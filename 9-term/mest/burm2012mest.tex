@@ -17,7 +17,136 @@
 Ясно, что чем меньше параметр $r$, тем более мелкие неоднородности способен заметить алгоритм.
 Параметр $r$ в предложенном решении подбирается экспериментально (оптимальные значения для присланных облаков точек уже подобраны).
 
-В такой форме алгоритм не способен обходить протяженные вогнутые границы, поэтому была предложена следующая эвристика: выбирать очередную точку таким образом, что она ближе к последней точке, чем к предпоследней (если такие точки нашлись если же нет~--- всё как обычно). 
-Такая эвристика удивительным образом помогла избавиться на тестовых изображениях от множества проблем, не создав новых.
+В такой форме алгоритм не способен обходить протяженные вогнутые границы, поэтому была предложена следующая эвристика: выбирать очередную точку таким образом, что она ближе к последней точке, чем к предпоследней (если такие точки нашлись, если же таковых нет~--- всё как обычно). 
+Эта эвристика удивительным образом помогла избавиться на обработке тестовых изображениях от множества проблем, не создав новых.
 
+\simpletitle{Инструкции по запуску}
+Технически программа является MATLAB скриптом. 
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+ 
+\lstset{ %
+  language=Octave,                % the language of the code
+  basicstyle=\footnotesize,           % the size of the fonts that are used for the code
+                                  % will be numbered
+  numbersep=5pt,                  % how far the line-numbers are from the code
+  backgroundcolor=\color{white},      % choose the background color. You must add \usepackage{color}
+  showspaces=false,               % show spaces adding particular underscores
+  showstringspaces=false,         % underline spaces within strings
+  showtabs=false,                 % show tabs within strings adding particular underscores
+  frame=single,                   % adds a frame around the code
+  rulecolor=\color{black},        % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
+  tabsize=2,                      % sets default tabsize to 2 spaces
+  captionpos=b,                   % sets the caption-position to bottom
+  breaklines=true,                % sets automatic line breaking
+  breakatwhitespace=false,        % sets if automatic breaks should only happen at whitespace
+  %title=\lstname,                   % show the filename of files included with \lstinputlisting;
+                                  % also try caption instead of title
+  keywordstyle=\color{blue},          % keyword style
+  commentstyle=\color{dkgreen},       % comment style
+  stringstyle=\color{mauve},         % string literal style
+  escapeinside={\%*}{*)},            % if you want to add LaTeX within your code
+  morekeywords={*,...},              % if you want to add more keywords to the set
+  deletekeywords={...}              % if you want to delete keywords from the given language
+}
+
+Для демонстрационного использования с набором присланных изображений следует изменять номер файла (от 2 до 5) в строке 
+\begin{lstlisting}[language=matlab, frame=lines]
+FileNumber = 5;
+\end{lstlisting}
+
+Изменяя следующие строки, можно получить результат работы алгоритма на любом файле с расширением \texttt{.txt}, содержащего в каждой строке пару чисел, разделенных пробелом, --- координаты точек облака (без общего числа точек в первой строке). При этом можно задать любой желаемый радиус рассматриваемых окрестностей. 
+\begin{lstlisting}[language=matlab, frame=lines]
+FileNamePrefix = sprintf('%d',FileNumber);
+r = RadiusOptimal(FileNumber);
+\end{lstlisting}
+\maintext{Внимание:} алгоритм может зациклится при неверном выборе параметра $r$. Ответственность за это полностью лежит на пользователе скрипта.
+
+По окончании работы скрипт выводит на экран полученную границу, площадь и периметр ограничиваемой фигуры, а также записывет всё в файл.
+\newpage
+\addeps{pic/2_r12}{Файл \texttt{2.txt}, $r=12$}
+\addeps{pic/3_r13}{Файл \texttt{3.txt}, $r=13$}
+\newpage
+\addeps{pic/4_r13}{Файл \texttt{4.txt}, $r=13$}
+\addeps{pic/5_r19}{Файл \texttt{5.txt}, $r=19$}
+\lstset{ %
+	basicstyle = \scriptsize,
+	numbers=left,                   % where to put the line-numbers
+  numberstyle=\tiny\color{gray},  % the style that is used for the line-numbers
+  stepnumber=5,                   % the step between two line-numbers. If it's 1, each line 
+	numberfirstline=true,
+}
+\newpage
+\simpletitle{Листинг}
+\begin{lstlisting}[language=matlab, frame=lines]
+clear all;
+
+FileNumber = 5;
+FileNamePrefix = sprintf('%d',FileNumber);
+RadiusOptimal = [500, 12, 13, 13, 19];
+X = dlmread(strcat(FileNamePrefix,'.txt'));
+%X = [X(:,1), X(:,3)];  % 2 -> 12 .. 10     % 3 -> 13 .. 12     % 4 -> 13 .. 11     % 5 -> 19 only
+r = RadiusOptimal(FileNumber);
+
+MinAngle = -179;
+
+AngleIdxInit = @() ndgrid(1000, 0);
+clangle = @(x) (1.25-4*(heaviside(x(:,1).*x(:,4)-x(:,2).*x(:,3))-0.75).^2) .*acos((x(:,1).*x(:,3)+x(:,2).*x(:,4))./sqrt((x(:,1).^2+ x(:,2).^2) .*(x(:,3).^2+ x(:,4).^2)))*180/pi;
+
+h = plot(X(:,1), X(:,2), 'r.','LineWidth',1);
+axis normal; hold on;
+
+[~, idx] = max(X(:,1)==max(X(:,1)));
+plot(X(idx,1), X(idx,2), 'b.','LineWidth',3);
+
+Previous = X(idx,:);
+nearest = find(((X(:,1) - Previous(1)).^2 + (X(:,2) - Previous(2)).^2) < r^2);
+nearest(nearest == idx) = [];
+XX = X(nearest,:);
+NPrev = (XX(:,1) - Previous(1)).^2 + (XX(:,2) - Previous(2)).^2;
+Angle = clangle([ones(length(nearest),1) * [0 -1] (XX - ones(length(nearest),1) * Previous)]);
+[~, NewIdx] = min(Angle(Angle > MinAngle));
+idx = [idx nearest(NewIdx)];
+plot(X(idx(end),1), X(idx(end),2), 'b.','LineWidth',3);
+
+while idx(end) ~= idx(1)
+    Previous = X(idx(end),:);
+    PrePrevious = X(idx(end-1),:);
+    LastLine = Previous - PrePrevious;
+    nearest = find(((X(:,1) - Previous(1)).^2 + (X(:,2) - Previous(2)).^2) < r^2);
+    nearest(nearest == idx(end)) = [];
+    XX = X(nearest,:);
+    NPrev = (XX(:,1) - Previous(1)).^2 + (XX(:,2) - Previous(2)).^2;
+    NPPrev = (XX(:,1) - PrePrevious(1)).^2 + (XX(:,2) - PrePrevious(2)).^2;
+    Angle = clangle([ones(length(nearest),1) * LastLine (XX-ones(length(nearest),1)*Previous) ] );
+    Positive = find((Angle > MinAngle) & (NPrev <= NPPrev));
+    if ~isempty(Angle(Positive))
+        [~, BestPos] = min(Angle(Positive));
+        NewIdx = nearest(Positive(BestPos));
+    else
+        Negative = find((Angle > MinAngle) & (NPrev > NPPrev));
+        [~, BestNeg] = min(Angle(Negative));
+        NewIdx = nearest(Negative(BestNeg));
+    end
+    %plot(XX(Positive,1), XX(Positive,2), 'y.','LineWidth',3);
+    idx = [idx NewIdx];
+    %plot(XX(Positive,1), XX(Positive,2), 'r.','LineWidth',3);
+    plot(X(idx(end),1), X(idx(end),2), 'g.','LineWidth',3);
+    %length(idx)
+end
+
+Perimeter = sum(sqrt((X(idx(1:end-1),1)-X(idx(2:end),1)).^2 + (X(idx(1:end-1),2)-X(idx(2:end),2)).^2) )
+Area = 1/2 * sum(X(idx(1:end-1),1).*X(idx(2:end),2) - X(idx(1:end-1),2).*X(idx(2:end),1))
+
+plot(X(idx,1), X(idx,2), 'g-','LineWidth',2);
+%axis('tight')
+axis('square');
+axis('xy');
+text(   0.5*min(X(:,1)) + 0.5* max(X(:,1)), min(X(:,2)), ...
+    strcat('$$P = ', num2str(Perimeter),', S = ',num2str(Area),'$$'), ...
+    'Interpreter','latex', 'FontSize',12);
+saveas(h, strcat(FileNamePrefix, sprintf('_r%d.eps',r)),        'eps2c');
+hold off
+\end{lstlisting}
 \end{document}
