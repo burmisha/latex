@@ -1,0 +1,81 @@
+\newcommand\bivec[2]{\begin{pmatrix} #1 \\ #2 \end{pmatrix}}
+
+\newcommand\ol[1]{\overline{#1}}
+
+\newcommand\p[1]{\Prob\!\left(#1\right)}
+\newcommand\e[1]{\mathsf{E}\!\left(#1\right)}
+\newcommand\disp[1]{\mathsf{D}\!\left(#1\right)}
+%\newcommand\norm[2]{\mathcal{N}\!\cbr{#1,#2}}
+\newcommand\sign{\text{ sign }}
+
+\newcommand\al[1]{\begin{align*} #1 \end{align*}}
+\newcommand\begcas[1]{\begin{cases}#1\end{cases}}
+\newcommand\tab[2]{	\vspace{-#1pt}
+						\begin{tabbing} 
+						#2
+						\end{tabbing}
+					\vspace{-#1pt}
+					}
+
+\newcommand\maintext[1]{{\bfseries\sffamily{#1}}}
+\newcommand\skipped[1]{ {\ensuremath{\text{\small{\sffamily{Пропущено:} #1} } } } }
+\newcommand\simpletitle[1]{\begin{center} \maintext{#1} \end{center}}
+
+\def\le{\leqslant}
+\def\ge{\geqslant}
+\def\Ell{\mathcal{L}}
+\def\eps{{\varepsilon}}
+\def\Rn{\mathbb{R}^n}
+\def\RSS{\mathsf{RSS}}
+
+\newcommand\foral[1]{\forall\,#1\:}
+\newcommand\exist[1]{\exists\,#1\:\colon}
+
+\newcommand\cbr[1]{\left(#1\right)} %circled brackets
+\newcommand\fbr[1]{\left\{#1\right\}} %figure brackets
+\newcommand\sbr[1]{\left[#1\right]} %square brackets
+\newcommand\modul[1]{\left|#1\right|}
+
+\newcommand\sqr[1]{\cbr{#1}^2}
+\newcommand\inv[1]{\cbr{#1}^{-1}}
+
+\newcommand\cdf[2]{\cdot\frac{#1}{#2}}
+\newcommand\dd[2]{\frac{\partial#1}{\partial#2}}
+
+\newcommand\integr[2]{\int\limits_{#1}^{#2}}
+\newcommand\suml[2]{\sum\limits_{#1}^{#2}}
+\newcommand\isum[2]{\sum\limits_{#1=#2}^{+\infty}}
+\newcommand\idots[3]{#1_{#2},\ldots,#1_{#3}}
+\newcommand\fdots[5]{#4{#1_{#2}}#5\ldots#5#4{#1_{#3}}}
+
+\newcommand\obol[1]{O\!\cbr{#1}}
+\newcommand\omal[1]{o\!\cbr{#1}}
+
+\newcommand\addeps[2]{
+	\begin{figure} [!ht] %lrp
+		\centering
+		\includegraphics[height=320px]{#1.eps}
+		\vspace{-10pt}
+		\caption{#2}
+		\label{eps:#1}
+	\end{figure}
+}
+
+\newcommand\addepssize[3]{
+	\begin{figure} [!ht] %lrp hp
+		\centering
+		\includegraphics[height=#3px]{#1.eps}
+		\vspace{-10pt}
+		\caption{#2}
+		\label{eps:#1}
+	\end{figure}
+}
+
+
+\newcommand\norm[1]{\ensuremath{\left\|{#1}\right\|}}
+\newcommand\ort{\bot}
+\newcommand\theorem[1]{{\sffamily Теорема #1\ }}
+\newcommand\lemma[1]{{\sffamily Лемма #1\ }}
+\newcommand\difflim[2]{\frac{#1\cbr{#2 + \Delta#2} - #1\cbr{#2}}{\Delta #2}}
+\renewcommand\proof[1]{\par\noindent$\square$ #1 \hfill$\blacksquare$\par}
+\newcommand\defenition[1]{{\sffamilyОпределение #1\ }}
