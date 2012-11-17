@@ -22,10 +22,10 @@ $y = y_0 + \isum k1(y-y_0)^k$
 \end{itemize}
 то решение ищется в виде ряда по степеням $x-x_0$
 
-\newcommand\ort{}
+
 Пусть фредгольмов оператор $T$
 \begin{itemize}
-	\item нормально разрешим $Tx = y, y \ort N(T^*)$
+	\item нормально разрешим $Tx = y, y \bot N(T^*)$
 	\item $N(T^*)$ и $N(T)$ конечномерны и имеют конечную размерность :-)
 \end{itemize}
 
@@ -33,13 +33,13 @@ $$Tx = 0$$
 
 \al{
 	Tx &= f \\
-	x &= \sum_{i=1}^n x_ie_i + y, (e_i^*, x) = x_i, y\ort e_i^* \\
-	\fbr{e_i} &\text{ --- базис} в N(T) \\
+	x &= \sum_{i=1}^n x_ie_i + y, (e_i^*, x) = x_i, y\bot e_i^* \\
+	\fbr{e_i} &\text{ --- базис в}  N(T) \\
 	\fbr{e_i^*}, &(e_i^*, e_j)=\delta_{ij} \\ 
 	x &= \sum_{i=1}^n(e_i,x)e_i + y \\
 	(e_i^*,x) &= (e_i^*,x)+(e_i^*,y) \\
-	Ty &= f, f\ort N(T^*) \\
-	x &\in B, y\in\tilde B = {}^{\ort}N(T^*) \\
+	Ty &= f, f\bot N(T^*) \\
+	x &\in B, y\in\tilde B = {}^{\bot}N(T^*) \\
 	T&\colon \tilde B \to B^2 \\
 	y &= \sum_{i=1}^n(e_i^*)e_i \\
 	x &= \sum_{i=1}^n x_ie_i + \tilde T^{-1}f
@@ -58,8 +58,8 @@ $Ax + f(x,y) = 0$
 \al{
 	N(T) = \Ell\cbr{\idots e1n}, Ty + \Phi(x,y) = 0 \\
 	(e_i^*,\Phi(x,y)) = 0 , i = \ol{1,n} \\
-	y = \sum_{i=1}^n \alpha_i e_i+z, z \ort N(T), z \in {}^\ort N(T^*) \\
-	Qf = f - \sum^{i=1}^n (e_i^*,f)e_i, Qf \ort N(T^*)
+	y = \sum_{i=1}^n \alpha_i e_i+z, z \bot N(T), z \in {}^\bot N(T^*) \\
+	Qf = f - \sum_{i=1}^n (e_i^*,f)e_i, Qf \bot N(T^*)
 }
 \al{
 	\tilde Tz + Q\Phi = 0 \\
@@ -81,7 +81,7 @@ $\lambda_0$ --- бифуркационное
 	f(x,y) = \alpha_1 x_0 + \psi_1(\lambda) x + x^2\psi_2(\lambda) + \ldots \
 	\psi_1(\lambda) = \isum k1 \gamma_k(\lambda - \lambda_0)^k \\
 	x = \gamma e + z \\
-	z \ort e^*\\
+	z \bot e^*\\
 	(e, e^*) = 1, (e^*,z) = 0\\
 	Tx = -\cbr{\psi_1(\lambda) x + \psi_2(\lambda)x^2 + \ldots} \\
 	\tilde Tz = -\cbr{\psi_1(\gamma e + z) x + \psi_2(\lambda)(\gamma e + z)^2 + \ldots} = F(x,\lambda) \\
@@ -94,7 +94,7 @@ $\lambda_0$ --- бифуркационное
 	z &= z(\gamma, \lambda) \\
 	\gamma &\psi_1(\lambda) + \psi_2(\lambda)\chi_2(\gamma \lambda) + \ldots = 0	\\
 }
-$$\box{\lambda = a\gamma^p(1+\lambda_1\gamma + \ldots)}$$
+$$\boxed{\lambda = a\gamma^p(1+\lambda_1\gamma + \ldots)}$$
 $$\lambda = a\gamma^p + \ldots \gamma = \pm \lambda^{\frac1p}$$
 От четности $p$ зависит, есть ли решения при положительных значениях $\lambda$. 
 
