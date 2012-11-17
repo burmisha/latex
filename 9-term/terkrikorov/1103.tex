@@ -1,0 +1,104 @@
+\simpletitle{3 ноября}
+
+%\newcommand\isum[2]{\sum\limits_{#1=#2}^{+\infty}}
+%\newcommand\idots[3]{#1_{#2},\ldots,#1_{#3}}
+%\newcommand\fdots[5]{#4{#1_{#2}}#5\ldots#5#4{#1_{#3}}}
+
+\al{
+	&\isum k0 c_n(z-z_0)^n, \isum k0 c_nz^n, c_n\in B \quad(1)\\
+	&\isum n0 \alpha_nt^n, \alpha^n\in \mathbb Z \text{ --- complex}, |t|<r, \isum n0|\alpha_n|t^n, |z|\le t<r. \\
+	&\norm{c_n}_B\le |\alpha_n| \text{ --- мажорантный ряд}
+}
+
+\lemma{1} $|z^n-z_0^n|\le |z-z_0|n\alpha^{n-1}, |z|\le \alpha, |z_0|\le \alpha$
+\lemma{2} $|z^n-z_0^n-(z-z_0)n\alpha^{n-1}|\le\frac{n(n-1)}2\alpha^n|z-z_0|^2, |z|\le \alpha, |z_0|\le \alpha$
+\al{
+	&\isum n0 \alpha_nt^n \\
+	&\isum n1 n\alpha_nt^{n-1} \\
+	&\isum n2 \frac{n(n-1)}2\alpha_nt^{n-2} , |t|<r.
+}
+
+\theorem{} If series $\isum n0 c_nz^n = \phi(z), |z|\le r$ then $\phi$ is continious on $|z|<r$.
+\proof{
+	\al{
+		\norm{\phi(z)-\phi(z_0)} 
+			&= \norm{\isum n0 c0_n(z^n-z^n_0)} \le \isum n0 \norm{C_n}|z^n-z_0^n| \le \\
+			&\le |z-z_0|\isum n1 nr^{n-1}\norm{c_n}\le c|z-z_0|.
+	}
+}
+
+\theorem{about derivative} $\phi(z)=\isum n0 c_nz^n, \psi(x)=\isum n1 nc_nz^{n-1}$
+\proof{
+	\al{
+		\norm{\phi(z)-\phi(z_0)-\psi(z_0)(z-z_0)} 
+			&= \norm{\isum n1 c_n(z_n-z_0^n(z-z_0)} \le \isum n2 \norm{C_n}\norm{z^n-z_0^n-nz_0^{n-1}(z-z_0)} \le \\
+			&\le \isum n2 \norm{C_n}\frac{n(n-1)}2r^{n-2} (z-z_0^2)
+	}
+	по определению производной получаем, что да, это производная
+}
+
+Про что-то другое
+\al{
+	&\norm{f_k(\idots x1k)} \le C\fdots x1k{\norm}{\cdot} \\
+	&f_kx^k = f_k(\idots x{}{}) \\
+	&f_kx^mh^{k-m}=f_k(\idots x{}{},\idots h{}{}) \\
+	&f_kx^m \\
+	&f_k(x+h)=\sum_{m=0}^k C_k^mf_k(x^kh^{k-m}) \\
+}
+
+\al{
+	&\norm{f_kx^k}\le \norm{f_k}\norm x^k, \isum k0 f_kx^km, \norm x\le t\le r \\
+	&\sum \alpha_kt^k, \norm{f_k}\le \alpha_k. \\
+	&f(x)=\isum k0 f_kx^k, \norm x\le r, \isum k0 \norm{f_k}t^k, \norm x\le r \\
+	&f'(x)h=\isum k1 kf_kx^{k-1}h=\psi(x) \text{ --- сходится, но к производной ли}, \isum k1 f\norm{f_k}t^{k-1} \\
+	&\norm{f(x+h)-f(x)-\psi(x)h} = \omal{|h|}
+}
+\proof{
+	\al{
+		\norm{f(x+h) - f(x) - \psi(x)h} 
+			&= \norm{\isum k1 f_k(x+h)^k - f_kx^k - kf_kx^{k-1}h} = \\
+			&= \norm{\isum k0 \sum_{m=2}^k C_k^m f_kx^mh^{k-m}} \le \isum k0 \sum_{m=2}^k C_k^m \norm{f_k}\norm x^m\norm h^{k-m} = \\
+			&= \isum k2 \norm{f_k}\cbr{\cbr{\norm x + \norm h}^k -\norm x^k - f\norm x^{k-1}\norm h} \le \\
+			&\le \modul{\text{lemma 2}} \le \isum k2 \frac{k(k-1)}2\norm x^{k-2}\norm h^2 \le C\norm h^2
+	}
+	(Последний ряд сходится как дважды формальное почленное дифференцирование сходящегося ряда)
+	\al{
+		f(x) &= \isum k0 \frac{f^k(x_0)}{k!}(x-x_0)^k
+	}
+}
+
+\al{
+	&f(z)=\isum k0 c_k(z-z_0)^k, c_k\in B, \exists f'(x) \\
+	&\int_\gamma f(z)dz \\
+	&\cbr{f^* \int_\gamma f(z)dz} = \int_\gamma(f^*, f(z))dz = 0, x\in \mathbb{C} \\
+	&\text{по теореме Хана-Банаха будет верна и теорема Коши.} 
+}
+
+Переходим к неявным функциям в надежде получить их в аналитическом виде.
+
+Двойные ряды.
+\al{
+	&c_{ij}\in \mathbb Z \\
+	&\isum j0 \isum i0 c_{ij}z^iw^j.\\
+	&z_0, w_0, |z|<|z_0|, |w|<|w_0|, \modul{\frac z{z_0}} = q<1, \modul{\frac w{w_0}} = p<1 \\
+	&\modul{c_{ij}z_0^iw^j} \le C, \modul{c_{ij}z^iw^j} \le \modul{c_{ij}z_0^iw_0^j}q^ip^j \le Cq^ip^j, \\
+	\isum j0 \isum i0 q^ip^i 
+		&= (1+p+p^2+\ldots) + q(1+p+p^2+\ldots) +q^2(1+p+p^2+\ldots)  +\ldots = \\
+		&= \frac1{1-p} + \frac q{1-p} + \frac {q^2}{1-p} + \ldots = \frac1{1-p}\frac1{1-q}
+}
+
+$$F(z,w)=0$$
+
+Без ограничени общности (сдвигом) полагаем 
+\begin{enumerate}
+	\item[0] $z_0=w_0=0.$
+	\item[1] $F(0,0) = 0$ 
+	\item[2] $\inv{F_w(0,0)}$
+\end{enumerate}
+\al{
+	F(z,w) = F_z(0,0)z + F_w(0,0)w + \isum j2 \sum_{i=0}^jC_{i,j-i}z^iw^{j-i} \\
+	w = f(z,w) = c_1 z + \isum j2\sum_{i=0}^j\tilde c_{i,j-i}z^iw^{j-i}, |z|\le \alpha, |w|\le\alpha.\\
+	w=f(z,w), f(z,w) = c_1z+\isum k2 \sum_{i=0}^j c_{i,j-i}z^iw^{j-i}, \text { () если что -- растянем оси} \\
+	\isum k2 \isum i0 |c_{i,j-i}|<+\infty, |c_{i,j-i}|\le M\\
+	\phi(z,w) = M \isum j2 \sum_{i=0}^jz^iw^j
+}

@@ -1,0 +1,138 @@
+\simpletitle{17 ноября}
+Мы решали аналитическое уравнение $f(x,y) = 0$, когда $f$ --- аналитическая функция в точке $(x_0, y_0)$ (раскладывается по степеням).
+Была теорема
+\begin{itemize}
+	\item $f(x_0, y_0) = 0$
+	\item $f^{-1}_u(x_0,y_0)$
+\end{itemize}
+$y = y_0 + \isum k1(y-y_0)^k$
+\al{
+	Ay + f(x,y) = 0, Ay_0+f(x_0,y_0) = 0 \\
+	T = A - f_y(x_0, y_0) \\
+	A(y-y_0) +f(x,y) - f(x_0, y_0) = 0 \\
+	(A-f_y(x_0,y_0)))(y-y_0) = - (f(x,y) - f(x_0,y_0) - f_y(x_0,y_0))(y-y_0) \\
+	y = y_0 + T^{-1}(f(x,y) - f(x_0,y_0) - f_y(x_0,y_0)) (y-y_0) =\psi(x,y)\\
+	\tilde f(x,y) = y - \psi(x,y)
+}
+Утвреждение: если
+\begin{itemize}
+	\item $Ay + f(x,y) = 0$
+	\item $Ay_0 + f(x_0,y_0) = 0$
+	\item $\inv{Ay_0 + f(x_0,y_0)}_y$
+\end{itemize}
+то решение ищется в виде ряда по степеням $x-x_0$
+
+\newcommand\ort{}
+Пусть фредгольмов оператор $T$
+\begin{itemize}
+	\item нормально разрешим $Tx = y, y \ort N(T^*)$
+	\item $N(T^*)$ и $N(T)$ конечномерны и имеют конечную размерность :-)
+\end{itemize}
+
+$$Tx = 0$$
+
+\al{
+	Tx &= f \\
+	x &= \sum_{i=1}^n x_ie_i + y, (e_i^*, x) = x_i, y\ort e_i^* \\
+	\fbr{e_i} &\text{ --- базис} в N(T) \\
+	\fbr{e_i^*}, &(e_i^*, e_j)=\delta_{ij} \\ 
+	x &= \sum_{i=1}^n(e_i,x)e_i + y \\
+	(e_i^*,x) &= (e_i^*,x)+(e_i^*,y) \\
+	Ty &= f, f\ort N(T^*) \\
+	x &\in B, y\in\tilde B = {}^{\ort}N(T^*) \\
+	T&\colon \tilde B \to B^2 \\
+	y &= \sum_{i=1}^n(e_i^*)e_i \\
+	x &= \sum_{i=1}^n x_ie_i + \tilde T^{-1}f
+}
+
+Теперь рассмотрим уравнение в банаховом пространстве
+$Ax + f(x,y) = 0$
+\begin{itemize}
+	\item $Ax_0 + f(x_0, y_0) = 0$ 
+	\item оператор $T = A + f_y(x_0, y_0)$ --- фредгольмовский
+\end{itemize}
+Без ограничения общности, $x_0 = y_0 = 0$.
+\begin{equation}
+	Ty + \Phi(x,y) = 0, \Phi(0,0) = 0, \Phi(0,0) = 0
+\end{equation}
+\al{
+	N(T) = \Ell\cbr{\idots e1n}, Ty + \Phi(x,y) = 0 \\
+	(e_i^*,\Phi(x,y)) = 0 , i = \ol{1,n} \\
+	y = \sum_{i=1}^n \alpha_i e_i+z, z \ort N(T), z \in {}^\ort N(T^*) \\
+	Qf = f - \sum^{i=1}^n (e_i^*,f)e_i, Qf \ort N(T^*)
+}
+\al{
+	\tilde Tz + Q\Phi = 0 \\
+	(e_i^*, \Phi(x,y)) = 0, i = \ol{1,n}\\
+	(e_i^*, \Phi(x, \sum_{i=1}^n\alpha i, e_i + z)) = 0 \\
+	(e_i^*, \Phi(x, \sum_{i=1}^n)) \\
+	\skipped{5 lines}
+}
+Это уравнения разветвления Ляпунова-Шмидта.
+
+Пусть имеем параметрическое (по $\lambda$) уравнение, причем тривиальное решение есть всегда (можно сравнить с поиском собственных значений)
+\al{
+	Ax + f(x,\lambda) = 0, f(0,\lambda) \\
+	T = A - f_(0,\lambda_0) \text { --- фредгольмовский оператор}
+	N(T) = \alpha e, Ax 0 f_x(0,\lambda_0 x) = 0
+}
+$\lambda_0$ --- бифуркационное
+\al{
+	f(x,y) = \alpha_1 x_0 + \psi_1(\lambda) x + x^2\psi_2(\lambda) + \ldots \
+	\psi_1(\lambda) = \isum k1 \gamma_k(\lambda - \lambda_0)^k \\
+	x = \gamma e + z \\
+	z \ort e^*\\
+	(e, e^*) = 1, (e^*,z) = 0\\
+	Tx = -\cbr{\psi_1(\lambda) x + \psi_2(\lambda)x^2 + \ldots} \\
+	\tilde Tz = -\cbr{\psi_1(\gamma e + z) x + \psi_2(\lambda)(\gamma e + z)^2 + \ldots} = F(x,\lambda) \\
+	\begcas{\tilde Tz = \psi_2(\lambda)Q(\gamma e + z)^2 + \ldots \\
+			\gamma \psi_1(\lambda) + \psi_2(\lambda)\cbr{e^*, (\gamma e + z)^2} + \ldots = 0}
+}
+
+Имеем систему уравнений, причем первое уравнение самостоятельно.
+\al{
+	z &= z(\gamma, \lambda) \\
+	\gamma &\psi_1(\lambda) + \psi_2(\lambda)\chi_2(\gamma \lambda) + \ldots = 0	\\
+}
+$$\box{\lambda = a\gamma^p(1+\lambda_1\gamma + \ldots)}$$
+$$\lambda = a\gamma^p + \ldots \gamma = \pm \lambda^{\frac1p}$$
+От четности $p$ зависит, есть ли решения при положительных значениях $\lambda$. 
+
+Бифуркация первого рода: при положительных - 2 решения (горизонтальная парабола)
+Бифуркация второго рода: всегда 1 решение.
+
+Давим на вертикально стояющую металлическую линейку сверху.
+$$y''(s) + \lambda y(x)\sqrt{1-y'^2(s)} = 0, y(0) = 0, y(\pi) = 0, \lambda = \frac{\pi P}{EJ}$$
+При $\lambda < 1$ решений, кроме тривиального, нет.
+\al{
+	-\integr 0\pi y'^2(s)ds + \lambda \integr 0\pi y^2(s)\sqrt{1-y'^2(s)}ds = 0 \\
+	\lambda \integr 0\pi y^2(s)ds \ge \integr 0\pi y'^2(s)ds \ge \integr 0\pi y^2(s)ds \Rightarrow y = 0.
+}
+Последнее неравенство: через разложение по $\fbr{\sin nx}$ в $L_2[0, \pi]$ и равенство Парсеваля (а для производной --- в коэфф появятся $n$-ки) $\frac1\pi\integr 0\pi y^2(s)ds = \isum n1 b_n^2$
+
+\al{
+	\begcas{
+		y''(s)+\lambda y(s) = 0 \\y(0)=y(\pi) = 0
+	} \\
+	\lambda_n = n^2, y_n(s) =\sin nx
+}
+Если справа от 1, то задача имеет 3 решения (2 нетрив), одно из них, правда, не особо физично. Но строго --- 3.
+
+
+Математический маятник
+\al{
+	y'(s) = \sin \theta \\
+	\sqrt{1-y'^2} = \cos \theta \\
+	\cos \theta \frac{d\theta}{ds} + \lambda y(s)\cos\theta = 0 \\
+	\frac{d\theta}{ds} + \lambda y(s) = 0 \\
+	\begcas{
+		\frac{d^2\theta}{ds^2} + \lambda \sin \theta = 0\\
+		\theta'(0) = \theta(\pi) = 0
+	}
+}
+\al{
+\begcas{
+		\frac{d^2\theta}{dt^2} + \lambda \sin \theta = 0\\
+		\theta'(0) = \theta(\pi) = 0
+	}
+	}

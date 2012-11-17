@@ -1,0 +1,126 @@
+\simpletitle{29 сентября}
+
+\al{
+	&B \\
+	B^k &= B\times\ldots B\\
+	(x_1,&\ldots,x_k), x_i\in B, i=\ol{1,k} \\
+	f_k&\colon B^k\to\tilde B, f_k(x_1,\ldots x_k), \norm{f_k(x_1,\ldots x_k)}_{\tilde b} \le C \prod_{i=1}^k\norm{x_i}_B \\
+}
+
+Две точки: 
+\al{
+	&x_1, x\\
+	f(x): f(x_1)-f(x) &= A_1(x_1-x)+\omal{\norm{x_1-x}} \\
+	A_1dx&=df(x), dx_1=x_1-x \\
+	A_2(A_1(x)dx_1)dx_2 &= f_2(dx_1, dx_2)\\
+	\norm{A_1}\norm{A_2}\norm{dx_1}\norm{dx_2} &=_{def} f''(x)dx_1dx_2 \\
+	&f''(x)dx^2
+}
+
+Пусть ф определена в окрестности:
+\al{
+	f(x) &= \suml{k=0}^n\frac{f^{(k)}(x_0)}{k!}(x-x_0)^k + r_n(x) \\
+	r_n(x) &=\integr 01(1-u)f^{(n+1)}(x_0+u(x-x_0))(x-x_0)^{n+1}du
+}
+
+\proof{
+	\psi(t) = f(x_0 + t(x-x_0)), -1\le t\le 1 .........
+}
+
+Нахождение неподвижных точек опертатора методом последовательных приближений.
+Пусть в банаховом пространстве есть множество $M\subset B$, $A\colon M\to B$. Если $Ax = x$, то $x$ --- неподвижная точка оператора.
+
+\defenition{} Оператор $A\colon M\to B$ --- опертор сжатия, если $\exist{\alpha\in(0, 1)}\foral{x_1, x_2 \in M} \norm{Ax_1-Ax_2}\le\alpha\norm{x_1-x_2}$
+
+\theorem{1} Если $A\colon M\to M$ --- сжимающий оператор (не обязательно линейный), то у $A$ существует единственная неподвижная точка, которую можно найти методом последовательных приближений: $$x = \lim x_n, x_{n+1} = Ax_n, x_0 \text{ --- произвольно}.$$
+При этом выполнена оценка скорости сходимости:
+$\norm{x_{n+1}-x_n} \le \frac{\norm{Ax_0-x_0}}{1-\alpha}\alpha^n$ --- невязка.
+\proof{
+	Надо показать фундаментальность
+	\al{
+		\norm{x_{n+1}-x_n} &\le \norm{Ax_{n}-Ax_{n-1}} \le \alpha\norm{x_{n}-x_{n-1}} \le \alpha^n\norm{x_{1}-x_0} = \alpha^n\norm{Ax_0 - x_0} \\
+		\norm{x_{n+p}-x_n} &\le \norm{Ax_0-x_0}\cbr{\alpha^{n+p} + \alpha^{n+p -1} + \ldots + \alpha^{n}} \le \frac{\alpha^n}{1-\alpha}\norm{Ax_0-x_0} \\
+		\foral{\eps > 0}&\exist N \foral n>N \foral p \norm{x_{n+p}} < \eps \\
+		\lim x_m &= x, x\in M \\
+		\norm{x-x_n} &\le \frac{\alpha^n}{1-\alpha}\norm{Ax_0-x_0}
+		\norm{x-x_0} &\le \frac{\norm{Ax_0-x_0}}{1-\alpha}
+		\norm{Ax_n - Ax} &\le \alpha\norm{x_n - x} \to 0, \lim_{n\to \infty} Ax_n = Ax, x_{n+1} = Ax_n, x = Ax.
+	}
+	Единственность: предположить, что их две, то после отображения они должны приблизиться, а они неподвижны
+}
+
+\theorem{2} Если $A$ --- сжимающий оператор (не обязательно линейный) оторбажающий шар $\ol{U_r(x_0)}$ , и $\norm{Ax_0 - x_0} \le r(1-\alpha)$, то оператор $A$ отображает шар в себя (и, следовательно имеет неподвижную точку).
+\proof{
+	\al{
+		x&\in\ol{U_r(x_0)} \\
+		\norm{Ax - x_0} &\le \norm{Ax-Ax_0} + \norm{Ax_0-x_0} \le \alpha{x-x_0} + \norm{Ax_0-x_0} \le r(1 \alpha +\alpha)
+	}
+	Нам достаточно нестрогих неравенст для док-ва попадания в замкнутый шар.
+}
+
+
+А как проверять, что оператор сжимающий?
+\theorem{3} Если функция $f(x)$ диффиренцируема в выпуклом множестве $M\subset B$ и $\norm{f'(x)} \le\alpha < 1,$ то $f(x)$ есть оператор сжатия.
+
+\proof{
+	Соединим точки отрезком
+	\al{
+		\norm{f(x_1) - f(x_2)} \le\norm{f'(x_1+\theta(x_2-x_1))}\norm{x_2-x_1} \le \norm{x_2-x_1}
+	}	
+}
+
+
+\theorem{4} Если $A\colon M\to B$, $M\subset B$, $M$~--- замкнуто и $\exist n A^n$ есть оператор сжатия, то у оператора $A$ есть единственная неподвижная точка.
+\proof{
+	$x$ --- неподв точка $A^n$.	$Ax$ --- неподв точка $A^n$, ибо $A^n(Ax) = Ax$. Но это точка единственна, поэтому $Ax = x.$
+
+	Единственность: каждая неподв т оператора $A$ будет неподв т оп $A^n$ и наоборот (что только что доказали).
+}
+
+Абстрактный аналог теормы о неявной функции
+$f(x, y) = 0, (x,y) \in \obol{x_0,y_0} \subset B_1\times B_2$
+\defenition уравнение $f(x,y) = 0$ определяет на кножестве $O_1\cbr{x_0}\times O_2\cbr{y_0}$ $y$ как неявную функцию $y(x)$, если $\foral{x\in O_1{x_0}}$ сущ единств $y(x)\in O_2(y_0)\colon f(x,y(x)) = 0$.
+
+\theorem{о неявной функции.} Пусть 
+\al{
+	f(x_0, y_0) = 0 \\
+	f(x,y) \text{ и } f_y(x,y)\text{ непрерывны в } O(x_0, y_0) \\
+	\exist{f_y^{-1}(x_0,y_0)}
+}
+тогда $\exist{O_\delta(x_0)\times O_\delta(y_0)} $ в которой уравнение $f(x,y) = 0$ определяет $y$ как неявную функцию от $x$.
+
+\proof{
+	\al{
+		f(x,y) &= 0 \\
+		f(x,y) &- f_y(x_0, y_0)(y-y_0) + f_y(x_0, y_0)(y-y_0) = 0 \\
+		y &= y_0 - f_y^{-1}(x_0, y_0)\cbr{f(x,y) - f_y(x_0, y_0)(y-y_0)} = F(x,y) \\
+		F_y(x,y) = -f^{-1}_y(x_0, y_0)(f_y(x,y) - f_y(x_0, y_0)) \\
+		1) & F(x_0, y_0) - y_0 = 0 \\
+		2) & F_y(x_0, y_0) = 0
+	}
+	$F_y(x, y)$ непрер ф-я в т $(x_0, y_0)$ \\
+	$\exist{\eps > 0} \norm{x-x_0}\le\eps, \norm{y-y_0}\le\eps \Rightarrow \norm{F_y(x, y)} \le \alpha < 1$
+	За счет малости $\delta\colon \norm{x-x_0}\le\delta.$
+	\al{
+		F(x, y_0) - y_0 &= -f_y(x_0, y_0)f(x, y_0) \\
+		\norm{F(x, y_0) - y_0} &= \eps(1-\alpha) \\
+	}
+	\al{
+		\foral{x\in \ol{U_\rho(x)}} \text{опер} F(x,y) \text{есть оп сжат: } \norm{F_y(x,y)} \le \alpha < 1 \\
+		\norm{F(x, y_0) - y_0} &= \eps(1-\alpha) \\
+	}
+	И теорма о шаре...
+}
+
+Следствие 1. Неявная функция непрерывна.
+\proof{
+	\al{
+		x_0& \\
+		y &= F(x,y) \\
+		y(x)-y(x_0) &= F(x,y(x)) - y_0 = F(x, y(x)) - F(x, y_0) + F(x, y_0) - y_0 \\
+		\norm{y(x)-y(x_0)} &\le \norm{F(x, y(x)) - F(x, y_0)} + \norm{F(x, y_0) - y_0} \le \alpha\norm{y-y_0} + \norm{f_y^{-1}(x_0, y0)}\norm{f(x, y_0)} \\
+		\norm{y(x)-y(x_0)} &\le \frac{f^{-1}_y(x_0,y-0)}}{1-\alpha}\norm{f(x, y_0)} < \eps, \norm{x-x_0}<\delta_1
+	}
+}
+
+Следствие 2. Если $f_x(x,y)$ непрервыная функция, то $y(x)$ непрерывно дифференцируемая функция, причем $y'(x) = -f_y^{-1}(x,y(x))f_x(x,y(x))$. 

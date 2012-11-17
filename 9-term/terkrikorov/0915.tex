@@ -1,0 +1,102 @@
+\simpletitle{15 сентября}
+
+$$\int_a^b x(t)dt = \lim_{k\to\infty}\sigma_{T_k}$$
+
+\begin{enumerate}
+	\item $\norm{\integr ab{x(t)dt}} \le \integr ab{\norm{x(t)}}dt$
+	\item $\integr ab{\cbr{\alpha x_1(t) + \beta x_2(t)}dt} = \alpha\integr ab{ x_1(t)dt} + \beta\integr ab{x_2(t)dt}$ --- линейность интеграла
+	\item $\integr ab{} = \integr ac{}  + \integr cb{}$
+	\item $\psi(t) = \integr {t_0}t{x(\tau)d\tau} \Rightarrow \psi'(t) = x(t)$
+\end{enumerate}
+
+\lemma{о среднем} Если $x(t)$ дифференцируема на $(a,b)$ и непрерывна на $[a,b]$, то $$\norm{x(b) - x(a)} \le \norm{x'(a+\theta(b-a))}(b-a), \foral {0<\theta<1}.$$
+\proof{
+	\al{
+		\phi(t) &= \cbr{x^*, x(t)} \\
+		\frac{phi(t+\Delta t) - \phi(t)}{\Delta t} &= \cbr{x^*, \frac{x(t+\Delta t) - x(t)}{\Delta t}} \\
+		\phi'(t) &= \cbr{x^*, x'(t)}\\
+		\phi(b) - \phi(a) &= \phi'(a +\theta(b-a))(b-a)\\
+		\cbr{x^*, x(b)- x(a)} &= \cbr{x^*, x'(a + \theta(b-a))(b-a)}\\
+		\mod{x^*, x(b)- x(a)} &\le \norm{x^*}\norm{x'(a + \theta(b-a))}(b-a) \\
+		\text{По теореме }&\text{Хана-Банаха подберем такой функционал, что  ... и получим, что} \\
+		\norm{x(b)- x(a)} &\le \norm{x'(a + \theta(b-a))}(b-a)
+	}
+}
+
+Следствие: $x'(t) = 0 \Rightarrow x(t) = x_0$
+
+Еще следствие: $\norm{x(t_2) - x(t_1) - x'(t_1)(t_2-t_1)} \le \norm{x'(t_1+\theta(t_2-t_1)) - x'(t_1)}(t_2-t_1)$
+
+\proof{
+	Д-м свойство 4:
+	$\difflim \psi t = \frac1{\Delta t}\integr{}{}{}$ .... и по лемме
+}
+
+\theorem{Ньютона-Лейбница} $\integr ab{x'(t)dt} = x(a) - x(b).$
+\proof{
+	\al{\psi(t) &= \integr at{x'(\tau)d\tau} \Rightarrow \psi'(t) = x'(t)  \Rightarrow\\
+	\Rightarrow \psi(t) - x(t) &= x_0 \Rightarrow \psi(a) - x(a) = x_0, \quad \psi(b) - x(b) = -x(a)\\
+	\integr ab x'(t)dt &\le x(a) - x(b).
+	}
+}
+
+Отсюда получается формула интегрирования по частям и формула замены переменной.
+
+Справедлива формула Тейлора (если есть производные до $n$-го порядка) с остаточным членом в интегральной форме.
+\al{
+	x(t) &= \sum_{k=0}^n \frac{x^{\cbr{k}}(t_0)}{k!}\cbr(t-t_0)^k + r_n(x
+	) \\
+	r_n(x) &= \frac{(t-t_0)^{n+1}}{n!} \integr 01 (1-u)^nx^{n+1}(t_0+u(t-t_0))du 
+}
+\proof{
+	Доказательство по индукции. База: $n=0$
+	\al{
+		x(t) &= x(t_0) + r_0(t) \\
+		r_0(t) &= \frac1{1!}\integr 01{x'(t_0+u(t-t_0))(t -t_0)du} \text{ через замену переменной}
+	}
+	Пусть верна при $n$, докажем при $n+1$
+	\al{
+		r_n(t) &= \frac{(t-t_0)^{n+1}}{n!} 
+			\sbr{
+				- \frac{(1-u)^{n+1}}{n+1}x^{(n+1)}(t_0 + u(t-t_0)) |_0^1 
+				+ \integr 01{\frac{(1-u)^{n+1}}{n+1}x^{(n+2)}(t_0 + u(t- t_0))(t-t_0)du}
+			} \\
+		&= \frac{(t-t_0)^{n+1}}{(n+1)!}x^{(n+1)}(t_0) + \frac{(t-t_0)^{n+2}}{(n+1)!}\integr 01{(1-u)^{n+1}x^{(n+2)}(t_0 + u(t-t_0))du} \\
+		&= \frac{(t-t_0)^{n+1}}{(n+1)!}x^{(n+1)}(t_0) + r_{n+1} 
+	}
+	$$x(t)-T_n(x) = \frac{(t-t_0)^{n+1}}{(n+1)!}x^{(n+1)}(t_0) + r_{n+1} \Rightarrow x(t) = T_{n+1}(x) + r_{n+1.}$$
+}
+
+$\norm{r_n(x)} \le \frac{(t-t_0)^{n+1}}{n!}C\integr01{(1-u)^n}du$ --- если равномерно ограничено, то сходится.
+
+
+Несобственный интеграл: $\integr 0{+\infty}{x(t)dt} =_{\text{def}} \lim_{k\to\infty}\integr0{t_k}x(t)dt$ и не зависит от последовательности $\fbr{t_k}_{k=1}^{\infty}$
+
+$\norm{x(t)} \le \phi(t), \int \phi <+\infty \Rightarrow \int x \text{ --- сходится}$
+\proof{
+	$y_k = \integr 0{t_k}x(t)dt. $
+	$\norm{y_{k+p} - y_k} $ --- оценить, нер-во для интегралов, показать фундаментальность.
+}
+
+\hrule
+
+$$f\colon O(x_0)\to B_2, O(x_0) \subset B-1.$$
+\defenition{
+	Ф $f(x)$ дифф в т $x_0$, если $\exist{\text{лин огран оператор\ } A} f(x) - f(x_0) = A(x-x_0) +\omega(x)(x-x_0),$ где $\lim_{x\to x_0}\omega(x) = 0.$
+}
+
+$A\in L[B_1\to B_2]$ --- сильная производная (или производная Фреше)
+
+$A(x-x_0)$ --- дифференциал Фреше. $df(x, x_0) = df(x_0).$
+
+\theorem{Производная сложной функции} Если $f(y)$ дифф в т. $y_0$, а функция $\psi(x)$ дифф в т $x_0$, $y_0 = \psi(x_0)$. Тогда сл. ф.  $f(y(x))$ дифф в т $x_0$ и $f(\psi(x))'_{x=x_0} = f'(\psi(x_0))\psi'(x_0)$
+\proof {
+	\al {
+		f(y) - f(y_0) &= f'(y_0)(y-y_0) + \omega_1(y)\norm{y-y_0} \\
+		\psi(x) - \psi(x_0) &= \psi'(x_0)(x-x_0) + \omega_1(x)\norm{x-x_0} \\
+		f(\psi(x)) - f(\psi(x_0)) &= f'(\psi(x_0))(\psi(x) - \psi(x_0) + \omega_1(\psi(x))\norm{\psi(x) - \psi(x_0)} \\
+		f(\psi(x)) - f(\psi(x_0)) &= f'(\psi(x_0))\psi'(x_0)(x -x_0) + \omega_3(\psi(x))\norm{x- x_0} \\
+		\omega_3 &= f'(\psi(x_0))\omega_2(x) + \frac1{\norm{x-x_0}}\omega_1{\psi(x)}\cbr{\psi'(x_0)(x- x_0) + \omega_1(x)\norm{x-x_0}}\\
+		\text{сказать, что бесконечно малая}
+	}
+}

@@ -1,0 +1,129 @@
+\simpletitle{20 октября}
+
+\al{
+\frac{dx}{dt} &= A(t)x, x\in [0, T]
+}
+
+Assumptions
+\begin{enumerate}
+	\item $\foral{t\in [0, T]} A(t)\text{ --- linear limited operator}$
+	\item $\foral{x\in B} A(t)x\text{ --- continious function of $t$ } \cbr{\Rightarrow \norm{A(t)}\le\lambda}$
+\end{enumerate}
+
+\al{
+	\Delta &= \fbr{(t,s)\colon 0\le s\le t\le T} \\
+	x(s) &= x_0 \\
+	x(t) &= \integr st A(u)x(u)du + x_0 = Fx \\
+	y(t) &= Fx(t) \\
+	y(t)-y(t_0) &= \integr s{t+\Delta t} A(u)x(u)du - \integr st A(u)x(u)du = \integr t{t+\Delta t} A(u)x(u)du \\
+	\norm{\Delta y} \le \integr t{t+\Delta t}\norm{A(u)}_B\norm{x(u)}_Bdu\le \lambda C\Delta t
+}
+
+\theorem{} With 1  and 2, equation has solution
+\al{
+	x(t, s, x_0) = U(t, s)x_0, \norm{U(t,s)}\le\e^{\lambda(t-s)}, o\le s \le t \le T.
+}
+\proof{ 
+	draft
+	\al{
+		x_0, x_1 = Fx_0, \ldots
+		x_{n+1}(t) = \integr ts A(u)x_n(u)du + x_0
+	}
+	let's proof that series shoditsa fundamental'no
+	\al{
+		x_0 &+ (x_1-x_0) + \ldots (x_n - x_{n-1}) + \ldots \\
+		s_n &= x_n, \\
+		\norm{x_n(t)-x_{n+1}(t)} &\le \frac{\lambda^n(t-s)^n}{n!} \le \frac{\lambda^n T^n}{n!} \\
+	}
+	So we have to proof the last line. Induction.
+	\al{
+		\norm{x_1-x_0} &= \norm{\integr st A(u)x_0du} \le \lambda \norm{x_0} (t-s), 0\le s \le t \\
+		\norm{x_{n+1} - x_n} 
+			&= \norm{\integr st A(u)(x_n(u) - x_{n-1}(u))du} \\
+		&\skipped{2 lines} \\
+		z &= x_1 - x_2 \\
+		z(s) &= 0 \\
+		z(s) &= \integr st A(u)z(u)du \\
+		&\skipped{3 lines} \\
+		x(t) = x_0 + x_1 - x_0 + \ldots \\
+		\norm{x(t)} &\le \norm{x_0} + \norm{x_1(t) - x_0(t)} \le \\
+					&\le \norm{x_0}\cbr{1 + (t-s) + \frac{(t-s)^2}{2!} + \ldots + \frac{(t-s)^n}{n!} +\ldots = \norm{x_0}e^{\lambda(t-s)} }, 0\le s \le t \\
+		\norm{U(t,s) \le e^{\lambda(t-s)}}
+	}
+	$U(t,s)$ --- operator of evolution
+}
+
+Odnorodnye equations
+\al{
+	\frac{dx}{dt} = A(t)x, t\in[0, T] \\
+	\skipped{2-3 lines}
+	U(t,s) = \integr st A(u)U(u,s)du + I, U(s,s) = I \\
+	\dd{U(t,s)}t = A(t)U(t,s), U(s,s) = I \text{equation for operator}
+}
+
+Neodnorodnye equations
+\al{	
+	\frac{dx}{dt} &= A(t)x + f(t), t\in[0, T] \\
+	x(s) &= x_0, 0\le s \le t \le T.
+}
+Solution using Cochie martix (in classics)
+\al{
+	\Phi(t)\Phi^{-1}(s) &= H(t,s) \text{(check!)} \fbr{\frac{d\Phi}{dt} = A(t)\Phi \ldots}
+	x &= H(t,0)x_0 + \integr 0t H(t,s)f(s)ds
+}
+
+\al{
+	V(t,s) &= I + \integr st V(t,u)A(u)du = FV \\
+	&\text{proof that it's solution}
+	V_n &= FV_{n-1}, n=1,2,3,\ldots, V_0 = I \\
+	\norm{V_n - V_{n-1}} &\le \frac{\lambda^n(t-s)^n}{n!} \\
+	I &+ (V_1 - I) + \ldots + (V_n-V_{n-1}) + \ldots
+}
+
+\al{
+	\dd{U(t,s)}t = A(t)U(t,s), U(s,s) = I  \\
+	\dd{V(t,s)}t = -V(t,s)A(s), V(t,t) = I 
+}
+\theorem{} $U(t,s) = V(t,s)$
+\proof{
+	\al{
+		\dd{}s\cbr{V(t,s)U(s,\tau)} 
+			&= \dd{V(t,s)}s U(s,\tau) + V(t,s)\dd{U(s,\tau)}s = \\
+			&= -V(t,s)A(s)U(s,\tau) + V(t,s)A(s)U(s,\tau) = 0.
+		V(t,s)U(s,\tau) &= \phi(t,\tau) \\
+		s = t &\Rightarrow U(t, \tau) = \phi(t,\tau) \\
+		s = \tau &\Rightarrow V(t, \tau) = \phi(t,\tau) \\
+		U(t,\tau) = V(t,\tau)
+	}
+}
+
+\al{
+	\dd{U(t,s)}t = A(t)U(t,s), U(s,s) = I  \\
+	\dd{U(t,s)}t = -U(t,s)A(s), U(t,t) = I 
+}
+
+\al{	
+	\frac{dx}{dt} &= A(t)x + f(t), t\in[0, T] \\
+	x(s) &= x_0, 0\le s \le t \le T, \\
+	x(t,s) &= U(t,s)x_0 + \integr st U(t,u)f(u)du.
+}
+\proof{
+	\al{
+		U(t,\tau) &\times \fbr{\dd{x(\tau,s)}\tau = A(\tau)x(\tau,s) + f(\tau)} \\
+		U(t,\tau) \dd{x(\tau,s)}\tau &= U(t,\tau)A(\tau)x(\tau,s) + U(t,\tau)f(\tau) \\
+		U(t,\tau) \dd{x(\tau,s)}\tau &= -\dd{U(t,\tau)}t x(\tau,s) + U(t,\tau)f(\tau) \\
+		\integr st & \fbr{\dd{U(t,\tau)x(\tau,s)}\tau = U(t,\tau)f(\tau)} d\tau\\
+		U(t,t)x(t,s) - U(t,s)x(s,s) &= \integr st U(t,\tau)f(\tau)d\tau \\
+		x(t,s) - U(t,s)x_0 &= \integr st U(t,\tau)f(\tau)d\tau.
+	}
+}
+
+Evaluate $x(t,s)$
+\al{
+	\norm{x(t,s)}_B 
+			&\le \integr st \norm{U(\cdot)\max_{0\le t\le T}\norm{f(t)}}du  + \norm{x_0} ___ \\
+			&\le \integr st e^{\lambda(t-u)}\max_{0\le t\le T}\norm{f(t)}}du + \norm{x_0}e^{\lambda(t-s)} \\
+			&\le \frac1\lambda \max_{0\le t\le T}\norm{f(t)}} e^{\lambda(t-s)} + \norm{x_0}e^{\lambda(t-s)} \\
+			&= e^{\lamda T}(\frac1\lambda \max_{0\le t\le T}\norm{f(t)}} + \norm{x_0})
+}
+We've prooven correctness.

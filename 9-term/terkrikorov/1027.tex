@@ -1,0 +1,135 @@
+\simpletitle{27 октября}
+
+\al{
+	\frac{dx(t)}{dt} &= A(t)x(t) + f(t), x(0)= x_0, t\ge 0, \\
+	A(t), f(t) &\text{ --- continious on } t\ge 0.
+}
+\al{
+	E_n \text{ --- Euclid space}, \ \\
+}
+\
+\defenition{} Матрица $A(t)$ устойчива, если $\foral k \Re \lambda_k(t) \le -\delta, \delta < 0$
+
+\defenition{} Матрица $A(t)$ отрицательно определена, если $\foral h \cbr{A(t)h,h} \le -\delta\modul{h}^2$
+
+\lemma{1} Отрицательно определенная матрица устойчива.
+\proof{
+	\al{
+		\lambda(t) &\qquad a(t) + ib(t) \text{нормированный собственный вектор}\\
+		\ol{\lambda}(t) &\qquad a(t) -ib(t) \\
+		\lambda(t) + \ol{\lambda}(t)  
+			&= \cbr{A(t)\cbr{a(t) + ib(t)}, a(t) + ib(t)} + \cbr{A(t)\cbr{a(t) - ib(t)}, a(t) - ib(t)} = \\
+			&= 2\cbr{A(t)b(t), b(t)} + 2\cbr{A(t)b(t), b(t)} \le -2\delta\modul{a(t)}^2 -2\delta\modul{b(t)}^2 = \\ 
+			&= -2\delta\modul{h(t)}^2 = -2\delta\\
+	}
+}
+Обратное неверно, вообще говоря. Пример: матрица % $(-1 100 // 0 -1)$ TODO:FIX
+\lemma{2} Если устойчивая матрица имеет базис из собственных векторов, то она отрицательно определена.
+\proof{
+	Выбираем ортогональный базис из собственных векторов
+	\al{
+		\cbr{A(t)x, x} 
+			&= \cbr{A(t)\sum_{i=1}^nx_ie_i(t), \sum_{i=1}^nx_ie_i(t)} = \\
+			&= \sum_{i=1}^n\lambda_i\modul{x_i}^2 = \sum_{i=1}^n\Re\lambda_i(t)\modul{x_i}^2 \le \\
+			&\le -\delta\sum_{i=1}^n\modul{x_i}^2 = -\delta\modul{x}^2.
+	}
+}
+
+\al{
+	\frac{dx}{dt} &= A(t)x \\
+	\Phi(t) &= \|\phi_{ij}\|_{i=\ldots}^{j=\ldots}  \text{ --- фундаментальная матрица}\\
+	\frac{d\Phi}{dt} &= A(t)\Phi(t) \\
+	\Psi(t) &= \Phi_{-1}(t) \\
+	\frac{d\Psi}{dt} &= -\Psi(t)A(t)
+}
+\proof{
+	\al{
+		\Phi(t)\Phi^{-1}(t)&= E, \Phi\Psi = E \\
+		\Phi(t+\delta t)\Psi(t+\delta t) - \Phi(t)\Phi(t) 
+			&= \cbr{\Phi(t+\delta t) - \Phi(t)}\Psi(t+\delta t) + \Phi(t)\cbr{\Psi(t+\delta t) - \Psi(t)} \\
+		\frac{\Psi(t+\delta t) - \Psi(t)}{\Delta t} &= -\Psi(t)\ldots \\
+		&\skipped{2-3 lines}
+	}
+}
+
+\al{
+	H(s,t) &= \Phi(t)\Psi(s) = \Phi(t)\Psi^{-1}(s), H(t,t) = E \\
+	\frac{dx}{dt} &= A(t)x + f(t), x(0) = x_0 \\
+	\dd Hs &= -HA(t), H(t,t) = I \\
+	x(t) &= \integr 01 H(s,t)f(s)ds + H(0,t)x_0
+}
+\proof{
+	\al{
+	x(t) &= \Phi(t)C(t),  \\
+	\Phi'(t)C(t) &+ \Phi(t)C'(t) = A(t)\Phi(t)C(t) + f(t) \\
+	C'(t) &= \Phi_t^{-1}(t)f(t), C(t) = \integr {}{}\ldots \skipped{1.5 lines}
+	}
+}
+
+\theorem{} Если $A(t)$ отрицательно поределенная матрица, то  $\Phi(t) \le Ce^{-\delta t}$
+\proof{
+	\al{
+		x(t) &= Phi(t)\cdot C, x(0) = C\\
+		\cbr{x, \frac{dx}{dt}} &= \cbr{A(t)x, x} \\
+		\frac12\frac{d\modul{x}^2}{dt} &\le -\delta \modul{x}^2,  \frac{d\modul{x}^2}{dt} +2\delta \modul{x}^2 \le 0, \\
+		\cbr{e^{2\delta t}\modul x^2}'&\le 0 \\
+		e^{2\delta t}\modul x^2&\le \modul C^2 \\
+		&\skipped{2-3 lines} %\modul {x(t)}\le \modul C^2 \\
+	}
+}
+\theorem{2} $H(s,t) \le e^{-\delta(t-s)}, 0\le s\le t$.
+\proof{
+	\al{
+		xH(s,t) &= y(s), y(t) = cH(t,t) = c\\
+		\frac{dy}{ds} &= -y(s)A(s), y(t) = c, o\le s \le t \\
+		\frac12 \frac{d\modul{y(s)}^2}{ds} &= \cbr{\frac{dy}{ds}, y} = \cbr{-y(s)A(s), y}, y(t) = c, o\le s \le t \\
+		\frac12 \frac{d\modul{y(s)}^2}{ds} &\ge \delta\modul {y(s)}^2 \\
+		\frac{d\modul{y(s)}^2}{ds} - 2\delta\modul {y(s)}^2 \ge 0\\
+		\frac d{ds} &\cbr{\modul{y(s)}^2e^{-2\delta s}}' \ge 0 \\
+		\modul{y(s)}^2e^{-2\delta s} &\le \modul{y(t)}^2e^{-2\delta t} \le 0 \\
+		\modul{cH(s,t)} &\le e^{-\delta (t-s)} \modul C.
+	}
+}
+
+\al{
+	\frac{dx}{dt} = A(t)x + f(t), x(0) = x_0 \\
+	f(t) \text{ --- огранич и непрер ф при $t>0$}. C[0, +\infty), \norm f_{C[0, +\infty)} = \sup_{t\ge 0}\modul{f(t)} \\
+	x(t) = \integr 0t H(s,t)f(s)ds + \Phi(t)x_0 \\
+	\modul{x(t)} \le \integr 0t H(s,t)\norm{f}_{C[0, +\infty)}ds + \modul{\Phi(t)}\modul{x_0} \\
+	\modul{x(t)} \le \norm f_{C[0, +\infty)}\integr 0t e^{-\delta(t-s)} ds + C e^{-\delta t}\norm x_0 \le \frac 1\delta \norm f_{C[0, +\infty)} + Ce^{-\delta t} \modul{x_0} 
+}
+Это показывает корректоность задачи Коши (у нас матрица отриц определенная!). Решение, кстати, забывает начальные условия.
+
+С точностью до постоянной матрицы: 
+\al{
+	\frac{dx}{dt}&=Ax \\
+	\Phi(t) &= e^{At} \\
+	x(t) = \integr 0t e^{A(t-s)}f(s)ds + e^{At} x_0
+}
+Если мы знаем собственные значения матрицы
+$$ e^{At} = \sum_{i=1}^k P_k(t)e^{\lambda_k t}$$
+$$e^{A(t)} \le Q(t)e^{-\delta t}$$
+
+
+Теперь немного об абстрактных аналитческих функциях
+
+\al{
+	\sum_{k=0}^{+\infty} c_nz^n, c_n\in B \\
+}
+
+\lemma{} Если $|z|\le C, |z_0|\le C$, то $|z^n-z_0^n| \le |z-z_0|nC^{n-1}$
+\proof{
+	\al{
+		z^n - z_0^n &= (z- z_0)(z^{n-1} + z^{n-2}z_0 + \ldots + z_0^{n-1}) \\
+		|z^n - z_0^n| &\le |z- z_0| nC^{n-1}.
+	}
+}
+
+
+\lemma{} Если $|z|\le C, |z_0|\le C$, то $|z^n-z_0 -z_0^{n-1}(z-z_0)nC^{n-1}|  \le \frac{n(n-1)}2C^{n-2}|z-z_0|^2$
+\proof{
+	\al{
+		z^n-z_0 -z_0^{n-1}(z-z_0)nC^{n-1} = (z- z_0)(z^{n-1} + z^{n-2}z_0 + \ldots + z_0^{n-1} - z_0^{n-1} - \ldots z_0^{n-1}}) \\
+		|z^n-z_0 -z_0^{n-1}(z-z_0)nC^{n-1}| = |z- z_0|^2|(n-1)C^{n-1} + (n-2)C^{n-1} + \ldots + C^{n-1}|
+	}
+}

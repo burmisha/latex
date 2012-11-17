@@ -1,0 +1,46 @@
+\input header.tex
+\input pagestyle_wide.tex
+\input macro.tex
+
+\newcommand\task[1]{\maintext{Задача #1. }}
+\begin{document}
+\simpletitle{Нелинейный и асимптотичский анализ\\ Михаил Бурмистров. \today}
+
+\task{4}
+а) 
+\proof{
+	Предположим противное: на некоторых двух последовательностя предлы различны, т.е. 
+	$\exist{\{\xi_i\}_{i=1}^\infty} \lim\limits_{i\to\infty}\xi_i=+\infty$ и 
+	$\exist{\{\chi_i\}_{i=1}^\infty} \lim\limits_{i\to\infty}\chi_i=+\infty$ такие, что
+	$\lim\limits_{i\to\infty}{\integr0{\xi_i}{x(t)dt}} = a \ne b = \lim\limits_{i\to\infty}{\integr0{\chi_i}{x(t)dt}}.$
+	Тогда рассмотрим последовательность $k_i=\begcas{\xi_i, i \equiv 1\mod{2} \\ \chi_i, i \equiv 0\mod{2}}.$ $\lim\limits_{i\to\infty}k_i=+\infty$. Тогда существует и $\lim\limits_{i\to\infty}{\integr0{k_i}{x(t)dt}} = c$ --- последовательность собственных интегралов сходится. Но она имеет два неравных частичных предела ($a\ne b$) --- противоречие.
+}
+
+б) это неверно
+в) $\norm{x(t)} \le \phi(t), \integr0{+\infty} \phi(t)dt < +\infty \Rightarrow \integr0{+\infty} x(t)dt \text{ --- сходится}$
+\proof{
+	\al{
+		y_k &= \integr0{t_k}x(t)dt \\
+		\norm{y_{k+p} - y_k} &= \norm{\integr{t_{k}}{t_{k+p}}x(t)dt} \le {\integr{t_{k}}{t_{k+p}}\norm{x(t)}dt} \le \integr{t_{k}}{t_{k+p}}\phi(t)dt < \eps, \\
+		\text{ при } k&>k\cbr{y, \eps} \text{в силу сходимости } \integr0{+\infty} \phi(t)dt.
+	} 
+	Показали фундаментальность последовательности в банаховом пространстве, поэтому предел существует.
+}
+
+г) 
+\al{
+	A&\in\Ell[B_1\to B_2] \\
+	A\integr0{+\infty} x(t)dt &= \integr0{+\infty} Ax(t)dt \\
+}
+
+\al{
+	y_k &= \integr0{t_k}x(t)dt \\
+	Ay_k &= \integr0{t_k}Ax(t)dt \text{ --- в силу линейности} \\
+	\norm{Ay_k - A\integr0{+\infty}x(t)dt} &= \norm{A\integr{y_k}{+\infty}x(t)dt}
+}
+
+%$\norm{\integr0{+\infty}{x(t)dt}} \le \integr0{+\infty}{\norm{x(t)}dt} \le \integr0{+\infty}{\phi(t)dt} < +\infty \Rightarrow $
+
+
+
+\end{document}

@@ -1,0 +1,98 @@
+\simpletitle{29 сентября}
+
+В прошлый раз доказали теорему 
+\theorem{о неявной функции} Если $f(x,y)$ и $f_y(x,y)$ непрер в $O(x_0, y_0) \subset B_1\times B_2$, $f(x_0,y_0) = 0$, $f_y(x_0, y_0)^{-1}$ --- огр лин оп, то уравнение $f(x,y) = 0$ в нек окре-ти $U_\delta(x_0)\times U_\eps(y_0)$ как непр ф $x$.
+
+\theorem{} $f_x(x,y)$ $y'(x) = -f_y^{-1}(x,y)f_x(x,y(x))$
+\proof{
+	\al{
+		B\\
+		\norm A < 1 \\
+		(I-A)^{-1} = I + A + A^2 + \ldots \\
+		A + B, \norm{A^{-1}B} < 1 \\
+		A+B = A(I+A^{-1}B), (A+B)^{-1} = (1+A^{-1}B)^{-1}A^{-a}
+	}
+	так вот
+	\al{
+		f(x,y) &= 0 \\
+		f(x + \delta x, &y + \delta y) = 0 \\
+		f(x + \delta x, &y + \delta y) - f(x,y) = 0 \\
+		\integr01\cbr{f_x(x + u\delta x, &y + u\delta y)\delta x + f_y(x + u\delta x, y + u\delta y)\delta y} du = 0 \\
+		{f_x(x,y)\delta x &+ f_y(x, y) delta y} + \integr01\cbr{f_x(x + u\delta x, y + u\delta y) -  f_x(x, y)}\delta x du + \integr01\cbr{f_y(x + u\delta x, y + u\delta y) -  f_y(x, y)} \delta y du = 0 \\
+		\norm {f_y^{-1}(x_0, y_0) &\cbr{f_y(x,y) - f_y(x_0, y_0)} } < 1 \text{--- сократим окрестность, если что} \\
+		\delta y &= -f^{-1}_y(x,y) f_x(x,y) \delta x - f^{-1}_y(x,y)\sbr{\integr 01 f_x(\cdot)\delta x du + \integr 01 f_y(\cdot)\delta y du} \\
+		y(x + \delta x) - y(x) &- \cbr{-f'_y(x,y)f_x(x,y)}\delta x = -f_y^{-1}(x,y) \sbr{\integr 01 (\cdot)\delta x du + \integr 01 (\cdot)\delta y du} \\
+		\norm{y(x + \delta x) - y(x) &+ \cbr{-f'_y(x,y)f_x(x,y)}\delta x} \le \eps_1(x)\norm{\delta x} + \eps_2(x)\norm{\delta y} \\
+		\norm{\delta y} &\le C \norm{\delta x} + \eps_2(x)\norm{\delta y} \Rightarrow \text{ производная Фреше.}
+	}
+}
+
+\al{
+	f_1(x,y) = 0, \ldots f_m(x,y) = 0, x = (x_1, \ldots, x_n), y = (y_1, \ldots y_m) \\
+	f(x, y) = (f_1(x,y), \ldots f_m(x,y))^T = 0\\
+	f'_y(x,y) = \cbr{\dd {f_i}{y_j}}, \\
+	\dd{\cbr{f_1, f_2, \ldots, f_m}}{\cbr{y_1,\ldots, y_n}} \ne 0, f(x_0, y_0) = 0
+}
+Старая теорема --- частный случай этой.
+
+Новая теорема
+\theorem{Канторовича} (так назовём) 
+Пусть $B_1, B_2$ --- банаховы пространства, $U_R(x_0)\subset B_1$, $L$ --- плотное подпространство в $B_1$, $A\colon L\to B_2, L = D(A)$. 
+Пусть ф $f\colon U_R(x_0)\to B_2$ дифф и её произв удовл услов Липш: $\foral{x_1, x_2 \in U_R(x_0)}\norm{f'(x_1) - f'(x_2)}\le l\norm{x_1-x_2}$. 
+Пусть $x_0\in L, \norm{\cbr{A - f'(x_0)}^{-1}} \le \kappa, \norm{\cbr{A-f'(x_0)}^{-1}\cbr{f(x_0) - Ax_0}} \le \gamma,$
+причем $r = \frac{1-\sqrt{1 - 2\kappa l \gamma}}{l \kappa} \le R$ \cbr{2\kappa l \gamma < 1} 
+тогда в $\ol{U_r}(x_0)$ ур $f(x) = 0$ имеет ед решение
+$x^* = \lim_{n\to\infty x_n}, Ax_{n+1} - f'(x_0)x_{n+1} = f(x_n) - f'(x_0)x_n$
+$\norm{x^* - x_n} \le \frac{\gamma q^n}{\sqrt{1-2l\kappa \gamma}}, q = 1 - \sqrt{1-2l\kappa\gamma} < 1, \norm{x^* - x_0}\le 2\gamma \text { --- невязка}.$
+
+% \proof{
+% 	\al{
+% 		A - f(x) = 0 \\
+% 		F(x) = f(x)-f(x_0)-f'(x_0)(x-x_0), x\in \ol{U_r}(x_0) \\
+% 		F'(x) = f'(x) - f'(x_0) \\
+% 		\norm{F(x)} \le \frac l2\notm{x-x_0}^2 \le \frac {lr^2}2, \norm{F^'(x)} \le \norm l\norm{x-x_0} \le lr \\
+% 		A(x-x_0) + Ax_0 - \cbr{F(x) + f(x_0) + f'(x_0)(x-x_0)} = 0 \\
+% 		(A- f'(x_0))(x-x_0) + Ax_0 - f(x_0) - F(x) = 0 \\ % - OK
+% 		\mathcal X = \Phi(x) = x_0 - (A - f'(x_0))^{-1}(Ax_0 - f(x_0)) + (A-f'(x_0))^{-1}F(x) \\
+% 		\norm{\Phi(x) - x_0} \le \gamma + \kappa\frac{lr^2}2  = r \text{квадратное уравнение}
+% 	}
+% 	Оператор - опреаторс сжатия, если его норма меньше 1.
+% 	\al{
+% 		\norm{\Phi'(x)} = \norm{\cbr{A - f'(x_0)}^{-1}F'(x)} \le \kappa l r = 1 - \sqrt{1 -2\kappa l\gamma} = q < 1. 
+% 	}
+% 	А значит, неподвижная точка единственна.
+% 	\al{
+% 		x_{n+1} = \Phi(x_n), \norm{x_{n+1} - x^*} \le \frac{\norm{x_1-x_0}}{1-q}q^n  \\
+% 		x_1 = \Phi(x_0) = x_0 - (A - f'(x_0))^{-1}(Ax_0 - f(x_0)) \\
+% 		\norm{x_{n+1} - x^*} \le \frac\gamma{1-q}q^n \\
+% 		\norm{x_0 - x^*} \le \r \le \frac {2l\kappa\gamma}{l\kappa(1+\sqrt{\cdot})} \le \gamma \\
+% 	}
+% 	Осталось расписать вот эту штуку 
+% 	\al{
+% 		x_{n+1} = x_0 - \inv{A - f'(x_0)}(Ax_0 - f(x_0)) - \inv{A-f'(x_0)}F(x_n) \\
+% 		Ax_{n+1} - f'(x_0) x_{n+1} = Ax_0 + f(x_0) - f'(x_0)x_0 + f(x_n) + f'(x_0)(x_n - x_0) - f(x_0) \\
+% 		Ax_{n+1} - f'(x_0) x_{n+1} = f(x_n) - f'(x_0)x_n
+% 	}
+% }
+	
+Как мы решали уравнения
+\al{
+	\frac{dx}{dt} - f(x) = 0,  \\
+	\frac{dx_{n+1}}{dt} - f'(x_0)x_{n+1} = f(x_n) - f'(x_0)x_n
+}
+Если брать не $x_0$, а $x_n$ --- быстрее скорость сходимоти, но надо пересчитывать производную.
+
+\al{
+	f(x) = 0, f\colon O(x_0)\to B_2, O(x_0)\subset B_1 \\
+	x_0 \\
+	f(x_0) + f'(x_0)(x_1-x_0) = 0 \\
+	x_1 - x_0 = -f'(x_0)^{-1}f(x_0) \\
+	x_1 = x_0 - f'(x_0)^{-1}f(x_0) \\
+	x_2 = x_1 - f'(x_1)^{-1}f(x_1) \\
+	x_{n+1} = x_n - f'(x_n)^{-1}f(x_n)
+}
+Если эта последовательность (Ньютона) сходится, то к решению. Нужно условие сходимости.
+
+\theorem{} Если в шаре $U_R(x_0)$ $f'(x)$ уд усл Липш. Пусть опер $f'(x)$ равномерно ограничен $\norm{f'(x)}\le alpha, x\in U_R(x_0)$. Пусть $\norm{f(x_0)}\le \beta, q = \alpha^2l\beta < 1, r = \alpha\beta\sum\limits_{k=0}^{\infty}q^{2^k-1} < R$
+тогда $f(x) = 0$ имеет в замкн шаре $\ol{U_r(x_0)}$ решение, а посл-ть Н сход. (не обяз единств реш)
+Скорость: $\norm{x_n-x^*} \le \alpha\beta\frac{q^{2^n-1}}{1-q^{2^n}}$

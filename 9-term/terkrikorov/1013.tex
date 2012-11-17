@@ -1,0 +1,69 @@
+\simpletitle{13 октября}
+
+\al{
+	f(x) = 0 
+	f(x_n) + f'(x)(x_{n+1} - x_n) = 0 (1)
+	x_{n+1} = x_n - f'(x_n)^{-1}f{x_n} \qquad (2)
+}
+
+\theorem Let $f\colon U_R{x_0}\to B_2, O(x_0)\subset B_1$, $f$ is diff in $U_R{x_0}$ and $f'$ has limited reverse $\inv{\norm{f'(x)}} \le \alpha$
+$f'(x)$ is Lipsch $\norm{f(x_1) - f(x_2)} \le l\norm{x_1-x_2}$. Let $q = \alpha^2\beta l < 1,$ where $\beta = \norm{f(x_0)}$. Then 
+$$\exist{\lim_{n\to\infty}} \norm{x_{n+1} - x} \le \alpha\beta\frac{q^{2^n+1}}{1-q^{2^n}}.$$
+\proof{
+	\al{
+		\norm{x_n - x_{n-1}} \le \alpha\beta q^{2^n-1}, \norm{f(x_n)} \le \frac l2\norm{x_n - x_{n-1}}^2 \\
+		\norm{x_1 - x_0} = \norm{\inv{f'(x_0)}f(x_0)} \le\alpha\beta < r \\
+		\norm{f(x_1)} = \modul{\text{substract nul! check for $x_1$}}=\norm{f(x_1) - f(x_0) - f'(x_0)(x_1-x_0)} \lr \frac l2\norm{x_1-x_0}^2 \\
+		\text{Induction} \\
+		\norm{x_{n+1} - x_n} = \norm{\inv{f'(x_n)}f(x_n)} \le \alpha\frac l2\norm{x_n-x_{n-1}} \le\alpha = \skipped{one line} \\
+		\norm{f(x_{n+1})} = \skipped{one line}
+	}
+}
+Lets show, that all $x$ are in sphere of radius 1.
+\al{
+	\norm{x_{n+1} - x_0} 	&\le 	{x_1 - x_0} + \ldots + \norm{x_{n+1} - x_n} \le\alpha\beta\sum_{k=1}^n q^{2^k -1} \le r \\
+							&\text{fundamentality}
+	\norm{x_{n+p} - x_n} 	&\le 	{x_{n+1} - x_n} + \ldots + \norm{x_{n+p} - x_{n+p-1}} \le\alpha\beta\sum_{k=1}^{p} q^{2^{n+k} - 1}  \le \\
+							&\le 	\alpha\beta\sum_{k=1}^{p} q^{2^{n}k} q^{-1} = \frac{\alpha\beta}q\frac{q^{2^n-1}}{1-q^{2^n}} < \eps, n > N(\eps).
+}
+
+Modified Newton's method.
+
+replace $x_0$ with $x_n$
+$$f(x_n) - \inv{f'(x_0)}(x_{n+1} - x_n).$$
+No need to proof again all the theorems.
+
+\al{
+	f(x) = 0\\
+	x = x- \inv{f'(x)}f(x) = F(x) \\
+	x_{n+1} = x_n - inv{f'(x_0)}f(x_n) \\
+	\text{don't understand}
+}
+
+Differentional equations in Banach space.
+We're going to solve Cochie problem:
+$$\frac{dx}{dt} = f(x,t), x(0) = x_0.$$
+The solution is a function with cont derivative and setting predicat to equality.
+$$t\in [-\delta_0, \delta_0], x\in U_R(x_0)\subset B$$
+$$f\colon U_R(x_0)\times[-\delta_0, \delta 0] \to B$$
+
+\theorem{} Let $f(x,t)$ is continious over $t$ $\foralx\in U_R(x_0)$, $f(x,t)$ is Lipsch over $x\colon \norm{f(x_1,t) - f(x_2,t)} \le l\norm{x_2, x_1}$, 
+$\modul{f(x,t)} \le M, \delta <\min\cbr{\frac rM,\frac 1l, \delta_0}, \norm{x(t) - x_0} \le r < R$. Then the solution exists.
+\proof{(follows the classical theory of ordinary diff equations)
+	\al{
+	F(t) &= f(x(t), t) \text{is continious because}\\
+	\norm{F(t) - F(t_0)} &= \norm{f(x(t), t) - f(x(t_0), t_0)} = \norm{f(x(t), t) - f(x(t_0), t) + f(x(t_0), t) - f(x(t_0), t_0)} \text{ use Lipsch and cont.}
+	}
+	\al{
+		\Phi x &= f(x(t), t) \\
+		x(t) &= \integr 0t f(x(s), s) ds + x_0 = \Psi x \\
+		\norm{\psi(x) - x_0}_B = \norm{\integr 0t f(x(s),s)ds}_B \\
+		\norm{\psi(x) - x_0}_B = Mt \le M\delta \le r \\
+		\norm{\psi(x) - x_0}_{C[-\delta, \delta]} \le r \\
+	}
+	The operator transforms a ball into itself. So it has the only nonmoving point (it's stretching).
+}
+
+Old linear nonlocal theorem. $\frac{dx}{dt} = Ax + f(t)$ --- has solution on the whole $[\alpha, \beta],$ if a is linear, $f$ limited.
+
+\theorem{} Let $f(x,t)$ is cont over $t$ on $[\alpha, \beta]$ and follows Lipsch on the whole space (very-very strong condition). Then $$\frac{dx}{dt} = f(x,t), x(0) = x_0$$ has solution on $[\alpha, \beta]$

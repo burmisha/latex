@@ -1,0 +1,100 @@
+\simpletitle{10 ноября}
+
+\al{
+	F(x,y) &= 0 \\
+	\exist \inv &F_y(x,y), \\
+	F(x_0,y_0) &= 0, \\
+	F(x,y) &= f_{10}(x-x_0) + f_{01}(y-y_0) + \isum k2 \sum_{m=0}^k f_{m,k-m}(x-x_0)^m(y-y_0)^{k-m}. \\ 
+}
+Предполагали, что этот ряд сходится абсолютно при $\norm{x-x_0}\le R, \norm{y-y_0}\le R.$
+\al{
+	y &= f(x,y) = f_{10}x + \isum k2 \sum_{m=0}^k f_{m,k-m}(x-x_0)^m(y-y_0)^{k-m}, \norm{x}\le 1+\delta_0, \norm{y}\le 0+y_0 \text{(нормировкой)}\\ 
+	&\norm{f_{10}} + \isum k2 \sum_{m=0}^k \norm{f_{m,k-m}}, \norm{f_{m,k-m}}\le M \\
+	\eta &= M\cdot\xi + M\isum k2 \sum_{m=0}^k \xi^k\eta^{k-m} = \phi(\xi,\eta), \eta = C_1\xi + C_2\xi^2 + \ldots.
+}
+Будем сперва искать решение формально в виде степенного ряда.
+\al{
+	y 	&= f_{10}x + f_{20}x^2 + f_{11}xy + f_{02}y^2 + f_{30}x^3 + f_{21}x^2y + f_{12}xy^2+ f_{03}y^2 + \ldots \\
+	y 	&= y_1x + y_2x^2 + \ldots = \\
+		&= f_{10}x + f_{20}x^2 + f_{11}xy(\phi_1x + \phi_1x^2 + \ldots) + f_{02}y^2(\phi_1x + \phi_1x^2 + \ldots)^2 + \ldots \\
+}
+приравняем
+\al{
+	y_1x &= f_{10}x, \\
+	y_2x^2 &= f_{20}x^2 + f_{11}x^(y_1x) + f_{02}(y_1x)^2, \\
+	&\ldots
+}
+\al{
+	C_1\xi &= M\xi, \\
+	C_2\xi^2 &= M(\xi^2 + \xi C_1\xi + \sqr{C_1\xi}),\\
+	&\ldots \\
+	\norm{y_1x} &\le \norm{f_{10}x} \le \norm{f_{10}}\norm{x}\le M\cdot\xi = C_1\xi \\
+	\norm{y_2x^2} &\le \norm{f_{20}x^2} + \norm{f_{11}x(y_1x)} + \norm{f_{02}\sqr{y_1x}} \le M\cdot \xi^2 + M \cdot\xi \cdot C_1\xi+M\sqr{C_1\xi} = C_2\xi^2 \\
+	&\ldots \\ 
+	\norm{y_nx^n}&\le C_n\xi^n
+}
+Осталось показать, что мажоратное уравнение имеет решение в круге какого-то радиуса
+\al{
+	\eta &= M\xi + M(\xi^2 + \eta\xi + \eta^2) + M(\xi^3 + \xi^2\eta + \xi\eta^2 + \eta^3) + \ldots , \modul\xi\le1,\modul\eta\le1 ,\\
+	\eta &= M(\eta^2+\eta^3 +\ldots) + M\xi(1+\eta+\eta^2+\eta^3 +\ldots) + M\xi^2(1+\eta+\eta^2+\eta^3 +\ldots) + \ldots, \\
+	\eta &= M\frac{\eta^2}{1-\eta} + M\xi\frac1{1-\eta} + M\xi^2\frac1{1-\eta} = M\frac{\eta^2}{1-\eta} + M\frac{\xi}{(1-\eta)(1-\xi)}}
+
+Получили квадратное уравнение, ура-ура.
+\al{
+	\eta(1-\eta) &= M\eta^2 + \frac{m\xi}{1-\xi} \\
+	(1+M)\eta^2 &- \eta + \frac{M\xi}{1-\xi} = 0 \\
+	\eta &= \frac1{2(1+2M)}\cbr{1 - \sqrt{1-\frac{4M(1+M)\xi}{1-\xi}}} = \frac1{2(1+2M)}\cbr{1 - \sqrt{\frac{1- \sqr{1+2M}\xi}{1-\xi}}}
+}
+$\eta$ --- аналитическая функция $\xi$. Радиус сходимости: ближайшая особая точка к нулю: $\modul\xi<\frac1{\sqr{1+2M}}\le1$. $\norm x \le \xi$
+
+\al{
+	Ay - f(x,y) &= 0, f(x_0, y_0) =0, Z = f(z,\xi) \\
+	A(y-y_0) - f(x,y) &= 0 \\
+	A-f_y(x_0,y_0) &= T \text{ --- имеет ограниченный обратный} \\
+	y-y_0 &= T^{-1}(f(x,y) - f_y(x_0, y_0)(y-y_0)) \\
+	A(y-y_0)-f_y(x_0,y_0)(y-y_0) &- f(x,y) - f_y(x_0, y_0)(y-y_0) = 0\\
+}
+и мы свели задачу к предыдущей.
+так что если есть 
+\al{
+	w' &= f(w,z), w(0) = 0 \\
+	&\skipped{2 lines}
+}
+
+
+Итак, мы решали уравнение 
+\al{
+	F(x,y) &= 0 \\
+	F(x_0, y_0) &= 0 \\
+	\exist &F^{-1}_y(x_0,y_0) \text{ или } \exist F^{-1}_x(x_0,y_0) \Rightarrow \text{ ищем решение в виде степенного ряда} \\
+	\text{если} &F^{-1}_y(x_0,y_0) = F^{-1}_x(x_0,y_0) = 0 \Rightarrow \text{ ветвление решений.}
+}
+
+\al{
+	f(x,\lambda) &= \sum_{k=0}^nf_k(\lambda)x^k \\
+	f_k(\lambda) &= \lambda^{\rho_k}\isum m0 f_{km}\lambda^\frac mp = \isum m0 f_{km}\lambda^{\rho_k + \frac mp}. \\
+	x 	&= x_\eps\lambda^\eps, \sum_{k=0}^n f_k(\lambda)x^k\lambda^{\eps k} = \\
+		&= \sum_{k=0}^nx^k_\eps\lambda^{\eps k}\isum m0 f_{km}\lambda^{\rho_k + \frac mp} = \\
+		&= \sum_{k=0}^n\isum m0 f_{km}x^k_\eps\lambda^{\rho_k + \frac mp + \eps k}.
+}
+
+Отбросим мелкие члены и получим точность до более высоких порядков. Как же искать?
+КАРТИНКА ПРО МНОГОУГОЛЬНИК. Метод диаграммы Ньютона.
+\al{
+	\sum_{k=0}^n & x_\eps^k\lambda^{\rho_k - \eps k} \\
+	&\cbr{k, \rho, k} \\
+	&A_0(0,\rho_0), A_1(1,\rho_1), A_k(k,\rho_k)
+} 
+Ставим точки и обходим по выпуклой оболочке против часовой, начав с $A_0$ --- имеем посл-ть $A_{s_k}$
+
+\al{
+	\rho - \rho_{s_1} &= -\eps_1(k-s_1) \\
+	\rho = \rho_{s_1} &- \eps_1(s_k-s_1) < \rho_{s_k} \\
+	\rho_{s_1} + \eps_1s_1 &< \rho_{s_k} + \eps_ks_k \\
+	&\skipped{7 lines} \\
+	\eps_1 &= \frac{\rho_0 - \rho_{s_1}}{s_1} \\
+	\eps_2 &= \frac{\rho_{s_2} - \rho_{s_1}}{s_2 - s_1} 
+}
+ну пусть нашли все $\eps$. Что делаем дальше. Выбираем некоторое $\eps$, всё меньшее выкинуть, новое уравение, и опять, а потом снова. Ну и получим решение в виде $\sum x_{\eps_k}\lambda^{\eps_k}$
+
+Подготоивтельная теорме Вейерштрасса из теории аналитических функций.
