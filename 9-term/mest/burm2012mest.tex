@@ -10,7 +10,7 @@
 
 \maintext{Найти:} $\fbr{n_j}_{j=1}^k$ --- последовательность индексов точек из $A$, описывающее пространственную структуру их расположения.
 
-\simpletitle{Решение}
+\simpletitle{План решения}
 Предлагается использовать модифицированный алгоритм Джарвиса для поиска выпуклой оболочки. 
 Основная модификация заключается в введении структурного параметра  $r$: теперь будет выбираться точка, образующая наименьший угол с предыдущим направлением, но не из всех точек множества $A$, а из точек, лежащих в окрестности предыдущей точки радиуса $r$. 
 Очевидно, что при $r\to\infty$ алгоритм переходит в алгоритм Джарвиса, а при $r\to0$ совершенно не работает (окрестность пуста). 
@@ -20,6 +20,21 @@
 В такой форме алгоритм не способен обходить протяженные вогнутые границы, поэтому была предложена следующая эвристика: выбирать очередную точку таким образом, что она ближе к последней точке, чем к предпоследней (если такие точки нашлись, если же таковых нет~--- всё как обычно). 
 Эта эвристика удивительным образом помогла избавиться на обработке тестовых изображениях от множества проблем, не создав новых.
 
+\simpletitle{Алгоритм}
+\begin{enumerate}
+  \item Определить точку $a\in A$ с максимальными (лексикографически) координатами.
+  \item Выделить точки $B = A \cap O_r(a)\backslash\{a\}$. 
+  \item Определить точку $b^* = \arg\min\limits_{b\in B} \angle\cbr{\overrightarrow{ab\mathstrut}, \bivec0{-1}}$ (угол измеряется от $[-\pi+\delta, \pi), \delta \ge 0$, остальные же отбрасываются)
+  \item Записать в список индексов индексов точек $a$ и $b$.
+  \item Взять из текущего списка индексов последнюю точку $p$ и предпоследнюю --- $s$.
+  \item Выделить точки $B = A \cap O_r(p) \backslash \{p\}.$ 
+  \item Выделить точки $C = \fbr{x\in B \colon \norm{x-p}\le \norm{x-s}}.$
+  \item Определить точку $b^* = \arg\min\limits_{b\in B\cap C} \angle\cbr{\overrightarrow{pb\mathstrut}, \overrightarrow{sp\mathstrut}}$.
+  \item Если такой точки не нашлось, то положить $b^* = \arg\min\limits_{b\in B \backslash C} \angle\cbr{\overrightarrow{pb\mathstrut}, \overrightarrow{sp\mathstrut}}.$
+  \item Положить индекс $b^*$ в конец списка индексов.
+  \item Если начало и конец списка совпадают --- завершить, иначе --- перейти на шаг 6.
+\end{enumerate}
+Примечание: параметр $\delta$ нужен лишь для того, чтобы обезопасить себя от вычислительных погрешностей, он был положен равным $\delta = 1^\circ.$
 \simpletitle{Инструкции по запуску}
 Технически программа является MATLAB скриптом. 
 \definecolor{dkgreen}{rgb}{0,0.6,0}
@@ -61,15 +76,15 @@ FileNumber = 5;
 FileNamePrefix = sprintf('%d',FileNumber);
 r = RadiusOptimal(FileNumber);
 \end{lstlisting}
-\maintext{Внимание:} алгоритм может зациклится при неверном выборе параметра $r$. Ответственность за это полностью лежит на пользователе скрипта.
+Алгоритм может зациклится при неверном выборе параметра $r$. Ответственность за это полностью лежит на пользователе скрипта.
 
 По окончании работы скрипт выводит на экран полученную границу, площадь и периметр ограничиваемой фигуры, а также записывает всё в файл.
 \newpage
-\addeps{pic/2_r12}{Файл \texttt{2.txt}, $r=12$}
-\addeps{pic/3_r13}{Файл \texttt{3.txt}, $r=13$}
-\newpage
-\addeps{pic/4_r13}{Файл \texttt{4.txt}, $r=13$}
-\addeps{pic/5_r19}{Файл \texttt{5.txt}, $r=19$}
+ \addeps{pic/2_r12}{Файл \texttt{2.txt}, $r=12$}
+ \addeps{pic/3_r13}{Файл \texttt{3.txt}, $r=13$}
+ \newpage
+ \addeps{pic/4_r13}{Файл \texttt{4.txt}, $r=13$}
+ \addeps{pic/5_r14}{Файл \texttt{5.txt}, $r=14$}
 \lstset{ %
 	basicstyle = \scriptsize,
 	numbers=left,                   % where to put the line-numbers
@@ -79,16 +94,15 @@ r = RadiusOptimal(FileNumber);
 }
 \newpage
 \simpletitle{Листинг}
+
 \begin{lstlisting}[language=matlab, frame=lines]
 clear all;
 
 FileNumber = 5;
 FileNamePrefix = sprintf('%d',FileNumber);
-RadiusOptimal = [500, 12, 13, 13, 19];
+RadiusOptimal = [500, 12, 13, 13, 14];
 X = dlmread(strcat(FileNamePrefix,'.txt'));
-%X = [X(:,1), X(:,3)];  % 2 -> 12 .. 10     % 3 -> 13 .. 12     % 4 -> 13 .. 11     % 5 -> 19 only
 r = RadiusOptimal(FileNumber);
-
 MinAngle = -179;
 
 AngleIdxInit = @() ndgrid(1000, 0);
@@ -97,7 +111,9 @@ clangle = @(x) (1.25-4*(heaviside(x(:,1).*x(:,4)-x(:,2).*x(:,3))-0.75).^2) .*aco
 h = plot(X(:,1), X(:,2), 'r.','LineWidth',1);
 axis normal; hold on;
 
-[~, idx] = max(X(:,1)==max(X(:,1)));
+MaxedX=find(X(:,1)==max(X(:,1)));
+[~, idx] = max(X(MaxedX, 2));
+idx = MaxedX(idx);
 plot(X(idx,1), X(idx,2), 'b.','LineWidth',3);
 
 Previous = X(idx,:);
@@ -129,22 +145,17 @@ while idx(end) ~= idx(1)
         [~, BestNeg] = min(Angle(Negative));
         NewIdx = nearest(Negative(BestNeg));
     end
-    %plot(XX(Positive,1), XX(Positive,2), 'y.','LineWidth',3);
     idx = [idx NewIdx];
-    %plot(XX(Positive,1), XX(Positive,2), 'r.','LineWidth',3);
-    plot(X(idx(end),1), X(idx(end),2), 'g.','LineWidth',3);
-    %length(idx)
 end
 
 Perimeter = sum(sqrt((X(idx(1:end-1),1)-X(idx(2:end),1)).^2 + (X(idx(1:end-1),2)-X(idx(2:end),2)).^2) )
 Area = 1/2 * sum(X(idx(1:end-1),1).*X(idx(2:end),2) - X(idx(1:end-1),2).*X(idx(2:end),1))
 
 plot(X(idx,1), X(idx,2), 'g-','LineWidth',2);
-%axis('tight')
 axis('square');
 axis('xy');
 text(   0.5*min(X(:,1)) + 0.5* max(X(:,1)), min(X(:,2)), ...
-    strcat('$$P = ', num2str(Perimeter),', S = ',num2str(Area),'$$'), ...
+    strcat('$$r=',num2str(r),', P = ', num2str(Perimeter),', S = ',num2str(Area),'$$'), ...
     'Interpreter','latex', 'FontSize',12);
 saveas(h, strcat(FileNamePrefix, sprintf('_r%d.eps',r)),        'eps2c');
 hold off
