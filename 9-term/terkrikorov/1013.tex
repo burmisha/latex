@@ -13,7 +13,7 @@ $$\exist{\lim_{n\to\infty}} \norm{x_{n+1} - x} \le \alpha\beta\frac{q^{2^n+1}}{1
 	\al{
 		\norm{x_n - x_{n-1}} \le \alpha\beta q^{2^n-1}, \norm{f(x_n)} \le \frac l2\norm{x_n - x_{n-1}}^2 \\
 		\norm{x_1 - x_0} = \norm{\inv{f'(x_0)}f(x_0)} \le\alpha\beta < r \\
-		\norm{f(x_1)} = \modul{\text{substract nul! check for $x_1$}}=\norm{f(x_1) - f(x_0) - f'(x_0)(x_1-x_0)} \lr \frac l2\norm{x_1-x_0}^2 \\
+		\norm{f(x_1)} = \modul{\text{substract nul! check for $x_1$}}=\norm{f(x_1) - f(x_0) - f'(x_0)(x_1-x_0)} \le \frac l2\norm{x_1-x_0}^2 \\
 		\text{Induction} \\
 		\norm{x_{n+1} - x_n} = \norm{\inv{f'(x_n)}f(x_n)} \le \alpha\frac l2\norm{x_n-x_{n-1}} \le\alpha = \skipped{one line} \\
 		\norm{f(x_{n+1})} = \skipped{one line}
@@ -22,8 +22,7 @@ $$\exist{\lim_{n\to\infty}} \norm{x_{n+1} - x} \le \alpha\beta\frac{q^{2^n+1}}{1
 Lets show, that all $x$ are in sphere of radius 1.
 \al{
 	\norm{x_{n+1} - x_0} 	&\le 	{x_1 - x_0} + \ldots + \norm{x_{n+1} - x_n} \le\alpha\beta\sum_{k=1}^n q^{2^k -1} \le r \\
-							&\text{fundamentality}
-	\norm{x_{n+p} - x_n} 	&\le 	{x_{n+1} - x_n} + \ldots + \norm{x_{n+p} - x_{n+p-1}} \le\alpha\beta\sum_{k=1}^{p} q^{2^{n+k} - 1}  \le \\
+							\text{fundamentality} \norm{x_{n+p} - x_n} 	&\le 	{x_{n+1} - x_n} + \ldots + \norm{x_{n+p} - x_{n+p-1}} \le\alpha\beta\sum_{k=1}^{p} q^{2^{n+k} - 1}  \le \\
 							&\le 	\alpha\beta\sum_{k=1}^{p} q^{2^{n}k} q^{-1} = \frac{\alpha\beta}q\frac{q^{2^n-1}}{1-q^{2^n}} < \eps, n > N(\eps).
 }
 
@@ -47,7 +46,7 @@ The solution is a function with cont derivative and setting predicat to equality
 $$t\in [-\delta_0, \delta_0], x\in U_R(x_0)\subset B$$
 $$f\colon U_R(x_0)\times[-\delta_0, \delta 0] \to B$$
 
-\theorem{} Let $f(x,t)$ is continious over $t$ $\foralx\in U_R(x_0)$, $f(x,t)$ is Lipsch over $x\colon \norm{f(x_1,t) - f(x_2,t)} \le l\norm{x_2, x_1}$, 
+\theorem{} Let $f(x,t)$ is continious over $t$ $\foral x\in U_R(x_0)$, $f(x,t)$ is Lipsch over $x\colon \norm{f(x_1,t) - f(x_2,t)} \le l\norm{x_2, x_1}$, 
 $\modul{f(x,t)} \le M, \delta <\min\cbr{\frac rM,\frac 1l, \delta_0}, \norm{x(t) - x_0} \le r < R$. Then the solution exists.
 \proof{(follows the classical theory of ordinary diff equations)
 	\al{

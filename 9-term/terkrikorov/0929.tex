@@ -19,12 +19,15 @@
 
 Пусть ф определена в окрестности:
 \al{
-	f(x) &= \suml{k=0}^n\frac{f^{(k)}(x_0)}{k!}(x-x_0)^k + r_n(x) \\
-	r_n(x) &=\integr 01(1-u)f^{(n+1)}(x_0+u(x-x_0))(x-x_0)^{n+1}du
+	f(x) &= \sum_{k=0}^n\frac{f^{(k)}(x_0)}{k!}(x-x_0)^k + r_n(x) \\
+	r_n(x) &=\integr 01 (1-u)f^{(n+1)}(x_0+u(x-x_0))(x-x_0)^{n+1}du
 }
 
-\proof{
-	\psi(t) = f(x_0 + t(x-x_0)), -1\le t\le 1 .........
+\proof{ 
+	\al{
+		\psi(t) &= f(x_0 + t(x-x_0)), -1\le t\le 1 \\
+		&\skipped{}
+	}
 }
 
 Нахождение неподвижных точек опертатора методом последовательных приближений.
@@ -42,8 +45,8 @@ $\norm{x_{n+1}-x_n} \le \frac{\norm{Ax_0-x_0}}{1-\alpha}\alpha^n$ --- невяз
 		\norm{x_{n+p}-x_n} &\le \norm{Ax_0-x_0}\cbr{\alpha^{n+p} + \alpha^{n+p -1} + \ldots + \alpha^{n}} \le \frac{\alpha^n}{1-\alpha}\norm{Ax_0-x_0} \\
 		\foral{\eps > 0}&\exist N \foral n>N \foral p \norm{x_{n+p}} < \eps \\
 		\lim x_m &= x, x\in M \\
-		\norm{x-x_n} &\le \frac{\alpha^n}{1-\alpha}\norm{Ax_0-x_0}
-		\norm{x-x_0} &\le \frac{\norm{Ax_0-x_0}}{1-\alpha}
+		\norm{x-x_n} &\le \frac{\alpha^n}{1-\alpha}\norm{Ax_0-x_0} \\
+		\norm{x-x_0} &\le \frac{\norm{Ax_0-x_0}}{1-\alpha} \\
 		\norm{Ax_n - Ax} &\le \alpha\norm{x_n - x} \to 0, \lim_{n\to \infty} Ax_n = Ax, x_{n+1} = Ax_n, x = Ax.
 	}
 	Единственность: предположить, что их две, то после отображения они должны приблизиться, а они неподвижны
@@ -119,7 +122,7 @@ $f(x, y) = 0, (x,y) \in \obol{x_0,y_0} \subset B_1\times B_2$
 		y &= F(x,y) \\
 		y(x)-y(x_0) &= F(x,y(x)) - y_0 = F(x, y(x)) - F(x, y_0) + F(x, y_0) - y_0 \\
 		\norm{y(x)-y(x_0)} &\le \norm{F(x, y(x)) - F(x, y_0)} + \norm{F(x, y_0) - y_0} \le \alpha\norm{y-y_0} + \norm{f_y^{-1}(x_0, y0)}\norm{f(x, y_0)} \\
-		\norm{y(x)-y(x_0)} &\le \frac{f^{-1}_y(x_0,y-0)}}{1-\alpha}\norm{f(x, y_0)} < \eps, \norm{x-x_0}<\delta_1
+		\norm{y(x)-y(x_0)} &\le \frac{f^{-1}_y(x_0,y-0)}{1-\alpha}\norm{f(x, y_0)} < \eps, \norm{x-x_0}<\delta_1
 	}
 }
 

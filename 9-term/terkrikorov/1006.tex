@@ -15,15 +15,15 @@
 	так вот
 	\al{
 		f(x,y) &= 0 \\
-		f(x + \delta x, &y + \delta y) = 0 \\
-		f(x + \delta x, &y + \delta y) - f(x,y) = 0 \\
-		\integr01\cbr{f_x(x + u\delta x, &y + u\delta y)\delta x + f_y(x + u\delta x, y + u\delta y)\delta y} du = 0 \\
-		{f_x(x,y)\delta x &+ f_y(x, y) delta y} + \integr01\cbr{f_x(x + u\delta x, y + u\delta y) -  f_x(x, y)}\delta x du + \integr01\cbr{f_y(x + u\delta x, y + u\delta y) -  f_y(x, y)} \delta y du = 0 \\
-		\norm {f_y^{-1}(x_0, y_0) &\cbr{f_y(x,y) - f_y(x_0, y_0)} } < 1 \text{--- сократим окрестность, если что} \\
-		\delta y &= -f^{-1}_y(x,y) f_x(x,y) \delta x - f^{-1}_y(x,y)\sbr{\integr 01 f_x(\cdot)\delta x du + \integr 01 f_y(\cdot)\delta y du} \\
-		y(x + \delta x) - y(x) &- \cbr{-f'_y(x,y)f_x(x,y)}\delta x = -f_y^{-1}(x,y) \sbr{\integr 01 (\cdot)\delta x du + \integr 01 (\cdot)\delta y du} \\
-		\norm{y(x + \delta x) - y(x) &+ \cbr{-f'_y(x,y)f_x(x,y)}\delta x} \le \eps_1(x)\norm{\delta x} + \eps_2(x)\norm{\delta y} \\
-		\norm{\delta y} &\le C \norm{\delta x} + \eps_2(x)\norm{\delta y} \Rightarrow \text{ производная Фреше.}
+		f(x + \Delta x, &y + \Delta y) = 0 \\
+		f(x + \Delta x, &y + \Delta y) - f(x,y) = 0 \\
+		\integr 01 &\cbr{f_x(x + u\Delta x, y  + u\Delta y) \Delta x + f_y(x + u\Delta x, y + u\Delta y)\Delta y} du = 0 \\
+		%{f_x(x,y)\Delta x &+ f_y(x, y) Delta y} + \integr01\cbr{f_x(x + u\Delta x, y + u\Delta y) -  f_x(x, y)}\Delta x du + \integr01\cbr{f_y(x + u\Delta x, y + u\Delta y) -  f_y(x, y)} \Delta y du = 0 \\
+		%\norm {f_y^{-1}(x_0, y_0) &\cbr{f_y(x,y) - f_y(x_0, y_0)} } < 1 \text{--- сократим окрестность, если что} \\
+		%\Delta y &= -f^{-1}_y(x,y) f_x(x,y) \Delta x - f^{-1}_y(x,y)\sbr{\integr 01 f_x(\cdot)\Delta x du + \integr 01 f_y(\cdot)\Delta y du} \\
+		%y(x + \Delta x) - y(x) &- \cbr{-f'_y(x,y)f_x(x,y)}\Delta x = -f_y^{-1}(x,y) \sbr{\integr 01 (\cdot)\Delta x du + \integr 01 (\cdot)\Delta y du} \\
+		%\norm{y(x + \Delta x) - y(x) &+ \cbr{-f'_y(x,y)f_x(x,y)}\Delta x} \le \eps_1(x)\norm{\Delta x} + \eps_2(x)\norm{\Delta y} \\
+		%\norm{\Delta y} &\le C \norm{\Delta x} + \eps_2(x)\norm{\Delta y} \Rightarrow \text{ производная Фреше.}
 	}
 }
 
@@ -40,8 +40,8 @@
 Пусть $B_1, B_2$ --- банаховы пространства, $U_R(x_0)\subset B_1$, $L$ --- плотное подпространство в $B_1$, $A\colon L\to B_2, L = D(A)$. 
 Пусть ф $f\colon U_R(x_0)\to B_2$ дифф и её произв удовл услов Липш: $\foral{x_1, x_2 \in U_R(x_0)}\norm{f'(x_1) - f'(x_2)}\le l\norm{x_1-x_2}$. 
 Пусть $x_0\in L, \norm{\cbr{A - f'(x_0)}^{-1}} \le \kappa, \norm{\cbr{A-f'(x_0)}^{-1}\cbr{f(x_0) - Ax_0}} \le \gamma,$
-причем $r = \frac{1-\sqrt{1 - 2\kappa l \gamma}}{l \kappa} \le R$ \cbr{2\kappa l \gamma < 1} 
-тогда в $\ol{U_r}(x_0)$ ур $f(x) = 0$ имеет ед решение
+причем $r = \frac{1-\sqrt{1 - 2\kappa l \gamma}}{l \kappa} \le R \cbr{2\kappa l \gamma < 1} $
+тогда в $\ol{U_r}(x_0)$ уравнение $f(x) = 0$ имеет ед решение
 $x^* = \lim_{n\to\infty x_n}, Ax_{n+1} - f'(x_0)x_{n+1} = f(x_n) - f'(x_0)x_n$
 $\norm{x^* - x_n} \le \frac{\gamma q^n}{\sqrt{1-2l\kappa \gamma}}, q = 1 - \sqrt{1-2l\kappa\gamma} < 1, \norm{x^* - x_0}\le 2\gamma \text { --- невязка}.$
 
