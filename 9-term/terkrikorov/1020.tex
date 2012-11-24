@@ -21,7 +21,7 @@ Assumptions
 
 \theorem{} With 1  and 2, equation has solution
 \al{
-	x(t, s, x_0) = U(t, s)x_0, \norm{U(t,s)}\le\e^{\lambda(t-s)}, o\le s \le t \le T.
+	x(t, s, x_0) = U(t, s)x_0, \norm{U(t,s)}\le e^{\lambda(t-s)}, o\le s \le t \le T.
 }
 \proof{ 
 	draft
@@ -121,9 +121,9 @@ Solution using Cochie martix (in classics)
 Evaluate $x(t,s)$
 \al{
 	\norm{x(t,s)}_B 
-			&\le \integr st \norm{U(\cdot)\max_{0\le t\le T}\norm{f(t)}}du  + \norm{x_0} ___ \\
-			&\le \integr st e^{\lambda(t-u)}\max_{0\le t\le T}\norm{f(t)}}du + \norm{x_0}e^{\lambda(t-s)} \\
-			&\le \frac1\lambda \max_{0\le t\le T}\norm{f(t)}} e^{\lambda(t-s)} + \norm{x_0}e^{\lambda(t-s)} \\
-			&= e^{\lamda T}(\frac1\lambda \max_{0\le t\le T}\norm{f(t)}} + \norm{x_0})
+			&\le \integr st \norm{U(\cdot)}\max_{0\le t\le T}\norm{f(t)}du  + \norm{x_0} \skipped{1 line} \\
+			&\le \integr st e^{\lambda(t-u)}\max_{0\le t\le T}\norm{f(t)}du + \norm{x_0}e^{\lambda(t-s)} \\
+			&\le \frac1\lambda \max_{0\le t\le T}\norm{f(t)} e^{\lambda(t-s)} + \norm{x_0}e^{\lambda(t-s)} \\
+			&= e^{\lambda T}(\frac1\lambda \max_{0\le t\le T}\norm{f(t)} + \norm{x_0})
 }
 We've prooven correctness.
