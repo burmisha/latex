@@ -1,12 +1,12 @@
 \simpletitle{13 октября}
 
 \al{
-	f(x) = 0 
-	f(x_n) + f'(x)(x_{n+1} - x_n) = 0 (1)
-	x_{n+1} = x_n - f'(x_n)^{-1}f{x_n} \qquad (2)
+	f(x) &= 0 \\
+	f(x_n) &+ f'(x)(x_{n+1} - x_n) = 0 \qquad (1) \\
+	x_{n+1} &= x_n - f'(x_n)^{-1}f{x_n} \qquad (2)
 }
 
-\theorem Let $f\colon U_R{x_0}\to B_2, O(x_0)\subset B_1$, $f$ is diff in $U_R{x_0}$ and $f'$ has limited reverse $\inv{\norm{f'(x)}} \le \alpha$
+\theorem{} Let $f\colon U_R{x_0}\to B_2, O(x_0)\subset B_1$, $f$ is diff in $U_R{x_0}$ and $f'$ has limited reverse $\inv{\norm{f'(x)}} \le \alpha$
 $f'(x)$ is Lipsch $\norm{f(x_1) - f(x_2)} \le l\norm{x_1-x_2}$. Let $q = \alpha^2\beta l < 1,$ where $\beta = \norm{f(x_0)}$. Then 
 $$\exist{\lim_{n\to\infty}} \norm{x_{n+1} - x} \le \alpha\beta\frac{q^{2^n+1}}{1-q^{2^n}}.$$
 \proof{
@@ -44,21 +44,22 @@ We're going to solve Cochie problem:
 $$\frac{dx}{dt} = f(x,t), x(0) = x_0.$$
 The solution is a function with cont derivative and setting predicat to equality.
 $$t\in [-\delta_0, \delta_0], x\in U_R(x_0)\subset B$$
-$$f\colon U_R(x_0)\times[-\delta_0, \delta 0] \to B$$
+$$f\colon U_R(x_0)\times[-\delta_0, \delta_0] \to B$$
 
 \theorem{} Let $f(x,t)$ is continious over $t$ $\foral x\in U_R(x_0)$, $f(x,t)$ is Lipsch over $x\colon \norm{f(x_1,t) - f(x_2,t)} \le l\norm{x_2, x_1}$, 
 $\modul{f(x,t)} \le M, \delta <\min\cbr{\frac rM,\frac 1l, \delta_0}, \norm{x(t) - x_0} \le r < R$. Then the solution exists.
 \proof{(follows the classical theory of ordinary diff equations)
 	\al{
 	F(t) &= f(x(t), t) \text{is continious because}\\
-	\norm{F(t) - F(t_0)} &= \norm{f(x(t), t) - f(x(t_0), t_0)} = \norm{f(x(t), t) - f(x(t_0), t) + f(x(t_0), t) - f(x(t_0), t_0)} \text{ use Lipsch and cont.}
+	\norm{F(t) - F(t_0)} &= \norm{f(x(t), t) - f(x(t_0), t_0)} = \norm{f(x(t), t) - f(x(t_0), t) + f(x(t_0), t) - f(x(t_0), t_0)}
 	}
+	use Lipsch and cont.
 	\al{
 		\Phi x &= f(x(t), t) \\
 		x(t) &= \integr 0t f(x(s), s) ds + x_0 = \Psi x \\
-		\norm{\psi(x) - x_0}_B = \norm{\integr 0t f(x(s),s)ds}_B \\
-		\norm{\psi(x) - x_0}_B = Mt \le M\delta \le r \\
-		\norm{\psi(x) - x_0}_{C[-\delta, \delta]} \le r \\
+		\norm{\psi(x) - x_0}_B &= \norm{\integr 0t f(x(s),s)ds}_B \\
+		\norm{\psi(x) - x_0}_B &= Mt \le M\delta \le r \\
+		\norm{\psi(x) - x_0}_{C[-\delta, \delta]} &\le r \\
 	}
 	The operator transforms a ball into itself. So it has the only nonmoving point (it's stretching).
 }

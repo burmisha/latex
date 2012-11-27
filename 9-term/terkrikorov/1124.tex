@@ -20,9 +20,9 @@ Let $Lz = z'' + z$~--- by defenition.
 	Необходимость.
 	\al{
 		&\begcas{ z'' + z &= f(s), \\ z''_0 + z_0 &= 0} \\
-		z_0z'' &- zz_0'' = f(s)z_0 \\
-		\frac d{ds}(z_0z' &- z_0'z) = f(s)z_0 \\
-		\integr 0\pi f(s)z_0(s)ds &= 0 \\
+		&z_0z'' - zz_0'' = f(s)z_0 \\
+		&\frac d{ds}(z_0z' - z_0'z) = f(s)z_0 \\
+		&\integr 0\pi f(s)z_0(s)ds = 0 \\
 	}
 	Достаточность.
 	\al{
@@ -54,8 +54,8 @@ Let $Lz = z'' + z$~--- by defenition.
 	z &= z_2c^2 + z_4c^4 + \ldots, \\
 	\eps &= \eps_2c^2 + \eps_4c^4 + \ldots, \\
 	z_2' + z_2 &= -\eps_1\cos s +\frac16\cos^3 s \quad \Leftarrow \cos^3 s = \frac34\cos s + \frac14 \cos 3s \\
-	z_2'' + z_2 = \cbr{-\eps_2 + \frac18}\cos s + \frac1{24}\cos 3s \\
+	z_2'' + z_2 &= \cbr{-\eps_2 + \frac18}\cos s + \frac1{24}\cos 3s \\
 	\ldots \\
-	z''_n + z_n = -\eps_{2n}\cos s + F(z_1, z_2, \ldots, z_{n-1}).
+	z''_n + z_n &= -\eps_{2n}\cos s + F(z_1, z_2, \ldots, z_{n-1}).
 }
 Важно, что мы доказали сходимость рядов, иначе можно было бы и угадать, по каким степеням раскладывать.

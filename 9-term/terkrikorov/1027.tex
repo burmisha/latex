@@ -92,11 +92,11 @@
 }
 
 \al{
-	\frac{dx}{dt} = A(t)x + f(t), x(0) = x_0 \\
-	f(t) \text{ --- огранич и непрер ф при $t>0$}. C[0, +\infty), \norm f_{C[0, +\infty)} = \sup_{t\ge 0}\modul{f(t)} \\
-	x(t) = \integr 0t H(s,t)f(s)ds + \Phi(t)x_0 \\
-	\modul{x(t)} \le \integr 0t H(s,t)\norm{f}_{C[0, +\infty)}ds + \modul{\Phi(t)}\modul{x_0} \\
-	\modul{x(t)} \le \norm f_{C[0, +\infty)}\integr 0t e^{-\delta(t-s)} ds + C e^{-\delta t}\norm x_0 \le \frac 1\delta \norm f_{C[0, +\infty)} + Ce^{-\delta t} \modul{x_0} 
+	\frac{dx}{dt} &= A(t)x + f(t), x(0) = x_0 \\
+	f(t) &\text{ --- огранич и непрер ф при $t>0$}. C[0, +\infty), \norm f_{C[0, +\infty)} = \sup_{t\ge 0}\modul{f(t)} \\
+	x(t) &= \integr 0t H(s,t)f(s)ds + \Phi(t)x_0 \\
+	\modul{x(t)} &\le \integr 0t H(s,t)\norm{f}_{C[0, +\infty)}ds + \modul{\Phi(t)}\modul{x_0} \\
+	\modul{x(t)} &\le \norm f_{C[0, +\infty)}\integr 0t e^{-\delta(t-s)} ds + C e^{-\delta t}\norm x_0 \le \frac 1\delta \norm f_{C[0, +\infty)} + Ce^{-\delta t} \modul{x_0} 
 }
 Это показывает корректоность задачи Коши (у нас матрица отриц определенная!). Решение, кстати, забывает начальные условия.
 
@@ -104,7 +104,7 @@
 \al{
 	\frac{dx}{dt}&=Ax \\
 	\Phi(t) &= e^{At} \\
-	x(t) = \integr 0t e^{A(t-s)}f(s)ds + e^{At} x_0
+	x(t) &= \integr 0t e^{A(t-s)}f(s)ds + e^{At} x_0
 }
 Если мы знаем собственные значения матрицы
 $$ e^{At} = \sum_{i=1}^k P_k(t)e^{\lambda_k t}$$

@@ -76,9 +76,9 @@ $$\norm{f(x_2) - f(x_1) - f'(x_1)(x_2-x_1)} \le \frac L2 \norm{x_2-x_1}^2$$
 
 \proof{
 	\al{
-		\norm{f(x_1) - f(x_1) - f'(x_1)(x_2-x_1)} 
+		\norm{f(x_2) - f(x_1) - f'(x_1)(x_2-x_1)} 
 		&\le \integr 01\norm{f'(x_1+t(x_2-x_1)) -f'(x_1)}\norm{x_2-x_1}dt \le \\
-		&\le \integr 01{L\norm{t(x_2-x_1)} \norm{x_2 -x_1} dt} = \frac L2 \norm{x_2-x_1}
+		&\le \integr 01{L\norm{t(x_2-x_1)} \norm{x_2 -x_1} dt} = \frac L2 \norm{x_2-x_1}^2
 	}
 }
 
