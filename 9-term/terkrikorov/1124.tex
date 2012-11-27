@@ -1,1 +1,61 @@
 \simpletitle{24 ноября}
+ Мы начали рассматривать задачу об устойчивости стержня (устойчивости Эйлера). Если сила превышает критическое значение~--- появляется нетривиальное решение.
+ \al{
+ 	\theta'' &+ \lambda \sin\theta = 0 \\
+ 	\theta'(0) &= \theta'(\pi) = 0 \\ 
+ 	0 &\le \lambda \le 1 \Rightarrow \text{1 solution} \\
+ 	\lambda &> 1 \Rightarrow \pm \theta \\
+ 	&\text{бифуркация второго рода} \\
+ 	\theta'' &+ \lambda\theta = 0, \theta'(0) &= \theta'(\pi) = 0 \\ 
+ 	\lambda _n = n^2, \cos ns
+}
+Let $\lambda = 1 + \eps, \eps > 0, \theta = \pm c\cbr{\cos s + z(s)}, z(s) = z(-s), \integr 0\pi z(s)\cos s ds = 0.$
+Let $Lz = z'' + z$~--- by defenition.
+\al{
+	Lz &= -\eps(z + \cos s) - (1 + \eps)\isum n1 \frac{(-1)^k c^{2k}(\cos s + z)^{2k}}{(2k+1)!} = F(z,c,e)
+}
+Ищем решение при малых $\eps$ и $c$ (максимальный прогиб балки).
+\lemma %$z'' + z = f(s), f \in C^0 \leftrightarrow \integr 0\pi f(s)\cos s ds$
+\proof{
+	Необходимость.
+	\al{
+		&\begcas{ z'' + z &= f(s), \\ z''_0 + z_0 &= 0} \\
+		z_0z'' &- zz_0'' = f(s)z_0 \\
+		\frac d{ds}(z_0z' &- z_0'z) = f(s)z_0 \\
+		\integr 0\pi f(s)z_0(s)ds &= 0 \\
+	}
+	Достаточность.
+	\al{
+		z''(s) + z(s) &= f(s), \\
+		z(0) &= 0 \\
+		%z(s) = \integr 0s f(u)\cos (su) du + c\cos s, \\ 		z_0(s) = \cos s, \\ 	z = c_1
+		C_1(s)\cos s &+ C_2(s)\sin s, \\
+		C_1'(s)\cos s &+ C_2'(s)\sin s = 0, \\
+		-C_1'(s)\sin s &+ C_2'(s)\cos s = 0, \\
+		C_2'(s) = f(s)\cos s &= \integr 0s \sin (s-u)f(udu) + C\cos u, \\
+		C_1'(s) = -f(s)\sin s &= \integr 0s \cos (s-u)f(udu) - C\sin u, \\
+		&\skipped{3 lines.}
+	}
+}
+\al{
+	Qf &= f - \cos s \frac2\pi\integr 0\pi f(s)\cos s ds \text{ --- define}\\
+	&\begcas{
+		\eps &= \frac2\pi(1+\eps)\isum n1 \frac{(-1)^k c^{2k}}{(2k+1)!}\integr 0\pi (\cos z + z(s))^{2k+1}\cos z dz\\
+		Lz &= -\eps z - (1+\eps)Q\cbr{\isum n1 \frac{(-1)^k c^{2k}}{(2k+1)!}(\cos z +z(s))^{2k+1}} = QF\\
+	}\\
+	z &= L^{-1}QF(z,\eps, c^2)\\
+	z &= \isum k1 z_{0k}c^{2k} + \eps\cbr{\quad} + \ldots, z = z_{01}c^2 \\
+	\eps &= \cbr{c_0\cdot c^2 + \ldots} + \eps\cbr{c^2 + \ldots} \\
+	\eps &= c_0 c^2.
+}
+Всё может быть представлено в виде ряда по степеням  $c^2$.
+\al{
+	z'' + z &=  -\eps(z + \cos s) - (1 + \eps)\isum n1 \frac{(-1)^k c^{2k}(\cos s + z)^{2k}}{(2k+1)!} \\
+	z &= z_2c^2 + z_4c^4 + \ldots, \\
+	\eps &= \eps_2c^2 + \eps_4c^4 + \ldots, \\
+	z_2' + z_2 &= -\eps_1\cos s +\frac16\cos^3 s \quad \Leftarrow \cos^3 s = \frac34\cos s + \frac14 \cos 3s \\
+	z_2'' + z_2 = \cbr{-\eps_2 + \frac18}\cos s + \frac1{24}\cos 3s \\
+	\ldots \\
+	z''_n + z_n = -\eps_{2n}\cos s + F(z_1, z_2, \ldots, z_{n-1}).
+}
+Важно, что мы доказали сходимость рядов, иначе можно было бы и угадать, по каким степеням раскладывать.
