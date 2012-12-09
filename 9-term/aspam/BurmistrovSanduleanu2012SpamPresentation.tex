@@ -1,0 +1,84 @@
+\documentclass[unicode,lefteqn,c,hyperref={pdfpagelabels=false}]{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage{amssymb}
+\usepackage{amsmath,mathrsfs}
+\usepackage[russian]{babel}
+\usepackage{ulem}\normalem
+\usepackage{color}
+
+\input macro.tex
+
+\usetheme{Warsaw}
+\usefonttheme[onlylarge]{structurebold}
+\setbeamerfont*{frametitle}{size=\normalsize,series=\bfseries}
+\setbeamertemplate{navigation symbols}{}
+\setbeameroption{show notes}
+\definecolor{beamer@blendedblue}{RGB}{30,54,102}%{15,80,120}
+\let\Tiny=\tiny
+\def\shortspace{\hspace{1.5pt}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\title[\hbox to 56mm{Классификация поискового спама\hfill\insertframenumber\,/\,\inserttotalframenumber}]{Классификация поискового спама по временным характеристикам сайта}
+\author{М.\shortspaceО.\shortspaceБурмистров, Л.\shortspaceН.\shortspaceСандуляну} % [М.\shortspaceО.\shortspaceБурмистров, Л.\shortspaceН.\shortspaceСандуляну]
+\institute{
+		%Научный руководитель с.н.с. ВЦ РАН д.ф.-м.н.
+		%\vfill К.\,В.~Воронцов \vfill ~ 
+		\vfill Московский физико-технический институт
+		\vfill Факультет управления и прикладной математики
+		\vfill Кафедра интеллектуальных систем}
+\date{\today}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+\begin{frame}
+    \titlepage
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Введение}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Данные и вероятностные гипотезы}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Исходные данные задачи}
+    \textbf{Пространства объектов и признаков}
+    \begin{itemize}
+    	\item $S$~--- конечное множество объектов (сайтов);
+    	\item $X$~--- конечное множество наблюдаемых характеристик;
+   		\item $Y = \{-1, 1\}$~--- метка классов <<спам / не спам>>;% (мнение наблюдателя);
+        % \item $Z = Н$~--- поведение владельца сайта (скрытая характеристика);
+		\item $T =\fbr{t_i}_{i=1}^{\tau}$~--- конечное линейно упорядоченное множество моментов времени.
+    \end{itemize}
+
+    \smallskip
+    \textbf{Исходные данные об объектах} \par
+	Каждому объекту $\foral{s\in S}$ сопоставлены
+    \begin{itemize}
+        %\item множество $T_s\subset T$
+        \item совокупность его наблюдаемых характеристик $\x_s \in X^{\tau}$ % плохие обозначения
+        \item совокупность ответов $\y_s \in Y^{\tau}. $
+    \end{itemize}
+
+    \smallskip
+    \textbf{Задача:} \par
+	Построить классификатор
+	\[
+		a\colon X\times T \to Y.
+	\] 	
+\end{frame}
+
+\begin{frame}{Вероятностные предположения и модель}
+    \textbf{Гипотеза о существовании генеральной совокупности}
+    \begin{itemize}
+        \item изучаем пары $\cbr{\omega, t} \in \Omega\times T$;
+        \item $\foral{\omega_1 \ne \omega_2 \in \Omega, t_1, t_2 \in T} \p{\omega_1, t_1} \text{ и }\p{\omega_1, t_1} \text{ независимы}$;
+    \end{itemize}
+
+    \textbf{Гипотеза о влиянии наблюдателя (и верности наблюдений)}
+    \begin{itemize}
+    	\item $\p{\x_s(t_i)\cond\omega} = \p{\x_s(t)=\chi\cond \x_s(t_{i-1}), \y_s(t_{i-1})}$;
+        \item $X=\hat X \sqcup \tilde X\colon$ \[\p{\hat{\x}_s(t)=\chi\cond \x_s(t_{i-1}), \y_s(t_{i-1})} = \p{\hat{\x}_s(t)=\chi\cond \hat{\x}_s(t_{i-1})}.\]
+    \end{itemize}
+\end{frame}
+
+
+
+\end{document}
