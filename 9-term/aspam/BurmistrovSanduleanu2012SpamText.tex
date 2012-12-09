@@ -11,9 +11,9 @@
 %\usepackage[colorlinks,unicode,pdfpagelabels=false, linkcolor = linkcolor]{hyperref}
 \usepackage[english,russian]{babel}
 \usepackage{amssymb,amsfonts,amsthm,amsmath,mathtext,cite,enumerate,float}
+\usepackage{enumitem} \input macro.tex
 
 \definecolor{linkcolor}{RGB}{7,31,63}%{15,80,120}
-
 
 \textheight=24cm		\textwidth=16cm
 \oddsidemargin=0mm 		\evensidemargin=0mm
@@ -22,9 +22,11 @@
 \footnotesep=3ex
 \raggedbottom %\flushbottom
 \clubpenalty=10000		\widowpenalty=10000 	\tolerance=500
-\renewcommand{\baselinestretch}{1.4}
+\renewcommand{\baselinestretch}{1.15}
 
-\input macro.tex
+\setlist{nolistsep}
+
+
 
 \begin{document}
 	%\input{title.tex}
