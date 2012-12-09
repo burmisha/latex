@@ -12,7 +12,9 @@
 \usepackage[english,russian]{babel}
 \usepackage{amssymb,amsfonts,amsthm,mathtext,cite,enumerate,float}
 \usepackage[sumlimits, intlimits]{amsmath}
-\usepackage{enumitem} \input macro.tex
+\usepackage{enumitem} \setlist{nolistsep}
+
+\input macro.tex
 
 \definecolor{linkcolor}{RGB}{7,31,63}%{15,80,120}
 
@@ -25,15 +27,11 @@
 \clubpenalty=10000		\widowpenalty=10000 	\tolerance=500
 \renewcommand{\baselinestretch}{1.15}
 
-\setlist{nolistsep}
-
-
-
 \begin{document}
 	%\input{title.tex}
-	%\newpage \tableofcontents
-	%\newpage \input{abstract.tex}	
-	%\newpage \section{Введение} \input{intro.tex}
+	\newpage \tableofcontents
+	\newpage \input{abstract.tex}	
+	\newpage \section{Введение} \input{intro.tex}
 
 	\section{Байесовская постановка задачи} \input{settask.tex}
 	%\subsection{Основные понятия} 			\input{concepts.tex}
