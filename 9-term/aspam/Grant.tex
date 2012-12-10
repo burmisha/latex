@@ -6,7 +6,7 @@
 \usepackage[english,russian]{babel}
 \usepackage{amssymb,amsfonts,amsthm,mathtext,cite,enumerate,float}
 \usepackage[sumlimits, intlimits]{amsmath}
-\usepackage{enumitem} \input macro.tex
+\usepackage{enumitem} \setlist{nolistsep}
 \usepackage{textcase} 
 
 \definecolor{linkcolor}{RGB}{7,31,63}%{15,80,120}
@@ -20,7 +20,8 @@
 \clubpenalty=10000		\widowpenalty=10000 	\tolerance=500
 \renewcommand{\baselinestretch}{1.25}
 
-\setlist{nolistsep}
+\input macro.tex
+
 
 \begin{document}
 	\maintext{Фундаментальная научная проблема, на анализ и обобщение результатов по которой, направлен проект} \\
