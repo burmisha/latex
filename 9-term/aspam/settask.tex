@@ -11,7 +11,6 @@ $\sbr{z \le 0} $, где $z(\mb x,\mb a,R)=\norm{\mb x-\mb a}-R$ без веро
 
 \newcommand\cird[1]{\draw [fill = lightgray] (center) ++ (#1) circle (0.04);} %, thin]
 
-%\addepssize{fig1}{}{130}
 \addtikz{basic}{1.2}{thick,domain=-1:2}{basic picture}
 
 Будем придерживаться вероятностной модели распределения объектов генеральной совокупности.
@@ -26,8 +25,7 @@ $\sbr{z \le 0} $, где $z(\mb x,\mb a,R)=\norm{\mb x-\mb a}-R$ без веро
 \end{equation}
 Здесь величина $c$ является гиперпараметром.
 
-\addepssize{fig2}{Значение плотности распределения вдоль радиуса}{100} 
-% TODO: 1) y in phi 	2) \norm{x-a} on X axis, not z
+\addtikz{expon}{1.2}{thick,domain=0:4}{Значение плотности распределения вдоль радиуса}
 
 Совместную плотность распределения случайной обучающей совокупности будем понимать как плотность распределения выборки независимых реализаций
 $$\Phi(\mb X|\mb a,R)=\prod_{j=1}^N \varphi(\mb x_j|\mb a,R),$$ 
