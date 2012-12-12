@@ -60,6 +60,20 @@
 	\end{figure}
 }
 
+\newcommand\addtikz[4]{
+	\begin{figure} [!ht] %lrp
+		\centering
+		\begin{tikzpicture}[x=#2cm,y=#2cm,#3]
+			\input{#1.tikz}
+		\end{tikzpicture}
+		\vspace{-10pt}
+		\caption{#4}
+		\label{tikz:#1}	
+	\end{figure}
+}
+
+
+
 \newcommand\addepssize[3]{
 	\begin{figure} [!ht] %lrp hp
 		\centering
