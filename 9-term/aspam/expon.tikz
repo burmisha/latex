@@ -7,4 +7,4 @@
 
 
 \node[left] at (0,1) {$1$};
-%\node[below] at (1,0) {$R$};
+\node[below left] at (0,0) {$0$};
