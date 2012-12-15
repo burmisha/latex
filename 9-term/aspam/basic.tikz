@@ -1,28 +1,30 @@
-		\node (center) at (0.7,1.2) {};
-		\draw[-latex] (-0.7,0) -- (4,0) node[below] {$x_1$};
-		\draw[-latex] (0,-0.5) -- (0,3) node[left] {$x_2$};
-		\draw [fill = none] (center) circle (1.0);
-		\draw [fill = black] (center) circle (0.02);
-		\cird{0.2,0.3}
-		\cird{-0.13,0.6}
-		\cird{0.17,-0.1}
-		\cird{0.6,-0.2}
-		\cird{-0.4,-0.5}
-		\cird{-0.6,0.05}
-		\cird{0.23,-0.85}
-		\cird{-0.35,0.85}
-		\cird{-0.8,0.4}
-		\cird{0.75,0.6}
+\newcommand\cird[1]{\draw [fill = lightgray] (center) ++ (#1) circle (0.04);} %, thin]
 
-		\cird{1.8,0}
-		\draw[latex-latex, thin] (center) ++(1,0) -- ++(0.8,0) node[pos=0.5,above]{$\delta$};
-		\draw[latex-] (center) ++(240:1) -- +(60:1) node[pos=0.25, right] {$R$};
-		\node[left] at (center) {$a$};
-		%\draw[-latex] (center) -- ++(0.5,0.2) node[pos=0.6, right] {$R$};
-		%\draw [fill = darkgray, thin] (center) ++(0.5,0.5) circle (0.05);
-		% \draw[color=orange] plot (\x,0.1);
-		% \draw[color=orange,thin] plot (\x,-0.1);
-		% \draw[color=orange,thin] plot (\x,0.3);
-		% \draw[color=green, thin] plot (\x,\x*\x);
-		% \draw[color=green] plot (\x,\x*\x-1);
-		% \draw[color=green, thin] plot (\x,\x*\x-2);
+\node (center) at (0.7,1.2) {};
+\draw[-latex] (-0.7,0) -- (4,0) node[below] {$x_1$};
+\draw[-latex] (0,-0.5) -- (0,3) node[left] {$x_2$};
+\draw [fill = none] (center) circle (1.0);
+\draw [fill = black] (center) circle (0.02);
+\cird{0.2,0.3}
+\cird{-0.13,0.6}
+\cird{0.17,-0.1}
+\cird{0.6,-0.2}
+\cird{-0.4,-0.5}
+\cird{-0.6,0.05}
+\cird{0.23,-0.85}
+\cird{-0.35,0.85}
+\cird{-0.8,0.4}
+\cird{0.75,0.6}
+
+\cird{1.8,0}
+\draw[latex-latex, thin] (center) ++(1,0) -- ++(0.8,0) node[pos=0.5,above]{$\delta$};
+\draw[latex-] (center) ++(240:1) -- +(60:1) node[pos=0.25, right] {$R$};
+\node[left] at (center) {$a$};
+%\draw[-latex] (center) -- ++(0.5,0.2) node[pos=0.6, right] {$R$};
+%\draw [fill = darkgray, thin] (center) ++(0.5,0.5) circle (0.05);
+% \draw[color=orange] plot (\x,0.1);
+% \draw[color=orange,thin] plot (\x,-0.1);
+% \draw[color=orange,thin] plot (\x,0.3);
+% \draw[color=green, thin] plot (\x,\x*\x);
+% \draw[color=green] plot (\x,\x*\x-1);
+% \draw[color=green, thin] plot (\x,\x*\x-2);
