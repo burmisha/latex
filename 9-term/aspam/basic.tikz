@@ -17,7 +17,7 @@
 \cird{0.75,0.6}
 
 \cird{1.8,0}
-\draw[latex-latex, thin] (center) ++(1,0) -- ++(0.8,0) node[pos=0.5,above]{$\delta$};
+\draw[latex-latex, thin] (center) ++(1,0) -- ++(0.8,0) node[pos=0.5,above]{$\xi$};
 \draw[latex-] (center) ++(240:1) -- +(60:1) node[pos=0.25, right] {$R$};
 \node[left] at (center) {$a$};
 %\draw[-latex] (center) -- ++(0.5,0.2) node[pos=0.6, right] {$R$};

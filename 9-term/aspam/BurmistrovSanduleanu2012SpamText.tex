@@ -1,4 +1,4 @@
-\documentclass[12pt]{article}
+\documentclass[12pt,a4paper]{article}
 \usepackage[utf8]{inputenc}
 \usepackage[T2A]{fontenc}
 \usepackage{graphics,graphicx,epsfig}
@@ -14,6 +14,8 @@
 \usepackage[sumlimits, intlimits]{amsmath}
 \usepackage{enumitem} \setlist{nolistsep}
 \usepackage{tikz}
+%\usepackage[biber]{biblatex}
+
 %\usepackage{pgfmath}
 
 \input macro.tex
@@ -30,6 +32,7 @@
 \renewcommand{\baselinestretch}{1.15}
 
 \begin{document}
+%\addbibresource{bibliography.bib}
 	%\input{title.tex}
 	%\newpage \tableofcontents
 	%\newpage \input{abstract.tex}	
@@ -39,7 +42,12 @@
 	%\subsection{Основные понятия} 			\input{concepts.tex}
 	%\subsection{Вероятностные  гипотезы}	\input{hypothesis.tex}
 	
-	\newpage 
+	%\newpage 
 	%\input{biblio.tex}
+	\newpage
+	%\begin{thebibliography}{99}
+	%\end{thebibliography}
+	%\bibliographystyle{gost780s}  % ГОСТ 7.80
+	%\bibliography{bibliography}     % MachLearn.bib
 
-\end{document} 
+\end{document}
