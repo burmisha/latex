@@ -12,6 +12,20 @@
 
 \simpletitle{Домашнее задание 3. \\ Михаил Бурмистров. i.like.spam@ya.ru}
 \section{Задача 1}
+burmisha $\to$ ta ti ta ti ti ti ta ti \\
 \subsection{a}
+Номера последовательных состояний: 0 0 1 4 1 2 2 3 4 --- не принимается
+\subsection{b}
+Необходимо добавить не менее 4 букв: например, ta ti ta ti ti ti [ta ti] ta ti.
+\subsection{c} 
+Получившаяся в пункте b строка прнимается, но, видимо, этот пункт не надо решать.
 
+\section{Задача 2}
+Будем считать, что слова по умолчанию состоят из маленьких английских букв.
+\subsection{a}
+\ttfamily{w[a-z]([b-d]|[f-h]|[j-n]|[p-t]|[v-x]|z)}
+\subsection{b}
+\ttfamily{(([b-d]|[f-h]|[j-n]|[p-t]|[v-x]|z)*e){3}([b-d]|[f-h]|[j-n]|[p-t]|[v-x]|z)}
+\subsection{c}
+\ttfamily{(0+(1+0+)*|1+(0+1+)*)}
 \end{document} 
