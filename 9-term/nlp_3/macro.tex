@@ -1,0 +1,59 @@
+\newcommand\bivec[2]{\begin{pmatrix} #1 \\ #2 \end{pmatrix}}
+
+\newcommand\ol[1]{\overline{#1}}
+
+\newcommand\p[1]{\Prob\!\left(#1\right)}
+\newcommand\e[1]{\mathsf{E}\!\left(#1\right)}
+\newcommand\disp[1]{\mathsf{D}\!\left(#1\right)}
+\newcommand\norm[2]{\mathcal{N}\!\cbr{#1,#2}}
+
+\newcommand\al[1]{\begin{align*} #1 \end{align*}}
+\newcommand\begcas[1]{\begin{cases}#1\end{cases}}
+\newcommand\tab[2]{	\vspace{-#1pt}
+						\begin{tabbing} 
+						#2
+						\end{tabbing}
+					\vspace{-#1pt}
+					}
+
+
+\newcommand\maintext[1]{{\bfseries\sffamily{#1}}}
+\newcommand\simpletitle[1]{\begin{center} \maintext{#1} \end{center}}
+
+\def\le{\leqslant}
+\def\ge{\geqslant}
+\def\Ell{\mathcal{L}}
+\def\eps{\varepsilon}
+\def\Rn{\mathbb{R}^n}
+\def\RSS{\mathsf{RSS}}
+
+\newcommand\foral[1]{\forall\,#1\:}
+\newcommand\exist[1]{\exists\,#1\:\colon}
+
+\newcommand\cbr[1]{\left(#1\right)} %circled brackets
+\newcommand\fbr[1]{\left\{#1\right\}} %circled brackets
+\newcommand\sbr[1]{\left[#1\right]} %circled brackets
+\newcommand\modul[1]{\left|#1\right|}
+\newcommand\cdf[2]{\cdot\frac{#1}{#2}}
+\newcommand\integr[3]{\int\limits_{#1}^{#2}{#3}}
+\newcommand\obol[1]{O\!\cbr{#1}}
+
+\newcommand\addeps[2]{
+	\begin{figure} [!ht] %lrp
+		\centering
+		\includegraphics[height=240px]{#1.eps}
+		\vspace{-10pt}
+		\caption{#2}
+		\label{eps:#1}
+	\end{figure}
+}
+
+\newcommand\addepssize[3]{
+	\begin{figure} [!ht] %lrp hp
+		\centering
+		\includegraphics[height=#3px]{#1.eps}
+		\vspace{-10pt}
+		\caption{#2}
+		\label{eps:#1}
+	\end{figure}
+}
