@@ -18,14 +18,99 @@ burmisha $\to$ ta ti ta ti ti ti ta ti \\
 \subsection{b}
 Необходимо добавить не менее 4 букв: например, ta ti ta ti ti ti [ta ti] ta ti.
 \subsection{c} 
-Получившаяся в пункте b строка прнимается, но, видимо, этот пункт не надо решать.
+Получившаяся в пункте b строка принимается, но, видимо, этот пункт не надо решать.
 
 \section{Задача 2}
 Будем считать, что слова по умолчанию состоят из маленьких английских букв.
 \subsection{a}
-\ttfamily{w[a-z]([b-d]|[f-h]|[j-n]|[p-t]|[v-x]|z)}
+{\ttfamily{w[a-z]([b-d]|[f-h]|[j-n]|[p-t]|[v-x]|z)}}
 \subsection{b}
-\ttfamily{(([b-d]|[f-h]|[j-n]|[p-t]|[v-x]|z)*e){3}([b-d]|[f-h]|[j-n]|[p-t]|[v-x]|z)}
+{\ttfamily{(([b-d]|[f-h]|[j-n]|[p-t]|[v-x]|z)*e)\{3\}([b-d]|[f-h]|[j-n]|[p-t]|[v-x]|z)}}
 \subsection{c}
-\ttfamily{(0+(1+0+)*|1+(0+1+)*)}
+{\ttfamily{(0+(1+0+)*|1+(0+1+)*|)}}
+
+\section{Задача 3}
+\subsection{a}
+{\ttfamily{au+a*}}
+\subsection{b}
+{\ttfamily{(|cl|ai)(tutor|professor])(i(n|um))?}}
+\subsection{c}
+{\ttfamily{(0[1-9]|1[0-3])([a-d]|e?)}}
+\subsection{d}
+{\ttfamily{(h(a|ae)\{1,2\})+(t+|z)sch(i\{3,\}|ue|u|y)+}}
+
+\section{Задача 4}
+{\ttfamily{(geschleimt|schleim(e(t|nd?|st)?|st))}}
+\subsection{a}
+geschleimt
+schleime
+schleimet
+schleimen
+schleimend
+schleimest
+schleimst
+\subsection{b}
+\subsection{c}
+{\ttfamily (geschleimt|schleim(t?e(t|nd?|st)?|st))}
+Правда, при этом появятся лишние слова, удовлетворяющие РВ, но условие будет выполнено.
+
+\section{Задача 5}
+\section{Задача 6}
+\section{Задача 7}
+\section{Задача 8}
+$\Omega=\fbr{\omega: \omega \sim \text{\ttfamily(a|b)\{4\}}}$.
+\subsection{a}
+Энтропия будет минимальна, если вероятность одного из слов --- 1, а всех остальных 0. Например $p(\omega)=\begcas{1, &\omega=aaaa\\0, &\omega\ne aaaa}.$ При этом энтропия будет равна 0.
+
+\subsection{b}
+Энтропия будет максимальна, если все слова равновероятны: $p(\omega)=\frac1{2^4}=\frac1{16}.$ $S = 2^4\cdot\cbr{-\frac1{2^4}\log_2\frac1{2^4}} = \log_2 2^4 = 4.$
+
+\section{Задача 9}
+У моей монетки вероятность $p=\frac1\pi$. \\
+Моё распределение: $p$, а у честной монетки: $q.$
+\subsection{a}
+$S = -\frac1\pi \log_2\frac1\pi - \cbr{1-\frac1\pi} \log_2\cbr{1 - \frac1\pi} \approx 0{.}90253404359986589$
+
+\subsection{b}
+$$KL(p,q) = \frac1\pi \ln\frac{\frac1\pi}{\frac12} + \cbr{1-\frac1\pi} \ln\frac{1 - \frac1\pi}{\frac12} \approx 0{.}067558252879331454,$$
+$$KL(q,p) = \frac12 \ln\frac{\frac12}{\frac1\pi} + \frac12 \ln\frac{\frac12}{1-\frac1\pi} \approx 0{.}070807813849007667.$$
+
+\section{Задача 10}
+Во всех грамматиках S --- начальное состояние
+\subsection{a}
+\al{
+    S &\to 0S1S | 1S0S | \eps
+}
+\subsection{b}
+\al{
+    S &\to S0S1S1S | S1S0S1S | S1S1S0S| \eps
+}
+\subsection{c}
+Исключая пустое слово получим:
+\al{
+    S \to   &aTa | bTb |cTc |dTd |eTe |fTf |gTg |hTh |iTi \\
+            &|jTj |kTk |lTl |mTm |nTn |oTo |pTp |qTq |rTr \\
+            &|tTt |tTt |uTu |vTv |wTw |xTx |yTy |zTz | \\
+            & a |b |c |d |e |f |g |h |i |j |k |l |m |n |o |p |q |r |s |t |u |v |w |x |y |z \\
+    T \to   &aTa | bTb |cTc |dTd |eTe |fTf |gTg |hTh |iTi \\
+            &|jTj |kTk |lTl |mTm |nTn |oTo |pTp |qTq |rTr \\
+            &|tTt |tTt |uTu |vTv |wTw |xTx |yTy |zTz | \\
+            & a |b |c |d |e |f |g |h |i |j |k |l |m |n |o |p |q |r |s |t |u |v |w |x |y |z |\eps 
+}
+
+\section{Задача 11}
+При применении правил грамматики в нормальной форме Хомского возможны следующие варианты:
+\begin{itemize}
+    \item Число нетерминалов увеличивается на 1 (причем при этом не может появится начальный символ), число терминалов не изменяется. (Правила вида $A\to BC,\;B,C\ne S$.)
+    \item Число нетерминалов уменьшается на 1, число терминалов увеличивается на 1. (Правила вида $A\to \alpha$.)
+    \item Число нетерминалов уменьшается на 1, число терминалов не изменяется (Правило $S\to\eps$.)
+\end{itemize}
+Таким образом единственный способ получить пустое слово --- применить правило $S\to\eps$. Причем при этом, вообще говоря, доказываемое утверждение неверно: $0\ne 2\cdot 0 - 1$. Поэтому в дальнейшем будем рассматривать непустые слова.
+
+В таком случае, придется отказаться от возможности применения правила $S\to\eps$, поскольку применить его можно ровно один раз и не более (поскольку $S$ не встречается в правых частях правил.) Теперь рассуждаем таким образом. Сперва у нас в строке есть ровно один символ: $S$, он нетерминал. Чтобы получить ровно $n$ терминалов надо ровно $n$ применить правила вида $A\to\alpha$. При каждом таком применении число нетерминалов уменьшается на 1, поэтому предварительно необходимо их получить: это можно сделать лишь правилами  вида $A\to BC$, применений которых потребуется на $n$ нетерминалов ровно $n-1$ штук (ибо один нетерминал у нас в строке уже есть). Всё: имеем $n+n-1=2n-1$ применений продукций, что и завершает доказательство.
+
+\section{Задача 12}
+\al{
+    
+}
 \end{document} 
