@@ -111,6 +111,40 @@ $$KL(q,p) = \frac12 \ln\frac{\frac12}{\frac1\pi} + \frac12 \ln\frac{\frac12}{1-\
 
 \section{Задача 12}
 \al{
-    
+    S&\to XY|\eps\\
+    X&\to XY\\
+    Y&\to AB\\
+    A&\to a\\
+    B&\to b
 }
+
+\section{Задача 13}
+
+{
+\newcommand\Ra{\!\Rightarrow\!}
+\newcommand\T{\text{\textsf{Type}}}
+\newcommand\V{\text{\textsf{T\!V}}}
+\newcommand\To{\:\:\to\:\:}
+
+\subsection{a}
+    Положим, что $\T$ --- начальный символ.
+    Покажем, что у цепочки $\alpha\Ra\beta$ есть 2 различных дерева вывода
+    $$\T \To \T\Ra\T \To \V\Ra\T \To \alpha\Ra\T \To \alpha\Ra\V \To \alpha\Ra\beta,$$
+    $$\T \To \T\Ra\T \To \T\Ra\V \To \T\Ra\beta \To \V\Ra\beta \To \alpha\Ra\beta.$$
+\subsection{b}
+    Теперь положим, что $S$ --- начальный символ.
+    \al{
+        S &\To L\Ra R | P\\
+        R &\To L\Ra R\\
+        L &\To P\\
+        R &\To P\\
+        P &\To A*B|F\\
+        A &\To A*B|F\\
+        B &\To F\\
+        F &\To \alpha|\beta|\gamma|\ldots
+    }
+
+
+}
+
 \end{document} 
