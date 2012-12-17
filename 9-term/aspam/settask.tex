@@ -5,14 +5,12 @@ $\mb x(\omega)=\cbr{x^1(\omega),\ldots, x^n(\omega)} \in {\mathbb R^n}$. При 
 Тем не менее нашей задачей будет построение классификатора, который будет давать ответ $1$, если предъявленный объект лежит в множестве, и $0$ иначе.
 
 В работе \cite{} предлагается строить сферический пороговый классификатор вида 
-$\sbr{z \le 0} $, где $z(\mb x,\mb a,R)=\norm{\mb x-\mb a}-R$ без вероятностного обоснования такого подхода. При этом в области $z(\mb x, \mb a, R) \ge 0$ значение этой величины несёт смысл отступа $\xi$. Для подбора значений $\mb a, R$ решается задача
+$\sbr{z \le 0} $, где $z(\mb x,\mb a,R)=\norm{\mb x-\mb a}-R$ без вероятностного обоснования такого подхода. При этом в области $z(\mb x, \mb a, R) \ge 0$ значение этой величины несёт смысл отступа $\xi$, а для объектов внутри шара отступ полагается равным 0. Для подбора значений $\mb a, R$ решается задача
 \begin{equation}
-	\label{argmax:noprob}
+	\label{min:noprob}
 	F(R,\mb a, \mb \xi) = R^2 + C\sum_i\xi_i \to \min_{\mb a, R}.
 \end{equation}
 Здесь величина $C$ задает баланс между минимальным объёмом шара и наименьшим числом объектов обучающей выборки вне сферы.
-%Множество $\Omega^*$ объектов $x_j, j=1 \ldots N,$ на которых известна скрытая характеристика $y_j$, назовем обучающей совокупностью. 
-%В обучающей совокупности будут только объекты класса, то есть $y_j=1$ для всех $j=1\ldots N$.
 
 \addtikz{basic}{1.2}{thick,domain=-1:2}{basic picture}
 
@@ -55,10 +53,9 @@ $$p(\mb a,R|\mb X)
 то в задаче максимизации (\ref{argmax:full}) достаточно рассматривать только числитель
 $$\cbr{\hat{\mb a},\hat R|\mb X}
 	= \argmax{\mb a,R} p(\mb a,R|\mb X) 
-	= \argmax{\mb a,R} \cbr{\log\Psi(\mb a,R) + \sum_{j=1}^N\log\varphi(\mb x_j|\mb a,R)}. $$
+	= \argmax{\mb a,R} \cbr{\ln\Psi(\mb a,R) + \sum_{j=1}^N\ln\varphi(\mb x_j|\mb a,R)}. $$
 
-
-Теперь покажем, что задача в такой постановке обобщает задачу \ref{argmax:noprob}. 
+Теперь покажем, что задача в такой постановке обобщает задачу \ref{min:noprob}. 
 Положим, что априорное распределение параметров $\Psi(\mb a,R)$ обладает следующими свойствами:
 \begin{itemize}
  	\item $\mb a$ и $R$ независимы,
@@ -67,3 +64,16 @@ $$\cbr{\hat{\mb a},\hat R|\mb X}
  \end{itemize} 
  Тогда совместное распределение параметров также будет несобственным: 
  $$\Psi(\mb a,R)\propto e^{-\frac1{2\sigma^2}R^2}.$$
+ Подставим это выражение и функцию распределения из (\ref{PhiXARC}):
+ \begin{align}
+ 	\label{ProbARX_simple}
+ 	\ln p(\mb a,R|\mb X) 
+ 		&=	\ln\Psi(\mb a,R) + \sum_{j=1}^N\ln\varphi(\mb x_j|\mb a,R) =\notag \\
+ 		&= 	-\frac{R^2}{2\sigma^2} + \sum_{i: \norm{\mb x_i - \mb a} \le R} \ln 1 
+ 			+ \sum_{i: \norm{\mb x_i - \mb a} > R} \ln e^{-c z(\mb x,\mb a,R)}  = \notag \\
+ 		&= -\frac{R^2}{2\sigma^2} - \sum_{i: \norm{\mb x_i - \mb a} > R} c\cbr{\norm{\mb x_i - \mb a} -R} = \notag \\
+ 		&= -\frac1{2\sigma^2}\cbr{R^2 + 2\sigma^2 c\sum_{i: \norm{\mb x_i - \mb a} > R} \cbr{\norm{\mb x_i - \mb a} -R}} \to \max_{\mb a, R}.
+ \end{align}
+ Очевидно, задачи \ref{ProbARX_simple} и \ref{min:noprob} эквивалентны при $C = 2\sigma^2 c.$
+
+ 
