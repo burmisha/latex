@@ -54,7 +54,38 @@ schleimst
 {\ttfamily (geschleimt|schleim(t?e(t|nd?|st)?|st))}
 Правда, при этом появятся лишние слова, удовлетворяющие РВ, но условие будет выполнено.
 
+
+\newcommand\Too[1]{&\xrightarrow[]{#1}}
 \section{Задача 5}
+Строим трансдьюсер следующим образом.
+\al{
+    S\Too{1:o}S_{{1\to one}} \\
+    S\Too{1:t}S_{{1\to ten|twelve|thirteen}} \\
+    S\Too{1:e}S_{{1\to eleven|eighteen}} \\
+    S\Too{1:f}S_{{1\to fourteen|fifteen}} \\
+    S\Too{1:s}S_{{1\to sixteen|seventeen}} \\
+    S\Too{1:n}S_{{1\to nineteen}} \\
+    S\Too{2:t}S_{{1\to two|twenty}} \\
+    S\Too{3:t}S_3 \\
+    S\Too{4:f}S_4 \\
+    S\Too{5:f}S_5 \\
+    &\ldots \\
+    S\Too{9:n}S_9 \\
+    S_{1\to ten|twelve|thirteen}\Too{0:t}S_{2\to ten} \\
+    S_{2\to ten}\Too{:n}S_{3\to ten} \\
+    S_{1\to ten|twelve|thirteen}\Too{2:w}S_{2\to twelve} \\
+    S_{1\to ten|twelve|thirteen}\Too{3:w}S_{2\to thirteen} \\
+    &\ldots 
+    % S_{{1\to one}}\Too{:n}S_{{2\to one}}\\
+    % S_{{2\to one}}\Too{:e}S_{{3\to one}}\\
+    % S_{{1\to two|twelve|twenty}}\Too{:w}S_{{2\to two|twelve|twenty}} \\
+    % S_{2\to two|twelve|twenty}\Too{:o}S_{3\to two} \\
+    % S_{2\to two|twelve|twenty}\Too{:e}S_{3\to twelve|twenty} \\
+    % S_{2_3}\Too{:e}S_{2_{4\to twenty}} \\
+    % S_{2_{4\to twelve}}\Too{:l}S_{2_{4\to twelve}} \\
+}
+И так далее. Конечными будут состояния $S_{3\to ten}, S_{1\to one}, \ldots$
+
 \section{Задача 6}
 \section{Задача 7}
 \section{Задача 8}
@@ -118,13 +149,13 @@ $$KL(q,p) = \frac12 \ln\frac{\frac12}{\frac1\pi} + \frac12 \ln\frac{\frac12}{1-\
     B&\to b
 }
 
-\section{Задача 13}
 
+\newcommand\To{\:\:\to\:\:}
+\section{Задача 13}
 {
 \newcommand\Ra{\!\Rightarrow\!}
 \newcommand\T{\text{\textsf{Type}}}
 \newcommand\V{\text{\textsf{T\!V}}}
-\newcommand\To{\:\:\to\:\:}
 
 \subsection{a}
     Положим, что $\T$ --- начальный символ.
@@ -143,8 +174,10 @@ $$KL(q,p) = \frac12 \ln\frac{\frac12}{\frac1\pi} + \frac12 \ln\frac{\frac12}{1-\
         B &\To F\\
         F &\To \alpha|\beta|\gamma|\ldots
     }
-
-
 }
 
+\section{Задача 14}
+\subsection{a}
+\al{S&\To EE\To OLE\To GGLE\To GOOLE\To GOGGLE\To\\
+    &\To gOGGLE\To goGGLE\To goggLE\To gogglE\To goggle.}
 \end{document} 
