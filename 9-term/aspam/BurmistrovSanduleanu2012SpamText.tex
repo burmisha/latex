@@ -18,8 +18,8 @@
 
 \input macro.tex
 
-\definecolor{linkcolor}{RGB}{7,31,63}%{15,80,120}
-
+%\definecolor{linkcolor}{RGB}{7,31,63}%{15,80,120}
+\definecolor{linkcolor}{RGB}{179,45,0}
 \textheight=24cm		\textwidth=16cm
 \oddsidemargin=0mm 		\evensidemargin=0mm
 \topmargin=-2,5cm
@@ -32,11 +32,11 @@
 \begin{document}
 	%\addbibresource{bibliography.bib}
 	%\input{title.tex}
-	%\newpage \tableofcontents
-	%\newpage \input{abstract.tex}	
-	%\newpage \section{Введение} \input{intro.tex}
+	\newpage \tableofcontents
+	\newpage \input{abstract.tex}	
+	\newpage \section{Введение} \input{intro.tex}
 
-	%\section{Байесовская постановка задачи} \input{settask}
+	\section{Байесовская постановка задачи} \input{settask}
 	\section{Решение оптимизационной задачи} \input{solvebasic}
 	%\subsection{Основные понятия} 			\input{concepts.tex}
 	%\subsection{Вероятностные  гипотезы}	\input{hypothesis.tex}

@@ -1,13 +1,13 @@
 Итак для нахождения значений $\mb a$ и $R$ необходимо решить следующую задачу:
 \begin{equation}
 			\begcas{
-			&R^2 + C\suml_i\xi_i \to \min\limits_{\mb a, R,\mb{\xi}}, \\
-			&||\mb x_i-\mb a||^2\le R^2 + \delta_i,\;\;\delta_i\ge0,\;\;i = 1,\ldots,N.
+			&R^2 + C\suml_i\xi_i \to \min\limits_{\mb a, R,\mb\xi}, \\
+			&\norm{\mb x_i-\mb a}^2\le R^2 + \delta_i,\quad\delta_i\ge0,\quad i = 1,\ldots,N.
 			} 
 \end{equation}
 Функция Лагранжа этой задачи имеет вид
 \al{
-L(\mb a, R,\mb{\xi},\mb{\alpha},\mb{\gamma})=
+L(\mb a, R,\mb\xi,\mb\alpha,\mb\gamma)=
 	R^2 + C\suml_i\xi_i-\suml_i\gamma_i\delta_i-\suml_i\alpha_i\fbr{R^2 
 	+ \delta_i-\cbr{\mb x_i\cdot\mb x_i-2\mb a\cdot\mb x_i+\mb a\cdot\mb a}},
 }
@@ -18,7 +18,7 @@ L(\mb a, R,\mb{\xi},\mb{\alpha},\mb{\gamma})=
 	\begin{array}{ll}
 		\dd LR = 0: & \suml_i \alpha_i = 1\\
 		\dd L{\mb a} = 0: & \mb a = \frac{\suml_i\alpha_i\mb x_i}{\suml_i \alpha_i}= \suml_i \alpha_i\mb x_i\\
-		\dd L{\delta_i} = 0: & \gamma_i = C - \alpha_i, \;\; i = 1,\ldots,N.\\
+		\dd L{\delta_i} = 0: & \gamma_i = C - \alpha_i, \;\; i = 1,\ldots,N.
 	\end{array}
 \end{equation}
 
@@ -29,15 +29,20 @@ $$0\le\alpha_i\le C, \;\; i = 1,\ldots,N.$$
 Если это ограничение выполнено, то мы можем вычислить $\gamma_i$ по формуле $\gamma_i = C - \alpha_i$, и при этом автоматически будет выполнено условие $\gamma_i\ge 0$.
 
 Тогда для функции Лагранжа получим выражение
-
+{
+\newcommand\ai[0]{\alpha_i\,}
+\newcommand\aj[0]{\alpha_j\,}
+\newcommand\mbx[1]{\mb x_#1}
+\newcommand\cd[0]{\!\cdot\!}
 \al{
-L(\mb a, R,\mb{\xi},\mb{\alpha},\mb{\gamma})
-	&= 	R^2 - \suml_i\alpha_iR^2 + C\suml_i\xi_i - \suml_i\alpha_i\delta_i 
-	+ 	\suml_i\alpha_i\mb x_i\cdot\mb x_i - \\
-	&- 2\suml_i\alpha_i\mb a\cdot\mb x_i + \suml_i\alpha_i\mb a\cdot\mb a +\suml_i\gamma_i\delta_i =\\
-	&= 	\suml_i\alpha_i\mb x_i\cdot\mb x_i - 2 \suml_i\alpha_i \suml_j \alpha_j \mb x_j \cdot \mb x_i
-	+ 	\suml_{i,j}\alpha_i\alpha_j \mb x_j\cdot \mb x_i = \\
-	&= 	\suml_i\alpha_i\mb x_i\cdot\mb x_i-\suml_{i,j}\alpha_i\alpha_j\mb x_j\cdot\mb x_i
+L(\mb a, R,\mb\xi,\mb\alpha,\mb\gamma)
+	&= 	R^2 - \suml_i\ai R^2 + C\suml_i\xi_i - \suml_i\ai\delta_i 
+	+ 	\suml_i\ai\mbx i\cd\mbx i - \\
+	&- 2\suml_i\ai\mb a\cd\mbx i + \suml_i\ai\mb a\cd\mb a +\suml_i\gamma_i\delta_i =\\
+	&= 	\suml_i\ai\mbx i\cd\mbx i - 2 \suml_i\ai\suml_j\aj\mbx j\cd\mbx i
+	+ 	\suml_{i,j}\ai\aj \mbx j\cd \mbx i = \\
+	&= 	\suml_i\ai\mbx i\cd\mbx i-\suml_{i,j}\ai\aj\mbx j\cd\mbx i
+}
 }
 
 Полученное выражение является квадратичной формой. 
