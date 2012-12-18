@@ -1,33 +1,39 @@
 И так для нахожения значений $\mb a$ и $R$ необходимо решить следующую задачу
 \begin{equation}
 			\begcas{
-			&R^2 + C\sum\limits_{i}\xi_i \to \min\limits_{\mb a, R,\mb{\xi}}, \\
-			&||\mb x_i-\mb a||^2\leq R^2 + \delta_i,\;\;\delta_i\geq0,\;\;i = 1,\ldots,N.
+			&R^2 + C\suml_i\xi_i \to \min\limits_{\mb a, R,\mb{\xi}}, \\
+			&||\mb x_i-\mb a||^2\le R^2 + \delta_i,\;\;\delta_i\ge0,\;\;i = 1,\ldots,N.
 			} 
 \end{equation}
 Функция Лагранжа этой задачи имеет вид
-$$L(\mb a, R,\mb{\xi},\mb{\alpha},\mb{\gamma})=R^2 + C\sum\limits_{i}\xi_i-\sum\limits_{i}\gamma_i\delta_i-$$
-$$-\sum\limits_{i}\alpha_i\left\{R^2 + \delta_i-\left(\mb x_i\cdot\mb x_i-2\mb a\cdot\mb x_i+\mb a\cdot\mb a\right)\right\},$$
-где $\alpha_i\geq 0$  и $\gamma_i\geq 0$ множетели Лагранжа.
+\al{
+L(\mb a, R,\mb{\xi},\mb{\alpha},\mb{\gamma})=
+	R^2 + C\suml_i\xi_i-\suml_i\gamma_i\delta_i-\suml_i\alpha_i\fbr{R^2 
+	+ \delta_i-\cbr{\mb x_i\cdot\mb x_i-2\mb a\cdot\mb x_i+\mb a\cdot\mb a}},
+}
+где $\alpha_i\ge 0$  и $\gamma_i\ge 0$ множетели Лагранжа.
 Необходимым условием минимума является равенство нулю частных производных функции Лагранжа по всем переменным
 
 \begin{equation}
 \label{minLag}
 \begin{array}{ll}
-\frac{\partial L}{\partial R} = 0: & \sum\limits_{i} \alpha_i = 1\\
-\frac{\partial L}{\partial \mb a} = 0: & \mb a = \frac{\sum\limits_{i}\alpha_i\mb x_i}{\sum\limits_{i} \alpha_i}= \sum\limits_{i} \alpha_i\mb x_i\\
-\frac{\partial L}{\partial \delta_i} = 0: & \gamma_i = C - \alpha_i, \;\; i = 1,\ldots,N.\\
+\dd LR = 0: & \suml_i \alpha_i = 1\\
+\dd L{\mb a} = 0: & \mb a = \frac{\suml_i\alpha_i\mb x_i}{\suml_i \alpha_i}= \suml_i \alpha_i\mb x_i\\
+\dd L{\delta_i} = 0: & \gamma_i = C - \alpha_i, \;\; i = 1,\ldots,N.\\
 \end{array}
 \end{equation}
 
 Из последнего уравнения получаем, что $\alpha_i = C - \gamma_i$. Тем самым мы получаем новые ограничения на $\alpha_i$ 
-$$0\leq\alpha_i\leq C, \;\; i = 1,\ldots,N.$$
-Если это ограничение выполнено, то мы можем вычислить $\gamma_i$ по формуле $\gamma_i = C - \alpha_i$ и автоматическибудет выполнено условие $\gamma_i\geq 0$.
+$$0\le\alpha_i\le C, \;\; i = 1,\ldots,N.$$
+Если это ограничение выполнено, то мы можем вычислить $\gamma_i$ по формуле $\gamma_i = C - \alpha_i$ и автоматическибудет выполнено условие $\gamma_i\ge 0$.
 Тогда для функции Лагранжа получим
-$$L(\mb a, R,\mb{\xi},\mb{\alpha},\mb{\gamma})=R^2-\sum\limits_{i}\alpha_iR^2 + 
-C\sum\limits_{i}\xi_i-\sum\limits_{i}\alpha_i\delta_i+$$
-$$+\sum\limits_{i}\alpha_i\mb x_i\cdot\mb x_i-2\sum\limits_{i}\alpha_i\mb a\cdot\mb x_i+\sum\limits_{i}\alpha_i\mb a\cdot\mb a +\sum\limits_{i}\gamma_i\delta_i=$$ 
-$$ = \sum\limits_{i}\alpha_i\mb x_i\cdot\mb x_i-
-2 \sum\limits_{i}\alpha_i \sum\limits_{j} \alpha_j \mb x_j\cdot \mb x_i+\sum\limits_{i,j}\alpha_i\alpha_j \mb x_j\cdot \mb x_i=$$
-$$=\sum\limits_{i}\alpha_i\mb x_i\cdot\mb x_i-\sum\limits_{i,j}\alpha_i\alpha_j\mb x_j\cdot\mb x_i$$
+\al{
+L(\mb a, R,\mb{\xi},\mb{\alpha},\mb{\gamma})
+	&= 	R^2 - \suml_i\alpha_iR^2 + C\suml_i\xi_i - \suml_i\alpha_i\delta_i 
+	+ 	\suml_i\alpha_i\mb x_i\cdot\mb x_i - \\
+	&- 2\suml_i\alpha_i\mb a\cdot\mb x_i + \suml_i\alpha_i\mb a\cdot\mb a +\suml_i\gamma_i\delta_i =\\
+	&= 	\suml_i\alpha_i\mb x_i\cdot\mb x_i - 2 \suml_i\alpha_i \suml_j \alpha_j \mb x_j \cdot \mb x_i
+	+ 	\suml_{i,j}\alpha_i\alpha_j \mb x_j\cdot \mb x_i = \\
+	&= 	\suml_i\alpha_i\mb x_i\cdot\mb x_i-\suml_{i,j}\alpha_i\alpha_j\mb x_j\cdot\mb x_i
+}
 Полученная формула является квадратичной формой. Ее минимум находится по известным алгоритмам решения задач квадратичного программирования. По оптимальным значениям $\mb{\alpha}$ мы сможем найти оптимальное значение центра гиперсферы $\mb a$ и отступов $\mb{\xi}$  формулам (\ref{minLag}). Опорные векторы $\mb x_i$ для которых $\alpha_i=0$ и $\gamma_i=C$ лежат внутри гиперсферы, те для которых $0<\alpha_i<C$ и $<0\gamma_i<C$ ~--- на границе, а те для которых $\alpha_i=C$ и $\gamma_i=0$ лежат вне гиперсферы и имеют ненулевой отступ $\mb\xi$. Радиус $R$ определяется как расстояние от центра гиперсферы $\mb a$ до опорных векторов лежащих на границе гиперсферы.
