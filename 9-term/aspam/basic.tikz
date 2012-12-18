@@ -16,15 +16,11 @@
 \cird{-0.8,0.4}
 \cird{0.75,0.6}
 
-\cird{1.8,0}
-\draw[latex-latex, thin] (center) ++(1,0) -- ++(0.8,0) node[pos=0.5,above]{$\xi$};
+%\cird{1.8,0}
+\draw [fill = lightgray] (center) ++(75:1) ++(-15:2.2)circle (0.04);
+\draw[latex-latex, thin] (center) ++(75:1) -- ++(-15:2.2) node[pos=0.5,above]{$\sqrt\xi$};
+
 \draw[latex-] (center) ++(240:1) -- +(60:1) node[pos=0.25, right] {$R$};
 \node[left] at (center) {$a$};
 %\draw[-latex] (center) -- ++(0.5,0.2) node[pos=0.6, right] {$R$};
 %\draw [fill = darkgray, thin] (center) ++(0.5,0.5) circle (0.05);
-% \draw[color=orange] plot (\x,0.1);
-% \draw[color=orange,thin] plot (\x,-0.1);
-% \draw[color=orange,thin] plot (\x,0.3);
-% \draw[color=green, thin] plot (\x,\x*\x);
-% \draw[color=green] plot (\x,\x*\x-1);
-% \draw[color=green, thin] plot (\x,\x*\x-2);

@@ -5,7 +5,7 @@ $\mb x(\omega)=\cbr{x^1(\omega),\ldots, x^n(\omega)} \in {\mathbb R^n}$. При 
 Тем не менее нашей задачей будет построение классификатора, который будет давать ответ $1$, если предъявленный объект лежит в множестве, и $0$ иначе.
 
 В работе \cite{} предлагается строить сферический пороговый классификатор вида 
-$\sbr{z \le 0} $, где $z(\mb x,\mb a,R)=\norm{\mb x-\mb a}-R$ без вероятностного обоснования такого подхода. При этом в области $z(\mb x, \mb a, R) \ge 0$ значение этой величины несёт смысл отступа $\xi$, а для объектов внутри шара отступ полагается равным 0. Для подбора значений $\mb a, R$ решается задача
+$\sbr{z \le 0} $, где $z(\mb x,\mb a,R)=\norm{\mb x-\mb a}-R$ без вероятностного обоснования такого подхода. При этом в области $z(\mb x, \mb a, R) \ge 0$ значение величины $\norm{\mb x-\mb a}^2-R^2$ несёт смысл отступа $\xi$, а для объектов внутри шара отступ полагается равным 0. Для подбора значений $\mb a, R$ решается задача
 \begin{equation}
 	\label{min:noprob}
 	F(R,\mb a, \mb \xi) = R^2 + C\sum_i\xi_i \to \min_{\mb a, R}.
@@ -20,8 +20,8 @@ $\sbr{z \le 0} $, где $z(\mb x,\mb a,R)=\norm{\mb x-\mb a}-R$ без веро
 	\label{PhiXARC}
 	\varphi \cbr{ {\mb x | \mb a,R;c} } =
 		\begcas{
-			&1 				\qquad  	\: 	z(\mb x,\mb a,R) \le 0, \\
-			&e^{-c z(\mb x,\mb a,R)}, 	\:	z(\mb x,\mb a,R) \ge 0.
+			&1, 		\qquad\qquad\qquad  	\! 	z(\mb x,\mb a,R) < 0, \\
+			&e^{-c \cbr{\norm{\mb x-\mb a}^2-R^2}}, 	\:	z(\mb x,\mb a,R) \ge 0.
 		} 
 \end{equation}
 Здесь величина $c$ является гиперпараметром.
@@ -70,10 +70,10 @@ $$\cbr{\hat{\mb a},\hat R|\mb X}
  	\ln p(\mb a,R|\mb X) 
  		&=	\ln\Psi(\mb a,R) + \sum_{j=1}^N\ln\varphi(\mb x_j|\mb a,R) =\notag \\
  		&= 	-\frac{R^2}{2\sigma^2} + \sum_{i: \norm{\mb x_i - \mb a} \le R} \ln 1 
- 			+ \sum_{i: \norm{\mb x_i - \mb a} > R} \ln e^{-c z(\mb x,\mb a,R)}  = \notag \\
- 		&= -\frac{R^2}{2\sigma^2} - \sum_{i: \norm{\mb x_i - \mb a} > R} c\cbr{\norm{\mb x_i - \mb a} -R} = \notag \\
- 		&= -\frac1{2\sigma^2}\cbr{R^2 + 2\sigma^2 c\sum_{i: \norm{\mb x_i - \mb a} > R} \cbr{\norm{\mb x_i - \mb a} -R}} \to \max_{\mb a, R}.
+ 			+ \sum_{i: \norm{\mb x_i - \mb a} > R} \ln e^{-c \cbr{\norm{\mb x-\mb a}^2-R^2}}  = \notag \\
+ 		&= -\frac{R^2}{2\sigma^2} - \sum_{i: \norm{\mb x_i - \mb a} > R} c\cbr{\norm{\mb x_i - \mb a}^2 - R^2} = \notag \\
+ 		&= -\frac1{2\sigma^2}\cbr{R^2 + 2\sigma^2 c\sum_{i: \norm{\mb x_i - \mb a} > R} \cbr{\norm{\mb x_i - \mb a}^2 -R^2}} \to \max_{\mb a, R}.
  \end{align}
- Очевидно, задачи \ref{ProbARX_simple} и \ref{min:noprob} эквивалентны при $C = 2\sigma^2 c.$
+ Очевидно, задачи (\ref{ProbARX_simple}) и (\ref{min:noprob}) эквивалентны при $C = 2\sigma^2 c.$
 
  
