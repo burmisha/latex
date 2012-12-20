@@ -8,22 +8,22 @@
 Функция Лагранжа этой задачи имеет вид
 \al{
 \Ell(\mb a, R,\mb\xi,\mb\alpha,\mb\gamma)=
-	R^2 + C\suml_i\xi_i-\suml_i\gamma_i\xi_i-\suml_i\alpha_i\fbr{R^2 
-	+ \xi_i-\cbr{\mb x_i\cdot\mb x_i-2\mb a\cdot\mb x_i+\mb a\cdot\mb a}},
+	R^2 + C\suml_i\xi_i - \suml_i\gamma_i\xi_i 
+	-\suml_i\alpha_i\cbr{R^2 + \xi_i - \cbr{\mb x_i\cdot\mb x_i - 2\mb a\cdot\mb x_i + \mb a\cdot\mb a}},
 }
 где $\alpha_i\ge 0$  и $\gamma_i\ge 0$ --- множители Лагранжа.
 Необходимым условием минимума является равенство нулю частных производных функции Лагранжа по всем переменным:
 \begin{equation}
 	\label{minLag}
 	\begin{array}{ll}
-		\dd \Ell R = 0: & \suml_i \alpha_i = 1\\
-		\dd \Ell{\mb a} = 0: & \mb a = \cfrac{\suml_i\alpha_i\mb x_i}{\suml_i \alpha_i}= \suml_i \alpha_i\mb x_i\\
+		\dd \Ell R = 0: & \suml_i \alpha_i = 1 \:\cbr{\text{или $R = 0$ --- этот случай рассмотрим отдельно,}}\\
+		\dd \Ell{\mb a} = 0: & \mb a = \cfrac{\suml_i\alpha_i\mb x_i}{\suml_i \alpha_i}= \suml_i \alpha_i\mb x_i,\\
 		\dd \Ell{\xi_i} = 0: & \gamma_i = C - \alpha_i, \;\; i = 1,\ldots,N.
 	\end{array}
 \end{equation}
 
 Из последнего уравнения получаем, что $\alpha_i = C - \gamma_i$. 
-Тем самым мы получаем новые ограничения на $\alpha_i$: 
+Таким образом, мы получаем новые ограничения на $\alpha_i$: 
 $$0\le\alpha_i\le C, \;\; i = 1,\ldots,N.$$
 
 Если это ограничение выполнено, то мы можем вычислить $\gamma_i$ по формуле $\gamma_i = C - \alpha_i$, и при этом автоматически будет выполнено условие $\gamma_i\ge 0$.
@@ -41,11 +41,12 @@ $$0\le\alpha_i\le C, \;\; i = 1,\ldots,N.$$
 	&- 2\suml_i\ai\mb a\cd\mbx i + \suml_i\ai\mb a\cd\mb a - \suml_i\gamma_i\xi_i =\\
 	&= 	\suml_i\ai\mbx i\cd\mbx i - 2 \suml_i\ai\suml_j\aj\mbx j\cd\mbx i
 	+ 	\suml_{i,j}\ai\aj \mbx j\cd \mbx i = \\
-	&= 	\suml_i\ai\mbx i\cd\mbx i-\suml_{i,j}\ai\aj\mbx j\cd\mbx i
+	&= 	\suml_i\ai\mbx i\cd\mbx i-\suml_{i,j}\ai\aj\mbx j\cd\mbx i \to \max_{\mb\alpha}
 }
 }
 
 Полученное выражение является квадратичной формой. 
-Ее минимум находится по известным алгоритмам решения задач квадратичного программирования. 
-По оптимальным значениям $\mb{\alpha}$ мы сможем найти оптимальное значение центра гиперсферы $\mb a$ и отступов $\mb{\xi}$ по формулам (\ref{minLag}). Векторы $\mb x_i$, для которых $\alpha_i=0$ и $\gamma_i=C$, лежат внутри гиперсферы, те, для которых $0<\alpha_i<C$ и $0<\gamma_i<C$~--- на её границе, а те, для которых $\alpha_i=C$ и $\gamma_i=0$, лежат вне гиперсферы и имеют ненулевой отступ $\mb\xi$. 
+Тогда его максимум находится по известным алгоритмам решения задач квадратичного программирования. 
+По оптимальным значениям $\mb{\alpha}$ мы сможем найти оптимальное значение центра гиперсферы $\mb a$ и отступов $\mb{\xi}$ используя соотношения (\ref{minLag}). 
+Те векторы $\mb x_i$, для которых $\alpha_i=0$ и $\gamma_i=C$, лежат внутри гиперсферы, те , для которых $0<\alpha_i<C$ и $0<\gamma_i<C$~--- на её границе, а те, для которых $\alpha_i=C$ и $\gamma_i=0$, лежат вне гиперсферы и имеют ненулевой отступ $\mb\xi$. 
 Радиус $R$ определяется как расстояние от центра гиперсферы $\mb a$ до опорных векторов лежащих на границе гиперсферы.
