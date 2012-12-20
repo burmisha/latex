@@ -2,23 +2,23 @@
 \begin{equation}
 			\begcas{
 			&R^2 + C\suml_i\xi_i \to \min\limits_{\mb a, R,\mb\xi}, \\
-			&\norm{\mb x_i-\mb a}^2\le R^2 + \delta_i,\quad\delta_i\ge0,\quad i = 1,\ldots,N.
+			&\norm{\mb x_i-\mb a}^2\le R^2 + \xi_i,\quad\xi_i\ge0,\quad i = 1,\ldots,N.
 			} 
 \end{equation}
 Функция Лагранжа этой задачи имеет вид
 \al{
-L(\mb a, R,\mb\xi,\mb\alpha,\mb\gamma)=
-	R^2 + C\suml_i\xi_i-\suml_i\gamma_i\delta_i-\suml_i\alpha_i\fbr{R^2 
-	+ \delta_i-\cbr{\mb x_i\cdot\mb x_i-2\mb a\cdot\mb x_i+\mb a\cdot\mb a}},
+\Ell(\mb a, R,\mb\xi,\mb\alpha,\mb\gamma)=
+	R^2 + C\suml_i\xi_i-\suml_i\gamma_i\xi_i-\suml_i\alpha_i\fbr{R^2 
+	+ \xi_i-\cbr{\mb x_i\cdot\mb x_i-2\mb a\cdot\mb x_i+\mb a\cdot\mb a}},
 }
 где $\alpha_i\ge 0$  и $\gamma_i\ge 0$ --- множители Лагранжа.
 Необходимым условием минимума является равенство нулю частных производных функции Лагранжа по всем переменным:
 \begin{equation}
 	\label{minLag}
 	\begin{array}{ll}
-		\dd LR = 0: & \suml_i \alpha_i = 1\\
-		\dd L{\mb a} = 0: & \mb a = \frac{\suml_i\alpha_i\mb x_i}{\suml_i \alpha_i}= \suml_i \alpha_i\mb x_i\\
-		\dd L{\delta_i} = 0: & \gamma_i = C - \alpha_i, \;\; i = 1,\ldots,N.
+		\dd \Ell R = 0: & \suml_i \alpha_i = 1\\
+		\dd \Ell{\mb a} = 0: & \mb a = \cfrac{\suml_i\alpha_i\mb x_i}{\suml_i \alpha_i}= \suml_i \alpha_i\mb x_i\\
+		\dd \Ell{\xi_i} = 0: & \gamma_i = C - \alpha_i, \;\; i = 1,\ldots,N.
 	\end{array}
 \end{equation}
 
@@ -35,10 +35,10 @@ $$0\le\alpha_i\le C, \;\; i = 1,\ldots,N.$$
 \newcommand\mbx[1]{\mb x_#1}
 \newcommand\cd[0]{\!\cdot\!}
 \al{
-L(\mb a, R,\mb\xi,\mb\alpha,\mb\gamma)
-	&= 	R^2 - \suml_i\ai R^2 + C\suml_i\xi_i - \suml_i\ai\delta_i 
+\Ell(\mb a, R,\mb\xi,\mb\alpha,\mb\gamma)
+	&= 	R^2 - \suml_i\ai R^2 + C\suml_i\xi_i - \suml_i\ai\xi_i 
 	+ 	\suml_i\ai\mbx i\cd\mbx i - \\
-	&- 2\suml_i\ai\mb a\cd\mbx i + \suml_i\ai\mb a\cd\mb a +\suml_i\gamma_i\delta_i =\\
+	&- 2\suml_i\ai\mb a\cd\mbx i + \suml_i\ai\mb a\cd\mb a +\suml_i\gamma_i\xi_i =\\
 	&= 	\suml_i\ai\mbx i\cd\mbx i - 2 \suml_i\ai\suml_j\aj\mbx j\cd\mbx i
 	+ 	\suml_{i,j}\ai\aj \mbx j\cd \mbx i = \\
 	&= 	\suml_i\ai\mbx i\cd\mbx i-\suml_{i,j}\ai\aj\mbx j\cd\mbx i
