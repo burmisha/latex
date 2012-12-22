@@ -41,7 +41,7 @@ $$0\le\alpha_i\le C, \;\; i = 1,\ldots,N.$$
 	&- 2\suml_i\ai\mb a\cd\mbx i + \suml_i\ai\mb a\cd\mb a - \suml_i\gamma_i\xi_i =\\
 	&= 	\suml_i\ai\mbx i\cd\mbx i - 2 \suml_i\ai\suml_j\aj\mbx j\cd\mbx i
 	+ 	\suml_{i,j}\ai\aj \mbx j\cd \mbx i = \\
-	&= 	\suml_i\ai\mbx i\cd\mbx i-\suml_{i,j}\ai\aj\mbx j\cd\mbx i \to \max_{\mb\alpha}
+	&= 	\suml_i\ai\mbx i\cd\mbx i-\suml_{i,j}\ai\aj\mbx j\cd\mbx i \to \max_{\mb\alpha}.
 }
 }
 
@@ -52,10 +52,17 @@ $$0\le\alpha_i\le C, \;\; i = 1,\ldots,N.$$
 Радиус $R$ определяется как расстояние от центра гиперсферы $\mb a$ до опорных векторов лежащих на границе гиперсферы.
 
 Теперь рассмотрим случай $R = 0$. 
-% Тогда из ограничений исходной задачи очевидным образом получаем:
-% $$\xi_i = \norm{\mb x_i - \mb a}^2,$$ 
-% а задача приобретает вид 
-% $$С\suml_i\norm{\mb x_i - \mb a}^2 \to \min\limits_{\mb a}.$$
-% Решение этой задачи: $$\mb a = \ol{\mb x} = \frac{\suml_i \mb x_i}N.$$
+При этом функция Лагранжа также принимает вид 
+\begin{equation}
+\newcommand\ai[0]{\alpha_i\,}
+\newcommand\aj[0]{\alpha_j\,}
+\newcommand\mbx[1]{\mb x_#1}
+\newcommand\cd[0]{\!\cdot\!}
+	\Ell(\mb a, R,\mb\xi,\mb\alpha,\mb\gamma)
+	= 	\suml_i\ai\mbx i\cd\mbx i-\suml_{i,j}\ai\aj\mbx j\cd\mbx i \to \max_{\mb\alpha}.
+\end{equation}
 
-% Простым способом определить, какой же случай из двух вышеописанных выполнен, является сравнение двух значений функионалов.
+Решая задачу квадратичной максимизации, но уже без ограничения $\sum_i\alpha_i = 1,$ аналогично получим вектор $\alpha$, 
+по нему сможем восстановим центр сферы: $\mb a = \frac{\sum_i\alpha_i\mb x_i}{\sum_i \alpha_i}.$ 
+Теперь, определив точки лежащие на сфере, вычислим $R$ и проверим, действительно ли получен $0$. 
+Если окажется, что это так, то следует выбрать именно этот вариант, поскольку множество, по которому производится максимизация $\Ell$, шире.

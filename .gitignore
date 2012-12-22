@@ -29,3 +29,5 @@
 *.gnuplot
 *.bcf
 *.xml
+
+*.eps
