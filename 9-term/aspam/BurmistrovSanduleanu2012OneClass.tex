@@ -1,12 +1,14 @@
-﻿\documentclass[12pt,a4paper]{amsart}
-\usepackage[cp1251]{inputenc}
-\usepackage{graphicx}
-\usepackage{color}
-\usepackage{epstopdf} % http://tex.stackexchange.com/questions/29664/latex-error-unknown-graphics-extension-eps
-\usepackage[colorlinks,unicode,pdfpagelabels=true]{hyperref}
-\usepackage[english,russian]{babel}
-\usepackage{amssymb,enumerate}
-\usepackage{enumitem}  \setlist{nolistsep}
+\documentclass[12pt]{article}
+\usepackage{jmlda}
+% \documentclass[12pt,a4paper]{amsart}
+% \usepackage[cp1251]{inputenc}
+% \usepackage{graphicx}
+% \usepackage{color}
+% \usepackage{epstopdf} % http://tex.stackexchange.com/questions/29664/latex-error-unknown-graphics-extension-eps
+% \usepackage[colorlinks,unicode,pdfpagelabels=true]{hyperref}
+% \usepackage[english,russian]{babel}
+% \usepackage{amssymb,enumerate}
+% \usepackage{enumitem}  \setlist{nolistsep}
 \usepackage{tikz}
 % \usepackage{textcase} % for UTF-8 in header
 
@@ -27,7 +29,7 @@
 	\def\Rn{\ensuremath{\mathbb{R}^n}}
 
 	\newcommand\mb[1]{\ensuremath{\boldsymbol{\mathbf{#1}}}}
-	\newcommand\argmax[1]{\arg\underset{#1}\max\,} % \operatornamewithlimits
+	% \newcommand\argmax[1]{\arg\underset{#1}\max\,} % \operatornamewithlimits
 	\newcommand{\prodl}{\prod\limits}
 	\newcommand{\suml}{\sum\limits}
 
@@ -37,7 +39,7 @@
 	\newcommand\modul[1]{\left|#1\right|}
 	\newcommand\norm[1]{\ensuremath{\left\|{#1}\right\|}}
 
-	\newcommand{\T}{^{\text{\tiny\sffamily\upshape\mdseries T}}}
+	% \newcommand{\T}{^{\text{\tiny\sffamily\upshape\mdseries T}}}
 	\newcommand\dd[2]{\frac{\partial#1}{\partial#2}}
 
 \begin{document}
@@ -186,7 +188,7 @@
 	Из принципа максимума плотности апостериорного распределения в пространстве параметров модели генеральной совокупности получим байесовское правило обучения
 	\begin{equation}
 		\label{argmax:full}
-		\cbr{\hat{\mb a},\hat R|\mb X} = \argmax{\mb a,R} p(\mb a,R|\mb X)
+		\cbr{\hat{\mb a},\hat R|\mb X} = \argmax_{\mb a,R} p(\mb a,R|\mb X)
 	\end{equation}
 
 	Поскольку знаменатель в выражении (\ref{Prob:aRX}) не зависит от целевых переменных 
@@ -195,8 +197,8 @@
 		=  \Psi(\mb a,R) \prod_{j=1}^N \varphi(\mb x_j|\mb a,R),$$
 	то в задаче максимизации (\ref{argmax:full}) достаточно рассматривать только числитель
 	$$\cbr{\hat{\mb a},\hat R|\mb X}
-		= \argmax{\mb a,R} p(\mb a,R|\mb X) 
-		= \argmax{\mb a,R} \cbr{\ln\Psi(\mb a,R) + \sum_{j=1}^N\ln\varphi(\mb x_j|\mb a,R)}. $$
+		= \argmax_{\mb a,R} p(\mb a,R|\mb X) 
+		= \argmax_{\mb a,R} \cbr{\ln\Psi(\mb a,R) + \sum_{j=1}^N\ln\varphi(\mb x_j|\mb a,R)}. $$
 
 	Теперь покажем, что задача в такой постановке обобщает задачу (\ref{min:noprob}). 
 	Положим, что априорное распределение параметров $\Psi(\mb a,R)$ обладает следующими свойствами:
