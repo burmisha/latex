@@ -12,7 +12,7 @@ $\sbr{z \le 0} $, где $z(\mb x,\mb a,R)=\norm{\mb x-\mb a}-R$ без веро
 \end{equation}
 Здесь величина $C$ задает баланс между минимальным объёмом шара и наименьшим числом объектов обучающей выборки вне сферы.
 
-\addtikz{basic}{1.2}{thick,domain=-1:2}{basic picture}
+\addtikz{basic}{1.2}{thick,domain=-1:2}{Пример описания объектов шаром}
 
 Будем придерживаться вероятностной модели распределения объектов генеральной совокупности.
 Параметрическое семейство условных плотностей распределения в признаковом пространстве имеет вид 
@@ -67,8 +67,8 @@ $$\cbr{\hat{\mb a},\hat R|\mb X}
  Подставим это выражение и функцию распределения из (\ref{PhiXARC}):
  \begin{align}
  	\label{ProbARX_simple}
- 	\ln p(\mb a,R|\mb X) 
- 		&=	\ln\Psi(\mb a,R) + \sum_{j=1}^N\ln\varphi(\mb x_j|\mb a,R) =\notag \\
+ 	\ln p(\mb a,R&|\mb X) 
+ 		=	\ln\Psi(\mb a,R) + \sum_{j=1}^N\ln\varphi(\mb x_j|\mb a,R) =\notag \\
  		&= 	-\frac{R^2}{2\sigma^2} + \sum_{i: \norm{\mb x_i - \mb a} \le R} \ln 1 
  			+ \sum_{i: \norm{\mb x_i - \mb a} > R} \ln e^{-c \cbr{\norm{\mb x-\mb a}^2-R^2}}  = \notag \\
  		&= -\frac{R^2}{2\sigma^2} - \sum_{i: \norm{\mb x_i - \mb a} > R} c\cbr{\norm{\mb x_i - \mb a}^2 - R^2} = \notag \\
