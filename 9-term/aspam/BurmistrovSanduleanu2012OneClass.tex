@@ -1,17 +1,17 @@
-\documentclass[12pt]{article}
-\usepackage{jmlda}
-% \documentclass[12pt,a4paper]{amsart}
-% \usepackage[cp1251]{inputenc}
-% \usepackage{graphicx}
-% \usepackage{color}
-% \usepackage{epstopdf} % http://tex.stackexchange.com/questions/29664/latex-error-unknown-graphics-extension-eps
-% \usepackage[colorlinks,unicode,pdfpagelabels=true]{hyperref}
-% \usepackage[english,russian]{babel}
-% \usepackage{amssymb,enumerate}
-% \usepackage{enumitem}  \setlist{nolistsep}
-% \usepackage{pfgplots}
+%\documentclass[12pt]{article}
+%\usepackage{jmlda}
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{epstopdf} % http://tex.stackexchange.com/questions/29664/latex-error-unknown-graphics-extension-eps
+\usepackage[colorlinks,unicode,pdfpagelabels=true]{hyperref}
+\usepackage[english,russian]{babel}
+\usepackage{amssymb,amsmath,enumerate}
+\usepackage{enumitem}  \setlist{nolistsep}
 \usepackage{tikz}
-% \usepackage{textcase} % for UTF-8 in header
+\usepackage{pgfplots}
+\usepackage{textcase} % for UTF-8 in header
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%% 	\input macro.tex
@@ -31,6 +31,7 @@
 
 	\newcommand\mb[1]{\ensuremath{\boldsymbol{\mathbf{#1}}}}
 	% \newcommand\argmax[1]{\arg\underset{#1}\max\,} % \operatornamewithlimits
+	\newcommand\argmax[1]{\arg\,\max\,} % \operatornamewithlimits
 	\newcommand{\prodl}{\prod\limits}
 	\newcommand{\suml}{\sum\limits}
 
@@ -40,13 +41,14 @@
 	\newcommand\modul[1]{\left|#1\right|}
 	\newcommand\norm[1]{\ensuremath{\left\|{#1}\right\|}}
 
-	% \newcommand{\T}{^{\text{\tiny\sffamily\upshape\mdseries T}}}
+	\newcommand{\T}{^{\text{\tiny\sffamily\upshape\mdseries T}}}
 	\newcommand\dd[2]{\frac{\partial#1}{\partial#2}}
 
 \begin{document}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%% 			\input{abstract.tex}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 	\title{Вероятностная модель одноклассовой классификации}
 	\author{М.\,О.\,Бурмистров, Л.\,Н.\,Сандуляну}
 	\organization{Московский физико-технический институт, ФУПМ, каф. <<Интеллектуальные системы>>}
