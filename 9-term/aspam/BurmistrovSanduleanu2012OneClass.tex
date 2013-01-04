@@ -10,7 +10,7 @@
 \usepackage{amssymb,amsmath,enumerate}
 \usepackage{enumitem}  \setlist{nolistsep}
 \usepackage{tikz}
-\usepackage{pgfplots}
+\usepackage{pgfplots} \pgfplotsset{compat=1.6}
 \usepackage{textcase} % for UTF-8 in header
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -31,7 +31,7 @@
 
 	\newcommand\mb[1]{\ensuremath{\boldsymbol{\mathbf{#1}}}}
 	% \newcommand\argmax[1]{\arg\underset{#1}\max\,} % \operatornamewithlimits
-	\newcommand\argmax[1]{\arg\,\max\,} % \operatornamewithlimits
+	\def\argmax{\arg\,\max} % \operatornamewithlimits
 	\newcommand{\prodl}{\prod\limits}
 	\newcommand{\suml}{\sum\limits}
 
@@ -51,9 +51,9 @@
 
 	\title{Вероятностная модель одноклассовой классификации}
 	\author{М.\,О.\,Бурмистров, Л.\,Н.\,Сандуляну}
-	\organization{Московский физико-технический институт, ФУПМ, каф. <<Интеллектуальные системы>>}
+	% \organization{Московский физико-технический институт, ФУПМ, каф. <<Интеллектуальные системы>>}
 	% \thanks{Научный руководитель О.\,В.\,Красоткина}
-	\email{burmisha@gmail.com, liubov.sanduleanu@gmail.com}
+	% \email{burmisha@gmail.com, liubov.sanduleanu@gmail.com}
 	\date{декабрь 2012\,г.}
 
 	\abstract{
@@ -148,7 +148,13 @@
 	\end{figure}
 
 	Будем придерживаться вероятностной модели распределения объектов генеральной совокупности.
-	Параметрическое семейство условных плотностей распределения в признаковом пространстве имеет вид 
+	При этом мы также сперва попытаемся описывать объекты класса гипершаром, т.\,е. будем изучать решающее правило
+	\begin{equation}
+		\label{rule:basic}
+		f(\mb x) = \sbr{\norm{\mb x - \mb a} \le R}.
+	\end{equation}
+
+	Пусть параметрическое семейство условных плотностей распределения в признаковом пространстве имеет вид 
 	\begin{equation}
 		\label{PhiXARC}
 		\varphi \cbr{ {\mb x | \mb a,R;c} } \propto
@@ -281,7 +287,7 @@
 	Полученное выражение является квадратичной формой. 
 	Тогда его максимум находится по известным алгоритмам решения задач квадратичного программирования. 
 	По оптимальным значениям $\mb{\alpha}$ мы сможем найти оптимальное значение центра гиперсферы $\mb a$ и отступов $\mb{\xi}$ используя соотношения (\ref{minLag}). 
-	Те векторы $\mb x_i$, для которых $\alpha_i=0$ и $\gamma_i=C$, лежат внутри гиперсферы, те , для которых $0<\alpha_i<C$ и $0<\gamma_i<C$~--- на её границе, а те, для которых $\alpha_i=C$ и $\gamma_i=0$, лежат вне гиперсферы и имеют ненулевой отступ $\mb\xi$. 
+	Те векторы $\mb x_i$, для которых $\alpha_i=0$ и $\gamma_i=C$, лежат внутри гиперсферы, те, для которых $0<\alpha_i<C$ и $0<\gamma_i<C$~--- на её границе, а те, для которых $\alpha_i=C$ и $\gamma_i=0$, лежат вне гиперсферы и имеют ненулевой отступ $\mb\xi$. 
 	Радиус $R$ определяется как расстояние от центра гиперсферы $\mb a$ до опорных векторов лежащих на границе гиперсферы.
 
 	Если же $R = 0$, то задача (\ref{min:main}) имеет вид 
@@ -303,9 +309,20 @@
 	$$K_p(\mb x_i, \mb x_j) = \cbr{1 + \mb x_i \cdot \mb x_j}^p$$
 	и радиальная базисная функция Гаусса
 	$$K(\mb x_i, \mb x_j) = \exp\cbr{-\frac{\norm{\mb x_i - \mb x_j}^2}{2s^2}}.$$
+	
 	Таким образом, чтобы получить улучшенную модель описания данных, необходимо заменить в функции Лагранжа операцию вычисления
 	скалярного произведения двух векторов вычислением значения потенциальной функции двух аргументов.
+	При таком обобщении решающее решающее правило (\ref{rule:basic}) принимает вид 
+	\begin{align}
+		\label{rule:kernel}
+		f(\mb x) 
+			&= 	\sbr{\norm{\mb x-\mb a} \le R} 
+			= 	\sbr{\mb x\cdot\mb x - 2\mb x\cdot\mb a + \mb a\cdot\mb a \le R^2} = \notag \\
+			&= 	\sbr{\mb x\cdot\mb x - 2\mb x\cdot\cbr{\suml_{i} \alpha_i \mb x_i} + \cbr{\suml_{i} \alpha_i \mb x_i}\cdot\cbr{\suml_{i} \alpha_i \mb x_i} \le R^2} \to \notag \\
+			&\to \sbr{K(\mb x,\mb x) - 2\suml_{i} \alpha_i K(\mb x, \mb x_i) + \suml_{i,j} \alpha_i\alpha_jK(\mb x_i,\mb x_j) \le R^2}.
+	\end{align}
 
+	Здесь оптимальное значение $R$ определяется как значение выражения $$K(\mb x,\mb x) - 2\suml_{i} \alpha_i K(\mb x, \mb x_i) + \suml_{i,j} \alpha_i\alpha_jK(\mb x_i,\mb x_j)$$ для граничных объектов ($0<\alpha_i<C$).
 
 \section{Численный эксперимент} 		 	
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -371,7 +388,7 @@
 	  	\begin{minipage}[h]{0.5\linewidth}
 			\centering
 			\begin{tikzpicture}%[x=3cm,y=3cm]
-				\begin{axis}[xlabel=$C$, ylabel=$F_1$, title={Модельные данные},
+				\begin{axis}[xlabel=$C$, ylabel=$F_1$, title={Реальные данные},
 							 scaled ticks=false, enlargelimits=false,
 							 xticklabel style={/pgf/number format/fixed, /pgf/number format/precision=3},
 							 yticklabel style={/pgf/number format/fixed, /pgf/number format/precision=3}
