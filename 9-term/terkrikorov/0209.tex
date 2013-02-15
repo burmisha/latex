@@ -1,0 +1,106 @@
+\simpletitle{9 февраля}
+Понятия асимптотического ряда
+\al{
+	&x: \sbr{-\alpha , \alpha} \to B, x(\eps) \\
+	&x_0 + x_1\eps + x_2\eps^2 + \ldots x_n\eps^n + \ldots, x_k \in B, k=1,2,\ldots 
+}
+Ряд асимптотический по малому параметру $\eps$, если 
+\al{
+	\foral{n}\exists{C(n), \eps(n)>0} \modul{\eps}<\eps(n) < \alpha \Rightarrow \\ \Rightarrow \norm{x_\eps - \sum_{k=1}^nx_k\eps^k} < C(n)\eps^{n+1}.
+}
+
+$n$ можно брать каким угодно хоть $1$ или $2$.
+Это отличается от определения сходящегося ряда.
+
+Примеры плохих рядов Тейлора:
+\al{
+	&e^{-\frac1{x^2}} \text{ --- сходится к функции лишь в нуле} \\
+}
+
+\al{
+	x(\eps) &= \integr0{+\infty}{\frac{e^{-\frac t\eps}}{1+t}dt} \\
+	&\text{ по частям}\\
+	x(\eps) &= -\eps\integr0{+\infty}{d\cbr{e^{-\frac t\eps}}} = \ldots 
+		= \eps - \eps^2\cdot 1! +\eps^3\cdot 3! +\ldots (-1)^{n-1}\eps^n n! + 
+		(-1)^{n-1}n!\eps^n\integr0{+\infty}{\frac{e^{-\frac t\eps}}{(1+t)^n}dt} \\
+	r_n = (-1)^{n-1}n!\eps^n\integr0{+\infty}{\frac{e^{-\frac t\eps}}{(1+t)^n}dt} \\
+	\modul{r_n} \skipped{3}
+}
+Ряд не сходится абсолютно (по признаку Даламбера, например).
+
+\al{
+	%x(\eps) &= \isum{k=0}\frac{\eps^k}{k!}x_k(0) \\
+	%\modul{x(\eps) - \sum_{k=0}^n\frac{\eps^k}{k !}x_k(0) } &= \modul{\frac{\eps^{n+1}{n!}\integr01{}}}\skipped{2}
+}
+
+\al{
+	A(x,\eps) &= 0, x(\eps), 0 < \modul{\eps}<\eps_0 \\
+	A(x_0,0) &= 0.
+}
+Даже в физике не так: обтекание маловязкой жидкостью совсем не такое, как идеальной, даже в пределе. Различные граничные условие: в вязкой обязательно нулевая компонента касательная.
+Если непрерывно, то регулярное вырождение. Если нет --- сингулярное.
+
+\al{
+	Ax - \phi(x,\eps) = 0;
+}
+
+Пусть \begin{enumerate}
+	\item $B_1, B_2$ --- банаховы пространства. $U_R(x_0)\subset B_1, S = U_R(x_0)\times (-\alpha, \alpha).$
+	\item $A: D(A)\to B_2, D(A)\subset B_1, \ol{D(A)} = B_1.$ ($A$ --- замкнутый опреатор, что следует из нащих условий (по словам Тера))
+	\item $Ax_0 - \phi_x(x_0, 0) = 0$
+	\item функция $\phi(x,\eps)$ имеет в шаре $S$ частные производные, удовлетворяющие условию Липшица.
+	\item $A-\phi_x(x_0,0)$ имеет ограниченный обратный. $\norm{\cbr{A-\phi_x(x_0,0)}^{-1}} = \varkappa.$
+\end{enumerate}
+Тогда $\exists{\eps_0>0}\text{ при } |\eps| < \eps_0$ задача имеет решение и $\lim_{\eps\to0} = x_0.$
+Лемма $\exists\eps_1\in(0,\alpha)$ при $0<\eps<\eps_1$ оп $T(\eps) = A-f'(x_0,\eps)$ имеет ограниченный обратный и $T^{-1}(\eps) \le 2\varkappa.$
+\proof{
+	\al{
+		T(\eps) &= A- \phi_x(x_0,\eps) = A - \phi_x(x_0,0) - \cbr{\phi_x(x_0,\eps) - \phi(x_0,0)} \\
+		S_\eps&=\phi_x(x_0,\eps) - \phi_x(x_0, 0) \\
+		T(\eps) &= T(0) - S(\eps) = T(0)(I - T(0)^{-1}S(\eps)) \\
+		% S(\eps) &\le C\eps < \frac12, 
+		\norm{T(0)^{-1}S(\eps)} &\le \varkappa \cdot C\eps \le \frac12 \\
+		\norm{(I - T(0)^{-1}S(\eps))^{-1}} \le \frac1{1-\frac12} = 2. \\
+		T(\eps)^{-1} &= (I - T(0)^{-1}S(\eps))^{-1} T(0)^{-1} \Rightarrow \norm{T(\eps)^{-1}}\le 2\varkappa
+	}
+}
+
+Воспользуемся теоремой Ньютона-Канторовича
+\al{
+	\norm{(A-f'(x_0))^{-1}} \le  \varkappa \\
+	\norm{Ax - f(x_0)}\le \gamma \\
+	f'_x(x), l \\
+	2l\varkappa^2\gamma < 1 \\
+	\norm{x-x_0}\le 2\varkappa\gamma
+}
+$$A-\phi(x,\eps)$$
+Возьмём там $\frac\varkappa2$.
+\al{
+	A - \phi(x_0,\eps)&\text{ имеет ограниченный обратный } \\
+	\norm{A - \phi(x_0,\eps)} &\le \varkappa \\
+	A - \phi(x_0,\eps) &= A - \phi(x_0,0) -(\phi(x_0,\eps) - \phi(x_0,0)) = \phi(x_0,\eps) - \phi(x_0,0) \\
+	\norm{A - \phi(x_0,\eps)} &\le C\eps = \gamma.
+}
+Доказали, что решение существует и непрерывно.
+
+\al{
+	Ax - \phi(x,\eps) = 0, Ax_0 - \phi(x_0, 0) = 0 \\
+	x = x_0 + \eps x_1 + \eps^2 x_2 + \ldots \eps^n x_n = X_n(\eps) \\
+	A(x_0 + \eps x_1 + \ldots + \eps^nx_n) = \phi(x_0 + \eps x_1 + \ldots + \eps^nx_n)
+}
+Подберем так, что невязка порядка $\eps^{n+1}$.
+\al{
+	Ax_0 &- \phi(x_0,0) = 0 \\
+	Ax_1 &- \phi_x(x_0,0) x_1 = \phi_\eps(x_0,0) \\
+	Ax_2 &- \phi_x(x_0,0) x_2 = F_2(x_0, x_1) \\
+	Ax_n &- \phi_x(x_0,0) x_n = F_n(x_0, x_1, \ldots, x_{n-1}) \\
+}
+$F_i$ --- многочлены.
+Все эти уравнения можно последовательно разрешить (сначала первое, потом второе и т.д.)
+$$\gamma = \norm{AX_n - \phi(X_n, \eps)} \le \eps^{n+1}\cdot C(n).$$
+$$\norm{A - \phi_x(X_N(\eps),\eps)}\le\gamma\text{ --- имеет ограниченный обратный ибо ...}$$
+\al{
+	\norm{X(\eps) - X_n(\eps)} \le \hat C(n)\eps^{n+1} \\
+	A - \phi_x(x_0,0) - (\phi_x(x_n(\eps),\eps)) - \phi_x(x_0,0)) \\
+	\norm{\phi_x(x_n(\eps),\eps)) - \phi_x(x_0,0)} \le C(\norm{x_n(\eps) - x_0} + |\eps|) \le C_1\eps \le \frac12	
+}
