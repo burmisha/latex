@@ -1,0 +1,89 @@
+
+\al{
+	\eps\dd xt = A(t)x+f(t), t\ge 0, \eps \ge 0
+}
+Система уравнений с малым параметром при производной.
+
+Предположения:
+\begin{enumerate}
+	\item $A(t), f(t)$ непрерывны и ограничены на $[0,+\infty).$ $C[0,+\infty), \norm f = \sup_{t\in [0,+\infty)} |f(t)|$.
+	\item матрица $A$ имеет обратную: $A^{-1}=\frac{M_{ij}(t)}{d(t)}, d(t) = \det A(t) \ge C_0 > 0$
+	\item $(A(t),x,x)\le -\delta(x,x)$ 
+	\item $A, f$ имеют производные всех порядков
+\end{enumerate}
+\al{
+	A(t)x_0(t)+f(t) &= 0 \\
+	x_0(t) &= -A^{-1}(t)f(t) \\
+	\tau &= \frac t\eps \text{ --- быстрое время} \\
+	x &= x_0(t)+y(\tau) \\
+	\eps x'_0(t) + \dd y\tau &=	A(t)x_0(t)+A(\eps\tau)y(\tau)+f(t) \text{ сократим, ибо решение}\\
+	\eps x'_0(t) + \dd y\tau &=	A(\eps\tau)y(\tau), y(0)=-x_0(0)\text{ --- компенсация невязки} \\
+	\dd y\tau &= -\eps x'_0(\eps\tau) + A(\eps\tau)y(\tau),\\
+	\dd y\tau &= A(0)y, y(0) = -x_0(0) \text{ --- однородное}}
+	$y = -\eps^{A(0)\tau}x_0(0), |y(t)| \le |x_0(0)|e^{-\delta\tau}$ {--- быстро убывает, ибо показатель велик по модулю, функция погранслоя}
+\al{
+	\norm{x(t,\eps) - x_0(t) - y_0\cbr{\frac t\eps}} &\le \skipped{1} \\
+	y &= y_0(\tau) + z(\tau,\eps) \\
+	\dd {y_0}\tau + \dd x\tau &= -\eps x'_0(\eps\tau)+A(\eps\tau)(y_0(\tau)+z) \\
+	\dd z\tau &= \cbr{A(\eps\tau) - A(0)}y_0(\tau)-\eps x'_0(\eps\tau) + A(\eps\tau)z, z(0)=0
+}
+\al{
+	M(t,s) &= \Phi(t)\Phi^{-1}(s), |M(t,s)|\le e^{-\delta(t-s)}, 0\le s\le t \\
+	|M(t, s,\eps)| &\le e^{-\frac\delta\eps(\tau-s)} \\
+	Z(\tau,\eps) &= \integr 0\tau M(\tau,s,\eps)((A(\eps s)-A(0))y_0(s) - \eps x'_0(s))ds \\
+	|Z(\tau,\eps)| &\le  \integr 0\tau e^{-\frac\delta\eps(\tau-s)} \cbr{(\eps s \cdot C_1)e^{-\frac{\delta s}\eps} + \eps C_2}ds = \\
+	&= e^{-\frac\delta\tau} \integr 0\tau \eps s C_1 ds + \integr 0\tau e^{-\frac\delta\eps(\tau - s)}\eps C_2 ds = e^{-\frac\delta\tau}\eps C_1 \frac{\tau^2}2 + \frac{\eps^2}\delta C_2.
+}
+Почему там $\eps^2$? ошибка?
+\al{
+	x(t) &= x_0(t) + y_0(\frac t\eps) + z(t) \\
+	\eps\dd {x_0}t + \dd {y_0}(t)\tau + \eps\dd z\tau &= Ax_0(t)  +A(t)y_0(\tau) + A(t)z(t) + f(t)\\
+	\eps\dd zt &= A(t)z  -\eps x'_0(t) + (A(t)-A(0))y_0\cbr{\frac t\eps}, z(0)=0 \\
+	\dd zt &= \frac1\eps A(t)z - x'_0(t) + \frac{A(t)-A(0)}\eps y_0\cbr{\frac t\eps} \\
+	&\text{что-то про формулу Коши} \\
+	(A(t)h, h) &\le -\delta(h,h) \\
+	\cbr{\frac1\eps A(t)h,h} &\le -\frac\delta\eps(h,h) \\
+	Z &= \integr 0t H(t,s,e)\cbr{-x'_0(s) + \frac{A(s)-A(0)}\eps y_0\cbr{\frac s\eps}}ds \\
+	|Z|&\le \integr 0t e^{-\frac\delta\eps(t-s)}\cbr{C_1 + C_2s\frac1\eps e^{-\frac\delta\eps s}}ds = C\integr 0t e^{-\frac\delta\eps(t-\eps)}dt \le \frac{C\eps}\delta \text{--- имеем ошибку порядка $\eps$.}
+}
+Мы тут использовали, что $\frac s\eps e^{-\frac\delta\eps s} = u e^{-\delta u} \le C.$
+
+\al{
+	x &= \tilde x_n(t) + y_n(\tau) + z \\
+	\tilde x_n &= \sum_{k=0}^n \eps^kx_k(t), y_k(0) = -x_k(0) \\
+	\tilde y_n &= \sum_{k=0}^n \eps^k y_k(\tau), \tau = \frac t\eps \\
+	\eps \dd zt - Az &= f(t) + \eps\dd{\bar x_n}t - A(t)\bar x_n + \dd{\bar y_n}\tau - A(\eps\tau)\bar y_n \\
+	&\text{хотим маленткую невязку} \\
+	\eps\dd{\tilde x_n}t - A(t)\tilde x_n + f(t) &= \sum_{k=0}^n \eps^{k+1}x_k', \sum_{k=0}^n\eps^k A x_k + f(t) = -\eps^{n+1}x'_n(t)\\
+	x_0(t) &= -A^{-1}(t) f \\
+	x_k(t) &= -A^{-1}(t) x'_{k-1}, k=\ol{1,n}
+}
+
+\al{
+	A(t) &= A_0+A_1t + \ldots + A_nt^n + t^{n+1}\psi_n(t) \\
+	A(\eps\tau) &= A_0+A_1\eps\tau + \ldots + A_n\eps^n\tau^n + \eps^{n+1}\tau^{n+1}\psi_n(\eps\tau) \\
+	\dd {\tilde y_n}\tau - A(\eps\tau)\dd {\tilde y_n}\tau &= \sum_{k=0}^n\eps^k\cbr{\dd{y_k}\tau - A_0y_k - \cbr{A-1y_{k-1}+\ldots + A_ky_0}} +\eps^{n+1}F(y_1,y_2,\ldots, y_n, \psi_n)
+}
+Приравняем все скобки к нулю + начальные условия.
+\al{
+	\dd {y_0}\tau - A_0y_0 &= 0, y_0 = -x_0(0), \norm{y_0(\tau)}\le Ce^{-\delta\tau} \\
+	\dd {y_1}\tau - A_0y_1 &= A_1y_0(\tau), y_1 = e^{A_0\tau}x_1(0) + \integr 0\tau e^{A_0(\tau - s)}A_1 y_0(s)ds\\
+	|y_1| &\le e^{-\delta\tau}C_0 + \integr {}{} e^{-\delta(\tau - s)}C_1 e^{-\delta s} ds = e^{-\delta \tau}(C_0 + C_1\tau) = P(\tau) e^{-\delta \tau} \\
+	|y_k(\tau)| &\le P_k(\tau)e^{-\delta\tau} \\
+	\eps^{n+1}&\integr 0\tau e^{-\delta(\tau - s)}\norm{\psi(y_0, y_1, \ldots, y_{k-1}, \psi)}ds \le \eps^{n+1}Q_k(\tau)e^{-\delta\tau} \\
+	\eps\dd x\tau - A(t)z &= \eps^{n+1}\phi(\tau), \phi(\tau)\le P_k(t)e^{-\delta\tau}, \\
+	\dd z\tau -\frac1\eps A(t)z &= \eps^n \phi(\tau), |\phi(\tau)|\le P(\tau)e^{-\delta\tau} \\
+	z &= \eps^n\integr 0t H(t,s,\eps)\phi\cbr{\frac s\eps} ds \\
+	|z(t)| &\le \eps^n \integr 0t e^{-\frac \delta\eps(t-s)}P\cbr{\frac s\eps}e^{-\frac{\delta s}\eps}ds \le C\eps^{n+1}.
+}
+
+В следующий раз рассмотрим уравнение
+\al{
+	\eps\dd xt &= f(x,t), t\ge 0, \eps>0, x(0)=0 \\
+	&\text{вырожденное уравнение $f(x,t) = 0$ может и не иметь решений}\\
+	&D_a = \fbr{(x,t)\colon |x|\le a, t\ge 0} \\
+	&x_0(t), x_0(t)\le\frac a2 \\
+	&x = x_0(t) + y_0(t), y(0) = -x_0(0) \\
+	&\dd y\tau = f(x_0(\eps\tau) + y(\tau), \eps\tau), y(0) = -x_0(0)\\
+	&\text{и положим в этом решении что-то там} 
+}

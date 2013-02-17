@@ -20,11 +20,11 @@ $n$ можно брать каким угодно хоть $1$ или $2$.
 \al{
 	x(\eps) &= \integr0{+\infty}{\frac{e^{-\frac t\eps}}{1+t}dt} \\
 	&\text{ по частям}\\
-	x(\eps) &= -\eps\integr0{+\infty}{d\cbr{e^{-\frac t\eps}}} = \ldots 
-		= \eps - \eps^2\cdot 1! +\eps^3\cdot 3! +\ldots (-1)^{n-1}\eps^n n! + 
+	x(\eps) &= -\eps\integr0{+\infty}{d\cbr{e^{-\frac t\eps}}} = \ldots = \\
+		&= \eps - \eps^2\cdot 1! +\eps^3\cdot 3! +\ldots (-1)^{n-1}\eps^n n! + 
 		(-1)^{n-1}n!\eps^n\integr0{+\infty}{\frac{e^{-\frac t\eps}}{(1+t)^n}dt} \\
-	r_n = (-1)^{n-1}n!\eps^n\integr0{+\infty}{\frac{e^{-\frac t\eps}}{(1+t)^n}dt} \\
-	\modul{r_n} \skipped{3}
+	r_n &= (-1)^{n-1}n!\eps^n\integr0{+\infty}{\frac{e^{-\frac t\eps}}{(1+t)^n}dt} \\
+	\modul{r_n} &\skipped{3}
 }
 Ряд не сходится абсолютно (по признаку Даламбера, например).
 
