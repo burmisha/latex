@@ -1,0 +1,80 @@
+\al{
+	|x| , in R^n , |A| \\
+	C[0,+\infty), \norm{x}_{C[0,+\infty]}\equiv \norm x \\
+	\norm x = \sup_{t\ge 0} |x(t)| \\
+	C_\delta[0,+\infty)\\
+	|x(t)|\le Ce^{-\delta t}, \delta > 0\\
+	\norm{x}_{C_\delta} = \sup_{t\ge 0} e^{\delta t} |x(t)| \\	
+	|x(t)|\le e^{-\delta t}\norm x\\
+	D_a = \fbr{(x,t) \colon |x|\le a, t\ge 0} \text{ --- полоса}.
+}
+
+\al{
+	\eps\dd xt = f(x,t), t\ge 0, \eps > 0, x(0) = 0.
+}
+
+Предположения:
+\begin{enumerate}
+	\item $f(x,t)$ имеет частный  производные в $D_a$
+	\item $f(x_0(t),t) = 0, x_0, x_0' \in C[0,+\infty), |x_0(t)|\le \frac a3, x_0(0)=\mu$
+	\item $|\det f_x(x,t)| \ge \alpha > 0$
+	\item $(f_x(x,t)h,h)\le -\delta |h|^2$
+\end{enumerate}
+Утверждение (на основе 1--3): 
+	Матрица $f_x^{-1}(x,t)$ непрерывна и ограничена.
+
+\al{
+	x(t,\eps) &= x_0(t) + y(\tau), \tau = \frac t\eps\\
+	\dd y\tau &= f(x_0(\eps\tau) + y(\tau),\eps\tau) - \eps x_0'(\eps\tau), y(0,\eps) = -\mu = -x_0(0).
+	\dd {y_0}\tau &= f(\mu, 0), y_0(0) = \mu	\text{ --- уравнения для погранслойной функции}
+	\dd {y_0}\tau &- f_x(\mu, 0)y_0 = f(\mu + y_0) - f_x(\mu,0)y_0 \\
+	y_0(\tau) 
+			&= -e^{f_x(\mu, 0)\tau}\mu + \integr 0\tau e^{f_x(\mu,0)(\tau -s)\cbr{f(\mu + y_0(s),0) - f(\mu,0) - f_x(\mu,0)y_0(s)}}ds = Ay_0 \\
+	|Ay_0(s)| 
+			&\le e^{-\delta\tau}|\mu| + \integr 0\tau e^{-\delta(\tau-s)}\frac l2 |y_0(s)|^2ds \le \\
+			&\le e^{-\delta\tau}|\mu| + e^{-\delta\tau}\integr 0\tau e^{\delta s}\frac l2 e^{-2\delta s}\norm{y_0(s)}^2ds \le \\
+	e^{\delta\tau}|Ay_0(\tau)| 
+		&\le |\mu| + \frac l{2\delta} r^2 \\
+	\norm{Ay_0}
+		 &\le \mu + \frac l{2\delta}r^2 = r \Rightarrow r = \frac\delta l\cbr{1-\sqrt{1-\frac{2l|\mu|}\delta}} \le 2|\mu|
+}
+Имеем требование: $|\mu| < \max\fbr{\frac\delta{2l}m \frac a6}$
+\al{
+	A'(y_0)h &= \integr 0\tau e^{f_x(\mu, 0)(\tau - s)}\cbr{f_x(\mu + y_0(s),0) - f_x(\mu, 0)}h(s)ds \\
+	|A'(y_0)h| 
+		&\le \integr 0\tau e^{\delta(\tau - s)}l|y_0(s)||h(s)|ds \le \\
+		&\le e^{\-\delta \tau} \norm{y_0}\norm{h} \integr 0\tau e^{\delta s}\cdot e^{-2\delta s} ds \le \\
+		&\le e^{\-\delta \tau} \norm{y_0}\norm{h} \frac l\delta \le e^{-\delta \tau} \skipped{1} \\
+ 		\norm{A'(y_0)}&\le \frac{lr}\delta = 1-\sqrt{1-\frac{2l|mu|}\delta} < 1
+}
+
+Поэтому имеем опреатор сжатия. Поэтому если выполнены условия 1--4, то... т.е. доказали теорему:
+
+Теорема 1. Если $|\mu| < \max\fbr{\frac\delta{2l}, \frac a6},$ то уравнение для погранслоя имеет решение $$|y_0(\tau)|\le 2|\mu|e^{-\delta\tau}.$$
+
+\al{
+	y(\tau,\eps) = y_0(\tau) + z(\tau,\eps), z(0,\eps) = 0\\
+	\ddd z\tau - F(x) = 0, F(z) = f(x_0(\eps\tau)) + y_0(\tau) + z, \eps\tau) - f(\mu + y_0(\tau),0) - \eps x_0'(\eps\tau) \\
+	|z|\frac a3 
+}
+
+Теорема. 
+1. $F'(z)$ удовл. усл. Л. $|z|\le\frac a6$
+2. $\ddd{}\tau - F'(z_0)$ имеет равномерно по $\eps$ огранич. обр.
+
+\proof{
+	\al{
+		\ddd ht &- f'_x(x_0(\eps\tau)+y_0(\tau),\eps\tau)h = g, g\in C[0,+\infty] \\
+		h &= \integr 0\tau H(s,\tau,\eps)g(s)ds \\
+		|h(t)| &\le \integr 0\tau e^{-\delta(\tau -s)}|g(s)|ds \le \norm g \frac 1\delta \\
+		\norm h &= \norm{\cbr{\ddd{}\tau - F'(z_0)}^{-1}} \le\frac{\norm g}\delta\\
+		\gamma 	
+				&= \norm{\cbr{\ddd{}\tau - F'(z_0)}^{-1}(z_0 - F(z_0))} \le \kappa\norm{\eps x_0'(\eps\tau)} \le \\
+				&\le \kappa\eps \sup_{t\ge 0}|x_0'(t)| = \kappa\eps \norm{x_0'} \\
+		2l\kappa\gamma &< 1 = 2l\frac1{\delta^2}\eps\norm{x_0'} < 1 \\
+		\norm{z} \le 2\gamma \le 2\kappa\eps\norm{x_0'}
+		\skipped{2}
+	}
+	Отметим, что оценки равномерны и не зависят от параметра.
+}
+
