@@ -1,0 +1,64 @@
+\simpletitle{9 марта}
+
+\al{
+	\begcas{
+		\ddd{x_1}t 		&= f_1(x_1, x_2, t), t>0, \eps > 0, \\
+		\eps \ddd{x_2}t &= f_2(x_1, x_2, t), x(0) = 0.
+	}
+}
+
+При $\eps = 0$ система вырождается: 
+\al{
+	&\begcas{
+		\ddd{x_1}t &= f_1(x_1,x_2,t) \\
+		f_2(x_1,x_2,t) &= 0.
+	}\\
+	D_a &= \fbr{(x_1,x_2,t) \colon |x|<a, t>0}
+}
+Предположения:
+\begin{enumerate}
+	\item частные производные $f_x, f_y$ удовлетворяют условию Липшица,
+	\item $x_{10}(t), x_{20}(t), |x_0|< \frac a3,$
+	\item $\dd{f_2(x_1, x_2,t)}{x_2}$ отрицательно определена в $D_a$: $\cbr{\dd{f_2(x_1,x_2, t)}x h,h} \le -\delta|h|^2.$
+\end{enumerate}
+
+\def\et{\eps\tau}
+
+\al{
+	x_1(t) &= x_{10}(t) + y_1(\tau), \qquad \tau = \frac t\eps \\
+	x_2(t) &= x_{20}(t) + y_2(\tau)\\
+	\ddd{y_1}\tau &= \eps f_1(x_1(\et) + y_1, x_2(\et)+y_2,\et), \\
+	\ddd{y_2}\tau &= f_2(\ldots), \\
+	y_1(0) &= 0, \quad y_2(0) = -x_2(0) = -\mu.
+}
+\al{
+	\ddd{y_2}\tau &= f_2(0, \mu + y_2(\tau), 0) \\
+	y_2(0) &= -\mu \\
+	x_1(\tau, \eps) &= x_{10}(t).
+}
+
+\al{
+	\ddd{y_1}\tau &= \eps\cbr{
+		f_1(x_{10}(\et) + y_1(\tau), x_{20}(\et)+y_2(\tau), \et) - f_1(x_{10}(\et), x_{20}(\et), \et)
+	}&\qquad &(1) \\
+	\ddd{y_2}\tau &= f_2(x_{10}(\et) + y_1(\tau), x_{20}(\et)+y_2(\tau), \et) - \eps x_{20}'(\et)&\quad &(2)
+}
+
+\al{
+	x_1(\tau, \eps) &= x_{10}(t) + z_1(t,\eps) \\
+	x_2(\tau, \eps) &= x_{20}(t) + y_2\cbr{\frac t\eps}+z_2(t,\eps) 
+}
+
+\al{
+	\ddd{z_1}t &- f_1(x_{10}+z_1, x_{20}+y_2 +z_2,t) - f_1(x_{10}, x_{20}, t) \\
+	\ddd{z_2}t &- \frac1\eps 
+		\cbr{f_2(x_{10}+z_1, x_{20}+y_2 +z_2,t) - f_2(0, \mu + y_2, 0)} + x_{20}'(t)' \\
+}
+
+Теорема Тихонова. Если выполнены 1--3, то $\foral{[0,T]} \exist{ C(t), \eps_0(T)} \text{ при } 0<\eps<\eps_0, |x_{10}|<\mu_0$ сушествует решение и $x_1(t) = x_{10}(t) + \obol{\eps}, x_2(t,\eps) = x_{20}(t) + y\cbr{\frac t\eps} + \obol{\eps}.$
+
+Лемма 1. 
+\al{
+	\modul{f_2(x_{10}(t), x_{20}(t) + y\cbr{\frac t\eps}, t-f_2(0,\mu+y_2\cbr{\frac t\eps}, 0))} = 
+	\modul{\integr 01 \ddd{}u\cbr{f_2(x_{10}(t), x_{20}(t) + y\cbr{\frac t\eps}, t-f_2(0,\mu+y_2\cbr{\frac t\eps}, 0))} du}
+}
