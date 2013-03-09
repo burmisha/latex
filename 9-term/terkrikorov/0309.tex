@@ -59,6 +59,56 @@
 
 Лемма 1. 
 \al{
-	\modul{f_2(x_{10}(t), x_{20}(t) + y\cbr{\frac t\eps}, t-f_2(0,\mu+y_2\cbr{\frac t\eps}, 0))} = 
-	\modul{\integr 01 \ddd{}u\cbr{f_2(x_{10}(t), x_{20}(t) + y\cbr{\frac t\eps}, t-f_2(0,\mu+y_2\cbr{\frac t\eps}, 0))} du}
+	&\modul{f_2(x_{10}(t), x_{20}(t) + y\cbr{\frac t\eps}, t)-f_2(0,\mu+y\cbr{\frac t\eps}, 0)} = \\ 
+	&=\modul{\integr 01 \ddd{}u\cbr{f_2\cbr{x_{10}(t), x_{20}(t) + uy\cbr{\frac t\eps}, t}-f_2\cbr{0,\mu+uy\cbr{\frac t\eps}, 0}} du} = \\
+	&= \modul{\integr 01 \cbr{\dd{f_2}{x_2}\cbr{x_{10}(t), x_{20}(t) + uy\cbr{\frac t\eps}, t} 
+	 	-\dd{f_2}{x_2}\cbr{0,\mu+uy\cbr{\frac t\eps}, 0}} du} \le \\
+	&\le C_1e^{-\frac{\delta t}\eps}\cbr{|x_1(t) - x_1(0)| + |x_2(t) - x_2(0)| + t} \le C_2te^{-\frac\delta\eps t}. 
 }
+
+Лемма 1.
+\al{
+	\modul{f_2(x_{10}(t),x_{20} + y\cbr{\frac t\eps}, t) - f_2(0, \mu +y\cbr{\frac t\eps}, 0)} \le C_2(t)te^{-\frac{\delta t}\eps}
+}
+
+Лемма 2.
+\al{
+	|H_2(s,t,\eps)| \le e^{-\frac \delta\eps(t-s)}, \qquad 0\le s\le t.
+}
+\al{
+	z-F(z) &= 0, \qquad z=(z_1,z_2) \\
+	z_1-F(z_1) &= 0 \\
+	z_2-F(z_2) &= 0
+}
+\al{
+	F_1(z) &= \integr 0t \cbr{
+		f_1(x_{10}(s) + z_1(s), x_{20}(s)+y(s) + z_2(s),s) - f_1(x_{10}(s), x_{20}(s), s)
+	} ds\\
+	F_2(z) &= \integr 0t H(s,t)x'_{20}(s)ds + 
+		\frac1\eps\integr 0t H(s,t) \cbr{
+			f_2(x_{20}(s) + z_1(s), x_{20}(s)+y(s)+z_2(s), s) 
+			- f_2(0, \mu+y(s), 0) - \right. \\
+			&\left.- \dd{f_2}{x_2}\cbr{
+				x_{10}(s),x_{20}(s)+y(s)+z_2(s),s 
+			}
+		}ds
+}
+
+Хотим применить теорему Канторовича. Необходимо проверить
+\begin{itemize}
+	\item $F'(z)$ удовлетворяет условию Липшица по $z$. 
+	Да: смотрим на свойства подынтегральных функций: 
+	$|F_1'(z) - F_1'(\tilde z)| \le C(T)|z - \tilde z|$, 
+	$|F_2'(z) - F_2'(\tilde z)| \le C(T)\norm{z - \tilde z}\integr 0t \frac1\eps H(s,t,\eps)ds,$ $\integr 0t \frac1\eps e^{-\frac\delta\eps(t-s)}ds = \skipped{2--3}$
+	\item $I - F'(0)$ имеет ограниченный обратный. Т.е. разрешима система.
+	\al{
+		&\begcas{
+			h_1 -\dd{F_1}{x_1}(0)h_1 - \dd{F_1}{x_2}h_2 &= g_1, \quad g_1,g_2\in C[0,T] \\
+			h_2 -\dd{F_2}{x_1}(0)h_1 - \dd{F_2}{x_2}h_2 &= g_2,
+		}\\
+		% h_1 &=
+		% 	\integr 0t \dd{f_1}{x_1}\cbr{x_{10}(s), x_{20}(s) + y\cbr{\frac s\eps}, s}h_1(s)ds + 
+		% 	\integr 0t \dd{f_1}{x_2}(\ldots)h_2(s)ds + g_1(t) \\
+		F_2'(z) = \frac1\eps \integr 01 H(s,t,\eps)\cbr{\dd{f_2}{x_2}(x_{10}(s), x_{20}(s) + y\cbr{\frac s\eps}, s)} h_1(s)ds
+	}
+\end{itemize}
