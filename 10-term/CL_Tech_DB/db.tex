@@ -1,0 +1,89 @@
+%\documentclass[12pt]{article}
+%\usepackage{jmlda}
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{epstopdf} % http://tex.stackexchange.com/questions/29664/latex-error-unknown-graphics-extension-eps
+\usepackage[colorlinks,unicode,pdfpagelabels=true]{hyperref}
+\usepackage[english,russian]{babel}
+\usepackage{amssymb,amsmath,enumerate}
+\usepackage{enumitem}  \setlist{nolistsep}
+\usepackage{tikz}
+\usepackage{pgfplots} \pgfplotsset{compat=1.6}
+\usepackage{textcase} % for UTF-8 in header
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%% 	\input macro.tex
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\newcommand\ol[1]{\overline{#1}}
+
+	\def\cond{\,|\,}
+	\newcommand\normal[2]{\mathcal{N}\!\cbr{#1,#2}}
+
+	\newcommand\al[1]{\begin{align*} #1 \end{align*}}
+	\newcommand\begcas[1]{\begin{cases}#1\end{cases}}
+
+	\def\le{\leqslant}
+	\def\ge{\geqslant}
+	\def\Ell{\mathcal{L}}
+	\def\Rn{\ensuremath{\mathbb{R}^n}}
+
+	\newcommand\mb[1]{\ensuremath{\boldsymbol{\mathbf{#1}}}}
+	% \newcommand\argmax[1]{\arg\underset{#1}\max\,} % \operatornamewithlimits
+	\def\argmax{\arg\,\max} % \operatornamewithlimits
+	\newcommand{\prodl}{\prod\limits}
+	\newcommand{\suml}{\sum\limits}
+
+	\newcommand\cbr[1]{\left(#1\right)} %circled brackets
+	\newcommand\fbr[1]{\left\{#1\right\}} %figure brackets
+	\newcommand\sbr[1]{\left[#1\right]} %square brackets
+	\newcommand\modul[1]{\left|#1\right|}
+	\newcommand\norm[1]{\ensuremath{\left\|{#1}\right\|}}
+
+	\newcommand{\T}{^{\text{\tiny\sffamily\upshape\mdseries T}}}
+	\newcommand\dd[2]{\frac{\partial#1}{\partial#2}}
+
+\begin{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%% 			\input{abstract.tex}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+	\title{Вероятностная модель одноклассовой классификации}
+	\author{М.\,О.\,Бурмистров, Л.\,Н.\,Сандуляну}
+	% \organization{Московский физико-технический институт, ФУПМ, каф. <<Интеллектуальные системы>>}
+	% \thanks{Научный руководитель О.\,В.\,Красоткина}
+	% \email{burmisha@gmail.com, liubov.sanduleanu@gmail.com}
+	\date{декабрь 2012\,г.}
+
+	\abstract{
+	Решается задача одноклассовой классификации электронных писем на предмет наличия в них спама. 
+	В работе вводится квазивероятностная модель для классической эмпирической постановки задачи одноклассовой классификации и 
+	производится сведение классического подхода к новой модели.
+	%Произведена модификация, позволяющая накладывать различные требования отбора признаков. 
+	Построенные методы классификации проверяются вычислительными экспериментами на модельных и реальных данных.
+	}
+
+\maketitle
+
+Пусть имеем 2 биржи: $A$ и $B$. Объемы, доступные для продажи: $Q_A, Q_B.$ Цены: 
+
+$$s = \min\cbr{\frac{Y_A\cdot C}{p_A}, \frac{Y_B\cdot Q}{1-\delta}, R_A, \frac{R_B}{1-\delta}}$$
+\vspace{-5pt}
+$$
+c = \frac{\cfrac{p_A}{p_B}(1-\delta)^2 - (1-\delta)^4}{1-(1-\delta)^4}
+$$
+\vspace{-15pt}
+\begin{figure} [!ht] %lrp
+		\centering
+		\begin{tikzpicture}[x=1.2cm,y=1.2cm,thick,domain=-1.2:1.2]
+			\draw[-latex] (-1.2,0) -- (1.5,0) node[below] {$\frac{p_A}{p_B}$};
+			\draw[-latex] (0,-0.3) -- (0,1.3) node[right] {$|c|^5$};
+			\draw[domain=-1.005:1.005] plot (\x,{(1+\x)*(1+\x)*(1+\x)*(1+\x)*(1+\x)/32});
+			\node[left] at (0,1) {$1$};
+			\node[below] at (1,0) {$1$};
+			\node[below left] at (0,0) {$0$};
+		\end{tikzpicture}
+	\end{figure}
+
+\end{document}
