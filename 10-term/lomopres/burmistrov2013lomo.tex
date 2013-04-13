@@ -1,0 +1,223 @@
+\documentclass[unicode,lefteqn,c,hyperref={pdfpagelabels=false}]{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage{amssymb}
+\usepackage{amsmath,mathrsfs}
+\usepackage[russian]{babel}
+\usepackage{ulem}\normalem
+\usepackage{color}
+% \usepackage[noend]{algorithmic}
+\usepackage{tikz}
+\usepackage{pgfplots} \pgfplotsset{compat=1.6}
+\usepackage{epstopdf}
+
+\usetheme{Warsaw}
+\usefonttheme[onlylarge]{structurebold}
+\setbeamerfont*{frametitle}{size=\normalsize,series=\bfseries}
+\setbeamertemplate{navigation symbols}{}
+\setbeameroption{show notes}
+\definecolor{beamer@blendedblue}{RGB}{15,80,120}
+\let\Tiny=\tiny
+\def\shortspace{\hspace{1.5pt}}
+\input macro.tex
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\title[\hbox to 60mm{Кернелы в одноклассовом классификаторе \hfill\insertframenumber\,/\,\inserttotalframenumber}]{Использование потенциальных функций для построения одноклассового классификатора в задаче фильтрации нежелательной почты}
+\author[М.\shortspaceО.\shortspaceБурмистров]{М.\shortspaceО.\shortspaceБурмистров}
+\institute{Научный руководитель: к.ф.-м.н.
+		\vfill О.\,В.~Красоткина \vfill ~ 
+		% \vfill Московский физико-технический институт
+		% \vfill Факультет управления и прикладной математики
+		% \vfill Кафедра интеллектуальных систем
+		}
+\date{9 апреля 2013\,г.}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+\begin{frame}
+    \titlepage
+\end{frame}
+
+\begin{frame}{Постановка задачи}
+Признаковое описание объектов:
+\begin{itemize}
+	\item $\Omega$~--- генеральная совокупность объектов;
+	\item $\omega \in \Omega$~--- множество объектов реального мира;
+	\item $\mb x(\omega)=\cbr{x^1(\omega),\ldots, x^n(\omega)} \in {\mathbb R^n}$~--- описание объекта в линейном пространстве признаков;
+	\item меткой класса ни один из объектов обучающей совокупности объект принципально не обладает.
+\end{itemize}
+Задача: построить алгоритм обучения с учителем, позволяющий по признаковому описанию нового объекта определить: лежит ли он в $\Omega$ или же не лежит. 
+\end{frame}
+
+
+% \begin{frame}{Байесовская постановка задачи}
+% 	Пороговый классификатор: $\sbr{z(\mb x,\mb a,R) \le 0},$ \\где $z(\mb x,\mb a,R)=\norm{\mb x-\mb a}-R.$
+% 	Здесь $\mb a, R$~--- параметры.
+
+% \end{frame}
+
+
+\begin{frame}{Модель данных и байесовская постановка задачи}
+	Гипотеза о распределении признаковых описаний $\mb x\in \mathbb R^n$ объектов $\omega\in\Omega$:
+	\begin{equation}
+		\label{PhiXARC}
+		\varphi \cbr{ {\mb x | \mb a,R;c} } \propto
+			\begcas{
+				&1, 		\qquad\qquad\qquad  	\! 	\norm{\mb x-\mb a}<R, \\
+				&e^{-c \cbr{\norm{\mb x-\mb a}^2-R^2}}, 	\:	\norm{\mb x-\mb a} \ge R,
+			}
+	\end{equation}
+
+	\begin{figure} [!ht] %lrp
+		\centering
+		\begin{tikzpicture}[x=1.2cm,y=1.2cm,thick,domain=0:4]
+			\draw[-latex] (-0.5,0) -- (5,0) node[below] {$\|\mb x-\mb a\|$};
+			\draw[-latex] (0,-0.3) -- (0,1.8) node[left] {$\varphi(\mb x | \mb a, R)$};
+
+			\draw[domain=0:1.2] plot (\x,1);
+			\draw[domain=1.2:4.5] plot (\x,{exp(-0.2*(\x*\x-1.44))});
+			\draw[dashed] (1.2,0) -- ++(0,1) ++(0,-1) node[below] {$R$};
+
+			\node[left] at (0,1) {$1$};
+			\node[below left] at (0,0) {$0$};
+		\end{tikzpicture}
+		\vspace{-10pt}
+		\caption{Значение плотности распределения вдоль радиуса}
+		\label{tikz:expon}	
+	\end{figure}
+\end{frame}
+
+\begin{frame}{Принцип максимума апостериорной вероятности}
+	Определение параметров сферы из принципа максимума апостериорной вероятности:
+	\begin{equation}
+		\label{argmax:full}
+		\cbr{\hat{\mb a},\hat R|\mb X} = \arg\max_{\mb a,R} p(\mb a,R|\mb X)
+	\end{equation}
+	
+	Предположения об априорном распределении параметров:
+	\begin{itemize}
+	 	\item $\mb a$ и $R$~--- независимые случайные величины,
+	 	\item $\modul{R}$ --- НРСВ $\mathcal{N}\!\cbr{0,\sigma^2}$,
+	 	\item $\mb a$ равномерно распределено по всему пространству $\mathbb R^n$ (такое распределение будет несобственным).
+	 \end{itemize} 
+	 Совместное распределение параметров также несобственно: 
+	 $$\Psi(\mb a,R)\propto e^{-\frac1{2\sigma^2}R^2}.$$
+	 $$p(\mb a,R|\mb X) 
+		\propto \Psi(\mb a,R) \Phi(\mb X|\mb a,R) 
+		=  \Psi(\mb a,R) \prod_{j=1}^N \varphi(\mb x_j|\mb a,R),$$
+\end{frame}
+
+\begin{frame}{Оптимизационная задача}
+	\begin{equation}
+	\label{min:main}
+		\begcas{
+			&R^2 + 2\sigma^2 c\suml_i\xi_i \to \min\limits_{\mb a, R,\mb\xi}, \\
+			&\norm{\mb x_i-\mb a}^2\le R^2 + \xi_i,\quad\xi_i\ge0,\quad i = 1,\ldots,N.
+		} 
+	\end{equation}
+	Преобразованная функция Лагранжа:
+	\begin{equation}
+		\newcommand\ai[0]{\alpha_i\,}
+		\newcommand\aj[0]{\alpha_j\,}
+		\newcommand\mbx[1]{\mb x_#1}
+		\newcommand\cd[0]{\!\cdot\!}
+		\Ell(\mb a, R,\mb\xi,\mb\alpha,\mb\gamma) = 	\suml_i\ai\mbx i\cd\mbx i-\suml_{i,j}\ai\aj\mbx j\cd\mbx i \to \max_{\mb\alpha}
+	\end{equation}
+	при ограничениях:
+	$$\suml_i \alpha_i = 1, \qquad 0\le\alpha_i\le C, \;\; i = 1,\ldots,N,$$
+	где $\alpha_i\ge 0$ и $\gamma_i\ge 0$ --- множители Лагранжа, $C = 2\sigma^2 c$.
+\end{frame}
+
+\begin{frame}{Переход к потенциальным функциям}
+	Замена скалярных произведений в задаче оптимизации на потенциальные функции:
+	\begin{itemize}
+		\item полиномиальная
+	$$K_p(\mb x_i, \mb x_j) = \cbr{1 + \mb x_i \cdot \mb x_j}^p,$$
+		\item радиальная базисная функция (РБФ) Гаусса
+	$$K(\mb x_i, \mb x_j) = \exp\cbr{-\frac{\norm{\mb x_i - \mb x_j}^2}{2s^2}}.$$
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Примеры разделяющих поверхностей: РБФ Гаусса}
+	\begin{columns}
+	 	\column{0.5\textwidth}
+			%\vspace{-10pt}
+			\begin{center}
+			\includegraphics[height=150px]{pic/example_rbf_10.eps}\\
+			% \vspace{-10pt}
+			РБФ Гаусса: $C = 0{,}015, s=10.$
+			\end{center}	
+		\column{0.5\textwidth}
+			% \vspace{-10pt}
+			\begin{center}
+			\includegraphics[height=150px]{pic/example_rbf_1.eps}\\
+			РБФ Гаусса: $C = 0{,}015, s=1.$
+			\end{center}	
+			%\vspace{-10pt}
+	\end{columns}
+\end{frame}
+
+\begin{frame}{Примеры разделяющих поверхностей: полиномальное ядро}
+	\begin{columns}
+	 	\column{0.5\textwidth}
+			%\vspace{-10pt}
+			\begin{center}
+			\includegraphics[height=140px]{pic/example_poly_1.eps}\\
+			% \vspace{-10pt}
+			$K_1(\mb x_i, \mb x_j) = \cbr{1 + \mb x_i \cdot \mb x_j}^1,$
+			\end{center}	
+		\column{0.5\textwidth}
+			% \vspace{-10pt}
+			\begin{center}
+			\includegraphics[height=150px]{pic/example_poly_3.eps}\\
+			$K_3(\mb x_i, \mb x_j) = \cbr{1 + \mb x_i \cdot \mb x_j}^3,$
+			\end{center}	
+			%\vspace{-10pt}
+	\end{columns}
+\end{frame}
+
+
+\begin{frame}{Функционал оценки качества при проведении экспериментов}
+	Точность (precision): $P = \cfrac{tp}{tp+fp}$.
+
+	Полнота (recall): $R = \cfrac{tp}{tp+fn}$. 
+
+	Агрегированный показатель: $F_1 = \cfrac{2PR}{P+R}$~--- $F_1$-мера.
+\end{frame}
+
+\begin{frame}{Качество классификации спама: базовый алгоритм}
+	\begin{figure}[H]
+	\vspace{-10pt}
+		\centering % Model_N400_0.0150-0.0005-0.0450_T20_Q3
+		\begin{tikzpicture}%[x=3cm,y=3cm]
+			\begin{axis}[xlabel=$C$, ylabel=$F_1$, 
+							 scaled ticks=false, enlargelimits=false,
+							 xticklabel style={/pgf/number format/fixed, /pgf/number format/precision=3},
+							 yticklabel style={/pgf/number format/fixed, /pgf/number format/precision=3}
+			]
+			\addplot[red, mark=none, thick] coordinates {
+					(0.0300, 0.7311)(0.0350, 0.7365)(0.0400, 0.7388)(0.0450, 0.7409)(0.0500, 0.7415)(0.0550, 0.7426)(0.0600, 0.7418)(0.0650, 0.7415)(0.0700, 0.7404)(0.0750, 0.7394)(0.0800, 0.7376)(0.0850, 0.7370)(0.0900, 0.7368)(0.0950, 0.7363)(0.1000, 0.7357)(0.1050, 0.7349)(0.1100, 0.7344)(0.1150, 0.7338)(0.1200, 0.7337)(0.1250, 0.7335)(0.1300, 0.7338)(0.1350, 0.7335)(0.1400, 0.7333)(0.1450, 0.7330)(0.1500, 0.7330)
+			};
+			%\legend{$\ln Iter$, $\ln n!$}
+			\end{axis}
+		\end{tikzpicture}
+		\vspace{-10pt}
+	  	Зависимость $F_1$-метрики от параметра регуляризации $C.$
+	\end{figure}
+\end{frame}
+
+\begin{frame}{Качество классификации спама при использовании РБФ Гаусса}
+	\begin{center}
+		\includegraphics[height=150px]{pic/real_rbf_07.eps}\\
+		% \vspace{-10pt}
+		Радиальная базисная функция Гаусса: $s=0{,}7.$
+	\end{center}
+\end{frame}
+
+\begin{frame}{Заключение, результаты и выводы}
+	\begin{itemize}
+			\item Произведено обобщение одноклассового классификатора, позволяющего описывать сложные пространственные структуры.
+			\item Проведен высичлительный эксперимент на реальных данных.
+			\item Показана эффективность использования потенциальных функций.
+	\end{itemize}
+\end{frame}
+
+\end{document}
