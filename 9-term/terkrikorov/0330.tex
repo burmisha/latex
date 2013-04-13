@@ -1,0 +1,106 @@
+Уравнение Ван-дер-Поля.
+\al{
+	\ddot x + x -\eps(1-x^2)\dot x = 0
+}
+
+\al{
+	&\ddot x + x - \eps\dot x = 0\\
+	&\text{характеристическое уравнение:} \lambda^2 - \eps\lambda + 1 \\
+	&\lambda = \eps \pm i\sqrt{1-\eps^2} \text{ --- решение неверно :-)}
+}
+
+Рассуждения о направлении и точке бифуркации.
+
+\al{
+	&\begcas{
+		\dot x &= y\\
+	 	\dot y &= -x +\eps y -\eps x^2y
+	} \\
+	&\text{в полярных координатах:} \\
+	&x\dot x + y\dot y = \eps y^2 - \eps x^2y^2 \\
+	&\frac12 \ddd{r^2}t = \eps r^2 \sin^2\theta - \eps^2r^4\sin^2\theta\cos^2\theta \\
+	&\ddd rt = \eps r \sin^2\theta - \eps r^3\sin^2\theta\cos^2\theta \\
+	&x\dot y - y\dot x = -(x^2+y^2)+\eps xy - \eps x^3y \\
+	&\frac{x\dot y - y\dot x}{x^2 + y^2} = \ddd\theta t \\
+	&\ddd\theta t = -1 + \eps \cos\theta\sin\theta - \eps r^2\cos^3\theta \sin\theta \\
+}
+
+\al{
+	&\begcas{
+		\ddd rt = \eps r \sin^2\theta - \eps r^3\sin^2\theta\cos^2\theta \\
+		\ddd\theta t = -1 + \eps \cos\theta\sin\theta - \eps r^2\cos^3\theta \sin\theta 
+	}  \\
+	&\theta = \psi - t \\
+	&\begcas{
+		\ddd rt &= \eps r \sin^2(t-\psi) - \eps r^3\sin^2(t-\psi)\cos^2(t-\psi) \\
+		\ddd\psi t &= - \eps \cos(t-\psi)\sin(t-\psi) + \eps r^2\cos^3(t-\psi)\sin(t-\psi) 
+	}
+}
+
+Интегрируем (с $0$ ибо это сдвиг и всё равно), усредняя:
+\al{
+	&\begcas{
+	\dot{\bar r} =\frac12\eps r  - \frac18\eps\bar r^3 \\
+	\dot{\bar\psi} = 0
+	} \\
+	&\text{Стационарные решения: $r=$ 0 и 2} \\
+	&-\frac12 \ddd{}t\cbr{\frac1{r^2}}
+		= \frac12\eps\frac1{\bar r^2} -\frac\eps8, \frac1{\bar r^2} = u \\
+	&\ddd ut +\eps u -\frac\eps4 = 0, u = \frac12 + Ce^{\eps t} \\
+	&\bar r(0)={r}_0 \\
+	&\ldots\\
+	&\bar r(t) = \frac{2r_0}{\sqrt{r_0 + (4-r_0^2)e^{-\eps t}}}
+}
+Рисуем цикл. Равновесие $r = 2$ -- неустойчивое равновесие --- сваливаемся в $r = 0$ по спирали.
+Это бифуркации Андронова-Хопфа.
+
+\al{
+	&\dd yt = \frac{\partial^2 y}{\partial x^2} + \lambda y - \frac43 y^3, y(t,0) = 0, y(t,\pi) = 0 \\
+	&y = 0 \text{--- всегда решение.} \\
+	&\text{Устверждаем, что при $0 < \lambda < 1$ решение $y=0$} \\ 
+	&\text{асимптитически устойчиво в смысле среднего квадратичного:} \\
+	&\integr 0\pi y^2(x,t)dx \to 0, t\to+\infty. 
+}
+
+Утверждение: $f'(x)\text{ непрерына на } [0, \pi] \Rightarrow \integr 0\pi f'(x)dx\ge\integr 0\pi f(x)dx$
+\proof{
+	Поскольку система синусов полна в этом пространстве, то
+	\al{
+		&\frac1\pi\integr0\pi f^2(x)dx = \isum k1 b_k^2 \\
+		&\frac1\pi\integr0\pi f'^2(x)dx = \isum k1 k^2b_k^2
+	}
+}
+
+\renewcommand\iint[2]{\integr 0\pi#1d#2}
+\al{
+	\iint{y(x,t)\dd{y(x,t)}t}x = \iint{y(x,t)\frac{\partial^2 y(x,t)}{\partial x}}x + \lambda \iint{y^2(x,t)}x - \frac43\iint{y^4(x,t)}x. \\
+	\frac12\ddd zt = -\iint{\cbr{\dd yx}^2}x + \lambda z -\frac43\iint{\ldots}\\
+	\skipped{1--2}
+}
+
+\al{
+	&e^{(1-\lambda)t}z(t)\le z(0), z(t)\le z(0)e^{-(1-\lambda)t}\\
+	&\ddd zt\le -z(t) + \lambda z(t) \\
+	&\ddd zt + (1-\lambda)z\le 0 \\
+	\skipped{6}
+}
+\newcommand\dpart[2]{\frac{\partial^2 #1}{\partial #2^2}}
+Лемма 1. 
+\al{
+	Ly = \dpart yx + y, \dpart yx + y = f(x) , \iint{f(x)\sin x}x = 0 \\
+	y(0) = y(\pi) = 0\\
+}
+\proof{
+	\al{
+		\iint{\dpart yx\sin x}x + \iint{y\sin x}x = \iint{f(x)\sin x}x = 0 \\
+		\iint{\dpart yx \sin x}x = -\dd yx \sin x |_0^\pi + \iint{\dd yx\cos x}x = -y\cos x + \iint{y\sin x}x\\
+		f\ort x\\
+		y(x) = \integr 0x f(u)\sin(xu)du + C\sin x \\
+		y(\pi) = \iint f(u)\sin(\pi - u)du  = \iint f(u)\sin(u)du  = 0.
+	}
+}
+
+\al{
+	Ly = \dpart yx + y. \qquad\overset{0}{C}[0,\pi] \qquad \ort \sin x\\
+	\skipped 6
+}
