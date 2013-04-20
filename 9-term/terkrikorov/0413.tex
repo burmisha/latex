@@ -1,0 +1,92 @@
+\al{
+	y(0,t) &= 0, y(\pi,t) = 0\\
+	\dd yt &= \ddn2yx + \lambda y-\frac43y^3 = 0 \\
+	Pf &= \frac2\pi\integr0\pi f(x)\sin x dx, Qf = f -\sin x Pf\\
+	\lambda &= 1, \sin x, \tau - 2t\eps,\\
+	y &= \sqrt\eps(u\sin x +v), Lv = \ddn2vx + v \\
+	u_0 &= a(\tau) = \frac1{\sqrt{1+e^{-\tau-\tau_0}}}, v_0 = a^3(\tau)\frac1{24}\sin 3x\\
+	&\begcas{
+		2\ddd u\tau &- u + u^3 + \eps P\phi(u,v) = 0 \\
+		2\eps\ddd v\tau &- Lv - \frac13u^3\sin 3x+\eps Q\phi(u,v)\\ 
+	}\\
+	\phi(u,v) &= 4u^2v\sin^2x+4\eps uv^2\sin x + \eps^3v^3 
+}
+
+\al{
+	&C(\ol{R})\colon |f| \le Ca^2(\tau), 
+		\norm f = \sup_{\tau\in\mathbb R} a^{-2}(\tau)|f(\tau)| \\
+	&\tilde C ([0,\pi]\times\ol R)\colon |f(x,y)|\le ca^{-2}(\tau)
+		\norm f = \sup_{\tau\in\mathbb R, x\in[0,\pi]} a^{-2}(\tau)|f(\tau)| \\
+	&A\omega - F\omega = 0, \omega=\bivec uv, \\
+	A &= \bivec{\ddd{}\tau - 1}{2\eps\ddd v\tau - Lv}
+	F = \bivec{-u^3 - \eps P\phi(u,v)}{\eps c + \frac13u^3\sin 3x + \eps Q \phi},
+	\omega_0 = \bivec{u(\tau)}{v(\tau)}
+}
+\begin{itemize}
+	\item $F'(\omega)$ удовлетворяет условию Липшица в ограниченной области,
+	\item $A-F'(\omega_0)$ имеет ограниченный обратный.
+\end{itemize}
+\al{
+	2\dd{h_1}\tau &- h_1 + 3a^2(\tau)h_1 + \eps B_1(\omega)\\
+	&\skipped{2--3}
+}
+Докажем, что укороченные уравнения без $\eps B_1(\omega)\ldots$ имеют решения, тогда и они будут иметь: $S+\eps B = S(I + \eps S^{-1}B)$.
+
+\al{
+	2\dd{h_1}\tau 
+		&- h_1 + 3a^2(\tau)h_1 = g_1\\
+	a'(\tau) 
+		&= a-a^3 = a(1-a^2) \\
+	h_1 
+		&= a'(\tau)\int_{-\infty}^\tau\frac{g_1(s)}{a'(s)}ds\\
+	|h_1(\tau)| 
+		&\le a'(\tau) \norm{g_1}\integr{-\infty}\tau\frac{a^2(s)a'(s)}{a'^2(s)}ds 
+		= a'(\tau) \norm{g_1}\integr{-\infty}\tau\frac{a^2(s)a'(s)}{a^2(s)(1-a^2(s))}ds \le\\
+		&\le a'(\tau) \norm{g_1}\integr{-\infty}\tau\frac{a'(s)}{1-a^2(s)}ds = a'(\tau) \norm{g_1}\frac{a(\tau)}{1-a(\tau)} =
+		= \norm{g_1}\frac{a(1-a^2)a}{1-a(\tau)} \le 2a^2\norm{g_1}\tau.\\
+		\text{ибо }&|h_1(\tau)|\le2a^2(\tau)\norm{g_1}, a < 1;
+}
+
+Изучаем функции на бесконечности. Правило Лопиталя:
+\al{
+	h_1
+		&= \frac{\integr0\tau\frac{g_1(s)}{a'(s)}ds}{\frac1{a'(\tau)}} 
+		\propto -\frac{g_1(\tau)}{a'(\tau)\frac1{a'^2(\tau)}} = \\
+		&= \frac{g_1(\tau)}{a'\frac{1-3a^2}{\ldots}}=\frac12g(+\infty)
+}
+
+\renewcommand\iint{\integr {-\infty}\tau}
+\al{
+	2\eps\dd{h_2}\tau &- \ddn2{h_2}x h_2 = g_2(x,\tau), h_2(0,\tau) = 0, h_2(\pi,\tau) = 0. \\
+	h_2(x,\tau) 
+		&= \frac1{\pi\eps}\integr0\pi\integr{-\infty}\tau
+		\cbr{\isum k2 e^{\frac{n^2-1}{2\eps}(s-\tau)}\sin kx\sin k\xi}g_2(\xi,s)ds d\xi \\
+	|h_2(x,\tau)| 
+		&\le \frac{\norm{g_2}}\eps\isum k2 \integr{-\infty}\tau a^2(s)e^{\frac{n^2-1}{2\eps}(s-\tau)}ds	 \\
+	I_n 
+		&= \frac1\eps\iint a^2(s)e^{\frac{n^2-1}{\eps}(s-\tau)}ds 
+		= \iint a^2(s)d\frac{e^{\frac{n^2-1}{\eps}(s-\tau)}}{n^2-1} = \\
+		&= \frac{a^2(\tau)}{n^2-1} - \frac2{n^2-1}\iint a(s)(a-a^3)e^{\frac{n^2-1}{\eps}(s-\tau)} ds < \frac{a^2(\tau)}{n^2-1} \\
+	&\skipped{5--9}
+}
+
+Солитоны
+\al{
+	\ddn2ux + \ddn2uy + \lambda u + \frac83u^3 = 0.
+}
+В полосе $0\le u\le\pi$. Причем $u=0$ на границах полосы.
+Тривиальное решение есть: 0 --- ламинарный поток.
+Интересно, когда появляется нетривиальное.
+\al{
+	\dddn2uy &+ \lambda u = 0, u(0)=u(\pi) = 0;\\
+	\eps x &= \xi \\
+	\lambda_0 &= 1, \phi =\sin x, \lambda = 1-\eps^2. \\
+	V = V_0+\eps^2V_1, \ddn2{V_0}y+V_0 = 0, V_0(0)=0, V_0(\pi) = 0\\
+	\eps^2\ddn2u\xi + \ddn2uy+(1-\eps^2)u + \frac83u^3 = 0 \\
+	u=\eps V\\
+	\eps^2\ddn2v\xi + \ddn2vy + (1-\eps^2)V +\frac83\eps^3V^3 = 0 \\
+	\ddn2{V_1}y + V_1 +(C''(\xi) - C(\xi))\sin y + \frac83 C^3\sin^3y \\
+	\ddn2{V_1}y + V_1 = -(C''(\xi)-C(\xi))\sin y -\frac83\sin^3y, V_1(0)=V_1(\pi) = 0\\
+	C''-C+2C^3 = 0,\\
+	C'^2 = C^2+C^4 + A, y = C^2 - C^4 -C^2(1-C^2) WTF \skipped{6--9}
+}
