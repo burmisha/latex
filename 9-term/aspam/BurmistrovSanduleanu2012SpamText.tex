@@ -1,20 +1,28 @@
-\documentclass[12pt,a4paper]{amsart}
-\usepackage[utf8]{inputenc}
-\usepackage[T2A]{fontenc}
-\usepackage{graphics,graphicx,epsfig}
-\usepackage{color}
-\usepackage{algorithm}
-\usepackage[noend]{algorithmic}
-\usepackage[vflt]{floatflt}
-\usepackage{graphics,graphicx,epsfig}
-\usepackage{epstopdf} % http://tex.stackexchange.com/questions/29664/latex-error-unknown-graphics-extension-eps
-\usepackage[colorlinks,unicode,pdfpagelabels=false,linkcolor=linkcolor]{hyperref}
-\usepackage[english,russian]{babel}
-\usepackage{amssymb,amsfonts,amsthm,mathtext,cite,enumerate,float}
-\usepackage{enumitem}  \setlist{nolistsep}
-\usepackage{tikz}
-\usepackage{textcase} 
+\documentclass[12pt]{article}
+%% compile in JMLDA
+% \usepackage{jmlda}
 
+%% compile NOT in JMLDA
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{epstopdf} % http://tex.stackexchange.com/questions/29664/latex-error-unknown-graphics-extension-eps
+\usepackage[colorlinks,unicode,pdfpagelabels=true]{hyperref}
+\usepackage[english,russian]{babel}
+\usepackage{amssymb,amsfonts,amsthm,mathtext,cite,enumerate,float,amsbsy,amsmath}
+\usepackage{enumitem}  \setlist{nolistsep}
+\usepackage{textcase} % for UTF-8 in header
+
+%%
+\newcommand{\organization}[1]{#1}
+\newcommand{\email}[1]{#1}
+\newcommand{\organizationEng}[1]{#1}
+\newcommand{\abstractEng}[1]{#1}
+\newcommand{\titleEng}[1]{#1}
+\newcommand{\authorEng}[1]{#1}
+%% 
+
+\usepackage{tikz}
 \input macro.tex
 \definecolor{linkcolor}{RGB}{179,45,0}
 
@@ -25,5 +33,5 @@
 	\section{Решение оптимизационной задачи} 	\input{solvebasic}
 	\section{Численный эксперимент} 		 	\input{numerical}
 	\section{Заключение}						\input{conclusion}
-	\input{bibliography.tex}
+	% \input{bibliography.tex}
 \end{document}
