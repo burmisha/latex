@@ -1,0 +1,111 @@
+\input header.tex
+\input pagestyle.tex
+\input macro.tex
+
+\begin{document}
+\simpletitle{Методы оптимизации параметров \\ вероятностных тематических моделей. \\ Михаил Бурмистров. \today}
+
+\textbf{Исходные данные:}
+\begin{itemize}
+		\item $W$~--- конечное множество (словарь) слов;
+		\item $D$~--- конечное множество (коллекция) документов;
+		\item $n_{dw}$~--- число вхождений слова~$w\in W$ в~документ $d\in D$;
+\end{itemize}
+
+\textbf{Найти:}
+\begin{itemize}
+		\item $\theta_{td} = p(t|d)$ --- распределение тем в~каждом документе~$d$;
+		\item $\phi_{wt} = p(w|t)$ --- распределение слов в~каждой теме~$t$;
+\end{itemize}
+
+\textbf{Основные гипотезы вероятностной тематической модели:}
+\begin{itemize}
+		\item $\exists{T}$ --- конечное множество латентных тем;
+		\item $D\times W\times T$ --- вероятностное пространство с~$p(d,w,t)$;
+		\item порядок слов в~документах не~важен;
+		\item $p(w|d,t) = p(w|t)$ --- гипотеза условной независимости;
+\end{itemize}
+
+\simpletitle{Сравнение, модификации и обобщение методов}
+
+Для идентификации параметров $\Theta$, $\Phi$ используется \rlap{EM-алгоритм}.
+
+\textbf{Основные модификации:}
+\begin{itemize}
+	\item PLSA-GEM позволяет ускорить сходимость за счет более частого обновления параметров;
+	\item LDA-GS: одно вхождение слова в документ соответствует одной теме
+\end{itemize}
+
+\textbf{Цели работы:}
+\begin{itemize}
+	\item обобщение известных алгоритмов тематического моделирования (PLSA-GEM и LDA-GS) в рамках одного численного метода;
+	\item исследование зависимости качества построенной модели от параметров полученного метода.
+\end{itemize}
+
+\simpletitle{Соединение PLSA-GEM и LDA-GS в общий численный метод}
+\begin{algorithmic}[1]
+    \REQUIRE
+		$D$, $|T|$, приближения $\Theta$~и~$\Phi$, гиперпараметры $\alpha$, $\beta$;
+    \ENSURE
+        распределения $\Theta$~и~$\Phi$;
+	\STATE $(t; h)_{dwi} = 0 $ для всех $d\in D, w \in W, {i \in I_{dw}}$;
+    \REPEAT
+        \FORALL{$d\in D$,\; $w\in d$,\; $i\in I_{dw}$}
+			\STATE подготовить тему $t_{dwi}$; \; $t$ = $t_{dwi}$;			
+			\STATE вычислить значение $\delta$;
+			\STATE увеличить $h_{dwi}$, $\varphi(w|t)$, $\theta(t|d)$ на $\delta$;		
+			\IF{пора обновить параметры $\Phi$, $\Theta$}
+				\STATE обновить $\Theta$~и~$\Phi$;
+			\ENDIF
+        \ENDFOR
+    \UNTIL $\Theta$ и~$\Phi$ не~стабилизируются.
+\end{algorithmic} 
+
+\simpletitle{Объектно-ориентированный подход}
+Для удобства использования и тестирования различных параметров программы предлагается применить подходы ООП.
+
+Есть классы-прототипы, обеспечивающие общие интерфейсы доступа к пересчёту параметров, а также дающие возможность изменять критерии частоты обновления параметров и останова алгоритма.
+%\newcommand\newcl[1]{\item $\mathfrak{#1}$~--- }
+\newcommand\newcl[1]{\item \texttt{#1}~--- }
+
+Классы:
+\begin{itemize}
+	\newcl{Dictionary} предоставляет общий интерфейс для управления используемым словарём.
+	\newcl{Distance} позволяет использовать различные метрики качества при сравнении распределений.
+	\newcl{GetDelta} вычисление приращения параметров модели.
+	\newcl{Prepare} предобработка каждой новой пары документ-слово.
+	\newcl{UpdateTime} критерий обновления параметров модели.
+\end{itemize}
+
+От каждого из классов-прототипов наследуются классы, реализующие конкретные способы обработки распределений $\Theta$ и~$\Phi$.
+
+\begin{itemize}
+	\newcl{Dictionary} 
+	\begin{itemize}
+		\newcl{Map} использование \texttt{std::map}
+	\end{itemize}
+	\newcl{Distance} 
+	\begin{itemize}
+		\newcl{KullbackLeibler} расстояние Кульбака-Лейблера
+		\newcl{Chi\_Squared} расстояние $\chi^2$
+		\newcl{Hellinger} метрика Хеллингера
+	\end{itemize}
+	\newcl{GetDelta} 
+	\begin{itemize}
+		\newcl{PLSA\_GetDelta} для PLSA
+		\newcl{LDA\_GetDelta} для LDA
+	\end{itemize}
+	\newcl{Prepare} 
+	\begin{itemize}
+		\newcl{PLSA\_prepare} для PLSA
+		\newcl{LDA\_prepare} для LDA
+	\end{itemize}
+	\newcl{UpdateTime} 
+	\begin{itemize}
+		\newcl{update\_every} обновлять каждые несколько раз, когда встаёт вопрос об этом,
+		\newcl{update\_after\_document} обновлять после каждого обработанного документа
+		\newcl{update\_after\_collection} обновлять после всей коллекции
+	\end{itemize}
+\end{itemize}
+
+\end{document}
