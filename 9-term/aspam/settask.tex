@@ -16,7 +16,7 @@ $\sbr{z \le 0} $, где $z(\mb x,\mb a,R)=\norm{\mb x-\mb a}-R$ без веро
 
 \addtikz{basic}{1.2}{thick,domain=-1:2}{Пример описания объектов шаром}
 
-Будем придерживаться вероятностной модели распределения объектов генеральной совокупности.
+Будем придерживаться следующей вероятностной модели распределения объектов генеральной совокупности.
 Параметрическое семейство условных плотностей распределения в признаковом пространстве имеет вид
 \begin{equation}
 	\label{PhiXARC}
@@ -46,6 +46,12 @@ $$\Phi(\mb X|\mb a,R)=\prod_{j=1}^N \varphi(\mb x_j|\mb a,R),$$
 \begin{equation}
 	\label{argmax:full}
 	\cbr{\hat{\mb a},\hat R|\mb X} = \argmax_{\mb a,R} p(\mb a,R|\mb X)
+\end{equation}
+
+При этом решающее правило принимает вид
+\begin{equation}
+	\label{rule:basic}
+	f(\mb x) = \sbr{\norm{\mb x - \hat{\mb a}} \le \hat R}.
 \end{equation}
 
 Поскольку знаменатель в выражении (\ref{Prob:aRX}) не зависит от целевых переменных

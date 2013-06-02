@@ -64,10 +64,10 @@ $$0\le\alpha_i\le C, \;\; i = 1,\ldots,N.$$
 
 Если же $R = 0$, то задача (\ref{min:main}) имеет вид
 \begin{equation}
-			\begcas{
-			&C\suml_i\xi_i \to \min\limits_{\mb a, \mb\xi}, \\
-			&\norm{\mb x_i-\mb a}^2\le \xi_i,\quad\xi_i\ge0,\quad i = 1,\ldots,N.
-			}
+	\begcas{
+	&C\suml_i\xi_i \to \min\limits_{\mb a, \mb\xi}, \\
+	&\norm{\mb x_i-\mb a}^2\le \xi_i,\quad\xi_i\ge0,\quad i = 1,\ldots,N.
+	}
 \end{equation}
 т.е.
 \begin{equation}
@@ -83,3 +83,15 @@ $$K_p(\mb x_i, \mb x_j) = \cbr{1 + \mb x_i\T \mb x_j}^p$$
 $$K(\mb x_i, \mb x_j) = \exp\cbr{-\frac{\norm{\mb x_i - \mb x_j}^2}{2s^2}}.$$
 Таким образом, чтобы получить улучшенную модель описания данных, необходимо заменить в функции Лагранжа операцию вычисления
 скалярного произведения двух векторов вычислением значения потенциальной функции двух аргументов.
+
+При таком обобщении решающее решающее правило (\ref{rule:basic}) принимает вид 
+\begin{align}
+	\label{rule:kernel}
+	f(\mb x) 
+		&= 	\sbr{\norm{\mb x-\mb a} \le R} 
+		= 	\sbr{\mb x\cdot\mb x - 2\mb x\cdot\mb a + \mb a\cdot\mb a \le R^2} = \notag \\
+		&= 	\sbr{\mb x\cdot\mb x - 2\mb x\cdot\cbr{\suml_{i} \alpha_i \mb x_i} + \cbr{\suml_{i} \alpha_i \mb x_i}\cdot\cbr{\suml_{i} \alpha_i \mb x_i} \le R^2} \to \notag \\
+		&\to \sbr{K(\mb x,\mb x) - 2\suml_{i} \alpha_i K(\mb x, \mb x_i) + \suml_{i,j} \alpha_i\alpha_jK(\mb x_i,\mb x_j) \le R^2}.
+\end{align}
+
+Здесь оптимальное значение $R$ определяется как значение выражения $$K(\mb x,\mb x) - 2\suml_{i} \alpha_i K(\mb x, \mb x_i) + \suml_{i,j} \alpha_i\alpha_jK(\mb x_i,\mb x_j)$$ для граничных объектов ($0<\alpha_i<C$).
