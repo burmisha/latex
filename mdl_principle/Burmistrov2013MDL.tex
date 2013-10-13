@@ -18,6 +18,12 @@
 
 \title[\hbox to 56mm{MDL principle \hfill\insertframenumber\,/\,\inserttotalframenumber}]{Принцип минимальной длины описания \\ Minimum description length principle}
 \author[Михаил Бурмистров]{Михаил Бурмистров}
+\institute{Основано на работе 
+		Peter Gr\"unwald
+		\vfill \textit{A Tutorial Introduction to 
+		\vfill the Minimum Description Length Principle} 
+		\vfill Centrum voor Wiskunde en Informatica, 
+		\vfill The Netherlands, 2004.}
 \date{\today}
 
 \begin{document}
@@ -25,5 +31,27 @@
 \begin{frame}
     \maketitle
 \end{frame}
+
+\begin{frame}
+	\begin{block}{Основная задача}
+	Построить критерий сравнения моделей обучения.
+	\end{block}
+	\begin{block}{Основная идея}
+	Любая закономерность в данных может быть использована для того, чтобы их сжать. Поиск закономерностей и регулярностей в данных в подходе отождестваляется с обучением.
+	\end{block}
+	\textbf{Сжатие данных}~--- описание данных меньшим количеством символов, чем потребовалось бы для из записи обычным способом.
+\end{frame}
+
+\begin{frame}
+	\textbf{Особенности подхода:}
+	\begin{enumerate}
+		\item выбор простейшей модели, по аналогии с бритвой Оккама,
+		\item отсутствие переобучения, 
+		\item наличие Байесовской интерпретации,
+		\item отсутствие необходимости в априорных предположениях,
+		\item построенная/выбранная модель обладает предсказательной силой.
+	\end{enumerate}
+\end{frame}
+
 
 \end{document}
