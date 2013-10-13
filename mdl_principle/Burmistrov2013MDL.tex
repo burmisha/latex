@@ -1,5 +1,6 @@
 \documentclass[unicode,lefteqn,c,hyperref={pdfpagelabels=true}]{beamer}
 \usepackage{burslides}
+\include{macro}
 
 \title[\hbox to 56mm{MDL principle \hfill\insertframenumber\,/\,\inserttotalframenumber}]{Принцип минимальной длины описания \\ Minimum description length principle}
 \author[Михаил Бурмистров]{Михаил Бурмистров}
@@ -39,19 +40,63 @@
 \end{frame}
 
 \begin{frame}{Примеры}
-	\textbf{Последовательности из $0$ и $1$:}
-	\begin{enumerate}
-		\item \texttt{00010001000100010001\ldots 00010001000100010001}
-		\item \texttt{01110100110100100110\ldots 10111011000101100010}
-		\item \texttt{00011000001010100000\ldots 00010000001000110000}
-	\end{enumerate}
-
 	\textbf{Реальные неслучайные данные, допускающие сжатие:}
 	\begin{enumerate}
 		\item Последовательность цифр в записи $\pi$.
 		\item Зависимость времени свободного падения шара от высоты, с которой его отпустили.
 		\item Естественный язык, поскольку не любая последовательность слов синтаксически корректна.
 	\end{enumerate}
+
+	\textbf{Последовательности из $0$ и $1$:}
+	\begin{enumerate}
+		\item \texttt{00010001000100010001\ldots 00010001000100010001}
+		\item \texttt{01110100110100100110\ldots 10111011000101100010}
+		\item \texttt{00011000001010100000\ldots 00010000001000110000}
+	\end{enumerate}
+\end{frame}
+
+\begin{frame}{Идеализированный подход}
+	\begin{block}{Идеализированный MDL}
+	Использование в качестве критерия сложности модели данных Колмогоровскую сложность её описания.
+	\end{block}
+
+	\textbf{Проблемы:}
+	\begin{enumerate}
+		\item невычислимость,
+		\item зависимость результата от выбранной универсальной машины Тьюринга.
+	\end{enumerate}
+\end{frame}
+
+\begin{frame}{Практический подход}
+	\begin{block}{Практический MDL}
+	Ограничиться при изучении моделей лишь частью из всех возможных. 
+	При этом язык описания моделей должен быть достаточно богат, чтобы сжимать <<интуитивно>> регулярные последовательности.
+	\end{block}
+
+	\textbf{Преимущества:}
+	\begin{enumerate}
+		\item вычислимость.
+	\end{enumerate}
+\end{frame}
+
+\newcommand\mch[1]{\mathcal H^{\cbr{#1}}}
+\begin{frame}{Черновой вариант MDL}
+	\textbf{Терминология:}
+	\begin{enumerate}
+		\item Точечная гипотеза~--- конкретная функция, алгоритм, распределение. 
+		Например, полином $4x^2+0{,}119x+93.$
+		\item Модель~--- совокупность точечных гипотез. Например, все полиномы степени 3.
+	\end{enumerate}
+	\begin{block}{Практический MDL}
+	Пусть $\mch 1, \mch 2, \ldots$~--- изучаемые модели данных. Лучшей точечной гипотезой $H \in \mch 1 \cup \mch 2 \cup \ldots$ для данных $D$ назовём 
+	$H = \argmin \cbr{L(H) + L(D|H)},$
+	где 
+	\begin{itemize}
+		\item $L(H)$~--- длина описания гипотезы,
+		\item $L(D|H)$~--- длина описания данных при известной гипотезе.
+	\end{itemize}
+	Лучшая модель~--- $\hat {\mathcal H} = \mch i: H \in \mch i.$
+	\end{block}
 \end{frame}
 
 \end{document}

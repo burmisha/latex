@@ -28,9 +28,18 @@
 \def\Rn{\mathbb{R}^n}
 \def\RSS{\mathsf{RSS}}
 
+\newcommand\mylim[1]{\mathop{#1}\limits}
+\renewcommand\lim{\mylim{lim}}
+\renewcommand\max{\mylim{max}}
+\renewcommand\min{\mylim{min}}
+\renewcommand\sup{\mylim{sup}}
+\renewcommand\inf{\mylim{inf}}
+\newcommand\argmin{\mylim{arg\,\!min}}
+\newcommand\argmax{\mylim{arg\,\!max}}
+
 %\newcommand{\prodl}{\mathop{\textstyle\prod}\limits}
-\newcommand{\prodl}{\prod\limits}
-\newcommand{\suml}{\sum\limits}
+% \newcommand{\prodl}{\prod\limits}
+% \newcommand{\suml}{\sum\limits}
 \newcommand\foral[1]{\forall\,#1\:}
 \newcommand\exist[1]{\exists\,#1\:\colon}
 
