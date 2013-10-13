@@ -34,4 +34,6 @@
 *.png
 *.synctex.gz(busy)
 
+*.DS_Store
+
 9-term/aspam/BurmistrovSanduleanu2012SpamText_cp1251.tex
