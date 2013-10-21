@@ -1,0 +1,14 @@
+Функция Лагранжа:
+\begin{equation}
+	\label{LagrWEN}
+	\begin{split}
+		L(\mb a,\idots \delta1N, \idots \lambda1N) 
+	&= \suml_{i=1}^n\cbr{\beta a_i^2 + \mu \modul{a_i}} + \suml_{j=1}^N p_j\delta_j^2 - \sum_{j=1}^N\lambda_j\cbr{\delta_j - y_j + \suml_{i=1}^nx_{ij}a_i} = \\
+	&= \suml_{i=1}^n\cbr{\beta a_i^2 + \mu \modul{a_i} - \suml_{j=1}^N\lambda_jx_{ij}a_i} + \suml_{j=1}^N \cbr{p_j\delta_j^2  - \lambda_j\cbr{\delta_j - y_j}} \to \\
+	&\to 
+	\begin{cases}
+		\min_{\mb a,\idots \delta1N}\\
+		\max_{\idots \lambda1N}\\
+	\end{cases}
+	\end{split}
+\end{equation}
