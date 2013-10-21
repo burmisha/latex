@@ -12,3 +12,21 @@
 	\end{cases}
 	\end{split}
 \end{equation}
+
+Положим 
+\begin{equation}
+	\label{partialLagr}
+	L_i(a_i,\idots \lambda1N) = \beta a_i^2 + \mu \modul{a_i} - \cbr{\suml_{j=1}^N\lambda_jx_{ij}}a_i \to \max{a_i}.
+\end{equation}
+
+Каждая из функций $L_i$ является кусочно заданной комбинаций двух квадратных трехчленов:
+
+\begin{equation}
+	\label{partialLagrParted}
+	L_i(a_i,\idots \lambda1N) =
+\begin{cases}
+	\beta a_i^2 + \mu a_i - \cbr{\suml_{j=1}^N\lambda_jx_{ij}}a_i, &a_i > 0,\\
+	0, &a_i = 0,\\
+	\beta a_i^2 - \mu a_i - \cbr{\suml_{j=1}^N\lambda_jx_{ij}}a_i, &a_i < 0.\\
+\end{cases}
+\end{equation}
