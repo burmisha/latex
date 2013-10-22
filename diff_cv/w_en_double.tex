@@ -16,17 +16,49 @@
 Положим 
 \begin{equation}
 	\label{partialLagr}
-	L_i(a_i,\idots \lambda1N) = \beta a_i^2 + \mu \modul{a_i} - \cbr{\suml_{j=1}^N\lambda_jx_{ij}}a_i \to \max{a_i}.
+	L_i(a_i,\idots \lambda1N) = \beta a_i^2 + \mu \modul{a_i} - \cbr{\suml_{j=1}^N\lambda_jx_{ij}}a_i \to \min_{a_i}.
 \end{equation}
 
 Каждая из функций $L_i$ является кусочно заданной комбинаций двух квадратных трехчленов:
 
 \begin{equation}
 	\label{partialLagrParted}
-	L_i(a_i,\idots \lambda1N) =
-\begin{cases}
-	\beta a_i^2 + \mu a_i - \cbr{\suml_{j=1}^N\lambda_jx_{ij}}a_i, &a_i > 0,\\
-	0, &a_i = 0,\\
-	\beta a_i^2 - \mu a_i - \cbr{\suml_{j=1}^N\lambda_jx_{ij}}a_i, &a_i < 0.\\
-\end{cases}
+	\begin{split}
+		L_i(a_i,\idots \lambda1N) 
+		&= \begin{cases}
+			\beta a_i^2 + \mu a_i - \cbr{\suml_{j=1}^N\lambda_jx_{ij}}a_i, &a_i > 0,\\
+			0, &a_i = 0,\\
+			\beta a_i^2 - \mu a_i - \cbr{\suml_{j=1}^N\lambda_jx_{ij}}a_i, &a_i < 0,\\
+		\end{cases} \quad= \\
+		&= \begin{cases}
+			\beta a_i^2 - \cbr{\suml_{j=1}^N\lambda_jx_{ij}-\mu}a_i, &a_i > 0,\\
+			0, &a_i = 0,\\
+			\beta a_i^2 - \cbr{\suml_{j=1}^N\lambda_jx_{ij}+\mu}a_i, &a_i < 0.\\
+		\end{cases}	
+	\end{split}
 \end{equation}
+
+Исходная постановка задачи Elastic Net \ref{basicEN} предполагает, что $\beta\ge0, \mu\ge0.$ Изучим случай $\beta > 0:$ 
+
+\begin{equation}
+	\label{hatAi}
+	\begin{split}
+		\hat a_i &= \argmin_{a_i} L_i(a_i,\idots \lambda1N) = \\
+				 &=	\argmin_{a_i} \fbr{
+				 	\begin{aligned}
+						\beta a_i^2 - \cbr{\suml_{j=1}^N\lambda_jx_{ij}-\mu}a_i, &a_i > 0,\\
+						0, \qquad\qquad &a_i = 0,\\
+						\beta a_i^2 - \cbr{\suml_{j=1}^N\lambda_jx_{ij}+\mu}a_i, &a_i < 0.\\
+					\end{aligned}	
+					}
+	\end{split}
+\end{equation}
+
+Для поиска точки минимума рассмотрим 3 случая:
+
+\begin{align}
+	\label{hatAi}
+	         &\suml_{j=1}^N\lambda_jx_{ij} \le -\mu &\Rightarrow& \hat a_i &= \frac{\suml_{j=1}^N\lambda_jx_{ij}+\mu}{2\beta}, \\
+	-\mu <   &\suml_{j=1}^N\lambda_jx_{ij} < \mu 	&\Rightarrow &\hat a_i &= 0, \\
+	-\mu \le &\suml_{j=1}^N\lambda_jx_{ij} 			\Rightarrow \hat a_i &= \frac{\suml_{j=1}^N\lambda_jx_{ij}-\mu}{2\beta},
+\end{align}
