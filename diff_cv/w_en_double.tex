@@ -13,52 +13,76 @@
 	\end{split}
 \end{equation}
 
+
+
+\def\LiPart{L_i(a_i,\idots \lambda1N)}
+\def\sumLambdaX{\suml_{j=1}^N\lambda_jx_{ij}}
+
 Положим 
 \begin{equation}
 	\label{partialLagr}
-	L_i(a_i,\idots \lambda1N) = \beta a_i^2 + \mu \modul{a_i} - \cbr{\suml_{j=1}^N\lambda_jx_{ij}}a_i \to \min_{a_i}.
+	\LiPart = \beta a_i^2 + \mu \modul{a_i} - \cbr{\sumLambdaX}a_i \to \min_{a_i}.
 \end{equation}
 
 Каждая из функций $L_i$ является кусочно заданной комбинаций двух квадратных трехчленов:
-
 \begin{equation}
 	\label{partialLagrParted}
 	\begin{split}
-		L_i(a_i,\idots \lambda1N) 
+		\LiPart 
 		&= \begin{cases}
-			\beta a_i^2 + \mu a_i - \cbr{\suml_{j=1}^N\lambda_jx_{ij}}a_i, &a_i > 0,\\
+			\beta a_i^2 + \mu a_i - \cbr{\sumLambdaX}a_i, &a_i > 0,\\
 			0, &a_i = 0,\\
-			\beta a_i^2 - \mu a_i - \cbr{\suml_{j=1}^N\lambda_jx_{ij}}a_i, &a_i < 0,\\
+			\beta a_i^2 - \mu a_i - \cbr{\sumLambdaX}a_i, &a_i < 0,\\
 		\end{cases} \quad= \\
 		&= \begin{cases}
-			\beta a_i^2 - \cbr{\suml_{j=1}^N\lambda_jx_{ij}-\mu}a_i, &a_i > 0,\\
+			\beta a_i^2 - \cbr{\sumLambdaX-\mu}a_i, &a_i > 0,\\
 			0, &a_i = 0,\\
-			\beta a_i^2 - \cbr{\suml_{j=1}^N\lambda_jx_{ij}+\mu}a_i, &a_i < 0.\\
+			\beta a_i^2 - \cbr{\sumLambdaX+\mu}a_i, &a_i < 0.\\
 		\end{cases}	
 	\end{split}
 \end{equation}
 
 Исходная постановка задачи Elastic Net \ref{basicEN} предполагает, что $\beta\ge0, \mu\ge0.$ Изучим случай $\beta > 0:$ 
-
 \begin{equation}
 	\label{hatAi}
 	\begin{split}
-		\hat a_i &= \argmin_{a_i} L_i(a_i,\idots \lambda1N) = \\
+		\hat a_i &= \argmin_{a_i} \LiPart = \\
 				 &=	\argmin_{a_i} \fbr{
 				 	\begin{aligned}
-						\beta a_i^2 - \cbr{\suml_{j=1}^N\lambda_jx_{ij}-\mu}a_i, &a_i > 0,\\
+						\beta a_i^2 - \cbr{\sumLambdaX-\mu}a_i, &a_i > 0,\\
 						0, \qquad\qquad &a_i = 0,\\
-						\beta a_i^2 - \cbr{\suml_{j=1}^N\lambda_jx_{ij}+\mu}a_i, &a_i < 0.\\
+						\beta a_i^2 - \cbr{\sumLambdaX+\mu}a_i, &a_i < 0.\\
 					\end{aligned}	
 					}
 	\end{split}
 \end{equation}
 
 Для поиска точки минимума рассмотрим 3 случая:
-
 \begin{align}
-	\label{hatAi}
-	         &\suml_{j=1}^N\lambda_jx_{ij} \le -\mu &\Rightarrow \hat a_i &= \frac{\suml_{j=1}^N\lambda_jx_{ij}+\mu}{2\beta}, \\
-	-\mu <   &\suml_{j=1}^N\lambda_jx_{ij} < \mu 	&\Rightarrow \hat a_i &= 0, \\
-	-\mu \le &\suml_{j=1}^N\lambda_jx_{ij} 			&\Rightarrow \hat a_i &= \frac{\suml_{j=1}^N\lambda_jx_{ij}-\mu}{2\beta},
+	\label{hatAicases}
+	         &\sumLambdaX \le -\mu 	&\Rightarrow \hat a_i &= \frac{\sumLambdaX+\mu}{2\beta}, \\
+	-\mu <   &\sumLambdaX < \mu 	&\Rightarrow \hat a_i &= 0, \\
+	-\mu \le &\sumLambdaX 			&\Rightarrow \hat a_i &= \frac{\sumLambdaX-\mu}{2\beta},
 \end{align}
+
+% a x^2 + b x + c = a(x-b/{2a})^2 + c - b^2/{4a} = a(x-x_0)^2 + c - a x_0^2
+
+Подставляя значения из \ref{hatAicases} в \ref{partialLagrParted}, получим решение задачи минимизации по $a_i$:
+\begin{align}
+	\begin{split}
+		\hat L_i(\idots \lambda1N) &= \min_{a_i}L_i(a_i, \idots \lambda1N) =
+		\begin{cases}
+			-\frac1{4\beta}\cbr{\sumLambdaX+\mu}^2, &\sumLambdaX \le -\mu,\\
+			0, 										&-\mu < \sumLambdaX < \mu,\\
+			-\frac1{4\beta}\cbr{\sumLambdaX-\mu}^2, &\mu\le\sumLambdaX,
+		\end{cases} = \\
+		&= -\frac1{4\beta}
+		\begin{cases}
+			\cbr{-\sumLambdaX-\mu}^2, &\sumLambdaX \le -\mu,\\
+			0, 	 					&-\mu < \sumLambdaX < \mu,\\
+			\cbr{\sumLambdaX-\mu}^2, &\mu\le\sumLambdaX.
+		\end{cases} 	\\
+		&= -\frac1{4\beta} \cbr{\min\fbr{\mu + \sumLambdaX, 0, \mu-\sumLambdaX}}^2
+	\end{split}
+\end{align}
+(Здесь не сходится с результатами doc-файла)
