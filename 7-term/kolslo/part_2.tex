@@ -1,0 +1,139 @@
+
+{\bfseries \sffamily{Обозначения:}}\\
+ЭН --- эффективно нулевое множество,\\
+ВФ --- вычислимая функция.
+
+
+\task{2.1}
+(а) Пусть $$U_n=\bigcup\limits_{\hat\omega\in\left(0(0|1)\right)^n}\Gamma_{\hat\omega}$$ --- вычислимое (и конечное) объединение интервалов. При этом $$L(U_n)=\sum\limits_{\hat\omega\in\left(0(0|1)\right)^n}L(\hat\omega) = \sum\limits_{\hat\omega\in\left(0(0|1)\right)^n} 2^{-2n} = 2^n\cdot 2^{-2n} = 2^{-n},$$ и, что самое главное, $$\{0\omega_10\omega_20\ldots|\omega_i\in\{0,1\}\}\subset U_n.$$ Таким образом построена вычислимая совокупность интервалов сколь угодно малой суммарной меры, покрывающих изучаемое множество бесконечных бинарных последовательностей, что и доказывает утверждение.
+
+(b) $0^\infty$ --- эффективно нулевое (ЭН) как подмножество эффективно нулевого (см. п (а)), поэтому $1^\infty$ --- также ЭН (аналогично с точностью до замены 0 и 1). Конечное объединение ЭН --- ЭН (см. з. 2.2). Утверждение обосновано.
+
+(c) %Прямое следствие пункта (d) и  рассуждений из пункта (b). неааааааа =)
+$\omega = \omega_1\omega_2\ldots$ --- вычислимая бинарная последовательность. Тогда вычислима и последовательность слов $\{\omega_1\omega_2\ldots\omega_n\}_{n=1}^\infty$ --- её префиксов. Положим  $\eta_n = \omega_1\omega_2\ldots\omega_n, U_n = \Gamma_{\eta_n}.$ Тогда $L(U_n) = 2^{-n}$, а  $\{\omega\}\subset U_n$. Тем самым построена ВФ $\eta(\eps)=\eta_{\lceil-\log \eps \rceil} \colon \{\omega\}\subset\Gamma_{\eta(\eps)}, L(\Gamma_{\eta(\eps)})\leqslant \eps$, что, согласно определению, доказывает: $\{\omega\}$ --- ЭН.
+
+(d) Теорема 30 из книги В.\,А.\,Успенского, Н.\,К.\,Верещагина, А.\,Шеня <<Колмогоровская сложность и алгоритмическая случайность>>.
+
+(f) $A^n = \{x\in\{0,1\}^n\colon K(x)\le f(n)\}$~--- перечислимо, пусть $A(n)$~--- алгоритм перечисления. $|A^n|\le 2^{f(n) + 1}.$ Пусть $A(n,t)$~--- результат работы $A(n)$ за $n$ шагов, $A^n_t$~--- полученное именно на этом шаге множество.
+Тогда $\omega\in\bcap{n=1}{\infty}\bcup{t=0}{\infty}\bcup{x\in A^n_t}{}\Gamma_x$. При этом $L\cbr{\bcup{t=0}{\infty}\bcup{x\in A^n_t}{}\Gamma_x} \le L\cbr{A^n} \le 2^{f(n)+1-n}$. Если $f(n)=o(n)$, то выберем $N\colon\foral{n\ge N} 2^{f(n)+1-n} \le \eps$. Теперь $\omega\in\bcup{t=0}{\infty}\bcup{x\in A^N_t}{}\Gamma_x$~--- заключена в вычислимой совокупности интервалов сколь угодно малой меры.
+
+(e) См. п. (f): $\ln n = o(n)$.
+
+
+\task{2.2}
+С пересечением ЭН всё понятно: $\bigcap\limits_{i=1}^n A_i \subset A_1$ и потому совокупность интервалов, доказывающая ЭН $A_1$, подойдет и для всего пересечения.
+
+Рассмотрим объединение: $A = \bigcup\limits_{k=1}^n A_k$. Поскольку все $A_k$ ЭН, то возьмем соответствующие вычислимые функции 
+$$x_k(\eps,i), k=1\ldots n \colon \forall\: \eps > 0 \;
+A_k\subset \bigcup_{i=1}^\infty\Gamma_{x_k(\eps,i)}, 
+\sum_{i=1}^\infty L\left(\Gamma_{x_k(\eps,i)}\right) \leqslant \eps.$$
+На их основе построим вычислимую функцию: 
+$$ x(\eps,i)=x_{r+1}\left(\frac \eps n, q\right), \text{ где $r$ и $q$ --- результаты деления с остатком: } i = qn+r.$$ 
+То есть функция построена таким образом, что $$\bigcup_j x(\eps,j) = \bigcup_{i, k} x_k\left(\frac \eps n, i\right).$$
+Тогда 
+$$ A = \bigcup\limits_{k=1}^n A_k \subset 
+\bigcup\limits_{k=1}^n \bigcup_{i=1}^\infty\Gamma_{x_k\left(\frac \eps n, i\right)} = 
+\bigcup_{j=1}^\infty\Gamma_{x(\eps, j)},$$
+
+$$\sum_{j=1}^\infty L(\Gamma_{x(\eps, j)}) = 
+\sum_{k=1}^n\sum_{i=1}^\infty L\left(\Gamma_{x\left(\frac \eps n, i\right)}\right) \leqslant
+\sum_{k=1}^n \frac \eps n = \eps.
+$$ 
+Что и означает, что $A$ --- ЭН.
+
+
+\task{2.3}
+(a) Предположим, что $0\omega$, где $\omega=\omega_1\omega_2\ldots\omega_n$, не является случайной по Мартин--Лёфу, т.е. множество $\{0\omega\}$ --- ЭН, тогда существует ВФ $y(\eps,i),$ подтверждающая этот факт по определению: 
+$$\forall\: \eps > 0 \;
+\{0\omega\}\subset \bigcup\limits_{i=1}^\infty\Gamma_{y(\eps,i)}, 
+\sum\limits_{i=1}^\infty L\left(\Gamma_{y(\eps,i)}\right) \leqslant \eps.$$
+Построим ВФ: 
+\begin{equation}
+z(\eps,i) = 
+\begin{cases}
+y(\eps,i), &\text{ при }(y(\eps,i))_1=0 , \\
+\text{не определена,}&\text{ при } (y(\eps,i))_1=1.
+\end{cases}
+\notag
+\end{equation}
+Она так же обладает условием: $\forall\: \eps > 0 \;
+\{0\omega\}\subset \bigcup\limits_{i=1}^\infty\Gamma_{z(\eps,i)}, 
+\sum\limits_{i=1}^\infty L\left(\Gamma_{z(\eps,i)}\right) \leqslant \eps.$
+Рассмотрим ВФ (отбросим ноль на первой позиции) : (её значения --- конечные слова!)
+\begin{equation}
+\hat z(\eps,i) = (y(\eps/2,i))_2(y(\eps/2,i))_3(y(\eps/2,i))_4\ldots, 
+\notag
+\end{equation}
+При этом $\sum\limits_{i=1}^\infty L\left(\Gamma_{\hat z(\eps,i)}\right) \leqslant \sum\limits_{i=1}^\infty 2\cdot L\left(\Gamma_{\hat z(\eps,i)}\right) \leqslant 2\cdot\frac \eps 2 = \eps
+$
+Тогда получим, что 
+$$\forall\: \eps > 0 \;
+\{\omega\}\subset \bigcup\limits_{i=1}^\infty\Gamma_{\hat z(\eps,i)}, 
+\sum\limits_{i=1}^\infty L\left(\Gamma_{\hat z(\eps,i)}\right) \leqslant \eps,$$ т.е. противоречие. Поэтому предположение неверно и $0\omega$ случайна.
+
+Случай с $1\omega$ --- аналогичен. 
+
+Случай с $x\omega=x_1x_2\ldots x_n\omega$ доказывается индукцией по $n$: база ($n=1$) верна, а при удлинении на 1 неслучайного префикса случайность $x_k\ldots x_n\omega$ следует из случайности $x_{k+1}\ldots x_n\omega$.
+
+(c) Предположим, что $\hat \omega = \omega\oplus 1^\infty$ не является случайной по Мартин--Лёфу, т.е. множество $\{\hat \omega\}$ --- ЭН, тогда существует ВФ $\hat x(\eps,i),$ подтверждающая этот факт по определению: 
+$$\forall\: \eps > 0 \;
+\{\hat \omega\}\subset \bigcup\limits_{i=1}^\infty\Gamma_{\hat x(\eps,i)}, 
+\sum\limits_{i=1}^\infty L\left(\Gamma_{\hat x(\eps,i)}\right) \leqslant \eps.$$
+
+Построим ВФ  $x(\eps,i) = \hat x(\eps,i)\oplus 1^{l\left(x(\eps,i)\right)}.$ Тогда получим противоречие со случайностью $\omega,$ ведь
+$$\forall\: \eps > 0 \;
+\{\omega\}\subset \bigcup\limits_{i=1}^\infty\Gamma_{x(\eps,i)}, 
+\sum\limits_{i=1}^\infty L\left(\Gamma_{x(\eps,i)}\right) \leqslant \eps.$$
+
+(d) Предположим, что $\eta = \omega_n\omega_{n+1}\ldots$ не является случайной по Мартин--Лёфу, т.е. множество $\{\eta\}$ --- ЭН, тогда существует ВФ $x(\eps,i),$ подтверждающая этот факт по определению: 
+$$\forall\: \eps > 0 \;
+\{\eta\}\subset \bigcup\limits_{i=1}^\infty\Gamma_{ x(\eps,i)}, 
+\sum\limits_{i=1}^\infty L\left(\Gamma_{x(\eps,i)}\right) \leqslant \eps.$$
+
+Построим ВФ:  $y(\eps,i) = \left(0^{n-1}\oplus bin(i \mod 2^{n-1}) \right)x(2^{-(n-1)}\eps,\lceil\frac i {2^{n-1}}\rceil),$ т.е. начало слова --- произвольное бинарное слово длины $n-1,$ т.е. мы продлили <<в начало>> последовательность всеми возможными способами, коих не более $2^{n-1}$, и при этом не увеличили меры: $\sum\limits_{p\in \{(0|1)^{n-1}\}}L(px(\eps,i)) = 2^{n-1}L(0^{n-1}x(\eps,i)) = L(x(\eps,i))$).
+Тогда получаем противоречие со случайностью $\omega$:
+$$\forall\: \eps > 0 \;
+\{\omega\}\subset \bigcup\limits_{i=1}^\infty\Gamma_{ y(\eps,i)}, 
+\sum\limits_{i=1}^\infty L\left(\Gamma_{y(\eps,i)}\right) \leqslant \eps.$$
+
+(b) Прямое следствие пунктов (a) и (d), поскольку из случайности $\omega$ следует случайность её хвоста:  $\omega_n\omega_{n+1}\ldots$, а приписывание чего-либо фиксированной длины в начало случайности не изменит.
+
+
+\task{2.4}
+Пусть $A$ --- алгоритм перечисления множества $A,$ $A(t)$ --- множество элементов $A$, перечисленных за $t$ шагов алгоритма $A$. $A(t)\subseteq A(t+1), \bigcup\limits_{t=0}^\infty A(t) = A.$ Соответственно, строим характеристические последовательности $\alpha(t)$ множеств $A(t)$. $\alpha(t)\preccurlyeq\alpha(t+1).$
+
+Рассмотрим слова: $\alpha^n(t)=\alpha_1(t)\ldots\alpha_n(t)$ (они вычислимы по $n$ и $t$) при росте $t$ (и фиксированном $n$). Таких различных слов не более $n+1$ --- по количеству возможных единиц (т.е. не более $n$ изменений), порядок же и позиции их появления строго зафиксированы алгоритмом $A$ (а с некоторого момента, правда мы никак не можем узнать, наступил ли он, слово становится неизменным, ведь все элементы с маленькими номерами будут уже перечислены алгоритмом). 
+
+При этом
+$L(\Gamma_{\alpha^n(t)})=2^{-n},$ 
+$ \sum\limits_{t=0}^\infty L\left(\Gamma_{\alpha^n(t)}\right) =
+L\left(\bigsqcup\limits_{t=0}^\infty\Gamma_{\alpha^n(t)}\right) = 
+L\left(\bigcup\limits_{t=0}^\infty\Gamma_{\alpha^n(t)}\right) <
+\cfrac{n+1}{2^n}$ (интервалы попарно не пересекаются)
+, и, что существенно, $\exists \: \hat t \colon \omega\subset \alpha^n(\hat t)$, поэтому $\{\omega\} \in \bigcup\limits_{t=0}^\infty\Gamma_{\alpha^n(t)}$. Выбрав $n(\eps)\colon \cfrac{n+1}{2^n} <  \eps $, получим вычислимую совокупность $\{\Gamma_{\alpha^{n(\eps)}(t)}\}_{t=1}^\infty$ интервалов малой суммарной меры, содержащей нашу последовательность, что и означает её неслучайность.
+
+
+\task{2.5}
+Предположим, что $\hat\omega=\omega_{n_1}\omega_{n_2}\ldots$  не является случайной по Мартин--Лёфу, т.е. множество $\{\hat\omega\}$ --- ЭН, тогда существует ВФ $x(\eps,i),$ подтверждающая этот факт по определению: 
+$$\forall\: \eps > 0 \;
+\{\hat\omega\}\subset \bigcup\limits_{i=1}^\infty\Gamma_{x(\eps,i)}, 
+\sum\limits_{i=1}^\infty L\left(\Gamma_{x(\eps,i)}\right) \leqslant \eps.$$
+%Не ограничивая общность, можно считать что все длины $l(x(\eps,i)) = h(\eps)$ --- одинаковы при фиксированном $i$.
+Построим ВФ: $m(l)=\min\limits_{k}\cbr{k\colon |\{n_j \le k\}| \ge l}$. Зафиксируем $\eps>0.$ Построим слова 
+$$y(\eps,i) = (0|1)^{n_1-1}\alpha_1(0|1)^{n_2-n_1-1}\alpha_2\ldots(0|1)^{n_{m(l(x(\eps,i)))}-n_{m(l(x(\eps,i)))-1}-1}\alpha_{m(l(x(\eps,i)))},$$
+где $\alpha_1\ldots\alpha_{m(l(x(\eps,i)))}$~--- все возможные продолжения $x(\eps,i)$. Тогда 
+$$\{\omega\}\subset \bcup{i=1}\infty\Gamma_{y(\eps,i)}, 
+\sum\limits_{i=1}^\infty L\left(\Gamma_{y(\eps,i)}\right) \leqslant \eps,$$
+что противоречит случайности $\omega$.
+
+
+\task{2.6}
+Предположим, что $\hat \omega = \omega\oplus \alpha$ не является случайной по Мартин--Лёфу, т.е. множество $\{\hat \omega\}$ --- ЭН, тогда существует ВФ $\hat x(\eps,i),$ подтверждающая этот факт по определению: 
+$$\foral{\eps > 0}
+\{\hat \omega\}\subset \bigcup\limits_{i=1}^\infty\Gamma_{\hat x(\eps,i)}, 
+\sum\limits_{i=1}^\infty L\left(\Gamma_{\hat x(\eps,i)}\right) \leqslant \eps.$$
+
+Построим ВФ  $x(\eps,i) = \hat x(\eps,i)\oplus \alpha^{l(\hat x(\eps,i))},$ (отметим, что $\omega\oplus \alpha \oplus \alpha = \omega$). Тогда получим противоречие со случайностью $\omega,$ ведь она оказывается ЭН:
+$$\forall\: \eps > 0 \;
+\{\omega\}\subset \bigcup\limits_{i=1}^\infty\Gamma_{x(\eps,i)}, 
+\sum\limits_{i=1}^\infty L\left(\Gamma_{x(\eps,i)}\right) \leqslant \eps.$$
