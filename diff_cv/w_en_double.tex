@@ -17,7 +17,7 @@
 
 \def\LiPart{L_i(a_i,\idots \lambda1N)}
 \def\sumLambdaX{\suml_{j=1}^N\lambda_jx_{ij}}
-
+\newcommand\diag[1]{\text{diag}\cbr{#1}}
 Положим 
 \begin{equation}
 	\label{partialLagr}
@@ -69,12 +69,13 @@
 
 Подставляя значения из \ref{hatAicases} в \ref{partialLagrParted}, получим решение задачи минимизации по $a_i$:
 \begin{align}
+	\label{hatLiSquared}
 	\begin{split}
 		\hat L_i(\idots \lambda1N) &= \min_{a_i}L_i(a_i, \idots \lambda1N) =
 		\begin{cases}
-			-\frac1{4\beta}\cbr{\sumLambdaX+\mu}^2, &\sumLambdaX \le -\mu,\\
+			-\cfrac1{4\beta}\cbr{\sumLambdaX+\mu}^2, &\sumLambdaX \le -\mu,\\
 			0, 										&-\mu < \sumLambdaX < \mu,\\
-			-\frac1{4\beta}\cbr{\sumLambdaX-\mu}^2, &\mu\le\sumLambdaX,
+			-\cfrac1{4\beta}\cbr{\sumLambdaX-\mu}^2, &\mu\le\sumLambdaX,
 		\end{cases} = \\
 		&= -\frac1{4\beta}
 		\begin{cases}
@@ -86,3 +87,62 @@
 	\end{split}
 \end{align}
 (Здесь не сходится с результатами doc-файла)
+
+Теперь перейдём к минимизации по $\cbr{\delta_1, \ldots, \delta_N}:$
+\begin{equation}
+	0 = \dd{}{\delta_j}L(\mb a,\idots \delta1N, \idots \lambda1N) = 2p_j\delta_j - \lambda_j 
+\end{equation}
+\begin{equation}
+	\label{deltaJ}
+	\delta_j = \frac{\lambda_j}{2p_j}
+\end{equation}
+
+Подставим результаты (\ref{hatLiSquared}) в (\ref{LagrWEN}):
+\begin{align} 
+	\hat L&\cbr{\mb a,\idots \delta1N, \idots \lambda1N} 
+		= \suml_{i=1}^n \hat L_i(a_i,\idots \lambda1N)
+		+ \suml_{j=1}^N \cbr{p_j\delta_j^2  - \lambda_j\cbr{\delta_j - y_j}} = \\
+		&= -\frac1{4\beta} \suml_{i=1}^n \cbr{\min\fbr{\mu + \sumLambdaX, 0, \mu-\sumLambdaX}}^2
+		+ \suml_{j=1}^N \cbr{p_j\cbr{\frac{\lambda_j}{2p_j}}^2  - \lambda_j\cbr{\frac{\lambda_j}{2p_j} - y_j}} = \\
+		&= -\frac1{4\beta} \suml_{i=1}^n \cbr{\min\fbr{\mu + \sumLambdaX, 0, \mu - \sumLambdaX}}^2
+		- \suml_{j=1}^N \cbr{ \frac{\lambda_j^2}{4p_j}  - \lambda_j y_j} 
+\end{align}
+
+Таким образом, задача (\ref{LagrWEN}) свелась к 
+\begin{align}
+-\frac1{4\beta} \suml_{i=1}^n \cbr{\min\fbr{\mu + \sumLambdaX, 0, \mu - \sumLambdaX}}^2
+		- \suml_{j=1}^N \cbr{ \frac{\lambda_j^2}{4p_j}  - \lambda_j y_j} \to \max_{\idots \lambda1N}
+\end{align}
+Используя соотношение (\ref{deltaJ}), получим эквивалентную задачу:
+\begin{align} 
+	% \hat L&\cbr{\mb a,\idots \delta1N, \idots \lambda1N} 
+	% 	= \suml_{i=1}^n \hat L_i(a_i,\idots \lambda1N)
+	% 	+ \suml_{j=1}^N % \cbr{p_j\cbr{\frac{\lambda_j}{2p_j}}^2  - \lambda_j\cbr{\frac{\lambda_j}{2p_j} - y_j}} = \\
+	% 		\cbr{p_j\delta_j^2  - \lambda_j\cbr{\delta_j - y_j}} = \\
+	% 	&= -\frac1{4\beta} \suml_{i=1}^n \cbr{\min\fbr{\mu + \sumLambdaX, 0, \mu-\sumLambdaX}}^2
+	% 	- \suml_{j=1}^N \cbr{p_j\delta_j^2  -  2 \delta_j p_j (\delta_j - y_j)} = \\
+	% 	&= 
+	-\frac1{4\beta} \suml_{i=1}^n \cbr{\min\fbr{\mu + \suml_{j=1}^N2 \delta_j p_jx_{ij}, 0, \mu-\suml_{j=1}^N2 \delta_j p_jx_{ij}}}^2
+		- \suml_{j=1}^N \cbr{ \delta_j^2 p_j  - 2\delta_j p_j y_j} \to \max_{\idots \delta1N}
+\end{align}
+Отметим, что задача осталась задачей максимизации.
+
+Положим 
+\begin{align}
+	W(\idots \delta1N) 
+	= \frac1{4\beta} \suml_{i=1}^n \cbr{\min\fbr{\mu + \suml_{j=1}^N2 \delta_j p_jx_{ij}, 0, \mu-\suml_{j=1}^N2 \delta_j p_jx_{ij}}}^2
+		+ \suml_{j=1}^N \cbr{ \delta_j^2 p_j  - 2\delta_j p_j y_j}
+\end{align}
+
+Итак, достаточно решить задачу 
+\begin{align}
+	W(\idots \delta1N) \to \min_{\idots \delta1N},
+\end{align}
+или же, используя матричные обозначения $\mb \delta = \cbr{\idots \delta1N}^T \in \mathbb R^N, \mb x_i = \cbr{x_{i1}, \ldots, \mb y = \idots y1N, x_{iN}}^T \in \mathbb R^N, P = P^T= \diag{\sqrt{p_1}, \ldots, \sqrt{p_N}},$
+
+\begin{align}
+	W(\mb \delta) = \frac1{2\beta} \suml_{i=1}^n \cbr{\min\fbr{\frac\mu2 + \mb \delta^T P^2\mb x_i, 0, \frac\mu2- \mb \delta^T P^2\mb x_i}}^2
+		+ (\mb \delta - \mb y)^T P (\mb \delta - \mb y) \to \min_{\mb \delta}.
+\end{align}
+
+Пусть $\hat{\mb \delta}$~--- решение этой задачи. Оно единственно в силу выпуклости функции $W(\mb \delta)$ по $\mb \delta$.
