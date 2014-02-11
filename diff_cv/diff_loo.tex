@@ -1,1 +1,12 @@
-diff_loo.tex
+\begin{align}
+	\hat S(\lambda_1, \lambda_2) &= \frac1N\sum_{j=1}^N \hat\delta_{j, \lambda_1, \lambda_2}^2, \\
+	\hat \delta_{j, \lambda_1, \lambda_2} &= y_j - \mb x_j^T \hat {\mb a}_{\lambda_1, \lambda_2}.
+\end{align}
+В используемых обозначениях кросс-валидацию можно рассматривать как обучение с поочередным присвоением объектам нулевых весов ($p_j=0$).
+Усреденные квадратичные остатки 
+
+
+\begin{align}
+	\hat{S}_{\text{LOO}}&=\frac1N\sum_{j=1}^N\sqr{\hat{\delta}_{j, \lambda_1, \lambda_2}^{(j)}}, \\
+	\hat \delta_{j, \lambda_1, \lambda_2}^{(j)} &= y_j - \mb x_j^T \hat {\mb a}_{\lambda_1, \lambda_2}^{(j)}.
+\end{align}
