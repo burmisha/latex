@@ -1,0 +1,37 @@
+
+У Жени всё в терминах $c$
+$$
+\hat y(x) = \sum_{j=1}^N c_j x_{ij}
+$$
+
+\begin{equation}
+	\label{basicENdelta}
+	\begin{cases}
+		\suml_{i=1}^n c_i^2 + \suml_{j=1}^N \delta_j^2 \to \min_{\mb c, \mb \delta}, \\
+	\delta_j = y_j - \suml_{i=1}^n c_ix_{ij}, j=1,\ldots,N. 
+	\end{cases}
+\end{equation}
+
+\begin{equation}
+	\label{basicENdelta}
+	\begin{cases}
+		\suml_{i=1}^n c_i^2 + \suml_{j=1}^N p_j\delta_j^2 \to \min_{\mb c, \mb \delta}, \\
+	\delta_j = y_j - \suml_{i=1}^n c_ix_{ij}, j=1,\ldots,N. 
+	\end{cases}
+\end{equation}
+
+
+
+\begin{equation}
+L(\mb c,\idots \delta1N, \idots \lambda1N) 
+	= \frac12 \mb c^T\mb c +  \frac12 \suml_{j=1}^N p_j\delta_j^2 + \sum_{j=1}^N\lambda_j\cbr{y_j  - \suml_{i=1}^n c_i x_{ij} - \delta_j }
+\end{equation}
+
+\begin{equation}
+L(\beta) = - \left.\sum_{i=1}^N \dd{\delta_j^2(\mb p\cond \beta)}{p_j}\right|_{\mb p = (1, \ldots, 1)} \to \min_{\beta}
+\end{equation}
+
+\begin{equation}
+\dd{\delta_j^2(\mb p)}{p_j} = 2 \delta_j(\mb p\cond \beta)\dd{\delta_j(\mb p)}{p_j} 
+\end{equation}
+

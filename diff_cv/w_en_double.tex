@@ -62,7 +62,7 @@
 	\label{hatAicases}
 	         &\sumLambdaX \le -\mu 	&\Rightarrow \hat a_i &= \frac{\sumLambdaX+\mu}{2\beta}, \\
 	-\mu <   &\sumLambdaX < \mu 	&\Rightarrow \hat a_i &= 0, \\
-	-\mu \le &\sumLambdaX 			&\Rightarrow \hat a_i &= \frac{\sumLambdaX-\mu}{2\beta},
+	\mu \le &\sumLambdaX 			&\Rightarrow \hat a_i &= \frac{\sumLambdaX-\mu}{2\beta},
 \end{align}
 
 % a x^2 + b x + c = a(x-b/{2a})^2 + c - b^2/{4a} = a(x-x_0)^2 + c - a x_0^2
@@ -138,7 +138,7 @@
 \begin{align}
 	W(\idots \delta1N) \to \min_{\idots \delta1N},
 \end{align}
-или же, используя матричные обозначения $\mb \delta = \cbr{\idots \delta1N}^T \in \mathbb R^N, \mb x_i = \cbr{x_{i1}, \ldots, \mb y = \idots y1N, x_{iN}}^T \in \mathbb R^N, P = P^T= \diag{\sqrt{p_1}, \ldots, \sqrt{p_N}},$
+или же, используя матричные обозначения $\mb \delta = \cbr{\idots \delta1N}^T \in \mathbb R^N, \mb x_i = \cbr{x_{i1}, \ldots, , x_{iN}} \in \mathbb R^N, \mb y = \cbr{\idots y1N}^T \in \mathbb R^N, P = P^T= \diag{\sqrt{p_1}, \ldots, \sqrt{p_N}},$
 
 \begin{align}
 	W(\mb \delta) = \frac1{2\beta} \suml_{i=1}^n \cbr{\min\fbr{\frac\mu2 + \mb \delta^T P^2\mb x_i, 0, \frac\mu2- \mb \delta^T P^2\mb x_i}}^2
