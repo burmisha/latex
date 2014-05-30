@@ -1,17 +1,41 @@
+
+\def\lams{{\lambda_1,\lambda_2}}
+
 \begin{align}
-	\hat S(\lambda_1, \lambda_2) &= \frac1N\sum_{j=1}^N \hat\delta_{j, \lambda_1, \lambda_2}^2, \\
-	\hat \delta_{j, \lambda_1, \lambda_2} &= y_j - \mb x_j^T \hat {\mb a}_{\lambda_1, \lambda_2}.
+	\hat S(\lams) &= \frac1N\sum_{j=1}^N \hat\delta_{j, \lams}^2, \\
+	\hat \delta_{j, \lams} &= y_j - \mb x_j^T \hat {\mb a}_{\lams}.
 \end{align}
 В используемых обозначениях кросс-валидацию можно рассматривать как обучение с поочередным присвоением объектам нулевых весов ($p_j=0$).
-Усреденные квадратичные остатки 
+Усреднённые квадратичные остатки 
 
 
 \begin{align}
-	\hat{S}_{\text{LOO}}&=\frac1N\sum_{j=1}^N\sqr{\hat{\delta}_{j, \lambda_1, \lambda_2}^{(j)}}, \\
-	\hat \delta_{j, \lambda_1, \lambda_2}^{(j)} &= y_j - \mb x_j^T \hat {\mb a}_{\lambda_1, \lambda_2}^{(j)}.
+	\hat{S}_{\text{LOO}}&=\frac1N\sum_{j=1}^N\sqr{\hat{\delta}_{j, \lams}^{(j)}}, \\
+	\hat \delta_{j, \lams}^{(j)} &= y_j - \mb x_j^T \hat {\mb a}_{\lams}^{(j)}.
+\end{align}
+
+$\hat {\mb a}_{\lams}^{(j)}$~--- результат обучения при векторе весов $p^{(j)}, p_i^{(j)} = \sbr{i \ne j}$ (единицы на всех позициях, кроме $j$-ой), т.е. при исключённом объекте $j.$
+
+
+Изучим, как соотносятся 
+$\suml_{j=1}^N\sqr{\hat{\delta}_{j, \lams}^{(j)}}$
+и $\suml_{j=1}^N \hat\delta_{j, \lams}^2$
+
+\begin{align}
+	\suml_{j=1}^N\sqr{\hat{\delta}_{j, \lams}^{(j)}} &= 
+		\suml_{j=1}^N\sqr{y_j - \mb x_j^T \hat {\mb a}_{\lams}^{(j)}} \\
+	\suml_{j=1}^N \hat\delta_{j, \lams}^2 &= 
+		\suml_{j=1}^N \sqr{y_j - \mb x_j^T \hat {\mb a}_{\lams}}
+\end{align}
+
+При поиске вектора $\hat{\mb a}$ мы получаем разбиение всех его компонент (а вместе с ними и признаков) на 3 группы: положительные, равный нулю и отрицательные. Пусть $I=\fbr{1,\ldots, n}$~--- множество всех признаков. Введём  обозначения:
+\begin{align}
+	\hat I^-_\lams &= \fbr{i\in I: \hat a_{i, \lams} < 0}, \\
+	\hat I^0_\lams &= \fbr{i\in I: \hat a_{i, \lams} = 0}, \\
+	\hat I^+_\lams &= \fbr{i\in I: \hat a_{i, \lams} > 0}.
 \end{align}
 
 \begin{align}
 	% \dd{}{\mb p}\hat{S}_{\lambda_1, \lambda_2}&= \frac2N\cbr{y_j - x_j^T \dd{}{\mb p}\hat {\mb a}_{\lambda_1, \lambda_2}}.
-	\dd{}{p_k}\hat{S}_{\lambda_1, \lambda_2}&= \frac2N\sum_{j=1}^N\cbr{y_j - x_j^T \dd{}{p_k}\hat {\mb a}_{\lambda_1, \lambda_2}}
+	\dd{}{p_k}\hat{S}_{\lams}&= \frac2N\sum_{j=1}^N\cbr{y_j - x_j^T \dd{}{p_k}\hat {\mb a}_{\lams}}
 \end{align}
