@@ -144,6 +144,73 @@ $\hat {\mb a}_{\lams}^{(j)}$~--- результат обучения при ве
 	&= \frac{y_k - \hat y_k}{\denominator}.
 \end{align}
 
+Таким образом, теорема доказана.
+
+
+\begin{theorem}
+Про дифф кросс валидацию
+\end{theorem}
+
+\begin{align}
+	\hat S(\lams)
+	&= \frac1N\suml_{k=1}^N\hat\delta_{k, \lams}^2
+	= \frac1N\suml_{k=1}^N\cbr{y_k - \tilde {\mb x}_k^T \besta}^2 = \\
+	&= \frac1N\suml_{k=1}^N
+		\cbr{y_k - \tilde {\mb x}_k^T
+		\inv{\tilde{\mb X}^T_\lams P^2\tilde{\mb X}_\lams + \beta I_{\hat n_\lams}}
+		\cbr{\tilde{\mb X}^T_\lams P^2 y - \frac\mu2\tilde{\mb e}_\lams}
+	}^2.
+\end{align}
+
+Положим $\mb \Delta = \mb P^2 - \mb I = \diag{p_1 - 1, \ldots, p_N - 1},$ тогда
+\begin{align}
+	&\dd{\hat\delta^2_k(\mb p \cond \lams)}{p_j}
+	= 	2\delta_k(\mb p \cond \lams)\dd{\hat\delta_k(\mb p \cond \lams)}{p_j} = \\
+	&= 	2\delta_k(\mb p \cond \lams)
+		\dd{}{p_j}
+		\fbr{
+			\cbr{y_k - \tilde {\mb x}_k^T \inv{\tilde{\mb X}^T P^2\tilde{\mb X} + \beta I_{\hat n}}
+			\cbr{\tilde{\mb X}^T P^2 \mb y -\frac\mu2\tilde{\mb e}}}
+		} = \\
+	&= 2\delta_k(\mb p \cond \lams) \tilde {\mb x}_k^T
+	\left\{
+		\inv{\tilde{\mb X}^T P^2\tilde{\mb X} + \beta I_{\hat n}}
+	  	\dd{\cbr{\tilde{\mb X}^T P^2 \mb y}}{p_j} -
+	  	\right. \\
+	&- 	\left.
+	   	\inv{\tilde{\mb X}^T P^2\tilde{\mb X} + \beta I_{\hat n}}
+		\dd{\cbr{\tilde{\mb X}^T P^2\tilde{\mb X}}}{p_j}
+		\inv{\tilde{\mb X}^T P^2\tilde{\mb X} + \beta I_{\hat n}}
+		\cbr{\tilde{\mb X}^T P^2 \mb y -\frac\mu2\tilde{\mb e}}
+	\right\} = \\
+	&= 2\delta_k(\mb p \cond \lams) \tilde {\mb x}_k^T
+	\fbr{
+		\inv{\tilde{\mb X}^T P^2\tilde{\mb X} + \beta I_{\hat n}}
+		\tilde{\mb x}_{j,\lams}y_j
+		-
+		\inv{\tilde{\mb X}^T P^2\tilde{\mb X} + \beta I_{\hat n}}
+		\tilde{\mb x}_j \tilde{\mb x}^T_j
+		\besta
+	}
+\end{align}
+
+\begin{align}
+	\dd{\hat\delta^2_k(\mb p \cond \lams)}{p_k}
+	&= 2\delta_k(\mb p \cond \lams) \tilde {\mb x}_k^T
+	\fbr{
+		\inv{\tilde{\mb X}^T P^2\tilde{\mb X} + \beta I_{\hat n}}
+		\tilde{\mb x}_ky_k
+		-
+		\inv{\tilde{\mb X}^T P^2\tilde{\mb X} + \beta I_{\hat n}}
+		\tilde{\mb x}_k \tilde{\mb x}^T_k
+		\besta
+	} = \\
+	&= 2\delta_k(\mb p \cond \lams)
+		\tilde {\mb x}_k^T
+		\inv{\tilde{\mb X}^T P^2\tilde{\mb X} + \beta I_{\hat n}}
+		\tilde{\mb x}_k \cbr{y_k - \hat y_k}
+\end{align}
+
 Изучим, как соотносятся
 $\suml_{j=1}^N\sqr{\hat{\delta}_{j, \lams}^{(j)}}$
 и $\suml_{j=1}^N \hat\delta_{j, \lams}^2$
