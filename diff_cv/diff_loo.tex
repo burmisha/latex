@@ -164,15 +164,13 @@ $\hat {\mb a}_{\lams}^{(j)}$~--- результат обучения при ве
 
 Положим $\mb \Delta = \mb P^2 - \mb I = \diag{p_1 - 1, \ldots, p_N - 1},$ тогда
 \begin{align}
-	&\dd{\hat\delta^2_k(\mb p \cond \lams)}{p_j}
-	= 	2\delta_k(\mb p \cond \lams)\dd{\hat\delta_k(\mb p \cond \lams)}{p_j} = \\
-	&= 	2\delta_k(\mb p \cond \lams)
-		\dd{}{p_j}
+	\dd{\hat\delta_k(\mb p \cond \lams)}{p_j}
+	&= 	\dd{}{p_j}
 		\fbr{
-			\cbr{y_k - \tilde {\mb x}_k^T \inv{\tilde{\mb X}^T P^2\tilde{\mb X} + \beta I_{\hat n}}
-			\cbr{\tilde{\mb X}^T P^2 \mb y -\frac\mu2\tilde{\mb e}}}
+			y_k - \tilde {\mb x}_k^T \inv{\tilde{\mb X}^T P^2\tilde{\mb X} + \beta I_{\hat n}}
+			\cbr{\tilde{\mb X}^T P^2 \mb y -\frac\mu2\tilde{\mb e}}
 		} = \\
-	&= 2\delta_k(\mb p \cond \lams) \tilde {\mb x}_k^T
+	&= - \tilde {\mb x}_k^T
 	\left\{
 		\inv{\tilde{\mb X}^T P^2\tilde{\mb X} + \beta I_{\hat n}}
 	  	\dd{\cbr{\tilde{\mb X}^T P^2 \mb y}}{p_j} -
@@ -183,10 +181,10 @@ $\hat {\mb a}_{\lams}^{(j)}$~--- результат обучения при ве
 		\inv{\tilde{\mb X}^T P^2\tilde{\mb X} + \beta I_{\hat n}}
 		\cbr{\tilde{\mb X}^T P^2 \mb y -\frac\mu2\tilde{\mb e}}
 	\right\} = \\
-	&= 2\delta_k(\mb p \cond \lams) \tilde {\mb x}_k^T
+	&= - \tilde {\mb x}_k^T
 	\fbr{
 		\inv{\tilde{\mb X}^T P^2\tilde{\mb X} + \beta I_{\hat n}}
-		\tilde{\mb x}_{j,\lams}y_j
+		\tilde{\mb x}_jy_j
 		-
 		\inv{\tilde{\mb X}^T P^2\tilde{\mb X} + \beta I_{\hat n}}
 		\tilde{\mb x}_j \tilde{\mb x}^T_j
@@ -195,8 +193,8 @@ $\hat {\mb a}_{\lams}^{(j)}$~--- результат обучения при ве
 \end{align}
 
 \begin{align}
-	\dd{\hat\delta^2_k(\mb p \cond \lams)}{p_k}
-	&= 2\delta_k(\mb p \cond \lams) \tilde {\mb x}_k^T
+	\dd{\hat\delta_k}{p_k}
+	&= - \tilde {\mb x}_k^T
 	\fbr{
 		\inv{\tilde{\mb X}^T P^2\tilde{\mb X} + \beta I_{\hat n}}
 		\tilde{\mb x}_ky_k
@@ -205,10 +203,37 @@ $\hat {\mb a}_{\lams}^{(j)}$~--- результат обучения при ве
 		\tilde{\mb x}_k \tilde{\mb x}^T_k
 		\besta
 	} = \\
-	&= 2\delta_k(\mb p \cond \lams)
-		\tilde {\mb x}_k^T
+	&= -\tilde {\mb x}_k^T
 		\inv{\tilde{\mb X}^T P^2\tilde{\mb X} + \beta I_{\hat n}}
 		\tilde{\mb x}_k \cbr{y_k - \hat y_k}
+	= - \tilde {\mb x}_k^T
+		\inv{\tilde{\mb X}^T P^2\tilde{\mb X} + \beta I_{\hat n}}
+		\tilde{\mb x}_k \hat \delta_k.
+\end{align}
+
+Тогда
+\begin{align}
+	\left.\fbr{
+		\hat S(\mb p, \lams)
+	- 	\suml_{i=1}^N\dd{\delta_i^2(\mb p, \lams)}{p_i}
+	}\right|_{\mb p=\mb e}
+	&= 	\frac1N\suml_{i=1}^N
+		\cbr{
+			\hat \delta_{i, \lams}^2
+		+ 	2 \delta_i(\mb p, \lams)
+			\tilde {\mb x}_i^T
+			\inv{\tilde{\mb X}^T \tilde{\mb X} + \beta I_{\hat n}}
+			\tilde{\mb x}_i \hat \delta_i
+		} = \\
+	&= 	\frac1N\suml_{i=1}^N
+			\hat \delta_{i, \lams}^2
+		\cbr{
+			1
+		+ 	2
+			\tilde {\mb x}_i^T
+			\inv{\tilde{\mb X}^T \tilde{\mb X} + \beta I_{\hat n}}
+			\tilde{\mb x}_i
+		}
 \end{align}
 
 Изучим, как соотносятся
