@@ -1,0 +1,120 @@
+\documentclass[unicode,lefteqn,c,hyperref={pdfpagelabels=false}]{beamer}
+\usepackage[utf8]{inputenc}
+% \usepackage[T2A]{fontenc}
+\usepackage{amssymb}
+\usepackage{amsmath,mathrsfs}
+\usepackage[russian]{babel}
+\usepackage{ulem}\normalem
+\usepackage{color}
+\usepackage[noend]{algorithmic}
+
+\input ../macro.tex
+
+\usetheme{Warsaw}
+\usefonttheme[onlylarge]{structurebold}
+\setbeamerfont*{frametitle}{size=\normalsize,series=\bfseries}
+\setbeamertemplate{navigation symbols}{}
+\setbeameroption{show notes}
+\definecolor{beamer@blendedblue}{RGB}{15,80,120}
+\let\Tiny=\tiny
+\def\shortspace{\hspace{1.5pt}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\title[\hbox to 56mm{Дифференциальный скользящий контроль \hfill\insertframenumber\,/\,\inserttotalframenumber}]{Дифференциальный скользящий контроль при выборе параметров регуляризации в задаче регрессионного анализа с помощью Elastic Net}
+\author[М.\shortspaceО.\shortspaceБурмистров]{М.\shortspaceО.\shortspaceБурмистров}
+\institute{Научный руководитель д.т.н.
+	\vfill В.\,В.~Моттль \vfill ~ 
+	\vfill Московский физико-технический институт
+	\vfill Факультет управления и прикладной математики
+	\vfill Кафедра интеллектуальных систем}
+\date{10 июня 2014г.}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\begin{frame}
+	\titlepage
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Постановка задачи}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Данные и вероятностные гипотезы}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Данные и вероятностные гипотезы}
+	\textbf{Изучаемые объекты:}
+	\begin{itemize}
+			\item $\Omega$~--- объекты реального мира;
+			\item $\mb x \colon \Omega \to X = \mathbb R^n$~--- признаковое описание объектов, $\mb x(\omega) = (x_1, \ldots, x_n)^T$;
+			\item $y \colon \Omega \to Y = \mathbb R$~--- скрытая характеристика объектов.
+	\end{itemize}
+
+	\smallskip
+	% \rlap{\textbf{Основные гипотезы вероятностной тематической модели:}}
+	\textbf{Исходные данные}
+	\begin{itemize}
+		\item $\Omega^* = \fbr{w_i\cond i=1,\ldots,N}\subset \Omega$~--- обучающая совокупность;
+		\item $\mb X = (\mb x_1, \ldots, \mb x_N)^T$~--- матрица объекты-признаки;
+		\item $\mb y = (y_1, \ldots, y_N)^T$~--- вектор ответов.
+	\end{itemize}
+
+	\smallskip
+	\textbf{Задача линейной регрессии:}
+
+	Функция $\hat y \colon X \to Y$ ищется в параметрическом семействе 
+	\begin{equation*}
+		\hat y(\mb x) = \mb a^T\mb x + b, \:\text{где $\mb a \in \mathbb R^n$ и $b\in \mathbb R.$}
+	\end{equation*}
+\end{frame}
+
+\begin{frame}{Регуляризация}
+	\textbf{Исходный функционал качества}
+	\begin{equation*}
+		\suml_{i=1}^N(y_i - \hat y(\mb x_i))^2.
+	\end{equation*}
+
+	\smallskip
+	\textbf{Регуляризация Elastic Net}
+
+	Для отбора признаков введём штрафную функцию
+	\begin{equation*}
+		\beta\suml_{i=1}^n a_i^2 + \mu\suml_{i=1}^n\abs{a_i}.
+	\end{equation*}
+
+	\smallskip
+	\textbf{Требования нормировки}
+
+	При использовании общих коэффициентов штрафа для компонент \mb a необходимо сделать замену, чтобы обучающая совокупность была центрирована и нормирована:
+	\begin{equation*}
+		\frac1N\suml_{i=1}^N\mb x_i = \mb 0, \:
+		\frac1N\suml_{i=1}^N y_i = 0, \:
+		\foral{j=1,\ldots, n} \: \frac1N\suml_{i=1}^N\mb x_{ij}^2 = 1. 
+	\end{equation*}
+\end{frame}
+
+\begin{frame}{Кросс валидация}
+	\textbf{Задача оптимизации}
+	\begin{equation*}
+		\begin{cases}
+			\suml_{i=1}^n\cbr{\beta a_i^2 + \mu \modul{a_i}} 
+			+ \suml_{j=1}^N \delta_j^2 \to \min_{\mb a}, \\
+			\delta_j = y_j - \suml_{i=1}^nx_{ij}a_i, j=1,\ldots,N. 
+		\end{cases}
+	\end{equation*}
+	Оптимальный вектор \mb a зависит от $\beta, \mu, \Omega^*.$
+
+	\smallskip
+	\textbf{Кросс валидация}
+
+	\begin{equation*}
+		LOO(\beta, \mu) = \frac1N\suml_{i=1}^N\cbr{y_i - \hat{\mb a}^T(\Omega \backslash \fbr{\omega_i})\mb x_i}^2
+	\end{equation*}
+\end{frame}
+
+\section*{}
+\subsection{Заключение}
+\begin{frame}{Заключение, результаты и выводы}
+\end{frame}
+
+\end{document}
