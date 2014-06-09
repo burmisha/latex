@@ -120,9 +120,6 @@
 \end{frame}
 
 \begin{frame}{Кросс валидация}
-	
-
-	\smallskip
 	Зафиксируем множество $\hat I_\lams = \hat I^-_\lams \cup I^+_\lams$ и предположим, что оно не изменяется при исключении любого одного объекта $\omega_i$ из обучающей совокупности $\Omega^*.$
 
 % \def\A{\tilde{\mb X}^T\tilde{\mb X} + \beta \tilde{\mb I}_{\hat n}}
@@ -152,9 +149,34 @@
 			\hat{\tilde{\mathbf a}} &= (\hat a_i \cond i\in \hat I_\lams)^T \text{ --- ненулевые компоненты $\hat{\mb a}(\Omega^*),$} \\
 			\tilde{\mb x} &= (x_i \cond i\in \hat I_\lams)^T,
 			\tilde{\mb X}\!=\!(\tilde{\mb x}_1, \ldots, \tilde{\mb x}_N)\!^T \text{ --- значения признаков $\hat I_\lams,$} \\
-			\hat y_k &= \hat{\tilde{\mathbf a}}^T\!(\Omega^*)\tilde{\mb x}_k = \hat{\mb a}^T\!(\Omega^*)\mb x_k \text{ --- значения функции регрессии.} \\
+			\hat y_k &= \hat{\tilde{\mathbf a}}^T\!(\Omega^*)\tilde{\mb x}_k = \hat{\mb a}^T\!(\Omega^*)\mb x_k \text{ --- значения функции регрессии.} 
 		\end{align*}
-		\vspace{-35pt}
+		\vspace{-20pt}
+	\end{theorem}
+\end{frame}
+
+
+\begin{frame}{Дифференциальная кросс-валидация}
+	Изменим задачу оптимизации, присвоив вес $p$ каждому объекту обучения $\omega$: 
+	\begin{equation*}
+		\begin{cases}
+			\suml_{i=1}^n\cbr{\beta a_i^2 + \mu \modul{a_i}}
+			+ \suml_{j=1}^N p_j\delta_j^2 \to \min_{\mb a}, \\
+			\delta_j = y_j - \suml_{i=1}^nx_{ij}a_i, j=1,\ldots,N.
+		\end{cases}
+	\end{equation*}
+
+	Функционал ошибки оставим прежним:
+	\begin{equation*}
+		\hat S(\mb p, \lams) = \suml_{k=1}^N \hat{\delta}_k^2.
+	\end{equation*}
+
+	\begin{theorem}
+		\begin{equation*}
+			\dd{\hat\delta_k}{p_k} = - \tilde {\mb x}_k^T
+			\inv{\tilde{\mb X}^T P\tilde{\mb X} + \beta I_{\hat n}}
+			\tilde{\mb x}_k \hat \delta_k, \text{ где } P = \text{diag}\cbr{p_1, \ldots, p_N}.
+		\end{equation*}
 	\end{theorem}
 \end{frame}
 
