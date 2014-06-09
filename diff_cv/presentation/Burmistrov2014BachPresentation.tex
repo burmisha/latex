@@ -156,7 +156,6 @@
 	\end{theorem}
 \end{frame}
 
-
 \begin{frame}{Дифференциальная кросс-валидация}
 	Изменим задачу оптимизации, присвоив вес $p$ каждому объекту обучения $\omega$:
 	\begin{equation*}
@@ -226,20 +225,28 @@
 		\includegraphics[height=95px]{../graph/diff_CV.png}
 		\begin{center}
 			$\hat S_{Diff}(\lams)$
+			\begin{align*}
+				\hat S_{Diff} &=0.0119, \\ \hat \beta &=0.160, \\ \hat \mu &=48.55
+			\end{align*}
 		\end{center}
 	\column{0.33\textwidth}
 		\includegraphics[height=95px]{../graph/LOO_I.png}
 		\begin{center}
 			$\hat S_{LOO, \hat I_\lams}(\lams)$
+			\begin{align*}
+				\hat S_{LOO, \hat I} &=0.0136, \\ \hat \beta &=0.156, \\ \hat \mu &=47.75
+			\end{align*}
 		\end{center}
 	\column{0.33\textwidth}
 		\includegraphics[height=95px]{../graph/honest_CV.png}
 		\begin{center}
-			$\hat S_{Diff}(\lams)$
+			$\hat S_{LOO}(\lams)$
+			\begin{align*}
+				\hat S_{LOO} &=0.0119, \\ \hat \beta &=0.159, \\ \hat \mu &=48.70
+			\end{align*}
 		\end{center}
 \end{columns}
 \end{frame}
-
 
 \section*{}
 \subsection{Заключение}
