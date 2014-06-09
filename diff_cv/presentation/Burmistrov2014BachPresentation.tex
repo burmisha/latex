@@ -149,7 +149,7 @@
 			\hat{\tilde{\mathbf a}} &= (\hat a_i \cond i\in \hat I_\lams)^T \text{ --- ненулевые компоненты $\hat{\mb a}(\Omega^*),$} \\
 			\tilde{\mb x} &= (x_i \cond i\in \hat I_\lams)^T,
 			\tilde{\mb X}\!=\!(\tilde{\mb x}_1, \ldots, \tilde{\mb x}_N)\!^T \text{ --- значения признаков $\hat I_\lams,$} \\
-			\hat y_k &= \hat{\tilde{\mathbf a}}^T\!(\Omega^*)\tilde{\mb x}_k = \hat{\mb a}^T\!(\Omega^*)\mb x_k \text{ --- значения функции регрессии.} 
+			\hat y_k &= \hat{\tilde{\mathbf a}}^T\!(\Omega^*)\tilde{\mb x}_k = \hat{\mb a}^T\!(\Omega^*)\mb x_k \text{ --- значения функции регрессии.}
 		\end{align*}
 		\vspace{-20pt}
 	\end{theorem}
@@ -157,7 +157,7 @@
 
 
 \begin{frame}{Дифференциальная кросс-валидация}
-	Изменим задачу оптимизации, присвоив вес $p$ каждому объекту обучения $\omega$: 
+	Изменим задачу оптимизации, присвоив вес $p$ каждому объекту обучения $\omega$:
 	\begin{equation*}
 		\begin{cases}
 			\suml_{i=1}^n\cbr{\beta a_i^2 + \mu \modul{a_i}}
@@ -168,7 +168,7 @@
 
 	Функционал ошибки оставим прежним:
 	\begin{equation*}
-		\hat S(\mb p, \lams) = \suml_{k=1}^N \hat{\delta}_k^2.
+		\hat S(\mb p, \lams) = \frac1N\suml_{k=1}^N \hat{\delta}_k^2(\mb p, \lams).
 	\end{equation*}
 
 	\begin{theorem}
@@ -178,6 +178,43 @@
 			\tilde{\mb x}_k \hat \delta_k, \text{ где } P = \text{diag}\cbr{p_1, \ldots, p_N}.
 		\end{equation*}
 	\end{theorem}
+\end{frame}
+
+\begin{frame}{Дифференциальная кросс-валидация}
+	Обучение на всех объектах соответствует единичному вектору $\mb p = \mb e = (1, \ldots, N)^T.$
+	Кросс-валидация же при этом соответствует поочерёдному обнулению компонент вектора
+	$\mb p^{(i)} = \mb e^{(i)} = (e^{(i)}_1, \ldots, e^{(i)}_N)^T, e^{(i)}_k=\begcas{1, i\ne k, \\ 0, i = k.}$
+
+	\textbf{Использование в качестве критерия кросс-валидации приближение функции ошибки:}
+	\begin{align*}
+		\hat S_{Diff}(\lams)
+		&= \frac1N\suml_{k=1}^N \hat{\delta}_k^2(\mb e, \lams)
+		+ \suml_{k=1}^N\left.\dd{\hat{\delta}_k^2(\mb p, \lams)}{p_k}\right|_{\mb p = \mb e}\cdot(-1) = \\
+		&= \frac1N\suml_{k=1}^N
+		\hat{\delta}_k^2(\mb e, \lams)
+		\cbr{1 + 2\tilde {\mb x}_k^T \inv{\tilde{\mb X}^T \tilde{\mb X} + \beta I_{\hat n}}\tilde{\mb x}_k}.
+	\end{align*}
+\end{frame}
+
+\begin{frame}{Сравнение результатов}
+	Положим $\delta^k = y_k - \hat y_k$~--- регрессионные остатки при обучении на $\Omega^*$.
+	Тогда
+	\begin{align*}
+		\hat S_{Diff}(\lams)
+			&= \frac1N\suml_{k=1}^N
+			\hat{\delta}_k^2
+			\cbr{1 + 2\tilde {\mb x}_k^T \inv{\tilde{\mb X}^T \tilde{\mb X} + \beta I_{\hat n}}\tilde{\mb x}_k}, \\
+		S_{LOO, \hat I_\lams}(\lams)
+			&= \frac1N\suml_{k=1}^N
+				\hat{\delta}_k^2
+				\cbr{
+				1 -
+				\tilde{\mb x}_k^T
+				\inv{\tilde{\mb X}^T\tilde{\mb X} + \beta \tilde{\mb I}_{\hat n}}
+				\tilde{\mb x}_k
+				}^{-2}.
+	\end{align*}
+	Результаты совпадают с точностью до малых второго порядка, что доказывает эффективность применения дифференциальной кросс-валидации.
 \end{frame}
 
 \section*{}
