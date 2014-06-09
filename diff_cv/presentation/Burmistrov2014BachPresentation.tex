@@ -7,6 +7,7 @@
 \usepackage{ulem}\normalem
 \usepackage{color}
 \usepackage[noend]{algorithmic}
+\usepackage[outdir=./]{epstopdf}
 
 \input ../macro.tex
 
@@ -129,7 +130,7 @@
 
 	\begin{theorem}
 		\begin{equation*}
-			S_{LOO, \hat I_\lams}
+			\hat S_{LOO, \hat I_\lams}
 			= \frac1N\suml_{k=1}^N
 			\cbr{
 			\frac{
@@ -204,7 +205,7 @@
 			&= \frac1N\suml_{k=1}^N
 			\hat{\delta}_k^2
 			\cbr{1 + 2\tilde {\mb x}_k^T \inv{\tilde{\mb X}^T \tilde{\mb X} + \beta I_{\hat n}}\tilde{\mb x}_k}, \\
-		S_{LOO, \hat I_\lams}(\lams)
+		\hat S_{LOO, \hat I_\lams}(\lams)
 			&= \frac1N\suml_{k=1}^N
 				\hat{\delta}_k^2
 				\cbr{
@@ -216,6 +217,29 @@
 	\end{align*}
 	Результаты совпадают с точностью до малых второго порядка, что доказывает эффективность применения дифференциальной кросс-валидации.
 \end{frame}
+
+\begin{frame}{Качество в зависимости от количества ассоциируемых тем}
+Частный случай алгоритма: LDA-GS, $\alpha = \beta = 0.2$, $|T| = 20$
+\begin{columns}
+	\hspace{-10pt}
+ 	\column{0.33\textwidth}
+		\includegraphics[height=95px]{../graph/diff_CV.png}
+		\begin{center}
+			$\hat S_{Diff}(\lams)$
+		\end{center}
+	\column{0.33\textwidth}
+		\includegraphics[height=95px]{../graph/LOO_I.png}
+		\begin{center}
+			$\hat S_{LOO, \hat I_\lams}(\lams)$
+		\end{center}
+	\column{0.33\textwidth}
+		\includegraphics[height=95px]{../graph/honest_CV.png}
+		\begin{center}
+			$\hat S_{Diff}(\lams)$
+		\end{center}
+\end{columns}
+\end{frame}
+
 
 \section*{}
 \subsection{Заключение}
