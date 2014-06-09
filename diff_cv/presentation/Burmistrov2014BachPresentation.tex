@@ -23,7 +23,7 @@
 \title[\hbox to 56mm{Дифференциальный скользящий контроль \hfill\insertframenumber\,/\,\inserttotalframenumber}]{Дифференциальный скользящий контроль при выборе параметров регуляризации в задаче регрессионного анализа с помощью Elastic Net}
 \author[М.\shortspaceО.\shortspaceБурмистров]{М.\shortspaceО.\shortspaceБурмистров}
 \institute{Научный руководитель д.т.н.
-	\vfill В.\,В.~Моттль \vfill ~ 
+	\vfill В.\,В.~Моттль \vfill ~
 	\vfill Московский физико-технический институт
 	\vfill Факультет управления и прикладной математики
 	\vfill Кафедра интеллектуальных систем}
@@ -62,7 +62,7 @@
 	\smallskip
 	\textbf{Задача линейной регрессии:}
 
-	Функция $\hat y \colon X \to Y$ ищется в параметрическом семействе 
+	Функция $\hat y \colon X \to Y$ ищется в параметрическом семействе
 	\begin{equation*}
 		\hat y(\mb x) = \mb a^T\mb x + b, \:\text{где $\mb a \in \mathbb R^n$ и $b\in \mathbb R.$}
 	\end{equation*}
@@ -89,27 +89,72 @@
 	\begin{equation*}
 		\frac1N\suml_{i=1}^N\mb x_i = \mb 0, \:
 		\frac1N\suml_{i=1}^N y_i = 0, \:
-		\foral{j=1,\ldots, n} \: \frac1N\suml_{i=1}^N\mb x_{ij}^2 = 1. 
+		\foral{j=1,\ldots, n} \: \frac1N\suml_{i=1}^N\mb x_{ij}^2 = 1.
 	\end{equation*}
 \end{frame}
-
+\def\lams{{\mu,\beta}}
 \begin{frame}{Кросс валидация}
 	\textbf{Задача оптимизации}
 	\begin{equation*}
 		\begin{cases}
-			\suml_{i=1}^n\cbr{\beta a_i^2 + \mu \modul{a_i}} 
+			\suml_{i=1}^n\cbr{\beta a_i^2 + \mu \modul{a_i}}
 			+ \suml_{j=1}^N \delta_j^2 \to \min_{\mb a}, \\
-			\delta_j = y_j - \suml_{i=1}^nx_{ij}a_i, j=1,\ldots,N. 
+			\delta_j = y_j - \suml_{i=1}^nx_{ij}a_i, j=1,\ldots,N.
 		\end{cases}
 	\end{equation*}
-	Оптимальный вектор \mb a зависит от $\beta, \mu, \Omega^*.$
+	Оптимальный вектор $\hat{\mb a}$ зависит от $\lams, \Omega^*.$
+
+	При этом множество признаков $I$ естественным образом разбивается на 3 подмножества:
+	\begin{equation*}
+		\hat I^-_\lams = \fbr{i\in I: \hat a_{i} < 0},
+		\hat I^0_\lams = \fbr{i\in I: \hat a_{i} = 0},
+		\hat I^+_\lams = \fbr{i\in I: \hat a_{i} > 0}.
+	\end{equation*}
 
 	\smallskip
 	\textbf{Кросс валидация}
 
 	\begin{equation*}
-		LOO(\beta, \mu) = \frac1N\suml_{i=1}^N\cbr{y_i - \hat{\mb a}^T(\Omega \backslash \fbr{\omega_i})\mb x_i}^2
+		S_{LOO}(\lams) = \frac1N\suml_{i=1}^N\cbr{y_i - \hat{\mb a}^T(\Omega \backslash \fbr{\omega_i})\mb x_i}^2
 	\end{equation*}
+\end{frame}
+
+\begin{frame}{Кросс валидация}
+	
+
+	\smallskip
+	Зафиксируем множество $\hat I_\lams = \hat I^-_\lams \cup I^+_\lams$ и предположим, что оно не изменяется при исключении любого одного объекта $\omega_i$ из обучающей совокупности $\Omega^*.$
+
+% \def\A{\tilde{\mb X}^T\tilde{\mb X} + \beta \tilde{\mb I}_{\hat n}}
+% \def\xxt{\tilde{\mb x}_k \tilde{\mb x}_k^T}
+% \def\denominator{1 - \tilde{\mb x}_k^T\inv{\A}\tilde{\mb x}_k}
+% \def\besta{\hat{\tilde{\mathbf a}}}
+
+	\begin{theorem}
+		\begin{equation*}
+			S_{LOO, \hat I_\lams}
+			= \frac1N\suml_{k=1}^N
+			\cbr{
+			\frac{
+				y_k - \hat y_k
+			}{
+				1 -
+				\tilde{\mb x}_k^T
+				\inv{\tilde{\mb X}^T\tilde{\mb X} + \beta \tilde{\mb I}_{\hat n}}
+				\tilde{\mb x}_k
+			}
+			}^2,
+		\end{equation*}
+		где
+		\begin{align*}
+			\hat n &= \abs{\hat I_\lams} \text{--- число ненулевых признаков,}\\
+			\hat{\tilde{\mathbf a}} &= (\hat a_i \cond i\in \hat I_\lams)^T \text{--- ненулевые компоненты $\hat{\mb a}$,} \\
+			\tilde{\mb x} &= (x_i \cond i\in \hat I_\lams)^T,
+			\tilde{\mb X} = (\tilde{\mb x}_1, \ldots, \tilde{\mb x}_N)^T \text{--- значения признаков $\hat I_\lams,$} \\
+			\hat y_k &= \hat{\tilde{\mathbf a}}^T\!(\Omega^*)\tilde{\mb x}_k.
+			% \text{--- ответы алгоритма, обучишегося на всём $\Omega^*$,} \\
+		\end{align*}
+	\end{theorem}
 \end{frame}
 
 \section*{}
