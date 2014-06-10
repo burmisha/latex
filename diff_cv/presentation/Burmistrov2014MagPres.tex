@@ -39,11 +39,11 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Постановка задачи}
+\section{Введение}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Данные и вероятностные гипотезы}
+\subsection{Исходные данные}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{Данные и вероятностные гипотезы}
+\begin{frame}{Постановка задачи линейной регрессии}
 	\textbf{Изучаемые объекты:}
 	\begin{itemize}
 			\item $\Omega$~--- объекты реального мира;
@@ -69,7 +69,8 @@
 	\end{equation*}
 \end{frame}
 
-\begin{frame}{Регуляризация}
+\subsection{Условия регуляризации Elastic Net}
+\begin{frame}{Наложим регуляризацию для отбора информативных признаков}
 	\textbf{Исходный функционал качества}
 	\begin{equation*}
 		\suml_{i=1}^N(y_i - \hat y(\mb x_i))^2.
@@ -93,8 +94,11 @@
 		\foral{j=1,\ldots, n} \: \frac1N\suml_{i=1}^N\mb x_{ij}^2 = 1.
 	\end{equation*}
 \end{frame}
+
 \def\lams{{\mu,\beta}}
-\begin{frame}{Кросс валидация}
+\section{Поиск оптимальных параметров регуляризации}
+\subsection{Быстрая кросс-валидация}
+\begin{frame}{Выделение структурных параметров}
 	\textbf{Задача оптимизации}
 	\begin{equation*}
 		\begin{cases}
@@ -113,24 +117,23 @@
 	\end{equation*}
 
 	\smallskip
-	\textbf{Кросс валидация}
+	\textbf{Кросс-валидация}
 
 	\begin{equation*}
-		S_{LOO}(\lams) = \frac1N\suml_{i=1}^N\cbr{y_i - \hat{\mb a}^T(\Omega \backslash \fbr{\omega_i})\mb x_i}^2
+		S_{LOO}(\lams) = \frac1N\suml_{i=1}^N\cbr{y_i - \hat{\mb a}^T(\Omega \backslash \fbr{\omega_i})\mb x_i}^2 \to \min_{\lams}
 	\end{equation*}
 \end{frame}
 
-\begin{frame}{Кросс валидация}
+\begin{frame}{Устойчивость структурного параметра}
 	Зафиксируем множество $\hat I_\lams = \hat I^-_\lams \cup I^+_\lams$ и предположим, что оно не изменяется при исключении любого одного объекта $\omega_i$ из обучающей совокупности $\Omega^*.$
 
 % \def\A{\tilde{\mb X}^T\tilde{\mb X} + \beta \tilde{\mb I}_{\hat n}}
 % \def\xxt{\tilde{\mb x}_k \tilde{\mb x}_k^T}
 % \def\denominator{1 - \tilde{\mb x}_k^T\inv{\A}\tilde{\mb x}_k}
 % \def\besta{\hat{\tilde{\mathbf a}}}
-
-	\begin{theorem}
+	\textbf{Теорема об оценке функционала качества:}
 		\begin{equation*}
-			\hat S_{LOO, \hat I_\lams}
+			S_{LOO, \hat I_\lams}
 			= \frac1N\suml_{k=1}^N
 			\cbr{
 			\frac{
@@ -153,10 +156,10 @@
 			\hat y_k &= \hat{\tilde{\mathbf a}}^T\!(\Omega^*)\tilde{\mb x}_k = \hat{\mb a}^T\!(\Omega^*)\mb x_k \text{ --- значения функции регрессии.}
 		\end{align*}
 		\vspace{-20pt}
-	\end{theorem}
 \end{frame}
 
-\begin{frame}{Дифференциальная кросс-валидация}
+\subsection{Дифференциальная кросс-валидация}
+\begin{frame}{Добавление весов объектам обучающей совокупности}
 	Изменим задачу оптимизации, присвоив вес $p$ каждому объекту обучения $\omega$:
 	\begin{equation*}
 		\begin{cases}
@@ -168,26 +171,27 @@
 
 	Функционал ошибки оставим прежним:
 	\begin{equation*}
-		\hat S(\mb p, \lams) = \frac1N\suml_{k=1}^N \hat{\delta}_k^2(\mb p, \lams).
+		S(\mb p, \lams) = \frac1N\suml_{k=1}^N \hat{\delta}_k^2(\mb p, \lams).
 	\end{equation*}
 
-	\begin{theorem}
+	\vspace{-5pt}
+		\textbf{Лемма о производной регрессионных остатков:}
+		\vspace{-5pt}
 		\begin{equation*}
 			\dd{\hat\delta_k}{p_k} = - \tilde {\mb x}_k^T
 			\inv{\tilde{\mb X}^T P\tilde{\mb X} + \beta I_{\hat n}}
 			\tilde{\mb x}_k \hat \delta_k, \text{ где } P = \text{diag}\cbr{p_1, \ldots, p_N}.
 		\end{equation*}
-	\end{theorem}
 \end{frame}
 
-\begin{frame}{Дифференциальная кросс-валидация}
+\begin{frame}{Принцип дифференциальной кросс-валидации}
 	Обучение на всех объектах соответствует единичному вектору $\mb p = \mb e = (1, \ldots, N)^T.$
 	Кросс-валидация же при этом соответствует поочерёдному обнулению компонент вектора
 	$\mb p^{(i)} = \mb e^{(i)} = (e^{(i)}_1, \ldots, e^{(i)}_N)^T, e^{(i)}_k=\begcas{1, i\ne k, \\ 0, i = k.}$
 
 	\textbf{Использование в качестве критерия кросс-валидации приближение функции ошибки:}
 	\begin{align*}
-		\hat S_{Diff}(\lams)
+		S_{Diff}(\lams)
 		&= \frac1N\suml_{k=1}^N \hat{\delta}_k^2(\mb e, \lams)
 		+ \suml_{k=1}^N\left.\dd{\hat{\delta}_k^2(\mb p, \lams)}{p_k}\right|_{\mb p = \mb e}\cdot(-1) = \\
 		&= \frac1N\suml_{k=1}^N
@@ -196,15 +200,16 @@
 	\end{align*}
 \end{frame}
 
-\begin{frame}{Сравнение результатов}
+\subsection{Сравнение результатов}
+\begin{frame}{}
 	Положим $\delta^k = y_k - \hat y_k$~--- регрессионные остатки при обучении на $\Omega^*$.
 	Тогда
 	\begin{align*}
-		\hat S_{Diff}(\lams)
+		S_{Diff}(\lams)
 			&= \frac1N\suml_{k=1}^N
 			\hat{\delta}_k^2
 			\cbr{1 + 2\tilde {\mb x}_k^T \inv{\tilde{\mb X}^T \tilde{\mb X} + \beta I_{\hat n}}\tilde{\mb x}_k}, \\
-		\hat S_{LOO, \hat I_\lams}(\lams)
+		S_{LOO, \hat I_\lams}(\lams)
 			&= \frac1N\suml_{k=1}^N
 				\hat{\delta}_k^2
 				\cbr{
@@ -217,35 +222,41 @@
 	Результаты совпадают с точностью до малых второго порядка, что доказывает эффективность применения дифференциальной кросс-валидации.
 \end{frame}
 
-\begin{frame}{Качество в зависимости от количества ассоциируемых тем}
-Частный случай алгоритма: LDA-GS, $\alpha = \beta = 0.2$, $|T| = 20$
-\begin{columns}
-	\hspace{-10pt}
- 	\column{0.33\textwidth}
-		\includegraphics[height=95px]{../graph/diff_CV.png}
-		\begin{center}
-			$\hat S_{Diff}(\lams)$
-			\begin{align*}
-				\hat S_{Diff} &=0.0119, \\ \hat \beta &=0.160, \\ \hat \mu &=48.55
-			\end{align*}
-		\end{center}
+\newcommand\addcolumn[3]{
 	\column{0.33\textwidth}
-		\includegraphics[height=95px]{../graph/LOO_I.png}
+		\includegraphics[height=95px]{../graph/#1.png}
+		\vspace{10pt}
 		\begin{center}
-			$\hat S_{LOO, \hat I_\lams}(\lams)$
+			\vspace{-25pt}
+			$#2$
+			\vspace{-5pt}
 			\begin{align*}
-				\hat S_{LOO, \hat I} &=0.0136, \\ \hat \beta &=0.156, \\ \hat \mu &=47.75
+			#3.
 			\end{align*}
 		\end{center}
-	\column{0.33\textwidth}
-		\includegraphics[height=95px]{../graph/honest_CV.png}
-		\begin{center}
-			$\hat S_{LOO}(\lams)$
-			\begin{align*}
-				\hat S_{LOO} &=0.0119, \\ \hat \beta &=0.159, \\ \hat \mu &=48.70
-			\end{align*}
-		\end{center}
-\end{columns}
+}
+
+\section{Численный эксперимент}
+\subsection{Модельные данные}
+\begin{frame}{Сгенерированная выборка из 100 объектов}
+	\vspace{-20pt}
+	\begin{align*}
+		x_{ij} &\sim Exp(j), \: i=1,\ldots,100, \: j=1,\ldots,5, \mb a &= (0, 2, 0, -3, 0)^T, \\
+		y_{i} &= \mb x_i^T \mb a + \eps_i, \eps_i \sim Exp(j), i=1,\ldots,100. 
+	\end{align*}
+	\vspace{-15pt}
+	\begin{columns}
+		\hspace{-15pt}
+		\addcolumn{LOO_I}{S_{LOO, \hat I_\lams}(\lams)}{
+			\hat S_{LOO, \hat I} &=0.0136, \\ \hat \beta &=0.156, \\ \hat \mu &=47.75
+		}
+		\addcolumn{diff_CV}{S_{Diff}(\lams)}{
+			\hat S_{Diff} &=0.0119, \\ \hat \beta &=0.160, \\ \hat \mu &=48.55
+		}
+		\addcolumn{honest_CV}{S_{LOO}(\lams)}{
+			\hat S_{LOO} &=0.0119, \\ \hat \beta &=0.159, \\ \hat \mu &=48.70
+		}
+	\end{columns}
 \end{frame}
 
 \section*{}
