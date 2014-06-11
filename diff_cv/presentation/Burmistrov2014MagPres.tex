@@ -195,8 +195,11 @@
 	\textbf{Использование в качестве критерия кросс-валидации приближение функции ошибки:}
 	\begin{align*}
 		S_{Diff}(\lams)
-		&= \frac1N\suml_{k=1}^N \hat{\delta}_k^2(\mb e, \lams)
-		+ \suml_{k=1}^N\left.\dd{\hat{\delta}_k^2(\mb p, \lams)}{p_k}\right|_{\mb p = \mb e}\cdot(-1) = \\
+		&= \frac1N
+		\fbr{
+		\suml_{k=1}^N \hat{\delta}_k^2(\mb e, \lams)
+		+ \suml_{k=1}^N\left.\dd{\hat{\delta}_k^2(\mb p, \lams)}{p_k}\right|_{\mb p = \mb e}\cdot(-1)
+		} = \\
 		&= \frac1N\suml_{k=1}^N
 		\hat{\delta}_k^2(\mb e, \lams)
 		\cbr{1 + 2\tilde {\mb x}_k^T \inv{\tilde{\mb X}^T \tilde{\mb X} + \beta I_{\hat n}}\tilde{\mb x}_k}.
