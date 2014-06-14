@@ -1,3 +1,14 @@
+Рассмотрим задачу (\ref{weighedEN}) и перепишем её в виде
+\begin{equation}
+	\label{weighedENdelta}
+	\begin{cases}
+		\suml_{i=1}^n\cbr{\beta a_i^2 + \mu \modul{a_i}} 
+	+ \suml_{j=1}^N p_j\delta_j^2 \to \min_{\mb a}, \\
+	\delta_j = y_j - \suml_{i=1}^nx_{ij}a_i, j=1,\ldots,N,
+	\end{cases}
+\end{equation}
+где $\delta = \cbr{\delta_1, \ldots, \delta_N}^T$ --- вектор регрессионных остатков.
+
 Функция Лагранжа:
 \begin{equation}
 	\label{LagrWEN}
