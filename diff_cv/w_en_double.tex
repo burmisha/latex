@@ -9,33 +9,27 @@
 \end{equation}
 где $\delta = \cbr{\delta_1, \ldots, \delta_N}^T$ --- вектор регрессионных остатков.
 
-Функция Лагранжа:
+Функция Лагранжа (здесь $\mb \lambda = \cbr{\idots \lambda iN}$ --- вектор двойственных переменных):
 \begin{equation}
 	\label{LagrWEN}
 	\begin{split}
-		L(\mb a,\idots \delta1N, \idots \lambda1N) 
-	&= \suml_{i=1}^n\cbr{\beta a_i^2 + \mu \modul{a_i}} + \suml_{j=1}^N p_j\delta_j^2 - \sum_{j=1}^N\lambda_j\cbr{\delta_j - y_j + \suml_{i=1}^nx_{ij}a_i} = \\
-	&= \suml_{i=1}^n\cbr{\beta a_i^2 + \mu \modul{a_i} - \suml_{j=1}^N\lambda_jx_{ij}a_i} + \suml_{j=1}^N \cbr{p_j\delta_j^2  - \lambda_j\cbr{\delta_j - y_j}} \to \\
-	&\to 
+		L&(\mb a, \mb \delta, \mb \lambda) 
+	= \suml_{i=1}^n\cbr{\beta a_i^2 + \mu \modul{a_i}} + \suml_{j=1}^N p_j\delta_j^2 - \sum_{j=1}^N\lambda_j\cbr{\delta_j - y_j + \suml_{i=1}^nx_{ij}a_i} = \\
+	&= \suml_{i=1}^n\cbr{\beta a_i^2 + \mu \modul{a_i} - \suml_{j=1}^N\lambda_jx_{ij}a_i} + \suml_{j=1}^N \cbr{p_j\delta_j^2  - \lambda_j\cbr{\delta_j - y_j}} \to 
 	\begin{cases}
-		\min_{\mb a,\idots \delta1N}\\
-		\max_{\idots \lambda1N}\\
+		\min_{\mb a, \mb \delta}\\
+		\max_{\mb \lambda}\\
 	\end{cases}
 	\end{split}
 \end{equation}
 
-
-
-\def\LiPart{L_i(a_i,\idots \lambda1N)}
-\def\sumLambdaX{\suml_{j=1}^N\lambda_jx_{ij}}
-\newcommand\diag[1]{\text{diag}\cbr{#1}}
 Положим 
 \begin{equation}
 	\label{partialLagr}
 	\LiPart = \beta a_i^2 + \mu \modul{a_i} - \cbr{\sumLambdaX}a_i \to \min_{a_i}.
 \end{equation}
 
-Каждая из функций $L_i$ является кусочно заданной комбинаций двух квадратных трехчленов:
+Каждая из функций $L_i$ является кусочно заданной:
 \begin{equation}
 	\label{partialLagrParted}
 	\begin{split}
@@ -53,7 +47,7 @@
 	\end{split}
 \end{equation}
 
-Исходная постановка задачи Elastic Net \ref{basicEN} предполагает, что $\beta\ge0, \mu\ge0.$ Изучим случай $\beta > 0:$ 
+Исходная постановка задачи (\ref{basicEN}) предполагает, что $\beta\ge0.$ Изучим случай $\beta > 0,$ получив в (\ref{partialLagrParted}) квадратные трехчлены:
 \begin{equation}
 	\label{hatAi}
 	\begin{split}
@@ -68,21 +62,22 @@
 	\end{split}
 \end{equation}
 
-Для поиска точки минимума рассмотрим 3 случая:
+Для поиска точки минимума в (\ref{hatAi}) рассмотрим 3 случая:
 \begin{align}
-	\label{hatAicases}
+	\label{hatAicases-start}
 	         &\sumLambdaX \le -\mu 	&\Rightarrow \hat a_i &= \frac{\sumLambdaX+\mu}{2\beta}, \\
 	-\mu <   &\sumLambdaX < \mu 	&\Rightarrow \hat a_i &= 0, \\
-	\mu \le &\sumLambdaX 			&\Rightarrow \hat a_i &= \frac{\sumLambdaX-\mu}{2\beta},
+	\label{hatAicases-end}
+	\mu \le &\sumLambdaX 			&\Rightarrow \hat a_i &= \frac{\sumLambdaX-\mu}{2\beta}.
 \end{align}
 
 % a x^2 + b x + c = a(x-b/{2a})^2 + c - b^2/{4a} = a(x-x_0)^2 + c - a x_0^2
 
-Подставляя значения из \ref{hatAicases} в \ref{partialLagrParted}, получим решение задачи минимизации по $a_i$:
+Подставляя значения из (\ref{hatAicases-start}--\ref{hatAicases-end}) в (\ref{partialLagrParted}), получим решение задачи (\ref{partialLagrParted}) минимизации по $a_i$:
 \begin{align}
 	\label{hatLiSquared}
 	\begin{split}
-		\hat L_i(\idots \lambda1N) &= \min_{a_i}L_i(a_i, \idots \lambda1N) =
+		\hat L_i(\mb \lambda) &= \min_{a_i}L_i(a_i, \mb \lambda) =
 		\begin{cases}
 			-\cfrac1{4\beta}\cbr{\sumLambdaX+\mu}^2, &\sumLambdaX \le -\mu,\\
 			0, 										&-\mu < \sumLambdaX < \mu,\\
@@ -94,66 +89,69 @@
 			0, 	 					&-\mu < \sumLambdaX < \mu,\\
 			\cbr{\sumLambdaX-\mu}^2, &\mu\le\sumLambdaX.
 		\end{cases} 	\\
-		&= -\frac1{4\beta} \cbr{\min\fbr{\mu + \sumLambdaX, 0, \mu-\sumLambdaX}}^2
+		&= -\frac1{4\beta} \cbr{\min\fbr{\mu + \sumLambdaX, 0, \mu-\sumLambdaX}}^2.
 	\end{split}
 \end{align}
-(Здесь не сходится с результатами doc-файла)
+% (Здесь не сходится с результатами doc-файла)
 
 Теперь перейдём к минимизации по $\cbr{\delta_1, \ldots, \delta_N}:$
-\begin{equation}
-	0 = \dd{}{\delta_j}L(\mb a,\idots \delta1N, \idots \lambda1N) = 2p_j\delta_j - \lambda_j 
-\end{equation}
-\begin{equation}
+\begin{align}
+	\notag
+	0 &= \dd{}{\delta_j}L(\mb a,\mb \delta, \mb \lambda) = 2p_j\delta_j - \lambda_j, \\
 	\label{deltaJ}
-	\delta_j = \frac{\lambda_j}{2p_j}
-\end{equation}
+	\delta_j &= \frac{\lambda_j}{2p_j}.
+\end{align}
 
-Подставим результаты (\ref{hatLiSquared}) в (\ref{LagrWEN}):
-\begin{align} 
-	\hat L&\cbr{\mb a,\idots \delta1N, \idots \lambda1N} 
-		= \suml_{i=1}^n \hat L_i(a_i,\idots \lambda1N)
+Подставим результаты (\ref{hatLiSquared}, \ref{deltaJ}) в (\ref{LagrWEN}):
+\begin{align*} 
+	\hat L&\cbr{\mb a,\mb \delta, \mb \lambda} 
+		= \suml_{i=1}^n \hat L_i(a_i,\mb \lambda)
 		+ \suml_{j=1}^N \cbr{p_j\delta_j^2  - \lambda_j\cbr{\delta_j - y_j}} = \\
 		&= -\frac1{4\beta} \suml_{i=1}^n \cbr{\min\fbr{\mu + \sumLambdaX, 0, \mu-\sumLambdaX}}^2
 		+ \suml_{j=1}^N \cbr{p_j\cbr{\frac{\lambda_j}{2p_j}}^2  - \lambda_j\cbr{\frac{\lambda_j}{2p_j} - y_j}} = \\
 		&= -\frac1{4\beta} \suml_{i=1}^n \cbr{\min\fbr{\mu + \sumLambdaX, 0, \mu - \sumLambdaX}}^2
-		- \suml_{j=1}^N \cbr{ \frac{\lambda_j^2}{4p_j}  - \lambda_j y_j} 
-\end{align}
+		- \suml_{j=1}^N \cbr{ \frac{\lambda_j^2}{4p_j}  - \lambda_j y_j}.
+\end{align*}
 
 Таким образом, задача (\ref{LagrWEN}) свелась к 
 \begin{align}
 -\frac1{4\beta} \suml_{i=1}^n \cbr{\min\fbr{\mu + \sumLambdaX, 0, \mu - \sumLambdaX}}^2
-		- \suml_{j=1}^N \cbr{ \frac{\lambda_j^2}{4p_j}  - \lambda_j y_j} \to \max_{\idots \lambda1N}
+		- \suml_{j=1}^N \cbr{ \frac{\lambda_j^2}{4p_j}  - \lambda_j y_j} \to \max_{\mb \lambda}.
 \end{align}
+
 Используя соотношение (\ref{deltaJ}), получим эквивалентную задачу:
-\begin{align} 
-	% \hat L&\cbr{\mb a,\idots \delta1N, \idots \lambda1N} 
-	% 	= \suml_{i=1}^n \hat L_i(a_i,\idots \lambda1N)
+\begin{align*} 
+	% \hat L&\cbr{\mb a,\mb \delta, \mb \lambda} 
+	% 	= \suml_{i=1}^n \hat L_i(a_i,\mb \lambda)
 	% 	+ \suml_{j=1}^N % \cbr{p_j\cbr{\frac{\lambda_j}{2p_j}}^2  - \lambda_j\cbr{\frac{\lambda_j}{2p_j} - y_j}} = \\
 	% 		\cbr{p_j\delta_j^2  - \lambda_j\cbr{\delta_j - y_j}} = \\
 	% 	&= -\frac1{4\beta} \suml_{i=1}^n \cbr{\min\fbr{\mu + \sumLambdaX, 0, \mu-\sumLambdaX}}^2
 	% 	- \suml_{j=1}^N \cbr{p_j\delta_j^2  -  2 \delta_j p_j (\delta_j - y_j)} = \\
 	% 	&= 
 	-\frac1{4\beta} \suml_{i=1}^n \cbr{\min\fbr{\mu + \suml_{j=1}^N2 \delta_j p_jx_{ij}, 0, \mu-\suml_{j=1}^N2 \delta_j p_jx_{ij}}}^2
-		- \suml_{j=1}^N \cbr{ \delta_j^2 p_j  - 2\delta_j p_j y_j} \to \max_{\idots \delta1N}
-\end{align}
+		- \suml_{j=1}^N \cbr{ \delta_j^2 p_j  - 2\delta_j p_j y_j} \to \max_{\mb \delta}.
+\end{align*}
 Отметим, что задача осталась задачей максимизации.
 
 Положим 
-\begin{align}
-	W(\idots \delta1N) 
+\begin{align*}
+	W(\mb \delta) 
 	= \frac1{4\beta} \suml_{i=1}^n \cbr{\min\fbr{\mu + \suml_{j=1}^N2 \delta_j p_jx_{ij}, 0, \mu-\suml_{j=1}^N2 \delta_j p_jx_{ij}}}^2
-		+ \suml_{j=1}^N \cbr{ \delta_j^2 p_j  - 2\delta_j p_j y_j}
-\end{align}
+		+ \suml_{j=1}^N \cbr{ \delta_j^2 p_j  - 2\delta_j p_j y_j}.
+\end{align*}
+
+В матричных обозначениях получаем:
+\begin{align*}
+	&W(\mb \delta) = \frac1{2\beta} \suml_{i=1}^n \cbr{\min\fbr{\frac\mu2 + \mb \delta^T P\mb x_i, 0, \frac\mu2- \mb \delta^T P\mb x_i}}^2
+		+ (\mb \delta - \mb y)^T P (\mb \delta - \mb y) \to \min_{\mb \delta}, \\
+	&\text{где } P = P^T= \diag{\idots p1N} \in \mathbb R^{N\times N}.
+\end{align*}
 
 Итак, достаточно решить задачу 
-\begin{align}
-	W(\idots \delta1N) \to \min_{\idots \delta1N},
-\end{align}
-или же, используя матричные обозначения $\mb \delta = \cbr{\idots \delta1N}^T \in \mathbb R^N, \mb x_i = \cbr{x_{i1}, \ldots, , x_{iN}} \in \mathbb R^N, \mb y = \cbr{\idots y1N}^T \in \mathbb R^N, P = P^T= \diag{\sqrt{p_1}, \ldots, \sqrt{p_N}},$
+\begin{align*}
+	W(\mb \delta) \to \min_{\mb \delta}.
+\end{align*}
 
-\begin{align}
-	W(\mb \delta) = \frac1{2\beta} \suml_{i=1}^n \cbr{\min\fbr{\frac\mu2 + \mb \delta^T P^2\mb x_i, 0, \frac\mu2- \mb \delta^T P^2\mb x_i}}^2
-		+ (\mb \delta - \mb y)^T P (\mb \delta - \mb y) \to \min_{\mb \delta}.
-\end{align}
+Пусть $\hat{\mb \delta}$~--- решение этой задачи. Оно единственно в силу выпуклости функции $W(\mb \delta)$ по $\mb \delta$ и может быть найдено методами вычислительной оптимизации.
+Тогда оптимальное $\hat{\mb a}$ можно определить из соотношений  (\ref{deltaJ}) и (\ref{hatAicases-start}--\ref{hatAicases-end}).
 
-Пусть $\hat{\mb \delta}$~--- решение этой задачи. Оно единственно в силу выпуклости функции $W(\mb \delta)$ по $\mb \delta$. Тогда оптимальное $\hat{\mb a}$ можно определить из соотношений  (\ref{deltaJ}) и (\ref{hatAicases}).

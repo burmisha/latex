@@ -11,8 +11,6 @@
 \definecolor{linkcolor}{RGB}{7,31,63}%{15,80,120}
 \usepackage[colorlinks,unicode,pdfpagelabels=false, linkcolor = linkcolor]{hyperref}
 
-\newtheorem{theorem}{Теорема}
-
 % \textheight=24cm		\textwidth=18cm
 % \oddsidemargin=-10mm 		\evensidemargin=-10mm
 % \topmargin=-2,5cm
@@ -43,9 +41,10 @@
 	\section{Введение} 
 		\input{assumptions.tex}
 		% \subsection{Постановка задачи оптимизации} 	\input{basic_en.tex}
-	\section{Использование взвешенных объектов в обучающей совокупности}
+	\section{}
 		% \subsection{Постановка задачи оптимизации} 	\input{weighed_en.tex}
-		\subsection{Двойственная задача}			\input{w_en_double.tex}
+		\subsection{Двойственная задача}			
+		\input{w_en_double.tex}
 	\section{Метод дифференциальной кросс-валидации}
 		\input{diff_loo.tex}
 		\input{grebennikov.tex}

@@ -1,13 +1,5 @@
-
-% \beta = \lambda_2
-% \mu = \lambda_1
-\def\cond{|}
-\def\lams{{\mu,\beta}}
-\def\inotnull{\not\in \hat I^0_\lams}
-%
-
-
-При поиске вектора $\hat{\mb a}$ мы получаем разбиение всех его компонент (а вместе с ними и признаков) на 3 группы: положительные, равный нулю и отрицательные. Пусть $I=\fbr{1,\ldots, n}$~--- множество всех признаков. Введём  обозначения:
+При поиске вектора $\hat{\mb a}$ мы получаем разбиение всех его компонент (а вместе с ними и признаков) на 3 группы: положительные, равные нулю и отрицательные. 
+Пусть $I=\fbr{1,\ldots, n}$~--- множество всех признаков. Введём  обозначения:
 \begin{align}
 	\hat I^-_\lams &= \fbr{i\in I: \hat a_{i, \lams} < 0}, \\
 	\hat I^0_\lams &= \fbr{i\in I: \hat a_{i, \lams} = 0}, \\
@@ -16,136 +8,162 @@
 
 Используя такие обозначения и тем самым зная знаки $\hat{\mb a}_\lams^i$, перепишем задачу (\ref{weighedENdelta}) в следующем виде:
 
-
 \begin{align}
-	\label{min_idx}
-	J(\mb a \cond \lams)
-		&= \suml_{i\inotnull}\cbr{\beta a_i^2 + \mu \modul{a_i}}
-		+ \suml_{j=1}^N p_j\cbr{y_j - \suml_{i=1}^nx_{ij}a_i}^2 \to \min_{\mb a}, \\
+	% \label{min_idx}
+	% J(\mb a \cond \lams)
+	% 	&= \suml_{i\inotnull}\cbr{\beta a_i^2 + \mu \modul{a_i}}
+	% 	+ \suml_{j=1}^N p_j\cbr{y_j - \suml_{i=1}^nx_{ij}a_i}^2 \to \min_{\mb a}, \\
+	\notag
 	J(\mb a, i\inotnull \cond \lams)
 		&= \suml_{i\inotnull}\beta a_i^2 + \mu \suml_{i\in \hat I^+_\lams}a_i - \mu \suml_{i\in \hat I^-_\lams}a_i
 		+ \suml_{j=1}^N p_j\cbr{y_j - \suml_{i\inotnull}x_{ij}a_i}^2 \to \\
+		\label{knownA}
 		&\to \min\cbr{a_i, i\inotnull}
 \end{align}
 
-Зная $\hat I^0_\lams,$ можно говорить о том, что $\hat{\mb a}$ - решение является комбинацией решения $\tilde{{\mb a}}$ задачи (\ref{min_idx}) и совокупности равенств $\mb a_i = 0, i\in \hat I^0_\lams$.
+Зная $\hat I^0_\lams,$ можно говорить о том, что $\hat{\mb a}$ --- решение является комбинацией решения $\tilde{{\mb a}}$ задачи (\ref{knownA}) и совокупности равенств $\mb a_i = 0, i\in \hat I^0_\lams$.
 
-При этом удобно ввести обозначения, соответствующие только ненулевым компонентам $\hat{\mb a}$:
-\begin{align}
+Введём обозначения, соответствующие только ненулевым компонентам $\hat{\mb a}$:
+\begin{align*}
 	\tilde{\mb a}_\lams &= (a_i, i\inotnull) \in \mathbb{R}^{\hat n_\lams}, \\
-	\tilde{\mb a}_{j,\lams} &= (x_{ij}, i\inotnull) \in \mathbb{R}^{\hat n_\lams}, \\
+	\tilde{\mb x}_{j,\lams} &= (x_{ij}, i\inotnull) \in \mathbb{R}^{\hat n_\lams}, \\
 	\tilde{\mb X}_\lams &= (\tilde{\mb x}_1, \ldots, \tilde{\mb x}_N)^T \in \mathbb{R}^{N \times \hat n_\lams}, \\
 	\tilde{\mb e}_\lams &= (\tilde e_i, i\inotnull) \in \mathbb{R}^{\hat n_\lams},
 		\tilde e_i = \begcas{+1, i \in \hat I^+_\lams \\-1, i \in \hat I^-_\lams}.
-\end{align}
+\end{align*}
 
-\begin{theorem}
-При известном множестве $\hat I^0_\lams$
-\end{theorem}
+При малых изменениях вектора весов $\mb p$ решение $\hat{\mb a}$ также изменится не сильно, а вместе с ним сохранятся и множества $\hat I^-_\lams, \hat I^0_\lams, \hat I^+_\lams.$ Поскольку при известном разбиении $I$ задача (\ref{knownA}) является квадратичной, то её решение может быть явно выписано.
 
-%\begin{proof}
-\begin{align}
-	\dd{}{a_i}J(\mb a, i\inotnull \cond \lams)
-		= 2\beta a_i + \mu e_i - 2\suml_{j=1}^N p_j\cbr{y_j - \suml_{l\inotnull}x_{lj}a_l}x_{ij} = 0
-\end{align}
-% Здесь есть дополнительный множитель, потерянный в публиции на кольт
+Таким образом, в малой окрестности $\mb p$ будет выполнено следующее
+
+\begin{statement}
+\label{stmnt:locally_linear}
+В малой окрестности $\mb p$ оптимальный вектор $\besta$ является решением системы линейных уравнений
+\begin{equation*}
+	\cbr{\tilde{\mb X}^T_\lams P\tilde{\mb X}_\lams + \beta I_{\hat n_\lams}} \tilde{\mb a}
+		= \tilde{\mb X}^T_\lams P y -\frac\mu2\tilde{\mb e}_\lams.
+\end{equation*}
+\end{statement}
+
+\begin{Proof}
+\begin{equation}
+	\dd{}{\tilde a_i}J(\tilde{\mb a}, i\inotnull \cond \lams)
+		= 2\beta \tilde a_i + \mu e_i - 2\suml_{j=1}^N p_j\cbr{y_j - \suml_{l\inotnull}x_{lj}\tilde a_l}x_{ij} = 0
+\end{equation}
+% Здесь есть дополнительный множитель, потерянный в публикации на кольт
 
 Тем самым мы имеем систему линейных алгебраических уравнений на $a_i$
-\begin{align}
+\begin{equation*}
 	\beta \tilde a_i + \suml_{j=1}^N p_j\suml_{l\inotnull} x_{lj}x_{ij}\tilde a_l
-		= \suml_{j=1}^N p_jy_jx_{ij} -\frac\mu2 e_i.
-\end{align}
+		= \suml_{j=1}^N p_jy_jx_{ij} -\frac\mu2 \tilde e_i, i\inotnull.
+\end{equation*}
 
-Или в матричных обозначениях,
+В матричных обозначениях система принимает вид,
+\begin{equation*}
+	\cbr{\tilde{\mb X}^T_\lams P\tilde{\mb X}_\lams + \beta I_{\hat n_\lams}} \tilde{\mb a}
+		= \tilde{\mb X}^T_\lams P y -\frac\mu2\tilde{\mb e}_\lams,
+\end{equation*}
+а решение может быть выражено в виде
 \begin{equation}
-	\cbr{\tilde{\mb X}^T_\lams P^2\tilde{\mb X}_\lams + \beta I_{\hat n_\lams}} \tilde{\mb a}
-		= \tilde{\mb X}^T_\lams P^2 y -\frac\mu2\tilde{\mb e}_\lams.
+	\besta
+		= \inv{\tilde{\mb X}^T_\lams P\tilde{\mb X}_\lams + \beta I_{\hat n_\lams}}\cbr{\tilde{\mb X}^T_\lams P y -\frac\mu2\tilde{\mb e}_\lams}.
 \end{equation}
 
-Теорема доказана.
+Утверждение доказано.
+\end{Proof}
 
-\begin{align}
-	\hat S(\lams) &= \frac1N\sum_{j=1}^N \hat\delta_{j, \lams}^2, \\
-	\hat \delta_{j, \lams} &= y_j - \mb x_j^T \hat {\mb a}_\lams.
-\end{align}
-В используемых обозначениях кросс-валидацию можно рассматривать как обучение с поочередным присвоением объектам нулевых весов ($p_j=0$).
-Усреднённые квадратичные остатки
 
-\begin{align}
-	\hat{S}_{\text{LOO}}(\lams)&=\frac1N\sum_{j=1}^N\sqr{\hat{\delta}_{j, \lams}^{(j)}}, \\
-	\hat \delta_{j, \lams}^{(j)} &= y_j - \mb x_j^T \hat {\mb a}_\lams^{(j)}.
-\end{align}
-
-$\hat {\mb a}_{\lams}^{(j)}$~--- результат обучения при векторе весов $p^{(j)}, p_i^{(j)} = \sbr{i \ne j}$ (единицы на всех позициях, кроме $j$-ой), т.е. при исключённом объекте $j.$
-\def\besta{\hat{\tilde{\mathbf a}}}
-
+\subsection{Оценка ошибки LOO}
+Ранее в пункте (\ref{sub:intro:weight}) было показано, как LOO-кросс-валидацию можно описать в терминах взвешенных объектов.
+Получим оценку скользящего контроля в следующей модели обучения. Предположим, что один раз обучившись при единичном векторе весов $\mb p = \mb e$ и найдя вектор $\hat{\mb a}(\mb e, \lams),$ мы получили множества $I^+, I^-, I^0,$ а затем будем поочерёдно присваивать объектам нулевой вес, при этом сохраняя фиксированными разбиение множества индексов. Тогда задача оптимизации будет оставаться квадратичной и её решение может быть проведено эффективнее, с использованием утверждения (\ref{stmnt:locally_linear}):
 \begin{equation}
-	\hat \delta_{j, \lams}^{(j)}
-		= y_j - \mb x_j^T \hat {\mb a}_\lams^{(j)}
-		= y_j - \suml_{i\inotnull} x_{ji} \hat{\mb a}_{i, \lams}^{(j)}
-		= y_j - \tilde{\mb x}_j^T \besta_\lams^{(j)}.
+	S_{LOO} = \frac1N\suml_{k=1}^N \cbr{y_k - \mb x_k^T\hat{\mb a}(\beta, \mu, \mb e^{(i)})}^2.
 \end{equation}
+% \begin{align}
+% 	\hat S(\lams) &= \frac1N\sum_{j=1}^N \hat\delta_{j, \lams}^2, \\
+% 	\hat \delta_{j, \lams} &= y_j - \mb x_j^T \hat {\mb a}_\lams.
+% \end{align}
+% В используемых обозначениях кросс-валидацию можно рассматривать как обучение с поочерёдным присвоением объектам нулевых весов ($p_j=0$).
+% Усреднённые квадратичные остатки
 
-\begin{theorem}
-про LOO оценки
-\end{theorem}
+% \begin{align}
+% 	\hat{S}_{\text{LOO}}(\lams)&=\frac1N\sum_{j=1}^N\sqr{\hat{\delta}_{j, \lams}^{(j)}}, \\
+% 	\hat \delta_{j, \lams}^{(j)} &= y_j - \mb x_j^T \hat {\mb a}_\lams^{(j)}.
+% \end{align}
 
-Доказательство:
-В течение доказательва опустим индексы $\lams$ для упрощения обозначений.
-Согласно доказанной ранее теореме
+% $\hat {\mb a}_{\lams}^{(j)}$~--- результат обучения при векторе весов $p^{(j)}, p_i^{(j)} = \sbr{i \ne j}$ (единицы на всех позициях, кроме $j$-ой), т.е. при исключённом объекте $j.$
+
+% \begin{equation}
+% 	\hat \delta_{j, \lams}^{(j)}
+% 		= y_j - \mb x_j^T \hat {\mb a}_\lams^{(j)}
+% 		= y_j - \suml_{i\inotnull} x_{ji} \hat{\mb a}_{i, \lams}^{(j)}
+% 		= y_j - \tilde{\mb x}_j^T \besta_\lams^{(j)}.
+% \end{equation}
+
+\begin{statement}
+При фиксированном разбиении множества индексов оценка скользящего контроля может быть вычислена в виде
+\begin{equation*}
+	S_{LOO, I^+, I^-} = \frac1N\suml_{k=1}^N\frac{y_k - \mb x_k^T\hat{\mb a}(\lams, \mb e)}{\denominator}.
+\end{equation*}
+\end{statement}
+
+\begin{Proof}
 \def\this{^{(k)}}
-\begin{equation}
-	\besta^{k}
-		= \cbr{\cbr{\tilde{\mb X}\this}^T P^2\tilde{\mb X}\this + \beta \tilde{\mb I}_{\hat n_\lams}}^{-1}\cbr{\cbr{\tilde{\mb X}\this}^T P^2 \mb y^{(k)} -\frac\mu2\tilde{\mb e}}.
-\end{equation}
+В течение доказательства опустим индексы $\lams$ для упрощения обозначений. 
+Верхний индекс ${}\this$ будем добавлять объектам, которые построены по всем объектам обучающей совокупности, кроме $\omega_k$, аналогично добавлению $\tilde{\:}$ над матрицами и векторами, из которых исключены компоненты, соответствующие нулевым элементам вектора $\hat{\mb a}.$
 
-В силу соотношений
-\begin{align}
+Согласно утверждению (\ref{stmnt:locally_linear})
+
+\begin{equation*}
+	\besta^{(k)}
+		= \cbr{\cbr{\tilde{\mb X}\this}^T \tilde{\mb X}\this + \beta \tilde{\mb I}_{\hat n_\lams}}^{-1}\cbr{\cbr{\tilde{\mb X}\this}^T \mb y^{(k)} -\frac\mu2\tilde{\mb e}}.
+\end{equation*}
+
+Используя соотношения
+\begin{align*}
 	\cbr{\tilde {\mb X}\this}^T \tilde{\mb X}\this
 		&= \tilde{\mb X}^T \tilde{\mb X} - \tilde{\mb x}_k \tilde{\mb x}_k^T, \\
 	\cbr{\tilde {\mb X}\this}^T \mb y^{(k)}
-		&= \tilde{\mb X}^T \mb y - y_k \tilde{\mb x}_k,
-\end{align}
-и матричного равенства Вудбери
-\begin{equation}
-	\inv{\mb A+\mb B \mb C} = \mb A^{-1} - \mb A^{-1} \mb B\inv{\mb I + \mb C \mb A^{-1} \mb B} \mb C \mb A^{-1}
-\end{equation}
-получаем
+		&= \tilde{\mb X}^T \mb y - y_k \tilde{\mb x}_k
+\end{align*}
+и матричное равенство Вудбери
+\begin{equation*}
+	\inv{\mb A+\mb B \mb C} = \mb A^{-1} - \mb A^{-1} \mb B\inv{\mb I + \mb C \mb A^{-1} \mb B} \mb C \mb A^{-1},
+\end{equation*}
 
-\def\A{\tilde{\mb X}^T\tilde{\mb X} + \beta \tilde{\mb I}_{\hat n}}
-\def\xxt{\tilde{\mb x}_k \tilde{\mb x}_k^T}
-\def\denominator{1 - \tilde{\mb x}_k^T\inv{\A}\tilde{\mb x}_k}
-\begin{align}
+получаем
+\begin{align*}
 	\besta\this
 		&= \inv{\A + \cbr{- \xxt}}
 		\cbr{\tilde{\mb X}^T \mb y - y_k\tilde{\mb x}_k -\frac\mu2\tilde{\mb e}} = \\
 		&= \inv{\A} \cbr{\tilde{\mb X}^T P^2\mb y - y_k\tilde{\mb x}_k -\frac\mu2\tilde{\mb e}} - \\
 		&- \frac{\inv{\A}\cbr{-\xxt}\inv{\A}\cbr{\tilde{\mb X}^T \mb y  -\frac\mu2\tilde{\mb e} - y_k\tilde{\mb x}_k}}{\denominator} = \\
-		&= \besta + \frac{\inv{\A}\xxt\besta}{\denominator} - \\
-		&- y_k\frac{\inv{\A}}{\denominator}\cbr{\tilde{\mb x}_k\cbr{\denominator} + \xxt\inv{\A}\tilde{\mb x}_k} = \\
+		&= \besta + \frac{\inv{\A}\xxt\besta}{\denominator}
+		- y_k\frac{\inv{\A}}{\denominator} \cdot \\
+		&\cdot \fbr{\tilde{\mb x}_k\cbr{\denominator} + \xxt\inv{\A}\tilde{\mb x}_k} = \\
 		&= \besta + \frac{\inv{\A}\xxt\besta}{\denominator} - y_k\frac{\inv{\A}}{\denominator}\tilde{\mb x}_k.
-\end{align}
+\end{align*}
 
 Выразим результаты $\hat y\this_k = \tilde{\mb x}^T_k\besta\this$ классификации при исключенном $k$-м объекте через результат классификации $\hat y_k = \tilde{\mb x}^T_k\besta$ при использовании всей обучающей совокупности:
 
-УБРАТЬ все Р - это настоящий ЛОО
+% УБРАТЬ все Р - это настоящий ЛОО
 
-\begin{align}
+\begin{align*}
 	\hat y\this_k
 		&= \hat y_k + \hat y_k\frac{\tilde{\mb x}_k^T\inv{\A} \tilde{\mb x}_k}{\denominator}
 		- y_k\frac{\tilde{\mb x}^T_k\inv{\A}\tilde{\mb x}_k}{\denominator} = \\
 		&= \frac{\hat y_k}{\denominator} - y_k\frac{\tilde{\mb x}^T_k\inv{\A}\tilde{\mb x}_k}{\denominator}.
-\end{align}
+\end{align*}
 
-Тогда
-\begin{align}
+Тогда регрессионные остатки окажутся равными
+\begin{align*}
 	\hat{\delta}_k\this
 	&= y_k - \hat y\this_k = y_k - \frac{\hat y_k}{\denominator} + y_k\frac{\tilde{\mb x}^T_k\inv{\A}\tilde{\mb x}_k}{\denominator} = \\
 	&= \frac{y_k - \hat y_k}{\denominator}.
-\end{align}
+\end{align*}
 
-Таким образом, теорема доказана.
-
+Доказательство завершено.
+\end{Proof}
 
 \begin{theorem}
 Про дифф кросс валидацию
