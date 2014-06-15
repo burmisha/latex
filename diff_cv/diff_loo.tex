@@ -1,77 +1,3 @@
-При поиске вектора $\hat{\mb a}$ мы получаем разбиение всех его компонент (а вместе с ними и признаков) на 3 группы: положительные, равные нулю и отрицательные. 
-Пусть $I=\fbr{1,\ldots, n}$~--- множество всех признаков. Введём  обозначения:
-\begin{align}
-	\hat I^-_\lams &= \fbr{i\in I: \hat a_{i, \lams} < 0}, \\
-	\hat I^0_\lams &= \fbr{i\in I: \hat a_{i, \lams} = 0}, \\
-	\hat I^+_\lams &= \fbr{i\in I: \hat a_{i, \lams} > 0}.
-\end{align}
-
-Используя такие обозначения и тем самым зная знаки $\hat{\mb a}_\lams^i$, перепишем задачу (\ref{weighedENdelta}) в следующем виде:
-
-\begin{align}
-	% \label{min_idx}
-	% J(\mb a \cond \lams)
-	% 	&= \suml_{i\inotnull}\cbr{\beta a_i^2 + \mu \modul{a_i}}
-	% 	+ \suml_{j=1}^N p_j\cbr{y_j - \suml_{i=1}^nx_{ij}a_i}^2 \to \min_{\mb a}, \\
-	\notag
-	J(\mb a, i\inotnull \cond \lams)
-		&= \suml_{i\inotnull}\beta a_i^2 + \mu \suml_{i\in \hat I^+_\lams}a_i - \mu \suml_{i\in \hat I^-_\lams}a_i
-		+ \suml_{j=1}^N p_j\cbr{y_j - \suml_{i\inotnull}x_{ij}a_i}^2 \to \\
-		\label{knownA}
-		&\to \min\cbr{a_i, i\inotnull}
-\end{align}
-
-Зная $\hat I^0_\lams,$ можно говорить о том, что $\hat{\mb a}$ --- решение является комбинацией решения $\tilde{{\mb a}}$ задачи (\ref{knownA}) и совокупности равенств $\mb a_i = 0, i\in \hat I^0_\lams$.
-
-Введём обозначения, соответствующие только ненулевым компонентам $\hat{\mb a}$:
-\begin{align*}
-	\tilde{\mb a}_\lams &= (a_i, i\inotnull) \in \mathbb{R}^{\hat n_\lams}, \\
-	\tilde{\mb x}_{j,\lams} &= (x_{ij}, i\inotnull) \in \mathbb{R}^{\hat n_\lams}, \\
-	\tilde{\mb X}_\lams &= (\tilde{\mb x}_1, \ldots, \tilde{\mb x}_N)^T \in \mathbb{R}^{N \times \hat n_\lams}, \\
-	\tilde{\mb e}_\lams &= (\tilde e_i, i\inotnull) \in \mathbb{R}^{\hat n_\lams},
-		\tilde e_i = \begcas{+1, i \in \hat I^+_\lams \\-1, i \in \hat I^-_\lams}.
-\end{align*}
-
-При малых изменениях вектора весов $\mb p$ решение $\hat{\mb a}$ также изменится не сильно, а вместе с ним сохранятся и множества $\hat I^-_\lams, \hat I^0_\lams, \hat I^+_\lams.$ Поскольку при известном разбиении $I$ задача (\ref{knownA}) является квадратичной, то её решение может быть явно выписано.
-
-Таким образом, в малой окрестности $\mb p$ будет выполнено следующее
-
-\begin{statement}
-\label{stmnt:locally_linear}
-В малой окрестности $\mb p$ оптимальный вектор $\besta$ является решением системы линейных уравнений
-\begin{equation*}
-	\cbr{\tilde{\mb X}^T_\lams P\tilde{\mb X}_\lams + \beta I_{\hat n_\lams}} \tilde{\mb a}
-		= \tilde{\mb X}^T_\lams P y -\frac\mu2\tilde{\mb e}_\lams.
-\end{equation*}
-\end{statement}
-
-\begin{Proof}
-\begin{equation}
-	\dd{}{\tilde a_i}J(\tilde{\mb a}, i\inotnull \cond \lams)
-		= 2\beta \tilde a_i + \mu e_i - 2\suml_{j=1}^N p_j\cbr{y_j - \suml_{l\inotnull}x_{lj}\tilde a_l}x_{ij} = 0
-\end{equation}
-% Здесь есть дополнительный множитель, потерянный в публикации на кольт
-
-Тем самым мы имеем систему линейных алгебраических уравнений на $a_i$
-\begin{equation*}
-	\beta \tilde a_i + \suml_{j=1}^N p_j\suml_{l\inotnull} x_{lj}x_{ij}\tilde a_l
-		= \suml_{j=1}^N p_jy_jx_{ij} -\frac\mu2 \tilde e_i, i\inotnull.
-\end{equation*}
-
-В матричных обозначениях система принимает вид,
-\begin{equation*}
-	\cbr{\tilde{\mb X}^T_\lams P\tilde{\mb X}_\lams + \beta I_{\hat n_\lams}} \tilde{\mb a}
-		= \tilde{\mb X}^T_\lams P y -\frac\mu2\tilde{\mb e}_\lams,
-\end{equation*}
-а решение может быть выражено в виде
-\begin{equation}
-	\besta
-		= \inv{\tilde{\mb X}^T_\lams P\tilde{\mb X}_\lams + \beta I_{\hat n_\lams}}\cbr{\tilde{\mb X}^T_\lams P y -\frac\mu2\tilde{\mb e}_\lams}.
-\end{equation}
-
-Утверждение доказано.
-\end{Proof}
-
 
 \subsection{Оценка ошибки LOO}
 Ранее в пункте (\ref{sub:intro:weight}) было показано, как LOO-кросс-валидацию можно описать в терминах взвешенных объектов.
@@ -164,6 +90,10 @@
 
 Доказательство завершено.
 \end{Proof}
+
+При этом отметим, что предположение о неизменности разбиения множества индексов является весьма сильным, 
+поэтому далее будет рассмотрен подход, позволяющий не полностью исключать объекты из выборки, изменяя вес с 1 на 0, 
+а лишь варьировать его в окрестности 1.
 
 \begin{theorem}
 Про дифф кросс валидацию
