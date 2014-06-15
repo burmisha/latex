@@ -1,9 +1,9 @@
-
 \subsection{Оценка ошибки LOO}
 Ранее в пункте (\ref{sub:intro:weight}) было показано, как LOO-кросс-валидацию можно описать в терминах взвешенных объектов.
 Получим оценку скользящего контроля в следующей модели обучения. Предположим, что один раз обучившись при единичном векторе весов $\mb p = \mb e$ и найдя вектор $\hat{\mb a}(\mb e, \lams),$ мы получили множества $I^+, I^-, I^0,$ а затем будем поочерёдно присваивать объектам нулевой вес, при этом сохраняя фиксированными разбиение множества индексов. Тогда задача оптимизации будет оставаться квадратичной и её решение может быть проведено эффективнее, с использованием утверждения (\ref{stmnt:locally_linear}):
 \begin{equation}
-	S_{LOO} = \frac1N\suml_{k=1}^N \cbr{y_k - \mb x_k^T\hat{\mb a}(\beta, \mu, \mb e^{(i)})}^2.
+	\label{LOO}
+	S_{LOO} = \frac1N\suml_{k=1}^N \cbr{y_k - \mb x_k^T\hat{\mb a}(\beta, \mu, \mb e^{(k)})}^2.
 \end{equation}
 % \begin{align}
 % 	\hat S(\lams) &= \frac1N\sum_{j=1}^N \hat\delta_{j, \lams}^2, \\
@@ -27,6 +27,7 @@
 % \end{equation}
 
 \begin{statement}
+\label{stmnt:CVI}
 При фиксированном разбиении множества индексов оценка скользящего контроля может быть вычислена в виде
 \begin{equation*}
 	S_{LOO, I^+, I^-} = \frac1N\suml_{k=1}^N\frac{y_k - \mb x_k^T\hat{\mb a}(\lams, \mb e)}{\denominator}.
@@ -70,7 +71,7 @@
 		&= \besta + \frac{\inv{\A}\xxt\besta}{\denominator} - y_k\frac{\inv{\A}}{\denominator}\tilde{\mb x}_k.
 \end{align*}
 
-Выразим результаты $\hat y\this_k = \tilde{\mb x}^T_k\besta\this$ классификации при исключенном $k$-м объекте через результат классификации $\hat y_k = \tilde{\mb x}^T_k\besta$ при использовании всей обучающей совокупности:
+Выразим результаты $\hat y\this_k = \tilde{\mb x}^T_k\besta\this$ классификации при исключённом $k$-м объекте через результат классификации $\hat y_k = \tilde{\mb x}^T_k\besta$ при использовании всей обучающей совокупности:
 
 % УБРАТЬ все Р - это настоящий ЛОО
 
@@ -95,72 +96,94 @@
 поэтому далее будет рассмотрен подход, позволяющий не полностью исключать объекты из выборки, изменяя вес с 1 на 0, 
 а лишь варьировать его в окрестности 1.
 
+\subsection{Дифференциальный подход}
+Положим 
+\begin{align*}
+	&S(\mb p, \lams) = \frac1N\suml_{k=1}^N \delta_k^2, \\
+	&\text{где } \delta_k = y_k - \mb x_k^T\hat{\mb a}(\mb p, \lams).
+\end{align*}
 \begin{theorem}
-Про дифф кросс валидацию
+\label{thm:diffLOO}
+\begin{equation*}	
+	\left.\fbr{
+		\hat S(\mb p, \lams)
+	- 	\suml_{k=1}^N\dd{\delta_k^2(\mb p, \lams)}{p_k}
+	}\right|_{\mb p=\mb e}
+	= 	\frac1N\suml_{k=1}^N
+			\hat \delta_{k, \lams}^2
+		\cbr{
+			1
+		+ 	2
+			\tilde {\mb x}_k^T
+			\inv{\tilde{\mb X}^T \tilde{\mb X} + \beta I_{\hat n}}
+			\tilde{\mb x}_k
+		}
+\end{equation*}
 \end{theorem}
 
-\begin{align}
-	\hat S(\lams)
-	&= \frac1N\suml_{k=1}^N\hat\delta_{k, \lams}^2
-	= \frac1N\suml_{k=1}^N\cbr{y_k - \tilde {\mb x}_k^T \besta}^2 = \\
-	&= \frac1N\suml_{k=1}^N
-		\cbr{y_k - \tilde {\mb x}_k^T
-		\inv{\tilde{\mb X}^T_\lams P^2\tilde{\mb X}_\lams + \beta I_{\hat n_\lams}}
-		\cbr{\tilde{\mb X}^T_\lams P^2 y - \frac\mu2\tilde{\mb e}_\lams}
-	}^2.
-\end{align}
+\begin{Proof}
+% \begin{align}
+% 	\hat S(\lams)
+% 	&= \frac1N\suml_{k=1}^N\hat\delta_{k, \lams}^2
+% 	= \frac1N\suml_{k=1}^N\cbr{y_k - \tilde {\mb x}_k^T \besta}^2 = \\
+% 	&= \frac1N\suml_{k=1}^N
+% 		\cbr{y_k - \tilde {\mb x}_k^T
+% 		\inv{\tilde{\mb X}^T_\lams P^2\tilde{\mb X}_\lams + \beta I_{\hat n_\lams}}
+% 		\cbr{\tilde{\mb X}^T_\lams P^2 y - \frac\mu2\tilde{\mb e}_\lams}
+% 	}^2.
+% \end{align}
 
-Положим $\mb \Delta = \mb P^2 - \mb I = \diag{p_1 - 1, \ldots, p_N - 1},$ тогда
-\begin{align}
+% Положим $\mb \Delta = \mb P^2 - \mb I = \diag{p_1 - 1, \ldots, p_N - 1},$ тогда
+\begin{align*}
 	\dd{\hat\delta_k(\mb p \cond \lams)}{p_j}
 	&= 	\dd{}{p_j}
 		\fbr{
-			y_k - \tilde {\mb x}_k^T \inv{\tilde{\mb X}^T P^2\tilde{\mb X} + \beta I_{\hat n}}
-			\cbr{\tilde{\mb X}^T P^2 \mb y -\frac\mu2\tilde{\mb e}}
+			y_k - \tilde {\mb x}_k^T \inv{\tilde{\mb X}^T P\tilde{\mb X} + \beta I_{\hat n}}
+			\cbr{\tilde{\mb X}^T P \mb y -\frac\mu2\tilde{\mb e}}
 		} = \\
 	&= - \tilde {\mb x}_k^T
 	\left\{
-		\inv{\tilde{\mb X}^T P^2\tilde{\mb X} + \beta I_{\hat n}}
+		\inv{\tilde{\mb X}^T P\tilde{\mb X} + \beta I_{\hat n}}
 	  	\dd{\cbr{\tilde{\mb X}^T P^2 \mb y}}{p_j} -
 	  	\right. \\
 	&- 	\left.
-	   	\inv{\tilde{\mb X}^T P^2\tilde{\mb X} + \beta I_{\hat n}}
-		\dd{\cbr{\tilde{\mb X}^T P^2\tilde{\mb X}}}{p_j}
-		\inv{\tilde{\mb X}^T P^2\tilde{\mb X} + \beta I_{\hat n}}
-		\cbr{\tilde{\mb X}^T P^2 \mb y -\frac\mu2\tilde{\mb e}}
+	   	\inv{\tilde{\mb X}^T P\tilde{\mb X} + \beta I_{\hat n}}
+		\dd{\cbr{\tilde{\mb X}^T P\tilde{\mb X}}}{p_j}
+		\inv{\tilde{\mb X}^T P\tilde{\mb X} + \beta I_{\hat n}}
+		\cbr{\tilde{\mb X}^T P \mb y -\frac\mu2\tilde{\mb e}}
 	\right\} = \\
 	&= - \tilde {\mb x}_k^T
 	\fbr{
-		\inv{\tilde{\mb X}^T P^2\tilde{\mb X} + \beta I_{\hat n}}
+		\inv{\tilde{\mb X}^T P\tilde{\mb X} + \beta I_{\hat n}}
 		\tilde{\mb x}_jy_j
 		-
-		\inv{\tilde{\mb X}^T P^2\tilde{\mb X} + \beta I_{\hat n}}
+		\inv{\tilde{\mb X}^T P\tilde{\mb X} + \beta I_{\hat n}}
 		\tilde{\mb x}_j \tilde{\mb x}^T_j
 		\besta
 	}
-\end{align}
+\end{align*}
 
-\begin{align}
+\begin{align*}
 	\dd{\hat\delta_k}{p_k}
 	&= - \tilde {\mb x}_k^T
 	\fbr{
-		\inv{\tilde{\mb X}^T P^2\tilde{\mb X} + \beta I_{\hat n}}
+		\inv{\tilde{\mb X}^T P\tilde{\mb X} + \beta I_{\hat n}}
 		\tilde{\mb x}_ky_k
 		-
-		\inv{\tilde{\mb X}^T P^2\tilde{\mb X} + \beta I_{\hat n}}
+		\inv{\tilde{\mb X}^T P\tilde{\mb X} + \beta I_{\hat n}}
 		\tilde{\mb x}_k \tilde{\mb x}^T_k
 		\besta
 	} = \\
 	&= -\tilde {\mb x}_k^T
-		\inv{\tilde{\mb X}^T P^2\tilde{\mb X} + \beta I_{\hat n}}
+		\inv{\tilde{\mb X}^T P\tilde{\mb X} + \beta I_{\hat n}}
 		\tilde{\mb x}_k \cbr{y_k - \hat y_k}
 	= - \tilde {\mb x}_k^T
-		\inv{\tilde{\mb X}^T P^2\tilde{\mb X} + \beta I_{\hat n}}
+		\inv{\tilde{\mb X}^T P\tilde{\mb X} + \beta I_{\hat n}}
 		\tilde{\mb x}_k \hat \delta_k.
-\end{align}
+\end{align*}
 
 Тогда
-\begin{align}
+\begin{align*}
 	\left.\fbr{
 		\hat S(\mb p, \lams)
 	- 	\suml_{i=1}^N\dd{\delta_i^2(\mb p, \lams)}{p_i}
@@ -182,23 +205,61 @@
 			\inv{\tilde{\mb X}^T \tilde{\mb X} + \beta I_{\hat n}}
 			\tilde{\mb x}_i
 		}
-\end{align}
+\end{align*}
+Теорема доказана.
+\end{Proof}
 
-Изучим, как соотносятся
-$\suml_{j=1}^N\sqr{\hat{\delta}_{j, \lams}^{(j)}}$
-и $\suml_{j=1}^N \hat\delta_{j, \lams}^2$
+% Изучим, как соотносятся
+% $\suml_{j=1}^N\sqr{\hat{\delta}_{j, \lams}^{(j)}}$
+% и $\suml_{j=1}^N \hat\delta_{j, \lams}^2$
 
-\begin{align}
-	\suml_{j=1}^N\sqr{\hat{\delta}_{j, \lams}^{(j)}} &=
-		\suml_{j=1}^N\sqr{y_j - \mb x_j^T \hat {\mb a}_\lams^{(j)}} \\
-	\suml_{j=1}^N \hat\delta_{j, \lams}^2 &=
-		\suml_{j=1}^N \sqr{y_j - \mb x_j^T \hat {\mb a}_\lams}
-\end{align}
+% \begin{align}
+% 	\suml_{j=1}^N\sqr{\hat{\delta}_{j, \lams}^{(j)}} &=
+% 		\suml_{j=1}^N\sqr{y_j - \mb x_j^T \hat {\mb a}_\lams^{(j)}} \\
+% 	\suml_{j=1}^N \hat\delta_{j, \lams}^2 &=
+% 		\suml_{j=1}^N \sqr{y_j - \mb x_j^T \hat {\mb a}_\lams}
+% \end{align}
 
-% \end{proof}
-% \newtheorem{о решении задачи оптимизации}{Решение $\hat a_{\lams}$ задачи оптимизации (\ref{LagrWEN}) является комбинацией решения }
+% % \end{proof}
+% % \newtheorem{о решении задачи оптимизации}{Решение $\hat a_{\lams}$ задачи оптимизации (\ref{LagrWEN}) является комбинацией решения }
 
-\begin{align}
-	% \dd{}{\mb p}\hat{S}_{\lambda_1, \lambda_2}&= \frac2N\cbr{y_j - x_j^T \dd{}{\mb p}\hat {\mb a}_{\lambda_1, \lambda_2}}.
-	\dd{}{p_k}\hat{S}_{\lams}&= \frac2N\sum_{j=1}^N\cbr{y_j - x_j^T \dd{}{p_k}\hat {\mb a}_{\lams}}
-\end{align}
+% \begin{align}
+% 	% \dd{}{\mb p}\hat{S}_{\lambda_1, \lambda_2}&= \frac2N\cbr{y_j - x_j^T \dd{}{\mb p}\hat {\mb a}_{\lambda_1, \lambda_2}}.
+% 	\dd{}{p_k}\hat{S}_{\lams}&= \frac2N\sum_{j=1}^N\cbr{y_j - x_j^T \dd{}{p_k}\hat {\mb a}_{\lams}}
+% \end{align}
+
+
+\subsection{Сравнение результатов} % (fold)
+Преобразуем (\ref{LOO})
+\begin{align*}
+% \frac1N\suml_{k=1}^N \cbr{y_k - \mb x_k^T\hat{\mb a}(\beta, \mu, \mb e^{(k)})}^2.
+	S_{LOO}(\lams) 
+	&= \frac1N\suml_{k=1}^N \hat{\delta}^2_k(\mb e^{(k)}, \lams) = \\
+	&= \frac1N\suml_{k=1}^N \hat{\delta}_k^2(\mb e, \lams)
+	+ \frac1N\suml_{k=1}^N \frac{\hat{\delta}_k^2(\mb e^{(k)}, \lams) - \hat{\delta}_k^2(\mb e, \lams)}1 = \\
+	&= \frac1N\suml_{k=1}^N \hat{\delta}_k^2(\mb e, \lams)
+	- \frac1N\suml_{k=1}^N \frac{\hat{\delta}_k^2(\mb e, \lams) - \hat{\delta}_k^2(\mb e^{(k)}, \lams)}{1-0}.
+\end{align*}
+
+Элементы второй суммы являются, отношением изменения $\hat{\delta}_k^2$ при изменении веса $p_k$ с $1$ на $0$, то есть дискретной производной.
+Такой представление показывает, что классический скользящий контроль через LOO можно заменить следующим критерием:
+\begin{equation*}
+	S_{Diff}(\lams) 
+	= \frac1N\suml_{k=1}^N \hat{\delta}_k^2(\mb e, \lams) 
+	- \frac1N\suml_{k=1}^N \left.
+		\dd{\hat{\delta}_k^2(\mb p, \lams)}{p_k} 
+	\right|_{\mb p=\mb e}.
+\end{equation*}
+
+Таким образом мы можем сформулировать критерий дифференциальной кросс-валидации:
+\begin{equation*}
+	S_{Diff}(\lams) 
+	= \frac1N\suml_{k=1}^N \left. \fbr{
+		\hat{\delta}_k^2(\mb p, \lams)
+		- \dd{\hat{\delta}_k^2(\mb p, \lams)}{p_k} 
+	}\right|_{\mb p=\mb e} \to \min_{\lams}.
+\end{equation*}
+
+Согласно теореме (\ref{thm:diffLOO}), значение этого критерия может быть эффективно вычислено, поскольку для каждой пары $(\lams)$ достаточно лишь единожды получить значение $\hat{\mb a}(\lams)$.
+
+Результаты утверждения (\ref{stmnt:CVI}) и теоремы (\ref{thm:diffLOO}) совпадают с точностью до малых второго порядка. Полного совпадения нет, поскольку оптимальное решение $\hat{\mb a}$ зависит от весов $\mb p$ не линейно, а дробно-линейно (см. утверждение (\ref{stmnt:locally_linear})), и что и вызывает расхождение.
