@@ -108,9 +108,10 @@
 \end{equation*}
 
 Критерием качества будет являться среднее ошибок алгоритмов на объектах исключённых из исходного множества обучения:
-\begin{equation}
-	Q(\beta, \mu) = \frac1N\suml_{k=1}^N \cbr{y_k - \mb x_k^T\hat{\mb a}^{(k)}}^2.
-\end{equation}
+\begin{equation*}
+	% \label{LOO}
+	S_{LOO}(\beta, \mu) = \frac1N\suml_{k=1}^N \cbr{y_k - \mb x_k^T\hat{\mb a}^{(k)}}^2.
+\end{equation*}
 
 Таким образом критерий традиционной кросс-валидации принимает вид:
 \begin{equation}
@@ -118,7 +119,7 @@
 	\cbr{\hat \beta, \hat \mu} = \argmin \frac1N\suml_{k=1}^N \cbr{y_k - \mb x_k^T\hat{\mb a}^{(k)}}^2.
 \end{equation}
 
-В такой форме явно видно, что получение оценки $Q(\beta, \mu)$ требует построение всех векторов $\hat{\mb a}^{(k)}, \oi kN,$ то есть придётся обучаться $N$ раз. 
+В такой форме явно видно, что получение оценки $S_{LOO}(\beta, \mu)$ требует построение всех векторов $\hat{\mb a}^{(k)}, \oi kN,$ то есть придётся обучаться $N$ раз. 
 % subsection subsection_name (end)
 
 % \subsection{Скользящий контроль для поиска оптимальных параметров регуляризации}

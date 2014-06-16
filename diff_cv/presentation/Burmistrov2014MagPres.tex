@@ -243,12 +243,12 @@
 }
 
 \section{Численный эксперимент}
-\subsection{Модельные данные}
+\subsection{Синтетические данные}
 \begin{frame}{Сгенерированная выборка из 100 объектов}
 	\vspace{-20pt}
 	\begin{align*}
 		x_{ij} &\sim Exp(j), \: i=1,\ldots,100, \: j=1,\ldots,5, \: \mb a = (0, 2, 0, -3, 0)^T, \\
-		y_{i} &= \mb x_i^T \mb a + \eps_i, \eps_i \sim Exp(j), i=1,\ldots,100. 
+		y_{i} &= \mb x_i^T \mb a + \eps_i, \eps_i \sim \Norm0{0{,}01}, i=1,\ldots,100. 
 	\end{align*}
 	\vspace{-15pt}
 	\begin{columns}

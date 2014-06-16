@@ -1,0 +1,51 @@
+Для экспериментального сравнения предложенных техник проведём вычислительный эксперимент на синтетических данных.
+
+\subsection{Сравнение оценок скользящего контроля} % (fold)
+В этом эксперименте данные сгенерированно $N=100$ объектов, обладающие $n=5$ признаками, по следующей вероятностной модели:
+	\begin{align*}
+		x_{ij} &\sim Exp(j), \: i=1,\ldots,N, \: j=1,\ldots,n,\\
+		\mb a &= (0, 2, 0, -3, 0)^T, \\
+		y_{i} &= \mb x_i^T \mb a + \eps_i, \eps_i \sim \Norm0{0{.}01}, i=1,\ldots,100. 
+	\end{align*}
+
+Вычислим оценки скользящего контроля по соотношениям (\ref{diffLOO}, \ref{LOOfixed}, \ref{LOO}) для определения оптимальных параметров регуляризации. Соответствующие графики приведены на рисунках (\ref{pic:diffLOO}, \ref{pic:LOOfixed}, \ref{pic:LOO}).
+
+\begin{figure}[H]
+	\label{pic:LOOfixed}
+	\centering
+	\includegraphics[height=240px]{graph/LOO_I.png}
+	\caption{$S_{LOO, \hat I_\lams}(\lams)$}
+\end{figure}
+
+\begin{figure}[H]
+	\label{pic:diffLOO}
+	\centering
+	\includegraphics[height=240px]{graph/diff_CV.png}
+	\caption{$S_{Diff}(\lams)$}
+\end{figure}
+
+\begin{figure}[H]
+	\label{pic:LOO}
+	\centering
+	\includegraphics[height=240px]{graph/honest_CV.png}
+	\caption{$S_{LOO}(\lams)$}
+\end{figure}
+
+При этом оптимальные значения оказались равными:
+\begin{align*}
+	\hat S_{LOO, \hat I} 	&=0.0136, &\qquad	\hat \beta&=0.156, &\qquad	\hat \mu&=47.75 \\
+	\hat S_{Diff} 			&=0.0119, &\qquad	\hat \beta&=0.160, &\qquad	\hat \mu&=48.55 \\
+	\hat S_{LOO} 			&=0.0119, &\qquad	\hat \beta&=0.159, &\qquad	\hat \mu&=48.70.
+\end{align*}
+
+		% \addcolumn{LOO_I}{}{
+		% 	\hat S_{LOO, \hat I} &=0.0136, \\ \hat \beta &=0.156, \\ \hat \mu &=47.75
+		% }
+		% \addcolumn{diff_CV}{}{
+		% 	\hat S_{Diff} &=0.0119, \\ \hat \beta &=0.160, \\ \hat \mu &=48.55
+		% }
+		% \addcolumn{honest_CV}{S_{LOO}(\lams)}{
+		% 	\hat S_{LOO} &=0.0119, \\ \hat \beta &=0.159, \\ \hat \mu &=48.70
+		% }
+
+% subsection  (end)
