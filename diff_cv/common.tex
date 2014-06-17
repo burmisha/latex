@@ -1,0 +1,21 @@
+\newcommand\oi[2]{#1=1, \ldots, #2}
+\def\LiPart{L_i(a_i,\mb \lambda)}
+\def\sumLambdaX{\suml_{j=1}^N\lambda_jx_{ij}}
+\newcommand\diag[1]{\text{diag}\cbr{#1}}
+\def\besta{\hat{\tilde{\mathbf a}}}
+
+% \beta = \lambda_2
+% \mu = \lambda_1
+\def\cond{|}
+\def\lams{{\mu,\beta}}
+\def\inotnull{\not\in \hat I^0_\lams}
+
+\newtheorem{theorem}{Теорема}
+\newtheorem{statement}{Утверждение}
+\newenvironment{Proof}
+	{\par\noindent{\bf Доказательство.}}
+	{\hfill$\scriptstyle\blacksquare$} 
+
+\def\A{\tilde{\mb X}^T\tilde{\mb X} + \beta \tilde{\mb I}_{\hat n}}
+\def\xxt{\tilde{\mb x}_k \tilde{\mb x}_k^T}
+\def\denominator{1 - \tilde{\mb x}_k^T\inv{\A}\tilde{\mb x}_k}
