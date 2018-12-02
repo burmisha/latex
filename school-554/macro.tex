@@ -39,3 +39,9 @@
 }
 
 \def\celsius{\,^\circ\text{C}}
+
+\newcommand{\libproblempath}{../problems}
+
+\newcommand\libproblem[2]{
+    \input{\libproblempath/#1/#2.tex}
+}
