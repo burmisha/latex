@@ -1,9 +1,10 @@
 \newcommand\units[1]{{\,\text{#1}}}
-\newcommand\dunits[2]{{\,\text{#1$^{#2}$}}}
-\newcommand\fracunits[4]{{\,\frac{\text{#1$^{#2}$}}{\text{#3$^{#4}$}}}}
-\newcommand\cfracunits[4]{{\,\cfrac{\text{#1$^{#2}$}}{\text{#3$^{#4}$}}}}
-\newcommand\dfracunits[4]{{\,\dfrac{\text{#1$^{#2}$}}{\text{#3$^{#4}$}}}}
-\newcommand\tfracunits[4]{{\,\tfrac{\text{#1$^{#2}$}}{\text{#3$^{#4}$}}}}
+\newcommand\powtext[2]{{\text{#1}^{#2}}}
+\newcommand\dunits[2]{{\,\powtext{#1}{#2}}}
+\newcommand\fracunits[4]{{\,\frac{\powtext{#1}{#2}}{\powtext{#3}{#4}}}}
+\newcommand\cfracunits[4]{{\,\cfrac{\powtext{#1}{#2}}{\powtext{#3}{#4}}}}
+\newcommand\dfracunits[4]{{\,\dfrac{\powtext{#1}{#2}}{\powtext{#3}{#4}}}}
+\newcommand\tfracunits[4]{\,\tfrac{\powtext{#1}{#2}}{\powtext{#3}{#4}}}
 % \newcommand\tasklong[1]{{\bfseries \sffamily{Задача #1.}}}
 % \newcommand\task[1]{{\bfseries \sffamily{Задача #1.}}}
 
@@ -50,7 +51,7 @@
 
 \newcommand\libproblempath{../problems}
 
-\newcommand\taskname[2]{{\tt(Задача #2 из #1)}}
+\newcommand\taskname[2]{{\qquad\tt(Задача #2 из #1)}}
 
 \newcommand\libproblem[2]{
     \input{\libproblempath/#1/#2.tex}
@@ -62,7 +63,7 @@
 }
 
 \newcommand{\answer}[1]{
-    Ответ: #1.
+    \\ {\bfseries \sffamily{Ответ:}} #1.
 }
 
 \newcommand\hasanswerswarning{{\bfseries \sffamily{Вариант с ответами}}}
@@ -72,3 +73,19 @@
     \renewcommand{\answer}[1]{}
     \renewcommand{\taskname}[2]{}
 }
+
+\def\narrow{
+    % \usepackage{beton} 
+    \oddsidemargin=1cm
+    \evensidemargin=1cm 
+    \textheight=29cm % высота текста
+    \textwidth=13cm % ширина текста
+    \topmargin=-1.5cm % отступ от верхнего края
+    \parskip=2pt % интервал между абзацами
+
+    \def\baselinestretch{1.25}
+}
+
+\def\qqquad{\qquad\qquad}
+\def\qqqquad{\qqquad\qqquad}
+\def\qqqqquad{\qqqquad\qqqquad}
