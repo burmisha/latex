@@ -39,6 +39,14 @@
     \end{flushright}
 }
 
+\newcommand\classdatevariant[3]{
+    \hasanswerswarning
+    \begin{flushright}
+    \textsc{#1 класс, #2\,г. Вариант #3}
+    \end{flushright}
+}
+
+
 \newcommand\rhoother[2]{
     $\rho_\text{#1} = #2\,\cfrac{\text{кг}}{\text{м}^3}$
 }
@@ -84,6 +92,12 @@
     \parskip=2pt % интервал между абзацами
 
     \def\baselinestretch{1.25}
+}
+
+\def\invert{
+    \usepackage{xcolor}
+    \pagecolor[rgb]{0,0,0}
+    \color[rgb]{1,1,1}
 }
 
 \def\qqquad{\qquad\qquad}
