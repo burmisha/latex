@@ -1,0 +1,41 @@
+\newcommand\units[1]{{\,\text{#1}}}
+% \newcommand\tasklong[1]{{\bfseries \sffamily{Задача #1.}}}
+% \newcommand\task[1]{{\bfseries \sffamily{Задача #1.}}}
+
+\newcommand\problem[1]{{\fbox{\bfseries{#1}}}}
+\newcommand\task[1]{{\problem{#1}}}
+
+
+\def\rhowater{$\rho = 1000\,\cfrac{\text{кг}}{\text{м}^3}.$}
+
+
+% \newcommand\adddate[1]{
+%     \begin{center} 
+%     \bfseries \sffamily{#1\,г.}
+%     \end{center} 
+% }
+
+\newcommand\adddate[1]{
+    \begin{flushright}
+    \textsc{#1\,г.}
+    \end{flushright}
+}
+
+\newcommand\addclassdate[2]{
+    \begin{flushright}
+    \textsc{#1 класс, #2\,г.}
+    \end{flushright}
+}
+
+
+
+   
+\newcommand\rhoother[2]{
+    $\rho_\text{#1} = #2\,\cfrac{\text{кг}}{\text{м}^3}$
+}
+
+\newcommand\cother[2]{
+    $c_\text{#1} = #2\,\cfrac{\text{Дж}}{\text{кг}\cdot^\circ \!\text{C}}$
+}
+
+\def\celsius{\,^\circ\text{C}}

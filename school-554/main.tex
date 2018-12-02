@@ -1,0 +1,48 @@
+\documentclass[12pt,a4paper]{amsart}%DVI-mode.
+\usepackage{graphics,graphicx,epsfig}%DVI-mode.
+%\documentclass[pdftex,12pt]{amsart} %PDF-mode.
+%\usepackage[pdftex]{graphicx}       %PDF-mode.
+
+%\usepackage{a4wide}                 % Fit the text to A4 page tightly.
+\usepackage[utf8]{inputenc}
+\usepackage[T2A]{fontenc}
+\usepackage[english,russian]{babel} % Download Russian fonts.
+\usepackage{amsmath,amsfonts,amssymb,amsthm,amscd,mathrsfs} % Use AMS symbols.
+\usepackage{tikz}
+\usetikzlibrary{circuits.ee.IEC}
+\usetikzlibrary{shapes.geometric}
+\usetikzlibrary{decorations.markings}
+%\usetikzlibrary{dashs}
+%\usetikzlibrary{info}
+
+
+\textheight=29cm % высота текста
+\textwidth=18cm % ширина текста
+\topmargin=-2.5cm % отступ от верхнего края
+\parskip=6pt % интервал между абзацами
+\oddsidemargin=-1.5cm
+\evensidemargin=-1.5cm 
+
+% wide docs
+% \oddsidemargin=0cm
+% \evensidemargin=0cm 
+% \textheight=29cm % высота текста
+% \textwidth=15cm % ширина текста
+% \topmargin=-1.5cm % отступ от верхнего края
+% \parskip=18pt % интервал между абзацами
+
+
+\parindent=0pt % абзацный отступ
+\tolerance=500 % терпимость к "жидким" строкам
+\binoppenalty=10000 % штраф за перенос формул - 10000 - абсолютный запрет
+\relpenalty=10000
+\flushbottom % выравнивание высоты страниц
+\def\baselinestretch{1.00}
+\pagenumbering{gobble}
+
+\begin{document}
+\input{macro.tex}
+%\raggedright
+\input{2018-04-20.tex}
+% \input{2018-11-20.tex}
+\end{document}
