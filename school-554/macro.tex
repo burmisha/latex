@@ -76,7 +76,6 @@
 
 \newcommand\hasanswerswarning{{\bfseries \sffamily{Вариант с ответами}}}
 \newcommand{\noanswers}[0]{
-    
     \renewcommand\hasanswerswarning{}
     \renewcommand{\answer}[1]{}
     \renewcommand{\taskname}[2]{}
@@ -130,3 +129,22 @@
     #2 \vspace{#1} #2 \vspace{#1} #2 \vspace{#1} #2 \vspace{#1} #2
 }
 
+\newcommand\setdate[1]{
+    \renewcommand\customdate{{#1}}
+}
+
+\newcommand\setclass[1]{
+    \renewcommand\customclass{{#1}}
+}
+
+\def\insertclassdate{
+    \begin{flushright}
+    \textsc{\customclass класс, \customdate\,г.}
+    \end{flushright}
+}
+
+\newcommand\addvariant[1]{
+    \begin{flushright}
+    \textsc{\customclass класс, \customdate\,г. Вариант #1.}
+    \end{flushright}
+}
