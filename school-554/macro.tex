@@ -103,3 +103,13 @@
 \def\qqquad{\qquad\qquad}
 \def\qqqquad{\qqquad\qqquad}
 \def\qqqqquad{\qqqquad\qqqquad}
+
+
+\newcommand\twocolumns[3]{
+    \columnsep=#1
+    \begin{multicols}{2}
+        #2
+        \columnbreak
+        #3
+    \end{multicols}
+}
