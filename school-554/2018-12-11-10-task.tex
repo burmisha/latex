@@ -1,0 +1,25 @@
+\input{main}
+% \narrow     \invert
+
+\usepackage{multicol}
+\begin{document}
+\noanswers
+
+\setdate{11 декабря 2018}
+\setclass{10}
+\def\first{
+    \addvariant{I}
+    \tasknumber{1}\libproblem{gendenshteyn-10}{08-12}
+
+    \tasknumber{2}\libproblem{gendenshteyn-10}{09-12}
+}
+
+\def\second{
+    \addvariant{II}
+    \tasknumber{1}\libproblem{gendenshteyn-10}{08-13}
+
+    \tasknumber{2}\libproblem{gendenshteyn-10}{09-11}
+}
+
+\twocolumns{30pt}{\fivevariants{20pt}{\first}}{\fivevariants{20pt}{\second}}
+\end{document}
