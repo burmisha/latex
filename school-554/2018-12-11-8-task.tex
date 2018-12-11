@@ -1,0 +1,37 @@
+\input{main}
+% \narrow     \invert
+
+\usepackage{multicol}
+\begin{document}
+\noanswers
+
+\setdate{11 декабря 2018}
+\setclass{8}
+\def\first{
+    \addvariant{I}
+    \tasknumber{1}\task{
+        Дайте определение и укажите обозначение и единицы измерения следующих физических величин: теплоёмкость тела, удельная теплота парообразования и конденсации.
+    }
+
+    \tasknumber{2}\task{
+        Сколько воды температурой $60\celsius$ необходимо добавить в теплоизолированный сосуд, чтобы полностью расплавить находящий в нём лёд массой $200\units{г}$ при температуре $-15\celsius$?
+    }
+
+    \tasknumber{3}\libproblem{gendenshteyn-8}{5-22}
+}
+
+\def\second{
+    \addvariant{II}
+    \tasknumber{1}\task{
+        Дайте определение и укажите обозначение и единицы измерения следующих физических величин: удельная теплота плавления и кристаллизации, удельная теплоёмкость вещества.
+    }
+
+    \tasknumber{2}\task{
+        В теплоизолированный сосуд, в котором находится $2\units{л}$ воды при температуре $20\celsius$, запускают $100\units{г}$ водяного пара при температуре $100\celsius$. Какая температура установится в сосуде?
+    }
+
+    \tasknumber{3}\libproblem{gendenshteyn-8}{5-24}
+}
+
+\twocolumns{50pt}{\threevariants{50pt}{\first}}{\threevariants{50pt}{\second}}
+\end{document}
