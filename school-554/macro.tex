@@ -115,6 +115,17 @@
     \end{multicols}
 }
 
+\newcommand\threecolumns[4]{
+    \columnsep=#1
+    \begin{multicols}{3}
+        #2
+        \columnbreak
+        #3
+        \columnbreak
+        #4
+    \end{multicols}
+}
+
 \newcommand\twovariants[2]{
     #2 \vspace{#1} #2
 }
