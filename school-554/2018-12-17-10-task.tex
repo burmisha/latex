@@ -1,0 +1,37 @@
+\input{main}
+% \narrow     \invert
+
+\usepackage{multicol}
+\begin{document}
+\noanswers
+
+\setdate{18 декабря 2018}
+\setclass{10}
+\def\first{
+    \addvariant{I}
+    \tasknumber{1}\task{
+        Камень после броска поднялся на высоту $40\units{м}$. Какова была его скорость в момент броска, если его скорость на этой высоте равна $20\fracunits{м}{}{с}{}$?
+        % kirik 9-22-my
+    }
+
+    \tasknumber{2}\task{
+        Пуля массы $15\units{г}$ после пробивания стены уменьшила скорость от $800\fracunits{м}{}{с}{}$ до $300\fracunits{м}{}{с}{}$. Какие доли импульса и кинетической энергии потеряла пуля?
+        % kirik 9-
+    }
+}
+
+\def\second{
+    \addvariant{II}
+    \tasknumber{1}\task{
+        Тело свободно падает с высоты $20\units{м}$. Какова его скорость на высоте $12\units{м}$ над Землёй? Какова скорость при ударе о Землю?
+        % kirik 9-23-my
+    }
+
+    \tasknumber{2}\task{
+        Молотком массой $0{,}6\units{кг}$, движущимся со скоростью $2\fracunits{м}{}{с}{}$, забивают гвоздь. Удар длится $0{,}01\units{с}$. Определите силу, с которой молоток воздействует на гвоздь?
+        % kirik 9-
+    }
+}
+
+\twocolumns{30pt}{\fivevariants{20pt}{\first}}{\fivevariants{14pt}{\second}}
+\end{document}
