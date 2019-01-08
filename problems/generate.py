@@ -1,6 +1,13 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+
 import os
+import argparse
+import logging
+
+import logging
+log = logging.getLogger('problems')
+
 
 class Task(object):
     def __init__(self, text, answer=None, book=None, number=None):
@@ -16,11 +23,10 @@ class Task(object):
         return result
 
     def GetFilename(self):
-        # return os.path.join(self.Book, '%s.tex' % self.Number)
-        return os.path.join('%s.tex' % self.Number)
+        return os.path.join(self.Book, '%s.tex' % self.Number)
 
 
-if __name__ == '__main__':
+def generate(args):
     tasks = {
         '18-01': ur'Какие известные вам наблюдения и опыты показывают, что существует сила трения?',
         '18-02': ur'Приведите примеры, показывающие, что трение может быть полезным.',
@@ -55,6 +61,44 @@ if __name__ == '__main__':
     for number, text in sorted(tasks.iteritems()):
         task = Task(text, book='gendenshteyn-7', number=number)
         filename = task.GetFilename()
-        print 'Saving file %s' % filename
+        log.info('Saving file %s', filename)
         with open(filename, 'w') as f:
             f.write(task.GetTex().encode('utf-8'))
+
+
+def CreateArgumentsParser():
+    fmtClass = {'formatter_class': argparse.ArgumentDefaultsHelpFormatter}
+    parser = argparse.ArgumentParser(description='Generate LaTeX-files', **fmtClass)
+
+    loggingGroup = parser.add_argument_group('Logging arguments')
+    defaultLogFormat = ' '.join([
+        # '%(relativeCreated)d',
+        '%(asctime)s.%(msecs)03d',
+        # '%(name)10s:%(lineno)-3d',
+        '%(levelname)-7s',
+        '%(message)s',
+    ])
+    loggingGroup.add_argument('--log-format', help='Logging format', default=defaultLogFormat)
+    loggingGroup.add_argument('--log-separator', help='Logging string separator', choices=['space', 'tab'], default='space')
+    loggingGroup.add_argument('--verbose', help='Enable debug logging', action='store_true')
+
+    parser.set_defaults(func=generate)
+    return parser
+
+
+def main():
+    parser = CreateArgumentsParser()
+    args = parser.parse_args()
+
+    logFormat = args.log_format.replace('\t', ' ')
+    logFormat = logFormat.replace(' ', {'space': ' ', 'tab': '\t'}[args.log_separator])
+    logLevel = logging.DEBUG if args.verbose else logging.INFO
+    logging.basicConfig(level=logLevel, format=logFormat, datefmt='%H:%M:%S')
+
+    log.info('Start')
+    args.func(args)
+    log.info('Finish')
+
+
+if __name__ == '__main__':
+    main()
