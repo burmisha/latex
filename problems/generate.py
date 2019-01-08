@@ -3,6 +3,7 @@
 
 import argparse
 import logging
+import os
 
 import gendenshteyn7
 import gendenshteyn8
@@ -10,18 +11,50 @@ import gendenshteyn8
 log = logging.getLogger('problems')
 
 
+
+def walkFiles(dirname, extensions=[], dirsOnly=False):
+    dirName = str(dirname)
+    logName = 'dirs' if dirsOnly else 'files'
+    log.debug('Looking for %s of types %r in %s', logName, extensions, dirName)
+    count = 0
+    if not os.path.exists(dirName):
+        log.error('Path %r is missing', dirName)
+    for root, dirs, files in os.walk(dirName):
+        if dirsOnly:
+            for directory in dirs:
+                count += 1
+                yield os.path.join(root, directory)
+        else:
+            for filename in files:
+                if not extensions or any(filename.endswith(extension) for extension in extensions):
+                    count += 1
+                    yield os.path.join(root, filename)
+    log.debug('Found %d %s in %s', count, logName, dirName)
+
+
 def generate(args):
     tasksGenerators = [
         gendenshteyn7.Gendenshteyn7(),
         gendenshteyn8.Gendenshteyn8(),
     ]
+    taskNumber = args.task_number
     for tasksGenerator in tasksGenerators:
-        log.info('Using %r', tasksGenerator)
-        for task in tasksGenerator():
-            filename = task.GetFilename()
+        log.info('Using %r for tasks in %r', tasksGenerator, tasksGenerator.GetBookName())
+        generatedTasks = set()
+        for task in sorted(tasksGenerator(), key=lambda task: task.GetFilename()):
+            if taskNumber and taskNumber not in task.GetFilename():
+                continue
+            filename = os.path.join(tasksGenerator.GetBookName(), task.GetFilename())
+            generatedTasks.add(filename)
             log.info('Saving file %s', filename)
             with open(filename, 'w') as f:
                 f.write(task.GetTex().encode('utf-8'))
+        allTasks = set(walkFiles(tasksGenerator.GetBookName(), extensions=['tex']))
+        manualTasks = sorted(allTasks - generatedTasks)
+        if args.show_manual:
+            log.info('Got %d manual tasks in %s', len(manualTasks), tasksGenerator.GetBookName())
+            for manualTask in manualTasks:
+                log.info('  Manual task: %r', manualTask)
 
 
 def CreateArgumentsParser():
@@ -39,6 +72,9 @@ def CreateArgumentsParser():
     loggingGroup.add_argument('--log-format', help='Logging format', default=defaultLogFormat)
     loggingGroup.add_argument('--log-separator', help='Logging string separator', choices=['space', 'tab'], default='space')
     loggingGroup.add_argument('--verbose', help='Enable debug logging', action='store_true')
+
+    parser.add_argument('--show-manual', '--sm', help='Show manual files', action='store_true')
+    parser.add_argument('--task-number', '--tn', help='Process only one task having number')
 
     parser.set_defaults(func=generate)
     return parser
@@ -60,3 +96,4 @@ def main():
 
 if __name__ == '__main__':
     main()
+# 
