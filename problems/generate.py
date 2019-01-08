@@ -5,6 +5,7 @@ import argparse
 import logging
 
 import gendenshteyn7
+import gendenshteyn8
 
 log = logging.getLogger('problems')
 
@@ -12,6 +13,7 @@ log = logging.getLogger('problems')
 def generate(args):
     tasksGenerators = [
         gendenshteyn7.Gendenshteyn7(),
+        gendenshteyn8.Gendenshteyn8(),
     ]
     for tasksGenerator in tasksGenerators:
         log.info('Using %r', tasksGenerator)
