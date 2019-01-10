@@ -11,7 +11,6 @@ import gendenshteyn8
 log = logging.getLogger('problems')
 
 
-
 def walkFiles(dirname, extensions=[], dirsOnly=False):
     dirName = str(dirname)
     logName = 'dirs' if dirsOnly else 'files'
