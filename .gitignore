@@ -34,6 +34,7 @@
 *.eps
 *.png
 *.synctex.gz(busy)
+*.synctex(busy)
 
 *.DS_Store
 *.txt
