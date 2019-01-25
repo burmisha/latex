@@ -6,6 +6,7 @@ import logging
 import os
 
 import problems
+import classes
 
 log = logging.getLogger('generate')
 
@@ -31,29 +32,43 @@ def walkFiles(dirname, extensions=[], dirsOnly=False):
 
 
 def generate(args):
-    tasksGenerators = [
-        problems.gendenshteyn7.Gendenshteyn7(),
-        problems.gendenshteyn8.Gendenshteyn8(),
-        problems.getaclass.GetAClass(),
-    ]
-    taskNumber = args.task_number
-    for tasksGenerator in tasksGenerators:
-        log.info('Using %r for tasks in %r', tasksGenerator, tasksGenerator.GetBookName())
-        generatedTasks = set()
-        for task in sorted(tasksGenerator(), key=lambda task: task.GetFilename()):
-            if taskNumber and taskNumber not in task.GetFilename():
-                continue
-            filename = os.path.join('problems', tasksGenerator.GetBookName(), task.GetFilename())
-            generatedTasks.add(filename)
-            log.info('Saving file %s', filename)
-            with open(filename, 'w') as f:
-                f.write(task.GetTex().encode('utf-8'))
-        allTasks = set(walkFiles(tasksGenerator.GetBookName(), extensions=['tex']))
-        manualTasks = sorted(allTasks - generatedTasks)
-        if args.show_manual:
-            log.info('Got %d manual tasks in %s', len(manualTasks), tasksGenerator.GetBookName())
-            for manualTask in manualTasks:
-                log.info('  Manual task: %r', manualTask)
+    generateProblems = False
+    generateLists = True
+
+    if generateProblems:
+        tasksGenerators = [
+            problems.gendenshteyn7.Gendenshteyn7(),
+            problems.gendenshteyn8.Gendenshteyn8(),
+            problems.getaclass.GetAClass(),
+        ]
+        taskNumber = args.task_number
+        for tasksGenerator in tasksGenerators:
+            log.info('Using %r for tasks in %r', tasksGenerator, tasksGenerator.GetBookName())
+            generatedTasks = set()
+            for task in sorted(tasksGenerator(), key=lambda task: task.GetFilename()):
+                if taskNumber and taskNumber not in task.GetFilename():
+                    continue
+                filename = os.path.join('problems', tasksGenerator.GetBookName(), task.GetFilename())
+                generatedTasks.add(filename)
+                log.info('Saving file %s', filename)
+                with open(filename, 'w') as f:
+                    f.write(task.GetTex().encode('utf-8'))
+            allTasks = set(walkFiles(tasksGenerator.GetBookName(), extensions=['tex']))
+            manualTasks = sorted(allTasks - generatedTasks)
+            if args.show_manual:
+                log.info('Got %d manual tasks in %s', len(manualTasks), tasksGenerator.GetBookName())
+                for manualTask in manualTasks:
+                    log.info('  Manual task: %r', manualTask)
+
+    if generateLists:
+        papersGenerators = [
+            classes.class1807.Class1807(),
+        ]
+        for papersGenerator in papersGenerators:
+            for paper in papersGenerator():
+                filename = os.path.join('school-554', paper.GetFilename())
+                with open(filename, 'w') as f:
+                    f.write(paper.GetTex().encode('utf-8'))
 
 
 def CreateArgumentsParser():

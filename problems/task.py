@@ -1,4 +1,3 @@
-import os
 import logging
 
 log = logging.getLogger('task')
