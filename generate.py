@@ -5,11 +5,9 @@ import argparse
 import logging
 import os
 
-import gendenshteyn7
-import gendenshteyn8
-import getaclass
+import problems
 
-log = logging.getLogger('problems')
+log = logging.getLogger('generate')
 
 
 def walkFiles(dirname, extensions=[], dirsOnly=False):
@@ -34,9 +32,9 @@ def walkFiles(dirname, extensions=[], dirsOnly=False):
 
 def generate(args):
     tasksGenerators = [
-        gendenshteyn7.Gendenshteyn7(),
-        gendenshteyn8.Gendenshteyn8(),
-        getaclass.GetAClass(),
+        problems.gendenshteyn7.Gendenshteyn7(),
+        problems.gendenshteyn8.Gendenshteyn8(),
+        problems.getaclass.GetAClass(),
     ]
     taskNumber = args.task_number
     for tasksGenerator in tasksGenerators:
@@ -45,7 +43,7 @@ def generate(args):
         for task in sorted(tasksGenerator(), key=lambda task: task.GetFilename()):
             if taskNumber and taskNumber not in task.GetFilename():
                 continue
-            filename = os.path.join(tasksGenerator.GetBookName(), task.GetFilename())
+            filename = os.path.join('problems', tasksGenerator.GetBookName(), task.GetFilename())
             generatedTasks.add(filename)
             log.info('Saving file %s', filename)
             with open(filename, 'w') as f:
