@@ -7,6 +7,7 @@ import os
 
 import gendenshteyn7
 import gendenshteyn8
+import getaclass
 
 log = logging.getLogger('problems')
 
@@ -35,6 +36,7 @@ def generate(args):
     tasksGenerators = [
         gendenshteyn7.Gendenshteyn7(),
         gendenshteyn8.Gendenshteyn8(),
+        getaclass.GetAClass(),
     ]
     taskNumber = args.task_number
     for tasksGenerator in tasksGenerators:
