@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
-import re
+import library
 import logging
 
-log = logging.getLogger('task')
+log = logging.getLogger(__name__)
 
 PAPER_TEMPLATE = ur'''
 \input{{main}}
@@ -22,20 +22,18 @@ PAPER_TEMPLATE = ur'''
 \end{{document}}
 '''.strip()
 
+
 class Paper(object):
     def __init__(self, date, tasks, name=None, classLetter=None, style=r'\variant'):
-        assert isinstance(date, str)
-        assert isinstance(tasks, list)
-        assert re.match(r'201\d-\d{2}-\d{2}', date)
-        assert name in [None, 'hometask', 'task'], 'Invalid name: %r' % name
+        self.Date = library.formatter.Date(date)
 
-        self.Date = date
+        assert isinstance(tasks, list)
         self.Tasks = tasks
         self.Name = name
         self.ClassLetter = classLetter
         self.Style = style
 
-        filename = '%s-%s' % (self.Date, self.ClassLetter)
+        filename = '%s-%s' % (self.Date.GetFilenameText(), self.ClassLetter)
         if self.Name:
             filename += '-' + self.Name
         filename += '.tex'
@@ -50,30 +48,12 @@ class Paper(object):
                 index += 1
                 tasks.append('\\tasknumber{%d}\\libproblem{%s}{%s}' % (index, book, problem))
         result = PAPER_TEMPLATE.format(
-            date=self.GetTextDate(),
+            date=self.Date.GetHumanText(),
             classLetter=self.ClassLetter,
             tasks='\n\n'.join('    ' + task for task in tasks),
             style=self.Style,
         )
         return result        
-
-    def GetTextDate(self):
-        year, month, day = self.Date.split('-')
-        textMonth = {
-            '01': u'января',
-            '02': u'февраля',
-            '03': u'марта',
-            '04': u'апреля',
-            '05': u'мая',
-            '06': u'июня',
-            '07': u'июля',
-            '08': u'августа',
-            '09': u'сентября',
-            '10': u'октября',
-            '11': u'ноября',
-            '12': u'декабря',
-        }
-        return u'%d %s %s' % (int(day), textMonth[month], year)
 
     def GetFilename(self):
         return self._Filename

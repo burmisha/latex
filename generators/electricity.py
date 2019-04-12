@@ -5,6 +5,7 @@ import logging
 import random
 
 import problems
+import library
 
 log = logging.getLogger('electricity')
 
@@ -85,17 +86,12 @@ class Variants(object):
 
 
 class MultiplePaper(object):
-    def __init__(self, date, name='task', classLetter=None):
-        assert isinstance(date, str)
-        # assert isinstance(tasks, list)
-        assert re.match(r'201\d-\d{2}-\d{2}', date)
-        assert name in ['task'], 'Invalid name: %r' % name
-
-        self.Date = date
-        self.Name = name
+    def __init__(self, date=None, classLetter=None):
+        self.Date = library.formatter.Date(date)
+        self.Name = 'task'
         self.ClassLetter = classLetter
 
-        filename = '%s-%s' % (self.Date, self.ClassLetter)
+        filename = '%s-%s' % (self.Date.GetFilenameText(), self.ClassLetter)
         if self.Name:
             filename += '-' + self.Name
         filename += '.tex'
@@ -112,29 +108,11 @@ class MultiplePaper(object):
                     taskText=task.GetTex(),
                 ))
         result = PAPER_TEMPLATE.format(
-            date=self.GetTextDate(),
+            date=self.Date.GetHumanText(),
             classLetter=self.ClassLetter,
             text=text,
         )
         return result        
-
-    def GetTextDate(self):
-        year, month, day = self.Date.split('-')
-        textMonth = {
-            '01': u'января',
-            '02': u'февраля',
-            '03': u'марта',
-            '04': u'апреля',
-            '05': u'мая',
-            '06': u'июня',
-            '07': u'июля',
-            '08': u'августа',
-            '09': u'сентября',
-            '10': u'октября',
-            '11': u'ноября',
-            '12': u'декабря',
-        }
-        return u'%d %s %s' % (int(day), textMonth[month], year)
 
     def GetFilename(self):
         return self._Filename
