@@ -23,7 +23,7 @@ PAPER_TEMPLATE = ur'''
 '''.strip()
 
 class Paper(object):
-    def __init__(self, date, tasks, name=None, classLetter=None):
+    def __init__(self, date, tasks, name=None, classLetter=None, style=r'\variant'):
         assert isinstance(date, str)
         assert isinstance(tasks, list)
         assert re.match(r'201\d-\d{2}-\d{2}', date)
@@ -33,6 +33,7 @@ class Paper(object):
         self.Tasks = tasks
         self.Name = name
         self.ClassLetter = classLetter
+        self.Style = style
 
         filename = '%s-%s' % (self.Date, self.ClassLetter)
         if self.Name:
@@ -52,7 +53,7 @@ class Paper(object):
             date=self.GetTextDate(),
             classLetter=self.ClassLetter,
             tasks='\n\n'.join('    ' + task for task in tasks),
-            style=ur'\twocolumns{30pt}{\variant}{\variant}',
+            style=self.Style,
         )
         return result        
 

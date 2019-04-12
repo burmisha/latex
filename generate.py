@@ -32,7 +32,7 @@ def walkFiles(dirname, extensions=[], dirsOnly=False):
 
 
 def generate(args):
-    generateProblems = False
+    generateProblems = True
     generateLists = True
 
     if generateProblems:
