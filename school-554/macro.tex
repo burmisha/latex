@@ -10,12 +10,14 @@
 
 \newcommand\ounits[2]{~$#1\units{#2}$}
 
-% \newcommand\dfracunits[2]{{\,\dfrac{\text{#1}}{\text{#2}}}}
+\newcommand\funits[2]{{\,\frac{\text{#1}}{\text{#2}}}}
 % \newcommand\cfracunits[2]{{\,\cfrac{\text{#1}}{\text{#2}}}}
 % \newcommand\tunits[2]{\,\tfrac{\text{#1}}{\text{#2}}}
 % \newcommand\ukg{\text{кг}}
 % \newcommand\ugg[2]{\text{г}}
 % \newcommand\umt[1]{\text{м$^{#1}$}}
+
+\newcommand\vect[1]{\overrightarrow{#1}}
 
 \newcommand\problem[1]{{\fbox{\bfseries{#1}}}}
 \newcommand\tasknumber[1]{{\problem{#1}}}
@@ -167,5 +169,11 @@
 \newcommand\addvariant[1]{
     \begin{flushright}
     \textsc{\customclass~класс, \customdate\,г. Вариант #1}
+    \end{flushright}
+}
+
+\newcommand\addpersonalvariant[1]{
+    \begin{flushright}
+    \textsc{#1~---~\customclass~класс, \customdate\,г.}
     \end{flushright}
 }

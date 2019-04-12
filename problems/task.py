@@ -4,7 +4,7 @@ log = logging.getLogger('task')
 
 class Task(object):
     def __init__(self, text, answer=None, number=None):
-        self.Text = text
+        self.Text = text.strip('\n')
         self.Answer = answer
         self.Number = number
         filename = '%s.tex' % self.Number
@@ -12,21 +12,28 @@ class Task(object):
         self._Filename = filename
 
     def Strip(self, lines):
-        return lines
-        # assert lines
-        # minSpaces = None
-        # for line in lines:
-        #     if line:
-        #         candidate = len(line) - len(line.lstrip(' '))
-        #         if minSpaces is None or candidate < minSpaces:
-        #             minSpaces = candidate
-        # log.debug('Got minimum of %r spaces in %d lines', minSpaces, len(lines))
-        # for line in lines:
-        #     yield line[minSpaces:].rstrip(' ')
+        # return lines
+        assert lines
+        minSpaces = None
+        for line in lines:
+            line = line.strip('\n')
+            if line:
+                candidate = len(line) - len(line.lstrip(' '))
+                if minSpaces is None or candidate < minSpaces:
+                    minSpaces = candidate
+        log.debug('Got minimum of %r spaces in %d lines %r', minSpaces, len(lines), lines)
+        for line in lines:
+            if line:
+                yield '    ' + line[minSpaces:].rstrip(' ')
+            else:
+                yield ''
 
     def GetTex(self):
+        self.Text = self.Text.replace('.\n', '. \n')
         lines = self.Text.split('. ')
-        text = '.\n'.join('    ' + line for line in self.Strip(lines))
+        stripped = list(self.Strip(lines))
+        log.debug('Got %d lines: %r -> %r', len(lines), lines, stripped)
+        text = '.\n'.join(stripped)
         result = None
         try:
             result = (u'''\\task{\n%s\n}\n''' % text).replace('\\\\u', '\\u')
