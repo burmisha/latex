@@ -18,7 +18,7 @@ def generate(args):
     generateLists = False
     generateMultiple = False
 
-    # generateProblems = True
+    generateProblems = True
     generateLists = True
     generateMultiple = True
 
@@ -39,7 +39,7 @@ def generate(args):
                 filename = os.path.join(problemsPath, task.GetFilename())
                 generatedTasks.add(filename)
                 library.files.writeFile('', filename, task.GetTex())
-            allTasks = set(library.walkFiles(problemsPath, extensions=['tex']))
+            allTasks = set(library.files.walkFiles(problemsPath, extensions=['tex']))
             manualTasks = sorted(allTasks - generatedTasks)
             if args.show_manual:
                 log.info('Got %d manual tasks in %s', len(manualTasks), tasksGenerator.GetBookName())
@@ -56,13 +56,13 @@ def generate(args):
 
     if generateMultiple:
         seed = 2704
-        fieldTasks = generators.electricity.FieldTaskGenerator().Shuffle(2704)
-        sumTasks = generators.electricity.SumTask().Shuffle(2704)
-        exchangeTasks = generators.electricity.ExchangeTask().Shuffle(2704)
-        sumTasks = sumTasks * 2
-
+        tasks = zip(
+            generators.electricity.FieldTaskGenerator().Shuffle(seed),
+            generators.electricity.SumTask().Shuffle(seed) * 2,
+            generators.electricity.ExchangeTask().Shuffle(seed),
+        )
         pupilsNames = list(library.pupils.getPupils('class-2018-10').Iterate())
-        variants = generators.electricity.Variants(pupilsNames, zip(exchangeTasks, sumTasks, fieldTasks))
+        variants = generators.electricity.Variants(pupilsNames, tasks)
         multiplePaper = generators.electricity.MultiplePaper('2019-04-15', classLetter='10')
         library.files.writeFile('school-554', multiplePaper.GetFilename(), multiplePaper.GetTex(variants.Iterate()))
 
@@ -81,7 +81,7 @@ def CreateArgumentsParser():
     ])
     loggingGroup.add_argument('--log-format', help='Logging format', default=defaultLogFormat)
     loggingGroup.add_argument('--log-separator', help='Logging string separator', choices=['space', 'tab'], default='space')
-    loggingGroup.add_argument('--verbose', help='Enable debug logging', action='store_true')
+    loggingGroup.add_argument('-v', '--verbose', help='Enable debug logging', action='store_true')
 
     parser.add_argument('--show-manual', '--sm', help='Show manual files', action='store_true')
     parser.add_argument('--task-number', '--tn', help='Process only one task having number')

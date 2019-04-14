@@ -1,3 +1,4 @@
+import library
 import logging
 
 log = logging.getLogger('task')
@@ -7,33 +8,9 @@ class Task(object):
         self.Text = text.strip('\n')
         self.Answer = answer
         self.Number = number
-        filename = '%s.tex' % self.Number
-        log.debug('Got filename %r from %r', filename, self.Number)
-        self._Filename = filename
-
-    def Strip(self, lines):
-        # return lines
-        assert lines
-        minSpaces = None
-        for line in lines:
-            line = line.strip('\n')
-            if line:
-                candidate = len(line) - len(line.lstrip(' '))
-                if minSpaces is None or candidate < minSpaces:
-                    minSpaces = candidate
-        log.debug('Got minimum of %r spaces in %d lines %r', minSpaces, len(lines), lines)
-        for line in lines:
-            if line:
-                yield '    ' + line[minSpaces:].rstrip(' ')
-            else:
-                yield ''
 
     def GetTex(self):
-        self.Text = self.Text.replace('.\n', '. \n')
-        lines = self.Text.split('. ')
-        stripped = list(self.Strip(lines))
-        log.debug('Got %d lines: %r -> %r', len(lines), lines, stripped)
-        text = '.\n'.join(stripped)
+        text = library.formatter.formatText(self.Text, addIndent=4)
         result = None
         try:
             result = (u'''\\task{\n%s\n}\n''' % text).replace('\\\\u', '\\u')
@@ -50,7 +27,9 @@ class Task(object):
         return result        
 
     def GetFilename(self):
-        return self._Filename
+        filename = '%s.tex' % self.Number
+        log.debug('Got filename %r from %r', filename, self.Number)
+        return filename
 
 
 class TasksGenerator(object):

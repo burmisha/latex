@@ -60,8 +60,6 @@ class ExchangeTask(VariantTask):
                     '{}{}{}'.format(fs, fc, cl),
                     '{}{}{}'.format(ss, sc, cl),
                 ]
-                print fs, ss, charges
-
                 yield self.__call__(
                     letter=l,
                     charges=charges,
@@ -173,13 +171,13 @@ class MultiplePaper(object):
     def GetTex(self, nameTasksIterator):
         text = ''
         for name, tasks in nameTasksIterator:
-            text += u'\\addpersonalvariant{{{name}}}'.format(name=name)
+            text += u'\\addpersonalvariant{{{name}}}\n'.format(name=name)
             for index, task in enumerate(tasks):
                 text += u'\\tasknumber{{{index}}}{taskText}'.format(
                     index=index + 1, 
                     taskText=task.GetTex(),
                 )
-                text += '\\vspace{180pt}'
+                text += '\n\\vspace{180pt}\n\n'
             text += u'\n\\newpage\n\n'
         result = PAPER_TEMPLATE.format(
             date=self.Date.GetHumanText(),
