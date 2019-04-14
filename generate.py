@@ -26,7 +26,9 @@ def generate(args):
         tasksGenerators = [
             problems.gendenshteyn7.Gendenshteyn7(),
             problems.gendenshteyn8.Gendenshteyn8(),
+            problems.gendenshteyn10.Gendenshteyn10(),
             problems.getaclass.GetAClass(),
+            problems.savchenko.Savchenko(),
         ]
         taskNumber = args.task_number
         for tasksGenerator in tasksGenerators:

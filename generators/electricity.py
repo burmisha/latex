@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
 import itertools
-import re
 import logging
 import random
 
@@ -38,16 +37,15 @@ class ExchangeTask(VariantTask):
     def __call__(self, charges=['+q', '+q'], letter='l'):
         return problems.task.Task(u'''
             Два одинаковых маленьких проводящих заряженных шарика находятся
-            на расстоянии~${l}$ друг от друга.
-            Заряд первого равен~${q1}$, второго~---${q2}$. 
-            Шарики приводят в соприкосновение, а после опять разводят на то же самое расстояние~${l}$. 
+            на расстоянии~${letter}$ друг от друга.
+            Заряд первого равен~${charges[0]}$, второго~---${charges[1]}$.
+            Шарики приводят в соприкосновение, а после опять разводят на то же самое расстояние~${letter}$.
             Каким стал заряд каждого из шариков?
             Определите характер (притяжение или отталкивание)
             и силу взаимодействия шариков до и после соприкосновения.
         '''.format(
-            l=letter,
-            q1=charges[0],
-            q2=charges[1],
+            letter=letter,
+            charges=charges,
         ))
 
     def All(self):
@@ -56,13 +54,12 @@ class ExchangeTask(VariantTask):
         chargeSizes = range(2, 6)
         for fs, ss, cl, fc, sc, l in itertools.product(signs, signs, chargeLetters, chargeSizes, chargeSizes, ['l', 'd', 'r']):
             if fc != sc:
-                charges = [
-                    '{}{}{}'.format(fs, fc, cl),
-                    '{}{}{}'.format(ss, sc, cl),
-                ]
                 yield self.__call__(
                     letter=l,
-                    charges=charges,
+                    charges=[
+                        '{}{}{}'.format(fs, fc, cl),
+                        '{}{}{}'.format(ss, sc, cl),
+                    ],
                 )
 
 
@@ -76,13 +73,12 @@ class FieldTaskGenerator(VariantTask):
         }
         return problems.task.Task(u'''
             На координатной плоскости в точках $(-{letter}; 0)$ и $({letter}; 0)$
-            находятся заряды, соответственно, ${leftCharge}$ и ${rightCharge}$.
+            находятся заряды, соответственно, ${charges[0]}$ и ${charges[1]}$.
             Сделайте рисунок, определите величину напряжённости электрического поля
             в точках ${firstPoint}$ и ${secondPoint}$ и укажите её направление.
         '''.format(
             letter=letter,
-            leftCharge=charges[0],
-            rightCharge=charges[1],
+            charges=charges,
             firstPoint=allPoints[points[0]],
             secondPoint=allPoints[points[1]],
         ))
@@ -102,20 +98,18 @@ class FieldTaskGenerator(VariantTask):
 class SumTask(VariantTask):
     def __call__(self, angleLetter='\\alpha', values=[12, 5], angles=[60, 90]):
         return problems.task.Task(u'''
-            Заряд $q_1$ создает в точке $A$ электрическое поле 
-            по величине равное~$E_1={firstValue}\\funits{{В}}{{м}}$,
-            а $q_2$~---$E_2={secondValue}\\funits{{В}}{{м}}$.
-            Угол между векторами $\\vect{{E_1}}$ и $\\vect{{E_2}}$ равен ${angleLetter}$.
+            Заряд $q_1$ создает в точке $A$ электрическое поле
+            по величине равное~$E_1={values[0]}\\funits{{В}}{{м}}$,
+            а $q_2$~---$E_2={values[1]}\\funits{{В}}{{м}}$.
+            Угол между векторами $\\vect{{E_1}}$ и $\\vect{{E_2}}$ равен ${angle}$.
             Определите величину суммарного электрического поля в точке $A$,
             создаваемого обоими зарядами $q_1$ и $q_2$.
-            Сделайте рисунок и вычислите её значение для двух значений угла ${angleLetter}$: 
-            ${angleLetter}_1={firstAngle}^\\circ$ и ${angleLetter}_2={secondAngle}^\\circ$.
+            Сделайте рисунок и вычислите её значение для двух значений угла ${angle}$:
+            ${angle}_1={angles[0]}^\\circ$ и ${angle}_2={angles[1]}^\\circ$.
         '''.format(
-            angleLetter=angleLetter,
-            firstValue=values[0],
-            secondValue=values[1],
-            firstAngle=angles[0],
-            secondAngle=angles[1],
+            angle=angleLetter,
+            values=values,
+            angles=angles,
         ))
 
     def All(self):
@@ -154,19 +148,11 @@ class Variants(object):
             yield name, self.Items[itemIndex]
 
 
-
 class MultiplePaper(object):
     def __init__(self, date=None, classLetter=None):
         self.Date = library.formatter.Date(date)
         self.Name = 'task'
         self.ClassLetter = classLetter
-
-        filename = '%s-%s' % (self.Date.GetFilenameText(), self.ClassLetter)
-        if self.Name:
-            filename += '-' + self.Name
-        filename += '.tex'
-        log.debug('Got filename %r', filename)
-        self._Filename = filename
 
     def GetTex(self, nameTasksIterator):
         text = ''
@@ -174,7 +160,7 @@ class MultiplePaper(object):
             text += u'\\addpersonalvariant{{{name}}}\n'.format(name=name)
             for index, task in enumerate(tasks):
                 text += u'\\tasknumber{{{index}}}{taskText}'.format(
-                    index=index + 1, 
+                    index=index + 1,
                     taskText=task.GetTex(),
                 )
                 text += '\n\\vspace{180pt}\n\n'
@@ -184,8 +170,12 @@ class MultiplePaper(object):
             classLetter=self.ClassLetter,
             text=text,
         )
-        return result        
+        return result
 
     def GetFilename(self):
-        return self._Filename
-
+        filename = '%s-%s' % (self.Date.GetFilenameText(), self.ClassLetter)
+        if self.Name:
+            filename += '-' + self.Name
+        filename += '.tex'
+        log.debug('Got filename %r', filename)
+        return filename
