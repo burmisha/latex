@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+import itertools
 import re
 import logging
 import random
@@ -26,6 +27,46 @@ PAPER_TEMPLATE = ur'''
 class VariantTask(object):
     pass
 
+    def Shuffle(self, seed):
+        tasks = list(self.All())
+        random.seed(seed)
+        random.shuffle(tasks)
+        return tasks
+
+
+class ExchangeTask(VariantTask):
+    def __call__(self, charges=['+q', '+q'], letter='l'):
+        return problems.task.Task(u'''
+            Два одинаковых маленьких проводящих заряженных шарика находятся
+            на расстоянии~${l}$ друг от друга.
+            Заряд первого равен~${q1}$, второго~---${q2}$. 
+            Шарики приводят в соприкосновение, а после опять разводят на то же самое расстояние~${l}$. 
+            Каким стал заряд каждого из шариков?
+            Определите характер (притяжение или отталкивание)
+            и силу взаимодействия шариков до и после соприкосновения.
+        '''.format(
+            l=letter,
+            q1=charges[0],
+            q2=charges[1],
+        ))
+
+    def All(self):
+        signs = ['+', '-']
+        chargeLetters = ['q', 'Q']
+        chargeSizes = range(2, 6)
+        for fs, ss, cl, fc, sc, l in itertools.product(signs, signs, chargeLetters, chargeSizes, chargeSizes, ['l', 'd', 'r']):
+            if fc != sc:
+                charges = [
+                    '{}{}{}'.format(fs, fc, cl),
+                    '{}{}{}'.format(ss, sc, cl),
+                ]
+                print fs, ss, charges
+
+                yield self.__call__(
+                    letter=l,
+                    charges=charges,
+                )
+
 
 class FieldTaskGenerator(VariantTask):
     def __call__(self, charges=['+q', '+q'], points=['up', 'left'], letter='l'):
@@ -48,6 +89,17 @@ class FieldTaskGenerator(VariantTask):
             secondPoint=allPoints[points[1]],
         ))
 
+    def All(self):
+        for charges in [['+q', '-q'], ['-q', '-q'], ['+Q', '+Q'], ['-Q', '+Q']]:
+            for firstPoint in ['up', 'down']:
+                for secondPoint in ['right', 'left']:
+                    for letter in ['a', 'l', 'r', 'd']:
+                        yield self.__call__(
+                            charges=charges,
+                            letter=letter,
+                            points=[firstPoint, secondPoint],
+                        )
+
 
 class SumTask(VariantTask):
     def __call__(self, angleLetter='\\alpha', values=[12, 5], angles=[60, 90]):
@@ -68,17 +120,37 @@ class SumTask(VariantTask):
             secondAngle=angles[1],
         ))
 
+    def All(self):
+        for values, angles in [
+            ((120, 50), (90, 180)),
+            ((50, 120), (0, 90)),
+            ((500, 500), (0, 120)),
+            ((200, 200), (0, 60)),
+            ((24, 7), (90, 180)),
+            ((7, 24), (0, 90)),
+            ((72, 72), (0, 120)),
+            ((250, 250), (0, 60)),
+            ((300, 400), (90, 180)),
+            ((300, 400), (0, 90)),
+        ]:
+            for angleLetter in ['\\alpha', '\\varphi']:
+                yield self.__call__(
+                    angleLetter=angleLetter,
+                    values=values,
+                    angles=angles
+                )
+
 
 class Variants(object):
-    def __init__(self, names, seed, items):
+    def __init__(self, names, items):
         self.Names = names
-        self.Seed = seed
+        # self.Seed = seed
         self.Items = list(items)
-        log.info('Got %d students, %d items, seed is %r', len(self.Names), len(self.Items), self.Seed)
+        log.info('Got %d students, %d items', len(self.Names), len(self.Items))
 
     def Iterate(self):
-        random.seed(self.Seed)
-        random.shuffle(self.Items)
+        # random.seed(self.Seed)
+        # random.shuffle(self.Items)
         for index, name in enumerate(self.Names):
             itemIndex = index % len(self.Items)
             yield name, self.Items[itemIndex]
@@ -103,10 +175,12 @@ class MultiplePaper(object):
         for name, tasks in nameTasksIterator:
             text += u'\\addpersonalvariant{{{name}}}'.format(name=name)
             for index, task in enumerate(tasks):
-                text += (u'\\tasknumber{{{index}}}{taskText}'.format(
+                text += u'\\tasknumber{{{index}}}{taskText}'.format(
                     index=index + 1, 
                     taskText=task.GetTex(),
-                ))
+                )
+                text += '\\vspace{180pt}'
+            text += u'\n\\newpage\n\n'
         result = PAPER_TEMPLATE.format(
             date=self.Date.GetHumanText(),
             classLetter=self.ClassLetter,

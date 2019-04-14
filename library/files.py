@@ -22,3 +22,10 @@ def walkFiles(dirname, extensions=[], dirsOnly=False):
                     count += 1
                     yield os.path.join(root, filename)
     log.debug('Found %d %s in %s', count, logName, dirName)
+
+
+def writeFile(dirname, basename, textText):
+    filename = os.path.join(dirname, basename)
+    log.info('Saving file %s', filename)
+    with open(filename, 'w') as f:
+        f.write(textText.encode('utf-8'))

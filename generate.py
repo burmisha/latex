@@ -38,9 +38,7 @@ def generate(args):
                     continue
                 filename = os.path.join(problemsPath, task.GetFilename())
                 generatedTasks.add(filename)
-                log.info('Saving file %s', filename)
-                with open(filename, 'w') as f:
-                    f.write(task.GetTex().encode('utf-8'))
+                library.files.writeFile('', filename, task.GetTex())
             allTasks = set(library.walkFiles(problemsPath, extensions=['tex']))
             manualTasks = sorted(allTasks - generatedTasks)
             if args.show_manual:
@@ -54,87 +52,19 @@ def generate(args):
         ]
         for papersGenerator in papersGenerators:
             for paper in papersGenerator():
-                filename = os.path.join('school-554', paper.GetFilename())
-                with open(filename, 'w') as f:
-                    f.write(paper.GetTex().encode('utf-8'))
+                library.files.writeFile('school-554', paper.GetFilename(), paper.GetTex())
 
     if generateMultiple:
-        pupils = [
-            u'Гагик Аракелян',
-            u'Ирен Аракелян',
-            u'Сабина Асадуллаева',
-            u'Вероника Битерякова',
-            u'Юлия Буянова',
-            u'Пелагея Вдовина',
-            u'Леонид Викторов',
-            u'Фёдор Гнутов',
-            u'Илья Гримберг',
-            u'Иван Гурьянов',
-            u'Артём Денежкин',
-            u'Виктор Жилин',
-            u'Дмитрий Иванов',
-            u'Олег Климов',
-            u'Анна Ковалева',
-            u'Глеб Ковылин',
-            u'Даниил Космынин',
-            u'Алина Леоничева',
-            u'Ирина Лин',
-            u'Олег Мальцев',
-            u'Ислам Мунаев',
-            u'Александр Наумов',
-            u'Георгий Новиков',
-            u'Егор Осипов',
-            u'Руслан Перепелица',
-            u'Михаил Перин',
-            u'Егор Подуровский',
-            u'Роман Прибылов',
-            u'Александр Селехметьев',
-            u'Алексей Тихонов',
-            u'Алина Филиппова',
-            u'Алина Яшина',
-        ]
-        fieldTaskGenerator = generators.electricity.FieldTaskGenerator()
-        fieldTasks = []
-        for charges in [['+q', '-q'], ['-q', '-q'], ['+Q', '+Q'], ['-Q', '+Q']]:
-            for firstPoint in ['up', 'down']:
-                for secondPoint in ['right', 'left']:
-                    for letter in ['a', 'l', 'r', 'd']:
-                        fieldTasks.append(fieldTaskGenerator(
-                            charges=charges,
-                            letter=letter,
-                            points=[firstPoint, secondPoint],
-                        ))
-
-        sumTask = generators.electricity.SumTask()
-        sumTasks = []
-        for values, angles in [
-            ((120, 50), (90, 180)),
-            ((50, 120), (0, 90)),
-            ((500, 500), (0, 120)),
-            ((200, 200), (0, 60)),
-            ((24, 7), (90, 180)),
-            ((7, 24), (0, 90)),
-            ((72, 72), (0, 120)),
-            ((250, 250), (0, 60)),
-            ((300, 400), (90, 180)),
-            ((300, 400), (0, 90)),
-        ]:
-            for angleLetter in ['\\alpha', '\\varphi']:
-                sumTasks.append(sumTask(
-                    angleLetter=angleLetter,
-                    values=values,
-                    angles=angles
-                ))
+        seed = 2704
+        fieldTasks = generators.electricity.FieldTaskGenerator().Shuffle(2704)
+        sumTasks = generators.electricity.SumTask().Shuffle(2704)
+        exchangeTasks = generators.electricity.ExchangeTask().Shuffle(2704)
         sumTasks = sumTasks * 2
 
-        variants = generators.electricity.Variants(pupils, 2704, zip(sumTasks, fieldTasks))
+        pupilsNames = list(library.pupils.getPupils('class-2018-10').Iterate())
+        variants = generators.electricity.Variants(pupilsNames, zip(exchangeTasks, sumTasks, fieldTasks))
         multiplePaper = generators.electricity.MultiplePaper('2019-04-15', classLetter='10')
-        filename = os.path.join('school-554', multiplePaper.GetFilename())
-        tex = multiplePaper.GetTex(variants.Iterate())
-        with open(filename, 'w') as f:
-            f.write(tex.encode('utf-8'))
-
-
+        library.files.writeFile('school-554', multiplePaper.GetFilename(), multiplePaper.GetTex(variants.Iterate()))
 
 
 def CreateArgumentsParser():
@@ -145,7 +75,7 @@ def CreateArgumentsParser():
     defaultLogFormat = ' '.join([
         # '%(relativeCreated)d',
         '%(asctime)s.%(msecs)03d',
-        '%(name)10s:%(lineno)-3d',
+        '%(name)15s:%(lineno)-4d',
         '%(levelname)-7s',
         '%(message)s',
     ])
@@ -176,4 +106,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-# 
