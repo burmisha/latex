@@ -30,7 +30,27 @@ class VariantTask(object):
         tasks = list(self.All())
         random.seed(seed)
         random.shuffle(tasks)
+        log.info('Got %d tasks for %r', len(tasks), self)
         return tasks
+
+
+class ForceTask(VariantTask):
+    def __call__(self, charges=['2', '4'], letter='l', distance='3'):
+        return problems.task.Task(u'''
+            С какой силой взаимодействуют 2 точечных заряда $q_1={charges[0]}\\units{{нКл}}$ и $q_2={charges[1]}\\units{{нКл}}$,
+            находящиеся на расстоянии ${letter}={distance}\\units{{см}}$?
+        '''.format(
+            charges=charges,
+            letter=letter,
+            distance=distance,
+        ))
+
+    def All(self):
+        for first, second, letter, distance in itertools.product(range(2, 5), range(2, 5), ['r', 'l', 'd'], [2, 3, 5, 6]):
+            if first != second:
+                yield self.__call__(charges=[first, second], letter=letter, distance=distance)
+
+
 
 
 class ExchangeTask(VariantTask):
@@ -136,13 +156,10 @@ class SumTask(VariantTask):
 class Variants(object):
     def __init__(self, names, items):
         self.Names = names
-        # self.Seed = seed
         self.Items = list(items)
         log.info('Got %d students, %d items', len(self.Names), len(self.Items))
 
     def Iterate(self):
-        # random.seed(self.Seed)
-        # random.shuffle(self.Items)
         for index, name in enumerate(self.Names):
             itemIndex = index % len(self.Items)
             yield name, self.Items[itemIndex]
@@ -163,7 +180,7 @@ class MultiplePaper(object):
                     index=index + 1,
                     taskText=task.GetTex(),
                 )
-                text += '\n\\vspace{180pt}\n\n'
+                text += '\n\\vspace{120pt}\n\n'
             text += u'\n\\newpage\n\n'
         result = PAPER_TEMPLATE.format(
             date=self.Date.GetHumanText(),

@@ -51,6 +51,7 @@ def generate(args):
     if generateLists:
         papersGenerators = [
             classes.class1807.Class1807(),
+            classes.class1810.Class1810(),
         ]
         for papersGenerator in papersGenerators:
             for paper in papersGenerator():
@@ -59,9 +60,10 @@ def generate(args):
     if generateMultiple:
         seed = 2704
         tasks = zip(
+            generators.electricity.ForceTask().Shuffle(seed),
+            generators.electricity.ExchangeTask().Shuffle(seed),
             generators.electricity.FieldTaskGenerator().Shuffle(seed),
             generators.electricity.SumTask().Shuffle(seed) * 2,
-            generators.electricity.ExchangeTask().Shuffle(seed),
         )
         pupilsNames = list(library.pupils.getPupils('class-2018-10').Iterate())
         variants = generators.electricity.Variants(pupilsNames, tasks)

@@ -59,4 +59,6 @@ def getPupils(className):
     else:
         raise RuntimeError('No class config for %r' % className)
 
+    names = [u'Михаил Бурмистров'] + names
+
     return Pupils(names=names, letter=letter, grade=grade)
