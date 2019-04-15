@@ -67,7 +67,7 @@ def generate(args):
         )
         pupilsNames = list(library.pupils.getPupils('class-2018-10').Iterate())
         variants = generators.electricity.Variants(pupilsNames, tasks)
-        multiplePaper = generators.electricity.MultiplePaper('2019-04-15', classLetter='10')
+        multiplePaper = generators.electricity.MultiplePaper('2019-04-16', classLetter='10')
         library.files.writeFile('school-554', multiplePaper.GetFilename(), multiplePaper.GetTex(variants.Iterate()))
 
 
