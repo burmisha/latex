@@ -4,6 +4,8 @@
 import argparse
 import logging
 import os
+import random
+import time
 
 import problems
 import classes
@@ -13,7 +15,28 @@ import library
 log = logging.getLogger('generate')
 
 
+def getLucky(lucky):
+    count = None
+    if ':' in lucky:
+        className, count = lucky.split(':')
+        count = int(count)
+    else:
+        className = lucky
+    className = 'class-2018-{}'.format(className)
+    pupils = list(library.pupils.getPupils(className).Iterate())
+    random.seed(int(time.time()))
+    random.shuffle(pupils)
+    if count:
+        pupils = pupils[:count]
+    for pupil in pupils:
+        log.info('New lucky person:  %s', pupil)
+    return None
+
+
 def generate(args):
+    if args.lucky:
+        return getLucky(args.lucky)
+
     generateProblems= False
     generateLists = False
     generateMultiple = False
@@ -65,7 +88,7 @@ def generate(args):
             generators.electricity.FieldTaskGenerator().Shuffle(seed),
             generators.electricity.SumTask().Shuffle(seed) * 2,
         )
-        pupilsNames = list(library.pupils.getPupils('class-2018-10').Iterate())
+        pupilsNames = list(library.pupils.getPupils('class-2018-10', addMyself=True).Iterate())
         variants = generators.variant.Variants(pupilsNames, tasks)
         multiplePaper = generators.variant.MultiplePaper('2019-04-16', classLetter='10')
         library.files.writeFile('school-554', multiplePaper.GetFilename(), multiplePaper.GetTex(variants.Iterate()))
@@ -76,7 +99,7 @@ def generate(args):
             generators.quantum.RadioFall().Shuffle(seed) * 10,
             generators.quantum.RadioFall2().Shuffle(seed) * 10,
         )
-        pupilsNames = list(library.pupils.getPupils('class-2018-11').Iterate())
+        pupilsNames = list(library.pupils.getPupils('class-2018-11', addMyself=True).Iterate())
         variants = generators.variant.Variants(pupilsNames, tasks)
         multiplePaper = generators.variant.MultiplePaper('2019-04-19', classLetter='11')
         library.files.writeFile('school-554', multiplePaper.GetFilename(), multiplePaper.GetTex(variants.Iterate()))
@@ -90,7 +113,7 @@ def CreateArgumentsParser():
     defaultLogFormat = ' '.join([
         # '%(relativeCreated)d',
         '%(asctime)s.%(msecs)03d',
-        '%(name)15s:%(lineno)-4d',
+        # '%(name)15s:%(lineno)-4d',
         '%(levelname)-7s',
         '%(message)s',
     ])
@@ -101,7 +124,10 @@ def CreateArgumentsParser():
     parser.add_argument('--show-manual', '--sm', help='Show manual files', action='store_true')
     parser.add_argument('--task-number', '--tn', help='Process only one task having number')
 
+    parser.add_argument('--lucky', help='Get lucky people')
+
     parser.set_defaults(func=generate)
+
     return parser
 
 
