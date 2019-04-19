@@ -2,39 +2,14 @@
 
 import itertools
 import logging
-import random
 
 import problems
-import library
+import variant
 
-log = logging.getLogger('electricity')
-
-PAPER_TEMPLATE = ur'''
-\input{{main}}
-\begin{{document}}
-\noanswers
-
-\setdate{{{date}}}
-\setclass{{{classLetter}}}
-
-{text}
-
-\end{{document}}
-'''.strip()
+log = logging.getLogger(__name__)
 
 
-class VariantTask(object):
-    pass
-
-    def Shuffle(self, seed):
-        tasks = list(self.All())
-        random.seed(seed)
-        random.shuffle(tasks)
-        log.info('Got %d tasks for %r', len(tasks), self)
-        return tasks
-
-
-class ForceTask(VariantTask):
+class ForceTask(variant.VariantTask):
     def __call__(self, charges=['2', '4'], letter='l', distance='3'):
         return problems.task.Task(u'''
             С какой силой взаимодействуют 2 точечных заряда $q_1={charges[0]}\\units{{нКл}}$ и $q_2={charges[1]}\\units{{нКл}}$,
@@ -53,7 +28,7 @@ class ForceTask(VariantTask):
 
 
 
-class ExchangeTask(VariantTask):
+class ExchangeTask(variant.VariantTask):
     def __call__(self, charges=['+q', '+q'], letter='l'):
         return problems.task.Task(u'''
             Два одинаковых маленьких проводящих заряженных шарика находятся
@@ -83,7 +58,7 @@ class ExchangeTask(VariantTask):
                 )
 
 
-class FieldTaskGenerator(VariantTask):
+class FieldTaskGenerator(variant.VariantTask):
     def __call__(self, charges=['+q', '+q'], points=['up', 'left'], letter='l'):
         allPoints = {
             'up': '(0; {})'.format(letter),
@@ -115,7 +90,7 @@ class FieldTaskGenerator(VariantTask):
                         )
 
 
-class SumTask(VariantTask):
+class SumTask(variant.VariantTask):
     def __call__(self, angleLetter='\\alpha', values=[12, 5], angles=[60, 90]):
         return problems.task.Task(u'''
             Заряд $q_1$ создает в точке $A$ электрическое поле
@@ -151,155 +126,3 @@ class SumTask(VariantTask):
                     values=values,
                     angles=angles
                 )
-
-
-class Fotons(VariantTask):
-    def __call__(self, time=30, power=2, length=750):
-        return problems.task.Task(u'''
-            Сколько фотонов испускает за {time} минут лазер,
-            если мощность его излучения {power} мВт.
-            Длина волны излучения {length} нм.
-        '''.format(
-            time=time,
-            power=power,
-            length=length,
-        ))
-
-    def All(self):
-        for time, power, length in itertools.product(
-            [5, 10, 20, 30, 40, 60, 120],
-            [15, 40, 75, 200],
-            [500, 600, 750],
-        ):
-            yield self.__call__(
-                time=time,
-                power=power,
-                length=length,
-            )
-
-class KernelCount(VariantTask):
-    def __call__(self, nuclons=108, electrons=47):
-        return problems.task.Task(u'''
-            В ядре электрически нейтрального атома {nuclons} частиц.
-            Вокруг ядра обращается {electrons} электронов.
-            Сколько в ядре этого атома протонов и нейтронов?
-        '''.format(
-            nuclons=nuclons,
-            electrons=electrons,
-        ))
-
-    def All(self):
-        for nuclons, electrons in [
-            (108, 47),  # Al
-            (65, 29),  # Cu
-            (63, 29),  # Cu
-            (121, 51),  # Sb
-            (123, 51),  # Cu
-            (190, 78),  # Pt
-        ]:
-            yield self.__call__(
-                nuclons=nuclons,
-                electrons=electrons,
-            )
-
-
-class RadioFall(VariantTask):
-    def __call__(self, fallType='alpha', element='^{238}_{92}U'):
-        typeFmt = {
-            'alpha': '\\alpha',
-            'beta': '\\beta',
-        }[fallType]
-        return problems.task.Task(u'''
-            Запишите реакцию ${typeFmt}$-распада \ce{{{element}}}.
-        '''.format(
-            typeFmt=typeFmt,
-            element=element,
-        ))
-
-    def All(self):
-        for fallType, element in [
-            ('alpha', '^{238}_{92}U'),
-            ('alpha', '^{144}_{60}Nd'),
-            ('alpha', '^{147}_{62}Sm'),
-            ('alpha', '^{148}_{62}Sm'),
-            ('alpha', '^{180}_{74}W'),
-            ('alpha', '^{153}_{61}Eu'),
-            ('beta', '^{137}_{55}Cs'),
-            ('beta', '^{22}_{11}Na'),
-        ]:
-            yield self.__call__(
-                fallType=fallType,
-                element=element,
-            )
-
-
-class RadioFall2(VariantTask):
-    def __call__(self, time=12, delta=7500, total=8000):
-        return problems.task.Task(u'''
-            Какой период полураспада радиоактивного изотопа,
-            если за {time} ч в среднем распадается {delta} атомов из {total}?
-        '''.format(
-            time=time,
-            delta=delta,
-            total=total,
-        ))
-
-    def All(self):
-        for time, delta, total in [
-            (12, 7500, 8000),
-            (24, 75000, 80000),
-            (6, 3500, 4000),
-            (8, 37500, 40000),
-            (8, 300, 400),
-        ]:
-            yield self.__call__(
-                time=time,
-                delta=delta,
-                total=total,
-            )
-
-
-
-class Variants(object):
-    def __init__(self, names, items):
-        self.Names = names
-        self.Items = list(items)
-        log.info('Got %d students, %d items', len(self.Names), len(self.Items))
-
-    def Iterate(self):
-        for index, name in enumerate(self.Names):
-            itemIndex = index % len(self.Items)
-            yield name, self.Items[itemIndex]
-
-
-class MultiplePaper(object):
-    def __init__(self, date=None, classLetter=None):
-        self.Date = library.formatter.Date(date)
-        self.Name = 'task'
-        self.ClassLetter = classLetter
-
-    def GetTex(self, nameTasksIterator):
-        text = ''
-        for name, tasks in nameTasksIterator:
-            text += u'\\addpersonalvariant{{{name}}}\n'.format(name=name)
-            for index, task in enumerate(tasks):
-                text += u'\\tasknumber{{{index}}}{taskText}'.format(
-                    index=index + 1,
-                    taskText=task.GetTex(),
-                )
-                text += '\n\\vspace{120pt}\n\n'
-            text += u'\n\\newpage\n\n'
-        result = PAPER_TEMPLATE.format(
-            date=self.Date.GetHumanText(),
-            classLetter=self.ClassLetter,
-            text=text,
-        )
-        return result
-
-    def GetFilename(self):
-        filename = '%s-%s' % (self.Date.GetFilenameText(), self.ClassLetter)
-        if self.Name:
-            filename += '-' + self.Name
-        filename += '.tex'
-        log.debug('Got filename %r', filename)
-        return filename
