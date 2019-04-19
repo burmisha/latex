@@ -70,6 +70,17 @@ def generate(args):
         multiplePaper = generators.electricity.MultiplePaper('2019-04-16', classLetter='10')
         library.files.writeFile('school-554', multiplePaper.GetFilename(), multiplePaper.GetTex(variants.Iterate()))
 
+        tasks = zip(
+            generators.electricity.Fotons().Shuffle(seed),
+            generators.electricity.KernelCount().Shuffle(seed) * 5,
+            generators.electricity.RadioFall().Shuffle(seed) * 10,
+            generators.electricity.RadioFall2().Shuffle(seed) * 10,
+        )
+        pupilsNames = list(library.pupils.getPupils('class-2018-11').Iterate())
+        variants = generators.electricity.Variants(pupilsNames, tasks)
+        multiplePaper = generators.electricity.MultiplePaper('2019-04-19', classLetter='11')
+        library.files.writeFile('school-554', multiplePaper.GetFilename(), multiplePaper.GetTex(variants.Iterate()))
+
 
 def CreateArgumentsParser():
     fmtClass = {'formatter_class': argparse.ArgumentDefaultsHelpFormatter}
