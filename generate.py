@@ -41,8 +41,8 @@ def generate(args):
     generateLists = False
     generateMultiple = False
 
-    generateProblems = True
-    generateLists = True
+    # generateProblems = True
+    # generateLists = True
     generateMultiple = True
 
     if generateProblems:
@@ -82,13 +82,14 @@ def generate(args):
 
     if generateMultiple:
         seed = 2704
+
         tasks = zip(
             generators.electricity.ForceTask().Shuffle(seed),
             generators.electricity.ExchangeTask().Shuffle(seed),
             generators.electricity.FieldTaskGenerator().Shuffle(seed),
             generators.electricity.SumTask().Shuffle(seed) * 2,
         )
-        pupilsNames = list(library.pupils.getPupils('class-2018-10', addMyself=True).Iterate())
+        pupilsNames = list(library.pupils.getPupils('class-2018-10', addMyself=True, onlyMe=False).Iterate())
         variants = generators.variant.Variants(pupilsNames, tasks)
         multiplePaper = generators.variant.MultiplePaper('2019-04-16', classLetter='10')
         library.files.writeFile('school-554', multiplePaper.GetFilename(), multiplePaper.GetTex(variants.Iterate()))
@@ -99,7 +100,7 @@ def generate(args):
             generators.quantum.RadioFall().Shuffle(seed) * 10,
             generators.quantum.RadioFall2().Shuffle(seed) * 10,
         )
-        pupilsNames = list(library.pupils.getPupils('class-2018-11', addMyself=True).Iterate())
+        pupilsNames = list(library.pupils.getPupils('class-2018-11', addMyself=True, onlyMe=False).Iterate())
         variants = generators.variant.Variants(pupilsNames, tasks)
         multiplePaper = generators.variant.MultiplePaper('2019-04-19', classLetter='11')
         library.files.writeFile('school-554', multiplePaper.GetFilename(), multiplePaper.GetTex(variants.Iterate()))

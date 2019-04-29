@@ -2,6 +2,7 @@
 
 import itertools
 import logging
+import math
 
 import problems
 import variant
@@ -10,31 +11,56 @@ log = logging.getLogger(__name__)
 
 
 class Fotons(variant.VariantTask):
-    def __call__(self, time=30, power=2, length=750):
+    def __call__(self, minutes=30, power=2, length=750):
+        answerValue = 1. * power  * minutes * length / 6.626 * 2 / (10 ** 5)
+        answerPower = 15 + 5
+
+        answer = u'''
+            $N = \\frac{{Pt\\lambda}}{{hc}}
+               = \\frac{{
+                    {power} \\cdot 10^{{-3}} \\units{{Вт}} \\cdot {minutes} \\cdot 60 \\units{{с}} \\cdot {length} \\cdot 10^{{-9}} \\units{{м}}
+                }}{{
+                    6{{,}}626 \\cdot 10^{{-34}} \\units{{Дж}} \\cdot \\units{{с}} \\cdot 3 \\cdot 10^{{8}} \\funits{{м}}{{с}}
+                }}
+               \\approx {{{approx:.2f}}}\\cdot10^{{{answerPower}}}\\units{{фотонов}}
+            $'''.format(
+            answerPower=answerPower,
+            approx=float(answerValue),
+            minutes=minutes,
+            power=power,
+            length=length,
+        ).replace('.', '{,}')
+
         return problems.task.Task(u'''
-            Сколько фотонов испускает за {time} минут лазер,
+            Сколько фотонов испускает за {minutes} минут лазер,
             если мощность его излучения {power} мВт.
             Длина волны излучения {length} нм.
         '''.format(
-            time=time,
+            minutes=minutes,
             power=power,
             length=length,
-        ))
+        ),
+        answer=answer,
+        )
 
     def All(self):
-        for time, power, length in itertools.product(
+        for minutes, power, length in itertools.product(
             [5, 10, 20, 30, 40, 60, 120],
             [15, 40, 75, 200],
             [500, 600, 750],
         ):
             yield self.__call__(
-                time=time,
+                minutes=minutes,
                 power=power,
                 length=length,
             )
 
 class KernelCount(variant.VariantTask):
     def __call__(self, nuclons=108, electrons=47):
+        answer = u'''$Z = {protons}$ протонов и $A - Z = {neutrons}$ нейтронов'''.format(
+            protons=electrons,
+            neutrons=nuclons - electrons,
+        )
         return problems.task.Task(u'''
             В ядре электрически нейтрального атома {nuclons} частиц.
             Вокруг ядра обращается {electrons} электронов.
@@ -42,7 +68,9 @@ class KernelCount(variant.VariantTask):
         '''.format(
             nuclons=nuclons,
             electrons=electrons,
-        ))
+        ),
+        answer=answer,
+        )
 
     def All(self):
         for nuclons, electrons in [
@@ -91,6 +119,27 @@ class RadioFall(variant.VariantTask):
 
 class RadioFall2(variant.VariantTask):
     def __call__(self, time=12, delta=7500, total=8000):
+        value = 1. * time / math.log(total / (total - delta), 2)
+        answer = u'''
+            $
+            N(t) = N_0\\cdot 2^{{-\\frac t{{\\tau_\\frac12}}}}
+            \\implies \\log_2\\frac N{{N_0}} = - \\frac t{{\\tau_\\frac 12}}
+            \\implies \\tau_\\frac 12 = - \\frac t {{\\log_2\\frac N{{N_0}}}} 
+                                      =   \\frac t {{\\log_2\\frac {{N_0}}N}}
+            = \\frac{{
+                {time} \\units{{ч}}
+            }}
+            {{
+                \\log_2\\frac{{{total}}}{{{total} - {delta}}}
+            }}
+            \\approx {value:.1f}\\units{{ч}}
+            $
+        '''.format(
+            value=value,
+            total=total,
+            time=time,
+            delta=delta,
+        ).replace('.', '{,}')
         return problems.task.Task(u'''
             Какой период полураспада радиоактивного изотопа,
             если за {time} ч в среднем распадается {delta} атомов из {total}?
@@ -98,7 +147,9 @@ class RadioFall2(variant.VariantTask):
             time=time,
             delta=delta,
             total=total,
-        ))
+        ),
+        answer=answer,
+        )
 
     def All(self):
         for time, delta, total in [

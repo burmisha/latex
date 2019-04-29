@@ -9,7 +9,7 @@ log = logging.getLogger(__name__)
 PAPER_TEMPLATE = ur'''
 \input{{main}}
 \begin{{document}}
-\noanswers
+% \noanswers
 
 \setdate{{{date}}}
 \setclass{{{classLetter}}}
@@ -59,8 +59,10 @@ class MultiplePaper(object):
                     index=index + 1,
                     taskText=task.GetTex(),
                 )
-                text += '\n\\vspace{120pt}\n\n'
-            text += u'\n\\newpage\n\n'
+                # text += '\n\\vspace{120pt}\n\n'
+                text += '\n\n'
+            # text += u'\n\\newpage\n\n'
+            text += u'\n\n'
         result = PAPER_TEMPLATE.format(
             date=self.Date.GetHumanText(),
             classLetter=self.ClassLetter,

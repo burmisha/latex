@@ -8,9 +8,37 @@ import variant
 
 log = logging.getLogger(__name__)
 
+import fractions
+
 
 class ForceTask(variant.VariantTask):
     def __call__(self, charges=['2', '4'], letter='l', distance='3'):
+        # answer = kqq/r**2
+        value = fractions.Fraction(
+            numerator=int(charges[0]) * int(charges[1]) * 9,
+            denominator=int(distance) ** 2,
+        )
+        power = 9 - 9 - 9 + 4
+
+        answer = u'''
+            $F  = k\\frac{{q_1q_2}}{{{letter}^2}}
+                = 9 \\cdot 10^9 \\funits{{Н $\\cdot$ м$^2$}}{{Кл$^2$}} \\cdot \\frac{{
+                    {charges[0]}\\cdot 10^{{-9}}\\units{{Кл}}
+                    \\cdot
+                    {charges[1]}\\cdot 10^{{-9}}\\units{{Кл}}
+                }}{{
+                    \\left({distance} \\cdot 10^{{-2}}\\units{{м}}\\right)^2
+                }}
+                = \\frac{{{value.numerator}}}{{{value.denominator}}}\\cdot10^{{{power}}}\\units{{Н}}
+                  \\approx {{{approx:.2f}}}\\cdot10^{{{power}}}\\units{{Н}}
+            $'''.format(
+            value=value,
+            power=power,
+            letter=letter,
+            approx=float(value),
+            charges=charges,
+            distance=distance,
+        ).replace('.', '{,}')
         return problems.task.Task(u'''
             С какой силой взаимодействуют 2 точечных заряда $q_1={charges[0]}\\units{{нКл}}$ и $q_2={charges[1]}\\units{{нКл}}$,
             находящиеся на расстоянии ${letter}={distance}\\units{{см}}$?
@@ -18,7 +46,9 @@ class ForceTask(variant.VariantTask):
             charges=charges,
             letter=letter,
             distance=distance,
-        ))
+        ),
+        answer=answer
+        )
 
     def All(self):
         for first, second, letter, distance in itertools.product(range(2, 5), range(2, 5), ['r', 'l', 'd'], [2, 3, 5, 6]):
@@ -30,6 +60,34 @@ class ForceTask(variant.VariantTask):
 
 class ExchangeTask(variant.VariantTask):
     def __call__(self, charges=['+q', '+q'], letter='l'):
+        q1 = int(''.join(c for c in charges[0] if c.isdigit() or c in ['+', '-']))
+        q2 = int(''.join(c for c in charges[1] if c.isdigit() or c in ['+', '-']))
+        letter1 = ''.join(c for c in charges[0] if c.isalpha())
+        letter2 = ''.join(c for c in charges[1] if c.isalpha())
+        assert q1 != q2
+        assert letter1 == letter2
+        answer = u'''
+            \\begin{{align*}}
+            F   &= k\\frac{{q_1q_2}}{{{letter}^2}} = k\\frac{{({charges[0]})\\cdot({charges[1]})}}{{{letter}^2}},
+            \\text{{{res[0]}}};
+            \\\\
+            q'_1 = q'_2 = \\frac{{q_1 + q_2}}2 = \\frac{{({charges[0]}) + ({charges[1]})}}2 \\implies
+            F'  &= k\\frac{{q'_1q'_2}}{{{letter}^2}}
+                = k\\frac{{
+                        \\left(\\frac{{({charges[0]}) + ({charges[1]})}}2\\right)^2
+                    }}{{
+                        {letter}^2
+                    }},
+            \\text{{{res[1]}}}.
+            \\end{{align*}}
+        '''.format(
+            charges=charges,
+            letter=letter,
+            res=[
+                u'притяжение' if q1 * q2 < 0 else u'отталкивание',
+                u'отталкивание',
+            ]
+        )
         return problems.task.Task(u'''
             Два одинаковых маленьких проводящих заряженных шарика находятся
             на расстоянии~${letter}$ друг от друга.
@@ -41,7 +99,9 @@ class ExchangeTask(variant.VariantTask):
         '''.format(
             letter=letter,
             charges=charges,
-        ))
+        ),
+        answer=answer,
+        )
 
     def All(self):
         signs = ['+', '-']

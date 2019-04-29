@@ -18,7 +18,7 @@ class Pupils(object):
             yield name
 
 
-def getPupils(className, addMyself=False):
+def getPupils(className, addMyself=False, onlyMe=False):
     if className == 'class-2018-10':
         names = [
             u'Гагик Аракелян',
@@ -172,7 +172,12 @@ def getPupils(className, addMyself=False):
     else:
         raise RuntimeError('No class config for %r' % className)
 
+    me = [u'Михаил Бурмистров']
     if addMyself:
-        names = [u'Михаил Бурмистров'] + names
+        names = me + names
 
+    if onlyMe:
+        names = me
+
+    log.info('Returning %d pupils from %s-%s', len(names), letter, grade)
     return Pupils(names=names, letter=letter, grade=grade)
