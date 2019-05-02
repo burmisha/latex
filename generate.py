@@ -95,6 +95,18 @@ def generate(args):
         library.files.writeFile('school-554', multiplePaper.GetFilename(), multiplePaper.GetTex(variants.Iterate()))
 
         tasks = zip(
+            generators.electricity.Potential728().Shuffle(seed),
+            generators.electricity.Potential735().Shuffle(seed),
+            generators.electricity.Potential737().Shuffle(seed),
+            generators.electricity.Potential2335().Shuffle(seed) * 4,
+            generators.electricity.Potential1621().Shuffle(seed),
+        )
+        pupilsNames = list(library.pupils.getPupils('class-2018-10', addMyself=True, onlyMe=False).Iterate())
+        variants = generators.variant.Variants(pupilsNames, tasks)
+        multiplePaper = generators.variant.MultiplePaper('2019-04-30', classLetter='10')
+        library.files.writeFile('school-554', multiplePaper.GetFilename(), multiplePaper.GetTex(variants.Iterate()))
+
+        tasks = zip(
             generators.quantum.Fotons().Shuffle(seed),
             generators.quantum.KernelCount().Shuffle(seed) * 5,
             generators.quantum.RadioFall().Shuffle(seed) * 10,
@@ -103,6 +115,15 @@ def generate(args):
         pupilsNames = list(library.pupils.getPupils('class-2018-11', addMyself=True, onlyMe=False).Iterate())
         variants = generators.variant.Variants(pupilsNames, tasks)
         multiplePaper = generators.variant.MultiplePaper('2019-04-19', classLetter='11')
+        library.files.writeFile('school-554', multiplePaper.GetFilename(), multiplePaper.GetTex(variants.Iterate()))
+
+        tasks = zip(
+            generators.quantum.Quantum1119().Shuffle(seed) * 2,
+            generators.quantum.Quantum1120().Shuffle(seed),
+        )
+        pupilsNames = list(library.pupils.getPupils('class-2018-11', addMyself=True, onlyMe=False).Iterate())
+        variants = generators.variant.Variants(pupilsNames, tasks)
+        multiplePaper = generators.variant.MultiplePaper('2019-04-30', classLetter='11')
         library.files.writeFile('school-554', multiplePaper.GetFilename(), multiplePaper.GetTex(variants.Iterate()))
 
 

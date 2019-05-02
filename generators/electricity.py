@@ -2,6 +2,7 @@
 
 import itertools
 import logging
+import collections
 
 import problems
 import variant
@@ -186,3 +187,114 @@ class SumTask(variant.VariantTask):
                     values=values,
                     angles=angles
                 )
+
+
+LetterValue = collections.namedtuple('LetterValue', ['Letter', 'Value'])
+
+class Potential728(variant.VariantTask):
+    def __call__(self, l=None, q=None, E=None):
+        # 728(737) - Rymkevich
+        return problems.task.Task(u'''
+            В однородном электрическом поле напряжённостью ${E.Letter}={E.Value}\\funits{{кВ}}{{м}}$
+            переместили заряд ${q.Letter}={q.Value}\\units{{нКл}}$ в направлении силовой линии
+            на ${l.Letter}={l.Value}\\units{{см}}$. Определите работу поля, изменение потенциальной энергии заряда,
+            напряжение между начальной и конечной точками перемещения.
+        '''.format(
+            l=l,
+            q=q,
+            E=E,
+        ))
+
+    def All(self):
+        for ql, qv, ll, lv, ev in itertools.product(['Q', 'q'], [-10, 10, -25, 25, -40, 40], ['l', 'r', 'd'], [2, 4, 5, 10], [2, 4, 20]):
+            yield self.__call__(
+                E=LetterValue(Letter='E', Value=ev),
+                q=LetterValue(Letter=ql, Value=qv),
+                l=LetterValue(Letter=ll, Value=lv),
+            )
+
+
+class Potential735(variant.VariantTask):
+    def __call__(self, l=None, U=None):
+        # 735(737) - Rymkevich
+        return problems.task.Task(u'''
+            Напряжение между двумя точками, лежащими на одной линии напряжённости однородного электрического поля,
+            равно ${U.Letter}={U.Value}\\units{{кВт}}$. Расстояние между точками ${l.Letter}={l.Value}\\units{{см}}$. 
+            Какова напряжённость этого поля?
+        '''.format(
+            l=l,
+            U=U,
+        ))
+
+    def All(self):
+        for ul, uv, ll, lv in itertools.product(['U', 'V'], [2, 3, 4, 5, 6], ['l', 'r', 'd'], [10, 20, 30, 40]):
+            yield self.__call__(
+                U=LetterValue(Letter=ul, Value=uv),
+                l=LetterValue(Letter=ll, Value=lv),
+            )
+
+
+class Potential737(variant.VariantTask):
+    def __call__(self, l=None, alpha=None, E=None):
+        # 737(739) - Rymkevich
+        return problems.task.Task(u'''
+            Найти напряжение между точками $A$ и $B$ в однородном электрическом поле (см. рис. на доске), если 
+            $AB={l.Letter}={l.Value}\\units{{см}}$,
+            ${alpha.Letter}={alpha.Value}^\\circ$,
+            ${E.Letter}={E.Value}\\funits{{В}}{{м}}$.
+            Потенциал какой из точек $A$ и $B$ больше?
+        '''.format(
+            l=l,
+            alpha=alpha,
+            E=E,
+        ))
+
+    def All(self):
+        for ll, lv, al, av, ev in itertools.product(['l', 'r', 'd'], [4, 6, 8, 10, 12], ['\\alpha', '\\varphi'], [30, 45, 60], [30, 50, 60, 100, 120]):
+            yield self.__call__(
+                l=LetterValue(Letter=ll, Value=lv),
+                alpha=LetterValue(Letter=al, Value=av),
+                E=LetterValue(Letter='E', Value=ev),
+            )
+
+
+class Potential2335(variant.VariantTask):
+    def __call__(self, E=None):
+        # 2335 Gendenshteyn
+        return problems.task.Task(u'''
+            При какой скорости электрона его кинетическая энергия равна $E_\\text{{к}} = {E}\\units{{эВ}}?$
+        '''.format(
+            E=E,
+        ))
+
+    def All(self):
+        for E in [4, 8, 20, 30, 40, 50, 200, 400, 600, 1000]:
+            yield self.__call__(
+                E=E,
+            )
+
+
+
+class Potential1621(variant.VariantTask):
+    def __call__(self, v=None, V=None):
+        # 1621 Goldfarb
+        return problems.task.Task(u'''
+            Электрон $e^-$ вылетает из точки, потенциал которой ${V.Letter} = {V.Value}\\units{{В}},$
+            со скоростью ${v.Letter} = {v.Value}\\cdot 10^6\\funits{{м}}{{c}}$ в направлении линий напряжённости поля.
+            Будет поле ускорять или тормозить электрон?
+            Каков потенциал точки, дойдя до которой электрон остановится?
+        '''.format(
+            v=v,
+            V=V,
+        ))
+
+    def All(self):
+        for vv, Vv, in itertools.product([3, 4, 6, 10, 12], [200, 400, 600, 800, 1000]):
+            yield self.__call__(
+                v=LetterValue(Letter='v', Value=vv),
+                V=LetterValue(Letter='\\varphi', Value=Vv),
+            )
+
+
+
+

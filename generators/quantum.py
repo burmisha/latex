@@ -164,3 +164,41 @@ class RadioFall2(variant.VariantTask):
                 delta=delta,
                 total=total,
             )
+
+
+class Quantum1119(variant.VariantTask):
+    # 1119 Рымкевич
+    def __call__(self, V=None):
+        return problems.task.Task(u'''
+            Определите длину волны лучей,
+            фотоны которых имеют энергию равную кинетической энергии электрона,
+            ускоренного напряжением ${V}\\units{{В}}$.
+        '''.format(
+            V=V,
+        ))
+
+    def All(self):
+        for V in [1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610]:
+            yield self.__call__(
+                V=V,
+            )
+
+
+class Quantum1120(variant.VariantTask):
+    # 1120 Рымкевич
+    def __call__(self, letter=None, value=None):
+        return problems.task.Task(u'''
+            Лучше всего нейтронное излучение ослабляет вода: в 4 раза лучше бетона и в 3 раза лучше свинца. 
+            Толщина слоя половинного ослабления $\\gamma$-излучения для воды равна $3\\units{{см}}$. 
+            Во сколько раз ослабит нейтронное излучение слой воды толщиной ${letter} = {value}\\units{{см}}?$
+        '''.format(
+            letter=letter,
+            value=value,
+        ))
+
+    def All(self):
+        for letter, value in itertools.product(['l', 'h', 'd'], [15, 30, 60, 120]):
+            yield self.__call__(
+                letter=letter,
+                value=value,
+            )
