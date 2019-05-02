@@ -119,11 +119,11 @@ def generate(args):
                 pupilsCount = len(pupilsNames)
                 tasksResults = []
                 for task in tasks:
-                    tasksList = task.Shuffle(seed)
-                    tasksResult = list(tasksList)
-                    while len(tasksResult) <= pupilsCount:
-                        tasksResult += tasksList
-                    tasksResults.append(tasksResult)
+                    availableTaskVariants = task.Shuffle(seed)
+                    periods = int((pupilsCount - 1) / len(availableTaskVariants)) + 1
+                    if periods > 1:
+                        log.info('  Expanding task %s to %d periods', task, periods)
+                    tasksResults.append(availableTaskVariants * periods)
                 variants = generators.variant.Variants(pupilsNames, zip(*tasksResults))
                 multiplePaper = generators.variant.MultiplePaper(date, classLetter=classLetter)
                 library.files.writeFile(
