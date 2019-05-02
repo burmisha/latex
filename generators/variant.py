@@ -9,7 +9,7 @@ log = logging.getLogger(__name__)
 PAPER_TEMPLATE = ur'''
 \input{{main}}
 \begin{{document}}
-\noanswers
+{noanswers}
 
 \setdate{{{date}}}
 \setclass{{{classLetter}}}
@@ -50,23 +50,27 @@ class MultiplePaper(object):
         self.Name = 'task'
         self.ClassLetter = classLetter
 
-    def GetTex(self, nameTasksIterator):
-        text = ''
+    def GetTex(self, nameTasksIterator, withAnswers=False):
+        if withAnswers:
+            tasksJoiner = u'\n\n'
+            variantsJoiner = u'\n\n'
+        else:
+            tasksJoiner = u'\n\\vspace{120pt}\n\n'
+            variantsJoiner = u'\n\\newpage\n\n'
+        variants = []
         for name, tasks in nameTasksIterator:
-            text += u'\\addpersonalvariant{{{name}}}\n'.format(name=name)
-            for index, task in enumerate(tasks):
-                text += u'\\tasknumber{{{index}}}{taskText}'.format(
-                    index=index + 1,
-                    taskText=task.GetTex(),
-                )
-                text += '\n\\vspace{120pt}\n\n'
-                # text += '\n\n'
-            text += u'\n\\newpage\n\n'
-            # text += u'\n\n'
+            variantText = u'\\addpersonalvariant{{{name}}}\n'.format(name=name)
+            tasksTexts = tasksJoiner.join([u'\\tasknumber{{{index}}}{taskText}'.format(
+                index=index + 1,
+                taskText=task.GetTex(),
+            ) for index, task in enumerate(tasks)])
+            variants.append(variantText + tasksTexts)
+        text = variantsJoiner.join(variants)
         result = PAPER_TEMPLATE.format(
             date=self.Date.GetHumanText(),
             classLetter=self.ClassLetter,
             text=text,
+            noanswers='' if withAnswers else ur'\noanswers',
         )
         return result
 

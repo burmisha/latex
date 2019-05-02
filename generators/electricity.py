@@ -57,8 +57,6 @@ class ForceTask(variant.VariantTask):
                 yield self.__call__(charges=[first, second], letter=letter, distance=distance)
 
 
-
-
 class ExchangeTask(variant.VariantTask):
     def __call__(self, charges=['+q', '+q'], letter='l'):
         q1 = int(''.join(c for c in charges[0] if c.isdigit() or c in ['+', '-']))
@@ -191,6 +189,7 @@ class SumTask(variant.VariantTask):
 
 LetterValue = collections.namedtuple('LetterValue', ['Letter', 'Value'])
 
+
 class Potential728(variant.VariantTask):
     def __call__(self, l=None, q=None, E=None):
         # 728(737) - Rymkevich
@@ -274,7 +273,6 @@ class Potential2335(variant.VariantTask):
             )
 
 
-
 class Potential1621(variant.VariantTask):
     def __call__(self, v=None, V=None):
         # 1621 Goldfarb
@@ -294,7 +292,3 @@ class Potential1621(variant.VariantTask):
                 v=LetterValue(Letter='v', Value=vv),
                 V=LetterValue(Letter='\\varphi', Value=Vv),
             )
-
-
-
-

@@ -41,8 +41,8 @@ def generate(args):
     generateLists = False
     generateMultiple = False
 
-    # generateProblems = True
-    # generateLists = True
+    generateProblems = True
+    generateLists = True
     generateMultiple = True
 
     if generateProblems:
@@ -83,48 +83,54 @@ def generate(args):
     if generateMultiple:
         seed = 2704
 
-        tasks = zip(
-            generators.electricity.ForceTask().Shuffle(seed),
-            generators.electricity.ExchangeTask().Shuffle(seed),
-            generators.electricity.FieldTaskGenerator().Shuffle(seed),
-            generators.electricity.SumTask().Shuffle(seed) * 2,
-        )
-        pupilsNames = list(library.pupils.getPupils('class-2018-10', addMyself=True, onlyMe=False).Iterate())
-        variants = generators.variant.Variants(pupilsNames, tasks)
-        multiplePaper = generators.variant.MultiplePaper('2019-04-16', classLetter='10')
-        library.files.writeFile('school-554', multiplePaper.GetFilename(), multiplePaper.GetTex(variants.Iterate()))
-
-        tasks = zip(
-            generators.electricity.Potential728().Shuffle(seed),
-            generators.electricity.Potential735().Shuffle(seed),
-            generators.electricity.Potential737().Shuffle(seed),
-            generators.electricity.Potential2335().Shuffle(seed) * 4,
-            generators.electricity.Potential1621().Shuffle(seed),
-        )
-        pupilsNames = list(library.pupils.getPupils('class-2018-10', addMyself=True, onlyMe=False).Iterate())
-        variants = generators.variant.Variants(pupilsNames, tasks)
-        multiplePaper = generators.variant.MultiplePaper('2019-04-30', classLetter='10')
-        library.files.writeFile('school-554', multiplePaper.GetFilename(), multiplePaper.GetTex(variants.Iterate()))
-
-        tasks = zip(
-            generators.quantum.Fotons().Shuffle(seed),
-            generators.quantum.KernelCount().Shuffle(seed) * 5,
-            generators.quantum.RadioFall().Shuffle(seed) * 10,
-            generators.quantum.RadioFall2().Shuffle(seed) * 10,
-        )
-        pupilsNames = list(library.pupils.getPupils('class-2018-11', addMyself=True, onlyMe=False).Iterate())
-        variants = generators.variant.Variants(pupilsNames, tasks)
-        multiplePaper = generators.variant.MultiplePaper('2019-04-19', classLetter='11')
-        library.files.writeFile('school-554', multiplePaper.GetFilename(), multiplePaper.GetTex(variants.Iterate()))
-
-        tasks = zip(
-            generators.quantum.Quantum1119().Shuffle(seed) * 2,
-            generators.quantum.Quantum1120().Shuffle(seed),
-        )
-        pupilsNames = list(library.pupils.getPupils('class-2018-11', addMyself=True, onlyMe=False).Iterate())
-        variants = generators.variant.Variants(pupilsNames, tasks)
-        multiplePaper = generators.variant.MultiplePaper('2019-04-30', classLetter='11')
-        library.files.writeFile('school-554', multiplePaper.GetFilename(), multiplePaper.GetTex(variants.Iterate()))
+        classRandomTasks = {
+            'class-2018-10': {
+                '2019-04-16': [
+                    generators.electricity.ForceTask(),
+                    generators.electricity.ExchangeTask(),
+                    generators.electricity.FieldTaskGenerator(),
+                    generators.electricity.SumTask(),
+                ],
+                '2019-04-30': [
+                    generators.electricity.Potential728(),
+                    generators.electricity.Potential735(),
+                    generators.electricity.Potential737(),
+                    generators.electricity.Potential2335(),
+                    generators.electricity.Potential1621(),
+                ],
+            },
+            'class-2018-11': {
+                '2019-04-19': [
+                    generators.quantum.Fotons(),
+                    generators.quantum.KernelCount(),
+                    generators.quantum.RadioFall(),
+                    generators.quantum.RadioFall2(),
+                ],
+                '2019-04-30': [
+                    generators.quantum.Quantum1119(),
+                    generators.quantum.Quantum1120(),
+                ],
+            },
+        }
+        for className, dateTasks in classRandomTasks.iteritems():
+            classLetter = className.split('-')[-1]
+            for date, tasks in dateTasks.iteritems():
+                pupilsNames = list(library.pupils.getPupils(className, addMyself=True, onlyMe=False).Iterate())
+                pupilsCount = len(pupilsNames)
+                tasksResults = []
+                for task in tasks:
+                    tasksList = task.Shuffle(seed)
+                    tasksResult = list(tasksList)
+                    while len(tasksResult) <= pupilsCount:
+                        tasksResult += tasksList
+                    tasksResults.append(tasksResult)
+                variants = generators.variant.Variants(pupilsNames, zip(*tasksResults))
+                multiplePaper = generators.variant.MultiplePaper(date, classLetter=classLetter)
+                library.files.writeFile(
+                    'school-554',
+                    multiplePaper.GetFilename(),
+                    multiplePaper.GetTex(variants.Iterate(), withAnswers=False),
+                )
 
 
 def CreateArgumentsParser():
