@@ -219,7 +219,7 @@ class Potential735(variant.VariantTask):
         # 735(737) - Rymkevich
         return problems.task.Task(u'''
             Напряжение между двумя точками, лежащими на одной линии напряжённости однородного электрического поля,
-            равно ${U.Letter}={U.Value}\\units{{кВт}}$. Расстояние между точками ${l.Letter}={l.Value}\\units{{см}}$. 
+            равно ${U.Letter}={U.Value}\\units{{кВ}}$. Расстояние между точками ${l.Letter}={l.Value}\\units{{см}}$. 
             Какова напряжённость этого поля?
         '''.format(
             l=l,
