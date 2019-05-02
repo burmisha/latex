@@ -23,11 +23,18 @@ PAPER_TEMPLATE = ur'''
 class VariantTask(object):
     pass
 
-    def Shuffle(self, seed):
+    def Shuffle(self, seed, minCount=None):
         tasks = list(self.All())
         random.seed(seed)
         random.shuffle(tasks)
         log.info('Got %d tasks for %r', len(tasks), self)
+
+        if minCount:
+            periods = int((minCount - 1) / len(tasks)) + 1
+            if periods > 1:
+                log.info('  Expanding task %s to %d periods', self, periods)
+            tasks *= periods
+
         return tasks
 
 
@@ -52,17 +59,19 @@ class MultiplePaper(object):
 
     def GetTex(self, nameTasksIterator, withAnswers=False):
         if withAnswers:
-            tasksJoiner = u'\n\n'
-            variantsJoiner = u'\n\n'
+            tasksJoiner = ''
+            variantsJoiner = ''
         else:
-            tasksJoiner = u'\n\\vspace{120pt}\n\n'
-            variantsJoiner = u'\n\\newpage\n\n'
+            tasksJoiner = u'\n\\vspace{120pt}'
+            variantsJoiner = u'\n\\newpage'
+        tasksJoiner += '\n\n'
+        variantsJoiner += '\n\n'
         variants = []
         for name, tasks in nameTasksIterator:
             variantText = u'\\addpersonalvariant{{{name}}}\n'.format(name=name)
             tasksTexts = tasksJoiner.join(u'\\tasknumber{{{index}}}{taskText}'.format(
                 index=index + 1,
-                taskText=task.GetTex(),
+                taskText=task.GetTex().strip(),
             ) for index, task in enumerate(tasks))
             variants.append(variantText + tasksTexts)
         text = variantsJoiner.join(variants)

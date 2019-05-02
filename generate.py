@@ -24,6 +24,8 @@ def generate(args):
     generateProblems = True
     generateLists = True
     generateMultiple = True
+    
+    fileFilter = args.filter
 
     if generateProblems:
         tasksGenerators = [
@@ -33,13 +35,13 @@ def generate(args):
             problems.getaclass.GetAClass(),
             problems.savchenko.Savchenko(),
         ]
-        taskNumber = args.task_number
+        fileFilter = args.filter
         for tasksGenerator in tasksGenerators:
             log.info('Using %r for tasks in %r', tasksGenerator, tasksGenerator.GetBookName())
             generatedTasks = set()
             problemsPath = os.path.join('problems', tasksGenerator.GetBookName())
             for task in sorted(tasksGenerator(), key=lambda task: task.GetFilename()):
-                if taskNumber and taskNumber not in task.GetFilename():
+                if fileFilter and fileFilter not in task.GetFilename():
                     continue
                 filename = os.path.join(problemsPath, task.GetFilename())
                 generatedTasks.add(filename)
@@ -58,6 +60,8 @@ def generate(args):
         ]
         for papersGenerator in papersGenerators:
             for paper in papersGenerator():
+                if fileFilter and fileFilter not in paper.GetFilename():
+                    continue
                 library.files.writeFile('school-554', paper.GetFilename(), paper.GetTex())
 
     if generateMultiple:
@@ -94,18 +98,13 @@ def generate(args):
         }
         for className, dateTasks in classRandomTasks.iteritems():
             classLetter = className.split('-')[-1]
-            for date, tasks in dateTasks.iteritems():
-                pupilsNames = list(library.pupils.getPupils(className, addMyself=True, onlyMe=False).Iterate())
-                pupilsCount = len(pupilsNames)
-                tasksResults = []
-                for task in tasks:
-                    availableTaskVariants = task.Shuffle(seed)
-                    periods = int((pupilsCount - 1) / len(availableTaskVariants)) + 1
-                    if periods > 1:
-                        log.info('  Expanding task %s to %d periods', task, periods)
-                    tasksResults.append(availableTaskVariants * periods)
-                variants = generators.variant.Variants(pupilsNames, zip(*tasksResults))
+            pupilsNames = list(library.pupils.getPupils(className, addMyself=True, onlyMe=False).Iterate())
+            for date, taskGenerators in dateTasks.iteritems():
                 multiplePaper = generators.variant.MultiplePaper(date, classLetter=classLetter)
+                if fileFilter and fileFilter not in multiplePaper.GetFilename():
+                    continue
+                tasksLists = [taskGenerator.Shuffle(seed, minCount=len(pupilsNames)) for taskGenerator in taskGenerators]
+                variants = generators.variant.Variants(pupilsNames, zip(*tasksLists))
                 library.files.writeFile(
                     'school-554',
                     multiplePaper.GetFilename(),
@@ -130,7 +129,7 @@ def CreateArgumentsParser():
     loggingGroup.add_argument('-v', '--verbose', help='Enable debug logging', action='store_true')
 
     parser.add_argument('--show-manual', '--sm', help='Show manual files', action='store_true')
-    parser.add_argument('--task-number', '--tn', help='Process only one task having number')
+    parser.add_argument('--filter', help='Process only files matchin filter')
 
     parser.add_argument('--lucky', help='Get lucky people')
 

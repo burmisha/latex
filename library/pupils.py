@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
 import argparse
@@ -7,15 +6,32 @@ import logging
 log = logging.getLogger(__name__)
 
 
+class Pupil(object):
+    def __init__(self, name=None, surname=None):
+        self.Name = name
+        self.Surname = surname
+
+    def __str__(self):
+        return u'{self.Name} {self.Surname}'.format(self=self)
+
+    def __lt__(self, other):
+        if self.Surname < other.Surname:
+            return True
+        elif self.Surname == other.Surname and self.Name <= other.Name:
+            return True
+        else:
+            return False
+
+
 class Pupils(object):
-    def __init__(self, names=[], letter=None, grade=None):
-        self.Names = names
+    def __init__(self, pupils=[], letter=None, grade=None):
+        self.Pupils = pupils
         self.Letter = letter
         self.Grade = grade
 
     def Iterate(self):
-        for name in self.Names:
-            yield name
+        for pupil in self.Pupils:
+            yield '%s' % pupil
 
 
 def getPupils(className, addMyself=False, onlyMe=False):
@@ -179,5 +195,11 @@ def getPupils(className, addMyself=False, onlyMe=False):
     if onlyMe:
         names = me
 
-    log.info('Returning %d pupils from %s-%s', len(names), grade, letter)
-    return Pupils(names=names, letter=letter, grade=grade)
+    pupils = []
+    for fullName in names:
+        name, surname = fullName.split(' ')
+        pupils.append(Pupil(name=name, surname=surname))
+
+    log.info('Returning %d pupils from %s-%s', len(pupils), grade, letter)
+
+    return Pupils(pupils=pupils, letter=letter, grade=grade)
