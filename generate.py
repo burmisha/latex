@@ -24,8 +24,8 @@ def generate(args):
     generateProblems = True
     generateLists = True
     generateMultiple = True
-    
-    fileFilter = args.filter
+
+    fileWriter = library.files.FileWriter(args.filter)
 
     if generateProblems:
         tasksGenerators = [
@@ -35,23 +35,13 @@ def generate(args):
             problems.getaclass.GetAClass(),
             problems.savchenko.Savchenko(),
         ]
-        fileFilter = args.filter
         for tasksGenerator in tasksGenerators:
             log.info('Using %r for tasks in %r', tasksGenerator, tasksGenerator.GetBookName())
-            generatedTasks = set()
             problemsPath = os.path.join('problems', tasksGenerator.GetBookName())
             for task in sorted(tasksGenerator(), key=lambda task: task.GetFilename()):
-                if fileFilter and fileFilter not in task.GetFilename():
+                if fileWriter.NotMatches(task.GetFilename()):
                     continue
-                filename = os.path.join(problemsPath, task.GetFilename())
-                generatedTasks.add(filename)
-                library.files.writeFile('', filename, task.GetTex())
-            allTasks = set(library.files.walkFiles(problemsPath, extensions=['tex']))
-            manualTasks = sorted(allTasks - generatedTasks)
-            if args.show_manual:
-                log.info('Got %d manual tasks in %s', len(manualTasks), tasksGenerator.GetBookName())
-                for manualTask in manualTasks:
-                    log.info('  Manual task: %r', manualTask)
+                fileWriter.Write(problemsPath, task.GetFilename(), text=task.GetTex())
 
     if generateLists:
         papersGenerators = [
@@ -60,9 +50,9 @@ def generate(args):
         ]
         for papersGenerator in papersGenerators:
             for paper in papersGenerator():
-                if fileFilter and fileFilter not in paper.GetFilename():
+                if fileWriter.NotMatches(paper.GetFilename()):
                     continue
-                library.files.writeFile('school-554', paper.GetFilename(), paper.GetTex())
+                fileWriter.Write('school-554', paper.GetFilename(), text=paper.GetTex())
 
     if generateMultiple:
         seed = 2704
@@ -101,15 +91,18 @@ def generate(args):
             pupilsNames = list(library.pupils.getPupils(className, addMyself=True, onlyMe=False).Iterate())
             for date, taskGenerators in dateTasks.iteritems():
                 multiplePaper = generators.variant.MultiplePaper(date, classLetter=classLetter)
-                if fileFilter and fileFilter not in multiplePaper.GetFilename():
+                if fileWriter.NotMatches(multiplePaper.GetFilename()):
                     continue
                 tasksLists = [taskGenerator.Shuffle(seed, minCount=len(pupilsNames)) for taskGenerator in taskGenerators]
                 variants = generators.variant.Variants(pupilsNames, zip(*tasksLists))
-                library.files.writeFile(
+                fileWriter.Write(
                     'school-554',
                     multiplePaper.GetFilename(),
-                    multiplePaper.GetTex(variants.Iterate(), withAnswers=False),
+                    text=multiplePaper.GetTex(variants.Iterate(), withAnswers=False),
                 )
+
+        if args.show_manual:
+            fileWriter.ShowManual(extensions=['tex'])
 
 
 def CreateArgumentsParser():
