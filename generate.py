@@ -4,8 +4,6 @@
 import argparse
 import logging
 import os
-import random
-import time
 
 import problems
 import classes
@@ -15,27 +13,9 @@ import library
 log = logging.getLogger('generate')
 
 
-def getLucky(lucky):
-    count = None
-    if ':' in lucky:
-        className, count = lucky.split(':')
-        count = int(count)
-    else:
-        className = lucky
-    className = 'class-2018-{}'.format(className)
-    pupils = list(library.pupils.getPupils(className).Iterate())
-    random.seed(int(time.time()))
-    random.shuffle(pupils)
-    if count:
-        pupils = pupils[:count]
-    for index, pupil in enumerate(pupils):
-        log.info('Lucky person %2d:  %s', index + 1, pupil)
-    return None
-
-
 def generate(args):
     if args.lucky:
-        return getLucky(args.lucky)
+        return library.lucky.getLucky(args.lucky)
 
     generateProblems= False
     generateLists = False
