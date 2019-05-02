@@ -60,10 +60,10 @@ class MultiplePaper(object):
         variants = []
         for name, tasks in nameTasksIterator:
             variantText = u'\\addpersonalvariant{{{name}}}\n'.format(name=name)
-            tasksTexts = tasksJoiner.join([u'\\tasknumber{{{index}}}{taskText}'.format(
+            tasksTexts = tasksJoiner.join(u'\\tasknumber{{{index}}}{taskText}'.format(
                 index=index + 1,
                 taskText=task.GetTex(),
-            ) for index, task in enumerate(tasks)])
+            ) for index, task in enumerate(tasks))
             variants.append(variantText + tasksTexts)
         text = variantsJoiner.join(variants)
         result = PAPER_TEMPLATE.format(

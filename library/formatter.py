@@ -62,11 +62,8 @@ class TextFormatter(object):
 
 
 def formatText(text, addIndent=0):
-    # text = u'\u0438. \u0423'
     textFormatter = TextFormatter(text)
-    # log.debug('Lines: %r', list(textFormatter.Format(addIndent=addIndent)))
     formatted = '\n'.join(textFormatter.Format(addIndent=addIndent))
     formatted.replace('\n\n\n', '\n\n')
     formatted = formatted.strip('\n')
-    # log.debug('formatted: %s', formatted)
     return formatted
