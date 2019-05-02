@@ -179,5 +179,5 @@ def getPupils(className, addMyself=False, onlyMe=False):
     if onlyMe:
         names = me
 
-    log.info('Returning %d pupils from %s-%s', len(names), letter, grade)
+    log.info('Returning %d pupils from %s-%s', len(names), grade, letter)
     return Pupils(names=names, letter=letter, grade=grade)

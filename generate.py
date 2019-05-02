@@ -28,8 +28,8 @@ def getLucky(lucky):
     random.shuffle(pupils)
     if count:
         pupils = pupils[:count]
-    for pupil in pupils:
-        log.info('New lucky person:  %s', pupil)
+    for index, pupil in enumerate(pupils):
+        log.info('Lucky person %2d:  %s', index + 1, pupil)
     return None
 
 
