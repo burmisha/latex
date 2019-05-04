@@ -46,6 +46,7 @@ def generate(args):
     if generateLists:
         papersGenerators = [
             classes.class1807.Class1807(),
+            classes.class1808.Class1808(),
             classes.class1810.Class1810(),
         ]
         for papersGenerator in papersGenerators:
