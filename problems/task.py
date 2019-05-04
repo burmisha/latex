@@ -13,7 +13,7 @@ class Task(object):
     def Format(self, text, nodeType):
         try:
             value = library.formatter.formatText(text, addIndent=4)
-            return u'''\\{}{{\n{}\n}}\n'''.format(nodeType, value).replace('\\\\u', '\\u')
+            return u'''\\{}{{\n{}\n}}\n'''.format(nodeType, value).replace(r'\\u', r'\u')
         except Exception:
             log.exception('Failed to get LaTeX for %s on %r', nodeType, self.Text)
             raise

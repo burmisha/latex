@@ -2,11 +2,13 @@
 
 import library
 import logging
+import os
 
 log = logging.getLogger(__name__)
 
 PAPER_TEMPLATE = ur'''
-\input{{main}}
+\newcommand\rootpath{{../..}}
+\input{{\rootpath/school-554/main}}
 \begin{{document}}
 \noanswers
 
@@ -57,6 +59,7 @@ class Paper(object):
         if self.Name:
             filename += '-' + self.Name
         filename += '.tex'
+        filename = os.path.join('%s-class' % self.ClassLetter, filename)
         log.debug('Got filename %r', filename)
         return filename
 

@@ -125,7 +125,7 @@ def CreateArgumentsParser():
     parser.add_argument('--show-manual', '--sm', help='Show manual files', action='store_true')
     parser.add_argument('--filter', help='Process only files matchin filter')
 
-    parser.add_argument('--lucky', help='Get lucky people')
+    parser.add_argument('-l', '--lucky', help='Get lucky people')
 
     parser.set_defaults(func=generate)
 

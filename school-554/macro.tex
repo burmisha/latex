@@ -62,12 +62,12 @@
 
 \def\celsius{\,^\circ\text{C}}
 
-\newcommand\libproblempath{../problems}
+\newcommand\libproblempath{\rootpath/problems}
 
 \newcommand\taskname[2]{{\qquad\tt(Задача #2 из #1)}}
 
 \newcommand\libproblem[2]{
-    \input{\libproblempath/#1/#2.tex}
+    \input{\rootpath/problems/#1/#2.tex}
     \taskname{#1}{#2}
 }
 
