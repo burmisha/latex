@@ -4,6 +4,9 @@ import paper
 class Class1808(paper.PaperGenerator):
     def __call__(self):
         papers = {
+            '2018-12-04': (ur'\fourvariants{80pt}{\variant}', [
+                ('gendenshteyn-8', ['6-38', '6-40', '5-25', '5-36', '5-38', '5-39']),
+            ]),
             '2018-12-07': (ur'\twocolumns{20pt}{\twovariants{2pt}{\variant}}{\twovariants{2pt}{\variant}}', [
                 ('gendenshteyn-8', [
                     '5-05', '5-17', '5-18', '5-13', '5-10',
