@@ -33,30 +33,32 @@ class Paper(object):
         self.ClassLetter = classLetter
         self.Style = style
 
-        filename = '%s-%s' % (self.Date.GetFilenameText(), self.ClassLetter)
-        if self.Name:
-            filename += '-' + self.Name
-        filename += '.tex'
-        log.debug('Got filename %r', filename)
-        self._Filename = filename
-
     def GetTex(self):
         tasks = []
         index = 0
         for book, problems in self.Tasks:
             for problem in problems:
+                taskMarker = 'tasknumber'
+                if problem.endswith('*'):
+                    problem = problem.strip('*')
+                    taskMarker = 'starnumber'
                 index += 1
-                tasks.append('\\tasknumber{%d}\\libproblem{%s}{%s}' % (index, book, problem))
+                tasks.append(r'\%s{%d}\libproblem{%s}{%s}' % (taskMarker, index, book, problem))
         result = PAPER_TEMPLATE.format(
             date=self.Date.GetHumanText(),
             classLetter=self.ClassLetter,
             tasks='\n\n'.join('    ' + task for task in tasks),
             style=self.Style,
         )
-        return result        
+        return result
 
     def GetFilename(self):
-        return self._Filename
+        filename = '%s-%s' % (self.Date.GetFilenameText(), self.ClassLetter)
+        if self.Name:
+            filename += '-' + self.Name
+        filename += '.tex'
+        log.debug('Got filename %r', filename)
+        return filename
 
 
 class PaperGenerator(object):
