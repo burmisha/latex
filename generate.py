@@ -17,9 +17,11 @@ def generate(args):
     if args.lucky:
         return library.lucky.getLucky(args.lucky)
 
+    fileWriter = library.files.FileWriter(args.filter)
     if args.tripod:
-        for report in library.tripod.getTripodReports():
-            print report
+        for className, report in library.tripod.getTripodReports():
+            fileWriter.Write(os.path.join('school-554', 'tripod'), className + '-tripod.tex', text=report.GetText())
+            # print reports
         return
 
     generateProblems= False

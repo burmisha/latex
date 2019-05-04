@@ -98,7 +98,26 @@ class Question(object):
         result.append(u'%60s:   %3d%%' % (u'Положительные ответы', self.GetRating()))
         result.append(u'%60s:   %.1f' % (u'Средний балл', self.GetMean()))
         result.append('')
+        return '\n'.join(result)
 
+    def GetTex(self):
+        totalCount = self.GetTotalCount()
+        result = [
+            ur'{{\bfseries {} $\rightarrow {}\%;\quad {:.1f}$}}'.format(
+                self.Text,
+                self.GetRating(),
+                self.GetMean()
+            ).replace('.', '{,}'),
+            '',
+        ]
+        for answerIndex in [5, 4, 3, 2, 1]:
+            result.append('%s: %3d\\%% %5d\n' % (
+                self.__AnswerMapping[answerIndex],
+                # '=' * self.Answers[answerIndex], ' ' * (totalCount - self.Answers[answerIndex]),
+                100. * self.Answers[answerIndex] / totalCount,
+                self.Answers[answerIndex],
+            ))
+        result.append('')
         return '\n'.join(result)
 
     def GetMean(self):
@@ -147,9 +166,20 @@ class Dimension(object):
         result.append('\n')
         return '\n'.join(result)
 
+    def GetTex(self):
+        result = [
+            ur'\section{%s $\rightarrow$ %d\%%}' % (self.Name, self.GetRating()),
+            ''
+        ]
+        for question in self.Questions:
+            result.append(question.GetTex())
+        result.append('\n')
+        return '\n'.join(result)
+
 
 class Report(object):
-    def __init__(self, dimensions):
+    def __init__(self, className, dimensions):
+        self.ClassName = className
         self.Dimensions = dimensions
         self.Indicies = {}
         for dimensionIndex, dimension in enumerate(self.Dimensions):
@@ -167,74 +197,97 @@ class Report(object):
     def GetRating(self):
         return mean(dimension.GetRating() for dimension in self.Dimensions)
 
-    def GetText(self, className):
+    def GetText(self):
         result = [
-            u'Класс: %s' % className,
-            u'Общий результат: %3d%%' % self.GetRating()
+            u'Класс: %s' % self.ClassName,
+            u'Общий результат: %3d%%' % self.GetRating(),
+            '',
         ]
         for dimension in self.Dimensions:
             result.append(dimension.GetText())
         result.append('')
         return '\n'.join(result)
 
+    def GetTex(self):
+        return ur'''
+\newcommand\rootpath{{../..}}
+\input{{\rootpath/school-554/main}}
+\begin{{document}}
+
+{{\bfseries Отчёт «Трипод» для класса {self.ClassName}}}
+
+Общий результат: {rating}\%
+
+\begin{{multicols}}{{2}}
+    {dimensions}
+\end{{multicols}}
+
+\end{{document}}
+        
+        '''.strip().format(
+            self=self,
+            dimensions='\n\n'.join(dimension.GetTex() for dimension in self.Dimensions),
+            rating=self.GetRating(),
+        )
 
 
-
-report = Report([
+def getEmptyReport(className):
+    return Report(className, [
         Dimension(u'Поддержка', [
-            Question(7, u'Мне кажется, что этому учителю действительно важны мои успехи', '+'),
+            Question(7, u'Мне кажется, что этому учителю действительно важны мои успехи', '+'),
             Question(20, u'Этот учитель искренне пытается понять, как мы относимся к тем или иным вещам.', '+'),
-            Question(27, u'Мне кажется, что этот учитель замечает, если меня что-то беспокоит.', '+'),
+            Question(27, u'Мне кажется, что этот учитель замечает, если меня что-то беспокоит', '+'),
         ]),
         Dimension(u'Вовлечение', [
-            Question(2, u'Мы можем выбирать, каким образом изучать материал на уроках этого учителя.', '+'),
-            Question(3, u'Этот учитель хочет, чтобы мы делились своими мыслями.', '+'),
-            Question(13, u'Учитель хочет, чтобы я объяснял свои ответы - почему я так думаю.', '+'),
-            Question(29, u'Этот учитель уважает мои идеи и предложения.', '+'),
-            Question(33, u'Этот учитель дает нам возможность объяснить свои мысли.', '+'),
-            Question(35, u'Мы открыто обсуждаем с учителем нашу работу в классе: что было интересно и понятно, а что не очень.', '+'),
+            Question(2, u'Мы можем выбирать, каким образом изучать материал на уроках этого учителя', '+'),
+            Question(3, u'Этот учитель хочет, чтобы мы делились своими мыслями', '+'),
+            Question(13, u'Учитель хочет, чтобы я объяснял свои ответы - почему я так думаю', '+'),
+            Question(29, u'Этот учитель уважает мои идеи и предложения', '+'),
+            Question(33, u'Этот учитель дает нам возможность объяснить свои мысли', '+'),
+            Question(35, u'Мы открыто обсуждаем с учителем нашу работу в классе: что было интересно и понятно, а что не очень', '+'),
         ]),
         Dimension(u'Интерес', [
-            Question(1, u'Мне нравится на уроках этого учителя.', '+'),
-            Question(10, u'С этим учителем приятно учиться.', '+'),
-            Question(22, u'Этот учитель делает уроки интересными.', '+'),
-            Question(24, u'На уроках этого учителя мое внимание рассеивается, и мне становится скучно.', '-'),
+            Question(1, u'Мне нравится на уроках этого учителя', '+'),
+            Question(10, u'С этим учителем приятно учиться', '+'),
+            Question(22, u'Этот учитель делает уроки интересными', '+'),
+            Question(24, u'На уроках этого учителя мое внимание рассеивается, и мне становится скучно', '-'),
         ]),
         Dimension(u'Объяснение', [
-            Question(4, u'Во время урока учитель спрашивает, успеваем ли мы за ходом урока.', '+'),
-            Question(8, u'Этот учитель знает, когда наш класс его НЕ понимает.', '+'),
-            Question(9, u'Если мы чего-то НЕ понимаем, учитель объясняет по-другому.', '+'),
-            Question(14, u'Этот учитель может по-разному объяснить любую тему, которую мы проходим на уроке.', '+'),
-            Question(17, u'Когда учитель объясняет материал, он думает, что мы понимаем, хотя на самом деле мы НЕ понимаем.', '-'),
-            Question(28, u'Этот учитель проверяет, понимаем ли мы его объяснения.', '+'),
-            Question(31, u'Этот учитель понятно объясняет даже сложный материал.', '+'),
-            Question(34, u'На уроках этого учителя мы учимся исправлять собственные ошибки.', '+'),
+            Question(4, u'Во время урока учитель спрашивает, успеваем ли мы за ходом урока', '+'),
+            Question(8, u'Этот учитель знает, когда наш класс его НЕ понимает', '+'),
+            Question(9, u'Если мы чего-то НЕ понимаем, учитель объясняет по-другому', '+'),
+            Question(14, u'Этот учитель может по-разному объяснить любую тему, которую мы проходим на уроке', '+'),
+            Question(17, u'Когда учитель объясняет материал, он думает, что мы понимаем, хотя на самом деле мы НЕ понимаем', '-'),
+            Question(28, u'Этот учитель проверяет, понимаем ли мы его объяснения', '+'),
+            Question(31, u'Этот учитель понятно объясняет даже сложный материал', '+'),
+            Question(34, u'На уроках этого учителя мы учимся исправлять собственные ошибки', '+'),
         ]),
         Dimension(u'Закрепление', [
-            Question(15, u'Комментарии этого учителя к работе, которую я выполняю, помогают мне понять, как можно сделать эту работу лучше.', '+'),
-            Question(18, u'Учитель дает полезные пояснения, чтобы мы поняли, что сделали не так в задании.', '+'),
-            Question(25, u'Этот учитель каждый раз подводит итог тому, что мы прошли на уроке.', '+'),
+            Question(15, u'Комментарии этого учителя к работе, которую я выполняю, помогают мне понять, как можно сделать эту работу лучше', '+'),
+            Question(18, u'Учитель дает полезные пояснения, чтобы мы поняли, что сделали не так в задании', '+'),
+            Question(25, u'Этот учитель каждый раз подводит итог тому, что мы прошли на уроке', '+'),
         ]),
         Dimension(u'Требовательность', [
-            Question(5, u'Этот учитель просит наш класс подробнее и глубже объяснять свои ответы.', '+'),
-            Question(12, u'Когда мы изучаем сложный материл, учитель поддерживает нас и не дает нам сдаваться.', '+'),
-            Question(26, u'Мы узнаем много нового почти на каждом уроке этого учителя.', '+'),
-            Question(32, u'На уроках наш учитель требует полной самоотдачи.', '+'),
+            Question(5, u'Этот учитель просит наш класс подробнее и глубже объяснять свои ответы', '+'),
+            Question(12, u'Когда мы изучаем сложный материл, учитель поддерживает нас и не дает нам сдаваться', '+'),
+            Question(26, u'Мы узнаем много нового почти на каждом уроке этого учителя', '+'),
+            Question(32, u'На уроках наш учитель требует полной самоотдачи', '+'),
         ]),
         Dimension(u'Управление классом', [
-            Question(6, u'На уроках этого учителя наш класс все время работает и не теряет времени.', '+'),
-            Question(11, u'Наш класс относится к учителю с уважением.', '+'),
-            Question(16, u'На уроках этого учителя наш класс ведет себя плохо.', '-'),
-            Question(19, u'На уроках этого учителя наш класс ведет себя хорошо.', '+'),
-            Question(21, u'Мне НЕ нравится, как наш класс ведет себя на уроках этого учителя.', '-'),
-            Question(23, u'Наш класс слушается этого учителя.', '+'),
-            Question(30, u'Поведение нашего класса злит учителя.', '-'),
+            Question(6, u'На уроках этого учителя наш класс все время работает и не теряет времени', '+'),
+            Question(11, u'Наш класс относится к учителю с уважением', '+'),
+            Question(16, u'На уроках этого учителя наш класс ведет себя плохо', '-'),
+            Question(19, u'На уроках этого учителя наш класс ведет себя хорошо', '+'),
+            Question(21, u'Мне НЕ нравится, как наш класс ведет себя на уроках этого учителя', '-'),
+            Question(23, u'Наш класс слушается этого учителя', '+'),
+            Question(30, u'Поведение нашего класса злит учителя', '-'),
         ]),
 ])
 
 
 def getTripodReports():
     for className, personsResults in results.iteritems():
+        report = getEmptyReport(className)
         report.Reset()
 
         for personResult in personsResults:
@@ -243,4 +296,4 @@ def getTripodReports():
             for index, answer in enumerate(personResult):
                 questionNumber = index + 1
                 report.AddAnswer(questionNumber, int(answer))
-        yield report.GetText(className)
+        yield className, report
