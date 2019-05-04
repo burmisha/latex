@@ -35,7 +35,7 @@ class Date(object):
         day = int(day)
         assert 1 <= day <= 31, 'Error on %r' % self.__DateStr
         assert 2018 <= int(year) <= 2019, 'Error on %r' % self.__DateStr
-        return u'{} {} {}'.format(int(day), textMonth, year)
+        return u'{}~{}~{}'.format(int(day), textMonth, year)
 
 
 class TextFormatter(object):
