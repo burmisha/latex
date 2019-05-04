@@ -17,6 +17,10 @@ def generate(args):
     if args.lucky:
         return library.lucky.getLucky(args.lucky)
 
+    if args.tripod:
+        print library.tripod.getTripodReports()
+        return
+
     generateProblems= False
     generateLists = False
     generateMultiple = False
@@ -126,6 +130,7 @@ def CreateArgumentsParser():
     parser.add_argument('--filter', help='Process only files matchin filter')
 
     parser.add_argument('-l', '--lucky', help='Get lucky people')
+    parser.add_argument('-t', '--tripod', help='Print tripod results', action='store_true')
 
     parser.set_defaults(func=generate)
 
