@@ -134,13 +134,14 @@ questionGroups = [
 
 def getTripodReports():
     for className, personsResults in results.iteritems():
+        totalRatings = []
         classResults = collections.defaultdict(lambda: collections.defaultdict(int))
         classSize = len(personsResults)
         for personResult in personsResults:
-            for index, answer in enumerate(personResult.replace(' ', '')):
+            personResult = personResult.replace(' ', '').replace('-', '3').replace('_', '3')
+            assert len(personResult) == 35
+            for index, answer in enumerate(personResult):
                 questionNumber = index + 1
-                if answer == '_':
-                    answer = '3'
                 intAnswer = int(answer)
                 textAnswer = answerMapping[int(answer)]
                 classResults[questionNumber][intAnswer] += 1
@@ -178,8 +179,12 @@ def getTripodReports():
                 report.append(u'%60s:   %3d%%' % (u'Положительные ответы', questionRating))
                 report.append(u'%60s:   %.1f' % (u'Средний балл', questionMean))
                 report.append('')
-            report.append(u'  Рейтинг: %3d%%' % (sum(groupRatings) / len(groupRatings)))
+            groupRating = sum(groupRatings) / len(groupRatings)
+            totalRatings.append(groupRating)
+            report.append(u'  Рейтинг: %3d%%' % groupRating)
             report.append('\n')
+
+        report.append(u'Общий результат: %3d%%' % (sum(totalRatings) / len(totalRatings)))
         report.append('\n')
 
-        return '\n'.join(report)
+        yield '\n'.join(report)

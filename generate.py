@@ -18,7 +18,8 @@ def generate(args):
         return library.lucky.getLucky(args.lucky)
 
     if args.tripod:
-        print library.tripod.getTripodReports()
+        for report in library.tripod.getTripodReports():
+            print report
         return
 
     generateProblems= False
