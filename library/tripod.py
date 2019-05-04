@@ -58,133 +58,189 @@ results = {
     ],
 }
 
-answerMapping = {
-    1: u'Неверно',
-    2: u'Скорее неверно',
-    3: u'Затрудняюсь ответить',
-    4: u'Скорее вeрно',
-    5: u'Beрно',
-}
 
-questionGroups = [
-        (u'Поддержка',
-            [
-                (7, u'Мне кажется, что этому учителю действительно важны мои успехи', '+'),
-                (20, u'Этот учитель искренне пытается понять, как мы относимся к тем или иным вещам.', '+'),
-                (27, u'Мне кажется, что этот учитель замечает, если меня что-то беспокоит.', '+'),
-            ]
-        ),
-        (u'Вовлечение',
-            [
-                (2, u'Мы можем выбирать, каким образом изучать материал на уроках этого учителя.', '+'),
-                (3, u'Этот учитель хочет, чтобы мы делились своими мыслями.', '+'),
-                (13, u'Учитель хочет, чтобы я объяснял свои ответы - почему я так думаю.', '+'),
-                (29, u'Этот учитель уважает мои идеи и предложения.', '+'),
-                (33, u'Этот учитель дает нам возможность объяснить свои мысли.', '+'),
-                (35, u'Мы открыто обсуждаем с учителем нашу работу в классе: что было интересно и понятно, а что не очень.', '+'),
-            ]
-        ),
-        (u'Интерес',
-            [
-                (1, u'Мне нравится на уроках этого учителя.', '+'),
-                (10, u'С этим учителем приятно учиться.', '+'),
-                (22, u'Этот учитель делает уроки интересными.', '+'),
-                (24, u'На уроках этого учителя мое внимание рассеивается, и мне становится скучно.', '-'),
-            ]
-        ),
-        (u'Объяснение',
-            [
-                (4, u'Во время урока учитель спрашивает, успеваем ли мы за ходом урока.', '+'),
-                (8, u'Этот учитель знает, когда наш класс его НЕ понимает.', '+'),
-                (9, u'Если мы чего-то НЕ понимаем, учитель объясняет по-другому.', '+'),
-                (14, u'Этот учитель может по-разному объяснить любую тему, которую мы проходим на уроке.', '+'),
-                (17, u'Когда учитель объясняет материал, он думает, что мы понимаем, хотя на самом деле мы НЕ понимаем.', '-'),
-                (28, u'Этот учитель проверяет, понимаем ли мы его объяснения.', '+'),
-                (31, u'Этот учитель понятно объясняет даже сложный материал.', '+'),
-                (34, u'На уроках этого учителя мы учимся исправлять собственные ошибки.', '+'),
-            ]
-        ),
-        (u'Закрепление',
-            [
-                (15, u'Комментарии этого учителя к работе, которую я выполняю, помогают мне понять, как можно сделать эту работу лучше.', '+'),
-                (18, u'Учитель дает полезные пояснения, чтобы мы поняли, что сделали не так в задании.', '+'),
-                (25, u'Этот учитель каждый раз подводит итог тому, что мы прошли на уроке.', '+'),
-            ]
-        ),
-        (u'Требовательность',
-            [
-                (5, u'Этот учитель просит наш класс подробнее и глубже объяснять свои ответы.', '+'),
-                (12, u'Когда мы изучаем сложный материл, учитель поддерживает нас и не дает нам сдаваться.', '+'),
-                (26, u'Мы узнаем много нового почти на каждом уроке этого учителя.', '+'),
-                (32, u'На уроках наш учитель требует полной самоотдачи.', '+'),
-            ]
-        ),
-        (u'Управление классом',
-            [
-                (6, u'На уроках этого учителя наш класс все время работает и не теряет времени.', '+'),
-                (11, u'Наш класс относится к учителю с уважением.', '+'),
-                (16, u'На уроках этого учителя наш класс ведет себя плохо.', '-'),
-                (19, u'На уроках этого учителя наш класс ведет себя хорошо.', '+'),
-                (21, u'Мне НЕ нравится, как наш класс ведет себя на уроках этого учителя.', '-'),
-                (23, u'Наш класс слушается этого учителя.', '+'),
-                (30, u'Поведение нашего класса злит учителя.', '-'),
-            ]
-        ),
-]
+class Question(object):
+    def __init__(self, index, text, polarity):
+        self.Index = index
+        self.Text = text
+        assert polarity in ['+', '-']
+        self.Polarity = polarity
+        self.Reset()
+
+        self.__AnswerMapping = {
+            1: u'Неверно',
+            2: u'Скорее неверно',
+            3: u'Затрудняюсь ответить',
+            4: u'Скорее вeрно',
+            5: u'Beрно',
+        }
+
+    def AddAnswer(self, answerIndex):
+        self.Answers[answerIndex] += 1
+
+    def Reset(self):
+        self.Answers = {1: 0, 2: 0, 3: 0, 4: 0, 5: 0}
+
+    def GetTotalCount(self):
+        return sum(self.Answers.values())
+
+    def GetText(self):
+        result = []
+        totalCount = self.GetTotalCount()
+        result.append(u'  * %s' % self.Text)
+        for answerIndex in [5, 4, 3, 2, 1]:
+            result.append('%30s: |%s%s| %3d%% %5d' % (
+                self.__AnswerMapping[answerIndex],
+                '=' * self.Answers[answerIndex], ' ' * (totalCount - self.Answers[answerIndex]),
+                100. * self.Answers[answerIndex] / totalCount,
+                self.Answers[answerIndex],
+            ))
+        result.append(u'%60s:   %3d%%' % (u'Положительные ответы', self.GetRating()))
+        result.append(u'%60s:   %.1f' % (u'Средний балл', self.GetMean()))
+        result.append('')
+
+        return '\n'.join(result)
+
+    def GetMean(self):
+        valuesSum = 0.
+        valuesTotal = 0.
+        for key, value in self.Answers.iteritems():
+            valuesSum += key * value
+            valuesTotal += value
+        result = valuesSum / valuesTotal
+        if self.Polarity == '-':
+            result = 6. - result
+        return result
+
+    def GetRating(self):
+        positiveSum = 0
+        for key, value in self.Answers.iteritems():
+            if (self.Polarity == '+' and key >= 4) or (self.Polarity == '-' and key <= 2):
+                positiveSum += value
+        return int(100. * positiveSum / self.GetTotalCount())
+
+
+def mean(items):
+    items = list(items)
+    return sum(items) / len(items)
+
+
+class Dimension(object):
+    def __init__(self, name, questions):
+        self.Name = name
+        self.Questions = questions
+        self.Reset()
+
+    def Reset(self):
+        for question in self.Questions:
+            question.Reset()
+
+    def GetRating(self):
+        return mean(question.GetRating() for question in self.Questions)
+
+    def GetText(self):
+        result = [
+            u'%-30s Среднее значение: %3d%%' % (self.Name, self.GetRating()),
+        ]
+        for question in self.Questions:
+            result.append(question.GetText())
+        result.append('\n')
+        return '\n'.join(result)
+
+
+class Report(object):
+    def __init__(self, dimensions):
+        self.Dimensions = dimensions
+        self.Indicies = {}
+        for dimensionIndex, dimension in enumerate(self.Dimensions):
+            for questionIndex, question in enumerate(dimension.Questions):
+                self.Indicies[question.Index] = (dimensionIndex, questionIndex)
+
+    def Reset(self):
+        for dimension in self.Dimensions:
+            dimension.Reset()
+
+    def AddAnswer(self, questionIndex, answer):
+        dimensionIndex, questionIndex = self.Indicies[questionIndex]
+        self.Dimensions[dimensionIndex].Questions[questionIndex].AddAnswer(answer)
+
+    def GetRating(self):
+        return mean(dimension.GetRating() for dimension in self.Dimensions)
+
+    def GetText(self, className):
+        result = [
+            u'Класс: %s' % className,
+            u'Общий результат: %3d%%' % self.GetRating()
+        ]
+        for dimension in self.Dimensions:
+            result.append(dimension.GetText())
+        result.append('')
+        return '\n'.join(result)
+
+
+
+
+report = Report([
+        Dimension(u'Поддержка', [
+            Question(7, u'Мне кажется, что этому учителю действительно важны мои успехи', '+'),
+            Question(20, u'Этот учитель искренне пытается понять, как мы относимся к тем или иным вещам.', '+'),
+            Question(27, u'Мне кажется, что этот учитель замечает, если меня что-то беспокоит.', '+'),
+        ]),
+        Dimension(u'Вовлечение', [
+            Question(2, u'Мы можем выбирать, каким образом изучать материал на уроках этого учителя.', '+'),
+            Question(3, u'Этот учитель хочет, чтобы мы делились своими мыслями.', '+'),
+            Question(13, u'Учитель хочет, чтобы я объяснял свои ответы - почему я так думаю.', '+'),
+            Question(29, u'Этот учитель уважает мои идеи и предложения.', '+'),
+            Question(33, u'Этот учитель дает нам возможность объяснить свои мысли.', '+'),
+            Question(35, u'Мы открыто обсуждаем с учителем нашу работу в классе: что было интересно и понятно, а что не очень.', '+'),
+        ]),
+        Dimension(u'Интерес', [
+            Question(1, u'Мне нравится на уроках этого учителя.', '+'),
+            Question(10, u'С этим учителем приятно учиться.', '+'),
+            Question(22, u'Этот учитель делает уроки интересными.', '+'),
+            Question(24, u'На уроках этого учителя мое внимание рассеивается, и мне становится скучно.', '-'),
+        ]),
+        Dimension(u'Объяснение', [
+            Question(4, u'Во время урока учитель спрашивает, успеваем ли мы за ходом урока.', '+'),
+            Question(8, u'Этот учитель знает, когда наш класс его НЕ понимает.', '+'),
+            Question(9, u'Если мы чего-то НЕ понимаем, учитель объясняет по-другому.', '+'),
+            Question(14, u'Этот учитель может по-разному объяснить любую тему, которую мы проходим на уроке.', '+'),
+            Question(17, u'Когда учитель объясняет материал, он думает, что мы понимаем, хотя на самом деле мы НЕ понимаем.', '-'),
+            Question(28, u'Этот учитель проверяет, понимаем ли мы его объяснения.', '+'),
+            Question(31, u'Этот учитель понятно объясняет даже сложный материал.', '+'),
+            Question(34, u'На уроках этого учителя мы учимся исправлять собственные ошибки.', '+'),
+        ]),
+        Dimension(u'Закрепление', [
+            Question(15, u'Комментарии этого учителя к работе, которую я выполняю, помогают мне понять, как можно сделать эту работу лучше.', '+'),
+            Question(18, u'Учитель дает полезные пояснения, чтобы мы поняли, что сделали не так в задании.', '+'),
+            Question(25, u'Этот учитель каждый раз подводит итог тому, что мы прошли на уроке.', '+'),
+        ]),
+        Dimension(u'Требовательность', [
+            Question(5, u'Этот учитель просит наш класс подробнее и глубже объяснять свои ответы.', '+'),
+            Question(12, u'Когда мы изучаем сложный материл, учитель поддерживает нас и не дает нам сдаваться.', '+'),
+            Question(26, u'Мы узнаем много нового почти на каждом уроке этого учителя.', '+'),
+            Question(32, u'На уроках наш учитель требует полной самоотдачи.', '+'),
+        ]),
+        Dimension(u'Управление классом', [
+            Question(6, u'На уроках этого учителя наш класс все время работает и не теряет времени.', '+'),
+            Question(11, u'Наш класс относится к учителю с уважением.', '+'),
+            Question(16, u'На уроках этого учителя наш класс ведет себя плохо.', '-'),
+            Question(19, u'На уроках этого учителя наш класс ведет себя хорошо.', '+'),
+            Question(21, u'Мне НЕ нравится, как наш класс ведет себя на уроках этого учителя.', '-'),
+            Question(23, u'Наш класс слушается этого учителя.', '+'),
+            Question(30, u'Поведение нашего класса злит учителя.', '-'),
+        ]),
+])
+
 
 def getTripodReports():
     for className, personsResults in results.iteritems():
-        totalRatings = []
-        classResults = collections.defaultdict(lambda: collections.defaultdict(int))
-        classSize = len(personsResults)
+        report.Reset()
+
         for personResult in personsResults:
             personResult = personResult.replace(' ', '').replace('-', '3').replace('_', '3')
             assert len(personResult) == 35
             for index, answer in enumerate(personResult):
                 questionNumber = index + 1
-                intAnswer = int(answer)
-                textAnswer = answerMapping[int(answer)]
-                classResults[questionNumber][intAnswer] += 1
-        report = [u'Класс: %s' % className]
-        for groupName, questions in questionGroups:
-            report.append('%s' % groupName)
-            groupRatings = []
-            for questionIndex, question, polarity in questions:
-                report.append('  * %s' % question)
-                positiveSum = 0
-                questionSum = 0
-                for answerIndex in [5, 4, 3, 2, 1]:
-                    answerSum = classResults[questionIndex][answerIndex]
-                    if polarity == '+':
-                        if answerIndex >= 4:
-                            positiveSum += answerSum
-                    elif polarity == '-':
-                        if answerIndex <= 2:
-                            positiveSum += answerSum
-                    else:
-                        raise RuntimeError('Invalid polarity')
-                    questionSum += answerIndex * answerSum
-                    report.append('%30s: |%s%s| %3d%% %5d' % (
-                        answerMapping[answerIndex],
-                        '=' * answerSum, ' ' * (classSize - answerSum),
-                        100. * answerSum / classSize,
-                        answerSum,
-                    ))
-                if polarity == '+':
-                    questionMean = 1. * questionSum / classSize
-                elif polarity == '-':
-                    questionMean = 6 - 1. * questionSum / classSize
-                questionRating = 100. * positiveSum / classSize
-                groupRatings.append(questionRating)
-                report.append(u'%60s:   %3d%%' % (u'Положительные ответы', questionRating))
-                report.append(u'%60s:   %.1f' % (u'Средний балл', questionMean))
-                report.append('')
-            groupRating = sum(groupRatings) / len(groupRatings)
-            totalRatings.append(groupRating)
-            report.append(u'  Рейтинг: %3d%%' % groupRating)
-            report.append('\n')
-
-        report.append(u'Общий результат: %3d%%' % (sum(totalRatings) / len(totalRatings)))
-        report.append('\n')
-
-        yield '\n'.join(report)
+                report.AddAnswer(questionNumber, int(answer))
+        yield report.GetText(className)
