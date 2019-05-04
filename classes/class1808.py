@@ -17,6 +17,12 @@ class Class1808(paper.PaperGenerator):
                     '11-23', '11-24', '11-25', '11-26', '11-27',
                 ]),
             ]),
+            '2019-01-11': (ur'\twocolumns{30pt}{\variant \\ \variant}{\variant \\ \variant}', [
+                ('gendenshteyn-8', [
+                    '12-00-my-1', '12-00-my-2', '12-00-my-3', '12-04', '12-08',
+                    '12-10', '12-00-my-4', '12-00-my-5', '12-00-my-6',
+                ]),
+            ]),
             '2019-01-15': (ur'\twocolumns{30pt}{\threevariants{20pt}{\variant}}{\threevariants{20pt}{\variant}}', [
                 ('gendenshteyn-8', [
                     '12-00-my-4', '12-00-my-5', '12-00-my-6', '12-00-my-7'
