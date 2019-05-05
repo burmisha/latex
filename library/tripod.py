@@ -103,20 +103,33 @@ class Question(object):
     def GetTex(self):
         totalCount = self.GetTotalCount()
         result = [
-            ur'{{\bfseries {} $\rightarrow {}\%;\quad {:.1f}$}}'.format(
-                self.Text,
-                self.GetRating(),
-                self.GetMean()
-            ).replace('.', '{,}'),
+            ur'{{\bfseries {}}}'.format(self.Text),
             '',
+            '\\begin{tikzpicture}',
         ]
-        for answerIndex in [5, 4, 3, 2, 1]:
-            result.append('%s: %3d\\%% %5d\n' % (
-                self.__AnswerMapping[answerIndex],
-                # '=' * self.Answers[answerIndex], ' ' * (totalCount - self.Answers[answerIndex]),
-                100. * self.Answers[answerIndex] / totalCount,
-                self.Answers[answerIndex],
-            ))
+        y = 0
+        dy = -0.500001
+        colors = ['green', 'lime', 'orange', 'pink', 'red']
+        if self.Polarity == '-':
+            colors = colors[::-1]
+        for answerIndex, color in zip([5, 4, 3, 2, 1], colors):
+            rating = 100. * self.Answers[answerIndex] / totalCount
+            result.extend([
+                r'\node [left] at (0,%.1f) {%s};' % (y, self.__AnswerMapping[answerIndex]),
+                r'\node [left] at (1,%.1f) {%d\%%};' % (y, rating),
+                r'\draw [%s, line width=6] (1,%.1f) -- (%.2f,%.1f);' % (color, y, 1. + 2 * rating / 100, y),
+                r'\node [right] at (3,%.1f) {%d};' % (y, self.Answers[answerIndex]),
+            ])
+            y += dy
+        y += dy / 2
+        result.extend([
+            ur'\node [left] at (2.5,%.1f) {Положительные ответы:};' % y,
+            ur'\node at (3,%.1f) {%d\%%};' % (y, self.GetRating()),
+            ur'\node [left] at (2.5,%.1f) {Средний балл:};' % (y + dy),
+            ur'\node at (3,%.1f) {%.1f};' % (y + dy, self.GetMean()),
+        ])
+
+        result.append('\\end{tikzpicture}')
         result.append('')
         return '\n'.join(result)
 
@@ -173,7 +186,7 @@ class Dimension(object):
         ]
         for question in self.Questions:
             result.append(question.GetTex())
-        result.append('\n')
+        result.append('\n\\columnbreak\n')
         return '\n'.join(result)
 
 
@@ -218,9 +231,10 @@ class Report(object):
 
 Общий результат: {rating}\%
 
-\begin{{multicols}}{{2}}
+\columnsep=30pt
+\begin{{multicols*}}{{2}}
     {dimensions}
-\end{{multicols}}
+\end{{multicols*}}
 
 \end{{document}}
         
