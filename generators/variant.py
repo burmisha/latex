@@ -25,8 +25,6 @@ class VariantTask(object):
 
     def Shuffle(self, seed, minCount=None):
         tasks = list(self.All())
-        random.seed(seed)
-        random.shuffle(tasks)
         log.info('Got %d tasks for %r', len(tasks), self)
 
         if minCount:
@@ -35,6 +33,8 @@ class VariantTask(object):
                 log.info('  Expanding task %s to %d periods', self, periods)
             tasks *= periods
 
+        random.seed(seed)
+        random.shuffle(tasks)
         return tasks
 
 

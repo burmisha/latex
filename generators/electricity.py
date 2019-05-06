@@ -187,29 +187,67 @@ class SumTask(variant.VariantTask):
                 )
 
 
-LetterValue = collections.namedtuple('LetterValue', ['Letter', 'Value'])
+# LetterValue = collections.namedtuple('LetterValue', ['Letter', 'Value'])
+
+class Units(object):
+    def __init__(self, basic=None, standard=None, power=None):
+        self.Basic = basic
+        self.Standard = standard
+        self.Power = power
+
+
+class LetterValue(object):
+    def __init__(self, Letter=None, Value=None, units=None):
+        self.Letter = Letter
+        self.Value = Value
+        self.Units = units
+
+    def __format__(self, format):
+        value = self.Value
+        if value < 0:
+            value = '({})'.format(value)
+        if format == 'Task':
+            return u'{self.Letter}={self.Value}{self.Units.Basic}'.format(self=self)
+        elif format == 'Answer':
+            return u'{value} \\cdot 10^{{{self.Units.Power}}} \\cdot {self.Units.Standard}'.format(self=self, value=value)
+        else:
+            raise RuntimeError('Error on format %r' % format)
 
 
 class Potential728(variant.VariantTask):
     def __call__(self, l=None, q=None, E=None):
         # 728(737) - Rymkevich
+        answer = u'''
+            \\begin{{align*}}
+            A   = {E.Letter}{q.Letter}{l.Letter} 
+                = {E:Answer} \\cdot {q:Answer} \\cdot {l:Answer}
+                = {A:.2f} \\cdot 10^{{-7}} \\units{{Дж}}
+            \\end{{align*}}
+        '''.format(
+            A=1. * E.Value * q.Value * l.Value,
+            E=E,
+            q=q,
+            l=l,
+        )
         return problems.task.Task(u'''
-            В однородном электрическом поле напряжённостью ${E.Letter}={E.Value}\\funits{{кВ}}{{м}}$
-            переместили заряд ${q.Letter}={q.Value}\\units{{нКл}}$ в направлении силовой линии
-            на ${l.Letter}={l.Value}\\units{{см}}$. Определите работу поля, изменение потенциальной энергии заряда,
+            В однородном электрическом поле напряжённостью ${E:Task}$
+            переместили заряд ${q:Task}$ в направлении силовой линии
+            на ${l:Task}$. Определите работу поля, изменение потенциальной энергии заряда,
             напряжение между начальной и конечной точками перемещения.
         '''.format(
             l=l,
             q=q,
             E=E,
-        ))
+        ),
+        answer=answer,
+        )
 
     def All(self):
         for ql, qv, ll, lv, ev in itertools.product(['Q', 'q'], [-10, 10, -25, 25, -40, 40], ['l', 'r', 'd'], [2, 4, 5, 10], [2, 4, 20]):
             yield self.__call__(
-                E=LetterValue(Letter='E', Value=ev),
-                q=LetterValue(Letter=ql, Value=qv),
-                l=LetterValue(Letter=ll, Value=lv),
+                E=LetterValue(Letter='E', Value=ev, units=Units(basic=u'\\funits{кВ}{м}', standard=u'\\funits{В}{м}', power=3)),
+                q=LetterValue(Letter=ql, Value=qv, units=Units(basic=u'\\units{нКл}',  standard=u'\\units{Кл}', power=-9)),
+                l=LetterValue(Letter=ll, Value=lv, units=Units(basic=u'\\units{см}',  standard=u'\\units{м}', power=-2)),
             )
 
 
