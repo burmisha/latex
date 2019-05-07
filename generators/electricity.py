@@ -330,3 +330,87 @@ class Potential1621(variant.VariantTask):
                 v=LetterValue(Letter='v', Value=vv),
                 V=LetterValue(Letter='\\varphi', Value=Vv),
             )
+
+
+class Rymkevich748(variant.VariantTask):
+    def __call__(self, U=None, q=None):
+        return problems.task.Task(u'''
+            Определите ёмкость конденсатора, если при его зарядке до напряжения
+            ${U:Task}$ он приобретает заряд ${q:Task}$. 
+            Чему при этом равны заряды обкладок конденсатора (сделайте рисунок)?
+        '''.format(U=U, q=q),
+        )
+
+    def All(self):
+        for Ul, Uv, ql, qv in itertools.product(['U', 'V'], [2, 3, 5, 6, 12, 15, 20], ['Q', 'q'], [4, 6, 15, 18, 24, 25]):
+            yield self.__call__(
+                U=LetterValue(Letter=Ul, Value=Uv, units=Units(basic=u'\\units{кВ}', standard=u'\\units{В}', power=3)),
+                q=LetterValue(Letter=ql, Value=qv, units=Units(basic=u'\\units{нКл}', standard=u'\\units{Кл}', power=-9)),
+            )
+
+
+class Rymkevich750(variant.VariantTask):
+    def __call__(self, U=None, Q=None, C=None):
+        return problems.task.Task(u'''
+            На конденсаторе указано: ${C:Task}$, ${U:Task}$.
+            Удастся ли его использовать для накопления заряда ${Q:Task}$?
+        '''.format(U=U, Q=Q, C=C),
+        )
+
+    def All(self):
+        for Ul, Uv, Ql, Qv, Cv in itertools.product(['U', 'V'], [200, 300, 400, 450], ['Q', 'q'], [30, 50, 60], [50, 80, 100, 120, 150]):
+            yield self.__call__(
+                U=LetterValue(Letter=Ul, Value=Uv, units=Units(basic=u'\\units{кВ}', standard=u'\\units{В}', power=3)),
+                Q=LetterValue(Letter=Ql, Value=Qv, units=Units(basic=u'\\units{нКл}', standard=u'\\units{Кл}', power=-9)),
+                C=LetterValue(Letter='C', Value=Cv, units=Units(basic=u'\\units{пФ}', standard=u'\\units{Ф}', power=-12)),
+            )
+
+
+class Rymkevich751(variant.VariantTask):
+    def __call__(self, a=None, b=None):
+        return problems.task.Task(u'''
+            Как и во сколько раз изменится ёмкость плоского конденсатора при уменьшении площади пластин в {a} раз
+            и уменьшении расстояния между ними в {b} раз?
+        '''.format(a=a, b=b),
+        )
+
+    def All(self):
+        for a, b in itertools.product([2, 3, 4, 5, 6, 7, 8], [2, 3, 4, 5, 6, 7, 8]):
+            yield self.__call__(a=a, b=b)
+
+
+class Rymkevich762(variant.VariantTask):
+    def __call__(self, C=None, Q=None):
+        return problems.task.Task(u'''
+            Электрическая ёмкость конденсатора равна ${C:Task}$,
+            при этом ему сообщён заряд ${Q:Task}$. Какова энергия заряженного конденсатора?
+        '''.format(C=C, Q=Q),
+        )
+
+    def All(self):
+        for Ql, Qv, Cv in itertools.product(['Q', 'q'], [300, 500, 800, 900], [200, 400, 600, 750]):
+            yield self.__call__(
+                Q=LetterValue(Letter=Ql, Value=Qv, units=Units(basic=u'\\units{нКл}', standard=u'\\units{Кл}', power=-9)),
+                C=LetterValue(Letter='C', Value=Cv, units=Units(basic=u'\\units{пФ}', standard=u'\\units{Ф}', power=-12)),
+            )
+
+
+class Cond1(variant.VariantTask):
+    def __call__(self, C=None, U=None):
+        return problems.task.Task(u'''
+            Два конденсатора ёмкостей ${C[0]:Task}$ и ${C[1]:Task}$ последовательно подключают
+            к источнику напряжения ${U:Task}$ (см. рис.). Определите заряды каждого из конденсаторов.
+        '''.format(C=C, U=U),
+        )
+
+    def All(self):
+        for Ul, Uv, C1, C2 in itertools.product(['U', 'V'], [150, 200, 300, 400, 450], [20, 30, 40, 60], [20, 30, 40, 60]):
+            if C1 == C2:
+                continue
+            yield self.__call__(
+                U=LetterValue(Letter=Ul, Value=Uv, units=Units(basic=u'\\units{В}', standard=u'\\units{В}', power=0)),
+                C=[
+                    LetterValue(Letter='C_1', Value=C1, units=Units(basic=u'\\units{нФ}', standard=u'\\units{Ф}', power=-9)),
+                    LetterValue(Letter='C_2', Value=C2, units=Units(basic=u'\\units{нФ}', standard=u'\\units{Ф}', power=-9)),
+                ],
+            )

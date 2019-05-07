@@ -80,6 +80,13 @@ def generate(args):
                     generators.electricity.Potential2335(),
                     generators.electricity.Potential1621(),
                 ],
+                '2019-05-06': [
+                    generators.electricity.Rymkevich748(),
+                    generators.electricity.Rymkevich750(),
+                    generators.electricity.Rymkevich751(),
+                    generators.electricity.Rymkevich762(),
+                    generators.electricity.Cond1(),
+                ],
             },
             'class-2018-11': {
                 '2019-04-19': [
