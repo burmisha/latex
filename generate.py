@@ -18,10 +18,14 @@ def generate(args):
         return library.lucky.getLucky(args.lucky)
 
     fileWriter = library.files.FileWriter(args.filter)
-    if args.tripod:
+    tripodFormat = args.tripod
+    if tripodFormat:
+        getText = {
+            'tex': lambda r: r.GetTex(),
+            'txt': lambda r: r.GetText(),
+        }[tripodFormat]
         for className, report in library.tripod.getTripodReports():
-            fileWriter.Write(os.path.join('school-554', 'tripod'), className + '-tripod.tex', text=report.GetText())
-            # print reports
+            fileWriter.Write(os.path.join('school-554', 'tripod'), className + '-tripod.tex', text=getText(report))
         return
 
     generateProblems= False
@@ -31,8 +35,6 @@ def generate(args):
     generateProblems = True
     generateLists = True
     generateMultiple = True
-
-    fileWriter = library.files.FileWriter(args.filter)
 
     if generateProblems:
         tasksGenerators = [
@@ -140,7 +142,7 @@ def CreateArgumentsParser():
     parser.add_argument('--filter', help='Process only files matchin filter')
 
     parser.add_argument('-l', '--lucky', help='Get lucky people')
-    parser.add_argument('-t', '--tripod', help='Print tripod results', action='store_true')
+    parser.add_argument('-t', '--tripod', help='Print tripod results', choices=['tex', 'txt'])
 
     parser.set_defaults(func=generate)
 
