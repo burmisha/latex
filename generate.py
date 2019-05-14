@@ -89,6 +89,12 @@ def generate(args):
                     generators.electricity.Rymkevich762(),
                     generators.electricity.Cond1(),
                 ],
+                '2019-05-14': [
+                    generators.electricity.Rezistor1(),
+                    generators.electricity.Rezistor2(),
+                    generators.electricity.Rezistor3(),
+                    generators.electricity.Rezistor4(),
+                ],
             },
             'class-2018-11': {
                 '2019-04-19': [
@@ -105,7 +111,7 @@ def generate(args):
         }
         for className, dateTasks in classRandomTasks.iteritems():
             classLetter = className.split('-')[-1]
-            pupilsNames = list(library.pupils.getPupils(className, addMyself=True, onlyMe=False).Iterate())
+            pupilsNames = list(library.pupils.getPupils(className, addMyself=True, onlyMe=args.me).Iterate())
             for date, taskGenerators in dateTasks.iteritems():
                 multiplePaper = generators.variant.MultiplePaper(date, classLetter=classLetter)
                 if fileWriter.NotMatches(multiplePaper.GetFilename()):
@@ -115,7 +121,7 @@ def generate(args):
                 fileWriter.Write(
                     'school-554',
                     multiplePaper.GetFilename(),
-                    text=multiplePaper.GetTex(variants.Iterate(), withAnswers=False),
+                    text=multiplePaper.GetTex(variants.Iterate(), withAnswers=args.answers),
                 )
 
         if args.show_manual:
@@ -140,6 +146,8 @@ def CreateArgumentsParser():
 
     parser.add_argument('--show-manual', '--sm', help='Show manual files', action='store_true')
     parser.add_argument('--filter', help='Process only files matchin filter')
+    parser.add_argument('--me', help='Use only me mode', action='store_true')
+    parser.add_argument('--answers', help='save answers', action='store_true')
 
     parser.add_argument('-l', '--lucky', help='Get lucky people')
     parser.add_argument('-t', '--tripod', help='Print tripod results', choices=['tex', 'txt'])

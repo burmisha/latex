@@ -194,6 +194,7 @@ class Units(object):
         self.Basic = basic
         self.Standard = standard
         self.Power = power
+        assert (self.Basic == self.Standard) == (self.Power == 0)
 
 
 class LetterValue(object):
@@ -203,13 +204,26 @@ class LetterValue(object):
         self.Units = units
 
     def __format__(self, format):
-        value = self.Value
-        if value < 0:
-            value = '({})'.format(value)
+        if isinstance(self.Value, int):
+            fmt = '{:d}'
+        else:
+            fmt = '{:.2f}'
+        if self.Value < 0:
+            fmt = '(%s)' % fmt
+        value = fmt.format(self.Value).replace('.', '{,}')
         if format == 'Task':
             return u'{self.Letter}={self.Value}{self.Units.Basic}'.format(self=self)
+        elif format == 'Letter':
+            return u'{self.Letter}'.format(self=self)
+        elif format == 'Value':
+            return u'{self.Value}'.format(self=self)
+        elif format == 'ShortAnswer':
+            return u'{value}{self.Units.Basic}'.format(self=self, value=value)
         elif format == 'Answer':
-            return u'{value} \\cdot 10^{{{self.Units.Power}}} \\cdot {self.Units.Standard}'.format(self=self, value=value)
+            if self.Units.Power != 0:
+                return u'{value} \\cdot 10^{{{self.Units.Power}}} {self.Units.Standard}'.format(self=self, value=value)
+            else:
+                return u'{value} {self.Units.Standard}'.format(self=self, value=value)
         else:
             raise RuntimeError('Error on format %r' % format)
 
@@ -325,7 +339,7 @@ class Potential1621(variant.VariantTask):
         ))
 
     def All(self):
-        for vv, Vv, in itertools.product([3, 4, 6, 10, 12], [200, 400, 600, 800, 1000]):
+        for vv, Vv in itertools.product([3, 4, 6, 10, 12], [200, 400, 600, 800, 1000]):
             yield self.__call__(
                 v=LetterValue(Letter='v', Value=vv),
                 V=LetterValue(Letter='\\varphi', Value=Vv),
@@ -333,28 +347,57 @@ class Potential1621(variant.VariantTask):
 
 
 class Rymkevich748(variant.VariantTask):
-    def __call__(self, U=None, q=None):
+    def __call__(self, U=None, Q=None):
+        answer = u'''
+            ${Q.Letter} = {C.Letter}{U.Letter} \\implies 
+            {C.Letter} = \\frac{{{Q.Letter}}}{{{U.Letter}}} = \\frac{{{Q:Answer}}}{{{U:Answer}}} = {C:Answer} = {C:ShortAnswer}.
+            \\text{{ Заряды обкладок: ${Q.Letter}$ и $-{Q.Letter}$}}$
+        '''.format(
+            C=LetterValue(Letter='C', Value=1. * Q.Value / U.Value, units=Units(basic=u'\\units{пФ}', standard=u'\\units{Ф}', power=-12)),
+            U=U,
+            Q=Q,
+        )
         return problems.task.Task(u'''
             Определите ёмкость конденсатора, если при его зарядке до напряжения
-            ${U:Task}$ он приобретает заряд ${q:Task}$. 
+            ${U:Task}$ он приобретает заряд ${Q:Task}$. 
             Чему при этом равны заряды обкладок конденсатора (сделайте рисунок)?
-        '''.format(U=U, q=q),
+        '''.format(U=U, Q=Q),
+        answer=answer,
         )
 
     def All(self):
         for Ul, Uv, ql, qv in itertools.product(['U', 'V'], [2, 3, 5, 6, 12, 15, 20], ['Q', 'q'], [4, 6, 15, 18, 24, 25]):
             yield self.__call__(
                 U=LetterValue(Letter=Ul, Value=Uv, units=Units(basic=u'\\units{кВ}', standard=u'\\units{В}', power=3)),
-                q=LetterValue(Letter=ql, Value=qv, units=Units(basic=u'\\units{нКл}', standard=u'\\units{Кл}', power=-9)),
+                Q=LetterValue(Letter=ql, Value=qv, units=Units(basic=u'\\units{нКл}', standard=u'\\units{Кл}', power=-9)),
             )
 
 
 class Rymkevich750(variant.VariantTask):
     def __call__(self, U=None, Q=None, C=None):
+        resultQ = C.Value * U.Value
+        if resultQ >= Q.Value:
+            sign = '\\ge'
+            result = u'удастся'
+        else:
+            sign = '\\less'
+            result = u'не удастся'
+        answer = u'''
+            ${Q.Letter}' = {C.Letter}{U.Letter} = {C:Answer}\\cdot{U:Answer} = {Q:Answer} = {Q:ShortAnswer}
+            \\implies {Q.Letter}' {sign} {Q.Letter} \\implies \\text{{{result}}}$
+        '''.format(
+            Q=LetterValue(Letter=Q.Letter, Value=resultQ, units=Units(basic=u'\\units{нКл}', standard=u'\\units{Кл}', power=-9)),
+            U=U,
+            C=C,
+            sign=sign,
+            result=result,
+        )
+
         return problems.task.Task(u'''
             На конденсаторе указано: ${C:Task}$, ${U:Task}$.
             Удастся ли его использовать для накопления заряда ${Q:Task}$?
         '''.format(U=U, Q=Q, C=C),
+        answer=answer,
         )
 
     def All(self):
@@ -368,10 +411,30 @@ class Rymkevich750(variant.VariantTask):
 
 class Rymkevich751(variant.VariantTask):
     def __call__(self, a=None, b=None):
+        value = fractions.Fraction(numerator=b, denominator=a)
+        if value == 1:
+            sign = '='
+            result = u'не изменится'
+        else:
+            if value > 1:
+                sign = '>'
+                result = u'увеличится'
+            elif value < 1:
+                sign = '<'
+                result = u'уменьшится'
+                value = 1 / value
+            result += u' в $\\frac{value.numerator}{value.denominator}$ раз'.format(value=value)
+        answer = u'''
+            $\\frac{{C'}}{{C}}
+                = \\frac{{\\eps_0\\eps \\frac S{a}}}{{\\frac d{b}}} \\Big/ \\frac{{\\eps_0\\eps S}}{{d}}
+                = \\frac ba {sign} 1 \\implies \\text{{{result}}}
+            $
+        '''.format(a=a, b=b, sign=sign, result=result)
         return problems.task.Task(u'''
             Как и во сколько раз изменится ёмкость плоского конденсатора при уменьшении площади пластин в {a} раз
             и уменьшении расстояния между ними в {b} раз?
         '''.format(a=a, b=b),
+        answer=answer,
         )
 
     def All(self):
@@ -381,10 +444,27 @@ class Rymkevich751(variant.VariantTask):
 
 class Rymkevich762(variant.VariantTask):
     def __call__(self, C=None, Q=None):
+        answer = u'''
+            ${W:Letter}
+                = \\frac{{{Q:Letter}^2}}{{2{C:Letter}}}
+                =   \\frac{{
+                        \\sqr{{{Q:Answer}}}
+                    }}{{
+                        2\\cdot{C:Answer}
+                    }}
+                = {W:Answer} = {W:ShortAnswer}
+            $
+        '''.format(
+            C=C,
+            Q=Q,
+            W=LetterValue(Letter='W', Value=1. * Q.Value ** 2 / 2 / C.Value, units=Units(basic=u'\\units{мкДж}', standard=u'\\units{Дж}', power=-6)),
+        )
+        
         return problems.task.Task(u'''
             Электрическая ёмкость конденсатора равна ${C:Task}$,
             при этом ему сообщён заряд ${Q:Task}$. Какова энергия заряженного конденсатора?
         '''.format(C=C, Q=Q),
+        answer=answer,
         )
 
     def All(self):
@@ -397,10 +477,30 @@ class Rymkevich762(variant.VariantTask):
 
 class Cond1(variant.VariantTask):
     def __call__(self, C=None, U=None):
+        answer = u'''
+            $Q_1
+                = Q_2
+                = C{U:Letter}
+                = \\frac{{{U:Letter}}}{{\\frac1{{C_1}} + \\frac1{{C_2}}}}
+                = \\frac{{C_1C_2{U:Letter}}}{{C_1 + C_2}}
+                = \\frac{{
+                    {C[0]:Answer} \\cdot {C[1]:Answer} \\cdot {U:Answer}
+                }}{{
+                    {C[0]:Answer} + {C[1]:Answer}
+                }}
+                = {Q:Answer}
+                = {Q:ShortAnswer}
+            $
+        '''.format(
+            C=C,
+            U=U,
+            Q=LetterValue(Letter='Q', Value=1. * C[0].Value * C[1].Value * U.Value / (C[0].Value + C[1].Value), units=Units(basic=u'\\units{нКл}', standard=u'\\units{Кл}', power=-9))
+        )
         return problems.task.Task(u'''
             Два конденсатора ёмкостей ${C[0]:Task}$ и ${C[1]:Task}$ последовательно подключают
             к источнику напряжения ${U:Task}$ (см. рис.). Определите заряды каждого из конденсаторов.
         '''.format(C=C, U=U),
+        answer=answer,
         )
 
     def All(self):
@@ -414,3 +514,120 @@ class Cond1(variant.VariantTask):
                     LetterValue(Letter='C_2', Value=C2, units=Units(basic=u'\\units{нФ}', standard=u'\\units{Ф}', power=-9)),
                 ],
             )
+
+
+class Rezistor1(variant.VariantTask):
+    def __call__(self, R=None, I=None, U=None):
+        assert R and ((I is None) != (U is None))
+        if I:
+            text = u'''
+                Через резистор сопротивлением ${R:Task}$ протекает электрический ток ${I:Task}$.
+                Определите, чему равны напряжение на резисторе и мощность, выделяющаяся на нём.
+            '''.format(R=R, I=I)
+        elif U:
+            text = u'''
+                На резистор сопротивлением ${R:Task}$ подали напряжение ${U:Task}$.
+                Определите ток, который потечёт через резистор, и мощность, выделяющуюся на нём.
+            '''.format(R=R, U=U)
+        return problems.task.Task(text)
+
+    def All(self):
+        for rLetter, rValue in itertools.product(['r', 'R'], [5, 12, 18, 30]):
+            R = LetterValue(Letter=rLetter, Value=rValue, units=Units(basic=u'\\units{Ом}', standard=u'\\units{Ом}', power=0))
+            for iValue in [2, 3, 4, 5, 6, 8, 10, 15]:
+                yield self.__call__(
+                    I=LetterValue(Letter='\\mathcal{I}', Value=iValue, units=Units(basic=u'\\units{А}', standard=u'\\units{А}', power=0)),
+                    R=R,
+                )
+            for uLetter, uValue in itertools.product(['U', 'V'], [120, 150, 180, 240]):
+                yield self.__call__(
+                    U=LetterValue(Letter=uLetter, Value=uValue, units=Units(basic=u'\\units{В}', standard=u'\\units{В}', power=0)),
+                    R=R,
+                )
+
+
+class Rezistor2(variant.VariantTask):
+    def __call__(self, r=None, R=None, E=None, t=None):
+        text = u'''
+            Замкнутая электрическая цепь состоит из ЭДС ${E:Task}$ и сопротивлением ${r:Letter}$
+            и резистора ${R:Task}$. Определите ток, протекающий в цепи. Какая тепловая энергия выделится на резисторе за время
+            ${t:Task}$? Какая работа будет совершена ЭДС за это время? Каков знак этой работы? Чему равен КПД цепи? Вычислите значения для 2 случаев:
+            ${r:Letter}=0$ и ${r:Task}$.
+        '''.format(E=E, r=r, R=R, t=t)
+        return problems.task.Task(text)
+
+    def All(self):
+        for rValue, RValue, EValue, tValue in itertools.product([1, 2, 3, 4], [10, 15, 24, 30], [10, 20, 30, 60], [2, 5, 10]):
+            yield self.__call__(
+                E=LetterValue(Letter='\\mathcal{E}', Value=EValue, units=Units(basic=u'\\units{В}', standard=u'\\units{В}', power=0)),
+                R=LetterValue(Letter='R', Value=RValue, units=Units(basic=u'\\units{Ом}', standard=u'\\units{Ом}', power=0)),
+                r=LetterValue(Letter='r', Value=rValue, units=Units(basic=u'\\units{Ом}', standard=u'\\units{Ом}', power=0)),
+                t=LetterValue(Letter='\\tau', Value=rValue, units=Units(basic=u'\\units{с}', standard=u'\\units{с}', power=0)),
+            )
+
+
+class Rezistor3(variant.VariantTask):
+    def __call__(self, R=None):
+        text = u'''
+            Лампочки, сопротивления которых ${R[0]:Task}$ и ${R[1]:Task}$, поочерёдно подключённные к некоторому источнику тока,
+            потребляют одинаковую мощность. Найти внутреннее сопротивление источника и КПД цепи в каждом случае.
+        '''.format(R=R)
+        return problems.task.Task(text)
+
+    def All(self):
+        for RValues in [
+            (0.25, 16),
+            (0.25, 64),
+            (0.25, 4),
+            (0.5, 18),
+            (0.5, 2),
+            (0.5, 4.5),
+            (1, 4),
+            (1, 9),
+            (1, 49),
+            (3, 12),
+            (3, 48),
+            (4, 36),
+            (4, 100),
+            (5, 45),
+            (5, 80),
+            (6, 24),
+            (6, 54),
+        ]:
+            yield self.__call__(
+                R=[
+                    LetterValue(Letter='R_1', Value=RValues[0], units=Units(basic=u'\\units{Ом}', standard=u'\\units{Ом}', power=0)),
+                    LetterValue(Letter='R_2', Value=RValues[1], units=Units(basic=u'\\units{Ом}', standard=u'\\units{Ом}', power=0)),
+                ]
+            )
+
+
+class Rezistor4(variant.VariantTask):
+    def __call__(self, R=None, r=None, E=None):
+        text = u'''
+            Определите ток, протекающий через резистор ${R:Task}$ и разность потенциалов на нём (см. рис. на доске),
+            если ${r[0]:Task}$, ${r[1]:Task}$, ${E[0]:Task}$, ${E[1]:Task}$
+        '''.format(R=R, r=r, E=E)
+        return problems.task.Task(text)
+
+    def All(self):
+        for RValue, r1Value, r2Value, E1Value, E2Value in itertools.product(
+            [10, 12, 15, 18, 20],
+            [1, 2, 3],
+            [1, 2, 3],
+            [20, 30, 40, 60],
+            [20, 30, 40, 60],
+        ):
+            if r1Value != r2Value and E1Value != E2Value:
+                yield self.__call__(
+                    R = LetterValue(Letter='R', Value=RValue, units=Units(basic=u'\\units{Ом}', standard=u'\\units{Ом}', power=0)),
+                    r=[
+                        LetterValue(Letter='r_1', Value=r1Value, units=Units(basic=u'\\units{Ом}', standard=u'\\units{Ом}', power=0)),
+                        LetterValue(Letter='r_2', Value=r2Value, units=Units(basic=u'\\units{Ом}', standard=u'\\units{Ом}', power=0)),
+                    ],
+                    E=[
+                        LetterValue(Letter='\\mathcal{E}_1', Value=E1Value, units=Units(basic=u'\\units{В}', standard=u'\\units{В}', power=0)),
+                        LetterValue(Letter='\\mathcal{E}_2', Value=E2Value, units=Units(basic=u'\\units{В}', standard=u'\\units{В}', power=0)),
+                    ],
+                )
+
