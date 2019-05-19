@@ -90,3 +90,64 @@ class MultiplePaper(object):
         filename += '.tex'
         log.debug('Got filename %r', filename)
         return filename
+
+
+class Units(object):
+    def __init__(self, basic=None, standard=None, power=0):
+        self.Basic = basic
+        self.Standard = standard
+        self.Power = power
+        if self.Power == 0:
+            assert self.Standard is not None
+            if not self.Basic:
+                self.Basic = self.Standard
+            assert self.Basic == self.Standard
+        else:
+            assert self.Basic != self.Standard
+
+
+class LetterValue(object):
+    def __init__(self, Letter=None, Value=None, units=None):
+        self.Letter = Letter
+        self.Value = Value
+        self.Units = units
+
+    def __repr__(self):
+        return ' '.join([
+            'Letter: %r' % [self.Letter, type(self.Letter)],
+            'Value: %r' % [self.Value, type(self.Value)],
+            'Units: %r' % [self.Units, type(self.Units)],
+        ])
+
+    def __format__(self, format):
+        if isinstance(self.Value, int):
+            fmt = '{:d}'
+        else:
+            fmt = '{:.2f}'
+        if self.Value < 0:
+            fmt = '(%s)' % fmt
+        value = fmt.format(self.Value).replace('.', '{,}')
+        if ':' in format:
+            format, suffix = format.split(':')
+        else:
+            suffix = None
+        if format == 'Task':
+            result = u'{self.Letter}={self.Value}{self.Units.Basic}'.format(self=self)
+        elif format == 'Letter':
+            result = u'{self.Letter}'.format(self=self)
+        elif format == 'Value':
+            result = u'{self.Value}'.format(self=self).replace('.', '{,}')
+        elif format == 'ShortAnswer':
+            result = u'{value}{self.Units.Basic}'.format(self=self, value=value)
+        elif format == 'Answer':
+            if self.Units.Power != 0:
+                result = u'{value} \\cdot 10^{{{self.Units.Power}}} {self.Units.Standard}'.format(self=self, value=value)
+            else:
+                result = u'{value} {self.Units.Standard}'.format(self=self, value=value)
+        else:
+            raise RuntimeError('Error on format %r' % format)
+
+        if suffix == 's':
+            result = u'{ ' + result + ' }'
+
+        return result

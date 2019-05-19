@@ -6,6 +6,7 @@ import collections
 
 import problems
 import variant
+from variant import LetterValue, Units
 
 log = logging.getLogger(__name__)
 
@@ -187,69 +188,6 @@ class SumTask(variant.VariantTask):
                 )
 
 
-# LetterValue = collections.namedtuple('LetterValue', ['Letter', 'Value'])
-
-class Units(object):
-    def __init__(self, basic=None, standard=None, power=0):
-        self.Basic = basic
-        self.Standard = standard
-        self.Power = power
-        if self.Power == 0:
-            assert self.Standard is not None
-            if not self.Basic:
-                self.Basic = self.Standard
-            assert self.Basic == self.Standard
-        else:
-            assert self.Basic != self.Standard
-
-
-class LetterValue(object):
-    def __init__(self, Letter=None, Value=None, units=None):
-        self.Letter = Letter
-        self.Value = Value
-        self.Units = units
-
-    def __repr__(self):
-        return ' '.join([
-            'Letter: %r' % [self.Letter, type(self.Letter)],
-            'Value: %r' % [self.Value, type(self.Value)],
-            'Units: %r' % [self.Units, type(self.Units)],
-        ])
-
-    def __format__(self, format):
-        if isinstance(self.Value, int):
-            fmt = '{:d}'
-        else:
-            fmt = '{:.2f}'
-        if self.Value < 0:
-            fmt = '(%s)' % fmt
-        value = fmt.format(self.Value).replace('.', '{,}')
-        if ':' in format:
-            format, suffix = format.split(':')
-        else:
-            suffix = None
-        if format == 'Task':
-            result = u'{self.Letter}={self.Value}{self.Units.Basic}'.format(self=self)
-        elif format == 'Letter':
-            result = u'{self.Letter}'.format(self=self)
-        elif format == 'Value':
-            result = u'{self.Value}'.format(self=self).replace('.', '{,}')
-        elif format == 'ShortAnswer':
-            result = u'{value}{self.Units.Basic}'.format(self=self, value=value)
-        elif format == 'Answer':
-            if self.Units.Power != 0:
-                result = u'{value} \\cdot 10^{{{self.Units.Power}}} {self.Units.Standard}'.format(self=self, value=value)
-            else:
-                result = u'{value} {self.Units.Standard}'.format(self=self, value=value)
-        else:
-            raise RuntimeError('Error on format %r' % format)
-
-        if suffix == 's':
-            result = u'{ ' + result + ' }'
-
-        return result
-
-
 class Potential728(variant.VariantTask):
     def __call__(self, l=None, q=None, E=None):
         # 728(737) - Rymkevich
@@ -371,9 +309,9 @@ class Potential1621(variant.VariantTask):
 class Rymkevich748(variant.VariantTask):
     def __call__(self, U=None, Q=None):
         answer = u'''
-            ${Q.Letter} = {C.Letter}{U.Letter} \\implies
-            {C.Letter} = \\frac{{{Q.Letter}}}{{{U.Letter}}} = \\frac{{{Q:Answer}}}{{{U:Answer}}} = {C:Answer} = {C:ShortAnswer}.
-            \\text{{ Заряды обкладок: ${Q.Letter}$ и $-{Q.Letter}$}}$
+            ${Q:Letter} = {C:Letter}{U:Letter} \\implies
+            {C:Letter} = \\frac{Q:Letter:s}{U:Letter:s} = \\frac{Q:Answer:s}{U:Answer:s} = {C:Answer} = {C:ShortAnswer}.
+            \\text{{ Заряды обкладок: ${Q:Letter}$ и $-{Q:Letter}$}}$
         '''.format(
             C=LetterValue(Letter='C', Value=1. * Q.Value / U.Value, units=Units(basic=u'\\units{пФ}', standard=u'\\units{Ф}', power=-12)),
             U=U,
@@ -468,12 +406,8 @@ class Rymkevich762(variant.VariantTask):
     def __call__(self, C=None, Q=None):
         answer = u'''
             ${W:Letter}
-                = \\frac{{{Q:Letter}^2}}{{2{C:Letter}}}
-                =   \\frac{{
-                        \\sqr{{{Q:Answer}}}
-                    }}{{
-                        2\\cdot{C:Answer}
-                    }}
+                = \\frac{{ {Q:Letter}^2 }}{{ 2{C:Letter} }}
+                = \\frac{{ \\sqr{Q:Answer:s} }}{{ 2 \\cdot {C:Answer} }}
                 = {W:Answer} = {W:ShortAnswer}
             $
         '''.format(
@@ -530,7 +464,7 @@ class Cond1(variant.VariantTask):
             if C1 == C2:
                 continue
             yield self.__call__(
-                U=LetterValue(Letter=Ul, Value=Uv, units=Units(basic=u'\\units{В}', standard=u'\\units{В}', power=0)),
+                U=LetterValue(Letter=Ul, Value=Uv, units=Units(standard=u'\\units{В}')),
                 C=[
                     LetterValue(Letter='C_1', Value=C1, units=Units(basic=u'\\units{нФ}', standard=u'\\units{Ф}', power=-9)),
                     LetterValue(Letter='C_2', Value=C2, units=Units(basic=u'\\units{нФ}', standard=u'\\units{Ф}', power=-9)),
@@ -542,8 +476,8 @@ class Rezistor1(variant.VariantTask):
     def __call__(self, R=None, I=None, U=None):
         assert R and ((I is None) != (U is None))
         if I:
-            U = LetterValue(Letter='U', Value=I.Value * R.Value, units=Units(basic=u'\\units{В}', standard=u'\\units{В}', power=0))
-            P = LetterValue(Letter='P', Value=I.Value ** 2 * R.Value, units=Units(basic=u'\\units{Вт}', standard=u'\\units{Вт}', power=0))
+            U = LetterValue(Letter='U', Value=I.Value * R.Value, units=Units(standard=u'\\units{В}'))
+            P = LetterValue(Letter='P', Value=I.Value ** 2 * R.Value, units=Units(standard=u'\\units{Вт}'))
             text = u'''
                 Через резистор сопротивлением ${R:Task}$ протекает электрический ток ${I:Task}$.
                 Определите, чему равны напряжение на резисторе и мощность, выделяющаяся на нём.
@@ -555,8 +489,8 @@ class Rezistor1(variant.VariantTask):
                 \\end{{align*}}
             '''
         elif U:
-            I = LetterValue(Letter='\\mathcal{I}', Value=1. * U.Value / R.Value, units=Units(basic=u'\\units{А}', standard=u'\\units{А}', power=0))
-            P = LetterValue(Letter='P', Value=1. * U.Value ** 2 / R.Value, units=Units(basic=u'\\units{Вт}', standard=u'\\units{Вт}', power=0))
+            I = LetterValue(Letter='\\mathcal{I}', Value=1. * U.Value / R.Value, units=Units(standard=u'\\units{А}'))
+            P = LetterValue(Letter='P', Value=1. * U.Value ** 2 / R.Value, units=Units(standard=u'\\units{Вт}'))
             text = u'''
                 На резистор сопротивлением ${R:Task}$ подали напряжение ${U:Task}$.
                 Определите ток, который потечёт через резистор, и мощность, выделяющуюся на нём.
@@ -571,15 +505,15 @@ class Rezistor1(variant.VariantTask):
 
     def All(self):
         for rLetter, rValue in itertools.product(['r', 'R'], [5, 12, 18, 30]):
-            R = LetterValue(Letter=rLetter, Value=rValue, units=Units(basic=u'\\units{Ом}', standard=u'\\units{Ом}', power=0))
+            R = LetterValue(Letter=rLetter, Value=rValue, units=Units(standard=u'\\units{Ом}'))
             for iValue in [2, 3, 4, 5, 6, 8, 10, 15]:
                 yield self.__call__(
-                    I=LetterValue(Letter='\\mathcal{I}', Value=iValue, units=Units(basic=u'\\units{А}', standard=u'\\units{А}', power=0)),
+                    I=LetterValue(Letter='\\mathcal{I}', Value=iValue, units=Units(standard=u'\\units{А}')),
                     R=R,
                 )
             for uLetter, uValue in itertools.product(['U', 'V'], [120, 150, 180, 240]):
                 yield self.__call__(
-                    U=LetterValue(Letter=uLetter, Value=uValue, units=Units(basic=u'\\units{В}', standard=u'\\units{В}', power=0)),
+                    U=LetterValue(Letter=uLetter, Value=uValue, units=Units(standard=u'\\units{В}')),
                     R=R,
                 )
 
@@ -719,8 +653,8 @@ class Rezistor3(variant.VariantTask):
         ]:
             yield self.__call__(
                 R=[
-                    LetterValue(Letter='R_1', Value=RValues[0], units=Units(basic=u'\\units{Ом}', standard=u'\\units{Ом}', power=0)),
-                    LetterValue(Letter='R_2', Value=RValues[1], units=Units(basic=u'\\units{Ом}', standard=u'\\units{Ом}', power=0)),
+                    LetterValue(Letter='R_1', Value=RValues[0], units=Units(standard=u'\\units{Ом}')),
+                    LetterValue(Letter='R_2', Value=RValues[1], units=Units(standard=u'\\units{Ом}')),
                 ]
             )
 
@@ -743,14 +677,13 @@ class Rezistor4(variant.VariantTask):
         ):
             if r1Value != r2Value and E1Value != E2Value:
                 yield self.__call__(
-                    R = LetterValue(Letter='R', Value=RValue, units=Units(basic=u'\\units{Ом}', standard=u'\\units{Ом}', power=0)),
+                    R = LetterValue(Letter='R', Value=RValue, units=Units(standard=u'\\units{Ом}')),
                     r=[
-                        LetterValue(Letter='r_1', Value=r1Value, units=Units(basic=u'\\units{Ом}', standard=u'\\units{Ом}', power=0)),
-                        LetterValue(Letter='r_2', Value=r2Value, units=Units(basic=u'\\units{Ом}', standard=u'\\units{Ом}', power=0)),
+                        LetterValue(Letter='r_1', Value=r1Value, units=Units(standard=u'\\units{Ом}')),
+                        LetterValue(Letter='r_2', Value=r2Value, units=Units(standard=u'\\units{Ом}')),
                     ],
                     E=[
-                        LetterValue(Letter='\\mathcal{E}_1', Value=E1Value, units=Units(basic=u'\\units{В}', standard=u'\\units{В}', power=0)),
-                        LetterValue(Letter='\\mathcal{E}_2', Value=E2Value, units=Units(basic=u'\\units{В}', standard=u'\\units{В}', power=0)),
+                        LetterValue(Letter='\\mathcal{E}_1', Value=E1Value, units=Units(standard=u'\\units{В}')),
+                        LetterValue(Letter='\\mathcal{E}_2', Value=E2Value, units=Units(standard=u'\\units{В}')),
                     ],
                 )
-
