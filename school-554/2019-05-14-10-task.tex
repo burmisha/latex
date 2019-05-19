@@ -10,6 +10,12 @@
     На резистор сопротивлением $R=5\units{Ом}$ подали напряжение $V=150\units{В}$.
     Определите ток, который потечёт через резистор, и мощность, выделяющуюся на нём.
 }
+\answer{
+    \begin{align*}
+    \mathcal{I} &= \frac{ V }{ R } = \frac{ 150 \units{В} }{ 5 \units{Ом} } = 30{,}00 \units{А}, \\
+    P &= \frac{ V^2 }{ R } = \frac{ \sqr{ 150 \units{В} } }{ 5 \units{Ом} } = 4500{,}00 \units{Вт}
+    \end{align*}
+}
 \vspace{150pt}
 
 \tasknumber{2}\task{
@@ -20,12 +26,81 @@
     $\tau=4\units{с}$? Какая работа будет совершена ЭДС за это время? Каков знак этой работы? Чему равен КПД цепи? Вычислите значения для 2 случаев:
     $r=0$ и $r=4\units{Ом}$.
 }
+\answer{
+    \begin{align*}
+    \mathcal{I}_1
+                    &= \frac{ \mathcal{E} }{ R }
+                    = \frac{ 20 \units{В} }{ 30 \units{Ом} }
+                    = 0{,}67 \units{А}, \\
+    \mathcal{I}_2
+                    &= \frac{ \mathcal{E} }{ R + r }
+                    = \frac{ 20 \units{В} }{ 30 \units{Ом} + 4 \units{Ом} }
+                    = 0{,}59 \units{А}, \\
+    Q_1
+                    &= \mathcal{I}_1^2R\tau
+                    = \cbr{ \frac{ \mathcal{E} }{ R } }^2 R \tau
+                    = \cbr{ \frac{ 20 \units{В} }{ 30 \units{Ом} } }^2 \cdot 30 \units{Ом} \cdot 4 \units{с}
+                    = 53{,}33 \units{Дж}, \\
+    Q_2
+                    &= \mathcal{I}_2^2R\tau
+                    = \cbr{\frac{ \mathcal{E} }{ R + r } }^2 R \tau
+                    = \cbr{\frac{ 20 \units{В} }{ 30 \units{Ом} + 4 \units{Ом} } }^2 \cdot 30 \units{Ом} \cdot 4 \units{с}
+                    = 41{,}52 \units{Дж}, \\
+    A_1
+                    &= \mathcal{I}_1\tau\mathcal{E}
+                    = \frac{ \mathcal{E} }{ R } \tau \mathcal{E}
+                    = \frac{ \mathcal{E}^2 \tau }{ R }
+                    = \frac{ \sqr{ 20 \units{В} } \cdot 4 \units{с} }{ 30 \units{Ом} }
+                    = 53{,}33 \units{Дж}, \text{положительна}, \\
+    A_2
+                    &= \mathcal{I}_2\tau\mathcal{E}
+                    = \frac{ \mathcal{E} }{ R + r } \tau \mathcal{E}
+                    = \frac{ \mathcal{E}^2 \tau }{ R + r }
+                    = \frac{ \sqr{ 20 \units{В} } \cdot 4 \units{с} }{ 30 \units{Ом} + 4 \units{Ом} }
+                    = 47{,}06 \units{Дж}, \text{положительна}, \\
+    \eta_1
+                    &= \frac{ Q_1 }{ A_1 }
+                    = \ldots
+                    = \frac{ R }{ R }
+                    = 1, \\
+    \eta_2
+                    &= \frac{ Q_2 }{ A_2 }
+                    = \ldots
+                    = \frac{ R }{ R + r }
+                    = 0{,}882352941176
+    \end{align*}
+}
 \vspace{150pt}
 
 \tasknumber{3}\task{
     Лампочки, сопротивления которых $R_1=1\units{Ом}$ и $R_2=4\units{Ом}$, поочерёдно подключённные к некоторому источнику тока,
     потребляют одинаковую мощность.
     Найти внутреннее сопротивление источника и КПД цепи в каждом случае.
+}
+\answer{
+    \begin{align*}
+    P_1 &= \sqr{ \frac{ \mathcal{E} }{ R_1 + r } } R_1,
+    P_2  = \sqr{ \frac{ \mathcal{E} }{ R_2 + r } } R_2,
+    P_1 = P_2 \implies \\
+    &\implies R_1 \sqr{ R_2 + r } = R_2 \sqr{ R_1 + r } \implies \\
+    &\implies R_1 R_2^2 + 2 R_1 R_2 r + R_1 r^2 =
+                R_2 R_1^2 + 2 R_2 R_1 r + R_2 r^2  \implies \\
+    &\implies r^2 (R_2 - R_1) = R_2^2 R_2 - R_1^2 R_2 \implies \\
+    &\implies r
+        = \sqrt{ R_1 R_2 \frac{ R_2 - R_1 }{ R_2 - R_1 } }
+        = \sqrt{ R_1 R_2 }
+        = \sqrt{ 1 \units{Ом} \cdot 4 \units{Ом} }
+        = 2{,}00 \units{Ом}.
+        \\
+     \eta_1
+        &= \frac{ R_1 }{ R_1 + r }
+        = \frac{ \sqrt{ R_1 } }{ \sqrt{ R_1 } + \sqrt{ R_2 } }
+        = 0{,}333333333333, \\
+     \eta_2
+        &= \frac{ R_2 }{ R_2 + r }
+        = \frac{ \sqrt{ R_2 } }{ \sqrt{ R_2 } + \sqrt{ R_1 } }
+        = 0{,}666666666667
+    \end{align*}
 }
 \vspace{150pt}
 
@@ -42,6 +117,12 @@
     На резистор сопротивлением $R=12\units{Ом}$ подали напряжение $U=240\units{В}$.
     Определите ток, который потечёт через резистор, и мощность, выделяющуюся на нём.
 }
+\answer{
+    \begin{align*}
+    \mathcal{I} &= \frac{ U }{ R } = \frac{ 240 \units{В} }{ 12 \units{Ом} } = 20{,}00 \units{А}, \\
+    P &= \frac{ U^2 }{ R } = \frac{ \sqr{ 240 \units{В} } }{ 12 \units{Ом} } = 4800{,}00 \units{Вт}
+    \end{align*}
+}
 \vspace{150pt}
 
 \tasknumber{2}\task{
@@ -52,12 +133,81 @@
     $\tau=1\units{с}$? Какая работа будет совершена ЭДС за это время? Каков знак этой работы? Чему равен КПД цепи? Вычислите значения для 2 случаев:
     $r=0$ и $r=1\units{Ом}$.
 }
+\answer{
+    \begin{align*}
+    \mathcal{I}_1
+                    &= \frac{ \mathcal{E} }{ R }
+                    = \frac{ 10 \units{В} }{ 10 \units{Ом} }
+                    = 1{,}00 \units{А}, \\
+    \mathcal{I}_2
+                    &= \frac{ \mathcal{E} }{ R + r }
+                    = \frac{ 10 \units{В} }{ 10 \units{Ом} + 1 \units{Ом} }
+                    = 0{,}91 \units{А}, \\
+    Q_1
+                    &= \mathcal{I}_1^2R\tau
+                    = \cbr{ \frac{ \mathcal{E} }{ R } }^2 R \tau
+                    = \cbr{ \frac{ 10 \units{В} }{ 10 \units{Ом} } }^2 \cdot 10 \units{Ом} \cdot 1 \units{с}
+                    = 10{,}00 \units{Дж}, \\
+    Q_2
+                    &= \mathcal{I}_2^2R\tau
+                    = \cbr{\frac{ \mathcal{E} }{ R + r } }^2 R \tau
+                    = \cbr{\frac{ 10 \units{В} }{ 10 \units{Ом} + 1 \units{Ом} } }^2 \cdot 10 \units{Ом} \cdot 1 \units{с}
+                    = 8{,}26 \units{Дж}, \\
+    A_1
+                    &= \mathcal{I}_1\tau\mathcal{E}
+                    = \frac{ \mathcal{E} }{ R } \tau \mathcal{E}
+                    = \frac{ \mathcal{E}^2 \tau }{ R }
+                    = \frac{ \sqr{ 10 \units{В} } \cdot 1 \units{с} }{ 10 \units{Ом} }
+                    = 10{,}00 \units{Дж}, \text{положительна}, \\
+    A_2
+                    &= \mathcal{I}_2\tau\mathcal{E}
+                    = \frac{ \mathcal{E} }{ R + r } \tau \mathcal{E}
+                    = \frac{ \mathcal{E}^2 \tau }{ R + r }
+                    = \frac{ \sqr{ 10 \units{В} } \cdot 1 \units{с} }{ 10 \units{Ом} + 1 \units{Ом} }
+                    = 9{,}09 \units{Дж}, \text{положительна}, \\
+    \eta_1
+                    &= \frac{ Q_1 }{ A_1 }
+                    = \ldots
+                    = \frac{ R }{ R }
+                    = 1, \\
+    \eta_2
+                    &= \frac{ Q_2 }{ A_2 }
+                    = \ldots
+                    = \frac{ R }{ R + r }
+                    = 0{,}909090909091
+    \end{align*}
+}
 \vspace{150pt}
 
 \tasknumber{3}\task{
     Лампочки, сопротивления которых $R_1=0.5\units{Ом}$ и $R_2=4.5\units{Ом}$, поочерёдно подключённные к некоторому источнику тока,
     потребляют одинаковую мощность.
     Найти внутреннее сопротивление источника и КПД цепи в каждом случае.
+}
+\answer{
+    \begin{align*}
+    P_1 &= \sqr{ \frac{ \mathcal{E} }{ R_1 + r } } R_1,
+    P_2  = \sqr{ \frac{ \mathcal{E} }{ R_2 + r } } R_2,
+    P_1 = P_2 \implies \\
+    &\implies R_1 \sqr{ R_2 + r } = R_2 \sqr{ R_1 + r } \implies \\
+    &\implies R_1 R_2^2 + 2 R_1 R_2 r + R_1 r^2 =
+                R_2 R_1^2 + 2 R_2 R_1 r + R_2 r^2  \implies \\
+    &\implies r^2 (R_2 - R_1) = R_2^2 R_2 - R_1^2 R_2 \implies \\
+    &\implies r
+        = \sqrt{ R_1 R_2 \frac{ R_2 - R_1 }{ R_2 - R_1 } }
+        = \sqrt{ R_1 R_2 }
+        = \sqrt{ 0{,}50 \units{Ом} \cdot 4{,}50 \units{Ом} }
+        = 1{,}50 \units{Ом}.
+        \\
+     \eta_1
+        &= \frac{ R_1 }{ R_1 + r }
+        = \frac{ \sqrt{ R_1 } }{ \sqrt{ R_1 } + \sqrt{ R_2 } }
+        = 0{,}25, \\
+     \eta_2
+        &= \frac{ R_2 }{ R_2 + r }
+        = \frac{ \sqrt{ R_2 } }{ \sqrt{ R_2 } + \sqrt{ R_1 } }
+        = 0{,}75
+    \end{align*}
 }
 \vspace{150pt}
 
@@ -74,6 +224,12 @@
     На резистор сопротивлением $R=5\units{Ом}$ подали напряжение $V=180\units{В}$.
     Определите ток, который потечёт через резистор, и мощность, выделяющуюся на нём.
 }
+\answer{
+    \begin{align*}
+    \mathcal{I} &= \frac{ V }{ R } = \frac{ 180 \units{В} }{ 5 \units{Ом} } = 36{,}00 \units{А}, \\
+    P &= \frac{ V^2 }{ R } = \frac{ \sqr{ 180 \units{В} } }{ 5 \units{Ом} } = 6480{,}00 \units{Вт}
+    \end{align*}
+}
 \vspace{150pt}
 
 \tasknumber{2}\task{
@@ -84,12 +240,81 @@
     $\tau=1\units{с}$? Какая работа будет совершена ЭДС за это время? Каков знак этой работы? Чему равен КПД цепи? Вычислите значения для 2 случаев:
     $r=0$ и $r=1\units{Ом}$.
 }
+\answer{
+    \begin{align*}
+    \mathcal{I}_1
+                    &= \frac{ \mathcal{E} }{ R }
+                    = \frac{ 20 \units{В} }{ 15 \units{Ом} }
+                    = 1{,}33 \units{А}, \\
+    \mathcal{I}_2
+                    &= \frac{ \mathcal{E} }{ R + r }
+                    = \frac{ 20 \units{В} }{ 15 \units{Ом} + 1 \units{Ом} }
+                    = 1{,}25 \units{А}, \\
+    Q_1
+                    &= \mathcal{I}_1^2R\tau
+                    = \cbr{ \frac{ \mathcal{E} }{ R } }^2 R \tau
+                    = \cbr{ \frac{ 20 \units{В} }{ 15 \units{Ом} } }^2 \cdot 15 \units{Ом} \cdot 1 \units{с}
+                    = 26{,}67 \units{Дж}, \\
+    Q_2
+                    &= \mathcal{I}_2^2R\tau
+                    = \cbr{\frac{ \mathcal{E} }{ R + r } }^2 R \tau
+                    = \cbr{\frac{ 20 \units{В} }{ 15 \units{Ом} + 1 \units{Ом} } }^2 \cdot 15 \units{Ом} \cdot 1 \units{с}
+                    = 23{,}44 \units{Дж}, \\
+    A_1
+                    &= \mathcal{I}_1\tau\mathcal{E}
+                    = \frac{ \mathcal{E} }{ R } \tau \mathcal{E}
+                    = \frac{ \mathcal{E}^2 \tau }{ R }
+                    = \frac{ \sqr{ 20 \units{В} } \cdot 1 \units{с} }{ 15 \units{Ом} }
+                    = 26{,}67 \units{Дж}, \text{положительна}, \\
+    A_2
+                    &= \mathcal{I}_2\tau\mathcal{E}
+                    = \frac{ \mathcal{E} }{ R + r } \tau \mathcal{E}
+                    = \frac{ \mathcal{E}^2 \tau }{ R + r }
+                    = \frac{ \sqr{ 20 \units{В} } \cdot 1 \units{с} }{ 15 \units{Ом} + 1 \units{Ом} }
+                    = 25{,}00 \units{Дж}, \text{положительна}, \\
+    \eta_1
+                    &= \frac{ Q_1 }{ A_1 }
+                    = \ldots
+                    = \frac{ R }{ R }
+                    = 1, \\
+    \eta_2
+                    &= \frac{ Q_2 }{ A_2 }
+                    = \ldots
+                    = \frac{ R }{ R + r }
+                    = 0{,}9375
+    \end{align*}
+}
 \vspace{150pt}
 
 \tasknumber{3}\task{
     Лампочки, сопротивления которых $R_1=1\units{Ом}$ и $R_2=49\units{Ом}$, поочерёдно подключённные к некоторому источнику тока,
     потребляют одинаковую мощность.
     Найти внутреннее сопротивление источника и КПД цепи в каждом случае.
+}
+\answer{
+    \begin{align*}
+    P_1 &= \sqr{ \frac{ \mathcal{E} }{ R_1 + r } } R_1,
+    P_2  = \sqr{ \frac{ \mathcal{E} }{ R_2 + r } } R_2,
+    P_1 = P_2 \implies \\
+    &\implies R_1 \sqr{ R_2 + r } = R_2 \sqr{ R_1 + r } \implies \\
+    &\implies R_1 R_2^2 + 2 R_1 R_2 r + R_1 r^2 =
+                R_2 R_1^2 + 2 R_2 R_1 r + R_2 r^2  \implies \\
+    &\implies r^2 (R_2 - R_1) = R_2^2 R_2 - R_1^2 R_2 \implies \\
+    &\implies r
+        = \sqrt{ R_1 R_2 \frac{ R_2 - R_1 }{ R_2 - R_1 } }
+        = \sqrt{ R_1 R_2 }
+        = \sqrt{ 1 \units{Ом} \cdot 49 \units{Ом} }
+        = 7{,}00 \units{Ом}.
+        \\
+     \eta_1
+        &= \frac{ R_1 }{ R_1 + r }
+        = \frac{ \sqrt{ R_1 } }{ \sqrt{ R_1 } + \sqrt{ R_2 } }
+        = 0{,}125, \\
+     \eta_2
+        &= \frac{ R_2 }{ R_2 + r }
+        = \frac{ \sqrt{ R_2 } }{ \sqrt{ R_2 } + \sqrt{ R_1 } }
+        = 0{,}875
+    \end{align*}
 }
 \vspace{150pt}
 
@@ -106,6 +331,12 @@
     Через резистор сопротивлением $r=12\units{Ом}$ протекает электрический ток $\mathcal{I}=6\units{А}$.
     Определите, чему равны напряжение на резисторе и мощность, выделяющаяся на нём.
 }
+\answer{
+    \begin{align*}
+    U &= \mathcal{I}r = 6 \units{А} \cdot 12 \units{Ом} = 72 \units{В}, \\
+    P &= \mathcal{I}^2r = \sqr{ 6 \units{А} } \cdot 12 \units{Ом} = 432 \units{Вт}
+    \end{align*}
+}
 \vspace{150pt}
 
 \tasknumber{2}\task{
@@ -116,12 +347,81 @@
     $\tau=4\units{с}$? Какая работа будет совершена ЭДС за это время? Каков знак этой работы? Чему равен КПД цепи? Вычислите значения для 2 случаев:
     $r=0$ и $r=4\units{Ом}$.
 }
+\answer{
+    \begin{align*}
+    \mathcal{I}_1
+                    &= \frac{ \mathcal{E} }{ R }
+                    = \frac{ 20 \units{В} }{ 15 \units{Ом} }
+                    = 1{,}33 \units{А}, \\
+    \mathcal{I}_2
+                    &= \frac{ \mathcal{E} }{ R + r }
+                    = \frac{ 20 \units{В} }{ 15 \units{Ом} + 4 \units{Ом} }
+                    = 1{,}05 \units{А}, \\
+    Q_1
+                    &= \mathcal{I}_1^2R\tau
+                    = \cbr{ \frac{ \mathcal{E} }{ R } }^2 R \tau
+                    = \cbr{ \frac{ 20 \units{В} }{ 15 \units{Ом} } }^2 \cdot 15 \units{Ом} \cdot 4 \units{с}
+                    = 106{,}67 \units{Дж}, \\
+    Q_2
+                    &= \mathcal{I}_2^2R\tau
+                    = \cbr{\frac{ \mathcal{E} }{ R + r } }^2 R \tau
+                    = \cbr{\frac{ 20 \units{В} }{ 15 \units{Ом} + 4 \units{Ом} } }^2 \cdot 15 \units{Ом} \cdot 4 \units{с}
+                    = 66{,}48 \units{Дж}, \\
+    A_1
+                    &= \mathcal{I}_1\tau\mathcal{E}
+                    = \frac{ \mathcal{E} }{ R } \tau \mathcal{E}
+                    = \frac{ \mathcal{E}^2 \tau }{ R }
+                    = \frac{ \sqr{ 20 \units{В} } \cdot 4 \units{с} }{ 15 \units{Ом} }
+                    = 106{,}67 \units{Дж}, \text{положительна}, \\
+    A_2
+                    &= \mathcal{I}_2\tau\mathcal{E}
+                    = \frac{ \mathcal{E} }{ R + r } \tau \mathcal{E}
+                    = \frac{ \mathcal{E}^2 \tau }{ R + r }
+                    = \frac{ \sqr{ 20 \units{В} } \cdot 4 \units{с} }{ 15 \units{Ом} + 4 \units{Ом} }
+                    = 84{,}21 \units{Дж}, \text{положительна}, \\
+    \eta_1
+                    &= \frac{ Q_1 }{ A_1 }
+                    = \ldots
+                    = \frac{ R }{ R }
+                    = 1, \\
+    \eta_2
+                    &= \frac{ Q_2 }{ A_2 }
+                    = \ldots
+                    = \frac{ R }{ R + r }
+                    = 0{,}789473684211
+    \end{align*}
+}
 \vspace{150pt}
 
 \tasknumber{3}\task{
     Лампочки, сопротивления которых $R_1=1\units{Ом}$ и $R_2=4\units{Ом}$, поочерёдно подключённные к некоторому источнику тока,
     потребляют одинаковую мощность.
     Найти внутреннее сопротивление источника и КПД цепи в каждом случае.
+}
+\answer{
+    \begin{align*}
+    P_1 &= \sqr{ \frac{ \mathcal{E} }{ R_1 + r } } R_1,
+    P_2  = \sqr{ \frac{ \mathcal{E} }{ R_2 + r } } R_2,
+    P_1 = P_2 \implies \\
+    &\implies R_1 \sqr{ R_2 + r } = R_2 \sqr{ R_1 + r } \implies \\
+    &\implies R_1 R_2^2 + 2 R_1 R_2 r + R_1 r^2 =
+                R_2 R_1^2 + 2 R_2 R_1 r + R_2 r^2  \implies \\
+    &\implies r^2 (R_2 - R_1) = R_2^2 R_2 - R_1^2 R_2 \implies \\
+    &\implies r
+        = \sqrt{ R_1 R_2 \frac{ R_2 - R_1 }{ R_2 - R_1 } }
+        = \sqrt{ R_1 R_2 }
+        = \sqrt{ 1 \units{Ом} \cdot 4 \units{Ом} }
+        = 2{,}00 \units{Ом}.
+        \\
+     \eta_1
+        &= \frac{ R_1 }{ R_1 + r }
+        = \frac{ \sqrt{ R_1 } }{ \sqrt{ R_1 } + \sqrt{ R_2 } }
+        = 0{,}333333333333, \\
+     \eta_2
+        &= \frac{ R_2 }{ R_2 + r }
+        = \frac{ \sqrt{ R_2 } }{ \sqrt{ R_2 } + \sqrt{ R_1 } }
+        = 0{,}666666666667
+    \end{align*}
 }
 \vspace{150pt}
 
@@ -138,6 +438,12 @@
     На резистор сопротивлением $R=18\units{Ом}$ подали напряжение $U=240\units{В}$.
     Определите ток, который потечёт через резистор, и мощность, выделяющуюся на нём.
 }
+\answer{
+    \begin{align*}
+    \mathcal{I} &= \frac{ U }{ R } = \frac{ 240 \units{В} }{ 18 \units{Ом} } = 13{,}33 \units{А}, \\
+    P &= \frac{ U^2 }{ R } = \frac{ \sqr{ 240 \units{В} } }{ 18 \units{Ом} } = 3200{,}00 \units{Вт}
+    \end{align*}
+}
 \vspace{150pt}
 
 \tasknumber{2}\task{
@@ -148,12 +454,81 @@
     $\tau=4\units{с}$? Какая работа будет совершена ЭДС за это время? Каков знак этой работы? Чему равен КПД цепи? Вычислите значения для 2 случаев:
     $r=0$ и $r=4\units{Ом}$.
 }
+\answer{
+    \begin{align*}
+    \mathcal{I}_1
+                    &= \frac{ \mathcal{E} }{ R }
+                    = \frac{ 10 \units{В} }{ 24 \units{Ом} }
+                    = 0{,}42 \units{А}, \\
+    \mathcal{I}_2
+                    &= \frac{ \mathcal{E} }{ R + r }
+                    = \frac{ 10 \units{В} }{ 24 \units{Ом} + 4 \units{Ом} }
+                    = 0{,}36 \units{А}, \\
+    Q_1
+                    &= \mathcal{I}_1^2R\tau
+                    = \cbr{ \frac{ \mathcal{E} }{ R } }^2 R \tau
+                    = \cbr{ \frac{ 10 \units{В} }{ 24 \units{Ом} } }^2 \cdot 24 \units{Ом} \cdot 4 \units{с}
+                    = 16{,}67 \units{Дж}, \\
+    Q_2
+                    &= \mathcal{I}_2^2R\tau
+                    = \cbr{\frac{ \mathcal{E} }{ R + r } }^2 R \tau
+                    = \cbr{\frac{ 10 \units{В} }{ 24 \units{Ом} + 4 \units{Ом} } }^2 \cdot 24 \units{Ом} \cdot 4 \units{с}
+                    = 12{,}24 \units{Дж}, \\
+    A_1
+                    &= \mathcal{I}_1\tau\mathcal{E}
+                    = \frac{ \mathcal{E} }{ R } \tau \mathcal{E}
+                    = \frac{ \mathcal{E}^2 \tau }{ R }
+                    = \frac{ \sqr{ 10 \units{В} } \cdot 4 \units{с} }{ 24 \units{Ом} }
+                    = 16{,}67 \units{Дж}, \text{положительна}, \\
+    A_2
+                    &= \mathcal{I}_2\tau\mathcal{E}
+                    = \frac{ \mathcal{E} }{ R + r } \tau \mathcal{E}
+                    = \frac{ \mathcal{E}^2 \tau }{ R + r }
+                    = \frac{ \sqr{ 10 \units{В} } \cdot 4 \units{с} }{ 24 \units{Ом} + 4 \units{Ом} }
+                    = 14{,}29 \units{Дж}, \text{положительна}, \\
+    \eta_1
+                    &= \frac{ Q_1 }{ A_1 }
+                    = \ldots
+                    = \frac{ R }{ R }
+                    = 1, \\
+    \eta_2
+                    &= \frac{ Q_2 }{ A_2 }
+                    = \ldots
+                    = \frac{ R }{ R + r }
+                    = 0{,}857142857143
+    \end{align*}
+}
 \vspace{150pt}
 
 \tasknumber{3}\task{
     Лампочки, сопротивления которых $R_1=0.5\units{Ом}$ и $R_2=2\units{Ом}$, поочерёдно подключённные к некоторому источнику тока,
     потребляют одинаковую мощность.
     Найти внутреннее сопротивление источника и КПД цепи в каждом случае.
+}
+\answer{
+    \begin{align*}
+    P_1 &= \sqr{ \frac{ \mathcal{E} }{ R_1 + r } } R_1,
+    P_2  = \sqr{ \frac{ \mathcal{E} }{ R_2 + r } } R_2,
+    P_1 = P_2 \implies \\
+    &\implies R_1 \sqr{ R_2 + r } = R_2 \sqr{ R_1 + r } \implies \\
+    &\implies R_1 R_2^2 + 2 R_1 R_2 r + R_1 r^2 =
+                R_2 R_1^2 + 2 R_2 R_1 r + R_2 r^2  \implies \\
+    &\implies r^2 (R_2 - R_1) = R_2^2 R_2 - R_1^2 R_2 \implies \\
+    &\implies r
+        = \sqrt{ R_1 R_2 \frac{ R_2 - R_1 }{ R_2 - R_1 } }
+        = \sqrt{ R_1 R_2 }
+        = \sqrt{ 0{,}50 \units{Ом} \cdot 2 \units{Ом} }
+        = 1{,}00 \units{Ом}.
+        \\
+     \eta_1
+        &= \frac{ R_1 }{ R_1 + r }
+        = \frac{ \sqrt{ R_1 } }{ \sqrt{ R_1 } + \sqrt{ R_2 } }
+        = 0{,}333333333333, \\
+     \eta_2
+        &= \frac{ R_2 }{ R_2 + r }
+        = \frac{ \sqrt{ R_2 } }{ \sqrt{ R_2 } + \sqrt{ R_1 } }
+        = 0{,}666666666667
+    \end{align*}
 }
 \vspace{150pt}
 
@@ -170,6 +545,12 @@
     Через резистор сопротивлением $R=30\units{Ом}$ протекает электрический ток $\mathcal{I}=5\units{А}$.
     Определите, чему равны напряжение на резисторе и мощность, выделяющаяся на нём.
 }
+\answer{
+    \begin{align*}
+    U &= \mathcal{I}R = 5 \units{А} \cdot 30 \units{Ом} = 150 \units{В}, \\
+    P &= \mathcal{I}^2R = \sqr{ 5 \units{А} } \cdot 30 \units{Ом} = 750 \units{Вт}
+    \end{align*}
+}
 \vspace{150pt}
 
 \tasknumber{2}\task{
@@ -180,12 +561,81 @@
     $\tau=3\units{с}$? Какая работа будет совершена ЭДС за это время? Каков знак этой работы? Чему равен КПД цепи? Вычислите значения для 2 случаев:
     $r=0$ и $r=3\units{Ом}$.
 }
+\answer{
+    \begin{align*}
+    \mathcal{I}_1
+                    &= \frac{ \mathcal{E} }{ R }
+                    = \frac{ 20 \units{В} }{ 24 \units{Ом} }
+                    = 0{,}83 \units{А}, \\
+    \mathcal{I}_2
+                    &= \frac{ \mathcal{E} }{ R + r }
+                    = \frac{ 20 \units{В} }{ 24 \units{Ом} + 3 \units{Ом} }
+                    = 0{,}74 \units{А}, \\
+    Q_1
+                    &= \mathcal{I}_1^2R\tau
+                    = \cbr{ \frac{ \mathcal{E} }{ R } }^2 R \tau
+                    = \cbr{ \frac{ 20 \units{В} }{ 24 \units{Ом} } }^2 \cdot 24 \units{Ом} \cdot 3 \units{с}
+                    = 50{,}00 \units{Дж}, \\
+    Q_2
+                    &= \mathcal{I}_2^2R\tau
+                    = \cbr{\frac{ \mathcal{E} }{ R + r } }^2 R \tau
+                    = \cbr{\frac{ 20 \units{В} }{ 24 \units{Ом} + 3 \units{Ом} } }^2 \cdot 24 \units{Ом} \cdot 3 \units{с}
+                    = 39{,}51 \units{Дж}, \\
+    A_1
+                    &= \mathcal{I}_1\tau\mathcal{E}
+                    = \frac{ \mathcal{E} }{ R } \tau \mathcal{E}
+                    = \frac{ \mathcal{E}^2 \tau }{ R }
+                    = \frac{ \sqr{ 20 \units{В} } \cdot 3 \units{с} }{ 24 \units{Ом} }
+                    = 50{,}00 \units{Дж}, \text{положительна}, \\
+    A_2
+                    &= \mathcal{I}_2\tau\mathcal{E}
+                    = \frac{ \mathcal{E} }{ R + r } \tau \mathcal{E}
+                    = \frac{ \mathcal{E}^2 \tau }{ R + r }
+                    = \frac{ \sqr{ 20 \units{В} } \cdot 3 \units{с} }{ 24 \units{Ом} + 3 \units{Ом} }
+                    = 44{,}44 \units{Дж}, \text{положительна}, \\
+    \eta_1
+                    &= \frac{ Q_1 }{ A_1 }
+                    = \ldots
+                    = \frac{ R }{ R }
+                    = 1, \\
+    \eta_2
+                    &= \frac{ Q_2 }{ A_2 }
+                    = \ldots
+                    = \frac{ R }{ R + r }
+                    = 0{,}888888888889
+    \end{align*}
+}
 \vspace{150pt}
 
 \tasknumber{3}\task{
     Лампочки, сопротивления которых $R_1=3\units{Ом}$ и $R_2=12\units{Ом}$, поочерёдно подключённные к некоторому источнику тока,
     потребляют одинаковую мощность.
     Найти внутреннее сопротивление источника и КПД цепи в каждом случае.
+}
+\answer{
+    \begin{align*}
+    P_1 &= \sqr{ \frac{ \mathcal{E} }{ R_1 + r } } R_1,
+    P_2  = \sqr{ \frac{ \mathcal{E} }{ R_2 + r } } R_2,
+    P_1 = P_2 \implies \\
+    &\implies R_1 \sqr{ R_2 + r } = R_2 \sqr{ R_1 + r } \implies \\
+    &\implies R_1 R_2^2 + 2 R_1 R_2 r + R_1 r^2 =
+                R_2 R_1^2 + 2 R_2 R_1 r + R_2 r^2  \implies \\
+    &\implies r^2 (R_2 - R_1) = R_2^2 R_2 - R_1^2 R_2 \implies \\
+    &\implies r
+        = \sqrt{ R_1 R_2 \frac{ R_2 - R_1 }{ R_2 - R_1 } }
+        = \sqrt{ R_1 R_2 }
+        = \sqrt{ 3 \units{Ом} \cdot 12 \units{Ом} }
+        = 6{,}00 \units{Ом}.
+        \\
+     \eta_1
+        &= \frac{ R_1 }{ R_1 + r }
+        = \frac{ \sqrt{ R_1 } }{ \sqrt{ R_1 } + \sqrt{ R_2 } }
+        = 0{,}333333333333, \\
+     \eta_2
+        &= \frac{ R_2 }{ R_2 + r }
+        = \frac{ \sqrt{ R_2 } }{ \sqrt{ R_2 } + \sqrt{ R_1 } }
+        = 0{,}666666666667
+    \end{align*}
 }
 \vspace{150pt}
 
@@ -202,6 +652,12 @@
     Через резистор сопротивлением $r=12\units{Ом}$ протекает электрический ток $\mathcal{I}=5\units{А}$.
     Определите, чему равны напряжение на резисторе и мощность, выделяющаяся на нём.
 }
+\answer{
+    \begin{align*}
+    U &= \mathcal{I}r = 5 \units{А} \cdot 12 \units{Ом} = 60 \units{В}, \\
+    P &= \mathcal{I}^2r = \sqr{ 5 \units{А} } \cdot 12 \units{Ом} = 300 \units{Вт}
+    \end{align*}
+}
 \vspace{150pt}
 
 \tasknumber{2}\task{
@@ -212,12 +668,81 @@
     $\tau=1\units{с}$? Какая работа будет совершена ЭДС за это время? Каков знак этой работы? Чему равен КПД цепи? Вычислите значения для 2 случаев:
     $r=0$ и $r=1\units{Ом}$.
 }
+\answer{
+    \begin{align*}
+    \mathcal{I}_1
+                    &= \frac{ \mathcal{E} }{ R }
+                    = \frac{ 30 \units{В} }{ 15 \units{Ом} }
+                    = 2{,}00 \units{А}, \\
+    \mathcal{I}_2
+                    &= \frac{ \mathcal{E} }{ R + r }
+                    = \frac{ 30 \units{В} }{ 15 \units{Ом} + 1 \units{Ом} }
+                    = 1{,}88 \units{А}, \\
+    Q_1
+                    &= \mathcal{I}_1^2R\tau
+                    = \cbr{ \frac{ \mathcal{E} }{ R } }^2 R \tau
+                    = \cbr{ \frac{ 30 \units{В} }{ 15 \units{Ом} } }^2 \cdot 15 \units{Ом} \cdot 1 \units{с}
+                    = 60{,}00 \units{Дж}, \\
+    Q_2
+                    &= \mathcal{I}_2^2R\tau
+                    = \cbr{\frac{ \mathcal{E} }{ R + r } }^2 R \tau
+                    = \cbr{\frac{ 30 \units{В} }{ 15 \units{Ом} + 1 \units{Ом} } }^2 \cdot 15 \units{Ом} \cdot 1 \units{с}
+                    = 52{,}73 \units{Дж}, \\
+    A_1
+                    &= \mathcal{I}_1\tau\mathcal{E}
+                    = \frac{ \mathcal{E} }{ R } \tau \mathcal{E}
+                    = \frac{ \mathcal{E}^2 \tau }{ R }
+                    = \frac{ \sqr{ 30 \units{В} } \cdot 1 \units{с} }{ 15 \units{Ом} }
+                    = 60{,}00 \units{Дж}, \text{положительна}, \\
+    A_2
+                    &= \mathcal{I}_2\tau\mathcal{E}
+                    = \frac{ \mathcal{E} }{ R + r } \tau \mathcal{E}
+                    = \frac{ \mathcal{E}^2 \tau }{ R + r }
+                    = \frac{ \sqr{ 30 \units{В} } \cdot 1 \units{с} }{ 15 \units{Ом} + 1 \units{Ом} }
+                    = 56{,}25 \units{Дж}, \text{положительна}, \\
+    \eta_1
+                    &= \frac{ Q_1 }{ A_1 }
+                    = \ldots
+                    = \frac{ R }{ R }
+                    = 1, \\
+    \eta_2
+                    &= \frac{ Q_2 }{ A_2 }
+                    = \ldots
+                    = \frac{ R }{ R + r }
+                    = 0{,}9375
+    \end{align*}
+}
 \vspace{150pt}
 
 \tasknumber{3}\task{
     Лампочки, сопротивления которых $R_1=6\units{Ом}$ и $R_2=24\units{Ом}$, поочерёдно подключённные к некоторому источнику тока,
     потребляют одинаковую мощность.
     Найти внутреннее сопротивление источника и КПД цепи в каждом случае.
+}
+\answer{
+    \begin{align*}
+    P_1 &= \sqr{ \frac{ \mathcal{E} }{ R_1 + r } } R_1,
+    P_2  = \sqr{ \frac{ \mathcal{E} }{ R_2 + r } } R_2,
+    P_1 = P_2 \implies \\
+    &\implies R_1 \sqr{ R_2 + r } = R_2 \sqr{ R_1 + r } \implies \\
+    &\implies R_1 R_2^2 + 2 R_1 R_2 r + R_1 r^2 =
+                R_2 R_1^2 + 2 R_2 R_1 r + R_2 r^2  \implies \\
+    &\implies r^2 (R_2 - R_1) = R_2^2 R_2 - R_1^2 R_2 \implies \\
+    &\implies r
+        = \sqrt{ R_1 R_2 \frac{ R_2 - R_1 }{ R_2 - R_1 } }
+        = \sqrt{ R_1 R_2 }
+        = \sqrt{ 6 \units{Ом} \cdot 24 \units{Ом} }
+        = 12{,}00 \units{Ом}.
+        \\
+     \eta_1
+        &= \frac{ R_1 }{ R_1 + r }
+        = \frac{ \sqrt{ R_1 } }{ \sqrt{ R_1 } + \sqrt{ R_2 } }
+        = 0{,}333333333333, \\
+     \eta_2
+        &= \frac{ R_2 }{ R_2 + r }
+        = \frac{ \sqrt{ R_2 } }{ \sqrt{ R_2 } + \sqrt{ R_1 } }
+        = 0{,}666666666667
+    \end{align*}
 }
 \vspace{150pt}
 
@@ -234,6 +759,12 @@
     На резистор сопротивлением $R=18\units{Ом}$ подали напряжение $V=180\units{В}$.
     Определите ток, который потечёт через резистор, и мощность, выделяющуюся на нём.
 }
+\answer{
+    \begin{align*}
+    \mathcal{I} &= \frac{ V }{ R } = \frac{ 180 \units{В} }{ 18 \units{Ом} } = 10{,}00 \units{А}, \\
+    P &= \frac{ V^2 }{ R } = \frac{ \sqr{ 180 \units{В} } }{ 18 \units{Ом} } = 1800{,}00 \units{Вт}
+    \end{align*}
+}
 \vspace{150pt}
 
 \tasknumber{2}\task{
@@ -244,12 +775,81 @@
     $\tau=3\units{с}$? Какая работа будет совершена ЭДС за это время? Каков знак этой работы? Чему равен КПД цепи? Вычислите значения для 2 случаев:
     $r=0$ и $r=3\units{Ом}$.
 }
+\answer{
+    \begin{align*}
+    \mathcal{I}_1
+                    &= \frac{ \mathcal{E} }{ R }
+                    = \frac{ 20 \units{В} }{ 15 \units{Ом} }
+                    = 1{,}33 \units{А}, \\
+    \mathcal{I}_2
+                    &= \frac{ \mathcal{E} }{ R + r }
+                    = \frac{ 20 \units{В} }{ 15 \units{Ом} + 3 \units{Ом} }
+                    = 1{,}11 \units{А}, \\
+    Q_1
+                    &= \mathcal{I}_1^2R\tau
+                    = \cbr{ \frac{ \mathcal{E} }{ R } }^2 R \tau
+                    = \cbr{ \frac{ 20 \units{В} }{ 15 \units{Ом} } }^2 \cdot 15 \units{Ом} \cdot 3 \units{с}
+                    = 80{,}00 \units{Дж}, \\
+    Q_2
+                    &= \mathcal{I}_2^2R\tau
+                    = \cbr{\frac{ \mathcal{E} }{ R + r } }^2 R \tau
+                    = \cbr{\frac{ 20 \units{В} }{ 15 \units{Ом} + 3 \units{Ом} } }^2 \cdot 15 \units{Ом} \cdot 3 \units{с}
+                    = 55{,}56 \units{Дж}, \\
+    A_1
+                    &= \mathcal{I}_1\tau\mathcal{E}
+                    = \frac{ \mathcal{E} }{ R } \tau \mathcal{E}
+                    = \frac{ \mathcal{E}^2 \tau }{ R }
+                    = \frac{ \sqr{ 20 \units{В} } \cdot 3 \units{с} }{ 15 \units{Ом} }
+                    = 80{,}00 \units{Дж}, \text{положительна}, \\
+    A_2
+                    &= \mathcal{I}_2\tau\mathcal{E}
+                    = \frac{ \mathcal{E} }{ R + r } \tau \mathcal{E}
+                    = \frac{ \mathcal{E}^2 \tau }{ R + r }
+                    = \frac{ \sqr{ 20 \units{В} } \cdot 3 \units{с} }{ 15 \units{Ом} + 3 \units{Ом} }
+                    = 66{,}67 \units{Дж}, \text{положительна}, \\
+    \eta_1
+                    &= \frac{ Q_1 }{ A_1 }
+                    = \ldots
+                    = \frac{ R }{ R }
+                    = 1, \\
+    \eta_2
+                    &= \frac{ Q_2 }{ A_2 }
+                    = \ldots
+                    = \frac{ R }{ R + r }
+                    = 0{,}833333333333
+    \end{align*}
+}
 \vspace{150pt}
 
 \tasknumber{3}\task{
     Лампочки, сопротивления которых $R_1=5\units{Ом}$ и $R_2=80\units{Ом}$, поочерёдно подключённные к некоторому источнику тока,
     потребляют одинаковую мощность.
     Найти внутреннее сопротивление источника и КПД цепи в каждом случае.
+}
+\answer{
+    \begin{align*}
+    P_1 &= \sqr{ \frac{ \mathcal{E} }{ R_1 + r } } R_1,
+    P_2  = \sqr{ \frac{ \mathcal{E} }{ R_2 + r } } R_2,
+    P_1 = P_2 \implies \\
+    &\implies R_1 \sqr{ R_2 + r } = R_2 \sqr{ R_1 + r } \implies \\
+    &\implies R_1 R_2^2 + 2 R_1 R_2 r + R_1 r^2 =
+                R_2 R_1^2 + 2 R_2 R_1 r + R_2 r^2  \implies \\
+    &\implies r^2 (R_2 - R_1) = R_2^2 R_2 - R_1^2 R_2 \implies \\
+    &\implies r
+        = \sqrt{ R_1 R_2 \frac{ R_2 - R_1 }{ R_2 - R_1 } }
+        = \sqrt{ R_1 R_2 }
+        = \sqrt{ 5 \units{Ом} \cdot 80 \units{Ом} }
+        = 20{,}00 \units{Ом}.
+        \\
+     \eta_1
+        &= \frac{ R_1 }{ R_1 + r }
+        = \frac{ \sqrt{ R_1 } }{ \sqrt{ R_1 } + \sqrt{ R_2 } }
+        = 0{,}2, \\
+     \eta_2
+        &= \frac{ R_2 }{ R_2 + r }
+        = \frac{ \sqrt{ R_2 } }{ \sqrt{ R_2 } + \sqrt{ R_1 } }
+        = 0{,}8
+    \end{align*}
 }
 \vspace{150pt}
 
@@ -266,6 +866,12 @@
     На резистор сопротивлением $r=30\units{Ом}$ подали напряжение $V=120\units{В}$.
     Определите ток, который потечёт через резистор, и мощность, выделяющуюся на нём.
 }
+\answer{
+    \begin{align*}
+    \mathcal{I} &= \frac{ V }{ r } = \frac{ 120 \units{В} }{ 30 \units{Ом} } = 4{,}00 \units{А}, \\
+    P &= \frac{ V^2 }{ r } = \frac{ \sqr{ 120 \units{В} } }{ 30 \units{Ом} } = 480{,}00 \units{Вт}
+    \end{align*}
+}
 \vspace{150pt}
 
 \tasknumber{2}\task{
@@ -276,12 +882,81 @@
     $\tau=4\units{с}$? Какая работа будет совершена ЭДС за это время? Каков знак этой работы? Чему равен КПД цепи? Вычислите значения для 2 случаев:
     $r=0$ и $r=4\units{Ом}$.
 }
+\answer{
+    \begin{align*}
+    \mathcal{I}_1
+                    &= \frac{ \mathcal{E} }{ R }
+                    = \frac{ 30 \units{В} }{ 24 \units{Ом} }
+                    = 1{,}25 \units{А}, \\
+    \mathcal{I}_2
+                    &= \frac{ \mathcal{E} }{ R + r }
+                    = \frac{ 30 \units{В} }{ 24 \units{Ом} + 4 \units{Ом} }
+                    = 1{,}07 \units{А}, \\
+    Q_1
+                    &= \mathcal{I}_1^2R\tau
+                    = \cbr{ \frac{ \mathcal{E} }{ R } }^2 R \tau
+                    = \cbr{ \frac{ 30 \units{В} }{ 24 \units{Ом} } }^2 \cdot 24 \units{Ом} \cdot 4 \units{с}
+                    = 150{,}00 \units{Дж}, \\
+    Q_2
+                    &= \mathcal{I}_2^2R\tau
+                    = \cbr{\frac{ \mathcal{E} }{ R + r } }^2 R \tau
+                    = \cbr{\frac{ 30 \units{В} }{ 24 \units{Ом} + 4 \units{Ом} } }^2 \cdot 24 \units{Ом} \cdot 4 \units{с}
+                    = 110{,}20 \units{Дж}, \\
+    A_1
+                    &= \mathcal{I}_1\tau\mathcal{E}
+                    = \frac{ \mathcal{E} }{ R } \tau \mathcal{E}
+                    = \frac{ \mathcal{E}^2 \tau }{ R }
+                    = \frac{ \sqr{ 30 \units{В} } \cdot 4 \units{с} }{ 24 \units{Ом} }
+                    = 150{,}00 \units{Дж}, \text{положительна}, \\
+    A_2
+                    &= \mathcal{I}_2\tau\mathcal{E}
+                    = \frac{ \mathcal{E} }{ R + r } \tau \mathcal{E}
+                    = \frac{ \mathcal{E}^2 \tau }{ R + r }
+                    = \frac{ \sqr{ 30 \units{В} } \cdot 4 \units{с} }{ 24 \units{Ом} + 4 \units{Ом} }
+                    = 128{,}57 \units{Дж}, \text{положительна}, \\
+    \eta_1
+                    &= \frac{ Q_1 }{ A_1 }
+                    = \ldots
+                    = \frac{ R }{ R }
+                    = 1, \\
+    \eta_2
+                    &= \frac{ Q_2 }{ A_2 }
+                    = \ldots
+                    = \frac{ R }{ R + r }
+                    = 0{,}857142857143
+    \end{align*}
+}
 \vspace{150pt}
 
 \tasknumber{3}\task{
     Лампочки, сопротивления которых $R_1=1\units{Ом}$ и $R_2=49\units{Ом}$, поочерёдно подключённные к некоторому источнику тока,
     потребляют одинаковую мощность.
     Найти внутреннее сопротивление источника и КПД цепи в каждом случае.
+}
+\answer{
+    \begin{align*}
+    P_1 &= \sqr{ \frac{ \mathcal{E} }{ R_1 + r } } R_1,
+    P_2  = \sqr{ \frac{ \mathcal{E} }{ R_2 + r } } R_2,
+    P_1 = P_2 \implies \\
+    &\implies R_1 \sqr{ R_2 + r } = R_2 \sqr{ R_1 + r } \implies \\
+    &\implies R_1 R_2^2 + 2 R_1 R_2 r + R_1 r^2 =
+                R_2 R_1^2 + 2 R_2 R_1 r + R_2 r^2  \implies \\
+    &\implies r^2 (R_2 - R_1) = R_2^2 R_2 - R_1^2 R_2 \implies \\
+    &\implies r
+        = \sqrt{ R_1 R_2 \frac{ R_2 - R_1 }{ R_2 - R_1 } }
+        = \sqrt{ R_1 R_2 }
+        = \sqrt{ 1 \units{Ом} \cdot 49 \units{Ом} }
+        = 7{,}00 \units{Ом}.
+        \\
+     \eta_1
+        &= \frac{ R_1 }{ R_1 + r }
+        = \frac{ \sqrt{ R_1 } }{ \sqrt{ R_1 } + \sqrt{ R_2 } }
+        = 0{,}125, \\
+     \eta_2
+        &= \frac{ R_2 }{ R_2 + r }
+        = \frac{ \sqrt{ R_2 } }{ \sqrt{ R_2 } + \sqrt{ R_1 } }
+        = 0{,}875
+    \end{align*}
 }
 \vspace{150pt}
 
@@ -298,6 +973,12 @@
     На резистор сопротивлением $R=12\units{Ом}$ подали напряжение $U=180\units{В}$.
     Определите ток, который потечёт через резистор, и мощность, выделяющуюся на нём.
 }
+\answer{
+    \begin{align*}
+    \mathcal{I} &= \frac{ U }{ R } = \frac{ 180 \units{В} }{ 12 \units{Ом} } = 15{,}00 \units{А}, \\
+    P &= \frac{ U^2 }{ R } = \frac{ \sqr{ 180 \units{В} } }{ 12 \units{Ом} } = 2700{,}00 \units{Вт}
+    \end{align*}
+}
 \vspace{150pt}
 
 \tasknumber{2}\task{
@@ -308,12 +989,81 @@
     $\tau=1\units{с}$? Какая работа будет совершена ЭДС за это время? Каков знак этой работы? Чему равен КПД цепи? Вычислите значения для 2 случаев:
     $r=0$ и $r=1\units{Ом}$.
 }
+\answer{
+    \begin{align*}
+    \mathcal{I}_1
+                    &= \frac{ \mathcal{E} }{ R }
+                    = \frac{ 30 \units{В} }{ 15 \units{Ом} }
+                    = 2{,}00 \units{А}, \\
+    \mathcal{I}_2
+                    &= \frac{ \mathcal{E} }{ R + r }
+                    = \frac{ 30 \units{В} }{ 15 \units{Ом} + 1 \units{Ом} }
+                    = 1{,}88 \units{А}, \\
+    Q_1
+                    &= \mathcal{I}_1^2R\tau
+                    = \cbr{ \frac{ \mathcal{E} }{ R } }^2 R \tau
+                    = \cbr{ \frac{ 30 \units{В} }{ 15 \units{Ом} } }^2 \cdot 15 \units{Ом} \cdot 1 \units{с}
+                    = 60{,}00 \units{Дж}, \\
+    Q_2
+                    &= \mathcal{I}_2^2R\tau
+                    = \cbr{\frac{ \mathcal{E} }{ R + r } }^2 R \tau
+                    = \cbr{\frac{ 30 \units{В} }{ 15 \units{Ом} + 1 \units{Ом} } }^2 \cdot 15 \units{Ом} \cdot 1 \units{с}
+                    = 52{,}73 \units{Дж}, \\
+    A_1
+                    &= \mathcal{I}_1\tau\mathcal{E}
+                    = \frac{ \mathcal{E} }{ R } \tau \mathcal{E}
+                    = \frac{ \mathcal{E}^2 \tau }{ R }
+                    = \frac{ \sqr{ 30 \units{В} } \cdot 1 \units{с} }{ 15 \units{Ом} }
+                    = 60{,}00 \units{Дж}, \text{положительна}, \\
+    A_2
+                    &= \mathcal{I}_2\tau\mathcal{E}
+                    = \frac{ \mathcal{E} }{ R + r } \tau \mathcal{E}
+                    = \frac{ \mathcal{E}^2 \tau }{ R + r }
+                    = \frac{ \sqr{ 30 \units{В} } \cdot 1 \units{с} }{ 15 \units{Ом} + 1 \units{Ом} }
+                    = 56{,}25 \units{Дж}, \text{положительна}, \\
+    \eta_1
+                    &= \frac{ Q_1 }{ A_1 }
+                    = \ldots
+                    = \frac{ R }{ R }
+                    = 1, \\
+    \eta_2
+                    &= \frac{ Q_2 }{ A_2 }
+                    = \ldots
+                    = \frac{ R }{ R + r }
+                    = 0{,}9375
+    \end{align*}
+}
 \vspace{150pt}
 
 \tasknumber{3}\task{
     Лампочки, сопротивления которых $R_1=0.25\units{Ом}$ и $R_2=16\units{Ом}$, поочерёдно подключённные к некоторому источнику тока,
     потребляют одинаковую мощность.
     Найти внутреннее сопротивление источника и КПД цепи в каждом случае.
+}
+\answer{
+    \begin{align*}
+    P_1 &= \sqr{ \frac{ \mathcal{E} }{ R_1 + r } } R_1,
+    P_2  = \sqr{ \frac{ \mathcal{E} }{ R_2 + r } } R_2,
+    P_1 = P_2 \implies \\
+    &\implies R_1 \sqr{ R_2 + r } = R_2 \sqr{ R_1 + r } \implies \\
+    &\implies R_1 R_2^2 + 2 R_1 R_2 r + R_1 r^2 =
+                R_2 R_1^2 + 2 R_2 R_1 r + R_2 r^2  \implies \\
+    &\implies r^2 (R_2 - R_1) = R_2^2 R_2 - R_1^2 R_2 \implies \\
+    &\implies r
+        = \sqrt{ R_1 R_2 \frac{ R_2 - R_1 }{ R_2 - R_1 } }
+        = \sqrt{ R_1 R_2 }
+        = \sqrt{ 0{,}25 \units{Ом} \cdot 16 \units{Ом} }
+        = 2{,}00 \units{Ом}.
+        \\
+     \eta_1
+        &= \frac{ R_1 }{ R_1 + r }
+        = \frac{ \sqrt{ R_1 } }{ \sqrt{ R_1 } + \sqrt{ R_2 } }
+        = 0{,}111111111111, \\
+     \eta_2
+        &= \frac{ R_2 }{ R_2 + r }
+        = \frac{ \sqrt{ R_2 } }{ \sqrt{ R_2 } + \sqrt{ R_1 } }
+        = 0{,}888888888889
+    \end{align*}
 }
 \vspace{150pt}
 
@@ -330,6 +1080,12 @@
     Через резистор сопротивлением $R=12\units{Ом}$ протекает электрический ток $\mathcal{I}=2\units{А}$.
     Определите, чему равны напряжение на резисторе и мощность, выделяющаяся на нём.
 }
+\answer{
+    \begin{align*}
+    U &= \mathcal{I}R = 2 \units{А} \cdot 12 \units{Ом} = 24 \units{В}, \\
+    P &= \mathcal{I}^2R = \sqr{ 2 \units{А} } \cdot 12 \units{Ом} = 48 \units{Вт}
+    \end{align*}
+}
 \vspace{150pt}
 
 \tasknumber{2}\task{
@@ -340,12 +1096,81 @@
     $\tau=4\units{с}$? Какая работа будет совершена ЭДС за это время? Каков знак этой работы? Чему равен КПД цепи? Вычислите значения для 2 случаев:
     $r=0$ и $r=4\units{Ом}$.
 }
+\answer{
+    \begin{align*}
+    \mathcal{I}_1
+                    &= \frac{ \mathcal{E} }{ R }
+                    = \frac{ 30 \units{В} }{ 30 \units{Ом} }
+                    = 1{,}00 \units{А}, \\
+    \mathcal{I}_2
+                    &= \frac{ \mathcal{E} }{ R + r }
+                    = \frac{ 30 \units{В} }{ 30 \units{Ом} + 4 \units{Ом} }
+                    = 0{,}88 \units{А}, \\
+    Q_1
+                    &= \mathcal{I}_1^2R\tau
+                    = \cbr{ \frac{ \mathcal{E} }{ R } }^2 R \tau
+                    = \cbr{ \frac{ 30 \units{В} }{ 30 \units{Ом} } }^2 \cdot 30 \units{Ом} \cdot 4 \units{с}
+                    = 120{,}00 \units{Дж}, \\
+    Q_2
+                    &= \mathcal{I}_2^2R\tau
+                    = \cbr{\frac{ \mathcal{E} }{ R + r } }^2 R \tau
+                    = \cbr{\frac{ 30 \units{В} }{ 30 \units{Ом} + 4 \units{Ом} } }^2 \cdot 30 \units{Ом} \cdot 4 \units{с}
+                    = 93{,}43 \units{Дж}, \\
+    A_1
+                    &= \mathcal{I}_1\tau\mathcal{E}
+                    = \frac{ \mathcal{E} }{ R } \tau \mathcal{E}
+                    = \frac{ \mathcal{E}^2 \tau }{ R }
+                    = \frac{ \sqr{ 30 \units{В} } \cdot 4 \units{с} }{ 30 \units{Ом} }
+                    = 120{,}00 \units{Дж}, \text{положительна}, \\
+    A_2
+                    &= \mathcal{I}_2\tau\mathcal{E}
+                    = \frac{ \mathcal{E} }{ R + r } \tau \mathcal{E}
+                    = \frac{ \mathcal{E}^2 \tau }{ R + r }
+                    = \frac{ \sqr{ 30 \units{В} } \cdot 4 \units{с} }{ 30 \units{Ом} + 4 \units{Ом} }
+                    = 105{,}88 \units{Дж}, \text{положительна}, \\
+    \eta_1
+                    &= \frac{ Q_1 }{ A_1 }
+                    = \ldots
+                    = \frac{ R }{ R }
+                    = 1, \\
+    \eta_2
+                    &= \frac{ Q_2 }{ A_2 }
+                    = \ldots
+                    = \frac{ R }{ R + r }
+                    = 0{,}882352941176
+    \end{align*}
+}
 \vspace{150pt}
 
 \tasknumber{3}\task{
     Лампочки, сопротивления которых $R_1=5\units{Ом}$ и $R_2=45\units{Ом}$, поочерёдно подключённные к некоторому источнику тока,
     потребляют одинаковую мощность.
     Найти внутреннее сопротивление источника и КПД цепи в каждом случае.
+}
+\answer{
+    \begin{align*}
+    P_1 &= \sqr{ \frac{ \mathcal{E} }{ R_1 + r } } R_1,
+    P_2  = \sqr{ \frac{ \mathcal{E} }{ R_2 + r } } R_2,
+    P_1 = P_2 \implies \\
+    &\implies R_1 \sqr{ R_2 + r } = R_2 \sqr{ R_1 + r } \implies \\
+    &\implies R_1 R_2^2 + 2 R_1 R_2 r + R_1 r^2 =
+                R_2 R_1^2 + 2 R_2 R_1 r + R_2 r^2  \implies \\
+    &\implies r^2 (R_2 - R_1) = R_2^2 R_2 - R_1^2 R_2 \implies \\
+    &\implies r
+        = \sqrt{ R_1 R_2 \frac{ R_2 - R_1 }{ R_2 - R_1 } }
+        = \sqrt{ R_1 R_2 }
+        = \sqrt{ 5 \units{Ом} \cdot 45 \units{Ом} }
+        = 15{,}00 \units{Ом}.
+        \\
+     \eta_1
+        &= \frac{ R_1 }{ R_1 + r }
+        = \frac{ \sqrt{ R_1 } }{ \sqrt{ R_1 } + \sqrt{ R_2 } }
+        = 0{,}25, \\
+     \eta_2
+        &= \frac{ R_2 }{ R_2 + r }
+        = \frac{ \sqrt{ R_2 } }{ \sqrt{ R_2 } + \sqrt{ R_1 } }
+        = 0{,}75
+    \end{align*}
 }
 \vspace{150pt}
 
@@ -362,6 +1187,12 @@
     Через резистор сопротивлением $r=18\units{Ом}$ протекает электрический ток $\mathcal{I}=10\units{А}$.
     Определите, чему равны напряжение на резисторе и мощность, выделяющаяся на нём.
 }
+\answer{
+    \begin{align*}
+    U &= \mathcal{I}r = 10 \units{А} \cdot 18 \units{Ом} = 180 \units{В}, \\
+    P &= \mathcal{I}^2r = \sqr{ 10 \units{А} } \cdot 18 \units{Ом} = 1800 \units{Вт}
+    \end{align*}
+}
 \vspace{150pt}
 
 \tasknumber{2}\task{
@@ -372,12 +1203,81 @@
     $\tau=3\units{с}$? Какая работа будет совершена ЭДС за это время? Каков знак этой работы? Чему равен КПД цепи? Вычислите значения для 2 случаев:
     $r=0$ и $r=3\units{Ом}$.
 }
+\answer{
+    \begin{align*}
+    \mathcal{I}_1
+                    &= \frac{ \mathcal{E} }{ R }
+                    = \frac{ 10 \units{В} }{ 10 \units{Ом} }
+                    = 1{,}00 \units{А}, \\
+    \mathcal{I}_2
+                    &= \frac{ \mathcal{E} }{ R + r }
+                    = \frac{ 10 \units{В} }{ 10 \units{Ом} + 3 \units{Ом} }
+                    = 0{,}77 \units{А}, \\
+    Q_1
+                    &= \mathcal{I}_1^2R\tau
+                    = \cbr{ \frac{ \mathcal{E} }{ R } }^2 R \tau
+                    = \cbr{ \frac{ 10 \units{В} }{ 10 \units{Ом} } }^2 \cdot 10 \units{Ом} \cdot 3 \units{с}
+                    = 30{,}00 \units{Дж}, \\
+    Q_2
+                    &= \mathcal{I}_2^2R\tau
+                    = \cbr{\frac{ \mathcal{E} }{ R + r } }^2 R \tau
+                    = \cbr{\frac{ 10 \units{В} }{ 10 \units{Ом} + 3 \units{Ом} } }^2 \cdot 10 \units{Ом} \cdot 3 \units{с}
+                    = 17{,}75 \units{Дж}, \\
+    A_1
+                    &= \mathcal{I}_1\tau\mathcal{E}
+                    = \frac{ \mathcal{E} }{ R } \tau \mathcal{E}
+                    = \frac{ \mathcal{E}^2 \tau }{ R }
+                    = \frac{ \sqr{ 10 \units{В} } \cdot 3 \units{с} }{ 10 \units{Ом} }
+                    = 30{,}00 \units{Дж}, \text{положительна}, \\
+    A_2
+                    &= \mathcal{I}_2\tau\mathcal{E}
+                    = \frac{ \mathcal{E} }{ R + r } \tau \mathcal{E}
+                    = \frac{ \mathcal{E}^2 \tau }{ R + r }
+                    = \frac{ \sqr{ 10 \units{В} } \cdot 3 \units{с} }{ 10 \units{Ом} + 3 \units{Ом} }
+                    = 23{,}08 \units{Дж}, \text{положительна}, \\
+    \eta_1
+                    &= \frac{ Q_1 }{ A_1 }
+                    = \ldots
+                    = \frac{ R }{ R }
+                    = 1, \\
+    \eta_2
+                    &= \frac{ Q_2 }{ A_2 }
+                    = \ldots
+                    = \frac{ R }{ R + r }
+                    = 0{,}769230769231
+    \end{align*}
+}
 \vspace{150pt}
 
 \tasknumber{3}\task{
     Лампочки, сопротивления которых $R_1=4\units{Ом}$ и $R_2=36\units{Ом}$, поочерёдно подключённные к некоторому источнику тока,
     потребляют одинаковую мощность.
     Найти внутреннее сопротивление источника и КПД цепи в каждом случае.
+}
+\answer{
+    \begin{align*}
+    P_1 &= \sqr{ \frac{ \mathcal{E} }{ R_1 + r } } R_1,
+    P_2  = \sqr{ \frac{ \mathcal{E} }{ R_2 + r } } R_2,
+    P_1 = P_2 \implies \\
+    &\implies R_1 \sqr{ R_2 + r } = R_2 \sqr{ R_1 + r } \implies \\
+    &\implies R_1 R_2^2 + 2 R_1 R_2 r + R_1 r^2 =
+                R_2 R_1^2 + 2 R_2 R_1 r + R_2 r^2  \implies \\
+    &\implies r^2 (R_2 - R_1) = R_2^2 R_2 - R_1^2 R_2 \implies \\
+    &\implies r
+        = \sqrt{ R_1 R_2 \frac{ R_2 - R_1 }{ R_2 - R_1 } }
+        = \sqrt{ R_1 R_2 }
+        = \sqrt{ 4 \units{Ом} \cdot 36 \units{Ом} }
+        = 12{,}00 \units{Ом}.
+        \\
+     \eta_1
+        &= \frac{ R_1 }{ R_1 + r }
+        = \frac{ \sqrt{ R_1 } }{ \sqrt{ R_1 } + \sqrt{ R_2 } }
+        = 0{,}25, \\
+     \eta_2
+        &= \frac{ R_2 }{ R_2 + r }
+        = \frac{ \sqrt{ R_2 } }{ \sqrt{ R_2 } + \sqrt{ R_1 } }
+        = 0{,}75
+    \end{align*}
 }
 \vspace{150pt}
 
@@ -394,6 +1294,12 @@
     Через резистор сопротивлением $r=5\units{Ом}$ протекает электрический ток $\mathcal{I}=4\units{А}$.
     Определите, чему равны напряжение на резисторе и мощность, выделяющаяся на нём.
 }
+\answer{
+    \begin{align*}
+    U &= \mathcal{I}r = 4 \units{А} \cdot 5 \units{Ом} = 20 \units{В}, \\
+    P &= \mathcal{I}^2r = \sqr{ 4 \units{А} } \cdot 5 \units{Ом} = 80 \units{Вт}
+    \end{align*}
+}
 \vspace{150pt}
 
 \tasknumber{2}\task{
@@ -404,12 +1310,81 @@
     $\tau=3\units{с}$? Какая работа будет совершена ЭДС за это время? Каков знак этой работы? Чему равен КПД цепи? Вычислите значения для 2 случаев:
     $r=0$ и $r=3\units{Ом}$.
 }
+\answer{
+    \begin{align*}
+    \mathcal{I}_1
+                    &= \frac{ \mathcal{E} }{ R }
+                    = \frac{ 20 \units{В} }{ 10 \units{Ом} }
+                    = 2{,}00 \units{А}, \\
+    \mathcal{I}_2
+                    &= \frac{ \mathcal{E} }{ R + r }
+                    = \frac{ 20 \units{В} }{ 10 \units{Ом} + 3 \units{Ом} }
+                    = 1{,}54 \units{А}, \\
+    Q_1
+                    &= \mathcal{I}_1^2R\tau
+                    = \cbr{ \frac{ \mathcal{E} }{ R } }^2 R \tau
+                    = \cbr{ \frac{ 20 \units{В} }{ 10 \units{Ом} } }^2 \cdot 10 \units{Ом} \cdot 3 \units{с}
+                    = 120{,}00 \units{Дж}, \\
+    Q_2
+                    &= \mathcal{I}_2^2R\tau
+                    = \cbr{\frac{ \mathcal{E} }{ R + r } }^2 R \tau
+                    = \cbr{\frac{ 20 \units{В} }{ 10 \units{Ом} + 3 \units{Ом} } }^2 \cdot 10 \units{Ом} \cdot 3 \units{с}
+                    = 71{,}01 \units{Дж}, \\
+    A_1
+                    &= \mathcal{I}_1\tau\mathcal{E}
+                    = \frac{ \mathcal{E} }{ R } \tau \mathcal{E}
+                    = \frac{ \mathcal{E}^2 \tau }{ R }
+                    = \frac{ \sqr{ 20 \units{В} } \cdot 3 \units{с} }{ 10 \units{Ом} }
+                    = 120{,}00 \units{Дж}, \text{положительна}, \\
+    A_2
+                    &= \mathcal{I}_2\tau\mathcal{E}
+                    = \frac{ \mathcal{E} }{ R + r } \tau \mathcal{E}
+                    = \frac{ \mathcal{E}^2 \tau }{ R + r }
+                    = \frac{ \sqr{ 20 \units{В} } \cdot 3 \units{с} }{ 10 \units{Ом} + 3 \units{Ом} }
+                    = 92{,}31 \units{Дж}, \text{положительна}, \\
+    \eta_1
+                    &= \frac{ Q_1 }{ A_1 }
+                    = \ldots
+                    = \frac{ R }{ R }
+                    = 1, \\
+    \eta_2
+                    &= \frac{ Q_2 }{ A_2 }
+                    = \ldots
+                    = \frac{ R }{ R + r }
+                    = 0{,}769230769231
+    \end{align*}
+}
 \vspace{150pt}
 
 \tasknumber{3}\task{
     Лампочки, сопротивления которых $R_1=0.25\units{Ом}$ и $R_2=16\units{Ом}$, поочерёдно подключённные к некоторому источнику тока,
     потребляют одинаковую мощность.
     Найти внутреннее сопротивление источника и КПД цепи в каждом случае.
+}
+\answer{
+    \begin{align*}
+    P_1 &= \sqr{ \frac{ \mathcal{E} }{ R_1 + r } } R_1,
+    P_2  = \sqr{ \frac{ \mathcal{E} }{ R_2 + r } } R_2,
+    P_1 = P_2 \implies \\
+    &\implies R_1 \sqr{ R_2 + r } = R_2 \sqr{ R_1 + r } \implies \\
+    &\implies R_1 R_2^2 + 2 R_1 R_2 r + R_1 r^2 =
+                R_2 R_1^2 + 2 R_2 R_1 r + R_2 r^2  \implies \\
+    &\implies r^2 (R_2 - R_1) = R_2^2 R_2 - R_1^2 R_2 \implies \\
+    &\implies r
+        = \sqrt{ R_1 R_2 \frac{ R_2 - R_1 }{ R_2 - R_1 } }
+        = \sqrt{ R_1 R_2 }
+        = \sqrt{ 0{,}25 \units{Ом} \cdot 16 \units{Ом} }
+        = 2{,}00 \units{Ом}.
+        \\
+     \eta_1
+        &= \frac{ R_1 }{ R_1 + r }
+        = \frac{ \sqrt{ R_1 } }{ \sqrt{ R_1 } + \sqrt{ R_2 } }
+        = 0{,}111111111111, \\
+     \eta_2
+        &= \frac{ R_2 }{ R_2 + r }
+        = \frac{ \sqrt{ R_2 } }{ \sqrt{ R_2 } + \sqrt{ R_1 } }
+        = 0{,}888888888889
+    \end{align*}
 }
 \vspace{150pt}
 
@@ -426,6 +1401,12 @@
     На резистор сопротивлением $r=12\units{Ом}$ подали напряжение $U=240\units{В}$.
     Определите ток, который потечёт через резистор, и мощность, выделяющуюся на нём.
 }
+\answer{
+    \begin{align*}
+    \mathcal{I} &= \frac{ U }{ r } = \frac{ 240 \units{В} }{ 12 \units{Ом} } = 20{,}00 \units{А}, \\
+    P &= \frac{ U^2 }{ r } = \frac{ \sqr{ 240 \units{В} } }{ 12 \units{Ом} } = 4800{,}00 \units{Вт}
+    \end{align*}
+}
 \vspace{150pt}
 
 \tasknumber{2}\task{
@@ -436,12 +1417,81 @@
     $\tau=4\units{с}$? Какая работа будет совершена ЭДС за это время? Каков знак этой работы? Чему равен КПД цепи? Вычислите значения для 2 случаев:
     $r=0$ и $r=4\units{Ом}$.
 }
+\answer{
+    \begin{align*}
+    \mathcal{I}_1
+                    &= \frac{ \mathcal{E} }{ R }
+                    = \frac{ 30 \units{В} }{ 15 \units{Ом} }
+                    = 2{,}00 \units{А}, \\
+    \mathcal{I}_2
+                    &= \frac{ \mathcal{E} }{ R + r }
+                    = \frac{ 30 \units{В} }{ 15 \units{Ом} + 4 \units{Ом} }
+                    = 1{,}58 \units{А}, \\
+    Q_1
+                    &= \mathcal{I}_1^2R\tau
+                    = \cbr{ \frac{ \mathcal{E} }{ R } }^2 R \tau
+                    = \cbr{ \frac{ 30 \units{В} }{ 15 \units{Ом} } }^2 \cdot 15 \units{Ом} \cdot 4 \units{с}
+                    = 240{,}00 \units{Дж}, \\
+    Q_2
+                    &= \mathcal{I}_2^2R\tau
+                    = \cbr{\frac{ \mathcal{E} }{ R + r } }^2 R \tau
+                    = \cbr{\frac{ 30 \units{В} }{ 15 \units{Ом} + 4 \units{Ом} } }^2 \cdot 15 \units{Ом} \cdot 4 \units{с}
+                    = 149{,}58 \units{Дж}, \\
+    A_1
+                    &= \mathcal{I}_1\tau\mathcal{E}
+                    = \frac{ \mathcal{E} }{ R } \tau \mathcal{E}
+                    = \frac{ \mathcal{E}^2 \tau }{ R }
+                    = \frac{ \sqr{ 30 \units{В} } \cdot 4 \units{с} }{ 15 \units{Ом} }
+                    = 240{,}00 \units{Дж}, \text{положительна}, \\
+    A_2
+                    &= \mathcal{I}_2\tau\mathcal{E}
+                    = \frac{ \mathcal{E} }{ R + r } \tau \mathcal{E}
+                    = \frac{ \mathcal{E}^2 \tau }{ R + r }
+                    = \frac{ \sqr{ 30 \units{В} } \cdot 4 \units{с} }{ 15 \units{Ом} + 4 \units{Ом} }
+                    = 189{,}47 \units{Дж}, \text{положительна}, \\
+    \eta_1
+                    &= \frac{ Q_1 }{ A_1 }
+                    = \ldots
+                    = \frac{ R }{ R }
+                    = 1, \\
+    \eta_2
+                    &= \frac{ Q_2 }{ A_2 }
+                    = \ldots
+                    = \frac{ R }{ R + r }
+                    = 0{,}789473684211
+    \end{align*}
+}
 \vspace{150pt}
 
 \tasknumber{3}\task{
     Лампочки, сопротивления которых $R_1=3\units{Ом}$ и $R_2=48\units{Ом}$, поочерёдно подключённные к некоторому источнику тока,
     потребляют одинаковую мощность.
     Найти внутреннее сопротивление источника и КПД цепи в каждом случае.
+}
+\answer{
+    \begin{align*}
+    P_1 &= \sqr{ \frac{ \mathcal{E} }{ R_1 + r } } R_1,
+    P_2  = \sqr{ \frac{ \mathcal{E} }{ R_2 + r } } R_2,
+    P_1 = P_2 \implies \\
+    &\implies R_1 \sqr{ R_2 + r } = R_2 \sqr{ R_1 + r } \implies \\
+    &\implies R_1 R_2^2 + 2 R_1 R_2 r + R_1 r^2 =
+                R_2 R_1^2 + 2 R_2 R_1 r + R_2 r^2  \implies \\
+    &\implies r^2 (R_2 - R_1) = R_2^2 R_2 - R_1^2 R_2 \implies \\
+    &\implies r
+        = \sqrt{ R_1 R_2 \frac{ R_2 - R_1 }{ R_2 - R_1 } }
+        = \sqrt{ R_1 R_2 }
+        = \sqrt{ 3 \units{Ом} \cdot 48 \units{Ом} }
+        = 12{,}00 \units{Ом}.
+        \\
+     \eta_1
+        &= \frac{ R_1 }{ R_1 + r }
+        = \frac{ \sqrt{ R_1 } }{ \sqrt{ R_1 } + \sqrt{ R_2 } }
+        = 0{,}2, \\
+     \eta_2
+        &= \frac{ R_2 }{ R_2 + r }
+        = \frac{ \sqrt{ R_2 } }{ \sqrt{ R_2 } + \sqrt{ R_1 } }
+        = 0{,}8
+    \end{align*}
 }
 \vspace{150pt}
 
@@ -458,6 +1508,12 @@
     На резистор сопротивлением $r=30\units{Ом}$ подали напряжение $U=180\units{В}$.
     Определите ток, который потечёт через резистор, и мощность, выделяющуюся на нём.
 }
+\answer{
+    \begin{align*}
+    \mathcal{I} &= \frac{ U }{ r } = \frac{ 180 \units{В} }{ 30 \units{Ом} } = 6{,}00 \units{А}, \\
+    P &= \frac{ U^2 }{ r } = \frac{ \sqr{ 180 \units{В} } }{ 30 \units{Ом} } = 1080{,}00 \units{Вт}
+    \end{align*}
+}
 \vspace{150pt}
 
 \tasknumber{2}\task{
@@ -468,12 +1524,81 @@
     $\tau=4\units{с}$? Какая работа будет совершена ЭДС за это время? Каков знак этой работы? Чему равен КПД цепи? Вычислите значения для 2 случаев:
     $r=0$ и $r=4\units{Ом}$.
 }
+\answer{
+    \begin{align*}
+    \mathcal{I}_1
+                    &= \frac{ \mathcal{E} }{ R }
+                    = \frac{ 10 \units{В} }{ 30 \units{Ом} }
+                    = 0{,}33 \units{А}, \\
+    \mathcal{I}_2
+                    &= \frac{ \mathcal{E} }{ R + r }
+                    = \frac{ 10 \units{В} }{ 30 \units{Ом} + 4 \units{Ом} }
+                    = 0{,}29 \units{А}, \\
+    Q_1
+                    &= \mathcal{I}_1^2R\tau
+                    = \cbr{ \frac{ \mathcal{E} }{ R } }^2 R \tau
+                    = \cbr{ \frac{ 10 \units{В} }{ 30 \units{Ом} } }^2 \cdot 30 \units{Ом} \cdot 4 \units{с}
+                    = 13{,}33 \units{Дж}, \\
+    Q_2
+                    &= \mathcal{I}_2^2R\tau
+                    = \cbr{\frac{ \mathcal{E} }{ R + r } }^2 R \tau
+                    = \cbr{\frac{ 10 \units{В} }{ 30 \units{Ом} + 4 \units{Ом} } }^2 \cdot 30 \units{Ом} \cdot 4 \units{с}
+                    = 10{,}38 \units{Дж}, \\
+    A_1
+                    &= \mathcal{I}_1\tau\mathcal{E}
+                    = \frac{ \mathcal{E} }{ R } \tau \mathcal{E}
+                    = \frac{ \mathcal{E}^2 \tau }{ R }
+                    = \frac{ \sqr{ 10 \units{В} } \cdot 4 \units{с} }{ 30 \units{Ом} }
+                    = 13{,}33 \units{Дж}, \text{положительна}, \\
+    A_2
+                    &= \mathcal{I}_2\tau\mathcal{E}
+                    = \frac{ \mathcal{E} }{ R + r } \tau \mathcal{E}
+                    = \frac{ \mathcal{E}^2 \tau }{ R + r }
+                    = \frac{ \sqr{ 10 \units{В} } \cdot 4 \units{с} }{ 30 \units{Ом} + 4 \units{Ом} }
+                    = 11{,}76 \units{Дж}, \text{положительна}, \\
+    \eta_1
+                    &= \frac{ Q_1 }{ A_1 }
+                    = \ldots
+                    = \frac{ R }{ R }
+                    = 1, \\
+    \eta_2
+                    &= \frac{ Q_2 }{ A_2 }
+                    = \ldots
+                    = \frac{ R }{ R + r }
+                    = 0{,}882352941176
+    \end{align*}
+}
 \vspace{150pt}
 
 \tasknumber{3}\task{
     Лампочки, сопротивления которых $R_1=4\units{Ом}$ и $R_2=100\units{Ом}$, поочерёдно подключённные к некоторому источнику тока,
     потребляют одинаковую мощность.
     Найти внутреннее сопротивление источника и КПД цепи в каждом случае.
+}
+\answer{
+    \begin{align*}
+    P_1 &= \sqr{ \frac{ \mathcal{E} }{ R_1 + r } } R_1,
+    P_2  = \sqr{ \frac{ \mathcal{E} }{ R_2 + r } } R_2,
+    P_1 = P_2 \implies \\
+    &\implies R_1 \sqr{ R_2 + r } = R_2 \sqr{ R_1 + r } \implies \\
+    &\implies R_1 R_2^2 + 2 R_1 R_2 r + R_1 r^2 =
+                R_2 R_1^2 + 2 R_2 R_1 r + R_2 r^2  \implies \\
+    &\implies r^2 (R_2 - R_1) = R_2^2 R_2 - R_1^2 R_2 \implies \\
+    &\implies r
+        = \sqrt{ R_1 R_2 \frac{ R_2 - R_1 }{ R_2 - R_1 } }
+        = \sqrt{ R_1 R_2 }
+        = \sqrt{ 4 \units{Ом} \cdot 100 \units{Ом} }
+        = 20{,}00 \units{Ом}.
+        \\
+     \eta_1
+        &= \frac{ R_1 }{ R_1 + r }
+        = \frac{ \sqrt{ R_1 } }{ \sqrt{ R_1 } + \sqrt{ R_2 } }
+        = 0{,}166666666667, \\
+     \eta_2
+        &= \frac{ R_2 }{ R_2 + r }
+        = \frac{ \sqrt{ R_2 } }{ \sqrt{ R_2 } + \sqrt{ R_1 } }
+        = 0{,}833333333333
+    \end{align*}
 }
 \vspace{150pt}
 
@@ -490,6 +1615,12 @@
     На резистор сопротивлением $r=5\units{Ом}$ подали напряжение $U=120\units{В}$.
     Определите ток, который потечёт через резистор, и мощность, выделяющуюся на нём.
 }
+\answer{
+    \begin{align*}
+    \mathcal{I} &= \frac{ U }{ r } = \frac{ 120 \units{В} }{ 5 \units{Ом} } = 24{,}00 \units{А}, \\
+    P &= \frac{ U^2 }{ r } = \frac{ \sqr{ 120 \units{В} } }{ 5 \units{Ом} } = 2880{,}00 \units{Вт}
+    \end{align*}
+}
 \vspace{150pt}
 
 \tasknumber{2}\task{
@@ -500,12 +1631,81 @@
     $\tau=2\units{с}$? Какая работа будет совершена ЭДС за это время? Каков знак этой работы? Чему равен КПД цепи? Вычислите значения для 2 случаев:
     $r=0$ и $r=2\units{Ом}$.
 }
+\answer{
+    \begin{align*}
+    \mathcal{I}_1
+                    &= \frac{ \mathcal{E} }{ R }
+                    = \frac{ 20 \units{В} }{ 15 \units{Ом} }
+                    = 1{,}33 \units{А}, \\
+    \mathcal{I}_2
+                    &= \frac{ \mathcal{E} }{ R + r }
+                    = \frac{ 20 \units{В} }{ 15 \units{Ом} + 2 \units{Ом} }
+                    = 1{,}18 \units{А}, \\
+    Q_1
+                    &= \mathcal{I}_1^2R\tau
+                    = \cbr{ \frac{ \mathcal{E} }{ R } }^2 R \tau
+                    = \cbr{ \frac{ 20 \units{В} }{ 15 \units{Ом} } }^2 \cdot 15 \units{Ом} \cdot 2 \units{с}
+                    = 53{,}33 \units{Дж}, \\
+    Q_2
+                    &= \mathcal{I}_2^2R\tau
+                    = \cbr{\frac{ \mathcal{E} }{ R + r } }^2 R \tau
+                    = \cbr{\frac{ 20 \units{В} }{ 15 \units{Ом} + 2 \units{Ом} } }^2 \cdot 15 \units{Ом} \cdot 2 \units{с}
+                    = 41{,}52 \units{Дж}, \\
+    A_1
+                    &= \mathcal{I}_1\tau\mathcal{E}
+                    = \frac{ \mathcal{E} }{ R } \tau \mathcal{E}
+                    = \frac{ \mathcal{E}^2 \tau }{ R }
+                    = \frac{ \sqr{ 20 \units{В} } \cdot 2 \units{с} }{ 15 \units{Ом} }
+                    = 53{,}33 \units{Дж}, \text{положительна}, \\
+    A_2
+                    &= \mathcal{I}_2\tau\mathcal{E}
+                    = \frac{ \mathcal{E} }{ R + r } \tau \mathcal{E}
+                    = \frac{ \mathcal{E}^2 \tau }{ R + r }
+                    = \frac{ \sqr{ 20 \units{В} } \cdot 2 \units{с} }{ 15 \units{Ом} + 2 \units{Ом} }
+                    = 47{,}06 \units{Дж}, \text{положительна}, \\
+    \eta_1
+                    &= \frac{ Q_1 }{ A_1 }
+                    = \ldots
+                    = \frac{ R }{ R }
+                    = 1, \\
+    \eta_2
+                    &= \frac{ Q_2 }{ A_2 }
+                    = \ldots
+                    = \frac{ R }{ R + r }
+                    = 0{,}882352941176
+    \end{align*}
+}
 \vspace{150pt}
 
 \tasknumber{3}\task{
     Лампочки, сопротивления которых $R_1=3\units{Ом}$ и $R_2=12\units{Ом}$, поочерёдно подключённные к некоторому источнику тока,
     потребляют одинаковую мощность.
     Найти внутреннее сопротивление источника и КПД цепи в каждом случае.
+}
+\answer{
+    \begin{align*}
+    P_1 &= \sqr{ \frac{ \mathcal{E} }{ R_1 + r } } R_1,
+    P_2  = \sqr{ \frac{ \mathcal{E} }{ R_2 + r } } R_2,
+    P_1 = P_2 \implies \\
+    &\implies R_1 \sqr{ R_2 + r } = R_2 \sqr{ R_1 + r } \implies \\
+    &\implies R_1 R_2^2 + 2 R_1 R_2 r + R_1 r^2 =
+                R_2 R_1^2 + 2 R_2 R_1 r + R_2 r^2  \implies \\
+    &\implies r^2 (R_2 - R_1) = R_2^2 R_2 - R_1^2 R_2 \implies \\
+    &\implies r
+        = \sqrt{ R_1 R_2 \frac{ R_2 - R_1 }{ R_2 - R_1 } }
+        = \sqrt{ R_1 R_2 }
+        = \sqrt{ 3 \units{Ом} \cdot 12 \units{Ом} }
+        = 6{,}00 \units{Ом}.
+        \\
+     \eta_1
+        &= \frac{ R_1 }{ R_1 + r }
+        = \frac{ \sqrt{ R_1 } }{ \sqrt{ R_1 } + \sqrt{ R_2 } }
+        = 0{,}333333333333, \\
+     \eta_2
+        &= \frac{ R_2 }{ R_2 + r }
+        = \frac{ \sqrt{ R_2 } }{ \sqrt{ R_2 } + \sqrt{ R_1 } }
+        = 0{,}666666666667
+    \end{align*}
 }
 \vspace{150pt}
 
@@ -522,6 +1722,12 @@
     Через резистор сопротивлением $r=18\units{Ом}$ протекает электрический ток $\mathcal{I}=4\units{А}$.
     Определите, чему равны напряжение на резисторе и мощность, выделяющаяся на нём.
 }
+\answer{
+    \begin{align*}
+    U &= \mathcal{I}r = 4 \units{А} \cdot 18 \units{Ом} = 72 \units{В}, \\
+    P &= \mathcal{I}^2r = \sqr{ 4 \units{А} } \cdot 18 \units{Ом} = 288 \units{Вт}
+    \end{align*}
+}
 \vspace{150pt}
 
 \tasknumber{2}\task{
@@ -532,12 +1738,81 @@
     $\tau=2\units{с}$? Какая работа будет совершена ЭДС за это время? Каков знак этой работы? Чему равен КПД цепи? Вычислите значения для 2 случаев:
     $r=0$ и $r=2\units{Ом}$.
 }
+\answer{
+    \begin{align*}
+    \mathcal{I}_1
+                    &= \frac{ \mathcal{E} }{ R }
+                    = \frac{ 30 \units{В} }{ 10 \units{Ом} }
+                    = 3{,}00 \units{А}, \\
+    \mathcal{I}_2
+                    &= \frac{ \mathcal{E} }{ R + r }
+                    = \frac{ 30 \units{В} }{ 10 \units{Ом} + 2 \units{Ом} }
+                    = 2{,}50 \units{А}, \\
+    Q_1
+                    &= \mathcal{I}_1^2R\tau
+                    = \cbr{ \frac{ \mathcal{E} }{ R } }^2 R \tau
+                    = \cbr{ \frac{ 30 \units{В} }{ 10 \units{Ом} } }^2 \cdot 10 \units{Ом} \cdot 2 \units{с}
+                    = 180{,}00 \units{Дж}, \\
+    Q_2
+                    &= \mathcal{I}_2^2R\tau
+                    = \cbr{\frac{ \mathcal{E} }{ R + r } }^2 R \tau
+                    = \cbr{\frac{ 30 \units{В} }{ 10 \units{Ом} + 2 \units{Ом} } }^2 \cdot 10 \units{Ом} \cdot 2 \units{с}
+                    = 125{,}00 \units{Дж}, \\
+    A_1
+                    &= \mathcal{I}_1\tau\mathcal{E}
+                    = \frac{ \mathcal{E} }{ R } \tau \mathcal{E}
+                    = \frac{ \mathcal{E}^2 \tau }{ R }
+                    = \frac{ \sqr{ 30 \units{В} } \cdot 2 \units{с} }{ 10 \units{Ом} }
+                    = 180{,}00 \units{Дж}, \text{положительна}, \\
+    A_2
+                    &= \mathcal{I}_2\tau\mathcal{E}
+                    = \frac{ \mathcal{E} }{ R + r } \tau \mathcal{E}
+                    = \frac{ \mathcal{E}^2 \tau }{ R + r }
+                    = \frac{ \sqr{ 30 \units{В} } \cdot 2 \units{с} }{ 10 \units{Ом} + 2 \units{Ом} }
+                    = 150{,}00 \units{Дж}, \text{положительна}, \\
+    \eta_1
+                    &= \frac{ Q_1 }{ A_1 }
+                    = \ldots
+                    = \frac{ R }{ R }
+                    = 1, \\
+    \eta_2
+                    &= \frac{ Q_2 }{ A_2 }
+                    = \ldots
+                    = \frac{ R }{ R + r }
+                    = 0{,}833333333333
+    \end{align*}
+}
 \vspace{150pt}
 
 \tasknumber{3}\task{
     Лампочки, сопротивления которых $R_1=0.5\units{Ом}$ и $R_2=18\units{Ом}$, поочерёдно подключённные к некоторому источнику тока,
     потребляют одинаковую мощность.
     Найти внутреннее сопротивление источника и КПД цепи в каждом случае.
+}
+\answer{
+    \begin{align*}
+    P_1 &= \sqr{ \frac{ \mathcal{E} }{ R_1 + r } } R_1,
+    P_2  = \sqr{ \frac{ \mathcal{E} }{ R_2 + r } } R_2,
+    P_1 = P_2 \implies \\
+    &\implies R_1 \sqr{ R_2 + r } = R_2 \sqr{ R_1 + r } \implies \\
+    &\implies R_1 R_2^2 + 2 R_1 R_2 r + R_1 r^2 =
+                R_2 R_1^2 + 2 R_2 R_1 r + R_2 r^2  \implies \\
+    &\implies r^2 (R_2 - R_1) = R_2^2 R_2 - R_1^2 R_2 \implies \\
+    &\implies r
+        = \sqrt{ R_1 R_2 \frac{ R_2 - R_1 }{ R_2 - R_1 } }
+        = \sqrt{ R_1 R_2 }
+        = \sqrt{ 0{,}50 \units{Ом} \cdot 18 \units{Ом} }
+        = 3{,}00 \units{Ом}.
+        \\
+     \eta_1
+        &= \frac{ R_1 }{ R_1 + r }
+        = \frac{ \sqrt{ R_1 } }{ \sqrt{ R_1 } + \sqrt{ R_2 } }
+        = 0{,}142857142857, \\
+     \eta_2
+        &= \frac{ R_2 }{ R_2 + r }
+        = \frac{ \sqrt{ R_2 } }{ \sqrt{ R_2 } + \sqrt{ R_1 } }
+        = 0{,}857142857143
+    \end{align*}
 }
 \vspace{150pt}
 
@@ -554,6 +1829,12 @@
     Через резистор сопротивлением $r=5\units{Ом}$ протекает электрический ток $\mathcal{I}=5\units{А}$.
     Определите, чему равны напряжение на резисторе и мощность, выделяющаяся на нём.
 }
+\answer{
+    \begin{align*}
+    U &= \mathcal{I}r = 5 \units{А} \cdot 5 \units{Ом} = 25 \units{В}, \\
+    P &= \mathcal{I}^2r = \sqr{ 5 \units{А} } \cdot 5 \units{Ом} = 125 \units{Вт}
+    \end{align*}
+}
 \vspace{150pt}
 
 \tasknumber{2}\task{
@@ -564,12 +1845,81 @@
     $\tau=3\units{с}$? Какая работа будет совершена ЭДС за это время? Каков знак этой работы? Чему равен КПД цепи? Вычислите значения для 2 случаев:
     $r=0$ и $r=3\units{Ом}$.
 }
+\answer{
+    \begin{align*}
+    \mathcal{I}_1
+                    &= \frac{ \mathcal{E} }{ R }
+                    = \frac{ 30 \units{В} }{ 10 \units{Ом} }
+                    = 3{,}00 \units{А}, \\
+    \mathcal{I}_2
+                    &= \frac{ \mathcal{E} }{ R + r }
+                    = \frac{ 30 \units{В} }{ 10 \units{Ом} + 3 \units{Ом} }
+                    = 2{,}31 \units{А}, \\
+    Q_1
+                    &= \mathcal{I}_1^2R\tau
+                    = \cbr{ \frac{ \mathcal{E} }{ R } }^2 R \tau
+                    = \cbr{ \frac{ 30 \units{В} }{ 10 \units{Ом} } }^2 \cdot 10 \units{Ом} \cdot 3 \units{с}
+                    = 270{,}00 \units{Дж}, \\
+    Q_2
+                    &= \mathcal{I}_2^2R\tau
+                    = \cbr{\frac{ \mathcal{E} }{ R + r } }^2 R \tau
+                    = \cbr{\frac{ 30 \units{В} }{ 10 \units{Ом} + 3 \units{Ом} } }^2 \cdot 10 \units{Ом} \cdot 3 \units{с}
+                    = 159{,}76 \units{Дж}, \\
+    A_1
+                    &= \mathcal{I}_1\tau\mathcal{E}
+                    = \frac{ \mathcal{E} }{ R } \tau \mathcal{E}
+                    = \frac{ \mathcal{E}^2 \tau }{ R }
+                    = \frac{ \sqr{ 30 \units{В} } \cdot 3 \units{с} }{ 10 \units{Ом} }
+                    = 270{,}00 \units{Дж}, \text{положительна}, \\
+    A_2
+                    &= \mathcal{I}_2\tau\mathcal{E}
+                    = \frac{ \mathcal{E} }{ R + r } \tau \mathcal{E}
+                    = \frac{ \mathcal{E}^2 \tau }{ R + r }
+                    = \frac{ \sqr{ 30 \units{В} } \cdot 3 \units{с} }{ 10 \units{Ом} + 3 \units{Ом} }
+                    = 207{,}69 \units{Дж}, \text{положительна}, \\
+    \eta_1
+                    &= \frac{ Q_1 }{ A_1 }
+                    = \ldots
+                    = \frac{ R }{ R }
+                    = 1, \\
+    \eta_2
+                    &= \frac{ Q_2 }{ A_2 }
+                    = \ldots
+                    = \frac{ R }{ R + r }
+                    = 0{,}769230769231
+    \end{align*}
+}
 \vspace{150pt}
 
 \tasknumber{3}\task{
     Лампочки, сопротивления которых $R_1=6\units{Ом}$ и $R_2=24\units{Ом}$, поочерёдно подключённные к некоторому источнику тока,
     потребляют одинаковую мощность.
     Найти внутреннее сопротивление источника и КПД цепи в каждом случае.
+}
+\answer{
+    \begin{align*}
+    P_1 &= \sqr{ \frac{ \mathcal{E} }{ R_1 + r } } R_1,
+    P_2  = \sqr{ \frac{ \mathcal{E} }{ R_2 + r } } R_2,
+    P_1 = P_2 \implies \\
+    &\implies R_1 \sqr{ R_2 + r } = R_2 \sqr{ R_1 + r } \implies \\
+    &\implies R_1 R_2^2 + 2 R_1 R_2 r + R_1 r^2 =
+                R_2 R_1^2 + 2 R_2 R_1 r + R_2 r^2  \implies \\
+    &\implies r^2 (R_2 - R_1) = R_2^2 R_2 - R_1^2 R_2 \implies \\
+    &\implies r
+        = \sqrt{ R_1 R_2 \frac{ R_2 - R_1 }{ R_2 - R_1 } }
+        = \sqrt{ R_1 R_2 }
+        = \sqrt{ 6 \units{Ом} \cdot 24 \units{Ом} }
+        = 12{,}00 \units{Ом}.
+        \\
+     \eta_1
+        &= \frac{ R_1 }{ R_1 + r }
+        = \frac{ \sqrt{ R_1 } }{ \sqrt{ R_1 } + \sqrt{ R_2 } }
+        = 0{,}333333333333, \\
+     \eta_2
+        &= \frac{ R_2 }{ R_2 + r }
+        = \frac{ \sqrt{ R_2 } }{ \sqrt{ R_2 } + \sqrt{ R_1 } }
+        = 0{,}666666666667
+    \end{align*}
 }
 \vspace{150pt}
 
@@ -586,6 +1936,12 @@
     Через резистор сопротивлением $r=12\units{Ом}$ протекает электрический ток $\mathcal{I}=15\units{А}$.
     Определите, чему равны напряжение на резисторе и мощность, выделяющаяся на нём.
 }
+\answer{
+    \begin{align*}
+    U &= \mathcal{I}r = 15 \units{А} \cdot 12 \units{Ом} = 180 \units{В}, \\
+    P &= \mathcal{I}^2r = \sqr{ 15 \units{А} } \cdot 12 \units{Ом} = 2700 \units{Вт}
+    \end{align*}
+}
 \vspace{150pt}
 
 \tasknumber{2}\task{
@@ -596,12 +1952,81 @@
     $\tau=1\units{с}$? Какая работа будет совершена ЭДС за это время? Каков знак этой работы? Чему равен КПД цепи? Вычислите значения для 2 случаев:
     $r=0$ и $r=1\units{Ом}$.
 }
+\answer{
+    \begin{align*}
+    \mathcal{I}_1
+                    &= \frac{ \mathcal{E} }{ R }
+                    = \frac{ 60 \units{В} }{ 24 \units{Ом} }
+                    = 2{,}50 \units{А}, \\
+    \mathcal{I}_2
+                    &= \frac{ \mathcal{E} }{ R + r }
+                    = \frac{ 60 \units{В} }{ 24 \units{Ом} + 1 \units{Ом} }
+                    = 2{,}40 \units{А}, \\
+    Q_1
+                    &= \mathcal{I}_1^2R\tau
+                    = \cbr{ \frac{ \mathcal{E} }{ R } }^2 R \tau
+                    = \cbr{ \frac{ 60 \units{В} }{ 24 \units{Ом} } }^2 \cdot 24 \units{Ом} \cdot 1 \units{с}
+                    = 150{,}00 \units{Дж}, \\
+    Q_2
+                    &= \mathcal{I}_2^2R\tau
+                    = \cbr{\frac{ \mathcal{E} }{ R + r } }^2 R \tau
+                    = \cbr{\frac{ 60 \units{В} }{ 24 \units{Ом} + 1 \units{Ом} } }^2 \cdot 24 \units{Ом} \cdot 1 \units{с}
+                    = 138{,}24 \units{Дж}, \\
+    A_1
+                    &= \mathcal{I}_1\tau\mathcal{E}
+                    = \frac{ \mathcal{E} }{ R } \tau \mathcal{E}
+                    = \frac{ \mathcal{E}^2 \tau }{ R }
+                    = \frac{ \sqr{ 60 \units{В} } \cdot 1 \units{с} }{ 24 \units{Ом} }
+                    = 150{,}00 \units{Дж}, \text{положительна}, \\
+    A_2
+                    &= \mathcal{I}_2\tau\mathcal{E}
+                    = \frac{ \mathcal{E} }{ R + r } \tau \mathcal{E}
+                    = \frac{ \mathcal{E}^2 \tau }{ R + r }
+                    = \frac{ \sqr{ 60 \units{В} } \cdot 1 \units{с} }{ 24 \units{Ом} + 1 \units{Ом} }
+                    = 144{,}00 \units{Дж}, \text{положительна}, \\
+    \eta_1
+                    &= \frac{ Q_1 }{ A_1 }
+                    = \ldots
+                    = \frac{ R }{ R }
+                    = 1, \\
+    \eta_2
+                    &= \frac{ Q_2 }{ A_2 }
+                    = \ldots
+                    = \frac{ R }{ R + r }
+                    = 0{,}96
+    \end{align*}
+}
 \vspace{150pt}
 
 \tasknumber{3}\task{
     Лампочки, сопротивления которых $R_1=0.25\units{Ом}$ и $R_2=64\units{Ом}$, поочерёдно подключённные к некоторому источнику тока,
     потребляют одинаковую мощность.
     Найти внутреннее сопротивление источника и КПД цепи в каждом случае.
+}
+\answer{
+    \begin{align*}
+    P_1 &= \sqr{ \frac{ \mathcal{E} }{ R_1 + r } } R_1,
+    P_2  = \sqr{ \frac{ \mathcal{E} }{ R_2 + r } } R_2,
+    P_1 = P_2 \implies \\
+    &\implies R_1 \sqr{ R_2 + r } = R_2 \sqr{ R_1 + r } \implies \\
+    &\implies R_1 R_2^2 + 2 R_1 R_2 r + R_1 r^2 =
+                R_2 R_1^2 + 2 R_2 R_1 r + R_2 r^2  \implies \\
+    &\implies r^2 (R_2 - R_1) = R_2^2 R_2 - R_1^2 R_2 \implies \\
+    &\implies r
+        = \sqrt{ R_1 R_2 \frac{ R_2 - R_1 }{ R_2 - R_1 } }
+        = \sqrt{ R_1 R_2 }
+        = \sqrt{ 0{,}25 \units{Ом} \cdot 64 \units{Ом} }
+        = 4{,}00 \units{Ом}.
+        \\
+     \eta_1
+        &= \frac{ R_1 }{ R_1 + r }
+        = \frac{ \sqrt{ R_1 } }{ \sqrt{ R_1 } + \sqrt{ R_2 } }
+        = 0{,}0588235294118, \\
+     \eta_2
+        &= \frac{ R_2 }{ R_2 + r }
+        = \frac{ \sqrt{ R_2 } }{ \sqrt{ R_2 } + \sqrt{ R_1 } }
+        = 0{,}941176470588
+    \end{align*}
 }
 \vspace{150pt}
 
@@ -618,6 +2043,12 @@
     Через резистор сопротивлением $r=18\units{Ом}$ протекает электрический ток $\mathcal{I}=15\units{А}$.
     Определите, чему равны напряжение на резисторе и мощность, выделяющаяся на нём.
 }
+\answer{
+    \begin{align*}
+    U &= \mathcal{I}r = 15 \units{А} \cdot 18 \units{Ом} = 270 \units{В}, \\
+    P &= \mathcal{I}^2r = \sqr{ 15 \units{А} } \cdot 18 \units{Ом} = 4050 \units{Вт}
+    \end{align*}
+}
 \vspace{150pt}
 
 \tasknumber{2}\task{
@@ -628,12 +2059,81 @@
     $\tau=1\units{с}$? Какая работа будет совершена ЭДС за это время? Каков знак этой работы? Чему равен КПД цепи? Вычислите значения для 2 случаев:
     $r=0$ и $r=1\units{Ом}$.
 }
+\answer{
+    \begin{align*}
+    \mathcal{I}_1
+                    &= \frac{ \mathcal{E} }{ R }
+                    = \frac{ 20 \units{В} }{ 30 \units{Ом} }
+                    = 0{,}67 \units{А}, \\
+    \mathcal{I}_2
+                    &= \frac{ \mathcal{E} }{ R + r }
+                    = \frac{ 20 \units{В} }{ 30 \units{Ом} + 1 \units{Ом} }
+                    = 0{,}65 \units{А}, \\
+    Q_1
+                    &= \mathcal{I}_1^2R\tau
+                    = \cbr{ \frac{ \mathcal{E} }{ R } }^2 R \tau
+                    = \cbr{ \frac{ 20 \units{В} }{ 30 \units{Ом} } }^2 \cdot 30 \units{Ом} \cdot 1 \units{с}
+                    = 13{,}33 \units{Дж}, \\
+    Q_2
+                    &= \mathcal{I}_2^2R\tau
+                    = \cbr{\frac{ \mathcal{E} }{ R + r } }^2 R \tau
+                    = \cbr{\frac{ 20 \units{В} }{ 30 \units{Ом} + 1 \units{Ом} } }^2 \cdot 30 \units{Ом} \cdot 1 \units{с}
+                    = 12{,}49 \units{Дж}, \\
+    A_1
+                    &= \mathcal{I}_1\tau\mathcal{E}
+                    = \frac{ \mathcal{E} }{ R } \tau \mathcal{E}
+                    = \frac{ \mathcal{E}^2 \tau }{ R }
+                    = \frac{ \sqr{ 20 \units{В} } \cdot 1 \units{с} }{ 30 \units{Ом} }
+                    = 13{,}33 \units{Дж}, \text{положительна}, \\
+    A_2
+                    &= \mathcal{I}_2\tau\mathcal{E}
+                    = \frac{ \mathcal{E} }{ R + r } \tau \mathcal{E}
+                    = \frac{ \mathcal{E}^2 \tau }{ R + r }
+                    = \frac{ \sqr{ 20 \units{В} } \cdot 1 \units{с} }{ 30 \units{Ом} + 1 \units{Ом} }
+                    = 12{,}90 \units{Дж}, \text{положительна}, \\
+    \eta_1
+                    &= \frac{ Q_1 }{ A_1 }
+                    = \ldots
+                    = \frac{ R }{ R }
+                    = 1, \\
+    \eta_2
+                    &= \frac{ Q_2 }{ A_2 }
+                    = \ldots
+                    = \frac{ R }{ R + r }
+                    = 0{,}967741935484
+    \end{align*}
+}
 \vspace{150pt}
 
 \tasknumber{3}\task{
     Лампочки, сопротивления которых $R_1=5\units{Ом}$ и $R_2=80\units{Ом}$, поочерёдно подключённные к некоторому источнику тока,
     потребляют одинаковую мощность.
     Найти внутреннее сопротивление источника и КПД цепи в каждом случае.
+}
+\answer{
+    \begin{align*}
+    P_1 &= \sqr{ \frac{ \mathcal{E} }{ R_1 + r } } R_1,
+    P_2  = \sqr{ \frac{ \mathcal{E} }{ R_2 + r } } R_2,
+    P_1 = P_2 \implies \\
+    &\implies R_1 \sqr{ R_2 + r } = R_2 \sqr{ R_1 + r } \implies \\
+    &\implies R_1 R_2^2 + 2 R_1 R_2 r + R_1 r^2 =
+                R_2 R_1^2 + 2 R_2 R_1 r + R_2 r^2  \implies \\
+    &\implies r^2 (R_2 - R_1) = R_2^2 R_2 - R_1^2 R_2 \implies \\
+    &\implies r
+        = \sqrt{ R_1 R_2 \frac{ R_2 - R_1 }{ R_2 - R_1 } }
+        = \sqrt{ R_1 R_2 }
+        = \sqrt{ 5 \units{Ом} \cdot 80 \units{Ом} }
+        = 20{,}00 \units{Ом}.
+        \\
+     \eta_1
+        &= \frac{ R_1 }{ R_1 + r }
+        = \frac{ \sqrt{ R_1 } }{ \sqrt{ R_1 } + \sqrt{ R_2 } }
+        = 0{,}2, \\
+     \eta_2
+        &= \frac{ R_2 }{ R_2 + r }
+        = \frac{ \sqrt{ R_2 } }{ \sqrt{ R_2 } + \sqrt{ R_1 } }
+        = 0{,}8
+    \end{align*}
 }
 \vspace{150pt}
 
@@ -650,6 +2150,12 @@
     На резистор сопротивлением $R=30\units{Ом}$ подали напряжение $V=150\units{В}$.
     Определите ток, который потечёт через резистор, и мощность, выделяющуюся на нём.
 }
+\answer{
+    \begin{align*}
+    \mathcal{I} &= \frac{ V }{ R } = \frac{ 150 \units{В} }{ 30 \units{Ом} } = 5{,}00 \units{А}, \\
+    P &= \frac{ V^2 }{ R } = \frac{ \sqr{ 150 \units{В} } }{ 30 \units{Ом} } = 750{,}00 \units{Вт}
+    \end{align*}
+}
 \vspace{150pt}
 
 \tasknumber{2}\task{
@@ -660,12 +2166,81 @@
     $\tau=3\units{с}$? Какая работа будет совершена ЭДС за это время? Каков знак этой работы? Чему равен КПД цепи? Вычислите значения для 2 случаев:
     $r=0$ и $r=3\units{Ом}$.
 }
+\answer{
+    \begin{align*}
+    \mathcal{I}_1
+                    &= \frac{ \mathcal{E} }{ R }
+                    = \frac{ 60 \units{В} }{ 10 \units{Ом} }
+                    = 6{,}00 \units{А}, \\
+    \mathcal{I}_2
+                    &= \frac{ \mathcal{E} }{ R + r }
+                    = \frac{ 60 \units{В} }{ 10 \units{Ом} + 3 \units{Ом} }
+                    = 4{,}62 \units{А}, \\
+    Q_1
+                    &= \mathcal{I}_1^2R\tau
+                    = \cbr{ \frac{ \mathcal{E} }{ R } }^2 R \tau
+                    = \cbr{ \frac{ 60 \units{В} }{ 10 \units{Ом} } }^2 \cdot 10 \units{Ом} \cdot 3 \units{с}
+                    = 1080{,}00 \units{Дж}, \\
+    Q_2
+                    &= \mathcal{I}_2^2R\tau
+                    = \cbr{\frac{ \mathcal{E} }{ R + r } }^2 R \tau
+                    = \cbr{\frac{ 60 \units{В} }{ 10 \units{Ом} + 3 \units{Ом} } }^2 \cdot 10 \units{Ом} \cdot 3 \units{с}
+                    = 639{,}05 \units{Дж}, \\
+    A_1
+                    &= \mathcal{I}_1\tau\mathcal{E}
+                    = \frac{ \mathcal{E} }{ R } \tau \mathcal{E}
+                    = \frac{ \mathcal{E}^2 \tau }{ R }
+                    = \frac{ \sqr{ 60 \units{В} } \cdot 3 \units{с} }{ 10 \units{Ом} }
+                    = 1080{,}00 \units{Дж}, \text{положительна}, \\
+    A_2
+                    &= \mathcal{I}_2\tau\mathcal{E}
+                    = \frac{ \mathcal{E} }{ R + r } \tau \mathcal{E}
+                    = \frac{ \mathcal{E}^2 \tau }{ R + r }
+                    = \frac{ \sqr{ 60 \units{В} } \cdot 3 \units{с} }{ 10 \units{Ом} + 3 \units{Ом} }
+                    = 830{,}77 \units{Дж}, \text{положительна}, \\
+    \eta_1
+                    &= \frac{ Q_1 }{ A_1 }
+                    = \ldots
+                    = \frac{ R }{ R }
+                    = 1, \\
+    \eta_2
+                    &= \frac{ Q_2 }{ A_2 }
+                    = \ldots
+                    = \frac{ R }{ R + r }
+                    = 0{,}769230769231
+    \end{align*}
+}
 \vspace{150pt}
 
 \tasknumber{3}\task{
     Лампочки, сопротивления которых $R_1=6\units{Ом}$ и $R_2=54\units{Ом}$, поочерёдно подключённные к некоторому источнику тока,
     потребляют одинаковую мощность.
     Найти внутреннее сопротивление источника и КПД цепи в каждом случае.
+}
+\answer{
+    \begin{align*}
+    P_1 &= \sqr{ \frac{ \mathcal{E} }{ R_1 + r } } R_1,
+    P_2  = \sqr{ \frac{ \mathcal{E} }{ R_2 + r } } R_2,
+    P_1 = P_2 \implies \\
+    &\implies R_1 \sqr{ R_2 + r } = R_2 \sqr{ R_1 + r } \implies \\
+    &\implies R_1 R_2^2 + 2 R_1 R_2 r + R_1 r^2 =
+                R_2 R_1^2 + 2 R_2 R_1 r + R_2 r^2  \implies \\
+    &\implies r^2 (R_2 - R_1) = R_2^2 R_2 - R_1^2 R_2 \implies \\
+    &\implies r
+        = \sqrt{ R_1 R_2 \frac{ R_2 - R_1 }{ R_2 - R_1 } }
+        = \sqrt{ R_1 R_2 }
+        = \sqrt{ 6 \units{Ом} \cdot 54 \units{Ом} }
+        = 18{,}00 \units{Ом}.
+        \\
+     \eta_1
+        &= \frac{ R_1 }{ R_1 + r }
+        = \frac{ \sqrt{ R_1 } }{ \sqrt{ R_1 } + \sqrt{ R_2 } }
+        = 0{,}25, \\
+     \eta_2
+        &= \frac{ R_2 }{ R_2 + r }
+        = \frac{ \sqrt{ R_2 } }{ \sqrt{ R_2 } + \sqrt{ R_1 } }
+        = 0{,}75
+    \end{align*}
 }
 \vspace{150pt}
 
@@ -682,6 +2257,12 @@
     На резистор сопротивлением $r=18\units{Ом}$ подали напряжение $V=120\units{В}$.
     Определите ток, который потечёт через резистор, и мощность, выделяющуюся на нём.
 }
+\answer{
+    \begin{align*}
+    \mathcal{I} &= \frac{ V }{ r } = \frac{ 120 \units{В} }{ 18 \units{Ом} } = 6{,}67 \units{А}, \\
+    P &= \frac{ V^2 }{ r } = \frac{ \sqr{ 120 \units{В} } }{ 18 \units{Ом} } = 800{,}00 \units{Вт}
+    \end{align*}
+}
 \vspace{150pt}
 
 \tasknumber{2}\task{
@@ -692,12 +2273,81 @@
     $\tau=1\units{с}$? Какая работа будет совершена ЭДС за это время? Каков знак этой работы? Чему равен КПД цепи? Вычислите значения для 2 случаев:
     $r=0$ и $r=1\units{Ом}$.
 }
+\answer{
+    \begin{align*}
+    \mathcal{I}_1
+                    &= \frac{ \mathcal{E} }{ R }
+                    = \frac{ 30 \units{В} }{ 15 \units{Ом} }
+                    = 2{,}00 \units{А}, \\
+    \mathcal{I}_2
+                    &= \frac{ \mathcal{E} }{ R + r }
+                    = \frac{ 30 \units{В} }{ 15 \units{Ом} + 1 \units{Ом} }
+                    = 1{,}88 \units{А}, \\
+    Q_1
+                    &= \mathcal{I}_1^2R\tau
+                    = \cbr{ \frac{ \mathcal{E} }{ R } }^2 R \tau
+                    = \cbr{ \frac{ 30 \units{В} }{ 15 \units{Ом} } }^2 \cdot 15 \units{Ом} \cdot 1 \units{с}
+                    = 60{,}00 \units{Дж}, \\
+    Q_2
+                    &= \mathcal{I}_2^2R\tau
+                    = \cbr{\frac{ \mathcal{E} }{ R + r } }^2 R \tau
+                    = \cbr{\frac{ 30 \units{В} }{ 15 \units{Ом} + 1 \units{Ом} } }^2 \cdot 15 \units{Ом} \cdot 1 \units{с}
+                    = 52{,}73 \units{Дж}, \\
+    A_1
+                    &= \mathcal{I}_1\tau\mathcal{E}
+                    = \frac{ \mathcal{E} }{ R } \tau \mathcal{E}
+                    = \frac{ \mathcal{E}^2 \tau }{ R }
+                    = \frac{ \sqr{ 30 \units{В} } \cdot 1 \units{с} }{ 15 \units{Ом} }
+                    = 60{,}00 \units{Дж}, \text{положительна}, \\
+    A_2
+                    &= \mathcal{I}_2\tau\mathcal{E}
+                    = \frac{ \mathcal{E} }{ R + r } \tau \mathcal{E}
+                    = \frac{ \mathcal{E}^2 \tau }{ R + r }
+                    = \frac{ \sqr{ 30 \units{В} } \cdot 1 \units{с} }{ 15 \units{Ом} + 1 \units{Ом} }
+                    = 56{,}25 \units{Дж}, \text{положительна}, \\
+    \eta_1
+                    &= \frac{ Q_1 }{ A_1 }
+                    = \ldots
+                    = \frac{ R }{ R }
+                    = 1, \\
+    \eta_2
+                    &= \frac{ Q_2 }{ A_2 }
+                    = \ldots
+                    = \frac{ R }{ R + r }
+                    = 0{,}9375
+    \end{align*}
+}
 \vspace{150pt}
 
 \tasknumber{3}\task{
     Лампочки, сопротивления которых $R_1=4\units{Ом}$ и $R_2=36\units{Ом}$, поочерёдно подключённные к некоторому источнику тока,
     потребляют одинаковую мощность.
     Найти внутреннее сопротивление источника и КПД цепи в каждом случае.
+}
+\answer{
+    \begin{align*}
+    P_1 &= \sqr{ \frac{ \mathcal{E} }{ R_1 + r } } R_1,
+    P_2  = \sqr{ \frac{ \mathcal{E} }{ R_2 + r } } R_2,
+    P_1 = P_2 \implies \\
+    &\implies R_1 \sqr{ R_2 + r } = R_2 \sqr{ R_1 + r } \implies \\
+    &\implies R_1 R_2^2 + 2 R_1 R_2 r + R_1 r^2 =
+                R_2 R_1^2 + 2 R_2 R_1 r + R_2 r^2  \implies \\
+    &\implies r^2 (R_2 - R_1) = R_2^2 R_2 - R_1^2 R_2 \implies \\
+    &\implies r
+        = \sqrt{ R_1 R_2 \frac{ R_2 - R_1 }{ R_2 - R_1 } }
+        = \sqrt{ R_1 R_2 }
+        = \sqrt{ 4 \units{Ом} \cdot 36 \units{Ом} }
+        = 12{,}00 \units{Ом}.
+        \\
+     \eta_1
+        &= \frac{ R_1 }{ R_1 + r }
+        = \frac{ \sqrt{ R_1 } }{ \sqrt{ R_1 } + \sqrt{ R_2 } }
+        = 0{,}25, \\
+     \eta_2
+        &= \frac{ R_2 }{ R_2 + r }
+        = \frac{ \sqrt{ R_2 } }{ \sqrt{ R_2 } + \sqrt{ R_1 } }
+        = 0{,}75
+    \end{align*}
 }
 \vspace{150pt}
 
@@ -714,6 +2364,12 @@
     На резистор сопротивлением $R=18\units{Ом}$ подали напряжение $V=120\units{В}$.
     Определите ток, который потечёт через резистор, и мощность, выделяющуюся на нём.
 }
+\answer{
+    \begin{align*}
+    \mathcal{I} &= \frac{ V }{ R } = \frac{ 120 \units{В} }{ 18 \units{Ом} } = 6{,}67 \units{А}, \\
+    P &= \frac{ V^2 }{ R } = \frac{ \sqr{ 120 \units{В} } }{ 18 \units{Ом} } = 800{,}00 \units{Вт}
+    \end{align*}
+}
 \vspace{150pt}
 
 \tasknumber{2}\task{
@@ -724,12 +2380,81 @@
     $\tau=2\units{с}$? Какая работа будет совершена ЭДС за это время? Каков знак этой работы? Чему равен КПД цепи? Вычислите значения для 2 случаев:
     $r=0$ и $r=2\units{Ом}$.
 }
+\answer{
+    \begin{align*}
+    \mathcal{I}_1
+                    &= \frac{ \mathcal{E} }{ R }
+                    = \frac{ 20 \units{В} }{ 30 \units{Ом} }
+                    = 0{,}67 \units{А}, \\
+    \mathcal{I}_2
+                    &= \frac{ \mathcal{E} }{ R + r }
+                    = \frac{ 20 \units{В} }{ 30 \units{Ом} + 2 \units{Ом} }
+                    = 0{,}62 \units{А}, \\
+    Q_1
+                    &= \mathcal{I}_1^2R\tau
+                    = \cbr{ \frac{ \mathcal{E} }{ R } }^2 R \tau
+                    = \cbr{ \frac{ 20 \units{В} }{ 30 \units{Ом} } }^2 \cdot 30 \units{Ом} \cdot 2 \units{с}
+                    = 26{,}67 \units{Дж}, \\
+    Q_2
+                    &= \mathcal{I}_2^2R\tau
+                    = \cbr{\frac{ \mathcal{E} }{ R + r } }^2 R \tau
+                    = \cbr{\frac{ 20 \units{В} }{ 30 \units{Ом} + 2 \units{Ом} } }^2 \cdot 30 \units{Ом} \cdot 2 \units{с}
+                    = 23{,}44 \units{Дж}, \\
+    A_1
+                    &= \mathcal{I}_1\tau\mathcal{E}
+                    = \frac{ \mathcal{E} }{ R } \tau \mathcal{E}
+                    = \frac{ \mathcal{E}^2 \tau }{ R }
+                    = \frac{ \sqr{ 20 \units{В} } \cdot 2 \units{с} }{ 30 \units{Ом} }
+                    = 26{,}67 \units{Дж}, \text{положительна}, \\
+    A_2
+                    &= \mathcal{I}_2\tau\mathcal{E}
+                    = \frac{ \mathcal{E} }{ R + r } \tau \mathcal{E}
+                    = \frac{ \mathcal{E}^2 \tau }{ R + r }
+                    = \frac{ \sqr{ 20 \units{В} } \cdot 2 \units{с} }{ 30 \units{Ом} + 2 \units{Ом} }
+                    = 25{,}00 \units{Дж}, \text{положительна}, \\
+    \eta_1
+                    &= \frac{ Q_1 }{ A_1 }
+                    = \ldots
+                    = \frac{ R }{ R }
+                    = 1, \\
+    \eta_2
+                    &= \frac{ Q_2 }{ A_2 }
+                    = \ldots
+                    = \frac{ R }{ R + r }
+                    = 0{,}9375
+    \end{align*}
+}
 \vspace{150pt}
 
 \tasknumber{3}\task{
     Лампочки, сопротивления которых $R_1=5\units{Ом}$ и $R_2=45\units{Ом}$, поочерёдно подключённные к некоторому источнику тока,
     потребляют одинаковую мощность.
     Найти внутреннее сопротивление источника и КПД цепи в каждом случае.
+}
+\answer{
+    \begin{align*}
+    P_1 &= \sqr{ \frac{ \mathcal{E} }{ R_1 + r } } R_1,
+    P_2  = \sqr{ \frac{ \mathcal{E} }{ R_2 + r } } R_2,
+    P_1 = P_2 \implies \\
+    &\implies R_1 \sqr{ R_2 + r } = R_2 \sqr{ R_1 + r } \implies \\
+    &\implies R_1 R_2^2 + 2 R_1 R_2 r + R_1 r^2 =
+                R_2 R_1^2 + 2 R_2 R_1 r + R_2 r^2  \implies \\
+    &\implies r^2 (R_2 - R_1) = R_2^2 R_2 - R_1^2 R_2 \implies \\
+    &\implies r
+        = \sqrt{ R_1 R_2 \frac{ R_2 - R_1 }{ R_2 - R_1 } }
+        = \sqrt{ R_1 R_2 }
+        = \sqrt{ 5 \units{Ом} \cdot 45 \units{Ом} }
+        = 15{,}00 \units{Ом}.
+        \\
+     \eta_1
+        &= \frac{ R_1 }{ R_1 + r }
+        = \frac{ \sqrt{ R_1 } }{ \sqrt{ R_1 } + \sqrt{ R_2 } }
+        = 0{,}25, \\
+     \eta_2
+        &= \frac{ R_2 }{ R_2 + r }
+        = \frac{ \sqrt{ R_2 } }{ \sqrt{ R_2 } + \sqrt{ R_1 } }
+        = 0{,}75
+    \end{align*}
 }
 \vspace{150pt}
 
@@ -746,6 +2471,12 @@
     Через резистор сопротивлением $r=30\units{Ом}$ протекает электрический ток $\mathcal{I}=6\units{А}$.
     Определите, чему равны напряжение на резисторе и мощность, выделяющаяся на нём.
 }
+\answer{
+    \begin{align*}
+    U &= \mathcal{I}r = 6 \units{А} \cdot 30 \units{Ом} = 180 \units{В}, \\
+    P &= \mathcal{I}^2r = \sqr{ 6 \units{А} } \cdot 30 \units{Ом} = 1080 \units{Вт}
+    \end{align*}
+}
 \vspace{150pt}
 
 \tasknumber{2}\task{
@@ -756,12 +2487,81 @@
     $\tau=1\units{с}$? Какая работа будет совершена ЭДС за это время? Каков знак этой работы? Чему равен КПД цепи? Вычислите значения для 2 случаев:
     $r=0$ и $r=1\units{Ом}$.
 }
+\answer{
+    \begin{align*}
+    \mathcal{I}_1
+                    &= \frac{ \mathcal{E} }{ R }
+                    = \frac{ 30 \units{В} }{ 10 \units{Ом} }
+                    = 3{,}00 \units{А}, \\
+    \mathcal{I}_2
+                    &= \frac{ \mathcal{E} }{ R + r }
+                    = \frac{ 30 \units{В} }{ 10 \units{Ом} + 1 \units{Ом} }
+                    = 2{,}73 \units{А}, \\
+    Q_1
+                    &= \mathcal{I}_1^2R\tau
+                    = \cbr{ \frac{ \mathcal{E} }{ R } }^2 R \tau
+                    = \cbr{ \frac{ 30 \units{В} }{ 10 \units{Ом} } }^2 \cdot 10 \units{Ом} \cdot 1 \units{с}
+                    = 90{,}00 \units{Дж}, \\
+    Q_2
+                    &= \mathcal{I}_2^2R\tau
+                    = \cbr{\frac{ \mathcal{E} }{ R + r } }^2 R \tau
+                    = \cbr{\frac{ 30 \units{В} }{ 10 \units{Ом} + 1 \units{Ом} } }^2 \cdot 10 \units{Ом} \cdot 1 \units{с}
+                    = 74{,}38 \units{Дж}, \\
+    A_1
+                    &= \mathcal{I}_1\tau\mathcal{E}
+                    = \frac{ \mathcal{E} }{ R } \tau \mathcal{E}
+                    = \frac{ \mathcal{E}^2 \tau }{ R }
+                    = \frac{ \sqr{ 30 \units{В} } \cdot 1 \units{с} }{ 10 \units{Ом} }
+                    = 90{,}00 \units{Дж}, \text{положительна}, \\
+    A_2
+                    &= \mathcal{I}_2\tau\mathcal{E}
+                    = \frac{ \mathcal{E} }{ R + r } \tau \mathcal{E}
+                    = \frac{ \mathcal{E}^2 \tau }{ R + r }
+                    = \frac{ \sqr{ 30 \units{В} } \cdot 1 \units{с} }{ 10 \units{Ом} + 1 \units{Ом} }
+                    = 81{,}82 \units{Дж}, \text{положительна}, \\
+    \eta_1
+                    &= \frac{ Q_1 }{ A_1 }
+                    = \ldots
+                    = \frac{ R }{ R }
+                    = 1, \\
+    \eta_2
+                    &= \frac{ Q_2 }{ A_2 }
+                    = \ldots
+                    = \frac{ R }{ R + r }
+                    = 0{,}909090909091
+    \end{align*}
+}
 \vspace{150pt}
 
 \tasknumber{3}\task{
     Лампочки, сопротивления которых $R_1=0.5\units{Ом}$ и $R_2=4.5\units{Ом}$, поочерёдно подключённные к некоторому источнику тока,
     потребляют одинаковую мощность.
     Найти внутреннее сопротивление источника и КПД цепи в каждом случае.
+}
+\answer{
+    \begin{align*}
+    P_1 &= \sqr{ \frac{ \mathcal{E} }{ R_1 + r } } R_1,
+    P_2  = \sqr{ \frac{ \mathcal{E} }{ R_2 + r } } R_2,
+    P_1 = P_2 \implies \\
+    &\implies R_1 \sqr{ R_2 + r } = R_2 \sqr{ R_1 + r } \implies \\
+    &\implies R_1 R_2^2 + 2 R_1 R_2 r + R_1 r^2 =
+                R_2 R_1^2 + 2 R_2 R_1 r + R_2 r^2  \implies \\
+    &\implies r^2 (R_2 - R_1) = R_2^2 R_2 - R_1^2 R_2 \implies \\
+    &\implies r
+        = \sqrt{ R_1 R_2 \frac{ R_2 - R_1 }{ R_2 - R_1 } }
+        = \sqrt{ R_1 R_2 }
+        = \sqrt{ 0{,}50 \units{Ом} \cdot 4{,}50 \units{Ом} }
+        = 1{,}50 \units{Ом}.
+        \\
+     \eta_1
+        &= \frac{ R_1 }{ R_1 + r }
+        = \frac{ \sqrt{ R_1 } }{ \sqrt{ R_1 } + \sqrt{ R_2 } }
+        = 0{,}25, \\
+     \eta_2
+        &= \frac{ R_2 }{ R_2 + r }
+        = \frac{ \sqrt{ R_2 } }{ \sqrt{ R_2 } + \sqrt{ R_1 } }
+        = 0{,}75
+    \end{align*}
 }
 \vspace{150pt}
 
@@ -778,6 +2578,12 @@
     Через резистор сопротивлением $r=30\units{Ом}$ протекает электрический ток $\mathcal{I}=3\units{А}$.
     Определите, чему равны напряжение на резисторе и мощность, выделяющаяся на нём.
 }
+\answer{
+    \begin{align*}
+    U &= \mathcal{I}r = 3 \units{А} \cdot 30 \units{Ом} = 90 \units{В}, \\
+    P &= \mathcal{I}^2r = \sqr{ 3 \units{А} } \cdot 30 \units{Ом} = 270 \units{Вт}
+    \end{align*}
+}
 \vspace{150pt}
 
 \tasknumber{2}\task{
@@ -788,12 +2594,81 @@
     $\tau=3\units{с}$? Какая работа будет совершена ЭДС за это время? Каков знак этой работы? Чему равен КПД цепи? Вычислите значения для 2 случаев:
     $r=0$ и $r=3\units{Ом}$.
 }
+\answer{
+    \begin{align*}
+    \mathcal{I}_1
+                    &= \frac{ \mathcal{E} }{ R }
+                    = \frac{ 10 \units{В} }{ 30 \units{Ом} }
+                    = 0{,}33 \units{А}, \\
+    \mathcal{I}_2
+                    &= \frac{ \mathcal{E} }{ R + r }
+                    = \frac{ 10 \units{В} }{ 30 \units{Ом} + 3 \units{Ом} }
+                    = 0{,}30 \units{А}, \\
+    Q_1
+                    &= \mathcal{I}_1^2R\tau
+                    = \cbr{ \frac{ \mathcal{E} }{ R } }^2 R \tau
+                    = \cbr{ \frac{ 10 \units{В} }{ 30 \units{Ом} } }^2 \cdot 30 \units{Ом} \cdot 3 \units{с}
+                    = 10{,}00 \units{Дж}, \\
+    Q_2
+                    &= \mathcal{I}_2^2R\tau
+                    = \cbr{\frac{ \mathcal{E} }{ R + r } }^2 R \tau
+                    = \cbr{\frac{ 10 \units{В} }{ 30 \units{Ом} + 3 \units{Ом} } }^2 \cdot 30 \units{Ом} \cdot 3 \units{с}
+                    = 8{,}26 \units{Дж}, \\
+    A_1
+                    &= \mathcal{I}_1\tau\mathcal{E}
+                    = \frac{ \mathcal{E} }{ R } \tau \mathcal{E}
+                    = \frac{ \mathcal{E}^2 \tau }{ R }
+                    = \frac{ \sqr{ 10 \units{В} } \cdot 3 \units{с} }{ 30 \units{Ом} }
+                    = 10{,}00 \units{Дж}, \text{положительна}, \\
+    A_2
+                    &= \mathcal{I}_2\tau\mathcal{E}
+                    = \frac{ \mathcal{E} }{ R + r } \tau \mathcal{E}
+                    = \frac{ \mathcal{E}^2 \tau }{ R + r }
+                    = \frac{ \sqr{ 10 \units{В} } \cdot 3 \units{с} }{ 30 \units{Ом} + 3 \units{Ом} }
+                    = 9{,}09 \units{Дж}, \text{положительна}, \\
+    \eta_1
+                    &= \frac{ Q_1 }{ A_1 }
+                    = \ldots
+                    = \frac{ R }{ R }
+                    = 1, \\
+    \eta_2
+                    &= \frac{ Q_2 }{ A_2 }
+                    = \ldots
+                    = \frac{ R }{ R + r }
+                    = 0{,}909090909091
+    \end{align*}
+}
 \vspace{150pt}
 
 \tasknumber{3}\task{
     Лампочки, сопротивления которых $R_1=6\units{Ом}$ и $R_2=54\units{Ом}$, поочерёдно подключённные к некоторому источнику тока,
     потребляют одинаковую мощность.
     Найти внутреннее сопротивление источника и КПД цепи в каждом случае.
+}
+\answer{
+    \begin{align*}
+    P_1 &= \sqr{ \frac{ \mathcal{E} }{ R_1 + r } } R_1,
+    P_2  = \sqr{ \frac{ \mathcal{E} }{ R_2 + r } } R_2,
+    P_1 = P_2 \implies \\
+    &\implies R_1 \sqr{ R_2 + r } = R_2 \sqr{ R_1 + r } \implies \\
+    &\implies R_1 R_2^2 + 2 R_1 R_2 r + R_1 r^2 =
+                R_2 R_1^2 + 2 R_2 R_1 r + R_2 r^2  \implies \\
+    &\implies r^2 (R_2 - R_1) = R_2^2 R_2 - R_1^2 R_2 \implies \\
+    &\implies r
+        = \sqrt{ R_1 R_2 \frac{ R_2 - R_1 }{ R_2 - R_1 } }
+        = \sqrt{ R_1 R_2 }
+        = \sqrt{ 6 \units{Ом} \cdot 54 \units{Ом} }
+        = 18{,}00 \units{Ом}.
+        \\
+     \eta_1
+        &= \frac{ R_1 }{ R_1 + r }
+        = \frac{ \sqrt{ R_1 } }{ \sqrt{ R_1 } + \sqrt{ R_2 } }
+        = 0{,}25, \\
+     \eta_2
+        &= \frac{ R_2 }{ R_2 + r }
+        = \frac{ \sqrt{ R_2 } }{ \sqrt{ R_2 } + \sqrt{ R_1 } }
+        = 0{,}75
+    \end{align*}
 }
 \vspace{150pt}
 
@@ -810,6 +2685,12 @@
     На резистор сопротивлением $R=30\units{Ом}$ подали напряжение $U=240\units{В}$.
     Определите ток, который потечёт через резистор, и мощность, выделяющуюся на нём.
 }
+\answer{
+    \begin{align*}
+    \mathcal{I} &= \frac{ U }{ R } = \frac{ 240 \units{В} }{ 30 \units{Ом} } = 8{,}00 \units{А}, \\
+    P &= \frac{ U^2 }{ R } = \frac{ \sqr{ 240 \units{В} } }{ 30 \units{Ом} } = 1920{,}00 \units{Вт}
+    \end{align*}
+}
 \vspace{150pt}
 
 \tasknumber{2}\task{
@@ -820,12 +2701,81 @@
     $\tau=1\units{с}$? Какая работа будет совершена ЭДС за это время? Каков знак этой работы? Чему равен КПД цепи? Вычислите значения для 2 случаев:
     $r=0$ и $r=1\units{Ом}$.
 }
+\answer{
+    \begin{align*}
+    \mathcal{I}_1
+                    &= \frac{ \mathcal{E} }{ R }
+                    = \frac{ 20 \units{В} }{ 24 \units{Ом} }
+                    = 0{,}83 \units{А}, \\
+    \mathcal{I}_2
+                    &= \frac{ \mathcal{E} }{ R + r }
+                    = \frac{ 20 \units{В} }{ 24 \units{Ом} + 1 \units{Ом} }
+                    = 0{,}80 \units{А}, \\
+    Q_1
+                    &= \mathcal{I}_1^2R\tau
+                    = \cbr{ \frac{ \mathcal{E} }{ R } }^2 R \tau
+                    = \cbr{ \frac{ 20 \units{В} }{ 24 \units{Ом} } }^2 \cdot 24 \units{Ом} \cdot 1 \units{с}
+                    = 16{,}67 \units{Дж}, \\
+    Q_2
+                    &= \mathcal{I}_2^2R\tau
+                    = \cbr{\frac{ \mathcal{E} }{ R + r } }^2 R \tau
+                    = \cbr{\frac{ 20 \units{В} }{ 24 \units{Ом} + 1 \units{Ом} } }^2 \cdot 24 \units{Ом} \cdot 1 \units{с}
+                    = 15{,}36 \units{Дж}, \\
+    A_1
+                    &= \mathcal{I}_1\tau\mathcal{E}
+                    = \frac{ \mathcal{E} }{ R } \tau \mathcal{E}
+                    = \frac{ \mathcal{E}^2 \tau }{ R }
+                    = \frac{ \sqr{ 20 \units{В} } \cdot 1 \units{с} }{ 24 \units{Ом} }
+                    = 16{,}67 \units{Дж}, \text{положительна}, \\
+    A_2
+                    &= \mathcal{I}_2\tau\mathcal{E}
+                    = \frac{ \mathcal{E} }{ R + r } \tau \mathcal{E}
+                    = \frac{ \mathcal{E}^2 \tau }{ R + r }
+                    = \frac{ \sqr{ 20 \units{В} } \cdot 1 \units{с} }{ 24 \units{Ом} + 1 \units{Ом} }
+                    = 16{,}00 \units{Дж}, \text{положительна}, \\
+    \eta_1
+                    &= \frac{ Q_1 }{ A_1 }
+                    = \ldots
+                    = \frac{ R }{ R }
+                    = 1, \\
+    \eta_2
+                    &= \frac{ Q_2 }{ A_2 }
+                    = \ldots
+                    = \frac{ R }{ R + r }
+                    = 0{,}96
+    \end{align*}
+}
 \vspace{150pt}
 
 \tasknumber{3}\task{
     Лампочки, сопротивления которых $R_1=1\units{Ом}$ и $R_2=9\units{Ом}$, поочерёдно подключённные к некоторому источнику тока,
     потребляют одинаковую мощность.
     Найти внутреннее сопротивление источника и КПД цепи в каждом случае.
+}
+\answer{
+    \begin{align*}
+    P_1 &= \sqr{ \frac{ \mathcal{E} }{ R_1 + r } } R_1,
+    P_2  = \sqr{ \frac{ \mathcal{E} }{ R_2 + r } } R_2,
+    P_1 = P_2 \implies \\
+    &\implies R_1 \sqr{ R_2 + r } = R_2 \sqr{ R_1 + r } \implies \\
+    &\implies R_1 R_2^2 + 2 R_1 R_2 r + R_1 r^2 =
+                R_2 R_1^2 + 2 R_2 R_1 r + R_2 r^2  \implies \\
+    &\implies r^2 (R_2 - R_1) = R_2^2 R_2 - R_1^2 R_2 \implies \\
+    &\implies r
+        = \sqrt{ R_1 R_2 \frac{ R_2 - R_1 }{ R_2 - R_1 } }
+        = \sqrt{ R_1 R_2 }
+        = \sqrt{ 1 \units{Ом} \cdot 9 \units{Ом} }
+        = 3{,}00 \units{Ом}.
+        \\
+     \eta_1
+        &= \frac{ R_1 }{ R_1 + r }
+        = \frac{ \sqrt{ R_1 } }{ \sqrt{ R_1 } + \sqrt{ R_2 } }
+        = 0{,}25, \\
+     \eta_2
+        &= \frac{ R_2 }{ R_2 + r }
+        = \frac{ \sqrt{ R_2 } }{ \sqrt{ R_2 } + \sqrt{ R_1 } }
+        = 0{,}75
+    \end{align*}
 }
 \vspace{150pt}
 
@@ -842,6 +2792,12 @@
     На резистор сопротивлением $R=12\units{Ом}$ подали напряжение $V=120\units{В}$.
     Определите ток, который потечёт через резистор, и мощность, выделяющуюся на нём.
 }
+\answer{
+    \begin{align*}
+    \mathcal{I} &= \frac{ V }{ R } = \frac{ 120 \units{В} }{ 12 \units{Ом} } = 10{,}00 \units{А}, \\
+    P &= \frac{ V^2 }{ R } = \frac{ \sqr{ 120 \units{В} } }{ 12 \units{Ом} } = 1200{,}00 \units{Вт}
+    \end{align*}
+}
 \vspace{150pt}
 
 \tasknumber{2}\task{
@@ -852,12 +2808,81 @@
     $\tau=3\units{с}$? Какая работа будет совершена ЭДС за это время? Каков знак этой работы? Чему равен КПД цепи? Вычислите значения для 2 случаев:
     $r=0$ и $r=3\units{Ом}$.
 }
+\answer{
+    \begin{align*}
+    \mathcal{I}_1
+                    &= \frac{ \mathcal{E} }{ R }
+                    = \frac{ 10 \units{В} }{ 24 \units{Ом} }
+                    = 0{,}42 \units{А}, \\
+    \mathcal{I}_2
+                    &= \frac{ \mathcal{E} }{ R + r }
+                    = \frac{ 10 \units{В} }{ 24 \units{Ом} + 3 \units{Ом} }
+                    = 0{,}37 \units{А}, \\
+    Q_1
+                    &= \mathcal{I}_1^2R\tau
+                    = \cbr{ \frac{ \mathcal{E} }{ R } }^2 R \tau
+                    = \cbr{ \frac{ 10 \units{В} }{ 24 \units{Ом} } }^2 \cdot 24 \units{Ом} \cdot 3 \units{с}
+                    = 12{,}50 \units{Дж}, \\
+    Q_2
+                    &= \mathcal{I}_2^2R\tau
+                    = \cbr{\frac{ \mathcal{E} }{ R + r } }^2 R \tau
+                    = \cbr{\frac{ 10 \units{В} }{ 24 \units{Ом} + 3 \units{Ом} } }^2 \cdot 24 \units{Ом} \cdot 3 \units{с}
+                    = 9{,}88 \units{Дж}, \\
+    A_1
+                    &= \mathcal{I}_1\tau\mathcal{E}
+                    = \frac{ \mathcal{E} }{ R } \tau \mathcal{E}
+                    = \frac{ \mathcal{E}^2 \tau }{ R }
+                    = \frac{ \sqr{ 10 \units{В} } \cdot 3 \units{с} }{ 24 \units{Ом} }
+                    = 12{,}50 \units{Дж}, \text{положительна}, \\
+    A_2
+                    &= \mathcal{I}_2\tau\mathcal{E}
+                    = \frac{ \mathcal{E} }{ R + r } \tau \mathcal{E}
+                    = \frac{ \mathcal{E}^2 \tau }{ R + r }
+                    = \frac{ \sqr{ 10 \units{В} } \cdot 3 \units{с} }{ 24 \units{Ом} + 3 \units{Ом} }
+                    = 11{,}11 \units{Дж}, \text{положительна}, \\
+    \eta_1
+                    &= \frac{ Q_1 }{ A_1 }
+                    = \ldots
+                    = \frac{ R }{ R }
+                    = 1, \\
+    \eta_2
+                    &= \frac{ Q_2 }{ A_2 }
+                    = \ldots
+                    = \frac{ R }{ R + r }
+                    = 0{,}888888888889
+    \end{align*}
+}
 \vspace{150pt}
 
 \tasknumber{3}\task{
     Лампочки, сопротивления которых $R_1=0.5\units{Ом}$ и $R_2=18\units{Ом}$, поочерёдно подключённные к некоторому источнику тока,
     потребляют одинаковую мощность.
     Найти внутреннее сопротивление источника и КПД цепи в каждом случае.
+}
+\answer{
+    \begin{align*}
+    P_1 &= \sqr{ \frac{ \mathcal{E} }{ R_1 + r } } R_1,
+    P_2  = \sqr{ \frac{ \mathcal{E} }{ R_2 + r } } R_2,
+    P_1 = P_2 \implies \\
+    &\implies R_1 \sqr{ R_2 + r } = R_2 \sqr{ R_1 + r } \implies \\
+    &\implies R_1 R_2^2 + 2 R_1 R_2 r + R_1 r^2 =
+                R_2 R_1^2 + 2 R_2 R_1 r + R_2 r^2  \implies \\
+    &\implies r^2 (R_2 - R_1) = R_2^2 R_2 - R_1^2 R_2 \implies \\
+    &\implies r
+        = \sqrt{ R_1 R_2 \frac{ R_2 - R_1 }{ R_2 - R_1 } }
+        = \sqrt{ R_1 R_2 }
+        = \sqrt{ 0{,}50 \units{Ом} \cdot 18 \units{Ом} }
+        = 3{,}00 \units{Ом}.
+        \\
+     \eta_1
+        &= \frac{ R_1 }{ R_1 + r }
+        = \frac{ \sqrt{ R_1 } }{ \sqrt{ R_1 } + \sqrt{ R_2 } }
+        = 0{,}142857142857, \\
+     \eta_2
+        &= \frac{ R_2 }{ R_2 + r }
+        = \frac{ \sqrt{ R_2 } }{ \sqrt{ R_2 } + \sqrt{ R_1 } }
+        = 0{,}857142857143
+    \end{align*}
 }
 \vspace{150pt}
 
@@ -874,6 +2899,12 @@
     На резистор сопротивлением $R=30\units{Ом}$ подали напряжение $V=240\units{В}$.
     Определите ток, который потечёт через резистор, и мощность, выделяющуюся на нём.
 }
+\answer{
+    \begin{align*}
+    \mathcal{I} &= \frac{ V }{ R } = \frac{ 240 \units{В} }{ 30 \units{Ом} } = 8{,}00 \units{А}, \\
+    P &= \frac{ V^2 }{ R } = \frac{ \sqr{ 240 \units{В} } }{ 30 \units{Ом} } = 1920{,}00 \units{Вт}
+    \end{align*}
+}
 \vspace{150pt}
 
 \tasknumber{2}\task{
@@ -884,12 +2915,81 @@
     $\tau=1\units{с}$? Какая работа будет совершена ЭДС за это время? Каков знак этой работы? Чему равен КПД цепи? Вычислите значения для 2 случаев:
     $r=0$ и $r=1\units{Ом}$.
 }
+\answer{
+    \begin{align*}
+    \mathcal{I}_1
+                    &= \frac{ \mathcal{E} }{ R }
+                    = \frac{ 30 \units{В} }{ 24 \units{Ом} }
+                    = 1{,}25 \units{А}, \\
+    \mathcal{I}_2
+                    &= \frac{ \mathcal{E} }{ R + r }
+                    = \frac{ 30 \units{В} }{ 24 \units{Ом} + 1 \units{Ом} }
+                    = 1{,}20 \units{А}, \\
+    Q_1
+                    &= \mathcal{I}_1^2R\tau
+                    = \cbr{ \frac{ \mathcal{E} }{ R } }^2 R \tau
+                    = \cbr{ \frac{ 30 \units{В} }{ 24 \units{Ом} } }^2 \cdot 24 \units{Ом} \cdot 1 \units{с}
+                    = 37{,}50 \units{Дж}, \\
+    Q_2
+                    &= \mathcal{I}_2^2R\tau
+                    = \cbr{\frac{ \mathcal{E} }{ R + r } }^2 R \tau
+                    = \cbr{\frac{ 30 \units{В} }{ 24 \units{Ом} + 1 \units{Ом} } }^2 \cdot 24 \units{Ом} \cdot 1 \units{с}
+                    = 34{,}56 \units{Дж}, \\
+    A_1
+                    &= \mathcal{I}_1\tau\mathcal{E}
+                    = \frac{ \mathcal{E} }{ R } \tau \mathcal{E}
+                    = \frac{ \mathcal{E}^2 \tau }{ R }
+                    = \frac{ \sqr{ 30 \units{В} } \cdot 1 \units{с} }{ 24 \units{Ом} }
+                    = 37{,}50 \units{Дж}, \text{положительна}, \\
+    A_2
+                    &= \mathcal{I}_2\tau\mathcal{E}
+                    = \frac{ \mathcal{E} }{ R + r } \tau \mathcal{E}
+                    = \frac{ \mathcal{E}^2 \tau }{ R + r }
+                    = \frac{ \sqr{ 30 \units{В} } \cdot 1 \units{с} }{ 24 \units{Ом} + 1 \units{Ом} }
+                    = 36{,}00 \units{Дж}, \text{положительна}, \\
+    \eta_1
+                    &= \frac{ Q_1 }{ A_1 }
+                    = \ldots
+                    = \frac{ R }{ R }
+                    = 1, \\
+    \eta_2
+                    &= \frac{ Q_2 }{ A_2 }
+                    = \ldots
+                    = \frac{ R }{ R + r }
+                    = 0{,}96
+    \end{align*}
+}
 \vspace{150pt}
 
 \tasknumber{3}\task{
     Лампочки, сопротивления которых $R_1=0.5\units{Ом}$ и $R_2=2\units{Ом}$, поочерёдно подключённные к некоторому источнику тока,
     потребляют одинаковую мощность.
     Найти внутреннее сопротивление источника и КПД цепи в каждом случае.
+}
+\answer{
+    \begin{align*}
+    P_1 &= \sqr{ \frac{ \mathcal{E} }{ R_1 + r } } R_1,
+    P_2  = \sqr{ \frac{ \mathcal{E} }{ R_2 + r } } R_2,
+    P_1 = P_2 \implies \\
+    &\implies R_1 \sqr{ R_2 + r } = R_2 \sqr{ R_1 + r } \implies \\
+    &\implies R_1 R_2^2 + 2 R_1 R_2 r + R_1 r^2 =
+                R_2 R_1^2 + 2 R_2 R_1 r + R_2 r^2  \implies \\
+    &\implies r^2 (R_2 - R_1) = R_2^2 R_2 - R_1^2 R_2 \implies \\
+    &\implies r
+        = \sqrt{ R_1 R_2 \frac{ R_2 - R_1 }{ R_2 - R_1 } }
+        = \sqrt{ R_1 R_2 }
+        = \sqrt{ 0{,}50 \units{Ом} \cdot 2 \units{Ом} }
+        = 1{,}00 \units{Ом}.
+        \\
+     \eta_1
+        &= \frac{ R_1 }{ R_1 + r }
+        = \frac{ \sqrt{ R_1 } }{ \sqrt{ R_1 } + \sqrt{ R_2 } }
+        = 0{,}333333333333, \\
+     \eta_2
+        &= \frac{ R_2 }{ R_2 + r }
+        = \frac{ \sqrt{ R_2 } }{ \sqrt{ R_2 } + \sqrt{ R_1 } }
+        = 0{,}666666666667
+    \end{align*}
 }
 \vspace{150pt}
 
@@ -906,6 +3006,12 @@
     Через резистор сопротивлением $R=30\units{Ом}$ протекает электрический ток $\mathcal{I}=6\units{А}$.
     Определите, чему равны напряжение на резисторе и мощность, выделяющаяся на нём.
 }
+\answer{
+    \begin{align*}
+    U &= \mathcal{I}R = 6 \units{А} \cdot 30 \units{Ом} = 180 \units{В}, \\
+    P &= \mathcal{I}^2R = \sqr{ 6 \units{А} } \cdot 30 \units{Ом} = 1080 \units{Вт}
+    \end{align*}
+}
 \vspace{150pt}
 
 \tasknumber{2}\task{
@@ -916,12 +3022,81 @@
     $\tau=2\units{с}$? Какая работа будет совершена ЭДС за это время? Каков знак этой работы? Чему равен КПД цепи? Вычислите значения для 2 случаев:
     $r=0$ и $r=2\units{Ом}$.
 }
+\answer{
+    \begin{align*}
+    \mathcal{I}_1
+                    &= \frac{ \mathcal{E} }{ R }
+                    = \frac{ 30 \units{В} }{ 15 \units{Ом} }
+                    = 2{,}00 \units{А}, \\
+    \mathcal{I}_2
+                    &= \frac{ \mathcal{E} }{ R + r }
+                    = \frac{ 30 \units{В} }{ 15 \units{Ом} + 2 \units{Ом} }
+                    = 1{,}76 \units{А}, \\
+    Q_1
+                    &= \mathcal{I}_1^2R\tau
+                    = \cbr{ \frac{ \mathcal{E} }{ R } }^2 R \tau
+                    = \cbr{ \frac{ 30 \units{В} }{ 15 \units{Ом} } }^2 \cdot 15 \units{Ом} \cdot 2 \units{с}
+                    = 120{,}00 \units{Дж}, \\
+    Q_2
+                    &= \mathcal{I}_2^2R\tau
+                    = \cbr{\frac{ \mathcal{E} }{ R + r } }^2 R \tau
+                    = \cbr{\frac{ 30 \units{В} }{ 15 \units{Ом} + 2 \units{Ом} } }^2 \cdot 15 \units{Ом} \cdot 2 \units{с}
+                    = 93{,}43 \units{Дж}, \\
+    A_1
+                    &= \mathcal{I}_1\tau\mathcal{E}
+                    = \frac{ \mathcal{E} }{ R } \tau \mathcal{E}
+                    = \frac{ \mathcal{E}^2 \tau }{ R }
+                    = \frac{ \sqr{ 30 \units{В} } \cdot 2 \units{с} }{ 15 \units{Ом} }
+                    = 120{,}00 \units{Дж}, \text{положительна}, \\
+    A_2
+                    &= \mathcal{I}_2\tau\mathcal{E}
+                    = \frac{ \mathcal{E} }{ R + r } \tau \mathcal{E}
+                    = \frac{ \mathcal{E}^2 \tau }{ R + r }
+                    = \frac{ \sqr{ 30 \units{В} } \cdot 2 \units{с} }{ 15 \units{Ом} + 2 \units{Ом} }
+                    = 105{,}88 \units{Дж}, \text{положительна}, \\
+    \eta_1
+                    &= \frac{ Q_1 }{ A_1 }
+                    = \ldots
+                    = \frac{ R }{ R }
+                    = 1, \\
+    \eta_2
+                    &= \frac{ Q_2 }{ A_2 }
+                    = \ldots
+                    = \frac{ R }{ R + r }
+                    = 0{,}882352941176
+    \end{align*}
+}
 \vspace{150pt}
 
 \tasknumber{3}\task{
     Лампочки, сопротивления которых $R_1=1\units{Ом}$ и $R_2=9\units{Ом}$, поочерёдно подключённные к некоторому источнику тока,
     потребляют одинаковую мощность.
     Найти внутреннее сопротивление источника и КПД цепи в каждом случае.
+}
+\answer{
+    \begin{align*}
+    P_1 &= \sqr{ \frac{ \mathcal{E} }{ R_1 + r } } R_1,
+    P_2  = \sqr{ \frac{ \mathcal{E} }{ R_2 + r } } R_2,
+    P_1 = P_2 \implies \\
+    &\implies R_1 \sqr{ R_2 + r } = R_2 \sqr{ R_1 + r } \implies \\
+    &\implies R_1 R_2^2 + 2 R_1 R_2 r + R_1 r^2 =
+                R_2 R_1^2 + 2 R_2 R_1 r + R_2 r^2  \implies \\
+    &\implies r^2 (R_2 - R_1) = R_2^2 R_2 - R_1^2 R_2 \implies \\
+    &\implies r
+        = \sqrt{ R_1 R_2 \frac{ R_2 - R_1 }{ R_2 - R_1 } }
+        = \sqrt{ R_1 R_2 }
+        = \sqrt{ 1 \units{Ом} \cdot 9 \units{Ом} }
+        = 3{,}00 \units{Ом}.
+        \\
+     \eta_1
+        &= \frac{ R_1 }{ R_1 + r }
+        = \frac{ \sqrt{ R_1 } }{ \sqrt{ R_1 } + \sqrt{ R_2 } }
+        = 0{,}25, \\
+     \eta_2
+        &= \frac{ R_2 }{ R_2 + r }
+        = \frac{ \sqrt{ R_2 } }{ \sqrt{ R_2 } + \sqrt{ R_1 } }
+        = 0{,}75
+    \end{align*}
 }
 \vspace{150pt}
 
@@ -938,6 +3113,12 @@
     Через резистор сопротивлением $R=30\units{Ом}$ протекает электрический ток $\mathcal{I}=4\units{А}$.
     Определите, чему равны напряжение на резисторе и мощность, выделяющаяся на нём.
 }
+\answer{
+    \begin{align*}
+    U &= \mathcal{I}R = 4 \units{А} \cdot 30 \units{Ом} = 120 \units{В}, \\
+    P &= \mathcal{I}^2R = \sqr{ 4 \units{А} } \cdot 30 \units{Ом} = 480 \units{Вт}
+    \end{align*}
+}
 \vspace{150pt}
 
 \tasknumber{2}\task{
@@ -948,12 +3129,81 @@
     $\tau=3\units{с}$? Какая работа будет совершена ЭДС за это время? Каков знак этой работы? Чему равен КПД цепи? Вычислите значения для 2 случаев:
     $r=0$ и $r=3\units{Ом}$.
 }
+\answer{
+    \begin{align*}
+    \mathcal{I}_1
+                    &= \frac{ \mathcal{E} }{ R }
+                    = \frac{ 20 \units{В} }{ 15 \units{Ом} }
+                    = 1{,}33 \units{А}, \\
+    \mathcal{I}_2
+                    &= \frac{ \mathcal{E} }{ R + r }
+                    = \frac{ 20 \units{В} }{ 15 \units{Ом} + 3 \units{Ом} }
+                    = 1{,}11 \units{А}, \\
+    Q_1
+                    &= \mathcal{I}_1^2R\tau
+                    = \cbr{ \frac{ \mathcal{E} }{ R } }^2 R \tau
+                    = \cbr{ \frac{ 20 \units{В} }{ 15 \units{Ом} } }^2 \cdot 15 \units{Ом} \cdot 3 \units{с}
+                    = 80{,}00 \units{Дж}, \\
+    Q_2
+                    &= \mathcal{I}_2^2R\tau
+                    = \cbr{\frac{ \mathcal{E} }{ R + r } }^2 R \tau
+                    = \cbr{\frac{ 20 \units{В} }{ 15 \units{Ом} + 3 \units{Ом} } }^2 \cdot 15 \units{Ом} \cdot 3 \units{с}
+                    = 55{,}56 \units{Дж}, \\
+    A_1
+                    &= \mathcal{I}_1\tau\mathcal{E}
+                    = \frac{ \mathcal{E} }{ R } \tau \mathcal{E}
+                    = \frac{ \mathcal{E}^2 \tau }{ R }
+                    = \frac{ \sqr{ 20 \units{В} } \cdot 3 \units{с} }{ 15 \units{Ом} }
+                    = 80{,}00 \units{Дж}, \text{положительна}, \\
+    A_2
+                    &= \mathcal{I}_2\tau\mathcal{E}
+                    = \frac{ \mathcal{E} }{ R + r } \tau \mathcal{E}
+                    = \frac{ \mathcal{E}^2 \tau }{ R + r }
+                    = \frac{ \sqr{ 20 \units{В} } \cdot 3 \units{с} }{ 15 \units{Ом} + 3 \units{Ом} }
+                    = 66{,}67 \units{Дж}, \text{положительна}, \\
+    \eta_1
+                    &= \frac{ Q_1 }{ A_1 }
+                    = \ldots
+                    = \frac{ R }{ R }
+                    = 1, \\
+    \eta_2
+                    &= \frac{ Q_2 }{ A_2 }
+                    = \ldots
+                    = \frac{ R }{ R + r }
+                    = 0{,}833333333333
+    \end{align*}
+}
 \vspace{150pt}
 
 \tasknumber{3}\task{
     Лампочки, сопротивления которых $R_1=0.25\units{Ом}$ и $R_2=4\units{Ом}$, поочерёдно подключённные к некоторому источнику тока,
     потребляют одинаковую мощность.
     Найти внутреннее сопротивление источника и КПД цепи в каждом случае.
+}
+\answer{
+    \begin{align*}
+    P_1 &= \sqr{ \frac{ \mathcal{E} }{ R_1 + r } } R_1,
+    P_2  = \sqr{ \frac{ \mathcal{E} }{ R_2 + r } } R_2,
+    P_1 = P_2 \implies \\
+    &\implies R_1 \sqr{ R_2 + r } = R_2 \sqr{ R_1 + r } \implies \\
+    &\implies R_1 R_2^2 + 2 R_1 R_2 r + R_1 r^2 =
+                R_2 R_1^2 + 2 R_2 R_1 r + R_2 r^2  \implies \\
+    &\implies r^2 (R_2 - R_1) = R_2^2 R_2 - R_1^2 R_2 \implies \\
+    &\implies r
+        = \sqrt{ R_1 R_2 \frac{ R_2 - R_1 }{ R_2 - R_1 } }
+        = \sqrt{ R_1 R_2 }
+        = \sqrt{ 0{,}25 \units{Ом} \cdot 4 \units{Ом} }
+        = 1{,}00 \units{Ом}.
+        \\
+     \eta_1
+        &= \frac{ R_1 }{ R_1 + r }
+        = \frac{ \sqrt{ R_1 } }{ \sqrt{ R_1 } + \sqrt{ R_2 } }
+        = 0{,}2, \\
+     \eta_2
+        &= \frac{ R_2 }{ R_2 + r }
+        = \frac{ \sqrt{ R_2 } }{ \sqrt{ R_2 } + \sqrt{ R_1 } }
+        = 0{,}8
+    \end{align*}
 }
 \vspace{150pt}
 
@@ -970,6 +3220,12 @@
     На резистор сопротивлением $r=18\units{Ом}$ подали напряжение $V=240\units{В}$.
     Определите ток, который потечёт через резистор, и мощность, выделяющуюся на нём.
 }
+\answer{
+    \begin{align*}
+    \mathcal{I} &= \frac{ V }{ r } = \frac{ 240 \units{В} }{ 18 \units{Ом} } = 13{,}33 \units{А}, \\
+    P &= \frac{ V^2 }{ r } = \frac{ \sqr{ 240 \units{В} } }{ 18 \units{Ом} } = 3200{,}00 \units{Вт}
+    \end{align*}
+}
 \vspace{150pt}
 
 \tasknumber{2}\task{
@@ -980,12 +3236,81 @@
     $\tau=3\units{с}$? Какая работа будет совершена ЭДС за это время? Каков знак этой работы? Чему равен КПД цепи? Вычислите значения для 2 случаев:
     $r=0$ и $r=3\units{Ом}$.
 }
+\answer{
+    \begin{align*}
+    \mathcal{I}_1
+                    &= \frac{ \mathcal{E} }{ R }
+                    = \frac{ 30 \units{В} }{ 30 \units{Ом} }
+                    = 1{,}00 \units{А}, \\
+    \mathcal{I}_2
+                    &= \frac{ \mathcal{E} }{ R + r }
+                    = \frac{ 30 \units{В} }{ 30 \units{Ом} + 3 \units{Ом} }
+                    = 0{,}91 \units{А}, \\
+    Q_1
+                    &= \mathcal{I}_1^2R\tau
+                    = \cbr{ \frac{ \mathcal{E} }{ R } }^2 R \tau
+                    = \cbr{ \frac{ 30 \units{В} }{ 30 \units{Ом} } }^2 \cdot 30 \units{Ом} \cdot 3 \units{с}
+                    = 90{,}00 \units{Дж}, \\
+    Q_2
+                    &= \mathcal{I}_2^2R\tau
+                    = \cbr{\frac{ \mathcal{E} }{ R + r } }^2 R \tau
+                    = \cbr{\frac{ 30 \units{В} }{ 30 \units{Ом} + 3 \units{Ом} } }^2 \cdot 30 \units{Ом} \cdot 3 \units{с}
+                    = 74{,}38 \units{Дж}, \\
+    A_1
+                    &= \mathcal{I}_1\tau\mathcal{E}
+                    = \frac{ \mathcal{E} }{ R } \tau \mathcal{E}
+                    = \frac{ \mathcal{E}^2 \tau }{ R }
+                    = \frac{ \sqr{ 30 \units{В} } \cdot 3 \units{с} }{ 30 \units{Ом} }
+                    = 90{,}00 \units{Дж}, \text{положительна}, \\
+    A_2
+                    &= \mathcal{I}_2\tau\mathcal{E}
+                    = \frac{ \mathcal{E} }{ R + r } \tau \mathcal{E}
+                    = \frac{ \mathcal{E}^2 \tau }{ R + r }
+                    = \frac{ \sqr{ 30 \units{В} } \cdot 3 \units{с} }{ 30 \units{Ом} + 3 \units{Ом} }
+                    = 81{,}82 \units{Дж}, \text{положительна}, \\
+    \eta_1
+                    &= \frac{ Q_1 }{ A_1 }
+                    = \ldots
+                    = \frac{ R }{ R }
+                    = 1, \\
+    \eta_2
+                    &= \frac{ Q_2 }{ A_2 }
+                    = \ldots
+                    = \frac{ R }{ R + r }
+                    = 0{,}909090909091
+    \end{align*}
+}
 \vspace{150pt}
 
 \tasknumber{3}\task{
     Лампочки, сопротивления которых $R_1=4\units{Ом}$ и $R_2=100\units{Ом}$, поочерёдно подключённные к некоторому источнику тока,
     потребляют одинаковую мощность.
     Найти внутреннее сопротивление источника и КПД цепи в каждом случае.
+}
+\answer{
+    \begin{align*}
+    P_1 &= \sqr{ \frac{ \mathcal{E} }{ R_1 + r } } R_1,
+    P_2  = \sqr{ \frac{ \mathcal{E} }{ R_2 + r } } R_2,
+    P_1 = P_2 \implies \\
+    &\implies R_1 \sqr{ R_2 + r } = R_2 \sqr{ R_1 + r } \implies \\
+    &\implies R_1 R_2^2 + 2 R_1 R_2 r + R_1 r^2 =
+                R_2 R_1^2 + 2 R_2 R_1 r + R_2 r^2  \implies \\
+    &\implies r^2 (R_2 - R_1) = R_2^2 R_2 - R_1^2 R_2 \implies \\
+    &\implies r
+        = \sqrt{ R_1 R_2 \frac{ R_2 - R_1 }{ R_2 - R_1 } }
+        = \sqrt{ R_1 R_2 }
+        = \sqrt{ 4 \units{Ом} \cdot 100 \units{Ом} }
+        = 20{,}00 \units{Ом}.
+        \\
+     \eta_1
+        &= \frac{ R_1 }{ R_1 + r }
+        = \frac{ \sqrt{ R_1 } }{ \sqrt{ R_1 } + \sqrt{ R_2 } }
+        = 0{,}166666666667, \\
+     \eta_2
+        &= \frac{ R_2 }{ R_2 + r }
+        = \frac{ \sqrt{ R_2 } }{ \sqrt{ R_2 } + \sqrt{ R_1 } }
+        = 0{,}833333333333
+    \end{align*}
 }
 \vspace{150pt}
 
@@ -1002,6 +3327,12 @@
     На резистор сопротивлением $R=18\units{Ом}$ подали напряжение $U=180\units{В}$.
     Определите ток, который потечёт через резистор, и мощность, выделяющуюся на нём.
 }
+\answer{
+    \begin{align*}
+    \mathcal{I} &= \frac{ U }{ R } = \frac{ 180 \units{В} }{ 18 \units{Ом} } = 10{,}00 \units{А}, \\
+    P &= \frac{ U^2 }{ R } = \frac{ \sqr{ 180 \units{В} } }{ 18 \units{Ом} } = 1800{,}00 \units{Вт}
+    \end{align*}
+}
 \vspace{150pt}
 
 \tasknumber{2}\task{
@@ -1012,12 +3343,81 @@
     $\tau=1\units{с}$? Какая работа будет совершена ЭДС за это время? Каков знак этой работы? Чему равен КПД цепи? Вычислите значения для 2 случаев:
     $r=0$ и $r=1\units{Ом}$.
 }
+\answer{
+    \begin{align*}
+    \mathcal{I}_1
+                    &= \frac{ \mathcal{E} }{ R }
+                    = \frac{ 60 \units{В} }{ 10 \units{Ом} }
+                    = 6{,}00 \units{А}, \\
+    \mathcal{I}_2
+                    &= \frac{ \mathcal{E} }{ R + r }
+                    = \frac{ 60 \units{В} }{ 10 \units{Ом} + 1 \units{Ом} }
+                    = 5{,}45 \units{А}, \\
+    Q_1
+                    &= \mathcal{I}_1^2R\tau
+                    = \cbr{ \frac{ \mathcal{E} }{ R } }^2 R \tau
+                    = \cbr{ \frac{ 60 \units{В} }{ 10 \units{Ом} } }^2 \cdot 10 \units{Ом} \cdot 1 \units{с}
+                    = 360{,}00 \units{Дж}, \\
+    Q_2
+                    &= \mathcal{I}_2^2R\tau
+                    = \cbr{\frac{ \mathcal{E} }{ R + r } }^2 R \tau
+                    = \cbr{\frac{ 60 \units{В} }{ 10 \units{Ом} + 1 \units{Ом} } }^2 \cdot 10 \units{Ом} \cdot 1 \units{с}
+                    = 297{,}52 \units{Дж}, \\
+    A_1
+                    &= \mathcal{I}_1\tau\mathcal{E}
+                    = \frac{ \mathcal{E} }{ R } \tau \mathcal{E}
+                    = \frac{ \mathcal{E}^2 \tau }{ R }
+                    = \frac{ \sqr{ 60 \units{В} } \cdot 1 \units{с} }{ 10 \units{Ом} }
+                    = 360{,}00 \units{Дж}, \text{положительна}, \\
+    A_2
+                    &= \mathcal{I}_2\tau\mathcal{E}
+                    = \frac{ \mathcal{E} }{ R + r } \tau \mathcal{E}
+                    = \frac{ \mathcal{E}^2 \tau }{ R + r }
+                    = \frac{ \sqr{ 60 \units{В} } \cdot 1 \units{с} }{ 10 \units{Ом} + 1 \units{Ом} }
+                    = 327{,}27 \units{Дж}, \text{положительна}, \\
+    \eta_1
+                    &= \frac{ Q_1 }{ A_1 }
+                    = \ldots
+                    = \frac{ R }{ R }
+                    = 1, \\
+    \eta_2
+                    &= \frac{ Q_2 }{ A_2 }
+                    = \ldots
+                    = \frac{ R }{ R + r }
+                    = 0{,}909090909091
+    \end{align*}
+}
 \vspace{150pt}
 
 \tasknumber{3}\task{
     Лампочки, сопротивления которых $R_1=3\units{Ом}$ и $R_2=48\units{Ом}$, поочерёдно подключённные к некоторому источнику тока,
     потребляют одинаковую мощность.
     Найти внутреннее сопротивление источника и КПД цепи в каждом случае.
+}
+\answer{
+    \begin{align*}
+    P_1 &= \sqr{ \frac{ \mathcal{E} }{ R_1 + r } } R_1,
+    P_2  = \sqr{ \frac{ \mathcal{E} }{ R_2 + r } } R_2,
+    P_1 = P_2 \implies \\
+    &\implies R_1 \sqr{ R_2 + r } = R_2 \sqr{ R_1 + r } \implies \\
+    &\implies R_1 R_2^2 + 2 R_1 R_2 r + R_1 r^2 =
+                R_2 R_1^2 + 2 R_2 R_1 r + R_2 r^2  \implies \\
+    &\implies r^2 (R_2 - R_1) = R_2^2 R_2 - R_1^2 R_2 \implies \\
+    &\implies r
+        = \sqrt{ R_1 R_2 \frac{ R_2 - R_1 }{ R_2 - R_1 } }
+        = \sqrt{ R_1 R_2 }
+        = \sqrt{ 3 \units{Ом} \cdot 48 \units{Ом} }
+        = 12{,}00 \units{Ом}.
+        \\
+     \eta_1
+        &= \frac{ R_1 }{ R_1 + r }
+        = \frac{ \sqrt{ R_1 } }{ \sqrt{ R_1 } + \sqrt{ R_2 } }
+        = 0{,}2, \\
+     \eta_2
+        &= \frac{ R_2 }{ R_2 + r }
+        = \frac{ \sqrt{ R_2 } }{ \sqrt{ R_2 } + \sqrt{ R_1 } }
+        = 0{,}8
+    \end{align*}
 }
 \vspace{150pt}
 
@@ -1034,6 +3434,12 @@
     Через резистор сопротивлением $R=5\units{Ом}$ протекает электрический ток $\mathcal{I}=5\units{А}$.
     Определите, чему равны напряжение на резисторе и мощность, выделяющаяся на нём.
 }
+\answer{
+    \begin{align*}
+    U &= \mathcal{I}R = 5 \units{А} \cdot 5 \units{Ом} = 25 \units{В}, \\
+    P &= \mathcal{I}^2R = \sqr{ 5 \units{А} } \cdot 5 \units{Ом} = 125 \units{Вт}
+    \end{align*}
+}
 \vspace{150pt}
 
 \tasknumber{2}\task{
@@ -1044,12 +3450,81 @@
     $\tau=4\units{с}$? Какая работа будет совершена ЭДС за это время? Каков знак этой работы? Чему равен КПД цепи? Вычислите значения для 2 случаев:
     $r=0$ и $r=4\units{Ом}$.
 }
+\answer{
+    \begin{align*}
+    \mathcal{I}_1
+                    &= \frac{ \mathcal{E} }{ R }
+                    = \frac{ 60 \units{В} }{ 15 \units{Ом} }
+                    = 4{,}00 \units{А}, \\
+    \mathcal{I}_2
+                    &= \frac{ \mathcal{E} }{ R + r }
+                    = \frac{ 60 \units{В} }{ 15 \units{Ом} + 4 \units{Ом} }
+                    = 3{,}16 \units{А}, \\
+    Q_1
+                    &= \mathcal{I}_1^2R\tau
+                    = \cbr{ \frac{ \mathcal{E} }{ R } }^2 R \tau
+                    = \cbr{ \frac{ 60 \units{В} }{ 15 \units{Ом} } }^2 \cdot 15 \units{Ом} \cdot 4 \units{с}
+                    = 960{,}00 \units{Дж}, \\
+    Q_2
+                    &= \mathcal{I}_2^2R\tau
+                    = \cbr{\frac{ \mathcal{E} }{ R + r } }^2 R \tau
+                    = \cbr{\frac{ 60 \units{В} }{ 15 \units{Ом} + 4 \units{Ом} } }^2 \cdot 15 \units{Ом} \cdot 4 \units{с}
+                    = 598{,}34 \units{Дж}, \\
+    A_1
+                    &= \mathcal{I}_1\tau\mathcal{E}
+                    = \frac{ \mathcal{E} }{ R } \tau \mathcal{E}
+                    = \frac{ \mathcal{E}^2 \tau }{ R }
+                    = \frac{ \sqr{ 60 \units{В} } \cdot 4 \units{с} }{ 15 \units{Ом} }
+                    = 960{,}00 \units{Дж}, \text{положительна}, \\
+    A_2
+                    &= \mathcal{I}_2\tau\mathcal{E}
+                    = \frac{ \mathcal{E} }{ R + r } \tau \mathcal{E}
+                    = \frac{ \mathcal{E}^2 \tau }{ R + r }
+                    = \frac{ \sqr{ 60 \units{В} } \cdot 4 \units{с} }{ 15 \units{Ом} + 4 \units{Ом} }
+                    = 757{,}89 \units{Дж}, \text{положительна}, \\
+    \eta_1
+                    &= \frac{ Q_1 }{ A_1 }
+                    = \ldots
+                    = \frac{ R }{ R }
+                    = 1, \\
+    \eta_2
+                    &= \frac{ Q_2 }{ A_2 }
+                    = \ldots
+                    = \frac{ R }{ R + r }
+                    = 0{,}789473684211
+    \end{align*}
+}
 \vspace{150pt}
 
 \tasknumber{3}\task{
     Лампочки, сопротивления которых $R_1=0.25\units{Ом}$ и $R_2=64\units{Ом}$, поочерёдно подключённные к некоторому источнику тока,
     потребляют одинаковую мощность.
     Найти внутреннее сопротивление источника и КПД цепи в каждом случае.
+}
+\answer{
+    \begin{align*}
+    P_1 &= \sqr{ \frac{ \mathcal{E} }{ R_1 + r } } R_1,
+    P_2  = \sqr{ \frac{ \mathcal{E} }{ R_2 + r } } R_2,
+    P_1 = P_2 \implies \\
+    &\implies R_1 \sqr{ R_2 + r } = R_2 \sqr{ R_1 + r } \implies \\
+    &\implies R_1 R_2^2 + 2 R_1 R_2 r + R_1 r^2 =
+                R_2 R_1^2 + 2 R_2 R_1 r + R_2 r^2  \implies \\
+    &\implies r^2 (R_2 - R_1) = R_2^2 R_2 - R_1^2 R_2 \implies \\
+    &\implies r
+        = \sqrt{ R_1 R_2 \frac{ R_2 - R_1 }{ R_2 - R_1 } }
+        = \sqrt{ R_1 R_2 }
+        = \sqrt{ 0{,}25 \units{Ом} \cdot 64 \units{Ом} }
+        = 4{,}00 \units{Ом}.
+        \\
+     \eta_1
+        &= \frac{ R_1 }{ R_1 + r }
+        = \frac{ \sqrt{ R_1 } }{ \sqrt{ R_1 } + \sqrt{ R_2 } }
+        = 0{,}0588235294118, \\
+     \eta_2
+        &= \frac{ R_2 }{ R_2 + r }
+        = \frac{ \sqrt{ R_2 } }{ \sqrt{ R_2 } + \sqrt{ R_1 } }
+        = 0{,}941176470588
+    \end{align*}
 }
 \vspace{150pt}
 

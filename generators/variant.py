@@ -62,7 +62,7 @@ class MultiplePaper(object):
             tasksJoiner = ''
             variantsJoiner = ''
         else:
-            tasksJoiner = u'\n\\vspace{120pt}'
+            tasksJoiner = u'\n\\vspace{150pt}'
             variantsJoiner = u'\n\\newpage'
         tasksJoiner += '\n\n'
         variantsJoiner += '\n\n'

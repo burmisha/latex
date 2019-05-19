@@ -190,11 +190,17 @@ class SumTask(variant.VariantTask):
 # LetterValue = collections.namedtuple('LetterValue', ['Letter', 'Value'])
 
 class Units(object):
-    def __init__(self, basic=None, standard=None, power=None):
+    def __init__(self, basic=None, standard=None, power=0):
         self.Basic = basic
         self.Standard = standard
         self.Power = power
-        assert (self.Basic == self.Standard) == (self.Power == 0)
+        if self.Power == 0:
+            assert self.Standard is not None
+            if not self.Basic:
+                self.Basic = self.Standard
+            assert self.Basic == self.Standard
+        else:
+            assert self.Basic != self.Standard
 
 
 class LetterValue(object):
@@ -202,6 +208,13 @@ class LetterValue(object):
         self.Letter = Letter
         self.Value = Value
         self.Units = units
+
+    def __repr__(self):
+        return ' '.join([
+            'Letter: %r' % [self.Letter, type(self.Letter)],
+            'Value: %r' % [self.Value, type(self.Value)],
+            'Units: %r' % [self.Units, type(self.Units)],
+        ])
 
     def __format__(self, format):
         if isinstance(self.Value, int):
@@ -211,21 +224,30 @@ class LetterValue(object):
         if self.Value < 0:
             fmt = '(%s)' % fmt
         value = fmt.format(self.Value).replace('.', '{,}')
+        if ':' in format:
+            format, suffix = format.split(':')
+        else:
+            suffix = None
         if format == 'Task':
-            return u'{self.Letter}={self.Value}{self.Units.Basic}'.format(self=self)
+            result = u'{self.Letter}={self.Value}{self.Units.Basic}'.format(self=self)
         elif format == 'Letter':
-            return u'{self.Letter}'.format(self=self)
+            result = u'{self.Letter}'.format(self=self)
         elif format == 'Value':
-            return u'{self.Value}'.format(self=self)
+            result = u'{self.Value}'.format(self=self).replace('.', '{,}')
         elif format == 'ShortAnswer':
-            return u'{value}{self.Units.Basic}'.format(self=self, value=value)
+            result = u'{value}{self.Units.Basic}'.format(self=self, value=value)
         elif format == 'Answer':
             if self.Units.Power != 0:
-                return u'{value} \\cdot 10^{{{self.Units.Power}}} {self.Units.Standard}'.format(self=self, value=value)
+                result = u'{value} \\cdot 10^{{{self.Units.Power}}} {self.Units.Standard}'.format(self=self, value=value)
             else:
-                return u'{value} {self.Units.Standard}'.format(self=self, value=value)
+                result = u'{value} {self.Units.Standard}'.format(self=self, value=value)
         else:
             raise RuntimeError('Error on format %r' % format)
+
+        if suffix == 's':
+            result = u'{ ' + result + ' }'
+
+        return result
 
 
 class Potential728(variant.VariantTask):
@@ -233,7 +255,7 @@ class Potential728(variant.VariantTask):
         # 728(737) - Rymkevich
         answer = u'''
             \\begin{{align*}}
-            A   = {E.Letter}{q.Letter}{l.Letter} 
+            A   = {E.Letter}{q.Letter}{l.Letter}
                 = {E:Answer} \\cdot {q:Answer} \\cdot {l:Answer}
                 = {A:.2f} \\cdot 10^{{-7}} \\units{{Дж}}
             \\end{{align*}}
@@ -270,7 +292,7 @@ class Potential735(variant.VariantTask):
         # 735(737) - Rymkevich
         return problems.task.Task(u'''
             Напряжение между двумя точками, лежащими на одной линии напряжённости однородного электрического поля,
-            равно ${U.Letter}={U.Value}\\units{{кВ}}$. Расстояние между точками ${l.Letter}={l.Value}\\units{{см}}$. 
+            равно ${U.Letter}={U.Value}\\units{{кВ}}$. Расстояние между точками ${l.Letter}={l.Value}\\units{{см}}$.
             Какова напряжённость этого поля?
         '''.format(
             l=l,
@@ -289,7 +311,7 @@ class Potential737(variant.VariantTask):
     def __call__(self, l=None, alpha=None, E=None):
         # 737(739) - Rymkevich
         return problems.task.Task(u'''
-            Найти напряжение между точками $A$ и $B$ в однородном электрическом поле (см. рис. на доске), если 
+            Найти напряжение между точками $A$ и $B$ в однородном электрическом поле (см. рис. на доске), если
             $AB={l.Letter}={l.Value}\\units{{см}}$,
             ${alpha.Letter}={alpha.Value}^\\circ$,
             ${E.Letter}={E.Value}\\funits{{В}}{{м}}$.
@@ -349,7 +371,7 @@ class Potential1621(variant.VariantTask):
 class Rymkevich748(variant.VariantTask):
     def __call__(self, U=None, Q=None):
         answer = u'''
-            ${Q.Letter} = {C.Letter}{U.Letter} \\implies 
+            ${Q.Letter} = {C.Letter}{U.Letter} \\implies
             {C.Letter} = \\frac{{{Q.Letter}}}{{{U.Letter}}} = \\frac{{{Q:Answer}}}{{{U:Answer}}} = {C:Answer} = {C:ShortAnswer}.
             \\text{{ Заряды обкладок: ${Q.Letter}$ и $-{Q.Letter}$}}$
         '''.format(
@@ -359,7 +381,7 @@ class Rymkevich748(variant.VariantTask):
         )
         return problems.task.Task(u'''
             Определите ёмкость конденсатора, если при его зарядке до напряжения
-            ${U:Task}$ он приобретает заряд ${Q:Task}$. 
+            ${U:Task}$ он приобретает заряд ${Q:Task}$.
             Чему при этом равны заряды обкладок конденсатора (сделайте рисунок)?
         '''.format(U=U, Q=Q),
         answer=answer,
@@ -427,7 +449,7 @@ class Rymkevich751(variant.VariantTask):
         answer = u'''
             $\\frac{{C'}}{{C}}
                 = \\frac{{\\eps_0\\eps \\frac S{a}}}{{\\frac d{b}}} \\Big/ \\frac{{\\eps_0\\eps S}}{{d}}
-                = \\frac ba {sign} 1 \\implies \\text{{{result}}}
+                = \\frac{{ {b} }}{{ {a} }} {sign} 1 \\implies \\text{{{result}}}
             $
         '''.format(a=a, b=b, sign=sign, result=result)
         return problems.task.Task(u'''
@@ -459,7 +481,7 @@ class Rymkevich762(variant.VariantTask):
             Q=Q,
             W=LetterValue(Letter='W', Value=1. * Q.Value ** 2 / 2 / C.Value, units=Units(basic=u'\\units{мкДж}', standard=u'\\units{Дж}', power=-6)),
         )
-        
+
         return problems.task.Task(u'''
             Электрическая ёмкость конденсатора равна ${C:Task}$,
             при этом ему сообщён заряд ${Q:Task}$. Какова энергия заряженного конденсатора?
@@ -520,16 +542,32 @@ class Rezistor1(variant.VariantTask):
     def __call__(self, R=None, I=None, U=None):
         assert R and ((I is None) != (U is None))
         if I:
+            U = LetterValue(Letter='U', Value=I.Value * R.Value, units=Units(basic=u'\\units{В}', standard=u'\\units{В}', power=0))
+            P = LetterValue(Letter='P', Value=I.Value ** 2 * R.Value, units=Units(basic=u'\\units{Вт}', standard=u'\\units{Вт}', power=0))
             text = u'''
                 Через резистор сопротивлением ${R:Task}$ протекает электрический ток ${I:Task}$.
                 Определите, чему равны напряжение на резисторе и мощность, выделяющаяся на нём.
             '''.format(R=R, I=I)
+            answer = u'''
+                \\begin{{align*}}
+                {U:Letter} &= {I:Letter}{R:Letter} = {I:Answer} \\cdot {R:Answer} = {U:Answer}, \\\\
+                {P:Letter} &= {I:Letter}^2{R:Letter} = \\sqr{I:Answer:s} \\cdot {R:Answer} = {P:Answer}
+                \\end{{align*}}
+            '''
         elif U:
+            I = LetterValue(Letter='\\mathcal{I}', Value=1. * U.Value / R.Value, units=Units(basic=u'\\units{А}', standard=u'\\units{А}', power=0))
+            P = LetterValue(Letter='P', Value=1. * U.Value ** 2 / R.Value, units=Units(basic=u'\\units{Вт}', standard=u'\\units{Вт}', power=0))
             text = u'''
                 На резистор сопротивлением ${R:Task}$ подали напряжение ${U:Task}$.
                 Определите ток, который потечёт через резистор, и мощность, выделяющуюся на нём.
             '''.format(R=R, U=U)
-        return problems.task.Task(text)
+            answer = u'''
+                \\begin{{align*}}
+                {I:Letter} &= \\frac{U:Letter:s}{R:Letter:s} = \\frac{U:Answer:s}{R:Answer:s} = {I:Answer}, \\\\
+                {P:Letter} &= \\frac{{ {U:Letter}^2 }}{R:Letter:s} = \\frac{{ \\sqr{U:Answer:s} }}{R:Answer:s} = {P:Answer}
+                \\end{{align*}}
+            '''
+        return problems.task.Task(text, answer=answer.format(I=I, U=U, R=R, P=P))
 
     def All(self):
         for rLetter, rValue in itertools.product(['r', 'R'], [5, 12, 18, 30]):
@@ -548,31 +586,116 @@ class Rezistor1(variant.VariantTask):
 
 class Rezistor2(variant.VariantTask):
     def __call__(self, r=None, R=None, E=None, t=None):
+        I1 = LetterValue(Letter='\\mathcal{I}_1', Value=1. * E.Value / R.Value, units=Units(standard=u'\\units{А}'))
+        I2 = LetterValue(Letter='\\mathcal{I}_2', Value=1. * E.Value / (R.Value + r.Value), units=Units(standard=u'\\units{А}'))
+        Q1 = LetterValue(Letter='Q_1', Value=1. * I1.Value ** 2 * R.Value * t.Value, units=Units(standard=u'\\units{Дж}'))
+        Q2 = LetterValue(Letter='Q_2', Value=1. * I2.Value ** 2 * R.Value * t.Value, units=Units(standard=u'\\units{Дж}'))
+        A1 = LetterValue(Letter='A_1', Value=1. * I1.Value * E.Value * t.Value, units=Units(standard=u'\\units{Дж}'))
+        A2 = LetterValue(Letter='A_2', Value=1. * I2.Value * E.Value * t.Value, units=Units(standard=u'\\units{Дж}'))
+        # eta1 = LetterValue(Letter='\\eta_1', Value=1. * 15 /Q1.Value, units=Units(standard=u''))
+        # print А2.Value
+        # eta1 = LetterValue(Letter='\\eta_1', Value=, units=Units(standard=u''))
+        # print A2.Value
+        # print A2
+        # # print int(А2.Value)
+        eta1 = LetterValue(Letter='\\eta_1', Value=1. * Q1.Value / A1.Value, units=Units(standard=u''))
+        eta2 = LetterValue(Letter='\\eta_2', Value=1. * Q2.Value / A2.Value, units=Units(standard=u''))
+        answer = u'''
+            \\begin{{align*}}
+            {I1:Letter}
+                            &= \\frac{E:Letter:s}{R:Letter:s}
+                            = \\frac{E:Answer:s}{R:Answer:s}
+                            = {I1:Answer}, \\\\
+            {I2:Letter}
+                            &= \\frac{E:Letter:s}{{ {R:Letter} + {r:Letter} }}
+                            = \\frac{E:Answer:s}{{ {R:Answer} + {r:Answer} }}
+                            = {I2:Answer}, \\\\
+            {Q1:Letter}
+                            &= {I1:Letter}^2{R:Letter}{t:Letter}
+                            = \\cbr{{ \\frac{E:Letter:s}{R:Letter:s} }}^2 {R:Letter} {t:Letter}
+                            = \\cbr{{ \\frac{E:Answer:s}{R:Answer:s} }}^2 \\cdot {R:Answer} \\cdot {t:Answer}
+                            = {Q1:Answer}, \\\\
+            {Q2:Letter}
+                            &= {I2:Letter}^2{R:Letter}{t:Letter}
+                            = \\cbr{{\\frac{E:Letter:s}{{ {R:Letter} + {r:Letter} }} }}^2 {R:Letter} {t:Letter}
+                            = \\cbr{{\\frac{E:Answer:s}{{ {R:Answer} + {r:Answer} }} }}^2 \\cdot {R:Answer} \\cdot {t:Answer}
+                            = {Q2:Answer}, \\\\
+            {A1:Letter}
+                            &= {I1:Letter}{t:Letter}{E:Letter}
+                            = \\frac{E:Letter:s}{{ {R:Letter} }} {t:Letter} {E:Letter}
+                            = \\frac{{ {E:Letter}^2 {t:Letter} }}{{ {R:Letter} }}
+                            = \\frac{{ \\sqr{E:Answer:s} \\cdot {t:Answer} }}{R:Answer:s}
+                            = {A1:Answer}, \\text{{положительна}}, \\\\
+            {A2:Letter}
+                            &= {I2:Letter}{t:Letter}{E:Letter}
+                            = \\frac{E:Letter:s}{{ {R:Letter} + {r:Letter} }} {t:Letter} {E:Letter}
+                            = \\frac{{ {E:Letter}^2 {t:Letter} }}{{ {R:Letter} + {r:Letter} }}
+                            = \\frac{{ \\sqr{E:Answer:s} \\cdot {t:Answer} }}{{ {R:Answer} + {r:Answer} }}
+                            = {A2:Answer}, \\text{{положительна}}, \\\\
+            {eta1:Letter}
+                            &= \\frac{Q1:Letter:s}{A1:Letter:s}
+                            = \\ldots
+                            = \\frac{R:Letter:s}{R:Letter:s}
+                            = 1, \\\\
+            {eta2:Letter}
+                            &= \\frac{Q2:Letter:s}{A2:Letter:s}
+                            = \\ldots
+                            = \\frac{R:Letter:s}{{ {R:Letter} + {r:Letter} }}
+                            = {eta2:Value}
+            \\end{{align*}}
+        '''.format(I1=I1, I2=I2, Q1=Q1, Q2=Q2, A1=A1, A2=A2, eta1=eta1, eta2=eta2, E=E, r=r, R=R, t=t)
         text = u'''
             Замкнутая электрическая цепь состоит из ЭДС ${E:Task}$ и сопротивлением ${r:Letter}$
             и резистора ${R:Task}$. Определите ток, протекающий в цепи. Какая тепловая энергия выделится на резисторе за время
             ${t:Task}$? Какая работа будет совершена ЭДС за это время? Каков знак этой работы? Чему равен КПД цепи? Вычислите значения для 2 случаев:
             ${r:Letter}=0$ и ${r:Task}$.
         '''.format(E=E, r=r, R=R, t=t)
-        return problems.task.Task(text)
+        return problems.task.Task(text, answer=answer)
 
     def All(self):
         for rValue, RValue, EValue, tValue in itertools.product([1, 2, 3, 4], [10, 15, 24, 30], [10, 20, 30, 60], [2, 5, 10]):
             yield self.__call__(
-                E=LetterValue(Letter='\\mathcal{E}', Value=EValue, units=Units(basic=u'\\units{В}', standard=u'\\units{В}', power=0)),
-                R=LetterValue(Letter='R', Value=RValue, units=Units(basic=u'\\units{Ом}', standard=u'\\units{Ом}', power=0)),
-                r=LetterValue(Letter='r', Value=rValue, units=Units(basic=u'\\units{Ом}', standard=u'\\units{Ом}', power=0)),
-                t=LetterValue(Letter='\\tau', Value=rValue, units=Units(basic=u'\\units{с}', standard=u'\\units{с}', power=0)),
+                E=LetterValue(Letter='\\mathcal{E}', Value=EValue, units=Units(standard=u'\\units{В}')),
+                R=LetterValue(Letter='R', Value=RValue, units=Units(standard=u'\\units{Ом}')),
+                r=LetterValue(Letter='r', Value=rValue, units=Units(standard=u'\\units{Ом}')),
+                t=LetterValue(Letter='\\tau', Value=rValue, units=Units(standard=u'\\units{с}')),
             )
 
 
 class Rezistor3(variant.VariantTask):
     def __call__(self, R=None):
+        r = LetterValue(Letter='r', Value=(1. * R[0].Value * R[1].Value) ** 0.5, units=Units(standard=u'\\units{Ом}'))
+        eta1 = LetterValue(Letter='\\eta_1', Value=1. * R[0].Value / (R[0].Value + r.Value), units=Units(standard=u''))
+        eta2 = LetterValue(Letter='\\eta_2', Value=1. * R[1].Value / (R[1].Value + r.Value), units=Units(standard=u''))
+        answer = u'''
+            \\begin{{align*}}
+            P_1 &= \\sqr{{ \\frac{E:Letter:s}{{ {R[0]:Letter} + {r:Letter} }} }} {R[0]:Letter},
+            P_2  = \\sqr{{ \\frac{E:Letter:s}{{ {R[1]:Letter} + {r:Letter} }} }} {R[1]:Letter},
+            P_1 = P_2 \\implies \\\\
+            &\\implies {R[0]:Letter} \\sqr{{ {R[1]:Letter} + {r:Letter} }} = {R[1]:Letter} \\sqr{{ {R[0]:Letter} + {r:Letter} }} \\implies \\\\
+            &\\implies {R[0]:Letter} {R[1]:Letter}^2 + 2 {R[0]:Letter} {R[1]:Letter} {r:Letter} + {R[0]:Letter} {r:Letter}^2 =
+                        {R[1]:Letter} {R[0]:Letter}^2 + 2 {R[1]:Letter} {R[0]:Letter} {r:Letter} + {R[1]:Letter} {r:Letter}^2  \\implies \\\\
+            &\\implies {r:Letter}^2 ({R[1]:Letter} - {R[0]:Letter}) = {R[1]:Letter}^2 {R[1]:Letter} - {R[0]:Letter}^2 {R[1]:Letter} \\implies \\\\
+            &\\implies {r:Letter}
+                = \\sqrt{{ {R[0]:Letter} {R[1]:Letter} \\frac{{ {R[1]:Letter} - {R[0]:Letter} }}{{ {R[1]:Letter} - {R[0]:Letter} }} }}
+                = \\sqrt{{ {R[0]:Letter} {R[1]:Letter} }}
+                = \\sqrt{{ {R[0]:Answer} \\cdot {R[1]:Answer} }}
+                = {r:Answer}. \\\\
+             {eta1:Letter}
+                &= \\frac{R[0]:Letter:s}{{ {R[0]:Letter} + {r:Letter} }}
+                = \\frac{{ \\sqrt{R[0]:Letter:s} }}{{ \\sqrt{R[0]:Letter:s} + \\sqrt{R[1]:Letter:s} }}
+                = {eta1:Value}, \\\\
+             {eta2:Letter}
+                &= \\frac{R[1]:Letter:s}{{ {R[1]:Letter} + {r:Letter} }}
+                = \\frac{{ \\sqrt{R[1]:Letter:s} }}{{ \\sqrt{R[1]:Letter:s} + \\sqrt{R[0]:Letter:s} }}
+                = {eta2:Value}
+            \\end{{align*}}
+        '''.format(R=R, r=r, eta1=eta1, eta2=eta2, E=LetterValue(Letter='\\mathcal{E}', Value=0, units=None))
         text = u'''
             Лампочки, сопротивления которых ${R[0]:Task}$ и ${R[1]:Task}$, поочерёдно подключённные к некоторому источнику тока,
             потребляют одинаковую мощность. Найти внутреннее сопротивление источника и КПД цепи в каждом случае.
         '''.format(R=R)
-        return problems.task.Task(text)
+        return problems.task.Task(text, answer=answer)
 
     def All(self):
         for RValues in [
