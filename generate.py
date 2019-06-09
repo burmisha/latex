@@ -20,12 +20,12 @@ def generate(args):
     fileWriter = library.files.FileWriter(args.filter)
     tripodFormat = args.tripod
     if tripodFormat:
-        getText = {
-            'tex': lambda r: r.GetTex(),
-            'txt': lambda r: r.GetText(),
+        getText, extension = {
+            'tex': (lambda r: r.GetTex(), 'tex'),
+            'txt': (lambda r: r.GetText(), 'txt'),
         }[tripodFormat]
         for className, report in library.tripod.getTripodReports():
-            fileWriter.Write(os.path.join('school-554', 'tripod'), className + '-tripod.tex', text=getText(report))
+            fileWriter.Write(os.path.join('school-554', 'tripod'), className + '-tripod.%s' % extension, text=getText(report))
         return
 
     generateProblems= False
