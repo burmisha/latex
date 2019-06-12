@@ -6,7 +6,7 @@ import collections
 
 import problems
 import variant
-from variant import LetterValue, Units
+from variant import LetterValue, Units, UnitValue
 
 log = logging.getLogger(__name__)
 
@@ -677,13 +677,13 @@ class Rezistor4(variant.VariantTask):
         ):
             if r1Value != r2Value and E1Value != E2Value:
                 yield self.__call__(
-                    R = LetterValue(Letter='R', Value=RValue, units=Units(standard=u'\\units{Ом}')),
+                    R = UnitValue(u'R = %d Ом' % RValue),
                     r=[
-                        LetterValue(Letter='r_1', Value=r1Value, units=Units(standard=u'\\units{Ом}')),
-                        LetterValue(Letter='r_2', Value=r2Value, units=Units(standard=u'\\units{Ом}')),
+                        UnitValue(u'r_1 = %d Ом' % r1Value),
+                        UnitValue(u'r_2 = %d Ом' % r2Value),
                     ],
                     E=[
-                        LetterValue(Letter='\\mathcal{E}_1', Value=E1Value, units=Units(standard=u'\\units{В}')),
-                        LetterValue(Letter='\\mathcal{E}_2', Value=E2Value, units=Units(standard=u'\\units{В}')),
+                        UnitValue(u'\\mathcal{E}_1 = %d В' % E1Value),
+                        UnitValue(u'\\mathcal{E}_2 = %d В' % E2Value),
                     ],
                 )

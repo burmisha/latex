@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import random
 import logging
 
@@ -90,6 +92,131 @@ class MultiplePaper(object):
         filename += '.tex'
         log.debug('Got filename %r', filename)
         return filename
+
+
+class UnitValue(object):
+    def __init__(self, line, letter=None):
+        if letter is None:
+            if '=' in line:
+                letter, line = line.split('=', 1)
+                self.Letter = letter.strip()
+                line = line.strip()
+            else:
+                self.Letter = None
+        else:
+            self.Letter = letter
+        self.HumanUnits = [[], []]
+        self.ReadyUnits = [[], []]
+        isUp = True
+        assert line.count('/') <= 1
+        self.Parts = []
+        if ' ' in line:
+            value, unitsSuffix = line.split(' ', 1)
+        else:
+            value = line.strip()
+            unitsSuffix = ''
+        try:
+            value = int(value)
+        except ValueError:
+            try:
+                signsCount = len(l for l in value if l != '.')
+                value = float(value)
+            except:
+                log.error('Could not get value from %r', value)
+                raise
+
+        self.Value = value
+        for part in unitsSuffix.split():
+            log.debug('Part: %r', part)
+            if part == '/':
+                isUp = False
+                continue
+            mainUnit, mainPower, humanUnit, power = self.ParseItem(part)
+            index = 0 if isUp else 1
+            self.HumanUnits[index].append((humanUnit, power))
+            self.ReadyUnits[index].append((mainUnit, mainPower))
+
+        totalPower = sum(power for _, power in self.ReadyUnits[0]) - sum(power for _, power in self.ReadyUnits[1])
+        log.debug('Letter: %r, Total power: %r', self.Letter, totalPower)
+
+
+    def ParseItem(self, item):
+        try:
+            if '^' in item:
+                item, power = item.split('^')
+                power = int(power)
+            else:
+                power = 1
+
+            prefix = ''
+            main = item
+            for suffix in [u'В', u'Дж', u'Н', u'Вт', u'Ом', u'Ф', u'А', u'Кл', u'г', u'с', u'м']:
+                if item.endswith(suffix):
+                    main = suffix
+                    prefix = item[:-len(suffix)]
+                    break
+            exponent = {
+                '': 0,
+                u'к': 3,
+                u'м': -3,
+                u'с': -2,
+                u'д': -1,
+                u'М': 6,
+                u'Г': 9,
+                u'мк': -6,
+                u'н': -9,
+                u'п': -12,
+            }[prefix]
+            return main, exponent * power, item, power
+        except:
+            log.exception(u'Error on item %s', item)
+            raise
+
+    def GetUnits(self, items):
+        parts = []
+        for unit, power in items:
+            if power == 1:
+                part = '\\text{%s}' % unit
+            else:
+                part = '\\text{%s}^{%d}' % (unit, power)
+            parts.append(part)
+        return '\\cdot'.join(parts)
+
+    def __format__(self, format):
+        if isinstance(self.Value, int):
+            fmt = '{:d}'
+        else:
+            fmt = '{:.2f}'
+        if self.Value < 0:
+            fmt = '(%s)' % fmt
+        value = fmt.format(self.Value).replace('.', '{,}')
+
+        if ':' in format:
+            format, suffix = format.split(':')
+        else:
+            suffix = None
+
+        needLetter = False
+        humanNom = self.GetUnits(self.HumanUnits[0])
+        humanDen = self.GetUnits(self.HumanUnits[1])
+        if humanDen:
+            units = '\\frac{%s}{%s}' % (humanNom, humanDen)
+        else:
+            units = humanNom
+        if format == 'Task':
+            result = u'{self.Value}\\,{units}'.format(self=self, units=units)
+            needLetter = True
+        else:
+            raise RuntimeError('Error on format %r' % format)
+
+        if needLetter and self.Letter:
+            result = '%s = %s' % (self.Letter, result)
+
+        if suffix == 's':
+            result = u'{ ' + result + ' }'
+
+        return result
+
 
 
 class Units(object):
