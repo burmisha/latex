@@ -14,7 +14,7 @@ def getLucky(lucky):
         count = int(count)
     else:
         className = lucky
-    className = 'class-2018-{}'.format(className)
+    className = 'class-2019-{}'.format(className)
     pupilsList = list(pupils.getPupils(className).Iterate())
     random.seed(int(time.time()))
     random.shuffle(pupilsList)
