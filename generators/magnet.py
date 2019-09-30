@@ -127,13 +127,13 @@ class Chernoutsan11_01(variant.VariantTask):
 
 
 class Chernoutsan11_02(variant.VariantTask):
-    def __call__(self, B=None, r=None):
+    def __call__(self, B=None, rho=None):
         text = u'''
             В однородном горизонтальном магнитном поле с индукцией ${B:Task}$ находится проводник, 
             расположенный также горизонтально и перпендикулярно полю. 
             Какой ток необходимо пустить по проводнику, чтобы он завис? 
-            Масса единицы длины проводника ${r:Task}$, ${g:Task}$.
-        '''.format(B=B, r=r, g=UnitValue(u'g = 10 м / c^2'))
+            Масса единицы длины проводника ${rho:Task}$, ${g:Task}$.
+        '''.format(B=B, rho=rho, g=UnitValue(u'g = 10 м / c^2'))
         return problems.task.Task(text)
 
     def All(self):
@@ -143,7 +143,7 @@ class Chernoutsan11_02(variant.VariantTask):
         ):
             yield self.__call__(
                 B=UnitValue(u'B = %d мТл' % B),
-                r=UnitValue(u'\\rho = %d Ом / м' % r),
+                r=UnitValue(u'\\rho = %d кг / м' % r),
             )
 
 
