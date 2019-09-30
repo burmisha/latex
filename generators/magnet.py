@@ -143,7 +143,7 @@ class Chernoutsan11_02(variant.VariantTask):
         ):
             yield self.__call__(
                 B=UnitValue(u'B = %d мТл' % B),
-                r=UnitValue(u'\\rho = %d кг / м' % r),
+                rho=UnitValue(u'\\rho = %d кг / м' % r),  # TODO: г / м
             )
 
 
