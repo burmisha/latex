@@ -108,6 +108,21 @@ def generate(args):
                     generators.quantum.Quantum1120(),
                 ],
             },
+            'class-2019-11': {
+                '2019-09-11': [
+                    generators.magnet.ConstMagnet0(),
+                    generators.magnet.ConstMagnet1(),
+                    generators.magnet.ConstMagnet2(),
+                    generators.magnet.ConstMagnet3(),
+                ],
+            },
+            'class-2019-11S': {
+                '2019-09-30': [
+                    generators.magnet.Chernoutsan11_01(),
+                    generators.magnet.Chernoutsan11_02(),
+                    generators.magnet.Chernoutsan11_5(),
+                ],
+            },
         }
         for className, dateTasks in classRandomTasks.iteritems():
             classLetter = className.split('-')[-1]
