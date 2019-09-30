@@ -119,7 +119,7 @@ class UnitValue(object):
             value = int(value)
         except ValueError:
             try:
-                signsCount = len(l for l in value if l != '.')
+                signsCount = len([l for l in value if l != '.'])
                 value = float(value)
             except:
                 log.error('Could not get value from %r', value)
@@ -150,7 +150,7 @@ class UnitValue(object):
 
             prefix = ''
             main = item
-            for suffix in [u'В', u'Дж', u'Н', u'Вт', u'Ом', u'Ф', u'А', u'Кл', u'г', u'с', u'м']:
+            for suffix in [u'В', u'Дж', u'Н', u'Вт', u'Ом', u'Ф', u'А', u'Кл', u'г', u'с', u'м', u'Тл']:
                 if item.endswith(suffix):
                     main = suffix
                     prefix = item[:-len(suffix)]
@@ -169,7 +169,7 @@ class UnitValue(object):
             }[prefix]
             return main, exponent * power, item, power
         except:
-            log.exception(u'Error on item %s', item)
+            log.exception(u'Error in ParseItem on %r', item)
             raise
 
     def GetUnits(self, items):
@@ -207,7 +207,7 @@ class UnitValue(object):
             result = u'{self.Value}\\,{units}'.format(self=self, units=units)
             needLetter = True
         else:
-            raise RuntimeError('Error on format %r' % format)
+            raise RuntimeError('Error in __format__ for %r' % format)
 
         if needLetter and self.Letter:
             result = '%s = %s' % (self.Letter, result)
