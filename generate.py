@@ -125,14 +125,14 @@ def generate(args):
             },
         }
         for className, dateTasks in classRandomTasks.iteritems():
-            classLetter = className.split('-')[-1]
-            pupilsNames = list(library.pupils.getPupils(className, addMyself=True, onlyMe=args.me).Iterate())
+            pupils = library.pupils.getPupils(className, addMyself=True, onlyMe=args.me)
+            pupilsList = list(pupils.Iterate())
             for date, taskGenerators in dateTasks.iteritems():
-                multiplePaper = generators.variant.MultiplePaper(date, classLetter=classLetter)
+                multiplePaper = generators.variant.MultiplePaper(date, classLetter=pupils.Grade)
                 if fileWriter.NotMatches(multiplePaper.GetFilename()):
                     continue
-                tasksLists = [taskGenerator.Shuffle(seed, minCount=len(pupilsNames)) for taskGenerator in taskGenerators]
-                variants = generators.variant.Variants(pupilsNames, zip(*tasksLists))
+                tasksLists = [taskGenerator.Shuffle(seed, minCount=len(pupilsList)) for taskGenerator in taskGenerators]
+                variants = generators.variant.Variants(pupilsList, zip(*tasksLists))
                 fileWriter.Write(
                     'school-554',
                     multiplePaper.GetFilename(),
