@@ -13,20 +13,23 @@ import library
 log = logging.getLogger('generate')
 
 
-def generate(args):
-    if args.lucky:
-        return library.lucky.getLucky(args.lucky)
+def runLucky(args):
+    library.lucky.getLucky(grade=args.grade, count=args.count)
 
+
+def runTripod(args):
+    fileWriter = library.files.FileWriter()    
+    tripodFormat = args.format
+    getText, extension = {
+        'tex': (lambda r: r.GetTex(), 'tex'),
+        'txt': (lambda r: r.GetText(), 'txt'),
+    }[tripodFormat]
+    for className, report in library.tripod.getTripodReports():
+        fileWriter.Write(os.path.join('school-554', 'tripod'), className + '-tripod.%s' % extension, text=getText(report))
+
+
+def runGenerate(args):
     fileWriter = library.files.FileWriter(args.filter)
-    tripodFormat = args.tripod
-    if tripodFormat:
-        getText, extension = {
-            'tex': (lambda r: r.GetTex(), 'tex'),
-            'txt': (lambda r: r.GetText(), 'txt'),
-        }[tripodFormat]
-        for className, report in library.tripod.getTripodReports():
-            fileWriter.Write(os.path.join('school-554', 'tripod'), className + '-tripod.%s' % extension, text=getText(report))
-        return
 
     generateProblems= False
     generateLists = False
@@ -159,15 +162,23 @@ def CreateArgumentsParser():
     loggingGroup.add_argument('--log-separator', help='Logging string separator', choices=['space', 'tab'], default='space')
     loggingGroup.add_argument('-v', '--verbose', help='Enable debug logging', action='store_true')
 
-    parser.add_argument('--show-manual', '--sm', help='Show manual files', action='store_true')
-    parser.add_argument('--filter', help='Process only files matchin filter')
-    parser.add_argument('--me', help='Use only me mode', action='store_true')
-    parser.add_argument('--answers', help='save answers', action='store_true')
+    subparsers = parser.add_subparsers()
 
-    parser.add_argument('-l', '--lucky', help='Get lucky people')
-    parser.add_argument('-t', '--tripod', help='Print tripod results', choices=['tex', 'txt'])
+    generateParser = subparsers.add_parser('generate', help='Generate all papers')
+    generateParser.add_argument('--show-manual', '--sm', help='Show manual files', action='store_true')
+    generateParser.add_argument('--filter', help='Process only files matchin filter')
+    generateParser.add_argument('--me', help='Use only me mode', action='store_true')
+    generateParser.add_argument('--answers', help='save answers', action='store_true')
+    generateParser.set_defaults(func=runGenerate)
 
-    parser.set_defaults(func=generate)
+    luckyParser = subparsers.add_parser('lucky', help='Find lucky pupils')
+    luckyParser.add_argument('-g', '--grade', help='Grade', type=int, choices=[8, 9])
+    luckyParser.add_argument('-c', '--count', help='Count', type=int)
+    luckyParser.set_defaults(func=runLucky)
+
+    tripodParser = subparsers.add_parser('tripod', help='Generate tripod results')
+    tripodParser.add_argument('--format', help='Format', choices=['tex', 'txt'])
+    tripodParser.set_defaults(func=runTripod)
 
     return parser
 

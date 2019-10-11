@@ -7,14 +7,9 @@ import pupils
 log = logging.getLogger('lucky')
 
 
-def getLucky(lucky):
+def getLucky(grade=None, count=None):
     count = None
-    if ':' in lucky:
-        className, count = lucky.split(':')
-        count = int(count)
-    else:
-        className = lucky
-    className = 'class-2019-{}'.format(className)
+    className = 'class-2019-{}'.format(grade)
     pupilsList = list(pupils.getPupils(className).Iterate())
     random.seed(int(time.time()))
     random.shuffle(pupilsList)

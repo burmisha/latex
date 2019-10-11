@@ -26,7 +26,7 @@ def walkFiles(dirname, extensions=[], dirsOnly=False):
 
 
 class FileWriter(object):
-    def __init__(self, nameFilter):
+    def __init__(self, nameFilter=None):
         self.NameFilter = nameFilter
         self.WrittenFiles = set()
 
