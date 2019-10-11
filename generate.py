@@ -28,6 +28,11 @@ def runTripod(args):
         fileWriter.Write(os.path.join('school-554', 'tripod'), className + '-tripod.%s' % extension, text=getText(report))
 
 
+def runDownload(args):
+    mathusPhys = library.download.MathusPhys()
+    mathusPhys.Download('.')
+
+
 def runGenerate(args):
     fileWriter = library.files.FileWriter(args.filter)
 
@@ -179,6 +184,10 @@ def CreateArgumentsParser():
     tripodParser = subparsers.add_parser('tripod', help='Generate tripod results')
     tripodParser.add_argument('--format', help='Format', choices=['tex', 'txt'])
     tripodParser.set_defaults(func=runTripod)
+
+    downloadParser = subparsers.add_parser('download', help='Download extra files')
+    # downloadParser.add_argument('--format', help='Format', choices=['tex', 'txt'])
+    downloadParser.set_defaults(func=runDownload)
 
     return parser
 
