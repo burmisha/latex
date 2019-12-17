@@ -104,6 +104,7 @@ def getPupils(className, addMyself=False, onlyMe=False):
             u'Александр Селехметьев',
             u'Алексей Тихонов',
             u'Алина Филиппова',
+            u'Дарья Шашкова',
             u'Алина Яшина',
         ]
         letter = u'T'
@@ -202,7 +203,6 @@ def getPupils(className, addMyself=False, onlyMe=False):
             u'Пичугин Илья',
             u'Стратонников Илья',
             u'Федотова Дарья',
-            u'Храмов Арсений',
             u'Шустов Иван',
         ]
         letter = u'М'
