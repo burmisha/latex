@@ -58,13 +58,15 @@ class MultiplePaper(object):
         self.Date = library.formatter.Date(date)
         self.Name = 'task'
         self.ClassLetter = classLetter
+        self.Vspace = 120
 
     def GetTex(self, nameTasksIterator, withAnswers=False):
         if withAnswers:
             tasksJoiner = ''
-            variantsJoiner = ''
+            # variantsJoiner = u''
+            variantsJoiner = u'\n\\newpage'
         else:
-            tasksJoiner = u'\n\\vspace{150pt}'
+            tasksJoiner = u'\n\\vspace{%dpt}' % self.Vspace
             variantsJoiner = u'\n\\newpage'
         tasksJoiner += '\n\n'
         variantsJoiner += '\n\n'
@@ -96,24 +98,29 @@ class MultiplePaper(object):
 
 class UnitValue(object):
     def __init__(self, line, letter=None):
-        if letter is None:
-            if '=' in line:
-                letter, line = line.split('=', 1)
-                self.Letter = letter.strip()
-                line = line.strip()
+        self.Line = line
+        self.Letter = letter
+        self.Load()
+
+    def Load(self):
+        if self.Letter is None:
+            if '=' in self.Line:
+                self.Letter, self.Line = self.Line.split('=', 1)
+                self.Letter = self.Letter.strip()
+                self.Line = self.Line.strip()
             else:
                 self.Letter = None
         else:
-            self.Letter = letter
+            self.Letter = self.Letter
         self.HumanUnits = [[], []]
         self.ReadyUnits = [[], []]
         isUp = True
-        assert line.count('/') <= 1
+        assert self.Line.count('/') <= 1
         self.Parts = []
-        if ' ' in line:
-            value, unitsSuffix = line.split(' ', 1)
+        if ' ' in self.Line:
+            value, unitsSuffix = self.Line.split(' ', 1)
         else:
-            value = line.strip()
+            value = self.Line.strip()
             unitsSuffix = ''
         try:
             value = int(value)
@@ -136,9 +143,8 @@ class UnitValue(object):
             self.HumanUnits[index].append((humanUnit, power))
             self.ReadyUnits[index].append((mainUnit, mainPower))
 
-        totalPower = sum(power for _, power in self.ReadyUnits[0]) - sum(power for _, power in self.ReadyUnits[1])
-        log.debug('Letter: %r, Total power: %r', self.Letter, totalPower)
-
+        self.Power = sum(power for _, power in self.ReadyUnits[0]) - sum(power for _, power in self.ReadyUnits[1])
+        log.debug('Letter: %r, Total power: %r', self.Letter, self.Power)
 
     def ParseItem(self, item):
         try:
@@ -150,7 +156,7 @@ class UnitValue(object):
 
             prefix = ''
             main = item
-            for suffix in [u'В', u'Дж', u'Н', u'Вт', u'Ом', u'Ф', u'А', u'Кл', u'г', u'с', u'м', u'Тл']:
+            for suffix in [u'В', u'Дж', u'Н', u'Вт', u'Ом', u'Ф', u'А', u'Кл', u'г', u'с', u'м', u'Тл', u'т']:
                 if item.endswith(suffix):
                     main = suffix
                     prefix = item[:-len(suffix)]
@@ -203,9 +209,16 @@ class UnitValue(object):
             units = '\\frac{%s}{%s}' % (humanNom, humanDen)
         else:
             units = humanNom
+        valueStr = u'{self.Value}\\,{units}'.format(self=self, units=units).replace('.', '{,}')
         if format == 'Task':
-            result = u'{self.Value}\\,{units}'.format(self=self, units=units)
+            result = valueStr
             needLetter = True
+        elif format == 'ShortTask' or format == 'Value':
+            result = valueStr
+            needLetter = False
+        elif format == 'Letter':
+            result = self.Letter
+            needLetter = False
         else:
             raise RuntimeError('Error in __format__ for %r' % format)
 
@@ -214,9 +227,10 @@ class UnitValue(object):
 
         if suffix == 's':
             result = u'{ ' + result + ' }'
+        elif suffix == 'e':
+            result = u'$' + result + '$'
 
         return result
-
 
 
 class Units(object):
@@ -278,3 +292,6 @@ class LetterValue(object):
             result = u'{ ' + result + ' }'
 
         return result
+
+
+assert UnitValue(u'50 мТл').Value * (10 ** UnitValue(u'50 мТл').Power) == 0.05, 'Got %r' % UnitValue(u'50 мТл').Value

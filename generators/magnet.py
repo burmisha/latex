@@ -106,7 +106,17 @@ class Chernoutsan11_01(variant.VariantTask):
             и поместили в однородное магнитное поле с индукцией ${B:Task}$ обеими сторонами перпендикулярно линиям индукции.
             Какая сила будет действовать на этот проводник при пропусканиии по нему тока ${I:Task}$? 
         '''.format(l=l, a=a, B=B, I=I)
-        return problems.task.Task(text)
+        F = UnitValue(u'%.2f мН' % ((1.0 * a.Value ** 2 + (1.0 * l.Value - a.Value) ** 2) ** 0.5 / 100 * I.Value * B.Value))
+        answer = u'''
+            \\begin{{align*}}
+                F 
+                    &= \\sqrt{{F_a^2 + F_b^2}} = \\sqrt{{(\\mathcal{{I}}Ba)^2 + (\\mathcal{{I}}Bb)^2}} 
+                    = \\mathcal{{I}}B\\sqrt{{a^2 + b^2}} = \\mathcal{{I}}B\\sqrt{{a^2 + (l - a)^2}} =                       \\\\
+                    &= {I:Value}\\cdot {B:Value} \\cdot \\sqrt{{ {a:Value:s}^2 + \\left({l:Value} - {a:Value}\\right)^2}} 
+                    = {F:Value}.
+            \\end{{align*}}
+        '''.format(l=l, a=a, B=B, I=I, F=F)
+        return problems.task.Task(text, answer=answer)
 
     def All(self):
         for (a, b), B, I in itertools.product(
@@ -128,13 +138,24 @@ class Chernoutsan11_01(variant.VariantTask):
 
 class Chernoutsan11_02(variant.VariantTask):
     def __call__(self, B=None, rho=None):
+        g = UnitValue(u'g = 10 м / c^2')
         text = u'''
             В однородном горизонтальном магнитном поле с индукцией ${B:Task}$ находится проводник, 
             расположенный также горизонтально и перпендикулярно полю. 
             Какой ток необходимо пустить по проводнику, чтобы он завис? 
             Масса единицы длины проводника ${rho:Task}$, ${g:Task}$.
-        '''.format(B=B, rho=rho, g=UnitValue(u'g = 10 м / c^2'))
-        return problems.task.Task(text)
+        '''.format(B=B, rho=rho, g=g)
+        I = UnitValue(u'%f кА' % (1.0 * g.Value * rho.Value / B.Value))
+        answer = u'''
+            $$
+                mg = B\\mathcal{{I}}l, m=\\rho l 
+                \\implies \\mathcal{{I}} 
+                    = \\frac{{g\\rho}}{{B}}
+                    = \\frac{{{g:Value} \\cdot {rho:Value}}}{B:Value:s}
+                    = {I:Value}.
+            $$
+        '''.format(B=B, rho=rho, g=g, I=I)
+        return problems.task.Task(text, answer=answer)
 
     def All(self):
         for B, r in itertools.product(
@@ -154,7 +175,15 @@ class Chernoutsan11_5(variant.VariantTask):
             с током силой ${I:Task}$ в однородном магнитном поле индукцией ${B:Task}$ на расстояние ${d:Task}$.
             Проводник перпендикулярен линиям поля и движется в направлении силы Ампера.
         '''.format(B=B, I=I, l=l, d=d)
-        return problems.task.Task(text)
+        A = UnitValue(u'%.5f Дж' % (10 ** (-4) * 1.0 * B.Value * I.Value * l.Value * d.Value))
+        answer = u'''
+            $$
+                A   = F\\cdot d = B\\mathcal{{I}} l \\cdot d 
+                    = {B:Value} \\cdot {I:Value} \\cdot {l:Value} \\cdot {d:Value} 
+                    = {A:Value}.
+            $$
+        '''.format(B=B, I=I, l=l, d=d, A=A)
+        return problems.task.Task(text, answer=answer)
 
     def All(self):
         for l, I, B, d in itertools.product(

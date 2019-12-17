@@ -116,12 +116,42 @@ def runGenerate(args):
                     generators.quantum.Quantum1120(),
                 ],
             },
+            'class-2019-8': {
+                '2019-11-27': [
+                    generators.termo.Ch_8_6(),
+                    generators.termo.Ch_8_7(),
+                    generators.termo.Ch_8_10(),
+                    generators.termo.Ch_8_13(),
+                    generators.termo.Ch_8_35(),
+                ],
+            },
+            'class-2019-9': {
+                '2019-11-25': [
+                    generators.mechanics.Ch_3_1(),
+                    generators.mechanics.Ch_3_2(),
+                    generators.mechanics.Ch_3_3(),
+                    generators.mechanics.Ch_3_24(),
+                    generators.mechanics.Ch_3_26(),
+                ],
+                '2019-12-17': [
+                    generators.koleb.Nu01(),
+                    generators.koleb.Nu02(),
+                    generators.koleb.Nu03(),
+                    generators.koleb.Nu04(),
+                ],
+            },
             'class-2019-11': {
                 '2019-09-11': [
                     generators.magnet.ConstMagnet0(),
                     generators.magnet.ConstMagnet1(),
                     generators.magnet.ConstMagnet2(),
                     generators.magnet.ConstMagnet3(),
+                ],
+                '2019-11-13': [
+                    generators.waves.Waves01(),
+                    generators.waves.Ch1238(),
+                    generators.waves.Ch1240(),
+                    generators.waves.Waves02(),
                 ],
             },
             'class-2019-11S': {

@@ -1,4 +1,8 @@
 import electricity
-import variant
-import quantum
+import koleb
 import magnet
+import mechanics
+import quantum
+import termo
+import variant
+import waves
