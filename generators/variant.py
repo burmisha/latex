@@ -103,48 +103,51 @@ class UnitValue(object):
         self.Load()
 
     def Load(self):
-        if self.Letter is None:
-            if '=' in self.Line:
-                self.Letter, self.Line = self.Line.split('=', 1)
-                self.Letter = self.Letter.strip()
-                self.Line = self.Line.strip()
-            else:
-                self.Letter = None
-        else:
-            self.Letter = self.Letter
-        self.HumanUnits = [[], []]
-        self.ReadyUnits = [[], []]
-        isUp = True
-        assert self.Line.count('/') <= 1
-        self.Parts = []
-        if ' ' in self.Line:
-            value, unitsSuffix = self.Line.split(' ', 1)
-        else:
-            value = self.Line.strip()
-            unitsSuffix = ''
         try:
-            value = int(value)
-        except ValueError:
+            if self.Letter is None:
+                if '=' in self.Line:
+                    self.Letter, self.Line = self.Line.split('=', 1)
+                    self.Letter = self.Letter.strip()
+                    self.Line = self.Line.strip()
+                else:
+                    self.Letter = None
+            else:
+                self.Letter = self.Letter
+            self.HumanUnits = [[], []]
+            self.ReadyUnits = [[], []]
+            isUp = True
+            assert self.Line.count('/') <= 1
+            self.Parts = []
+            if ' ' in self.Line:
+                value, unitsSuffix = self.Line.split(' ', 1)
+            else:
+                value = self.Line.strip()
+                unitsSuffix = ''
             try:
-                signsCount = len([l for l in value if l != '.'])
-                value = float(value)
-            except:
-                log.error('Could not get value from %r', value)
-                raise
+                value = int(value)
+            except ValueError:
+                try:
+                    signsCount = len([l for l in value if l != '.'])
+                    value = float(value)
+                except:
+                    log.error('Could not get value from %r', value)
+                    raise
 
-        self.Value = value
-        for part in unitsSuffix.split():
-            log.debug('Part: %r', part)
-            if part == '/':
-                isUp = False
-                continue
-            mainUnit, mainPower, humanUnit, power = self.ParseItem(part)
-            index = 0 if isUp else 1
-            self.HumanUnits[index].append((humanUnit, power))
-            self.ReadyUnits[index].append((mainUnit, mainPower))
+            self.Value = value
+            for part in unitsSuffix.split():
+                log.debug('Part: %r', part)
+                if part == '/':
+                    isUp = False
+                    continue
+                mainUnit, mainPower, humanUnit, power = self.ParseItem(part)
+                index = 0 if isUp else 1
+                self.HumanUnits[index].append((humanUnit, power))
+                self.ReadyUnits[index].append((mainUnit, mainPower))
 
-        self.Power = sum(power for _, power in self.ReadyUnits[0]) - sum(power for _, power in self.ReadyUnits[1])
-        log.debug('Letter: %r, Total power: %r', self.Letter, self.Power)
+            self.Power = sum(power for _, power in self.ReadyUnits[0]) - sum(power for _, power in self.ReadyUnits[1])
+            log.debug('Letter: %r, Total power: %r', self.Letter, self.Power)
+        except Exception:
+            log.exception('Could not load |%s|', self.Line)
 
     def ParseItem(self, item):
         try:
@@ -227,6 +230,8 @@ class UnitValue(object):
 
         if suffix == 's':
             result = u'{ ' + result + ' }'
+        elif suffix == 'b':
+            result = u'\\left(' + result + '\\right)'
         elif suffix == 'e':
             result = u'$' + result + '$'
 

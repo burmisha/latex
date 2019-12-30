@@ -138,6 +138,13 @@ def runGenerate(args):
                     generators.koleb.Nu02(),
                     generators.koleb.Nu03(),
                     generators.koleb.Nu04(),
+                    generators.koleb.Nu05(),
+                ],
+                '2019-12-24': [
+                    generators.waves.Waves00(),
+                    generators.waves.Waves03(),
+                    generators.waves.Waves04(),
+                    generators.waves.Waves05(),
                 ],
             },
             'class-2019-11': {
