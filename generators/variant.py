@@ -62,28 +62,32 @@ class MultiplePaper(object):
 
     def GetTex(self, nameTasksIterator, withAnswers=False):
         if withAnswers:
-            tasksJoiner = ''
             variantsJoiner = u''
-            # variantsJoiner = u'\n\\newpage'
         else:
-            tasksJoiner = u'\n\\vspace{%dpt}' % self.Vspace
             variantsJoiner = u'\n\\newpage'
-        tasksJoiner += '\n\n'
         variantsJoiner += '\n\n'
         variants = []
         for name, tasks in nameTasksIterator:
             variantText = u'\\addpersonalvariant{{{name}}}\n'.format(name=name)
-            tasksTexts = tasksJoiner.join(u'\\tasknumber{{{index}}}{taskText}'.format(
-                index=index + 1,
-                taskText=task.GetTex().strip(),
-            ) for index, task in enumerate(tasks))
+            tasksTexts = u''
+            previousTask = None
+            for index, task in enumerate(tasks):
+                if previousTask:
+                    if not withAnswers:
+                        tasksTexts += u'\n\\vspace{%dpt}\n\n' % task.GetSolutionSpace()
+                    tasksTexts += '\n\n'
+                tasksTexts += u'\\tasknumber{{{index}}}{taskText}'.format(
+                    index=index + 1,
+                    taskText=task.GetTex().strip(),
+                )
+                previousTask = task
             variants.append(variantText + tasksTexts)
         text = variantsJoiner.join(variants)
         result = PAPER_TEMPLATE.format(
             date=self.Date.GetHumanText(),
             classLetter=self.ClassLetter,
             text=text,
-            noanswers='' if withAnswers else ur'\noanswers',
+            noanswers='' if withAnswers else u'\\noanswers',
         )
         return result
 

@@ -5,10 +5,11 @@ log = logging.getLogger('task')
 
 
 class Task(object):
-    def __init__(self, text, answer=None, number=None):
+    def __init__(self, text, answer=None, number=None, solutionSpace=120):
         self.Text = text.strip('\n')
         self.Answer = answer
         self.Number = number
+        self.SolutionSpace = solutionSpace
 
     def Format(self, text, nodeType):
         try:
@@ -28,6 +29,9 @@ class Task(object):
         filename = '%s.tex' % self.Number
         log.debug('Got filename %r from %r', filename, self.Number)
         return filename
+
+    def GetSolutionSpace(self):
+        return self.SolutionSpace
 
 
 class TasksGenerator(object):
