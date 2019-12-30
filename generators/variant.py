@@ -63,8 +63,8 @@ class MultiplePaper(object):
     def GetTex(self, nameTasksIterator, withAnswers=False):
         if withAnswers:
             tasksJoiner = ''
-            # variantsJoiner = u''
-            variantsJoiner = u'\n\\newpage'
+            variantsJoiner = u''
+            # variantsJoiner = u'\n\\newpage'
         else:
             tasksJoiner = u'\n\\vspace{%dpt}' % self.Vspace
             variantsJoiner = u'\n\\newpage'
