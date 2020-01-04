@@ -13,9 +13,9 @@ log = logging.getLogger(__name__)
 class Ch_3_1(variant.VariantTask):
     def __call__(self, masses=None, speeds=None):
         text = u'''
-            Шарики массами {m1:ShortTask:e} и {m2:ShortTask:e} 
+            Шарики массами {m1:Value:e} и {m2:Value:e}
             движутся параллельно друг другу в одном направлении
-            со скоростями {v1:ShortTask:e} и {v2:ShortTask:e} соответсвенно.
+            со скоростями {v1:Value:e} и {v2:Value:e} соответсвенно.
             Сделайте рисунок и укажите направления скоростей и импульсов.
             Определите импульс каждого из шариков, а также их суммарный импульс.
         '''.format(m1=masses[0], m2=masses[1], v1=speeds[0], v2=speeds[1])
@@ -55,9 +55,9 @@ class Ch_3_1(variant.VariantTask):
 class Ch_3_2(variant.VariantTask):
     def __call__(self, m=None, speeds=None):
         text = u'''
-            Два шарика, масса каждого из которого составляет {m:ShortTask:e},
+            Два шарика, масса каждого из которого составляет {m:Value:e},
             движутся навстречу друг другу.
-            Скорость одного из них {v1:ShortTask:e}, а другого~--- {v2:ShortTask:e}.
+            Скорость одного из них {v1:Value:e}, а другого~--- {v2:Value:e}.
             Сделайте рисунок, укажите направления скоростей и импульсов.
             Определите импульс каждого из шариков, а также их суммарный импульс.
         '''.format(m=m, v1=speeds[0], v2=speeds[1])
@@ -92,9 +92,9 @@ class Ch_3_2(variant.VariantTask):
 class Ch_3_3(variant.VariantTask):
     def __call__(self, m=None, speeds=None):
         text = u'''
-            Два одинаковых шарика массами по {m:ShortTask:e}
+            Два одинаковых шарика массами по {m:Value:e}
             движутся во взаимно перпендикулярных направлениях.
-            Скорости шариков составляют {v1:ShortTask:e} и {v2:ShortTask:e}.
+            Скорости шариков составляют {v1:Value:e} и {v2:Value:e}.
             Сделайте рисунок, укажите направления скоростей и импульсов.
             Определите импульс каждого из шариков и полный импульс системы.
         '''.format(m=m, v1=speeds[0], v2=speeds[1])
@@ -106,8 +106,8 @@ class Ch_3_3(variant.VariantTask):
             \\begin{{align*}}
                 {p1:Letter} &= {m:Letter}{v1:Letter} = {m:Value}\\cdot{v1:Value} = {p1:Value}, \\\\
                 {p2:Letter} &= {m:Letter}{v2:Letter} = {m:Value}\\cdot{v2:Value} = {p2:Value}, \\\\
-                {p:Letter} 
-                    &= \\sqrt{{{p1:Letter}^2 + {p2:Letter}^2}} 
+                {p:Letter}
+                    &= \\sqrt{{{p1:Letter}^2 + {p2:Letter}^2}}
                     = {m:Letter}\\sqrt{{{v1:Letter}^2 + {v2:Letter}^2}} = {p:Value}.
             \\end{{align*}}
         '''.format(m=m, v1=speeds[0], v2=speeds[1], p1=p1, p2=p2, p=p)
@@ -134,7 +134,7 @@ class Ch_3_3(variant.VariantTask):
 class Ch_3_24(variant.VariantTask):
     def __call__(self, m=None, M=None, v=None):
         text = u'''
-            Паровоз массой {M:Task:e}, скорость которого равна {v:Task:e}, 
+            Паровоз массой {M:Task:e}, скорость которого равна {v:Task:e},
             сталкивается с двумя неподвижными вагонами массой {m:Task:e} каждый и сцепляется с ними.
             Запишите (формулами, не числами) импульсы каждого из тел до и после сцепки и после,
             а также определите скорость их совместного движения.
@@ -144,7 +144,7 @@ class Ch_3_24(variant.VariantTask):
         answer = u'''
             \\begin{{align*}}
                 \\text{{ЗСИ: }} &M\\cdot v + m\\cdot 0 + m \\cdot 0 =  M\\cdot v' + m\\cdot v' + m \\cdot v' \\implies \\\\
-                &\\implies v' = v\\cdot \\frac{{M}}{{M + 2m}} 
+                &\\implies v' = v\\cdot \\frac{{M}}{{M + 2m}}
                   = {v:Value}\\cdot \\frac{{{M:Value}}}{{{M:Value} + 2 \\cdot {m:Value}}} \\approx {u:Value}.
             \\end{{align*}}
         '''.format(m=m, M=M, v=v, u=u)
@@ -166,8 +166,8 @@ class Ch_3_24(variant.VariantTask):
 class Ch_3_26(variant.VariantTask):
     def __call__(self, v=None, u=None):
         text = u'''
-            Два тела двигаются навстречу друг другу. Скорость каждого из них составляет {v:Task:e}. 
-            После соударения тела слиплись и продолжили движение уже со скоростью {u:Task:e}. 
+            Два тела двигаются навстречу друг другу. Скорость каждого из них составляет {v:Task:e}.
+            После соударения тела слиплись и продолжили движение уже со скоростью {u:Task:e}.
             Определите отношение масс тел.
         '''.format(v=v, u=u)
 

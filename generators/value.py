@@ -146,7 +146,7 @@ class UnitValue(object):
         if format == 'Task':
             result = valueStr
             needLetter = True
-        elif format == 'ShortTask' or format == 'Value':
+        elif format == 'Value':
             result = valueStr
             needLetter = False
         elif format == 'Letter':

@@ -18,7 +18,7 @@ class ConstMagnet0(variant.VariantTask):
         text = u'''
             Верно ли, что
             \\begin{itemize}
-                \item   если распилить постоянный магнит на 2, то мы получим 2 магнита: 
+                \item   если распилить постоянный магнит на 2, то мы получим 2 магнита:
                         один только с южным полюсом, а второй — только с северным,
                 \item   линии магнитного поля всегда замкнуты,
                 \item   линии магнитного поля могут пересекаться в полюсах магнитов,
@@ -35,8 +35,8 @@ class ConstMagnet0(variant.VariantTask):
 class ConstMagnet1(variant.VariantTask):
     def __call__(self, variant=None, points=None):
         text = u'''
-            Для постоянного магнита, изображнного на рис. 1{variant}) 
-            изобразите линии индукции магнитного поля 
+            Для постоянного магнита, изображнного на рис. 1{variant})
+            изобразите линии индукции магнитного поля
             и укажите, как соориентируется магнитная стрелка в точках {points}.
         '''.format(variant=variant, points=u' и '.join(points))
         return problems.task.Task(text)
@@ -52,7 +52,7 @@ class ConstMagnet1(variant.VariantTask):
 class ConstMagnet2(variant.VariantTask):
     def __call__(self, variant=None, direction=None, point=None):
         text = u'''
-            Магнитная стрелка вблизи длинного прямолинейного проводника 
+            Магнитная стрелка вблизи длинного прямолинейного проводника
             повёрнута в точке ${point}$ северным полюсом {direction} (см. рис. 2{variant}).
             Сделайте рисунок, укажите направление протекания электрического тока,
             изобразите линии индукции магнитного поля.
@@ -104,15 +104,15 @@ class Chernoutsan11_01(variant.VariantTask):
         text = u'''
             Проводник длиной ${l:Task}$ согнули под прямым углом так, что одна сторона угла оказалась равной ${a:Task}$,
             и поместили в однородное магнитное поле с индукцией ${B:Task}$ обеими сторонами перпендикулярно линиям индукции.
-            Какая сила будет действовать на этот проводник при пропусканиии по нему тока ${I:Task}$? 
+            Какая сила будет действовать на этот проводник при пропусканиии по нему тока ${I:Task}$?
         '''.format(l=l, a=a, B=B, I=I)
         F = UnitValue(u'%.2f мН' % ((1.0 * a.Value ** 2 + (1.0 * l.Value - a.Value) ** 2) ** 0.5 / 100 * I.Value * B.Value))
         answer = u'''
             \\begin{{align*}}
-                F 
-                    &= \\sqrt{{F_a^2 + F_b^2}} = \\sqrt{{(\\mathcal{{I}}Ba)^2 + (\\mathcal{{I}}Bb)^2}} 
+                F
+                    &= \\sqrt{{F_a^2 + F_b^2}} = \\sqrt{{(\\mathcal{{I}}Ba)^2 + (\\mathcal{{I}}Bb)^2}}
                     = \\mathcal{{I}}B\\sqrt{{a^2 + b^2}} = \\mathcal{{I}}B\\sqrt{{a^2 + (l - a)^2}} =                       \\\\
-                    &= {I:Value}\\cdot {B:Value} \\cdot \\sqrt{{ {a:Value:s}^2 + \\left({l:Value} - {a:Value}\\right)^2}} 
+                    &= {I:Value}\\cdot {B:Value} \\cdot \\sqrt{{ {a:Value:s}^2 + \\left({l:Value} - {a:Value}\\right)^2}}
                     = {F:Value}.
             \\end{{align*}}
         '''.format(l=l, a=a, B=B, I=I, F=F)
@@ -140,16 +140,16 @@ class Chernoutsan11_02(variant.VariantTask):
     def __call__(self, B=None, rho=None):
         g = UnitValue(u'g = 10 м / c^2')
         text = u'''
-            В однородном горизонтальном магнитном поле с индукцией ${B:Task}$ находится проводник, 
-            расположенный также горизонтально и перпендикулярно полю. 
-            Какой ток необходимо пустить по проводнику, чтобы он завис? 
+            В однородном горизонтальном магнитном поле с индукцией ${B:Task}$ находится проводник,
+            расположенный также горизонтально и перпендикулярно полю.
+            Какой ток необходимо пустить по проводнику, чтобы он завис?
             Масса единицы длины проводника ${rho:Task}$, ${g:Task}$.
         '''.format(B=B, rho=rho, g=g)
         I = UnitValue(u'%f кА' % (1.0 * g.Value * rho.Value / B.Value))
         answer = u'''
             $$
-                mg = B\\mathcal{{I}}l, m=\\rho l 
-                \\implies \\mathcal{{I}} 
+                mg = B\\mathcal{{I}}l, m=\\rho l
+                \\implies \\mathcal{{I}}
                     = \\frac{{g\\rho}}{{B}}
                     = \\frac{{{g:Value} \\cdot {rho:Value}}}{B:Value:s}
                     = {I:Value}.
@@ -178,8 +178,8 @@ class Chernoutsan11_5(variant.VariantTask):
         A = UnitValue(u'%.5f Дж' % (10 ** (-4) * 1.0 * B.Value * I.Value * l.Value * d.Value))
         answer = u'''
             $$
-                A   = F\\cdot d = B\\mathcal{{I}} l \\cdot d 
-                    = {B:Value} \\cdot {I:Value} \\cdot {l:Value} \\cdot {d:Value} 
+                A   = F\\cdot d = B\\mathcal{{I}} l \\cdot d
+                    = {B:Value} \\cdot {I:Value} \\cdot {l:Value} \\cdot {d:Value}
                     = {A:Value}.
             $$
         '''.format(B=B, I=I, l=l, d=d, A=A)

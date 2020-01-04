@@ -124,7 +124,7 @@ class RadioFall2(variant.VariantTask):
             $
             N(t) = N_0\\cdot 2^{{-\\frac t{{\\tau_\\frac12}}}}
             \\implies \\log_2\\frac N{{N_0}} = - \\frac t{{\\tau_\\frac 12}}
-            \\implies \\tau_\\frac 12 = - \\frac t {{\\log_2\\frac N{{N_0}}}} 
+            \\implies \\tau_\\frac 12 = - \\frac t {{\\log_2\\frac N{{N_0}}}}
                                       =   \\frac t {{\\log_2\\frac {{N_0}}N}}
             = \\frac{{
                 {time} \\units{{ч}}
@@ -188,8 +188,8 @@ class Quantum1120(variant.VariantTask):
     # 1120 Рымкевич
     def __call__(self, letter=None, value=None):
         return problems.task.Task(u'''
-            Лучше всего нейтронное излучение ослабляет вода: в 4 раза лучше бетона и в 3 раза лучше свинца. 
-            Толщина слоя половинного ослабления $\\gamma$-излучения для воды равна $3\\units{{см}}$. 
+            Лучше всего нейтронное излучение ослабляет вода: в 4 раза лучше бетона и в 3 раза лучше свинца.
+            Толщина слоя половинного ослабления $\\gamma$-излучения для воды равна $3\\units{{см}}$.
             Во сколько раз ослабит нейтронное излучение слой воды толщиной ${letter} = {value}\\units{{см}}?$
         '''.format(
             letter=letter,

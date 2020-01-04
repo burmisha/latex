@@ -39,7 +39,7 @@ class Ch_8_6(variant.VariantTask):
     def __call__(self, Q=None):
         text = u'''
             Сколько льда при температуре $0\\celsius$ можно расплавить,
-            сообщив ему энергию {Q:ShortTask:e}?
+            сообщив ему энергию {Q:Value:e}?
             Здесь (и во всех следующих задачах) используйте табличные значения из учебника.
         '''.format(Q=Q)
         lmbd = TableValues['water']['lmbd']
@@ -64,7 +64,7 @@ class Ch_8_6(variant.VariantTask):
 class Ch_8_7(variant.VariantTask):
     def __call__(self, m=None, metall=None, lmbd=None):
         text = u'''
-            Какое количество теплоты выделится при затвердевании {m:ShortTask:e} расплавленного {metall} при температуре плавления?
+            Какое количество теплоты выделится при затвердевании {m:Value:e} расплавленного {metall} при температуре плавления?
         '''.format(m=m, metall=metall)
         Q = UnitValue(u'Q = %.1f МДж' % (0.001 * m.Value * lmbd.Value))
         answer = u'''$
@@ -96,7 +96,7 @@ class Ch_8_7(variant.VariantTask):
 class Ch_8_10(variant.VariantTask):
     def __call__(self, m=None, t=None):
         text = u'''
-            Какое количество теплоты необходимо для превращения воды массой {m:ShortTask:e} при $t = {t}\\celsius$
+            Какое количество теплоты необходимо для превращения воды массой {m:Value:e} при $t = {t}\\celsius$
             в пар при температуре $t_{{100}} = 100\\celsius$?
         '''.format(m=m, t=t)
         c = TableValues['water']['c']
@@ -126,7 +126,7 @@ class Ch_8_13(variant.VariantTask):
     def __call__(self, Q=None, t=None):
         text = u'''
             Воду температурой $t = {t}\\celsius$ нагрели и превратили в пар при температуре $t_{{100}} = 100\\celsius$,
-            потратив {Q:ShortTask:e}. Определите массу воды.
+            потратив {Q:Value:e}. Определите массу воды.
         '''.format(Q=Q, t=t)
         c = TableValues['water']['c']
         L = TableValues['water']['L']

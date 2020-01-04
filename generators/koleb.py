@@ -91,7 +91,7 @@ class Nu04(variant.VariantTask):
         '''.format(A=A, nu=nu, t=t)
         s = UnitValue(u'%.1f м' % (4. * A.Value / 100 * t.Value * nu.Value))
         answer = u'''$
-            s 
+            s
                 = 4A \\cdot N = 4A \\cdot \\frac tT = 4A \\cdot t\\nu
                 = 4 \\cdot {A:Value} \\cdot {t:Value} \\cdot {nu:Value}
                 = {s:Value}

@@ -42,12 +42,12 @@ class Waves01(variant.VariantTask):
         '''.format(nu=nu, alpha=alpha)
         T1 = UnitValue(u'T\' = %.2f с' % (math.sqrt(int(alpha)) / int(nu.Value)))
         answer = u'''$
-            T'  = 2\\pi\\sqrt{{\\frac {{m'}}k}} 
+            T'  = 2\\pi\\sqrt{{\\frac {{m'}}k}}
                 = 2\\pi\\sqrt{{\\frac {{\\alpha m}}k}}
                 = \\sqrt{{\\alpha}} \\cdot 2\\pi\\sqrt{{\\frac mk}}
                 = \\sqrt{{\\alpha}} \\cdot T
                 = T\\sqrt{{\\alpha}}
-                = \\frac 1\\nu \\cdot\\sqrt{{\\alpha}} 
+                = \\frac 1\\nu \\cdot\\sqrt{{\\alpha}}
                 = \\frac {{\\sqrt{{\\alpha}}}}\\nu
                 = \\frac {{\\sqrt{{{alpha}}}}}{nu:Value:s}
                 = {T1:Value}
@@ -69,7 +69,7 @@ class Waves02(variant.VariantTask):
     def __call__(self, m=None, v=None):
         text = u'''
             Тело массой ${m:Task}$ совершает гармонические колебания.
-            При этом амплитуда колебаний его скорости равна ${v:Task}$. 
+            При этом амплитуда колебаний его скорости равна ${v:Task}$.
             Определите запас полной механической энергии колебательной системы
             и амплитуду колебаний потенциальной энергии.
         '''.format(m=m, v=v)
@@ -77,8 +77,8 @@ class Waves02(variant.VariantTask):
         E2 = UnitValue(u'%.3f Дж' % (0.001 * m.Value * (v.Value ** 2) / 2 / 2))
         answer = u'''
             \\begin{{align*}}
-                E_{{\\text{{полная механическая}}}} 
-                    &= E_{{\\text{{max кинетическая}}}} 
+                E_{{\\text{{полная механическая}}}}
+                    &= E_{{\\text{{max кинетическая}}}}
                     = \\frac{{m v_{{\\max}}^2}}2
                     = \\frac{{{m:Value} \\cdot \\sqr{v:Value:s}}}2
                     = {E:Value},
@@ -108,8 +108,8 @@ class Waves03(variant.VariantTask):
         '''.format(first=first, second=second, lmbd=lmbd)
         l = UnitValue(u'l = %d м' % ((n2 - n1) * lmbd.Value))
         answer = u'''$
-            l 
-                = (n_2 - n_1) \\cdot \\lambda 
+            l
+                = (n_2 - n_1) \\cdot \\lambda
                 = \\cbr{{{n2} - {n1}}} \\cdot {lmbd:Value}
                 = {l:Value},
             \\quad
@@ -145,14 +145,14 @@ class Waves03(variant.VariantTask):
 class Waves04(variant.VariantTask):
     def __call__(self, T=None, lmbd=None):
         text = u'''
-            Определите скорость звука в среде, если источник звука, 
+            Определите скорость звука в среде, если источник звука,
             колеблющийся с периодом {T:Value:e}, возбуждает волны длиной
             {lmbd:Value:e}.
         '''.format(T=T, lmbd=lmbd)
         v = UnitValue(u'v = %.1f м / c' % (1000. * lmbd.Value / T.Value))
         answer = u'''$
-            \\lambda 
-                = vT \\implies v 
+            \\lambda
+                = vT \\implies v
                 = \\frac{{\\lambda}}{{T}}
                 = \\frac{lmbd:Value:s}{T:Value:s}
                 = {v:Value:s}
@@ -174,7 +174,7 @@ class Waves05(variant.VariantTask):
     def __call__(self, N=None, t=None, v=None):
         text = u'''
             Мимо неподвижного наблюдателя прошло {N:Value:e} гребней волн за {t:Value:e},
-            начиная с первого. Каковы длина, период и частота волны, 
+            начиная с первого. Каковы длина, период и частота волны,
             если скорость распространения волн {v:Value:e}?
         '''.format(N=N, t=t, v=v)
         lmbd = UnitValue(u'\\lambda = %.2f м' % (1. * v.Value * t.Value / (N.Value - 1)))
@@ -214,19 +214,19 @@ class Ch1238(variant.VariantTask):
         v = UnitValue(u'v = 320 м / с')
         c = UnitValue(u'c = 300 Мм / с')
         text = u'''
-            Сравните длины звуковой волны частотой ${nu_1:Task}$ и радиоволны частотой ${nu_2:Task}$. 
+            Сравните длины звуковой волны частотой ${nu_1:Task}$ и радиоволны частотой ${nu_2:Task}$.
             Какая больше, во сколько раз? Скорость звука примите равной ${v:Task}$.
         '''.format(nu_1=nu_1, nu_2=nu_2, v=v)
         l_1 = UnitValue(u'%.2f м' % (320. / nu_1.Value))
         l_2 = UnitValue(u'%.2f м' % (300. / nu_2.Value))
         n = UnitValue('%.2f' % ((300. / nu_2.Value) / (320. / nu_1.Value)))
         answer = u'''$
-            \\lambda_1 
-                = v T_1 = v \\cdot \\frac 1{{\\nu_1}} = \\frac{{v}}{{\\nu_1}} 
+            \\lambda_1
+                = v T_1 = v \\cdot \\frac 1{{\\nu_1}} = \\frac{{v}}{{\\nu_1}}
                 = \\frac{v:Value:s}{nu_1:Value:s} = {l_1:Value},
             \\quad
-            \\lambda_2 
-                = c T_2 = c \\cdot \\frac 1{{\\nu_2}} = \\frac{{c}}{{\\nu_2}} 
+            \\lambda_2
+                = c T_2 = c \\cdot \\frac 1{{\\nu_2}} = \\frac{{c}}{{\\nu_2}}
                 = \\frac{c:Value:s}{nu_2:Value:s} = {l_2:Value},
             \\quad n = \\frac{{\\lambda_2}}{{\\lambda_1}} \\approx {n:Value}
         $'''.format(nu_1=nu_1, nu_2=nu_2, v=v, c=c, l_1=l_1, l_2=l_2, n=n)
@@ -252,8 +252,8 @@ class Ch1240(variant.VariantTask):
         lmbd = UnitValue(u'\\lambda = %.2f см' % (1. * l.Value / frac))
         answer = u'''$
             \\frac l\\lambda = \\frac \\varphi{{2\\pi}} + k (k\\in\\mathbb{{N}})
-            \\implies 
-            \\lambda 
+            \\implies
+            \\lambda
                 = \\frac l{{\\frac \\varphi{{2\\pi}} + k}}
                 = \\frac {{2\\pi l}}{{\\varphi + 2\\pi k}},
             \\quad
