@@ -28,7 +28,7 @@ class Waves00(variant.VariantTask):
             (4 из 8~--- это «–»)
         '''
         answer = u'''нет, да, да, нет, да, да, нет, да'''
-        return problems.task.Task(text, answer=answer)
+        return problems.task.Task(text, answer=answer, solutionSpace=20)
 
     def All(self):
         yield self.__call__()

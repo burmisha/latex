@@ -74,7 +74,7 @@ class MultiplePaper(object):
             for index, task in enumerate(tasks):
                 if previousTask:
                     if not withAnswers:
-                        tasksTexts += u'\n\\vspace{%dpt}\n\n' % task.GetSolutionSpace()
+                        tasksTexts += u'\n\\vspace{%dpt}' % task.GetSolutionSpace()
                     tasksTexts += '\n\n'
                 tasksTexts += u'\\tasknumber{{{index}}}{taskText}'.format(
                     index=index + 1,
