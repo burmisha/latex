@@ -6,7 +6,7 @@ import collections
 
 import problems
 import variant
-from value import LetterValue, Units, UnitValue
+from value import UnitValue
 
 log = logging.getLogger(__name__)
 
@@ -194,7 +194,7 @@ class Potential728(variant.VariantTask):
         answer = u'''
             \\begin{{align*}}
             A   = {E.Letter}{q.Letter}{l.Letter}
-                = {E:Answer} \\cdot {q:Answer} \\cdot {l:Answer}
+                = {E:Value} \\cdot {q:Value} \\cdot {l:Value}
                 = {A:.2f} \\cdot 10^{{-7}} \\units{{Дж}}
             \\end{{align*}}
         '''.format(
@@ -217,11 +217,17 @@ class Potential728(variant.VariantTask):
         )
 
     def All(self):
-        for ql, qv, ll, lv, ev in itertools.product(['Q', 'q'], [-10, 10, -25, 25, -40, 40], ['l', 'r', 'd'], [2, 4, 5, 10], [2, 4, 20]):
+        for ql, qv, ll, lv, ev in itertools.product(
+            ['Q', 'q'],
+            [-10, 10, -25, 25, -40, 40],
+            ['l', 'r', 'd'],
+            [2, 4, 5, 10],
+            [2, 4, 20],
+        ):
             yield self.__call__(
-                E=LetterValue(Letter='E', Value=ev, units=Units(basic=u'\\funits{кВ}{м}', standard=u'\\funits{В}{м}', power=3)),
-                q=LetterValue(Letter=ql, Value=qv, units=Units(basic=u'\\units{нКл}',  standard=u'\\units{Кл}', power=-9)),
-                l=LetterValue(Letter=ll, Value=lv, units=Units(basic=u'\\units{см}',  standard=u'\\units{м}', power=-2)),
+                E=UnitValue(u'E = %d кВ / м' % ev),
+                q=UnitValue(u'%s = %d нКл' % (ql, qv)),
+                l=UnitValue(u'%s = %d см' % (ll, lv)),
             )
 
 
@@ -230,7 +236,7 @@ class Potential735(variant.VariantTask):
         # 735(737) - Rymkevich
         return problems.task.Task(u'''
             Напряжение между двумя точками, лежащими на одной линии напряжённости однородного электрического поля,
-            равно ${U.Letter}={U.Value}\\units{{кВ}}$. Расстояние между точками ${l.Letter}={l.Value}\\units{{см}}$.
+            равно ${U.Letter}={U:Value}$. Расстояние между точками ${l.Letter}={l:Value}$.
             Какова напряжённость этого поля?
         '''.format(
             l=l,
@@ -238,10 +244,15 @@ class Potential735(variant.VariantTask):
         ))
 
     def All(self):
-        for ul, uv, ll, lv in itertools.product(['U', 'V'], [2, 3, 4, 5, 6], ['l', 'r', 'd'], [10, 20, 30, 40]):
+        for ul, uv, ll, lv in itertools.product(
+            ['U', 'V'],
+            [2, 3, 4, 5, 6],
+            ['l', 'r', 'd'],
+            [10, 20, 30, 40],
+        ):
             yield self.__call__(
-                U=LetterValue(Letter=ul, Value=uv),
-                l=LetterValue(Letter=ll, Value=lv),
+                U=UnitValue(u'%s = %d кВ' % (ul, uv)),
+                l=UnitValue(u'%s = %d см' % (ll, lv)),
             )
 
 
@@ -250,9 +261,9 @@ class Potential737(variant.VariantTask):
         # 737(739) - Rymkevich
         return problems.task.Task(u'''
             Найти напряжение между точками $A$ и $B$ в однородном электрическом поле (см. рис. на доске), если
-            $AB={l.Letter}={l.Value}\\units{{см}}$,
-            ${alpha.Letter}={alpha.Value}^\\circ$,
-            ${E.Letter}={E.Value}\\funits{{В}}{{м}}$.
+            $AB={l.Letter}={l:Value}$,
+            ${alpha.Letter}={alpha:Value}^\\circ$,
+            ${E.Letter}={E:Value}$.
             Потенциал какой из точек $A$ и $B$ больше?
         '''.format(
             l=l,
@@ -261,11 +272,17 @@ class Potential737(variant.VariantTask):
         ))
 
     def All(self):
-        for ll, lv, al, av, ev in itertools.product(['l', 'r', 'd'], [4, 6, 8, 10, 12], ['\\alpha', '\\varphi'], [30, 45, 60], [30, 50, 60, 100, 120]):
+        for ll, lv, al, av, ev in itertools.product(
+            ['l', 'r', 'd'],
+            [4, 6, 8, 10, 12],
+            ['\\alpha', '\\varphi'],
+            [30, 45, 60],
+            [30, 50, 60, 100, 120],
+        ):
             yield self.__call__(
-                l=LetterValue(Letter=ll, Value=lv),
-                alpha=LetterValue(Letter=al, Value=av),
-                E=LetterValue(Letter='E', Value=ev),
+                l=UnitValue(u'%s = %d см' % (ll, lv)),
+                alpha=UnitValue(u'%s = %d' % (al, av)),
+                E=UnitValue(u'E = %d В / м' % ev),
             )
 
 
@@ -289,8 +306,8 @@ class Potential1621(variant.VariantTask):
     def __call__(self, v=None, V=None):
         # 1621 Goldfarb
         return problems.task.Task(u'''
-            Электрон $e^-$ вылетает из точки, потенциал которой ${V.Letter} = {V.Value}\\units{{В}},$
-            со скоростью ${v.Letter} = {v.Value}\\cdot 10^6\\funits{{м}}{{c}}$ в направлении линий напряжённости поля.
+            Электрон $e^-$ вылетает из точки, потенциал которой ${V.Letter} = {V:Value}$,
+            со скоростью ${v.Letter} = {v:Value}$ в направлении линий напряжённости поля.
             Будет поле ускорять или тормозить электрон?
             Каков потенциал точки, дойдя до которой электрон остановится?
         '''.format(
@@ -301,8 +318,8 @@ class Potential1621(variant.VariantTask):
     def All(self):
         for vv, Vv in itertools.product([3, 4, 6, 10, 12], [200, 400, 600, 800, 1000]):
             yield self.__call__(
-                v=LetterValue(Letter='v', Value=vv),
-                V=LetterValue(Letter='\\varphi', Value=Vv),
+                v=UnitValue(u'v = %d000000 м / с' % vv),
+                V=UnitValue(u'\\varphi = %d В' % Vv),
             )
 
 
@@ -310,10 +327,10 @@ class Rymkevich748(variant.VariantTask):
     def __call__(self, U=None, Q=None):
         answer = u'''
             ${Q:Letter} = {C:Letter}{U:Letter} \\implies
-            {C:Letter} = \\frac{Q:Letter:s}{U:Letter:s} = \\frac{Q:Answer:s}{U:Answer:s} = {C:Answer} = {C:ShortAnswer}.
+            {C:Letter} = \\frac{Q:Letter:s}{U:Letter:s} = \\frac{Q:Value:s}{U:Value:s} = {C:Value}.
             \\text{{ Заряды обкладок: ${Q:Letter}$ и $-{Q:Letter}$}}$
         '''.format(
-            C=LetterValue(Letter='C', Value=1. * Q.Value / U.Value, units=Units(basic=u'\\units{пФ}', standard=u'\\units{Ф}', power=-12)),
+            C=UnitValue(u'C = %.2f пФ' % (1. * Q.Value / U.Value)),
             U=U,
             Q=Q,
         )
@@ -328,8 +345,8 @@ class Rymkevich748(variant.VariantTask):
     def All(self):
         for Ul, Uv, ql, qv in itertools.product(['U', 'V'], [2, 3, 5, 6, 12, 15, 20], ['Q', 'q'], [4, 6, 15, 18, 24, 25]):
             yield self.__call__(
-                U=LetterValue(Letter=Ul, Value=Uv, units=Units(basic=u'\\units{кВ}', standard=u'\\units{В}', power=3)),
-                Q=LetterValue(Letter=ql, Value=qv, units=Units(basic=u'\\units{нКл}', standard=u'\\units{Кл}', power=-9)),
+                U=UnitValue(u'%s = %d кВ' % (Ul, Uv)),
+                Q=UnitValue(u'%s = %d нКл' % (ql, qv)),
             )
 
 
@@ -343,10 +360,10 @@ class Rymkevich750(variant.VariantTask):
             sign = '\\less'
             result = u'не удастся'
         answer = u'''
-            ${Q.Letter}' = {C.Letter}{U.Letter} = {C:Answer}\\cdot{U:Answer} = {Q:Answer} = {Q:ShortAnswer}
-            \\implies {Q.Letter}' {sign} {Q.Letter} \\implies \\text{{{result}}}$
+            ${Q:Letter}' = {C:Letter}{U:Letter} = {C:Value} \\cdot {U:Value} = {Q:Value}
+            \\implies {Q:Letter}' {sign} {Q:Letter} \\implies \\text{{{result}}}$
         '''.format(
-            Q=LetterValue(Letter=Q.Letter, Value=resultQ, units=Units(basic=u'\\units{нКл}', standard=u'\\units{Кл}', power=-9)),
+            Q=UnitValue(u'%s = %d нКл' % (Q.Letter, resultQ)),
             U=U,
             C=C,
             sign=sign,
@@ -361,11 +378,17 @@ class Rymkevich750(variant.VariantTask):
         )
 
     def All(self):
-        for Ul, Uv, Ql, Qv, Cv in itertools.product(['U', 'V'], [200, 300, 400, 450], ['Q', 'q'], [30, 50, 60], [50, 80, 100, 120, 150]):
+        for Ul, Uv, Ql, Qv, Cv in itertools.product(
+            ['U', 'V'],
+            [200, 300, 400, 450],
+            ['Q', 'q'],
+            [30, 50, 60],
+            [50, 80, 100, 120, 150],
+        ):
             yield self.__call__(
-                U=LetterValue(Letter=Ul, Value=Uv, units=Units(basic=u'\\units{кВ}', standard=u'\\units{В}', power=3)),
-                Q=LetterValue(Letter=Ql, Value=Qv, units=Units(basic=u'\\units{нКл}', standard=u'\\units{Кл}', power=-9)),
-                C=LetterValue(Letter='C', Value=Cv, units=Units(basic=u'\\units{пФ}', standard=u'\\units{Ф}', power=-12)),
+                U=UnitValue(u'%s = %d кВ' % (Ul, Uv)),
+                Q=UnitValue(u'%s = %d нКл' % (Ql, Qv)),
+                C=UnitValue(u'C = %d пФ' % Cv),
             )
 
 
@@ -407,13 +430,13 @@ class Rymkevich762(variant.VariantTask):
         answer = u'''
             ${W:Letter}
                 = \\frac{{ {Q:Letter}^2 }}{{ 2{C:Letter} }}
-                = \\frac{{ \\sqr{Q:Answer:s} }}{{ 2 \\cdot {C:Answer} }}
-                = {W:Answer} = {W:ShortAnswer}
+                = \\frac{{ \\sqr{Q:Value:s} }}{{ 2 \\cdot {C:Value} }}
+                = {W:Value}
             $
         '''.format(
             C=C,
             Q=Q,
-            W=LetterValue(Letter='W', Value=1. * Q.Value ** 2 / 2 / C.Value, units=Units(basic=u'\\units{мкДж}', standard=u'\\units{Дж}', power=-6)),
+            W=UnitValue(u'W = %.2f мкДж' % (1. * Q.Value ** 2 / 2 / C.Value)),
         )
 
         return problems.task.Task(u'''
@@ -426,8 +449,8 @@ class Rymkevich762(variant.VariantTask):
     def All(self):
         for Ql, Qv, Cv in itertools.product(['Q', 'q'], [300, 500, 800, 900], [200, 400, 600, 750]):
             yield self.__call__(
-                Q=LetterValue(Letter=Ql, Value=Qv, units=Units(basic=u'\\units{нКл}', standard=u'\\units{Кл}', power=-9)),
-                C=LetterValue(Letter='C', Value=Cv, units=Units(basic=u'\\units{пФ}', standard=u'\\units{Ф}', power=-12)),
+                Q=UnitValue(u'%s = %s нКл' % (Ql, Qv)),
+                C=UnitValue(u'С = %s пФ' % Cv),
             )
 
 
@@ -440,17 +463,16 @@ class Cond1(variant.VariantTask):
                 = \\frac{{{U:Letter}}}{{\\frac1{{C_1}} + \\frac1{{C_2}}}}
                 = \\frac{{C_1C_2{U:Letter}}}{{C_1 + C_2}}
                 = \\frac{{
-                    {C[0]:Answer} \\cdot {C[1]:Answer} \\cdot {U:Answer}
+                    {C[0]:Value} \\cdot {C[1]:Value} \\cdot {U:Value}
                 }}{{
-                    {C[0]:Answer} + {C[1]:Answer}
+                    {C[0]:Value} + {C[1]:Value}
                 }}
-                = {Q:Answer}
-                = {Q:ShortAnswer}
+                = {Q:Value}
             $
         '''.format(
             C=C,
             U=U,
-            Q=LetterValue(Letter='Q', Value=1. * C[0].Value * C[1].Value * U.Value / (C[0].Value + C[1].Value), units=Units(basic=u'\\units{нКл}', standard=u'\\units{Кл}', power=-9))
+            Q=UnitValue(u'Q = %.2f нКл' % (1. * C[0].Value * C[1].Value * U.Value / (C[0].Value + C[1].Value))),
         )
         return problems.task.Task(u'''
             Два конденсатора ёмкостей ${C[0]:Task}$ и ${C[1]:Task}$ последовательно подключают
@@ -460,14 +482,19 @@ class Cond1(variant.VariantTask):
         )
 
     def All(self):
-        for Ul, Uv, C1, C2 in itertools.product(['U', 'V'], [150, 200, 300, 400, 450], [20, 30, 40, 60], [20, 30, 40, 60]):
+        for Ul, Uv, C1, C2 in itertools.product(
+            ['U', 'V'],
+            [150, 200, 300, 400, 450],
+            [20, 30, 40, 60],
+            [20, 30, 40, 60],
+        ):
             if C1 == C2:
                 continue
             yield self.__call__(
-                U=LetterValue(Letter=Ul, Value=Uv, units=Units(standard=u'\\units{В}')),
+                U=UnitValue(u'%s = %s В' % (Ul, Uv)),
                 C=[
-                    LetterValue(Letter='C_1', Value=C1, units=Units(basic=u'\\units{нФ}', standard=u'\\units{Ф}', power=-9)),
-                    LetterValue(Letter='C_2', Value=C2, units=Units(basic=u'\\units{нФ}', standard=u'\\units{Ф}', power=-9)),
+                    UnitValue(u'С_1 = %s нФ' % C1),
+                    UnitValue(u'С_2 = %s нФ' % C2),
                 ],
             )
 
@@ -476,96 +503,90 @@ class Rezistor1(variant.VariantTask):
     def __call__(self, R=None, I=None, U=None):
         assert R and ((I is None) != (U is None))
         if I:
-            U = LetterValue(Letter='U', Value=I.Value * R.Value, units=Units(standard=u'\\units{В}'))
-            P = LetterValue(Letter='P', Value=I.Value ** 2 * R.Value, units=Units(standard=u'\\units{Вт}'))
+            U = UnitValue(u'U = %d В' % (I.Value * R.Value))
+            P = UnitValue(u'P = %d Вт' % (I.Value ** 2 * R.Value))
             text = u'''
                 Через резистор сопротивлением ${R:Task}$ протекает электрический ток ${I:Task}$.
                 Определите, чему равны напряжение на резисторе и мощность, выделяющаяся на нём.
             '''.format(R=R, I=I)
             answer = u'''
                 \\begin{{align*}}
-                {U:Letter} &= {I:Letter}{R:Letter} = {I:Answer} \\cdot {R:Answer} = {U:Answer}, \\\\
-                {P:Letter} &= {I:Letter}^2{R:Letter} = \\sqr{I:Answer:s} \\cdot {R:Answer} = {P:Answer}
+                {U:Letter} &= {I:Letter}{R:Letter} = {I:Value} \\cdot {R:Value} = {U:Value}, \\\\
+                {P:Letter} &= {I:Letter}^2{R:Letter} = \\sqr{I:Value:s} \\cdot {R:Value} = {P:Value}
                 \\end{{align*}}
             '''
         elif U:
-            I = LetterValue(Letter='\\mathcal{I}', Value=1. * U.Value / R.Value, units=Units(standard=u'\\units{А}'))
-            P = LetterValue(Letter='P', Value=1. * U.Value ** 2 / R.Value, units=Units(standard=u'\\units{Вт}'))
+            I = UnitValue(u'\\mathcal{I} = %.2f А' % (1. * U.Value / R.Value))
+            P = UnitValue(u'P = %.2f Вт' % (1. * U.Value ** 2 / R.Value))
             text = u'''
                 На резистор сопротивлением ${R:Task}$ подали напряжение ${U:Task}$.
                 Определите ток, который потечёт через резистор, и мощность, выделяющуюся на нём.
             '''.format(R=R, U=U)
             answer = u'''
                 \\begin{{align*}}
-                {I:Letter} &= \\frac{U:Letter:s}{R:Letter:s} = \\frac{U:Answer:s}{R:Answer:s} = {I:Answer}, \\\\
-                {P:Letter} &= \\frac{{ {U:Letter}^2 }}{R:Letter:s} = \\frac{{ \\sqr{U:Answer:s} }}{R:Answer:s} = {P:Answer}
+                {I:Letter} &= \\frac{U:Letter:s}{R:Letter:s} = \\frac{U:Value:s}{R:Value:s} = {I:Value}, \\\\
+                {P:Letter} &= \\frac{{ {U:Letter}^2 }}{R:Letter:s} = \\frac{{ \\sqr{U:Value:s} }}{R:Value:s} = {P:Value}
                 \\end{{align*}}
             '''
         return problems.task.Task(text, answer=answer.format(I=I, U=U, R=R, P=P))
 
     def All(self):
         for rLetter, rValue in itertools.product(['r', 'R'], [5, 12, 18, 30]):
-            R = LetterValue(Letter=rLetter, Value=rValue, units=Units(standard=u'\\units{Ом}'))
+            R = UnitValue(u'%s = %d Ом' % (rLetter, rValue))
             for iValue in [2, 3, 4, 5, 6, 8, 10, 15]:
                 yield self.__call__(
-                    I=LetterValue(Letter='\\mathcal{I}', Value=iValue, units=Units(standard=u'\\units{А}')),
+                    I=UnitValue(u'\\mathcal{I} = %.2f А' % iValue),
                     R=R,
                 )
             for uLetter, uValue in itertools.product(['U', 'V'], [120, 150, 180, 240]):
                 yield self.__call__(
-                    U=LetterValue(Letter=uLetter, Value=uValue, units=Units(standard=u'\\units{В}')),
+                    U=UnitValue(u'%s = %d В' % (uLetter, uValue)),
                     R=R,
                 )
 
 
 class Rezistor2(variant.VariantTask):
     def __call__(self, r=None, R=None, E=None, t=None):
-        I1 = LetterValue(Letter='\\mathcal{I}_1', Value=1. * E.Value / R.Value, units=Units(standard=u'\\units{А}'))
-        I2 = LetterValue(Letter='\\mathcal{I}_2', Value=1. * E.Value / (R.Value + r.Value), units=Units(standard=u'\\units{А}'))
-        Q1 = LetterValue(Letter='Q_1', Value=1. * I1.Value ** 2 * R.Value * t.Value, units=Units(standard=u'\\units{Дж}'))
-        Q2 = LetterValue(Letter='Q_2', Value=1. * I2.Value ** 2 * R.Value * t.Value, units=Units(standard=u'\\units{Дж}'))
-        A1 = LetterValue(Letter='A_1', Value=1. * I1.Value * E.Value * t.Value, units=Units(standard=u'\\units{Дж}'))
-        A2 = LetterValue(Letter='A_2', Value=1. * I2.Value * E.Value * t.Value, units=Units(standard=u'\\units{Дж}'))
-        # eta1 = LetterValue(Letter='\\eta_1', Value=1. * 15 /Q1.Value, units=Units(standard=u''))
-        # print А2.Value
-        # eta1 = LetterValue(Letter='\\eta_1', Value=, units=Units(standard=u''))
-        # print A2.Value
-        # print A2
-        # # print int(А2.Value)
-        eta1 = LetterValue(Letter='\\eta_1', Value=1. * Q1.Value / A1.Value, units=Units(standard=u''))
-        eta2 = LetterValue(Letter='\\eta_2', Value=1. * Q2.Value / A2.Value, units=Units(standard=u''))
+        I1 = UnitValue(u'\\mathcal{I}_1 = %.2f А' % (1. * E.Value / R.Value))
+        I2 = UnitValue(u'\\mathcal{I}_2 = %.2f А' % (1. * E.Value / (R.Value + r.Value)))
+        Q1 = UnitValue(u'Q_1 = %.2f Дж' % (1. * I1.Value ** 2 * R.Value * t.Value))
+        Q2 = UnitValue(u'Q_2 = %.2f Дж' % (1. * I2.Value ** 2 * R.Value * t.Value))
+        A1 = UnitValue(u'A_1 = %.2f Дж' % (1. * I1.Value * E.Value * t.Value))
+        A2 = UnitValue(u'A_2 = %.2f Дж' % (1. * I2.Value * E.Value * t.Value))
+        eta1 = UnitValue(u'\\eta_1 = %.2f' % (1. * Q1.Value / A1.Value))
+        eta2 = UnitValue(u'\\eta_2 = %.2f' % (1. * Q2.Value / A2.Value))
         answer = u'''
             \\begin{{align*}}
             {I1:Letter}
                             &= \\frac{E:Letter:s}{R:Letter:s}
-                            = \\frac{E:Answer:s}{R:Answer:s}
-                            = {I1:Answer}, \\\\
+                            = \\frac{E:Value:s}{R:Value:s}
+                            = {I1:Value}, \\\\
             {I2:Letter}
                             &= \\frac{E:Letter:s}{{ {R:Letter} + {r:Letter} }}
-                            = \\frac{E:Answer:s}{{ {R:Answer} + {r:Answer} }}
-                            = {I2:Answer}, \\\\
+                            = \\frac{E:Value:s}{{ {R:Value} + {r:Value} }}
+                            = {I2:Value}, \\\\
             {Q1:Letter}
                             &= {I1:Letter}^2{R:Letter}{t:Letter}
                             = \\cbr{{ \\frac{E:Letter:s}{R:Letter:s} }}^2 {R:Letter} {t:Letter}
-                            = \\cbr{{ \\frac{E:Answer:s}{R:Answer:s} }}^2 \\cdot {R:Answer} \\cdot {t:Answer}
-                            = {Q1:Answer}, \\\\
+                            = \\cbr{{ \\frac{E:Value:s}{R:Value:s} }}^2 \\cdot {R:Value} \\cdot {t:Value}
+                            = {Q1:Value}, \\\\
             {Q2:Letter}
                             &= {I2:Letter}^2{R:Letter}{t:Letter}
                             = \\cbr{{\\frac{E:Letter:s}{{ {R:Letter} + {r:Letter} }} }}^2 {R:Letter} {t:Letter}
-                            = \\cbr{{\\frac{E:Answer:s}{{ {R:Answer} + {r:Answer} }} }}^2 \\cdot {R:Answer} \\cdot {t:Answer}
-                            = {Q2:Answer}, \\\\
+                            = \\cbr{{\\frac{E:Value:s}{{ {R:Value} + {r:Value} }} }}^2 \\cdot {R:Value} \\cdot {t:Value}
+                            = {Q2:Value}, \\\\
             {A1:Letter}
                             &= {I1:Letter}{t:Letter}{E:Letter}
                             = \\frac{E:Letter:s}{{ {R:Letter} }} {t:Letter} {E:Letter}
                             = \\frac{{ {E:Letter}^2 {t:Letter} }}{{ {R:Letter} }}
-                            = \\frac{{ \\sqr{E:Answer:s} \\cdot {t:Answer} }}{R:Answer:s}
-                            = {A1:Answer}, \\text{{положительна}}, \\\\
+                            = \\frac{{ \\sqr{E:Value:s} \\cdot {t:Value} }}{R:Value:s}
+                            = {A1:Value}, \\text{{положительна}}, \\\\
             {A2:Letter}
                             &= {I2:Letter}{t:Letter}{E:Letter}
                             = \\frac{E:Letter:s}{{ {R:Letter} + {r:Letter} }} {t:Letter} {E:Letter}
                             = \\frac{{ {E:Letter}^2 {t:Letter} }}{{ {R:Letter} + {r:Letter} }}
-                            = \\frac{{ \\sqr{E:Answer:s} \\cdot {t:Answer} }}{{ {R:Answer} + {r:Answer} }}
-                            = {A2:Answer}, \\text{{положительна}}, \\\\
+                            = \\frac{{ \\sqr{E:Value:s} \\cdot {t:Value} }}{{ {R:Value} + {r:Value} }}
+                            = {A2:Value}, \\text{{положительна}}, \\\\
             {eta1:Letter}
                             &= \\frac{Q1:Letter:s}{A1:Letter:s}
                             = \\ldots
@@ -589,18 +610,18 @@ class Rezistor2(variant.VariantTask):
     def All(self):
         for rValue, RValue, EValue, tValue in itertools.product([1, 2, 3, 4], [10, 15, 24, 30], [10, 20, 30, 60], [2, 5, 10]):
             yield self.__call__(
-                E=LetterValue(Letter='\\mathcal{E}', Value=EValue, units=Units(standard=u'\\units{В}')),
-                R=LetterValue(Letter='R', Value=RValue, units=Units(standard=u'\\units{Ом}')),
-                r=LetterValue(Letter='r', Value=rValue, units=Units(standard=u'\\units{Ом}')),
-                t=LetterValue(Letter='\\tau', Value=rValue, units=Units(standard=u'\\units{с}')),
+                E=UnitValue(u'\\mathcal{E} = %d В' % EValue),
+                R=UnitValue(u'R = %d Ом' % RValue),
+                r=UnitValue(u'r = %d Ом' % rValue),
+                t=UnitValue(u'\\tau = %d с' % rValue),
             )
 
 
 class Rezistor3(variant.VariantTask):
     def __call__(self, R=None):
-        r = LetterValue(Letter='r', Value=(1. * R[0].Value * R[1].Value) ** 0.5, units=Units(standard=u'\\units{Ом}'))
-        eta1 = LetterValue(Letter='\\eta_1', Value=1. * R[0].Value / (R[0].Value + r.Value), units=Units(standard=u''))
-        eta2 = LetterValue(Letter='\\eta_2', Value=1. * R[1].Value / (R[1].Value + r.Value), units=Units(standard=u''))
+        r = UnitValue(u'r = %.2f Ом' % ((1. * R[0].Value * R[1].Value) ** 0.5))
+        eta1 = UnitValue(u'\\eta_1 = %.3f ' % (1. * R[0].Value / (R[0].Value + r.Value)))
+        eta2 = UnitValue(u'\\eta_2 = %.3f ' % (1. * R[1].Value / (R[1].Value + r.Value)))
         answer = u'''
             \\begin{{align*}}
             P_1 &= \\sqr{{ \\frac{E:Letter:s}{{ {R[0]:Letter} + {r:Letter} }} }} {R[0]:Letter},
@@ -613,8 +634,8 @@ class Rezistor3(variant.VariantTask):
             &\\implies {r:Letter}
                 = \\sqrt{{ {R[0]:Letter} {R[1]:Letter} \\frac{{ {R[1]:Letter} - {R[0]:Letter} }}{{ {R[1]:Letter} - {R[0]:Letter} }} }}
                 = \\sqrt{{ {R[0]:Letter} {R[1]:Letter} }}
-                = \\sqrt{{ {R[0]:Answer} \\cdot {R[1]:Answer} }}
-                = {r:Answer}. \\\\
+                = \\sqrt{{ {R[0]:Value} \\cdot {R[1]:Value} }}
+                = {r:Value}. \\\\
              {eta1:Letter}
                 &= \\frac{R[0]:Letter:s}{{ {R[0]:Letter} + {r:Letter} }}
                 = \\frac{{ \\sqrt{R[0]:Letter:s} }}{{ \\sqrt{R[0]:Letter:s} + \\sqrt{R[1]:Letter:s} }}
@@ -624,7 +645,7 @@ class Rezistor3(variant.VariantTask):
                 = \\frac{{ \\sqrt{R[1]:Letter:s} }}{{ \\sqrt{R[1]:Letter:s} + \\sqrt{R[0]:Letter:s} }}
                 = {eta2:Value}
             \\end{{align*}}
-        '''.format(R=R, r=r, eta1=eta1, eta2=eta2, E=LetterValue(Letter='\\mathcal{E}', Value=0, units=None))
+        '''.format(R=R, r=r, eta1=eta1, eta2=eta2, E=UnitValue(u'\\mathcal{E} = 0'))
         text = u'''
             Лампочки, сопротивления которых ${R[0]:Task}$ и ${R[1]:Task}$, поочерёдно подключённные к некоторому источнику тока,
             потребляют одинаковую мощность. Найти внутреннее сопротивление источника и КПД цепи в каждом случае.
@@ -653,8 +674,8 @@ class Rezistor3(variant.VariantTask):
         ]:
             yield self.__call__(
                 R=[
-                    LetterValue(Letter='R_1', Value=RValues[0], units=Units(standard=u'\\units{Ом}')),
-                    LetterValue(Letter='R_2', Value=RValues[1], units=Units(standard=u'\\units{Ом}')),
+                    UnitValue(u'R_1 = %.2f Ом' % RValues[0]),
+                    UnitValue(u'R_2 = %.2f Ом' % RValues[1]),
                 ]
             )
 
