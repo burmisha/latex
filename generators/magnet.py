@@ -6,7 +6,7 @@ import collections
 
 import problems
 import variant
-from variant import LetterValue, Units, UnitValue
+from value import UnitValue
 
 log = logging.getLogger(__name__)
 

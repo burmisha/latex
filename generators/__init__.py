@@ -6,3 +6,4 @@ import quantum
 import termo
 import variant
 import waves
+import value

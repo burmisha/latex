@@ -5,7 +5,7 @@ import logging
 
 import problems
 import variant
-from variant import UnitValue as UV
+from value import UnitValue
 
 log = logging.getLogger(__name__)
 
@@ -20,9 +20,9 @@ class Ch_3_1(variant.VariantTask):
             Определите импульс каждого из шариков, а также их суммарный импульс.
         '''.format(m1=masses[0], m2=masses[1], v1=speeds[0], v2=speeds[1])
 
-        p1 = UV(u'p_1 = %d кг м / с' % (masses[0].Value * speeds[0].Value))
-        p2 = UV(u'p_2 = %d кг м / с' % (masses[1].Value * speeds[1].Value))
-        p = UV(u'p = %d кг м / с' % (masses[0].Value * speeds[0].Value + masses[1].Value * speeds[1].Value))
+        p1 = UnitValue(u'p_1 = %d кг м / с' % (masses[0].Value * speeds[0].Value))
+        p2 = UnitValue(u'p_2 = %d кг м / с' % (masses[1].Value * speeds[1].Value))
+        p = UnitValue(u'p = %d кг м / с' % (masses[0].Value * speeds[0].Value + masses[1].Value * speeds[1].Value))
         answer = u'''
             \\begin{{align*}}
                 {p1:Letter} &= {m1:Letter}{v1:Letter} = {m1:Value}\\cdot{v1:Value} = {p1:Value}, \\\\
@@ -42,12 +42,12 @@ class Ch_3_1(variant.VariantTask):
             if m1 != m2 and v1 != v2:
                 yield self.__call__(
                     masses=[
-                        UV(u'm_1 = %d кг' % m1),
-                        UV(u'm_2 = %d кг' % m2),
+                        UnitValue(u'm_1 = %d кг' % m1),
+                        UnitValue(u'm_2 = %d кг' % m2),
                     ],
                     speeds=[
-                        UV(u'v_1 = %d м / с' % v1),
-                        UV(u'v_2 = %d м / с' % v2),
+                        UnitValue(u'v_1 = %d м / с' % v1),
+                        UnitValue(u'v_2 = %d м / с' % v2),
                     ],
                 )
 
@@ -62,9 +62,9 @@ class Ch_3_2(variant.VariantTask):
             Определите импульс каждого из шариков, а также их суммарный импульс.
         '''.format(m=m, v1=speeds[0], v2=speeds[1])
 
-        p1 = UV(u'p_1 = %d кг м / с' % (m.Value * speeds[0].Value))
-        p2 = UV(u'p_2 = %d кг м / с' % (m.Value * speeds[1].Value))
-        p = UV(u'p = %d кг м / с' % (m.Value * speeds[0].Value - m.Value * speeds[1].Value))
+        p1 = UnitValue(u'p_1 = %d кг м / с' % (m.Value * speeds[0].Value))
+        p2 = UnitValue(u'p_2 = %d кг м / с' % (m.Value * speeds[1].Value))
+        p = UnitValue(u'p = %d кг м / с' % (m.Value * speeds[0].Value - m.Value * speeds[1].Value))
         answer = u'''
             \\begin{{align*}}
                 {p1:Letter} &= {m:Letter}{v1:Letter} = {m:Value}\\cdot{v1:Value} = {p1:Value}, \\\\
@@ -81,10 +81,10 @@ class Ch_3_2(variant.VariantTask):
             [3, 6, 8],
         ):
             yield self.__call__(
-                m=UV(u'm = %d кг' % m),
+                m=UnitValue(u'm = %d кг' % m),
                 speeds=[
-                    UV(u'v_1 = %d м / с' % v1),
-                    UV(u'v_2 = %d м / с' % v2),
+                    UnitValue(u'v_1 = %d м / с' % v1),
+                    UnitValue(u'v_2 = %d м / с' % v2),
                 ],
             )
 
@@ -99,9 +99,9 @@ class Ch_3_3(variant.VariantTask):
             Определите импульс каждого из шариков и полный импульс системы.
         '''.format(m=m, v1=speeds[0], v2=speeds[1])
 
-        p1 = UV(u'p_1 = %d кг м / с' % (m.Value * speeds[0].Value))
-        p2 = UV(u'p_2 = %d кг м / с' % (m.Value * speeds[1].Value))
-        p = UV(u'p = %d кг м / с' % (m.Value * speeds[2].Value))
+        p1 = UnitValue(u'p_1 = %d кг м / с' % (m.Value * speeds[0].Value))
+        p2 = UnitValue(u'p_2 = %d кг м / с' % (m.Value * speeds[1].Value))
+        p = UnitValue(u'p = %d кг м / с' % (m.Value * speeds[2].Value))
         answer = u'''
             \\begin{{align*}}
                 {p1:Letter} &= {m:Letter}{v1:Letter} = {m:Value}\\cdot{v1:Value} = {p1:Value}, \\\\
@@ -123,11 +123,11 @@ class Ch_3_3(variant.VariantTask):
             ],
         ):
             yield self.__call__(
-                m=UV(u'm = %d кг' % m),
+                m=UnitValue(u'm = %d кг' % m),
                 speeds=[
-                    UV(u'v_1 = %d м / с' % v1),
-                    UV(u'v_2 = %d м / с' % v2),
-                    UV(u'%d м / с' % v3),
+                    UnitValue(u'v_1 = %d м / с' % v1),
+                    UnitValue(u'v_2 = %d м / с' % v2),
+                    UnitValue(u'%d м / с' % v3),
                 ],
             )
 
@@ -140,7 +140,7 @@ class Ch_3_24(variant.VariantTask):
             а также определите скорость их совместного движения.
         '''.format(m=m, M=M, v=v)
 
-        u = UV(u'%.2f м / с' % (1.0 * v.Value * M.Value / (M.Value + 2 * m.Value)))
+        u = UnitValue(u'%.2f м / с' % (1.0 * v.Value * M.Value / (M.Value + 2 * m.Value)))
         answer = u'''
             \\begin{{align*}}
                 \\text{{ЗСИ: }} &M\\cdot v + m\\cdot 0 + m \\cdot 0 =  M\\cdot v' + m\\cdot v' + m \\cdot v' \\implies \\\\
@@ -157,9 +157,9 @@ class Ch_3_24(variant.VariantTask):
             [0.2, 0.4, 0.6],
         ):
             yield self.__call__(
-                M=UV(u'M = %d т' % M),
-                m=UV(u'm = %d т' % m),
-                v=UV(u'v = %.2f м / с' % v),
+                M=UnitValue(u'M = %d т' % M),
+                m=UnitValue(u'm = %d т' % m),
+                v=UnitValue(u'v = %.2f м / с' % v),
             )
 
 
@@ -179,6 +179,6 @@ class Ch_3_26(variant.VariantTask):
             [1.0, 1.5, 2.0],
         ):
             yield self.__call__(
-                v=UV(u'v = %f м / с' % v),
-                u=UV(u'u = %.1f м / с' % u),
+                v=UnitValue(u'v = %f м / с' % v),
+                u=UnitValue(u'u = %.1f м / с' % u),
             )

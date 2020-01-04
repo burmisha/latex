@@ -5,33 +5,33 @@ import logging
 
 import problems
 import variant
-from variant import UnitValue as UV
+from value import UnitValue
 
 log = logging.getLogger(__name__)
 
 
 TableValues = {
     'water': {
-        'c': UV(u'4200 Дж / кг К'),
-        'lmbd': UV(u'340 кДж / кг'),
-        'L': UV(u'2.3 МДж / кг'),
+        'c': UnitValue(u'4200 Дж / кг К'),
+        'lmbd': UnitValue(u'340 кДж / кг'),
+        'L': UnitValue(u'2.3 МДж / кг'),
     },
     'lead': {  # свинец
-        'lmbd': UV(u'25 кДж / кг'),
+        'lmbd': UnitValue(u'25 кДж / кг'),
     },
     'aluminum': { # алюминий
-        'c': UV(u'920 Дж / кг К'),
-        'lmbd': UV(u'390 кДж / кг'),
+        'c': UnitValue(u'920 Дж / кг К'),
+        'lmbd': UnitValue(u'390 кДж / кг'),
     },
     'copper': { # медь
-        'lmbd': UV(u'210 кДж / кг'),
+        'lmbd': UnitValue(u'210 кДж / кг'),
     },
     'steel': { # сталь
-        'c': UV(u'500 Дж / кг К'),
-        'lmbd': UV(u'84 кДж / кг'),
+        'c': UnitValue(u'500 Дж / кг К'),
+        'lmbd': UnitValue(u'84 кДж / кг'),
     },
     'zinc': { # цинк
-        'c': UV(u'400 Дж / кг К'),
+        'c': UnitValue(u'400 Дж / кг К'),
     },
 }
 
@@ -43,7 +43,7 @@ class Ch_8_6(variant.VariantTask):
             Здесь (и во всех следующих задачах) используйте табличные значения из учебника.
         '''.format(Q=Q)
         lmbd = TableValues['water']['lmbd']
-        m = UV(u'%.1f кг' % (1000. * Q.Value / lmbd.Value))
+        m = UnitValue(u'%.1f кг' % (1000. * Q.Value / lmbd.Value))
         answer = u'''$
             Q = \\lambda m \\implies m
                 = \\frac Q{{\\lambda}}
@@ -57,7 +57,7 @@ class Ch_8_6(variant.VariantTask):
              [2, 3, 4, 5, 6, 7, 8, 9],
         ):
             yield self.__call__(
-                Q=UV(u'Q = %d МДж' % Q),
+                Q=UnitValue(u'Q = %d МДж' % Q),
             )
 
 
@@ -66,7 +66,7 @@ class Ch_8_7(variant.VariantTask):
         text = u'''
             Какое количество теплоты выделится при затвердевании {m:ShortTask:e} расплавленного {metall} при температуре плавления?
         '''.format(m=m, metall=metall)
-        Q = UV(u'Q = %.1f МДж' % (0.001 * m.Value * lmbd.Value))
+        Q = UnitValue(u'Q = %.1f МДж' % (0.001 * m.Value * lmbd.Value))
         answer = u'''$
             Q
                 = - \\lambda m
@@ -87,7 +87,7 @@ class Ch_8_7(variant.VariantTask):
              ]
         ):
             yield self.__call__(
-                m=UV(u'm = %d кг' % m),
+                m=UnitValue(u'm = %d кг' % m),
                 metall=metall,
                 lmbd=lmbd,
             )
@@ -101,7 +101,7 @@ class Ch_8_10(variant.VariantTask):
         '''.format(m=m, t=t)
         c = TableValues['water']['c']
         L = TableValues['water']['L']
-        Q = UV(u'Q = %.2f МДж' % (m.Value * ((100. - t) * c.Value / 10 ** 6 + L.Value)))
+        Q = UnitValue(u'Q = %.2f МДж' % (m.Value * ((100. - t) * c.Value / 10 ** 6 + L.Value)))
         answer = u'''$
             Q
                 = cm\\Delta t + Lm
@@ -117,7 +117,7 @@ class Ch_8_10(variant.VariantTask):
              [20, 30, 40, 50, 60, 70],
         ):
             yield self.__call__(
-                m=UV(u'm = %d кг' % m),
+                m=UnitValue(u'm = %d кг' % m),
                 t=t,
             )
 
@@ -130,7 +130,7 @@ class Ch_8_13(variant.VariantTask):
         '''.format(Q=Q, t=t)
         c = TableValues['water']['c']
         L = TableValues['water']['L']
-        m = UV(u'Q = %.2f кг' % (1000. * Q.Value / ((100. - t) * c.Value + 1. * L.Value * 10 ** 6)))
+        m = UnitValue(u'Q = %.2f кг' % (1000. * Q.Value / ((100. - t) * c.Value + 1. * L.Value * 10 ** 6)))
         answer = u'''$
             Q
                 = cm\\Delta t + Lm
@@ -149,7 +149,7 @@ class Ch_8_13(variant.VariantTask):
              [10, 30, 40, 50, 60, 70],
         ):
             yield self.__call__(
-                Q=UV(u'Q = %d кДж' % Q),
+                Q=UnitValue(u'Q = %d кДж' % Q),
                 t=t,
             )
 

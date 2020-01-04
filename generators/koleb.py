@@ -5,7 +5,7 @@ import logging
 
 import problems
 import variant
-from variant import UnitValue
+from value import UnitValue
 
 log = logging.getLogger(__name__)
 
