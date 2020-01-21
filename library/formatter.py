@@ -9,7 +9,7 @@ log = logging.getLogger(__name__)
 class Date(object):
     def __init__(self, date):
         assert isinstance(date, str), 'Invalid date type: %r' % date
-        assert re.match(r'201\d-\d{2}-\d{2}', date), 'Invalid date format: %r' % date
+        assert re.match(r'20\d\d-\d{2}-\d{2}', date), 'Invalid date format: %r' % date
         self.__DateStr = date
         log.debug('Date: %r -> %r', self.__DateStr, self.GetHumanText())
 
@@ -34,7 +34,7 @@ class Date(object):
         }[month]
         day = int(day)
         assert 1 <= day <= 31, 'Error on %r' % self.__DateStr
-        assert 2018 <= int(year) <= 2019, 'Error on %r' % self.__DateStr
+        assert 2018 <= int(year) <= 2025, 'Error on %r' % self.__DateStr
         return u'{}~{}~{}'.format(int(day), textMonth, year)
 
 
