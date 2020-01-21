@@ -29,8 +29,12 @@ def runTripod(args):
 
 
 def runDownload(args):
-    mathusPhys = library.download.MathusPhys()
-    mathusPhys.Download('.')
+    for downloader in [
+        # library.download.MathusPhys(),
+        library.download.ZnakKachestava(),
+    ]:
+        downloader.Download(os.path.join(args.root, downloader.GetDirname()))
+
 
 
 def runGenerate(args):
@@ -147,6 +151,15 @@ def runGenerate(args):
                     generators.waves.Waves05(),
                 ],
             },
+            'class-2019-9L': {
+                '2020-01-20': [
+                    generators.koleb.Nu01(),
+                    generators.koleb.Nu02(),
+                    generators.koleb.Nu03(),
+                    generators.koleb.Nu04(),
+                    generators.koleb.Nu05(),
+                ],
+            },
             'class-2019-11': {
                 '2019-09-11': [
                     generators.magnet.ConstMagnet0(),
@@ -223,7 +236,7 @@ def CreateArgumentsParser():
     tripodParser.set_defaults(func=runTripod)
 
     downloadParser = subparsers.add_parser('download', help='Download extra files')
-    # downloadParser.add_argument('--format', help='Format', choices=['tex', 'txt'])
+    downloadParser.add_argument('--root', help='Location to save', default=u'/Users/burmisha/Yandex.Disk.localized/УДР/Общие материалы физиков УДР')
     downloadParser.set_defaults(func=runDownload)
 
     return parser
