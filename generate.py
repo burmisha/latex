@@ -55,6 +55,7 @@ def runGenerate(args):
             problems.gendenshteyn10.Gendenshteyn10(),
             problems.getaclass.GetAClass(),
             problems.savchenko.Savchenko(),
+            problems.cheshev.Cheshev(),
         ]
         for tasksGenerator in tasksGenerators:
             log.info('Using %r for tasks in %r', tasksGenerator, tasksGenerator.GetBookName())
@@ -69,6 +70,7 @@ def runGenerate(args):
             classes.class1807.Class1807(),
             classes.class1808.Class1808(),
             classes.class1810.Class1810(),
+            classes.class1911.Class1911(),
         ]
         for papersGenerator in papersGenerators:
             for paper in papersGenerator():

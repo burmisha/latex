@@ -1,0 +1,23 @@
+# -*- coding: utf-8 -*-
+
+import task
+
+
+class Cheshev(task.TasksGenerator):
+    def GetBookName(self):
+        return 'cheshev'
+
+    def __call__(self):
+        tasks = {
+            '5-01': (
+                ur'''
+                    При некотором максимальном значении задерживающей разности потенциалов на вакуумном фотоэлементе фототок с поверхности катода, облучаемого светом с длиной волны $\lambda_0$, прекращается.
+                    Если изменить длину волны света в $\alpha = 2$ раза, то для прекращение фототока необходимо увеличить задерживающую разность потенциалов в $\beta=3$ раза.
+                    Определить длину волны $\lambda_0$, если известно, что работа выхода материала катода равна $A = 1{,}89\\units{эВ}$,
+                    а постоянная планка $h = 6{,}63 \cdot 10^{-34} \\units{Дж} \cdot \text{с}$.
+                ''', 
+                ur'$\lambda_0 = \frac{hc}{A}\cdot\frac{\beta-\alpha}{\beta - 1} \approx 329 \\units{нм}$',
+            ),
+        }
+        for number, (text, answer) in tasks.iteritems():
+            yield task.Task(text, answer=answer, number=number)
