@@ -16,6 +16,8 @@ class PdfBook(object):
         name='page',
         overwrite=False,
     ):
+        assert pdfPath.endswith('.pdf')
+        assert os.path.exists(pdfPath)
         self.PdfPath = pdfPath
         self.DstPath = dstPath
         self.PageShift = pageShift
@@ -244,7 +246,7 @@ class ChernoutsanBook(PdfBook):
                 (u'Движение проводника в магнитном поле', 271, 272),
                 (u'Индуктивность, ЭДС самоиндукции, энергия магнитного поля', 272, 272),
             ]),
-            (u'Колебания н волны', [
+            (u'Колебания и волны', [
                 (u'Примеры решения задач', 273, 284),
                 (u'Кинематика гармонических колебаний', 284, 285),
                 (u'Математический маятник', 285, 286),
