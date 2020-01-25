@@ -13,7 +13,7 @@ import library
 log = logging.getLogger('generate')
 
 
-def getUdrRoot(*args):
+def udrPath(*args):
     return os.path.join(os.environ['HOME'], 'Yandex.Disk.localized', u'УДР', *args)
 
 
@@ -41,16 +41,21 @@ def runDownload(args):
 
 
 def runConvert(args):
-    comicsBook = library.convert.ComicsBook(
-        pdfPath=getUdrRoot(u'Общие материалы физиков УДР/Книги - физика/Физика в комиксах.pdf'),
-        dstPath=getUdrRoot(u'Общие материалы физиков УДР/Книги - физика/Физика в комиксах'),
-    )
-    comicsBook.Save()
-    chernoutsanBook = library.convert.ChernoutsanBook(
-        pdfPath=getUdrRoot(u'Общие материалы физиков УДР/Книги - физика/Сборники/Сборник - Черноуцан - 2011.pdf'),
-        dstPath=getUdrRoot(u'Общие материалы физиков УДР/Книги - физика/Сборники/Черноуцан'),
-    )
-    chernoutsanBook.Save()
+    booksPath = os.path.join(u'Общие материалы физиков УДР', u'Книги - физика')
+    books = [
+        library.convert.ComicsBook(
+            pdfPath=udrPath(booksPath, u'Физика в комиксах.pdf'),
+            dstPath=udrPath(booksPath, u'Физика в комиксах'),
+            # overwrite=True,
+        ),
+        library.convert.ChernoutsanBook(
+            pdfPath=udrPath(booksPath, u'Сборники', u'Сборник - Черноуцан - 2011.pdf'),
+            dstPath=udrPath(booksPath, u'Сборники', u'Черноуцан'),
+            # overwrite=True,
+        ),
+    ]
+    for book in books:
+        book.Save()
 
 
 def runGenerate(args):
@@ -254,7 +259,7 @@ def CreateArgumentsParser():
     tripodParser.set_defaults(func=runTripod)
 
     downloadParser = subparsers.add_parser('download', help='Download extra files')
-    downloadParser.add_argument('--root', help='Location to save', default=getUdrRoot(u'Общие материалы физиков УДР'))
+    downloadParser.add_argument('--root', help='Location to save', default=udrPath(u'Общие материалы физиков УДР'))
     downloadParser.set_defaults(func=runDownload)
 
     convertParser = subparsers.add_parser('convert', help='Convert into smth')
