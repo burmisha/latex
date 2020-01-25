@@ -249,7 +249,7 @@ def CreateArgumentsParser():
     tripodParser.set_defaults(func=runTripod)
 
     downloadParser = subparsers.add_parser('download', help='Download extra files')
-    downloadParser.add_argument('--root', help='Location to save', default=u'/Users/burmisha/Yandex.Disk.localized/УДР/Общие материалы физиков УДР')
+    downloadParser.add_argument('--root', help='Location to save', default=getUdrRoot(u'Общие материалы физиков УДР'))
     downloadParser.set_defaults(func=runDownload)
 
     convertParser = subparsers.add_parser('convert', help='Convert into smth')
