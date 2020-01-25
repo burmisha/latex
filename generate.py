@@ -13,12 +13,16 @@ import library
 log = logging.getLogger('generate')
 
 
+def getUdrRoot(*args):
+    return os.path.join(os.environ['HOME'], 'Yandex.Disk.localized', u'УДР', *args)
+
+
 def runLucky(args):
     library.lucky.getLucky(grade=args.grade, count=args.count)
 
 
 def runTripod(args):
-    fileWriter = library.files.FileWriter()    
+    fileWriter = library.files.FileWriter()
     tripodFormat = args.format
     getText, extension = {
         'tex': (lambda r: r.GetTex(), 'tex'),
@@ -35,6 +39,13 @@ def runDownload(args):
     ]:
         downloader.Download(os.path.join(args.root, downloader.GetDirname()))
 
+
+def runConvert(args):
+    comicsBook = library.convert.ComicsBook(
+        pdfPath=getUdrRoot(u'Общие материалы физиков УДР/Книги - физика/Физика в комиксах.pdf'),
+        dstPath=getUdrRoot(u'Общие материалы физиков УДР/Книги - физика/Физика в комиксах'),
+    )
+    comicsBook.Save()
 
 
 def runGenerate(args):
@@ -240,6 +251,9 @@ def CreateArgumentsParser():
     downloadParser = subparsers.add_parser('download', help='Download extra files')
     downloadParser.add_argument('--root', help='Location to save', default=u'/Users/burmisha/Yandex.Disk.localized/УДР/Общие материалы физиков УДР')
     downloadParser.set_defaults(func=runDownload)
+
+    convertParser = subparsers.add_parser('convert', help='Convert into smth')
+    convertParser.set_defaults(func=runConvert)
 
     return parser
 
