@@ -46,6 +46,11 @@ def runConvert(args):
         dstPath=getUdrRoot(u'Общие материалы физиков УДР/Книги - физика/Физика в комиксах'),
     )
     comicsBook.Save()
+    chernoutsanBook = library.convert.ChernoutsanBook(
+        pdfPath=getUdrRoot(u'Общие материалы физиков УДР/Книги - физика/Сборники/Сборник - Черноуцан - 2011.pdf'),
+        dstPath=getUdrRoot(u'Общие материалы физиков УДР/Книги - физика/Сборники/Черноуцан'),
+    )
+    chernoutsanBook.Save()
 
 
 def runGenerate(args):

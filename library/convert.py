@@ -21,6 +21,7 @@ class PdfBook(object):
         self.PageShift = pageShift
         self.NameTemplate = '%s-%%03d.png' % name
         self.Overwrite = overwrite
+        log.info('Extracting "%s" to "%s"', self.PdfPath, self.DstPath)
 
     def GetPageShift(self, pageNumber):
         if self.PageShift:
@@ -37,6 +38,8 @@ class PdfBook(object):
             log.info(u'Create missing %s', dirname)
             os.mkdir(dirname)
 
+    def GetParams(self):
+        return []
     def ExtractPage(self, pageNumber, dirName=None):
         assert isinstance(pageNumber, int)
         assert 1 <= pageNumber < 1000
@@ -44,14 +47,14 @@ class PdfBook(object):
         assert 1 <= pageIndex < 1000
 
         self.EnsureDir(self.DstPath)
-
         if dirName:
             dirName = os.path.join(self.DstPath, dirName)
+            self.EnsureDir(dirName)
         else:
             dirName = self.DstPath
-        self.EnsureDir(dirName)
-
-        fileName = os.path.join(dirName, self.NameTemplate % pageNumber)
+        fileName = self.NameTemplate % pageNumber
+        log.info('  Page %d -> %s', pageNumber, fileName)
+        fileName = os.path.join(dirName, fileName)
 
         if os.path.exists(fileName) and not self.Overwrite:
             log.debug('Already generated %s', fileName)
@@ -68,7 +71,9 @@ class PdfBook(object):
             # '-transparent', '"#ffffff"',
             '-type', 'Grayscale',
             '-background', 'white',
+            # '-define', 'png:compression-level=9',
             '-flatten',
+        ] + self.GetParams() + [
             u'%s[%d]' % (self.PdfPath, pageIndex),
             fileName,
         ]
@@ -116,5 +121,14 @@ class ComicsBook(PdfBook):
             (24, u'Квантовая электродинамика', 201, 214),
         ]:
             dirName = u'%02d %s' % (index, dirName)
+            for pageNumber in range(first, last):
+                self.ExtractPage(pageNumber, dirName=dirName)
+
+class ChernoutsanBook(PdfBook):
+    def Save(self):
+        for chapterIndex, chapter, partIndex, part, first, last in [
+            (1, u'Кинематика', 1, u'Примеры решения', 6, 26),
+        ]:
+            dirName = u'%02d %s - %02d %s' % (chapterIndex, chapter, partIndex, part)
             for pageNumber in range(first, last):
                 self.ExtractPage(pageNumber, dirName=dirName)
