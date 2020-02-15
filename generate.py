@@ -63,6 +63,11 @@ def runConvert(args):
             pdfPath=udrPath(booksPath, u'8 класс', u'8 - Марон - Самост. и контр. работы - 2017.pdf'),
             dstPath=udrPath(booksPath, u'8 класс', u'8 - Марон - СР и КР'),
         ),
+        library.convert.Maron_9_Didaktika(
+            pageShift=1,
+            pdfPath=udrPath(booksPath, u'9 класс', u'9 - Марон - Дидактические материалы - 2014.pdf'),
+            dstPath=udrPath(booksPath, u'9 класс', u'9 - Марон - Дидактические материалы'),
+        ),
     ]
     for book in books:
         book.Save()
