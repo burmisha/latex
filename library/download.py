@@ -4,8 +4,15 @@ import logging
 import os
 import re
 import requests
+import time
 
 log = logging.getLogger(__name__)
+
+
+try:
+    import pafy # http://np1.github.io/pafy/
+except ImportError:
+    log.error('Failed to load pafy')
 
 
 MATHUS_PHYS_CONFIG = [
@@ -256,3 +263,31 @@ class ZnakKachestava(object):
     def GetDirname(self):
         return u'znakka4estva'
 
+
+class GetAClass(object):
+    def __init__(self):
+        self.SleepTime = 1200
+
+    def Sleep(self):
+        log.info('Sleeping for %d', sleepTime)
+        time.sleep(sleepTime)
+
+    def DownloadVideo(self, url):
+        log.debug('Trying to fetch %r', url)
+        ok = False
+        while not ok:
+            try:
+                video = pafy.new(url)
+                ok = True
+            except IndexError:
+                sleepTime = 1200
+                log.exception('Failed, traceback:')
+                self.Sleep()
+        # print video
+        # print dir(video)
+        best = video.getbest(preftype="mp4")
+        print best
+        best.download(filepath=os.path.join(u'', os.environ['HOME'], u'tmp', u'1.mp4'))
+        # print list(video.streams)
+        # audio = video.getbestaudio(preftype='m4a')
+        # title = video.title
