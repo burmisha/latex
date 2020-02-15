@@ -35,9 +35,11 @@ def runTripod(args):
 def runDownload(args):
     for downloader in [
         # library.download.MathusPhys(),
-        library.download.ZnakKachestava(),
+        # library.download.ZnakKachestava(),
     ]:
         downloader.Download(os.path.join(args.root, downloader.GetDirname()))
+    getAClass = library.download.GetAClass()
+    getAClass.DownloadVideo('https://www.youtube.com/watch?v=8yXf4Gawl4w')
 
 
 def runConvert(args):
@@ -74,6 +76,7 @@ def runGenerate(args):
             problems.gendenshteyn7.Gendenshteyn7(),
             problems.gendenshteyn8.Gendenshteyn8(),
             problems.gendenshteyn10.Gendenshteyn10(),
+            problems.gendenshteyn11.Gendenshteyn11(),
             problems.getaclass.GetAClass(),
             problems.savchenko.Savchenko(),
             problems.cheshev.Cheshev(),
