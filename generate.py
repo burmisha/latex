@@ -48,12 +48,20 @@ def runConvert(args):
         library.convert.ComicsBook(
             pdfPath=udrPath(booksPath, u'Физика в комиксах.pdf'),
             dstPath=udrPath(booksPath, u'Физика в комиксах'),
-            # overwrite=True,
         ),
         library.convert.ChernoutsanBook(
             pdfPath=udrPath(booksPath, u'Сборники', u'Сборник - Черноуцан - 2011.pdf'),
             dstPath=udrPath(booksPath, u'Сборники', u'Черноуцан'),
-            # overwrite=True,
+        ),
+        library.convert.Maron_9_Sbornik(
+            pageShift=1,
+            pdfPath=udrPath(booksPath, u'9 класс', u'9 - Марон - Сборник вопросов и задач - 2019.pdf'),
+            dstPath=udrPath(booksPath, u'9 класс', u'9 - Марон - Сборник'),
+        ),
+        library.convert.Maron_8_SR_KR(
+            pageShift=1,
+            pdfPath=udrPath(booksPath, u'8 класс', u'8 - Марон - Самост. и контр. работы - 2017.pdf'),
+            dstPath=udrPath(booksPath, u'8 класс', u'8 - Марон - СР и КР'),
         ),
     ]
     for book in books:
