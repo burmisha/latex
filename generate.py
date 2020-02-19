@@ -58,6 +58,11 @@ def runConvert(args):
             pdfPath=udrPath(booksPath, u'9 класс', u'9 - Марон - Сборник вопросов и задач - 2019.pdf'),
             dstPath=udrPath(booksPath, u'9 класс', u'9 - Марон - Сборник'),
         ),
+        library.convert.Maron_8_Sbornik(
+            pageShift=1,
+            pdfPath=udrPath(booksPath, u'8 класс', u'8 - Марон - Сборник вопросов и задач - 2019.pdf'),
+            dstPath=udrPath(booksPath, u'8 класс', u'8 - Марон - Сборник'),
+        ),
         library.convert.Maron_8_SR_KR(
             pageShift=1,
             pdfPath=udrPath(booksPath, u'8 класс', u'8 - Марон - Самост. и контр. работы - 2017.pdf'),
@@ -72,6 +77,21 @@ def runConvert(args):
             pageShift=1,
             pdfPath=udrPath(booksPath, u'9 класс', u'9 - Марон - Дидактические материалы - 2014.pdf'),
             dstPath=udrPath(booksPath, u'9 класс', u'9 - Марон - Дидактические материалы'),
+        ),
+        library.convert.Maron_8_Didaktika(
+            pageShift=1,
+            pdfPath=udrPath(booksPath, u'8 класс', u'8 - Марон - Дидактические материалы - 2013.pdf'),
+            dstPath=udrPath(booksPath, u'8 класс', u'8 - Марон - Дидактические материалы'),
+        ),
+        library.convert.Kirik_8(
+            pageShift=1,
+            pdfPath=udrPath(booksPath, u'8 класс', u'8 - Кирик - Разноуровневые СР и КР - 2014.pdf'),
+            dstPath=udrPath(booksPath, u'8 класс', u'8 - Кирик - Разноуровневые СР и КР'),
+        ),
+        library.convert.Gendenshteyn_8(
+            pageShift=1,
+            pdfPath=udrPath(booksPath, u'8 класс', u'8 - Генденштейн - 2012.pdf'),
+            dstPath=udrPath(booksPath, u'8 класс', u'8 - Генденштейн'),
         ),
     ]
     for book in books:
