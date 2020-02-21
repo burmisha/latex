@@ -88,10 +88,20 @@ def runConvert(args):
             pdfPath=udrPath(booksPath, u'8 класс', u'8 - Кирик - Разноуровневые СР и КР - 2014.pdf'),
             dstPath=udrPath(booksPath, u'8 класс', u'8 - Кирик - Разноуровневые СР и КР'),
         ),
+        library.convert.Kirik_9(
+            pageShift=1,
+            pdfPath=udrPath(booksPath, u'9 класс', u'9 - Кирик - СР и КР - 2016.pdf'),
+            dstPath=udrPath(booksPath, u'9 класс', u'9 - Кирик - СР и КР'),
+        ),
         library.convert.Gendenshteyn_8(
             pageShift=1,
             pdfPath=udrPath(booksPath, u'8 класс', u'8 - Генденштейн - 2012.pdf'),
             dstPath=udrPath(booksPath, u'8 класс', u'8 - Генденштейн'),
+        ),
+        library.convert.Gendenshteyn_9(
+            pageShift=1,
+            pdfPath=udrPath(booksPath, u'9 класс', u'9 - Генденштейн - 2012.pdf'),
+            dstPath=udrPath(booksPath, u'9 класс', u'9 - Генденштейн'),
         ),
     ]
     for book in books:
