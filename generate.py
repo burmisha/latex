@@ -65,12 +65,12 @@ def runConvert(args):
         ),
         library.convert.Maron_8_SR_KR(
             pageShift=1,
-            pdfPath=udrPath(booksPath, u'8 класс', u'8 - Марон - Самост. и контр. работы - 2017.pdf'),
+            pdfPath=udrPath(booksPath, u'8 класс', u'8 - Марон - СР и КР - 2017.pdf'),
             dstPath=udrPath(booksPath, u'8 класс', u'8 - Марон - СР и КР'),
         ),
         library.convert.Maron_9_SR_KR(
             pageShift=1,
-            pdfPath=udrPath(booksPath, u'9 класс', u'9 - Марон - Самост. и контр. работы - 2018.pdf'),
+            pdfPath=udrPath(booksPath, u'9 класс', u'9 - Марон - СР и КР - 2018.pdf'),
             dstPath=udrPath(booksPath, u'9 класс', u'9 - Марон - СР и КР'),
         ),
         library.convert.Maron_9_Didaktika(
@@ -85,8 +85,8 @@ def runConvert(args):
         ),
         library.convert.Kirik_8(
             pageShift=1,
-            pdfPath=udrPath(booksPath, u'8 класс', u'8 - Кирик - Разноуровневые СР и КР - 2014.pdf'),
-            dstPath=udrPath(booksPath, u'8 класс', u'8 - Кирик - Разноуровневые СР и КР'),
+            pdfPath=udrPath(booksPath, u'8 класс', u'8 - Кирик - СР и КР - 2014.pdf'),
+            dstPath=udrPath(booksPath, u'8 класс', u'8 - Кирик - СР и КР'),
         ),
         library.convert.Kirik_9(
             pageShift=1,
