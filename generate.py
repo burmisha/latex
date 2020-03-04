@@ -247,6 +247,11 @@ def runGenerate(args):
                     generators.waves.Ch1240(),
                     generators.waves.Waves02(),
                 ],
+                '2020-03-04': [
+                    generators.optics.Gendenshteyn_11_11_18(),
+                    generators.optics.Vishnyakova_example_11(),
+                    generators.optics.Belolipetsky_5_196(),
+                ],
             },
             'class-2019-11S': {
                 '2019-09-30': [

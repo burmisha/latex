@@ -65,6 +65,7 @@ class MultiplePaper(object):
             variantsJoiner = u''
         else:
             variantsJoiner = u'\n\\newpage'
+        # variantsJoiner = u'\n\\newpage'
         variantsJoiner += '\n\n'
         variants = []
         for name, tasks in nameTasksIterator:
