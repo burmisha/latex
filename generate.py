@@ -34,12 +34,16 @@ def runTripod(args):
 
 def runDownload(args):
     for downloader in [
-        # library.download.MathusPhys(),
-        # library.download.ZnakKachestava(),
+        library.download.MathusPhys(),
+        library.download.ZnakKachestava(),
     ]:
-        downloader.Download(os.path.join(args.root, downloader.GetDirname()))
-    getAClass = library.download.GetAClass()
-    getAClass.DownloadVideo('https://www.youtube.com/watch?v=8yXf4Gawl4w')
+        downloader.Download(udrPath(u'Общие материалы физиков УДР', downloader.GetDirname()))
+
+    for videoDownloader in [
+        library.download.GetAClass(),
+        library.download.Gorbushin(),
+    ]:
+        videoDownloader.Download(udrPath(u'Общие материалы физиков УДР', u'Видео'))
 
 
 def runConvert(args):
@@ -315,7 +319,6 @@ def CreateArgumentsParser():
     tripodParser.set_defaults(func=runTripod)
 
     downloadParser = subparsers.add_parser('download', help='Download extra files')
-    downloadParser.add_argument('--root', help='Location to save', default=udrPath(u'Общие материалы физиков УДР'))
     downloadParser.set_defaults(func=runDownload)
 
     convertParser = subparsers.add_parser('convert', help='Convert into smth')

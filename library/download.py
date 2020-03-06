@@ -264,30 +264,80 @@ class ZnakKachestava(object):
         return u'znakka4estva'
 
 
-class GetAClass(object):
-    def __init__(self):
-        self.SleepTime = 1200
+class YoutubeDownloader(object):
+    def __init__(self, sleepTime=1200):
+        self.SleepTime = sleepTime
 
-    def Sleep(self):
-        log.info('Sleeping for %d', sleepTime)
-        time.sleep(sleepTime)
-
-    def DownloadVideo(self, url):
-        log.debug('Trying to fetch %r', url)
+    def GetBestStream(self, url, preftype=None):
+        log.debug('Searching best stream for %s', url)
         ok = False
         while not ok:
             try:
                 video = pafy.new(url)
                 ok = True
             except IndexError:
-                sleepTime = 1200
                 log.exception('Failed, traceback:')
-                self.Sleep()
-        # print video
-        # print dir(video)
-        best = video.getbest(preftype="mp4")
-        print best
-        best.download(filepath=os.path.join(u'', os.environ['HOME'], u'tmp', u'1.mp4'))
-        # print list(video.streams)
-        # audio = video.getbestaudio(preftype='m4a')
-        # title = video.title
+                log.info('Sleeping for %d', self.SleepTime)
+                time.sleep(self.SleepTime)
+        log.info('Streams: %r', video.streams)
+        bestStream = video.getbest(preftype=preftype)
+        return bestStream
+
+
+class GetAClass(object):
+    def __init__(self):
+        self.YoutubeDownloader = YoutubeDownloader()
+
+    def __DownloadVideo(self, url, file):
+        bestStream = self.YoutubeDownloader.GetBestStream(url, preftype='mp4')
+        bestStream.download(filepath=file)
+
+    def Download(self, path):
+        url = 'https://www.youtube.com/watch?v=8yXf4Gawl4w'
+        dstFile = os.path.join(path, u'GetAClass', u'1.mp4')
+        log.info('Downloading %s to %s', url, dstFile)
+        self.__DownloadVideo(url, dstFile)
+
+
+class Gorbushin(object):
+    def __init__(self):
+        self.YoutubeDownloader = YoutubeDownloader()
+
+    def Download(self, path):
+        log.info('Downloading playlist https://www.youtube.com/playlist?list=PLNG6BIg2XJxCfZtigKso6rBpJ2yk_JFVp')
+        for url, name in [
+            ('https://www.youtube.com/watch?v=yvZoJ9oA2T0', u'Подготовка к ЕГЭ по физике. Занятие 01'),
+            ('https://www.youtube.com/watch?v=znsFzrsHXcw', u'Подготовка к ЕГЭ по физике. Занятие 02'),
+            ('https://www.youtube.com/watch?v=woiO_HENO20', u'Подготовка к ЕГЭ по физике. Занятие 03'),
+            ('https://www.youtube.com/watch?v=cPP9sPWmNds', u'Подготовка к ЕГЭ по физике. Занятие 04'),
+            ('https://www.youtube.com/watch?v=9zUxpWaRnN0', u'Подготовка к ЕГЭ по физике. Занятие 05'),
+            ('https://www.youtube.com/watch?v=2vZfPKmfeCs', u'Подготовка к ЕГЭ по физике. Занятие 06'),
+            ('https://www.youtube.com/watch?v=lkRIteVb0lU', u'Подготовка к ЕГЭ по физике. Занятие 07'),
+            ('https://www.youtube.com/watch?v=E3tFXjh5WFY', u'Подготовка к ЕГЭ по физике. Занятие 08'),
+            ('https://www.youtube.com/watch?v=9XIZffuvibY', u'Подготовка к ЕГЭ по физике. Занятие 09'),
+            ('https://www.youtube.com/watch?v=ScpikkktFeM', u'Подготовка к ЕГЭ по физике. Занятие 10'),
+            ('https://www.youtube.com/watch?v=E214eHekXGA', u'Подготовка к ЕГЭ по физике. Занятие 11'),
+            ('https://www.youtube.com/watch?v=E77nKXA3XGM', u'Подготовка к ЕГЭ по физике. Занятие 12'),
+            ('https://www.youtube.com/watch?v=Yso604wZlls', u'Подготовка к ЕГЭ по физике. Занятие 13'),
+            ('https://www.youtube.com/watch?v=f4i99JCpDaE', u'Подготовка к ЕГЭ по физике. Занятие 14'),
+            ('https://www.youtube.com/watch?v=JPQe2wTsq34', u'Подготовка к ЕГЭ по физике. Занятие 15'),
+            ('https://www.youtube.com/watch?v=o2rI59dasHc', u'Подготовка к ЕГЭ по физике. Занятие 16'),
+            ('https://www.youtube.com/watch?v=XrAvEu7dU4o', u'Подготовка к ЕГЭ по физике. Занятие 17'),
+            ('https://www.youtube.com/watch?v=un39S9MGUtQ', u'Подготовка к ЕГЭ по физике. Занятие 18'),
+            ('https://www.youtube.com/watch?v=DEVHbDMiTA8', u'Подготовка к ЕГЭ по физике. Занятие 19'),
+            ('https://www.youtube.com/watch?v=-mHpFMPXgfs', u'Подготовка к ЕГЭ по физике. Занятие 20'),
+            ('https://www.youtube.com/watch?v=ieZkxvs-134', u'Подготовка к ЕГЭ по физике. Занятие 21'),
+            ('https://www.youtube.com/watch?v=Dc_yG7EAuls', u'Подготовка к ЕГЭ по физике. Занятие 22'),
+            ('https://www.youtube.com/watch?v=TdKHj4ZKM9o', u'Подготовка к ЕГЭ по физике. Занятие 23'),
+            ('https://www.youtube.com/watch?v=2kOmU6WItv8', u'Подготовка к ЕГЭ по физике. Занятие 24'),
+            ('https://www.youtube.com/watch?v=pc0wzU-wTMg', u'Подготовка к ЕГЭ по физике. Занятие 25'),
+        ]:
+            dstFile = os.path.join(path, u'Горбушин', u'%s.mp4' % name)
+            if os.path.exists(dstFile):
+                log.info('Skipping %s', name)
+            else:
+                log.info('Downloading %s to %s', url, dstFile)
+                bestStream = self.YoutubeDownloader.GetBestStream(url)
+                data = requests.get(bestStream.url).content
+                with open(dstFile, 'w') as f:
+                    f.write(data)
