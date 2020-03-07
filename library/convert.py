@@ -134,9 +134,9 @@ class ChernoutsanBook(PdfBook):
         ]
 
     def Save(self):
-        for chapterIndex, (chapter, parts) in enumerate([
+        structure = TwoDStructure([
             (u'Кинематика', [
-                (u'Примеры решения', 6, 26),
+                (u'Примеры решения', 6, 25),
                 (u'Перемещение, путь равномерное движение', 26, 16),
                 (u'Относительность движения, сложение скоростей', 26, 27),
                 (u'Средняя скорость', 27, 28),
@@ -160,7 +160,7 @@ class ChernoutsanBook(PdfBook):
                 (u'Динамика движения по окружности', 59, 62),
             ]),
             (u'Закон сохранения импульса', [
-                (u'Примеры решения задач', 63, 71),
+                (u'Примеры решения задач', 63, 70),
                 (u'Определение импульса', 71, 71),
                 (u'Изменение импульса и средняя сила', 71, 72),
                 (u'Закон сохранения импульса', 73, 74),
@@ -168,7 +168,7 @@ class ChernoutsanBook(PdfBook):
                 (u'Комплексные задачи, центр масс', 74, 75),
             ]),
             (u'Работа и энергия', [
-                (u'Примеры решения задач', 76, 104),
+                (u'Примеры решения задач', 76, 103),
                 (u'Работа', 104, 105),
                 (u'Постоянная мощность, КПД', 105, 105),
                 (u'Переменная мощность, cредняя мощность', 105, 106),
@@ -182,7 +182,7 @@ class ChernoutsanBook(PdfBook):
                 (u'Изменение механической энергии и закон сохранения импульса', 116, 117),
             ]),
             (u'Статика', [
-                (u'Примеры решения задач', 118, 129),
+                (u'Примеры решения задач', 118, 128),
                 (u'Равнодействующая сил, второй закон Ньютона для неподвижного тела', 129, 130),
                 (u'Правило моментов', 130, 133),
                 (u'Центр тяжести', 133, 133),
@@ -203,7 +203,7 @@ class ChernoutsanBook(PdfBook):
                 (u'Изменение количества вещества', 167, 168),
             ]),
             (u'Термодинамика', [
-                (u'Примеры решения задач', 168, 186),
+                (u'Примеры решения задач', 168, 185),
                 (u'Вычисление количества теплоты, КПД нагревателя', 186, 187),
                 (u'Взаимные превращения механической и внутренней энергии', 187, 188),
                 (u'Уравнение теплового баланса', 188, 190),
@@ -238,7 +238,7 @@ class ChernoutsanBook(PdfBook):
                 (u'Электролиз', 254, 254),
             ]),
             (u'Магнетизм', [
-                (u'Примеры решения задач', 255, 266),
+                (u'Примеры решения задач', 255, 265),
                 (u'Закон Ампера', 266, 267),
                 (u'Сила Лоренца', 267, 269),
                 (u'Магнитный поток, закон электромагнитной индукции', 269, 271),
@@ -264,11 +264,11 @@ class ChernoutsanBook(PdfBook):
                 (u'Атом водорода', 309, 309),
                 (u'Ядерные реакции', 309, 310),
             ]),
-        ], 1):
-            dirName = u'%02d %s' % (chapterIndex, chapter)
-            for partIndex, (part, first, last) in enumerate(parts, 0):
-                for pageNumber in range(first, last + (0 if partIndex == 0 else 1)):
-                    self.ExtractPage(pageNumber, dirName=dirName, nameTemplate='%02d %s - %%03d' % (partIndex, part))
+            ],
+            secondLevelStartIndex=0,
+        )
+        for pageNumber, dirName, nameTemplate in structure():
+            self.ExtractPage(pageNumber, dirName=dirName, nameTemplate=nameTemplate)
 
 
 class Maron_9_Sbornik(PdfBook):
@@ -278,15 +278,15 @@ class Maron_9_Sbornik(PdfBook):
         ]
 
     def Save(self):
-        for chapterIndex, (chapterName, first, last) in enumerate([
+        structure = OneDStructure([
             (u'Механика', 5, 78),
             (u'Колебания', 78, 87),
             (u'Волны', 87, 92),
             (u'Магнитное поле', 93, 118),
             (u'Строение атома', 119, 129),
-        ], 1):
-            for pageNumber in range(first, last + 1):
-                self.ExtractPage(pageNumber, nameTemplate='%01d - %s - %%03d' % (chapterIndex, chapterName))
+        ])
+        for pageNumber, dirName, nameTemplate in structure():
+            self.ExtractPage(pageNumber, dirName=dirName, nameTemplate=nameTemplate)
 
 
 class Maron_8_Sbornik(PdfBook):
@@ -296,14 +296,14 @@ class Maron_8_Sbornik(PdfBook):
         ]
 
     def Save(self):
-        for chapterIndex, (chapterName, first, last) in enumerate([
+        structure = OneDStructure([
             (u'Тепловые явления', 5, 51),
             (u'Электрические явления', 52, 117),
             (u'Электромагнитные явления', 118, 129),
             (u'Световые явления', 130, 143),
-        ], 1):
-            for pageNumber in range(first, last + 1):
-                self.ExtractPage(pageNumber, nameTemplate='%01d - %s - %%03d' % (chapterIndex, chapterName))
+        ])
+        for pageNumber, dirName, nameTemplate in structure():
+            self.ExtractPage(pageNumber, dirName=dirName, nameTemplate=nameTemplate)
 
 
 class Maron_8_SR_KR(PdfBook):
@@ -313,7 +313,7 @@ class Maron_8_SR_KR(PdfBook):
         ]
 
     def Save(self):
-        for chapterIndex, (chapterName, parts) in enumerate([
+        structure = TwoDStructure([
             (u'Тепловые явления', [
                 (u'Тепловое движение Температура', 4, 4),
                 (u'Внутренняя энергия', 5, 5),
@@ -399,11 +399,9 @@ class Maron_8_SR_KR(PdfBook):
             (u'Контрольные работы', [
                 (u'Итоговые КР', 97, 102),
             ]),
-        ], 1):
-            dirName = u'%01d %s' % (chapterIndex, chapterName)
-            for partIndex, (part, first, last) in enumerate(parts, 1):
-                for pageNumber in range(first, last + 1):
-                    self.ExtractPage(pageNumber, dirName=dirName, nameTemplate='%02d %s - %%03d' % (partIndex, part))
+        ])
+        for pageNumber, dirName, nameTemplate in structure():
+            self.ExtractPage(pageNumber, dirName=dirName, nameTemplate=nameTemplate)
 
 
 class Maron_9_SR_KR(PdfBook):
@@ -413,7 +411,7 @@ class Maron_9_SR_KR(PdfBook):
         ]
 
     def Save(self):
-        for chapterIndex, (chapterName, parts) in enumerate([
+        structure = TwoDStructure([
             (u'Механика', [
                 (u'Материальная точка и СО', 5, 5),
                 (u'Перемещение', 6, 6),
@@ -505,11 +503,9 @@ class Maron_9_SR_KR(PdfBook):
                 (u'Итоговая', 97, 102),
                 (u'Экзамен', 103, 104),
             ]),
-        ], 1):
-            dirName = u'%01d %s' % (chapterIndex, chapterName)
-            for partIndex, (part, first, last) in enumerate(parts, 1):
-                for pageNumber in range(first, last + 1):
-                    self.ExtractPage(pageNumber, dirName=dirName, nameTemplate='%02d %s - %%03d' % (partIndex, part))
+        ])
+        for pageNumber, dirName, nameTemplate in structure():
+            self.ExtractPage(pageNumber, dirName=dirName, nameTemplate=nameTemplate)
 
 
 class Maron_9_Didaktika(PdfBook):
@@ -519,7 +515,7 @@ class Maron_9_Didaktika(PdfBook):
         ]
 
     def Save(self):
-        for chapterIndex, (chapterName, parts) in enumerate([
+        structure = TwoDStructure([
             (u'Тренировочные задания', [
                 (u'Путь и перемещение', 5, 6),
                 (u'Прямолинейное равномерное движение', 6, 8),
@@ -570,11 +566,9 @@ class Maron_9_Didaktika(PdfBook):
                 (u'Механические колебания и волны', 105, 108),
                 (u'Электромагнитное поле', 109, 112),
             ]),
-        ], 1):
-            dirName = u'%01d %s' % (chapterIndex, chapterName)
-            for partIndex, (part, first, last) in enumerate(parts, 1):
-                for pageNumber in range(first, last + 1):
-                    self.ExtractPage(pageNumber, dirName=dirName, nameTemplate='%02d %s - %%03d' % (partIndex, part))
+        ])
+        for pageNumber, dirName, nameTemplate in structure():
+            self.ExtractPage(pageNumber, dirName=dirName, nameTemplate=nameTemplate)
 
 
 class Maron_8_Didaktika(PdfBook):
@@ -584,7 +578,7 @@ class Maron_8_Didaktika(PdfBook):
         ]
 
     def Save(self):
-        for chapterIndex, (chapterName, parts) in enumerate([
+        structure = TwoDStructure([
             (u'Тренировочные задания', [
                 (u'Внутренняя энергия', 5, 6),
                 (u'Виды теплопередачи', 6, 9),
@@ -633,11 +627,9 @@ class Maron_8_Didaktika(PdfBook):
                 (u'Сила тока - напряжение - сопротивление - закон Ома', 112, 114),
                 (u'Работа и мощность тока', 114, 115),
             ]),
-        ], 1):
-            dirName = u'%01d %s' % (chapterIndex, chapterName)
-            for partIndex, (part, first, last) in enumerate(parts, 1):
-                for pageNumber in range(first, last + 1):
-                    self.ExtractPage(pageNumber, dirName=dirName, nameTemplate='%02d %s - %%03d' % (partIndex, part))
+        ])
+        for pageNumber, dirName, nameTemplate in structure():
+            self.ExtractPage(pageNumber, dirName=dirName, nameTemplate=nameTemplate)
 
 
 class Kirik_8(PdfBook):
@@ -648,7 +640,7 @@ class Kirik_8(PdfBook):
 
     def Save(self):
         # from http://alleng.net/d/phys/phys462.htm
-        for chapterIndex, (chapterName, parts) in enumerate([
+        structure = TwoDStructure([
             (u'Тепловые явления', [
                 (u'Внутренняя энергия - Виды теплопередачи', 6, 10),
                 (u'Количество теплоты - Удельная теплоемкость', 11, 16),
@@ -693,11 +685,9 @@ class Kirik_8(PdfBook):
                 (u'Электромагнитные явления - Работа и мощность - Закон Джоуля—Ленца - Магнитное поле', 179, 187),
                 (u'Световые явления', 188, 194),
             ]),
-        ], 1):
-            dirName = u'%01d %s' % (chapterIndex, chapterName)
-            for partIndex, (part, first, last) in enumerate(parts, 1):
-                for pageNumber in range(first, last + 1):
-                    self.ExtractPage(pageNumber, dirName=dirName, nameTemplate='%02d %s - %%03d' % (partIndex, part))
+        ])
+        for pageNumber, dirName, nameTemplate in structure():
+            self.ExtractPage(pageNumber, dirName=dirName, nameTemplate=nameTemplate)
 
 class Kirik_9(PdfBook):
     def GetParams(self):
@@ -707,7 +697,7 @@ class Kirik_9(PdfBook):
 
     def Save(self):
         # from https://uchebnik.alleng.me/d/phys/phys552.htm
-        for chapterIndex, (chapterName, parts) in enumerate([
+        structure = TwoDStructure([
             (u'Кинематика', [
                 (u'Механическое движение и система отсчета - траектория-путь-перемещение', 6, 12),
                 (u'Прямолинейное равномерное движение', 13, 17),
@@ -740,11 +730,9 @@ class Kirik_9(PdfBook):
                 (u'Законы сохранения в механике', 132, 139),
                 (u'Механические колебания и волны. Атом и атомное ядро', 140, 147),
             ]),
-        ], 1):
-            dirName = u'%01d %s' % (chapterIndex, chapterName)
-            for partIndex, (part, first, last) in enumerate(parts, 1):
-                for pageNumber in range(first, last + 1):
-                    self.ExtractPage(pageNumber, dirName=dirName, nameTemplate='%02d %s - %%03d' % (partIndex, part))
+        ])
+        for pageNumber, dirName, nameTemplate in structure():
+            self.ExtractPage(pageNumber, dirName=dirName, nameTemplate=nameTemplate)
 
 
 class Gendenshteyn_8(PdfBook):
@@ -755,7 +743,7 @@ class Gendenshteyn_8(PdfBook):
 
     def Save(self):
         # from http://alleng.net/d/phys/phys433.htm
-        for chapterIndex, (chapterName, parts) in enumerate([
+        structure = TwoDStructure([
             (u'Тепловые явления', [
                 (u'Внутренняя энергия', 4, 7),
                 (u'Виды теплопередачи', 7, 15),
@@ -793,11 +781,9 @@ class Gendenshteyn_8(PdfBook):
                 (u'Дисперсия света и цвет', 153, 156),
                 (u'Домашние экспериментальные задания', 156, 160),
             ]),
-        ], 1):
-            dirName = u'%01d %s' % (chapterIndex, chapterName)
-            for partIndex, (part, first, last) in enumerate(parts, 1):
-                for pageNumber in range(first, last + 1):
-                    self.ExtractPage(pageNumber, dirName=dirName, nameTemplate='%02d %s - %%03d' % (partIndex, part))
+        ])
+        for pageNumber, dirName, nameTemplate in structure():
+            self.ExtractPage(pageNumber, dirName=dirName, nameTemplate=nameTemplate)
 
 
 class Gendenshteyn_9(PdfBook):
@@ -808,7 +794,7 @@ class Gendenshteyn_9(PdfBook):
 
     def Save(self):
         # from https://uchebnik.alleng.me/d/phys/phys435.htm
-        for chapterIndex, (chapterName, parts) in enumerate([
+        structure = TwoDStructure([
             (u'Механика', [
                 (u'Механическое движение и система отсчёта', 4, 13),
                 (u'Прямолинейное равномерное движение', 13, 20),
@@ -839,21 +825,21 @@ class Gendenshteyn_9(PdfBook):
                 (u'Задания для самоконтроля', 144, 151),
                 (u'Задания повышенной трудности', 151, 159),
             ]),
-        ], 1):
-            dirName = u'%01d %s' % (chapterIndex, chapterName)
-            for partIndex, (part, first, last) in enumerate(parts, 1):
-                for pageNumber in range(first, last + 1):
-                    self.ExtractPage(pageNumber, dirName=dirName, nameTemplate='%02d %s - %%03d' % (partIndex, part))
+        ])
+        for pageNumber, dirName, nameTemplate in structure():
+            self.ExtractPage(pageNumber, dirName=dirName, nameTemplate=nameTemplate)
 
 
 class TwoDStructure(object):
-    def __init__(self, data):
+    def __init__(self, data, firstLevelStartIndex=1, secondLevelStartIndex=1):
         self.Data = data
+        self.FirstLevelStartIndex = firstLevelStartIndex
+        self.SecondLevelStartIndex = secondLevelStartIndex
 
     def __call__(self):
-        for chapterIndex, (chapterName, parts) in enumerate(self.Data, 1):
-            dirName = u'%01d %s' % (chapterIndex, chapterName)
-            for partIndex, (part, first, last) in enumerate(parts, 1):
+        for chapterIndex, (chapterName, parts) in enumerate(self.Data, self.FirstLevelStartIndex):
+            dirName = u'%02d %s' % (chapterIndex, chapterName)
+            for partIndex, (part, first, last) in enumerate(parts, self.SecondLevelStartIndex):
                 for pageNumber in range(first, last + 1):
                     yield pageNumber, dirName, '%02d %s - %%03d' % (partIndex, part)
 
@@ -918,7 +904,7 @@ class Problems_3800(PdfBook):
 
     def Save(self):
         # from https://uchebnik.alleng.me/d/phys/phys435.htm
-        for chapterIndex, (chapterName, parts) in enumerate([
+        structure = TwoDStructure([
             (ur'Механика - Кинематика', [
                 (ur'Длина - время - скорость', 4, 7),
                 (ur'Материальная точка. Система отсчета. Путь. Перемещение', 7, 9),
@@ -1089,8 +1075,6 @@ class Problems_3800(PdfBook):
 #         Законы сохранения в ядерных реакциях 521
 # Ответы 525
 # Приложение 659
-        ], 1):
-            dirName = u'%01d %s' % (chapterIndex, chapterName)
-            for partIndex, (part, first, last) in enumerate(parts, 1):
-                for pageNumber in range(first, last + 1):
-                    self.ExtractPage(pageNumber, dirName=dirName, nameTemplate='%02d %s - %%03d' % (partIndex, part))
+        ])
+        for pageNumber, dirName, nameTemplate in structure():
+            self.ExtractPage(pageNumber, dirName=dirName, nameTemplate=nameTemplate)
