@@ -37,7 +37,7 @@ def runDownload(args):
         library.download.MathusPhys(),
         library.download.ZnakKachestava(),
     ]:
-        downloader.Download(udrPath(, downloader.GetDirname()))
+        downloader.Download(udrPath(downloader.GetDirname()))
 
     for videoDownloader in [
         library.download.GetAClass(),
