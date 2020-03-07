@@ -113,7 +113,7 @@ def runConvert(args):
         ),
     ]
     for book in books:
-        book.Save()
+        book.Save(overwrite=False)
 
 
 def runGenerate(args):

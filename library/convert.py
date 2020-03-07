@@ -13,17 +13,12 @@ class PdfBook(object):
         pdfPath=None,
         dstPath=None,
         pageShift=None,
-        name='page',
-        overwrite=False,
     ):
         assert pdfPath.endswith('.pdf')
         assert os.path.exists(pdfPath)
         self.PdfPath = pdfPath
         self.DstPath = dstPath
         self.PageShift = pageShift
-        self.NameTemplate = '%s-%%03d' % name
-        self.Overwrite = overwrite
-        log.info('Extracting "%s" to "%s"', self.PdfPath, self.DstPath)
 
     def GetPageShift(self, pageNumber):
         if self.PageShift:
@@ -43,7 +38,7 @@ class PdfBook(object):
     def GetParams(self):
         return []
 
-    def ExtractPage(self, pageNumber, dirName=None, nameTemplate=None):
+    def ExtractPage(self, pageNumber, dirName=None, nameTemplate=None, overwrite=False):
         assert isinstance(pageNumber, int)
         assert 1 <= pageNumber < 1000
         pageIndex = self.GetPageShift(pageNumber) + pageNumber - 1
@@ -55,11 +50,11 @@ class PdfBook(object):
             self.EnsureDir(dirName)
         else:
             dirName = self.DstPath
-        fileName = (nameTemplate or self.NameTemplate) % pageNumber + '.png'
+        fileName = (nameTemplate % pageNumber) + '.png'
         log.info('  Page %d -> %s', pageNumber, fileName)
         fileName = os.path.join(dirName, fileName)
 
-        if os.path.exists(fileName) and not self.Overwrite:
+        if os.path.exists(fileName) and not overwrite:
             log.debug('Already generated %s', fileName)
             return False
 
@@ -88,6 +83,13 @@ class PdfBook(object):
         else:
             return True
 
+    def Save(self, overwrite=False):
+        structure = self.GetStructure()
+        data = list(structure())
+        log.info('Saving %d pages from "%s" to "%s"', len(data), self.PdfPath, self.DstPath)
+        for pageNumber, dirName, nameTemplate in data:
+            self.ExtractPage(pageNumber, dirName=dirName, nameTemplate=nameTemplate, overwrite=overwrite)
+
 
 class ComicsBook(PdfBook):
     def GetPageShift(self, pageNumber):
@@ -96,8 +98,8 @@ class ComicsBook(PdfBook):
         else:
             return -3
 
-    def Save(self):
-        structure = OneDStructure([
+    def GetStructure(self):
+        return OneDStructure([
             (u'Движение', 9, 24),
             (u'Яблоко и Луна', 24, 39),
             (u'Пуля и параболическое движение', 39, 43),
@@ -123,8 +125,6 @@ class ComicsBook(PdfBook):
             (u'Уравнения Максвелла и свет', 195, 201),
             (u'Квантовая электродинамика', 201, 214),
         ])
-        for pageNumber, dirName, nameTemplate in structure():
-            self.ExtractPage(pageNumber, dirName=dirName, nameTemplate=nameTemplate)
 
 
 class ChernoutsanBook(PdfBook):
@@ -133,8 +133,8 @@ class ChernoutsanBook(PdfBook):
             '-level', '50%,90%,1.5',
         ]
 
-    def Save(self):
-        structure = TwoDStructure([
+    def GetStructure(self):
+        return TwoDStructure([
             (u'Кинематика', [
                 (u'Примеры решения', 6, 25),
                 (u'Перемещение, путь равномерное движение', 26, 16),
@@ -267,8 +267,6 @@ class ChernoutsanBook(PdfBook):
             ],
             secondLevelStartIndex=0,
         )
-        for pageNumber, dirName, nameTemplate in structure():
-            self.ExtractPage(pageNumber, dirName=dirName, nameTemplate=nameTemplate)
 
 
 class Maron_9_Sbornik(PdfBook):
@@ -277,16 +275,14 @@ class Maron_9_Sbornik(PdfBook):
             '-level', '50%,90%,1.5',
         ]
 
-    def Save(self):
-        structure = OneDStructure([
+    def GetStructure(self):
+        return OneDStructure([
             (u'Механика', 5, 78),
             (u'Колебания', 78, 87),
             (u'Волны', 87, 92),
             (u'Магнитное поле', 93, 118),
             (u'Строение атома', 119, 129),
         ])
-        for pageNumber, dirName, nameTemplate in structure():
-            self.ExtractPage(pageNumber, dirName=dirName, nameTemplate=nameTemplate)
 
 
 class Maron_8_Sbornik(PdfBook):
@@ -295,15 +291,13 @@ class Maron_8_Sbornik(PdfBook):
             '-level', '50%,90%,1.5',
         ]
 
-    def Save(self):
-        structure = OneDStructure([
+    def GetStructure(self):
+        return OneDStructure([
             (u'Тепловые явления', 5, 51),
             (u'Электрические явления', 52, 117),
             (u'Электромагнитные явления', 118, 129),
             (u'Световые явления', 130, 143),
         ])
-        for pageNumber, dirName, nameTemplate in structure():
-            self.ExtractPage(pageNumber, dirName=dirName, nameTemplate=nameTemplate)
 
 
 class Maron_8_SR_KR(PdfBook):
@@ -312,8 +306,8 @@ class Maron_8_SR_KR(PdfBook):
             '-level', '10%,90%,0.7',
         ]
 
-    def Save(self):
-        structure = TwoDStructure([
+    def GetStructure(self):
+        return TwoDStructure([
             (u'Тепловые явления', [
                 (u'Тепловое движение Температура', 4, 4),
                 (u'Внутренняя энергия', 5, 5),
@@ -400,8 +394,6 @@ class Maron_8_SR_KR(PdfBook):
                 (u'Итоговые КР', 97, 102),
             ]),
         ])
-        for pageNumber, dirName, nameTemplate in structure():
-            self.ExtractPage(pageNumber, dirName=dirName, nameTemplate=nameTemplate)
 
 
 class Maron_9_SR_KR(PdfBook):
@@ -410,8 +402,8 @@ class Maron_9_SR_KR(PdfBook):
             '-level', '10%,90%,0.7',
         ]
 
-    def Save(self):
-        structure = TwoDStructure([
+    def GetStructure(self):
+        return TwoDStructure([
             (u'Механика', [
                 (u'Материальная точка и СО', 5, 5),
                 (u'Перемещение', 6, 6),
@@ -504,8 +496,6 @@ class Maron_9_SR_KR(PdfBook):
                 (u'Экзамен', 103, 104),
             ]),
         ])
-        for pageNumber, dirName, nameTemplate in structure():
-            self.ExtractPage(pageNumber, dirName=dirName, nameTemplate=nameTemplate)
 
 
 class Maron_9_Didaktika(PdfBook):
@@ -514,8 +504,8 @@ class Maron_9_Didaktika(PdfBook):
             '-level', '10%,90%,0.7',
         ]
 
-    def Save(self):
-        structure = TwoDStructure([
+    def GetStructure(self):
+        return TwoDStructure([
             (u'Тренировочные задания', [
                 (u'Путь и перемещение', 5, 6),
                 (u'Прямолинейное равномерное движение', 6, 8),
@@ -567,8 +557,6 @@ class Maron_9_Didaktika(PdfBook):
                 (u'Электромагнитное поле', 109, 112),
             ]),
         ])
-        for pageNumber, dirName, nameTemplate in structure():
-            self.ExtractPage(pageNumber, dirName=dirName, nameTemplate=nameTemplate)
 
 
 class Maron_8_Didaktika(PdfBook):
@@ -577,8 +565,8 @@ class Maron_8_Didaktika(PdfBook):
             '-level', '10%,90%,0.7',
         ]
 
-    def Save(self):
-        structure = TwoDStructure([
+    def GetStructure(self):
+        return TwoDStructure([
             (u'Тренировочные задания', [
                 (u'Внутренняя энергия', 5, 6),
                 (u'Виды теплопередачи', 6, 9),
@@ -628,8 +616,6 @@ class Maron_8_Didaktika(PdfBook):
                 (u'Работа и мощность тока', 114, 115),
             ]),
         ])
-        for pageNumber, dirName, nameTemplate in structure():
-            self.ExtractPage(pageNumber, dirName=dirName, nameTemplate=nameTemplate)
 
 
 class Kirik_8(PdfBook):
@@ -640,7 +626,7 @@ class Kirik_8(PdfBook):
 
     def Save(self):
         # from http://alleng.net/d/phys/phys462.htm
-        structure = TwoDStructure([
+        return TwoDStructure([
             (u'Тепловые явления', [
                 (u'Внутренняя энергия - Виды теплопередачи', 6, 10),
                 (u'Количество теплоты - Удельная теплоемкость', 11, 16),
@@ -686,8 +672,6 @@ class Kirik_8(PdfBook):
                 (u'Световые явления', 188, 194),
             ]),
         ])
-        for pageNumber, dirName, nameTemplate in structure():
-            self.ExtractPage(pageNumber, dirName=dirName, nameTemplate=nameTemplate)
 
 class Kirik_9(PdfBook):
     def GetParams(self):
@@ -697,7 +681,7 @@ class Kirik_9(PdfBook):
 
     def Save(self):
         # from https://uchebnik.alleng.me/d/phys/phys552.htm
-        structure = TwoDStructure([
+        return TwoDStructure([
             (u'Кинематика', [
                 (u'Механическое движение и система отсчета - траектория-путь-перемещение', 6, 12),
                 (u'Прямолинейное равномерное движение', 13, 17),
@@ -731,8 +715,6 @@ class Kirik_9(PdfBook):
                 (u'Механические колебания и волны. Атом и атомное ядро', 140, 147),
             ]),
         ])
-        for pageNumber, dirName, nameTemplate in structure():
-            self.ExtractPage(pageNumber, dirName=dirName, nameTemplate=nameTemplate)
 
 
 class Gendenshteyn_8(PdfBook):
@@ -743,7 +725,7 @@ class Gendenshteyn_8(PdfBook):
 
     def Save(self):
         # from http://alleng.net/d/phys/phys433.htm
-        structure = TwoDStructure([
+        return TwoDStructure([
             (u'Тепловые явления', [
                 (u'Внутренняя энергия', 4, 7),
                 (u'Виды теплопередачи', 7, 15),
@@ -782,8 +764,6 @@ class Gendenshteyn_8(PdfBook):
                 (u'Домашние экспериментальные задания', 156, 160),
             ]),
         ])
-        for pageNumber, dirName, nameTemplate in structure():
-            self.ExtractPage(pageNumber, dirName=dirName, nameTemplate=nameTemplate)
 
 
 class Gendenshteyn_9(PdfBook):
@@ -794,7 +774,7 @@ class Gendenshteyn_9(PdfBook):
 
     def Save(self):
         # from https://uchebnik.alleng.me/d/phys/phys435.htm
-        structure = TwoDStructure([
+        return TwoDStructure([
             (u'Механика', [
                 (u'Механическое движение и система отсчёта', 4, 13),
                 (u'Прямолинейное равномерное движение', 13, 20),
@@ -826,8 +806,6 @@ class Gendenshteyn_9(PdfBook):
                 (u'Задания повышенной трудности', 151, 159),
             ]),
         ])
-        for pageNumber, dirName, nameTemplate in structure():
-            self.ExtractPage(pageNumber, dirName=dirName, nameTemplate=nameTemplate)
 
 
 class TwoDStructure(object):
@@ -845,14 +823,15 @@ class TwoDStructure(object):
 
 
 class OneDStructure(object):
-    def __init__(self, data):
+    def __init__(self, data, startIndex=1):
         self.Data = data
+        self.StartIndex = startIndex
 
     def __call__(self):
-        for index, (dirName, first, last) in enumerate(self.Data, 1):
-            dirName = u'%02d %s' % (index, dirName)
+        for index, (name, first, last) in enumerate(self.Data, self.StartIndex):
+            dirName = u'%02d %s' % (index, name)
             for pageNumber in range(first, last):
-                yield pageNumber, dirName, 'page-%03d'
+                yield pageNumber, dirName, '%02d %s - %%03d' % (index, name)
 
 
 class Gorbushin(PdfBook):
@@ -861,8 +840,8 @@ class Gorbushin(PdfBook):
             '-level', '10%,90%,0.7',
         ]
 
-    def Save(self):
-        structure = OneDStructure([
+    def GetStructure(self):
+        return OneDStructure([
             (u'Кинематика-1', 10, 12),
             (u'Кинематика-2', 14, 17),
             (u'Динамика-1', 25, 28),
@@ -892,8 +871,6 @@ class Gorbushin(PdfBook):
             (u'Строение атома', 231, 235),
             (u'Строение ядра и больше', 240, 242),
         ])
-        for pageNumber, dirName, nameTemplate in structure():
-            self.ExtractPage(pageNumber, dirName=dirName, nameTemplate=nameTemplate)
 
 
 class Problems_3800(PdfBook):
@@ -904,7 +881,7 @@ class Problems_3800(PdfBook):
 
     def Save(self):
         # from https://uchebnik.alleng.me/d/phys/phys435.htm
-        structure = TwoDStructure([
+        return TwoDStructure([
             (ur'Механика - Кинематика', [
                 (ur'Длина - время - скорость', 4, 7),
                 (ur'Материальная точка. Система отсчета. Путь. Перемещение', 7, 9),
@@ -1076,5 +1053,3 @@ class Problems_3800(PdfBook):
 # Ответы 525
 # Приложение 659
         ])
-        for pageNumber, dirName, nameTemplate in structure():
-            self.ExtractPage(pageNumber, dirName=dirName, nameTemplate=nameTemplate)
