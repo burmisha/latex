@@ -107,6 +107,10 @@ def runConvert(args):
             pdfPath=udrPath(booksPath, u'9 класс', u'9 - Генденштейн - 2012.pdf'),
             dstPath=udrPath(booksPath, u'9 класс', u'9 - Генденштейн'),
         ),
+        library.convert.Gorbushin(
+            pdfPath=udrPath(booksPath, u'Методика', u'Горбушин - Как можно учить физике.pdf'),
+            dstPath=udrPath(booksPath, u'Методика', u'Горбушин - Как можно учить физике'),
+        ),
     ]
     for book in books:
         book.Save()

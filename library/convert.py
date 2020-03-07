@@ -847,6 +847,70 @@ class Gendenshteyn_9(PdfBook):
                     self.ExtractPage(pageNumber, dirName=dirName, nameTemplate='%02d %s - %%03d' % (partIndex, part))
 
 
+class TwoDStructure(object):
+    def __init__(self, data):
+        self.Data = data
+
+    def __call__(self):
+        for chapterIndex, (chapterName, parts) in enumerate(self.Data, 1):
+            dirName = u'%01d %s' % (chapterIndex, chapterName)
+            for partIndex, (part, first, last) in enumerate(parts, 1):
+                for pageNumber in range(first, last + 1):
+                    yield pageNumber, dirName, '%02d %s - %%03d' % (partIndex, part)
+
+
+class OneDStructure(object):
+    def __init__(self, data):
+        self.Data = data
+
+    def __call__(self):
+        for index, (dirName, first, last) in enumerate(self.Data, 1):
+            dirName = u'%02d %s' % (index, dirName)
+            for pageNumber in range(first, last):
+                yield pageNumber, dirName
+
+
+class Gorbushin(PdfBook):
+    def GetParams(self):
+        return [
+            '-level', '10%,90%,0.7',
+        ]
+
+    def Save(self):
+        structure = OneDStructure([
+            (u'Кинематика-1', 10, 12),
+            (u'Кинематика-2', 14, 17),
+            (u'Динамика-1', 25, 28),
+            (u'Динамика-2', 30, 30),
+            (u'Законы сохранения', 34, 36),
+            (u'Динамика вращения', 39, 40),
+            (u'Основы МКТ', 44, 46),
+            (u'Идеальные газы', 53, 55),
+            (u'Пар и влажность', 61, 62),
+            (u'Поверхностное натяжение', 64, 65),
+            (u'Электростатика', 70, 77),
+            (u'Конденсаторы', 82, 84),
+            (u'Постоянный ток', 88, 90),
+            (u'Ток в средах', 95, 97),
+            (u'Магнитное поле', 101, 104),
+            (u'ЭМИ', 115, 122),
+            (u'Механические колебания', 127, 131),
+            (u'Электромагнитные колебания', 135, 137),
+            (u'Колебания', 148, 153),
+            (u'Волны', 164, 169),
+            (u'Интерференция', 174, 176),
+            (u'Дифракция', 182, 183),
+            (u'Поляризация и дисперсия', 184, 184),
+            (u'Геометрическая оптика', 195, 202),
+            (u'СТО', 209, 212),
+            (u'Фотоэффект', 219, 220),
+            (u'Строение атома', 231, 235),
+            (u'Строение ядра и больше', 240, 242),
+        ])
+        for pageNumber, dirName in structure():
+            self.ExtractPage(pageNumber, dirName=dirName)
+
+
 class Problems_3800(PdfBook):
     def GetParams(self):
         return [
