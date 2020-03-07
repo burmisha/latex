@@ -14,7 +14,7 @@ log = logging.getLogger('generate')
 
 
 def udrPath(*args):
-    return os.path.join(os.environ['HOME'], 'Yandex.Disk.localized', u'УДР', *args)
+    return os.path.join(os.environ['HOME'], 'Yandex.Disk.localized', u'УДР', u'Общие материалы физиков УДР', *args)
 
 
 def runLucky(args):
@@ -37,17 +37,17 @@ def runDownload(args):
         library.download.MathusPhys(),
         library.download.ZnakKachestava(),
     ]:
-        downloader.Download(udrPath(u'Общие материалы физиков УДР', downloader.GetDirname()))
+        downloader.Download(udrPath(, downloader.GetDirname()))
 
     for videoDownloader in [
         library.download.GetAClass(),
         library.download.Gorbushin(),
     ]:
-        videoDownloader.Download(udrPath(u'Общие материалы физиков УДР', u'Видео'))
+        videoDownloader.Download(udrPath(u'Видео'))
 
 
 def runConvert(args):
-    booksPath = os.path.join(u'Общие материалы физиков УДР', u'Книги - физика')
+    booksPath = os.path.join(u'Книги - физика')
     books = [
         library.convert.ComicsBook(
             pdfPath=udrPath(booksPath, u'Физика в комиксах.pdf'),
