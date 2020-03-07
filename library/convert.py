@@ -624,7 +624,7 @@ class Kirik_8(PdfBook):
             '-level', '10%,90%,0.7',
         ]
 
-    def Save(self):
+    def GetStructure(self):
         # from http://alleng.net/d/phys/phys462.htm
         return TwoDStructure([
             (u'Тепловые явления', [
@@ -679,7 +679,7 @@ class Kirik_9(PdfBook):
             '-level', '10%,90%,0.7',
         ]
 
-    def Save(self):
+    def GetStructure(self):
         # from https://uchebnik.alleng.me/d/phys/phys552.htm
         return TwoDStructure([
             (u'Кинематика', [
@@ -723,7 +723,7 @@ class Gendenshteyn_8(PdfBook):
             '-level', '10%,90%,0.7',
         ]
 
-    def Save(self):
+    def GetStructure(self):
         # from http://alleng.net/d/phys/phys433.htm
         return TwoDStructure([
             (u'Тепловые явления', [
@@ -772,7 +772,7 @@ class Gendenshteyn_9(PdfBook):
             '-level', '10%,90%,0.7',
         ]
 
-    def Save(self):
+    def GetStructure(self):
         # from https://uchebnik.alleng.me/d/phys/phys435.htm
         return TwoDStructure([
             (u'Механика', [
@@ -879,7 +879,7 @@ class Problems_3800(PdfBook):
             '-level', '10%,90%,0.7',
         ]
 
-    def Save(self):
+    def GetStructure(self):
         # from https://uchebnik.alleng.me/d/phys/phys435.htm
         return TwoDStructure([
             (ur'Механика - Кинематика', [
