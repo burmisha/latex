@@ -288,15 +288,33 @@ class GetAClass(object):
     def __init__(self):
         self.YoutubeDownloader = YoutubeDownloader()
 
-    def __DownloadVideo(self, url, file):
-        bestStream = self.YoutubeDownloader.GetBestStream(url, preftype='mp4')
-        bestStream.download(filepath=file)
-
     def Download(self, path):
-        url = 'https://www.youtube.com/watch?v=8yXf4Gawl4w'
-        dstFile = os.path.join(path, u'GetAClass', u'1.mp4')
-        log.info('Downloading %s to %s', url, dstFile)
-        self.__DownloadVideo(url, dstFile)
+        for url, name in [
+            ('https://www.youtube.com/watch?v=8yXf4Gawl4w', u'8 - 01 - Действия электрического тока'),
+            ('https://www.youtube.com/watch?v=SwNJwbU_lYU', u'8 - 02 - Электролиз'),
+            ('https://www.youtube.com/watch?v=RU_-6Ahalqk', u'8 - 03 - Направление электрического тока'),
+            ('https://www.youtube.com/watch?v=iyR4Nt7Twg4', u'8 - 04 - Закон Ома'),
+            ('https://www.youtube.com/watch?v=RnQGENiF-QM', u'8 - 05 - Внутреннее сопротивление'),
+            ('https://www.youtube.com/watch?v=X7_lDtGzXTY', u'8 - 06 - Последовательное и параллельное соединение сопротивлений'),
+            ('https://www.youtube.com/watch?v=no9KjloMdxU', u'8 - 07 - Сопротивление куба'),
+            ('https://www.youtube.com/watch?v=DowFnoMYqgI', u'8 - 08 - Лампа накаливания'),
+            ('https://www.youtube.com/watch?v=8GvuGCE9JQI', u'8 - 09 - Электродвижущая сила (ЭДС)'),
+            ('https://www.youtube.com/watch?v=GGnFhHSCuAs', u'8 - 10 - Закон Джоуля-Ленца. Часть 1'),
+            ('https://www.youtube.com/watch?v=xlDaZVQWbNA', u'8 - 11 - Закон Джоуля-Ленца. Часть 2'),
+            ('https://www.youtube.com/watch?v=4j4T9wyRAGQ', u'10 - 12 - Коэффициент мощности косинус фи'),
+            ('https://www.youtube.com/watch?v=1T8FRhLCUJM', u'8 - Коронный разряд и огни святого Эльма'),
+            ('https://www.youtube.com/watch?v=627QB4DGE8k', u'10 - 05 - Диэлектрик в электрическом поле'),
+            ('https://www.youtube.com/watch?v=NV2V5VcXlEI', u'8 - Переменный ток'),
+            ('https://www.youtube.com/watch?v=BQOK_b9TsjE', u'8 - Когда переменный ток становится постоянным'),
+            ('https://www.youtube.com/watch?v=denwtwcfvZw', u'8 - Стабилитрон'),
+        ]:
+            dstFile = os.path.join(path, u'GetAClass', u'%s.mp4' % name)
+            if os.path.exists(dstFile):
+                log.info('Skipping %s as %s exists', url, name)
+            else:
+                log.info('Downloading %s to %s', url, dstFile)
+                bestStream = self.YoutubeDownloader.GetBestStream(url, preftype='mp4')
+                bestStream.download(filepath=dstFile)
 
 
 class Gorbushin(object):
