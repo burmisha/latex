@@ -4,8 +4,8 @@ import os
 log = logging.getLogger(__name__)
 
 
-def walkFiles(dirname, extensions=[], dirsOnly=False):
-    dirName = str(dirname)
+def walkFiles(dirName, extensions=[], dirsOnly=False):
+    # dirName = str(dirname)
     logName = 'dirs' if dirsOnly else 'files'
     log.debug('Looking for %s of types %r in %s', logName, extensions, dirName)
     count = 0

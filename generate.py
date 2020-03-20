@@ -9,6 +9,7 @@ import problems
 import classes
 import generators
 import library
+import tools
 
 log = logging.getLogger('generate')
 
@@ -44,6 +45,11 @@ def runDownload(args):
         library.download.Gorbushin(),
     ]:
         videoDownloader.Download(udrPath(u'Видео'))
+
+
+def runQr(args):
+    qrGenerator = tools.qr.Generator(path=udrPath('qrcodes'), force=args.force)
+    qrGenerator.MakeAll()
 
 
 def runConvert(args):
@@ -114,6 +120,7 @@ def runConvert(args):
     ]
     for book in books:
         book.Save(overwrite=False)
+        book.GetStrangeFiles(remove=args.remove_strange_files)
 
 
 def runGenerate(args):
@@ -325,7 +332,12 @@ def CreateArgumentsParser():
     downloadParser = subparsers.add_parser('download', help='Download extra files')
     downloadParser.set_defaults(func=runDownload)
 
+    qrParser = subparsers.add_parser('qr', help='Form QR codes')
+    qrParser.add_argument('--force', help='Force updates', action='store_true')
+    qrParser.set_defaults(func=runQr)
+
     convertParser = subparsers.add_parser('convert', help='Convert into smth')
+    convertParser.add_argument('--remove-strange-files', help='Remove strange files', action='store_true')
     convertParser.set_defaults(func=runConvert)
 
     return parser

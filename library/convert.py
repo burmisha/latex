@@ -3,6 +3,8 @@
 import subprocess
 import os
 
+import files
+
 import logging
 log = logging.getLogger('convert')
 
@@ -38,12 +40,7 @@ class PdfBook(object):
     def GetParams(self):
         return []
 
-    def ExtractPage(self, pageNumber, dirName=None, nameTemplate=None, overwrite=False):
-        assert isinstance(pageNumber, int)
-        assert 1 <= pageNumber < 1000
-        pageIndex = self.GetPageShift(pageNumber) + pageNumber - 1
-        assert 1 <= pageIndex < 1000
-
+    def GetDirFilename(self, dirName, nameTemplate, pageNumber):
         self.EnsureDir(self.DstPath)
         if dirName:
             dirName = os.path.join(self.DstPath, dirName)
@@ -51,8 +48,20 @@ class PdfBook(object):
         else:
             dirName = self.DstPath
         fileName = (nameTemplate % pageNumber) + '.png'
-        log.info('  Page %d -> %s', pageNumber, fileName)
         fileName = os.path.join(dirName, fileName)
+        return dirName, fileName
+
+    def ExtractPage(self, pageNumber, dirName=None, nameTemplate=None, overwrite=False):
+        assert isinstance(pageNumber, int)
+        assert 1 <= pageNumber < 1000
+        pageIndex = self.GetPageShift(pageNumber) + pageNumber - 1
+        assert 1 <= pageIndex < 1000
+
+        dirName, fileName = self.GetDirFilename(dirName, nameTemplate, pageNumber)
+        log.info('  Page %d -> %s', pageNumber, fileName)
+
+        self.EnsureDir(self.DstPath)
+        self.EnsureDir(dirName)
 
         if os.path.exists(fileName) and not overwrite:
             log.debug('Already generated %s', fileName)
@@ -89,6 +98,18 @@ class PdfBook(object):
         log.info('Saving %d pages from "%s" to "%s"', len(data), self.PdfPath, self.DstPath)
         for pageNumber, dirName, nameTemplate in data:
             self.ExtractPage(pageNumber, dirName=dirName, nameTemplate=nameTemplate, overwrite=overwrite)
+
+    def GetStrangeFiles(self, remove=False):
+        log.debug('Checking for strange files in %s', self.DstPath)
+        found = set(files.walkFiles(self.DstPath, extensions=['.png']))
+        structure = self.GetStructure()
+        known = set(self.GetDirFilename(dirName, nameTemplate, pageNumber)[1] for pageNumber, dirName, nameTemplate in structure())
+        strange = sorted(found - known)
+        log.info('Found %d strange files (expected %d, found %d) in %s', len(strange), len(known), len(found), self.DstPath)
+        for file in strange:
+            log.info('Unknown file %s', file)
+            if remove:
+                os.remove(file)
 
 
 class ComicsBook(PdfBook):

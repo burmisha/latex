@@ -307,10 +307,13 @@ class GetAClass(object):
             ('https://www.youtube.com/watch?v=NV2V5VcXlEI', u'8 - Переменный ток'),
             ('https://www.youtube.com/watch?v=BQOK_b9TsjE', u'8 - Когда переменный ток становится постоянным'),
             ('https://www.youtube.com/watch?v=denwtwcfvZw', u'8 - Стабилитрон'),
+            ('https://www.youtube.com/watch?v=4E1AxUMUz-g', u'9 - Дисперсия света'),
+            ('https://www.youtube.com/watch?v=BhYKN21olBw', u'9 - Brain Damage'),
+            ('https://www.youtube.com/watch?v=p15KNqWUZ-c', u'Сергей Гуриев - Экономика красоты и счастья - 2012'),
         ]:
             dstFile = os.path.join(path, u'GetAClass', u'%s.mp4' % name)
             if os.path.exists(dstFile):
-                log.info('Skipping %s as %s exists', url, name)
+                log.debug('Skipping %s as %s exists', url, name)
             else:
                 log.info('Downloading %s to %s', url, dstFile)
                 bestStream = self.YoutubeDownloader.GetBestStream(url, preftype='mp4')
