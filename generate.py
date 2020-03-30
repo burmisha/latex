@@ -35,8 +35,8 @@ def runTripod(args):
 
 def runDownload(args):
     for downloader in [
-        library.download.MathusPhys(),
-        library.download.ZnakKachestava(),
+        # library.download.MathusPhys(),
+        # library.download.ZnakKachestava(),
     ]:
         downloader.Download(udrPath(downloader.GetDirname()))
 
@@ -116,6 +116,12 @@ def runConvert(args):
         library.convert.Gorbushin(
             pdfPath=udrPath(booksPath, u'Методика', u'Горбушин - Как можно учить физике.pdf'),
             dstPath=udrPath(booksPath, u'Методика', u'Горбушин - Как можно учить физике'),
+        ),
+        library.convert.Vishnyakova(
+            pageShift=1,
+            pdfPath=udrPath(booksPath, u'МГУ', u'Вишнякова - Физика - сборник задач к ЕГЭ - 2015.pdf'),
+            dstPath=udrPath(booksPath, u'МГУ', u'Вишнякова - Физика - сборник задач к ЕГЭ - 2015'),
+            ppi=200,
         ),
     ]
     for book in books:
