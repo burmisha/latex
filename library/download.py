@@ -309,7 +309,9 @@ class GetAClass(object):
             ('https://www.youtube.com/watch?v=denwtwcfvZw', u'8 - Стабилитрон'),
             ('https://www.youtube.com/watch?v=4E1AxUMUz-g', u'9 - Дисперсия света'),
             ('https://www.youtube.com/watch?v=BhYKN21olBw', u'9 - Brain Damage'),
+            ('https://www.youtube.com/watch?v=mh-LTSGjFsE', u'9 - 10 - Закон Гука и энергия упругой деформации'),
             ('https://www.youtube.com/watch?v=p15KNqWUZ-c', u'Сергей Гуриев - Экономика красоты и счастья - 2012'),
+            ('https://www.youtube.com/watch?v=OHCobJjMHuM', u'Творческая дистанционка от Димы Зицера - 2020-03-20'),
         ]:
             dstFile = os.path.join(path, u'GetAClass', u'%s.mp4' % name)
             if os.path.exists(dstFile):
