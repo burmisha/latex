@@ -284,17 +284,20 @@ def runGenerate(args):
         }
         for className, dateTasks in classRandomTasks.iteritems():
             pupils = library.pupils.getPupils(className, addMyself=True, onlyMe=args.me)
-            pupilsList = list(pupils.Iterate())
-            for date, taskGenerators in dateTasks.iteritems():
+            for date, variantTasks in dateTasks.iteritems():
                 multiplePaper = generators.variant.MultiplePaper(date, classLetter=pupils.Grade)
-                if fileWriter.NotMatches(multiplePaper.GetFilename()):
+                filename = multiplePaper.GetFilename()
+                if fileWriter.NotMatches(filename):
+                    log.info('Skipping %s', filename)
                     continue
-                tasksLists = [taskGenerator.Shuffle(seed, minCount=len(pupilsList)) for taskGenerator in taskGenerators]
-                variants = generators.variant.Variants(pupilsList, zip(*tasksLists))
                 fileWriter.Write(
                     'school-554',
-                    multiplePaper.GetFilename(),
-                    text=multiplePaper.GetTex(variants.Iterate(), withAnswers=args.answers),
+                    filename,
+                    text=multiplePaper.GetTex(
+                        pupils=pupils,
+                        variants=generators.variant.Variants(variantTasks, date=date, pupils=pupils),
+                        withAnswers=args.answers,
+                    ),
                 )
 
         if args.show_manual:

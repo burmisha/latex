@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 
-import random
 import logging
+import hashlib
+import collections
 
 import library
 
@@ -23,34 +24,58 @@ PAPER_TEMPLATE = ur'''
 
 
 class VariantTask(object):
-    pass
+    def __init__(self):
+        self.__TasksList = None
+        self.__TaskCount = None
+        self.__Stats = collections.defaultdict(int)
 
-    def Shuffle(self, seed, minCount=None):
-        tasks = list(self.All())
-        log.info('Got %d tasks for %r', len(tasks), self)
+    def All(self):
+        raise NotImplementedError
 
-        if minCount:
-            periods = int((minCount - 1) / len(tasks)) + 1
-            if periods > 1:
-                log.info('  Expanding task %s to %d periods', self, periods)
-            tasks *= periods
+    def GetTasksCount(self):
+        if self.__TaskCount is None:
+            self.__TaskCount = len(self.GetTasksList())
+        return self.__TaskCount
 
-        random.seed(seed)
-        random.shuffle(tasks)
-        return tasks
+    def GetTasksList(self):
+        if self.__TasksList is None:
+            self.__TasksList = list(self.All())
+        return self.__TasksList
 
+    def GetRandomTask(self, randomStr):
+        hash_md5 = hashlib.md5()
+        hash_md5.update(randomStr)
+        randomHash = hash_md5.hexdigest()[8:16] # use only part of hash
+        randomIndex = int(randomHash, 16) % self.GetTasksCount()
+        self.__Stats[randomIndex] += 1
+        return self.GetTasksList()[randomIndex]
+
+    def GetStats(self):
+        return self.__Stats
 
 
 class Variants(object):
-    def __init__(self, names, items):
-        self.Names = names
-        self.Items = list(items)
-        log.info('Got %d students, %d items', len(self.Names), len(self.Items))
+    def __init__(self, variantTasks, date=None, pupils=None):
+        self.Date = date
+        self.PupilsRandomSeedPart = pupils.GetRandomSeedPart()
+        self.VariantTasks = variantTasks
 
-    def Iterate(self):
-        for index, name in enumerate(self.Names):
-            itemIndex = index % len(self.Items)
-            yield name, self.Items[itemIndex]
+    def GetPupilTasks(self, pupil):
+        for variantTask in self.VariantTasks:
+            randomStr = '_'.join([
+                pupil.GetRandomSeedPart(),
+                self.Date,
+                self.PupilsRandomSeedPart,
+            ]).encode('utf-8')
+            yield variantTask.GetRandomTask(randomStr)
+
+    def GetStats(self):
+        for variantTask in self.VariantTasks:
+            stats = [0] * variantTask.GetTasksCount()
+            for index, value in variantTask.GetStats().iteritems():
+                stats[index] = value
+            log.debug('Stats for %s: %r', type(variantTask).__name__, stats)
+            log.info('Stats for %s: %r', type(variantTask).__name__, collections.OrderedDict(sorted(variantTask.GetStats().iteritems())))
 
 
 class MultiplePaper(object):
@@ -60,30 +85,29 @@ class MultiplePaper(object):
         self.ClassLetter = classLetter
         self.Vspace = 120
 
-    def GetTex(self, nameTasksIterator, withAnswers=False):
+    def GetTex(self, pupils, variants, withAnswers=False):
         if withAnswers:
             variantsJoiner = u''
         else:
             variantsJoiner = u'\n\\newpage'
         # variantsJoiner = u'\n\\newpage'
         variantsJoiner += '\n\n'
-        variants = []
-        for name, tasks in nameTasksIterator:
-            variantText = u'\\addpersonalvariant{{{name}}}\n'.format(name=name)
-            tasksTexts = u''
-            previousTask = None
-            for index, task in enumerate(tasks):
-                if previousTask:
+        variantsTex = []
+        for pupil in pupils.Iterate():
+            variantText = u'\\addpersonalvariant{{{name}}}\n'.format(name=pupil.GetFullName())
+            pupilTasksTex = u''
+            for index, task in enumerate(variants.GetPupilTasks(pupil), 1):
+                if index > 1:
                     if not withAnswers:
-                        tasksTexts += u'\n\\vspace{%dpt}' % task.GetSolutionSpace()
-                    tasksTexts += '\n\n'
-                tasksTexts += u'\\tasknumber{{{index}}}{taskText}'.format(
-                    index=index + 1,
+                        pupilTasksTex += u'\n\\vspace{%dpt}' % task.GetSolutionSpace()
+                    pupilTasksTex += '\n\n'
+                pupilTasksTex += u'\\tasknumber{{{index}}}{taskText}'.format(
+                    index=index,
                     taskText=task.GetTex().strip(),
                 )
-                previousTask = task
-            variants.append(variantText + tasksTexts)
-        text = variantsJoiner.join(variants)
+            variantsTex.append(variantText + pupilTasksTex)
+        variants.GetStats()
+        text = variantsJoiner.join(variantsTex)
         result = PAPER_TEMPLATE.format(
             date=self.Date.GetHumanText(),
             classLetter=self.ClassLetter,

@@ -7,9 +7,16 @@ log = logging.getLogger(__name__)
 
 
 class Pupil(object):
-    def __init__(self, name=None, surname=None):
+    def __init__(self, name=None, surname=None, uniqueId=None):
         self.Name = name
         self.Surname = surname
+        self.UniqueId = uniqueId or (u'{} {}'.format(name, surname))
+
+    def GetFullName(self):
+        return u'{self.Name} {self.Surname}'.format(self=self)
+
+    def GetRandomSeedPart(self):
+        return u'{self.Name} {self.Surname}'.format(self=self)
 
     def __str__(self):
         return u'{self.Name} {self.Surname}'.format(self=self)
@@ -28,11 +35,15 @@ class Pupils(object):
         self.Pupils = pupils
         self.Letter = letter
         self.Grade = grade
+        assert isinstance(self.Grade, int)
+        assert 6 <= self.Grade <= 11
 
     def Iterate(self):
         for pupil in self.Pupils:
-            yield '%s' % pupil
+            yield pupil
 
+    def GetRandomSeedPart(self):
+        return u'{}-{}'.format(self.Grade, self.Letter)
 
 def getPupils(className, addMyself=False, onlyMe=False):
     if className == 'class-2018-10':
