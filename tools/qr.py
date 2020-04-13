@@ -46,6 +46,9 @@ class Generator(object):
     def MakeAll(self, path=None, method='png', force=False):
         for link, file in [
             ('https://bit.ly/554-11T-2020', '2020-03-spring-11.png'),
+            ('https://notion.so/33bad2ae867b489280e39046c97776eb', '2019-20-9A.png'),
+            ('https://notion.so/f5d57ced2a224ccc9b142e21e3714a61', '2019-20-9L.png'),
+            ('https://notion.so/ce257644b31d4cb5bfdef3d199446677', '2019-20-8M.png'),
         ]:
             filename = os.path.join(path or self.__Path, file)
             assert filename.endswith(method)
