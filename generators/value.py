@@ -22,6 +22,10 @@ class UnitValue(object):
 
             assert self.Line.count('/') <= 1
             self.Line = self.Line.replace('/', ' / ')
+            self.Line = self.Line.replace('**', '^')
+            self.Line = self.Line.replace(' ^', '^')
+
+            self.BasePower = 0
 
             self.HumanUnits = [[], []]
             self.ReadyUnits = [[], []]
@@ -38,6 +42,8 @@ class UnitValue(object):
                         except:
                             log.error('Could not get value from %r', part)
                             raise
+                elif part.startswith('10^'):
+                    self.BasePower = int(part[3:].strip('{').strip('}'))
                 else:
                     if part == '/':
                         isNumerator = False
@@ -48,13 +54,20 @@ class UnitValue(object):
                         self.ReadyUnits[index].append((mainUnit, mainPower))
 
             self.Value = self.RawValue  # TODO: use power
-            self.Power = sum(power for _, power in self.ReadyUnits[0]) - sum(power for _, power in self.ReadyUnits[1])
+            self.Power = sum(power for _, power in self.ReadyUnits[0]) - sum(power for _, power in self.ReadyUnits[1]) + self.BasePower
         except Exception:
             log.error('Could not load unit %s (from %r)', self.Line, self.__RawLine)
             raise
 
+    def __str__(self):
+        return self.__RawLine
+
+    def __repr__(self):
+        return '%r' % self.__RawLine
+
     def __ParseItem(self, item):
         try:
+            item = item.replace('**', '^')
             if '^' in item:
                 item, power = item.split('^')
                 power = int(power)
@@ -64,6 +77,7 @@ class UnitValue(object):
             prefix = ''
             main = item
             for suffix in [
+                u'эВ',  # электрон-вольт
                 u'В',   # вольт
                 u'Дж',  # джоуль
                 u'Н',   # ньютон
@@ -120,15 +134,14 @@ class UnitValue(object):
             parts.append(part)
         return '\\cdot'.join(parts)
 
-    def __format__(self, format):
-        # TODO: use precision
-        if isinstance(self.Value, int):
-            fmt = '{:d}'
-        else:
-            fmt = '{:.2f}'
-        if self.Value < 0:
-            fmt = '(%s)' % fmt
-        value = fmt.format(self.Value).replace('.', '{,}')
+    def __format__(self, format):        
+        # if isinstance(self.Value, int):
+        #     fmt = '{:d}'
+        # else:
+        #     fmt = '{:.2f}'
+        # if self.Value < 0:
+        #     fmt = '(%s)' % fmt
+        # value = fmt.format(self.Value).replace('.', '{,}')
 
         if ':' in format:
             format, suffix = format.split(':')
@@ -141,8 +154,13 @@ class UnitValue(object):
         if humanDen:
             units = u'\\frac{{{}}}{{{}}}'.format(humanNom, humanDen)
         else:
-            units = humanNom
-        valueStr = u'{self.Value}\\,{units}'.format(self=self, units=units).replace('.', '{,}')
+            units = '\,' + humanNom
+
+        valueStr = u'{}'.format(self.Value).replace('.', '{,}')  # TODO: use precision
+        if self.BasePower:
+            valueStr += ' \\cdot 10^{{{}}} '.format(self.BasePower)
+        valueStr += u'{}'.format(units)
+
         if format == 'Task':
             result = valueStr
             needLetter = True
@@ -169,3 +187,10 @@ class UnitValue(object):
 
 
 assert UnitValue(u'50 мТл').Value * (10 ** UnitValue(u'50 мТл').Power) == 0.05, 'Got %r' % UnitValue(u'50 мТл').Value
+assert u'{v:Task}'.format(v=UnitValue(u'c = 3 10^{8} м / с')) == u'c = 3 \\cdot 10^{8} \\frac{\\text{м}}{\\text{с}}', 'Got %r' %  u'{v:Task}'.format(v=UnitValue(u'c = 3 10^{8} м / с'))
+assert u'{t:Task}'.format(t=UnitValue(u't = 8 суток')) == u't = 8\\,\\text{суток}', 'Got %r' %  u'{t:Task}'.format(t=UnitValue(u't = 8 суток'))
+
+
+class Consts(object):
+    h = UnitValue(u'h = 6.62 10^{-34} Дж с')
+    c = UnitValue(u'c = 3 10^{8} м / с')

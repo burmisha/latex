@@ -1,11 +1,14 @@
 # -*- coding: utf-8 -*-
 
-import logging
-import hashlib
 import collections
+import hashlib
+import itertools
+
+import value
 
 import library
 
+import logging
 log = logging.getLogger(__name__)
 
 
@@ -23,14 +26,41 @@ PAPER_TEMPLATE = ur'''
 '''.strip()
 
 
+def form_args(kwargs):
+    keys = []
+    values = []
+    for key, value in kwargs.iteritems():
+        keys.append(key)
+        values.append(value)
+    for row in itertools.product(*values):
+        result = {}
+        for key, value in zip(keys, row):
+            if isinstance(key, tuple):
+                for k, v in zip(key, value):
+                    result[k] = v
+            else:
+                result[key] = value
+        yield result
+
+
 class VariantTask(object):
     def __init__(self):
         self.__TasksList = None
         self.__TaskCount = None
         self.__Stats = collections.defaultdict(int)
 
-    def All(self):
+    def GetArgs(self):
         raise NotImplementedError
+
+    def All(self):
+        try:
+            self.GetArgs()
+        except NotImplementedError:
+            raise
+        else:
+            for args in form_args(self.GetArgs()):
+                args['Consts'] = value.Consts
+                yield self.__call__(**args)
 
     def GetTasksCount(self):
         if self.__TaskCount is None:
@@ -96,15 +126,12 @@ class MultiplePaper(object):
         for pupil in pupils.Iterate():
             variantText = u'\\addpersonalvariant{{{name}}}\n'.format(name=pupil.GetFullName())
             pupilTasksTex = u''
-            for index, task in enumerate(variants.GetPupilTasks(pupil), 1):
-                if index > 1:
-                    if not withAnswers:
-                        pupilTasksTex += u'\n\\vspace{%dpt}' % task.GetSolutionSpace()
-                    pupilTasksTex += '\n\n'
-                pupilTasksTex += u'\\tasknumber{{{index}}}{taskText}'.format(
-                    index=index,
-                    taskText=task.GetTex().strip(),
-                )
+            pupilTasks = list(variants.GetPupilTasks(pupil))
+            for index, task in enumerate(pupilTasks, 1):
+                pupilTasksTex += u'\n\n\\tasknumber{%d}' % index
+                pupilTasksTex += task.GetTex().strip()
+                if not withAnswers and index != len(pupilTasks):
+                    pupilTasksTex += u'\n\\vspace{%dpt}' % task.GetSolutionSpace()
             variantsTex.append(variantText + pupilTasksTex)
         variants.GetStats()
         text = variantsJoiner.join(variantsTex)

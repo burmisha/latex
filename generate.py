@@ -245,6 +245,15 @@ def runGenerate(args):
                     generators.waves.Waves04(),
                     generators.waves.Waves05(),
                 ],
+                '2020-04-14': [
+                    generators.vishnyakova.BK_52_01(),
+                    generators.vishnyakova.BK_52_02(),
+                    generators.vishnyakova.BK_52_07(),
+                    generators.vishnyakova.BK_53_01(),
+                    generators.vishnyakova.BK_53_02(),
+                    generators.vishnyakova.BK_53_03(),
+                    generators.vishnyakova.BK_53_12(),
+                ],
             },
             'class-2019-9L': {
                 '2020-01-20': [

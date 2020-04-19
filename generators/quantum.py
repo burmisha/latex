@@ -55,6 +55,7 @@ class Fotons(variant.VariantTask):
                 length=length,
             )
 
+
 class KernelCount(variant.VariantTask):
     def __call__(self, nuclons=108, electrons=47):
         answer = u'''$Z = {protons}$ протонов и $A - Z = {neutrons}$ нейтронов'''.format(

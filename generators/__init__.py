@@ -2,9 +2,10 @@ import electricity
 import koleb
 import magnet
 import mechanics
+import optics
 import quantum
 import termo
-import variant
-import waves
 import value
-import optics
+import variant
+import vishnyakova
+import waves
