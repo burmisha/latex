@@ -54,11 +54,14 @@ class VariantTask(object):
 
     def All(self):
         try:
-            self.GetArgs()
+            argsDict = self.GetArgs()
         except NotImplementedError:
             raise
         else:
-            for args in form_args(self.GetArgs()):
+            if argsDict is None:
+                yield self.__call__()
+                return
+            for args in form_args(argsDict):
                 args['Consts'] = value.Consts
                 yield self.__call__(**args)
 

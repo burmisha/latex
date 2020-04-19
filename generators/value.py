@@ -192,5 +192,9 @@ assert u'{t:Task}'.format(t=UnitValue(u't = 8 суток')) == u't = 8\\,\\text{
 
 
 class Consts(object):
+    m_e = UnitValue(u'm_{e} = 9.1 10^{-31} кг')
+    m_p = UnitValue(u'm_{p} = 1.672 10^{-27} кг')
+    m_n = UnitValue(u'm_{n} = 1.675 10^{-27} кг')
+    e = UnitValue(u'e = 1.6 10^{-19} Кл')
     h = UnitValue(u'h = 6.62 10^{-34} Дж с')
     c = UnitValue(u'c = 3 10^{8} м / с')
