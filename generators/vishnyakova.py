@@ -2,7 +2,6 @@
 
 import problems
 import variant
-from value import UnitValue
 
 import logging
 log = logging.getLogger(__name__)
@@ -20,7 +19,7 @@ class BK_52_01(variant.VariantTask):
 
     def GetArgs(self):
         return {
-            'E': [UnitValue(u'E = %s 10^{-19} Дж' % E) for E in [u'4.04', u'5.05', u'2.02', u'7.07', u'1.01', u'0.55']],
+            'E': [u'E = %s 10^{-19} Дж' % E for E in [u'4.04', u'5.05', u'2.02', u'7.07', u'1.01', u'0.55']],
         }
 
 
@@ -34,7 +33,7 @@ class BK_52_02(variant.VariantTask):
 
     def GetArgs(self):
         return {
-            'E': [UnitValue(u'E = %d 10^{-19} Дж' % E) for E in [2, 3, 4, 6]],
+            'E': [u'E = %d 10^{-19} Дж' % E for E in [2, 3, 4, 6]],
         }
 
 
@@ -83,8 +82,8 @@ class BK_53_02(variant.VariantTask):
 
     def GetArgs(self):
         return {
-            't': [UnitValue(u't = %s суток' % t) for t in [u'91.2', u'136.8', u'182.4']],
-            'T': [UnitValue(u'T = 45.6 суток')],
+            't': [u't = %s суток' % t for t in [u'91.2', u'136.8', u'182.4']],
+            'T': [u'T = 45.6 суток'],
         }
 
 
@@ -100,7 +99,7 @@ class BK_53_03(variant.VariantTask):
     def GetArgs(self):
         return {
             'how': [u'четверть', u'одна восьмая', u'половина', u'одна шестнадцатая'],
-            't': [UnitValue(u'%d суток' % t) for t in [2, 3, 4, 5]],
+            't': [u'%d суток' % t for t in [2, 3, 4, 5]],
         }
 
 
@@ -116,22 +115,22 @@ class BK_53_12(variant.VariantTask):
         # https://www.calc.ru/Energiya-Svyazi-Nekotorykh-Yader.html
         return {
             ('element', 'E'): [
-                (u'дейтерия \\ce{^{2}_{1}H} (D)', UnitValue(u'E = 2.22 МэВ')),
-                (u'трития \\ce{^{3}_{1}H} (T)', UnitValue(u'E = 8.48 МэВ')),
-                (u'гелия \\ce{^{3}_{2}He}', UnitValue(u'E = 7.72 МэВ')),
-                (u'гелия \\ce{^{3}_{2}He}', UnitValue(u'E = 28.29 МэВ')),
-                (u'лития \\ce{^{6}_{3}Li}', UnitValue(u'E = 31.99 МэВ')),
-                (u'лития \\ce{^{7}_{3}Li}', UnitValue(u'E = 39.2 МэВ')),
-                (u'бериллия \\ce{^{9}_{4}Be}', UnitValue(u'E = 58.2 МэВ')),
-                (u'бора \\ce{^{10}_{5}B}', UnitValue(u'E = 64.7 МэВ')),
-                (u'бора \\ce{^{11}_{5}B}', UnitValue(u'E = 76.2 МэВ')),
-                (u'углерода \\ce{^{12}_{6}C}', UnitValue(u'E = 92.2 МэВ')),
-                (u'углерода \\ce{^{13}_{6}C}', UnitValue(u'E = 97.1 МэВ')),
-                (u'азота \\ce{^{14}_{7}N}', UnitValue(u'E = 104.7 МэВ')),
-                (u'азота \\ce{^{14}_{7}N}', UnitValue(u'E = 115.5 МэВ')),
-                (u'кислорода \\ce{^{16}_{8}O}', UnitValue(u'E = 127.6 МэВ')),
-                (u'кислорода \\ce{^{17}_{8}O}', UnitValue(u'E = 131.8 МэВ')),
-                (u'кислорода \\ce{^{18}_{8}O}', UnitValue(u'E = 139.8 МэВ')),
+                (u'дейтерия \\ce{^{2}_{1}H} (D)', u'E = 2.22 МэВ'),
+                (u'трития \\ce{^{3}_{1}H} (T)', u'E = 8.48 МэВ'),
+                (u'гелия \\ce{^{3}_{2}He}', u'E = 7.72 МэВ'),
+                (u'гелия \\ce{^{3}_{2}He}', u'E = 28.29 МэВ'),
+                (u'лития \\ce{^{6}_{3}Li}', u'E = 31.99 МэВ'),
+                (u'лития \\ce{^{7}_{3}Li}', u'E = 39.2 МэВ'),
+                (u'бериллия \\ce{^{9}_{4}Be}', u'E = 58.2 МэВ'),
+                (u'бора \\ce{^{10}_{5}B}', u'E = 64.7 МэВ'),
+                (u'бора \\ce{^{11}_{5}B}', u'E = 76.2 МэВ'),
+                (u'углерода \\ce{^{12}_{6}C}', u'E = 92.2 МэВ'),
+                (u'углерода \\ce{^{13}_{6}C}', u'E = 97.1 МэВ'),
+                (u'азота \\ce{^{14}_{7}N}', u'E = 104.7 МэВ'),
+                (u'азота \\ce{^{14}_{7}N}', u'E = 115.5 МэВ'),
+                (u'кислорода \\ce{^{16}_{8}O}', u'E = 127.6 МэВ'),
+                (u'кислорода \\ce{^{17}_{8}O}', u'E = 131.8 МэВ'),
+                (u'кислорода \\ce{^{18}_{8}O}', u'E = 139.8 МэВ'),
             ],
         }
 

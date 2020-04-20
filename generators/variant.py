@@ -3,6 +3,7 @@
 import collections
 import hashlib
 import itertools
+import re
 
 import value
 
@@ -25,21 +26,33 @@ PAPER_TEMPLATE = ur'''
 \end{{document}}
 '''.strip()
 
+def check_unit_value(v):
+    try:
+        if isinstance(v, (str, unicode)) and ('=' in v or re.match(r'\d \w', v, re.UNICODE)):
+            return value.UnitValue(v)
+        else:
+            return v
+    except:
+        print v
+        raise
+
+
+assert isinstance(check_unit_value(u'2 суток'), value.UnitValue)
 
 def form_args(kwargs):
     keys = []
     values = []
-    for key, value in kwargs.iteritems():
-        keys.append(key)
-        values.append(value)
+    for k, v in kwargs.iteritems():
+        keys.append(k)
+        values.append(v)
     for row in itertools.product(*values):
         result = {}
-        for key, value in zip(keys, row):
-            if isinstance(key, tuple):
-                for k, v in zip(key, value):
-                    result[k] = v
+        for k, v in zip(keys, row):
+            if isinstance(k, tuple):
+                for kk, vv in zip(k, v):
+                    result[kk] = check_unit_value(vv)
             else:
-                result[key] = value
+                result[k] = check_unit_value(v)
         yield result
 
 
