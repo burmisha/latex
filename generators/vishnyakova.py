@@ -63,7 +63,7 @@ class BK_53_01(variant.VariantTask):
             Какая доля (от начального количества) радиоактивных ядер {what} через время,
             равное {when} периодам полураспада? Ответ выразить в процентах. 
         '''.format(**kws)
-        return problems.task.Task(text, solutionSpace=100)
+        return problems.task.Task(text, solutionSpace=150)
 
     def GetArgs(self):
         return {
@@ -78,7 +78,7 @@ class BK_53_02(variant.VariantTask):
             Сколько процентов ядер радиоактивного железа \ce{{^{{59}}Fe}}
             останется через ${t:Value}$, если период его полураспада составляет ${T:Value}$?
         '''.format(**kws)
-        return problems.task.Task(text, solutionSpace=100)
+        return problems.task.Task(text, solutionSpace=150)
 
     def GetArgs(self):
         return {
@@ -91,10 +91,10 @@ class BK_53_03(variant.VariantTask):
     def __call__(self, **kws):
         text = u'''
             За ${t:Value}$ от начального количества ядер радиоизотопа осталась {how}. 
-            Какая ещё доля (от начально количества) распадётся, если подождать ещё столько же?
             Каков период полураспада этого изотопа (ответ приведите в сутках)?
+            Какая ещё доля (также от начального количества) распадётся, если подождать ещё столько же?
         '''.format(**kws)
-        return problems.task.Task(text, solutionSpace=100)
+        return problems.task.Task(text, solutionSpace=150)
 
     def GetArgs(self):
         return {
@@ -107,9 +107,9 @@ class BK_53_12(variant.VariantTask):
     def __call__(self, **kws):
         text = u'''
             Энергия связи ядра {element} равна ${E:Value}$.
-            Найти дефект массы этого ядра. Скорость света ${Consts.c:Task}$.
+            Найти дефект массы этого ядра. Ответ выразите в а.е.м. и кг. Скорость света ${Consts.c:Task}$.
         '''.format(**kws)
-        return problems.task.Task(text, solutionSpace=100)
+        return problems.task.Task(text, solutionSpace=150)
 
     def GetArgs(self):
         # https://www.calc.ru/Energiya-Svyazi-Nekotorykh-Yader.html
@@ -133,36 +133,3 @@ class BK_53_12(variant.VariantTask):
                 (u'кислорода \\ce{^{18}_{8}O}', u'E = 139.8 МэВ'),
             ],
         }
-
-
-
-# class Waves01(variant.VariantTask):
-#     def __call__(self, nu=None, alpha=None):
-#         text = u'''
-#             Частота собственных малых колебаний пружинного маятника равна ${nu:Task}$.
-#             Чему станет равен период колебаний, если массу пружинного маятника увеличить в ${alpha}$ раз?
-#         '''.format(nu=nu, alpha=alpha)
-#         T1 = UnitValue(u'T\' = %.2f с' % (math.sqrt(int(alpha)) / int(nu.Value)))
-#         answer = u'''$
-#             T'  = 2\\pi\\sqrt{{\\frac {{m'}}k}}
-#                 = 2\\pi\\sqrt{{\\frac {{\\alpha m}}k}}
-#                 = \\sqrt{{\\alpha}} \\cdot 2\\pi\\sqrt{{\\frac mk}}
-#                 = \\sqrt{{\\alpha}} \\cdot T
-#                 = T\\sqrt{{\\alpha}}
-#                 = \\frac 1\\nu \\cdot\\sqrt{{\\alpha}}
-#                 = \\frac {{\\sqrt{{\\alpha}}}}\\nu
-#                 = \\frac {{\\sqrt{{{alpha}}}}}{nu:Value:s}
-#                 = {T1:Value}
-#         $'''.format(alpha=alpha, nu=nu, T1=T1)
-#         return problems.task.Task(text, answer=answer)
-
-#     def All(self):
-#         for nu, alpha in itertools.product(
-#             [u'2', u'4', u'5', u'8'],
-#             [u'4', u'16', u'25'],
-#         ):
-#             yield self.__call__(
-#                 nu=UnitValue(u'\\nu = %s Гц' % nu),
-#                 alpha=alpha,
-#             )
-
