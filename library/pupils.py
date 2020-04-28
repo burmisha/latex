@@ -81,7 +81,7 @@ def getPupils(className, addMyself=False, onlyMe=False):
             u'Алина Филиппова',
             u'Алина Яшина',
         ]
-        letter = u'T'
+        letter = u'Т'
         grade = 10
     elif className == 'class-2019-11':
         names = [
@@ -118,7 +118,7 @@ def getPupils(className, addMyself=False, onlyMe=False):
             u'Дарья Шашкова',
             u'Алина Яшина',
         ]
-        letter = u'T'
+        letter = u'Т'
         grade = 11
     elif className == 'class-2019-11S':
         names = [
@@ -140,7 +140,7 @@ def getPupils(className, addMyself=False, onlyMe=False):
             u'Алина Филиппова',
             u'Алина Яшина',
         ]
-        letter = u'T'
+        letter = u'Т'
         grade = 11
     elif className == 'class-2018-11':
         names = [
@@ -247,7 +247,7 @@ def getPupils(className, addMyself=False, onlyMe=False):
         ]
         letter = u'А1'
         grade = 8
-    elif className == 'class-2019-9':
+    elif className == 'class-2019-9A':
         names = [
             u'Ирина Ан',
             u'Софья Андрианова',

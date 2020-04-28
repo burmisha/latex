@@ -125,13 +125,11 @@ class Variants(object):
 
 
 class MultiplePaper(object):
-    def __init__(self, date=None, classLetter=None):
+    def __init__(self, date=None, pupils=None):
         self.Date = library.formatter.Date(date)
-        self.Name = 'task'
-        self.ClassLetter = classLetter
-        self.Vspace = 120
+        self.Pupils = pupils
 
-    def GetTex(self, pupils, variants, withAnswers=False):
+    def GetTex(self, variants, withAnswers=False):
         if withAnswers:
             variantsJoiner = u''
         else:
@@ -139,7 +137,7 @@ class MultiplePaper(object):
         # variantsJoiner = u'\n\\newpage'
         variantsJoiner += '\n\n'
         variantsTex = []
-        for pupil in pupils.Iterate():
+        for pupil in self.Pupils.Iterate():
             variantText = u'\\addpersonalvariant{{{name}}}\n'.format(name=pupil.GetFullName())
             pupilTasksTex = u''
             pupilTasks = list(variants.GetPupilTasks(pupil))
@@ -153,16 +151,25 @@ class MultiplePaper(object):
         text = variantsJoiner.join(variantsTex)
         result = PAPER_TEMPLATE.format(
             date=self.Date.GetHumanText(),
-            classLetter=self.ClassLetter,
+            classLetter=self.Pupils.Grade,
             text=text,
             noanswers='' if withAnswers else u'\\noanswers',
         )
         return result
 
-    def GetFilename(self):
-        filename = '%s-%s' % (self.Date.GetFilenameText(), self.ClassLetter)
-        if self.Name:
-            filename += '-' + self.Name
+    def GetFilename(self, name='task'):
+        filename = '%s-%s' % (self.Date.GetFilenameText(), self.Pupils.Grade)
+        if self.Pupils.Letter:
+            letter = {
+                u'А': 'A',
+                u'Т': 'T',
+                u'Л': 'L',
+                u'М': 'M',
+            }[self.Pupils.Letter]
+            filename += letter
+
+        if name:
+            filename += '-' + name
         filename += '.tex'
         log.debug('Got filename %r', filename)
         return filename

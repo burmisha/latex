@@ -15,7 +15,7 @@ class BK_52_01(variant.VariantTask):
             Какова длина волны этой линии спектра? 
             Постоянная Планка ${Consts.h:Task}$, скорость света ${Consts.c:Task}$.
         '''.format(**kws)
-        return problems.task.Task(text, solutionSpace=60)
+        return problems.task.Task(text, solutionSpace=150)
 
     def GetArgs(self):
         return {
@@ -29,7 +29,7 @@ class BK_52_02(variant.VariantTask):
             Излучение какой длины волны поглотил атом водорода, если полная энергия в атоме увеличилась на ${E:Value}$?
             Постоянная Планка ${Consts.h:Task}$, скорость света ${Consts.c:Task}$.
         '''.format(**kws)
-        return problems.task.Task(text, solutionSpace=60)
+        return problems.task.Task(text, solutionSpace=150)
 
     def GetArgs(self):
         return {
@@ -47,7 +47,7 @@ class BK_52_07(variant.VariantTask):
             Отметьте все соответствующие переходы на рисунке и укажите, 
             при каком переходе (среди отмеченных) {what} излучённого фотона {minmax}.
         '''.format(**kws)
-        return problems.task.Task(text, solutionSpace=100)
+        return problems.task.Task(text, solutionSpace=150)
 
     def GetArgs(self):
         return {

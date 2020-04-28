@@ -224,7 +224,7 @@ def runGenerate(args):
                     generators.termo.Ch_8_35(),
                 ],
             },
-            'class-2019-9': {
+            'class-2019-9A': {
                 '2019-11-25': [
                     generators.mechanics.Ch_3_1(),
                     generators.mechanics.Ch_3_2(),
@@ -245,10 +245,7 @@ def runGenerate(args):
                     generators.waves.Waves04(),
                     generators.waves.Waves05(),
                 ],
-                '2020-04-14': [
-                    generators.vishnyakova.BK_52_01(),
-                    generators.vishnyakova.BK_52_02(),
-                    generators.vishnyakova.BK_52_07(),
+                '2020-04-22': [
                     generators.vishnyakova.BK_53_01(),
                     generators.vishnyakova.BK_53_02(),
                     generators.vishnyakova.BK_53_03(),
@@ -262,6 +259,12 @@ def runGenerate(args):
                     generators.koleb.Nu03(),
                     generators.koleb.Nu04(),
                     generators.koleb.Nu05(),
+                ],
+                '2020-04-22': [
+                    generators.optics.Gendenshteyn_11_11_18(),
+                    generators.vishnyakova.BK_52_01(),
+                    generators.vishnyakova.BK_52_02(),
+                    generators.vishnyakova.BK_52_07(),
                 ],
             },
             'class-2019-11': {
@@ -294,7 +297,7 @@ def runGenerate(args):
         for className, dateTasks in classRandomTasks.iteritems():
             pupils = library.pupils.getPupils(className, addMyself=True, onlyMe=args.me)
             for date, variantTasks in dateTasks.iteritems():
-                multiplePaper = generators.variant.MultiplePaper(date, classLetter=pupils.Grade)
+                multiplePaper = generators.variant.MultiplePaper(date, pupils=pupils)
                 filename = multiplePaper.GetFilename()
                 if fileWriter.NotMatches(filename):
                     log.info('Skipping %s', filename)
@@ -303,7 +306,6 @@ def runGenerate(args):
                     'school-554',
                     filename,
                     text=multiplePaper.GetTex(
-                        pupils=pupils,
                         variants=generators.variant.Variants(variantTasks, date=date, pupils=pupils),
                         withAnswers=args.answers,
                     ),
