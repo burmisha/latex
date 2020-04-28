@@ -7,6 +7,53 @@ import logging
 log = logging.getLogger(__name__)
 
 
+class BK_4_01(variant.VariantTask):
+    def __call__(self, **kws):
+        text = u'''
+            {what} движется со скоростью $0{{,}}{percent}\,c$, где $c$~--- скорость света в вакууме.
+            Каково при этом отношение {energy} к его энергии покоя $E_0$?
+        '''.format(**kws)
+        return problems.task.Task(text, solutionSpace=150)
+
+    def GetArgs(self):
+        return {
+            'what': [u'Протон', u'Позитрон'],
+            'energy': [u'полной энергии частицы $E$', u'кинетической энергии частицы $E_{\\text{кин}}$'],
+            'percent': ['9', '8', '7', '6'],
+        }
+
+
+class BK_4_03(variant.VariantTask):
+    def __call__(self, **kws):
+        text = u'''
+            {what} движется со скоростью $0{{,}}{percent}\,c$, где $c$~--- скорость света в вакууме.
+            Определите его {x} (в ответе приведите формулу и укажите численное значение).
+        '''.format(**kws)
+        return problems.task.Task(text, solutionSpace=150)
+
+    def GetArgs(self):
+        return {
+            'what': [u'Протон', u'Электрон'],
+            'x': [u'полную энергию', u'кинетическую энергию', u'импульс'],
+            'percent': ['85', '75', '65'],
+        }
+
+
+class BK_4_06(variant.VariantTask):
+    def __call__(self, **kws):
+        text = u'''
+            При какой скорости движения (в {what}) релятивистское сокращение длины движущегося тела
+            составит {percent}\\%%?
+        '''.format(**kws)
+        return problems.task.Task(text, solutionSpace=150)
+
+    def GetArgs(self):
+        return {
+            'what': [u'км/ч', u'м/с', u'долях скорости света'],
+            'percent': ['50', '30', '10'],
+        }
+
+
 class BK_52_01(variant.VariantTask):
     def __call__(self, **kws):
         text = u'''

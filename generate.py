@@ -260,7 +260,7 @@ def runGenerate(args):
                     generators.koleb.Nu04(),
                     generators.koleb.Nu05(),
                 ],
-                '2020-04-22': [
+                '2020-04-28': [
                     generators.optics.Gendenshteyn_11_11_18(),
                     generators.vishnyakova.BK_52_01(),
                     generators.vishnyakova.BK_52_02(),
@@ -284,6 +284,24 @@ def runGenerate(args):
                     generators.optics.Gendenshteyn_11_11_18(),
                     generators.optics.Vishnyakova_example_11(),
                     generators.optics.Belolipetsky_5_196(),
+                ],
+                '2020-04-29': [
+                    # sto
+                    generators.sto.Equations(),
+                    generators.vishnyakova.BK_4_01(),
+                    generators.vishnyakova.BK_4_03(),
+                    generators.vishnyakova.BK_4_06(),
+                    # atomic-1
+                    generators.vishnyakova.BK_52_01(),
+                    generators.vishnyakova.BK_52_02(),
+                    generators.vishnyakova.BK_52_07(),
+                    generators.quantum.Fotons(),
+                    # atomic-2
+                    generators.vishnyakova.BK_53_01(),
+                    generators.vishnyakova.BK_53_02(),
+                    generators.vishnyakova.BK_53_03(),
+                    generators.vishnyakova.BK_53_12(),
+
                 ],
             },
             'class-2019-11S': {

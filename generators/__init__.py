@@ -4,6 +4,7 @@ import magnet
 import mechanics
 import optics
 import quantum
+import sto
 import termo
 import value
 import variant
