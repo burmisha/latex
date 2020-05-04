@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 
-import problems
 import variant
 
 import itertools
@@ -9,9 +8,8 @@ import logging
 log = logging.getLogger(__name__)
 
 
+@variant.solution_space(200)
 class Equations(variant.VariantTask):
-    def GetSolutionSpace(self):
-        return 200
 
     def GetText(self):
         return u'''

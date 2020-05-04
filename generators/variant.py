@@ -62,7 +62,6 @@ class VariantTask(object):
         self.__TasksList = None
         self.__TaskCount = None
         self.__Stats = collections.defaultdict(int)
-        # self.SolutionSpace = None
 
     def GetArgs(self):
         raise NotImplementedError
@@ -79,41 +78,43 @@ class VariantTask(object):
         else:
             return 120
 
-    def All(self):
-        try:
-            argsDict = self.GetArgs()
-        except NotImplementedError:
-            raise
+    def GetTextTemplate(self):
+        if hasattr(self, 'TextTemplate'):
+            return self.TextTemplate
         else:
-            if argsDict is None:  # only one variant
-                args = {'Consts': value.Consts}
-                if hasattr(self, 'GetText'):
-                    textTemplate = self.GetText()
-                    answerTemplate = self.GetAnswer()
-                    kwsUpdate = self.GetUpdate(**args)
-                    args.update(kwsUpdate)
-                    yield problems.task.Task(
-                        textTemplate.format(**args),
-                        answer=answerTemplate.format(**args) if answerTemplate else None,
-                        solutionSpace=self.GetSolutionSpace(),
-                    )
-                else:
-                    yield self.__call__(**args)
-                return
-            for args in form_args(argsDict):
-                args['Consts'] = value.Consts
-                if hasattr(self, 'GetText'):
-                    textTemplate = self.GetText()
-                    answerTemplate = self.GetAnswer()
-                    kwsUpdate = self.GetUpdate(**args)
-                    args.update(kwsUpdate)
-                    yield problems.task.Task(
-                        textTemplate.format(**args),
-                        answer=answerTemplate.format(**args) if answerTemplate else None,
-                        solutionSpace=self.GetSolutionSpace(),
-                    )
-                else:
-                    yield self.__call__(**args)
+            return self.GetText()
+
+    def GetAnswerTemplate(self):
+        if hasattr(self, 'AnswerTemplate'):
+            return self.AnswerTemplate
+        else:
+            return self.GetAnswer()
+
+    def GetArgsList(self):
+        if hasattr(self, 'ArgsList'):
+            argsDict = self.ArgsList
+        else:
+            argsDict = self.GetArgs()
+        if argsDict is None:  # only one variant
+            return [{}]
+        else:
+            return form_args(argsDict)
+
+    def All(self):
+        for args in self.GetArgsList():
+            args['Consts'] = value.Consts
+            if hasattr(self, 'GetText') or hasattr(self, 'TextTemplate'):
+                textTemplate = self.GetTextTemplate()
+                answerTemplate = self.GetAnswerTemplate()
+                kwsUpdate = self.GetUpdate(**args)
+                args.update(kwsUpdate)
+                yield problems.task.Task(
+                    textTemplate.format(**args),
+                    answer=answerTemplate.format(**args) if answerTemplate else None,
+                    solutionSpace=self.GetSolutionSpace(),
+                )
+            else:
+                yield self.__call__(**args)
 
     def GetTasksCount(self):
         if self.__TaskCount is None:
@@ -215,5 +216,26 @@ class MultiplePaper(object):
 def solution_space(space):
     def decorator(cls):
         cls.SolutionSpace = space
+        return cls
+    return decorator
+
+
+def text(text_template):
+    def decorator(cls):
+        cls.TextTemplate = text_template
+        return cls
+    return decorator
+
+
+def answer(answer_template):
+    def decorator(cls):
+        cls.AnswerTemplate = answer_template
+        return cls
+    return decorator
+
+def args(args_dict):
+    assert isinstance(args_dict, dict) or args_dict is None
+    def decorator(cls):
+        cls.ArgsList = args_dict
         return cls
     return decorator
