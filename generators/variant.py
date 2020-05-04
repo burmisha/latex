@@ -63,12 +63,6 @@ class VariantTask(object):
         self.__TaskCount = None
         self.__Stats = collections.defaultdict(int)
 
-    def GetArgs(self):
-        raise NotImplementedError
-
-    def GetAnswer(self):
-        return None
-
     def GetUpdate(self, **kws):
         return {}
 
@@ -88,17 +82,13 @@ class VariantTask(object):
         if hasattr(self, 'AnswerTemplate'):
             return self.AnswerTemplate
         else:
-            return self.GetAnswer()
+            return None
 
     def GetArgsList(self):
-        if hasattr(self, 'ArgsList'):
-            argsDict = self.ArgsList
-        else:
-            argsDict = self.GetArgs()
-        if argsDict is None:  # only one variant
+        if self.ArgsList is None:  # only one variant
             return [{}]
         else:
-            return form_args(argsDict)
+            return form_args(self.ArgsList)
 
     def All(self):
         for args in self.GetArgsList():
@@ -108,6 +98,7 @@ class VariantTask(object):
                 answerTemplate = self.GetAnswerTemplate()
                 kwsUpdate = self.GetUpdate(**args)
                 args.update(kwsUpdate)
+                # TODO: .replace('.', '{,}') in answer
                 yield problems.task.Task(
                     textTemplate.format(**args),
                     answer=answerTemplate.format(**args) if answerTemplate else None,

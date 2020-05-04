@@ -26,7 +26,7 @@ class Nu01(variant.VariantTask):
 @variant.text(u'Определите частоту колебаний, если их период составляет {T:Task:e}.')
 @variant.answer(u'$\\nu = \\frac 1T = \\frac 1{T:Value:s} = {nu:Value}$')
 @variant.args({
-    'T': [UnitValue(u'T = %d мс' % T) for T in [2, 4, 5, 10, 20, 40, 50]],
+    'T': [u'T = %d мс' % T for T in [2, 4, 5, 10, 20, 40, 50]],
 })
 class Nu02(variant.VariantTask):
     def GetUpdate(self, **kws):
@@ -34,7 +34,6 @@ class Nu02(variant.VariantTask):
         return {
             'nu': UnitValue(u'''\\nu = %d Гц''' % (1000 / T.Value)),
         }
-
 
 
 @variant.text(u'''
@@ -48,8 +47,8 @@ class Nu02(variant.VariantTask):
     \\end{{align*}}
 ''')
 @variant.args({
-    'nu': [UnitValue(u'\\nu = %d кГц' % nu) for nu in [2, 4, 5, 10, 20, 40, 50]],
-    't': [UnitValue(u't = %d мин' % t) for t in [1, 2, 3, 5, 10]],
+    'nu': [u'\\nu = %d кГц' % nu for nu in [2, 4, 5, 10, 20, 40, 50]],
+    't': [u't = %d мин' % t for t in [1, 2, 3, 5, 10]],
 })
 class Nu03(variant.VariantTask):
     def GetUpdate(self, **kws):
@@ -72,9 +71,9 @@ class Nu03(variant.VariantTask):
         = {s:Value}
 $''')
 @variant.args({
-    'A': [UnitValue(u'A = %d см' % A) for A in [2, 3, 5, 10, 15]],
-    'nu': [UnitValue(u'\\nu = %d Гц' % nu) for nu in [2, 5, 6, 10, 20]],
-    't': [UnitValue(u't = %d с' % t) for t in [10, 40, 80]],
+    'A': [u'A = %d см' % A for A in [2, 3, 5, 10, 15]],
+    'nu': [u'\\nu = %d Гц' % nu for nu in [2, 5, 6, 10, 20]],
+    't': [u't = %d с' % t for t in [10, 40, 80]],
 })
 class Nu04(variant.VariantTask):
     def GetUpdate(self, **kws):
@@ -91,8 +90,8 @@ class Nu04(variant.VariantTask):
     {A:Task:e}, а период {T:Task:e}.
 ''')
 @variant.args({
-    'A': [UnitValue(u'A = %d см' % A) for A in [1, 2, 3, 5, 6, 15, 30, 40, 75]],
-    'T': [UnitValue(u'T = %d с' % T) for T in [2, 4, 6, 8, 10]],
+    'A': [u'A = %d см' % A for A in [1, 2, 3, 5, 6, 15, 30, 40, 75]],
+    'T': [u'T = %d с' % T for T in [2, 4, 6, 8, 10]],
 })
 class Nu05(variant.VariantTask):
     pass
