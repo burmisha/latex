@@ -15,7 +15,7 @@ class Cheshev(task.TasksGenerator):
                     Если изменить длину волны света в $\alpha = 2$ раза, то для прекращение фототока необходимо увеличить задерживающую разность потенциалов в $\beta=3$ раза.
                     Определить длину волны $\lambda_0$, если известно, что работа выхода материала катода равна $A = 1{,}89\\units{эВ}$,
                     а постоянная Планка $h = 6{,}63 \cdot 10^{-34} \\units{Дж} \cdot \text{с}$.
-                ''', 
+                ''',
                 ur'$\lambda_0 = \frac{hc}{A}\cdot\frac{\beta-\alpha}{\beta - 1} \approx 329 \\units{нм}$',
             ),
             '5-02': (
@@ -44,7 +44,6 @@ class Cheshev(task.TasksGenerator):
                     энергия покоя атома водорода $E=mc^2 = 1{,}49\cdot 10^{-10}\\units{Дж},$ где $m$~--- масса покоя атома, а $c$~--- скорость света.
                 ''',
                 ur'$v = \frac pm = c\cbr{1 \pm \sqrt{1 - \frac{2W}{mc^2}}} \approx c \frac{W}{mc^2}\approx 3{,}28\funits{м}{c}$',
-
             ),
         }
         for number, (text, answer) in tasks.iteritems():

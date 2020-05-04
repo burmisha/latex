@@ -78,7 +78,7 @@ class VariantTask(object):
         if hasattr(self, 'TextTemplate'):
             return self.TextTemplate
         else:
-            return self.GetText()
+            raise RuntimeError('No text for task')
 
     def GetAnswerTemplate(self):
         if hasattr(self, 'AnswerTemplate'):
@@ -94,28 +94,34 @@ class VariantTask(object):
 
     def All(self):
         for args in self.GetArgsList():
+            kwsUpdate = self.GetUpdate(**args)
+            args.update(kwsUpdate)
             args['Consts'] = value.Consts
-            if hasattr(self, 'GetText') or hasattr(self, 'TextTemplate'):
-                textTemplate = self.GetTextTemplate()
-                answerTemplate = self.GetAnswerTemplate()
-                kwsUpdate = self.GetUpdate(**args)
-                args.update(kwsUpdate)
-                for k, v in args.iteritems():
-                    args[k] = check_unit_value(v)
-                try:
-                    answer = answerTemplate.format(**args) if answerTemplate else None
-                except:
-                    print answerTemplate
-                    print args
-                    raise
-                # TODO: .replace('.', '{,}') in answer
-                yield problems.task.Task(
-                    textTemplate.format(**args),
-                    answer=answer,
-                    solutionSpace=self.GetSolutionSpace(),
-                )
-            else:
-                yield self.__call__(**args)
+            for k, v in args.iteritems():
+                args[k] = check_unit_value(v)
+
+            textTemplate = self.GetTextTemplate()
+            try:
+                text = textTemplate.format(**args)
+            except:
+                print textTemplate
+                print args
+                raise
+
+            answerTemplate = self.GetAnswerTemplate()
+            try:
+                answer = answerTemplate.format(**args) if answerTemplate else None
+            except:
+                print answerTemplate
+                print args
+                raise
+
+            # TODO: .replace('.', '{,}') in answer
+            yield problems.task.Task(
+                text,
+                answer=answer,
+                solutionSpace=self.GetSolutionSpace(),
+            )
 
     def GetTasksCount(self):
         if self.__TaskCount is None:
