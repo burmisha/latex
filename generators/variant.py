@@ -194,9 +194,13 @@ class MultiplePaper(object):
             variantsTex.append(variantText + pupilTasksTex)
         variants.GetStats()
         text = variantsJoiner.join(variantsTex)
+        if self.Pupils.Letter:
+            classLetter = u'{}«{}»'.format(self.Pupils.Grade, self.Pupils.Letter)
+        else:
+            classLetter = self.Pupils.Grade
         result = PAPER_TEMPLATE.format(
             date=self.Date.GetHumanText(),
-            classLetter=self.Pupils.Grade,
+            classLetter=classLetter,
             text=text,
             noanswers='' if withAnswers else u'\\noanswers',
         )
