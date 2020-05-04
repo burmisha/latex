@@ -20,6 +20,7 @@ log = logging.getLogger(__name__)
 class Gendenshteyn_11_11_18(variant.VariantTask):
     pass
 
+
 @variant.text(u'''
     Установка для наблюдения интерференции состоит
     из двух когерентных источников света и экрана.
@@ -41,6 +42,7 @@ class Vishnyakova_example_11(variant.VariantTask):
     # Вычитаем, приближаем
     # h=lambda L/l = 3,6 мм.
     pass
+
 
 @variant.text(u'''
     На стеклянную пластинку ({n1:Task:e}) нанесена прозрачная пленка ({n2:Task:e}).

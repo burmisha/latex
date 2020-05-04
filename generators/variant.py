@@ -29,7 +29,7 @@ PAPER_TEMPLATE = ur'''
 
 def check_unit_value(v):
     try:
-        if isinstance(v, (str, unicode)) and ('=' in v or re.match(r'\d \w', v, re.UNICODE)):
+        if isinstance(v, (str, unicode)) and (('=' in v and len(v) >= 3) or re.match(r'\d \w', v, re.UNICODE)):
             return value.UnitValue(v)
         else:
             return v

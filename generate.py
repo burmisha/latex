@@ -197,7 +197,7 @@ def runGenerate(args):
                     generators.electricity.Cond1(),
                 ],
                 '2019-05-14': [
-                    generators.electricity.Rezistor1(),
+                    generators.electricity.Rezistor1_v1(),
                     generators.electricity.Rezistor2(),
                     generators.electricity.Rezistor3(),
                     generators.electricity.Rezistor4(),
