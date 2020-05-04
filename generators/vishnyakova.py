@@ -33,6 +33,7 @@ class BK_4_01(variant.VariantTask):
 class BK_4_03(variant.VariantTask):
     pass
 
+
 @variant.solution_space(150)
 @variant.text(u'''
     При какой скорости движения (в {what}) релятивистское сокращение длины движущегося тела

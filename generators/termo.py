@@ -32,6 +32,7 @@ TableValues = {
     },
 }
 
+
 @variant.text(u'''
     Сколько льда при температуре $0\\celsius$ можно расплавить,
     сообщив ему энергию {Q:Value:e}?
@@ -54,6 +55,7 @@ class Ch_8_6(variant.VariantTask):
             'lmbd': lmbd,
             'm': u'm = %.1f кг' % (1000. * Q.Value / lmbd.Value),
         }
+
 
 @variant.text(u'''
     Какое количество теплоты выделится при затвердевании {m:Value:e} расплавленного {metall} при температуре плавления?
@@ -78,6 +80,7 @@ class Ch_8_7(variant.VariantTask):
         return {
             'Q': u'Q = %.1f МДж' % (0.001 * m.Value * lmbd.Value),
         }
+
 
 @variant.text(u'''
     Какое количество теплоты необходимо для превращения воды массой {m:Value:e} при $t = {t}\\celsius$

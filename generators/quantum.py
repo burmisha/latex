@@ -124,6 +124,7 @@ class RadioFall2(variant.VariantTask):
 class Quantum1119(variant.VariantTask):  # 1119 Рымкевич
     pass
 
+
 @variant.text(u'''
     Лучше всего нейтронное излучение ослабляет вода: в 4 раза лучше бетона и в 3 раза лучше свинца.
     Толщина слоя половинного ослабления $\\gamma$-излучения для воды равна $3\\units{{см}}$.
