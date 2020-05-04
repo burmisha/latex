@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
 import variant
-from value import UnitValue
 
 import logging
 log = logging.getLogger(__name__)
@@ -29,8 +28,7 @@ class Nu01(variant.VariantTask):
     'T': [u'T = %d мс' % T for T in [2, 4, 5, 10, 20, 40, 50]],
 })
 class Nu02(variant.VariantTask):
-    def GetUpdate(self, **kws):
-        T = kws['T']
+    def GetUpdate(self, T=None, **kws):
         return {
             'nu': u'''\\nu = %d Гц''' % (1000 / T.Value),
         }
@@ -51,9 +49,7 @@ class Nu02(variant.VariantTask):
     't': [u't = %d мин' % t for t in [1, 2, 3, 5, 10]],
 })
 class Nu03(variant.VariantTask):
-    def GetUpdate(self, **kws):
-        nu = kws['nu']
-        t = kws['t']
+    def GetUpdate(self, nu=None, t=None, **kws):
         return {
             'T': u'T = %.3f мc' % (1. / nu.Value),
             'N': u'N = %d колебаний' % (nu.Value * 1000 * t.Value * 60),
@@ -76,10 +72,7 @@ $''')
     't': [u't = %d с' % t for t in [10, 40, 80]],
 })
 class Nu04(variant.VariantTask):
-    def GetUpdate(self, **kws):
-        A = kws['A']
-        nu = kws['nu']
-        t = kws['t']
+    def GetUpdate(self, A=None, nu=None, t=None, **kws):
         return {
             's': u's = %.1f м' % (4. * A.Value / 100 * t.Value * nu.Value),
         }

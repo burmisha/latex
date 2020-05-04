@@ -102,11 +102,7 @@ class ConstMagnet3(variant.VariantTask):
     'I': [u'\\mathcal{I} = %d А' % I for I in [10, 20, 40, 50]],
 })
 class Chernoutsan11_01(variant.VariantTask):
-    def GetUpdate(self, **kws):
-        l = kws['l']
-        a = kws['a']
-        B = kws['B']
-        I = kws['I']
+    def GetUpdate(self, l=None, a=None, B=None, I=None, **kws):
         return {
             'F': u'F = %.2f мН' % ((1.0 * a.Value ** 2 + (1.0 * l.Value - a.Value) ** 2) ** 0.5 / 100 * I.Value * B.Value),
         }
@@ -132,11 +128,11 @@ class Chernoutsan11_01(variant.VariantTask):
     'rho': [u'\\rho = %d кг / м' % r for r in [5, 10, 20, 40, 100]],   # TODO: г / м
 })
 class Chernoutsan11_02(variant.VariantTask):
-    def GetUpdate(self, **kws):
+    def GetUpdate(self, rho=None, B=None, **kws):
         g = value.Consts.g_ten
         return {
             'g': g,
-            'I': u'\\mathcal{I} = %f кА' % (1.0 * g.Value * kws['rho'].Value / kws['B'].Value),
+            'I': u'\\mathcal{I} = %f кА' % (1.0 * g.Value * rho.Value / B.Value),
         }
 
 
@@ -159,7 +155,7 @@ class Chernoutsan11_02(variant.VariantTask):
     'd': [u'd = %d см' % d for d in [20, 50, 80]],
 })
 class Chernoutsan11_5(variant.VariantTask):
-    def GetUpdate(self, **kws):
+    def GetUpdate(self, B=None, I=None, l=None, d=None, **kws):
         return {
-            'A': u'A = %.5f Дж' % (10 ** (-4) * 1.0 * kws['B'].Value * kws['I'].Value * kws['l'].Value * kws['d'].Value),
+            'A': u'A = %.5f Дж' % (10 ** (-4) * 1.0 * B.Value * I.Value * l.Value * d.Value),
         }

@@ -28,9 +28,9 @@ $''')
     'length': [500, 600, 750],
 })
 class Fotons(variant.VariantTask):
-    def GetUpdate(self, **kws):
+    def GetUpdate(self, power=None, minutes=None, length=None, **kws):
         res = {
-            'answerValue': 1. * kws['power']  * kws['minutes'] * kws['length'] / 6.626 * 2 / (10 ** 5),
+            'answerValue': 1. * power  * minutes * length / 6.626 * 2 / (10 ** 5),
             'answerPower': 15 + 5,
         }
         res['approx'] = float(res['answerValue'])
@@ -56,10 +56,10 @@ class Fotons(variant.VariantTask):
     ],
 })
 class KernelCount(variant.VariantTask):
-    def GetUpdate(self, **kws):
+    def GetUpdate(self, nuclons=None, electrons=None, **kws):
         return {
-            'neutrons': kws['nuclons'] - kws['electrons'],
-            'protons': kws['electrons'],
+            'neutrons': nuclons - electrons,
+            'protons': electrons,
         }
 
 
@@ -107,9 +107,9 @@ $''')
     ],
 })
 class RadioFall2(variant.VariantTask):
-    def GetUpdate(self, **kws):
+    def GetUpdate(self, time=None, total=None, delta=None, **kws):
         return {
-            'value': 1. * kws['time'] / math.log(kws['total'] / (kws['total'] - kws['delta']), 2),
+            'value': 1. * time / math.log(total / (total - delta), 2),
         }
 
 

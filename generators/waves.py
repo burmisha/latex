@@ -1,13 +1,9 @@
 # -*- coding: utf-8 -*-
 import math
 
-import itertools
-import logging
-
-import problems
 import variant
-from value import UnitValue
 
+import logging
 log = logging.getLogger(__name__)
 
 
@@ -48,13 +44,13 @@ class Waves00(variant.VariantTask):
         = {T1:Value}
 $''')
 @variant.args({
-    'nu': [UnitValue(u'\\nu = %s Гц' % nu) for nu in [u'2', u'4', u'5', u'8']],
+    'nu': [u'\\nu = %s Гц' % nu for nu in [u'2', u'4', u'5', u'8']],
     'alpha': [u'4', u'16', u'25'],
 })
 class Waves01(variant.VariantTask):
-    def GetUpdate(self, **kws):
+    def GetUpdate(self, alpha=None, nu=None, **kws):
         return {
-            'T1': UnitValue(u'T\' = %.2f с' % (math.sqrt(int(kws['alpha'])) / int(kws['nu'].Value))),
+            'T1': u'T\' = %.2f с' % (math.sqrt(int(alpha)) / int(nu.Value)),
         }
 
 
@@ -78,16 +74,14 @@ class Waves01(variant.VariantTask):
 @variant.args({
     'mLetter': [u'm', u'M'],
     'mValue': [100, 200, 250, 400],
-    'v': [ UnitValue(u'v = %d м / с' % v) for v in [1, 2, 4, 5]],
+    'v': [u'v = %d м / с' % v for v in [1, 2, 4, 5]],
 })
 class Waves02(variant.VariantTask):
-    def GetUpdate(self, **kws):
-        m = UnitValue(u'%s = %d г' % (kws['mLetter'], kws['mValue']))
-        v = kws['v']
+    def GetUpdate(self, mLetter=None, mValue=None, v=None, **kws):
         return {
-            'm': m,
-            'E': UnitValue(u'%.3f Дж' % (0.001 * m.Value * (v.Value ** 2) / 2)),
-            'E2': UnitValue(u'%.3f Дж' % (0.001 * m.Value * (v.Value ** 2) / 2 / 2))
+            'm': u'%s = %d г' % (mLetter, mValue),
+            'E': u'E_1 = %.3f Дж' % (0.001 * mValue * (v.Value ** 2) / 2),
+            'E2': u'E_2 = %.3f Дж' % (0.001 * mValue * (v.Value ** 2) / 2 / 2)
         }
 
 
@@ -117,13 +111,13 @@ $''')
         (u'девятым', 9),
         (u'десятым', 10),
     ],
-    'lmbd': [UnitValue(u'\\lambda = %d м' % lmbd) for lmbd in [3, 4, 5, 6]],
+    'lmbd': [u'\\lambda = %d м' % lmbd for lmbd in [3, 4, 5, 6]],
 })
 class Waves03(variant.VariantTask):
-    def GetUpdate(self, **kws):
+    def GetUpdate(self, n1=None, n2=None, lmbd=None, **kws):
         return {
-            'l': UnitValue(u'l = %d м' % ((kws['n2'] - kws['n1']) * kws['lmbd'].Value)),
-            'n': kws['n2'] - kws['n1'] - 1,
+            'l': u'l = %d м' % ((n2 - n1) * lmbd.Value),
+            'n': n2 - n1 - 1,
         }
 
 
@@ -141,13 +135,13 @@ class Waves03(variant.VariantTask):
         = {v:Value:s}
 $''')
 @variant.args({
-    'lmbd': [UnitValue(u'\\lambda = %.1f м' % lmbd) for lmbd in [1.2, 1.5, 2.1, 2.4]],
-    'T': [UnitValue(u'T = %d мc' % T) for T in [2, 3, 4, 5, 6]],
+    'lmbd': [u'\\lambda = %.1f м' % lmbd for lmbd in [1.2, 1.5, 2.1, 2.4]],
+    'T': [u'T = %d мc' % T for T in [2, 3, 4, 5, 6]],
 })
 class Waves04(variant.VariantTask):
-    def GetUpdate(self, **kws):
+    def GetUpdate(self, lmbd=None, T=None, **kws):
         return {
-            'v': UnitValue(u'v = %.1f м / c' % (1000. * kws['lmbd'].Value / kws['T'].Value)),
+            'v': u'v = %.1f м / c' % (1000. * lmbd.Value / T.Value),
         }
 
 
@@ -168,22 +162,19 @@ class Waves04(variant.VariantTask):
     \\end{{align*}}
 ''')
 @variant.args({
-    'N': [UnitValue(u'N = %d' % N) for N in [4, 5, 6]],
-    't': [UnitValue(u't = %d c' % t) for t in [5, 6, 8, 10]],
-    'v': [UnitValue(u'v = %d м / с' % v) for v in [1, 2, 3, 4, 5]],
+    'N': [u'N = %d' % N for N in [4, 5, 6]],
+    't': [u't = %d c' % t for t in [5, 6, 8, 10]],
+    'v': [u'v = %d м / с' % v for v in [1, 2, 3, 4, 5]],
 })
 class Waves05(variant.VariantTask):
-    def GetUpdate(self, **kws):
-        N = kws['N']
-        t = kws['t']
-        v = kws['v']
+    def GetUpdate(self, N=None, t=None, v=None, **kws):
         return {
-            'lmbd': UnitValue(u'\\lambda = %.2f м' % (1. * v.Value * t.Value / (N.Value - 1))),
-            'T': UnitValue(u'T = %.2f с' % (1. * t.Value / (N.Value - 1))),
-            'nu': UnitValue(u'\\nu = %.2f Гц' % (1. * (N.Value - 1) / t.Value)),
-            'lmbd_1': UnitValue(u'\\lambda = %.2f м' % (1. * v.Value * t.Value / N.Value)),
-            'T_1': UnitValue(u'T = %.2f с' % (1. * t.Value / N.Value)),
-            'nu_1': UnitValue(u'\\nu = %.2f Гц' % (1. * N.Value / t.Value)),
+            'lmbd': u'\\lambda = %.2f м' % (1. * v.Value * t.Value / (N.Value - 1)),
+            'T': u'T = %.2f с' % (1. * t.Value / (N.Value - 1)),
+            'nu': u'\\nu = %.2f Гц' % (1. * (N.Value - 1) / t.Value),
+            'lmbd_1': u'\\lambda = %.2f м' % (1. * v.Value * t.Value / N.Value),
+            'T_1': u'T = %.2f с' % (1. * t.Value / N.Value),
+            'nu_1': u'\\nu = %.2f Гц' % (1. * N.Value / t.Value),
         }
 
 
@@ -202,19 +193,17 @@ class Waves05(variant.VariantTask):
     \\quad n = \\frac{{\\lambda_2}}{{\\lambda_1}} \\approx {n:Value}
 $''')
 @variant.args({
-    'nu_1': [UnitValue(u'\\nu_1 = %s Гц' % nu_1) for nu_1 in [150, 200, 300, 500]],
-    'nu_2': [UnitValue(u'\\nu_2 = %s МГц' % nu_2) for nu_2 in [200, 500, 800]],
+    'nu_1': [u'\\nu_1 = %s Гц' % nu_1 for nu_1 in [150, 200, 300, 500]],
+    'nu_2': [u'\\nu_2 = %s МГц' % nu_2 for nu_2 in [200, 500, 800]],
 })
 class Ch1238(variant.VariantTask):
-    def GetUpdate(self, **kws):
-        nu_1 = kws['nu_1']
-        nu_2 = kws['nu_2']
+    def GetUpdate(self, nu_1=None, nu_2=None, **kws):
         return {
-            'v': UnitValue(u'v = 320 м / с'),
-            'c': UnitValue(u'c = 300 Мм / с'),
-            'l_1': UnitValue(u'%.2f м' % (320. / nu_1.Value)),
-            'l_2': UnitValue(u'%.2f м' % (300. / nu_2.Value)),
-            'n': UnitValue('%.2f' % ((300. / nu_2.Value) / (320. / nu_1.Value)))
+            'v': u'v = 320 м / с',
+            'c': u'c = 300 Мм / с',
+            'l_1': u'l_1 = %.2f м' % (320. / nu_1.Value),
+            'l_2': u'l_2 = %.2f м' % (300. / nu_2.Value),
+            'n': 'n = %.2f' % ((300. / nu_2.Value) / (320. / nu_1.Value)),
         }
 
 
@@ -232,7 +221,7 @@ class Ch1238(variant.VariantTask):
     \\lambda_0 = \\frac {{2\\pi l}}{{\\varphi}} = {lmbd:Value}
 $''')
 @variant.args({
-    'l': [UnitValue(u'l = %d см' % l) for l in [20, 25, 40, 50, 75]],
+    'l': [u'l = %d см' % l for l in [20, 25, 40, 50, 75]],
     ('delta', 'frac'): [
         (u'\\frac{\\pi}{8}', 1. / 16),
         (u'\\frac{2\\pi}{5}', 1. / 5),
@@ -242,7 +231,7 @@ $''')
     ],
 })
 class Ch1240(variant.VariantTask):
-    def GetUpdate(self, **kws):
+    def GetUpdate(self, l=None, frac=None, **kws):
         return {
-            'lmbd': UnitValue(u'\\lambda = %.2f см' % (1. * kws['l'].Value / kws['frac'])),
+            'lmbd': u'\\lambda = %.2f см' % (1. * l.Value / frac),
         }
