@@ -45,9 +45,9 @@ TableValues = {
         = \\frac {Q:Value:s}{lmbd:Value:s}
         \\approx {m:Value}
 $''')
-@variant.args({
-    'Q': [u'Q = %d МДж' % Q for Q in [2, 3, 4, 5, 6, 7, 8, 9]],
-})
+@variant.args(
+    Q=[u'Q = %d МДж' % Q for Q in [2, 3, 4, 5, 6, 7, 8, 9]],
+)
 class Ch_8_6(variant.VariantTask):
     def GetUpdate(self, Q=None, **kws):
         lmbd = TableValues['water']['lmbd']
@@ -66,15 +66,15 @@ class Ch_8_6(variant.VariantTask):
         = - {lmbd:Value} \\cdot {m:Value}
         = - {Q:Value} \\implies \\abs{{Q}} = {Q:Value}
 $''')
-@variant.args({
-     'm': [u'm = %d кг' % m for m in [15, 20, 25, 30, 50, 75]],
-     ('metall', 'lmbd'): [
+@variant.args(
+    metall__lmbd=[
         (u'свинца', TableValues['lead']['lmbd']),
         (u'меди', TableValues['copper']['lmbd']),
         (u'алюминия', TableValues['aluminum']['lmbd']),
         (u'стали', TableValues['steel']['lmbd']),
-     ],
-})
+    ],
+    m=[u'm = %d кг' % m for m in [15, 20, 25, 30, 50, 75]],
+)
 class Ch_8_7(variant.VariantTask):
     def GetUpdate(self, m=None, metall=None, lmbd=None, **kws):
         return {
@@ -93,10 +93,10 @@ class Ch_8_7(variant.VariantTask):
         = {m:Value} \\cdot \\cbr{{{c:Value}\\cbr{{100\\celsius - {t}\\celsius}} + {L:Value}}}
         = {Q:Value}
 $''')
-@variant.args({
-    'm': [u'm = %d кг' % m for m in [2, 3, 4, 5, 15]],
-    't': [20, 30, 40, 50, 60, 70],
-})
+@variant.args(
+    m=[u'm = %d кг' % m for m in [2, 3, 4, 5, 15]],
+    t=[20, 30, 40, 50, 60, 70],
+)
 class Ch_8_10(variant.VariantTask):
     def GetUpdate(self, m=None, t=None, **kws):
         c = TableValues['water']['c']
@@ -122,10 +122,9 @@ class Ch_8_10(variant.VariantTask):
         \\approx {m:Value}
 $''')
 @variant.args(
-{
-     'Q': [u'Q = %d кДж' % Q for Q in [2000, 2500, 4000, 5000]],
-     't': [10, 30, 40, 50, 60, 70],
-})
+     Q=[u'Q = %d кДж' % Q for Q in [2000, 2500, 4000, 5000]],
+     t=[10, 30, 40, 50, 60, 70],
+)
 class Ch_8_13(variant.VariantTask):
     def GetUpdate(self, Q=None, t=None, **kws):
         c =  TableValues['water']['c']
@@ -154,15 +153,15 @@ class Ch_8_13(variant.VariantTask):
         = \\frac{{{c1:Value} \\cdot {t1}\\celsius + {c2:Value} \\cdot {t2}\\celsius}}{{{c1:Value} + {c2:Value}}}
         \\approx {theta} \\celsius.
 \\end{{align*}}''')
-@variant.args({
-    ('metall', 'c'): [
+@variant.args(
+    metall__c=[
         (u'Стальное', TableValues['steel']['c']),
         (u'Алюминиевое', TableValues['aluminum']['c']),
         (u'Цинковое', TableValues['zinc']['c']),
     ],
-    'T': [70, 80, 90, 100],
-    't': [10, 20, 30],
-})
+    T=[70, 80, 90, 100],
+    t=[10, 20, 30],
+)
 class Ch_8_35(variant.VariantTask):
     def GetUpdate(self, metall=None, T=None, t=None, c=None, **kws):
         c_water = TableValues['water']['c']

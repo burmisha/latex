@@ -22,11 +22,11 @@ log = logging.getLogger(__name__)
         }}
        \\approx {{{approx:.2f}}}\\cdot10^{{{answerPower}}}\\units{{фотонов}}
 $''')
-@variant.args({
-    'minutes': [5, 10, 20, 30, 40, 60, 120],
-    'power': [u'P = %d мВт' % P for P in [15, 40, 75, 200]],
-    'length': [u'\\lambda = %d нм' % lmbd for lmbd in [500, 600, 750]],
-})
+@variant.args(
+    minutes=[5, 10, 20, 30, 40, 60, 120],
+    power=[u'P = %d мВт' % P for P in [15, 40, 75, 200]],
+    length=[u'\\lambda = %d нм' % lmbd for lmbd in [500, 600, 750]],
+)
 class Fotons(variant.VariantTask):
     def GetUpdate(self, power=None, minutes=None, length=None, **kws):
         res = {
@@ -118,9 +118,9 @@ class RadioFall2(variant.VariantTask):
     фотоны которых имеют энергию равную кинетической энергии электрона,
     ускоренного напряжением ${V}\\units{{В}}$.
 ''')
-@variant.args({
-    'V': [1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610],
-})
+@variant.args(
+    V=[1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610],
+)
 class Quantum1119(variant.VariantTask):  # 1119 Рымкевич
     pass
 
@@ -130,9 +130,9 @@ class Quantum1119(variant.VariantTask):  # 1119 Рымкевич
     Толщина слоя половинного ослабления $\\gamma$-излучения для воды равна $3\\units{{см}}$.
     Во сколько раз ослабит нейтронное излучение слой воды толщиной ${letter} = {value}\\units{{см}}?$
 ''')
-@variant.args({
-    'letter': ['l', 'h', 'd'],
-    'value': [15, 30, 60, 120],
-})
+@variant.args(
+    letter=['l', 'h', 'd'],
+    value=[15, 30, 60, 120],
+)
 class Quantum1120(variant.VariantTask):  # 1120 Рымкевич
     pass

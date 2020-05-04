@@ -43,10 +43,10 @@ class Waves00(variant.VariantTask):
         = \\frac {{\\sqrt{{{alpha}}}}}{nu:Value:s}
         = {T1:Value}
 $''')
-@variant.args({
-    'nu': [u'\\nu = %s Гц' % nu for nu in [u'2', u'4', u'5', u'8']],
-    'alpha': [u'4', u'16', u'25'],
-})
+@variant.args(
+    nu=[u'\\nu = %s Гц' % nu for nu in [u'2', u'4', u'5', u'8']],
+    alpha=[u'4', u'16', u'25'],
+)
 class Waves01(variant.VariantTask):
     def GetUpdate(self, alpha=None, nu=None, **kws):
         return {
@@ -71,11 +71,11 @@ class Waves01(variant.VariantTask):
         A_{{E_{{\\text{{потенциальная}}}}}} &= \\frac {{E_{{\\text{{полная механическая}}}}}}2 = {E2:Value}.
     \\end{{align*}}
 ''')
-@variant.args({
-    'mLetter': [u'm', u'M'],
-    'mValue': [100, 200, 250, 400],
-    'v': [u'v = %d м / с' % v for v in [1, 2, 4, 5]],
-})
+@variant.args(
+    mLetter=[u'm', u'M'],
+    mValue=[100, 200, 250, 400],
+    v=[u'v = %d м / с' % v for v in [1, 2, 4, 5]],
+)
 class Waves02(variant.VariantTask):
     def GetUpdate(self, mLetter=None, mValue=None, v=None, **kws):
         return {
@@ -98,21 +98,21 @@ class Waves02(variant.VariantTask):
     \\quad
     n = n_2 - n_1 - 1 = {n2} - {n1} - 1 = {n}
 $''')
-@variant.args({
-    ('first', 'n1'): [
+@variant.args(
+    first__n1=[
         (u'первым', 1),
         (u'вторым', 2),
         (u'третьим', 3),
     ],
-    ('second', 'n2'): [
+    second__n2=[
         (u'шестым', 6),
         (u'седьмым', 7),
         (u'восьмым', 8),
         (u'девятым', 9),
         (u'десятым', 10),
     ],
-    'lmbd': [u'\\lambda = %d м' % lmbd for lmbd in [3, 4, 5, 6]],
-})
+    lmbd=[u'\\lambda = %d м' % lmbd for lmbd in [3, 4, 5, 6]],
+)
 class Waves03(variant.VariantTask):
     def GetUpdate(self, n1=None, n2=None, lmbd=None, **kws):
         return {
@@ -134,10 +134,10 @@ class Waves03(variant.VariantTask):
         = \\frac{lmbd:Value:s}{T:Value:s}
         = {v:Value:s}
 $''')
-@variant.args({
-    'lmbd': [u'\\lambda = %.1f м' % lmbd for lmbd in [1.2, 1.5, 2.1, 2.4]],
-    'T': [u'T = %d мc' % T for T in [2, 3, 4, 5, 6]],
-})
+@variant.args(
+    lmbd=[u'\\lambda = %.1f м' % lmbd for lmbd in [1.2, 1.5, 2.1, 2.4]],
+    T=[u'T = %d мc' % T for T in [2, 3, 4, 5, 6]],
+)
 class Waves04(variant.VariantTask):
     def GetUpdate(self, lmbd=None, T=None, **kws):
         return {
@@ -161,11 +161,11 @@ class Waves04(variant.VariantTask):
         \\nu' &= \\frac 1{{T'}} = \\frac {{N}}{{t}} = \\frac {N:Value:s}{t:Value:s} = {nu_1:Value}.
     \\end{{align*}}
 ''')
-@variant.args({
-    'N': [u'N = %d' % N for N in [4, 5, 6]],
-    't': [u't = %d c' % t for t in [5, 6, 8, 10]],
-    'v': [u'v = %d м / с' % v for v in [1, 2, 3, 4, 5]],
-})
+@variant.args(
+    N=[u'N = %d' % N for N in [4, 5, 6]],
+    t=[u't = %d c' % t for t in [5, 6, 8, 10]],
+    v=[u'v = %d м / с' % v for v in [1, 2, 3, 4, 5]],
+)
 class Waves05(variant.VariantTask):
     def GetUpdate(self, N=None, t=None, v=None, **kws):
         return {
@@ -192,10 +192,10 @@ class Waves05(variant.VariantTask):
         = \\frac{c:Value:s}{nu_2:Value:s} = {l_2:Value},
     \\quad n = \\frac{{\\lambda_2}}{{\\lambda_1}} \\approx {n:Value}
 $''')
-@variant.args({
-    'nu_1': [u'\\nu_1 = %s Гц' % nu_1 for nu_1 in [150, 200, 300, 500]],
-    'nu_2': [u'\\nu_2 = %s МГц' % nu_2 for nu_2 in [200, 500, 800]],
-})
+@variant.args(
+    nu_1=[u'\\nu_1 = %s Гц' % nu_1 for nu_1 in [150, 200, 300, 500]],
+    nu_2=[u'\\nu_2 = %s МГц' % nu_2 for nu_2 in [200, 500, 800]],
+)
 class Ch1238(variant.VariantTask):
     def GetUpdate(self, nu_1=None, nu_2=None, **kws):
         return {
@@ -220,16 +220,16 @@ class Ch1238(variant.VariantTask):
     \\quad
     \\lambda_0 = \\frac {{2\\pi l}}{{\\varphi}} = {lmbd:Value}
 $''')
-@variant.args({
-    'l': [u'l = %d см' % l for l in [20, 25, 40, 50, 75]],
-    ('delta', 'frac'): [
+@variant.args(
+    delta__frac=[
         (u'\\frac{\\pi}{8}', 1. / 16),
         (u'\\frac{2\\pi}{5}', 1. / 5),
         (u'\\frac{3\\pi}{8}', 3. / 16),
         (u'\\frac{\\pi}{2}', 1. / 4),
         (u'\\frac{3\\pi}{4}', 3. / 8),
     ],
-})
+    l=[u'l = %d см' % l for l in [20, 25, 40, 50, 75]],
+)
 class Ch1240(variant.VariantTask):
     def GetUpdate(self, l=None, frac=None, **kws):
         return {

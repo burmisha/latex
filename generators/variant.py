@@ -45,17 +45,25 @@ assert isinstance(check_unit_value(u'2 см'), value.UnitValue)
 def form_args(kwargs):
     keys = []
     values = []
-    for k, v in kwargs.iteritems():
-        keys.append(k)
-        values.append(v)
+    for key, value in kwargs.iteritems():
+        value = list(value)
+        if any(isinstance(v, tuple) or isinstance(v, list) for v in value):
+            for v in value:
+                assert isinstance(v, tuple) or isinstance(v, list)
+            if isinstance(key, (str, unicode)) and '__' in key:
+                key = tuple(part.strip() for part in key.split('__'))
+                for v in value:
+                    assert len(key) == len(v), '%r' % [key, value]
+
+        keys.append(key)
+        values.append(value)
     for row in itertools.product(*values):
         result = {}
-        for k, v in zip(keys, row):
-            if isinstance(k, tuple):
-                for kk, vv in zip(k, v):
-                    result[kk] = check_unit_value(vv)
+        for key, value in zip(keys, row):
+            if isinstance(key, tuple):
+                result.update(dict(zip(key, value)))
             else:
-                result[k] = check_unit_value(v)
+                result[key] = value
         yield result
 
 
@@ -86,36 +94,26 @@ class VariantTask(object):
         else:
             return None
 
-    def GetArgsList(self):
+    def GetArgs(self):
         if self.ArgsList is None:  # only one variant
-            return [{}]
+            args = {}
         else:
-            return form_args(self.ArgsList)
+            args = self.ArgsList
+
+        for res in form_args(args):
+            for k, v in res.iteritems():
+                res[k] = check_unit_value(v)
+            for k, v in self.GetUpdate(**res).iteritems():
+                res[k] = check_unit_value(v)
+            res['Consts'] = value.Consts
+            yield res
 
     def All(self):
-        for args in self.GetArgsList():
-            kwsUpdate = self.GetUpdate(**args)
-            args.update(kwsUpdate)
-            args['Consts'] = value.Consts
-            for k, v in args.iteritems():
-                args[k] = check_unit_value(v)
-
-            textTemplate = self.GetTextTemplate()
-            try:
-                text = textTemplate.format(**args)
-            except:
-                print textTemplate
-                print args
-                raise
-
-            answerTemplate = self.GetAnswerTemplate()
-            try:
-                answer = answerTemplate.format(**args) if answerTemplate else None
-            except:
-                print answerTemplate
-                print args
-                raise
-
+        textTemplate = self.GetTextTemplate()
+        answerTemplate = self.GetAnswerTemplate()
+        for args in self.GetArgs():
+            text = textTemplate.format(**args)
+            answer = answerTemplate.format(**args) if answerTemplate else None
             # TODO: .replace('.', '{,}') in answer
             yield problems.task.Task(
                 text,
@@ -134,6 +132,7 @@ class VariantTask(object):
         return self.__TasksList
 
     def GetRandomTask(self, randomStr):
+        # print self.GetTextTemplate()
         hash_md5 = hashlib.md5()
         hash_md5.update(randomStr)
         randomHash = hash_md5.hexdigest()[8:16] # use only part of hash
@@ -244,9 +243,22 @@ def answer(answer_template):
         return cls
     return decorator
 
-def args(args_dict):
-    assert isinstance(args_dict, dict) or args_dict is None
+def args(*args_list, **kws):
+    assert args_list == () or (len(args_list) == 1 and (isinstance(args_list[0], dict) or args_list[0] is None)), '%r' % [args_list, kws]
     def decorator(cls):
-        cls.ArgsList = args_dict
+        if args_list == ():
+            if kws:
+                cls.ArgsList = kws
+            else:
+                raise RuntimeError()
+        else:
+            if args_list[0] is None:
+                if kws:
+                    cls.ArgsList = kws
+                else:
+                    cls.ArgsList = args_list[0]
+            else:
+                cls.ArgsList = args_list[0]
+                cls.ArgsList.update(kws)
         return cls
     return decorator
