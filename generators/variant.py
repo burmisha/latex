@@ -39,6 +39,8 @@ def check_unit_value(v):
 
 
 assert isinstance(check_unit_value(u'2 суток'), value.UnitValue)
+assert isinstance(check_unit_value(u'2 см'), value.UnitValue)
+# assert isinstance(check_unit_value(u'1.6 м'), value.UnitValue)  # TODO
 
 def form_args(kwargs):
     keys = []
@@ -98,10 +100,18 @@ class VariantTask(object):
                 answerTemplate = self.GetAnswerTemplate()
                 kwsUpdate = self.GetUpdate(**args)
                 args.update(kwsUpdate)
+                for k, v in args.iteritems():
+                    args[k] = check_unit_value(v)
+                try:
+                    answer = answerTemplate.format(**args) if answerTemplate else None
+                except:
+                    print answerTemplate
+                    print args
+                    raise
                 # TODO: .replace('.', '{,}') in answer
                 yield problems.task.Task(
                     textTemplate.format(**args),
-                    answer=answerTemplate.format(**args) if answerTemplate else None,
+                    answer=answer,
                     solutionSpace=self.GetSolutionSpace(),
                 )
             else:

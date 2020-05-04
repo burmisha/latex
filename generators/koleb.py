@@ -32,7 +32,7 @@ class Nu02(variant.VariantTask):
     def GetUpdate(self, **kws):
         T = kws['T']
         return {
-            'nu': UnitValue(u'''\\nu = %d Гц''' % (1000 / T.Value)),
+            'nu': u'''\\nu = %d Гц''' % (1000 / T.Value),
         }
 
 
@@ -55,8 +55,8 @@ class Nu03(variant.VariantTask):
         nu = kws['nu']
         t = kws['t']
         return {
-            'T': UnitValue(u'''T = %.3f мc''' % (1. / nu.Value)),
-            'N': UnitValue(u'''N = %d колебаний''' % (nu.Value * 1000 * t.Value * 60)),
+            'T': u'T = %.3f мc' % (1. / nu.Value),
+            'N': u'N = %d колебаний' % (nu.Value * 1000 * t.Value * 60),
         }
 
 
@@ -81,7 +81,7 @@ class Nu04(variant.VariantTask):
         nu = kws['nu']
         t = kws['t']
         return {
-            's': UnitValue(u'%.1f м' % (4. * A.Value / 100 * t.Value * nu.Value)),
+            's': u's = %.1f м' % (4. * A.Value / 100 * t.Value * nu.Value),
         }
 
 

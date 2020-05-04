@@ -60,10 +60,10 @@ class UnitValue(object):
             raise
 
     def __str__(self):
-        return self.__RawLine
+        return 'UV ' + '%s' % self.__RawLine
 
     def __repr__(self):
-        return '%r' % self.__RawLine
+        return 'UVR ' + '%r' % self.__RawLine
 
     def __ParseItem(self, item):
         try:
@@ -198,3 +198,4 @@ class Consts(object):
     e = UnitValue(u'e = 1.6 10^{-19} Кл')
     h = UnitValue(u'h = 6.62 10^{-34} Дж с')
     c = UnitValue(u'c = 3 10^{8} м / с')
+    g_ten = UnitValue(u'g = 10 м / с^2')
