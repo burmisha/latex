@@ -10,15 +10,17 @@ log = logging.getLogger(__name__)
 
 
 class Equations(variant.VariantTask):
-    def __call__(self, **kws):
-        text = u'''
+    def GetSolutionSpace(self):
+        return 200
+
+    def GetText(self):
+        return u'''
             Для частицы, движущейся с релятивистской скоростью, 
             выразите ${x}$ и ${y}$ через $m$, ${a}$ и ${b}$, где
             $E_\\text{{кин}}$~--- кинетическая энергия частицы,
             $E_0$~--- её энергия покоя,
             а $p, v, m$~--- её импульс, скорость и масса.
-        '''.format(**kws)
-        return problems.task.Task(text, solutionSpace=200)
+        '''
 
     def GetArgs(self):
         return {

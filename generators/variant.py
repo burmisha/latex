@@ -8,6 +8,7 @@ import re
 import value
 
 import library
+import problems
 
 import logging
 log = logging.getLogger(__name__)
@@ -61,9 +62,22 @@ class VariantTask(object):
         self.__TasksList = None
         self.__TaskCount = None
         self.__Stats = collections.defaultdict(int)
+        # self.SolutionSpace = None
 
     def GetArgs(self):
         raise NotImplementedError
+
+    def GetAnswer(self):
+        return None
+
+    def GetUpdate(self, **kws):
+        return {}
+
+    def GetSolutionSpace(self):
+        if hasattr(self, 'SolutionSpace'):
+            return self.SolutionSpace
+        else:
+            return 120
 
     def All(self):
         try:
@@ -71,12 +85,35 @@ class VariantTask(object):
         except NotImplementedError:
             raise
         else:
-            if argsDict is None:
-                yield self.__call__()
+            if argsDict is None:  # only one variant
+                args = {'Consts': value.Consts}
+                if hasattr(self, 'GetText'):
+                    textTemplate = self.GetText()
+                    answerTemplate = self.GetAnswer()
+                    kwsUpdate = self.GetUpdate(**args)
+                    args.update(kwsUpdate)
+                    yield problems.task.Task(
+                        textTemplate.format(**args),
+                        answer=answerTemplate.format(**args) if answerTemplate else None,
+                        solutionSpace=self.GetSolutionSpace(),
+                    )
+                else:
+                    yield self.__call__(**args)
                 return
             for args in form_args(argsDict):
                 args['Consts'] = value.Consts
-                yield self.__call__(**args)
+                if hasattr(self, 'GetText'):
+                    textTemplate = self.GetText()
+                    answerTemplate = self.GetAnswer()
+                    kwsUpdate = self.GetUpdate(**args)
+                    args.update(kwsUpdate)
+                    yield problems.task.Task(
+                        textTemplate.format(**args),
+                        answer=answerTemplate.format(**args) if answerTemplate else None,
+                        solutionSpace=self.GetSolutionSpace(),
+                    )
+                else:
+                    yield self.__call__(**args)
 
     def GetTasksCount(self):
         if self.__TaskCount is None:
@@ -173,3 +210,10 @@ class MultiplePaper(object):
         filename += '.tex'
         log.debug('Got filename %r', filename)
         return filename
+
+
+def solution_space(space):
+    def decorator(cls):
+        cls.SolutionSpace = space
+        return cls
+    return decorator

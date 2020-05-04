@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 
-import problems
 import variant
 
 import logging
@@ -8,12 +7,14 @@ log = logging.getLogger(__name__)
 
 
 class BK_4_01(variant.VariantTask):
-    def __call__(self, **kws):
-        text = u'''
+    def GetText(self):
+        return u'''
             {what} движется со скоростью $0{{,}}{percent}\,c$, где $c$~--- скорость света в вакууме.
             Каково при этом отношение {energy} к его энергии покоя $E_0$?
-        '''.format(**kws)
-        return problems.task.Task(text, solutionSpace=150)
+        '''
+
+    def GetSolutionSpace(self):
+        return 150
 
     def GetArgs(self):
         return {
@@ -24,12 +25,14 @@ class BK_4_01(variant.VariantTask):
 
 
 class BK_4_03(variant.VariantTask):
-    def __call__(self, **kws):
-        text = u'''
+    def GetText(self):
+        return u'''
             {what} движется со скоростью $0{{,}}{percent}\,c$, где $c$~--- скорость света в вакууме.
             Определите его {x} (в ответе приведите формулу и укажите численное значение).
-        '''.format(**kws)
-        return problems.task.Task(text, solutionSpace=150)
+        '''
+
+    def GetSolutionSpace(self):
+        return 150
 
     def GetArgs(self):
         return {
@@ -40,12 +43,14 @@ class BK_4_03(variant.VariantTask):
 
 
 class BK_4_06(variant.VariantTask):
-    def __call__(self, **kws):
-        text = u'''
+    def GetText(self):
+        return u'''
             При какой скорости движения (в {what}) релятивистское сокращение длины движущегося тела
             составит {percent}\\%%?
-        '''.format(**kws)
-        return problems.task.Task(text, solutionSpace=150)
+        '''
+
+    def GetSolutionSpace(self):
+        return 150
 
     def GetArgs(self):
         return {
@@ -55,14 +60,16 @@ class BK_4_06(variant.VariantTask):
 
 
 class BK_52_01(variant.VariantTask):
-    def __call__(self, **kws):
-        text = u'''
+    def GetText(self):
+        return u'''
             При переходе электрона в атоме с одной стационарной орбиты на другую 
             излучается фотон с энергией ${E:Value}$. 
             Какова длина волны этой линии спектра? 
             Постоянная Планка ${Consts.h:Task}$, скорость света ${Consts.c:Task}$.
-        '''.format(**kws)
-        return problems.task.Task(text, solutionSpace=150)
+        '''
+
+    def GetSolutionSpace(self):
+        return 150
 
     def GetArgs(self):
         return {
@@ -71,12 +78,14 @@ class BK_52_01(variant.VariantTask):
 
 
 class BK_52_02(variant.VariantTask):
-    def __call__(self, **kws):
-        text = u'''
+    def GetText(self):
+        return u'''
             Излучение какой длины волны поглотил атом водорода, если полная энергия в атоме увеличилась на ${E:Value}$?
             Постоянная Планка ${Consts.h:Task}$, скорость света ${Consts.c:Task}$.
-        '''.format(**kws)
-        return problems.task.Task(text, solutionSpace=150)
+        '''
+
+    def GetSolutionSpace(self):
+        return 150
 
     def GetArgs(self):
         return {
@@ -85,16 +94,18 @@ class BK_52_02(variant.VariantTask):
 
 
 class BK_52_07(variant.VariantTask):
-    def __call__(self, **kws):
-        text = u'''
+    def GetText(self):
+        return u'''
             Сделайте схематичный рисунок энергетических уровней атома водорода 
             и отметьте на нём первый (основной) уровень и последующие.
             Сколько различных длин волн может испустить атом водорода, 
             находящийся в {n}-м возбуждённом состоянии? 
             Отметьте все соответствующие переходы на рисунке и укажите, 
             при каком переходе (среди отмеченных) {what} излучённого фотона {minmax}.
-        '''.format(**kws)
-        return problems.task.Task(text, solutionSpace=150)
+        '''
+
+    def GetSolutionSpace(self):
+        return 150
 
     def GetArgs(self):
         return {
@@ -105,12 +116,14 @@ class BK_52_07(variant.VariantTask):
 
 
 class BK_53_01(variant.VariantTask):
-    def __call__(self, **kws):
-        text = u'''
+    def GetText(self):
+        return u'''
             Какая доля (от начального количества) радиоактивных ядер {what} через время,
             равное {when} периодам полураспада? Ответ выразить в процентах. 
-        '''.format(**kws)
-        return problems.task.Task(text, solutionSpace=150)
+        '''
+
+    def GetSolutionSpace(self):
+        return 150
 
     def GetArgs(self):
         return {
@@ -120,12 +133,14 @@ class BK_53_01(variant.VariantTask):
 
 
 class BK_53_02(variant.VariantTask):
-    def __call__(self, **kws):
-        text = u'''
+    def GetText(self):
+        return u'''
             Сколько процентов ядер радиоактивного железа \ce{{^{{59}}Fe}}
             останется через ${t:Value}$, если период его полураспада составляет ${T:Value}$?
-        '''.format(**kws)
-        return problems.task.Task(text, solutionSpace=150)
+        '''
+
+    def GetSolutionSpace(self):
+        return 150
 
     def GetArgs(self):
         return {
@@ -135,13 +150,15 @@ class BK_53_02(variant.VariantTask):
 
 
 class BK_53_03(variant.VariantTask):
-    def __call__(self, **kws):
-        text = u'''
+    def GetText(self):
+        return u'''
             За ${t:Value}$ от начального количества ядер радиоизотопа осталась {how}. 
             Каков период полураспада этого изотопа (ответ приведите в сутках)?
             Какая ещё доля (также от начального количества) распадётся, если подождать ещё столько же?
-        '''.format(**kws)
-        return problems.task.Task(text, solutionSpace=150)
+        '''
+
+    def GetSolutionSpace(self):
+        return 150
 
     def GetArgs(self):
         return {
@@ -151,12 +168,14 @@ class BK_53_03(variant.VariantTask):
 
 
 class BK_53_12(variant.VariantTask):
-    def __call__(self, **kws):
-        text = u'''
+    def GetText(self):
+        return u'''
             Энергия связи ядра {element} равна ${E:Value}$.
             Найти дефект массы этого ядра. Ответ выразите в а.е.м. и кг. Скорость света ${Consts.c:Task}$.
-        '''.format(**kws)
-        return problems.task.Task(text, solutionSpace=150)
+        '''
+
+    def GetSolutionSpace(self):
+        return 150
 
     def GetArgs(self):
         # https://www.calc.ru/Energiya-Svyazi-Nekotorykh-Yader.html
