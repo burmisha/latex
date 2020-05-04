@@ -10,27 +10,27 @@ log = logging.getLogger(__name__)
 
 @variant.text(u'''
     Сколько фотонов испускает за {minutes} минут лазер,
-    если мощность его излучения {power} мВт.
-    Длина волны излучения {length} нм.
+    если мощность его излучения {power:Value:e}.
+    Длина волны излучения {length:Value:e}.
 ''')
 @variant.answer(u'''$
     N = \\frac{{Pt\\lambda}}{{hc}}
        = \\frac{{
-            {power} \\cdot 10^{{-3}} \\units{{Вт}} \\cdot {minutes} \\cdot 60 \\units{{с}} \\cdot {length} \\cdot 10^{{-9}} \\units{{м}}
+            {power:Value} \\cdot {minutes} \\cdot 60 \\units{{с}} \\cdot {length:Value}
         }}{{
-            6{{,}}626 \\cdot 10^{{-34}} \\units{{Дж}} \\cdot \\units{{с}} \\cdot 3 \\cdot 10^{{8}} \\funits{{м}}{{с}}
+            {Consts.h:Value} \\cdot {Consts.c:Value}
         }}
        \\approx {{{approx:.2f}}}\\cdot10^{{{answerPower}}}\\units{{фотонов}}
 $''')
 @variant.args({
     'minutes': [5, 10, 20, 30, 40, 60, 120],
-    'power': [15, 40, 75, 200],
-    'length': [500, 600, 750],
+    'power': [u'P = %d мВт' % P for P in [15, 40, 75, 200]],
+    'length': [u'\\lambda = %d нм' % lmbd for lmbd in [500, 600, 750]],
 })
 class Fotons(variant.VariantTask):
     def GetUpdate(self, power=None, minutes=None, length=None, **kws):
         res = {
-            'answerValue': 1. * power  * minutes * length / 6.626 * 2 / (10 ** 5),
+            'answerValue': 1. * power.Value * minutes * length.Value / 6.626 * 2 / (10 ** 5),
             'answerPower': 15 + 5,
         }
         res['approx'] = float(res['answerValue'])
@@ -63,17 +63,17 @@ class KernelCount(variant.VariantTask):
         }
 
 
-@variant.text(u'''Запишите реакцию ${fallType}$-распада \ce{{{element}}}.''')
+@variant.text(u'''Запишите реакцию ${fallType}$-распада {element}.''')
 @variant.args({
     ('fallType', 'element'): [
-        ('\\alpha', '^{238}_{92}U'),
-        ('\\alpha', '^{144}_{60}Nd'),
-        ('\\alpha', '^{147}_{62}Sm'),
-        ('\\alpha', '^{148}_{62}Sm'),
-        ('\\alpha', '^{180}_{74}W'),
-        ('\\alpha', '^{153}_{61}Eu'),
-        ('\\beta', '^{137}_{55}Cs'),
-        ('\\beta', '^{22}_{11}Na'),
+        ('\\alpha', '\ce{^{238}_{92}U}'),
+        ('\\alpha', '\ce{^{144}_{60}Nd}'),
+        ('\\alpha', '\ce{^{147}_{62}Sm}'),
+        ('\\alpha', '\ce{^{148}_{62}Sm}'),
+        ('\\alpha', '\ce{^{180}_{74}W}'),
+        ('\\alpha', '\ce{^{153}_{61}Eu}'),
+        ('\\beta', '\ce{^{137}_{55}Cs}'),
+        ('\\beta', '\ce{^{22}_{11}Na}'),
     ]
 })
 class RadioFall(variant.VariantTask):

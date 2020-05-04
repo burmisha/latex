@@ -171,6 +171,7 @@ class UnitValue(object):
             result = self.Letter
             needLetter = False
         else:
+            print self.__RawLine
             raise RuntimeError('Error in __format__ for %r' % format)
 
         if needLetter and self.Letter:
@@ -196,6 +197,6 @@ class Consts(object):
     m_p = UnitValue(u'm_{p} = 1.672 10^{-27} кг')
     m_n = UnitValue(u'm_{n} = 1.675 10^{-27} кг')
     e = UnitValue(u'e = 1.6 10^{-19} Кл')
-    h = UnitValue(u'h = 6.62 10^{-34} Дж с')
+    h = UnitValue(u'h = 6.626 10^{-34} Дж с')
     c = UnitValue(u'c = 3 10^{8} м / с')
     g_ten = UnitValue(u'g = 10 м / с^2')
