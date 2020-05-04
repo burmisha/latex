@@ -18,6 +18,15 @@ def udrPath(*args):
     return os.path.join(os.environ['HOME'], 'Yandex.Disk.localized', u'УДР', u'Общие материалы физиков УДР', *args)
 
 
+class UdrPath(object):
+    def __init__(self, *path):
+        self.__Path = path
+
+    def __call__(self, *path):
+        resPath = self.__Path + path
+        return udrPath(*resPath)
+
+
 def runLucky(args):
     library.lucky.getLucky(grade=args.grade, count=args.count)
 
@@ -53,75 +62,64 @@ def runQr(args):
 
 
 def runConvert(args):
-    booksPath = os.path.join(u'Книги - физика')
+    booksPath = UdrPath(u'Книги - физика')
+
     books = [
         library.convert.ComicsBook(
-            pdfPath=udrPath(booksPath, u'Физика в комиксах.pdf'),
-            dstPath=udrPath(booksPath, u'Физика в комиксах'),
+            pdfPath=booksPath(u'Физика в комиксах.pdf'),
+            dstPath=booksPath(u'Физика в комиксах'),
         ),
         library.convert.ChernoutsanBook(
-            pdfPath=udrPath(booksPath, u'Сборники', u'Сборник - Черноуцан - 2011.pdf'),
-            dstPath=udrPath(booksPath, u'Сборники', u'Черноуцан'),
+            pdfPath=booksPath(u'Сборники', u'Сборник - Черноуцан - 2011.pdf'),
+            dstPath=booksPath(u'Сборники', u'Черноуцан'),
         ),
         library.convert.Maron_9_Sbornik(
-            pageShift=1,
-            pdfPath=udrPath(booksPath, u'9 класс', u'9 - Марон - Сборник вопросов и задач - 2019.pdf'),
-            dstPath=udrPath(booksPath, u'9 класс', u'9 - Марон - Сборник'),
+            pdfPath=booksPath(u'9 класс', u'9 - Марон - Сборник вопросов и задач - 2019.pdf'),
+            dstPath=booksPath(u'9 класс', u'9 - Марон - Сборник'),
         ),
         library.convert.Maron_8_Sbornik(
-            pageShift=1,
-            pdfPath=udrPath(booksPath, u'8 класс', u'8 - Марон - Сборник вопросов и задач - 2019.pdf'),
-            dstPath=udrPath(booksPath, u'8 класс', u'8 - Марон - Сборник'),
+            pdfPath=booksPath(u'8 класс', u'8 - Марон - Сборник вопросов и задач - 2019.pdf'),
+            dstPath=booksPath(u'8 класс', u'8 - Марон - Сборник'),
         ),
         library.convert.Maron_8_SR_KR(
-            pageShift=1,
-            pdfPath=udrPath(booksPath, u'8 класс', u'8 - Марон - СР и КР - 2017.pdf'),
-            dstPath=udrPath(booksPath, u'8 класс', u'8 - Марон - СР и КР'),
+            pdfPath=booksPath(u'8 класс', u'8 - Марон - СР и КР - 2017.pdf'),
+            dstPath=booksPath(u'8 класс', u'8 - Марон - СР и КР'),
         ),
         library.convert.Maron_9_SR_KR(
-            pageShift=1,
-            pdfPath=udrPath(booksPath, u'9 класс', u'9 - Марон - СР и КР - 2018.pdf'),
-            dstPath=udrPath(booksPath, u'9 класс', u'9 - Марон - СР и КР'),
+            pdfPath=booksPath(u'9 класс', u'9 - Марон - СР и КР - 2018.pdf'),
+            dstPath=booksPath(u'9 класс', u'9 - Марон - СР и КР'),
         ),
         library.convert.Maron_9_Didaktika(
-            pageShift=1,
-            pdfPath=udrPath(booksPath, u'9 класс', u'9 - Марон - Дидактические материалы - 2014.pdf'),
-            dstPath=udrPath(booksPath, u'9 класс', u'9 - Марон - Дидактические материалы'),
+            pdfPath=booksPath(u'9 класс', u'9 - Марон - Дидактические материалы - 2014.pdf'),
+            dstPath=booksPath(u'9 класс', u'9 - Марон - Дидактические материалы'),
         ),
         library.convert.Maron_8_Didaktika(
-            pageShift=1,
-            pdfPath=udrPath(booksPath, u'8 класс', u'8 - Марон - Дидактические материалы - 2013.pdf'),
-            dstPath=udrPath(booksPath, u'8 класс', u'8 - Марон - Дидактические материалы'),
+            pdfPath=booksPath(u'8 класс', u'8 - Марон - Дидактические материалы - 2013.pdf'),
+            dstPath=booksPath(u'8 класс', u'8 - Марон - Дидактические материалы'),
         ),
         library.convert.Kirik_8(
-            pageShift=1,
-            pdfPath=udrPath(booksPath, u'8 класс', u'8 - Кирик - СР и КР - 2014.pdf'),
-            dstPath=udrPath(booksPath, u'8 класс', u'8 - Кирик - СР и КР'),
+            pdfPath=booksPath(u'8 класс', u'8 - Кирик - СР и КР - 2014.pdf'),
+            dstPath=booksPath(u'8 класс', u'8 - Кирик - СР и КР'),
         ),
         library.convert.Kirik_9(
-            pageShift=1,
-            pdfPath=udrPath(booksPath, u'9 класс', u'9 - Кирик - СР и КР - 2016.pdf'),
-            dstPath=udrPath(booksPath, u'9 класс', u'9 - Кирик - СР и КР'),
+            pdfPath=booksPath(u'9 класс', u'9 - Кирик - СР и КР - 2016.pdf'),
+            dstPath=booksPath(u'9 класс', u'9 - Кирик - СР и КР'),
         ),
         library.convert.Gendenshteyn_8(
-            pageShift=1,
-            pdfPath=udrPath(booksPath, u'8 класс', u'8 - Генденштейн - 2012.pdf'),
-            dstPath=udrPath(booksPath, u'8 класс', u'8 - Генденштейн'),
+            pdfPath=booksPath(u'8 класс', u'8 - Генденштейн - 2012.pdf'),
+            dstPath=booksPath(u'8 класс', u'8 - Генденштейн'),
         ),
         library.convert.Gendenshteyn_9(
-            pageShift=1,
-            pdfPath=udrPath(booksPath, u'9 класс', u'9 - Генденштейн - 2012.pdf'),
-            dstPath=udrPath(booksPath, u'9 класс', u'9 - Генденштейн'),
+            pdfPath=booksPath(u'9 класс', u'9 - Генденштейн - 2012.pdf'),
+            dstPath=booksPath(u'9 класс', u'9 - Генденштейн'),
         ),
         library.convert.Gorbushin(
-            pdfPath=udrPath(booksPath, u'Методика', u'Горбушин - Как можно учить физике.pdf'),
-            dstPath=udrPath(booksPath, u'Методика', u'Горбушин - Как можно учить физике'),
+            pdfPath=booksPath(u'Методика', u'Горбушин - Как можно учить физике.pdf'),
+            dstPath=booksPath(u'Методика', u'Горбушин - Как можно учить физике'),
         ),
         library.convert.Vishnyakova(
-            pageShift=1,
-            pdfPath=udrPath(booksPath, u'МГУ', u'Вишнякова - Физика - сборник задач к ЕГЭ - 2015.pdf'),
-            dstPath=udrPath(booksPath, u'МГУ', u'Вишнякова - Физика - сборник задач к ЕГЭ - 2015'),
-            ppi=200,
+            pdfPath=booksPath(u'МГУ', u'Вишнякова - Физика - сборник задач к ЕГЭ - 2015.pdf'),
+            dstPath=booksPath(u'МГУ', u'Вишнякова - Физика - сборник задач к ЕГЭ - 2015'),
         ),
     ]
     for book in books:

@@ -15,23 +15,23 @@ class PdfBook(object):
         pdfPath=None,
         dstPath=None,
         pageShift=None,
-        ppi=200,
     ):
         assert pdfPath.endswith('.pdf')
         assert os.path.exists(pdfPath)
         self.PdfPath = pdfPath
         self.DstPath = dstPath
-        self.PageShift = pageShift
-        self.Ppi = ppi
 
     def GetPageShift(self, pageNumber):
-        if self.PageShift:
+        if hasattr(self, 'PageShift'):
             if isinstance(self.PageShift, int):
                 return self.PageShift
             else:
                 return self.PageShift(pageNumber)
         else:
             return 0
+
+    def GetPpi(self):
+        return 200
 
     def EnsureDir(self, dirname):
         log.debug(u'Checking %s', dirname)
@@ -40,7 +40,10 @@ class PdfBook(object):
             os.mkdir(dirname)
 
     def GetParams(self):
-        return []
+        if hasattr(self, 'ParamsList'):
+            return self.ParamsList
+        else:
+            return []
 
     def GetDirFilename(self, dirName, nameTemplate, pageNumber):
         self.EnsureDir(self.DstPath)
@@ -73,8 +76,8 @@ class PdfBook(object):
             'magick',
             'convert',
             '-log', '%t %e',
-            '-density', str(self.Ppi * 3),
-            '-resample', str(self.Ppi),
+            '-density', str(self.GetPpi() * 3),
+            '-resample', str(self.GetPpi()),
             '-trim',
             '+repage',
             # '-transparent', '"#ffffff"',
@@ -114,13 +117,22 @@ class PdfBook(object):
                 os.remove(file)
 
 
-class ComicsBook(PdfBook):
-    def GetPageShift(self, pageNumber):
-        if pageNumber < 110:
-            return -2
-        else:
-            return -3
+def page_shift(shift):
+    def decorator(cls):
+        cls.PageShift = shift
+        return cls
+    return decorator
 
+
+def params(params_list):
+    def decorator(cls):
+        cls.ParamsList = params_list
+        return cls
+    return decorator
+
+
+@page_shift(lambda self, pageNumber: -2 if pageNumber < 110 else -3)
+class ComicsBook(PdfBook):
     def GetStructure(self):
         return OneDStructure([
             (u'Движение', 9, 24),
@@ -150,12 +162,8 @@ class ComicsBook(PdfBook):
         ])
 
 
+@params(['-level', '50%,90%,1.5'])
 class ChernoutsanBook(PdfBook):
-    def GetParams(self):
-        return [
-            '-level', '50%,90%,1.5',
-        ]
-
     def GetStructure(self):
         return TwoDStructure([
             (u'Кинематика', [
@@ -291,13 +299,9 @@ class ChernoutsanBook(PdfBook):
             secondLevelStartIndex=0,
         )
 
-
+@page_shift(1)
+@params(['-level', '50%,90%,1.5'])
 class Maron_9_Sbornik(PdfBook):
-    def GetParams(self):
-        return [
-            '-level', '50%,90%,1.5',
-        ]
-
     def GetStructure(self):
         return OneDStructure([
             (u'Механика', 5, 78),
@@ -308,12 +312,9 @@ class Maron_9_Sbornik(PdfBook):
         ])
 
 
+@page_shift(1)
+@params(['-level', '50%,90%,1.5'])
 class Maron_8_Sbornik(PdfBook):
-    def GetParams(self):
-        return [
-            '-level', '50%,90%,1.5',
-        ]
-
     def GetStructure(self):
         return OneDStructure([
             (u'Тепловые явления', 5, 51),
@@ -323,12 +324,9 @@ class Maron_8_Sbornik(PdfBook):
         ])
 
 
+@page_shift(1)
+@params(['-level', '10%,90%,0.7'])
 class Maron_8_SR_KR(PdfBook):
-    def GetParams(self):
-        return [
-            '-level', '10%,90%,0.7',
-        ]
-
     def GetStructure(self):
         return TwoDStructure([
             (u'Тепловые явления', [
@@ -419,12 +417,9 @@ class Maron_8_SR_KR(PdfBook):
         ])
 
 
+@page_shift(1)
+@params(['-level', '10%,90%,0.7'])
 class Maron_9_SR_KR(PdfBook):
-    def GetParams(self):
-        return [
-            '-level', '10%,90%,0.7',
-        ]
-
     def GetStructure(self):
         return TwoDStructure([
             (u'Механика', [
@@ -521,12 +516,9 @@ class Maron_9_SR_KR(PdfBook):
         ])
 
 
+@page_shift(1)
+@params(['-level', '10%,90%,0.7'])
 class Maron_9_Didaktika(PdfBook):
-    def GetParams(self):
-        return [
-            '-level', '10%,90%,0.7',
-        ]
-
     def GetStructure(self):
         return TwoDStructure([
             (u'Тренировочные задания', [
@@ -582,12 +574,9 @@ class Maron_9_Didaktika(PdfBook):
         ])
 
 
+@page_shift(1)
+@params(['-level', '10%,90%,0.7'])
 class Maron_8_Didaktika(PdfBook):
-    def GetParams(self):
-        return [
-            '-level', '10%,90%,0.7',
-        ]
-
     def GetStructure(self):
         return TwoDStructure([
             (u'Тренировочные задания', [
@@ -641,12 +630,9 @@ class Maron_8_Didaktika(PdfBook):
         ])
 
 
+@page_shift(1)
+@params(['-level', '10%,90%,0.7'])
 class Kirik_8(PdfBook):
-    def GetParams(self):
-        return [
-            '-level', '10%,90%,0.7',
-        ]
-
     def GetStructure(self):
         # from http://alleng.net/d/phys/phys462.htm
         return TwoDStructure([
@@ -696,12 +682,10 @@ class Kirik_8(PdfBook):
             ]),
         ])
 
-class Kirik_9(PdfBook):
-    def GetParams(self):
-        return [
-            '-level', '10%,90%,0.7',
-        ]
 
+@page_shift(1)
+@params(['-level', '10%,90%,0.7'])
+class Kirik_9(PdfBook):
     def GetStructure(self):
         # from https://uchebnik.alleng.me/d/phys/phys552.htm
         return TwoDStructure([
@@ -740,12 +724,9 @@ class Kirik_9(PdfBook):
         ])
 
 
+@page_shift(1)
+@params(['-level', '10%,90%,0.7'])
 class Gendenshteyn_8(PdfBook):
-    def GetParams(self):
-        return [
-            '-level', '10%,90%,0.7',
-        ]
-
     def GetStructure(self):
         # from http://alleng.net/d/phys/phys433.htm
         return TwoDStructure([
@@ -789,12 +770,9 @@ class Gendenshteyn_8(PdfBook):
         ])
 
 
+@page_shift(1)
+@params(['-level', '10%,90%,0.7'])
 class Gendenshteyn_9(PdfBook):
-    def GetParams(self):
-        return [
-            '-level', '10%,90%,0.7',
-        ]
-
     def GetStructure(self):
         # from https://uchebnik.alleng.me/d/phys/phys435.htm
         return TwoDStructure([
@@ -857,12 +835,8 @@ class OneDStructure(object):
                 yield pageNumber, dirName, '%02d %s - %%03d' % (index, name)
 
 
+@params(['-level', '10%,90%,0.7'])
 class Gorbushin(PdfBook):
-    def GetParams(self):
-        return [
-            '-level', '10%,90%,0.7',
-        ]
-
     def GetStructure(self):
         return OneDStructure([
             (u'Кинематика-1', 10, 12),
@@ -896,6 +870,7 @@ class Gorbushin(PdfBook):
         ])
 
 
+@page_shift(1)
 class Vishnyakova(PdfBook):
     def GetStructure(self):
         return TwoDStructure([
@@ -946,12 +921,8 @@ class Vishnyakova(PdfBook):
         ])
 
 
+@params(['-level', '10%,90%,0.7'])
 class Problems_3800(PdfBook):
-    def GetParams(self):
-        return [
-            '-level', '10%,90%,0.7',
-        ]
-
     def GetStructure(self):
         # from https://uchebnik.alleng.me/d/phys/phys435.htm
         return TwoDStructure([
