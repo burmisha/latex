@@ -45,6 +45,7 @@ class Pupils(object):
     def GetRandomSeedPart(self):
         return u'{}-{}'.format(self.Grade, self.Letter)
 
+
 def getPupils(className, addMyself=False, onlyMe=False):
     if className == 'class-2018-10':
         names = [

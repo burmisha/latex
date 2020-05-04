@@ -1,28 +1,36 @@
 import library
-import logging
 
+import logging
 log = logging.getLogger('task')
+
+DEFAULT_SOLUTION_SPACE = 120
+
+TASK_TEMPLATE = u'''
+\\{}{{
+{}
+}}
+'''
 
 
 class Task(object):
-    def __init__(self, text, answer=None, number=None, solutionSpace=120):
+    def __init__(self, text, answer=None, number=None, solutionSpace=None):
         self.Text = text.strip('\n')
         self.Answer = answer
         self.Number = number
         self.SolutionSpace = solutionSpace
 
-    def Format(self, text, nodeType):
+    def __Format(self, text, nodeType):
         try:
             value = library.formatter.formatText(text, addIndent=4)
-            return u'''\\{}{{\n{}\n}}\n'''.format(nodeType, value).replace(r'\\u', r'\u')
+            return TASK_TEMPLATE.format(nodeType, value).replace(r'\\u', r'\u').strip()
         except Exception:
             log.exception('Failed to get LaTeX for %s on %r', nodeType, self.Text)
             raise
 
     def GetTex(self):
-        result = self.Format(self.Text, 'task')
-        if self.Answer:
-            result += self.Format(self.Answer, 'answer')
+        result = self.__Format(self.Text, 'task')
+        if self.Answer is not None:
+            result += '\n' + self.__Format(self.Answer, 'answer')
         return result        
 
     def GetFilename(self):

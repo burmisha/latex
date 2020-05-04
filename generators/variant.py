@@ -80,7 +80,7 @@ class VariantTask(object):
         if hasattr(self, 'SolutionSpace'):
             return self.SolutionSpace
         else:
-            return 120
+            return problems.task.DEFAULT_SOLUTION_SPACE
 
     def GetTextTemplate(self):
         if hasattr(self, 'TextTemplate'):

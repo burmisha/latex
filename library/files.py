@@ -24,7 +24,6 @@ def walkFiles(dirName, extensions=[], dirsOnly=False):
     log.debug('Found %d %s in %s', count, logName, dirName)
 
 
-
 class FileWriter(object):
     def __init__(self, nameFilter=None):
         self.NameFilter = nameFilter
