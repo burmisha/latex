@@ -21,17 +21,83 @@
     Протон движется со скоростью $0{,}8\,c$, где $c$~--- скорость света в вакууме.
     Каково при этом отношение полной энергии частицы $E$ к его энергии покоя $E_0$?
 }
+\answer{
+    \begin{align*}
+        E &= \frac{E_0}{\sqrt{1 - \frac{v^2}{c^2}}}
+            \implies \frac{E}{E_0}
+                = \frac 1{\sqrt{1 - \frac{v^2}{c^2}}}
+                = \frac 1{\sqrt{1 - \sqr{0{,}8}}}
+                \approx 1.667
+        \\
+        E_{\text{кин}} &= E - E_0
+            \implies \frac{E_{\text{кин}}}{E_0}
+                = \frac{E}{E_0} - 1
+                = \frac 1{\sqrt{1 - \frac{v^2}{c^2}}} - 1
+                = \frac 1{\sqrt{1 - \sqr{0{,}8}}} - 1
+                \approx 0.667
+    \end{align*}
+}
 \vspace{150pt}
 
 \tasknumber{3}\task{
     Протон движется со скоростью $0{,}85\,c$, где $c$~--- скорость света в вакууме.
     Определите его импульс (в ответе приведите формулу и укажите численное значение).
 }
+\answer{
+    \begin{align*}
+        E &= \frac{ mc^2 }{ \sqrt{ 1 - \frac{v^2}{c^2} } }
+            \approx \frac{
+                1{,}67 \cdot 10^{-27}\,\text{кг} \cdot \sqr{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} }
+            }{
+                \sqrt{1 - 0{,}85^2}
+            } \approx 28{,}53 \cdot 10^{-11}\,\text{Дж},
+        \\
+        E_{\text{кин}} &= \frac{mc^2}{\sqrt{1 - \frac{v^2}{c^2}}} - mc^2
+            = mc^2 \cbr{
+                \frac 1{
+                    \sqrt{1 - \frac{v^2}{c^2} }
+                } - 1
+            }
+            \approx
+            \\
+            &\approx \cbr{
+                1{,}67 \cdot 10^{-27}\,\text{кг} \cdot \sqr{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} }
+            } \cdot \cbr{
+                \frac 1{ \sqrt{ 1 - 0{,}85^2 } } - 1
+            }
+            \approx 13{,}5 \cdot 10^{-11}\,\text{Дж},
+        \\
+        p &= \frac{
+                mv
+            }{
+                \sqrt{1 - \frac{v^2}{c^2} }
+            }
+            \approx \frac{
+                1{,}67 \cdot 10^{-27}\,\text{кг} \cdot 0{,}85 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}
+            }{
+                1 - 0{,}85^2
+            }
+            \approx 9{,}51 \cdot 10^{-19}\,\frac{\text{кг}\cdot\text{м}}{\text{с}}.
+    \end{align*}
+}
 \vspace{150pt}
 
 \tasknumber{4}\task{
     При какой скорости движения (в м/с) релятивистское сокращение длины движущегося тела
-    составит 50\%%?
+    составит 50\%?
+}
+\answer{
+    \begin{align*}
+        l_0 &= \frac{l}{\sqrt{1 - \frac {v^2}{c^2}}}
+        \implies 1 - \frac {v^2}{c^2} = \sqr{\frac l{l_0}}
+        \implies \frac v c = \sqrt{1 - \sqr{\frac l{l_0}}} \implies \\
+        \implies v &= c\sqrt{1 - \sqr{\frac l{l_0}}}
+        = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} \cdot \sqrt{1 - \sqr{\frac {l_0 - 0{,}50l_0} {l_0} } }
+        = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} \cdot \sqrt{1 - \sqr{1 - 0{,}50 } } \approx \\
+        &\approx 0.866c
+        \approx 2{,}598 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}
+        \approx 9{,}353 \cdot 10^{8}\,\frac{\text{км}}{\text{ч}}.
+    \end{align*}
 }
 \vspace{150pt}
 
@@ -41,11 +107,31 @@
     Какова длина волны этой линии спектра?
     Постоянная Планка $h = 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с}$, скорость света $c = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}$.
 }
+\answer{
+    $
+        E = h\nu = h \frac c\lambda
+        \implies \lambda = \frac{hc}{E}
+            = \frac{
+                { 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с} } \cdot{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} }
+            }{ 4{,}04 \cdot 10^{-19}\,\text{Дж} }
+            = 4{,}92 \cdot 10^{-7}\,\text{м}.
+    $
+}
 \vspace{150pt}
 
 \tasknumber{6}\task{
     Излучение какой длины волны поглотил атом водорода, если полная энергия в атоме увеличилась на $4 \cdot 10^{-19}\,\text{Дж}$?
     Постоянная Планка $h = 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с}$, скорость света $c = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}$.
+}
+\answer{
+    $
+        E = h\nu = h \frac c\lambda
+        \implies \lambda = \frac{hc}{E}
+            = \frac{
+                { 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с} } \cdot{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} }
+            }{ 4 \cdot 10^{-19}\,\text{Дж} }
+            = 4{,}97 \cdot 10^{-7}\,\text{м}.
+    $
 }
 \vspace{150pt}
 
@@ -56,6 +142,9 @@
     находящийся в 3-м возбуждённом состоянии?
     Отметьте все соответствующие переходы на рисунке и укажите,
     при каком переходе (среди отмеченных) частота излучённого фотона максимальна.
+}
+\answer{
+    $N = 3$, самая длинная линия
 }
 \vspace{150pt}
 
@@ -121,17 +210,83 @@
     Протон движется со скоростью $0{,}6\,c$, где $c$~--- скорость света в вакууме.
     Каково при этом отношение кинетической энергии частицы $E_{\text{кин}}$ к его энергии покоя $E_0$?
 }
+\answer{
+    \begin{align*}
+        E &= \frac{E_0}{\sqrt{1 - \frac{v^2}{c^2}}}
+            \implies \frac{E}{E_0}
+                = \frac 1{\sqrt{1 - \frac{v^2}{c^2}}}
+                = \frac 1{\sqrt{1 - \sqr{0{,}6}}}
+                \approx 1.250
+        \\
+        E_{\text{кин}} &= E - E_0
+            \implies \frac{E_{\text{кин}}}{E_0}
+                = \frac{E}{E_0} - 1
+                = \frac 1{\sqrt{1 - \frac{v^2}{c^2}}} - 1
+                = \frac 1{\sqrt{1 - \sqr{0{,}6}}} - 1
+                \approx 0.250
+    \end{align*}
+}
 \vspace{150pt}
 
 \tasknumber{3}\task{
     Протон движется со скоростью $0{,}75\,c$, где $c$~--- скорость света в вакууме.
     Определите его кинетическую энергию (в ответе приведите формулу и укажите численное значение).
 }
+\answer{
+    \begin{align*}
+        E &= \frac{ mc^2 }{ \sqrt{ 1 - \frac{v^2}{c^2} } }
+            \approx \frac{
+                1{,}67 \cdot 10^{-27}\,\text{кг} \cdot \sqr{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} }
+            }{
+                \sqrt{1 - 0{,}75^2}
+            } \approx 22{,}72 \cdot 10^{-11}\,\text{Дж},
+        \\
+        E_{\text{кин}} &= \frac{mc^2}{\sqrt{1 - \frac{v^2}{c^2}}} - mc^2
+            = mc^2 \cbr{
+                \frac 1{
+                    \sqrt{1 - \frac{v^2}{c^2} }
+                } - 1
+            }
+            \approx
+            \\
+            &\approx \cbr{
+                1{,}67 \cdot 10^{-27}\,\text{кг} \cdot \sqr{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} }
+            } \cdot \cbr{
+                \frac 1{ \sqrt{ 1 - 0{,}75^2 } } - 1
+            }
+            \approx 7{,}69 \cdot 10^{-11}\,\text{Дж},
+        \\
+        p &= \frac{
+                mv
+            }{
+                \sqrt{1 - \frac{v^2}{c^2} }
+            }
+            \approx \frac{
+                1{,}67 \cdot 10^{-27}\,\text{кг} \cdot 0{,}75 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}
+            }{
+                1 - 0{,}75^2
+            }
+            \approx 7{,}57 \cdot 10^{-19}\,\frac{\text{кг}\cdot\text{м}}{\text{с}}.
+    \end{align*}
+}
 \vspace{150pt}
 
 \tasknumber{4}\task{
     При какой скорости движения (в долях скорости света) релятивистское сокращение длины движущегося тела
-    составит 30\%%?
+    составит 30\%?
+}
+\answer{
+    \begin{align*}
+        l_0 &= \frac{l}{\sqrt{1 - \frac {v^2}{c^2}}}
+        \implies 1 - \frac {v^2}{c^2} = \sqr{\frac l{l_0}}
+        \implies \frac v c = \sqrt{1 - \sqr{\frac l{l_0}}} \implies \\
+        \implies v &= c\sqrt{1 - \sqr{\frac l{l_0}}}
+        = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} \cdot \sqrt{1 - \sqr{\frac {l_0 - 0{,}30l_0} {l_0} } }
+        = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} \cdot \sqrt{1 - \sqr{1 - 0{,}30 } } \approx \\
+        &\approx 0.714c
+        \approx 2{,}142 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}
+        \approx 7{,}713 \cdot 10^{8}\,\frac{\text{км}}{\text{ч}}.
+    \end{align*}
 }
 \vspace{150pt}
 
@@ -141,11 +296,31 @@
     Какова длина волны этой линии спектра?
     Постоянная Планка $h = 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с}$, скорость света $c = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}$.
 }
+\answer{
+    $
+        E = h\nu = h \frac c\lambda
+        \implies \lambda = \frac{hc}{E}
+            = \frac{
+                { 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с} } \cdot{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} }
+            }{ 5{,}05 \cdot 10^{-19}\,\text{Дж} }
+            = 3{,}94 \cdot 10^{-7}\,\text{м}.
+    $
+}
 \vspace{150pt}
 
 \tasknumber{6}\task{
     Излучение какой длины волны поглотил атом водорода, если полная энергия в атоме увеличилась на $6 \cdot 10^{-19}\,\text{Дж}$?
     Постоянная Планка $h = 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с}$, скорость света $c = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}$.
+}
+\answer{
+    $
+        E = h\nu = h \frac c\lambda
+        \implies \lambda = \frac{hc}{E}
+            = \frac{
+                { 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с} } \cdot{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} }
+            }{ 6 \cdot 10^{-19}\,\text{Дж} }
+            = 3{,}31 \cdot 10^{-7}\,\text{м}.
+    $
 }
 \vspace{150pt}
 
@@ -156,6 +331,9 @@
     находящийся в 4-м возбуждённом состоянии?
     Отметьте все соответствующие переходы на рисунке и укажите,
     при каком переходе (среди отмеченных) длина волны излучённого фотона минимальна.
+}
+\answer{
+    $N = 6$, самая длинная линия
 }
 \vspace{150pt}
 
@@ -221,17 +399,83 @@
     Протон движется со скоростью $0{,}7\,c$, где $c$~--- скорость света в вакууме.
     Каково при этом отношение кинетической энергии частицы $E_{\text{кин}}$ к его энергии покоя $E_0$?
 }
+\answer{
+    \begin{align*}
+        E &= \frac{E_0}{\sqrt{1 - \frac{v^2}{c^2}}}
+            \implies \frac{E}{E_0}
+                = \frac 1{\sqrt{1 - \frac{v^2}{c^2}}}
+                = \frac 1{\sqrt{1 - \sqr{0{,}7}}}
+                \approx 1.400
+        \\
+        E_{\text{кин}} &= E - E_0
+            \implies \frac{E_{\text{кин}}}{E_0}
+                = \frac{E}{E_0} - 1
+                = \frac 1{\sqrt{1 - \frac{v^2}{c^2}}} - 1
+                = \frac 1{\sqrt{1 - \sqr{0{,}7}}} - 1
+                \approx 0.400
+    \end{align*}
+}
 \vspace{150pt}
 
 \tasknumber{3}\task{
     Протон движется со скоростью $0{,}75\,c$, где $c$~--- скорость света в вакууме.
     Определите его полную энергию (в ответе приведите формулу и укажите численное значение).
 }
+\answer{
+    \begin{align*}
+        E &= \frac{ mc^2 }{ \sqrt{ 1 - \frac{v^2}{c^2} } }
+            \approx \frac{
+                1{,}67 \cdot 10^{-27}\,\text{кг} \cdot \sqr{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} }
+            }{
+                \sqrt{1 - 0{,}75^2}
+            } \approx 22{,}72 \cdot 10^{-11}\,\text{Дж},
+        \\
+        E_{\text{кин}} &= \frac{mc^2}{\sqrt{1 - \frac{v^2}{c^2}}} - mc^2
+            = mc^2 \cbr{
+                \frac 1{
+                    \sqrt{1 - \frac{v^2}{c^2} }
+                } - 1
+            }
+            \approx
+            \\
+            &\approx \cbr{
+                1{,}67 \cdot 10^{-27}\,\text{кг} \cdot \sqr{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} }
+            } \cdot \cbr{
+                \frac 1{ \sqrt{ 1 - 0{,}75^2 } } - 1
+            }
+            \approx 7{,}69 \cdot 10^{-11}\,\text{Дж},
+        \\
+        p &= \frac{
+                mv
+            }{
+                \sqrt{1 - \frac{v^2}{c^2} }
+            }
+            \approx \frac{
+                1{,}67 \cdot 10^{-27}\,\text{кг} \cdot 0{,}75 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}
+            }{
+                1 - 0{,}75^2
+            }
+            \approx 7{,}57 \cdot 10^{-19}\,\frac{\text{кг}\cdot\text{м}}{\text{с}}.
+    \end{align*}
+}
 \vspace{150pt}
 
 \tasknumber{4}\task{
     При какой скорости движения (в км/ч) релятивистское сокращение длины движущегося тела
-    составит 30\%%?
+    составит 30\%?
+}
+\answer{
+    \begin{align*}
+        l_0 &= \frac{l}{\sqrt{1 - \frac {v^2}{c^2}}}
+        \implies 1 - \frac {v^2}{c^2} = \sqr{\frac l{l_0}}
+        \implies \frac v c = \sqrt{1 - \sqr{\frac l{l_0}}} \implies \\
+        \implies v &= c\sqrt{1 - \sqr{\frac l{l_0}}}
+        = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} \cdot \sqrt{1 - \sqr{\frac {l_0 - 0{,}30l_0} {l_0} } }
+        = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} \cdot \sqrt{1 - \sqr{1 - 0{,}30 } } \approx \\
+        &\approx 0.714c
+        \approx 2{,}142 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}
+        \approx 7{,}713 \cdot 10^{8}\,\frac{\text{км}}{\text{ч}}.
+    \end{align*}
 }
 \vspace{150pt}
 
@@ -241,11 +485,31 @@
     Какова длина волны этой линии спектра?
     Постоянная Планка $h = 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с}$, скорость света $c = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}$.
 }
+\answer{
+    $
+        E = h\nu = h \frac c\lambda
+        \implies \lambda = \frac{hc}{E}
+            = \frac{
+                { 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с} } \cdot{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} }
+            }{ 5{,}05 \cdot 10^{-19}\,\text{Дж} }
+            = 3{,}94 \cdot 10^{-7}\,\text{м}.
+    $
+}
 \vspace{150pt}
 
 \tasknumber{6}\task{
     Излучение какой длины волны поглотил атом водорода, если полная энергия в атоме увеличилась на $3 \cdot 10^{-19}\,\text{Дж}$?
     Постоянная Планка $h = 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с}$, скорость света $c = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}$.
+}
+\answer{
+    $
+        E = h\nu = h \frac c\lambda
+        \implies \lambda = \frac{hc}{E}
+            = \frac{
+                { 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с} } \cdot{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} }
+            }{ 3 \cdot 10^{-19}\,\text{Дж} }
+            = 6{,}63 \cdot 10^{-7}\,\text{м}.
+    $
 }
 \vspace{150pt}
 
@@ -256,6 +520,9 @@
     находящийся в 4-м возбуждённом состоянии?
     Отметьте все соответствующие переходы на рисунке и укажите,
     при каком переходе (среди отмеченных) энергия излучённого фотона минимальна.
+}
+\answer{
+    $N = 6$, самая короткая линия
 }
 \vspace{150pt}
 
@@ -321,17 +588,83 @@
     Позитрон движется со скоростью $0{,}7\,c$, где $c$~--- скорость света в вакууме.
     Каково при этом отношение кинетической энергии частицы $E_{\text{кин}}$ к его энергии покоя $E_0$?
 }
+\answer{
+    \begin{align*}
+        E &= \frac{E_0}{\sqrt{1 - \frac{v^2}{c^2}}}
+            \implies \frac{E}{E_0}
+                = \frac 1{\sqrt{1 - \frac{v^2}{c^2}}}
+                = \frac 1{\sqrt{1 - \sqr{0{,}7}}}
+                \approx 1.400
+        \\
+        E_{\text{кин}} &= E - E_0
+            \implies \frac{E_{\text{кин}}}{E_0}
+                = \frac{E}{E_0} - 1
+                = \frac 1{\sqrt{1 - \frac{v^2}{c^2}}} - 1
+                = \frac 1{\sqrt{1 - \sqr{0{,}7}}} - 1
+                \approx 0.400
+    \end{align*}
+}
 \vspace{150pt}
 
 \tasknumber{3}\task{
     Электрон движется со скоростью $0{,}65\,c$, где $c$~--- скорость света в вакууме.
     Определите его импульс (в ответе приведите формулу и укажите численное значение).
 }
+\answer{
+    \begin{align*}
+        E &= \frac{ mc^2 }{ \sqrt{ 1 - \frac{v^2}{c^2} } }
+            \approx \frac{
+                9{,}1 \cdot 10^{-31}\,\text{кг} \cdot \sqr{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} }
+            }{
+                \sqrt{1 - 0{,}65^2}
+            } \approx 107{,}77 \cdot 10^{-15}\,\text{Дж},
+        \\
+        E_{\text{кин}} &= \frac{mc^2}{\sqrt{1 - \frac{v^2}{c^2}}} - mc^2
+            = mc^2 \cbr{
+                \frac 1{
+                    \sqrt{1 - \frac{v^2}{c^2} }
+                } - 1
+            }
+            \approx
+            \\
+            &\approx \cbr{
+                9{,}1 \cdot 10^{-31}\,\text{кг} \cdot \sqr{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} }
+            } \cdot \cbr{
+                \frac 1{ \sqrt{ 1 - 0{,}65^2 } } - 1
+            }
+            \approx 25{,}87 \cdot 10^{-15}\,\text{Дж},
+        \\
+        p &= \frac{
+                mv
+            }{
+                \sqrt{1 - \frac{v^2}{c^2} }
+            }
+            \approx \frac{
+                9{,}1 \cdot 10^{-31}\,\text{кг} \cdot 0{,}65 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}
+            }{
+                1 - 0{,}65^2
+            }
+            \approx 35{,}92 \cdot 10^{-23}\,\frac{\text{кг}\cdot\text{м}}{\text{с}}.
+    \end{align*}
+}
 \vspace{150pt}
 
 \tasknumber{4}\task{
     При какой скорости движения (в долях скорости света) релятивистское сокращение длины движущегося тела
-    составит 10\%%?
+    составит 10\%?
+}
+\answer{
+    \begin{align*}
+        l_0 &= \frac{l}{\sqrt{1 - \frac {v^2}{c^2}}}
+        \implies 1 - \frac {v^2}{c^2} = \sqr{\frac l{l_0}}
+        \implies \frac v c = \sqrt{1 - \sqr{\frac l{l_0}}} \implies \\
+        \implies v &= c\sqrt{1 - \sqr{\frac l{l_0}}}
+        = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} \cdot \sqrt{1 - \sqr{\frac {l_0 - 0{,}10l_0} {l_0} } }
+        = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} \cdot \sqrt{1 - \sqr{1 - 0{,}10 } } \approx \\
+        &\approx 0.436c
+        \approx 1{,}308 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}
+        \approx 4{,}708 \cdot 10^{8}\,\frac{\text{км}}{\text{ч}}.
+    \end{align*}
 }
 \vspace{150pt}
 
@@ -341,11 +674,31 @@
     Какова длина волны этой линии спектра?
     Постоянная Планка $h = 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с}$, скорость света $c = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}$.
 }
+\answer{
+    $
+        E = h\nu = h \frac c\lambda
+        \implies \lambda = \frac{hc}{E}
+            = \frac{
+                { 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с} } \cdot{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} }
+            }{ 0{,}55 \cdot 10^{-19}\,\text{Дж} }
+            = 36{,}14 \cdot 10^{-7}\,\text{м}.
+    $
+}
 \vspace{150pt}
 
 \tasknumber{6}\task{
     Излучение какой длины волны поглотил атом водорода, если полная энергия в атоме увеличилась на $3 \cdot 10^{-19}\,\text{Дж}$?
     Постоянная Планка $h = 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с}$, скорость света $c = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}$.
+}
+\answer{
+    $
+        E = h\nu = h \frac c\lambda
+        \implies \lambda = \frac{hc}{E}
+            = \frac{
+                { 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с} } \cdot{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} }
+            }{ 3 \cdot 10^{-19}\,\text{Дж} }
+            = 6{,}63 \cdot 10^{-7}\,\text{м}.
+    $
 }
 \vspace{150pt}
 
@@ -356,6 +709,9 @@
     находящийся в 5-м возбуждённом состоянии?
     Отметьте все соответствующие переходы на рисунке и укажите,
     при каком переходе (среди отмеченных) длина волны излучённого фотона максимальна.
+}
+\answer{
+    $N = 10$, самая короткая линия
 }
 \vspace{150pt}
 
@@ -421,17 +777,83 @@
     Протон движется со скоростью $0{,}7\,c$, где $c$~--- скорость света в вакууме.
     Каково при этом отношение кинетической энергии частицы $E_{\text{кин}}$ к его энергии покоя $E_0$?
 }
+\answer{
+    \begin{align*}
+        E &= \frac{E_0}{\sqrt{1 - \frac{v^2}{c^2}}}
+            \implies \frac{E}{E_0}
+                = \frac 1{\sqrt{1 - \frac{v^2}{c^2}}}
+                = \frac 1{\sqrt{1 - \sqr{0{,}7}}}
+                \approx 1.400
+        \\
+        E_{\text{кин}} &= E - E_0
+            \implies \frac{E_{\text{кин}}}{E_0}
+                = \frac{E}{E_0} - 1
+                = \frac 1{\sqrt{1 - \frac{v^2}{c^2}}} - 1
+                = \frac 1{\sqrt{1 - \sqr{0{,}7}}} - 1
+                \approx 0.400
+    \end{align*}
+}
 \vspace{150pt}
 
 \tasknumber{3}\task{
     Электрон движется со скоростью $0{,}65\,c$, где $c$~--- скорость света в вакууме.
     Определите его импульс (в ответе приведите формулу и укажите численное значение).
 }
+\answer{
+    \begin{align*}
+        E &= \frac{ mc^2 }{ \sqrt{ 1 - \frac{v^2}{c^2} } }
+            \approx \frac{
+                9{,}1 \cdot 10^{-31}\,\text{кг} \cdot \sqr{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} }
+            }{
+                \sqrt{1 - 0{,}65^2}
+            } \approx 107{,}77 \cdot 10^{-15}\,\text{Дж},
+        \\
+        E_{\text{кин}} &= \frac{mc^2}{\sqrt{1 - \frac{v^2}{c^2}}} - mc^2
+            = mc^2 \cbr{
+                \frac 1{
+                    \sqrt{1 - \frac{v^2}{c^2} }
+                } - 1
+            }
+            \approx
+            \\
+            &\approx \cbr{
+                9{,}1 \cdot 10^{-31}\,\text{кг} \cdot \sqr{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} }
+            } \cdot \cbr{
+                \frac 1{ \sqrt{ 1 - 0{,}65^2 } } - 1
+            }
+            \approx 25{,}87 \cdot 10^{-15}\,\text{Дж},
+        \\
+        p &= \frac{
+                mv
+            }{
+                \sqrt{1 - \frac{v^2}{c^2} }
+            }
+            \approx \frac{
+                9{,}1 \cdot 10^{-31}\,\text{кг} \cdot 0{,}65 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}
+            }{
+                1 - 0{,}65^2
+            }
+            \approx 35{,}92 \cdot 10^{-23}\,\frac{\text{кг}\cdot\text{м}}{\text{с}}.
+    \end{align*}
+}
 \vspace{150pt}
 
 \tasknumber{4}\task{
     При какой скорости движения (в долях скорости света) релятивистское сокращение длины движущегося тела
-    составит 10\%%?
+    составит 10\%?
+}
+\answer{
+    \begin{align*}
+        l_0 &= \frac{l}{\sqrt{1 - \frac {v^2}{c^2}}}
+        \implies 1 - \frac {v^2}{c^2} = \sqr{\frac l{l_0}}
+        \implies \frac v c = \sqrt{1 - \sqr{\frac l{l_0}}} \implies \\
+        \implies v &= c\sqrt{1 - \sqr{\frac l{l_0}}}
+        = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} \cdot \sqrt{1 - \sqr{\frac {l_0 - 0{,}10l_0} {l_0} } }
+        = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} \cdot \sqrt{1 - \sqr{1 - 0{,}10 } } \approx \\
+        &\approx 0.436c
+        \approx 1{,}308 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}
+        \approx 4{,}708 \cdot 10^{8}\,\frac{\text{км}}{\text{ч}}.
+    \end{align*}
 }
 \vspace{150pt}
 
@@ -441,11 +863,31 @@
     Какова длина волны этой линии спектра?
     Постоянная Планка $h = 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с}$, скорость света $c = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}$.
 }
+\answer{
+    $
+        E = h\nu = h \frac c\lambda
+        \implies \lambda = \frac{hc}{E}
+            = \frac{
+                { 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с} } \cdot{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} }
+            }{ 0{,}55 \cdot 10^{-19}\,\text{Дж} }
+            = 36{,}14 \cdot 10^{-7}\,\text{м}.
+    $
+}
 \vspace{150pt}
 
 \tasknumber{6}\task{
     Излучение какой длины волны поглотил атом водорода, если полная энергия в атоме увеличилась на $3 \cdot 10^{-19}\,\text{Дж}$?
     Постоянная Планка $h = 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с}$, скорость света $c = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}$.
+}
+\answer{
+    $
+        E = h\nu = h \frac c\lambda
+        \implies \lambda = \frac{hc}{E}
+            = \frac{
+                { 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с} } \cdot{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} }
+            }{ 3 \cdot 10^{-19}\,\text{Дж} }
+            = 6{,}63 \cdot 10^{-7}\,\text{м}.
+    $
 }
 \vspace{150pt}
 
@@ -456,6 +898,9 @@
     находящийся в 5-м возбуждённом состоянии?
     Отметьте все соответствующие переходы на рисунке и укажите,
     при каком переходе (среди отмеченных) длина волны излучённого фотона максимальна.
+}
+\answer{
+    $N = 10$, самая короткая линия
 }
 \vspace{150pt}
 
@@ -521,17 +966,83 @@
     Позитрон движется со скоростью $0{,}8\,c$, где $c$~--- скорость света в вакууме.
     Каково при этом отношение полной энергии частицы $E$ к его энергии покоя $E_0$?
 }
+\answer{
+    \begin{align*}
+        E &= \frac{E_0}{\sqrt{1 - \frac{v^2}{c^2}}}
+            \implies \frac{E}{E_0}
+                = \frac 1{\sqrt{1 - \frac{v^2}{c^2}}}
+                = \frac 1{\sqrt{1 - \sqr{0{,}8}}}
+                \approx 1.667
+        \\
+        E_{\text{кин}} &= E - E_0
+            \implies \frac{E_{\text{кин}}}{E_0}
+                = \frac{E}{E_0} - 1
+                = \frac 1{\sqrt{1 - \frac{v^2}{c^2}}} - 1
+                = \frac 1{\sqrt{1 - \sqr{0{,}8}}} - 1
+                \approx 0.667
+    \end{align*}
+}
 \vspace{150pt}
 
 \tasknumber{3}\task{
     Электрон движется со скоростью $0{,}75\,c$, где $c$~--- скорость света в вакууме.
     Определите его импульс (в ответе приведите формулу и укажите численное значение).
 }
+\answer{
+    \begin{align*}
+        E &= \frac{ mc^2 }{ \sqrt{ 1 - \frac{v^2}{c^2} } }
+            \approx \frac{
+                9{,}1 \cdot 10^{-31}\,\text{кг} \cdot \sqr{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} }
+            }{
+                \sqrt{1 - 0{,}75^2}
+            } \approx 123{,}82 \cdot 10^{-15}\,\text{Дж},
+        \\
+        E_{\text{кин}} &= \frac{mc^2}{\sqrt{1 - \frac{v^2}{c^2}}} - mc^2
+            = mc^2 \cbr{
+                \frac 1{
+                    \sqrt{1 - \frac{v^2}{c^2} }
+                } - 1
+            }
+            \approx
+            \\
+            &\approx \cbr{
+                9{,}1 \cdot 10^{-31}\,\text{кг} \cdot \sqr{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} }
+            } \cdot \cbr{
+                \frac 1{ \sqrt{ 1 - 0{,}75^2 } } - 1
+            }
+            \approx 41{,}92 \cdot 10^{-15}\,\text{Дж},
+        \\
+        p &= \frac{
+                mv
+            }{
+                \sqrt{1 - \frac{v^2}{c^2} }
+            }
+            \approx \frac{
+                9{,}1 \cdot 10^{-31}\,\text{кг} \cdot 0{,}75 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}
+            }{
+                1 - 0{,}75^2
+            }
+            \approx 41{,}27 \cdot 10^{-23}\,\frac{\text{кг}\cdot\text{м}}{\text{с}}.
+    \end{align*}
+}
 \vspace{150pt}
 
 \tasknumber{4}\task{
     При какой скорости движения (в долях скорости света) релятивистское сокращение длины движущегося тела
-    составит 30\%%?
+    составит 30\%?
+}
+\answer{
+    \begin{align*}
+        l_0 &= \frac{l}{\sqrt{1 - \frac {v^2}{c^2}}}
+        \implies 1 - \frac {v^2}{c^2} = \sqr{\frac l{l_0}}
+        \implies \frac v c = \sqrt{1 - \sqr{\frac l{l_0}}} \implies \\
+        \implies v &= c\sqrt{1 - \sqr{\frac l{l_0}}}
+        = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} \cdot \sqrt{1 - \sqr{\frac {l_0 - 0{,}30l_0} {l_0} } }
+        = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} \cdot \sqrt{1 - \sqr{1 - 0{,}30 } } \approx \\
+        &\approx 0.714c
+        \approx 2{,}142 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}
+        \approx 7{,}713 \cdot 10^{8}\,\frac{\text{км}}{\text{ч}}.
+    \end{align*}
 }
 \vspace{150pt}
 
@@ -541,11 +1052,31 @@
     Какова длина волны этой линии спектра?
     Постоянная Планка $h = 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с}$, скорость света $c = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}$.
 }
+\answer{
+    $
+        E = h\nu = h \frac c\lambda
+        \implies \lambda = \frac{hc}{E}
+            = \frac{
+                { 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с} } \cdot{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} }
+            }{ 1{,}01 \cdot 10^{-19}\,\text{Дж} }
+            = 19{,}68 \cdot 10^{-7}\,\text{м}.
+    $
+}
 \vspace{150pt}
 
 \tasknumber{6}\task{
     Излучение какой длины волны поглотил атом водорода, если полная энергия в атоме увеличилась на $4 \cdot 10^{-19}\,\text{Дж}$?
     Постоянная Планка $h = 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с}$, скорость света $c = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}$.
+}
+\answer{
+    $
+        E = h\nu = h \frac c\lambda
+        \implies \lambda = \frac{hc}{E}
+            = \frac{
+                { 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с} } \cdot{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} }
+            }{ 4 \cdot 10^{-19}\,\text{Дж} }
+            = 4{,}97 \cdot 10^{-7}\,\text{м}.
+    $
 }
 \vspace{150pt}
 
@@ -556,6 +1087,9 @@
     находящийся в 4-м возбуждённом состоянии?
     Отметьте все соответствующие переходы на рисунке и укажите,
     при каком переходе (среди отмеченных) длина волны излучённого фотона максимальна.
+}
+\answer{
+    $N = 6$, самая короткая линия
 }
 \vspace{150pt}
 
@@ -621,17 +1155,83 @@
     Позитрон движется со скоростью $0{,}7\,c$, где $c$~--- скорость света в вакууме.
     Каково при этом отношение кинетической энергии частицы $E_{\text{кин}}$ к его энергии покоя $E_0$?
 }
+\answer{
+    \begin{align*}
+        E &= \frac{E_0}{\sqrt{1 - \frac{v^2}{c^2}}}
+            \implies \frac{E}{E_0}
+                = \frac 1{\sqrt{1 - \frac{v^2}{c^2}}}
+                = \frac 1{\sqrt{1 - \sqr{0{,}7}}}
+                \approx 1.400
+        \\
+        E_{\text{кин}} &= E - E_0
+            \implies \frac{E_{\text{кин}}}{E_0}
+                = \frac{E}{E_0} - 1
+                = \frac 1{\sqrt{1 - \frac{v^2}{c^2}}} - 1
+                = \frac 1{\sqrt{1 - \sqr{0{,}7}}} - 1
+                \approx 0.400
+    \end{align*}
+}
 \vspace{150pt}
 
 \tasknumber{3}\task{
     Протон движется со скоростью $0{,}75\,c$, где $c$~--- скорость света в вакууме.
     Определите его импульс (в ответе приведите формулу и укажите численное значение).
 }
+\answer{
+    \begin{align*}
+        E &= \frac{ mc^2 }{ \sqrt{ 1 - \frac{v^2}{c^2} } }
+            \approx \frac{
+                1{,}67 \cdot 10^{-27}\,\text{кг} \cdot \sqr{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} }
+            }{
+                \sqrt{1 - 0{,}75^2}
+            } \approx 22{,}72 \cdot 10^{-11}\,\text{Дж},
+        \\
+        E_{\text{кин}} &= \frac{mc^2}{\sqrt{1 - \frac{v^2}{c^2}}} - mc^2
+            = mc^2 \cbr{
+                \frac 1{
+                    \sqrt{1 - \frac{v^2}{c^2} }
+                } - 1
+            }
+            \approx
+            \\
+            &\approx \cbr{
+                1{,}67 \cdot 10^{-27}\,\text{кг} \cdot \sqr{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} }
+            } \cdot \cbr{
+                \frac 1{ \sqrt{ 1 - 0{,}75^2 } } - 1
+            }
+            \approx 7{,}69 \cdot 10^{-11}\,\text{Дж},
+        \\
+        p &= \frac{
+                mv
+            }{
+                \sqrt{1 - \frac{v^2}{c^2} }
+            }
+            \approx \frac{
+                1{,}67 \cdot 10^{-27}\,\text{кг} \cdot 0{,}75 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}
+            }{
+                1 - 0{,}75^2
+            }
+            \approx 7{,}57 \cdot 10^{-19}\,\frac{\text{кг}\cdot\text{м}}{\text{с}}.
+    \end{align*}
+}
 \vspace{150pt}
 
 \tasknumber{4}\task{
     При какой скорости движения (в м/с) релятивистское сокращение длины движущегося тела
-    составит 30\%%?
+    составит 30\%?
+}
+\answer{
+    \begin{align*}
+        l_0 &= \frac{l}{\sqrt{1 - \frac {v^2}{c^2}}}
+        \implies 1 - \frac {v^2}{c^2} = \sqr{\frac l{l_0}}
+        \implies \frac v c = \sqrt{1 - \sqr{\frac l{l_0}}} \implies \\
+        \implies v &= c\sqrt{1 - \sqr{\frac l{l_0}}}
+        = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} \cdot \sqrt{1 - \sqr{\frac {l_0 - 0{,}30l_0} {l_0} } }
+        = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} \cdot \sqrt{1 - \sqr{1 - 0{,}30 } } \approx \\
+        &\approx 0.714c
+        \approx 2{,}142 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}
+        \approx 7{,}713 \cdot 10^{8}\,\frac{\text{км}}{\text{ч}}.
+    \end{align*}
 }
 \vspace{150pt}
 
@@ -641,11 +1241,31 @@
     Какова длина волны этой линии спектра?
     Постоянная Планка $h = 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с}$, скорость света $c = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}$.
 }
+\answer{
+    $
+        E = h\nu = h \frac c\lambda
+        \implies \lambda = \frac{hc}{E}
+            = \frac{
+                { 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с} } \cdot{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} }
+            }{ 5{,}05 \cdot 10^{-19}\,\text{Дж} }
+            = 3{,}94 \cdot 10^{-7}\,\text{м}.
+    $
+}
 \vspace{150pt}
 
 \tasknumber{6}\task{
     Излучение какой длины волны поглотил атом водорода, если полная энергия в атоме увеличилась на $3 \cdot 10^{-19}\,\text{Дж}$?
     Постоянная Планка $h = 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с}$, скорость света $c = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}$.
+}
+\answer{
+    $
+        E = h\nu = h \frac c\lambda
+        \implies \lambda = \frac{hc}{E}
+            = \frac{
+                { 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с} } \cdot{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} }
+            }{ 3 \cdot 10^{-19}\,\text{Дж} }
+            = 6{,}63 \cdot 10^{-7}\,\text{м}.
+    $
 }
 \vspace{150pt}
 
@@ -656,6 +1276,9 @@
     находящийся в 4-м возбуждённом состоянии?
     Отметьте все соответствующие переходы на рисунке и укажите,
     при каком переходе (среди отмеченных) частота излучённого фотона максимальна.
+}
+\answer{
+    $N = 6$, самая длинная линия
 }
 \vspace{150pt}
 
@@ -721,17 +1344,83 @@
     Протон движется со скоростью $0{,}6\,c$, где $c$~--- скорость света в вакууме.
     Каково при этом отношение кинетической энергии частицы $E_{\text{кин}}$ к его энергии покоя $E_0$?
 }
+\answer{
+    \begin{align*}
+        E &= \frac{E_0}{\sqrt{1 - \frac{v^2}{c^2}}}
+            \implies \frac{E}{E_0}
+                = \frac 1{\sqrt{1 - \frac{v^2}{c^2}}}
+                = \frac 1{\sqrt{1 - \sqr{0{,}6}}}
+                \approx 1.250
+        \\
+        E_{\text{кин}} &= E - E_0
+            \implies \frac{E_{\text{кин}}}{E_0}
+                = \frac{E}{E_0} - 1
+                = \frac 1{\sqrt{1 - \frac{v^2}{c^2}}} - 1
+                = \frac 1{\sqrt{1 - \sqr{0{,}6}}} - 1
+                \approx 0.250
+    \end{align*}
+}
 \vspace{150pt}
 
 \tasknumber{3}\task{
     Электрон движется со скоростью $0{,}85\,c$, где $c$~--- скорость света в вакууме.
     Определите его кинетическую энергию (в ответе приведите формулу и укажите численное значение).
 }
+\answer{
+    \begin{align*}
+        E &= \frac{ mc^2 }{ \sqrt{ 1 - \frac{v^2}{c^2} } }
+            \approx \frac{
+                9{,}1 \cdot 10^{-31}\,\text{кг} \cdot \sqr{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} }
+            }{
+                \sqrt{1 - 0{,}85^2}
+            } \approx 155{,}47 \cdot 10^{-15}\,\text{Дж},
+        \\
+        E_{\text{кин}} &= \frac{mc^2}{\sqrt{1 - \frac{v^2}{c^2}}} - mc^2
+            = mc^2 \cbr{
+                \frac 1{
+                    \sqrt{1 - \frac{v^2}{c^2} }
+                } - 1
+            }
+            \approx
+            \\
+            &\approx \cbr{
+                9{,}1 \cdot 10^{-31}\,\text{кг} \cdot \sqr{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} }
+            } \cdot \cbr{
+                \frac 1{ \sqrt{ 1 - 0{,}85^2 } } - 1
+            }
+            \approx 73{,}57 \cdot 10^{-15}\,\text{Дж},
+        \\
+        p &= \frac{
+                mv
+            }{
+                \sqrt{1 - \frac{v^2}{c^2} }
+            }
+            \approx \frac{
+                9{,}1 \cdot 10^{-31}\,\text{кг} \cdot 0{,}85 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}
+            }{
+                1 - 0{,}85^2
+            }
+            \approx 51{,}82 \cdot 10^{-23}\,\frac{\text{кг}\cdot\text{м}}{\text{с}}.
+    \end{align*}
+}
 \vspace{150pt}
 
 \tasknumber{4}\task{
     При какой скорости движения (в км/ч) релятивистское сокращение длины движущегося тела
-    составит 50\%%?
+    составит 50\%?
+}
+\answer{
+    \begin{align*}
+        l_0 &= \frac{l}{\sqrt{1 - \frac {v^2}{c^2}}}
+        \implies 1 - \frac {v^2}{c^2} = \sqr{\frac l{l_0}}
+        \implies \frac v c = \sqrt{1 - \sqr{\frac l{l_0}}} \implies \\
+        \implies v &= c\sqrt{1 - \sqr{\frac l{l_0}}}
+        = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} \cdot \sqrt{1 - \sqr{\frac {l_0 - 0{,}50l_0} {l_0} } }
+        = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} \cdot \sqrt{1 - \sqr{1 - 0{,}50 } } \approx \\
+        &\approx 0.866c
+        \approx 2{,}598 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}
+        \approx 9{,}353 \cdot 10^{8}\,\frac{\text{км}}{\text{ч}}.
+    \end{align*}
 }
 \vspace{150pt}
 
@@ -741,11 +1430,31 @@
     Какова длина волны этой линии спектра?
     Постоянная Планка $h = 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с}$, скорость света $c = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}$.
 }
+\answer{
+    $
+        E = h\nu = h \frac c\lambda
+        \implies \lambda = \frac{hc}{E}
+            = \frac{
+                { 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с} } \cdot{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} }
+            }{ 7{,}07 \cdot 10^{-19}\,\text{Дж} }
+            = 2{,}81 \cdot 10^{-7}\,\text{м}.
+    $
+}
 \vspace{150pt}
 
 \tasknumber{6}\task{
     Излучение какой длины волны поглотил атом водорода, если полная энергия в атоме увеличилась на $6 \cdot 10^{-19}\,\text{Дж}$?
     Постоянная Планка $h = 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с}$, скорость света $c = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}$.
+}
+\answer{
+    $
+        E = h\nu = h \frac c\lambda
+        \implies \lambda = \frac{hc}{E}
+            = \frac{
+                { 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с} } \cdot{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} }
+            }{ 6 \cdot 10^{-19}\,\text{Дж} }
+            = 3{,}31 \cdot 10^{-7}\,\text{м}.
+    $
 }
 \vspace{150pt}
 
@@ -756,6 +1465,9 @@
     находящийся в 3-м возбуждённом состоянии?
     Отметьте все соответствующие переходы на рисунке и укажите,
     при каком переходе (среди отмеченных) энергия излучённого фотона максимальна.
+}
+\answer{
+    $N = 3$, самая длинная линия
 }
 \vspace{150pt}
 
@@ -821,17 +1533,83 @@
     Протон движется со скоростью $0{,}8\,c$, где $c$~--- скорость света в вакууме.
     Каково при этом отношение полной энергии частицы $E$ к его энергии покоя $E_0$?
 }
+\answer{
+    \begin{align*}
+        E &= \frac{E_0}{\sqrt{1 - \frac{v^2}{c^2}}}
+            \implies \frac{E}{E_0}
+                = \frac 1{\sqrt{1 - \frac{v^2}{c^2}}}
+                = \frac 1{\sqrt{1 - \sqr{0{,}8}}}
+                \approx 1.667
+        \\
+        E_{\text{кин}} &= E - E_0
+            \implies \frac{E_{\text{кин}}}{E_0}
+                = \frac{E}{E_0} - 1
+                = \frac 1{\sqrt{1 - \frac{v^2}{c^2}}} - 1
+                = \frac 1{\sqrt{1 - \sqr{0{,}8}}} - 1
+                \approx 0.667
+    \end{align*}
+}
 \vspace{150pt}
 
 \tasknumber{3}\task{
     Протон движется со скоростью $0{,}65\,c$, где $c$~--- скорость света в вакууме.
     Определите его кинетическую энергию (в ответе приведите формулу и укажите численное значение).
 }
+\answer{
+    \begin{align*}
+        E &= \frac{ mc^2 }{ \sqrt{ 1 - \frac{v^2}{c^2} } }
+            \approx \frac{
+                1{,}67 \cdot 10^{-27}\,\text{кг} \cdot \sqr{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} }
+            }{
+                \sqrt{1 - 0{,}65^2}
+            } \approx 19{,}78 \cdot 10^{-11}\,\text{Дж},
+        \\
+        E_{\text{кин}} &= \frac{mc^2}{\sqrt{1 - \frac{v^2}{c^2}}} - mc^2
+            = mc^2 \cbr{
+                \frac 1{
+                    \sqrt{1 - \frac{v^2}{c^2} }
+                } - 1
+            }
+            \approx
+            \\
+            &\approx \cbr{
+                1{,}67 \cdot 10^{-27}\,\text{кг} \cdot \sqr{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} }
+            } \cdot \cbr{
+                \frac 1{ \sqrt{ 1 - 0{,}65^2 } } - 1
+            }
+            \approx 4{,}75 \cdot 10^{-11}\,\text{Дж},
+        \\
+        p &= \frac{
+                mv
+            }{
+                \sqrt{1 - \frac{v^2}{c^2} }
+            }
+            \approx \frac{
+                1{,}67 \cdot 10^{-27}\,\text{кг} \cdot 0{,}65 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}
+            }{
+                1 - 0{,}65^2
+            }
+            \approx 6{,}59 \cdot 10^{-19}\,\frac{\text{кг}\cdot\text{м}}{\text{с}}.
+    \end{align*}
+}
 \vspace{150pt}
 
 \tasknumber{4}\task{
     При какой скорости движения (в долях скорости света) релятивистское сокращение длины движущегося тела
-    составит 10\%%?
+    составит 10\%?
+}
+\answer{
+    \begin{align*}
+        l_0 &= \frac{l}{\sqrt{1 - \frac {v^2}{c^2}}}
+        \implies 1 - \frac {v^2}{c^2} = \sqr{\frac l{l_0}}
+        \implies \frac v c = \sqrt{1 - \sqr{\frac l{l_0}}} \implies \\
+        \implies v &= c\sqrt{1 - \sqr{\frac l{l_0}}}
+        = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} \cdot \sqrt{1 - \sqr{\frac {l_0 - 0{,}10l_0} {l_0} } }
+        = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} \cdot \sqrt{1 - \sqr{1 - 0{,}10 } } \approx \\
+        &\approx 0.436c
+        \approx 1{,}308 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}
+        \approx 4{,}708 \cdot 10^{8}\,\frac{\text{км}}{\text{ч}}.
+    \end{align*}
 }
 \vspace{150pt}
 
@@ -841,11 +1619,31 @@
     Какова длина волны этой линии спектра?
     Постоянная Планка $h = 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с}$, скорость света $c = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}$.
 }
+\answer{
+    $
+        E = h\nu = h \frac c\lambda
+        \implies \lambda = \frac{hc}{E}
+            = \frac{
+                { 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с} } \cdot{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} }
+            }{ 2{,}02 \cdot 10^{-19}\,\text{Дж} }
+            = 9{,}84 \cdot 10^{-7}\,\text{м}.
+    $
+}
 \vspace{150pt}
 
 \tasknumber{6}\task{
     Излучение какой длины волны поглотил атом водорода, если полная энергия в атоме увеличилась на $4 \cdot 10^{-19}\,\text{Дж}$?
     Постоянная Планка $h = 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с}$, скорость света $c = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}$.
+}
+\answer{
+    $
+        E = h\nu = h \frac c\lambda
+        \implies \lambda = \frac{hc}{E}
+            = \frac{
+                { 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с} } \cdot{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} }
+            }{ 4 \cdot 10^{-19}\,\text{Дж} }
+            = 4{,}97 \cdot 10^{-7}\,\text{м}.
+    $
 }
 \vspace{150pt}
 
@@ -856,6 +1654,9 @@
     находящийся в 5-м возбуждённом состоянии?
     Отметьте все соответствующие переходы на рисунке и укажите,
     при каком переходе (среди отмеченных) длина волны излучённого фотона минимальна.
+}
+\answer{
+    $N = 10$, самая длинная линия
 }
 \vspace{150pt}
 
@@ -921,17 +1722,83 @@
     Позитрон движется со скоростью $0{,}7\,c$, где $c$~--- скорость света в вакууме.
     Каково при этом отношение кинетической энергии частицы $E_{\text{кин}}$ к его энергии покоя $E_0$?
 }
+\answer{
+    \begin{align*}
+        E &= \frac{E_0}{\sqrt{1 - \frac{v^2}{c^2}}}
+            \implies \frac{E}{E_0}
+                = \frac 1{\sqrt{1 - \frac{v^2}{c^2}}}
+                = \frac 1{\sqrt{1 - \sqr{0{,}7}}}
+                \approx 1.400
+        \\
+        E_{\text{кин}} &= E - E_0
+            \implies \frac{E_{\text{кин}}}{E_0}
+                = \frac{E}{E_0} - 1
+                = \frac 1{\sqrt{1 - \frac{v^2}{c^2}}} - 1
+                = \frac 1{\sqrt{1 - \sqr{0{,}7}}} - 1
+                \approx 0.400
+    \end{align*}
+}
 \vspace{150pt}
 
 \tasknumber{3}\task{
     Электрон движется со скоростью $0{,}85\,c$, где $c$~--- скорость света в вакууме.
     Определите его кинетическую энергию (в ответе приведите формулу и укажите численное значение).
 }
+\answer{
+    \begin{align*}
+        E &= \frac{ mc^2 }{ \sqrt{ 1 - \frac{v^2}{c^2} } }
+            \approx \frac{
+                9{,}1 \cdot 10^{-31}\,\text{кг} \cdot \sqr{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} }
+            }{
+                \sqrt{1 - 0{,}85^2}
+            } \approx 155{,}47 \cdot 10^{-15}\,\text{Дж},
+        \\
+        E_{\text{кин}} &= \frac{mc^2}{\sqrt{1 - \frac{v^2}{c^2}}} - mc^2
+            = mc^2 \cbr{
+                \frac 1{
+                    \sqrt{1 - \frac{v^2}{c^2} }
+                } - 1
+            }
+            \approx
+            \\
+            &\approx \cbr{
+                9{,}1 \cdot 10^{-31}\,\text{кг} \cdot \sqr{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} }
+            } \cdot \cbr{
+                \frac 1{ \sqrt{ 1 - 0{,}85^2 } } - 1
+            }
+            \approx 73{,}57 \cdot 10^{-15}\,\text{Дж},
+        \\
+        p &= \frac{
+                mv
+            }{
+                \sqrt{1 - \frac{v^2}{c^2} }
+            }
+            \approx \frac{
+                9{,}1 \cdot 10^{-31}\,\text{кг} \cdot 0{,}85 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}
+            }{
+                1 - 0{,}85^2
+            }
+            \approx 51{,}82 \cdot 10^{-23}\,\frac{\text{кг}\cdot\text{м}}{\text{с}}.
+    \end{align*}
+}
 \vspace{150pt}
 
 \tasknumber{4}\task{
     При какой скорости движения (в км/ч) релятивистское сокращение длины движущегося тела
-    составит 50\%%?
+    составит 50\%?
+}
+\answer{
+    \begin{align*}
+        l_0 &= \frac{l}{\sqrt{1 - \frac {v^2}{c^2}}}
+        \implies 1 - \frac {v^2}{c^2} = \sqr{\frac l{l_0}}
+        \implies \frac v c = \sqrt{1 - \sqr{\frac l{l_0}}} \implies \\
+        \implies v &= c\sqrt{1 - \sqr{\frac l{l_0}}}
+        = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} \cdot \sqrt{1 - \sqr{\frac {l_0 - 0{,}50l_0} {l_0} } }
+        = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} \cdot \sqrt{1 - \sqr{1 - 0{,}50 } } \approx \\
+        &\approx 0.866c
+        \approx 2{,}598 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}
+        \approx 9{,}353 \cdot 10^{8}\,\frac{\text{км}}{\text{ч}}.
+    \end{align*}
 }
 \vspace{150pt}
 
@@ -941,11 +1808,31 @@
     Какова длина волны этой линии спектра?
     Постоянная Планка $h = 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с}$, скорость света $c = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}$.
 }
+\answer{
+    $
+        E = h\nu = h \frac c\lambda
+        \implies \lambda = \frac{hc}{E}
+            = \frac{
+                { 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с} } \cdot{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} }
+            }{ 7{,}07 \cdot 10^{-19}\,\text{Дж} }
+            = 2{,}81 \cdot 10^{-7}\,\text{м}.
+    $
+}
 \vspace{150pt}
 
 \tasknumber{6}\task{
     Излучение какой длины волны поглотил атом водорода, если полная энергия в атоме увеличилась на $3 \cdot 10^{-19}\,\text{Дж}$?
     Постоянная Планка $h = 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с}$, скорость света $c = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}$.
+}
+\answer{
+    $
+        E = h\nu = h \frac c\lambda
+        \implies \lambda = \frac{hc}{E}
+            = \frac{
+                { 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с} } \cdot{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} }
+            }{ 3 \cdot 10^{-19}\,\text{Дж} }
+            = 6{,}63 \cdot 10^{-7}\,\text{м}.
+    $
 }
 \vspace{150pt}
 
@@ -956,6 +1843,9 @@
     находящийся в 3-м возбуждённом состоянии?
     Отметьте все соответствующие переходы на рисунке и укажите,
     при каком переходе (среди отмеченных) энергия излучённого фотона максимальна.
+}
+\answer{
+    $N = 3$, самая длинная линия
 }
 \vspace{150pt}
 
@@ -1021,17 +1911,83 @@
     Позитрон движется со скоростью $0{,}8\,c$, где $c$~--- скорость света в вакууме.
     Каково при этом отношение кинетической энергии частицы $E_{\text{кин}}$ к его энергии покоя $E_0$?
 }
+\answer{
+    \begin{align*}
+        E &= \frac{E_0}{\sqrt{1 - \frac{v^2}{c^2}}}
+            \implies \frac{E}{E_0}
+                = \frac 1{\sqrt{1 - \frac{v^2}{c^2}}}
+                = \frac 1{\sqrt{1 - \sqr{0{,}8}}}
+                \approx 1.667
+        \\
+        E_{\text{кин}} &= E - E_0
+            \implies \frac{E_{\text{кин}}}{E_0}
+                = \frac{E}{E_0} - 1
+                = \frac 1{\sqrt{1 - \frac{v^2}{c^2}}} - 1
+                = \frac 1{\sqrt{1 - \sqr{0{,}8}}} - 1
+                \approx 0.667
+    \end{align*}
+}
 \vspace{150pt}
 
 \tasknumber{3}\task{
     Электрон движется со скоростью $0{,}65\,c$, где $c$~--- скорость света в вакууме.
     Определите его полную энергию (в ответе приведите формулу и укажите численное значение).
 }
+\answer{
+    \begin{align*}
+        E &= \frac{ mc^2 }{ \sqrt{ 1 - \frac{v^2}{c^2} } }
+            \approx \frac{
+                9{,}1 \cdot 10^{-31}\,\text{кг} \cdot \sqr{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} }
+            }{
+                \sqrt{1 - 0{,}65^2}
+            } \approx 107{,}77 \cdot 10^{-15}\,\text{Дж},
+        \\
+        E_{\text{кин}} &= \frac{mc^2}{\sqrt{1 - \frac{v^2}{c^2}}} - mc^2
+            = mc^2 \cbr{
+                \frac 1{
+                    \sqrt{1 - \frac{v^2}{c^2} }
+                } - 1
+            }
+            \approx
+            \\
+            &\approx \cbr{
+                9{,}1 \cdot 10^{-31}\,\text{кг} \cdot \sqr{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} }
+            } \cdot \cbr{
+                \frac 1{ \sqrt{ 1 - 0{,}65^2 } } - 1
+            }
+            \approx 25{,}87 \cdot 10^{-15}\,\text{Дж},
+        \\
+        p &= \frac{
+                mv
+            }{
+                \sqrt{1 - \frac{v^2}{c^2} }
+            }
+            \approx \frac{
+                9{,}1 \cdot 10^{-31}\,\text{кг} \cdot 0{,}65 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}
+            }{
+                1 - 0{,}65^2
+            }
+            \approx 35{,}92 \cdot 10^{-23}\,\frac{\text{кг}\cdot\text{м}}{\text{с}}.
+    \end{align*}
+}
 \vspace{150pt}
 
 \tasknumber{4}\task{
     При какой скорости движения (в м/с) релятивистское сокращение длины движущегося тела
-    составит 10\%%?
+    составит 10\%?
+}
+\answer{
+    \begin{align*}
+        l_0 &= \frac{l}{\sqrt{1 - \frac {v^2}{c^2}}}
+        \implies 1 - \frac {v^2}{c^2} = \sqr{\frac l{l_0}}
+        \implies \frac v c = \sqrt{1 - \sqr{\frac l{l_0}}} \implies \\
+        \implies v &= c\sqrt{1 - \sqr{\frac l{l_0}}}
+        = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} \cdot \sqrt{1 - \sqr{\frac {l_0 - 0{,}10l_0} {l_0} } }
+        = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} \cdot \sqrt{1 - \sqr{1 - 0{,}10 } } \approx \\
+        &\approx 0.436c
+        \approx 1{,}308 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}
+        \approx 4{,}708 \cdot 10^{8}\,\frac{\text{км}}{\text{ч}}.
+    \end{align*}
 }
 \vspace{150pt}
 
@@ -1041,11 +1997,31 @@
     Какова длина волны этой линии спектра?
     Постоянная Планка $h = 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с}$, скорость света $c = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}$.
 }
+\answer{
+    $
+        E = h\nu = h \frac c\lambda
+        \implies \lambda = \frac{hc}{E}
+            = \frac{
+                { 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с} } \cdot{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} }
+            }{ 0{,}55 \cdot 10^{-19}\,\text{Дж} }
+            = 36{,}14 \cdot 10^{-7}\,\text{м}.
+    $
+}
 \vspace{150pt}
 
 \tasknumber{6}\task{
     Излучение какой длины волны поглотил атом водорода, если полная энергия в атоме увеличилась на $6 \cdot 10^{-19}\,\text{Дж}$?
     Постоянная Планка $h = 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с}$, скорость света $c = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}$.
+}
+\answer{
+    $
+        E = h\nu = h \frac c\lambda
+        \implies \lambda = \frac{hc}{E}
+            = \frac{
+                { 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с} } \cdot{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} }
+            }{ 6 \cdot 10^{-19}\,\text{Дж} }
+            = 3{,}31 \cdot 10^{-7}\,\text{м}.
+    $
 }
 \vspace{150pt}
 
@@ -1056,6 +2032,9 @@
     находящийся в 5-м возбуждённом состоянии?
     Отметьте все соответствующие переходы на рисунке и укажите,
     при каком переходе (среди отмеченных) частота излучённого фотона минимальна.
+}
+\answer{
+    $N = 10$, самая короткая линия
 }
 \vspace{150pt}
 
@@ -1121,17 +2100,83 @@
     Протон движется со скоростью $0{,}7\,c$, где $c$~--- скорость света в вакууме.
     Каково при этом отношение кинетической энергии частицы $E_{\text{кин}}$ к его энергии покоя $E_0$?
 }
+\answer{
+    \begin{align*}
+        E &= \frac{E_0}{\sqrt{1 - \frac{v^2}{c^2}}}
+            \implies \frac{E}{E_0}
+                = \frac 1{\sqrt{1 - \frac{v^2}{c^2}}}
+                = \frac 1{\sqrt{1 - \sqr{0{,}7}}}
+                \approx 1.400
+        \\
+        E_{\text{кин}} &= E - E_0
+            \implies \frac{E_{\text{кин}}}{E_0}
+                = \frac{E}{E_0} - 1
+                = \frac 1{\sqrt{1 - \frac{v^2}{c^2}}} - 1
+                = \frac 1{\sqrt{1 - \sqr{0{,}7}}} - 1
+                \approx 0.400
+    \end{align*}
+}
 \vspace{150pt}
 
 \tasknumber{3}\task{
     Электрон движется со скоростью $0{,}85\,c$, где $c$~--- скорость света в вакууме.
     Определите его полную энергию (в ответе приведите формулу и укажите численное значение).
 }
+\answer{
+    \begin{align*}
+        E &= \frac{ mc^2 }{ \sqrt{ 1 - \frac{v^2}{c^2} } }
+            \approx \frac{
+                9{,}1 \cdot 10^{-31}\,\text{кг} \cdot \sqr{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} }
+            }{
+                \sqrt{1 - 0{,}85^2}
+            } \approx 155{,}47 \cdot 10^{-15}\,\text{Дж},
+        \\
+        E_{\text{кин}} &= \frac{mc^2}{\sqrt{1 - \frac{v^2}{c^2}}} - mc^2
+            = mc^2 \cbr{
+                \frac 1{
+                    \sqrt{1 - \frac{v^2}{c^2} }
+                } - 1
+            }
+            \approx
+            \\
+            &\approx \cbr{
+                9{,}1 \cdot 10^{-31}\,\text{кг} \cdot \sqr{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} }
+            } \cdot \cbr{
+                \frac 1{ \sqrt{ 1 - 0{,}85^2 } } - 1
+            }
+            \approx 73{,}57 \cdot 10^{-15}\,\text{Дж},
+        \\
+        p &= \frac{
+                mv
+            }{
+                \sqrt{1 - \frac{v^2}{c^2} }
+            }
+            \approx \frac{
+                9{,}1 \cdot 10^{-31}\,\text{кг} \cdot 0{,}85 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}
+            }{
+                1 - 0{,}85^2
+            }
+            \approx 51{,}82 \cdot 10^{-23}\,\frac{\text{кг}\cdot\text{м}}{\text{с}}.
+    \end{align*}
+}
 \vspace{150pt}
 
 \tasknumber{4}\task{
     При какой скорости движения (в м/с) релятивистское сокращение длины движущегося тела
-    составит 50\%%?
+    составит 50\%?
+}
+\answer{
+    \begin{align*}
+        l_0 &= \frac{l}{\sqrt{1 - \frac {v^2}{c^2}}}
+        \implies 1 - \frac {v^2}{c^2} = \sqr{\frac l{l_0}}
+        \implies \frac v c = \sqrt{1 - \sqr{\frac l{l_0}}} \implies \\
+        \implies v &= c\sqrt{1 - \sqr{\frac l{l_0}}}
+        = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} \cdot \sqrt{1 - \sqr{\frac {l_0 - 0{,}50l_0} {l_0} } }
+        = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} \cdot \sqrt{1 - \sqr{1 - 0{,}50 } } \approx \\
+        &\approx 0.866c
+        \approx 2{,}598 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}
+        \approx 9{,}353 \cdot 10^{8}\,\frac{\text{км}}{\text{ч}}.
+    \end{align*}
 }
 \vspace{150pt}
 
@@ -1141,11 +2186,31 @@
     Какова длина волны этой линии спектра?
     Постоянная Планка $h = 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с}$, скорость света $c = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}$.
 }
+\answer{
+    $
+        E = h\nu = h \frac c\lambda
+        \implies \lambda = \frac{hc}{E}
+            = \frac{
+                { 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с} } \cdot{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} }
+            }{ 7{,}07 \cdot 10^{-19}\,\text{Дж} }
+            = 2{,}81 \cdot 10^{-7}\,\text{м}.
+    $
+}
 \vspace{150pt}
 
 \tasknumber{6}\task{
     Излучение какой длины волны поглотил атом водорода, если полная энергия в атоме увеличилась на $3 \cdot 10^{-19}\,\text{Дж}$?
     Постоянная Планка $h = 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с}$, скорость света $c = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}$.
+}
+\answer{
+    $
+        E = h\nu = h \frac c\lambda
+        \implies \lambda = \frac{hc}{E}
+            = \frac{
+                { 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с} } \cdot{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} }
+            }{ 3 \cdot 10^{-19}\,\text{Дж} }
+            = 6{,}63 \cdot 10^{-7}\,\text{м}.
+    $
 }
 \vspace{150pt}
 
@@ -1156,6 +2221,9 @@
     находящийся в 3-м возбуждённом состоянии?
     Отметьте все соответствующие переходы на рисунке и укажите,
     при каком переходе (среди отмеченных) частота излучённого фотона минимальна.
+}
+\answer{
+    $N = 3$, самая короткая линия
 }
 \vspace{150pt}
 
@@ -1221,17 +2289,83 @@
     Протон движется со скоростью $0{,}7\,c$, где $c$~--- скорость света в вакууме.
     Каково при этом отношение полной энергии частицы $E$ к его энергии покоя $E_0$?
 }
+\answer{
+    \begin{align*}
+        E &= \frac{E_0}{\sqrt{1 - \frac{v^2}{c^2}}}
+            \implies \frac{E}{E_0}
+                = \frac 1{\sqrt{1 - \frac{v^2}{c^2}}}
+                = \frac 1{\sqrt{1 - \sqr{0{,}7}}}
+                \approx 1.400
+        \\
+        E_{\text{кин}} &= E - E_0
+            \implies \frac{E_{\text{кин}}}{E_0}
+                = \frac{E}{E_0} - 1
+                = \frac 1{\sqrt{1 - \frac{v^2}{c^2}}} - 1
+                = \frac 1{\sqrt{1 - \sqr{0{,}7}}} - 1
+                \approx 0.400
+    \end{align*}
+}
 \vspace{150pt}
 
 \tasknumber{3}\task{
     Протон движется со скоростью $0{,}85\,c$, где $c$~--- скорость света в вакууме.
     Определите его импульс (в ответе приведите формулу и укажите численное значение).
 }
+\answer{
+    \begin{align*}
+        E &= \frac{ mc^2 }{ \sqrt{ 1 - \frac{v^2}{c^2} } }
+            \approx \frac{
+                1{,}67 \cdot 10^{-27}\,\text{кг} \cdot \sqr{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} }
+            }{
+                \sqrt{1 - 0{,}85^2}
+            } \approx 28{,}53 \cdot 10^{-11}\,\text{Дж},
+        \\
+        E_{\text{кин}} &= \frac{mc^2}{\sqrt{1 - \frac{v^2}{c^2}}} - mc^2
+            = mc^2 \cbr{
+                \frac 1{
+                    \sqrt{1 - \frac{v^2}{c^2} }
+                } - 1
+            }
+            \approx
+            \\
+            &\approx \cbr{
+                1{,}67 \cdot 10^{-27}\,\text{кг} \cdot \sqr{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} }
+            } \cdot \cbr{
+                \frac 1{ \sqrt{ 1 - 0{,}85^2 } } - 1
+            }
+            \approx 13{,}5 \cdot 10^{-11}\,\text{Дж},
+        \\
+        p &= \frac{
+                mv
+            }{
+                \sqrt{1 - \frac{v^2}{c^2} }
+            }
+            \approx \frac{
+                1{,}67 \cdot 10^{-27}\,\text{кг} \cdot 0{,}85 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}
+            }{
+                1 - 0{,}85^2
+            }
+            \approx 9{,}51 \cdot 10^{-19}\,\frac{\text{кг}\cdot\text{м}}{\text{с}}.
+    \end{align*}
+}
 \vspace{150pt}
 
 \tasknumber{4}\task{
     При какой скорости движения (в м/с) релятивистское сокращение длины движущегося тела
-    составит 50\%%?
+    составит 50\%?
+}
+\answer{
+    \begin{align*}
+        l_0 &= \frac{l}{\sqrt{1 - \frac {v^2}{c^2}}}
+        \implies 1 - \frac {v^2}{c^2} = \sqr{\frac l{l_0}}
+        \implies \frac v c = \sqrt{1 - \sqr{\frac l{l_0}}} \implies \\
+        \implies v &= c\sqrt{1 - \sqr{\frac l{l_0}}}
+        = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} \cdot \sqrt{1 - \sqr{\frac {l_0 - 0{,}50l_0} {l_0} } }
+        = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} \cdot \sqrt{1 - \sqr{1 - 0{,}50 } } \approx \\
+        &\approx 0.866c
+        \approx 2{,}598 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}
+        \approx 9{,}353 \cdot 10^{8}\,\frac{\text{км}}{\text{ч}}.
+    \end{align*}
 }
 \vspace{150pt}
 
@@ -1241,11 +2375,31 @@
     Какова длина волны этой линии спектра?
     Постоянная Планка $h = 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с}$, скорость света $c = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}$.
 }
+\answer{
+    $
+        E = h\nu = h \frac c\lambda
+        \implies \lambda = \frac{hc}{E}
+            = \frac{
+                { 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с} } \cdot{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} }
+            }{ 4{,}04 \cdot 10^{-19}\,\text{Дж} }
+            = 4{,}92 \cdot 10^{-7}\,\text{м}.
+    $
+}
 \vspace{150pt}
 
 \tasknumber{6}\task{
     Излучение какой длины волны поглотил атом водорода, если полная энергия в атоме увеличилась на $2 \cdot 10^{-19}\,\text{Дж}$?
     Постоянная Планка $h = 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с}$, скорость света $c = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}$.
+}
+\answer{
+    $
+        E = h\nu = h \frac c\lambda
+        \implies \lambda = \frac{hc}{E}
+            = \frac{
+                { 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с} } \cdot{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} }
+            }{ 2 \cdot 10^{-19}\,\text{Дж} }
+            = 9{,}94 \cdot 10^{-7}\,\text{м}.
+    $
 }
 \vspace{150pt}
 
@@ -1256,6 +2410,9 @@
     находящийся в 3-м возбуждённом состоянии?
     Отметьте все соответствующие переходы на рисунке и укажите,
     при каком переходе (среди отмеченных) частота излучённого фотона максимальна.
+}
+\answer{
+    $N = 3$, самая длинная линия
 }
 \vspace{150pt}
 
@@ -1321,17 +2478,83 @@
     Позитрон движется со скоростью $0{,}7\,c$, где $c$~--- скорость света в вакууме.
     Каково при этом отношение полной энергии частицы $E$ к его энергии покоя $E_0$?
 }
+\answer{
+    \begin{align*}
+        E &= \frac{E_0}{\sqrt{1 - \frac{v^2}{c^2}}}
+            \implies \frac{E}{E_0}
+                = \frac 1{\sqrt{1 - \frac{v^2}{c^2}}}
+                = \frac 1{\sqrt{1 - \sqr{0{,}7}}}
+                \approx 1.400
+        \\
+        E_{\text{кин}} &= E - E_0
+            \implies \frac{E_{\text{кин}}}{E_0}
+                = \frac{E}{E_0} - 1
+                = \frac 1{\sqrt{1 - \frac{v^2}{c^2}}} - 1
+                = \frac 1{\sqrt{1 - \sqr{0{,}7}}} - 1
+                \approx 0.400
+    \end{align*}
+}
 \vspace{150pt}
 
 \tasknumber{3}\task{
     Протон движется со скоростью $0{,}85\,c$, где $c$~--- скорость света в вакууме.
     Определите его импульс (в ответе приведите формулу и укажите численное значение).
 }
+\answer{
+    \begin{align*}
+        E &= \frac{ mc^2 }{ \sqrt{ 1 - \frac{v^2}{c^2} } }
+            \approx \frac{
+                1{,}67 \cdot 10^{-27}\,\text{кг} \cdot \sqr{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} }
+            }{
+                \sqrt{1 - 0{,}85^2}
+            } \approx 28{,}53 \cdot 10^{-11}\,\text{Дж},
+        \\
+        E_{\text{кин}} &= \frac{mc^2}{\sqrt{1 - \frac{v^2}{c^2}}} - mc^2
+            = mc^2 \cbr{
+                \frac 1{
+                    \sqrt{1 - \frac{v^2}{c^2} }
+                } - 1
+            }
+            \approx
+            \\
+            &\approx \cbr{
+                1{,}67 \cdot 10^{-27}\,\text{кг} \cdot \sqr{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} }
+            } \cdot \cbr{
+                \frac 1{ \sqrt{ 1 - 0{,}85^2 } } - 1
+            }
+            \approx 13{,}5 \cdot 10^{-11}\,\text{Дж},
+        \\
+        p &= \frac{
+                mv
+            }{
+                \sqrt{1 - \frac{v^2}{c^2} }
+            }
+            \approx \frac{
+                1{,}67 \cdot 10^{-27}\,\text{кг} \cdot 0{,}85 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}
+            }{
+                1 - 0{,}85^2
+            }
+            \approx 9{,}51 \cdot 10^{-19}\,\frac{\text{кг}\cdot\text{м}}{\text{с}}.
+    \end{align*}
+}
 \vspace{150pt}
 
 \tasknumber{4}\task{
     При какой скорости движения (в м/с) релятивистское сокращение длины движущегося тела
-    составит 50\%%?
+    составит 50\%?
+}
+\answer{
+    \begin{align*}
+        l_0 &= \frac{l}{\sqrt{1 - \frac {v^2}{c^2}}}
+        \implies 1 - \frac {v^2}{c^2} = \sqr{\frac l{l_0}}
+        \implies \frac v c = \sqrt{1 - \sqr{\frac l{l_0}}} \implies \\
+        \implies v &= c\sqrt{1 - \sqr{\frac l{l_0}}}
+        = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} \cdot \sqrt{1 - \sqr{\frac {l_0 - 0{,}50l_0} {l_0} } }
+        = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} \cdot \sqrt{1 - \sqr{1 - 0{,}50 } } \approx \\
+        &\approx 0.866c
+        \approx 2{,}598 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}
+        \approx 9{,}353 \cdot 10^{8}\,\frac{\text{км}}{\text{ч}}.
+    \end{align*}
 }
 \vspace{150pt}
 
@@ -1341,11 +2564,31 @@
     Какова длина волны этой линии спектра?
     Постоянная Планка $h = 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с}$, скорость света $c = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}$.
 }
+\answer{
+    $
+        E = h\nu = h \frac c\lambda
+        \implies \lambda = \frac{hc}{E}
+            = \frac{
+                { 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с} } \cdot{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} }
+            }{ 4{,}04 \cdot 10^{-19}\,\text{Дж} }
+            = 4{,}92 \cdot 10^{-7}\,\text{м}.
+    $
+}
 \vspace{150pt}
 
 \tasknumber{6}\task{
     Излучение какой длины волны поглотил атом водорода, если полная энергия в атоме увеличилась на $2 \cdot 10^{-19}\,\text{Дж}$?
     Постоянная Планка $h = 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с}$, скорость света $c = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}$.
+}
+\answer{
+    $
+        E = h\nu = h \frac c\lambda
+        \implies \lambda = \frac{hc}{E}
+            = \frac{
+                { 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с} } \cdot{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} }
+            }{ 2 \cdot 10^{-19}\,\text{Дж} }
+            = 9{,}94 \cdot 10^{-7}\,\text{м}.
+    $
 }
 \vspace{150pt}
 
@@ -1356,6 +2599,9 @@
     находящийся в 3-м возбуждённом состоянии?
     Отметьте все соответствующие переходы на рисунке и укажите,
     при каком переходе (среди отмеченных) частота излучённого фотона максимальна.
+}
+\answer{
+    $N = 3$, самая длинная линия
 }
 \vspace{150pt}
 
@@ -1421,17 +2667,83 @@
     Протон движется со скоростью $0{,}8\,c$, где $c$~--- скорость света в вакууме.
     Каково при этом отношение кинетической энергии частицы $E_{\text{кин}}$ к его энергии покоя $E_0$?
 }
+\answer{
+    \begin{align*}
+        E &= \frac{E_0}{\sqrt{1 - \frac{v^2}{c^2}}}
+            \implies \frac{E}{E_0}
+                = \frac 1{\sqrt{1 - \frac{v^2}{c^2}}}
+                = \frac 1{\sqrt{1 - \sqr{0{,}8}}}
+                \approx 1.667
+        \\
+        E_{\text{кин}} &= E - E_0
+            \implies \frac{E_{\text{кин}}}{E_0}
+                = \frac{E}{E_0} - 1
+                = \frac 1{\sqrt{1 - \frac{v^2}{c^2}}} - 1
+                = \frac 1{\sqrt{1 - \sqr{0{,}8}}} - 1
+                \approx 0.667
+    \end{align*}
+}
 \vspace{150pt}
 
 \tasknumber{3}\task{
     Электрон движется со скоростью $0{,}65\,c$, где $c$~--- скорость света в вакууме.
     Определите его кинетическую энергию (в ответе приведите формулу и укажите численное значение).
 }
+\answer{
+    \begin{align*}
+        E &= \frac{ mc^2 }{ \sqrt{ 1 - \frac{v^2}{c^2} } }
+            \approx \frac{
+                9{,}1 \cdot 10^{-31}\,\text{кг} \cdot \sqr{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} }
+            }{
+                \sqrt{1 - 0{,}65^2}
+            } \approx 107{,}77 \cdot 10^{-15}\,\text{Дж},
+        \\
+        E_{\text{кин}} &= \frac{mc^2}{\sqrt{1 - \frac{v^2}{c^2}}} - mc^2
+            = mc^2 \cbr{
+                \frac 1{
+                    \sqrt{1 - \frac{v^2}{c^2} }
+                } - 1
+            }
+            \approx
+            \\
+            &\approx \cbr{
+                9{,}1 \cdot 10^{-31}\,\text{кг} \cdot \sqr{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} }
+            } \cdot \cbr{
+                \frac 1{ \sqrt{ 1 - 0{,}65^2 } } - 1
+            }
+            \approx 25{,}87 \cdot 10^{-15}\,\text{Дж},
+        \\
+        p &= \frac{
+                mv
+            }{
+                \sqrt{1 - \frac{v^2}{c^2} }
+            }
+            \approx \frac{
+                9{,}1 \cdot 10^{-31}\,\text{кг} \cdot 0{,}65 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}
+            }{
+                1 - 0{,}65^2
+            }
+            \approx 35{,}92 \cdot 10^{-23}\,\frac{\text{кг}\cdot\text{м}}{\text{с}}.
+    \end{align*}
+}
 \vspace{150pt}
 
 \tasknumber{4}\task{
     При какой скорости движения (в км/ч) релятивистское сокращение длины движущегося тела
-    составит 10\%%?
+    составит 10\%?
+}
+\answer{
+    \begin{align*}
+        l_0 &= \frac{l}{\sqrt{1 - \frac {v^2}{c^2}}}
+        \implies 1 - \frac {v^2}{c^2} = \sqr{\frac l{l_0}}
+        \implies \frac v c = \sqrt{1 - \sqr{\frac l{l_0}}} \implies \\
+        \implies v &= c\sqrt{1 - \sqr{\frac l{l_0}}}
+        = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} \cdot \sqrt{1 - \sqr{\frac {l_0 - 0{,}10l_0} {l_0} } }
+        = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} \cdot \sqrt{1 - \sqr{1 - 0{,}10 } } \approx \\
+        &\approx 0.436c
+        \approx 1{,}308 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}
+        \approx 4{,}708 \cdot 10^{8}\,\frac{\text{км}}{\text{ч}}.
+    \end{align*}
 }
 \vspace{150pt}
 
@@ -1441,11 +2753,31 @@
     Какова длина волны этой линии спектра?
     Постоянная Планка $h = 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с}$, скорость света $c = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}$.
 }
+\answer{
+    $
+        E = h\nu = h \frac c\lambda
+        \implies \lambda = \frac{hc}{E}
+            = \frac{
+                { 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с} } \cdot{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} }
+            }{ 0{,}55 \cdot 10^{-19}\,\text{Дж} }
+            = 36{,}14 \cdot 10^{-7}\,\text{м}.
+    $
+}
 \vspace{150pt}
 
 \tasknumber{6}\task{
     Излучение какой длины волны поглотил атом водорода, если полная энергия в атоме увеличилась на $6 \cdot 10^{-19}\,\text{Дж}$?
     Постоянная Планка $h = 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с}$, скорость света $c = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}$.
+}
+\answer{
+    $
+        E = h\nu = h \frac c\lambda
+        \implies \lambda = \frac{hc}{E}
+            = \frac{
+                { 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с} } \cdot{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} }
+            }{ 6 \cdot 10^{-19}\,\text{Дж} }
+            = 3{,}31 \cdot 10^{-7}\,\text{м}.
+    $
 }
 \vspace{150pt}
 
@@ -1456,6 +2788,9 @@
     находящийся в 5-м возбуждённом состоянии?
     Отметьте все соответствующие переходы на рисунке и укажите,
     при каком переходе (среди отмеченных) энергия излучённого фотона максимальна.
+}
+\answer{
+    $N = 10$, самая длинная линия
 }
 \vspace{150pt}
 
@@ -1521,17 +2856,83 @@
     Позитрон движется со скоростью $0{,}9\,c$, где $c$~--- скорость света в вакууме.
     Каково при этом отношение полной энергии частицы $E$ к его энергии покоя $E_0$?
 }
+\answer{
+    \begin{align*}
+        E &= \frac{E_0}{\sqrt{1 - \frac{v^2}{c^2}}}
+            \implies \frac{E}{E_0}
+                = \frac 1{\sqrt{1 - \frac{v^2}{c^2}}}
+                = \frac 1{\sqrt{1 - \sqr{0{,}9}}}
+                \approx 2.294
+        \\
+        E_{\text{кин}} &= E - E_0
+            \implies \frac{E_{\text{кин}}}{E_0}
+                = \frac{E}{E_0} - 1
+                = \frac 1{\sqrt{1 - \frac{v^2}{c^2}}} - 1
+                = \frac 1{\sqrt{1 - \sqr{0{,}9}}} - 1
+                \approx 1.294
+    \end{align*}
+}
 \vspace{150pt}
 
 \tasknumber{3}\task{
     Протон движется со скоростью $0{,}85\,c$, где $c$~--- скорость света в вакууме.
     Определите его импульс (в ответе приведите формулу и укажите численное значение).
 }
+\answer{
+    \begin{align*}
+        E &= \frac{ mc^2 }{ \sqrt{ 1 - \frac{v^2}{c^2} } }
+            \approx \frac{
+                1{,}67 \cdot 10^{-27}\,\text{кг} \cdot \sqr{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} }
+            }{
+                \sqrt{1 - 0{,}85^2}
+            } \approx 28{,}53 \cdot 10^{-11}\,\text{Дж},
+        \\
+        E_{\text{кин}} &= \frac{mc^2}{\sqrt{1 - \frac{v^2}{c^2}}} - mc^2
+            = mc^2 \cbr{
+                \frac 1{
+                    \sqrt{1 - \frac{v^2}{c^2} }
+                } - 1
+            }
+            \approx
+            \\
+            &\approx \cbr{
+                1{,}67 \cdot 10^{-27}\,\text{кг} \cdot \sqr{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} }
+            } \cdot \cbr{
+                \frac 1{ \sqrt{ 1 - 0{,}85^2 } } - 1
+            }
+            \approx 13{,}5 \cdot 10^{-11}\,\text{Дж},
+        \\
+        p &= \frac{
+                mv
+            }{
+                \sqrt{1 - \frac{v^2}{c^2} }
+            }
+            \approx \frac{
+                1{,}67 \cdot 10^{-27}\,\text{кг} \cdot 0{,}85 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}
+            }{
+                1 - 0{,}85^2
+            }
+            \approx 9{,}51 \cdot 10^{-19}\,\frac{\text{кг}\cdot\text{м}}{\text{с}}.
+    \end{align*}
+}
 \vspace{150pt}
 
 \tasknumber{4}\task{
     При какой скорости движения (в м/с) релятивистское сокращение длины движущегося тела
-    составит 50\%%?
+    составит 50\%?
+}
+\answer{
+    \begin{align*}
+        l_0 &= \frac{l}{\sqrt{1 - \frac {v^2}{c^2}}}
+        \implies 1 - \frac {v^2}{c^2} = \sqr{\frac l{l_0}}
+        \implies \frac v c = \sqrt{1 - \sqr{\frac l{l_0}}} \implies \\
+        \implies v &= c\sqrt{1 - \sqr{\frac l{l_0}}}
+        = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} \cdot \sqrt{1 - \sqr{\frac {l_0 - 0{,}50l_0} {l_0} } }
+        = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} \cdot \sqrt{1 - \sqr{1 - 0{,}50 } } \approx \\
+        &\approx 0.866c
+        \approx 2{,}598 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}
+        \approx 9{,}353 \cdot 10^{8}\,\frac{\text{км}}{\text{ч}}.
+    \end{align*}
 }
 \vspace{150pt}
 
@@ -1541,11 +2942,31 @@
     Какова длина волны этой линии спектра?
     Постоянная Планка $h = 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с}$, скорость света $c = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}$.
 }
+\answer{
+    $
+        E = h\nu = h \frac c\lambda
+        \implies \lambda = \frac{hc}{E}
+            = \frac{
+                { 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с} } \cdot{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} }
+            }{ 4{,}04 \cdot 10^{-19}\,\text{Дж} }
+            = 4{,}92 \cdot 10^{-7}\,\text{м}.
+    $
+}
 \vspace{150pt}
 
 \tasknumber{6}\task{
     Излучение какой длины волны поглотил атом водорода, если полная энергия в атоме увеличилась на $2 \cdot 10^{-19}\,\text{Дж}$?
     Постоянная Планка $h = 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с}$, скорость света $c = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}$.
+}
+\answer{
+    $
+        E = h\nu = h \frac c\lambda
+        \implies \lambda = \frac{hc}{E}
+            = \frac{
+                { 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с} } \cdot{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} }
+            }{ 2 \cdot 10^{-19}\,\text{Дж} }
+            = 9{,}94 \cdot 10^{-7}\,\text{м}.
+    $
 }
 \vspace{150pt}
 
@@ -1556,6 +2977,9 @@
     находящийся в 3-м возбуждённом состоянии?
     Отметьте все соответствующие переходы на рисунке и укажите,
     при каком переходе (среди отмеченных) частота излучённого фотона максимальна.
+}
+\answer{
+    $N = 3$, самая длинная линия
 }
 \vspace{150pt}
 
@@ -1621,17 +3045,83 @@
     Позитрон движется со скоростью $0{,}6\,c$, где $c$~--- скорость света в вакууме.
     Каково при этом отношение полной энергии частицы $E$ к его энергии покоя $E_0$?
 }
+\answer{
+    \begin{align*}
+        E &= \frac{E_0}{\sqrt{1 - \frac{v^2}{c^2}}}
+            \implies \frac{E}{E_0}
+                = \frac 1{\sqrt{1 - \frac{v^2}{c^2}}}
+                = \frac 1{\sqrt{1 - \sqr{0{,}6}}}
+                \approx 1.250
+        \\
+        E_{\text{кин}} &= E - E_0
+            \implies \frac{E_{\text{кин}}}{E_0}
+                = \frac{E}{E_0} - 1
+                = \frac 1{\sqrt{1 - \frac{v^2}{c^2}}} - 1
+                = \frac 1{\sqrt{1 - \sqr{0{,}6}}} - 1
+                \approx 0.250
+    \end{align*}
+}
 \vspace{150pt}
 
 \tasknumber{3}\task{
     Электрон движется со скоростью $0{,}75\,c$, где $c$~--- скорость света в вакууме.
     Определите его кинетическую энергию (в ответе приведите формулу и укажите численное значение).
 }
+\answer{
+    \begin{align*}
+        E &= \frac{ mc^2 }{ \sqrt{ 1 - \frac{v^2}{c^2} } }
+            \approx \frac{
+                9{,}1 \cdot 10^{-31}\,\text{кг} \cdot \sqr{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} }
+            }{
+                \sqrt{1 - 0{,}75^2}
+            } \approx 123{,}82 \cdot 10^{-15}\,\text{Дж},
+        \\
+        E_{\text{кин}} &= \frac{mc^2}{\sqrt{1 - \frac{v^2}{c^2}}} - mc^2
+            = mc^2 \cbr{
+                \frac 1{
+                    \sqrt{1 - \frac{v^2}{c^2} }
+                } - 1
+            }
+            \approx
+            \\
+            &\approx \cbr{
+                9{,}1 \cdot 10^{-31}\,\text{кг} \cdot \sqr{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} }
+            } \cdot \cbr{
+                \frac 1{ \sqrt{ 1 - 0{,}75^2 } } - 1
+            }
+            \approx 41{,}92 \cdot 10^{-15}\,\text{Дж},
+        \\
+        p &= \frac{
+                mv
+            }{
+                \sqrt{1 - \frac{v^2}{c^2} }
+            }
+            \approx \frac{
+                9{,}1 \cdot 10^{-31}\,\text{кг} \cdot 0{,}75 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}
+            }{
+                1 - 0{,}75^2
+            }
+            \approx 41{,}27 \cdot 10^{-23}\,\frac{\text{кг}\cdot\text{м}}{\text{с}}.
+    \end{align*}
+}
 \vspace{150pt}
 
 \tasknumber{4}\task{
     При какой скорости движения (в км/ч) релятивистское сокращение длины движущегося тела
-    составит 30\%%?
+    составит 30\%?
+}
+\answer{
+    \begin{align*}
+        l_0 &= \frac{l}{\sqrt{1 - \frac {v^2}{c^2}}}
+        \implies 1 - \frac {v^2}{c^2} = \sqr{\frac l{l_0}}
+        \implies \frac v c = \sqrt{1 - \sqr{\frac l{l_0}}} \implies \\
+        \implies v &= c\sqrt{1 - \sqr{\frac l{l_0}}}
+        = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} \cdot \sqrt{1 - \sqr{\frac {l_0 - 0{,}30l_0} {l_0} } }
+        = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} \cdot \sqrt{1 - \sqr{1 - 0{,}30 } } \approx \\
+        &\approx 0.714c
+        \approx 2{,}142 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}
+        \approx 7{,}713 \cdot 10^{8}\,\frac{\text{км}}{\text{ч}}.
+    \end{align*}
 }
 \vspace{150pt}
 
@@ -1641,11 +3131,31 @@
     Какова длина волны этой линии спектра?
     Постоянная Планка $h = 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с}$, скорость света $c = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}$.
 }
+\answer{
+    $
+        E = h\nu = h \frac c\lambda
+        \implies \lambda = \frac{hc}{E}
+            = \frac{
+                { 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с} } \cdot{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} }
+            }{ 1{,}01 \cdot 10^{-19}\,\text{Дж} }
+            = 19{,}68 \cdot 10^{-7}\,\text{м}.
+    $
+}
 \vspace{150pt}
 
 \tasknumber{6}\task{
     Излучение какой длины волны поглотил атом водорода, если полная энергия в атоме увеличилась на $4 \cdot 10^{-19}\,\text{Дж}$?
     Постоянная Планка $h = 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с}$, скорость света $c = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}$.
+}
+\answer{
+    $
+        E = h\nu = h \frac c\lambda
+        \implies \lambda = \frac{hc}{E}
+            = \frac{
+                { 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с} } \cdot{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} }
+            }{ 4 \cdot 10^{-19}\,\text{Дж} }
+            = 4{,}97 \cdot 10^{-7}\,\text{м}.
+    $
 }
 \vspace{150pt}
 
@@ -1656,6 +3166,9 @@
     находящийся в 4-м возбуждённом состоянии?
     Отметьте все соответствующие переходы на рисунке и укажите,
     при каком переходе (среди отмеченных) энергия излучённого фотона максимальна.
+}
+\answer{
+    $N = 6$, самая длинная линия
 }
 \vspace{150pt}
 
@@ -1721,17 +3234,83 @@
     Протон движется со скоростью $0{,}8\,c$, где $c$~--- скорость света в вакууме.
     Каково при этом отношение полной энергии частицы $E$ к его энергии покоя $E_0$?
 }
+\answer{
+    \begin{align*}
+        E &= \frac{E_0}{\sqrt{1 - \frac{v^2}{c^2}}}
+            \implies \frac{E}{E_0}
+                = \frac 1{\sqrt{1 - \frac{v^2}{c^2}}}
+                = \frac 1{\sqrt{1 - \sqr{0{,}8}}}
+                \approx 1.667
+        \\
+        E_{\text{кин}} &= E - E_0
+            \implies \frac{E_{\text{кин}}}{E_0}
+                = \frac{E}{E_0} - 1
+                = \frac 1{\sqrt{1 - \frac{v^2}{c^2}}} - 1
+                = \frac 1{\sqrt{1 - \sqr{0{,}8}}} - 1
+                \approx 0.667
+    \end{align*}
+}
 \vspace{150pt}
 
 \tasknumber{3}\task{
     Протон движется со скоростью $0{,}65\,c$, где $c$~--- скорость света в вакууме.
     Определите его полную энергию (в ответе приведите формулу и укажите численное значение).
 }
+\answer{
+    \begin{align*}
+        E &= \frac{ mc^2 }{ \sqrt{ 1 - \frac{v^2}{c^2} } }
+            \approx \frac{
+                1{,}67 \cdot 10^{-27}\,\text{кг} \cdot \sqr{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} }
+            }{
+                \sqrt{1 - 0{,}65^2}
+            } \approx 19{,}78 \cdot 10^{-11}\,\text{Дж},
+        \\
+        E_{\text{кин}} &= \frac{mc^2}{\sqrt{1 - \frac{v^2}{c^2}}} - mc^2
+            = mc^2 \cbr{
+                \frac 1{
+                    \sqrt{1 - \frac{v^2}{c^2} }
+                } - 1
+            }
+            \approx
+            \\
+            &\approx \cbr{
+                1{,}67 \cdot 10^{-27}\,\text{кг} \cdot \sqr{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} }
+            } \cdot \cbr{
+                \frac 1{ \sqrt{ 1 - 0{,}65^2 } } - 1
+            }
+            \approx 4{,}75 \cdot 10^{-11}\,\text{Дж},
+        \\
+        p &= \frac{
+                mv
+            }{
+                \sqrt{1 - \frac{v^2}{c^2} }
+            }
+            \approx \frac{
+                1{,}67 \cdot 10^{-27}\,\text{кг} \cdot 0{,}65 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}
+            }{
+                1 - 0{,}65^2
+            }
+            \approx 6{,}59 \cdot 10^{-19}\,\frac{\text{кг}\cdot\text{м}}{\text{с}}.
+    \end{align*}
+}
 \vspace{150pt}
 
 \tasknumber{4}\task{
     При какой скорости движения (в км/ч) релятивистское сокращение длины движущегося тела
-    составит 10\%%?
+    составит 10\%?
+}
+\answer{
+    \begin{align*}
+        l_0 &= \frac{l}{\sqrt{1 - \frac {v^2}{c^2}}}
+        \implies 1 - \frac {v^2}{c^2} = \sqr{\frac l{l_0}}
+        \implies \frac v c = \sqrt{1 - \sqr{\frac l{l_0}}} \implies \\
+        \implies v &= c\sqrt{1 - \sqr{\frac l{l_0}}}
+        = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} \cdot \sqrt{1 - \sqr{\frac {l_0 - 0{,}10l_0} {l_0} } }
+        = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} \cdot \sqrt{1 - \sqr{1 - 0{,}10 } } \approx \\
+        &\approx 0.436c
+        \approx 1{,}308 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}
+        \approx 4{,}708 \cdot 10^{8}\,\frac{\text{км}}{\text{ч}}.
+    \end{align*}
 }
 \vspace{150pt}
 
@@ -1741,11 +3320,31 @@
     Какова длина волны этой линии спектра?
     Постоянная Планка $h = 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с}$, скорость света $c = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}$.
 }
+\answer{
+    $
+        E = h\nu = h \frac c\lambda
+        \implies \lambda = \frac{hc}{E}
+            = \frac{
+                { 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с} } \cdot{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} }
+            }{ 2{,}02 \cdot 10^{-19}\,\text{Дж} }
+            = 9{,}84 \cdot 10^{-7}\,\text{м}.
+    $
+}
 \vspace{150pt}
 
 \tasknumber{6}\task{
     Излучение какой длины волны поглотил атом водорода, если полная энергия в атоме увеличилась на $4 \cdot 10^{-19}\,\text{Дж}$?
     Постоянная Планка $h = 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с}$, скорость света $c = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}$.
+}
+\answer{
+    $
+        E = h\nu = h \frac c\lambda
+        \implies \lambda = \frac{hc}{E}
+            = \frac{
+                { 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с} } \cdot{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} }
+            }{ 4 \cdot 10^{-19}\,\text{Дж} }
+            = 4{,}97 \cdot 10^{-7}\,\text{м}.
+    $
 }
 \vspace{150pt}
 
@@ -1756,6 +3355,9 @@
     находящийся в 5-м возбуждённом состоянии?
     Отметьте все соответствующие переходы на рисунке и укажите,
     при каком переходе (среди отмеченных) энергия излучённого фотона минимальна.
+}
+\answer{
+    $N = 10$, самая короткая линия
 }
 \vspace{150pt}
 
@@ -1821,17 +3423,83 @@
     Позитрон движется со скоростью $0{,}7\,c$, где $c$~--- скорость света в вакууме.
     Каково при этом отношение полной энергии частицы $E$ к его энергии покоя $E_0$?
 }
+\answer{
+    \begin{align*}
+        E &= \frac{E_0}{\sqrt{1 - \frac{v^2}{c^2}}}
+            \implies \frac{E}{E_0}
+                = \frac 1{\sqrt{1 - \frac{v^2}{c^2}}}
+                = \frac 1{\sqrt{1 - \sqr{0{,}7}}}
+                \approx 1.400
+        \\
+        E_{\text{кин}} &= E - E_0
+            \implies \frac{E_{\text{кин}}}{E_0}
+                = \frac{E}{E_0} - 1
+                = \frac 1{\sqrt{1 - \frac{v^2}{c^2}}} - 1
+                = \frac 1{\sqrt{1 - \sqr{0{,}7}}} - 1
+                \approx 0.400
+    \end{align*}
+}
 \vspace{150pt}
 
 \tasknumber{3}\task{
     Протон движется со скоростью $0{,}65\,c$, где $c$~--- скорость света в вакууме.
     Определите его полную энергию (в ответе приведите формулу и укажите численное значение).
 }
+\answer{
+    \begin{align*}
+        E &= \frac{ mc^2 }{ \sqrt{ 1 - \frac{v^2}{c^2} } }
+            \approx \frac{
+                1{,}67 \cdot 10^{-27}\,\text{кг} \cdot \sqr{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} }
+            }{
+                \sqrt{1 - 0{,}65^2}
+            } \approx 19{,}78 \cdot 10^{-11}\,\text{Дж},
+        \\
+        E_{\text{кин}} &= \frac{mc^2}{\sqrt{1 - \frac{v^2}{c^2}}} - mc^2
+            = mc^2 \cbr{
+                \frac 1{
+                    \sqrt{1 - \frac{v^2}{c^2} }
+                } - 1
+            }
+            \approx
+            \\
+            &\approx \cbr{
+                1{,}67 \cdot 10^{-27}\,\text{кг} \cdot \sqr{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} }
+            } \cdot \cbr{
+                \frac 1{ \sqrt{ 1 - 0{,}65^2 } } - 1
+            }
+            \approx 4{,}75 \cdot 10^{-11}\,\text{Дж},
+        \\
+        p &= \frac{
+                mv
+            }{
+                \sqrt{1 - \frac{v^2}{c^2} }
+            }
+            \approx \frac{
+                1{,}67 \cdot 10^{-27}\,\text{кг} \cdot 0{,}65 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}
+            }{
+                1 - 0{,}65^2
+            }
+            \approx 6{,}59 \cdot 10^{-19}\,\frac{\text{кг}\cdot\text{м}}{\text{с}}.
+    \end{align*}
+}
 \vspace{150pt}
 
 \tasknumber{4}\task{
     При какой скорости движения (в км/ч) релятивистское сокращение длины движущегося тела
-    составит 10\%%?
+    составит 10\%?
+}
+\answer{
+    \begin{align*}
+        l_0 &= \frac{l}{\sqrt{1 - \frac {v^2}{c^2}}}
+        \implies 1 - \frac {v^2}{c^2} = \sqr{\frac l{l_0}}
+        \implies \frac v c = \sqrt{1 - \sqr{\frac l{l_0}}} \implies \\
+        \implies v &= c\sqrt{1 - \sqr{\frac l{l_0}}}
+        = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} \cdot \sqrt{1 - \sqr{\frac {l_0 - 0{,}10l_0} {l_0} } }
+        = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} \cdot \sqrt{1 - \sqr{1 - 0{,}10 } } \approx \\
+        &\approx 0.436c
+        \approx 1{,}308 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}
+        \approx 4{,}708 \cdot 10^{8}\,\frac{\text{км}}{\text{ч}}.
+    \end{align*}
 }
 \vspace{150pt}
 
@@ -1841,11 +3509,31 @@
     Какова длина волны этой линии спектра?
     Постоянная Планка $h = 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с}$, скорость света $c = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}$.
 }
+\answer{
+    $
+        E = h\nu = h \frac c\lambda
+        \implies \lambda = \frac{hc}{E}
+            = \frac{
+                { 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с} } \cdot{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} }
+            }{ 2{,}02 \cdot 10^{-19}\,\text{Дж} }
+            = 9{,}84 \cdot 10^{-7}\,\text{м}.
+    $
+}
 \vspace{150pt}
 
 \tasknumber{6}\task{
     Излучение какой длины волны поглотил атом водорода, если полная энергия в атоме увеличилась на $2 \cdot 10^{-19}\,\text{Дж}$?
     Постоянная Планка $h = 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с}$, скорость света $c = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}$.
+}
+\answer{
+    $
+        E = h\nu = h \frac c\lambda
+        \implies \lambda = \frac{hc}{E}
+            = \frac{
+                { 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с} } \cdot{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} }
+            }{ 2 \cdot 10^{-19}\,\text{Дж} }
+            = 9{,}94 \cdot 10^{-7}\,\text{м}.
+    $
 }
 \vspace{150pt}
 
@@ -1856,6 +3544,9 @@
     находящийся в 5-м возбуждённом состоянии?
     Отметьте все соответствующие переходы на рисунке и укажите,
     при каком переходе (среди отмеченных) энергия излучённого фотона минимальна.
+}
+\answer{
+    $N = 10$, самая короткая линия
 }
 \vspace{150pt}
 
@@ -1921,17 +3612,83 @@
     Позитрон движется со скоростью $0{,}6\,c$, где $c$~--- скорость света в вакууме.
     Каково при этом отношение полной энергии частицы $E$ к его энергии покоя $E_0$?
 }
+\answer{
+    \begin{align*}
+        E &= \frac{E_0}{\sqrt{1 - \frac{v^2}{c^2}}}
+            \implies \frac{E}{E_0}
+                = \frac 1{\sqrt{1 - \frac{v^2}{c^2}}}
+                = \frac 1{\sqrt{1 - \sqr{0{,}6}}}
+                \approx 1.250
+        \\
+        E_{\text{кин}} &= E - E_0
+            \implies \frac{E_{\text{кин}}}{E_0}
+                = \frac{E}{E_0} - 1
+                = \frac 1{\sqrt{1 - \frac{v^2}{c^2}}} - 1
+                = \frac 1{\sqrt{1 - \sqr{0{,}6}}} - 1
+                \approx 0.250
+    \end{align*}
+}
 \vspace{150pt}
 
 \tasknumber{3}\task{
     Протон движется со скоростью $0{,}85\,c$, где $c$~--- скорость света в вакууме.
     Определите его кинетическую энергию (в ответе приведите формулу и укажите численное значение).
 }
+\answer{
+    \begin{align*}
+        E &= \frac{ mc^2 }{ \sqrt{ 1 - \frac{v^2}{c^2} } }
+            \approx \frac{
+                1{,}67 \cdot 10^{-27}\,\text{кг} \cdot \sqr{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} }
+            }{
+                \sqrt{1 - 0{,}85^2}
+            } \approx 28{,}53 \cdot 10^{-11}\,\text{Дж},
+        \\
+        E_{\text{кин}} &= \frac{mc^2}{\sqrt{1 - \frac{v^2}{c^2}}} - mc^2
+            = mc^2 \cbr{
+                \frac 1{
+                    \sqrt{1 - \frac{v^2}{c^2} }
+                } - 1
+            }
+            \approx
+            \\
+            &\approx \cbr{
+                1{,}67 \cdot 10^{-27}\,\text{кг} \cdot \sqr{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} }
+            } \cdot \cbr{
+                \frac 1{ \sqrt{ 1 - 0{,}85^2 } } - 1
+            }
+            \approx 13{,}5 \cdot 10^{-11}\,\text{Дж},
+        \\
+        p &= \frac{
+                mv
+            }{
+                \sqrt{1 - \frac{v^2}{c^2} }
+            }
+            \approx \frac{
+                1{,}67 \cdot 10^{-27}\,\text{кг} \cdot 0{,}85 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}
+            }{
+                1 - 0{,}85^2
+            }
+            \approx 9{,}51 \cdot 10^{-19}\,\frac{\text{кг}\cdot\text{м}}{\text{с}}.
+    \end{align*}
+}
 \vspace{150pt}
 
 \tasknumber{4}\task{
     При какой скорости движения (в долях скорости света) релятивистское сокращение длины движущегося тела
-    составит 50\%%?
+    составит 50\%?
+}
+\answer{
+    \begin{align*}
+        l_0 &= \frac{l}{\sqrt{1 - \frac {v^2}{c^2}}}
+        \implies 1 - \frac {v^2}{c^2} = \sqr{\frac l{l_0}}
+        \implies \frac v c = \sqrt{1 - \sqr{\frac l{l_0}}} \implies \\
+        \implies v &= c\sqrt{1 - \sqr{\frac l{l_0}}}
+        = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} \cdot \sqrt{1 - \sqr{\frac {l_0 - 0{,}50l_0} {l_0} } }
+        = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} \cdot \sqrt{1 - \sqr{1 - 0{,}50 } } \approx \\
+        &\approx 0.866c
+        \approx 2{,}598 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}
+        \approx 9{,}353 \cdot 10^{8}\,\frac{\text{км}}{\text{ч}}.
+    \end{align*}
 }
 \vspace{150pt}
 
@@ -1941,11 +3698,31 @@
     Какова длина волны этой линии спектра?
     Постоянная Планка $h = 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с}$, скорость света $c = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}$.
 }
+\answer{
+    $
+        E = h\nu = h \frac c\lambda
+        \implies \lambda = \frac{hc}{E}
+            = \frac{
+                { 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с} } \cdot{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} }
+            }{ 4{,}04 \cdot 10^{-19}\,\text{Дж} }
+            = 4{,}92 \cdot 10^{-7}\,\text{м}.
+    $
+}
 \vspace{150pt}
 
 \tasknumber{6}\task{
     Излучение какой длины волны поглотил атом водорода, если полная энергия в атоме увеличилась на $4 \cdot 10^{-19}\,\text{Дж}$?
     Постоянная Планка $h = 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с}$, скорость света $c = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}$.
+}
+\answer{
+    $
+        E = h\nu = h \frac c\lambda
+        \implies \lambda = \frac{hc}{E}
+            = \frac{
+                { 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с} } \cdot{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} }
+            }{ 4 \cdot 10^{-19}\,\text{Дж} }
+            = 4{,}97 \cdot 10^{-7}\,\text{м}.
+    $
 }
 \vspace{150pt}
 
@@ -1956,6 +3733,9 @@
     находящийся в 3-м возбуждённом состоянии?
     Отметьте все соответствующие переходы на рисунке и укажите,
     при каком переходе (среди отмеченных) длина волны излучённого фотона минимальна.
+}
+\answer{
+    $N = 3$, самая длинная линия
 }
 \vspace{150pt}
 
@@ -2021,17 +3801,83 @@
     Позитрон движется со скоростью $0{,}8\,c$, где $c$~--- скорость света в вакууме.
     Каково при этом отношение кинетической энергии частицы $E_{\text{кин}}$ к его энергии покоя $E_0$?
 }
+\answer{
+    \begin{align*}
+        E &= \frac{E_0}{\sqrt{1 - \frac{v^2}{c^2}}}
+            \implies \frac{E}{E_0}
+                = \frac 1{\sqrt{1 - \frac{v^2}{c^2}}}
+                = \frac 1{\sqrt{1 - \sqr{0{,}8}}}
+                \approx 1.667
+        \\
+        E_{\text{кин}} &= E - E_0
+            \implies \frac{E_{\text{кин}}}{E_0}
+                = \frac{E}{E_0} - 1
+                = \frac 1{\sqrt{1 - \frac{v^2}{c^2}}} - 1
+                = \frac 1{\sqrt{1 - \sqr{0{,}8}}} - 1
+                \approx 0.667
+    \end{align*}
+}
 \vspace{150pt}
 
 \tasknumber{3}\task{
     Электрон движется со скоростью $0{,}65\,c$, где $c$~--- скорость света в вакууме.
     Определите его полную энергию (в ответе приведите формулу и укажите численное значение).
 }
+\answer{
+    \begin{align*}
+        E &= \frac{ mc^2 }{ \sqrt{ 1 - \frac{v^2}{c^2} } }
+            \approx \frac{
+                9{,}1 \cdot 10^{-31}\,\text{кг} \cdot \sqr{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} }
+            }{
+                \sqrt{1 - 0{,}65^2}
+            } \approx 107{,}77 \cdot 10^{-15}\,\text{Дж},
+        \\
+        E_{\text{кин}} &= \frac{mc^2}{\sqrt{1 - \frac{v^2}{c^2}}} - mc^2
+            = mc^2 \cbr{
+                \frac 1{
+                    \sqrt{1 - \frac{v^2}{c^2} }
+                } - 1
+            }
+            \approx
+            \\
+            &\approx \cbr{
+                9{,}1 \cdot 10^{-31}\,\text{кг} \cdot \sqr{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} }
+            } \cdot \cbr{
+                \frac 1{ \sqrt{ 1 - 0{,}65^2 } } - 1
+            }
+            \approx 25{,}87 \cdot 10^{-15}\,\text{Дж},
+        \\
+        p &= \frac{
+                mv
+            }{
+                \sqrt{1 - \frac{v^2}{c^2} }
+            }
+            \approx \frac{
+                9{,}1 \cdot 10^{-31}\,\text{кг} \cdot 0{,}65 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}
+            }{
+                1 - 0{,}65^2
+            }
+            \approx 35{,}92 \cdot 10^{-23}\,\frac{\text{кг}\cdot\text{м}}{\text{с}}.
+    \end{align*}
+}
 \vspace{150pt}
 
 \tasknumber{4}\task{
     При какой скорости движения (в м/с) релятивистское сокращение длины движущегося тела
-    составит 10\%%?
+    составит 10\%?
+}
+\answer{
+    \begin{align*}
+        l_0 &= \frac{l}{\sqrt{1 - \frac {v^2}{c^2}}}
+        \implies 1 - \frac {v^2}{c^2} = \sqr{\frac l{l_0}}
+        \implies \frac v c = \sqrt{1 - \sqr{\frac l{l_0}}} \implies \\
+        \implies v &= c\sqrt{1 - \sqr{\frac l{l_0}}}
+        = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} \cdot \sqrt{1 - \sqr{\frac {l_0 - 0{,}10l_0} {l_0} } }
+        = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} \cdot \sqrt{1 - \sqr{1 - 0{,}10 } } \approx \\
+        &\approx 0.436c
+        \approx 1{,}308 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}
+        \approx 4{,}708 \cdot 10^{8}\,\frac{\text{км}}{\text{ч}}.
+    \end{align*}
 }
 \vspace{150pt}
 
@@ -2041,11 +3887,31 @@
     Какова длина волны этой линии спектра?
     Постоянная Планка $h = 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с}$, скорость света $c = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}$.
 }
+\answer{
+    $
+        E = h\nu = h \frac c\lambda
+        \implies \lambda = \frac{hc}{E}
+            = \frac{
+                { 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с} } \cdot{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} }
+            }{ 0{,}55 \cdot 10^{-19}\,\text{Дж} }
+            = 36{,}14 \cdot 10^{-7}\,\text{м}.
+    $
+}
 \vspace{150pt}
 
 \tasknumber{6}\task{
     Излучение какой длины волны поглотил атом водорода, если полная энергия в атоме увеличилась на $6 \cdot 10^{-19}\,\text{Дж}$?
     Постоянная Планка $h = 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с}$, скорость света $c = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}$.
+}
+\answer{
+    $
+        E = h\nu = h \frac c\lambda
+        \implies \lambda = \frac{hc}{E}
+            = \frac{
+                { 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с} } \cdot{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} }
+            }{ 6 \cdot 10^{-19}\,\text{Дж} }
+            = 3{,}31 \cdot 10^{-7}\,\text{м}.
+    $
 }
 \vspace{150pt}
 
@@ -2056,6 +3922,9 @@
     находящийся в 5-м возбуждённом состоянии?
     Отметьте все соответствующие переходы на рисунке и укажите,
     при каком переходе (среди отмеченных) частота излучённого фотона минимальна.
+}
+\answer{
+    $N = 10$, самая короткая линия
 }
 \vspace{150pt}
 
@@ -2121,17 +3990,83 @@
     Позитрон движется со скоростью $0{,}6\,c$, где $c$~--- скорость света в вакууме.
     Каково при этом отношение кинетической энергии частицы $E_{\text{кин}}$ к его энергии покоя $E_0$?
 }
+\answer{
+    \begin{align*}
+        E &= \frac{E_0}{\sqrt{1 - \frac{v^2}{c^2}}}
+            \implies \frac{E}{E_0}
+                = \frac 1{\sqrt{1 - \frac{v^2}{c^2}}}
+                = \frac 1{\sqrt{1 - \sqr{0{,}6}}}
+                \approx 1.250
+        \\
+        E_{\text{кин}} &= E - E_0
+            \implies \frac{E_{\text{кин}}}{E_0}
+                = \frac{E}{E_0} - 1
+                = \frac 1{\sqrt{1 - \frac{v^2}{c^2}}} - 1
+                = \frac 1{\sqrt{1 - \sqr{0{,}6}}} - 1
+                \approx 0.250
+    \end{align*}
+}
 \vspace{150pt}
 
 \tasknumber{3}\task{
     Электрон движется со скоростью $0{,}65\,c$, где $c$~--- скорость света в вакууме.
     Определите его полную энергию (в ответе приведите формулу и укажите численное значение).
 }
+\answer{
+    \begin{align*}
+        E &= \frac{ mc^2 }{ \sqrt{ 1 - \frac{v^2}{c^2} } }
+            \approx \frac{
+                9{,}1 \cdot 10^{-31}\,\text{кг} \cdot \sqr{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} }
+            }{
+                \sqrt{1 - 0{,}65^2}
+            } \approx 107{,}77 \cdot 10^{-15}\,\text{Дж},
+        \\
+        E_{\text{кин}} &= \frac{mc^2}{\sqrt{1 - \frac{v^2}{c^2}}} - mc^2
+            = mc^2 \cbr{
+                \frac 1{
+                    \sqrt{1 - \frac{v^2}{c^2} }
+                } - 1
+            }
+            \approx
+            \\
+            &\approx \cbr{
+                9{,}1 \cdot 10^{-31}\,\text{кг} \cdot \sqr{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} }
+            } \cdot \cbr{
+                \frac 1{ \sqrt{ 1 - 0{,}65^2 } } - 1
+            }
+            \approx 25{,}87 \cdot 10^{-15}\,\text{Дж},
+        \\
+        p &= \frac{
+                mv
+            }{
+                \sqrt{1 - \frac{v^2}{c^2} }
+            }
+            \approx \frac{
+                9{,}1 \cdot 10^{-31}\,\text{кг} \cdot 0{,}65 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}
+            }{
+                1 - 0{,}65^2
+            }
+            \approx 35{,}92 \cdot 10^{-23}\,\frac{\text{кг}\cdot\text{м}}{\text{с}}.
+    \end{align*}
+}
 \vspace{150pt}
 
 \tasknumber{4}\task{
     При какой скорости движения (в м/с) релятивистское сокращение длины движущегося тела
-    составит 10\%%?
+    составит 10\%?
+}
+\answer{
+    \begin{align*}
+        l_0 &= \frac{l}{\sqrt{1 - \frac {v^2}{c^2}}}
+        \implies 1 - \frac {v^2}{c^2} = \sqr{\frac l{l_0}}
+        \implies \frac v c = \sqrt{1 - \sqr{\frac l{l_0}}} \implies \\
+        \implies v &= c\sqrt{1 - \sqr{\frac l{l_0}}}
+        = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} \cdot \sqrt{1 - \sqr{\frac {l_0 - 0{,}10l_0} {l_0} } }
+        = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} \cdot \sqrt{1 - \sqr{1 - 0{,}10 } } \approx \\
+        &\approx 0.436c
+        \approx 1{,}308 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}
+        \approx 4{,}708 \cdot 10^{8}\,\frac{\text{км}}{\text{ч}}.
+    \end{align*}
 }
 \vspace{150pt}
 
@@ -2141,11 +4076,31 @@
     Какова длина волны этой линии спектра?
     Постоянная Планка $h = 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с}$, скорость света $c = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}$.
 }
+\answer{
+    $
+        E = h\nu = h \frac c\lambda
+        \implies \lambda = \frac{hc}{E}
+            = \frac{
+                { 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с} } \cdot{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} }
+            }{ 0{,}55 \cdot 10^{-19}\,\text{Дж} }
+            = 36{,}14 \cdot 10^{-7}\,\text{м}.
+    $
+}
 \vspace{150pt}
 
 \tasknumber{6}\task{
     Излучение какой длины волны поглотил атом водорода, если полная энергия в атоме увеличилась на $6 \cdot 10^{-19}\,\text{Дж}$?
     Постоянная Планка $h = 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с}$, скорость света $c = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}$.
+}
+\answer{
+    $
+        E = h\nu = h \frac c\lambda
+        \implies \lambda = \frac{hc}{E}
+            = \frac{
+                { 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с} } \cdot{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} }
+            }{ 6 \cdot 10^{-19}\,\text{Дж} }
+            = 3{,}31 \cdot 10^{-7}\,\text{м}.
+    $
 }
 \vspace{150pt}
 
@@ -2156,6 +4111,9 @@
     находящийся в 5-м возбуждённом состоянии?
     Отметьте все соответствующие переходы на рисунке и укажите,
     при каком переходе (среди отмеченных) частота излучённого фотона минимальна.
+}
+\answer{
+    $N = 10$, самая короткая линия
 }
 \vspace{150pt}
 
@@ -2221,17 +4179,83 @@
     Позитрон движется со скоростью $0{,}8\,c$, где $c$~--- скорость света в вакууме.
     Каково при этом отношение кинетической энергии частицы $E_{\text{кин}}$ к его энергии покоя $E_0$?
 }
+\answer{
+    \begin{align*}
+        E &= \frac{E_0}{\sqrt{1 - \frac{v^2}{c^2}}}
+            \implies \frac{E}{E_0}
+                = \frac 1{\sqrt{1 - \frac{v^2}{c^2}}}
+                = \frac 1{\sqrt{1 - \sqr{0{,}8}}}
+                \approx 1.667
+        \\
+        E_{\text{кин}} &= E - E_0
+            \implies \frac{E_{\text{кин}}}{E_0}
+                = \frac{E}{E_0} - 1
+                = \frac 1{\sqrt{1 - \frac{v^2}{c^2}}} - 1
+                = \frac 1{\sqrt{1 - \sqr{0{,}8}}} - 1
+                \approx 0.667
+    \end{align*}
+}
 \vspace{150pt}
 
 \tasknumber{3}\task{
     Протон движется со скоростью $0{,}75\,c$, где $c$~--- скорость света в вакууме.
     Определите его импульс (в ответе приведите формулу и укажите численное значение).
 }
+\answer{
+    \begin{align*}
+        E &= \frac{ mc^2 }{ \sqrt{ 1 - \frac{v^2}{c^2} } }
+            \approx \frac{
+                1{,}67 \cdot 10^{-27}\,\text{кг} \cdot \sqr{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} }
+            }{
+                \sqrt{1 - 0{,}75^2}
+            } \approx 22{,}72 \cdot 10^{-11}\,\text{Дж},
+        \\
+        E_{\text{кин}} &= \frac{mc^2}{\sqrt{1 - \frac{v^2}{c^2}}} - mc^2
+            = mc^2 \cbr{
+                \frac 1{
+                    \sqrt{1 - \frac{v^2}{c^2} }
+                } - 1
+            }
+            \approx
+            \\
+            &\approx \cbr{
+                1{,}67 \cdot 10^{-27}\,\text{кг} \cdot \sqr{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} }
+            } \cdot \cbr{
+                \frac 1{ \sqrt{ 1 - 0{,}75^2 } } - 1
+            }
+            \approx 7{,}69 \cdot 10^{-11}\,\text{Дж},
+        \\
+        p &= \frac{
+                mv
+            }{
+                \sqrt{1 - \frac{v^2}{c^2} }
+            }
+            \approx \frac{
+                1{,}67 \cdot 10^{-27}\,\text{кг} \cdot 0{,}75 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}
+            }{
+                1 - 0{,}75^2
+            }
+            \approx 7{,}57 \cdot 10^{-19}\,\frac{\text{кг}\cdot\text{м}}{\text{с}}.
+    \end{align*}
+}
 \vspace{150pt}
 
 \tasknumber{4}\task{
     При какой скорости движения (в м/с) релятивистское сокращение длины движущегося тела
-    составит 30\%%?
+    составит 30\%?
+}
+\answer{
+    \begin{align*}
+        l_0 &= \frac{l}{\sqrt{1 - \frac {v^2}{c^2}}}
+        \implies 1 - \frac {v^2}{c^2} = \sqr{\frac l{l_0}}
+        \implies \frac v c = \sqrt{1 - \sqr{\frac l{l_0}}} \implies \\
+        \implies v &= c\sqrt{1 - \sqr{\frac l{l_0}}}
+        = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} \cdot \sqrt{1 - \sqr{\frac {l_0 - 0{,}30l_0} {l_0} } }
+        = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} \cdot \sqrt{1 - \sqr{1 - 0{,}30 } } \approx \\
+        &\approx 0.714c
+        \approx 2{,}142 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}
+        \approx 7{,}713 \cdot 10^{8}\,\frac{\text{км}}{\text{ч}}.
+    \end{align*}
 }
 \vspace{150pt}
 
@@ -2241,11 +4265,31 @@
     Какова длина волны этой линии спектра?
     Постоянная Планка $h = 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с}$, скорость света $c = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}$.
 }
+\answer{
+    $
+        E = h\nu = h \frac c\lambda
+        \implies \lambda = \frac{hc}{E}
+            = \frac{
+                { 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с} } \cdot{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} }
+            }{ 5{,}05 \cdot 10^{-19}\,\text{Дж} }
+            = 3{,}94 \cdot 10^{-7}\,\text{м}.
+    $
+}
 \vspace{150pt}
 
 \tasknumber{6}\task{
     Излучение какой длины волны поглотил атом водорода, если полная энергия в атоме увеличилась на $6 \cdot 10^{-19}\,\text{Дж}$?
     Постоянная Планка $h = 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с}$, скорость света $c = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}$.
+}
+\answer{
+    $
+        E = h\nu = h \frac c\lambda
+        \implies \lambda = \frac{hc}{E}
+            = \frac{
+                { 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с} } \cdot{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} }
+            }{ 6 \cdot 10^{-19}\,\text{Дж} }
+            = 3{,}31 \cdot 10^{-7}\,\text{м}.
+    $
 }
 \vspace{150pt}
 
@@ -2256,6 +4300,9 @@
     находящийся в 4-м возбуждённом состоянии?
     Отметьте все соответствующие переходы на рисунке и укажите,
     при каком переходе (среди отмеченных) частота излучённого фотона максимальна.
+}
+\answer{
+    $N = 6$, самая длинная линия
 }
 \vspace{150pt}
 
@@ -2321,17 +4368,83 @@
     Протон движется со скоростью $0{,}8\,c$, где $c$~--- скорость света в вакууме.
     Каково при этом отношение полной энергии частицы $E$ к его энергии покоя $E_0$?
 }
+\answer{
+    \begin{align*}
+        E &= \frac{E_0}{\sqrt{1 - \frac{v^2}{c^2}}}
+            \implies \frac{E}{E_0}
+                = \frac 1{\sqrt{1 - \frac{v^2}{c^2}}}
+                = \frac 1{\sqrt{1 - \sqr{0{,}8}}}
+                \approx 1.667
+        \\
+        E_{\text{кин}} &= E - E_0
+            \implies \frac{E_{\text{кин}}}{E_0}
+                = \frac{E}{E_0} - 1
+                = \frac 1{\sqrt{1 - \frac{v^2}{c^2}}} - 1
+                = \frac 1{\sqrt{1 - \sqr{0{,}8}}} - 1
+                \approx 0.667
+    \end{align*}
+}
 \vspace{150pt}
 
 \tasknumber{3}\task{
     Протон движется со скоростью $0{,}65\,c$, где $c$~--- скорость света в вакууме.
     Определите его кинетическую энергию (в ответе приведите формулу и укажите численное значение).
 }
+\answer{
+    \begin{align*}
+        E &= \frac{ mc^2 }{ \sqrt{ 1 - \frac{v^2}{c^2} } }
+            \approx \frac{
+                1{,}67 \cdot 10^{-27}\,\text{кг} \cdot \sqr{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} }
+            }{
+                \sqrt{1 - 0{,}65^2}
+            } \approx 19{,}78 \cdot 10^{-11}\,\text{Дж},
+        \\
+        E_{\text{кин}} &= \frac{mc^2}{\sqrt{1 - \frac{v^2}{c^2}}} - mc^2
+            = mc^2 \cbr{
+                \frac 1{
+                    \sqrt{1 - \frac{v^2}{c^2} }
+                } - 1
+            }
+            \approx
+            \\
+            &\approx \cbr{
+                1{,}67 \cdot 10^{-27}\,\text{кг} \cdot \sqr{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} }
+            } \cdot \cbr{
+                \frac 1{ \sqrt{ 1 - 0{,}65^2 } } - 1
+            }
+            \approx 4{,}75 \cdot 10^{-11}\,\text{Дж},
+        \\
+        p &= \frac{
+                mv
+            }{
+                \sqrt{1 - \frac{v^2}{c^2} }
+            }
+            \approx \frac{
+                1{,}67 \cdot 10^{-27}\,\text{кг} \cdot 0{,}65 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}
+            }{
+                1 - 0{,}65^2
+            }
+            \approx 6{,}59 \cdot 10^{-19}\,\frac{\text{кг}\cdot\text{м}}{\text{с}}.
+    \end{align*}
+}
 \vspace{150pt}
 
 \tasknumber{4}\task{
     При какой скорости движения (в долях скорости света) релятивистское сокращение длины движущегося тела
-    составит 10\%%?
+    составит 10\%?
+}
+\answer{
+    \begin{align*}
+        l_0 &= \frac{l}{\sqrt{1 - \frac {v^2}{c^2}}}
+        \implies 1 - \frac {v^2}{c^2} = \sqr{\frac l{l_0}}
+        \implies \frac v c = \sqrt{1 - \sqr{\frac l{l_0}}} \implies \\
+        \implies v &= c\sqrt{1 - \sqr{\frac l{l_0}}}
+        = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} \cdot \sqrt{1 - \sqr{\frac {l_0 - 0{,}10l_0} {l_0} } }
+        = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} \cdot \sqrt{1 - \sqr{1 - 0{,}10 } } \approx \\
+        &\approx 0.436c
+        \approx 1{,}308 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}
+        \approx 4{,}708 \cdot 10^{8}\,\frac{\text{км}}{\text{ч}}.
+    \end{align*}
 }
 \vspace{150pt}
 
@@ -2341,11 +4454,31 @@
     Какова длина волны этой линии спектра?
     Постоянная Планка $h = 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с}$, скорость света $c = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}$.
 }
+\answer{
+    $
+        E = h\nu = h \frac c\lambda
+        \implies \lambda = \frac{hc}{E}
+            = \frac{
+                { 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с} } \cdot{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} }
+            }{ 2{,}02 \cdot 10^{-19}\,\text{Дж} }
+            = 9{,}84 \cdot 10^{-7}\,\text{м}.
+    $
+}
 \vspace{150pt}
 
 \tasknumber{6}\task{
     Излучение какой длины волны поглотил атом водорода, если полная энергия в атоме увеличилась на $4 \cdot 10^{-19}\,\text{Дж}$?
     Постоянная Планка $h = 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с}$, скорость света $c = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}$.
+}
+\answer{
+    $
+        E = h\nu = h \frac c\lambda
+        \implies \lambda = \frac{hc}{E}
+            = \frac{
+                { 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с} } \cdot{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} }
+            }{ 4 \cdot 10^{-19}\,\text{Дж} }
+            = 4{,}97 \cdot 10^{-7}\,\text{м}.
+    $
 }
 \vspace{150pt}
 
@@ -2356,6 +4489,9 @@
     находящийся в 5-м возбуждённом состоянии?
     Отметьте все соответствующие переходы на рисунке и укажите,
     при каком переходе (среди отмеченных) длина волны излучённого фотона минимальна.
+}
+\answer{
+    $N = 10$, самая длинная линия
 }
 \vspace{150pt}
 
@@ -2421,17 +4557,83 @@
     Протон движется со скоростью $0{,}9\,c$, где $c$~--- скорость света в вакууме.
     Каково при этом отношение полной энергии частицы $E$ к его энергии покоя $E_0$?
 }
+\answer{
+    \begin{align*}
+        E &= \frac{E_0}{\sqrt{1 - \frac{v^2}{c^2}}}
+            \implies \frac{E}{E_0}
+                = \frac 1{\sqrt{1 - \frac{v^2}{c^2}}}
+                = \frac 1{\sqrt{1 - \sqr{0{,}9}}}
+                \approx 2.294
+        \\
+        E_{\text{кин}} &= E - E_0
+            \implies \frac{E_{\text{кин}}}{E_0}
+                = \frac{E}{E_0} - 1
+                = \frac 1{\sqrt{1 - \frac{v^2}{c^2}}} - 1
+                = \frac 1{\sqrt{1 - \sqr{0{,}9}}} - 1
+                \approx 1.294
+    \end{align*}
+}
 \vspace{150pt}
 
 \tasknumber{3}\task{
     Протон движется со скоростью $0{,}85\,c$, где $c$~--- скорость света в вакууме.
     Определите его полную энергию (в ответе приведите формулу и укажите численное значение).
 }
+\answer{
+    \begin{align*}
+        E &= \frac{ mc^2 }{ \sqrt{ 1 - \frac{v^2}{c^2} } }
+            \approx \frac{
+                1{,}67 \cdot 10^{-27}\,\text{кг} \cdot \sqr{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} }
+            }{
+                \sqrt{1 - 0{,}85^2}
+            } \approx 28{,}53 \cdot 10^{-11}\,\text{Дж},
+        \\
+        E_{\text{кин}} &= \frac{mc^2}{\sqrt{1 - \frac{v^2}{c^2}}} - mc^2
+            = mc^2 \cbr{
+                \frac 1{
+                    \sqrt{1 - \frac{v^2}{c^2} }
+                } - 1
+            }
+            \approx
+            \\
+            &\approx \cbr{
+                1{,}67 \cdot 10^{-27}\,\text{кг} \cdot \sqr{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} }
+            } \cdot \cbr{
+                \frac 1{ \sqrt{ 1 - 0{,}85^2 } } - 1
+            }
+            \approx 13{,}5 \cdot 10^{-11}\,\text{Дж},
+        \\
+        p &= \frac{
+                mv
+            }{
+                \sqrt{1 - \frac{v^2}{c^2} }
+            }
+            \approx \frac{
+                1{,}67 \cdot 10^{-27}\,\text{кг} \cdot 0{,}85 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}
+            }{
+                1 - 0{,}85^2
+            }
+            \approx 9{,}51 \cdot 10^{-19}\,\frac{\text{кг}\cdot\text{м}}{\text{с}}.
+    \end{align*}
+}
 \vspace{150pt}
 
 \tasknumber{4}\task{
     При какой скорости движения (в км/ч) релятивистское сокращение длины движущегося тела
-    составит 50\%%?
+    составит 50\%?
+}
+\answer{
+    \begin{align*}
+        l_0 &= \frac{l}{\sqrt{1 - \frac {v^2}{c^2}}}
+        \implies 1 - \frac {v^2}{c^2} = \sqr{\frac l{l_0}}
+        \implies \frac v c = \sqrt{1 - \sqr{\frac l{l_0}}} \implies \\
+        \implies v &= c\sqrt{1 - \sqr{\frac l{l_0}}}
+        = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} \cdot \sqrt{1 - \sqr{\frac {l_0 - 0{,}50l_0} {l_0} } }
+        = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} \cdot \sqrt{1 - \sqr{1 - 0{,}50 } } \approx \\
+        &\approx 0.866c
+        \approx 2{,}598 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}
+        \approx 9{,}353 \cdot 10^{8}\,\frac{\text{км}}{\text{ч}}.
+    \end{align*}
 }
 \vspace{150pt}
 
@@ -2441,11 +4643,31 @@
     Какова длина волны этой линии спектра?
     Постоянная Планка $h = 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с}$, скорость света $c = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}$.
 }
+\answer{
+    $
+        E = h\nu = h \frac c\lambda
+        \implies \lambda = \frac{hc}{E}
+            = \frac{
+                { 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с} } \cdot{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} }
+            }{ 4{,}04 \cdot 10^{-19}\,\text{Дж} }
+            = 4{,}92 \cdot 10^{-7}\,\text{м}.
+    $
+}
 \vspace{150pt}
 
 \tasknumber{6}\task{
     Излучение какой длины волны поглотил атом водорода, если полная энергия в атоме увеличилась на $2 \cdot 10^{-19}\,\text{Дж}$?
     Постоянная Планка $h = 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с}$, скорость света $c = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}$.
+}
+\answer{
+    $
+        E = h\nu = h \frac c\lambda
+        \implies \lambda = \frac{hc}{E}
+            = \frac{
+                { 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с} } \cdot{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} }
+            }{ 2 \cdot 10^{-19}\,\text{Дж} }
+            = 9{,}94 \cdot 10^{-7}\,\text{м}.
+    $
 }
 \vspace{150pt}
 
@@ -2456,6 +4678,9 @@
     находящийся в 3-м возбуждённом состоянии?
     Отметьте все соответствующие переходы на рисунке и укажите,
     при каком переходе (среди отмеченных) энергия излучённого фотона минимальна.
+}
+\answer{
+    $N = 3$, самая короткая линия
 }
 \vspace{150pt}
 
@@ -2521,17 +4746,83 @@
     Протон движется со скоростью $0{,}6\,c$, где $c$~--- скорость света в вакууме.
     Каково при этом отношение кинетической энергии частицы $E_{\text{кин}}$ к его энергии покоя $E_0$?
 }
+\answer{
+    \begin{align*}
+        E &= \frac{E_0}{\sqrt{1 - \frac{v^2}{c^2}}}
+            \implies \frac{E}{E_0}
+                = \frac 1{\sqrt{1 - \frac{v^2}{c^2}}}
+                = \frac 1{\sqrt{1 - \sqr{0{,}6}}}
+                \approx 1.250
+        \\
+        E_{\text{кин}} &= E - E_0
+            \implies \frac{E_{\text{кин}}}{E_0}
+                = \frac{E}{E_0} - 1
+                = \frac 1{\sqrt{1 - \frac{v^2}{c^2}}} - 1
+                = \frac 1{\sqrt{1 - \sqr{0{,}6}}} - 1
+                \approx 0.250
+    \end{align*}
+}
 \vspace{150pt}
 
 \tasknumber{3}\task{
     Протон движется со скоростью $0{,}75\,c$, где $c$~--- скорость света в вакууме.
     Определите его импульс (в ответе приведите формулу и укажите численное значение).
 }
+\answer{
+    \begin{align*}
+        E &= \frac{ mc^2 }{ \sqrt{ 1 - \frac{v^2}{c^2} } }
+            \approx \frac{
+                1{,}67 \cdot 10^{-27}\,\text{кг} \cdot \sqr{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} }
+            }{
+                \sqrt{1 - 0{,}75^2}
+            } \approx 22{,}72 \cdot 10^{-11}\,\text{Дж},
+        \\
+        E_{\text{кин}} &= \frac{mc^2}{\sqrt{1 - \frac{v^2}{c^2}}} - mc^2
+            = mc^2 \cbr{
+                \frac 1{
+                    \sqrt{1 - \frac{v^2}{c^2} }
+                } - 1
+            }
+            \approx
+            \\
+            &\approx \cbr{
+                1{,}67 \cdot 10^{-27}\,\text{кг} \cdot \sqr{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} }
+            } \cdot \cbr{
+                \frac 1{ \sqrt{ 1 - 0{,}75^2 } } - 1
+            }
+            \approx 7{,}69 \cdot 10^{-11}\,\text{Дж},
+        \\
+        p &= \frac{
+                mv
+            }{
+                \sqrt{1 - \frac{v^2}{c^2} }
+            }
+            \approx \frac{
+                1{,}67 \cdot 10^{-27}\,\text{кг} \cdot 0{,}75 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}
+            }{
+                1 - 0{,}75^2
+            }
+            \approx 7{,}57 \cdot 10^{-19}\,\frac{\text{кг}\cdot\text{м}}{\text{с}}.
+    \end{align*}
+}
 \vspace{150pt}
 
 \tasknumber{4}\task{
     При какой скорости движения (в м/с) релятивистское сокращение длины движущегося тела
-    составит 30\%%?
+    составит 30\%?
+}
+\answer{
+    \begin{align*}
+        l_0 &= \frac{l}{\sqrt{1 - \frac {v^2}{c^2}}}
+        \implies 1 - \frac {v^2}{c^2} = \sqr{\frac l{l_0}}
+        \implies \frac v c = \sqrt{1 - \sqr{\frac l{l_0}}} \implies \\
+        \implies v &= c\sqrt{1 - \sqr{\frac l{l_0}}}
+        = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} \cdot \sqrt{1 - \sqr{\frac {l_0 - 0{,}30l_0} {l_0} } }
+        = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} \cdot \sqrt{1 - \sqr{1 - 0{,}30 } } \approx \\
+        &\approx 0.714c
+        \approx 2{,}142 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}
+        \approx 7{,}713 \cdot 10^{8}\,\frac{\text{км}}{\text{ч}}.
+    \end{align*}
 }
 \vspace{150pt}
 
@@ -2541,11 +4832,31 @@
     Какова длина волны этой линии спектра?
     Постоянная Планка $h = 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с}$, скорость света $c = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}$.
 }
+\answer{
+    $
+        E = h\nu = h \frac c\lambda
+        \implies \lambda = \frac{hc}{E}
+            = \frac{
+                { 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с} } \cdot{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} }
+            }{ 5{,}05 \cdot 10^{-19}\,\text{Дж} }
+            = 3{,}94 \cdot 10^{-7}\,\text{м}.
+    $
+}
 \vspace{150pt}
 
 \tasknumber{6}\task{
     Излучение какой длины волны поглотил атом водорода, если полная энергия в атоме увеличилась на $6 \cdot 10^{-19}\,\text{Дж}$?
     Постоянная Планка $h = 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с}$, скорость света $c = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}$.
+}
+\answer{
+    $
+        E = h\nu = h \frac c\lambda
+        \implies \lambda = \frac{hc}{E}
+            = \frac{
+                { 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с} } \cdot{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} }
+            }{ 6 \cdot 10^{-19}\,\text{Дж} }
+            = 3{,}31 \cdot 10^{-7}\,\text{м}.
+    $
 }
 \vspace{150pt}
 
@@ -2556,6 +4867,9 @@
     находящийся в 4-м возбуждённом состоянии?
     Отметьте все соответствующие переходы на рисунке и укажите,
     при каком переходе (среди отмеченных) частота излучённого фотона максимальна.
+}
+\answer{
+    $N = 6$, самая длинная линия
 }
 \vspace{150pt}
 
@@ -2621,17 +4935,83 @@
     Позитрон движется со скоростью $0{,}9\,c$, где $c$~--- скорость света в вакууме.
     Каково при этом отношение полной энергии частицы $E$ к его энергии покоя $E_0$?
 }
+\answer{
+    \begin{align*}
+        E &= \frac{E_0}{\sqrt{1 - \frac{v^2}{c^2}}}
+            \implies \frac{E}{E_0}
+                = \frac 1{\sqrt{1 - \frac{v^2}{c^2}}}
+                = \frac 1{\sqrt{1 - \sqr{0{,}9}}}
+                \approx 2.294
+        \\
+        E_{\text{кин}} &= E - E_0
+            \implies \frac{E_{\text{кин}}}{E_0}
+                = \frac{E}{E_0} - 1
+                = \frac 1{\sqrt{1 - \frac{v^2}{c^2}}} - 1
+                = \frac 1{\sqrt{1 - \sqr{0{,}9}}} - 1
+                \approx 1.294
+    \end{align*}
+}
 \vspace{150pt}
 
 \tasknumber{3}\task{
     Протон движется со скоростью $0{,}85\,c$, где $c$~--- скорость света в вакууме.
     Определите его кинетическую энергию (в ответе приведите формулу и укажите численное значение).
 }
+\answer{
+    \begin{align*}
+        E &= \frac{ mc^2 }{ \sqrt{ 1 - \frac{v^2}{c^2} } }
+            \approx \frac{
+                1{,}67 \cdot 10^{-27}\,\text{кг} \cdot \sqr{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} }
+            }{
+                \sqrt{1 - 0{,}85^2}
+            } \approx 28{,}53 \cdot 10^{-11}\,\text{Дж},
+        \\
+        E_{\text{кин}} &= \frac{mc^2}{\sqrt{1 - \frac{v^2}{c^2}}} - mc^2
+            = mc^2 \cbr{
+                \frac 1{
+                    \sqrt{1 - \frac{v^2}{c^2} }
+                } - 1
+            }
+            \approx
+            \\
+            &\approx \cbr{
+                1{,}67 \cdot 10^{-27}\,\text{кг} \cdot \sqr{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} }
+            } \cdot \cbr{
+                \frac 1{ \sqrt{ 1 - 0{,}85^2 } } - 1
+            }
+            \approx 13{,}5 \cdot 10^{-11}\,\text{Дж},
+        \\
+        p &= \frac{
+                mv
+            }{
+                \sqrt{1 - \frac{v^2}{c^2} }
+            }
+            \approx \frac{
+                1{,}67 \cdot 10^{-27}\,\text{кг} \cdot 0{,}85 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}
+            }{
+                1 - 0{,}85^2
+            }
+            \approx 9{,}51 \cdot 10^{-19}\,\frac{\text{кг}\cdot\text{м}}{\text{с}}.
+    \end{align*}
+}
 \vspace{150pt}
 
 \tasknumber{4}\task{
     При какой скорости движения (в долях скорости света) релятивистское сокращение длины движущегося тела
-    составит 50\%%?
+    составит 50\%?
+}
+\answer{
+    \begin{align*}
+        l_0 &= \frac{l}{\sqrt{1 - \frac {v^2}{c^2}}}
+        \implies 1 - \frac {v^2}{c^2} = \sqr{\frac l{l_0}}
+        \implies \frac v c = \sqrt{1 - \sqr{\frac l{l_0}}} \implies \\
+        \implies v &= c\sqrt{1 - \sqr{\frac l{l_0}}}
+        = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} \cdot \sqrt{1 - \sqr{\frac {l_0 - 0{,}50l_0} {l_0} } }
+        = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} \cdot \sqrt{1 - \sqr{1 - 0{,}50 } } \approx \\
+        &\approx 0.866c
+        \approx 2{,}598 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}
+        \approx 9{,}353 \cdot 10^{8}\,\frac{\text{км}}{\text{ч}}.
+    \end{align*}
 }
 \vspace{150pt}
 
@@ -2641,11 +5021,31 @@
     Какова длина волны этой линии спектра?
     Постоянная Планка $h = 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с}$, скорость света $c = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}$.
 }
+\answer{
+    $
+        E = h\nu = h \frac c\lambda
+        \implies \lambda = \frac{hc}{E}
+            = \frac{
+                { 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с} } \cdot{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} }
+            }{ 4{,}04 \cdot 10^{-19}\,\text{Дж} }
+            = 4{,}92 \cdot 10^{-7}\,\text{м}.
+    $
+}
 \vspace{150pt}
 
 \tasknumber{6}\task{
     Излучение какой длины волны поглотил атом водорода, если полная энергия в атоме увеличилась на $2 \cdot 10^{-19}\,\text{Дж}$?
     Постоянная Планка $h = 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с}$, скорость света $c = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}$.
+}
+\answer{
+    $
+        E = h\nu = h \frac c\lambda
+        \implies \lambda = \frac{hc}{E}
+            = \frac{
+                { 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с} } \cdot{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} }
+            }{ 2 \cdot 10^{-19}\,\text{Дж} }
+            = 9{,}94 \cdot 10^{-7}\,\text{м}.
+    $
 }
 \vspace{150pt}
 
@@ -2656,6 +5056,9 @@
     находящийся в 3-м возбуждённом состоянии?
     Отметьте все соответствующие переходы на рисунке и укажите,
     при каком переходе (среди отмеченных) длина волны излучённого фотона минимальна.
+}
+\answer{
+    $N = 3$, самая длинная линия
 }
 \vspace{150pt}
 
@@ -2721,17 +5124,83 @@
     Позитрон движется со скоростью $0{,}8\,c$, где $c$~--- скорость света в вакууме.
     Каково при этом отношение полной энергии частицы $E$ к его энергии покоя $E_0$?
 }
+\answer{
+    \begin{align*}
+        E &= \frac{E_0}{\sqrt{1 - \frac{v^2}{c^2}}}
+            \implies \frac{E}{E_0}
+                = \frac 1{\sqrt{1 - \frac{v^2}{c^2}}}
+                = \frac 1{\sqrt{1 - \sqr{0{,}8}}}
+                \approx 1.667
+        \\
+        E_{\text{кин}} &= E - E_0
+            \implies \frac{E_{\text{кин}}}{E_0}
+                = \frac{E}{E_0} - 1
+                = \frac 1{\sqrt{1 - \frac{v^2}{c^2}}} - 1
+                = \frac 1{\sqrt{1 - \sqr{0{,}8}}} - 1
+                \approx 0.667
+    \end{align*}
+}
 \vspace{150pt}
 
 \tasknumber{3}\task{
     Протон движется со скоростью $0{,}65\,c$, где $c$~--- скорость света в вакууме.
     Определите его кинетическую энергию (в ответе приведите формулу и укажите численное значение).
 }
+\answer{
+    \begin{align*}
+        E &= \frac{ mc^2 }{ \sqrt{ 1 - \frac{v^2}{c^2} } }
+            \approx \frac{
+                1{,}67 \cdot 10^{-27}\,\text{кг} \cdot \sqr{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} }
+            }{
+                \sqrt{1 - 0{,}65^2}
+            } \approx 19{,}78 \cdot 10^{-11}\,\text{Дж},
+        \\
+        E_{\text{кин}} &= \frac{mc^2}{\sqrt{1 - \frac{v^2}{c^2}}} - mc^2
+            = mc^2 \cbr{
+                \frac 1{
+                    \sqrt{1 - \frac{v^2}{c^2} }
+                } - 1
+            }
+            \approx
+            \\
+            &\approx \cbr{
+                1{,}67 \cdot 10^{-27}\,\text{кг} \cdot \sqr{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} }
+            } \cdot \cbr{
+                \frac 1{ \sqrt{ 1 - 0{,}65^2 } } - 1
+            }
+            \approx 4{,}75 \cdot 10^{-11}\,\text{Дж},
+        \\
+        p &= \frac{
+                mv
+            }{
+                \sqrt{1 - \frac{v^2}{c^2} }
+            }
+            \approx \frac{
+                1{,}67 \cdot 10^{-27}\,\text{кг} \cdot 0{,}65 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}
+            }{
+                1 - 0{,}65^2
+            }
+            \approx 6{,}59 \cdot 10^{-19}\,\frac{\text{кг}\cdot\text{м}}{\text{с}}.
+    \end{align*}
+}
 \vspace{150pt}
 
 \tasknumber{4}\task{
     При какой скорости движения (в долях скорости света) релятивистское сокращение длины движущегося тела
-    составит 10\%%?
+    составит 10\%?
+}
+\answer{
+    \begin{align*}
+        l_0 &= \frac{l}{\sqrt{1 - \frac {v^2}{c^2}}}
+        \implies 1 - \frac {v^2}{c^2} = \sqr{\frac l{l_0}}
+        \implies \frac v c = \sqrt{1 - \sqr{\frac l{l_0}}} \implies \\
+        \implies v &= c\sqrt{1 - \sqr{\frac l{l_0}}}
+        = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} \cdot \sqrt{1 - \sqr{\frac {l_0 - 0{,}10l_0} {l_0} } }
+        = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} \cdot \sqrt{1 - \sqr{1 - 0{,}10 } } \approx \\
+        &\approx 0.436c
+        \approx 1{,}308 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}
+        \approx 4{,}708 \cdot 10^{8}\,\frac{\text{км}}{\text{ч}}.
+    \end{align*}
 }
 \vspace{150pt}
 
@@ -2741,11 +5210,31 @@
     Какова длина волны этой линии спектра?
     Постоянная Планка $h = 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с}$, скорость света $c = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}$.
 }
+\answer{
+    $
+        E = h\nu = h \frac c\lambda
+        \implies \lambda = \frac{hc}{E}
+            = \frac{
+                { 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с} } \cdot{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} }
+            }{ 2{,}02 \cdot 10^{-19}\,\text{Дж} }
+            = 9{,}84 \cdot 10^{-7}\,\text{м}.
+    $
+}
 \vspace{150pt}
 
 \tasknumber{6}\task{
     Излучение какой длины волны поглотил атом водорода, если полная энергия в атоме увеличилась на $4 \cdot 10^{-19}\,\text{Дж}$?
     Постоянная Планка $h = 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с}$, скорость света $c = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}$.
+}
+\answer{
+    $
+        E = h\nu = h \frac c\lambda
+        \implies \lambda = \frac{hc}{E}
+            = \frac{
+                { 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с} } \cdot{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} }
+            }{ 4 \cdot 10^{-19}\,\text{Дж} }
+            = 4{,}97 \cdot 10^{-7}\,\text{м}.
+    $
 }
 \vspace{150pt}
 
@@ -2756,6 +5245,9 @@
     находящийся в 5-м возбуждённом состоянии?
     Отметьте все соответствующие переходы на рисунке и укажите,
     при каком переходе (среди отмеченных) длина волны излучённого фотона минимальна.
+}
+\answer{
+    $N = 10$, самая длинная линия
 }
 \vspace{150pt}
 
@@ -2821,17 +5313,83 @@
     Позитрон движется со скоростью $0{,}9\,c$, где $c$~--- скорость света в вакууме.
     Каково при этом отношение кинетической энергии частицы $E_{\text{кин}}$ к его энергии покоя $E_0$?
 }
+\answer{
+    \begin{align*}
+        E &= \frac{E_0}{\sqrt{1 - \frac{v^2}{c^2}}}
+            \implies \frac{E}{E_0}
+                = \frac 1{\sqrt{1 - \frac{v^2}{c^2}}}
+                = \frac 1{\sqrt{1 - \sqr{0{,}9}}}
+                \approx 2.294
+        \\
+        E_{\text{кин}} &= E - E_0
+            \implies \frac{E_{\text{кин}}}{E_0}
+                = \frac{E}{E_0} - 1
+                = \frac 1{\sqrt{1 - \frac{v^2}{c^2}}} - 1
+                = \frac 1{\sqrt{1 - \sqr{0{,}9}}} - 1
+                \approx 1.294
+    \end{align*}
+}
 \vspace{150pt}
 
 \tasknumber{3}\task{
     Электрон движется со скоростью $0{,}85\,c$, где $c$~--- скорость света в вакууме.
     Определите его полную энергию (в ответе приведите формулу и укажите численное значение).
 }
+\answer{
+    \begin{align*}
+        E &= \frac{ mc^2 }{ \sqrt{ 1 - \frac{v^2}{c^2} } }
+            \approx \frac{
+                9{,}1 \cdot 10^{-31}\,\text{кг} \cdot \sqr{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} }
+            }{
+                \sqrt{1 - 0{,}85^2}
+            } \approx 155{,}47 \cdot 10^{-15}\,\text{Дж},
+        \\
+        E_{\text{кин}} &= \frac{mc^2}{\sqrt{1 - \frac{v^2}{c^2}}} - mc^2
+            = mc^2 \cbr{
+                \frac 1{
+                    \sqrt{1 - \frac{v^2}{c^2} }
+                } - 1
+            }
+            \approx
+            \\
+            &\approx \cbr{
+                9{,}1 \cdot 10^{-31}\,\text{кг} \cdot \sqr{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} }
+            } \cdot \cbr{
+                \frac 1{ \sqrt{ 1 - 0{,}85^2 } } - 1
+            }
+            \approx 73{,}57 \cdot 10^{-15}\,\text{Дж},
+        \\
+        p &= \frac{
+                mv
+            }{
+                \sqrt{1 - \frac{v^2}{c^2} }
+            }
+            \approx \frac{
+                9{,}1 \cdot 10^{-31}\,\text{кг} \cdot 0{,}85 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}
+            }{
+                1 - 0{,}85^2
+            }
+            \approx 51{,}82 \cdot 10^{-23}\,\frac{\text{кг}\cdot\text{м}}{\text{с}}.
+    \end{align*}
+}
 \vspace{150pt}
 
 \tasknumber{4}\task{
     При какой скорости движения (в м/с) релятивистское сокращение длины движущегося тела
-    составит 50\%%?
+    составит 50\%?
+}
+\answer{
+    \begin{align*}
+        l_0 &= \frac{l}{\sqrt{1 - \frac {v^2}{c^2}}}
+        \implies 1 - \frac {v^2}{c^2} = \sqr{\frac l{l_0}}
+        \implies \frac v c = \sqrt{1 - \sqr{\frac l{l_0}}} \implies \\
+        \implies v &= c\sqrt{1 - \sqr{\frac l{l_0}}}
+        = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} \cdot \sqrt{1 - \sqr{\frac {l_0 - 0{,}50l_0} {l_0} } }
+        = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} \cdot \sqrt{1 - \sqr{1 - 0{,}50 } } \approx \\
+        &\approx 0.866c
+        \approx 2{,}598 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}
+        \approx 9{,}353 \cdot 10^{8}\,\frac{\text{км}}{\text{ч}}.
+    \end{align*}
 }
 \vspace{150pt}
 
@@ -2841,11 +5399,31 @@
     Какова длина волны этой линии спектра?
     Постоянная Планка $h = 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с}$, скорость света $c = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}$.
 }
+\answer{
+    $
+        E = h\nu = h \frac c\lambda
+        \implies \lambda = \frac{hc}{E}
+            = \frac{
+                { 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с} } \cdot{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} }
+            }{ 7{,}07 \cdot 10^{-19}\,\text{Дж} }
+            = 2{,}81 \cdot 10^{-7}\,\text{м}.
+    $
+}
 \vspace{150pt}
 
 \tasknumber{6}\task{
     Излучение какой длины волны поглотил атом водорода, если полная энергия в атоме увеличилась на $3 \cdot 10^{-19}\,\text{Дж}$?
     Постоянная Планка $h = 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с}$, скорость света $c = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}$.
+}
+\answer{
+    $
+        E = h\nu = h \frac c\lambda
+        \implies \lambda = \frac{hc}{E}
+            = \frac{
+                { 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с} } \cdot{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} }
+            }{ 3 \cdot 10^{-19}\,\text{Дж} }
+            = 6{,}63 \cdot 10^{-7}\,\text{м}.
+    $
 }
 \vspace{150pt}
 
@@ -2856,6 +5434,9 @@
     находящийся в 3-м возбуждённом состоянии?
     Отметьте все соответствующие переходы на рисунке и укажите,
     при каком переходе (среди отмеченных) частота излучённого фотона минимальна.
+}
+\answer{
+    $N = 3$, самая короткая линия
 }
 \vspace{150pt}
 
@@ -2921,17 +5502,83 @@
     Протон движется со скоростью $0{,}8\,c$, где $c$~--- скорость света в вакууме.
     Каково при этом отношение полной энергии частицы $E$ к его энергии покоя $E_0$?
 }
+\answer{
+    \begin{align*}
+        E &= \frac{E_0}{\sqrt{1 - \frac{v^2}{c^2}}}
+            \implies \frac{E}{E_0}
+                = \frac 1{\sqrt{1 - \frac{v^2}{c^2}}}
+                = \frac 1{\sqrt{1 - \sqr{0{,}8}}}
+                \approx 1.667
+        \\
+        E_{\text{кин}} &= E - E_0
+            \implies \frac{E_{\text{кин}}}{E_0}
+                = \frac{E}{E_0} - 1
+                = \frac 1{\sqrt{1 - \frac{v^2}{c^2}}} - 1
+                = \frac 1{\sqrt{1 - \sqr{0{,}8}}} - 1
+                \approx 0.667
+    \end{align*}
+}
 \vspace{150pt}
 
 \tasknumber{3}\task{
     Протон движется со скоростью $0{,}65\,c$, где $c$~--- скорость света в вакууме.
     Определите его полную энергию (в ответе приведите формулу и укажите численное значение).
 }
+\answer{
+    \begin{align*}
+        E &= \frac{ mc^2 }{ \sqrt{ 1 - \frac{v^2}{c^2} } }
+            \approx \frac{
+                1{,}67 \cdot 10^{-27}\,\text{кг} \cdot \sqr{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} }
+            }{
+                \sqrt{1 - 0{,}65^2}
+            } \approx 19{,}78 \cdot 10^{-11}\,\text{Дж},
+        \\
+        E_{\text{кин}} &= \frac{mc^2}{\sqrt{1 - \frac{v^2}{c^2}}} - mc^2
+            = mc^2 \cbr{
+                \frac 1{
+                    \sqrt{1 - \frac{v^2}{c^2} }
+                } - 1
+            }
+            \approx
+            \\
+            &\approx \cbr{
+                1{,}67 \cdot 10^{-27}\,\text{кг} \cdot \sqr{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} }
+            } \cdot \cbr{
+                \frac 1{ \sqrt{ 1 - 0{,}65^2 } } - 1
+            }
+            \approx 4{,}75 \cdot 10^{-11}\,\text{Дж},
+        \\
+        p &= \frac{
+                mv
+            }{
+                \sqrt{1 - \frac{v^2}{c^2} }
+            }
+            \approx \frac{
+                1{,}67 \cdot 10^{-27}\,\text{кг} \cdot 0{,}65 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}
+            }{
+                1 - 0{,}65^2
+            }
+            \approx 6{,}59 \cdot 10^{-19}\,\frac{\text{кг}\cdot\text{м}}{\text{с}}.
+    \end{align*}
+}
 \vspace{150pt}
 
 \tasknumber{4}\task{
     При какой скорости движения (в км/ч) релятивистское сокращение длины движущегося тела
-    составит 10\%%?
+    составит 10\%?
+}
+\answer{
+    \begin{align*}
+        l_0 &= \frac{l}{\sqrt{1 - \frac {v^2}{c^2}}}
+        \implies 1 - \frac {v^2}{c^2} = \sqr{\frac l{l_0}}
+        \implies \frac v c = \sqrt{1 - \sqr{\frac l{l_0}}} \implies \\
+        \implies v &= c\sqrt{1 - \sqr{\frac l{l_0}}}
+        = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} \cdot \sqrt{1 - \sqr{\frac {l_0 - 0{,}10l_0} {l_0} } }
+        = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} \cdot \sqrt{1 - \sqr{1 - 0{,}10 } } \approx \\
+        &\approx 0.436c
+        \approx 1{,}308 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}
+        \approx 4{,}708 \cdot 10^{8}\,\frac{\text{км}}{\text{ч}}.
+    \end{align*}
 }
 \vspace{150pt}
 
@@ -2941,11 +5588,31 @@
     Какова длина волны этой линии спектра?
     Постоянная Планка $h = 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с}$, скорость света $c = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}$.
 }
+\answer{
+    $
+        E = h\nu = h \frac c\lambda
+        \implies \lambda = \frac{hc}{E}
+            = \frac{
+                { 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с} } \cdot{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} }
+            }{ 2{,}02 \cdot 10^{-19}\,\text{Дж} }
+            = 9{,}84 \cdot 10^{-7}\,\text{м}.
+    $
+}
 \vspace{150pt}
 
 \tasknumber{6}\task{
     Излучение какой длины волны поглотил атом водорода, если полная энергия в атоме увеличилась на $4 \cdot 10^{-19}\,\text{Дж}$?
     Постоянная Планка $h = 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с}$, скорость света $c = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}$.
+}
+\answer{
+    $
+        E = h\nu = h \frac c\lambda
+        \implies \lambda = \frac{hc}{E}
+            = \frac{
+                { 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с} } \cdot{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} }
+            }{ 4 \cdot 10^{-19}\,\text{Дж} }
+            = 4{,}97 \cdot 10^{-7}\,\text{м}.
+    $
 }
 \vspace{150pt}
 
@@ -2956,6 +5623,9 @@
     находящийся в 5-м возбуждённом состоянии?
     Отметьте все соответствующие переходы на рисунке и укажите,
     при каком переходе (среди отмеченных) энергия излучённого фотона минимальна.
+}
+\answer{
+    $N = 10$, самая короткая линия
 }
 \vspace{150pt}
 
@@ -3021,17 +5691,83 @@
     Позитрон движется со скоростью $0{,}6\,c$, где $c$~--- скорость света в вакууме.
     Каково при этом отношение кинетической энергии частицы $E_{\text{кин}}$ к его энергии покоя $E_0$?
 }
+\answer{
+    \begin{align*}
+        E &= \frac{E_0}{\sqrt{1 - \frac{v^2}{c^2}}}
+            \implies \frac{E}{E_0}
+                = \frac 1{\sqrt{1 - \frac{v^2}{c^2}}}
+                = \frac 1{\sqrt{1 - \sqr{0{,}6}}}
+                \approx 1.250
+        \\
+        E_{\text{кин}} &= E - E_0
+            \implies \frac{E_{\text{кин}}}{E_0}
+                = \frac{E}{E_0} - 1
+                = \frac 1{\sqrt{1 - \frac{v^2}{c^2}}} - 1
+                = \frac 1{\sqrt{1 - \sqr{0{,}6}}} - 1
+                \approx 0.250
+    \end{align*}
+}
 \vspace{150pt}
 
 \tasknumber{3}\task{
     Протон движется со скоростью $0{,}75\,c$, где $c$~--- скорость света в вакууме.
     Определите его полную энергию (в ответе приведите формулу и укажите численное значение).
 }
+\answer{
+    \begin{align*}
+        E &= \frac{ mc^2 }{ \sqrt{ 1 - \frac{v^2}{c^2} } }
+            \approx \frac{
+                1{,}67 \cdot 10^{-27}\,\text{кг} \cdot \sqr{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} }
+            }{
+                \sqrt{1 - 0{,}75^2}
+            } \approx 22{,}72 \cdot 10^{-11}\,\text{Дж},
+        \\
+        E_{\text{кин}} &= \frac{mc^2}{\sqrt{1 - \frac{v^2}{c^2}}} - mc^2
+            = mc^2 \cbr{
+                \frac 1{
+                    \sqrt{1 - \frac{v^2}{c^2} }
+                } - 1
+            }
+            \approx
+            \\
+            &\approx \cbr{
+                1{,}67 \cdot 10^{-27}\,\text{кг} \cdot \sqr{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} }
+            } \cdot \cbr{
+                \frac 1{ \sqrt{ 1 - 0{,}75^2 } } - 1
+            }
+            \approx 7{,}69 \cdot 10^{-11}\,\text{Дж},
+        \\
+        p &= \frac{
+                mv
+            }{
+                \sqrt{1 - \frac{v^2}{c^2} }
+            }
+            \approx \frac{
+                1{,}67 \cdot 10^{-27}\,\text{кг} \cdot 0{,}75 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}
+            }{
+                1 - 0{,}75^2
+            }
+            \approx 7{,}57 \cdot 10^{-19}\,\frac{\text{кг}\cdot\text{м}}{\text{с}}.
+    \end{align*}
+}
 \vspace{150pt}
 
 \tasknumber{4}\task{
     При какой скорости движения (в км/ч) релятивистское сокращение длины движущегося тела
-    составит 30\%%?
+    составит 30\%?
+}
+\answer{
+    \begin{align*}
+        l_0 &= \frac{l}{\sqrt{1 - \frac {v^2}{c^2}}}
+        \implies 1 - \frac {v^2}{c^2} = \sqr{\frac l{l_0}}
+        \implies \frac v c = \sqrt{1 - \sqr{\frac l{l_0}}} \implies \\
+        \implies v &= c\sqrt{1 - \sqr{\frac l{l_0}}}
+        = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} \cdot \sqrt{1 - \sqr{\frac {l_0 - 0{,}30l_0} {l_0} } }
+        = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} \cdot \sqrt{1 - \sqr{1 - 0{,}30 } } \approx \\
+        &\approx 0.714c
+        \approx 2{,}142 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}
+        \approx 7{,}713 \cdot 10^{8}\,\frac{\text{км}}{\text{ч}}.
+    \end{align*}
 }
 \vspace{150pt}
 
@@ -3041,11 +5777,31 @@
     Какова длина волны этой линии спектра?
     Постоянная Планка $h = 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с}$, скорость света $c = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}$.
 }
+\answer{
+    $
+        E = h\nu = h \frac c\lambda
+        \implies \lambda = \frac{hc}{E}
+            = \frac{
+                { 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с} } \cdot{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} }
+            }{ 5{,}05 \cdot 10^{-19}\,\text{Дж} }
+            = 3{,}94 \cdot 10^{-7}\,\text{м}.
+    $
+}
 \vspace{150pt}
 
 \tasknumber{6}\task{
     Излучение какой длины волны поглотил атом водорода, если полная энергия в атоме увеличилась на $6 \cdot 10^{-19}\,\text{Дж}$?
     Постоянная Планка $h = 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с}$, скорость света $c = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}$.
+}
+\answer{
+    $
+        E = h\nu = h \frac c\lambda
+        \implies \lambda = \frac{hc}{E}
+            = \frac{
+                { 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с} } \cdot{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} }
+            }{ 6 \cdot 10^{-19}\,\text{Дж} }
+            = 3{,}31 \cdot 10^{-7}\,\text{м}.
+    $
 }
 \vspace{150pt}
 
@@ -3056,6 +5812,9 @@
     находящийся в 4-м возбуждённом состоянии?
     Отметьте все соответствующие переходы на рисунке и укажите,
     при каком переходе (среди отмеченных) энергия излучённого фотона минимальна.
+}
+\answer{
+    $N = 6$, самая короткая линия
 }
 \vspace{150pt}
 
@@ -3121,17 +5880,83 @@
     Протон движется со скоростью $0{,}6\,c$, где $c$~--- скорость света в вакууме.
     Каково при этом отношение полной энергии частицы $E$ к его энергии покоя $E_0$?
 }
+\answer{
+    \begin{align*}
+        E &= \frac{E_0}{\sqrt{1 - \frac{v^2}{c^2}}}
+            \implies \frac{E}{E_0}
+                = \frac 1{\sqrt{1 - \frac{v^2}{c^2}}}
+                = \frac 1{\sqrt{1 - \sqr{0{,}6}}}
+                \approx 1.250
+        \\
+        E_{\text{кин}} &= E - E_0
+            \implies \frac{E_{\text{кин}}}{E_0}
+                = \frac{E}{E_0} - 1
+                = \frac 1{\sqrt{1 - \frac{v^2}{c^2}}} - 1
+                = \frac 1{\sqrt{1 - \sqr{0{,}6}}} - 1
+                \approx 0.250
+    \end{align*}
+}
 \vspace{150pt}
 
 \tasknumber{3}\task{
     Протон движется со скоростью $0{,}85\,c$, где $c$~--- скорость света в вакууме.
     Определите его кинетическую энергию (в ответе приведите формулу и укажите численное значение).
 }
+\answer{
+    \begin{align*}
+        E &= \frac{ mc^2 }{ \sqrt{ 1 - \frac{v^2}{c^2} } }
+            \approx \frac{
+                1{,}67 \cdot 10^{-27}\,\text{кг} \cdot \sqr{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} }
+            }{
+                \sqrt{1 - 0{,}85^2}
+            } \approx 28{,}53 \cdot 10^{-11}\,\text{Дж},
+        \\
+        E_{\text{кин}} &= \frac{mc^2}{\sqrt{1 - \frac{v^2}{c^2}}} - mc^2
+            = mc^2 \cbr{
+                \frac 1{
+                    \sqrt{1 - \frac{v^2}{c^2} }
+                } - 1
+            }
+            \approx
+            \\
+            &\approx \cbr{
+                1{,}67 \cdot 10^{-27}\,\text{кг} \cdot \sqr{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} }
+            } \cdot \cbr{
+                \frac 1{ \sqrt{ 1 - 0{,}85^2 } } - 1
+            }
+            \approx 13{,}5 \cdot 10^{-11}\,\text{Дж},
+        \\
+        p &= \frac{
+                mv
+            }{
+                \sqrt{1 - \frac{v^2}{c^2} }
+            }
+            \approx \frac{
+                1{,}67 \cdot 10^{-27}\,\text{кг} \cdot 0{,}85 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}
+            }{
+                1 - 0{,}85^2
+            }
+            \approx 9{,}51 \cdot 10^{-19}\,\frac{\text{кг}\cdot\text{м}}{\text{с}}.
+    \end{align*}
+}
 \vspace{150pt}
 
 \tasknumber{4}\task{
     При какой скорости движения (в долях скорости света) релятивистское сокращение длины движущегося тела
-    составит 50\%%?
+    составит 50\%?
+}
+\answer{
+    \begin{align*}
+        l_0 &= \frac{l}{\sqrt{1 - \frac {v^2}{c^2}}}
+        \implies 1 - \frac {v^2}{c^2} = \sqr{\frac l{l_0}}
+        \implies \frac v c = \sqrt{1 - \sqr{\frac l{l_0}}} \implies \\
+        \implies v &= c\sqrt{1 - \sqr{\frac l{l_0}}}
+        = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} \cdot \sqrt{1 - \sqr{\frac {l_0 - 0{,}50l_0} {l_0} } }
+        = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} \cdot \sqrt{1 - \sqr{1 - 0{,}50 } } \approx \\
+        &\approx 0.866c
+        \approx 2{,}598 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}
+        \approx 9{,}353 \cdot 10^{8}\,\frac{\text{км}}{\text{ч}}.
+    \end{align*}
 }
 \vspace{150pt}
 
@@ -3141,11 +5966,31 @@
     Какова длина волны этой линии спектра?
     Постоянная Планка $h = 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с}$, скорость света $c = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}$.
 }
+\answer{
+    $
+        E = h\nu = h \frac c\lambda
+        \implies \lambda = \frac{hc}{E}
+            = \frac{
+                { 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с} } \cdot{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} }
+            }{ 4{,}04 \cdot 10^{-19}\,\text{Дж} }
+            = 4{,}92 \cdot 10^{-7}\,\text{м}.
+    $
+}
 \vspace{150pt}
 
 \tasknumber{6}\task{
     Излучение какой длины волны поглотил атом водорода, если полная энергия в атоме увеличилась на $4 \cdot 10^{-19}\,\text{Дж}$?
     Постоянная Планка $h = 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с}$, скорость света $c = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}$.
+}
+\answer{
+    $
+        E = h\nu = h \frac c\lambda
+        \implies \lambda = \frac{hc}{E}
+            = \frac{
+                { 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с} } \cdot{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} }
+            }{ 4 \cdot 10^{-19}\,\text{Дж} }
+            = 4{,}97 \cdot 10^{-7}\,\text{м}.
+    $
 }
 \vspace{150pt}
 
@@ -3156,6 +6001,9 @@
     находящийся в 3-м возбуждённом состоянии?
     Отметьте все соответствующие переходы на рисунке и укажите,
     при каком переходе (среди отмеченных) длина волны излучённого фотона минимальна.
+}
+\answer{
+    $N = 3$, самая длинная линия
 }
 \vspace{150pt}
 
@@ -3221,17 +6069,83 @@
     Протон движется со скоростью $0{,}6\,c$, где $c$~--- скорость света в вакууме.
     Каково при этом отношение кинетической энергии частицы $E_{\text{кин}}$ к его энергии покоя $E_0$?
 }
+\answer{
+    \begin{align*}
+        E &= \frac{E_0}{\sqrt{1 - \frac{v^2}{c^2}}}
+            \implies \frac{E}{E_0}
+                = \frac 1{\sqrt{1 - \frac{v^2}{c^2}}}
+                = \frac 1{\sqrt{1 - \sqr{0{,}6}}}
+                \approx 1.250
+        \\
+        E_{\text{кин}} &= E - E_0
+            \implies \frac{E_{\text{кин}}}{E_0}
+                = \frac{E}{E_0} - 1
+                = \frac 1{\sqrt{1 - \frac{v^2}{c^2}}} - 1
+                = \frac 1{\sqrt{1 - \sqr{0{,}6}}} - 1
+                \approx 0.250
+    \end{align*}
+}
 \vspace{150pt}
 
 \tasknumber{3}\task{
     Электрон движется со скоростью $0{,}65\,c$, где $c$~--- скорость света в вакууме.
     Определите его импульс (в ответе приведите формулу и укажите численное значение).
 }
+\answer{
+    \begin{align*}
+        E &= \frac{ mc^2 }{ \sqrt{ 1 - \frac{v^2}{c^2} } }
+            \approx \frac{
+                9{,}1 \cdot 10^{-31}\,\text{кг} \cdot \sqr{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} }
+            }{
+                \sqrt{1 - 0{,}65^2}
+            } \approx 107{,}77 \cdot 10^{-15}\,\text{Дж},
+        \\
+        E_{\text{кин}} &= \frac{mc^2}{\sqrt{1 - \frac{v^2}{c^2}}} - mc^2
+            = mc^2 \cbr{
+                \frac 1{
+                    \sqrt{1 - \frac{v^2}{c^2} }
+                } - 1
+            }
+            \approx
+            \\
+            &\approx \cbr{
+                9{,}1 \cdot 10^{-31}\,\text{кг} \cdot \sqr{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} }
+            } \cdot \cbr{
+                \frac 1{ \sqrt{ 1 - 0{,}65^2 } } - 1
+            }
+            \approx 25{,}87 \cdot 10^{-15}\,\text{Дж},
+        \\
+        p &= \frac{
+                mv
+            }{
+                \sqrt{1 - \frac{v^2}{c^2} }
+            }
+            \approx \frac{
+                9{,}1 \cdot 10^{-31}\,\text{кг} \cdot 0{,}65 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}
+            }{
+                1 - 0{,}65^2
+            }
+            \approx 35{,}92 \cdot 10^{-23}\,\frac{\text{кг}\cdot\text{м}}{\text{с}}.
+    \end{align*}
+}
 \vspace{150pt}
 
 \tasknumber{4}\task{
     При какой скорости движения (в долях скорости света) релятивистское сокращение длины движущегося тела
-    составит 10\%%?
+    составит 10\%?
+}
+\answer{
+    \begin{align*}
+        l_0 &= \frac{l}{\sqrt{1 - \frac {v^2}{c^2}}}
+        \implies 1 - \frac {v^2}{c^2} = \sqr{\frac l{l_0}}
+        \implies \frac v c = \sqrt{1 - \sqr{\frac l{l_0}}} \implies \\
+        \implies v &= c\sqrt{1 - \sqr{\frac l{l_0}}}
+        = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} \cdot \sqrt{1 - \sqr{\frac {l_0 - 0{,}10l_0} {l_0} } }
+        = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} \cdot \sqrt{1 - \sqr{1 - 0{,}10 } } \approx \\
+        &\approx 0.436c
+        \approx 1{,}308 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}
+        \approx 4{,}708 \cdot 10^{8}\,\frac{\text{км}}{\text{ч}}.
+    \end{align*}
 }
 \vspace{150pt}
 
@@ -3241,11 +6155,31 @@
     Какова длина волны этой линии спектра?
     Постоянная Планка $h = 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с}$, скорость света $c = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}$.
 }
+\answer{
+    $
+        E = h\nu = h \frac c\lambda
+        \implies \lambda = \frac{hc}{E}
+            = \frac{
+                { 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с} } \cdot{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} }
+            }{ 0{,}55 \cdot 10^{-19}\,\text{Дж} }
+            = 36{,}14 \cdot 10^{-7}\,\text{м}.
+    $
+}
 \vspace{150pt}
 
 \tasknumber{6}\task{
     Излучение какой длины волны поглотил атом водорода, если полная энергия в атоме увеличилась на $6 \cdot 10^{-19}\,\text{Дж}$?
     Постоянная Планка $h = 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с}$, скорость света $c = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}$.
+}
+\answer{
+    $
+        E = h\nu = h \frac c\lambda
+        \implies \lambda = \frac{hc}{E}
+            = \frac{
+                { 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с} } \cdot{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} }
+            }{ 6 \cdot 10^{-19}\,\text{Дж} }
+            = 3{,}31 \cdot 10^{-7}\,\text{м}.
+    $
 }
 \vspace{150pt}
 
@@ -3256,6 +6190,9 @@
     находящийся в 5-м возбуждённом состоянии?
     Отметьте все соответствующие переходы на рисунке и укажите,
     при каком переходе (среди отмеченных) длина волны излучённого фотона максимальна.
+}
+\answer{
+    $N = 10$, самая короткая линия
 }
 \vspace{150pt}
 
