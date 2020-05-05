@@ -29,7 +29,7 @@ PAPER_TEMPLATE = ur'''
 
 def check_unit_value(v):
     try:
-        if isinstance(v, (str, unicode)) and (('=' in v and len(v) >= 3) or re.match(r'\d \w', v, re.UNICODE)):
+        if isinstance(v, (str, unicode)) and (('=' in v and len(v) >= 3) or re.match(r'\d.* \w', v, re.UNICODE)):
             return value.UnitValue(v)
         else:
             return v
@@ -103,17 +103,27 @@ class VariantTask(object):
         for res in form_args(args):
             for k, v in res.iteritems():
                 res[k] = check_unit_value(v)
+            res['Consts'] = value.Consts
             for k, v in self.GetUpdate(**res).iteritems():
                 res[k] = check_unit_value(v)
-            res['Consts'] = value.Consts
             yield res
 
     def All(self):
         textTemplate = self.GetTextTemplate()
         answerTemplate = self.GetAnswerTemplate()
         for args in self.GetArgs():
-            text = textTemplate.format(**args)
-            answer = answerTemplate.format(**args) if answerTemplate else None
+            try:
+                text = textTemplate.format(**args)
+            except ValueError:
+                print textTemplate
+                print args
+                raise
+            try:
+                answer = answerTemplate.format(**args) if answerTemplate else None
+            except ValueError:
+                print answerTemplate
+                print args
+                raise
             # TODO: .replace('.', '{,}') in answer
             yield problems.task.Task(
                 text,

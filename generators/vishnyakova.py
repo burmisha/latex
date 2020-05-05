@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import variant
+from value import UnitValue
 
 import logging
 log = logging.getLogger(__name__)
@@ -11,13 +12,32 @@ log = logging.getLogger(__name__)
     {what} движется со скоростью $0{{,}}{percent}\,c$, где $c$~--- скорость света в вакууме.
     Каково при этом отношение {energy} к его энергии покоя $E_0$?
 ''')
+@variant.answer(u'''\\begin{{align*}}
+    E &= \\frac{{E_0}}{{\\sqrt{{1 - \\frac{{v^2}}{{c^2}}}}}}
+        \\implies \\frac{{E}}{{E_0}}
+            = \\frac 1{{\\sqrt{{1 - \\frac{{v^2}}{{c^2}}}}}}
+            = \\frac 1{{\\sqrt{{1 - \\sqr{{0{{,}}{percent}}}}}}}
+            \\approx {E:.3f}
+    \\\\
+    E_{{\\text{{кин}}}} &= E - E_0
+        \\implies \\frac{{E_{{\\text{{кин}}}}}}{{E_0}}
+            = \\frac{{E}}{{E_0}} - 1
+            = \\frac 1{{\\sqrt{{1 - \\frac{{v^2}}{{c^2}}}}}} - 1
+            = \\frac 1{{\\sqrt{{1 - \\sqr{{0{{,}}{percent}}}}}}} - 1
+            \\approx {E_kin:.3f}
+\\end{{align*}}''')
 @variant.args(
     what=[u'Протон', u'Позитрон'],
     energy=[u'полной энергии частицы $E$', u'кинетической энергии частицы $E_{\\text{кин}}$'],
     percent=['9', '8', '7', '6'],
 )
 class BK_4_01(variant.VariantTask):
-    pass
+    def GetUpdate(self, energy=None, percent=None, **kws):
+        share = float('0.' + percent)
+        return {
+            'E':  1. / ((1. - share ** 2) ** 0.5),
+            'E_kin': 1. / ((1. - share ** 2) ** 0.5) - 1,
+        }
 
 
 @variant.solution_space(150)
@@ -25,40 +45,128 @@ class BK_4_01(variant.VariantTask):
     {what} движется со скоростью $0{{,}}{percent}\,c$, где $c$~--- скорость света в вакууме.
     Определите его {x} (в ответе приведите формулу и укажите численное значение).
 ''')
+@variant.answer(u'''\\begin{{align*}}
+    E &= \\frac{{ mc^2 }}{{ \\sqrt{{ 1 - \\frac{{v^2}}{{c^2}} }} }}
+        \\approx \\frac{{
+            {m:Value|cdot} {Consts.c:Value|sqr}
+        }}{{
+            \\sqrt{{1 - 0{{,}}{percent}^2}}
+        }} \\approx {E:Value},
+    \\\\
+    E_{{\\text{{кин}}}} &= \\frac{{mc^2}}{{\\sqrt{{1 - \\frac{{v^2}}{{c^2}}}}}} - mc^2
+        = mc^2 \\cbr{{
+            \\frac 1{{
+                \\sqrt{{1 - \\frac{{v^2}}{{c^2}} }}
+            }} - 1
+        }}
+        \\approx
+        \\\\
+        &\\approx \\cbr{{
+            {m:Value|cdot} {Consts.c:Value|sqr}
+        }} \\cdot \\cbr{{
+            \\frac 1{{ \\sqrt{{ 1 - 0{{,}}{percent}^2 }} }} - 1
+        }}
+        \\approx {E_kin:Value},
+    \\\\
+    p &= \\frac{{
+            mv
+        }}{{
+            \\sqrt{{1 - \\frac{{v^2}}{{c^2}} }}
+        }}
+        \\approx \\frac{{
+            {m:Value|cdot} 0{{,}}{percent} {Consts.c:Value}
+        }}{{
+            1 - 0{{,}}{percent}^2
+        }}
+        \\approx {p:Value}.
+\\end{{align*}}''')
 @variant.args(
     what=[u'Протон', u'Электрон'],
     x=[u'полную энергию', u'кинетическую энергию', u'импульс'],
     percent=['85', '75', '65'],
 )
 class BK_4_03(variant.VariantTask):
-    pass
+    def GetUpdate(self, what=None, percent=None, Consts=None, **kws):
+        m = {
+            u'Протон': UnitValue(u'm = 1.67 10^-27 кг'),
+            u'Электрон': UnitValue(u'm = 9.1 10^-31 кг'),
+        }[what]
+        share = float('0.' + percent)
+        return {
+            'E': u'{value:.2f} 10^{power} Дж'.format(
+                value=m.Value * Consts.c.Value ** 2 / ((1. - share ** 2) ** 0.5),
+                power=m.Power + 2 * Consts.c.Power,
+            ),
+            'E_kin': u'{value:.2f} 10^{power} Дж'.format(
+                value=m.Value * Consts.c.Value ** 2 * (1. / ((1. - share ** 2) ** 0.5) - 1),
+                power=m.Power + 2 * Consts.c.Power,
+            ),
+            'p': u'{value:.2f} 10^{power} кг м / с'.format(
+                value=m.Value * Consts.c.Value / ((1. - share ** 2) ** 0.5),
+                power=m.Power + Consts.c.Power,
+            ),
+            'm': m,
+        }
+
 
 
 @variant.solution_space(150)
 @variant.text(u'''
     При какой скорости движения (в {what}) релятивистское сокращение длины движущегося тела
-    составит {percent}\\%%?
+    составит {percent}\\%?
 ''')
+@variant.answer(u'''\\begin{{align*}}
+    l_0 &= \\frac{{l}}{{\\sqrt{{1 - \\frac {{v^2}}{{c^2}}}}}}
+    \\implies 1 - \\frac {{v^2}}{{c^2}} = \\sqr{{\\frac l{{l_0}}}}
+    \\implies \\frac v c = \\sqrt{{1 - \\sqr{{\\frac l{{l_0}}}}}} \\implies \\\\
+    \\implies v &= c\\sqrt{{1 - \\sqr{{\\frac l{{l_0}}}}}}
+    = {Consts.c:Value} \\cdot \\sqrt{{1 - \\sqr{{\\frac {{l_0 - 0{{,}}{percent}l_0}} {{l_0}} }} }}
+    = {Consts.c:Value} \\cdot \\sqrt{{1 - \\sqr{{1 - 0{{,}}{percent} }} }} \\approx \\\\
+    &\\approx {answerShare:.3f}c
+    \\approx {speed:Value}
+    \\approx {kmch:Value}.
+\\end{{align*}}''')
 @variant.args(
     what=[u'км/ч', u'м/с', u'долях скорости света'],
     percent=['50', '30', '10'],
 )
 class BK_4_06(variant.VariantTask):
-    pass
+    def GetUpdate(self, percent=None, Consts=None, **kws):
+        share = float('0.' + percent)
+        answerShare = (1. - (1. - share) ** 2) ** 0.5
+        return {
+            'answerShare': answerShare,
+            'speed': u'%.3f 10^8 м / с' % (answerShare * Consts.c.Value),
+            'kmch': u'%.3f 10^8 км / ч' % (3.6 * answerShare * Consts.c.Value),
+        }
 
 
 @variant.solution_space(150)
 @variant.text(u'''
-    При переходе электрона в атоме с одной стационарной орбиты на другую 
-    излучается фотон с энергией ${E:Value}$. 
-    Какова длина волны этой линии спектра? 
+    При переходе электрона в атоме с одной стационарной орбиты на другую
+    излучается фотон с энергией ${E:Value}$.
+    Какова длина волны этой линии спектра?
     Постоянная Планка ${Consts.h:Task}$, скорость света ${Consts.c:Task}$.
 ''')
+@variant.answer(u'''$
+    E = h\\nu = h \\frac c\\lambda
+    \\implies \\lambda = \\frac{{hc}}{{E}}
+        = \\frac{{
+            {Consts.h:Value|s|cdot}{Consts.c:Value|s}
+        }}{E:Value|s}
+        = {lmbd:Value}.
+$''')
 @variant.args(
     E=[u'E = %s 10^{-19} Дж' % E for E in [u'4.04', u'5.05', u'2.02', u'7.07', u'1.01', u'0.55']],
 )
 class BK_52_01(variant.VariantTask):
-    pass
+    def GetUpdate(self, E=None, Consts=None, **kws):
+        return {
+            'lmbd': u'{value:.2f} 10^{power} м'.format(
+                value=Consts.h.Value * Consts.c.Value / E.Value,
+                power=Consts.h.Power + Consts.c.Power - E.Power,
+            ),
+        }
 
 
 @variant.solution_space(150)
@@ -66,35 +174,64 @@ class BK_52_01(variant.VariantTask):
     Излучение какой длины волны поглотил атом водорода, если полная энергия в атоме увеличилась на ${E:Value}$?
     Постоянная Планка ${Consts.h:Task}$, скорость света ${Consts.c:Task}$.
 ''')
+@variant.answer(u'''$
+    E = h\\nu = h \\frac c\\lambda
+    \\implies \\lambda = \\frac{{hc}}{{E}}
+        = \\frac{{
+            {Consts.h:Value|s|cdot}{Consts.c:Value|s}
+        }}{E:Value|s}
+        = {lmbd:Value}.
+$''')
 @variant.args(
     E=[u'E = %d 10^{-19} Дж' % E for E in [2, 3, 4, 6]],
 )
 class BK_52_02(variant.VariantTask):
-    pass
+    def GetUpdate(self, E=None, Consts=None, **kws):
+        return {
+            'lmbd': u'{value:.2f} 10^{power} м'.format(
+                value=Consts.h.Value * Consts.c.Value / E.Value,
+                power=Consts.h.Power + Consts.c.Power - E.Power,
+            ),
+        }
 
 
 @variant.solution_space(150)
 @variant.text(u'''
-    Сделайте схематичный рисунок энергетических уровней атома водорода 
+    Сделайте схематичный рисунок энергетических уровней атома водорода
     и отметьте на нём первый (основной) уровень и последующие.
-    Сколько различных длин волн может испустить атом водорода, 
-    находящийся в {n}-м возбуждённом состоянии? 
-    Отметьте все соответствующие переходы на рисунке и укажите, 
+    Сколько различных длин волн может испустить атом водорода,
+    находящийся в {n}-м возбуждённом состоянии?
+    Отметьте все соответствующие переходы на рисунке и укажите,
     при каком переходе (среди отмеченных) {what} излучённого фотона {minmax}.
 ''')
+@variant.answer(u'''$N = {N}$, {answer}''')
 @variant.args(
-    n=[u'3', u'4', u'5'],
+    n=[3, 4, 5],
     what=[u'энергия', u'частота', u'длина волны'],
     minmax=[u'минимальна', u'максимальна'],
 )
 class BK_52_07(variant.VariantTask):
-    pass
+    def GetUpdate(self, n=None, what=None, minmax=None, **kws):
+        whatSign = {
+            u'энергия': 1,
+            u'частота': 1,
+            u'длина волны': -1,
+        }[what]
+        minmaxSign = {
+            u'минимальна': -1,
+            u'максимальна': 1,
+        }[minmax]
+        answer = u'самая длинная линия' if whatSign == minmaxSign else u'самая короткая линия'
+        return {
+            'N': n * (n - 1) / 2,
+            'answer': answer,
+        }
 
 
 @variant.solution_space(150)
 @variant.text(u'''
     Какая доля (от начального количества) радиоактивных ядер {what} через время,
-    равное {when} периодам полураспада? Ответ выразить в процентах. 
+    равное {when} периодам полураспада? Ответ выразить в процентах.
 ''')
 @variant.args(
     what=[u'распадётся', u'останется'],
@@ -119,7 +256,7 @@ class BK_53_02(variant.VariantTask):
 
 @variant.solution_space(150)
 @variant.text(u'''
-    За ${t:Value}$ от начального количества ядер радиоизотопа осталась {how}. 
+    За ${t:Value}$ от начального количества ядер радиоизотопа осталась {how}.
     Каков период полураспада этого изотопа (ответ приведите в сутках)?
     Какая ещё доля (также от начального количества) распадётся, если подождать ещё столько же?
 ''')

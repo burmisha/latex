@@ -134,7 +134,7 @@ class UnitValue(object):
             parts.append(part)
         return '\\cdot'.join(parts)
 
-    def __format__(self, format):        
+    def __format__(self, format):
         # if isinstance(self.Value, int):
         #     fmt = '{:d}'
         # else:
@@ -143,10 +143,8 @@ class UnitValue(object):
         #     fmt = '(%s)' % fmt
         # value = fmt.format(self.Value).replace('.', '{,}')
 
-        if ':' in format:
-            format, suffix = format.split(':')
-        else:
-            suffix = None
+        mainFormat = format.replace(':', '|')
+        mainFormat, pipes = mainFormat.split('|')[0], mainFormat.split('|')[1:]
 
         needLetter = False
         humanNom = self.__GetUnits(self.HumanUnits[0])
@@ -161,13 +159,13 @@ class UnitValue(object):
             valueStr += ' \\cdot 10^{{{}}}'.format(self.BasePower)
         valueStr += u'{}'.format(units)
 
-        if format == 'Task':
+        if mainFormat == 'Task':
             result = valueStr
             needLetter = True
-        elif format == 'Value':
+        elif mainFormat == 'Value':
             result = valueStr
             needLetter = False
-        elif format == 'Letter':
+        elif mainFormat == 'Letter':
             result = self.Letter
             needLetter = False
         else:
@@ -177,19 +175,25 @@ class UnitValue(object):
         if needLetter and self.Letter:
             result = '%s = %s' % (self.Letter, result)
 
-        if suffix == 's':
-            result = u'{ ' + result + ' }'
-        elif suffix == 'b':
-            result = u'\\left(' + result + '\\right)'
-        elif suffix == 'e':
-            result = u'$' + result + '$'
-
+        for pipe in pipes:
+            fmt = {
+                's': u'{{ {} }}',
+                'b': u'\\left({}\\right)',
+                'e': u'${}$',
+                'sqr': u'\\sqr{{ {} }}',
+                'sqrt': u'\\sqrt{{ {} }}',
+                'cdot': u'{} \\cdot'
+            }.get(pipe)
+            if fmt is None:
+                raise RuntimeError('Unknown pipe in %s for %s' % (format, self))
+            result = fmt.format(result)
         return result
 
 
 assert UnitValue(u'50 мТл').Value * (10 ** UnitValue(u'50 мТл').Power) == 0.05, 'Got %r' % UnitValue(u'50 мТл').Value
 assert u'{v:Task}'.format(v=UnitValue(u'c = 3 10^{8} м / с')) == u'c = 3 \\cdot 10^{8}\\,\\frac{\\text{м}}{\\text{с}}', 'Got %r' %  u'{v:Task}'.format(v=UnitValue(u'c = 3 10^{8} м / с'))
 assert u'{t:Task}'.format(t=UnitValue(u't = 8 суток')) == u't = 8\\,\\text{суток}', 'Got %r' %  u'{t:Task}'.format(t=UnitValue(u't = 8 суток'))
+u'13.50 10^-11 \u0414\u0436'
 
 
 class Consts(object):
