@@ -131,6 +131,14 @@ def params(params_list):
     return decorator
 
 
+def source_link(link):
+    # now link is unused
+    def decorator(cls):
+        cls.SourceLink = link
+        return cls
+    return decorator
+
+
 @page_shift(lambda self, pageNumber: -2 if pageNumber < 110 else -3)
 class ComicsBook(PdfBook):
     def GetStructure(self):
@@ -632,9 +640,9 @@ class Maron_8_Didaktika(PdfBook):
 
 @page_shift(1)
 @params(['-level', '10%,90%,0.7'])
+@source_link('http://alleng.net/d/phys/phys462.htm')
 class Kirik_8(PdfBook):
     def GetStructure(self):
-        # from http://alleng.net/d/phys/phys462.htm
         return TwoDStructure([
             (u'Тепловые явления', [
                 (u'Внутренняя энергия - Виды теплопередачи', 6, 10),
@@ -685,9 +693,9 @@ class Kirik_8(PdfBook):
 
 @page_shift(1)
 @params(['-level', '10%,90%,0.7'])
+@source_link('https://uchebnik.alleng.me/d/phys/phys552.htm')
 class Kirik_9(PdfBook):
     def GetStructure(self):
-        # from https://uchebnik.alleng.me/d/phys/phys552.htm
         return TwoDStructure([
             (u'Кинематика', [
                 (u'Механическое движение и система отсчета - траектория-путь-перемещение', 6, 12),
@@ -726,9 +734,9 @@ class Kirik_9(PdfBook):
 
 @page_shift(1)
 @params(['-level', '10%,90%,0.7'])
+@source_link('http://alleng.net/d/phys/phys433.htm')
 class Gendenshteyn_8(PdfBook):
     def GetStructure(self):
-        # from http://alleng.net/d/phys/phys433.htm
         return TwoDStructure([
             (u'Тепловые явления', [
                 (u'Внутренняя энергия', 4, 7),
@@ -772,9 +780,9 @@ class Gendenshteyn_8(PdfBook):
 
 @page_shift(1)
 @params(['-level', '10%,90%,0.7'])
+@source_link('https://uchebnik.alleng.me/d/phys/phys435.htm')
 class Gendenshteyn_9(PdfBook):
     def GetStructure(self):
-        # from https://uchebnik.alleng.me/d/phys/phys435.htm
         return TwoDStructure([
             (u'Механика', [
                 (u'Механическое движение и система отсчёта', 4, 13),
@@ -922,9 +930,9 @@ class Vishnyakova(PdfBook):
 
 
 @params(['-level', '10%,90%,0.7'])
+@source_link('https://uchebnik.alleng.me/d/phys/phys435.htm')
 class Problems_3800(PdfBook):
     def GetStructure(self):
-        # from https://uchebnik.alleng.me/d/phys/phys435.htm
         return TwoDStructure([
             (ur'Механика - Кинематика', [
                 (ur'Длина - время - скорость', 4, 7),
