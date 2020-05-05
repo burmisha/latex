@@ -33,8 +33,8 @@ class Date(object):
             '12': u'декабря',
         }[month]
         day = int(day)
-        assert 1 <= day <= 31, 'Error on %r' % self.__DateStr
-        assert 2018 <= int(year) <= 2025, 'Error on %r' % self.__DateStr
+        assert 1 <= day <= 31, 'Error on day in %r' % self.__DateStr
+        assert 2018 <= int(year) <= 2025, 'Error on year in %r' % self.__DateStr
         return u'{}~{}~{}'.format(int(day), textMonth, year)
 
 
