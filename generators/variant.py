@@ -114,12 +114,17 @@ class VariantTask(object):
         for args in self.GetArgs():
             try:
                 text = textTemplate.format(**args)
+                text = re.sub('(\\d)\.(\\d)', '\\1{,}\\2', text)
             except ValueError:
                 print textTemplate
                 print args
                 raise
             try:
-                answer = answerTemplate.format(**args) if answerTemplate else None
+                if answerTemplate:
+                    answer = answerTemplate.format(**args)
+                    answer = re.sub('(\\d)\.(\\d)', '\\1{,}\\2', answer)
+                else:
+                    answer = None
             except ValueError:
                 print answerTemplate
                 print args
