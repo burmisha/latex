@@ -9,23 +9,25 @@ log = logging.getLogger(__name__)
 
 @variant.solution_space(150)
 @variant.text(u'''
-    {what} движется со скоростью $0{{,}}{percent}\,c$, где $c$~--- скорость света в вакууме.
+    {what} движется со скоростью $0.{percent}\,c$, где $c$~--- скорость света в вакууме.
     Каково при этом отношение {energy} к его энергии покоя $E_0$?
 ''')
-@variant.answer(u'''\\begin{{align*}}
-    E &= \\frac{{E_0}}{{\\sqrt{{1 - \\frac{{v^2}}{{c^2}}}}}}
-        \\implies \\frac{{E}}{{E_0}}
-            = \\frac 1{{\\sqrt{{1 - \\frac{{v^2}}{{c^2}}}}}}
-            = \\frac 1{{\\sqrt{{1 - \\sqr{{0{{,}}{percent}}}}}}}
+@variant.answer_align([
+    u'''E &= \\frac{ E_0 }{ \\sqrt{ 1 - \\frac{ v^2 }{ c^2 } } }
+        \\implies \\frac{ E }{ E_0 }
+            = \\frac 1{ \\sqrt{ 1 - \\frac{ v^2 }{ c^2 } } }
+            = \\frac 1{ \\sqrt{ 1 - \\sqr{ 0.{percent} } } }
             \\approx {E:.3f}
-    \\\\
-    E_{{\\text{{кин}}}} &= E - E_0
-        \\implies \\frac{{E_{{\\text{{кин}}}}}}{{E_0}}
-            = \\frac{{E}}{{E_0}} - 1
-            = \\frac 1{{\\sqrt{{1 - \\frac{{v^2}}{{c^2}}}}}} - 1
-            = \\frac 1{{\\sqrt{{1 - \\sqr{{0{{,}}{percent}}}}}}} - 1
+    ''',
+    u'''
+    E_{ \\text{ кин } } &= E - E_0
+        \\implies \\frac{ E_{ \\text{ кин } } }{ E_0 }
+            = \\frac{ E }{ E_0 } - 1
+            = \\frac 1{ \\sqrt{ 1 - \\frac{ v^2 }{ c^2 } } } - 1
+            = \\frac 1{ \\sqrt{ 1 - \\sqr{ 0.{percent} } } } - 1
             \\approx {E_kin:.3f}
-\\end{{align*}}''')
+    ''',
+])
 @variant.args(
     what=[u'Протон', u'Позитрон'],
     energy=[u'полной энергии частицы $E$', u'кинетической энергии частицы $E_{\\text{кин}}$'],
@@ -42,44 +44,28 @@ class BK_4_01(variant.VariantTask):
 
 @variant.solution_space(150)
 @variant.text(u'''
-    {what} движется со скоростью $0{{,}}{percent}\,c$, где $c$~--- скорость света в вакууме.
+    {what} движется со скоростью $0.{percent}\,c$, где $c$~--- скорость света в вакууме.
     Определите его {x} (в ответе приведите формулу и укажите численное значение).
 ''')
-@variant.answer(u'''\\begin{{align*}}
-    E &= \\frac{{ mc^2 }}{{ \\sqrt{{ 1 - \\frac{{v^2}}{{c^2}} }} }}
-        \\approx \\frac{{
-            {m:Value|cdot} {Consts.c:Value|sqr}
-        }}{{
-            \\sqrt{{1 - 0{{,}}{percent}^2}}
-        }} \\approx {E:Value},
-    \\\\
-    E_{{\\text{{кин}}}} &= \\frac{{mc^2}}{{\\sqrt{{1 - \\frac{{v^2}}{{c^2}}}}}} - mc^2
-        = mc^2 \\cbr{{
-            \\frac 1{{
-                \\sqrt{{1 - \\frac{{v^2}}{{c^2}} }}
-            }} - 1
-        }}
-        \\approx
-        \\\\
-        &\\approx \\cbr{{
-            {m:Value|cdot} {Consts.c:Value|sqr}
-        }} \\cdot \\cbr{{
-            \\frac 1{{ \\sqrt{{ 1 - 0{{,}}{percent}^2 }} }} - 1
-        }}
+@variant.answer_align([
+    u'''E &= \\frac{ mc^2 }{  \\sqrt{ 1 - \\frac{ v^2 }{ c^2 } } }
+        \\approx \\frac{ {m:Value|cdot} {Consts.c:Value|sqr} }{ \\sqrt{ 1 - 0.{percent}^2 } }
+        \\approx {E:Value},
+    ''',
+    u'''
+    E_{ \\text{ кин}}}} &= \\frac{ mc^2 }{ \\sqrt{ 1 - \\frac{ v^2 }{ c^2 } } } - mc^2
+        = mc^2 \\cbr{ \\frac 1{ \\sqrt{ 1 - \\frac{ v^2 }{ c^2 } } } - 1 } \\approx''',
+    u'''
+        &\\approx \\cbr{ {m:Value|cdot} {Consts.c:Value|sqr} }
+        \\cdot \\cbr{ \\frac 1{ \\sqrt{ 1 - 0.{percent}^2 } } - 1 }
         \\approx {E_kin:Value},
-    \\\\
-    p &= \\frac{{
-            mv
-        }}{{
-            \\sqrt{{1 - \\frac{{v^2}}{{c^2}} }}
-        }}
-        \\approx \\frac{{
-            {m:Value|cdot} 0{{,}}{percent} {Consts.c:Value}
-        }}{{
-            1 - 0{{,}}{percent}^2
-        }}
+    ''',
+    u'''
+    p &= \\frac{ mv }{ \\sqrt{ 1 - \\frac{ v^2 }{ c^2 } } }
+        \\approx \\frac{ {m:Value|cdot} 0.{percent} \\cdot {Consts.c:Value} }{ 1 - 0.{percent}^2 }
         \\approx {p:Value}.
-\\end{{align*}}''')
+    '''
+])
 @variant.args(
     what=[u'Протон', u'Электрон'],
     x=[u'полную энергию', u'кинетическую энергию', u'импульс'],
@@ -115,17 +101,20 @@ class BK_4_03(variant.VariantTask):
     При какой скорости движения (в {what}) релятивистское сокращение длины движущегося тела
     составит {percent}\\%?
 ''')
-@variant.answer(u'''\\begin{{align*}}
-    l_0 &= \\frac{{l}}{{\\sqrt{{1 - \\frac {{v^2}}{{c^2}}}}}}
-    \\implies 1 - \\frac {{v^2}}{{c^2}} = \\sqr{{\\frac l{{l_0}}}}
-    \\implies \\frac v c = \\sqrt{{1 - \\sqr{{\\frac l{{l_0}}}}}} \\implies \\\\
-    \\implies v &= c\\sqrt{{1 - \\sqr{{\\frac l{{l_0}}}}}}
-    = {Consts.c:Value} \\cdot \\sqrt{{1 - \\sqr{{\\frac {{l_0 - 0{{,}}{percent}l_0}} {{l_0}} }} }}
-    = {Consts.c:Value} \\cdot \\sqrt{{1 - \\sqr{{1 - 0{{,}}{percent} }} }} \\approx \\\\
+@variant.answer_align([
+    u'''l_0 &= \\frac{ l }{ \\sqrt{ 1 - \\frac { v^2 }{ c^2 } } }
+    \\implies 1 - \\frac{ v^2 }{ c^2 } = \\sqr{ \\frac l{ l_0 } }
+    \\implies \\frac v c = \\sqrt{ 1 - \\sqr{ \\frac l{ l_0 } } } \\implies
+    ''',
+    u'''
+    \\implies v &= c\\sqrt{ 1 - \\sqr{ \\frac l{ l_0 } } }
+    = {Consts.c:Value} \\cdot \\sqrt{ 1 - \\sqr{ \\frac { l_0 - 0.{percent}l_0 }{ l_0 } } }
+    = {Consts.c:Value} \\cdot \\sqrt{ 1 - \\sqr{ 1 - 0.{percent} } } \\approx ''',
+    u'''
     &\\approx {answerShare:.3f}c
     \\approx {speed:Value}
-    \\approx {kmch:Value}.
-\\end{{align*}}''')
+    \\approx {kmch:Value}.''',
+])
 @variant.args(
     what=[u'км/ч', u'м/с', u'долях скорости света'],
     percent=['50', '30', '10'],
