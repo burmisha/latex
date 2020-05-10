@@ -273,7 +273,6 @@ class UnitValue(object):
     def Other(self, other, action=None, precisionInc=0, units=''):
         # TODO: skips units now
         if isinstance(other, UnitValue):
-            # print self.Precision, other.Precision
             precision = min(min(self.Precision, other.Precision) + precisionInc, 7)
             if action == 'mult':
                 value = self.Value * other.Value
@@ -308,19 +307,8 @@ class Consts(object):
     m_p = UnitValue(u'm_{p} = 1.672 10^{-27} кг')
     m_n = UnitValue(u'm_{n} = 1.675 10^{-27} кг')
     e = UnitValue(u'e = 1.60 10^{-19} Кл', viewPrecision=1)
-    eV = UnitValue(u'1.6 10^{-19} Дж', viewPrecision=1)
+    eV = UnitValue(u'1.60 10^{-19} Дж', viewPrecision=1)
     h = UnitValue(u'h = 6.626 10^{-34} Дж с')
     c = UnitValue(u'c = 3 10^{8} м / с', precision=3, viewPrecision=1)
     g_ten = UnitValue(u'g = 10 м / с^2', precision=2)
     aem = UnitValue(u'1.66054 10^-27 кг')
-
-
-# E = UnitValue(u'E = 7.72 МэВ')
-# print '%r' % [
-#     E.Precision,
-#     Consts.c.Precision,
-#     # E.Other(Consts.e, action='mult').Precision,
-#     E.Other(Consts.e, action='mult').Other(Consts.c, action='div').Precision,
-#     # E.Other(Consts.e, action='mult').Other(Consts.c, action='div').Other(Consts.c, action='div', units=u'кг')
-# ]
-# assert False

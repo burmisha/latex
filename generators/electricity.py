@@ -62,19 +62,18 @@ class ForceTask(variant.VariantTask):
     Определите характер (притяжение или отталкивание)
     и силу взаимодействия шариков до и после соприкосновения.
 ''')
-@variant.answer(u'''\\begin{{align*}}
-    F   &= k\\frac{{q_1q_2}}{{{letter}^2}} = k\\frac{{({charges[0]})\\cdot({charges[1]})}}{{{letter}^2}},
-    \\text{{{res[0]}}};
-    \\\\
-    q'_1 = q'_2 = \\frac{{q_1 + q_2}}2 = \\frac{{({charges[0]}) + ({charges[1]})}}2 \\implies
-    F'  &= k\\frac{{q'_1q'_2}}{{{letter}^2}}
-        = k\\frac{{
-                \\left(\\frac{{({charges[0]}) + ({charges[1]})}}2\\right)^2
-            }}{{
-                {letter}^2
-            }},
-    \\text{{{res[1]}}}.
-\\end{{align*}}''')
+@variant.answer_align([
+    u'''
+    F   &= k\\frac{ q_1 q_2 }{ {letter}^2 } = k\\frac{ ({charges[0]})\\cdot({charges[1]}) }{ {letter}^2 },
+    \\text{ {res[0]} };
+    ''',
+    u'''
+    q'_1 = q'_2 = \\frac{ q_1 + q_2 }2 = \\frac{ {charges[0]} + {charges[1]} }2 \\implies
+    F'  &= k\\frac{ q'_1 q'_2 }{ {letter}^2 }
+        = k\\frac{ \\sqr{ \\frac{ ({charges[0]}) + ({charges[1]}) }2 } }{ {letter}^2 },
+    \\text{ {res[1]} }.
+'''
+])
 @variant.args(
     first_charge__second_charge=[(fc, sc) for fc in range(2, 6) for sc in range(2, 6) if fc != sc],
     sign_1=['+', '-'],
@@ -157,11 +156,11 @@ class SumTask(variant.VariantTask):
     на {l:Task:e}. Определите работу поля, изменение потенциальной энергии заряда,
     напряжение между начальной и конечной точками перемещения.
 ''')
-@variant.answer(u'''\\begin{{align*}}
+@variant.answer(u'''
     A   = {E.Letter}{q.Letter}{l.Letter}
         = {E:Value} \\cdot {q:Value} \\cdot {l:Value}
         = {A:.2f} \\cdot 10^{{-7}} \\units{{Дж}}
-\\end{{align*}}''')
+''')
 @variant.args(
     q=[u'%s = %d нКл' % (ql, qv) for ql in ['Q', 'q'] for qv in [-10, 10, -25, 25, -40, 40]],
     l=[u'%s = %d см' % (ll, lv) for ll in ['l', 'r', 'd'] for lv in [2, 4, 5, 10]],
@@ -366,10 +365,10 @@ class Cond1(variant.VariantTask):
     На резистор сопротивлением {R:Task:e} подали напряжение {U:Task:e}.
     Определите ток, который потечёт через резистор, и мощность, выделяющуюся на нём.
 ''')
-@variant.answer(u'''\\begin{{align*}}
-    {I:Letter} &= \\frac{U:Letter:s}{R:Letter:s} = \\frac{U:Value:s}{R:Value:s} = {I:Value}, \\\\
-    {P:Letter} &= \\frac{{ {U:Letter}^2 }}{R:Letter:s} = \\frac{{ \\sqr{U:Value:s} }}{R:Value:s} = {P:Value}
-\\end{{align*}}''')
+@variant.answer_align([
+    u'{I:Letter} &= \\frac{U:Letter:s}{R:Letter:s} = \\frac{U:Value:s}{R:Value:s} = {I:Value}, ',
+    u'{P:Letter} &= \\frac{ {U:Letter}^2 }{R:Letter:s} = \\frac{U:Value|sqr|s}{R:Value:s} = {P:Value}',
+])
 @variant.args(
     R=[u'%s = %d Ом' % (rLetter, rValue) for rLetter, rValue in itertools.product(['r', 'R'], [5, 12, 18, 30])],
     U=[u'%s = %d В' % (uLetter, uValue) for uLetter, uValue in itertools.product(['U', 'V'], [120, 150, 180, 240])],
@@ -386,10 +385,10 @@ class Rezistor1_v1(variant.VariantTask):
     Через резистор сопротивлением {R:Task:e} протекает электрический ток {I:Task:e}.
     Определите, чему равны напряжение на резисторе и мощность, выделяющаяся на нём.
 ''')
-@variant.answer(u'''\\begin{{align*}}
-    {U:Letter} &= {I:Letter}{R:Letter} = {I:Value} \\cdot {R:Value} = {U:Value}, \\\\
-    {P:Letter} &= {I:Letter}^2{R:Letter} = \\sqr{I:Value:s} \\cdot {R:Value} = {P:Value}
-\\end{{align*}}''')
+@variant.answer_align([
+    u'{U:Letter} &= {I:Letter}{R:Letter} = {I:Value} \\cdot {R:Value} = {U:Value}, ',
+    u'{P:Letter} &= {I:Letter}^2{R:Letter} = {I:Value|sqr|cdot} {R:Value} = {P:Value}',
+])
 @variant.args(
     R=[u'%s = %d Ом' % (rLetter, rValue) for rLetter, rValue in itertools.product(['r', 'R'], [5, 12, 18, 30])],
     I=[u'\\mathcal{I} = %.2f А' % iValue for iValue in [2, 3, 4, 5, 6, 8, 10, 15]],
@@ -408,48 +407,22 @@ class Rezistor1_v2(variant.VariantTask):
     {t:Task:e}? Какая работа будет совершена ЭДС за это время? Каков знак этой работы? Чему равен КПД цепи? Вычислите значения для 2 случаев:
     ${r:Letter}=0$ и {r:Task:e}.
 ''')
-@variant.answer(u'''\\begin{{align*}}
-    {I1:Letter}
-        &= \\frac{E:Letter:s}{R:Letter:s}
-        = \\frac{E:Value:s}{R:Value:s}
-        = {I1:Value}, \\\\
-    {I2:Letter}
-        &= \\frac{E:Letter:s}{{ {R:Letter} + {r:Letter} }}
-        = \\frac{E:Value:s}{{ {R:Value} + {r:Value} }}
-        = {I2:Value}, \\\\
-    {Q1:Letter}
-        &= {I1:Letter}^2{R:Letter}{t:Letter}
-        = \\cbr{{ \\frac{E:Letter:s}{R:Letter:s} }}^2 {R:Letter} {t:Letter}
-        = \\cbr{{ \\frac{E:Value:s}{R:Value:s} }}^2 \\cdot {R:Value} \\cdot {t:Value}
-        = {Q1:Value}, \\\\
-    {Q2:Letter}
-        &= {I2:Letter}^2{R:Letter}{t:Letter}
-        = \\cbr{{\\frac{E:Letter:s}{{ {R:Letter} + {r:Letter} }} }}^2 {R:Letter} {t:Letter}
-        = \\cbr{{\\frac{E:Value:s}{{ {R:Value} + {r:Value} }} }}^2 \\cdot {R:Value} \\cdot {t:Value}
-        = {Q2:Value}, \\\\
-    {A1:Letter}
-        &= {I1:Letter}{t:Letter}{E:Letter}
-        = \\frac{E:Letter:s}{{ {R:Letter} }} {t:Letter} {E:Letter}
-        = \\frac{{ {E:Letter}^2 {t:Letter} }}{{ {R:Letter} }}
-        = \\frac{{ \\sqr{E:Value:s} \\cdot {t:Value} }}{R:Value:s}
-        = {A1:Value}, \\text{{положительна}}, \\\\
-    {A2:Letter}
-        &= {I2:Letter}{t:Letter}{E:Letter}
-        = \\frac{E:Letter:s}{{ {R:Letter} + {r:Letter} }} {t:Letter} {E:Letter}
-        = \\frac{{ {E:Letter}^2 {t:Letter} }}{{ {R:Letter} + {r:Letter} }}
-        = \\frac{{ \\sqr{E:Value:s} \\cdot {t:Value} }}{{ {R:Value} + {r:Value} }}
-        = {A2:Value}, \\text{{положительна}}, \\\\
-    {eta1:Letter}
-        &= \\frac{Q1:Letter:s}{A1:Letter:s}
-        = \\ldots
-        = \\frac{R:Letter:s}{R:Letter:s}
-        = 1, \\\\
-    {eta2:Letter}
-        &= \\frac{Q2:Letter:s}{A2:Letter:s}
-        = \\ldots
-        = \\frac{R:Letter:s}{{ {R:Letter} + {r:Letter} }}
-        = {eta2:Value}
-\\end{{align*}}''')
+@variant.answer_align([
+    u'''{I1:Letter} &= \\frac{E:Letter:s}{R:Letter:s} = \\frac{E:Value:s}{R:Value:s} = {I1:Value}, ''',
+    u'''{I2:Letter} &= \\frac{E:Letter:s}{ {R:Letter} + {r:Letter} } = \\frac{E:Value:s}{ {R:Value} + {r:Value} } = {I2:Value}, ''',
+    u'''{Q1:Letter} &= {I1:Letter}^2{R:Letter}{t:Letter} = \\sqr{ \\frac{E:Letter:s}{R:Letter:s} } {R:Letter} {t:Letter}
+        = \\sqr{ \\frac{E:Value:s}{R:Value:s} } \\cdot {R:Value|cdot} \\cdot {t:Value} = {Q1:Value}, ''',
+    u'''{Q2:Letter} &= {I2:Letter}^2{R:Letter}{t:Letter} = \\sqr{ \\frac{E:Letter:s}{ {R:Letter} + {r:Letter} } } {R:Letter} {t:Letter}
+        = \\sqr{ \\frac{E:Value:s}{ {R:Value} + {r:Value} } } \\cdot {R:Value} \\cdot {t:Value} = {Q2:Value}, ''',
+    u'''{A1:Letter} &= {I1:Letter}{t:Letter}{E:Letter} = \\frac{E:Letter:s}{ {R:Letter} } {t:Letter} {E:Letter}
+        = \\frac{ {E:Letter}^2 {t:Letter} }{R:Letter|s} = \\frac{ {E:Value|sqr|cdot} {t:Value} }{R:Value:s}
+        = {A1:Value}, \\text{ положительна }, ''',
+    u'''{A2:Letter} &= {I2:Letter}{t:Letter}{E:Letter} = \\frac{E:Letter:s}{ {R:Letter} + {r:Letter} } {t:Letter} {E:Letter}
+        = \\frac{ {E:Letter}^2 {t:Letter} }{ {R:Letter} + {r:Letter} } = \\frac{ {E:Value|sqr|cdot} {t:Value} }{ {R:Value} + {r:Value} }
+        = {A2:Value}, \\text{ положительна }, ''',
+    u'''{eta1:Letter} &= \\frac{Q1:Letter:s}{A1:Letter:s} = \\ldots = \\frac{R:Letter:s}{R:Letter:s} = 1, ''',
+    u'''{eta2:Letter} &= \\frac{Q2:Letter:s}{A2:Letter:s} = \\ldots = \\frac{R:Letter:s}{ {R:Letter} + {r:Letter} } = {eta2:Value}''',
+])
 @variant.args(
     E=[u'\\mathcal{E} = %d В' % E for E in [1, 2, 3, 4]],
     R=[u'R = %d Ом' % R for R in [10, 15, 24, 30]],
@@ -482,28 +455,33 @@ class Rezistor2(variant.VariantTask):
     Лампочки, сопротивления которых {R1:Task:e} и {R2:Task:e}, поочерёдно подключённные к некоторому источнику тока,
     потребляют одинаковую мощность. Найти внутреннее сопротивление источника и КПД цепи в каждом случае.
 ''')
-@variant.answer(u'''\\begin{{align*}}
-    P_1 &= \\sqr{{ \\frac{E:Letter:s}{{ {R1:Letter} + {r:Letter} }} }} {R1:Letter},
-    P_2  = \\sqr{{ \\frac{E:Letter:s}{{ {R2:Letter} + {r:Letter} }} }} {R2:Letter},
-    P_1 = P_2 \\implies \\\\
-    &\\implies {R1:Letter} \\sqr{{ {R2:Letter} + {r:Letter} }} = {R2:Letter} \\sqr{{ {R1:Letter} + {r:Letter} }} \\implies \\\\
+@variant.answer_align([
+    u'''
+    P_1 &= \\sqr{ \\frac{E:Letter:s}{ {R1:Letter} + {r:Letter} } }{R1:Letter},
+    P_2  = \\sqr{ \\frac{E:Letter:s}{ {R2:Letter} + {r:Letter} } }{R2:Letter},
+    P_1 = P_2 \\implies ''',
+    u'''
+    &\\implies {R1:Letter} \\sqr{ {R2:Letter} + {r:Letter} } = {R2:Letter} \\sqr{ {R1:Letter} + {r:Letter} } \\implies ''',
+    u'''
     &\\implies {R1:Letter} {R2:Letter}^2 + 2 {R1:Letter} {R2:Letter} {r:Letter} + {R1:Letter} {r:Letter}^2 =
-                {R2:Letter} {R1:Letter}^2 + 2 {R2:Letter} {R1:Letter} {r:Letter} + {R2:Letter} {r:Letter}^2  \\implies \\\\
-    &\\implies {r:Letter}^2 ({R2:Letter} - {R1:Letter}) = {R2:Letter}^2 {R2:Letter} - {R1:Letter}^2 {R2:Letter} \\implies \\\\
-    &\\implies {r:Letter}
-        = \\sqrt{{ {R1:Letter} {R2:Letter} \\frac{{ {R2:Letter} - {R1:Letter} }}{{ {R2:Letter} - {R1:Letter} }} }}
-        = \\sqrt{{ {R1:Letter} {R2:Letter} }}
-        = \\sqrt{{ {R1:Value} \\cdot {R2:Value} }}
-        = {r:Value}. \\\\
-     {eta1:Letter}
-        &= \\frac{R1:Letter:s}{{ {R1:Letter} + {r:Letter} }}
-        = \\frac{{ \\sqrt{R1:Letter:s} }}{{ \\sqrt{R1:Letter:s} + \\sqrt{R2:Letter:s} }}
-        = {eta1:Value}, \\\\
-     {eta2:Letter}
-        &= \\frac{R2:Letter:s}{{ {R2:Letter} + {r:Letter} }}
-        = \\frac{{ \\sqrt{R2:Letter:s} }}{{ \\sqrt{R2:Letter:s} + \\sqrt{R1:Letter:s} }}
-        = {eta2:Value}
-\\end{{align*}}''')
+                {R2:Letter} {R1:Letter}^2 + 2 {R2:Letter} {R1:Letter} {r:Letter} + {R2:Letter} {r:Letter}^2  \\implies ''',
+    u'''&\\imuplies {r:Letter}^2 ({R2:Letter} - {R1:Letter}) = {R2:Letter}^2 {R2:Letter} - {R1:Letter}^2 {R2:Letter} \\implies ''',
+    u'''&\\implies {r:Letter}
+        = \\sqrt{ {R1:Letter} {R2:Letter} \\frac{ {R2:Letter} - {R1:Letter} }{ {R2:Letter} - {R1:Letter} } }
+        = \\sqrt{ {R1:Letter} {R2:Letter} }
+        = \\sqrt{ {R1:Value|cdot} {R2:Value} }
+        = {r:Value}. '''
+   ,
+   u'''{eta1:Letter}
+        &= \\frac{R1:Letter:s}{ {R1:Letter} + {r:Letter} }
+        = \\frac{ {R1:Letter|sqrt} }{ {R1:Letter|sqrt} + {R2:Letter|sqrt} }
+        = {eta1:Value}, '''
+   ,
+   u'''{eta2:Letter}
+        &= \\frac{R2:Letter:s}{ {R2:Letter} + {r:Letter} }
+        = \\frac{R2:Letter|sqrt|s}{ {R2:Letter|sqrt} + {R1:Letter|sqrt} }
+        = {eta2:Value}''',
+])
 @variant.args(
     R1__R2=[(u'R_1 = %.2f Ом' % R_1, u'R_2 = %.2f Ом' % R_2) for R_1, R_2 in [
         (0.25, 16), (0.25, 64), (0.25, 4),
