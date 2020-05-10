@@ -234,12 +234,12 @@ class BK_52_07(variant.VariantTask):
     равное {when} периодам полураспада? Ответ выразить в процентах.
 ''')
 @variant.answer_align([
-    u'''N &= N_0 \\cdot 2^{ - \\frac t{ T_{ 1/2 } } } \\implies 
+    u'''N &= N_0 \\cdot 2^{ - \\frac t{ T_{ 1/2 } } } \\implies
     \\frac N{ N_0 } = 2^{ - \\frac t{ T_{ 1/2 } } }
     = 2^{ -{t} } \\approx {N_value:.2f} \\approx {N_percent:.0f}\\%''',
-    u'''N_\\text{{ост.}} &= N_0 - N = N_0 - N_0 \\cdot 2^{ - \\frac t{ T_{ 1/2 } } } 
-    = N_0\\cbr{ 1 - 2^{ - \\frac t{ T_{ 1/2 } } } } \\implies 
-    \\frac { N_\\text{ ост. } }{ N_0 } = 1 - 2^{ - \\frac t{ T_{ 1/2 } } }
+    u'''N_\\text{ расп. } &= N_0 - N = N_0 - N_0 \\cdot 2^{ - \\frac t{ T_{ 1/2 } } }
+    = N_0\\cbr{ 1 - 2^{ - \\frac t{ T_{ 1/2 } } } } \\implies
+    \\frac { N_\\text{ расп. } }{ N_0 } = 1 - 2^{ - \\frac t{ T_{ 1/2 } } }
     = 1 - 2^{ -{t} } \\approx {N_left_value:.2f} \\approx {N_left_percent:.0f}\\%''',
 ])
 @variant.args(
@@ -270,12 +270,8 @@ class BK_53_01(variant.VariantTask):
     останется через ${t:Value}$, если период его полураспада составляет ${T:Value}$?
 ''')
 @variant.answer_align([
-    u'''N_\\text{{ост.}} &= N_0 - N = N_0 - N_0 \\cdot 2^{ - \\frac t{ T_{ 1/2 } } } 
-    = N_0\\cbr{ 1 - 2^{ - \\frac t{ T_{ 1/2 } } } } \\implies''',
-    u'''
-    \\implies 
-    \\frac { N_\\text{ ост. } }{ N_0 } &= 1 - 2^{ - \\frac t{ T_{ 1/2 } } }
-     = 1 - 2^{ - \\frac {t:Value|s}{T:Value|s} }
+    u'''N &= N_0 \\cdot 2^{ - \\frac t{ T_{ 1/2 } } }
+    = 2^{ - \\frac {t:Value|s}{T:Value|s} }
     \\approx {share} \\approx {percent}\\%''',
 ])
 @variant.args(
@@ -284,7 +280,7 @@ class BK_53_01(variant.VariantTask):
 )
 class BK_53_02(variant.VariantTask):
     def GetUpdate(self, t=None, T=None, **kws):
-        share = 1. - 2. ** (-t.Value / T.Value)
+        share = 2. ** (-t.Value / T.Value)
         return dict(
             share=share,
             percent=share * 100,
@@ -299,15 +295,15 @@ class BK_53_02(variant.VariantTask):
 ''')
 @variant.answer_align([
     u'''
-        N &= N_0 \\cdot 2^{ - \\frac t{ T_{ 1/2 } } } 
-        \\implies \\frac N{ N_0 } = 2^{ - \\frac t{ T_{ 1/2 } } } 
-        \\implies \\frac 1{num} = 2^{ - \\frac {t:Value|s}{ T_{ 1/2 } } } 
+        N &= N_0 \\cdot 2^{ - \\frac t{ T_{ 1/2 } } }
+        \\implies \\frac N{ N_0 } = 2^{ - \\frac t{ T_{ 1/2 } } }
+        \\implies \\frac 1{num} = 2^{ - \\frac {t:Value|s}{ T_{ 1/2 } } }
         \\implies {log_num} = \\frac {t:Value|s}{ T_{ 1/2 } }
         \\implies T_{ 1/2 } = \\frac {t:Value|s}{log_num} \\approx {T:Value}.
     ''',
     u'''
         \\delta &= \\frac{ N(t) }{ N_0 } - \\frac{ N(2t) }{ N_0 }
-        = 2^{ - \\frac t{ T_{ 1/2 } } } - 2^{ - \\frac { 2t }{ T_{ 1/2 } } } 
+        = 2^{ - \\frac t{ T_{ 1/2 } } } - 2^{ - \\frac { 2t }{ T_{ 1/2 } } }
         = 2^{ - \\frac t{ T_{ 1/2 } } }\\cbr{ 1 - 2^{ - \\frac { t }{ T_{ 1/2 } } } }
         = \\frac 1{num}\\cdot \\cbr{ 1 - \\frac 1{num} } \\approx {res:.3f}
     '''
@@ -339,12 +335,12 @@ class BK_53_03(variant.VariantTask):
 ''')
 @variant.answer_align([
     u'''
-        &E_\\text{ св. } = \\Delta m c^2 
-        \\implies \\Delta m = \\frac { E_\\text{ св. } }{ c^2 } =
+        E_\\text{ св. } = \\Delta m c^2 \\implies
     ''',
     u'''
-        &= \\frac{E:Value|s}{Consts.c:Value|sqr|s}
-        = \\frac{ {eV} \\cdot 10^6 \\cdot {Consts.eV:Value} }{Consts.c:Value|sqr|s} 
+        \\implies
+        \\Delta m &= \\frac { E_\\text{ св. } }{ c^2 } = \\frac{E:Value|s}{Consts.c:Value|sqr|s}
+        = \\frac{ {eV} \\cdot 10^6 \\cdot {Consts.eV:Value} }{Consts.c:Value|sqr|s}
         \\approx {dm:Value} \\approx {aem:Value}
     ''',
 ])
