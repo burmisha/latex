@@ -12,11 +12,31 @@
     Какая доля (от начального количества) радиоактивных ядер останется через время,
     равное четырём периодам полураспада? Ответ выразить в процентах.
 }
+\answer{
+    \begin{align*}
+    N &= N_0 \cdot 2^{ - \frac t{ T_{ 1/2 } } } \implies
+        \frac N{ N_0 } = 2^{ - \frac t{ T_{ 1/2 } } }
+        = 2^{ -4 } \approx 0.06 \approx 6\% \\
+    N_\text{ расп.
+    } &= N_0 - N = N_0 - N_0 \cdot 2^{ - \frac t{ T_{ 1/2 } } }
+        = N_0\cbr{ 1 - 2^{ - \frac t{ T_{ 1/2 } } } } \implies
+        \frac { N_\text{ расп.
+        } }{ N_0 } = 1 - 2^{ - \frac t{ T_{ 1/2 } } }
+        = 1 - 2^{ -4 } \approx 0.94 \approx 94\%
+    \end{align*}
+}
 \vspace{150pt}
 
 \tasknumber{2}\task{
     Сколько процентов ядер радиоактивного железа \ce{^{59}Fe}
     останется через $182{,}4\,\text{суток}$, если период его полураспада составляет $45{,}6\,\text{суток}$?
+}
+\answer{
+    \begin{align*}
+    N &= N_0 \cdot 2^{ - \frac t{ T_{ 1/2 } } }
+        = 2^{ - \frac { 182{,}4\,\text{суток} }{ 45{,}6\,\text{суток} } }
+        \approx 0.0625 \approx 6.25\%
+    \end{align*}
 }
 \vspace{150pt}
 
@@ -24,6 +44,20 @@
     За $5\,\text{суток}$ от начального количества ядер радиоизотопа осталась половина.
     Каков период полураспада этого изотопа (ответ приведите в сутках)?
     Какая ещё доля (также от начального количества) распадётся, если подождать ещё столько же?
+}
+\answer{
+    \begin{align*}
+    N &= N_0 \cdot 2^{ - \frac t{ T_{ 1/2 } } }
+            \implies \frac N{ N_0 } = 2^{ - \frac t{ T_{ 1/2 } } }
+            \implies \frac 12 = 2^{ - \frac { 5\,\text{суток} }{ T_{ 1/2 } } }
+            \implies 1 = \frac { 5\,\text{суток} }{ T_{ 1/2 } }
+            \implies T_{ 1/2 } = \frac { 5\,\text{суток} }1 \approx 5{,}0\,\text{суток}.
+         \\
+            \delta &= \frac{ N(t) }{ N_0 } - \frac{ N(2t) }{ N_0 }
+            = 2^{ - \frac t{ T_{ 1/2 } } } - 2^{ - \frac { 2t }{ T_{ 1/2 } } }
+            = 2^{ - \frac t{ T_{ 1/2 } } }\cbr{ 1 - 2^{ - \frac { t }{ T_{ 1/2 } } } }
+            = \frac 12\cdot \cbr{ 1 - \frac 12 } \approx 0.250
+    \end{align*}
 }
 \vspace{150pt}
 
@@ -34,6 +68,18 @@
     и кг.
     Скорость света $c = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}$.
 }
+\answer{
+    \begin{align*}
+    E_\text{ св.
+    } = \Delta m c^2 \implies
+         \\
+            \implies
+            \Delta m &= \frac { E_\text{ св.
+            } }{ c^2 } = \frac{ 104{,}7\,\text{МэВ} }{ \sqr{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} } }
+            = \frac{ 104.7 \cdot 10^6 \cdot 1{,}6 \cdot 10^{-19}\,\text{Дж} }{ \sqr{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} } }
+            \approx 18{,}5 \cdot 10^{-29}\,\text{кг} \approx 11{,}1 \cdot 10^{-2}\,\text{а.е.м.}
+    \end{align*}
+}
 \newpage
 
 \addpersonalvariant{Ирина Ан}
@@ -43,11 +89,31 @@
     Какая доля (от начального количества) радиоактивных ядер останется через время,
     равное двум периодам полураспада? Ответ выразить в процентах.
 }
+\answer{
+    \begin{align*}
+    N &= N_0 \cdot 2^{ - \frac t{ T_{ 1/2 } } } \implies
+        \frac N{ N_0 } = 2^{ - \frac t{ T_{ 1/2 } } }
+        = 2^{ -2 } \approx 0.25 \approx 25\% \\
+    N_\text{ расп.
+    } &= N_0 - N = N_0 - N_0 \cdot 2^{ - \frac t{ T_{ 1/2 } } }
+        = N_0\cbr{ 1 - 2^{ - \frac t{ T_{ 1/2 } } } } \implies
+        \frac { N_\text{ расп.
+        } }{ N_0 } = 1 - 2^{ - \frac t{ T_{ 1/2 } } }
+        = 1 - 2^{ -2 } \approx 0.75 \approx 75\%
+    \end{align*}
+}
 \vspace{150pt}
 
 \tasknumber{2}\task{
     Сколько процентов ядер радиоактивного железа \ce{^{59}Fe}
     останется через $91{,}2\,\text{суток}$, если период его полураспада составляет $45{,}6\,\text{суток}$?
+}
+\answer{
+    \begin{align*}
+    N &= N_0 \cdot 2^{ - \frac t{ T_{ 1/2 } } }
+        = 2^{ - \frac { 91{,}2\,\text{суток} }{ 45{,}6\,\text{суток} } }
+        \approx 0.25 \approx 25.0\%
+    \end{align*}
 }
 \vspace{150pt}
 
@@ -55,6 +121,20 @@
     За $3\,\text{суток}$ от начального количества ядер радиоизотопа осталась одна шестнадцатая.
     Каков период полураспада этого изотопа (ответ приведите в сутках)?
     Какая ещё доля (также от начального количества) распадётся, если подождать ещё столько же?
+}
+\answer{
+    \begin{align*}
+    N &= N_0 \cdot 2^{ - \frac t{ T_{ 1/2 } } }
+            \implies \frac N{ N_0 } = 2^{ - \frac t{ T_{ 1/2 } } }
+            \implies \frac 116 = 2^{ - \frac { 3\,\text{суток} }{ T_{ 1/2 } } }
+            \implies 4 = \frac { 3\,\text{суток} }{ T_{ 1/2 } }
+            \implies T_{ 1/2 } = \frac { 3\,\text{суток} }4 \approx 0{,}0\,\text{суток}.
+         \\
+            \delta &= \frac{ N(t) }{ N_0 } - \frac{ N(2t) }{ N_0 }
+            = 2^{ - \frac t{ T_{ 1/2 } } } - 2^{ - \frac { 2t }{ T_{ 1/2 } } }
+            = 2^{ - \frac t{ T_{ 1/2 } } }\cbr{ 1 - 2^{ - \frac { t }{ T_{ 1/2 } } } }
+            = \frac 116\cdot \cbr{ 1 - \frac 116 } \approx 0.059
+    \end{align*}
 }
 \vspace{150pt}
 
@@ -65,6 +145,18 @@
     и кг.
     Скорость света $c = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}$.
 }
+\answer{
+    \begin{align*}
+    E_\text{ св.
+    } = \Delta m c^2 \implies
+         \\
+            \implies
+            \Delta m &= \frac { E_\text{ св.
+            } }{ c^2 } = \frac{ 127{,}6\,\text{МэВ} }{ \sqr{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} } }
+            = \frac{ 127.6 \cdot 10^6 \cdot 1{,}6 \cdot 10^{-19}\,\text{Дж} }{ \sqr{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} } }
+            \approx 22{,}6 \cdot 10^{-29}\,\text{кг} \approx 13{,}6 \cdot 10^{-2}\,\text{а.е.м.}
+    \end{align*}
+}
 \newpage
 
 \addpersonalvariant{Софья Андрианова}
@@ -74,11 +166,31 @@
     Какая доля (от начального количества) радиоактивных ядер останется через время,
     равное четырём периодам полураспада? Ответ выразить в процентах.
 }
+\answer{
+    \begin{align*}
+    N &= N_0 \cdot 2^{ - \frac t{ T_{ 1/2 } } } \implies
+        \frac N{ N_0 } = 2^{ - \frac t{ T_{ 1/2 } } }
+        = 2^{ -4 } \approx 0.06 \approx 6\% \\
+    N_\text{ расп.
+    } &= N_0 - N = N_0 - N_0 \cdot 2^{ - \frac t{ T_{ 1/2 } } }
+        = N_0\cbr{ 1 - 2^{ - \frac t{ T_{ 1/2 } } } } \implies
+        \frac { N_\text{ расп.
+        } }{ N_0 } = 1 - 2^{ - \frac t{ T_{ 1/2 } } }
+        = 1 - 2^{ -4 } \approx 0.94 \approx 94\%
+    \end{align*}
+}
 \vspace{150pt}
 
 \tasknumber{2}\task{
     Сколько процентов ядер радиоактивного железа \ce{^{59}Fe}
     останется через $182{,}4\,\text{суток}$, если период его полураспада составляет $45{,}6\,\text{суток}$?
+}
+\answer{
+    \begin{align*}
+    N &= N_0 \cdot 2^{ - \frac t{ T_{ 1/2 } } }
+        = 2^{ - \frac { 182{,}4\,\text{суток} }{ 45{,}6\,\text{суток} } }
+        \approx 0.0625 \approx 6.25\%
+    \end{align*}
 }
 \vspace{150pt}
 
@@ -86,6 +198,20 @@
     За $5\,\text{суток}$ от начального количества ядер радиоизотопа осталась одна шестнадцатая.
     Каков период полураспада этого изотопа (ответ приведите в сутках)?
     Какая ещё доля (также от начального количества) распадётся, если подождать ещё столько же?
+}
+\answer{
+    \begin{align*}
+    N &= N_0 \cdot 2^{ - \frac t{ T_{ 1/2 } } }
+            \implies \frac N{ N_0 } = 2^{ - \frac t{ T_{ 1/2 } } }
+            \implies \frac 116 = 2^{ - \frac { 5\,\text{суток} }{ T_{ 1/2 } } }
+            \implies 4 = \frac { 5\,\text{суток} }{ T_{ 1/2 } }
+            \implies T_{ 1/2 } = \frac { 5\,\text{суток} }4 \approx 1{,}0\,\text{суток}.
+         \\
+            \delta &= \frac{ N(t) }{ N_0 } - \frac{ N(2t) }{ N_0 }
+            = 2^{ - \frac t{ T_{ 1/2 } } } - 2^{ - \frac { 2t }{ T_{ 1/2 } } }
+            = 2^{ - \frac t{ T_{ 1/2 } } }\cbr{ 1 - 2^{ - \frac { t }{ T_{ 1/2 } } } }
+            = \frac 116\cdot \cbr{ 1 - \frac 116 } \approx 0.059
+    \end{align*}
 }
 \vspace{150pt}
 
@@ -95,6 +221,18 @@
     Ответ выразите в а.е.м.
     и кг.
     Скорость света $c = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}$.
+}
+\answer{
+    \begin{align*}
+    E_\text{ св.
+    } = \Delta m c^2 \implies
+         \\
+            \implies
+            \Delta m &= \frac { E_\text{ св.
+            } }{ c^2 } = \frac{ 139{,}8\,\text{МэВ} }{ \sqr{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} } }
+            = \frac{ 139.8 \cdot 10^6 \cdot 1{,}6 \cdot 10^{-19}\,\text{Дж} }{ \sqr{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} } }
+            \approx 24{,}8 \cdot 10^{-29}\,\text{кг} \approx 14{,}9 \cdot 10^{-2}\,\text{а.е.м.}
+    \end{align*}
 }
 \newpage
 
@@ -105,11 +243,31 @@
     Какая доля (от начального количества) радиоактивных ядер останется через время,
     равное четырём периодам полураспада? Ответ выразить в процентах.
 }
+\answer{
+    \begin{align*}
+    N &= N_0 \cdot 2^{ - \frac t{ T_{ 1/2 } } } \implies
+        \frac N{ N_0 } = 2^{ - \frac t{ T_{ 1/2 } } }
+        = 2^{ -4 } \approx 0.06 \approx 6\% \\
+    N_\text{ расп.
+    } &= N_0 - N = N_0 - N_0 \cdot 2^{ - \frac t{ T_{ 1/2 } } }
+        = N_0\cbr{ 1 - 2^{ - \frac t{ T_{ 1/2 } } } } \implies
+        \frac { N_\text{ расп.
+        } }{ N_0 } = 1 - 2^{ - \frac t{ T_{ 1/2 } } }
+        = 1 - 2^{ -4 } \approx 0.94 \approx 94\%
+    \end{align*}
+}
 \vspace{150pt}
 
 \tasknumber{2}\task{
     Сколько процентов ядер радиоактивного железа \ce{^{59}Fe}
     останется через $182{,}4\,\text{суток}$, если период его полураспада составляет $45{,}6\,\text{суток}$?
+}
+\answer{
+    \begin{align*}
+    N &= N_0 \cdot 2^{ - \frac t{ T_{ 1/2 } } }
+        = 2^{ - \frac { 182{,}4\,\text{суток} }{ 45{,}6\,\text{суток} } }
+        \approx 0.0625 \approx 6.25\%
+    \end{align*}
 }
 \vspace{150pt}
 
@@ -117,6 +275,20 @@
     За $3\,\text{суток}$ от начального количества ядер радиоизотопа осталась одна восьмая.
     Каков период полураспада этого изотопа (ответ приведите в сутках)?
     Какая ещё доля (также от начального количества) распадётся, если подождать ещё столько же?
+}
+\answer{
+    \begin{align*}
+    N &= N_0 \cdot 2^{ - \frac t{ T_{ 1/2 } } }
+            \implies \frac N{ N_0 } = 2^{ - \frac t{ T_{ 1/2 } } }
+            \implies \frac 18 = 2^{ - \frac { 3\,\text{суток} }{ T_{ 1/2 } } }
+            \implies 3 = \frac { 3\,\text{суток} }{ T_{ 1/2 } }
+            \implies T_{ 1/2 } = \frac { 3\,\text{суток} }3 \approx 1{,}0\,\text{суток}.
+         \\
+            \delta &= \frac{ N(t) }{ N_0 } - \frac{ N(2t) }{ N_0 }
+            = 2^{ - \frac t{ T_{ 1/2 } } } - 2^{ - \frac { 2t }{ T_{ 1/2 } } }
+            = 2^{ - \frac t{ T_{ 1/2 } } }\cbr{ 1 - 2^{ - \frac { t }{ T_{ 1/2 } } } }
+            = \frac 18\cdot \cbr{ 1 - \frac 18 } \approx 0.109
+    \end{align*}
 }
 \vspace{150pt}
 
@@ -127,6 +299,18 @@
     и кг.
     Скорость света $c = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}$.
 }
+\answer{
+    \begin{align*}
+    E_\text{ св.
+    } = \Delta m c^2 \implies
+         \\
+            \implies
+            \Delta m &= \frac { E_\text{ св.
+            } }{ c^2 } = \frac{ 39{,}2\,\text{МэВ} }{ \sqr{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} } }
+            = \frac{ 39.2 \cdot 10^6 \cdot 1{,}6 \cdot 10^{-19}\,\text{Дж} }{ \sqr{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} } }
+            \approx 6{,}96 \cdot 10^{-29}\,\text{кг} \approx 4{,}19 \cdot 10^{-2}\,\text{а.е.м.}
+    \end{align*}
+}
 \newpage
 
 \addpersonalvariant{Софья Белянкина}
@@ -136,11 +320,31 @@
     Какая доля (от начального количества) радиоактивных ядер распадётся через время,
     равное четырём периодам полураспада? Ответ выразить в процентах.
 }
+\answer{
+    \begin{align*}
+    N &= N_0 \cdot 2^{ - \frac t{ T_{ 1/2 } } } \implies
+        \frac N{ N_0 } = 2^{ - \frac t{ T_{ 1/2 } } }
+        = 2^{ -4 } \approx 0.06 \approx 6\% \\
+    N_\text{ расп.
+    } &= N_0 - N = N_0 - N_0 \cdot 2^{ - \frac t{ T_{ 1/2 } } }
+        = N_0\cbr{ 1 - 2^{ - \frac t{ T_{ 1/2 } } } } \implies
+        \frac { N_\text{ расп.
+        } }{ N_0 } = 1 - 2^{ - \frac t{ T_{ 1/2 } } }
+        = 1 - 2^{ -4 } \approx 0.94 \approx 94\%
+    \end{align*}
+}
 \vspace{150pt}
 
 \tasknumber{2}\task{
     Сколько процентов ядер радиоактивного железа \ce{^{59}Fe}
     останется через $182{,}4\,\text{суток}$, если период его полураспада составляет $45{,}6\,\text{суток}$?
+}
+\answer{
+    \begin{align*}
+    N &= N_0 \cdot 2^{ - \frac t{ T_{ 1/2 } } }
+        = 2^{ - \frac { 182{,}4\,\text{суток} }{ 45{,}6\,\text{суток} } }
+        \approx 0.0625 \approx 6.25\%
+    \end{align*}
 }
 \vspace{150pt}
 
@@ -148,6 +352,20 @@
     За $2\,\text{суток}$ от начального количества ядер радиоизотопа осталась четверть.
     Каков период полураспада этого изотопа (ответ приведите в сутках)?
     Какая ещё доля (также от начального количества) распадётся, если подождать ещё столько же?
+}
+\answer{
+    \begin{align*}
+    N &= N_0 \cdot 2^{ - \frac t{ T_{ 1/2 } } }
+            \implies \frac N{ N_0 } = 2^{ - \frac t{ T_{ 1/2 } } }
+            \implies \frac 14 = 2^{ - \frac { 2\,\text{суток} }{ T_{ 1/2 } } }
+            \implies 2 = \frac { 2\,\text{суток} }{ T_{ 1/2 } }
+            \implies T_{ 1/2 } = \frac { 2\,\text{суток} }2 \approx 1{,}0\,\text{суток}.
+         \\
+            \delta &= \frac{ N(t) }{ N_0 } - \frac{ N(2t) }{ N_0 }
+            = 2^{ - \frac t{ T_{ 1/2 } } } - 2^{ - \frac { 2t }{ T_{ 1/2 } } }
+            = 2^{ - \frac t{ T_{ 1/2 } } }\cbr{ 1 - 2^{ - \frac { t }{ T_{ 1/2 } } } }
+            = \frac 14\cdot \cbr{ 1 - \frac 14 } \approx 0.188
+    \end{align*}
 }
 \vspace{150pt}
 
@@ -157,6 +375,18 @@
     Ответ выразите в а.е.м.
     и кг.
     Скорость света $c = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}$.
+}
+\answer{
+    \begin{align*}
+    E_\text{ св.
+    } = \Delta m c^2 \implies
+         \\
+            \implies
+            \Delta m &= \frac { E_\text{ св.
+            } }{ c^2 } = \frac{ 2{,}22\,\text{МэВ} }{ \sqr{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} } }
+            = \frac{ 2.22 \cdot 10^6 \cdot 1{,}6 \cdot 10^{-19}\,\text{Дж} }{ \sqr{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} } }
+            \approx 0{,}3933 \cdot 10^{-29}\,\text{кг} \approx 0{,}2368 \cdot 10^{-2}\,\text{а.е.м.}
+    \end{align*}
 }
 \newpage
 
@@ -167,11 +397,31 @@
     Какая доля (от начального количества) радиоактивных ядер останется через время,
     равное четырём периодам полураспада? Ответ выразить в процентах.
 }
+\answer{
+    \begin{align*}
+    N &= N_0 \cdot 2^{ - \frac t{ T_{ 1/2 } } } \implies
+        \frac N{ N_0 } = 2^{ - \frac t{ T_{ 1/2 } } }
+        = 2^{ -4 } \approx 0.06 \approx 6\% \\
+    N_\text{ расп.
+    } &= N_0 - N = N_0 - N_0 \cdot 2^{ - \frac t{ T_{ 1/2 } } }
+        = N_0\cbr{ 1 - 2^{ - \frac t{ T_{ 1/2 } } } } \implies
+        \frac { N_\text{ расп.
+        } }{ N_0 } = 1 - 2^{ - \frac t{ T_{ 1/2 } } }
+        = 1 - 2^{ -4 } \approx 0.94 \approx 94\%
+    \end{align*}
+}
 \vspace{150pt}
 
 \tasknumber{2}\task{
     Сколько процентов ядер радиоактивного железа \ce{^{59}Fe}
     останется через $182{,}4\,\text{суток}$, если период его полураспада составляет $45{,}6\,\text{суток}$?
+}
+\answer{
+    \begin{align*}
+    N &= N_0 \cdot 2^{ - \frac t{ T_{ 1/2 } } }
+        = 2^{ - \frac { 182{,}4\,\text{суток} }{ 45{,}6\,\text{суток} } }
+        \approx 0.0625 \approx 6.25\%
+    \end{align*}
 }
 \vspace{150pt}
 
@@ -179,6 +429,20 @@
     За $5\,\text{суток}$ от начального количества ядер радиоизотопа осталась одна шестнадцатая.
     Каков период полураспада этого изотопа (ответ приведите в сутках)?
     Какая ещё доля (также от начального количества) распадётся, если подождать ещё столько же?
+}
+\answer{
+    \begin{align*}
+    N &= N_0 \cdot 2^{ - \frac t{ T_{ 1/2 } } }
+            \implies \frac N{ N_0 } = 2^{ - \frac t{ T_{ 1/2 } } }
+            \implies \frac 116 = 2^{ - \frac { 5\,\text{суток} }{ T_{ 1/2 } } }
+            \implies 4 = \frac { 5\,\text{суток} }{ T_{ 1/2 } }
+            \implies T_{ 1/2 } = \frac { 5\,\text{суток} }4 \approx 1{,}0\,\text{суток}.
+         \\
+            \delta &= \frac{ N(t) }{ N_0 } - \frac{ N(2t) }{ N_0 }
+            = 2^{ - \frac t{ T_{ 1/2 } } } - 2^{ - \frac { 2t }{ T_{ 1/2 } } }
+            = 2^{ - \frac t{ T_{ 1/2 } } }\cbr{ 1 - 2^{ - \frac { t }{ T_{ 1/2 } } } }
+            = \frac 116\cdot \cbr{ 1 - \frac 116 } \approx 0.059
+    \end{align*}
 }
 \vspace{150pt}
 
@@ -188,6 +452,18 @@
     Ответ выразите в а.е.м.
     и кг.
     Скорость света $c = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}$.
+}
+\answer{
+    \begin{align*}
+    E_\text{ св.
+    } = \Delta m c^2 \implies
+         \\
+            \implies
+            \Delta m &= \frac { E_\text{ св.
+            } }{ c^2 } = \frac{ 139{,}8\,\text{МэВ} }{ \sqr{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} } }
+            = \frac{ 139.8 \cdot 10^6 \cdot 1{,}6 \cdot 10^{-19}\,\text{Дж} }{ \sqr{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} } }
+            \approx 24{,}8 \cdot 10^{-29}\,\text{кг} \approx 14{,}9 \cdot 10^{-2}\,\text{а.е.м.}
+    \end{align*}
 }
 \newpage
 
@@ -198,11 +474,31 @@
     Какая доля (от начального количества) радиоактивных ядер распадётся через время,
     равное трём периодам полураспада? Ответ выразить в процентах.
 }
+\answer{
+    \begin{align*}
+    N &= N_0 \cdot 2^{ - \frac t{ T_{ 1/2 } } } \implies
+        \frac N{ N_0 } = 2^{ - \frac t{ T_{ 1/2 } } }
+        = 2^{ -3 } \approx 0.12 \approx 12\% \\
+    N_\text{ расп.
+    } &= N_0 - N = N_0 - N_0 \cdot 2^{ - \frac t{ T_{ 1/2 } } }
+        = N_0\cbr{ 1 - 2^{ - \frac t{ T_{ 1/2 } } } } \implies
+        \frac { N_\text{ расп.
+        } }{ N_0 } = 1 - 2^{ - \frac t{ T_{ 1/2 } } }
+        = 1 - 2^{ -3 } \approx 0.88 \approx 88\%
+    \end{align*}
+}
 \vspace{150pt}
 
 \tasknumber{2}\task{
     Сколько процентов ядер радиоактивного железа \ce{^{59}Fe}
     останется через $136{,}8\,\text{суток}$, если период его полураспада составляет $45{,}6\,\text{суток}$?
+}
+\answer{
+    \begin{align*}
+    N &= N_0 \cdot 2^{ - \frac t{ T_{ 1/2 } } }
+        = 2^{ - \frac { 136{,}8\,\text{суток} }{ 45{,}6\,\text{суток} } }
+        \approx 0.125 \approx 12.5\%
+    \end{align*}
 }
 \vspace{150pt}
 
@@ -210,6 +506,20 @@
     За $3\,\text{суток}$ от начального количества ядер радиоизотопа осталась четверть.
     Каков период полураспада этого изотопа (ответ приведите в сутках)?
     Какая ещё доля (также от начального количества) распадётся, если подождать ещё столько же?
+}
+\answer{
+    \begin{align*}
+    N &= N_0 \cdot 2^{ - \frac t{ T_{ 1/2 } } }
+            \implies \frac N{ N_0 } = 2^{ - \frac t{ T_{ 1/2 } } }
+            \implies \frac 14 = 2^{ - \frac { 3\,\text{суток} }{ T_{ 1/2 } } }
+            \implies 2 = \frac { 3\,\text{суток} }{ T_{ 1/2 } }
+            \implies T_{ 1/2 } = \frac { 3\,\text{суток} }2 \approx 1{,}0\,\text{суток}.
+         \\
+            \delta &= \frac{ N(t) }{ N_0 } - \frac{ N(2t) }{ N_0 }
+            = 2^{ - \frac t{ T_{ 1/2 } } } - 2^{ - \frac { 2t }{ T_{ 1/2 } } }
+            = 2^{ - \frac t{ T_{ 1/2 } } }\cbr{ 1 - 2^{ - \frac { t }{ T_{ 1/2 } } } }
+            = \frac 14\cdot \cbr{ 1 - \frac 14 } \approx 0.188
+    \end{align*}
 }
 \vspace{150pt}
 
@@ -219,6 +529,18 @@
     Ответ выразите в а.е.м.
     и кг.
     Скорость света $c = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}$.
+}
+\answer{
+    \begin{align*}
+    E_\text{ св.
+    } = \Delta m c^2 \implies
+         \\
+            \implies
+            \Delta m &= \frac { E_\text{ св.
+            } }{ c^2 } = \frac{ 8{,}48\,\text{МэВ} }{ \sqr{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} } }
+            = \frac{ 8.48 \cdot 10^6 \cdot 1{,}6 \cdot 10^{-19}\,\text{Дж} }{ \sqr{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} } }
+            \approx 1{,}5 \cdot 10^{-29}\,\text{кг} \approx 0{,}9033 \cdot 10^{-2}\,\text{а.е.м.}
+    \end{align*}
 }
 \newpage
 
@@ -229,11 +551,31 @@
     Какая доля (от начального количества) радиоактивных ядер распадётся через время,
     равное двум периодам полураспада? Ответ выразить в процентах.
 }
+\answer{
+    \begin{align*}
+    N &= N_0 \cdot 2^{ - \frac t{ T_{ 1/2 } } } \implies
+        \frac N{ N_0 } = 2^{ - \frac t{ T_{ 1/2 } } }
+        = 2^{ -2 } \approx 0.25 \approx 25\% \\
+    N_\text{ расп.
+    } &= N_0 - N = N_0 - N_0 \cdot 2^{ - \frac t{ T_{ 1/2 } } }
+        = N_0\cbr{ 1 - 2^{ - \frac t{ T_{ 1/2 } } } } \implies
+        \frac { N_\text{ расп.
+        } }{ N_0 } = 1 - 2^{ - \frac t{ T_{ 1/2 } } }
+        = 1 - 2^{ -2 } \approx 0.75 \approx 75\%
+    \end{align*}
+}
 \vspace{150pt}
 
 \tasknumber{2}\task{
     Сколько процентов ядер радиоактивного железа \ce{^{59}Fe}
     останется через $91{,}2\,\text{суток}$, если период его полураспада составляет $45{,}6\,\text{суток}$?
+}
+\answer{
+    \begin{align*}
+    N &= N_0 \cdot 2^{ - \frac t{ T_{ 1/2 } } }
+        = 2^{ - \frac { 91{,}2\,\text{суток} }{ 45{,}6\,\text{суток} } }
+        \approx 0.25 \approx 25.0\%
+    \end{align*}
 }
 \vspace{150pt}
 
@@ -241,6 +583,20 @@
     За $2\,\text{суток}$ от начального количества ядер радиоизотопа осталась четверть.
     Каков период полураспада этого изотопа (ответ приведите в сутках)?
     Какая ещё доля (также от начального количества) распадётся, если подождать ещё столько же?
+}
+\answer{
+    \begin{align*}
+    N &= N_0 \cdot 2^{ - \frac t{ T_{ 1/2 } } }
+            \implies \frac N{ N_0 } = 2^{ - \frac t{ T_{ 1/2 } } }
+            \implies \frac 14 = 2^{ - \frac { 2\,\text{суток} }{ T_{ 1/2 } } }
+            \implies 2 = \frac { 2\,\text{суток} }{ T_{ 1/2 } }
+            \implies T_{ 1/2 } = \frac { 2\,\text{суток} }2 \approx 1{,}0\,\text{суток}.
+         \\
+            \delta &= \frac{ N(t) }{ N_0 } - \frac{ N(2t) }{ N_0 }
+            = 2^{ - \frac t{ T_{ 1/2 } } } - 2^{ - \frac { 2t }{ T_{ 1/2 } } }
+            = 2^{ - \frac t{ T_{ 1/2 } } }\cbr{ 1 - 2^{ - \frac { t }{ T_{ 1/2 } } } }
+            = \frac 14\cdot \cbr{ 1 - \frac 14 } \approx 0.188
+    \end{align*}
 }
 \vspace{150pt}
 
@@ -250,6 +606,18 @@
     Ответ выразите в а.е.м.
     и кг.
     Скорость света $c = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}$.
+}
+\answer{
+    \begin{align*}
+    E_\text{ св.
+    } = \Delta m c^2 \implies
+         \\
+            \implies
+            \Delta m &= \frac { E_\text{ св.
+            } }{ c^2 } = \frac{ 2{,}22\,\text{МэВ} }{ \sqr{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} } }
+            = \frac{ 2.22 \cdot 10^6 \cdot 1{,}6 \cdot 10^{-19}\,\text{Дж} }{ \sqr{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} } }
+            \approx 0{,}3933 \cdot 10^{-29}\,\text{кг} \approx 0{,}2368 \cdot 10^{-2}\,\text{а.е.м.}
+    \end{align*}
 }
 \newpage
 
@@ -260,11 +628,31 @@
     Какая доля (от начального количества) радиоактивных ядер останется через время,
     равное трём периодам полураспада? Ответ выразить в процентах.
 }
+\answer{
+    \begin{align*}
+    N &= N_0 \cdot 2^{ - \frac t{ T_{ 1/2 } } } \implies
+        \frac N{ N_0 } = 2^{ - \frac t{ T_{ 1/2 } } }
+        = 2^{ -3 } \approx 0.12 \approx 12\% \\
+    N_\text{ расп.
+    } &= N_0 - N = N_0 - N_0 \cdot 2^{ - \frac t{ T_{ 1/2 } } }
+        = N_0\cbr{ 1 - 2^{ - \frac t{ T_{ 1/2 } } } } \implies
+        \frac { N_\text{ расп.
+        } }{ N_0 } = 1 - 2^{ - \frac t{ T_{ 1/2 } } }
+        = 1 - 2^{ -3 } \approx 0.88 \approx 88\%
+    \end{align*}
+}
 \vspace{150pt}
 
 \tasknumber{2}\task{
     Сколько процентов ядер радиоактивного железа \ce{^{59}Fe}
     останется через $136{,}8\,\text{суток}$, если период его полураспада составляет $45{,}6\,\text{суток}$?
+}
+\answer{
+    \begin{align*}
+    N &= N_0 \cdot 2^{ - \frac t{ T_{ 1/2 } } }
+        = 2^{ - \frac { 136{,}8\,\text{суток} }{ 45{,}6\,\text{суток} } }
+        \approx 0.125 \approx 12.5\%
+    \end{align*}
 }
 \vspace{150pt}
 
@@ -272,6 +660,20 @@
     За $4\,\text{суток}$ от начального количества ядер радиоизотопа осталась половина.
     Каков период полураспада этого изотопа (ответ приведите в сутках)?
     Какая ещё доля (также от начального количества) распадётся, если подождать ещё столько же?
+}
+\answer{
+    \begin{align*}
+    N &= N_0 \cdot 2^{ - \frac t{ T_{ 1/2 } } }
+            \implies \frac N{ N_0 } = 2^{ - \frac t{ T_{ 1/2 } } }
+            \implies \frac 12 = 2^{ - \frac { 4\,\text{суток} }{ T_{ 1/2 } } }
+            \implies 1 = \frac { 4\,\text{суток} }{ T_{ 1/2 } }
+            \implies T_{ 1/2 } = \frac { 4\,\text{суток} }1 \approx 4{,}0\,\text{суток}.
+         \\
+            \delta &= \frac{ N(t) }{ N_0 } - \frac{ N(2t) }{ N_0 }
+            = 2^{ - \frac t{ T_{ 1/2 } } } - 2^{ - \frac { 2t }{ T_{ 1/2 } } }
+            = 2^{ - \frac t{ T_{ 1/2 } } }\cbr{ 1 - 2^{ - \frac { t }{ T_{ 1/2 } } } }
+            = \frac 12\cdot \cbr{ 1 - \frac 12 } \approx 0.250
+    \end{align*}
 }
 \vspace{150pt}
 
@@ -282,6 +684,18 @@
     и кг.
     Скорость света $c = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}$.
 }
+\answer{
+    \begin{align*}
+    E_\text{ св.
+    } = \Delta m c^2 \implies
+         \\
+            \implies
+            \Delta m &= \frac { E_\text{ св.
+            } }{ c^2 } = \frac{ 97{,}1\,\text{МэВ} }{ \sqr{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} } }
+            = \frac{ 97.1 \cdot 10^6 \cdot 1{,}6 \cdot 10^{-19}\,\text{Дж} }{ \sqr{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} } }
+            \approx 17{,}2 \cdot 10^{-29}\,\text{кг} \approx 10{,}3 \cdot 10^{-2}\,\text{а.е.м.}
+    \end{align*}
+}
 \newpage
 
 \addpersonalvariant{Анна Кузьмичёва}
@@ -291,11 +705,31 @@
     Какая доля (от начального количества) радиоактивных ядер распадётся через время,
     равное двум периодам полураспада? Ответ выразить в процентах.
 }
+\answer{
+    \begin{align*}
+    N &= N_0 \cdot 2^{ - \frac t{ T_{ 1/2 } } } \implies
+        \frac N{ N_0 } = 2^{ - \frac t{ T_{ 1/2 } } }
+        = 2^{ -2 } \approx 0.25 \approx 25\% \\
+    N_\text{ расп.
+    } &= N_0 - N = N_0 - N_0 \cdot 2^{ - \frac t{ T_{ 1/2 } } }
+        = N_0\cbr{ 1 - 2^{ - \frac t{ T_{ 1/2 } } } } \implies
+        \frac { N_\text{ расп.
+        } }{ N_0 } = 1 - 2^{ - \frac t{ T_{ 1/2 } } }
+        = 1 - 2^{ -2 } \approx 0.75 \approx 75\%
+    \end{align*}
+}
 \vspace{150pt}
 
 \tasknumber{2}\task{
     Сколько процентов ядер радиоактивного железа \ce{^{59}Fe}
     останется через $91{,}2\,\text{суток}$, если период его полураспада составляет $45{,}6\,\text{суток}$?
+}
+\answer{
+    \begin{align*}
+    N &= N_0 \cdot 2^{ - \frac t{ T_{ 1/2 } } }
+        = 2^{ - \frac { 91{,}2\,\text{суток} }{ 45{,}6\,\text{суток} } }
+        \approx 0.25 \approx 25.0\%
+    \end{align*}
 }
 \vspace{150pt}
 
@@ -303,6 +737,20 @@
     За $4\,\text{суток}$ от начального количества ядер радиоизотопа осталась одна восьмая.
     Каков период полураспада этого изотопа (ответ приведите в сутках)?
     Какая ещё доля (также от начального количества) распадётся, если подождать ещё столько же?
+}
+\answer{
+    \begin{align*}
+    N &= N_0 \cdot 2^{ - \frac t{ T_{ 1/2 } } }
+            \implies \frac N{ N_0 } = 2^{ - \frac t{ T_{ 1/2 } } }
+            \implies \frac 18 = 2^{ - \frac { 4\,\text{суток} }{ T_{ 1/2 } } }
+            \implies 3 = \frac { 4\,\text{суток} }{ T_{ 1/2 } }
+            \implies T_{ 1/2 } = \frac { 4\,\text{суток} }3 \approx 1{,}0\,\text{суток}.
+         \\
+            \delta &= \frac{ N(t) }{ N_0 } - \frac{ N(2t) }{ N_0 }
+            = 2^{ - \frac t{ T_{ 1/2 } } } - 2^{ - \frac { 2t }{ T_{ 1/2 } } }
+            = 2^{ - \frac t{ T_{ 1/2 } } }\cbr{ 1 - 2^{ - \frac { t }{ T_{ 1/2 } } } }
+            = \frac 18\cdot \cbr{ 1 - \frac 18 } \approx 0.109
+    \end{align*}
 }
 \vspace{150pt}
 
@@ -312,6 +760,18 @@
     Ответ выразите в а.е.м.
     и кг.
     Скорость света $c = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}$.
+}
+\answer{
+    \begin{align*}
+    E_\text{ св.
+    } = \Delta m c^2 \implies
+         \\
+            \implies
+            \Delta m &= \frac { E_\text{ св.
+            } }{ c^2 } = \frac{ 58{,}2\,\text{МэВ} }{ \sqr{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} } }
+            = \frac{ 58.2 \cdot 10^6 \cdot 1{,}6 \cdot 10^{-19}\,\text{Дж} }{ \sqr{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} } }
+            \approx 10{,}3 \cdot 10^{-29}\,\text{кг} \approx 6{,}2 \cdot 10^{-2}\,\text{а.е.м.}
+    \end{align*}
 }
 \newpage
 
@@ -322,11 +782,31 @@
     Какая доля (от начального количества) радиоактивных ядер останется через время,
     равное четырём периодам полураспада? Ответ выразить в процентах.
 }
+\answer{
+    \begin{align*}
+    N &= N_0 \cdot 2^{ - \frac t{ T_{ 1/2 } } } \implies
+        \frac N{ N_0 } = 2^{ - \frac t{ T_{ 1/2 } } }
+        = 2^{ -4 } \approx 0.06 \approx 6\% \\
+    N_\text{ расп.
+    } &= N_0 - N = N_0 - N_0 \cdot 2^{ - \frac t{ T_{ 1/2 } } }
+        = N_0\cbr{ 1 - 2^{ - \frac t{ T_{ 1/2 } } } } \implies
+        \frac { N_\text{ расп.
+        } }{ N_0 } = 1 - 2^{ - \frac t{ T_{ 1/2 } } }
+        = 1 - 2^{ -4 } \approx 0.94 \approx 94\%
+    \end{align*}
+}
 \vspace{150pt}
 
 \tasknumber{2}\task{
     Сколько процентов ядер радиоактивного железа \ce{^{59}Fe}
     останется через $182{,}4\,\text{суток}$, если период его полураспада составляет $45{,}6\,\text{суток}$?
+}
+\answer{
+    \begin{align*}
+    N &= N_0 \cdot 2^{ - \frac t{ T_{ 1/2 } } }
+        = 2^{ - \frac { 182{,}4\,\text{суток} }{ 45{,}6\,\text{суток} } }
+        \approx 0.0625 \approx 6.25\%
+    \end{align*}
 }
 \vspace{150pt}
 
@@ -334,6 +814,20 @@
     За $3\,\text{суток}$ от начального количества ядер радиоизотопа осталась четверть.
     Каков период полураспада этого изотопа (ответ приведите в сутках)?
     Какая ещё доля (также от начального количества) распадётся, если подождать ещё столько же?
+}
+\answer{
+    \begin{align*}
+    N &= N_0 \cdot 2^{ - \frac t{ T_{ 1/2 } } }
+            \implies \frac N{ N_0 } = 2^{ - \frac t{ T_{ 1/2 } } }
+            \implies \frac 14 = 2^{ - \frac { 3\,\text{суток} }{ T_{ 1/2 } } }
+            \implies 2 = \frac { 3\,\text{суток} }{ T_{ 1/2 } }
+            \implies T_{ 1/2 } = \frac { 3\,\text{суток} }2 \approx 1{,}0\,\text{суток}.
+         \\
+            \delta &= \frac{ N(t) }{ N_0 } - \frac{ N(2t) }{ N_0 }
+            = 2^{ - \frac t{ T_{ 1/2 } } } - 2^{ - \frac { 2t }{ T_{ 1/2 } } }
+            = 2^{ - \frac t{ T_{ 1/2 } } }\cbr{ 1 - 2^{ - \frac { t }{ T_{ 1/2 } } } }
+            = \frac 14\cdot \cbr{ 1 - \frac 14 } \approx 0.188
+    \end{align*}
 }
 \vspace{150pt}
 
@@ -344,6 +838,18 @@
     и кг.
     Скорость света $c = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}$.
 }
+\answer{
+    \begin{align*}
+    E_\text{ св.
+    } = \Delta m c^2 \implies
+         \\
+            \implies
+            \Delta m &= \frac { E_\text{ св.
+            } }{ c^2 } = \frac{ 8{,}48\,\text{МэВ} }{ \sqr{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} } }
+            = \frac{ 8.48 \cdot 10^6 \cdot 1{,}6 \cdot 10^{-19}\,\text{Дж} }{ \sqr{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} } }
+            \approx 1{,}5 \cdot 10^{-29}\,\text{кг} \approx 0{,}9033 \cdot 10^{-2}\,\text{а.е.м.}
+    \end{align*}
+}
 \newpage
 
 \addpersonalvariant{Анастасия Ламанова}
@@ -353,11 +859,31 @@
     Какая доля (от начального количества) радиоактивных ядер останется через время,
     равное двум периодам полураспада? Ответ выразить в процентах.
 }
+\answer{
+    \begin{align*}
+    N &= N_0 \cdot 2^{ - \frac t{ T_{ 1/2 } } } \implies
+        \frac N{ N_0 } = 2^{ - \frac t{ T_{ 1/2 } } }
+        = 2^{ -2 } \approx 0.25 \approx 25\% \\
+    N_\text{ расп.
+    } &= N_0 - N = N_0 - N_0 \cdot 2^{ - \frac t{ T_{ 1/2 } } }
+        = N_0\cbr{ 1 - 2^{ - \frac t{ T_{ 1/2 } } } } \implies
+        \frac { N_\text{ расп.
+        } }{ N_0 } = 1 - 2^{ - \frac t{ T_{ 1/2 } } }
+        = 1 - 2^{ -2 } \approx 0.75 \approx 75\%
+    \end{align*}
+}
 \vspace{150pt}
 
 \tasknumber{2}\task{
     Сколько процентов ядер радиоактивного железа \ce{^{59}Fe}
     останется через $91{,}2\,\text{суток}$, если период его полураспада составляет $45{,}6\,\text{суток}$?
+}
+\answer{
+    \begin{align*}
+    N &= N_0 \cdot 2^{ - \frac t{ T_{ 1/2 } } }
+        = 2^{ - \frac { 91{,}2\,\text{суток} }{ 45{,}6\,\text{суток} } }
+        \approx 0.25 \approx 25.0\%
+    \end{align*}
 }
 \vspace{150pt}
 
@@ -365,6 +891,20 @@
     За $5\,\text{суток}$ от начального количества ядер радиоизотопа осталась одна восьмая.
     Каков период полураспада этого изотопа (ответ приведите в сутках)?
     Какая ещё доля (также от начального количества) распадётся, если подождать ещё столько же?
+}
+\answer{
+    \begin{align*}
+    N &= N_0 \cdot 2^{ - \frac t{ T_{ 1/2 } } }
+            \implies \frac N{ N_0 } = 2^{ - \frac t{ T_{ 1/2 } } }
+            \implies \frac 18 = 2^{ - \frac { 5\,\text{суток} }{ T_{ 1/2 } } }
+            \implies 3 = \frac { 5\,\text{суток} }{ T_{ 1/2 } }
+            \implies T_{ 1/2 } = \frac { 5\,\text{суток} }3 \approx 1{,}0\,\text{суток}.
+         \\
+            \delta &= \frac{ N(t) }{ N_0 } - \frac{ N(2t) }{ N_0 }
+            = 2^{ - \frac t{ T_{ 1/2 } } } - 2^{ - \frac { 2t }{ T_{ 1/2 } } }
+            = 2^{ - \frac t{ T_{ 1/2 } } }\cbr{ 1 - 2^{ - \frac { t }{ T_{ 1/2 } } } }
+            = \frac 18\cdot \cbr{ 1 - \frac 18 } \approx 0.109
+    \end{align*}
 }
 \vspace{150pt}
 
@@ -375,6 +915,18 @@
     и кг.
     Скорость света $c = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}$.
 }
+\answer{
+    \begin{align*}
+    E_\text{ св.
+    } = \Delta m c^2 \implies
+         \\
+            \implies
+            \Delta m &= \frac { E_\text{ св.
+            } }{ c^2 } = \frac{ 64{,}7\,\text{МэВ} }{ \sqr{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} } }
+            = \frac{ 64.7 \cdot 10^6 \cdot 1{,}6 \cdot 10^{-19}\,\text{Дж} }{ \sqr{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} } }
+            \approx 11{,}5 \cdot 10^{-29}\,\text{кг} \approx 6{,}92 \cdot 10^{-2}\,\text{а.е.м.}
+    \end{align*}
+}
 \newpage
 
 \addpersonalvariant{Виктория Легонькова}
@@ -384,11 +936,31 @@
     Какая доля (от начального количества) радиоактивных ядер останется через время,
     равное двум периодам полураспада? Ответ выразить в процентах.
 }
+\answer{
+    \begin{align*}
+    N &= N_0 \cdot 2^{ - \frac t{ T_{ 1/2 } } } \implies
+        \frac N{ N_0 } = 2^{ - \frac t{ T_{ 1/2 } } }
+        = 2^{ -2 } \approx 0.25 \approx 25\% \\
+    N_\text{ расп.
+    } &= N_0 - N = N_0 - N_0 \cdot 2^{ - \frac t{ T_{ 1/2 } } }
+        = N_0\cbr{ 1 - 2^{ - \frac t{ T_{ 1/2 } } } } \implies
+        \frac { N_\text{ расп.
+        } }{ N_0 } = 1 - 2^{ - \frac t{ T_{ 1/2 } } }
+        = 1 - 2^{ -2 } \approx 0.75 \approx 75\%
+    \end{align*}
+}
 \vspace{150pt}
 
 \tasknumber{2}\task{
     Сколько процентов ядер радиоактивного железа \ce{^{59}Fe}
     останется через $91{,}2\,\text{суток}$, если период его полураспада составляет $45{,}6\,\text{суток}$?
+}
+\answer{
+    \begin{align*}
+    N &= N_0 \cdot 2^{ - \frac t{ T_{ 1/2 } } }
+        = 2^{ - \frac { 91{,}2\,\text{суток} }{ 45{,}6\,\text{суток} } }
+        \approx 0.25 \approx 25.0\%
+    \end{align*}
 }
 \vspace{150pt}
 
@@ -396,6 +968,20 @@
     За $3\,\text{суток}$ от начального количества ядер радиоизотопа осталась половина.
     Каков период полураспада этого изотопа (ответ приведите в сутках)?
     Какая ещё доля (также от начального количества) распадётся, если подождать ещё столько же?
+}
+\answer{
+    \begin{align*}
+    N &= N_0 \cdot 2^{ - \frac t{ T_{ 1/2 } } }
+            \implies \frac N{ N_0 } = 2^{ - \frac t{ T_{ 1/2 } } }
+            \implies \frac 12 = 2^{ - \frac { 3\,\text{суток} }{ T_{ 1/2 } } }
+            \implies 1 = \frac { 3\,\text{суток} }{ T_{ 1/2 } }
+            \implies T_{ 1/2 } = \frac { 3\,\text{суток} }1 \approx 3{,}0\,\text{суток}.
+         \\
+            \delta &= \frac{ N(t) }{ N_0 } - \frac{ N(2t) }{ N_0 }
+            = 2^{ - \frac t{ T_{ 1/2 } } } - 2^{ - \frac { 2t }{ T_{ 1/2 } } }
+            = 2^{ - \frac t{ T_{ 1/2 } } }\cbr{ 1 - 2^{ - \frac { t }{ T_{ 1/2 } } } }
+            = \frac 12\cdot \cbr{ 1 - \frac 12 } \approx 0.250
+    \end{align*}
 }
 \vspace{150pt}
 
@@ -405,6 +991,18 @@
     Ответ выразите в а.е.м.
     и кг.
     Скорость света $c = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}$.
+}
+\answer{
+    \begin{align*}
+    E_\text{ св.
+    } = \Delta m c^2 \implies
+         \\
+            \implies
+            \Delta m &= \frac { E_\text{ св.
+            } }{ c^2 } = \frac{ 92{,}2\,\text{МэВ} }{ \sqr{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} } }
+            = \frac{ 92.2 \cdot 10^6 \cdot 1{,}6 \cdot 10^{-19}\,\text{Дж} }{ \sqr{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} } }
+            \approx 16{,}3 \cdot 10^{-29}\,\text{кг} \approx 9{,}81 \cdot 10^{-2}\,\text{а.е.м.}
+    \end{align*}
 }
 \newpage
 
@@ -415,11 +1013,31 @@
     Какая доля (от начального количества) радиоактивных ядер распадётся через время,
     равное четырём периодам полураспада? Ответ выразить в процентах.
 }
+\answer{
+    \begin{align*}
+    N &= N_0 \cdot 2^{ - \frac t{ T_{ 1/2 } } } \implies
+        \frac N{ N_0 } = 2^{ - \frac t{ T_{ 1/2 } } }
+        = 2^{ -4 } \approx 0.06 \approx 6\% \\
+    N_\text{ расп.
+    } &= N_0 - N = N_0 - N_0 \cdot 2^{ - \frac t{ T_{ 1/2 } } }
+        = N_0\cbr{ 1 - 2^{ - \frac t{ T_{ 1/2 } } } } \implies
+        \frac { N_\text{ расп.
+        } }{ N_0 } = 1 - 2^{ - \frac t{ T_{ 1/2 } } }
+        = 1 - 2^{ -4 } \approx 0.94 \approx 94\%
+    \end{align*}
+}
 \vspace{150pt}
 
 \tasknumber{2}\task{
     Сколько процентов ядер радиоактивного железа \ce{^{59}Fe}
     останется через $182{,}4\,\text{суток}$, если период его полураспада составляет $45{,}6\,\text{суток}$?
+}
+\answer{
+    \begin{align*}
+    N &= N_0 \cdot 2^{ - \frac t{ T_{ 1/2 } } }
+        = 2^{ - \frac { 182{,}4\,\text{суток} }{ 45{,}6\,\text{суток} } }
+        \approx 0.0625 \approx 6.25\%
+    \end{align*}
 }
 \vspace{150pt}
 
@@ -427,6 +1045,20 @@
     За $2\,\text{суток}$ от начального количества ядер радиоизотопа осталась одна восьмая.
     Каков период полураспада этого изотопа (ответ приведите в сутках)?
     Какая ещё доля (также от начального количества) распадётся, если подождать ещё столько же?
+}
+\answer{
+    \begin{align*}
+    N &= N_0 \cdot 2^{ - \frac t{ T_{ 1/2 } } }
+            \implies \frac N{ N_0 } = 2^{ - \frac t{ T_{ 1/2 } } }
+            \implies \frac 18 = 2^{ - \frac { 2\,\text{суток} }{ T_{ 1/2 } } }
+            \implies 3 = \frac { 2\,\text{суток} }{ T_{ 1/2 } }
+            \implies T_{ 1/2 } = \frac { 2\,\text{суток} }3 \approx 0{,}0\,\text{суток}.
+         \\
+            \delta &= \frac{ N(t) }{ N_0 } - \frac{ N(2t) }{ N_0 }
+            = 2^{ - \frac t{ T_{ 1/2 } } } - 2^{ - \frac { 2t }{ T_{ 1/2 } } }
+            = 2^{ - \frac t{ T_{ 1/2 } } }\cbr{ 1 - 2^{ - \frac { t }{ T_{ 1/2 } } } }
+            = \frac 18\cdot \cbr{ 1 - \frac 18 } \approx 0.109
+    \end{align*}
 }
 \vspace{150pt}
 
@@ -437,6 +1069,18 @@
     и кг.
     Скорость света $c = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}$.
 }
+\answer{
+    \begin{align*}
+    E_\text{ св.
+    } = \Delta m c^2 \implies
+         \\
+            \implies
+            \Delta m &= \frac { E_\text{ св.
+            } }{ c^2 } = \frac{ 31{,}99\,\text{МэВ} }{ \sqr{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} } }
+            = \frac{ 31.99 \cdot 10^6 \cdot 1{,}6 \cdot 10^{-19}\,\text{Дж} }{ \sqr{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} } }
+            \approx 5{,}66 \cdot 10^{-29}\,\text{кг} \approx 3{,}4 \cdot 10^{-2}\,\text{а.е.м.}
+    \end{align*}
+}
 \newpage
 
 \addpersonalvariant{Варвара Минаева}
@@ -446,11 +1090,31 @@
     Какая доля (от начального количества) радиоактивных ядер распадётся через время,
     равное четырём периодам полураспада? Ответ выразить в процентах.
 }
+\answer{
+    \begin{align*}
+    N &= N_0 \cdot 2^{ - \frac t{ T_{ 1/2 } } } \implies
+        \frac N{ N_0 } = 2^{ - \frac t{ T_{ 1/2 } } }
+        = 2^{ -4 } \approx 0.06 \approx 6\% \\
+    N_\text{ расп.
+    } &= N_0 - N = N_0 - N_0 \cdot 2^{ - \frac t{ T_{ 1/2 } } }
+        = N_0\cbr{ 1 - 2^{ - \frac t{ T_{ 1/2 } } } } \implies
+        \frac { N_\text{ расп.
+        } }{ N_0 } = 1 - 2^{ - \frac t{ T_{ 1/2 } } }
+        = 1 - 2^{ -4 } \approx 0.94 \approx 94\%
+    \end{align*}
+}
 \vspace{150pt}
 
 \tasknumber{2}\task{
     Сколько процентов ядер радиоактивного железа \ce{^{59}Fe}
     останется через $182{,}4\,\text{суток}$, если период его полураспада составляет $45{,}6\,\text{суток}$?
+}
+\answer{
+    \begin{align*}
+    N &= N_0 \cdot 2^{ - \frac t{ T_{ 1/2 } } }
+        = 2^{ - \frac { 182{,}4\,\text{суток} }{ 45{,}6\,\text{суток} } }
+        \approx 0.0625 \approx 6.25\%
+    \end{align*}
 }
 \vspace{150pt}
 
@@ -458,6 +1122,20 @@
     За $4\,\text{суток}$ от начального количества ядер радиоизотопа осталась одна восьмая.
     Каков период полураспада этого изотопа (ответ приведите в сутках)?
     Какая ещё доля (также от начального количества) распадётся, если подождать ещё столько же?
+}
+\answer{
+    \begin{align*}
+    N &= N_0 \cdot 2^{ - \frac t{ T_{ 1/2 } } }
+            \implies \frac N{ N_0 } = 2^{ - \frac t{ T_{ 1/2 } } }
+            \implies \frac 18 = 2^{ - \frac { 4\,\text{суток} }{ T_{ 1/2 } } }
+            \implies 3 = \frac { 4\,\text{суток} }{ T_{ 1/2 } }
+            \implies T_{ 1/2 } = \frac { 4\,\text{суток} }3 \approx 1{,}0\,\text{суток}.
+         \\
+            \delta &= \frac{ N(t) }{ N_0 } - \frac{ N(2t) }{ N_0 }
+            = 2^{ - \frac t{ T_{ 1/2 } } } - 2^{ - \frac { 2t }{ T_{ 1/2 } } }
+            = 2^{ - \frac t{ T_{ 1/2 } } }\cbr{ 1 - 2^{ - \frac { t }{ T_{ 1/2 } } } }
+            = \frac 18\cdot \cbr{ 1 - \frac 18 } \approx 0.109
+    \end{align*}
 }
 \vspace{150pt}
 
@@ -467,6 +1145,18 @@
     Ответ выразите в а.е.м.
     и кг.
     Скорость света $c = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}$.
+}
+\answer{
+    \begin{align*}
+    E_\text{ св.
+    } = \Delta m c^2 \implies
+         \\
+            \implies
+            \Delta m &= \frac { E_\text{ св.
+            } }{ c^2 } = \frac{ 58{,}2\,\text{МэВ} }{ \sqr{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} } }
+            = \frac{ 58.2 \cdot 10^6 \cdot 1{,}6 \cdot 10^{-19}\,\text{Дж} }{ \sqr{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} } }
+            \approx 10{,}3 \cdot 10^{-29}\,\text{кг} \approx 6{,}2 \cdot 10^{-2}\,\text{а.е.м.}
+    \end{align*}
 }
 \newpage
 
@@ -477,11 +1167,31 @@
     Какая доля (от начального количества) радиоактивных ядер останется через время,
     равное двум периодам полураспада? Ответ выразить в процентах.
 }
+\answer{
+    \begin{align*}
+    N &= N_0 \cdot 2^{ - \frac t{ T_{ 1/2 } } } \implies
+        \frac N{ N_0 } = 2^{ - \frac t{ T_{ 1/2 } } }
+        = 2^{ -2 } \approx 0.25 \approx 25\% \\
+    N_\text{ расп.
+    } &= N_0 - N = N_0 - N_0 \cdot 2^{ - \frac t{ T_{ 1/2 } } }
+        = N_0\cbr{ 1 - 2^{ - \frac t{ T_{ 1/2 } } } } \implies
+        \frac { N_\text{ расп.
+        } }{ N_0 } = 1 - 2^{ - \frac t{ T_{ 1/2 } } }
+        = 1 - 2^{ -2 } \approx 0.75 \approx 75\%
+    \end{align*}
+}
 \vspace{150pt}
 
 \tasknumber{2}\task{
     Сколько процентов ядер радиоактивного железа \ce{^{59}Fe}
     останется через $91{,}2\,\text{суток}$, если период его полураспада составляет $45{,}6\,\text{суток}$?
+}
+\answer{
+    \begin{align*}
+    N &= N_0 \cdot 2^{ - \frac t{ T_{ 1/2 } } }
+        = 2^{ - \frac { 91{,}2\,\text{суток} }{ 45{,}6\,\text{суток} } }
+        \approx 0.25 \approx 25.0\%
+    \end{align*}
 }
 \vspace{150pt}
 
@@ -489,6 +1199,20 @@
     За $3\,\text{суток}$ от начального количества ядер радиоизотопа осталась половина.
     Каков период полураспада этого изотопа (ответ приведите в сутках)?
     Какая ещё доля (также от начального количества) распадётся, если подождать ещё столько же?
+}
+\answer{
+    \begin{align*}
+    N &= N_0 \cdot 2^{ - \frac t{ T_{ 1/2 } } }
+            \implies \frac N{ N_0 } = 2^{ - \frac t{ T_{ 1/2 } } }
+            \implies \frac 12 = 2^{ - \frac { 3\,\text{суток} }{ T_{ 1/2 } } }
+            \implies 1 = \frac { 3\,\text{суток} }{ T_{ 1/2 } }
+            \implies T_{ 1/2 } = \frac { 3\,\text{суток} }1 \approx 3{,}0\,\text{суток}.
+         \\
+            \delta &= \frac{ N(t) }{ N_0 } - \frac{ N(2t) }{ N_0 }
+            = 2^{ - \frac t{ T_{ 1/2 } } } - 2^{ - \frac { 2t }{ T_{ 1/2 } } }
+            = 2^{ - \frac t{ T_{ 1/2 } } }\cbr{ 1 - 2^{ - \frac { t }{ T_{ 1/2 } } } }
+            = \frac 12\cdot \cbr{ 1 - \frac 12 } \approx 0.250
+    \end{align*}
 }
 \vspace{150pt}
 
@@ -499,6 +1223,18 @@
     и кг.
     Скорость света $c = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}$.
 }
+\answer{
+    \begin{align*}
+    E_\text{ св.
+    } = \Delta m c^2 \implies
+         \\
+            \implies
+            \Delta m &= \frac { E_\text{ св.
+            } }{ c^2 } = \frac{ 92{,}2\,\text{МэВ} }{ \sqr{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} } }
+            = \frac{ 92.2 \cdot 10^6 \cdot 1{,}6 \cdot 10^{-19}\,\text{Дж} }{ \sqr{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} } }
+            \approx 16{,}3 \cdot 10^{-29}\,\text{кг} \approx 9{,}81 \cdot 10^{-2}\,\text{а.е.м.}
+    \end{align*}
+}
 \newpage
 
 \addpersonalvariant{Андрей Рожков}
@@ -508,11 +1244,31 @@
     Какая доля (от начального количества) радиоактивных ядер останется через время,
     равное двум периодам полураспада? Ответ выразить в процентах.
 }
+\answer{
+    \begin{align*}
+    N &= N_0 \cdot 2^{ - \frac t{ T_{ 1/2 } } } \implies
+        \frac N{ N_0 } = 2^{ - \frac t{ T_{ 1/2 } } }
+        = 2^{ -2 } \approx 0.25 \approx 25\% \\
+    N_\text{ расп.
+    } &= N_0 - N = N_0 - N_0 \cdot 2^{ - \frac t{ T_{ 1/2 } } }
+        = N_0\cbr{ 1 - 2^{ - \frac t{ T_{ 1/2 } } } } \implies
+        \frac { N_\text{ расп.
+        } }{ N_0 } = 1 - 2^{ - \frac t{ T_{ 1/2 } } }
+        = 1 - 2^{ -2 } \approx 0.75 \approx 75\%
+    \end{align*}
+}
 \vspace{150pt}
 
 \tasknumber{2}\task{
     Сколько процентов ядер радиоактивного железа \ce{^{59}Fe}
     останется через $91{,}2\,\text{суток}$, если период его полураспада составляет $45{,}6\,\text{суток}$?
+}
+\answer{
+    \begin{align*}
+    N &= N_0 \cdot 2^{ - \frac t{ T_{ 1/2 } } }
+        = 2^{ - \frac { 91{,}2\,\text{суток} }{ 45{,}6\,\text{суток} } }
+        \approx 0.25 \approx 25.0\%
+    \end{align*}
 }
 \vspace{150pt}
 
@@ -520,6 +1276,20 @@
     За $5\,\text{суток}$ от начального количества ядер радиоизотопа осталась одна шестнадцатая.
     Каков период полураспада этого изотопа (ответ приведите в сутках)?
     Какая ещё доля (также от начального количества) распадётся, если подождать ещё столько же?
+}
+\answer{
+    \begin{align*}
+    N &= N_0 \cdot 2^{ - \frac t{ T_{ 1/2 } } }
+            \implies \frac N{ N_0 } = 2^{ - \frac t{ T_{ 1/2 } } }
+            \implies \frac 116 = 2^{ - \frac { 5\,\text{суток} }{ T_{ 1/2 } } }
+            \implies 4 = \frac { 5\,\text{суток} }{ T_{ 1/2 } }
+            \implies T_{ 1/2 } = \frac { 5\,\text{суток} }4 \approx 1{,}0\,\text{суток}.
+         \\
+            \delta &= \frac{ N(t) }{ N_0 } - \frac{ N(2t) }{ N_0 }
+            = 2^{ - \frac t{ T_{ 1/2 } } } - 2^{ - \frac { 2t }{ T_{ 1/2 } } }
+            = 2^{ - \frac t{ T_{ 1/2 } } }\cbr{ 1 - 2^{ - \frac { t }{ T_{ 1/2 } } } }
+            = \frac 116\cdot \cbr{ 1 - \frac 116 } \approx 0.059
+    \end{align*}
 }
 \vspace{150pt}
 
@@ -529,6 +1299,18 @@
     Ответ выразите в а.е.м.
     и кг.
     Скорость света $c = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}$.
+}
+\answer{
+    \begin{align*}
+    E_\text{ св.
+    } = \Delta m c^2 \implies
+         \\
+            \implies
+            \Delta m &= \frac { E_\text{ св.
+            } }{ c^2 } = \frac{ 139{,}8\,\text{МэВ} }{ \sqr{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} } }
+            = \frac{ 139.8 \cdot 10^6 \cdot 1{,}6 \cdot 10^{-19}\,\text{Дж} }{ \sqr{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} } }
+            \approx 24{,}8 \cdot 10^{-29}\,\text{кг} \approx 14{,}9 \cdot 10^{-2}\,\text{а.е.м.}
+    \end{align*}
 }
 \newpage
 
@@ -539,11 +1321,31 @@
     Какая доля (от начального количества) радиоактивных ядер распадётся через время,
     равное двум периодам полураспада? Ответ выразить в процентах.
 }
+\answer{
+    \begin{align*}
+    N &= N_0 \cdot 2^{ - \frac t{ T_{ 1/2 } } } \implies
+        \frac N{ N_0 } = 2^{ - \frac t{ T_{ 1/2 } } }
+        = 2^{ -2 } \approx 0.25 \approx 25\% \\
+    N_\text{ расп.
+    } &= N_0 - N = N_0 - N_0 \cdot 2^{ - \frac t{ T_{ 1/2 } } }
+        = N_0\cbr{ 1 - 2^{ - \frac t{ T_{ 1/2 } } } } \implies
+        \frac { N_\text{ расп.
+        } }{ N_0 } = 1 - 2^{ - \frac t{ T_{ 1/2 } } }
+        = 1 - 2^{ -2 } \approx 0.75 \approx 75\%
+    \end{align*}
+}
 \vspace{150pt}
 
 \tasknumber{2}\task{
     Сколько процентов ядер радиоактивного железа \ce{^{59}Fe}
     останется через $91{,}2\,\text{суток}$, если период его полураспада составляет $45{,}6\,\text{суток}$?
+}
+\answer{
+    \begin{align*}
+    N &= N_0 \cdot 2^{ - \frac t{ T_{ 1/2 } } }
+        = 2^{ - \frac { 91{,}2\,\text{суток} }{ 45{,}6\,\text{суток} } }
+        \approx 0.25 \approx 25.0\%
+    \end{align*}
 }
 \vspace{150pt}
 
@@ -551,6 +1353,20 @@
     За $2\,\text{суток}$ от начального количества ядер радиоизотопа осталась половина.
     Каков период полураспада этого изотопа (ответ приведите в сутках)?
     Какая ещё доля (также от начального количества) распадётся, если подождать ещё столько же?
+}
+\answer{
+    \begin{align*}
+    N &= N_0 \cdot 2^{ - \frac t{ T_{ 1/2 } } }
+            \implies \frac N{ N_0 } = 2^{ - \frac t{ T_{ 1/2 } } }
+            \implies \frac 12 = 2^{ - \frac { 2\,\text{суток} }{ T_{ 1/2 } } }
+            \implies 1 = \frac { 2\,\text{суток} }{ T_{ 1/2 } }
+            \implies T_{ 1/2 } = \frac { 2\,\text{суток} }1 \approx 2{,}0\,\text{суток}.
+         \\
+            \delta &= \frac{ N(t) }{ N_0 } - \frac{ N(2t) }{ N_0 }
+            = 2^{ - \frac t{ T_{ 1/2 } } } - 2^{ - \frac { 2t }{ T_{ 1/2 } } }
+            = 2^{ - \frac t{ T_{ 1/2 } } }\cbr{ 1 - 2^{ - \frac { t }{ T_{ 1/2 } } } }
+            = \frac 12\cdot \cbr{ 1 - \frac 12 } \approx 0.250
+    \end{align*}
 }
 \vspace{150pt}
 
@@ -561,6 +1377,18 @@
     и кг.
     Скорость света $c = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}$.
 }
+\answer{
+    \begin{align*}
+    E_\text{ св.
+    } = \Delta m c^2 \implies
+         \\
+            \implies
+            \Delta m &= \frac { E_\text{ св.
+            } }{ c^2 } = \frac{ 76{,}2\,\text{МэВ} }{ \sqr{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} } }
+            = \frac{ 76.2 \cdot 10^6 \cdot 1{,}6 \cdot 10^{-19}\,\text{Дж} }{ \sqr{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} } }
+            \approx 13{,}5 \cdot 10^{-29}\,\text{кг} \approx 8{,}12 \cdot 10^{-2}\,\text{а.е.м.}
+    \end{align*}
+}
 \newpage
 
 \addpersonalvariant{Рената Таржиманова}
@@ -570,11 +1398,31 @@
     Какая доля (от начального количества) радиоактивных ядер останется через время,
     равное двум периодам полураспада? Ответ выразить в процентах.
 }
+\answer{
+    \begin{align*}
+    N &= N_0 \cdot 2^{ - \frac t{ T_{ 1/2 } } } \implies
+        \frac N{ N_0 } = 2^{ - \frac t{ T_{ 1/2 } } }
+        = 2^{ -2 } \approx 0.25 \approx 25\% \\
+    N_\text{ расп.
+    } &= N_0 - N = N_0 - N_0 \cdot 2^{ - \frac t{ T_{ 1/2 } } }
+        = N_0\cbr{ 1 - 2^{ - \frac t{ T_{ 1/2 } } } } \implies
+        \frac { N_\text{ расп.
+        } }{ N_0 } = 1 - 2^{ - \frac t{ T_{ 1/2 } } }
+        = 1 - 2^{ -2 } \approx 0.75 \approx 75\%
+    \end{align*}
+}
 \vspace{150pt}
 
 \tasknumber{2}\task{
     Сколько процентов ядер радиоактивного железа \ce{^{59}Fe}
     останется через $91{,}2\,\text{суток}$, если период его полураспада составляет $45{,}6\,\text{суток}$?
+}
+\answer{
+    \begin{align*}
+    N &= N_0 \cdot 2^{ - \frac t{ T_{ 1/2 } } }
+        = 2^{ - \frac { 91{,}2\,\text{суток} }{ 45{,}6\,\text{суток} } }
+        \approx 0.25 \approx 25.0\%
+    \end{align*}
 }
 \vspace{150pt}
 
@@ -582,6 +1430,20 @@
     За $5\,\text{суток}$ от начального количества ядер радиоизотопа осталась одна шестнадцатая.
     Каков период полураспада этого изотопа (ответ приведите в сутках)?
     Какая ещё доля (также от начального количества) распадётся, если подождать ещё столько же?
+}
+\answer{
+    \begin{align*}
+    N &= N_0 \cdot 2^{ - \frac t{ T_{ 1/2 } } }
+            \implies \frac N{ N_0 } = 2^{ - \frac t{ T_{ 1/2 } } }
+            \implies \frac 116 = 2^{ - \frac { 5\,\text{суток} }{ T_{ 1/2 } } }
+            \implies 4 = \frac { 5\,\text{суток} }{ T_{ 1/2 } }
+            \implies T_{ 1/2 } = \frac { 5\,\text{суток} }4 \approx 1{,}0\,\text{суток}.
+         \\
+            \delta &= \frac{ N(t) }{ N_0 } - \frac{ N(2t) }{ N_0 }
+            = 2^{ - \frac t{ T_{ 1/2 } } } - 2^{ - \frac { 2t }{ T_{ 1/2 } } }
+            = 2^{ - \frac t{ T_{ 1/2 } } }\cbr{ 1 - 2^{ - \frac { t }{ T_{ 1/2 } } } }
+            = \frac 116\cdot \cbr{ 1 - \frac 116 } \approx 0.059
+    \end{align*}
 }
 \vspace{150pt}
 
@@ -592,6 +1454,18 @@
     и кг.
     Скорость света $c = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}$.
 }
+\answer{
+    \begin{align*}
+    E_\text{ св.
+    } = \Delta m c^2 \implies
+         \\
+            \implies
+            \Delta m &= \frac { E_\text{ св.
+            } }{ c^2 } = \frac{ 139{,}8\,\text{МэВ} }{ \sqr{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} } }
+            = \frac{ 139.8 \cdot 10^6 \cdot 1{,}6 \cdot 10^{-19}\,\text{Дж} }{ \sqr{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} } }
+            \approx 24{,}8 \cdot 10^{-29}\,\text{кг} \approx 14{,}9 \cdot 10^{-2}\,\text{а.е.м.}
+    \end{align*}
+}
 \newpage
 
 \addpersonalvariant{Глеб Урбанский}
@@ -601,11 +1475,31 @@
     Какая доля (от начального количества) радиоактивных ядер останется через время,
     равное трём периодам полураспада? Ответ выразить в процентах.
 }
+\answer{
+    \begin{align*}
+    N &= N_0 \cdot 2^{ - \frac t{ T_{ 1/2 } } } \implies
+        \frac N{ N_0 } = 2^{ - \frac t{ T_{ 1/2 } } }
+        = 2^{ -3 } \approx 0.12 \approx 12\% \\
+    N_\text{ расп.
+    } &= N_0 - N = N_0 - N_0 \cdot 2^{ - \frac t{ T_{ 1/2 } } }
+        = N_0\cbr{ 1 - 2^{ - \frac t{ T_{ 1/2 } } } } \implies
+        \frac { N_\text{ расп.
+        } }{ N_0 } = 1 - 2^{ - \frac t{ T_{ 1/2 } } }
+        = 1 - 2^{ -3 } \approx 0.88 \approx 88\%
+    \end{align*}
+}
 \vspace{150pt}
 
 \tasknumber{2}\task{
     Сколько процентов ядер радиоактивного железа \ce{^{59}Fe}
     останется через $136{,}8\,\text{суток}$, если период его полураспада составляет $45{,}6\,\text{суток}$?
+}
+\answer{
+    \begin{align*}
+    N &= N_0 \cdot 2^{ - \frac t{ T_{ 1/2 } } }
+        = 2^{ - \frac { 136{,}8\,\text{суток} }{ 45{,}6\,\text{суток} } }
+        \approx 0.125 \approx 12.5\%
+    \end{align*}
 }
 \vspace{150pt}
 
@@ -613,6 +1507,20 @@
     За $2\,\text{суток}$ от начального количества ядер радиоизотопа осталась четверть.
     Каков период полураспада этого изотопа (ответ приведите в сутках)?
     Какая ещё доля (также от начального количества) распадётся, если подождать ещё столько же?
+}
+\answer{
+    \begin{align*}
+    N &= N_0 \cdot 2^{ - \frac t{ T_{ 1/2 } } }
+            \implies \frac N{ N_0 } = 2^{ - \frac t{ T_{ 1/2 } } }
+            \implies \frac 14 = 2^{ - \frac { 2\,\text{суток} }{ T_{ 1/2 } } }
+            \implies 2 = \frac { 2\,\text{суток} }{ T_{ 1/2 } }
+            \implies T_{ 1/2 } = \frac { 2\,\text{суток} }2 \approx 1{,}0\,\text{суток}.
+         \\
+            \delta &= \frac{ N(t) }{ N_0 } - \frac{ N(2t) }{ N_0 }
+            = 2^{ - \frac t{ T_{ 1/2 } } } - 2^{ - \frac { 2t }{ T_{ 1/2 } } }
+            = 2^{ - \frac t{ T_{ 1/2 } } }\cbr{ 1 - 2^{ - \frac { t }{ T_{ 1/2 } } } }
+            = \frac 14\cdot \cbr{ 1 - \frac 14 } \approx 0.188
+    \end{align*}
 }
 \vspace{150pt}
 
@@ -623,6 +1531,18 @@
     и кг.
     Скорость света $c = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}$.
 }
+\answer{
+    \begin{align*}
+    E_\text{ св.
+    } = \Delta m c^2 \implies
+         \\
+            \implies
+            \Delta m &= \frac { E_\text{ св.
+            } }{ c^2 } = \frac{ 2{,}22\,\text{МэВ} }{ \sqr{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} } }
+            = \frac{ 2.22 \cdot 10^6 \cdot 1{,}6 \cdot 10^{-19}\,\text{Дж} }{ \sqr{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} } }
+            \approx 0{,}3933 \cdot 10^{-29}\,\text{кг} \approx 0{,}2368 \cdot 10^{-2}\,\text{а.е.м.}
+    \end{align*}
+}
 \newpage
 
 \addpersonalvariant{Кирилл Швец}
@@ -632,11 +1552,31 @@
     Какая доля (от начального количества) радиоактивных ядер распадётся через время,
     равное четырём периодам полураспада? Ответ выразить в процентах.
 }
+\answer{
+    \begin{align*}
+    N &= N_0 \cdot 2^{ - \frac t{ T_{ 1/2 } } } \implies
+        \frac N{ N_0 } = 2^{ - \frac t{ T_{ 1/2 } } }
+        = 2^{ -4 } \approx 0.06 \approx 6\% \\
+    N_\text{ расп.
+    } &= N_0 - N = N_0 - N_0 \cdot 2^{ - \frac t{ T_{ 1/2 } } }
+        = N_0\cbr{ 1 - 2^{ - \frac t{ T_{ 1/2 } } } } \implies
+        \frac { N_\text{ расп.
+        } }{ N_0 } = 1 - 2^{ - \frac t{ T_{ 1/2 } } }
+        = 1 - 2^{ -4 } \approx 0.94 \approx 94\%
+    \end{align*}
+}
 \vspace{150pt}
 
 \tasknumber{2}\task{
     Сколько процентов ядер радиоактивного железа \ce{^{59}Fe}
     останется через $182{,}4\,\text{суток}$, если период его полураспада составляет $45{,}6\,\text{суток}$?
+}
+\answer{
+    \begin{align*}
+    N &= N_0 \cdot 2^{ - \frac t{ T_{ 1/2 } } }
+        = 2^{ - \frac { 182{,}4\,\text{суток} }{ 45{,}6\,\text{суток} } }
+        \approx 0.0625 \approx 6.25\%
+    \end{align*}
 }
 \vspace{150pt}
 
@@ -644,6 +1584,20 @@
     За $4\,\text{суток}$ от начального количества ядер радиоизотопа осталась одна восьмая.
     Каков период полураспада этого изотопа (ответ приведите в сутках)?
     Какая ещё доля (также от начального количества) распадётся, если подождать ещё столько же?
+}
+\answer{
+    \begin{align*}
+    N &= N_0 \cdot 2^{ - \frac t{ T_{ 1/2 } } }
+            \implies \frac N{ N_0 } = 2^{ - \frac t{ T_{ 1/2 } } }
+            \implies \frac 18 = 2^{ - \frac { 4\,\text{суток} }{ T_{ 1/2 } } }
+            \implies 3 = \frac { 4\,\text{суток} }{ T_{ 1/2 } }
+            \implies T_{ 1/2 } = \frac { 4\,\text{суток} }3 \approx 1{,}0\,\text{суток}.
+         \\
+            \delta &= \frac{ N(t) }{ N_0 } - \frac{ N(2t) }{ N_0 }
+            = 2^{ - \frac t{ T_{ 1/2 } } } - 2^{ - \frac { 2t }{ T_{ 1/2 } } }
+            = 2^{ - \frac t{ T_{ 1/2 } } }\cbr{ 1 - 2^{ - \frac { t }{ T_{ 1/2 } } } }
+            = \frac 18\cdot \cbr{ 1 - \frac 18 } \approx 0.109
+    \end{align*}
 }
 \vspace{150pt}
 
@@ -653,6 +1607,18 @@
     Ответ выразите в а.е.м.
     и кг.
     Скорость света $c = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}$.
+}
+\answer{
+    \begin{align*}
+    E_\text{ св.
+    } = \Delta m c^2 \implies
+         \\
+            \implies
+            \Delta m &= \frac { E_\text{ св.
+            } }{ c^2 } = \frac{ 58{,}2\,\text{МэВ} }{ \sqr{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} } }
+            = \frac{ 58.2 \cdot 10^6 \cdot 1{,}6 \cdot 10^{-19}\,\text{Дж} }{ \sqr{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} } }
+            \approx 10{,}3 \cdot 10^{-29}\,\text{кг} \approx 6{,}2 \cdot 10^{-2}\,\text{а.е.м.}
+    \end{align*}
 }
 \newpage
 
@@ -663,11 +1629,31 @@
     Какая доля (от начального количества) радиоактивных ядер распадётся через время,
     равное двум периодам полураспада? Ответ выразить в процентах.
 }
+\answer{
+    \begin{align*}
+    N &= N_0 \cdot 2^{ - \frac t{ T_{ 1/2 } } } \implies
+        \frac N{ N_0 } = 2^{ - \frac t{ T_{ 1/2 } } }
+        = 2^{ -2 } \approx 0.25 \approx 25\% \\
+    N_\text{ расп.
+    } &= N_0 - N = N_0 - N_0 \cdot 2^{ - \frac t{ T_{ 1/2 } } }
+        = N_0\cbr{ 1 - 2^{ - \frac t{ T_{ 1/2 } } } } \implies
+        \frac { N_\text{ расп.
+        } }{ N_0 } = 1 - 2^{ - \frac t{ T_{ 1/2 } } }
+        = 1 - 2^{ -2 } \approx 0.75 \approx 75\%
+    \end{align*}
+}
 \vspace{150pt}
 
 \tasknumber{2}\task{
     Сколько процентов ядер радиоактивного железа \ce{^{59}Fe}
     останется через $91{,}2\,\text{суток}$, если период его полураспада составляет $45{,}6\,\text{суток}$?
+}
+\answer{
+    \begin{align*}
+    N &= N_0 \cdot 2^{ - \frac t{ T_{ 1/2 } } }
+        = 2^{ - \frac { 91{,}2\,\text{суток} }{ 45{,}6\,\text{суток} } }
+        \approx 0.25 \approx 25.0\%
+    \end{align*}
 }
 \vspace{150pt}
 
@@ -675,6 +1661,20 @@
     За $4\,\text{суток}$ от начального количества ядер радиоизотопа осталась одна восьмая.
     Каков период полураспада этого изотопа (ответ приведите в сутках)?
     Какая ещё доля (также от начального количества) распадётся, если подождать ещё столько же?
+}
+\answer{
+    \begin{align*}
+    N &= N_0 \cdot 2^{ - \frac t{ T_{ 1/2 } } }
+            \implies \frac N{ N_0 } = 2^{ - \frac t{ T_{ 1/2 } } }
+            \implies \frac 18 = 2^{ - \frac { 4\,\text{суток} }{ T_{ 1/2 } } }
+            \implies 3 = \frac { 4\,\text{суток} }{ T_{ 1/2 } }
+            \implies T_{ 1/2 } = \frac { 4\,\text{суток} }3 \approx 1{,}0\,\text{суток}.
+         \\
+            \delta &= \frac{ N(t) }{ N_0 } - \frac{ N(2t) }{ N_0 }
+            = 2^{ - \frac t{ T_{ 1/2 } } } - 2^{ - \frac { 2t }{ T_{ 1/2 } } }
+            = 2^{ - \frac t{ T_{ 1/2 } } }\cbr{ 1 - 2^{ - \frac { t }{ T_{ 1/2 } } } }
+            = \frac 18\cdot \cbr{ 1 - \frac 18 } \approx 0.109
+    \end{align*}
 }
 \vspace{150pt}
 
@@ -685,6 +1685,18 @@
     и кг.
     Скорость света $c = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}$.
 }
+\answer{
+    \begin{align*}
+    E_\text{ св.
+    } = \Delta m c^2 \implies
+         \\
+            \implies
+            \Delta m &= \frac { E_\text{ св.
+            } }{ c^2 } = \frac{ 58{,}2\,\text{МэВ} }{ \sqr{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} } }
+            = \frac{ 58.2 \cdot 10^6 \cdot 1{,}6 \cdot 10^{-19}\,\text{Дж} }{ \sqr{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} } }
+            \approx 10{,}3 \cdot 10^{-29}\,\text{кг} \approx 6{,}2 \cdot 10^{-2}\,\text{а.е.м.}
+    \end{align*}
+}
 \newpage
 
 \addpersonalvariant{Михаил Ярошевский}
@@ -694,11 +1706,31 @@
     Какая доля (от начального количества) радиоактивных ядер распадётся через время,
     равное четырём периодам полураспада? Ответ выразить в процентах.
 }
+\answer{
+    \begin{align*}
+    N &= N_0 \cdot 2^{ - \frac t{ T_{ 1/2 } } } \implies
+        \frac N{ N_0 } = 2^{ - \frac t{ T_{ 1/2 } } }
+        = 2^{ -4 } \approx 0.06 \approx 6\% \\
+    N_\text{ расп.
+    } &= N_0 - N = N_0 - N_0 \cdot 2^{ - \frac t{ T_{ 1/2 } } }
+        = N_0\cbr{ 1 - 2^{ - \frac t{ T_{ 1/2 } } } } \implies
+        \frac { N_\text{ расп.
+        } }{ N_0 } = 1 - 2^{ - \frac t{ T_{ 1/2 } } }
+        = 1 - 2^{ -4 } \approx 0.94 \approx 94\%
+    \end{align*}
+}
 \vspace{150pt}
 
 \tasknumber{2}\task{
     Сколько процентов ядер радиоактивного железа \ce{^{59}Fe}
     останется через $182{,}4\,\text{суток}$, если период его полураспада составляет $45{,}6\,\text{суток}$?
+}
+\answer{
+    \begin{align*}
+    N &= N_0 \cdot 2^{ - \frac t{ T_{ 1/2 } } }
+        = 2^{ - \frac { 182{,}4\,\text{суток} }{ 45{,}6\,\text{суток} } }
+        \approx 0.0625 \approx 6.25\%
+    \end{align*}
 }
 \vspace{150pt}
 
@@ -706,6 +1738,20 @@
     За $4\,\text{суток}$ от начального количества ядер радиоизотопа осталась четверть.
     Каков период полураспада этого изотопа (ответ приведите в сутках)?
     Какая ещё доля (также от начального количества) распадётся, если подождать ещё столько же?
+}
+\answer{
+    \begin{align*}
+    N &= N_0 \cdot 2^{ - \frac t{ T_{ 1/2 } } }
+            \implies \frac N{ N_0 } = 2^{ - \frac t{ T_{ 1/2 } } }
+            \implies \frac 14 = 2^{ - \frac { 4\,\text{суток} }{ T_{ 1/2 } } }
+            \implies 2 = \frac { 4\,\text{суток} }{ T_{ 1/2 } }
+            \implies T_{ 1/2 } = \frac { 4\,\text{суток} }2 \approx 2{,}0\,\text{суток}.
+         \\
+            \delta &= \frac{ N(t) }{ N_0 } - \frac{ N(2t) }{ N_0 }
+            = 2^{ - \frac t{ T_{ 1/2 } } } - 2^{ - \frac { 2t }{ T_{ 1/2 } } }
+            = 2^{ - \frac t{ T_{ 1/2 } } }\cbr{ 1 - 2^{ - \frac { t }{ T_{ 1/2 } } } }
+            = \frac 14\cdot \cbr{ 1 - \frac 14 } \approx 0.188
+    \end{align*}
 }
 \vspace{150pt}
 
@@ -715,6 +1761,18 @@
     Ответ выразите в а.е.м.
     и кг.
     Скорость света $c = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}$.
+}
+\answer{
+    \begin{align*}
+    E_\text{ св.
+    } = \Delta m c^2 \implies
+         \\
+            \implies
+            \Delta m &= \frac { E_\text{ св.
+            } }{ c^2 } = \frac{ 7{,}72\,\text{МэВ} }{ \sqr{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} } }
+            = \frac{ 7.72 \cdot 10^6 \cdot 1{,}6 \cdot 10^{-19}\,\text{Дж} }{ \sqr{ 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} } }
+            \approx 1{,}37 \cdot 10^{-29}\,\text{кг} \approx 0{,}825 \cdot 10^{-2}\,\text{а.е.м.}
+    \end{align*}
 }
 
 \end{document}
