@@ -37,6 +37,8 @@ def precisionFmt2(value, precision):
         rawDigits = '-' + rawDigits
     return rawDigits.rstrip('.')
 
+
+assert precisionFmt2(1.7, 1) == '1.7'
 assert precisionFmt2(0.091, 2) == '0.091'
 assert precisionFmt2(0.095, 2) == '0.095'
 assert precisionFmt2(0.0949, 2) == '0.095'
@@ -122,7 +124,7 @@ class UnitValue(object):
                                 if self.Precision is None:
                                     self.Precision = len(precisionStr)
                                     try:
-                                        if precisionStr[0] == '1' and self.Precision >= 3:
+                                        if precisionStr[0] == '1' and self.Precision >= 2:
                                             self.Precision -= 1
                                     except:
                                         print part, precisionStr, self.__RawLine
@@ -300,6 +302,7 @@ assert UnitValue(u'50 мТл').Value * (10 ** UnitValue(u'50 мТл').Power) == 
 assert u'{v:Task}'.format(v=UnitValue(u'c = 3 10^{8} м / с')) == u'c = 3 \\cdot 10^{8}\\,\\frac{\\text{м}}{\\text{с}}', 'Got %r' %  u'{v:Task}'.format(v=UnitValue(u'c = 3 10^{8} м / с'))
 assert u'{t:Task}'.format(t=UnitValue(u't = 8 суток')) == u't = 8\\,\\text{суток}', 'Got %r' %  u'{t:Task}'.format(t=UnitValue(u't = 8 суток'))
 assert u'{:Value}'.format(UnitValue(u'm = 1.67 10^-27 кг')) == u'1{,}67 \\cdot 10^{-27}\\,\\text{кг}'
+assert u'{:Value}'.format(UnitValue(u'T = 1.7 суток')) == u'1{,}7\\,\\text{суток}'
 
 
 class Consts(object):

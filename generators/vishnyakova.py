@@ -295,7 +295,7 @@ class BK_53_02(variant.VariantTask):
         = 2^{ - \\frac t{ T_{ 1/2 } } } - 2^{ - \\frac { 2t }{ T_{ 1/2 } } }
         = 2^{ - \\frac t{ T_{ 1/2 } } }\\cbr{ 1 - 2^{ - \\frac { t }{ T_{ 1/2 } } } }
         = \\frac 1{num}\\cdot \\cbr{ 1 - \\frac 1{num} } \\approx {res:.3f}
-    '''
+    ''',
 ])
 @variant.args(
     how=[u'четверть', u'одна восьмая', u'половина', u'одна шестнадцатая'],
@@ -323,15 +323,11 @@ class BK_53_03(variant.VariantTask):
     Найти дефект массы этого ядра. Ответ выразите в а.е.м. и кг. Скорость света ${Consts.c:Task}$.
 ''')
 @variant.answer_align([
-    u'''
-        E_\\text{ св. } = \\Delta m c^2 \\implies
-    ''',
-    u'''
-        \\implies
+    u'E_\\text{ св. } = \\Delta m c^2 \\implies',
+    u'''\\implies
         \\Delta m &= \\frac { E_\\text{ св. } }{ c^2 } = \\frac{E:Value|s}{Consts.c:Value|sqr|s}
         = \\frac{ {eV} \\cdot 10^6 \\cdot {Consts.eV:Value} }{Consts.c:Value|sqr|s}
-        \\approx {dm:Value} \\approx {aem:Value}
-    ''',
+        \\approx {dm:Value} \\approx {aem:Value}''',
 ])
 @variant.args({
     # https://www.calc.ru/Energiya-Svyazi-Nekotorykh-Yader.html
@@ -356,7 +352,7 @@ class BK_53_03(variant.VariantTask):
 })
 class BK_53_12(variant.VariantTask):
     def GetUpdate(self, E=None, Consts=None, **kws):
-        dm = E.Other(Consts.e, action='mult').Other(Consts.c, action='div').Other(Consts.c, action='div', units=u'кг')
+        dm = E.Other(Consts.e, action='mult', precisionInc=1).Other(Consts.c, action='div').Other(Consts.c, action='div', units=u'кг')
         aem = dm.Other(Consts.aem, action='div', units=u'а.е.м.')
         return dict(
             eV=E.Value,

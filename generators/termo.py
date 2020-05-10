@@ -141,18 +141,18 @@ class Ch_8_13(variant.VariantTask):
     в воду температурой $t = {t}\\celsius$, масса которой равна массе тела.
     Определите, какая температура установится в сосуде.
 ''')
-@variant.answer(u'''\\begin{{align*}}
-    Q_1 + Q_2 &= 0, \\\\
-    Q_1 &= c_1 m_1 \\Delta t_1 = c_1 m (\\theta - t_1), \\\\
-    Q_2 &= c_2 m_2 \\Delta t_2 = c_2 m (\\theta - t_2), \\\\
-    c_1 m (\\theta - t_1) + c_2 m (\\theta - t_2) &= 0, \\\\
-    c_1 (\\theta - t_1) + c_2 (\\theta - t_2) &= 0, \\\\
-    c_1 \\theta - c_1 t_1 + c_2 \\theta - c_2 t_2 &= 0, \\\\
-    (c_1 + c_2)\\theta &= c_1 t_1 + c_2 t_2, \\\\
-    \\theta &= \\frac{{c_1 t_1 + c_2 t_2}}{{c_1 + c_2}}
-        = \\frac{{{c1:Value} \\cdot {t1}\\celsius + {c2:Value} \\cdot {t2}\\celsius}}{{{c1:Value} + {c2:Value}}}
-        \\approx {theta} \\celsius.
-\\end{{align*}}''')
+@variant.answer_align([
+    u'Q_1 + Q_2 &= 0, ',
+    u'Q_1 &= c_1 m_1 \\Delta t_1 = c_1 m (\\theta - t_1), ',
+    u'Q_2 &= c_2 m_2 \\Delta t_2 = c_2 m (\\theta - t_2), ',
+    u'c_1 m (\\theta - t_1) + c_2 m (\\theta - t_2) &= 0, ',
+    u'c_1 (\\theta - t_1) + c_2 (\\theta - t_2) &= 0, ',
+    u'c_1 \\theta - c_1 t_1 + c_2 \\theta - c_2 t_2 &= 0, ',
+    u'(c_1 + c_2)\\theta &= c_1 t_1 + c_2 t_2, ',
+    u'''\\theta &= \\frac{ c_1 t_1 + c_2 t_2 }{ c_1 + c_2 }
+        = \\frac{ {c1:Value|cdot} {t1}\\celsius + {c2:Value|cdot} {t2}\\celsius }{ {c1:Value} + {c2:Value} }
+        \\approx {theta} \\celsius.''',
+])
 @variant.args(
     metall__c=[
         (u'Стальное', TableValues['steel']['c']),

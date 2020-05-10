@@ -83,15 +83,11 @@ class ConstMagnet3(variant.VariantTask):
     и поместили в однородное магнитное поле с индукцией {B:Task:e} обеими сторонами перпендикулярно линиям индукции.
     Какая сила будет действовать на этот проводник при пропусканиии по нему тока {I:Task:e}?
 ''')
-@variant.answer(u'''
-    \\begin{{align*}}
-        F
-            &= \\sqrt{{F_a^2 + F_b^2}} = \\sqrt{{(\\mathcal{{I}}Ba)^2 + (\\mathcal{{I}}Bb)^2}}
-            = \\mathcal{{I}}B\\sqrt{{a^2 + b^2}} = \\mathcal{{I}}B\\sqrt{{a^2 + (l - a)^2}} =                       \\\\
-            &= {I:Value}\\cdot {B:Value} \\cdot \\sqrt{{ {a:Value:s}^2 + \\left({l:Value} - {a:Value}\\right)^2}}
-            = {F:Value}.
-    \\end{{align*}}
-''')
+@variant.answer_align([
+    u'''F &= \\sqrt{ F_a^2 + F_b^2 } = \\sqrt{ \\sqr{ \\mathcal{ I }Ba } + \\sqr{ \\mathcal{ I }Bb } }
+            = \\mathcal{ I }B\\sqrt{ a^2 + b^2 } = \\mathcal{ I }B\\sqrt{ a^2 + (l - a)^2 } = ''',
+    u'&= {I:Value|cdot}{B:Value|cdot}\\sqrt{ {a:Value|sqr} + \\sqr{ {l:Value} - {a:Value} } } = {F:Value}.',
+])
 @variant.args(
     l__a=[(u'l = %d см' % (a + b), u'a = %d см' % a) for a, b in [
         (30, 40), (40, 30), (3, 4), (4, 3),

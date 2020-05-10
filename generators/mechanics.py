@@ -13,13 +13,11 @@ log = logging.getLogger(__name__)
     Сделайте рисунок и укажите направления скоростей и импульсов.
     Определите импульс каждого из шариков, а также их суммарный импульс.
 ''')
-@variant.answer(u'''
-    \\begin{{align*}}
-        {p1:Letter} &= {m1:Letter}{v1:Letter} = {m1:Value}\\cdot{v1:Value} = {p1:Value}, \\\\
-        {p2:Letter} &= {m2:Letter}{v2:Letter} = {m2:Value}\\cdot{v2:Value} = {p2:Value}, \\\\
-        {p:Letter} &= {p1:Letter} + {p2:Letter} = {m1:Letter}{v1:Letter} + {m2:Letter}{v2:Letter} = {p:Value}.
-    \\end{{align*}}
-''')
+@variant.answer_align([
+    u'{p1:Letter} &= {m1:Letter}{v1:Letter} = {m1:Value|cdot}{v1:Value} = {p1:Value},',
+    u'{p2:Letter} &= {m2:Letter}{v2:Letter} = {m2:Value|cdot}{v2:Value} = {p2:Value},',
+    u'{p:Letter} &= {p1:Letter} + {p2:Letter} = {m1:Letter}{v1:Letter} + {m2:Letter}{v2:Letter} = {p:Value}.',
+])
 @variant.args(
     m1__m2=[(u'm_1 = %d кг' % m1, u'm_2 = %d кг' % m2) for m1 in [1, 2, 3, 4] for m2 in [1, 2, 3, 4] if m1 != m2],
     v1=[u'v_1 = %d м / с' % v1 for v1 in [2, 4, 5, 10]],
@@ -41,13 +39,11 @@ class Ch_3_1(variant.VariantTask):
     Сделайте рисунок, укажите направления скоростей и импульсов.
     Определите импульс каждого из шариков, а также их суммарный импульс.
 ''')
-@variant.answer(u'''
-    \\begin{{align*}}
-        {p1:Letter} &= {m:Letter}{v1:Letter} = {m:Value}\\cdot{v1:Value} = {p1:Value}, \\\\
-        {p2:Letter} &= {m:Letter}{v2:Letter} = {m:Value}\\cdot{v2:Value} = {p2:Value}, \\\\
-        {p:Letter} &= {p1:Letter} - {p2:Letter} = {m:Letter}({v1:Letter} - {v2:Letter}) = {p:Value}.
-    \\end{{align*}}
-''')
+@variant.answer_align([
+    u'{p1:Letter} &= {m:Letter}{v1:Letter} = {m:Value|cdot}{v1:Value} = {p1:Value},',
+    u'{p2:Letter} &= {m:Letter}{v2:Letter} = {m:Value|cdot}{v2:Value} = {p2:Value},',
+    u'{p:Letter} &= {p1:Letter} - {p2:Letter} = {m:Letter}({v1:Letter} - {v2:Letter}) = {p:Value}.',
+])
 @variant.args(
     m=[u'm = %d кг' % m for m in [2, 5, 10]],
     v1=[u'v_1 = %d м / с' % v1 for v1 in [1, 2, 5, 10]],
@@ -69,13 +65,11 @@ class Ch_3_2(variant.VariantTask):
     Сделайте рисунок, укажите направления скоростей и импульсов.
     Определите импульс каждого из шариков и полный импульс системы.
 ''')
-@variant.answer(u'''\\begin{{align*}}
-    {p1:Letter} &= {m:Letter}{v1:Letter} = {m:Value}\\cdot{v1:Value} = {p1:Value}, \\\\
-    {p2:Letter} &= {m:Letter}{v2:Letter} = {m:Value}\\cdot{v2:Value} = {p2:Value}, \\\\
-    {p:Letter}
-        &= \\sqrt{{{p1:Letter}^2 + {p2:Letter}^2}}
-        = {m:Letter}\\sqrt{{{v1:Letter}^2 + {v2:Letter}^2}} = {p:Value}.
-\\end{{align*}}''')
+@variant.answer_align([
+    u'{p1:Letter} &= {m:Letter}{v1:Letter} = {m:Value|cdot}{v1:Value} = {p1:Value},',
+    u'{p2:Letter} &= {m:Letter}{v2:Letter} = {m:Value|cdot}{v2:Value} = {p2:Value},',
+    u'{p:Letter} &= \\sqrt{ {p1:Letter}^2 + {p2:Letter}^2 } = {m:Letter}\\sqrt{ {v1:Letter}^2 + {v2:Letter}^2 } = {p:Value}.',
+])
 @variant.args(
     v1__v2__v=[(
         u'v_1 = %d м / с' % v1,
@@ -103,11 +97,10 @@ class Ch_3_3(variant.VariantTask):
     Запишите (формулами, не числами) импульсы каждого из тел до и после сцепки и после,
     а также определите скорость их совместного движения.
 ''')
-@variant.answer(u'''\\begin{{align*}}
-    \\text{{ЗСИ: }} &M\\cdot v + m\\cdot 0 + m \\cdot 0 =  M\\cdot v' + m\\cdot v' + m \\cdot v' \\implies \\\\
-    &\\implies v' = v\\cdot \\frac{{M}}{{M + 2m}}
-      = {v:Value}\\cdot \\frac{{{M:Value}}}{{{M:Value} + 2 \\cdot {m:Value}}} \\approx {u:Value}.
-\\end{{align*}}''')
+@variant.answer_align([
+    u"\\text{ ЗСИ: } &M\\cdot v + m \\cdot 0 + m \\cdot 0 =  M \\cdot v' + m \\cdot v' + m \\cdot v' \\implies",
+    u"&\\implies v' = v\\cdot \\frac{ M }{ M + 2m } = {v:Value|cdot} \\frac{M:Value|s}{ {M:Value} + 2 \\cdot {m:Value} } \\approx {u:Value}.",
+])
 @variant.args(
     M=[u'M = %d т' % M for M in [120, 150, 210]],
     m=[u'm = %d т' % m for m in [30, 40, 50]],

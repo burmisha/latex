@@ -60,17 +60,12 @@ class Waves01(variant.VariantTask):
     Определите запас полной механической энергии колебательной системы
     и амплитуду колебаний потенциальной энергии.
 ''')
-@variant.answer(u'''
-    \\begin{{align*}}
-        E_{{\\text{{полная механическая}}}}
-            &= E_{{\\text{{max кинетическая}}}}
-            = \\frac{{m v_{{\\max}}^2}}2
-            = \\frac{{{m:Value} \\cdot \\sqr{v:Value:s}}}2
-            = {E:Value},
-        \\\\
-        A_{{E_{{\\text{{потенциальная}}}}}} &= \\frac {{E_{{\\text{{полная механическая}}}}}}2 = {E2:Value}.
-    \\end{{align*}}
-''')
+@variant.answer_align([
+    u'''
+        E_{ \\text{ полная механическая } } &= E_{ \\text{ max кинетическая } }
+        = \\frac{ m v_{ \\max }^2 }2 = \\frac{ {m:Value|cdot}{v:Value|sqr} }2 = {E:Value},''',
+    u'A_{{E_{{\\text{{потенциальная}}}}}} &= \\frac {{E_{{\\text{{полная механическая}}}}}}2 = {E2:Value}.'
+])
 @variant.args(
     mLetter=[u'm', u'M'],
     mValue=[100, 200, 250, 400],
@@ -150,17 +145,15 @@ class Waves04(variant.VariantTask):
     начиная с первого. Каковы длина, период и частота волны,
     если скорость распространения волн {v:Value:e}?
 ''')
-@variant.answer(u'''
-    \\begin{{align*}}
-        \\lambda &= \\frac L{{N-1}} = \\frac {{vt}}{{N-1}} = \\frac {{{v:Value}\\cdot{t:Value}}}{{{N:Value} - 1}} = {lmbd:Value}, \\\\
-        T &= \\frac {{\\lambda}}{{v}} = \\frac {{vt}}{{\\cbr{{N-1}}v}} = \\frac {{t}}{{N-1}} =  \\frac {t:Value:s}{{{N:Value} - 1}} = {T:Value}, \\\\
-        \\nu &= \\frac 1T = \\frac {{N-1}}{{t}} = \\frac {{{N:Value} - 1}}{t:Value:s} = {nu:Value}. \\\\
-        &\\text{{Если же считать гребни целиком, т.е. не вычитать единицу:}} \\\\
-        \\lambda' &= \\frac L{{N}} = \\frac {{vt}}{{N}} = \\frac {{{v:Value}\\cdot{t:Value}}}{N:Value:s} = {lmbd_1:Value}, \\\\
-        T' &= \\frac {{\\lambda'}}{{v}} = \\frac {{vt}}{{Nv}} = \\frac tN =  \\frac {t:Value:s}{N:Value:s} = {T_1:Value}, \\\\
-        \\nu' &= \\frac 1{{T'}} = \\frac {{N}}{{t}} = \\frac {N:Value:s}{t:Value:s} = {nu_1:Value}.
-    \\end{{align*}}
-''')
+@variant.answer_align([
+    u"\\lambda &= \\frac L{ N-1 } = \\frac { vt }{ N-1 } = \\frac { {v:Value|cdot}{t:Value} }{ {N:Value} - 1 } = {lmbd:Value}, ",
+    u"T &= \\frac { \\lambda }{ v } = \\frac { vt }{ \\cbr{ N-1 }v } = \\frac { t }{ N-1 } =  \\frac {t:Value:s}{ {N:Value} - 1 } = {T:Value}, ",
+    u"\\nu &= \\frac 1T = \\frac { N-1 }{ t } = \\frac { {N:Value} - 1 }{t:Value:s} = {nu:Value}. ",
+    u"&\\text{ Если же считать гребни целиком, т.е. не вычитать единицу: } ",
+    u"\\lambda' &= \\frac L{ N } = \\frac { vt }{ N } = \\frac { {v:Value|cdot}{t:Value} }{N:Value:s} = {lmbd_1:Value}, ",
+    u"T' &= \\frac { \\lambda' }{ v } = \\frac { vt }{ Nv } = \\frac tN =  \\frac {t:Value:s}{N:Value:s} = {T_1:Value}, ",
+    u"\\nu' &= \\frac 1{ T' } = \\frac { N }{{t } = \\frac {N:Value:s}{t:Value:s} = {nu_1:Value}. ",
+])
 @variant.args(
     N=[u'N = %d' % N for N in [4, 5, 6]],
     t=[u't = %d c' % t for t in [5, 6, 8, 10]],

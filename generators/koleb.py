@@ -38,12 +38,10 @@ class Nu02(variant.VariantTask):
     Определите период колебаний, если их частота составляет {nu:Task:e}.
     Сколько колебаний произойдёт за {t:Task:e}?
 ''')
-@variant.answer(u'''
-    \\begin{{align*}}
-        T &= \\frac 1\\nu = \\frac 1{nu:Value:s} = {T:Value}, \\\\
-        N &= \\nu t = {nu:Value}\\cdot{t:Value} = {N:Value}.
-    \\end{{align*}}
-''')
+@variant.answer_align([
+    u'T &= \\frac 1\\nu = \\frac 1{nu:Value:s} = {T:Value},',
+    u'N &= \\nu t = {nu:Value|cdot}{t:Value} = {N:Value}.',
+])
 @variant.args(
     nu=[u'\\nu = %d кГц' % nu for nu in [2, 4, 5, 10, 20, 40, 50]],
     t=[u't = %d мин' % t for t in [1, 2, 3, 5, 10]],
