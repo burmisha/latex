@@ -261,7 +261,6 @@ def answer_align(answer_template):
         templateLines = []
         for line in answer_template:
             templateLines.append(line.replace(u'{ ', u'{{ ').replace(u' }', u' }}'))
-        print templateLines
         templateLine = u' \\\\\n'.join(templateLines).strip()
         template = u'\\begin{{align*}}\n' +  templateLine + u'\n\\end{{align*}}'
         cls.AnswerTemplate = template.replace('\n\n', '\n')

@@ -337,6 +337,17 @@ class BK_53_03(variant.VariantTask):
     Энергия связи ядра {element} равна ${E:Value}$.
     Найти дефект массы этого ядра. Ответ выразите в а.е.м. и кг. Скорость света ${Consts.c:Task}$.
 ''')
+@variant.answer_align([
+    u'''
+        &E_\\text{ св. } = \\Delta m c^2 
+        \\implies \\Delta m = \\frac { E_\\text{ св. } }{ c^2 } =
+    ''',
+    u'''
+        &= \\frac{E:Value|s}{Consts.c:Value|sqr|s}
+        = \\frac{ {eV} \\cdot 10^6 \\cdot {Consts.eV:Value} }{Consts.c:Value|sqr|s} 
+        \\approx {dm:Value} \\approx {aem:Value}
+    ''',
+])
 @variant.args({
     # https://www.calc.ru/Energiya-Svyazi-Nekotorykh-Yader.html
     ('element', 'E'): [
@@ -359,4 +370,11 @@ class BK_53_03(variant.VariantTask):
     ],
 })
 class BK_53_12(variant.VariantTask):
-    pass
+    def GetUpdate(self, E=None, Consts=None, **kws):
+        dm = E.Other(Consts.e, action='mult', precisionInc=2).Other(Consts.c, action='div', precisionInc=3).Other(Consts.c, action='div', precisionInc=3, units=u'кг')
+        aem = dm.Other(Consts.aem, action='div', units=u'а.е.м.')
+        return dict(
+            eV=E.Value,
+            dm=dm,
+            aem=aem,
+        )

@@ -189,6 +189,44 @@ class UnitValue(object):
             result = fmt.format(result)
         return result
 
+    def Other(self, other, action=None, precisionInc=0, units=''):
+        # TODO: skips units now
+        if isinstance(other, UnitValue):
+            precision = min(self.Precision, other.Precision) + precisionInc
+            if action == 'mult':
+                value = self.Value * other.Value
+                power = self.Power + other.Power
+            elif action == 'div':
+                value = self.Value / other.Value
+                power = self.Power - other.Power
+            else:
+                raise NotImplementedError('Could not apply %s' % action)
+        elif isinstance(other, (int, float)):
+            precision = self.Precision + precisionInc
+            power = self.Power
+            if action == 'mult':
+                value = self.Value * other
+            elif action == 'div':
+                value = self.Value / other
+            else:
+                raise NotImplementedError('Could not apply %s' % action)
+
+        resValue = u''
+        valuable = 0
+        for c in '%.50f' % value:
+            if valuable or (c != '0' and c != '.'):
+                valuable += 1
+            if not valuable:
+                resValue += c
+                continue            
+            if valuable <= precision:
+                resValue += c
+            else:
+                break
+        r = UnitValue(resValue + u' 10^%d ' % power + units)
+        # print '%r' % [self, other, self.Precision, other.Precision, precision, value, power, resValue, valuable, r]
+        return r
+
 
 assert UnitValue(u'50 мТл').Value * (10 ** UnitValue(u'50 мТл').Power) == 0.05, 'Got %r' % UnitValue(u'50 мТл').Value
 assert u'{v:Task}'.format(v=UnitValue(u'c = 3 10^{8} м / с')) == u'c = 3 \\cdot 10^{8}\\,\\frac{\\text{м}}{\\text{с}}', 'Got %r' %  u'{v:Task}'.format(v=UnitValue(u'c = 3 10^{8} м / с'))
@@ -200,6 +238,8 @@ class Consts(object):
     m_p = UnitValue(u'm_{p} = 1.672 10^{-27} кг')
     m_n = UnitValue(u'm_{n} = 1.675 10^{-27} кг')
     e = UnitValue(u'e = 1.6 10^{-19} Кл')
+    eV = UnitValue(u'1.6 10^{-19} Дж')
     h = UnitValue(u'h = 6.626 10^{-34} Дж с')
     c = UnitValue(u'c = 3 10^{8} м / с')
     g_ten = UnitValue(u'g = 10 м / с^2')
+    aem = UnitValue(u'1.66054 10^-27 кг')
