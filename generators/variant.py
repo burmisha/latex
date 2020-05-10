@@ -115,7 +115,7 @@ class VariantTask(object):
             try:
                 text = textTemplate.format(**args)
                 text = re.sub('(\\d)\.(\\d)', '\\1{,}\\2', text)
-            except ValueError:
+            except:
                 print textTemplate
                 print args
                 raise
@@ -125,11 +125,10 @@ class VariantTask(object):
                     answer = re.sub('(\\d)\.(\\d)', '\\1{,}\\2', answer)
                 else:
                     answer = None
-            except ValueError:
+            except:
                 print answerTemplate
                 print args
                 raise
-            # TODO: .replace('.', '{,}') in answer
             yield problems.task.Task(
                 text,
                 answer=answer,
@@ -147,7 +146,6 @@ class VariantTask(object):
         return self.__TasksList
 
     def GetRandomTask(self, randomStr):
-        # print self.GetTextTemplate()
         hash_md5 = hashlib.md5()
         hash_md5.update(randomStr)
         randomHash = hash_md5.hexdigest()[8:16] # use only part of hash

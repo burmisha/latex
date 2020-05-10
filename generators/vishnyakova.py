@@ -79,15 +79,15 @@ class BK_4_03(variant.VariantTask):
         }[what]
         share = float('0.' + percent)
         return {
-            'E': u'{value:.2f} 10^{power} Дж'.format(
+            'E': u'{value:.1f} 10^{power} Дж'.format(
                 value=m.Value * Consts.c.Value ** 2 / ((1. - share ** 2) ** 0.5),
                 power=m.Power + 2 * Consts.c.Power,
             ),
-            'E_kin': u'{value:.2f} 10^{power} Дж'.format(
+            'E_kin': u'{value:.1f} 10^{power} Дж'.format(
                 value=m.Value * Consts.c.Value ** 2 * (1. / ((1. - share ** 2) ** 0.5) - 1),
                 power=m.Power + 2 * Consts.c.Power,
             ),
-            'p': u'{value:.2f} 10^{power} кг м / с'.format(
+            'p': u'{value:.1f} 10^{power} кг м / с'.format(
                 value=m.Value * Consts.c.Value / ((1. - share ** 2) ** 0.5),
                 power=m.Power + Consts.c.Power,
             ),
@@ -312,7 +312,7 @@ class BK_53_03(variant.VariantTask):
         return dict(
             num=num,
             log_num=log_num,
-            T=u'%.2f суток' % (t.Value / log_num),
+            T=u'%.1f суток' % (1. * t.Value / log_num),
             res=1. / num * (1 - 1./num),
         )
 
@@ -356,7 +356,7 @@ class BK_53_03(variant.VariantTask):
 })
 class BK_53_12(variant.VariantTask):
     def GetUpdate(self, E=None, Consts=None, **kws):
-        dm = E.Other(Consts.e, action='mult', precisionInc=2).Other(Consts.c, action='div', precisionInc=3).Other(Consts.c, action='div', precisionInc=3, units=u'кг')
+        dm = E.Other(Consts.e, action='mult').Other(Consts.c, action='div').Other(Consts.c, action='div', units=u'кг')
         aem = dm.Other(Consts.aem, action='div', units=u'а.е.м.')
         return dict(
             eV=E.Value,

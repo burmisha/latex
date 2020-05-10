@@ -5,10 +5,87 @@ import logging
 log = logging.getLogger(__name__)
 
 
+def precisionFmt2(value, precision):
+    isNegative = value < 0
+    absValue = abs(value)
+    assert absValue >= 10 ** -7
+    assert 1 <= precision <= 10
+
+    rawValue = '%.20f' % absValue
+    assert 'e' not in rawValue
+    dot_pos = rawValue.index('.')
+    assert dot_pos is not None
+    no_dot = rawValue.replace('.', '')
+    rawDigits = no_dot.lstrip('0')
+    leading_zeros = len(no_dot) - len(rawDigits)
+    if rawDigits[0] == '1':
+        rawDigits = rawDigits[:precision + 2]
+    else:
+        rawDigits = rawDigits[:(precision + 1)]
+    if rawDigits[-1] >= 5:
+        if len(str(int(rawDigits) + 5)) > len(rawDigits):
+            leading_zeros -= 1
+        rawDigits = str(int(rawDigits) + 5)
+    rawDigits = '0' * leading_zeros + rawDigits[:-1]
+
+    if dot_pos >= len(rawDigits):
+        rawDigits += '0' * (dot_pos - len(rawDigits))
+    else:
+        rawDigits = rawDigits[:dot_pos] + '.' + rawDigits[dot_pos:]
+
+    if isNegative:
+        rawDigits = '-' + rawDigits
+    return rawDigits.rstrip('.')
+
+assert precisionFmt2(0.091, 2) == '0.091'
+assert precisionFmt2(0.095, 2) == '0.095'
+assert precisionFmt2(0.0949, 2) == '0.095'
+assert precisionFmt2(-0.0949, 2) == '-0.095'
+assert precisionFmt2(0.99, 2) == '0.99'
+assert precisionFmt2(0.99, 1) == '1.0'
+assert precisionFmt2(1.99, 2) == '1.99'
+assert precisionFmt2(1.99, 3) == '1.990'
+assert precisionFmt2(19.9, 2) == '19.9'
+assert precisionFmt2(19.9, 1) == '20'
+assert precisionFmt2(20, 2) == '20'
+assert precisionFmt2(2.99, 2) == '3.0'
+assert precisionFmt2(29.9, 2) == '30'
+assert precisionFmt2(299, 2) == '300'
+assert precisionFmt2(1 + 1. / 30, 2) == '1.03'
+assert precisionFmt2(1 + 1. / 300, 2) == '1.00'
+assert precisionFmt2(1 + 1. / 300, 3) == '1.003'
+assert precisionFmt2(1. / 3, 2) == '0.33'
+assert precisionFmt2(4. / 3, 2) == '1.33'
+assert precisionFmt2(7. / 3, 2) == '2.3'
+assert precisionFmt2(7. / 3, 3) == '2.33'
+assert precisionFmt2(700. / 3, 3) == '233'
+assert precisionFmt2(700. / 3, 3) == '233'
+assert precisionFmt2(7000. / 3, 3) == '2330'
+assert precisionFmt2(7000. / 3, 2) == '2300'
+assert precisionFmt2(7000. / 3, 1) == '2000'
+assert precisionFmt2(8000. / 3, 1) == '3000'
+assert precisionFmt2(7000. / 3, 4) == '2333'
+assert precisionFmt2(7000. / 3, 5) == '2333.3'
+assert precisionFmt2(1000. / 3, 5) == '333.33'
+assert precisionFmt2(100. / 3, 5) == '33.333'
+assert precisionFmt2(10. / 3, 5) == '3.3333'
+assert precisionFmt2(0.1 / 3, 5) == '0.033333'
+assert precisionFmt2(0.01 / 3, 5) == '0.0033333'
+assert precisionFmt2(0.001 / 3, 5) == '0.00033333'
+assert precisionFmt2(0.0049594, 5) == '0.0049594'
+assert precisionFmt2(0.0049594, 4) == '0.004959'
+assert precisionFmt2(0.0049595, 4) == '0.004960'
+assert precisionFmt2(0.0049594, 3) == '0.00496'
+assert precisionFmt2(0.0049594, 2) == '0.0050'
+assert precisionFmt2(0.0049594, 1) == '0.005'
+
+
 class UnitValue(object):
-    def __init__(self, line):
+    def __init__(self, line, precision=None, viewPrecision=None):
         self.Line = line.strip()
         self.__RawLine = line
+        self.Precision = precision
+        self.ViewPrecision = viewPrecision
         self.Load()
 
     def Load(self):
@@ -34,11 +111,22 @@ class UnitValue(object):
                 if index == 0:
                     try:
                         self.RawValue = int(part)
-                        self.Precision = len(part)
+                        if self.Precision is None:
+                            self.Precision = len(part)
                     except ValueError:
                         try:
                             self.RawValue = float(part)
-                            self.Precision = len(part.lstrip('0').lstrip('.').lstrip('0'))
+                            if self.Precision is None:
+
+                                precisionStr = part.lstrip('0').lstrip('.').lstrip('0').replace('.', '')
+                                if self.Precision is None:
+                                    self.Precision = len(precisionStr)
+                                    try:
+                                        if precisionStr[0] == '1' and self.Precision >= 3:
+                                            self.Precision -= 1
+                                    except:
+                                        print part, precisionStr, self.__RawLine
+                                        raise
                         except:
                             log.error('Could not get value from %r', part)
                             raise
@@ -135,14 +223,6 @@ class UnitValue(object):
         return '\\cdot'.join(parts)
 
     def __format__(self, format):
-        # if isinstance(self.Value, int):
-        #     fmt = '{:d}'
-        # else:
-        #     fmt = '{:.2f}'
-        # if self.Value < 0:
-        #     fmt = '(%s)' % fmt
-        # value = fmt.format(self.Value).replace('.', '{,}')
-
         mainFormat = format.replace(':', '|')
         mainFormat, pipes = mainFormat.split('|')[0], mainFormat.split('|')[1:]
 
@@ -154,7 +234,8 @@ class UnitValue(object):
         else:
             units = '\,' + humanNom
 
-        valueStr = u'{}'.format(self.Value).replace('.', '{,}')  # TODO: use precision
+        valueStr = precisionFmt2(self.Value, self.ViewPrecision or self.Precision)
+        valueStr = valueStr.replace('.', '{,}')
         if self.BasePower:
             valueStr += ' \\cdot 10^{{{}}}'.format(self.BasePower)
         valueStr += u'{}'.format(units)
@@ -192,7 +273,8 @@ class UnitValue(object):
     def Other(self, other, action=None, precisionInc=0, units=''):
         # TODO: skips units now
         if isinstance(other, UnitValue):
-            precision = min(self.Precision, other.Precision) + precisionInc
+            # print self.Precision, other.Precision
+            precision = min(min(self.Precision, other.Precision) + precisionInc, 7)
             if action == 'mult':
                 value = self.Value * other.Value
                 power = self.Power + other.Power
@@ -202,7 +284,7 @@ class UnitValue(object):
             else:
                 raise NotImplementedError('Could not apply %s' % action)
         elif isinstance(other, (int, float)):
-            precision = self.Precision + precisionInc
+            precision = min(self.Precision + precisionInc, 7)
             power = self.Power
             if action == 'mult':
                 value = self.Value * other
@@ -211,35 +293,34 @@ class UnitValue(object):
             else:
                 raise NotImplementedError('Could not apply %s' % action)
 
-        resValue = u''
-        valuable = 0
-        for c in '%.50f' % value:
-            if valuable or (c != '0' and c != '.'):
-                valuable += 1
-            if not valuable:
-                resValue += c
-                continue            
-            if valuable <= precision:
-                resValue += c
-            else:
-                break
-        r = UnitValue(resValue + u' 10^%d ' % power + units)
-        # print '%r' % [self, other, self.Precision, other.Precision, precision, value, power, resValue, valuable, r]
+        r = UnitValue( u'%.20f 10^%d %s' % (value, power, units), precision=precision)
         return r
 
 
 assert UnitValue(u'50 мТл').Value * (10 ** UnitValue(u'50 мТл').Power) == 0.05, 'Got %r' % UnitValue(u'50 мТл').Value
 assert u'{v:Task}'.format(v=UnitValue(u'c = 3 10^{8} м / с')) == u'c = 3 \\cdot 10^{8}\\,\\frac{\\text{м}}{\\text{с}}', 'Got %r' %  u'{v:Task}'.format(v=UnitValue(u'c = 3 10^{8} м / с'))
 assert u'{t:Task}'.format(t=UnitValue(u't = 8 суток')) == u't = 8\\,\\text{суток}', 'Got %r' %  u'{t:Task}'.format(t=UnitValue(u't = 8 суток'))
+assert u'{:Value}'.format(UnitValue(u'm = 1.67 10^-27 кг')) == u'1{,}67 \\cdot 10^{-27}\\,\\text{кг}'
 
 
 class Consts(object):
     m_e = UnitValue(u'm_{e} = 9.1 10^{-31} кг')
     m_p = UnitValue(u'm_{p} = 1.672 10^{-27} кг')
     m_n = UnitValue(u'm_{n} = 1.675 10^{-27} кг')
-    e = UnitValue(u'e = 1.6 10^{-19} Кл')
-    eV = UnitValue(u'1.6 10^{-19} Дж')
+    e = UnitValue(u'e = 1.60 10^{-19} Кл', viewPrecision=1)
+    eV = UnitValue(u'1.6 10^{-19} Дж', viewPrecision=1)
     h = UnitValue(u'h = 6.626 10^{-34} Дж с')
-    c = UnitValue(u'c = 3 10^{8} м / с')
-    g_ten = UnitValue(u'g = 10 м / с^2')
+    c = UnitValue(u'c = 3 10^{8} м / с', precision=3, viewPrecision=1)
+    g_ten = UnitValue(u'g = 10 м / с^2', precision=2)
     aem = UnitValue(u'1.66054 10^-27 кг')
+
+
+# E = UnitValue(u'E = 7.72 МэВ')
+# print '%r' % [
+#     E.Precision,
+#     Consts.c.Precision,
+#     # E.Other(Consts.e, action='mult').Precision,
+#     E.Other(Consts.e, action='mult').Other(Consts.c, action='div').Precision,
+#     # E.Other(Consts.e, action='mult').Other(Consts.c, action='div').Other(Consts.c, action='div', units=u'кг')
+# ]
+# assert False
