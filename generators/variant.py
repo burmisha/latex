@@ -249,9 +249,25 @@ def text(text_template):
 
 def answer(answer_template):
     def decorator(cls):
+        assert not hasattr(cls, 'AnswerTemplate')
         cls.AnswerTemplate = answer_template
         return cls
     return decorator
+
+
+def answer_align(answer_template):
+    def decorator(cls):
+        assert not hasattr(cls, 'AnswerTemplate')
+        templateLines = []
+        for line in answer_template:
+            templateLines.append(line.replace(u'{ ', u'{{ ').replace(u' }', u' }}'))
+        print templateLines
+        templateLine = u' \\\\\n'.join(templateLines).strip()
+        template = u'\\begin{{align*}}\n' +  templateLine + u'\n\\end{{align*}}'
+        cls.AnswerTemplate = template.replace('\n\n', '\n')
+        return cls
+    return decorator
+
 
 def args(*args_list, **kws):
     assert args_list == () or (len(args_list) == 1 and (isinstance(args_list[0], dict) or args_list[0] is None)), '%r' % [args_list, kws]

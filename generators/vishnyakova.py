@@ -233,12 +233,35 @@ class BK_52_07(variant.VariantTask):
     Какая доля (от начального количества) радиоактивных ядер {what} через время,
     равное {when} периодам полураспада? Ответ выразить в процентах.
 ''')
+@variant.answer_align([
+    u'''N &= N_0 \\cdot 2^{ - \\frac t{ T_{ 1/2 } } } \\implies 
+    \\frac N{ N_0 } = 2^{ - \\frac t{ T_{ 1/2 } } }
+    = 2^{ -{t} } \\approx {N_value:.2f} \\approx {N_percent:.0f}\\%''',
+    u'''N_\\text{{ост.}} &= N_0 - N = N_0 - N_0 \\cdot 2^{ - \\frac t{ T_{ 1/2 } } } 
+    = N_0\\cbr{ 1 - 2^{ - \\frac t{ T_{ 1/2 } } } } \\implies 
+    \\frac { N_\\text{ ост. } }{ N_0 } = 1 - 2^{ - \\frac t{ T_{ 1/2 } } }
+    = 1 - 2^{ -{t} } \\approx {N_left_value:.2f} \\approx {N_left_percent:.0f}\\%''',
+])
 @variant.args(
     what=[u'распадётся', u'останется'],
     when=[u'двум', u'трём', u'четырём'],
 )
 class BK_53_01(variant.VariantTask):
-    pass
+    def GetUpdate(self, what=None, when=None, **kws):
+        t = {
+            u'двум': 2,
+            u'трём': 3,
+            u'четырём': 4,
+        }[when]
+        share = 2. ** (-t)
+        left = 1. - share
+        return dict(
+            t=t,
+            N_value=share,
+            N_percent=share * 100,
+            N_left_value=left,
+            N_left_percent=left * 100,
+        )
 
 
 @variant.solution_space(150)
@@ -246,12 +269,26 @@ class BK_53_01(variant.VariantTask):
     Сколько процентов ядер радиоактивного железа \ce{{^{{59}}Fe}}
     останется через ${t:Value}$, если период его полураспада составляет ${T:Value}$?
 ''')
+@variant.answer_align([
+    u'''N_\\text{{ост.}} &= N_0 - N = N_0 - N_0 \\cdot 2^{ - \\frac t{ T_{ 1/2 } } } 
+    = N_0\\cbr{ 1 - 2^{ - \\frac t{ T_{ 1/2 } } } } \\implies''',
+    u'''
+    \\implies 
+    \\frac { N_\\text{ ост. } }{ N_0 } &= 1 - 2^{ - \\frac t{ T_{ 1/2 } } }
+     = 1 - 2^{ - \\frac {t:Value|s}{T:Value|s} }
+    \\approx {share} \\approx {percent}\\%''',
+])
 @variant.args(
     t=[u't = %s суток' % t for t in [u'91.2', u'136.8', u'182.4']],
     T=[u'T = 45.6 суток'],
 )
 class BK_53_02(variant.VariantTask):
-    pass
+    def GetUpdate(self, t=None, T=None, **kws):
+        share = 1. - 2. ** (-t.Value / T.Value)
+        return dict(
+            share=share,
+            percent=share * 100,
+        )
 
 
 @variant.solution_space(150)
@@ -260,12 +297,39 @@ class BK_53_02(variant.VariantTask):
     Каков период полураспада этого изотопа (ответ приведите в сутках)?
     Какая ещё доля (также от начального количества) распадётся, если подождать ещё столько же?
 ''')
+@variant.answer_align([
+    u'''
+        N &= N_0 \\cdot 2^{ - \\frac t{ T_{ 1/2 } } } 
+        \\implies \\frac N{ N_0 } = 2^{ - \\frac t{ T_{ 1/2 } } } 
+        \\implies \\frac 1{num} = 2^{ - \\frac {t:Value|s}{ T_{ 1/2 } } } 
+        \\implies {log_num} = \\frac {t:Value|s}{ T_{ 1/2 } }
+        \\implies T_{ 1/2 } = \\frac {t:Value|s}{log_num} \\approx {T:Value}.
+    ''',
+    u'''
+        \\delta &= \\frac{ N(t) }{ N_0 } - \\frac{ N(2t) }{ N_0 }
+        = 2^{ - \\frac t{ T_{ 1/2 } } } - 2^{ - \\frac { 2t }{ T_{ 1/2 } } } 
+        = 2^{ - \\frac t{ T_{ 1/2 } } }\\cbr{ 1 - 2^{ - \\frac { t }{ T_{ 1/2 } } } }
+        = \\frac 1{num}\\cdot \\cbr{ 1 - \\frac 1{num} } \\approx {res:.3f}
+    '''
+])
 @variant.args(
     how=[u'четверть', u'одна восьмая', u'половина', u'одна шестнадцатая'],
     t=[u'%d суток' % t for t in [2, 3, 4, 5]],
 )
 class BK_53_03(variant.VariantTask):
-    pass
+    def GetUpdate(self, how=None, t=None, **kws):
+        num, log_num = {
+            u'четверть': (4, 2),
+            u'одна восьмая': (8, 3),
+            u'половина': (2, 1),
+            u'одна шестнадцатая': (16, 4),
+        }[how]
+        return dict(
+            num=num,
+            log_num=log_num,
+            T=u'%.2f суток' % (t.Value / log_num),
+            res=1. / num * (1 - 1./num),
+        )
 
 
 @variant.solution_space(150)
