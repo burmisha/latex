@@ -137,14 +137,12 @@ class BK_4_06(variant.VariantTask):
     Какова длина волны этой линии спектра?
     Постоянная Планка ${Consts.h:Task}$, скорость света ${Consts.c:Task}$.
 ''')
-@variant.answer(u'''$
+@variant.answer_short(u'''
     E = h\\nu = h \\frac c\\lambda
-    \\implies \\lambda = \\frac{{hc}}{{E}}
-        = \\frac{{
-            {Consts.h:Value|s|cdot}{Consts.c:Value|s}
-        }}{E:Value|s}
+    \\implies \\lambda = \\frac{ hc }{ E }
+        = \\frac{ {Consts.h:Value|cdot}{Consts.c:Value|s} }{E:Value|s}
         = {lmbd:Value}.
-$''')
+''')
 @variant.args(
     E=[u'E = %s 10^{-19} Дж' % E for E in [u'4.04', u'5.05', u'2.02', u'7.07', u'1.01', u'0.55']],
 )
@@ -163,14 +161,12 @@ class BK_52_01(variant.VariantTask):
     Излучение какой длины волны поглотил атом водорода, если полная энергия в атоме увеличилась на ${E:Value}$?
     Постоянная Планка ${Consts.h:Task}$, скорость света ${Consts.c:Task}$.
 ''')
-@variant.answer(u'''$
+@variant.answer_short(u'''
     E = h\\nu = h \\frac c\\lambda
-    \\implies \\lambda = \\frac{{hc}}{{E}}
-        = \\frac{{
-            {Consts.h:Value|s|cdot}{Consts.c:Value|s}
-        }}{E:Value|s}
+    \\implies \\lambda = \\frac{ hc }{ E }
+        = \\frac{ {Consts.h:Value|cdot}{Consts.c:Value|s} }{E:Value|s}
         = {lmbd:Value}.
-$''')
+''')
 @variant.args(
     E=[u'E = %d 10^{-19} Дж' % E for E in [2, 3, 4, 6]],
 )
@@ -193,7 +189,7 @@ class BK_52_02(variant.VariantTask):
     Отметьте все соответствующие переходы на рисунке и укажите,
     при каком переходе (среди отмеченных) {what} излучённого фотона {minmax}.
 ''')
-@variant.answer(u'''$N = {N}$, {answer}''')
+@variant.answer_short(u'N = {N}, \\text{ {answer} }')
 @variant.args(
     n=[3, 4, 5],
     what=[u'энергия', u'частота', u'длина волны'],
@@ -286,7 +282,7 @@ class BK_53_02(variant.VariantTask):
     u'''
         N &= N_0 \\cdot 2^{ - \\frac t{ T_{ 1/2 } } }
         \\implies \\frac N{ N_0 } = 2^{ - \\frac t{ T_{ 1/2 } } }
-        \\implies \\frac 1{num} = 2^{ - \\frac {t:Value|s}{ T_{ 1/2 } } }
+        \\implies \\frac 1{ {num} } = 2^{ - \\frac {t:Value|s}{ T_{ 1/2 } } }
         \\implies {log_num} = \\frac {t:Value|s}{ T_{ 1/2 } }
         \\implies T_{ 1/2 } = \\frac {t:Value|s}{log_num} \\approx {T:Value}.
     ''',
@@ -294,7 +290,7 @@ class BK_53_02(variant.VariantTask):
         \\delta &= \\frac{ N(t) }{ N_0 } - \\frac{ N(2t) }{ N_0 }
         = 2^{ - \\frac t{ T_{ 1/2 } } } - 2^{ - \\frac { 2t }{ T_{ 1/2 } } }
         = 2^{ - \\frac t{ T_{ 1/2 } } }\\cbr{ 1 - 2^{ - \\frac { t }{ T_{ 1/2 } } } }
-        = \\frac 1{num}\\cdot \\cbr{ 1 - \\frac 1{num} } \\approx {res:.3f}
+        = \\frac 1{ {num} }\\cdot \\cbr{ 1 - \\frac 1{ {num} } } \\approx {res:.3f}
     ''',
 ])
 @variant.args(

@@ -85,14 +85,10 @@ class Waves02(variant.VariantTask):
     Определите расстояние между {first} и {second} гребнями волн,
     если длина волны равна {lmbd:Value:e}. Сколько между ними ещё уместилось гребней?
 ''')
-@variant.answer(u'''$
-    l
-        = (n_2 - n_1) \\cdot \\lambda
-        = \\cbr{{{n2} - {n1}}} \\cdot {lmbd:Value}
-        = {l:Value},
-    \\quad
-    n = n_2 - n_1 - 1 = {n2} - {n1} - 1 = {n}
-$''')
+@variant.answer_short(u'''
+    l = (n_2 - n_1) \\cdot \\lambda = \\cbr{ {n2} - {n1} } \\cdot {lmbd:Value} = {l:Value},
+    \\quad n = n_2 - n_1 - 1 = {n2} - {n1} - 1 = {n}
+''')
 @variant.args(
     first__n1=[
         (u'первым', 1),
@@ -122,13 +118,7 @@ class Waves03(variant.VariantTask):
     колеблющийся с периодом {T:Value:e}, возбуждает волны длиной
     {lmbd:Value:e}.
 ''')
-@variant.answer(u'''$
-    \\lambda
-        = vT \\implies v
-        = \\frac{{\\lambda}}{{T}}
-        = \\frac{lmbd:Value:s}{T:Value:s}
-        = {v:Value:s}
-$''')
+@variant.answer_short(u'\\lambda = vT \\implies v = \\frac{ \\lambda }T = \\frac{lmbd:Value:s}{T:Value:s} = {v:Value:s}')
 @variant.args(
     lmbd=[u'\\lambda = %.1f м' % lmbd for lmbd in [1.2, 1.5, 2.1, 2.4]],
     T=[u'T = %d мc' % T for T in [2, 3, 4, 5, 6]],
@@ -175,16 +165,16 @@ class Waves05(variant.VariantTask):
     Сравните длины звуковой волны частотой {nu_1:Task:e} и радиоволны частотой {nu_2:Task:e}.
     Какая больше, во сколько раз? Скорость звука примите равной {v:Task:e}.
 ''')
-@variant.answer(u'''$
+@variant.answer_short(u'''
     \\lambda_1
-        = v T_1 = v \\cdot \\frac 1{{\\nu_1}} = \\frac{{v}}{{\\nu_1}}
+        = v T_1 = v \\cdot \\frac 1{{\\nu_1}} = \\frac{ v }{ \\nu_1 }
         = \\frac{v:Value:s}{nu_1:Value:s} = {l_1:Value},
     \\quad
     \\lambda_2
-        = c T_2 = c \\cdot \\frac 1{{\\nu_2}} = \\frac{{c}}{{\\nu_2}}
+        = c T_2 = c \\cdot \\frac 1{ \\nu_2 } = \\frac{ c }{ \\nu_2 }
         = \\frac{c:Value:s}{nu_2:Value:s} = {l_2:Value},
-    \\quad n = \\frac{{\\lambda_2}}{{\\lambda_1}} \\approx {n:Value}
-$''')
+    \\quad n = \\frac{ \\lambda_2 }{ \\lambda_1 } \\approx {n:Value}
+''')
 @variant.args(
     nu_1=[u'\\nu_1 = %s Гц' % nu_1 for nu_1 in [150, 200, 300, 500]],
     nu_2=[u'\\nu_2 = %s МГц' % nu_2 for nu_2 in [200, 500, 800]],
@@ -204,15 +194,11 @@ class Ch1238(variant.VariantTask):
     Чему равна длина волны, если две точки среды, находящиеся на расстоянии {l:Task:e},
     совершают колебания с разностью фаз ${delta}$?
 ''')
-@variant.answer(u'''$
-    \\frac l\\lambda = \\frac \\varphi{{2\\pi}} + k (k\\in\\mathbb{{N}})
-    \\implies
-    \\lambda
-        = \\frac l{{\\frac \\varphi{{2\\pi}} + k}}
-        = \\frac {{2\\pi l}}{{\\varphi + 2\\pi k}},
-    \\quad
-    \\lambda_0 = \\frac {{2\\pi l}}{{\\varphi}} = {lmbd:Value}
-$''')
+@variant.answer_short(u'''
+    \\frac l\\lambda = \\frac \\varphi{ 2\\pi } + k (k\\in\\mathbb{ N })
+    \\implies \\lambda = \\frac l{ \\frac \\varphi{ 2\\pi } + k } = \\frac { 2\\pi l }{ \\varphi + 2\\pi k },
+    \\quad \\lambda_0 = \\frac { 2\\pi l }{ \\varphi } = {lmbd:Value}
+''')
 @variant.args(
     delta__frac=[
         (u'\\frac{\\pi}{8}', 1. / 16),

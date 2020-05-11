@@ -258,6 +258,16 @@ def answer(answer_template):
     return decorator
 
 
+def answer_short(answer_template):
+    def decorator(cls):
+        assert not hasattr(cls, 'AnswerTemplate')
+        templateLine = answer_template.replace(u'{ ', u'{{ ').replace(u' }', u' }}')
+        template = u'${}$'.format(templateLine)
+        cls.AnswerTemplate = template.replace('\n\n', '\n')
+        return cls
+    return decorator
+
+
 def answer_align(answer_template):
     def decorator(cls):
         assert not hasattr(cls, 'AnswerTemplate')
