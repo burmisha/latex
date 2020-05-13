@@ -272,15 +272,16 @@ class UnitValue(object):
             result = fmt.format(result)
         return result
 
-    def Other(self, other, action=None, precisionInc=0, units=''):
+    def Other(self, other, action=None, precisionInc=0, units='', powerShift=0):
         # TODO: skips units now
+
         if isinstance(other, UnitValue):
             precision = min(min(self.Precision, other.Precision) + precisionInc, 7)
             if action == 'mult':
-                value = self.Value * other.Value
+                value = 1. * self.Value * other.Value
                 power = self.Power + other.Power
             elif action == 'div':
-                value = self.Value / other.Value
+                value = 1. * self.Value / other.Value
                 power = self.Power - other.Power
             else:
                 raise NotImplementedError('Could not apply %s' % action)
@@ -288,13 +289,16 @@ class UnitValue(object):
             precision = min(self.Precision + precisionInc, 7)
             power = self.Power
             if action == 'mult':
-                value = self.Value * other
+                value = 1. * self.Value * other
             elif action == 'div':
-                value = self.Value / other
+                value = 1. * self.Value / other
             else:
                 raise NotImplementedError('Could not apply %s' % action)
 
-        r = UnitValue( u'%.20f 10^%d %s' % (value, power, units), precision=precision)
+        power -= powerShift
+        value *= 10 ** powerShift
+
+        r = UnitValue(u'%.20f 10^%d %s' % (value, power, units), precision=precision)
         return r
 
 
@@ -315,3 +319,6 @@ class Consts(object):
     c = UnitValue(u'c = 3 10^{8} м / с', precision=3, viewPrecision=1)
     g_ten = UnitValue(u'g = 10 м / с^2', precision=2)
     aem = UnitValue(u'1.66054 10^-27 кг')
+
+
+assert u'{:Value}'.format(Consts.c.Other(UnitValue(u'l = 500 нм'), action='div', units=u'Гц', powerShift=3)) == u'6{,}00 \\cdot 10^{14}\\,\\text{Гц}'

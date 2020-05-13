@@ -16,9 +16,18 @@ log = logging.getLogger(__name__)
     n=[u'n = 1.%d' % n for n in [3, 4, 5, 6, 7]],
     lmbd=[u'\\lambda = %d нм' % lmbd for lmbd in [400, 500, 600, 700]],
 )
+@variant.answer_align([
+    u'''\\nu &= \\frac 1T = \\frac 1{ \\lambda/c } = \\frac c\\lambda = \\frac{Consts.c:Value|s}{lmbd:Value|s} \\approx {nu:Value},''',
+    u'''\\nu' = \\nu &\\cbr{ \\text{ или } T' = T } \\implies \\lambda' = v'T' = \\frac vn T = \\frac{ vt }n = \\frac \\lambda n = \\frac{lmbd:Value|s}{n:Value|s} \\approx {lmbd_1:Value}.''',
+    u'&\\text{ 380 нм---фиол---440---син---485---гол---500---зел---565---жёл---590---оранж---625---крас---780 нм }',
+])
 @variant.solution_space(180)
 class Gendenshteyn_11_11_18(variant.VariantTask):
-    pass
+    def GetUpdate(self, n=None, lmbd=None, Consts=None, **kws):
+        return dict(
+            nu=Consts.c.Other(lmbd, action='div', units=u'Гц', powerShift=3),
+            lmbd_1=lmbd.Other(n, action='div', units=u'м'),
+        )
 
 
 @variant.text(u'''
