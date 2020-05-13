@@ -232,9 +232,11 @@ class UnitValue(object):
         humanNom = self.__GetUnits(self.HumanUnits[0])
         humanDen = self.__GetUnits(self.HumanUnits[1])
         if humanDen:
-            units = u'\,\\frac{{{}}}{{{}}}'.format(humanNom, humanDen)
-        else:
+            units = u'\,\\frac{%s}{%s}' % (humanNom, humanDen)
+        elif humanNom:
             units = '\,' + humanNom
+        else:
+            units = ''
 
         valueStr = precisionFmt2(self.Value, self.ViewPrecision or self.Precision)
         valueStr = valueStr.replace('.', '{,}')
