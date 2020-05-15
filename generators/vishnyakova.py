@@ -35,10 +35,10 @@ log = logging.getLogger(__name__)
 class BK_4_01(variant.VariantTask):
     def GetUpdate(self, energy=None, percent=None, **kws):
         share = float('0.' + percent)
-        return {
-            'E':  1. / ((1. - share ** 2) ** 0.5),
-            'E_kin': 1. / ((1. - share ** 2) ** 0.5) - 1,
-        }
+        return dict(
+            E=1. / ((1. - share ** 2) ** 0.5),
+            E_kin=1. / ((1. - share ** 2) ** 0.5) - 1,
+        )
 
 
 @variant.solution_space(150)
@@ -77,21 +77,21 @@ class BK_4_03(variant.VariantTask):
             u'Электрон': Consts.m_e,
         }[what]
         share = float('0.' + percent)
-        return {
-            'E': u'{value:.1f} 10^{power} Дж'.format(
+        return dict(
+            E=u'{value:.1f} 10^{power} Дж'.format(
                 value=m.Value * Consts.c.Value ** 2 / ((1. - share ** 2) ** 0.5),
                 power=m.Power + 2 * Consts.c.Power,
             ),
-            'E_kin': u'{value:.1f} 10^{power} Дж'.format(
+            E_kin=u'{value:.1f} 10^{power} Дж'.format(
                 value=m.Value * Consts.c.Value ** 2 * (1. / ((1. - share ** 2) ** 0.5) - 1),
                 power=m.Power + 2 * Consts.c.Power,
             ),
-            'p': u'{value:.1f} 10^{power} кг м / с'.format(
+            p=u'{value:.1f} 10^{power} кг м / с'.format(
                 value=m.Value * share * Consts.c.Value / ((1. - share ** 2) ** 0.5),
                 power=m.Power + Consts.c.Power,
             ),
-            'm': m,
-        }
+            m=m,
+        )
 
 
 @variant.solution_space(150)
@@ -121,11 +121,11 @@ class BK_4_06(variant.VariantTask):
     def GetUpdate(self, percent=None, Consts=None, **kws):
         share = float('0.' + percent)
         answerShare = (1. - (1. - share) ** 2) ** 0.5
-        return {
-            'answerShare': answerShare,
-            'speed': u'%.3f 10^8 м / с' % (answerShare * Consts.c.Value),
-            'kmch': u'%.3f 10^8 км / ч' % (3.6 * answerShare * Consts.c.Value),
-        }
+        return dict(
+            answerShare=answerShare,
+            speed=u'%.3f 10^8 м / с' % (answerShare * Consts.c.Value),
+            kmch=u'%.3f 10^8 км / ч' % (3.6 * answerShare * Consts.c.Value),
+        )
 
 
 @variant.solution_space(150)
@@ -146,12 +146,12 @@ class BK_4_06(variant.VariantTask):
 )
 class BK_52_01(variant.VariantTask):
     def GetUpdate(self, E=None, Consts=None, **kws):
-        return {
-            'lmbd': u'{value:.2f} 10^{power} м'.format(
+        return dict(
+            lmbd=u'{value:.2f} 10^{power} м'.format(
                 value=Consts.h.Value * Consts.c.Value / E.Value,
                 power=Consts.h.Power + Consts.c.Power - E.Power,
             ),
-        }
+        )
 
 
 @variant.solution_space(150)
@@ -170,12 +170,12 @@ class BK_52_01(variant.VariantTask):
 )
 class BK_52_02(variant.VariantTask):
     def GetUpdate(self, E=None, Consts=None, **kws):
-        return {
-            'lmbd': u'{value:.2f} 10^{power} м'.format(
+        return dict(
+            lmbd=u'{value:.2f} 10^{power} м'.format(
                 value=Consts.h.Value * Consts.c.Value / E.Value,
                 power=Consts.h.Power + Consts.c.Power - E.Power,
             ),
-        }
+        )
 
 
 @variant.solution_space(150)
@@ -190,25 +190,26 @@ class BK_52_02(variant.VariantTask):
 @variant.answer_short(u'N = {N}, \\text{ {answer} }')
 @variant.args(
     n=[3, 4, 5],
-    what=[u'энергия', u'частота', u'длина волны'],
-    minmax=[u'минимальна', u'максимальна'],
+    what__what_sign=[
+        (u'энергия', 1),
+        (u'частота', 1),
+        (u'длина волны', -1),
+    ],
+    minmax__minmax_sign=[
+        (u'минимальна', -1),
+        (u'максимальна', 1),
+    ],
 )
 class BK_52_07(variant.VariantTask):
-    def GetUpdate(self, n=None, what=None, minmax=None, **kws):
-        whatSign = {
-            u'энергия': 1,
-            u'частота': 1,
-            u'длина волны': -1,
-        }[what]
-        minmaxSign = {
-            u'минимальна': -1,
-            u'максимальна': 1,
-        }[minmax]
-        answer = u'самая длинная линия' if whatSign == minmaxSign else u'самая короткая линия'
-        return {
-            'N': n * (n - 1) / 2,
-            'answer': answer,
-        }
+    def GetUpdate(self, n=None, what=None, minmax=None, what_sign=None, minmax_sign=None, **kws):
+        answer = {
+            1: u'самая длинная линия',
+            -1: u'самая короткая линия',
+        }[what_sign * minmax_sign]
+        return dict(
+            N=n * (n - 1) / 2,
+            answer=answer,
+        )
 
 
 @variant.solution_space(150)
@@ -227,15 +228,14 @@ class BK_52_07(variant.VariantTask):
 ])
 @variant.args(
     what=[u'распадётся', u'останется'],
-    when=[u'двум', u'трём', u'четырём'],
+    when__t=[
+        (u'двум', 2),
+        (u'трём', 3),
+        (u'четырём', 4),
+    ],
 )
 class BK_53_01(variant.VariantTask):
-    def GetUpdate(self, what=None, when=None, **kws):
-        t = {
-            u'двум': 2,
-            u'трём': 3,
-            u'четырём': 4,
-        }[when]
+    def GetUpdate(self, what=None, when=None, t=None, **kws):
         share = 2. ** (-t)
         left = 1. - share
         return dict(
@@ -292,20 +292,17 @@ class BK_53_02(variant.VariantTask):
     ''',
 ])
 @variant.args(
-    how=[u'четверть', u'одна восьмая', u'половина', u'одна шестнадцатая'],
+    how__num__log_num=[
+        (u'четверть', 4, 2),
+        (u'одна восьмая', 8, 3),
+        (u'половина', 2, 1),
+        (u'одна шестнадцатая', 16, 4),
+    ],
     t=[u'%d суток' % t for t in [2, 3, 4, 5]],
 )
 class BK_53_03(variant.VariantTask):
-    def GetUpdate(self, how=None, t=None, **kws):
-        num, log_num = {
-            u'четверть': (4, 2),
-            u'одна восьмая': (8, 3),
-            u'половина': (2, 1),
-            u'одна шестнадцатая': (16, 4),
-        }[how]
+    def GetUpdate(self, how=None, t=None, num=None, log_num=None, **kws):
         return dict(
-            num=num,
-            log_num=log_num,
             T=u'%.1f суток' % (1. * t.Value / log_num),
             res=1. / num * (1 - 1./num),
         )

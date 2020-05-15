@@ -32,26 +32,26 @@ class Waves00(variant.VariantTask):
     Частота собственных малых колебаний пружинного маятника равна {nu:Task:e}.
     Чему станет равен период колебаний, если массу пружинного маятника увеличить в ${alpha}$ раз?
 ''')
-@variant.answer(u'''$
-    T'  = 2\\pi\\sqrt{{\\frac {{m'}}k}}
-        = 2\\pi\\sqrt{{\\frac {{\\alpha m}}k}}
-        = \\sqrt{{\\alpha}} \\cdot 2\\pi\\sqrt{{\\frac mk}}
-        = \\sqrt{{\\alpha}} \\cdot T
-        = T\\sqrt{{\\alpha}}
-        = \\frac 1\\nu \\cdot\\sqrt{{\\alpha}}
-        = \\frac {{\\sqrt{{\\alpha}}}}\\nu
-        = \\frac {{\\sqrt{{{alpha}}}}}{nu:Value:s}
+@variant.answer_short(u'''
+    T'  = 2\\pi\\sqrt{ \\frac { m' }k }
+        = 2\\pi\\sqrt{ \\frac { \\alpha m }k }
+        = \\sqrt{ \\alpha } \\cdot 2\\pi\\sqrt{ \\frac mk }
+        = \\sqrt{ \\alpha } \\cdot T
+        = T\\sqrt{ \\alpha }
+        = \\frac 1\\nu \\cdot\\sqrt{ \\alpha }
+        = \\frac{ \\sqrt{ \\alpha } }{ \\nu }
+        = \\frac{ \\sqrt{ {alpha} } }{nu:Value:s}
         = {T1:Value}
-$''')
+''')
 @variant.args(
     nu=[u'\\nu = %s Гц' % nu for nu in [u'2', u'4', u'5', u'8']],
     alpha=[u'4', u'16', u'25'],
 )
 class Waves01(variant.VariantTask):
     def GetUpdate(self, alpha=None, nu=None, **kws):
-        return {
-            'T1': u'T\' = %.2f с' % (math.sqrt(int(alpha)) / int(nu.Value)),
-        }
+        return dict(
+            T1=u'T\' = %.2f с' % (math.sqrt(int(alpha)) / int(nu.Value)),
+        )
 
 
 @variant.text(u'''
@@ -64,7 +64,7 @@ class Waves01(variant.VariantTask):
     u'''
         E_{ \\text{ полная механическая } } &= E_{ \\text{ max кинетическая } }
         = \\frac{ m v_{ \\max }^2 }2 = \\frac{ {m:Value|cdot}{v:Value|sqr} }2 = {E:Value},''',
-    u'A_{{E_{{\\text{{потенциальная}}}}}} &= \\frac {{E_{{\\text{{полная механическая}}}}}}2 = {E2:Value}.'
+    u'A_{ E_{ \\text{ потенциальная } } } &= \\frac{ E_{ \\text{ полная механическая } } }2 = {E2:Value}.'
 ])
 @variant.args(
     mLetter=[u'm', u'M'],
@@ -73,12 +73,11 @@ class Waves01(variant.VariantTask):
 )
 class Waves02(variant.VariantTask):
     def GetUpdate(self, mLetter=None, mValue=None, v=None, **kws):
-        return {
-            'm': u'%s = %d г' % (mLetter, mValue),
-            'E': u'E_1 = %.3f Дж' % (0.001 * mValue * (v.Value ** 2) / 2),
-            'E2': u'E_2 = %.3f Дж' % (0.001 * mValue * (v.Value ** 2) / 2 / 2)
-        }
-
+        return dict(
+            m=u'%s = %d г' % (mLetter, mValue),
+            E=u'E_1 = %.3f Дж' % (0.001 * mValue * (v.Value ** 2) / 2),
+            E2=u'E_2 = %.3f Дж' % (0.001 * mValue * (v.Value ** 2) / 2 / 2)
+        )
 
 
 @variant.text(u'''
@@ -106,11 +105,10 @@ class Waves02(variant.VariantTask):
 )
 class Waves03(variant.VariantTask):
     def GetUpdate(self, n1=None, n2=None, lmbd=None, **kws):
-        return {
-            'l': u'l = %d м' % ((n2 - n1) * lmbd.Value),
-            'n': n2 - n1 - 1,
-        }
-
+        return dict(
+            l=u'l = %d м' % ((n2 - n1) * lmbd.Value),
+            n=n2 - n1 - 1,
+        )
 
 
 @variant.text(u'''
@@ -125,9 +123,9 @@ class Waves03(variant.VariantTask):
 )
 class Waves04(variant.VariantTask):
     def GetUpdate(self, lmbd=None, T=None, **kws):
-        return {
-            'v': u'v = %.1f м / c' % (1000. * lmbd.Value / T.Value),
-        }
+        return dict(
+            v=u'v = %.1f м / c' % (1000. * lmbd.Value / T.Value),
+        )
 
 
 @variant.text(u'''
@@ -142,7 +140,7 @@ class Waves04(variant.VariantTask):
     u"&\\text{ Если же считать гребни целиком, т.е. не вычитать единицу: } ",
     u"\\lambda' &= \\frac L{ N } = \\frac { vt }{ N } = \\frac { {v:Value|cdot}{t:Value} }{N:Value:s} = {lmbd_1:Value}, ",
     u"T' &= \\frac { \\lambda' }{ v } = \\frac { vt }{ Nv } = \\frac tN =  \\frac {t:Value:s}{N:Value:s} = {T_1:Value}, ",
-    u"\\nu' &= \\frac 1{ T' } = \\frac { N }{{t } = \\frac {N:Value:s}{t:Value:s} = {nu_1:Value}. ",
+    u"\\nu' &= \\frac 1{ T' } = \\frac { N }{ t } = \\frac {N:Value:s}{t:Value:s} = {nu_1:Value}. ",
 ])
 @variant.args(
     N=[u'N = %d' % N for N in [4, 5, 6]],
@@ -151,14 +149,14 @@ class Waves04(variant.VariantTask):
 )
 class Waves05(variant.VariantTask):
     def GetUpdate(self, N=None, t=None, v=None, **kws):
-        return {
-            'lmbd': u'\\lambda = %.2f м' % (1. * v.Value * t.Value / (N.Value - 1)),
-            'T': u'T = %.2f с' % (1. * t.Value / (N.Value - 1)),
-            'nu': u'\\nu = %.2f Гц' % (1. * (N.Value - 1) / t.Value),
-            'lmbd_1': u'\\lambda = %.2f м' % (1. * v.Value * t.Value / N.Value),
-            'T_1': u'T = %.2f с' % (1. * t.Value / N.Value),
-            'nu_1': u'\\nu = %.2f Гц' % (1. * N.Value / t.Value),
-        }
+        return dict(
+            lmbd=u'\\lambda = %.2f м' % (1. * v.Value * t.Value / (N.Value - 1)),
+            T=u'T = %.2f с' % (1. * t.Value / (N.Value - 1)),
+            nu=u'\\nu = %.2f Гц' % (1. * (N.Value - 1) / t.Value),
+            lmbd_1=u'\\lambda = %.2f м' % (1. * v.Value * t.Value / N.Value),
+            T_1=u'T = %.2f с' % (1. * t.Value / N.Value),
+            nu_1=u'\\nu = %.2f Гц' % (1. * N.Value / t.Value),
+        )
 
 
 @variant.text(u'''
@@ -167,7 +165,7 @@ class Waves05(variant.VariantTask):
 ''')
 @variant.answer_short(u'''
     \\lambda_1
-        = v T_1 = v \\cdot \\frac 1{{\\nu_1}} = \\frac{ v }{ \\nu_1 }
+        = v T_1 = v \\cdot \\frac 1{ \\nu_1 } = \\frac{ v }{ \\nu_1 }
         = \\frac{v:Value:s}{nu_1:Value:s} = {l_1:Value},
     \\quad
     \\lambda_2
@@ -181,13 +179,13 @@ class Waves05(variant.VariantTask):
 )
 class Ch1238(variant.VariantTask):
     def GetUpdate(self, nu_1=None, nu_2=None, **kws):
-        return {
-            'v': u'v = 320 м / с',
-            'c': u'c = 300 Мм / с',
-            'l_1': u'l_1 = %.2f м' % (320. / nu_1.Value),
-            'l_2': u'l_2 = %.2f м' % (300. / nu_2.Value),
-            'n': 'n = %.2f' % ((300. / nu_2.Value) / (320. / nu_1.Value)),
-        }
+        return dict(
+            v=u'v = 320 м / с',
+            c=u'c = 300 Мм / с',
+            l_1=u'l_1 = %.2f м' % (320. / nu_1.Value),
+            l_2=u'l_2 = %.2f м' % (300. / nu_2.Value),
+            n='n = %.2f' % ((300. / nu_2.Value) / (320. / nu_1.Value)),
+        )
 
 
 @variant.text(u'''
@@ -211,6 +209,6 @@ class Ch1238(variant.VariantTask):
 )
 class Ch1240(variant.VariantTask):
     def GetUpdate(self, l=None, frac=None, **kws):
-        return {
-            'lmbd': u'\\lambda = %.2f см' % (1. * l.Value / frac),
-        }
+        return dict(
+            lmbd=u'\\lambda = %.2f см' % (1. * l.Value / frac),
+        )
