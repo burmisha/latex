@@ -26,7 +26,7 @@ class Gendenshteyn_11_11_18(variant.VariantTask):
     def GetUpdate(self, n=None, lmbd=None, Consts=None, **kws):
         return dict(
             nu=Consts.c.Other(lmbd, action='div', units=u'Гц', powerShift=3),
-            lmbd_1=lmbd.Other(n, action='div', units=u'м'),
+            lmbd_1=lmbd.Other(n, action='div', units=u'м', precisionInc=2),
         )
 
 

@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
 import variant
-from value import UnitValue
 
 import logging
 log = logging.getLogger(__name__)
@@ -62,7 +61,7 @@ class BK_4_01(variant.VariantTask):
     ''',
     u'''
     p &= \\frac{ mv }{ \\sqrt{ 1 - \\frac{ v^2 }{ c^2 } } }
-        \\approx \\frac{ {m:Value|cdot} 0.{percent} \\cdot {Consts.c:Value} }{ 1 - 0.{percent}^2 }
+        \\approx \\frac{ {m:Value|cdot} 0.{percent} \\cdot {Consts.c:Value} }{ \\sqrt{ 1 - 0.{percent}^2 } }
         \\approx {p:Value}.
     '''
 ])
@@ -74,8 +73,8 @@ class BK_4_01(variant.VariantTask):
 class BK_4_03(variant.VariantTask):
     def GetUpdate(self, what=None, percent=None, Consts=None, **kws):
         m = {
-            u'Протон': UnitValue(u'm = 1.67 10^-27 кг'),
-            u'Электрон': UnitValue(u'm = 9.1 10^-31 кг'),
+            u'Протон': Consts.m_p,
+            u'Электрон': Consts.m_e,
         }[what]
         share = float('0.' + percent)
         return {
@@ -88,12 +87,11 @@ class BK_4_03(variant.VariantTask):
                 power=m.Power + 2 * Consts.c.Power,
             ),
             'p': u'{value:.1f} 10^{power} кг м / с'.format(
-                value=m.Value * Consts.c.Value / ((1. - share ** 2) ** 0.5),
+                value=m.Value * share * Consts.c.Value / ((1. - share ** 2) ** 0.5),
                 power=m.Power + Consts.c.Power,
             ),
             'm': m,
         }
-
 
 
 @variant.solution_space(150)
