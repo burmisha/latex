@@ -1,36 +1,10 @@
 # -*- coding: utf-8 -*-
 
 import variant
-from value import UnitValue
+from value import UnitValue, Consts
 
 import logging
 log = logging.getLogger(__name__)
-
-
-TableValues = {
-    'water': {
-        'c': UnitValue(u'4200 Дж / кг К'),
-        'lmbd': UnitValue(u'340 кДж / кг'),
-        'L': UnitValue(u'2.3 МДж / кг'),
-    },
-    'lead': {  # свинец
-        'lmbd': UnitValue(u'25 кДж / кг'),
-    },
-    'aluminum': { # алюминий
-        'c': UnitValue(u'920 Дж / кг К'),
-        'lmbd': UnitValue(u'390 кДж / кг'),
-    },
-    'copper': { # медь
-        'lmbd': UnitValue(u'210 кДж / кг'),
-    },
-    'steel': { # сталь
-        'c': UnitValue(u'500 Дж / кг К'),
-        'lmbd': UnitValue(u'84 кДж / кг'),
-    },
-    'zinc': { # цинк
-        'c': UnitValue(u'400 Дж / кг К'),
-    },
-}
 
 
 @variant.text(u'''
@@ -38,102 +12,102 @@ TableValues = {
     сообщив ему энергию {Q:Value:e}?
     Здесь (и во всех следующих задачах) используйте табличные значения из учебника.
 ''')
-@variant.answer(u'''$
+@variant.answer_short(u'''
     Q 
         = \\lambda m \\implies m
-        = \\frac Q{{\\lambda}}
+        = \\frac Q{ \\lambda }
         = \\frac {Q:Value:s}{lmbd:Value:s}
         \\approx {m:Value}
-$''')
+''')
 @variant.args(
     Q=[u'Q = %d МДж' % Q for Q in [2, 3, 4, 5, 6, 7, 8, 9]],
 )
 class Ch_8_6(variant.VariantTask):
     def GetUpdate(self, Q=None, **kws):
-        lmbd = TableValues['water']['lmbd']
-        return {
-            'lmbd': lmbd,
-            'm': u'm = %.1f кг' % (1000. * Q.Value / lmbd.Value),
-        }
+        lmbd = Consts.water.lmbd
+        return dict(
+            lmbd=lmbd,
+            m=u'm = %.1f кг' % (1000. * Q.Value / lmbd.Value),
+        )
 
 
 @variant.text(u'''
     Какое количество теплоты выделится при затвердевании {m:Value:e} расплавленного {metall} при температуре плавления?
 ''')
-@variant.answer(u'''$
+@variant.answer_short(u'''
     Q
         = - \\lambda m
         = - {lmbd:Value} \\cdot {m:Value}
-        = - {Q:Value} \\implies \\abs{{Q}} = {Q:Value}
-$''')
+        = - {Q:Value} \\implies \\abs{ Q } = {Q:Value}
+''')
 @variant.args(
     metall__lmbd=[
-        (u'свинца', TableValues['lead']['lmbd']),
-        (u'меди', TableValues['copper']['lmbd']),
-        (u'алюминия', TableValues['aluminum']['lmbd']),
-        (u'стали', TableValues['steel']['lmbd']),
+        (u'свинца', Consts.lead.lmbd),
+        (u'меди', Consts.copper.lmbd),
+        (u'алюминия', Consts.aluminum.lmbd),
+        (u'стали', Consts.steel.lmbd),
     ],
     m=[u'm = %d кг' % m for m in [15, 20, 25, 30, 50, 75]],
 )
 class Ch_8_7(variant.VariantTask):
     def GetUpdate(self, m=None, metall=None, lmbd=None, **kws):
-        return {
-            'Q': u'Q = %.1f МДж' % (0.001 * m.Value * lmbd.Value),
-        }
+        return dict(
+            Q=u'Q = %.1f МДж' % (0.001 * m.Value * lmbd.Value),
+        )
 
 
 @variant.text(u'''
     Какое количество теплоты необходимо для превращения воды массой {m:Value:e} при $t = {t}\\celsius$
     в пар при температуре $t_{{100}} = 100\\celsius$?
 ''')
-@variant.answer(u'''$
+@variant.answer_short(u'''
     Q
         = cm\\Delta t + Lm
-        = m\\cbr{{c(t_{{100}} - t) + L}}
-        = {m:Value} \\cdot \\cbr{{{c:Value}\\cbr{{100\\celsius - {t}\\celsius}} + {L:Value}}}
+        = m\\cbr{ c(t_{ 100 } - t) + L }
+        = {m:Value} \\cdot \\cbr{ {c:Value}\\cbr{ 100\\celsius - {t}\\celsius } + {L:Value} }
         = {Q:Value}
-$''')
+''')
 @variant.args(
     m=[u'm = %d кг' % m for m in [2, 3, 4, 5, 15]],
     t=[20, 30, 40, 50, 60, 70],
 )
 class Ch_8_10(variant.VariantTask):
     def GetUpdate(self, m=None, t=None, **kws):
-        c = TableValues['water']['c']
-        L = TableValues['water']['L']
-        return {
-            'c': c,
-            'L': L,
-            'Q': u'Q = %.2f МДж' % (m.Value * ((100. - t) * c.Value / 10 ** 6 + L.Value)),
-        }
+        c = Consts.water.c
+        L = Consts.water.L
+        return dict(
+            c=c,
+            L=L,
+            Q=u'Q = %.2f МДж' % (m.Value * ((100. - t) * c.Value / 10 ** 6 + L.Value)),
+        )
 
 
 @variant.text(u'''
     Воду температурой $t = {t}\\celsius$ нагрели и превратили в пар при температуре $t_{{100}} = 100\\celsius$,
     потратив {Q:Value:e}. Определите массу воды.
 ''')
-@variant.answer(u'''$
+@variant.answer_short(u'''
     Q
         = cm\\Delta t + Lm
-        = m\\cbr{{c(t_{{100}} - t) + L}}
+        = m\\cbr{ c(t_{ 100 } - t) + L }
     \\implies
-    m = \\frac{{Q}}{{c(t_{{100}} - t) + L}}
-        = \\frac {Q:Value:s}{{{c:Value}\\cbr{{100\\celsius - {t}\\celsius}} + {L:Value}}}
+    m = \\frac{ Q }{ c(t_{ 100 } - t) + L }
+        = \\frac {Q:Value:s}{ {c:Value}\\cbr{ 100\\celsius - {t}\\celsius } + {L:Value} }
         \\approx {m:Value}
-$''')
+''')
 @variant.args(
      Q=[u'Q = %d кДж' % Q for Q in [2000, 2500, 4000, 5000]],
      t=[10, 30, 40, 50, 60, 70],
 )
 class Ch_8_13(variant.VariantTask):
     def GetUpdate(self, Q=None, t=None, **kws):
-        c =  TableValues['water']['c']
-        L = TableValues['water']['L']
-        return {
-            'c': c,
-            'L': L,
-            'm': u'Q = %.2f кг' % (1000. * Q.Value / ((100. - t) * c.Value + 1. * L.Value * 10 ** 6)),
-        }
+        c =  Consts.water.c
+        L = Consts.water.L
+        return dict(
+            c=c,
+            L=L,
+            m=u'Q = %.2f кг' % (1000. * Q.Value / ((100. - t) * c.Value + 1. * L.Value * 10 ** 6)),
+        )
 
 
 @variant.text(u'''
@@ -155,20 +129,20 @@ class Ch_8_13(variant.VariantTask):
 ])
 @variant.args(
     metall__c=[
-        (u'Стальное', TableValues['steel']['c']),
-        (u'Алюминиевое', TableValues['aluminum']['c']),
-        (u'Цинковое', TableValues['zinc']['c']),
+        (u'Стальное', Consts.steel.c),
+        (u'Алюминиевое', Consts.aluminum.c),
+        (u'Цинковое', Consts.zinc.c),
     ],
     T=[70, 80, 90, 100],
     t=[10, 20, 30],
 )
 class Ch_8_35(variant.VariantTask):
     def GetUpdate(self, metall=None, T=None, t=None, c=None, **kws):
-        c_water = TableValues['water']['c']
-        return {
-            'c1': c_water,
-            'c2': c,
-            't1': t,
-            't2': T,
-            'theta': '%.1f' % ((1. * c_water.Value * t + 1. * c.Value * T) / (1. * c_water.Value + 1. * c.Value)),
-        }
+        c_water = Consts.water.c
+        return dict(
+            c1=c_water,
+            c2=c,
+            t1=t,
+            t2=T,
+            theta='%.1f' % ((1. * c_water.Value * t + 1. * c.Value * T) / (1. * c_water.Value + 1. * c.Value)),
+        )

@@ -311,6 +311,14 @@ assert u'{:Value}'.format(UnitValue(u'm = 1.67 10^-27 кг')) == u'1{,}67 \\cdot
 assert u'{:Value}'.format(UnitValue(u'T = 1.7 суток')) == u'1{,}7\\,\\text{суток}'
 
 
+class Matter(object):
+    def __init__(self, name=None, c=None, lmbd=None, L=None):
+        self.Name = name
+        self.c = UnitValue(c) if c else None
+        self.lmbd = UnitValue(lmbd) if lmbd else None
+        self.L = UnitValue(L) if L else None
+
+
 class Consts(object):
     m_e = UnitValue(u'm_{e} = 9.1 10^{-31} кг')
     m_p = UnitValue(u'm_{p} = 1.672 10^{-27} кг')
@@ -321,6 +329,35 @@ class Consts(object):
     c = UnitValue(u'c = 3 10^{8} м / с', precision=3, viewPrecision=1)
     g_ten = UnitValue(u'g = 10 м / с^2', precision=2)
     aem = UnitValue(u'1.66054 10^-27 кг')
+
+    water = Matter(
+        name=u'вода',
+        c=u'4200 Дж / кг К',
+        lmbd=u'340 кДж / кг',
+        L=u'2.3 МДж / кг',
+    )
+    lead = Matter(
+        name=u'свинец',
+        lmbd=u'25 кДж / кг',
+    )
+    aluminum = Matter(
+        name=u'алюминий',
+        c=u'920 Дж / кг К',
+        lmbd=u'390 кДж / кг',
+    )
+    copper = Matter(
+        name=u'медь',
+        lmbd=u'210 кДж / кг',
+    )
+    steel = Matter(
+        name=u'сталь',
+        c=u'500 Дж / кг К',
+        lmbd=u'84 кДж / кг',
+    )
+    zinc = Matter(
+        name=u'цинк',
+        c=u'400 Дж / кг К',
+    )
 
 
 assert u'{:Value}'.format(Consts.c.Other(UnitValue(u'l = 500 нм'), action='div', units=u'Гц', powerShift=3)) == u'6{,}00 \\cdot 10^{14}\\,\\text{Гц}'
