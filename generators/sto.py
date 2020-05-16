@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
-import variant
-
 import itertools
+
+import variant
 
 import logging
 log = logging.getLogger(__name__)

@@ -1,14 +1,13 @@
 # -*- coding: utf-8 -*-
 
 import itertools
+import fractions
 
 import variant
 from value import UnitValue
 
 import logging
 log = logging.getLogger(__name__)
-
-import fractions
 
 
 @variant.text(u'''
@@ -325,7 +324,7 @@ class Rymkevich751(variant.VariantTask):
 class Rymkevich762(variant.VariantTask):
     def GetUpdate(self, C=None, Q=None, **kws):
         return dict(
-            W=UnitValue(u'W = %.2f мкДж' % (1. * Q.Value ** 2 / 2 / C.Value)),
+            W=u'W = %.2f мкДж' % (1. * Q.Value ** 2 / 2 / C.Value),
         )
 
 
@@ -429,21 +428,15 @@ class Rezistor2(variant.VariantTask):
     def GetUpdate(self, r=None, R=None, E=None, t=None, **kws):
         I1 = UnitValue(u'\\mathcal{I}_1 = %.2f А' % (1. * E.Value / R.Value))
         I2 = UnitValue(u'\\mathcal{I}_2 = %.2f А' % (1. * E.Value / (R.Value + r.Value)))
-        Q1 = UnitValue(u'Q_1 = %.3f Дж' % (1. * I1.Value ** 2 * R.Value * t.Value))
-        Q2 = UnitValue(u'Q_2 = %.3f Дж' % (1. * I2.Value ** 2 * R.Value * t.Value))
-        A1 = UnitValue(u'A_1 = %.3f Дж' % (1. * I1.Value * E.Value * t.Value))
-        A2 = UnitValue(u'A_2 = %.3f Дж' % (1. * I2.Value * E.Value * t.Value))
-        eta1 = UnitValue(u'\\eta_1 = %.2f' % (1. * Q1.Value / A1.Value))
-        eta2 = UnitValue(u'\\eta_2 = %.2f' % (1. * Q2.Value / A2.Value))
         return dict(
             I1=I1,
             I2=I2,
-            Q1=Q1,
-            Q2=Q2,
-            A1=A1,
-            A2=A2,
-            eta1=eta1,
-            eta2=eta2,
+            Q1=u'Q_1 = %.3f Дж' % (1. * I1.Value ** 2 * R.Value * t.Value),
+            Q2=u'Q_2 = %.3f Дж' % (1. * I2.Value ** 2 * R.Value * t.Value),
+            A1=u'A_1 = %.3f Дж' % (1. * I1.Value * E.Value * t.Value),
+            A2=u'A_2 = %.3f Дж' % (1. * I2.Value * E.Value * t.Value),
+            eta1=u'\\eta_1 = %.2f' % (1. * Q1.Value / A1.Value),
+            eta2=u'\\eta_2 = %.2f' % (1. * Q2.Value / A2.Value),
         )
 
 
@@ -496,9 +489,9 @@ class Rezistor3(variant.VariantTask):
             R1=R1,
             R2=R2,
             r=r,
-            eta1=UnitValue(u'\\eta_1 = %.3f ' % (1. * R1.Value / (R1.Value + r.Value))),
-            eta2=UnitValue(u'\\eta_2 = %.3f ' % (1. * R2.Value / (R2.Value + r.Value))),
-            E=UnitValue(u'\\mathcal{E} = 1234 В'),
+            eta1=u'\\eta_1 = %.3f ' % (1. * R1.Value / (R1.Value + r.Value)),
+            eta2=u'\\eta_2 = %.3f ' % (1. * R2.Value / (R2.Value + r.Value)),
+            E=u'\\mathcal{E} = 1234 В',
         )
 
 
