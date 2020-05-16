@@ -22,7 +22,7 @@ log = logging.getLogger(__name__)
     (4 из 8~--- это «–»)
 ''')
 @variant.answer(u'''нет, да, да, нет, да, да, нет, да''')
-@variant.args(None)
+@variant.no_args
 @variant.solution_space(20)
 class Waves00(variant.VariantTask):
     pass

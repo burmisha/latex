@@ -27,6 +27,7 @@ PAPER_TEMPLATE = ur'''
 \end{{document}}
 '''.strip()
 
+
 def check_unit_value(v):
     try:
         if isinstance(v, (str, unicode)) and (('=' in v and len(v) >= 3) or re.match(r'\d.* \w', v, re.UNICODE)):
@@ -108,30 +109,25 @@ class VariantTask(object):
                 res[k] = check_unit_value(v)
             yield res
 
+    def __TryFormat(self, template, args):
+        if template is None:
+            return None
+        try:
+            result = template.format(**args)
+            result = re.sub('(\\d)\.(\\d)', '\\1{,}\\2', result)
+            return result
+        except:
+            log.error(u'Template: %s', template)
+            log.error(u'Args: %s', args)
+            raise
+
     def All(self):
         textTemplate = self.GetTextTemplate()
         answerTemplate = self.GetAnswerTemplate()
         for args in self.GetArgs():
-            try:
-                text = textTemplate.format(**args)
-                text = re.sub('(\\d)\.(\\d)', '\\1{,}\\2', text)
-            except:
-                print textTemplate
-                print args
-                raise
-            try:
-                if answerTemplate:
-                    answer = answerTemplate.format(**args)
-                    answer = re.sub('(\\d)\.(\\d)', '\\1{,}\\2', answer)
-                else:
-                    answer = None
-            except:
-                print answerTemplate
-                print args
-                raise
             yield problems.task.Task(
-                text,
-                answer=answer,
+                self.__TryFormat(textTemplate, args),
+                answer=self.__TryFormat(answerTemplate, args),
                 solutionSpace=self.GetSolutionSpace(),
             )
 
@@ -258,7 +254,7 @@ def answer(answer_template):
 def answer_short(answer_template):
     def decorator(cls):
         assert not hasattr(cls, 'AnswerTemplate')
-        templateLine = answer_template.replace(u'{ ', u'{{ ').replace(u' }', u' }}')
+        templateLine = answer_template.replace(u'{\n', u'{{\n').replace(u'\n}', u'\n}}').replace(u'{ ', u'{{ ').replace(u' }', u' }}')
         template = u'${}$'.format(templateLine)
         cls.AnswerTemplate = template.replace('\n\n', '\n')
         return cls
@@ -270,7 +266,7 @@ def answer_align(answer_template):
         assert not hasattr(cls, 'AnswerTemplate')
         templateLines = []
         for line in answer_template:
-            templateLines.append(line.replace(u'{ ', u'{{ ').replace(u' }', u' }}'))
+            templateLines.append(line.replace(u'{\n', u'{{\n').replace(u'\n}', u'\n}}').replace(u'{ ', u'{{ ').replace(u' }', u' }}'))
         templateLine = u' \\\\\n'.join(templateLines).strip()
         template = u'\\begin{{align*}}\n' + templateLine + u'\n\\end{{align*}}'
         cls.AnswerTemplate = template.replace('\n\n', '\n')
@@ -278,22 +274,16 @@ def answer_align(answer_template):
     return decorator
 
 
-def args(*args_list, **kws):
-    assert args_list == () or (len(args_list) == 1 and (isinstance(args_list[0], dict) or args_list[0] is None)), '%r' % [args_list, kws]
+def no_args(cls):
+    assert not hasattr(cls, 'ArgsList')
+    cls.ArgsList = None
+    return cls
+
+
+def args(**kws):
     def decorator(cls):
-        if args_list == ():
-            if kws:
-                cls.ArgsList = kws
-            else:
-                raise RuntimeError()
-        else:
-            if args_list[0] is None:
-                if kws:
-                    cls.ArgsList = kws
-                else:
-                    cls.ArgsList = args_list[0]
-            else:
-                cls.ArgsList = args_list[0]
-                cls.ArgsList.update(kws)
+        assert not hasattr(cls, 'ArgsList')
+        cls.ArgsList = kws
         return cls
+
     return decorator

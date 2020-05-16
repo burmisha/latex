@@ -20,7 +20,7 @@ log = logging.getLogger(__name__)
         \item   Северный географическию полюс Земли в точности совпадает с южным магнитным полюсом Земли?
     \\end{{itemize}}
 ''')
-@variant.args(None)
+@variant.no_args
 class ConstMagnet0(variant.VariantTask):
     pass
 

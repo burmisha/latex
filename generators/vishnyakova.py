@@ -24,7 +24,7 @@ log = logging.getLogger(__name__)
             = \\frac{ E }{ E_0 } - 1
             = \\frac 1{ \\sqrt{ 1 - \\frac{ v^2 }{ c^2 } } } - 1
             = \\frac 1{ \\sqrt{ 1 - \\sqr{ 0.{percent} } } } - 1
-            \\approx {E_kin:.3f}
+            \\approx {E_kin:.3f}.
     ''',
 ])
 @variant.args(
@@ -320,9 +320,9 @@ class BK_53_03(variant.VariantTask):
         = \\frac{ {eV} \\cdot 10^6 \\cdot {Consts.eV:Value} }{Consts.c:Value|sqr|s}
         \\approx {dm:Value} \\approx {aem:Value}''',
 ])
-@variant.args({
+@variant.args(
     # https://www.calc.ru/Energiya-Svyazi-Nekotorykh-Yader.html
-    ('element', 'E'): [
+    element__E=[
         (u'дейтерия \\ce{^{2}_{1}H} (D)', u'E = 2.22 МэВ'),
         (u'трития \\ce{^{3}_{1}H} (T)', u'E = 8.48 МэВ'),
         (u'гелия \\ce{^{3}_{2}He}', u'E = 7.72 МэВ'),
@@ -340,7 +340,7 @@ class BK_53_03(variant.VariantTask):
         (u'кислорода \\ce{^{17}_{8}O}', u'E = 131.8 МэВ'),
         (u'кислорода \\ce{^{18}_{8}O}', u'E = 139.8 МэВ'),
     ],
-})
+)
 class BK_53_12(variant.VariantTask):
     def GetUpdate(self, E=None, Consts=None, **kws):
         dm = E.Other(Consts.e, action='mult', precisionInc=1).Other(Consts.c, action='div').Other(Consts.c, action='div', units=u'кг')
