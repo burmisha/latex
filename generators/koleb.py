@@ -29,9 +29,9 @@ class Nu01(variant.VariantTask):
 )
 class Nu02(variant.VariantTask):
     def GetUpdate(self, T=None, **kws):
-        return {
-            'nu': u'''\\nu = %d Гц''' % (1000 / T.Value),
-        }
+        return dict(
+            nu=u'''\\nu = %d Гц''' % (1000 / T.Value),
+        )
 
 
 @variant.text(u'''
@@ -48,10 +48,10 @@ class Nu02(variant.VariantTask):
 )
 class Nu03(variant.VariantTask):
     def GetUpdate(self, nu=None, t=None, **kws):
-        return {
-            'T': u'T = %.3f мc' % (1. / nu.Value),
-            'N': u'N = %d колебаний' % (nu.Value * 1000 * t.Value * 60),
-        }
+        return dict(
+            T=u'T = %.3f мc' % (1. / nu.Value),
+            N=u'N = %d колебаний' % (nu.Value * 1000 * t.Value * 60),
+        )
 
 
 @variant.text(u'''
@@ -71,9 +71,9 @@ class Nu03(variant.VariantTask):
 )
 class Nu04(variant.VariantTask):
     def GetUpdate(self, A=None, nu=None, t=None, **kws):
-        return {
-            's': u's = %.1f м' % (4. * A.Value / 100 * t.Value * nu.Value),
-        }
+        return dict(
+            s=u's = %.1f м' % (4. * A.Value / 100 * t.Value * nu.Value),
+        )
 
 
 @variant.text(u'''

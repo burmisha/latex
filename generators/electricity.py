@@ -42,15 +42,14 @@ class ForceTask(variant.VariantTask):
             denominator=int(distance) ** 2,
         )
         power = 9 - 9 - 9 + 4
-        return {
-            'charges': charges,
-            'value': value,
-            'power': power,
-            'letter': letter,
-            'approx': float(value),
-            'charges': charges,
-            'distance': distance,
-        }
+        return dict(
+            charges=charges,
+            value=value,
+            power=power,
+            letter=letter,
+            approx=float(value),
+            distance=distance,
+        )
 
 
 @variant.text(u'''
@@ -303,10 +302,10 @@ class Rymkevich751(variant.VariantTask):
                 result = u'уменьшится'
                 value = 1 / value
             result += u' в $\\frac{value.numerator}{value.denominator}$ раз'.format(value=value)
-        return {
-            'sign': sign,
-            'result': result,
-        }
+        return dict(
+            sign=sign,
+            result=result,
+        )
 
 
 @variant.text(u'''
@@ -325,9 +324,9 @@ class Rymkevich751(variant.VariantTask):
 )
 class Rymkevich762(variant.VariantTask):
     def GetUpdate(self, C=None, Q=None, **kws):
-        return {
-            'W': UnitValue(u'W = %.2f мкДж' % (1. * Q.Value ** 2 / 2 / C.Value)),
-        }
+        return dict(
+            W=UnitValue(u'W = %.2f мкДж' % (1. * Q.Value ** 2 / 2 / C.Value)),
+        )
 
 
 @variant.text(u'''
@@ -493,14 +492,14 @@ class Rezistor2(variant.VariantTask):
 class Rezistor3(variant.VariantTask):
     def GetUpdate(self, R1=None, R2=None, **kws):
         r = UnitValue(u'r = %.2f Ом' % ((1. * R1.Value * R2.Value) ** 0.5))
-        return {
-            'R1': R1,
-            'R2': R2,
-            'r': r,
-            'eta1': UnitValue(u'\\eta_1 = %.3f ' % (1. * R1.Value / (R1.Value + r.Value))),
-            'eta2': UnitValue(u'\\eta_2 = %.3f ' % (1. * R2.Value / (R2.Value + r.Value))),
-            'E': UnitValue(u'\\mathcal{E} = 1234 В'),
-        }
+        return dict(
+            R1=R1,
+            R2=R2,
+            r=r,
+            eta1=UnitValue(u'\\eta_1 = %.3f ' % (1. * R1.Value / (R1.Value + r.Value))),
+            eta2=UnitValue(u'\\eta_2 = %.3f ' % (1. * R2.Value / (R2.Value + r.Value))),
+            E=UnitValue(u'\\mathcal{E} = 1234 В'),
+        )
 
 
 @variant.text(u'''

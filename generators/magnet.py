@@ -99,22 +99,22 @@ class ConstMagnet3(variant.VariantTask):
 )
 class Chernoutsan11_01(variant.VariantTask):
     def GetUpdate(self, l=None, a=None, B=None, I=None, **kws):
-        return {
-            'F': u'F = %.2f мН' % ((1.0 * a.Value ** 2 + (1.0 * l.Value - a.Value) ** 2) ** 0.5 / 100 * I.Value * B.Value),
-        }
+        return dict(
+            F=u'F = %.2f мН' % ((1.0 * a.Value ** 2 + (1.0 * l.Value - a.Value) ** 2) ** 0.5 / 100 * I.Value * B.Value),
+        )
 
 
 @variant.text(u'''
     В однородном горизонтальном магнитном поле с индукцией {B:Task|e} находится проводник,
     расположенный также горизонтально и перпендикулярно полю.
     Какой ток необходимо пустить по проводнику, чтобы он завис?
-    Масса единицы длины проводника {rho:Task|e}, {g:Task|e}.
+    Масса единицы длины проводника {rho:Task|e}, {Consts.g_ten:Task|e}.
 ''')
 @variant.answer_short(u'''
         mg = B\\mathcal{ I } l, m=\\rho l
         \\implies \\mathcal{ I }
             = \\frac{ g\\rho } { B }
-            = \\frac{ {g:Value|cdot}{rho:Value} }{B:Value|s}
+            = \\frac{ {Consts.g_ten:Value|cdot}{rho:Value} }{B:Value|s}
             = {I:Value}.
 ''')
 @variant.args(
@@ -122,12 +122,10 @@ class Chernoutsan11_01(variant.VariantTask):
     rho=[u'\\rho = %d кг / м' % r for r in [5, 10, 20, 40, 100]],   # TODO: г / м
 )
 class Chernoutsan11_02(variant.VariantTask):
-    def GetUpdate(self, rho=None, B=None, **kws):
-        g = value.Consts.g_ten
-        return {
-            'g': g,
-            'I': u'\\mathcal{I} = %f кА' % (1.0 * g.Value * rho.Value / B.Value),
-        }
+    def GetUpdate(self, rho=None, B=None, Consts=None, **kws):
+        return dict(
+            I=u'\\mathcal{I} = %f кА' % (1.0 * Consts.g_ten.Value * rho.Value / B.Value),
+        )
 
 
 @variant.text(u'''
@@ -148,6 +146,6 @@ class Chernoutsan11_02(variant.VariantTask):
 )
 class Chernoutsan11_5(variant.VariantTask):
     def GetUpdate(self, B=None, I=None, l=None, d=None, **kws):
-        return {
-            'A': u'A = %.5f Дж' % (10 ** (-4) * 1.0 * B.Value * I.Value * l.Value * d.Value),
-        }
+        return dict(
+            A=u'A = %.5f Дж' % (10 ** (-4) * 1.0 * B.Value * I.Value * l.Value * d.Value),
+        )
