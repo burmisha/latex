@@ -16,7 +16,7 @@ log = logging.getLogger(__name__)
         \\implies \\frac{ E }{ E_0 }
             = \\frac 1{ \\sqrt{ 1 - \\frac{ v^2 }{ c^2 } } }
             = \\frac 1{ \\sqrt{ 1 - \\sqr{ 0.{percent} } } }
-            \\approx {E:.3f}
+            \\approx {E:.3f},
     ''',
     u'''
     E_{ \\text{ кин } } &= E - E_0

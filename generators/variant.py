@@ -187,25 +187,22 @@ class MultiplePaper(object):
         self.Pupils = pupils
 
     def GetTex(self, variants, withAnswers=False):
-        if withAnswers:
-            variantsJoiner = u''
-        else:
-            variantsJoiner = u'\n\\newpage'
-        # variantsJoiner = u'\n\\newpage'
-        variantsJoiner += '\n\n'
         variantsTex = []
         for pupil in self.Pupils.Iterate():
-            variantText = u'\\addpersonalvariant{{{name}}}\n'.format(name=pupil.GetFullName())
-            pupilTasksTex = u''
+            pupilTasksTex = [
+                u'\\addpersonalvariant{{{name}}}'.format(name=pupil.GetFullName())
+            ]
             pupilTasks = list(variants.GetPupilTasks(pupil))
             for index, task in enumerate(pupilTasks, 1):
-                pupilTasksTex += u'\n\n\\tasknumber{%d}' % index
-                pupilTasksTex += task.GetTex().strip()
-                if not withAnswers and index != len(pupilTasks):
-                    pupilTasksTex += u'\n\\vspace{%dpt}' % task.GetSolutionSpace()
-            variantsTex.append(variantText + pupilTasksTex)
+                pupilTasksTex.append(u'')
+                pupilTasksTex.append(u'\\tasknumber{%d}' % index)
+                pupilTasksTex.append(task.GetTex().strip())
+                if index != len(pupilTasks):
+                    pupilTasksTex.append(u'\\solutionspace{%dpt}' % task.GetSolutionSpace())
+            variantsTex.append('\n'.join(pupilTasksTex))
+
         variants.GetStats()
-        text = variantsJoiner.join(variantsTex)
+        text = '\n\n\\variantsplitter\n\n'.join(variantsTex)
         if self.Pupils.Letter:
             classLetter = u'{}«{}»'.format(self.Pupils.Grade, self.Pupils.Letter)
         else:
@@ -275,7 +272,7 @@ def answer_align(answer_template):
         for line in answer_template:
             templateLines.append(line.replace(u'{ ', u'{{ ').replace(u' }', u' }}'))
         templateLine = u' \\\\\n'.join(templateLines).strip()
-        template = u'\\begin{{align*}}\n' +  templateLine + u'\n\\end{{align*}}'
+        template = u'\\begin{{align*}}\n' + templateLine + u'\n\\end{{align*}}'
         cls.AnswerTemplate = template.replace('\n\n', '\n')
         return cls
     return decorator

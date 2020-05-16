@@ -25,12 +25,6 @@
 
 \def\rhowater{$\rho = 1000\,\cfrac{\text{кг}}{\text{м}^3}.$}
 
-% \newcommand\adddate[1]{
-%     \begin{center}
-%     \bfseries \sffamily{#1\,г.}
-%     \end{center}
-% }
-
 \newcommand\adddate[1]{
     \begin{flushright}
     \textsc{#1\,г.}
@@ -90,14 +84,27 @@
 }
 
 \newcommand{\answer}[1]{
-    \\ {\bfseries{Указание:}} #1.
+    \\ {\itshape{Указание:}} #1
 }
 
+\newcommand\solutionspace[1]{}
+
+\def\variantsplitter{}
+
 \newcommand\hasanswerswarning{{\bfseries \sffamily{Вариант с ответами}}}
-\newcommand{\noanswers}[0]{
+\def\noanswers{
     \renewcommand\hasanswerswarning{}
     \renewcommand{\answer}[1]{}
     \renewcommand{\taskname}[2]{}
+    \renewcommand{\solutionspace}[1]{ \vspace{##1} }
+    % \renewcommand{\solutionspace}[1]{ \vspace*{##1} }
+%     \renewcommand{\solutionspace}[1]{
+
+% \addvspace{##1}\par
+
+% }
+    % \renewcommand{\solutionspace}[1]{ \vskip ##1 }
+    \def\variantsplitter{\newpage}
 }
 
 \def\narrow{
@@ -167,27 +174,27 @@
 \newcommand\customclass{}
 
 \newcommand\setdate[1]{
-    \renewcommand\customdate{{#1}}
+    \renewcommand\customdate{{#1\,г.}}
 }
 
 \newcommand\setclass[1]{
-    \renewcommand\customclass{{#1}}
+    \renewcommand\customclass{{#1 класс}}
 }
 
 \def\insertclassdate{
     \begin{flushright}
-    \textsc{\customclass~класс, \customdate\,г.}
+    \textsc{\customclass, \customdate}
     \end{flushright}
 }
 
 \newcommand\addvariant[1]{
     \begin{flushright}
-    \textsc{\customclass~класс, \customdate\,г. Вариант #1}
+    \textsc{\customclass, \customdate, вариант #1}
     \end{flushright}
 }
 
 \newcommand\addpersonalvariant[1]{
     \begin{flushright}
-    \textsc{#1~---~\customclass~класс, \customdate\,г.}
+    \textsc{#1~---~\customclass, \customdate}
     \end{flushright}
 }
