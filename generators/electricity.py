@@ -12,22 +12,22 @@ import fractions
 
 
 @variant.text(u'''
-    С какой силой взаимодействуют 2 точечных заряда $q_1={charges[0]}\\units{{нКл}}$ и $q_2={charges[1]}\\units{{нКл}}$,
-    находящиеся на расстоянии ${letter}={distance}\\units{{см}}$?
+    С какой силой взаимодействуют 2 точечных заряда $q_1={charges[0]}\\units{ нКл }$ и $q_2={charges[1]}\\units{ нКл }$,
+    находящиеся на расстоянии ${letter}={distance}\\units{ см }$?
 ''')
-@variant.answer(u'''$
+@variant.answer_short(u'''
     F
-        = k\\frac{{q_1q_2}}{{{letter}^2}}
-        = 9 \\cdot 10^9 \\funits{{Н $\\cdot$ м$^2$}}{{Кл$^2$}} \\cdot \\frac{{
-            {charges[0]}\\cdot 10^{{-9}}\\units{{Кл}}
+        = k\\frac{ q_1q_2 }{ {letter}^2 }
+        = 9 \\cdot 10^9 \\funits{ Н $\\cdot$ м$^2$ }{ Кл$^2$ } \\cdot \\frac{
+            {charges[0]}\\cdot 10^{ -9 }\\units{ Кл }
             \\cdot
-            {charges[1]}\\cdot 10^{{-9}}\\units{{Кл}}
-        }}{{
-            \\left({distance} \\cdot 10^{{-2}}\\units{{м}}\\right)^2
-        }}
-        = \\frac{{{value.numerator}}}{{{value.denominator}}}\\cdot10^{{{power}}}\\units{{Н}}
-          \\approx {{{approx:.2f}}}\\cdot10^{{{power}}}\\units{{Н}}
-$''')
+            {charges[1]}\\cdot 10^{ -9 }\\units{ Кл }
+         }{
+            \\left({distance} \\cdot 10^{ -2 }\\units{ м }\\right)^2
+         }
+        = \\frac{ {value.numerator} }{ {value.denominator} }\\cdot10^{ {power} }\\units{ Н }
+          \\approx { {approx:.2f} }\\cdot10^{ {power} }\\units{ Н }
+''')
 @variant.args(
     first__second=[(f, s) for f in range(2, 5) for s in range(2, 5) if f != s],
     letter=['r', 'l', 'd'],
@@ -71,8 +71,7 @@ class ForceTask(variant.VariantTask):
     q'_1 = q'_2 = \\frac{ q_1 + q_2 }2 = \\frac{ {charges[0]} + {charges[1]} }2 \\implies
     F'  &= k\\frac{ q'_1 q'_2 }{ {letter}^2 }
         = k\\frac{ \\sqr{ \\frac{ ({charges[0]}) + ({charges[1]}) }2 } }{ {letter}^2 },
-    \\text{ {res[1]} }.
-'''
+    \\text{ {res[1]} }.'''
 ])
 @variant.args(
     first_charge__second_charge=[(fc, sc) for fc in range(2, 6) for sc in range(2, 6) if fc != sc],
@@ -87,13 +86,13 @@ class ExchangeTask(variant.VariantTask):
             '{}{}{}'.format(sign_1, first_charge, chargeLetter),
             '{}{}{}'.format(sign_2, second_charge, chargeLetter),
         ]
-        return {
-            'res': [
+        return dict(
+            res=[
                 u'притяжение' if first_charge * second_charge < 0 else u'отталкивание',
                 u'отталкивание',
             ],
-            'charges': charges,
-        }
+            charges=charges,
+        )
 
 
 @variant.text(u'''
@@ -115,17 +114,17 @@ class FieldTaskGenerator(variant.VariantTask):
             'left': '(-2{}; 0)'.format(letter),
             'right': '(2{}; 0)'.format(letter),
         }
-        return {
-            'firstCoords': coords[firstPoint],
-            'secondCoords': coords[secondPoint],
-        }
+        return dict(
+            firstCoords=coords[firstPoint],
+            secondCoords=coords[secondPoint],
+        )
 
 
 @variant.text(u'''
     Заряд $q_1$ создает в точке $A$ электрическое поле
-    по величине равное~$E_1={values[0]}\\funits{{В}}{{м}}$,
-    а $q_2$~---$E_2={values[1]}\\funits{{В}}{{м}}$.
-    Угол между векторами $\\vect{{E_1}}$ и $\\vect{{E_2}}$ равен ${angleLetter}$.
+    по величине равное~$E_1={values[0]}\\funits{ В }{ м }$,
+    а $q_2$~---$E_2={values[1]}\\funits{ В }{ м }$.
+    Угол между векторами $\\vect{ E_1 }$ и $\\vect{ E_2 }$ равен ${angleLetter}$.
     Определите величину суммарного электрического поля в точке $A$,
     создаваемого обоими зарядами $q_1$ и $q_2$.
     Сделайте рисунок и вычислите её значение для двух значений угла ${angleLetter}$:
@@ -156,10 +155,10 @@ class SumTask(variant.VariantTask):
     на {l:Task:e}. Определите работу поля, изменение потенциальной энергии заряда,
     напряжение между начальной и конечной точками перемещения.
 ''')
-@variant.answer(u'''
+@variant.answer_short(u'''
     A   = {E.Letter}{q.Letter}{l.Letter}
         = {E:Value} \\cdot {q:Value} \\cdot {l:Value}
-        = {A:.2f} \\cdot 10^{{-7}} \\units{{Дж}}
+        = {A:.2f} \\cdot 10^{ -7 } \\units{ Дж }
 ''')
 @variant.args(
     q=[u'%s = %d нКл' % (ql, qv) for ql in ['Q', 'q'] for qv in [-10, 10, -25, 25, -40, 40]],
@@ -168,9 +167,9 @@ class SumTask(variant.VariantTask):
 )
 class Potential728(variant.VariantTask):  # 728(737) - Rymkevich
     def GetUpdate(self, l=None, q=None, E=None, **kws):
-        return {
-            'A': 1. * E.Value * q.Value * l.Value,
-        }        
+        return dict(
+            A=1. * E.Value * q.Value * l.Value,
+        )
 
 
 @variant.text(u'''
@@ -203,14 +202,13 @@ class Potential737(variant.VariantTask):  # 737(739) - Rymkevich
 
 
 @variant.text(u'''
-    При какой скорости электрона его кинетическая энергия равна $E_\\text{{к}} = {E}\\units{{эВ}}?$
+    При какой скорости электрона его кинетическая энергия равна $E_\\text{ к } = {E}\\units{ эВ }?$
 ''')
 @variant.args(
     E=[4, 8, 20, 30, 40, 50, 200, 400, 600, 1000],
 )
 class Potential2335(variant.VariantTask):  # 2335 Gendenshteyn
     pass
-       
 
 
 @variant.text(u'''
@@ -232,29 +230,29 @@ class Potential1621(variant.VariantTask):  # 1621 Goldfarb
     {U:Task:e} он приобретает заряд {Q:Task:e}.
     Чему при этом равны заряды обкладок конденсатора (сделайте рисунок)?
 ''')
-@variant.answer(u'''$
+@variant.answer_short(u'''
     {Q:Letter} = {C:Letter}{U:Letter} \\implies
     {C:Letter} = \\frac{Q:Letter:s}{U:Letter:s} = \\frac{Q:Value:s}{U:Value:s} = {C:Value}.
-    \\text{{ Заряды обкладок: ${Q:Letter}$ и $-{Q:Letter}$}}
-$''')
+    \\text{ Заряды обкладок: ${Q:Letter}$ и $-{Q:Letter}$ }
+''')
 @variant.args(
     U=[u'%s = %d кВ' % (Ul, Uv) for Ul in ['U', 'V'] for Uv in [2, 3, 5, 6, 12, 15, 20]],
     Q=[u'%s = %d нКл' % (ql, qv) for ql in ['Q', 'q'] for qv in [4, 6, 15, 18, 24, 25]],
 )
 class Rymkevich748(variant.VariantTask):
     def GetUpdate(self, U=None, Q=None, **kws):
-        return {
-            'C': u'C = %.2f пФ' % (1. * Q.Value / U.Value)
-        }
+        return dict(
+            C=u'C = %.2f пФ' % (1. * Q.Value / U.Value)
+        )
 
 
 @variant.text(u'''
     На конденсаторе указано: {C:Task:e}, {U:Task:e}.
     Удастся ли его использовать для накопления заряда {Q:Task:e}?
 ''')
-@variant.answer(u'''
-    ${Q_new:Letter} = {C:Letter}{U:Letter} = {C:Value} \\cdot {U:Value} = {Q:Value}
-    \\implies {Q_new:Letter} {sign} {Q:Letter} \\implies \\text{{{result}}}$
+@variant.answer_short(u'''
+    {Q_new:Letter} = {C:Letter}{U:Letter} = {C:Value} \\cdot {U:Value} = {Q:Value}
+    \\implies {Q_new:Letter} {sign} {Q:Letter} \\implies \\text{ {result} }
 ''')
 @variant.args(
     U=[u'%s = %d кВ' % (Ul, Uv) for Ul in ['U', 'V'] for Uv in [200, 300, 400, 450]],
@@ -270,22 +268,21 @@ class Rymkevich750(variant.VariantTask):
         else:
             sign = '\\less'
             result = u'не удастся'
-        return {
-            'Q_new': u'%s_{max} = %d нКл' % (Q.Letter, resultQ),
-            'sign': sign,
-            'result': result,
-        }
+        return dict(
+            Q_new=u'%s_{max} = %d нКл' % (Q.Letter, resultQ),
+            sign=sign,
+            result=result,
+        )
 
 
 @variant.text(u'''
     Как и во сколько раз изменится ёмкость плоского конденсатора при уменьшении площади пластин в {a} раз
     и уменьшении расстояния между ними в {b} раз?
 ''')
-@variant.answer(u'''
-    $\\frac{{C'}}{{C}}
-        = \\frac{{\\eps_0\\eps \\frac S{a}}}{{\\frac d{b}}} \\Big/ \\frac{{\\eps_0\\eps S}}{{d}}
-        = \\frac{{ {b} }}{{ {a} }} {sign} 1 \\implies \\text{{{result}}}
-    $
+@variant.answer_short(u'''
+    \\frac{ C' }{ C }
+        = \\frac{ \\eps_0\\eps \\frac S{a} }{ \\frac d{b} } \\Big/ \\frac{ \\eps_0\\eps S }{ d }
+        = \\frac{  {b}  }{  {a}  } {sign} 1 \\implies \\text{ {result} }
 ''')
 @variant.args(
     a=[2, 3, 4, 5, 6, 7, 8],
@@ -307,7 +304,7 @@ class Rymkevich751(variant.VariantTask):
                 value = 1 / value
             result += u' в $\\frac{value.numerator}{value.denominator}$ раз'.format(value=value)
         return {
-            'sign': sign, 
+            'sign': sign,
             'result': result,
         }
 
@@ -316,12 +313,12 @@ class Rymkevich751(variant.VariantTask):
     Электрическая ёмкость конденсатора равна {C:Task:e},
     при этом ему сообщён заряд {Q:Task:e}. Какова энергия заряженного конденсатора?
 ''')
-@variant.answer(u'''$
+@variant.answer_short(u'''
     {W:Letter}
-    = \\frac{{ {Q:Letter}^2 }}{{ 2{C:Letter} }}
-    = \\frac{{ \\sqr{Q:Value:s} }}{{ 2 \\cdot {C:Value} }}
+    = \\frac{ {Q:Letter}^2 }{ 2{C:Letter} }
+    = \\frac{ \\sqr{Q:Value:s} }{ 2 \\cdot {C:Value} }
     = {W:Value}
-$''')
+''')
 @variant.args(
     Q=[u'%s = %s нКл' % (Ql, Qv) for Ql in ['Q', 'q'] for Qv in [300, 500, 800, 900]],
     C=[u'С = %s пФ' % Cv for Cv in [200, 400, 600, 750]],
@@ -337,28 +334,28 @@ class Rymkevich762(variant.VariantTask):
     Два конденсатора ёмкостей {C1:Task:e} и {C2:Task:e} последовательно подключают
     к источнику напряжения {U:Task:e} (см. рис.). Определите заряды каждого из конденсаторов.
 ''')
-@variant.answer(u'''$
+@variant.answer_short(u'''
     Q_1
         = Q_2
         = C{U:Letter}
-        = \\frac{{{U:Letter}}}{{\\frac1{{C_1}} + \\frac1{{C_2}}}}
-        = \\frac{{C_1C_2{U:Letter}}}{{C_1 + C_2}}
-        = \\frac{{
+        = \\frac{ {U:Letter} }{ \\frac1{ C_1 } + \\frac1{ C_2 } }
+        = \\frac{ C_1C_2{U:Letter} }{ C_1 + C_2 }
+        = \\frac{
             {C1:Value} \\cdot {C2:Value} \\cdot {U:Value}
-        }}{{
+         }{
             {C1:Value} + {C2:Value}
-        }}
+         }
         = {Q:Value}
-$''')
+''')
 @variant.args(
     C1__C2=[(u'С_1 = %s нФ' % C1, u'С_2 = %s нФ' % C2) for C1 in [20, 30, 40, 60] for C2 in [20, 30, 40, 60] if C1 != C2],
     U=[u'%s = %s В' % (Ul, Uv) for  Ul in ['U', 'V'] for Uv in [150, 200, 300, 400, 450]],
 )
 class Cond1(variant.VariantTask):
     def GetUpdate(self, C1=None, C2=None, U=None, **kws):
-        return {
-            'Q': u'Q = %.2f нКл' % (1. * C1.Value * C2.Value * U.Value / (C1.Value + C2.Value)),
-        }
+        return dict(
+            Q=u'Q = %.2f нКл' % (1. * C1.Value * C2.Value * U.Value / (C1.Value + C2.Value)),
+        )
 
 
 @variant.text(u'''
@@ -375,10 +372,10 @@ class Cond1(variant.VariantTask):
 )
 class Rezistor1_v1(variant.VariantTask):
     def GetUpdate(self, R=None, U=None, **kws):
-        return {
-            'I': u'\\mathcal{I} = %.2f А' % (1. * U.Value / R.Value),
-            'P': u'P = %.2f Вт' % (1. * U.Value ** 2 / R.Value),
-        }
+        return dict(
+            I=u'\\mathcal{I} = %.2f А' % (1. * U.Value / R.Value),
+            P=u'P = %.2f Вт' % (1. * U.Value ** 2 / R.Value),
+        )
 
 
 @variant.text(u'''
@@ -395,10 +392,10 @@ class Rezistor1_v1(variant.VariantTask):
 )
 class Rezistor1_v2(variant.VariantTask):
     def GetUpdate(self, R=None, I=None, U=None, **kws):
-        return {
-            'U': u'U = %d В' % (I.Value * R.Value),
-            'P': u'P = %d Вт' % (I.Value ** 2 * R.Value),
-        }
+        return dict(
+            U=u'U = %d В' % (I.Value * R.Value),
+            P=u'P = %d Вт' % (I.Value ** 2 * R.Value),
+        )
 
 
 @variant.text(u'''
@@ -439,16 +436,16 @@ class Rezistor2(variant.VariantTask):
         A2 = UnitValue(u'A_2 = %.3f Дж' % (1. * I2.Value * E.Value * t.Value))
         eta1 = UnitValue(u'\\eta_1 = %.2f' % (1. * Q1.Value / A1.Value))
         eta2 = UnitValue(u'\\eta_2 = %.2f' % (1. * Q2.Value / A2.Value))
-        return {
-            'I1': I1,
-            'I2': I2,
-            'Q1': Q1,
-            'Q2': Q2,
-            'A1': A1,
-            'A2': A2,
-            'eta1': eta1,
-            'eta2': eta2,
-        }
+        return dict(
+            I1=I1,
+            I2=I2,
+            Q1=Q1,
+            Q2=Q2,
+            A1=A1,
+            A2=A2,
+            eta1=eta1,
+            eta2=eta2,
+        )
 
 
 @variant.text(u'''

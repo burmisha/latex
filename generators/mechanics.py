@@ -25,11 +25,11 @@ log = logging.getLogger(__name__)
 )
 class Ch_3_1(variant.VariantTask):
     def GetUpdate(self, m1=None, m2=None, v1=None, v2=None, **kws):
-        return {
-            'p1': u'p_1 = %d кг м / с' % (m1.Value * v1.Value),
-            'p2': u'p_2 = %d кг м / с' % (m2.Value * v2.Value),
-            'p': u'p = %d кг м / с' % (m1.Value * v1.Value + m2.Value * v2.Value),
-        }
+        return dict(
+            p1=u'p_1 = %d кг м / с' % (m1.Value * v1.Value),
+            p2=u'p_2 = %d кг м / с' % (m2.Value * v2.Value),
+            p=u'p = %d кг м / с' % (m1.Value * v1.Value + m2.Value * v2.Value),
+        )
 
 
 @variant.text(u'''
@@ -51,11 +51,11 @@ class Ch_3_1(variant.VariantTask):
 )
 class Ch_3_2(variant.VariantTask):
     def GetUpdate(self, m=None, v1=None, v2=None, **kws):
-        return {
-            'p1': u'p_1 = %d кг м / с' % (m.Value * v1.Value),
-            'p2': u'p_2 = %d кг м / с' % (m.Value * v2.Value),
-            'p': u'p = %d кг м / с' % (m.Value * v1.Value - m.Value * v2.Value),
-        }
+        return dict(
+            p1=u'p_1 = %d кг м / с' % (m.Value * v1.Value),
+            p2=u'p_2 = %d кг м / с' % (m.Value * v2.Value),
+            p=u'p = %d кг м / с' % (m.Value * v1.Value - m.Value * v2.Value),
+        )
 
 
 @variant.text(u'''
@@ -84,11 +84,11 @@ class Ch_3_2(variant.VariantTask):
 )
 class Ch_3_3(variant.VariantTask):
     def GetUpdate(self, m=None, v1=None, v2=None, v=None, **kws):
-        return {
-            'p1': u'p_1 = %d кг м / с' % (m.Value * v1.Value),
-            'p2': u'p_2 = %d кг м / с' % (m.Value * v2.Value),
-            'p': u'p = %d кг м / с' % (m.Value * v.Value),
-        }
+        return dict(
+            p1=u'p_1 = %d кг м / с' % (m.Value * v1.Value),
+            p2=u'p_2 = %d кг м / с' % (m.Value * v2.Value),
+            p=u'p = %d кг м / с' % (m.Value * v.Value),
+        )
 
 
 @variant.text(u'''
@@ -108,9 +108,9 @@ class Ch_3_3(variant.VariantTask):
 )
 class Ch_3_24(variant.VariantTask):
     def GetUpdate(self, m=None, M=None, v=None, **kws):
-        return {
-            'u': u'v\' = %.2f м / с' % (1.0 * v.Value * M.Value / (M.Value + 2 * m.Value)),
-        }
+        return dict(
+            u=u'v\' = %.2f м / с' % (1.0 * v.Value * M.Value / (M.Value + 2 * m.Value)),
+        )
 
 
 @variant.text(u'''

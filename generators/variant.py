@@ -238,7 +238,7 @@ def solution_space(space):
 
 def text(text_template):
     def decorator(cls):
-        cls.TextTemplate = text_template
+        cls.TextTemplate = text_template.replace(u'{\n', u'{{\n').replace(u'\n}', u'\n}}').replace(u'{ ', u'{{ ').replace(u' }', u' }}')
         return cls
     return decorator
 

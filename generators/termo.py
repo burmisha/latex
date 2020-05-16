@@ -58,7 +58,7 @@ class Ch_8_7(variant.VariantTask):
 
 @variant.text(u'''
     Какое количество теплоты необходимо для превращения воды массой {m:Value:e} при $t = {t}\\celsius$
-    в пар при температуре $t_{{100}} = 100\\celsius$?
+    в пар при температуре $t_{ 100 } = 100\\celsius$?
 ''')
 @variant.answer_short(u'''
     Q
@@ -83,7 +83,7 @@ class Ch_8_10(variant.VariantTask):
 
 
 @variant.text(u'''
-    Воду температурой $t = {t}\\celsius$ нагрели и превратили в пар при температуре $t_{{100}} = 100\\celsius$,
+    Воду температурой $t = {t}\\celsius$ нагрели и превратили в пар при температуре $t_{ 100 } = 100\\celsius$,
     потратив {Q:Value:e}. Определите массу воды.
 ''')
 @variant.answer_short(u'''

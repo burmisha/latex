@@ -29,7 +29,7 @@ log = logging.getLogger(__name__)
 ])
 @variant.args(
     what=[u'Протон', u'Позитрон'],
-    energy=[u'полной энергии частицы $E$', u'кинетической энергии частицы $E_{\\text{кин}}$'],
+    energy=[u'полной энергии частицы $E$', u'кинетической энергии частицы $E_{ \\text{ кин } }$'],
     percent=['9', '8', '7', '6'],
 )
 class BK_4_01(variant.VariantTask):
@@ -52,7 +52,7 @@ class BK_4_01(variant.VariantTask):
         \\approx {E:Value},
     ''',
     u'''
-    E_{ \\text{ кин}}}} &= \\frac{ mc^2 }{ \\sqrt{ 1 - \\frac{ v^2 }{ c^2 } } } - mc^2
+    E_{ \\text{ кин } } &= \\frac{ mc^2 }{ \\sqrt{ 1 - \\frac{ v^2 }{ c^2 } } } - mc^2
         = mc^2 \\cbr{ \\frac 1{ \\sqrt{ 1 - \\frac{ v^2 }{ c^2 } } } - 1 } \\approx''',
     u'''
         &\\approx \\cbr{ {m:Value|cdot} {Consts.c:Value|sqr} }

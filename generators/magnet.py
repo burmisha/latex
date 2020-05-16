@@ -79,9 +79,9 @@ class ConstMagnet3(variant.VariantTask):
 
 
 @variant.text(u'''
-    Проводник длиной {l:Task:e} согнули под прямым углом так, что одна сторона угла оказалась равной {a:Task:e},
-    и поместили в однородное магнитное поле с индукцией {B:Task:e} обеими сторонами перпендикулярно линиям индукции.
-    Какая сила будет действовать на этот проводник при пропусканиии по нему тока {I:Task:e}?
+    Проводник длиной {l:Task|e} согнули под прямым углом так, что одна сторона угла оказалась равной {a:Task|e},
+    и поместили в однородное магнитное поле с индукцией {B:Task|e} обеими сторонами перпендикулярно линиям индукции.
+    Какая сила будет действовать на этот проводник при пропусканиии по нему тока {I:Task|e}?
 ''')
 @variant.answer_align([
     u'''F &= \\sqrt{ F_a^2 + F_b^2 } = \\sqrt{ \\sqr{ \\mathcal{ I }Ba } + \\sqr{ \\mathcal{ I }Bb } }
@@ -105,19 +105,17 @@ class Chernoutsan11_01(variant.VariantTask):
 
 
 @variant.text(u'''
-    В однородном горизонтальном магнитном поле с индукцией {B:Task:e} находится проводник,
+    В однородном горизонтальном магнитном поле с индукцией {B:Task|e} находится проводник,
     расположенный также горизонтально и перпендикулярно полю.
     Какой ток необходимо пустить по проводнику, чтобы он завис?
-    Масса единицы длины проводника {rho:Task:e}, {g:Task:e}.
+    Масса единицы длины проводника {rho:Task|e}, {g:Task|e}.
 ''')
-@variant.answer(u'''
-    $$
-        mg = B\\mathcal{{I}}l, m=\\rho l
-        \\implies \\mathcal{{I}}
-            = \\frac{{g\\rho}}{{B}}
-            = \\frac{{{g:Value} \\cdot {rho:Value}}}{B:Value:s}
+@variant.answer_short(u'''
+        mg = B\\mathcal{ I } l, m=\\rho l
+        \\implies \\mathcal{ I }
+            = \\frac{ g\\rho } { B }
+            = \\frac{ {g:Value|cdot}{rho:Value} }{B:Value|s}
             = {I:Value}.
-    $$
 ''')
 @variant.args(
     B=[u'B = %d мТл' % B for B in [10, 20, 50, 100]],
@@ -133,16 +131,14 @@ class Chernoutsan11_02(variant.VariantTask):
 
 
 @variant.text(u'''
-    Определите работу, которую совершает сила Ампера при перемещении проводника длиной {l:Task:e}
-    с током силой {I:Task:e} в однородном магнитном поле индукцией {B:Task:e} на расстояние {d:Task:e}.
+    Определите работу, которую совершает сила Ампера при перемещении проводника длиной {l:Task|e}
+    с током силой {I:Task|e} в однородном магнитном поле индукцией {B:Task|e} на расстояние {d:Task|e}.
     Проводник перпендикулярен линиям поля и движется в направлении силы Ампера.
 ''')
-@variant.answer(u'''
-    $$
-        A   = F\\cdot d = B\\mathcal{{I}} l \\cdot d
-            = {B:Value} \\cdot {I:Value} \\cdot {l:Value} \\cdot {d:Value}
-            = {A:Value}.
-    $$
+@variant.answer_short(u'''
+    A   = F\\cdot d = B\\mathcal{ I } l \\cdot d
+        = {B:Value} \\cdot {I:Value} \\cdot {l:Value} \\cdot {d:Value}
+        = {A:Value}.
 ''')
 @variant.args(
     l=[u'l = %d см' % l for l in [20, 30, 40, 50]],
