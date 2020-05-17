@@ -24,7 +24,7 @@ class Pupil(object):
     def __lt__(self, other):
         if self.Surname < other.Surname:
             return True
-        elif self.Surname == other.Surname and self.Name <= other.Name:
+        elif self.Surname == other.Surname and self.Name < other.Name:
             return True
         else:
             return False
