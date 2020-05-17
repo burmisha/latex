@@ -428,13 +428,17 @@ class Rezistor2(variant.VariantTask):
     def GetUpdate(self, r=None, R=None, E=None, t=None, **kws):
         I1 = UnitValue(u'\\mathcal{I}_1 = %.2f А' % (1. * E.Value / R.Value))
         I2 = UnitValue(u'\\mathcal{I}_2 = %.2f А' % (1. * E.Value / (R.Value + r.Value)))
+        Q1 = UnitValue(u'Q_1 = %.3f Дж' % (1. * I1.Value ** 2 * R.Value * t.Value))
+        Q2 = UnitValue(u'Q_2 = %.3f Дж' % (1. * I2.Value ** 2 * R.Value * t.Value))
+        A1 = UnitValue(u'A_1 = %.3f Дж' % (1. * I1.Value * E.Value * t.Value))
+        A2 = UnitValue(u'A_2 = %.3f Дж' % (1. * I2.Value * E.Value * t.Value))
         return dict(
             I1=I1,
             I2=I2,
-            Q1=u'Q_1 = %.3f Дж' % (1. * I1.Value ** 2 * R.Value * t.Value),
-            Q2=u'Q_2 = %.3f Дж' % (1. * I2.Value ** 2 * R.Value * t.Value),
-            A1=u'A_1 = %.3f Дж' % (1. * I1.Value * E.Value * t.Value),
-            A2=u'A_2 = %.3f Дж' % (1. * I2.Value * E.Value * t.Value),
+            Q1=Q1,
+            Q2=Q2,
+            A1=A1,
+            A2=A2,
             eta1=u'\\eta_1 = %.2f' % (1. * Q1.Value / A1.Value),
             eta2=u'\\eta_2 = %.2f' % (1. * Q2.Value / A2.Value),
         )
