@@ -142,8 +142,12 @@ class VariantTask(object):
         return self.__TasksList
 
     def GetRandomTask(self, randomStr):
+        if self.ArgsList is None:
+            args = ''
+        else:
+            args = '__'.join(sorted(self.ArgsList.keys()))
         hash_md5 = hashlib.md5()
-        hash_md5.update(randomStr)
+        hash_md5.update(randomStr + args)
         randomHash = hash_md5.hexdigest()[8:16] # use only part of hash
         randomIndex = int(randomHash, 16) % self.GetTasksCount()
         self.__Stats[randomIndex] += 1
