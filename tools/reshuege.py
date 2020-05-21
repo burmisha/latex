@@ -105,6 +105,7 @@ class PhysEge(object):
         log.info('Making screenshot of %s to %s', url, filename)
         if os.path.exists(filename):
             log.info('Skipping existing screenshot')
+            return
         log.info('Starting Firefox')
         driver = webdriver.Firefox()
         try:
