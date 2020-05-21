@@ -1,12 +1,55 @@
 # -*- coding: utf-8 -*-
 
+import time
+
 import logging
 log = logging.getLogger(__name__)
 
 # Selenium also requires geckodriver
 # Use 'brew install geckodriver'
 from selenium import webdriver
+# from selenium.webdriver.common.keys import Keys
+# from selenium.webdriver.common.action_chains import ActionChains
 
+
+
+# TODO: strange texts
+DELETE_SCRIPT = '''
+$('iframe').remove();
+$('.adsbygoogle').remove();
+$('[id^=yandex_rtb_]').remove();
+
+$('.minor').remove();
+$("span:contains('Раздел кодификатора ФИПИ')").remove();
+$("span:contains('Источник: Тренировочная работа по физике')").remove();
+$("span:contains('Источник: ЕГЭ по физике')").remove();
+$("span:contains('Источник: ЕГЭ по фи­зи­ке')").remove();
+$("a:contains('Пройти тестирование по этим заданиям')").remove();
+$("a:contains('Вернуться к каталогу заданий')").remove();
+$("a:contains('Версия для печати и копирования в MS Word')").remove();
+
+$('.left_column').remove();
+$('.new_header').remove();
+$('.new_topheader').remove();
+$('.subj_nav').remove();
+$('.left_column_btn').remove();
+$('.pred_btn').remove();
+$('.orange_select').remove();
+$('#tophref').remove();
+$('#sm2-container').remove();
+$('.footer').remove();
+$('.content > dev > br').remove();
+$('hr').remove();
+$('body > div:nth-child(7)').remove();
+$('body > div:nth-child(6)').remove();
+$('body > div:nth-child(5)').remove();
+$('.sgia-main-content > span:nth-child(3)').remove();
+$('.sgia-main-content > br').remove();
+$('.s2b51bef0').remove();
+
+$('body').css('background', 'fff');
+$('body').css('background-image', 'none');
+'''
 
 class PhysEge(object):
     def __init__(self):
@@ -55,14 +98,48 @@ class PhysEge(object):
             driver.quit()
         return result
 
-    def MakeFullScreenshot(self, url):
-        pass
+    def MakeFullScreenshot(self, url, totalCount=None, filename=None):
+        log.info('Making screenshot of %s', url)
+        log.info('Starting Firefox')
+        driver = webdriver.Firefox()
+        try:
+            driver.set_window_size(720, 768)
+            log.info('Loading %s', url)
+            driver.get(url)
+            oldCount = 0
+            count = len(driver.find_elements_by_class_name('problem_container'))
+            while (oldCount != count) and (count != totalCount):
+                log.info('%d -> %d, loading more', oldCount, count)
+                driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+                if totalCount is None:
+                    time.sleep(2)
+                else:
+                    time.sleep(1)
+                oldCount = count
+                count = len(driver.find_elements_by_class_name('problem_container'))
+            log.info('Loaded %d problems', count)
+            driver.execute_script(DELETE_SCRIPT)
+
+            # dirty hack to zoom for better typesetting
+            # https://github.com/SeleniumHQ/selenium/issues/4244
+            driver.execute_script('document.body.style.MozTransform = "scale(1.30)";')
+            driver.execute_script('document.body.style.MozTransformOrigin = "0 0";')
+
+            with open(filename, 'wb') as pngFile:
+                pngFile.write(driver.find_element_by_class_name('prob_list').screenshot_as_png)
+        except:
+            log.error('Exiting browser')
+            driver.quit()
+            raise
+        else:
+            log.info('Exiting browser')
+            driver.quit()
 
 
 def run(args):
     physEge = PhysEge()
-    physEge.GetParts()
-
+    # physEge.GetParts()
+    physEge.MakeFullScreenshot('https://phys-ege.sdamgia.ru/test?theme=334', filename='/Users/burmisha/screenshot.png')
 
 def populate_parser(parser):
     parser.set_defaults(func=run)
