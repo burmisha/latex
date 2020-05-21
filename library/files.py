@@ -14,9 +14,13 @@ class UdrPath(object):
     def __init__(self, *path):
         self.__Path = path
 
-    def __call__(self, *path):
+    def __call__(self, *path, **kws):
         resPath = self.__Path + path
-        return udrPath(*resPath)
+        resPath = udrPath(*resPath)
+        if kws.get('create_missing_dir') is True and not os.path.isdir(resPath):
+            log.warn(u'Create missing %s', resPath)
+            os.mkdir(resPath)
+        return resPath
 
 
 def walkFiles(dirName, extensions=[], dirsOnly=False):

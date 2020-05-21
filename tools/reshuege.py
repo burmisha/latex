@@ -1,5 +1,8 @@
 # -*- coding: utf-8 -*-
 
+import library
+
+import os
 import time
 
 import logging
@@ -98,8 +101,10 @@ class PhysEge(object):
             driver.quit()
         return result
 
-    def MakeFullScreenshot(self, url, totalCount=None, filename=None):
-        log.info('Making screenshot of %s', url)
+    def MakeFullScreenshot(self, url=None, totalCount=None, filename=None):
+        log.info('Making screenshot of %s to %s', url, filename)
+        if os.path.exists(filename):
+            log.info('Skipping existing screenshot')
         log.info('Starting Firefox')
         driver = webdriver.Firefox()
         try:
@@ -109,7 +114,7 @@ class PhysEge(object):
             oldCount = 0
             count = len(driver.find_elements_by_class_name('problem_container'))
             while (oldCount != count) and (count != totalCount):
-                log.info('%d -> %d, loading more', oldCount, count)
+                log.info('  %d -> %d, loading more', oldCount, count)
                 driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
                 if totalCount is None:
                     time.sleep(2)
@@ -137,9 +142,19 @@ class PhysEge(object):
 
 
 def run(args):
+    rootPath = library.files.UdrPath(u'Материалы - Решу ЕГЭ - Физика')
+
     physEge = PhysEge()
-    # physEge.GetParts()
-    physEge.MakeFullScreenshot('https://phys-ege.sdamgia.ru/test?theme=334', filename='/Users/burmisha/screenshot.png')
+
+    tasks = physEge.GetParts()
+    for taskIndex, (taskName, parts) in enumerate(tasks, 1):
+        dirName = u'%02d %s' % (taskIndex, taskName)
+        taskPath = rootPath(dirName, create_missing_dir=True)
+        for partIndex, (partName, link) in enumerate(parts, 1):
+            log.info('Task %d of %d, part %d of %d', taskIndex, len(tasks), partIndex, len(parts))
+            filename = rootPath(taskPath, u'%d %s.png' % (partIndex, partName))
+            physEge.MakeFullScreenshot(link, filename=filename)
+            # physEge.MakeFullScreenshot('https://phys-ege.sdamgia.ru/test?theme=334', filename='/Users/burmisha/screenshot.png')
 
 def populate_parser(parser):
     parser.set_defaults(func=run)
