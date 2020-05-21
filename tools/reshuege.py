@@ -118,9 +118,6 @@ class PhysEge(object):
 
     def MakeFullScreenshot(self, url=None, totalCount=None, filename=None):
         log.info('Making screenshot of %s to %s', url, filename)
-        if os.path.exists(filename):
-            log.info('Skipping existing screenshot')
-            return
         log.info('Starting Firefox')
         driver = webdriver.Firefox()
         try:
@@ -138,7 +135,7 @@ class PhysEge(object):
                     time.sleep(1)
                 oldCount = count
                 count = len(driver.find_elements_by_class_name('problem_container'))
-            log.info('Loaded %d problems', count)
+            log.info('Loaded %d problems, cleaning up DOM', count)
             driver.execute_script(DELETE_SCRIPT)
 
             # dirty hack to zoom for better typesetting
@@ -154,14 +151,14 @@ class PhysEge(object):
                 totalHeight += problem.size['height']
                 if totalHeight >= 1200:
                     result_image = self.__JoinPngParts(pngParts)
-                    result_image.save(filename.replace('.png', '_%02d.png' % index))
+                    result_image.save(filename % index)
                     pngParts = []
                     totalHeight = 0
                     index += 1
 
             if pngParts:
                 result_image = self.__JoinPngParts(pngParts)
-                result_image.save(filename.replace('.png', '_%02d.png' % index))
+                result_image.save(filename % index)
 
             # with open(filename, 'wb') as pngFile:
             #     pngFile.write(driver.find_element_by_class_name('prob_list').screenshot_as_png)
@@ -185,7 +182,7 @@ def run(args):
         taskPath = rootPath(dirName, create_missing_dir=True)
         for partIndex, (partName, link) in enumerate(parts, 1):
             log.info('Task %d of %d, part %d of %d', taskIndex, len(tasks), partIndex, len(parts))
-            filename = rootPath(taskPath, u'%d %s.png' % (partIndex, partName))
+            filename = rootPath(taskPath, u'%d - %s - %%02d.png' % (partIndex, partName))
             physEge.MakeFullScreenshot(link, filename=filename)
 
     # physEge.MakeFullScreenshot('https://phys-ege.sdamgia.ru/test?theme=281', filename='/Users/burmisha/screenshot.png')
