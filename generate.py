@@ -14,19 +14,6 @@ import tools
 log = logging.getLogger('generate')
 
 
-def udrPath(*args):
-    return os.path.join(os.environ['HOME'], 'Yandex.Disk.localized', u'УДР', u'Общие материалы физиков УДР', *args)
-
-
-class UdrPath(object):
-    def __init__(self, *path):
-        self.__Path = path
-
-    def __call__(self, *path):
-        resPath = self.__Path + path
-        return udrPath(*resPath)
-
-
 def runLucky(args):
     library.lucky.getLucky(grade=args.grade, count=args.count)
 
@@ -47,22 +34,22 @@ def runDownload(args):
         # library.download.MathusPhys(),
         # library.download.ZnakKachestava(),
     ]:
-        downloader.Download(udrPath(downloader.GetDirname()))
+        downloader.Download(library.files.udrPath(downloader.GetDirname()))
 
     for videoDownloader in [
         library.download.GetAClass(),
         library.download.Gorbushin(),
     ]:
-        videoDownloader.Download(udrPath(u'Видео'))
+        videoDownloader.Download(library.files.udrPath(u'Видео'))
 
 
 def runQr(args):
-    qrGenerator = tools.qr.Generator(path=udrPath('qrcodes'), force=args.force)
+    qrGenerator = tools.qr.Generator(path=library.files.udrPath('qrcodes'), force=args.force)
     qrGenerator.MakeAll()
 
 
 def runConvert(args):
-    booksPath = UdrPath(u'Книги - физика')
+    booksPath = library.files.UdrPath(u'Книги - физика')
 
     books = [
         library.convert.ComicsBook(

@@ -1,7 +1,22 @@
+# -*- coding: utf-8 -*-
+
 import logging
 import os
 
 log = logging.getLogger(__name__)
+
+
+def udrPath(*args):
+    return os.path.join(os.environ['HOME'], 'Yandex.Disk.localized', u'УДР', u'Общие материалы физиков УДР', *args)
+
+
+class UdrPath(object):
+    def __init__(self, *path):
+        self.__Path = path
+
+    def __call__(self, *path):
+        resPath = self.__Path + path
+        return udrPath(*resPath)
 
 
 def walkFiles(dirName, extensions=[], dirsOnly=False):
