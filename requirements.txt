@@ -1,0 +1,6 @@
+pafy==0.5.5
+requests==2.22.0
+youtube-dl
+qrcode>=6.1
+pymaging
+selenium>=3.141

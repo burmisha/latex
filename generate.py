@@ -372,6 +372,9 @@ def CreateArgumentsParser():
     qrParser.add_argument('--force', help='Force updates', action='store_true')
     qrParser.set_defaults(func=runQr)
 
+    reshuegeParser = subparsers.add_parser('reshu-ege', help='Reshu EGE')
+    tools.reshuege.populate_parser(reshuegeParser)
+
     convertParser = subparsers.add_parser('convert', help='Convert into smth')
     convertParser.add_argument('--remove-strange-files', help='Remove strange files', action='store_true')
     convertParser.set_defaults(func=runConvert)
