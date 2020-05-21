@@ -8,6 +8,10 @@ import time
 import logging
 log = logging.getLogger(__name__)
 
+from PIL import Image
+from cStringIO import StringIO
+from io import BytesIO
+
 # Selenium also requires geckodriver
 # Use 'brew install geckodriver'
 from selenium import webdriver
@@ -24,6 +28,8 @@ $('[id^=yandex_rtb_]').remove();
 
 $('.minor').remove();
 $("span:contains('Раздел кодификатора ФИПИ')").remove();
+$("span:contains('Источник: Досрочный')").remove();
+$("span:contains('Источник: Демо')").remove();
 $("span:contains('Источник: Тренировочная работа по физике')").remove();
 $("span:contains('Источник: ЕГЭ по физике')").remove();
 $("span:contains('Источник: ЕГЭ по фи­зи­ке')").remove();
@@ -101,6 +107,15 @@ class PhysEge(object):
             driver.quit()
         return result
 
+    def __JoinPngParts(self, pngParts):
+        resHeight = sum(pngPart.size[1] for pngPart in pngParts)
+        result_image = Image.new('RGB', (pngParts[0].size[0], resHeight))
+        offset = 0
+        for pngPart in pngParts:
+            result_image.paste(pngPart, (0, offset))
+            offset += pngPart.size[1]
+        return result_image
+
     def MakeFullScreenshot(self, url=None, totalCount=None, filename=None):
         log.info('Making screenshot of %s to %s', url, filename)
         if os.path.exists(filename):
@@ -131,8 +146,25 @@ class PhysEge(object):
             driver.execute_script('document.body.style.MozTransform = "scale(1.30)";')
             driver.execute_script('document.body.style.MozTransformOrigin = "0 0";')
 
-            with open(filename, 'wb') as pngFile:
-                pngFile.write(driver.find_element_by_class_name('prob_list').screenshot_as_png)
+            pngParts = []
+            totalHeight = 0
+            index = 0
+            for problem in driver.find_elements_by_class_name('problem_container'):
+                pngParts.append(Image.open(BytesIO(problem.screenshot_as_png)))
+                totalHeight += problem.size['height']
+                if totalHeight >= 1200:
+                    result_image = self.__JoinPngParts(pngParts)
+                    result_image.save(filename.replace('.png', '_%02d.png' % index))
+                    pngParts = []
+                    totalHeight = 0
+                    index += 1
+
+            if pngParts:
+                result_image = self.__JoinPngParts(pngParts)
+                result_image.save(filename.replace('.png', '_%02d.png' % index))
+
+            # with open(filename, 'wb') as pngFile:
+            #     pngFile.write(driver.find_element_by_class_name('prob_list').screenshot_as_png)
         except:
             log.error('Exiting browser')
             driver.quit()
@@ -155,7 +187,9 @@ def run(args):
             log.info('Task %d of %d, part %d of %d', taskIndex, len(tasks), partIndex, len(parts))
             filename = rootPath(taskPath, u'%d %s.png' % (partIndex, partName))
             physEge.MakeFullScreenshot(link, filename=filename)
-            # physEge.MakeFullScreenshot('https://phys-ege.sdamgia.ru/test?theme=334', filename='/Users/burmisha/screenshot.png')
+
+    # physEge.MakeFullScreenshot('https://phys-ege.sdamgia.ru/test?theme=281', filename='/Users/burmisha/screenshot.png')
+    # physEge.MakeFullScreenshot('https://phys-ege.sdamgia.ru/test?theme=334', filename='/Users/burmisha/screenshot.png')
 
 def populate_parser(parser):
     parser.set_defaults(func=run)
