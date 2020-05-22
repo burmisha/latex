@@ -31,8 +31,7 @@ $("span:contains('Раздел кодификатора ФИПИ')").remove();
 $("span:contains('Источник: Досрочный')").remove();
 $("span:contains('Источник: Демо')").remove();
 $("span:contains('Источник: Тренировочная работа по физике')").remove();
-$("span:contains('Источник: ЕГЭ по физике')").remove();
-$("span:contains('Источник: ЕГЭ по фи­зи­ке')").remove();
+$("span:contains('Источник: ЕГЭ')").remove();
 $("a:contains('Пройти тестирование по этим заданиям')").remove();
 $("a:contains('Вернуться к каталогу заданий')").remove();
 $("a:contains('Версия для печати и копирования в MS Word')").remove();
@@ -60,9 +59,59 @@ $('body').css('background', 'fff');
 $('body').css('background-image', 'none');
 '''
 
+# based on https://gist.github.com/fabtho/13e4a2e7cfbfde671b8fa81bbe9359fb
+class PngJoiner(object):
+    def __init__(self, filenameFmt=None, minHeight=None):
+        assert filenameFmt.endswith(' - %02d.png'), 'Invalid filename format: %s' % filenameFmt
+        self.__FilenameFmt = filenameFmt
+        self.__LogFile = filenameFmt.replace(' - %02d.png', '.txt')
+        self.__MinHeight = minHeight
+        self.__OkMessage = 'Ok\n'
+        self.Reset()
+
+    def WasSaved(self):
+        if os.path.exists(self.__LogFile):
+            with open(self.__LogFile) as f:
+                if f.read() == self.__OkMessage:
+                    return True
+        return False
+
+    def Reset(self, inc=False):
+        self.__Parts = []
+        if inc:
+            self.__Index += 1
+        else:
+            self.__Index = 0
+        self.__TotalHeight = 0
+
+    def __JoinPngParts(self):
+        resHeight = sum(part.size[1] for part in self.__Parts)
+        result_image = Image.new('RGB', (self.__Parts[0].size[0], resHeight))
+        offset = 0
+        for part in self.__Parts:
+            result_image.paste(part, (0, offset))
+            offset += part.size[1]
+        return result_image
+
+    def Save(self):
+        if self.__Parts:
+            result_image = self.__JoinPngParts(pngParts)
+            result_image.save(self.__FilenameFmt % self.__Index)
+        with open(self.__LogFile, 'w') as logFile:
+            logFile.write(self.__OkMessage)
+
+    def AddImage(self, pngImage, height):
+        self.__Parts.append(Image.open(BytesIO(pngImage)))
+        self.__TotalHeight += height
+        if self.__TotalHeight >= self.__MinHeight:
+            result_image = self.__JoinPngParts()
+            result_image.save(self.__FilenameFmt % self.__Index)
+            self.Reset(inc=True)
+
+
 class PhysEge(object):
-    def __init__(self):
-        self.__Url = 'https://phys-ege.sdamgia.ru'
+    def __init__(self, url):
+        self.__Url = url
 
     def GetParts(self):
         log.info('Starting Firefox')
@@ -107,17 +156,14 @@ class PhysEge(object):
             driver.quit()
         return result
 
-    def __JoinPngParts(self, pngParts):
-        resHeight = sum(pngPart.size[1] for pngPart in pngParts)
-        result_image = Image.new('RGB', (pngParts[0].size[0], resHeight))
-        offset = 0
-        for pngPart in pngParts:
-            result_image.paste(pngPart, (0, offset))
-            offset += pngPart.size[1]
-        return result_image
-
     def MakeFullScreenshot(self, url=None, totalCount=None, filename=None):
-        log.info('Making screenshot of %s to %s', url, filename)
+        pngJoiner = PngJoiner(filenameFmt=filename, minHeight=1200)
+        if pngJoiner.WasSaved():
+            log.info('Skipping saved part')
+            return
+        else:
+            log.info('Making screenshot of %s to %s', url, filename)
+
         log.info('Starting Firefox')
         driver = webdriver.Firefox()
         try:
@@ -143,25 +189,11 @@ class PhysEge(object):
             driver.execute_script('document.body.style.MozTransform = "scale(1.30)";')
             driver.execute_script('document.body.style.MozTransformOrigin = "0 0";')
 
-            pngParts = []
-            totalHeight = 0
-            index = 0
+            log.info('Saving problems')
             for problem in driver.find_elements_by_class_name('problem_container'):
-                pngParts.append(Image.open(BytesIO(problem.screenshot_as_png)))
-                totalHeight += problem.size['height']
-                if totalHeight >= 1200:
-                    result_image = self.__JoinPngParts(pngParts)
-                    result_image.save(filename % index)
-                    pngParts = []
-                    totalHeight = 0
-                    index += 1
+                pngJoiner.AddImage(problem.screenshot_as_png, problem.size['height'])
+            pngJoiner.Save()
 
-            if pngParts:
-                result_image = self.__JoinPngParts(pngParts)
-                result_image.save(filename % index)
-
-            # with open(filename, 'wb') as pngFile:
-            #     pngFile.write(driver.find_element_by_class_name('prob_list').screenshot_as_png)
         except:
             log.error('Exiting browser')
             driver.quit()
@@ -174,7 +206,8 @@ class PhysEge(object):
 def run(args):
     rootPath = library.files.UdrPath(u'Материалы - Решу ЕГЭ - Физика')
 
-    physEge = PhysEge()
+    physEge = PhysEge('https://phys-ege.sdamgia.ru')
+    # physEge = PhysEge('https://chem-ege.sdamgia.ru')
 
     tasks = physEge.GetParts()
     for taskIndex, (taskName, parts) in enumerate(tasks, 1):
@@ -185,7 +218,7 @@ def run(args):
             filename = rootPath(taskPath, u'%d - %s - %%02d.png' % (partIndex, partName))
             physEge.MakeFullScreenshot(link, filename=filename)
 
-    # physEge.MakeFullScreenshot('https://phys-ege.sdamgia.ru/test?theme=281', filename='/Users/burmisha/screenshot.png')
+    # physEge.MakeFullScreenshot('https://phys-ege.sdamgia.ru/test?theme=281', filename='/Users/burmisha/screenshot - %02d.png')
     # physEge.MakeFullScreenshot('https://phys-ege.sdamgia.ru/test?theme=334', filename='/Users/burmisha/screenshot.png')
 
 def populate_parser(parser):
