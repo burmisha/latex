@@ -32,6 +32,7 @@ $("span:contains('Источник: Досрочный')").remove();
 $("span:contains('Источник: Демо')").remove();
 $("span:contains('Источник: Тренировочная работа по физике')").remove();
 $("span:contains('Источник: ЕГЭ')").remove();
+$("span:contains('Источник: РЕШУ')").remove();
 $("a:contains('Пройти тестирование по этим заданиям')").remove();
 $("a:contains('Вернуться к каталогу заданий')").remove();
 $("a:contains('Версия для печати и копирования в MS Word')").remove();
@@ -84,36 +85,34 @@ class PngJoiner(object):
             self.__Index = 0
         self.__TotalHeight = 0
 
-    def __JoinPngParts(self):
-        resHeight = sum(part.size[1] for part in self.__Parts)
-        result_image = Image.new('RGB', (self.__Parts[0].size[0], resHeight))
-        offset = 0
-        for part in self.__Parts:
-            result_image.paste(part, (0, offset))
-            offset += part.size[1]
-        return result_image
-
-    def Save(self):
+    def Save(self, final=False):
         if self.__Parts:
-            result_image = self.__JoinPngParts(pngParts)
-            result_image.save(self.__FilenameFmt % self.__Index)
-        with open(self.__LogFile, 'w') as logFile:
-            logFile.write(self.__OkMessage)
+            height = sum(part.size[1] for part in self.__Parts)
+            image = Image.new('RGB', (self.__Parts[0].size[0], height))
+            offset = 0
+            for part in self.__Parts:
+                image.paste(part, (0, offset))
+                offset += part.size[1]
+            image.save(self.__FilenameFmt % self.__Index)
+
+        if final:
+            with open(self.__LogFile, 'w') as logFile:
+                logFile.write(self.__OkMessage)
 
     def AddImage(self, pngImage, height):
         self.__Parts.append(Image.open(BytesIO(pngImage)))
         self.__TotalHeight += height
         if self.__TotalHeight >= self.__MinHeight:
-            result_image = self.__JoinPngParts()
-            result_image.save(self.__FilenameFmt % self.__Index)
+            self.Save(final=False)
             self.Reset(inc=True)
 
 
-class PhysEge(object):
-    def __init__(self, url):
+class SdamGia(object):
+    def __init__(self, url, tasksCount=None):
         self.__Url = url
+        self.__TasksCount = tasksCount
 
-    def GetParts(self):
+    def GetTasks(self):
         log.info('Starting Firefox')
         driver = webdriver.Firefox()
         try:
@@ -138,15 +137,23 @@ class PhysEge(object):
                         log.info('  Part: %s, link: %s', partName, a)
                 elif len(tds) == 2:
                     a = tds[0].find_element_by_xpath('./a')
-                    a.click()  # selenium reqiures text to be displayed
-                    taskNumber = int(a.text.split('.')[0].split(' ')[0])
-                    taskName = a.text.split('.')[1].split('(')[0].strip().replace(', ', u' и ')
-                    assert taskNumber == len(result) + 1
-                    result.append((taskName, []))
+                    hasChildren = not (u'просмотреть (' in a.text)
+                    if hasChildren:
+                        a.click()  # selenium reqiures text to be displayed
+                        taskNumber = int(a.text.split('.')[0].split(' ')[0])
+                        taskName = a.text.split('.')[1].split('(')[0].strip().replace(', ', u' и ')
+                        assert taskNumber == len(result) + 1
+                        result.append((taskName, []))
+                    else:
+                        taskNumber = int(tds[0].text.split(' ')[0].strip('.'))
+                        assert taskNumber == len(result) + 1
+                        taskName = tds[0].text.split('.')[1].split('(')[0].strip().replace(', ', u' и ').replace(u' просмотреть', '')
+                        link = a.get_attribute('href')
+                        result.append((taskName, [(taskName, link)]))
                     log.info('Chapter %02d: %s', taskNumber, taskName)
                 else:
                     pass
-            assert len(result) == 32
+            assert len(result) == self.__TasksCount
         except:
             log.error('Exiting browser')
             driver.quit()
@@ -192,7 +199,7 @@ class PhysEge(object):
             log.info('Saving problems')
             for problem in driver.find_elements_by_class_name('problem_container'):
                 pngJoiner.AddImage(problem.screenshot_as_png, problem.size['height'])
-            pngJoiner.Save()
+            pngJoiner.Save(final=True)
 
         except:
             log.error('Exiting browser')
@@ -206,10 +213,11 @@ class PhysEge(object):
 def run(args):
     rootPath = library.files.UdrPath(u'Материалы - Решу ЕГЭ - Физика')
 
-    physEge = PhysEge('https://phys-ege.sdamgia.ru')
-    # physEge = PhysEge('https://chem-ege.sdamgia.ru')
+    physEge = SdamGia('https://phys-ege.sdamgia.ru', 32)
+    # geoEge = SdamGia('https://geo-ege.sdamgia.ru', 34)
+    # chemEge = SdamGia('https://chem-ege.sdamgia.ru', 35)
 
-    tasks = physEge.GetParts()
+    tasks = physEge.GetTasks()
     for taskIndex, (taskName, parts) in enumerate(tasks, 1):
         dirName = u'%02d %s' % (taskIndex, taskName)
         taskPath = rootPath(dirName, create_missing_dir=True)
