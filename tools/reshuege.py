@@ -33,6 +33,7 @@ $("span:contains('Источник: Демо')").remove();
 $("span:contains('Источник: Тренировочная работа по физике')").remove();
 $("span:contains('Источник: ЕГЭ')").remove();
 $("span:contains('Источник: РЕШУ')").remove();
+$("span:contains('Источник: Яндекс')").remove();
 $("a:contains('Пройти тестирование по этим заданиям')").remove();
 $("a:contains('Вернуться к каталогу заданий')").remove();
 $("a:contains('Версия для печати и копирования в MS Word')").remove();
@@ -93,9 +94,12 @@ class PngJoiner(object):
             for part in self.__Parts:
                 image.paste(part, (0, offset))
                 offset += part.size[1]
-            image.save(self.__FilenameFmt % self.__Index)
+            filename = self.__FilenameFmt % self.__Index
+            log.info('  Saving image %s', filename)
+            image.save(filename)
 
         if final:
+            log.info('  Saved %d images', self.__Index + 1)
             with open(self.__LogFile, 'w') as logFile:
                 logFile.write(self.__OkMessage)
 
@@ -211,23 +215,22 @@ class SdamGia(object):
 
 
 def run(args):
-    rootPath = library.files.UdrPath(u'Материалы - Решу ЕГЭ - Физика')
+    for subject, link, count in [
+        (u'Физика', 'https://phys-ege.sdamgia.ru', 32),
+        # (u'Химия', 'https://geo-ege.sdamgia.ru', 34),
+        # (u'География', 'https://chem-ege.sdamgia.ru', 35),
+    ]:
+        rootPath = library.files.UdrPath(u'Материалы - Решу ЕГЭ - %s' % subject)
+        sdamGia = SdamGia(link, count)
+        tasks = sdamGia.GetTasks()
+        for taskIndex, (taskName, parts) in enumerate(tasks, 1):
+            dirName = u'%02d %s' % (taskIndex, taskName)
+            taskPath = rootPath(dirName, create_missing_dir=True)
+            for partIndex, (partName, link) in enumerate(parts, 1):
+                log.info('Task %d of %d, part %d of %d', taskIndex, len(tasks), partIndex, len(parts))
+                filename = rootPath(taskPath, u'%d - %s - %%02d.png' % (partIndex, partName))
+                sdamGia.MakeFullScreenshot(link, filename=filename)
 
-    physEge = SdamGia('https://phys-ege.sdamgia.ru', 32)
-    # geoEge = SdamGia('https://geo-ege.sdamgia.ru', 34)
-    # chemEge = SdamGia('https://chem-ege.sdamgia.ru', 35)
-
-    tasks = physEge.GetTasks()
-    for taskIndex, (taskName, parts) in enumerate(tasks, 1):
-        dirName = u'%02d %s' % (taskIndex, taskName)
-        taskPath = rootPath(dirName, create_missing_dir=True)
-        for partIndex, (partName, link) in enumerate(parts, 1):
-            log.info('Task %d of %d, part %d of %d', taskIndex, len(tasks), partIndex, len(parts))
-            filename = rootPath(taskPath, u'%d - %s - %%02d.png' % (partIndex, partName))
-            physEge.MakeFullScreenshot(link, filename=filename)
-
-    # physEge.MakeFullScreenshot('https://phys-ege.sdamgia.ru/test?theme=281', filename='/Users/burmisha/screenshot - %02d.png')
-    # physEge.MakeFullScreenshot('https://phys-ege.sdamgia.ru/test?theme=334', filename='/Users/burmisha/screenshot.png')
 
 def populate_parser(parser):
     parser.set_defaults(func=run)
