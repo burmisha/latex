@@ -15,12 +15,8 @@ from io import BytesIO
 # Selenium also requires geckodriver
 # Use 'brew install geckodriver'
 from selenium import webdriver
-# from selenium.webdriver.common.keys import Keys
-# from selenium.webdriver.common.action_chains import ActionChains
 
 
-
-# TODO: strange texts
 DELETE_SCRIPT = '''
 $('iframe').remove();
 $('.adsbygoogle').remove();
