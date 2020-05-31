@@ -104,6 +104,10 @@ def runConvert(args):
             pdfPath=booksPath(u'Методика', u'Горбушин - Как можно учить физике.pdf'),
             dstPath=booksPath(u'Методика', u'Горбушин - Как можно учить физике'),
         ),
+        library.convert.Goldfarb(
+            pdfPath=booksPath(u'Сборники', u'Сборник - Гольдфарб - 10-11.pdf'),
+            dstPath=booksPath(u'Сборники', u'Гольдфарб'),
+        ),
         library.convert.Vishnyakova(
             pdfPath=booksPath(u'МГУ', u'Вишнякова - Физика - сборник задач к ЕГЭ - 2015.pdf'),
             dstPath=booksPath(u'МГУ', u'Вишнякова - Физика - сборник задач к ЕГЭ - 2015'),
