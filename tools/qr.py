@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import qrcode
 import qrcode.image.svg
 import qrcode.image.pure
@@ -5,7 +7,8 @@ import qrcode.image.pure
 import os
 
 import logging
-log = logging.getLogger('qr')
+log = logging.getLogger(__name__)
+
 
 # handler based on https://pypi.org/project/qrcode/
 class Generator(object):
@@ -50,6 +53,8 @@ class Generator(object):
             ('https://notion.so/f5d57ced2a224ccc9b142e21e3714a61', '2019-20-9L.png'),
             ('https://notion.so/ce257644b31d4cb5bfdef3d199446677', '2019-20-8M.png'),
             ('https://notion.so/3234ab6735f64635a34ae9550625a103', '2019-20-extra.png'),
+            ('https://notion.so/8aa8591fcc00453eb19519f9faf6a1f8', '2020-summer.png'),
+            ('https://notion.so/8acf3ff3b2874cefabbfa78d2db4f07e', '2020-summer-marathon.png'),
         ]:
             filename = os.path.join(path or self.__Path, file)
             assert filename.endswith(method)
