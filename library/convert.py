@@ -52,7 +52,7 @@ class PdfBook(object):
             self.EnsureDir(dirName)
         else:
             dirName = self.DstPath
-        fileName = (nameTemplate % pageNumber) + '.png'
+        fileName = u'%s - %03d.png' % (nameTemplate, pageNumber)
         fileName = os.path.join(dirName, fileName)
         return dirName, fileName
 
@@ -826,9 +826,14 @@ class TwoDStructure(object):
     def __call__(self):
         for chapterIndex, (chapterName, parts) in enumerate(self.Data, self.FirstLevelStartIndex):
             dirName = u'%02d %s' % (chapterIndex, chapterName)
-            for partIndex, (part, first, last) in enumerate(parts, self.SecondLevelStartIndex):
+            hasDigit = all(part[0].isdigit() for part, _, _ in parts)
+            for partIndex, (partName, first, last) in enumerate(parts, self.SecondLevelStartIndex):
                 for pageNumber in range(first, last + 1):
-                    yield pageNumber, dirName, '%02d %s - %%03d' % (partIndex, part)
+                    if hasDigit:
+                        nameTemplate = u'%s' % partName
+                    else:
+                        nameTemplate = u'%02d %s' % (partIndex, partName)
+                    yield pageNumber, dirName, nameTemplate
 
 
 class OneDStructure(object):
@@ -840,7 +845,7 @@ class OneDStructure(object):
         for index, (name, first, last) in enumerate(self.Data, self.StartIndex):
             dirName = u'%02d %s' % (index, name)
             for pageNumber in range(first, last):
-                yield pageNumber, dirName, '%02d %s - %%03d' % (index, name)
+                yield pageNumber, dirName, '%02d %s' % (index, name)
 
 
 @params(['-level', '10%,90%,0.7'])
@@ -938,10 +943,10 @@ class Goldfarb(PdfBook):
                 (u'01-2 - Кинематика - решения', 164, 181),
                 (u'02-1 - Законы Ньютона', 14, 23),
                 (u'02-2 - Законы Ньютона - решения', 181, 195),
-                (u'03-1 - Импульс. Закон сохранения импульса', 23, 28),
-                (u'03-2 - Импульс. Закон сохранения импульса - решения', 195, 204),
-                (u'04-1 - Работа, мощность, энергия', 28, 33),
-                (u'04-2 - Работа, мощность, энергия - решения', 204, 210),
+                (u'03-1 - Импульс и ЗСИ', 23, 28),
+                (u'03-2 - Импульс и ЗСИ - решения', 195, 204),
+                (u'04-1 - Работа - мощность - энергия', 28, 33),
+                (u'04-2 - Работа - мощность - энергия - решения', 204, 210),
                 (u'05-1 - Законы сохранения энергии и импульса', 33, 41),
                 (u'05-2 - Законы сохранения энергии и импульса - решения', 210, 226),
                 (u'06-1 - Движение по окружности - кинематика - динамика', 41, 50),
@@ -1016,7 +1021,7 @@ class Problems_3800(PdfBook):
                 (ur'Движение тела - брошенного вертикально', 22, 25),
                 (ur'Прямолинейное переменное движение', 25, 26),
                 (ur'Движение материальной точки на плоскости', 26, 29),
-                (ur'Движение материальной точки по окружности ', 29, 34),
+                (ur'Движение материальной точки по окружности', 29, 34),
                 (ur'Движение тела - брошенного горизонтально', 34, 35),
                 (ur'Движение тела - брошенного под углом к горизонту', 35, 44),
             ]),
@@ -1048,7 +1053,7 @@ class Problems_3800(PdfBook):
 #         Гравитационное поле планет 125
 #         Законы Кеплера 132
 #     ]),
-#     (ur'Механика - Механические колебания и волны   ', [
+#     (ur'Механика - Механические колебания и волны', [
 #         Колебания материальной точки 134
 #         Пружинный маятник 137
 #         Математический маятник 142
