@@ -15,13 +15,19 @@
 % \usepackage[english,russian]{babel} % Download Russian fonts.
 \usepackage{amsmath,amsfonts,amssymb,amsthm,amscd,mathrsfs} % Use AMS symbols.
 \usepackage{tikz}
+\usepackage{tkz-euclide}  % https://gist.github.com/kpym/f08d1a326884e11dddb7d272359eb2bd
 \usepackage[version=4]{mhchem}
+\usepackage{wrapfig}  % for wrapfigure, see https://www.overleaf.com/learn/latex/Wrapping_text_around_figures
 \usetikzlibrary{circuits.ee.IEC}
 \usetikzlibrary{shapes.geometric}
 \usetikzlibrary{decorations.markings}
 %\usetikzlibrary{dashs}
 %\usetikzlibrary{info}
+% \usetkzobj{all}
+\tkzSetUpPoint[fill=black]  % https://tex.stackexchange.com/questions/165803/how-can-i-style-tkz-euclide-points
 
+\usepackage{xcolor}
+\usepackage[colorlinks,urlcolor=blue]{hyperref}  % for \href
 
 \textheight=28cm % высота текста
 \textwidth=19cm % ширина текста
