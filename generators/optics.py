@@ -12,10 +12,8 @@ log = logging.getLogger(__name__)
     Какова длина этой волны в среде с показателем преломления {n:Task:e}?
     Может ли человек увидеть такую волну света, и если да, то какой именно цвет соответствует этим волнам в вакууме и в этой среде?
 ''')
-@variant.args(
-    n=[u'n = 1.%d' % n for n in [3, 4, 5, 6, 7]],
-    lmbd=[u'\\lambda = %d нм' % lmbd for lmbd in [400, 500, 600, 700]],
-)
+@variant.arg(n=[u'n = 1.%d' % n for n in [3, 4, 5, 6, 7]])
+@variant.arg(lmbd=[u'\\lambda = %d нм' % lmbd for lmbd in [400, 500, 600, 700]])
 @variant.answer_align([
     u'''\\nu &= \\frac 1T = \\frac 1{ \\lambda/c } = \\frac c\\lambda = \\frac{Consts.c:Value|s}{lmbd:Value|s} \\approx {nu:Value},''',
     u'''\\nu' = \\nu &\\cbr{ \\text{ или } T' = T } \\implies \\lambda' = v'T' = \\frac vn T = \\frac{ vt }n = \\frac \\lambda n = \\frac{lmbd:Value|s}{n:Value|s} \\approx {lmbd_1:Value}.''',
@@ -39,12 +37,10 @@ class Gendenshteyn_11_11_18(variant.VariantTask):
     а также определите расстояние между первым {text} и нулевым максимумом.
     Длина волны падающего света составляет {lmbd:Task:e}.
 ''')
-@variant.args(
-    l=[u'l = %d мкм' % l for l in [400, 500, 600]],
-    L=[u'L = %d м' % L for L in [2, 4, 5, 6]],
-    lmbd=[u'\\lambda = %d нм' % lmbd for lmbd in [400, 500, 600]],
-    text=[u'максимумом', u'минимумом'],
-)
+@variant.arg(l=[u'l = %d мкм' % l for l in [400, 500, 600]])
+@variant.arg(L=[u'L = %d м' % L for L in [2, 4, 5, 6]])
+@variant.arg(lmbd=[u'\\lambda = %d нм' % lmbd for lmbd in [400, 500, 600]])
+@variant.arg(text=[u'максимумом', u'минимумом'])
 @variant.solution_space(180)
 class Vishnyakova_example_11(variant.VariantTask):
     # d_1^2=L^2 + (h - l/2)^2
@@ -59,11 +55,9 @@ class Vishnyakova_example_11(variant.VariantTask):
     Какова должна быть минимальная толщина пленки, если в результате интерференции свет имеет {text} интенсивность?
 ''')
 @variant.solution_space(180)
-@variant.args(
-    n1=[u'\\hat n = 1.%d' % n1 for n1 in [5, 6]],
-    n2=[u'n = 1.%d' % n2 for n2 in [2, 4, 7, 8]],
-    lmbd=[u'\\lambda = %d нм' % lmbd for lmbd in [400, 500, 600]],
-    text=[u'наибольшую', u'наименьшую'],
-)
+@variant.arg(n1=[u'\\hat n = 1.%d' % n1 for n1 in [5, 6]])
+@variant.arg(n2=[u'n = 1.%d' % n2 for n2 in [2, 4, 7, 8]])
+@variant.arg(lmbd=[u'\\lambda = %d нм' % lmbd for lmbd in [400, 500, 600]])
+@variant.arg(text=[u'наибольшую', u'наименьшую'])
 class Belolipetsky_5_196(variant.VariantTask):
     pass

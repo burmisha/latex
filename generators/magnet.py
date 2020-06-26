@@ -30,10 +30,8 @@ class ConstMagnet0(variant.VariantTask):
     изобразите линии индукции магнитного поля
     и укажите, как соориентируются магнитные стрелки в точках {points}.
 ''')
-@variant.args(
-    variant=[u'а', u'б', u'в', u'г'],
-    points=[u' и '.join(points) for points in itertools.combinations('ABCD', 2)],
-)
+@variant.arg(variant=[u'а', u'б', u'в', u'г'])
+@variant.arg(points=[u' и '.join(points) for points in itertools.combinations('ABCD', 2)])
 class ConstMagnet1(variant.VariantTask):
     pass
 
@@ -44,20 +42,18 @@ class ConstMagnet1(variant.VariantTask):
     Сделайте рисунок, укажите направление протекания электрического тока,
     изобразите линии индукции магнитного поля.
 ''')
-@variant.args(
-    variant__direction__point=itertools.chain(
-        itertools.product(
-            [u'а', u'б'],
-            [u'налево', u'направо'],
-            'AB',
-        ),
-        itertools.product(
-            [u'в', u'г'],
-            [u'вверх', u'вниз'],
-            'AB',
-        ),
-    )
-)
+@variant.arg(variant__direction__point=itertools.chain(
+    itertools.product(
+        [u'а', u'б'],
+        [u'налево', u'направо'],
+        'AB',
+    ),
+    itertools.product(
+        [u'в', u'г'],
+        [u'вверх', u'вниз'],
+        'AB',
+    ),
+))
 class ConstMagnet2(variant.VariantTask):
     pass
 
@@ -69,11 +65,9 @@ class ConstMagnet2(variant.VariantTask):
     Как нужно расположить ещё один кольцевой ток, чтобы между ними возникло {what}
     (сделайте отдельный рисунок с витками, укажите направления протекания тока и направление сил)?
 ''')
-@variant.args(
-    variant=[u'а', u'б', u'в', u'г'],
-    points=[u' и '.join(points) for points in itertools.combinations('ABCD', 2)],
-    what=[u'притяжение', u'отталкивание'],
-)
+@variant.arg(variant=[u'а', u'б', u'в', u'г'])
+@variant.arg(points=[u' и '.join(points) for points in itertools.combinations('ABCD', 2)])
+@variant.arg(what=[u'притяжение', u'отталкивание'])
 class ConstMagnet3(variant.VariantTask):
     pass
 
@@ -88,15 +82,13 @@ class ConstMagnet3(variant.VariantTask):
             = \\mathcal{ I }B\\sqrt{ a^2 + b^2 } = \\mathcal{ I }B\\sqrt{ a^2 + (l - a)^2 } = ''',
     u'&= {I:Value|cdot}{B:Value|cdot}\\sqrt{ {a:Value|sqr} + \\sqr{ {l:Value} - {a:Value} } } = {F:Value}.',
 ])
-@variant.args(
-    l__a=[(u'l = %d см' % (a + b), u'a = %d см' % a) for a, b in [
-        (30, 40), (40, 30), (3, 4), (4, 3),
-        (120, 50), (50, 120), (12, 5), (5, 12),
-        (70, 240), (240, 70), (7, 24), (24, 7),
-    ]],
-    B=[u'B = %d мТл' % B for B in [2, 5, 10]],
-    I=[u'\\mathcal{I} = %d А' % I for I in [10, 20, 40, 50]],
-)
+@variant.arg(l__a=[(u'l = %d см' % (a + b), u'a = %d см' % a) for a, b in [
+    (30, 40), (40, 30), (3, 4), (4, 3),
+    (120, 50), (50, 120), (12, 5), (5, 12),
+    (70, 240), (240, 70), (7, 24), (24, 7),
+]])
+@variant.arg(B=[u'B = %d мТл' % B for B in [2, 5, 10]])
+@variant.arg(I=[u'\\mathcal{I} = %d А' % I for I in [10, 20, 40, 50]])
 class Chernoutsan11_01(variant.VariantTask):
     def GetUpdate(self, l=None, a=None, B=None, I=None, **kws):
         return dict(
@@ -117,10 +109,8 @@ class Chernoutsan11_01(variant.VariantTask):
             = \\frac{ {Consts.g_ten:Value|cdot}{rho:Value} }{B:Value|s}
             = {I:Value}.
 ''')
-@variant.args(
-    B=[u'B = %d мТл' % B for B in [10, 20, 50, 100]],
-    rho=[u'\\rho = %d кг / м' % r for r in [5, 10, 20, 40, 100]],   # TODO: г / м
-)
+@variant.arg(B=[u'B = %d мТл' % B for B in [10, 20, 50, 100]])
+@variant.arg(rho=[u'\\rho = %d кг / м' % r for r in [5, 10, 20, 40, 100]])   # TODO: г / м
 class Chernoutsan11_02(variant.VariantTask):
     def GetUpdate(self, rho=None, B=None, Consts=None, **kws):
         return dict(
@@ -138,12 +128,10 @@ class Chernoutsan11_02(variant.VariantTask):
         = {B:Value} \\cdot {I:Value} \\cdot {l:Value} \\cdot {d:Value}
         = {A:Value}.
 ''')
-@variant.args(
-    l=[u'l = %d см' % l for l in [20, 30, 40, 50]],
-    I=[u'\\mathcal{I} = %d А' % I for I in [5, 10, 20]],
-    B=[u'B = %f Тл' % B for B in [0.1, 0.2, 0.5]],
-    d=[u'd = %d см' % d for d in [20, 50, 80]],
-)
+@variant.arg(l=[u'l = %d см' % l for l in [20, 30, 40, 50]])
+@variant.arg(I=[u'\\mathcal{I} = %d А' % I for I in [5, 10, 20]])
+@variant.arg(B=[u'B = %f Тл' % B for B in [0.1, 0.2, 0.5]])
+@variant.arg(d=[u'd = %d см' % d for d in [20, 50, 80]])
 class Chernoutsan11_5(variant.VariantTask):
     def GetUpdate(self, B=None, I=None, l=None, d=None, **kws):
         return dict(

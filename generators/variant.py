@@ -68,6 +68,54 @@ def form_args(kwargs):
         yield result
 
 
+def test_form_args():
+    od = collections.OrderedDict()
+    od['a'] = [1, 2]
+    od['b'] = [7, 8]
+    assert list(form_args(od)) == [
+        {'a': 1, 'b': 7},
+        {'a': 1, 'b': 8},
+        {'a': 2, 'b': 7},
+        {'a': 2, 'b': 8},
+    ]
+
+    od = collections.OrderedDict()
+    od['b'] = [7, 8]
+    od['a'] = [1, 2]
+    assert list(form_args(od)) == [
+        {'a': 1, 'b': 7},
+        {'a': 2, 'b': 7},
+        {'a': 1, 'b': 8},
+        {'a': 2, 'b': 8},
+    ]
+
+    od = collections.OrderedDict()
+    od['a'] = [1, 2]
+    od['b__c'] = [(7, 77), (8, 88), (9, 99)]
+    assert list(form_args(od)) == [
+        {'a': 1, 'b': 7, 'c': 77},
+        {'a': 1, 'b': 8, 'c': 88},
+        {'a': 1, 'b': 9, 'c': 99},
+        {'a': 2, 'b': 7, 'c': 77},
+        {'a': 2, 'b': 8, 'c': 88},
+        {'a': 2, 'b': 9, 'c': 99},
+    ]
+
+    od = collections.OrderedDict()
+    od['b__c'] = [(7, 77), (8, 88), (9, 99)]
+    od['a'] = [1, 2]
+    assert list(form_args(od)) == [
+        {'a': 1, 'b': 7, 'c': 77},
+        {'a': 2, 'b': 7, 'c': 77},
+        {'a': 1, 'b': 8, 'c': 88},
+        {'a': 2, 'b': 8, 'c': 88},
+        {'a': 1, 'b': 9, 'c': 99},
+        {'a': 2, 'b': 9, 'c': 99},
+    ]
+
+test_form_args()
+
+
 class VariantTask(object):
     def __init__(self):
         self.__TasksList = None
@@ -284,10 +332,15 @@ def no_args(cls):
     return cls
 
 
-def args(**kws):
+def arg(**kws):
     def decorator(cls):
-        assert not hasattr(cls, 'ArgsList')
-        cls.ArgsList = kws
+        assert len(kws) == 1, 'Invalid arg: %r' % kws
+        if hasattr(cls, 'ArgsList'):
+            assert isinstance(cls.ArgsList, collections.OrderedDict), 'Invalid ArgsList: %r' % cls.ArgsList
+        else:
+            cls.ArgsList = collections.OrderedDict()
+        for key, value in kws.iteritems():
+            cls.ArgsList[key] = value
         return cls
 
     return decorator

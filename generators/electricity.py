@@ -27,11 +27,9 @@ log = logging.getLogger(__name__)
         = \\frac{ {value.numerator} }{ {value.denominator} }\\cdot10^{ {power} }\\units{ Н }
           \\approx { {approx:.2f} }\\cdot10^{ {power} }\\units{ Н }
 ''')
-@variant.args(
-    first__second=[(f, s) for f in range(2, 5) for s in range(2, 5) if f != s],
-    letter=['r', 'l', 'd'],
-    distance=[2, 3, 5, 6],
-)
+@variant.arg(first__second=[(f, s) for f in range(2, 5) for s in range(2, 5) if f != s])
+@variant.arg(letter=['r', 'l', 'd'])
+@variant.arg(distance=[2, 3, 5, 6])
 class ForceTask(variant.VariantTask):
     def GetUpdate(self, first=None, second=None, letter=None, distance=None, **kws):
         # answer = kqq/r**2
@@ -71,13 +69,11 @@ class ForceTask(variant.VariantTask):
         = k\\frac{ \\sqr{ \\frac{ ({charges[0]}) + ({charges[1]}) }2 } }{ {letter}^2 },
     \\text{ {res[1]} }.'''
 ])
-@variant.args(
-    first_charge__second_charge=[(fc, sc) for fc in range(2, 6) for sc in range(2, 6) if fc != sc],
-    sign_1=['+', '-'],
-    sign_2=['+', '-'],
-    chargeLetter=['q', 'Q'],
-    letter=['l', 'd', 'r'],
-)
+@variant.arg(first_charge__second_charge=[(fc, sc) for fc in range(2, 6) for sc in range(2, 6) if fc != sc])
+@variant.arg(sign_1=['+', '-'])
+@variant.arg(sign_2=['+', '-'])
+@variant.arg(chargeLetter=['q', 'Q'])
+@variant.arg(letter=['l', 'd', 'r'])
 class ExchangeTask(variant.VariantTask):
     def GetUpdate(self, sign_1=None, sign_2=None, chargeLetter=None, letter=None, first_charge=None, second_charge=None, **kws):
         charges = [
@@ -99,11 +95,9 @@ class ExchangeTask(variant.VariantTask):
     Сделайте рисунок, определите величину напряжённости электрического поля
     в точках ${firstCoords}$ и ${secondCoords}$ и укажите её направление.
 ''')
-@variant.args(
-    firstPoint__secondPoint=itertools.product(['up', 'down'], ['right', 'left']),
-    charges=[['+q', '-q'], ['-q', '-q'], ['+Q', '+Q'], ['-Q', '+Q']],
-    letter=['a', 'l', 'r', 'd'],
-)
+@variant.arg(firstPoint__secondPoint=itertools.product(['up', 'down'], ['right', 'left']))
+@variant.arg(charges=[['+q', '-q'], ['-q', '-q'], ['+Q', '+Q'], ['-Q', '+Q']])
+@variant.arg(letter=['a', 'l', 'r', 'd'])
 class FieldTaskGenerator(variant.VariantTask):
     def GetUpdate(self, firstPoint=None, secondPoint=None, letter='l', **kws):
         coords = {
@@ -128,21 +122,19 @@ class FieldTaskGenerator(variant.VariantTask):
     Сделайте рисунок и вычислите её значение для двух значений угла ${angleLetter}$:
     ${angleLetter}_1={angles[0]}^\\circ$ и ${angleLetter}_2={angles[1]}^\\circ$.
 ''')
-@variant.args(
-    values__angles=[
-        ((120, 50), (90, 180)),
-        ((50, 120), (0, 90)),
-        ((500, 500), (0, 120)),
-        ((200, 200), (0, 60)),
-        ((24, 7), (90, 180)),
-        ((7, 24), (0, 90)),
-        ((72, 72), (0, 120)),
-        ((250, 250), (0, 60)),
-        ((300, 400), (90, 180)),
-        ((300, 400), (0, 90)),
-    ],
-    angleLetter=['\\alpha', '\\varphi'],
-)
+@variant.arg(values__angles=[
+    ((120, 50), (90, 180)),
+    ((50, 120), (0, 90)),
+    ((500, 500), (0, 120)),
+    ((200, 200), (0, 60)),
+    ((24, 7), (90, 180)),
+    ((7, 24), (0, 90)),
+    ((72, 72), (0, 120)),
+    ((250, 250), (0, 60)),
+    ((300, 400), (90, 180)),
+    ((300, 400), (0, 90)),
+])
+@variant.arg(angleLetter=['\\alpha', '\\varphi'])
 class SumTask(variant.VariantTask):
     pass
 
@@ -158,11 +150,9 @@ class SumTask(variant.VariantTask):
         = {E:Value} \\cdot {q:Value} \\cdot {l:Value}
         = {A:.2f} \\cdot 10^{ -7 } \\units{ Дж }
 ''')
-@variant.args(
-    q=[u'%s = %d нКл' % (ql, qv) for ql in ['Q', 'q'] for qv in [-10, 10, -25, 25, -40, 40]],
-    l=[u'%s = %d см' % (ll, lv) for ll in ['l', 'r', 'd'] for lv in [2, 4, 5, 10]],
-    E=[u'E = %d кВ / м' % ev for ev in [2, 4, 20]],
-)
+@variant.arg(q=[u'%s = %d нКл' % (ql, qv) for ql in ['Q', 'q'] for qv in [-10, 10, -25, 25, -40, 40]])
+@variant.arg(l=[u'%s = %d см' % (ll, lv) for ll in ['l', 'r', 'd'] for lv in [2, 4, 5, 10]])
+@variant.arg(E=[u'E = %d кВ / м' % ev for ev in [2, 4, 20]])
 class Potential728(variant.VariantTask):  # 728(737) - Rymkevich
     def GetUpdate(self, l=None, q=None, E=None, **kws):
         return dict(
@@ -175,10 +165,8 @@ class Potential728(variant.VariantTask):  # 728(737) - Rymkevich
     равно ${U.Letter}={U:Value}$. Расстояние между точками ${l.Letter}={l:Value}$.
     Какова напряжённость этого поля?
 ''')
-@variant.args(
-    U=[u'%s = %d кВ' % (ul, uv) for ul in ['U', 'V'] for uv in [2, 3, 4, 5, 6]],
-    l=[u'%s = %d см' % (ll, lv) for ll in ['l', 'r', 'd'] for lv in [10, 20, 30, 40]],
-)
+@variant.arg(U=[u'%s = %d кВ' % (ul, uv) for ul in ['U', 'V'] for uv in [2, 3, 4, 5, 6]])
+@variant.arg(l=[u'%s = %d см' % (ll, lv) for ll in ['l', 'r', 'd'] for lv in [10, 20, 30, 40]])
 class Potential735(variant.VariantTask):  # 735(737) - Rymkevich
     pass
 
@@ -190,11 +178,9 @@ class Potential735(variant.VariantTask):  # 735(737) - Rymkevich
     ${E.Letter}={E:Value}$.
     Потенциал какой из точек $A$ и $B$ больше?
 ''')
-@variant.args(
-    l=[u'%s = %d см' % (ll, lv) for ll in ['l', 'r', 'd'] for lv in [4, 6, 8, 10, 12]],
-    alpha=[u'%s = %d' % (al, av) for al in ['\\alpha', '\\varphi'] for av in [30, 45, 60]],
-    E=[u'E = %d В / м' % ev for ev in [30, 50, 60, 100, 120]],
-)
+@variant.arg(l=[u'%s = %d см' % (ll, lv) for ll in ['l', 'r', 'd'] for lv in [4, 6, 8, 10, 12]])
+@variant.arg(alpha=[u'%s = %d' % (al, av) for al in ['\\alpha', '\\varphi'] for av in [30, 45, 60]])
+@variant.arg(E=[u'E = %d В / м' % ev for ev in [30, 50, 60, 100, 120]])
 class Potential737(variant.VariantTask):  # 737(739) - Rymkevich
     pass
 
@@ -202,9 +188,7 @@ class Potential737(variant.VariantTask):  # 737(739) - Rymkevich
 @variant.text(u'''
     При какой скорости электрона его кинетическая энергия равна $E_\\text{ к } = {E}\\units{ эВ }?$
 ''')
-@variant.args(
-    E=[4, 8, 20, 30, 40, 50, 200, 400, 600, 1000],
-)
+@variant.arg(E=[4, 8, 20, 30, 40, 50, 200, 400, 600, 1000])
 class Potential2335(variant.VariantTask):  # 2335 Gendenshteyn
     pass
 
@@ -215,10 +199,8 @@ class Potential2335(variant.VariantTask):  # 2335 Gendenshteyn
     Будет поле ускорять или тормозить электрон?
     Каков потенциал точки, дойдя до которой электрон остановится?
 ''')
-@variant.args(
-    v=[u'v = %d000000 м / с' % vv for vv in [3, 4, 6, 10, 12]],
-    V=[u'\\varphi = %d В' % Vv for Vv in [200, 400, 600, 800, 1000]],
-)
+@variant.arg(v=[u'v = %d000000 м / с' % vv for vv in [3, 4, 6, 10, 12]])
+@variant.arg(V=[u'\\varphi = %d В' % Vv for Vv in [200, 400, 600, 800, 1000]])
 class Potential1621(variant.VariantTask):  # 1621 Goldfarb
     pass
 
@@ -233,10 +215,8 @@ class Potential1621(variant.VariantTask):  # 1621 Goldfarb
     {C:Letter} = \\frac{Q:Letter:s}{U:Letter:s} = \\frac{Q:Value:s}{U:Value:s} = {C:Value}.
     \\text{ Заряды обкладок: ${Q:Letter}$ и $-{Q:Letter}$ }
 ''')
-@variant.args(
-    U=[u'%s = %d кВ' % (Ul, Uv) for Ul in ['U', 'V'] for Uv in [2, 3, 5, 6, 12, 15, 20]],
-    Q=[u'%s = %d нКл' % (ql, qv) for ql in ['Q', 'q'] for qv in [4, 6, 15, 18, 24, 25]],
-)
+@variant.arg(U=[u'%s = %d кВ' % (Ul, Uv) for Ul in ['U', 'V'] for Uv in [2, 3, 5, 6, 12, 15, 20]])
+@variant.arg(Q=[u'%s = %d нКл' % (ql, qv) for ql in ['Q', 'q'] for qv in [4, 6, 15, 18, 24, 25]])
 class Rymkevich748(variant.VariantTask):
     def GetUpdate(self, U=None, Q=None, **kws):
         return dict(
@@ -252,11 +232,9 @@ class Rymkevich748(variant.VariantTask):
     {Q_new:Letter} = {C:Letter}{U:Letter} = {C:Value} \\cdot {U:Value} = {Q:Value}
     \\implies {Q_new:Letter} {sign} {Q:Letter} \\implies \\text{ {result} }
 ''')
-@variant.args(
-    U=[u'%s = %d кВ' % (Ul, Uv) for Ul in ['U', 'V'] for Uv in [200, 300, 400, 450]],
-    Q=[u'%s = %d нКл' % (Ql, Qv) for Ql in ['Q', 'q'] for Qv in [30, 50, 60]],
-    C=[u'C = %d пФ' % Cv for Cv in [50, 80, 100, 120, 150]],
-)
+@variant.arg(U=[u'%s = %d кВ' % (Ul, Uv) for Ul in ['U', 'V'] for Uv in [200, 300, 400, 450]])
+@variant.arg(Q=[u'%s = %d нКл' % (Ql, Qv) for Ql in ['Q', 'q'] for Qv in [30, 50, 60]])
+@variant.arg(C=[u'C = %d пФ' % Cv for Cv in [50, 80, 100, 120, 150]])
 class Rymkevich750(variant.VariantTask):
     def GetUpdate(self, U=None, Q=None, C=None, **kws):
         resultQ = C.Value * U.Value
@@ -282,10 +260,8 @@ class Rymkevich750(variant.VariantTask):
         = \\frac{ \\eps_0\\eps \\frac S{a} }{ \\frac d{b} } \\Big/ \\frac{ \\eps_0\\eps S }{ d }
         = \\frac{  {b}  }{  {a}  } {sign} 1 \\implies \\text{ {result} }
 ''')
-@variant.args(
-    a=[2, 3, 4, 5, 6, 7, 8],
-    b=[2, 3, 4, 5, 6, 7, 8],
-)
+@variant.arg(a=[2, 3, 4, 5, 6, 7, 8])
+@variant.arg(b=[2, 3, 4, 5, 6, 7, 8])
 class Rymkevich751(variant.VariantTask):
     def GetUpdate(self, a=None, b=None, **kws):
         value = fractions.Fraction(numerator=b, denominator=a)
@@ -317,10 +293,8 @@ class Rymkevich751(variant.VariantTask):
     = \\frac{ \\sqr{Q:Value:s} }{ 2 \\cdot {C:Value} }
     = {W:Value}
 ''')
-@variant.args(
-    Q=[u'%s = %s нКл' % (Ql, Qv) for Ql in ['Q', 'q'] for Qv in [300, 500, 800, 900]],
-    C=[u'С = %s пФ' % Cv for Cv in [200, 400, 600, 750]],
-)
+@variant.arg(Q=[u'%s = %s нКл' % (Ql, Qv) for Ql in ['Q', 'q'] for Qv in [300, 500, 800, 900]])
+@variant.arg(C=[u'С = %s пФ' % Cv for Cv in [200, 400, 600, 750]])
 class Rymkevich762(variant.VariantTask):
     def GetUpdate(self, C=None, Q=None, **kws):
         return dict(
@@ -345,10 +319,8 @@ class Rymkevich762(variant.VariantTask):
          }
         = {Q:Value}
 ''')
-@variant.args(
-    C1__C2=[(u'С_1 = %s нФ' % C1, u'С_2 = %s нФ' % C2) for C1 in [20, 30, 40, 60] for C2 in [20, 30, 40, 60] if C1 != C2],
-    U=[u'%s = %s В' % (Ul, Uv) for  Ul in ['U', 'V'] for Uv in [150, 200, 300, 400, 450]],
-)
+@variant.arg(C1__C2=[(u'С_1 = %s нФ' % C1, u'С_2 = %s нФ' % C2) for C1 in [20, 30, 40, 60] for C2 in [20, 30, 40, 60] if C1 != C2])
+@variant.arg(U=[u'%s = %s В' % (Ul, Uv) for  Ul in ['U', 'V'] for Uv in [150, 200, 300, 400, 450]])
 class Cond1(variant.VariantTask):
     def GetUpdate(self, C1=None, C2=None, U=None, **kws):
         return dict(
@@ -364,10 +336,8 @@ class Cond1(variant.VariantTask):
     u'{I:Letter} &= \\frac{U:Letter:s}{R:Letter:s} = \\frac{U:Value:s}{R:Value:s} = {I:Value}, ',
     u'{P:Letter} &= \\frac{ {U:Letter}^2 }{R:Letter:s} = \\frac{U:Value|sqr|s}{R:Value:s} = {P:Value}',
 ])
-@variant.args(
-    R=[u'%s = %d Ом' % (rLetter, rValue) for rLetter, rValue in itertools.product(['r', 'R'], [5, 12, 18, 30])],
-    U=[u'%s = %d В' % (uLetter, uValue) for uLetter, uValue in itertools.product(['U', 'V'], [120, 150, 180, 240])],
-)
+@variant.arg(R=[u'%s = %d Ом' % (rLetter, rValue) for rLetter, rValue in itertools.product(['r', 'R'], [5, 12, 18, 30])])
+@variant.arg(U=[u'%s = %d В' % (uLetter, uValue) for uLetter, uValue in itertools.product(['U', 'V'], [120, 150, 180, 240])])
 class Rezistor1_v1(variant.VariantTask):
     def GetUpdate(self, R=None, U=None, **kws):
         return dict(
@@ -384,10 +354,8 @@ class Rezistor1_v1(variant.VariantTask):
     u'{U:Letter} &= {I:Letter}{R:Letter} = {I:Value} \\cdot {R:Value} = {U:Value}, ',
     u'{P:Letter} &= {I:Letter}^2{R:Letter} = {I:Value|sqr|cdot} {R:Value} = {P:Value}',
 ])
-@variant.args(
-    R=[u'%s = %d Ом' % (rLetter, rValue) for rLetter, rValue in itertools.product(['r', 'R'], [5, 12, 18, 30])],
-    I=[u'\\mathcal{I} = %.2f А' % iValue for iValue in [2, 3, 4, 5, 6, 8, 10, 15]],
-)
+@variant.arg(R=[u'%s = %d Ом' % (rLetter, rValue) for rLetter, rValue in itertools.product(['r', 'R'], [5, 12, 18, 30])])
+@variant.arg(I=[u'\\mathcal{I} = %.2f А' % iValue for iValue in [2, 3, 4, 5, 6, 8, 10, 15]])
 class Rezistor1_v2(variant.VariantTask):
     def GetUpdate(self, R=None, I=None, U=None, **kws):
         return dict(
@@ -418,12 +386,10 @@ class Rezistor1_v2(variant.VariantTask):
     u'''{eta1:Letter} &= \\frac{Q1:Letter:s}{A1:Letter:s} = \\ldots = \\frac{R:Letter:s}{R:Letter:s} = 1, ''',
     u'''{eta2:Letter} &= \\frac{Q2:Letter:s}{A2:Letter:s} = \\ldots = \\frac{R:Letter:s}{ {R:Letter} + {r:Letter} } = {eta2:Value}''',
 ])
-@variant.args(
-    E=[u'\\mathcal{E} = %d В' % E for E in [1, 2, 3, 4]],
-    R=[u'R = %d Ом' % R for R in [10, 15, 24, 30]],
-    r=[u'r = %d Ом' % r for r in [10, 20, 30, 60]],
-    t=[u'\\tau = %d с' % t for t in [2, 5, 10]],
-)
+@variant.arg(E=[u'\\mathcal{E} = %d В' % E for E in [1, 2, 3, 4]])
+@variant.arg(R=[u'R = %d Ом' % R for R in [10, 15, 24, 30]])
+@variant.arg(r=[u'r = %d Ом' % r for r in [10, 20, 30, 60]])
+@variant.arg(t=[u'\\tau = %d с' % t for t in [2, 5, 10]])
 class Rezistor2(variant.VariantTask):
     def GetUpdate(self, r=None, R=None, E=None, t=None, **kws):
         I1 = UnitValue(u'\\mathcal{I}_1 = %.2f А' % (1. * E.Value / R.Value))
@@ -475,17 +441,15 @@ class Rezistor2(variant.VariantTask):
         = \\frac{R2:Letter|sqrt|s}{ {R2:Letter|sqrt} + {R1:Letter|sqrt} }
         = {eta2:Value}''',
 ])
-@variant.args(
-    R1__R2=[(u'R_1 = %.2f Ом' % R_1, u'R_2 = %.2f Ом' % R_2) for R_1, R_2 in [
-        (0.25, 16), (0.25, 64), (0.25, 4),
-        (0.5, 18),  (0.5, 2),   (0.5, 4.5),
-        (1, 4),     (1, 9),     (1, 49),
-        (3, 12),    (3, 48),
-        (4, 36),    (4, 100),
-        (5, 45),    (5, 80),
-        (6, 24),    (6, 54),
-    ]],
-)
+@variant.arg(R1__R2=[(u'R_1 = %.2f Ом' % R_1, u'R_2 = %.2f Ом' % R_2) for R_1, R_2 in [
+    (0.25, 16), (0.25, 64), (0.25, 4),
+    (0.5, 18),  (0.5, 2),   (0.5, 4.5),
+    (1, 4),     (1, 9),     (1, 49),
+    (3, 12),    (3, 48),
+    (4, 36),    (4, 100),
+    (5, 45),    (5, 80),
+    (6, 24),    (6, 54),
+]])
 class Rezistor3(variant.VariantTask):
     def GetUpdate(self, R1=None, R2=None, **kws):
         r = UnitValue(u'r = %.2f Ом' % ((1. * R1.Value * R2.Value) ** 0.5))
@@ -503,12 +467,10 @@ class Rezistor3(variant.VariantTask):
     Определите ток, протекающий через резистор {R:Task:e} и разность потенциалов на нём (см. рис. на доске),
     если {r1:Task:e}, {r2:Task:e}, {E1:Task:e}, {E2:Task:e}
 ''')
-@variant.args(
-    R=[u'R = %d Ом' % RValue for RValue in [10, 12, 15, 18, 20]],
-    r1=[u'r_1 = %d Ом' % r1Value for r1Value in [1, 2, 3]],
-    r2=[u'r_2 = %d Ом' % r2Value for r2Value in [1, 2, 3]],
-    E1=[u'\\mathcal{E}_1 = %d В' % E1Value for E1Value in [20, 30, 40, 60]],
-    E2=[u'\\mathcal{E}_2 = %d В' % E2Value for E2Value in [20, 30, 40, 60]],
-)
+@variant.arg(R=[u'R = %d Ом' % RValue for RValue in [10, 12, 15, 18, 20]])
+@variant.arg(r1=[u'r_1 = %d Ом' % r1Value for r1Value in [1, 2, 3]])
+@variant.arg(r2=[u'r_2 = %d Ом' % r2Value for r2Value in [1, 2, 3]])
+@variant.arg(E1=[u'\\mathcal{E}_1 = %d В' % E1Value for E1Value in [20, 30, 40, 60]])
+@variant.arg(E2=[u'\\mathcal{E}_2 = %d В' % E2Value for E2Value in [20, 30, 40, 60]])
 class Rezistor4(variant.VariantTask):
     pass

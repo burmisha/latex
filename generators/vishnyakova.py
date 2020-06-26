@@ -27,11 +27,9 @@ log = logging.getLogger(__name__)
             \\approx {E_kin:.3f}.
     ''',
 ])
-@variant.args(
-    what=[u'Протон', u'Позитрон'],
-    energy=[u'полной энергии частицы $E$', u'кинетической энергии частицы $E_{ \\text{ кин } }$'],
-    percent=['9', '8', '7', '6'],
-)
+@variant.arg(what=[u'Протон', u'Позитрон'])
+@variant.arg(energy=[u'полной энергии частицы $E$', u'кинетической энергии частицы $E_{ \\text{ кин } }$'])
+@variant.arg(percent=['9', '8', '7', '6'])
 class BK_4_01(variant.VariantTask):
     def GetUpdate(self, energy=None, percent=None, **kws):
         share = float('0.' + percent)
@@ -65,11 +63,9 @@ class BK_4_01(variant.VariantTask):
         \\approx {p:Value}.
     '''
 ])
-@variant.args(
-    what=[u'Протон', u'Электрон'],
-    x=[u'полную энергию', u'кинетическую энергию', u'импульс'],
-    percent=['85', '75', '65'],
-)
+@variant.arg(what=[u'Протон', u'Электрон'])
+@variant.arg(x=[u'полную энергию', u'кинетическую энергию', u'импульс'])
+@variant.arg(percent=['85', '75', '65'])
 class BK_4_03(variant.VariantTask):
     def GetUpdate(self, what=None, percent=None, Consts=None, **kws):
         m = {
@@ -113,10 +109,8 @@ class BK_4_03(variant.VariantTask):
     \\approx {speed:Value}
     \\approx {kmch:Value}.''',
 ])
-@variant.args(
-    what=[u'км/ч', u'м/с', u'долях скорости света'],
-    percent=['50', '30', '10'],
-)
+@variant.arg(what=[u'км/ч', u'м/с', u'долях скорости света'])
+@variant.arg(percent=['50', '30', '10'])
 class BK_4_06(variant.VariantTask):
     def GetUpdate(self, percent=None, Consts=None, **kws):
         share = float('0.' + percent)
@@ -141,9 +135,7 @@ class BK_4_06(variant.VariantTask):
         = \\frac{ {Consts.h:Value|cdot}{Consts.c:Value|s} }{E:Value|s}
         = {lmbd:Value}.
 ''')
-@variant.args(
-    E=[u'E = %s 10^{-19} Дж' % E for E in [u'4.04', u'5.05', u'2.02', u'7.07', u'1.01', u'0.55']],
-)
+@variant.arg(E=[u'E = %s 10^{-19} Дж' % E for E in [u'4.04', u'5.05', u'2.02', u'7.07', u'1.01', u'0.55']])
 class BK_52_01(variant.VariantTask):
     def GetUpdate(self, E=None, Consts=None, **kws):
         return dict(
@@ -165,9 +157,7 @@ class BK_52_01(variant.VariantTask):
         = \\frac{ {Consts.h:Value|cdot}{Consts.c:Value|s} }{E:Value|s}
         = {lmbd:Value}.
 ''')
-@variant.args(
-    E=[u'E = %d 10^{-19} Дж' % E for E in [2, 3, 4, 6]],
-)
+@variant.arg(E=[u'E = %d 10^{-19} Дж' % E for E in [2, 3, 4, 6]])
 class BK_52_02(variant.VariantTask):
     def GetUpdate(self, E=None, Consts=None, **kws):
         return dict(
@@ -188,18 +178,16 @@ class BK_52_02(variant.VariantTask):
     при каком переходе (среди отмеченных) {what} излучённого фотона {minmax}.
 ''')
 @variant.answer_short(u'N = {N}, \\text{ {answer} }')
-@variant.args(
-    n=[3, 4, 5],
-    what__what_sign=[
-        (u'энергия', 1),
-        (u'частота', 1),
-        (u'длина волны', -1),
-    ],
-    minmax__minmax_sign=[
-        (u'минимальна', -1),
-        (u'максимальна', 1),
-    ],
-)
+@variant.arg(n=[3, 4, 5])
+@variant.arg(what__what_sign=[
+    (u'энергия', 1),
+    (u'частота', 1),
+    (u'длина волны', -1),
+])
+@variant.arg(minmax__minmax_sign=[
+    (u'минимальна', -1),
+    (u'максимальна', 1),
+])
 class BK_52_07(variant.VariantTask):
     def GetUpdate(self, n=None, what=None, minmax=None, what_sign=None, minmax_sign=None, **kws):
         answer = {
@@ -226,14 +214,12 @@ class BK_52_07(variant.VariantTask):
     \\frac { N_\\text{ расп. } }{ N_0 } = 1 - 2^{ - \\frac t{ T_{ 1/2 } } }
     = 1 - 2^{ -{t} } \\approx {N_left_value:.2f} \\approx {N_left_percent:.0f}\\%''',
 ])
-@variant.args(
-    what=[u'распадётся', u'останется'],
-    when__t=[
-        (u'двум', 2),
-        (u'трём', 3),
-        (u'четырём', 4),
-    ],
-)
+@variant.arg(what=[u'распадётся', u'останется'])
+@variant.arg(when__t=[
+    (u'двум', 2),
+    (u'трём', 3),
+    (u'четырём', 4),
+])
 class BK_53_01(variant.VariantTask):
     def GetUpdate(self, what=None, when=None, t=None, **kws):
         share = 2. ** (-t)
@@ -257,10 +243,8 @@ class BK_53_01(variant.VariantTask):
     = 2^{ - \\frac {t:Value|s}{T:Value|s} }
     \\approx {share} \\approx {percent}\\%''',
 ])
-@variant.args(
-    t=[u't = %s суток' % t for t in [u'91.2', u'136.8', u'182.4']],
-    T=[u'T = 45.6 суток'],
-)
+@variant.arg(t=[u't = %s суток' % t for t in [u'91.2', u'136.8', u'182.4']])
+@variant.arg(T=[u'T = 45.6 суток'])
 class BK_53_02(variant.VariantTask):
     def GetUpdate(self, t=None, T=None, **kws):
         share = 2. ** (-t.Value / T.Value)
@@ -291,15 +275,13 @@ class BK_53_02(variant.VariantTask):
         = \\frac 1{ {num} }\\cdot \\cbr{ 1 - \\frac 1{ {num} } } \\approx {res:.3f}
     ''',
 ])
-@variant.args(
-    how__num__log_num=[
-        (u'четверть', 4, 2),
-        (u'одна восьмая', 8, 3),
-        (u'половина', 2, 1),
-        (u'одна шестнадцатая', 16, 4),
-    ],
-    t=[u'%d суток' % t for t in [2, 3, 4, 5]],
-)
+@variant.arg(how__num__log_num=[
+    (u'четверть', 4, 2),
+    (u'одна восьмая', 8, 3),
+    (u'половина', 2, 1),
+    (u'одна шестнадцатая', 16, 4),
+])
+@variant.arg(t=[u'%d суток' % t for t in [2, 3, 4, 5]])
 class BK_53_03(variant.VariantTask):
     def GetUpdate(self, how=None, t=None, num=None, log_num=None, **kws):
         return dict(
@@ -320,27 +302,24 @@ class BK_53_03(variant.VariantTask):
         = \\frac{ {eV} \\cdot 10^6 \\cdot {Consts.eV:Value} }{Consts.c:Value|sqr|s}
         \\approx {dm:Value} \\approx {aem:Value}''',
 ])
-@variant.args(
-    # https://www.calc.ru/Energiya-Svyazi-Nekotorykh-Yader.html
-    element__E=[
-        (u'дейтерия \\ce{^{2}_{1}H} (D)', u'E = 2.22 МэВ'),
-        (u'трития \\ce{^{3}_{1}H} (T)', u'E = 8.48 МэВ'),
-        (u'гелия \\ce{^{3}_{2}He}', u'E = 7.72 МэВ'),
-        (u'гелия \\ce{^{3}_{2}He}', u'E = 28.29 МэВ'),
-        (u'лития \\ce{^{6}_{3}Li}', u'E = 31.99 МэВ'),
-        (u'лития \\ce{^{7}_{3}Li}', u'E = 39.2 МэВ'),
-        (u'бериллия \\ce{^{9}_{4}Be}', u'E = 58.2 МэВ'),
-        (u'бора \\ce{^{10}_{5}B}', u'E = 64.7 МэВ'),
-        (u'бора \\ce{^{11}_{5}B}', u'E = 76.2 МэВ'),
-        (u'углерода \\ce{^{12}_{6}C}', u'E = 92.2 МэВ'),
-        (u'углерода \\ce{^{13}_{6}C}', u'E = 97.1 МэВ'),
-        (u'азота \\ce{^{14}_{7}N}', u'E = 104.7 МэВ'),
-        (u'азота \\ce{^{14}_{7}N}', u'E = 115.5 МэВ'),
-        (u'кислорода \\ce{^{16}_{8}O}', u'E = 127.6 МэВ'),
-        (u'кислорода \\ce{^{17}_{8}O}', u'E = 131.8 МэВ'),
-        (u'кислорода \\ce{^{18}_{8}O}', u'E = 139.8 МэВ'),
-    ],
-)
+@variant.arg(element__E=[  # https://www.calc.ru/Energiya-Svyazi-Nekotorykh-Yader.html
+    (u'дейтерия \\ce{^{2}_{1}H} (D)', u'E = 2.22 МэВ'),
+    (u'трития \\ce{^{3}_{1}H} (T)', u'E = 8.48 МэВ'),
+    (u'гелия \\ce{^{3}_{2}He}', u'E = 7.72 МэВ'),
+    (u'гелия \\ce{^{3}_{2}He}', u'E = 28.29 МэВ'),
+    (u'лития \\ce{^{6}_{3}Li}', u'E = 31.99 МэВ'),
+    (u'лития \\ce{^{7}_{3}Li}', u'E = 39.2 МэВ'),
+    (u'бериллия \\ce{^{9}_{4}Be}', u'E = 58.2 МэВ'),
+    (u'бора \\ce{^{10}_{5}B}', u'E = 64.7 МэВ'),
+    (u'бора \\ce{^{11}_{5}B}', u'E = 76.2 МэВ'),
+    (u'углерода \\ce{^{12}_{6}C}', u'E = 92.2 МэВ'),
+    (u'углерода \\ce{^{13}_{6}C}', u'E = 97.1 МэВ'),
+    (u'азота \\ce{^{14}_{7}N}', u'E = 104.7 МэВ'),
+    (u'азота \\ce{^{14}_{7}N}', u'E = 115.5 МэВ'),
+    (u'кислорода \\ce{^{16}_{8}O}', u'E = 127.6 МэВ'),
+    (u'кислорода \\ce{^{17}_{8}O}', u'E = 131.8 МэВ'),
+    (u'кислорода \\ce{^{18}_{8}O}', u'E = 139.8 МэВ'),
+])
 class BK_53_12(variant.VariantTask):
     def GetUpdate(self, E=None, Consts=None, **kws):
         dm = E.Other(Consts.e, action='mult', precisionInc=1).Other(Consts.c, action='div').Other(Consts.c, action='div', units=u'кг')

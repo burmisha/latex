@@ -19,9 +19,7 @@ log = logging.getLogger(__name__)
         = \\frac {Q:Value:s}{lmbd:Value:s}
         \\approx {m:Value}
 ''')
-@variant.args(
-    Q=[u'Q = %d МДж' % Q for Q in [2, 3, 4, 5, 6, 7, 8, 9]],
-)
+@variant.arg(Q=[u'Q = %d МДж' % Q for Q in [2, 3, 4, 5, 6, 7, 8, 9]])
 class Ch_8_6(variant.VariantTask):
     def GetUpdate(self, Q=None, **kws):
         lmbd = Consts.water.lmbd
@@ -40,15 +38,13 @@ class Ch_8_6(variant.VariantTask):
         = - {lmbd:Value} \\cdot {m:Value}
         = - {Q:Value} \\implies \\abs{ Q } = {Q:Value}
 ''')
-@variant.args(
-    metall__lmbd=[
-        (u'свинца', Consts.lead.lmbd),
-        (u'меди', Consts.copper.lmbd),
-        (u'алюминия', Consts.aluminum.lmbd),
-        (u'стали', Consts.steel.lmbd),
-    ],
-    m=[u'm = %d кг' % m for m in [15, 20, 25, 30, 50, 75]],
-)
+@variant.arg(metall__lmbd=[
+    (u'свинца', Consts.lead.lmbd),
+    (u'меди', Consts.copper.lmbd),
+    (u'алюминия', Consts.aluminum.lmbd),
+    (u'стали', Consts.steel.lmbd),
+])
+@variant.arg(m=[u'm = %d кг' % m for m in [15, 20, 25, 30, 50, 75]])
 class Ch_8_7(variant.VariantTask):
     def GetUpdate(self, m=None, metall=None, lmbd=None, **kws):
         return dict(
@@ -67,10 +63,8 @@ class Ch_8_7(variant.VariantTask):
         = {m:Value} \\cdot \\cbr{ {c:Value}\\cbr{ 100\\celsius - {t}\\celsius } + {L:Value} }
         = {Q:Value}
 ''')
-@variant.args(
-    m=[u'm = %d кг' % m for m in [2, 3, 4, 5, 15]],
-    t=[20, 30, 40, 50, 60, 70],
-)
+@variant.arg(m=[u'm = %d кг' % m for m in [2, 3, 4, 5, 15]])
+@variant.arg(t=[20, 30, 40, 50, 60, 70])
 class Ch_8_10(variant.VariantTask):
     def GetUpdate(self, m=None, t=None, **kws):
         c = Consts.water.c
@@ -95,10 +89,8 @@ class Ch_8_10(variant.VariantTask):
         = \\frac {Q:Value:s}{ {c:Value}\\cbr{ 100\\celsius - {t}\\celsius } + {L:Value} }
         \\approx {m:Value}
 ''')
-@variant.args(
-     Q=[u'Q = %d кДж' % Q for Q in [2000, 2500, 4000, 5000]],
-     t=[10, 30, 40, 50, 60, 70],
-)
+@variant.arg(Q=[u'Q = %d кДж' % Q for Q in [2000, 2500, 4000, 5000]])
+@variant.arg(t=[10, 30, 40, 50, 60, 70])
 class Ch_8_13(variant.VariantTask):
     def GetUpdate(self, Q=None, t=None, **kws):
         c =  Consts.water.c
@@ -127,15 +119,13 @@ class Ch_8_13(variant.VariantTask):
         = \\frac{ {c1:Value|cdot} {t1}\\celsius + {c2:Value|cdot} {t2}\\celsius }{ {c1:Value} + {c2:Value} }
         \\approx {theta} \\celsius.''',
 ])
-@variant.args(
-    metall__c=[
-        (u'Стальное', Consts.steel.c),
-        (u'Алюминиевое', Consts.aluminum.c),
-        (u'Цинковое', Consts.zinc.c),
-    ],
-    T=[70, 80, 90, 100],
-    t=[10, 20, 30],
-)
+@variant.arg(metall__c=[
+    (u'Стальное', Consts.steel.c),
+    (u'Алюминиевое', Consts.aluminum.c),
+    (u'Цинковое', Consts.zinc.c),
+])
+@variant.arg(T=[70, 80, 90, 100])
+@variant.arg(t=[10, 20, 30])
 class Ch_8_35(variant.VariantTask):
     def GetUpdate(self, metall=None, T=None, t=None, c=None, **kws):
         c_water = Consts.water.c
