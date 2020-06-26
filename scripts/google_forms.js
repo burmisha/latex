@@ -1,3 +1,5 @@
+// https://script.google.com/home
+// https://developers.google.com/apps-script/overview
 // https://developers.google.com/apps-script/reference/forms
 function newSimpleForm() {
     var form = FormApp.create('2020.06.27 Математический марафон');
