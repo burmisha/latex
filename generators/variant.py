@@ -243,7 +243,7 @@ class MultiplePaper(object):
             pupilTasks = list(variants.GetPupilTasks(pupil))
             for index, task in enumerate(pupilTasks, 1):
                 pupilTasksTex.append(u'')
-                pupilTasksTex.append(u'\\tasknumber{%d}' % index)
+                pupilTasksTex.append(u'\\tasknumber{%d}%%' % index)
                 pupilTasksTex.append(task.GetTex().strip())
                 if index != len(pupilTasks):
                     pupilTasksTex.append(u'\\solutionspace{%dpt}' % task.GetSolutionSpace())

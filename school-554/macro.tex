@@ -19,7 +19,7 @@
 
 \newcommand\vect[1]{\overrightarrow{#1}}
 
-\newcommand\problem[1]{{\fbox{\bfseries{#1}}}}
+\newcommand\problem[1]{\smallskip\par\noindent\hskip0mm\llap{\fbox{\bfseries{#1}}\kern.3em}}  % ium
 \newcommand\tasknumber[1]{{\problem{#1}}}
 \newcommand\starnumber[1]{{\problem{#1${}^\text{*}$}}}
 
@@ -79,12 +79,13 @@
     \taskname{#1}{#2}
 }
 
-\newcommand\task[1]{
-    #1
+\newcommand\task[1]{%
+    #1%
 }
 
 \newcommand{\answer}[1]{
-    \\ {\itshape{Указание:}} #1
+\par
+{\itshape{Указание:}} #1
 }
 
 \newcommand\solutionspace[1]{}
@@ -111,9 +112,9 @@
     % \usepackage{beton}
     \oddsidemargin=1cm
     \evensidemargin=1cm
-    \textheight=29cm % высота текста
+    \textheight=28cm % высота текста
     \textwidth=13cm % ширина текста
-    \topmargin=-1.5cm % отступ от верхнего края
+    \topmargin=-2.5cm % отступ от верхнего края
     \parskip=2pt % интервал между абзацами
 
     \def\baselinestretch{1.25}

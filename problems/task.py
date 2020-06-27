@@ -6,7 +6,7 @@ log = logging.getLogger('task')
 DEFAULT_SOLUTION_SPACE = 120
 
 TASK_TEMPLATE = u'''
-\\{}{{
+\\{}{{%
 {}
 }}
 '''
