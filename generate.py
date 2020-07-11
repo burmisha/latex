@@ -366,6 +366,9 @@ def CreateArgumentsParser():
     reshuegeParser = subparsers.add_parser('reshu-ege', help='Reshu EGE')
     tools.reshuege.populate_parser(reshuegeParser)
 
+    znaniumParser = subparsers.add_parser('znanium', help='Snanium')
+    tools.znanium.populate_parser(znaniumParser)
+
     convertParser = subparsers.add_parser('convert', help='Convert into smth')
     convertParser.add_argument('--remove-strange-files', help='Remove strange files', action='store_true')
     convertParser.set_defaults(func=runConvert)
