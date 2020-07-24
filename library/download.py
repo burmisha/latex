@@ -281,6 +281,7 @@ class YoutubeDownloader(object):
                 time.sleep(self.SleepTime)
         log.info('Streams: %r', video.streams)
         bestStream = video.getbest(preftype=preftype)
+        log.debug('Best stream: %r', bestStream)
         return bestStream
 
 
@@ -314,12 +315,13 @@ class GetAClass(object):
             ('https://www.youtube.com/watch?v=OHCobJjMHuM', u'Творческая дистанционка от Димы Зицера - 2020-03-20'),
             ('https://www.youtube.com/watch?v=dSVdjmabpgg', u'HBO - Welcome to Chechnya - 2020'),
             ('https://www.youtube.com/watch?v=lYTdewh-dhY', u'Открытая Россия - Семья - Фильм о Рамзане Кадырове - 2015'),
+            ('https://www.youtube.com/watch?v=2nTmeuXQT5w', u'2020 - Математический марафон'),
         ]:
             dstFile = os.path.join(path, u'GetAClass', u'%s.mp4' % name)
             if os.path.exists(dstFile):
-                log.debug('Skipping %s as %s exists', url, name)
+                log.info('Skipping %s as "%s" exists', url, name)
             else:
-                log.info('Downloading %s to %s', url, dstFile)
+                log.info('Downloading %s to "%s"', url, dstFile)
                 bestStream = self.YoutubeDownloader.GetBestStream(url, preftype='mp4')
                 bestStream.download(filepath=dstFile)
 
@@ -359,7 +361,7 @@ class Gorbushin(object):
         ]:
             dstFile = os.path.join(path, u'Горбушин', u'%s.mp4' % name)
             if os.path.exists(dstFile):
-                log.info('Skipping %s', name)
+                log.info('Skipping %s as "%s" exists', name, dstFile)
             else:
                 log.info('Downloading %s to %s', url, dstFile)
                 bestStream = self.YoutubeDownloader.GetBestStream(url)
