@@ -28,6 +28,7 @@ $("span:contains('Источник: Досрочный')").remove();
 $("span:contains('Источник: Демо')").remove();
 $("span:contains('Источник: Тренировочная работа по физике')").remove();
 $("span:contains('Источник: ЕГЭ')").remove();
+$("span:contains('Источник: ГИА')").remove();
 $("span:contains('Источник: РЕШУ')").remove();
 $("span:contains('Источник: Яндекс')").remove();
 $("a:contains('Пройти тестирование по этим заданиям')").remove();
@@ -213,6 +214,7 @@ class SdamGia(object):
 def run(args):
     for subject, link, count in [
         (u'Физика', 'https://phys-ege.sdamgia.ru', 32),
+        (u'Физика-ОГЭ', 'https://phys-oge.sdamgia.ru', 25),
         # (u'Химия', 'https://geo-ege.sdamgia.ru', 34),
         # (u'География', 'https://chem-ege.sdamgia.ru', 35),
     ]:
