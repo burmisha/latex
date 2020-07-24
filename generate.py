@@ -112,6 +112,10 @@ def runConvert(args):
             pdfPath=booksPath(u'МГУ', u'Вишнякова - Физика - сборник задач к ЕГЭ - 2015.pdf'),
             dstPath=booksPath(u'МГУ', u'Вишнякова - Физика - сборник задач к ЕГЭ - 2015'),
         ),
+        library.convert.Baumansky(
+            pdfPath=booksPath(u'Сборники', u'Бауманский - 2000 - Васюков.pdf'),
+            dstPath=booksPath(u'Сборники', u'Бауманский - 2000 - Васюков'),
+        ),
     ]
     for book in books:
         book.Save(overwrite=False)
@@ -330,7 +334,7 @@ def CreateArgumentsParser():
     defaultLogFormat = ' '.join([
         # '%(relativeCreated)d',
         '%(asctime)s.%(msecs)03d',
-        # '%(name)15s:%(lineno)-4d',
+        '%(name)15s:%(lineno)-4d',
         '%(levelname)-7s',
         '%(message)s',
     ])
@@ -366,7 +370,7 @@ def CreateArgumentsParser():
     reshuegeParser = subparsers.add_parser('reshu-ege', help='Reshu EGE')
     tools.reshuege.populate_parser(reshuegeParser)
 
-    znaniumParser = subparsers.add_parser('znanium', help='Snanium')
+    znaniumParser = subparsers.add_parser('znanium', help='Znanium')
     tools.znanium.populate_parser(znaniumParser)
 
     convertParser = subparsers.add_parser('convert', help='Convert into smth')
