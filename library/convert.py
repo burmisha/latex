@@ -176,7 +176,7 @@ class ChernoutsanBook(PdfBook):
         return TwoDStructure([
             (u'Кинематика', [
                 (u'Примеры решения', 6, 25),
-                (u'Перемещение, путь равномерное движение', 26, 16),
+                (u'Перемещение, путь равномерное движение', 16, 16),
                 (u'Относительность движения, сложение скоростей', 26, 27),
                 (u'Средняя скорость', 27, 28),
                 (u'Равноускоренное движение', 28, 29),
@@ -828,6 +828,10 @@ class TwoDStructure(object):
             dirName = u'%02d %s' % (chapterIndex, chapterName)
             hasDigit = all(part[0].isdigit() for part, _, _ in parts)
             for partIndex, (partName, first, last) in enumerate(parts, self.SecondLevelStartIndex):
+                if first > last:
+                    log.error('Error in book config for %r, %r', first, last)
+                    raise RuntimeError('Broken pages range')
+
                 for pageNumber in range(first, last + 1):
                     if hasDigit:
                         nameTemplate = u'%s' % partName
@@ -844,6 +848,9 @@ class OneDStructure(object):
     def __call__(self):
         for index, (name, first, last) in enumerate(self.Data, self.StartIndex):
             dirName = u'%02d %s' % (index, name)
+            if first > last:
+                log.error('Error in book config for %r, %r', first, last)
+                raise RuntimeError('Broken pages range')
             for pageNumber in range(first, last):
                 yield pageNumber, dirName, '%02d %s' % (index, name)
 
@@ -852,8 +859,8 @@ class OneDStructure(object):
 class Gorbushin(PdfBook):
     def GetStructure(self):
         return OneDStructure([
-            (u'Кинематика-1', 10, 12),
-            (u'Кинематика-2', 14, 17),
+            (u'Кинематика-1', 10, 13),
+            (u'Кинематика-2', 14, 18),
             (u'Динамика-1', 25, 28),
             (u'Динамика-2', 30, 30),
             (u'Законы сохранения', 34, 36),
@@ -890,14 +897,14 @@ class Vishnyakova(PdfBook):
             (u'Механика', [
                 (u'1.1 - Кинематика', 7, 18),
                 (u'1.1 - Кинематика - УК', 199, 204),
-                (u'1.1 - Динамика', 19, 20),
-                (u'1.1 - Динамика - УК', 199, 204),
-                (u'1.2 - Статика', 31, 41),
-                (u'1.2 - Статика - УК', 205, 210),
-                (u'1.3 - Законы сохранения', 42, 52),
-                (u'1.3 - Законы сохранения - УК', 219, 227),
-                (u'1.4 - Колебания и волны', 53, 64),
-                (u'1.4 - Колебания и волны - УК', 228, 232),
+                (u'1.2 - Динамика', 19, 30),
+                (u'1.2 - Динамика - УК', 199, 204),
+                (u'1.3 - Статика', 31, 41),
+                (u'1.3 - Статика - УК', 205, 210),
+                (u'1.4 - Законы сохранения', 42, 52),
+                (u'1.4 - Законы сохранения - УК', 219, 227),
+                (u'1.5 - Колебания и волны', 53, 64),
+                (u'1.5 - Колебания и волны - УК', 228, 232),
             ]),
             (u'Молекулярная физика и термодинамика', [
                 (u'2.1 - Молекулярная физика', 65, 79),
@@ -916,7 +923,7 @@ class Vishnyakova(PdfBook):
                 (u'3.4 - Электромагнитная индукция - УК', 267, 271),
                 (u'3.5 - Электромагнитные колебания и волны', 142, 155),
                 (u'3.5 - Электромагнитные колебания и волны - УК', 272, 276),
-                (u'3.6 - Оптика', 156, 89),
+                (u'3.6 - Оптика', 156, 174),
                 (u'3.6 - Оптика - УК', 277, 286),
             ]),
             (u'Основы специальной теории относительности', [
