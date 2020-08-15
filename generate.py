@@ -39,6 +39,8 @@ def runDownload(args):
     for videoDownloader in [
         library.download.GetAClass(),
         library.download.Gorbushin(),
+        library.download.CrashCoursePhysics(),
+        library.download.Foxford(),
     ]:
         videoDownloader.Download(library.files.udrPath(u'Видео'))
 

@@ -285,10 +285,7 @@ class YoutubeDownloader(object):
         return bestStream
 
 
-class GetAClass(object):
-    def __init__(self):
-        self.YoutubeDownloader = YoutubeDownloader()
-
+class GetAClass(YoutubeDownloader):
     def Download(self, path):
         for url, name in [
             ('https://www.youtube.com/watch?v=8yXf4Gawl4w', u'8 - 01 - Действия электрического тока'),
@@ -314,7 +311,7 @@ class GetAClass(object):
             ('https://www.youtube.com/watch?v=p15KNqWUZ-c', u'Сергей Гуриев - Экономика красоты и счастья - 2012'),
             ('https://www.youtube.com/watch?v=OHCobJjMHuM', u'Творческая дистанционка от Димы Зицера - 2020-03-20'),
             ('https://www.youtube.com/watch?v=dSVdjmabpgg', u'HBO - Welcome to Chechnya - 2020'),
-            ('https://www.youtube.com/watch?v=lYTdewh-dhY', u'Открытая Россия - Семья - Фильм о Рамзане Кадырове - 2015'),
+            # ('https://www.youtube.com/watch?v=lYTdewh-dhY', u'Открытая Россия - Семья - Фильм о Рамзане Кадырове - 2015'),
             ('https://www.youtube.com/watch?v=2nTmeuXQT5w', u'2020 - Математический марафон'),
         ]:
             dstFile = os.path.join(path, u'GetAClass', u'%s.mp4' % name)
@@ -322,14 +319,145 @@ class GetAClass(object):
                 log.info('Skipping %s as "%s" exists', url, name)
             else:
                 log.info('Downloading %s to "%s"', url, dstFile)
-                bestStream = self.YoutubeDownloader.GetBestStream(url, preftype='mp4')
+                bestStream = self.GetBestStream(url, preftype='mp4')
                 bestStream.download(filepath=dstFile)
 
 
-class Gorbushin(object):
-    def __init__(self):
-        self.YoutubeDownloader = YoutubeDownloader()
+class Foxford(YoutubeDownloader):
+    def Download(self, path):
+        log.info('Downloading playlist https://www.youtube.com/playlist?list=PL66kIi3dt8A6Hd7soGMFXe6E5366Y66So')
+        for url, name in [
+            ('https://www.youtube.com/watch?v=iWr6U3-rynQ', u'Кинематика - Плоское движение точек твердого тела'),
+            ('https://www.youtube.com/watch?v=W6zOwbHkA8g', u'Термодинамика - Адиабатный процесс'),
+            ('https://www.youtube.com/watch?v=RXvNehmSfl8', u'Статика - Условия равновесия тела'),
+            ('https://www.youtube.com/watch?v=YPTGHZZ6H0I', u'Термодинамика - Теплоёмкость'),
+            ('https://www.youtube.com/watch?v=7ZpPP_LZYNM', u'Термодинамика - Молярная теплоёмкость'),
+            ('https://www.youtube.com/watch?v=b_LlqXeABQU', u'Термодинамика - Удельная теплоёмкость'),
+            ('https://www.youtube.com/watch?v=KAcCPNDmRe8', u'Статика - Момент силы'),
+            ('https://www.youtube.com/watch?v=0hFWeR8ybxs', u'Последовательное и параллельное соединение проводников'),
+            ('https://www.youtube.com/watch?v=vUkOstwz1kA', u'Постоянный ток - Закон Ома для участка цепи'),
+            ('https://www.youtube.com/watch?v=487Z6jJVngQ', u'Постоянный ток - Электрическое сопротивление проводника'),
+            ('https://www.youtube.com/watch?v=frJYMkK6lFk', u'Постоянный ток - Напряжение'),
+            ('https://www.youtube.com/watch?v=At9OP9pQqCE', u'Постоянный ток - Сила тока'),
+            ('https://www.youtube.com/watch?v=Hp3dJNEXW00', u'Постоянный ток - Электрический ток'),
+            ('https://www.youtube.com/watch?v=hxfowwBlDWg', u'Термодинамика - Количество теплоты'),
+            ('https://www.youtube.com/watch?v=2QrBqGvGCKA', u'Термодинамика - Циклические процессы'),
+            ('https://www.youtube.com/watch?v=iDDGCf9eyes', u'Термодинамика - Тепловые машины'),
+            ('https://www.youtube.com/watch?v=piKLPtzJ1sk', u'МКТ - Графики газовых процессов'),
+            ('https://www.youtube.com/watch?v=emwG8AVHciM', u'МКТ - Основные термодинамические процессы'),
+            ('https://www.youtube.com/watch?v=ewDWrUCY8sk', u'Геометрическая оптика - Скорость света'),
+            ('https://www.youtube.com/watch?v=tEfEaBmYPrI', u'Геометрическая оптика - Плоское зеркало'),
+            ('https://www.youtube.com/watch?v=lrBE5EHwbqg', u'Кинематика - Относительность механического движения'),
+            ('https://www.youtube.com/watch?v=cMBrpdpOAfU', u'Геометрическая оптика - Законы преломления'),
+            ('https://www.youtube.com/watch?v=AuqJHgDFJmY', u'Геометрическая оптика - Законы отражения'),
+            ('https://www.youtube.com/watch?v=GpuqosemhBk', u'Кинематика - Поступательное и вращательное движение твёрдого тела'),
+            ('https://www.youtube.com/watch?v=uVL3SoDDMNg', u'Геометрическая оптика - Фокусное расстояние и оптическая сила линзы'),
+            ('https://www.youtube.com/watch?v=vjmyDrCSFm8', u'Геометрическая оптика - Построение изображений в тонких линзах'),
+            ('https://www.youtube.com/watch?v=8Vm_svrry9A', u'Геометрическая оптика - Формула тонкой линзы'),
+            ('https://www.youtube.com/watch?v=gy29hTFu54E', u'Геометрическая оптика - Действительный и мнимый источники'),
+            ('https://www.youtube.com/watch?v=c1cqOmLOQ9M', u'Геометрическая оптика - Тонкие линзы'),
+            ('https://www.youtube.com/watch?v=fQCZkmd9MUk', u'Геометрическая оптика - Действительное и мнимое изображения'),
+            ('https://www.youtube.com/watch?v=fvRCNxAjgQ4', u'Геометрическая оптика - Показатель преломления'),
+            ('https://www.youtube.com/watch?v=pxc2NUAroLI', u'Геометрическая оптика - Образование тени и полутени'),
+            ('https://www.youtube.com/watch?v=sxCkJ_4sT9U', u'Геометрическая оптика - Распространение света'),
+            ('https://www.youtube.com/watch?v=utJyyEPMXBU', u'Законы сохранения в механике - Внутренние и внешние силы'),
+            ('https://www.youtube.com/watch?v=wsVmAedcD2A', u'Законы сохранения в механике - Неупругий удар'),
+            ('https://www.youtube.com/watch?v=RfO-7rPHRTg', u'Общее - Плотность'),
+            ('https://www.youtube.com/watch?v=PXyIVNgxfvM', u'МКТ - Основное уравнение МКТ'),
+            ('https://www.youtube.com/watch?v=kr8kkIszQbM', u'Термодинамика - Внутренняя энергия и способы её изменения'),
+            ('https://www.youtube.com/watch?v=LlPHqQ3UaS4', u'Термодинамика - Внутренняя энергия идеального газа'),
+            ('https://www.youtube.com/watch?v=-IFzslacWrI', u'Законы сохранения в механике - Абсолютно упругий удар'),
+            ('https://www.youtube.com/watch?v=dqijLBR1qZc', u'Законы сохранения в механике - Закон сохранения импульса'),
+            ('https://www.youtube.com/watch?v=CBz4S4gKMfY', u'Законы сохранения в механике - Импульс'),
+            ('https://www.youtube.com/watch?v=T72IA5QmUZU', u'Термодинамика - Работа газа'),
+            ('https://www.youtube.com/watch?v=lao0b2VD-Bk', u'Термодинамика - Первое начало термодинамики'),
+            ('https://www.youtube.com/watch?v=XJS1llpnZK8', u'МКТ - Уравнение Менделеева-Клапейрона для идеального газа'),
+            ('https://www.youtube.com/watch?v=ivwYzV9Ar2k', u'МКТ - Смеси газов. Закон Дальтона'),
+            ('https://www.youtube.com/watch?v=2nMyiIQtgvM', u'МКТ - Идеальный газ'),
+            ('https://www.youtube.com/watch?v=Jo_EXQzgHT0', u'МКТ - Основные положения МКТ и их опытное обоснование'),
+            ('https://www.youtube.com/watch?v=OBArlSVHl70', u'МКТ - Изобарный процесс'),
+            ('https://www.youtube.com/watch?v=n12aZKl-fWE', u'МКТ - Изохорный процесс'),
+            ('https://www.youtube.com/watch?v=RETZXUDfDhc', u'МКТ - Изотермический процесс'),
+            ('https://www.youtube.com/watch?v=oFrkSRFOvcE', u'Механика жидкостей и газов - Сила Архимеда'),
+            ('https://www.youtube.com/watch?v=DFuQya7Oe9U', u'Динамика - Закон Всемирного тяготения'),
+            ('https://www.youtube.com/watch?v=MxfuBo6ih_M', u'Динамика - Третий закон Ньютона'),
+            ('https://www.youtube.com/watch?v=kgfpqLNrjuk', u'Динамика - Второй закон Ньютона'),
+            ('https://www.youtube.com/watch?v=niJFMDiuMj8', u'Динамика - Первый закон Ньютона'),
+            ('https://www.youtube.com/watch?v=d5QhXjgW8tw', u'Общее - Масса'),
+            ('https://www.youtube.com/watch?v=M0pnXB_cEMY', u'Динамика - Силы'),
+        ]:
+            dstFile = os.path.join(path, u'Foxford', u'%s.mp4' % name)
+            if os.path.exists(dstFile):
+                log.info('Skipping %s as "%s" exists', url, name)
+            else:
+                log.info('Downloading %s to "%s"', url, dstFile)
+                bestStream = self.GetBestStream(url, preftype='mp4')
+                bestStream.download(filepath=dstFile)
 
+
+class CrashCoursePhysics(YoutubeDownloader):
+    def Download(self, path):
+        log.info('Downloading playlist https://www.youtube.com/playlist?list=PL8dPuuaLjXtN0ge7yDk_UA0ldZJdhwkoV')
+        for url, name in [
+            ('https://www.youtube.com/watch?v=ZM8ECpBuQYE', '1 - Motion - 01 - Motion in a Straight Line'),
+            ('https://www.youtube.com/watch?v=ObHJJYvu3RE', '1 - Motion - 02 - Derivatives'),
+            ('https://www.youtube.com/watch?v=jLJLXka2wEM', '1 - Motion - 03 - Integrals'),
+            ('https://www.youtube.com/watch?v=w3BhzYI6zXU', '1 - Motion - 04 - Vectors and 2D Motion'),
+            ('https://www.youtube.com/watch?v=kKKM8Y-u7ds', '1 - Motion - 05 - Newtons Laws'),
+            ('https://www.youtube.com/watch?v=fo_pmp5rtzo', '1 - Motion - 06 - Friction'),
+            ('https://www.youtube.com/watch?v=bpFK2VCRHUs', '1 - Motion - 07 - Uniform Circular Motion'),
+            ('https://www.youtube.com/watch?v=7gf6YpdvtE0', '1 - Motion - 08 - Newtonian Gravity'),
+            ('https://www.youtube.com/watch?v=w4QFJb9a8vo', '1 - Motion - 09 - Work Energy and Power'),
+            ('https://www.youtube.com/watch?v=Y-QOfc2XqOk', '1 - Motion - 10 - Collisions'),
+            ('https://www.youtube.com/watch?v=fmXFWi-WfyU', '1 - Motion - 11 - Rotational Motion'),
+            ('https://www.youtube.com/watch?v=b-HZ1SZPaQw', '1 - Motion - 12 - Torque'),
+            ('https://www.youtube.com/watch?v=9cbF9A6eQNA', '1 - Motion - 13 - Statics'),
+            ('https://www.youtube.com/watch?v=b5SqYuWT4-4', '1 - Motion - 14 - Fluids at Rest'),
+            ('https://www.youtube.com/watch?v=fJefjG3xhW0', '1 - Motion - 15 - Fluids in Motion'),
+            ('https://www.youtube.com/watch?v=jxstE6A_CYQ', '1 - Motion - 16 - Simple Harmonic Motion'),
+            ('https://www.youtube.com/watch?v=TfYCnOvNnFU', '2 - Waves and Sound - 17 - Traveling Waves'),
+            ('https://www.youtube.com/watch?v=qV4lR9EWGlY', '2 - Waves and Sound - 18 - Sound'),
+            ('https://www.youtube.com/watch?v=XDsk6tZX55g', '2 - Waves and Sound - 19 - The Physics of Music'),
+            ('https://www.youtube.com/watch?v=6BHbJ_gBOk0', '3 - Temperature - 20 - Temperature'),
+            ('https://www.youtube.com/watch?v=WOEvvHbc240', '3 - Temperature - 21 - Kinetic Theory and Phase Changes'),
+            ('https://www.youtube.com/watch?v=tuSC0ObB-qY', '3 - Temperature - 22 - The Physics of Heat'),
+            ('https://www.youtube.com/watch?v=4i1MUWJoI0U', '3 - Temperature - 23 - Thermodynamics'),
+            ('https://www.youtube.com/watch?v=p1woKh2mdVQ', '3 - Temperature - 24 - Engines'),
+            ('https://www.youtube.com/watch?v=TFlVWf8JX4A', '4 - Electricity and Magnetism - 25 - Electric Charge'),
+            ('https://www.youtube.com/watch?v=mdulzEfQXDE', '4 - Electricity and Magnetism - 26 - Electric Fields'),
+            ('https://www.youtube.com/watch?v=ZrMltpK6iAw', '4 - Electricity and Magnetism - 27 - Voltage Electric Energy and Capacitors'),
+            ('https://www.youtube.com/watch?v=HXOok3mfMLM', '4 - Electricity and Magnetism - 28 - Electric Current'),
+            ('https://www.youtube.com/watch?v=g-wjP1otQWI', '4 - Electricity and Magnetism - 29 - DC Resistors &amp; Batteries'),
+            ('https://www.youtube.com/watch?v=-w-VTw0tQlE', '4 - Electricity and Magnetism - 30 - Circuit Analysis'),
+            ('https://www.youtube.com/watch?v=vuCJP_5KOlI', '4 - Electricity and Magnetism - 31 - Capacitors and Kirchhoff'),
+            ('https://www.youtube.com/watch?v=s94suB5uLWw', '4 - Electricity and Magnetism - 32 - Magnetism'),
+            ('https://www.youtube.com/watch?v=5fqwJyt4Lus', '4 - Electricity and Magnetism - 33 - Amperes Law'),
+            ('https://www.youtube.com/watch?v=pQp6bmJPU_0', '4 - Electricity and Magnetism - 34 - Induction - An Introduction'),
+            ('https://www.youtube.com/watch?v=9kgzA0Vd8S8', '4 - Electricity and Magnetism - 35 - How Power Gets to Your Home'),
+            ('https://www.youtube.com/watch?v=Jveer7vhjGo', '4 - Electricity and Magnetism - 36 - AC Circuits'),
+            ('https://www.youtube.com/watch?v=K40lNL3KsJ4', '4 - Electricity and Magnetism - 37 - Maxwells Equations'),
+            ('https://www.youtube.com/watch?v=Oh4m8Ees-3Q', '5 - Light - 38 - Geometric Optics'),
+            ('https://www.youtube.com/watch?v=IRBfpBPELmE', '5 - Light - 39 - Light Is Waves'),
+            ('https://www.youtube.com/watch?v=-ob7foUzXaY', '5 - Light - 40 - Spectra Interference'),
+            ('https://www.youtube.com/watch?v=SddBPTcmqOk', '5 - Light - 41 - Optical Instruments'),
+            ('https://www.youtube.com/watch?v=AInCqm5nCzw', '5 - Light - 42 - Special Relativity'),
+            ('https://www.youtube.com/watch?v=7kb1VT0J3DE', '6 - Quantum - 43 - Quantum Mechanics - Part 1'),
+            ('https://www.youtube.com/watch?v=qO_W70VegbQ', '6 - Quantum - 44 - Quantum Mechanics - Part 2'),
+            ('https://www.youtube.com/watch?v=lUhJL7o6_cA', '6 - Quantum - 45 - Nuclear Physics'),
+            ('https://www.youtube.com/watch?v=VYxYuaDvdM0', '6 - Quantum - 46 - Astrophysics and Cosmology'),
+        ]:
+            dstFile = os.path.join(path, u'CrashCoursePhysics', u'%s.mp4' % name)
+            if os.path.exists(dstFile):
+                log.info('Skipping %s as "%s" exists', name, dstFile)
+            else:
+                log.info('Downloading %s to %s', url, dstFile)
+                bestStream = self.GetBestStream(url, preftype='mp4')
+                data = requests.get(bestStream.url).content
+                with open(dstFile, 'w') as f:
+                    f.write(data)
+
+
+class Gorbushin(YoutubeDownloader):
     def Download(self, path):
         log.info('Downloading playlist https://www.youtube.com/playlist?list=PLNG6BIg2XJxCfZtigKso6rBpJ2yk_JFVp')
         for url, name in [
@@ -364,7 +492,7 @@ class Gorbushin(object):
                 log.info('Skipping %s as "%s" exists', name, dstFile)
             else:
                 log.info('Downloading %s to %s', url, dstFile)
-                bestStream = self.YoutubeDownloader.GetBestStream(url)
+                bestStream = self.GetBestStream(url)
                 data = requests.get(bestStream.url).content
                 with open(dstFile, 'w') as f:
                     f.write(data)
