@@ -234,7 +234,8 @@ class Chernoutsan_1_2(variant.VariantTask):
 @variant.answer_short('{d:Value}')
 class Chernoutsan_1_2_1(variant.VariantTask):
      def GetUpdate(self, l=None, s=None, **kws):
-        d = abs(s.Value % (2 * l.Value) - l.Value)
+        d = s.Value % (2 * l.Value)
+        d = min(d, 2 * l.Value - d)
         return dict(
             d=u'd = %d м' % d
         )
