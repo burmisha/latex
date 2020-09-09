@@ -54,72 +54,33 @@ def runConvert(args):
     booksPath = library.files.UdrPath(u'Книги - физика')
 
     books = [
-        library.convert.ComicsBook(
-            pdfPath=booksPath(u'Физика в комиксах.pdf'),
-            dstPath=booksPath(u'Физика в комиксах'),
-        ),
-        library.convert.ChernoutsanBook(
-            pdfPath=booksPath(u'Сборники', u'Сборник - Черноуцан - 2011.pdf'),
-            dstPath=booksPath(u'Сборники', u'Черноуцан'),
-        ),
-        library.convert.Maron_9_Sbornik(
-            pdfPath=booksPath(u'9 класс', u'9 - Марон - Сборник вопросов и задач - 2019.pdf'),
-            dstPath=booksPath(u'9 класс', u'9 - Марон - Сборник'),
-        ),
-        library.convert.Maron_8_Sbornik(
-            pdfPath=booksPath(u'8 класс', u'8 - Марон - Сборник вопросов и задач - 2019.pdf'),
-            dstPath=booksPath(u'8 класс', u'8 - Марон - Сборник'),
-        ),
-        library.convert.Maron_8_SR_KR(
-            pdfPath=booksPath(u'8 класс', u'8 - Марон - СР и КР - 2017.pdf'),
-            dstPath=booksPath(u'8 класс', u'8 - Марон - СР и КР'),
-        ),
-        library.convert.Maron_9_SR_KR(
-            pdfPath=booksPath(u'9 класс', u'9 - Марон - СР и КР - 2018.pdf'),
-            dstPath=booksPath(u'9 класс', u'9 - Марон - СР и КР'),
-        ),
-        library.convert.Maron_9_Didaktika(
-            pdfPath=booksPath(u'9 класс', u'9 - Марон - Дидактические материалы - 2014.pdf'),
-            dstPath=booksPath(u'9 класс', u'9 - Марон - Дидактические материалы'),
-        ),
-        library.convert.Maron_8_Didaktika(
-            pdfPath=booksPath(u'8 класс', u'8 - Марон - Дидактические материалы - 2013.pdf'),
-            dstPath=booksPath(u'8 класс', u'8 - Марон - Дидактические материалы'),
-        ),
-        library.convert.Kirik_8(
-            pdfPath=booksPath(u'8 класс', u'8 - Кирик - СР и КР - 2014.pdf'),
-            dstPath=booksPath(u'8 класс', u'8 - Кирик - СР и КР'),
-        ),
-        library.convert.Kirik_9(
-            pdfPath=booksPath(u'9 класс', u'9 - Кирик - СР и КР - 2016.pdf'),
-            dstPath=booksPath(u'9 класс', u'9 - Кирик - СР и КР'),
-        ),
-        library.convert.Gendenshteyn_8(
-            pdfPath=booksPath(u'8 класс', u'8 - Генденштейн - 2012.pdf'),
-            dstPath=booksPath(u'8 класс', u'8 - Генденштейн'),
-        ),
-        library.convert.Gendenshteyn_9(
-            pdfPath=booksPath(u'9 класс', u'9 - Генденштейн - 2012.pdf'),
-            dstPath=booksPath(u'9 класс', u'9 - Генденштейн'),
-        ),
-        library.convert.Gorbushin(
-            pdfPath=booksPath(u'Методика', u'Горбушин - Как можно учить физике.pdf'),
-            dstPath=booksPath(u'Методика', u'Горбушин - Как можно учить физике'),
-        ),
-        library.convert.Goldfarb(
-            pdfPath=booksPath(u'Сборники', u'Сборник - Гольдфарб - 10-11.pdf'),
-            dstPath=booksPath(u'Сборники', u'Гольдфарб'),
-        ),
-        library.convert.Vishnyakova(
-            pdfPath=booksPath(u'МГУ', u'Вишнякова - Физика - сборник задач к ЕГЭ - 2015.pdf'),
-            dstPath=booksPath(u'МГУ', u'Вишнякова - Физика - сборник задач к ЕГЭ - 2015'),
-        ),
-        library.convert.Baumansky(
-            pdfPath=booksPath(u'Сборники', u'Бауманский - 2000 - Васюков.pdf'),
-            dstPath=booksPath(u'Сборники', u'Бауманский - 2000 - Васюков'),
-        ),
+        (library.convert.ComicsBook, [u'Физика в комиксах.pdf']),
+        (library.convert.ChernoutsanBook, [u'Сборники', u'Сборник - Черноуцан - 2011.pdf']),
+        (library.convert.Maron_9_Sbornik, [u'9 класс', u'9 - Марон - Сборник вопросов и задач - 2019.pdf']),
+        (library.convert.Maron_8_Sbornik, [u'8 класс', u'8 - Марон - Сборник вопросов и задач - 2019.pdf']),
+        (library.convert.Maron_8_SR_KR, [u'8 класс', u'8 - Марон - СР и КР - 2017.pdf']),
+        (library.convert.Maron_9_SR_KR, [u'9 класс', u'9 - Марон - СР и КР - 2018.pdf']),
+        (library.convert.Maron_9_Didaktika, [u'9 класс', u'9 - Марон - Дидактические материалы - 2014.pdf']),
+        (library.convert.Maron_8_Didaktika, [u'8 класс', u'8 - Марон - Дидактические материалы - 2013.pdf']),
+        (library.convert.Kirik_8, [u'8 класс', u'8 - Кирик - СР и КР - 2014.pdf']),
+        (library.convert.Kirik_9, [u'9 класс', u'9 - Кирик - СР и КР - 2016.pdf']),
+        (library.convert.Gendenshteyn_8, [u'8 класс', u'8 - Генденштейн - 2012.pdf']),
+        (library.convert.Gendenshteyn_9, [u'9 класс', u'9 - Генденштейн - 2012.pdf']),
+        (library.convert.Gorbushin, [u'Методика', u'Горбушин - Как можно учить физике.pdf']),
+        (library.convert.Goldfarb, [u'Сборники', u'Сборник - Гольдфарб - 10-11.pdf']),
+        (library.convert.Vishnyakova, [u'МГУ', u'Вишнякова - Физика - сборник задач к ЕГЭ - 2015.pdf']),
+        (library.convert.Baumansky, [u'Сборники', u'Бауманский - 2000 - Васюков.pdf']),
+        (library.convert.Belolipetsky, [u'Сборники', u'Сборник - Белолипецкий - Задачник с лягушками.pdf']),
+        (library.convert.Rymkevich, [u'Сборники', u'9-11 - Рымкевич.pdf']),
     ]
-    for book in books:
+
+    for bookClass, pdfPath in books:
+        dstPath = list(pdfPath)
+        dstPath[-1] = dstPath[-1].replace('.pdf', '')
+        book = bookClass(
+            pdfPath=booksPath(*pdfPath),
+            dstPath=booksPath(*dstPath),
+        )
         book.Save(overwrite=False)
         book.GetStrangeFiles(remove=args.remove_strange_files)
 
@@ -304,6 +265,21 @@ def runGenerate(args):
                     generators.magnet.Chernoutsan11_01(),
                     generators.magnet.Chernoutsan11_02(),
                     generators.magnet.Chernoutsan11_5(),
+                ],
+            },
+            'class-2020-10': {
+                '2020-09-10': [
+                    generators.mechanics.Theory_1(),
+                    generators.mechanics.Vectors_SumAndDiff(),
+                    generators.mechanics.Chernoutsan_1_2(),
+                    generators.mechanics.Vectors_SpeedSum(),
+                ],
+            },
+            'class-2020-9': {
+                '2020-09-10': [
+                    generators.mechanics.Theory_1_simple(),
+                    generators.mechanics.Chernoutsan_1_2(),
+                    generators.mechanics.Chernoutsan_1_2_1(),
                 ],
             },
         }
