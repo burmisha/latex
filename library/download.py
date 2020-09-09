@@ -313,6 +313,8 @@ class GetAClass(YoutubeDownloader):
             ('https://www.youtube.com/watch?v=dSVdjmabpgg', u'HBO - Welcome to Chechnya - 2020'),
             # ('https://www.youtube.com/watch?v=lYTdewh-dhY', u'Открытая Россия - Семья - Фильм о Рамзане Кадырове - 2015'),
             ('https://www.youtube.com/watch?v=2nTmeuXQT5w', u'2020 - Математический марафон'),
+            ('https://www.youtube.com/watch?v=vF1UGmi5m8s', u'2019 - Дудь - Беслан'),
+            ('https://www.youtube.com/watch?v=-TSD1cX2htQ', u'2019 - Новая Газета - Беслан'),
         ]:
             dstFile = os.path.join(path, u'GetAClass', u'%s.mp4' % name)
             if os.path.exists(dstFile):
