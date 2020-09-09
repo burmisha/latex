@@ -163,6 +163,7 @@ class VariantTask(object):
         try:
             result = template.format(**args)
             result = re.sub('(\\d)\.(\\d)', '\\1{,}\\2', result)
+            result = re.sub('\+ +-', '-', result)
             return result
         except:
             log.error(u'Template: %s', template)
@@ -271,6 +272,7 @@ class MultiplePaper(object):
                 u'Т': 'T',
                 u'Л': 'L',
                 u'М': 'M',
+                u'АБ': 'AB',
             }[self.Pupils.Letter]
             filename += letter
 
