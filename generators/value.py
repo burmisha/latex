@@ -5,6 +5,19 @@ log = logging.getLogger(__name__)
 
 
 def precisionFmt2(value, precision):
+    isInt = False
+    if isinstance(value, int):
+        isInt = True
+    elif isinstance(value, str):
+        try:
+            intValue = int(value)
+        except ValueError:
+            pass
+        if str(intValue) == value:
+            isInt = True
+    if isInt:
+        return str(value)
+
     isNegative = value < 0
     absValue = abs(value)
     assert absValue >= 10 ** -7
@@ -37,6 +50,7 @@ def precisionFmt2(value, precision):
     return rawDigits.rstrip('.')
 
 
+assert precisionFmt2(1.2, 1) == '1.2'
 assert precisionFmt2(1.7, 1) == '1.7'
 assert precisionFmt2(0.091, 2) == '0.091'
 assert precisionFmt2(0.095, 2) == '0.095'
@@ -48,10 +62,12 @@ assert precisionFmt2(1.99, 2) == '1.99'
 assert precisionFmt2(1.99, 3) == '1.990'
 assert precisionFmt2(19.9, 2) == '19.9'
 assert precisionFmt2(19.9, 1) == '20'
+assert precisionFmt2(12, 2) == '12'
 assert precisionFmt2(20, 2) == '20'
 assert precisionFmt2(2.99, 2) == '3.0'
 assert precisionFmt2(29.9, 2) == '30'
-assert precisionFmt2(299, 2) == '300'
+assert precisionFmt2(299., 2) == '300'
+assert precisionFmt2(299, 2) == '299'
 assert precisionFmt2(1 + 1. / 30, 2) == '1.03'
 assert precisionFmt2(1 + 1. / 300, 2) == '1.00'
 assert precisionFmt2(1 + 1. / 300, 3) == '1.003'
@@ -238,6 +254,7 @@ class UnitValue(object):
             units = ''
 
         valueStr = precisionFmt2(self.Value, self.ViewPrecision or self.Precision)
+
         valueStr = valueStr.replace('.', '{,}')
         if self.BasePower:
             valueStr += ' \\cdot 10^{{{}}}'.format(self.BasePower)
@@ -308,6 +325,8 @@ assert u'{v:Task}'.format(v=UnitValue(u'c = 3 10^{8} м / с')) == u'c = 3 \\cdo
 assert u'{t:Task}'.format(t=UnitValue(u't = 8 суток')) == u't = 8\\,\\text{суток}', 'Got %r' %  u'{t:Task}'.format(t=UnitValue(u't = 8 суток'))
 assert u'{:Value}'.format(UnitValue(u'm = 1.67 10^-27 кг')) == u'1{,}67 \\cdot 10^{-27}\\,\\text{кг}'
 assert u'{:Value}'.format(UnitValue(u'T = 1.7 суток')) == u'1{,}7\\,\\text{суток}'
+assert u'{:Value}'.format(UnitValue(u'12 км / ч')) == u'12\\,\\frac{\\text{км}}{\\text{ч}}'
+assert u'{:Value}'.format(UnitValue(u'50 км / ч')) == u'50\\,\\frac{\\text{км}}{\\text{ч}}'
 
 
 class Matter(object):
