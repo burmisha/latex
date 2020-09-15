@@ -1,2 +1,9 @@
 This the root of all new writings in LaTeX.
-2012–2019 burmisha
+
+Typical usage:
+```
+$ . venv/bin/activate
+$ ./generate.py --help
+```
+
+2012–2020 burmisha
