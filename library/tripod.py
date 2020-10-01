@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+import library
+
 import collections
 
 results = {
@@ -316,3 +318,19 @@ def getTripodReports():
                 questionNumber = index + 1
                 report.AddAnswer(questionNumber, int(answer))
         yield className, report
+
+
+def runTripod(args):
+    fileWriter = library.files.FileWriter()
+    tripodFormat = args.format
+    getText, extension = {
+        'tex': (lambda r: r.GetTex(), 'tex'),
+        'txt': (lambda r: r.GetText(), 'txt'),
+    }[tripodFormat]
+    for className, report in library.tripod.getTripodReports():
+        fileWriter.Write(os.path.join('school-554', 'tripod'), className + '-tripod.%s' % extension, text=getText(report))
+
+
+def populate_parser(parser):
+    parser.add_argument('--format', help='Format', choices=['tex', 'txt'])
+    parser.set_defaults(func=runTripod)
