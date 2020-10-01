@@ -14,10 +14,6 @@ import tools
 log = logging.getLogger('generate')
 
 
-def runLucky(args):
-    library.lucky.getLucky(grade=args.grade, count=args.count)
-
-
 def runTripod(args):
     fileWriter = library.files.FileWriter()
     tripodFormat = args.format
@@ -300,9 +296,7 @@ def CreateArgumentsParser():
     generateParser.set_defaults(func=runGenerate)
 
     luckyParser = subparsers.add_parser('lucky', help='Find lucky pupils')
-    luckyParser.add_argument('-g', '--grade', help='Grade', type=int, choices=[8, 9])
-    luckyParser.add_argument('-c', '--count', help='Count', type=int)
-    luckyParser.set_defaults(func=runLucky)
+    library.lucky.populate_parser(luckyParser)
 
     tripodParser = subparsers.add_parser('tripod', help='Generate tripod results')
     tripodParser.add_argument('--format', help='Format', choices=['tex', 'txt'])
@@ -320,7 +314,7 @@ def CreateArgumentsParser():
     znaniumParser = subparsers.add_parser('znanium', help='Znanium')
     tools.znanium.populate_parser(znaniumParser)
 
-    convertParser = subparsers.add_parser('convert', help='Znanium')
+    convertParser = subparsers.add_parser('convert', help='Convert pdf books')
     library.convert.populate_parser(convertParser)
 
     return parser
