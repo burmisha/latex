@@ -14,17 +14,6 @@ import tools
 log = logging.getLogger('generate')
 
 
-def runTripod(args):
-    fileWriter = library.files.FileWriter()
-    tripodFormat = args.format
-    getText, extension = {
-        'tex': (lambda r: r.GetTex(), 'tex'),
-        'txt': (lambda r: r.GetText(), 'txt'),
-    }[tripodFormat]
-    for className, report in library.tripod.getTripodReports():
-        fileWriter.Write(os.path.join('school-554', 'tripod'), className + '-tripod.%s' % extension, text=getText(report))
-
-
 def runDownload(args):
     for downloader in [
         # library.download.MathusPhys(),
@@ -299,8 +288,7 @@ def CreateArgumentsParser():
     library.lucky.populate_parser(luckyParser)
 
     tripodParser = subparsers.add_parser('tripod', help='Generate tripod results')
-    tripodParser.add_argument('--format', help='Format', choices=['tex', 'txt'])
-    tripodParser.set_defaults(func=runTripod)
+    library.tripod.populate_parser(tripodParser)
 
     downloadParser = subparsers.add_parser('download', help='Download extra files')
     downloadParser.set_defaults(func=runDownload)
