@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+import json
 import logging
 import os
 import re
@@ -10,7 +11,7 @@ log = logging.getLogger(__name__)
 
 
 try:
-    import pafy # http://np1.github.io/pafy/
+    import pafy  # http://np1.github.io/pafy/
 except ImportError:
     log.error('Failed to load pafy')
 
@@ -498,3 +499,52 @@ class Gorbushin(YoutubeDownloader):
                 data = requests.get(bestStream.url).content
                 with open(dstFile, 'w') as f:
                     f.write(data)
+
+
+class TitleCanonizer(object):
+    def __init__(self, replacements=None):
+        if replacements is None:
+            log.debug('Using default replacements'):
+            replacements = [
+                (ur'^Физика[\.:] ', u''),
+                (ur'  +', u' '),
+                (ur' Центр онлайн-обучения «Фоксфорд»$', u''),
+                (ur'\.$', u''),
+            ]
+
+        self._Replacements = replacements
+
+    def Canonize(self, title):
+        canonized = unicode(title)
+        for pattern, replacement in self._Replacements:
+            canonized = re.sub(pattern, replacement, canonized)
+        canonized = canonized.strip()
+        return canonized
+
+
+class YoutubePlaylist(object):
+    def __init__(self, url):
+        self._Url = url
+        self._TitleCanonizer = TitleCanonizer()
+
+    def ListVideos(self):
+        log.info('Looking for videos in %s', self._Url)
+        searchPrefix = 'window["ytInitialData"] = '
+        count = 0
+        for line in requests.get(self._Url).content.split('\n'):
+            if line.strip().startswith(searchPrefix):
+                l = line.strip()[len(searchPrefix):].strip(';')
+                for contentItem in json.loads(l)['contents']['twoColumnBrowseResultsRenderer']['tabs'][0]['tabRenderer']['content']['sectionListRenderer']['contents'][0]['itemSectionRenderer']['contents'][0]['playlistVideoListRenderer']['contents']:
+                    try:
+                        index = int(contentItem['playlistVideoRenderer']['index']['simpleText'])
+                        url = 'https://www.youtube.com/watch?v=%s' % contentItem['playlistVideoRenderer']['videoId']
+                        title = contentItem['playlistVideoRenderer']['title']['runs'][0]['text']
+                        log.debug('  #%02d %s, %s', index, self._TitleCanonizer.Canonize(title), url)
+                        count += 1
+                        log.debug('%s', json.dumps(contentItem, separators=(",", ":"), sort_keys=True, indent=4, ensure_ascii=False))
+                        yield index, url
+                    except Exception as e:
+                        log.error('Error %s on %s', e, json.dumps(contentItem, separators=(",", ":"), sort_keys=True, indent=4, ensure_ascii=False))
+                        raise
+        assert index == count
+        log.info('Found %d videos for %s', count, self._Url)

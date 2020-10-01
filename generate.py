@@ -44,6 +44,13 @@ def runDownload(args):
     ]:
         videoDownloader.Download(library.files.udrPath(u'Видео'))
 
+    for url in [
+        # 'https://www.youtube.com/playlist?list=PLNG6BIg2XJxCfZtigKso6rBpJ2yk_JFVp',
+        'https://www.youtube.com/playlist?list=PL66kIi3dt8A6Hd7soGMFXe6E5366Y66So',
+    ]:
+        youtubePlaylist = library.download.YoutubePlaylist(url)
+        list(youtubePlaylist.ListVideos())
+
 
 def runQr(args):
     qrGenerator = tools.qr.Generator(path=library.files.udrPath('qrcodes'), force=args.force)
