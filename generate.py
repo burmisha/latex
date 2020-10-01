@@ -55,41 +55,6 @@ def runDownload(args):
         list(youtubePlaylist.ListVideos())
 
 
-def runConvert(args):
-    booksPath = library.files.UdrPath(u'Книги - физика')
-
-    books = [
-        (library.convert.ComicsBook, [u'Физика в комиксах.pdf']),
-        (library.convert.ChernoutsanBook, [u'Сборники', u'Сборник - Черноуцан - 2011.pdf']),
-        (library.convert.Maron_9_Sbornik, [u'9 класс', u'9 - Марон - Сборник вопросов и задач - 2019.pdf']),
-        (library.convert.Maron_8_Sbornik, [u'8 класс', u'8 - Марон - Сборник вопросов и задач - 2019.pdf']),
-        (library.convert.Maron_8_SR_KR, [u'8 класс', u'8 - Марон - СР и КР - 2017.pdf']),
-        (library.convert.Maron_9_SR_KR, [u'9 класс', u'9 - Марон - СР и КР - 2018.pdf']),
-        (library.convert.Maron_9_Didaktika, [u'9 класс', u'9 - Марон - Дидактические материалы - 2014.pdf']),
-        (library.convert.Maron_8_Didaktika, [u'8 класс', u'8 - Марон - Дидактические материалы - 2013.pdf']),
-        (library.convert.Kirik_8, [u'8 класс', u'8 - Кирик - СР и КР - 2014.pdf']),
-        (library.convert.Kirik_9, [u'9 класс', u'9 - Кирик - СР и КР - 2016.pdf']),
-        (library.convert.Gendenshteyn_8, [u'8 класс', u'8 - Генденштейн - 2012.pdf']),
-        (library.convert.Gendenshteyn_9, [u'9 класс', u'9 - Генденштейн - 2012.pdf']),
-        (library.convert.Gorbushin, [u'Методика', u'Горбушин - Как можно учить физике.pdf']),
-        (library.convert.Goldfarb, [u'Сборники', u'Сборник - Гольдфарб - 10-11.pdf']),
-        (library.convert.Vishnyakova, [u'МГУ', u'Вишнякова - Физика - сборник задач к ЕГЭ - 2015.pdf']),
-        (library.convert.Baumansky, [u'Сборники', u'Бауманский - 2000 - Васюков.pdf']),
-        (library.convert.Belolipetsky, [u'Сборники', u'Сборник - Белолипецкий - Задачник с лягушками.pdf']),
-        (library.convert.Rymkevich, [u'Сборники', u'9-11 - Рымкевич.pdf']),
-    ]
-
-    for bookClass, pdfPath in books:
-        dstPath = list(pdfPath)
-        dstPath[-1] = dstPath[-1].replace('.pdf', '')
-        book = bookClass(
-            pdfPath=booksPath(*pdfPath),
-            dstPath=booksPath(*dstPath),
-        )
-        book.Save(overwrite=False)
-        book.GetStrangeFiles(remove=args.remove_strange_files)
-
-
 def runGenerate(args):
     fileWriter = library.files.FileWriter(args.filter)
 
@@ -355,9 +320,8 @@ def CreateArgumentsParser():
     znaniumParser = subparsers.add_parser('znanium', help='Znanium')
     tools.znanium.populate_parser(znaniumParser)
 
-    convertParser = subparsers.add_parser('convert', help='Convert into smth')
-    convertParser.add_argument('--remove-strange-files', help='Remove strange files', action='store_true')
-    convertParser.set_defaults(func=runConvert)
+    convertParser = subparsers.add_parser('convert', help='Znanium')
+    library.convert.populate_parser(convertParser)
 
     return parser
 
