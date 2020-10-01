@@ -504,12 +504,15 @@ class Gorbushin(YoutubeDownloader):
 class TitleCanonizer(object):
     def __init__(self, replacements=None):
         if replacements is None:
-            log.debug('Using default replacements'):
+            log.debug('Using default replacements')
             replacements = [
                 (ur'^Физика[\.:] ', u''),
                 (ur'  +', u' '),
                 (ur' Центр онлайн-обучения «Фоксфорд»$', u''),
                 (ur'\.$', u''),
+                (ur' \(осн\)\.?', u'.'),
+                (ur'^8 кл - ([0-9]{3})', ur'Урок \1'),
+                (ur' \(осн, запись 2014 года\)\.', ur'.'),
             ]
 
         self._Replacements = replacements
@@ -524,13 +527,16 @@ class TitleCanonizer(object):
 
 class YoutubePlaylist(object):
     def __init__(self, url):
+        assert url.startswith('https://www.youtube.com/playlist?list=PL')
         self._Url = url
         self._TitleCanonizer = TitleCanonizer()
 
     def ListVideos(self):
         log.info('Looking for videos in %s', self._Url)
+
         searchPrefix = 'window["ytInitialData"] = '
         count = 0
+        index = None
         for line in requests.get(self._Url).content.split('\n'):
             if line.strip().startswith(searchPrefix):
                 l = line.strip()[len(searchPrefix):].strip(';')
@@ -541,10 +547,10 @@ class YoutubePlaylist(object):
                         title = contentItem['playlistVideoRenderer']['title']['runs'][0]['text']
                         log.debug('  #%02d %s, %s', index, self._TitleCanonizer.Canonize(title), url)
                         count += 1
-                        log.debug('%s', json.dumps(contentItem, separators=(",", ":"), sort_keys=True, indent=4, ensure_ascii=False))
                         yield index, url
                     except Exception as e:
                         log.error('Error %s on %s', e, json.dumps(contentItem, separators=(",", ":"), sort_keys=True, indent=4, ensure_ascii=False))
                         raise
+
         assert index == count
         log.info('Found %d videos for %s', count, self._Url)
