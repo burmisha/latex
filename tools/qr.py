@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+import library
+
 import qrcode
 import qrcode.image.svg
 import qrcode.image.pure
@@ -66,3 +68,13 @@ class Generator(object):
                     self.__MakeImage(data=link, method=method).save(f)
             else:
                 log.debug('Skipping %s as %s exists', link, filename)
+
+
+def runQr(args):
+    qrGenerator = Generator(path=library.files.udrPath('qrcodes'), force=args.force)
+    qrGenerator.MakeAll()
+
+
+def populate_parser(parser):
+    parser.add_argument('--force', help='Force updates', action='store_true')
+    parser.set_defaults(func=runQr)
