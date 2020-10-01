@@ -45,8 +45,11 @@ def runDownload(args):
         videoDownloader.Download(library.files.udrPath(u'Видео'))
 
     for url in [
-        # 'https://www.youtube.com/playlist?list=PLNG6BIg2XJxCfZtigKso6rBpJ2yk_JFVp',
-        'https://www.youtube.com/playlist?list=PL66kIi3dt8A6Hd7soGMFXe6E5366Y66So',
+        'https://www.youtube.com/playlist?list=PLNG6BIg2XJxCfZtigKso6rBpJ2yk_JFVp',  # Горбушин
+        'https://www.youtube.com/playlist?list=PL66kIi3dt8A6Hd7soGMFXe6E5366Y66So',  # Фоксфорд
+        'https://www.youtube.com/playlist?list=PLYLAAGsAQhw9TcTQiq-EZeVuVPc6P8PSX',  # Виктор - 7
+        'https://www.youtube.com/playlist?list=PLYLAAGsAQhw_dGE-7OdXgBXu52_GbnvF7',  # Виктор - 8
+        'https://www.youtube.com/playlist?list=PLYLAAGsAQhw9fX9rgG5Z20V_M2AaUKErL',  # Виктор - 9
     ]:
         youtubePlaylist = library.download.YoutubePlaylist(url)
         list(youtubePlaylist.ListVideos())
