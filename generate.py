@@ -14,7 +14,6 @@ import tools
 log = logging.getLogger('generate')
 
 
-
 def runGenerate(args):
     fileWriter = library.files.FileWriter(args.filter)
 
