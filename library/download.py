@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+import library
+
 import json
 import logging
 import os
@@ -554,3 +556,34 @@ class YoutubePlaylist(object):
 
         assert index == count
         log.info('Found %d videos for %s', count, self._Url)
+
+
+
+def runDownload(args):
+    for downloader in [
+        # library.download.MathusPhys(),
+        # library.download.ZnakKachestava(),
+    ]:
+        downloader.Download(library.files.udrPath(downloader.GetDirname()))
+
+    for videoDownloader in [
+        library.download.GetAClass(),
+        library.download.Gorbushin(),
+        library.download.CrashCoursePhysics(),
+        library.download.Foxford(),
+    ]:
+        videoDownloader.Download(library.files.udrPath(u'Видео'))
+
+    for url in [
+        'https://www.youtube.com/playlist?list=PLNG6BIg2XJxCfZtigKso6rBpJ2yk_JFVp',  # Горбушин
+        'https://www.youtube.com/playlist?list=PL66kIi3dt8A6Hd7soGMFXe6E5366Y66So',  # Фоксфорд
+        'https://www.youtube.com/playlist?list=PLYLAAGsAQhw9TcTQiq-EZeVuVPc6P8PSX',  # Виктор - 7
+        'https://www.youtube.com/playlist?list=PLYLAAGsAQhw_dGE-7OdXgBXu52_GbnvF7',  # Виктор - 8
+        'https://www.youtube.com/playlist?list=PLYLAAGsAQhw9fX9rgG5Z20V_M2AaUKErL',  # Виктор - 9
+    ]:
+        youtubePlaylist = library.download.YoutubePlaylist(url)
+        list(youtubePlaylist.ListVideos())
+
+
+def populate_parser(parser):
+    parser.set_defaults(func=runDownload)
