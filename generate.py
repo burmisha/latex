@@ -55,11 +55,6 @@ def runDownload(args):
         list(youtubePlaylist.ListVideos())
 
 
-def runQr(args):
-    qrGenerator = tools.qr.Generator(path=library.files.udrPath('qrcodes'), force=args.force)
-    qrGenerator.MakeAll()
-
-
 def runConvert(args):
     booksPath = library.files.UdrPath(u'Книги - физика')
 
@@ -352,8 +347,7 @@ def CreateArgumentsParser():
     downloadParser.set_defaults(func=runDownload)
 
     qrParser = subparsers.add_parser('qr', help='Form QR codes')
-    qrParser.add_argument('--force', help='Force updates', action='store_true')
-    qrParser.set_defaults(func=runQr)
+    tools.qr.populate_parser(qrParser)
 
     reshuegeParser = subparsers.add_parser('reshu-ege', help='Reshu EGE')
     tools.reshuege.populate_parser(reshuegeParser)

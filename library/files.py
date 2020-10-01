@@ -7,7 +7,9 @@ log = logging.getLogger(__name__)
 
 
 def udrPath(*args):
-    return os.path.join(os.environ['HOME'], 'Yandex.Disk.localized', u'УДР', u'Общие материалы физиков УДР', *args)
+    path = os.path.join(os.environ['HOME'], 'Yandex.Disk.localized', u'УДР', u'Общие материалы физиков УДР', *args)
+    log.debug('Using path %s', path)
+    return path
 
 
 class UdrPath(object):
