@@ -4,6 +4,7 @@
 import argparse
 import logging
 import os
+import time
 
 import problems
 import classes
@@ -279,6 +280,9 @@ def CreateArgumentsParser():
     convertParser = subparsers.add_parser('convert', help='Convert pdf books')
     library.convert.populate_parser(convertParser)
 
+    templateParser = subparsers.add_parser('template', help='Create template files')
+    tools.template.populate_parser(templateParser)
+
     return parser
 
 
@@ -292,8 +296,11 @@ def main():
     logging.basicConfig(level=logLevel, format=logFormat, datefmt='%H:%M:%S')
 
     log.info('Start')
+    start_time = time.time()
     args.func(args)
-    log.info('Finish')
+    finish_time = time.time()
+    duration = finish_time  - start_time
+    log.info('Finish in %.2f seconds', duration)
 
 
 if __name__ == '__main__':
