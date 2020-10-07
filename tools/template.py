@@ -98,20 +98,33 @@ class DocxToPdf(object):
         log.info('Converted \'%s\' to \'%s\'', source_file, destination_file)
         os.remove(tmp_docx_file)
 
-    def ConvertDir(self, directory):
-        assert os.path.exists(directory)
-        assert os.path.isdir(directory)
+    def ConvertDir(self, source_directory, destination_directory=None, recursive=True, regexp=None):
+        assert os.path.exists(source_directory)
+        assert os.path.isdir(source_directory)
+        if destination_directory:
+            dst_path = os.path.join(source_directory, destination_directory)
+        else:
+            dst_path = source_directory
+        assert os.path.exists(dst_path)
+        assert os.path.isdir(dst_path)
+
         docx_suffix = '.docx'
         new_converted = 0
         already_converted_count = 0
-        for docx_file in sorted(library.files.walkFiles(directory, extensions=[docx_suffix])):
-            pdf_file = docx_file[:-len(docx_suffix)] + '.pdf'
+        for docx_file in sorted(library.files.walkFiles(
+            source_directory,
+            extensions=[docx_suffix],
+            recursive=recursive,
+            regexp=regexp,
+        )):
+            basename = os.path.basename(docx_file)[:-len(docx_suffix)] + '.pdf'
+            pdf_file = os.path.join(dst_path, basename)
             if not os.path.exists(pdf_file):
                 self.ConvertFile(docx_file, pdf_file)
                 new_converted += 1
             else:
                 already_converted_count += 1
-        log.info(u'Converted %d files (and found %d existing) in %s', new_converted, already_converted_count, directory)
+        log.info(u'Converted %d files (and found %d existing) in %s', new_converted, already_converted_count, source_directory)
 
 
 def runTemplate(args):
@@ -150,7 +163,17 @@ def runTemplate(args):
 
     if args.docx_2_pdf:
         docxToPdf = DocxToPdf()
-        docxToPdf.ConvertDir(library.files.udrPath(u'11 класс', u'2020 весна'))
+        docxToPdf.ConvertDir(
+            library.files.udrPath(u'11 класс', u'2020 весна'),
+            recursive=False,
+            regexp=u'.*Вишнякова - [0-9].*',
+        )
+        docxToPdf.ConvertDir(
+            library.files.udrPath(u'10 класс'),
+            destination_directory=u'2020-21 10AБ Физика',
+            recursive=False,
+            regexp=u'.*Неделя.*',
+        )
 
 
 def populate_parser(parser):

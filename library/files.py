@@ -2,6 +2,7 @@
 
 import logging
 import os
+import re
 
 log = logging.getLogger(__name__)
 
@@ -25,14 +26,32 @@ class UdrPath(object):
         return resPath
 
 
-def walkFiles(dirName, extensions=[], dirsOnly=False):
+def walkFiles(
+    dirName,
+    extensions=[],
+    dirsOnly=False,
+    recursive=True,
+    regexp=None,
+):
     # dirName = str(dirname)
     logName = 'dirs' if dirsOnly else 'files'
     log.debug('Looking for %s of types %r in %s', logName, extensions, dirName)
     count = 0
     if not os.path.exists(dirName):
         log.error('Path %r is missing', dirName)
-    for root, dirs, files in os.walk(dirName):
+
+    if regexp is not None:
+        if not isinstance(regexp, list):
+            regexps = [regexp]
+        else:
+            regexps = regexp
+    else:
+        regexps = []
+
+    iterable = os.walk(dirName)
+    if not recursive:
+        iterable = [next(iterable)]
+    for root, dirs, files in iterable:
         if dirsOnly:
             for directory in dirs:
                 count += 1
@@ -40,8 +59,8 @@ def walkFiles(dirName, extensions=[], dirsOnly=False):
         else:
             for filename in files:
                 if not extensions or any(filename.endswith(extension) for extension in extensions):
-                    count += 1
-                    yield os.path.join(root, filename)
+                    if not regexps or any(re.match(regexp, filename) for regexp in regexps):
+                        yield os.path.join(root, filename)
     log.debug('Found %d %s in %s', count, logName, dirName)
 
 
