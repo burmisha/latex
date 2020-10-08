@@ -127,6 +127,51 @@ class DocxToPdf(object):
         log.info(u'Converted %d files (and found %d existing) in %s', new_converted, already_converted_count, source_directory)
 
 
+class PdfExtractor(object):
+    def __init__(self, source_file):
+        # https://apple.stackexchange.com/questions/99210/mac-os-x-how-to-merge-pdf-files-in-a-directory-according-to-their-file-names
+        # brew install poppler
+        assert os.path.exists(source_file)
+        assert os.path.isfile(source_file)
+        assert source_file.endswith('.pdf')
+        self._source_file = source_file
+        self._tmp_dir = os.path.join(os.environ['HOME'], 'tmp')
+
+    def Extract(self, pages, destination_file):
+        log.info('Extracting pages %s to %s', pages, destination_file)
+        assert isinstance(pages, str)
+        assert destination_file.endswith('.pdf')
+        parts = []
+        for index, pages_range in enumerate(pages.split(',')):
+            pages_range = pages_range.strip()
+            if '-' in pages_range:
+                first_page, last_page = pages_range.split('-')
+            else:
+                first_page, last_page = pages_range, pages_range
+            first_page, last_page = int(first_page), int(last_page)
+            assert first_page <= last_page
+
+            part_file = os.path.join(self._tmp_dir, 'part_%d.pdf')
+            for page_index in range(first_page, last_page + 1):
+                parts.append(part_file % page_index)
+            separate_command = [
+                'pdfseparate',
+                '-f', '%d' % first_page,
+                '-l', '%d' % last_page,
+                self._source_file,
+                part_file,
+            ]
+            library.process.run(separate_command)
+
+        assert len(set(parts)) == len(parts)
+        unite_command = ['pdfunite'] + parts + [destination_file]
+        library.process.run(unite_command)
+
+        for part_file in parts:
+            log.debug('Removing tmp file %s', part_file)
+            os.remove(part_file)
+
+
 def runTemplate(args):
     fileCopier = FileCopier(library.files.udrPath('template-2-columns.docx'))
     fileCopier.SetDestinationDir(library.files.udrPath(u'11 класс', u'2020 весна'))
@@ -174,8 +219,18 @@ def runTemplate(args):
             recursive=False,
             regexp=u'.*Неделя.*',
         )
+        docxToPdf.ConvertDir(
+            library.files.udrPath(u'10 класс'),
+            recursive=False,
+            regexp=u'.*Рабочая тетрадь.*',
+        )
+
+    if args.run_extractor:
+        pdfExtractor = PdfExtractor(library.files.udrPath(u'10 класс', u'10-1 - Кинематика - Рабочая тетрадь.pdf'))
+        pdfExtractor.Extract('5, 1-4', library.files.udrPath(u'10 класс', u'tmp.pdf'))
 
 
 def populate_parser(parser):
     parser.add_argument('--docx-2-pdf', help='Run converter too', action='store_true')
+    parser.add_argument('--run-extractor', help='Extract pdf files', action='store_true')
     parser.set_defaults(func=runTemplate)

@@ -60,7 +60,10 @@ def walkFiles(
             for filename in files:
                 if not extensions or any(filename.endswith(extension) for extension in extensions):
                     if not regexps or any(re.match(regexp, filename) for regexp in regexps):
-                        yield os.path.join(root, filename)
+                        if filename.startswith('~$'):
+                            log.warn('Skipping %s in %s', filename, root)
+                        else:
+                            yield os.path.join(root, filename)
     log.debug('Found %d %s in %s', count, logName, dirName)
 
 
