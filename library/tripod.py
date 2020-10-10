@@ -110,7 +110,7 @@ class Question(object):
     def GetTex(self):
         totalCount = self.GetTotalCount()
         result = [
-            ur'{{\bfseries {}}}'.format(self.Text),
+            r'{{\bfseries {}}}'.format(self.Text),
             '',
             '\\begin{tikzpicture}',
         ]
@@ -130,10 +130,10 @@ class Question(object):
             y += dy
         y += dy / 2
         result.extend([
-            ur'\node [left] at (2.5,%.1f) {Положительные ответы:};' % y,
-            ur'\node at (3,%.1f) {%d\%%};' % (y, self.GetRating()),
-            ur'\node [left] at (2.5,%.1f) {Средний балл:};' % (y + dy),
-            ur'\node at (3,%.1f) {%.1f};' % (y + dy, self.GetMean()),
+            r'\node [left] at (2.5,%.1f) {Положительные ответы:};' % y,
+            r'\node at (3,%.1f) {%d\%%};' % (y, self.GetRating()),
+            r'\node [left] at (2.5,%.1f) {Средний балл:};' % (y + dy),
+            r'\node at (3,%.1f) {%.1f};' % (y + dy, self.GetMean()),
         ])
 
         result.append('\\end{tikzpicture}')
@@ -143,7 +143,7 @@ class Question(object):
     def GetMean(self):
         valuesSum = 0.
         valuesTotal = 0.
-        for key, value in self.Answers.iteritems():
+        for key, value in self.Answers.items():
             valuesSum += key * value
             valuesTotal += value
         result = valuesSum / valuesTotal
@@ -153,7 +153,7 @@ class Question(object):
 
     def GetRating(self):
         positiveSum = 0
-        for key, value in self.Answers.iteritems():
+        for key, value in self.Answers.items():
             if (self.Polarity == '+' and key >= 4) or (self.Polarity == '-' and key <= 2):
                 positiveSum += value
         return int(100. * positiveSum / self.GetTotalCount())
@@ -188,7 +188,7 @@ class Dimension(object):
 
     def GetTex(self):
         result = [
-            ur'\section{%s $\rightarrow$ %d\%%}' % (self.Name, self.GetRating()),
+            r'\section{%s $\rightarrow$ %d\%%}' % (self.Name, self.GetRating()),
             ''
         ]
         for question in self.Questions:
@@ -229,7 +229,7 @@ class Report(object):
         return '\n'.join(result)
 
     def GetTex(self):
-        return ur'''
+        return r'''
 \newcommand\rootpath{{../..}}
 \input{{\rootpath/school-554/main}}
 \begin{{document}}
@@ -307,7 +307,7 @@ def getEmptyReport(className):
 
 
 def getTripodReports():
-    for className, personsResults in results.iteritems():
+    for className, personsResults in results.items():
         report = getEmptyReport(className)
         report.Reset()
 

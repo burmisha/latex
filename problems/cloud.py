@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 
-import gendenshteyn10
-import gendenshteyn11
-import gendenshteyn7
-import gendenshteyn8
-import yakunin
+import problems.gendenshteyn10 as gendenshteyn10
+import problems.gendenshteyn11 as gendenshteyn11
+import problems.gendenshteyn7 as gendenshteyn7
+import problems.gendenshteyn8 as gendenshteyn8
+import problems.yakunin as yakunin
 
 
 class Tasks(object):

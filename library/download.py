@@ -259,7 +259,7 @@ class ZnakKachestava(object):
                     filename = re.sub(r'\. (\d)\. ', r'. 0\1. ', ll)
                     filename = '%s.ppt' % filename
                     filename = os.path.join(path, filename)
-                    print 'Saving %s to %s' % (presName, filename)
+                    print('Saving %s to %s' % (presName, filename))
                     # with open(filename, 'w') as f:
                     #     f.write(requests.get(link).content)
 
@@ -508,19 +508,19 @@ class TitleCanonizer(object):
         if replacements is None:
             log.debug('Using default replacements')
             replacements = [
-                (ur'^Физика[\.:] ', u''),
-                (ur'  +', u' '),
-                (ur' Центр онлайн-обучения «Фоксфорд»$', u''),
-                (ur'\.$', u''),
-                (ur' \(осн\)\.?', u'.'),
-                (ur'^8 кл - ([0-9]{3})', ur'Урок \1'),
-                (ur' \(осн, запись 2014 года\)\.', ur'.'),
+                (r'^Физика[\.:] ', u''),
+                (r'  +', u' '),
+                (r' Центр онлайн-обучения «Фоксфорд»$', u''),
+                (r'\.$', u''),
+                (r' \(осн\)\.?', u'.'),
+                (r'^8 кл - ([0-9]{3})', r'Урок \1'),
+                (r' \(осн, запись 2014 года\)\.', r'.'),
             ]
 
         self._Replacements = replacements
 
     def Canonize(self, title):
-        canonized = unicode(title)
+        canonized = str(title)
         for pattern, replacement in self._Replacements:
             canonized = re.sub(pattern, replacement, canonized)
         canonized = canonized.strip()
@@ -539,7 +539,7 @@ class YoutubePlaylist(object):
         searchPrefix = 'window["ytInitialData"] = '
         count = 0
         index = None
-        for line in requests.get(self._Url).content.split('\n'):
+        for line in requests.get(self._Url).text.split('\n'):
             if line.strip().startswith(searchPrefix):
                 l = line.strip()[len(searchPrefix):].strip(';')
                 for contentItem in json.loads(l)['contents']['twoColumnBrowseResultsRenderer']['tabs'][0]['tabRenderer']['content']['sectionListRenderer']['contents'][0]['itemSectionRenderer']['contents'][0]['playlistVideoListRenderer']['contents']:
@@ -567,19 +567,19 @@ def runDownload(args):
         downloader.Download(library.files.udrPath(downloader.GetDirname()))
 
     for videoDownloader in [
-        library.download.GetAClass(),
-        library.download.Gorbushin(),
-        library.download.CrashCoursePhysics(),
-        library.download.Foxford(),
+        # library.download.GetAClass(),
+        # library.download.Gorbushin(),
+        # library.download.CrashCoursePhysics(),
+        # library.download.Foxford(),
     ]:
         videoDownloader.Download(library.files.udrPath(u'Видео'))
 
     for url in [
-        'https://www.youtube.com/playlist?list=PLNG6BIg2XJxCfZtigKso6rBpJ2yk_JFVp',  # Горбушин
+        # 'https://www.youtube.com/playlist?list=PLNG6BIg2XJxCfZtigKso6rBpJ2yk_JFVp',  # Горбушин
         'https://www.youtube.com/playlist?list=PL66kIi3dt8A6Hd7soGMFXe6E5366Y66So',  # Фоксфорд
-        'https://www.youtube.com/playlist?list=PLYLAAGsAQhw9TcTQiq-EZeVuVPc6P8PSX',  # Виктор - 7
-        'https://www.youtube.com/playlist?list=PLYLAAGsAQhw_dGE-7OdXgBXu52_GbnvF7',  # Виктор - 8
-        'https://www.youtube.com/playlist?list=PLYLAAGsAQhw9fX9rgG5Z20V_M2AaUKErL',  # Виктор - 9
+        # 'https://www.youtube.com/playlist?list=PLYLAAGsAQhw9TcTQiq-EZeVuVPc6P8PSX',  # Виктор - 7
+        # 'https://www.youtube.com/playlist?list=PLYLAAGsAQhw_dGE-7OdXgBXu52_GbnvF7',  # Виктор - 8
+        # 'https://www.youtube.com/playlist?list=PLYLAAGsAQhw9fX9rgG5Z20V_M2AaUKErL',  # Виктор - 9
     ]:
         youtubePlaylist = library.download.YoutubePlaylist(url)
         list(youtubePlaylist.ListVideos())

@@ -34,7 +34,7 @@ def precisionFmt2(value, precision):
         rawDigits = rawDigits[:precision + 2]
     else:
         rawDigits = rawDigits[:(precision + 1)]
-    if rawDigits[-1] >= 5:
+    if rawDigits[-1] >= '5':
         if len(str(int(rawDigits) + 5)) > len(rawDigits):
             leading_zeros -= 1
         rawDigits = str(int(rawDigits) + 5)
@@ -142,7 +142,7 @@ class UnitValue(object):
                                         if precisionStr[0] == '1' and self.Precision >= 2:
                                             self.Precision -= 1
                                     except:
-                                        print part, precisionStr, self.__RawLine
+                                        print(part, precisionStr, self.__RawLine)
                                         raise
                         except:
                             log.error('Could not get value from %r', part)
@@ -270,7 +270,7 @@ class UnitValue(object):
             result = self.Letter
             needLetter = False
         else:
-            print self.__RawLine
+            print(self.__RawLine)
             raise RuntimeError('Error in __format__ for %r' % format)
 
         if needLetter and self.Letter:

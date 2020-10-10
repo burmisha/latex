@@ -6,7 +6,7 @@ import os
 
 log = logging.getLogger(__name__)
 
-PAPER_TEMPLATE = ur'''
+PAPER_TEMPLATE = r'''
 \newcommand\rootpath{{../..}}
 \input{{\rootpath/school-554/main}}
 \begin{{document}}

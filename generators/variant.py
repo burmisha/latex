@@ -5,7 +5,7 @@ import hashlib
 import itertools
 import re
 
-import value
+import generators.value as value
 
 import library
 import problems
@@ -14,7 +14,7 @@ import logging
 log = logging.getLogger(__name__)
 
 
-PAPER_TEMPLATE = ur'''
+PAPER_TEMPLATE = r'''
 \input{{main}}
 \begin{{document}}
 {noanswers}
@@ -30,12 +30,12 @@ PAPER_TEMPLATE = ur'''
 
 def check_unit_value(v):
     try:
-        if isinstance(v, (str, unicode)) and (('=' in v and len(v) >= 3) or re.match(r'\d.* \w', v, re.UNICODE)):
+        if isinstance(v, str) and (('=' in v and len(v) >= 3) or re.match(r'\d.* \w', v, re.UNICODE)):
             return value.UnitValue(v)
         else:
             return v
     except:
-        print v
+        print(v)
         raise
 
 
@@ -46,12 +46,12 @@ assert isinstance(check_unit_value(u'2 см'), value.UnitValue)
 def form_args(kwargs):
     keys = []
     values = []
-    for key, value in kwargs.iteritems():
+    for key, value in kwargs.items():
         value = list(value)
         if any(isinstance(v, tuple) or isinstance(v, list) for v in value):
             for v in value:
                 assert isinstance(v, tuple) or isinstance(v, list)
-            if isinstance(key, (str, unicode)) and '__' in key:
+            if isinstance(key, str) and '__' in key:
                 key = tuple(part.strip() for part in key.split('__'))
                 for v in value:
                     assert len(key) == len(v), '%r' % [key, value]
@@ -150,10 +150,10 @@ class VariantTask(object):
             args = self.ArgsList
 
         for res in form_args(args):
-            for k, v in res.iteritems():
+            for k, v in res.items():
                 res[k] = check_unit_value(v)
             res['Consts'] = value.Consts
-            for k, v in self.GetUpdate(**res).iteritems():
+            for k, v in self.GetUpdate(**res).items():
                 res[k] = check_unit_value(v)
             yield res
 
@@ -163,7 +163,7 @@ class VariantTask(object):
         try:
             result = template.format(**args)
             result = re.sub('(\\d)\.(\\d)', '\\1{,}\\2', result)
-            result = re.sub('\+ +-', '-', result)
+            result = re.sub(r'\+ +-', '-', result)
             return result
         except:
             log.error(u'Template: %s', template)
@@ -196,7 +196,8 @@ class VariantTask(object):
         else:
             args = '__'.join(sorted(self.ArgsList.keys()))
         hash_md5 = hashlib.md5()
-        hash_md5.update(randomStr + args)
+        # print(randomStr, args, type(randomStr), type(args))
+        hash_md5.update((randomStr + args).encode('utf-8'))
         randomHash = hash_md5.hexdigest()[8:16] # use only part of hash
         randomIndex = int(randomHash, 16) % self.GetTasksCount()
         self.__Stats[randomIndex] += 1
@@ -218,16 +219,16 @@ class Variants(object):
                 pupil.GetRandomSeedPart(),
                 self.Date,
                 self.PupilsRandomSeedPart,
-            ]).encode('utf-8')
+            ])
             yield variantTask.GetRandomTask(randomStr)
 
     def GetStats(self):
         for variantTask in self.VariantTasks:
             stats = [0] * variantTask.GetTasksCount()
-            for index, value in variantTask.GetStats().iteritems():
+            for index, value in variantTask.GetStats().items():
                 stats[index] = value
             log.debug('Stats for %s: %r', type(variantTask).__name__, stats)
-            log.info('Stats for %s: %r', type(variantTask).__name__, collections.OrderedDict(sorted(variantTask.GetStats().iteritems())))
+            log.info('Stats for %s: %r', type(variantTask).__name__, collections.OrderedDict(sorted(variantTask.GetStats().items())))
 
 
 class MultiplePaper(object):
@@ -341,7 +342,7 @@ def arg(**kws):
             assert isinstance(cls.ArgsList, collections.OrderedDict), 'Invalid ArgsList: %r' % cls.ArgsList
         else:
             cls.ArgsList = collections.OrderedDict()
-        for key, value in kws.iteritems():
+        for key, value in kws.items():
             cls.ArgsList[key] = value
         return cls
 

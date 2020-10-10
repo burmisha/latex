@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-import task
+import problems.task as task
 
 
 class Savchenko(task.TasksGenerator):
@@ -9,7 +9,7 @@ class Savchenko(task.TasksGenerator):
 
     def __call__(self):
         tasks = {
-            '6-4-4': ur'''
+            '6-4-4': r'''
                 Площадь обкладок плоского конденсатора $S$, расстояние между пластинами $d$.
                 \begin{itemize}
                     \item Определите его ёмкость.
@@ -19,5 +19,5 @@ class Savchenko(task.TasksGenerator):
                 \end{itemize}
             ''',
         }
-        for number, text in tasks.iteritems():
+        for number, text in tasks.items():
             yield task.Task(text, number=number)

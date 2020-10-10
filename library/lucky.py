@@ -2,7 +2,7 @@ import random
 import logging
 import time
 
-import pupils
+import library.pupils
 
 log = logging.getLogger('lucky')
 

@@ -9,7 +9,7 @@ import logging
 log = logging.getLogger(__name__)
 
 from PIL import Image
-from cStringIO import StringIO
+from io import StringIO
 from io import BytesIO
 
 # Selenium also requires geckodriver

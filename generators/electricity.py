@@ -3,8 +3,8 @@
 import itertools
 import fractions
 
-import variant
-from value import UnitValue
+import generators.variant as variant
+from generators.value import UnitValue
 
 import logging
 log = logging.getLogger(__name__)

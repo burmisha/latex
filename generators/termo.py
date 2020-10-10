@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
-import variant
-from value import UnitValue, Consts
+import generators.variant as variant
+from generators.value import UnitValue, Consts
 
 import logging
 log = logging.getLogger(__name__)

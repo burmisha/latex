@@ -2,8 +2,8 @@
 
 import itertools
 
-import variant
-import value
+import generators.variant as variant
+import generators.value as value
 
 import logging
 log = logging.getLogger(__name__)

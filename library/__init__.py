@@ -1,8 +1,8 @@
-import convert
-import download
-import files
-import formatter
-import lucky
-import process
-import pupils
-import tripod
+import library.convert
+import library.download
+import library.files
+import library.formatter
+import library.lucky
+import library.process
+import library.pupils
+import library.tripod

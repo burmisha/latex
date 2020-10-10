@@ -2,7 +2,7 @@
 
 import math
 
-import variant
+import generators.variant as variant
 
 import logging
 log = logging.getLogger(__name__)

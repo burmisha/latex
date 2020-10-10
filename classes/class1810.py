@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-import paper
+import classes.paper as paper
 
 
 # def style(columns=2, variants=2, pt=20):
@@ -22,5 +22,5 @@ class Class1810(paper.PaperGenerator):
                 ('gendenshteyn-10', ['21-13', '21-17', '21-27', '22-20', '22-31', '22-35']),
             ],
         }
-        for date, tasks in papers.iteritems():
-            yield paper.Paper(date, tasks, classLetter='10', style=ur'\twocolumns{40pt}{\twovariants{40pt}{\variant}}{\twovariants{20pt}{\variant}}')
+        for date, tasks in papers.items():
+            yield paper.Paper(date, tasks, classLetter='10', style=r'\twocolumns{40pt}{\twovariants{40pt}{\variant}}{\twovariants{20pt}{\variant}}')

@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
 
-import paper
+import classes.paper as paper
 
 
 class Class1807(paper.PaperGenerator):
     def __call__(self):
         papers = {
-            '2018-12-03': (ur'\variant\vspace{30pt}\variant', [
+            '2018-12-03': (r'\variant\vspace{30pt}\variant', [
                 ('gendenshteyn-7', [
                     '13-01', '13-02', '13-03', '13-04', '13-06',
                     '13-09', '13-16', '13-19', '13-21', '13-22',
@@ -14,7 +14,7 @@ class Class1807(paper.PaperGenerator):
                     '13-57', '13-61', '13-62'
                 ]),
             ]),
-            '2018-12-10': (ur'\variant', [
+            '2018-12-10': (r'\variant', [
                 ('gendenshteyn-7', [
                     '15-02', '15-03', '15-04', '15-05', '15-06',
                     '15-06-my', '15-09', '15-17', '15-19', '15-23',
@@ -22,35 +22,35 @@ class Class1807(paper.PaperGenerator):
                     '15-28',
                 ]),
             ]),
-            '2018-12-14': (ur'\twocolumns{40pt}{\variant}{\variant}', [
+            '2018-12-14': (r'\twocolumns{40pt}{\variant}{\variant}', [
                 ('gendenshteyn-7', [
                     '15-11', '15-14', '15-15', '15-19', '15-20',
                     '15-23', '15-24', '15-25', '15-25-my', '15-26',
                     '15-27', '15-28',
                 ]),
             ]),
-            '2018-12-17': (ur'\twocolumns{40pt}{\variant}{\variant}', [
+            '2018-12-17': (r'\twocolumns{40pt}{\variant}{\variant}', [
                 ('gendenshteyn-7', [
                     '18-01', '18-02', '18-03', '18-04', '18-20',
                     '18-05', '18-06', '18-07', '18-08', '18-24',
                     '18-09', '18-10', '18-11', '18-15', '18-13', 
                 ]),
             ]),
-            '2018-12-21': (ur'\twocolumns{40pt}{\variant}{\variant}', [
+            '2018-12-21': (r'\twocolumns{40pt}{\variant}{\variant}', [
                 ('gendenshteyn-7', [
                     '18-08', '18-24', '18-09', '18-10', '18-11',
                     '18-15', '18-13', '18-25', '18-29', '18-30',
                     '18-31', '18-12', '18-16',
                 ]),
             ]),
-            '2018-12-24': (ur'\twocolumns{20pt}{\variant}{\variant}', [
+            '2018-12-24': (r'\twocolumns{20pt}{\variant}{\variant}', [
                 ('gendenshteyn-7', [
                     '18-29', '18-30', '18-31', '18-14', '18-12',
                     '18-16', '18-17', '18-35*', '18-35-my*', '18-36*',
                     '18-37', '18-39', '18-40*', '18-41*',
                 ]),
             ]),
-            '2019-01-11': (ur'\twocolumns{40pt}{\variant}{\variant}', [
+            '2019-01-11': (r'\twocolumns{40pt}{\variant}{\variant}', [
                 ('gendenshteyn-7', [
                     '20-01-my', '20-04', '20-06', '20-08', '20-09',
                     '20-11', '20-13', '20-14', '20-15', '20-27*',
@@ -58,39 +58,39 @@ class Class1807(paper.PaperGenerator):
                     '20-46*',
                 ]),
             ]),
-            '2019-01-14': (ur'\twocolumns{40pt}{\variant}{\variant}', [
+            '2019-01-14': (r'\twocolumns{40pt}{\variant}{\variant}', [
                 ('gendenshteyn-7', [
                     '20-12', '20-16', '20-17', '20-18*', '20-33',
                     '20-34*', '20-36', '20-37', '20-38', '20-41',
                     '20-42*', '20-43', '20-45', '20-46*',
                 ]),
             ]),
-            '2019-01-18': (ur'\twocolumns{60pt}{\variant}{\variant}', [
+            '2019-01-18': (r'\twocolumns{60pt}{\variant}{\variant}', [
                 ('gendenshteyn-7', [
                     '21-01', '21-02', '21-03', '21-05', '21-28',
                     '21-09', '21-10', '21-13', '21-14', '21-15',
                     '21-16', '21-17', '21-18', '20-34',
                 ]),
             ]),
-            '2019-01-21': (ur'\twocolumns{60pt}{\variant}{\variant}', [
+            '2019-01-21': (r'\twocolumns{60pt}{\variant}{\variant}', [
                 ('gendenshteyn-7', [
                     '21-13', '21-14', '21-15', '21-16', '21-17',
                     '21-18', '20-34', '21-25', '21-29', '21-30',
                     '21-32', '21-41',
                 ]),
             ]),
-            '2019-01-25': (ur'\twocolumns{20pt}{\variant}{\variant}', [
+            '2019-01-25': (r'\twocolumns{20pt}{\variant}{\variant}', [
                 ('gendenshteyn-7', ['21-19', '21-20', '21-29', '21-39', '21-36', '21-34']),
                 ('getaclass', ['297', '298', '306']),
             ]),
-            '2019-01-28': (ur'\twocolumns{30pt}{\variant}{\variant}', [
+            '2019-01-28': (r'\twocolumns{30pt}{\variant}{\variant}', [
                 ('gendenshteyn-7', ['21-34']),
                 ('getaclass', ['297', '298', '306']),
             ]),
-            '2019-02-01': (ur'\twocolumns{20pt}{\variant}{\variant}', [
+            '2019-02-01': (r'\twocolumns{20pt}{\variant}{\variant}', [
                 ('getaclass', ['1576', '1577', '1578', '1579']),
                 ('gendenshteyn-7', ['22-24', '22-25', '22-27', '22-28', '22-29-1', '22-29', '22-29-2']),
             ]),
         }
-        for date, (style, tasks) in papers.iteritems():
+        for date, (style, tasks) in papers.items():
             yield paper.Paper(date, tasks, classLetter='7', style=style)

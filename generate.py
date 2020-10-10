@@ -1,4 +1,4 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 import argparse
@@ -213,9 +213,9 @@ def runGenerate(args):
                 ],
             },
         }
-        for className, dateTasks in classRandomTasks.iteritems():
+        for className, dateTasks in classRandomTasks.items():
             pupils = library.pupils.getPupils(className, addMyself=True, onlyMe=args.me)
-            for date, variantTasks in dateTasks.iteritems():
+            for date, variantTasks in dateTasks.items():
                 multiplePaper = generators.variant.MultiplePaper(date, pupils=pupils)
                 filename = multiplePaper.GetFilename()
                 if fileWriter.NotMatches(filename):

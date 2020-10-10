@@ -1,4 +1,4 @@
-import qr
-import reshuege
-import template
-import znanium
+import tools.qr
+import tools.reshuege
+import tools.template
+import tools.znanium

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-import task
+import problems.task as task
 
 from generators.value import UnitValue
 
@@ -1070,5 +1070,5 @@ class Yakunin(task.TasksGenerator):
         return 'yakunin'
 
     def __call__(self):
-        for number, text in yakuninTasksConfig.iteritems():
+        for number, text in yakuninTasksConfig.items():
             yield task.Task(text, number=number)
