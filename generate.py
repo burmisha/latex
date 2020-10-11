@@ -283,6 +283,9 @@ def CreateArgumentsParser():
     templateParser = subparsers.add_parser('template', help='Create template files')
     tools.template.populate_parser(templateParser)
 
+    docx2PdfParser = subparsers.add_parser('docx2pdf', help='Convert docx files to pdf ones')
+    tools.docx2pdf.populate_parser(docx2PdfParser)
+
     return parser
 
 
