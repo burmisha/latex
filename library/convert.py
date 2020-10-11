@@ -140,12 +140,12 @@ def source_link(link):
 
 class DocxToPdf(object):
     def __init__(self):
+        assert platform.system() == 'Darwin', 'DocxToPdf converter is configured for macOS only'
         self.__GroupContainerDir = os.path.join(os.environ['HOME'], 'Library', 'Group Containers', 'UBF8T346G9.Office')
         assert os.path.exists(self.__GroupContainerDir)
         assert os.path.isdir(self.__GroupContainerDir)
 
     def ConvertFile(self, source_file, destination_file):
-        assert platform.system() == 'Darwin', 'DocxToPdf converter is configured for macOS only'
         log.info('Converting \'%s\' to \'%s\'', source_file, destination_file)
         assert os.path.exists(source_file)
         assert os.path.isfile(source_file)
