@@ -9,6 +9,45 @@ import logging
 log = logging.getLogger(__name__)
 
 
+
+class OneDStructure(object):
+    def __init__(self, data, startIndex=1):
+        self.Data = data
+        self.StartIndex = startIndex
+
+    def __call__(self):
+        for index, (name, first, last) in enumerate(self.Data, self.StartIndex):
+            dirName = u'%02d %s' % (index, name)
+            if first > last:
+                log.error('Error in book config for %r, %r', first, last)
+                raise RuntimeError('Broken pages range')
+            for pageNumber in range(first, last):
+                yield pageNumber, dirName, '%02d %s' % (index, name)
+
+
+class TwoDStructure(object):
+    def __init__(self, data, firstLevelStartIndex=1, secondLevelStartIndex=1):
+        self.Data = data
+        self.FirstLevelStartIndex = firstLevelStartIndex
+        self.SecondLevelStartIndex = secondLevelStartIndex
+
+    def __call__(self):
+        for chapterIndex, (chapterName, parts) in enumerate(self.Data, self.FirstLevelStartIndex):
+            dirName = u'%02d %s' % (chapterIndex, chapterName)
+            hasDigit = all(part[0].isdigit() for part, _, _ in parts)
+            for partIndex, (partName, first, last) in enumerate(parts, self.SecondLevelStartIndex):
+                if first > last:
+                    log.error('Error in book config for %r, %r', first, last)
+                    raise RuntimeError('Broken pages range')
+
+                for pageNumber in range(first, last + 1):
+                    if hasDigit:
+                        nameTemplate = u'%s' % partName
+                    else:
+                        nameTemplate = u'%02d %s' % (partIndex, partName)
+                    yield pageNumber, dirName, nameTemplate
+
+
 class PdfBook(object):
     def __init__(
         self,
@@ -97,6 +136,12 @@ class PdfBook(object):
         else:
             return True
 
+    def GetStructure(self):
+        if hasattr(self, '_structure'):
+            return self._structure
+        else:
+            raise NotImplementedError('No structure defined')
+
     def Save(self, overwrite=False):
         structure = self.GetStructure()
         data = list(structure())
@@ -127,6 +172,20 @@ def page_shift(shift):
 def params(params_list):
     def decorator(cls):
         cls.ParamsList = params_list
+        return cls
+    return decorator
+
+
+def one_d_structure(data, **kws):
+    def decorator(cls):
+        cls._structure = OneDStructure(data, **kws)
+        return cls
+    return decorator
+
+
+def two_d_structure(data, **kws):
+    def decorator(cls):
+        cls._structure = TwoDStructure(data, **kws)
         return cls
     return decorator
 
