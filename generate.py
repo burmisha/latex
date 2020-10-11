@@ -277,8 +277,8 @@ def CreateArgumentsParser():
     znaniumParser = subparsers.add_parser('znanium', help='Znanium')
     tools.znanium.populate_parser(znaniumParser)
 
-    convertParser = subparsers.add_parser('convert', help='Convert pdf books')
-    library.convert.populate_parser(convertParser)
+    convertParser = subparsers.add_parser('convert', help='Convert pdf books into jpeg')
+    tools.convert.populate_parser(convertParser)
 
     templateParser = subparsers.add_parser('template', help='Create template files')
     tools.template.populate_parser(templateParser)

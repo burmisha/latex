@@ -1,3 +1,4 @@
+import tools.convert
 import tools.docx2pdf
 import tools.qr
 import tools.reshuege
