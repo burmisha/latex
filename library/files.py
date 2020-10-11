@@ -1,9 +1,8 @@
-# -*- coding: utf-8 -*-
-
-import logging
 import os
 import re
+import shutil
 
+import logging
 log = logging.getLogger(__name__)
 
 
@@ -100,3 +99,34 @@ class FileWriter(object):
         log.info('Got %d manual files in %r', len(manualFiles), sorted(dirs))
         for index, manualFile in enumerate(manualFiles):
             log.info('  Manual file %3d: %s', index, manualFile)
+
+
+class FileCopier(object):
+    def __init__(self, source_file, destination_dir=None):
+        assert os.path.exists(source_file)
+        assert os.path.isfile(source_file)
+        self._source_file = source_file
+        log.info(u'Using source file \'%s\'', self._source_file)
+
+        if destination_dir is None:
+            self._destination_dir = None
+        else:
+            self.SetDestinationDir(destination_dir)
+
+    def SetDestinationDir(self, destination_dir):
+        assert os.path.exists(destination_dir)
+        assert os.path.isdir(destination_dir)
+        self._destination_dir = destination_dir
+        log.info(u'Using destination dir \'%s\'', self._destination_dir)
+
+    def CreateFile(self, destination_file):
+        if self._destination_dir:
+            destination_path = os.path.join(self._destination_dir, destination_file)
+        else:
+            destination_path = destination_file
+
+        if not os.path.exists(destination_path):
+            log.info(u'Creating \'%s\' from template', destination_path)
+            shutil.copy(self._source_file, destination_path)
+        else:
+            log.debug(u'File %s already exists', destination_path)

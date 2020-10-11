@@ -24,6 +24,11 @@ def run(args):
         regexp=u'.*Рабочая тетрадь.*',
     )
 
+    if args.run_extractor:
+        pdfExtractor = library.convert.PdfToPdf(library.files.udrPath(u'10 класс', u'10-1 - Кинематика - Рабочая тетрадь.pdf'))
+        pdfExtractor.Extract('5, 1-4', library.files.udrPath(u'10 класс', u'tmp.pdf'))
+
 
 def populate_parser(parser):
+    parser.add_argument('--run-extractor', help='Extract pdf files', action='store_true')
     parser.set_defaults(func=run)
