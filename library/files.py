@@ -125,7 +125,6 @@ class FileCopier(object):
         else:
             destination_path = destination_file
 
-        # never overwrite file
         if not os.path.exists(destination_path):
             log.info(u'Creating \'%s\' from template', destination_path)
             shutil.copy(self._source_file, destination_path)
