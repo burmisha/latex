@@ -130,3 +130,16 @@ class FileCopier(object):
             shutil.copy(self._source_file, destination_path)
         else:
             log.debug(u'File %s already exists', destination_path)
+
+
+def is_older(first_file, second_file):
+    assert os.path.exists(first_file)
+    assert os.path.isfile(first_file)
+    if not os.path.exists(second_file):
+        return False
+    elif os.path.isdir(second_file):
+        raise RuntimeError(f'\'{second_file}\' is not a file')
+    else:
+        first_mtime = os.path.getmtime(first_file)
+        second_mtime = os.path.getmtime(second_file)
+        return first_mtime < second_mtime

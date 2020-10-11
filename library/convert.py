@@ -3,6 +3,7 @@ import library.files
 import os
 import platform
 import subprocess
+import shutil
 
 import logging
 log = logging.getLogger(__name__)
@@ -33,9 +34,9 @@ class PdfBook(object):
         return 200
 
     def EnsureDir(self, dirname):
-        log.debug(u'Checking %s', dirname)
+        log.debug(f'Checking {dirname}', )
         if not os.path.isdir(dirname):
-            log.info(u'Create missing %s', dirname)
+            log.info(f'Create missing {dirname}', )
             os.mkdir(dirname)
 
     def GetParams(self):
@@ -51,7 +52,7 @@ class PdfBook(object):
             self.EnsureDir(dirName)
         else:
             dirName = self.DstPath
-        fileName = u'%s - %03d.png' % (nameTemplate, pageNumber)
+        fileName = '%s - %03d.png' % (nameTemplate, pageNumber)
         fileName = os.path.join(dirName, fileName)
         return dirName, fileName
 
@@ -85,7 +86,7 @@ class PdfBook(object):
             # '-define', 'png:compression-level=9',
             '-flatten',
         ] + self.GetParams() + [
-            u'%s[%d]' % (self.PdfPath, pageIndex),
+            '%s[%d]' % (self.PdfPath, pageIndex),
             fileName,
         ]
         log.debug('Running %r', command)
@@ -146,22 +147,27 @@ class DocxToPdf(object):
         assert os.path.isdir(self.__GroupContainerDir)
 
     def ConvertFile(self, source_file, destination_file):
-        log.info('Converting \'%s\' to \'%s\'', source_file, destination_file)
         assert os.path.exists(source_file)
         assert os.path.isfile(source_file)
         assert source_file.endswith('.docx')
         assert destination_file.endswith('.pdf')
-        assert not os.path.exists(destination_file)
+
+        if library.files.is_older(source_file, destination_file):
+            log.info(f'Skipping existing file \'{destination_file}\'')
+            return False
+        else:
+            log.info(f'Converting \'{source_file}\' to \'{destination_file}\'')
+
 
         tmp_docx_file = os.path.join(self.__GroupContainerDir, '_convert_tmp.docx')
         tmp_pdf_file = os.path.join(self.__GroupContainerDir, '_convert_tmp.pdf')
         for file in [tmp_docx_file, tmp_pdf_file]:
             if os.path.exists(file):
-                assert os.path.isfile(file), u'Expected file: \'%s\'' % file
+                assert os.path.isfile(file), f'Expected file: \'{file}\''
                 os.remove(file)
 
         shutil.copy(source_file, tmp_docx_file)
-        apple_script = '''
+        apple_script = f'''
             tell application "Microsoft Word"
                 activate
                 set tmp_docx_file to "{tmp_docx_file}"
@@ -170,10 +176,7 @@ class DocxToPdf(object):
                 save as active document file name tmp_pdf_file file format format PDF
                 close active window saving no
             end tell
-        '''.format(
-            tmp_docx_file=tmp_docx_file,
-            tmp_pdf_file=tmp_pdf_file,
-        )
+        '''
 
         # https://stackoverflow.com/questions/2940916/how-do-i-embed-an-applescript-in-a-python-script
         # https://discussions.apple.com/thread/7571530
@@ -184,17 +187,18 @@ class DocxToPdf(object):
         # https://developer.apple.com/library/archive/documentation/AppleScript/Conceptual/AppleScriptX/Concepts/work_with_as.html#//apple_ref/doc/uid/TP40001568-BABEBGCF
 
         p = subprocess.Popen(['osascript', '-'], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-        stdout, stderr = p.communicate(apple_script)
-        assert p.returncode == 0, u'returncode expected to by 0, got %s (%r)' % p.returncode
-        assert stdout == '', u'stdout expected to by empty, got %s (%r)' % stdout
-        assert stderr == '', u'stderr expected to by empty, got %s (%r)' % stderr
+        stdout, stderr = p.communicate(apple_script.encode('utf-8'))
+        assert p.returncode == 0, 'returncode expected to be 0, got %s (%r)' % (p.returncode, p.returncode)
+        assert stdout == b'', 'stdout expected to by empty, got %s (%r)' % (stdout, stdout)
+        assert stderr == b'', 'stderr expected to by empty, got %s (%r)' % (stderr, stderr)
 
         assert os.path.exists(tmp_pdf_file)
         assert os.path.isfile(tmp_pdf_file)
 
         shutil.move(tmp_pdf_file, destination_file)
-        log.info('Converted \'%s\' to \'%s\'', source_file, destination_file)
+        log.info(f'Converted \'{source_file}\' to \'{destination_file}\'')
         os.remove(tmp_docx_file)
+        return True
 
     def ConvertDir(self, source_directory, destination_directory=None, recursive=True, regexp=None):
         assert os.path.exists(source_directory)
@@ -217,12 +221,11 @@ class DocxToPdf(object):
         )):
             basename = os.path.basename(docx_file)[:-len(docx_suffix)] + '.pdf'
             pdf_file = os.path.join(dst_path, basename)
-            if not os.path.exists(pdf_file):
-                self.ConvertFile(docx_file, pdf_file)
+            if self.ConvertFile(docx_file, pdf_file):
                 new_converted += 1
             else:
                 already_converted_count += 1
-        log.info(u'Converted %d files (and found %d existing) in %s', new_converted, already_converted_count, source_directory)
+        log.info(f'Converted {new_converted} files and found {already_converted_count} existing in \'{source_directory}\'')
 
 
 
