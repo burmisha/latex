@@ -11,8 +11,6 @@ log = logging.getLogger(__name__)
 from PIL import Image
 from io import BytesIO
 
-# Selenium also requires geckodriver
-# Use 'brew install geckodriver'
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 
