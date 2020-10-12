@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 import library
 
 import os
@@ -89,13 +87,13 @@ class Znanium(object):
 
 
 def run(args):
-    rootPath = library.files.UdrPath(u'Материалы - Znanium')
+    rootPath = library.files.UdrPath('Материалы - Znanium')
     for bookName, bookUrl, dataUrl, password, pageCount, descDict in [
         (
-            u'Горбушин', 
+            'Горбушин', 
             'https://znanium.com/catalog/document?id=338171',
             'https://znanium.com/read?id=338172',
-            u'нулевые',
+            'нулевые',
             84,
             {
                 1: '1.2.11',
@@ -188,7 +186,7 @@ def run(args):
         znanium = Znanium(bookUrl=bookUrl, dataUrl=dataUrl, password=password)
         dirName = rootPath(bookName, create_missing_dir=True)
         pages = znanium.SaveAllPages(
-            filenameFmt=rootPath(bookName, u'%s - %%02d%%s.png' % bookName),
+            filenameFmt=rootPath(bookName, '%s - %%02d%%s.png' % bookName),
             pageCount=pageCount,
             descDict=descDict,
         )

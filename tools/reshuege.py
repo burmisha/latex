@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 import library
 
 import os
@@ -130,23 +128,23 @@ class SdamGia(object):
                     for tr_small in tds[0].find_elements_by_xpath('./div/table/tbody/tr'):
                         name = tr_small.find_element_by_xpath('./td[1]').text
                         a = tr_small.find_element_by_xpath('./td[1]/a').get_attribute('href')
-                        partName = name.split('(')[0].strip().replace(', ', u' и ').replace(u' просмотреть', '')
+                        partName = name.split('(')[0].strip().replace(', ', ' и ').replace(' просмотреть', '')
                         assert partName
                         result[-1][1].append((partName, a))
                         log.info('  Part: %s, link: %s', partName, a)
                 elif len(tds) == 2:
                     a = tds[0].find_element_by_xpath('./a')
-                    hasChildren = not (u'просмотреть (' in a.text)
+                    hasChildren = not ('просмотреть (' in a.text)
                     if hasChildren:
                         a.click()  # selenium reqiures text to be displayed
                         taskNumber = int(a.text.split('.')[0].split(' ')[0])
-                        taskName = a.text.split('.')[1].split('(')[0].strip().replace(', ', u' и ')
+                        taskName = a.text.split('.')[1].split('(')[0].strip().replace(', ', ' и ')
                         assert taskNumber == len(result) + 1
                         result.append((taskName, []))
                     else:
                         taskNumber = int(tds[0].text.split(' ')[0].strip('.'))
                         assert taskNumber == len(result) + 1
-                        taskName = tds[0].text.split('.')[1].split('(')[0].strip().replace(', ', u' и ').replace(u' просмотреть', '')
+                        taskName = tds[0].text.split('.')[1].split('(')[0].strip().replace(', ', ' и ').replace(' просмотреть', '')
                         link = a.get_attribute('href')
                         result.append((taskName, [(taskName, link)]))
                     log.info('Chapter %02d: %s', taskNumber, taskName)
@@ -211,20 +209,20 @@ class SdamGia(object):
 
 def run(args):
     for subject, link, count in [
-        (u'Физика', 'https://phys-ege.sdamgia.ru', 32),
-        (u'Физика-ОГЭ', 'https://phys-oge.sdamgia.ru', 25),
-        # (u'Химия', 'https://geo-ege.sdamgia.ru', 34),
-        # (u'География', 'https://chem-ege.sdamgia.ru', 35),
+        ('Физика', 'https://phys-ege.sdamgia.ru', 32),
+        ('Физика-ОГЭ', 'https://phys-oge.sdamgia.ru', 25),
+        # ('Химия', 'https://geo-ege.sdamgia.ru', 34),
+        # ('География', 'https://chem-ege.sdamgia.ru', 35),
     ]:
-        rootPath = library.files.UdrPath(u'Материалы - Решу ЕГЭ - %s' % subject)
+        rootPath = library.files.UdrPath('Материалы - Решу ЕГЭ - %s' % subject)
         sdamGia = SdamGia(link, count)
         tasks = sdamGia.GetTasks()
         for taskIndex, (taskName, parts) in enumerate(tasks, 1):
-            dirName = u'%02d %s' % (taskIndex, taskName)
+            dirName = '%02d %s' % (taskIndex, taskName)
             taskPath = rootPath(dirName, create_missing_dir=True)
             for partIndex, (partName, link) in enumerate(parts, 1):
                 log.info('Task %d of %d, part %d of %d', taskIndex, len(tasks), partIndex, len(parts))
-                filename = rootPath(taskPath, u'%d - %s - %%02d.png' % (partIndex, partName))
+                filename = rootPath(taskPath, '%d - %s - %%02d.png' % (partIndex, partName))
                 sdamGia.MakeFullScreenshot(link, filename=filename)
 
 

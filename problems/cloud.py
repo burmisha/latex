@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 import problems.gendenshteyn10 as gendenshteyn10
 import problems.gendenshteyn11 as gendenshteyn11
 import problems.gendenshteyn7 as gendenshteyn7

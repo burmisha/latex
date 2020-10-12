@@ -7,7 +7,7 @@ log = logging.getLogger(__name__)
 
 
 def udrPath(*args):
-    path = os.path.join(os.environ['HOME'], 'Yandex.Disk.localized', u'УДР', u'Общие материалы физиков УДР', *args)
+    path = os.path.join(os.environ['HOME'], 'Yandex.Disk.localized', 'УДР', 'Общие материалы физиков УДР', *args)
     log.debug('Using path %s', path)
     return path
 
@@ -20,7 +20,7 @@ class UdrPath(object):
         resPath = self.__Path + path
         resPath = udrPath(*resPath)
         if kws.get('create_missing_dir') is True and not os.path.isdir(resPath):
-            log.warn(u'Create missing %s', resPath)
+            log.warn('Create missing %s', resPath)
             os.mkdir(resPath)
         return resPath
 
@@ -106,7 +106,7 @@ class FileCopier(object):
         assert os.path.exists(source_file)
         assert os.path.isfile(source_file)
         self._source_file = source_file
-        log.info(u'Using source file \'%s\'', self._source_file)
+        log.info('Using source file \'%s\'', self._source_file)
 
         if destination_dir is None:
             self._destination_dir = None
@@ -117,7 +117,7 @@ class FileCopier(object):
         assert os.path.exists(destination_dir)
         assert os.path.isdir(destination_dir)
         self._destination_dir = destination_dir
-        log.info(u'Using destination dir \'%s\'', self._destination_dir)
+        log.info('Using destination dir \'%s\'', self._destination_dir)
 
     def CreateFile(self, destination_file):
         if self._destination_dir:
@@ -127,10 +127,10 @@ class FileCopier(object):
 
         # never overwrite file
         if not os.path.exists(destination_path):
-            log.info(u'Creating \'%s\' from template', destination_path)
+            log.info('Creating \'%s\' from template', destination_path)
             shutil.copy(self._source_file, destination_path)
         else:
-            log.debug(u'File %s already exists', destination_path)
+            log.debug('File %s already exists', destination_path)
 
 
 def is_older(first_file, second_file):
