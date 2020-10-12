@@ -9,6 +9,8 @@ import logging
 log = logging.getLogger(__name__)
 
 
+BROKEN_Y = '\u0438\u0306'  # й из 2 символов
+PROPER_Y = '\u0439'  # й из 1 символа
 
 class OneDStructure(object):
     def __init__(self, data, startIndex=1):
@@ -57,6 +59,8 @@ class PdfBook(object):
     ):
         assert pdfPath.endswith('.pdf')
         assert os.path.exists(pdfPath)
+        assert BROKEN_Y not in pdfPath
+        assert BROKEN_Y not in dstPath
         self.PdfPath = pdfPath
         self.DstPath = dstPath
 
@@ -73,9 +77,10 @@ class PdfBook(object):
         return 200
 
     def EnsureDir(self, dirname):
-        log.debug(f'Checking {dirname}', )
+        log.debug(f'Checking {dirname}')
+        assert BROKEN_Y not in dirname
         if not os.path.isdir(dirname):
-            log.info(f'Create missing {dirname}', )
+            log.info(f'Create missing {dirname}')
             os.mkdir(dirname)
 
     def GetParams(self):
@@ -111,6 +116,7 @@ class PdfBook(object):
             log.debug('Already generated %s', fileName)
             return False
 
+        assert BROKEN_Y not in fileName
         command = [
             'magick',
             'convert',
@@ -136,24 +142,26 @@ class PdfBook(object):
         else:
             return True
 
-    def GetStructure(self):
-        if hasattr(self, '_structure'):
-            return self._structure
-        else:
-            raise NotImplementedError('No structure defined')
-
     def Save(self, overwrite=False):
-        structure = self.GetStructure()
-        data = list(structure())
-        log.info('Saving %d pages from "%s" to "%s"', len(data), self.PdfPath, self.DstPath)
+        data = list(self._structure())
+        log.info('Saving %d pages from \'%s\' to \'%s\'', len(data), self.PdfPath, self.DstPath)
         for pageNumber, dirName, nameTemplate in data:
             self.ExtractPage(pageNumber, dirName=dirName, nameTemplate=nameTemplate, overwrite=overwrite)
 
     def GetStrangeFiles(self, remove=False):
         log.debug('Checking for strange files in %s', self.DstPath)
+
         found = set(library.files.walkFiles(self.DstPath, extensions=['.png']))
-        structure = self.GetStructure()
-        known = set(self.GetDirFilename(dirName, nameTemplate, pageNumber)[1] for pageNumber, dirName, nameTemplate in structure())
+        for foundFile in sorted(found):
+            if BROKEN_Y in foundFile:
+                raise RuntimeError(f'Broken {PROPER_Y} (got 2 symbols instead of 1) in \'{foundFile}\'')
+
+        knownFiles = []
+        for pageNumber, dirName, nameTemplate in self._structure():
+            filename = self.GetDirFilename(dirName, nameTemplate, pageNumber)[1]
+            knownFiles.append(filename)
+
+        known = set(knownFiles)
         strange = sorted(found - known)
         log.info('Found %d strange files (expected %d, found %d) in %s', len(strange), len(known), len(found), self.DstPath)
         for file in strange:
