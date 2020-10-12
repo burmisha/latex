@@ -1,5 +1,5 @@
 import library
-from library.convert import PdfBook, page_shift, params, source_link, one_d_structure, two_d_structure
+from library.convert import PdfBook, page_shift, params, source_link, one_d_structure, two_d_structure, ppi
 
 import subprocess
 import os
@@ -974,6 +974,7 @@ class Rymkevich(PdfBook):
 
 
 @page_shift(-2)
+@ppi(300)
 @two_d_structure([
     ('Механика', [
         ('01 - Прямолинейное равномерное и равнопеременное движение', 7, 13),

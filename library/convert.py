@@ -63,6 +63,8 @@ class PdfBook(object):
         assert BROKEN_Y not in dstPath
         self.PdfPath = pdfPath
         self.DstPath = dstPath
+        if not hasattr(self, '_ppi'):
+            self._ppi = 200
 
     def GetPageShift(self, pageNumber):
         if hasattr(self, 'PageShift'):
@@ -74,7 +76,7 @@ class PdfBook(object):
             return 0
 
     def GetPpi(self):
-        return 200
+        return int(self._ppi)
 
     def EnsureDir(self, dirname):
         log.debug(f'Checking {dirname}')
@@ -202,6 +204,13 @@ def source_link(link):
     # now link is unused
     def decorator(cls):
         cls.SourceLink = link
+        return cls
+    return decorator
+
+
+def ppi(value):
+    def decorator(cls):
+        cls._ppi = value
         return cls
     return decorator
 
