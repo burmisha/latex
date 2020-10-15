@@ -549,7 +549,8 @@ class YoutubePlaylist(object):
                         index = int(contentItem['playlistVideoRenderer']['index']['simpleText'])
                         url = 'https://www.youtube.com/watch?v=%s' % contentItem['playlistVideoRenderer']['videoId']
                         title = contentItem['playlistVideoRenderer']['title']['runs'][0]['text']
-                        log.debug('  #%02d %s, %s', index, self._TitleCanonizer.Canonize(title), url)
+                        title = self._TitleCanonizer.Canonize(title)
+                        log.debug('  #%02d %s, %s', index, title, url)
                         count += 1
                         videos.append((index, url, title))
                     except Exception as e:
@@ -570,29 +571,30 @@ def runDownload(args):
         downloader.Download(library.files.udrPath(downloader.GetDirname()))
 
     for videoDownloader in [
-        library.download.GetAClass(),
-        library.download.Gorbushin(),
-        library.download.CrashCoursePhysics(),
-        library.download.Foxford(),
+        # library.download.GetAClass(),
+        # library.download.Gorbushin(),
+        # library.download.CrashCoursePhysics(),
+        # library.download.Foxford(),
     ]:
         videoDownloader.Download(library.files.udrPath('Видео'))
 
     video_count = 0
 
     for url in [
-        'https://www.youtube.com/playlist?list=PLNG6BIg2XJxCfZtigKso6rBpJ2yk_JFVp',  # Горбушин
+        # 'https://www.youtube.com/playlist?list=PLNG6BIg2XJxCfZtigKso6rBpJ2yk_JFVp',  # Горбушин
         'https://www.youtube.com/playlist?list=PL66kIi3dt8A6Hd7soGMFXe6E5366Y66So',  # Фоксфорд
         # 'Курс физики основной школы'
         'https://www.youtube.com/playlist?list=PLYLAAGsAQhw9TcTQiq-EZeVuVPc6P8PSX',  # 7 класс
         'https://www.youtube.com/playlist?list=PLYLAAGsAQhw_dGE-7OdXgBXu52_GbnvF7',  # 8 класс
         'https://www.youtube.com/playlist?list=PLYLAAGsAQhw9fX9rgG5Z20V_M2AaUKErL',  # 9 класс — это 8-й
-        'https://www.youtube.com/playlist?list=PLYLAAGsAQhw8Y5BWL3nyecfr2nK6xqwIO',  # Підготовка до ДПА 9 клас
+        # 'https://www.youtube.com/playlist?list=PLYLAAGsAQhw8Y5BWL3nyecfr2nK6xqwIO',  # Підготовка до ДПА 9 клас
     ]:
         youtubePlaylist = library.download.YoutubePlaylist(url)
         title, videos = youtubePlaylist.ListVideos()
+        log.info(f'{title}')
         for index, url, video_title in videos:
             video_count += 1
-            log.info(f'{title}: {video_title}')
+            log.info(f'{video_title} {url}')
 
     pavel_victor_config = {
         ('10-0', 'Курс физики старшей школы. Физические величины и их измерение. Теория погрешностей'): {
@@ -658,7 +660,7 @@ def runDownload(args):
             full_chapter = f'{index_1}-{parts_1} - {title_2}'
             for index, url, video_title in videos:
                 video_count += 1
-                log.info(f'{full_chapter}: {video_title}')
+                log.info(f'{full_chapter}: {video_title} {url}')
     log.info(f'Got total of {video_count} videos')
 
 
