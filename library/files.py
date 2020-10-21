@@ -1,13 +1,29 @@
 import os
 import re
 import shutil
+import datetime
 
 import logging
 log = logging.getLogger(__name__)
 
+BROKEN_Y = '\u0438\u0306'  # й из 2 символов
+PROPER_Y = '\u0439'  # й из 1 символа
+
+
+class Location:
+    Dropbox = os.path.join(os.environ['HOME'], 'Dropbox')
+    YandexDisk = os.path.join(os.environ['HOME'], 'Yandex.Disk.localized')
+    Zoom = os.path.join(os.environ['HOME'], 'Documents', 'Zoom')
+
 
 def udrPath(*args):
-    path = os.path.join(os.environ['HOME'], 'Yandex.Disk.localized', 'УДР', 'Общие материалы физиков УДР', *args)
+    path = os.path.join(Location.YandexDisk, 'УДР', 'Общие материалы физиков УДР', *args)
+    log.debug('Using path %s', path)
+    return path
+
+
+def ipadWordPath(*args):
+    path = os.path.join(Location.Dropbox, '_iPad-Word', *args)
     log.debug('Using path %s', path)
     return path
 
@@ -32,9 +48,8 @@ def walkFiles(
     recursive=True,
     regexp=None,
 ):
-    # dirName = str(dirname)
     logName = 'dirs' if dirsOnly else 'files'
-    log.debug('Looking for %s of types %r in %s', logName, extensions, dirName)
+    log.debug(f'Looking for {logName} of types {extensions} in {dirName} matching {regexp}')
     count = 0
     if not os.path.exists(dirName):
         log.error('Path %r is missing', dirName)
@@ -47,14 +62,21 @@ def walkFiles(
     else:
         regexps = []
 
+    regexps = [r.replace(BROKEN_Y, PROPER_Y) for r in regexps]
+
     iterable = os.walk(dirName)
     if not recursive:
         iterable = [next(iterable)]
     for root, dirs, files in iterable:
         if dirsOnly:
             for directory in dirs:
-                count += 1
-                yield os.path.join(root, directory)
+                if not regexps or any(re.match(regexp, directory) for regexp in regexps):
+                    if directory.startswith('~$'):
+                        log.warn('Skipping %s in %s', directory, root)
+                    else:
+                        count += 1
+                        res = os.path.join(root, directory).replace(BROKEN_Y, PROPER_Y)
+                        yield res
         else:
             for filename in files:
                 if not extensions or any(filename.endswith(extension) for extension in extensions):
@@ -62,7 +84,9 @@ def walkFiles(
                         if filename.startswith('~$'):
                             log.warn('Skipping %s in %s', filename, root)
                         else:
-                            yield os.path.join(root, filename)
+                            count += 1
+                            res = os.path.join(root, filename).replace(BROKEN_Y, PROPER_Y)
+                            yield res
     log.debug('Found %d %s in %s', count, logName, dirName)
 
 
@@ -144,3 +168,68 @@ def is_older(first_file, second_file):
         first_mtime = os.path.getmtime(first_file)
         second_mtime = os.path.getmtime(second_file)
         return first_mtime < second_mtime
+
+
+class ZoomRenamer:
+    def __init__(self, root):
+        assert os.path.exists(root)
+        assert os.path.isdir(root)
+        self._root = root
+
+    def RenameOne(self, dir_name):
+        assert os.path.exists(dir_name)
+        assert os.path.isdir(dir_name)
+
+        dir_base = os.path.basename(dir_name)
+        log.info(f'Renaming zoom dir {dir_base}')
+        src_date_fmt = '%Y-%m-%d %H.%M.%S'
+        dst_date_fmt = '%Y-%m-%d %H-%M'
+        dt = datetime.datetime.strptime(dir_base[:4 + 3 + 3 + 3 + 3 + 3], src_date_fmt)
+        date = dt.strftime(dst_date_fmt)
+        dst_dir = os.path.join(self._root, f'{date} - zoom')
+        assert not os.path.exists(dst_dir)
+
+        if os.path.exists(os.path.join(self._root, dir_base, 'double_click_to_convert_01.zoom')):
+            log.warn(f'Still converting {dir_name} to mp4')
+            return
+
+        for src_base, dst_base in [
+            ('audio_only.m4a', f'{date} - аудио.m4a'),
+            ('chat.txt', f'{date} - чат - en.txt'),
+            ('meeting_saved_chat.txt', f'{date} - чат - ru.txt'),
+            ('playback.m3u', f'{date} - playback.m3u'),
+            ('zoom_0.mp4', f'{date} - запись.mp4'),
+        ]:
+            src_file = os.path.join(self._root, dir_base, src_base)
+            dst_file = os.path.join(self._root, dir_base, dst_base)
+            if os.path.exists(src_file) and not os.path.exists(dst_file):
+                log.info(f'Moving file {src_file} to {dst_file}')
+                shutil.move(src_file, dst_file)
+
+        log.info(f'Moving dir {dir_name} to {dst_dir}')
+        shutil.move(dir_name, dst_dir)
+
+
+class FileMover:
+    def __init__(self, prefix=None):
+        self._prefix = prefix
+
+    def Move(self, re=None, source=None, destination=None, matching=None):
+        src_list = [i for i in [self._prefix, source] if i]
+        dst_list = [i for i in [self._prefix, source, destination] if i]
+        src_dir = os.path.join(*src_list).replace(BROKEN_Y, PROPER_Y)
+        dst_dir = os.path.join(*dst_list).replace(BROKEN_Y, PROPER_Y)
+        assert os.path.exists(src_dir)
+        assert os.path.isdir(src_dir)
+        assert os.path.exists(dst_dir)
+        assert os.path.isdir(dst_dir)
+        log.info(f'Moving files from {src_dir} (recursive) to {dst_dir} (flat)')
+        for src_file in walkFiles(source, regexp=re):
+            assert os.path.exists(src_file)
+            assert os.path.isfile(src_file)
+            basename = os.path.basename(src_file)
+            if matching is None or matching(basename):
+                dst_file = os.path.join(dst_dir, basename)
+                assert not os.path.exists(dst_file)
+                log.info(f'Moving file {basename!r} to {dst_file}')
+                shutil.move(src_file, dst_file)

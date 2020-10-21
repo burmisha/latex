@@ -5,10 +5,57 @@ import itertools
 import logging
 log = logging.getLogger(__name__)
 
+import datetime
+import time
+import os
+
+
+def formatTimestamp(timestamp, fmt='%Y-%m-%d %H:%M:%S'):
+    if isinstance(timestamp, int):
+        return datetime.datetime.utcfromtimestamp(timestamp).strftime(fmt)
+    elif isinstance(timestamp, datetime.datetime):
+        return timestamp.strftime(fmt)
+    else:
+        raise RuntimeException(f'Unknown timestamp {timestamp}')
+
+
+class NowDelta:
+    def __init__(self, dt=None):
+        if dt is None:
+            self._now = datetime.datetime.now()
+        else:
+            if isinstance(dt, int):
+                self._now = datetime.datetime.utcfromtimestamp(dt)
+            elif isinstance(dt, datetime.datetime):
+                self._now = dt
+            else:
+                raise RuntimeException(f'Unknown datetime {dt}')
+
+    def _Format(self, dt, fmt=None):
+        if fmt:
+            return formatTimestamp(dt, fmt=fmt)
+        else:
+            return dt
+
+    def Before(self, fmt=None, **kwargs):
+        dt = self._now - datetime.timedelta(**kwargs)
+        return self._Format(dt, fmt=fmt)
+
+    def Now(self, fmt=None):
+        dt = self._now
+        return self._Format(dt, fmt=fmt)
+
+    def After(self, fmt=None, **kwargs):
+        dt = self._now + datetime.timedelta(**kwargs)
+        return self._Format(dt, fmt=fmt)
+
 
 def runTemplate(args):
-    fileCopier = library.files.FileCopier(library.files.udrPath('template-2-columns.docx'))
-    fileCopier.SetDestinationDir(library.files.udrPath('11 класс', '2020 весна'))
+    nowDelta = NowDelta()
+    docxTemplate = library.files.udrPath('template-2-columns.docx')
+    ipadTemplate = library.files.ipadWordPath('2020-21 Кружок', '2020-10-00 Кружок - Шаблон.docx')
+
+    fileCopier = library.files.FileCopier(docxTemplate, destination_dir=library.files.udrPath('11 класс', '2020 весна'))
     chapters = [
         # '1.1 - Кинематика',
         # '1.2 - Динамика',
@@ -34,6 +81,63 @@ def runTemplate(args):
     ]
     for chapter, course in itertools.product(chapters, courses):
         fileCopier.CreateFile(f'Вишнякова - {chapter} - {course} - решения.docx')
+
+    ipadTemplate = library.files.ipadWordPath('2020-21 Кружок', '2020-10-00 Кружок - Шаблон.docx')
+    circleCopier = library.files.FileCopier(ipadTemplate)
+
+    nowFmt = nowDelta.Now(fmt='%F')
+    futureFmt = nowDelta.After(days=12, fmt='%F')
+
+    for date in [
+        '2020-10-17',
+    ]:
+        if nowFmt <= date <= futureFmt:
+            circleCopier.CreateFile(library.files.ipadWordPath('2020-21 Кружок', f'{date} Кружок.docx'))
+        else:
+            log.info(f'Skipping {date}')
+
+    distantCopier = library.files.FileCopier(
+        docxTemplate,
+        destination_dir=library.files.ipadWordPath('2020-2 дистант')
+    )
+    for dateClass in [
+        # '2020-10-20-10',  # week 2–1
+        # '2020-10-20-9',
+        '2020-10-22-9',
+        '2020-10-22-10',
+        '2020-10-23-10',
+    ]:
+        if nowFmt <= dateClass <= futureFmt:
+            distantCopier.CreateFile(f'{dateClass} - с урока.docx')
+        else:
+            log.info(f'Skipping {dateClass}')
+
+
+    zoomRenamer = library.files.ZoomRenamer(library.files.Location.Zoom)
+    for dir_name in library.files.walkFiles(library.files.Location.Zoom, dirsOnly=True, regexp='.*2198986972$'):
+        zoomRenamer.RenameOne(dir_name)
+
+    yesterday = nowDelta.Before(days=1, fmt='%F')
+    monthAgo = nowDelta.Before(days=32, fmt='%F')
+    fileMover = library.files.FileMover()
+    fileMover.Move(
+        source=library.files.ipadWordPath('2020-21 Кружок'),
+        destination=library.files.udrPath('12 - кружок - 9-10-11'),
+        re='.*ужок.docx$',
+        matching=lambda b: monthAgo <= b <= yesterday,
+    )
+    fileMover.Move(
+        source=library.files.ipadWordPath('2020-2 дистант'),
+        destination=library.files.udrPath('10 класс', '2020-21 10AБ Физика - Архив'),
+        re='^....-..-..-10 .* с урока.docx$',
+        matching=lambda b: monthAgo <= b <= yesterday,
+    )
+    fileMover.Move(
+        source=library.files.ipadWordPath('2020-2 дистант'),
+        destination=library.files.udrPath('9 класс', '2020-21 9М Физика - Архив'),
+        re='[0-9\-]{10}-9.*файл с урока.docx$',
+        matching=lambda b: monthAgo <= b <= yesterday,
+    )
 
 
 def populate_parser(parser):

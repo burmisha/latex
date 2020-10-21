@@ -261,6 +261,8 @@ class DocxToPdf(object):
         # https://stackoverflow.com/questions/16534292/basic-powershell-batch-convert-word-docx-to-pdf
         # https://apple.stackexchange.com/questions/59532/create-automator-service-with-a-python-script
         # https://developer.apple.com/library/archive/documentation/AppleScript/Conceptual/AppleScriptX/Concepts/work_with_as.html#//apple_ref/doc/uid/TP40001568-BABEBGCF
+        # https://stackoverflow.com/questions/31697325/apple-script-ms-word-page-count-in-folder
+        # https://forums.macrumors.com/threads/applescript-ms-word-delete-last-sentence-paragraph.1767586/
 
         p = subprocess.Popen(['osascript', '-'], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         stdout, stderr = p.communicate(apple_script.encode('utf-8'))
