@@ -285,6 +285,9 @@ def CreateArgumentsParser():
     docx2PdfParser = subparsers.add_parser('docx2pdf', help='Convert docx files to pdf ones')
     tools.docx2pdf.populate_parser(docx2PdfParser)
 
+    gformsParser = subparsers.add_parser('gforms', help='Create JS scripts for Google Forms')
+    tools.google_forms.populate_parser(gformsParser)
+
     return parser
 
 
