@@ -21,16 +21,16 @@ def get_example_form():
 
 def get_all_forms():
     confirmation = 'Спасибо, ты молодчина!'
-    upTo = lambda time: 'Отправить до {} (напомню, что Гугл-формы сохраняют время отправки)'.format(time)
+    upTo = lambda time: 'Отправить до {} (напомню, что Гугл-формы сохраняют время отправки). И пожалуйста, проверьте, что выше верно указана дата и ваш класс (если нет — как можно быстрее дайте знать)'.format(time)
 
     form_2020_10_22_10 = GoogleForm(title='2020.10.22 10АБ - тест по динамике - 1', description=upTo('8:50'), confirmationMessage=confirmation)
     form_2020_10_22_10.AddSectionHeaderItem(title='''Возможно, стоит сначала посмотреть эту форму, потом всё решить у себя в тетради или черновике, а лишь после вписать ответы, чтобы не переключаться между приложениями или экранами''')
     form_2020_10_22_10.AddTextItem(title='Фамилия Имя', helpText='Именно в таком порядке, пожалуйста', required=True)
-    form_2020_10_22_10.AddMultipleChoiceItem(title='Задание 1', choices=['Верно', 'Неверно', 'Недостаточно данных в условии'])
-    form_2020_10_22_10.AddMultipleChoiceItem(title='Задание 2', choices=['Верно', 'Неверно', 'Недостаточно данных в условии'])
-    form_2020_10_22_10.AddMultipleChoiceItem(title='Задание 3', choices=['Верно', 'Неверно', 'Недостаточно данных в условии'])
-    form_2020_10_22_10.AddMultipleChoiceItem(title='Задание 4', choices=['Верно', 'Неверно', 'Недостаточно данных в условии'])
-    form_2020_10_22_10.AddMultipleChoiceItem(title='Задание 4', choices=['Верно', 'Неверно', 'Недостаточно данных в условии'])
+    for task_index in range(1, 5, 1):
+        form_2020_10_22_10.AddMultipleChoiceItem(title=f'Задание {task_index}', choices=['Верно', 'Неверно', 'Недостаточно данных в условии'])
+    for task_index in range(5, 11, 1):
+        form_2020_10_22_10.AddTextItem(title=f'Задание {task_index}')
+    form_2020_10_22_10.AddTextItem(title='Сколько задач на уроке сегодня было понятно?')
     form_2020_10_22_10.AddSectionHeaderItem(title='Это конец формы, пора всё проверить и отправлять')
     form_2020_10_22_10.AddImageItem(url='https://media.giphy.com/media/WxxsVAJLSBsFa/giphy.gif', title='Всё!', helpText='Пора проверить и отправлять')
 
@@ -45,8 +45,8 @@ def get_all_forms():
 
     return {
         'example': get_example_form(),
-        '2020-10-22-10': form_2020_10_22_10,
         '2020-10-22-9': form_2020_10_22_9,
+        '2020-10-22-10': form_2020_10_22_10,
     }
 
 
@@ -56,12 +56,15 @@ def run(args):
     last_name = None
     for name, form in sorted(get_all_forms().items()):
         if form_filter is None or form_filter in name:
+            log.info(f'Script for {name}')
             last_query = form.FormQuery()
+            log.info(f'\n\n{last_query}\n\n')
+            log.info('Go to https://script.google.com/home and enter code above')
             last_name = name
 
     if last_query:
         subprocess.run('pbcopy', universal_newlines=True, input=last_query)
-        log.info(f'Copied query for {last_name} to clipboard (it was lat one)')
+        log.info(f'Copied query for {last_name} to clipboard (it was last one)')
     else:
         log.info(f'No forms to match {form_filter}')
 

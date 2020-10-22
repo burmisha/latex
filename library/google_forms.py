@@ -71,9 +71,7 @@ class GoogleForm:
 
     def FormQuery(self):
         query = f'''
-function newSimpleForm(){{
-    {self._query}
+function newSimpleForm(){{{self._query}
     Logger.log('Done: ' + form.getEditUrl());
 }}'''
-        log.info(f'\n\n{query}\n\nGo to https://script.google.com/home and enter code above')
         return query
