@@ -233,3 +233,5 @@ class FileMover:
                 assert not os.path.exists(dst_file)
                 log.info(f'Moving file {basename!r} to {dst_file}')
                 shutil.move(src_file, dst_file)
+            else:
+                log.debug(f'File {basename!r} does not match')

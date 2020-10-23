@@ -101,17 +101,17 @@ def runTemplate(args):
         destination_dir=library.files.ipadWordPath('2020-2 дистант')
     )
     for dateClass in [
-        # '2020-10-20-10',  # week 2–1
-        # '2020-10-20-9',
-        '2020-10-22-9',
-        '2020-10-22-10',
-        '2020-10-23-10',
+        # '2020-10-20-10', '2020-10-20-9', '2020-10-22-9', '2020-10-22-10', '2020-10-23-10',  # week 2–1
+        '2020-10-27-10',  # week 2–2
+        '2020-10-27-9',
+        '2020-10-29-9',
+        '2020-10-29-10',
+        '2020-10-30-10',
     ]:
         if nowFmt <= dateClass <= futureFmt:
             distantCopier.CreateFile(f'{dateClass} - с урока.docx')
         else:
             log.info(f'Skipping {dateClass}')
-
 
     zoomRenamer = library.files.ZoomRenamer(library.files.Location.Zoom)
     for dir_name in library.files.walkFiles(library.files.Location.Zoom, dirsOnly=True, regexp='.*2198986972$'):
@@ -124,19 +124,19 @@ def runTemplate(args):
         source=library.files.ipadWordPath('2020-21 Кружок'),
         destination=library.files.udrPath('12 - кружок - 9-10-11'),
         re='.*ужок.docx$',
-        matching=lambda b: monthAgo <= b <= yesterday,
+        matching=lambda b: monthAgo <= b[:10] <= yesterday,
     )
     fileMover.Move(
         source=library.files.ipadWordPath('2020-2 дистант'),
         destination=library.files.udrPath('10 класс', '2020-21 10AБ Физика - Архив'),
         re='^....-..-..-10 .* с урока.docx$',
-        matching=lambda b: monthAgo <= b <= yesterday,
+        matching=lambda b: monthAgo <= b[:10] <= yesterday
     )
     fileMover.Move(
         source=library.files.ipadWordPath('2020-2 дистант'),
         destination=library.files.udrPath('9 класс', '2020-21 9М Физика - Архив'),
-        re='[0-9\-]{10}-9.*файл с урока.docx$',
-        matching=lambda b: monthAgo <= b <= yesterday,
+        re='^....-..-..-9 .* с урока.docx$',
+        matching=lambda b: monthAgo <= b[:10] <= yesterday,
     )
 
 
