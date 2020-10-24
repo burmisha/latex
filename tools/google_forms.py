@@ -1,4 +1,4 @@
-from library.google_forms import GoogleForm
+import library.google_forms
 
 import subprocess
 
@@ -18,7 +18,7 @@ class TestFormGenerator:
             '554 школа, Москва, 2020–2021 учебный год.'
         self._count = count
         self._task_number = 0
-        self._form = GoogleForm(
+        self._form = library.google_forms.GoogleForm(
             title=title,
             description=upToStr,
             confirmationMessage=confirmation,
@@ -45,7 +45,7 @@ class TestFormGenerator:
             self._form.AddMultipleChoiceItem(title=f'Задание {task_number}', choices=choices)
 
     def Generate(self, image='minions'):
-        assert self._count == self._task_number
+        assert self._count == self._task_number or self._count is None
         images = {
             'minions': 'https://media.giphy.com/media/WxxsVAJLSBsFa/giphy.gif',
             'incredibles': 'https://media.giphy.com/media/G2fKgPMXJ40WA/giphy.gif',
@@ -57,51 +57,77 @@ class TestFormGenerator:
 
 
 def get_all_forms():
-    example = GoogleForm(title='Пример', description='Отправить до полуночи', confirmationMessage='Спасибо, ты молодчина!')
+    forms = {}
+    example = library.google_forms.GoogleForm(title='Пример', description='Отправить до полуночи', confirmationMessage='Спасибо, ты молодчина!')
     example.AddTextItem(title='Фамилия Имя', helpText='Именно в таком порядке', required=True)
     example.AddMultipleChoiceItem(title='Класс', choices=[9, 10], showOtherOption=True)
     example.AddMultipleChoiceItem(title='Школа', choices=['554, Москва'], showOtherOption=True)
     example.AddTextItem(title='Задание 2', required=False)
     example.AddSectionHeaderItem(title='Это конец формы, пора всё проверить и отправлять')
     example.AddImageItem(url='https://media.giphy.com/media/WxxsVAJLSBsFa/giphy.gif', title='Всё!', helpText='Пора проверить и отправлять')
+    forms['example'] = example
 
-    form_generator = TestFormGenerator(title='2020.10.22 10АБ - тест по динамике - 1', upTo='8:50', count=10)
-    form_generator.AddMultipleChoiceTask(choices=['Верно', 'Неверно', 'Недостаточно данных в условии'], count=4)
-    form_generator.AddTextTask(count=6)
-    form_generator.AddText(title='Сколько задач на уроке сегодня было понятно?')
-    form_2020_10_22_10 = form_generator.Generate()
-
-    form_generator = TestFormGenerator(title='2020.10.22 9М - тест по динамике - 1', upTo='10:50', count=10)
-    form_generator.AddMultipleChoiceTask(choices=['А', 'Б', 'В'], count=10)
-    form_generator.AddText(title='Сколько задач (из 20) на уроке сегодня было понятно?')
-    form_2020_10_22_9 = form_generator.Generate()
-
-    return {
-        'example': example,
-        '2020-10-22-9': form_2020_10_22_9,
-        '2020-10-22-10': form_2020_10_22_10,
+    test_forms_config = {
+        '2020-10-22-10АБ': {
+            'title': 'Тест по динамике - 1',
+            'upTo': '8:50',
+            'tasks': [
+                ('choices', 4, ['Верно', 'Неверно', 'Недостаточно данных в условии']),
+                ('any', 6),
+                ('text', 'Сколько задач на уроке сегодня было понятно?'),
+            ],
+        },
+        '2020-10-22-9М': {
+            'title': 'Тест по динамике - 1',
+            'upTo': '10:50',
+            'tasks': [
+                ('choices', 10, ['А', 'Б', 'В']),
+                ('text', 'Сколько задач на уроке сегодня было понятно?'),
+            ],
+        },
     }
+    for key, config in test_forms_config.items():
+        title = '{} - {}'.format(
+            key.replace('-', '.', 2).replace('-', ' ', 1),
+            config['title'],
+        )
+        form_generator = TestFormGenerator(title=title, upTo=config['upTo'])
+        for task_config in config['tasks']:
+            if task_config[0] == 'choices':
+                form_generator.AddMultipleChoiceTask(choices=task_config[2], count=task_config[1])
+            elif task_config[0] == 'any':
+                form_generator.AddTextTask(count=task_config[1])
+            elif task_config[0] == 'text':
+                form_generator.AddText(title=task_config[1])
+                form = form_generator.Generate()
+        forms[key] = form
+
+    return forms
+
+
+def log_list(items):
+    return ''.join('\n    - ' + item for item in items)
 
 
 def run(args):
     form_filter = args.filter
-    last_query = None
-    last_name = None
-    for name, form in sorted(get_all_forms().items()):
-        if form_filter is None or form_filter in name:
-            log.info(f'Script for {name}')
-            last_query = form.FormQuery()
-            log.info(f'\n\n{last_query}\n\n')
-            log.info('Paste and run code above at https://script.google.com/home')
-            last_name = name
-
-    if last_query:
-        subprocess.run('pbcopy', universal_newlines=True, input=last_query)
-        log.info(f'Copied query for {last_name} to clipboard (it was last one)')
+    all_forms = get_all_forms()
+    if form_filter:
+        matched_names = sorted([name for name in all_forms if form_filter in name])
+        if len(matched_names) > 1:
+            log.warning('Too many matches for \'%s\':%s', form_filter, log_list(sorted(matched_names)))
+        elif len(matched_names) == 1:
+            name = matched_names[0]
+            query = all_forms[name].FormQuery()
+            subprocess.run('pbcopy', universal_newlines=True, input=query)
+            log.info(f'Script for {name}: \n{query}\n')
+            log.info(f'Copied query for {name} to clipboard')
+            log.info('Paste and run JS-code at https://script.google.com/home')
+            log.info('See all ready forms at: https://docs.google.com/forms/u/0/')
+        else:
+            log.warning('No forms to match \'%s\'\nAvailable forms:%s', form_filter, log_list(sorted(all_forms)))
     else:
-        log.warning(f'No forms to match {form_filter}')
-
-    log.info('See all forms at: https://docs.google.com/forms/u/0/')
+        log.info('Available forms:%s', log_list(sorted(all_forms)))
 
 
 
