@@ -568,7 +568,7 @@ def runDownload(args):
         # library.download.MathusPhys(),
         # library.download.ZnakKachestava(),
     ]:
-        downloader.Download(library.files.udrPath(downloader.GetDirname()))
+        downloader.Download(library.location.udr(downloader.GetDirname()))
 
     for videoDownloader in [
         # library.download.GetAClass(),
@@ -576,7 +576,7 @@ def runDownload(args):
         # library.download.CrashCoursePhysics(),
         # library.download.Foxford(),
     ]:
-        videoDownloader.Download(library.files.udrPath('Видео'))
+        videoDownloader.Download(library.location.udr('Видео'))
 
     video_count = 0
 

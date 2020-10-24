@@ -1,5 +1,6 @@
 import library.convert
 import library.files
+import library.location
 
 import os
 
@@ -36,37 +37,37 @@ class PdfExtractor:
 def run(args):
     docxToPdf = library.convert.DocxToPdf()
     docxToPdf.ConvertDir(
-        library.files.udrPath('11 класс', '2020 весна'),
+        library.location.udr('11 класс', '2020 весна'),
         recursive=False,
         regexp='.*Вишнякова - [0-9].*',
     )
     docxToPdf.ConvertDir(
-        library.files.udrPath('11 класс', '2020 весна'),
+        library.location.udr('11 класс', '2020 весна'),
         recursive=False,
         regexp='.*Вишнякова - .* - Все условия.*',
     )
-    docxToPdf.ConvertDir(library.files.udrPath('10 класс'), recursive=False, regexp='.*Рабочая тетрадь.*')
-    docxToPdf.ConvertDir(library.files.udrPath('9 класс'), recursive=False, regexp='.*Рабочая тетрадь.*')
+    docxToPdf.ConvertDir(library.location.udr('10 класс'), recursive=False, regexp='.*Рабочая тетрадь.*')
+    docxToPdf.ConvertDir(library.location.udr('9 класс'), recursive=False, regexp='.*Рабочая тетрадь.*')
     docxToPdf.ConvertDir(
-        os.path.join(library.files.Location.Dropbox, '_iPad-Word', '2020-21 Кружок'),
-        destination_directory=library.files.udrPath('12 - кружок - 9-10-11', '2020-21 Кружок и допы - Видео и материалы'),
+        library.location.ipad('2020-21 Кружок'),
+        destination_directory=library.location.udr('12 - кружок - 9-10-11', '2020-21 Кружок и допы - Видео и материалы'),
         regexp=r'.*\b[Кк]ружок\.docx$',
     )
     docxToPdf.ConvertDir(
-        library.files.udrPath('12 - кружок - 9-10-11'),
+        library.location.udr('12 - кружок - 9-10-11'),
         destination_directory='2020-21 Кружок и допы - Видео и материалы',
         regexp=r'.*\b[Кк]ружок\.docx$',
         recursive=False,
     )
     docxToPdf.ConvertDir(
-        library.files.udrPath('10 класс', '2020-21 10AБ Физика - Архив'),
-        destination_directory=library.files.udrPath('10 класс', '2020-21 10AБ Физика'),
+        library.location.udr('10 класс', '2020-21 10AБ Физика - Архив'),
+        destination_directory=library.location.udr('10 класс', '2020-21 10AБ Физика'),
         regexp=r'.*с урока\.docx$',
         recursive=False,
     )
     docxToPdf.ConvertDir(
-        library.files.udrPath('9 класс', '2020-21 9М Физика - Архив'),
-        destination_directory=library.files.udrPath('9 класс', '2020-21 9М Физика'),
+        library.location.udr('9 класс', '2020-21 9М Физика - Архив'),
+        destination_directory=library.location.udr('9 класс', '2020-21 9М Физика'),
         regexp=r'.*с урока\.docx$',
         recursive=False,
     )
@@ -75,7 +76,7 @@ def run(args):
     if args.run_extractor:
         extractor_configs = [
             (
-                library.files.udrPath('11 класс', '2020 весна', 'Вишнякова - Базовый курс - Все условия.pdf'),
+                library.location.udr('11 класс', '2020 весна', 'Вишнякова - Базовый курс - Все условия.pdf'),
                 None,
                 {
                     '1': 'Вишнякова - 1.1 - Кинематика - БК - условия.pdf',
@@ -98,7 +99,7 @@ def run(args):
                 },
             ),
             (
-                library.files.udrPath('10 класс', '10-1 - Кинематика - Рабочая тетрадь.pdf'),
+                library.location.udr('10 класс', '10-1 - Кинематика - Рабочая тетрадь.pdf'),
                 '2020-21 10AБ Физика',
                 {
                     '1-4':          '10-1-1 - Кинематика - Неделя 1 - Материалы.pdf',
@@ -114,7 +115,7 @@ def run(args):
                 },
             ),
             (
-                library.files.udrPath('10 класс', '10-2 - Динамика - Рабочая тетрадь.pdf'),
+                library.location.udr('10 класс', '10-2 - Динамика - Рабочая тетрадь.pdf'),
                 '2020-21 10AБ Физика',
                 {
                     '1':    '10-2-1 - Динамика - Неделя 1 - ДЗ.pdf',
@@ -125,7 +126,7 @@ def run(args):
                 },
             ),
             (
-                library.files.udrPath('9 класс', '9-2 - Динамика - Рабочая тетрадь.pdf'),
+                library.location.udr('9 класс', '9-2 - Динамика - Рабочая тетрадь.pdf'),
                 '2020-21 9М Физика',
                 {
                     '1-2':  '9-2-1.1 - Динамика - Неделя 1 - Материалы.pdf',

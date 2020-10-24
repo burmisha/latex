@@ -1,3 +1,7 @@
+import library.location
+from library.location import Location
+
+
 import os
 import re
 import shutil
@@ -10,31 +14,13 @@ BROKEN_Y = '\u0438\u0306'  # й из 2 символов
 PROPER_Y = '\u0439'  # й из 1 символа
 
 
-class Location:
-    Dropbox = os.path.join(os.environ['HOME'], 'Dropbox')
-    YandexDisk = os.path.join(os.environ['HOME'], 'Yandex.Disk.localized')
-    Zoom = os.path.join(os.environ['HOME'], 'Documents', 'Zoom')
-
-
-def udrPath(*args):
-    path = os.path.join(Location.YandexDisk, 'УДР', 'Общие материалы физиков УДР', *args)
-    log.debug('Using path %s', path)
-    return path
-
-
-def ipadWordPath(*args):
-    path = os.path.join(Location.Dropbox, '_iPad-Word', *args)
-    log.debug('Using path %s', path)
-    return path
-
-
 class UdrPath(object):
     def __init__(self, *path):
         self.__Path = path
 
     def __call__(self, *path, **kws):
         resPath = self.__Path + path
-        resPath = udrPath(*resPath)
+        resPath = library.location.udr(*resPath)
         if kws.get('create_missing_dir') is True and not os.path.isdir(resPath):
             log.warn('Create missing %s', resPath)
             os.mkdir(resPath)

@@ -69,7 +69,7 @@ class Generator(object):
 
 
 def runQr(args):
-    qrGenerator = Generator(path=library.files.udrPath('qrcodes'), force=args.force)
+    qrGenerator = Generator(path=library.location.udr('qrcodes'), force=args.force)
     qrGenerator.MakeAll()
 
 
