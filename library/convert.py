@@ -329,9 +329,12 @@ class PdfToPdf(object):
             pages_range = pages_range.strip()
             if '-' in pages_range:
                 first_page, last_page = pages_range.split('-')
+            elif '+' in pages_range:
+                first_page, more_pages = pages_range.split('+')
+                last_page = int(first_page) + int(more_pages)
             else:
                 first_page, last_page = pages_range, pages_range
-            first_page, last_page = int(first_page), int(last_page)
+            first_page, last_page = int(first_page), int(last_page)  # including both
             assert first_page <= last_page
 
             part_file = os.path.join(self._tmp_dir, 'part_%d.pdf')

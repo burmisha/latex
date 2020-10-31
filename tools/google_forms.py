@@ -44,15 +44,21 @@ class TestFormGenerator:
             task_number = self.NewTask()
             self._form.AddMultipleChoiceItem(title=f'Задание {task_number}', choices=choices)
 
-    def Generate(self, image='minions'):
+    def Generate(self, image=None):
+        if not image:
+            image = 'minions'
         assert self._count == self._task_number or self._count is None
         images = {
             'minions': 'https://media.giphy.com/media/WxxsVAJLSBsFa/giphy.gif',
             'incredibles': 'https://media.giphy.com/media/G2fKgPMXJ40WA/giphy.gif',
             'insideout': 'https://media.giphy.com/media/dU6Ec1svWeWCk/giphy.gif',
         }
-        self._form.AddSectionHeaderItem(title='Это конец формы, пора всё проверить и отправлять')
-        self._form.AddImageItem(url=images[image], title='Всё!', helpText='Пора проверить и отправлять')
+        self._form.AddTextItem(title='Если сдаёшь сильно позже, напиши, пожалуйста, причину', helpText='Если опоздание до 1–2 минут — писать точно не надо, 3 — скорее не надо, если больше 15 минут — точно надо.')
+        self._form.AddImageItem(
+            url=images[image],
+            title='Всё, это конец формы, пора всё проверить и отправлять!',
+            helpText='Пора проверить и отправлять',
+        )
         return self._form
 
 
@@ -85,6 +91,41 @@ def get_all_forms():
                 ('text', 'Сколько задач на уроке сегодня было понятно?'),
             ],
         },
+        '2020-10-27-9М': {
+            'title': 'Тест по динамике - 2',
+            'upTo': '10:50',
+            'image': 'incredibles',
+            'tasks': [
+                ('choices', 8, ['А', 'Б', 'В']),
+                ('any', 4),
+            ],
+        },
+        '2020-10-27-10АБ': {
+            'title': 'Тест по динамике - 2',
+            'upTo': '10:05',
+            'image': 'incredibles',
+            'tasks': [
+                ('any', 7),
+            ],
+        },
+        '2020-10-29-10АБ': {
+            'title': 'Тест по динамике - 3',
+            'upTo': '12:05',
+            'image': 'insideout',
+            'tasks': [
+                ('choices', 6, ['А', 'Б', 'В']),
+                ('any', 11),
+            ],
+        },
+        '2020-10-30-10АБ': {
+            'title': 'Тест по динамике - 4',
+            'upTo': '10:05',
+            'image': 'minions',
+            'tasks': [
+                ('choices', 9, ['А', 'Б', 'В']),
+                ('any', 3),
+            ],
+        },
     }
     for key, config in test_forms_config.items():
         title = '{} - {}'.format(
@@ -99,8 +140,8 @@ def get_all_forms():
                 form_generator.AddTextTask(count=task_config[1])
             elif task_config[0] == 'text':
                 form_generator.AddText(title=task_config[1])
-                form = form_generator.Generate()
-        forms[key] = form
+
+        forms[key] = form_generator.Generate(image=config.get('image'))
 
     return forms
 

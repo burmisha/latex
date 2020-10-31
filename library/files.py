@@ -205,11 +205,11 @@ class FileMover:
         dst_list = [i for i in [self._prefix, source, destination] if i]
         src_dir = os.path.join(*src_list).replace(BROKEN_Y, PROPER_Y)
         dst_dir = os.path.join(*dst_list).replace(BROKEN_Y, PROPER_Y)
+        log.info(f'Moving files from {src_dir} (recursive) to {dst_dir} (flat)')
         assert os.path.exists(src_dir)
         assert os.path.isdir(src_dir)
         assert os.path.exists(dst_dir)
         assert os.path.isdir(dst_dir)
-        log.info(f'Moving files from {src_dir} (recursive) to {dst_dir} (flat)')
         for src_file in walkFiles(source, regexp=re):
             assert os.path.exists(src_file)
             assert os.path.isfile(src_file)
