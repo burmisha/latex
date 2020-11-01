@@ -63,6 +63,9 @@ def CreateArgumentsParser():
     gformsParser = subparsers.add_parser('gforms', help='Create JS scripts for Google Forms')
     tools.google_forms.populate_parser(gformsParser)
 
+    checkerParser = subparsers.add_parser('checker', help='Check csv forms')
+    tools.checker.populate_parser(checkerParser)
+
     return parser
 
 

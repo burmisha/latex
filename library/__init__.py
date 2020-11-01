@@ -1,4 +1,5 @@
 import library.location
+import library.checker
 import library.convert
 import library.download
 import library.files
