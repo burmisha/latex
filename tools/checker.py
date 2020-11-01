@@ -13,8 +13,8 @@ def get_checkers():
             [
                 'А', 'Б', 'А', 'В', 'А', 'В', 'А', 'А', 'Б',
                 [
-                    library.checker.ProperAnswer('25600( *к[мл])?', value=2),
-                    library.checker.ProperAnswer('32000( *к[мл])?', value=1),
+                    library.checker.ProperAnswer('25600( к[мл])?', value=2),
+                    library.checker.ProperAnswer('32000( к[мл])?', value=1),
                 ],
                 [library.checker.ProperAnswer('6400( ?км)?', value=2)],
                 [library.checker.ProperAnswer('8', value=2)],
@@ -27,14 +27,12 @@ def get_checkers():
 def run(args):
     test_filter = args.filter
     pupil_filter = args.name
-    checkers = [c for c in get_checkers() if not test_filter or test_filter in c._csv_file]
+    checkers = [c for c in get_checkers() if not test_filter or test_filter.replace('.', '-') in c._csv_file.replace('.', '-')]
     for checker in checkers:
-        results = checker.Check(pupil_filter)
-        results_text = ''
-        for result in [('ФИО', 'Отметка')] + results:
-            if result:
-                results_text += f'{result[0]}\t{result[1]}\n'
-        library.process.pbcopy(results_text)
+        pupil_results = checker.Check(pupil_filter)
+        results_text = ['ФИО\tОтметка'] + [f'{pr._name}\t{pr._mark}' for pr in pupil_results if pr]
+        library.process.pbcopy('\n'.join(results_text))
+        log.info('Copied names and marks to clipboard')
 
 
 def populate_parser(parser):
