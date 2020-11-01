@@ -36,11 +36,9 @@ class NameLookup:
                 log.debug(f'{part} has {count} duplicates, will not use')
                 del self._unique_names[part]
 
-
     def _split(self, line):
         parts = re.split(r'\s|-|,|;|\.', line)
         return [p.strip() for p in parts if len(p) >= 2]
-    
 
     def _distance(self, name_1, name_2):
         name_1_strip = name_1.strip().lower()
@@ -94,6 +92,93 @@ class ProperAnswer:
 cm = library.logging.ColorMessage()
 
 
+class PupilResult:
+    def __init__(self, name, answers_count):
+        self._name = name
+        self._result = []
+        self._answers_count = answers_count
+
+        self._answers = ['' for _ in range(answers_count)]
+        self._best_answers = ['' for _ in range(answers_count)]
+
+        self._values = [0 for _ in range(answers_count)]
+        self._max_values = [0 for _ in range(answers_count)]
+
+        self._fields = {}
+
+    def ParseRow(self, row):
+        self._timestamp = datetime.datetime.strptime(row['Timestamp'], '%Y/%m/%d %H:%M:%S %p GMT+3')
+        for key, value in row.items():
+            value = value.strip()
+            if value:
+                if key.startswith('Задание '):
+                    index = int(key.split(' ')[1]) - 1
+                    assert 0 <= index < self._answers_count
+                    self._answers[index] = value
+                else:
+                    if key not in ('Фамилия Имя', 'Timestamp'):
+                        self._fields[key] = value
+
+    def GetResult(self):
+        return sum(self._values)
+
+    def CheckAnswer(self, index, proper):
+        answer = self._answers[index]
+        max_value = max(ans.Value() for ans in proper)
+        best_answer = list(ans for ans in proper if ans.Value() == max_value)[0]
+        value = max([ans.Value() for ans in proper if ans.IsOk(answer)] + [0])
+
+        self._best_answers[index] = best_answer
+        self._values[index] = value
+
+        return answer
+
+    def ToStr(self, original_name=None, mark=None):
+        task_line = []
+        answers_line = []
+        best_line = []
+        max_result = 0
+        for index, (answer, best_answer) in enumerate(zip(self._answers, self._best_answers)):
+            best_printable = best_answer.Printable()
+            value = self._values[index]
+            max_value = best_answer.Value()
+            max_result += max_value
+
+            best_color = None
+            if value == max_value:
+                color = 'green'
+            else:
+                if value > 0:
+                    color = 'yellow'
+                else:
+                    color = 'red'
+
+                if answer and len(best_printable) >= 2:
+                    best_color = 'cyan'
+
+            width = (max(len(answer), len(best_printable)) + 1) // 4 + 1
+            fmt = '{:<%d}' % (width * 4)
+            answers_line.append(cm(fmt.format(answer), color))
+            best_line.append(cm(fmt.format(best_printable), best_color))
+            task_line.append(fmt.format(index + 1))
+
+        answers_line = ''.join(answers_line)
+        best_line = ''.join(best_line)
+        task_line = ''.join(task_line)
+
+        message = f'''
+[{self._timestamp}] {cm(self._name, bold=True)} ({original_name}): {cm(self._result, bold=True)} / {max_result} → {cm(mark, bold=True)}
+    Task:\t{task_line}
+    Form:\t{best_line}
+    Answer:\t{answers_line}
+'''
+
+        if self._fields:
+            for key, value in sorted(self._fields.items()):
+                message += f'    {key[:10]}...:\t{cm(value, bold=True)}\n'
+
+        return message
+
 class Checker:
     def __init__(self, csv_file, answers, marks=None):
         self._csv_file = csv_file
@@ -133,80 +218,24 @@ class Checker:
         self._all_marks[mark] += 1
         return mark
 
-    def _get_canidates(self, row):
-        answers_count = len(self._proper_answers)
-        candidate_answers = ['' for _ in self._proper_answers]
-        additional_fields = {}
-        for key, value in row.items():
-            value = value.strip()
-            if value:
-                if key.startswith('Задание '):
-                    index = int(key.split(' ')[1]) - 1
-                    assert 0 <= index < answers_count
-                    candidate_answers[index] = value
-                else:
-                    if key not in ('Фамилия Имя', 'Timestamp'):
-                        additional_fields[key] = value
-        return candidate_answers, additional_fields
-
     def ParseRow(self, row, pupil_filter):
-        timestamp = datetime.datetime.strptime(row['Timestamp'], '%Y/%m/%d %H:%M:%S %p GMT+3')
         candidate_name = row['Фамилия Имя']
         name = self._name_lookup.Find(candidate_name)
 
         if pupil_filter and (not name or pupil_filter.lower() not in name.lower()):
             return
 
-        candidate_answers, additional_fields =self._get_canidates(row)
+        pupil_result = PupilResult(name, len(self._proper_answers))
+        pupil_result.ParseRow(row)
 
-        log_proper_answers = []
-        log_candidate_answers = []
-        log_indices = []
-        result = 0
-        max_result = 0
-        for index, (candidate, proper_answers) in enumerate(zip(candidate_answers, self._proper_answers), 1):
-            proper_color = None
-            max_value = max(ans.Value() for ans in proper_answers)
-            max_result += max_value
-            best_answer = list(ans for ans in proper_answers if ans.Value() == max_value)[0]
-            value = max([answer.Value() for answer in proper_answers if answer.IsOk(candidate)] + [0])
+        for index, proper_answers in enumerate(self._proper_answers):
+            answer = pupil_result.CheckAnswer(index, proper_answers)
+            if answer:
+                self._all_answers[index][answer] += 1
 
-            best_printable = best_answer.Printable()
-            result += value
-            if value == max_value:
-                color = 'green'
-            else:
-                if value == 0:
-                    color = 'red'
-                else:
-                    color = 'yellow'
-                if candidate and len(best_printable) >= 2:
-                    proper_color = 'cyan'
+        mark = self._get_mark(pupil_result.GetResult())
 
-            if candidate:
-                self._all_answers[index - 1][candidate] += 1
-
-            width = (((max(len(candidate), len(best_printable)) + 1) / 4) + 1)
-            fmt = '{:<%d}' % (width * 4)
-            log_candidate_answers.append(cm(fmt.format(candidate), color))
-            log_proper_answers.append(cm(fmt.format(best_printable), proper_color))
-            log_indices.append(fmt.format(str(index)))
-
-        log_candidate_answers = ''.join(log_candidate_answers)
-        log_proper_answers = ''.join(log_proper_answers)
-        log_indices = ''.join(log_indices)
-
-        mark = self._get_mark(result)
-        message = f'''
-[{timestamp}] {cm(name, bold=True)} ({candidate_name}): {cm(result, bold=True)} / {max_result} → {cm(mark, bold=True)}
-    Task:\t{log_indices}
-    Answer:\t{log_proper_answers}
-    Form:\t{log_candidate_answers}
-'''
-        if additional_fields:
-            for key, value in sorted(additional_fields.items()):
-                message += f'    {key[:10]}...:\t{cm(value, bold=True)}\n'
-
+        message = pupil_result.ToStr(original_name=candidate_name, mark=mark)
         log.info(message.lstrip('\n'))
         return name, mark
 
