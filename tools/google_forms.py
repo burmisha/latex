@@ -126,6 +126,16 @@ def get_all_forms():
                 ('any', 3),
             ],
         },
+        '2020-11-03-10АБ': {
+            'title': 'Тест по динамике - 5',
+            'upTo': '10:05',
+            'image': 'insideout',
+            'tasks': [
+                ('text', 'Электронная почта (вопрос только для 10«Б», 10«А» уже присылал)'),
+                ('text', 9, ['А', 'Б', 'В']),
+                ('any', 3),
+            ],
+        },
     }
     for key, config in test_forms_config.items():
         title = '{} - {}'.format(

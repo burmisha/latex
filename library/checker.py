@@ -145,6 +145,8 @@ class Checker:
         pupils = library.pupils.getPupils(class_key, addMyself=True)
         names = [pupil.GetFullName(surnameFirst=True) for pupil in pupils.Iterate()]
         self._name_lookup = NameLookup(names)
+        self._all_marks = collections.Counter()
+        self._all_answers = [collections.Counter() for answer in self._proper_answers]
 
     def _get_mark(self, result):
         mark = None
@@ -153,11 +155,26 @@ class Checker:
                 mark = index
         if any(self._marks) and not mark:
             mark = 2
+        self._all_marks[mark] += 1
         return mark
 
-    def ParseRow(self, row, pupil_filter):
+    def _get_canidates(self, row):
         answers_count = len(self._proper_answers)
+        candidate_answers = ['' for _ in self._proper_answers]
+        additional_fields = {}
+        for key, value in row.items():
+            value = value.strip()
+            if value:
+                if key.startswith('Задание '):
+                    index = int(key.split(' ')[1]) - 1
+                    assert 0 <= index < answers_count
+                    candidate_answers[index] = value
+                else:
+                    if key not in ('Фамилия Имя', 'Timestamp'):
+                        additional_fields[key] = value
+        return candidate_answers, additional_fields
 
+    def ParseRow(self, row, pupil_filter):
         timestamp = datetime.datetime.strptime(row['Timestamp'], '%Y/%m/%d %H:%M:%S %p GMT+3')
         candidate_name = row['Фамилия Имя']
         name = self._name_lookup.Find(candidate_name)
@@ -165,17 +182,7 @@ class Checker:
         if pupil_filter and (not name or pupil_filter.lower() not in name.lower()):
             return
 
-        candidate_answers = [None for _ in range(answers_count)]
-        additional_fields = {}
-        for key, value in row.items():
-            if key.startswith('Задание '):
-                index = int(key.split(' ')[1]) - 1
-                assert 0 <= index < answers_count
-                candidate_answers[index] = value
-            else:
-                value = value.strip()
-                if value:
-                    additional_fields[key] = value
+        candidate_answers, additional_fields =self._get_canidates(row)
 
         cm = ColorMessage()
         log_proper_answers = []
@@ -202,6 +209,9 @@ class Checker:
                 if candidate and len(best_printable) >= 2:
                     proper_color = 'cyan'
 
+            if candidate:
+                self._all_answers[index - 1][candidate] += 1
+
             width = (((max(len(candidate), len(best_printable)) + 1) / 4) + 1)
             fmt = '{:<%d}' % (width * 4)
             log_candidate_answers.append(cm(fmt.format(candidate), color))
@@ -214,11 +224,15 @@ class Checker:
 
         mark = self._get_mark(result)
         message = f'''
-{candidate_name} → {cm(name, bold=True)} on {cm(timestamp, bold=True)} got {cm(result, bold=True)}/{max_result} → {cm(mark, bold=True)}
+[{timestamp}] {cm(name, bold=True)} ({candidate_name}): {cm(result, bold=True)} / {max_result} → {cm(mark, bold=True)}
     Task:\t{log_indices}
     Answer:\t{log_proper_answers}
     Form:\t{log_candidate_answers}
 '''
+        if additional_fields:
+            for key, value in sorted(additional_fields.items()):
+                message += f'    {key[:10]}...:\t{cm(value, bold=True)}\n'
+
         log.info(message.lstrip('\n'))
         return name, mark
 
@@ -231,5 +245,11 @@ class Checker:
                 reader = csv.DictReader(data)
                 for row in reader:
                     results.append(self.ParseRow(row, pupil_filter))
+
+        for index, stats in enumerate(self._all_answers, 1):
+            log.info(f'Task {index}: {stats.most_common()}')
+
+        log.info(f'Marks: {sorted(self._all_marks.items())}')
+
 
         return results
