@@ -70,9 +70,15 @@ class NameLookup:
 
 class ProperAnswer:
     def __init__(self, canonicRe=None):
-        assert not canonicRe.startswith('^')
-        assert not canonicRe.endswith('$')
-        self._canonic_re = '^{canonicRe}$'
+        canonicRe = canonicRe.strip()
+        canonicRe.replace(' ', '\s*')
+        assert not canonicRe.startswith('^[\s.;,]*')
+        assert not canonicRe.endswith('[\s.;,]*$')
+        self._canonic_re = f'^{canonicRe}$'
+        self._printable = str(canonicRe)
+
+    def Printable(self):
+        return self._printable
 
     def IsOk(self, value=None):
         if re.match(self._canonic_re, value):
@@ -117,6 +123,7 @@ class Checker:
                 self._proper_answers.append(ProperAnswer(answer))
             else:
                 raise RuntimeError(f'Answer {answer} is not supported yet')
+
         assert self._csv_file.endswith('.csv.zip')
         assert os.path.exists(self._csv_file)
         assert os.path.isfile(self._csv_file)
@@ -129,12 +136,16 @@ class Checker:
         self._name_lookup = NameLookup(names)
 
 
-    def ParseRow(self, row):
-        answers_count = len(self._answers)
+    def ParseRow(self, row, pupil_filter):
+        answers_count = len(self._proper_answers)
 
         timestamp = datetime.datetime.strptime(row['Timestamp'], '%Y/%m/%d %H:%M:%S %p GMT+3')
         candidate_name = row['Фамилия Имя']
         name = self._name_lookup.Find(candidate_name)
+
+        if pupil_filter and (not name or pupil_filter not in name):
+            return
+
         candidate_answers = [None for _ in range(answers_count)]
         additional_fields = {}
         for key, value in row.items():
@@ -146,30 +157,34 @@ class Checker:
                 value = value.strip()
                 if value:
                     additional_fields[key] = value
-        log_indices = '\t'.join(str(index) for index in range(1, answers_count + 1))
-        log_answer = '\t'.join(str(answer) for answer in self._answers)
 
         cm = ColorMessage()
         proper_answers = []
         colored_answers = []
+        log_indices = []
         result = 0
-        for candidate, proper in zip(candidate_answers, self._answers):
+        for index, (candidate, proper) in enumerate(zip(candidate_answers, self._proper_answers), 1):
             proper_color = None
-            if candidate == proper:
+            if proper.IsOk(candidate):
                 color = 'green'
                 result += 1
             else:
                 color = 'red'
-                if candidate and len(proper) >= 2:
+                if candidate and len(proper.Printable()) >= 2:
                     proper_color = 'cyan'
 
             # if not candidate:
             #     candidate = str(None)
 
-            colored_answers.append(cm(candidate, color))
-            proper_answers.append(cm(proper, proper_color))
-        log_candidate_answers = '\t'.join(colored_answers)
-        log_proper_answers = '\t'.join(proper_answers)
+            width = (((max(len(candidate), len(proper.Printable())) + 1) / 4) + 1)
+            fmt = '{:<%d}' % (width * 4)
+            colored_answers.append(cm(fmt.format(candidate), color))
+            proper_answers.append(cm(fmt.format(proper.Printable()), proper_color))
+            log_indices.append(fmt.format(str(index)))
+
+        log_candidate_answers = ''.join(colored_answers)
+        log_proper_answers = ''.join(proper_answers)
+        log_indices = ''.join(log_indices)
 
         message = f'''
 {candidate_name} → {cm(name, bold=True)} on {cm(timestamp, bold=True)} got {cm(result, bold=True)}/{answers_count}
@@ -179,11 +194,12 @@ class Checker:
 '''
         log.info(message.lstrip('\n'))
 
-    def Check(self):
+    def Check(self, pupil_filter):
         with zipfile.ZipFile(self._csv_file, 'r') as zfile:
             for file in zfile.namelist():
                 log.info(f'Got {file!r}')
                 data = StringIO(zfile.read(file).decode('utf8'))
                 reader = csv.DictReader(data)
+                # for row in list(reader)[-1:]:
                 for row in reader:
-                    self.ParseRow(row)
+                    self.ParseRow(row, pupil_filter)
