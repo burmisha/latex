@@ -156,17 +156,13 @@ def get_all_forms():
     return forms
 
 
-def log_list(items):
-    return ''.join('\n    - ' + item for item in items)
-
-
 def run(args):
     form_filter = args.filter
     all_forms = get_all_forms()
     if form_filter:
         matched_names = sorted([name for name in all_forms if form_filter in name])
         if len(matched_names) > 1:
-            log.warning('Too many matches for \'%s\':%s', form_filter, log_list(sorted(matched_names)))
+            log.warning('Too many matches for \'%s\':%s', form_filter, library.logging.log_list(sorted(matched_names)))
         elif len(matched_names) == 1:
             name = matched_names[0]
             query = all_forms[name].FormQuery()
@@ -176,7 +172,7 @@ def run(args):
             log.info('Paste and run JS-code at https://script.google.com/home')
             log.info('See all ready forms at: https://docs.google.com/forms/u/0/')
         else:
-            log.warning('No forms to match \'%s\'\nAvailable forms:%s', form_filter, log_list(sorted(all_forms)))
+            log.warning('No forms to match \'%s\'\nAvailable forms:%s', form_filter, library.logging.log_list(sorted(all_forms)))
     else:
         log.info('Available forms:%s', log_list(sorted(all_forms)))
 

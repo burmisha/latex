@@ -33,3 +33,7 @@ class ColorMessage:
             return message
         else:
             return line
+
+
+def log_list(items):
+    return ''.join('\n    - ' + item for item in items)
