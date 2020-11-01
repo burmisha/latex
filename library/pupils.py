@@ -8,8 +8,11 @@ class Pupil(object):
         self.Surname = surname
         self.UniqueId = uniqueId or ('{} {}'.format(name, surname))
 
-    def GetFullName(self):
-        return '{self.Name} {self.Surname}'.format(self=self)
+    def GetFullName(self, surnameFirst=False):
+        if surnameFirst:
+            return f'{self.Surname} {self.Name}'
+        else:
+            return f'{self.Name} {self.Surname}'
 
     def GetRandomSeedPart(self):
         return '{self.Name} {self.Surname}'.format(self=self)
@@ -336,7 +339,6 @@ def getPupils(className, addMyself=False, onlyMe=False):
         grade = 6
     elif className == 'class-2020-10':
         names = [
-            'Тимофей Алфёров',
             'Ирина Ан',
             'Софья Андрианова',
             'Владимир Артемчук',
@@ -361,11 +363,12 @@ def getPupils(className, addMyself=False, onlyMe=False):
             'Алимпиев Алексей',
             'Васин Евгений',
             'Говоров Герман',
-            'Журавлева Софья',
+            'Журавлева София',
             'Козлов Константин',
             'Кравченко Наталья',
             'Малышев Сергей',
             'Полканова Алина',
+            'Пономарёв Сергей',
             'Свистушкин Егор',
             'Соколов Дмитрий',
         ]
