@@ -92,21 +92,31 @@ class ProperAnswer:
 cm = library.logging.ColorMessage()
 
 
+class Answer:
+    def __init__(self, value):
+        self,_value = value
+
+    def Check(self, proper):
+        self._max_value = max(ans.Value() for ans in proper)
+        self._best_answer = list(ans for ans in proper if ans.Value() == max_value)[0]
+        self._value = max([ans.Value() for ans in proper if ans.IsOk(answer)] + [0])
+
+
 class PupilResult:
     def __init__(self, name, answers_count):
         self._name = name
         self._result = []
         self._answers_count = answers_count
 
-        self._answers = ['' for _ in range(answers_count)]
-        self._best_answers = ['' for _ in range(answers_count)]
-
-        self._values = [0 for _ in range(answers_count)]
-        self._max_values = [0 for _ in range(answers_count)]
-
         self._fields = {}
 
     def ParseRow(self, row):
+        self._answers = [None for _ in range(answers_count)]
+        # self._best_answers = ['' for _ in range(answers_count)]
+
+        # self._values = [0 for _ in range(answers_count)]
+        # self._max_values = [0 for _ in range(answers_count)]
+
         self._timestamp = datetime.datetime.strptime(row['Timestamp'], '%Y/%m/%d %H:%M:%S %p GMT+3')
         for key, value in row.items():
             value = value.strip()
@@ -114,7 +124,7 @@ class PupilResult:
                 if key.startswith('Задание '):
                     index = int(key.split(' ')[1]) - 1
                     assert 0 <= index < self._answers_count
-                    self._answers[index] = value
+                    self._answers[index] = Answer(value)
                 else:
                     if key not in ('Фамилия Имя', 'Timestamp'):
                         self._fields[key] = value
