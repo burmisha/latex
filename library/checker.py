@@ -223,11 +223,13 @@ class Checker:
         return name, mark
 
     def Check(self, pupil_filter):
+        results = []
         with zipfile.ZipFile(self._csv_file, 'r') as zfile:
             for file in zfile.namelist():
                 log.info(f'Got {file!r}')
                 data = StringIO(zfile.read(file).decode('utf8'))
                 reader = csv.DictReader(data)
-                results = []
                 for row in reader:
                     results.append(self.ParseRow(row, pupil_filter))
+
+        return results

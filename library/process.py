@@ -9,3 +9,7 @@ def run(command):
     result = subprocess.call(command)
     if result != 0:
         raise RuntimeError('Command failed: %s: %s' % (command, ' '.join(command)))
+
+
+def pbcopy(text):
+    subprocess.run('pbcopy', universal_newlines=True, input=text)

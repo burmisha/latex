@@ -1,8 +1,9 @@
-import library
+import library.checker
+import library.location
+import library.process
 
 import logging
 log = logging.getLogger(__name__)
-
 
 
 def run(args):
@@ -18,15 +19,19 @@ def run(args):
                 [library.checker.ProperAnswer('6400( ?км)?', value=2)],
                 [library.checker.ProperAnswer('8', value=2)],
             ],
-            marks=[7, 9, 11],
+            marks=[6, 8, 10],
         ),
     ]
     test_filter = args.filter
     pupil_filter = args.name
+    checkers = [c for c in checkers if not test_filter or test_filter in c._csv_file]
     for checker in checkers:
-        if not test_filter or test_filter in checker._csv_file:
-            checker.Check(pupil_filter)
-
+        results = checker.Check(pupil_filter)
+        results_text = ''
+        for result in [('ФИО', 'Отметка')] + results:
+            if result:
+                results_text += f'{result[0]}\t{result[1]}\n'
+        library.process.pbcopy(results_text)
 
 
 def populate_parser(parser):

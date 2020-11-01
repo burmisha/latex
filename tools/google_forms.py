@@ -160,7 +160,7 @@ def run(args):
         elif len(matched_names) == 1:
             name = matched_names[0]
             query = all_forms[name].FormQuery()
-            subprocess.run('pbcopy', universal_newlines=True, input=query)
+            library.process.pbcopy(query)
             log.info(f'Script for {name}: \n{query}\n')
             log.info(f'Copied query for {name} to clipboard')
             log.info('Paste and run JS-code at https://script.google.com/home')
