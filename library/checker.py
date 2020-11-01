@@ -69,16 +69,20 @@ class NameLookup:
 
 
 class ProperAnswer:
-    def __init__(self, canonicRe=None):
+    def __init__(self, canonicRe=None, value=1):
         canonicRe = canonicRe.strip()
         canonicRe.replace(' ', '\s*')
         assert not canonicRe.startswith('^[\s.;,]*')
         assert not canonicRe.endswith('[\s.;,]*$')
+        self._value = value
         self._canonic_re = f'^{canonicRe}$'
         self._printable = str(canonicRe)
 
     def Printable(self):
         return self._printable
+
+    def Value(self):
+        return int(self._value)
 
     def IsOk(self, value=None):
         if re.match(self._canonic_re, value):
@@ -100,6 +104,7 @@ class ColorMessage:
             'green': self.GREEN,
             'red': self.RED,
             'cyan': self.CYAN,
+            'yellow': self.YELLOW,
         }
 
     def __call__(self, line, color=None, bold=False):
@@ -115,12 +120,18 @@ class ColorMessage:
 
 
 class Checker:
-    def __init__(self, csv_file, answers):
+    def __init__(self, csv_file, answers, marks=None):
         self._csv_file = csv_file
+        if not marks:
+            marks = [None, None, None]
+        self._marks = marks
+        assert len(self._marks) == 3
         self._proper_answers = []
         for answer in answers:
             if isinstance(answer, str):
-                self._proper_answers.append(ProperAnswer(answer))
+                self._proper_answers.append([ProperAnswer(answer)])
+            elif isinstance(answer, list):
+                self._proper_answers.append(answer)
             else:
                 raise RuntimeError(f'Answer {answer} is not supported yet')
 
@@ -135,6 +146,14 @@ class Checker:
         names = [pupil.GetFullName(surnameFirst=True) for pupil in pupils.Iterate()]
         self._name_lookup = NameLookup(names)
 
+    def _get_mark(self, result):
+        mark = None
+        for index, value in enumerate(self._marks,  3):
+            if result >= value:
+                mark = index
+        if any(self._marks) and not mark:
+            mark = 2
+        return mark
 
     def ParseRow(self, row, pupil_filter):
         answers_count = len(self._proper_answers)
@@ -143,7 +162,7 @@ class Checker:
         candidate_name = row['Фамилия Имя']
         name = self._name_lookup.Find(candidate_name)
 
-        if pupil_filter and (not name or pupil_filter not in name):
+        if pupil_filter and (not name or pupil_filter.lower() not in name.lower()):
             return
 
         candidate_answers = [None for _ in range(answers_count)]
@@ -159,40 +178,49 @@ class Checker:
                     additional_fields[key] = value
 
         cm = ColorMessage()
-        proper_answers = []
-        colored_answers = []
+        log_proper_answers = []
+        log_candidate_answers = []
         log_indices = []
         result = 0
-        for index, (candidate, proper) in enumerate(zip(candidate_answers, self._proper_answers), 1):
+        max_result = 0
+        for index, (candidate, proper_answers) in enumerate(zip(candidate_answers, self._proper_answers), 1):
             proper_color = None
-            if proper.IsOk(candidate):
+            max_value = max(ans.Value() for ans in proper_answers)
+            max_result += max_value
+            best_answer = list(ans for ans in proper_answers if ans.Value() == max_value)[0]
+            value = max([answer.Value() for answer in proper_answers if answer.IsOk(candidate)] + [0])
+
+            best_printable = best_answer.Printable()
+            result += value
+            if value == max_value:
                 color = 'green'
-                result += 1
             else:
-                color = 'red'
-                if candidate and len(proper.Printable()) >= 2:
+                if value == 0:
+                    color = 'red'
+                else:
+                    color = 'yellow'
+                if candidate and len(best_printable) >= 2:
                     proper_color = 'cyan'
 
-            # if not candidate:
-            #     candidate = str(None)
-
-            width = (((max(len(candidate), len(proper.Printable())) + 1) / 4) + 1)
+            width = (((max(len(candidate), len(best_printable)) + 1) / 4) + 1)
             fmt = '{:<%d}' % (width * 4)
-            colored_answers.append(cm(fmt.format(candidate), color))
-            proper_answers.append(cm(fmt.format(proper.Printable()), proper_color))
+            log_candidate_answers.append(cm(fmt.format(candidate), color))
+            log_proper_answers.append(cm(fmt.format(best_printable), proper_color))
             log_indices.append(fmt.format(str(index)))
 
-        log_candidate_answers = ''.join(colored_answers)
-        log_proper_answers = ''.join(proper_answers)
+        log_candidate_answers = ''.join(log_candidate_answers)
+        log_proper_answers = ''.join(log_proper_answers)
         log_indices = ''.join(log_indices)
 
+        mark = self._get_mark(result)
         message = f'''
-{candidate_name} → {cm(name, bold=True)} on {cm(timestamp, bold=True)} got {cm(result, bold=True)}/{answers_count}
-    Index:\t{log_indices}
-    Proper:\t{log_proper_answers}
-    Result:\t{log_candidate_answers}
+{candidate_name} → {cm(name, bold=True)} on {cm(timestamp, bold=True)} got {cm(result, bold=True)}/{max_result} → {cm(mark, bold=True)}
+    Task:\t{log_indices}
+    Answer:\t{log_proper_answers}
+    Form:\t{log_candidate_answers}
 '''
         log.info(message.lstrip('\n'))
+        return name, mark
 
     def Check(self, pupil_filter):
         with zipfile.ZipFile(self._csv_file, 'r') as zfile:
@@ -200,6 +228,6 @@ class Checker:
                 log.info(f'Got {file!r}')
                 data = StringIO(zfile.read(file).decode('utf8'))
                 reader = csv.DictReader(data)
-                # for row in list(reader)[-1:]:
+                results = []
                 for row in reader:
-                    self.ParseRow(row, pupil_filter)
+                    results.append(self.ParseRow(row, pupil_filter))
