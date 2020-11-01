@@ -71,6 +71,7 @@ class ProperAnswer:
     def __init__(self, canonicRe=None, value=1):
         canonicRe = canonicRe.strip()
         canonicRe.replace(' ', '\s*')
+        re.sub(r'([0-9])[,\.]([0-9])', r'\1[,\.]\2', canonicRe)
         assert not canonicRe.startswith('^[\s.;,]*')
         assert not canonicRe.endswith('[\s.;,]*$')
         self._value = value
@@ -207,7 +208,10 @@ class Checker:
         for answer in answers:
             if isinstance(answer, str):
                 self._proper_answers.append([ProperAnswer(answer)])
+            elif isinstance(answer, int):
+                 self._proper_answers.append([ProperAnswer(str(answer))])
             elif isinstance(answer, list):
+                assert all(isinstance(ans, ProperAnswer) for ans in answer)
                 self._proper_answers.append(answer)
             else:
                 raise RuntimeError(f'Answer {answer} is not supported yet')
