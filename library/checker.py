@@ -111,7 +111,12 @@ class ColorMessage:
 class Checker:
     def __init__(self, csv_file, answers):
         self._csv_file = csv_file
-        self._answers = answers
+        self._proper_answers = []
+        for answer in answers:
+            if isinstance(answer, str):
+                self._proper_answers.append(ProperAnswer(answer))
+            else:
+                raise RuntimeError(f'Answer {answer} is not supported yet')
         assert self._csv_file.endswith('.csv.zip')
         assert os.path.exists(self._csv_file)
         assert os.path.isfile(self._csv_file)
