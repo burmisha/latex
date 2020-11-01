@@ -2,6 +2,7 @@ import library.pupils
 
 import Levenshtein
 
+import datetime
 import re
 import os
 import zipfile
@@ -31,7 +32,7 @@ class NameLookup:
 
         for part, count in sorted(counter.items()):
             if count != 1:
-                log.info(f'{part} has {count} duplicates')
+                log.debug(f'{part} has {count} duplicates, will not use')
                 del self._unique_names[part]
 
 
@@ -80,51 +81,104 @@ class ProperAnswer:
         return False
 
 
+class ColorMessage:
+    # https://stackoverflow.com/questions/384076/how-can-i-color-python-logging-output
+    ResetTemplate = "\033[0m"
+    ColorTemplate = "\033[1;%dm"
+    BoldTemplate = "\033[1m"
+    BLACK, RED, GREEN, YELLOW, BLUE, MAGENTA, CYAN, WHITE = range(8)
+
+    def __init__(self, enable=True):
+        self._enable = enable
+        self._known_colors = {
+            'green': self.GREEN,
+            'red': self.RED,
+            'cyan': self.CYAN,
+        }
+
+    def __call__(self, line, color=None, bold=False):
+        if self._enable:
+            message = str(line)
+            if color:
+                message = self.ColorTemplate % (30 + self._known_colors[color.lower()]) + message + self.ResetTemplate
+            if bold:
+                message = self.BoldTemplate + message + self.ResetTemplate
+            return message
+        else:
+            return line
+
+
 class Checker:
     def __init__(self, csv_file, answers):
         self._csv_file = csv_file
+        self._answers = answers
+        assert self._csv_file.endswith('.csv.zip')
+        assert os.path.exists(self._csv_file)
+        assert os.path.isfile(self._csv_file)
 
         basename = os.path.basename(self._csv_file)
         class_str = basename.split()[1]
         class_key = 'class-2020-' + ''.join(i for i in class_str if i.isdigit())
         pupils = library.pupils.getPupils(class_key, addMyself=True)
         names = [pupil.GetFullName(surnameFirst=True) for pupil in pupils.Iterate()]
-        name_lookup = NameLookup(names)
+        self._name_lookup = NameLookup(names)
 
-        answers_count = len(answers)
 
-        assert self._csv_file.endswith('.zip')
+    def ParseRow(self, row):
+        answers_count = len(self._answers)
+
+        timestamp = datetime.datetime.strptime(row['Timestamp'], '%Y/%m/%d %H:%M:%S %p GMT+3')
+        candidate_name = row['Фамилия Имя']
+        name = self._name_lookup.Find(candidate_name)
+        candidate_answers = [None for _ in range(answers_count)]
+        additional_fields = {}
+        for key, value in row.items():
+            if key.startswith('Задание '):
+                index = int(key.split(' ')[1]) - 1
+                assert 0 <= index < answers_count
+                candidate_answers[index] = value
+            else:
+                value = value.strip()
+                if value:
+                    additional_fields[key] = value
+        log_indices = '\t'.join(str(index) for index in range(1, answers_count + 1))
+        log_answer = '\t'.join(str(answer) for answer in self._answers)
+
+        cm = ColorMessage()
+        proper_answers = []
+        colored_answers = []
+        result = 0
+        for candidate, proper in zip(candidate_answers, self._answers):
+            proper_color = None
+            if candidate == proper:
+                color = 'green'
+                result += 1
+            else:
+                color = 'red'
+                if candidate and len(proper) >= 2:
+                    proper_color = 'cyan'
+
+            # if not candidate:
+            #     candidate = str(None)
+
+            colored_answers.append(cm(candidate, color))
+            proper_answers.append(cm(proper, proper_color))
+        log_candidate_answers = '\t'.join(colored_answers)
+        log_proper_answers = '\t'.join(proper_answers)
+
+        message = f'''
+{candidate_name} → {cm(name, bold=True)} on {cm(timestamp, bold=True)} got {cm(result, bold=True)}/{answers_count}
+    Index:\t{log_indices}
+    Proper:\t{log_proper_answers}
+    Result:\t{log_candidate_answers}
+'''
+        log.info(message.lstrip('\n'))
+
+    def Check(self):
         with zipfile.ZipFile(self._csv_file, 'r') as zfile:
             for file in zfile.namelist():
                 log.info(f'Got {file!r}')
                 data = StringIO(zfile.read(file).decode('utf8'))
                 reader = csv.DictReader(data)
                 for row in reader:
-                    timestamp = row['Timestamp']
-                    candidate_name = row['Фамилия Имя']
-                    name = name_lookup.Find(candidate_name)
-                    candidate_answers = [None for _ in range(answers_count)]
-                    additional_fields = {}
-                    for key, value in row.items():
-                        if key.startswith('Задание '):
-                            index = int(key.split(' ')[1]) - 1
-                            assert 0 <= index < answers_count
-                            candidate_answers[index] = value
-                        else:
-                            value = value.strip()
-                            if value:
-                                additional_fields[key] = value
-                    log_indices = '\t'.join(str(index) for index in range(1, answers_count + 1))
-                    log_answer = '\t'.join(str(answer) for answer in answers)
-                    log_candidate_answer = '\t'.join(str(answer) for answer in candidate_answers)
-                    log.info(f'''
-{candidate_name} → {name}
-Index:\t\t{log_indices}
-Proper:\t\t{log_answer}
-Candidate:\t{log_candidate_answer}
-''')
-
-        self._answers = answers
-
-    def Check(self):
-        pass
+                    self.ParseRow(row)
