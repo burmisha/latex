@@ -1,4 +1,5 @@
 import library.pupils
+import library.logging
 
 import Levenshtein
 
@@ -62,7 +63,7 @@ class NameLookup:
                     best_matches.add(name)
 
         if best_match_distance is None or best_match_distance >= 2 or len(best_matches) != 1:
-            log.warn(f'Could not find name for {candidate_name}: best matches are {best_matches} is bad ({best_match_distance})')
+            log.warn(cm(f'Could not find name for {candidate_name}: best matches are {best_matches} is bad ({best_match_distance})', bg='red'))
             return None
 
         return list(best_matches)[0]
@@ -90,33 +91,7 @@ class ProperAnswer:
 
         return False
 
-
-class ColorMessage:
-    # https://stackoverflow.com/questions/384076/how-can-i-color-python-logging-output
-    ResetTemplate = "\033[0m"
-    ColorTemplate = "\033[1;%dm"
-    BoldTemplate = "\033[1m"
-    BLACK, RED, GREEN, YELLOW, BLUE, MAGENTA, CYAN, WHITE = range(8)
-
-    def __init__(self, enable=True):
-        self._enable = enable
-        self._known_colors = {
-            'green': self.GREEN,
-            'red': self.RED,
-            'cyan': self.CYAN,
-            'yellow': self.YELLOW,
-        }
-
-    def __call__(self, line, color=None, bold=False):
-        if self._enable:
-            message = str(line)
-            if color:
-                message = self.ColorTemplate % (30 + self._known_colors[color.lower()]) + message + self.ResetTemplate
-            if bold:
-                message = self.BoldTemplate + message + self.ResetTemplate
-            return message
-        else:
-            return line
+cm = library.logging.ColorMessage()
 
 
 class Checker:
@@ -184,7 +159,6 @@ class Checker:
 
         candidate_answers, additional_fields =self._get_canidates(row)
 
-        cm = ColorMessage()
         log_proper_answers = []
         log_candidate_answers = []
         log_indices = []
