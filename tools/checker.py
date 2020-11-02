@@ -11,6 +11,11 @@ log = logging.getLogger(__name__)
 def get_checkers():
     checkers = [
         library.checker.Checker(
+            library.location.udr('9 класс', '2020-21 9М Физика - Архив', '2020.10.27 9М - Тест по динамике - 2.csv.zip'),
+            ['А', 'В', 'А', 'В', 'А', 'Б', 'Б', 'В', '1,5', '24', '5', '50'],
+            marks=[4, 6, 8],
+        ),
+        library.checker.Checker(
             library.location.udr('10 класс', '2020-21 10AБ Физика - Архив', '2020.10.29 10АБ - Тест по динамике - 3.csv.zip'),
             ['В', 'В', 'А', 'В', 'А', 'Б', '400', '1000000', r'0.02( м)?', '500( [НH]/м)?', r'0.02', r'0.102(75)?', r'0.14', '160', '2[kк].*', '4[kк].*', r'.*\b400\b.*\b75\b.*'],
             marks=[10, 13, 15],
@@ -54,7 +59,6 @@ def run(args):
         log.info('Copied names and marks to clipboard')
     else:
         log.warning('No test forms results to match \'%s\'\nAvailable ones:%s', test_filter, library.logging.log_list(sorted(checkers_dict)))
-
 
 
 def populate_parser(parser):

@@ -36,6 +36,8 @@ class NameLookup:
                 log.debug(f'{part} has {count} duplicates, will not use')
                 del self._unique_names[part]
 
+        self._found_names = collections.Counter()
+
     def _split(self, line):
         parts = re.split(r'\s|-|,|;|\.', line)
         return [p.strip() for p in parts if len(p) >= 2]
@@ -64,7 +66,12 @@ class NameLookup:
             log.warn(cm(f'Could not find name for {candidate_name}: best matches are {best_matches} is bad ({best_match_distance})', bg='red'))
             return None
 
-        return list(best_matches)[0]
+        name = list(best_matches)[0]
+        self._found_names[name] += 1
+        return name
+
+    def NotFound(self):
+        return sorted(set(self._names) - set(self._found_names))
 
 
 class ProperAnswer:
@@ -267,5 +274,7 @@ class Checker:
             log.info(f'Task {index + 1:>2}: {stats_line}.')
 
         log.info(f'Marks: {", ".join("%d: %d" % (k, v) for k, v in sorted(self._all_marks.items()))}')
+        if not pupil_filter:
+            log.info(f'Not found:{library.logging.log_list(self._name_lookup.NotFound())}')
 
         return results

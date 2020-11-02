@@ -35,5 +35,5 @@ class ColorMessage:
             return line
 
 
-def log_list(items):
-    return ''.join('\n    - ' + item for item in items)
+def log_list(items, tab=4):
+    return ''.join('\n' + ' ' * tab + '- ' + item for item in items)
