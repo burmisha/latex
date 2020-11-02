@@ -26,7 +26,10 @@ class NameLookup:
         counter = collections.Counter()
         for name in self._names:
             parts = sorted(self._split(name))
-            parts.append(' '.join(parts))
+            parts += [
+                ' '.join(parts),
+                ' '.join(parts[::-1]),
+            ]
             for part in parts:
                 counter[part] += 1
                 self._unique_names[part] = name
@@ -35,6 +38,8 @@ class NameLookup:
             if count != 1:
                 log.debug(f'{part} has {count} duplicates, will not use')
                 del self._unique_names[part]
+            else:
+                log.debug(f'Using {part} → {self._unique_names[part]}')
 
         self._found_names = collections.Counter()
 
@@ -136,7 +141,7 @@ class PupilResult:
         self._fields = {}
 
     def ParseRow(self, row):
-        self._timestamp = datetime.datetime.strptime(row['Timestamp'], '%Y/%m/%d %H:%M:%S %p GMT+3')
+        self._timestamp = datetime.datetime.strptime(row['Timestamp'], '%Y/%m/%d %I:%M:%S %p GMT+3')
         self._original_name = row['Фамилия Имя']
 
         self._answers = [None for _ in range(self._answers_count)]
@@ -217,6 +222,8 @@ class Checker:
                 self._proper_answers.append([ProperAnswer(answer)])
             elif isinstance(answer, int):
                  self._proper_answers.append([ProperAnswer(str(answer))])
+            elif isinstance(answer, ProperAnswer):
+                 self._proper_answers.append([answer])
             elif isinstance(answer, list):
                 assert all(isinstance(ans, ProperAnswer) for ans in answer)
                 self._proper_answers.append(answer)

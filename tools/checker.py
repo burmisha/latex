@@ -7,13 +7,29 @@ import os
 import logging
 log = logging.getLogger(__name__)
 
+ms2_re = r'( ?м/[cс]\^?2| м/\([cс]\^?2\))?'
 
 def get_checkers():
     checkers = [
         library.checker.Checker(
+            library.location.udr('9 класс', '2020-21 9М Физика - Архив', '2020.10.22 9М - Тест по динамике - 1.csv.zip'),
+            ['Б', 'Б', 'В', 'В', 'А', 'А', 'В', 'А', 'А', 'Б',],
+            marks=[5, 7, 9],
+        ),
+        library.checker.Checker(
             library.location.udr('9 класс', '2020-21 9М Физика - Архив', '2020.10.27 9М - Тест по динамике - 2.csv.zip'),
-            ['А', 'В', 'А', 'В', 'А', 'Б', 'Б', 'В', '1,5', '24', '5', '50'],
+            ['А', 'В', 'А', 'В', 'А', 'Б', 'Б', 'В', '1.5', '24', '5', '50'],
             marks=[4, 6, 8],
+        ),
+        library.checker.Checker(
+            library.location.udr('10 класс', '2020-21 10AБ Физика - Архив', '2020.10.22 10АБ - Тест по динамике - 1.csv.zip'),
+            ['Неверно', 'Верно', 'Верно', 'Неверно', '([Кк]илограмм.?|кг)', '([Нн]ьютон.?|Н)', f'1.6{ms2_re}', f'16{ms2_re}', f'2{ms2_re}', '6( Н)?'],
+            marks=[5, 7, 9],
+        ),
+        library.checker.Checker(
+            library.location.udr('10 класс', '2020-21 10AБ Физика - Архив', '2020.10.27 10АБ - Тест по динамике - 2.csv.zip'),
+            [13, 17, 120, 20, 2, 40, 15],
+            marks=[3, 4, 5],
         ),
         library.checker.Checker(
             library.location.udr('10 класс', '2020-21 10AБ Физика - Архив', '2020.10.29 10АБ - Тест по динамике - 3.csv.zip'),
@@ -28,8 +44,8 @@ def get_checkers():
                     library.checker.ProperAnswer('25600( к[мл])?', value=2),
                     library.checker.ProperAnswer('32000( к[мл])?', value=1),
                 ],
-                [library.checker.ProperAnswer('6400( ?км)?', value=2)],
-                [library.checker.ProperAnswer('8', value=2)],
+                library.checker.ProperAnswer('6400( ?км)?', value=2),
+                library.checker.ProperAnswer('8', value=2),
             ],
             marks=[6, 8, 10],
         ),
