@@ -66,7 +66,6 @@ class TestFormGenerator:
 
 
 def get_all_forms():
-    forms = {}
     example = library.google_forms.GoogleForm(title='Пример', description='Отправить до полуночи', confirmationMessage='Спасибо, ты молодчина!')
     example.AddTextItem(title='Фамилия Имя', helpText='Именно в таком порядке', required=True)
     example.AddMultipleChoiceItem(title='Класс', choices=[9, 10], showOtherOption=True)
@@ -74,7 +73,7 @@ def get_all_forms():
     example.AddTextItem(title='Задание 2', required=False)
     example.AddSectionHeaderItem(title='Это конец формы, пора всё проверить и отправлять')
     example.AddImageItem(url='https://media.giphy.com/media/WxxsVAJLSBsFa/giphy.gif', title='Всё!', helpText='Пора проверить и отправлять')
-    forms['example'] = example
+    yield 'example', example
 
     test_forms_config = {
         '2020-10-22-10АБ': {
@@ -171,33 +170,30 @@ def get_all_forms():
             elif task_config[0] == 'text':
                 form_generator.AddText(title=task_config[1])
 
-        forms[key] = form_generator.Generate(image=config.get('image'))
-
-    return forms
+        yield key, form_generator.Generate(image=config.get('image'))
 
 
 def run(args):
     form_filter = args.filter
-    all_forms = get_all_forms()
-    if form_filter:
-        matched_names = sorted([name for name in all_forms if form_filter in name])
-        if len(matched_names) > 1:
-            log.warning('Too many matches for \'%s\':%s', form_filter, library.logging.log_list(sorted(matched_names)))
-        elif len(matched_names) == 1:
-            name = matched_names[0]
-            query = all_forms[name].FormQuery()
-            library.process.pbcopy(query)
-            log.info(f'Script for {name}: \n{query}\n')
-            log.info(f'Copied query for {name} to clipboard')
-            log.info('Paste and run JS-code at https://script.google.com/home')
-            log.info('See all ready forms at: https://docs.google.com/forms/u/0/')
-        else:
-            log.warning('No forms to match \'%s\'\nAvailable forms:%s', form_filter, library.logging.log_list(sorted(all_forms)))
-    else:
-        log.info('Available forms:%s', log_list(sorted(all_forms)))
 
+    key_picker = library.picker.KeyPicker(key=lambda x: x.replace('.', '').replace('-', ''))
+    for key, value in get_all_forms():
+        key_picker.add(key, value)
+
+    form = key_picker.get(form_filter)
+    if form:
+        query = form.FormQuery()
+
+        if args.log_query:
+            log.info(f'Script: \n{query}\n')
+
+        library.process.pbcopy(query)
+        log.info('Copied query to clipboard')
+        log.info('Paste and run JS-code at https://script.google.com/home')
+        log.info('See all ready forms at: https://docs.google.com/forms/u/0/')
 
 
 def populate_parser(parser):
-    parser.add_argument('--filter', help='Find forms containg this substring')
+    parser.add_argument('-f', '--filter', help='Find forms containg this substring')
+    parser.add_argument('--log-query', help='Log query')
     parser.set_defaults(func=run)

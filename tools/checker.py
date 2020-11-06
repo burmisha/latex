@@ -1,17 +1,12 @@
 import library.checker
 import library.location
+import library.picker
 import library.process
-
-import os
 
 import logging
 log = logging.getLogger(__name__)
 
 ms2_re = r'( ?м/[cс]\^?2| м/\([cс]\^?2\))?'
-
-
-def make_key(line):
-    return line.replace('.', '').replace('-', '')
 
 
 def get_checkers():
@@ -53,7 +48,6 @@ def get_checkers():
         ),
     }
 
-    checkers = {}
     for test_name, (answers, marks) in config.items():
         if ' 9М ' in test_name:
             test_file = library.location.udr('9 класс', '2020-21 9М Физика - Архив', test_name + '.csv.zip')
@@ -62,33 +56,29 @@ def get_checkers():
         else:
             raise RuntimeError(f'Unknown test_name: {test_name!r}')
 
-        key = make_key(test_name)
-        assert key not in checkers
         if isinstance(answers, str):
             answers = list(answers)
-        checkers[key] = library.checker.Checker(test_file, answers, marks)
 
-    return checkers
+        yield test_name, library.checker.Checker(test_file, answers, marks)
 
 
 def run(args):
     test_filter = args.filter
     pupil_filter = args.name
 
-    checkers_dict = get_checkers()
-    matched_keys = sorted([key for key in checkers_dict if not test_filter or make_key(test_filter) in key])
+    key_picker = library.picker.KeyPicker(key=lambda x: x.replace('.', '').replace('-', ''))
+    for key, checker in get_checkers():
+        key_picker.add(key, checker)
 
-    if len(matched_keys) > 1:
-        log.warning('Too many matches for \'%s\':%s', test_filter, library.logging.log_list(matched_keys))
-    elif len(matched_keys) == 1:
-        checker_key = matched_keys[0]
-        log.info(f'Checking {checker_key}')
-        pupil_results = checkers_dict[checker_key].Check(pupil_filter)
-        results_text = ['ФИО\tОтметка'] + [f'{pr._name}\t{pr._mark}' for pr in pupil_results if pr]
-        library.process.pbcopy('\n'.join(results_text))
+    checker = key_picker.get(flt=test_filter)
+    if checker:
+        result = ['ФИО\tОтметка']
+        for pupil_result in checker.Check(pupil_filter):
+            if pupil_result:
+                result.append(f'{pr._name}\t{pr._mark}')
+
+        library.process.pbcopy('\n'.join(result))
         log.info('Copied names and marks to clipboard')
-    else:
-        log.warning('No test forms results to match \'%s\'\nAvailable ones:%s', test_filter, library.logging.log_list(sorted(checkers_dict)))
 
 
 def populate_parser(parser):
