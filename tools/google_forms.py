@@ -1,9 +1,18 @@
 import library.google_forms
 
 import subprocess
+import webbrowser
 
 import logging
 log = logging.getLogger(__name__)
+
+
+class TabOpener:
+    def __init__(self, browser):
+        self._controller = webbrowser.get(browser)
+
+    def open(self, url):
+        self._controller.open_new_tab(url)
 
 
 class TestFormGenerator:
@@ -189,11 +198,20 @@ def run(args):
 
         library.process.pbcopy(query)
         log.info('Copied query to clipboard')
-        log.info('Paste and run JS-code at https://script.google.com/home')
-        log.info('See all ready forms at: https://docs.google.com/forms/u/0/')
+
+        tab_opener = TabOpener(args.browser)
+        script_url = 'https://script.google.com/home'
+        forms_url = 'https://docs.google.com/forms/u/0/'
+        log.info(f'Paste and run JS-code at {script_url}')
+        log.info(f'See all ready forms at {forms_url}')
+        if args.open:
+            tab_opener.open(script_url)
+            tab_opener.open(forms_url)
 
 
 def populate_parser(parser):
     parser.add_argument('-f', '--filter', help='Find forms containg this substring')
     parser.add_argument('--log-query', help='Log query')
+    parser.add_argument('--browser', help='Default browser', default='Firefox')
+    parser.add_argument('-o', '--open', help='Open browser', action='store_true')
     parser.set_defaults(func=run)
