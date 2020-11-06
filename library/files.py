@@ -1,11 +1,13 @@
 import library.location
 from library.location import Location
 
-
+import csv
+import datetime
+import io
 import os
 import re
 import shutil
-import datetime
+import zipfile
 
 import logging
 log = logging.getLogger(__name__)
@@ -221,3 +223,21 @@ class FileMover:
                 shutil.move(src_file, dst_file)
             else:
                 log.debug(f'File {basename!r} does not match')
+
+
+class ZippedCsv:
+    def __init__(self, filename):
+        assert filename.endswith('.csv.zip')
+        self._filename = filename
+
+    def ReadDicts(self):
+        assert os.path.exists(self._filename), f'No file {self._filename}'
+        assert os.path.isfile(self._filename), f'Is not file {self._filename}'
+        with zipfile.ZipFile(self._filename, 'r') as zfile:
+            assert len(zfile.namelist()) == 1
+            for file in zfile.namelist():
+                log.debug(f'Reading {file}')
+                data = io.StringIO(zfile.read(file).decode('utf8'))
+                reader = csv.DictReader(data)
+                for row in reader:
+                    yield row

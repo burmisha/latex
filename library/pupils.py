@@ -414,22 +414,3 @@ def getPupils(className, addMyself=False, onlyMe=False):
     log.info('Returning %d pupils from %s-%s', len(pupils), grade, letter)
 
     return Pupils(pupils=pupils, letter=letter, grade=grade)
-
-'''
-"Артём Глембо" <glembo2005@gmail.com>
-"Наталья Гончарова" <goncharova0110@mail.ru>
-"Файезбек Касымов" <faykasymov@gmail.com>
-"Александр Козинец" <aa-kozinec@mail.ru>
-"Андрей Куликовский" <waterman17061958@gmail.com>
-"Полина Лоткова" <polina2005io1113@gmail.com>
-"Екатерина Медведева" <ekmedvedeva05@gmail.com>
-"Константин Мельник" <melnikkonstantin051@gmail.com>
-"Степан Небоваренков" <nebovarenkovstipan@gmail.com>
-"Матвей Неретин" <matveyneretin.school@gmail.com>
-"Мария Никонова " <mashkanikonova@gmail.com>
-"Даниил Палаткин" <danya.palatkin@yandex.ru>
-"Стас Пикун" <Utygo@mail.ru>
-"Илья Пичугин" <pichugin301@gmail.com>
-"Кирилл Севрюгин" <kirill.s_2006@mail.ru>
-"Иван Шустов" <shustov_ivan05@mail.ru>
-'''

@@ -3,12 +3,9 @@ import library.pupils
 import Levenshtein
 
 import collections
-import csv
 import datetime
-import io
 import os
 import re
-import zipfile
 
 import logging
 log = logging.getLogger(__name__)
@@ -82,12 +79,14 @@ class NameLookup:
 
 
 class ProperAnswer:
-    def __init__(self, canonicRe=None, value=1):
-        canonicRe = canonicRe.strip()
-        canonicRe.replace(' ', '\s*')
+    def __init__(self, canonicRe, value=1):
+        assert isinstance(canonicRe, (str, int)), f'Invalid re: {canonicRe}'
+        assert isinstance(value, int), f'Invalid value: {value}'
+        canonicRe = str(canonicRe).strip()
+        canonicRe = canonicRe.replace(' ', r'\s*')
         re.sub(r'([0-9])[,\.]([0-9])', r'\1[,\.]\2', canonicRe)
-        assert not canonicRe.startswith('^[\s.;,]*')
-        assert not canonicRe.endswith('[\s.;,]*$')
+        assert not canonicRe.startswith(r'^[\s.;,]*')
+        assert not canonicRe.endswith(r'[\s.;,]*$')
         self._value = value
         self._canonic_re = f'^{canonicRe}$'
         self._printable = str(canonicRe)
@@ -98,8 +97,24 @@ class ProperAnswer:
     def Value(self):
         return int(self._value)
 
+    def _simplify(self, value):
+        # use russian instead of english
+        mapping = {
+            'C': 'С',
+            'H': 'Н',
+            'c': 'с',
+            'O': 'O',
+            'o': 'о',
+            'A': 'А',
+            'a': 'а',
+        }
+        v = str(value)
+        for src, dst in mapping.items():
+            v = v.replace(src, dst)
+        return v
+
     def IsOk(self, value=None):
-        if re.match(self._canonic_re, value):
+        if re.match(self._simplify(self._canonic_re), self._simplify(value)):
             return True
 
         return False
@@ -109,10 +124,10 @@ class Answer:
     def __init__(self, value):
         self._value = value
 
-    def Check(self, proper):
-        self._result_max = max(ans.Value() for ans in proper)
-        self._best_answer = list(ans for ans in proper if ans.Value() == self._result_max)[0]
-        self._result = max([ans.Value() for ans in proper if ans.IsOk(self._value)] + [0])
+    def Check(self, proper_answers):
+        self._result_max = max(ans.Value() for ans in proper_answers)
+        self._best_answer = list(ans for ans in proper_answers if ans.Value() == self._result_max)[0]
+        self._result = max([ans.Value() for ans in proper_answers if ans.IsOk(self._value)] + [0])
 
         color = None
         best_color = None
@@ -209,6 +224,7 @@ class PupilResult:
 
         return message
 
+
 class Checker:
     def __init__(self, csv_file, answers, marks=None):
         self._csv_file = csv_file
@@ -216,23 +232,18 @@ class Checker:
             marks = [None, None, None]
         self._marks = marks
         assert len(self._marks) == 3
+
         self._proper_answers = []
         for answer in answers:
-            if isinstance(answer, str):
-                self._proper_answers.append([ProperAnswer(answer)])
-            elif isinstance(answer, int):
-                 self._proper_answers.append([ProperAnswer(str(answer))])
-            elif isinstance(answer, ProperAnswer):
-                 self._proper_answers.append([answer])
-            elif isinstance(answer, list):
-                assert all(isinstance(ans, ProperAnswer) for ans in answer)
-                self._proper_answers.append(answer)
+            answer_variants = []
+            if isinstance(answer, ProperAnswer):
+                answer_variants = [answer]
+            elif isinstance(answer, dict):
+                for key, value in answer.items():
+                    answer_variants.append(ProperAnswer(key, value=value))
             else:
-                raise RuntimeError(f'Answer {answer} is not supported yet')
-
-        assert self._csv_file.endswith('.csv.zip')
-        assert os.path.exists(self._csv_file)
-        assert os.path.isfile(self._csv_file)
+                answer_variants = [ProperAnswer(answer)]
+            self._proper_answers.append(answer_variants)
 
         basename = os.path.basename(self._csv_file)
         class_str = basename.split()[1]
@@ -264,14 +275,9 @@ class Checker:
         return pupil_result
 
     def Check(self, pupil_filter):
-        results = []
-        with zipfile.ZipFile(self._csv_file, 'r') as zfile:
-            for file in zfile.namelist():
-                log.info(f'Got {file!r}')
-                data = io.StringIO(zfile.read(file).decode('utf8'))
-                reader = csv.DictReader(data)
-                for row in reader:
-                    results.append(self.ParseRow(row, pupil_filter))
+        zipped_csv = library.files.ZippedCsv(self._csv_file)
+        for row in zipped_csv.ReadDicts():
+            yield self.ParseRow(row, pupil_filter)
 
         for index, stats in enumerate(self._all_answers):
             stats_line = []
@@ -286,5 +292,3 @@ class Checker:
         log.info(f'Marks: {", ".join("%s: %d" % (k, v) for k, v in sorted(self._all_marks.items()))}')
         if not pupil_filter:
             log.info(f'Not found:{library.logging.log_list(self._name_lookup.NotFound())}')
-
-        return results

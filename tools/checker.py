@@ -16,12 +16,9 @@ def make_key(line):
 
 def get_checkers():
     config = {
-        '2020.10.22 9М - Тест по динамике - 1': (
-            ['Б', 'Б', 'В', 'В', 'А', 'А', 'В', 'А', 'А', 'Б',],
-            [5, 7, 9],
-        ),
+        '2020.10.22 9М - Тест по динамике - 1': ('ББВВААВААБ', [5, 7, 9]),
         '2020.10.27 9М - Тест по динамике - 2': (
-            ['А', 'В', 'А', 'В', 'А', 'Б', 'Б', 'В', '1.5', '24', '5', '50'],
+            list('АВАВАББВ') + ['1.5', '24', '5', '50'],
             [4, 6, 8],
         ),
         '2020.10.22 10АБ - Тест по динамике - 1': (
@@ -33,41 +30,25 @@ def get_checkers():
             [3, 4, 5],
         ),
         '2020.10.29 10АБ - Тест по динамике - 3': (
-            ['В', 'В', 'А', 'В', 'А', 'Б', '400', '1000000', r'0.02( м)?', '500( [НH]/м)?', r'0.02', r'0.102(75)?', r'0.14', '160', '2[kк].*', '4[kк].*', r'.*\b400\b.*\b75\b.*'],
+            list('ВВАВАБ') + ['400', '1000000', r'0.02( м)?', '500( Н/м)?', r'0.02', r'0.102(75)?', r'0.14', '160', '2[kк].*', '4[kк].*', r'.*\b400\b.*\b75\b.*'],
             [10, 13, 15],
         ),
         '2020.10.30 10АБ - Тест по динамике - 4': (
-            [
-                'А', 'Б', 'А', 'В', 'А', 'В', 'А', 'А', 'Б',
-                [
-                    library.checker.ProperAnswer('25600( к[мл])?', value=2),
-                    library.checker.ProperAnswer('32000( к[мл])?', value=1),
-                ],
-                library.checker.ProperAnswer('6400( ?км)?', value=2),
-                library.checker.ProperAnswer('8', value=2),
+            list('АБАВАВААБ') + [
+                {'25600( к[мл])?': 2, '32000( к[мл])?': 1},
+                {'6400( км)?': 2},
+                {'8': 2},
             ],
             [6, 8, 10],
         ),
         '2020.11.03 10АБ - Тест по динамике - 5': (
-            ['А', 'В', 12, 240, '0.05', '100[НH]?', 5],
+            ['А', 'В', 12, 240, '0.05', '100 Н?', 5],
             [4, 5, 6],
         ),
-        '2020.11.03 9М - Тест по динамике - 3': (
-            list('БАВАБАБВАВ'),
-            [5, 7, 9],
-        ),
-        '2020.11.05 9М - Тест по динамике - 4': (
-            list('ВБВБААВББА'),
-            [5, 7, 9],
-        ),
+        '2020.11.03 9М - Тест по динамике - 3': ('БАВАБАБВАВ', [5, 7, 9]),
+        '2020.11.05 9М - Тест по динамике - 4': ('ВБВБААВББА', [5, 7, 9]),
         '2020.11.06 10АБ - Тест по динамике - 6': (
-            [
-                5, 
-                [
-                    library.checker.ProperAnswer(5, value=2),
-                    library.checker.ProperAnswer('6.73', value=1),
-                ],
-                '3.27', 0, 80, 120, 24, 5],
+            [5, {'5': 1, '6.73': 1}, '3.27', 0, 80, 120, 24, 5],
             [3, 5, 7],
         ),
     }
@@ -83,6 +64,8 @@ def get_checkers():
 
         key = make_key(test_name)
         assert key not in checkers
+        if isinstance(answers, str):
+            answers = list(answers)
         checkers[key] = library.checker.Checker(test_file, answers, marks)
 
     return checkers
@@ -98,7 +81,9 @@ def run(args):
     if len(matched_keys) > 1:
         log.warning('Too many matches for \'%s\':%s', test_filter, library.logging.log_list(matched_keys))
     elif len(matched_keys) == 1:
-        pupil_results = checkers_dict[matched_keys[0]].Check(pupil_filter)
+        checker_key = matched_keys[0]
+        log.info(f'Checking {checker_key}')
+        pupil_results = checkers_dict[checker_key].Check(pupil_filter)
         results_text = ['ФИО\tОтметка'] + [f'{pr._name}\t{pr._mark}' for pr in pupil_results if pr]
         library.process.pbcopy('\n'.join(results_text))
         log.info('Copied names and marks to clipboard')
