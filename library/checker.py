@@ -1,18 +1,20 @@
 import library.pupils
-import library.logging
 
 import Levenshtein
 
-import datetime
-import re
-import os
-import zipfile
-import csv
-from io import StringIO
 import collections
+import csv
+import datetime
+import io
+import os
+import re
+import zipfile
 
 import logging
 log = logging.getLogger(__name__)
+
+import library.logging
+cm = library.logging.ColorMessage()
 
 
 class NameLookup:
@@ -102,8 +104,6 @@ class ProperAnswer:
 
         return False
 
-cm = library.logging.ColorMessage()
-
 
 class Answer:
     def __init__(self, value):
@@ -170,7 +170,7 @@ class PupilResult:
         mark = None
         result = self.GetResult()
         for index, value in enumerate(marks, 3):
-            if result >= value:
+            if value and result >= value:
                 mark = index
         if any(marks) and not mark:
             mark = 2
@@ -242,6 +242,7 @@ class Checker:
         self._name_lookup = NameLookup(names)
         self._all_marks = collections.Counter()
         self._all_answers = [collections.Counter() for answer in self._proper_answers]
+        self._all_results = collections.Counter()
 
     def ParseRow(self, row, pupil_filter):
         name = self._name_lookup.Find(row['Фамилия Имя'])
@@ -257,6 +258,7 @@ class Checker:
 
         mark = pupil_result.SetMark(self._marks)
         self._all_marks[mark] += 1
+        self._all_results[pupil_result.GetResult()] += 1
 
         log.info(str(pupil_result).lstrip('\n'))
         return pupil_result
@@ -266,7 +268,7 @@ class Checker:
         with zipfile.ZipFile(self._csv_file, 'r') as zfile:
             for file in zfile.namelist():
                 log.info(f'Got {file!r}')
-                data = StringIO(zfile.read(file).decode('utf8'))
+                data = io.StringIO(zfile.read(file).decode('utf8'))
                 reader = csv.DictReader(data)
                 for row in reader:
                     results.append(self.ParseRow(row, pupil_filter))
@@ -280,7 +282,8 @@ class Checker:
             stats_line = ",  ".join(stats_line)
             log.info(f'Task {index + 1:>2}: {stats_line}.')
 
-        log.info(f'Marks: {", ".join("%d: %d" % (k, v) for k, v in sorted(self._all_marks.items()))}')
+        log.info(f'Results: {", ".join("%s: %d" % (k, v) for k, v in sorted(self._all_results.items()))}')
+        log.info(f'Marks: {", ".join("%s: %d" % (k, v) for k, v in sorted(self._all_marks.items()))}')
         if not pupil_filter:
             log.info(f'Not found:{library.logging.log_list(self._name_lookup.NotFound())}')
 

@@ -52,6 +52,9 @@ class TestFormGenerator:
             'minions': 'https://media.giphy.com/media/WxxsVAJLSBsFa/giphy.gif',
             'incredibles': 'https://media.giphy.com/media/G2fKgPMXJ40WA/giphy.gif',
             'insideout': 'https://media.giphy.com/media/dU6Ec1svWeWCk/giphy.gif',
+            'tenet': 'https://media.giphy.com/media/jV0IaIdzPy7L1vqv5T/giphy.gif',
+            'up': 'https://media.giphy.com/media/3sB5CjvsDbA6A/giphy.gif',
+            'monsters': 'https://media.giphy.com/media/19ZCKSoEvSquk/giphy.gif',
         }
         self._form.AddTextItem(title='Если сдаёшь сильно позже, напиши, пожалуйста, причину', helpText='Если опоздание до 1–2 минут — писать точно не надо, 3 — скорее не надо, если больше 15 минут — точно надо.')
         self._form.AddImageItem(
@@ -128,12 +131,29 @@ def get_all_forms():
         },
         '2020-11-03-10АБ': {
             'title': 'Тест по динамике - 5',
-            'upTo': '10:05',
+            'upTo': '9:05',
             'image': 'insideout',
             'tasks': [
-                ('text', 'Электронная почта (вопрос только для 10«Б», 10«А» уже присылал)'),
-                ('text', 9, ['А', 'Б', 'В']),
-                ('any', 3),
+                ('text', 'Электронная почта (только для 10«Б», 10«А» уже присылал)'),
+                ('choices', 2, ['А', 'Б', 'В']),
+                ('any', 5),
+            ],
+        },
+        '2020-11-03-9М': {
+            'title': 'Тест по динамике - 3',
+            'upTo': '11:05',
+            'image': 'insideout',
+            'tasks': [
+                ('text', 'Электронная почта'),
+                ('choices', 10, ['А', 'Б', 'В']),
+            ],
+        },
+        '2020-11-06-10АБ': {
+            'title': 'Тест по динамике - 6',
+            'upTo': '10:05',
+            'image': 'up',
+            'tasks': [
+                ('any', 8),
             ],
         },
     }

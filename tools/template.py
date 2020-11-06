@@ -102,12 +102,8 @@ def runTemplate(args):
     )
     for dateClass in [
         # '2020-10-20-10', '2020-10-20-9', '2020-10-22-9', '2020-10-22-10', '2020-10-23-10',  # week 2–1
-        '2020-10-27-10',  # week 2–2
-        '2020-10-27-9',
-        '2020-10-29-9',
-        '2020-10-29-10',
-        '2020-10-30-10',
-        '2020-10-30-8',
+        # '2020-10-27-10', '2020-10-27-9', '2020-10-29-9', '2020-10-29-10', '2020-10-30-10', '2020-10-30-8', # week 2–2
+        '2020-11-03-10', '2020-11-03-9', '2020-11-05-9', '2020-11-05-10', '2020-11-06-10' # week 2–3
     ]:
         if nowFmt <= dateClass <= futureFmt:
             distantCopier.CreateFile(f'{dateClass} - с урока.docx')
@@ -121,28 +117,28 @@ def runTemplate(args):
     yesterday = nowDelta.Before(days=1, fmt='%F')
     monthAgo = nowDelta.Before(days=32, fmt='%F')
     fileMover = library.files.FileMover()
-    # fileMover.Move(
-    #     source=library.location.ipad('2020-21 Кружок'),
-    #     destination=library.location.udr('12 - кружок - 9-10-11'),
-    #     re='.*ужок.docx$',
-    #     matching=lambda b: monthAgo <= b[:10] <= yesterday,
-    # )
-    # fileMover.Move(
-    #     source=library.location.ipad('2020-2 дистант'),
-    #     destination=library.location.udr('10 класс', '2020-21 10AБ Физика - Архив'),
-    #     re='^....-..-..-10 .* с урока.docx$',
-    #     matching=lambda b: monthAgo <= b[:10] <= yesterday
-    # )
-    # fileMover.Move(
-    #     source=library.location.ipad('2020-2 дистант'),
-    #     destination=library.location.udr('9 класс', '2020-21 9М Физика - Архив'),
-    #     re='^....-..-..-9 .* с урока.docx$',
-    #     matching=lambda b: monthAgo <= b[:10] <= yesterday,
-    # )
+    fileMover.Move(
+        source=library.location.ipad('2020-21 Кружок'),
+        destination=library.location.udr('12 - кружок - 9-10-11'),
+        re='.*ужок.docx$',
+        matching=lambda b: monthAgo <= b[:10] <= yesterday,
+    )
+    fileMover.Move(
+        source=library.location.ipad('2020-2 дистант'),
+        destination=library.location.udr('10 класс', '2020-21 10AБ Физика - Архив'),
+        re='^....-..-..-10 .* с урока.*\.docx$',
+        matching=lambda b: monthAgo <= b[:10] <= yesterday,
+    )
+    fileMover.Move(
+        source=library.location.ipad('2020-2 дистант'),
+        destination=library.location.udr('9 класс', '2020-21 9М Физика - Архив'),
+        re='^....-..-..-9 .* с урока.*\.docx$',
+        matching=lambda b: monthAgo <= b[:10] <= yesterday,
+    )
     fileMover.Move(
         source=library.location.ipad('2020-2 дистант'),
         destination=library.location.udr('8 класс', '2020-21 Архив'),
-        re='^....-..-..-8 .* с урока.docx$',
+        re='^....-..-..-8 .* с урока.*\.docx$',
         # matching=lambda b: monthAgo <= b[:10] <= yesterday,
     )
 
