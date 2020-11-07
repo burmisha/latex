@@ -1,5 +1,6 @@
 import library.google_forms
 
+import random
 import subprocess
 import webbrowser
 
@@ -17,10 +18,14 @@ class TabOpener:
 
 class TestFormGenerator:
     def __init__(self, title=None, upTo=None, count=None):
-        confirmation = 'Спасибо, ты молодчина!'
-        instruction = 'Возможно, стоит сначала посмотреть эту форму, ' \
-            'потом всё решить у себя в тетради или черновике, а лишь после вписать ответы, ' \
-            'чтобы не переключаться между приложениями или экранами.'
+        confirmation = random.choice([
+            'Спасибо, ты молодчина!',
+            'Готово, всё сохранили!',
+            'Принято, ответы записаны!',
+        ]) + ' Закрывай вкладку, а то иногда отправляются дубли.'
+        instruction = 'Рекомендуется сначала просмотреть форму ответов на этой странице, ' \
+            'потом всё решить у себя в тетради, а лишь после заполнить форму. ' \
+            'Так ответы не потеряются и не нужно переключаться между приложениями и экранами.'
         upToStr = f'Отправить до {upTo} (напомню, что Гугл-формы сохраняют время отправки). ' \
             'И пожалуйста, проверьте, что выше верно указана дата и ваш класс ' \
             '(если нет — дайте знать как можно раньше). ' \
@@ -53,9 +58,7 @@ class TestFormGenerator:
             task_number = self.NewTask()
             self._form.AddMultipleChoiceItem(title=f'Задание {task_number}', choices=choices)
 
-    def Generate(self, image=None):
-        if not image:
-            image = 'minions'
+    def Generate(self, image='minions'):
         assert self._count == self._task_number or self._count is None
         images = {
             'minions': 'https://media.giphy.com/media/WxxsVAJLSBsFa/giphy.gif',
@@ -64,11 +67,24 @@ class TestFormGenerator:
             'tenet': 'https://media.giphy.com/media/jV0IaIdzPy7L1vqv5T/giphy.gif',
             'up': 'https://media.giphy.com/media/3sB5CjvsDbA6A/giphy.gif',
             'monsters': 'https://media.giphy.com/media/19ZCKSoEvSquk/giphy.gif',
+            'zootopia': 'https://media.giphy.com/media/139Lo3rANXYt9K/giphy.gif',
+            'minion-up': 'https://media.giphy.com/media/oobNzX5ICcRZC/giphy.gif',
         }
-        self._form.AddTextItem(title='Если сдаёшь сильно позже, напиши, пожалуйста, причину', helpText='Если опоздание до 1–2 минут — писать точно не надо, 3 — скорее не надо, если больше 15 минут — точно надо.')
+        self._form.AddTextItem(
+            title='Если сдаёшь сильно позже, пожалуйста, кратко напиши причину',
+            helpText='Если опоздание до пары минут — точно не надо, 3 минуты — скорее не надо, а больше 15 минут — точно надо.',
+        )
+        self._form.AddTextItem(
+            title='Мне было бы понятно больше заданий на уроке, если бы ...',
+            helpText='Например, если было больше похожих (чтобы понять принцип), ' \
+                'если было больше времени на самостоятельное решение,' \
+                'если бы мы делали больше (и так всё понятно),' \
+                'если записи были бы чётче. ' \
+                'Сюда же можно вписать вообще любой комментарий к уроку. '
+        )
         self._form.AddImageItem(
             url=images[image],
-            title='Всё, это конец формы, пора всё проверить и отправлять!',
+            title='Всё, это конец формы, пора всё проверить (числа, лишние символы в формах, порядок заданий) и отправлять!',
             helpText='Пора проверить и отправлять',
         )
         return self._form
