@@ -16,18 +16,29 @@ class TabOpener:
         self._controller.open_new_tab(url)
 
 
+def get_ss_link(title):
+    ss_link = None
+    if '10АБ' in title:
+        ss_link = '1Ba2UNTV3T3Rtzh3yraxJfVGvnVgbs_Y-IklyWUjebyg'
+    elif '9М' in title:
+        ss_link = '1cpTrWurYvugcLdbrmiNuFxKoMRml4qxt_a0kqdLHg7c'
+    else:
+        raise RuntimeError(f'Could not link spreadsheet for {title}')
+    return ss_link
+
+
 class TestFormGenerator:
     def __init__(self, title=None, upTo=None, count=None):
         confirmation = random.choice([
             'Спасибо, ты молодчина!',
             'Готово, всё сохранили!',
             'Принято, ответы записаны!',
-        ]) + ' Закрывай вкладку, а то иногда отправляются дубли.'
+        ]) + ' Закрой вкладку, а то иногда отправляются дубли.'
         instruction = 'Рекомендуется сначала просмотреть форму ответов на этой странице, ' \
-            'потом всё решить у себя в тетради, а лишь после заполнить форму. ' \
+            'потом открыть задание и всё решить у себя в тетради, а лишь после заполнять форму. ' \
             'Так ответы не потеряются и не нужно переключаться между приложениями и экранами.'
         upToStr = f'Отправить до {upTo} (напомню, что Гугл-формы сохраняют время отправки). ' \
-            'И пожалуйста, проверьте, что выше верно указана дата и ваш класс ' \
+            'И пожалуйста, проверьте, что выше верно указаны дата и класс ' \
             '(если нет — дайте знать как можно раньше). ' \
             '554 школа, Москва, 2020–2021 учебный год.'
         self._count = count
@@ -36,6 +47,7 @@ class TestFormGenerator:
             title=title,
             description=upToStr,
             confirmationMessage=confirmation,
+            link_existing=get_ss_link(title),
         )
         self._form.AddSectionHeaderItem(title=instruction)
         self._form.AddTextItem(title='Фамилия Имя', helpText='Именно в таком порядке, пожалуйста', required=True)
@@ -58,7 +70,9 @@ class TestFormGenerator:
             task_number = self.NewTask()
             self._form.AddMultipleChoiceItem(title=f'Задание {task_number}', choices=choices)
 
-    def Generate(self, image='minions'):
+    def Generate(self, image=None):
+        if not image:
+            image = 'minions'
         assert self._count == self._task_number or self._count is None
         images = {
             'minions': 'https://media.giphy.com/media/WxxsVAJLSBsFa/giphy.gif',
@@ -74,19 +88,20 @@ class TestFormGenerator:
             title='Если сдаёшь сильно позже, пожалуйста, кратко напиши причину',
             helpText='Если опоздание до пары минут — точно не надо, 3 минуты — скорее не надо, а больше 15 минут — точно надо.',
         )
-        self._form.AddTextItem(
-            title='Мне было бы понятно больше заданий на уроке, если бы ...',
-            helpText='Например, если было больше похожих (чтобы понять принцип), ' \
-                'если было больше времени на самостоятельное решение,' \
-                'если бы мы делали больше (и так всё понятно),' \
-                'если записи были бы чётче. ' \
-                'Сюда же можно вписать вообще любой комментарий к уроку. '
-        )
+        # self._form.AddTextItem(
+        #     title='Мне было бы понятно больше заданий на уроке, если бы ...',
+        #     helpText='Например, если было больше похожих задач (чтобы понять принцип), ' \
+        #         'если было больше времени на самостоятельное решение, ' \
+        #         'если бы мы делали больше (и так всё понятно), ' \
+        #         'если записи были бы чётче. ' \
+        #         'Сюда же можно вписать вообще любой комментарий к уроку. '
+        # )
         self._form.AddImageItem(
             url=images[image],
             title='Всё, это конец формы, пора всё проверить (числа, лишние символы в формах, порядок заданий) и отправлять!',
             helpText='Пора проверить и отправлять',
         )
+
         return self._form
 
 
@@ -100,84 +115,73 @@ def get_all_forms():
     example.AddImageItem(url='https://media.giphy.com/media/WxxsVAJLSBsFa/giphy.gif', title='Всё!', helpText='Пора проверить и отправлять')
     yield 'example', example
 
+    choices = lambda count, variants: ('choices', count, variants)
+    abv_choices = lambda count: choices(count, ['А', 'Б', 'В'])
+    abvg_choices = lambda count: choices(count, ['А', 'Б', 'В', 'Г'])
+    abvgd_choices = lambda count: choices(count, ['А', 'Б', 'В', 'Г', 'Д'])
+    any_text = lambda count: ('any', count)
+
     test_forms_config = {
         '2020-10-22-10АБ': {
-            'title': 'Тест по динамике - 1',
-            'upTo': '8:50',
+            'title': 'Тест по динамике - 1', 'upTo': '8:50',
             'tasks': [
-                ('choices', 4, ['Верно', 'Неверно', 'Недостаточно данных в условии']),
-                ('any', 6),
+                choices(4, ['Верно', 'Неверно', 'Недостаточно данных в условии']),
+                any_text(6),
                 ('text', 'Сколько задач на уроке сегодня было понятно?'),
             ],
         },
         '2020-10-22-9М': {
-            'title': 'Тест по динамике - 1',
-            'upTo': '10:50',
+            'title': 'Тест по динамике - 1', 'upTo': '10:50',
             'tasks': [
-                ('choices', 10, ['А', 'Б', 'В']),
+                abv_choices(10),
                 ('text', 'Сколько задач на уроке сегодня было понятно?'),
             ],
         },
         '2020-10-27-9М': {
-            'title': 'Тест по динамике - 2',
-            'upTo': '10:50',
-            'image': 'incredibles',
-            'tasks': [
-                ('choices', 8, ['А', 'Б', 'В']),
-                ('any', 4),
-            ],
+            'title': 'Тест по динамике - 2', 'upTo': '10:50', 'image': 'incredibles',
+            'tasks': [abv_choices(8), any_text(4)],
         },
         '2020-10-27-10АБ': {
-            'title': 'Тест по динамике - 2',
-            'upTo': '10:05',
-            'image': 'incredibles',
-            'tasks': [
-                ('any', 7),
-            ],
+            'title': 'Тест по динамике - 2', 'upTo': '10:05', 'image': 'incredibles',
+            'tasks': [any_text(7)],
         },
         '2020-10-29-10АБ': {
-            'title': 'Тест по динамике - 3',
-            'upTo': '12:05',
-            'image': 'insideout',
-            'tasks': [
-                ('choices', 6, ['А', 'Б', 'В']),
-                ('any', 11),
-            ],
+            'title': 'Тест по динамике - 3', 'upTo': '12:05', 'image': 'insideout',
+            'tasks': [abv_choices(6), any_text(11)],
         },
         '2020-10-30-10АБ': {
-            'title': 'Тест по динамике - 4',
-            'upTo': '10:05',
-            'image': 'minions',
-            'tasks': [
-                ('choices', 9, ['А', 'Б', 'В']),
-                ('any', 3),
-            ],
+            'title': 'Тест по динамике - 4', 'upTo': '10:05', 'image': 'minions',
+            'tasks': [abv_choices(9), any_text(3)],
         },
         '2020-11-03-10АБ': {
-            'title': 'Тест по динамике - 5',
-            'upTo': '9:05',
-            'image': 'insideout',
+            'title': 'Тест по динамике - 5', 'upTo': '9:05', 'image': 'insideout',
             'tasks': [
                 ('text', 'Электронная почта (только для 10«Б», 10«А» уже присылал)'),
-                ('choices', 2, ['А', 'Б', 'В']),
-                ('any', 5),
+                abv_choices(2),
+                any_text(5),
             ],
         },
         '2020-11-03-9М': {
-            'title': 'Тест по динамике - 3',
-            'upTo': '11:05',
-            'image': 'insideout',
+            'title': 'Тест по динамике - 3', 'upTo': '11:05', 'image': 'insideout',
             'tasks': [
                 ('text', 'Электронная почта'),
-                ('choices', 10, ['А', 'Б', 'В']),
+                abv_choices(10),
             ],
         },
         '2020-11-06-10АБ': {
-            'title': 'Тест по динамике - 6',
-            'upTo': '10:05',
-            'image': 'up',
+            'title': 'Тест по динамике - 6', 'upTo': '10:05', 'image': 'up',
+            'tasks': [any_text(8)],
+        },
+        '2020-11-12-9М': {
+            'title': 'Динамика - 6', 'upTo': '10:15', 'image': 'zootopia',
+            'tasks': [abv_choices(5), any_text(4)],
+        },
+        '2020-11-13-10АБ': {
+            'title': 'Законы сохранения - 1', 'upTo': '10:05', 'image': 'zootopia',
             'tasks': [
-                ('any', 8),
+                ('text', 'Электронная почта (если не присылали на прошлой неделе)'),
+                abv_choices(6),
+                any_text(4),
             ],
         },
     }
@@ -221,8 +225,8 @@ def run(args):
         log.info(f'Paste and run JS-code at {script_url}')
         log.info(f'See all ready forms at {forms_url}')
         if args.open:
-            tab_opener.open(script_url)
             tab_opener.open(forms_url)
+            tab_opener.open(script_url)
 
 
 def populate_parser(parser):

@@ -23,7 +23,7 @@ class OneDStructure(object):
             if first > last:
                 log.error('Error in book config for %r, %r', first, last)
                 raise RuntimeError('Broken pages range')
-            for pageNumber in range(first, last):
+            for pageNumber in range(first, last + 1):
                 yield pageNumber, dirName, '%02d %s' % (index, name)
 
 
@@ -58,7 +58,8 @@ class PdfBook(object):
         pageShift=None,
     ):
         assert pdfPath.endswith('.pdf')
-        assert os.path.exists(pdfPath)
+        assert os.path.exists(pdfPath), f'{pdfPath} is missing'
+        assert os.path.isdir(dstPath), f'{dstPath} is not dir'
         assert BROKEN_Y not in pdfPath
         assert BROKEN_Y not in dstPath
         self.PdfPath = pdfPath

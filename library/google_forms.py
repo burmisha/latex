@@ -9,6 +9,8 @@ class GoogleForm:
         description=None,
         confirmationMessage=None,
         showLinkToRespondAgain=False,
+        linkNewSpreadsheet=False,
+        link_existing=None,
     ):
         showLinkToRespondAgain = str(showLinkToRespondAgain).lower()
         self._query = f'''
@@ -17,6 +19,21 @@ class GoogleForm:
             form.setConfirmationMessage('{confirmationMessage}');
             form.setShowLinkToRespondAgain({showLinkToRespondAgain});
             form.setPublishingSummary(false);  // default
+'''
+
+        if linkNewSpreadsheet and link_existing:
+            raise RuntimeError(f'Could not set two destinations: {linkNewSpreadsheet} {link_existing}')
+
+        if linkNewSpreadsheet:
+            self._query += f'''
+            var ss = SpreadsheetApp.create('{title} - ответы');
+            form.setDestination(FormApp.DestinationType.SPREADSHEET, ss.getId());
+'''
+
+        if link_existing:
+            self._query += f'''
+            var ss = SpreadsheetApp.openById("{link_existing}");
+            form.setDestination(FormApp.DestinationType.SPREADSHEET, ss.getId());
 '''
         self._item_id = 0
 

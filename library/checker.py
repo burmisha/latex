@@ -247,7 +247,7 @@ class Checker:
 
         basename = os.path.basename(self._csv_file)
         class_str = basename.split()[1]
-        class_key = 'class-2020-' + ''.join(i for i in class_str if i.isdigit())
+        class_key = '2020-' + ''.join(i for i in class_str if i.isdigit())
         pupils = library.pupils.getPupils(class_key, addMyself=True)
         names = [pupil.GetFullName(surnameFirst=True) for pupil in pupils.Iterate()]
         self._name_lookup = NameLookup(names)

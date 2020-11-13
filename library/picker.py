@@ -11,11 +11,18 @@ class KeyPicker:
         self._make_key = key
 
     def add(self, key, value):
+        if not value:
+            raise RuntimeError(f'Cannot save empty value: {value}')
         new_key = self._make_key(key)
         if new_key in self._keys:
             raise RuntimeError(f'Already got similar key for {key!r}: {self._keys[new_key]!r}')
         self._options[new_key] = value
         self._keys[new_key] = key
+
+    def get_original_key(self, flt):
+        matched_keys = sorted([key for key in self._keys if not flt or self._make_key(flt) in key])
+        assert len(matched_keys) == 1
+        return self._keys[matched_keys[0]]
 
     def get(self, flt=None):
         matched_keys = sorted([key for key in self._options if not flt or self._make_key(flt) in key])

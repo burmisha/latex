@@ -8,7 +8,7 @@ log = logging.getLogger('lucky')
 
 
 def getLucky(grade=None, count=None):
-    className = 'class-2020-{}'.format(grade)
+    className = '2020-{}'.format(grade)
     pupilsList = list(pupils.getPupils(className).Iterate())
     random.seed(int(time.time()))
     random.shuffle(pupilsList)

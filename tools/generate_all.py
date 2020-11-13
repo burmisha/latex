@@ -56,7 +56,7 @@ def run(args):
         seed = 2704
 
         classRandomTasks = {
-            'class-2018-10': {
+            '2018-10': {
                 '2019-04-16': [
                     generators.electricity.ForceTask(),
                     generators.electricity.ExchangeTask(),
@@ -84,7 +84,7 @@ def run(args):
                     generators.electricity.Rezistor4(),
                 ],
             },
-            'class-2018-11': {
+            '2018-11': {
                 '2019-04-19': [
                     generators.quantum.Fotons(),
                     generators.quantum.KernelCount(),
@@ -96,7 +96,7 @@ def run(args):
                     generators.quantum.Quantum1120(),
                 ],
             },
-            'class-2019-8': {
+            '2019-8': {
                 '2019-11-27': [
                     generators.termo.Ch_8_6(),
                     generators.termo.Ch_8_7(),
@@ -105,7 +105,7 @@ def run(args):
                     generators.termo.Ch_8_35(),
                 ],
             },
-            'class-2019-9A': {
+            '2019-9-А': {
                 '2019-11-25': [
                     generators.mechanics.Ch_3_1(),
                     generators.mechanics.Ch_3_2(),
@@ -133,7 +133,7 @@ def run(args):
                     generators.vishnyakova.BK_53_12(),
                 ],
             },
-            'class-2019-9L': {
+            '2019-9-Л': {
                 '2020-01-20': [
                     generators.koleb.Nu01(),
                     generators.koleb.Nu02(),
@@ -148,7 +148,7 @@ def run(args):
                     generators.vishnyakova.BK_52_07(),
                 ],
             },
-            'class-2019-11': {
+            '2019-11-Т': {
                 '2019-09-11': [
                     generators.magnet.ConstMagnet0(),
                     generators.magnet.ConstMagnet1(),
@@ -185,14 +185,14 @@ def run(args):
 
                 ],
             },
-            'class-2019-11S': {
+            '2019-11S': {
                 '2019-09-30': [
                     generators.magnet.Chernoutsan11_01(),
                     generators.magnet.Chernoutsan11_02(),
                     generators.magnet.Chernoutsan11_5(),
                 ],
             },
-            'class-2020-10': {
+            '2020-10': {
                 '2020-09-10': [
                     generators.mechanics.Theory_1(),
                     generators.mechanics.Vectors_SumAndDiff(),
@@ -200,7 +200,7 @@ def run(args):
                     generators.mechanics.Vectors_SpeedSum(),
                 ],
             },
-            'class-2020-9': {
+            '2020-9': {
                 '2020-09-10': [
                     generators.mechanics.Theory_1_simple(),
                     generators.mechanics.Chernoutsan_1_2(),
