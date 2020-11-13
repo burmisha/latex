@@ -1,7 +1,13 @@
 import library.logging
+cm = library.logging.ColorMessage()
 
 import logging
 log = logging.getLogger(__name__)
+
+
+def letters_key(key):
+    assert isinstance(key, str), f'Key is not str, but {type(key)}: {key}'
+    return ''.join(l for l in key if l.isalpha() or l.isdigit()).lower()
 
 
 class KeyPicker:
@@ -25,7 +31,8 @@ class KeyPicker:
         return self._keys[matched_keys[0]]
 
     def get(self, flt=None):
-        matched_keys = sorted([key for key in self._options if not flt or self._make_key(flt) in key])
+        flt_key = self._make_key(flt) if flt else None
+        matched_keys = sorted([key for key in self._options if not flt or flt_key in key])
         
         if len(matched_keys) > 1:
             keys = [self._keys[key] for key in matched_keys]
@@ -33,7 +40,7 @@ class KeyPicker:
             log.warning(f'Too many matches for {flt}:{keys}')
         elif len(matched_keys) == 1:
             key = matched_keys[0]
-            log.info(f'Found {self._keys[key]}')
+            log.info(f"Found '{cm(self._keys[key], color='cyan')}' (as '{key}' for '{flt_key}')")
             return self._options[key]
         else:
             keys = library.logging.log_list(sorted(self._keys.values()))

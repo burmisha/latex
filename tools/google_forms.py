@@ -18,9 +18,9 @@ class TabOpener:
 
 def get_ss_link(title):
     ss_link = None
-    if '10АБ' in title:
+    if ' 10АБ ' in title:
         ss_link = '1Ba2UNTV3T3Rtzh3yraxJfVGvnVgbs_Y-IklyWUjebyg'
-    elif '9М' in title:
+    elif ' 9М ' in title:
         ss_link = '1cpTrWurYvugcLdbrmiNuFxKoMRml4qxt_a0kqdLHg7c'
     else:
         raise RuntimeError(f'Could not link spreadsheet for {title}')
@@ -123,38 +123,34 @@ def get_all_forms():
     email = lambda desc: ('text', f'Электронная почта {desc}'.strip())
 
     forms_config = [
-        ('2020-10-22-10АБ', 'Тест по динамике - 1', '8:50', None, [
+        ('2020.10.22 10АБ - Тест по динамике - 1', '8:50', None, [
             choices(4, ['Верно', 'Неверно', 'Недостаточно данных в условии']),
             any_text(6),
             ('text', 'Сколько задач на уроке сегодня было понятно?'),
         ]),
-        ('2020-10-22-9М', 'Тест по динамике - 1', '10:50', None, [
+        ('2020.10.22 9М - Тест по динамике - 1', '10:50', None, [
             abv_choices(10),
             ('text', 'Сколько задач на уроке сегодня было понятно?'),
         ]),
-        ('2020-10-27-9М', 'Тест по динамике - 2', '10:50', 'incredibles', [abv_choices(8), any_text(4)]),
-        ('2020-10-27-10АБ', 'Тест по динамике - 2', '10:05', 'incredibles', [any_text(7)]),
-        ('2020-10-29-10АБ', 'Тест по динамике - 3', '12:05', 'insideout', [abv_choices(6), any_text(11)]),
-        ('2020-10-30-10АБ', 'Тест по динамике - 4', '10:05', 'minions', [abv_choices(9), any_text(3)]),
-        ('2020-11-03-10АБ', 'Тест по динамике - 5', '9:05', 'insideout', [
+        ('2020.10.27 9М - Тест по динамике - 2', '10:50', 'incredibles', [abv_choices(8), any_text(4)]),
+        ('2020.10.27 10АБ - Тест по динамике - 2', '10:05', 'incredibles', [any_text(7)]),
+        ('2020.10.29 10АБ - Тест по динамике - 3', '12:05', 'insideout', [abv_choices(6), any_text(11)]),
+        ('2020.10.30 10АБ - Тест по динамике - 4', '10:05', 'minions', [abv_choices(9), any_text(3)]),
+        ('2020.11.03 10АБ - Тест по динамике - 5', '9:05', 'insideout', [
             email('(только для 10«Б», 10«А» уже присылал)'),
             abv_choices(2),
             any_text(5),
         ]),
-        ('2020-11-03-9М', 'Тест по динамике - 3', '11:05', 'insideout', [email(''), abv_choices(10)]),
-        ('2020-11-06-10АБ', 'Тест по динамике - 6', '10:05', 'up', [any_text(8)]),
-        ('2020-11-12-9М', 'Динамика - 6', '10:15', 'zootopia', [abv_choices(5), any_text(4)]),
-        ('2020-11-13-10АБ', 'Законы сохранения - 1', '10:05', 'zootopia', [
+        ('2020.11.03 9М - Тест по динамике - 3', '11:05', 'insideout', [email(''), abv_choices(10)]),
+        ('2020.11.06 10АБ - Тест по динамике - 6', '10:05', 'up', [any_text(8)]),
+        ('2020.11.12 9М - Динамика - 6', '10:15', 'zootopia', [abv_choices(5), any_text(4)]),
+        ('2020.11.13 10АБ - Законы сохранения - 1', '10:05', 'zootopia', [
             email('(если не присылали на прошлой неделе)'),
             abv_choices(6),
             any_text(4),
         ]),
     ]
-    for key, name, up_to, image, questions in forms_config:
-        title = '{} - {}'.format(
-            key.replace('-', '.', 2).replace('-', ' ', 1),
-            name,
-        )
+    for title, up_to, image, questions in forms_config:
         form_generator = TestFormGenerator(title=title, upTo=up_to, image=image)
         for question_config in questions:
             if question_config[0] == 'choices':
@@ -166,13 +162,13 @@ def get_all_forms():
             else:
                 raise RuntimeError(f'Invalid question {question_config}')
 
-        yield key, form_generator.Generate()
+        yield title, form_generator.Generate()
 
 
 def run(args):
     form_filter = args.filter
 
-    key_picker = library.picker.KeyPicker(key=lambda x: x.replace('.', '').replace('-', ''))
+    key_picker = library.picker.KeyPicker(key=library.picker.letters_key)
     for key, value in get_all_forms():
         key_picker.add(key, value)
 
@@ -194,6 +190,8 @@ def run(args):
         if args.open:
             tab_opener.open(forms_url)
             tab_opener.open(script_url)
+        else:
+            log.info('Add --open or -o option to open browser')
 
 
 def populate_parser(parser):
