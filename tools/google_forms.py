@@ -28,7 +28,7 @@ def get_ss_link(title):
 
 
 class TestFormGenerator:
-    def __init__(self, title=None, upTo=None, count=None):
+    def __init__(self, title=None, upTo=None, count=None, image=None):
         confirmation = random.choice([
             'Спасибо, ты молодчина!',
             'Готово, всё сохранили!',
@@ -51,6 +51,7 @@ class TestFormGenerator:
         )
         self._form.AddSectionHeaderItem(title=instruction)
         self._form.AddTextItem(title='Фамилия Имя', helpText='Именно в таком порядке, пожалуйста', required=True)
+        self._image = image
 
     def NewTask(self):
         self._task_number += 1
@@ -70,9 +71,8 @@ class TestFormGenerator:
             task_number = self.NewTask()
             self._form.AddMultipleChoiceItem(title=f'Задание {task_number}', choices=choices)
 
-    def Generate(self, image=None):
-        if not image:
-            image = 'minions'
+    def Generate(self):
+        image = self._image or 'minions'
         assert self._count == self._task_number or self._count is None
         images = {
             'minions': 'https://media.giphy.com/media/WxxsVAJLSBsFa/giphy.gif',
@@ -120,86 +120,53 @@ def get_all_forms():
     abvg_choices = lambda count: choices(count, ['А', 'Б', 'В', 'Г'])
     abvgd_choices = lambda count: choices(count, ['А', 'Б', 'В', 'Г', 'Д'])
     any_text = lambda count: ('any', count)
+    email = lambda desc: ('text', f'Электронная почта {desc}'.strip())
 
-    test_forms_config = {
-        '2020-10-22-10АБ': {
-            'title': 'Тест по динамике - 1', 'upTo': '8:50',
-            'tasks': [
-                choices(4, ['Верно', 'Неверно', 'Недостаточно данных в условии']),
-                any_text(6),
-                ('text', 'Сколько задач на уроке сегодня было понятно?'),
-            ],
-        },
-        '2020-10-22-9М': {
-            'title': 'Тест по динамике - 1', 'upTo': '10:50',
-            'tasks': [
-                abv_choices(10),
-                ('text', 'Сколько задач на уроке сегодня было понятно?'),
-            ],
-        },
-        '2020-10-27-9М': {
-            'title': 'Тест по динамике - 2', 'upTo': '10:50', 'image': 'incredibles',
-            'tasks': [abv_choices(8), any_text(4)],
-        },
-        '2020-10-27-10АБ': {
-            'title': 'Тест по динамике - 2', 'upTo': '10:05', 'image': 'incredibles',
-            'tasks': [any_text(7)],
-        },
-        '2020-10-29-10АБ': {
-            'title': 'Тест по динамике - 3', 'upTo': '12:05', 'image': 'insideout',
-            'tasks': [abv_choices(6), any_text(11)],
-        },
-        '2020-10-30-10АБ': {
-            'title': 'Тест по динамике - 4', 'upTo': '10:05', 'image': 'minions',
-            'tasks': [abv_choices(9), any_text(3)],
-        },
-        '2020-11-03-10АБ': {
-            'title': 'Тест по динамике - 5', 'upTo': '9:05', 'image': 'insideout',
-            'tasks': [
-                ('text', 'Электронная почта (только для 10«Б», 10«А» уже присылал)'),
-                abv_choices(2),
-                any_text(5),
-            ],
-        },
-        '2020-11-03-9М': {
-            'title': 'Тест по динамике - 3', 'upTo': '11:05', 'image': 'insideout',
-            'tasks': [
-                ('text', 'Электронная почта'),
-                abv_choices(10),
-            ],
-        },
-        '2020-11-06-10АБ': {
-            'title': 'Тест по динамике - 6', 'upTo': '10:05', 'image': 'up',
-            'tasks': [any_text(8)],
-        },
-        '2020-11-12-9М': {
-            'title': 'Динамика - 6', 'upTo': '10:15', 'image': 'zootopia',
-            'tasks': [abv_choices(5), any_text(4)],
-        },
-        '2020-11-13-10АБ': {
-            'title': 'Законы сохранения - 1', 'upTo': '10:05', 'image': 'zootopia',
-            'tasks': [
-                ('text', 'Электронная почта (если не присылали на прошлой неделе)'),
-                abv_choices(6),
-                any_text(4),
-            ],
-        },
-    }
-    for key, config in test_forms_config.items():
+    forms_config = [
+        ('2020-10-22-10АБ', 'Тест по динамике - 1', '8:50', None, [
+            choices(4, ['Верно', 'Неверно', 'Недостаточно данных в условии']),
+            any_text(6),
+            ('text', 'Сколько задач на уроке сегодня было понятно?'),
+        ]),
+        ('2020-10-22-9М', 'Тест по динамике - 1', '10:50', None, [
+            abv_choices(10),
+            ('text', 'Сколько задач на уроке сегодня было понятно?'),
+        ]),
+        ('2020-10-27-9М', 'Тест по динамике - 2', '10:50', 'incredibles', [abv_choices(8), any_text(4)]),
+        ('2020-10-27-10АБ', 'Тест по динамике - 2', '10:05', 'incredibles', [any_text(7)]),
+        ('2020-10-29-10АБ', 'Тест по динамике - 3', '12:05', 'insideout', [abv_choices(6), any_text(11)]),
+        ('2020-10-30-10АБ', 'Тест по динамике - 4', '10:05', 'minions', [abv_choices(9), any_text(3)]),
+        ('2020-11-03-10АБ', 'Тест по динамике - 5', '9:05', 'insideout', [
+            email('(только для 10«Б», 10«А» уже присылал)'),
+            abv_choices(2),
+            any_text(5),
+        ]),
+        ('2020-11-03-9М', 'Тест по динамике - 3', '11:05', 'insideout', [email(''), abv_choices(10)]),
+        ('2020-11-06-10АБ', 'Тест по динамике - 6', '10:05', 'up', [any_text(8)]),
+        ('2020-11-12-9М', 'Динамика - 6', '10:15', 'zootopia', [abv_choices(5), any_text(4)]),
+        ('2020-11-13-10АБ', 'Законы сохранения - 1', '10:05', 'zootopia', [
+            email('(если не присылали на прошлой неделе)'),
+            abv_choices(6),
+            any_text(4),
+        ]),
+    ]
+    for key, name, up_to, image, questions in forms_config:
         title = '{} - {}'.format(
             key.replace('-', '.', 2).replace('-', ' ', 1),
-            config['title'],
+            name,
         )
-        form_generator = TestFormGenerator(title=title, upTo=config['upTo'])
-        for task_config in config['tasks']:
-            if task_config[0] == 'choices':
-                form_generator.AddMultipleChoiceTask(choices=task_config[2], count=task_config[1])
-            elif task_config[0] == 'any':
-                form_generator.AddTextTask(count=task_config[1])
-            elif task_config[0] == 'text':
-                form_generator.AddText(title=task_config[1])
+        form_generator = TestFormGenerator(title=title, upTo=up_to, image=image)
+        for question_config in questions:
+            if question_config[0] == 'choices':
+                form_generator.AddMultipleChoiceTask(choices=question_config[2], count=question_config[1])
+            elif question_config[0] == 'any':
+                form_generator.AddTextTask(count=question_config[1])
+            elif question_config[0] == 'text':
+                form_generator.AddText(title=question_config[1])
+            else:
+                raise RuntimeError(f'Invalid question {question_config}')
 
-        yield key, form_generator.Generate(image=config.get('image'))
+        yield key, form_generator.Generate()
 
 
 def run(args):
