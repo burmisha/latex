@@ -169,57 +169,6 @@ class SdamGia(object):
         assert len(result) == self.__TasksCount
         return result
 
-    def GetTasks(self):
-        log.info('Starting Firefox')
-        driver = webdriver.Firefox()
-        try:
-            log.info('Loading %s', self._url)
-            driver.get(self._url)
-            log.info('Parsing DOM')
-            tbody = driver.find_element_by_xpath('//form/table/tbody')
-
-            taskName = None
-            partName = None
-
-            result = []
-            for tr in tbody.find_elements_by_xpath('./tr'):
-                tds = tr.find_elements_by_xpath('./td')
-                if len(tds) == 1:
-                    for tr_small in tds[0].find_elements_by_xpath('./div/table/tbody/tr'):
-                        name = tr_small.find_element_by_xpath('./td[1]').text
-                        a = tr_small.find_element_by_xpath('./td[1]/a').get_attribute('href')
-                        partName = name.split('(')[0].strip().replace(', ', ' и ').replace(' просмотреть', '').replace('\xad', '').replace('/', '-').replace(':', '-').strip()
-                        assert partName
-                        result[-1][1].append((partName, a))
-                        log.info('  Part: %s, link: %s', partName, a)
-                elif len(tds) == 2:
-                    a = tds[0].find_element_by_xpath('./a')
-                    hasChildren = not ('просмотреть (' in a.text)
-                    if hasChildren:
-                        a.click()  # selenium reqiures text to be displayed
-                        taskNumber = int(a.text.split('.')[0].split(' ')[0])
-                        taskName = a.text.split('.')[1].split('(')[0].strip().replace(', ', ' и ').replace('\xad', '').strip()
-                        assert taskNumber == len(result) + 1
-                        result.append((taskName, []))
-                    else:
-                        taskNumber = int(tds[0].text.split(' ')[0].strip('.'))
-                        assert taskNumber == len(result) + 1
-                        taskName = tds[0].text.split('.')[1].split('(')[0].strip().replace(', ', ' и ').replace(' просмотреть', '').replace('\xad', '').strip()
-                        link = a.get_attribute('href')
-                        result.append((taskName, [(taskName, link)]))
-                    log.info('Chapter %02d: %s', taskNumber, taskName)
-                else:
-                    pass
-            assert len(result) == self.__TasksCount
-        except:
-            log.error('Exiting browser')
-            driver.quit()
-            raise
-        else:
-            log.info('Exiting browser')
-            driver.quit()
-        return result
-
     @retry(WebDriverException, tries=10, delay=20)
     def MakeFullScreenshot(self, url=None, totalCount=None, filename=None):
         pngJoiner = PngJoiner(filenameFmt=filename, minHeight=1200)
@@ -270,11 +219,11 @@ class SdamGia(object):
 
 def run(args):
     for subject, link, count in [
-        # ('Физика', 'https://phys-ege.sdamgia.ru', 32),
-        # ('Физика-ОГЭ', 'https://phys-oge.sdamgia.ru', 25),
-        # ('География', 'https://geo-ege.sdamgia.ru', 34),
-        # ('Химия', 'https://chem-ege.sdamgia.ru', 35),
-        # ('Математика', 'https://math-ege.sdamgia.ru/', 19),
+        ('Физика', 'https://phys-ege.sdamgia.ru', 32),
+        ('Физика-ОГЭ', 'https://phys-oge.sdamgia.ru', 25),
+        ('География', 'https://geo-ege.sdamgia.ru', 34),
+        ('Химия', 'https://chem-ege.sdamgia.ru', 35),
+        ('Математика', 'https://math-ege.sdamgia.ru/', 19),
         ('Математика-База', 'https://mathb-ege.sdamgia.ru/', 20),
     ]:
         rootPath = library.files.UdrPath('Материалы - Решу ЕГЭ - %s' % subject)
