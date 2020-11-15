@@ -6,3 +6,4 @@ pymaging
 selenium>=3.141
 Pillow>=6.2.2
 python-Levenshtein
+retry

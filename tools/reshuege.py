@@ -2,6 +2,7 @@ import library
 
 import os
 import time
+import re
 
 import logging
 log = logging.getLogger(__name__)
@@ -11,6 +12,8 @@ from io import StringIO
 from io import BytesIO
 
 from selenium import webdriver
+from selenium.common.exceptions import WebDriverException
+from retry import retry
 
 
 DELETE_SCRIPT = '''
@@ -27,6 +30,12 @@ $("span:contains('Источник: ЕГЭ')").remove();
 $("span:contains('Источник: ГИА')").remove();
 $("span:contains('Источник: РЕШУ')").remove();
 $("span:contains('Источник: Яндекс')").remove();
+$("span:contains('Источник: Досрочная волна ЕГЭ')").remove();
+$("span:contains('Источник: Пробный экзамен')").remove();
+$("span:contains('Источник: Основная волна ЕГЭ')").remove();
+$("span:contains('Классификатор базовой части')").remove();
+$("span:contains('Классификатор стереометрии:')").remove();
+$("span:contains('Методы геометрии:')").remove();
 $("a:contains('Пройти тестирование по этим заданиям')").remove();
 $("a:contains('Вернуться к каталогу заданий')").remove();
 $("a:contains('Версия для печати и копирования в MS Word')").remove();
@@ -52,7 +61,9 @@ $('.s2b51bef0').remove();
 
 $('body').css('background', 'fff');
 $('body').css('background-image', 'none');
+$('p').css('text-indent', '0pt');
 '''
+
 
 # based on https://gist.github.com/fabtho/13e4a2e7cfbfde671b8fa81bbe9359fb
 class PngJoiner(object):
@@ -106,15 +117,64 @@ class PngJoiner(object):
 
 class SdamGia(object):
     def __init__(self, url, tasksCount=None):
-        self.__Url = url
+        self._url = url
         self.__TasksCount = tasksCount
+        assert self._canonize_text('31. Реакции ионного обмена') == 'Реакции ионного обмена'
+        assert self._canonize_text('За\xadда\xadния для подготовки (9)') == 'Задания для подготовки'
+
+    def _canonize_text(self, text):
+        assert isinstance(text, str)
+        assert text
+        result = text.replace('\xad', '').replace('/', '-').replace(':', ' - ')
+        result = re.sub('^Т?[0-9]{1,2}\. (.*)', '\\1', result)
+        result = result.split('(')[0]
+        return result.strip()
+
+    @retry(WebDriverException, tries=3, delay=30)
+    def GetCatalog(self):
+        url = '{}/prob_catalog'.format(self._url.strip('/'))
+        driver = webdriver.Firefox()
+        result = []
+        try:
+            driver.get(url)
+            for index, category in enumerate(driver.find_elements_by_xpath('//div[@class="cat_main"]/div[@class="cat_category"]'), 1):
+                children = category.find_elements_by_xpath('./div[@class="cat_children"]/div[@class="cat_category"]/a[@class="cat_name"]')
+                if children:
+                    cat_name = category.find_element_by_xpath('./b[@class="cat_name"]')
+                else:
+                    cat_name = category.find_element_by_xpath('./b/a[@class="cat_name"]')
+                    children = [cat_name]
+
+                if re.match('^Т?Задани[ея] ', cat_name.text):
+                    log.info(f'Skipping {cat_name.text}')
+                    continue
+
+                part_index = int(cat_name.text.strip('Т').split('.')[0])
+                assert index == part_index
+                part_name = self._canonize_text(cat_name.text)
+                parts = [(self._canonize_text(child.text), child.get_attribute('href')) for child in children]
+
+                log.info(f'{part_index}. {part_name}')
+                for name, link in parts:
+                    log.info(f'  - {name}: {link}')
+
+                result.append((part_name, parts))
+        except:
+            log.error('Exiting browser')
+            driver.quit()
+            raise
+        else:
+            log.info('Exiting browser')
+            driver.quit()
+        assert len(result) == self.__TasksCount
+        return result
 
     def GetTasks(self):
         log.info('Starting Firefox')
         driver = webdriver.Firefox()
         try:
-            log.info('Loading %s', self.__Url)
-            driver.get(self.__Url)
+            log.info('Loading %s', self._url)
+            driver.get(self._url)
             log.info('Parsing DOM')
             tbody = driver.find_element_by_xpath('//form/table/tbody')
 
@@ -128,7 +188,7 @@ class SdamGia(object):
                     for tr_small in tds[0].find_elements_by_xpath('./div/table/tbody/tr'):
                         name = tr_small.find_element_by_xpath('./td[1]').text
                         a = tr_small.find_element_by_xpath('./td[1]/a').get_attribute('href')
-                        partName = name.split('(')[0].strip().replace(', ', ' и ').replace(' просмотреть', '')
+                        partName = name.split('(')[0].strip().replace(', ', ' и ').replace(' просмотреть', '').replace('\xad', '').replace('/', '-').replace(':', '-').strip()
                         assert partName
                         result[-1][1].append((partName, a))
                         log.info('  Part: %s, link: %s', partName, a)
@@ -138,13 +198,13 @@ class SdamGia(object):
                     if hasChildren:
                         a.click()  # selenium reqiures text to be displayed
                         taskNumber = int(a.text.split('.')[0].split(' ')[0])
-                        taskName = a.text.split('.')[1].split('(')[0].strip().replace(', ', ' и ')
+                        taskName = a.text.split('.')[1].split('(')[0].strip().replace(', ', ' и ').replace('\xad', '').strip()
                         assert taskNumber == len(result) + 1
                         result.append((taskName, []))
                     else:
                         taskNumber = int(tds[0].text.split(' ')[0].strip('.'))
                         assert taskNumber == len(result) + 1
-                        taskName = tds[0].text.split('.')[1].split('(')[0].strip().replace(', ', ' и ').replace(' просмотреть', '')
+                        taskName = tds[0].text.split('.')[1].split('(')[0].strip().replace(', ', ' и ').replace(' просмотреть', '').replace('\xad', '').strip()
                         link = a.get_attribute('href')
                         result.append((taskName, [(taskName, link)]))
                     log.info('Chapter %02d: %s', taskNumber, taskName)
@@ -160,6 +220,7 @@ class SdamGia(object):
             driver.quit()
         return result
 
+    @retry(WebDriverException, tries=10, delay=20)
     def MakeFullScreenshot(self, url=None, totalCount=None, filename=None):
         pngJoiner = PngJoiner(filenameFmt=filename, minHeight=1200)
         if pngJoiner.WasSaved():
@@ -209,14 +270,18 @@ class SdamGia(object):
 
 def run(args):
     for subject, link, count in [
-        ('Физика', 'https://phys-ege.sdamgia.ru', 32),
-        ('Физика-ОГЭ', 'https://phys-oge.sdamgia.ru', 25),
-        # ('Химия', 'https://geo-ege.sdamgia.ru', 34),
-        # ('География', 'https://chem-ege.sdamgia.ru', 35),
+        # ('Физика', 'https://phys-ege.sdamgia.ru', 32),
+        # ('Физика-ОГЭ', 'https://phys-oge.sdamgia.ru', 25),
+        # ('География', 'https://geo-ege.sdamgia.ru', 34),
+        # ('Химия', 'https://chem-ege.sdamgia.ru', 35),
+        # ('Математика', 'https://math-ege.sdamgia.ru/', 19),
+        ('Математика-База', 'https://mathb-ege.sdamgia.ru/', 20),
     ]:
         rootPath = library.files.UdrPath('Материалы - Решу ЕГЭ - %s' % subject)
+        rootPath(create_missing_dir=True)
         sdamGia = SdamGia(link, count)
-        tasks = sdamGia.GetTasks()
+        tasks = sdamGia.GetCatalog()
+        # tasks = sdamGia.GetTasks()
         for taskIndex, (taskName, parts) in enumerate(tasks, 1):
             dirName = '%02d %s' % (taskIndex, taskName)
             taskPath = rootPath(dirName, create_missing_dir=True)

@@ -230,7 +230,7 @@ class DocxToPdf(object):
         assert destination_file.endswith('.pdf')
 
         if library.files.is_older(source_file, destination_file):
-            log.info(f'Skipping existing file \'{destination_file}\'')
+            log.debug(f'Skipping existing file \'{destination_file}\'')
             return False
         else:
             log.info(f'Converting \'{source_file}\' to \'{destination_file}\'')
@@ -304,7 +304,7 @@ class DocxToPdf(object):
                 new_converted += 1
             else:
                 already_converted_count += 1
-        log.info(f'Converted {new_converted} files and found {already_converted_count} existing in \'{source_directory}\'')
+        log.info(f'Converted {new_converted:2d} files and found {already_converted_count:2d} existing in \'{source_directory}\'')
 
 
 

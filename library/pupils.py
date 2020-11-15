@@ -55,6 +55,7 @@ class Pupils(object):
     def GetRandomSeedPart(self):
         return '{}-{}'.format(self.Grade, self.Letter)
 
+
 classes_config = {
     'Гагик Аракелян':           ['2018-10-Т',   '2019-11-Т',                ],
     'Ирен Аракелян':            ['2018-10-Т',   '2019-11-Т',    '2019-11S-Т'],
