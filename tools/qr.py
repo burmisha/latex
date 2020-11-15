@@ -41,7 +41,7 @@ class Generator(object):
         elif method == 'png':
             factory = qrcode.image.pure.PymagingImage
         else:
-            raise RuntimeError('Invalid method %r' % method)
+            raise RuntimeError(f'Invalid method {method!r}')
         qrCode.add_data(data)
         qrCode.make()
         return qrCode.make_image(image_factory=factory)
@@ -59,13 +59,13 @@ class Generator(object):
             ('https://notion.so/a7e4f5156a9b428397e3b495ffce7881', '2020-21-9M.png'),
         ]:
             filename = os.path.join(path or self.__Path, file)
-            assert filename.endswith(method)
+            assert filename.endswith('.' + method)
             if not os.path.exists(filename) or self.__Force or force:
-                log.info('Saving %s to %s', link, filename)
+                log.info(f'Saving {link} to {filename}')
                 with open(filename, 'w') as f:
                     self.__MakeImage(data=link, method=method).save(f)
             else:
-                log.debug('Skipping %s as %s exists', link, filename)
+                log.debug(f'Skipping {link} as {filename} exists')
 
 
 def runQr(args):
