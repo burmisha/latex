@@ -80,9 +80,14 @@ def main():
 
     log.info('Start')
     start_time = time.time()
-    args.func(args)
-    finish_time = time.time()
-    log.info('Finished in %.2f seconds', finish_time  - start_time)
+    try:
+        args.func(args)
+        finish_time = time.time()
+        log.info('Finished in %.2f seconds', finish_time  - start_time)
+    except Exception:
+        log.exception('Failed')
+        finish_time = time.time()
+        log.info('Failed in %.2f seconds', finish_time  - start_time)
 
 
 if __name__ == '__main__':
