@@ -33,12 +33,12 @@ class PdfExtractor:
 def run(args):
     docxToPdf = library.convert.DocxToPdf()
     docxToPdf.ConvertDir(
-        library.location.udr('11 класс', '2020 весна'),
+        library.location.udr('11 класс', 'Вишнякова'),
         recursive=False,
         regexp='.*Вишнякова - [0-9].*',
     )
     docxToPdf.ConvertDir(
-        library.location.udr('11 класс', '2020 весна'),
+        library.location.udr('11 класс', 'Вишнякова'),
         recursive=False,
         regexp='.*Вишнякова - .* - Все условия.*',
     )
@@ -69,7 +69,6 @@ def run(args):
     )
     docxToPdf.ConvertDir(
         library.location.udr('8 класс', '2020-21 Архив'),
-        # destination_directory=library.location.udr('9 класс', '2020-21 9М Физика'),
         regexp=r'.*с урока\.docx$',
         recursive=False,
     )
@@ -78,7 +77,7 @@ def run(args):
     if args.run_extractor:
         extractor_configs = [
             (
-                library.location.udr('11 класс', '2020 весна', 'Вишнякова - Базовый курс - Все условия.pdf'),
+                library.location.udr('11 класс', 'Вишнякова', 'Вишнякова - Базовый курс - Все условия.pdf'),
                 None,
                 {
                     '1': 'Вишнякова - 1.1 - Кинематика - БК - условия.pdf',
@@ -171,6 +170,9 @@ def run(args):
                     '34+1': '9-2-3.3 - Динамика - Неделя 3 - Материалы-2.pdf',
                     '37+2,41+3': '9-2-4.2 - Динамика - Неделя 4 - Материалы-1.pdf',
                     # '40':   '9-2-4.2 - Динамика - Неделя 4 - Тест-1.pdf',
+                    '46+1': '9-3-1.1 - Законы сохранения - Неделя 1 - Материалы-1.pdf',
+                    # '48':   '9-3-1.2 - Законы сохранения - Неделя 1 - Тест-1.pdf',
+                    '49+1,53+1': '9-3-1.2 - Законы сохранения - Неделя 1 - Материалы-2.pdf',
                 },
             ),
         ]
@@ -184,5 +186,5 @@ def run(args):
 
 
 def populate_parser(parser):
-    parser.add_argument('--run-extractor', help='Extract pdf files', action='store_true')
+    parser.add_argument('-e', '--extract', help='Extract pages from pdf to separate files', action='store_true')
     parser.set_defaults(func=run)
