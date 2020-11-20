@@ -280,14 +280,14 @@ class DocxToPdf(object):
         return True
 
     def ConvertDir(self, source_directory, destination_directory=None, recursive=True, regexp=None):
-        assert os.path.exists(source_directory)
-        assert os.path.isdir(source_directory)
+        assert os.path.exists(source_directory), f'No dir {source_directory}'
+        assert os.path.isdir(source_directory), f'Not dir {source_directory}'
         if destination_directory:
             dst_path = os.path.join(source_directory, destination_directory)
         else:
             dst_path = source_directory
-        assert os.path.exists(dst_path)
-        assert os.path.isdir(dst_path)
+        assert os.path.exists(dst_path), f'No dir {dst_path}'
+        assert os.path.isdir(dst_path), f'Not dir {dst_path}'
 
         docx_suffix = '.docx'
         new_converted = 0

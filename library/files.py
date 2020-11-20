@@ -115,10 +115,10 @@ class FileWriter(object):
 
 class FileCopier(object):
     def __init__(self, source_file, destination_dir=None):
-        assert os.path.exists(source_file)
-        assert os.path.isfile(source_file)
+        assert os.path.exists(source_file), f'No file {source_file}'
+        assert os.path.isfile(source_file), f'Not file {source_file}'
         self._source_file = source_file
-        log.info('Using source file \'%s\'', self._source_file)
+        log.info(f'Using template {self._source_file}')
 
         if destination_dir is None:
             self._destination_dir = None
@@ -126,8 +126,8 @@ class FileCopier(object):
             self.SetDestinationDir(destination_dir)
 
     def SetDestinationDir(self, destination_dir):
-        assert os.path.exists(destination_dir)
-        assert os.path.isdir(destination_dir)
+        assert os.path.exists(destination_dir), f'No dir {destination_dir}'
+        assert os.path.isdir(destination_dir), f'Not dir {destination_dir}'
         self._destination_dir = destination_dir
         log.info('Using destination dir \'%s\'', self._destination_dir)
 
@@ -139,10 +139,10 @@ class FileCopier(object):
 
         # never overwrite file
         if not os.path.exists(destination_path):
-            log.info('Creating \'%s\' from template', destination_path)
+            log.info(f'Creating {destination_path} from template')
             shutil.copy(self._source_file, destination_path)
         else:
-            log.debug('File %s already exists', destination_path)
+            log.info('File %s already exists', destination_path)
 
 
 def is_older(first_file, second_file):
@@ -150,23 +150,23 @@ def is_older(first_file, second_file):
     assert os.path.isfile(first_file)
     if not os.path.exists(second_file):
         return False
-    elif os.path.isdir(second_file):
-        raise RuntimeError(f'\'{second_file}\' is not a file')
-    else:
+    elif os.path.isfile(second_file):
         first_mtime = os.path.getmtime(first_file)
         second_mtime = os.path.getmtime(second_file)
         return first_mtime < second_mtime
+    else:
+        raise RuntimeError(f'\'{second_file}\' is not a file')
 
 
 class ZoomRenamer:
     def __init__(self, root):
-        assert os.path.exists(root)
-        assert os.path.isdir(root)
+        assert os.path.exists(root), f'No dir {root}'
+        assert os.path.isdir(root), f'Not dir {root}'
         self._root = root
 
     def RenameOne(self, dir_name):
-        assert os.path.exists(dir_name)
-        assert os.path.isdir(dir_name)
+        assert os.path.exists(dir_name), f'No dir {dir_name}'
+        assert os.path.isdir(dir_name), f'Not dir {dir_name}'
 
         dir_base = os.path.basename(dir_name)
         log.info(f'Renaming zoom dir {dir_base}')
@@ -175,7 +175,7 @@ class ZoomRenamer:
         dt = datetime.datetime.strptime(dir_base[:4 + 3 + 3 + 3 + 3 + 3], src_date_fmt)
         date = dt.strftime(dst_date_fmt)
         dst_dir = os.path.join(self._root, f'{date} - zoom')
-        assert not os.path.exists(dst_dir)
+        assert not os.path.exists(dst_dir), f'Already exists {dst_dir}'
 
         if os.path.exists(os.path.join(self._root, dir_base, 'double_click_to_convert_01.zoom')):
             log.warn(f'Still converting {dir_name} to mp4')
@@ -208,17 +208,17 @@ class FileMover:
         src_dir = os.path.join(*src_list).replace(BROKEN_Y, PROPER_Y)
         dst_dir = os.path.join(*dst_list).replace(BROKEN_Y, PROPER_Y)
         log.info(f'Moving files from {src_dir} (recursive) to {dst_dir} (flat)')
-        assert os.path.exists(src_dir)
-        assert os.path.isdir(src_dir)
-        assert os.path.exists(dst_dir)
-        assert os.path.isdir(dst_dir)
+        assert os.path.exists(src_dir), f'No dir {src_dir}'
+        assert os.path.isdir(src_dir), f'Not dir {src_dir}'
+        assert os.path.exists(dst_dir), f'No dir {dst_dir}'
+        assert os.path.isdir(dst_dir), f'Not dir {dst_dir}'
         for src_file in walkFiles(source, regexp=re):
-            assert os.path.exists(src_file)
-            assert os.path.isfile(src_file)
+            assert os.path.exists(src_file), f'No file {src_file}'
+            assert os.path.isfile(src_file), f'Not file {dst_dir}'
             basename = os.path.basename(src_file)
             if matching is None or matching(basename):
                 dst_file = os.path.join(dst_dir, basename)
-                assert not os.path.exists(dst_file)
+                assert not os.path.exists(dst_file), f'Exists {dst_file}'
                 log.info(f'Moving file {basename!r} to {dst_file}')
                 shutil.move(src_file, dst_file)
             else:
@@ -234,7 +234,7 @@ class ZippedCsv:
         assert os.path.exists(self._filename), f'No file {self._filename}'
         assert os.path.isfile(self._filename), f'Is not file {self._filename}'
         with zipfile.ZipFile(self._filename, 'r') as zfile:
-            assert len(zfile.namelist()) == 1
+            assert len(zfile.namelist()) == 1, f'Found too many files in {filename}: {zfile.namelist()}'
             for file in zfile.namelist():
                 log.debug(f'Reading {file}')
                 data = io.StringIO(zfile.read(file).decode('utf8'))
