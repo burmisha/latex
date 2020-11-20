@@ -32,7 +32,7 @@ def CreateArgumentsParser():
     for mode_name, help_message, populate_module in [
         ('generate', 'Generate all LaTeX-files and papers', tools.generate_all),
         ('lucky', 'Find lucky pupils', library.lucky),
-        ('tripod', 'Generate tripod results', library.tripod),
+        ('tripod', 'Generate tripod results', tools.tripod),
         ('download', 'Download extra files', library.download),
         ('qr', 'Form QR codes', tools.qr),
         ('reshu-ege', 'Reshu EGE', tools.reshuege),
