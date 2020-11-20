@@ -1,5 +1,6 @@
 import library
 
+import contextlib
 import os
 import time
 import re
@@ -25,7 +26,7 @@ $('.minor').remove();
 $("span:contains('Раздел кодификатора ФИПИ')").remove();
 $("span:contains('Источник: Досрочный')").remove();
 $("span:contains('Источник: Демо')").remove();
-$("span:contains('Источник: Тренировочная работа по физике')").remove();
+$("span:contains('Источник: Тренировочная работа по ')").remove();
 $("span:contains('Источник: ЕГЭ')").remove();
 $("span:contains('Источник: ГИА')").remove();
 $("span:contains('Источник: РЕШУ')").remove();
@@ -115,10 +116,25 @@ class PngJoiner(object):
             self.Reset(inc=True)
 
 
+@contextlib.contextmanager
+def firefox_driver():
+    driver = webdriver.Firefox()
+    try:
+        yield driver
+    except Exception as e:
+        log.error(f'Closing browser on {e}')
+        driver.quit()
+        raise
+    else:
+        log.info('Closing browser')
+        driver.quit()
+
+
 class SdamGia(object):
-    def __init__(self, url, tasksCount=None):
+    def __init__(self, url, count=None, driver=None):
         self._url = url
-        self.__TasksCount = tasksCount
+        self._tasks_count = count
+        self._driver = driver
         assert self._canonize_text('31. Реакции ионного обмена') == 'Реакции ионного обмена'
         assert self._canonize_text('За\xadда\xadния для подготовки (9)') == 'Задания для подготовки'
 
@@ -133,40 +149,33 @@ class SdamGia(object):
     @retry(WebDriverException, tries=3, delay=30)
     def GetCatalog(self):
         url = '{}/prob_catalog'.format(self._url.strip('/'))
-        driver = webdriver.Firefox()
         result = []
-        try:
-            driver.get(url)
-            for index, category in enumerate(driver.find_elements_by_xpath('//div[@class="cat_main"]/div[@class="cat_category"]'), 1):
-                children = category.find_elements_by_xpath('./div[@class="cat_children"]/div[@class="cat_category"]/a[@class="cat_name"]')
-                if children:
-                    cat_name = category.find_element_by_xpath('./b[@class="cat_name"]')
-                else:
-                    cat_name = category.find_element_by_xpath('./b/a[@class="cat_name"]')
-                    children = [cat_name]
+        log.info(f'Parsing {url}')
+        self._driver.get(url)
+        for index, category in enumerate(self._driver.find_elements_by_xpath('//div[@class="cat_main"]/div[@class="cat_category"]'), 1):
+            children = category.find_elements_by_xpath('./div[@class="cat_children"]/div[@class="cat_category"]/a[@class="cat_name"]')
+            if children:
+                cat_name = category.find_element_by_xpath('./b[@class="cat_name"]')
+            else:
+                cat_name = category.find_element_by_xpath('./b/a[@class="cat_name"]')
+                children = [cat_name]
 
-                if re.match('^Т?Задани[ея] ', cat_name.text):
-                    log.info(f'Skipping {cat_name.text}')
-                    continue
+            if re.match('^Т?Задани[ея] ', cat_name.text):
+                log.info(f'Skipping {cat_name.text}')
+                continue
 
-                part_index = int(cat_name.text.strip('Т').split('.')[0])
-                assert index == part_index
-                part_name = self._canonize_text(cat_name.text)
-                parts = [(self._canonize_text(child.text), child.get_attribute('href')) for child in children]
+            part_index = int(cat_name.text.strip('Т').split('.')[0])
+            assert index == part_index
+            part_name = self._canonize_text(cat_name.text)
+            parts = [(self._canonize_text(child.text), child.get_attribute('href')) for child in children]
 
-                log.info(f'{part_index}. {part_name}')
-                for name, link in parts:
-                    log.info(f'  - {name}: {link}')
+            log.info(f'{part_index}. {part_name}')
+            for name, link in parts:
+                log.info(f'  - {name}: {link}')
 
-                result.append((part_name, parts))
-        except:
-            log.error('Exiting browser')
-            driver.quit()
-            raise
-        else:
-            log.info('Exiting browser')
-            driver.quit()
-        assert len(result) == self.__TasksCount
+            result.append((part_name, parts))
+        assert len(result) == self._tasks_count
+        log.info(f'Found {self._tasks_count} tasks')
         return result
 
     @retry(WebDriverException, tries=10, delay=20)
@@ -178,66 +187,57 @@ class SdamGia(object):
         else:
             log.info('Making screenshot of %s to %s', url, filename)
 
-        log.info('Starting Firefox')
-        driver = webdriver.Firefox()
-        try:
-            driver.set_window_size(720, 768)
-            log.info('Loading %s', url)
-            driver.get(url)
-            oldCount = 0
-            count = len(driver.find_elements_by_class_name('problem_container'))
-            while (oldCount != count) and (count != totalCount):
-                log.info('  %d -> %d, loading more', oldCount, count)
-                driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
-                if totalCount is None:
-                    time.sleep(2)
-                else:
-                    time.sleep(1)
-                oldCount = count
-                count = len(driver.find_elements_by_class_name('problem_container'))
-            log.info('Loaded %d problems, cleaning up DOM', count)
-            driver.execute_script(DELETE_SCRIPT)
+        log.info('Loading %s', url)
+        self._driver.set_window_size(720, 768)
+        self._driver.get(url)
 
-            # dirty hack to zoom for better typesetting
-            # https://github.com/SeleniumHQ/selenium/issues/4244
-            driver.execute_script('document.body.style.MozTransform = "scale(1.30)";')
-            driver.execute_script('document.body.style.MozTransformOrigin = "0 0";')
+        oldCount = 0
+        count = len(self._driver.find_elements_by_class_name('problem_container'))
+        while (oldCount != count) and (count != totalCount):
+            log.info('  %d -> %d, loading more', oldCount, count)
+            self._driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+            if totalCount is None:
+                time.sleep(2)
+            else:
+                time.sleep(1)
+            oldCount = count
+            count = len(self._driver.find_elements_by_class_name('problem_container'))
 
-            log.info('Saving problems')
-            for problem in driver.find_elements_by_class_name('problem_container'):
-                pngJoiner.AddImage(problem.screenshot_as_png, problem.size['height'])
-            pngJoiner.Save(final=True)
+        log.info('Loaded %d problems, cleaning up DOM', count)
+        self._driver.execute_script(DELETE_SCRIPT)
 
-        except:
-            log.error('Exiting browser')
-            driver.quit()
-            raise
-        else:
-            log.info('Exiting browser')
-            driver.quit()
+        log.debug('Zoom for better typesetting')  # dirty hack, see https://github.com/SeleniumHQ/selenium/issues/4244
+        self._driver.execute_script('document.body.style.MozTransform = "scale(1.30)";')
+        self._driver.execute_script('document.body.style.MozTransformOrigin = "0 0";')
+
+        log.debug('Saving problems')
+        for problem in self._driver.find_elements_by_class_name('problem_container'):
+            pngJoiner.AddImage(problem.screenshot_as_png, problem.size['height'])
+        pngJoiner.Save(final=True)
 
 
 def run(args):
     for subject, link, count in [
-        ('Физика', 'https://phys-ege.sdamgia.ru', 32),
-        ('Физика-ОГЭ', 'https://phys-oge.sdamgia.ru', 25),
-        ('География', 'https://geo-ege.sdamgia.ru', 34),
-        ('Химия', 'https://chem-ege.sdamgia.ru', 35),
-        ('Математика', 'https://math-ege.sdamgia.ru/', 19),
+        # ('Физика', 'https://phys-ege.sdamgia.ru', 32),
+        # ('Физика-ОГЭ', 'https://phys-oge.sdamgia.ru', 25),
+        # ('География', 'https://geo-ege.sdamgia.ru', 34),
+        # ('Химия', 'https://chem-ege.sdamgia.ru', 35),
+        # ('Математика', 'https://math-ege.sdamgia.ru/', 19),
         ('Математика-База', 'https://mathb-ege.sdamgia.ru/', 20),
+        ('Информатика', 'https://inf-ege.sdamgia.ru/', 27),
     ]:
-        rootPath = library.files.UdrPath('Материалы - Решу ЕГЭ - %s' % subject)
-        rootPath(create_missing_dir=True)
-        sdamGia = SdamGia(link, count)
-        tasks = sdamGia.GetCatalog()
-        # tasks = sdamGia.GetTasks()
-        for taskIndex, (taskName, parts) in enumerate(tasks, 1):
-            dirName = '%02d %s' % (taskIndex, taskName)
-            taskPath = rootPath(dirName, create_missing_dir=True)
-            for partIndex, (partName, link) in enumerate(parts, 1):
-                log.info('Task %d of %d, part %d of %d', taskIndex, len(tasks), partIndex, len(parts))
-                filename = rootPath(taskPath, '%d - %s - %%02d.png' % (partIndex, partName))
-                sdamGia.MakeFullScreenshot(link, filename=filename)
+        with firefox_driver() as driver:
+            rootPath = library.files.UdrPath('Материалы - Решу ЕГЭ - %s' % subject)
+            rootPath(create_missing_dir=True)
+            sdamGia = SdamGia(link, count=count, driver=driver)
+            tasks = sdamGia.GetCatalog()
+            for taskIndex, (taskName, parts) in enumerate(tasks, 1):
+                dirName = '%02d %s' % (taskIndex, taskName)
+                taskPath = rootPath(dirName, create_missing_dir=True)
+                for partIndex, (partName, link) in enumerate(parts, 1):
+                    log.info('Task %d of %d, part %d of %d', taskIndex, len(tasks), partIndex, len(parts))
+                    filename = rootPath(taskPath, '%d - %s - %%02d.png' % (partIndex, partName))
+                    sdamGia.MakeFullScreenshot(link, filename=filename)
 
 
 def populate_parser(parser):
