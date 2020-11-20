@@ -122,7 +122,7 @@ def firefox_driver():
     try:
         yield driver
     except Exception as e:
-        log.error(f'Closing browser on {e}')
+        log.error(f'Closing browser on {e!r}: {e}')
         driver.quit()
         raise
     else:
@@ -156,7 +156,9 @@ class SdamGia(object):
             children = category.find_elements_by_xpath('./div[@class="cat_children"]/div[@class="cat_category"]/a[@class="cat_name"]')
             if children:
                 cat_name = category.find_element_by_xpath('./b[@class="cat_name"]')
+                task_counts = [None] * len(children)
             else:
+                task_counts = [int(category.find_element_by_xpath('./div[@class="cat_count"]').text)]
                 cat_name = category.find_element_by_xpath('./b/a[@class="cat_name"]')
                 children = [cat_name]
 
@@ -167,11 +169,15 @@ class SdamGia(object):
             part_index = int(cat_name.text.strip('Т').split('.')[0])
             assert index == part_index
             part_name = self._canonize_text(cat_name.text)
-            parts = [(self._canonize_text(child.text), child.get_attribute('href')) for child in children]
+            parts = []
+            for child, task_count in zip(children, task_counts):
+                if task_count is None:
+                    task_count = int(child.find_element_by_xpath('./../div[@class="cat_count"]').text)
+                parts.append((self._canonize_text(child.text), child.get_attribute('href'), task_count))
 
             log.info(f'{part_index}. {part_name}')
-            for name, link in parts:
-                log.info(f'  - {name}: {link}')
+            for name, link, task_count in parts:
+                log.info(f'  - {name} ({task_count} заданий): {link}')
 
             result.append((part_name, parts))
         assert len(result) == self._tasks_count
@@ -184,23 +190,23 @@ class SdamGia(object):
         if pngJoiner.WasSaved():
             log.info('Skipping saved part')
             return
+        elif totalCount == 0:
+            log.info('Skipping empty part')
+            return
+        elif totalCount is None:
+            raise RuntimeError('Total count is required')
         else:
             log.info('Making screenshot of %s to %s', url, filename)
 
-        log.info('Loading %s', url)
+        log.info(f'Loading {totalCount} problems from {url}')
         self._driver.set_window_size(720, 768)
         self._driver.get(url)
 
-        oldCount = 0
-        count = len(self._driver.find_elements_by_class_name('problem_container'))
-        while (oldCount != count) and (count != totalCount):
-            log.info('  %d -> %d, loading more', oldCount, count)
+        count = 0
+        while count != totalCount:
+            log.info(f'Loaded {count} problems, scrolling')
             self._driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
-            if totalCount is None:
-                time.sleep(2)
-            else:
-                time.sleep(1)
-            oldCount = count
+            time.sleep(1)
             count = len(self._driver.find_elements_by_class_name('problem_container'))
 
         log.info('Loaded %d problems, cleaning up DOM', count)
@@ -222,9 +228,9 @@ def run(args):
         # ('Физика-ОГЭ', 'https://phys-oge.sdamgia.ru', 25),
         # ('География', 'https://geo-ege.sdamgia.ru', 34),
         # ('Химия', 'https://chem-ege.sdamgia.ru', 35),
-        # ('Математика', 'https://math-ege.sdamgia.ru/', 19),
-        ('Математика-База', 'https://mathb-ege.sdamgia.ru/', 20),
-        ('Информатика', 'https://inf-ege.sdamgia.ru/', 27),
+        # ('Математика', 'https://math-ege.sdamgia.ru', 19),
+        # ('Математика-База', 'https://mathb-ege.sdamgia.ru', 20),
+        ('Информатика', 'https://inf-ege.sdamgia.ru', 27),
     ]:
         with firefox_driver() as driver:
             rootPath = library.files.UdrPath('Материалы - Решу ЕГЭ - %s' % subject)
@@ -234,10 +240,10 @@ def run(args):
             for taskIndex, (taskName, parts) in enumerate(tasks, 1):
                 dirName = '%02d %s' % (taskIndex, taskName)
                 taskPath = rootPath(dirName, create_missing_dir=True)
-                for partIndex, (partName, link) in enumerate(parts, 1):
+                for partIndex, (partName, link, task_count) in enumerate(parts, 1):
                     log.info('Task %d of %d, part %d of %d', taskIndex, len(tasks), partIndex, len(parts))
                     filename = rootPath(taskPath, '%d - %s - %%02d.png' % (partIndex, partName))
-                    sdamGia.MakeFullScreenshot(link, filename=filename)
+                    sdamGia.MakeFullScreenshot(url=link, filename=filename, totalCount=task_count)
 
 
 def populate_parser(parser):
