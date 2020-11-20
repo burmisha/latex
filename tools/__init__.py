@@ -1,6 +1,7 @@
 import tools.checker
 import tools.convert
 import tools.docx2pdf
+import tools.download
 import tools.generate_all
 import tools.google_forms
 import tools.lucky

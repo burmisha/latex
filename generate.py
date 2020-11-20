@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 
-import library
 import tools
 
 import argparse
@@ -33,7 +32,7 @@ def CreateArgumentsParser():
         ('generate', 'Generate all LaTeX-files and papers', tools.generate_all),
         ('lucky', 'Find lucky pupils', tools.lucky),
         ('tripod', 'Generate tripod results', tools.tripod),
-        ('download', 'Download extra files', library.download),
+        ('download', 'Download extra files', tools.download),
         ('qr', 'Form QR codes', tools.qr),
         ('reshu-ege', 'Reshu EGE', tools.reshuege),
         ('znanium', 'Znanium', tools.znanium),
