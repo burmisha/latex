@@ -284,6 +284,6 @@ def getPupils(key, addMyself=False, onlyMe=False):
     start_year = int(start_year)
     grade = int(''.join(s for s in class_id if s.isdigit()))
 
-    log.warn(f'Returning {len(pupils)} pupils from {original} (search key: {key})')
+    log.debug(f'Returning {len(pupils)} pupils from {original} (search key: {key})')
 
     return Pupils(pupils=pupils, letter=letter, grade=grade, add_me=addMyself, only_me=onlyMe)

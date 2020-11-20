@@ -1,22 +1,32 @@
+class color:
+    Green = 'green'
+    Red = 'red'
+    Cyan = 'cyan'
+    Yellow = 'yellow'
+    Blue = 'blue'
+    Magenta = 'magenta'
+    Black = 'black'
+    White = 'white'
+
+
 class ColorMessage:
     # https://stackoverflow.com/questions/384076/how-can-i-color-python-logging-output
     ResetTemplate = "\033[0m"
     ColorTemplate = "\033[1;%dm"
     BoldTemplate = "\033[1m"
-    BLACK, RED, GREEN, YELLOW, BLUE, MAGENTA, CYAN, WHITE = range(8)
 
     def __init__(self, enable=True):
         self._enable = enable
-        self._known_colors = {
-            'green': self.GREEN,
-            'red': self.RED,
-            'cyan': self.CYAN,
-            'yellow': self.YELLOW,
-            'blue': self.BLUE,
-            'magenta': self.MAGENTA,
-            'black': self.BLACK,
-            'white': self.WHITE,
-        }
+        self._known_colors = dict(zip([
+            color.Black,
+            color.Red,
+            color.Green,
+            color.Yellow,
+            color.Blue,
+            color.Magenta,
+            color.Cyan,
+            color.White,
+        ], range(8)))
 
     def __call__(self, line, color=None, bold=False, bg=None):
         if self._enable:

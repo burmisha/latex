@@ -90,6 +90,20 @@ class ProperAnswer:
         self._value = value
         self._canonic_re = f'^{canonicRe}$'
         self._printable = str(canonicRe)
+        # use russian instead of english
+        self._eng_rus_mapping = {
+            'A': 'А', 'a': 'а',
+            'B': 'В',
+            'C': 'С', 'c': 'с',
+            'E': 'Е', 'e': 'е',
+            'H': 'Н',
+            'K': 'К',
+            'M': 'М',
+            'O': 'O', 'o': 'о',
+            'P': 'Р', 'p': 'р',
+            'T': 'Т',
+            'X': 'Х', 'x': 'х',
+        }
 
     def Printable(self):
         return self._printable
@@ -98,20 +112,10 @@ class ProperAnswer:
         return int(self._value)
 
     def _simplify(self, value):
-        # use russian instead of english
-        mapping = {
-            'C': 'С',
-            'H': 'Н',
-            'c': 'с',
-            'O': 'O',
-            'o': 'о',
-            'A': 'А',
-            'a': 'а',
-        }
-        v = str(value)
-        for src, dst in mapping.items():
-            v = v.replace(src, dst)
-        return v
+        res = str(value)
+        for eng, rus in self._eng_rus_mapping.items():
+            res = res.replace(eng, rus)
+        return res
 
     def IsOk(self, value=None):
         if re.match(self._simplify(self._canonic_re), self._simplify(value)):
@@ -132,15 +136,15 @@ class Answer:
         color = None
         best_color = None
         if self._result == self._result_max:
-            color = 'green'
+            color = library.logging.color.Green
         else:
             if self._result > 0:
-                color = 'yellow'
+                color = library.logging.color.Yellow
             else:
-                color = 'red'
+                color = library.logging.color.Red
 
             if self._value and len(self._best_answer.Printable()) >= 2:
-                best_color = 'cyan'
+                best_color = library.logging.color.Cyan
 
         self._color = color
         self._best_color = best_color
@@ -284,7 +288,7 @@ class Checker:
             for answer_str, count in stats.most_common():
                 answer = Answer(answer_str)
                 answer.Check(self._proper_answers[index])
-                stats_line.append(f'{cm(answer_str, color=answer._color)}: {cm(count, color="cyan")}') 
+                stats_line.append(f'{cm(answer_str, color=answer._color)}: {cm(count, color=library.logging.color.Cyan)}') 
             stats_line = ",  ".join(stats_line)
             log.info(f'Task {index + 1:>2}: {stats_line}.')
 
