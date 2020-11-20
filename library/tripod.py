@@ -1,6 +1,8 @@
 import library
 
 import collections
+import os
+
 
 results = {
     '2019-05-7': [
@@ -247,12 +249,12 @@ class Report(object):
         '''.strip().format(
             self=self,
             dimensions='\n\n'.join(dimension.GetTex() for dimension in self.Dimensions),
-            rating=self.GetRating(),
+            rating=int(self.GetRating()),
         )
 
 
 def getEmptyReport(className):
-    return Report(className, [
+    report = Report(className, [
         Dimension('Поддержка', [
             Question(7, 'Мне кажется, что этому учителю действительно важны мои успехи', '+'),
             Question(20, 'Этот учитель искренне пытается понять, как мы относимся к тем или иным вещам.', '+'),
@@ -302,20 +304,19 @@ def getEmptyReport(className):
             Question(23, 'Наш класс слушается этого учителя', '+'),
             Question(30, 'Поведение нашего класса злит учителя', '-'),
         ]),
-])
+    ])
+    report.Reset()
+    return report
 
 
 def getTripodReports():
     for className, personsResults in results.items():
         report = getEmptyReport(className)
-        report.Reset()
-
         for personResult in personsResults:
             personResult = personResult.replace(' ', '').replace('-', '3').replace('_', '3')
             assert len(personResult) == 35
-            for index, answer in enumerate(personResult):
-                questionNumber = index + 1
-                report.AddAnswer(questionNumber, int(answer))
+            for index, answer in enumerate(personResult, 1):
+                report.AddAnswer(index, int(answer))
         yield className, report
 
 
