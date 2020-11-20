@@ -29,42 +29,22 @@ def CreateArgumentsParser():
     loggingGroup.add_argument('-v', '--verbose', help='Enable debug logging', action='store_true')
 
     subparsers = parser.add_subparsers()
-
-    generateParser = subparsers.add_parser('generate', help='Generate all LaTeX-files and papers')
-    tools.generate_all.populate_parser(generateParser)
-
-    luckyParser = subparsers.add_parser('lucky', help='Find lucky pupils')
-    library.lucky.populate_parser(luckyParser)
-
-    tripodParser = subparsers.add_parser('tripod', help='Generate tripod results')
-    library.tripod.populate_parser(tripodParser)
-
-    downloadParser = subparsers.add_parser('download', help='Download extra files')
-    library.download.populate_parser(downloadParser)
-
-    qrParser = subparsers.add_parser('qr', help='Form QR codes')
-    tools.qr.populate_parser(qrParser)
-
-    reshuegeParser = subparsers.add_parser('reshu-ege', help='Reshu EGE')
-    tools.reshuege.populate_parser(reshuegeParser)
-
-    znaniumParser = subparsers.add_parser('znanium', help='Znanium')
-    tools.znanium.populate_parser(znaniumParser)
-
-    convertParser = subparsers.add_parser('convert', help='Convert pdf books into jpeg')
-    tools.convert.populate_parser(convertParser)
-
-    templateParser = subparsers.add_parser('template', help='Create template files')
-    tools.template.populate_parser(templateParser)
-
-    docx2PdfParser = subparsers.add_parser('docx2pdf', help='Convert docx files to pdf ones')
-    tools.docx2pdf.populate_parser(docx2PdfParser)
-
-    gformsParser = subparsers.add_parser('gforms', help='Create JS scripts for Google Forms')
-    tools.google_forms.populate_parser(gformsParser)
-
-    checkerParser = subparsers.add_parser('checker', help='Check csv forms')
-    tools.checker.populate_parser(checkerParser)
+    for mode_name, help_message, populate_module in [
+        ('generate', 'Generate all LaTeX-files and papers', tools.generate_all),
+        ('lucky', 'Find lucky pupils', library.lucky),
+        ('tripod', 'Generate tripod results', library.tripod),
+        ('download', 'Download extra files', library.download),
+        ('qr', 'Form QR codes', tools.qr),
+        ('reshu-ege', 'Reshu EGE', tools.reshuege),
+        ('znanium', 'Znanium', tools.znanium),
+        ('convert', 'Convert pdf books into jpeg', tools.convert),
+        ('template', 'Create template files', tools.template),
+        ('docx2pdf', 'Convert docx files to pdf ones', tools.docx2pdf),
+        ('gforms', 'Create JS scripts for Google Forms', tools.google_forms),
+        ('checker', 'Check csv forms', tools.checker),
+    ]:
+        subparser = subparsers.add_parser(mode_name, help=help_message)
+        populate_module.populate_parser(subparser)
 
     return parser
 

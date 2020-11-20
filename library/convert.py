@@ -12,6 +12,7 @@ log = logging.getLogger(__name__)
 BROKEN_Y = '\u0438\u0306'  # й из 2 символов
 PROPER_Y = '\u0439'  # й из 1 символа
 
+
 class OneDStructure(object):
     def __init__(self, data, startIndex=1):
         self.Data = data
