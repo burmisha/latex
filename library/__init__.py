@@ -6,7 +6,6 @@ import library.formatter
 import library.google_forms
 import library.location
 import library.logging
-import library.lucky
 import library.process
 import library.pupils
 import library.tripod

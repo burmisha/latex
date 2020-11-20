@@ -31,7 +31,7 @@ def CreateArgumentsParser():
     subparsers = parser.add_subparsers()
     for mode_name, help_message, populate_module in [
         ('generate', 'Generate all LaTeX-files and papers', tools.generate_all),
-        ('lucky', 'Find lucky pupils', library.lucky),
+        ('lucky', 'Find lucky pupils', tools.lucky),
         ('tripod', 'Generate tripod results', tools.tripod),
         ('download', 'Download extra files', library.download),
         ('qr', 'Form QR codes', tools.qr),
