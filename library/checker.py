@@ -1,4 +1,5 @@
 import library.pupils
+import library.location
 
 import Levenshtein
 
@@ -230,7 +231,14 @@ class PupilResult:
 
 
 class Checker:
-    def __init__(self, csv_file, answers, marks=None):
+    def __init__(self, test_name, answers, marks=None):
+        pupils = library.pupils.get_class_from_string(test_name)
+        csv_file = library.location.udr(
+            f'{pupils.Grade} класс',
+            f'{pupils.Year} {pupils.Grade}{pupils.Letter} Физика - Архив',
+            test_name + '.csv.zip',
+        )
+
         self._csv_file = csv_file
         if not marks:
             marks = [None, None, None]
@@ -249,10 +257,6 @@ class Checker:
                 answer_variants = [ProperAnswer(answer)]
             self._proper_answers.append(answer_variants)
 
-        basename = os.path.basename(self._csv_file)
-        class_str = basename.split()[1]
-        class_key = '2020-' + ''.join(i for i in class_str if i.isdigit())
-        pupils = library.pupils.getPupils(class_key, addMyself=True)
         names = [pupil.GetFullName(surnameFirst=True) for pupil in pupils.Iterate()]
         self._name_lookup = NameLookup(names)
         self._all_marks = collections.Counter()
@@ -288,7 +292,7 @@ class Checker:
             for answer_str, count in stats.most_common():
                 answer = Answer(answer_str)
                 answer.Check(self._proper_answers[index])
-                stats_line.append(f'{cm(answer_str, color=answer._color)}: {cm(count, color=library.logging.color.Cyan)}') 
+                stats_line.append(f'{cm(answer_str, color=answer._color)}: {cm(count, color=library.logging.color.Cyan)}')
             stats_line = ",  ".join(stats_line)
             log.info(f'Task {index + 1:>2}: {stats_line}.')
 

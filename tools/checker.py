@@ -36,14 +36,7 @@ def get_checkers():
     ]
 
     for test_name, answers, marks in config:
-        if ' 9М ' in test_name:
-            test_file = library.location.udr('9 класс', '2020-21 9М Физика - Архив', test_name + '.csv.zip')
-        elif ' 10АБ ' in test_name:
-            test_file = library.location.udr('10 класс', '2020-21 10AБ Физика - Архив', test_name + '.csv.zip')
-        else:
-            raise RuntimeError(f'Unknown test_name: {test_name!r}')
-
-        yield test_name, library.checker.Checker(test_file, answers, marks)
+        yield test_name, library.checker.Checker(test_name, answers, marks)
 
 
 def run(args):
