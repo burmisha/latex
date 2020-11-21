@@ -9,6 +9,9 @@ import library.picker
 import logging
 log = logging.getLogger(__name__)
 
+import library.logging
+cm = library.logging.ColorMessage()
+
 
 class Pupil(object):
     def __init__(self, name=None, surname=None, uniqueId=None):

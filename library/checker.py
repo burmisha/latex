@@ -1,5 +1,6 @@
 import library.pupils
 import library.location
+import generators.variant
 
 import collections
 import datetime
@@ -66,12 +67,16 @@ class ProperAnswer:
             res = res.replace(eng, rus)
         return res
 
-    def IsOk(self, pupil_answer):
+    def IsOk(self, pupil_answer, pupil):
         if self._is_re:
             if re.match(self._duplicates_to_rus(self._canonic_re), self._duplicates_to_rus(pupil_answer._value)):
                 return True
         else:
-            pass
+            personal_answer = self._variant_task.GetRandomTask(pupil).GetTestAnswer()
+            answer_re = self._format_re(personal_answer)
+            print(personal_answer)
+            if re.match(self._duplicates_to_rus(answer_re), self._duplicates_to_rus(pupil_answer._value)):
+                return True
 
         return False
 
@@ -80,10 +85,10 @@ class PupilAnswer:
     def __init__(self, value):
         self._value = value
 
-    def Check(self, proper_answers):
+    def Check(self, proper_answers, pupil):
         self._result_max = max(ans.Value() for ans in proper_answers)
         self._best_answer = list(ans for ans in proper_answers if ans.Value() == self._result_max)[0]
-        self._result = max([ans.Value() for ans in proper_answers if ans.IsOk(self)] + [0])
+        self._result = max([ans.Value() for ans in proper_answers if ans.IsOk(self, pupil)] + [0])
 
         color = None
         best_color = None
@@ -136,7 +141,7 @@ class PupilResult:
 
     def CheckAnswer(self, index, proper):
         answer = self._answers[index]
-        answer.Check(proper)
+        answer.Check(proper, self._pupil)
         return answer._value
 
     def SetMark(self, marks):
@@ -185,7 +190,7 @@ class PupilResult:
 
 class Checker:
     def __init__(self, test_name, answers, marks=None):
-        pupils = library.pupils.get_class_from_string(test_name)
+        pupils = library.pupils.get_class_from_string(test_name, addMyself=True)
         self._pupils = pupils
 
         self._csv_file = library.location.udr(
@@ -244,7 +249,7 @@ class Checker:
             stats_line = []
             for answer_str, count in stats.most_common():
                 pupil_answer = PupilAnswer(answer_str)
-                pupil_answer.Check(self._proper_answers_lists[index])
+                pupil_answer.Check(self._proper_answers_lists[index], self._pupils._me)
                 stats_line.append(f'{cm(answer_str, color=pupil_answer._color)}: {cm(count, color=library.logging.color.Cyan)}')
             stats_line = ",  ".join(stats_line)
             log.info(f'Task {index + 1:>2}: {stats_line}.')

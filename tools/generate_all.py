@@ -46,7 +46,7 @@ def run(args):
                 fileWriter.Write('school-554', paper.GetFilename(), text=paper.GetTex())
 
     if generateMultiple:
-        for pupils, date, variant_tasks in classes.variants.get_all(only_me=args.me):
+        for pupils, date, variant_tasks in classes.variants.get_all_variants(only_me=args.me):
             multiplePaper = generators.variant.MultiplePaper(date=date, pupils=pupils)
             text = multiplePaper.GetTex(variant_tasks=variant_tasks, withAnswers=args.answers)
             fileWriter.Write('school-554', multiplePaper.GetFilename(), text=text)

@@ -2,6 +2,7 @@ import library.checker
 import library.location
 import library.picker
 import library.process
+import classes.variants
 
 import logging
 log = logging.getLogger(__name__)
@@ -33,6 +34,7 @@ def get_checkers():
         ('2020.11.12 9М - Динамика - 6', list('АББВВ') + ['(0.5|1/2)', 2, 120, 2], [3, 5, 7]),
         ('2020.11.13 10АБ - Законы сохранения - 1', list('АБАБВА') + [{8000: 2}, {'12.6': 2}, {10: 2}, {5: 2}], [4, 8, 11]),
         ('2020.11.19 9М - Законы сохранения - 1', list('АБАБВА') + [{'2( кг\*м/с)?': 2}, {'2( м/c)?': 2}, {'3( м/с)?': 2}, {'0.1( м/c)?': 2, '1/10': 2}], [6, 8, 10]),
+        ('2020.11.22 9М - Законы сохранения - 2', classes.variants.get_variant('2020.11.22 9'), [6, 8, 10]),
     ]
 
     for test_name, answers, marks in config:

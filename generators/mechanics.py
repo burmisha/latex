@@ -18,10 +18,10 @@ log = logging.getLogger(__name__)
     u'{p2:Letter} &= {m2:Letter}{v2:Letter} = {m2:Value|cdot}{v2:Value} = {p2:Value},',
     u'{p:Letter} &= {p1:Letter} + {p2:Letter} = {m1:Letter}{v1:Letter} + {m2:Letter}{v2:Letter} = {p:Value}.',
 ])
+@variant.answer_test('{p:Value}')
 @variant.arg(m1__m2=[(u'm_1 = %d кг' % m1, u'm_2 = %d кг' % m2) for m1 in [1, 2, 3, 4] for m2 in [1, 2, 3, 4] if m1 != m2])
 @variant.arg(v1=[u'v_1 = %d м / с' % v1 for v1 in [2, 4, 5, 10]])
 @variant.arg(v2=[u'v_2 = %d м / с' % v2 for v2 in[3, 6, 8]])
-@variant.answer_test('{p:Value}')
 class Ch_3_1(variant.VariantTask):
     def GetUpdate(self, m1=None, m2=None, v1=None, v2=None, **kws):
         return dict(
@@ -43,6 +43,7 @@ class Ch_3_1(variant.VariantTask):
     u'{p2:Letter} &= {m:Letter}{v2:Letter} = {m:Value|cdot}{v2:Value} = {p2:Value},',
     u'{p:Letter} &= {p1:Letter} - {p2:Letter} = {m:Letter}({v1:Letter} - {v2:Letter}) = {p:Value}.',
 ])
+@variant.answer_test('{p:Value}')
 @variant.arg(m=[u'm = %d кг' % m for m in [2, 5, 10]])
 @variant.arg(v1=[u'v_1 = %d м / с' % v1 for v1 in [1, 2, 5, 10]])
 @variant.arg(v2=[u'v_2 = %d м / с' % v2 for v2 in [3, 6, 8]])
@@ -67,6 +68,7 @@ class Ch_3_2(variant.VariantTask):
     u'{p2:Letter} &= {m:Letter}{v2:Letter} = {m:Value|cdot}{v2:Value} = {p2:Value},',
     u'{p:Letter} &= \\sqrt{ {p1:Letter}^2 + {p2:Letter}^2 } = {m:Letter}\\sqrt{ {v1:Letter}^2 + {v2:Letter}^2 } = {p:Value}.',
 ])
+@variant.answer_test('{p:Value}')
 @variant.arg(v1__v2__v=[(
     u'v_1 = %d м / с' % v1,
     u'v_2 = %d м / с' % v2,

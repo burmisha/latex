@@ -1,5 +1,7 @@
 import library.pupils
 import library.formatter
+import library.picker
+
 import generators
 
 import logging
@@ -24,7 +26,7 @@ def pick_classes(base, config):
         raise RuntimeError(f'Invalid config: {config}')
 
 
-def get_all(only_me=False):
+def get_all_variants(only_me=False):
     random_tasks = [
         ('2019-04-16 10', {'electricity': ['ForceTask', 'ExchangeTask', 'FieldTaskGenerator', 'SumTask']}),
         ('2019-04-30 10', {'electricity': ['Potential728', 'Potential735', 'Potential737', 'Potential2335', 'Potential1621']}),
@@ -50,6 +52,7 @@ def get_all(only_me=False):
         ('2019-09-30 11S', {'magnet': ['Chernoutsan11_01', 'Chernoutsan11_02', 'Chernoutsan11_5']}),
         ('2020-09-10 10', {'mechanics': ['Theory_1', 'Vectors_SumAndDiff', 'Chernoutsan_1_2', 'Vectors_SpeedSum']}),
         ('2020-09-10 9', {'mechanics': ['Theory_1_simple', 'Chernoutsan_1_2', 'Chernoutsan_1_2_1']}),
+        ('2020-11-22 9', {'mechanics': ['Ch_3_1', 'Ch_3_2', 'Ch_3_3']}),
     ]
     for task_id, tasks_classes in random_tasks:
         pupils = library.pupils.get_class_from_string(task_id, addMyself=True, onlyMe=only_me)
@@ -58,3 +61,11 @@ def get_all(only_me=False):
         tasks = pick_classes(generators, tasks_classes)
         tasks = [task(pupils=pupils, date=date) for task in tasks]
         yield pupils, date, tasks
+
+
+def get_variant(key):
+    key_picker = library.picker.KeyPicker(key=library.picker.letters_key)
+    for pupils, date, tasks in get_all_variants():
+        key_picker.add(f'{date.GetFilenameText()} {pupils.Grade}', tasks)
+
+    return key_picker.get(key)
