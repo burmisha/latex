@@ -43,6 +43,14 @@ class Pupils(object):
         self._only_me = only_me
         assert isinstance(self.Grade, int)
         assert 6 <= self.Grade <= 11
+        self.LatinLetter = {
+            u'А': 'A',
+            u'Т': 'T',
+            u'Л': 'L',
+            u'М': 'M',
+            u'АБ': 'AB',
+        }[self.Letter]
+
 
     def Iterate(self, add_me=False, only_me=False):
         me = ['Михаил Бурмистров']

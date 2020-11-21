@@ -232,26 +232,27 @@ class Variants(object):
 
 
 class MultiplePaper(object):
-    def __init__(self, date=None, pupils=None):
+    def __init__(self, date=None, pupils=None, variant_tasks=None):
         self.Date = library.formatter.Date(date)
         self.Pupils = pupils
+        self._variants = Variants(variant_tasks, date=date, pupils=self.Pupils)
 
-    def GetTex(self, variants, withAnswers=False):
+    def GetTex(self, withAnswers=False):
         variantsTex = []
         for pupil in self.Pupils.Iterate():
             pupilTasksTex = [
-                u'\\addpersonalvariant{{{name}}}'.format(name=pupil.GetFullName())
+                f'\\addpersonalvariant{{{pupil.GetFullName()}}}'
             ]
-            pupilTasks = list(variants.GetPupilTasks(pupil))
+            pupilTasks = list(self._variants.GetPupilTasks(pupil))
             for index, task in enumerate(pupilTasks, 1):
-                pupilTasksTex.append(u'')
-                pupilTasksTex.append(u'\\tasknumber{%d}%%' % index)
+                pupilTasksTex.append('')
+                pupilTasksTex.append(f'\\tasknumber{{{index}}}%')
                 pupilTasksTex.append(task.GetTex().strip())
                 if index != len(pupilTasks):
                     pupilTasksTex.append(u'\\solutionspace{%dpt}' % task.GetSolutionSpace())
             variantsTex.append('\n'.join(pupilTasksTex))
 
-        variants.GetStats()
+        self._variants.GetStats()
         text = '\n\n\\variantsplitter\n\n'.join(variantsTex)
         if self.Pupils.Letter:
             classLetter = u'{}«{}»'.format(self.Pupils.Grade, self.Pupils.Letter)
@@ -266,21 +267,11 @@ class MultiplePaper(object):
         return result
 
     def GetFilename(self, name='task'):
-        filename = '%s-%s' % (self.Date.GetFilenameText(), self.Pupils.Grade)
-        if self.Pupils.Letter:
-            letter = {
-                u'А': 'A',
-                u'Т': 'T',
-                u'Л': 'L',
-                u'М': 'M',
-                u'АБ': 'AB',
-            }[self.Pupils.Letter]
-            filename += letter
-
+        filename = '%s-%s%s' % (self.Date.GetFilenameText(), self.Pupils.Grade, self.Pupils.LatinLetter)
         if name:
             filename += '-' + name
         filename += '.tex'
-        log.debug('Got filename %r', filename)
+        log.debug(f'Got filename {filename}')
         return filename
 
 
