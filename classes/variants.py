@@ -52,7 +52,7 @@ def get_all_variants(only_me=False):
         ('2019-09-30 11S', {'magnet': ['Chernoutsan11_01', 'Chernoutsan11_02', 'Chernoutsan11_5']}),
         ('2020-09-10 10', {'mechanics': ['Theory_1', 'Vectors_SumAndDiff', 'Chernoutsan_1_2', 'Vectors_SpeedSum']}),
         ('2020-09-10 9', {'mechanics': ['Theory_1_simple', 'Chernoutsan_1_2', 'Chernoutsan_1_2_1']}),
-        ('2020-11-22 9', {'mechanics': ['Ch_3_1', 'Ch_3_2', 'Ch_3_3']}),
+        # ('2020-11-22 9', {'mechanics': ['Ch_3_1', 'Ch_3_2', 'Ch_3_3']}),
     ]
     for task_id, tasks_classes in random_tasks:
         pupils = library.pupils.get_class_from_string(task_id, addMyself=True, onlyMe=only_me)

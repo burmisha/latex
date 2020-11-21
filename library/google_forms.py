@@ -34,6 +34,7 @@ class GoogleForm:
             self._query += f'''
             var ss = SpreadsheetApp.openById("{link_existing}");
             form.setDestination(FormApp.DestinationType.SPREADSHEET, ss.getId());
+            // ss.getSheets()[0].setName('SOME NAME');
 '''
         self._item_id = 0
 
