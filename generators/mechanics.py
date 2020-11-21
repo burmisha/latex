@@ -5,7 +5,7 @@ import generators.variant as variant
 import logging
 log = logging.getLogger(__name__)
 
-
+# соответсвенно
 @variant.text(u'''
     Шарики массами {m1:Value:e} и {m2:Value:e}
     движутся параллельно друг другу в одном направлении
@@ -21,6 +21,7 @@ log = logging.getLogger(__name__)
 @variant.arg(m1__m2=[(u'm_1 = %d кг' % m1, u'm_2 = %d кг' % m2) for m1 in [1, 2, 3, 4] for m2 in [1, 2, 3, 4] if m1 != m2])
 @variant.arg(v1=[u'v_1 = %d м / с' % v1 for v1 in [2, 4, 5, 10]])
 @variant.arg(v2=[u'v_2 = %d м / с' % v2 for v2 in[3, 6, 8]])
+@variant.answer_test('{p:Value}')
 class Ch_3_1(variant.VariantTask):
     def GetUpdate(self, m1=None, m2=None, v1=None, v2=None, **kws):
         return dict(

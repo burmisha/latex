@@ -312,6 +312,14 @@ def answer_short(answer_template):
     return decorator
 
 
+def answer_test(template):
+    def decorator(cls):
+        assert not hasattr(cls, 'AnswerTestTemplate')
+        cls.AnswerTestTemplate = template
+        return cls
+    return decorator
+
+
 def answer_align(answer_template):
     def decorator(cls):
         assert not hasattr(cls, 'AnswerTemplate')
