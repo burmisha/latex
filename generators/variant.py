@@ -143,6 +143,12 @@ class VariantTask(object):
         else:
             return None
 
+    def GetAnswerTestTemplate(self):
+        if hasattr(self, 'AnswerTestTemplate'):
+            return self.AnswerTestTemplate
+        else:
+            return None
+
     def GetArgs(self):
         if self.ArgsList is None:  # only one variant
             args = {}
@@ -157,12 +163,13 @@ class VariantTask(object):
                 res[k] = check_unit_value(v)
             yield res
 
-    def __TryFormat(self, template, args):
+    def __TryFormat(self, template, args, replace_comma=True):
         if template is None:
             return None
         try:
             result = template.format(**args)
-            result = re.sub('(\\d)\.(\\d)', '\\1{,}\\2', result)
+            if replace_comma:
+                result = re.sub('(\\d)\.(\\d)', '\\1{,}\\2', result)
             result = re.sub(r'\+ +-', '-', result)
             return result
         except:
@@ -173,10 +180,12 @@ class VariantTask(object):
     def _All(self):
         textTemplate = self.GetTextTemplate()
         answerTemplate = self.GetAnswerTemplate()
+        answer_test_template = self.GetAnswerTestTemplate()
         for args in self.GetArgs():
             yield problems.task.Task(
                 self.__TryFormat(textTemplate, args),
                 answer=self.__TryFormat(answerTemplate, args),
+                test_answer=self.__TryFormat(answer_test_template, args, replace_comma=False),
                 solutionSpace=self.GetSolutionSpace(),
             )
 
@@ -206,6 +215,14 @@ class VariantTask(object):
         return self.__Stats
 
 
+def get_random_str(pupil, date, pupils):
+    return '_'.join([
+        pupil.GetRandomSeedPart(),
+        self.Date.GetFilenameText(),
+        self.Pupils.GetRandomSeedPart()
+    ])
+
+
 class Variants(object):
     def __init__(self, pupils=None, date=None, tasks=None):
         self.Pupils = pupils
@@ -214,11 +231,7 @@ class Variants(object):
 
     def _get_pupil_tasks(self, pupil):
         for variantTask in self.VariantTasks:
-            randomStr = '_'.join([
-                pupil.GetRandomSeedPart(),
-                self.Date.GetFilenameText(),
-                self.Pupils.GetRandomSeedPart()
-            ])
+            randomStr = get_random_str(pupil, self.Date, self.Pupils)
             yield variantTask.GetRandomTask(randomStr)
 
     def GetAll(self):

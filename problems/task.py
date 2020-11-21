@@ -13,11 +13,12 @@ TASK_TEMPLATE = '''
 
 
 class Task(object):
-    def __init__(self, text, answer=None, number=None, solutionSpace=None):
+    def __init__(self, text, answer=None, number=None, solutionSpace=None, test_answer=None):
         self.Text = text.strip('\n')
         self.Answer = answer
         self.Number = number
         self.SolutionSpace = solutionSpace
+        self._test_answer = test_answer
 
     def __Format(self, text, nodeType):
         try:
@@ -40,6 +41,9 @@ class Task(object):
 
     def GetSolutionSpace(self):
         return self.SolutionSpace
+
+    def GetTestAnswer(self):
+        return self._test_answer
 
 
 class TasksGenerator(object):

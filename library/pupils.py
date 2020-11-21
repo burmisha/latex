@@ -101,7 +101,7 @@ class Pupils(object):
         self._me = Pupil(name='Михаил', surname='Бурмистров')
         self.Letter = letter
         self.Grade = grade
-        assert 2000 <= year < 2099
+        assert 2010 <= year < 2099
         self.Year = f'{year}-{year-2000+1}'
         self._add_me = add_me
         self._only_me = only_me

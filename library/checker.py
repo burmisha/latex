@@ -14,47 +14,64 @@ cm = library.logging.ColorMessage()
 
 
 class ProperAnswer:
-    def __init__(self, canonicRe, value=1):
-        assert isinstance(canonicRe, (str, int)), f'Invalid re: {canonicRe}'
+    ENG_RUS_MAPPING = {
+        'A': 'А', 'a': 'а',
+        'B': 'В',
+        'C': 'С', 'c': 'с',
+        'E': 'Е', 'e': 'е',
+        'H': 'Н',
+        'K': 'К',
+        'M': 'М',
+        'O': 'O', 'o': 'о',
+        'P': 'Р', 'p': 'р',
+        'T': 'Т',
+        'X': 'Х', 'x': 'х',
+    }
+
+    def __init__(self, answer, value=1):
         assert isinstance(value, int), f'Invalid value: {value}'
-        canonicRe = str(canonicRe).strip()
-        canonicRe = canonicRe.replace(' ', r'\s*')
-        re.sub(r'([0-9])[,\.]([0-9])', r'\1[,\.]\2', canonicRe)
-        assert not canonicRe.startswith(r'^[\s.;,]*')
-        assert not canonicRe.endswith(r'[\s.;,]*$')
         self._value = value
-        self._canonic_re = f'^{canonicRe}$'
-        self._printable = str(canonicRe)
-        # use russian instead of english
-        self._eng_rus_mapping = {
-            'A': 'А', 'a': 'а',
-            'B': 'В',
-            'C': 'С', 'c': 'с',
-            'E': 'Е', 'e': 'е',
-            'H': 'Н',
-            'K': 'К',
-            'M': 'М',
-            'O': 'O', 'o': 'о',
-            'P': 'Р', 'p': 'р',
-            'T': 'Т',
-            'X': 'Х', 'x': 'х',
-        }
+
+        if isinstance(answer, (str, int)):
+            self._is_re = True
+            self._printable = str(answer)
+            self._canonic_re = self._format_re(answer)
+        elif isinstance(answer, generators.variant.VariantTask):
+            self._is_re = False
+            self._variant_task = answer
+        else:
+            raise RuntimeError(f'Invalid proper answer: {answer}')
+
+    def _format_re(self, canonic_re):
+        canonic_re = str(canonic_re).strip()
+        canonic_re = canonic_re.replace(' ', r'\s*')
+        re.sub(r'([0-9])[,\.]([0-9])', r'\1[,\.]\2', canonic_re)
+        assert not canonic_re.startswith(r'^[\s.;,]*')
+        assert not canonic_re.endswith(r'[\s.;,]*$')
+        canonic_re = f'^{canonic_re}$'
+        return canonic_re
 
     def Printable(self):
-        return self._printable
+        if self._is_re:
+            return self._printable
+        else:
+            return ''
 
     def Value(self):
-        return int(self._value)
+        return self._value
 
-    def _simplify(self, value):
+    def _duplicates_to_rus(self, value):
         res = str(value)
-        for eng, rus in self._eng_rus_mapping.items():
+        for eng, rus in self.ENG_RUS_MAPPING.items():
             res = res.replace(eng, rus)
         return res
 
-    def IsOk(self, value=None):
-        if re.match(self._simplify(self._canonic_re), self._simplify(value)):
-            return True
+    def IsOk(self, pupil_answer):
+        if self._is_re:
+            if re.match(self._duplicates_to_rus(self._canonic_re), self._duplicates_to_rus(pupil_answer._value)):
+                return True
+        else:
+            pass
 
         return False
 
@@ -66,7 +83,7 @@ class PupilAnswer:
     def Check(self, proper_answers):
         self._result_max = max(ans.Value() for ans in proper_answers)
         self._best_answer = list(ans for ans in proper_answers if ans.Value() == self._result_max)[0]
-        self._result = max([ans.Value() for ans in proper_answers if ans.IsOk(self._value)] + [0])
+        self._result = max([ans.Value() for ans in proper_answers if ans.IsOk(self)] + [0])
 
         color = None
         best_color = None
@@ -179,7 +196,7 @@ class Checker:
         self._marks = marks or [None, None, None]
         assert len(self._marks) == 3
 
-        self._proper_answers = []
+        self._proper_answers_lists = []
         for answer in answers:
             if isinstance(answer, ProperAnswer):
                 answer_variants = [answer]
@@ -187,18 +204,18 @@ class Checker:
                 answer_variants = [ProperAnswer(key, value=value) for key, value in answer.items()]
             else:
                 answer_variants = [ProperAnswer(answer)]
-            self._proper_answers.append(answer_variants)
+            self._proper_answers_lists.append(answer_variants)
 
         self._all_marks = collections.Counter()
-        self._all_answers = [collections.Counter() for answer in self._proper_answers]
+        self._all_answers = [collections.Counter() for answer in self._proper_answers_lists]
         self._all_results = collections.Counter()
 
     def GetPupilResult(self, row):
-        pupil_result = PupilResult(len(self._proper_answers), row)
+        pupil_result = PupilResult(len(self._proper_answers_lists), row)
         pupil_result.SetPupil(self._pupils)
 
-        for index, proper_answers in enumerate(self._proper_answers):
-            answer = pupil_result.CheckAnswer(index, proper_answers)
+        for index, answers in enumerate(self._proper_answers_lists):
+            answer = pupil_result.CheckAnswer(index, answers)
             if answer:
                 self._all_answers[index][answer] += 1
 
@@ -213,8 +230,10 @@ class Checker:
         found_pupils = set()
         for row in zipped_csv.ReadDicts():
             pupil_result = self.GetPupilResult(row)
+
             pupil_name = pupil_result._pupil.GetFullName()
             found_pupils.add(pupil_name)
+
             if pupil_filter and (not pupil_name or pupil_filter.lower() not in pupil_name.lower()):
                 continue
 
@@ -224,9 +243,9 @@ class Checker:
         for index, stats in enumerate(self._all_answers):
             stats_line = []
             for answer_str, count in stats.most_common():
-                answer = PupilAnswer(answer_str)
-                answer.Check(self._proper_answers[index])
-                stats_line.append(f'{cm(answer_str, color=answer._color)}: {cm(count, color=library.logging.color.Cyan)}')
+                pupil_answer = PupilAnswer(answer_str)
+                pupil_answer.Check(self._proper_answers_lists[index])
+                stats_line.append(f'{cm(answer_str, color=pupil_answer._color)}: {cm(count, color=library.logging.color.Cyan)}')
             stats_line = ",  ".join(stats_line)
             log.info(f'Task {index + 1:>2}: {stats_line}.')
 
