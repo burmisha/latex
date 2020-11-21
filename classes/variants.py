@@ -56,5 +56,5 @@ def get_all(only_me=False):
         date = library.formatter.Date(task_id[:10])
 
         tasks = pick_classes(generators, tasks_classes)
-        variants = generators.variant.Variants(pupils=pupils, date=date, tasks=[t() for t in tasks])
-        yield pupils, date, variants
+        tasks = [task(pupils=pupils, date=date) for task in tasks]
+        yield pupils, date, tasks

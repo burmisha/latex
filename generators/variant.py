@@ -117,10 +117,12 @@ test_form_args()
 
 
 class VariantTask(object):
-    def __init__(self):
+    def __init__(self, pupils, date):
         self.__TasksList = None
         self.__TaskCount = None
         self.__Stats = collections.defaultdict(int)
+        self._pupils = pupils
+        self._date = date
 
     def GetUpdate(self, **kws):
         return {}
@@ -199,13 +201,13 @@ class VariantTask(object):
             self.__TasksList = list(self._All())
         return self.__TasksList
 
-    def GetRandomTask(self, randomStr):
+    def GetRandomTask(self, pupil):
         if self.ArgsList is None:
             args = ''
         else:
             args = '__'.join(sorted(self.ArgsList.keys()))
         hash_md5 = hashlib.md5()
-        hash_md5.update((randomStr + args).encode('utf-8'))
+        hash_md5.update((self._get_random_str(pupil) + args).encode('utf-8'))
         randomHash = hash_md5.hexdigest()[8:16] # use only part of hash
         randomIndex = int(randomHash, 16) % self.GetTasksCount()
         self.__Stats[randomIndex] += 1
@@ -214,69 +216,53 @@ class VariantTask(object):
     def GetStats(self):
         return self.__Stats
 
+    def _get_random_str(self, pupil):
+        return '_'.join([
+            pupil.GetRandomSeedPart(),
+            self._date.GetFilenameText(),
+            self._pupils.GetRandomSeedPart()
+        ])
 
-def get_random_str(pupil, date, pupils):
-    return '_'.join([
-        pupil.GetRandomSeedPart(),
-        self.Date.GetFilenameText(),
-        self.Pupils.GetRandomSeedPart()
-    ])
 
-
-class Variants(object):
-    def __init__(self, pupils=None, date=None, tasks=None):
-        self.Pupils = pupils
-        self.Date = date
-        self.VariantTasks = tasks
-
-    def _get_pupil_tasks(self, pupil):
-        for variantTask in self.VariantTasks:
-            randomStr = get_random_str(pupil, self.Date, self.Pupils)
-            yield variantTask.GetRandomTask(randomStr)
-
-    def GetAll(self):
-        for pupil in self.Pupils.Iterate():
-            yield pupil, self._get_pupil_tasks(pupil)
-
-    def GetStats(self):
-        for variantTask in self.VariantTasks:
-            stats = [0] * variantTask.GetTasksCount()
-            for index, value in variantTask.GetStats().items():
-                stats[index] = value
-            log.debug('Stats for %s: %r', type(variantTask).__name__, stats)
-            log.info('Stats for %s: %r', type(variantTask).__name__, collections.OrderedDict(sorted(variantTask.GetStats().items())))
+def get_class_letter(pupils):
+    if pupils.Letter:
+        return u'{}«{}»'.format(pupils.Grade, pupils.Letter)
+    else:
+        return pupils.Grade    
 
 
 class MultiplePaper(object):
     def __init__(self, date=None, pupils=None):
         self.Date = date  # only for date in header and filename
-        self.Pupils = pupils  # only for letters in tasks and filename
+        self.Pupils = pupils
 
-    def GetTex(self, variants=None, withAnswers=False):
+    def GetTex(self, variant_tasks=None, withAnswers=False):
         paper_tex = []
-        for pupil, pupil_tasks in variants.GetAll():
+        for pupil in self.Pupils.Iterate():
             pupil_tex = [
                 f'\\addpersonalvariant{{{pupil.GetFullName()}}}'
             ]
-            for index, task in enumerate(pupil_tasks, 1):
+            for index, variant_task in enumerate(variant_tasks, 1):
+                task = variant_task.GetRandomTask(pupil)
                 pupil_tex.append('')
                 pupil_tex.append(f'\\tasknumber{{{index}}}%')
                 pupil_tex.append(task.GetTex().strip())
-                if index != len(variants.VariantTasks):
+                if index != len(variant_tasks):
                     pupil_tex.append(u'\\solutionspace{%dpt}' % task.GetSolutionSpace())
             paper_tex.append('\n'.join(pupil_tex))
 
-        variants.GetStats()
-        paper_tex = '\n\n\\variantsplitter\n\n'.join(paper_tex)
+        for variant_task in variant_tasks:
+            stats = [0] * variant_task.GetTasksCount()
+            for index, value in variant_task.GetStats().items():
+                stats[index] = value
+            log.debug('Stats for %s: %r', type(variant_task).__name__, stats)
+            log.info('Stats for %s: %r', type(variant_task).__name__, collections.OrderedDict(sorted(variant_task.GetStats().items())))
 
-        if self.Pupils.Letter:
-            classLetter = u'{}«{}»'.format(self.Pupils.Grade, self.Pupils.Letter)
-        else:
-            classLetter = self.Pupils.Grade
+        paper_tex = '\n\n\\variantsplitter\n\n'.join(paper_tex)
 
         result = PAPER_TEMPLATE.format(
             date=self.Date.GetHumanText(),
-            classLetter=classLetter,
+            classLetter=get_class_letter(self.Pupils),
             text=paper_tex,
             noanswers='' if withAnswers else u'\\noanswers',
         )
