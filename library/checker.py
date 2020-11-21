@@ -52,11 +52,11 @@ class ProperAnswer:
         canonic_re = f'^{canonic_re}$'
         return canonic_re
 
-    def Printable(self):
+    def Printable(self, pupil):
         if self._is_re:
             return self._printable
         else:
-            return ''
+            return self._variant_task.GetRandomTask(pupil).GetTestAnswer()
 
     def Value(self):
         return self._value
@@ -74,7 +74,6 @@ class ProperAnswer:
         else:
             personal_answer = self._variant_task.GetRandomTask(pupil).GetTestAnswer()
             answer_re = self._format_re(personal_answer)
-            print(personal_answer)
             if re.match(self._duplicates_to_rus(answer_re), self._duplicates_to_rus(pupil_answer._value)):
                 return True
 
@@ -100,7 +99,7 @@ class PupilAnswer:
             else:
                 color = library.logging.color.Red
 
-            if self._value and len(self._best_answer.Printable()) >= 2:
+            if self._value and len(self._best_answer.Printable(pupil)) >= 2:
                 best_color = library.logging.color.Cyan
 
         self._color = color
@@ -160,7 +159,7 @@ class PupilResult:
         answers_line = []
         best_line = []
         for index, answer in enumerate(self._answers):
-            best_printable = answer._best_answer.Printable()
+            best_printable = answer._best_answer.Printable(self._pupil)
             result = answer._result
             result_max = answer._best_answer.Value()
 

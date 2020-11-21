@@ -255,6 +255,11 @@ class UnitValue(object):
 
         valueStr = precisionFmt2(self.Value, self.ViewPrecision or self.Precision)
 
+        if mainFormat == 'TestAnswer':
+            if self.BasePower:
+                raise RuntimeError(f'Cannot convert for test answer {self.__RawLine!r}')
+            return valueStr
+
         valueStr = valueStr.replace('.', '{,}')
         if self.BasePower:
             valueStr += ' \\cdot 10^{{{}}}'.format(self.BasePower)
