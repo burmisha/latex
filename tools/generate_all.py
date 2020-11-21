@@ -14,10 +14,6 @@ log = logging.getLogger(__name__)
 def run(args):
     fileWriter = library.files.FileWriter(args.filter)
 
-    generateProblems= False
-    generateLists = False
-    generateMultiple = False
-
     generateProblems = True
     generateLists = True
     generateMultiple = True
@@ -36,8 +32,6 @@ def run(args):
             log.info('Using %r for tasks in %r', tasksGenerator, tasksGenerator.GetBookName())
             problemsPath = os.path.join('problems', tasksGenerator.GetBookName())
             for task in sorted(tasksGenerator(), key=lambda task: task.GetFilename()):
-                if fileWriter.NotMatches(task.GetFilename()):
-                    continue
                 fileWriter.Write(problemsPath, task.GetFilename(), text=task.GetTex())
 
     if generateLists:
@@ -49,23 +43,13 @@ def run(args):
         ]
         for papersGenerator in papersGenerators:
             for paper in papersGenerator():
-                if fileWriter.NotMatches(paper.GetFilename()):
-                    continue
                 fileWriter.Write('school-554', paper.GetFilename(), text=paper.GetTex())
 
     if generateMultiple:
         for pupils, date, variants in classes.variants.get_all(only_me=args.me):
             multiplePaper = generators.variant.MultiplePaper(date=date, pupils=pupils)
-
-            filename = multiplePaper.GetFilename()
-            if fileWriter.NotMatches(filename):
-                log.info('Skipping %s', filename)
-                continue
-            fileWriter.Write(
-                'school-554',
-                filename,
-                text=multiplePaper.GetTex(variants=variants, withAnswers=args.answers),
-            )
+            text = multiplePaper.GetTex(variants=variants, withAnswers=args.answers)
+            fileWriter.Write('school-554', multiplePaper.GetFilename(), text=text)
 
         if args.show_manual:
             fileWriter.ShowManual(extensions=['tex'])

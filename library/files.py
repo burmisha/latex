@@ -91,6 +91,10 @@ class FileWriter(object):
         filename = os.path.join(*pathParts)
         assert filename
 
+        if self.NotMatches(os.path.basename(filename)):
+            log.info('Skipping %s', filename)
+            return
+
         text = kwargs.get('text')
         assert text
 
