@@ -1,4 +1,5 @@
 import collections
+import re
 
 import library.picker
 
@@ -264,7 +265,7 @@ class NamesPicker:
                 assert name not in cfg[class_name]
                 cfg[class_name].append(name)
 
-        self._key_picker = library.picker.KeyPicker()
+        self._key_picker = library.picker.KeyPicker(key=library.picker.letters_key)
         for key, names in cfg.items():
             pupils = []
             for fullName in names:
@@ -295,3 +296,19 @@ def getPupils(key, addMyself=False, onlyMe=False):
     log.debug(f'Returning {len(pupils)} pupils from {original} (search key: {key})')
 
     return Pupils(pupils=pupils, letter=letter, grade=grade, add_me=addMyself, only_me=onlyMe)
+
+
+def get_class_from_string(value, *args, **kwargs):
+    assert isinstance(value, str)
+    parts = value.split()
+    date_part, class_part = parts[0], parts[1]
+    year = int(date_part[:4])
+    if re.match(r'20\d\d-\d{2}-\d{2}', date_part):
+        if int(date_part[5:7]) <= 8:  # Aug
+            year -= 1
+    elif re.match(r'20\d\d', date_part):
+        pass
+    else:
+        raise RuntimeError(f'Could not guess class from {value}')
+
+    return getPupils(f'{year}-{class_part}', *args, **kwargs)
