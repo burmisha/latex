@@ -1,3 +1,6 @@
+import Levenshtein
+
+
 import collections
 import re
 
@@ -34,6 +37,64 @@ class Pupil(object):
             return False
 
 
+class NameLookup:
+    def __init__(self, names_dict):
+        assert names_dict
+        for name in names_dict:
+            assert name
+        self._names = names_dict
+        self._unique_names = {}
+
+        counter = collections.Counter()
+        for name, value in self._names.items():
+            parts = sorted(self._split(name))
+            parts += [
+                ' '.join(parts),
+                ' '.join(parts[::-1]),
+            ]
+            for part in parts:
+                counter[part] += 1
+                self._unique_names[part] = value
+
+        for part, count in sorted(counter.items()):
+            if count != 1:
+                log.debug(f'{part} has {count} duplicates, will not use')
+                del self._unique_names[part]
+            else:
+                log.debug(f'Using {part} → {self._unique_names[part]}')
+
+    def _split(self, line):
+        parts = re.split(r'\s|-|,|;|\.', line)
+        return [p.strip() for p in parts if len(p) >= 2]
+
+    def _distance(self, name_1, name_2):
+        name_1_strip = name_1.strip().lower()
+        name_2_strip = name_2.strip().lower()
+        assert len(name_1_strip) >= 2
+        assert len(name_2_strip) >= 2
+        distance = Levenshtein.distance(name_1_strip, name_2_strip)
+        return distance
+
+    def Find(self, candidate_name):
+        best_matches = set()
+        best_match_distance = None
+        for part in sorted(self._split(candidate_name)):
+            for key, value in sorted(self._unique_names.items()):
+                distance = self._distance(part, key)
+                if best_match_distance is None or distance < best_match_distance:
+                    best_matches = set([value])
+                    best_match_distance = distance
+                elif distance == best_match_distance:
+                    best_matches.add(value)
+
+        if best_match_distance is None or best_match_distance >= 2 or len(best_matches) != 1:
+            log.warn(cm(f'Could not find name for {candidate_name}: best matches are {best_matches} is bad ({best_match_distance})', bg='red'))
+            return None
+
+        name = list(best_matches)[0]
+        return name
+
+
 class Pupils(object):
     def __init__(self, pupils=[], letter=None, grade=None, add_me=None, only_me=None, year=None):
         self.Pupils = pupils
@@ -53,7 +114,10 @@ class Pupils(object):
             u'М': 'M',
             u'АБ': 'AB',
         }[self.Letter]
-
+        self._name_lookup = NameLookup(dict([
+            (pupil.GetFullName(), pupil)
+            for pupil in self.Iterate()
+        ]))
 
     def Iterate(self, add_me=False, only_me=False):
         me = ['Михаил Бурмистров']
@@ -62,6 +126,9 @@ class Pupils(object):
         if self._only_me is None or not only_me:
             for pupil in self.Pupils:
                 yield pupil
+
+    def FindByName(self, name):
+        return self._name_lookup.Find(name)
 
     def GetRandomSeedPart(self):
         return '{}-{}'.format(self.Grade, self.Letter)

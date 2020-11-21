@@ -52,7 +52,7 @@ def run(args):
         result = ['ФИО\tОтметка']
         for pupil_result in checker.Check(pupil_filter):
             if pupil_result:
-                result.append(f'{pupil_result._name}\t{pupil_result._mark}')
+                result.append(f'{pupil_result._pupil.GetFullName(surnameFirst=True)}\t{pupil_result._mark}')
 
         library.process.pbcopy('\n'.join(result))
         log.info('Copied names and marks to clipboard')
