@@ -170,7 +170,7 @@ class VariantTask(object):
             log.error(u'Args: %s', args)
             raise
 
-    def All(self):
+    def _All(self):
         textTemplate = self.GetTextTemplate()
         answerTemplate = self.GetAnswerTemplate()
         for args in self.GetArgs():
@@ -187,7 +187,7 @@ class VariantTask(object):
 
     def GetTasksList(self):
         if self.__TasksList is None:
-            self.__TasksList = list(self.All())
+            self.__TasksList = list(self._All())
         return self.__TasksList
 
     def GetRandomTask(self, randomStr):
@@ -196,7 +196,6 @@ class VariantTask(object):
         else:
             args = '__'.join(sorted(self.ArgsList.keys()))
         hash_md5 = hashlib.md5()
-        # print(randomStr, args, type(randomStr), type(args))
         hash_md5.update((randomStr + args).encode('utf-8'))
         randomHash = hash_md5.hexdigest()[8:16] # use only part of hash
         randomIndex = int(randomHash, 16) % self.GetTasksCount()
@@ -208,19 +207,23 @@ class VariantTask(object):
 
 
 class Variants(object):
-    def __init__(self, variantTasks, date=None, pupils=None):
+    def __init__(self, pupils=None, date=None, tasks=None):
+        self.Pupils = pupils
         self.Date = date
-        self.PupilsRandomSeedPart = pupils.GetRandomSeedPart()
-        self.VariantTasks = variantTasks
+        self.VariantTasks = tasks
 
-    def GetPupilTasks(self, pupil):
+    def _get_pupil_tasks(self, pupil):
         for variantTask in self.VariantTasks:
             randomStr = '_'.join([
                 pupil.GetRandomSeedPart(),
-                self.Date,
-                self.PupilsRandomSeedPart,
+                self.Date.GetFilenameText(),
+                self.Pupils.GetRandomSeedPart()
             ])
             yield variantTask.GetRandomTask(randomStr)
+
+    def GetAll(self):
+        for pupil in self.Pupils.Iterate():
+            yield pupil, self._get_pupil_tasks(pupil)
 
     def GetStats(self):
         for variantTask in self.VariantTasks:
@@ -232,42 +235,44 @@ class Variants(object):
 
 
 class MultiplePaper(object):
-    def __init__(self, date=None, pupils=None, variant_tasks=None):
-        self.Date = library.formatter.Date(date)
-        self.Pupils = pupils
-        self._variants = Variants(variant_tasks, date=date, pupils=self.Pupils)
+    def __init__(self, date=None, pupils=None):
+        self.Date = date  # only for date in header and filename
+        self.Pupils = pupils  # only for letters in tasks and filename
 
-    def GetTex(self, withAnswers=False):
-        variantsTex = []
-        for pupil in self.Pupils.Iterate():
-            pupilTasksTex = [
+    def GetTex(self, variants=None, withAnswers=False):
+        paper_tex = []
+        for pupil, pupil_tasks in variants.GetAll():
+            pupil_tex = [
                 f'\\addpersonalvariant{{{pupil.GetFullName()}}}'
             ]
-            pupilTasks = list(self._variants.GetPupilTasks(pupil))
-            for index, task in enumerate(pupilTasks, 1):
-                pupilTasksTex.append('')
-                pupilTasksTex.append(f'\\tasknumber{{{index}}}%')
-                pupilTasksTex.append(task.GetTex().strip())
-                if index != len(pupilTasks):
-                    pupilTasksTex.append(u'\\solutionspace{%dpt}' % task.GetSolutionSpace())
-            variantsTex.append('\n'.join(pupilTasksTex))
+            for index, task in enumerate(pupil_tasks, 1):
+                pupil_tex.append('')
+                pupil_tex.append(f'\\tasknumber{{{index}}}%')
+                pupil_tex.append(task.GetTex().strip())
+                if index != len(variants.VariantTasks):
+                    pupil_tex.append(u'\\solutionspace{%dpt}' % task.GetSolutionSpace())
+            paper_tex.append('\n'.join(pupil_tex))
 
-        self._variants.GetStats()
-        text = '\n\n\\variantsplitter\n\n'.join(variantsTex)
+        variants.GetStats()
+        paper_tex = '\n\n\\variantsplitter\n\n'.join(paper_tex)
+
         if self.Pupils.Letter:
             classLetter = u'{}«{}»'.format(self.Pupils.Grade, self.Pupils.Letter)
         else:
             classLetter = self.Pupils.Grade
+
         result = PAPER_TEMPLATE.format(
             date=self.Date.GetHumanText(),
             classLetter=classLetter,
-            text=text,
+            text=paper_tex,
             noanswers='' if withAnswers else u'\\noanswers',
         )
         return result
 
     def GetFilename(self, name='task'):
-        filename = '%s-%s%s' % (self.Date.GetFilenameText(), self.Pupils.Grade, self.Pupils.LatinLetter)
+        filename = f'{self.Date.GetFilenameText()}-{self.Pupils.Grade}'
+        if self.Pupils.LatinLetter:
+            filename += self.Pupils.LatinLetter
         if name:
             filename += '-' + name
         filename += '.tex'
