@@ -53,146 +53,51 @@ def run(args):
                     continue
                 fileWriter.Write('school-554', paper.GetFilename(), text=paper.GetTex())
 
+    random_tasks = [
+        ('2019-04-16 10', ('electricity', ['ForceTask', 'ExchangeTask', 'FieldTaskGenerator', 'SumTask'])),
+        ('2019-04-30 10', ('electricity', ['Potential728', 'Potential735', 'Potential737', 'Potential2335', 'Potential1621'])),
+        ('2019-05-06 10', ('electricity', ['Rymkevich748', 'Rymkevich750', 'Rymkevich751', 'Rymkevich762', 'Cond1'])),
+        ('2019-05-14 10', ('electricity', ['Rezistor1_v1', 'Rezistor2', 'Rezistor3', 'Rezistor4'])),
+        ('2019-04-19 11',  ('quantum', ['Fotons', 'KernelCount', 'RadioFall', 'RadioFall2'])),
+        ('2019-04-30 11',  ('quantum', ['Quantum1119', 'Quantum1120'])),
+        ('2019-11-27 8',   ('termo', ['Ch_8_6', 'Ch_8_7', 'Ch_8_10', 'Ch_8_13', 'Ch_8_35'])),
+        ('2019-11-25 9-А', ('mechanics', ['Ch_3_1', 'Ch_3_2', 'Ch_3_3', 'Ch_3_24', 'Ch_3_26'])),
+        ('2019-12-17 9-А', ('koleb', ['Nu01', 'Nu02', 'Nu03', 'Nu04', 'Nu05'])),
+        ('2019-12-24 9-А', ('waves', ['Waves00', 'Waves03', 'Waves04', 'Waves05'])),
+        ('2020-04-22 9-А', ('vishnyakova', ['BK_53_01', 'BK_53_02', 'BK_53_03', 'BK_53_12'])),
+        ('2020-01-20 9-Л', ('koleb', ['Nu01', 'Nu02', 'Nu03', 'Nu04', 'Nu05'])),
+        ('2020-04-28 9-Л', ['optics.Gendenshteyn_11_11_18', 'vishnyakova.BK_52_01', 'vishnyakova.BK_52_02', 'vishnyakova.BK_52_07']),
+        ('2019-09-11 11-Т', ('magnet', ['ConstMagnet0', 'ConstMagnet1', 'ConstMagnet2', 'ConstMagnet3'])),
+        ('2019-11-13 11-Т', ('waves', ['Waves01', 'Ch1238', 'Ch1240', 'Waves02'])),
+        ('2020-03-04 11-Т', ('optics', ['Gendenshteyn_11_11_18', 'Vishnyakova_example_11', 'Belolipetsky_5_196'])),
+        ('2020-04-29 11-Т', [
+            'sto.Equations', 'vishnyakova.BK_4_01', 'vishnyakova.BK_4_03', 'vishnyakova.BK_4_06',  # sto
+            'vishnyakova.BK_52_01', 'vishnyakova.BK_52_02', 'vishnyakova.BK_52_07', 'quantum.Fotons',  # atomic-1
+            'vishnyakova.BK_53_01', 'vishnyakova.BK_53_02', 'vishnyakova.BK_53_03', 'vishnyakova.BK_53_12',  # atomic-2
+        ]),
+        ('2019-09-30 11S', ('magnet', ['Chernoutsan11_01', 'Chernoutsan11_02', 'Chernoutsan11_5'])),
+        ('2020-09-10 10', ('mechanics', ['Theory_1', 'Vectors_SumAndDiff', 'Chernoutsan_1_2', 'Vectors_SpeedSum'])),
+        ('2020-09-10 9', ('mechanics', ['Theory_1_simple', 'Chernoutsan_1_2', 'Chernoutsan_1_2_1'])),
+    ]
     if generateMultiple:
-        classRandomTasks = [
-            ('2019-04-16 10', [
-                generators.electricity.ForceTask(),
-                generators.electricity.ExchangeTask(),
-                generators.electricity.FieldTaskGenerator(),
-                generators.electricity.SumTask(),
-            ]),
-            ('2019-04-30 10', [
-                generators.electricity.Potential728(),
-                generators.electricity.Potential735(),
-                generators.electricity.Potential737(),
-                generators.electricity.Potential2335(),
-                generators.electricity.Potential1621(),
-            ]),
-            ('2019-05-06 10', [
-                generators.electricity.Rymkevich748(),
-                generators.electricity.Rymkevich750(),
-                generators.electricity.Rymkevich751(),
-                generators.electricity.Rymkevich762(),
-                generators.electricity.Cond1(),
-            ]),
-            ('2019-05-14 10', [
-                generators.electricity.Rezistor1_v1(),
-                generators.electricity.Rezistor2(),
-                generators.electricity.Rezistor3(),
-                generators.electricity.Rezistor4(),
-            ]),
-            ('2019-04-19 11', [
-                generators.quantum.Fotons(),
-                generators.quantum.KernelCount(),
-                generators.quantum.RadioFall(),
-                generators.quantum.RadioFall2(),
-            ]),
-            ('2019-04-30 11', [
-                generators.quantum.Quantum1119(),
-                generators.quantum.Quantum1120(),
-            ]),
-            ('2019-11-27 8', [
-                generators.termo.Ch_8_6(),
-                generators.termo.Ch_8_7(),
-                generators.termo.Ch_8_10(),
-                generators.termo.Ch_8_13(),
-                generators.termo.Ch_8_35(),
-            ]),
-            ('2019-11-25 9-А', [
-                generators.mechanics.Ch_3_1(),
-                generators.mechanics.Ch_3_2(),
-                generators.mechanics.Ch_3_3(),
-                generators.mechanics.Ch_3_24(),
-                generators.mechanics.Ch_3_26(),
-            ]),
-            ('2019-12-17 9-А', [
-                generators.koleb.Nu01(),
-                generators.koleb.Nu02(),
-                generators.koleb.Nu03(),
-                generators.koleb.Nu04(),
-                generators.koleb.Nu05(),
-            ]),
-            ('2019-12-24 9-А', [
-                generators.waves.Waves00(),
-                generators.waves.Waves03(),
-                generators.waves.Waves04(),
-                generators.waves.Waves05(),
-            ]),
-            ('2020-04-22 9-А', [
-                generators.vishnyakova.BK_53_01(),
-                generators.vishnyakova.BK_53_02(),
-                generators.vishnyakova.BK_53_03(),
-                generators.vishnyakova.BK_53_12(),
-            ]),
-            ('2020-01-20 9-Л', [
-                generators.koleb.Nu01(),
-                generators.koleb.Nu02(),
-                generators.koleb.Nu03(),
-                generators.koleb.Nu04(),
-                generators.koleb.Nu05(),
-            ]),
-            ('2020-04-28 9-Л', [
-                generators.optics.Gendenshteyn_11_11_18(),
-                generators.vishnyakova.BK_52_01(),
-                generators.vishnyakova.BK_52_02(),
-                generators.vishnyakova.BK_52_07(),
-            ]),
-            ('2019-09-11 11-Т', [
-                generators.magnet.ConstMagnet0(),
-                generators.magnet.ConstMagnet1(),
-                generators.magnet.ConstMagnet2(),
-                generators.magnet.ConstMagnet3(),
-            ]),
-            ('2019-11-13 11-Т', [
-                generators.waves.Waves01(),
-                generators.waves.Ch1238(),
-                generators.waves.Ch1240(),
-                generators.waves.Waves02(),
-            ]),
-            ('2020-03-04 11-Т', [
-                generators.optics.Gendenshteyn_11_11_18(),
-                generators.optics.Vishnyakova_example_11(),
-                generators.optics.Belolipetsky_5_196(),
-            ]),
-            ('2020-04-29 11-Т', [
-                # sto
-                generators.sto.Equations(),
-                generators.vishnyakova.BK_4_01(),
-                generators.vishnyakova.BK_4_03(),
-                generators.vishnyakova.BK_4_06(),
-                # atomic-1
-                generators.vishnyakova.BK_52_01(),
-                generators.vishnyakova.BK_52_02(),
-                generators.vishnyakova.BK_52_07(),
-                generators.quantum.Fotons(),
-                # atomic-2
-                generators.vishnyakova.BK_53_01(),
-                generators.vishnyakova.BK_53_02(),
-                generators.vishnyakova.BK_53_03(),
-                generators.vishnyakova.BK_53_12(),
-            ]),
-            ('2019-09-30 11S', [
-                generators.magnet.Chernoutsan11_01(),
-                generators.magnet.Chernoutsan11_02(),
-                generators.magnet.Chernoutsan11_5(),
-            ]),
-            ('2020-09-10 10', [
-                generators.mechanics.Theory_1(),
-                generators.mechanics.Vectors_SumAndDiff(),
-                generators.mechanics.Chernoutsan_1_2(),
-                generators.mechanics.Vectors_SpeedSum(),
-            ]),
-            ('2020-09-10 9', [
-                generators.mechanics.Theory_1_simple(),
-                generators.mechanics.Chernoutsan_1_2(),
-                generators.mechanics.Chernoutsan_1_2_1(),
-            ]),
-        ]
-        for task_id, tasks in classRandomTasks:
+        for task_id, tasks_classes in random_tasks:
             pupils = library.pupils.get_class_from_string(task_id, addMyself=True, onlyMe=args.me)
             date = library.formatter.Date(task_id[:10])
 
-            variants = generators.variant.Variants(pupils=pupils, date=date, tasks=tasks)
+            tasks = []
+            if isinstance(tasks_classes, list):
+                for task_cfg in tasks_classes:
+                    task = generators
+                    for part in task_cfg.split('.'):
+                        task = getattr(task, part)
+                    tasks.append(task)
+            elif isinstance(tasks_classes, tuple):
+                module = tasks_classes[0]
+                for task_cfg in tasks_classes[1]:
+                    tasks.append(getattr(getattr(generators, module), task_cfg))
+            else:
+                raise
+            variants = generators.variant.Variants(pupils=pupils, date=date, tasks=[t() for t in tasks])
             multiplePaper = generators.variant.MultiplePaper(date=date, pupils=pupils)
 
             filename = multiplePaper.GetFilename()
