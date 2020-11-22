@@ -276,34 +276,39 @@ class MultiplePaper(object):
         return filename
 
 
+def escape_tex(template):
+    return template.replace(u'{\n', u'{{\n').replace(u'\n}', u'\n}}').replace(u'{ ', u'{{ ').replace(u' }', u' }}')
+
+
 def solution_space(space):
     def decorator(cls):
+        assert not hasattr(cls, 'SolutionSpace')
+        assert isinstance(space, int)
         cls.SolutionSpace = space
         return cls
     return decorator
 
 
-def text(text_template):
+def text(template_str):
     def decorator(cls):
-        cls.TextTemplate = text_template.replace(u'{\n', u'{{\n').replace(u'\n}', u'\n}}').replace(u'{ ', u'{{ ').replace(u' }', u' }}')
+        assert not hasattr(cls, 'TextTemplate')
+        cls.TextTemplate = escape_tex(template_str)
         return cls
     return decorator
 
 
-def answer(answer_template):
+def answer(template_str):
     def decorator(cls):
         assert not hasattr(cls, 'AnswerTemplate')
-        cls.AnswerTemplate = answer_template
+        cls.AnswerTemplate = escape_tex(template_str)
         return cls
     return decorator
 
 
-def answer_short(answer_template):
+def answer_short(template_str):
     def decorator(cls):
         assert not hasattr(cls, 'AnswerTemplate')
-        templateLine = answer_template.replace(u'{\n', u'{{\n').replace(u'\n}', u'\n}}').replace(u'{ ', u'{{ ').replace(u' }', u' }}')
-        template = u'${}$'.format(templateLine)
-        cls.AnswerTemplate = template.replace('\n\n', '\n')
+        cls.AnswerTemplate = '${}$'.format(escape_tex(template_str))
         return cls
     return decorator
 
@@ -316,12 +321,12 @@ def answer_test(template):
     return decorator
 
 
-def answer_align(answer_template):
+def answer_align(template_str):
     def decorator(cls):
         assert not hasattr(cls, 'AnswerTemplate')
         templateLines = []
-        for line in answer_template:
-            templateLines.append(line.replace(u'{\n', u'{{\n').replace(u'\n}', u'\n}}').replace(u'{ ', u'{{ ').replace(u' }', u' }}'))
+        for line in template_str:
+            templateLines.append(escape_tex(line))
         templateLine = u' \\\\\n'.join(templateLines).strip()
         template = u'\\begin{{align*}}\n' + templateLine + u'\n\\end{{align*}}'
         cls.AnswerTemplate = template.replace('\n\n', '\n')
