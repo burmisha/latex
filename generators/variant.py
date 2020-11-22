@@ -210,8 +210,15 @@ class VariantTask(object):
         args = self._get_expanded_args_list()[randomIndex]
         return self.get_task(args)
 
-    def GetStats(self):
-        return self.__Stats
+    def CheckStats(self):
+        stats = ''.join(str(self.__Stats.get(index, '_')) for index in range(self.GetTasksCount()))  # TODO: support tasks with 10 on more
+        log.info(
+            '%s: total of %d tasks, used %d: %r',
+            type(self).__name__,
+            self.GetTasksCount(),
+            len(self.__Stats),
+            stats,
+        )
 
     def _get_random_str(self, pupil):
         return '_'.join([
@@ -249,11 +256,7 @@ class MultiplePaper(object):
             paper_tex.append('\n'.join(pupil_tex))
 
         for variant_task in variant_tasks:
-            stats = [0] * variant_task.GetTasksCount()
-            for index, value in variant_task.GetStats().items():
-                stats[index] = value
-            log.debug('Stats for %s: %r', type(variant_task).__name__, stats)
-            log.info('Stats for %s: %r', type(variant_task).__name__, collections.OrderedDict(sorted(variant_task.GetStats().items())))
+            variant_task.CheckStats()
 
         paper_tex = '\n\n\\variantsplitter\n\n'.join(paper_tex)
 
