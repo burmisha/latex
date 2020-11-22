@@ -56,8 +56,8 @@ def run(args):
         recursive=False,
     )
     docxToPdf.ConvertDir(
-        library.location.udr('10 класс', '2020-21 10AБ Физика - Архив'),
-        destination_directory=library.location.udr('10 класс', '2020-21 10AБ Физика'),
+        library.location.udr('10 класс', '2020-21 10АБ Физика - Архив'),
+        destination_directory=library.location.udr('10 класс', '2020-21 10АБ Физика'),
         regexp=r'.*с урока.*\.docx$',
         recursive=False,
     )
@@ -74,7 +74,7 @@ def run(args):
     )
 
 
-    if args.run_extractor:
+    if args.extract:
         extractor_configs = [
             (
                 library.location.udr('11 класс', 'Вишнякова', 'Вишнякова - Базовый курс - Все условия.pdf'),
@@ -101,7 +101,7 @@ def run(args):
             ),
             (
                 library.location.udr('10 класс', '10-1 - Кинематика - Рабочая тетрадь.pdf'),
-                library.location.udr('10 класс', '2020-21 10AБ Физика', '10-1 Кинематика'),
+                library.location.udr('10 класс', '2020-21 10АБ Физика', '10-1 Кинематика'),
                 {
                     '1+3':         '10-1-1 - Кинематика - Неделя 1 - Материалы.pdf',
                     '5':           '10-1-1 - Кинематика - Неделя 1 - ДЗ.pdf',
@@ -117,7 +117,7 @@ def run(args):
             ),
             (
                 library.location.udr('10 класс', '10-2 - Динамика - Рабочая тетрадь.pdf'),
-                library.location.udr('10 класс', '2020-21 10AБ Физика', '10-2 Динамика'),
+                library.location.udr('10 класс', '2020-21 10АБ Физика', '10-2 Динамика'),
                 {
                     '1':        '10-2-1 - Динамика - Неделя 1 - ДЗ.pdf',
                     '2+3':      '10-2-1.1 - Динамика - Неделя 1 - Материалы-1.pdf',
@@ -143,7 +143,7 @@ def run(args):
             ),
             (
                 library.location.udr('10 класс', '10-3 - Законы сохранения - Рабочая тетрадь.pdf'),
-                '2020-21 10AБ Физика',
+                '2020-21 10АБ Физика',
                 {
                     '1':        '10-3-1 - Законы сохранения - Неделя 1 - ДЗ.pdf',
                     '2+6':      '10-3-1.3 - Законы сохранения - Неделя 1 - Материалы-1.pdf',

@@ -128,7 +128,7 @@ def runTemplate(args):
     )
     fileMover.Move(
         source=library.location.ipad('2020-2 дистант'),
-        destination=library.location.udr('10 класс', '2020-21 10AБ Физика - Архив'),
+        destination=library.location.udr('10 класс', '2020-21 10АБ Физика - Архив'),
         re='^....-..-..-10 .* с урока.*\.docx$',
         matching=lambda b: monthAgo <= b[:10] <= yesterday,
     )
