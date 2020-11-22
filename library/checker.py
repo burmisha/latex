@@ -244,17 +244,17 @@ class Checker:
             log.info(pupil_result)
             yield pupil_result
 
-        for index, stats in enumerate(self._all_answers):
-            stats_line = []
-            for answer_str, count in stats.most_common():
-                pupil_answer = PupilAnswer(answer_str)
-                pupil_answer.Check(self._proper_answers_lists[index], self._pupils._me)
-                stats_line.append(f'{cm(answer_str, color=pupil_answer._color)}: {cm(count, color=library.logging.color.Cyan)}')
-            stats_line = ",  ".join(stats_line)
-            log.info(f'Task {index + 1:>2}: {stats_line}.')
-
-        log.info(f'Results: {", ".join("%s: %d" % (k, v) for k, v in sorted(self._all_results.items()))}')
-        log.info(f'Marks: {", ".join("%s: %d" % (k, v) for k, v in sorted(self._all_marks.items()))}')
         if not pupil_filter:
+            for index, stats in enumerate(self._all_answers):
+                stats_line = []
+                for answer_str, count in stats.most_common():
+                    pupil_answer = PupilAnswer(answer_str)
+                    pupil_answer.Check(self._proper_answers_lists[index], self._pupils._me)
+                    stats_line.append(f'{cm(answer_str, color=pupil_answer._color)}: {cm(count, color=library.logging.color.Cyan)}')
+                stats_line = ",  ".join(stats_line)
+                log.info(f'Task {index + 1:>2}: {stats_line}.')
+
+            log.info(f'Results: {", ".join("%s: %d" % (k, v) for k, v in sorted(self._all_results.items()))}')
+            log.info(f'Marks: {", ".join("%s: %d" % (k, v) for k, v in sorted(self._all_marks.items()))}')
             not_found = set(p.GetFullName() for p in self._pupils.Iterate()) - found_pupils
             log.info(f'Not found:{library.logging.log_list(sorted(not_found))}')

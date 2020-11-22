@@ -30,10 +30,12 @@ class KeyPicker:
         assert len(matched_keys) == 1
         return self._keys[matched_keys[0]]
 
-    def get(self, flt=None):
+    def _get_matched_keys(self, flt):
         flt_key = self._make_key(flt) if flt else None
-        matched_keys = sorted([key for key in self._options if not flt or flt_key in key])
-        
+        return flt_key, sorted([key for key in self._options if not flt or flt_key in key])
+
+    def get(self, flt=None):
+        flt_key, matched_keys = self._get_matched_keys(flt)
         if len(matched_keys) > 1:
             keys = [self._keys[key] for key in matched_keys]
             keys = library.logging.log_list(sorted(keys))
@@ -47,3 +49,8 @@ class KeyPicker:
             log.warning(f'No search results for {flt}\nAvailable ones:{keys}')
 
         return None
+
+    def all(self, flt=None):
+        flt_key, matched_keys = self._get_matched_keys(flt)
+        for key in matched_keys:
+            yield self._options[key]

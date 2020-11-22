@@ -42,14 +42,19 @@ def get_checkers():
 
 
 def run(args):
-    test_filter = args.filter
+    checker_filter = args.filter
     pupil_filter = args.name
 
     key_picker = library.picker.KeyPicker(key=library.picker.letters_key)
     for key, checker in get_checkers():
         key_picker.add(key, checker)
 
-    checker = key_picker.get(flt=test_filter)
+    if args.all:
+        for checker in key_picker.all(checker_filter):
+            list(checker.Check(pupil_filter))
+        return
+
+    checker = key_picker.get(flt=checker_filter)
     if checker:
         result = ['ФИО\tОтметка']
         for pupil_result in checker.Check(pupil_filter):
@@ -63,4 +68,5 @@ def run(args):
 def populate_parser(parser):
     parser.add_argument('-f', '--filter', help='Filter test')
     parser.add_argument('-n', '--name', help='Filter pupil')
+    parser.add_argument('--all', '--all', help='Parse all forms matching filter', action='store_true')
     parser.set_defaults(func=run)

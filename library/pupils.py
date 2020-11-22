@@ -131,7 +131,14 @@ class Pupils(object):
                 yield pupil
 
     def FindByName(self, name):
-        return self._name_lookup.Find(name)
+        pupil = self._name_lookup.Find(name)
+        if pupil is None:
+            if ' ' in name:
+                new_name, new_surname = name.split(' ', 1)
+            else:
+                new_name, new_surname = name, ''
+            return Pupil(name=new_name, surname=new_surname)
+        return pupil
 
     def GetRandomSeedPart(self):
         return '{}-{}'.format(self.Grade, self.Letter)
