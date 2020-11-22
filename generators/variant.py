@@ -248,11 +248,8 @@ class MultiplePaper(object):
             ]
             for index, variant_task in enumerate(variant_tasks, 1):
                 task = variant_task.GetRandomTask(pupil)
-                pupil_tex.append('')
-                pupil_tex.append(f'\\tasknumber{{{index}}}%')
-                pupil_tex.append(task.GetTex().strip())
-                if index != len(variant_tasks):
-                    pupil_tex.append(u'\\solutionspace{%dpt}' % task.GetSolutionSpace())
+                task_tex = task.GetTex(index=index, add_solution_space=index != len(variant_tasks))
+                pupil_tex += ['', task_tex]
             paper_tex.append('\n'.join(pupil_tex))
 
         for variant_task in variant_tasks:

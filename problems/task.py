@@ -17,7 +17,7 @@ class Task(object):
         self.Text = text.strip('\n')
         self.Answer = answer
         self.Number = number
-        self.SolutionSpace = solutionSpace
+        self._solution_space = solutionSpace
         self._test_answer = test_answer
 
     def __Format(self, text, nodeType):
@@ -28,19 +28,26 @@ class Task(object):
             log.exception('Failed to get LaTeX for %s on %r', nodeType, self.Text)
             raise
 
-    def GetTex(self):
-        result = self.__Format(self.Text, 'task')
+    def GetTex(self, index=None, add_solution_space=False):
+        lines = []
+
+        if index:
+            lines.append(f'\\tasknumber{{{index}}}%')
+
+        lines.append(self.__Format(self.Text, 'task'))
+
         if self.Answer is not None:
-            result += '\n' + self.__Format(self.Answer, 'answer')
-        return result        
+            lines.append(self.__Format(self.Answer, 'answer'))
+
+        if add_solution_space:
+            lines.append(u'\\solutionspace{%dpt}' % self._solution_space)
+
+        return '\n'.join(lines)
 
     def GetFilename(self):
         filename = '%s.tex' % self.Number
         log.debug('Got filename %r from %r', filename, self.Number)
         return filename
-
-    def GetSolutionSpace(self):
-        return self.SolutionSpace
 
     def GetTestAnswer(self):
         return self._test_answer
