@@ -52,7 +52,7 @@ class NowDelta:
 
 def runTemplate(args):
     nowDelta = NowDelta()
-    docxTemplate = library.location.udr('template-2-columns.docx')
+    docxTemplate = library.location.udr('Шаблоны', 'template-2-columns.docx')
     ipadTemplate = library.location.ipad('2020-21 Кружок', '2020-10-00 Кружок - Шаблон.docx')
 
     fileCopier = library.files.FileCopier(docxTemplate, destination_dir=library.location.udr('11 класс', 'Вишнякова'))
@@ -83,7 +83,7 @@ def runTemplate(args):
         fileCopier.CreateFile(f'Вишнякова - {chapter} - {course} - решения.docx')
 
     ipadTemplate = library.location.ipad('2020-21 Кружок', '2020-10-00 Кружок - Шаблон.docx')
-    circleCopier = library.files.FileCopier(ipadTemplate)
+    ipadCopier = library.files.FileCopier(ipadTemplate)
 
     nowFmt = nowDelta.Now(fmt='%F')
     futureFmt = nowDelta.After(days=12, fmt='%F')
@@ -92,13 +92,33 @@ def runTemplate(args):
         '2020-10-17',
     ]:
         if nowFmt <= date <= futureFmt:
-            circleCopier.CreateFile(library.location.ipad('2020-21 Кружок', f'{date} Кружок.docx'))
+            ipadCopier.CreateFile(library.location.ipad('2020-21 Кружок', f'{date} Кружок.docx'))
         else:
             log.info(f'Skipping {date}')
 
+    textbookTemplate = library.location.udr('Шаблоны', 'Рабочая тетрадь - Шаблон.docx')
+    for class_dir, filenames in {
+        '9 класс': [
+        ],
+        '10 класс': [
+            '10-1 - Кинематика',
+            '10-2 - Динамика',
+            '10-3 - Законы сохранения',
+            '10-4 - Статика и гидростатика',
+            '10-5 - МКТ',
+            '10-6 - Термодинамика',
+            '10-7 - Электростатика',
+            '10-8 - Постоянный ток',
+        ],
+    }.items():
+        copier = library.files.FileCopier(textbookTemplate, destination_dir=library.location.udr(class_dir))
+        for filename in filenames:
+            copier.CreateFile(f'{filename} - Рабочая тетрадь.docx')
+
+
     distantCopier = library.files.FileCopier(
         docxTemplate,
-        destination_dir=library.location.ipad('2020-2 дистант')
+        destination_dir=library.location.ipad('2020 дистант')
     )
     for dateClass in [
         # '2020-10-20-10', '2020-10-20-9', '2020-10-22-9', '2020-10-22-10', '2020-10-23-10',  # week 2–1
@@ -127,19 +147,19 @@ def runTemplate(args):
         matching=lambda b: monthAgo <= b[:10] <= yesterday,
     )
     fileMover.Move(
-        source=library.location.ipad('2020-2 дистант'),
+        source=library.location.ipad('2020 дистант'),
         destination=library.location.udr('10 класс', '2020-21 10АБ Физика - Архив'),
         re='^....-..-..-10 .* с урока.*\.docx$',
         matching=lambda b: monthAgo <= b[:10] <= yesterday,
     )
     fileMover.Move(
-        source=library.location.ipad('2020-2 дистант'),
+        source=library.location.ipad('2020 дистант'),
         destination=library.location.udr('9 класс', '2020-21 9М Физика - Архив'),
         re='^....-..-..-9 .* с урока.*\.docx$',
         matching=lambda b: monthAgo <= b[:10] <= yesterday,
     )
     fileMover.Move(
-        source=library.location.ipad('2020-2 дистант'),
+        source=library.location.ipad('2020 дистант'),
         destination=library.location.udr('8 класс', '2020-21 Архив'),
         re='^....-..-..-8 .* с урока.*\.docx$',
         matching=lambda b: monthAgo <= b[:10] <= yesterday,
