@@ -118,11 +118,10 @@ test_form_args()
 
 class VariantTask(object):
     def __init__(self, pupils, date):
-        self.__TasksList = None
-        self.__TaskCount = None
         self.__Stats = collections.defaultdict(int)
         self._pupils = pupils
         self._date = date
+        self._expanded_args_list = None
 
     def GetUpdate(self, **kws):
         return {}
@@ -179,27 +178,24 @@ class VariantTask(object):
             log.error(u'Args: %s', args)
             raise
 
-    def _All(self):
+    def get_task(self, formed_args):
         textTemplate = self.GetTextTemplate()
         answerTemplate = self.GetAnswerTemplate()
         answer_test_template = self.GetAnswerTestTemplate()
-        for args in self.GetArgs():
-            yield problems.task.Task(
-                self.__TryFormat(textTemplate, args),
-                answer=self.__TryFormat(answerTemplate, args),
-                test_answer=self.__TryFormat(answer_test_template, args, replace_comma=False),
-                solutionSpace=self.GetSolutionSpace(),
-            )
+        return problems.task.Task(
+            self.__TryFormat(textTemplate, formed_args),
+            answer=self.__TryFormat(answerTemplate, formed_args),
+            test_answer=self.__TryFormat(answer_test_template, formed_args, replace_comma=False),
+            solutionSpace=self.GetSolutionSpace(),
+        )
+
+    def _get_expanded_args_list(self):
+        if self._expanded_args_list is None:
+            self._expanded_args_list = list(self.GetArgs())
+        return self._expanded_args_list
 
     def GetTasksCount(self):
-        if self.__TaskCount is None:
-            self.__TaskCount = len(self.GetTasksList())
-        return self.__TaskCount
-
-    def GetTasksList(self):
-        if self.__TasksList is None:
-            self.__TasksList = list(self._All())
-        return self.__TasksList
+        return len(self._get_expanded_args_list())
 
     def GetRandomTask(self, pupil):
         if self.ArgsList is None:
@@ -211,7 +207,8 @@ class VariantTask(object):
         randomHash = hash_md5.hexdigest()[8:16] # use only part of hash
         randomIndex = int(randomHash, 16) % self.GetTasksCount()
         self.__Stats[randomIndex] += 1
-        return self.GetTasksList()[randomIndex]
+        args = self._get_expanded_args_list()[randomIndex]
+        return self.get_task(args)
 
     def GetStats(self):
         return self.__Stats
