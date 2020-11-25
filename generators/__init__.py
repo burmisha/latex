@@ -1,7 +1,7 @@
 import generators.electricity
+import generators.kinematics
 import generators.koleb
 import generators.magnet
-import generators.mechanics
 import generators.optics
 import generators.quantum
 import generators.sto
@@ -10,3 +10,4 @@ import generators.value
 import generators.variant
 import generators.vishnyakova
 import generators.waves
+import generators.zsi_zse

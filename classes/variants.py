@@ -35,7 +35,7 @@ def get_all_variants(only_me=False):
         ('2019-04-19 11', {'quantum': ['Fotons', 'KernelCount', 'RadioFall', 'RadioFall2']}),
         ('2019-04-30 11', {'quantum': ['Quantum1119', 'Quantum1120']}),
         ('2019-11-27 8', {'termo': ['Ch_8_6', 'Ch_8_7', 'Ch_8_10', 'Ch_8_13', 'Ch_8_35']}),
-        ('2019-11-25 9А', {'mechanics': ['Ch_3_1', 'Ch_3_2', 'Ch_3_3', 'Ch_3_24', 'Ch_3_26']}),
+        ('2019-11-25 9А', {'zsi_zse': ['Ch_3_1', 'Ch_3_2', 'Ch_3_3', 'Ch_3_24', 'Ch_3_26']}),
         ('2019-12-17 9А', {'koleb': ['Nu01', 'Nu02', 'Nu03', 'Nu04', 'Nu05']}),
         ('2019-12-24 9А', {'waves': ['Waves00', 'Waves03', 'Waves04', 'Waves05']}),
         ('2020-04-22 9А', {'vishnyakova': ['BK_53_01', 'BK_53_02', 'BK_53_03', 'BK_53_12']}),
@@ -50,8 +50,8 @@ def get_all_variants(only_me=False):
             {'vishnyakova': ['BK_53_01', 'BK_53_02', 'BK_53_03', 'BK_53_12']},  # atomic-2
         ]),
         ('2019-09-30 11S', {'magnet': ['Chernoutsan11_01', 'Chernoutsan11_02', 'Chernoutsan11_5']}),
-        ('2020-09-10 10', {'mechanics': ['Theory_1', 'Vectors_SumAndDiff', 'Chernoutsan_1_2', 'Vectors_SpeedSum']}),
-        ('2020-09-10 9', {'mechanics': ['Theory_1_simple', 'Chernoutsan_1_2', 'Chernoutsan_1_2_1']}),
+        ('2020-09-10 10', {'kinematics': ['Theory_1', 'Vectors_SumAndDiff', 'Chernoutsan_1_2', 'Vectors_SpeedSum']}),
+        ('2020-09-10 9', {'kinematics': ['Theory_1_simple', 'Chernoutsan_1_2', 'Chernoutsan_1_2_1']}),
         # ('2020-11-22 9', {'mechanics': ['Ch_3_1', 'Ch_3_2', 'Ch_3_3']}),
     ]
     for task_id, tasks_classes in random_tasks:
