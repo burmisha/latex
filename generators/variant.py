@@ -30,7 +30,7 @@ PAPER_TEMPLATE = r'''
 
 def check_unit_value(v):
     try:
-        if isinstance(v, str) and (('=' in v and len(v) >= 3) or re.match(r'\d.* \w', v, re.UNICODE)):
+        if isinstance(v, str) and (('=' in v and len(v) >= 3) or re.match(r'-?\d.* \w', v, re.UNICODE)):
             return value.UnitValue(v)
         else:
             return v
@@ -41,7 +41,10 @@ def check_unit_value(v):
 
 assert isinstance(check_unit_value(u'2 суток'), value.UnitValue)
 assert isinstance(check_unit_value(u'2 см'), value.UnitValue)
-# assert isinstance(check_unit_value(u'1.6 м'), value.UnitValue)  # TODO
+assert isinstance(check_unit_value(u'2 Дж'), value.UnitValue)
+assert isinstance(check_unit_value(u'-2 Дж'), value.UnitValue)
+assert isinstance(check_unit_value(u'1.6 м'), value.UnitValue)
+
 
 def form_args(kwargs):
     keys = []
@@ -122,6 +125,10 @@ class VariantTask(object):
         self._pupils = pupils
         self._date = date
         self._expanded_args_list = None
+        self._prefer_test_version = False
+
+    def PreferTestVersion(self):
+        self._prefer_test_version = True
 
     def GetUpdate(self, **kws):
         return {}
@@ -133,6 +140,8 @@ class VariantTask(object):
             return problems.task.DEFAULT_SOLUTION_SPACE
 
     def GetTextTemplate(self):
+        if self._prefer_test_version and hasattr(self, 'TextTestTemplate'):
+            return self.TextTestTemplate
         if hasattr(self, 'TextTemplate'):
             return self.TextTemplate
         else:
@@ -297,6 +306,14 @@ def text(template_str):
     return decorator
 
 
+def text_test(template_str):
+    def decorator(cls):
+        assert not hasattr(cls, 'TextTestTemplate')
+        cls.TextTestTemplate = escape_tex(template_str)
+        return cls
+    return decorator
+
+
 def answer(template_str):
     def decorator(cls):
         assert not hasattr(cls, 'AnswerTemplate')
@@ -348,6 +365,7 @@ def arg(**kws):
         else:
             cls.ArgsList = collections.OrderedDict()
         for key, value in kws.items():
+            assert key not in cls.ArgsList, f'Already used key in ArgsList: {key}'
             cls.ArgsList[key] = value
         return cls
 

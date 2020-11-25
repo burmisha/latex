@@ -271,7 +271,7 @@ class UnitValue(object):
         elif mainFormat == 'Value':
             result = valueStr
             needLetter = False
-        elif mainFormat == 'Letter':
+        elif mainFormat == 'Letter' or mainFormat == 'L' :
             result = self.Letter
             needLetter = False
         else:

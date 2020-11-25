@@ -52,14 +52,21 @@ def get_all_variants(only_me=False):
         ('2019-09-30 11S', {'magnet': ['Chernoutsan11_01', 'Chernoutsan11_02', 'Chernoutsan11_5']}),
         ('2020-09-10 10', {'kinematics': ['Theory_1', 'Vectors_SumAndDiff', 'Chernoutsan_1_2', 'Vectors_SpeedSum']}),
         ('2020-09-10 9', {'kinematics': ['Theory_1_simple', 'Chernoutsan_1_2', 'Chernoutsan_1_2_1']}),
-        # ('2020-11-22 9', {'mechanics': ['Ch_3_1', 'Ch_3_2', 'Ch_3_3']}),
+        ('2020-11-26 10', {'zsi_zse': ['Ch_3_1', 'Ch_3_2', 'Ch_3_3', 'Ch_3_6', 'Ch_3_26', 'Vishnyakova_1_4_6', 'Ch_4_2', 'Ch_4_29', 'Ch_4_45', 'Vishnyakova_1_4_12']}),
     ]
     for task_id, tasks_classes in random_tasks:
         pupils = library.pupils.get_class_from_string(task_id, addMyself=True, onlyMe=only_me)
         date = library.formatter.Date(task_id[:10])
 
-        tasks = pick_classes(generators, tasks_classes)
-        tasks = [task(pupils=pupils, date=date) for task in tasks]
+        tasks_classes = pick_classes(generators, tasks_classes)
+
+        tasks = [task(pupils=pupils, date=date) for task in tasks_classes]
+        if '2020-11-20' <= task_id <= '2021-07-01':  # use test version on distant
+            for task in tasks:
+                task.PreferTestVersion()
+                task.SolutionSpace = 0
+                assert hasattr(task, 'AnswerTestTemplate')
+
         yield pupils, date, tasks
 
 
