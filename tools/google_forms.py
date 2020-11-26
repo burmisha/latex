@@ -83,6 +83,8 @@ class TestFormGenerator:
             'monsters': 'https://media.giphy.com/media/19ZCKSoEvSquk/giphy.gif',
             'zootopia': 'https://media.giphy.com/media/139Lo3rANXYt9K/giphy.gif',
             'minion-up': 'https://media.giphy.com/media/oobNzX5ICcRZC/giphy.gif',
+            'ratatouille': 'https://media.giphy.com/media/5Wyv8urxxclm8/giphy.gif',
+            'keanureeves': 'https://media.giphy.com/media/TJrS7r0f6SOthGTiPe/giphy.gif',
         }
         self._form.AddTextItem(
             title='Если сдаёшь сильно позже, пожалуйста, кратко напиши причину',
