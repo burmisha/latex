@@ -49,7 +49,7 @@ class Ch_3_1(variant.VariantTask):
 @variant.answer_align([
     '{p1:L} &= {m:L}{v1:L} = {m:Value|cdot}{v1:Value} = {p1:Value},',
     '{p2:L} &= {m:L}{v2:L} = {m:Value|cdot}{v2:Value} = {p2:Value},',
-    '{p:L} &= {p1:L} - {p2:L} = {m:L}({v1:L} - {v2:L}) = {p:Value}.',
+    '{p:L} &= \\abs{ {p1:L} - {p2:L} } = \\abs{ {m:L}({v1:L} - {v2:L}) }= {p:Value}.',
 ])
 @variant.answer_test('{p:TestAnswer}')
 @variant.arg(m=['m = %d кг' % m for m in [2, 5, 10]])
@@ -60,7 +60,7 @@ class Ch_3_2(variant.VariantTask):
         return dict(
             p1='p_1 = %d кг м / с' % (m.Value * v1.Value),
             p2='p_2 = %d кг м / с' % (m.Value * v2.Value),
-            p='p = %d кг м / с' % (m.Value * v1.Value - m.Value * v2.Value),
+            p='p = %d кг м / с' % abs(m.Value * v1.Value - m.Value * v2.Value),
         )
 
 
@@ -146,7 +146,12 @@ class Ch_3_24(variant.VariantTask):
 ''')
 # @variant.arg(v=['v = %f м / с' % v for v in [3, 4, 5, 6]])
 # @variant.arg(u=['u = %.1f м / с' % u for u in [1.0, 1.5, 2.0]])
-@variant.answer_short('{answer}')
+@variant.answer_align([
+    '&\\text{ ЗСИ в проекции на ось, соединяющую центры тел: } m_1 v_1 - m_2 v_1 = (m_1 + m_2) v_2 \\implies',
+    '''&\\implies \\frac{ m_1 }{ m_2 } v_1 - v_1 = \\cbr{ \\frac{ m_1 }{ m_2 } + 1 } v_2 \\implies 
+    \\frac{ m_1 }{ m_2 } (v_1 - v_2) = v_2 + v_1 \\implies \\frac{ m_1 }{ m_2 } = \\frac{ v_2 + v_1 }{ v_1 - v_2 } = {answer}''',
+])
+# @variant.answer_short('{answer}')
 @variant.answer_test('{answer}')
 @variant.arg(v1__v2=[(
     'v_1 = %d м / с' % v1,
@@ -175,7 +180,12 @@ class Ch_3_26(variant.VariantTask):
     Шар движется с некоторой скоростью и абсолютно неупруго соударяется с телом, масса которого в {N} раз больше.
     Определите во сколько раз уменьшилась скорость шара после столкновения.
 ''')
-@variant.answer_short('{answer}')
+@variant.answer_align([
+    '&\\text{ ЗСИ в проекции на ось, соединяющую центры тел: } ',
+    '&mv + {N}m\\cdot 0 = (m + {N}m) v\' \\implies',
+    '&v\' = v\\frac{ m }{ {N}m + m } = \\frac{ v }{ {N} + 1 } \\implies \\frac{ v }{ v\' } = {answer}',
+])
+# @variant.answer_short('{answer}')
 @variant.answer_test('{answer}')
 @variant.arg(N=list(range(5, 15)))
 class Vishnyakova_1_4_6(variant.VariantTask):
@@ -187,9 +197,13 @@ class Vishnyakova_1_4_6(variant.VariantTask):
 
 @variant.text('''
     Для того, чтобы разогать тело из состояния покоя до скорости $v$ с постоянным ускорением,
-    требуется соверщить работу {A1:Value:e}. Какую работу нужно совершить, чтобы увеличить скорость этого тела от $v$ до ${n}v$?
+    требуется совершить работу {A1:Value:e}. Какую работу нужно совершить, чтобы увеличить скорость этого тела от $v$ до ${n}v$?
 ''')
-@variant.answer_short('{A2:Task}')
+@variant.answer_align([
+    '&\\text{ Изменение кинетической энергии равно работе внешних сил: }',
+    '&A_1 = \\frac{ mv^2 }2 - \\frac{ m\\cdot 0^2 }2 = \\frac{ mv^2 }2, A_2 = \\frac{ m\\sqr{ {n}v } }2 - \\frac{ mv^2 }2 \\implies ',
+    '&\\implies A_2 = \\frac{ mv^2 }2 \\cbr{ {n}^2 - 1 } = A_1 \\cdot \\cbr{ {n}^2 - 1 } = {A2:Value}.'
+])
 @variant.answer_test('{A2:TestAnswer}')
 @variant.arg(A1=['A = %d Дж' % A for A in [10, 20, 40, 100, 200]])
 @variant.arg(n=[2, 3, 4, 5])
@@ -204,7 +218,12 @@ class Vishnyakova_1_4_12(variant.VariantTask):
     Определите работу силы, которая обеспечит {what} тела массой {m:Value:e} на высоту {h:Value:e} с постоянным ускорением {a:Value:e}.
     Примите {Consts.g_ten:Task:e}.
 ''')
-@variant.answer_short('{A:Task}')
+@variant.answer_align([
+    '&\\text{ Для подъёма: } A = Fh = (mg + ma) h = m(g+a)h,',
+    '&\\text{ Для спуска: } A = -Fh = -(mg - ma) h = -m(g-a)h,',
+    '&\\text{ В результате получаем: } {A:Task}.',
+])
+# @variant.answer_short('{A:Task}')
 @variant.answer_test('{A:TestAnswer}')
 @variant.arg(what__mult=[('подъём', +1), ('спуск', -1)])
 @variant.arg(a=['a = %d м / c^2' % a for a in [2, 3, 4, 6]])
@@ -219,10 +238,14 @@ class Ch_4_2(variant.VariantTask):
 
 @variant.text('''
     Тело массой {m:Value} бросили с обрыва {how} с начальной скоростью {v0:Value:e}.
-    Через некоторое время его скорость тела составила {v:Value:e}.
+    Через некоторое время скорость тела составила {v:Value:e}.
     Пренебрегая сопротивлением воздуха и считая падение тела свободным, определите работу силы тяжести в течение наблюдаемого промежутка времени.
 ''')
-@variant.answer_short('{A:Task}')
+@variant.answer_align([
+    '&\\text{ Изменение кинетической энергии равно работе внешних сил: }',
+    '&\\Delta E_k = E_k\' - E_k = A_\\text{ тяж } \\implies A_\\text{ тяж } = \\frac{ mv\'^2 }2 - \\frac{ mv_0^2 }2 = {A:Value}.'
+])
+# @variant.answer_short('{A:Task}')
 @variant.answer_test('{A:TestAnswer}')
 @variant.arg(how=['вертикально вверх', 'горизонтально', 'под углом $45\\degrees$ к горизонту', 'под углом $30\\degrees$ к горизонту'])
 @variant.arg(m=['m = %d кг' % m for m in [1, 2, 3]])
@@ -240,7 +263,7 @@ class Ch_4_29(variant.VariantTask):
     Какую минимальную работу надо совершить, чтобы поставить его на землю в вертикальное положение?
     Примите {Consts.g_ten:Task:e}.
 ''')
-@variant.answer_short('{A:Task}')
+@variant.answer_short('A = mg\\frac l2 = {A:Task}')
 @variant.answer_test('{A:TestAnswer}')
 @variant.arg(what=['лом', 'шест', 'кусок арматуры'])
 @variant.arg(m=['m = %d кг' % m for m in [10, 20, 30]])
