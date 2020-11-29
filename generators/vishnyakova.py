@@ -296,7 +296,7 @@ class BK_53_03(variant.VariantTask):
     Найти дефект массы этого ядра. Ответ выразите в а.е.м. и кг. Скорость света ${Consts.c:Task}$.
 ''')
 @variant.answer_align([
-    u'E_\\text{ св. } = \\Delta m c^2 \\implies',
+    u'E_\\text{ св. } &= \\Delta m c^2 \\implies',
     u'''\\implies
         \\Delta m &= \\frac { E_\\text{ св. } }{ c^2 } = \\frac{E:Value|s}{Consts.c:Value|sqr|s}
         = \\frac{ {eV} \\cdot 10^6 \\cdot {Consts.eV:Value} }{Consts.c:Value|sqr|s}

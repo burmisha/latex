@@ -127,26 +127,19 @@ class UnitValue(object):
             for index, part in enumerate(self.Line.split()):
                 if index == 0:
                     try:
-                        self.RawValue = int(part)
-                        if self.Precision is None:
-                            self.Precision = len(part)
+                        self.Value = int(part)
                     except ValueError:
-                        try:
-                            self.RawValue = float(part)
-                            if self.Precision is None:
+                        self.Value = float(part)
 
-                                precisionStr = part.lstrip('0').lstrip('.').lstrip('0').replace('.', '')
-                                if self.Precision is None:
-                                    self.Precision = len(precisionStr)
-                                    try:
-                                        if precisionStr[0] == '1' and self.Precision >= 2:
-                                            self.Precision -= 1
-                                    except:
-                                        print(part, precisionStr, self.__RawLine)
-                                        raise
-                        except:
-                            log.error('Could not get value from %r', part)
-                            raise
+                    if self.Precision is None:
+                        precisionStr = part.replace('.', '').lstrip('0')
+                        if not precisionStr:
+                            assert part == '0'
+                            precisionStr = '0'
+                        self.Precision = len(precisionStr)
+                        if precisionStr[0] == '1' and self.Precision >= 2:
+                            self.Precision -= 1
+                        assert self.Precision >= 1
                 elif part.startswith('10^'):
                     self.BasePower = int(part[3:].strip('{').strip('}'))
                 else:
@@ -158,21 +151,19 @@ class UnitValue(object):
                         self.HumanUnits[index].append((humanUnit, power))
                         self.ReadyUnits[index].append((mainUnit, mainPower))
 
-            self.Value = self.RawValue  # TODO: use power
             self.Power = sum(power for _, power in self.ReadyUnits[0]) - sum(power for _, power in self.ReadyUnits[1]) + self.BasePower
         except Exception:
-            log.error('Could not load unit %s (from %r)', self.Line, self.__RawLine)
+            log.error(f'Could not load unit {self.Line} (from {self.__RawLine})')
             raise
 
     def __str__(self):
-        return 'UV ' + '%s' % self.__RawLine
+        return f'UVS {self.__RawLine}'
 
     def __repr__(self):
-        return 'UVR ' + '%r' % self.__RawLine
+        return f'UVR {self.__RawLine!r}'
 
     def __ParseItem(self, item):
         try:
-            item = item.replace('**', '^')
             if '^' in item:
                 item, power = item.split('^')
                 power = int(power)
@@ -232,10 +223,9 @@ class UnitValue(object):
     def __GetUnits(self, items):
         parts = []
         for unit, power in items:
-            if power == 1:
-                part = '\\text{%s}' % unit
-            else:
-                part = '\\text{%s}^{%d}' % (unit, power)
+            part = f'\\text{{{unit}}}'
+            if power != 1:
+                part += f'^{{{power}}}'
             parts.append(part)
         return '\\cdot'.join(parts)
 

@@ -30,21 +30,17 @@ PAPER_TEMPLATE = r'''
 
 
 def check_unit_value(v):
-    try:
-        if isinstance(v, str) and (('=' in v and len(v) >= 3) or re.match(r'-?\d.* \w', v, re.UNICODE)):
-            return value.UnitValue(v)
-        else:
-            return v
-    except:
-        print(v)
-        raise
+    if isinstance(v, str) and (('=' in v and len(v) >= 3) or re.match(r'-?\d.* \w', v, re.UNICODE)):
+        return value.UnitValue(v)
+    else:
+        return v
 
 
-assert isinstance(check_unit_value(u'2 суток'), value.UnitValue)
-assert isinstance(check_unit_value(u'2 см'), value.UnitValue)
-assert isinstance(check_unit_value(u'2 Дж'), value.UnitValue)
-assert isinstance(check_unit_value(u'-2 Дж'), value.UnitValue)
-assert isinstance(check_unit_value(u'1.6 м'), value.UnitValue)
+assert isinstance(check_unit_value('2 суток'), value.UnitValue)
+assert isinstance(check_unit_value('2 см'), value.UnitValue)
+assert isinstance(check_unit_value('2 Дж'), value.UnitValue)
+assert isinstance(check_unit_value('-2 Дж'), value.UnitValue)
+assert isinstance(check_unit_value('1.6 м'), value.UnitValue)
 
 
 def form_args(kwargs):
@@ -146,7 +142,7 @@ class VariantTask(object):
         if hasattr(self, 'TextTemplate'):
             return self.TextTemplate
         else:
-            raise RuntimeError('No text for task')
+            raise RuntimeError(f'No text for task {type(self)}')
 
     def GetAnswerTemplate(self):
         if hasattr(self, 'AnswerTemplate'):
@@ -160,19 +156,27 @@ class VariantTask(object):
         else:
             return None
 
-    def GetArgs(self):
-        if self.ArgsList is None:  # only one variant
-            args = {}
-        else:
-            args = self.ArgsList
+    def _get_expanded_args_list(self):
+        if self._expanded_args_list is None:
+            self._expanded_args_list = []
+            if self.ArgsList is None:  # only one variant
+                args = {}
+            else:
+                args = self.ArgsList
 
-        for res in form_args(args):
-            for k, v in res.items():
-                res[k] = check_unit_value(v)
-            res['Consts'] = value.Consts
-            for k, v in self.GetUpdate(**res).items():
-                res[k] = check_unit_value(v)
-            yield res
+            for res in form_args(args):
+                try:
+                    for k, v in res.items():
+                        res[k] = check_unit_value(v)
+                    res['Consts'] = value.Consts
+                    for k, v in self.GetUpdate(**res).items():
+                        res[k] = check_unit_value(v)
+                except:
+                    log.error(f'Cannot enrich {type(self)}')
+                    raise
+                self._expanded_args_list.append(res)
+
+        return self._expanded_args_list
 
     def __TryFormat(self, template, args, replace_comma=True):
         if template is None:
@@ -184,25 +188,10 @@ class VariantTask(object):
             result = re.sub(r'\+ +-', '-', result)
             return result
         except:
-            log.error(u'Template: %s', template)
-            log.error(u'Args: %s', args)
-            raise
-
-    def get_task(self, formed_args):
-        textTemplate = self.GetTextTemplate()
-        answerTemplate = self.GetAnswerTemplate()
-        answer_test_template = self.GetAnswerTestTemplate()
-        return problems.task.Task(
-            self.__TryFormat(textTemplate, formed_args),
-            answer=self.__TryFormat(answerTemplate, formed_args),
-            test_answer=self.__TryFormat(answer_test_template, formed_args, replace_comma=False),
-            solutionSpace=self.GetSolutionSpace(),
-        )
-
-    def _get_expanded_args_list(self):
-        if self._expanded_args_list is None:
-            self._expanded_args_list = list(self.GetArgs())
-        return self._expanded_args_list
+            log.error(f'Cannot format template for {type(self)}')
+            log.error(f'Template: {template}')
+            log.error(f'Args: {args}')
+            raise        
 
     def GetTasksCount(self):
         return len(self._get_expanded_args_list())
@@ -218,7 +207,16 @@ class VariantTask(object):
         randomIndex = int(randomHash, 16) % self.GetTasksCount()
         self.__Stats[randomIndex] += 1
         args = self._get_expanded_args_list()[randomIndex]
-        return self.get_task(args)
+
+        textTemplate = self.GetTextTemplate()
+        answerTemplate = self.GetAnswerTemplate()
+        answer_test_template = self.GetAnswerTestTemplate()
+        return problems.task.Task(
+            self.__TryFormat(textTemplate, args),
+            answer=self.__TryFormat(answerTemplate, args),
+            test_answer=self.__TryFormat(answer_test_template, args, replace_comma=False),
+            solutionSpace=self.GetSolutionSpace(),
+        )
 
     def CheckStats(self):
         stats = ''.join(str(self.__Stats.get(index, '_')) for index in range(self.GetTasksCount()))  # TODO: support tasks with 10 on more
@@ -339,14 +337,14 @@ def answer_test(template):
     return decorator
 
 
-def answer_align(template_str):
+def answer_align(template_lines):
     def decorator(cls):
         assert not hasattr(cls, 'AnswerTemplate')
-        templateLines = []
-        for line in template_str:
-            templateLines.append(escape_tex(line))
-        templateLine = u' \\\\\n'.join(templateLines).strip()
-        template = u'\\begin{{align*}}\n' + templateLine + u'\n\\end{{align*}}'
+        lines = []
+        for line in template_lines:
+            assert '&' in line
+            lines.append(escape_tex(line))
+        template = '\\begin{{align*}}\n' + ' \\\\\n'.join(lines) + '\n\\end{{align*}}'
         cls.AnswerTemplate = template.replace('\n\n', '\n')
         return cls
     return decorator
@@ -360,9 +358,9 @@ def no_args(cls):
 
 def arg(**kws):
     def decorator(cls):
-        assert len(kws) == 1, 'Invalid arg: %r' % kws
+        assert len(kws) == 1, f'Invalid arg for {cls}: {kws}'
         if hasattr(cls, 'ArgsList'):
-            assert isinstance(cls.ArgsList, collections.OrderedDict), 'Invalid ArgsList: %r' % cls.ArgsList
+            assert isinstance(cls.ArgsList, collections.OrderedDict), f'Invalid ArgsList for {cls}: {cls.ArgsList}'
         else:
             cls.ArgsList = collections.OrderedDict()
         for key, value in kws.items():
