@@ -46,6 +46,7 @@ assert isinstance(check_unit_value('1.6 м'), value.UnitValue)
 def form_args(kwargs):
     keys = []
     values = []
+    assert isinstance(kwargs, collections.OrderedDict), kwargs
     for key, value in kwargs.items():
         value = list(value)
         if any(isinstance(v, tuple) or isinstance(v, list) for v in value):
@@ -58,6 +59,7 @@ def form_args(kwargs):
 
         keys.append(key)
         values.append(value)
+
     for row in itertools.product(*values):
         result = {}
         for key, value in zip(keys, row):
@@ -157,24 +159,28 @@ class VariantTask(object):
             return None
 
     def _get_expanded_args_list(self):
-        if self._expanded_args_list is None:
-            self._expanded_args_list = []
-            if self.ArgsList is None:  # only one variant
-                args = {}
-            else:
-                args = self.ArgsList
+        try:
+            if self._expanded_args_list is None:
+                self._expanded_args_list = []
+                if self.ArgsList is None:  # only one variant
+                    args = collections.OrderedDict()
+                else:
+                    args = self.ArgsList
 
-            for res in form_args(args):
-                try:
-                    for k, v in res.items():
-                        res[k] = check_unit_value(v)
-                    res['Consts'] = value.Consts
-                    for k, v in self.GetUpdate(**res).items():
-                        res[k] = check_unit_value(v)
-                except:
-                    log.error(f'Cannot enrich {type(self)}')
-                    raise
-                self._expanded_args_list.append(res)
+                for res in form_args(args):
+                    try:
+                        for k, v in res.items():
+                            res[k] = check_unit_value(v)
+                        res['Consts'] = value.Consts
+                        for k, v in self.GetUpdate(**res).items():
+                            res[k] = check_unit_value(v)
+                    except:
+                        log.error(f'Cannot enrich {type(self)}')
+                        raise
+                    self._expanded_args_list.append(res)
+        except:
+            log.error(f'Could not _get_expanded_args_list for {type(self)}')
+            raise
 
         return self._expanded_args_list
 

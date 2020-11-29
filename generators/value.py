@@ -176,7 +176,11 @@ class OneUnit:
 class UnitValue(object):
     def __init__(self, line, precision=None, viewPrecision=None):
         self.__raw_line = line
-        self._load(line, precision=precision)
+        try:
+            self._load(line, precision=precision)
+        except Exception:
+            log.error(f'Could not load unit from {self.__raw_line}')
+            raise
         self.ViewPrecision = viewPrecision
         self._value_str = None
 
@@ -191,49 +195,45 @@ class UnitValue(object):
         return precision
 
     def _load(self, line, precision=None):
-        try:
-            line = line.strip()
-            if '=' in line:
-                letter_line, value_line = line.split('=', 1)
-                letter_line = letter_line.strip()
-                value_line = value_line.strip()
+        line = line.strip()
+        if '=' in line:
+            letter_line, value_line = line.split('=', 1)
+            letter_line = letter_line.strip()
+            value_line = value_line.strip()
+        else:
+            letter_line = None
+            value_line = line
+        self.Letter = letter_line
+
+        assert value_line.count('/') <= 1
+        for key, value in {
+            '/': ' / ',
+            '**': '^',
+            ' ^': '^',
+        }.items():
+            value_line = value_line.replace(key, value)
+
+        self.ValuePower = 0
+
+        self._units = []
+        isNumerator = True
+        for index, part in enumerate(value_line.split()):
+            if index == 0:
+                try:
+                    self.Value = int(part)
+                except ValueError:
+                    self.Value = float(part)
+                self.Precision = self._parse_precision(part) if precision is None else precision
+                assert self.Precision >= 1
+            elif part.startswith('10^'):
+                self.ValuePower = int(part[3:].strip('{').strip('}'))
             else:
-                letter_line = None
-                value_line = line
-            self.Letter = letter_line
-
-            assert value_line.count('/') <= 1
-            for key, value in {
-                '/': ' / ',
-                '**': '^',
-                ' ^': '^',
-            }.items():
-                value_line = value_line.replace(key, value)
-
-            self.ValuePower = 0
-
-            self._units = []
-            isNumerator = True
-            for index, part in enumerate(value_line.split()):
-                if index == 0:
-                    try:
-                        self.Value = int(part)
-                    except ValueError:
-                        self.Value = float(part)
-                    self.Precision = self._parse_precision(part) if precision is None else precision
-                    assert self.Precision >= 1
-                elif part.startswith('10^'):
-                    self.ValuePower = int(part[3:].strip('{').strip('}'))
+                if part == '/':
+                    isNumerator = False
                 else:
-                    if part == '/':
-                        isNumerator = False
-                    else:
-                        self._units.append(OneUnit(part, isNumerator))
+                    self._units.append(OneUnit(part, isNumerator))
 
-            self.Power = sum(unit.SiPower if unit.IsNumerator else -unit.SiPower for unit in self._units) + self.ValuePower
-        except Exception:
-            log.error(f'Could not load unit from {self.__raw_line}')
-            raise
+        self.Power = sum(unit.SiPower if unit.IsNumerator else -unit.SiPower for unit in self._units) + self.ValuePower
 
     def __str__(self):
         return f'UVS {self.__raw_line}'

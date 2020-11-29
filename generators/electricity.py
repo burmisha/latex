@@ -12,36 +12,29 @@ log = logging.getLogger(__name__)
 
 @variant.text('''
     С какой силой взаимодействуют 2 точечных заряда {first:Task:e} и {second:Task:e},
-    находящиеся на расстоянии {dist:Task:e}?
+    находящиеся на расстоянии {distance:Task:e}?
 ''')
 @variant.answer_short('''
     F
-        = k\\frac{ {first:L}{second:L} }{ {dist:L}^2 }
-        = {Consts.k:Value} \\cdot \\frac{
-            {first:Value|cdot}{second:Value|cdot}
-         }{
-            {dist:Value|sqr}
-         }
+        = k\\frac{ {first:L}{second:L} }{ {distance:L}^2 }
+        = {Consts.k:Value} \\cdot \\frac{ {first:Value|cdot}{second:Value} }{ {distance:Value|sqr} }
         = \\frac{ {value.numerator} }{ {value.denominator} }\\cdot10^{ {power} }\\units{ Н }
           \\approx { {approx:.2f} }\\cdot10^{ {power} }\\units{ Н }
 ''')
 @variant.arg(first__second=[('q_1 = %d нКл' % f, 'q_2 = %d нКл' % s) for f in range(2, 5) for s in range(2, 5) if f != s])
-@variant.arg(letter=['r', 'l', 'd'])
-@variant.arg(distance=[2, 3, 5, 6])
+@variant.arg(distance=['%s = %d см' % (l, d) for d in [2, 3, 5, 6] for l in ['r', 'l', 'd'] ])
 class ForceTask(variant.VariantTask):
-    def GetUpdate(self, first=None, second=None, letter=None, distance=None, Consts=None, **kws):
+    def GetUpdate(self, first=None, second=None, distance=None, Consts=None, **kws):
         # answer = kqq/r**2
-        dist = f'{letter} = {distance} см'
         value = fractions.Fraction(
-            numerator=int(first.Value) * int(second.Value) * 9,
-            denominator=int(distance) ** 2,
+            numerator=first.Value * second.Value * Consts.k.Value,
+            denominator=distance.Value ** 2,
         )
-        power = 9 - 9 - 9 + 4
         return dict(
             value=value,
-            power=power,
+            power=Consts.k.Power - first.Power - second.Power - 2 * distance.Power,
             approx=float(value),
-            dist=dist,
+            distance=distance,
         )
 
 
@@ -155,7 +148,7 @@ class Potential728(variant.VariantTask):  # 728(737) - Rymkevich
 
 @variant.text('''
     Напряжение между двумя точками, лежащими на одной линии напряжённости однородного электрического поля,
-    равно ${U:L}={U:Value}$. Расстояние между точками ${l:L}={l:Value}$.
+    равно {U:Task:e}. Расстояние между точками {l:Task:e}.
     Какова напряжённость этого поля?
 ''')
 @variant.arg(U=['%s = %d кВ' % (ul, uv) for ul in ['U', 'V'] for uv in [2, 3, 4, 5, 6]])
@@ -166,9 +159,9 @@ class Potential735(variant.VariantTask):  # 735(737) - Rymkevich
 
 @variant.text('''
     Найти напряжение между точками $A$ и $B$ в однородном электрическом поле (см. рис. на доске), если
-    $AB={l:L}={l:Value}$,
+    $AB={l:Task}$,
     ${alpha:L}={alpha:Value}^\\circ$,
-    ${E:L}={E:Value}$.
+    {E:Task:e}$.
     Потенциал какой из точек $A$ и $B$ больше?
 ''')
 @variant.arg(l=['%s = %d см' % (ll, lv) for ll in ['l', 'r', 'd'] for lv in [4, 6, 8, 10, 12]])
@@ -179,16 +172,16 @@ class Potential737(variant.VariantTask):  # 737(739) - Rymkevich
 
 
 @variant.text('''
-    При какой скорости электрона его кинетическая энергия равна $E_\\text{ к } = {E}\\units{ эВ }?$
+    При какой скорости электрона его кинетическая энергия равна $E_\\text{ к } = {E:Value}?$
 ''')
-@variant.arg(E=[4, 8, 20, 30, 40, 50, 200, 400, 600, 1000])
+@variant.arg(E=['E = %d эВ' % E for E in [4, 8, 20, 30, 40, 50, 200, 400, 600, 1000]])
 class Potential2335(variant.VariantTask):  # 2335 Gendenshteyn
     pass
 
 
 @variant.text('''
-    Электрон $e^-$ вылетает из точки, потенциал которой ${V:L} = {V:Value}$,
-    со скоростью ${v:L} = {v:Value}$ в направлении линий напряжённости поля.
+    Электрон $e^-$ вылетает из точки, потенциал которой {V:Task:e},
+    со скоростью {v:Task:e} в направлении линий напряжённости поля.
     Будет поле ускорять или тормозить электрон?
     Каков потенциал точки, дойдя до которой электрон остановится?
 ''')
@@ -201,7 +194,7 @@ class Potential1621(variant.VariantTask):  # 1621 Goldfarb
 @variant.text('''
     Определите ёмкость конденсатора, если при его зарядке до напряжения
     {U:Task:e} он приобретает заряд {Q:Task:e}.
-    Чему при этом равны заряды обкладок конденсатора (сделайте рисунок)?
+    Чему при этом равны заряды обкладок конденсатора (сделайте рисунок и укажите их)?
 ''')
 @variant.answer_short('''
     {Q:L} = {C:L}{U:L} \\implies
@@ -251,7 +244,7 @@ class Rymkevich750(variant.VariantTask):
 @variant.answer_short('''
     \\frac{ C' }{ C }
         = \\frac{ \\eps_0\\eps \\frac S{a} }{ \\frac d{b} } \\Big/ \\frac{ \\eps_0\\eps S }{ d }
-        = \\frac{  {b}  }{  {a}  } {sign} 1 \\implies \\text{ {result} }
+        = \\frac{ {b} }{ {a} } {sign} 1 \\implies \\text{ {result} }
 ''')
 @variant.arg(a=[2, 3, 4, 5, 6, 7, 8])
 @variant.arg(b=[2, 3, 4, 5, 6, 7, 8])
