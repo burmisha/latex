@@ -96,82 +96,35 @@ assert precisionFmt2(0.0049594, 3) == '0.00496'
 assert precisionFmt2(0.0049594, 2) == '0.0050'
 assert precisionFmt2(0.0049594, 1) == '0.005'
 
+class OneUnit:
+    def __init__(self, line, is_numenator):
+        si_unit, si_power, human_unit, human_power = self._parse_line(line)
+        self.SiUnit = si_unit
+        self.SiPower = si_power
+        self.HumanUnit = human_unit
+        self.HumanPower = human_power
+        self.IsNumerator = is_numenator
+        assert isinstance(self.SiUnit, str)
+        assert isinstance(self.SiPower, int)
+        assert isinstance(self.HumanUnit, str)
+        assert isinstance(self.HumanPower, int)
 
-class UnitValue(object):
-    def __init__(self, line, precision=None, viewPrecision=None):
-        self.Line = line.strip()
-        self.__RawLine = line
-        self.Precision = precision
-        self.ViewPrecision = viewPrecision
-        self.Load()
+    def get_tex(self):
+        part = f'\\text{{{self.HumanUnit}}}'
+        if self.HumanPower != 1:
+            part += f'^{{{self.HumanPower}}}'
+        return part
 
-    def Load(self):
+    def _parse_line(self, line):
         try:
-            if '=' in self.Line:
-                self.Letter, self.Line = self.Line.split('=', 1)
-                self.Letter = self.Letter.strip()
-                self.Line = self.Line.strip()
-            else:
-                self.Letter = None
-
-            assert self.Line.count('/') <= 1
-            self.Line = self.Line.replace('/', ' / ')
-            self.Line = self.Line.replace('**', '^')
-            self.Line = self.Line.replace(' ^', '^')
-
-            self.BasePower = 0
-
-            self.HumanUnits = [[], []]
-            self.ReadyUnits = [[], []]
-            isNumerator = True
-            for index, part in enumerate(self.Line.split()):
-                if index == 0:
-                    try:
-                        self.Value = int(part)
-                    except ValueError:
-                        self.Value = float(part)
-
-                    if self.Precision is None:
-                        precisionStr = part.replace('.', '').lstrip('0')
-                        if not precisionStr:
-                            assert part == '0'
-                            precisionStr = '0'
-                        self.Precision = len(precisionStr)
-                        if precisionStr[0] == '1' and self.Precision >= 2:
-                            self.Precision -= 1
-                        assert self.Precision >= 1
-                elif part.startswith('10^'):
-                    self.BasePower = int(part[3:].strip('{').strip('}'))
-                else:
-                    if part == '/':
-                        isNumerator = False
-                    else:
-                        mainUnit, mainPower, humanUnit, power = self.__ParseItem(part)
-                        index = 0 if isNumerator else 1
-                        self.HumanUnits[index].append((humanUnit, power))
-                        self.ReadyUnits[index].append((mainUnit, mainPower))
-
-            self.Power = sum(power for _, power in self.ReadyUnits[0]) - sum(power for _, power in self.ReadyUnits[1]) + self.BasePower
-        except Exception:
-            log.error(f'Could not load unit {self.Line} (from {self.__RawLine})')
-            raise
-
-    def __str__(self):
-        return f'UVS {self.__RawLine}'
-
-    def __repr__(self):
-        return f'UVR {self.__RawLine!r}'
-
-    def __ParseItem(self, item):
-        try:
-            if '^' in item:
-                item, power = item.split('^')
+            if '^' in line:
+                line, power = line.split('^')
                 power = int(power)
             else:
                 power = 1
 
             prefix = ''
-            main = item
+            main = line
             for suffix in [
                 'эВ',  # электрон-вольт
                 'В',   # вольт
@@ -193,9 +146,9 @@ class UnitValue(object):
                 'К',   # кельвин
                 'K',   # kelvin
             ]:
-                if item.endswith(suffix):
+                if line.endswith(suffix):
                     main = suffix
-                    prefix = item[:-len(suffix)]
+                    prefix = line[:-len(suffix)]
                     break
 
             exponent = {
@@ -215,75 +168,144 @@ class UnitValue(object):
                 main = 'кг'
                 exponent -= 3
 
-            return main, exponent * power, item, power
+            return main, exponent * power, line, power
         except:
-            log.error('Error in ParseItem on %r', item)
+            log.error('Error in ParseItem on %r', line)
             raise
 
-    def __GetUnits(self, items):
-        parts = []
-        for unit, power in items:
-            part = f'\\text{{{unit}}}'
-            if power != 1:
-                part += f'^{{{power}}}'
-            parts.append(part)
-        return '\\cdot'.join(parts)
+class UnitValue(object):
+    def __init__(self, line, precision=None, viewPrecision=None):
+        self.__raw_line = line
+        self._load(line, precision=precision)
+        self.ViewPrecision = viewPrecision
+        self._value_str = None
 
-    def __format__(self, format):
-        mainFormat = format.replace(':', '|')
-        mainFormat, pipes = mainFormat.split('|')[0], mainFormat.split('|')[1:]
+    def _parse_precision(self, value_part):
+        precisionStr = value_part.replace('.', '').lstrip('0')
+        if not precisionStr:
+            assert value_part == '0'
+            precisionStr = '0'
+        precision = len(precisionStr)
+        if precisionStr[0] == '1' and precision >= 2:
+            precision -= 1
+        return precision
 
-        needLetter = False
-        humanNom = self.__GetUnits(self.HumanUnits[0])
-        humanDen = self.__GetUnits(self.HumanUnits[1])
+    def _load(self, line, precision=None):
+        try:
+            line = line.strip()
+            if '=' in line:
+                letter_line, value_line = line.split('=', 1)
+                letter_line = letter_line.strip()
+                value_line = value_line.strip()
+            else:
+                letter_line = None
+                value_line = line
+            self.Letter = letter_line
+
+            assert value_line.count('/') <= 1
+            for key, value in {
+                '/': ' / ',
+                '**': '^',
+                ' ^': '^',
+            }.items():
+                value_line = value_line.replace(key, value)
+
+            self.ValuePower = 0
+
+            self._units = []
+            isNumerator = True
+            for index, part in enumerate(value_line.split()):
+                if index == 0:
+                    try:
+                        self.Value = int(part)
+                    except ValueError:
+                        self.Value = float(part)
+                    self.Precision = self._parse_precision(part) if precision is None else precision
+                    assert self.Precision >= 1
+                elif part.startswith('10^'):
+                    self.ValuePower = int(part[3:].strip('{').strip('}'))
+                else:
+                    if part == '/':
+                        isNumerator = False
+                    else:
+                        self._units.append(OneUnit(part, isNumerator))
+
+            self.Power = sum(unit.SiPower if unit.IsNumerator else -unit.SiPower for unit in self._units) + self.ValuePower
+        except Exception:
+            log.error(f'Could not load unit from {self.__raw_line}')
+            raise
+
+    def __str__(self):
+        return f'UVS {self.__raw_line}'
+
+    def __repr__(self):
+        return f'UVR {self.__raw_line!r}'
+
+    def _get_units_tex(self):
+        humanNom = '\\cdot'.join(unit.get_tex() for unit in self._units if unit.IsNumerator)
+        humanDen = '\\cdot'.join(unit.get_tex() for unit in self._units if not unit.IsNumerator)
         if humanDen:
             units = '\,\\frac{%s}{%s}' % (humanNom, humanDen)
         elif humanNom:
             units = '\,' + humanNom
         else:
             units = ''
+        return units
 
-        valueStr = precisionFmt2(self.Value, self.ViewPrecision or self.Precision)
-
-        if mainFormat == 'TestAnswer':
-            if self.BasePower:
-                raise RuntimeError(f'Cannot convert for test answer {self.__RawLine!r}')
-            return valueStr
-
-        valueStr = valueStr.replace('.', '{,}')
-        if self.BasePower:
-            valueStr += ' \\cdot 10^{{{}}}'.format(self.BasePower)
-        valueStr += '{}'.format(units)
-
-        if mainFormat == 'Task':
-            result = valueStr
-            needLetter = True
-        elif mainFormat == 'Value':
-            result = valueStr
-            needLetter = False
-        elif mainFormat == 'Letter' or mainFormat == 'L' :
-            result = self.Letter
-            needLetter = False
-        else:
-            print(self.__RawLine)
-            raise RuntimeError('Error in __format__ for %r' % format)
-
-        if needLetter and self.Letter:
-            result = '%s = %s' % (self.Letter, result)
-
+    def apply_pipes(self, line, pipes):
+        pipes_dict = {
+            's': '{{ {} }}',
+            'b': '\\left({}\\right)',
+            'e': '${}$',
+            'sqr': '\\sqr{{ {} }}',
+            'sqrt': '\\sqrt{{ {} }}',
+            'cdot': '{} \\cdot'
+        }
         for pipe in pipes:
-            fmt = {
-                's': '{{ {} }}',
-                'b': '\\left({}\\right)',
-                'e': '${}$',
-                'sqr': '\\sqr{{ {} }}',
-                'sqrt': '\\sqrt{{ {} }}',
-                'cdot': '{} \\cdot'
-            }.get(pipe)
-            if fmt is None:
-                raise RuntimeError('Unknown pipe in %s for %s' % (format, self))
-            result = fmt.format(result)
-        return result
+            pipe_fmt = pipes_dict.get(pipe)
+            if pipe_fmt is None:
+                raise RuntimeError(f'Unknown pipe {pipe} for {self}')
+            line = pipe_fmt.format(line)
+        return line
+
+    def get_value_str(self):
+        if self._value_str is None:
+            valueStr = precisionFmt2(self.Value, self.ViewPrecision or self.Precision)
+            self._precisionFmt2 = str(valueStr)
+            valueStr = valueStr.replace('.', '{,}')
+            if self.ValuePower:
+                valueStr += f' \\cdot 10^{{{self.ValuePower}}}'
+            valueStr += self._get_units_tex()
+            self._value_str = valueStr
+        return self._value_str
+
+    def __format__(self, fmt):
+        try:
+            fmt_parts = fmt.replace(':', '|').split('|')
+            main_format, pipes = fmt_parts[0], fmt_parts[1:]
+
+            value_str = self.get_value_str()
+            if main_format == 'TestAnswer':
+                assert all(i.isdigit() or i == '-' for i in self._precisionFmt2)
+                return self._precisionFmt2
+            elif main_format == 'Task':
+                with_letter = True
+                with_value = True
+            elif main_format == 'Value':
+                with_letter = False
+                with_value = True
+            elif main_format == 'Letter' or main_format == 'L':
+                with_letter = True
+                with_value = False
+            else:
+                raise RuntimeError(f'Error in __format__ for {fmt} and {self.__raw_line}')
+
+            result = ' = '.join(i for i, j in [[self.Letter, with_letter], [value_str, with_value]] if j and i)
+            result = self.apply_pipes(result, pipes)
+            return result
+        except Exception:
+            log.error(f'Error in __format__ for {fmt} and {self.__raw_line}')
+            raise
 
     def Other(self, other, action=None, precisionInc=0, units='', powerShift=0):
         # TODO: skips units now
@@ -325,11 +347,11 @@ assert '{:Value}'.format(UnitValue('50 км / ч')) == '50\\,\\frac{\\text{км}
 
 
 class Matter(object):
-    def __init__(self, name=None, c=None, lmbd=None, L=None):
+    def __init__(self, name=None, **kws):
         self.Name = name
-        self.c = UnitValue(c) if c else None
-        self.lmbd = UnitValue(lmbd) if lmbd else None
-        self.L = UnitValue(L) if L else None
+        for key, value in kws.items():
+            assert key in ['c', 'lmbd', 'L']
+            setattr(self, key, UnitValue(value))
 
 
 class Consts(object):
@@ -341,7 +363,7 @@ class Consts(object):
     h = UnitValue('h = 6.626 10^{-34} Дж с')
     c = UnitValue('c = 3 10^{8} м / с', precision=3, viewPrecision=1)
     g_ten = UnitValue('g = 10 м / с^2', precision=2)
-    aem = UnitValue('1.66054 10^-27 кг')
+    aem = UnitValue('\\text{а.е.м.} = 1.66054 10^-27 кг')
     k = UnitValue('k = 9 10^9 Н м^2 / Кл^2')
 
     water = Matter(
