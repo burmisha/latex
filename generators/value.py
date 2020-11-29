@@ -110,10 +110,10 @@ class OneUnit:
         assert isinstance(self.HumanPower, int)
 
     def get_tex(self):
-        part = f'\\text{{{self.HumanUnit}}}'
+        res = f'\\text{{{self.HumanUnit}}}'
         if self.HumanPower != 1:
-            part += f'^{{{self.HumanPower}}}'
-        return part
+            res += f'^{{{self.HumanPower}}}'
+        return res
 
     def _parse_line(self, line):
         try:
@@ -252,7 +252,7 @@ class UnitValue(object):
             units = ''
         return units
 
-    def apply_pipes(self, line, pipes):
+    def _apply_pipes(self, line, pipes):
         pipes_dict = {
             's': '{{ {} }}',
             'b': '\\left({}\\right)',
@@ -264,7 +264,7 @@ class UnitValue(object):
         for pipe in pipes:
             pipe_fmt = pipes_dict.get(pipe)
             if pipe_fmt is None:
-                raise RuntimeError(f'Unknown pipe {pipe} for {self}')
+                raise RuntimeError(f'Unknown pipe {pipe}')
             line = pipe_fmt.format(line)
         return line
 
@@ -286,7 +286,7 @@ class UnitValue(object):
 
             value_str = self.get_value_str()
             if main_format == 'TestAnswer':
-                assert all(i.isdigit() or i == '-' for i in self._precisionFmt2)
+                assert str(int(self._precisionFmt2)) == self._precisionFmt2
                 return self._precisionFmt2
             elif main_format == 'Task':
                 with_letter = True
@@ -298,10 +298,10 @@ class UnitValue(object):
                 with_letter = True
                 with_value = False
             else:
-                raise RuntimeError(f'Error in __format__ for {fmt} and {self.__raw_line}')
+                raise RuntimeError(f'Unknown main format: {main_format}')
 
             result = ' = '.join(i for i, j in [[self.Letter, with_letter], [value_str, with_value]] if j and i)
-            result = self.apply_pipes(result, pipes)
+            result = self._apply_pipes(result, pipes)
             return result
         except Exception:
             log.error(f'Error in __format__ for {fmt} and {self.__raw_line}')
@@ -338,8 +338,8 @@ class UnitValue(object):
 
 
 assert UnitValue('50 мТл').Value * (10 ** UnitValue('50 мТл').Power) == 0.05, 'Got %r' % UnitValue('50 мТл').Value
-assert '{v:Task}'.format(v=UnitValue('c = 3 10^{8} м / с')) == 'c = 3 \\cdot 10^{8}\\,\\frac{\\text{м}}{\\text{с}}', 'Got %r' %  '{v:Task}'.format(v=UnitValue('c = 3 10^{8} м / с'))
-assert '{t:Task}'.format(t=UnitValue('t = 8 суток')) == 't = 8\\,\\text{суток}', 'Got %r' %  '{t:Task}'.format(t=UnitValue('t = 8 суток'))
+assert '{:Task}'.format(UnitValue('c = 3 10^{8} м / с')) == 'c = 3 \\cdot 10^{8}\\,\\frac{\\text{м}}{\\text{с}}', 'Got %r' % '{v:Task}'.format(v=UnitValue('c = 3 10^{8} м / с'))
+assert '{:Task}'.format(UnitValue('t = 8 суток')) == 't = 8\\,\\text{суток}', 'Got %r' % '{t:Task}'.format(t=UnitValue('t = 8 суток'))
 assert '{:Value}'.format(UnitValue('m = 1.67 10^-27 кг')) == '1{,}67 \\cdot 10^{-27}\\,\\text{кг}'
 assert '{:Value}'.format(UnitValue('T = 1.7 суток')) == '1{,}7\\,\\text{суток}'
 assert '{:Value}'.format(UnitValue('12 км / ч')) == '12\\,\\frac{\\text{км}}{\\text{ч}}'
