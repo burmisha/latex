@@ -47,3 +47,6 @@ class ColorMessage:
 
 def log_list(items, tab=4):
     return ''.join('\n' + ' ' * tab + '- ' + item for item in items)
+
+
+cm = ColorMessage()
