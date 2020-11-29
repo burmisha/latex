@@ -8,7 +8,7 @@ import logging
 log = logging.getLogger(__name__)
 
 
-@variant.text(u'''
+@variant.text('''
     Для частицы, движущейся с релятивистской скоростью, 
     выразите ${x}$ и ${y}$ через $m$, ${a}$ и ${b}$, где
     $E_\\text{ кин }$~--- кинетическая энергия частицы,
@@ -16,10 +16,10 @@ log = logging.getLogger(__name__)
     а $p, v, m$~--- её импульс, скорость и масса.
 ''')
 @variant.arg(x__y__a__b=itertools.permutations([
-    u'E_\\text{кин}',
-    u'E_0',
-    u'p',
-    u'v',
+    'E_\\text{кин}',
+    'E_0',
+    'p',
+    'v',
 ], 4))
 @variant.solution_space(200)
 class Equations(variant.VariantTask):

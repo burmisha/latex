@@ -111,11 +111,11 @@ class Pupils(object):
         assert isinstance(self.Grade, int)
         assert 6 <= self.Grade <= 11
         self.LatinLetter = {
-            u'А': 'A',
-            u'Т': 'T',
-            u'Л': 'L',
-            u'М': 'M',
-            u'АБ': 'AB',
+            'А': 'A',
+            'Т': 'T',
+            'Л': 'L',
+            'М': 'M',
+            'АБ': 'AB',
         }[self.Letter]
         self._name_lookup = NameLookup(dict([
             (pupil.GetFullName(), pupil)

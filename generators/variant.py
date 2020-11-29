@@ -238,7 +238,7 @@ class VariantTask(object):
 
 def get_class_letter(pupils):
     if pupils.Letter:
-        return u'{}«{}»'.format(pupils.Grade, pupils.Letter)
+        return '{}«{}»'.format(pupils.Grade, pupils.Letter)
     else:
         return pupils.Grade    
 
@@ -269,7 +269,7 @@ class MultiplePaper(object):
             date=self.Date.GetHumanText(),
             classLetter=get_class_letter(self.Pupils),
             text=paper_tex,
-            noanswers='' if withAnswers else u'\\noanswers',
+            noanswers='' if withAnswers else '\\noanswers',
         )
         return result
 
@@ -285,7 +285,7 @@ class MultiplePaper(object):
 
 
 def escape_tex(template):
-    return template.replace(u'{\n', u'{{\n').replace(u'\n}', u'\n}}').replace(u'{ ', u'{{ ').replace(u' }', u' }}')
+    return template.replace('{\n', '{{\n').replace('\n}', '\n}}').replace('{ ', '{{ ').replace(' }', ' }}')
 
 
 def solution_space(space):

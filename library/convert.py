@@ -34,7 +34,7 @@ class OneDStructure(object):
 
     def __call__(self):
         for index, (name, first, last) in enumerate(self.Data, self.StartIndex):
-            dirName = u'%02d %s' % (index, name)
+            dirName = '%02d %s' % (index, name)
             if first > last:
                 log.error('Error in book config for %r, %r', first, last)
                 raise RuntimeError('Broken pages range')
@@ -50,7 +50,7 @@ class TwoDStructure(object):
 
     def __call__(self):
         for chapterIndex, (chapterName, parts) in enumerate(self.Data, self.FirstLevelStartIndex):
-            dirName = u'%02d %s' % (chapterIndex, chapterName)
+            dirName = '%02d %s' % (chapterIndex, chapterName)
             hasDigit = all(part[0].isdigit() for part, _, _ in parts)
             for partIndex, (partName, first, last) in enumerate(parts, self.SecondLevelStartIndex):
                 if first > last:
@@ -59,9 +59,9 @@ class TwoDStructure(object):
 
                 for pageNumber in range(first, last + 1):
                     if hasDigit:
-                        nameTemplate = u'%s' % partName
+                        nameTemplate = '%s' % partName
                     else:
-                        nameTemplate = u'%02d %s' % (partIndex, partName)
+                        nameTemplate = '%02d %s' % (partIndex, partName)
                     yield pageNumber, dirName, nameTemplate
 
 

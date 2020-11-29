@@ -40,7 +40,7 @@ class Task(object):
             lines.append(self.__Format(self.Answer, 'answer'))
 
         if add_solution_space and self._solution_space:
-            lines.append(u'\\solutionspace{%dpt}' % self._solution_space)
+            lines.append('\\solutionspace{%dpt}' % self._solution_space)
 
         return '\n'.join(lines)
 

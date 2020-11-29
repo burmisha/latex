@@ -173,25 +173,25 @@ class UnitValue(object):
             prefix = ''
             main = item
             for suffix in [
-                u'эВ',  # электрон-вольт
-                u'В',   # вольт
-                u'Дж',  # джоуль
-                u'Н',   # ньютон
-                u'Вт',  # ватт
-                u'Ом',  # ом
-                u'Ф',   # фарад
-                u'А',   # ампер
-                u'Кл',  # кулон
-                u'кг',  # килограм
-                u'г',   # грам
-                u'с',   # секунда
-                u'м',   # метр
-                u'Тл',  # тесла
-                u'т',   # тонна
-                u'С',   # цельсий
-                u'C',   # celsium
-                u'К',   # кельвин
-                u'K',   # kelvin
+                'эВ',  # электрон-вольт
+                'В',   # вольт
+                'Дж',  # джоуль
+                'Н',   # ньютон
+                'Вт',  # ватт
+                'Ом',  # ом
+                'Ф',   # фарад
+                'А',   # ампер
+                'Кл',  # кулон
+                'кг',  # килограм
+                'г',   # грам
+                'с',   # секунда
+                'м',   # метр
+                'Тл',  # тесла
+                'т',   # тонна
+                'С',   # цельсий
+                'C',   # celsium
+                'К',   # кельвин
+                'K',   # kelvin
             ]:
                 if item.endswith(suffix):
                     main = suffix
@@ -200,24 +200,24 @@ class UnitValue(object):
 
             exponent = {
                 '': 0,
-                u'к': 3,
-                u'М': 6,
-                u'Г': 9,
-                u'м': -3,
-                u'мк': -6,
-                u'н': -9,
-                u'п': -12,
-                u'с': -2,
-                u'д': -1,
+                'к': 3,
+                'М': 6,
+                'Г': 9,
+                'м': -3,
+                'мк': -6,
+                'н': -9,
+                'п': -12,
+                'с': -2,
+                'д': -1,
             }[prefix]
 
-            if main == u'г':
-                main = u'кг'
+            if main == 'г':
+                main = 'кг'
                 exponent -= 3
 
             return main, exponent * power, item, power
         except:
-            log.error(u'Error in ParseItem on %r', item)
+            log.error('Error in ParseItem on %r', item)
             raise
 
     def __GetUnits(self, items):
@@ -237,7 +237,7 @@ class UnitValue(object):
         humanNom = self.__GetUnits(self.HumanUnits[0])
         humanDen = self.__GetUnits(self.HumanUnits[1])
         if humanDen:
-            units = u'\,\\frac{%s}{%s}' % (humanNom, humanDen)
+            units = '\,\\frac{%s}{%s}' % (humanNom, humanDen)
         elif humanNom:
             units = '\,' + humanNom
         else:
@@ -253,7 +253,7 @@ class UnitValue(object):
         valueStr = valueStr.replace('.', '{,}')
         if self.BasePower:
             valueStr += ' \\cdot 10^{{{}}}'.format(self.BasePower)
-        valueStr += u'{}'.format(units)
+        valueStr += '{}'.format(units)
 
         if mainFormat == 'Task':
             result = valueStr
@@ -273,12 +273,12 @@ class UnitValue(object):
 
         for pipe in pipes:
             fmt = {
-                's': u'{{ {} }}',
-                'b': u'\\left({}\\right)',
-                'e': u'${}$',
-                'sqr': u'\\sqr{{ {} }}',
-                'sqrt': u'\\sqrt{{ {} }}',
-                'cdot': u'{} \\cdot'
+                's': '{{ {} }}',
+                'b': '\\left({}\\right)',
+                'e': '${}$',
+                'sqr': '\\sqr{{ {} }}',
+                'sqrt': '\\sqrt{{ {} }}',
+                'cdot': '{} \\cdot'
             }.get(pipe)
             if fmt is None:
                 raise RuntimeError('Unknown pipe in %s for %s' % (format, self))
@@ -311,17 +311,17 @@ class UnitValue(object):
         power -= powerShift
         value *= 10 ** powerShift
 
-        r = UnitValue(u'%.20f 10^%d %s' % (value, power, units), precision=precision)
+        r = UnitValue('%.20f 10^%d %s' % (value, power, units), precision=precision)
         return r
 
 
-assert UnitValue(u'50 мТл').Value * (10 ** UnitValue(u'50 мТл').Power) == 0.05, 'Got %r' % UnitValue(u'50 мТл').Value
-assert u'{v:Task}'.format(v=UnitValue(u'c = 3 10^{8} м / с')) == u'c = 3 \\cdot 10^{8}\\,\\frac{\\text{м}}{\\text{с}}', 'Got %r' %  u'{v:Task}'.format(v=UnitValue(u'c = 3 10^{8} м / с'))
-assert u'{t:Task}'.format(t=UnitValue(u't = 8 суток')) == u't = 8\\,\\text{суток}', 'Got %r' %  u'{t:Task}'.format(t=UnitValue(u't = 8 суток'))
-assert u'{:Value}'.format(UnitValue(u'm = 1.67 10^-27 кг')) == u'1{,}67 \\cdot 10^{-27}\\,\\text{кг}'
-assert u'{:Value}'.format(UnitValue(u'T = 1.7 суток')) == u'1{,}7\\,\\text{суток}'
-assert u'{:Value}'.format(UnitValue(u'12 км / ч')) == u'12\\,\\frac{\\text{км}}{\\text{ч}}'
-assert u'{:Value}'.format(UnitValue(u'50 км / ч')) == u'50\\,\\frac{\\text{км}}{\\text{ч}}'
+assert UnitValue('50 мТл').Value * (10 ** UnitValue('50 мТл').Power) == 0.05, 'Got %r' % UnitValue('50 мТл').Value
+assert '{v:Task}'.format(v=UnitValue('c = 3 10^{8} м / с')) == 'c = 3 \\cdot 10^{8}\\,\\frac{\\text{м}}{\\text{с}}', 'Got %r' %  '{v:Task}'.format(v=UnitValue('c = 3 10^{8} м / с'))
+assert '{t:Task}'.format(t=UnitValue('t = 8 суток')) == 't = 8\\,\\text{суток}', 'Got %r' %  '{t:Task}'.format(t=UnitValue('t = 8 суток'))
+assert '{:Value}'.format(UnitValue('m = 1.67 10^-27 кг')) == '1{,}67 \\cdot 10^{-27}\\,\\text{кг}'
+assert '{:Value}'.format(UnitValue('T = 1.7 суток')) == '1{,}7\\,\\text{суток}'
+assert '{:Value}'.format(UnitValue('12 км / ч')) == '12\\,\\frac{\\text{км}}{\\text{ч}}'
+assert '{:Value}'.format(UnitValue('50 км / ч')) == '50\\,\\frac{\\text{км}}{\\text{ч}}'
 
 
 class Matter(object):
@@ -333,45 +333,45 @@ class Matter(object):
 
 
 class Consts(object):
-    m_e = UnitValue(u'm_{e} = 9.1 10^{-31} кг')
-    m_p = UnitValue(u'm_{p} = 1.672 10^{-27} кг')
-    m_n = UnitValue(u'm_{n} = 1.675 10^{-27} кг')
-    e = UnitValue(u'e = 1.60 10^{-19} Кл', viewPrecision=1)
-    eV = UnitValue(u'1.60 10^{-19} Дж', viewPrecision=1)
-    h = UnitValue(u'h = 6.626 10^{-34} Дж с')
-    c = UnitValue(u'c = 3 10^{8} м / с', precision=3, viewPrecision=1)
-    g_ten = UnitValue(u'g = 10 м / с^2', precision=2)
-    aem = UnitValue(u'1.66054 10^-27 кг')
+    m_e = UnitValue('m_{e} = 9.1 10^{-31} кг')
+    m_p = UnitValue('m_{p} = 1.672 10^{-27} кг')
+    m_n = UnitValue('m_{n} = 1.675 10^{-27} кг')
+    e = UnitValue('e = 1.60 10^{-19} Кл', viewPrecision=1)
+    eV = UnitValue('1.60 10^{-19} Дж', viewPrecision=1)
+    h = UnitValue('h = 6.626 10^{-34} Дж с')
+    c = UnitValue('c = 3 10^{8} м / с', precision=3, viewPrecision=1)
+    g_ten = UnitValue('g = 10 м / с^2', precision=2)
+    aem = UnitValue('1.66054 10^-27 кг')
     k = UnitValue('k = 9 10^9 Н м^2 / Кл^2')
 
     water = Matter(
-        name=u'вода',
-        c=u'4200 Дж / кг К',
-        lmbd=u'340 кДж / кг',
-        L=u'2.3 МДж / кг',
+        name='вода',
+        c='4200 Дж / кг К',
+        lmbd='340 кДж / кг',
+        L='2.3 МДж / кг',
     )
     lead = Matter(
-        name=u'свинец',
-        lmbd=u'25 кДж / кг',
+        name='свинец',
+        lmbd='25 кДж / кг',
     )
     aluminum = Matter(
-        name=u'алюминий',
-        c=u'920 Дж / кг К',
-        lmbd=u'390 кДж / кг',
+        name='алюминий',
+        c='920 Дж / кг К',
+        lmbd='390 кДж / кг',
     )
     copper = Matter(
-        name=u'медь',
-        lmbd=u'210 кДж / кг',
+        name='медь',
+        lmbd='210 кДж / кг',
     )
     steel = Matter(
-        name=u'сталь',
-        c=u'500 Дж / кг К',
-        lmbd=u'84 кДж / кг',
+        name='сталь',
+        c='500 Дж / кг К',
+        lmbd='84 кДж / кг',
     )
     zinc = Matter(
-        name=u'цинк',
-        c=u'400 Дж / кг К',
+        name='цинк',
+        c='400 Дж / кг К',
     )
 
 
-assert u'{:Value}'.format(Consts.c.Other(UnitValue(u'l = 500 нм'), action='div', units=u'Гц', powerShift=3)) == u'6{,}00 \\cdot 10^{14}\\,\\text{Гц}'
+assert '{:Value}'.format(Consts.c.Other(UnitValue('l = 500 нм'), action='div', units='Гц', powerShift=3)) == '6{,}00 \\cdot 10^{14}\\,\\text{Гц}'
