@@ -352,6 +352,7 @@ class Consts(object):
     c = UnitValue(u'c = 3 10^{8} м / с', precision=3, viewPrecision=1)
     g_ten = UnitValue(u'g = 10 м / с^2', precision=2)
     aem = UnitValue(u'1.66054 10^-27 кг')
+    k = UnitValue('k = 9 10^9 Н м^2 / Кл^2')
 
     water = Matter(
         name=u'вода',

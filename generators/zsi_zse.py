@@ -151,7 +151,6 @@ class Ch_3_24(variant.VariantTask):
     '''&\\implies \\frac{ m_1 }{ m_2 } v_1 - v_1 = \\cbr{ \\frac{ m_1 }{ m_2 } + 1 } v_2 \\implies 
     \\frac{ m_1 }{ m_2 } (v_1 - v_2) = v_2 + v_1 \\implies \\frac{ m_1 }{ m_2 } = \\frac{ v_2 + v_1 }{ v_1 - v_2 } = {answer}''',
 ])
-# @variant.answer_short('{answer}')
 @variant.answer_test('{answer}')
 @variant.arg(v1__v2=[(
     'v_1 = %d м / с' % v1,
@@ -185,7 +184,6 @@ class Ch_3_26(variant.VariantTask):
     '&mv + {N}m\\cdot 0 = (m + {N}m) v\' \\implies',
     '&v\' = v\\frac{ m }{ {N}m + m } = \\frac{ v }{ {N} + 1 } \\implies \\frac{ v }{ v\' } = {answer}',
 ])
-# @variant.answer_short('{answer}')
 @variant.answer_test('{answer}')
 @variant.arg(N=list(range(5, 15)))
 class Vishnyakova_1_4_6(variant.VariantTask):
@@ -223,7 +221,6 @@ class Vishnyakova_1_4_12(variant.VariantTask):
     '&\\text{ Для спуска: } A = -Fh = -(mg - ma) h = -m(g-a)h,',
     '&\\text{ В результате получаем: } {A:Task}.',
 ])
-# @variant.answer_short('{A:Task}')
 @variant.answer_test('{A:TestAnswer}')
 @variant.arg(what__mult=[('подъём', +1), ('спуск', -1)])
 @variant.arg(a=['a = %d м / c^2' % a for a in [2, 3, 4, 6]])
@@ -245,7 +242,6 @@ class Ch_4_2(variant.VariantTask):
     '&\\text{ Изменение кинетической энергии равно работе внешних сил: }',
     '&\\Delta E_k = E_k\' - E_k = A_\\text{ тяж } \\implies A_\\text{ тяж } = \\frac{ mv\'^2 }2 - \\frac{ mv_0^2 }2 = {A:Value}.'
 ])
-# @variant.answer_short('{A:Task}')
 @variant.answer_test('{A:TestAnswer}')
 @variant.arg(how=['вертикально вверх', 'горизонтально', 'под углом $45\\degrees$ к горизонту', 'под углом $30\\degrees$ к горизонту'])
 @variant.arg(m=['m = %d кг' % m for m in [1, 2, 3]])
