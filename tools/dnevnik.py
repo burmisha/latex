@@ -57,6 +57,8 @@ def run(args):
     ]:
         log.info(f'Got\n{colorize_json(res)}')
 
+    client._logout()
+
 
 def populate_parser(parser):
     parser.add_argument('-a', '--set-all-absent', help='Set all absent for schedult item', type=int, action='append', default=[])

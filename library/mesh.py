@@ -91,6 +91,14 @@ class Client:
         self._auth_token = response['authentication_token']
         log.info(f'Got profile_id {self._profile_id} and auth_token {self._auth_token} for {username}')
 
+    def _logout(self):
+        response = requests.delete(
+            f'{self._base_url}/lms/api/sessions?authentication_token={self._auth_token}',
+            headers=self._get_headers(add_personal=False)
+        ).json()
+        log.info(f'Got on login: {response}')
+        assert response == {'status': 'ok', 'http_status_code': 200}
+
     def get_teacher_id(self):
         return self._profile_id
 
