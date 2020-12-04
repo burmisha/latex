@@ -63,32 +63,66 @@ class ScheduleItem:
 
 
 class Client:
-    def __init__(self):
-        self._profile_id = 15033420
-        self._auth_token = library.secrets.token.dnevnik_mos_ru
+    def __init__(self, username=None, password=None):
         self._base_url = 'https://dnevnik.mos.ru'
+        self._login(username=username, password=password)
+
         self._current_year = None
         self._teacher_profile = None
         self._groups = None
         self._all_student_profiles = None
         self._available_lessons_dict = {}
 
+    def _login(self, username, password):
+        response = requests.post(
+            f'{self._base_url}/lms/api/sessions',
+            headers=self._get_headers(add_personal=False),
+            json={'login': username, 'password_plain': password,
+        }).json()
+        self._profile_id = response['profiles'][0]['id']
+        self._auth_token = response['authentication_token']
+        log.info(f'Got profile_id {self._profile_id} and auth_token {self._auth_token} for {username}')
+
     def get_teacher_id(self):
         return self._profile_id
 
-    def _get_headers(self):
-        return {
-            'Auth-Token': self._auth_token,
-            'Profile-Id': str(self._profile_id),
+    def _get_headers(self, add_personal=True):
+        headers = {
+            'Accept': 'application/json, text/plain, */*',
+            'Accept-Language': 'ru-RU,ru;q=0.8,en-US;q=0.5,en;q=0.3',
+            'Connection': 'keep-alive',
             'Content-Type': 'application/json;charset=utf-8',
+            'Origin': 'https://dnevnik.mos.ru',
+            'Referer': 'https://dnevnik.mos.ru/',
+            'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:83.0) Gecko/20100101 Firefox/83.0',
         }
+        if add_personal:
+            headers.update({
+                'Auth-Token': self._auth_token,
+                'Profile-Id': str(self._profile_id),
+            })
+        return headers
+
+    def _check_response(self, response):
+        try:
+            data = response.json()
+        except:
+            log.error(f'Could not load json from {response.text}')
+            raise
+
+        if isinstance(data, dict) and data.get('code') == 400:
+            raise RuntimeError(f'Got {colorize_json(data)}')
+        if isinstance(data, dict) and data.get('message') == 'Предыдущая сессия работы в ЭЖД завершена. Войдите в ЭЖД заново':
+            raise RuntimeError(f'Token is invalid')
+
+        return data
 
     def post(self, url, json_data):
         assert url.startswith('/'), f'url doesn\'t start with /: {url}' 
         full_url = f'{self._base_url}{url}'
         try:
             response = requests.post(full_url, json=json_data, headers=self._get_headers())
-            response = response.json()
+            response = self._check_response(response)
             log.debug(f'Response from {url}: {response}')
             return response
         except:
@@ -104,10 +138,8 @@ class Client:
         full_url = f'{self._base_url}{url}'
         try:
             response = requests.get(full_url, params=str_params, headers=self._get_headers())
-            response = response.json()
+            response = self._check_response(response)
             log.debug(f'Response from {url}: {response}')
-            if isinstance(response, dict) and response.get('code') == 400:
-                raise RuntimeError(f'Got {colorize_json(response)}')
             return response
         except:
             log.error(f'Error on GET to {full_url} with {params}')

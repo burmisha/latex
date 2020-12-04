@@ -21,7 +21,7 @@ class Token:
         self._load(data)
 
     def _load(self, tokens_dict):
-        self.dnevnik_mos_ru = tokens_dict.get('dnevnik.mos.ru')  # get manually from browser
+        self.dnevnik_mos_ru_password = tokens_dict.get('dnevnik.mos.ru.password')  # get manually from browser
 
 
 token = Token(os.path.join(os.path.dirname(__file__), '..', 'secrets.json'))

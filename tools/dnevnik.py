@@ -9,7 +9,10 @@ log = logging.getLogger(__name__)
 
 
 def run(args):
-    client = library.mesh.Client()
+    client = library.mesh.Client(
+        username='burmistrovmo',
+        password=library.secrets.token.dnevnik_mos_ru_password,
+    )
 
     schedule_items = client.get_schedule_items(from_date=args.from_date, to_date=args.to_date)
     for schedule_item in sorted(schedule_items, key=lambda x: x._iso_date_time):
