@@ -1,3 +1,4 @@
+import library.datetools
 import library.files
 
 import itertools
@@ -5,53 +6,11 @@ import itertools
 import logging
 log = logging.getLogger(__name__)
 
-import datetime
-import time
 import os
 
 
-def formatTimestamp(timestamp, fmt='%Y-%m-%d %H:%M:%S'):
-    if isinstance(timestamp, int):
-        return datetime.datetime.utcfromtimestamp(timestamp).strftime(fmt)
-    elif isinstance(timestamp, datetime.datetime):
-        return timestamp.strftime(fmt)
-    else:
-        raise RuntimeException(f'Unknown timestamp {timestamp}')
-
-
-class NowDelta:
-    def __init__(self, dt=None):
-        if dt is None:
-            self._now = datetime.datetime.now()
-        else:
-            if isinstance(dt, int):
-                self._now = datetime.datetime.utcfromtimestamp(dt)
-            elif isinstance(dt, datetime.datetime):
-                self._now = dt
-            else:
-                raise RuntimeException(f'Unknown datetime {dt}')
-
-    def _Format(self, dt, fmt=None):
-        if fmt:
-            return formatTimestamp(dt, fmt=fmt)
-        else:
-            return dt
-
-    def Before(self, fmt=None, **kwargs):
-        dt = self._now - datetime.timedelta(**kwargs)
-        return self._Format(dt, fmt=fmt)
-
-    def Now(self, fmt=None):
-        dt = self._now
-        return self._Format(dt, fmt=fmt)
-
-    def After(self, fmt=None, **kwargs):
-        dt = self._now + datetime.timedelta(**kwargs)
-        return self._Format(dt, fmt=fmt)
-
-
 def runTemplate(args):
-    nowDelta = NowDelta()
+    nowDelta = library.datetools.NowDelta()
     docxTemplate = library.location.udr('Шаблоны', 'template-2-columns.docx')
     ipadTemplate = library.location.ipad('2020-21 Кружок', '2020-10-00 Кружок - Шаблон.docx')
 
