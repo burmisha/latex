@@ -41,6 +41,7 @@ def CreateArgumentsParser():
         ('docx2pdf', 'Convert docx files to pdf ones', tools.docx2pdf),
         ('gforms', 'Create JS scripts for Google Forms', tools.google_forms),
         ('checker', 'Check csv forms', tools.checker),
+        ('dnevnik', 'Run mesh tools', tools.dnevnik),
     ]:
         subparser = subparsers.add_parser(
             mode_name,

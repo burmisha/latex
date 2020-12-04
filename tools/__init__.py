@@ -1,5 +1,6 @@
 import tools.checker
 import tools.convert
+import tools.dnevnik
 import tools.docx2pdf
 import tools.download
 import tools.generate_all

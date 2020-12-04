@@ -1,3 +1,10 @@
+import pygments
+import pygments.lexers
+import pygments.formatters
+
+import json
+
+
 class color:
     Green = 'green'
     Red = 'red'
@@ -47,6 +54,14 @@ class ColorMessage:
 
 def log_list(items, tab=4):
     return ''.join('\n' + ' ' * tab + '- ' + item for item in items)
+
+
+def colorize_json(data):
+    return pygments.highlight(
+        json.dumps(data, sort_keys=True, indent=2, separators=(",", ":"), ensure_ascii=False),
+        pygments.lexers.JsonLexer(),
+        pygments.formatters.TerminalFormatter()
+    )
 
 
 cm = ColorMessage()
