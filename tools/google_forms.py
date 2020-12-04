@@ -153,6 +153,9 @@ def get_all_forms():
         ]),
         ('2020.11.19 9М - Законы сохранения - 1', '10:05', 'up', [abv_choices(6), any_text(4)]),
         ('2020.11.26 10АБ - Законы сохранения - 2', '12:05', 'incredibles', [any_text(10)]),
+        ('2020.12.04 10АБ - Статика и гидростатика - 1', '12:05', 'ratatouille',
+            [any_text(7), ('text', 'Ссылка на гифку'), ('text', 'Какой вопрос добавить в опрос?')],
+        ),
     ]
     for title, up_to, image, questions in forms_config:
         form_generator = TestFormGenerator(title=title, upTo=up_to, image=image)
