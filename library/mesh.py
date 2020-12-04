@@ -171,7 +171,7 @@ class Client:
                     'with_lesson_info': True,
                     # 'with_parents': True,
                 })
-                log.info(f'Loaded {len(student_profiles_data)} student profiles for {group._id}')
+                log.info(f'Loaded {len(student_profiles_data)} student profiles for {group}')
                 for item in student_profiles_data:
                     student_profile = StudentProfile(item)
                     self._all_student_profiles[student_profile._id] = student_profile
