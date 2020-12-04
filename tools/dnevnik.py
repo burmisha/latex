@@ -17,7 +17,7 @@ def run(args):
     to_date = now_delta.After(days=args.to_date)
 
     client = library.mesh.Client(
-        username='burmistrovmo',
+        username=args.username,
         password=library.secrets.token.dnevnik_mos_ru_password,
     )
 
@@ -64,4 +64,5 @@ def populate_parser(parser):
     parser.add_argument('-t', '--to-date', help='Search lessons to date (in days)', type=int, default=2)
     parser.add_argument('-c', '--class-filter', help='Class filter')
     parser.add_argument('-g', '--group-filter', help='Group filter (by id)', type=int)
+    parser.add_argument('--username', help='Username to login', default='burmistrovmo')
     parser.set_defaults(func=run)
