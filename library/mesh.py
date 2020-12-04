@@ -24,12 +24,20 @@ class StudentsGroup:
         self._subject_name = data['subject_name']
         self._class_unit_ids = data['class_unit_ids']
         self._subgroup_ids = data['subgroup_ids'] or []
+
+        best_name = data['class_unit_name']
+        if best_name is None:
+            assert self._name == 'МЕТ.Физика Бурмистров 5ч. Тех'
+            best_name = '10'
+        self._best_name = best_name + " " + self._subject_name
+
         self._raw_data = data
 
     def __str__(self):
         class_unit_id_str = ','.join(str(i) for i in self._class_unit_ids)
         return ' '.join([
-            f'group {cm(self._name, color="green")} ({self._id}) of {len(self._student_ids)} students, see',
+            f'group {cm(self._best_name, color="green")}',
+            f'({self._id}, {len(self._student_ids)} students),',
             cm(f'https://dnevnik.mos.ru/manage/journal?group_id={self._id}&class_unit_id={class_unit_id_str}', color="cyan"),
         ])
 
@@ -59,7 +67,7 @@ class ScheduleItem:
         self._group = group
 
     def __str__(self):
-        return f'Schedule item {self._id} on {self._timestamp.strftime("%d %B %Y, %A, %H:%M")} for {self._group}'
+        return f'Schedule item {cm(self._timestamp.strftime("%d %B %Y, %A, %H:%M"), color="yellow")} ({self._id}) for {self._group}'
 
 
 class Client:
@@ -268,5 +276,5 @@ class Client:
                 schedule_items.append(schedule_item)
                 self._available_lessons_dict[schedule_item._id] = schedule_item
             else:
-                log.warn(f'Skipping schedule item for {cm(schedule_item._raw_data["group_name"], color="red")}')
+                log.warn(f'Skipping schedule item for {cm(schedule_item._raw_data["group_name"], color="red")} as no group found')
         return schedule_items

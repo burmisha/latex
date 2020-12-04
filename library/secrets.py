@@ -10,7 +10,6 @@ cm = library.logging.ColorMessage()
 
 class Token:
     def __init__(self, file):
-        
         if os.path.exists(file):
             with open(file) as f:
                 data = json.load(f)
