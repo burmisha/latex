@@ -1,8 +1,8 @@
-# see https://github.com/search?q=dnevnik.mos.ru&type=repositories`
-import requests
+# see https://github.com/search?q=dnevnik.mos.ru&type=repositories
 import collections
-import re
 import datetime
+import re
+import requests
 
 import logging
 log = logging.getLogger(__name__)
@@ -11,10 +11,12 @@ from library.logging import colorize_json, cm
 import library.secrets
 
 import locale
-locale.setlocale(locale.LC_ALL, ('RU','UTF8'))
+locale.setlocale(locale.LC_ALL, ('RU', 'UTF8'))
 
 Year = collections.namedtuple('Year', ['id', 'name', 'begin_date', 'end_date', 'calendar_id', 'current_year'])
 
+
+BASE_URL = 'https://dnevnik.mos.ru'
 
 class StudentsGroup:
     def __init__(self, data):
@@ -66,13 +68,16 @@ class ScheduleItem:
     def set_group(self, group):
         self._group = group
 
+    def log_link(self):
+        log.info(f'Link: {BASE_URL}/conference/?scheduled_lesson_id={self._id}')
+
     def __str__(self):
         return f'Schedule item {cm(self._timestamp.strftime("%d %B %Y, %A, %H:%M"), color="yellow")} ({self._id}) for {self._group}'
 
 
 class Client:
     def __init__(self, username=None, password=None):
-        self._base_url = 'https://dnevnik.mos.ru'
+        self._base_url = BASE_URL
         self._login(username=username, password=password)
 
         self._current_year = None

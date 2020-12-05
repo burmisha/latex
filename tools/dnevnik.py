@@ -1,8 +1,6 @@
 import library.mesh
 import library.datetools
-from library.logging import colorize_json
-
-import json
+import library.logging
 
 import logging
 log = logging.getLogger(__name__)
@@ -27,6 +25,8 @@ def run(args):
             continue
         if group_filter and schedule_item._group._id != group_filter:
             continue
+        if args.log_links:
+            schedule_item.log_link()
         log.info(schedule_item)
         if schedule_item._id in args.set_all_absent:
             for student_id in schedule_item._group._student_ids:
@@ -55,7 +55,7 @@ def run(args):
         #     'with_entries': True
         # }),
     ]:
-        log.info(f'Got\n{colorize_json(res)}')
+        log.info(f'Got\n{library.logging.colorize_json(res)}')
 
     client._logout()
 
@@ -67,4 +67,5 @@ def populate_parser(parser):
     parser.add_argument('-c', '--class-filter', help='Class filter')
     parser.add_argument('-g', '--group-filter', help='Group filter (by id)', type=int)
     parser.add_argument('--username', help='Username to login', default='burmistrovmo')
+    parser.add_argument('-l', '--log-links', help='Log distant links', action='store_true')
     parser.set_defaults(func=run)
