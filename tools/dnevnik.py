@@ -10,9 +10,12 @@ def run(args):
     class_filter = args.class_filter
     group_filter = args.group_filter
 
+    from_date_days = args.from_date
+    to_date_days = args.to_date
+
     now_delta = library.datetools.NowDelta(default_fmt='%Y-%m-%d')
-    from_date = now_delta.Before(days=args.from_date)
-    to_date = now_delta.After(days=args.to_date)
+    from_date = now_delta.Before(days=from_date_days)
+    to_date = now_delta.After(days=to_date_days)
 
     client = library.mesh.Client(
         username=args.username,
@@ -34,6 +37,15 @@ def run(args):
 
     for _, student in client.get_student_profiles().items():
         log.debug(student)
+
+    marks_now_date = library.datetools.NowDelta(default_fmt='%d.%m.%Y')
+    marks_from_date = marks_now_date.Before(days=from_date_days)
+    marks_to_date = marks_now_date.After(days=to_date_days)
+    for group in client.get_groups():
+        for mark in client.get_marks(from_date=marks_from_date, to_date=marks_to_date, group=client.get_group_by_id(group._id)):
+            student = client.get_student_by_id(mark._student_profile_id)
+            lesson = client.get_schedule_item_by_id(mark._schedule_lesson_id)
+            log.info(f'{student._short_name} got {mark._name} at {lesson}')
 
     for res in [
         # client.get('/acl/api/users', {

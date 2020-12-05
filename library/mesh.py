@@ -75,6 +75,16 @@ class ScheduleItem:
         return f'Schedule item {cm(self._timestamp.strftime("%d %B %Y, %A, %H:%M"), color="yellow")} ({self._id}) for {self._group}'
 
 
+class Mark:
+    def __init__(self, data):
+        self._id = data['id']
+        self._name = data['name']
+        self._student_profile_id = data['student_profile_id']
+        self._schedule_lesson_id = data['schedule_lesson_id']
+        assert self._name in ['2', '3', '4', '5']
+        self._raw_data = data
+
+
 class Client:
     def __init__(self, username=None, password=None):
         self._base_url = BASE_URL
@@ -292,3 +302,20 @@ class Client:
             else:
                 log.warn(f'Skipping schedule item for {cm(schedule_item._raw_data["group_name"], color="red")} as no group found')
         return schedule_items
+
+    def get_marks(self, from_date=None, to_date=None, group=None):
+        log.info(f'Getting marks [{from_date}, {to_date}] for {group}')
+        assert re.match(r'\d{2}.\d{2}.20\d{2}', from_date), f'Invalid from_date format: {from_date}'
+        assert re.match(r'\d{2}.\d{2}.20\d{2}', to_date), f'Invalid to_date format: {to_date}'
+        marks_items = self.get('/core/api/marks', params={
+            'created_at_from': from_date,
+            'created_at_to': to_date,
+            'group_ids': ','.join(str(i) for i in [group._id] + group._subgroup_ids),
+            'page': 1,
+            'per_page': 1000,
+            'pid': self.get_teacher_id(),
+        })
+        assert len(marks_items) < 1000, 'Too many marks: reduce dates or increase limit'
+        marks = [Mark(item) for item in marks_items]
+        marks.sort(key=lambda x: (x._schedule_lesson_id, x._student_profile_id))
+        return marks
