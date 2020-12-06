@@ -329,7 +329,6 @@ class DocxToPdf(object):
 class PdfToPdf(object):
     '''
     https://apple.stackexchange.com/questions/99210/mac-os-x-how-to-merge-pdf-files-in-a-directory-according-to-their-file-names
-    $ brew install poppler
     '''
 
     def __init__(self, source_file):
