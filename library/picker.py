@@ -1,5 +1,4 @@
-import library.logging
-cm = library.logging.ColorMessage()
+from library.logging import log_list, cm
 
 import logging
 log = logging.getLogger(__name__)
@@ -38,14 +37,14 @@ class KeyPicker:
         flt_key, matched_keys = self._get_matched_keys(flt)
         if len(matched_keys) > 1:
             keys = [self._keys[key] for key in matched_keys]
-            keys = library.logging.log_list(sorted(keys))
+            keys = log_list(sorted(keys))
             log.warning(f'Too many matches for {flt}:{keys}')
         elif len(matched_keys) == 1:
             key = matched_keys[0]
             log.info(f"Found '{cm(self._keys[key], color='cyan')}' (as '{key}' for '{flt_key}')")
             return self._options[key]
         else:
-            keys = library.logging.log_list(sorted(self._keys.values()))
+            keys = log_list(sorted(self._keys.values()))
             log.warning(f'No search results for {flt}\nAvailable ones:{keys}')
 
         return None

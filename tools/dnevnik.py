@@ -2,11 +2,15 @@ import library.mesh
 import library.datetools
 import library.logging
 
+import locale
+
 import logging
 log = logging.getLogger(__name__)
 
 
 def run(args):
+    locale.setlocale(locale.LC_ALL, ('RU', 'UTF8'))
+
     class_filter = args.class_filter
     group_filter = args.group_filter
 

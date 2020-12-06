@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import tools
+from library.logging import cm
 
 import argparse
 import time
@@ -17,7 +18,6 @@ def CreateArgumentsParser():
 
     loggingGroup = parser.add_argument_group('Logging arguments')
     defaultLogFormat = ' '.join([
-        # '%(relativeCreated)d',
         '%(asctime)s.%(msecs)03d',
         '%(name)15s:%(lineno)-4d',
         '%(levelname)-7s',
@@ -60,18 +60,18 @@ def main():
     logFormat = args.log_format.replace('\t', ' ')
     logFormat = logFormat.replace(' ', {'space': ' ', 'tab': '\t'}[args.log_separator])
     logLevel = logging.DEBUG if args.verbose else logging.INFO
-    logging.basicConfig(level=logLevel, format=logFormat, datefmt='%H:%M:%S')
+    logging.basicConfig(level=logLevel, format=logFormat, datefmt='%T')
 
     log.info('Start')
     start_time = time.time()
     try:
         args.func(args)
         finish_time = time.time()
-        log.info('Finished in %.2f seconds', finish_time  - start_time)
+        log.info('Finished in %.2f seconds', finish_time - start_time)
     except Exception:
-        log.exception('Failed')
+        log.exception(cm('Failed', bg='red'))
         finish_time = time.time()
-        log.info('Failed in %.2f seconds', finish_time  - start_time)
+        log.info('Failed in %.2f seconds', finish_time - start_time)
 
 
 if __name__ == '__main__':

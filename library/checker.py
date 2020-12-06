@@ -10,8 +10,7 @@ import re
 import logging
 log = logging.getLogger(__name__)
 
-import library.logging
-cm = library.logging.ColorMessage()
+from library.logging import cm, color, log_list
 
 
 class ProperAnswer:
@@ -89,20 +88,20 @@ class PupilAnswer:
         self._best_answer = list(ans for ans in proper_answers if ans.Value() == self._result_max)[0]
         self._result = max([ans.Value() for ans in proper_answers if ans.IsOk(self, pupil)] + [0])
 
-        color = None
+        current_color = None
         best_color = None
         if self._result == self._result_max:
-            color = library.logging.color.Green
+            current_color = color.Green
         else:
             if self._result > 0:
-                color = library.logging.color.Yellow
+                current_color = color.Yellow
             else:
-                color = library.logging.color.Red
+                current_color = color.Red
 
             if self._value and len(self._best_answer.Printable(pupil)) >= 2:
-                best_color = library.logging.color.Cyan
+                best_color = color.Cyan
 
-        self._color = color
+        self._color = current_color
         self._best_color = best_color
 
 
@@ -250,11 +249,11 @@ class Checker:
                 for answer_str, count in stats.most_common():
                     pupil_answer = PupilAnswer(answer_str)
                     pupil_answer.Check(self._proper_answers_lists[index], self._pupils._me)
-                    stats_line.append(f'{cm(answer_str, color=pupil_answer._color)}: {cm(count, color=library.logging.color.Cyan)}')
+                    stats_line.append(f'{cm(answer_str, color=pupil_answer._color)}: {cm(count, color=color.Cyan)}')
                 stats_line = ",  ".join(stats_line)
                 log.info(f'Task {index + 1:>2}: {stats_line}.')
 
             log.info(f'Results: {", ".join("%s: %d" % (k, v) for k, v in sorted(self._all_results.items()))}')
             log.info(f'Marks: {", ".join("%s: %d" % (k, v) for k, v in sorted(self._all_marks.items()))}')
             not_found = set(p.GetFullName() for p in self._pupils.Iterate()) - found_pupils
-            log.info(f'Not found:{library.logging.log_list(sorted(not_found))}')
+            log.info(f'Not found:{log_list(sorted(not_found))}')

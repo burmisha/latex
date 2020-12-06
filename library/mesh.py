@@ -10,9 +10,6 @@ log = logging.getLogger(__name__)
 from library.logging import colorize_json, cm
 import library.secrets
 
-import locale
-locale.setlocale(locale.LC_ALL, ('RU', 'UTF8'))
-
 Year = collections.namedtuple('Year', ['id', 'name', 'begin_date', 'end_date', 'calendar_id', 'current_year'])
 
 

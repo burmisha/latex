@@ -4,8 +4,7 @@ import json
 import logging
 log = logging.getLogger(__name__)
 
-import library.logging
-cm = library.logging.ColorMessage()
+from library.logging import cm
 
 
 class Token:
@@ -13,7 +12,7 @@ class Token:
         if os.path.exists(file):
             with open(file) as f:
                 data = json.load(f)
-            log.warn(f'Loaded secrets from: {cm(file, color="green")}')
+            log.warn(f'Loaded secrets from {cm(file, color="green")}')
         else:
             data = {}
             log.warn(f'Could not load secrets from missing file: {cm(file, bg="red")}')
