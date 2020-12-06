@@ -41,9 +41,9 @@ class ColorMessage:
             if color:
                 message += self.ColorTemplate % (30 + self._known_colors[color.lower()])
             if bg:
-                message = self.ColorTemplate % (40 + self._known_colors[bg.lower()])
+                message += self.ColorTemplate % (40 + self._known_colors[bg.lower()])
             if bold:
-                message = self.BoldTemplate
+                message += self.BoldTemplate
             message += str(line)
             if color or bg or bold:
             	message += self.ResetTemplate
