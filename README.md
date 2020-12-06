@@ -17,7 +17,7 @@ $ pip3 install -e git+git://github.com/ojii/pymaging-png.git#egg=pymaging-png
 $ pip3 install -r requirements.txt
 
 $ . venv/bin/activate
-$ ./generate.py --help
+$ ./run.py --help
 ```
 
 2012–2020 burmisha
