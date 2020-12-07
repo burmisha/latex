@@ -99,11 +99,11 @@ def main():
     try:
         args.func(args)
         finish_time = time.time()
-        log.info('Finished in %.2f seconds', finish_time - start_time)
+        log.info(cm('Finished in %.2f seconds', color='green'), finish_time - start_time)
     except Exception:
         log.exception(cm('Failed', bg='red'))
         finish_time = time.time()
-        log.info('Failed in %.2f seconds', finish_time - start_time)
+        log.error(cm('Failed in %.2f seconds', bg='red'), finish_time - start_time)
 
 
 if __name__ == '__main__':
