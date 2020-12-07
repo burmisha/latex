@@ -9,6 +9,38 @@ import time
 import logging
 log = logging.getLogger(__name__)
 
+DEFAULT_LOG_FIELDS = [
+    '%(asctime)s.%(msecs)03d',
+    '%(name)15s:%(lineno)-4d',
+    '%(levelname)-7s',
+    '%(message)s',
+]
+
+LOG_LEVELS = {
+    'critical': logging.CRITICAL,
+    'error': logging.ERROR,
+    'warning': logging.WARNING,
+    'info': logging.INFO,
+    'debug': logging.DEBUG,
+}
+
+
+def get_log_format(args):
+    log_separator = {'space': ' ', 'tab': '\t'}[args.log_separator]
+    log_fields = args.log_field or DEFAULT_LOG_FIELDS
+    return log_separator.join(log_fields)
+
+
+def get_log_level(args):
+    if args.warning:
+        return logging.WARNING
+    elif args.verbose:
+        return logging.DEBUG
+    elif args.log_level:
+        return LOG_LEVELS[args.log_level.lower()]
+    else:
+        return logging.INFO
+
 
 def CreateArgumentsParser():
     parser = argparse.ArgumentParser(
@@ -16,16 +48,15 @@ def CreateArgumentsParser():
         formatter_class=argparse.ArgumentDefaultsHelpFormatter,
     )
 
-    loggingGroup = parser.add_argument_group('Logging arguments')
-    defaultLogFormat = ' '.join([
-        '%(asctime)s.%(msecs)03d',
-        '%(name)15s:%(lineno)-4d',
-        '%(levelname)-7s',
-        '%(message)s',
-    ])
-    loggingGroup.add_argument('--log-format', help='Logging format', default=defaultLogFormat)
-    loggingGroup.add_argument('--log-separator', help='Logging string separator', choices=['space', 'tab'], default='space')
-    loggingGroup.add_argument('-v', '--verbose', help='Enable debug logging', action='store_true')
+    log_format_group = parser.add_argument_group('Logging arguments')
+    log_format_group.add_argument('--log-field', help='Logging fields, if missing will use default ones', default=[], action='append')
+    log_format_group.add_argument('--log-separator', help='Logging string separator', choices=['space', 'tab'], default='space')
+    log_format_group.add_argument('--log-datefmt', help='Logging default time format', default='%T')
+
+    log_level_group = parser.add_mutually_exclusive_group()
+    log_level_group.add_argument('-v', '--verbose', help='Enable debug logging', action='store_true')
+    log_level_group.add_argument('-w', '--warning', help='Enable warning logging only', action='store_true')
+    log_level_group.add_argument('--log-level', help='Set log level', choices=LOG_LEVELS.keys(), default=None)
 
     subparsers = parser.add_subparsers()
     for mode_name, help_message, populate_module in [
@@ -57,10 +88,11 @@ def main():
     parser = CreateArgumentsParser()
     args = parser.parse_args()
 
-    logFormat = args.log_format.replace('\t', ' ')
-    logFormat = logFormat.replace(' ', {'space': ' ', 'tab': '\t'}[args.log_separator])
-    logLevel = logging.DEBUG if args.verbose else logging.INFO
-    logging.basicConfig(level=logLevel, format=logFormat, datefmt='%T')
+    logging.basicConfig(
+        level=get_log_level(args),
+        format=get_log_format(args),
+        datefmt=args.log_datefmt,
+    )
 
     log.info('Start')
     start_time = time.time()
