@@ -14,7 +14,7 @@ log = logging.getLogger(__name__)
 )
 @answer_test('{h:TestAnswer}')
 @arg(matter__rho__p=[
-    (m, '\\rho_{{\\text{{{m}.}}}} = {rho} кг/м^3'.format(m=m[0], rho=rho), 'p = %d кПа' % p) for m, rho, p in [
+    (m, '\\rho_{{\\text{{{m}}}}} = {rho} кг/м^3'.format(m=m[0], rho=rho), 'p = %d кПа' % p) for m, rho, p in [
         ('воды', 1000, 50),
         ('воды', 1000, 100),
         ('воды', 1000, 150),
@@ -56,9 +56,9 @@ class Ch_6_8(VariantTask):
 
 
 @text('''
-    В сосуд с вертикальными стенками и площадью поперечного (горизонтального) сечения {S:Task|e}
-    налили воду. На сколько увеличится {what}, если 
-    на поверхность воды ещё будет плавать тело массой {m:Value|e}.
+    В сосуд с вертикальными стенками и площадью горизонтального поперечного сечения {S:Task|e}
+    налили воду. На сколько увеличится {what}, если
+    на поверхности воды ещё будет плавать тело массой {m:Value|e}.
     Принять {Consts.p_atm:Task|e}, {Consts.g_ten:Task|e}.
 ''')
 @answer_short(
@@ -82,5 +82,79 @@ class Ch_6_10(VariantTask):
         }[what]
         return dict(
             ans=ans,
+        )
+
+
+@text('''
+    В два сообщающихся сосуда налита вода. В один из соcудов наливают {matter} так,
+    что столб этой жидкости имеет высоту {h1:Value:e}.
+    На сколько теперь уровень воды в этом сосуде ниже, чем в другом?
+    Ответ выразите в сантиметрах. {Consts.water.rho:Task|e}, {rho:Task:e}.
+''')
+@answer_short(
+    '{h2:L} = {h1:L} \\frac{ {rho:L} }{ {Consts.water.rho:L} } '
+    '= {h1:Value|cdot} \\frac{ {rho:Value} }{ {Consts.water.rho:Value} } '
+    '= {h2:Value}'
+)
+@answer_test('{h2:TestAnswer}')
+@arg(matter__rho__h1=[
+    (m, '\\rho_{{\\text{{{m}}}}} = {rho} кг/м^3'.format(m=m[0], rho=rho), 'h_1 = %d см' % h) for m, rho, h in [
+        ('масло', 900, 90),
+        ('масло', 900, 80),
+        ('масло', 900, 70),
+        ('масло', 900, 60),
+        ('масло', 900, 50),
+        ('масло', 900, 40),
+        ('масло', 900, 30),
+        ('масло', 900, 20),
+        ('нефть', 800, 5),
+        ('нефть', 800, 10),
+        ('нефть', 800, 15),
+        ('нефть', 800, 20),
+        ('нефть', 800, 25),
+        ('нефть', 800, 30),
+        ('нефть', 800, 40),
+    ]
+])
+class Ch_6_16(VariantTask):
+    def GetUpdate(self, h1=None, rho=None, Consts=None, **kws):
+        return dict(
+            h2='h_2 = %d см' % (h1.Value * rho.Value / Consts.water.rho.Value),
+        )
+
+
+@text('''
+    В два сообщающихся сосуда сечений {S1:Value:e} и {S2:Value:e} налита вода.
+    Оба сосуда закрыты лёгкими поршнями и находятся в равновесии.
+    На больший из поршней кладут груз массой {m:Value:e}.
+    Определите, на сколько поднимется меньший поршень.
+    Ответ выразите в сантиметрах. {Consts.water.rho:Task|e}.
+''')
+@answer_align([
+    '{S1:L}h_1 &= {S2:L}h_2 \\implies h_1 = h_2 \\frac{ {S2:L} }{ {S1:L} } ',
+    '\\frac{ {m:L}{Consts.g_ten:L} }{ {S1:L} } &= {Consts.water.rho:L}{Consts.g_ten:L}(h_1 + h_2) '
+    '= {Consts.water.rho:L}{Consts.g_ten:L} \\cdot h_2 \\cbr{ 1 + \\frac{ {S2:L} }{ {S1:L} } }',
+    'h_2 &= \\frac{ {m:L}{Consts.g_ten:L} }{ {S1:L}{Consts.water.rho:L}{Consts.g_ten:L} } \\cdot'
+    '\\frac{ {S1:L} }{ {S1:L} + {S2:L} } = \\frac{ {m:L} }{ {Consts.water.rho:L}({S1:L} + {S2:L}) }'
+    ' = {h2:Value}',
+])
+@answer_test('{h2:TestAnswer}')
+@arg(m=['m = %d г' % m for m in [200, 300, 400, 500]])
+@arg(S1__S2=[
+    ('S_1 = %d см^2' % S1, 'S_2 = %d см^2' % S2) for S1, S2 in [
+        (45, 5),
+        (40, 10),
+        (32, 18),
+        (30, 20),
+        (90, 10),
+        (80, 20),
+        (64, 36),
+        (60, 40),
+    ]
+])
+class Ch_6_20(VariantTask):
+    def GetUpdate(self, S1=None, S2=None, m=None, Consts=None, **kws):
+        return dict(
+            h2='h_2 = %d см' % (100 * 10 * m.Value / Consts.water.rho.Value / (S1.Value + S2.Value)),
         )
 

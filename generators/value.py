@@ -344,6 +344,7 @@ assert '{:Value}'.format(UnitValue('m = 1.67 10^-27 кг')) == '1{,}67 \\cdot 10
 assert '{:Value}'.format(UnitValue('T = 1.7 суток')) == '1{,}7\\,\\text{суток}'
 assert '{:Value}'.format(UnitValue('12 км / ч')) == '12\\,\\frac{\\text{км}}{\\text{ч}}'
 assert '{:Value}'.format(UnitValue('50 км / ч')) == '50\\,\\frac{\\text{км}}{\\text{ч}}'
+assert '{:TestAnswer}'.format(UnitValue('4 см')) == '4'
 
 
 class Matter(object):
@@ -363,7 +364,7 @@ class Consts(object):
     h = UnitValue('h = 6.626 10^{-34} Дж с')
     c = UnitValue('c = 3 10^{8} м / с', precision=3, viewPrecision=1)
     g_ten = UnitValue('g = 10 м / с^2', precision=2)
-    p_atm = UnitValue('p_{\\text{aтм.}} = 100 кПа')
+    p_atm = UnitValue('p_{\\text{aтм}} = 100 кПа')
     aem = UnitValue('\\text{а.е.м.} = 1.66054 10^-27 кг')
     k = UnitValue('k = 9 10^9 Н м^2 / Кл^2')
 
@@ -372,7 +373,7 @@ class Consts(object):
         c='4200 Дж / кг К',
         lmbd='340 кДж / кг',
         L='2.3 МДж / кг',
-        rho='\\rho_{\\text{вода}} = 1000 кг / м^3',
+        rho='\\rho_{\\text{в}} = 1000 кг / м^3',
     )
     lead = Matter(
         name='свинец',
