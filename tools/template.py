@@ -87,7 +87,10 @@ def runTemplate(args):
         #                                  '2020-11-12-9', '2020-11-12-10', '2020-11-13-10',  # week 2–3 is missing some lessons
         # '2020-11-17-10', '2020-11-17-9', '2020-11-19-9', '2020-11-19-8',                    # week 2–5
         # '2020-11-24-10', '2020-11-24-9', '2020-11-26-9', '2020-11-26-10', '2020-11-27-10'  # week 3–1
-        '2020-12-01-10', '2020-12-01-9', '2020-12-03-9', '2020-12-03-10', '2020-12-04-10'  # week 3–2
+        # '2020-12-01-10', '2020-12-01-9', '2020-12-03-9', '2020-12-03-10', '2020-12-04-10'  # week 3–2
+        '2020-12-08-10', '2020-12-08-9', '2020-12-10-9', '2020-12-10-10', '2020-12-11-10'  # week 3–3
+        # '2020-12-15-10', '2020-12-15-9', '2020-12-17-9', '2020-12-17-10', '2020-12-18-10'  # week 3–4
+        # '2020-12-22-10', '2020-12-22-9', '2020-12-24-9', '2020-12-24-10', '2020-12-25-10'  # week 3–5
     ]:
         if nowFmt <= dateClass <= futureFmt:
             distantCopier.CreateFile(f'{dateClass} - с урока.docx')
@@ -98,34 +101,35 @@ def runTemplate(args):
     for dir_name in library.files.walkFiles(library.files.Location.Zoom, dirsOnly=True, regexp='.*2198986972$'):
         zoomRenamer.RenameOne(dir_name)
 
-    yesterday = nowDelta.Before(days=1, fmt='%F')
-    monthAgo = nowDelta.Before(days=32, fmt='%F')
+    last_date = nowDelta.Before(days=0 if args.today else 1, fmt='%F')
+    first_date = nowDelta.Before(days=32, fmt='%F')
     fileMover = library.files.FileMover()
     fileMover.Move(
         source=library.location.ipad('2020-21 Кружок'),
         destination=library.location.udr('12 - кружок - 9-10-11'),
         re='.*ужок.docx$',
-        matching=lambda b: monthAgo <= b[:10] <= yesterday,
+        matching=lambda b: first_date <= b[:10] <= last_date,
     )
     fileMover.Move(
         source=library.location.ipad('2020 дистант'),
         destination=library.location.udr('10 класс', '2020-21 10АБ Физика - Архив'),
         re='^....-..-..-10 .* с урока.*\.docx$',
-        matching=lambda b: monthAgo <= b[:10] <= yesterday,
+        matching=lambda b: first_date <= b[:10] <= last_date,
     )
     fileMover.Move(
         source=library.location.ipad('2020 дистант'),
         destination=library.location.udr('9 класс', '2020-21 9М Физика - Архив'),
         re='^....-..-..-9 .* с урока.*\.docx$',
-        matching=lambda b: monthAgo <= b[:10] <= yesterday,
+        matching=lambda b: first_date <= b[:10] <= last_date,
     )
     fileMover.Move(
         source=library.location.ipad('2020 дистант'),
         destination=library.location.udr('8 класс', '2020-21 Архив'),
         re='^....-..-..-8 .* с урока.*\.docx$',
-        matching=lambda b: monthAgo <= b[:10] <= yesterday,
+        matching=lambda b: first_date <= b[:10] <= last_date,
     )
 
 
 def populate_parser(parser):
+    parser.add_argument('-t', '--today', help='Today appers are ready, move them too', action='store_true')
     parser.set_defaults(func=runTemplate)
