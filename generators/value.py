@@ -350,7 +350,7 @@ class Matter(object):
     def __init__(self, name=None, **kws):
         self.Name = name
         for key, value in kws.items():
-            assert key in ['c', 'lmbd', 'L']
+            assert key in ['rho', 'c', 'lmbd', 'L']
             setattr(self, key, UnitValue(value))
 
 
@@ -363,6 +363,7 @@ class Consts(object):
     h = UnitValue('h = 6.626 10^{-34} Дж с')
     c = UnitValue('c = 3 10^{8} м / с', precision=3, viewPrecision=1)
     g_ten = UnitValue('g = 10 м / с^2', precision=2)
+    p_atm = UnitValue('p_{\\text{aтм.}} = 100 кПа')
     aem = UnitValue('\\text{а.е.м.} = 1.66054 10^-27 кг')
     k = UnitValue('k = 9 10^9 Н м^2 / Кл^2')
 
@@ -371,6 +372,7 @@ class Consts(object):
         c='4200 Дж / кг К',
         lmbd='340 кДж / кг',
         L='2.3 МДж / кг',
+        rho='\\rho_{\\text{вода}} = 1000 кг / м^3',
     )
     lead = Matter(
         name='свинец',

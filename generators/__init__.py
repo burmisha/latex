@@ -1,4 +1,5 @@
 import generators.electricity
+import generators.gidro
 import generators.kinematics
 import generators.koleb
 import generators.magnet
