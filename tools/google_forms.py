@@ -158,6 +158,7 @@ def get_all_forms():
         ),
         ('2020.12.08 9М - Колебания и волны - 1', '11:05', 'ratatouille', [abv_choices(8)]),
         ('2020.12.10 9М - Колебания и волны - 2', '11:05', 'incredibles', [abv_choices(8)]),
+        ('2020.12.11 10АБ - Статика и гидростатика - 2', '11:05', 'minions', [any_text(5)]),
     ]
     for title, up_to, image, questions in forms_config:
         form_generator = TestFormGenerator(title=title, upTo=up_to, image=image)

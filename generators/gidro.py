@@ -32,14 +32,19 @@ log = logging.getLogger(__name__)
 ])
 class Ch_6_3(VariantTask):
     def GetUpdate(self, matter=None, rho=None, p=None, Consts=None, **kws):
+        value = 1000 * p.Value / Consts.g_ten.Value / rho.Value
+        if int(value) == value:
+            h = 'h = %d м' % value
+        else:
+            h = 'h = %.1f м' % value
         return dict(
-            h='h = %d м' % (1000 * p.Value / Consts.g_ten.Value / rho.Value),
+            h=h,
         )
 
 
 @text('''
     На какой глубине полное давление пресной воды превышает атмосферное в {N} раз?
-    Принять {Consts.p_atm:Task|e}, {Consts.g_ten:Task|e}.
+    Принять {Consts.p_atm:Task|e}, {Consts.g_ten:Task|e}, {Consts.water.rho:Task|e}.
 ''')
 @answer_short(
     'p = {Consts.water.rho:L} {Consts.g_ten:L} {h:L} + {Consts.p_atm:L} = {N} {Consts.p_atm:L} \\implies '
@@ -62,8 +67,8 @@ class Ch_6_8(VariantTask):
     Принять {Consts.p_atm:Task|e}, {Consts.g_ten:Task|e}.
 ''')
 @answer_short(
-    '\\Delta F = {m:L}{Consts.g_ten:L},'
-    '\\Delta p = \\frac{ {m:L}{Consts.g_ten:L} }{S:L|s},'
+    '\\Delta F = {m:L}{Consts.g_ten:L}, '
+    '\\Delta p = \\frac{ \\Delta F }{S:L|s} = \\frac{ {m:L}{Consts.g_ten:L} }{S:L|s}, '
     '{ans:Task}.'
 )
 @answer_test('{ans:TestAnswer}')
@@ -92,6 +97,7 @@ class Ch_6_10(VariantTask):
     Ответ выразите в сантиметрах. {Consts.water.rho:Task|e}, {rho:Task:e}.
 ''')
 @answer_short(
+    '{rho:L}{Consts.g_ten:L}{h1:L} = {Consts.water.rho:L}{Consts.g_ten:L}{h2:L} \\implies '
     '{h2:L} = {h1:L} \\frac{ {rho:L} }{ {Consts.water.rho:L} } '
     '= {h1:Value|cdot} \\frac{ {rho:Value} }{ {Consts.water.rho:Value} } '
     '= {h2:Value}'

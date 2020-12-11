@@ -286,8 +286,8 @@ class UnitValue(object):
 
             value_str = self.get_value_str()
             if main_format == 'TestAnswer':
-                assert str(int(self._precisionFmt2)) == self._precisionFmt2
-                return self._precisionFmt2
+                # assert str(int(self._precisionFmt2)) == self._precisionFmt2
+                return self._precisionFmt2.replace('.', r'[\.,]')
             elif main_format == 'Task':
                 with_letter = True
                 with_value = True
@@ -345,6 +345,7 @@ assert '{:Value}'.format(UnitValue('T = 1.7 суток')) == '1{,}7\\,\\text{с�
 assert '{:Value}'.format(UnitValue('12 км / ч')) == '12\\,\\frac{\\text{км}}{\\text{ч}}'
 assert '{:Value}'.format(UnitValue('50 км / ч')) == '50\\,\\frac{\\text{км}}{\\text{ч}}'
 assert '{:TestAnswer}'.format(UnitValue('4 см')) == '4'
+assert '{:TestAnswer}'.format(UnitValue('2.5 м')) == r'2[\.,]5', '{:TestAnswer}'.format(UnitValue('2.5 м'))
 
 
 class Matter(object):
