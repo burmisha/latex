@@ -1,6 +1,5 @@
 import library
 
-import contextlib
 import os
 import time
 import re
@@ -12,7 +11,6 @@ from PIL import Image
 from io import StringIO
 from io import BytesIO
 
-from selenium import webdriver
 from selenium.common.exceptions import WebDriverException
 from retry import retry
 
@@ -117,20 +115,6 @@ class PngJoiner(object):
             self.Reset(inc=True)
 
 
-@contextlib.contextmanager
-def firefox_driver():
-    driver = webdriver.Firefox()
-    try:
-        yield driver
-    except Exception as e:
-        log.error(f'Closing browser on {e!r}: {e}')
-        driver.quit()
-        raise
-    else:
-        log.info('Closing browser')
-        driver.quit()
-
-
 class SdamGia(object):
     def __init__(self, url, count=None, driver=None):
         self._url = url
@@ -215,7 +199,7 @@ class SdamGia(object):
                     break
 
         count = 0
-        while count != totalCount:
+        while count < totalCount:
             log.info(f'Loaded {count} of {totalCount} problems, scrolling')
             self._driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
             time.sleep(1)
@@ -245,7 +229,7 @@ def run(args):
         ('Математика-База', 'https://mathb-ege.sdamgia.ru', 20),
         ('Информатика', 'https://inf-ege.sdamgia.ru', 27),
     ]
-    with firefox_driver() as driver:
+    with library.firefox.get_driver() as driver:
         for subject, link, count in config:
             rootPath = library.files.UdrPath('Материалы - Решу ЕГЭ - %s' % subject)
             rootPath(create_missing_dir=True)

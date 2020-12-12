@@ -3,6 +3,7 @@ import library.convert
 import library.datetools
 import library.download
 import library.files
+import library.firefox
 import library.formatter
 import library.google_forms
 import library.location

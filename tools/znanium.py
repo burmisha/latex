@@ -9,7 +9,6 @@ log = logging.getLogger(__name__)
 from PIL import Image
 from io import BytesIO
 
-from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 
 
@@ -41,9 +40,7 @@ class Znanium(object):
     def SaveAllPages(self, pageCount=None, filenameFmt=None, descDict={}):
         assert filenameFmt.endswith('.png'), 'Invalid filename format: %s' % filenameFmt
 
-        log.info('Starting Firefox')
-        driver = webdriver.Firefox()
-        try:
+        with library.firefox.get_driver() as driver:
             # authorize
             driver.get(self.__BookUrl)
             for element in driver.find_elements_by_class_name('accordeon__toggle'):
@@ -77,13 +74,6 @@ class Znanium(object):
                     decodedPng = img.get_attribute('src').split(',', 1)[1].decode('base64')
                     imageJoiner.AddImage(decodedPng)
                 imageJoiner.Save()
-        except:
-            log.error('Exiting browser')
-            driver.quit()
-            raise
-        else:
-            log.info('Exiting browser')
-            driver.quit()
 
 
 def run(args):
