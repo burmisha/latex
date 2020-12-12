@@ -102,8 +102,8 @@ class YFAnswer:
 
 
 def run(args):
-    log.info('Delete old versions at https://disk.yandex.ru/client/disk/Yandex.Forms')
     log.info('Forse JSON update at https://forms.yandex.ru/admin/5fd491a3dfc5aebea76233ef/answers')
+    log.info('Delete old versions at https://disk.yandex.ru/client/disk/Yandex.Forms')
 
     answer_location = library.location.ya_disk('Yandex.Forms')
     candidates = library.files.walkFiles(answer_location, regexp=r'.*202021 Физика 554.*\.json')

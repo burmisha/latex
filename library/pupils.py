@@ -13,10 +13,9 @@ from library.logging import cm
 
 
 class Pupil(object):
-    def __init__(self, name=None, surname=None, uniqueId=None):
+    def __init__(self, name=None, surname=None):
         self.Name = name
         self.Surname = surname
-        self.UniqueId = uniqueId or ('{} {}'.format(name, surname))
 
     def GetFullName(self, surnameFirst=False):
         if surnameFirst:
@@ -26,10 +25,10 @@ class Pupil(object):
         return ' '.join(part for part in parts if part)
 
     def GetRandomSeedPart(self):
-        return '{self.Name} {self.Surname}'.format(self=self)
+        return f'{self.Name} {self.Surname}'
 
     def __str__(self):
-        return '{self.Name} {self.Surname}'.format(self=self)
+        return f'{self.Name} {self.Surname}'
 
     def __lt__(self, other):
         if self.Surname < other.Surname:
@@ -101,7 +100,7 @@ class NameLookup:
 class Pupils(object):
     def __init__(self, pupils_id=None, pupils=[], letter=None, grade=None, add_me=None, only_me=None, year=None):
         self._id = pupils_id
-        self.Pupils = pupils
+        self._pupils_list = pupils
         self._me = Pupil(name='Михаил', surname='Бурмистров')
         self.Letter = letter
         self.Grade = grade
@@ -112,6 +111,7 @@ class Pupils(object):
         assert isinstance(self.Grade, int)
         assert 6 <= self.Grade <= 11
         self.LatinLetter = {
+            'А1': 'A1',
             'А': 'A',
             'Т': 'T',
             'Л': 'L',
@@ -128,7 +128,7 @@ class Pupils(object):
         if self._add_me or add_me:
             yield self._me
         if self._only_me is None or not only_me:
-            for pupil in self.Pupils:
+            for pupil in self._pupils_list:
                 yield pupil
 
     def FindByName(self, name):
@@ -346,50 +346,39 @@ class NamesPicker:
                 cfg[class_name].append(name)
 
         self._key_picker = library.picker.KeyPicker(key=library.picker.letters_key)
-        for key, names in cfg.items():
-            pupils = []
+        for pupils_id, names in cfg.items():
+            pupils_list = []
             for fullName in names:
                 name, surname = fullName.split(' ')
-                pupils.append(Pupil(name=name, surname=surname))
-            self._key_picker.add(key, pupils)
+                pupils_list.append(Pupil(name=name, surname=surname))
+
+            start_year, class_id, letter = pupils_id.split('-')
+            grade = int(''.join(s for s in class_id if s.isdigit()))
+            pupils = Pupils(
+                pupils_id=pupils_id,
+                pupils=pupils_list,
+                letter=letter,
+                grade=grade,
+                add_me=True,
+                only_me=False,
+                year=int(start_year),
+            )
+            self._key_picker.add(pupils_id, pupils)
 
     def get(self, key):
         return self._key_picker.get(key)
-
-    def get_original_key(self, key):
-        return self._key_picker.get_original_key(key)
 
 
 names_picker = NamesPicker(classes_config)
 
 
-def getPupils(key, addMyself=False, onlyMe=False):
-    pupils = names_picker.get(key)
-    if not pupils:
-        return None
+def get_class_from_string(value, addMyself=False, onlyMe=False):
+    assert isinstance(value, str), f'Trying to search not by str: {value}'
+    assert ' ' in value, f'No space in class name: {value}'
 
-    original = names_picker.get_original_key(key)
-    start_year, class_id, letter = original.split('-')
-    start_year = int(start_year)
-    grade = int(''.join(s for s in class_id if s.isdigit()))
-
-    log.debug(f'Returning {len(pupils)} pupils from {original} (search key: {key})')
-
-    return Pupils(
-        pupils_id=original,
-        pupils=pupils,
-        letter=letter,
-        grade=grade,
-        add_me=addMyself,
-        only_me=onlyMe,
-        year=start_year,
-    )
-
-
-def get_class_from_string(value, *args, **kwargs):
-    assert isinstance(value, str)
     parts = value.split()
     date_part, class_part = parts[0], parts[1]
+
     year = int(date_part[:4])
     if re.match(r'20\d\d[\.-]\d{2}[\.-]\d{2}', date_part):
         if int(date_part[5:7]) <= 8:  # Aug
@@ -399,4 +388,9 @@ def get_class_from_string(value, *args, **kwargs):
     else:
         raise RuntimeError(f'Could not guess class from {value}')
 
-    return getPupils(f'{year}-{class_part}', *args, **kwargs)
+    key = f'{year} {class_part}'
+    pupils = names_picker.get(key)
+    assert pupils
+
+    log.debug(f'Returning {len(pupils._pupils_list)} pupils from {pupils._id} (search key: {key})')
+    return pupils
