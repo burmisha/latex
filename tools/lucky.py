@@ -15,7 +15,7 @@ def getLucky(grade=None, count=None, seed=None):
     if count:
         pupilsList = pupilsList[:count]
     for index, pupil in enumerate(pupilsList, 1):
-        log.info(f'Lucky person {index:2d}:  {pupil}')
+        log.info(f'  {index:2d}:  {pupil}')
     return None
 
 

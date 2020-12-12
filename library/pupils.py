@@ -397,5 +397,5 @@ def get_class_from_string(value, addMyself=False, onlyMe=False):
     pupils = names_picker.get(key)
     assert pupils
 
-    log.info(f'Got {pupils} (search by: {key!r})')
+    log.debug(f'Got {pupils} (search by: {key!r})')
     return pupils

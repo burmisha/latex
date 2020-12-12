@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 import tools
-from library.logging import cm
+from library.logging import cm, color
 
 import argparse
 import time
@@ -10,11 +10,13 @@ import logging
 log = logging.getLogger('main')
 
 DEFAULT_LOG_FIELDS = [
-    '%(asctime)s.%(msecs)03d',
+    # '%(asctime)s.%(msecs)03d',
     '%(name)15s:%(lineno)-4d',
-    '%(levelname)-7s',
-    '%(message)s',
+    # '%(levelname)-7s',
+    ' %(message)s',
 ]
+
+DEFAULT_LOG_LEVEL = 'info'
 
 LOG_LEVELS = {
     'critical': logging.CRITICAL,
@@ -39,7 +41,7 @@ def get_log_level(args):
     elif args.log_level:
         return LOG_LEVELS[args.log_level.lower()]
     else:
-        return logging.INFO
+        raise RuntimeError('No log level provided')
 
 
 def CreateArgumentsParser():
@@ -54,26 +56,26 @@ def CreateArgumentsParser():
     log_format_group.add_argument('--log-datefmt', help='Logging default time format', default='%T')
 
     log_level_group = parser.add_mutually_exclusive_group()
-    log_level_group.add_argument('-v', '--verbose', help='Enable debug logging', action='store_true')
+    log_level_group.add_argument('-v', '--verbose', help='Add debug logging', action='store_true')
     log_level_group.add_argument('-w', '--warning', help='Enable warning logging only', action='store_true')
-    log_level_group.add_argument('--log-level', help='Set log level', choices=LOG_LEVELS.keys(), default=None)
+    log_level_group.add_argument('--log-level', help='Set log level', choices=sorted(LOG_LEVELS.keys()), default=DEFAULT_LOG_LEVEL)
 
     subparsers = parser.add_subparsers()
     for mode_name, help_message, populate_module in [
-        ('generate', 'Generate all LaTeX-files and papers', tools.generate_all),
-        ('lucky', 'Find lucky pupils', tools.lucky),
-        ('tripod', 'Generate tripod results', tools.tripod),
+        ('checker', 'Check csv forms', tools.checker),
+        ('convert', 'Convert pdf books into jpeg', tools.convert),
+        ('dnevnik', 'Run mesh tools', tools.dnevnik),
+        ('docx2pdf', 'Convert docx files to pdf ones', tools.docx2pdf),
         ('download', 'Download extra files', tools.download),
+        ('generate', 'Generate all LaTeX-files and papers', tools.generate_all),
+        ('gforms', 'Create JS scripts for Google Forms', tools.google_forms),
+        ('lucky', 'Find lucky pupils', tools.lucky),
         ('qr', 'Form QR codes', tools.qr),
         ('reshu-ege', 'Reshu EGE', tools.reshuege),
-        ('znanium', 'Znanium', tools.znanium),
-        ('convert', 'Convert pdf books into jpeg', tools.convert),
         ('template', 'Create template files', tools.template),
-        ('docx2pdf', 'Convert docx files to pdf ones', tools.docx2pdf),
-        ('gforms', 'Create JS scripts for Google Forms', tools.google_forms),
-        ('checker', 'Check csv forms', tools.checker),
-        ('dnevnik', 'Run mesh tools', tools.dnevnik),
+        ('tripod', 'Generate tripod results', tools.tripod),
         ('yaform', 'Download yandex form results', tools.yaform),
+        ('znanium', 'Znanium', tools.znanium),
     ]:
         subparser = subparsers.add_parser(
             mode_name,
@@ -95,16 +97,17 @@ def main():
         datefmt=args.log_datefmt,
     )
 
-    log.info('Start')
+    log.info(cm(f'Start', color=color.Green))
     start_time = time.time()
     try:
         args.func(args)
         finish_time = time.time()
-        log.info(cm('Finished in %.2f seconds', color='green'), finish_time - start_time)
-    except Exception:
+        log.info(cm('Finished in %.2f seconds', color=color.Green), finish_time - start_time)
+    except Exception as e:
+        log.critical(f'Error message: {cm(e, color=color.Red)}')
         log.exception(cm('Failed', bg='red'))
         finish_time = time.time()
-        log.error(cm('Failed in %.2f seconds', bg='red'), finish_time - start_time)
+        log.error(cm(f'Failed in {finish_time - start_time:.2f} seconds', bg=color.Red), )
 
 
 if __name__ == '__main__':

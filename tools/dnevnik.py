@@ -23,7 +23,7 @@ def run(args):
 
     client = library.mesh.Client(
         username=args.username,
-        password=library.secrets.token.dnevnik_mos_ru_password,
+        password=library.secrets.token.get('dnevnik.mos.ru.password'),
     )
 
     schedule_items = client.get_schedule_items(from_date=from_date, to_date=to_date)
