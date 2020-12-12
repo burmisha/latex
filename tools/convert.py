@@ -1,4 +1,4 @@
-import library
+import library.location
 from library.convert import PdfBook, page_shift, params, source_link, one_d_structure, two_d_structure, ppi
 
 import subprocess
@@ -1242,8 +1242,6 @@ class Problems_3800(PdfBook):
 
 
 def runConvert(args):
-    booksPath = library.files.UdrPath('Книги - физика')
-
     books = [
         (ComicsBook, ['Физика в комиксах.pdf']),
         (ChernoutsanBook, ['Сборники', 'Сборник - Черноуцан - 2011.pdf']),
@@ -1271,14 +1269,15 @@ def runConvert(args):
         dstPath = list(pdfPath)
         dstPath[-1] = dstPath[-1].replace('.pdf', '')
         book = bookClass(
-            pdfPath=booksPath(*pdfPath),
-            dstPath=booksPath(*dstPath),
+            pdfPath=library.location.udr('Книги - физика', *pdfPath),
+            dstPath=library.location.udr('Книги - физика', *dstPath),
         )
         book.GetStrangeFiles(remove=False)
-        book.Save(overwrite=False)
+        book.Save(overwrite=args.overwrite_existing)
         book.GetStrangeFiles(remove=args.remove_strange_files)
 
 
 def populate_parser(parser):
     parser.add_argument('--remove-strange-files', help='Remove strange files', action='store_true')
+    parser.add_argument('--overwrite-existing', help='Overwrite already extracted files', action='store_true')
     parser.set_defaults(func=runConvert)
