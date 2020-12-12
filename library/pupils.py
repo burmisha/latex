@@ -20,9 +20,10 @@ class Pupil(object):
 
     def GetFullName(self, surnameFirst=False):
         if surnameFirst:
-            return f'{self.Surname} {self.Name}'
+            parts = [self.Surname, self.Name]
         else:
-            return f'{self.Name} {self.Surname}'
+            parts = [self.Name, self.Surname]
+        return ' '.join(part for part in parts if part)
 
     def GetRandomSeedPart(self):
         return '{self.Name} {self.Surname}'.format(self=self)

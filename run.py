@@ -7,7 +7,7 @@ import argparse
 import time
 
 import logging
-log = logging.getLogger(__name__)
+log = logging.getLogger('main')
 
 DEFAULT_LOG_FIELDS = [
     '%(asctime)s.%(msecs)03d',
