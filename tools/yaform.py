@@ -15,6 +15,63 @@ import logging
 log = logging.getLogger(__name__)
 
 
+def add_pupil_lines(lines, pupil_name):
+    blocks = []
+    cur_block = []
+    for line in lines:
+        if re.match(f'^#+ .*$', line):
+            if cur_block:
+                blocks.append(cur_block)
+            cur_block = [line]
+        else:
+            cur_block.append(line)
+    if cur_block:
+        blocks.append(cur_block)
+
+    position = 0
+    for block_index, block in enumerate(blocks):
+        block_name = block[0].lstrip('#').strip()
+        if block_name == pupil_name:
+            return lines
+        elif block_name < pupil_name:
+            position += 1
+
+    blocks = blocks[:position] + [[f'## {pupil_name}', '', '']] + blocks[position:]
+    result = []
+    for block in blocks:
+        result.extend(block)
+    return result
+
+
+assert add_pupil_lines(['# A'], 'A') == ['# A']
+assert add_pupil_lines(['# A', '## B'] , 'B') == ['# A', '## B']
+assert add_pupil_lines(['# A', '## C'] , 'B') == ['# A', '## B', '', '', '## C']
+assert add_pupil_lines(['# A', '## B'] , 'A') == ['# A', '## B']
+assert add_pupil_lines(['# A', '## B'] , 'D') == ['# A', '## B', '## D', '', '']
+assert add_pupil_lines(['# B', '### C'] , 'A') == ['## A', '', '', '# B', '### C']
+
+
+class Description:
+    def __init__(self, filename):
+        self._filename = filename
+        log.info(f'Description: {self._filename}')
+        if not os.path.exists(self._filename):
+            self._write_lines([])
+
+    def _write_lines(self, lines):
+        with open(self._filename, 'w') as f:
+            for line in lines:
+                f.write(line + '\n')
+
+    def add_pupil(self, pupil_name):
+        with open(self._filename, 'r') as f:
+            lines = [line for line in f]
+
+        new_lines = add_pupil_lines(lines, pupil_name)
+        if new_lines != lines:
+            self._write_lines(new_lines)
+
+
 class AnswersJoiner:
     def __init__(self):
         self._task_map = collections.defaultdict(lambda: collections.defaultdict(lambda: collections.defaultdict(list)))
@@ -44,6 +101,7 @@ class AnswersJoiner:
     def _get_download_cfg(self):
         for pupils_dir, works in self._task_map.items():
             for work_name, answers in works.items():
+                description = Description(os.path.join(pupils_dir, f'{work_name}.md'))
                 for pupil_name, links in answers.items():
                     for index, link in enumerate(links, 1):
                         link_basename = link.split('_', 1)[1]
@@ -52,6 +110,7 @@ class AnswersJoiner:
                             work_name,
                             f'{pupil_name} - {index:02d} - {link_basename}',
                         )
+                        description.add_pupil(pupil_name)
                         yield link, file_name
 
     def Download(self):
