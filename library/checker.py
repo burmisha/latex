@@ -190,12 +190,7 @@ class Checker:
     def __init__(self, test_name, answers, marks=None):
         pupils = library.pupils.get_class_from_string(test_name, addMyself=True)
         self._pupils = pupils
-
-        self._csv_file = library.location.udr(
-            f'{pupils.Grade} класс',
-            f'{pupils.Year} {pupils.Grade}{pupils.Letter} Физика - Архив',
-            test_name + '.csv.zip',
-        )
+        self._csv_file = pupils.get_path(test_name + '.csv.zip', archive=True)
         self._marks = marks or [None, None, None]
         assert len(self._marks) == 3
 

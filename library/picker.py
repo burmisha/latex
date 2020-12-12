@@ -24,16 +24,12 @@ class KeyPicker:
         self._options[new_key] = value
         self._keys[new_key] = key
 
-    def get_original_key(self, flt):
-        matched_keys = sorted([key for key in self._keys if not flt or self._make_key(flt) in key])
-        assert len(matched_keys) == 1
-        return self._keys[matched_keys[0]]
-
     def _get_matched_keys(self, flt):
         flt_key = self._make_key(flt) if flt else None
         return flt_key, sorted([key for key in self._options if not flt or flt_key in key])
 
     def get(self, flt=None):
+        assert flt is None or isinstance(flt, str)
         flt_key, matched_keys = self._get_matched_keys(flt)
         if len(matched_keys) > 1:
             keys = [self._keys[key] for key in matched_keys]
@@ -41,7 +37,7 @@ class KeyPicker:
             log.warning(f'Too many matches for {flt}:{keys}')
         elif len(matched_keys) == 1:
             key = matched_keys[0]
-            log.info(f"Found '{cm(self._keys[key], color='cyan')}' (as '{key}' for '{flt_key}')")
+            log.debug(f"Found '{cm(self._keys[key], color='cyan')}' (as '{key}' for '{flt_key}')")
             return self._options[key]
         else:
             keys = log_list(sorted(self._keys.values()))

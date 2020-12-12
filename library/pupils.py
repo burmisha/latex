@@ -1,9 +1,9 @@
 import Levenshtein
 
-
 import collections
 import re
 
+import library.location
 import library.picker
 
 import logging
@@ -98,7 +98,7 @@ class NameLookup:
 
 
 class Pupils(object):
-    def __init__(self, pupils_id=None, pupils=[], letter=None, grade=None, add_me=None, only_me=None, year=None):
+    def __init__(self, pupils_id=None, pupils=[], letter=None, grade=None, year=None):
         self._id = pupils_id
         self._pupils_list = pupils
         self._me = Pupil(name='Михаил', surname='Бурмистров')
@@ -106,8 +106,6 @@ class Pupils(object):
         self.Grade = grade
         assert 2010 <= year < 2099
         self.Year = f'{year}-{year-2000+1}'
-        self._add_me = add_me
-        self._only_me = only_me
         assert isinstance(self.Grade, int)
         assert 6 <= self.Grade <= 11
         self.LatinLetter = {
@@ -123,13 +121,18 @@ class Pupils(object):
             for pupil in self.Iterate()
         ]))
 
-    def Iterate(self, add_me=False, only_me=False):
+    def get_path(self, *args, archive=True):
+        return library.location.udr(
+            f'{self.Grade} класс',
+            f'{self.Year} {self.Grade}{self.Letter} Физика' + (' - Архив' if archive else ''),
+            *args,
+        )
+
+    def Iterate(self):
         me = ['Михаил Бурмистров']
-        if self._add_me or add_me:
-            yield self._me
-        if self._only_me is None or not only_me:
-            for pupil in self._pupils_list:
-                yield pupil
+        yield self._me
+        for pupil in self._pupils_list:
+            yield pupil
 
     def FindByName(self, name):
         pupil = self._name_lookup.Find(name)
@@ -143,6 +146,10 @@ class Pupils(object):
 
     def GetRandomSeedPart(self):
         return '{}-{}'.format(self.Grade, self.Letter)
+
+    def __str__(self):
+        return f'{len(self._pupils_list)} pupils from {self._id}'
+
 
 
 classes_config = {
@@ -359,8 +366,6 @@ class NamesPicker:
                 pupils=pupils_list,
                 letter=letter,
                 grade=grade,
-                add_me=True,
-                only_me=False,
                 year=int(start_year),
             )
             self._key_picker.add(pupils_id, pupils)
@@ -392,5 +397,5 @@ def get_class_from_string(value, addMyself=False, onlyMe=False):
     pupils = names_picker.get(key)
     assert pupils
 
-    log.debug(f'Returning {len(pupils._pupils_list)} pupils from {pupils._id} (search key: {key})')
+    log.info(f'Got {pupils} (search by: {key!r})')
     return pupils

@@ -26,7 +26,7 @@ def pick_classes(base, config):
         raise RuntimeError(f'Invalid config: {config}')
 
 
-def get_all_variants(only_me=False):
+def get_all_variants():
     random_tasks = [
         ('2019-04-16 10', {'electricity': ['ForceTask', 'ExchangeTask', 'FieldTaskGenerator', 'SumTask']}),
         ('2019-04-30 10', {'electricity': ['Potential728', 'Potential735', 'Potential737', 'Potential2335', 'Potential1621']}),
@@ -56,7 +56,7 @@ def get_all_variants(only_me=False):
         ('2020-12-11 10', {'gidro': ['Ch_6_3', 'Ch_6_8', 'Ch_6_10', 'Ch_6_16', 'Ch_6_20']}),
     ]
     for task_id, tasks_classes in random_tasks:
-        pupils = library.pupils.get_class_from_string(task_id, addMyself=True, onlyMe=only_me)
+        pupils = library.pupils.get_class_from_string(task_id)
         date = library.formatter.Date(task_id[:10])
 
         tasks_classes = pick_classes(generators, tasks_classes)

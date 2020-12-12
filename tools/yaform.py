@@ -16,11 +16,6 @@ log = logging.getLogger(__name__)
 
 
 class AnswersJoiner:
-    GROUP_CONFIG = {
-        '2020-9-М': library.location.udr('9 класс', '2020-21 9М Физика - Архив'),
-        '2020-10-АБ': library.location.udr('10 класс', '2020-21 10АБ Физика - Архив'),
-    }
-
     def __init__(self):
         self._task_map = collections.defaultdict(lambda: collections.defaultdict(lambda: collections.defaultdict(list)))
         self._headers = {
@@ -28,22 +23,13 @@ class AnswersJoiner:
         }
 
     def add_answer(self, yf_answer):
-        pupils = library.pupils.get_class_from_string(
-            f'{yf_answer._create_time[:10]} {yf_answer._group_name}',
-            addMyself=True,
-        )
-        pupil = pupils.FindByName(yf_answer._original_name)
-
-        pupils_id = pupils._id
-
-        if yf_answer._work_name == 'Работа на уроке за сегодня':
-            work_id = f'{yf_answer._update_time[:10]} Задание с урока'
-        else:
-            work_id = yf_answer._work_name
-
+        pupils = library.pupils.get_class_from_string(yf_answer.get_pupils_id())
+        pupil = pupils.FindByName(yf_answer.get_pupil_name())
+        pupils_dir = pupils.get_path(archive=True)
+        work_id = yf_answer.get_work_id()
         pupil_name = pupil.GetFullName(surnameFirst=True)
 
-        self._task_map[pupils_id][work_id][pupil_name] += yf_answer._photos_list
+        self._task_map[pupils_dir][work_id][pupil_name] += yf_answer.get_photos()
 
     def _download_to_file(self, link, filename):
         log.info(f'Downloading {link} into {filename}')
@@ -55,26 +41,27 @@ class AnswersJoiner:
             log.warn(f'Failed to download {link}')
             raise RuntimeError('Failed to download file from Yandex')
 
-    def Download(self):
-        log.info('Downloading all files')
-        for pupils_id, works in self._task_map.items():
+    def _get_download_cfg(self):
+        for pupils_dir, works in self._task_map.items():
             for work_name, answers in works.items():
                 for pupil_name, links in answers.items():
                     for index, link in enumerate(links, 1):
                         link_basename = link.split('_', 1)[1]
-                        dir_name = os.path.join(
-                            self.GROUP_CONFIG[pupils_id],
-                            work_name
-                        )
                         file_name = os.path.join(
-                            dir_name,
+                            pupils_dir,
+                            work_name,
                             f'{pupil_name} - {index:02d} - {link_basename}',
                         )
-                        os.makedirs(dir_name, exist_ok=True)
-                        if not os.path.exists(file_name):
-                            self._download_to_file(link, file_name)
-                        else:
-                            log.debug('File already exists')
+                        yield link, file_name
+
+    def Download(self):
+        log.info('Downloading all files')
+        for link, file_name in self._get_download_cfg():
+            if not os.path.exists(file_name):
+                os.makedirs(os.path.dirname(file_name), exist_ok=True)
+                self._download_to_file(link, file_name)
+            else:
+                log.debug('File already exists')
 
         log.info('Downloaded all files')
 
@@ -86,6 +73,7 @@ class YFAnswer:
         self._create_time = row['Время создания']
         self._update_time = row['Время изменения']
         self._group_name = row['Выберите группу']
+        self._photos = row['Фотографии решений']
         photos = []
         for link in row['Фотографии решений'].split(', '):
             if link:
@@ -96,6 +84,30 @@ class YFAnswer:
                 photos.append(link)
         self._photos_list = photos
         self._work_name = row['Что загружаем?']
+
+    def get_work_id(self):
+        if self._work_name == 'Работа на уроке за сегодня':
+            work_id = f'{self._create_time[:10]} Задание с урока'
+        else:
+            work_id = self._work_name
+        return work_id
+
+    def get_pupils_id(self):
+        return f'{self._create_time[:10]} {self._group_name}'
+
+    def get_pupil_name(self):
+        return self._original_name
+
+    def get_photos(self):
+        photos = []
+        for link in self._photos.split(', '):
+            if link:
+                link = link.replace('forms.yandex.ru/u/files?path=', 'forms.yandex.ru/u/files/?path=')
+                assert link.split('.')[-1].lower() in ['pdf', 'jpeg', 'jpg', 'png']
+                assert '_' in link
+                assert re.match('[0-9a-zA-Z\.\-_а-яА-Я ]+', link.split('_', 1)[1])
+                photos.append(link)
+        return photos
 
     def __str__(self):
         return f'[{self._create_time}][{len(self._photos_list)} files] {self._work_name}: {self._original_name}'
