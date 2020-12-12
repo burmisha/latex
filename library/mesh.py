@@ -12,8 +12,8 @@ import library.secrets
 
 Year = collections.namedtuple('Year', ['id', 'name', 'begin_date', 'end_date', 'calendar_id', 'current_year'])
 
-
 BASE_URL = 'https://dnevnik.mos.ru'
+
 
 class StudentsGroup:
     def __init__(self, data):
