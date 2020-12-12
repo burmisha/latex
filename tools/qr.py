@@ -1,6 +1,6 @@
 import library
 
-import qrcode
+import qrcode  # https://pypi.org/project/qrcode/
 import qrcode.image.svg
 import qrcode.image.pure
 
@@ -10,16 +10,26 @@ import logging
 log = logging.getLogger(__name__)
 
 
-# handler based on https://pypi.org/project/qrcode/
-class Generator(object):
-    def __init__(self, path=None, force=False):
+class Generator:
+    DEFAULT_CORRECTION_LEVEL = 7
+    CORRECTION_LEVELS = {
+        7: qrcode.constants.ERROR_CORRECT_L,  # About 7% or less errors can be corrected
+        15: qrcode.constants.ERROR_CORRECT_M,  # About 15% or less errors can be corrected
+        25: qrcode.constants.ERROR_CORRECT_Q,  # About 25% or less errors can be corrected
+        30: qrcode.constants.ERROR_CORRECT_H,  # About 30% or less errors can be corrected
+    }
+
+    DEFAULT_FACTORY = 'png'
+    FACTORIES =  {
+        'png': qrcode.image.pure.PymagingImage,
+        'svg-basic': qrcode.image.svg.SvgImage,  # Simple factory, just a set of rects.
+        'svg-fragment': qrcode.image.svg.SvgFragmentImage,  # Fragment factory (also just a set of rects)
+        'svg': qrcode.image.svg.SvgPathImage,  # Combined path factory, fixes white space that may occur when zooming
+    }
+
+    def __init__(self, path=None, correction_level=None):
         self.__Path = path
-        self.__Force = force
-        # ERROR_CORRECT_L  # About 7% or less errors can be corrected
-        # ERROR_CORRECT_M  # About 15% or less errors can be corrected
-        # ERROR_CORRECT_Q  # About 25% or less errors can be corrected
-        # ERROR_CORRECT_H  # About 30% or less errors can be corrected
-        self.__ErrorCorrectionLevel = qrcode.constants.ERROR_CORRECT_L
+        self.__ErrorCorrectionLevel = correction_level
 
     def __MakeImage(self, data=None, method=None):
         qrCode = qrcode.QRCode(
@@ -29,25 +39,32 @@ class Generator(object):
             border=1,
         )
 
-        if method == 'svg-basic':
-            # Simple factory, just a set of rects.
-            factory = qrcode.image.svg.SvgImage
-        elif method == 'svg-fragment':
-            # Fragment factory (also just a set of rects)
-            factory = qrcode.image.svg.SvgFragmentImage
-        elif method == 'svg':
-            # Combined path factory, fixes white space that may occur when zooming
-            factory = qrcode.image.svg.SvgPathImage
-        elif method == 'png':
-            factory = qrcode.image.pure.PymagingImage
-        else:
-            raise RuntimeError(f'Invalid method {method!r}')
+        factory = self.FACTORIES[method]
         qrCode.add_data(data)
         qrCode.make()
         return qrCode.make_image(image_factory=factory)
 
-    def MakeAll(self, path=None, method='png', force=False):
-        for link, file in [
+    def Make(self, config=None, method=None, force=False):
+        for link, file in config:
+            filename = os.path.join(self.__Path, file)
+            assert filename.endswith('.' + method.split('-')[0])
+            if not os.path.exists(filename) or force:
+                log.info(f'Saving {link} to {filename}')
+                with open(filename, 'wb') as f:
+                    self.__MakeImage(data=link, method=method).save(f)
+            else:
+                log.debug(f'Skipping {link} as {filename} exists')
+
+
+def run(args):
+    qrGenerator = Generator(
+        path=library.location.udr('qrcodes'),
+        correction_level=Generator.CORRECTION_LEVELS[args.correction_level],
+    )
+    qrGenerator.Make(
+        method=args.method,
+        force=args.force,
+        config=[
             ('https://bit.ly/554-11T-2020', '2020-03-spring-11.png'),
             ('https://notion.so/33bad2ae867b489280e39046c97776eb', '2019-20-9A.png'),
             ('https://notion.so/f5d57ced2a224ccc9b142e21e3714a61', '2019-20-9L.png'),
@@ -57,22 +74,29 @@ class Generator(object):
             ('https://notion.so/8acf3ff3b2874cefabbfa78d2db4f07e', '2020-summer-marathon.png'),
             ('https://notion.so/f28319ef853940bd88d8729ba23b1eab', '2020-21-10A.png'),
             ('https://notion.so/a7e4f5156a9b428397e3b495ffce7881', '2020-21-9M.png'),
-        ]:
-            filename = os.path.join(path or self.__Path, file)
-            assert filename.endswith('.' + method)
-            if not os.path.exists(filename) or self.__Force or force:
-                log.info(f'Saving {link} to {filename}')
-                with open(filename, 'w') as f:
-                    self.__MakeImage(data=link, method=method).save(f)
-            else:
-                log.debug(f'Skipping {link} as {filename} exists')
-
-
-def runQr(args):
-    qrGenerator = Generator(path=library.location.udr('qrcodes'), force=args.force)
-    qrGenerator.MakeAll()
+        ],
+    )
 
 
 def populate_parser(parser):
-    parser.add_argument('--force', help='Force updates', action='store_true')
-    parser.set_defaults(func=runQr)
+    parser.add_argument(
+        '-f',
+        '--force',
+        help='Force updates',
+        action='store_true',
+    )
+    parser.add_argument(
+        '-l',
+        '--correction-level',
+        help='How many errors could be corrected',
+        choices=sorted(Generator.CORRECTION_LEVELS),
+        default=Generator.DEFAULT_CORRECTION_LEVEL,
+    )
+    parser.add_argument(
+        '-m',
+        '--method',
+        help='Result format',
+        choices=sorted(Generator.FACTORIES),
+        default=Generator.DEFAULT_FACTORY,
+    )
+    parser.set_defaults(func=run)
