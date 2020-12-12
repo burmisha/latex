@@ -11,10 +11,9 @@ import os
 
 def runTemplate(args):
     nowDelta = library.datetools.NowDelta()
-    docxTemplate = library.location.udr('Шаблоны', 'template-2-columns.docx')
-    ipadTemplate = library.location.ipad('2020-21 Кружок', '2020-10-00 Кружок - Шаблон.docx')
+    ipadTemplate = library.location.udr('Шаблоны', 'template-2-columns.docx')
 
-    fileCopier = library.files.FileCopier(docxTemplate, destination_dir=library.location.udr('11 класс', 'Вишнякова'))
+    fileCopier = library.files.FileCopier(ipadTemplate, destination_dir=library.location.udr('11 класс', 'Вишнякова'))
     chapters = [
         # '1.1 - Кинематика',
         # '1.2 - Динамика',
@@ -41,7 +40,6 @@ def runTemplate(args):
     for chapter, course in itertools.product(chapters, courses):
         fileCopier.CreateFile(f'Вишнякова - {chapter} - {course} - решения.docx')
 
-    ipadTemplate = library.location.ipad('2020-21 Кружок', '2020-10-00 Кружок - Шаблон.docx')
     ipadCopier = library.files.FileCopier(ipadTemplate)
 
     nowFmt = nowDelta.Now(fmt='%F')
@@ -50,6 +48,7 @@ def runTemplate(args):
     for date in [
         '2020-10-17',
         '2020-12-05',
+        '2020-12-12',
     ]:
         if nowFmt <= date <= futureFmt:
             ipadCopier.CreateFile(library.location.ipad('2020-21 Кружок', f'{date} Кружок.docx'))
@@ -77,7 +76,7 @@ def runTemplate(args):
 
 
     distantCopier = library.files.FileCopier(
-        docxTemplate,
+        ipadTemplate,
         destination_dir=library.location.ipad('2020 дистант')
     )
     for dateClass in [

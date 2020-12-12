@@ -285,9 +285,9 @@ class DocxToPdf(object):
 
         p = subprocess.Popen(['osascript', '-'], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         stdout, stderr = p.communicate(apple_script.encode('utf-8'))
+        assert stdout == b'', 'stdout expected to by empty, got %s (%r)' % (stdout.decode('utf-8'), stdout.decode('utf-8'))
+        assert stderr == b'', 'stderr expected to by empty, got %s (%r)' % (stderr.decode('utf-8'), stderr.decode('utf-8'))
         assert p.returncode == 0, 'returncode expected to be 0, got %s (%r)' % (p.returncode, p.returncode)
-        assert stdout == b'', 'stdout expected to by empty, got %s (%r)' % (stdout, stdout)
-        assert stderr == b'', 'stderr expected to by empty, got %s (%r)' % (stderr, stderr)
 
         assert os.path.exists(tmp_pdf_file)
         assert os.path.isfile(tmp_pdf_file)
