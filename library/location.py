@@ -24,3 +24,8 @@ def udr(*args):
 def ipad(*args):
     path = os.path.join(Location.Dropbox, '_iPad-Word', *args)
     return path
+
+
+def ya_disk(*args):
+    path = os.path.join(Location.YandexDisk, *args)
+    return path

@@ -98,7 +98,8 @@ class NameLookup:
 
 
 class Pupils(object):
-    def __init__(self, pupils=[], letter=None, grade=None, add_me=None, only_me=None, year=None):
+    def __init__(self, pupils_id=None, pupils=[], letter=None, grade=None, add_me=None, only_me=None, year=None):
+        self._id = pupils_id
         self.Pupils = pupils
         self._me = Pupil(name='Михаил', surname='Бурмистров')
         self.Letter = letter
@@ -373,7 +374,15 @@ def getPupils(key, addMyself=False, onlyMe=False):
 
     log.debug(f'Returning {len(pupils)} pupils from {original} (search key: {key})')
 
-    return Pupils(pupils=pupils, letter=letter, grade=grade, add_me=addMyself, only_me=onlyMe, year=start_year)
+    return Pupils(
+        pupils_id=original,
+        pupils=pupils,
+        letter=letter,
+        grade=grade,
+        add_me=addMyself,
+        only_me=onlyMe,
+        year=start_year,
+    )
 
 
 def get_class_from_string(value, *args, **kwargs):

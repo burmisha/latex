@@ -19,7 +19,20 @@ class Token:
         self._load(data)
 
     def _load(self, tokens_dict):
+        self._tokens_dict = tokens_dict
         self.dnevnik_mos_ru_password = tokens_dict.get('dnevnik.mos.ru.password')  # get manually from browser
+
+    def get(self, key):
+        token = self._tokens_dict.get(key)
+        if not token:
+            raise RuntimeError(f'No token for {key}')
+        token_length = len(token)
+        if token_length < 20:
+            token_mock = ': ' + '*' * token_length
+        else:
+            token_mock = f' of length {cm(token_length, color="green")}'
+        log.info(f'Using token {cm(key, color="green")}{token_mock}')
+        return token
 
 
 token = Token(os.path.join(os.path.dirname(__file__), '..', 'secrets.json'))

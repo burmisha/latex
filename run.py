@@ -73,6 +73,7 @@ def CreateArgumentsParser():
         ('gforms', 'Create JS scripts for Google Forms', tools.google_forms),
         ('checker', 'Check csv forms', tools.checker),
         ('dnevnik', 'Run mesh tools', tools.dnevnik),
+        ('yaform', 'Download yandex form results', tools.yaform),
     ]:
         subparser = subparsers.add_parser(
             mode_name,
