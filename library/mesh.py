@@ -7,7 +7,7 @@ import requests
 import logging
 log = logging.getLogger(__name__)
 
-from library.logging import colorize_json, cm
+from library.logging import colorize_json, cm, color
 import library.secrets
 
 Year = collections.namedtuple('Year', ['id', 'name', 'begin_date', 'end_date', 'calendar_id', 'current_year'])
@@ -92,6 +92,7 @@ class Client:
         self._groups = None
         self._all_student_profiles = None
         self._available_lessons_dict = {}
+        self._marks_cache = {}  # very silly, looses data
 
     def _login(self, username, password):
         response = requests.post(
@@ -315,4 +316,120 @@ class Client:
         assert len(marks_items) < 1000, 'Too many marks: reduce dates or increase limit'
         marks = [Mark(item) for item in marks_items]
         marks.sort(key=lambda x: (x._schedule_lesson_id, x._student_profile_id))
+
+        for mark in marks:
+            self._marks_cache[(mark._schedule_lesson_id, mark._student_profile_id)] = mark
+
+        log.info(f'Got marks [{from_date}, {to_date}] for {group}')
         return marks
+
+    def set_mark(self, schedule_lesson_id=None, student_id=None, value=None, comment=None, weight=1, point_date=None):
+        assert isinstance(schedule_lesson_id, int)
+        lesson = self.get_schedule_item_by_id(schedule_lesson_id)
+        assert lesson
+
+        assert isinstance(student_id, int)
+        student = self.get_student_by_id(student_id)
+        assert student
+
+        assert student._raw_data['class_unit']['id'] == lesson._raw_data['class_unit_id']
+
+        log.info(f'Trying to set mark {cm(value, color=color.Red)} for {student} at {lesson}')
+
+        known_mark = self._marks_cache.get((schedule_lesson_id, student_id))
+        if known_mark:
+            if int(known_mark._name) == value:
+                log.info('Mark was already set')
+                return
+            else:
+                raise RuntimeError('Seems to have broken mark')
+
+        if comment is None:
+            show_comment = False
+        else:
+            assert isinstance(comment, str)
+            show_comment = True
+
+        if point_date is None:
+            is_point = False
+            point_date_patched = None
+            point_date_strange = library.datetools.NowDelta().After(fmt='%FT%T.000Z', hours=20)
+        else:
+            assert isinstance(point_date, str)
+            assert re.match(r'202\d\-\d\d-\d\d', point_date)
+            is_point = True
+            point_date_patched = '.'.join([point_date[8:], point_date[5:7], point_date[:4], ])
+            point_date_strange = f'{point_date}T04:12:35.678Z'
+            assert re.match(r'\d\d\.\d\d.202\d', point_date_patched)
+
+        assert weight == 1
+        assert value in [2, 3, 4, 5]
+
+        mark_name = "Домашняя работа"
+        grade_system_id = 3839912
+        grade_system_name = 'шкала оценивания 1597410492'
+        grade_system_type = 'five'
+        control_form_id = 4789098
+        subject_id = 3626
+
+        school_id = 1098
+
+        data = {
+          'comment': comment,
+          'controlForm':{
+            'deleted_at': None,
+            'education_level_id': 3,
+            'fromServer': False,
+            'grade_system':{
+                'defaults':[{
+                    'five':[{'mark':5},{'mark':4},{'mark':3},{'mark':2},{'mark':1},{'mark':0}],
+                    'hundred':[{'range':{'from':81,'to':100}},{'range':{'from':61,'to':80}},{'range':{'from':31,'to':60}},{'range':{'from':21,'to':30}},{'range':{'from':11,'to':20}},{'range':{'from':0,'to':10}}],
+                    'inversion': False,
+                    'n':[{'range':{'from':81,'to':100}},{'range':{'from':61,'to':80}},{'range':{'from':31,'to':60}},{'range':{'from':21,'to':30}},{'range':{'from':11,'to':20}},{'range':{'from':0,'to':10}}],
+                    'names':[ 'Оценка 5', 'Оценка 4', 'Оценка 3', 'Оценка 2', 'Оценка 1', 'Оценка 0'],
+                    'nmax':6,
+                }],
+                'id': grade_system_id,
+                'name': grade_system_name,
+                'nmax': 6,
+                'type': grade_system_type,
+            },
+            'grade_system_id': grade_system_id,
+            'id': control_form_id,
+            'is_exam': False,
+            'name': mark_name,
+            'origin_control_form_id': None,
+            'parentResource': None,
+            'reqParams': None,
+            'restangularCollection': False,
+            'restangularized': True,
+            'route': '/core/api/control_forms',
+            'school_id': school_id,
+            'selected': True,
+            'short_name': '',
+            'subject_id': subject_id,
+            'type': None,
+            'weight': weight,
+          },
+          'control_form_id': control_form_id,
+          'grade_origins': [{ 'grade_origin': value, 'grade_system_id': grade_system_id}],
+          'grade_system_id': grade_system_id,
+          'grade_system_name': grade_system_name,
+          'grade_system_type': grade_system_type,
+          'is_approve': False,
+          'is_criterion': False,
+          'is_exam': False,
+          'is_point': is_point,
+          'pointDate': point_date_strange,
+          'point_date': point_date_patched,
+          'schedule_lesson_id': schedule_lesson_id,
+          'showComment': show_comment,
+          'student_profile_id': student_id,
+          'valuesByIds': {str(grade_system_id): value},
+          'weight': weight,
+        }
+        response = self.post(f'/core/api/marks?pid={self.get_teacher_id()}', json_data=data)
+        mark_id = response['id']
+        if isinstance(mark_id, int) and mark_id > 0:
+            log.info(f'Set mark id {mark_id} was ok')
+        return
