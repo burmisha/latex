@@ -153,7 +153,6 @@ class AnswersJoiner:
             raise RuntimeError(f'failed to start sync task: {response}, {response.content}')
 
 
-
 class YFAnswer:
     def __init__(self, row):
         self._original_name = row['Фамилия и имя']

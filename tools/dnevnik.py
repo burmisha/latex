@@ -8,6 +8,32 @@ import logging
 log = logging.getLogger(__name__)
 
 
+class MarkSetter:
+    def __init__(self, client=None, lesson_id=None, point_date=None, control_form_name=None, comment=None):
+        self._client = client
+        self._point_date = point_date
+        self._lesson = self._client.get_schedule_item_by_id(lesson_id)
+        self._control_form = self._client.get_control_forms(self._lesson._subject_id)[control_form_name]
+        self._comment = comment
+
+    def Set(self, student_name=None, value=None):
+        assert value in [2, 3, 4, 5]
+
+        if value == 5:
+            point_date = None
+        else:
+            point_date = self._point_date
+
+        self._client.set_mark(
+            schedule_lesson_id=self._lesson._id,
+            student_id=self._client.get_student_by_name(student_name)._id,
+            value=value,
+            comment=self._comment,
+            point_date=point_date,
+            control_form=self._control_form,
+        )
+
+
 def run(args):
     locale.setlocale(locale.LC_ALL, ('RU', 'UTF8'))
 
@@ -20,8 +46,6 @@ def run(args):
     now_delta = library.datetools.NowDelta(default_fmt='%Y-%m-%d')
     from_date = now_delta.Before(days=from_date_days)
     to_date = now_delta.After(days=to_date_days)
-
-
 
     # for data in [
     #     # '{"schedule_lesson_id":220536675,"student_profile_id":5575224,"control_form_id":4789098,"is_exam":false,"grade_system_id":3839912,"grade_system_type":"five","grade_system_name":"\u0448\u043a\u0430\u043b\u0430 \u043e\u0446\u0435\u043d\u0438\u0432\u0430\u043d\u0438\u044f 1597410492","weight":1,"comment":"\u0417\u0430\u0434\u0430\u0447\u0438 \u043d\u0430\u0438\u0437\u0443\u0441\u0442\u044c \u043f\u043e \u0434\u0438\u043d\u0430\u043c\u0438\u043a\u0435","point_date":"29.12.2020","pointDate":"2020-12-28T21:54:11.000Z","is_point":true,"grade_origins":[{"grade_system_id":3839912,"grade_origin":4}],"valuesByIds":{"3839912":4},"is_criterion":false,"is_approve":false,"controlForm":{"subject_id":3626,"name":"\u0414\u043e\u043c\u0430\u0448\u043d\u044f\u044f \u0440\u0430\u0431\u043e\u0442\u0430","short_name":"","education_level_id":3,"origin_control_form_id":null,"school_id":1098,"id":4789098,"is_exam":false,"grade_system_id":3839912,"grade_system":{"id":3839912,"nmax":6,"name":"\u0448\u043a\u0430\u043b\u0430 \u043e\u0446\u0435\u043d\u0438\u0432\u0430\u043d\u0438\u044f 1597410492","type":"five","defaults":[{"nmax":6,"inversion":false,"hundred":[{"range":{"from":81,"to":100}},{"range":{"from":61,"to":80}},{"range":{"from":31,"to":60}},{"range":{"from":21,"to":30}},{"range":{"from":11,"to":20}},{"range":{"from":0,"to":10}}],"names":["\u041e\u0446\u0435\u043d\u043a\u0430 5","\u041e\u0446\u0435\u043d\u043a\u0430 4","\u041e\u0446\u0435\u043d\u043a\u0430 3","\u041e\u0446\u0435\u043d\u043a\u0430 2","\u041e\u0446\u0435\u043d\u043a\u0430 1","\u041e\u0446\u0435\u043d\u043a\u0430 0"],"n":[{"range":{"from":81,"to":100}},{"range":{"from":61,"to":80}},{"range":{"from":31,"to":60}},{"range":{"from":21,"to":30}},{"range":{"from":11,"to":20}},{"range":{"from":0,"to":10}}],"five":[{"mark":5},{"mark":4},{"mark":3},{"mark":2},{"mark":1},{"mark":0}]}]},"weight":1,"deleted_at":null,"type":null,"route":"/core/api/control_forms","reqParams":null,"restangularized":true,"fromServer":false,"parentResource":null,"restangularCollection":false,"selected":true},"showComment":true}',
@@ -41,14 +65,10 @@ def run(args):
 
     schedule_items = client.get_schedule_items(from_date=from_date, to_date=to_date)
 
-    log.info('Available control forms:')
-    for lesson_id in [220536671, 220536675]:
-        lesson = client.get_schedule_item_by_id(lesson_id)
-        log.info(lesson)
-        control_forms = client.get_control_forms(lesson._subject_id)
-        # control_form = control_forms["Домашняя работа"]
-        # log.info(f'Got\n{library.logging.colorize_json(control_form)}')
-    # return
+    log.info('Loading available control forms...')
+    for subject_id in sorted(set(lesson._subject_id for lesson in schedule_items)):
+        client.get_control_forms(subject_id)
+    log.info('Loaded available control forms')
 
     for schedule_item in sorted(schedule_items, key=lambda x: x._iso_date_time):
         if class_filter and class_filter not in schedule_item._group._best_name:
@@ -74,6 +94,8 @@ def run(args):
             lesson = client.get_schedule_item_by_id(mark._schedule_lesson_id)
             log.debug(f'{student._short_name} got {mark._name} at {lesson}')
 
+
+    mark_setter = MarkSetter(client=client, lesson_id=220536675, point_date='2020-12-29', control_form_name='Домашняя работа', comment='Динамика - Задачи наизусть')
     for student_name, value in [
         ('Ан Ирина', 2),
         ('Андрианова Софья', 4),  # 4 / 6
@@ -97,16 +119,9 @@ def run(args):
         ('Щербаков Андрей', 4),  # 4 / 6
         ('Ярошевский Михаил', 2),
     ]:
-        if value == 5:
-            point_date = None
-        else:
-            point_date = '2020-12-29'
-        student_id = client.get_student_by_name(student_name)
-        lesson_id = 220536675
-        lesson = client.get_schedule_item_by_id(lesson_id)
-        control_form = client.get_control_forms(lesson._subject_id)['Домашняя работа']
-        client.set_mark(schedule_lesson_id=lesson_id, student_id=student_id._id, value=value, comment='Динамика - Задачи наизусть', point_date=point_date, control_form=control_form)
+        mark_setter.Set(student_name=student_name, value=value)
 
+    mark_setter = MarkSetter(client=client, lesson_id=220536671, point_date='2020-12-29', control_form_name='Цифровое домашнее задание', comment='Динамика - Задачи наизусть')
     for student_name, value in [
         ('Алимпиев Алексей', 2),  # 0 / 6
         ('Васин Евгений', 2),  # 0 / 6
@@ -120,15 +135,7 @@ def run(args):
         ('Свистушкин Егор', 2),  # 0 / 6
         ('Соколов Дмитрий', 2),  # 0 / 6
     ]:
-        if value == 5:
-            point_date = None
-        else:
-            point_date = '2020-12-29'
-        student_id = client.get_student_by_name(student_name)
-        lesson_id = 220536671
-        lesson = client.get_schedule_item_by_id(lesson_id)
-        control_form = client.get_control_forms(lesson._subject_id)['Цифровое домашнее задание']
-        client.set_mark(schedule_lesson_id=lesson_id, student_id=student_id._id, value=value, comment='Динамика - Задачи наизусть', point_date=point_date, control_form=control_form)
+        mark_setter.Set(student_name=student_name, value=value)
 
     for res in [
         # client.get('/acl/api/users', {

@@ -35,6 +35,10 @@ class StudentsGroup:
 
     def __str__(self):
         class_unit_id_str = ','.join(str(i) for i in self._class_unit_ids)
+        return f'group {cm(self._best_name, color="green")}'
+
+    def __repr__(self):
+        class_unit_id_str = ','.join(str(i) for i in self._class_unit_ids)
         return ' '.join([
             f'group {cm(self._best_name, color="green")}',
             f'({self._id}, {len(self._student_ids)} students),',
@@ -49,6 +53,9 @@ class StudentProfile:
         self._raw_data = data
 
     def __str__(self):
+        return f'{self._short_name}'
+
+    def __repr__(self):
         return f'student {self._short_name} ({self._id})'
 
 
@@ -71,7 +78,10 @@ class ScheduleItem:
         log.info(f'Link: {BASE_URL}/conference/?scheduled_lesson_id={self._id}')
 
     def __str__(self):
-        return f'Schedule item {cm(self._timestamp.strftime("%d %B %Y, %A, %H:%M"), color="yellow")} ({self._id}) for {self._group}'
+        return f'lesson {cm(self._timestamp.strftime("%d %B %Y, %A, %H:%M"), color="yellow")} ({self._id}, {self._group})'
+
+    def __repr__(self):
+        return f'Schedule item {cm(self._timestamp.strftime("%d %B %Y, %A, %H:%M"), color="yellow")} ({self._id}) for {self._group!r}'
 
 
 class Mark:
@@ -82,6 +92,19 @@ class Mark:
         self._schedule_lesson_id = data['schedule_lesson_id']
         assert self._name in ['2', '3', '4', '5']
         self._raw_data = data
+
+
+class ControlForm:
+    def __init__(self, data):
+        assert not data['deleted_at']
+        self._raw_data = data
+
+    def get_name(self):
+        return self._raw_data['name']
+
+    def __str__(self):
+        return f'Active control form \'{self._raw_data["name"]}\' of weight {self._raw_data["weight"]} for subject {self._raw_data["subject_id"]}'
+
 
 
 class Client:
@@ -237,7 +260,7 @@ class Client:
                     'with_lesson_info': True,
                     # 'with_parents': True,
                 })
-                log.info(f'Loaded {len(student_profiles_data)} students for {group}')
+                log.info(f'Loaded {len(student_profiles_data)} students for {group!r}')
                 assert len(student_profiles_data) == len(group._student_ids)
                 for item in student_profiles_data:
                     student_profile = StudentProfile(item)
@@ -336,8 +359,7 @@ class Client:
         return marks
 
     def set_mark(self, schedule_lesson_id=None, student_id=None, value=None, comment=None, point_date=None, control_form=None):
-        assert isinstance(control_form, dict)
-        assert control_form
+        assert isinstance(control_form, ControlForm)
 
         assert isinstance(schedule_lesson_id, int)
         lesson = self.get_schedule_item_by_id(schedule_lesson_id)
@@ -356,7 +378,7 @@ class Client:
             log.info(colorize_json(lesson._raw_data))
             raise
 
-        log.info(f'Trying to set mark {cm(value, color=color.Red)} for {student} at {lesson}')
+        log.info(f'Setting mark {cm(value, color=color.Red)} for {student} at {lesson}')
 
         known_mark = self._marks_cache.get((schedule_lesson_id, student_id))
         if known_mark:
@@ -387,18 +409,18 @@ class Client:
         assert value in [2, 3, 4, 5]
 
         # TODO: round all floats better
-        control_form_str = json.dumps(control_form)
+        control_form_str = json.dumps(control_form._raw_data)
         control_form_str = control_form_str.replace('.0', '')
-        control_form = json.loads(control_form_str)
+        control_form_data = json.loads(control_form_str)
 
-        grade_system_id = int(control_form['grade_system_id'])
-        grade_system_name = control_form['grade_system']['name']
-        grade_system_type = control_form['grade_system']['type']
-        # subject_id = control_form['subject_id']  # unused
-        # school_id = control_form['school_id']  # unused
-        control_form_id = control_form['id']
-        weight = control_form['weight']
-        control_form.update({
+        grade_system_id = int(control_form_data['grade_system_id'])
+        grade_system_name = control_form_data['grade_system']['name']
+        grade_system_type = control_form_data['grade_system']['type']
+        # subject_id = control_form_data['subject_id']  # unused
+        # school_id = control_form_data['school_id']  # unused
+        control_form_id = control_form_data['id']
+        weight = control_form_data['weight']
+        control_form_data.update({
             'fromServer': False,
             'parentResource': None,
             'reqParams': None,
@@ -410,7 +432,7 @@ class Client:
 
         data = {
           'comment': comment,
-          'controlForm': control_form,
+          'controlForm': control_form_data,
           'control_form_id': control_form_id,
           'grade_origins': [{ 'grade_origin': value, 'grade_system_id': grade_system_id}],
           'grade_system_id': grade_system_id,
@@ -442,7 +464,6 @@ class Client:
 
     def get_control_forms(self, subject_id):
         if self._control_forms.get(subject_id) is None:
-            # curl 'https://dnevnik.mos.ru/core/api/?academic_year_id=8&education_level_id=3&page=1&per_page=50&pid=15033420&subject_id=56&with_grade_system=true'
             data = self.get(f'/core/api/control_forms', {
                 'academic_year_id': self.get_current_year().id,
                 'education_level_id': self._education_level_id,
@@ -453,12 +474,12 @@ class Client:
                 'with_grade_system': True,
             })
             assert 1 <= len(data) < 100
+            control_forms = [ControlForm(item) for item in data if not item['deleted_at']]
+            assert control_forms
             self._control_forms[subject_id] = {}
-            for item in data:
-                if not item["deleted_at"]:
-                    self._control_forms[subject_id][item["name"]] = item
-                    log.info(f'Got active \'{item["name"]}\' of weight {item["weight"]} for subject {subject_id}')
-            assert self._control_forms[subject_id]
+            for control_form in control_forms:
+                self._control_forms[subject_id][control_form.get_name()] = control_form
+                log.info(control_form)
         control_forms = self._control_forms[subject_id]
         log.info(f'Got {len(control_forms)} active control_forms for {subject_id}')
         return control_forms
