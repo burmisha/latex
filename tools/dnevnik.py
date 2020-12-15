@@ -42,6 +42,8 @@ def run(args):
 
     from_date_days = args.from_date
     to_date_days = args.to_date
+    assert -15 <= from_date_days <= 15
+    assert -15 <= to_date_days <= 15
 
     now_delta = library.datetools.NowDelta(default_fmt='%Y-%m-%d')
     from_date = now_delta.Before(days=from_date_days)
@@ -65,10 +67,8 @@ def run(args):
 
     schedule_items = client.get_schedule_items(from_date=from_date, to_date=to_date)
 
-    log.info('Loading available control forms...')
     for subject_id in sorted(set(lesson._subject_id for lesson in schedule_items)):
         client.get_control_forms(subject_id)
-    log.info('Loaded available control forms')
 
     for schedule_item in sorted(schedule_items, key=lambda x: x._iso_date_time):
         if class_filter and class_filter not in schedule_item._group._best_name:
@@ -92,50 +92,49 @@ def run(args):
         for mark in client.get_marks(from_date=marks_from_date, to_date=marks_to_date, group=client.get_group_by_id(group._id)):
             student = client.get_student_by_id(mark._student_profile_id)
             lesson = client.get_schedule_item_by_id(mark._schedule_lesson_id)
-            log.debug(f'{student._short_name} got {mark._name} at {lesson}')
+            log.info(f'  {student} got {mark} at {lesson}')
 
-
-    mark_setter = MarkSetter(client=client, lesson_id=220536675, point_date='2020-12-29', control_form_name='Домашняя работа', comment='Динамика - Задачи наизусть')
-    for student_name, value in [
-        ('Ан Ирина', 2),
-        ('Андрианова Софья', 4),  # 4 / 6
-        ('Артемчук Владимир', 4),  # 3 / 6
-        ('Белянкина Софья', 2),
-        ('Егиазарян Варвара', 3),  # 2 / 6
-        ('Емелин Владислав', 2),
-        ('Жичин Артём', 2),
-        ('Кошман Дарья', 4),  # 4 / 6
-        ('Кузьмичёва Анна', 2),
-        ('Куприянова Алёна', 2),
-        ('Ламанова Анастасия', 2),
-        ('Легонькова Виктория', 3),  # 2 / 6
-        ('Мартынов Семён', 2),
-        ('Минаева Варвара', 5),  # 5 / 6
-        ('Никитин Леонид', 5),  # 6 / 6
-        ('Полетаев Тимофей', 3),  # 2 / 6
-        ('Рожков Андрей', 5),  # 5 / 6
-        ('Таржиманова Рената', 5),  # 6 / 6
-        ('Трофимов Арсений', 2),
-        ('Щербаков Андрей', 4),  # 4 / 6
-        ('Ярошевский Михаил', 2),
+    for lesson_id, point_date, control_form_name, comment, marks in [
+        (220536675, '2020-12-29', 'Домашняя работа', 'Динамика - Задачи наизусть', [
+            ('Ан Ирина', 2),
+            ('Андрианова Софья', 4),  # 4 / 6
+            ('Артемчук Владимир', 4),  # 3 / 6
+            ('Белянкина Софья', 2),
+            ('Егиазарян Варвара', 3),  # 2 / 6
+            ('Емелин Владислав', 2),
+            ('Жичин Артём', 2),
+            ('Кошман Дарья', 4),  # 4 / 6
+            ('Кузьмичёва Анна', 2),
+            ('Куприянова Алёна', 2),
+            ('Ламанова Анастасия', 2),
+            ('Легонькова Виктория', 3),  # 2 / 6
+            ('Мартынов Семён', 2),
+            ('Минаева Варвара', 5),  # 5 / 6
+            ('Никитин Леонид', 5),  # 6 / 6
+            ('Полетаев Тимофей', 3),  # 2 / 6
+            ('Рожков Андрей', 5),  # 5 / 6
+            ('Таржиманова Рената', 5),  # 6 / 6
+            ('Трофимов Арсений', 2),
+            ('Щербаков Андрей', 4),  # 4 / 6
+            ('Ярошевский Михаил', 2),
+        ]),
+        (220536671, '2020-12-29', 'Цифровое домашнее задание', 'Динамика - Задачи наизусть', [
+            ('Алимпиев Алексей', 2),  # 0 / 6
+            ('Васин Евгений', 2),  # 0 / 6
+            ('Говоров Герман', 2),  # 0 / 6
+            ('Журавлёва София', 2),  # 0 / 6
+            ('Козлов Константин', 2),  # 0 / 6
+            ('Кравченко Наталья', 2),  # 0 / 6
+            ('Малышев Сергей', 2),  # 0 / 6
+            ('Полканова Алина', 2),  # 0 / 6
+            ('Пономарев Сергей', 3),  # 1 / 6
+            ('Свистушкин Егор', 2),  # 0 / 6
+            ('Соколов Дмитрий', 2),  # 0 / 6
+        ]),
     ]:
-        mark_setter.Set(student_name=student_name, value=value)
-
-    mark_setter = MarkSetter(client=client, lesson_id=220536671, point_date='2020-12-29', control_form_name='Цифровое домашнее задание', comment='Динамика - Задачи наизусть')
-    for student_name, value in [
-        ('Алимпиев Алексей', 2),  # 0 / 6
-        ('Васин Евгений', 2),  # 0 / 6
-        ('Говоров Герман', 2),  # 0 / 6
-        ('Журавлёва София', 2),  # 0 / 6
-        ('Козлов Константин', 2),  # 0 / 6
-        ('Кравченко Наталья', 2),  # 0 / 6
-        ('Малышев Сергей', 2),  # 0 / 6
-        ('Полканова Алина', 2),  # 0 / 6
-        ('Пономарев Сергей', 3),  # 1 / 6
-        ('Свистушкин Егор', 2),  # 0 / 6
-        ('Соколов Дмитрий', 2),  # 0 / 6
-    ]:
-        mark_setter.Set(student_name=student_name, value=value)
+        mark_setter = MarkSetter(client=client, lesson_id=lesson_id, point_date=point_date, control_form_name=control_form_name, comment=comment)
+        for student_name, value in marks:
+            mark_setter.Set(student_name=student_name, value=value)
 
     for res in [
         # client.get('/acl/api/users', {

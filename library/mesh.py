@@ -35,14 +35,14 @@ class StudentsGroup:
 
     def __str__(self):
         class_unit_id_str = ','.join(str(i) for i in self._class_unit_ids)
-        return f'group {cm(self._best_name, color="green")}'
+        return f'group {cm(self._best_name, color=color.Green)}'
 
     def __repr__(self):
         class_unit_id_str = ','.join(str(i) for i in self._class_unit_ids)
         return ' '.join([
-            f'group {cm(self._best_name, color="green")}',
+            f'group {cm(self._best_name, color=color.Green)}',
             f'({self._id}, {len(self._student_ids)} students),',
-            cm(f'https://dnevnik.mos.ru/manage/journal?group_id={self._id}&class_unit_id={class_unit_id_str}', color="cyan"),
+            cm(f'https://dnevnik.mos.ru/manage/journal?group_id={self._id}&class_unit_id={class_unit_id_str}', color=color.Cyan),
         ])
 
 
@@ -53,7 +53,7 @@ class StudentProfile:
         self._raw_data = data
 
     def __str__(self):
-        return f'{self._short_name}'
+        return f'{cm(self._short_name, color=color.Cyan)}'
 
     def __repr__(self):
         return f'student {self._short_name} ({self._id})'
@@ -78,10 +78,10 @@ class ScheduleItem:
         log.info(f'Link: {BASE_URL}/conference/?scheduled_lesson_id={self._id}')
 
     def __str__(self):
-        return f'lesson {cm(self._timestamp.strftime("%d %B %Y, %A, %H:%M"), color="yellow")} ({self._id}, {self._group})'
+        return f'lesson {cm(self._timestamp.strftime("%d %B %Y, %A, %H:%M"), color=color.Yellow)} ({self._id}, {self._group})'
 
     def __repr__(self):
-        return f'Schedule item {cm(self._timestamp.strftime("%d %B %Y, %A, %H:%M"), color="yellow")} ({self._id}) for {self._group!r}'
+        return f'Schedule item {cm(self._timestamp.strftime("%d %B %Y, %A, %H:%M"), color=color.Yellow)} ({self._id}) for {self._group!r}'
 
 
 class Mark:
@@ -93,6 +93,9 @@ class Mark:
         assert self._name in ['2', '3', '4', '5']
         self._raw_data = data
 
+    def __str__(self):
+        return f'{cm(self._name, color=color.Red)}'
+
 
 class ControlForm:
     def __init__(self, data):
@@ -103,7 +106,7 @@ class ControlForm:
         return self._raw_data['name']
 
     def __str__(self):
-        return f'Active control form \'{self._raw_data["name"]}\' of weight {self._raw_data["weight"]} for subject {self._raw_data["subject_id"]}'
+        return f'  Active control form [{self._raw_data["weight"]}] {cm(self._raw_data["name"], color=color.Yellow)}'
 
 
 
@@ -130,14 +133,14 @@ class Client:
         }).json()
         self._profile_id = response['profiles'][0]['id']
         self._auth_token = response['authentication_token']
-        log.info(f'Got profile_id {self._profile_id} and auth_token {self._auth_token} for {username}')
+        log.info(f'Got profile_id {self._profile_id} and auth_token {self._auth_token} for {username} at login')
 
     def _logout(self):
         response = requests.delete(
             f'{self._base_url}/lms/api/sessions?authentication_token={self._auth_token}',
             headers=self._get_headers(add_personal=False)
         ).json()
-        log.info(f'Got on login: {response}')
+        log.info(f'Got on logout: {response}')
         assert response == {'status': 'ok', 'http_status_code': 200}
 
     def get_teacher_id(self):
@@ -333,7 +336,7 @@ class Client:
                 schedule_items.append(schedule_item)
                 self._available_lessons_dict[schedule_item._id] = schedule_item
             else:
-                log.warn(f'Skipping schedule item for {cm(schedule_item._raw_data["group_name"], color="red")} as no group found')
+                log.warn(f'Skipping schedule item for {cm(schedule_item._raw_data["group_name"], color=color.Red)} as no group found')
         return schedule_items
 
     def get_marks(self, from_date=None, to_date=None, group=None):
@@ -378,14 +381,14 @@ class Client:
             log.info(colorize_json(lesson._raw_data))
             raise
 
-        log.info(f'Setting mark {cm(value, color=color.Red)} for {student} at {lesson}')
-
+        log_message = f'Setting mark {cm(value, color=color.Red)} for {student} at {lesson}'
         known_mark = self._marks_cache.get((schedule_lesson_id, student_id))
         if known_mark:
             if int(known_mark._name) == value:
-                log.info('Mark was already set')
+                log.info(f'{log_message}: already set')
                 return
             else:
+                log.error(f'{log_message}: changged mark, already have {value}')
                 raise RuntimeError('Seems to have broken mark')
 
         if comment is None:
@@ -464,6 +467,7 @@ class Client:
 
     def get_control_forms(self, subject_id):
         if self._control_forms.get(subject_id) is None:
+            log.info(f'Loading available control forms for subject {subject_id}')
             data = self.get(f'/core/api/control_forms', {
                 'academic_year_id': self.get_current_year().id,
                 'education_level_id': self._education_level_id,
@@ -480,6 +484,5 @@ class Client:
             for control_form in control_forms:
                 self._control_forms[subject_id][control_form.get_name()] = control_form
                 log.info(control_form)
-        control_forms = self._control_forms[subject_id]
-        log.info(f'Got {len(control_forms)} active control_forms for {subject_id}')
-        return control_forms
+            log.info(f'Loaded {len(self._control_forms[subject_id])} active control forms for subject {subject_id}')
+        return self._control_forms[subject_id]
