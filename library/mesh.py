@@ -3,6 +3,7 @@ import collections
 import datetime
 import re
 import requests
+import json
 
 import logging
 log = logging.getLogger(__name__)
@@ -54,10 +55,11 @@ class StudentProfile:
 class ScheduleItem:
     def __init__(self, data):
         self._id = data['id']
-        self._date = data['date']  
-        self._iso_date_time = data['iso_date_time']  
-        self._schedule_id = data['schedule_id']  
-        self._group_id = data['group_id']  
+        self._date = data['date']
+        self._iso_date_time = data['iso_date_time']
+        self._schedule_id = data['schedule_id']
+        self._group_id = data['group_id']
+        self._subject_id = data['subject_id']
         self._timestamp = datetime.datetime.strptime(self._iso_date_time, '%Y-%m-%dT%H:%M:00.000')
 
         self._raw_data = data
@@ -87,12 +89,15 @@ class Client:
         self._base_url = BASE_URL
         self._login(username=username, password=password)
 
+        self._education_level_id = 3
+
         self._current_year = None
         self._teacher_profile = None
         self._groups = None
         self._all_student_profiles = None
         self._available_lessons_dict = {}
         self._marks_cache = {}  # very silly, looses data
+        self._control_forms = {}
 
     def _login(self, username, password):
         response = requests.post(
@@ -147,7 +152,7 @@ class Client:
         return data
 
     def post(self, url, json_data):
-        assert url.startswith('/'), f'url doesn\'t start with /: {url}' 
+        assert url.startswith('/'), f'url doesn\'t start with /: {url}'
         full_url = f'{self._base_url}{url}'
         try:
             response = requests.post(full_url, json=json_data, headers=self._get_headers())
@@ -245,6 +250,13 @@ class Client:
             log.warn(f'No student item with id {student_id}')
         return student_profile
 
+    def get_student_by_name(self, student_name):
+        matched = [student_profile for student_profile in self.get_student_profiles().values() if student_profile._short_name == student_name]
+        if len(matched) == 1:
+            return matched[0]
+        else:
+            raise RuntimeError(f'Not found students by name {student_name}: got {matched}')
+
     def get_schedule_item_by_id(self, schedule_item_id):
         schedule_item = self._available_lessons_dict.get(schedule_item_id)
         if not schedule_item:
@@ -276,7 +288,7 @@ class Client:
         assert re.match(r'20\d\d-\d{2}-\d{2}', from_date), f'Invalid from_date format: {from_date}'
         assert re.match(r'20\d\d-\d{2}-\d{2}', to_date), f'Invalid to_date format: {to_date}'
         schedule_items_raw = self.get('/jersey/api/schedule_items', {
-            'academic_year_id': self.get_current_year().id, 
+            'academic_year_id': self.get_current_year().id,
             'from': from_date,
             'to': to_date,
             'original': True,
@@ -323,7 +335,10 @@ class Client:
         log.info(f'Got marks [{from_date}, {to_date}] for {group}')
         return marks
 
-    def set_mark(self, schedule_lesson_id=None, student_id=None, value=None, comment=None, weight=1, point_date=None):
+    def set_mark(self, schedule_lesson_id=None, student_id=None, value=None, comment=None, point_date=None, control_form=None):
+        assert isinstance(control_form, dict)
+        assert control_form
+
         assert isinstance(schedule_lesson_id, int)
         lesson = self.get_schedule_item_by_id(schedule_lesson_id)
         assert lesson
@@ -332,7 +347,14 @@ class Client:
         student = self.get_student_by_id(student_id)
         assert student
 
-        assert student._raw_data['class_unit']['id'] == lesson._raw_data['class_unit_id']
+        try:
+            student_group_ids = [group['id'] for group in student._raw_data['groups']]
+            assert (lesson._raw_data['group_id'] in student_group_ids) or (student._raw_data['class_unit']['id'] == lesson._raw_data['class_unit_id'])
+            # assert , [student._raw_data['class_unit']['id'], lesson._raw_data['class_unit_id']]
+        except:
+            log.info(colorize_json(student._raw_data))
+            log.info(colorize_json(lesson._raw_data))
+            raise
 
         log.info(f'Trying to set mark {cm(value, color=color.Red)} for {student} at {lesson}')
 
@@ -362,55 +384,33 @@ class Client:
             point_date_strange = f'{point_date}T04:12:35.678Z'
             assert re.match(r'\d\d\.\d\d.202\d', point_date_patched)
 
-        assert weight == 1
         assert value in [2, 3, 4, 5]
 
-        mark_name = "Домашняя работа"
-        grade_system_id = 3839912
-        grade_system_name = 'шкала оценивания 1597410492'
-        grade_system_type = 'five'
-        control_form_id = 4789098
-        subject_id = 3626
+        # TODO: round all floats better
+        control_form_str = json.dumps(control_form)
+        control_form_str = control_form_str.replace('.0', '')
+        control_form = json.loads(control_form_str)
 
-        school_id = 1098
-
-        data = {
-          'comment': comment,
-          'controlForm':{
-            'deleted_at': None,
-            'education_level_id': 3,
+        grade_system_id = int(control_form['grade_system_id'])
+        grade_system_name = control_form['grade_system']['name']
+        grade_system_type = control_form['grade_system']['type']
+        # subject_id = control_form['subject_id']  # unused
+        # school_id = control_form['school_id']  # unused
+        control_form_id = control_form['id']
+        weight = control_form['weight']
+        control_form.update({
             'fromServer': False,
-            'grade_system':{
-                'defaults':[{
-                    'five':[{'mark':5},{'mark':4},{'mark':3},{'mark':2},{'mark':1},{'mark':0}],
-                    'hundred':[{'range':{'from':81,'to':100}},{'range':{'from':61,'to':80}},{'range':{'from':31,'to':60}},{'range':{'from':21,'to':30}},{'range':{'from':11,'to':20}},{'range':{'from':0,'to':10}}],
-                    'inversion': False,
-                    'n':[{'range':{'from':81,'to':100}},{'range':{'from':61,'to':80}},{'range':{'from':31,'to':60}},{'range':{'from':21,'to':30}},{'range':{'from':11,'to':20}},{'range':{'from':0,'to':10}}],
-                    'names':[ 'Оценка 5', 'Оценка 4', 'Оценка 3', 'Оценка 2', 'Оценка 1', 'Оценка 0'],
-                    'nmax':6,
-                }],
-                'id': grade_system_id,
-                'name': grade_system_name,
-                'nmax': 6,
-                'type': grade_system_type,
-            },
-            'grade_system_id': grade_system_id,
-            'id': control_form_id,
-            'is_exam': False,
-            'name': mark_name,
-            'origin_control_form_id': None,
             'parentResource': None,
             'reqParams': None,
             'restangularCollection': False,
             'restangularized': True,
             'route': '/core/api/control_forms',
-            'school_id': school_id,
             'selected': True,
-            'short_name': '',
-            'subject_id': subject_id,
-            'type': None,
-            'weight': weight,
-          },
+        })
+
+        data = {
+          'comment': comment,
+          'controlForm': control_form,
           'control_form_id': control_form_id,
           'grade_origins': [{ 'grade_origin': value, 'grade_system_id': grade_system_id}],
           'grade_system_id': grade_system_id,
@@ -432,4 +432,33 @@ class Client:
         mark_id = response['id']
         if isinstance(mark_id, int) and mark_id > 0:
             log.info(f'Set mark id {mark_id} was ok')
+        else:
+            raise RuntimeError('Could not set mark')
         return
+
+    def delete_mark(self):
+        # curl 'https://dnevnik.mos.ru/core/api/marks/1188480155?pid=15033420' -X DELETE
+        pass
+
+    def get_control_forms(self, subject_id):
+        if self._control_forms.get(subject_id) is None:
+            # curl 'https://dnevnik.mos.ru/core/api/?academic_year_id=8&education_level_id=3&page=1&per_page=50&pid=15033420&subject_id=56&with_grade_system=true'
+            data = self.get(f'/core/api/control_forms', {
+                'academic_year_id': self.get_current_year().id,
+                'education_level_id': self._education_level_id,
+                'page': 1,
+                'per_page': 100,
+                'pid': self.get_teacher_id(),
+                'subject_id': subject_id,
+                'with_grade_system': True,
+            })
+            assert 1 <= len(data) < 100
+            self._control_forms[subject_id] = {}
+            for item in data:
+                if not item["deleted_at"]:
+                    self._control_forms[subject_id][item["name"]] = item
+                    log.info(f'Got active \'{item["name"]}\' of weight {item["weight"]} for subject {subject_id}')
+            assert self._control_forms[subject_id]
+        control_forms = self._control_forms[subject_id]
+        log.info(f'Got {len(control_forms)} active control_forms for {subject_id}')
+        return control_forms
