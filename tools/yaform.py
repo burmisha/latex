@@ -8,47 +8,12 @@ import collections
 import json
 import os
 import re
+import time
 
 import requests
 
 import logging
 log = logging.getLogger(__name__)
-
-
-def add_pupil_lines(lines, pupil_name):
-    blocks = []
-    cur_block = []
-    for line in lines:
-        if re.match(f'^#+ .*$', line):
-            if cur_block:
-                blocks.append(cur_block)
-            cur_block = [line]
-        else:
-            cur_block.append(line)
-    if cur_block:
-        blocks.append(cur_block)
-
-    position = 0
-    for block_index, block in enumerate(blocks):
-        block_name = block[0].lstrip('#').strip()
-        if block_name == pupil_name:
-            return lines
-        elif block_name < pupil_name:
-            position += 1
-
-    blocks = blocks[:position] + [[f'## {pupil_name}', '', '']] + blocks[position:]
-    result = []
-    for block in blocks:
-        result.extend(block)
-    return result
-
-
-assert add_pupil_lines(['# A'], 'A') == ['# A']
-assert add_pupil_lines(['# A', '## B'] , 'B') == ['# A', '## B']
-assert add_pupil_lines(['# A', '## C'] , 'B') == ['# A', '## B', '', '', '## C']
-assert add_pupil_lines(['# A', '## B'] , 'A') == ['# A', '## B']
-assert add_pupil_lines(['# A', '## B'] , 'D') == ['# A', '## B', '## D', '', '']
-assert add_pupil_lines(['# B', '### C'] , 'A') == ['## A', '', '', '# B', '### C']
 
 
 class Description:
@@ -58,25 +23,50 @@ class Description:
         if not os.path.exists(self._filename):
             self._write_lines([])
 
-    def _write_lines(self, lines):
-        with open(self._filename, 'w') as f:
-            for line in lines:
-                f.write(line + '\n')
+        self._blocks = {}
+        with open(self._filename, 'r') as f:
+            block = []
+            for line in f:
+                if re.match(f'^#+ .*$', line):
+                    self._add_block(block)
+                    block = []
+                block.append(line.strip())
+            self._add_block(block)
+
+    def _add_block(self, block):
+        log.debug(f'Adding block {block} to {self._blocks}')
+        if block:
+            block_name = block[0].lstrip('#').strip()
+            if not block_name:
+                return None
+            if block_name in self._blocks:
+                return None
+            self._blocks[block_name] = block
+            return block_name
+        else:
+            return None
 
     def add_pupil(self, pupil_name):
-        with open(self._filename, 'r') as f:
-            lines = [line for line in f]
+        if pupil_name:
+            self._add_block([f'## {pupil_name}', ''])
 
-        new_lines = add_pupil_lines(lines, pupil_name)
-        if new_lines != lines:
-            self._write_lines(new_lines)
+    def save(self):
+        with open(self._filename, 'w') as f:
+            for pupil_name in sorted(self._blocks):
+                for line in self._blocks[pupil_name]:
+                    f.write(line + '\n')
 
 
 class AnswersJoiner:
     def __init__(self):
         self._task_map = collections.defaultdict(lambda: collections.defaultdict(lambda: collections.defaultdict(list)))
+        ya_cookie = library.secrets.token.get('ru.yandex.cookie')
         self._headers = {
-            'Cookie': library.secrets.token.get('yandex.ru.cookie'),
+            'Cookie': ya_cookie,
+        }
+        self._csrf_headers = {
+            'Cookie': ya_cookie,
+            'csrf-token': library.secrets.token.get('ru.yandex.token.csrf'),
         }
 
     def add_answer(self, yf_answer):
@@ -85,8 +75,14 @@ class AnswersJoiner:
         pupils_dir = pupils.get_path(archive=True)
         work_id = yf_answer.get_work_id()
         pupil_name = pupil.GetFullName(surnameFirst=True)
-
-        self._task_map[pupils_dir][work_id][pupil_name] += yf_answer.get_photos()
+        if not pupils_dir:
+            log.warn(f'Skipping answer {yf_answer} as got no pupils_dir ')
+        elif not work_id:
+            log.warn(f'Skipping answer {yf_answer} as got no work_id ')
+        elif not pupil_name:
+            log.warn(f'Skipping answer {yf_answer} as got no pupil_name ')
+        else:
+            self._task_map[pupils_dir][work_id][pupil_name] += yf_answer.get_photos()
 
     def _download_to_file(self, link, filename):
         log.info(f'Downloading {link} into {filename}')
@@ -112,17 +108,50 @@ class AnswersJoiner:
                         )
                         description.add_pupil(pupil_name)
                         yield link, file_name
+                description.save()
 
     def Download(self):
         log.info('Downloading all files')
+        count, existing = 0, 0
         for link, file_name in self._get_download_cfg():
             if not os.path.exists(file_name):
                 os.makedirs(os.path.dirname(file_name), exist_ok=True)
                 self._download_to_file(link, file_name)
+                count += 1
             else:
                 log.debug('File already exists')
+                existing += 1
 
-        log.info('Downloaded all files')
+        log.info(f'Downloaded {count} files and got {existing} existing ones')
+
+    def sync_with_yadisk(self, form_id=None, wait_time=10):
+        data = {
+            'method': 'POST',
+            'path[name]': 'profile-survey-answers:export',
+            'path[params][id]': form_id,
+            'data': json.dumps({
+                'export_columns': {
+                    'answer_fields': 'id,date_created,date_updated',
+                    'orders': True,
+                    'questions': '5685839,5685855,5685930,5685860,5685887',
+                    'user_fields': '',
+                },
+                'export_format':'json',
+                'export_archived_answers': True,
+                'upload': 'disk',
+            }),
+            'query[survey]': form_id,
+        }
+        response = requests.post('https://forms.yandex.ru/admin/_api', headers=self._csrf_headers, data=data)
+
+        log.info([response.url, data])
+        if response.ok:
+            task_id = response.json()['task_id']
+            log.info(f'Got task id {task_id}. Waiting for {wait_time} seconds')
+            time.sleep(wait_time)
+        else:
+            raise RuntimeError(f'failed to start sync task: {response}, {response.content}')
+
 
 
 class YFAnswer:
@@ -143,6 +172,7 @@ class YFAnswer:
                 photos.append(link)
         self._photos_list = photos
         self._work_name = row['Что загружаем?']
+        self._raw_data = row
 
     def get_work_id(self):
         if self._work_name == 'Работа на уроке за сегодня':
@@ -173,8 +203,13 @@ class YFAnswer:
 
 
 def run(args):
-    log.info('Forse JSON update at https://forms.yandex.ru/admin/5fd491a3dfc5aebea76233ef/answers')
+    form_id = '5fd491a3dfc5aebea76233ef'
+    log.info(f'Forse JSON update at https://forms.yandex.ru/admin/{form_id}/answers')
     log.info('Delete old versions at https://disk.yandex.ru/client/disk/Yandex.Forms')
+
+    answers_joiner = AnswersJoiner()
+    if args.sync:
+        answers_joiner.sync_with_yadisk(form_id)
 
     answer_location = library.location.ya_disk('Yandex.Forms')
     candidates = library.files.walkFiles(answer_location, regexp=r'.*202021 Физика 554.*\.json')
@@ -184,7 +219,6 @@ def run(args):
     with open(yandex_form_file) as f:
         yandex_form_raw = json.load(f)
 
-    answers_joiner = AnswersJoiner()
     answers = [YFAnswer(dict(row)) for row in yandex_form_raw]
     answers.sort(key=lambda x: x._create_time)
     for answer in answers:
@@ -193,4 +227,6 @@ def run(args):
 
 
 def populate_parser(parser):
+
+    parser.add_argument('-s', '--sync', help='Sync form data from yandex server to Yandex.Disk', action='store_true')
     parser.set_defaults(func=run)
