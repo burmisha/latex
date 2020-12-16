@@ -74,8 +74,11 @@ class ScheduleItem:
     def set_group(self, group):
         self._group = group
 
-    def log_link(self):
-        log.info(f'Link: {BASE_URL}/conference/?scheduled_lesson_id={self._id}')
+    def get_link(self):
+        return f'{BASE_URL}/conference/?scheduled_lesson_id={self._id}'
+
+    def __lt__(self, other):
+        return self._iso_date_time < other._iso_date_time
 
     def __str__(self):
         return f'lesson {cm(self._timestamp.strftime("%d %B %Y, %A, %H:%M"), color=color.Yellow)} ({self._id}, {self._group})'
@@ -140,8 +143,11 @@ class Client:
             f'{self._base_url}/lms/api/sessions?authentication_token={self._auth_token}',
             headers=self._get_headers(add_personal=False)
         ).json()
-        log.info(f'Got on logout: {response}')
-        assert response == {'status': 'ok', 'http_status_code': 200}
+        if response == {'status': 'ok', 'http_status_code': 200}:
+            log.debug(f'Logged out')
+        else:
+            log.error(f'Got during log out: {response}')
+            raise RuntimeError('Could not logout')
 
     def get_teacher_id(self):
         return self._profile_id

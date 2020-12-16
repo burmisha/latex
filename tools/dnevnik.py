@@ -68,17 +68,19 @@ def run(args):
 
     schedule_items = client.get_schedule_items(from_date=from_date, to_date=to_date)
 
-    for subject_id in sorted(set(lesson._subject_id for lesson in schedule_items)):
-        client.get_control_forms(subject_id)
+    for lesson in schedule_items:
+        client.get_control_forms(lesson._subject_id)
 
-    for schedule_item in sorted(schedule_items, key=lambda x: x._iso_date_time):
+    for schedule_item in sorted(schedule_items,):
         if class_filter and class_filter not in schedule_item._group._best_name:
             continue
         if group_filter and schedule_item._group._id != group_filter:
             continue
-        if args.log_links:
-            schedule_item.log_link()
+
         log.info(schedule_item)
+        if args.log_links:
+            log.info(f'  Link: {schedule_item.get_link()}')
+
         if schedule_item._id in args.set_all_absent:
             for student_id in schedule_item._group._student_ids:
                 client.set_absent(student_id=student_id, lesson_id=schedule_item._id)
