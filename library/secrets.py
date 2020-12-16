@@ -4,7 +4,8 @@ import json
 import logging
 log = logging.getLogger(__name__)
 
-from library.logging import cm
+from library.logging import cm, color
+import library.location
 
 
 class Token:
@@ -17,10 +18,10 @@ class Token:
         if os.path.exists(file):
             with open(file) as f:
                 data = json.load(f)
-            log.warn(f'Loaded secrets from {cm(file, color="red")}')
+            log.warn(f'Loaded secrets from {cm(file, color=color.Cyan)}')
         else:
             data = {}
-            log.warn(f'Could not load secrets from missing file: {cm(file, bg="red")}')
+            log.warn(f'Could not load secrets from missing file: {cm(file, bg=color.Red)}')
 
         return data
 
@@ -35,9 +36,9 @@ class Token:
         if token_length < 40:
             token_mock = ': ' + '*' * token_length
         else:
-            token_mock = f' of length {cm(token_length, color="green")}'
-        log.info(f'Using token {cm(key, color="green")}{token_mock}')
+            token_mock = f' of length {cm(token_length, color=color.Green)}'
+        log.info(f'Using token {cm(key, color=color.Green)}{token_mock}')
         return token
 
 
-token = Token(os.path.join(os.path.dirname(__file__), '..', 'secrets.json'))
+token = Token(library.location.ya_disk('secrets.json'))
