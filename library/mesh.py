@@ -390,6 +390,8 @@ class Client:
             else:
                 log.error(f'{log_message}: changged mark, already have {value}')
                 raise RuntimeError('Seems to have broken mark')
+        else:
+            log.info(log_message)
 
         if comment is None:
             show_comment = False

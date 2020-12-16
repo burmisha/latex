@@ -104,10 +104,9 @@ def main():
         finish_time = time.time()
         log.info(cm('Finished in %.2f seconds', color=color.Green), finish_time - start_time)
     except Exception as e:
-        log.critical(f'Error message: {cm(e, color=color.Red)}')
-        log.exception(cm('Failed', bg='red'))
         finish_time = time.time()
-        log.error(cm(f'Failed in {finish_time - start_time:.2f} seconds', bg=color.Red), )
+        log.critical(f'Error message: {cm(e, color=color.Red)}')
+        log.exception(cm(f'Failed in {finish_time - start_time:.2f} seconds', color=color.Red))
 
 
 if __name__ == '__main__':

@@ -13,6 +13,7 @@ class MarkSetter:
         self._client = client
         self._point_date = point_date
         self._lesson = self._client.get_schedule_item_by_id(lesson_id)
+        assert self._lesson, f'No lesson found by id {lesson_id}'
         self._control_form = self._client.get_control_forms(self._lesson._subject_id)[control_form_name]
         self._comment = comment
 
@@ -94,7 +95,7 @@ def run(args):
             lesson = client.get_schedule_item_by_id(mark._schedule_lesson_id)
             log.info(f'  {student} got {mark} at {lesson}')
 
-    for lesson_id, point_date, control_form_name, comment, marks in [
+    marks_cfg = [
         (220536675, '2020-12-29', 'Домашняя работа', 'Динамика - Задачи наизусть', [
             ('Ан Ирина', 2),
             ('Андрианова Софья', 4),  # 4 / 6
@@ -131,10 +132,12 @@ def run(args):
             ('Свистушкин Егор', 2),  # 0 / 6
             ('Соколов Дмитрий', 2),  # 0 / 6
         ]),
-    ]:
-        mark_setter = MarkSetter(client=client, lesson_id=lesson_id, point_date=point_date, control_form_name=control_form_name, comment=comment)
-        for student_name, value in marks:
-            mark_setter.Set(student_name=student_name, value=value)
+    ]
+    if args.set_marks:
+        for lesson_id, point_date, control_form_name, comment, marks in marks_cfg:
+            mark_setter = MarkSetter(client=client, lesson_id=lesson_id, point_date=point_date, control_form_name=control_form_name, comment=comment)
+            for student_name, value in marks:
+                mark_setter.Set(student_name=student_name, value=value)
 
     for res in [
         # client.get('/acl/api/users', {
@@ -169,4 +172,5 @@ def populate_parser(parser):
     parser.add_argument('-g', '--group-filter', help='Group filter (by id)', type=int)
     parser.add_argument('--username', help='Username to login', default='burmistrovmo')
     parser.add_argument('-l', '--log-links', help='Log distant links', action='store_true')
+    parser.add_argument('-m', '--set-marks', help='Set marks', action='store_true')
     parser.set_defaults(func=run)
