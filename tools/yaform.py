@@ -15,15 +15,17 @@ import requests
 import logging
 log = logging.getLogger(__name__)
 
+EXTENSIONS = ['pdf', 'jpeg', 'jpg', 'png', 'docx', 'doc']
+
 
 class Description:
     def __init__(self, filename):
         self._filename = filename
+        self._blocks = {}
         log.info(f'Description: {self._filename}')
         if not os.path.exists(self._filename):
-            self._write_lines([])
+            self.save()
 
-        self._blocks = {}
         with open(self._filename, 'r') as f:
             block = []
             for line in f:
@@ -110,16 +112,30 @@ class AnswersJoiner:
                         yield link, file_name
                 description.save()
 
+    def _already_downloaded(self, file_name):
+        if os.path.exists(file_name):
+            return True
+
+        dir_name = os.path.dirname(file_name)
+        base_name = os.path.basename(file_name)
+        existing_files = list(library.files.walkFiles(dir_name, regexp=base_name))
+        if existing_files:
+            assert len(existing_files) == 1
+            log.info(f'{file_name} was downloaded to {existing_files[0]}')
+            return True
+        else:
+            return False
+
     def Download(self):
         log.info('Downloading all files')
         count, existing = 0, 0
         for link, file_name in self._get_download_cfg():
-            if not os.path.exists(file_name):
+            if not self._already_downloaded(file_name):
                 os.makedirs(os.path.dirname(file_name), exist_ok=True)
                 self._download_to_file(link, file_name)
                 count += 1
             else:
-                log.debug('File already exists')
+                log.debug(f'File {file_name} already exists')
                 existing += 1
 
         log.info(f'Downloaded {count} files and got {existing} existing ones')
@@ -161,15 +177,6 @@ class YFAnswer:
         self._update_time = row['Время изменения']
         self._group_name = row['Выберите группу']
         self._photos = row['Фотографии решений']
-        photos = []
-        for link in row['Фотографии решений'].split(', '):
-            if link:
-                link = link.replace('forms.yandex.ru/u/files?path=', 'forms.yandex.ru/u/files/?path=')
-                assert link.split('.')[-1].lower() in ['pdf', 'jpeg', 'jpg', 'png']
-                assert '_' in link
-                assert re.match('[0-9a-zA-Z\.\-_а-яА-Я ]+', link.split('_', 1)[1])
-                photos.append(link)
-        self._photos_list = photos
         self._work_name = row['Что загружаем?']
         self._raw_data = row
 
@@ -190,15 +197,19 @@ class YFAnswer:
         photos = []
         for link in self._photos.split(', '):
             if link:
-                link = link.replace('forms.yandex.ru/u/files?path=', 'forms.yandex.ru/u/files/?path=')
-                assert link.split('.')[-1].lower() in ['pdf', 'jpeg', 'jpg', 'png']
-                assert '_' in link
-                assert re.match('[0-9a-zA-Z\.\-_а-яА-Я ]+', link.split('_', 1)[1])
-                photos.append(link)
+                try:
+                    link = link.replace('forms.yandex.ru/u/files?path=', 'forms.yandex.ru/u/files/?path=')
+                    assert link.split('.')[-1].lower() in EXTENSIONS
+                    assert '_' in link
+                    assert re.match('[0-9a-zA-Z\.\-_а-яА-Я ]+', link.split('_', 1)[1])
+                    photos.append(link)
+                except:
+                    log.error(f'Failed on link {link}')
+                    raise
         return photos
 
     def __str__(self):
-        return f'[{self._create_time}][{len(self._photos_list)} files] {self._work_name}: {self._original_name}'
+        return f'[{self._create_time}][{len(self.get_photos())} files] {self._work_name}: {self._original_name}'
 
 
 def run(args):
@@ -226,6 +237,5 @@ def run(args):
 
 
 def populate_parser(parser):
-
     parser.add_argument('-s', '--sync', help='Sync form data from yandex server to Yandex.Disk', action='store_true')
     parser.set_defaults(func=run)
