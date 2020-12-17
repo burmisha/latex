@@ -79,11 +79,11 @@ class AnswersJoiner:
         work_id = yf_answer.get_work_id()
         pupil_name = pupil.GetFullName(surnameFirst=True)
         if not pupils_dir:
-            log.warn(f'Skipping answer {yf_answer} as got no pupils_dir ')
+            log.warn(f'Skipping answer {yf_answer} as got no pupils_dir')
         elif not work_id:
-            log.warn(f'Skipping answer {yf_answer} as got no work_id ')
+            log.warn(f'Skipping answer {yf_answer} as got no work_id')
         elif not pupil_name:
-            log.warn(f'Skipping answer {yf_answer} as got no pupil_name ')
+            log.warn(f'Skipping answer {yf_answer} as got no pupil_name')
         else:
             self._task_map[pupils_dir][work_id][pupil_name] += yf_answer.get_photos()
 
@@ -189,6 +189,9 @@ class YFAnswer:
         self._work_name = row['Что загружаем?']
         self._raw_data = row
 
+    def __lt__(self, other):
+        return self._create_time < other._create_time
+
     def get_work_id(self):
         if self._work_name == 'Работа на уроке за сегодня':
             work_id = f'{self._create_time[:10]} Задание с урока'
@@ -226,7 +229,7 @@ def get_latest_file(dir_name, regexp):
     candidates = sorted(candidates, key=lambda f: os.path.getmtime(f))
     if candidates:
         candidate = candidates[-1]
-        log.info(f'File with largest mtime: {cm(candidate, color=color.Cyan)} ')
+        log.info(f'File with largest mtime: {cm(candidate, color=color.Cyan)}')
         return candidate
     else:
         return None
@@ -245,6 +248,7 @@ def run(args):
 
     answers_joiner = AnswersJoiner()
     if args.sync:
+        log.info(f'Syncing answers to dir {cm(answer_location, color=color.Green)}')
         answers_joiner.sync_with_yadisk(form_id)
         new_latest_file = get_latest_file(answer_location, regexp)
         while (new_latest_file is None) or (new_latest_file == old_latest_file):
@@ -253,11 +257,12 @@ def run(args):
             new_latest_file = get_latest_file(answer_location, regexp)
 
     yandex_form_file = new_latest_file or old_latest_file
+    log.info(f'Using: {cm(yandex_form_file, color=color.Cyan)}')
     with open(yandex_form_file) as f:
         yandex_form_raw = json.load(f)
 
     answers = [YFAnswer(dict(row)) for row in yandex_form_raw]
-    answers.sort(key=lambda x: x._create_time)
+    answers.sort()
     for answer in answers:
         answers_joiner.add_answer(answer)
     answers_joiner.Download()
