@@ -379,6 +379,10 @@ names_picker = NamesPicker(classes_config)
 
 
 def get_class_from_string(value, addMyself=False, onlyMe=False):
+    search_by_id = names_picker.get(value)
+    if search_by_id:
+        return search_by_id
+
     assert isinstance(value, str), f'Trying to search not by str: {value}'
     assert ' ' in value, f'No space in class name: {value}'
 

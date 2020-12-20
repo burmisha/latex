@@ -15,7 +15,7 @@ NAME_MAPPING = {
     'lesha alimpiev': 'Алексей Алимпиев',
 }
 AVAILABLE_PUPILS_KEYS = ('2020 10', '2020 9')
-MATCHED_THRESHOLD = 0.8
+MATCHED_THRESHOLD = 0.6
 SURNAME_FIRST = True
 
 
@@ -67,26 +67,35 @@ class ParticipantAction:
 class MSTeamsVisitors:
     def __init__(self, filename):
         self._filename = filename
-        self._actions = list(self._load())
-        for action in self._actions:
-            log.info(action)
-        first_action_time = min(action._time for action in self._actions)
-        active_raw_name = set(action._raw_name for action in self._actions)
-        log.info(f'First action was on {cm(first_action_time, color=color.Yellow)}')
-        matched_rates = {}
-        for pupils_key in AVAILABLE_PUPILS_KEYS:
-            pupils = library.pupils.get_class_from_string(pupils_key)
-            matched_count = sum(pupils.FindByName(raw_name, use_raw_if_missing=False) is not None for raw_name in active_raw_name)
-            matched_rates[pupils_key] = matched_count / len(active_raw_name)
-        log.info(f'Matched rates: {colorize_json(matched_rates)}')
-        ok_keys = [key for key, value in matched_rates.items() if value > MATCHED_THRESHOLD]
+
+        matched_count = collections.defaultdict(int)
+        actions = []
+        available_pupils = list(
+            library.pupils.get_class_from_string(pupils_key)
+            for pupils_key in AVAILABLE_PUPILS_KEYS
+        )
+        for action in self._load():
+            for pupils in available_pupils:
+                pupil = pupils.FindByName(action._raw_name, use_raw_if_missing=False)
+                if pupil:
+                    matched_count[pupils._id] += 1
+            actions.append(action)
+
+        log.info(f'Matched rates: {colorize_json(matched_count)}')
+        ok_keys = [key for key, count in matched_count.items() if (count / len(actions)) > MATCHED_THRESHOLD]
         assert len(ok_keys) == 1
         self._pupils = library.pupils.get_class_from_string(ok_keys[0])
+        log.info(f'Using {self._pupils}')
 
-        for action in self._actions:
+        for action in actions:
             action.set_name(self._pupils)
-        # self._actions = sorted(self._actions)
+        self._actions = actions
 
+        first_action_time = min(action._time for action in self._actions)
+        log.info(f'First action was on {cm(first_action_time, color=color.Yellow)}')
+
+
+    def get_absent(self):
         all_pupils = collections.defaultdict(list)
         for action in self._actions:
             all_pupils[action._name].append(action)
@@ -99,7 +108,6 @@ class MSTeamsVisitors:
             else:
                 missing_names.append(full_name)
         log.info(f'Absent pupils:{log_list(missing_names)}')
-
 
 
     def _load(self):
