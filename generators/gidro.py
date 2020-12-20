@@ -102,7 +102,7 @@ class Ch_6_10(VariantTask):
     '= {h1:Value|cdot} \\frac{ {rho:Value} }{ {Consts.water.rho:Value} } '
     '= {h2:Value}'
 )
-@answer_test('{h2:TestAnswer}')
+@answer_test({'{h2:TestAnswer}': 1, '{h2_m:TestAnswer}': 0.7})
 @arg(matter__rho__h1=[
     (m, '\\rho_{{\\text{{{m}}}}} = {rho} кг/м^3'.format(m=m[0], rho=rho), 'h_1 = %d см' % h) for m, rho, h in [
         ('масло', 900, 90),
@@ -126,6 +126,7 @@ class Ch_6_16(VariantTask):
     def GetUpdate(self, h1=None, rho=None, Consts=None, **kws):
         return dict(
             h2='h_2 = %d см' % (h1.Value * rho.Value / Consts.water.rho.Value),
+            h2_m = 'h_2 = %.2f м' % (h1.Value * rho.Value / Consts.water.rho.Value / 100),
         )
 
 

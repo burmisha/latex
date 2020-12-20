@@ -29,6 +29,43 @@ PAPER_TEMPLATE = r'''
 '''.strip()
 
 
+class LaTeXFormatter:
+    def __init__(self, args):
+        self._args = args
+
+    def __substitute(self, line, replace_comma):
+        assert isinstance(line, str)
+        result = line.format(**(self._args))
+        if replace_comma:
+            result = re.sub('(\\d)\.(\\d)', '\\1{,}\\2', result)
+        result = re.sub(r'\+ +-', '-', result)
+        return result
+
+    def format(self, value, replace_comma=True):
+        try:
+            if value is None:
+                return None
+            elif isinstance(value, str):
+                return self.__substitute(value, replace_comma=replace_comma)
+            elif isinstance(value, dict):
+                return dict(
+                    (self.__substitute(k, replace_comma=replace_comma), v)
+                    for k, v in value.items()
+                )
+            else:
+                raise RuntimeError(f'LaTeXFormatter does not support {value}')
+        except:
+            log.error(f'Cannot format template for {type(value)}')
+            log.error(f'Template: {value}')
+            log.error(f'Args: {self._args}')
+            raise
+
+
+assert LaTeXFormatter({}).format('0.2', replace_comma=False) == '0.2'
+assert LaTeXFormatter({}).format('0.2', replace_comma=True) == r'0{,}2'
+assert LaTeXFormatter({'a': '0.20'}).format({'{a}': 0.3}, replace_comma=False) == {'0.20': 0.3}
+
+
 def check_unit_value(v):
     if isinstance(v, str) and (('=' in v and len(v) >= 3) or re.match(r'-?\d.* \w', v, re.UNICODE)):
         return value.UnitValue(v)
@@ -184,21 +221,6 @@ class VariantTask(object):
 
         return self._expanded_args_list
 
-    def __TryFormat(self, template, args, replace_comma=True):
-        if template is None:
-            return None
-        try:
-            result = template.format(**args)
-            if replace_comma:
-                result = re.sub('(\\d)\.(\\d)', '\\1{,}\\2', result)
-            result = re.sub(r'\+ +-', '-', result)
-            return result
-        except:
-            log.error(f'Cannot format template for {type(self)}')
-            log.error(f'Template: {template}')
-            log.error(f'Args: {args}')
-            raise        
-
     def GetTasksCount(self):
         return len(self._get_expanded_args_list())
 
@@ -213,14 +235,16 @@ class VariantTask(object):
         randomIndex = int(randomHash, 16) % self.GetTasksCount()
         self.__Stats[randomIndex] += 1
         args = self._get_expanded_args_list()[randomIndex]
+        laTeXFormatter = LaTeXFormatter(args)
 
         textTemplate = self.GetTextTemplate()
         answerTemplate = self.GetAnswerTemplate()
         answer_test_template = self.GetAnswerTestTemplate()
+
         return problems.task.Task(
-            self.__TryFormat(textTemplate, args),
-            answer=self.__TryFormat(answerTemplate, args),
-            test_answer=self.__TryFormat(answer_test_template, args, replace_comma=False),
+            laTeXFormatter.format(textTemplate),
+            answer=laTeXFormatter.format(answerTemplate),
+            test_answer=laTeXFormatter.format(answer_test_template, replace_comma=False),
             solutionSpace=self.GetSolutionSpace(),
         )
 
@@ -246,7 +270,7 @@ def get_class_letter(pupils):
     if pupils.Letter:
         return '{}«{}»'.format(pupils.Grade, pupils.Letter)
     else:
-        return pupils.Grade    
+        return pupils.Grade
 
 
 class MultiplePaper(object):

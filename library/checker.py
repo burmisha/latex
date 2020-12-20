@@ -10,7 +10,7 @@ import re
 import logging
 log = logging.getLogger(__name__)
 
-from library.logging import cm, color, log_list
+from library.logging import cm, color, log_list, one_line_pairs
 
 
 class ProperAnswer:
@@ -28,39 +28,24 @@ class ProperAnswer:
         'X': 'Х', 'x': 'х',
     }
 
-    def __init__(self, answer, value=1):
-        assert isinstance(value, int), f'Invalid value: {value}'
+    def __init__(self, answer, value=None):
+        assert isinstance(value, (int, float)), f'Invalid value: {value}'
+        assert isinstance(answer, (int, str))
         self._value = value
-
-        if isinstance(answer, (str, int)):
-            self._is_re = True
-            self._printable = str(answer)
-            self._canonic_re = self._format_re(answer)
-        elif isinstance(answer, generators.variant.VariantTask):
-            self._is_re = False
-            self._variant_task = answer
-        else:
-            raise RuntimeError(f'Invalid proper answer: {answer}')
-
-        assert self.IsOk(
-            PupilAnswer(''),
-            library.pupils.Pupil(name='any', surname='pupil')
-        ) is False
+        self.__re = str(answer)
 
     def _format_re(self, canonic_re):
-        canonic_re = str(canonic_re).strip()
-        canonic_re = canonic_re.replace(' ', r'\s*')
-        re.sub(r'([0-9])[,\.]([0-9])', r'\1[,\.]\2', canonic_re)
-        assert not canonic_re.startswith(r'^[\s.;,]*')
-        assert not canonic_re.endswith(r'[\s.;,]*$')
-        canonic_re = f'^{canonic_re}$'
-        return canonic_re
+        result = str(canonic_re).strip()
+        result = result.replace(' ', r'\s*')
+        result = re.sub(r'([0-9][\.,][0-9])0+\b', r'\1', result)
+        result = re.sub(r'([0-9])[,\.]([0-9])', r'\1[,\.]\2', result)
+        assert not result.startswith(r'^[\s.;,]*')
+        assert not result.endswith(r'[\s.;,]*$')
+        result = f'^{result}$'
+        return result
 
-    def Printable(self, pupil):
-        if self._is_re:
-            return self._printable
-        else:
-            return self._variant_task.GetRandomTask(pupil).GetTestAnswer()
+    def Printable(self):
+        return str(self.__re)
 
     def Value(self):
         return self._value
@@ -71,27 +56,37 @@ class ProperAnswer:
             res = res.replace(eng, rus)
         return res
 
-    def IsOk(self, pupil_answer, pupil):
-        if self._is_re:
-            if re.match(self._en_to_ru(self._canonic_re), self._en_to_ru(pupil_answer._value)):
-                return True
-        else:
-            personal_answer = self._variant_task.GetRandomTask(pupil).GetTestAnswer()
-            answer_re = self._format_re(personal_answer)
-            if re.match(self._en_to_ru(answer_re), self._en_to_ru(pupil_answer._value)):
-                return True
+    def IsOk(self, value):
+        value = re.sub(r'([0-9][\.,][0-9])0+\b', r'\1', value)
+        regexp = self._format_re(self.__re)
+        if re.match(self._en_to_ru(regexp), self._en_to_ru(value)):
+            return True
 
         return False
+
+
+assert ProperAnswer('0.20', 1).IsOk('0.2')
+# assert ProperAnswer('0.20', 1).__re == '0.20'
+assert ProperAnswer('0.20', 1).IsOk('0,2')
+assert ProperAnswer('20', 1).IsOk('20')
+assert not ProperAnswer('20', 1).IsOk('200')
+assert not ProperAnswer('200', 1).IsOk('20')
+assert not ProperAnswer('0.20', 1).IsOk('0,21')
+assert ProperAnswer('0.20', 1).IsOk('0,20')
 
 
 class PupilAnswer:
     def __init__(self, value):
         self._value = value
 
-    def Check(self, proper_answers, pupil):
-        self._result_max = max(ans.Value() for ans in proper_answers)
-        self._best_answer = list(ans for ans in proper_answers if ans.Value() == self._result_max)[0]
-        self._result = max([ans.Value() for ans in proper_answers if ans.IsOk(self, pupil)] + [0])
+    def Check(self, valid_answers_list):
+        self._result_max = max(ans.Value() for ans in valid_answers_list)
+        self._best_answer = list(ans for ans in valid_answers_list if ans.Value() == self._result_max)[0]
+        matched_values = [ans.Value() for ans in valid_answers_list if ans.IsOk(self._value)]
+        if not matched_values:
+            self._result = 0
+        else:
+            self._result = matched_values[0]
 
         current_color = None
         best_color = None
@@ -103,7 +98,7 @@ class PupilAnswer:
             else:
                 current_color = color.Red
 
-            if self._value and len(self._best_answer.Printable(pupil)) >= 2:
+            if self._value and len(self._best_answer.Printable()) >= 2:
                 best_color = color.Cyan
 
         self._color = current_color
@@ -111,10 +106,11 @@ class PupilAnswer:
 
 
 class PupilResult:
-    def __init__(self, answers_count, row):
+    def __init__(self, answers_count, row, marks):
         self._answers_count = answers_count
         self._result = []
         self._fields = {}
+        self._marks = marks
         self._parse_row(row)
 
     def _parse_row(self, row):
@@ -133,8 +129,8 @@ class PupilResult:
             elif value:
                 self._fields[key] = value
 
-    def SetPupil(self, pupils):
-        self._pupil = pupils.FindByName(self._original_name)
+    def SetPupil(self, pupil):
+        self._pupil = pupil
 
     def GetResult(self):
         return sum(answer._result for answer in self._answers)
@@ -142,18 +138,13 @@ class PupilResult:
     def GetMaxResult(self):
         return sum(answer._result_max for answer in self._answers)
 
-    def CheckAnswer(self, index, proper):
-        answer = self._answers[index]
-        answer.Check(proper, self._pupil)
-        return answer._value
-
-    def SetMark(self, marks):
+    def GetMark(self):
         mark = None
         result = self.GetResult()
-        for index, value in enumerate(marks, 3):
+        for index, value in enumerate(self._marks, 3):
             if value and result >= value:
                 mark = index
-        if any(marks) and not mark:
+        if any(self._marks) and not mark:
             mark = 2
         self._mark = mark
         return mark
@@ -163,7 +154,7 @@ class PupilResult:
         answers_line = []
         best_line = []
         for index, answer in enumerate(self._answers):
-            best_printable = answer._best_answer.Printable(self._pupil)
+            best_printable = answer._best_answer.Printable()
             result = answer._result
             result_max = answer._best_answer.Value()
 
@@ -199,31 +190,41 @@ class Checker:
         self._marks = marks or [None, None, None]
         assert len(self._marks) == 3
 
-        self._proper_answers_lists = []
-        for answer in answers:
-            if isinstance(answer, ProperAnswer):
-                answer_variants = [answer]
-            elif isinstance(answer, dict):
-                answer_variants = [ProperAnswer(key, value=value) for key, value in answer.items()]
-            else:
-                answer_variants = [ProperAnswer(answer)]
-            self._proper_answers_lists.append(answer_variants)
+        self._raw_answers = answers
 
         self._all_marks = collections.Counter()
-        self._all_answers = [collections.Counter() for answer in self._proper_answers_lists]
+        self._all_answers = [collections.Counter() for answer in self._raw_answers]
         self._all_results = collections.Counter()
 
+    def _get_proper_answer_list(self, answer, pupil):
+        if isinstance(answer, generators.variant.VariantTask):
+            answer = answer.GetRandomTask(pupil).GetTestAnswer()
+
+        if isinstance(answer, (str, int)):
+            answer_dict = {
+                str(answer): 1,
+            }
+        else:
+            assert isinstance(answer, dict), f'got {answer}'
+            for key, value in answer.items():
+                assert isinstance(key, (str, int))
+            answer_dict = answer
+
+        return [
+            ProperAnswer(key, value=value)
+            for key, value in answer_dict.items()
+        ]
+
     def GetPupilResult(self, row):
-        pupil_result = PupilResult(len(self._proper_answers_lists), row)
-        pupil_result.SetPupil(self._pupils)
+        pupil_result = PupilResult(len(self._raw_answers), row, self._marks)
+        pupil = self._pupils.FindByName(pupil_result._original_name)
+        pupil_result.SetPupil(pupil)
 
-        for index, answers in enumerate(self._proper_answers_lists):
-            answer = pupil_result.CheckAnswer(index, answers)
-            if answer:
-                self._all_answers[index][answer] += 1
+        for index, (pupil_answer, answer) in enumerate(zip(pupil_result._answers, self._raw_answers)):
+            pupil_answer.Check(self._get_proper_answer_list(answer, pupil))
+            self._all_answers[index][pupil_answer._value] += 1
 
-        mark = pupil_result.SetMark(self._marks)
-        self._all_marks[mark] += 1
+        self._all_marks[pupil_result.GetMark()] += 1
         self._all_results[pupil_result.GetResult()] += 1
 
         return pupil_result
@@ -246,14 +247,15 @@ class Checker:
         if not pupil_filter:
             for index, stats in enumerate(self._all_answers):
                 stats_line = []
+                valid_answers_list = self._get_proper_answer_list(self._raw_answers[index], self._pupils._me)
                 for answer_str, count in stats.most_common():
                     pupil_answer = PupilAnswer(answer_str)
-                    pupil_answer.Check(self._proper_answers_lists[index], self._pupils._me)
+                    pupil_answer.Check(valid_answers_list)
                     stats_line.append(f'{cm(answer_str, color=pupil_answer._color)}: {cm(count, color=color.Cyan)}')
                 stats_line = ",  ".join(stats_line)
                 log.info(f'Task {index + 1:>2}: {stats_line}.')
 
-            log.info(f'Results: {", ".join("%s: %d" % (k, v) for k, v in sorted(self._all_results.items()))}')
-            log.info(f'Marks: {", ".join("%s: %d" % (k, v) for k, v in sorted(self._all_marks.items()))}')
+            log.info(f'Results: {one_line_pairs(sorted(self._all_results.items()))}')
+            log.info(f'Marks: {one_line_pairs(sorted(self._all_marks.items()))}')
             not_found = set(p.GetFullName() for p in self._pupils.Iterate()) - found_pupils
             log.info(f'Not found:{log_list(sorted(not_found))}')
