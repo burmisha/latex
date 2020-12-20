@@ -18,9 +18,9 @@ class color:
 
 class ColorMessage:
     # https://stackoverflow.com/questions/384076/how-can-i-color-python-logging-output
-    ResetTemplate = "\033[0m"
-    ColorTemplate = "\033[1;%dm"
-    BoldTemplate = "\033[1m"
+    ResetTemplate = '\033[0m'
+    ColorTemplate = '\033[1;%dm'
+    BoldTemplate = '\033[1m'
 
     def __init__(self, enable=True):
         self._enable = enable
@@ -53,12 +53,17 @@ class ColorMessage:
 
 
 def log_list(items, tab=4):
-    return ''.join('\n' + ' ' * tab + '- ' + item for item in items)
+    if len(items) == 0:
+        return cm('Empty list', color=color.Red)
+    elif len(items) == 1:
+        return cm(str(items[0]), color=color.Red)
+
+    return ''.join('\n' + ' ' * tab + '- ' + str(item) for item in items)
 
 
 def colorize_json(data):
     return pygments.highlight(
-        json.dumps(data, sort_keys=True, indent=2, separators=(",", ":"), ensure_ascii=False),
+        json.dumps(data, sort_keys=True, indent=2, separators=(',', ': '), ensure_ascii=False),
         pygments.lexers.JsonLexer(),
         pygments.formatters.TerminalFormatter()
     )

@@ -90,7 +90,8 @@ class NameLookup:
                     best_matches.add(value)
 
         if best_match_distance is None or best_match_distance >= 2 or len(best_matches) != 1:
-            log.warn(cm(f'Could not find name for {candidate_name}: best matches are {best_matches} is bad ({best_match_distance})', bg='red'))
+            best_matches_str = ' '.join(str(best_match) for best_match in best_matches)
+            log.warn(cm(f'Could not find name for {candidate_name}: best matches are {best_matches_str} is bad ({best_match_distance})', bg='red'))
             return None
 
         name = list(best_matches)[0]
@@ -134,9 +135,9 @@ class Pupils(object):
         for pupil in self._pupils_list:
             yield pupil
 
-    def FindByName(self, name):
+    def FindByName(self, name, use_raw_if_missing=True):
         pupil = self._name_lookup.Find(name)
-        if pupil is None:
+        if pupil is None and use_raw_if_missing:
             if ' ' in name:
                 new_name, new_surname = name.split(' ', 1)
             else:

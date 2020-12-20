@@ -62,6 +62,7 @@ def CreateArgumentsParser():
 
     subparsers = parser.add_subparsers()
     for mode_name, help_message, populate_module in [
+        ('absent', 'Check absent files', tools.absent),
         ('checker', 'Check csv forms', tools.checker),
         ('convert', 'Convert pdf books into jpeg', tools.convert),
         ('dnevnik', 'Run mesh tools', tools.dnevnik),

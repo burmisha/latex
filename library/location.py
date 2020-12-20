@@ -9,6 +9,7 @@ class Location:
     Dropbox = os.path.join(Home, 'Dropbox')
     YandexDisk = os.path.join(Home, 'Yandex.Disk.localized')
     Zoom = os.path.join(Home, 'Documents', 'Zoom')
+    Downloads =  os.path.join(Home, 'Downloads')
 
 
 def zoom(*args):
@@ -28,4 +29,9 @@ def ipad(*args):
 
 def ya_disk(*args):
     path = os.path.join(Location.YandexDisk, *args)
+    return path
+
+
+def downloads(*args):
+    path = os.path.join(Location.Downloads, *args)
     return path
