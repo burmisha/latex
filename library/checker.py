@@ -14,7 +14,7 @@ from library.logging import cm, color, log_list
 
 
 class ProperAnswer:
-    ENG_RUS_MAPPING = {
+    EN_TO_RU_MAPPING = {
         'A': 'А', 'a': 'а',
         'B': 'В',
         'C': 'С', 'c': 'с',
@@ -42,6 +42,11 @@ class ProperAnswer:
         else:
             raise RuntimeError(f'Invalid proper answer: {answer}')
 
+        assert self.IsOk(
+            PupilAnswer(''),
+            library.pupils.Pupil(name='any', surname='pupil')
+        ) is False
+
     def _format_re(self, canonic_re):
         canonic_re = str(canonic_re).strip()
         canonic_re = canonic_re.replace(' ', r'\s*')
@@ -60,20 +65,20 @@ class ProperAnswer:
     def Value(self):
         return self._value
 
-    def _duplicates_to_rus(self, value):
+    def _en_to_ru(self, value):
         res = str(value)
-        for eng, rus in self.ENG_RUS_MAPPING.items():
+        for eng, rus in self.EN_TO_RU_MAPPING.items():
             res = res.replace(eng, rus)
         return res
 
     def IsOk(self, pupil_answer, pupil):
         if self._is_re:
-            if re.match(self._duplicates_to_rus(self._canonic_re), self._duplicates_to_rus(pupil_answer._value)):
+            if re.match(self._en_to_ru(self._canonic_re), self._en_to_ru(pupil_answer._value)):
                 return True
         else:
             personal_answer = self._variant_task.GetRandomTask(pupil).GetTestAnswer()
             answer_re = self._format_re(personal_answer)
-            if re.match(self._duplicates_to_rus(answer_re), self._duplicates_to_rus(pupil_answer._value)):
+            if re.match(self._en_to_ru(answer_re), self._en_to_ru(pupil_answer._value)):
                 return True
 
         return False
