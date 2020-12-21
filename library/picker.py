@@ -1,4 +1,4 @@
-from library.logging import log_list, cm
+from library.logging import log_list, cm, color
 
 import logging
 log = logging.getLogger(__name__)
@@ -34,16 +34,19 @@ class KeyPicker:
         if len(matched_keys) > 1:
             keys = [self._keys[key] for key in matched_keys]
             keys = log_list(sorted(keys))
-            log.warning(f'Too many matches for {flt}:{keys}')
+            log.warning(f'Too many matches for filter {flt}:{keys}')
+            return None
         elif len(matched_keys) == 1:
             key = matched_keys[0]
-            log.debug(f"Found '{cm(self._keys[key], color='cyan')}' (as '{key}' for '{flt_key}')")
+            log.debug(f"Found '{cm(self._keys[key], color=color.Cyan)}' (as '{key}' for '{flt_key}')")
             return self._options[key]
         else:
-            keys = log_list(sorted(self._keys.values()))
-            log.warning(f'No search results for {flt}\nAvailable ones:{keys}')
+            log.debug(f'No search results for {flt}')
+            return None
 
-        return None
+    def __str__(self):
+        keys = log_list(sorted(self._keys.values()))
+        return 'Available keys:{keys}'
 
     def all(self, flt=None):
         flt_key, matched_keys = self._get_matched_keys(flt)

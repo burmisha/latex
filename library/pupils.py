@@ -91,7 +91,7 @@ class NameLookup:
 
         if best_match_distance is None or best_match_distance >= 2 or len(best_matches) != 1:
             best_matches_str = ' '.join(str(best_match) for best_match in best_matches)
-            log.warn(cm(f'Could not find name for {candidate_name}: best matches are {best_matches_str} is bad ({best_match_distance})', bg='red'))
+            log.debug(cm(f'Could not find name for {candidate_name}: best matches are {best_matches_str} is bad ({best_match_distance})', bg='red'))
             return None
 
         name = list(best_matches)[0]
