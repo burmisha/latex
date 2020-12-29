@@ -18,6 +18,8 @@ log = logging.getLogger(__name__)
 
 EXTENSIONS = ['pdf', 'jpeg', 'jpg', 'png', 'docx', 'doc']
 
+TODAY_WORK = 'Задание с урока'
+
 
 class Description:
     def __init__(self, filename):
@@ -79,11 +81,13 @@ class AnswersJoiner:
         work_id = yf_answer.get_work_id()
         pupil_name = pupil.GetFullName(surnameFirst=True)
         if not pupils_dir:
-            log.warn(f'Skipping answer {yf_answer} as got no pupils_dir')
+            log.warn(f'{cm("Skipping", color=color.Red)} {yf_answer} as got no pupils_dir')
         elif not work_id:
-            log.warn(f'Skipping answer {yf_answer} as got no work_id')
+            log.warn(f'{cm("Skipping", color=color.Red)} {yf_answer} as got no work_id')
         elif not pupil_name:
-            log.warn(f'Skipping answer {yf_answer} as got no pupil_name')
+            log.warn(f'{cm("Skipping", color=color.Red)} {yf_answer} as got no pupil_name')
+        elif TODAY_WORK not in work_id and not work_id.startswith(str(pupils.Grade)):
+            log.warn(f'{cm("Skipping", color=color.Red)} {yf_answer} as got broken work id')
         else:
             self._task_map[pupils_dir][work_id][pupil_name] += yf_answer.get_photos()
 
@@ -142,7 +146,7 @@ class AnswersJoiner:
             if not self._already_downloaded(full_name):
                 if not os.path.isdir(best_dir):
                     log.info(f'Creating {best_dir}')
-                    os.makedirs(os.path.dirname(best_dir), exist_ok=True)
+                    os.makedirs(best_dir, exist_ok=True)
                 self._download_to_file(link, full_name)
                 count += 1
             else:
@@ -194,7 +198,7 @@ class YFAnswer:
 
     def get_work_id(self):
         if self._work_name == 'Работа на уроке за сегодня':
-            work_id = f'{self._create_time[:10]} Задание с урока'
+            work_id = f'{self._create_time[:10]} {TODAY_WORK}'
         else:
             work_id = self._work_name
         return work_id
@@ -221,7 +225,12 @@ class YFAnswer:
         return photos
 
     def __str__(self):
-        return f'[{self._create_time}][{len(self.get_photos())} files] {self._work_name}: {self._original_name}'
+        return (
+            f'answer {cm(self._create_time, color=color.Yellow)}'
+            f' - {cm(self._work_name, color=color.Cyan)}'
+            f' - {cm(len(self.get_photos()), color=color.Magenta)} files'
+            f' - {cm(self._original_name, color=color.Green)}'
+        )
 
 
 def get_latest_file(dir_name, regexp):
@@ -264,6 +273,7 @@ def run(args):
     answers = [YFAnswer(dict(row)) for row in yandex_form_raw]
     answers.sort()
     for answer in answers:
+        log.info(f'Got {answer}')
         answers_joiner.add_answer(answer)
     answers_joiner.Download()
 
