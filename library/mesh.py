@@ -118,8 +118,6 @@ class Client:
         self._base_url = BASE_URL
         self._login(username=username, password=password)
 
-        self._education_level_id = 3
-
         self._current_year = None
         self._teacher_profile = None
         self._groups = None
@@ -192,7 +190,19 @@ class Client:
             log.debug(f'Response from {url}: {response}')
             return response
         except:
-            log.error('Error on POST to {full_url} with {json_data}')
+            log.error(f'Error on POST to {full_url} with {colorize_json(json_data)}')
+            raise
+
+    def put(self, url, json_data):
+        assert url.startswith('/'), f'url doesn\'t start with /: {url}'
+        full_url = f'{self._base_url}{url}'
+        try:
+            response = requests.put(full_url, json=json_data, headers=self._get_headers())
+            response = self._check_response(response)
+            log.debug(f'Response from {url}: {response}')
+            return response
+        except:
+            log.error(f'Error on PUT to {full_url} with {colorize_json(json_data)}')
             raise
 
     def get(self, url, params):
@@ -277,6 +287,7 @@ class Client:
         return self._all_student_profiles
 
     def get_student_by_id(self, student_id):
+        assert isinstance(student_id, int)
         student_profile = self.get_student_profiles().get(student_id)
         if not student_profile:
             log.warn(f'No student item with id {student_id}')
@@ -290,6 +301,7 @@ class Client:
             raise RuntimeError(f'Not found students by name {student_name}: got {matched}')
 
     def get_schedule_item_by_id(self, schedule_item_id):
+        assert isinstance(schedule_item_id, int)
         schedule_item = self._available_lessons_dict.get(schedule_item_id)
         if not schedule_item:
             log.warn(f'No schedule item with id {schedule_item_id}')
@@ -370,29 +382,38 @@ class Client:
     def set_mark(self, schedule_lesson_id=None, student_id=None, value=None, comment=None, point_date=None, control_form=None):
         assert isinstance(control_form, ControlForm)
 
-        assert isinstance(schedule_lesson_id, int)
         lesson = self.get_schedule_item_by_id(schedule_lesson_id)
         assert lesson
 
-        assert isinstance(student_id, int)
         student = self.get_student_by_id(student_id)
         assert student
 
         try:
             student_group_ids = [group['id'] for group in student._raw_data['groups']]
             assert (lesson._raw_data['group_id'] in student_group_ids) or (student._raw_data['class_unit']['id'] == lesson._raw_data['class_unit_id'])
-            # assert , [student._raw_data['class_unit']['id'], lesson._raw_data['class_unit_id']]
         except:
             log.info(colorize_json(student._raw_data))
             log.info(colorize_json(lesson._raw_data))
-            raise
+            log.error(f'Failed on {student} at {lesson}')
+            raise RuntimeError(f'Failed at student check')
 
         log_message = f'Setting mark {cm(value, color=color.Red)} for {student} at {lesson}'
+
         known_mark = self._marks_cache.get((schedule_lesson_id, student_id))
         if known_mark:
             if int(known_mark._name) == value:
                 log.info(f'{log_message}: already set')
                 return
+            if int(known_mark._name) < value:
+                self._update_mark(
+                    mark_id=known_mark._id,
+                    schedule_lesson_id=schedule_lesson_id,
+                    student_id=student_id,
+                    value=value,
+                    comment=comment,
+                    point_date=point_date,
+                    control_form=control_form,
+                )
             else:
                 log.error(f'{log_message}: changged mark, already have {value}')
                 raise RuntimeError('Seems to have broken mark')
@@ -469,16 +490,116 @@ class Client:
             raise RuntimeError('Could not set mark')
         return
 
+    def _update_mark(self, mark_id=None, schedule_lesson_id=None, student_id=None, value=None, comment=None, point_date=None, control_form=None):
+        raise RuntimeError('Will set same mark')
+        # https://dnevnik.mos.ru/core/api/marks/1188507628?pid=15033420
+        assert isinstance(control_form, ControlForm)
+
+        lesson = self.get_schedule_item_by_id(schedule_lesson_id)
+        assert lesson
+
+        student = self.get_student_by_id(student_id)
+        assert student
+
+        try:
+            student_group_ids = [group['id'] for group in student._raw_data['groups']]
+            assert (lesson._raw_data['group_id'] in student_group_ids) or (student._raw_data['class_unit']['id'] == lesson._raw_data['class_unit_id'])
+        except:
+            log.info(colorize_json(student._raw_data))
+            log.info(colorize_json(lesson._raw_data))
+            log.error(f'Failed on {student} at {lesson}')
+            raise RuntimeError(f'Failed at student check')
+
+        log_message = f'Updating mark {cm(value, color=color.Red)} for {student} at {lesson}'
+        log.info(log_message)
+
+        if comment is None:
+            show_comment = False
+        else:
+            assert isinstance(comment, str)
+            show_comment = True
+
+        if point_date is None:
+            is_point = False
+            point_date_patched = None
+            point_date_strange = library.datetools.NowDelta().After(fmt='%FT%T.000Z', hours=20)
+        else:
+            assert isinstance(point_date, str)
+            assert re.match(r'202\d\-\d\d-\d\d', point_date)
+            is_point = True
+            point_date_patched = '.'.join([point_date[8:], point_date[5:7], point_date[:4], ])
+            point_date_strange = f'{point_date}T04:12:35.678Z'
+            assert re.match(r'\d\d\.\d\d.202\d', point_date_patched)
+
+        assert value in [2, 3, 4, 5]
+
+        # TODO: round all floats better
+        control_form_str = json.dumps(control_form._raw_data)
+        control_form_str = control_form_str.replace('.0', '')
+        control_form_data = json.loads(control_form_str)
+
+        grade_system_id = int(control_form_data['grade_system_id'])
+        grade_system_name = control_form_data['grade_system']['name']
+        grade_system_type = control_form_data['grade_system']['type']
+        # subject_id = control_form_data['subject_id']  # unused
+        # school_id = control_form_data['school_id']  # unused
+        control_form_id = control_form_data['id']
+        weight = control_form_data['weight']
+        control_form_data.update({
+            'fromServer': False,
+            'parentResource': None,
+            'reqParams': None,
+            'restangularCollection': False,
+            'restangularized': True,
+            'route': '/core/api/control_forms',
+            'selected': True,
+        })
+
+        data = {
+          'comment': comment,
+          'controlForm': control_form_data,
+          'control_form_id': control_form_id,
+          'grade_origins': [{ 'grade_origin': value, 'grade_system_id': grade_system_id}],
+          'grade_system_id': grade_system_id,
+          'grade_system_name': grade_system_name,
+          'grade_system_type': grade_system_type,
+          'is_approve': False,
+          'is_criterion': False,
+          'is_exam': False,
+          'is_point': is_point,
+          'pointDate': point_date_strange,
+          'point_date': point_date_patched,
+          'schedule_lesson_id': schedule_lesson_id,
+          'showComment': show_comment,
+          'student_profile_id': student_id,
+          'valuesByIds': {str(grade_system_id): value},
+          'weight': weight,
+
+          # some additional fields
+          'id': mark_id,
+          'name': str(value),
+        }
+
+        response = self.put(f'/core/api/marks/{mark_id}?pid={self.get_teacher_id()}', json_data=data)
+        assert response['id'] == mark_id
+        assert int(response['name']) == value
+        return
+
     def delete_mark(self):
         # curl 'https://dnevnik.mos.ru/core/api/marks/1188480155?pid=15033420' -X DELETE
         pass
 
-    def get_control_forms(self, subject_id):
-        if self._control_forms.get(subject_id) is None:
-            log.info(f'Loading available control forms for subject {subject_id}')
+    def get_control_forms(self, subject_id, grade):
+        education_level_id = {
+            10: 3,
+            9: 2,
+        }[grade]
+        key = (education_level_id, subject_id)
+        if self._control_forms.get(key) is None:
+            log.debug(f'Loading available control forms for grade {grade} subject {subject_id}')
             data = self.get(f'/core/api/control_forms', {
                 'academic_year_id': self.get_current_year().id,
-                'education_level_id': self._education_level_id,
+                'education_level_id': education_level_id,
                 'page': 1,
                 'per_page': 100,
                 'pid': self.get_teacher_id(),
@@ -488,9 +609,12 @@ class Client:
             assert 1 <= len(data) < 100
             control_forms = [ControlForm(item) for item in data if not item['deleted_at']]
             assert control_forms
-            self._control_forms[subject_id] = {}
+            self._control_forms[key] = {}
             for control_form in control_forms:
-                self._control_forms[subject_id][control_form.get_name()] = control_form
+                self._control_forms[key][control_form.get_name()] = control_form
                 log.info(control_form)
-            log.info(f'Loaded {len(self._control_forms[subject_id])} active control forms for subject {subject_id}')
-        return self._control_forms[subject_id]
+            log.info(f'Loaded {len(self._control_forms[key])} active control forms for grade {grade} subject {subject_id}')
+        return self._control_forms[key]
+
+
+# curl 'https://dnevnik.mos.ru/core/api/lesson_comments?pid=15033420'  --data-raw $'{"schedule_lesson_id":221224612,"student_id":2890790,"comment":"\u041e","teacher_id":15033420,"subject_id":56}'
