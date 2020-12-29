@@ -26,6 +26,18 @@ def pick_classes(base, config):
         raise RuntimeError(f'Invalid config: {config}')
 
 
+FORCED_NOT_DISTANT = ['2020-12-24 9']
+
+
+def is_distnant_task(task_id):
+    if task_id in FORCED_NOT_DISTANT:
+        return False
+    elif '2020-11-20' <= task_id <= '2021-07-01':  # use test version on distant
+        return True
+    else:
+        return False
+
+
 def get_all_variants():
     random_tasks = [
         ('2019-04-16 10', {'electricity': ['ForceTask', 'ExchangeTask', 'FieldTaskGenerator', 'SumTask']}),
@@ -63,7 +75,7 @@ def get_all_variants():
         tasks_classes = pick_classes(generators, tasks_classes)
 
         tasks = [task(pupils=pupils, date=date) for task in tasks_classes]
-        if '2020-11-20' <= task_id <= '2021-07-01':  # use test version on distant
+        if is_distnant_task(task_id):  # use test version on distant
             for task in tasks:
                 task.PreferTestVersion()
                 task.SolutionSpace = 0
