@@ -1,5 +1,8 @@
 import library.download
 
+import logging
+log = logging.getLogger(__name__)
+
 
 def run(args):
     for downloader in [
@@ -20,19 +23,25 @@ def run(args):
 
     for url in [
         # 'https://www.youtube.com/playlist?list=PLNG6BIg2XJxCfZtigKso6rBpJ2yk_JFVp',  # Горбушин
-        'https://www.youtube.com/playlist?list=PL66kIi3dt8A6Hd7soGMFXe6E5366Y66So',  # Фоксфорд
-        # 'Курс физики основной школы'
-        'https://www.youtube.com/playlist?list=PLYLAAGsAQhw9TcTQiq-EZeVuVPc6P8PSX',  # 7 класс
-        'https://www.youtube.com/playlist?list=PLYLAAGsAQhw_dGE-7OdXgBXu52_GbnvF7',  # 8 класс
-        'https://www.youtube.com/playlist?list=PLYLAAGsAQhw9fX9rgG5Z20V_M2AaUKErL',  # 9 класс — это 8-й
+        # 'https://www.youtube.com/playlist?list=PL66kIi3dt8A6Hd7soGMFXe6E5366Y66So',  # Фоксфорд
+        # # OnliSkill
+        # 'https://www.youtube.com/playlist?list=PLRqVDT_WVZRkqpQBB1rIGzVKCaPf5qtYi',  # OnliSkill - 7 класс
+        # 'https://www.youtube.com/playlist?list=PLRqVDT_WVZRmWRPyyVVOTe0Jc46eVxqEz',  # OnliSkill - 8 класс
+        # 'https://www.youtube.com/playlist?list=PLRqVDT_WVZRlWUbTOSqswejgrO1RvQQs1',  # OnliSkill - 9 класс
+        'https://www.youtube.com/playlist?list=PLRqVDT_WVZRkKOQFruLNC1v74_jTp6LzW',  # OnliSkill - 10 класс
+        # 'https://www.youtube.com/playlist?list=PLRqVDT_WVZRkCHtZmveDa9z3G1IiPpisi',  # OnliSkill - 11 класс
+        # # 'Курс физики основной школы'
+        # 'https://www.youtube.com/playlist?list=PLYLAAGsAQhw9TcTQiq-EZeVuVPc6P8PSX',  # 7 класс
+        # 'https://www.youtube.com/playlist?list=PLYLAAGsAQhw_dGE-7OdXgBXu52_GbnvF7',  # 8 класс
+        # 'https://www.youtube.com/playlist?list=PLYLAAGsAQhw9fX9rgG5Z20V_M2AaUKErL',  # 9 класс — это 8-й
         # 'https://www.youtube.com/playlist?list=PLYLAAGsAQhw8Y5BWL3nyecfr2nK6xqwIO',  # Підготовка до ДПА 9 клас
     ]:
         youtubePlaylist = library.download.YoutubePlaylist(url)
         title, videos = youtubePlaylist.ListVideos()
-        log.info(f'{title}')
+        log.info(f'Playlist: {title}')
         for index, url, video_title in videos:
             video_count += 1
-            log.info(f'{video_title} {url}')
+            log.info(f'  {video_title}: {url}')
 
     pavel_victor_config = {
         ('10-0', 'Курс физики старшей школы. Физические величины и их измерение. Теория погрешностей'): {
@@ -90,6 +99,7 @@ def run(args):
             5: 'https://www.youtube.com/playlist?list=PLYLAAGsAQhw_sm3UrSTHX4EPZZJjBsoTs',  # Физика ядра
         },
     }
+    pavel_victor_config = {}
     for (index_1, title_1), parts_1 in sorted(pavel_victor_config.items()):
         for parts_1, url in sorted(parts_1.items()):
             youtubePlaylist = library.download.YoutubePlaylist(url)

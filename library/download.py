@@ -1,4 +1,4 @@
-import library
+from library.logging import cm, colorize_json, color
 
 import json
 import logging
@@ -513,6 +513,9 @@ class TitleCanonizer(object):
                 (r' \(осн\)\.?', '.'),
                 (r'^8 кл - ([0-9]{3})', r'Урок \1'),
                 (r' \(осн, запись 2014 года\)\.', r'.'),
+                (r' \| Видеоурок', r''),
+                (r' \| ', r' и '),
+                (r'Ф..... 10 класс ?[:.] ?', r'Физика 10 класс. '),
             ]
 
         self._Replacements = replacements
@@ -532,31 +535,31 @@ class YoutubePlaylist(object):
         self._TitleCanonizer = TitleCanonizer()
 
     def ListVideos(self):
-        log.info('Looking for videos in %s', self._Url)
+        log.info(f'Looking for videos in {cm(self._Url, color=color.Cyan)}')
+        text = requests.get(self._Url).text
 
-        searchPrefix = 'window["ytInitialData"] = '
-        count = 0
-        index = None
-        playlistTitle = None
+        start_expression = 'var ytInitialData ='
+        end_expression = '</script>'
+        start_pos = text.find(start_expression) + len(start_expression)
+        end_pos = text.find(end_expression, start_pos)
+        js_data = text[start_pos:end_pos].strip().strip(';')
+        loaded = json.loads(js_data)
+        playlistTitle = loaded['metadata']['playlistMetadataRenderer']['title']
+        contentItems = loaded['contents']['twoColumnBrowseResultsRenderer']['tabs'][0]['tabRenderer']['content']['sectionListRenderer']['contents'][0]['itemSectionRenderer']['contents'][0]['playlistVideoListRenderer']['contents']
+
         videos = []
-        for line in requests.get(self._Url).text.split('\n'):
-            if line.strip().startswith(searchPrefix):
-                l = line.strip()[len(searchPrefix):].strip(';')
-                loaded = json.loads(l)
-                playlistTitle = loaded['metadata']['playlistMetadataRenderer']['title']
-                for contentItem in loaded['contents']['twoColumnBrowseResultsRenderer']['tabs'][0]['tabRenderer']['content']['sectionListRenderer']['contents'][0]['itemSectionRenderer']['contents'][0]['playlistVideoListRenderer']['contents']:
-                    try:
-                        index = int(contentItem['playlistVideoRenderer']['index']['simpleText'])
-                        url = 'https://www.youtube.com/watch?v=%s' % contentItem['playlistVideoRenderer']['videoId']
-                        title = contentItem['playlistVideoRenderer']['title']['runs'][0]['text']
-                        title = self._TitleCanonizer.Canonize(title)
-                        log.debug('  #%02d %s, %s', index, title, url)
-                        count += 1
-                        videos.append((index, url, title))
-                    except Exception as e:
-                        log.error('Error %s on %s', e, json.dumps(json.loads(l), separators=(",", ":"), sort_keys=True, indent=4, ensure_ascii=False))
-                        raise
+        for index, contentItem in enumerate(contentItems, 1):
+            try:
+                index_text = int(contentItem['playlistVideoRenderer']['index']['simpleText'])
+                assert index_text == index, f'Got index {index_text} instead of {index}'
+                url = 'https://www.youtube.com/watch?v=%s' % contentItem['playlistVideoRenderer']['videoId']
+                title = contentItem['playlistVideoRenderer']['title']['runs'][0]['text']
+                title = self._TitleCanonizer.Canonize(title)
+                log.debug('  #%02d %s, %s', index, title, url)
+                videos.append((index, url, title))
+            except Exception as e:
+                log.error(f'Error {e} on {colorize_json(contentItem)}')
+                raise
 
-        assert index == count, f'{index} (index) != {count} (count)'
-        log.info('Found %d videos for \'%s\' %s', count, playlistTitle, self._Url)
+        log.info(f'Found {len(videos)} videos for \'{playlistTitle}\' at {self._Url}')
         return playlistTitle, videos
