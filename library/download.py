@@ -268,16 +268,25 @@ class ZnakKachestava:
 
 
 class YoutubeVideo:
-    def __init__(self, url, title):
+    def __init__(self, url, title, dstdir=None, use_requests=False):
         assert url.startswith('https://www.youtube.com/watch?v=')
         self._url = url
         self._title = title
+        self._dstdir = dstdir
+        self._use_requests = use_requests
 
     def __str__(self):
-        return f'{cm(self._title, color=color.Yellow)} ({self._url})'
+        return f'{cm(self._title, color=color.Yellow)} ({self._url}) from {os.path.basename(self._dstdir)}'
 
-    def get_filename(self, dstdir):
-        return os.path.join(dstdir, f'{self._title}.mp4')
+    def set_dstdir(self, dstdir):
+        self._dstdir = dstdir
+
+    def get_filename(self):
+        assert os.path.isdir(self._dstdir)
+        return os.path.join(self._dstdir, f'{self._title}.mp4')
+
+    def set_use_requests(self, use_requests):
+        self._use_requests = use_requests
 
     def get_best_stream(self, preftype=None, sleepTime=1200):
         log.debug(f'Searching best stream for {self}')
@@ -294,14 +303,14 @@ class YoutubeVideo:
         log.info(f'Streams: {video.streams}, best stream: {best_stream}')
         return best_stream
 
-    def download(self, dstdir, use_requests=False):
-        filename = self.get_filename(dstdir)
+    def download(self):
+        filename = self.get_filename()
         if os.path.exists(filename):
             log.info(f'Skipping {self} as \'{filename}\' exists')
         else:
             log.info(f'Downloading {self} to \'{filename}\'')
             best_stream = self.get_best_stream(preftype='mp4')
-            if use_requests:
+            if self._use_requests:
                 data = requests.get(best_stream.url).content
                 with open(filename, 'wb') as f:
                     f.write(data)
@@ -347,7 +356,7 @@ class YoutubePlaylist:
         self._TitleCanonizer = TitleCanonizer()
 
     def ListVideos(self):
-        log.info(f'Looking for videos in {cm(self._Url, color=color.Cyan)}')
+        log.debug(f'Looking for videos in {cm(self._Url, color=color.Cyan)}')
         text = requests.get(self._Url).text
 
         start_expression = 'var ytInitialData ='
@@ -359,8 +368,9 @@ class YoutubePlaylist:
         playlistTitle = loaded['metadata']['playlistMetadataRenderer']['title']
         contentItems = loaded['contents']['twoColumnBrowseResultsRenderer']['tabs'][0]['tabRenderer']['content']['sectionListRenderer']['contents'][0]['itemSectionRenderer']['contents'][0]['playlistVideoListRenderer']['contents']
 
+        content_items = [item for item in contentItems if 'playlistVideoRenderer' in item]
         videos = []
-        for index, contentItem in enumerate(contentItems, 1):
+        for index, contentItem in enumerate(content_items, 1):
             try:
                 index_text = int(contentItem['playlistVideoRenderer']['index']['simpleText'])
                 assert index_text == index, f'Got index {index_text} instead of {index}'
@@ -375,5 +385,5 @@ class YoutubePlaylist:
                 log.error(f'Error on {colorize_json(contentItem)}')
                 raise
 
-        log.info(f'Found {len(videos)} videos for \'{playlistTitle}\' at {self._Url}')
+        log.info(f'Found {len(videos)} videos for \'{playlistTitle}\' in {cm(self._Url, color=color.Cyan)}')
         return playlistTitle, videos

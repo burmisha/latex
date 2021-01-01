@@ -8,13 +8,15 @@ log = logging.getLogger(__name__)
 
 
 def run(args):
+    save_files = args.save
+
     for downloader in [
         # library.download.MathusPhys(),
         # library.download.ZnakKachestava(),
     ]:
         downloader.Download(library.location.udr(downloader.GetDirname()))
 
-    video_count = 0
+    all_videos = []
 
     download_playlists_cfg = {
         'Foxford': 'https://www.youtube.com/playlist?list=PL66kIi3dt8A6Hd7soGMFXe6E5366Y66So',
@@ -23,22 +25,16 @@ def run(args):
         'OnliSkill - 9 класс': 'https://www.youtube.com/playlist?list=PLRqVDT_WVZRlWUbTOSqswejgrO1RvQQs1',
         'OnliSkill - 10 класс': 'https://www.youtube.com/playlist?list=PLRqVDT_WVZRkKOQFruLNC1v74_jTp6LzW',
         'OnliSkill - 11 класс': 'https://www.youtube.com/playlist?list=PLRqVDT_WVZRkCHtZmveDa9z3G1IiPpisi',
-        # 'Курс физики основной школы'
-        # 'Павел Виктор - 7 класс': 'https://www.youtube.com/playlist?list=PLYLAAGsAQhw9TcTQiq-EZeVuVPc6P8PSX',
-        # 'Павел Виктор - 8 класс': 'https://www.youtube.com/playlist?list=PLYLAAGsAQhw_dGE-7OdXgBXu52_GbnvF7',
-        # 'Павел Виктор - 9 класс': 'https://www.youtube.com/playlist?list=PLYLAAGsAQhw9fX9rgG5Z20V_M2AaUKErL',
-        # 'Павел Виктор - Подготовка к ДПА': 'https://www.youtube.com/playlist?list=PLYLAAGsAQhw8Y5BWL3nyecfr2nK6xqwIO',
-
     }
     for dirname, playlist_url in download_playlists_cfg.items():
         playlist = library.download.YoutubePlaylist(playlist_url)
         playlist_title, videos = playlist.ListVideos()
-        video_count += len(videos)
         dstdir = library.location.udr('Видео', dirname)
         if not os.path.exists(dstdir):
             os.mkdir(dstdir)
         for video in videos:
-            video.download(dstdir)
+            video.set_dstdir(dstdir)
+            all_videos.append(video)
 
     videos_download_cfg = {
         'CrashCoursePhysics': [
@@ -152,80 +148,106 @@ def run(args):
     }
     for dirname, videos in videos_download_cfg.items():
         dirname = library.location.udr('Видео', dirname)
-        log.info(f'Downloading to {cm(dirname, color=color.Cyan)}')
         for url, title in videos:
-            video_count += 1
-            youtube_video = library.download.YoutubeVideo(url, title)
-            youtube_video.download(dirname, use_requests=True)
+            video = library.download.YoutubeVideo(url, title, dstdir=dirname, use_requests=True)
+            all_videos.append(video)
 
-    pavel_victor_config = {
-        ('10-0', 'Курс физики старшей школы. Физические величины и их измерение. Теория погрешностей'): {
-            0: 'https://www.youtube.com/playlist?list=PLYLAAGsAQhw-LHb3pbAt99Uvx6RRehPPk',  # Измерения. Теория погрешностей.
-            1: 'https://www.youtube.com/playlist?list=PLYLAAGsAQhw-O0knvaGt6jCCLA7gpD_UN',  # Физический практикум
-        },
-        ('10-1', 'Механика. Кинематика'): {
-            1: 'https://www.youtube.com/playlist?list=PLYLAAGsAQhw_h-12xDu-GKRHqtVFYgDHt',  # Основные понятия кинематики
-            2: 'https://www.youtube.com/playlist?list=PLYLAAGsAQhw_DkIADOZqsWYn2hTFohPBU',  # Равномерное прямолинейное движение
-            3: 'https://www.youtube.com/playlist?list=PLYLAAGsAQhw-Z3QO7VYVcyWO1QHHi6pbf',  # Равноускоренное движение
-            4: 'https://www.youtube.com/playlist?list=PLYLAAGsAQhw8Pe-su21PGMr9hhYPxhcGK',  # Криволинейное и вращательдвижение
-        },
-        ('10-2', 'Механика. Законы динамики'): {
-            1: 'https://www.youtube.com/playlist?list=PLYLAAGsAQhw8mS6wFGCLPvweu8yRGcU4j',  # Законы Ньютона
-            2: 'https://www.youtube.com/playlist?list=PLYLAAGsAQhw9QCJdAsJFv2rQ4NrgNGBsV',  # Силы в природе
-            3: 'https://www.youtube.com/playlist?list=PLYLAAGsAQhw__kE2T8jk0xFAgjKmQ2dF2',  # Статика
-            4: 'https://www.youtube.com/playlist?list=PLYLAAGsAQhw_2yM8RxiH6Ff18cGWY9WOD',  # Применение законов динамики
-            5: 'https://www.youtube.com/playlist?list=PLYLAAGsAQhw-kdIQk9HA2MZGuUCqdGTKY',  # Динамика вращательного движения
-        },
-        ('10-3', 'Механика. Законы сохранения. Движение жидкостей и газов'): {
-            1: 'https://www.youtube.com/playlist?list=PLYLAAGsAQhw8zTgiJU5BM0hf-9seXf-Eq',  # Импульс и момент импульса
-            2: 'https://www.youtube.com/playlist?list=PLYLAAGsAQhw_7NJesD6o9yfzDk0vtnnIm',  # Работа и энергия
-            3: 'https://www.youtube.com/playlist?list=PLYLAAGsAQhw-2R0i_j9tf1Z6QEw1WhJzt',  # Движение жидкостей и газов
-        },
-        ('10-5', 'Молекулярная физика. МКТ и термодинамика'): {
-            1: 'https://www.youtube.com/playlist?list=PLYLAAGsAQhw_6jGjxZmTxnAKY-LdrzM1a',  # Основы молекулярно-кинетичестеории
-            2: 'https://www.youtube.com/playlist?list=PLYLAAGsAQhw80Lo4RK0VPCvCiDdS3ISgq',  # Уравнение состояния идеального газа
-            3: 'https://www.youtube.com/playlist?list=PLYLAAGsAQhw_ksmc1o1ZNUBG5zqvqq0Ue',  # Основы термодинамики
-        },
-        ('10-6', 'Молекулярная физика. Свойства паров, жидкостей и твердых тел'): {
-            1: 'https://www.youtube.com/playlist?list=PLYLAAGsAQhw_rrO-8LVG4vA2MLHw1VJ4Y',  # Свойства паров
-            2: 'https://www.youtube.com/playlist?list=PLYLAAGsAQhw98LcoigAEMKWmC0o0zilBO',  # Свойства жидкостей
-            3: 'https://www.youtube.com/playlist?list=PLYLAAGsAQhw8sdkmL_wvHS8zTr7BRY6py',  # Свойства твердых тел
-        },
-        ('10-7', 'Основы электродинамики'): {
-            1: 'https://www.youtube.com/playlist?list=PLYLAAGsAQhw8Jtndre2W-4cZCnZTfuqc4',  # Электростатика
-            2: 'https://www.youtube.com/playlist?list=PLYLAAGsAQhw_HRBg3k8VFTp2mDMgKFyIZ',  # Законы постоянного тока
-            3: 'https://www.youtube.com/playlist?list=PLYLAAGsAQhw_clhMs2ShkQayZK3xIGiSf',  # Магнитное поле
-            4: 'https://www.youtube.com/playlist?list=PLYLAAGsAQhw-4S63vaIZs4XJmsGx9WylD',  # Электромагнитная индукция
-            5: 'https://www.youtube.com/playlist?list=PLYLAAGsAQhw8twHGrxC2EsgswUgrlH2eF',  # Электрический ток в различных средах
-        },
-        ('11-1', 'Колебания и волны'): {
-            1: 'https://www.youtube.com/playlist?list=PLYLAAGsAQhw8eAdCNXDpyu85Pn95ZXFiE',  # Повторение механики (обзор)
-            2: 'https://www.youtube.com/playlist?list=PLYLAAGsAQhw9GedypbA-En9aam5M356v8',  # Элементы дифференциальнисчисления
-            3: 'https://www.youtube.com/playlist?list=PLYLAAGsAQhw_uIvisbeffNrk6G44ma735',  # Механические колебания
-            4: 'https://www.youtube.com/playlist?list=PLYLAAGsAQhw9hcmjWIr-E_eJwWoJpboQ5',  # Электромагнитные колебания
-            5: 'https://www.youtube.com/playlist?list=PLYLAAGsAQhw8IDqme-3NQWQEBlTHxlEfm',  # Механические волны
-            6: 'https://www.youtube.com/playlist?list=PLYLAAGsAQhw9R8PfiMnh2wkLwcpyV9ahA',  # Электромагнитные волны
-        },
-        ('11-2', 'Оптика, физика атома и ядра'): {
-            1: 'https://www.youtube.com/playlist?list=PLYLAAGsAQhw-t-V-oTSJBemkt9gysB8xE',  # Геометрическая оптика
-            2: 'https://www.youtube.com/playlist?list=PLYLAAGsAQhw9M6EaKwezrpPY361i4FqZ1',  # Фотометрия
-            3: 'https://www.youtube.com/playlist?list=PLYLAAGsAQhw9nEvX4BxcRMTRffGvIzMis',  # Физическая оптика
-            4: 'https://www.youtube.com/playlist?list=PLYLAAGsAQhw-1grjrzQxwUBhI7Qy-zS0D',  # Атомная физика
-            5: 'https://www.youtube.com/playlist?list=PLYLAAGsAQhw_sm3UrSTHX4EPZZJjBsoTs',  # Физика ядра
-        },
-    }
-    # pavel_victor_config = {}
-    for (index_1, title_1), parts_1 in sorted(pavel_victor_config.items()):
-        for parts_1, url in sorted(parts_1.items()):
-            youtubePlaylist = library.download.YoutubePlaylist(url)
-            title_2, videos = youtubePlaylist.ListVideos()
-            # assert title_1 == title_2, f'{title_1} != {title_2}'
-            full_chapter = f'{index_1}-{parts_1} - {title_2}'
-            video_count += len(videos)
+    pavel_victor_config = [
+        # 'Курс физики основной школы'
+        ('07', '7 класс', [
+            'https://www.youtube.com/playlist?list=PLYLAAGsAQhw9TcTQiq-EZeVuVPc6P8PSX',
+        ]),
+        ('08', '8 класс', [
+            'https://www.youtube.com/playlist?list=PLYLAAGsAQhw_dGE-7OdXgBXu52_GbnvF7',
+        ]),
+        ('09', '9 класс', [
+            'https://www.youtube.com/playlist?list=PLYLAAGsAQhw9fX9rgG5Z20V_M2AaUKErL',
+        ]),
+        ('09', 'Подготовка к ДПА', [
+            'https://www.youtube.com/playlist?list=PLYLAAGsAQhw8Y5BWL3nyecfr2nK6xqwIO',
+        ]),
+        ('10-0', 'Курс физики старшей школы. Физические величины и их измерение. Теория погрешностей', [
+            'https://www.youtube.com/playlist?list=PLYLAAGsAQhw-LHb3pbAt99Uvx6RRehPPk',  # Измерения. Теория погрешностей.
+            'https://www.youtube.com/playlist?list=PLYLAAGsAQhw-O0knvaGt6jCCLA7gpD_UN',  # Физический практикум
+        ]),
+        ('10-1', 'Механика. Кинематика', [
+            'https://www.youtube.com/playlist?list=PLYLAAGsAQhw_h-12xDu-GKRHqtVFYgDHt',  # Основные понятия кинематики
+            'https://www.youtube.com/playlist?list=PLYLAAGsAQhw_DkIADOZqsWYn2hTFohPBU',  # Равномерное прямолинейное движение
+            'https://www.youtube.com/playlist?list=PLYLAAGsAQhw-Z3QO7VYVcyWO1QHHi6pbf',  # Равноускоренное движение
+            'https://www.youtube.com/playlist?list=PLYLAAGsAQhw8Pe-su21PGMr9hhYPxhcGK',  # Криволинейное и вращательдвижение
+        ]),
+        ('10-2', 'Механика. Законы динамики', [
+            'https://www.youtube.com/playlist?list=PLYLAAGsAQhw8mS6wFGCLPvweu8yRGcU4j',  # Законы Ньютона
+            'https://www.youtube.com/playlist?list=PLYLAAGsAQhw9QCJdAsJFv2rQ4NrgNGBsV',  # Силы в природе
+            'https://www.youtube.com/playlist?list=PLYLAAGsAQhw__kE2T8jk0xFAgjKmQ2dF2',  # Статика
+            'https://www.youtube.com/playlist?list=PLYLAAGsAQhw_2yM8RxiH6Ff18cGWY9WOD',  # Применение законов динамики
+            'https://www.youtube.com/playlist?list=PLYLAAGsAQhw-kdIQk9HA2MZGuUCqdGTKY',  # Динамика вращательного движения
+        ]),
+        ('10-3', 'Механика. Законы сохранения. Движение жидкостей и газов', [
+            'https://www.youtube.com/playlist?list=PLYLAAGsAQhw8zTgiJU5BM0hf-9seXf-Eq',  # Импульс и момент импульса
+            'https://www.youtube.com/playlist?list=PLYLAAGsAQhw_7NJesD6o9yfzDk0vtnnIm',  # Работа и энергия
+            'https://www.youtube.com/playlist?list=PLYLAAGsAQhw-2R0i_j9tf1Z6QEw1WhJzt',  # Движение жидкостей и газов
+        ]),
+        ('10-6', 'Молекулярная физика. МКТ и термодинамика', [
+            'https://www.youtube.com/playlist?list=PLYLAAGsAQhw_6jGjxZmTxnAKY-LdrzM1a',  # Основы молекулярно-кинетичестеории
+            'https://www.youtube.com/playlist?list=PLYLAAGsAQhw80Lo4RK0VPCvCiDdS3ISgq',  # Уравнение состояния идеального газа
+            'https://www.youtube.com/playlist?list=PLYLAAGsAQhw_ksmc1o1ZNUBG5zqvqq0Ue',  # Основы термодинамики
+        ]),
+        ('10-7', 'Молекулярная физика. Свойства паров, жидкостей и твердых тел', [
+            'https://www.youtube.com/playlist?list=PLYLAAGsAQhw_rrO-8LVG4vA2MLHw1VJ4Y',  # Свойства паров
+            'https://www.youtube.com/playlist?list=PLYLAAGsAQhw98LcoigAEMKWmC0o0zilBO',  # Свойства жидкостей
+            'https://www.youtube.com/playlist?list=PLYLAAGsAQhw8sdkmL_wvHS8zTr7BRY6py',  # Свойства твердых тел
+        ]),
+        ('10-9', 'Основы электродинамики', [
+            'https://www.youtube.com/playlist?list=PLYLAAGsAQhw8Jtndre2W-4cZCnZTfuqc4',  # Электростатика
+        ]),
+        ('10-9', 'Основы электродинамики', [
+            'https://www.youtube.com/playlist?list=PLYLAAGsAQhw_HRBg3k8VFTp2mDMgKFyIZ',  # Законы постоянного тока
+        ]),
+        ('11-1', 'Основы электродинамики', [
+            'https://www.youtube.com/playlist?list=PLYLAAGsAQhw_clhMs2ShkQayZK3xIGiSf',  # Магнитное поле
+            'https://www.youtube.com/playlist?list=PLYLAAGsAQhw-4S63vaIZs4XJmsGx9WylD',  # Электромагнитная индукция
+            'https://www.youtube.com/playlist?list=PLYLAAGsAQhw8twHGrxC2EsgswUgrlH2eF',  # Электрический ток в различных средах
+        ]),
+        ('11-2', 'Колебания и волны', [
+            'https://www.youtube.com/playlist?list=PLYLAAGsAQhw8eAdCNXDpyu85Pn95ZXFiE',  # Повторение механики (обзор)
+            'https://www.youtube.com/playlist?list=PLYLAAGsAQhw9GedypbA-En9aam5M356v8',  # Элементы дифференциальнисчисления
+            'https://www.youtube.com/playlist?list=PLYLAAGsAQhw_uIvisbeffNrk6G44ma735',  # Механические колебания
+            'https://www.youtube.com/playlist?list=PLYLAAGsAQhw9hcmjWIr-E_eJwWoJpboQ5',  # Электромагнитные колебания
+            'https://www.youtube.com/playlist?list=PLYLAAGsAQhw8IDqme-3NQWQEBlTHxlEfm',  # Механические волны
+            'https://www.youtube.com/playlist?list=PLYLAAGsAQhw9R8PfiMnh2wkLwcpyV9ahA',  # Электромагнитные волны
+        ]),
+        ('11-3', 'Оптика, физика атома и ядра', [
+            'https://www.youtube.com/playlist?list=PLYLAAGsAQhw-t-V-oTSJBemkt9gysB8xE',  # Геометрическая оптика
+            'https://www.youtube.com/playlist?list=PLYLAAGsAQhw9M6EaKwezrpPY361i4FqZ1',  # Фотометрия
+            'https://www.youtube.com/playlist?list=PLYLAAGsAQhw9nEvX4BxcRMTRffGvIzMis',  # Физическая оптика
+            'https://www.youtube.com/playlist?list=PLYLAAGsAQhw-1grjrzQxwUBhI7Qy-zS0D',  # Атомная физика
+            'https://www.youtube.com/playlist?list=PLYLAAGsAQhw_sm3UrSTHX4EPZZJjBsoTs',  # Физика ядра
+        ]),
+    ]
+
+    if save_files:
+        log.warn('Skipping Павел Виктор videos from save as there too many large videos')
+        pavel_victor_config = []
+
+    for prefix, large_topic, playlists in pavel_victor_config:
+        for index, playlist_url in enumerate(playlists, 1):
+            youtube_playlist = library.download.YoutubePlaylist(playlist_url)
+            small_topic, videos = youtube_playlist.ListVideos()
+            dirname = f'Павел Виктор - {prefix}-{index} - {large_topic} - {small_topic}'
             for video in videos:
-                log.info(f'{full_chapter}: {video}')
-    log.info(f'Got total of {video_count} videos')
+                video.set_dstdir(library.location.udr('Видео', dirname))
+                all_videos.append(video)
+
+    log.info(f'Got total of {len(all_videos)} videos')
+
+    for video in all_videos:
+        if save_files:
+            video.download()
+        else:
+            log.info(video)
 
 
 def populate_parser(parser):
+    parser.add_argument('-s', '--save', help='Save videos to hard drive', action='store_true')
     parser.set_defaults(func=run)
