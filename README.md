@@ -15,9 +15,10 @@ $ pip3 install -e git+git://github.com/ojii/pymaging.git#egg=pymaging
 $ pip3 install -e git+git://github.com/ojii/pymaging-png.git#egg=pymaging-png
 
 $ pip3 install -r requirements.txt
+$ pip3 install youtube-dl -U --upgrade-strategy eager  # force update
 
 $ . venv/bin/activate
 $ ./run.py --help
 ```
 
-2012–2020 burmisha
+2012–2021 burmisha
