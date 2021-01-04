@@ -1,5 +1,6 @@
 import library.location
 from library.location import Location
+from library.logging import cm, color
 
 import csv
 import datetime
@@ -14,6 +15,8 @@ log = logging.getLogger(__name__)
 
 BROKEN_Y = '\u0438\u0306'  # й из 2 символов
 PROPER_Y = '\u0439'  # й из 1 символа
+BROKEN_YO = '\u0435\u0308'  # ё из 2 символов
+PROPER_YO = '\u0451'  # ё из 1 символа
 
 
 class UdrPath(object):
@@ -27,6 +30,38 @@ class UdrPath(object):
             log.warn('Create missing %s', resPath)
             os.mkdir(resPath)
         return resPath
+
+
+def path_is_ok(value, raise_on_error=True):
+    invalid_substrings = [BROKEN_Y, BROKEN_YO, '–', '—']
+    for substring in invalid_substrings:
+        if substring in value:
+            pos = value.find(substring)
+            msg = value[:pos] + cm(value[pos:pos+len(substring)], bg=color.Red) + value[pos+len(substring):]
+            log.info(f'Broken {substring} in {msg}')
+            if raise_on_error:
+                raise RuntimeError(f'Broken {substring}')
+    return True
+
+
+def is_dir(dir_name):
+    if not path_is_ok(dir_name):
+        raise RuntimeError(f'Broken dir name {dir_name}')
+    if not os.path.exists(dir_name):
+        raise RuntimeError(f'No dir {dir_name}')
+    if not os.path.isdir(dir_name):
+        raise RuntimeError(f'Not dir {dir_name}')
+    return True
+
+
+def is_file(file_name):
+    if not path_is_ok(file_name):
+        raise RuntimeError(f'Broken file name {file_name}')
+    if not os.path.exists(file_name):
+        raise RuntimeError(f'No file {file_name}')
+    if not os.path.isfile(file_name):
+        raise RuntimeError(f'Not file {file_name}')
+    return True
 
 
 def walkFiles(

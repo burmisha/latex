@@ -12,23 +12,6 @@ import logging
 log = logging.getLogger(__name__)
 
 
-BROKEN_Y = '\u0438\u0306'  # й из 2 символов
-PROPER_Y = '\u0439'  # й из 1 символа
-BROKEN_YO = '\u0435\u0308'  # ё из 2 символов
-PROPER_YO = '\u0451'  # ё из 1 символа
-
-
-def check_for_broken_y(value, raise_on_error=True):
-    invalid_substrings = [BROKEN_Y, BROKEN_YO, '–', '—']
-    for substring in invalid_substrings:
-        if substring in value:
-            pos = value.find(substring)
-            msg = value[:pos] + library.logging.cm(value[pos:pos+len(substring)], bg=library.logging.color.Red) + value[pos+len(substring):]
-            log.info(f'Broken {substring} in {msg}')
-            if raise_on_error:
-                raise RuntimeError(f'Broken {substring}')
-
-
 class Structure:
     def __call__(self):
         raise NotImplementedError('Could not get structure')
@@ -101,10 +84,11 @@ class PdfBook:
         pageShift=None,
     ):
         assert pdfPath.endswith('.pdf')
-        assert os.path.exists(pdfPath), f'{pdfPath} is missing'
-        assert os.path.isdir(dstPath), f'{dstPath} is not dir'
-        check_for_broken_y(pdfPath)
-        check_for_broken_y(dstPath)
+        assert library.files.is_file(pdfPath)
+        assert library.files.is_dir(dstPath)
+
+        assert library.files.path_is_ok(pdfPath)
+        assert library.files.path_is_ok(dstPath)
         self.PdfPath = pdfPath
         self.DstPath = dstPath
 
@@ -124,8 +108,7 @@ class PdfBook:
             return 0
 
     def EnsureDir(self, dirname):
-        log.debug(f'Checking {dirname}')
-        assert BROKEN_Y not in dirname
+        assert library.files.path_is_ok(dirname)
         if not os.path.isdir(dirname):
             log.info(f'Create missing {dirname}')
             os.mkdir(dirname)
@@ -138,6 +121,7 @@ class PdfBook:
         else:
             dirName = self.DstPath
         fileName = os.path.join(dirName, f'{nameTemplate} - {pageNumber:03d}.png')
+        assert library.files.path_is_ok(fileName)
         return fileName
 
     def ExtractPage(self, pageNumber, dirName=None, nameTemplate=None, overwrite=False):
@@ -153,7 +137,6 @@ class PdfBook:
             log.debug(f'Already generated {fileName}')
             return
 
-        assert BROKEN_Y not in fileName
         command = [
             'magick',
             'convert',
@@ -180,12 +163,10 @@ class PdfBook:
             self.ExtractPage(pageNumber, dirName=dirName, nameTemplate=nameTemplate, overwrite=overwrite)
 
     def GetStrangeFiles(self, remove=False):
-        log.debug('Looking for for strange files in {self.DstPath}')
+        log.debug(f'Looking for for strange files in {self.DstPath}')
 
         found = set(library.files.walkFiles(self.DstPath, extensions=['.png']))
-        for foundFile in sorted(found):
-            if BROKEN_Y in foundFile:
-                raise RuntimeError(f'Broken {PROPER_Y} (got 2 symbols instead of 1) in \'{foundFile}\'')
+        assert all(library.files.path_is_ok(file) for file in found)
 
         knownFiles = []
         for pageNumber, dirName, nameTemplate in self._structure():
@@ -197,7 +178,7 @@ class PdfBook:
         log.info(f'Found {len(strange)} strange files (expected {len(known)}, found {len(found)}) in {self.DstPath}')
         for file in strange:
             log.info(f'Unknown file {file}', )
-            check_for_broken_y(file, raise_on_error=False)
+            assert library.files.path_is_ok(file, raise_on_error=False)
             if remove:
                 os.remove(file)
 
@@ -252,12 +233,10 @@ class DocxToPdf:
     def __init__(self):
         assert platform.system() == 'Darwin', 'DocxToPdf converter is configured for macOS only'
         self.__GroupContainerDir = os.path.join(library.location.Location.Home, 'Library', 'Group Containers', 'UBF8T346G9.Office')
-        assert os.path.exists(self.__GroupContainerDir)
-        assert os.path.isdir(self.__GroupContainerDir)
+        assert library.files.is_dir(self.__GroupContainerDir)
 
     def ConvertFile(self, source_file, destination_file):
-        assert os.path.exists(source_file)
-        assert os.path.isfile(source_file)
+        assert library.files.is_file(source_file)
         assert source_file.endswith('.docx')
         assert destination_file.endswith('.pdf')
 
@@ -303,8 +282,7 @@ class DocxToPdf:
         assert stderr == b'', 'stderr expected to by empty, got %s (%r)' % (stderr.decode('utf-8'), stderr.decode('utf-8'))
         assert p.returncode == 0, 'returncode expected to be 0, got %s (%r)' % (p.returncode, p.returncode)
 
-        assert os.path.exists(tmp_pdf_file)
-        assert os.path.isfile(tmp_pdf_file)
+        assert library.files.is_file(tmp_pdf_file)
 
         shutil.move(tmp_pdf_file, destination_file)
         log.info(f'Converted \'{source_file}\' to \'{destination_file}\'')
@@ -312,14 +290,12 @@ class DocxToPdf:
         return True
 
     def ConvertDir(self, source_directory, destination_directory=None, recursive=True, regexp=None):
-        assert os.path.exists(source_directory), f'No dir {source_directory}'
-        assert os.path.isdir(source_directory), f'Not dir {source_directory}'
+        assert library.files.is_dir(source_directory)
         if destination_directory:
             dst_path = os.path.join(source_directory, destination_directory)
         else:
             dst_path = source_directory
-        assert os.path.exists(dst_path), f'No dir {dst_path}'
-        assert os.path.isdir(dst_path), f'Not dir {dst_path}'
+        assert library.files.is_dir(dst_path)
 
         docx_suffix = '.docx'
         new_converted = 0
@@ -346,8 +322,7 @@ class PdfToPdf:
     '''
 
     def __init__(self, source_file):
-        assert os.path.exists(source_file)
-        assert os.path.isfile(source_file)
+        assert library.files.is_file(source_file)
         assert source_file.endswith('.pdf')
         self._source_file = source_file
         self._tmp_dir = os.path.join(library.location.Location.Home, 'tmp')
