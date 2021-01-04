@@ -1,5 +1,7 @@
 import library.files
+import library.location
 import library.logging
+import library.process
 
 import os
 import platform
@@ -27,22 +29,55 @@ def check_for_broken_y(value, raise_on_error=True):
                 raise RuntimeError(f'Broken {substring}')
 
 
-class OneDStructure(object):
+class Structure:
+    def __call__(self):
+        raise NotImplementedError('Could not get structure')
+
+    def _impl(self, sub_dir=None, start_index=None, parts=None):
+        has_digit = all(part[0].isdigit() for part, _, _ in parts)  # all subfiles start with digit
+        for index, (part_name, first, last) in enumerate(parts, start_index):
+            if first > last:
+                log.error('Error in book config for %r, %r', first, last)
+                raise RuntimeError('Broken pages range in structure')
+
+            if has_digit:
+                name = f'{part_name}'
+            else:
+                name = f'{index:02d} {part_name}'
+
+            for page in range(first, last + 1):
+                yield page, sub_dir(index, name), name
+
+
+class ZeroDStructure(Structure):
     def __init__(self, data, startIndex=1):
         self.Data = data
         self.StartIndex = startIndex
 
     def __call__(self):
-        for index, (name, first, last) in enumerate(self.Data, self.StartIndex):
-            dirName = '%02d %s' % (index, name)
-            if first > last:
-                log.error('Error in book config for %r, %r', first, last)
-                raise RuntimeError('Broken pages range')
-            for pageNumber in range(first, last + 1):
-                yield pageNumber, dirName, '%02d %s' % (index, name)
+        for result in self._impl(
+            sub_dir=lambda index, name: None,
+            start_index=self.StartIndex,
+            parts=self.Data,
+        ):
+            yield result
 
 
-class TwoDStructure(object):
+class OneDStructure(Structure):
+    def __init__(self, data, startIndex=1):
+        self.Data = data
+        self.StartIndex = startIndex
+
+    def __call__(self):
+        for result in self._impl(
+            sub_dir=lambda index, name: f'{name}',
+            start_index=self.StartIndex,
+            parts=self.Data,
+        ):
+            yield result
+
+
+class TwoDStructure(Structure):
     def __init__(self, data, firstLevelStartIndex=1, secondLevelStartIndex=1):
         self.Data = data
         self.FirstLevelStartIndex = firstLevelStartIndex
@@ -50,22 +85,15 @@ class TwoDStructure(object):
 
     def __call__(self):
         for chapterIndex, (chapterName, parts) in enumerate(self.Data, self.FirstLevelStartIndex):
-            dirName = '%02d %s' % (chapterIndex, chapterName)
-            hasDigit = all(part[0].isdigit() for part, _, _ in parts)
-            for partIndex, (partName, first, last) in enumerate(parts, self.SecondLevelStartIndex):
-                if first > last:
-                    log.error('Error in book config for %r, %r', first, last)
-                    raise RuntimeError('Broken pages range')
-
-                for pageNumber in range(first, last + 1):
-                    if hasDigit:
-                        nameTemplate = '%s' % partName
-                    else:
-                        nameTemplate = '%02d %s' % (partIndex, partName)
-                    yield pageNumber, dirName, nameTemplate
+            for result in self._impl(
+                sub_dir=lambda index, name: f'{chapterIndex:02d} {chapterName}',
+                start_index=self.SecondLevelStartIndex,
+                parts=parts,
+            ):
+                yield result
 
 
-class PdfBook(object):
+class PdfBook:
     def __init__(
         self,
         pdfPath=None,
@@ -77,12 +105,14 @@ class PdfBook(object):
         assert os.path.isdir(dstPath), f'{dstPath} is not dir'
         check_for_broken_y(pdfPath)
         check_for_broken_y(dstPath)
-        # assert BROKEN_Y not in pdfPath, f'BROKEN_Y in pdfPath: {pdfPath}'
-        # assert BROKEN_Y not in dstPath, f'BROKEN_Y in dstPath: {dstPath}'
         self.PdfPath = pdfPath
         self.DstPath = dstPath
+
         if not hasattr(self, '_ppi'):
             self._ppi = 200
+
+        if not hasattr(self, '_magick_params'):
+            self._magick_params = []
 
     def GetPageShift(self, pageNumber):
         if hasattr(self, 'PageShift'):
@@ -93,9 +123,6 @@ class PdfBook(object):
         else:
             return 0
 
-    def GetPpi(self):
-        return int(self._ppi)
-
     def EnsureDir(self, dirname):
         log.debug(f'Checking {dirname}')
         assert BROKEN_Y not in dirname
@@ -103,22 +130,15 @@ class PdfBook(object):
             log.info(f'Create missing {dirname}')
             os.mkdir(dirname)
 
-    def GetParams(self):
-        if hasattr(self, 'ParamsList'):
-            return self.ParamsList
-        else:
-            return []
-
-    def GetDirFilename(self, dirName, nameTemplate, pageNumber):
+    def GetFilename(self, dirName, nameTemplate, pageNumber):
         self.EnsureDir(self.DstPath)
         if dirName:
             dirName = os.path.join(self.DstPath, dirName)
             self.EnsureDir(dirName)
         else:
             dirName = self.DstPath
-        fileName = '%s - %03d.png' % (nameTemplate, pageNumber)
-        fileName = os.path.join(dirName, fileName)
-        return dirName, fileName
+        fileName = os.path.join(dirName, f'{nameTemplate} - {pageNumber:03d}.png')
+        return fileName
 
     def ExtractPage(self, pageNumber, dirName=None, nameTemplate=None, overwrite=False):
         assert isinstance(pageNumber, int)
@@ -126,23 +146,20 @@ class PdfBook(object):
         pageIndex = self.GetPageShift(pageNumber) + pageNumber - 1
         assert 1 <= pageIndex < 1000
 
-        dirName, fileName = self.GetDirFilename(dirName, nameTemplate, pageNumber)
-        log.info('  Page %d -> %s', pageNumber, fileName)
-
-        self.EnsureDir(self.DstPath)
-        self.EnsureDir(dirName)
+        fileName = self.GetFilename(dirName, nameTemplate, pageNumber)
+        log.info(f'  Page {pageNumber} -> {fileName}')
 
         if os.path.exists(fileName) and not overwrite:
-            log.debug('Already generated %s', fileName)
-            return False
+            log.debug(f'Already generated {fileName}')
+            return
 
         assert BROKEN_Y not in fileName
         command = [
             'magick',
             'convert',
             '-log', '%t %e',
-            '-density', str(self.GetPpi() * 3),
-            '-resample', str(self.GetPpi()),
+            '-density', str(self._ppi * 3),
+            '-resample', str(self._ppi),
             '-trim',
             '+repage',
             # '-transparent', '"#ffffff"',
@@ -150,26 +167,20 @@ class PdfBook(object):
             '-background', 'white',
             # '-define', 'png:compression-level=9',
             '-flatten',
-        ] + self.GetParams() + [
-            '%s[%d]' % (self.PdfPath, pageIndex),
+        ] + self._magick_params + [
+            f'{self.PdfPath}[{pageIndex}]',
             fileName,
         ]
-        log.debug('Running %r', command)
-        result = subprocess.call(command)
-        if result != 0:
-            log.error(f'Failed to convert (got {result}) on {command}')
-            raise RuntimeError('Convert failed')
-        else:
-            return True
+        library.process.run(command)
 
     def Save(self, overwrite=False):
         data = list(self._structure())
-        log.info('Saving %d pages from \'%s\' to \'%s\'', len(data), self.PdfPath, self.DstPath)
+        log.info(f'Saving {len(data)} pages from \'{self.PdfPath}\' to \'{self.DstPath}\'')
         for pageNumber, dirName, nameTemplate in data:
             self.ExtractPage(pageNumber, dirName=dirName, nameTemplate=nameTemplate, overwrite=overwrite)
 
     def GetStrangeFiles(self, remove=False):
-        log.debug('Checking for strange files in %s', self.DstPath)
+        log.debug('Looking for for strange files in {self.DstPath}')
 
         found = set(library.files.walkFiles(self.DstPath, extensions=['.png']))
         for foundFile in sorted(found):
@@ -178,14 +189,14 @@ class PdfBook(object):
 
         knownFiles = []
         for pageNumber, dirName, nameTemplate in self._structure():
-            filename = self.GetDirFilename(dirName, nameTemplate, pageNumber)[1]
+            filename = self.GetFilename(dirName, nameTemplate, pageNumber)
             knownFiles.append(filename)
 
         known = set(knownFiles)
         strange = sorted(found - known)
-        log.info('Found %d strange files (expected %d, found %d) in %s', len(strange), len(known), len(found), self.DstPath)
+        log.info(f'Found {len(strange)} strange files (expected {len(known)}, found {len(found)}) in {self.DstPath}')
         for file in strange:
-            log.info('Unknown file %s', file)
+            log.info(f'Unknown file {file}', )
             check_for_broken_y(file, raise_on_error=False)
             if remove:
                 os.remove(file)
@@ -200,7 +211,8 @@ def page_shift(shift):
 
 def params(params_list):
     def decorator(cls):
-        cls.ParamsList = params_list
+        assert isinstance(params_list, list)
+        cls._magick_params = params_list
         return cls
     return decorator
 
@@ -229,15 +241,17 @@ def source_link(link):
 
 def ppi(value):
     def decorator(cls):
+        assert isinstance(value, int), f'Strange ppi: {value} is not int'
+        assert 120 <= value <= 300, f'Strange ppi: {value} is out of range'
         cls._ppi = value
         return cls
     return decorator
 
 
-class DocxToPdf(object):
+class DocxToPdf:
     def __init__(self):
         assert platform.system() == 'Darwin', 'DocxToPdf converter is configured for macOS only'
-        self.__GroupContainerDir = os.path.join(os.environ['HOME'], 'Library', 'Group Containers', 'UBF8T346G9.Office')
+        self.__GroupContainerDir = os.path.join(library.location.Location.Home, 'Library', 'Group Containers', 'UBF8T346G9.Office')
         assert os.path.exists(self.__GroupContainerDir)
         assert os.path.isdir(self.__GroupContainerDir)
 
@@ -326,7 +340,7 @@ class DocxToPdf(object):
 
 
 
-class PdfToPdf(object):
+class PdfToPdf:
     '''
     https://apple.stackexchange.com/questions/99210/mac-os-x-how-to-merge-pdf-files-in-a-directory-according-to-their-file-names
     '''
@@ -336,7 +350,7 @@ class PdfToPdf(object):
         assert os.path.isfile(source_file)
         assert source_file.endswith('.pdf')
         self._source_file = source_file
-        self._tmp_dir = os.path.join(os.environ['HOME'], 'tmp')
+        self._tmp_dir = os.path.join(library.location.Location.Home, 'tmp')
 
     def Extract(self, pages, destination_file):
         log.info('Extracting pages %s to %s', pages, destination_file)
