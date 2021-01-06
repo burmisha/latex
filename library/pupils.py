@@ -14,26 +14,39 @@ from library.logging import cm
 
 class Pupil(object):
     def __init__(self, name=None, surname=None):
-        self.Name = name
-        self.Surname = surname
+        self._name = name
+        self._surname = surname
+        self._mesh_name = None
+
+    def set_mesh_name(self, mesh_name):
+        self._mesh_name = mesh_name
+
+    def get_paper_name(self):
+        return f'{self._name} {self._surname}'
+
+    def get_mesh_name(self):
+        if self._mesh_name is None:
+            return f'{self._surname} {self._name}'
+        else:
+            return self._mesh_name
 
     def GetFullName(self, surnameFirst=False):
         if surnameFirst:
-            parts = [self.Surname, self.Name]
+            parts = [self._surname, self._name]
         else:
-            parts = [self.Name, self.Surname]
+            parts = [self._name, self._surname]
         return ' '.join(part for part in parts if part)
 
     def GetRandomSeedPart(self):
-        return f'{self.Name} {self.Surname}'
+        return f'{self._name} {self._surname}'
 
     def __str__(self):
-        return f'{self.Name} {self.Surname}'
+        return f'{self._name} {self._surname}'
 
     def __lt__(self, other):
-        if self.Surname < other.Surname:
+        if self._surname < other._surname:
             return True
-        elif self.Surname == other.Surname and self.Name < other.Name:
+        elif self._surname == other._surname and self._name < other._name:
             return True
         else:
             return False
