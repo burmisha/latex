@@ -45,3 +45,4 @@ diff_cv/graph/*
 venv
 
 *secret*.json
+*.json
