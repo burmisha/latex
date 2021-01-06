@@ -24,12 +24,12 @@ def run(args):
     all_videos = []
 
     download_playlists_cfg = {
-        'Foxford': 'https://www.youtube.com/playlist?list=PL66kIi3dt8A6Hd7soGMFXe6E5366Y66So',
-        'OnliSkill - 7 класс': 'https://www.youtube.com/playlist?list=PLRqVDT_WVZRkqpQBB1rIGzVKCaPf5qtYi',
-        'OnliSkill - 8 класс': 'https://www.youtube.com/playlist?list=PLRqVDT_WVZRmWRPyyVVOTe0Jc46eVxqEz',
-        'OnliSkill - 9 класс': 'https://www.youtube.com/playlist?list=PLRqVDT_WVZRlWUbTOSqswejgrO1RvQQs1',
+        # 'Foxford': 'https://www.youtube.com/playlist?list=PL66kIi3dt8A6Hd7soGMFXe6E5366Y66So',
+        # 'OnliSkill - 7 класс': 'https://www.youtube.com/playlist?list=PLRqVDT_WVZRkqpQBB1rIGzVKCaPf5qtYi',
+        # 'OnliSkill - 8 класс': 'https://www.youtube.com/playlist?list=PLRqVDT_WVZRmWRPyyVVOTe0Jc46eVxqEz',
+        # 'OnliSkill - 9 класс': 'https://www.youtube.com/playlist?list=PLRqVDT_WVZRlWUbTOSqswejgrO1RvQQs1',
         'OnliSkill - 10 класс': 'https://www.youtube.com/playlist?list=PLRqVDT_WVZRkKOQFruLNC1v74_jTp6LzW',
-        'OnliSkill - 11 класс': 'https://www.youtube.com/playlist?list=PLRqVDT_WVZRkCHtZmveDa9z3G1IiPpisi',
+        # 'OnliSkill - 11 класс': 'https://www.youtube.com/playlist?list=PLRqVDT_WVZRkCHtZmveDa9z3G1IiPpisi',
     }
     for dirname, playlist_url in download_playlists_cfg.items():
         playlist = library.download.YoutubePlaylist(playlist_url)
@@ -245,11 +245,18 @@ def run(args):
 
     log.info(f'Got total of {len(all_videos)} videos')
 
+    topic_detector = library.download.TopicDetector()
     for video in all_videos:
+        topic_index = topic_detector.get_topic_index(video._title)
+
         if save_files:
             video.download()
         else:
-            log.info(video)
+            if not topic_index:
+                log.info(video)
+            else:
+                log.info(f'{video}, {topic_index}')
+
 
 
 def populate_parser(parser):

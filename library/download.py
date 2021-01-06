@@ -485,11 +485,20 @@ class TopicDetector:
                         assert topic_index not in self._matcher[subpart_name]
                         self._matcher[subpart_name].append(topic_index)
 
+    def _form_key(self, title):
+        tmp = title.lower()
+        tmp = tmp.remove('класс')
+        tmp = tmp.remove('класс')
+        return ''.join(c for c in tmp if c.isalpha() or c.isdigit())
 
     def get_topic_index(self, title, grade=None):
         assert grade in (7, 8, 9, 10, 11, None)
         topic_indices = self._matcher[title]
-        topic_indices = [topic_index for topic_index in topic_indices if topic_index[0] == grade]
+        topic_indices = [
+            topic_index
+            for topic_index in topic_indices
+            if self._form_key(topic_index[0]) == self._form_key(grade)
+        ]
         if len(topic_indices) == 1:
             return topic_indices[0]
         elif len(topic_indices) > 1:
