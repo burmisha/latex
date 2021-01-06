@@ -1,12 +1,13 @@
 from library.logging import cm, colorize_json, color
 
+import collections
 import json
-import logging
 import os
 import re
 import requests
 import time
 
+import logging
 log = logging.getLogger(__name__)
 
 
@@ -324,7 +325,6 @@ class TitleCanonizer:
             log.debug('Using default replacements')
             replacements = [
                 (r'^Физика[\.:] ', ''),
-                (r'  +', ' '),
                 (r' Центр онлайн-обучения «Фоксфорд»$', ''),
                 (r'\.$', ''),
                 (r' \(осн\)\.?', '.'),
@@ -332,11 +332,14 @@ class TitleCanonizer:
                 (r' \(осн, запись 2014 года\)\.', r'.'),
                 (r' \| Видеоурок', r''),
                 (r' \| ', r' и '),
-                (r'(.): ', r'\1 - '),
-                (r' : ', r' - '),
+                (r'(.+)', r'- \1 -'),
                 (r'\?', r''),
+                (r'(\. )?[Чч](асть)? *(\d)', r' - \3'),
                 (r'Подготовка к ЕГЭ по физике. Занятие', r' - '),
-                (r'Ф..... 10 класс ?[:.] ?', r'Физика 10 класс. '),
+                (r'ВарІант', r'Вариант'),
+                (r'[Фф]..... (\d\d?) класс *[:.] *', r'\1-'),
+                (r':', r' - '),
+                (r'  +', ' '),
             ]
 
         self._Replacements = replacements
@@ -347,6 +350,133 @@ class TitleCanonizer:
             canonized = re.sub(pattern, replacement, canonized)
         canonized = canonized.strip()
         return canonized
+
+
+TopicIndex = collections.namedtuple('TopicIndex', ['Grade', 'Part', 'Subpart', 'Index'])
+
+
+class TopicDetector:
+    CONFIG = {
+        10: {
+            1: {
+                1: [
+                    'Механическое движение и его виды. Материальная точка, траектория, перемещение',
+                    'Проекции вектора на оси координат',
+                ],
+                2: [
+                    'Средняя скорость',
+                    'Правило сложения скоростей и Относительная скорость',
+                    'Движение связанных тел',
+                ],
+                3: [
+                    'Прямолинейное равноускоренное движение',
+                    'Графики кинематических величин',
+                    'Движение по вертикали',
+                    'Свободное падение'
+                    'Путь в n-ю секунду',
+                ],
+                4: [
+                    'Горизонтальный бросок',
+                ],
+                5: [
+                    'Бросок под углом к горизонту',
+                ],
+                6: [
+                    'Движение по окружности с постоянной скоростью',
+                ],
+            },
+            2: {
+                1: [
+                    'Первый закон Ньютона',
+                    'Второй закон Ньютона. Сила. Принцип суперпозиции сил',
+                    'Вес тела',
+                ],
+                2: [
+                    'Закон всемирного тяготения',
+                    'Сила тяжести и ускорение свободного падения',
+                    'Первая космическая скорость',
+                    'Период движения спутника',
+                ],
+                3: [
+                    'Сила упругости. Коэффициент жесткости',
+                    'Сила трения',
+                    'Сила под углом к горизонту',
+                    'Наклонная плоскость',
+                ],
+                4: [
+                    'Динамика движения по окружности',
+                ],
+            },
+            3: {
+                1: [
+                    'Импульс тела. Относительный импульс. Изменение импульса'
+                    'Закон сохранения импульса тел'
+                    'Второй закон Ньютона в импульсном виде. Реактивная сила'
+                    'Закон сохранения импульса в проекциях на оси координат'
+                ],
+                2: [
+                    'Работа силы',
+                    'Мощность',
+                    'Кинетическая энергия и Теорема о кинетической энергии',
+                    'Потенциальная энергия тела',
+                    'Закон сохранения энергии'
+                    'Превращение механической энергии в тепловую',
+                ],
+            },
+            4: {
+                1: [
+                    'Сила Архимеда',
+                    'Гидравлический пресс',
+                    'Сообщающиеся сосуды',
+                ],
+            },
+            6: {
+                1: [
+                    'Молекулярная физика',
+                    'Температура',
+                    'Основное уравнение молекулярно-кинетической теории идеального газа',
+                    'Объединенный газовый закон',
+                    'Закон Дальтона',
+                    'Уравнение Клапейрона-Менделеева',
+                    'Изопроцессы',
+                    'Графики изопроцессов',
+                    'Агрегатные (фазовые) переходы'
+                    'Влажность воздуха',
+                ],
+            },
+            7:  {
+                1: [
+                    'Работа в термодинамике',
+                    'Адиабатный процесс',
+                ],
+            },
+            # 'Гармонические колебания. Решение задач'
+        }
+    }
+
+    def __init__(self):
+        self._matcher = collections.defaultdict(list)
+        for grade, parts in self.CONFIG.items():
+            for part_index, subparts in parts.items():
+                for subpart_index, subpart_names in subparts.items():
+                    for index, subpart_name in enumerate(subpart_names, 1):
+                        topic_index = TopicIndex(grade, part_index, subpart_index, index)
+                        assert topic_index not in self._matcher[subpart_name]
+                        self._matcher[subpart_name].append(topic_index)
+
+
+    def get_topic_index(self, title, grade=None):
+        assert grade in (7, 8, 9, 10, 11, None)
+        topic_indices = self._matcher[title]
+        topic_indices = [topic_index for topic_index in topic_indices if topic_index[0] == grade]
+        if len(topic_indices) == 1:
+            return topic_indices[0]
+        elif len(topic_indices) > 1:
+            log.warn(f'Too many topic indices for {title} in {grade}: {topic_indices}')
+            return None
+        else:
+            log.debug(f'No topic indices for {title} in {grade}')
+            return None
 
 
 class YoutubePlaylist:

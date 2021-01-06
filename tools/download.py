@@ -9,6 +9,11 @@ log = logging.getLogger(__name__)
 
 def run(args):
     save_files = args.save
+    add_pavel_victor = args.pavel_viktor
+
+    if save_files and add_pavel_victor:
+        log.error('Could not download Павел Виктор videos from save as there too many large videos')
+        raise RuntimeError('Could not save all videos')
 
     for downloader in [
         # library.download.MathusPhys(),
@@ -19,12 +24,12 @@ def run(args):
     all_videos = []
 
     download_playlists_cfg = {
-        'Foxford': 'https://www.youtube.com/playlist?list=PL66kIi3dt8A6Hd7soGMFXe6E5366Y66So',
-        'OnliSkill - 7 класс': 'https://www.youtube.com/playlist?list=PLRqVDT_WVZRkqpQBB1rIGzVKCaPf5qtYi',
-        'OnliSkill - 8 класс': 'https://www.youtube.com/playlist?list=PLRqVDT_WVZRmWRPyyVVOTe0Jc46eVxqEz',
-        'OnliSkill - 9 класс': 'https://www.youtube.com/playlist?list=PLRqVDT_WVZRlWUbTOSqswejgrO1RvQQs1',
+        # 'Foxford': 'https://www.youtube.com/playlist?list=PL66kIi3dt8A6Hd7soGMFXe6E5366Y66So',
+        # 'OnliSkill - 7 класс': 'https://www.youtube.com/playlist?list=PLRqVDT_WVZRkqpQBB1rIGzVKCaPf5qtYi',
+        # 'OnliSkill - 8 класс': 'https://www.youtube.com/playlist?list=PLRqVDT_WVZRmWRPyyVVOTe0Jc46eVxqEz',
+        # 'OnliSkill - 9 класс': 'https://www.youtube.com/playlist?list=PLRqVDT_WVZRlWUbTOSqswejgrO1RvQQs1',
         'OnliSkill - 10 класс': 'https://www.youtube.com/playlist?list=PLRqVDT_WVZRkKOQFruLNC1v74_jTp6LzW',
-        'OnliSkill - 11 класс': 'https://www.youtube.com/playlist?list=PLRqVDT_WVZRkCHtZmveDa9z3G1IiPpisi',
+        # 'OnliSkill - 11 класс': 'https://www.youtube.com/playlist?list=PLRqVDT_WVZRkCHtZmveDa9z3G1IiPpisi',
     }
     for dirname, playlist_url in download_playlists_cfg.items():
         playlist = library.download.YoutubePlaylist(playlist_url)
@@ -226,8 +231,7 @@ def run(args):
         ]),
     ]
 
-    if save_files:
-        log.warn('Skipping Павел Виктор videos from save as there too many large videos')
+    if not add_pavel_victor:
         pavel_victor_config = []
 
     for prefix, large_topic, playlists in pavel_victor_config:
@@ -250,4 +254,5 @@ def run(args):
 
 def populate_parser(parser):
     parser.add_argument('-s', '--save', help='Save videos to hard drive', action='store_true')
+    parser.add_argument('-p', '--pavel-viktor', help='Add Pavel Viktor', action='store_true')
     parser.set_defaults(func=run)
