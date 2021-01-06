@@ -1,4 +1,4 @@
-import Levenshtein
+from fuzzywuzzy import process, fuzz
 
 import collections
 import re
@@ -17,6 +17,14 @@ class Pupil(object):
         self._name = name
         self._surname = surname
         self._mesh_name = None
+
+    @property
+    def name(self):
+        return self._name
+
+    @property
+    def surname(self):
+        return self._surname
 
     def set_mesh_name(self, mesh_name):
         self._mesh_name = mesh_name
@@ -52,66 +60,10 @@ class Pupil(object):
             return False
 
 
-class NameLookup:
-    def __init__(self, names_dict):
-        assert names_dict
-        for name in names_dict:
-            assert name
-        self._names = names_dict
-        self._unique_names = {}
-
-        counter = collections.Counter()
-        for name, value in self._names.items():
-            parts = sorted(self._split(name))
-            parts += [
-                ' '.join(parts),
-                ' '.join(parts[::-1]),
-            ]
-            for part in parts:
-                counter[part] += 1
-                self._unique_names[part] = value
-
-        for part, count in sorted(counter.items()):
-            if count != 1:
-                log.debug(f'{part} has {count} duplicates, will not use')
-                del self._unique_names[part]
-            else:
-                log.debug(f'Using {part} → {self._unique_names[part]}')
-
-    def _split(self, line):
-        parts = re.split(r'\s|-|,|;|\.', line)
-        return [p.strip() for p in parts if len(p) >= 2]
-
-    def _distance(self, name_1, name_2):
-        name_1_strip = name_1.strip().lower()
-        name_2_strip = name_2.strip().lower()
-        assert len(name_1_strip) >= 2
-        assert len(name_2_strip) >= 2
-        distance = Levenshtein.distance(name_1_strip, name_2_strip)
-        return distance
-
-    def Find(self, candidate_name):
-        best_matches = set()
-        best_match_distance = None
-        for part in sorted(self._split(candidate_name)):
-            for key, value in sorted(self._unique_names.items()):
-                distance = self._distance(part, key)
-                if best_match_distance is None or distance < best_match_distance:
-                    best_matches = set([value])
-                    best_match_distance = distance
-                elif distance == best_match_distance:
-                    best_matches.add(value)
-
-        if best_match_distance is None or best_match_distance >= 2 or len(best_matches) != 1:
-            best_matches_str = ' '.join(str(best_match) for best_match in best_matches)
-            log.debug(cm(f'Could not find name for {candidate_name}: best matches are {best_matches_str} is bad ({best_match_distance})', bg='red'))
-            return None
-
-        name = list(best_matches)[0]
-        return name
-
-
 class Pupils(object):
+    SEARCH_MIN_THRESHOLD = 60
+    SEARCH_DELTA_MULTIPLIER = 0.8
+
     def __init__(self, pupils_id=None, pupils=[], letter=None, grade=None, year=None):
         self._id = pupils_id
         self._pupils_list = pupils
@@ -130,10 +82,10 @@ class Pupils(object):
             'М': 'M',
             'АБ': 'AB',
         }[self.Letter]
-        self._name_lookup = NameLookup(dict([
-            (pupil.GetFullName(), pupil)
+        self._name_lookup = dict([
+            (f'{pupil.name} {pupil.surname}', pupil)
             for pupil in self.Iterate()
-        ]))
+        ])
 
     def get_path(self, *args, archive=True):
         return library.location.udr(
@@ -149,13 +101,30 @@ class Pupils(object):
             yield pupil
 
     def FindByName(self, name, use_raw_if_missing=True):
-        pupil = self._name_lookup.Find(name)
-        if pupil is None and use_raw_if_missing:
+        best_keys = process.extract(name, self._name_lookup.keys(), limit=2, scorer=fuzz.token_sort_ratio)
+        assert 1 <= len(best_keys) <= 2
+        best_key = None
+
+        if best_keys[0][1] >= self.SEARCH_MIN_THRESHOLD:
+            if len(best_keys) == 1:
+                best_key = best_keys[0][0]
+            elif len(best_keys) == 2 and best_keys[1][1] < self.SEARCH_DELTA_MULTIPLIER * best_keys[0][1]:
+                best_key = best_keys[0][0]
+
+        pupil = None
+        if best_key:
+            pupil = self._name_lookup[best_key]
+        elif use_raw_if_missing:
             if ' ' in name:
                 new_name, new_surname = name.split(' ', 1)
             else:
                 new_name, new_surname = name, ''
-            return Pupil(name=new_name, surname=new_surname)
+            pupil = Pupil(name=new_name, surname=new_surname)
+            log.warn(f'Could not find pupil by name {name!r} in {self._id}, candidates are {best_keys}, using {pupil}')
+        else:
+            log.error(f'Could not find pupil by name {name!r} in {self._id}, candidates are {best_keys}')
+            raise RuntimeError(f'Could not find pupil {name}')
+        log.debug(f'Search pupil by name {name!r} in {self._id}: {best_keys} → {pupil}')
         return pupil
 
     def GetRandomSeedPart(self):
@@ -163,7 +132,6 @@ class Pupils(object):
 
     def __str__(self):
         return f'{len(self._pupils_list)} pupils from {self._id}'
-
 
 
 classes_config = {
