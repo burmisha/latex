@@ -500,6 +500,33 @@ class YoutubePlaylist:
         self._Url = url
         self._TitleCanonizer = TitleCanonizer()
 
+    def __str__(self):
+        return f'{cm(self._Url, color=color.Cyan)}'
+
+    def get_unique_suffix(self, videos, title, url):
+        suffixes = [''] + [f' - {i}' for i in range(2, 4)]
+        for suffix in suffixes:
+            new_title = title + suffix
+            has_duplicate = False
+            for video in videos:
+                if video._title == new_title:
+                    has_duplicate = True
+                    if video._url == url:
+                        log.info(f'Found full duplicate for {title!r}, skipping')
+                        return False, None
+                    else:
+                        log.warn((
+                            f'Found duplicate for {title!r} with another url: '
+                            f'check {video._url} and {url}'
+                        ))
+            if not has_duplicate:
+                if suffix:
+                    log.warn(f'Got suffix {suffix} for {title} at {url}')
+                return True, suffix
+
+        raise RuntimeError(f'Could not resolve duplicate {title!r}, check {url}')
+                    
+
     def ListVideos(self):
         log.debug(f'Looking for videos in {cm(self._Url, color=color.Cyan)}')
         text = requests.get(self._Url).text
@@ -521,14 +548,15 @@ class YoutubePlaylist:
                 assert index_text == index, f'Got index {index_text} instead of {index}'
                 video_id = contentItem['playlistVideoRenderer']['videoId']
                 title_text = contentItem['playlistVideoRenderer']['title']['runs'][0]['text']
-                youtube_video = YoutubeVideo(
-                    f'https://www.youtube.com/watch?v={video_id}',
-                    self._TitleCanonizer.Canonize(title_text),
-                )
-                videos.append(youtube_video)
+                title_text = self._TitleCanonizer.Canonize(title_text)
+                url = f'https://www.youtube.com/watch?v={video_id}'
+
+                is_unique, suffix = self.get_unique_suffix(videos, title_text, url)
+                if is_unique:
+                    videos.append(YoutubeVideo(url, title_text + suffix))
             except:
-                log.error(f'Error on {colorize_json(contentItem)}')
+                log.error(f'Error on {colorize_json(contentItem)} in {self}')
                 raise
 
-        log.info(f'Found {len(videos)} videos for \'{playlistTitle}\' in {cm(self._Url, color=color.Cyan)}')
+        log.info(f'Found {len(videos)} videos for \'{playlistTitle}\' in {self}')
         return playlistTitle, videos
