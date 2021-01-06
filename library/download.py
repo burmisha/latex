@@ -332,12 +332,14 @@ class TitleCanonizer:
                 (r' \(осн, запись 2014 года\)\.', r'.'),
                 (r' \| Видеоурок', r''),
                 (r' \| ', r' и '),
-                (r'(.+)', r'- \1 -'),
+                (r'\((\w+)\)', r'- \1 -'),
+                (r'\(', r''),
+                (r'\)', r''),
                 (r'\?', r''),
                 (r'(\. )?[Чч](асть)? *(\d)', r' - \3'),
                 (r'Подготовка к ЕГЭ по физике. Занятие', r' - '),
                 (r'ВарІант', r'Вариант'),
-                (r'[Фф]..... (\d\d?) класс *[:.] *', r'\1-'),
+                (r'[Фф]..... +(\d\d?) +класс *[:.-] *', r'\1 класс - '),
                 (r':', r' - '),
                 (r'  +', ' '),
             ]
@@ -351,6 +353,19 @@ class TitleCanonizer:
         canonized = canonized.strip()
         return canonized
 
+def test_title_canonizer():
+    title_canonizer = TitleCanonizer()
+    for src, canonic_dst in [
+        ('Физика 10 класс  : Второй', '10 класс - Второй'),
+        ('Физика 10 класс - Прямолинейное', '10 класс - Прямолинейное'),
+        ('Физика 10 класс - Прямолинейное равноускоренное движение', '10 класс - Прямолинейное равноускоренное движение'),
+        ('Физика 10  класс : Прямолинейное', '10 класс - Прямолинейное'),
+        ('частиц (часть 1)', 'частиц - 1'),
+    ]:
+        dst = title_canonizer.Canonize(src)
+        assert dst == canonic_dst, f'Expected {canonic_dst!r}, got {dst!r} from {src!r}'
+
+test_title_canonizer()
 
 TopicIndex = collections.namedtuple('TopicIndex', ['Grade', 'Part', 'Subpart', 'Index'])
 
