@@ -1,4 +1,6 @@
-from library.logging import cm, colorize_json, color
+from fuzzywuzzy import process, fuzz
+
+from library.logging import cm, colorize_json, color, one_line_pairs
 
 import collections
 import json
@@ -377,6 +379,8 @@ TopicIndex = collections.namedtuple('TopicIndex', ['Grade', 'Part', 'Subpart', '
 
 
 class TopicDetector:
+    SEARCH_MIN_THRESHOLD = 80
+    SEARCH_DELTA_MULTIPLIER = 0.85
     CONFIG = {
         10: {
             1: {
@@ -393,7 +397,7 @@ class TopicDetector:
                     'Прямолинейное равноускоренное движение',
                     'Графики кинематических величин',
                     'Движение по вертикали',
-                    'Свободное падение'
+                    'Свободное падение',
                     'Путь в n-ю секунду',
                 ],
                 4: [
@@ -430,17 +434,17 @@ class TopicDetector:
             },
             3: {
                 1: [
-                    'Импульс тела. Относительный импульс. Изменение импульса'
-                    'Закон сохранения импульса тел'
-                    'Второй закон Ньютона в импульсном виде. Реактивная сила'
-                    'Закон сохранения импульса в проекциях на оси координат'
+                    'Импульс тела. Относительный импульс. Изменение импульса',
+                    'Закон сохранения импульса тел',
+                    'Второй закон Ньютона в импульсном виде. Реактивная сила',
+                    'Закон сохранения импульса в проекциях на оси координат',
                 ],
                 2: [
                     'Работа силы',
                     'Мощность',
                     'Кинетическая энергия и Теорема о кинетической энергии',
                     'Потенциальная энергия тела',
-                    'Закон сохранения энергии'
+                    'Закон сохранения энергии',
                     'Превращение механической энергии в тепловую',
                 ],
             },
@@ -461,7 +465,7 @@ class TopicDetector:
                     'Уравнение Клапейрона-Менделеева',
                     'Изопроцессы',
                     'Графики изопроцессов',
-                    'Агрегатные (фазовые) переходы'
+                    'Агрегатные (фазовые) переходы',
                     'Влажность воздуха',
                 ],
             },
@@ -479,34 +483,42 @@ class TopicDetector:
         self._matcher = collections.defaultdict(list)
         for grade, parts in self.CONFIG.items():
             for part_index, subparts in parts.items():
-                for subpart_index, subpart_names in subparts.items():
-                    for index, subpart_name in enumerate(subpart_names, 1):
+                for subpart_index, titles in subparts.items():
+                    for index, title in enumerate(titles, 1):
                         topic_index = TopicIndex(grade, part_index, subpart_index, index)
-                        assert topic_index not in self._matcher[subpart_name]
-                        self._matcher[subpart_name].append(topic_index)
-
-    def _form_key(self, title):
-        tmp = title.lower()
-        tmp = tmp.remove('класс')
-        tmp = tmp.remove('класс')
-        return ''.join(c for c in tmp if c.isalpha() or c.isdigit())
+                        assert topic_index not in self._matcher[title]
+                        self._matcher[title].append(topic_index)
 
     def get_topic_index(self, title, grade=None):
         assert grade in (7, 8, 9, 10, 11, None)
-        topic_indices = self._matcher[title]
-        topic_indices = [
-            topic_index
-            for topic_index in topic_indices
-            if self._form_key(topic_index[0]) == self._form_key(grade)
-        ]
+        search_key = title.replace('класс', '')
+        if grade:
+            search_key = search_key.replace(str(grade), '')
+        best_keys = process.extract(search_key, self._matcher.keys(), limit=2, scorer=fuzz.token_sort_ratio)
+
+        best_key = None
+        if best_keys[0][1] >= self.SEARCH_MIN_THRESHOLD:
+            if len(best_keys) == 1:
+                best_key = best_keys[0][0]
+            elif best_keys[1][1] < self.SEARCH_DELTA_MULTIPLIER * best_keys[0][1]:
+                best_key = best_keys[0][0]
+
+        topic_indices = []
+        if best_key:
+            topic_indices = self._matcher[best_key]
+            if grade:
+                topic_indices = [topic_index for topic_index in topic_indices if topic_index.Grade == grade]
         if len(topic_indices) == 1:
-            return topic_indices[0]
-        elif len(topic_indices) > 1:
-            log.warn(f'Too many topic indices for {title} in {grade}: {topic_indices}')
-            return None
+            topic_index = topic_indices[0]
         else:
-            log.debug(f'No topic indices for {title} in {grade}')
-            return None
+            topic_index = None
+
+        log.debug((
+            f'Search topic index by title {cm(title, color=color.Cyan)} in grade {grade}: {cm(topic_index, color=color.Cyan)}\n'
+            f'  Best keys are: {one_line_pairs(sorted([(v, k) for k, v in best_keys], reverse=True))}\n'
+            f'  Topic indices {topic_indices}'
+        ))
+        return topic_index
 
 
 class YoutubePlaylist:

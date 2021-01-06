@@ -70,7 +70,7 @@ def colorize_json(data):
 
 
 def one_line_pairs(data):
-    return ', '.join('%s: %d' % (k, v) for k, v in data)
+    return ',  '.join('%s: %s' % (k, v) for k, v in data)
 
 
 cm = ColorMessage()
