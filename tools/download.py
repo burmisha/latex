@@ -245,7 +245,7 @@ def run(args):
 
     log.info(f'Got total of {len(all_videos)} videos')
 
-    topic_detector = library.download.TopicDetector()
+    topic_detector = library.topic.TopicDetector()
     for video in all_videos:
         topic_index = topic_detector.get_topic_index(video._title)
 

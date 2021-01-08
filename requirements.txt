@@ -8,4 +8,5 @@ selenium>=3.141
 Pillow>=6.2.2
 pygments>=2.7.2
 python-Levenshtein
+pyyaml
 retry

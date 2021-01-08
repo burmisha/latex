@@ -282,7 +282,7 @@ class MultiplePaper(object):
         paper_tex = []
         for pupil in self.Pupils.Iterate():
             pupil_tex = [
-                f'\\addpersonalvariant{{{pupil.get_paper_name()}}}'
+                f'\\addpersonalvariant{{{pupil.name} {pupil.surname}}}'
             ]
             for index, variant_task in enumerate(variant_tasks, 1):
                 task = variant_task.GetRandomTask(pupil)

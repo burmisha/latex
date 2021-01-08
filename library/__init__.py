@@ -12,4 +12,5 @@ import library.logging
 import library.process
 import library.pupils
 import library.secrets
+import library.topic
 import library.tripod
