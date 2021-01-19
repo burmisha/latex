@@ -22,7 +22,7 @@ class TopicDetector:
     def __init__(self):
         topics_file = library.location.root('data', 'topics.yaml')
         with open(topics_file) as f:
-        	config = yaml.load(f)
+            config = yaml.safe_load(f)
 
         self._matcher = collections.defaultdict(list)
         for grade, parts in config.items():
