@@ -32,7 +32,7 @@ FORCED_NOT_DISTANT = ['2020-12-24 9']
 def is_distnant_task(task_id):
     if task_id in FORCED_NOT_DISTANT:
         return False
-    elif '2020-11-20' <= task_id <= '2021-07-01':  # use test version on distant
+    elif '2020-11-20' <= task_id <= '2021-01-01':  # use test version on distant
         return True
     else:
         return False
@@ -67,6 +67,7 @@ def get_all_variants():
         ('2020-11-26 10', {'zsi_zse': ['Ch_3_1', 'Ch_3_2', 'Ch_3_3', 'Ch_3_6', 'Ch_3_26', 'Vishnyakova_1_4_6', 'Ch_4_2', 'Ch_4_29', 'Ch_4_45', 'Vishnyakova_1_4_12']}),
         ('2020-12-11 10', {'gidro': ['Ch_6_3', 'Ch_6_8', 'Ch_6_10', 'Ch_6_16', 'Ch_6_20']}),
         ('2020-12-24 9', {'koleb': ['Nu01', 'Nu02', 'Nu03', 'Nu04', 'Nu05']}),
+        ('2021-01-21 9', {'koleb': ['Nu01', 'Nu02', 'Nu03', 'Nu04', 'Nu05']}),
     ]
     for task_id, tasks_classes in random_tasks:
         pupils = library.pupils.get_class_from_string(task_id)

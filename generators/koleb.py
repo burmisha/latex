@@ -7,19 +7,23 @@ log = logging.getLogger(__name__)
 
 
 @variant.text('''
-    Запишите определения:
+    Дайте определения:
     \\begin{{itemize}}
-        \\item гармонические колебания,
+        \\item {koleb},
         \\item {free},
-        \\item {const}.
+        \\item {const},
+        \\item {what}.
     \\end{{itemize}}
 ''')
+@variant.arg(koleb=['гармонические колебания', 'механические колебания'])
 @variant.arg(free=['свободные колебания', 'вынужденные колебания'])
 @variant.arg(const=['незатухающие колебания', 'затухающие колебания'])
+@variant.arg(what=['амплитуда колебаний', 'период колебаний'])
 class Nu01(variant.VariantTask):
     pass
 
 
+@variant.solution_space(60)
 @variant.text('Определите частоту колебаний, если их период составляет {T:Task:e}.')
 @variant.answer_short('\\nu = \\frac 1T = \\frac 1{T:Value:s} = {nu:Value}')
 @variant.arg(T=['T = %d мс' % T for T in [2, 4, 5, 10, 20, 40, 50]])
