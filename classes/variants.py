@@ -68,6 +68,11 @@ def get_all_variants():
         ('2020-12-11 10', {'gidro': ['Ch_6_3', 'Ch_6_8', 'Ch_6_10', 'Ch_6_16', 'Ch_6_20']}),
         ('2020-12-24 9', {'koleb': ['Nu01', 'Nu02', 'Nu03', 'Nu04', 'Nu05']}),
         ('2021-01-21 9', {'koleb': ['Nu01', 'Nu02', 'Nu03', 'Nu04', 'Nu05']}),
+        ('2021-01-22 10', {'mkt': [
+            'Basic01', 
+            'Basic02', 'Basic03', 'Basic04', 
+            'Basic05', 'CountNu', 'CountMass', 'CountParticles'
+        ]}),
     ]
     for task_id, tasks_classes in random_tasks:
         pupils = library.pupils.get_class_from_string(task_id)
