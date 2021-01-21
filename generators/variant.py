@@ -16,7 +16,6 @@ log = logging.getLogger(__name__)
 
 PAPER_TEMPLATE = r'''
 \input{{main}}
-\narrow
 \begin{{document}}
 {noanswers}
 

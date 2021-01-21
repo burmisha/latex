@@ -3,6 +3,7 @@ import generators.gidro
 import generators.kinematics
 import generators.koleb
 import generators.magnet
+import generators.mkt
 import generators.optics
 import generators.quantum
 import generators.sto

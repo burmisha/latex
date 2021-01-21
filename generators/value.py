@@ -126,6 +126,8 @@ class OneUnit:
             prefix = ''
             main = line
             for suffix in [
+                'час',
+                'сут',
                 'эВ',  # электрон-вольт
                 'В',   # вольт
                 'Дж',  # джоуль
@@ -145,6 +147,7 @@ class OneUnit:
                 'C',   # celsium
                 'К',   # кельвин
                 'K',   # kelvin
+                'моль',
             ]:
                 if line.endswith(suffix):
                     main = suffix
@@ -167,6 +170,7 @@ class OneUnit:
             if main == 'г':
                 main = 'кг'
                 exponent -= 3
+            # TODO: час, сутки
 
             return main, exponent * power, line, power
         except:
