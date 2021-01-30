@@ -1288,11 +1288,9 @@ def runConvert(args):
     ]
 
     for bookClass, pdfPath in books:
-        dstPath = list(pdfPath)
-        dstPath[-1] = dstPath[-1].replace('.pdf', '')
         book = bookClass(
             pdfPath=library.location.udr('Книги - физика', *pdfPath),
-            dstPath=library.location.udr('Книги - физика', *dstPath),
+            dstPath=library.location.no_sync('Книги - физика - картинки', pdfPath[-1].replace('.pdf', '')),
         )
         book.GetStrangeFiles(remove=False)
         book.Save(overwrite=args.overwrite_existing)
