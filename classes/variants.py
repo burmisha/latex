@@ -73,6 +73,10 @@ def get_all_variants():
             'Basic02', 'Basic03', 'Basic04', 
             'Basic05', 'CountNu', 'CountMass', 'CountParticles'
         ]}),
+        ('2021-01-29 10', {'mkt': [
+            # 'Celsuis',
+            'Basic06', 'Basic07', 'Basic08', 'Basic09', 'Basic10', 'Basic11',
+        ]}),
     ]
     for task_id, tasks_classes in random_tasks:
         pupils = library.pupils.get_class_from_string(task_id)
