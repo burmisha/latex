@@ -140,6 +140,7 @@ def run(args):
             ('https://www.youtube.com/watch?v=4E1AxUMUz-g', '9 - Дисперсия света'),
             ('https://www.youtube.com/watch?v=BhYKN21olBw', '9 - Brain Damage'),
             ('https://www.youtube.com/watch?v=mh-LTSGjFsE', '9 - 10 - Закон Гука и энергия упругой деформации'),
+            ('https://www.youtube.com/watch?v=F4JL2vvYd8c', '9-5-1 - НИЯУ МИФИ - Опыт Эрстеда со стрелкой'),
         ],
         'misc': [
             ('https://www.youtube.com/watch?v=p15KNqWUZ-c', 'Сергей Гуриев - Экономика красоты и счастья - 2012'),
@@ -149,6 +150,7 @@ def run(args):
             ('https://www.youtube.com/watch?v=2nTmeuXQT5w', '2020 - Математический марафон'),
             ('https://www.youtube.com/watch?v=vF1UGmi5m8s', '2019 - Дудь - Беслан'),
             ('https://www.youtube.com/watch?v=-TSD1cX2htQ', '2019 - Новая Газета - Беслан'),
+            ('https://www.youtube.com/watch?v=jKw3n1Gsrtw', '2021 - Александр Гудков - АКВАДИСКОТЕКА'),
         ],
     }
     for dirname, videos in videos_download_cfg.items():
