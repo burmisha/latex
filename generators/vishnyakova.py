@@ -322,8 +322,8 @@ class BK_53_03(variant.VariantTask):
 ])
 class BK_53_12(variant.VariantTask):
     def GetUpdate(self, E=None, Consts=None, **kws):
-        dm = E.Other(Consts.e, action='mult', precisionInc=1).Other(Consts.c, action='div').Other(Consts.c, action='div', units='кг')
-        aem = dm.Other(Consts.aem, action='div', units='а.е.м.')
+        dm = E.Mult(Consts.e, precisionInc=1).Div(Consts.c).Div(Consts.c, units='кг')
+        aem = dm.Div(Consts.aem, units='а.е.м.')
         return dict(
             eV=E.Value,
             dm=dm,

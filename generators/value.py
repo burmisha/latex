@@ -314,7 +314,13 @@ class UnitValue(object):
             log.error(f'Error in __format__ for {fmt} and {self.__raw_line}')
             raise
 
-    def Other(self, other, action=None, precisionInc=0, units='', powerShift=0):
+    def Mult(self, other, **kws):
+        return self._calculate(other, action='mult', **kws)
+
+    def Div(self, other, **kws):
+        return self._calculate(other, action='div', **kws)
+
+    def _calculate(self, other, action=None, precisionInc=0, units='', powerShift=0):
         # TODO: skips units now
 
         if isinstance(other, UnitValue):
@@ -409,4 +415,4 @@ class Consts(object):
     )
 
 
-assert '{:Value}'.format(Consts.c.Other(UnitValue('l = 500 нм'), action='div', units='Гц', powerShift=3)) == '6{,}00 \\cdot 10^{14}\\,\\text{Гц}'
+assert '{:Value}'.format(Consts.c.Div(UnitValue('l = 500 нм'), units='Гц', powerShift=3)) == '6{,}00 \\cdot 10^{14}\\,\\text{Гц}'

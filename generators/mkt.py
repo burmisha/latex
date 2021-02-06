@@ -145,7 +145,7 @@ class CountMass(variant.VariantTask):
 class CountParticles(variant.VariantTask):
     def GetUpdate(self, m=None, mu=None, Consts=None, **kws):
         return dict(
-            N=m.Other(mu, action='div').Other(Consts.N_A, action='mult'),
+            N=m.Div(mu).Mult(Consts.N_A),
         )
 
 

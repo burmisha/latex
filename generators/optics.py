@@ -23,8 +23,8 @@ log = logging.getLogger(__name__)
 class Gendenshteyn_11_11_18(variant.VariantTask):
     def GetUpdate(self, n=None, lmbd=None, Consts=None, **kws):
         return dict(
-            nu=Consts.c.Other(lmbd, action='div', units='Гц', powerShift=3),
-            lmbd_1=lmbd.Other(n, action='div', units='м', precisionInc=2),
+            nu=Consts.c.Div(lmbd, units='Гц', powerShift=3),
+            lmbd_1=lmbd.Div(n, units='м', precisionInc=2),
         )
 
 
