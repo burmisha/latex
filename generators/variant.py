@@ -211,7 +211,7 @@ class VariantTask(object):
                         for k, v in self.GetUpdate(**res).items():
                             res[k] = check_unit_value(v)
                     except:
-                        log.error(f'Cannot enrich {type(self)}')
+                        log.error(f'Cannot enrich {type(self)}, args: {res}')
                         raise
                     self._expanded_args_list.append(res)
         except:

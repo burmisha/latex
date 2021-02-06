@@ -249,7 +249,10 @@ class UnitValue(object):
         humanNom = '\\cdot'.join(unit.get_tex() for unit in self._units if unit.IsNumerator)
         humanDen = '\\cdot'.join(unit.get_tex() for unit in self._units if not unit.IsNumerator)
         if humanDen:
-            units = '\,\\frac{%s}{%s}' % (humanNom, humanDen)
+            if humanNom:
+                units = '\,\\frac{%s}{%s}' % (humanNom, humanDen)
+            else:
+                units = '\,\\frac{1}{%s}' % (humanDen)
         elif humanNom:
             units = '\,' + humanNom
         else:
@@ -295,7 +298,7 @@ class UnitValue(object):
             elif main_format == 'Task':
                 with_letter = True
                 with_value = True
-            elif main_format == 'Value':
+            elif main_format == 'Value' or main_format == 'V':
                 with_letter = False
                 with_value = True
             elif main_format == 'Letter' or main_format == 'L':
@@ -372,6 +375,8 @@ class Consts(object):
     p_atm = UnitValue('p_{\\text{aтм}} = 100 кПа')
     aem = UnitValue('\\text{а.е.м.} = 1.66054 10^-27 кг')
     k = UnitValue('k = 9 10^9 Н м^2 / Кл^2')
+    N_A = UnitValue('N_A = 6.02 10^23 / моль')
+
 
     water = Matter(
         name='вода',

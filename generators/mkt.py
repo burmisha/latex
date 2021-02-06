@@ -5,13 +5,18 @@ import generators.variant as variant
     Молекулы газа в некотором сосуде движутся со средней скоростью {v:Value|e}.
     Определите, какое расстояние в среднем проходит одна из таких молекул за {t:Value|e}.
 ''')
-@variant.answer_short(
-    's = vt = {v:Value|cdot}{t:Value}'
-)
+@variant.answer_short('s = v t = {v:Value|cdot}{t:Value} = {s:Value}.')
 @variant.arg(v=['%d м / с' % v for v in [150, 200, 250, 300, 500]])
 @variant.arg(t=['%d час' % v for v in [2, 3, 4, 5]] + ['%d сут' % v for v in [2, 3, 4, 5]])
 class Basic01(variant.VariantTask):
-    pass
+    def GetUpdate(self, v=None, t=None, **kws):
+        if 'час' in f'{t:Value}':
+            mult = 3600
+        elif 'сут' in f'{t:Value}':
+            mult = 3600 * 24
+        return dict(
+            s='{} м'.format(v.Value * t.Value * mult),
+        )
 
 @variant.solution_space(0)
 @variant.text('''
@@ -80,6 +85,9 @@ class Basic04(variant.VariantTask):
 ''')
 @variant.no_args
 @variant.solution_space(0)
+@variant.answer_short('''
+    \\text{ да, да, нет, нет, нет, да, да, да }
+''')
 class Basic05(variant.VariantTask):
     pass
 
@@ -110,8 +118,12 @@ class CountNu(variant.VariantTask):
     ('нонана', '\\mu = 128 г / моль', '\\ce{C9H20}'),
     ('декана', '\\mu = 142 г / моль', '\\ce{C10H22}'),
 ])
+@variant.answer_short('m = \\mu\\nu = {mu:Value|cdot}{nu:Value} = {m:Value}.')
 class CountMass(variant.VariantTask):
-    pass
+    def GetUpdate(self, nu=None, mu=None, **kws):
+        return dict(
+            m='{} г'.format(nu.Value * mu.Value),
+        )
 
 
 @variant.solution_space(40)
@@ -129,8 +141,12 @@ class CountMass(variant.VariantTask):
     ('нонана', '\\mu = 128 г / моль', '\\ce{C9H20}'),
     ('декана', '\\mu = 142 г / моль', '\\ce{C10H22}'),
 ])
+@variant.answer_short('{N:L} = {Consts.N_A:L}\\nu = {Consts.N_A:L}\\frac{m:L|s}{mu:L|s} = {Consts.N_A:Value|cdot}\\frac{m:V|s}{mu:V|s} = {N:V}.')
 class CountParticles(variant.VariantTask):
-    pass
+    def GetUpdate(self, m=None, mu=None, Consts=None, **kws):
+        return dict(
+            N=m.Other(mu, action='div').Other(Consts.N_A, action='mult'),
+        )
 
 
 @variant.solution_space(40)
