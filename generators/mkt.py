@@ -99,8 +99,12 @@ class Basic05(variant.VariantTask):
     '9 10^22', '9 10^23', '9 10^24', '9 10^25',
     '12 10^22', '12 10^23', '12 10^24', '12 10^25',
 ])
+@variant.answer_short('\\nu = \\frac{ N }{Consts.N_A:L|s} = \\frac{N:V|s}{Consts.N_A:V|s} = {nu:V}.')
 class CountNu(variant.VariantTask):
-    pass
+    def GetUpdate(self, N=None, Consts=None, **kws):
+        return dict(
+            nu=N.Div(Consts.N_A, units='моль'),
+        )
 
 
 @variant.solution_space(40)
@@ -141,7 +145,7 @@ class CountMass(variant.VariantTask):
     ('нонана', '\\mu = 128 г / моль', '\\ce{C9H20}'),
     ('декана', '\\mu = 142 г / моль', '\\ce{C10H22}'),
 ])
-@variant.answer_short('{N:L} = {Consts.N_A:L}\\nu = {Consts.N_A:L}\\frac{m:L|s}{mu:L|s} = {Consts.N_A:Value|cdot}\\frac{m:V|s}{mu:V|s} = {N:V}.')
+@variant.answer_short('N = {Consts.N_A:L}\\nu = {Consts.N_A:L}\\frac{m:L|s}{mu:L|s} = {Consts.N_A:Value|cdot}\\frac{m:V|s}{mu:V|s} = {N:V}.')
 class CountParticles(variant.VariantTask):
     def GetUpdate(self, m=None, mu=None, Consts=None, **kws):
         return dict(

@@ -343,8 +343,12 @@ class UnitValue(object):
             else:
                 raise NotImplementedError('Could not apply %s' % action)
 
-        power -= powerShift
-        value *= 10 ** powerShift
+        if powerShift:
+            power -= powerShift
+            value *= 10 ** powerShift
+        elif abs(power) <= 2:
+            value *= 10 ** power
+            power -= power
 
         r = UnitValue('%.20f 10^%d %s' % (value, power, units), precision=precision)
         return r
@@ -415,4 +419,13 @@ class Consts(object):
     )
 
 
-assert '{:Value}'.format(Consts.c.Div(UnitValue('l = 500 нм'), units='Гц', powerShift=3)) == '6{,}00 \\cdot 10^{14}\\,\\text{Гц}'
+def test_calculation():
+    for expr, answer in [
+        ('{:Value}'.format(Consts.c.Div(UnitValue('l = 500 нм'), units='Гц', powerShift=3)), '6{,}00 \\cdot 10^{14}\\,\\text{Гц}'),
+        ('{:Value}'.format(UnitValue('9 10^25').Div(Consts.N_A)), '150'),
+        ('{:V}'.format(UnitValue('9 10^25').Div(UnitValue('6.03 10^23'), precisionInc=1)), '149'),
+        ('{:V}'.format(UnitValue('9 10^25').Div(UnitValue('6.03 10^23'), precisionInc=0)), '150'),
+    ]:
+        assert expr == answer, f'Expected |{answer}|, got |{expr}|'
+
+test_calculation()
