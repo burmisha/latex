@@ -107,7 +107,7 @@ def runTemplate(args):
     fileMover.Move(
         source=library.location.ipad('2020-21 Кружок'),
         destination=library.location.udr('12 - кружок - 9-10-11'),
-        re='.*ужок.docx$',
+        re='.*[Кк]ружок( по математике)?.docx$',
         matching=lambda b: first_date <= b[:10] <= last_date,
     )
     fileMover.Move(

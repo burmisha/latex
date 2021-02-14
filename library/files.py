@@ -38,7 +38,7 @@ def path_is_ok(value, raise_on_error=True):
         if substring in value:
             pos = value.find(substring)
             msg = value[:pos] + cm(value[pos:pos+len(substring)], bg=color.Red) + value[pos+len(substring):]
-            log.info(f'Broken {substring} in {msg}')
+            log.error(f'Broken {substring} in {msg}')
             if raise_on_error:
                 raise RuntimeError(f'Broken {substring}')
     return True
@@ -78,14 +78,16 @@ def walkFiles(
         log.error('Path %r is missing', dirName)
 
     if regexp is not None:
-        if not isinstance(regexp, list):
-            regexps = [regexp]
-        else:
+        if isinstance(regexp, list):
             regexps = regexp
+        else:
+            regexps = [regexp]
     else:
         regexps = []
 
     regexps = [r.replace(BROKEN_Y, PROPER_Y) for r in regexps]
+
+    log.debug(f'Looking for {logName} of types {extensions} in {dirName} matching {regexps}')
 
     iterable = os.walk(dirName)
     if not recursive:
@@ -102,6 +104,7 @@ def walkFiles(
                         yield res
         else:
             for filename in files:
+                log.debug(f'  Checking {filename}: {extensions}, {regexps}')
                 if not extensions or any(filename.endswith(extension) for extension in extensions):
                     if not regexps or any(re.match(regexp, filename) for regexp in regexps):
                         if filename.startswith('~$'):
@@ -246,14 +249,11 @@ class FileMover:
         dst_list = [i for i in [self._prefix, source, destination] if i]
         src_dir = os.path.join(*src_list).replace(BROKEN_Y, PROPER_Y)
         dst_dir = os.path.join(*dst_list).replace(BROKEN_Y, PROPER_Y)
-        log.info(f'Moving files from {src_dir} (recursive) to {dst_dir} (flat)')
-        assert os.path.exists(src_dir), f'No dir {src_dir}'
-        assert os.path.isdir(src_dir), f'Not dir {src_dir}'
-        assert os.path.exists(dst_dir), f'No dir {dst_dir}'
-        assert os.path.isdir(dst_dir), f'Not dir {dst_dir}'
+        log.info(f'Moving files from {src_dir} (recursive) to {dst_dir} (flat) by re {re}')
+        assert is_dir(src_dir)
+        assert is_dir(dst_dir)
         for src_file in walkFiles(source, regexp=re):
-            assert os.path.exists(src_file), f'No file {src_file}'
-            assert os.path.isfile(src_file), f'Not file {dst_dir}'
+            assert is_file(src_file)
             basename = os.path.basename(src_file)
             if matching is None or matching(basename):
                 dst_file = os.path.join(dst_dir, basename)
