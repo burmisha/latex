@@ -20,7 +20,7 @@ class Structure:
         has_digit = all(part[0].isdigit() for part, _, _ in parts)  # all subfiles start with digit
         for index, (part_name, first, last) in enumerate(parts, start_index):
             if first > last:
-                log.error('Error in book config for %r, %r', first, last)
+                log.error(f'Invalid pages range in book structure for {part_name!r}: [{first}, {last}]. End must be greater or equal')
                 raise RuntimeError('Broken pages range in structure')
 
             if has_digit:
@@ -126,9 +126,9 @@ class PdfBook:
 
     def ExtractPage(self, pageNumber, dirName=None, nameTemplate=None, overwrite=False):
         assert isinstance(pageNumber, int)
-        assert 1 <= pageNumber < 1000
+        assert 1 <= pageNumber < 1000, f'Invalid pageNumber: {pageNumber}'
         pageIndex = self.GetPageShift(pageNumber) + pageNumber - 1
-        assert 1 <= pageIndex < 1000
+        assert 0 <= pageIndex < 1000, f'Invalid pageIndex: {pageIndex}'
 
         fileName = self.GetFilename(dirName, nameTemplate, pageNumber)
         log.info(f'  Page {pageNumber} -> {fileName}')
