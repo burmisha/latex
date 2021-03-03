@@ -77,6 +77,10 @@ def get_all_variants():
             # 'Celsuis',
             'Basic06', 'Basic07', 'Basic08', 'Basic09', 'Basic10', 'Basic11',
         ]}),
+        ('2021-03-02 10', {'mkt': [
+            # 'Celsuis',
+            'Basic12', 'Basic13', 'GraphPV_1', 'GraphPV_2', 'ZFTSH_10_2_9_kv', 'ZFTSH_10_2_2_kv', 'Polytrope',
+        ]}),
     ]
     for task_id, tasks_classes in random_tasks:
         pupils = library.pupils.get_class_from_string(task_id)
