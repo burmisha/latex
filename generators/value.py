@@ -128,6 +128,7 @@ class OneUnit:
             for suffix in [
                 'час',
                 'сут',
+                'атм',
                 'эВ',  # электрон-вольт
                 'В',   # вольт
                 'Дж',  # джоуль
@@ -305,7 +306,7 @@ class UnitValue(object):
                 with_letter = True
                 with_value = False
             else:
-                raise RuntimeError(f'Unknown main format: {main_format}')
+                raise RuntimeError(f'Unknown main format: {main_format!r} from {fmt!r}')
 
             result = ' = '.join(i for i, j in [[self.Letter, with_letter], [value_str, with_value]] if j and i)
             result = self._apply_pipes(result, pipes)
@@ -386,6 +387,7 @@ class Consts(object):
     aem = UnitValue('\\text{а.е.м.} = 1.66054 10^-27 кг')
     k = UnitValue('k = 9 10^9 Н м^2 / Кл^2')
     N_A = UnitValue('N_A = 6.02 10^23 / моль')
+    R = UnitValue('R = 8.31 Дж / моль К')
 
 
     water = Matter(

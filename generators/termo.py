@@ -13,7 +13,7 @@ log = logging.getLogger(__name__)
     Здесь (и во всех следующих задачах) используйте табличные значения из учебника.
 ''')
 @variant.answer_short('''
-    Q 
+    Q
         = \\lambda m \\implies m
         = \\frac Q{ \\lambda }
         = \\frac {Q:Value:s}{lmbd:Value:s}
@@ -136,3 +136,153 @@ class Ch_8_35(variant.VariantTask):
             t2=T,
             theta='%.1f' % ((1. * c_water.Value * t + 1. * c.Value * T) / (1. * c_water.Value + 1. * c.Value)),
         )
+
+
+@variant.solution_space(40)
+@variant.text('''
+    Определите давление одноатомного идеального газа, занимающего объём {V:Value:e},
+    если его внутренняя энергия составляет {U:Value:e}.
+''')
+@variant.arg(V=('V = {} л', [2, 3, 4, 5, 6]))
+@variant.arg(U=('U = {} Дж', [250, 300, 400, 500]))
+@variant.answer_short(
+    'U = \\frac 32 \\nu R T = \\frac 32 PV \\implies P = \\frac 23 \\cdot \\frac UV'
+    '= \\frac 23 \\cdot \\frac{U:V:s}{V:V:s} \\approx {P:V}.'
+)
+class P_from_V_and_U(variant.VariantTask):
+    def GetUpdate(self, U=None, V=None, **kws):
+        return dict(
+            P='%.2d кПа' % (2 / 3 * U.Value / V.Value),
+        )
+
+
+@variant.solution_space(40)
+@variant.text('''
+    Газ изобарически расширился от {V1:Value:e} до {V2:Value:e}.
+    Давление газа при этом оставалось постоянным и равным {P:Value:e}.
+    Определите работу газа. {Consts.p_atm:Task:e}.
+''')
+@variant.arg(V1=('V_1 = {} л', [10, 20, 30]))
+@variant.arg(V2=('V_2 = {} л', [40, 50, 60]))
+@variant.arg(P=('P = {} атм', [1.2, 1.5, 1.8, 2.5, 3.5]))
+@variant.answer_short(
+    'A = P\\Delta V = P(V_2 - V_1) = {P:V|cdot}\\cbr{ {V2:V} - {V1:V} } = {A:V}.'
+)
+class A_on_P_const(variant.VariantTask):
+    def GetUpdate(self, P=None, V1=None, V2=None, **kws):
+        return dict(
+            A='%d Дж' % (P.Value * (V2.Value - V1.Value) * 100),
+        )
+
+
+@variant.solution_space(80)
+@variant.text('''
+    Как изменилась внутренняя энергия одноатомного идеального газа при переходе из состояния 1 в состояние 2?
+    {P1:Task:e}, {V1:Task:e}, {P2:Task:e}, {V2:Task:e}.
+    Как изменилась при этом температура газа?
+''')
+@variant.arg(P1=('P_1 = {} МПа', [2, 3, 4]))
+@variant.arg(P2=('P_2 = {} МПа', [1.5, 2.5, 3.5, 4.5]))
+@variant.arg(V1=('V_1 = {} л', [3, 5, 7]))
+@variant.arg(V2=('V_2 = {} л', [2, 4, 6, 8]))
+@variant.answer_align([
+    'P_1V_1 &= \\nu R T_1, P_2V_2 = \\nu R T_2,',
+    '\\Delta U &= U_2-U_1 = \\frac 32 \\nu R T_2- \\frac 32 \\nu R T_1 = \\frac 32 P_2 V_2 - \\frac 32 P_1 V_1'
+    '= \\frac 32 \\cdot \\cbr{ {P2:V|cdot}{V2:V} - {P1:V|cdot}{V1:V} } = {dU:V}.',
+    '\\frac{ T_2 }{ T_1 } &= \\frac{ \\frac{ P_2V_2 }{ \\nu R } }{ \\frac{ P_1V_1 }{ \\nu R } } = \\frac{ P_2V_2 }{ P_1V_1 }'
+    '= \\frac{ {P2:V|cdot}{V2:V} }{ {P1:V|cdot}{V1:V} } \\approx {ratio}.',
+])
+class DeltaU_on_P_const(variant.VariantTask):
+    def GetUpdate(self, P1=None, P2=None, V1=None, V2=None, **kws):
+        return dict(
+            dU='%d Дж' % (1000 * 3 / 2 * (P2.Value * V2.Value - P1.Value * V1.Value)),
+            ratio='%.2f' % (1. * P2.Value * V2.Value / (P1.Value * V1.Value)),
+        )
+
+
+@variant.solution_space(40)
+@variant.text('''
+    {nu:V:e} идеального одноатомного газа {what} на {dT:V:e}.
+    Определите изменение внутренней энергии газа. Увеличилась она или уменьшилась?
+    Универсальная газовая постоянная {Consts.R:Task:e}.
+''')
+
+@variant.arg(what__sign=[('нагрели', +1), ('охладили', -1)])
+@variant.arg(nu=('\\nu = {} моль', [2, 3, 4, 5]))
+@variant.arg(dT=('\\Delta T = {} К', [10, 20, 30]))
+@variant.answer_short('''
+    \\Delta U = \\frac 32 \\nu R {dT:Letter}
+        = {sgn} \\frac 32 \\cdot {nu:V|cdot}{Consts.R:V|cdot}{dT:V}
+        = {dU:V}. \\text{ {ans}. }
+''')
+class DeltaU_from_DeltaT(variant.VariantTask):
+    def GetUpdate(self, what=None, sign=None, nu=None, dT=None, Consts=None, **kws):
+        return dict(
+            sgn='-' if sign == -1 else '',
+            dU='%d Дж' % (3 / 2 * nu.Value * Consts.R.Value * dT.Value * sign),
+            ans='Увеличилась' if sign == 1 else 'Уменьшилась',
+        )
+
+
+@variant.solution_space(60)
+@variant.text('''
+    Определите сообщенное газу количество теплоты,
+    если её {ratio} он потратил на совершение работы,
+    при этом увеличив свою внутреннюю энергию на {dU:V:e}.
+''')
+@variant.arg(ratio__N=[('половину', 2), ('треть', 3), ('четверть', 4)])
+@variant.arg(dU=('\\Delta U = {} Дж', [1200, 1500, 2400, 3000]))
+@variant.answer_short('''
+    Q = A' + \\Delta U, A' = \\frac 1{N} Q \\implies Q\\cdot\\cbr{ 1 - \\frac 1{N} } = \\Delta U \\implies Q
+    = \\frac{ \\Delta U }{ 1 - \\frac 1{N} }
+    = \\frac{ {dU:V} }{ 1 - \\frac 1{N} } \\approx {Q:V}.
+''')
+class Q_from_DeltaU(variant.VariantTask):
+    def GetUpdate(self, N=None, dU=None, **kws):
+        return dict(
+            Q='%d Дж' % (dU.Value * N / (N - 1)),
+        )
+
+
+@variant.solution_space(40)
+@variant.text('''
+    В некотором процессе внешние силы совершили над газом работу {A:V:e},
+    при этом его внутренняя энергия {what} на {dU:V:e}.
+    Определите количество тепла, переданное при этом процессе газу.
+    Явно пропишите, подводили газу тепло или же отводили.
+''')
+@variant.arg(what__sign=[('увеличилась', +1), ('уменьшилась', -1)])
+@variant.arg(dU=('\\Delta U = {} Дж', [150, 250, 350, 450]))
+@variant.arg(A=('A = {} Дж', [100, 200, 300]))
+@variant.answer_short('''
+    Q = A' + \\Delta U, A = -A' \\implies Q = -A + \\Delta U = - {A:V} + {sgn} {dU:V} = {Q:V}.
+    \\text{ {ans}. }
+''')
+class Q_from_DeltaU_and_A(variant.VariantTask):
+    def GetUpdate(self, A=None, dU=None, what=None, sign=None, **kws):
+        Q = dU.Value * sign - A.Value
+        return dict(
+            Q='%d Дж' % Q,
+            ans='Подводили' if Q > 0 else 'Отводили',
+            sgn='-' if sign == -1 else '',
+        )
+
+
+@variant.text('''
+    Укажите, верны ли утверждения («да» или «нет» слева от каждого утверждения):
+    \\begin{{enumerate}}
+        \\item При адиабатическом расширении идеальный газ совершает ровно столько работы, сколько внутренней энергии теряет.
+        \\item В силу третьего закона Ньютона, совершённая газом работа и работа, совершённая над ним, всегда равны по модулю и противоположны по знаку.
+        \\item Работу газа в некотором процессе можно вычислять как площадь под графиком в любой системе координат: $PV$, $VT$ или $PT$, главное лишь правильно расположить оси.
+        \\item Дважды два пять.
+        \\item При изотермическом процессе внутренняя энергия идеального одноатомного газа не изменяется, даже если ему подводят тепло.
+        \\item Газ может совершить ненулевую работу в любом из изопроцессов: изохорном, изобарном, изотермическом.
+        \\item Адиабатический процесс лишь по воле случая не имеет приставки «изо»: в нём изменяются давление, температура и объём, но это не все макропараметры идеального газа.
+        \\item Полученное выражение для внутренней энергии идеального газа ($\\frac 32 \\nu RT$) применимо лишь к одноатомному газу, хотя, например, уравнений состояние идельного газа применимо и к многоатомным газам.
+    \\end{{enumerate}}
+''')
+@variant.no_args
+@variant.solution_space(0)
+@variant.answer_short('''\\text{ да, да, нет, нет, да, нет, да, да }''')
+class YesNo(variant.VariantTask):
+    pass

@@ -394,7 +394,12 @@ def arg(**kws):
             cls.ArgsList = collections.OrderedDict()
         for key, value in kws.items():
             assert key not in cls.ArgsList, f'Already used key in ArgsList: {key}'
-            cls.ArgsList[key] = value
+            if isinstance(value, tuple):
+                assert len(value) == 2
+                assert '{}' in value[0], f'No {{}} in {template}'
+                cls.ArgsList[key] = [value[0].format(option) for option in value[1]]
+            else:
+                cls.ArgsList[key] = value
         return cls
 
     return decorator
