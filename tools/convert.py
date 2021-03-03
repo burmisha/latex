@@ -1403,7 +1403,7 @@ def runConvert(args):
 
     zftsh_config = [
         (ZFTSH_10_2, 'Физика 10 - 2 - МКТ, идеальный газ.pdf'),
-        (ZFTSH_10_3, 'Физика 10 - 3 - Созранение энергии, тепловые процессы.pdf'),
+        (ZFTSH_10_3, 'Физика 10 - 3 - Сохранение энергии, тепловые процессы.pdf'),
     ]
     for book_class, file_name in zftsh_config:
         book = book_class(
