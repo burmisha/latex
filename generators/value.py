@@ -370,7 +370,7 @@ class Matter(object):
     def __init__(self, name=None, **kws):
         self.Name = name
         for key, value in kws.items():
-            assert key in ['rho', 'c', 'lmbd', 'L']
+            assert key in ['rho', 'c', 'lmbd', 'L', 'mu']
             setattr(self, key, UnitValue(value))
 
 
@@ -419,6 +419,35 @@ class Consts(object):
         name='цинк',
         c='400 Дж / кг К',
     )
+    gas_n2 = Matter(
+        name='азот',
+        mu='28 г / моль',
+    )
+    gas_air = Matter(
+        name='воздух',
+        mu='29 г / моль',
+    )
+    gas_o2 = Matter(
+        name='кислород',
+        mu='32 г / моль',
+    )
+    gas_o3 = Matter(
+        name='озон',
+        mu='48 г / моль',
+    )
+    gas_co2 = Matter(
+        name='углекислый газ',
+        mu='44 г / моль',
+    )
+    gas_ne = Matter(
+        name='неон',
+        mu='20 г / моль',
+    )
+    gas_ar = Matter(
+        name='аргон',
+        mu='40 г / моль',
+    )
+
 
 
 def test_calculation():

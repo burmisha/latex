@@ -1,4 +1,5 @@
 import generators.variant as variant
+from generators.value import Consts
 
 @variant.solution_space(40)
 @variant.text('''
@@ -101,7 +102,7 @@ class Basic05(variant.VariantTask):
 ])
 @variant.answer_short('\\nu = \\frac{ N }{Consts.N_A:L|s} = \\frac{N:V|s}{Consts.N_A:V|s} = {nu:V}.')
 class CountNu(variant.VariantTask):
-    def GetUpdate(self, N=None, Consts=None, **kws):
+    def GetUpdate(self, N=None, **kws):
         return dict(
             nu=N.Div(Consts.N_A, units='моль'),
         )
@@ -147,7 +148,7 @@ class CountMass(variant.VariantTask):
 ])
 @variant.answer_short('N = {Consts.N_A:L}\\nu = {Consts.N_A:L}\\frac{m:L|s}{mu:L|s} = {Consts.N_A:Value|cdot}\\frac{m:V|s}{mu:V|s} = {N:V}.')
 class CountParticles(variant.VariantTask):
-    def GetUpdate(self, m=None, mu=None, Consts=None, **kws):
+    def GetUpdate(self, m=None, mu=None, **kws):
         return dict(
             N=m.Div(mu).Mult(Consts.N_A),
         )
@@ -398,17 +399,20 @@ class GraphPV_1(variant.VariantTask):
     pass
 
 
-@variant.solution_space(40)
+@variant.solution_space(80)
 @variant.text('''
     Изобразите в координатах $PV$, соблюдая масштаб, процесс 1234,
-    в котором 12 — {first} расширение в {first_n} раза,
-    23 — изохорический нагрев в {second_n} раза,
-    34 — {third} уменьшение давления в {third_n} раза.
+    в котором 12 — {first} {first_what} в {first_n} раза,
+    23 — изотермическое {second_what} в {second_n} раза,
+    34 — {third} {third_what} в {third_n} раза.
 ''')
-@variant.arg(first=['изобарическое', 'изотермическое'])
+@variant.arg(first=['изобарическое', 'изохорическое'])
+@variant.arg(first_what=['нагревание', 'охлаждение'])
 @variant.arg(first_n=[2, 3])
-@variant.arg(second_n=[2, 4])
-@variant.arg(third=['изотермическое', 'изохорическое'])
+@variant.arg(second_what=['расширение', 'сжатие'])
+@variant.arg(second_n=[2, 3])
+@variant.arg(third=['изобарическое', 'изохорическое'])
+@variant.arg(third_what=['нагревание', 'охлаждение'])
 @variant.arg(third_n=[2, 3])
 class GraphPV_2(variant.VariantTask):
     pass
@@ -429,38 +433,73 @@ class GraphPV_2(variant.VariantTask):
     ('шестую', 6),
 ])
 @variant.arg(T=[f'T = {t+5+273} К' for t in range(15)])
+@variant.answer_align([
+    'T\\text{ — const } &\\implies P_1V_1 = \\nu RT = P_2V_2.',
+    'V_2 = \\frac 1{n} V_1 &\\implies P_1V_1 = P_2\\cdot \\frac 1{n}V_1 \\implies P_2 = {n}P_1 = {n}{Consts.p_atm:L}.',
+    'P_2 = {Consts.p_atm:L} + {Consts.water.rho:L} {Consts.g_ten:L} h \\implies '
+    'h = \\frac{ P_2 - {Consts.p_atm:L} }{ {Consts.water.rho:L} {Consts.g_ten:L} }'
+    ' &= \\frac{ {n}{Consts.p_atm:L} - {Consts.p_atm:L} }{ {Consts.water.rho:L} {Consts.g_ten:L} }'
+    ' = \\frac{ {n_1} \\cdot {Consts.p_atm:L} }{ {Consts.water.rho:L} {Consts.g_ten:L} } = ',
+    ' &= \\frac{ {n_1} \\cdot {Consts.p_atm:V} }{ {Consts.water.rho:V|cdot} {Consts.g_ten:V} } \\approx {h:V}.'
+])
 class ZFTSH_10_2_9_kv(variant.VariantTask):
-    pass
+    def GetUpdate(self, ratio=None, n=None, T=None, **kws):
+        return dict(
+            n_1=n - 1,
+            h='%d м' % ((n - 1) * Consts.p_atm.Value * 1000 / Consts.water.rho.Value / Consts.g_ten.Value),
+        )
 
 
 @variant.solution_space(120)
 @variant.text('''
-    В замкнутом сосуде объёмом {V:Value:e} находится {gas} под давлением ${p}\\units{ атм }$.
+    В замкнутом сосуде объёмом {V:Value:e} находится {gas.Name} ($\\mu = {gas.mu:V}$) под давлением ${p}\\units{ атм }$.
     Определите массу газа в сосуде и выразите её в граммах, приняв температуру газа равной ${t}\\celsius$.
 ''')
-@variant.arg(gas__mu=[
-   ('воздух', 1),
-   ('азот', 1),
-   ('кислород', 1),
-   ('углекислый газ', 1),
-   ('неон', 1),
-   ('аргон', 1),
+@variant.arg(gas=[
+    Consts.gas_air,
+    Consts.gas_n2,
+    Consts.gas_o2,
+    Consts.gas_co2,
+    Consts.gas_ne,
+    Consts.gas_ar,
 ])
 @variant.arg(V=[f'{V} л' for V in [2, 3, 4, 5]])
 @variant.arg(p=[2.5, 3, 3.5, 4, 4.5, 5])
 @variant.arg(t=[7, 17, 27, 37, 47])
+@variant.answer_short('''
+    PV = \\frac m\\mu RT \\implies m = \\frac{ PV \\mu }{ RT } =
+    \\frac{ {P:V|cdot}{V:V|cdot} {gas.mu:V} }{ {Consts.R:V|cdot} \\cbr{ {t} + 273 }\\units{{К}} }
+    \\approx {m:V}.
+''')
+
 class ZFTSH_10_2_2_kv(variant.VariantTask):
-    pass
+    def GetUpdate(self, gas=None, V=None, p=None, t=None, **kws):
+        return dict(
+            P='%.1d атм' % p,
+            m='%d г' % (p * Consts.p_atm.Value * 100000 * gas.mu.Value / 1000 / Consts.R.Value / (t + 273)),
+        )
 
 
 @variant.solution_space(120)
 @variant.text('''
     Идеальный газ в экспериментальной установке подвергут политропному процессу $PV^n\\text{ — const }$
-    с показателем политропы $n={n}$. В одном из экспериментов объем газа {what} в ${how}$ раза.
+    с показателем политропы $n={n}$. В одном из экспериментов объём газа {what} в ${how}$ раза.
     Как при этом измерилась температура газа (выросла или уменьшилась, на сколько или во сколько раз)?
 ''')
 @variant.arg(what=['увеличился', 'уменьшился'])
 @variant.arg(n=[2, 3, 4])
 @variant.arg(how=[1.5, 2, 2.5])
+@variant.answer_align([
+    'P_1V_1^n &= P_2V_2^n, P_1V_1 = \\nu R T_1, P_2V_2 = \\nu R T_2 \\implies'
+    '\\frac{ \\nu R T_1 }{ V_1 } V_1^n = \\frac{ \\nu R T_2 }{ V_2 } V_2^n \\implies',
+    '\\implies T_1V_1^{ n-1 } &= T_2V_2^{ n - 1 } \\implies'
+    '\\frac{ T_2 }{ T_1 } = \\cbr{ \\frac{ V_1 }{ V_2 } }^{ n-1 } \\approx {ans}'
+])
 class Polytrope(variant.VariantTask):
-    pass
+    def GetUpdate(self, what=None, n=None, how=None, **kws):
+        ans = how ** (n - 1)
+        if what == 'увеличился':
+            ans = 1 / ans
+        return dict(
+            ans='%.3f' % ans,
+        )
