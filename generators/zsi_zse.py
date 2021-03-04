@@ -1,4 +1,5 @@
 import generators.variant as variant
+from generators.value import Consts
 
 
 @variant.text('''
@@ -222,7 +223,7 @@ class Vishnyakova_1_4_12(variant.VariantTask):
 @variant.arg(m=['m = %d кг' % m for m in [2, 3, 5]])
 @variant.arg(h=['h = %d м' % h for h in [2, 5, 10]])
 class Ch_4_2(variant.VariantTask):
-    def GetUpdate(self, what=None, mult=None, m=None, h=None, a=None, Consts=None, **kws):
+    def GetUpdate(self, what=None, mult=None, m=None, h=None, a=None, **kws):
         return dict(
             A='%d Дж' % (mult * m.Value * h.Value * (Consts.g_ten.Value + mult * a.Value))
         )
@@ -260,7 +261,7 @@ class Ch_4_29(variant.VariantTask):
 @variant.arg(m=['m = %d кг' % m for m in [10, 20, 30]])
 @variant.arg(l=['l = %d м' % l for l in [1, 2, 3]])
 class Ch_4_45(variant.VariantTask):
-    def GetUpdate(self, what=None, m=None, l=None, Consts=None, **kws):
+    def GetUpdate(self, what=None, m=None, l=None, **kws):
         return dict(
             A='%d Дж' % (m.Value * l.Value * Consts.g_ten.Value / 2)
         )

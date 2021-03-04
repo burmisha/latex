@@ -4,6 +4,7 @@ import itertools
 
 import generators.variant as variant
 import generators.value as value
+from generators.value import Consts
 
 import logging
 log = logging.getLogger(__name__)
@@ -112,7 +113,7 @@ class Chernoutsan11_01(variant.VariantTask):
 @variant.arg(B=['B = %d мТл' % B for B in [10, 20, 50, 100]])
 @variant.arg(rho=['\\rho = %d кг / м' % r for r in [5, 10, 20, 40, 100]])   # TODO: г / м
 class Chernoutsan11_02(variant.VariantTask):
-    def GetUpdate(self, rho=None, B=None, Consts=None, **kws):
+    def GetUpdate(self, rho=None, B=None, **kws):
         return dict(
             I='\\mathcal{I} = %f кА' % (1.0 * Consts.g_ten.Value * rho.Value / B.Value),
         )

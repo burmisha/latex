@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import generators.variant as variant
+from generators.value import Consts
 
 import logging
 log = logging.getLogger(__name__)
@@ -21,7 +22,7 @@ log = logging.getLogger(__name__)
 ])
 @variant.solution_space(180)
 class Gendenshteyn_11_11_18(variant.VariantTask):
-    def GetUpdate(self, n=None, lmbd=None, Consts=None, **kws):
+    def GetUpdate(self, n=None, lmbd=None, **kws):
         return dict(
             nu=Consts.c.Div(lmbd, units='Гц', powerShift=3),
             lmbd_1=lmbd.Div(n, units='м', precisionInc=2),

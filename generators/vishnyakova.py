@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import generators.variant as variant
+from generators.value import Consts
 
 import logging
 log = logging.getLogger(__name__)
@@ -67,7 +68,7 @@ class BK_4_01(variant.VariantTask):
 @variant.arg(x=['полную энергию', 'кинетическую энергию', 'импульс'])
 @variant.arg(percent=['85', '75', '65'])
 class BK_4_03(variant.VariantTask):
-    def GetUpdate(self, what=None, percent=None, Consts=None, **kws):
+    def GetUpdate(self, what=None, percent=None, **kws):
         m = {
             'Протон': Consts.m_p,
             'Электрон': Consts.m_e,
@@ -112,7 +113,7 @@ class BK_4_03(variant.VariantTask):
 @variant.arg(what=['км/ч', 'м/с', 'долях скорости света'])
 @variant.arg(percent=['50', '30', '10'])
 class BK_4_06(variant.VariantTask):
-    def GetUpdate(self, percent=None, Consts=None, **kws):
+    def GetUpdate(self, percent=None, **kws):
         share = float('0.' + percent)
         answerShare = (1. - (1. - share) ** 2) ** 0.5
         return dict(
@@ -137,7 +138,7 @@ class BK_4_06(variant.VariantTask):
 ''')
 @variant.arg(E=['E = %s 10^{-19} Дж' % E for E in ['4.04', '5.05', '2.02', '7.07', '1.01', '0.55']])
 class BK_52_01(variant.VariantTask):
-    def GetUpdate(self, E=None, Consts=None, **kws):
+    def GetUpdate(self, E=None, **kws):
         return dict(
             lmbd='{value:.2f} 10^{power} м'.format(
                 value=Consts.h.Value * Consts.c.Value / E.Value,
@@ -159,7 +160,7 @@ class BK_52_01(variant.VariantTask):
 ''')
 @variant.arg(E=['E = %d 10^{-19} Дж' % E for E in [2, 3, 4, 6]])
 class BK_52_02(variant.VariantTask):
-    def GetUpdate(self, E=None, Consts=None, **kws):
+    def GetUpdate(self, E=None, **kws):
         return dict(
             lmbd='{value:.2f} 10^{power} м'.format(
                 value=Consts.h.Value * Consts.c.Value / E.Value,
@@ -321,7 +322,7 @@ class BK_53_03(variant.VariantTask):
     ('кислорода \\ce{^{18}_{8}O}', 'E = 139.8 МэВ'),
 ])
 class BK_53_12(variant.VariantTask):
-    def GetUpdate(self, E=None, Consts=None, **kws):
+    def GetUpdate(self, E=None, **kws):
         dm = E.Mult(Consts.e, precisionInc=1).Div(Consts.c).Div(Consts.c, units='кг')
         aem = dm.Div(Consts.aem, units='а.е.м.')
         return dict(

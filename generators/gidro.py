@@ -1,4 +1,5 @@
 from generators.variant import text, text_test, answer_short, answer_align, answer_test, arg, VariantTask
+from generators.value import Consts
 
 import logging
 log = logging.getLogger(__name__)
@@ -31,7 +32,7 @@ log = logging.getLogger(__name__)
     ]
 ])
 class Ch_6_3(VariantTask):
-    def GetUpdate(self, matter=None, rho=None, p=None, Consts=None, **kws):
+    def GetUpdate(self, matter=None, rho=None, p=None, **kws):
         value = 1000 * p.Value / Consts.g_ten.Value / rho.Value
         if int(value) == value:
             h = 'h = %d м' % value
@@ -54,7 +55,7 @@ class Ch_6_3(VariantTask):
 @answer_test('{h:TestAnswer}')
 @arg(N=[2, 3, 4, 5, 6, 7, 8, 9, 10])
 class Ch_6_8(VariantTask):
-    def GetUpdate(self, N=None, p=None, Consts=None, **kws):
+    def GetUpdate(self, N=None, p=None, **kws):
         return dict(
             h='h = %d м' % (1000 * Consts.p_atm.Value * (N-1) / Consts.g_ten.Value / Consts.water.rho.Value),
         )
@@ -80,7 +81,7 @@ class Ch_6_8(VariantTask):
     # 'уровень жидкости',  # not for test
 ])
 class Ch_6_10(VariantTask):
-    def GetUpdate(self, m=None, S=None, what=None, Consts=None, **kws):
+    def GetUpdate(self, m=None, S=None, what=None, **kws):
         ans = {
             'сила давления на дно сосуда': '\\Delta F = %d Н' % (m.Value * Consts.g_ten.Value / 1000),
             'давление на дно сосуда': '\\Delta p = %d Па' % (m.Value * Consts.g_ten.Value / S.Value / 1000),
@@ -123,7 +124,7 @@ class Ch_6_10(VariantTask):
     ]
 ])
 class Ch_6_16(VariantTask):
-    def GetUpdate(self, h1=None, rho=None, Consts=None, **kws):
+    def GetUpdate(self, h1=None, rho=None, **kws):
         return dict(
             h2='h_2 = %d см' % (h1.Value * rho.Value / Consts.water.rho.Value),
             h2_m = 'h_2 = %.2f м' % (h1.Value * rho.Value / Consts.water.rho.Value / 100),
@@ -160,7 +161,7 @@ class Ch_6_16(VariantTask):
     ]
 ])
 class Ch_6_20(VariantTask):
-    def GetUpdate(self, S1=None, S2=None, m=None, Consts=None, **kws):
+    def GetUpdate(self, S1=None, S2=None, m=None, **kws):
         return dict(
             h2='h_2 = %d см' % (100 * 10 * m.Value / Consts.water.rho.Value / (S1.Value + S2.Value)),
         )

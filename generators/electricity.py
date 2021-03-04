@@ -4,7 +4,7 @@ import itertools
 import fractions
 
 import generators.variant as variant
-from generators.value import UnitValue
+from generators.value import Consts, UnitValue
 
 import logging
 log = logging.getLogger(__name__)
@@ -24,7 +24,7 @@ log = logging.getLogger(__name__)
 @variant.arg(first__second=[('q_1 = %d нКл' % f, 'q_2 = %d нКл' % s) for f in range(2, 5) for s in range(2, 5) if f != s])
 @variant.arg(distance=['%s = %d см' % (l, d) for d in [2, 3, 5, 6] for l in ['r', 'l', 'd'] ])
 class ForceTask(variant.VariantTask):
-    def GetUpdate(self, first=None, second=None, distance=None, Consts=None, **kws):
+    def GetUpdate(self, first=None, second=None, distance=None, **kws):
         # answer = kqq/r**2
         value = fractions.Fraction(
             numerator=first.Value * second.Value * Consts.k.Value,

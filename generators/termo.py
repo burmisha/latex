@@ -216,7 +216,7 @@ class DeltaU_on_P_const(variant.VariantTask):
         = {dU:V}. \\text{ {ans}. }
 ''')
 class DeltaU_from_DeltaT(variant.VariantTask):
-    def GetUpdate(self, what=None, sign=None, nu=None, dT=None, Consts=None, **kws):
+    def GetUpdate(self, what=None, sign=None, nu=None, dT=None, **kws):
         return dict(
             sgn='-' if sign == -1 else '',
             dU='%d Дж' % (3 / 2 * nu.Value * Consts.R.Value * dT.Value * sign),
