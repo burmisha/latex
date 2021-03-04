@@ -399,7 +399,7 @@ class GraphPV_1(variant.VariantTask):
     pass
 
 
-@variant.solution_space(80)
+@variant.solution_space(160)
 @variant.text('''
     Изобразите в координатах $PV$, соблюдая масштаб, процесс 1234,
     в котором 12 — {first} {first_what} в {first_n} раза,
