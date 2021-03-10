@@ -246,25 +246,28 @@ class Q_from_DeltaU(variant.VariantTask):
 
 @variant.solution_space(40)
 @variant.text('''
-    В некотором процессе внешние силы совершили над газом работу {A:V:e},
+    В некотором процессе {who} работу {A:V:e},
     при этом его внутренняя энергия {what} на {dU:V:e}.
     Определите количество тепла, переданное при этом процессе газу.
     Явно пропишите, подводили газу тепло или же отводили.
 ''')
-@variant.arg(what__sign=[('увеличилась', +1), ('уменьшилась', -1)])
+@variant.arg(who__sign_who=[('внешние силы совершили над газом', -1), ('газ совершил', +1)])
+@variant.arg(what__sign_what=[('увеличилась', +1), ('уменьшилась', -1)])
 @variant.arg(dU=('\\Delta U = {} Дж', [150, 250, 350, 450]))
-@variant.arg(A=('A = {} Дж', [100, 200, 300]))
+@variant.arg(A=('{} Дж', [100, 200, 300]))
 @variant.answer_short('''
-    Q = A' + \\Delta U, A = -A' \\implies Q = -A + \\Delta U = - {A:V} + {sgn} {dU:V} = {Q:V}.
+    Q = A_\\text{ газа } + \\Delta U, A_\\text{ газа } = -A_\\text{ внешняя }
+    \\implies Q = A_\\text{ газа } + \\Delta U = {sign_who} {A:V} + {sign_what} {dU:V} = {Q:V}.
     \\text{ {ans}. }
 ''')
 class Q_from_DeltaU_and_A(variant.VariantTask):
-    def GetUpdate(self, A=None, dU=None, what=None, sign=None, **kws):
-        Q = dU.Value * sign - A.Value
+    def GetUpdate(self, A=None, dU=None, what=None, sign_what=None, who=None, sign_who=None, **kws):
+        Q = dU.Value * sign_what + A.Value * sign_who
         return dict(
             Q='%d Дж' % Q,
             ans='Подводили' if Q > 0 else 'Отводили',
-            sgn='-' if sign == -1 else '',
+            sign_who='-' if sign_who == -1 else '',
+            sign_what='-' if sign_what == -1 else '',
         )
 
 
@@ -278,7 +281,7 @@ class Q_from_DeltaU_and_A(variant.VariantTask):
         \\item При изотермическом процессе внутренняя энергия идеального одноатомного газа не изменяется, даже если ему подводят тепло.
         \\item Газ может совершить ненулевую работу в любом из изопроцессов: изохорном, изобарном, изотермическом.
         \\item Адиабатический процесс лишь по воле случая не имеет приставки «изо»: в нём изменяются давление, температура и объём, но это не все макропараметры идеального газа.
-        \\item Полученное выражение для внутренней энергии идеального газа ($\\frac 32 \\nu RT$) применимо к {q8} газу, при этом, например, уравнение состояния идеального газа применимо независимо от числа атомов в молукуле газа.
+        \\item Полученное выражение для внутренней энергии идеального газа ($\\frac 32 \\nu RT$) применимо к {q8} газу, при этом, например, уравнение состояния идеального газа применимо независимо от числа атомов в молекулах газа.
     \\end{{enumerate}}
 ''')
 @variant.arg(q1__a1=[('адиабатическом', 'да'), ('изобарном', 'нет')])
