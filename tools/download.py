@@ -24,12 +24,12 @@ def run(args):
     all_videos = []
 
     download_playlists_cfg = {
-        # 'Foxford': 'https://www.youtube.com/playlist?list=PL66kIi3dt8A6Hd7soGMFXe6E5366Y66So',
-        # 'OnliSkill - 7 класс': 'https://www.youtube.com/playlist?list=PLRqVDT_WVZRkqpQBB1rIGzVKCaPf5qtYi',
-        # 'OnliSkill - 8 класс': 'https://www.youtube.com/playlist?list=PLRqVDT_WVZRmWRPyyVVOTe0Jc46eVxqEz',
-        # 'OnliSkill - 9 класс': 'https://www.youtube.com/playlist?list=PLRqVDT_WVZRlWUbTOSqswejgrO1RvQQs1',
+        'Foxford': 'https://www.youtube.com/playlist?list=PL66kIi3dt8A6Hd7soGMFXe6E5366Y66So',
+        'OnliSkill - 7 класс': 'https://www.youtube.com/playlist?list=PLRqVDT_WVZRkqpQBB1rIGzVKCaPf5qtYi',
+        'OnliSkill - 8 класс': 'https://www.youtube.com/playlist?list=PLRqVDT_WVZRmWRPyyVVOTe0Jc46eVxqEz',
+        'OnliSkill - 9 класс': 'https://www.youtube.com/playlist?list=PLRqVDT_WVZRlWUbTOSqswejgrO1RvQQs1',
         'OnliSkill - 10 класс': 'https://www.youtube.com/playlist?list=PLRqVDT_WVZRkKOQFruLNC1v74_jTp6LzW',
-        # 'OnliSkill - 11 класс': 'https://www.youtube.com/playlist?list=PLRqVDT_WVZRkCHtZmveDa9z3G1IiPpisi',
+        'OnliSkill - 11 класс': 'https://www.youtube.com/playlist?list=PLRqVDT_WVZRkCHtZmveDa9z3G1IiPpisi',
     }
     for dirname, playlist_url in download_playlists_cfg.items():
         playlist = library.download.YoutubePlaylist(playlist_url)
@@ -250,20 +250,35 @@ def run(args):
     log.info(f'Got total of {len(all_videos)} videos')
 
     topic_detector = library.topic.TopicDetector()
+    topic_filter =  library.topic.TopicFilter(args.filter)
+
+    assert topic_detector.get_topic_index('Термодинамика - Внутренняя энергия идеального газа') is not None
+    assert topic_detector.get_topic_index('Термодинамика - Циклические процессы') is not None
+
+    video_with_topics = []
     for video in all_videos:
         topic_index = topic_detector.get_topic_index(video._title)
+        video_with_topics.append((video, topic_index))
 
+    if args.sort:
+        video_with_topics = [(v, t) for v, t in video_with_topics if t]
+        video_with_topics.sort(key=lambda t: t[1])
+
+    for video, topic_index in video_with_topics:
         if save_files:
             video.download()
         else:
-            if not topic_index:
-                log.info(video)
-            else:
-                log.info(f'{video}, {topic_index}')
+            if topic_filter.matches(topic_index):
+                if not topic_index:
+                    log.info(video)
+                else:
+                    log.info(f'{video}, {topic_index}')
 
 
 
 def populate_parser(parser):
     parser.add_argument('-s', '--save', help='Save videos to hard drive', action='store_true')
     parser.add_argument('-p', '--pavel-viktor', help='Add Pavel Viktor', action='store_true')
+    parser.add_argument('-f', '--filter', help='Choose only videos matching filters')
+    parser.add_argument('--sort', help='Sort by topic', action='store_true')
     parser.set_defaults(func=run)

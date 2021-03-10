@@ -17,7 +17,7 @@ TopicIndex = collections.namedtuple('TopicIndex', ['Grade', 'Part', 'Subpart', '
 
 class TopicDetector:
     SEARCH_MIN_THRESHOLD = 80
-    SEARCH_DELTA_MULTIPLIER = 0.85
+    SEARCH_DELTA_MULTIPLIER = 0.95
 
     def __init__(self):
         topics_file = library.location.root('data', 'topics.yaml')
@@ -28,10 +28,12 @@ class TopicDetector:
         for grade, parts in config.items():
             for part_index, subparts in parts.items():
                 for subpart_index, titles in subparts.items():
-                    for index, title in enumerate(titles, 1):
-                        topic_index = TopicIndex(grade, part_index, subpart_index, index)
-                        assert topic_index not in self._matcher[title]
-                        self._matcher[title].append(topic_index)
+                    if isinstance(subpart_index, int):
+                        for index, title in enumerate(titles, 1):
+                            topic_index = TopicIndex(grade, part_index, subpart_index, index)
+                            assert topic_index not in self._matcher[title]
+                            joined_title = ' '.join([subparts.get('name', ''), title]).strip()
+                            self._matcher[joined_title].append(topic_index)
 
     def get_topic_index(self, title, grade=None):
         assert grade in (7, 8, 9, 10, 11, None)
@@ -63,3 +65,29 @@ class TopicDetector:
             f'  Topic indices {topic_indices}'
         ))
         return topic_index
+
+
+class TopicFilter:
+    def __init__(self, cfg):
+        if cfg:
+            self._cfg = cfg
+
+            grade, part, subpart = cfg.split('-')
+            self._grade = int(grade)
+            self._part = int(part)
+            self._subpart = int(subpart)
+        else:
+            self._cfg = None
+
+    def matches(self, topic):
+        if self._cfg is None:
+            return True
+
+        if topic:
+            return (
+                self._grade == topic.Grade and
+                self._part == topic.Part and
+                self._subpart == topic.Subpart
+            )
+
+        return False
