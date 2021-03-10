@@ -206,7 +206,6 @@ class DeltaU_on_P_const(variant.VariantTask):
     Определите изменение внутренней энергии газа. Увеличилась она или уменьшилась?
     Универсальная газовая постоянная {Consts.R:Task:e}.
 ''')
-
 @variant.arg(what__sign=[('нагрели', +1), ('охладили', -1)])
 @variant.arg(nu=('\\nu = {} моль', [2, 3, 4, 5]))
 @variant.arg(dT=('\\Delta T = {} К', [10, 20, 30]))
@@ -221,6 +220,29 @@ class DeltaU_from_DeltaT(variant.VariantTask):
             sgn='-' if sign == -1 else '',
             dU='%d Дж' % (3 / 2 * nu.Value * Consts.R.Value * dT.Value * sign),
             ans='Увеличилась' if sign == 1 else 'Уменьшилась',
+        )
+
+
+@variant.solution_space(40)
+@variant.text('''
+    {nu:V:e} идеального одноатомного в результате адиабатического процесса {what} на {dT:V:e}.
+    Определите работу газа. Кто совершил положительную работу: газ или внешние силы?
+    Универсальная газовая постоянная {Consts.R:Task:e}.
+''')
+@variant.arg(what__sign=[('нагрелся', +1), ('остыл', -1)])
+@variant.arg(nu=('\\nu = {} моль', [3, 4, 5, 6]))
+@variant.arg(dT=('\\Delta T = {} К', [10, 20, 30]))
+@variant.answer_short('''
+    Q = 0, Q = \\Delta U + A_\\text{ газа } \\implies A_\\text{ газа } = - \\Delta U
+    = - \\frac 32 \\nu R \\Delta T = {sgn} \\frac 32 \\cdot {nu:V|cdot}{Consts.R:V|cdot}{dT:V}
+    = {A:V}, \\text{ {ans}. }
+''')
+class A_from_DeltaT(variant.VariantTask):
+    def GetUpdate(self, what=None, sign=None, nu=None, dT=None, **kws):
+        return dict(
+            sgn='' if sign == -1 else '-',
+            A='%d Дж' % (3 / 2 * nu.Value * Consts.R.Value * dT.Value * sign),
+            ans='внешние силы' if sign == 1 else 'газ',
         )
 
 
@@ -265,7 +287,7 @@ class Q_from_DeltaU_and_A(variant.VariantTask):
         Q = dU.Value * sign_what + A.Value * sign_who
         return dict(
             Q='%d Дж' % Q,
-            ans='Подводили' if Q > 0 else 'Отводили',
+            ans=' Подводили' if Q > 0 else ' Отводили',
             sign_who='-' if sign_who == -1 else '',
             sign_what='-' if sign_what == -1 else '',
         )

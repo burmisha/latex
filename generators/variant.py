@@ -314,7 +314,7 @@ class MultiplePaper(object):
 
 
 def escape_tex(template):
-    return template.replace('{\n', '{{\n').replace('\n}', '\n}}').replace('{ ', '{{ ').replace(' }', ' }}')
+    return template.replace('{\n', '{{\n').replace('\n}', '\n}}').replace('{ ', '{{').replace(' }', '}}')
 
 
 def solution_space(space):
