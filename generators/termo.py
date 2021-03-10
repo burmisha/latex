@@ -8,7 +8,7 @@ log = logging.getLogger(__name__)
 
 @variant.solution_space(20)
 @variant.text('''
-    Напротив физической величины укажите её обозначение и единицы измерения в СИ или же запишите физический закон или формулу:
+    Напротив физической величины укажите её обозначение и единицы измерения в СИ или запишите физический закон или формулу (в пункте «г)»):
     \\begin{{enumerate}}
         \\item {v_1},
         \\item {v_2},
@@ -197,10 +197,10 @@ class V_from_P_and_U(variant.VariantTask):
 @variant.text('''
     Газ изобарически расширился от {V1:Value:e} до {V2:Value:e}.
     Давление газа при этом оставалось постоянным и равным {P:Value:e}.
-    Определите работу газа. {Consts.p_atm:Task:e}.
+    Определите работу газа, ответ выразите в килоджоулях. {Consts.p_atm:Task:e}.
 ''')
-@variant.arg(V1=('V_1 = {} л', [10, 20, 30]))
-@variant.arg(V2=('V_2 = {} л', [40, 50, 60]))
+@variant.arg(V1=('V_1 = {} л', [150, 200, 250, 350]))
+@variant.arg(V2=('V_2 = {} л', [450, 550, 650]))
 @variant.arg(P=('P = {} атм', [1.2, 1.5, 1.8, 2.5, 3.5]))
 @variant.answer_short(
     'A = P\\Delta V = P(V_2 - V_1) = {P:V|cdot}\\cbr{ {V2:V} - {V1:V} } = {A:V}.'
@@ -208,7 +208,7 @@ class V_from_P_and_U(variant.VariantTask):
 class A_on_P_const(variant.VariantTask):
     def GetUpdate(self, P=None, V1=None, V2=None, **kws):
         return dict(
-            A='%d Дж' % (P.Value * (V2.Value - V1.Value) * 100),
+            A='%.2f кДж' % (P.Value * (V2.Value - V1.Value) / 100),
         )
 
 
@@ -286,21 +286,27 @@ class A_from_DeltaT(variant.VariantTask):
 
 @variant.solution_space(60)
 @variant.text('''
-    Определите сообщенное газу количество теплоты,
-    если её {ratio} он потратил на совершение работы,
-    при этом увеличив свою внутреннюю энергию на {dU:V:e}.
+    Газу сообщили некоторое количество теплоты,
+    при этом {ratio} его он потратил на совершение работы,
+    одновременно увеличив свою внутреннюю энергию на {dU:V:e}.
+    Определите {what}.
 ''')
 @variant.arg(ratio__N=[('половину', 2), ('треть', 3), ('четверть', 4)])
 @variant.arg(dU=('\\Delta U = {} Дж', [1200, 1500, 2400, 3000]))
-@variant.answer_short('''
-    Q = A' + \\Delta U, A' = \\frac 1{N} Q \\implies Q\\cdot\\cbr{ 1 - \\frac 1{N} } = \\Delta U \\implies Q
-    = \\frac{ \\Delta U }{ 1 - \\frac 1{N} }
-    = \\frac{ {dU:V} }{ 1 - \\frac 1{N} } \\approx {Q:V}.
-''')
+@variant.arg(what=['количество теплоты, сообщённое газу', 'работу, совершённую газом'])
+@variant.answer_align([
+    '''Q &= A' + \\Delta U, A' = \\frac 1{N} Q \\implies Q\\cdot\\cbr{ 1 - \\frac 1{N} } = \\Delta U \\implies '''
+    '''Q = \\frac{ \\Delta U }{ 1 - \\frac 1{N} } = \\frac{ {dU:V} }{ 1 - \\frac 1{N} } \\approx {Q:V}.''',
+    '''A' &= \\frac 1{N} Q
+    = \\frac 1{N} \\cdot \\frac{ \\Delta U }{ 1 - \\frac 1{N} }
+    = \\frac{ \\Delta U }{ {N} - 1 }
+    = \\frac{ {dU:V} }{ {N} - 1 } \\approx {A:V}.''',
+])
 class Q_from_DeltaU(variant.VariantTask):
     def GetUpdate(self, N=None, dU=None, **kws):
         return dict(
             Q='%d Дж' % (dU.Value * N / (N - 1)),
+            A='%d Дж' % (dU.Value / (N - 1)),
         )
 
 
