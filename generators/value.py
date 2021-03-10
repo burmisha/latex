@@ -192,7 +192,7 @@ class UnitValue(object):
     def _parse_precision(self, value_part):
         precisionStr = value_part.replace('.', '').lstrip('0')
         if not precisionStr:
-            assert value_part == '0'
+            assert value_part == '0', f'Could not get precision from {value_part!r}'
             precisionStr = '0'
         precision = len(precisionStr)
         if precisionStr[0] == '1' and precision >= 2:

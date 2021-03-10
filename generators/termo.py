@@ -6,6 +6,23 @@ from generators.value import UnitValue, Consts
 import logging
 log = logging.getLogger(__name__)
 
+@variant.solution_space(20)
+@variant.text('''
+    Напротив физической величины укажите её обозначение и единицы измерения в СИ или же запишите физический закон или формулу:
+    \\begin{{enumerate}}
+        \\item {v_1},
+        \\item {v_2},
+        \\item {v_3},
+        \\item {v_4}.
+    \\end{{enumerate}}
+''')
+@variant.arg(v_1=['количество теплоты', 'изменение внутренней энергии'])
+@variant.arg(v_2=['работа газа', 'работа внешних сил'])
+@variant.arg(v_3=['молярная теплоёмкость', 'удельная теплоёмкость'])
+@variant.arg(v_4=['первое начало термодинамики', 'внутренняя энергия идеального одноатомного газа'])
+class Definitions01(variant.VariantTask):
+    pass
+
 
 @variant.text('''
     Сколько льда при температуре $0\\celsius$ можно расплавить,
@@ -158,6 +175,26 @@ class P_from_V_and_U(variant.VariantTask):
 
 @variant.solution_space(40)
 @variant.text('''
+    Определите объём идеального одноатомного газа,
+    если его внутренняя энергия при давлении {P:Value:e} составляет {U:Value:e}.
+    {Consts.p_atm:Task:e}.
+''')
+@variant.arg(P=('P = {} атм', [2, 3, 4, 5, 6]))
+@variant.arg(U=('U = {} кДж', [250, 300, 400, 500]))
+@variant.answer_short(
+    'U = \\frac 32 \\nu R T = \\frac 32 PV \\implies V = \\frac 23 \\cdot \\frac UP'
+    '= \\frac 23 \\cdot \\frac{U:V:s}{P:V:s} \\approx {V:V}.'
+)
+class V_from_P_and_U(variant.VariantTask):
+    def GetUpdate(self, U=None, P=None, **kws):
+        return dict(
+            V='%.2f м^3' % (2 / 3 * U.Value * 1000 / P.Value / 100000),
+        )
+
+
+
+@variant.solution_space(40)
+@variant.text('''
     Газ изобарически расширился от {V1:Value:e} до {V2:Value:e}.
     Давление газа при этом оставалось постоянным и равным {P:Value:e}.
     Определите работу газа. {Consts.p_atm:Task:e}.
@@ -230,18 +267,19 @@ class DeltaU_from_DeltaT(variant.VariantTask):
     Универсальная газовая постоянная {Consts.R:Task:e}.
 ''')
 @variant.arg(what__sign=[('нагрелся', +1), ('остыл', -1)])
-@variant.arg(nu=('\\nu = {} моль', [3, 4, 5, 6]))
-@variant.arg(dT=('\\Delta T = {} К', [10, 20, 30]))
-@variant.answer_short('''
-    Q = 0, Q = \\Delta U + A_\\text{ газа } \\implies A_\\text{ газа } = - \\Delta U
-    = - \\frac 32 \\nu R \\Delta T = {sgn} \\frac 32 \\cdot {nu:V|cdot}{Consts.R:V|cdot}{dT:V}
-    = {A:V}, \\text{ {ans}. }
-''')
+@variant.arg(nu=('\\nu = {} моль', [30, 40, 50, 60]))
+@variant.arg(dT=('\\Delta T = {} К', [15, 25, 45, 60, 80, 120]))
+@variant.answer_align([
+    'Q &= 0, Q = \\Delta U + A_\\text{ газа } \\implies',
+    '\\implies A_\\text{ газа } &= - \\Delta U = - \\frac 32 \\nu R \\Delta T '
+    '= {sgn} \\frac 32 \\cdot {nu:V|cdot}{Consts.R:V|cdot}{dT:V}'
+    '= {A:V}, \\text{ {ans}. }'
+])
 class A_from_DeltaT(variant.VariantTask):
     def GetUpdate(self, what=None, sign=None, nu=None, dT=None, **kws):
         return dict(
             sgn='' if sign == -1 else '-',
-            A='%d Дж' % (3 / 2 * nu.Value * Consts.R.Value * dT.Value * sign),
+            A='%.1f кДж' % (- 3 / 2 * nu.Value * Consts.R.Value * dT.Value * sign / 1000),
             ans='внешние силы' if sign == 1 else 'газ',
         )
 

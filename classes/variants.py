@@ -89,7 +89,7 @@ def get_all_variants():
             # {'termo': ['YesNo']},
         ]),
         ('2021-03-11 10', {'termo': [
-            'YesNo', 'P_from_V_and_U', 'A_on_P_const', 'DeltaU_on_P_const', 'DeltaU_from_DeltaT', 'Q_from_DeltaU', 'Q_from_DeltaU_and_A',
+            'Definitions01', 'V_from_P_and_U', 'A_on_P_const', 'A_from_DeltaT', 'DeltaU_on_P_const', 'DeltaU_from_DeltaT', 'Q_from_DeltaU', 'Q_from_DeltaU_and_A',
         ]}),
     ]
     for task_id, tasks_classes in random_tasks:
