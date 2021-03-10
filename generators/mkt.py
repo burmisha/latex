@@ -475,8 +475,8 @@ class ZFTSH_10_2_9_kv(variant.VariantTask):
 class ZFTSH_10_2_2_kv(variant.VariantTask):
     def GetUpdate(self, gas=None, V=None, p=None, t=None, **kws):
         return dict(
-            P='%.1d атм' % p,
-            m='%d г' % (p * Consts.p_atm.Value * 100000 * gas.mu.Value / 1000 / Consts.R.Value / (t + 273)),
+            P='%.1f атм' % p,
+            m='%.2f г' % (p * Consts.p_atm.Value * 1000 * V.Value * gas.mu.Value / 1000 / Consts.R.Value / (t + 273)),
         )
 
 
@@ -484,11 +484,11 @@ class ZFTSH_10_2_2_kv(variant.VariantTask):
 @variant.text('''
     Идеальный газ в экспериментальной установке подвергут политропному процессу $PV^n\\text{ — const }$
     с показателем политропы $n={n}$. В одном из экспериментов объём газа {what} в ${how}$ раза.
-    Как при этом измерилась температура газа (выросла или уменьшилась, на сколько или во сколько раз)?
+    Как при этом изменилась температура газа (выросла или уменьшилась, на сколько или во сколько раз)?
 ''')
 @variant.arg(what=['увеличился', 'уменьшился'])
-@variant.arg(n=[2, 3, 4])
-@variant.arg(how=[1.5, 2, 2.5])
+@variant.arg(n=[0.4, 0.7, 1.2, 1.5, 1.8])
+@variant.arg(how=[2, 3, 4])
 @variant.answer_align([
     'P_1V_1^n &= P_2V_2^n, P_1V_1 = \\nu R T_1, P_2V_2 = \\nu R T_2 \\implies'
     '\\frac{ \\nu R T_1 }{ V_1 } V_1^n = \\frac{ \\nu R T_2 }{ V_2 } V_2^n \\implies',
