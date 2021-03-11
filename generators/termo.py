@@ -195,7 +195,7 @@ class V_from_P_and_U(variant.VariantTask):
 
 @variant.solution_space(40)
 @variant.text('''
-    Газ изобарически расширился от {V1:Value:e} до {V2:Value:e}.
+    Газ расширился от {V1:Value:e} до {V2:Value:e}.
     Давление газа при этом оставалось постоянным и равным {P:Value:e}.
     Определите работу газа, ответ выразите в килоджоулях. {Consts.p_atm:Task:e}.
 ''')
