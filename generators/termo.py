@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+import fractions
+
 import generators.variant as variant
 from generators.value import UnitValue, Consts
 
@@ -8,7 +10,7 @@ log = logging.getLogger(__name__)
 
 @variant.solution_space(20)
 @variant.text('''
-    Напротив физической величины укажите её обозначение и единицы измерения в СИ или запишите физический закон или формулу (в пункте «г)»):
+    Напротив физических величин укажите их обозначения и единицы измерения в СИ, а в пункте «г)» запишите физический закон или формулу:
     \\begin{{enumerate}}
         \\item {v_1},
         \\item {v_2},
@@ -21,6 +23,18 @@ log = logging.getLogger(__name__)
 @variant.arg(v_3=['молярная теплоёмкость', 'удельная теплоёмкость'])
 @variant.arg(v_4=['первое начало термодинамики', 'внутренняя энергия идеального одноатомного газа'])
 class Definitions01(variant.VariantTask):
+    pass
+
+@variant.solution_space(20)
+@variant.text('''
+    Запишите формулы и рядом с каждой физичической величиной укажите её название и единицы изменения в СИ:
+    \\begin{{enumerate}}
+        \\item первое начало термодинамики,
+        \\item внутренняя энергия идеального одноатомного газа.
+    \\end{{enumerate}}
+''')
+@variant.no_args
+class Definitions02(variant.VariantTask):
     pass
 
 
@@ -207,8 +221,8 @@ class V_from_P_and_U(variant.VariantTask):
 )
 class A_on_P_const(variant.VariantTask):
     def GetUpdate(self, P=None, V1=None, V2=None, **kws):
-        return dict(
-            A='%.2f кДж' % (P.Value * (V2.Value - V1.Value) / 100),
+        return dicйt(
+            A='%.1f кДж' % (P.Value * 100000 * (V2.Value - V1.Value) / 1000 / 1000),
         )
 
 
@@ -262,11 +276,11 @@ class DeltaU_from_DeltaT(variant.VariantTask):
 
 @variant.solution_space(40)
 @variant.text('''
-    {nu:V:e} идеального одноатомного в результате адиабатического процесса {what} на {dT:V:e}.
+    {nu:V:e} идеального одноатомного газа в результате адиабатического процесса {what} на {dT:V:e}.
     Определите работу газа. Кто совершил положительную работу: газ или внешние силы?
     Универсальная газовая постоянная {Consts.R:Task:e}.
 ''')
-@variant.arg(what__sign=[('нагрелся', +1), ('остыл', -1)])
+@variant.arg(what__sign=[('нагрелись', +1), ('остыли', -1)])
 @variant.arg(nu=('\\nu = {} моль', [30, 40, 50, 60]))
 @variant.arg(dT=('\\Delta T = {} К', [15, 25, 45, 60, 80, 120]))
 @variant.answer_align([
@@ -358,3 +372,113 @@ class Q_from_DeltaU_and_A(variant.VariantTask):
 @variant.answer_short('''\\text{ {a1}, да, {a3}, {a4}, да, нет, да, {a8} }''')
 class YesNo(variant.VariantTask):
     pass
+
+
+@variant.text('''
+    Определите КПД цикла 12341, рабочим телом которого является идеальный одноатомный газ, если
+    12 — изобарическое расширение газа в {alpha_text},
+    23 — изохорическое охлаждение газа, при котором температура уменьшается в {beta_text},
+    34 — изобара, 41 — изохора.
+    % Для этого:
+    % \\begin{{enumerate}}
+    %     \\item сделайте рисунок в PV-координатах,
+    %     \\item выберите удобные обозначения, чтобы не запутаться в множестве температур, давлений и объёмов,
+    %     \\item вычислите необходимые соотнощения между температурами, давлениями и объёмами
+    %     (некоторые сразу видны по рисунку, некоторые — надо считать),
+    %     \\item определите для каждого участка поглощается или отдаётся тепло (и сколько именно:
+    %     потребуется первое начало термодинамики, отдельный расчёт работ на участках через площади фигур и изменений внутренней энергии),
+    %     \\item вычислите полную работу газа в цикле,
+    %     \\item подставьте всё в формулу для КПД, упростите и доведите до ответа.
+    % \\end{{enumerate}}
+    Определите КПД цикла Карно, температура нагревателя которого равна максимальной температуре в цикле 12341, а холодильника — минимальной.
+    Ответы в обоих случаях оставьте точными в виде нескоратимой дроби, никаких округлений.
+''')
+@variant.arg(alpha__alpha_text=[(2, 'два раза'), (3, 'три раза'), (4, 'четыре раза'), (5, 'пять раз'), (6, 'шесть раз')])
+@variant.arg(beta__beta_text=[(2, 'два раза'), (3, 'три раза'), (4, 'четыре раза'), (5, 'пять раз'), (6, 'шесть раз')])
+@variant.solution_space(360)
+@variant.answer_align([
+    'A_{ 12 } &> 0, \\Delta U_{ 12 } > 0, \\implies Q_{ 12 } = A_{ 12 } + \\Delta U_{ 12 } > 0,',
+    'A_{ 23 } &= 0, \\Delta U_{ 23 } < 0, \\implies Q_{ 23 } = A_{ 23 } + \\Delta U_{ 23 } < 0,',
+    'A_{ 34 } &< 0, \\Delta U_{ 34 } < 0, \\implies Q_{ 34 } = A_{ 34 } + \\Delta U_{ 34 } < 0,',
+    'A_{ 41 } &= 0, \\Delta U_{ 41 } > 0, \\implies Q_{ 41 } = A_{ 41 } + \\Delta U_{ 41 } > 0.',
+
+    'P_1V_1 &= \\nu R T_1, P_2V_2 = \\nu R T_2, P_3V_3 = \\nu R T_3, P_4V_4 = \\nu R T_4 \\text{  — уравнения состояния идеального газа },',
+
+    '&\\text{ Пусть $P_0$, $V_0$, $T_0$ — давление, объём и температура в точке 4 (минимальные во всём цикле): }',
+    'P_1 &= P_2, P_3 = P_4 = P_0, V_1 = V_4 = V_0, V_2 = V_3 = {alpha} V_1 = {alpha} V_0,',
+    'T_3 &= \\frac{ T_2 }{beta} \\text{ (по условию) } \\implies \\frac{ P_2 }{ P_3 } = \\frac{ P_2 V_2 }{ P_3 V_3 }'
+    '= \\frac{ \\nu R T_2 }{ \\nu R T_3 } = \\frac{ T_2 }{ T_3 } = {beta} \\implies P_1 = P_2 = {beta} P_0',
+
+    'A_\\text{ цикл } &= ({beta}P_0 - P_0)({alpha}V_0 - V_0) = {A}P_0V_0,',
+    'A_{ 12 } &= {beta}P_0 \\cdot ({alpha}V_0 - V_0) = {A12}P_0V_0,',
+
+    '\\Delta U_{ 12 } &= \\frac 32 \\nu R T_2 - \\frac 32 \\nu R T_1 = \\frac 32 P_2 V_2 - \\frac 32 P_1 V_1'
+    ' = \\frac 32 \\cdot {beta} P_0 \\cdot {alpha} V_0 -  \\frac 32 \\cdot {beta} P_0 \\cdot V_0'
+    ' = \\frac 32 \\cdot {U12} \\cdot P_0V_0,',
+
+    '\\Delta U_{ 41 } &= \\frac 32 \\nu R T_1 - \\frac 32 \\nu R T_4 = \\frac 32 P_1 V_1 - \\frac 32 P_4 V_4'
+    ' = \\frac 32 \\cdot {beta} P_0 V_0 - \\frac 32 P_0 V_0'
+    ' = \\frac 32 \\cdot {U41} \\cdot P_0V_0.',
+
+    '\\eta &= \\frac{ A_\\text{ цикл } }{ Q_+ } = \\frac{ A_\\text{ цикл } }{ Q_{ 12 } + Q_{ 41 } } '
+    ' = \\frac{ A_\\text{ цикл } }{ A_{ 12 } + \\Delta U_{ 12 } + A_{ 41 } + \\Delta U_{ 41 } } = ',
+    ' &= \\frac{ {A}P_0V_0 }{ {A12}P_0V_0 + \\frac 32 \\cdot {U12} \\cdot P_0V_0 + 0 + \\frac 32 \\cdot {U41} \\cdot P_0V_0 }'
+    ' = \\frac{ {A} }{ {A12} + \\frac 32 \\cdot {U12} + \\frac 32 \\cdot {U41} } = \\frac{ {eta.numerator} }{ {eta.denominator} } \\approx {eta_f}.',
+
+    '\\eta_\\text{ Карно } &= 1 - \\frac{ T_\\text{ х } }{ T_\\text{ н } } = 1 - \\frac{ T_\\text{ 4 } }{ T_\\text{ 2 } }'
+    ' = 1 - \\frac{ \\frac{ P_4V_4 }{ \\nu R } }{ \\frac{ P_2V_2 }{ \\nu R } } = 1 - \\frac{ P_4V_4 }{ P_2V_2 }'
+    ' = 1 - \\frac{ P_0V_0 }{ {beta}P_0 \\cdot {alpha}V_0 } = 1 - \\frac 1{ {beta} \\cdot {alpha} }  = \\frac{ {eta_max.numerator} }{ {eta_max.denominator} } \\approx {eta_max_f}.'
+])
+class CycleRectangle(variant.VariantTask):
+    def GetUpdate(self, alpha=None, beta=None, **kws):
+        A = (alpha - 1) * (beta - 1)
+        A12 = (alpha - 1) * beta
+        U12 = (alpha - 1) * beta
+        U41 = beta - 1
+        eta = fractions.Fraction(
+            numerator= 2 * A,
+            denominator=2 * A12 + 3 * U12 + 3 * U41,
+        )
+        eta_max = 1 - fractions.Fraction(
+            numerator=1,
+            denominator=alpha * beta,
+        )
+        return dict(
+            A=A,
+            A12=A12,
+            U12=U12,
+            U41=U41,
+            eta=eta,
+            eta_f='%.3f' % eta,
+            eta_max=eta_max,
+            eta_max_f='%.3f' % eta_max,
+        )
+
+
+@variant.solution_space(150)
+@variant.text('''
+    Порция идеального одноатомного газа перешла из состояния 1 в состояние 2: {P1:Task:e}, {V1:Task:e}, {P2:Task:e}, {V2:Task:e}.
+    Определите, какую работу при этом совершил газ, чему равно изменение внутренней энергии газа, сколько теплоты подвели к нему в этом процессе?
+    При решении обратите внимание на знаки искомых величин. Известно, что в PV-координатах график процесса 12 представляет собой отрезок прямой.
+''')
+@variant.arg(P1=('P_1 = {} МПа', [2, 3, 4]))
+@variant.arg(P2=('P_2 = {} МПа', [1.5, 2.5, 3.5, 4.5]))
+@variant.arg(V1=('V_1 = {} л', [3, 5, 7]))
+@variant.arg(V2=('V_2 = {} л', [2, 4, 6, 8]))
+@variant.answer_align([
+    'P_1V_1 &= \\nu R T_1, P_2V_2 = \\nu R T_2,',
+    '\\Delta U &= U_2-U_1 = \\frac 32 \\nu R T_2- \\frac 32 \\nu R T_1 = \\frac 32 P_2 V_2 - \\frac 32 P_1 V_1'
+    '= \\frac 32 \\cdot \\cbr{ {P2:V|cdot}{V2:V} - {P1:V|cdot}{V1:V} } = {dU:V}.',
+    'A_\\text{ газа } &= \\frac{ P_2 + P_1 } 2 \\cdot (V_2 - V_1) = \\frac{ {P2:V} + {P1:V} } 2 \\cdot ({V2:V} - {V1:V}) = {A:V},',
+    'Q &= A_\\text{ газа } + \\Delta U = \\frac 32 (P_2 V_2 - P_1 V_1) + \\frac{ P_2 + P_1 } 2 \\cdot (V_2 - V_1) = {dU:V} + {A:V} = {Q:V}.'
+])
+class DeltaQ_from_states(variant.VariantTask):
+    def GetUpdate(self, P1=None, P2=None, V1=None, V2=None, **kws):
+        A = (1000 * 1 / 2 * (P2.Value + P1.Value) * (V2.Value - V1.Value))
+        dU = (1000 * 3 / 2 * (P2.Value * V2.Value - P1.Value * V1.Value))
+        return dict(
+            A='%.1f кДж' % (A / 1000),
+            dU=('%.1f кДж' % (dU / 1000)) if dU else '0 кДж',
+            Q='%.1f кДж' % ((A + dU) / 1000),
+        )
+

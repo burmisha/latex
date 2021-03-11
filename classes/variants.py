@@ -91,6 +91,9 @@ def get_all_variants():
         ('2021-03-11 10', {'termo': [
             'Definitions01', 'V_from_P_and_U', 'A_on_P_const', 'A_from_DeltaT', 'DeltaU_on_P_const', 'DeltaU_from_DeltaT', 'Q_from_DeltaU', 'Q_from_DeltaU_and_A',
         ]}),
+        ('2021-03-12 10', {'termo': [
+            'CycleRectangle', 'DeltaQ_from_states', 'Definitions02',
+        ]}),
     ]
     for task_id, tasks_classes in random_tasks:
         pupils = library.pupils.get_class_from_string(task_id)
