@@ -221,7 +221,7 @@ class V_from_P_and_U(variant.VariantTask):
 )
 class A_on_P_const(variant.VariantTask):
     def GetUpdate(self, P=None, V1=None, V2=None, **kws):
-        return dicйt(
+        return dict(
             A='%.1f кДж' % (P.Value * 100000 * (V2.Value - V1.Value) / 1000 / 1000),
         )
 
