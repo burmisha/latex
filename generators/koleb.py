@@ -58,8 +58,8 @@ class Nu03(variant.VariantTask):
 ''')
 @variant.answer_short('''
     s
-        = 4A \\cdot N = 4A \\cdot \\frac tT = 4A \\cdot t\\nu
-        = 4 \\cdot {A:Value} \\cdot {t:Value} \\cdot {nu:Value}
+        = 4A * N = 4A * \\frac tT = 4A * t\\nu
+        = 4 * {A:Value} * {t:Value} * {nu:Value}
         = {s:Value}
 ''')
 @variant.arg(A=['A = %d см' % A for A in [2, 3, 5, 10, 15]])

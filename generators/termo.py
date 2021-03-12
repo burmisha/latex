@@ -66,7 +66,7 @@ class Ch_8_6(variant.VariantTask):
 @variant.answer_short('''
     Q
         = - \\lambda m
-        = - {lmbd:Value} \\cdot {m:Value}
+        = - {lmbd:Value} * {m:Value}
         = - {Q:Value} \\implies \\abs{ Q } = {Q:Value}
 ''')
 @variant.arg(metall__lmbd=[
@@ -91,7 +91,7 @@ class Ch_8_7(variant.VariantTask):
     Q
         = cm\\Delta t + Lm
         = m\\cbr{ c(t_{ 100 } - t) + L }
-        = {m:Value} \\cdot \\cbr{ {c:Value}\\cbr{ 100\\celsius - {t}\\celsius } + {L:Value} }
+        = {m:Value} * \\cbr{ {c:Value}\\cbr{ 100\\celsius - {t}\\celsius } + {L:Value} }
         = {Q:Value}
 ''')
 @variant.arg(m=['m = %d кг' % m for m in [2, 3, 4, 5, 15]])
@@ -147,7 +147,7 @@ class Ch_8_13(variant.VariantTask):
     'c_1 \\theta - c_1 t_1 + c_2 \\theta - c_2 t_2 &= 0, ',
     '(c_1 + c_2)\\theta &= c_1 t_1 + c_2 t_2, ',
     '''\\theta &= \\frac{ c_1 t_1 + c_2 t_2 }{ c_1 + c_2 }
-        = \\frac{ {c1:Value|cdot} {t1}\\celsius + {c2:Value|cdot} {t2}\\celsius }{ {c1:Value} + {c2:Value} }
+        = \\frac{ {c1:Value} * {t1}\\celsius + {c2:Value} *  {t2}\\celsius }{ {c1:Value} + {c2:Value} }
         \\approx {theta} \\celsius.''',
 ])
 @variant.arg(metall__c=[
@@ -177,8 +177,8 @@ class Ch_8_35(variant.VariantTask):
 @variant.arg(V=('V = {} л', [2, 3, 4, 5, 6]))
 @variant.arg(U=('U = {} Дж', [250, 300, 400, 500]))
 @variant.answer_short(
-    'U = \\frac 32 \\nu R T = \\frac 32 PV \\implies P = \\frac 23 \\cdot \\frac UV'
-    '= \\frac 23 \\cdot \\frac{U:V:s}{V:V:s} \\approx {P:V}.'
+    'U = \\frac 32 \\nu R T = \\frac 32 PV \\implies P = \\frac 23 * \\frac UV'
+    '= \\frac 23 * \\frac{U:V:s}{V:V:s} \\approx {P:V}.'
 )
 class P_from_V_and_U(variant.VariantTask):
     def GetUpdate(self, U=None, V=None, **kws):
@@ -196,8 +196,8 @@ class P_from_V_and_U(variant.VariantTask):
 @variant.arg(P=('P = {} атм', [2, 3, 4, 5, 6]))
 @variant.arg(U=('U = {} кДж', [250, 300, 400, 500]))
 @variant.answer_short(
-    'U = \\frac 32 \\nu R T = \\frac 32 PV \\implies V = \\frac 23 \\cdot \\frac UP'
-    '= \\frac 23 \\cdot \\frac{U:V:s}{P:V:s} \\approx {V:V}.'
+    'U = \\frac 32 \\nu R T = \\frac 32 PV \\implies V = \\frac 23 * \\frac UP'
+    '= \\frac 23 * \\frac{U:V:s}{P:V:s} \\approx {V:V}.'
 )
 class V_from_P_and_U(variant.VariantTask):
     def GetUpdate(self, U=None, P=None, **kws):
@@ -217,7 +217,7 @@ class V_from_P_and_U(variant.VariantTask):
 @variant.arg(V2=('V_2 = {} л', [450, 550, 650]))
 @variant.arg(P=('P = {} атм', [1.2, 1.5, 1.8, 2.5, 3.5]))
 @variant.answer_short(
-    'A = P\\Delta V = P(V_2 - V_1) = {P:V|cdot}\\cbr{ {V2:V} - {V1:V} } = {A:V}.'
+    'A = P\\Delta V = P(V_2 - V_1) = {P:V} * \\cbr{ {V2:V} - {V1:V} } = {A:V}.'
 )
 class A_on_P_const(variant.VariantTask):
     def GetUpdate(self, P=None, V1=None, V2=None, **kws):
@@ -239,9 +239,9 @@ class A_on_P_const(variant.VariantTask):
 @variant.answer_align([
     'P_1V_1 &= \\nu R T_1, P_2V_2 = \\nu R T_2,',
     '\\Delta U &= U_2-U_1 = \\frac 32 \\nu R T_2- \\frac 32 \\nu R T_1 = \\frac 32 P_2 V_2 - \\frac 32 P_1 V_1'
-    '= \\frac 32 \\cdot \\cbr{ {P2:V|cdot}{V2:V} - {P1:V|cdot}{V1:V} } = {dU:V}.',
+    '= \\frac 32 * \\cbr{ {P2:V} * {V2:V} - {P1:V} * {V1:V} } = {dU:V}.',
     '\\frac{ T_2 }{ T_1 } &= \\frac{ \\frac{ P_2V_2 }{ \\nu R } }{ \\frac{ P_1V_1 }{ \\nu R } } = \\frac{ P_2V_2 }{ P_1V_1 }'
-    '= \\frac{ {P2:V|cdot}{V2:V} }{ {P1:V|cdot}{V1:V} } \\approx {ratio}.',
+    '= \\frac{ {P2:V} * {V2:V} }{ {P1:V} * {V1:V} } \\approx {ratio}.',
 ])
 class DeltaU_on_P_const(variant.VariantTask):
     def GetUpdate(self, P1=None, P2=None, V1=None, V2=None, **kws):
@@ -262,7 +262,7 @@ class DeltaU_on_P_const(variant.VariantTask):
 @variant.arg(dT=('\\Delta T = {} К', [10, 20, 30]))
 @variant.answer_short('''
     \\Delta U = \\frac 32 \\nu R {dT:Letter}
-        = {sgn} \\frac 32 \\cdot {nu:V|cdot}{Consts.R:V|cdot}{dT:V}
+        = {sgn} \\frac 32 * {nu:V} * {Consts.R:V} * {dT:V}
         = {dU:V}. \\text{ {ans}. }
 ''')
 class DeltaU_from_DeltaT(variant.VariantTask):
@@ -286,7 +286,7 @@ class DeltaU_from_DeltaT(variant.VariantTask):
 @variant.answer_align([
     'Q &= 0, Q = \\Delta U + A_\\text{ газа } \\implies',
     '\\implies A_\\text{ газа } &= - \\Delta U = - \\frac 32 \\nu R \\Delta T '
-    '= {sgn} \\frac 32 \\cdot {nu:V|cdot}{Consts.R:V|cdot}{dT:V}'
+    '= {sgn} \\frac 32 * {nu:V} * {Consts.R:V} * {dT:V}'
     '= {A:V}, \\text{ {ans}. }'
 ])
 class A_from_DeltaT(variant.VariantTask):
@@ -309,10 +309,10 @@ class A_from_DeltaT(variant.VariantTask):
 @variant.arg(dU=('\\Delta U = {} Дж', [1200, 1500, 2400, 3000]))
 @variant.arg(what=['количество теплоты, сообщённое газу', 'работу, совершённую газом'])
 @variant.answer_align([
-    '''Q &= A' + \\Delta U, A' = \\frac 1{N} Q \\implies Q\\cdot\\cbr{ 1 - \\frac 1{N} } = \\Delta U \\implies '''
+    '''Q &= A' + \\Delta U, A' = \\frac 1{N} Q \\implies Q * \\cbr{ 1 - \\frac 1{N} } = \\Delta U \\implies '''
     '''Q = \\frac{ \\Delta U }{ 1 - \\frac 1{N} } = \\frac{ {dU:V} }{ 1 - \\frac 1{N} } \\approx {Q:V}.''',
     '''A' &= \\frac 1{N} Q
-    = \\frac 1{N} \\cdot \\frac{ \\Delta U }{ 1 - \\frac 1{N} }
+    = \\frac 1{N} * \\frac{ \\Delta U }{ 1 - \\frac 1{N} }
     = \\frac{ \\Delta U }{ {N} - 1 }
     = \\frac{ {dU:V} }{ {N} - 1 } \\approx {A:V}.''',
 ])
@@ -410,24 +410,24 @@ class YesNo(variant.VariantTask):
     '= \\frac{ \\nu R T_2 }{ \\nu R T_3 } = \\frac{ T_2 }{ T_3 } = {beta} \\implies P_1 = P_2 = {beta} P_0',
 
     'A_\\text{ цикл } &= ({beta}P_0 - P_0)({alpha}V_0 - V_0) = {A}P_0V_0,',
-    'A_{ 12 } &= {beta}P_0 \\cdot ({alpha}V_0 - V_0) = {A12}P_0V_0,',
+    'A_{ 12 } &= {beta}P_0 * ({alpha}V_0 - V_0) = {A12}P_0V_0,',
 
     '\\Delta U_{ 12 } &= \\frac 32 \\nu R T_2 - \\frac 32 \\nu R T_1 = \\frac 32 P_2 V_2 - \\frac 32 P_1 V_1'
-    ' = \\frac 32 \\cdot {beta} P_0 \\cdot {alpha} V_0 -  \\frac 32 \\cdot {beta} P_0 \\cdot V_0'
-    ' = \\frac 32 \\cdot {U12} \\cdot P_0V_0,',
+    ' = \\frac 32 * {beta} P_0 * {alpha} V_0 -  \\frac 32 * {beta} P_0 * V_0'
+    ' = \\frac 32 * {U12} * P_0V_0,',
 
     '\\Delta U_{ 41 } &= \\frac 32 \\nu R T_1 - \\frac 32 \\nu R T_4 = \\frac 32 P_1 V_1 - \\frac 32 P_4 V_4'
-    ' = \\frac 32 \\cdot {beta} P_0 V_0 - \\frac 32 P_0 V_0'
-    ' = \\frac 32 \\cdot {U41} \\cdot P_0V_0.',
+    ' = \\frac 32 * {beta} P_0 V_0 - \\frac 32 P_0 V_0'
+    ' = \\frac 32 * {U41} * P_0V_0.',
 
     '\\eta &= \\frac{ A_\\text{ цикл } }{ Q_+ } = \\frac{ A_\\text{ цикл } }{ Q_{ 12 } + Q_{ 41 } } '
     ' = \\frac{ A_\\text{ цикл } }{ A_{ 12 } + \\Delta U_{ 12 } + A_{ 41 } + \\Delta U_{ 41 } } = ',
-    ' &= \\frac{ {A}P_0V_0 }{ {A12}P_0V_0 + \\frac 32 \\cdot {U12} \\cdot P_0V_0 + 0 + \\frac 32 \\cdot {U41} \\cdot P_0V_0 }'
-    ' = \\frac{ {A} }{ {A12} + \\frac 32 \\cdot {U12} + \\frac 32 \\cdot {U41} } = \\frac{ {eta.numerator} }{ {eta.denominator} } \\approx {eta_f}.',
+    ' &= \\frac{ {A}P_0V_0 }{ {A12}P_0V_0 + \\frac 32 * {U12} * P_0V_0 + 0 + \\frac 32 * {U41} * P_0V_0 }'
+    ' = \\frac{ {A} }{ {A12} + \\frac 32 * {U12} + \\frac 32 * {U41} } = \\frac{ {eta.numerator} }{ {eta.denominator} } \\approx {eta_f}.',
 
     '\\eta_\\text{ Карно } &= 1 - \\frac{ T_\\text{ х } }{ T_\\text{ н } } = 1 - \\frac{ T_\\text{ 4 } }{ T_\\text{ 2 } }'
     ' = 1 - \\frac{ \\frac{ P_4V_4 }{ \\nu R } }{ \\frac{ P_2V_2 }{ \\nu R } } = 1 - \\frac{ P_4V_4 }{ P_2V_2 }'
-    ' = 1 - \\frac{ P_0V_0 }{ {beta}P_0 \\cdot {alpha}V_0 } = 1 - \\frac 1{ {beta} \\cdot {alpha} }  = \\frac{ {eta_max.numerator} }{ {eta_max.denominator} } \\approx {eta_max_f}.'
+    ' = 1 - \\frac{ P_0V_0 }{ {beta}P_0 * {alpha}V_0 } = 1 - \\frac 1{ {beta} * {alpha} }  = \\frac{ {eta_max.numerator} }{ {eta_max.denominator} } \\approx {eta_max_f}.'
 ])
 class CycleRectangle(variant.VariantTask):
     def GetUpdate(self, alpha=None, beta=None, **kws):
@@ -484,20 +484,20 @@ class CycleRectangle(variant.VariantTask):
     '= \\frac{ \\nu R T_3 }{ \\nu R T_2 } = \\frac{ T_3 }{ T_2 } = {beta} \\implies V_3 = V_4 = {beta} V_2 = {beta} V_0.',
 
     'A_\\text{ цикл } &= ({beta}P_0 - P_0)({alpha}V_0 - V_0) = {A}P_0V_0,',
-    'A_{ 23 } &= {alpha}P_0 \\cdot ({beta}V_0 - V_0) = {A23}P_0V_0,',
+    'A_{ 23 } &= {alpha}P_0 * ({beta}V_0 - V_0) = {A23}P_0V_0,',
 
     '\\Delta U_{ 23 } &= \\frac 32 \\nu R T_3 - \\frac 32 \\nu R T_3 = \\frac 32 P_3 V_3 - \\frac 32 P_2 V_2'
-    ' = \\frac 32 \\cdot {alpha} P_0 \\cdot {beta} V_0 -  \\frac 32 \\cdot {alpha} P_0 \\cdot V_0'
-    ' = \\frac 32 \\cdot {U23} \\cdot P_0V_0,',
+    ' = \\frac 32 * {alpha} P_0 * {beta} V_0 -  \\frac 32 * {alpha} P_0 * V_0'
+    ' = \\frac 32 * {U23} * P_0V_0,',
 
     '\\Delta U_{ 12 } &= \\frac 32 \\nu R T_2 - \\frac 32 \\nu R T_1 = \\frac 32 P_2 V_2 - \\frac 32 P_1 V_1'
-    ' = \\frac 32 \\cdot {alpha} P_0 V_0 - \\frac 32 P_0 V_0'
-    ' = \\frac 32 \\cdot {U12} \\cdot P_0V_0.',
+    ' = \\frac 32 * {alpha} P_0 V_0 - \\frac 32 P_0 V_0'
+    ' = \\frac 32 * {U12} * P_0V_0.',
 
     '\\eta &= \\frac{ A_\\text{ цикл } }{ Q_+ } = \\frac{ A_\\text{ цикл } }{ Q_{ 12 } + Q_{ 23 } } '
     ' = \\frac{ A_\\text{ цикл } }{ A_{ 12 } + \\Delta U_{ 12 } + A_{ 23 } + \\Delta U_{ 23 } } = ',
-    ' &= \\frac{ {A}P_0V_0 }{ 0 + \\frac 32 \\cdot {U12} \\cdot P_0V_0 + {A23}P_0V_0 + \\frac 32 \\cdot {U23} \\cdot P_0V_0 }'
-    ' = \\frac{ {A} }{ \\frac 32 \\cdot {U12} + {A23} + \\frac 32 \\cdot {U23} } = \\frac{ {eta.numerator} }{ {eta.denominator} } \\approx {eta_f}.',
+    ' &= \\frac{ {A}P_0V_0 }{ 0 + \\frac 32 * {U12} * P_0V_0 + {A23}P_0V_0 + \\frac 32 * {U23} * P_0V_0 }'
+    ' = \\frac{ {A} }{ \\frac 32 * {U12} + {A23} + \\frac 32 * {U23} } = \\frac{ {eta.numerator} }{ {eta.denominator} } \\approx {eta_f}.',
 
     '\\eta_\\text{ Карно } &= 1 - \\frac{ T_\\text{ х } }{ T_\\text{ н } } = 1 - \\frac{ T_\\text{ 1 } }{ T_\\text{ 3 } }'
     ' = 1 - \\frac{ T_0 }{ {t}T_0 } = 1 - \\frac 1{ {t} }  = \\frac{ {eta_max.numerator} }{ {eta_max.denominator} } \\approx {eta_max_f}.'
@@ -543,9 +543,9 @@ class CycleRectangle_T(variant.VariantTask):
 @variant.answer_align([
     'P_1V_1 &= \\nu R T_1, P_2V_2 = \\nu R T_2,',
     '\\Delta U &= U_2-U_1 = \\frac 32 \\nu R T_2- \\frac 32 \\nu R T_1 = \\frac 32 P_2 V_2 - \\frac 32 P_1 V_1'
-    '= \\frac 32 \\cdot \\cbr{ {P2:V|cdot}{V2:V} - {P1:V|cdot}{V1:V} } = {dU:V}.',
-    'A_\\text{ газа } &= \\frac{ P_2 + P_1 } 2 \\cdot (V_2 - V_1) = \\frac{ {P2:V} + {P1:V} } 2 \\cdot ({V2:V} - {V1:V}) = {A:V},',
-    'Q &= A_\\text{ газа } + \\Delta U = \\frac 32 (P_2 V_2 - P_1 V_1) + \\frac{ P_2 + P_1 } 2 \\cdot (V_2 - V_1) = {dU:V} + {A:V} = {Q:V}.'
+    '= \\frac 32 * \\cbr{ {P2:V} * {V2:V} - {P1:V} * {V1:V} } = {dU:V}.',
+    'A_\\text{ газа } &= \\frac{ P_2 + P_1 } 2 * (V_2 - V_1) = \\frac{ {P2:V} + {P1:V} } 2 * ({V2:V} - {V1:V}) = {A:V},',
+    'Q &= A_\\text{ газа } + \\Delta U = \\frac 32 (P_2 V_2 - P_1 V_1) + \\frac{ P_2 + P_1 } 2 * (V_2 - V_1) = {dU:V} + {A:V} = {Q:V}.'
 ])
 class DeltaQ_from_states(variant.VariantTask):
     def GetUpdate(self, P1=None, P2=None, V1=None, V2=None, **kws):

@@ -36,10 +36,10 @@ class Waves00(variant.VariantTask):
 @variant.answer_short('''
     T'  = 2\\pi\\sqrt{ \\frac { m' }k }
         = 2\\pi\\sqrt{ \\frac { \\alpha m }k }
-        = \\sqrt{ \\alpha } \\cdot 2\\pi\\sqrt{ \\frac mk }
-        = \\sqrt{ \\alpha } \\cdot T
+        = \\sqrt{ \\alpha } * 2\\pi\\sqrt{ \\frac mk }
+        = \\sqrt{ \\alpha } * T
         = T\\sqrt{ \\alpha }
-        = \\frac 1\\nu \\cdot\\sqrt{ \\alpha }
+        = \\frac 1\\nu * \\sqrt{ \\alpha }
         = \\frac{ \\sqrt{ \\alpha } }{ \\nu }
         = \\frac{ \\sqrt{ {alpha} } }{nu:Value:s}
         = {T1:Value}
@@ -62,7 +62,7 @@ class Waves01(variant.VariantTask):
 @variant.answer_align([
     '''
         E_{ \\text{ полная механическая } } &= E_{ \\text{ max кинетическая } }
-        = \\frac{ m v_{ \\max }^2 }2 = \\frac{ {m:Value|cdot}{v:Value|sqr} }2 = {E:Value},''',
+        = \\frac{ m v_{ \\max }^2 }2 = \\frac{ {m:Value} * {v:Value|sqr} }2 = {E:Value},''',
     'A_{ E_{ \\text{ потенциальная } } } &= \\frac{ E_{ \\text{ полная механическая } } }2 = {E2:Value}.'
 ])
 @variant.arg(mLetter=['m', 'M'])
@@ -82,7 +82,7 @@ class Waves02(variant.VariantTask):
     если длина волны равна {lmbd:Value:e}. Сколько между ними ещё уместилось гребней?
 ''')
 @variant.answer_short('''
-    l = (n_2 - n_1) \\cdot \\lambda = \\cbr{ {n2} - {n1} } \\cdot {lmbd:Value} = {l:Value},
+    l = (n_2 - n_1) * \\lambda = \\cbr{ {n2} - {n1} } * {lmbd:Value} = {l:Value},
     \\quad n = n_2 - n_1 - 1 = {n2} - {n1} - 1 = {n}
 ''')
 @variant.arg(first__n1=[
@@ -127,11 +127,11 @@ class Waves04(variant.VariantTask):
     если скорость распространения волн {v:Value:e}?
 ''')
 @variant.answer_align([
-    u"\\lambda &= \\frac L{ N-1 } = \\frac { vt }{ N-1 } = \\frac { {v:Value|cdot}{t:Value} }{ {N:Value} - 1 } = {lmbd:Value}, ",
+    u"\\lambda &= \\frac L{ N-1 } = \\frac { vt }{ N-1 } = \\frac { {v:Value} * {t:Value} }{ {N:Value} - 1 } = {lmbd:Value}, ",
     u"T &= \\frac { \\lambda }{ v } = \\frac { vt }{ \\cbr{ N-1 }v } = \\frac { t }{ N-1 } =  \\frac {t:Value:s}{ {N:Value} - 1 } = {T:Value}, ",
     u"\\nu &= \\frac 1T = \\frac { N-1 }{ t } = \\frac { {N:Value} - 1 }{t:Value:s} = {nu:Value}. ",
     u"&\\text{ Если же считать гребни целиком, т.е. не вычитать единицу: } ",
-    u"\\lambda' &= \\frac L{ N } = \\frac { vt }{ N } = \\frac { {v:Value|cdot}{t:Value} }{N:Value:s} = {lmbd_1:Value}, ",
+    u"\\lambda' &= \\frac L{ N } = \\frac { vt }{ N } = \\frac { {v:Value} * {t:Value} }{N:Value:s} = {lmbd_1:Value}, ",
     u"T' &= \\frac { \\lambda' }{ v } = \\frac { vt }{ Nv } = \\frac tN =  \\frac {t:Value:s}{N:Value:s} = {T_1:Value}, ",
     u"\\nu' &= \\frac 1{ T' } = \\frac { N }{ t } = \\frac {N:Value:s}{t:Value:s} = {nu_1:Value}. ",
 ])
@@ -156,11 +156,11 @@ class Waves05(variant.VariantTask):
 ''')
 @variant.answer_short('''
     \\lambda_1
-        = v T_1 = v \\cdot \\frac 1{ \\nu_1 } = \\frac{ v }{ \\nu_1 }
+        = v T_1 = v * \\frac 1{ \\nu_1 } = \\frac{ v }{ \\nu_1 }
         = \\frac{v:Value:s}{nu_1:Value:s} = {l_1:Value},
     \\quad
     \\lambda_2
-        = c T_2 = c \\cdot \\frac 1{ \\nu_2 } = \\frac{ c }{ \\nu_2 }
+        = c T_2 = c * \\frac 1{ \\nu_2 } = \\frac{ c }{ \\nu_2 }
         = \\frac{c:Value:s}{nu_2:Value:s} = {l_2:Value},
     \\quad n = \\frac{ \\lambda_2 }{ \\lambda_1 } \\approx {n:Value}
 ''')

@@ -17,11 +17,11 @@ log = logging.getLogger(__name__)
 @variant.answer_short('''
     N = \\frac{ Pt\\lambda }{ hc }
        = \\frac{
-            {power:Value} \\cdot {minutes} \\cdot 60 \\units{ с } \\cdot {length:Value}
+            {power:Value} * {minutes} * 60 \\units{ с } * {length:Value}
          }{
-            {Consts.h:Value} \\cdot {Consts.c:Value}
+            {Consts.h:Value} * {Consts.c:Value}
          }
-       \\approx { {approx:.2f} }\\cdot10^{ {answerPower} }\\units{ фотонов }
+       \\approx { {approx:.2f} } * 10^{ {answerPower} }\\units{ фотонов }
 ''')
 @variant.arg(minutes=[5, 10, 20, 30, 40, 60, 120])
 @variant.arg(power=['P = %d мВт' % P for P in [15, 40, 75, 200]])
@@ -78,10 +78,10 @@ class RadioFall(variant.VariantTask):
     если за {time} ч в среднем распадается {delta} атомов из {total}?
 ''')
 @variant.answer_short('''
-    N(t) = N_0\\cdot 2^{ -\\frac t{ \\tau_\\frac12 }  }
+    N(t) = N_0 * 2^{ -\\frac t{ \\tau_\\frac12 }  }
     \\implies \\log_2\\frac N{ N_0 } = - \\frac t{ \\tau_\\frac 12 }
     \\implies \\tau_\\frac 12 = - \\frac t { \\log_2\\frac N{ N_0 } }
-                              =   \\frac t { \\log_2\\frac { N_0 } }N }
+                              =   \\frac t { \\log_2\\frac { N_0 }N }
     = \\frac{
         {time} \\units{ ч }
     }

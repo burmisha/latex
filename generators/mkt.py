@@ -6,7 +6,7 @@ from generators.value import Consts
     Молекулы газа в некотором сосуде движутся со средней скоростью {v:Value|e}.
     Определите, какое расстояние в среднем проходит одна из таких молекул за {t:Value|e}.
 ''')
-@variant.answer_short('s = v t = {v:Value|cdot}{t:Value} = {s:Value}.')
+@variant.answer_short('s = v t = {v:Value} * {t:Value} = {s:Value}.')
 @variant.arg(v=['%d м / с' % v for v in [150, 200, 250, 300, 500]])
 @variant.arg(t=['%d час' % v for v in [2, 3, 4, 5]] + ['%d сут' % v for v in [2, 3, 4, 5]])
 class Basic01(variant.VariantTask):
@@ -123,7 +123,7 @@ class CountNu(variant.VariantTask):
     ('нонана', '\\mu = 128 г / моль', '\\ce{C9H20}'),
     ('декана', '\\mu = 142 г / моль', '\\ce{C10H22}'),
 ])
-@variant.answer_short('m = \\mu\\nu = {mu:Value|cdot}{nu:Value} = {m:Value}.')
+@variant.answer_short('m = \\mu\\nu = {mu:Value} * {nu:Value} = {m:Value}.')
 class CountMass(variant.VariantTask):
     def GetUpdate(self, nu=None, mu=None, **kws):
         return dict(
@@ -146,7 +146,7 @@ class CountMass(variant.VariantTask):
     ('нонана', '\\mu = 128 г / моль', '\\ce{C9H20}'),
     ('декана', '\\mu = 142 г / моль', '\\ce{C10H22}'),
 ])
-@variant.answer_short('N = {Consts.N_A:L}\\nu = {Consts.N_A:L}\\frac{m:L|s}{mu:L|s} = {Consts.N_A:Value|cdot}\\frac{m:V|s}{mu:V|s} = {N:V}.')
+@variant.answer_short('N = {Consts.N_A:L}\\nu = {Consts.N_A:L}\\frac{m:L|s}{mu:L|s} = {Consts.N_A:Value} * \\frac{m:V|s}{mu:V|s} = {N:V}.')
 class CountParticles(variant.VariantTask):
     def GetUpdate(self, m=None, mu=None, **kws):
         return dict(
@@ -435,12 +435,12 @@ class GraphPV_2(variant.VariantTask):
 @variant.arg(T=[f'T = {t+5+273} К' for t in range(15)])
 @variant.answer_align([
     'T\\text{ — const } &\\implies P_1V_1 = \\nu RT = P_2V_2.',
-    'V_2 = \\frac 1{n} V_1 &\\implies P_1V_1 = P_2\\cdot \\frac 1{n}V_1 \\implies P_2 = {n}P_1 = {n}{Consts.p_atm:L}.',
+    'V_2 = \\frac 1{n} V_1 &\\implies P_1V_1 = P_2 * \\frac 1{n}V_1 \\implies P_2 = {n}P_1 = {n}{Consts.p_atm:L}.',
     'P_2 = {Consts.p_atm:L} + {Consts.water.rho:L} {Consts.g_ten:L} h \\implies '
     'h = \\frac{ P_2 - {Consts.p_atm:L} }{ {Consts.water.rho:L} {Consts.g_ten:L} }'
     ' &= \\frac{ {n}{Consts.p_atm:L} - {Consts.p_atm:L} }{ {Consts.water.rho:L} {Consts.g_ten:L} }'
-    ' = \\frac{ {n_1} \\cdot {Consts.p_atm:L} }{ {Consts.water.rho:L} {Consts.g_ten:L} } = ',
-    ' &= \\frac{ {n_1} \\cdot {Consts.p_atm:V} }{ {Consts.water.rho:V|cdot} {Consts.g_ten:V} } \\approx {h:V}.'
+    ' = \\frac{ {n_1} * {Consts.p_atm:L} }{ {Consts.water.rho:L} {Consts.g_ten:L} } = ',
+    ' &= \\frac{ {n_1} * {Consts.p_atm:V} }{ {Consts.water.rho:V} *  {Consts.g_ten:V} } \\approx {h:V}.'
 ])
 class ZFTSH_10_2_9_kv(variant.VariantTask):
     def GetUpdate(self, ratio=None, n=None, T=None, **kws):
@@ -468,7 +468,7 @@ class ZFTSH_10_2_9_kv(variant.VariantTask):
 @variant.arg(t=[7, 17, 27, 37, 47])
 @variant.answer_short('''
     PV = \\frac m\\mu RT \\implies m = \\frac{ PV \\mu }{ RT } =
-    \\frac{ {P:V|cdot}{V:V|cdot} {gas.mu:V} }{ {Consts.R:V|cdot} \\cbr{ {t} + 273 }\\units{{К}} }
+    \\frac{ {P:V} * {V:V} *  {gas.mu:V} }{ {Consts.R:V} *  \\cbr{ {t} + 273 }\\units{{К}} }
     \\approx {m:V}.
 ''')
 

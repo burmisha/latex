@@ -11,7 +11,7 @@ log = logging.getLogger(__name__)
 ''')
 @answer_short(
     '{p:L} = {rho:L}g{h:L} \\implies {h:L} = \\frac{ {p:L:s} }{ g{rho:L} } '
-    '= \\frac{ {p:Value:s} }{ {Consts.g_ten:Value|cdot}{rho:Value} } = {h:Value}.'
+    '= \\frac{ {p:Value:s} }{ {Consts.g_ten:Value} * {rho:Value} } = {h:Value}.'
 )
 @answer_test('{h:TestAnswer}')
 @arg(matter__rho__p=[
@@ -50,7 +50,7 @@ class Ch_6_3(VariantTask):
 @answer_short(
     'p = {Consts.water.rho:L} {Consts.g_ten:L} {h:L} + {Consts.p_atm:L} = {N} {Consts.p_atm:L} \\implies '
     '{h:L} = \\frac{ ({N}-1) {Consts.p_atm:L} }{ {Consts.g_ten:L} {Consts.water.rho:L} } '
-    '= \\frac{ ({N}-1) \\cdot {Consts.p_atm:Value} }{ {Consts.g_ten:Value|cdot}{Consts.water.rho:Value} } = {h:Value}.'
+    '= \\frac{ ({N}-1) * {Consts.p_atm:Value} }{ {Consts.g_ten:Value} * {Consts.water.rho:Value} } = {h:Value}.'
 )
 @answer_test('{h:TestAnswer}')
 @arg(N=[2, 3, 4, 5, 6, 7, 8, 9, 10])
@@ -100,7 +100,7 @@ class Ch_6_10(VariantTask):
 @answer_short(
     '{rho:L}{Consts.g_ten:L}{h1:L} = {Consts.water.rho:L}{Consts.g_ten:L}{h2:L} \\implies '
     '{h2:L} = {h1:L} \\frac{ {rho:L} }{ {Consts.water.rho:L} } '
-    '= {h1:Value|cdot} \\frac{ {rho:Value} }{ {Consts.water.rho:Value} } '
+    '= {h1:Value} * \\frac{ {rho:Value} }{ {Consts.water.rho:Value} } '
     '= {h2:Value}'
 )
 @answer_test({'{h2:TestAnswer}': 1, '{h2_m:TestAnswer}': 0.7})
@@ -141,8 +141,8 @@ class Ch_6_16(VariantTask):
 @answer_align([
     '{S1:L}h_1 &= {S2:L}h_2 \\implies h_1 = h_2 \\frac{ {S2:L} }{ {S1:L} } ',
     '\\frac{ {m:L}{Consts.g_ten:L} }{ {S1:L} } &= {Consts.water.rho:L}{Consts.g_ten:L}(h_1 + h_2) '
-    '= {Consts.water.rho:L}{Consts.g_ten:L} \\cdot h_2 \\cbr{ 1 + \\frac{ {S2:L} }{ {S1:L} } }',
-    'h_2 &= \\frac{ {m:L}{Consts.g_ten:L} }{ {S1:L}{Consts.water.rho:L}{Consts.g_ten:L} } \\cdot'
+    '= {Consts.water.rho:L}{Consts.g_ten:L} * h_2 \\cbr{ 1 + \\frac{ {S2:L} }{ {S1:L} } }',
+    'h_2 &= \\frac{ {m:L}{Consts.g_ten:L} }{ {S1:L}{Consts.water.rho:L}{Consts.g_ten:L} } * '
     '\\frac{ {S1:L} }{ {S1:L} + {S2:L} } = \\frac{ {m:L} }{ {Consts.water.rho:L}({S1:L} + {S2:L}) }'
     ' = {h2:Value}',
 ])

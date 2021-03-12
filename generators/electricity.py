@@ -17,9 +17,9 @@ log = logging.getLogger(__name__)
 @variant.answer_short('''
     F
         = k\\frac{ {first:L}{second:L} }{ {distance:L}^2 }
-        = {Consts.k:Value} \\cdot \\frac{ {first:Value|cdot}{second:Value} }{ {distance:Value|sqr} }
-        = \\frac{ {value.numerator} }{ {value.denominator} }\\cdot10^{ {power} }\\units{ Н }
-          \\approx { {approx:.2f} }\\cdot10^{ {power} }\\units{ Н }
+        = {Consts.k:Value} * \\frac{ {first:Value} *{second:Value} }{ {distance:Value|sqr} }
+        = \\frac{ {value.numerator} }{ {value.denominator} } * 10^{ {power} }\\units{ Н }
+          \\approx { {approx:.2f} } * 10^{ {power} }\\units{ Н }
 ''')
 @variant.arg(first__second=[('q_1 = %d нКл' % f, 'q_2 = %d нКл' % s) for f in range(2, 5) for s in range(2, 5) if f != s])
 @variant.arg(distance=['%s = %d см' % (l, d) for d in [2, 3, 5, 6] for l in ['r', 'l', 'd'] ])
@@ -48,7 +48,7 @@ class ForceTask(variant.VariantTask):
     и силу взаимодействия шариков до и после соприкосновения.
 ''')
 @variant.answer_align([
-    'F &= k\\frac{ q_1 q_2 }{ {letter}^2 } = k\\frac{ ({charges[0]})\\cdot({charges[1]}) }{ {letter}^2 }, \\text{ {res[0]} };',
+    'F &= k\\frac{ q_1 q_2 }{ {letter}^2 } = k\\frac{ ({charges[0]}) * ({charges[1]}) }{ {letter}^2 }, \\text{ {res[0]} };',
     '''
     q'_1 = q'_2 = \\frac{ q_1 + q_2 }2 = \\frac{ {charges[0]} + {charges[1]} }2 \\implies
     F'  &= k\\frac{ q'_1 q'_2 }{ {letter}^2 }
@@ -133,8 +133,8 @@ class SumTask(variant.VariantTask):
 ''')
 @variant.answer_short('''
     A   = {E:L}{q:L}{l:L}
-        = {E:Value} \\cdot {q:Value} \\cdot {l:Value}
-        = {A:.2f} \\cdot 10^{ -7 } \\units{ Дж }
+        = {E:Value} * {q:Value} * {l:Value}
+        = {A:.2f} * 10^{ -7 } \\units{ Дж }
 ''')
 @variant.arg(q=['%s = %d нКл' % (ql, qv) for ql in ['Q', 'q'] for qv in [-10, 10, -25, 25, -40, 40]])
 @variant.arg(l=['%s = %d см' % (ll, lv) for ll in ['l', 'r', 'd'] for lv in [2, 4, 5, 10]])
@@ -161,7 +161,7 @@ class Potential735(variant.VariantTask):  # 735(737) - Rymkevich
     Найти напряжение между точками $A$ и $B$ в однородном электрическом поле (см. рис. на доске), если
     $AB={l:Task}$,
     ${alpha:L}={alpha:Value}^\\circ$,
-    {E:Task:e}$.
+    {E:Task:e}.
     Потенциал какой из точек $A$ и $B$ больше?
 ''')
 @variant.arg(l=['%s = %d см' % (ll, lv) for ll in ['l', 'r', 'd'] for lv in [4, 6, 8, 10, 12]])
@@ -215,7 +215,7 @@ class Rymkevich748(variant.VariantTask):
     Удастся ли его использовать для накопления заряда {Q:Task:e}?
 ''')
 @variant.answer_short('''
-    {Q_new:L} = {C:L}{U:L} = {C:Value} \\cdot {U:Value} = {Q:Value}
+    {Q_new:L} = {C:L}{U:L} = {C:Value} * {U:Value} = {Q:Value}
     \\implies {Q_new:L} {sign} {Q:L} \\implies \\text{ {result} }
 ''')
 @variant.arg(U=['%s = %d кВ' % (Ul, Uv) for Ul in ['U', 'V'] for Uv in [200, 300, 400, 450]])
@@ -276,7 +276,7 @@ class Rymkevich751(variant.VariantTask):
 @variant.answer_short('''
     {W:L}
     = \\frac{ {Q:L}^2 }{ 2{C:L} }
-    = \\frac{ \\sqr{Q:Value:s} }{ 2 \\cdot {C:Value} }
+    = \\frac{ \\sqr{Q:Value:s} }{ 2 * {C:Value} }
     = {W:Value}
 ''')
 @variant.arg(Q=['%s = %s нКл' % (Ql, Qv) for Ql in ['Q', 'q'] for Qv in [300, 500, 800, 900]])
@@ -299,7 +299,7 @@ class Rymkevich762(variant.VariantTask):
         = \\frac{ {U:L} }{ \\frac1{ C_1 } + \\frac1{ C_2 } }
         = \\frac{ C_1C_2{U:L} }{ C_1 + C_2 }
         = \\frac{
-            {C1:Value} \\cdot {C2:Value} \\cdot {U:Value}
+            {C1:Value} * {C2:Value} * {U:Value}
          }{
             {C1:Value} + {C2:Value}
          }
@@ -337,8 +337,8 @@ class Rezistor1_v1(variant.VariantTask):
     Определите, чему равны напряжение на резисторе и мощность, выделяющаяся на нём.
 ''')
 @variant.answer_align([
-    '{U:L} &= {I:L}{R:L} = {I:Value} \\cdot {R:Value} = {U:Value}, ',
-    '{P:L} &= {I:L}^2{R:L} = {I:Value|sqr|cdot} {R:Value} = {P:Value}',
+    '{U:L} &= {I:L}{R:L} = {I:Value} * {R:Value} = {U:Value}, ',
+    '{P:L} &= {I:L}^2{R:L} = {I:Value|sqr} * {R:Value} = {P:Value}',
 ])
 @variant.arg(R=['%s = %d Ом' % (rLetter, rValue) for rLetter, rValue in itertools.product(['r', 'R'], [5, 12, 18, 30])])
 @variant.arg(I=['\\mathcal{I} = %.2f А' % iValue for iValue in [2, 3, 4, 5, 6, 8, 10, 15]])
@@ -360,14 +360,14 @@ class Rezistor1_v2(variant.VariantTask):
     '''{I1:L} &= \\frac{E:L:s}{R:L:s} = \\frac{E:Value:s}{R:Value:s} = {I1:Value}, ''',
     '''{I2:L} &= \\frac{E:L:s}{ {R:L} + {r:L} } = \\frac{E:Value:s}{ {R:Value} + {r:Value} } = {I2:Value}, ''',
     '''{Q1:L} &= {I1:L}^2{R:L}{t:L} = \\sqr{ \\frac{E:L:s}{R:L:s} } {R:L} {t:L}
-        = \\sqr{ \\frac{E:Value:s}{R:Value:s} } \\cdot {R:Value|cdot} \\cdot {t:Value} = {Q1:Value}, ''',
+        = \\sqr{ \\frac{E:Value:s}{R:Value:s} } * {R:Value} * {t:Value} = {Q1:Value}, ''',
     '''{Q2:L} &= {I2:L}^2{R:L}{t:L} = \\sqr{ \\frac{E:L:s}{ {R:L} + {r:L} } } {R:L} {t:L}
-        = \\sqr{ \\frac{E:Value:s}{ {R:Value} + {r:Value} } } \\cdot {R:Value} \\cdot {t:Value} = {Q2:Value}, ''',
+        = \\sqr{ \\frac{E:Value:s}{ {R:Value} + {r:Value} } } * {R:Value} * {t:Value} = {Q2:Value}, ''',
     '''{A1:L} &= {I1:L}{t:L}{E:L} = \\frac{E:L:s}{ {R:L} } {t:L} {E:L}
-        = \\frac{ {E:L}^2 {t:L} }{R:L|s} = \\frac{ {E:Value|sqr|cdot} {t:Value} }{R:Value:s}
+        = \\frac{ {E:L}^2 {t:L} }{R:L|s} = \\frac{ {E:Value|sqr} * {t:Value} }{R:Value:s}
         = {A1:Value}, \\text{ положительна }, ''',
     '''{A2:L} &= {I2:L}{t:L}{E:L} = \\frac{E:L:s}{ {R:L} + {r:L} } {t:L} {E:L}
-        = \\frac{ {E:L}^2 {t:L} }{ {R:L} + {r:L} } = \\frac{ {E:Value|sqr|cdot} {t:Value} }{ {R:Value} + {r:Value} }
+        = \\frac{ {E:L}^2 {t:L} }{ {R:L} + {r:L} } = \\frac{ {E:Value|sqr} * {t:Value} }{ {R:Value} + {r:Value} }
         = {A2:Value}, \\text{ положительна }, ''',
     '''{eta1:L} &= \\frac{Q1:L:s}{A1:L:s} = \\ldots = \\frac{R:L:s}{R:L:s} = 1, ''',
     '''{eta2:L} &= \\frac{Q2:L:s}{A2:L:s} = \\ldots = \\frac{R:L:s}{ {R:L} + {r:L} } = {eta2:Value}''',
@@ -414,7 +414,7 @@ class Rezistor2(variant.VariantTask):
     '''&\\implies {r:L}
         = \\sqrt{ {R1:L} {R2:L} \\frac{ {R2:L} - {R1:L} }{ {R2:L} - {R1:L} } }
         = \\sqrt{ {R1:L} {R2:L} }
-        = \\sqrt{ {R1:Value|cdot} {R2:Value} }
+        = \\sqrt{ {R1:Value} * {R2:Value} }
         = {r:Value}. '''
    ,
    '''{eta1:L}

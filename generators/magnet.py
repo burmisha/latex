@@ -81,7 +81,7 @@ class ConstMagnet3(variant.VariantTask):
 @variant.answer_align([
     '''F &= \\sqrt{ F_a^2 + F_b^2 } = \\sqrt{ \\sqr{ \\mathcal{ I }Ba } + \\sqr{ \\mathcal{ I }Bb } }
             = \\mathcal{ I }B\\sqrt{ a^2 + b^2 } = \\mathcal{ I }B\\sqrt{ a^2 + (l - a)^2 } = ''',
-    '&= {I:Value|cdot}{B:Value|cdot}\\sqrt{ {a:Value|sqr} + \\sqr{ {l:Value} - {a:Value} } } = {F:Value}.',
+    '&= {I:Value} * {B:Value} * \\sqrt{ {a:Value|sqr} + \\sqr{ {l:Value} - {a:Value} } } = {F:Value}.',
 ])
 @variant.arg(l__a=[('l = %d см' % (a + b), 'a = %d см' % a) for a, b in [
     (30, 40), (40, 30), (3, 4), (4, 3),
@@ -107,7 +107,7 @@ class Chernoutsan11_01(variant.VariantTask):
         mg = B\\mathcal{ I } l, m=\\rho l
         \\implies \\mathcal{ I }
             = \\frac{ g\\rho } { B }
-            = \\frac{ {Consts.g_ten:Value|cdot}{rho:Value} }{B:Value|s}
+            = \\frac{ {Consts.g_ten:Value} * {rho:Value} }{B:Value|s}
             = {I:Value}.
 ''')
 @variant.arg(B=['B = %d мТл' % B for B in [10, 20, 50, 100]])
@@ -125,8 +125,8 @@ class Chernoutsan11_02(variant.VariantTask):
     Проводник перпендикулярен линиям поля и движется в направлении силы Ампера.
 ''')
 @variant.answer_short('''
-    A   = F\\cdot d = B\\mathcal{ I } l \\cdot d
-        = {B:Value} \\cdot {I:Value} \\cdot {l:Value} \\cdot {d:Value}
+    A   = F * d = B\\mathcal{ I } l  * d
+        = {B:Value}  * {I:Value}  * {l:Value}  * {d:Value}
         = {A:Value}.
 ''')
 @variant.arg(l=['l = %d см' % l for l in [20, 30, 40, 50]])

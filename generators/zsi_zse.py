@@ -14,8 +14,8 @@ from generators.value import Consts
     со скоростями {v1:Value:e} и {v2:Value:e} соответственно. Определите общий импульс шариков.
 ''')
 @variant.answer_align([
-    '{p1:Letter} &= {m1:Letter}{v1:Letter} = {m1:Value|cdot}{v1:Value} = {p1:Value},',
-    '{p2:Letter} &= {m2:Letter}{v2:Letter} = {m2:Value|cdot}{v2:Value} = {p2:Value},',
+    '{p1:Letter} &= {m1:Letter}{v1:Letter} = {m1:Value} * {v1:Value} = {p1:Value},',
+    '{p2:Letter} &= {m2:Letter}{v2:Letter} = {m2:Value} * {v2:Value} = {p2:Value},',
     '{p:Letter} &= {p1:Letter} + {p2:Letter} = {m1:Letter}{v1:Letter} + {m2:Letter}{v2:Letter} = {p:Value}.',
 ])
 @variant.answer_test('{p:TestAnswer}')
@@ -43,8 +43,8 @@ class Ch_3_1(variant.VariantTask):
     Скорость одного из них {v1:Value:e}, а другого~--- {v2:Value:e}. Определите общий импульс шариков.
 ''')
 @variant.answer_align([
-    '{p1:L} &= {m:L}{v1:L} = {m:Value|cdot}{v1:Value} = {p1:Value},',
-    '{p2:L} &= {m:L}{v2:L} = {m:Value|cdot}{v2:Value} = {p2:Value},',
+    '{p1:L} &= {m:L}{v1:L} = {m:Value} * {v1:Value} = {p1:Value},',
+    '{p2:L} &= {m:L}{v2:L} = {m:Value} * {v2:Value} = {p2:Value},',
     '{p:L} &= \\abs{ {p1:L} - {p2:L} } = \\abs{ {m:L}({v1:L} - {v2:L}) }= {p:Value}.',
 ])
 @variant.answer_test('{p:TestAnswer}')
@@ -72,8 +72,8 @@ class Ch_3_2(variant.VariantTask):
     Скорости шариков составляют {v1:Value:e} и {v2:Value:e}. Определите полный импульс системы.
 ''')
 @variant.answer_align([
-    '{p1:L} &= {m:L}{v1:L} = {m:Value|cdot}{v1:Value} = {p1:Value},',
-    '{p2:L} &= {m:L}{v2:L} = {m:Value|cdot}{v2:Value} = {p2:Value},',
+    '{p1:L} &= {m:L}{v1:L} = {m:Value} * {v1:Value} = {p1:Value},',
+    '{p2:L} &= {m:L}{v2:L} = {m:Value} * {v2:Value} = {p2:Value},',
     '{p:L} &= \\sqrt{ {p1:L}^2 + {p2:L}^2 } = {m:L}\\sqrt{ {v1:L}^2 + {v2:L}^2 } = {p:Value}.',
 ])
 @variant.answer_test('{p:TestAnswer}')
@@ -101,7 +101,7 @@ class Ch_3_3(variant.VariantTask):
     Считая удар абсолютно {which}, определите изменение импульса шарика. В ответе укажите модуль полученной величины.
 ''')
 @variant.answer_align([
-    '{delta_p:L} &= {mult} \\cdot {m:L}{v:L} = {mult} \\cdot {m:Value|cdot}{v:Value} = {delta_p:Value}.',
+    '{delta_p:L} &= {mult} * {m:L}{v:L} = {mult} * {m:Value} * {v:Value} = {delta_p:Value}.',
 ])
 @variant.answer_test('{delta_p:TestAnswer}')
 @variant.arg(which__mult=[('упругим', 2), ('неупругим', 1)])
@@ -121,8 +121,8 @@ class Ch_3_6(variant.VariantTask):
     а также определите скорость их совместного движения.
 ''')
 @variant.answer_align([
-    '\\text{ ЗСИ: } &M\\cdot v + {n} \\cdot{ m \\cdot 0 } =  M \\cdot u + {n} \\cdot \\cbr{ m \\cdot u } \\implies',
-    '&\\implies u = v\\cdot \\frac{ M }{ M + nm } = {v:Value|cdot} \\frac{M:Value|s}{ {M:Value} + {n} \\cdot {m:Value} } \\approx {u:Value}.',
+    '\\text{ ЗСИ: } &M * v + {n} * \\cbr{ m * 0 } =  M * u + {n} * \\cbr{ m * u } \\implies',
+    '&\\implies u = v * \\frac{ M }{ M + nm } = {v:Value} *  \\frac{M:Value|s}{ {M:Value} + {n} * {m:Value} } \\approx {u:Value}.',
 ])
 @variant.arg(M=['M = %d т' % M for M in [120, 150, 210]])
 @variant.arg(m=['m = %d т' % m for m in [30, 40, 50]])
@@ -177,7 +177,7 @@ class Ch_3_26(variant.VariantTask):
 ''')
 @variant.answer_align([
     '&\\text{ ЗСИ в проекции на ось, соединяющую центры тел: } ',
-    '&mv + {N}m\\cdot 0 = (m + {N}m) v\' \\implies',
+    '&mv + {N}m * 0 = (m + {N}m) v\' \\implies',
     '&v\' = v\\frac{ m }{ {N}m + m } = \\frac{ v }{ {N} + 1 } \\implies \\frac{ v }{ v\' } = {answer}',
 ])
 @variant.answer_test('{answer}')
@@ -195,8 +195,8 @@ class Vishnyakova_1_4_6(variant.VariantTask):
 ''')
 @variant.answer_align([
     '&\\text{ Изменение кинетической энергии равно работе внешних сил: }',
-    '&A_1 = \\frac{ mv^2 }2 - \\frac{ m\\cdot 0^2 }2 = \\frac{ mv^2 }2, A_2 = \\frac{ m\\sqr{ {n}v } }2 - \\frac{ mv^2 }2 \\implies ',
-    '&\\implies A_2 = \\frac{ mv^2 }2 \\cbr{ {n}^2 - 1 } = A_1 \\cdot \\cbr{ {n}^2 - 1 } = {A2:Value}.'
+    '&A_1 = \\frac{ mv^2 }2 - \\frac{ m * 0^2 }2 = \\frac{ mv^2 }2, A_2 = \\frac{ m\\sqr{ {n}v } }2 - \\frac{ mv^2 }2 \\implies ',
+    '&\\implies A_2 = \\frac{ mv^2 }2 \\cbr{ {n}^2 - 1 } = A_1 * \\cbr{ {n}^2 - 1 } = {A2:Value}.'
 ])
 @variant.answer_test('{A2:TestAnswer}')
 @variant.arg(A1=['A = %d Дж' % A for A in [10, 20, 40, 100, 200]])

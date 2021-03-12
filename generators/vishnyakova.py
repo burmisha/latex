@@ -25,8 +25,7 @@ log = logging.getLogger(__name__)
             = \\frac{ E }{ E_0 } - 1
             = \\frac 1{ \\sqrt{ 1 - \\frac{ v^2 }{ c^2 } } } - 1
             = \\frac 1{ \\sqrt{ 1 - \\sqr{ 0.{percent} } } } - 1
-            \\approx {E_kin:.3f}.
-    ''',
+            \\approx {E_kin:.3f}.''',
 ])
 @variant.arg(what=['Протон', 'Позитрон'])
 @variant.arg(energy=['полной энергии частицы $E$', 'кинетической энергии частицы $E_{ \\text{ кин } }$'])
@@ -47,22 +46,21 @@ class BK_4_01(variant.VariantTask):
 ''')
 @variant.answer_align([
     '''E &= \\frac{ mc^2 }{  \\sqrt{ 1 - \\frac{ v^2 }{ c^2 } } }
-        \\approx \\frac{ {m:Value|cdot} {Consts.c:Value|sqr} }{ \\sqrt{ 1 - 0.{percent}^2 } }
+        \\approx \\frac{ {m:Value} * {Consts.c:Value|sqr} }{ \\sqrt{ 1 - 0.{percent}^2 } }
         \\approx {E:Value},
     ''',
     '''
     E_{ \\text{ кин } } &= \\frac{ mc^2 }{ \\sqrt{ 1 - \\frac{ v^2 }{ c^2 } } } - mc^2
         = mc^2 \\cbr{ \\frac 1{ \\sqrt{ 1 - \\frac{ v^2 }{ c^2 } } } - 1 } \\approx''',
     '''
-        &\\approx \\cbr{ {m:Value|cdot} {Consts.c:Value|sqr} }
-        \\cdot \\cbr{ \\frac 1{ \\sqrt{ 1 - 0.{percent}^2 } } - 1 }
+        &\\approx \\cbr{ {m:Value} * {Consts.c:Value|sqr} }
+        * \\cbr{ \\frac 1{ \\sqrt{ 1 - 0.{percent}^2 } } - 1 }
         \\approx {E_kin:Value},
     ''',
     '''
     p &= \\frac{ mv }{ \\sqrt{ 1 - \\frac{ v^2 }{ c^2 } } }
-        \\approx \\frac{ {m:Value|cdot} 0.{percent} \\cdot {Consts.c:Value} }{ \\sqrt{ 1 - 0.{percent}^2 } }
-        \\approx {p:Value}.
-    '''
+        \\approx \\frac{ {m:Value} * 0.{percent} * {Consts.c:Value} }{ \\sqrt{ 1 - 0.{percent}^2 } }
+        \\approx {p:Value}.'''
 ])
 @variant.arg(what=['Протон', 'Электрон'])
 @variant.arg(x=['полную энергию', 'кинетическую энергию', 'импульс'])
@@ -103,8 +101,8 @@ class BK_4_03(variant.VariantTask):
     ''',
     '''
     \\implies v &= c\\sqrt{ 1 - \\sqr{ \\frac l{ l_0 } } }
-    = {Consts.c:Value} \\cdot \\sqrt{ 1 - \\sqr{ \\frac { l_0 - 0.{percent}l_0 }{ l_0 } } }
-    = {Consts.c:Value} \\cdot \\sqrt{ 1 - \\sqr{ 1 - 0.{percent} } } \\approx ''',
+    = {Consts.c:Value} * \\sqrt{ 1 - \\sqr{ \\frac { l_0 - 0.{percent}l_0 }{ l_0 } } }
+    = {Consts.c:Value} * \\sqrt{ 1 - \\sqr{ 1 - 0.{percent} } } \\approx ''',
     '''
     &\\approx {answerShare:.3f}c
     \\approx {speed:Value}
@@ -133,7 +131,7 @@ class BK_4_06(variant.VariantTask):
 @variant.answer_short('''
     E = h\\nu = h \\frac c\\lambda
     \\implies \\lambda = \\frac{ hc }{ E }
-        = \\frac{ {Consts.h:Value|cdot}{Consts.c:Value|s} }{E:Value|s}
+        = \\frac{ {Consts.h:Value} * {Consts.c:Value|s} }{E:Value|s}
         = {lmbd:Value}.
 ''')
 @variant.arg(E=['E = %s 10^{-19} Дж' % E for E in ['4.04', '5.05', '2.02', '7.07', '1.01', '0.55']])
@@ -155,7 +153,7 @@ class BK_52_01(variant.VariantTask):
 @variant.answer_short('''
     E = h\\nu = h \\frac c\\lambda
     \\implies \\lambda = \\frac{ hc }{ E }
-        = \\frac{ {Consts.h:Value|cdot}{Consts.c:Value|s} }{E:Value|s}
+        = \\frac{ {Consts.h:Value} * {Consts.c:Value|s} }{E:Value|s}
         = {lmbd:Value}.
 ''')
 @variant.arg(E=['E = %d 10^{-19} Дж' % E for E in [2, 3, 4, 6]])
@@ -207,10 +205,10 @@ class BK_52_07(variant.VariantTask):
     равное {when} периодам полураспада? Ответ выразить в процентах.
 ''')
 @variant.answer_align([
-    '''N &= N_0 \\cdot 2^{ - \\frac t{ T_{ 1/2 } } } \\implies
+    '''N &= N_0 * 2^{ - \\frac t{ T_{ 1/2 } } } \\implies
     \\frac N{ N_0 } = 2^{ - \\frac t{ T_{ 1/2 } } }
     = 2^{ -{t} } \\approx {N_value:.2f} \\approx {N_percent:.0f}\\%''',
-    '''N_\\text{ расп. } &= N_0 - N = N_0 - N_0 \\cdot 2^{ - \\frac t{ T_{ 1/2 } } }
+    '''N_\\text{ расп. } &= N_0 - N = N_0 - N_0 * 2^{ - \\frac t{ T_{ 1/2 } } }
     = N_0\\cbr{ 1 - 2^{ - \\frac t{ T_{ 1/2 } } } } \\implies
     \\frac { N_\\text{ расп. } }{ N_0 } = 1 - 2^{ - \\frac t{ T_{ 1/2 } } }
     = 1 - 2^{ -{t} } \\approx {N_left_value:.2f} \\approx {N_left_percent:.0f}\\%''',
@@ -240,7 +238,7 @@ class BK_53_01(variant.VariantTask):
     останется через ${t:Value}$, если период его полураспада составляет ${T:Value}$?
 ''')
 @variant.answer_align([
-    '''N &= N_0 \\cdot 2^{ - \\frac t{ T_{ 1/2 } } }
+    '''N &= N_0 * 2^{ - \\frac t{ T_{ 1/2 } } }
     = 2^{ - \\frac {t:Value|s}{T:Value|s} }
     \\approx {share} \\approx {percent}\\%''',
 ])
@@ -263,7 +261,7 @@ class BK_53_02(variant.VariantTask):
 ''')
 @variant.answer_align([
     '''
-        N &= N_0 \\cdot 2^{ - \\frac t{ T_{ 1/2 } } }
+        N &= N_0 * 2^{ - \\frac t{ T_{ 1/2 } } }
         \\implies \\frac N{ N_0 } = 2^{ - \\frac t{ T_{ 1/2 } } }
         \\implies \\frac 1{ {num} } = 2^{ - \\frac {t:Value|s}{ T_{ 1/2 } } }
         \\implies {log_num} = \\frac {t:Value|s}{ T_{ 1/2 } }
@@ -273,8 +271,7 @@ class BK_53_02(variant.VariantTask):
         \\delta &= \\frac{ N(t) }{ N_0 } - \\frac{ N(2t) }{ N_0 }
         = 2^{ - \\frac t{ T_{ 1/2 } } } - 2^{ - \\frac { 2t }{ T_{ 1/2 } } }
         = 2^{ - \\frac t{ T_{ 1/2 } } }\\cbr{ 1 - 2^{ - \\frac { t }{ T_{ 1/2 } } } }
-        = \\frac 1{ {num} }\\cdot \\cbr{ 1 - \\frac 1{ {num} } } \\approx {res:.3f}
-    ''',
+        = \\frac 1{ {num} } * \\cbr{ 1 - \\frac 1{ {num} } } \\approx {res:.3f}''',
 ])
 @variant.arg(how__num__log_num=[
     ('четверть', 4, 2),
@@ -300,7 +297,7 @@ class BK_53_03(variant.VariantTask):
     'E_\\text{ св. } &= \\Delta m c^2 \\implies',
     '''\\implies
         \\Delta m &= \\frac { E_\\text{ св. } }{ c^2 } = \\frac{E:Value|s}{Consts.c:Value|sqr|s}
-        = \\frac{ {eV} \\cdot 10^6 \\cdot {Consts.eV:Value} }{Consts.c:Value|sqr|s}
+        = \\frac{ {eV} * 10^6 * {Consts.eV:Value} }{Consts.c:Value|sqr|s}
         \\approx {dm:Value} \\approx {aem:Value}''',
 ])
 @variant.arg(element__E=[  # https://www.calc.ru/Energiya-Svyazi-Nekotorykh-Yader.html
