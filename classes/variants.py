@@ -78,7 +78,6 @@ def get_all_variants():
             'Basic06', 'Basic07', 'Basic08', 'Basic09', 'Basic10', 'Basic11',
         ]}),
         ('2021-03-02 10', {'mkt': [
-            # 'Celsuis',
             'Basic12', 'Basic13', 'GraphPV_1', 'GraphPV_2', 'ZFTSH_10_2_9_kv', 'ZFTSH_10_2_2_kv', 'Polytrope',
         ]}),
         ('2021-03-04 10', {'termo': [
@@ -86,7 +85,6 @@ def get_all_variants():
         ]}),
         ('2021-03-05 10', [
             {'mkt': ['Basic12', 'GraphPV_2', 'ZFTSH_10_2_9_kv', 'ZFTSH_10_2_2_kv', 'Polytrope']},
-            # {'termo': ['YesNo']},
         ]),
         ('2021-03-11 10', {'termo': [
             'Definitions01', 'V_from_P_and_U', 'A_on_P_const', 'A_from_DeltaT', 'DeltaU_on_P_const', 'DeltaU_from_DeltaT', 'Q_from_DeltaU', 'Q_from_DeltaU_and_A',
@@ -94,6 +92,7 @@ def get_all_variants():
         ('2021-03-12 10', {'termo': [
             'CycleRectangle', 'DeltaQ_from_states', 'Definitions02',
         ]}),
+        ('2021-03-18 10', {'termo': ['YesNo', 'CycleRectangle_T']}),
     ]
     for task_id, tasks_classes in random_tasks:
         pupils = library.pupils.get_class_from_string(task_id)

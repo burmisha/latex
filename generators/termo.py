@@ -405,7 +405,7 @@ class YesNo(variant.VariantTask):
     'P_1V_1 &= \\nu R T_1, P_2V_2 = \\nu R T_2, P_3V_3 = \\nu R T_3, P_4V_4 = \\nu R T_4 \\text{  — уравнения состояния идеального газа },',
 
     '&\\text{ Пусть $P_0$, $V_0$, $T_0$ — давление, объём и температура в точке 4 (минимальные во всём цикле): }',
-    'P_1 &= P_2, P_3 = P_4 = P_0, V_1 = V_4 = V_0, V_2 = V_3 = {alpha} V_1 = {alpha} V_0,',
+    'P_1 &= P_2, P_3 = P_4 = P_0, V_1 = V_4 = V_0, V_2 = V_3 = {alpha} V_1 = {alpha} V_0,, \\text{ остальные соотношения между объёмами и давлениями не даны, нужно считать }',
     'T_3 &= \\frac{ T_2 }{beta} \\text{ (по условию) } \\implies \\frac{ P_2 }{ P_3 } = \\frac{ P_2 V_2 }{ P_3 V_3 }'
     '= \\frac{ \\nu R T_2 }{ \\nu R T_3 } = \\frac{ T_2 }{ T_3 } = {beta} \\implies P_1 = P_2 = {beta} P_0',
 
@@ -455,6 +455,81 @@ class CycleRectangle(variant.VariantTask):
         )
 
 
+@variant.text('''
+    Определите КПД цикла 12341, рабочим телом которого является идеальный одноатомный газ, если
+    12 — изохорический нагрев в {alpha_text},
+    23 — изобарическое расширение, при котором температура растёт в {beta_text},
+    34 — изохора, 41 — изобара.
+
+    Определите КПД цикла Карно, температура нагревателя которого равна максимальной температуре в цикле 12341, а холодильника — минимальной.
+    Ответы в обоих случаях оставьте точными в виде нескоратимой дроби, никаких округлений.
+''')
+@variant.arg(alpha__alpha_text=[(2, 'два раза'), (3, 'три раза'), (4, 'четыре раза'), (5, 'пять раз'), (6, 'шесть раз')])
+@variant.arg(beta__beta_text=[(2, 'два раза'), (3, 'три раза'), (4, 'четыре раза'), (5, 'пять раз'), (6, 'шесть раз')])
+@variant.solution_space(360)
+@variant.answer_align([
+    'A_{ 12 } &= 0, \\Delta U_{ 12 } > 0, \\implies Q_{ 12 } = A_{ 12 } + \\Delta U_{ 12 } > 0.',
+    'A_{ 23 } &> 0, \\Delta U_{ 23 } > 0, \\implies Q_{ 23 } = A_{ 23 } + \\Delta U_{ 23 } > 0,',
+    'A_{ 34 } &= 0, \\Delta U_{ 34 } < 0, \\implies Q_{ 34 } = A_{ 34 } + \\Delta U_{ 34 } < 0,',
+    'A_{ 41 } &< 0, \\Delta U_{ 41 } < 0, \\implies Q_{ 41 } = A_{ 41 } + \\Delta U_{ 41 } < 0.',
+
+    'P_1V_1 &= \\nu R T_1, P_2V_2 = \\nu R T_2, P_3V_3 = \\nu R T_3, P_4V_4 = \\nu R T_4 \\text{  — уравнения состояния идеального газа },',
+
+    '&\\text{ Пусть $P_0$, $V_0$, $T_0$ — давление, объём и температура в точке 1 (минимальные во всём цикле): }',
+    'P_1 &= P_4 = P_0, P_2 = P_3, V_1 = V_2 = V_0, V_3 = V_4, \\text{ остальные соотношения между объёмами и давлениями не даны, нужно считать }',
+
+    'T_2 &= {alpha}T_1 = {alpha}T_0 \\text{ (по условию) } \\implies \\frac{ P_2 }{ P_1 } = \\frac{ P_2V_0 }{ P_1V_0 } = \\frac{ P_2 V_2 }{ P_1 V_1 }'
+    '= \\frac{ \\nu R T_2 }{ \\nu R T_1 } = \\frac{ T_2 }{ T_1 } = {alpha} \\implies P_2 = P_3 = {alpha} P_1 = {alpha} P_0,',
+    'T_3 &= {beta}T_2 = {t}T_0 \\text{ (по условию) } \\implies \\frac{ V_3 }{ V_2 } = \\frac{ P_3V_3 }{ P_2V_2 }'
+    '= \\frac{ \\nu R T_3 }{ \\nu R T_2 } = \\frac{ T_3 }{ T_2 } = {beta} \\implies V_3 = V_4 = {beta} V_2 = {beta} V_0.',
+
+    'A_\\text{ цикл } &= ({beta}P_0 - P_0)({alpha}V_0 - V_0) = {A}P_0V_0,',
+    'A_{ 23 } &= {alpha}P_0 \\cdot ({beta}V_0 - V_0) = {A23}P_0V_0,',
+
+    '\\Delta U_{ 23 } &= \\frac 32 \\nu R T_3 - \\frac 32 \\nu R T_3 = \\frac 32 P_3 V_3 - \\frac 32 P_2 V_2'
+    ' = \\frac 32 \\cdot {alpha} P_0 \\cdot {beta} V_0 -  \\frac 32 \\cdot {alpha} P_0 \\cdot V_0'
+    ' = \\frac 32 \\cdot {U23} \\cdot P_0V_0,',
+
+    '\\Delta U_{ 12 } &= \\frac 32 \\nu R T_2 - \\frac 32 \\nu R T_1 = \\frac 32 P_2 V_2 - \\frac 32 P_1 V_1'
+    ' = \\frac 32 \\cdot {alpha} P_0 V_0 - \\frac 32 P_0 V_0'
+    ' = \\frac 32 \\cdot {U12} \\cdot P_0V_0.',
+
+    '\\eta &= \\frac{ A_\\text{ цикл } }{ Q_+ } = \\frac{ A_\\text{ цикл } }{ Q_{ 12 } + Q_{ 23 } } '
+    ' = \\frac{ A_\\text{ цикл } }{ A_{ 12 } + \\Delta U_{ 12 } + A_{ 23 } + \\Delta U_{ 23 } } = ',
+    ' &= \\frac{ {A}P_0V_0 }{ 0 + \\frac 32 \\cdot {U12} \\cdot P_0V_0 + {A23}P_0V_0 + \\frac 32 \\cdot {U23} \\cdot P_0V_0 }'
+    ' = \\frac{ {A} }{ \\frac 32 \\cdot {U12} + {A23} + \\frac 32 \\cdot {U23} } = \\frac{ {eta.numerator} }{ {eta.denominator} } \\approx {eta_f}.',
+
+    '\\eta_\\text{ Карно } &= 1 - \\frac{ T_\\text{ х } }{ T_\\text{ н } } = 1 - \\frac{ T_\\text{ 1 } }{ T_\\text{ 3 } }'
+    ' = 1 - \\frac{ T_0 }{ {t}T_0 } = 1 - \\frac 1{ {t} }  = \\frac{ {eta_max.numerator} }{ {eta_max.denominator} } \\approx {eta_max_f}.'
+])
+class CycleRectangle_T(variant.VariantTask):
+    def GetUpdate(self, alpha=None, beta=None, **kws):
+        t = alpha * beta
+        A = (alpha - 1) * (beta - 1)
+        A23 = (beta - 1) * alpha
+        U23 = (beta - 1) * alpha
+        U12 = alpha - 1
+        eta = fractions.Fraction(
+            numerator= 2 * A,
+            denominator=2 * A23 + 3 * U12 + 3 * U23,
+        )
+        eta_max = 1 - fractions.Fraction(
+            numerator=1,
+            denominator=alpha * beta,
+        )
+        return dict(
+            t=t,
+            A=A,
+            A23=A23,
+            U23=U23,
+            U12=U12,
+            eta=eta,
+            eta_f='%.3f' % eta,
+            eta_max=eta_max,
+            eta_max_f='%.3f' % eta_max,
+        )
+
+
 @variant.solution_space(150)
 @variant.text('''
     Порция идеального одноатомного газа перешла из состояния 1 в состояние 2: {P1:Task:e}, {V1:Task:e}, {P2:Task:e}, {V2:Task:e}.
@@ -477,8 +552,8 @@ class DeltaQ_from_states(variant.VariantTask):
         A = (1000 * 1 / 2 * (P2.Value + P1.Value) * (V2.Value - V1.Value))
         dU = (1000 * 3 / 2 * (P2.Value * V2.Value - P1.Value * V1.Value))
         return dict(
-            A='%.1f кДж' % (A / 1000),
-            dU=('%.1f кДж' % (dU / 1000)) if dU else '0 кДж',
-            Q='%.1f кДж' % ((A + dU) / 1000),
+            A='%.2f кДж' % (A / 1000),
+            dU=('%.2f кДж' % (dU / 1000)) if dU else '0 кДж',
+            Q='%.2f кДж' % ((A + dU) / 1000),
         )
 
