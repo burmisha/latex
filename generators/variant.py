@@ -15,16 +15,10 @@ log = logging.getLogger(__name__)
 
 
 PAPER_TEMPLATE = r'''
-\input{{main}}
-\begin{{document}}
-{noanswers}
-
 \setdate{{{date}}}
 \setclass{{{classLetter}}}
 
 {text}
-
-\end{{document}}
 '''.strip()
 
 
@@ -302,13 +296,10 @@ class MultiplePaper(object):
         )
         return result
 
-    def GetFilename(self, name='task'):
+    def GetFilename(self):
         filename = f'{self.Date.GetFilenameText()}-{self.Pupils.Grade}'
         if self.Pupils.LatinLetter:
             filename += self.Pupils.LatinLetter
-        if name:
-            filename += '-' + name
-        filename += '.tex'
         log.debug(f'Got filename {filename}')
         return filename
 

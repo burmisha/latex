@@ -11,6 +11,16 @@ import logging
 log = logging.getLogger(__name__)
 
 
+PAPER_TEMPLATE = r'''
+\input{{main}}
+\begin{{document}}
+{noanswers}
+\input{{{filename}}}
+
+\end{{document}}
+'''
+
+
 def run(args):
     fileWriter = library.files.FileWriter(args.filter)
 
@@ -48,8 +58,15 @@ def run(args):
     if generateMultiple:
         for pupils, date, variant_tasks in classes.variants.get_all_variants():
             multiplePaper = generators.variant.MultiplePaper(date=date, pupils=pupils)
-            text = multiplePaper.GetTex(variant_tasks=variant_tasks, withAnswers=args.answers)
-            fileWriter.Write('school-554', multiplePaper.GetFilename(), text=text)
+            filename = multiplePaper.GetFilename()
+
+            text = multiplePaper.GetTex(variant_tasks=variant_tasks)
+            task = PAPER_TEMPLATE.format(noanswers='\n\\noanswers\n', filename=filename)
+            answer = PAPER_TEMPLATE.format(noanswers='', filename=filename)
+
+            fileWriter.Write('school-554', filename + '.tex', text=text)
+            fileWriter.Write('school-554', filename + '-task.tex', text=task)
+            fileWriter.Write('school-554', filename + '-answer.tex', text=answer)
 
         if args.show_manual:
             fileWriter.ShowManual(extensions=['tex'])
@@ -58,5 +75,4 @@ def run(args):
 def populate_parser(parser):
     parser.add_argument('--show-manual', '--sm', help='Show manual files', action='store_true')
     parser.add_argument('--filter', help='Process only files matching filter')
-    parser.add_argument('--answers', help='save answers', action='store_true')
     parser.set_defaults(func=run)
