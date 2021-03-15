@@ -382,7 +382,7 @@ class YesNo(variant.VariantTask):
     34 — изобара, 41 — изохора.
     % Для этого:
     % \\begin{{enumerate}}
-    %     \\item сделайте рисунок в PV-координатах,
+    %     \\item сделайте рисунок в $PV$-координатах,
     %     \\item выберите удобные обозначения, чтобы не запутаться в множестве температур, давлений и объёмов,
     %     \\item вычислите необходимые соотнощения между температурами, давлениями и объёмами
     %     (некоторые сразу видны по рисунку, некоторые — надо считать),
@@ -531,11 +531,141 @@ class CycleRectangle_T(variant.VariantTask):
         )
 
 
+@variant.text('''
+    Определите КПД (оставив ответ точным в виде нескоратимой дроби) цикла 1231, рабочим телом которого является идеальный одноатомный газ, если
+    \\begin{{itemize}}
+        \\item 12 — изохорический нагрев в {alpha_text},
+        \\item 23 — изобарическое расширение, при котором температура растёт в {beta_text},
+        \\item 31 — процесс, график которого в $PV$-координатах является отрезком прямой.
+    \\end{{itemize}}
+''')
+@variant.arg(alpha__alpha_text=[(2, 'два раза'), (3, 'три раза'), (4, 'четыре раза'), (5, 'пять раз'), (6, 'шесть раз')])
+@variant.arg(beta__beta_text=[(2, 'два раза'), (3, 'три раза'), (4, 'четыре раза'), (5, 'пять раз'), (6, 'шесть раз')])
+@variant.solution_space(360)
+@variant.answer_align([
+    'A_{ 12 } &= 0, \\Delta U_{ 12 } > 0, \\implies Q_{ 12 } = A_{ 12 } + \\Delta U_{ 12 } > 0.',
+    'A_{ 23 } &> 0, \\Delta U_{ 23 } > 0, \\implies Q_{ 23 } = A_{ 23 } + \\Delta U_{ 23 } > 0,',
+    'A_{ 31 } &= 0, \\Delta U_{ 31 } < 0, \\implies Q_{ 31 } = A_{ 31 } + \\Delta U_{ 31 } < 0.',
+
+    'P_1V_1 &= \\nu R T_1, P_2V_2 = \\nu R T_2, P_3V_3 = \\nu R T_3 \\text{  — уравнения состояния идеального газа },',
+
+    '&\\text{ Пусть $P_0$, $V_0$, $T_0$ — давление, объём и температура в точке 1 (минимальные во всём цикле): }',
+    'P_1 &= P_0, P_2 = P_3, V_1 = V_2 = V_0, \\text{ остальные соотношения нужно считать }',
+
+    'T_2 &= {alpha}T_1 = {alpha}T_0 \\text{ (по условию) } \\implies \\frac{ P_2 }{ P_1 } = \\frac{ P_2V_0 }{ P_1V_0 } = \\frac{ P_2 V_2 }{ P_1 V_1 }'
+    '= \\frac{ \\nu R T_2 }{ \\nu R T_1 } = \\frac{ T_2 }{ T_1 } = {alpha} \\implies P_2 = {alpha} P_1 = {alpha} P_0,',
+    'T_3 &= {beta}T_2 = {t}T_0 \\text{ (по условию) } \\implies \\frac{ V_3 }{ V_2 } = \\frac{ P_3V_3 }{ P_2V_2 }'
+    '= \\frac{ \\nu R T_3 }{ \\nu R T_2 } = \\frac{ T_3 }{ T_2 } = {beta} \\implies V_3 = {beta} V_2 = {beta} V_0.',
+
+    'A_\\text{ цикл } &= \\frac 12 ({beta}P_0 - P_0)({alpha}V_0 - V_0) = \\frac 12 * {A} * P_0V_0,',
+    'A_{ 23 } &= {alpha}P_0 * ({beta}V_0 - V_0) = {A23}P_0V_0,',
+
+    '\\Delta U_{ 23 } &= \\frac 32 \\nu R T_3 - \\frac 32 \\nu R T_3 = \\frac 32 P_3 V_3 - \\frac 32 P_2 V_2'
+    ' = \\frac 32 * {alpha} P_0 * {beta} V_0 -  \\frac 32 * {alpha} P_0 * V_0'
+    ' = \\frac 32 * {U23} * P_0V_0,',
+
+    '\\Delta U_{ 12 } &= \\frac 32 \\nu R T_2 - \\frac 32 \\nu R T_1 = \\frac 32 P_2 V_2 - \\frac 32 P_1 V_1'
+    ' = \\frac 32 * {alpha} P_0V_0 - \\frac 32 P_0V_0'
+    ' = \\frac 32 * {U12} * P_0V_0.',
+
+    '\\eta &= \\frac{ A_\\text{ цикл } }{ Q_+ } = \\frac{ A_\\text{ цикл } }{ Q_{ 12 } + Q_{ 23 } } '
+    ' = \\frac{ A_\\text{ цикл } }{ A_{ 12 } + \\Delta U_{ 12 } + A_{ 23 } + \\Delta U_{ 23 } } = ',
+    ' &= \\frac{ \\frac 12 * {A} * P_0V_0 }{ 0 + \\frac 32 * {U12} * P_0V_0 + {A23}P_0V_0 + \\frac 32 * {U23} * P_0V_0 }'
+    ' = \\frac{ \\frac 12 * {A} }{ \\frac 32 * {U12} + {A23} + \\frac 32 * {U23} } = \\frac{ {eta.numerator} }{ {eta.denominator} } \\approx {eta_f}.',
+])
+class CycleTriangleUp_T(variant.VariantTask):
+    def GetUpdate(self, alpha=None, beta=None, **kws):
+        t = alpha * beta
+        A = (alpha - 1) * (beta - 1)
+        A23 = (beta - 1) * alpha
+        U23 = (beta - 1) * alpha
+        U12 = alpha - 1
+        eta = fractions.Fraction(
+            numerator=A,
+            denominator=2 * A23 + 3 * U12 + 3 * U23,
+        )
+        return dict(
+            t=t,
+            A=A,
+            A23=A23,
+            U23=U23,
+            U12=U12,
+            eta=eta,
+            eta_f='%.3f' % eta,
+        )
+
+
+
+@variant.text('''
+    Определите КПД (оставив ответ точным в виде нескоратимой дроби) цикла 1231, рабочим телом которого является идеальный одноатомный газ, если
+    \\begin{{itemize}}
+        \\item 12 — изобарическое расширение,
+        \\item 23 — процесс, график которого в $PV$-координатах является отрезком прямой, а объём уменьшается в {beta_text},
+        \\item 31 — изохорический нагрев с увеличением давления в {alpha_text},
+    \\end{{itemize}}
+''')
+@variant.arg(alpha__alpha_text=[(2, 'два раза'), (3, 'три раза'), (4, 'четыре раза'), (5, 'пять раз'), (6, 'шесть раз')])
+@variant.arg(beta__beta_text=[(2, 'два раза'), (3, 'три раза'), (4, 'четыре раза'), (5, 'пять раз'), (6, 'шесть раз')])
+@variant.solution_space(360)
+@variant.answer_align([
+    'A_{ 12 } &> 0, \\Delta U_{ 12 } > 0, \\implies Q_{ 12 } = A_{ 12 } + \\Delta U_{ 12 } > 0.',
+    'A_{ 23 } &< 0, \\Delta U_{ 23 } < 0, \\implies Q_{ 23 } = A_{ 23 } + \\Delta U_{ 23 } < 0,',
+    'A_{ 31 } &= 0, \\Delta U_{ 31 } > 0, \\implies Q_{ 31 } = A_{ 31 } + \\Delta U_{ 31 } > 0.',
+
+    'P_1V_1 &= \\nu R T_1, P_2V_2 = \\nu R T_2, P_3V_3 = \\nu R T_3 \\text{  — уравнения состояния идеального газа },',
+
+    '&\\text{ Пусть $P_0$, $V_0$, $T_0$ — давление, объём и температура в точке 3 (минимальные во всём цикле): }',
+    'P_3 &= P_0, P_1 = P_2 = {alpha}P_0, V_1 = V_3 = V_0, V_2 = {beta}V_3 = {beta}V_0',
+
+    'A_\\text{ цикл } &= \\frac 12 (P_2-P_1)(V_1-V_2) = \\frac 12 ({alpha}P_0 - P_0)({beta}V_0 - V_0) = \\frac 12 * {A} * P_0V_0,',
+    'A_{ 12 } &= {beta}P_0 * ({alpha}V_0 - V_0) = {A12}P_0V_0,',
+
+    '\\Delta U_{ 12 } &= \\frac 32 \\nu R T_2 - \\frac 32 \\nu R T_1 = \\frac 32 P_2 V_2 - \\frac 32 P_1 V_1'
+    ' = \\frac 32 * {alpha} P_0 * {beta} V_0 -  \\frac 32 * {beta} P_0 * V_0'
+    ' = \\frac 32 * {U12} * P_0V_0,',
+
+    '\\Delta U_{ 31 } &= \\frac 32 \\nu R T_1 - \\frac 32 \\nu R T_3 = \\frac 32 P_1 V_1 - \\frac 32 P_3 V_3'
+    ' = \\frac 32 * {alpha} P_0V_0 - \\frac 32 P_0V_0'
+    ' = \\frac 32 * {U31} * P_0V_0.',
+
+    '\\eta &= \\frac{ A_\\text{ цикл } }{ Q_+ } = \\frac{ A_\\text{ цикл } }{ Q_{ 12 } + Q_{ 31 } } '
+    ' = \\frac{ A_\\text{ цикл } }{ A_{ 12 } + \\Delta U_{ 12 } + A_{ 31 } + \\Delta U_{ 31 } } = ',
+    ' &= \\frac{ \\frac 12 * {A} * P_0V_0 }{ {A12}P_0V_0 + \\frac 32 * {U12} * P_0V_0 + 0 + \\frac 32 * {U31} * P_0V_0 }'
+    ' = \\frac{ \\frac 12 * {A} }{ {A12} + \\frac 32 * {U12} + \\frac 32 * {U31} } = \\frac{ {eta.numerator} }{ {eta.denominator} } \\approx {eta_f}.',
+])
+class CycleTriangleUp(variant.VariantTask):
+    def GetUpdate(self, alpha=None, beta=None, **kws):
+        t = alpha * beta
+        A = (alpha - 1) * (beta - 1)
+        A12 = (alpha - 1) * beta
+        U12 = (alpha - 1) * beta
+        U31 = alpha - 1
+        eta = fractions.Fraction(
+            numerator=A,
+            denominator=2 * A12 + 3 * U31 + 3 * U12,
+        )
+        return dict(
+            t=t,
+            A=A,
+            A12=A12,
+            U12=U12,
+            U31=U31,
+            eta=eta,
+            eta_f='%.3f' % eta,
+        )
+
+
 @variant.solution_space(150)
 @variant.text('''
     Порция идеального одноатомного газа перешла из состояния 1 в состояние 2: {P1:Task:e}, {V1:Task:e}, {P2:Task:e}, {V2:Task:e}.
-    Определите, какую работу при этом совершил газ, чему равно изменение внутренней энергии газа, сколько теплоты подвели к нему в этом процессе?
-    При решении обратите внимание на знаки искомых величин. Известно, что в PV-координатах график процесса 12 представляет собой отрезок прямой.
+    Известно, что в $PV$-координатах график процесса 12 представляет собой отрезок прямой.
+    Определите,
+    \\begin{{itemize}}
+        \\item какую работу при этом совершил газ,
+        \\item чему равно изменение внутренней энергии газа,
+        \\item сколько теплоты подвели к нему в этом процессе?
+    \\end{{itemize}}
+    При решении обратите внимание на знаки искомых величин.
 ''')
 @variant.arg(P1=('P_1 = {} МПа', [2, 3, 4]))
 @variant.arg(P2=('P_2 = {} МПа', [1.5, 2.5, 3.5, 4.5]))
@@ -557,4 +687,3 @@ class DeltaQ_from_states(variant.VariantTask):
             dU=('%.2f кДж' % (dU / 1000)) if dU else '0 кДж',
             Q='%.2f кДж' % ((A + dU) / 1000),
         )
-
