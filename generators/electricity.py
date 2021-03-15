@@ -191,6 +191,34 @@ class Potential1621(variant.VariantTask):  # 1621 Goldfarb
     pass
 
 
+@variant.solution_space(40)
+@variant.text('''
+    Напротив физических величин укажите их обозначения и единицы измерения в СИ:
+    \\begin{{enumerate}}
+        \\item ёмкость конденсатора,
+        \\item индуктивность.
+    \\end{{enumerate}}
+''')
+@variant.no_args
+class Definitions01(variant.VariantTask):
+    pass
+
+
+@variant.solution_space(40)
+@variant.text('''
+    Запишите формулы, выражающие:
+    \\begin{{enumerate}}
+        \\item заряд кондесатора через его ёмкость и поданное напряжение,
+        \\item энергию кондесатора через {v_1},
+        \\item {v_2} колебаний в электромагнитном контуре, состоящем из конденсатора и катушки индуктивности,
+    \\end{{enumerate}}
+''')
+@variant.arg(v_1=['его ёмкость и поданное напряжение', 'его ёмкость и заряд', 'его заряд и поданное напряжение'])
+@variant.arg(v_2=['период', 'частоту'])
+class Definitions02(variant.VariantTask):
+    pass
+
+
 @variant.text('''
     Определите ёмкость конденсатора, если при его зарядке до напряжения
     {U:Task:e} он приобретает заряд {Q:Task:e}.
@@ -210,33 +238,35 @@ class Rymkevich748(variant.VariantTask):
         )
 
 
+@variant.solution_space(80)
 @variant.text('''
     На конденсаторе указано: {C:Task:e}, {U:Task:e}.
     Удастся ли его использовать для накопления заряда {Q:Task:e}?
 ''')
 @variant.answer_short('''
-    {Q_new:L} = {C:L}{U:L} = {C:Value} * {U:Value} = {Q:Value}
-    \\implies {Q_new:L} {sign} {Q:L} \\implies \\text{ {result} }
+    {Q_max:L} = {C:L}{U:L} = {C:Value} * {U:Value} = {Q_max:Value}
+    \\implies {Q_max:L} {sign} {Q:L} \\implies \\text{ {result} }
 ''')
-@variant.arg(U=['%s = %d кВ' % (Ul, Uv) for Ul in ['U', 'V'] for Uv in [200, 300, 400, 450]])
+@variant.arg(U=['%s = %d В' % (Ul, Uv) for Ul in ['U', 'V'] for Uv in [200, 300, 400, 450]])
 @variant.arg(Q=['%s = %d нКл' % (Ql, Qv) for Ql in ['Q', 'q'] for Qv in [30, 50, 60]])
 @variant.arg(C=['C = %d пФ' % Cv for Cv in [50, 80, 100, 120, 150]])
 class Rymkevich750(variant.VariantTask):
     def GetUpdate(self, U=None, Q=None, C=None, **kws):
-        resultQ = C.Value * U.Value
-        if resultQ >= Q.Value:
+        Q_max = C.Value * U.Value / 1000
+        if Q_max >= Q.Value:
             sign = '\\ge'
             result = 'удастся'
         else:
-            sign = '\\less'
+            sign = ' < '
             result = 'не удастся'
         return dict(
-            Q_new='%s_{max} = %d нКл' % (Q.Letter, resultQ),
+            Q_max='%s_{ \\text{ max } } = %d нКл' % (Q.Letter, Q_max),
             sign=sign,
             result=result,
         )
 
 
+@variant.solution_space(80)
 @variant.text('''
     Как и во сколько раз изменится ёмкость плоского конденсатора при уменьшении площади пластин в {a} раз
     и уменьшении расстояния между ними в {b} раз?
@@ -269,6 +299,7 @@ class Rymkevich751(variant.VariantTask):
         )
 
 
+@variant.solution_space(80)
 @variant.text('''
     Электрическая ёмкость конденсатора равна {C:Task:e},
     при этом ему сообщён заряд {Q:Task:e}. Какова энергия заряженного конденсатора?
@@ -280,7 +311,7 @@ class Rymkevich751(variant.VariantTask):
     = {W:Value}
 ''')
 @variant.arg(Q=['%s = %s нКл' % (Ql, Qv) for Ql in ['Q', 'q'] for Qv in [300, 500, 800, 900]])
-@variant.arg(C=['С = %s пФ' % Cv for Cv in [200, 400, 600, 750]])
+@variant.arg(C=['C = %s пФ' % Cv for Cv in [200, 400, 600, 750]])
 class Rymkevich762(variant.VariantTask):
     def GetUpdate(self, C=None, Q=None, **kws):
         return dict(
@@ -305,7 +336,7 @@ class Rymkevich762(variant.VariantTask):
          }
         = {Q:Value}
 ''')
-@variant.arg(C1__C2=[('С_1 = %s нФ' % C1, 'С_2 = %s нФ' % C2) for C1 in [20, 30, 40, 60] for C2 in [20, 30, 40, 60] if C1 != C2])
+@variant.arg(C1__C2=[('C_1 = %s нФ' % C1, 'C_2 = %s нФ' % C2) for C1 in [20, 30, 40, 60] for C2 in [20, 30, 40, 60] if C1 != C2])
 @variant.arg(U=['%s = %s В' % (Ul, Uv) for  Ul in ['U', 'V'] for Uv in [150, 200, 300, 400, 450]])
 class Cond1(variant.VariantTask):
     def GetUpdate(self, C1=None, C2=None, U=None, **kws):
