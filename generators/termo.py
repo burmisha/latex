@@ -25,6 +25,7 @@ log = logging.getLogger(__name__)
 class Definitions01(variant.VariantTask):
     pass
 
+
 @variant.solution_space(20)
 @variant.text('''
     Запишите формулы и рядом с каждой физичической величиной укажите её название и единицы измерения в СИ:
@@ -367,7 +368,7 @@ class Q_from_DeltaU_and_A(variant.VariantTask):
 @variant.arg(q1__a1=[('адиабатическом', 'да'), ('изобарном', 'нет')])
 @variant.arg(q3__a3=[('$PV$', 'да'), ('$VT$', 'нет'), ('$PT$', 'нет')])
 @variant.arg(q4__a4=[('три', 'нет'), ('четыре', 'да'), ('пять', 'нет')])
-@variant.arg(q8__a8=[('одноатомному', 'да'), ('двухноатомному', 'нет'), ('трёхатомному', 'нет')])
+@variant.arg(q8__a8=[('одноатомному', 'да'), ('двухоатомному', 'нет'), ('трёхатомному', 'нет')])
 @variant.solution_space(0)
 @variant.answer_short('''\\text{ {a1}, да, {a3}, {a4}, да, нет, да, {a8} }''')
 class YesNo(variant.VariantTask):
