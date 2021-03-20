@@ -93,7 +93,7 @@ def get_all_variants():
             'CycleRectangle', 'DeltaQ_from_states', 'Definitions02',
         ]}),
         ('2021-03-16 9', {'electricity': ['Rymkevich748', 'Rymkevich750', 'Rymkevich751', 'Rymkevich762', 'Definitions01', 'Definitions02']}),
-        # ('2021-03-18 10', {'termo': ['YesNo', 'CycleRectangle_T']}),
+        ('2021-03-18 10', ['termo.CycleRectangle_T', 'mkt.GraphPV_1', 'termo.YesNo']),
         # ('2021-03-20 10', {'termo': ['CycleTriangleUp_T', 'CycleTriangleUp']}),
     ]
     for task_id, tasks_classes in random_tasks:
