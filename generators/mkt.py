@@ -381,7 +381,7 @@ class Basic13(variant.VariantTask):
     pass
 
 
-@variant.solution_space(40)
+@variant.solution_space(100)
 @variant.text('''
     Изобразите в координатах $PV$/$VT$/$PT$ графики {what} в {N} раза (все 3 графика).
     Не забудьте указать оси и масштаб, начальную и конечную точки, направление движения на графике.
