@@ -468,7 +468,7 @@ class ZFTSH_10_2_9_kv(variant.VariantTask):
 @variant.arg(t=[7, 17, 27, 37, 47])
 @variant.answer_short('''
     PV = \\frac m\\mu RT \\implies m = \\frac{ PV \\mu }{ RT } =
-    \\frac{ {P:V} * {V:V} *  {gas.mu:V} }{ {Consts.R:V} *  \\cbr{ {t} + 273 }\\units{{К}} }
+    \\frac{ {P:V} * {V:V} * {gas.mu:V} }{ {Consts.R:V} * \\cbr{ {t} + 273 }\\units{{К}} }
     \\approx {m:V}.
 ''')
 
