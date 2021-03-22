@@ -12,8 +12,8 @@ log = logging.getLogger(__name__)
 
 @variant.text('''
     Сколько фотонов испускает за {minutes} минут лазер,
-    если мощность его излучения {power:Value:e}.
-    Длина волны излучения {length:Value:e}.
+    если мощность его излучения {power:Value:e}?
+    Длина волны излучения {length:Value:e}. {h:Task:e}.
 ''')
 @variant.answer_short('''
     N = \\frac{ Pt\\lambda }{ hc }
@@ -72,7 +72,7 @@ class ColorNameFromLambda(variant.VariantTask):
     pass
 
 
-@variant.solution_space(40)
+@variant.solution_space(80)
 @variant.text('''
     Определите {what} колебаний вектора напряженности {of} 
     в электромагнитной волне в вакууме, длина который составляет {lmbd:V:e}. 
@@ -81,6 +81,45 @@ class ColorNameFromLambda(variant.VariantTask):
 @variant.arg(of=['электрического поля', 'индукции магнитного поля'])
 @variant.arg(lmbd=['%d %s' % (l, s) for l in [2, 3, 5] for s in ['м', 'см']])
 class T_Nu_from_lambda(variant.VariantTask):
+    pass
+
+
+@variant.solution_space(80)
+@variant.text('''
+    Определите энергию фотона излучения частотой {nu:V:e}. 
+    Ответ получите в джоулях и в электронвольтах.
+''')
+@variant.arg(nu=('{} 10^16 Гц', [4, 5, 6, 7, 8, 9]))
+class E_from_nu(variant.VariantTask):
+    pass
+
+
+@variant.solution_space(80)
+@variant.text('''
+    Определите энергию {of} с длиной волны {lmbd:V:e}. Ответ выразите в {in_what}.
+    Способен ли человеческий глаз увидеть один такой квант? А импульс таких квантов?'
+
+''')
+@variant.arg(lmbd=('{} нм', [150, 200, 400, 500, 600, 700, 850, 900]))
+@variant.arg(of=['кванта света', 'фотона'])
+@variant.arg(in_what=['джоулях', 'электронвольтах'])
+class E_from_lambda(variant.VariantTask):
+    pass
+
+
+@variant.solution_space(40)
+@variant.text('''
+    Из формулы Планка выразите (нужен вывод, не только ответ)...
+    \\begin{{enumerate}}
+        \\item длину соответствующей электромагнитной волны,
+        \\item {second}.
+    \\end{{enumerate}}
+''')
+@variant.arg(second=[
+    'период колебаний индукции магнитного поля в соответствующей электромагнитной волне',
+    'период колебаний электрического поля в соответствующей электромагнитной волне',
+])
+class Deduce01(variant.VariantTask):
     pass
 
 
