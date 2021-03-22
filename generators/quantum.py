@@ -4,6 +4,7 @@ import math
 import itertools
 
 import generators.variant as variant
+from generators.value import UnitValue, Consts
 
 import logging
 log = logging.getLogger(__name__)
@@ -19,21 +20,68 @@ log = logging.getLogger(__name__)
        = \\frac{
             {power:Value} * {minutes} * 60 \\units{ с } * {length:Value}
          }{
-            {Consts.h:Value} * {Consts.c:Value}
-         }
-       \\approx { {approx:.2f} } * 10^{ {answerPower} }\\units{ фотонов }
+            {h:V} * {c:V}
+        }
+       \\approx {approx} * 10^{ {answerPower} }\\units{ фотонов }
 ''')
 @variant.arg(minutes=[5, 10, 20, 30, 40, 60, 120])
-@variant.arg(power=['P = %d мВт' % P for P in [15, 40, 75, 200]])
-@variant.arg(length=['\\lambda = %d нм' % lmbd for lmbd in [500, 600, 750]])
+@variant.arg(power=('P = {} мВт', [15, 40, 75, 200]))
+@variant.arg(length=('\\lambda = {} нм', [500, 600, 750]))
 class Fotons(variant.VariantTask):
     def GetUpdate(self, power=None, minutes=None, length=None, **kws):
         answer = 1. * power.Value * minutes * length.Value / 6.626 * 2 / (10 ** 5)
         return dict(
             answerValue=answer,
             answerPower=15 + 5,
-            approx=float(answer)
+            approx='%.2f' % float(answer),
+            h=Consts.h,
+            c=Consts.c,
         )
+
+
+# Сколько радиостанций сможет работать без помех в диапазоне {}-{} м, если для каждой необходима полоса частот {}?
+
+# Сигнал радиолокатора отразился от самолёта и вернулся обратно через {}. Чему равно расстояние от локатора для самолёта?
+
+
+
+# Длина волны рентгеновского излучения больше длины волны видимого излучения.
+# Частота волны инфракрасного излучения больше частоты волны гамма-излучения.
+# Скорость распространения инфракрасного излучения составляет 200000 км/с 
+# Скорость любого электромагнитного излучения в вакууме составляет ровно 299792458 м/с. Там целое число в дробной части (после запятой) исключительно нули.
+# Ультрафиолетовое излучение невидимо для человеческого глаза, однако при высокой интенсивности может нанести вред здоровью.
+# Чем больше длина волны, тем ниже способность этой волны огибать препятствия.
+# Чем выше частота волны, тем больше информации в единицу времени она способна передать, что актуально для средств связи.
+
+@variant.solution_space(80)
+@variant.text('''
+    Определите название цвета по длине волны в вакууме 
+    и частоту колебаний электромагнитного поля в ней:
+    \\begin{{enumerate}}
+        \\item {q1:V:e},
+        \\item {q2:V:e},
+        \\item {q3:V:e},
+        \\item {q4:V:e}.
+    \\end{{enumerate}}
+''')
+@variant.arg(q1__a1=[('450 нм', 'синий'), ('580 нм', 'жёлтый '), ('660 нм', 'красный')])
+@variant.arg(q2__a2=[('470 нм', 'синий'), ('390 нм', 'фиолетовый'), ('595 нм', 'оранжевый ')])
+@variant.arg(q3__a3=[('530 нм', 'зелёный'), ('720 нм', 'красный'), ('610 нм', 'оранжевый')])
+@variant.arg(q4__a4=[('580 нм', 'зелёный'), ('490 нм', 'голубой'), ('420 нм', 'фиолетовый')])
+class ColorNameFromLambda(variant.VariantTask):
+    pass
+
+
+@variant.solution_space(40)
+@variant.text('''
+    Определите {what} колебаний вектора напряженности {of} 
+    в электромагнитной волне в вакууме, длина который составляет {lmbd:V:e}. 
+''')
+@variant.arg(what=['период', 'частоту'])
+@variant.arg(of=['электрического поля', 'индукции магнитного поля'])
+@variant.arg(lmbd=['%d %s' % (l, s) for l in [2, 3, 5] for s in ['м', 'см']])
+class T_Nu_from_lambda(variant.VariantTask):
+    pass
 
 
 @variant.text('''
