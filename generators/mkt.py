@@ -346,7 +346,7 @@ class Basic11(variant.VariantTask):
     pass
 
 
-@variant.solution_space(40)
+@variant.solution_space(0)
 @variant.text('''
     Из уравнения состояния идеального газа выведите или выразите...
     \\begin{{enumerate}}

@@ -94,7 +94,8 @@ def get_all_variants():
         ]}),
         ('2021-03-16 9', {'electricity': ['Rymkevich748', 'Rymkevich750', 'Rymkevich751', 'Rymkevich762', 'Definitions01', 'Definitions02']}),
         ('2021-03-18 10', ['termo.CycleRectangle_T', 'mkt.GraphPV_1', 'termo.YesNo']),
-        # ('2021-03-20 10', {'termo': ['CycleTriangleUp_T', 'CycleTriangleUp']}),
+        ('2021-03-23 10', ['termo.CycleTriangleUp_T', 'termo.GetPhi', 'mkt.Basic12', 'termo.Definitions02']),
+        # ('2021-03-30 10', {'termo': ['CycleTriangleUp']}),
     ]
     for task_id, tasks_classes in random_tasks:
         pupils = library.pupils.get_class_from_string(task_id)
