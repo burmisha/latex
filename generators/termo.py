@@ -564,7 +564,7 @@ class CycleRectangle_T(variant.VariantTask):
     'A_\\text{ цикл } &= \\frac 12 ({beta}P_0 - P_0)({alpha}V_0 - V_0) = \\frac 12 * {A} * P_0V_0,',
     'A_{ 23 } &= {alpha}P_0 * ({beta}V_0 - V_0) = {A23}P_0V_0,',
 
-    '\\Delta U_{ 23 } &= \\frac 32 \\nu R T_3 - \\frac 32 \\nu R T_3 = \\frac 32 P_3 V_3 - \\frac 32 P_2 V_2'
+    '\\Delta U_{ 23 } &= \\frac 32 \\nu R T_3 - \\frac 32 \\nu R T_2 = \\frac 32 P_3 V_3 - \\frac 32 P_2 V_2'
     ' = \\frac 32 * {alpha} P_0 * {beta} V_0 -  \\frac 32 * {alpha} P_0 * V_0'
     ' = \\frac 32 * {U23} * P_0V_0,',
 
@@ -704,5 +704,32 @@ class DeltaQ_from_states(variant.VariantTask):
 @variant.arg(t1=('{}', [15, 20, 25, 30]))
 @variant.arg(t2=('{}', [40, 50, 60, 70, 80]))
 @variant.arg(phi1=('{}', [40, 45, 50, 55, 60, 65, 70, 75]))
+@variant.answer_align([
+    '&\\text{ Значения плотности насыщенного водяного пара определяем по таблице: }',
+    '&{rho_np_1:Task}, {rho_np_2:Task}.',
+    '\\varphi_1 &= \\frac{rho:L:s}{rho_np_1:L:s} \\implies {rho:L:s} = {rho_np_1:L} * \\varphi_1 = {rho_np_1:V} * {phi1_ratio} = {rho:V}.',
+    '&\\text{ По таблице определяем, при какой температуре пар с такой плотностью станет насыщенным:  } ',
+    't_\\text{ росы } &= {t}\\celsius,',
+    '\\varphi_2 &= \\frac{rho:L:s}{rho_np_2:L:s} = \\frac{ {rho_np_1:L} * \\varphi_1 }{rho_np_2:L:s}'
+    '= \\varphi_1 * \\frac{rho_np_1:L:s}{rho_np_2:L:s} = {phi1_ratio} * \\frac{rho_np_1:V:s}{rho_np_2:V:s} = {phi2} \\approx {phi2_ratio}\\%.'
+])
 class GetPhi(variant.VariantTask):
-    pass
+    def GetUpdate(self, t1=None, t2=None, phi1=None, **kws):
+        np_1 = Consts.vapor.get_rho_by_t(int(t1))
+        np_2 = Consts.vapor.get_rho_by_t(int(t2))
+        rho_np_1 = f'\\rho_{{ \\text{{ нас. пара {t1} }} \\celsius }}= {np_1:.3f} г / м^3'
+        rho_np_2 = f'\\rho_{{ \\text{{ нас. пара {t2} }} \\celsius }} = {np_2:.3f} г / м^3'
+        rho = '\\rho_\\text{ пара } = %.3f г / м^3' % (np_1 * int(phi1) / 100)
+        t = '%.1f' % Consts.vapor.get_t_by_rho(np_1 * int(phi1) / 100)
+        phi_2 = '%.3f' % (int(phi1) * np_1 / np_2 / 100)
+        phi1_ratio = '%.2f' % (int(phi1) / 100)
+        phi2_ratio = '%.1f' % (int(phi1) * np_1 / np_2)
+        return dict(
+            rho_np_1=rho_np_1,
+            rho_np_2=rho_np_2,
+            rho=rho,
+            t=t,
+            phi2=phi_2,
+            phi1_ratio=phi1_ratio,
+            phi2_ratio=phi2_ratio,
+        )

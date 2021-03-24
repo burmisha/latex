@@ -374,6 +374,63 @@ class Matter(object):
             setattr(self, key, UnitValue(value))
 
 
+class Vapor:
+    T_P_P_rho = [
+        (0, 0.611, 4.58, 4.84),
+        (1, 0.656, 4.92, 5.22),
+        (2, 0.705, 5.29, 5.60),
+        (3, 0.757, 5.68, 5.98),
+        (4, 0.813, 6.10, 6.40),
+        (5, 0.872, 6.54, 6.84),
+        (6, 0.934, 7.01, 7.3),
+        (7, 1.01, 7.57, 7.8),
+        (8, 1.07, 8.05, 8.3),
+        (9, 1.15, 8.61, 8.8),
+        (10, 1.23, 9.21, 9.4),
+        (11, 1.31, 9.84, 10.0),
+        (12, 1.40, 10.52, 10.7),
+        (13, 1.50, 11.23, 11.4),
+        (14, 1.59, 11.99, 12.1),
+        (15, 1.70, 12.79, 12.8),
+        (16, 1.81, 13.63, 13.6),
+        (17, 1.94, 14.53, 14.5),
+        (18, 2.06, 15.48, 15.4),
+        (19, 2.19, 16.48, 16.3),
+        (20, 2.34, 17.54, 17.3),
+        (21, 2.48, 18.6, 18.3),
+        (22, 2.64, 19.8, 19.4),
+        (23, 2.81, 21.1, 20.6),
+        (24, 2.99, 22.4, 21.8),
+        (25, 3.17, 23.8, 23.0),
+        (30, 4.24, 31.8, 30.3),
+        (40, 7.37, 55.3, 51.2),
+        (50, 12.3, 92.5, 83.0),
+        (60, 19.9, 149.4, 130),
+        (70, 31.0, 233.7, 198),
+        (80, 47.3, 355.1, 293),
+        (90, 70.1, 525.8, 424),
+        (100, 101.3, 760.0, 598),
+    ]
+
+    def _get_rows_pairs(self):
+        for index in range(len(self.T_P_P_rho) - 1):
+            yield self.T_P_P_rho[index], self.T_P_P_rho[index + 1]
+
+    def get_rho_by_t(self, t):
+        for row, next_row in self._get_rows_pairs():
+            if row[0] <= t < next_row[0]:
+                return (t - row[0]) / (next_row[0] - row[0]) * (next_row[3] - row[3]) + row[3]
+
+        raise RuntimeError()
+
+    def get_t_by_rho(self, rho):
+        for row, next_row in self._get_rows_pairs():
+            if row[3] <= rho < next_row[3]:
+                return (rho - row[3]) / (next_row[3] - row[3]) * (next_row[0] - row[0]) + row[0]
+
+        raise RuntimeError()
+
+
 class Consts(object):
     m_e = UnitValue('m_{e} = 9.1 10^{-31} кг')
     m_p = UnitValue('m_{p} = 1.672 10^{-27} кг')
@@ -389,6 +446,7 @@ class Consts(object):
     N_A = UnitValue('N_A = 6.02 10^23 / моль')
     R = UnitValue('R = 8.31 Дж / моль К')
 
+    vapor = Vapor()
 
     water = Matter(
         name='вода',
@@ -448,6 +506,15 @@ class Consts(object):
         mu='40 г / моль',
     )
 
+
+def test_vapor():
+    vapor = Vapor()
+    assert vapor.get_rho_by_t(80) == 293
+    assert vapor.get_rho_by_t(65) == 164
+    assert vapor.get_t_by_rho(293) == 80
+
+
+test_vapor()
 
 
 def test_calculation():
