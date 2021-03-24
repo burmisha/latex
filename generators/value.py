@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import fractions
 
 import logging
 log = logging.getLogger(__name__)
@@ -506,6 +507,53 @@ class Consts(object):
         mu='40 г / моль',
     )
 
+
+class Fraction:
+    def __init__(self, base_value=1):
+        assert base_value == 1 or base_value == 0
+        self._fraction = fractions.Fraction(numerator=base_value, denominator=1)
+
+    def __mul__(self, other):
+        self._fraction = self._fraction * other
+        return self
+
+
+    def __truediv__(self, other):
+        self._fraction = self._fraction / other
+        return self
+
+    def __format__(self, fmt):
+        try:
+            fmt_parts = fmt.replace(':', '|').split('|')
+            if len(fmt_parts) == 1:
+                main_format = fmt_parts[0]
+                if main_format == 'LaTeX':
+                    if self._fraction.denominator == 1:
+                        return str(self._fraction.numerator)
+                    else:
+                        return f'\\frac{{ {self._fraction.numerator} }}{{ {self._fraction.denominator} }}'
+                else:
+                    raise RuntimeError(f'Unknown main format: {main_format!r} from {fmt!r}')
+            else:
+                raise RuntimeError()
+        except Exception:
+            log.error(f'Error in __format__ for {fmt} and {self._fraction}')
+            raise
+
+
+def test_fraction():
+    for template, frac, result in [
+        ('{f:LaTeX}', Fraction(0), '0'),
+        ('{f:LaTeX}', Fraction(1), '1'),
+        ('{f:LaTeX}', Fraction(1) * 2, '2'),
+        ('{f:LaTeX}', Fraction(1) * 2 / 2, '1'),
+        ('{f:LaTeX}', Fraction(1) * 2 / 4, '\\frac{ 1 }{ 2 }'),
+        ('{f:LaTeX}', Fraction(), '1'),
+    ]:
+        res = template.format(f=frac)
+        assert res == result, f'Expected {result}, got {res}'
+
+test_fraction()
 
 def test_vapor():
     vapor = Vapor()
