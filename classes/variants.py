@@ -97,6 +97,7 @@ def get_all_variants():
         ('2021-03-23 10', ['termo.CycleTriangleUp_T', 'termo.GetPhi', 'mkt.Basic12', 'termo.Definitions02']),
         ('2021-03-23 9', {'quantum': ['Fotons', 'ColorNameFromLambda', 'E_from_nu',  'E_from_lambda', 'T_Nu_from_lambda', 'Deduce01']}),
         # ('2021-03-30 10', {'termo': ['CycleTriangleUp']}),
+        ('2021-03-25 10', {'electricity': ['ForceTask', 'ExchangeTask', 'FieldTaskGenerator', 'SumTask']}),
     ]
     for task_id, tasks_classes in random_tasks:
         pupils = library.pupils.get_class_from_string(task_id)

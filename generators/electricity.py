@@ -43,9 +43,11 @@ class ForceTask(variant.VariantTask):
     на расстоянии~${letter}$ друг от друга.
     Заряд первого равен~${charges[0]}$, второго~---${charges[1]}$.
     Шарики приводят в соприкосновение, а после опять разводят на то же самое расстояние~${letter}$.
-    Каким стал заряд каждого из шариков?
-    Определите характер (притяжение или отталкивание)
-    и силу взаимодействия шариков до и после соприкосновения.
+    \\begin{{itemize}}
+        \\item Каким стал заряд каждого из шариков?
+        \\item Определите характер (притяжение или отталкивание) и силу взаимодействия шариков до и после соприкосновения.
+        \\item Как изменилась сила взаимодействия шариков после соприкосновения?
+    \\end{{itemize}}
 ''')
 @variant.answer_align([
     'F &= k\\frac{ q_1 q_2 }{ {letter}^2 } = k\\frac{ ({charges[0]}) * ({charges[1]}) }{ {letter}^2 }, \\text{ {res[0]} };',
@@ -81,7 +83,7 @@ class ExchangeTask(variant.VariantTask):
     Сделайте рисунок, определите величину напряжённости электрического поля
     в точках ${firstCoords}$ и ${secondCoords}$ и укажите её направление.
 ''')
-@variant.arg(firstPoint__secondPoint=itertools.product(['up', 'down'], ['right', 'left']))
+@variant.arg(firstPoint__secondPoint=list(itertools.product(['up', 'down'], ['right', 'left'])))
 @variant.arg(charges=[['+q', '-q'], ['-q', '-q'], ['+Q', '+Q'], ['-Q', '+Q']])
 @variant.arg(letter=['a', 'l', 'r', 'd'])
 class FieldTaskGenerator(variant.VariantTask):
@@ -101,11 +103,11 @@ class FieldTaskGenerator(variant.VariantTask):
 @variant.text('''
     Заряд $q_1$ создает в точке $A$ электрическое поле
     по величине равное~$E_1={values[0]}\\funits{ В }{ м }$,
-    а $q_2$~---$E_2={values[1]}\\funits{ В }{ м }$.
+    а $q_2$~--- $E_2={values[1]}\\funits{ В }{ м }$.
     Угол между векторами $\\vect{ E_1 }$ и $\\vect{ E_2 }$ равен ${angleLetter}$.
     Определите величину суммарного электрического поля в точке $A$,
     создаваемого обоими зарядами $q_1$ и $q_2$.
-    Сделайте рисунок и вычислите её значение для двух значений угла ${angleLetter}$:
+    Сделайте рисунки и вычислите значение для двух значений угла ${angleLetter}$:
     ${angleLetter}_1={angles[0]}^\\circ$ и ${angleLetter}_2={angles[1]}^\\circ$.
 ''')
 @variant.arg(values__angles=[
