@@ -657,7 +657,8 @@ class CycleRectangle_T(variant.VariantTask):
     Q
         &= \\frac 32 (P\\Delta V + V \\Delta P) + P \\Delta V =  \\frac 52 P\\Delta V + \\frac 32 V \\Delta P = \\\\
         &= \\frac 52 P\\Delta V + \\frac 32 V * \\cbr{ - \\frac{ P_0 }{ V_0 } \\Delta V } = \\frac{ \\Delta V }2 * \\cbr{ 5P - \\frac{ P_0 }{ V_0 } V } = \\\\
-        &= \\frac{ \\Delta V }2 * \\cbr{ 5 * \\cbr{ {a1}P_0 - \\frac{ P_0 }{ V_0 } V } - \\frac{ P_0 }{ V_0 } V } = \\frac{ \\Delta V * P_0 }2 * \\cbr{ 5 * {a1} - 8\\frac{ V }{ V_0 } }.
+        &= \\frac{ \\Delta V }2 * \\cbr{ 5 * \\cbr{ {a1}P_0 - \\frac{ P_0 }{ V_0 } V } - \\frac{ P_0 }{ V_0 } V } 
+         = \\frac{ \\Delta V * P_0 }2 * \\cbr{ 5 * {a1} - 8\\frac{ V }{ V_0 } }.
     \\end{ align* }
 
     Таком образом, знак количества теплоты $Q$ на участке 23 зависит от конкретного значения $V$:
@@ -670,7 +671,8 @@ class CycleRectangle_T(variant.VariantTask):
     Тут *~--- некоторая точка между точками 2 и 3, конкретные значения надо досчитать:
     $$V^* = V_0 * \\frac{ 5 * {a1} }8 = \\frac{ {V_star.numerator} }{ {V_star.denominator} } * V_0 \\implies P^* = {a1}P_0 - \\frac{ P_0 }{ V_0 } V^* = \\ldots = \\frac{ {P_star.numerator} }{ {P_star.denominator} } * P_0.$$
 
-    Т.е. чтобы вычислить $Q_+$ нам надо сложить $Q_+ = Q_{ 12 } + Q_{ 2* }$.
+    Т.е. чтобы вычислить $Q_+$, надо сложить количества теплоты на участке 12 и лишь части участка 23 — участке 2*, 
+    той его части где это количество теплоты положительно. Имеем: $Q_+ = Q_{ 12 } + Q_{ 2* }$.
 
     Теперь возвращаемся к циклу целиком и получаем: 
     \\begin{ align* }
