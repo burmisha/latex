@@ -577,6 +577,80 @@ class CycleRectangle_T(variant.VariantTask):
     ' &= \\frac{ \\frac 12 * {A} * P_0V_0 }{ 0 + \\frac 32 * {U12} * P_0V_0 + {A23}P_0V_0 + \\frac 32 * {U23} * P_0V_0 }'
     ' = \\frac{ \\frac 12 * {A} }{ \\frac 32 * {U12} + {A23} + \\frac 32 * {U23} } = \\frac{ {eta.numerator} }{ {eta.denominator} } \\approx {eta_f}.',
 ])
+@variant.tex_notions('''
+    Решение бонуса:
+    \\begin{ align* }
+        A_{ 12 } &= 0, \\Delta U_{ 12 } > 0, \\implies Q_{ 12 } = A_{ 12 } + \\Delta U_{ 12 } > 0, \\\\
+        A_{ 23 } &> 0, \\Delta U_{ 23 } \\text{  — ничего нельзя сказать, нужно исследовать отдельно }, \\\\
+        A_{ 31 } &< 0, \\Delta U_{ 31 } < 0, \\implies Q_{ 31 } = A_{ 31 } + \\Delta U_{ 31 } < 0. \\\\
+    \\end{ align* }
+
+    Уравнения состояния идеального газа для точек 1, 2, 3: $P_1V_1 = \\nu R T_1, P_2V_2 = \\nu R T_2, P_3V_3 = \\nu R T_3$.
+    Пусть $P_0$, $V_0$, $T_0$ — давление, объём и температура в точке 1 (минимальные во всём цикле).
+
+    12 --- изохора, $\\frac{ P_1V_1 }{ T_1 } = \\nu R = \\frac{ P_2V_2 }{ T_2 }, V_2=V_1=V_0 \\implies \\frac{ P_1 }{ T_1 } =  \\frac{ P_2 }{ T_2 } \\implies P_2 = P_1 \\frac{ T_2 }{ T_1 } = {alpha}P_0$,
+
+    31 --- изобара, $\\frac{ P_1V_1 }{ T_1 } = \\nu R = \\frac{ P_3V_3 }{ T_3 }, P_3=P_1=P_0 \\implies \\frac{ V_3 }{ T_3 } =  \\frac{ V_1 }{ T_1 } \\implies V_3 = V_1 \\frac{ T_3 }{ T_1 } = {alpha}V_0$,
+
+    Таким образом, используя новые обозначения, состояния газа в точках 1, 2 и 3 описываются макропараметрами $(P_0, V_0, T_0), ({alpha}P_0, V_0, {alpha}T_0), (P_0, {alpha}V_0, {alpha}T_0)$ соответственно.
+
+    Теперь рассмотрим отдельно процесс 23, к остальному вернёмся позже. Уравнение этой прямой в $PV$-координатах: $P(V) = {a1}P_0 - \\frac{ P_0 }{ V_0 } V$.
+    Это значит, что при изменении объёма на $\\Delta V$ давление изменится на $\\Delta P = - \\frac{ P_0 }{ V_0 } \\Delta V$, обратите внимание на знак.
+
+    Рассмотрим произвольную точку в процессе 23 и дадим процессу ещё немного свершиться, при этом объём изменится на $\\Delta V$, давление — на $\\Delta P$, температура (иначе бы была гипербола, а не прямая) — на $\\Delta T$,
+    т.е. из состояния $(P, V, T)$ мы перешли в $(P', V', T')$, причём  $P' = P + \\Delta P, V' = V + \\Delta V, T' = T + \\Delta T$.
+
+    При этом изменится внутренняя энергия:
+    \\begin{ align* }
+    \\Delta U 
+        &= U' - U = \\frac 32 \\nu R T' - \\frac 32 \\nu R T = \\frac 32 (P+\\Delta P) (V+\\Delta V) - \\frac 32 PV\\\\
+        &= \\frac 32 ((P+\\Delta P) (V+\\Delta V) - PV) = \\frac 32 (P\\Delta V + V \\Delta P + \\Delta P \\Delta V).
+    \\end{ align* }
+
+    Рассмотрим малые изменения объёма, тогда и изменение давления будем малым (т.к. $\\Delta P = - \\frac{ P_0 }{ V_0 } \\Delta V$),
+    а третьим слагаемым в выражении для $\\Delta U$  можно пренебречь во сравнению с двумя другими, тогда $\\Delta U = \\frac 32 (P\\Delta V + V \\Delta P)$.
+
+    Работа газа при этом малом изменении объёма — это площадь трапеции (тут ещё раз пренебрегли малым слагаемым):
+    $$A = \\frac{ P + P\' }2 \\Delta V = \\cbr{ P + \\frac{ \\Delta P }2 } \\Delta V = P \\Delta V.$$
+
+    Подведённое количество теплоты, используя первое начало термодинамики, будет равно
+    \\begin{ align* }
+    Q
+        &= \\frac 32 (P\\Delta V + V \\Delta P) + P \\Delta V =  \\frac 52 P\\Delta V + \\frac 32 V \\Delta P = \\\\
+        &= \\frac 52 P\\Delta V + \\frac 32 V * \\cbr{ - \\frac{ P_0 }{ V_0 } \\Delta V } = \\frac{ \\Delta V }2 * \\cbr{ 5P - \\frac{ P_0 }{ V_0 } V } = \\\\
+        &= \\frac{ \\Delta V }2 * \\cbr{ 5 * \\cbr{ {a1}P_0 - \\frac{ P_0 }{ V_0 } V } - \\frac{ P_0 }{ V_0 } V } = \\frac{ \\Delta V * P_0 }2 * \\cbr{ 5 * {a1} - 8\\frac{ V }{ V_0 } }.
+    \\end{ align* }
+
+    Таком образом, знак количества теплоты $Q$ на участке 23 зависит от конкретного значения $V$:
+    \\begin{ itemize }
+        \\item $\\Delta V > 0$ на всём участке 23, поскольку газ расширяется, 
+        \\item $P > 0$ — всегда, у нас идеальный газ, удары о стенки сосуда абсолютно упругие, а молекулы не взаимодействуют и поэтому давление только положительно,
+        \\item если $5 * {a1} - 8\\frac{ V }{ V_0 } > 0$ — тепло подводят, если же меньше нуля — отводят. 
+    \\end{ itemize }
+    Решая последнее неравенство, получаем конкретное значение $V^*$: при $V < V^*$ тепло подводят, далее~— отводят. 
+    Тут *~--- некоторая точка между точками 2 и 3, конкретные значения надо досчитать:
+    $$V^* = V_0 * \\frac{ 5 * {a1} }8 = \\frac{ {V_star.numerator} }{ {V_star.denominator} } * V_0 \\implies P^* = {a1}P_0 - \\frac{ P_0 }{ V_0 } V^* = \\ldots = \\frac{ {P_star.numerator} }{ {P_star.denominator} } * P_0.$$
+
+    Т.е. чтобы вычислить $Q_+$ нам надо сложить $Q_+ = Q_{ 12 } + Q_{ 2* }$.
+
+    Теперь возвращаемся к циклу целиком и получаем: 
+    \\begin{ align* }
+    A_\\text{ цикл } &= \\frac 12 * ({alpha}P_0 - P_0) * ({alpha}V_0 - V_0) = \\frac{ {A_bonus_cycle.numerator} }{ {A_bonus_cycle.denominator} } * P_0V_0, \\\\
+    A_{ 2* } &= \\frac{ P^* + {alpha}P_0 }2 * (V^* - V_0) 
+        = \\frac{ \\frac{ {P_star.numerator} }{ {P_star.denominator} } * P_0 + {alpha}P_0 }2 * \\cbr{ \\frac{ {V_star.numerator} }{ {V_star.denominator} } * V_0 - V_0 }
+        = \\ldots = \\frac{ {A_bonus_plus.numerator} }{ {A_bonus_plus.denominator} } * P_0 V_0, \\\\
+    \\Delta U_{ 2* } &= \\frac 32 \\nu R T^* - \\frac 32 \\nu R T_2 = \\frac 32 (P^*V^* - P_0 * {alpha}V_0) 
+        = \\frac 32 \\cbr{ \\frac{ {P_star.numerator} }{ {P_star.denominator} } * P_0 * \\frac{ {V_star.numerator} }{ {V_star.denominator} } * V_0 - P_0 * {alpha}V_0 }
+        = \\frac{ {U_bonus_plus.numerator} }{ {U_bonus_plus.denominator} } * P_0 V_0, \\\\ 
+    \\Delta U_{ 12 } &= \\frac 32 \\nu R T_2 - \\frac 32 \\nu R T_1 = \\frac 32 ({alpha}P_0V_0 - P_0V_0) = \\ldots = \\frac{ {U_bonus_12.numerator} }{ {U_bonus_12.denominator} } * P_0 V_0, \\\\ 
+    \\eta &= \\frac{ A_\\text{ цикл } }{ Q_+ } = \\frac{ A_\\text{ цикл } }{ Q_{ 12 } + Q_{ 2* } } 
+        = \\frac{ A_\\text{ цикл } }{ A_{ 12 } + \\frac{ {U_bonus_12.numerator} }{ {U_bonus_12.denominator} } * P_0 V_0 + A_{ 2* } + \\Delta U_{ 2* } } = \\\\
+        &= \\frac{ \\frac{ {A_bonus_cycle.numerator} }{ {A_bonus_cycle.denominator} } * P_0V_0 }{ 0 + \\frac{ {U_bonus_12.numerator} }{ {U_bonus_12.denominator} } * P_0 V_0 + \\frac{ {A_bonus_plus.numerator} }{ {A_bonus_plus.denominator} } * P_0 V_0 + \\frac{ {U_bonus_plus.numerator} }{ {U_bonus_plus.denominator} } * P_0 V_0 }
+         = \\frac{ \\frac{ {A_bonus_cycle.numerator} }{ {A_bonus_cycle.denominator} } }{ \\frac{ {U_bonus_12.numerator} }{ {U_bonus_12.denominator} } + \\frac{ {A_bonus_plus.numerator} }{ {A_bonus_plus.denominator} } + \\frac{ {U_bonus_plus.numerator} }{ {U_bonus_plus.denominator} } }
+         = \\frac{ {eta_bonus.numerator} }{ {eta_bonus.denominator} } \\leftarrow \\text{ вжух и готово! }
+    \\end{ align* }
+'''
+)
 class CycleTriangleUp_T(variant.VariantTask):
     def GetUpdate(self, alpha=None, beta=None, **kws):
         t = alpha * beta
@@ -588,6 +662,23 @@ class CycleTriangleUp_T(variant.VariantTask):
             numerator=A,
             denominator=2 * A23 + 3 * U12 + 3 * U23,
         )
+        A_bonus_cycle = fractions.Fraction(
+            numerator=(alpha - 1) ** 2,
+            denominator=2,
+        )
+        A_bonus_plus = fractions.Fraction(
+            numerator=(11 * alpha + 3) * (5 * alpha - 3),
+            denominator=16 * 8,
+        )
+        U_bonus_plus = (fractions.Fraction(
+            numerator=15 * (alpha + 1) ** 2,
+            denominator=64,
+        ) - alpha) * 3 / 2
+        U_bonus_12 = fractions.Fraction(
+            numerator=alpha - 1,
+            denominator=1,
+        ) * 3 / 2
+        eta_bonus = A_bonus_cycle / (U_bonus_plus + A_bonus_plus + U_bonus_12)
         return dict(
             t=t,
             A=A,
@@ -596,6 +687,22 @@ class CycleTriangleUp_T(variant.VariantTask):
             U12=U12,
             eta=eta,
             eta_f='%.3f' % eta,
+            # a1=alpha + 1,
+            # A_bonus_cycle=A_bonus_cycle,
+            # A_bonus_plus=A_bonus_plus,
+            # U_bonus_plus=U_bonus_plus,
+            # U_bonus_12=U_bonus_12,
+            # eta_bonus=eta_bonus,
+            # V_star=fractions.Fraction(numerator=(alpha + 1) * 5, denominator=8),
+            # P_star=fractions.Fraction(numerator=(alpha + 1) * 3, denominator=8),
+            a1=42,
+            A_bonus_cycle=fractions.Fraction(numerator=42, denominator=23),
+            A_bonus_plus=fractions.Fraction(numerator=42, denominator=23),
+            U_bonus_plus=fractions.Fraction(numerator=42, denominator=23),
+            U_bonus_12=fractions.Fraction(numerator=42, denominator=23),
+            eta_bonus=fractions.Fraction(numerator=42, denominator=23),
+            V_star=fractions.Fraction(numerator=42, denominator=23),
+            P_star=fractions.Fraction(numerator=42, denominator=23),
         )
 
 

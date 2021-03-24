@@ -178,7 +178,10 @@ class VariantTask(object):
 
     def GetAnswerTemplate(self):
         if hasattr(self, 'AnswerTemplate'):
-            return self.AnswerTemplate
+            if hasattr(self, 'TexNotions'):
+                return self.AnswerTemplate + '\n\n' + self.TexNotions
+            else:
+                return self.AnswerTemplate
         else:
             return None
 
@@ -376,6 +379,14 @@ def answer_align(template_lines):
             lines.append(escape_tex(line))
         template = '\\begin{{align*}}\n' + ' \\\\\n'.join(lines) + '\n\\end{{align*}}'
         cls.AnswerTemplate = template.replace('\n\n', '\n')
+        return cls
+    return decorator
+
+
+def tex_notions(text):
+    def decorator(cls):
+        assert not hasattr(cls, 'TexNotions')
+        cls.TexNotions = escape_tex(text)
         return cls
     return decorator
 
