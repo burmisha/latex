@@ -205,3 +205,15 @@
     \textsc{#1~---~\customclass, \customdate}
     \end{flushright}
 }
+
+\tikzset{
+    midar/.style 2 args={ 
+            very thick,
+            decoration={ name=markings,
+                mark=at position .55 with { \arrow{ latex } },
+                mark=at position 0 with { \fill circle (2pt); },
+                mark=at position 1 with { \fill circle (2pt); }
+            },
+            postaction=decorate,
+    },
+}

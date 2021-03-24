@@ -578,6 +578,23 @@ class CycleRectangle_T(variant.VariantTask):
     ' = \\frac{ \\frac 12 * {A} }{ \\frac 32 * {U12} + {A23} + \\frac 32 * {U23} } = \\frac{ {eta.numerator} }{ {eta.denominator} } \\approx {eta_f}.',
 ])
 @variant.tex_notions('''
+    График процесса не в масштабе (эта часть пока не готова и сделать автоматически аккуратно сложно), но с верными подписями (а для решения этого достаточно):
+
+    \\begin{ tikzpicture }[thick]
+        \\draw[-{ Latex }] (0, 0) -- (0, 7) node[above left] { $P$ };
+        \\draw[-{ Latex }] (0, 0) -- (10, 0) node[right] { $V$ };
+
+        \\draw[dashed] (0, 2) node[left] { $P_1 = P_0$ } -| (3, 0) node[below] { $V_1 = V_2 = V_0$  };
+        \\draw[dashed] (0, 6) node[left] { $P_2 = P_3 = {alpha}P_0$ } -| (9, 0) node[below] { $V_3 = {beta}V_0$ };
+
+        \\draw (3, 2) node[above left]{ 1 } node[below left]{ $T_1 = T_0$ } 
+               (3, 6) node[below left]{ 2 } node[above]{ $T_2 = {alpha}T_0$ } 
+               (9, 6) node[above right]{ 3 } node[below right]{ $T_3 = {t}T_0$ };
+        \\draw[midar] (3, 2) -- (3, 6);
+        \\draw[midar] (3, 6) -- (9, 6);
+        \\draw[midar] (9, 6) -- (3, 2);
+    \\end{ tikzpicture }
+
     Решение бонуса:
     \\begin{ align* }
         A_{ 12 } &= 0, \\Delta U_{ 12 } > 0, \\implies Q_{ 12 } = A_{ 12 } + \\Delta U_{ 12 } > 0, \\\\
@@ -594,6 +611,26 @@ class CycleRectangle_T(variant.VariantTask):
 
     Таким образом, используя новые обозначения, состояния газа в точках 1, 2 и 3 описываются макропараметрами $(P_0, V_0, T_0), ({alpha}P_0, V_0, {alpha}T_0), (P_0, {alpha}V_0, {alpha}T_0)$ соответственно.
 
+    \\begin{ tikzpicture }[thick]
+        \\draw[-{ Latex }] (0, 0) -- (0, 7) node[above left] { $P$ };
+        \\draw[-{ Latex }] (0, 0) -- (10, 0) node[right] { $V$ };
+
+        \\draw[dashed] (0, 2) node[left] { $P_1 = P_3 = P_0$ } -| (9, 0) node[below] { $V_3 = {alpha}V_0$ };
+        \\draw[dashed] (0, 6) node[left] { $P_2 = {alpha}P_0$ } -| (3, 0) node[below] { $V_1 = V_2 = V_0$ };
+
+        \\draw[dashed] (0, 5) node[left] { $P$ } -| (4.5, 0) node[below] { $V$ };
+        \\draw[dashed] (0, 4.6) node[left] { $P'$ } -| (5.1, 0) node[below] { $V'$ };
+
+        \\draw (3, 2) node[above left]{ 1 } node[below left]{ $T_1 = T_0$ } 
+               (3, 6) node[below left]{ 2 } node[above]{ $T_2 = {alpha}T_0$ } 
+               (9, 2) node[above right]{ 3 } node[below right]{ $T_3 = {alpha}T_0$ };
+        \\draw[midar] (3, 2) -- (3, 6);
+        \\draw[midar] (3, 6) -- (9, 2);
+        \\draw[midar] (9, 2) -- (3, 2);
+        \\draw   (4.5, 5) node[above right]{ $T$ } (5.1, 4.6) node[above right]{ $T'$ };
+    \\end{ tikzpicture }
+
+
     Теперь рассмотрим отдельно процесс 23, к остальному вернёмся позже. Уравнение этой прямой в $PV$-координатах: $P(V) = {a1}P_0 - \\frac{ P_0 }{ V_0 } V$.
     Это значит, что при изменении объёма на $\\Delta V$ давление изменится на $\\Delta P = - \\frac{ P_0 }{ V_0 } \\Delta V$, обратите внимание на знак.
 
@@ -608,7 +645,9 @@ class CycleRectangle_T(variant.VariantTask):
     \\end{ align* }
 
     Рассмотрим малые изменения объёма, тогда и изменение давления будем малым (т.к. $\\Delta P = - \\frac{ P_0 }{ V_0 } \\Delta V$),
-    а третьим слагаемым в выражении для $\\Delta U$  можно пренебречь во сравнению с двумя другими, тогда $\\Delta U = \\frac 32 (P\\Delta V + V \\Delta P)$.
+    а третьим слагаемым в выражении для $\\Delta U$  можно пренебречь по сравнению с двумя другими: 
+    два первых это малые величины, а третье — произведение двух малых. 
+    Тогда $\\Delta U = \\frac 32 (P\\Delta V + V \\Delta P)$.
 
     Работа газа при этом малом изменении объёма — это площадь трапеции (тут ещё раз пренебрегли малым слагаемым):
     $$A = \\frac{ P + P\' }2 \\Delta V = \\cbr{ P + \\frac{ \\Delta P }2 } \\Delta V = P \\Delta V.$$
@@ -644,7 +683,7 @@ class CycleRectangle_T(variant.VariantTask):
         = \\frac{ {U_bonus_plus.numerator} }{ {U_bonus_plus.denominator} } * P_0 V_0, \\\\ 
     \\Delta U_{ 12 } &= \\frac 32 \\nu R T_2 - \\frac 32 \\nu R T_1 = \\frac 32 ({alpha}P_0V_0 - P_0V_0) = \\ldots = \\frac{ {U_bonus_12.numerator} }{ {U_bonus_12.denominator} } * P_0 V_0, \\\\ 
     \\eta &= \\frac{ A_\\text{ цикл } }{ Q_+ } = \\frac{ A_\\text{ цикл } }{ Q_{ 12 } + Q_{ 2* } } 
-        = \\frac{ A_\\text{ цикл } }{ A_{ 12 } + \\frac{ {U_bonus_12.numerator} }{ {U_bonus_12.denominator} } * P_0 V_0 + A_{ 2* } + \\Delta U_{ 2* } } = \\\\
+        = \\frac{ A_\\text{ цикл } }{ A_{ 12 } + \\Delta U_{ 12 } + A_{ 2* } + \\Delta U_{ 2* } } = \\\\
         &= \\frac{ \\frac{ {A_bonus_cycle.numerator} }{ {A_bonus_cycle.denominator} } * P_0V_0 }{ 0 + \\frac{ {U_bonus_12.numerator} }{ {U_bonus_12.denominator} } * P_0 V_0 + \\frac{ {A_bonus_plus.numerator} }{ {A_bonus_plus.denominator} } * P_0 V_0 + \\frac{ {U_bonus_plus.numerator} }{ {U_bonus_plus.denominator} } * P_0 V_0 }
          = \\frac{ \\frac{ {A_bonus_cycle.numerator} }{ {A_bonus_cycle.denominator} } }{ \\frac{ {U_bonus_12.numerator} }{ {U_bonus_12.denominator} } + \\frac{ {A_bonus_plus.numerator} }{ {A_bonus_plus.denominator} } + \\frac{ {U_bonus_plus.numerator} }{ {U_bonus_plus.denominator} } }
          = \\frac{ {eta_bonus.numerator} }{ {eta_bonus.denominator} } \\leftarrow \\text{ вжух и готово! }

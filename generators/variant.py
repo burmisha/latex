@@ -29,7 +29,8 @@ class LaTeXFormatter:
     def __substitute(self, line, replace_comma):
         assert isinstance(line, str)
         result = line.format(**(self._args))
-        if replace_comma:
+        # dirty hacks for tikz
+        if replace_comma and ('node' not in line) and ('draw' not in line):
             result = re.sub('(\\d)\.(\\d)', '\\1{,}\\2', result)
         result = re.sub(r'\+ +-', '-', result)
         return result
