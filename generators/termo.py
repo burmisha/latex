@@ -3,7 +3,7 @@
 import fractions
 
 import generators.variant as variant
-from generators.value import UnitValue, Consts
+from generators.value import UnitValue, Consts, Fraction
 
 import logging
 log = logging.getLogger(__name__)
@@ -501,10 +501,10 @@ class CycleRectangle(variant.VariantTask):
     '\\eta &= \\frac{ A_\\text{ цикл } }{ Q_+ } = \\frac{ A_\\text{ цикл } }{ Q_{ 12 } + Q_{ 23 } } '
     ' = \\frac{ A_\\text{ цикл } }{ A_{ 12 } + \\Delta U_{ 12 } + A_{ 23 } + \\Delta U_{ 23 } } = ',
     ' &= \\frac{ {A}P_0V_0 }{ 0 + \\frac 32 * {U12} * P_0V_0 + {A23}P_0V_0 + \\frac 32 * {U23} * P_0V_0 }'
-    ' = \\frac{ {A} }{ \\frac 32 * {U12} + {A23} + \\frac 32 * {U23} } = \\frac{ {eta.numerator} }{ {eta.denominator} } \\approx {eta_f}.',
+    ' = \\frac{ {A} }{ \\frac 32 * {U12} + {A23} + \\frac 32 * {U23} } = {eta:LaTeX} \\approx {eta_f}.',
 
     '\\eta_\\text{ Карно } &= 1 - \\frac{ T_\\text{ х } }{ T_\\text{ н } } = 1 - \\frac{ T_\\text{ 1 } }{ T_\\text{ 3 } }'
-    ' = 1 - \\frac{ T_0 }{ {t}T_0 } = 1 - \\frac 1{ {t} }  = \\frac{ {eta_max.numerator} }{ {eta_max.denominator} } \\approx {eta_max_f}.'
+    ' = 1 - \\frac{ T_0 }{ {t}T_0 } = 1 - \\frac 1{ {t} }  = {eta_max:LaTeX} \\approx {eta_max_f}.'
 ])
 class CycleRectangle_T(variant.VariantTask):
     def GetUpdate(self, alpha=None, beta=None, **kws):
@@ -513,14 +513,8 @@ class CycleRectangle_T(variant.VariantTask):
         A23 = (beta - 1) * alpha
         U23 = (beta - 1) * alpha
         U12 = alpha - 1
-        eta = fractions.Fraction(
-            numerator= 2 * A,
-            denominator=2 * A23 + 3 * U12 + 3 * U23,
-        )
-        eta_max = 1 - fractions.Fraction(
-            numerator=1,
-            denominator=alpha * beta,
-        )
+        eta = Fraction() * 2 * A / (2 * A23 + 3 * U12 + 3 * U23)
+        eta_max = Fraction() / (alpha * beta) * (-1) + 1
         return dict(
             t=t,
             A=A,
@@ -528,9 +522,9 @@ class CycleRectangle_T(variant.VariantTask):
             U23=U23,
             U12=U12,
             eta=eta,
-            eta_f='%.3f' % eta,
+            eta_f='%.3f' % float(eta),
             eta_max=eta_max,
-            eta_max_f='%.3f' % eta_max,
+            eta_max_f='%.3f' % float(eta_max),
         )
 
 
@@ -575,7 +569,7 @@ class CycleRectangle_T(variant.VariantTask):
     '\\eta &= \\frac{ A_\\text{ цикл } }{ Q_+ } = \\frac{ A_\\text{ цикл } }{ Q_{ 12 } + Q_{ 23 } } '
     ' = \\frac{ A_\\text{ цикл } }{ A_{ 12 } + \\Delta U_{ 12 } + A_{ 23 } + \\Delta U_{ 23 } } = ',
     ' &= \\frac{ \\frac 12 * {A} * P_0V_0 }{ 0 + \\frac 32 * {U12} * P_0V_0 + {A23}P_0V_0 + \\frac 32 * {U23} * P_0V_0 }'
-    ' = \\frac{ \\frac 12 * {A} }{ \\frac 32 * {U12} + {A23} + \\frac 32 * {U23} } = \\frac{ {eta.numerator} }{ {eta.denominator} } \\approx {eta_f}.',
+    ' = \\frac{ \\frac 12 * {A} }{ \\frac 32 * {U12} + {A23} + \\frac 32 * {U23} } = {eta:LaTeX} \\approx {eta_f}.',
 ])
 @variant.tex_notions('''
     График процесса не в масштабе (эта часть пока не готова и сделать автоматически аккуратно сложно), но с верными подписями (а для решения этого достаточно):
@@ -639,14 +633,14 @@ class CycleRectangle_T(variant.VariantTask):
 
     При этом изменится внутренняя энергия:
     \\begin{ align* }
-    \\Delta U 
+    \\Delta U
         &= U' - U = \\frac 32 \\nu R T' - \\frac 32 \\nu R T = \\frac 32 (P+\\Delta P) (V+\\Delta V) - \\frac 32 PV\\\\
         &= \\frac 32 ((P+\\Delta P) (V+\\Delta V) - PV) = \\frac 32 (P\\Delta V + V \\Delta P + \\Delta P \\Delta V).
     \\end{ align* }
 
     Рассмотрим малые изменения объёма, тогда и изменение давления будем малым (т.к. $\\Delta P = - \\frac{ P_0 }{ V_0 } \\Delta V$),
-    а третьим слагаемым в выражении для $\\Delta U$  можно пренебречь по сравнению с двумя другими: 
-    два первых это малые величины, а третье — произведение двух малых. 
+    а третьим слагаемым в выражении для $\\Delta U$  можно пренебречь по сравнению с двумя другими:
+    два первых это малые величины, а третье — произведение двух малых.
     Тогда $\\Delta U = \\frac 32 (P\\Delta V + V \\Delta P)$.
 
     Работа газа при этом малом изменении объёма — это площадь трапеции (тут ещё раз пренебрегли малым слагаемым):
@@ -657,38 +651,38 @@ class CycleRectangle_T(variant.VariantTask):
     Q
         &= \\frac 32 (P\\Delta V + V \\Delta P) + P \\Delta V =  \\frac 52 P\\Delta V + \\frac 32 V \\Delta P = \\\\
         &= \\frac 52 P\\Delta V + \\frac 32 V * \\cbr{ - \\frac{ P_0 }{ V_0 } \\Delta V } = \\frac{ \\Delta V }2 * \\cbr{ 5P - \\frac{ P_0 }{ V_0 } V } = \\\\
-        &= \\frac{ \\Delta V }2 * \\cbr{ 5 * \\cbr{ {a1}P_0 - \\frac{ P_0 }{ V_0 } V } - \\frac{ P_0 }{ V_0 } V } 
+        &= \\frac{ \\Delta V }2 * \\cbr{ 5 * \\cbr{ {a1}P_0 - \\frac{ P_0 }{ V_0 } V } - \\frac{ P_0 }{ V_0 } V }
          = \\frac{ \\Delta V * P_0 }2 * \\cbr{ 5 * {a1} - 8\\frac{ V }{ V_0 } }.
     \\end{ align* }
 
     Таком образом, знак количества теплоты $Q$ на участке 23 зависит от конкретного значения $V$:
     \\begin{ itemize }
-        \\item $\\Delta V > 0$ на всём участке 23, поскольку газ расширяется, 
+        \\item $\\Delta V > 0$ на всём участке 23, поскольку газ расширяется,
         \\item $P > 0$ — всегда, у нас идеальный газ, удары о стенки сосуда абсолютно упругие, а молекулы не взаимодействуют и поэтому давление только положительно,
-        \\item если $5 * {a1} - 8\\frac{ V }{ V_0 } > 0$ — тепло подводят, если же меньше нуля — отводят. 
+        \\item если $5 * {a1} - 8\\frac{ V }{ V_0 } > 0$ — тепло подводят, если же меньше нуля — отводят.
     \\end{ itemize }
-    Решая последнее неравенство, получаем конкретное значение $V^*$: при $V < V^*$ тепло подводят, далее~— отводят. 
+    Решая последнее неравенство, получаем конкретное значение $V^*$: при $V < V^*$ тепло подводят, далее~— отводят.
     Тут *~--- некоторая точка между точками 2 и 3, конкретные значения надо досчитать:
-    $$V^* = V_0 * \\frac{ 5 * {a1} }8 = \\frac{ {V_star.numerator} }{ {V_star.denominator} } * V_0 \\implies P^* = {a1}P_0 - \\frac{ P_0 }{ V_0 } V^* = \\ldots = \\frac{ {P_star.numerator} }{ {P_star.denominator} } * P_0.$$
+    $$V^* = V_0 * \\frac{ 5 * {a1} }8 = {V_star:LaTeX} * V_0 \\implies P^* = {a1}P_0 - \\frac{ P_0 }{ V_0 } V^* = \\ldots = {P_star:LaTeX} * P_0.$$
 
-    Т.е. чтобы вычислить $Q_+$, надо сложить количества теплоты на участке 12 и лишь части участка 23 — участке 2*, 
+    Т.е. чтобы вычислить $Q_+$, надо сложить количества теплоты на участке 12 и лишь части участка 23 — участке 2*,
     той его части где это количество теплоты положительно. Имеем: $Q_+ = Q_{ 12 } + Q_{ 2* }$.
 
-    Теперь возвращаемся к циклу целиком и получаем: 
+    Теперь возвращаемся к циклу целиком и получаем:
     \\begin{ align* }
-    A_\\text{ цикл } &= \\frac 12 * ({alpha}P_0 - P_0) * ({alpha}V_0 - V_0) = \\frac{ {A_bonus_cycle.numerator} }{ {A_bonus_cycle.denominator} } * P_0V_0, \\\\
-    A_{ 2* } &= \\frac{ P^* + {alpha}P_0 }2 * (V^* - V_0) 
-        = \\frac{ \\frac{ {P_star.numerator} }{ {P_star.denominator} } * P_0 + {alpha}P_0 }2 * \\cbr{ \\frac{ {V_star.numerator} }{ {V_star.denominator} } * V_0 - V_0 }
-        = \\ldots = \\frac{ {A_bonus_plus.numerator} }{ {A_bonus_plus.denominator} } * P_0 V_0, \\\\
-    \\Delta U_{ 2* } &= \\frac 32 \\nu R T^* - \\frac 32 \\nu R T_2 = \\frac 32 (P^*V^* - P_0 * {alpha}V_0) 
-        = \\frac 32 \\cbr{ \\frac{ {P_star.numerator} }{ {P_star.denominator} } * P_0 * \\frac{ {V_star.numerator} }{ {V_star.denominator} } * V_0 - P_0 * {alpha}V_0 }
-        = \\frac{ {U_bonus_plus.numerator} }{ {U_bonus_plus.denominator} } * P_0 V_0, \\\\ 
-    \\Delta U_{ 12 } &= \\frac 32 \\nu R T_2 - \\frac 32 \\nu R T_1 = \\frac 32 ({alpha}P_0V_0 - P_0V_0) = \\ldots = \\frac{ {U_bonus_12.numerator} }{ {U_bonus_12.denominator} } * P_0 V_0, \\\\ 
-    \\eta &= \\frac{ A_\\text{ цикл } }{ Q_+ } = \\frac{ A_\\text{ цикл } }{ Q_{ 12 } + Q_{ 2* } } 
+    A_\\text{ цикл } &= \\frac 12 * ({alpha}P_0 - P_0) * ({alpha}V_0 - V_0) = {A_bonus_cycle:LaTeX} * P_0V_0, \\\\
+    A_{ 2* } &= \\frac{ P^* + {alpha}P_0 }2 * (V^* - V_0)
+        = \\frac{ {P_star:LaTeX} * P_0 + {alpha}P_0 }2 * \\cbr{ {V_star:LaTeX} * V_0 - V_0 }
+        = \\ldots = {A_bonus_plus:LaTeX} * P_0 V_0, \\\\
+    \\Delta U_{ 2* } &= \\frac 32 \\nu R T^* - \\frac 32 \\nu R T_2 = \\frac 32 (P^*V^* - P_0 * {alpha}V_0)
+        = \\frac 32 \\cbr{ {P_star:LaTeX} * P_0 * {V_star:LaTeX} * V_0 - P_0 * {alpha}V_0 }
+        = {U_bonus_plus:LaTeX} * P_0 V_0, \\\\
+    \\Delta U_{ 12 } &= \\frac 32 \\nu R T_2 - \\frac 32 \\nu R T_1 = \\frac 32 ({alpha}P_0V_0 - P_0V_0) = \\ldots = {U_bonus_12:LaTeX} * P_0 V_0, \\\\
+    \\eta &= \\frac{ A_\\text{ цикл } }{ Q_+ } = \\frac{ A_\\text{ цикл } }{ Q_{ 12 } + Q_{ 2* } }
         = \\frac{ A_\\text{ цикл } }{ A_{ 12 } + \\Delta U_{ 12 } + A_{ 2* } + \\Delta U_{ 2* } } = \\\\
-        &= \\frac{ \\frac{ {A_bonus_cycle.numerator} }{ {A_bonus_cycle.denominator} } * P_0V_0 }{ 0 + \\frac{ {U_bonus_12.numerator} }{ {U_bonus_12.denominator} } * P_0 V_0 + \\frac{ {A_bonus_plus.numerator} }{ {A_bonus_plus.denominator} } * P_0 V_0 + \\frac{ {U_bonus_plus.numerator} }{ {U_bonus_plus.denominator} } * P_0 V_0 }
-         = \\frac{ \\frac{ {A_bonus_cycle.numerator} }{ {A_bonus_cycle.denominator} } }{ \\frac{ {U_bonus_12.numerator} }{ {U_bonus_12.denominator} } + \\frac{ {A_bonus_plus.numerator} }{ {A_bonus_plus.denominator} } + \\frac{ {U_bonus_plus.numerator} }{ {U_bonus_plus.denominator} } }
-         = \\frac{ {eta_bonus.numerator} }{ {eta_bonus.denominator} } \\leftarrow \\text{ вжух и готово! }
+        &= \\frac{ {A_bonus_cycle:LaTeX} * P_0V_0 }{ 0 + {U_bonus_12:LaTeX} * P_0 V_0 + {A_bonus_plus:LaTeX} * P_0 V_0 + {U_bonus_plus:LaTeX} * P_0 V_0 }
+         = \\frac{ {A_bonus_cycle:LaTeX} }{ {U_bonus_12:LaTeX} + {A_bonus_plus:LaTeX} + {U_bonus_plus:LaTeX} }
+         = {eta_bonus:LaTeX} \\leftarrow \\text{ вжух и готово! }
     \\end{ align* }
 '''
 )
@@ -699,27 +693,24 @@ class CycleTriangleUp_T(variant.VariantTask):
         A23 = (beta - 1) * alpha
         U23 = (beta - 1) * alpha
         U12 = alpha - 1
-        eta = fractions.Fraction(
-            numerator=A,
-            denominator=2 * A23 + 3 * U12 + 3 * U23,
-        )
-        A_bonus_cycle = fractions.Fraction(
-            numerator=(alpha - 1) ** 2,
-            denominator=2,
-        )
-        A_bonus_plus = fractions.Fraction(
-            numerator=(11 * alpha + 3) * (5 * alpha - 3),
-            denominator=16 * 8,
-        )
-        U_bonus_plus = (fractions.Fraction(
-            numerator=15 * (alpha + 1) ** 2,
-            denominator=64,
-        ) - alpha) * 3 / 2
-        U_bonus_12 = fractions.Fraction(
-            numerator=alpha - 1,
-            denominator=1,
-        ) * 3 / 2
-        eta_bonus = A_bonus_cycle / (U_bonus_plus + A_bonus_plus + U_bonus_12)
+        eta = Fraction() * A / (2 * A23 + 3 * U12 + 3 * U23)
+
+        a1 = alpha + 1
+        A_bonus_cycle = Fraction() * (alpha - 1) ** 2 / 2
+        A_bonus_plus = Fraction() * (11 * alpha + 3) * (5 * alpha - 3) / (16 * 8)
+        U_bonus_plus = (Fraction() * 15 * (alpha + 1) ** 2 / 64 - alpha) * 3 / 2
+        U_bonus_12 = Fraction() * (alpha - 1) / 1 * 3 / 2
+        eta_bonus = Fraction() * A_bonus_cycle / (U_bonus_plus + A_bonus_plus + U_bonus_12)
+
+        a1=42
+        A_bonus_cycle=Fraction() * 42 / 23
+        A_bonus_plus=Fraction() * 42 / 23
+        U_bonus_plus=Fraction() * 42 / 23
+        U_bonus_12=Fraction() * 42 / 23
+        eta_bonus=Fraction() * 42 / 23
+        V_star=Fraction() * 42 / 23
+        P_star=Fraction() * 42 / 23
+
         return dict(
             t=t,
             A=A,
@@ -728,22 +719,14 @@ class CycleTriangleUp_T(variant.VariantTask):
             U12=U12,
             eta=eta,
             eta_f='%.3f' % eta,
-            # a1=alpha + 1,
-            # A_bonus_cycle=A_bonus_cycle,
-            # A_bonus_plus=A_bonus_plus,
-            # U_bonus_plus=U_bonus_plus,
-            # U_bonus_12=U_bonus_12,
-            # eta_bonus=eta_bonus,
-            # V_star=fractions.Fraction(numerator=(alpha + 1) * 5, denominator=8),
-            # P_star=fractions.Fraction(numerator=(alpha + 1) * 3, denominator=8),
-            a1=42,
-            A_bonus_cycle=fractions.Fraction(numerator=42, denominator=23),
-            A_bonus_plus=fractions.Fraction(numerator=42, denominator=23),
-            U_bonus_plus=fractions.Fraction(numerator=42, denominator=23),
-            U_bonus_12=fractions.Fraction(numerator=42, denominator=23),
-            eta_bonus=fractions.Fraction(numerator=42, denominator=23),
-            V_star=fractions.Fraction(numerator=42, denominator=23),
-            P_star=fractions.Fraction(numerator=42, denominator=23),
+            a1=a1,
+            A_bonus_cycle=A_bonus_cycle,
+            A_bonus_plus=A_bonus_plus,
+            U_bonus_plus=U_bonus_plus,
+            U_bonus_12=U_bonus_12,
+            eta_bonus=eta_bonus,
+            V_star=V_star,
+            P_star=P_star,
         )
 
 
