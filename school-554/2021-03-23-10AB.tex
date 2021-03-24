@@ -28,7 +28,7 @@
     \\
     A_\text{цикл} &= \frac 12 (4P_0 - P_0)(3V_0 - V_0) = \frac 12 \cdot 6 \cdot P_0V_0, \\
     A_{23} &= 3P_0 \cdot (4V_0 - V_0) = 9P_0V_0, \\
-    \Delta U_{23} &= \frac 32 \nu R T_3 - \frac 32 \nu R T_3 = \frac 32 P_3 V_3 - \frac 32 P_2 V_2 = \frac 32 \cdot 3 P_0 \cdot 4 V_0 -  \frac 32 \cdot 3 P_0 \cdot V_0 = \frac 32 \cdot 9 \cdot P_0V_0, \\
+    \Delta U_{23} &= \frac 32 \nu R T_3 - \frac 32 \nu R T_2 = \frac 32 P_3 V_3 - \frac 32 P_2 V_2 = \frac 32 \cdot 3 P_0 \cdot 4 V_0 -  \frac 32 \cdot 3 P_0 \cdot V_0 = \frac 32 \cdot 9 \cdot P_0V_0, \\
     \Delta U_{12} &= \frac 32 \nu R T_2 - \frac 32 \nu R T_1 = \frac 32 P_2 V_2 - \frac 32 P_1 V_1 = \frac 32 \cdot 3 P_0V_0 - \frac 32 P_0V_0 = \frac 32 \cdot 2 \cdot P_0V_0.
     \\
     \eta &= \frac{A_\text{цикл}}{Q_+} = \frac{A_\text{цикл}}{Q_{12} + Q_{23}}  = \frac{A_\text{цикл}}{A_{12} + \Delta U_{12} + A_{23} + \Delta U_{23}} =  \\
@@ -44,6 +44,27 @@
         \item Определите точку росы для этого воздуха.
         \item Какой станет относительная влажность этого воздуха, если нагреть его до $80\celsius$?
     \end{itemize}
+}
+\answer{%
+    \begin{align*}
+    &\text{Значения плотности насыщенного водяного пара определяем по таблице:} \\
+    &\rho_{ \text{ нас.
+    пара 25 } \celsius } = 23{,}000\,\frac{\text{г}}{\text{м}^{3}}, \rho_{ \text{ нас.
+    пара 80 } \celsius } = 293{,}000\,\frac{\text{г}}{\text{м}^{3}}.
+    \\
+    \varphi_1 &= \frac{ \rho_\text{ пара } }{ \rho_{ \text{ нас.
+    пара 25 } \celsius } } \implies { \rho_\text{ пара } } = \rho_{ \text{ нас.
+    пара 25 } \celsius } \cdot \varphi_1 = 23{,}000\,\frac{\text{г}}{\text{м}^{3}} \cdot 0{,}70 = 16{,}100\,\frac{\text{г}}{\text{м}^{3}}.
+    \\
+    &\text{По таблице определяем, при какой температуре пар с такой плотностью станет насыщенным: }  \\
+    t_\text{росы} &= 18{,}8\celsius, \\
+    \varphi_2 &= \frac{ \rho_\text{ пара } }{ \rho_{ \text{ нас.
+    пара 80 } \celsius } } = \frac{\rho_{ \text{ нас.
+    пара 25 } \celsius } \cdot \varphi_1}{ \rho_{ \text{ нас.
+    пара 80 } \celsius } }= \varphi_1 \cdot \frac{ \rho_{ \text{ нас.
+    пара 25 } \celsius } }{ \rho_{ \text{ нас.
+    пара 80 } \celsius } } = 0{,}70 \cdot \frac{ 23{,}000\,\frac{\text{г}}{\text{м}^{3}} }{ 293{,}000\,\frac{\text{г}}{\text{м}^{3}} } = 0{,}055 \approx 5{,}5\%.
+    \end{align*}
 }
 \solutionspace{80pt}
 
@@ -95,7 +116,7 @@
     \\
     A_\text{цикл} &= \frac 12 (6P_0 - P_0)(2V_0 - V_0) = \frac 12 \cdot 5 \cdot P_0V_0, \\
     A_{23} &= 2P_0 \cdot (6V_0 - V_0) = 10P_0V_0, \\
-    \Delta U_{23} &= \frac 32 \nu R T_3 - \frac 32 \nu R T_3 = \frac 32 P_3 V_3 - \frac 32 P_2 V_2 = \frac 32 \cdot 2 P_0 \cdot 6 V_0 -  \frac 32 \cdot 2 P_0 \cdot V_0 = \frac 32 \cdot 10 \cdot P_0V_0, \\
+    \Delta U_{23} &= \frac 32 \nu R T_3 - \frac 32 \nu R T_2 = \frac 32 P_3 V_3 - \frac 32 P_2 V_2 = \frac 32 \cdot 2 P_0 \cdot 6 V_0 -  \frac 32 \cdot 2 P_0 \cdot V_0 = \frac 32 \cdot 10 \cdot P_0V_0, \\
     \Delta U_{12} &= \frac 32 \nu R T_2 - \frac 32 \nu R T_1 = \frac 32 P_2 V_2 - \frac 32 P_1 V_1 = \frac 32 \cdot 2 P_0V_0 - \frac 32 P_0V_0 = \frac 32 \cdot 1 \cdot P_0V_0.
     \\
     \eta &= \frac{A_\text{цикл}}{Q_+} = \frac{A_\text{цикл}}{Q_{12} + Q_{23}}  = \frac{A_\text{цикл}}{A_{12} + \Delta U_{12} + A_{23} + \Delta U_{23}} =  \\
@@ -111,6 +132,27 @@
         \item Определите точку росы для этого воздуха.
         \item Какой станет относительная влажность этого воздуха, если нагреть его до $60\celsius$?
     \end{itemize}
+}
+\answer{%
+    \begin{align*}
+    &\text{Значения плотности насыщенного водяного пара определяем по таблице:} \\
+    &\rho_{ \text{ нас.
+    пара 30 } \celsius } = 30{,}300\,\frac{\text{г}}{\text{м}^{3}}, \rho_{ \text{ нас.
+    пара 60 } \celsius } = 130{,}000\,\frac{\text{г}}{\text{м}^{3}}.
+    \\
+    \varphi_1 &= \frac{ \rho_\text{ пара } }{ \rho_{ \text{ нас.
+    пара 30 } \celsius } } \implies { \rho_\text{ пара } } = \rho_{ \text{ нас.
+    пара 30 } \celsius } \cdot \varphi_1 = 30{,}300\,\frac{\text{г}}{\text{м}^{3}} \cdot 0{,}70 = 21{,}210\,\frac{\text{г}}{\text{м}^{3}}.
+    \\
+    &\text{По таблице определяем, при какой температуре пар с такой плотностью станет насыщенным: }  \\
+    t_\text{росы} &= 23{,}5\celsius, \\
+    \varphi_2 &= \frac{ \rho_\text{ пара } }{ \rho_{ \text{ нас.
+    пара 60 } \celsius } } = \frac{\rho_{ \text{ нас.
+    пара 30 } \celsius } \cdot \varphi_1}{ \rho_{ \text{ нас.
+    пара 60 } \celsius } }= \varphi_1 \cdot \frac{ \rho_{ \text{ нас.
+    пара 30 } \celsius } }{ \rho_{ \text{ нас.
+    пара 60 } \celsius } } = 0{,}70 \cdot \frac{ 30{,}300\,\frac{\text{г}}{\text{м}^{3}} }{ 130{,}000\,\frac{\text{г}}{\text{м}^{3}} } = 0{,}163 \approx 16{,}3\%.
+    \end{align*}
 }
 \solutionspace{80pt}
 
@@ -162,7 +204,7 @@
     \\
     A_\text{цикл} &= \frac 12 (6P_0 - P_0)(6V_0 - V_0) = \frac 12 \cdot 25 \cdot P_0V_0, \\
     A_{23} &= 6P_0 \cdot (6V_0 - V_0) = 30P_0V_0, \\
-    \Delta U_{23} &= \frac 32 \nu R T_3 - \frac 32 \nu R T_3 = \frac 32 P_3 V_3 - \frac 32 P_2 V_2 = \frac 32 \cdot 6 P_0 \cdot 6 V_0 -  \frac 32 \cdot 6 P_0 \cdot V_0 = \frac 32 \cdot 30 \cdot P_0V_0, \\
+    \Delta U_{23} &= \frac 32 \nu R T_3 - \frac 32 \nu R T_2 = \frac 32 P_3 V_3 - \frac 32 P_2 V_2 = \frac 32 \cdot 6 P_0 \cdot 6 V_0 -  \frac 32 \cdot 6 P_0 \cdot V_0 = \frac 32 \cdot 30 \cdot P_0V_0, \\
     \Delta U_{12} &= \frac 32 \nu R T_2 - \frac 32 \nu R T_1 = \frac 32 P_2 V_2 - \frac 32 P_1 V_1 = \frac 32 \cdot 6 P_0V_0 - \frac 32 P_0V_0 = \frac 32 \cdot 5 \cdot P_0V_0.
     \\
     \eta &= \frac{A_\text{цикл}}{Q_+} = \frac{A_\text{цикл}}{Q_{12} + Q_{23}}  = \frac{A_\text{цикл}}{A_{12} + \Delta U_{12} + A_{23} + \Delta U_{23}} =  \\
@@ -178,6 +220,27 @@
         \item Определите точку росы для этого воздуха.
         \item Какой станет относительная влажность этого воздуха, если нагреть его до $70\celsius$?
     \end{itemize}
+}
+\answer{%
+    \begin{align*}
+    &\text{Значения плотности насыщенного водяного пара определяем по таблице:} \\
+    &\rho_{ \text{ нас.
+    пара 15 } \celsius } = 12{,}800\,\frac{\text{г}}{\text{м}^{3}}, \rho_{ \text{ нас.
+    пара 70 } \celsius } = 198{,}000\,\frac{\text{г}}{\text{м}^{3}}.
+    \\
+    \varphi_1 &= \frac{ \rho_\text{ пара } }{ \rho_{ \text{ нас.
+    пара 15 } \celsius } } \implies { \rho_\text{ пара } } = \rho_{ \text{ нас.
+    пара 15 } \celsius } \cdot \varphi_1 = 12{,}800\,\frac{\text{г}}{\text{м}^{3}} \cdot 0{,}75 = 9{,}600\,\frac{\text{г}}{\text{м}^{3}}.
+    \\
+    &\text{По таблице определяем, при какой температуре пар с такой плотностью станет насыщенным: }  \\
+    t_\text{росы} &= 10{,}3\celsius, \\
+    \varphi_2 &= \frac{ \rho_\text{ пара } }{ \rho_{ \text{ нас.
+    пара 70 } \celsius } } = \frac{\rho_{ \text{ нас.
+    пара 15 } \celsius } \cdot \varphi_1}{ \rho_{ \text{ нас.
+    пара 70 } \celsius } }= \varphi_1 \cdot \frac{ \rho_{ \text{ нас.
+    пара 15 } \celsius } }{ \rho_{ \text{ нас.
+    пара 70 } \celsius } } = 0{,}75 \cdot \frac{ 12{,}800\,\frac{\text{г}}{\text{м}^{3}} }{ 198{,}000\,\frac{\text{г}}{\text{м}^{3}} } = 0{,}048 \approx 4{,}8\%.
+    \end{align*}
 }
 \solutionspace{80pt}
 
@@ -229,7 +292,7 @@
     \\
     A_\text{цикл} &= \frac 12 (3P_0 - P_0)(5V_0 - V_0) = \frac 12 \cdot 8 \cdot P_0V_0, \\
     A_{23} &= 5P_0 \cdot (3V_0 - V_0) = 10P_0V_0, \\
-    \Delta U_{23} &= \frac 32 \nu R T_3 - \frac 32 \nu R T_3 = \frac 32 P_3 V_3 - \frac 32 P_2 V_2 = \frac 32 \cdot 5 P_0 \cdot 3 V_0 -  \frac 32 \cdot 5 P_0 \cdot V_0 = \frac 32 \cdot 10 \cdot P_0V_0, \\
+    \Delta U_{23} &= \frac 32 \nu R T_3 - \frac 32 \nu R T_2 = \frac 32 P_3 V_3 - \frac 32 P_2 V_2 = \frac 32 \cdot 5 P_0 \cdot 3 V_0 -  \frac 32 \cdot 5 P_0 \cdot V_0 = \frac 32 \cdot 10 \cdot P_0V_0, \\
     \Delta U_{12} &= \frac 32 \nu R T_2 - \frac 32 \nu R T_1 = \frac 32 P_2 V_2 - \frac 32 P_1 V_1 = \frac 32 \cdot 5 P_0V_0 - \frac 32 P_0V_0 = \frac 32 \cdot 4 \cdot P_0V_0.
     \\
     \eta &= \frac{A_\text{цикл}}{Q_+} = \frac{A_\text{цикл}}{Q_{12} + Q_{23}}  = \frac{A_\text{цикл}}{A_{12} + \Delta U_{12} + A_{23} + \Delta U_{23}} =  \\
@@ -245,6 +308,27 @@
         \item Определите точку росы для этого воздуха.
         \item Какой станет относительная влажность этого воздуха, если нагреть его до $40\celsius$?
     \end{itemize}
+}
+\answer{%
+    \begin{align*}
+    &\text{Значения плотности насыщенного водяного пара определяем по таблице:} \\
+    &\rho_{ \text{ нас.
+    пара 20 } \celsius } = 17{,}300\,\frac{\text{г}}{\text{м}^{3}}, \rho_{ \text{ нас.
+    пара 40 } \celsius } = 51{,}200\,\frac{\text{г}}{\text{м}^{3}}.
+    \\
+    \varphi_1 &= \frac{ \rho_\text{ пара } }{ \rho_{ \text{ нас.
+    пара 20 } \celsius } } \implies { \rho_\text{ пара } } = \rho_{ \text{ нас.
+    пара 20 } \celsius } \cdot \varphi_1 = 17{,}300\,\frac{\text{г}}{\text{м}^{3}} \cdot 0{,}60 = 10{,}380\,\frac{\text{г}}{\text{м}^{3}}.
+    \\
+    &\text{По таблице определяем, при какой температуре пар с такой плотностью станет насыщенным: }  \\
+    t_\text{росы} &= 11{,}5\celsius, \\
+    \varphi_2 &= \frac{ \rho_\text{ пара } }{ \rho_{ \text{ нас.
+    пара 40 } \celsius } } = \frac{\rho_{ \text{ нас.
+    пара 20 } \celsius } \cdot \varphi_1}{ \rho_{ \text{ нас.
+    пара 40 } \celsius } }= \varphi_1 \cdot \frac{ \rho_{ \text{ нас.
+    пара 20 } \celsius } }{ \rho_{ \text{ нас.
+    пара 40 } \celsius } } = 0{,}60 \cdot \frac{ 17{,}300\,\frac{\text{г}}{\text{м}^{3}} }{ 51{,}200\,\frac{\text{г}}{\text{м}^{3}} } = 0{,}203 \approx 20{,}3\%.
+    \end{align*}
 }
 \solutionspace{80pt}
 
@@ -296,7 +380,7 @@
     \\
     A_\text{цикл} &= \frac 12 (6P_0 - P_0)(3V_0 - V_0) = \frac 12 \cdot 10 \cdot P_0V_0, \\
     A_{23} &= 3P_0 \cdot (6V_0 - V_0) = 15P_0V_0, \\
-    \Delta U_{23} &= \frac 32 \nu R T_3 - \frac 32 \nu R T_3 = \frac 32 P_3 V_3 - \frac 32 P_2 V_2 = \frac 32 \cdot 3 P_0 \cdot 6 V_0 -  \frac 32 \cdot 3 P_0 \cdot V_0 = \frac 32 \cdot 15 \cdot P_0V_0, \\
+    \Delta U_{23} &= \frac 32 \nu R T_3 - \frac 32 \nu R T_2 = \frac 32 P_3 V_3 - \frac 32 P_2 V_2 = \frac 32 \cdot 3 P_0 \cdot 6 V_0 -  \frac 32 \cdot 3 P_0 \cdot V_0 = \frac 32 \cdot 15 \cdot P_0V_0, \\
     \Delta U_{12} &= \frac 32 \nu R T_2 - \frac 32 \nu R T_1 = \frac 32 P_2 V_2 - \frac 32 P_1 V_1 = \frac 32 \cdot 3 P_0V_0 - \frac 32 P_0V_0 = \frac 32 \cdot 2 \cdot P_0V_0.
     \\
     \eta &= \frac{A_\text{цикл}}{Q_+} = \frac{A_\text{цикл}}{Q_{12} + Q_{23}}  = \frac{A_\text{цикл}}{A_{12} + \Delta U_{12} + A_{23} + \Delta U_{23}} =  \\
@@ -312,6 +396,27 @@
         \item Определите точку росы для этого воздуха.
         \item Какой станет относительная влажность этого воздуха, если нагреть его до $50\celsius$?
     \end{itemize}
+}
+\answer{%
+    \begin{align*}
+    &\text{Значения плотности насыщенного водяного пара определяем по таблице:} \\
+    &\rho_{ \text{ нас.
+    пара 25 } \celsius } = 23{,}000\,\frac{\text{г}}{\text{м}^{3}}, \rho_{ \text{ нас.
+    пара 50 } \celsius } = 83{,}000\,\frac{\text{г}}{\text{м}^{3}}.
+    \\
+    \varphi_1 &= \frac{ \rho_\text{ пара } }{ \rho_{ \text{ нас.
+    пара 25 } \celsius } } \implies { \rho_\text{ пара } } = \rho_{ \text{ нас.
+    пара 25 } \celsius } \cdot \varphi_1 = 23{,}000\,\frac{\text{г}}{\text{м}^{3}} \cdot 0{,}45 = 10{,}350\,\frac{\text{г}}{\text{м}^{3}}.
+    \\
+    &\text{По таблице определяем, при какой температуре пар с такой плотностью станет насыщенным: }  \\
+    t_\text{росы} &= 11{,}5\celsius, \\
+    \varphi_2 &= \frac{ \rho_\text{ пара } }{ \rho_{ \text{ нас.
+    пара 50 } \celsius } } = \frac{\rho_{ \text{ нас.
+    пара 25 } \celsius } \cdot \varphi_1}{ \rho_{ \text{ нас.
+    пара 50 } \celsius } }= \varphi_1 \cdot \frac{ \rho_{ \text{ нас.
+    пара 25 } \celsius } }{ \rho_{ \text{ нас.
+    пара 50 } \celsius } } = 0{,}45 \cdot \frac{ 23{,}000\,\frac{\text{г}}{\text{м}^{3}} }{ 83{,}000\,\frac{\text{г}}{\text{м}^{3}} } = 0{,}125 \approx 12{,}5\%.
+    \end{align*}
 }
 \solutionspace{80pt}
 
@@ -363,7 +468,7 @@
     \\
     A_\text{цикл} &= \frac 12 (6P_0 - P_0)(2V_0 - V_0) = \frac 12 \cdot 5 \cdot P_0V_0, \\
     A_{23} &= 2P_0 \cdot (6V_0 - V_0) = 10P_0V_0, \\
-    \Delta U_{23} &= \frac 32 \nu R T_3 - \frac 32 \nu R T_3 = \frac 32 P_3 V_3 - \frac 32 P_2 V_2 = \frac 32 \cdot 2 P_0 \cdot 6 V_0 -  \frac 32 \cdot 2 P_0 \cdot V_0 = \frac 32 \cdot 10 \cdot P_0V_0, \\
+    \Delta U_{23} &= \frac 32 \nu R T_3 - \frac 32 \nu R T_2 = \frac 32 P_3 V_3 - \frac 32 P_2 V_2 = \frac 32 \cdot 2 P_0 \cdot 6 V_0 -  \frac 32 \cdot 2 P_0 \cdot V_0 = \frac 32 \cdot 10 \cdot P_0V_0, \\
     \Delta U_{12} &= \frac 32 \nu R T_2 - \frac 32 \nu R T_1 = \frac 32 P_2 V_2 - \frac 32 P_1 V_1 = \frac 32 \cdot 2 P_0V_0 - \frac 32 P_0V_0 = \frac 32 \cdot 1 \cdot P_0V_0.
     \\
     \eta &= \frac{A_\text{цикл}}{Q_+} = \frac{A_\text{цикл}}{Q_{12} + Q_{23}}  = \frac{A_\text{цикл}}{A_{12} + \Delta U_{12} + A_{23} + \Delta U_{23}} =  \\
@@ -379,6 +484,27 @@
         \item Определите точку росы для этого воздуха.
         \item Какой станет относительная влажность этого воздуха, если нагреть его до $50\celsius$?
     \end{itemize}
+}
+\answer{%
+    \begin{align*}
+    &\text{Значения плотности насыщенного водяного пара определяем по таблице:} \\
+    &\rho_{ \text{ нас.
+    пара 20 } \celsius } = 17{,}300\,\frac{\text{г}}{\text{м}^{3}}, \rho_{ \text{ нас.
+    пара 50 } \celsius } = 83{,}000\,\frac{\text{г}}{\text{м}^{3}}.
+    \\
+    \varphi_1 &= \frac{ \rho_\text{ пара } }{ \rho_{ \text{ нас.
+    пара 20 } \celsius } } \implies { \rho_\text{ пара } } = \rho_{ \text{ нас.
+    пара 20 } \celsius } \cdot \varphi_1 = 17{,}300\,\frac{\text{г}}{\text{м}^{3}} \cdot 0{,}75 = 12{,}975\,\frac{\text{г}}{\text{м}^{3}}.
+    \\
+    &\text{По таблице определяем, при какой температуре пар с такой плотностью станет насыщенным: }  \\
+    t_\text{росы} &= 15{,}2\celsius, \\
+    \varphi_2 &= \frac{ \rho_\text{ пара } }{ \rho_{ \text{ нас.
+    пара 50 } \celsius } } = \frac{\rho_{ \text{ нас.
+    пара 20 } \celsius } \cdot \varphi_1}{ \rho_{ \text{ нас.
+    пара 50 } \celsius } }= \varphi_1 \cdot \frac{ \rho_{ \text{ нас.
+    пара 20 } \celsius } }{ \rho_{ \text{ нас.
+    пара 50 } \celsius } } = 0{,}75 \cdot \frac{ 17{,}300\,\frac{\text{г}}{\text{м}^{3}} }{ 83{,}000\,\frac{\text{г}}{\text{м}^{3}} } = 0{,}156 \approx 15{,}6\%.
+    \end{align*}
 }
 \solutionspace{80pt}
 
@@ -430,7 +556,7 @@
     \\
     A_\text{цикл} &= \frac 12 (6P_0 - P_0)(5V_0 - V_0) = \frac 12 \cdot 20 \cdot P_0V_0, \\
     A_{23} &= 5P_0 \cdot (6V_0 - V_0) = 25P_0V_0, \\
-    \Delta U_{23} &= \frac 32 \nu R T_3 - \frac 32 \nu R T_3 = \frac 32 P_3 V_3 - \frac 32 P_2 V_2 = \frac 32 \cdot 5 P_0 \cdot 6 V_0 -  \frac 32 \cdot 5 P_0 \cdot V_0 = \frac 32 \cdot 25 \cdot P_0V_0, \\
+    \Delta U_{23} &= \frac 32 \nu R T_3 - \frac 32 \nu R T_2 = \frac 32 P_3 V_3 - \frac 32 P_2 V_2 = \frac 32 \cdot 5 P_0 \cdot 6 V_0 -  \frac 32 \cdot 5 P_0 \cdot V_0 = \frac 32 \cdot 25 \cdot P_0V_0, \\
     \Delta U_{12} &= \frac 32 \nu R T_2 - \frac 32 \nu R T_1 = \frac 32 P_2 V_2 - \frac 32 P_1 V_1 = \frac 32 \cdot 5 P_0V_0 - \frac 32 P_0V_0 = \frac 32 \cdot 4 \cdot P_0V_0.
     \\
     \eta &= \frac{A_\text{цикл}}{Q_+} = \frac{A_\text{цикл}}{Q_{12} + Q_{23}}  = \frac{A_\text{цикл}}{A_{12} + \Delta U_{12} + A_{23} + \Delta U_{23}} =  \\
@@ -446,6 +572,27 @@
         \item Определите точку росы для этого воздуха.
         \item Какой станет относительная влажность этого воздуха, если нагреть его до $40\celsius$?
     \end{itemize}
+}
+\answer{%
+    \begin{align*}
+    &\text{Значения плотности насыщенного водяного пара определяем по таблице:} \\
+    &\rho_{ \text{ нас.
+    пара 20 } \celsius } = 17{,}300\,\frac{\text{г}}{\text{м}^{3}}, \rho_{ \text{ нас.
+    пара 40 } \celsius } = 51{,}200\,\frac{\text{г}}{\text{м}^{3}}.
+    \\
+    \varphi_1 &= \frac{ \rho_\text{ пара } }{ \rho_{ \text{ нас.
+    пара 20 } \celsius } } \implies { \rho_\text{ пара } } = \rho_{ \text{ нас.
+    пара 20 } \celsius } \cdot \varphi_1 = 17{,}300\,\frac{\text{г}}{\text{м}^{3}} \cdot 0{,}45 = 7{,}785\,\frac{\text{г}}{\text{м}^{3}}.
+    \\
+    &\text{По таблице определяем, при какой температуре пар с такой плотностью станет насыщенным: }  \\
+    t_\text{росы} &= 7{,}0\celsius, \\
+    \varphi_2 &= \frac{ \rho_\text{ пара } }{ \rho_{ \text{ нас.
+    пара 40 } \celsius } } = \frac{\rho_{ \text{ нас.
+    пара 20 } \celsius } \cdot \varphi_1}{ \rho_{ \text{ нас.
+    пара 40 } \celsius } }= \varphi_1 \cdot \frac{ \rho_{ \text{ нас.
+    пара 20 } \celsius } }{ \rho_{ \text{ нас.
+    пара 40 } \celsius } } = 0{,}45 \cdot \frac{ 17{,}300\,\frac{\text{г}}{\text{м}^{3}} }{ 51{,}200\,\frac{\text{г}}{\text{м}^{3}} } = 0{,}152 \approx 15{,}2\%.
+    \end{align*}
 }
 \solutionspace{80pt}
 
@@ -497,7 +644,7 @@
     \\
     A_\text{цикл} &= \frac 12 (4P_0 - P_0)(4V_0 - V_0) = \frac 12 \cdot 9 \cdot P_0V_0, \\
     A_{23} &= 4P_0 \cdot (4V_0 - V_0) = 12P_0V_0, \\
-    \Delta U_{23} &= \frac 32 \nu R T_3 - \frac 32 \nu R T_3 = \frac 32 P_3 V_3 - \frac 32 P_2 V_2 = \frac 32 \cdot 4 P_0 \cdot 4 V_0 -  \frac 32 \cdot 4 P_0 \cdot V_0 = \frac 32 \cdot 12 \cdot P_0V_0, \\
+    \Delta U_{23} &= \frac 32 \nu R T_3 - \frac 32 \nu R T_2 = \frac 32 P_3 V_3 - \frac 32 P_2 V_2 = \frac 32 \cdot 4 P_0 \cdot 4 V_0 -  \frac 32 \cdot 4 P_0 \cdot V_0 = \frac 32 \cdot 12 \cdot P_0V_0, \\
     \Delta U_{12} &= \frac 32 \nu R T_2 - \frac 32 \nu R T_1 = \frac 32 P_2 V_2 - \frac 32 P_1 V_1 = \frac 32 \cdot 4 P_0V_0 - \frac 32 P_0V_0 = \frac 32 \cdot 3 \cdot P_0V_0.
     \\
     \eta &= \frac{A_\text{цикл}}{Q_+} = \frac{A_\text{цикл}}{Q_{12} + Q_{23}}  = \frac{A_\text{цикл}}{A_{12} + \Delta U_{12} + A_{23} + \Delta U_{23}} =  \\
@@ -513,6 +660,27 @@
         \item Определите точку росы для этого воздуха.
         \item Какой станет относительная влажность этого воздуха, если нагреть его до $80\celsius$?
     \end{itemize}
+}
+\answer{%
+    \begin{align*}
+    &\text{Значения плотности насыщенного водяного пара определяем по таблице:} \\
+    &\rho_{ \text{ нас.
+    пара 20 } \celsius } = 17{,}300\,\frac{\text{г}}{\text{м}^{3}}, \rho_{ \text{ нас.
+    пара 80 } \celsius } = 293{,}000\,\frac{\text{г}}{\text{м}^{3}}.
+    \\
+    \varphi_1 &= \frac{ \rho_\text{ пара } }{ \rho_{ \text{ нас.
+    пара 20 } \celsius } } \implies { \rho_\text{ пара } } = \rho_{ \text{ нас.
+    пара 20 } \celsius } \cdot \varphi_1 = 17{,}300\,\frac{\text{г}}{\text{м}^{3}} \cdot 0{,}50 = 8{,}650\,\frac{\text{г}}{\text{м}^{3}}.
+    \\
+    &\text{По таблице определяем, при какой температуре пар с такой плотностью станет насыщенным: }  \\
+    t_\text{росы} &= 8{,}7\celsius, \\
+    \varphi_2 &= \frac{ \rho_\text{ пара } }{ \rho_{ \text{ нас.
+    пара 80 } \celsius } } = \frac{\rho_{ \text{ нас.
+    пара 20 } \celsius } \cdot \varphi_1}{ \rho_{ \text{ нас.
+    пара 80 } \celsius } }= \varphi_1 \cdot \frac{ \rho_{ \text{ нас.
+    пара 20 } \celsius } }{ \rho_{ \text{ нас.
+    пара 80 } \celsius } } = 0{,}50 \cdot \frac{ 17{,}300\,\frac{\text{г}}{\text{м}^{3}} }{ 293{,}000\,\frac{\text{г}}{\text{м}^{3}} } = 0{,}030 \approx 3{,}0\%.
+    \end{align*}
 }
 \solutionspace{80pt}
 
@@ -564,7 +732,7 @@
     \\
     A_\text{цикл} &= \frac 12 (3P_0 - P_0)(6V_0 - V_0) = \frac 12 \cdot 10 \cdot P_0V_0, \\
     A_{23} &= 6P_0 \cdot (3V_0 - V_0) = 12P_0V_0, \\
-    \Delta U_{23} &= \frac 32 \nu R T_3 - \frac 32 \nu R T_3 = \frac 32 P_3 V_3 - \frac 32 P_2 V_2 = \frac 32 \cdot 6 P_0 \cdot 3 V_0 -  \frac 32 \cdot 6 P_0 \cdot V_0 = \frac 32 \cdot 12 \cdot P_0V_0, \\
+    \Delta U_{23} &= \frac 32 \nu R T_3 - \frac 32 \nu R T_2 = \frac 32 P_3 V_3 - \frac 32 P_2 V_2 = \frac 32 \cdot 6 P_0 \cdot 3 V_0 -  \frac 32 \cdot 6 P_0 \cdot V_0 = \frac 32 \cdot 12 \cdot P_0V_0, \\
     \Delta U_{12} &= \frac 32 \nu R T_2 - \frac 32 \nu R T_1 = \frac 32 P_2 V_2 - \frac 32 P_1 V_1 = \frac 32 \cdot 6 P_0V_0 - \frac 32 P_0V_0 = \frac 32 \cdot 5 \cdot P_0V_0.
     \\
     \eta &= \frac{A_\text{цикл}}{Q_+} = \frac{A_\text{цикл}}{Q_{12} + Q_{23}}  = \frac{A_\text{цикл}}{A_{12} + \Delta U_{12} + A_{23} + \Delta U_{23}} =  \\
@@ -580,6 +748,27 @@
         \item Определите точку росы для этого воздуха.
         \item Какой станет относительная влажность этого воздуха, если нагреть его до $80\celsius$?
     \end{itemize}
+}
+\answer{%
+    \begin{align*}
+    &\text{Значения плотности насыщенного водяного пара определяем по таблице:} \\
+    &\rho_{ \text{ нас.
+    пара 30 } \celsius } = 30{,}300\,\frac{\text{г}}{\text{м}^{3}}, \rho_{ \text{ нас.
+    пара 80 } \celsius } = 293{,}000\,\frac{\text{г}}{\text{м}^{3}}.
+    \\
+    \varphi_1 &= \frac{ \rho_\text{ пара } }{ \rho_{ \text{ нас.
+    пара 30 } \celsius } } \implies { \rho_\text{ пара } } = \rho_{ \text{ нас.
+    пара 30 } \celsius } \cdot \varphi_1 = 30{,}300\,\frac{\text{г}}{\text{м}^{3}} \cdot 0{,}65 = 19{,}695\,\frac{\text{г}}{\text{м}^{3}}.
+    \\
+    &\text{По таблице определяем, при какой температуре пар с такой плотностью станет насыщенным: }  \\
+    t_\text{росы} &= 22{,}2\celsius, \\
+    \varphi_2 &= \frac{ \rho_\text{ пара } }{ \rho_{ \text{ нас.
+    пара 80 } \celsius } } = \frac{\rho_{ \text{ нас.
+    пара 30 } \celsius } \cdot \varphi_1}{ \rho_{ \text{ нас.
+    пара 80 } \celsius } }= \varphi_1 \cdot \frac{ \rho_{ \text{ нас.
+    пара 30 } \celsius } }{ \rho_{ \text{ нас.
+    пара 80 } \celsius } } = 0{,}65 \cdot \frac{ 30{,}300\,\frac{\text{г}}{\text{м}^{3}} }{ 293{,}000\,\frac{\text{г}}{\text{м}^{3}} } = 0{,}067 \approx 6{,}7\%.
+    \end{align*}
 }
 \solutionspace{80pt}
 
@@ -631,7 +820,7 @@
     \\
     A_\text{цикл} &= \frac 12 (6P_0 - P_0)(5V_0 - V_0) = \frac 12 \cdot 20 \cdot P_0V_0, \\
     A_{23} &= 5P_0 \cdot (6V_0 - V_0) = 25P_0V_0, \\
-    \Delta U_{23} &= \frac 32 \nu R T_3 - \frac 32 \nu R T_3 = \frac 32 P_3 V_3 - \frac 32 P_2 V_2 = \frac 32 \cdot 5 P_0 \cdot 6 V_0 -  \frac 32 \cdot 5 P_0 \cdot V_0 = \frac 32 \cdot 25 \cdot P_0V_0, \\
+    \Delta U_{23} &= \frac 32 \nu R T_3 - \frac 32 \nu R T_2 = \frac 32 P_3 V_3 - \frac 32 P_2 V_2 = \frac 32 \cdot 5 P_0 \cdot 6 V_0 -  \frac 32 \cdot 5 P_0 \cdot V_0 = \frac 32 \cdot 25 \cdot P_0V_0, \\
     \Delta U_{12} &= \frac 32 \nu R T_2 - \frac 32 \nu R T_1 = \frac 32 P_2 V_2 - \frac 32 P_1 V_1 = \frac 32 \cdot 5 P_0V_0 - \frac 32 P_0V_0 = \frac 32 \cdot 4 \cdot P_0V_0.
     \\
     \eta &= \frac{A_\text{цикл}}{Q_+} = \frac{A_\text{цикл}}{Q_{12} + Q_{23}}  = \frac{A_\text{цикл}}{A_{12} + \Delta U_{12} + A_{23} + \Delta U_{23}} =  \\
@@ -647,6 +836,27 @@
         \item Определите точку росы для этого воздуха.
         \item Какой станет относительная влажность этого воздуха, если нагреть его до $70\celsius$?
     \end{itemize}
+}
+\answer{%
+    \begin{align*}
+    &\text{Значения плотности насыщенного водяного пара определяем по таблице:} \\
+    &\rho_{ \text{ нас.
+    пара 20 } \celsius } = 17{,}300\,\frac{\text{г}}{\text{м}^{3}}, \rho_{ \text{ нас.
+    пара 70 } \celsius } = 198{,}000\,\frac{\text{г}}{\text{м}^{3}}.
+    \\
+    \varphi_1 &= \frac{ \rho_\text{ пара } }{ \rho_{ \text{ нас.
+    пара 20 } \celsius } } \implies { \rho_\text{ пара } } = \rho_{ \text{ нас.
+    пара 20 } \celsius } \cdot \varphi_1 = 17{,}300\,\frac{\text{г}}{\text{м}^{3}} \cdot 0{,}55 = 9{,}515\,\frac{\text{г}}{\text{м}^{3}}.
+    \\
+    &\text{По таблице определяем, при какой температуре пар с такой плотностью станет насыщенным: }  \\
+    t_\text{росы} &= 10{,}2\celsius, \\
+    \varphi_2 &= \frac{ \rho_\text{ пара } }{ \rho_{ \text{ нас.
+    пара 70 } \celsius } } = \frac{\rho_{ \text{ нас.
+    пара 20 } \celsius } \cdot \varphi_1}{ \rho_{ \text{ нас.
+    пара 70 } \celsius } }= \varphi_1 \cdot \frac{ \rho_{ \text{ нас.
+    пара 20 } \celsius } }{ \rho_{ \text{ нас.
+    пара 70 } \celsius } } = 0{,}55 \cdot \frac{ 17{,}300\,\frac{\text{г}}{\text{м}^{3}} }{ 198{,}000\,\frac{\text{г}}{\text{м}^{3}} } = 0{,}048 \approx 4{,}8\%.
+    \end{align*}
 }
 \solutionspace{80pt}
 
@@ -698,7 +908,7 @@
     \\
     A_\text{цикл} &= \frac 12 (5P_0 - P_0)(4V_0 - V_0) = \frac 12 \cdot 12 \cdot P_0V_0, \\
     A_{23} &= 4P_0 \cdot (5V_0 - V_0) = 16P_0V_0, \\
-    \Delta U_{23} &= \frac 32 \nu R T_3 - \frac 32 \nu R T_3 = \frac 32 P_3 V_3 - \frac 32 P_2 V_2 = \frac 32 \cdot 4 P_0 \cdot 5 V_0 -  \frac 32 \cdot 4 P_0 \cdot V_0 = \frac 32 \cdot 16 \cdot P_0V_0, \\
+    \Delta U_{23} &= \frac 32 \nu R T_3 - \frac 32 \nu R T_2 = \frac 32 P_3 V_3 - \frac 32 P_2 V_2 = \frac 32 \cdot 4 P_0 \cdot 5 V_0 -  \frac 32 \cdot 4 P_0 \cdot V_0 = \frac 32 \cdot 16 \cdot P_0V_0, \\
     \Delta U_{12} &= \frac 32 \nu R T_2 - \frac 32 \nu R T_1 = \frac 32 P_2 V_2 - \frac 32 P_1 V_1 = \frac 32 \cdot 4 P_0V_0 - \frac 32 P_0V_0 = \frac 32 \cdot 3 \cdot P_0V_0.
     \\
     \eta &= \frac{A_\text{цикл}}{Q_+} = \frac{A_\text{цикл}}{Q_{12} + Q_{23}}  = \frac{A_\text{цикл}}{A_{12} + \Delta U_{12} + A_{23} + \Delta U_{23}} =  \\
@@ -714,6 +924,27 @@
         \item Определите точку росы для этого воздуха.
         \item Какой станет относительная влажность этого воздуха, если нагреть его до $70\celsius$?
     \end{itemize}
+}
+\answer{%
+    \begin{align*}
+    &\text{Значения плотности насыщенного водяного пара определяем по таблице:} \\
+    &\rho_{ \text{ нас.
+    пара 15 } \celsius } = 12{,}800\,\frac{\text{г}}{\text{м}^{3}}, \rho_{ \text{ нас.
+    пара 70 } \celsius } = 198{,}000\,\frac{\text{г}}{\text{м}^{3}}.
+    \\
+    \varphi_1 &= \frac{ \rho_\text{ пара } }{ \rho_{ \text{ нас.
+    пара 15 } \celsius } } \implies { \rho_\text{ пара } } = \rho_{ \text{ нас.
+    пара 15 } \celsius } \cdot \varphi_1 = 12{,}800\,\frac{\text{г}}{\text{м}^{3}} \cdot 0{,}50 = 6{,}400\,\frac{\text{г}}{\text{м}^{3}}.
+    \\
+    &\text{По таблице определяем, при какой температуре пар с такой плотностью станет насыщенным: }  \\
+    t_\text{росы} &= 4{,}0\celsius, \\
+    \varphi_2 &= \frac{ \rho_\text{ пара } }{ \rho_{ \text{ нас.
+    пара 70 } \celsius } } = \frac{\rho_{ \text{ нас.
+    пара 15 } \celsius } \cdot \varphi_1}{ \rho_{ \text{ нас.
+    пара 70 } \celsius } }= \varphi_1 \cdot \frac{ \rho_{ \text{ нас.
+    пара 15 } \celsius } }{ \rho_{ \text{ нас.
+    пара 70 } \celsius } } = 0{,}50 \cdot \frac{ 12{,}800\,\frac{\text{г}}{\text{м}^{3}} }{ 198{,}000\,\frac{\text{г}}{\text{м}^{3}} } = 0{,}032 \approx 3{,}2\%.
+    \end{align*}
 }
 \solutionspace{80pt}
 
@@ -765,7 +996,7 @@
     \\
     A_\text{цикл} &= \frac 12 (4P_0 - P_0)(3V_0 - V_0) = \frac 12 \cdot 6 \cdot P_0V_0, \\
     A_{23} &= 3P_0 \cdot (4V_0 - V_0) = 9P_0V_0, \\
-    \Delta U_{23} &= \frac 32 \nu R T_3 - \frac 32 \nu R T_3 = \frac 32 P_3 V_3 - \frac 32 P_2 V_2 = \frac 32 \cdot 3 P_0 \cdot 4 V_0 -  \frac 32 \cdot 3 P_0 \cdot V_0 = \frac 32 \cdot 9 \cdot P_0V_0, \\
+    \Delta U_{23} &= \frac 32 \nu R T_3 - \frac 32 \nu R T_2 = \frac 32 P_3 V_3 - \frac 32 P_2 V_2 = \frac 32 \cdot 3 P_0 \cdot 4 V_0 -  \frac 32 \cdot 3 P_0 \cdot V_0 = \frac 32 \cdot 9 \cdot P_0V_0, \\
     \Delta U_{12} &= \frac 32 \nu R T_2 - \frac 32 \nu R T_1 = \frac 32 P_2 V_2 - \frac 32 P_1 V_1 = \frac 32 \cdot 3 P_0V_0 - \frac 32 P_0V_0 = \frac 32 \cdot 2 \cdot P_0V_0.
     \\
     \eta &= \frac{A_\text{цикл}}{Q_+} = \frac{A_\text{цикл}}{Q_{12} + Q_{23}}  = \frac{A_\text{цикл}}{A_{12} + \Delta U_{12} + A_{23} + \Delta U_{23}} =  \\
@@ -781,6 +1012,27 @@
         \item Определите точку росы для этого воздуха.
         \item Какой станет относительная влажность этого воздуха, если нагреть его до $50\celsius$?
     \end{itemize}
+}
+\answer{%
+    \begin{align*}
+    &\text{Значения плотности насыщенного водяного пара определяем по таблице:} \\
+    &\rho_{ \text{ нас.
+    пара 30 } \celsius } = 30{,}300\,\frac{\text{г}}{\text{м}^{3}}, \rho_{ \text{ нас.
+    пара 50 } \celsius } = 83{,}000\,\frac{\text{г}}{\text{м}^{3}}.
+    \\
+    \varphi_1 &= \frac{ \rho_\text{ пара } }{ \rho_{ \text{ нас.
+    пара 30 } \celsius } } \implies { \rho_\text{ пара } } = \rho_{ \text{ нас.
+    пара 30 } \celsius } \cdot \varphi_1 = 30{,}300\,\frac{\text{г}}{\text{м}^{3}} \cdot 0{,}65 = 19{,}695\,\frac{\text{г}}{\text{м}^{3}}.
+    \\
+    &\text{По таблице определяем, при какой температуре пар с такой плотностью станет насыщенным: }  \\
+    t_\text{росы} &= 22{,}2\celsius, \\
+    \varphi_2 &= \frac{ \rho_\text{ пара } }{ \rho_{ \text{ нас.
+    пара 50 } \celsius } } = \frac{\rho_{ \text{ нас.
+    пара 30 } \celsius } \cdot \varphi_1}{ \rho_{ \text{ нас.
+    пара 50 } \celsius } }= \varphi_1 \cdot \frac{ \rho_{ \text{ нас.
+    пара 30 } \celsius } }{ \rho_{ \text{ нас.
+    пара 50 } \celsius } } = 0{,}65 \cdot \frac{ 30{,}300\,\frac{\text{г}}{\text{м}^{3}} }{ 83{,}000\,\frac{\text{г}}{\text{м}^{3}} } = 0{,}237 \approx 23{,}7\%.
+    \end{align*}
 }
 \solutionspace{80pt}
 
@@ -832,7 +1084,7 @@
     \\
     A_\text{цикл} &= \frac 12 (4P_0 - P_0)(4V_0 - V_0) = \frac 12 \cdot 9 \cdot P_0V_0, \\
     A_{23} &= 4P_0 \cdot (4V_0 - V_0) = 12P_0V_0, \\
-    \Delta U_{23} &= \frac 32 \nu R T_3 - \frac 32 \nu R T_3 = \frac 32 P_3 V_3 - \frac 32 P_2 V_2 = \frac 32 \cdot 4 P_0 \cdot 4 V_0 -  \frac 32 \cdot 4 P_0 \cdot V_0 = \frac 32 \cdot 12 \cdot P_0V_0, \\
+    \Delta U_{23} &= \frac 32 \nu R T_3 - \frac 32 \nu R T_2 = \frac 32 P_3 V_3 - \frac 32 P_2 V_2 = \frac 32 \cdot 4 P_0 \cdot 4 V_0 -  \frac 32 \cdot 4 P_0 \cdot V_0 = \frac 32 \cdot 12 \cdot P_0V_0, \\
     \Delta U_{12} &= \frac 32 \nu R T_2 - \frac 32 \nu R T_1 = \frac 32 P_2 V_2 - \frac 32 P_1 V_1 = \frac 32 \cdot 4 P_0V_0 - \frac 32 P_0V_0 = \frac 32 \cdot 3 \cdot P_0V_0.
     \\
     \eta &= \frac{A_\text{цикл}}{Q_+} = \frac{A_\text{цикл}}{Q_{12} + Q_{23}}  = \frac{A_\text{цикл}}{A_{12} + \Delta U_{12} + A_{23} + \Delta U_{23}} =  \\
@@ -848,6 +1100,27 @@
         \item Определите точку росы для этого воздуха.
         \item Какой станет относительная влажность этого воздуха, если нагреть его до $50\celsius$?
     \end{itemize}
+}
+\answer{%
+    \begin{align*}
+    &\text{Значения плотности насыщенного водяного пара определяем по таблице:} \\
+    &\rho_{ \text{ нас.
+    пара 15 } \celsius } = 12{,}800\,\frac{\text{г}}{\text{м}^{3}}, \rho_{ \text{ нас.
+    пара 50 } \celsius } = 83{,}000\,\frac{\text{г}}{\text{м}^{3}}.
+    \\
+    \varphi_1 &= \frac{ \rho_\text{ пара } }{ \rho_{ \text{ нас.
+    пара 15 } \celsius } } \implies { \rho_\text{ пара } } = \rho_{ \text{ нас.
+    пара 15 } \celsius } \cdot \varphi_1 = 12{,}800\,\frac{\text{г}}{\text{м}^{3}} \cdot 0{,}60 = 7{,}680\,\frac{\text{г}}{\text{м}^{3}}.
+    \\
+    &\text{По таблице определяем, при какой температуре пар с такой плотностью станет насыщенным: }  \\
+    t_\text{росы} &= 6{,}8\celsius, \\
+    \varphi_2 &= \frac{ \rho_\text{ пара } }{ \rho_{ \text{ нас.
+    пара 50 } \celsius } } = \frac{\rho_{ \text{ нас.
+    пара 15 } \celsius } \cdot \varphi_1}{ \rho_{ \text{ нас.
+    пара 50 } \celsius } }= \varphi_1 \cdot \frac{ \rho_{ \text{ нас.
+    пара 15 } \celsius } }{ \rho_{ \text{ нас.
+    пара 50 } \celsius } } = 0{,}60 \cdot \frac{ 12{,}800\,\frac{\text{г}}{\text{м}^{3}} }{ 83{,}000\,\frac{\text{г}}{\text{м}^{3}} } = 0{,}093 \approx 9{,}3\%.
+    \end{align*}
 }
 \solutionspace{80pt}
 
@@ -899,7 +1172,7 @@
     \\
     A_\text{цикл} &= \frac 12 (6P_0 - P_0)(3V_0 - V_0) = \frac 12 \cdot 10 \cdot P_0V_0, \\
     A_{23} &= 3P_0 \cdot (6V_0 - V_0) = 15P_0V_0, \\
-    \Delta U_{23} &= \frac 32 \nu R T_3 - \frac 32 \nu R T_3 = \frac 32 P_3 V_3 - \frac 32 P_2 V_2 = \frac 32 \cdot 3 P_0 \cdot 6 V_0 -  \frac 32 \cdot 3 P_0 \cdot V_0 = \frac 32 \cdot 15 \cdot P_0V_0, \\
+    \Delta U_{23} &= \frac 32 \nu R T_3 - \frac 32 \nu R T_2 = \frac 32 P_3 V_3 - \frac 32 P_2 V_2 = \frac 32 \cdot 3 P_0 \cdot 6 V_0 -  \frac 32 \cdot 3 P_0 \cdot V_0 = \frac 32 \cdot 15 \cdot P_0V_0, \\
     \Delta U_{12} &= \frac 32 \nu R T_2 - \frac 32 \nu R T_1 = \frac 32 P_2 V_2 - \frac 32 P_1 V_1 = \frac 32 \cdot 3 P_0V_0 - \frac 32 P_0V_0 = \frac 32 \cdot 2 \cdot P_0V_0.
     \\
     \eta &= \frac{A_\text{цикл}}{Q_+} = \frac{A_\text{цикл}}{Q_{12} + Q_{23}}  = \frac{A_\text{цикл}}{A_{12} + \Delta U_{12} + A_{23} + \Delta U_{23}} =  \\
@@ -915,6 +1188,27 @@
         \item Определите точку росы для этого воздуха.
         \item Какой станет относительная влажность этого воздуха, если нагреть его до $70\celsius$?
     \end{itemize}
+}
+\answer{%
+    \begin{align*}
+    &\text{Значения плотности насыщенного водяного пара определяем по таблице:} \\
+    &\rho_{ \text{ нас.
+    пара 25 } \celsius } = 23{,}000\,\frac{\text{г}}{\text{м}^{3}}, \rho_{ \text{ нас.
+    пара 70 } \celsius } = 198{,}000\,\frac{\text{г}}{\text{м}^{3}}.
+    \\
+    \varphi_1 &= \frac{ \rho_\text{ пара } }{ \rho_{ \text{ нас.
+    пара 25 } \celsius } } \implies { \rho_\text{ пара } } = \rho_{ \text{ нас.
+    пара 25 } \celsius } \cdot \varphi_1 = 23{,}000\,\frac{\text{г}}{\text{м}^{3}} \cdot 0{,}75 = 17{,}250\,\frac{\text{г}}{\text{м}^{3}}.
+    \\
+    &\text{По таблице определяем, при какой температуре пар с такой плотностью станет насыщенным: }  \\
+    t_\text{росы} &= 19{,}9\celsius, \\
+    \varphi_2 &= \frac{ \rho_\text{ пара } }{ \rho_{ \text{ нас.
+    пара 70 } \celsius } } = \frac{\rho_{ \text{ нас.
+    пара 25 } \celsius } \cdot \varphi_1}{ \rho_{ \text{ нас.
+    пара 70 } \celsius } }= \varphi_1 \cdot \frac{ \rho_{ \text{ нас.
+    пара 25 } \celsius } }{ \rho_{ \text{ нас.
+    пара 70 } \celsius } } = 0{,}75 \cdot \frac{ 23{,}000\,\frac{\text{г}}{\text{м}^{3}} }{ 198{,}000\,\frac{\text{г}}{\text{м}^{3}} } = 0{,}087 \approx 8{,}7\%.
+    \end{align*}
 }
 \solutionspace{80pt}
 
@@ -966,7 +1260,7 @@
     \\
     A_\text{цикл} &= \frac 12 (5P_0 - P_0)(5V_0 - V_0) = \frac 12 \cdot 16 \cdot P_0V_0, \\
     A_{23} &= 5P_0 \cdot (5V_0 - V_0) = 20P_0V_0, \\
-    \Delta U_{23} &= \frac 32 \nu R T_3 - \frac 32 \nu R T_3 = \frac 32 P_3 V_3 - \frac 32 P_2 V_2 = \frac 32 \cdot 5 P_0 \cdot 5 V_0 -  \frac 32 \cdot 5 P_0 \cdot V_0 = \frac 32 \cdot 20 \cdot P_0V_0, \\
+    \Delta U_{23} &= \frac 32 \nu R T_3 - \frac 32 \nu R T_2 = \frac 32 P_3 V_3 - \frac 32 P_2 V_2 = \frac 32 \cdot 5 P_0 \cdot 5 V_0 -  \frac 32 \cdot 5 P_0 \cdot V_0 = \frac 32 \cdot 20 \cdot P_0V_0, \\
     \Delta U_{12} &= \frac 32 \nu R T_2 - \frac 32 \nu R T_1 = \frac 32 P_2 V_2 - \frac 32 P_1 V_1 = \frac 32 \cdot 5 P_0V_0 - \frac 32 P_0V_0 = \frac 32 \cdot 4 \cdot P_0V_0.
     \\
     \eta &= \frac{A_\text{цикл}}{Q_+} = \frac{A_\text{цикл}}{Q_{12} + Q_{23}}  = \frac{A_\text{цикл}}{A_{12} + \Delta U_{12} + A_{23} + \Delta U_{23}} =  \\
@@ -982,6 +1276,27 @@
         \item Определите точку росы для этого воздуха.
         \item Какой станет относительная влажность этого воздуха, если нагреть его до $70\celsius$?
     \end{itemize}
+}
+\answer{%
+    \begin{align*}
+    &\text{Значения плотности насыщенного водяного пара определяем по таблице:} \\
+    &\rho_{ \text{ нас.
+    пара 30 } \celsius } = 30{,}300\,\frac{\text{г}}{\text{м}^{3}}, \rho_{ \text{ нас.
+    пара 70 } \celsius } = 198{,}000\,\frac{\text{г}}{\text{м}^{3}}.
+    \\
+    \varphi_1 &= \frac{ \rho_\text{ пара } }{ \rho_{ \text{ нас.
+    пара 30 } \celsius } } \implies { \rho_\text{ пара } } = \rho_{ \text{ нас.
+    пара 30 } \celsius } \cdot \varphi_1 = 30{,}300\,\frac{\text{г}}{\text{м}^{3}} \cdot 0{,}55 = 16{,}665\,\frac{\text{г}}{\text{м}^{3}}.
+    \\
+    &\text{По таблице определяем, при какой температуре пар с такой плотностью станет насыщенным: }  \\
+    t_\text{росы} &= 19{,}4\celsius, \\
+    \varphi_2 &= \frac{ \rho_\text{ пара } }{ \rho_{ \text{ нас.
+    пара 70 } \celsius } } = \frac{\rho_{ \text{ нас.
+    пара 30 } \celsius } \cdot \varphi_1}{ \rho_{ \text{ нас.
+    пара 70 } \celsius } }= \varphi_1 \cdot \frac{ \rho_{ \text{ нас.
+    пара 30 } \celsius } }{ \rho_{ \text{ нас.
+    пара 70 } \celsius } } = 0{,}55 \cdot \frac{ 30{,}300\,\frac{\text{г}}{\text{м}^{3}} }{ 198{,}000\,\frac{\text{г}}{\text{м}^{3}} } = 0{,}084 \approx 8{,}4\%.
+    \end{align*}
 }
 \solutionspace{80pt}
 
@@ -1033,7 +1348,7 @@
     \\
     A_\text{цикл} &= \frac 12 (2P_0 - P_0)(2V_0 - V_0) = \frac 12 \cdot 1 \cdot P_0V_0, \\
     A_{23} &= 2P_0 \cdot (2V_0 - V_0) = 2P_0V_0, \\
-    \Delta U_{23} &= \frac 32 \nu R T_3 - \frac 32 \nu R T_3 = \frac 32 P_3 V_3 - \frac 32 P_2 V_2 = \frac 32 \cdot 2 P_0 \cdot 2 V_0 -  \frac 32 \cdot 2 P_0 \cdot V_0 = \frac 32 \cdot 2 \cdot P_0V_0, \\
+    \Delta U_{23} &= \frac 32 \nu R T_3 - \frac 32 \nu R T_2 = \frac 32 P_3 V_3 - \frac 32 P_2 V_2 = \frac 32 \cdot 2 P_0 \cdot 2 V_0 -  \frac 32 \cdot 2 P_0 \cdot V_0 = \frac 32 \cdot 2 \cdot P_0V_0, \\
     \Delta U_{12} &= \frac 32 \nu R T_2 - \frac 32 \nu R T_1 = \frac 32 P_2 V_2 - \frac 32 P_1 V_1 = \frac 32 \cdot 2 P_0V_0 - \frac 32 P_0V_0 = \frac 32 \cdot 1 \cdot P_0V_0.
     \\
     \eta &= \frac{A_\text{цикл}}{Q_+} = \frac{A_\text{цикл}}{Q_{12} + Q_{23}}  = \frac{A_\text{цикл}}{A_{12} + \Delta U_{12} + A_{23} + \Delta U_{23}} =  \\
@@ -1049,6 +1364,27 @@
         \item Определите точку росы для этого воздуха.
         \item Какой станет относительная влажность этого воздуха, если нагреть его до $70\celsius$?
     \end{itemize}
+}
+\answer{%
+    \begin{align*}
+    &\text{Значения плотности насыщенного водяного пара определяем по таблице:} \\
+    &\rho_{ \text{ нас.
+    пара 20 } \celsius } = 17{,}300\,\frac{\text{г}}{\text{м}^{3}}, \rho_{ \text{ нас.
+    пара 70 } \celsius } = 198{,}000\,\frac{\text{г}}{\text{м}^{3}}.
+    \\
+    \varphi_1 &= \frac{ \rho_\text{ пара } }{ \rho_{ \text{ нас.
+    пара 20 } \celsius } } \implies { \rho_\text{ пара } } = \rho_{ \text{ нас.
+    пара 20 } \celsius } \cdot \varphi_1 = 17{,}300\,\frac{\text{г}}{\text{м}^{3}} \cdot 0{,}55 = 9{,}515\,\frac{\text{г}}{\text{м}^{3}}.
+    \\
+    &\text{По таблице определяем, при какой температуре пар с такой плотностью станет насыщенным: }  \\
+    t_\text{росы} &= 10{,}2\celsius, \\
+    \varphi_2 &= \frac{ \rho_\text{ пара } }{ \rho_{ \text{ нас.
+    пара 70 } \celsius } } = \frac{\rho_{ \text{ нас.
+    пара 20 } \celsius } \cdot \varphi_1}{ \rho_{ \text{ нас.
+    пара 70 } \celsius } }= \varphi_1 \cdot \frac{ \rho_{ \text{ нас.
+    пара 20 } \celsius } }{ \rho_{ \text{ нас.
+    пара 70 } \celsius } } = 0{,}55 \cdot \frac{ 17{,}300\,\frac{\text{г}}{\text{м}^{3}} }{ 198{,}000\,\frac{\text{г}}{\text{м}^{3}} } = 0{,}048 \approx 4{,}8\%.
+    \end{align*}
 }
 \solutionspace{80pt}
 
@@ -1100,7 +1436,7 @@
     \\
     A_\text{цикл} &= \frac 12 (2P_0 - P_0)(3V_0 - V_0) = \frac 12 \cdot 2 \cdot P_0V_0, \\
     A_{23} &= 3P_0 \cdot (2V_0 - V_0) = 3P_0V_0, \\
-    \Delta U_{23} &= \frac 32 \nu R T_3 - \frac 32 \nu R T_3 = \frac 32 P_3 V_3 - \frac 32 P_2 V_2 = \frac 32 \cdot 3 P_0 \cdot 2 V_0 -  \frac 32 \cdot 3 P_0 \cdot V_0 = \frac 32 \cdot 3 \cdot P_0V_0, \\
+    \Delta U_{23} &= \frac 32 \nu R T_3 - \frac 32 \nu R T_2 = \frac 32 P_3 V_3 - \frac 32 P_2 V_2 = \frac 32 \cdot 3 P_0 \cdot 2 V_0 -  \frac 32 \cdot 3 P_0 \cdot V_0 = \frac 32 \cdot 3 \cdot P_0V_0, \\
     \Delta U_{12} &= \frac 32 \nu R T_2 - \frac 32 \nu R T_1 = \frac 32 P_2 V_2 - \frac 32 P_1 V_1 = \frac 32 \cdot 3 P_0V_0 - \frac 32 P_0V_0 = \frac 32 \cdot 2 \cdot P_0V_0.
     \\
     \eta &= \frac{A_\text{цикл}}{Q_+} = \frac{A_\text{цикл}}{Q_{12} + Q_{23}}  = \frac{A_\text{цикл}}{A_{12} + \Delta U_{12} + A_{23} + \Delta U_{23}} =  \\
@@ -1116,6 +1452,27 @@
         \item Определите точку росы для этого воздуха.
         \item Какой станет относительная влажность этого воздуха, если нагреть его до $50\celsius$?
     \end{itemize}
+}
+\answer{%
+    \begin{align*}
+    &\text{Значения плотности насыщенного водяного пара определяем по таблице:} \\
+    &\rho_{ \text{ нас.
+    пара 15 } \celsius } = 12{,}800\,\frac{\text{г}}{\text{м}^{3}}, \rho_{ \text{ нас.
+    пара 50 } \celsius } = 83{,}000\,\frac{\text{г}}{\text{м}^{3}}.
+    \\
+    \varphi_1 &= \frac{ \rho_\text{ пара } }{ \rho_{ \text{ нас.
+    пара 15 } \celsius } } \implies { \rho_\text{ пара } } = \rho_{ \text{ нас.
+    пара 15 } \celsius } \cdot \varphi_1 = 12{,}800\,\frac{\text{г}}{\text{м}^{3}} \cdot 0{,}60 = 7{,}680\,\frac{\text{г}}{\text{м}^{3}}.
+    \\
+    &\text{По таблице определяем, при какой температуре пар с такой плотностью станет насыщенным: }  \\
+    t_\text{росы} &= 6{,}8\celsius, \\
+    \varphi_2 &= \frac{ \rho_\text{ пара } }{ \rho_{ \text{ нас.
+    пара 50 } \celsius } } = \frac{\rho_{ \text{ нас.
+    пара 15 } \celsius } \cdot \varphi_1}{ \rho_{ \text{ нас.
+    пара 50 } \celsius } }= \varphi_1 \cdot \frac{ \rho_{ \text{ нас.
+    пара 15 } \celsius } }{ \rho_{ \text{ нас.
+    пара 50 } \celsius } } = 0{,}60 \cdot \frac{ 12{,}800\,\frac{\text{г}}{\text{м}^{3}} }{ 83{,}000\,\frac{\text{г}}{\text{м}^{3}} } = 0{,}093 \approx 9{,}3\%.
+    \end{align*}
 }
 \solutionspace{80pt}
 
@@ -1167,7 +1524,7 @@
     \\
     A_\text{цикл} &= \frac 12 (2P_0 - P_0)(2V_0 - V_0) = \frac 12 \cdot 1 \cdot P_0V_0, \\
     A_{23} &= 2P_0 \cdot (2V_0 - V_0) = 2P_0V_0, \\
-    \Delta U_{23} &= \frac 32 \nu R T_3 - \frac 32 \nu R T_3 = \frac 32 P_3 V_3 - \frac 32 P_2 V_2 = \frac 32 \cdot 2 P_0 \cdot 2 V_0 -  \frac 32 \cdot 2 P_0 \cdot V_0 = \frac 32 \cdot 2 \cdot P_0V_0, \\
+    \Delta U_{23} &= \frac 32 \nu R T_3 - \frac 32 \nu R T_2 = \frac 32 P_3 V_3 - \frac 32 P_2 V_2 = \frac 32 \cdot 2 P_0 \cdot 2 V_0 -  \frac 32 \cdot 2 P_0 \cdot V_0 = \frac 32 \cdot 2 \cdot P_0V_0, \\
     \Delta U_{12} &= \frac 32 \nu R T_2 - \frac 32 \nu R T_1 = \frac 32 P_2 V_2 - \frac 32 P_1 V_1 = \frac 32 \cdot 2 P_0V_0 - \frac 32 P_0V_0 = \frac 32 \cdot 1 \cdot P_0V_0.
     \\
     \eta &= \frac{A_\text{цикл}}{Q_+} = \frac{A_\text{цикл}}{Q_{12} + Q_{23}}  = \frac{A_\text{цикл}}{A_{12} + \Delta U_{12} + A_{23} + \Delta U_{23}} =  \\
@@ -1183,6 +1540,27 @@
         \item Определите точку росы для этого воздуха.
         \item Какой станет относительная влажность этого воздуха, если нагреть его до $40\celsius$?
     \end{itemize}
+}
+\answer{%
+    \begin{align*}
+    &\text{Значения плотности насыщенного водяного пара определяем по таблице:} \\
+    &\rho_{ \text{ нас.
+    пара 25 } \celsius } = 23{,}000\,\frac{\text{г}}{\text{м}^{3}}, \rho_{ \text{ нас.
+    пара 40 } \celsius } = 51{,}200\,\frac{\text{г}}{\text{м}^{3}}.
+    \\
+    \varphi_1 &= \frac{ \rho_\text{ пара } }{ \rho_{ \text{ нас.
+    пара 25 } \celsius } } \implies { \rho_\text{ пара } } = \rho_{ \text{ нас.
+    пара 25 } \celsius } \cdot \varphi_1 = 23{,}000\,\frac{\text{г}}{\text{м}^{3}} \cdot 0{,}65 = 14{,}950\,\frac{\text{г}}{\text{м}^{3}}.
+    \\
+    &\text{По таблице определяем, при какой температуре пар с такой плотностью станет насыщенным: }  \\
+    t_\text{росы} &= 17{,}5\celsius, \\
+    \varphi_2 &= \frac{ \rho_\text{ пара } }{ \rho_{ \text{ нас.
+    пара 40 } \celsius } } = \frac{\rho_{ \text{ нас.
+    пара 25 } \celsius } \cdot \varphi_1}{ \rho_{ \text{ нас.
+    пара 40 } \celsius } }= \varphi_1 \cdot \frac{ \rho_{ \text{ нас.
+    пара 25 } \celsius } }{ \rho_{ \text{ нас.
+    пара 40 } \celsius } } = 0{,}65 \cdot \frac{ 23{,}000\,\frac{\text{г}}{\text{м}^{3}} }{ 51{,}200\,\frac{\text{г}}{\text{м}^{3}} } = 0{,}292 \approx 29{,}2\%.
+    \end{align*}
 }
 \solutionspace{80pt}
 
@@ -1234,7 +1612,7 @@
     \\
     A_\text{цикл} &= \frac 12 (5P_0 - P_0)(4V_0 - V_0) = \frac 12 \cdot 12 \cdot P_0V_0, \\
     A_{23} &= 4P_0 \cdot (5V_0 - V_0) = 16P_0V_0, \\
-    \Delta U_{23} &= \frac 32 \nu R T_3 - \frac 32 \nu R T_3 = \frac 32 P_3 V_3 - \frac 32 P_2 V_2 = \frac 32 \cdot 4 P_0 \cdot 5 V_0 -  \frac 32 \cdot 4 P_0 \cdot V_0 = \frac 32 \cdot 16 \cdot P_0V_0, \\
+    \Delta U_{23} &= \frac 32 \nu R T_3 - \frac 32 \nu R T_2 = \frac 32 P_3 V_3 - \frac 32 P_2 V_2 = \frac 32 \cdot 4 P_0 \cdot 5 V_0 -  \frac 32 \cdot 4 P_0 \cdot V_0 = \frac 32 \cdot 16 \cdot P_0V_0, \\
     \Delta U_{12} &= \frac 32 \nu R T_2 - \frac 32 \nu R T_1 = \frac 32 P_2 V_2 - \frac 32 P_1 V_1 = \frac 32 \cdot 4 P_0V_0 - \frac 32 P_0V_0 = \frac 32 \cdot 3 \cdot P_0V_0.
     \\
     \eta &= \frac{A_\text{цикл}}{Q_+} = \frac{A_\text{цикл}}{Q_{12} + Q_{23}}  = \frac{A_\text{цикл}}{A_{12} + \Delta U_{12} + A_{23} + \Delta U_{23}} =  \\
@@ -1250,6 +1628,27 @@
         \item Определите точку росы для этого воздуха.
         \item Какой станет относительная влажность этого воздуха, если нагреть его до $70\celsius$?
     \end{itemize}
+}
+\answer{%
+    \begin{align*}
+    &\text{Значения плотности насыщенного водяного пара определяем по таблице:} \\
+    &\rho_{ \text{ нас.
+    пара 30 } \celsius } = 30{,}300\,\frac{\text{г}}{\text{м}^{3}}, \rho_{ \text{ нас.
+    пара 70 } \celsius } = 198{,}000\,\frac{\text{г}}{\text{м}^{3}}.
+    \\
+    \varphi_1 &= \frac{ \rho_\text{ пара } }{ \rho_{ \text{ нас.
+    пара 30 } \celsius } } \implies { \rho_\text{ пара } } = \rho_{ \text{ нас.
+    пара 30 } \celsius } \cdot \varphi_1 = 30{,}300\,\frac{\text{г}}{\text{м}^{3}} \cdot 0{,}60 = 18{,}180\,\frac{\text{г}}{\text{м}^{3}}.
+    \\
+    &\text{По таблице определяем, при какой температуре пар с такой плотностью станет насыщенным: }  \\
+    t_\text{росы} &= 20{,}9\celsius, \\
+    \varphi_2 &= \frac{ \rho_\text{ пара } }{ \rho_{ \text{ нас.
+    пара 70 } \celsius } } = \frac{\rho_{ \text{ нас.
+    пара 30 } \celsius } \cdot \varphi_1}{ \rho_{ \text{ нас.
+    пара 70 } \celsius } }= \varphi_1 \cdot \frac{ \rho_{ \text{ нас.
+    пара 30 } \celsius } }{ \rho_{ \text{ нас.
+    пара 70 } \celsius } } = 0{,}60 \cdot \frac{ 30{,}300\,\frac{\text{г}}{\text{м}^{3}} }{ 198{,}000\,\frac{\text{г}}{\text{м}^{3}} } = 0{,}092 \approx 9{,}2\%.
+    \end{align*}
 }
 \solutionspace{80pt}
 
@@ -1301,7 +1700,7 @@
     \\
     A_\text{цикл} &= \frac 12 (2P_0 - P_0)(6V_0 - V_0) = \frac 12 \cdot 5 \cdot P_0V_0, \\
     A_{23} &= 6P_0 \cdot (2V_0 - V_0) = 6P_0V_0, \\
-    \Delta U_{23} &= \frac 32 \nu R T_3 - \frac 32 \nu R T_3 = \frac 32 P_3 V_3 - \frac 32 P_2 V_2 = \frac 32 \cdot 6 P_0 \cdot 2 V_0 -  \frac 32 \cdot 6 P_0 \cdot V_0 = \frac 32 \cdot 6 \cdot P_0V_0, \\
+    \Delta U_{23} &= \frac 32 \nu R T_3 - \frac 32 \nu R T_2 = \frac 32 P_3 V_3 - \frac 32 P_2 V_2 = \frac 32 \cdot 6 P_0 \cdot 2 V_0 -  \frac 32 \cdot 6 P_0 \cdot V_0 = \frac 32 \cdot 6 \cdot P_0V_0, \\
     \Delta U_{12} &= \frac 32 \nu R T_2 - \frac 32 \nu R T_1 = \frac 32 P_2 V_2 - \frac 32 P_1 V_1 = \frac 32 \cdot 6 P_0V_0 - \frac 32 P_0V_0 = \frac 32 \cdot 5 \cdot P_0V_0.
     \\
     \eta &= \frac{A_\text{цикл}}{Q_+} = \frac{A_\text{цикл}}{Q_{12} + Q_{23}}  = \frac{A_\text{цикл}}{A_{12} + \Delta U_{12} + A_{23} + \Delta U_{23}} =  \\
@@ -1317,6 +1716,27 @@
         \item Определите точку росы для этого воздуха.
         \item Какой станет относительная влажность этого воздуха, если нагреть его до $70\celsius$?
     \end{itemize}
+}
+\answer{%
+    \begin{align*}
+    &\text{Значения плотности насыщенного водяного пара определяем по таблице:} \\
+    &\rho_{ \text{ нас.
+    пара 15 } \celsius } = 12{,}800\,\frac{\text{г}}{\text{м}^{3}}, \rho_{ \text{ нас.
+    пара 70 } \celsius } = 198{,}000\,\frac{\text{г}}{\text{м}^{3}}.
+    \\
+    \varphi_1 &= \frac{ \rho_\text{ пара } }{ \rho_{ \text{ нас.
+    пара 15 } \celsius } } \implies { \rho_\text{ пара } } = \rho_{ \text{ нас.
+    пара 15 } \celsius } \cdot \varphi_1 = 12{,}800\,\frac{\text{г}}{\text{м}^{3}} \cdot 0{,}70 = 8{,}960\,\frac{\text{г}}{\text{м}^{3}}.
+    \\
+    &\text{По таблице определяем, при какой температуре пар с такой плотностью станет насыщенным: }  \\
+    t_\text{росы} &= 9{,}3\celsius, \\
+    \varphi_2 &= \frac{ \rho_\text{ пара } }{ \rho_{ \text{ нас.
+    пара 70 } \celsius } } = \frac{\rho_{ \text{ нас.
+    пара 15 } \celsius } \cdot \varphi_1}{ \rho_{ \text{ нас.
+    пара 70 } \celsius } }= \varphi_1 \cdot \frac{ \rho_{ \text{ нас.
+    пара 15 } \celsius } }{ \rho_{ \text{ нас.
+    пара 70 } \celsius } } = 0{,}70 \cdot \frac{ 12{,}800\,\frac{\text{г}}{\text{м}^{3}} }{ 198{,}000\,\frac{\text{г}}{\text{м}^{3}} } = 0{,}045 \approx 4{,}5\%.
+    \end{align*}
 }
 \solutionspace{80pt}
 
@@ -1368,7 +1788,7 @@
     \\
     A_\text{цикл} &= \frac 12 (2P_0 - P_0)(2V_0 - V_0) = \frac 12 \cdot 1 \cdot P_0V_0, \\
     A_{23} &= 2P_0 \cdot (2V_0 - V_0) = 2P_0V_0, \\
-    \Delta U_{23} &= \frac 32 \nu R T_3 - \frac 32 \nu R T_3 = \frac 32 P_3 V_3 - \frac 32 P_2 V_2 = \frac 32 \cdot 2 P_0 \cdot 2 V_0 -  \frac 32 \cdot 2 P_0 \cdot V_0 = \frac 32 \cdot 2 \cdot P_0V_0, \\
+    \Delta U_{23} &= \frac 32 \nu R T_3 - \frac 32 \nu R T_2 = \frac 32 P_3 V_3 - \frac 32 P_2 V_2 = \frac 32 \cdot 2 P_0 \cdot 2 V_0 -  \frac 32 \cdot 2 P_0 \cdot V_0 = \frac 32 \cdot 2 \cdot P_0V_0, \\
     \Delta U_{12} &= \frac 32 \nu R T_2 - \frac 32 \nu R T_1 = \frac 32 P_2 V_2 - \frac 32 P_1 V_1 = \frac 32 \cdot 2 P_0V_0 - \frac 32 P_0V_0 = \frac 32 \cdot 1 \cdot P_0V_0.
     \\
     \eta &= \frac{A_\text{цикл}}{Q_+} = \frac{A_\text{цикл}}{Q_{12} + Q_{23}}  = \frac{A_\text{цикл}}{A_{12} + \Delta U_{12} + A_{23} + \Delta U_{23}} =  \\
@@ -1384,6 +1804,27 @@
         \item Определите точку росы для этого воздуха.
         \item Какой станет относительная влажность этого воздуха, если нагреть его до $60\celsius$?
     \end{itemize}
+}
+\answer{%
+    \begin{align*}
+    &\text{Значения плотности насыщенного водяного пара определяем по таблице:} \\
+    &\rho_{ \text{ нас.
+    пара 25 } \celsius } = 23{,}000\,\frac{\text{г}}{\text{м}^{3}}, \rho_{ \text{ нас.
+    пара 60 } \celsius } = 130{,}000\,\frac{\text{г}}{\text{м}^{3}}.
+    \\
+    \varphi_1 &= \frac{ \rho_\text{ пара } }{ \rho_{ \text{ нас.
+    пара 25 } \celsius } } \implies { \rho_\text{ пара } } = \rho_{ \text{ нас.
+    пара 25 } \celsius } \cdot \varphi_1 = 23{,}000\,\frac{\text{г}}{\text{м}^{3}} \cdot 0{,}75 = 17{,}250\,\frac{\text{г}}{\text{м}^{3}}.
+    \\
+    &\text{По таблице определяем, при какой температуре пар с такой плотностью станет насыщенным: }  \\
+    t_\text{росы} &= 19{,}9\celsius, \\
+    \varphi_2 &= \frac{ \rho_\text{ пара } }{ \rho_{ \text{ нас.
+    пара 60 } \celsius } } = \frac{\rho_{ \text{ нас.
+    пара 25 } \celsius } \cdot \varphi_1}{ \rho_{ \text{ нас.
+    пара 60 } \celsius } }= \varphi_1 \cdot \frac{ \rho_{ \text{ нас.
+    пара 25 } \celsius } }{ \rho_{ \text{ нас.
+    пара 60 } \celsius } } = 0{,}75 \cdot \frac{ 23{,}000\,\frac{\text{г}}{\text{м}^{3}} }{ 130{,}000\,\frac{\text{г}}{\text{м}^{3}} } = 0{,}133 \approx 13{,}3\%.
+    \end{align*}
 }
 \solutionspace{80pt}
 
@@ -1435,7 +1876,7 @@
     \\
     A_\text{цикл} &= \frac 12 (3P_0 - P_0)(2V_0 - V_0) = \frac 12 \cdot 2 \cdot P_0V_0, \\
     A_{23} &= 2P_0 \cdot (3V_0 - V_0) = 4P_0V_0, \\
-    \Delta U_{23} &= \frac 32 \nu R T_3 - \frac 32 \nu R T_3 = \frac 32 P_3 V_3 - \frac 32 P_2 V_2 = \frac 32 \cdot 2 P_0 \cdot 3 V_0 -  \frac 32 \cdot 2 P_0 \cdot V_0 = \frac 32 \cdot 4 \cdot P_0V_0, \\
+    \Delta U_{23} &= \frac 32 \nu R T_3 - \frac 32 \nu R T_2 = \frac 32 P_3 V_3 - \frac 32 P_2 V_2 = \frac 32 \cdot 2 P_0 \cdot 3 V_0 -  \frac 32 \cdot 2 P_0 \cdot V_0 = \frac 32 \cdot 4 \cdot P_0V_0, \\
     \Delta U_{12} &= \frac 32 \nu R T_2 - \frac 32 \nu R T_1 = \frac 32 P_2 V_2 - \frac 32 P_1 V_1 = \frac 32 \cdot 2 P_0V_0 - \frac 32 P_0V_0 = \frac 32 \cdot 1 \cdot P_0V_0.
     \\
     \eta &= \frac{A_\text{цикл}}{Q_+} = \frac{A_\text{цикл}}{Q_{12} + Q_{23}}  = \frac{A_\text{цикл}}{A_{12} + \Delta U_{12} + A_{23} + \Delta U_{23}} =  \\
@@ -1451,6 +1892,27 @@
         \item Определите точку росы для этого воздуха.
         \item Какой станет относительная влажность этого воздуха, если нагреть его до $80\celsius$?
     \end{itemize}
+}
+\answer{%
+    \begin{align*}
+    &\text{Значения плотности насыщенного водяного пара определяем по таблице:} \\
+    &\rho_{ \text{ нас.
+    пара 15 } \celsius } = 12{,}800\,\frac{\text{г}}{\text{м}^{3}}, \rho_{ \text{ нас.
+    пара 80 } \celsius } = 293{,}000\,\frac{\text{г}}{\text{м}^{3}}.
+    \\
+    \varphi_1 &= \frac{ \rho_\text{ пара } }{ \rho_{ \text{ нас.
+    пара 15 } \celsius } } \implies { \rho_\text{ пара } } = \rho_{ \text{ нас.
+    пара 15 } \celsius } \cdot \varphi_1 = 12{,}800\,\frac{\text{г}}{\text{м}^{3}} \cdot 0{,}50 = 6{,}400\,\frac{\text{г}}{\text{м}^{3}}.
+    \\
+    &\text{По таблице определяем, при какой температуре пар с такой плотностью станет насыщенным: }  \\
+    t_\text{росы} &= 4{,}0\celsius, \\
+    \varphi_2 &= \frac{ \rho_\text{ пара } }{ \rho_{ \text{ нас.
+    пара 80 } \celsius } } = \frac{\rho_{ \text{ нас.
+    пара 15 } \celsius } \cdot \varphi_1}{ \rho_{ \text{ нас.
+    пара 80 } \celsius } }= \varphi_1 \cdot \frac{ \rho_{ \text{ нас.
+    пара 15 } \celsius } }{ \rho_{ \text{ нас.
+    пара 80 } \celsius } } = 0{,}50 \cdot \frac{ 12{,}800\,\frac{\text{г}}{\text{м}^{3}} }{ 293{,}000\,\frac{\text{г}}{\text{м}^{3}} } = 0{,}022 \approx 2{,}2\%.
+    \end{align*}
 }
 \solutionspace{80pt}
 
@@ -1502,7 +1964,7 @@
     \\
     A_\text{цикл} &= \frac 12 (2P_0 - P_0)(3V_0 - V_0) = \frac 12 \cdot 2 \cdot P_0V_0, \\
     A_{23} &= 3P_0 \cdot (2V_0 - V_0) = 3P_0V_0, \\
-    \Delta U_{23} &= \frac 32 \nu R T_3 - \frac 32 \nu R T_3 = \frac 32 P_3 V_3 - \frac 32 P_2 V_2 = \frac 32 \cdot 3 P_0 \cdot 2 V_0 -  \frac 32 \cdot 3 P_0 \cdot V_0 = \frac 32 \cdot 3 \cdot P_0V_0, \\
+    \Delta U_{23} &= \frac 32 \nu R T_3 - \frac 32 \nu R T_2 = \frac 32 P_3 V_3 - \frac 32 P_2 V_2 = \frac 32 \cdot 3 P_0 \cdot 2 V_0 -  \frac 32 \cdot 3 P_0 \cdot V_0 = \frac 32 \cdot 3 \cdot P_0V_0, \\
     \Delta U_{12} &= \frac 32 \nu R T_2 - \frac 32 \nu R T_1 = \frac 32 P_2 V_2 - \frac 32 P_1 V_1 = \frac 32 \cdot 3 P_0V_0 - \frac 32 P_0V_0 = \frac 32 \cdot 2 \cdot P_0V_0.
     \\
     \eta &= \frac{A_\text{цикл}}{Q_+} = \frac{A_\text{цикл}}{Q_{12} + Q_{23}}  = \frac{A_\text{цикл}}{A_{12} + \Delta U_{12} + A_{23} + \Delta U_{23}} =  \\
@@ -1518,6 +1980,27 @@
         \item Определите точку росы для этого воздуха.
         \item Какой станет относительная влажность этого воздуха, если нагреть его до $70\celsius$?
     \end{itemize}
+}
+\answer{%
+    \begin{align*}
+    &\text{Значения плотности насыщенного водяного пара определяем по таблице:} \\
+    &\rho_{ \text{ нас.
+    пара 30 } \celsius } = 30{,}300\,\frac{\text{г}}{\text{м}^{3}}, \rho_{ \text{ нас.
+    пара 70 } \celsius } = 198{,}000\,\frac{\text{г}}{\text{м}^{3}}.
+    \\
+    \varphi_1 &= \frac{ \rho_\text{ пара } }{ \rho_{ \text{ нас.
+    пара 30 } \celsius } } \implies { \rho_\text{ пара } } = \rho_{ \text{ нас.
+    пара 30 } \celsius } \cdot \varphi_1 = 30{,}300\,\frac{\text{г}}{\text{м}^{3}} \cdot 0{,}75 = 22{,}725\,\frac{\text{г}}{\text{м}^{3}}.
+    \\
+    &\text{По таблице определяем, при какой температуре пар с такой плотностью станет насыщенным: }  \\
+    t_\text{росы} &= 24{,}8\celsius, \\
+    \varphi_2 &= \frac{ \rho_\text{ пара } }{ \rho_{ \text{ нас.
+    пара 70 } \celsius } } = \frac{\rho_{ \text{ нас.
+    пара 30 } \celsius } \cdot \varphi_1}{ \rho_{ \text{ нас.
+    пара 70 } \celsius } }= \varphi_1 \cdot \frac{ \rho_{ \text{ нас.
+    пара 30 } \celsius } }{ \rho_{ \text{ нас.
+    пара 70 } \celsius } } = 0{,}75 \cdot \frac{ 30{,}300\,\frac{\text{г}}{\text{м}^{3}} }{ 198{,}000\,\frac{\text{г}}{\text{м}^{3}} } = 0{,}115 \approx 11{,}5\%.
+    \end{align*}
 }
 \solutionspace{80pt}
 
@@ -1569,7 +2052,7 @@
     \\
     A_\text{цикл} &= \frac 12 (6P_0 - P_0)(3V_0 - V_0) = \frac 12 \cdot 10 \cdot P_0V_0, \\
     A_{23} &= 3P_0 \cdot (6V_0 - V_0) = 15P_0V_0, \\
-    \Delta U_{23} &= \frac 32 \nu R T_3 - \frac 32 \nu R T_3 = \frac 32 P_3 V_3 - \frac 32 P_2 V_2 = \frac 32 \cdot 3 P_0 \cdot 6 V_0 -  \frac 32 \cdot 3 P_0 \cdot V_0 = \frac 32 \cdot 15 \cdot P_0V_0, \\
+    \Delta U_{23} &= \frac 32 \nu R T_3 - \frac 32 \nu R T_2 = \frac 32 P_3 V_3 - \frac 32 P_2 V_2 = \frac 32 \cdot 3 P_0 \cdot 6 V_0 -  \frac 32 \cdot 3 P_0 \cdot V_0 = \frac 32 \cdot 15 \cdot P_0V_0, \\
     \Delta U_{12} &= \frac 32 \nu R T_2 - \frac 32 \nu R T_1 = \frac 32 P_2 V_2 - \frac 32 P_1 V_1 = \frac 32 \cdot 3 P_0V_0 - \frac 32 P_0V_0 = \frac 32 \cdot 2 \cdot P_0V_0.
     \\
     \eta &= \frac{A_\text{цикл}}{Q_+} = \frac{A_\text{цикл}}{Q_{12} + Q_{23}}  = \frac{A_\text{цикл}}{A_{12} + \Delta U_{12} + A_{23} + \Delta U_{23}} =  \\
@@ -1585,6 +2068,27 @@
         \item Определите точку росы для этого воздуха.
         \item Какой станет относительная влажность этого воздуха, если нагреть его до $80\celsius$?
     \end{itemize}
+}
+\answer{%
+    \begin{align*}
+    &\text{Значения плотности насыщенного водяного пара определяем по таблице:} \\
+    &\rho_{ \text{ нас.
+    пара 30 } \celsius } = 30{,}300\,\frac{\text{г}}{\text{м}^{3}}, \rho_{ \text{ нас.
+    пара 80 } \celsius } = 293{,}000\,\frac{\text{г}}{\text{м}^{3}}.
+    \\
+    \varphi_1 &= \frac{ \rho_\text{ пара } }{ \rho_{ \text{ нас.
+    пара 30 } \celsius } } \implies { \rho_\text{ пара } } = \rho_{ \text{ нас.
+    пара 30 } \celsius } \cdot \varphi_1 = 30{,}300\,\frac{\text{г}}{\text{м}^{3}} \cdot 0{,}70 = 21{,}210\,\frac{\text{г}}{\text{м}^{3}}.
+    \\
+    &\text{По таблице определяем, при какой температуре пар с такой плотностью станет насыщенным: }  \\
+    t_\text{росы} &= 23{,}5\celsius, \\
+    \varphi_2 &= \frac{ \rho_\text{ пара } }{ \rho_{ \text{ нас.
+    пара 80 } \celsius } } = \frac{\rho_{ \text{ нас.
+    пара 30 } \celsius } \cdot \varphi_1}{ \rho_{ \text{ нас.
+    пара 80 } \celsius } }= \varphi_1 \cdot \frac{ \rho_{ \text{ нас.
+    пара 30 } \celsius } }{ \rho_{ \text{ нас.
+    пара 80 } \celsius } } = 0{,}70 \cdot \frac{ 30{,}300\,\frac{\text{г}}{\text{м}^{3}} }{ 293{,}000\,\frac{\text{г}}{\text{м}^{3}} } = 0{,}072 \approx 7{,}2\%.
+    \end{align*}
 }
 \solutionspace{80pt}
 
@@ -1636,7 +2140,7 @@
     \\
     A_\text{цикл} &= \frac 12 (3P_0 - P_0)(5V_0 - V_0) = \frac 12 \cdot 8 \cdot P_0V_0, \\
     A_{23} &= 5P_0 \cdot (3V_0 - V_0) = 10P_0V_0, \\
-    \Delta U_{23} &= \frac 32 \nu R T_3 - \frac 32 \nu R T_3 = \frac 32 P_3 V_3 - \frac 32 P_2 V_2 = \frac 32 \cdot 5 P_0 \cdot 3 V_0 -  \frac 32 \cdot 5 P_0 \cdot V_0 = \frac 32 \cdot 10 \cdot P_0V_0, \\
+    \Delta U_{23} &= \frac 32 \nu R T_3 - \frac 32 \nu R T_2 = \frac 32 P_3 V_3 - \frac 32 P_2 V_2 = \frac 32 \cdot 5 P_0 \cdot 3 V_0 -  \frac 32 \cdot 5 P_0 \cdot V_0 = \frac 32 \cdot 10 \cdot P_0V_0, \\
     \Delta U_{12} &= \frac 32 \nu R T_2 - \frac 32 \nu R T_1 = \frac 32 P_2 V_2 - \frac 32 P_1 V_1 = \frac 32 \cdot 5 P_0V_0 - \frac 32 P_0V_0 = \frac 32 \cdot 4 \cdot P_0V_0.
     \\
     \eta &= \frac{A_\text{цикл}}{Q_+} = \frac{A_\text{цикл}}{Q_{12} + Q_{23}}  = \frac{A_\text{цикл}}{A_{12} + \Delta U_{12} + A_{23} + \Delta U_{23}} =  \\
@@ -1652,6 +2156,27 @@
         \item Определите точку росы для этого воздуха.
         \item Какой станет относительная влажность этого воздуха, если нагреть его до $40\celsius$?
     \end{itemize}
+}
+\answer{%
+    \begin{align*}
+    &\text{Значения плотности насыщенного водяного пара определяем по таблице:} \\
+    &\rho_{ \text{ нас.
+    пара 30 } \celsius } = 30{,}300\,\frac{\text{г}}{\text{м}^{3}}, \rho_{ \text{ нас.
+    пара 40 } \celsius } = 51{,}200\,\frac{\text{г}}{\text{м}^{3}}.
+    \\
+    \varphi_1 &= \frac{ \rho_\text{ пара } }{ \rho_{ \text{ нас.
+    пара 30 } \celsius } } \implies { \rho_\text{ пара } } = \rho_{ \text{ нас.
+    пара 30 } \celsius } \cdot \varphi_1 = 30{,}300\,\frac{\text{г}}{\text{м}^{3}} \cdot 0{,}60 = 18{,}180\,\frac{\text{г}}{\text{м}^{3}}.
+    \\
+    &\text{По таблице определяем, при какой температуре пар с такой плотностью станет насыщенным: }  \\
+    t_\text{росы} &= 20{,}9\celsius, \\
+    \varphi_2 &= \frac{ \rho_\text{ пара } }{ \rho_{ \text{ нас.
+    пара 40 } \celsius } } = \frac{\rho_{ \text{ нас.
+    пара 30 } \celsius } \cdot \varphi_1}{ \rho_{ \text{ нас.
+    пара 40 } \celsius } }= \varphi_1 \cdot \frac{ \rho_{ \text{ нас.
+    пара 30 } \celsius } }{ \rho_{ \text{ нас.
+    пара 40 } \celsius } } = 0{,}60 \cdot \frac{ 30{,}300\,\frac{\text{г}}{\text{м}^{3}} }{ 51{,}200\,\frac{\text{г}}{\text{м}^{3}} } = 0{,}355 \approx 35{,}5\%.
+    \end{align*}
 }
 \solutionspace{80pt}
 
@@ -1703,7 +2228,7 @@
     \\
     A_\text{цикл} &= \frac 12 (4P_0 - P_0)(2V_0 - V_0) = \frac 12 \cdot 3 \cdot P_0V_0, \\
     A_{23} &= 2P_0 \cdot (4V_0 - V_0) = 6P_0V_0, \\
-    \Delta U_{23} &= \frac 32 \nu R T_3 - \frac 32 \nu R T_3 = \frac 32 P_3 V_3 - \frac 32 P_2 V_2 = \frac 32 \cdot 2 P_0 \cdot 4 V_0 -  \frac 32 \cdot 2 P_0 \cdot V_0 = \frac 32 \cdot 6 \cdot P_0V_0, \\
+    \Delta U_{23} &= \frac 32 \nu R T_3 - \frac 32 \nu R T_2 = \frac 32 P_3 V_3 - \frac 32 P_2 V_2 = \frac 32 \cdot 2 P_0 \cdot 4 V_0 -  \frac 32 \cdot 2 P_0 \cdot V_0 = \frac 32 \cdot 6 \cdot P_0V_0, \\
     \Delta U_{12} &= \frac 32 \nu R T_2 - \frac 32 \nu R T_1 = \frac 32 P_2 V_2 - \frac 32 P_1 V_1 = \frac 32 \cdot 2 P_0V_0 - \frac 32 P_0V_0 = \frac 32 \cdot 1 \cdot P_0V_0.
     \\
     \eta &= \frac{A_\text{цикл}}{Q_+} = \frac{A_\text{цикл}}{Q_{12} + Q_{23}}  = \frac{A_\text{цикл}}{A_{12} + \Delta U_{12} + A_{23} + \Delta U_{23}} =  \\
@@ -1719,6 +2244,27 @@
         \item Определите точку росы для этого воздуха.
         \item Какой станет относительная влажность этого воздуха, если нагреть его до $80\celsius$?
     \end{itemize}
+}
+\answer{%
+    \begin{align*}
+    &\text{Значения плотности насыщенного водяного пара определяем по таблице:} \\
+    &\rho_{ \text{ нас.
+    пара 15 } \celsius } = 12{,}800\,\frac{\text{г}}{\text{м}^{3}}, \rho_{ \text{ нас.
+    пара 80 } \celsius } = 293{,}000\,\frac{\text{г}}{\text{м}^{3}}.
+    \\
+    \varphi_1 &= \frac{ \rho_\text{ пара } }{ \rho_{ \text{ нас.
+    пара 15 } \celsius } } \implies { \rho_\text{ пара } } = \rho_{ \text{ нас.
+    пара 15 } \celsius } \cdot \varphi_1 = 12{,}800\,\frac{\text{г}}{\text{м}^{3}} \cdot 0{,}75 = 9{,}600\,\frac{\text{г}}{\text{м}^{3}}.
+    \\
+    &\text{По таблице определяем, при какой температуре пар с такой плотностью станет насыщенным: }  \\
+    t_\text{росы} &= 10{,}3\celsius, \\
+    \varphi_2 &= \frac{ \rho_\text{ пара } }{ \rho_{ \text{ нас.
+    пара 80 } \celsius } } = \frac{\rho_{ \text{ нас.
+    пара 15 } \celsius } \cdot \varphi_1}{ \rho_{ \text{ нас.
+    пара 80 } \celsius } }= \varphi_1 \cdot \frac{ \rho_{ \text{ нас.
+    пара 15 } \celsius } }{ \rho_{ \text{ нас.
+    пара 80 } \celsius } } = 0{,}75 \cdot \frac{ 12{,}800\,\frac{\text{г}}{\text{м}^{3}} }{ 293{,}000\,\frac{\text{г}}{\text{м}^{3}} } = 0{,}033 \approx 3{,}3\%.
+    \end{align*}
 }
 \solutionspace{80pt}
 
@@ -1770,7 +2316,7 @@
     \\
     A_\text{цикл} &= \frac 12 (4P_0 - P_0)(3V_0 - V_0) = \frac 12 \cdot 6 \cdot P_0V_0, \\
     A_{23} &= 3P_0 \cdot (4V_0 - V_0) = 9P_0V_0, \\
-    \Delta U_{23} &= \frac 32 \nu R T_3 - \frac 32 \nu R T_3 = \frac 32 P_3 V_3 - \frac 32 P_2 V_2 = \frac 32 \cdot 3 P_0 \cdot 4 V_0 -  \frac 32 \cdot 3 P_0 \cdot V_0 = \frac 32 \cdot 9 \cdot P_0V_0, \\
+    \Delta U_{23} &= \frac 32 \nu R T_3 - \frac 32 \nu R T_2 = \frac 32 P_3 V_3 - \frac 32 P_2 V_2 = \frac 32 \cdot 3 P_0 \cdot 4 V_0 -  \frac 32 \cdot 3 P_0 \cdot V_0 = \frac 32 \cdot 9 \cdot P_0V_0, \\
     \Delta U_{12} &= \frac 32 \nu R T_2 - \frac 32 \nu R T_1 = \frac 32 P_2 V_2 - \frac 32 P_1 V_1 = \frac 32 \cdot 3 P_0V_0 - \frac 32 P_0V_0 = \frac 32 \cdot 2 \cdot P_0V_0.
     \\
     \eta &= \frac{A_\text{цикл}}{Q_+} = \frac{A_\text{цикл}}{Q_{12} + Q_{23}}  = \frac{A_\text{цикл}}{A_{12} + \Delta U_{12} + A_{23} + \Delta U_{23}} =  \\
@@ -1786,6 +2332,27 @@
         \item Определите точку росы для этого воздуха.
         \item Какой станет относительная влажность этого воздуха, если нагреть его до $70\celsius$?
     \end{itemize}
+}
+\answer{%
+    \begin{align*}
+    &\text{Значения плотности насыщенного водяного пара определяем по таблице:} \\
+    &\rho_{ \text{ нас.
+    пара 20 } \celsius } = 17{,}300\,\frac{\text{г}}{\text{м}^{3}}, \rho_{ \text{ нас.
+    пара 70 } \celsius } = 198{,}000\,\frac{\text{г}}{\text{м}^{3}}.
+    \\
+    \varphi_1 &= \frac{ \rho_\text{ пара } }{ \rho_{ \text{ нас.
+    пара 20 } \celsius } } \implies { \rho_\text{ пара } } = \rho_{ \text{ нас.
+    пара 20 } \celsius } \cdot \varphi_1 = 17{,}300\,\frac{\text{г}}{\text{м}^{3}} \cdot 0{,}40 = 6{,}920\,\frac{\text{г}}{\text{м}^{3}}.
+    \\
+    &\text{По таблице определяем, при какой температуре пар с такой плотностью станет насыщенным: }  \\
+    t_\text{росы} &= 5{,}2\celsius, \\
+    \varphi_2 &= \frac{ \rho_\text{ пара } }{ \rho_{ \text{ нас.
+    пара 70 } \celsius } } = \frac{\rho_{ \text{ нас.
+    пара 20 } \celsius } \cdot \varphi_1}{ \rho_{ \text{ нас.
+    пара 70 } \celsius } }= \varphi_1 \cdot \frac{ \rho_{ \text{ нас.
+    пара 20 } \celsius } }{ \rho_{ \text{ нас.
+    пара 70 } \celsius } } = 0{,}40 \cdot \frac{ 17{,}300\,\frac{\text{г}}{\text{м}^{3}} }{ 198{,}000\,\frac{\text{г}}{\text{м}^{3}} } = 0{,}035 \approx 3{,}5\%.
+    \end{align*}
 }
 \solutionspace{80pt}
 
@@ -1837,7 +2404,7 @@
     \\
     A_\text{цикл} &= \frac 12 (5P_0 - P_0)(5V_0 - V_0) = \frac 12 \cdot 16 \cdot P_0V_0, \\
     A_{23} &= 5P_0 \cdot (5V_0 - V_0) = 20P_0V_0, \\
-    \Delta U_{23} &= \frac 32 \nu R T_3 - \frac 32 \nu R T_3 = \frac 32 P_3 V_3 - \frac 32 P_2 V_2 = \frac 32 \cdot 5 P_0 \cdot 5 V_0 -  \frac 32 \cdot 5 P_0 \cdot V_0 = \frac 32 \cdot 20 \cdot P_0V_0, \\
+    \Delta U_{23} &= \frac 32 \nu R T_3 - \frac 32 \nu R T_2 = \frac 32 P_3 V_3 - \frac 32 P_2 V_2 = \frac 32 \cdot 5 P_0 \cdot 5 V_0 -  \frac 32 \cdot 5 P_0 \cdot V_0 = \frac 32 \cdot 20 \cdot P_0V_0, \\
     \Delta U_{12} &= \frac 32 \nu R T_2 - \frac 32 \nu R T_1 = \frac 32 P_2 V_2 - \frac 32 P_1 V_1 = \frac 32 \cdot 5 P_0V_0 - \frac 32 P_0V_0 = \frac 32 \cdot 4 \cdot P_0V_0.
     \\
     \eta &= \frac{A_\text{цикл}}{Q_+} = \frac{A_\text{цикл}}{Q_{12} + Q_{23}}  = \frac{A_\text{цикл}}{A_{12} + \Delta U_{12} + A_{23} + \Delta U_{23}} =  \\
@@ -1853,6 +2420,27 @@
         \item Определите точку росы для этого воздуха.
         \item Какой станет относительная влажность этого воздуха, если нагреть его до $60\celsius$?
     \end{itemize}
+}
+\answer{%
+    \begin{align*}
+    &\text{Значения плотности насыщенного водяного пара определяем по таблице:} \\
+    &\rho_{ \text{ нас.
+    пара 15 } \celsius } = 12{,}800\,\frac{\text{г}}{\text{м}^{3}}, \rho_{ \text{ нас.
+    пара 60 } \celsius } = 130{,}000\,\frac{\text{г}}{\text{м}^{3}}.
+    \\
+    \varphi_1 &= \frac{ \rho_\text{ пара } }{ \rho_{ \text{ нас.
+    пара 15 } \celsius } } \implies { \rho_\text{ пара } } = \rho_{ \text{ нас.
+    пара 15 } \celsius } \cdot \varphi_1 = 12{,}800\,\frac{\text{г}}{\text{м}^{3}} \cdot 0{,}45 = 5{,}760\,\frac{\text{г}}{\text{м}^{3}}.
+    \\
+    &\text{По таблице определяем, при какой температуре пар с такой плотностью станет насыщенным: }  \\
+    t_\text{росы} &= 2{,}4\celsius, \\
+    \varphi_2 &= \frac{ \rho_\text{ пара } }{ \rho_{ \text{ нас.
+    пара 60 } \celsius } } = \frac{\rho_{ \text{ нас.
+    пара 15 } \celsius } \cdot \varphi_1}{ \rho_{ \text{ нас.
+    пара 60 } \celsius } }= \varphi_1 \cdot \frac{ \rho_{ \text{ нас.
+    пара 15 } \celsius } }{ \rho_{ \text{ нас.
+    пара 60 } \celsius } } = 0{,}45 \cdot \frac{ 12{,}800\,\frac{\text{г}}{\text{м}^{3}} }{ 130{,}000\,\frac{\text{г}}{\text{м}^{3}} } = 0{,}044 \approx 4{,}4\%.
+    \end{align*}
 }
 \solutionspace{80pt}
 
@@ -1904,7 +2492,7 @@
     \\
     A_\text{цикл} &= \frac 12 (6P_0 - P_0)(3V_0 - V_0) = \frac 12 \cdot 10 \cdot P_0V_0, \\
     A_{23} &= 3P_0 \cdot (6V_0 - V_0) = 15P_0V_0, \\
-    \Delta U_{23} &= \frac 32 \nu R T_3 - \frac 32 \nu R T_3 = \frac 32 P_3 V_3 - \frac 32 P_2 V_2 = \frac 32 \cdot 3 P_0 \cdot 6 V_0 -  \frac 32 \cdot 3 P_0 \cdot V_0 = \frac 32 \cdot 15 \cdot P_0V_0, \\
+    \Delta U_{23} &= \frac 32 \nu R T_3 - \frac 32 \nu R T_2 = \frac 32 P_3 V_3 - \frac 32 P_2 V_2 = \frac 32 \cdot 3 P_0 \cdot 6 V_0 -  \frac 32 \cdot 3 P_0 \cdot V_0 = \frac 32 \cdot 15 \cdot P_0V_0, \\
     \Delta U_{12} &= \frac 32 \nu R T_2 - \frac 32 \nu R T_1 = \frac 32 P_2 V_2 - \frac 32 P_1 V_1 = \frac 32 \cdot 3 P_0V_0 - \frac 32 P_0V_0 = \frac 32 \cdot 2 \cdot P_0V_0.
     \\
     \eta &= \frac{A_\text{цикл}}{Q_+} = \frac{A_\text{цикл}}{Q_{12} + Q_{23}}  = \frac{A_\text{цикл}}{A_{12} + \Delta U_{12} + A_{23} + \Delta U_{23}} =  \\
@@ -1920,6 +2508,27 @@
         \item Определите точку росы для этого воздуха.
         \item Какой станет относительная влажность этого воздуха, если нагреть его до $60\celsius$?
     \end{itemize}
+}
+\answer{%
+    \begin{align*}
+    &\text{Значения плотности насыщенного водяного пара определяем по таблице:} \\
+    &\rho_{ \text{ нас.
+    пара 25 } \celsius } = 23{,}000\,\frac{\text{г}}{\text{м}^{3}}, \rho_{ \text{ нас.
+    пара 60 } \celsius } = 130{,}000\,\frac{\text{г}}{\text{м}^{3}}.
+    \\
+    \varphi_1 &= \frac{ \rho_\text{ пара } }{ \rho_{ \text{ нас.
+    пара 25 } \celsius } } \implies { \rho_\text{ пара } } = \rho_{ \text{ нас.
+    пара 25 } \celsius } \cdot \varphi_1 = 23{,}000\,\frac{\text{г}}{\text{м}^{3}} \cdot 0{,}70 = 16{,}100\,\frac{\text{г}}{\text{м}^{3}}.
+    \\
+    &\text{По таблице определяем, при какой температуре пар с такой плотностью станет насыщенным: }  \\
+    t_\text{росы} &= 18{,}8\celsius, \\
+    \varphi_2 &= \frac{ \rho_\text{ пара } }{ \rho_{ \text{ нас.
+    пара 60 } \celsius } } = \frac{\rho_{ \text{ нас.
+    пара 25 } \celsius } \cdot \varphi_1}{ \rho_{ \text{ нас.
+    пара 60 } \celsius } }= \varphi_1 \cdot \frac{ \rho_{ \text{ нас.
+    пара 25 } \celsius } }{ \rho_{ \text{ нас.
+    пара 60 } \celsius } } = 0{,}70 \cdot \frac{ 23{,}000\,\frac{\text{г}}{\text{м}^{3}} }{ 130{,}000\,\frac{\text{г}}{\text{м}^{3}} } = 0{,}124 \approx 12{,}4\%.
+    \end{align*}
 }
 \solutionspace{80pt}
 
@@ -1971,7 +2580,7 @@
     \\
     A_\text{цикл} &= \frac 12 (2P_0 - P_0)(4V_0 - V_0) = \frac 12 \cdot 3 \cdot P_0V_0, \\
     A_{23} &= 4P_0 \cdot (2V_0 - V_0) = 4P_0V_0, \\
-    \Delta U_{23} &= \frac 32 \nu R T_3 - \frac 32 \nu R T_3 = \frac 32 P_3 V_3 - \frac 32 P_2 V_2 = \frac 32 \cdot 4 P_0 \cdot 2 V_0 -  \frac 32 \cdot 4 P_0 \cdot V_0 = \frac 32 \cdot 4 \cdot P_0V_0, \\
+    \Delta U_{23} &= \frac 32 \nu R T_3 - \frac 32 \nu R T_2 = \frac 32 P_3 V_3 - \frac 32 P_2 V_2 = \frac 32 \cdot 4 P_0 \cdot 2 V_0 -  \frac 32 \cdot 4 P_0 \cdot V_0 = \frac 32 \cdot 4 \cdot P_0V_0, \\
     \Delta U_{12} &= \frac 32 \nu R T_2 - \frac 32 \nu R T_1 = \frac 32 P_2 V_2 - \frac 32 P_1 V_1 = \frac 32 \cdot 4 P_0V_0 - \frac 32 P_0V_0 = \frac 32 \cdot 3 \cdot P_0V_0.
     \\
     \eta &= \frac{A_\text{цикл}}{Q_+} = \frac{A_\text{цикл}}{Q_{12} + Q_{23}}  = \frac{A_\text{цикл}}{A_{12} + \Delta U_{12} + A_{23} + \Delta U_{23}} =  \\
@@ -1987,6 +2596,27 @@
         \item Определите точку росы для этого воздуха.
         \item Какой станет относительная влажность этого воздуха, если нагреть его до $70\celsius$?
     \end{itemize}
+}
+\answer{%
+    \begin{align*}
+    &\text{Значения плотности насыщенного водяного пара определяем по таблице:} \\
+    &\rho_{ \text{ нас.
+    пара 15 } \celsius } = 12{,}800\,\frac{\text{г}}{\text{м}^{3}}, \rho_{ \text{ нас.
+    пара 70 } \celsius } = 198{,}000\,\frac{\text{г}}{\text{м}^{3}}.
+    \\
+    \varphi_1 &= \frac{ \rho_\text{ пара } }{ \rho_{ \text{ нас.
+    пара 15 } \celsius } } \implies { \rho_\text{ пара } } = \rho_{ \text{ нас.
+    пара 15 } \celsius } \cdot \varphi_1 = 12{,}800\,\frac{\text{г}}{\text{м}^{3}} \cdot 0{,}40 = 5{,}120\,\frac{\text{г}}{\text{м}^{3}}.
+    \\
+    &\text{По таблице определяем, при какой температуре пар с такой плотностью станет насыщенным: }  \\
+    t_\text{росы} &= 0{,}7\celsius, \\
+    \varphi_2 &= \frac{ \rho_\text{ пара } }{ \rho_{ \text{ нас.
+    пара 70 } \celsius } } = \frac{\rho_{ \text{ нас.
+    пара 15 } \celsius } \cdot \varphi_1}{ \rho_{ \text{ нас.
+    пара 70 } \celsius } }= \varphi_1 \cdot \frac{ \rho_{ \text{ нас.
+    пара 15 } \celsius } }{ \rho_{ \text{ нас.
+    пара 70 } \celsius } } = 0{,}40 \cdot \frac{ 12{,}800\,\frac{\text{г}}{\text{м}^{3}} }{ 198{,}000\,\frac{\text{г}}{\text{м}^{3}} } = 0{,}026 \approx 2{,}6\%.
+    \end{align*}
 }
 \solutionspace{80pt}
 
@@ -2038,7 +2668,7 @@
     \\
     A_\text{цикл} &= \frac 12 (2P_0 - P_0)(3V_0 - V_0) = \frac 12 \cdot 2 \cdot P_0V_0, \\
     A_{23} &= 3P_0 \cdot (2V_0 - V_0) = 3P_0V_0, \\
-    \Delta U_{23} &= \frac 32 \nu R T_3 - \frac 32 \nu R T_3 = \frac 32 P_3 V_3 - \frac 32 P_2 V_2 = \frac 32 \cdot 3 P_0 \cdot 2 V_0 -  \frac 32 \cdot 3 P_0 \cdot V_0 = \frac 32 \cdot 3 \cdot P_0V_0, \\
+    \Delta U_{23} &= \frac 32 \nu R T_3 - \frac 32 \nu R T_2 = \frac 32 P_3 V_3 - \frac 32 P_2 V_2 = \frac 32 \cdot 3 P_0 \cdot 2 V_0 -  \frac 32 \cdot 3 P_0 \cdot V_0 = \frac 32 \cdot 3 \cdot P_0V_0, \\
     \Delta U_{12} &= \frac 32 \nu R T_2 - \frac 32 \nu R T_1 = \frac 32 P_2 V_2 - \frac 32 P_1 V_1 = \frac 32 \cdot 3 P_0V_0 - \frac 32 P_0V_0 = \frac 32 \cdot 2 \cdot P_0V_0.
     \\
     \eta &= \frac{A_\text{цикл}}{Q_+} = \frac{A_\text{цикл}}{Q_{12} + Q_{23}}  = \frac{A_\text{цикл}}{A_{12} + \Delta U_{12} + A_{23} + \Delta U_{23}} =  \\
@@ -2054,6 +2684,27 @@
         \item Определите точку росы для этого воздуха.
         \item Какой станет относительная влажность этого воздуха, если нагреть его до $50\celsius$?
     \end{itemize}
+}
+\answer{%
+    \begin{align*}
+    &\text{Значения плотности насыщенного водяного пара определяем по таблице:} \\
+    &\rho_{ \text{ нас.
+    пара 20 } \celsius } = 17{,}300\,\frac{\text{г}}{\text{м}^{3}}, \rho_{ \text{ нас.
+    пара 50 } \celsius } = 83{,}000\,\frac{\text{г}}{\text{м}^{3}}.
+    \\
+    \varphi_1 &= \frac{ \rho_\text{ пара } }{ \rho_{ \text{ нас.
+    пара 20 } \celsius } } \implies { \rho_\text{ пара } } = \rho_{ \text{ нас.
+    пара 20 } \celsius } \cdot \varphi_1 = 17{,}300\,\frac{\text{г}}{\text{м}^{3}} \cdot 0{,}75 = 12{,}975\,\frac{\text{г}}{\text{м}^{3}}.
+    \\
+    &\text{По таблице определяем, при какой температуре пар с такой плотностью станет насыщенным: }  \\
+    t_\text{росы} &= 15{,}2\celsius, \\
+    \varphi_2 &= \frac{ \rho_\text{ пара } }{ \rho_{ \text{ нас.
+    пара 50 } \celsius } } = \frac{\rho_{ \text{ нас.
+    пара 20 } \celsius } \cdot \varphi_1}{ \rho_{ \text{ нас.
+    пара 50 } \celsius } }= \varphi_1 \cdot \frac{ \rho_{ \text{ нас.
+    пара 20 } \celsius } }{ \rho_{ \text{ нас.
+    пара 50 } \celsius } } = 0{,}75 \cdot \frac{ 17{,}300\,\frac{\text{г}}{\text{м}^{3}} }{ 83{,}000\,\frac{\text{г}}{\text{м}^{3}} } = 0{,}156 \approx 15{,}6\%.
+    \end{align*}
 }
 \solutionspace{80pt}
 
@@ -2105,7 +2756,7 @@
     \\
     A_\text{цикл} &= \frac 12 (5P_0 - P_0)(2V_0 - V_0) = \frac 12 \cdot 4 \cdot P_0V_0, \\
     A_{23} &= 2P_0 \cdot (5V_0 - V_0) = 8P_0V_0, \\
-    \Delta U_{23} &= \frac 32 \nu R T_3 - \frac 32 \nu R T_3 = \frac 32 P_3 V_3 - \frac 32 P_2 V_2 = \frac 32 \cdot 2 P_0 \cdot 5 V_0 -  \frac 32 \cdot 2 P_0 \cdot V_0 = \frac 32 \cdot 8 \cdot P_0V_0, \\
+    \Delta U_{23} &= \frac 32 \nu R T_3 - \frac 32 \nu R T_2 = \frac 32 P_3 V_3 - \frac 32 P_2 V_2 = \frac 32 \cdot 2 P_0 \cdot 5 V_0 -  \frac 32 \cdot 2 P_0 \cdot V_0 = \frac 32 \cdot 8 \cdot P_0V_0, \\
     \Delta U_{12} &= \frac 32 \nu R T_2 - \frac 32 \nu R T_1 = \frac 32 P_2 V_2 - \frac 32 P_1 V_1 = \frac 32 \cdot 2 P_0V_0 - \frac 32 P_0V_0 = \frac 32 \cdot 1 \cdot P_0V_0.
     \\
     \eta &= \frac{A_\text{цикл}}{Q_+} = \frac{A_\text{цикл}}{Q_{12} + Q_{23}}  = \frac{A_\text{цикл}}{A_{12} + \Delta U_{12} + A_{23} + \Delta U_{23}} =  \\
@@ -2121,6 +2772,27 @@
         \item Определите точку росы для этого воздуха.
         \item Какой станет относительная влажность этого воздуха, если нагреть его до $60\celsius$?
     \end{itemize}
+}
+\answer{%
+    \begin{align*}
+    &\text{Значения плотности насыщенного водяного пара определяем по таблице:} \\
+    &\rho_{ \text{ нас.
+    пара 25 } \celsius } = 23{,}000\,\frac{\text{г}}{\text{м}^{3}}, \rho_{ \text{ нас.
+    пара 60 } \celsius } = 130{,}000\,\frac{\text{г}}{\text{м}^{3}}.
+    \\
+    \varphi_1 &= \frac{ \rho_\text{ пара } }{ \rho_{ \text{ нас.
+    пара 25 } \celsius } } \implies { \rho_\text{ пара } } = \rho_{ \text{ нас.
+    пара 25 } \celsius } \cdot \varphi_1 = 23{,}000\,\frac{\text{г}}{\text{м}^{3}} \cdot 0{,}75 = 17{,}250\,\frac{\text{г}}{\text{м}^{3}}.
+    \\
+    &\text{По таблице определяем, при какой температуре пар с такой плотностью станет насыщенным: }  \\
+    t_\text{росы} &= 19{,}9\celsius, \\
+    \varphi_2 &= \frac{ \rho_\text{ пара } }{ \rho_{ \text{ нас.
+    пара 60 } \celsius } } = \frac{\rho_{ \text{ нас.
+    пара 25 } \celsius } \cdot \varphi_1}{ \rho_{ \text{ нас.
+    пара 60 } \celsius } }= \varphi_1 \cdot \frac{ \rho_{ \text{ нас.
+    пара 25 } \celsius } }{ \rho_{ \text{ нас.
+    пара 60 } \celsius } } = 0{,}75 \cdot \frac{ 23{,}000\,\frac{\text{г}}{\text{м}^{3}} }{ 130{,}000\,\frac{\text{г}}{\text{м}^{3}} } = 0{,}133 \approx 13{,}3\%.
+    \end{align*}
 }
 \solutionspace{80pt}
 
@@ -2172,7 +2844,7 @@
     \\
     A_\text{цикл} &= \frac 12 (6P_0 - P_0)(5V_0 - V_0) = \frac 12 \cdot 20 \cdot P_0V_0, \\
     A_{23} &= 5P_0 \cdot (6V_0 - V_0) = 25P_0V_0, \\
-    \Delta U_{23} &= \frac 32 \nu R T_3 - \frac 32 \nu R T_3 = \frac 32 P_3 V_3 - \frac 32 P_2 V_2 = \frac 32 \cdot 5 P_0 \cdot 6 V_0 -  \frac 32 \cdot 5 P_0 \cdot V_0 = \frac 32 \cdot 25 \cdot P_0V_0, \\
+    \Delta U_{23} &= \frac 32 \nu R T_3 - \frac 32 \nu R T_2 = \frac 32 P_3 V_3 - \frac 32 P_2 V_2 = \frac 32 \cdot 5 P_0 \cdot 6 V_0 -  \frac 32 \cdot 5 P_0 \cdot V_0 = \frac 32 \cdot 25 \cdot P_0V_0, \\
     \Delta U_{12} &= \frac 32 \nu R T_2 - \frac 32 \nu R T_1 = \frac 32 P_2 V_2 - \frac 32 P_1 V_1 = \frac 32 \cdot 5 P_0V_0 - \frac 32 P_0V_0 = \frac 32 \cdot 4 \cdot P_0V_0.
     \\
     \eta &= \frac{A_\text{цикл}}{Q_+} = \frac{A_\text{цикл}}{Q_{12} + Q_{23}}  = \frac{A_\text{цикл}}{A_{12} + \Delta U_{12} + A_{23} + \Delta U_{23}} =  \\
@@ -2188,6 +2860,27 @@
         \item Определите точку росы для этого воздуха.
         \item Какой станет относительная влажность этого воздуха, если нагреть его до $50\celsius$?
     \end{itemize}
+}
+\answer{%
+    \begin{align*}
+    &\text{Значения плотности насыщенного водяного пара определяем по таблице:} \\
+    &\rho_{ \text{ нас.
+    пара 20 } \celsius } = 17{,}300\,\frac{\text{г}}{\text{м}^{3}}, \rho_{ \text{ нас.
+    пара 50 } \celsius } = 83{,}000\,\frac{\text{г}}{\text{м}^{3}}.
+    \\
+    \varphi_1 &= \frac{ \rho_\text{ пара } }{ \rho_{ \text{ нас.
+    пара 20 } \celsius } } \implies { \rho_\text{ пара } } = \rho_{ \text{ нас.
+    пара 20 } \celsius } \cdot \varphi_1 = 17{,}300\,\frac{\text{г}}{\text{м}^{3}} \cdot 0{,}50 = 8{,}650\,\frac{\text{г}}{\text{м}^{3}}.
+    \\
+    &\text{По таблице определяем, при какой температуре пар с такой плотностью станет насыщенным: }  \\
+    t_\text{росы} &= 8{,}7\celsius, \\
+    \varphi_2 &= \frac{ \rho_\text{ пара } }{ \rho_{ \text{ нас.
+    пара 50 } \celsius } } = \frac{\rho_{ \text{ нас.
+    пара 20 } \celsius } \cdot \varphi_1}{ \rho_{ \text{ нас.
+    пара 50 } \celsius } }= \varphi_1 \cdot \frac{ \rho_{ \text{ нас.
+    пара 20 } \celsius } }{ \rho_{ \text{ нас.
+    пара 50 } \celsius } } = 0{,}50 \cdot \frac{ 17{,}300\,\frac{\text{г}}{\text{м}^{3}} }{ 83{,}000\,\frac{\text{г}}{\text{м}^{3}} } = 0{,}104 \approx 10{,}4\%.
+    \end{align*}
 }
 \solutionspace{80pt}
 
@@ -2239,7 +2932,7 @@
     \\
     A_\text{цикл} &= \frac 12 (2P_0 - P_0)(2V_0 - V_0) = \frac 12 \cdot 1 \cdot P_0V_0, \\
     A_{23} &= 2P_0 \cdot (2V_0 - V_0) = 2P_0V_0, \\
-    \Delta U_{23} &= \frac 32 \nu R T_3 - \frac 32 \nu R T_3 = \frac 32 P_3 V_3 - \frac 32 P_2 V_2 = \frac 32 \cdot 2 P_0 \cdot 2 V_0 -  \frac 32 \cdot 2 P_0 \cdot V_0 = \frac 32 \cdot 2 \cdot P_0V_0, \\
+    \Delta U_{23} &= \frac 32 \nu R T_3 - \frac 32 \nu R T_2 = \frac 32 P_3 V_3 - \frac 32 P_2 V_2 = \frac 32 \cdot 2 P_0 \cdot 2 V_0 -  \frac 32 \cdot 2 P_0 \cdot V_0 = \frac 32 \cdot 2 \cdot P_0V_0, \\
     \Delta U_{12} &= \frac 32 \nu R T_2 - \frac 32 \nu R T_1 = \frac 32 P_2 V_2 - \frac 32 P_1 V_1 = \frac 32 \cdot 2 P_0V_0 - \frac 32 P_0V_0 = \frac 32 \cdot 1 \cdot P_0V_0.
     \\
     \eta &= \frac{A_\text{цикл}}{Q_+} = \frac{A_\text{цикл}}{Q_{12} + Q_{23}}  = \frac{A_\text{цикл}}{A_{12} + \Delta U_{12} + A_{23} + \Delta U_{23}} =  \\
@@ -2255,6 +2948,27 @@
         \item Определите точку росы для этого воздуха.
         \item Какой станет относительная влажность этого воздуха, если нагреть его до $60\celsius$?
     \end{itemize}
+}
+\answer{%
+    \begin{align*}
+    &\text{Значения плотности насыщенного водяного пара определяем по таблице:} \\
+    &\rho_{ \text{ нас.
+    пара 30 } \celsius } = 30{,}300\,\frac{\text{г}}{\text{м}^{3}}, \rho_{ \text{ нас.
+    пара 60 } \celsius } = 130{,}000\,\frac{\text{г}}{\text{м}^{3}}.
+    \\
+    \varphi_1 &= \frac{ \rho_\text{ пара } }{ \rho_{ \text{ нас.
+    пара 30 } \celsius } } \implies { \rho_\text{ пара } } = \rho_{ \text{ нас.
+    пара 30 } \celsius } \cdot \varphi_1 = 30{,}300\,\frac{\text{г}}{\text{м}^{3}} \cdot 0{,}50 = 15{,}150\,\frac{\text{г}}{\text{м}^{3}}.
+    \\
+    &\text{По таблице определяем, при какой температуре пар с такой плотностью станет насыщенным: }  \\
+    t_\text{росы} &= 17{,}7\celsius, \\
+    \varphi_2 &= \frac{ \rho_\text{ пара } }{ \rho_{ \text{ нас.
+    пара 60 } \celsius } } = \frac{\rho_{ \text{ нас.
+    пара 30 } \celsius } \cdot \varphi_1}{ \rho_{ \text{ нас.
+    пара 60 } \celsius } }= \varphi_1 \cdot \frac{ \rho_{ \text{ нас.
+    пара 30 } \celsius } }{ \rho_{ \text{ нас.
+    пара 60 } \celsius } } = 0{,}50 \cdot \frac{ 30{,}300\,\frac{\text{г}}{\text{м}^{3}} }{ 130{,}000\,\frac{\text{г}}{\text{м}^{3}} } = 0{,}117 \approx 11{,}7\%.
+    \end{align*}
 }
 \solutionspace{80pt}
 
@@ -2306,7 +3020,7 @@
     \\
     A_\text{цикл} &= \frac 12 (6P_0 - P_0)(5V_0 - V_0) = \frac 12 \cdot 20 \cdot P_0V_0, \\
     A_{23} &= 5P_0 \cdot (6V_0 - V_0) = 25P_0V_0, \\
-    \Delta U_{23} &= \frac 32 \nu R T_3 - \frac 32 \nu R T_3 = \frac 32 P_3 V_3 - \frac 32 P_2 V_2 = \frac 32 \cdot 5 P_0 \cdot 6 V_0 -  \frac 32 \cdot 5 P_0 \cdot V_0 = \frac 32 \cdot 25 \cdot P_0V_0, \\
+    \Delta U_{23} &= \frac 32 \nu R T_3 - \frac 32 \nu R T_2 = \frac 32 P_3 V_3 - \frac 32 P_2 V_2 = \frac 32 \cdot 5 P_0 \cdot 6 V_0 -  \frac 32 \cdot 5 P_0 \cdot V_0 = \frac 32 \cdot 25 \cdot P_0V_0, \\
     \Delta U_{12} &= \frac 32 \nu R T_2 - \frac 32 \nu R T_1 = \frac 32 P_2 V_2 - \frac 32 P_1 V_1 = \frac 32 \cdot 5 P_0V_0 - \frac 32 P_0V_0 = \frac 32 \cdot 4 \cdot P_0V_0.
     \\
     \eta &= \frac{A_\text{цикл}}{Q_+} = \frac{A_\text{цикл}}{Q_{12} + Q_{23}}  = \frac{A_\text{цикл}}{A_{12} + \Delta U_{12} + A_{23} + \Delta U_{23}} =  \\
@@ -2322,6 +3036,27 @@
         \item Определите точку росы для этого воздуха.
         \item Какой станет относительная влажность этого воздуха, если нагреть его до $50\celsius$?
     \end{itemize}
+}
+\answer{%
+    \begin{align*}
+    &\text{Значения плотности насыщенного водяного пара определяем по таблице:} \\
+    &\rho_{ \text{ нас.
+    пара 30 } \celsius } = 30{,}300\,\frac{\text{г}}{\text{м}^{3}}, \rho_{ \text{ нас.
+    пара 50 } \celsius } = 83{,}000\,\frac{\text{г}}{\text{м}^{3}}.
+    \\
+    \varphi_1 &= \frac{ \rho_\text{ пара } }{ \rho_{ \text{ нас.
+    пара 30 } \celsius } } \implies { \rho_\text{ пара } } = \rho_{ \text{ нас.
+    пара 30 } \celsius } \cdot \varphi_1 = 30{,}300\,\frac{\text{г}}{\text{м}^{3}} \cdot 0{,}65 = 19{,}695\,\frac{\text{г}}{\text{м}^{3}}.
+    \\
+    &\text{По таблице определяем, при какой температуре пар с такой плотностью станет насыщенным: }  \\
+    t_\text{росы} &= 22{,}2\celsius, \\
+    \varphi_2 &= \frac{ \rho_\text{ пара } }{ \rho_{ \text{ нас.
+    пара 50 } \celsius } } = \frac{\rho_{ \text{ нас.
+    пара 30 } \celsius } \cdot \varphi_1}{ \rho_{ \text{ нас.
+    пара 50 } \celsius } }= \varphi_1 \cdot \frac{ \rho_{ \text{ нас.
+    пара 30 } \celsius } }{ \rho_{ \text{ нас.
+    пара 50 } \celsius } } = 0{,}65 \cdot \frac{ 30{,}300\,\frac{\text{г}}{\text{м}^{3}} }{ 83{,}000\,\frac{\text{г}}{\text{м}^{3}} } = 0{,}237 \approx 23{,}7\%.
+    \end{align*}
 }
 \solutionspace{80pt}
 
@@ -2373,7 +3108,7 @@
     \\
     A_\text{цикл} &= \frac 12 (2P_0 - P_0)(5V_0 - V_0) = \frac 12 \cdot 4 \cdot P_0V_0, \\
     A_{23} &= 5P_0 \cdot (2V_0 - V_0) = 5P_0V_0, \\
-    \Delta U_{23} &= \frac 32 \nu R T_3 - \frac 32 \nu R T_3 = \frac 32 P_3 V_3 - \frac 32 P_2 V_2 = \frac 32 \cdot 5 P_0 \cdot 2 V_0 -  \frac 32 \cdot 5 P_0 \cdot V_0 = \frac 32 \cdot 5 \cdot P_0V_0, \\
+    \Delta U_{23} &= \frac 32 \nu R T_3 - \frac 32 \nu R T_2 = \frac 32 P_3 V_3 - \frac 32 P_2 V_2 = \frac 32 \cdot 5 P_0 \cdot 2 V_0 -  \frac 32 \cdot 5 P_0 \cdot V_0 = \frac 32 \cdot 5 \cdot P_0V_0, \\
     \Delta U_{12} &= \frac 32 \nu R T_2 - \frac 32 \nu R T_1 = \frac 32 P_2 V_2 - \frac 32 P_1 V_1 = \frac 32 \cdot 5 P_0V_0 - \frac 32 P_0V_0 = \frac 32 \cdot 4 \cdot P_0V_0.
     \\
     \eta &= \frac{A_\text{цикл}}{Q_+} = \frac{A_\text{цикл}}{Q_{12} + Q_{23}}  = \frac{A_\text{цикл}}{A_{12} + \Delta U_{12} + A_{23} + \Delta U_{23}} =  \\
@@ -2389,6 +3124,27 @@
         \item Определите точку росы для этого воздуха.
         \item Какой станет относительная влажность этого воздуха, если нагреть его до $70\celsius$?
     \end{itemize}
+}
+\answer{%
+    \begin{align*}
+    &\text{Значения плотности насыщенного водяного пара определяем по таблице:} \\
+    &\rho_{ \text{ нас.
+    пара 25 } \celsius } = 23{,}000\,\frac{\text{г}}{\text{м}^{3}}, \rho_{ \text{ нас.
+    пара 70 } \celsius } = 198{,}000\,\frac{\text{г}}{\text{м}^{3}}.
+    \\
+    \varphi_1 &= \frac{ \rho_\text{ пара } }{ \rho_{ \text{ нас.
+    пара 25 } \celsius } } \implies { \rho_\text{ пара } } = \rho_{ \text{ нас.
+    пара 25 } \celsius } \cdot \varphi_1 = 23{,}000\,\frac{\text{г}}{\text{м}^{3}} \cdot 0{,}70 = 16{,}100\,\frac{\text{г}}{\text{м}^{3}}.
+    \\
+    &\text{По таблице определяем, при какой температуре пар с такой плотностью станет насыщенным: }  \\
+    t_\text{росы} &= 18{,}8\celsius, \\
+    \varphi_2 &= \frac{ \rho_\text{ пара } }{ \rho_{ \text{ нас.
+    пара 70 } \celsius } } = \frac{\rho_{ \text{ нас.
+    пара 25 } \celsius } \cdot \varphi_1}{ \rho_{ \text{ нас.
+    пара 70 } \celsius } }= \varphi_1 \cdot \frac{ \rho_{ \text{ нас.
+    пара 25 } \celsius } }{ \rho_{ \text{ нас.
+    пара 70 } \celsius } } = 0{,}70 \cdot \frac{ 23{,}000\,\frac{\text{г}}{\text{м}^{3}} }{ 198{,}000\,\frac{\text{г}}{\text{м}^{3}} } = 0{,}081 \approx 8{,}1\%.
+    \end{align*}
 }
 \solutionspace{80pt}
 
