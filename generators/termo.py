@@ -864,3 +864,62 @@ class GetPhi(variant.VariantTask):
             phi1_ratio=phi1_ratio,
             phi2_ratio=phi2_ratio,
         )
+
+
+@variant.solution_space(160)
+@variant.text('''
+    Сколько молекул водяного пара содержится в сосуде объёмом {V:V:e} при температуре ${t}\\celsius$,
+    и влажности воздуха ${phi}\%$?
+''')
+@variant.arg(V=('{} л', [3, 6, 9, 12, 15]))
+@variant.arg(t=('{}', [15, 20, 25, 30, 40, 50, 60, 70, 80, 90, 100]))
+@variant.arg(phi=('{}', [20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80]))
+class GetNFromPhi(variant.VariantTask):
+    pass
+
+
+@variant.solution_space(200)
+@variant.text('''
+    В герметичном сосуде находится влажный воздух при температуре ${t1}\\celsius$ и относительной влажности ${phi1}\%$.
+    \\begin{{enumerate}}
+        \\item Чему равно парциальное давление насыщенного водяного пара при этой температуре?
+        \\item Чему равно парциальное давление водяного пара?
+        \\item Определите точку росы этого пара?
+        \\item Каким станет парциальное давление водяного пара, если сосуд нагреть до  ${t2}\\celsius$?
+        \\item Чему будет равна относительная влажность воздуха, если сосуд нагреть до ${t2}\\celsius$?
+        \\item Получите ответ на предыдущий вопрос, используя плотности, а не давления.
+    \\end{{enumerate}}
+''')
+@variant.arg(V=('{} л', [3, 6, 9, 12, 15]))
+@variant.arg(t1=('{}', [15, 20, 25, 30, 40]))
+@variant.arg(t2=('{}', [70, 80, 90]))
+@variant.arg(phi1=('{}', [20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80]))
+class GetPFromPhi(variant.VariantTask):
+    pass
+
+
+@variant.solution_space(150)
+@variant.text('''
+    Закрытый сосуд объёмом {V:V:e} заполнен сухим воздухом при давлении {Consts.p_atm:V:e} и температуре ${t1}\\celsius$.
+    Каким станет давление в сосуде, если в него налить {m:V:e} воды и нагреть содержимое сосуда до ${t2}\\celsius$?
+''')
+@variant.arg(V=('{} л', [10, 15, 20]))
+@variant.arg(t1=('{}', [10, 20, 30]))
+@variant.arg(t2=('{}', [100, 90, 80]))
+@variant.arg(m=('{} г', [5, 10, 20, 30]))
+class GetPFromM(variant.VariantTask):
+    pass
+
+
+@variant.solution_space(40)
+@variant.text('''
+    Напротив физических величин запишите определение, обозначение и единицы измерения в системе СИ (если есть):
+    \\begin{{enumerate}}
+        \\item {v_1},
+        \\item {v_2}.
+    \\end{{enumerate}}
+''')
+@variant.arg(v_1=['абсолютная влажность', 'относительная влажность'])
+@variant.arg(v_2=['насыщенный пар', 'динамическое равновесие'])
+class Vapor01(variant.VariantTask):
+    pass

@@ -98,6 +98,8 @@ def get_all_variants():
         ('2021-03-23 9', {'quantum': ['Fotons', 'ColorNameFromLambda', 'E_from_nu',  'E_from_lambda', 'T_Nu_from_lambda', 'Deduce01']}),
         # ('2021-03-30 10', {'termo': ['CycleTriangleUp']}),
         ('2021-03-25 10', {'electricity': ['ForceTask', 'ExchangeTask', 'FieldTaskGenerator', 'SumTask']}),
+        ('2021-03-26 10', {'termo': ['GetNFromPhi', 'GetPFromPhi', 'GetPFromM', 'Vapor01']}),
+        ('2021-03-30 9', ['optics.Gendenshteyn_11_11_18', 'c_9_5_em_waves.Definitions01', 'c_9_5_em_waves.Deduce01']),
     ]
     for task_id, tasks_classes in random_tasks:
         pupils = library.pupils.get_class_from_string(task_id)
