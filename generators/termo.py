@@ -571,7 +571,7 @@ class CycleRectangle_T(variant.VariantTask):
     ' &= \\frac{ \\frac 12 * {A} * P_0V_0 }{ 0 + \\frac 32 * {U12} * P_0V_0 + {A23}P_0V_0 + \\frac 32 * {U23} * P_0V_0 }'
     ' = \\frac{ \\frac 12 * {A} }{ \\frac 32 * {U12} + {A23} + \\frac 32 * {U23} } = {eta:LaTeX} \\approx {eta_f}.',
 ])
-@variant.tex_notions('''
+@variant.answer_tex('''
     График процесса не в масштабе (эта часть пока не готова и сделать автоматически аккуратно сложно), но с верными подписями (а для решения этого достаточно):
 
     \\begin{ tikzpicture }[thick]
@@ -900,15 +900,86 @@ class GetPFromPhi(variant.VariantTask):
 
 @variant.solution_space(150)
 @variant.text('''
-    Закрытый сосуд объёмом {V:V:e} заполнен сухим воздухом при давлении {Consts.p_atm:V:e} и температуре ${t1}\\celsius$.
+    Закрытый сосуд объёмом {V:V:e} заполнен сухим воздухом при давлении {P_air_old:V:e} и температуре ${t1}\\celsius$.
     Каким станет давление в сосуде, если в него налить {m:V:e} воды и нагреть содержимое сосуда до ${t2}\\celsius$?
 ''')
+@variant.arg(P_air_old=('P = {} кПа', [100]))
 @variant.arg(V=('{} л', [10, 15, 20]))
 @variant.arg(t1=('{}', [10, 20, 30]))
 @variant.arg(t2=('{}', [100, 90, 80]))
 @variant.arg(m=('{} г', [5, 10, 20, 30]))
+@variant.answer_tex('''
+    Конечное давление газа в сосуде складывается по закону Дальтона из давления нагретого сухого воздуха {P_air_new:L:e} и
+    давления насыщенного пара {P_vapor_1:L:e}:
+    $$P' = {P_air_new:L} + {P_vapor_1:L}.$$
+
+    Сперва определим новое давление сухого воздуха из уравнения состояния идеального газа:
+    $$\\frac{ {P_air_new:L} * V }{ {T2:L} } = \\nu R = \\frac{ {P_air_old:L} * V }{ {T1:L} } \\implies {P_air_new:L} = {P_air_old:L} * \\frac{ {T2:L} }{ {T1:L} }.$$
+
+    Чтобы найти давление пара, нужно понять, будет ли он насыщенным после нагрева или нет.
+
+    Плотность насыщенного пара при температуре равна {rho:V:e}, тогда для того,
+    чтобы весь сосуд был заполнен насыщенным водяным паром нужно
+    ${m_np:L} = {rho:L} * V = {rho:V} * {V:V} = {m_np:V}$ воды.
+    Сравнивая эту массу с массой воды из условия, получаем массу жидкости, которая испарится: {m_vapor:V:e}.
+    Осталось определить давление этого пара:
+    $${P_vapor_1:L} = \\frac{ {m_vapor:L}RT }{ \\mu V } = \\frac{ {m_vapor:V} * {Consts.R:Value} * {T2:Value} }{ {mu:Value} * {V:Value} } \\approx {P_vapor_1:V}.$$
+
+    Получаем ответ: {P_1:Task:e}.
+
+    Другой вариант решения для давления пара:
+    Определим давление пара, если бы вся вода испарилась (что не факт):
+    $${P_max:L} = \\frac{ mR{T2:L} }{ \\mu V } = \\frac{ {m:V} * {Consts.R:V} * {T2:V} }{ {mu:Value} * {V:Value} } = {P_max:V}.$$
+    Сравниваем это давление с давлением насыщенного пара при этой температуре {P_np:Task:e}:
+     если у нас получилось меньше табличного значения,
+    то вся вода испарилась, если же больше — испарилась лишь часть, а пар является насыщенным.
+    Отсюда сразу получаем давление пара: {P_vapor_2:Task:e}. Сравните этот результат с первым вариантом решения.
+
+    Тут получаем ответ: {P_2:Task:e}.
+''')
 class GetPFromM(variant.VariantTask):
-    pass
+    def GetUpdate(self,P_air_old=None, V=None, t1=None, t2=None, m=None, **kws):
+        mu_value = 18
+        mu = f'\\mu = {mu_value} г / моль'
+
+        T1 = f'T = {int(t1) + 273} К'
+        T2 = f'T\' = {int(t2) + 273} К'
+
+        P_air_new_value = P_air_old.Value * (int(t2) + 273) / (int(t1) + 273)
+        P_air_new = 'P\'_\\text{ воздуха } = %.1f кПа' % P_air_new_value
+
+        rho_value = Consts.vapor.get_rho_by_t(int(t2))
+        rho = '\\rho_\\text{ н. п. %d $\\celsius$ } = %d г / м^3' % (int(t2), rho_value)
+
+        m_np_value = 1. * rho_value * V.Value / 1000
+        m_np = 'm_\\text{ н. п. } = %.1f г' % m_np_value
+        m_vapor = 'm_\\text{ пара } = %.1f г' % min(m_np_value, m.Value)
+        P_vapor_1_value = 1. * min(m_np_value, m.Value) * Consts.R.Value * (int(t2) + 273) / mu_value / V.Value
+        P_vapor_1 = 'P_\\text{ пара } = %d кПа' % P_vapor_1_value
+
+        P_np_value = Consts.vapor.get_p_by_t(int(t2))
+        P_np = 'P_\\text{ н. п. %d $\\celsius$ } = %d кПа' % (int(t2), P_np_value)
+        P_max_value = 1. * m.Value * Consts.R.Value * (int(t2) + 273) / mu_value / V.Value
+        P_max = 'P_\\text{ max } = %d кПа' % P_max_value
+        P_vapor_2 = 'P\'_\\text{ пара } = %.1f' % min(P_max_value, P_np_value)
+
+        P_1 = 'P\'_\\text{ пара } = %.1f кПа' % (P_air_new_value + P_vapor_1_value)
+        P_2 = 'P\'_\\text{ пара } = %.1f кПа' % (P_air_new_value + min(P_max_value, P_np_value))
+        return dict(
+            T1=T1,
+            T2=T2,
+            rho=rho,
+            m_np=m_np,
+            m_vapor=m_vapor,
+            P_vapor_1=P_vapor_1,
+            P_air_new=P_air_new,
+            P_np=P_np,
+            P_max=P_max,
+            mu=mu,
+            P_vapor_2=P_vapor_2,
+            P_1=P_1,
+            P_2=P_2,
+        )
 
 
 @variant.solution_space(40)

@@ -179,11 +179,11 @@ class VariantTask(object):
             raise RuntimeError(f'No text for task {type(self)}')
 
     def GetAnswerTemplate(self):
-        if hasattr(self, 'AnswerTemplate'):
-            if hasattr(self, 'TexNotions'):
-                return self.AnswerTemplate + '\n\n' + self.TexNotions
-            else:
-                return self.AnswerTemplate
+        results = [
+            getattr(self, attr) for attr in ['AnswerTemplate', 'AnswerTex'] if hasattr(self, attr)
+        ]
+        if results:
+            return '\n\n'.join(results)
         else:
             return None
 
@@ -385,10 +385,10 @@ def answer_align(template_lines):
     return decorator
 
 
-def tex_notions(text):
+def answer_tex(text):
     def decorator(cls):
-        assert not hasattr(cls, 'TexNotions')
-        cls.TexNotions = escape_tex(text)
+        assert not hasattr(cls, 'AnswerTex')
+        cls.AnswerTex = escape_tex(text)
         return cls
     return decorator
 

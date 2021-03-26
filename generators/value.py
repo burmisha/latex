@@ -417,19 +417,25 @@ class Vapor:
         for index in range(len(self.T_P_P_rho) - 1):
             yield self.T_P_P_rho[index], self.T_P_P_rho[index + 1]
 
-    def get_rho_by_t(self, t):
+    def _get_index_by_index(self, value, search_index, result_index):
         for row, next_row in self._get_rows_pairs():
-            if row[0] <= t < next_row[0]:
-                return (t - row[0]) / (next_row[0] - row[0]) * (next_row[3] - row[3]) + row[3]
+            if row[search_index] <= value < next_row[search_index]:
+                return (value - row[search_index]) / (next_row[search_index] - row[search_index]) * (next_row[result_index] - row[result_index]) + row[result_index]
 
+        if value == self.T_P_P_rho[-1][search_index]:
+            return self.T_P_P_rho[-1][result_index]
+
+        log.error(f'Failed to find {value} at index {search_index}')
         raise RuntimeError()
+
+    def get_rho_by_t(self, t):
+        return self._get_index_by_index(t, 0, 3)
+
+    def get_p_by_t(self, t):
+        return self._get_index_by_index(t, 0, 1)
 
     def get_t_by_rho(self, rho):
-        for row, next_row in self._get_rows_pairs():
-            if row[3] <= rho < next_row[3]:
-                return (rho - row[3]) / (next_row[3] - row[3]) * (next_row[0] - row[0]) + row[0]
-
-        raise RuntimeError()
+        return self._get_index_by_index(rho, 3, 0)
 
 
 class Consts(object):
@@ -608,6 +614,7 @@ def test_vapor():
     vapor = Vapor()
     assert vapor.get_rho_by_t(80) == 293
     assert vapor.get_rho_by_t(65) == 164
+    assert vapor.get_rho_by_t(100) == 598
     assert vapor.get_t_by_rho(293) == 80
 
 
