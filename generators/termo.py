@@ -914,24 +914,27 @@ class GetPFromPhi(variant.VariantTask):
     $$P' = {P_air_new:L} + {P_vapor_1:L}.$$
 
     Сперва определим новое давление сухого воздуха из уравнения состояния идеального газа:
-    $$\\frac{ {P_air_new:L} * V }{ {T2:L} } = \\nu R = \\frac{ {P_air_old:L} * V }{ {T1:L} } \\implies {P_air_new:L} = {P_air_old:L} * \\frac{ {T2:L} }{ {T1:L} }.$$
+    $$
+        \\frac{ {P_air_new:L} * V }{ {T2:L} } = \\nu R = \\frac{ {P_air_old:L} * V }{ {T1:L} } 
+        \\implies {P_air_new:L} = {P_air_old:L} * \\frac{T2:L:s}{T1:L:s} = {P_air_old:V} * \\frac{T2:V:s}{T1:V:s} \\approx {P_air_new:V}.
+    $$
 
     Чтобы найти давление пара, нужно понять, будет ли он насыщенным после нагрева или нет.
 
-    Плотность насыщенного пара при температуре равна {rho:V:e}, тогда для того,
+    Плотность насыщенного пара при температуре ${t2}\\celsius$ равна {rho:V:e}, тогда для того,
     чтобы весь сосуд был заполнен насыщенным водяным паром нужно
-    ${m_np:L} = {rho:L} * V = {rho:V} * {V:V} = {m_np:V}$ воды.
+    ${m_np:L} = {rho:L} * V = {rho:V} * {V:V} \\approx {m_np:V}$ воды.
     Сравнивая эту массу с массой воды из условия, получаем массу жидкости, которая испарится: {m_vapor:V:e}.
     Осталось определить давление этого пара:
-    $${P_vapor_1:L} = \\frac{ {m_vapor:L}RT }{ \\mu V } = \\frac{ {m_vapor:V} * {Consts.R:Value} * {T2:Value} }{ {mu:Value} * {V:Value} } \\approx {P_vapor_1:V}.$$
+    $${P_vapor_1:L} = \\frac{ {m_vapor:L}R{T2:L} }{ \\mu V } = \\frac{ {m_vapor:V} * {Consts.R:Value} * {T2:Value} }{ {mu:Value} * {V:Value} } \\approx {P_vapor_1:V}.$$
 
     Получаем ответ: {P_1:Task:e}.
 
     Другой вариант решения для давления пара:
     Определим давление пара, если бы вся вода испарилась (что не факт):
-    $${P_max:L} = \\frac{ mR{T2:L} }{ \\mu V } = \\frac{ {m:V} * {Consts.R:V} * {T2:V} }{ {mu:Value} * {V:Value} } = {P_max:V}.$$
+    $${P_max:L} = \\frac{ mR{T2:L} }{ \\mu V } = \\frac{ {m:V} * {Consts.R:V} * {T2:V} }{ {mu:Value} * {V:Value} } \\approx {P_max:V}.$$
     Сравниваем это давление с давлением насыщенного пара при этой температуре {P_np:Task:e}:
-     если у нас получилось меньше табличного значения,
+    если у нас получилось меньше табличного значения,
     то вся вода испарилась, если же больше — испарилась лишь часть, а пар является насыщенным.
     Отсюда сразу получаем давление пара: {P_vapor_2:Task:e}. Сравните этот результат с первым вариантом решения.
 
@@ -949,19 +952,19 @@ class GetPFromM(variant.VariantTask):
         P_air_new = 'P\'_\\text{ воздуха } = %.1f кПа' % P_air_new_value
 
         rho_value = Consts.vapor.get_rho_by_t(int(t2))
-        rho = '\\rho_\\text{ н. п. %d $\\celsius$ } = %d г / м^3' % (int(t2), rho_value)
+        rho = '\\rho_\\text{ н. п. %d $\\celsius$ } = %.2f г / м^3' % (int(t2), rho_value)
 
         m_np_value = 1. * rho_value * V.Value / 1000
         m_np = 'm_\\text{ н. п. } = %.1f г' % m_np_value
         m_vapor = 'm_\\text{ пара } = %.1f г' % min(m_np_value, m.Value)
         P_vapor_1_value = 1. * min(m_np_value, m.Value) * Consts.R.Value * (int(t2) + 273) / mu_value / V.Value
-        P_vapor_1 = 'P_\\text{ пара } = %d кПа' % P_vapor_1_value
+        P_vapor_1 = 'P_\\text{ пара } = %.1f кПа' % P_vapor_1_value
 
         P_np_value = Consts.vapor.get_p_by_t(int(t2))
-        P_np = 'P_\\text{ н. п. %d $\\celsius$ } = %d кПа' % (int(t2), P_np_value)
+        P_np = 'P_\\text{ н. п. %d $\\celsius$ } = %.1f кПа' % (int(t2), P_np_value)
         P_max_value = 1. * m.Value * Consts.R.Value * (int(t2) + 273) / mu_value / V.Value
-        P_max = 'P_\\text{ max } = %d кПа' % P_max_value
-        P_vapor_2 = 'P\'_\\text{ пара } = %.1f' % min(P_max_value, P_np_value)
+        P_max = 'P_\\text{ max } = %.1f кПа' % P_max_value
+        P_vapor_2 = 'P\'_\\text{ пара } = %.1f кПа' % min(P_max_value, P_np_value)
 
         P_1 = 'P\'_\\text{ пара } = %.1f кПа' % (P_air_new_value + P_vapor_1_value)
         P_2 = 'P\'_\\text{ пара } = %.1f кПа' % (P_air_new_value + min(P_max_value, P_np_value))
