@@ -57,6 +57,7 @@ class LaTeXFormatter:
 
 assert LaTeXFormatter({}).format('0.2', replace_comma=False) == '0.2'
 assert LaTeXFormatter({}).format('0.2', replace_comma=True) == r'0{,}2'
+assert LaTeXFormatter({}).format('node 0.2', replace_comma=True) == r'node 0.2'
 assert LaTeXFormatter({'a': '0.20'}).format({'{a}': 0.3}, replace_comma=False) == {'0.20': 0.3}
 
 
