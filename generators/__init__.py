@@ -1,3 +1,4 @@
+import generators.c_9_5_em_waves
 import generators.electricity
 import generators.gidro
 import generators.kinematics
