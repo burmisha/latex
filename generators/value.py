@@ -51,51 +51,60 @@ def precisionFmt2(value, precision):
     return rawDigits.rstrip('.')
 
 
-assert precisionFmt2(1.2, 1) == '1.2'
-assert precisionFmt2(1.7, 1) == '1.7'
-assert precisionFmt2(0.091, 2) == '0.091'
-assert precisionFmt2(0.095, 2) == '0.095'
-assert precisionFmt2(0.0949, 2) == '0.095'
-assert precisionFmt2(-0.0949, 2) == '-0.095'
-assert precisionFmt2(0.99, 2) == '0.99'
-assert precisionFmt2(0.99, 1) == '1.0'
-assert precisionFmt2(1.99, 2) == '1.99'
-assert precisionFmt2(1.99, 3) == '1.990'
-assert precisionFmt2(19.9, 2) == '19.9'
-assert precisionFmt2(19.9, 1) == '20'
-assert precisionFmt2(12, 2) == '12'
-assert precisionFmt2(20, 2) == '20'
-assert precisionFmt2(2.99, 2) == '3.0'
-assert precisionFmt2(29.9, 2) == '30'
-assert precisionFmt2(299., 2) == '300'
-assert precisionFmt2(299, 2) == '299'
-assert precisionFmt2(1 + 1. / 30, 2) == '1.03'
-assert precisionFmt2(1 + 1. / 300, 2) == '1.00'
-assert precisionFmt2(1 + 1. / 300, 3) == '1.003'
-assert precisionFmt2(1. / 3, 2) == '0.33'
-assert precisionFmt2(4. / 3, 2) == '1.33'
-assert precisionFmt2(7. / 3, 2) == '2.3'
-assert precisionFmt2(7. / 3, 3) == '2.33'
-assert precisionFmt2(700. / 3, 3) == '233'
-assert precisionFmt2(700. / 3, 3) == '233'
-assert precisionFmt2(7000. / 3, 3) == '2330'
-assert precisionFmt2(7000. / 3, 2) == '2300'
-assert precisionFmt2(7000. / 3, 1) == '2000'
-assert precisionFmt2(8000. / 3, 1) == '3000'
-assert precisionFmt2(7000. / 3, 4) == '2333'
-assert precisionFmt2(7000. / 3, 5) == '2333.3'
-assert precisionFmt2(1000. / 3, 5) == '333.33'
-assert precisionFmt2(100. / 3, 5) == '33.333'
-assert precisionFmt2(10. / 3, 5) == '3.3333'
-assert precisionFmt2(0.1 / 3, 5) == '0.033333'
-assert precisionFmt2(0.01 / 3, 5) == '0.0033333'
-assert precisionFmt2(0.001 / 3, 5) == '0.00033333'
-assert precisionFmt2(0.0049594, 5) == '0.0049594'
-assert precisionFmt2(0.0049594, 4) == '0.004959'
-assert precisionFmt2(0.0049595, 4) == '0.004960'
-assert precisionFmt2(0.0049594, 3) == '0.00496'
-assert precisionFmt2(0.0049594, 2) == '0.0050'
-assert precisionFmt2(0.0049594, 1) == '0.005'
+
+def test_precisionFmt2():
+    for value, precision, result in [
+        (1.7, 1, '1.7'),
+        (0.091, 2, '0.091'),
+        (0.095, 2, '0.095'),
+        (0.0949, 2, '0.095'),
+        (-0.0949, 2, '-0.095'),
+        (0.99, 2, '0.99'),
+        (0.99, 1, '1.0'),
+        (1.99, 2, '1.99'),
+        (1.99, 3, '1.990'),
+        (19.9, 2, '19.9'),
+        (19.9, 1, '20'),
+        (12, 2, '12'),
+        (20, 2, '20'),
+        (2.99, 2, '3.0'),
+        (29.9, 2, '30'),
+        (299., 2, '300'),
+        (299, 2, '299'),
+        (1 + 1. / 30, 2, '1.03'),
+        (1 + 1. / 300, 2, '1.00'),
+        (1 + 1. / 300, 3, '1.003'),
+        (1. / 3, 2, '0.33'),
+        (4. / 3, 2, '1.33'),
+        (7. / 3, 2, '2.3'),
+        (7. / 3, 3, '2.33'),
+        (700. / 3, 3, '233'),
+        (700. / 3, 3, '233'),
+        (7000. / 3, 3, '2330'),
+        (7000. / 3, 2, '2300'),
+        (7000. / 3, 1, '2000'),
+        (8000. / 3, 1, '3000'),
+        (7000. / 3, 4, '2333'),
+        (7000. / 3, 5, '2333.3'),
+        (1000. / 3, 5, '333.33'),
+        (100. / 3, 5, '33.333'),
+        (10. / 3, 5, '3.3333'),
+        (0.1 / 3, 5, '0.033333'),
+        (0.01 / 3, 5, '0.0033333'),
+        (0.001 / 3, 5, '0.00033333'),
+        (0.0049594, 5, '0.0049594'),
+        (0.0049594, 4, '0.004959'),
+        (0.0049595, 4, '0.004960'),
+        (0.0049594, 3, '0.00496'),
+        (0.0049594, 2, '0.0050'),
+        (0.0049594, 1, '0.005'),
+    ]:
+        res = precisionFmt2(value, precision)
+        assert res == result, f'Expected {value}, {precision} -> {result}, got {res}'
+
+
+test_precisionFmt2()
+
 
 class OneUnit:
     def __init__(self, line, is_numenator):
