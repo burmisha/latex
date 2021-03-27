@@ -1,5 +1,5 @@
 from generators.variant import text, text_test, answer_short, answer_align, answer_test, arg, VariantTask
-from generators.value import Consts
+from generators.helpers import Consts
 
 import logging
 log = logging.getLogger(__name__)

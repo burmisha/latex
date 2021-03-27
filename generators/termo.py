@@ -3,7 +3,7 @@
 import fractions
 
 import generators.variant as variant
-from generators.value import UnitValue, Consts, Fraction
+from generators.helpers import UnitValue, Consts, Fraction
 
 import logging
 log = logging.getLogger(__name__)

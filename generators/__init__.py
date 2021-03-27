@@ -9,7 +9,6 @@ import generators.optics
 import generators.quantum
 import generators.sto
 import generators.termo
-import generators.value
 import generators.variant
 import generators.vishnyakova
 import generators.waves

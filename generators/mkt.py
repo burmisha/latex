@@ -1,5 +1,5 @@
 import generators.variant as variant
-from generators.value import Consts
+from generators.helpers import Consts
 
 @variant.solution_space(40)
 @variant.text('''

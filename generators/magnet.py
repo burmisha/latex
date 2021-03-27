@@ -3,8 +3,7 @@
 import itertools
 
 import generators.variant as variant
-import generators.value as value
-from generators.value import Consts
+from generators.helpers import Consts
 
 import logging
 log = logging.getLogger(__name__)

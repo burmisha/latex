@@ -1,6 +1,6 @@
 import problems.task as task
 
-from generators.value import UnitValue
+from generators.helpers import UnitValue
 
 yakuninTasksConfig = {
     '1.1.1': '''

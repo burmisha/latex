@@ -4,7 +4,7 @@ import math
 import itertools
 
 import generators.variant as variant
-from generators.value import UnitValue, Consts
+from generators.helpers import UnitValue, Consts
 
 import logging
 log = logging.getLogger(__name__)

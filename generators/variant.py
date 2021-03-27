@@ -5,7 +5,7 @@ import hashlib
 import itertools
 import re
 
-import generators.value as value
+from generators.helpers import UnitValue, Consts
 
 import library
 import problems
@@ -63,16 +63,16 @@ assert LaTeXFormatter({'a': '0.20'}).format({'{a}': 0.3}, replace_comma=False) =
 
 def check_unit_value(v):
     if isinstance(v, str) and (('=' in v and len(v) >= 3) or re.match(r'-?\d.* \w', v, re.UNICODE)):
-        return value.UnitValue(v)
+        return UnitValue(v)
     else:
         return v
 
 
-assert isinstance(check_unit_value('2 суток'), value.UnitValue)
-assert isinstance(check_unit_value('2 см'), value.UnitValue)
-assert isinstance(check_unit_value('2 Дж'), value.UnitValue)
-assert isinstance(check_unit_value('-2 Дж'), value.UnitValue)
-assert isinstance(check_unit_value('1.6 м'), value.UnitValue)
+assert isinstance(check_unit_value('2 суток'), UnitValue)
+assert isinstance(check_unit_value('2 см'), UnitValue)
+assert isinstance(check_unit_value('2 Дж'), UnitValue)
+assert isinstance(check_unit_value('-2 Дж'), UnitValue)
+assert isinstance(check_unit_value('1.6 м'), UnitValue)
 
 
 def form_args(kwargs):
@@ -206,7 +206,7 @@ class VariantTask(object):
                     try:
                         for k, v in res.items():
                             res[k] = check_unit_value(v)
-                        res['Consts'] = value.Consts
+                        res['Consts'] = Consts
                         for k, v in self.GetUpdate(**res).items():
                             res[k] = check_unit_value(v)
                     except:
