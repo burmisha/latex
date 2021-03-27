@@ -45,10 +45,10 @@ def is_distant_task(task_id):
 
 def get_all_variants():
     random_tasks = [
-        ('2019-04-16 10', {'electricity': ['ForceTask', 'ExchangeTask', 'FieldTaskGenerator', 'SumTask']}),
-        ('2019-04-30 10', {'electricity': ['Potential728', 'Potential735', 'Potential737', 'Potential2335', 'Potential1621']}),
-        ('2019-05-06 10', {'electricity': ['Rymkevich748', 'Rymkevich750', 'Rymkevich751', 'Rymkevich762', 'Cond1']}),
-        ('2019-05-14 10', {'electricity': ['Rezistor1_v1', 'Rezistor2', 'Rezistor3', 'Rezistor4']}),
+        ('2019-04-16 10', {'electricity.kulon_field': ['ForceTask', 'ExchangeTask', 'FieldTaskGenerator', 'SumTask']}),
+        ('2019-04-30 10', {'electricity.potential': ['Potential728', 'Potential735', 'Potential737', 'Potential2335', 'Potential1621']}),
+        ('2019-05-06 10', {'electricity.cond': ['Rymkevich748', 'Rymkevich750', 'Rymkevich751', 'Rymkevich762', 'Cond1']}),
+        ('2019-05-14 10', {'electricity.om': ['Rezistor1_v1', 'Rezistor2', 'Rezistor3', 'Rezistor4']}),
         ('2019-04-19 11', {'quantum': ['Fotons', 'KernelCount', 'RadioFall', 'RadioFall2']}),
         ('2019-04-30 11', {'quantum': ['Quantum1119', 'Quantum1120']}),
         ('2019-11-27 8', {'termodynamics.termo': ['Ch_8_6', 'Ch_8_7', 'Ch_8_10', 'Ch_8_13', 'Ch_8_35']}),
@@ -97,12 +97,12 @@ def get_all_variants():
         ('2021-03-12 10', [
             'termodynamics.cycle.Rectangle', 'termodynamics.termo.DeltaQ_from_states', 'termodynamics.termo.Definitions02',
         ]),
-        ('2021-03-16 9', {'electricity': ['Rymkevich748', 'Rymkevich750', 'Rymkevich751', 'Rymkevich762', 'Definitions01', 'Definitions02']}),
+        ('2021-03-16 9', {'electricity.cond': ['Rymkevich748', 'Rymkevich750', 'Rymkevich751', 'Rymkevich762', 'Definitions01', 'Definitions02']}),
         ('2021-03-18 10', ['termodynamics.cycle.Rectangle_T', 'termodynamics.mkt.GraphPV_1', 'termodynamics.termo.YesNo']),
         ('2021-03-23 10', ['termodynamics.cycle.TriangleUp_T', 'termodynamics.vapor.GetPhi', 'termodynamics.mkt.Basic12', 'termodynamics.termo.Definitions02']),
         ('2021-03-23 9', {'quantum': ['Fotons', 'ColorNameFromLambda', 'E_from_nu',  'E_from_lambda', 'T_Nu_from_lambda', 'Deduce01']}),
         # ('2021-03-30 10', {'termodynamics.termo': ['CycleTriangleUp']}),
-        ('2021-03-25 10', {'electricity': ['ForceTask', 'ExchangeTask', 'FieldTaskGenerator', 'SumTask']}),
+        ('2021-03-25 10', {'electricity.kulon_field': ['ForceTask', 'ExchangeTask', 'FieldTaskGenerator', 'SumTask']}),
         ('2021-03-26 10', {'termodynamics.vapor': ['GetNFromPhi', 'GetPFromPhi', 'GetPFromM', 'Vapor01']}),
         ('2021-03-30 9', ['optics.Gendenshteyn_11_11_18', 'c_9_5_em_waves.Definitions01', 'c_9_5_em_waves.Deduce01']),
     ]
