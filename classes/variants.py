@@ -94,16 +94,16 @@ def get_all_variants():
         ('2021-03-11 10', {'termodynamics.termo': [
             'Definitions01', 'V_from_P_and_U', 'A_on_P_const', 'A_from_DeltaT', 'DeltaU_on_P_const', 'DeltaU_from_DeltaT', 'Q_from_DeltaU', 'Q_from_DeltaU_and_A',
         ]}),
-        ('2021-03-12 10', {'termodynamics.termo': [
-            'CycleRectangle', 'DeltaQ_from_states', 'Definitions02',
-        ]}),
+        ('2021-03-12 10', [
+            'termodynamics.cycle.Rectangle', 'termodynamics.termo.DeltaQ_from_states', 'termodynamics.termo.Definitions02',
+        ]),
         ('2021-03-16 9', {'electricity': ['Rymkevich748', 'Rymkevich750', 'Rymkevich751', 'Rymkevich762', 'Definitions01', 'Definitions02']}),
-        ('2021-03-18 10', ['termodynamics.termo.CycleRectangle_T', 'termodynamics.mkt.GraphPV_1', 'termodynamics.termo.YesNo']),
-        ('2021-03-23 10', ['termodynamics.termo.CycleTriangleUp_T', 'termodynamics.termo.GetPhi', 'termodynamics.mkt.Basic12', 'termodynamics.termo.Definitions02']),
+        ('2021-03-18 10', ['termodynamics.cycle.Rectangle_T', 'termodynamics.mkt.GraphPV_1', 'termodynamics.termo.YesNo']),
+        ('2021-03-23 10', ['termodynamics.cycle.TriangleUp_T', 'termodynamics.vapor.GetPhi', 'termodynamics.mkt.Basic12', 'termodynamics.termo.Definitions02']),
         ('2021-03-23 9', {'quantum': ['Fotons', 'ColorNameFromLambda', 'E_from_nu',  'E_from_lambda', 'T_Nu_from_lambda', 'Deduce01']}),
         # ('2021-03-30 10', {'termodynamics.termo': ['CycleTriangleUp']}),
         ('2021-03-25 10', {'electricity': ['ForceTask', 'ExchangeTask', 'FieldTaskGenerator', 'SumTask']}),
-        ('2021-03-26 10', {'termodynamics.termo': ['GetNFromPhi', 'GetPFromPhi', 'GetPFromM', 'Vapor01']}),
+        ('2021-03-26 10', {'termodynamics.vapor': ['GetNFromPhi', 'GetPFromPhi', 'GetPFromM', 'Vapor01']}),
         ('2021-03-30 9', ['optics.Gendenshteyn_11_11_18', 'c_9_5_em_waves.Definitions01', 'c_9_5_em_waves.Deduce01']),
     ]
     for task_id, tasks_classes in random_tasks:
