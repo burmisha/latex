@@ -1,4 +1,3 @@
-
 import fractions
 
 import generators.variant as variant
@@ -55,4 +54,3 @@ class Definitions01(variant.VariantTask):
 ])
 class Deduce01(variant.VariantTask):
     pass
-
