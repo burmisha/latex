@@ -874,8 +874,53 @@ class GetPhi(variant.VariantTask):
 @variant.arg(V=('{} л', [3, 6, 9, 12, 15]))
 @variant.arg(t=('{}', [15, 20, 25, 30, 40, 50, 60, 70, 80, 90, 100]))
 @variant.arg(phi=('{}', [20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80]))
+@variant.answer_tex('''
+    Уравнение состояние идеального газа (и учтём, что $R = {Consts.N_A:L} * {Consts.k_boltzmann:L}$, 
+    это чуть упростит выячичления, но вовсе не обязательно это делать):
+    $$
+        PV = \\nu RT = \\frac{ N }{Consts.N_A:L:s} RT \\implies N = PV * \\frac{Consts.N_A:L:s}{ RT }=  \\frac{ PV }{ {Consts.k_boltzmann:L}T }
+    $$
+    Плотность насыщенного водяного пара при ${t}\\celsius$ ищем по таблице: ${P_np:Task}.$
+
+    Получаем плотность пара в сосуде $\\varphi = \\frac{ P }{P_np:L:s} \\implies P = \\varphi {P_np:L}.$
+
+    И подставляем в ответ (по сути, его можно было получить быстрее из формул $P = nkT, n = \\frac NV$): 
+    $$
+        N = \\frac{ \\varphi * {P_np:L} * V }{ {Consts.k_boltzmann:L}T }
+         = \\frac{ {phi_share} * {P_np:V} * {V:V} }{ {Consts.k_boltzmann:V} * {T:V} }
+         \\approx {N:V}.
+    $$
+
+    Другой вариант решения (через плотности) приводит в результату: 
+    $$
+        N = {Consts.N_A:L} \\nu = {Consts.N_A:L} * \\frac{ m }{ {mu:L} } 
+          = {Consts.N_A:L} \\frac{ \\rho V }{ {mu:L} } 
+          = {Consts.N_A:L} \\frac{ \\varphi * {rho_np:L} * V }{ {mu:L} } 
+          = {Consts.N_A:V} * \\frac{ {phi_share} * {rho_np:V} * {V:V} }{ {mu:V} } 
+          \\approx {N2:V}.
+    $$
+''')
 class GetNFromPhi(variant.VariantTask):
-    pass
+    def GetUpdate(self, phi=None, V=None, t=None, **kws):
+        mu_value = 18
+
+        t_int = int(t)
+        T = t_int + 273
+
+        P_np_value = Consts.vapor.get_p_by_t(t_int)
+        rho_np_value = Consts.vapor.get_rho_by_t(t_int)
+
+        N = 1. * int(phi) / 100 * P_np_value * V.Value / Consts.k_boltzmann.Value / T * 1000
+        N2 = 1. * int(phi) / 100 * rho_np_value * V.Value / mu_value * Consts.N_A.Value 
+        return dict(
+            P_np=f'P_{{ \\text{{ нас. пара {t} }} \\celsius }} = %.3f кПа' % P_np_value,
+            rho_np=f'\\rho_{{ \\text{{ нас. пара {t} }} \\celsius }} = %.3f г/м^3' % rho_np_value,
+            T='T = %d К' % T,
+            phi_share='%.2f' % (int(phi) / 100),
+            N='N = %.1f 10^20' % N,
+            N2='N = %.1f 10^20' % N2,
+            mu=f'\\mu = {mu_value} г / моль',
+        )
 
 
 @variant.solution_space(200)
@@ -885,7 +930,7 @@ class GetNFromPhi(variant.VariantTask):
         \\item Чему равно парциальное давление насыщенного водяного пара при этой температуре?
         \\item Чему равно парциальное давление водяного пара?
         \\item Определите точку росы этого пара?
-        \\item Каким станет парциальное давление водяного пара, если сосуд нагреть до  ${t2}\\celsius$?
+        \\item Каким станет парциальное давление водяного пара, если сосуд нагреть до ${t2}\\celsius$?
         \\item Чему будет равна относительная влажность воздуха, если сосуд нагреть до ${t2}\\celsius$?
         \\item Получите ответ на предыдущий вопрос, используя плотности, а не давления.
     \\end{{enumerate}}
@@ -894,8 +939,60 @@ class GetNFromPhi(variant.VariantTask):
 @variant.arg(t1=('{}', [15, 20, 25, 30, 40]))
 @variant.arg(t2=('{}', [70, 80, 90]))
 @variant.arg(phi1=('{}', [20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80]))
+@variant.answer_tex('''
+    Парциальное давление насыщенного водяного пара при ${t1}\\celsius$ ищем по таблице: $${P_np_1:Task}.$$
+
+    Парциальное давление водяного пара 
+    $${P1:L} = \\varphi_1 * {P_np_1:L} = {phi_1} * {P_np_1:V} = {P1:V}.$$
+
+    Точку росы определяем по таблице: при какой температуре пар с давлением {P1:Task:e} станет насыщенным: ${t}\\celsius$.
+
+    После нагрева парциальное давление пара возрастёт:
+    $$
+        \\frac{ {P1:L} * V }{ {T1:L} } = \\nu R = \\frac{ {P2:L} * V }{ {T2:L} } 
+        \\implies {P2:L} = {P1:L} * \\frac{T2:L:s}{T1:L:s} = {P1:V} * \\frac{T2:V:s}{T1:V:s} \\approx {P2:V}.
+    $$
+
+    Парциальное давление насыщенного водяного пара при ${t2}\\celsius$ ищем по таблице: {P_np_2:Task:e}. 
+    Теперь определяем влажность: 
+    $$
+        \\varphi_2 = \\frac{P2:L:s}{P_np_2:L:s} = \\frac{P2:V:s}{P_np_2:V:s} \\approx {phi2} = {phi2_percent}\%.
+    $$
+
+    Или же выражаем то же самое через плотности (плотность не изменяется при изохорном нагревании $\\rho_1 =\\rho_2 = \\rho$, в отличие от давления):
+    $$
+        \\varphi_2 = \\frac{ \\rho }{rho_np_2:L:s} = \\frac{ \\varphi_1{rho_np_1:L} }{rho_np_2:L:s} 
+        = \\frac{ {phi_1} * {rho_np_1:V} }{rho_np_2:V:s} \\approx {phi_2_rho} = {phi2_percent_rho}\%.
+    $$
+    Сравните 2 последних результата.
+''')
 class GetPFromPhi(variant.VariantTask):
-    pass
+    def GetUpdate(self, phi1=None, V=None, t1=None, t2=None, **kws):
+        P_np_1_value = Consts.vapor.get_p_by_t(int(t1))
+        P_np_2_value = Consts.vapor.get_p_by_t(int(t2))
+        phi_1 = 1. * int(phi1) / 100
+        P1_value = P_np_1_value * phi_1
+        T1 = int(t1) + 273
+        T2 = int(t2) + 273
+        P2_value = P1_value * T2 / T1
+        phi2 = P2_value / P_np_2_value
+        phi_2_rho = phi_1 * Consts.vapor.get_rho_by_t(int(t1)) / Consts.vapor.get_rho_by_t(int(t2))
+        return dict(
+            P_np_1=f'P_{{ \\text{{ нас. пара {t1} }} \\celsius }} = %.3f кПа' % P_np_1_value,
+            P_np_2=f'P_{{ \\text{{ нас. пара {t2} }} \\celsius }} = %.3f кПа' % P_np_2_value,
+            t='%.1f' % Consts.vapor.get_t_by_p(P1_value),
+            phi_1='%.2f' % phi_1,
+            P1='P_\\text{ пара 1 } = %.3f кПа' % P1_value,
+            P2='P_\\text{ пара 2 } = %.3f кПа' % P2_value,
+            T1='T_1 = %d К' % T1,
+            T2='T_2 = %d К' % T2,
+            phi2='%.3f' % phi2,
+            phi2_percent='%.1f' % (phi2 * 100),
+            phi_2_rho='%.3f' % phi_2_rho,
+            phi2_percent_rho='%.1f' % (phi_2_rho * 100),
+            rho_np_1=f'\\rho_{{ \\text{{ нас. пара {t1} }} \\celsius }} = %.3f г/м^3' % Consts.vapor.get_rho_by_t(int(t1)),
+            rho_np_2=f'\\rho_{{ \\text{{ нас. пара {t2} }} \\celsius }} = %.3f г/м^3' % Consts.vapor.get_rho_by_t(int(t2)),
+        )
 
 
 @variant.solution_space(150)
@@ -941,7 +1038,7 @@ class GetPFromPhi(variant.VariantTask):
     Тут получаем ответ: {P_2:Task:e}.
 ''')
 class GetPFromM(variant.VariantTask):
-    def GetUpdate(self,P_air_old=None, V=None, t1=None, t2=None, m=None, **kws):
+    def GetUpdate(self, P_air_old=None, V=None, t1=None, t2=None, m=None, **kws):
         mu_value = 18
         mu = f'\\mu = {mu_value} г / моль'
 

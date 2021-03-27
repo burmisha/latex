@@ -425,6 +425,10 @@ class Vapor:
         if value == self.T_P_P_rho[-1][search_index]:
             return self.T_P_P_rho[-1][result_index]
 
+        # TODO: delete dirty hack
+        if search_index == 1 and value < self.T_P_P_rho[0][search_index]:
+            return 0
+
         log.error(f'Failed to find {value} at index {search_index}')
         raise RuntimeError()
 
@@ -436,6 +440,9 @@ class Vapor:
 
     def get_t_by_rho(self, rho):
         return self._get_index_by_index(rho, 3, 0)
+
+    def get_t_by_p(self, rho):
+        return self._get_index_by_index(rho, 1, 0)
 
 
 class Consts(object):
@@ -450,6 +457,7 @@ class Consts(object):
     p_atm = UnitValue('p_{\\text{aтм}} = 100 кПа')
     aem = UnitValue('\\text{а.е.м.} = 1.66054 10^-27 кг')
     k = UnitValue('k = 9 10^9 Н м^2 / Кл^2')
+    k_boltzmann = UnitValue('k = 1.38 10^-23 Дж / К')
     N_A = UnitValue('N_A = 6.02 10^23 / моль')
     R = UnitValue('R = 8.31 Дж / моль К')
 
