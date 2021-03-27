@@ -3,9 +3,6 @@ import fractions
 import generators.variant as variant
 from generators.helpers import UnitValue, Consts, Fraction
 
-import logging
-log = logging.getLogger(__name__)
-
 
 @variant.solution_space(20)
 @variant.text('''

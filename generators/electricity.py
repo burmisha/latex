@@ -1,13 +1,8 @@
-# -*- coding: utf-8 -*-
-
 import itertools
 import fractions
 
 import generators.variant as variant
 from generators.helpers import Consts, UnitValue, Fraction
-
-import logging
-log = logging.getLogger(__name__)
 
 
 @variant.text('''

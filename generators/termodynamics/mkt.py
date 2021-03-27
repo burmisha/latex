@@ -1,6 +1,7 @@
 import generators.variant as variant
 from generators.helpers import Consts
 
+
 @variant.solution_space(40)
 @variant.text('''
     Молекулы газа в некотором сосуде движутся со средней скоростью {v:Value|e}.

@@ -1,11 +1,6 @@
-# -*- coding: utf-8 -*-
-
 import itertools
 
 import generators.variant as variant
-
-import logging
-log = logging.getLogger(__name__)
 
 
 @variant.text('''

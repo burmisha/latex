@@ -27,6 +27,7 @@ class Consts(object):
         lmbd='340 кДж / кг',
         L='2.3 МДж / кг',
         rho='\\rho_{\\text{в}} = 1000 кг / м^3',
+        mu='18 г / моль',
     )
     lead = Matter(
         name='свинец',

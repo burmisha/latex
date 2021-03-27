@@ -1,13 +1,8 @@
-# -*- coding: utf-8 -*-
-
 import math
 import itertools
 
 import generators.variant as variant
 from generators.helpers import UnitValue, Consts
-
-import logging
-log = logging.getLogger(__name__)
 
 
 @variant.text('''

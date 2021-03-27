@@ -1,6 +1,7 @@
 import generators.variant as variant
 from generators.helpers import UnitValue, Consts
 
+
 @variant.solution_space(80)
 @variant.text('''
     При температуре ${t1}\\celsius$ относительная влажность воздуха составляет ${phi1}\%$.
