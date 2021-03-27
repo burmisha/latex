@@ -4,7 +4,7 @@ import itertools
 import fractions
 
 import generators.variant as variant
-from generators.helpers import Consts, UnitValue
+from generators.helpers import Consts, UnitValue, Fraction
 
 import logging
 log = logging.getLogger(__name__)
@@ -18,7 +18,7 @@ log = logging.getLogger(__name__)
     F
         = k\\frac{ {first:L}{second:L} }{ {distance:L}^2 }
         = {Consts.k:Value} * \\frac{ {first:Value} *{second:Value} }{ {distance:Value|sqr} }
-        = \\frac{ {value.numerator} }{ {value.denominator} } * 10^{ {power} }\\units{ Н }
+        = {value:LaTeX} * 10^{ {power} }\\units{ Н }
           \\approx { {approx:.2f} } * 10^{ {power} }\\units{ Н }
 ''')
 @variant.arg(first__second=[('q_1 = %d нКл' % f, 'q_2 = %d нКл' % s) for f in range(2, 5) for s in range(2, 5) if f != s])
@@ -26,14 +26,11 @@ log = logging.getLogger(__name__)
 class ForceTask(variant.VariantTask):
     def GetUpdate(self, first=None, second=None, distance=None, **kws):
         # answer = kqq/r**2
-        value = fractions.Fraction(
-            numerator=first.Value * second.Value * Consts.k.Value,
-            denominator=distance.Value ** 2,
-        )
+        value = Fraction() * first.Value * second.Value * Consts.k.Value / (distance.Value ** 2)
         return dict(
             value=value,
             power=Consts.k.Power - first.Power - second.Power - 2 * distance.Power,
-            approx=float(value),
+            approx=float(value._fraction),
             distance=distance,
         )
 
