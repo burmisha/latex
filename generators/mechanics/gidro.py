@@ -1,9 +1,6 @@
 from generators.variant import text, text_test, answer_short, answer_align, answer_test, arg, VariantTask
 from generators.helpers import Consts
 
-import logging
-log = logging.getLogger(__name__)
-
 
 @text('''
     Гидростатическое давление столба {matter} равно {p:Value|e}.

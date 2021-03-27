@@ -1,8 +1,5 @@
 import generators.c_9_5_em_waves
 import generators.electricity
-import generators.gidro
-import generators.kinematics
-import generators.koleb
 import generators.magnet
 import generators.mkt
 import generators.optics
@@ -11,5 +8,4 @@ import generators.sto
 import generators.termo
 import generators.variant
 import generators.vishnyakova
-import generators.waves
-import generators.zsi_zse
+import generators.mechanics
