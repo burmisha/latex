@@ -8,25 +8,25 @@ import logging
 log = logging.getLogger(__name__)
 
 
+def follow_dots(key, base):
+    assert isinstance(key, str)
+    b = base
+    for part in key.split('.'):
+        b = getattr(b, part)
+    return b
+
+
 def pick_classes(base, config):
     if isinstance(config, dict):
         for key, value in config.items():
-            log.info(f'Picking {key}, {value} from {config}')
-            b = base
-            for part in key.split('.'):
-                b = getattr(b, part)
-            log.info(f'Picking {key}, {value} from {b}')
-            for c in pick_classes(b, value):
+            for c in pick_classes(follow_dots(key, base), value):
                 yield c
     elif isinstance(config, list):
         for cfg in config:
             for c in pick_classes(base, cfg):
                 yield c
     elif isinstance(config, str):
-        c = base
-        for part in config.split('.'):
-            c = getattr(c, part)
-        yield c
+        yield follow_dots(config, base)
     else:
         raise RuntimeError(f'Invalid config: {config}')
 
@@ -46,7 +46,7 @@ def is_distant_task(task_id):
 def get_all_variants():
     random_tasks = [
         ('2019-04-16 10', {'electricity.kulon_field': ['ForceTask', 'ExchangeTask', 'FieldTaskGenerator', 'SumTask']}),
-        ('2019-04-30 10', {'electricity.potential': ['Potential728', 'Potential735', 'Potential737', 'Potential2335', 'Potential1621']}),
+        ('2019-04-30 10', {'electricity.potential': ['A_from_Q_E_l', 'E_from_U_l', 'Potential737', 'v_from_Ev_m', 'Potential1621']}),
         ('2019-05-06 10', {'electricity.cond': ['Rymkevich748', 'Rymkevich750', 'Rymkevich751', 'Rymkevich762', 'Cond1']}),
         ('2019-05-14 10', {'electricity.om': ['Rezistor1_v1', 'Rezistor2', 'Rezistor3', 'Rezistor4']}),
         ('2019-04-19 11', {'quantum': ['Fotons', 'KernelCount', 'RadioFall', 'RadioFall2']}),
@@ -104,6 +104,11 @@ def get_all_variants():
         # ('2021-03-30 10', {'termodynamics.termo': ['CycleTriangleUp']}),
         ('2021-03-25 10', {'electricity.kulon_field': ['ForceTask', 'ExchangeTask', 'FieldTaskGenerator', 'SumTask']}),
         ('2021-03-26 10', {'termodynamics.vapor': ['GetNFromPhi', 'GetPFromPhi', 'GetPFromM', 'Vapor01']}),
+        ('2021-03-30 10', {'electricity': [
+            'kulon_field.ExchangeTask', 'kulon_field.FieldTaskGenerator',
+            'potential.E_from_U_l', 'potential.A_from_Q_E_l',
+            'kulon_field.Definitions01',
+        ]}),
         ('2021-03-30 9', ['optics.Gendenshteyn_11_11_18', 'c_9_5_em_waves.Definitions01', 'c_9_5_em_waves.Deduce01']),
     ]
     for task_id, tasks_classes in random_tasks:

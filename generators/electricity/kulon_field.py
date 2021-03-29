@@ -30,10 +30,9 @@ class ForceTask(variant.VariantTask):
 
 
 @variant.text('''
-    Два одинаковых маленьких проводящих заряженных шарика находятся
-    на расстоянии~${letter}$ друг от друга.
-    Заряд первого равен~${charges[0]}$, второго~---${charges[1]}$.
-    Шарики приводят в соприкосновение, а после опять разводят на то же самое расстояние~${letter}$.
+    Два одинаковых маленьких проводящих заряженных шарика находятся на расстоянии~${letter}$ друг от друга.
+    Заряд первого равен~${charges[0]}$, второго~--- ${charges[1]}$.
+    Шарики приводят в соприкосновение, а после опять разводят на расстояние~${n}{letter}$.
     \\begin{{itemize}}
         \\item Каким стал заряд каждого из шариков?
         \\item Определите характер (притяжение или отталкивание) и силу взаимодействия шариков до и после соприкосновения.
@@ -41,14 +40,15 @@ class ForceTask(variant.VariantTask):
     \\end{{itemize}}
 ''')
 @variant.answer_align([
-    'F &= k\\frac{ q_1 q_2 }{ {letter}^2 } = k\\frac{ ({charges[0]}) * ({charges[1]}) }{ {letter}^2 }, \\text{ {res[0]} };',
+    'F &= k\\frac{ q_1 q_2 }{ \\sqr{ {n} {letter} } } = k\\frac{ ({charges[0]}) * ({charges[1]}) }{ \\sqr{ {n} {letter} } }, \\text{ {res[0]} };',
     '''
     q'_1 = q'_2 = \\frac{ q_1 + q_2 }2 = \\frac{ {charges[0]} + {charges[1]} }2 \\implies
     F'  &= k\\frac{ q'_1 q'_2 }{ {letter}^2 }
-        = k\\frac{ \\sqr{ \\frac{ ({charges[0]}) + ({charges[1]}) }2 } }{ {letter}^2 },
+        = k\\frac{ \\sqr{ \\frac{ ({charges[0]}) + ({charges[1]}) }2 } }{ {n}^2 * {letter}^2 },
     \\text{ {res[1]} }.'''
 ])
-@variant.arg(first_charge__second_charge=[(fc, sc) for fc in range(2, 6) for sc in range(2, 6) if fc != sc])
+@variant.arg(first_charge__second_charge=[(fc, sc) for fc in range(3, 9, 2) for sc in range(2, 10, 2)])
+@variant.arg(n=[2, 3, 4])
 @variant.arg(sign_1=['+', '-'])
 @variant.arg(sign_2=['+', '-'])
 @variant.arg(chargeLetter=['q', 'Q'])
@@ -71,8 +71,8 @@ class ExchangeTask(variant.VariantTask):
 @variant.text('''
     На координатной плоскости в точках $(-{letter}; 0)$ и $({letter}; 0)$
     находятся заряды, соответственно, ${charges[0]}$ и ${charges[1]}$.
-    Сделайте рисунок, определите величину напряжённости электрического поля
-    в точках ${firstCoords}$ и ${secondCoords}$ и укажите её направление.
+    Сделайте рисунок, определите величину напряжённости электрического поля 
+    и укажите её направление в двух точках: ${firstCoords}$ и ${secondCoords}$.
 ''')
 @variant.arg(firstPoint__secondPoint=list(itertools.product(['up', 'down'], ['right', 'left'])))
 @variant.arg(charges=[['+q', '-q'], ['-q', '-q'], ['+Q', '+Q'], ['-Q', '+Q']])
@@ -116,3 +116,22 @@ class FieldTaskGenerator(variant.VariantTask):
 @variant.arg(angleLetter=['\\alpha', '\\varphi'])
 class SumTask(variant.VariantTask):
     pass
+
+
+
+@variant.solution_space(0)
+@variant.text('''
+    \\begin{{enumerate}}
+        \\item Запишите (формулой) {first}.
+        \\item Зарисуйте электрическое поле точечного {second} электрического заряда.
+        \\item Запишите формулу для вычисления {third} электрического поля точечного заряда.
+        \\item Запишите принцип суперпозиции (правило сложения) {fourth}.
+    \\end{{enumerate}}
+''')
+@variant.arg(first=['закон Кулона (в вакууме)', 'закон сохранения электрического заряда'])
+@variant.arg(second=['положительного', 'отрицательного'])
+@variant.arg(third=['потенциала', 'напряжённости'])
+@variant.arg(fourth=['потенциалов', 'напряжённостей'])
+class Definitions01(variant.VariantTask):
+    pass
+
