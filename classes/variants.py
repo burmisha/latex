@@ -109,7 +109,10 @@ def get_all_variants():
             'potential.E_from_U_l', 'potential.A_from_Q_E_l',
             'kulon_field.Definitions01',
         ]}),
-        ('2021-03-30 9', ['optics.Gendenshteyn_11_11_18', 'c_9_5_em_waves.Definitions01', 'c_9_5_em_waves.Deduce01']),
+        ('2021-03-30 9', [
+            'optics.Gendenshteyn_11_11_18', 'c_9_5_em_waves.Definitions01', 'c_9_5_em_waves.Deduce01',
+            'c_9_5_em_waves.Sound_to_value', 'c_9_5_em_waves.Prefix',
+        ]),
     ]
     for task_id, tasks_classes in random_tasks:
         pupils = library.pupils.get_class_from_string(task_id)
