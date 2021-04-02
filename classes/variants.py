@@ -57,10 +57,10 @@ def get_all_variants():
         ('2019-12-24 9А', {'mechanics.waves': ['Waves00', 'Waves03', 'Waves04', 'Waves05']}),
         ('2020-04-22 9А', {'atomic.radioactive': ['BK_53_01', 'BK_53_02', 'BK_53_03', 'BK_53_12']}),
         ('2020-01-20 9Л', {'mechanics.koleb': ['Nu01', 'Nu02', 'Nu03', 'Nu04', 'Nu05']}),
-        ('2020-04-28 9Л', ['optics.Gendenshteyn_11_11_18', 'atomic.em_waves.Lambda_from_E', 'atomic.em_waves.Lambda_from_E_2', 'atomic.em_waves.H_levels']),
+        ('2020-04-28 9Л', ['atomic.em_waves.Gendenshteyn_11_11_18', 'atomic.em_waves.Lambda_from_E', 'atomic.em_waves.Lambda_from_E_2', 'atomic.em_waves.H_levels']),
         ('2019-09-11 11Т', {'electricity.magnet': ['ConstMagnet0', 'ConstMagnet1', 'ConstMagnet2', 'ConstMagnet3']}),
         ('2019-11-13 11Т', {'mechanics.waves': ['Waves01', 'Ch1238', 'Ch1240', 'Waves02']}),
-        ('2020-03-04 11Т', {'optics': ['Gendenshteyn_11_11_18', 'Vishnyakova_example_11', 'Belolipetsky_5_196']}),
+        ('2020-03-04 11Т', ['atomic.em_waves.Gendenshteyn_11_11_18', {'optics': ['Vishnyakova_example_11', 'Belolipetsky_5_196']}]),
         ('2020-04-29 11Т', [
             'sto.Equations', 'sto.E_ratio_from_v_ratio', 'sto.E_P_from_v_ratio', 'sto.beta_from_l_reduction',
             'atomic.em_waves.Lambda_from_E', 'atomic.em_waves.Lambda_from_E_2', 'atomic.em_waves.H_levels', 'atomic.quantum.Fotons',  # atomic-1
@@ -109,11 +109,8 @@ def get_all_variants():
             'potential.E_from_U_l', 'potential.A_from_Q_E_l',
             'kulon_field.Definitions01',
         ]}),
-        ('2021-03-30 9', [
-            'optics.Gendenshteyn_11_11_18', 'atomic.em_waves.Definitions01', 'atomic.em_waves.Deduce01',
-            'atomic.em_waves.Sound_to_value', 'atomic.em_waves.Prefix',
-        ]),
-        ('2021-04-01 9', ['atomic.em_waves.Lambda_from_E', 'atomic.em_waves.Lambda_from_E_2', 'atomic.em_waves.H_levels']),
+        ('2021-03-30 9', {'atomic.em_waves': ['Gendenshteyn_11_11_18', 'Definitions01', 'Deduce01', 'Sound_to_value', 'Prefix']}),
+        ('2021-04-01 9', {'atomic.em_waves': ['Lambda_from_E', 'Lambda_from_E_2', 'H_levels']}),
         ('2021-04-02 10',  {'electricity.potential': ['Phi_from_static_e', 'A_from_motion', 'E_phi_graphs', 'Definitions01']}),
     ]
     for task_id, tasks_classes in random_tasks:
