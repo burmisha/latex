@@ -4,6 +4,13 @@ import generators.variant as variant
 from generators.helpers import Consts, Fraction
 
 
+def sign_to_mult(line):
+    return {
+        '+': 1,
+        '-': -1,
+    }[line[0]]
+
+
 @variant.text('''
     С какой силой взаимодействуют 2 точечных заряда {first:Task:e} и {second:Task:e},
     находящиеся на расстоянии {distance:Task:e}?
@@ -11,7 +18,7 @@ from generators.helpers import Consts, Fraction
 @variant.answer_short('''
     F
         = k\\frac{ {first:L}{second:L} }{ {distance:L}^2 }
-        = {Consts.k:Value} * \\frac{ {first:Value} *{second:Value} }{ {distance:Value|sqr} }
+        = {Consts.k:Value} * \\frac{ {first:Value} * {second:Value} }{ {distance:Value|sqr} }
         = {value:LaTeX} * 10^{ {power} }\\units{ Н }
           \\approx { {approx:.2f} } * 10^{ {power} }\\units{ Н }
 ''')
@@ -40,12 +47,15 @@ class ForceTask(variant.VariantTask):
     \\end{{itemize}}
 ''')
 @variant.answer_align([
-    'F &= k\\frac{ q_1 q_2 }{ \\sqr{ {n} {letter} } } = k\\frac{ ({charges[0]}) * ({charges[1]}) }{ \\sqr{ {n} {letter} } }, \\text{ {res[0]} };',
+    'F &= k\\frac{ \\abs{ q_1 }\\abs { q_2 } }{ \\sqr{ {n} {letter} } }'
+    '   = k\\frac{ \\abs{ {charges[0]} } * \\abs{ {charges[1]} } }{ {n}^2 * {letter}^2 }, \\text{ {res[0]} };',
     '''
-    q'_1 = q'_2 = \\frac{ q_1 + q_2 }2 = \\frac{ {charges[0]} + {charges[1]} }2 \\implies
-    F'  &= k\\frac{ q'_1 q'_2 }{ {letter}^2 }
-        = k\\frac{ \\sqr{ \\frac{ ({charges[0]}) + ({charges[1]}) }2 } }{ {n}^2 * {letter}^2 },
-    \\text{ {res[1]} }.'''
+    q'_1 &= q'_2, q_1 + q_2 = q'_1 + q'_2 \\implies  q'_1 = q'_2 = q = \\frac{ q_1 + q_2 }2 = \\frac{ {charges[0]} + {charges[1]} }2 = {q_ratio:LaTeX}{chargeLetter} \\implies''',
+    '''
+    \\implies F'  &= k\\frac{ \\abs{ q'_1 }\\abs{ q'_2 } }{ \\sqr{ {n} {letter} } }
+        = k\\frac{ \\sqr{ {q_ratio:LaTeX}{chargeLetter} } }{ {n}^2 * {letter}^2 },
+    \\text{ {res[1]} },''',
+    '\\frac{ F\' }{ F } &= \\frac{ \\sqr{ {q_ratio:LaTeX}{chargeLetter} } }{ {n}^2 * \\abs{ {charges[0]} } * \\abs{ {charges[1]} } } = {ratio:LaTeX}.'
 ])
 @variant.arg(first_charge__second_charge=[(fc, sc) for fc in range(3, 9, 2) for sc in range(2, 10, 2)])
 @variant.arg(n=[2, 3, 4])
@@ -54,24 +64,28 @@ class ForceTask(variant.VariantTask):
 @variant.arg(chargeLetter=['q', 'Q'])
 @variant.arg(letter=['l', 'd', 'r'])
 class ExchangeTask(variant.VariantTask):
-    def GetUpdate(self, sign_1=None, sign_2=None, chargeLetter=None, letter=None, first_charge=None, second_charge=None, **kws):
+    def GetUpdate(self, sign_1=None, sign_2=None, chargeLetter=None, letter=None, first_charge=None, second_charge=None, n=None, **kws):
         charges = [
             '{}{}{}'.format(sign_1, first_charge, chargeLetter),
             '{}{}{}'.format(sign_2, second_charge, chargeLetter),
         ]
+        q_ratio = Fraction() * (sign_to_mult(sign_1) * first_charge + sign_to_mult(sign_2) * second_charge) / 2
+        ratio = Fraction() * q_ratio * q_ratio / first_charge / second_charge / (n ** 2)
         return dict(
             res=[
-                'притяжение' if first_charge * second_charge < 0 else 'отталкивание',
+                'отталкивание' if (sign_to_mult(sign_1) == sign_to_mult(sign_2)) else 'притяжение',
                 'отталкивание',
             ],
             charges=charges,
+            ratio=ratio,
+            q_ratio=q_ratio,
         )
 
 
 @variant.text('''
     На координатной плоскости в точках $(-{letter}; 0)$ и $({letter}; 0)$
     находятся заряды, соответственно, ${charges[0]}$ и ${charges[1]}$.
-    Сделайте рисунок, определите величину напряжённости электрического поля 
+    Сделайте рисунок, определите величину напряжённости электрического поля
     и укажите её направление в двух точках: ${firstCoords}$ и ${secondCoords}$.
 ''')
 @variant.arg(firstPoint__secondPoint=list(itertools.product(['up', 'down'], ['right', 'left'])))
@@ -116,7 +130,6 @@ class FieldTaskGenerator(variant.VariantTask):
 @variant.arg(angleLetter=['\\alpha', '\\varphi'])
 class SumTask(variant.VariantTask):
     pass
-
 
 
 @variant.solution_space(0)
