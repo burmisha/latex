@@ -327,15 +327,16 @@ class TriangleUp_T(variant.VariantTask):
         U_bonus_plus = (Fraction() * 15 * (alpha + 1) ** 2 / 64 - alpha) * 3 / 2
         U_bonus_12 = Fraction() * (alpha - 1) / 1 * 3 / 2
         eta_bonus = Fraction() * A_bonus_cycle / (U_bonus_plus + A_bonus_plus + U_bonus_12)
-
-        a1=42
-        A_bonus_cycle=Fraction() * 42 / 23
-        A_bonus_plus=Fraction() * 42 / 23
-        U_bonus_plus=Fraction() * 42 / 23
-        U_bonus_12=Fraction() * 42 / 23
-        eta_bonus=Fraction() * 42 / 23
-        V_star=Fraction() * 42 / 23
-        P_star=Fraction() * 42 / 23
+        V_star = Fraction() * (alpha + 1) * 5 / 8
+        P_star = Fraction() * (alpha + 1) * 3 / 8
+        # a1=42
+        # A_bonus_cycle=Fraction() * 42 / 23
+        # A_bonus_plus=Fraction() * 42 / 23
+        # U_bonus_plus=Fraction() * 42 / 23
+        # U_bonus_12=Fraction() * 42 / 23
+        # eta_bonus=Fraction() * 42 / 23
+        # V_star=Fraction() * 42 / 23
+        # P_star=Fraction() * 42 / 23
 
         return dict(
             t=t,
