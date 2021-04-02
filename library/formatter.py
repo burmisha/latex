@@ -4,36 +4,43 @@ import re
 log = logging.getLogger(__name__)
 
 
-class Date(object):
+class Date:
     def __init__(self, date):
         assert isinstance(date, str), 'Invalid date type: %r' % date
         assert re.match(r'20\d\d-\d{2}-\d{2}', date), 'Invalid date format: %r' % date
         self.__DateStr = date
-        log.debug('Date: %r -> %r', self.__DateStr, self.GetHumanText())
+        log.debug('Date: %r', self.__DateStr)
+        self._year = int(self.__DateStr[:4])
+        self._month = int(self.__DateStr[5:7])
+        self._day = int(self.__DateStr[8:10])
+        assert 2018 <= self._year <= 2025, 'Error on year in %r' % self.__DateStr
+        assert 1 <= self._day <= 31, 'Error on day in %r' % self.__DateStr
 
     def GetFilenameText(self):
         return str(self.__DateStr)
 
     def GetHumanText(self):
-        year, month, day = self.__DateStr.split('-')
         textMonth = {
-            '01': 'января',
-            '02': 'февраля',
-            '03': 'марта',
-            '04': 'апреля',
-            '05': 'мая',
-            '06': 'июня',
-            '07': 'июля',
-            '08': 'августа',
-            '09': 'сентября',
-            '10': 'октября',
-            '11': 'ноября',
-            '12': 'декабря',
-        }[month]
-        day = int(day)
-        assert 1 <= day <= 31, 'Error on day in %r' % self.__DateStr
-        assert 2018 <= int(year) <= 2025, 'Error on year in %r' % self.__DateStr
-        return '{}~{}~{}'.format(int(day), textMonth, year)
+            1: 'января',
+            2: 'февраля',
+            3: 'марта',
+            4: 'апреля',
+            5: 'мая',
+            6: 'июня',
+            7: 'июля',
+            8: 'августа',
+            9: 'сентября',
+            10: 'октября',
+            11: 'ноября',
+            12: 'декабря',
+        }[self._month]
+        return '{}~{}~{}'.format(self._day, textMonth, self._year)
+
+    def GetStudyYearPair(self):
+        if self._month <= 7:
+            return self._year - 1, self._year
+        else:
+            return self._year, self._year + 1
 
 
 class TextFormatter(object):

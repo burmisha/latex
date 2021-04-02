@@ -12,10 +12,11 @@ log = logging.getLogger(__name__)
 
 
 PAPER_TEMPLATE = r'''
-\input{{main}}
+\newcommand\rootpath{{../..}}
+\input{{\rootpath/school-554/main}}
 \begin{{document}}
 {noanswers}
-\input{{{filename}}}
+\input{{\rootpath/{filename}}}
 
 \end{{document}}
 '''
@@ -58,15 +59,20 @@ def run(args):
     if generateMultiple:
         for pupils, date, variant_tasks in classes.variants.get_all_variants():
             multiplePaper = generators.variant.MultiplePaper(date=date, pupils=pupils)
-            filename = multiplePaper.GetFilename()
+            study_year_pair = date.GetStudyYearPair()
+            filename = os.path.join(
+                'school-554',
+                f'generated-{str(study_year_pair[0])}-{str(study_year_pair[1])[2:]}',
+                multiplePaper.GetFilename(),
+            )
 
             text = multiplePaper.GetTex(variant_tasks=variant_tasks)
             task = PAPER_TEMPLATE.format(noanswers='\n\\noanswers\n', filename=filename)
             answer = PAPER_TEMPLATE.format(noanswers='', filename=filename)
 
-            fileWriter.Write('school-554', filename + '.tex', text=text)
-            fileWriter.Write('school-554', filename + '-task.tex', text=task)
-            fileWriter.Write('school-554', filename + '-answer.tex', text=answer)
+            fileWriter.Write(f'{filename}.tex', text=text)
+            fileWriter.Write(f'{filename}-task.tex', text=task)
+            fileWriter.Write(f'{filename}-answer.tex', text=answer)
 
         if args.show_manual:
             fileWriter.ShowManual(extensions=['tex'])
