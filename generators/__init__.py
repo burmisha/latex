@@ -1,10 +1,7 @@
-import generators.c_9_5_em_waves
+import generators.atomic
 import generators.electricity
-import generators.magnet
 import generators.optics
-import generators.quantum
 import generators.sto
 import generators.variant
-import generators.vishnyakova
 import generators.mechanics
 import generators.termodynamics

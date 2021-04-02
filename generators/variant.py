@@ -240,6 +240,7 @@ class VariantTask(object):
         answer_test_template = self.GetAnswerTestTemplate()
 
         return problems.task.Task(
+            # NORO: do not escape_tex
             laTeXFormatter.format(textTemplate),
             answer=laTeXFormatter.format(answerTemplate),
             test_answer=laTeXFormatter.format(answer_test_template, replace_comma=False),

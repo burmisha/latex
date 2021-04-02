@@ -49,24 +49,24 @@ def get_all_variants():
         ('2019-04-30 10', {'electricity.potential': ['A_from_Q_E_l', 'E_from_U_l', 'Potential737', 'v_from_Ev_m', 'Phi_from_static_e']}),
         ('2019-05-06 10', {'electricity.cond': ['Rymkevich748', 'Rymkevich750', 'Rymkevich751', 'Rymkevich762', 'Cond1']}),
         ('2019-05-14 10', {'electricity.om': ['Rezistor1_v1', 'Rezistor2', 'Rezistor3', 'Rezistor4']}),
-        ('2019-04-19 11', {'quantum': ['Fotons', 'KernelCount', 'RadioFall', 'RadioFall2']}),
-        ('2019-04-30 11', {'quantum': ['Quantum1119', 'Quantum1120']}),
+        ('2019-04-19 11', {'atomic.quantum': ['Fotons', 'KernelCount', 'RadioFall', 'RadioFall2']}),
+        ('2019-04-30 11', {'atomic.quantum': ['Quantum1119', 'Quantum1120']}),
         ('2019-11-27 8', {'termodynamics.termo': ['Ch_8_6', 'Ch_8_7', 'Ch_8_10', 'Ch_8_13', 'Ch_8_35']}),
         ('2019-11-25 9А', {'mechanics.zsi_zse': ['Ch_3_1', 'Ch_3_2', 'Ch_3_3', 'Ch_3_24', 'Ch_3_26']}),
         ('2019-12-17 9А', {'mechanics.koleb': ['Nu01', 'Nu02', 'Nu03', 'Nu04', 'Nu05']}),
         ('2019-12-24 9А', {'mechanics.waves': ['Waves00', 'Waves03', 'Waves04', 'Waves05']}),
-        ('2020-04-22 9А', {'vishnyakova': ['BK_53_01', 'BK_53_02', 'BK_53_03', 'BK_53_12']}),
+        ('2020-04-22 9А', {'atomic.radioactive': ['BK_53_01', 'BK_53_02', 'BK_53_03', 'BK_53_12']}),
         ('2020-01-20 9Л', {'mechanics.koleb': ['Nu01', 'Nu02', 'Nu03', 'Nu04', 'Nu05']}),
-        ('2020-04-28 9Л', ['optics.Gendenshteyn_11_11_18', {'vishnyakova': ['BK_52_01', 'BK_52_02', 'BK_52_07']}]),
-        ('2019-09-11 11Т', {'magnet': ['ConstMagnet0', 'ConstMagnet1', 'ConstMagnet2', 'ConstMagnet3']}),
+        ('2020-04-28 9Л', ['optics.Gendenshteyn_11_11_18', 'atomic.em_waves.Lambda_from_E', 'atomic.em_waves.Lambda_from_E_2', 'atomic.em_waves.H_levels']),
+        ('2019-09-11 11Т', {'electricity.magnet': ['ConstMagnet0', 'ConstMagnet1', 'ConstMagnet2', 'ConstMagnet3']}),
         ('2019-11-13 11Т', {'mechanics.waves': ['Waves01', 'Ch1238', 'Ch1240', 'Waves02']}),
         ('2020-03-04 11Т', {'optics': ['Gendenshteyn_11_11_18', 'Vishnyakova_example_11', 'Belolipetsky_5_196']}),
         ('2020-04-29 11Т', [
-            'sto.Equations', {'vishnyakova': ['BK_4_01', 'BK_4_03', 'BK_4_06']},  # sto
-            {'vishnyakova': ['BK_52_01', 'BK_52_02', 'BK_52_07']}, 'quantum.Fotons',  # atomic-1
-            {'vishnyakova': ['BK_53_01', 'BK_53_02', 'BK_53_03', 'BK_53_12']},  # atomic-2
+            'sto.Equations', 'sto.E_ratio_from_v_ratio', 'sto.E_P_from_v_ratio', 'sto.beta_from_l_reduction',
+            'atomic.em_waves.Lambda_from_E', 'atomic.em_waves.Lambda_from_E_2', 'atomic.em_waves.H_levels', 'atomic.quantum.Fotons',  # atomic-1
+            {'atomic.radioactive': ['BK_53_01', 'BK_53_02', 'BK_53_03', 'BK_53_12']},  # atomic-2
         ]),
-        ('2019-09-30 11S', {'magnet': ['Chernoutsan11_01', 'Chernoutsan11_02', 'Chernoutsan11_5']}),
+        ('2019-09-30 11S', {'electricity.magnet': ['Chernoutsan11_01', 'Chernoutsan11_02', 'Chernoutsan11_5']}),
         ('2020-09-10 10', {'mechanics.kinematics': ['Theory_1', 'Vectors_SumAndDiff', 'Chernoutsan_1_2', 'Vectors_SpeedSum']}),
         ('2020-09-10 9', {'mechanics.kinematics': ['Theory_1_simple', 'Chernoutsan_1_2', 'Chernoutsan_1_2_1']}),
         ('2020-11-26 10', {'mechanics.zsi_zse': ['Ch_3_1', 'Ch_3_2', 'Ch_3_3', 'Ch_3_6', 'Ch_3_26', 'Vishnyakova_1_4_6', 'Ch_4_2', 'Ch_4_29', 'Ch_4_45', 'Vishnyakova_1_4_12']}),
@@ -100,7 +100,7 @@ def get_all_variants():
         ('2021-03-16 9', {'electricity.cond': ['Rymkevich748', 'Rymkevich750', 'Rymkevich751', 'Rymkevich762', 'Definitions01', 'Definitions02']}),
         ('2021-03-18 10', ['termodynamics.cycle.Rectangle_T', 'termodynamics.mkt.GraphPV_1', 'termodynamics.termo.YesNo']),
         ('2021-03-23 10', ['termodynamics.cycle.TriangleUp_T', 'termodynamics.vapor.GetPhi', 'termodynamics.mkt.Basic12', 'termodynamics.termo.Definitions02']),
-        ('2021-03-23 9', {'quantum': ['Fotons', 'ColorNameFromLambda', 'E_from_nu',  'E_from_lambda', 'T_Nu_from_lambda', 'Deduce01']}),
+        ('2021-03-23 9', {'atomic.quantum': ['Fotons', 'ColorNameFromLambda', 'E_from_nu',  'E_from_lambda', 'T_Nu_from_lambda', 'Deduce01']}),
         # ('2021-03-30 10', {'termodynamics.termo': ['CycleTriangleUp']}),
         ('2021-03-25 10', {'electricity.kulon_field': ['ForceTask', 'ExchangeTask', 'FieldTaskGenerator', 'SumTask']}),
         ('2021-03-26 10', {'termodynamics.vapor': ['GetNFromPhi', 'GetPFromPhi', 'GetPFromM', 'Vapor01']}),
@@ -110,10 +110,10 @@ def get_all_variants():
             'kulon_field.Definitions01',
         ]}),
         ('2021-03-30 9', [
-            'optics.Gendenshteyn_11_11_18', 'c_9_5_em_waves.Definitions01', 'c_9_5_em_waves.Deduce01',
-            'c_9_5_em_waves.Sound_to_value', 'c_9_5_em_waves.Prefix',
+            'optics.Gendenshteyn_11_11_18', 'atomic.em_waves.Definitions01', 'atomic.em_waves.Deduce01',
+            'atomic.em_waves.Sound_to_value', 'atomic.em_waves.Prefix',
         ]),
-        ('2021-04-01 9',  {'vishnyakova': ['BK_52_01', 'BK_52_02', 'BK_52_07']}),
+        ('2021-04-01 9', ['atomic.em_waves.Lambda_from_E', 'atomic.em_waves.Lambda_from_E_2', 'atomic.em_waves.H_levels']),
         ('2021-04-02 10',  {'electricity.potential': ['Phi_from_static_e', 'A_from_motion', 'E_phi_graphs', 'Definitions01']}),
     ]
     for task_id, tasks_classes in random_tasks:
