@@ -91,7 +91,7 @@
 
 
         Теперь рассмотрим отдельно процесс 23, к остальному вернёмся позже.
-        Уравнение этой прямой в $PV$-координатах: $P(V) = 42P_0 - \frac{P_0}{V_0} V$.
+        Уравнение этой прямой в $PV$-координатах: $P(V) = 4P_0 - \frac{P_0}{V_0} V$.
         Это значит, что при изменении объёма на $\Delta V$ давление изменится на $\Delta P = - \frac{P_0}{V_0} \Delta V$, обратите внимание на знак.
 
         Рассмотрим произвольную точку в процессе 23 и дадим процессу ещё немного свершиться, при этом объём изменится на $\Delta V$, давление — на $\Delta P$, температура (иначе бы была гипербола, а не прямая) — на $\Delta T$,
@@ -119,19 +119,19 @@
         Q
             &= \frac 32 (P\Delta V + V \Delta P) + P \Delta V =  \frac 52 P\Delta V + \frac 32 V \Delta P = \\
             &= \frac 52 P\Delta V + \frac 32 V \cdot \cbr{- \frac{P_0}{V_0} \Delta V} = \frac{\Delta V}2 \cdot \cbr{5P - \frac{P_0}{V_0} V} = \\
-            &= \frac{\Delta V}2 \cdot \cbr{5 \cdot \cbr{42P_0 - \frac{P_0}{V_0} V} - \frac{P_0}{V_0} V}
-             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 42 - 8\frac{V}{V_0}}.
+            &= \frac{\Delta V}2 \cdot \cbr{5 \cdot \cbr{4P_0 - \frac{P_0}{V_0} V} - \frac{P_0}{V_0} V}
+             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 4 - 8\frac{V}{V_0}}.
         \end{align*}
 
         Таком образом, знак количества теплоты $Q$ на участке 23 зависит от конкретного значения $V$:
         \begin{itemize}
             \item $\Delta V > 0$ на всём участке 23, поскольку газ расширяется,
             \item $P > 0$ — всегда, у нас идеальный газ, удары о стенки сосуда абсолютно упругие, а молекулы не взаимодействуют и поэтому давление только положительно,
-            \item если $5 \cdot 42 - 8\frac{V}{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
+            \item если $5 \cdot 4 - 8\frac{V}{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
         \end{itemize}
         Решая последнее неравенство, получаем конкретное значение $V^*$: при $V < V^*$ тепло подводят, далее~— отводят.
         Тут *~--- некоторая точка между точками 2 и 3, конкретные значения надо досчитать:
-        $$V^* = V_0 \cdot \frac{5 \cdot 42}8 = \frac{42}{23} \cdot V_0 \implies P^* = 42P_0 - \frac{P_0}{V_0} V^* = \ldots = \frac{42}{23} \cdot P_0.$$
+        $$V^* = V_0 \cdot \frac{5 \cdot 4}8 = \frac52 \cdot V_0 \implies P^* = 4P_0 - \frac{P_0}{V_0} V^* = \ldots = \frac32 \cdot P_0.$$
 
         Т.е.
         чтобы вычислить $Q_+$, надо сложить количества теплоты на участке 12 и лишь части участка 23 — участке 2*,
@@ -140,19 +140,19 @@
 
         Теперь возвращаемся к циклу целиком и получаем:
         \begin{align*}
-        A_\text{цикл} &= \frac 12 \cdot (3P_0 - P_0) \cdot (3V_0 - V_0) = \frac{42}{23} \cdot P_0V_0, \\
+        A_\text{цикл} &= \frac 12 \cdot (3P_0 - P_0) \cdot (3V_0 - V_0) = 2 \cdot P_0V_0, \\
         A_{2*} &= \frac{P^* + 3P_0}2 \cdot (V^* - V_0)
-            = \frac{\frac{42}{23} \cdot P_0 + 3P_0}2 \cdot \cbr{\frac{42}{23} \cdot V_0 - V_0}
-            = \ldots = \frac{42}{23} \cdot P_0 V_0, \\
+            = \frac{\frac32 \cdot P_0 + 3P_0}2 \cdot \cbr{\frac52 \cdot V_0 - V_0}
+            = \ldots = \frac{27}8 \cdot P_0 V_0, \\
         \Delta U_{2*} &= \frac 32 \nu R T^* - \frac 32 \nu R T_2 = \frac 32 (P^*V^* - P_0 \cdot 3V_0)
-            = \frac 32 \cbr{\frac{42}{23} \cdot P_0 \cdot \frac{42}{23} \cdot V_0 - P_0 \cdot 3V_0}
-            = \frac{42}{23} \cdot P_0 V_0, \\
-        \Delta U_{12} &= \frac 32 \nu R T_2 - \frac 32 \nu R T_1 = \frac 32 (3P_0V_0 - P_0V_0) = \ldots = \frac{42}{23} \cdot P_0 V_0, \\
+            = \frac 32 \cbr{\frac32 \cdot P_0 \cdot \frac52 \cdot V_0 - P_0 \cdot 3V_0}
+            = \frac{15}2 \cdot P_0 V_0, \\
+        \Delta U_{12} &= \frac 32 \nu R T_2 - \frac 32 \nu R T_1 = \frac 32 (3P_0V_0 - P_0V_0) = \ldots = 3 \cdot P_0 V_0, \\
         \eta &= \frac{A_\text{цикл}}{Q_+} = \frac{A_\text{цикл}}{Q_{12} + Q_{2*}}
             = \frac{A_\text{цикл}}{A_{12} + \Delta U_{12} + A_{2*} + \Delta U_{2*}} = \\
-            &= \frac{\frac{42}{23} \cdot P_0V_0}{0 + \frac{42}{23} \cdot P_0 V_0 + \frac{42}{23} \cdot P_0 V_0 + \frac{42}{23} \cdot P_0 V_0}
-             = \frac{\frac{42}{23}}{\frac{42}{23} + \frac{42}{23} + \frac{42}{23}}
-             = \frac{42}{23} \leftarrow \text{вжух и готово!}
+            &= \frac{2 \cdot P_0V_0}{0 + 3 \cdot P_0 V_0 + \frac{27}8 \cdot P_0 V_0 + \frac{15}2 \cdot P_0 V_0}
+             = \frac{2}{3 + \frac{27}8 + \frac{15}2}
+             = \frac4{15} \leftarrow \text{вжух и готово!}
         \end{align*}
 }
 \solutionspace{360pt}
@@ -299,7 +299,7 @@
 
 
         Теперь рассмотрим отдельно процесс 23, к остальному вернёмся позже.
-        Уравнение этой прямой в $PV$-координатах: $P(V) = 42P_0 - \frac{P_0}{V_0} V$.
+        Уравнение этой прямой в $PV$-координатах: $P(V) = 3P_0 - \frac{P_0}{V_0} V$.
         Это значит, что при изменении объёма на $\Delta V$ давление изменится на $\Delta P = - \frac{P_0}{V_0} \Delta V$, обратите внимание на знак.
 
         Рассмотрим произвольную точку в процессе 23 и дадим процессу ещё немного свершиться, при этом объём изменится на $\Delta V$, давление — на $\Delta P$, температура (иначе бы была гипербола, а не прямая) — на $\Delta T$,
@@ -327,19 +327,19 @@
         Q
             &= \frac 32 (P\Delta V + V \Delta P) + P \Delta V =  \frac 52 P\Delta V + \frac 32 V \Delta P = \\
             &= \frac 52 P\Delta V + \frac 32 V \cdot \cbr{- \frac{P_0}{V_0} \Delta V} = \frac{\Delta V}2 \cdot \cbr{5P - \frac{P_0}{V_0} V} = \\
-            &= \frac{\Delta V}2 \cdot \cbr{5 \cdot \cbr{42P_0 - \frac{P_0}{V_0} V} - \frac{P_0}{V_0} V}
-             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 42 - 8\frac{V}{V_0}}.
+            &= \frac{\Delta V}2 \cdot \cbr{5 \cdot \cbr{3P_0 - \frac{P_0}{V_0} V} - \frac{P_0}{V_0} V}
+             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 3 - 8\frac{V}{V_0}}.
         \end{align*}
 
         Таком образом, знак количества теплоты $Q$ на участке 23 зависит от конкретного значения $V$:
         \begin{itemize}
             \item $\Delta V > 0$ на всём участке 23, поскольку газ расширяется,
             \item $P > 0$ — всегда, у нас идеальный газ, удары о стенки сосуда абсолютно упругие, а молекулы не взаимодействуют и поэтому давление только положительно,
-            \item если $5 \cdot 42 - 8\frac{V}{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
+            \item если $5 \cdot 3 - 8\frac{V}{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
         \end{itemize}
         Решая последнее неравенство, получаем конкретное значение $V^*$: при $V < V^*$ тепло подводят, далее~— отводят.
         Тут *~--- некоторая точка между точками 2 и 3, конкретные значения надо досчитать:
-        $$V^* = V_0 \cdot \frac{5 \cdot 42}8 = \frac{42}{23} \cdot V_0 \implies P^* = 42P_0 - \frac{P_0}{V_0} V^* = \ldots = \frac{42}{23} \cdot P_0.$$
+        $$V^* = V_0 \cdot \frac{5 \cdot 3}8 = \frac{15}8 \cdot V_0 \implies P^* = 3P_0 - \frac{P_0}{V_0} V^* = \ldots = \frac98 \cdot P_0.$$
 
         Т.е.
         чтобы вычислить $Q_+$, надо сложить количества теплоты на участке 12 и лишь части участка 23 — участке 2*,
@@ -348,19 +348,19 @@
 
         Теперь возвращаемся к циклу целиком и получаем:
         \begin{align*}
-        A_\text{цикл} &= \frac 12 \cdot (2P_0 - P_0) \cdot (2V_0 - V_0) = \frac{42}{23} \cdot P_0V_0, \\
+        A_\text{цикл} &= \frac 12 \cdot (2P_0 - P_0) \cdot (2V_0 - V_0) = \frac12 \cdot P_0V_0, \\
         A_{2*} &= \frac{P^* + 2P_0}2 \cdot (V^* - V_0)
-            = \frac{\frac{42}{23} \cdot P_0 + 2P_0}2 \cdot \cbr{\frac{42}{23} \cdot V_0 - V_0}
-            = \ldots = \frac{42}{23} \cdot P_0 V_0, \\
+            = \frac{\frac98 \cdot P_0 + 2P_0}2 \cdot \cbr{\frac{15}8 \cdot V_0 - V_0}
+            = \ldots = \frac{175}{128} \cdot P_0 V_0, \\
         \Delta U_{2*} &= \frac 32 \nu R T^* - \frac 32 \nu R T_2 = \frac 32 (P^*V^* - P_0 \cdot 2V_0)
-            = \frac 32 \cbr{\frac{42}{23} \cdot P_0 \cdot \frac{42}{23} \cdot V_0 - P_0 \cdot 2V_0}
-            = \frac{42}{23} \cdot P_0 V_0, \\
-        \Delta U_{12} &= \frac 32 \nu R T_2 - \frac 32 \nu R T_1 = \frac 32 (2P_0V_0 - P_0V_0) = \ldots = \frac{42}{23} \cdot P_0 V_0, \\
+            = \frac 32 \cbr{\frac98 \cdot P_0 \cdot \frac{15}8 \cdot V_0 - P_0 \cdot 2V_0}
+            = \frac{97}{32} \cdot P_0 V_0, \\
+        \Delta U_{12} &= \frac 32 \nu R T_2 - \frac 32 \nu R T_1 = \frac 32 (2P_0V_0 - P_0V_0) = \ldots = \frac32 \cdot P_0 V_0, \\
         \eta &= \frac{A_\text{цикл}}{Q_+} = \frac{A_\text{цикл}}{Q_{12} + Q_{2*}}
             = \frac{A_\text{цикл}}{A_{12} + \Delta U_{12} + A_{2*} + \Delta U_{2*}} = \\
-            &= \frac{\frac{42}{23} \cdot P_0V_0}{0 + \frac{42}{23} \cdot P_0 V_0 + \frac{42}{23} \cdot P_0 V_0 + \frac{42}{23} \cdot P_0 V_0}
-             = \frac{\frac{42}{23}}{\frac{42}{23} + \frac{42}{23} + \frac{42}{23}}
-             = \frac{42}{23} \leftarrow \text{вжух и готово!}
+            &= \frac{\frac12 \cdot P_0V_0}{0 + \frac32 \cdot P_0 V_0 + \frac{175}{128} \cdot P_0 V_0 + \frac{97}{32} \cdot P_0 V_0}
+             = \frac{\frac12}{\frac32 + \frac{175}{128} + \frac{97}{32}}
+             = \frac{16}{97} \leftarrow \text{вжух и готово!}
         \end{align*}
 }
 \solutionspace{360pt}
@@ -507,7 +507,7 @@
 
 
         Теперь рассмотрим отдельно процесс 23, к остальному вернёмся позже.
-        Уравнение этой прямой в $PV$-координатах: $P(V) = 42P_0 - \frac{P_0}{V_0} V$.
+        Уравнение этой прямой в $PV$-координатах: $P(V) = 7P_0 - \frac{P_0}{V_0} V$.
         Это значит, что при изменении объёма на $\Delta V$ давление изменится на $\Delta P = - \frac{P_0}{V_0} \Delta V$, обратите внимание на знак.
 
         Рассмотрим произвольную точку в процессе 23 и дадим процессу ещё немного свершиться, при этом объём изменится на $\Delta V$, давление — на $\Delta P$, температура (иначе бы была гипербола, а не прямая) — на $\Delta T$,
@@ -535,19 +535,19 @@
         Q
             &= \frac 32 (P\Delta V + V \Delta P) + P \Delta V =  \frac 52 P\Delta V + \frac 32 V \Delta P = \\
             &= \frac 52 P\Delta V + \frac 32 V \cdot \cbr{- \frac{P_0}{V_0} \Delta V} = \frac{\Delta V}2 \cdot \cbr{5P - \frac{P_0}{V_0} V} = \\
-            &= \frac{\Delta V}2 \cdot \cbr{5 \cdot \cbr{42P_0 - \frac{P_0}{V_0} V} - \frac{P_0}{V_0} V}
-             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 42 - 8\frac{V}{V_0}}.
+            &= \frac{\Delta V}2 \cdot \cbr{5 \cdot \cbr{7P_0 - \frac{P_0}{V_0} V} - \frac{P_0}{V_0} V}
+             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 7 - 8\frac{V}{V_0}}.
         \end{align*}
 
         Таком образом, знак количества теплоты $Q$ на участке 23 зависит от конкретного значения $V$:
         \begin{itemize}
             \item $\Delta V > 0$ на всём участке 23, поскольку газ расширяется,
             \item $P > 0$ — всегда, у нас идеальный газ, удары о стенки сосуда абсолютно упругие, а молекулы не взаимодействуют и поэтому давление только положительно,
-            \item если $5 \cdot 42 - 8\frac{V}{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
+            \item если $5 \cdot 7 - 8\frac{V}{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
         \end{itemize}
         Решая последнее неравенство, получаем конкретное значение $V^*$: при $V < V^*$ тепло подводят, далее~— отводят.
         Тут *~--- некоторая точка между точками 2 и 3, конкретные значения надо досчитать:
-        $$V^* = V_0 \cdot \frac{5 \cdot 42}8 = \frac{42}{23} \cdot V_0 \implies P^* = 42P_0 - \frac{P_0}{V_0} V^* = \ldots = \frac{42}{23} \cdot P_0.$$
+        $$V^* = V_0 \cdot \frac{5 \cdot 7}8 = \frac{35}8 \cdot V_0 \implies P^* = 7P_0 - \frac{P_0}{V_0} V^* = \ldots = \frac{21}8 \cdot P_0.$$
 
         Т.е.
         чтобы вычислить $Q_+$, надо сложить количества теплоты на участке 12 и лишь части участка 23 — участке 2*,
@@ -556,19 +556,19 @@
 
         Теперь возвращаемся к циклу целиком и получаем:
         \begin{align*}
-        A_\text{цикл} &= \frac 12 \cdot (6P_0 - P_0) \cdot (6V_0 - V_0) = \frac{42}{23} \cdot P_0V_0, \\
+        A_\text{цикл} &= \frac 12 \cdot (6P_0 - P_0) \cdot (6V_0 - V_0) = \frac{25}2 \cdot P_0V_0, \\
         A_{2*} &= \frac{P^* + 6P_0}2 \cdot (V^* - V_0)
-            = \frac{\frac{42}{23} \cdot P_0 + 6P_0}2 \cdot \cbr{\frac{42}{23} \cdot V_0 - V_0}
-            = \ldots = \frac{42}{23} \cdot P_0 V_0, \\
+            = \frac{\frac{21}8 \cdot P_0 + 6P_0}2 \cdot \cbr{\frac{35}8 \cdot V_0 - V_0}
+            = \ldots = \frac{1863}{128} \cdot P_0 V_0, \\
         \Delta U_{2*} &= \frac 32 \nu R T^* - \frac 32 \nu R T_2 = \frac 32 (P^*V^* - P_0 \cdot 6V_0)
-            = \frac 32 \cbr{\frac{42}{23} \cdot P_0 \cdot \frac{42}{23} \cdot V_0 - P_0 \cdot 6V_0}
-            = \frac{42}{23} \cdot P_0 V_0, \\
-        \Delta U_{12} &= \frac 32 \nu R T_2 - \frac 32 \nu R T_1 = \frac 32 (6P_0V_0 - P_0V_0) = \ldots = \frac{42}{23} \cdot P_0 V_0, \\
+            = \frac 32 \cbr{\frac{21}8 \cdot P_0 \cdot \frac{35}8 \cdot V_0 - P_0 \cdot 6V_0}
+            = \frac{969}{32} \cdot P_0 V_0, \\
+        \Delta U_{12} &= \frac 32 \nu R T_2 - \frac 32 \nu R T_1 = \frac 32 (6P_0V_0 - P_0V_0) = \ldots = \frac{15}2 \cdot P_0 V_0, \\
         \eta &= \frac{A_\text{цикл}}{Q_+} = \frac{A_\text{цикл}}{Q_{12} + Q_{2*}}
             = \frac{A_\text{цикл}}{A_{12} + \Delta U_{12} + A_{2*} + \Delta U_{2*}} = \\
-            &= \frac{\frac{42}{23} \cdot P_0V_0}{0 + \frac{42}{23} \cdot P_0 V_0 + \frac{42}{23} \cdot P_0 V_0 + \frac{42}{23} \cdot P_0 V_0}
-             = \frac{\frac{42}{23}}{\frac{42}{23} + \frac{42}{23} + \frac{42}{23}}
-             = \frac{42}{23} \leftarrow \text{вжух и готово!}
+            &= \frac{\frac{25}2 \cdot P_0V_0}{0 + \frac{15}2 \cdot P_0 V_0 + \frac{1863}{128} \cdot P_0 V_0 + \frac{969}{32} \cdot P_0 V_0}
+             = \frac{\frac{25}2}{\frac{15}2 + \frac{1863}{128} + \frac{969}{32}}
+             = \frac{400}{969} \leftarrow \text{вжух и готово!}
         \end{align*}
 }
 \solutionspace{360pt}
@@ -715,7 +715,7 @@
 
 
         Теперь рассмотрим отдельно процесс 23, к остальному вернёмся позже.
-        Уравнение этой прямой в $PV$-координатах: $P(V) = 42P_0 - \frac{P_0}{V_0} V$.
+        Уравнение этой прямой в $PV$-координатах: $P(V) = 6P_0 - \frac{P_0}{V_0} V$.
         Это значит, что при изменении объёма на $\Delta V$ давление изменится на $\Delta P = - \frac{P_0}{V_0} \Delta V$, обратите внимание на знак.
 
         Рассмотрим произвольную точку в процессе 23 и дадим процессу ещё немного свершиться, при этом объём изменится на $\Delta V$, давление — на $\Delta P$, температура (иначе бы была гипербола, а не прямая) — на $\Delta T$,
@@ -743,19 +743,19 @@
         Q
             &= \frac 32 (P\Delta V + V \Delta P) + P \Delta V =  \frac 52 P\Delta V + \frac 32 V \Delta P = \\
             &= \frac 52 P\Delta V + \frac 32 V \cdot \cbr{- \frac{P_0}{V_0} \Delta V} = \frac{\Delta V}2 \cdot \cbr{5P - \frac{P_0}{V_0} V} = \\
-            &= \frac{\Delta V}2 \cdot \cbr{5 \cdot \cbr{42P_0 - \frac{P_0}{V_0} V} - \frac{P_0}{V_0} V}
-             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 42 - 8\frac{V}{V_0}}.
+            &= \frac{\Delta V}2 \cdot \cbr{5 \cdot \cbr{6P_0 - \frac{P_0}{V_0} V} - \frac{P_0}{V_0} V}
+             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 6 - 8\frac{V}{V_0}}.
         \end{align*}
 
         Таком образом, знак количества теплоты $Q$ на участке 23 зависит от конкретного значения $V$:
         \begin{itemize}
             \item $\Delta V > 0$ на всём участке 23, поскольку газ расширяется,
             \item $P > 0$ — всегда, у нас идеальный газ, удары о стенки сосуда абсолютно упругие, а молекулы не взаимодействуют и поэтому давление только положительно,
-            \item если $5 \cdot 42 - 8\frac{V}{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
+            \item если $5 \cdot 6 - 8\frac{V}{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
         \end{itemize}
         Решая последнее неравенство, получаем конкретное значение $V^*$: при $V < V^*$ тепло подводят, далее~— отводят.
         Тут *~--- некоторая точка между точками 2 и 3, конкретные значения надо досчитать:
-        $$V^* = V_0 \cdot \frac{5 \cdot 42}8 = \frac{42}{23} \cdot V_0 \implies P^* = 42P_0 - \frac{P_0}{V_0} V^* = \ldots = \frac{42}{23} \cdot P_0.$$
+        $$V^* = V_0 \cdot \frac{5 \cdot 6}8 = \frac{15}4 \cdot V_0 \implies P^* = 6P_0 - \frac{P_0}{V_0} V^* = \ldots = \frac94 \cdot P_0.$$
 
         Т.е.
         чтобы вычислить $Q_+$, надо сложить количества теплоты на участке 12 и лишь части участка 23 — участке 2*,
@@ -764,19 +764,19 @@
 
         Теперь возвращаемся к циклу целиком и получаем:
         \begin{align*}
-        A_\text{цикл} &= \frac 12 \cdot (5P_0 - P_0) \cdot (5V_0 - V_0) = \frac{42}{23} \cdot P_0V_0, \\
+        A_\text{цикл} &= \frac 12 \cdot (5P_0 - P_0) \cdot (5V_0 - V_0) = 8 \cdot P_0V_0, \\
         A_{2*} &= \frac{P^* + 5P_0}2 \cdot (V^* - V_0)
-            = \frac{\frac{42}{23} \cdot P_0 + 5P_0}2 \cdot \cbr{\frac{42}{23} \cdot V_0 - V_0}
-            = \ldots = \frac{42}{23} \cdot P_0 V_0, \\
+            = \frac{\frac94 \cdot P_0 + 5P_0}2 \cdot \cbr{\frac{15}4 \cdot V_0 - V_0}
+            = \ldots = \frac{319}{32} \cdot P_0 V_0, \\
         \Delta U_{2*} &= \frac 32 \nu R T^* - \frac 32 \nu R T_2 = \frac 32 (P^*V^* - P_0 \cdot 5V_0)
-            = \frac 32 \cbr{\frac{42}{23} \cdot P_0 \cdot \frac{42}{23} \cdot V_0 - P_0 \cdot 5V_0}
-            = \frac{42}{23} \cdot P_0 V_0, \\
-        \Delta U_{12} &= \frac 32 \nu R T_2 - \frac 32 \nu R T_1 = \frac 32 (5P_0V_0 - P_0V_0) = \ldots = \frac{42}{23} \cdot P_0 V_0, \\
+            = \frac 32 \cbr{\frac94 \cdot P_0 \cdot \frac{15}4 \cdot V_0 - P_0 \cdot 5V_0}
+            = \frac{169}8 \cdot P_0 V_0, \\
+        \Delta U_{12} &= \frac 32 \nu R T_2 - \frac 32 \nu R T_1 = \frac 32 (5P_0V_0 - P_0V_0) = \ldots = 6 \cdot P_0 V_0, \\
         \eta &= \frac{A_\text{цикл}}{Q_+} = \frac{A_\text{цикл}}{Q_{12} + Q_{2*}}
             = \frac{A_\text{цикл}}{A_{12} + \Delta U_{12} + A_{2*} + \Delta U_{2*}} = \\
-            &= \frac{\frac{42}{23} \cdot P_0V_0}{0 + \frac{42}{23} \cdot P_0 V_0 + \frac{42}{23} \cdot P_0 V_0 + \frac{42}{23} \cdot P_0 V_0}
-             = \frac{\frac{42}{23}}{\frac{42}{23} + \frac{42}{23} + \frac{42}{23}}
-             = \frac{42}{23} \leftarrow \text{вжух и готово!}
+            &= \frac{8 \cdot P_0V_0}{0 + 6 \cdot P_0 V_0 + \frac{319}{32} \cdot P_0 V_0 + \frac{169}8 \cdot P_0 V_0}
+             = \frac{8}{6 + \frac{319}{32} + \frac{169}8}
+             = \frac{64}{169} \leftarrow \text{вжух и готово!}
         \end{align*}
 }
 \solutionspace{360pt}
@@ -923,7 +923,7 @@
 
 
         Теперь рассмотрим отдельно процесс 23, к остальному вернёмся позже.
-        Уравнение этой прямой в $PV$-координатах: $P(V) = 42P_0 - \frac{P_0}{V_0} V$.
+        Уравнение этой прямой в $PV$-координатах: $P(V) = 4P_0 - \frac{P_0}{V_0} V$.
         Это значит, что при изменении объёма на $\Delta V$ давление изменится на $\Delta P = - \frac{P_0}{V_0} \Delta V$, обратите внимание на знак.
 
         Рассмотрим произвольную точку в процессе 23 и дадим процессу ещё немного свершиться, при этом объём изменится на $\Delta V$, давление — на $\Delta P$, температура (иначе бы была гипербола, а не прямая) — на $\Delta T$,
@@ -951,19 +951,19 @@
         Q
             &= \frac 32 (P\Delta V + V \Delta P) + P \Delta V =  \frac 52 P\Delta V + \frac 32 V \Delta P = \\
             &= \frac 52 P\Delta V + \frac 32 V \cdot \cbr{- \frac{P_0}{V_0} \Delta V} = \frac{\Delta V}2 \cdot \cbr{5P - \frac{P_0}{V_0} V} = \\
-            &= \frac{\Delta V}2 \cdot \cbr{5 \cdot \cbr{42P_0 - \frac{P_0}{V_0} V} - \frac{P_0}{V_0} V}
-             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 42 - 8\frac{V}{V_0}}.
+            &= \frac{\Delta V}2 \cdot \cbr{5 \cdot \cbr{4P_0 - \frac{P_0}{V_0} V} - \frac{P_0}{V_0} V}
+             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 4 - 8\frac{V}{V_0}}.
         \end{align*}
 
         Таком образом, знак количества теплоты $Q$ на участке 23 зависит от конкретного значения $V$:
         \begin{itemize}
             \item $\Delta V > 0$ на всём участке 23, поскольку газ расширяется,
             \item $P > 0$ — всегда, у нас идеальный газ, удары о стенки сосуда абсолютно упругие, а молекулы не взаимодействуют и поэтому давление только положительно,
-            \item если $5 \cdot 42 - 8\frac{V}{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
+            \item если $5 \cdot 4 - 8\frac{V}{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
         \end{itemize}
         Решая последнее неравенство, получаем конкретное значение $V^*$: при $V < V^*$ тепло подводят, далее~— отводят.
         Тут *~--- некоторая точка между точками 2 и 3, конкретные значения надо досчитать:
-        $$V^* = V_0 \cdot \frac{5 \cdot 42}8 = \frac{42}{23} \cdot V_0 \implies P^* = 42P_0 - \frac{P_0}{V_0} V^* = \ldots = \frac{42}{23} \cdot P_0.$$
+        $$V^* = V_0 \cdot \frac{5 \cdot 4}8 = \frac52 \cdot V_0 \implies P^* = 4P_0 - \frac{P_0}{V_0} V^* = \ldots = \frac32 \cdot P_0.$$
 
         Т.е.
         чтобы вычислить $Q_+$, надо сложить количества теплоты на участке 12 и лишь части участка 23 — участке 2*,
@@ -972,19 +972,19 @@
 
         Теперь возвращаемся к циклу целиком и получаем:
         \begin{align*}
-        A_\text{цикл} &= \frac 12 \cdot (3P_0 - P_0) \cdot (3V_0 - V_0) = \frac{42}{23} \cdot P_0V_0, \\
+        A_\text{цикл} &= \frac 12 \cdot (3P_0 - P_0) \cdot (3V_0 - V_0) = 2 \cdot P_0V_0, \\
         A_{2*} &= \frac{P^* + 3P_0}2 \cdot (V^* - V_0)
-            = \frac{\frac{42}{23} \cdot P_0 + 3P_0}2 \cdot \cbr{\frac{42}{23} \cdot V_0 - V_0}
-            = \ldots = \frac{42}{23} \cdot P_0 V_0, \\
+            = \frac{\frac32 \cdot P_0 + 3P_0}2 \cdot \cbr{\frac52 \cdot V_0 - V_0}
+            = \ldots = \frac{27}8 \cdot P_0 V_0, \\
         \Delta U_{2*} &= \frac 32 \nu R T^* - \frac 32 \nu R T_2 = \frac 32 (P^*V^* - P_0 \cdot 3V_0)
-            = \frac 32 \cbr{\frac{42}{23} \cdot P_0 \cdot \frac{42}{23} \cdot V_0 - P_0 \cdot 3V_0}
-            = \frac{42}{23} \cdot P_0 V_0, \\
-        \Delta U_{12} &= \frac 32 \nu R T_2 - \frac 32 \nu R T_1 = \frac 32 (3P_0V_0 - P_0V_0) = \ldots = \frac{42}{23} \cdot P_0 V_0, \\
+            = \frac 32 \cbr{\frac32 \cdot P_0 \cdot \frac52 \cdot V_0 - P_0 \cdot 3V_0}
+            = \frac{15}2 \cdot P_0 V_0, \\
+        \Delta U_{12} &= \frac 32 \nu R T_2 - \frac 32 \nu R T_1 = \frac 32 (3P_0V_0 - P_0V_0) = \ldots = 3 \cdot P_0 V_0, \\
         \eta &= \frac{A_\text{цикл}}{Q_+} = \frac{A_\text{цикл}}{Q_{12} + Q_{2*}}
             = \frac{A_\text{цикл}}{A_{12} + \Delta U_{12} + A_{2*} + \Delta U_{2*}} = \\
-            &= \frac{\frac{42}{23} \cdot P_0V_0}{0 + \frac{42}{23} \cdot P_0 V_0 + \frac{42}{23} \cdot P_0 V_0 + \frac{42}{23} \cdot P_0 V_0}
-             = \frac{\frac{42}{23}}{\frac{42}{23} + \frac{42}{23} + \frac{42}{23}}
-             = \frac{42}{23} \leftarrow \text{вжух и готово!}
+            &= \frac{2 \cdot P_0V_0}{0 + 3 \cdot P_0 V_0 + \frac{27}8 \cdot P_0 V_0 + \frac{15}2 \cdot P_0 V_0}
+             = \frac{2}{3 + \frac{27}8 + \frac{15}2}
+             = \frac4{15} \leftarrow \text{вжух и готово!}
         \end{align*}
 }
 \solutionspace{360pt}
@@ -1131,7 +1131,7 @@
 
 
         Теперь рассмотрим отдельно процесс 23, к остальному вернёмся позже.
-        Уравнение этой прямой в $PV$-координатах: $P(V) = 42P_0 - \frac{P_0}{V_0} V$.
+        Уравнение этой прямой в $PV$-координатах: $P(V) = 3P_0 - \frac{P_0}{V_0} V$.
         Это значит, что при изменении объёма на $\Delta V$ давление изменится на $\Delta P = - \frac{P_0}{V_0} \Delta V$, обратите внимание на знак.
 
         Рассмотрим произвольную точку в процессе 23 и дадим процессу ещё немного свершиться, при этом объём изменится на $\Delta V$, давление — на $\Delta P$, температура (иначе бы была гипербола, а не прямая) — на $\Delta T$,
@@ -1159,19 +1159,19 @@
         Q
             &= \frac 32 (P\Delta V + V \Delta P) + P \Delta V =  \frac 52 P\Delta V + \frac 32 V \Delta P = \\
             &= \frac 52 P\Delta V + \frac 32 V \cdot \cbr{- \frac{P_0}{V_0} \Delta V} = \frac{\Delta V}2 \cdot \cbr{5P - \frac{P_0}{V_0} V} = \\
-            &= \frac{\Delta V}2 \cdot \cbr{5 \cdot \cbr{42P_0 - \frac{P_0}{V_0} V} - \frac{P_0}{V_0} V}
-             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 42 - 8\frac{V}{V_0}}.
+            &= \frac{\Delta V}2 \cdot \cbr{5 \cdot \cbr{3P_0 - \frac{P_0}{V_0} V} - \frac{P_0}{V_0} V}
+             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 3 - 8\frac{V}{V_0}}.
         \end{align*}
 
         Таком образом, знак количества теплоты $Q$ на участке 23 зависит от конкретного значения $V$:
         \begin{itemize}
             \item $\Delta V > 0$ на всём участке 23, поскольку газ расширяется,
             \item $P > 0$ — всегда, у нас идеальный газ, удары о стенки сосуда абсолютно упругие, а молекулы не взаимодействуют и поэтому давление только положительно,
-            \item если $5 \cdot 42 - 8\frac{V}{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
+            \item если $5 \cdot 3 - 8\frac{V}{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
         \end{itemize}
         Решая последнее неравенство, получаем конкретное значение $V^*$: при $V < V^*$ тепло подводят, далее~— отводят.
         Тут *~--- некоторая точка между точками 2 и 3, конкретные значения надо досчитать:
-        $$V^* = V_0 \cdot \frac{5 \cdot 42}8 = \frac{42}{23} \cdot V_0 \implies P^* = 42P_0 - \frac{P_0}{V_0} V^* = \ldots = \frac{42}{23} \cdot P_0.$$
+        $$V^* = V_0 \cdot \frac{5 \cdot 3}8 = \frac{15}8 \cdot V_0 \implies P^* = 3P_0 - \frac{P_0}{V_0} V^* = \ldots = \frac98 \cdot P_0.$$
 
         Т.е.
         чтобы вычислить $Q_+$, надо сложить количества теплоты на участке 12 и лишь части участка 23 — участке 2*,
@@ -1180,19 +1180,19 @@
 
         Теперь возвращаемся к циклу целиком и получаем:
         \begin{align*}
-        A_\text{цикл} &= \frac 12 \cdot (2P_0 - P_0) \cdot (2V_0 - V_0) = \frac{42}{23} \cdot P_0V_0, \\
+        A_\text{цикл} &= \frac 12 \cdot (2P_0 - P_0) \cdot (2V_0 - V_0) = \frac12 \cdot P_0V_0, \\
         A_{2*} &= \frac{P^* + 2P_0}2 \cdot (V^* - V_0)
-            = \frac{\frac{42}{23} \cdot P_0 + 2P_0}2 \cdot \cbr{\frac{42}{23} \cdot V_0 - V_0}
-            = \ldots = \frac{42}{23} \cdot P_0 V_0, \\
+            = \frac{\frac98 \cdot P_0 + 2P_0}2 \cdot \cbr{\frac{15}8 \cdot V_0 - V_0}
+            = \ldots = \frac{175}{128} \cdot P_0 V_0, \\
         \Delta U_{2*} &= \frac 32 \nu R T^* - \frac 32 \nu R T_2 = \frac 32 (P^*V^* - P_0 \cdot 2V_0)
-            = \frac 32 \cbr{\frac{42}{23} \cdot P_0 \cdot \frac{42}{23} \cdot V_0 - P_0 \cdot 2V_0}
-            = \frac{42}{23} \cdot P_0 V_0, \\
-        \Delta U_{12} &= \frac 32 \nu R T_2 - \frac 32 \nu R T_1 = \frac 32 (2P_0V_0 - P_0V_0) = \ldots = \frac{42}{23} \cdot P_0 V_0, \\
+            = \frac 32 \cbr{\frac98 \cdot P_0 \cdot \frac{15}8 \cdot V_0 - P_0 \cdot 2V_0}
+            = \frac{97}{32} \cdot P_0 V_0, \\
+        \Delta U_{12} &= \frac 32 \nu R T_2 - \frac 32 \nu R T_1 = \frac 32 (2P_0V_0 - P_0V_0) = \ldots = \frac32 \cdot P_0 V_0, \\
         \eta &= \frac{A_\text{цикл}}{Q_+} = \frac{A_\text{цикл}}{Q_{12} + Q_{2*}}
             = \frac{A_\text{цикл}}{A_{12} + \Delta U_{12} + A_{2*} + \Delta U_{2*}} = \\
-            &= \frac{\frac{42}{23} \cdot P_0V_0}{0 + \frac{42}{23} \cdot P_0 V_0 + \frac{42}{23} \cdot P_0 V_0 + \frac{42}{23} \cdot P_0 V_0}
-             = \frac{\frac{42}{23}}{\frac{42}{23} + \frac{42}{23} + \frac{42}{23}}
-             = \frac{42}{23} \leftarrow \text{вжух и готово!}
+            &= \frac{\frac12 \cdot P_0V_0}{0 + \frac32 \cdot P_0 V_0 + \frac{175}{128} \cdot P_0 V_0 + \frac{97}{32} \cdot P_0 V_0}
+             = \frac{\frac12}{\frac32 + \frac{175}{128} + \frac{97}{32}}
+             = \frac{16}{97} \leftarrow \text{вжух и готово!}
         \end{align*}
 }
 \solutionspace{360pt}
@@ -1339,7 +1339,7 @@
 
 
         Теперь рассмотрим отдельно процесс 23, к остальному вернёмся позже.
-        Уравнение этой прямой в $PV$-координатах: $P(V) = 42P_0 - \frac{P_0}{V_0} V$.
+        Уравнение этой прямой в $PV$-координатах: $P(V) = 6P_0 - \frac{P_0}{V_0} V$.
         Это значит, что при изменении объёма на $\Delta V$ давление изменится на $\Delta P = - \frac{P_0}{V_0} \Delta V$, обратите внимание на знак.
 
         Рассмотрим произвольную точку в процессе 23 и дадим процессу ещё немного свершиться, при этом объём изменится на $\Delta V$, давление — на $\Delta P$, температура (иначе бы была гипербола, а не прямая) — на $\Delta T$,
@@ -1367,19 +1367,19 @@
         Q
             &= \frac 32 (P\Delta V + V \Delta P) + P \Delta V =  \frac 52 P\Delta V + \frac 32 V \Delta P = \\
             &= \frac 52 P\Delta V + \frac 32 V \cdot \cbr{- \frac{P_0}{V_0} \Delta V} = \frac{\Delta V}2 \cdot \cbr{5P - \frac{P_0}{V_0} V} = \\
-            &= \frac{\Delta V}2 \cdot \cbr{5 \cdot \cbr{42P_0 - \frac{P_0}{V_0} V} - \frac{P_0}{V_0} V}
-             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 42 - 8\frac{V}{V_0}}.
+            &= \frac{\Delta V}2 \cdot \cbr{5 \cdot \cbr{6P_0 - \frac{P_0}{V_0} V} - \frac{P_0}{V_0} V}
+             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 6 - 8\frac{V}{V_0}}.
         \end{align*}
 
         Таком образом, знак количества теплоты $Q$ на участке 23 зависит от конкретного значения $V$:
         \begin{itemize}
             \item $\Delta V > 0$ на всём участке 23, поскольку газ расширяется,
             \item $P > 0$ — всегда, у нас идеальный газ, удары о стенки сосуда абсолютно упругие, а молекулы не взаимодействуют и поэтому давление только положительно,
-            \item если $5 \cdot 42 - 8\frac{V}{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
+            \item если $5 \cdot 6 - 8\frac{V}{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
         \end{itemize}
         Решая последнее неравенство, получаем конкретное значение $V^*$: при $V < V^*$ тепло подводят, далее~— отводят.
         Тут *~--- некоторая точка между точками 2 и 3, конкретные значения надо досчитать:
-        $$V^* = V_0 \cdot \frac{5 \cdot 42}8 = \frac{42}{23} \cdot V_0 \implies P^* = 42P_0 - \frac{P_0}{V_0} V^* = \ldots = \frac{42}{23} \cdot P_0.$$
+        $$V^* = V_0 \cdot \frac{5 \cdot 6}8 = \frac{15}4 \cdot V_0 \implies P^* = 6P_0 - \frac{P_0}{V_0} V^* = \ldots = \frac94 \cdot P_0.$$
 
         Т.е.
         чтобы вычислить $Q_+$, надо сложить количества теплоты на участке 12 и лишь части участка 23 — участке 2*,
@@ -1388,19 +1388,19 @@
 
         Теперь возвращаемся к циклу целиком и получаем:
         \begin{align*}
-        A_\text{цикл} &= \frac 12 \cdot (5P_0 - P_0) \cdot (5V_0 - V_0) = \frac{42}{23} \cdot P_0V_0, \\
+        A_\text{цикл} &= \frac 12 \cdot (5P_0 - P_0) \cdot (5V_0 - V_0) = 8 \cdot P_0V_0, \\
         A_{2*} &= \frac{P^* + 5P_0}2 \cdot (V^* - V_0)
-            = \frac{\frac{42}{23} \cdot P_0 + 5P_0}2 \cdot \cbr{\frac{42}{23} \cdot V_0 - V_0}
-            = \ldots = \frac{42}{23} \cdot P_0 V_0, \\
+            = \frac{\frac94 \cdot P_0 + 5P_0}2 \cdot \cbr{\frac{15}4 \cdot V_0 - V_0}
+            = \ldots = \frac{319}{32} \cdot P_0 V_0, \\
         \Delta U_{2*} &= \frac 32 \nu R T^* - \frac 32 \nu R T_2 = \frac 32 (P^*V^* - P_0 \cdot 5V_0)
-            = \frac 32 \cbr{\frac{42}{23} \cdot P_0 \cdot \frac{42}{23} \cdot V_0 - P_0 \cdot 5V_0}
-            = \frac{42}{23} \cdot P_0 V_0, \\
-        \Delta U_{12} &= \frac 32 \nu R T_2 - \frac 32 \nu R T_1 = \frac 32 (5P_0V_0 - P_0V_0) = \ldots = \frac{42}{23} \cdot P_0 V_0, \\
+            = \frac 32 \cbr{\frac94 \cdot P_0 \cdot \frac{15}4 \cdot V_0 - P_0 \cdot 5V_0}
+            = \frac{169}8 \cdot P_0 V_0, \\
+        \Delta U_{12} &= \frac 32 \nu R T_2 - \frac 32 \nu R T_1 = \frac 32 (5P_0V_0 - P_0V_0) = \ldots = 6 \cdot P_0 V_0, \\
         \eta &= \frac{A_\text{цикл}}{Q_+} = \frac{A_\text{цикл}}{Q_{12} + Q_{2*}}
             = \frac{A_\text{цикл}}{A_{12} + \Delta U_{12} + A_{2*} + \Delta U_{2*}} = \\
-            &= \frac{\frac{42}{23} \cdot P_0V_0}{0 + \frac{42}{23} \cdot P_0 V_0 + \frac{42}{23} \cdot P_0 V_0 + \frac{42}{23} \cdot P_0 V_0}
-             = \frac{\frac{42}{23}}{\frac{42}{23} + \frac{42}{23} + \frac{42}{23}}
-             = \frac{42}{23} \leftarrow \text{вжух и готово!}
+            &= \frac{8 \cdot P_0V_0}{0 + 6 \cdot P_0 V_0 + \frac{319}{32} \cdot P_0 V_0 + \frac{169}8 \cdot P_0 V_0}
+             = \frac{8}{6 + \frac{319}{32} + \frac{169}8}
+             = \frac{64}{169} \leftarrow \text{вжух и готово!}
         \end{align*}
 }
 \solutionspace{360pt}
@@ -1547,7 +1547,7 @@
 
 
         Теперь рассмотрим отдельно процесс 23, к остальному вернёмся позже.
-        Уравнение этой прямой в $PV$-координатах: $P(V) = 42P_0 - \frac{P_0}{V_0} V$.
+        Уравнение этой прямой в $PV$-координатах: $P(V) = 5P_0 - \frac{P_0}{V_0} V$.
         Это значит, что при изменении объёма на $\Delta V$ давление изменится на $\Delta P = - \frac{P_0}{V_0} \Delta V$, обратите внимание на знак.
 
         Рассмотрим произвольную точку в процессе 23 и дадим процессу ещё немного свершиться, при этом объём изменится на $\Delta V$, давление — на $\Delta P$, температура (иначе бы была гипербола, а не прямая) — на $\Delta T$,
@@ -1575,19 +1575,19 @@
         Q
             &= \frac 32 (P\Delta V + V \Delta P) + P \Delta V =  \frac 52 P\Delta V + \frac 32 V \Delta P = \\
             &= \frac 52 P\Delta V + \frac 32 V \cdot \cbr{- \frac{P_0}{V_0} \Delta V} = \frac{\Delta V}2 \cdot \cbr{5P - \frac{P_0}{V_0} V} = \\
-            &= \frac{\Delta V}2 \cdot \cbr{5 \cdot \cbr{42P_0 - \frac{P_0}{V_0} V} - \frac{P_0}{V_0} V}
-             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 42 - 8\frac{V}{V_0}}.
+            &= \frac{\Delta V}2 \cdot \cbr{5 \cdot \cbr{5P_0 - \frac{P_0}{V_0} V} - \frac{P_0}{V_0} V}
+             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 5 - 8\frac{V}{V_0}}.
         \end{align*}
 
         Таком образом, знак количества теплоты $Q$ на участке 23 зависит от конкретного значения $V$:
         \begin{itemize}
             \item $\Delta V > 0$ на всём участке 23, поскольку газ расширяется,
             \item $P > 0$ — всегда, у нас идеальный газ, удары о стенки сосуда абсолютно упругие, а молекулы не взаимодействуют и поэтому давление только положительно,
-            \item если $5 \cdot 42 - 8\frac{V}{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
+            \item если $5 \cdot 5 - 8\frac{V}{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
         \end{itemize}
         Решая последнее неравенство, получаем конкретное значение $V^*$: при $V < V^*$ тепло подводят, далее~— отводят.
         Тут *~--- некоторая точка между точками 2 и 3, конкретные значения надо досчитать:
-        $$V^* = V_0 \cdot \frac{5 \cdot 42}8 = \frac{42}{23} \cdot V_0 \implies P^* = 42P_0 - \frac{P_0}{V_0} V^* = \ldots = \frac{42}{23} \cdot P_0.$$
+        $$V^* = V_0 \cdot \frac{5 \cdot 5}8 = \frac{25}8 \cdot V_0 \implies P^* = 5P_0 - \frac{P_0}{V_0} V^* = \ldots = \frac{15}8 \cdot P_0.$$
 
         Т.е.
         чтобы вычислить $Q_+$, надо сложить количества теплоты на участке 12 и лишь части участка 23 — участке 2*,
@@ -1596,19 +1596,19 @@
 
         Теперь возвращаемся к циклу целиком и получаем:
         \begin{align*}
-        A_\text{цикл} &= \frac 12 \cdot (4P_0 - P_0) \cdot (4V_0 - V_0) = \frac{42}{23} \cdot P_0V_0, \\
+        A_\text{цикл} &= \frac 12 \cdot (4P_0 - P_0) \cdot (4V_0 - V_0) = \frac92 \cdot P_0V_0, \\
         A_{2*} &= \frac{P^* + 4P_0}2 \cdot (V^* - V_0)
-            = \frac{\frac{42}{23} \cdot P_0 + 4P_0}2 \cdot \cbr{\frac{42}{23} \cdot V_0 - V_0}
-            = \ldots = \frac{42}{23} \cdot P_0 V_0, \\
+            = \frac{\frac{15}8 \cdot P_0 + 4P_0}2 \cdot \cbr{\frac{25}8 \cdot V_0 - V_0}
+            = \ldots = \frac{799}{128} \cdot P_0 V_0, \\
         \Delta U_{2*} &= \frac 32 \nu R T^* - \frac 32 \nu R T_2 = \frac 32 (P^*V^* - P_0 \cdot 4V_0)
-            = \frac 32 \cbr{\frac{42}{23} \cdot P_0 \cdot \frac{42}{23} \cdot V_0 - P_0 \cdot 4V_0}
-            = \frac{42}{23} \cdot P_0 V_0, \\
-        \Delta U_{12} &= \frac 32 \nu R T_2 - \frac 32 \nu R T_1 = \frac 32 (4P_0V_0 - P_0V_0) = \ldots = \frac{42}{23} \cdot P_0 V_0, \\
+            = \frac 32 \cbr{\frac{15}8 \cdot P_0 \cdot \frac{25}8 \cdot V_0 - P_0 \cdot 4V_0}
+            = \frac{433}{32} \cdot P_0 V_0, \\
+        \Delta U_{12} &= \frac 32 \nu R T_2 - \frac 32 \nu R T_1 = \frac 32 (4P_0V_0 - P_0V_0) = \ldots = \frac92 \cdot P_0 V_0, \\
         \eta &= \frac{A_\text{цикл}}{Q_+} = \frac{A_\text{цикл}}{Q_{12} + Q_{2*}}
             = \frac{A_\text{цикл}}{A_{12} + \Delta U_{12} + A_{2*} + \Delta U_{2*}} = \\
-            &= \frac{\frac{42}{23} \cdot P_0V_0}{0 + \frac{42}{23} \cdot P_0 V_0 + \frac{42}{23} \cdot P_0 V_0 + \frac{42}{23} \cdot P_0 V_0}
-             = \frac{\frac{42}{23}}{\frac{42}{23} + \frac{42}{23} + \frac{42}{23}}
-             = \frac{42}{23} \leftarrow \text{вжух и готово!}
+            &= \frac{\frac92 \cdot P_0V_0}{0 + \frac92 \cdot P_0 V_0 + \frac{799}{128} \cdot P_0 V_0 + \frac{433}{32} \cdot P_0 V_0}
+             = \frac{\frac92}{\frac92 + \frac{799}{128} + \frac{433}{32}}
+             = \frac{144}{433} \leftarrow \text{вжух и готово!}
         \end{align*}
 }
 \solutionspace{360pt}
@@ -1755,7 +1755,7 @@
 
 
         Теперь рассмотрим отдельно процесс 23, к остальному вернёмся позже.
-        Уравнение этой прямой в $PV$-координатах: $P(V) = 42P_0 - \frac{P_0}{V_0} V$.
+        Уравнение этой прямой в $PV$-координатах: $P(V) = 7P_0 - \frac{P_0}{V_0} V$.
         Это значит, что при изменении объёма на $\Delta V$ давление изменится на $\Delta P = - \frac{P_0}{V_0} \Delta V$, обратите внимание на знак.
 
         Рассмотрим произвольную точку в процессе 23 и дадим процессу ещё немного свершиться, при этом объём изменится на $\Delta V$, давление — на $\Delta P$, температура (иначе бы была гипербола, а не прямая) — на $\Delta T$,
@@ -1783,19 +1783,19 @@
         Q
             &= \frac 32 (P\Delta V + V \Delta P) + P \Delta V =  \frac 52 P\Delta V + \frac 32 V \Delta P = \\
             &= \frac 52 P\Delta V + \frac 32 V \cdot \cbr{- \frac{P_0}{V_0} \Delta V} = \frac{\Delta V}2 \cdot \cbr{5P - \frac{P_0}{V_0} V} = \\
-            &= \frac{\Delta V}2 \cdot \cbr{5 \cdot \cbr{42P_0 - \frac{P_0}{V_0} V} - \frac{P_0}{V_0} V}
-             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 42 - 8\frac{V}{V_0}}.
+            &= \frac{\Delta V}2 \cdot \cbr{5 \cdot \cbr{7P_0 - \frac{P_0}{V_0} V} - \frac{P_0}{V_0} V}
+             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 7 - 8\frac{V}{V_0}}.
         \end{align*}
 
         Таком образом, знак количества теплоты $Q$ на участке 23 зависит от конкретного значения $V$:
         \begin{itemize}
             \item $\Delta V > 0$ на всём участке 23, поскольку газ расширяется,
             \item $P > 0$ — всегда, у нас идеальный газ, удары о стенки сосуда абсолютно упругие, а молекулы не взаимодействуют и поэтому давление только положительно,
-            \item если $5 \cdot 42 - 8\frac{V}{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
+            \item если $5 \cdot 7 - 8\frac{V}{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
         \end{itemize}
         Решая последнее неравенство, получаем конкретное значение $V^*$: при $V < V^*$ тепло подводят, далее~— отводят.
         Тут *~--- некоторая точка между точками 2 и 3, конкретные значения надо досчитать:
-        $$V^* = V_0 \cdot \frac{5 \cdot 42}8 = \frac{42}{23} \cdot V_0 \implies P^* = 42P_0 - \frac{P_0}{V_0} V^* = \ldots = \frac{42}{23} \cdot P_0.$$
+        $$V^* = V_0 \cdot \frac{5 \cdot 7}8 = \frac{35}8 \cdot V_0 \implies P^* = 7P_0 - \frac{P_0}{V_0} V^* = \ldots = \frac{21}8 \cdot P_0.$$
 
         Т.е.
         чтобы вычислить $Q_+$, надо сложить количества теплоты на участке 12 и лишь части участка 23 — участке 2*,
@@ -1804,19 +1804,19 @@
 
         Теперь возвращаемся к циклу целиком и получаем:
         \begin{align*}
-        A_\text{цикл} &= \frac 12 \cdot (6P_0 - P_0) \cdot (6V_0 - V_0) = \frac{42}{23} \cdot P_0V_0, \\
+        A_\text{цикл} &= \frac 12 \cdot (6P_0 - P_0) \cdot (6V_0 - V_0) = \frac{25}2 \cdot P_0V_0, \\
         A_{2*} &= \frac{P^* + 6P_0}2 \cdot (V^* - V_0)
-            = \frac{\frac{42}{23} \cdot P_0 + 6P_0}2 \cdot \cbr{\frac{42}{23} \cdot V_0 - V_0}
-            = \ldots = \frac{42}{23} \cdot P_0 V_0, \\
+            = \frac{\frac{21}8 \cdot P_0 + 6P_0}2 \cdot \cbr{\frac{35}8 \cdot V_0 - V_0}
+            = \ldots = \frac{1863}{128} \cdot P_0 V_0, \\
         \Delta U_{2*} &= \frac 32 \nu R T^* - \frac 32 \nu R T_2 = \frac 32 (P^*V^* - P_0 \cdot 6V_0)
-            = \frac 32 \cbr{\frac{42}{23} \cdot P_0 \cdot \frac{42}{23} \cdot V_0 - P_0 \cdot 6V_0}
-            = \frac{42}{23} \cdot P_0 V_0, \\
-        \Delta U_{12} &= \frac 32 \nu R T_2 - \frac 32 \nu R T_1 = \frac 32 (6P_0V_0 - P_0V_0) = \ldots = \frac{42}{23} \cdot P_0 V_0, \\
+            = \frac 32 \cbr{\frac{21}8 \cdot P_0 \cdot \frac{35}8 \cdot V_0 - P_0 \cdot 6V_0}
+            = \frac{969}{32} \cdot P_0 V_0, \\
+        \Delta U_{12} &= \frac 32 \nu R T_2 - \frac 32 \nu R T_1 = \frac 32 (6P_0V_0 - P_0V_0) = \ldots = \frac{15}2 \cdot P_0 V_0, \\
         \eta &= \frac{A_\text{цикл}}{Q_+} = \frac{A_\text{цикл}}{Q_{12} + Q_{2*}}
             = \frac{A_\text{цикл}}{A_{12} + \Delta U_{12} + A_{2*} + \Delta U_{2*}} = \\
-            &= \frac{\frac{42}{23} \cdot P_0V_0}{0 + \frac{42}{23} \cdot P_0 V_0 + \frac{42}{23} \cdot P_0 V_0 + \frac{42}{23} \cdot P_0 V_0}
-             = \frac{\frac{42}{23}}{\frac{42}{23} + \frac{42}{23} + \frac{42}{23}}
-             = \frac{42}{23} \leftarrow \text{вжух и готово!}
+            &= \frac{\frac{25}2 \cdot P_0V_0}{0 + \frac{15}2 \cdot P_0 V_0 + \frac{1863}{128} \cdot P_0 V_0 + \frac{969}{32} \cdot P_0 V_0}
+             = \frac{\frac{25}2}{\frac{15}2 + \frac{1863}{128} + \frac{969}{32}}
+             = \frac{400}{969} \leftarrow \text{вжух и готово!}
         \end{align*}
 }
 \solutionspace{360pt}
@@ -1963,7 +1963,7 @@
 
 
         Теперь рассмотрим отдельно процесс 23, к остальному вернёмся позже.
-        Уравнение этой прямой в $PV$-координатах: $P(V) = 42P_0 - \frac{P_0}{V_0} V$.
+        Уравнение этой прямой в $PV$-координатах: $P(V) = 6P_0 - \frac{P_0}{V_0} V$.
         Это значит, что при изменении объёма на $\Delta V$ давление изменится на $\Delta P = - \frac{P_0}{V_0} \Delta V$, обратите внимание на знак.
 
         Рассмотрим произвольную точку в процессе 23 и дадим процессу ещё немного свершиться, при этом объём изменится на $\Delta V$, давление — на $\Delta P$, температура (иначе бы была гипербола, а не прямая) — на $\Delta T$,
@@ -1991,19 +1991,19 @@
         Q
             &= \frac 32 (P\Delta V + V \Delta P) + P \Delta V =  \frac 52 P\Delta V + \frac 32 V \Delta P = \\
             &= \frac 52 P\Delta V + \frac 32 V \cdot \cbr{- \frac{P_0}{V_0} \Delta V} = \frac{\Delta V}2 \cdot \cbr{5P - \frac{P_0}{V_0} V} = \\
-            &= \frac{\Delta V}2 \cdot \cbr{5 \cdot \cbr{42P_0 - \frac{P_0}{V_0} V} - \frac{P_0}{V_0} V}
-             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 42 - 8\frac{V}{V_0}}.
+            &= \frac{\Delta V}2 \cdot \cbr{5 \cdot \cbr{6P_0 - \frac{P_0}{V_0} V} - \frac{P_0}{V_0} V}
+             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 6 - 8\frac{V}{V_0}}.
         \end{align*}
 
         Таком образом, знак количества теплоты $Q$ на участке 23 зависит от конкретного значения $V$:
         \begin{itemize}
             \item $\Delta V > 0$ на всём участке 23, поскольку газ расширяется,
             \item $P > 0$ — всегда, у нас идеальный газ, удары о стенки сосуда абсолютно упругие, а молекулы не взаимодействуют и поэтому давление только положительно,
-            \item если $5 \cdot 42 - 8\frac{V}{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
+            \item если $5 \cdot 6 - 8\frac{V}{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
         \end{itemize}
         Решая последнее неравенство, получаем конкретное значение $V^*$: при $V < V^*$ тепло подводят, далее~— отводят.
         Тут *~--- некоторая точка между точками 2 и 3, конкретные значения надо досчитать:
-        $$V^* = V_0 \cdot \frac{5 \cdot 42}8 = \frac{42}{23} \cdot V_0 \implies P^* = 42P_0 - \frac{P_0}{V_0} V^* = \ldots = \frac{42}{23} \cdot P_0.$$
+        $$V^* = V_0 \cdot \frac{5 \cdot 6}8 = \frac{15}4 \cdot V_0 \implies P^* = 6P_0 - \frac{P_0}{V_0} V^* = \ldots = \frac94 \cdot P_0.$$
 
         Т.е.
         чтобы вычислить $Q_+$, надо сложить количества теплоты на участке 12 и лишь части участка 23 — участке 2*,
@@ -2012,19 +2012,19 @@
 
         Теперь возвращаемся к циклу целиком и получаем:
         \begin{align*}
-        A_\text{цикл} &= \frac 12 \cdot (5P_0 - P_0) \cdot (5V_0 - V_0) = \frac{42}{23} \cdot P_0V_0, \\
+        A_\text{цикл} &= \frac 12 \cdot (5P_0 - P_0) \cdot (5V_0 - V_0) = 8 \cdot P_0V_0, \\
         A_{2*} &= \frac{P^* + 5P_0}2 \cdot (V^* - V_0)
-            = \frac{\frac{42}{23} \cdot P_0 + 5P_0}2 \cdot \cbr{\frac{42}{23} \cdot V_0 - V_0}
-            = \ldots = \frac{42}{23} \cdot P_0 V_0, \\
+            = \frac{\frac94 \cdot P_0 + 5P_0}2 \cdot \cbr{\frac{15}4 \cdot V_0 - V_0}
+            = \ldots = \frac{319}{32} \cdot P_0 V_0, \\
         \Delta U_{2*} &= \frac 32 \nu R T^* - \frac 32 \nu R T_2 = \frac 32 (P^*V^* - P_0 \cdot 5V_0)
-            = \frac 32 \cbr{\frac{42}{23} \cdot P_0 \cdot \frac{42}{23} \cdot V_0 - P_0 \cdot 5V_0}
-            = \frac{42}{23} \cdot P_0 V_0, \\
-        \Delta U_{12} &= \frac 32 \nu R T_2 - \frac 32 \nu R T_1 = \frac 32 (5P_0V_0 - P_0V_0) = \ldots = \frac{42}{23} \cdot P_0 V_0, \\
+            = \frac 32 \cbr{\frac94 \cdot P_0 \cdot \frac{15}4 \cdot V_0 - P_0 \cdot 5V_0}
+            = \frac{169}8 \cdot P_0 V_0, \\
+        \Delta U_{12} &= \frac 32 \nu R T_2 - \frac 32 \nu R T_1 = \frac 32 (5P_0V_0 - P_0V_0) = \ldots = 6 \cdot P_0 V_0, \\
         \eta &= \frac{A_\text{цикл}}{Q_+} = \frac{A_\text{цикл}}{Q_{12} + Q_{2*}}
             = \frac{A_\text{цикл}}{A_{12} + \Delta U_{12} + A_{2*} + \Delta U_{2*}} = \\
-            &= \frac{\frac{42}{23} \cdot P_0V_0}{0 + \frac{42}{23} \cdot P_0 V_0 + \frac{42}{23} \cdot P_0 V_0 + \frac{42}{23} \cdot P_0 V_0}
-             = \frac{\frac{42}{23}}{\frac{42}{23} + \frac{42}{23} + \frac{42}{23}}
-             = \frac{42}{23} \leftarrow \text{вжух и готово!}
+            &= \frac{8 \cdot P_0V_0}{0 + 6 \cdot P_0 V_0 + \frac{319}{32} \cdot P_0 V_0 + \frac{169}8 \cdot P_0 V_0}
+             = \frac{8}{6 + \frac{319}{32} + \frac{169}8}
+             = \frac{64}{169} \leftarrow \text{вжух и готово!}
         \end{align*}
 }
 \solutionspace{360pt}
@@ -2171,7 +2171,7 @@
 
 
         Теперь рассмотрим отдельно процесс 23, к остальному вернёмся позже.
-        Уравнение этой прямой в $PV$-координатах: $P(V) = 42P_0 - \frac{P_0}{V_0} V$.
+        Уравнение этой прямой в $PV$-координатах: $P(V) = 5P_0 - \frac{P_0}{V_0} V$.
         Это значит, что при изменении объёма на $\Delta V$ давление изменится на $\Delta P = - \frac{P_0}{V_0} \Delta V$, обратите внимание на знак.
 
         Рассмотрим произвольную точку в процессе 23 и дадим процессу ещё немного свершиться, при этом объём изменится на $\Delta V$, давление — на $\Delta P$, температура (иначе бы была гипербола, а не прямая) — на $\Delta T$,
@@ -2199,19 +2199,19 @@
         Q
             &= \frac 32 (P\Delta V + V \Delta P) + P \Delta V =  \frac 52 P\Delta V + \frac 32 V \Delta P = \\
             &= \frac 52 P\Delta V + \frac 32 V \cdot \cbr{- \frac{P_0}{V_0} \Delta V} = \frac{\Delta V}2 \cdot \cbr{5P - \frac{P_0}{V_0} V} = \\
-            &= \frac{\Delta V}2 \cdot \cbr{5 \cdot \cbr{42P_0 - \frac{P_0}{V_0} V} - \frac{P_0}{V_0} V}
-             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 42 - 8\frac{V}{V_0}}.
+            &= \frac{\Delta V}2 \cdot \cbr{5 \cdot \cbr{5P_0 - \frac{P_0}{V_0} V} - \frac{P_0}{V_0} V}
+             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 5 - 8\frac{V}{V_0}}.
         \end{align*}
 
         Таком образом, знак количества теплоты $Q$ на участке 23 зависит от конкретного значения $V$:
         \begin{itemize}
             \item $\Delta V > 0$ на всём участке 23, поскольку газ расширяется,
             \item $P > 0$ — всегда, у нас идеальный газ, удары о стенки сосуда абсолютно упругие, а молекулы не взаимодействуют и поэтому давление только положительно,
-            \item если $5 \cdot 42 - 8\frac{V}{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
+            \item если $5 \cdot 5 - 8\frac{V}{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
         \end{itemize}
         Решая последнее неравенство, получаем конкретное значение $V^*$: при $V < V^*$ тепло подводят, далее~— отводят.
         Тут *~--- некоторая точка между точками 2 и 3, конкретные значения надо досчитать:
-        $$V^* = V_0 \cdot \frac{5 \cdot 42}8 = \frac{42}{23} \cdot V_0 \implies P^* = 42P_0 - \frac{P_0}{V_0} V^* = \ldots = \frac{42}{23} \cdot P_0.$$
+        $$V^* = V_0 \cdot \frac{5 \cdot 5}8 = \frac{25}8 \cdot V_0 \implies P^* = 5P_0 - \frac{P_0}{V_0} V^* = \ldots = \frac{15}8 \cdot P_0.$$
 
         Т.е.
         чтобы вычислить $Q_+$, надо сложить количества теплоты на участке 12 и лишь части участка 23 — участке 2*,
@@ -2220,19 +2220,19 @@
 
         Теперь возвращаемся к циклу целиком и получаем:
         \begin{align*}
-        A_\text{цикл} &= \frac 12 \cdot (4P_0 - P_0) \cdot (4V_0 - V_0) = \frac{42}{23} \cdot P_0V_0, \\
+        A_\text{цикл} &= \frac 12 \cdot (4P_0 - P_0) \cdot (4V_0 - V_0) = \frac92 \cdot P_0V_0, \\
         A_{2*} &= \frac{P^* + 4P_0}2 \cdot (V^* - V_0)
-            = \frac{\frac{42}{23} \cdot P_0 + 4P_0}2 \cdot \cbr{\frac{42}{23} \cdot V_0 - V_0}
-            = \ldots = \frac{42}{23} \cdot P_0 V_0, \\
+            = \frac{\frac{15}8 \cdot P_0 + 4P_0}2 \cdot \cbr{\frac{25}8 \cdot V_0 - V_0}
+            = \ldots = \frac{799}{128} \cdot P_0 V_0, \\
         \Delta U_{2*} &= \frac 32 \nu R T^* - \frac 32 \nu R T_2 = \frac 32 (P^*V^* - P_0 \cdot 4V_0)
-            = \frac 32 \cbr{\frac{42}{23} \cdot P_0 \cdot \frac{42}{23} \cdot V_0 - P_0 \cdot 4V_0}
-            = \frac{42}{23} \cdot P_0 V_0, \\
-        \Delta U_{12} &= \frac 32 \nu R T_2 - \frac 32 \nu R T_1 = \frac 32 (4P_0V_0 - P_0V_0) = \ldots = \frac{42}{23} \cdot P_0 V_0, \\
+            = \frac 32 \cbr{\frac{15}8 \cdot P_0 \cdot \frac{25}8 \cdot V_0 - P_0 \cdot 4V_0}
+            = \frac{433}{32} \cdot P_0 V_0, \\
+        \Delta U_{12} &= \frac 32 \nu R T_2 - \frac 32 \nu R T_1 = \frac 32 (4P_0V_0 - P_0V_0) = \ldots = \frac92 \cdot P_0 V_0, \\
         \eta &= \frac{A_\text{цикл}}{Q_+} = \frac{A_\text{цикл}}{Q_{12} + Q_{2*}}
             = \frac{A_\text{цикл}}{A_{12} + \Delta U_{12} + A_{2*} + \Delta U_{2*}} = \\
-            &= \frac{\frac{42}{23} \cdot P_0V_0}{0 + \frac{42}{23} \cdot P_0 V_0 + \frac{42}{23} \cdot P_0 V_0 + \frac{42}{23} \cdot P_0 V_0}
-             = \frac{\frac{42}{23}}{\frac{42}{23} + \frac{42}{23} + \frac{42}{23}}
-             = \frac{42}{23} \leftarrow \text{вжух и готово!}
+            &= \frac{\frac92 \cdot P_0V_0}{0 + \frac92 \cdot P_0 V_0 + \frac{799}{128} \cdot P_0 V_0 + \frac{433}{32} \cdot P_0 V_0}
+             = \frac{\frac92}{\frac92 + \frac{799}{128} + \frac{433}{32}}
+             = \frac{144}{433} \leftarrow \text{вжух и готово!}
         \end{align*}
 }
 \solutionspace{360pt}
@@ -2379,7 +2379,7 @@
 
 
         Теперь рассмотрим отдельно процесс 23, к остальному вернёмся позже.
-        Уравнение этой прямой в $PV$-координатах: $P(V) = 42P_0 - \frac{P_0}{V_0} V$.
+        Уравнение этой прямой в $PV$-координатах: $P(V) = 4P_0 - \frac{P_0}{V_0} V$.
         Это значит, что при изменении объёма на $\Delta V$ давление изменится на $\Delta P = - \frac{P_0}{V_0} \Delta V$, обратите внимание на знак.
 
         Рассмотрим произвольную точку в процессе 23 и дадим процессу ещё немного свершиться, при этом объём изменится на $\Delta V$, давление — на $\Delta P$, температура (иначе бы была гипербола, а не прямая) — на $\Delta T$,
@@ -2407,19 +2407,19 @@
         Q
             &= \frac 32 (P\Delta V + V \Delta P) + P \Delta V =  \frac 52 P\Delta V + \frac 32 V \Delta P = \\
             &= \frac 52 P\Delta V + \frac 32 V \cdot \cbr{- \frac{P_0}{V_0} \Delta V} = \frac{\Delta V}2 \cdot \cbr{5P - \frac{P_0}{V_0} V} = \\
-            &= \frac{\Delta V}2 \cdot \cbr{5 \cdot \cbr{42P_0 - \frac{P_0}{V_0} V} - \frac{P_0}{V_0} V}
-             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 42 - 8\frac{V}{V_0}}.
+            &= \frac{\Delta V}2 \cdot \cbr{5 \cdot \cbr{4P_0 - \frac{P_0}{V_0} V} - \frac{P_0}{V_0} V}
+             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 4 - 8\frac{V}{V_0}}.
         \end{align*}
 
         Таком образом, знак количества теплоты $Q$ на участке 23 зависит от конкретного значения $V$:
         \begin{itemize}
             \item $\Delta V > 0$ на всём участке 23, поскольку газ расширяется,
             \item $P > 0$ — всегда, у нас идеальный газ, удары о стенки сосуда абсолютно упругие, а молекулы не взаимодействуют и поэтому давление только положительно,
-            \item если $5 \cdot 42 - 8\frac{V}{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
+            \item если $5 \cdot 4 - 8\frac{V}{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
         \end{itemize}
         Решая последнее неравенство, получаем конкретное значение $V^*$: при $V < V^*$ тепло подводят, далее~— отводят.
         Тут *~--- некоторая точка между точками 2 и 3, конкретные значения надо досчитать:
-        $$V^* = V_0 \cdot \frac{5 \cdot 42}8 = \frac{42}{23} \cdot V_0 \implies P^* = 42P_0 - \frac{P_0}{V_0} V^* = \ldots = \frac{42}{23} \cdot P_0.$$
+        $$V^* = V_0 \cdot \frac{5 \cdot 4}8 = \frac52 \cdot V_0 \implies P^* = 4P_0 - \frac{P_0}{V_0} V^* = \ldots = \frac32 \cdot P_0.$$
 
         Т.е.
         чтобы вычислить $Q_+$, надо сложить количества теплоты на участке 12 и лишь части участка 23 — участке 2*,
@@ -2428,19 +2428,19 @@
 
         Теперь возвращаемся к циклу целиком и получаем:
         \begin{align*}
-        A_\text{цикл} &= \frac 12 \cdot (3P_0 - P_0) \cdot (3V_0 - V_0) = \frac{42}{23} \cdot P_0V_0, \\
+        A_\text{цикл} &= \frac 12 \cdot (3P_0 - P_0) \cdot (3V_0 - V_0) = 2 \cdot P_0V_0, \\
         A_{2*} &= \frac{P^* + 3P_0}2 \cdot (V^* - V_0)
-            = \frac{\frac{42}{23} \cdot P_0 + 3P_0}2 \cdot \cbr{\frac{42}{23} \cdot V_0 - V_0}
-            = \ldots = \frac{42}{23} \cdot P_0 V_0, \\
+            = \frac{\frac32 \cdot P_0 + 3P_0}2 \cdot \cbr{\frac52 \cdot V_0 - V_0}
+            = \ldots = \frac{27}8 \cdot P_0 V_0, \\
         \Delta U_{2*} &= \frac 32 \nu R T^* - \frac 32 \nu R T_2 = \frac 32 (P^*V^* - P_0 \cdot 3V_0)
-            = \frac 32 \cbr{\frac{42}{23} \cdot P_0 \cdot \frac{42}{23} \cdot V_0 - P_0 \cdot 3V_0}
-            = \frac{42}{23} \cdot P_0 V_0, \\
-        \Delta U_{12} &= \frac 32 \nu R T_2 - \frac 32 \nu R T_1 = \frac 32 (3P_0V_0 - P_0V_0) = \ldots = \frac{42}{23} \cdot P_0 V_0, \\
+            = \frac 32 \cbr{\frac32 \cdot P_0 \cdot \frac52 \cdot V_0 - P_0 \cdot 3V_0}
+            = \frac{15}2 \cdot P_0 V_0, \\
+        \Delta U_{12} &= \frac 32 \nu R T_2 - \frac 32 \nu R T_1 = \frac 32 (3P_0V_0 - P_0V_0) = \ldots = 3 \cdot P_0 V_0, \\
         \eta &= \frac{A_\text{цикл}}{Q_+} = \frac{A_\text{цикл}}{Q_{12} + Q_{2*}}
             = \frac{A_\text{цикл}}{A_{12} + \Delta U_{12} + A_{2*} + \Delta U_{2*}} = \\
-            &= \frac{\frac{42}{23} \cdot P_0V_0}{0 + \frac{42}{23} \cdot P_0 V_0 + \frac{42}{23} \cdot P_0 V_0 + \frac{42}{23} \cdot P_0 V_0}
-             = \frac{\frac{42}{23}}{\frac{42}{23} + \frac{42}{23} + \frac{42}{23}}
-             = \frac{42}{23} \leftarrow \text{вжух и готово!}
+            &= \frac{2 \cdot P_0V_0}{0 + 3 \cdot P_0 V_0 + \frac{27}8 \cdot P_0 V_0 + \frac{15}2 \cdot P_0 V_0}
+             = \frac{2}{3 + \frac{27}8 + \frac{15}2}
+             = \frac4{15} \leftarrow \text{вжух и готово!}
         \end{align*}
 }
 \solutionspace{360pt}
@@ -2587,7 +2587,7 @@
 
 
         Теперь рассмотрим отдельно процесс 23, к остальному вернёмся позже.
-        Уравнение этой прямой в $PV$-координатах: $P(V) = 42P_0 - \frac{P_0}{V_0} V$.
+        Уравнение этой прямой в $PV$-координатах: $P(V) = 5P_0 - \frac{P_0}{V_0} V$.
         Это значит, что при изменении объёма на $\Delta V$ давление изменится на $\Delta P = - \frac{P_0}{V_0} \Delta V$, обратите внимание на знак.
 
         Рассмотрим произвольную точку в процессе 23 и дадим процессу ещё немного свершиться, при этом объём изменится на $\Delta V$, давление — на $\Delta P$, температура (иначе бы была гипербола, а не прямая) — на $\Delta T$,
@@ -2615,19 +2615,19 @@
         Q
             &= \frac 32 (P\Delta V + V \Delta P) + P \Delta V =  \frac 52 P\Delta V + \frac 32 V \Delta P = \\
             &= \frac 52 P\Delta V + \frac 32 V \cdot \cbr{- \frac{P_0}{V_0} \Delta V} = \frac{\Delta V}2 \cdot \cbr{5P - \frac{P_0}{V_0} V} = \\
-            &= \frac{\Delta V}2 \cdot \cbr{5 \cdot \cbr{42P_0 - \frac{P_0}{V_0} V} - \frac{P_0}{V_0} V}
-             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 42 - 8\frac{V}{V_0}}.
+            &= \frac{\Delta V}2 \cdot \cbr{5 \cdot \cbr{5P_0 - \frac{P_0}{V_0} V} - \frac{P_0}{V_0} V}
+             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 5 - 8\frac{V}{V_0}}.
         \end{align*}
 
         Таком образом, знак количества теплоты $Q$ на участке 23 зависит от конкретного значения $V$:
         \begin{itemize}
             \item $\Delta V > 0$ на всём участке 23, поскольку газ расширяется,
             \item $P > 0$ — всегда, у нас идеальный газ, удары о стенки сосуда абсолютно упругие, а молекулы не взаимодействуют и поэтому давление только положительно,
-            \item если $5 \cdot 42 - 8\frac{V}{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
+            \item если $5 \cdot 5 - 8\frac{V}{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
         \end{itemize}
         Решая последнее неравенство, получаем конкретное значение $V^*$: при $V < V^*$ тепло подводят, далее~— отводят.
         Тут *~--- некоторая точка между точками 2 и 3, конкретные значения надо досчитать:
-        $$V^* = V_0 \cdot \frac{5 \cdot 42}8 = \frac{42}{23} \cdot V_0 \implies P^* = 42P_0 - \frac{P_0}{V_0} V^* = \ldots = \frac{42}{23} \cdot P_0.$$
+        $$V^* = V_0 \cdot \frac{5 \cdot 5}8 = \frac{25}8 \cdot V_0 \implies P^* = 5P_0 - \frac{P_0}{V_0} V^* = \ldots = \frac{15}8 \cdot P_0.$$
 
         Т.е.
         чтобы вычислить $Q_+$, надо сложить количества теплоты на участке 12 и лишь части участка 23 — участке 2*,
@@ -2636,19 +2636,19 @@
 
         Теперь возвращаемся к циклу целиком и получаем:
         \begin{align*}
-        A_\text{цикл} &= \frac 12 \cdot (4P_0 - P_0) \cdot (4V_0 - V_0) = \frac{42}{23} \cdot P_0V_0, \\
+        A_\text{цикл} &= \frac 12 \cdot (4P_0 - P_0) \cdot (4V_0 - V_0) = \frac92 \cdot P_0V_0, \\
         A_{2*} &= \frac{P^* + 4P_0}2 \cdot (V^* - V_0)
-            = \frac{\frac{42}{23} \cdot P_0 + 4P_0}2 \cdot \cbr{\frac{42}{23} \cdot V_0 - V_0}
-            = \ldots = \frac{42}{23} \cdot P_0 V_0, \\
+            = \frac{\frac{15}8 \cdot P_0 + 4P_0}2 \cdot \cbr{\frac{25}8 \cdot V_0 - V_0}
+            = \ldots = \frac{799}{128} \cdot P_0 V_0, \\
         \Delta U_{2*} &= \frac 32 \nu R T^* - \frac 32 \nu R T_2 = \frac 32 (P^*V^* - P_0 \cdot 4V_0)
-            = \frac 32 \cbr{\frac{42}{23} \cdot P_0 \cdot \frac{42}{23} \cdot V_0 - P_0 \cdot 4V_0}
-            = \frac{42}{23} \cdot P_0 V_0, \\
-        \Delta U_{12} &= \frac 32 \nu R T_2 - \frac 32 \nu R T_1 = \frac 32 (4P_0V_0 - P_0V_0) = \ldots = \frac{42}{23} \cdot P_0 V_0, \\
+            = \frac 32 \cbr{\frac{15}8 \cdot P_0 \cdot \frac{25}8 \cdot V_0 - P_0 \cdot 4V_0}
+            = \frac{433}{32} \cdot P_0 V_0, \\
+        \Delta U_{12} &= \frac 32 \nu R T_2 - \frac 32 \nu R T_1 = \frac 32 (4P_0V_0 - P_0V_0) = \ldots = \frac92 \cdot P_0 V_0, \\
         \eta &= \frac{A_\text{цикл}}{Q_+} = \frac{A_\text{цикл}}{Q_{12} + Q_{2*}}
             = \frac{A_\text{цикл}}{A_{12} + \Delta U_{12} + A_{2*} + \Delta U_{2*}} = \\
-            &= \frac{\frac{42}{23} \cdot P_0V_0}{0 + \frac{42}{23} \cdot P_0 V_0 + \frac{42}{23} \cdot P_0 V_0 + \frac{42}{23} \cdot P_0 V_0}
-             = \frac{\frac{42}{23}}{\frac{42}{23} + \frac{42}{23} + \frac{42}{23}}
-             = \frac{42}{23} \leftarrow \text{вжух и готово!}
+            &= \frac{\frac92 \cdot P_0V_0}{0 + \frac92 \cdot P_0 V_0 + \frac{799}{128} \cdot P_0 V_0 + \frac{433}{32} \cdot P_0 V_0}
+             = \frac{\frac92}{\frac92 + \frac{799}{128} + \frac{433}{32}}
+             = \frac{144}{433} \leftarrow \text{вжух и готово!}
         \end{align*}
 }
 \solutionspace{360pt}
@@ -2795,7 +2795,7 @@
 
 
         Теперь рассмотрим отдельно процесс 23, к остальному вернёмся позже.
-        Уравнение этой прямой в $PV$-координатах: $P(V) = 42P_0 - \frac{P_0}{V_0} V$.
+        Уравнение этой прямой в $PV$-координатах: $P(V) = 4P_0 - \frac{P_0}{V_0} V$.
         Это значит, что при изменении объёма на $\Delta V$ давление изменится на $\Delta P = - \frac{P_0}{V_0} \Delta V$, обратите внимание на знак.
 
         Рассмотрим произвольную точку в процессе 23 и дадим процессу ещё немного свершиться, при этом объём изменится на $\Delta V$, давление — на $\Delta P$, температура (иначе бы была гипербола, а не прямая) — на $\Delta T$,
@@ -2823,19 +2823,19 @@
         Q
             &= \frac 32 (P\Delta V + V \Delta P) + P \Delta V =  \frac 52 P\Delta V + \frac 32 V \Delta P = \\
             &= \frac 52 P\Delta V + \frac 32 V \cdot \cbr{- \frac{P_0}{V_0} \Delta V} = \frac{\Delta V}2 \cdot \cbr{5P - \frac{P_0}{V_0} V} = \\
-            &= \frac{\Delta V}2 \cdot \cbr{5 \cdot \cbr{42P_0 - \frac{P_0}{V_0} V} - \frac{P_0}{V_0} V}
-             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 42 - 8\frac{V}{V_0}}.
+            &= \frac{\Delta V}2 \cdot \cbr{5 \cdot \cbr{4P_0 - \frac{P_0}{V_0} V} - \frac{P_0}{V_0} V}
+             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 4 - 8\frac{V}{V_0}}.
         \end{align*}
 
         Таком образом, знак количества теплоты $Q$ на участке 23 зависит от конкретного значения $V$:
         \begin{itemize}
             \item $\Delta V > 0$ на всём участке 23, поскольку газ расширяется,
             \item $P > 0$ — всегда, у нас идеальный газ, удары о стенки сосуда абсолютно упругие, а молекулы не взаимодействуют и поэтому давление только положительно,
-            \item если $5 \cdot 42 - 8\frac{V}{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
+            \item если $5 \cdot 4 - 8\frac{V}{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
         \end{itemize}
         Решая последнее неравенство, получаем конкретное значение $V^*$: при $V < V^*$ тепло подводят, далее~— отводят.
         Тут *~--- некоторая точка между точками 2 и 3, конкретные значения надо досчитать:
-        $$V^* = V_0 \cdot \frac{5 \cdot 42}8 = \frac{42}{23} \cdot V_0 \implies P^* = 42P_0 - \frac{P_0}{V_0} V^* = \ldots = \frac{42}{23} \cdot P_0.$$
+        $$V^* = V_0 \cdot \frac{5 \cdot 4}8 = \frac52 \cdot V_0 \implies P^* = 4P_0 - \frac{P_0}{V_0} V^* = \ldots = \frac32 \cdot P_0.$$
 
         Т.е.
         чтобы вычислить $Q_+$, надо сложить количества теплоты на участке 12 и лишь части участка 23 — участке 2*,
@@ -2844,19 +2844,19 @@
 
         Теперь возвращаемся к циклу целиком и получаем:
         \begin{align*}
-        A_\text{цикл} &= \frac 12 \cdot (3P_0 - P_0) \cdot (3V_0 - V_0) = \frac{42}{23} \cdot P_0V_0, \\
+        A_\text{цикл} &= \frac 12 \cdot (3P_0 - P_0) \cdot (3V_0 - V_0) = 2 \cdot P_0V_0, \\
         A_{2*} &= \frac{P^* + 3P_0}2 \cdot (V^* - V_0)
-            = \frac{\frac{42}{23} \cdot P_0 + 3P_0}2 \cdot \cbr{\frac{42}{23} \cdot V_0 - V_0}
-            = \ldots = \frac{42}{23} \cdot P_0 V_0, \\
+            = \frac{\frac32 \cdot P_0 + 3P_0}2 \cdot \cbr{\frac52 \cdot V_0 - V_0}
+            = \ldots = \frac{27}8 \cdot P_0 V_0, \\
         \Delta U_{2*} &= \frac 32 \nu R T^* - \frac 32 \nu R T_2 = \frac 32 (P^*V^* - P_0 \cdot 3V_0)
-            = \frac 32 \cbr{\frac{42}{23} \cdot P_0 \cdot \frac{42}{23} \cdot V_0 - P_0 \cdot 3V_0}
-            = \frac{42}{23} \cdot P_0 V_0, \\
-        \Delta U_{12} &= \frac 32 \nu R T_2 - \frac 32 \nu R T_1 = \frac 32 (3P_0V_0 - P_0V_0) = \ldots = \frac{42}{23} \cdot P_0 V_0, \\
+            = \frac 32 \cbr{\frac32 \cdot P_0 \cdot \frac52 \cdot V_0 - P_0 \cdot 3V_0}
+            = \frac{15}2 \cdot P_0 V_0, \\
+        \Delta U_{12} &= \frac 32 \nu R T_2 - \frac 32 \nu R T_1 = \frac 32 (3P_0V_0 - P_0V_0) = \ldots = 3 \cdot P_0 V_0, \\
         \eta &= \frac{A_\text{цикл}}{Q_+} = \frac{A_\text{цикл}}{Q_{12} + Q_{2*}}
             = \frac{A_\text{цикл}}{A_{12} + \Delta U_{12} + A_{2*} + \Delta U_{2*}} = \\
-            &= \frac{\frac{42}{23} \cdot P_0V_0}{0 + \frac{42}{23} \cdot P_0 V_0 + \frac{42}{23} \cdot P_0 V_0 + \frac{42}{23} \cdot P_0 V_0}
-             = \frac{\frac{42}{23}}{\frac{42}{23} + \frac{42}{23} + \frac{42}{23}}
-             = \frac{42}{23} \leftarrow \text{вжух и готово!}
+            &= \frac{2 \cdot P_0V_0}{0 + 3 \cdot P_0 V_0 + \frac{27}8 \cdot P_0 V_0 + \frac{15}2 \cdot P_0 V_0}
+             = \frac{2}{3 + \frac{27}8 + \frac{15}2}
+             = \frac4{15} \leftarrow \text{вжух и готово!}
         \end{align*}
 }
 \solutionspace{360pt}
@@ -3003,7 +3003,7 @@
 
 
         Теперь рассмотрим отдельно процесс 23, к остальному вернёмся позже.
-        Уравнение этой прямой в $PV$-координатах: $P(V) = 42P_0 - \frac{P_0}{V_0} V$.
+        Уравнение этой прямой в $PV$-координатах: $P(V) = 6P_0 - \frac{P_0}{V_0} V$.
         Это значит, что при изменении объёма на $\Delta V$ давление изменится на $\Delta P = - \frac{P_0}{V_0} \Delta V$, обратите внимание на знак.
 
         Рассмотрим произвольную точку в процессе 23 и дадим процессу ещё немного свершиться, при этом объём изменится на $\Delta V$, давление — на $\Delta P$, температура (иначе бы была гипербола, а не прямая) — на $\Delta T$,
@@ -3031,19 +3031,19 @@
         Q
             &= \frac 32 (P\Delta V + V \Delta P) + P \Delta V =  \frac 52 P\Delta V + \frac 32 V \Delta P = \\
             &= \frac 52 P\Delta V + \frac 32 V \cdot \cbr{- \frac{P_0}{V_0} \Delta V} = \frac{\Delta V}2 \cdot \cbr{5P - \frac{P_0}{V_0} V} = \\
-            &= \frac{\Delta V}2 \cdot \cbr{5 \cdot \cbr{42P_0 - \frac{P_0}{V_0} V} - \frac{P_0}{V_0} V}
-             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 42 - 8\frac{V}{V_0}}.
+            &= \frac{\Delta V}2 \cdot \cbr{5 \cdot \cbr{6P_0 - \frac{P_0}{V_0} V} - \frac{P_0}{V_0} V}
+             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 6 - 8\frac{V}{V_0}}.
         \end{align*}
 
         Таком образом, знак количества теплоты $Q$ на участке 23 зависит от конкретного значения $V$:
         \begin{itemize}
             \item $\Delta V > 0$ на всём участке 23, поскольку газ расширяется,
             \item $P > 0$ — всегда, у нас идеальный газ, удары о стенки сосуда абсолютно упругие, а молекулы не взаимодействуют и поэтому давление только положительно,
-            \item если $5 \cdot 42 - 8\frac{V}{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
+            \item если $5 \cdot 6 - 8\frac{V}{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
         \end{itemize}
         Решая последнее неравенство, получаем конкретное значение $V^*$: при $V < V^*$ тепло подводят, далее~— отводят.
         Тут *~--- некоторая точка между точками 2 и 3, конкретные значения надо досчитать:
-        $$V^* = V_0 \cdot \frac{5 \cdot 42}8 = \frac{42}{23} \cdot V_0 \implies P^* = 42P_0 - \frac{P_0}{V_0} V^* = \ldots = \frac{42}{23} \cdot P_0.$$
+        $$V^* = V_0 \cdot \frac{5 \cdot 6}8 = \frac{15}4 \cdot V_0 \implies P^* = 6P_0 - \frac{P_0}{V_0} V^* = \ldots = \frac94 \cdot P_0.$$
 
         Т.е.
         чтобы вычислить $Q_+$, надо сложить количества теплоты на участке 12 и лишь части участка 23 — участке 2*,
@@ -3052,19 +3052,19 @@
 
         Теперь возвращаемся к циклу целиком и получаем:
         \begin{align*}
-        A_\text{цикл} &= \frac 12 \cdot (5P_0 - P_0) \cdot (5V_0 - V_0) = \frac{42}{23} \cdot P_0V_0, \\
+        A_\text{цикл} &= \frac 12 \cdot (5P_0 - P_0) \cdot (5V_0 - V_0) = 8 \cdot P_0V_0, \\
         A_{2*} &= \frac{P^* + 5P_0}2 \cdot (V^* - V_0)
-            = \frac{\frac{42}{23} \cdot P_0 + 5P_0}2 \cdot \cbr{\frac{42}{23} \cdot V_0 - V_0}
-            = \ldots = \frac{42}{23} \cdot P_0 V_0, \\
+            = \frac{\frac94 \cdot P_0 + 5P_0}2 \cdot \cbr{\frac{15}4 \cdot V_0 - V_0}
+            = \ldots = \frac{319}{32} \cdot P_0 V_0, \\
         \Delta U_{2*} &= \frac 32 \nu R T^* - \frac 32 \nu R T_2 = \frac 32 (P^*V^* - P_0 \cdot 5V_0)
-            = \frac 32 \cbr{\frac{42}{23} \cdot P_0 \cdot \frac{42}{23} \cdot V_0 - P_0 \cdot 5V_0}
-            = \frac{42}{23} \cdot P_0 V_0, \\
-        \Delta U_{12} &= \frac 32 \nu R T_2 - \frac 32 \nu R T_1 = \frac 32 (5P_0V_0 - P_0V_0) = \ldots = \frac{42}{23} \cdot P_0 V_0, \\
+            = \frac 32 \cbr{\frac94 \cdot P_0 \cdot \frac{15}4 \cdot V_0 - P_0 \cdot 5V_0}
+            = \frac{169}8 \cdot P_0 V_0, \\
+        \Delta U_{12} &= \frac 32 \nu R T_2 - \frac 32 \nu R T_1 = \frac 32 (5P_0V_0 - P_0V_0) = \ldots = 6 \cdot P_0 V_0, \\
         \eta &= \frac{A_\text{цикл}}{Q_+} = \frac{A_\text{цикл}}{Q_{12} + Q_{2*}}
             = \frac{A_\text{цикл}}{A_{12} + \Delta U_{12} + A_{2*} + \Delta U_{2*}} = \\
-            &= \frac{\frac{42}{23} \cdot P_0V_0}{0 + \frac{42}{23} \cdot P_0 V_0 + \frac{42}{23} \cdot P_0 V_0 + \frac{42}{23} \cdot P_0 V_0}
-             = \frac{\frac{42}{23}}{\frac{42}{23} + \frac{42}{23} + \frac{42}{23}}
-             = \frac{42}{23} \leftarrow \text{вжух и готово!}
+            &= \frac{8 \cdot P_0V_0}{0 + 6 \cdot P_0 V_0 + \frac{319}{32} \cdot P_0 V_0 + \frac{169}8 \cdot P_0 V_0}
+             = \frac{8}{6 + \frac{319}{32} + \frac{169}8}
+             = \frac{64}{169} \leftarrow \text{вжух и готово!}
         \end{align*}
 }
 \solutionspace{360pt}
@@ -3211,7 +3211,7 @@
 
 
         Теперь рассмотрим отдельно процесс 23, к остальному вернёмся позже.
-        Уравнение этой прямой в $PV$-координатах: $P(V) = 42P_0 - \frac{P_0}{V_0} V$.
+        Уравнение этой прямой в $PV$-координатах: $P(V) = 3P_0 - \frac{P_0}{V_0} V$.
         Это значит, что при изменении объёма на $\Delta V$ давление изменится на $\Delta P = - \frac{P_0}{V_0} \Delta V$, обратите внимание на знак.
 
         Рассмотрим произвольную точку в процессе 23 и дадим процессу ещё немного свершиться, при этом объём изменится на $\Delta V$, давление — на $\Delta P$, температура (иначе бы была гипербола, а не прямая) — на $\Delta T$,
@@ -3239,19 +3239,19 @@
         Q
             &= \frac 32 (P\Delta V + V \Delta P) + P \Delta V =  \frac 52 P\Delta V + \frac 32 V \Delta P = \\
             &= \frac 52 P\Delta V + \frac 32 V \cdot \cbr{- \frac{P_0}{V_0} \Delta V} = \frac{\Delta V}2 \cdot \cbr{5P - \frac{P_0}{V_0} V} = \\
-            &= \frac{\Delta V}2 \cdot \cbr{5 \cdot \cbr{42P_0 - \frac{P_0}{V_0} V} - \frac{P_0}{V_0} V}
-             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 42 - 8\frac{V}{V_0}}.
+            &= \frac{\Delta V}2 \cdot \cbr{5 \cdot \cbr{3P_0 - \frac{P_0}{V_0} V} - \frac{P_0}{V_0} V}
+             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 3 - 8\frac{V}{V_0}}.
         \end{align*}
 
         Таком образом, знак количества теплоты $Q$ на участке 23 зависит от конкретного значения $V$:
         \begin{itemize}
             \item $\Delta V > 0$ на всём участке 23, поскольку газ расширяется,
             \item $P > 0$ — всегда, у нас идеальный газ, удары о стенки сосуда абсолютно упругие, а молекулы не взаимодействуют и поэтому давление только положительно,
-            \item если $5 \cdot 42 - 8\frac{V}{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
+            \item если $5 \cdot 3 - 8\frac{V}{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
         \end{itemize}
         Решая последнее неравенство, получаем конкретное значение $V^*$: при $V < V^*$ тепло подводят, далее~— отводят.
         Тут *~--- некоторая точка между точками 2 и 3, конкретные значения надо досчитать:
-        $$V^* = V_0 \cdot \frac{5 \cdot 42}8 = \frac{42}{23} \cdot V_0 \implies P^* = 42P_0 - \frac{P_0}{V_0} V^* = \ldots = \frac{42}{23} \cdot P_0.$$
+        $$V^* = V_0 \cdot \frac{5 \cdot 3}8 = \frac{15}8 \cdot V_0 \implies P^* = 3P_0 - \frac{P_0}{V_0} V^* = \ldots = \frac98 \cdot P_0.$$
 
         Т.е.
         чтобы вычислить $Q_+$, надо сложить количества теплоты на участке 12 и лишь части участка 23 — участке 2*,
@@ -3260,19 +3260,19 @@
 
         Теперь возвращаемся к циклу целиком и получаем:
         \begin{align*}
-        A_\text{цикл} &= \frac 12 \cdot (2P_0 - P_0) \cdot (2V_0 - V_0) = \frac{42}{23} \cdot P_0V_0, \\
+        A_\text{цикл} &= \frac 12 \cdot (2P_0 - P_0) \cdot (2V_0 - V_0) = \frac12 \cdot P_0V_0, \\
         A_{2*} &= \frac{P^* + 2P_0}2 \cdot (V^* - V_0)
-            = \frac{\frac{42}{23} \cdot P_0 + 2P_0}2 \cdot \cbr{\frac{42}{23} \cdot V_0 - V_0}
-            = \ldots = \frac{42}{23} \cdot P_0 V_0, \\
+            = \frac{\frac98 \cdot P_0 + 2P_0}2 \cdot \cbr{\frac{15}8 \cdot V_0 - V_0}
+            = \ldots = \frac{175}{128} \cdot P_0 V_0, \\
         \Delta U_{2*} &= \frac 32 \nu R T^* - \frac 32 \nu R T_2 = \frac 32 (P^*V^* - P_0 \cdot 2V_0)
-            = \frac 32 \cbr{\frac{42}{23} \cdot P_0 \cdot \frac{42}{23} \cdot V_0 - P_0 \cdot 2V_0}
-            = \frac{42}{23} \cdot P_0 V_0, \\
-        \Delta U_{12} &= \frac 32 \nu R T_2 - \frac 32 \nu R T_1 = \frac 32 (2P_0V_0 - P_0V_0) = \ldots = \frac{42}{23} \cdot P_0 V_0, \\
+            = \frac 32 \cbr{\frac98 \cdot P_0 \cdot \frac{15}8 \cdot V_0 - P_0 \cdot 2V_0}
+            = \frac{97}{32} \cdot P_0 V_0, \\
+        \Delta U_{12} &= \frac 32 \nu R T_2 - \frac 32 \nu R T_1 = \frac 32 (2P_0V_0 - P_0V_0) = \ldots = \frac32 \cdot P_0 V_0, \\
         \eta &= \frac{A_\text{цикл}}{Q_+} = \frac{A_\text{цикл}}{Q_{12} + Q_{2*}}
             = \frac{A_\text{цикл}}{A_{12} + \Delta U_{12} + A_{2*} + \Delta U_{2*}} = \\
-            &= \frac{\frac{42}{23} \cdot P_0V_0}{0 + \frac{42}{23} \cdot P_0 V_0 + \frac{42}{23} \cdot P_0 V_0 + \frac{42}{23} \cdot P_0 V_0}
-             = \frac{\frac{42}{23}}{\frac{42}{23} + \frac{42}{23} + \frac{42}{23}}
-             = \frac{42}{23} \leftarrow \text{вжух и готово!}
+            &= \frac{\frac12 \cdot P_0V_0}{0 + \frac32 \cdot P_0 V_0 + \frac{175}{128} \cdot P_0 V_0 + \frac{97}{32} \cdot P_0 V_0}
+             = \frac{\frac12}{\frac32 + \frac{175}{128} + \frac{97}{32}}
+             = \frac{16}{97} \leftarrow \text{вжух и готово!}
         \end{align*}
 }
 \solutionspace{360pt}
@@ -3419,7 +3419,7 @@
 
 
         Теперь рассмотрим отдельно процесс 23, к остальному вернёмся позже.
-        Уравнение этой прямой в $PV$-координатах: $P(V) = 42P_0 - \frac{P_0}{V_0} V$.
+        Уравнение этой прямой в $PV$-координатах: $P(V) = 4P_0 - \frac{P_0}{V_0} V$.
         Это значит, что при изменении объёма на $\Delta V$ давление изменится на $\Delta P = - \frac{P_0}{V_0} \Delta V$, обратите внимание на знак.
 
         Рассмотрим произвольную точку в процессе 23 и дадим процессу ещё немного свершиться, при этом объём изменится на $\Delta V$, давление — на $\Delta P$, температура (иначе бы была гипербола, а не прямая) — на $\Delta T$,
@@ -3447,19 +3447,19 @@
         Q
             &= \frac 32 (P\Delta V + V \Delta P) + P \Delta V =  \frac 52 P\Delta V + \frac 32 V \Delta P = \\
             &= \frac 52 P\Delta V + \frac 32 V \cdot \cbr{- \frac{P_0}{V_0} \Delta V} = \frac{\Delta V}2 \cdot \cbr{5P - \frac{P_0}{V_0} V} = \\
-            &= \frac{\Delta V}2 \cdot \cbr{5 \cdot \cbr{42P_0 - \frac{P_0}{V_0} V} - \frac{P_0}{V_0} V}
-             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 42 - 8\frac{V}{V_0}}.
+            &= \frac{\Delta V}2 \cdot \cbr{5 \cdot \cbr{4P_0 - \frac{P_0}{V_0} V} - \frac{P_0}{V_0} V}
+             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 4 - 8\frac{V}{V_0}}.
         \end{align*}
 
         Таком образом, знак количества теплоты $Q$ на участке 23 зависит от конкретного значения $V$:
         \begin{itemize}
             \item $\Delta V > 0$ на всём участке 23, поскольку газ расширяется,
             \item $P > 0$ — всегда, у нас идеальный газ, удары о стенки сосуда абсолютно упругие, а молекулы не взаимодействуют и поэтому давление только положительно,
-            \item если $5 \cdot 42 - 8\frac{V}{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
+            \item если $5 \cdot 4 - 8\frac{V}{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
         \end{itemize}
         Решая последнее неравенство, получаем конкретное значение $V^*$: при $V < V^*$ тепло подводят, далее~— отводят.
         Тут *~--- некоторая точка между точками 2 и 3, конкретные значения надо досчитать:
-        $$V^* = V_0 \cdot \frac{5 \cdot 42}8 = \frac{42}{23} \cdot V_0 \implies P^* = 42P_0 - \frac{P_0}{V_0} V^* = \ldots = \frac{42}{23} \cdot P_0.$$
+        $$V^* = V_0 \cdot \frac{5 \cdot 4}8 = \frac52 \cdot V_0 \implies P^* = 4P_0 - \frac{P_0}{V_0} V^* = \ldots = \frac32 \cdot P_0.$$
 
         Т.е.
         чтобы вычислить $Q_+$, надо сложить количества теплоты на участке 12 и лишь части участка 23 — участке 2*,
@@ -3468,19 +3468,19 @@
 
         Теперь возвращаемся к циклу целиком и получаем:
         \begin{align*}
-        A_\text{цикл} &= \frac 12 \cdot (3P_0 - P_0) \cdot (3V_0 - V_0) = \frac{42}{23} \cdot P_0V_0, \\
+        A_\text{цикл} &= \frac 12 \cdot (3P_0 - P_0) \cdot (3V_0 - V_0) = 2 \cdot P_0V_0, \\
         A_{2*} &= \frac{P^* + 3P_0}2 \cdot (V^* - V_0)
-            = \frac{\frac{42}{23} \cdot P_0 + 3P_0}2 \cdot \cbr{\frac{42}{23} \cdot V_0 - V_0}
-            = \ldots = \frac{42}{23} \cdot P_0 V_0, \\
+            = \frac{\frac32 \cdot P_0 + 3P_0}2 \cdot \cbr{\frac52 \cdot V_0 - V_0}
+            = \ldots = \frac{27}8 \cdot P_0 V_0, \\
         \Delta U_{2*} &= \frac 32 \nu R T^* - \frac 32 \nu R T_2 = \frac 32 (P^*V^* - P_0 \cdot 3V_0)
-            = \frac 32 \cbr{\frac{42}{23} \cdot P_0 \cdot \frac{42}{23} \cdot V_0 - P_0 \cdot 3V_0}
-            = \frac{42}{23} \cdot P_0 V_0, \\
-        \Delta U_{12} &= \frac 32 \nu R T_2 - \frac 32 \nu R T_1 = \frac 32 (3P_0V_0 - P_0V_0) = \ldots = \frac{42}{23} \cdot P_0 V_0, \\
+            = \frac 32 \cbr{\frac32 \cdot P_0 \cdot \frac52 \cdot V_0 - P_0 \cdot 3V_0}
+            = \frac{15}2 \cdot P_0 V_0, \\
+        \Delta U_{12} &= \frac 32 \nu R T_2 - \frac 32 \nu R T_1 = \frac 32 (3P_0V_0 - P_0V_0) = \ldots = 3 \cdot P_0 V_0, \\
         \eta &= \frac{A_\text{цикл}}{Q_+} = \frac{A_\text{цикл}}{Q_{12} + Q_{2*}}
             = \frac{A_\text{цикл}}{A_{12} + \Delta U_{12} + A_{2*} + \Delta U_{2*}} = \\
-            &= \frac{\frac{42}{23} \cdot P_0V_0}{0 + \frac{42}{23} \cdot P_0 V_0 + \frac{42}{23} \cdot P_0 V_0 + \frac{42}{23} \cdot P_0 V_0}
-             = \frac{\frac{42}{23}}{\frac{42}{23} + \frac{42}{23} + \frac{42}{23}}
-             = \frac{42}{23} \leftarrow \text{вжух и готово!}
+            &= \frac{2 \cdot P_0V_0}{0 + 3 \cdot P_0 V_0 + \frac{27}8 \cdot P_0 V_0 + \frac{15}2 \cdot P_0 V_0}
+             = \frac{2}{3 + \frac{27}8 + \frac{15}2}
+             = \frac4{15} \leftarrow \text{вжух и готово!}
         \end{align*}
 }
 \solutionspace{360pt}
@@ -3627,7 +3627,7 @@
 
 
         Теперь рассмотрим отдельно процесс 23, к остальному вернёмся позже.
-        Уравнение этой прямой в $PV$-координатах: $P(V) = 42P_0 - \frac{P_0}{V_0} V$.
+        Уравнение этой прямой в $PV$-координатах: $P(V) = 3P_0 - \frac{P_0}{V_0} V$.
         Это значит, что при изменении объёма на $\Delta V$ давление изменится на $\Delta P = - \frac{P_0}{V_0} \Delta V$, обратите внимание на знак.
 
         Рассмотрим произвольную точку в процессе 23 и дадим процессу ещё немного свершиться, при этом объём изменится на $\Delta V$, давление — на $\Delta P$, температура (иначе бы была гипербола, а не прямая) — на $\Delta T$,
@@ -3655,19 +3655,19 @@
         Q
             &= \frac 32 (P\Delta V + V \Delta P) + P \Delta V =  \frac 52 P\Delta V + \frac 32 V \Delta P = \\
             &= \frac 52 P\Delta V + \frac 32 V \cdot \cbr{- \frac{P_0}{V_0} \Delta V} = \frac{\Delta V}2 \cdot \cbr{5P - \frac{P_0}{V_0} V} = \\
-            &= \frac{\Delta V}2 \cdot \cbr{5 \cdot \cbr{42P_0 - \frac{P_0}{V_0} V} - \frac{P_0}{V_0} V}
-             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 42 - 8\frac{V}{V_0}}.
+            &= \frac{\Delta V}2 \cdot \cbr{5 \cdot \cbr{3P_0 - \frac{P_0}{V_0} V} - \frac{P_0}{V_0} V}
+             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 3 - 8\frac{V}{V_0}}.
         \end{align*}
 
         Таком образом, знак количества теплоты $Q$ на участке 23 зависит от конкретного значения $V$:
         \begin{itemize}
             \item $\Delta V > 0$ на всём участке 23, поскольку газ расширяется,
             \item $P > 0$ — всегда, у нас идеальный газ, удары о стенки сосуда абсолютно упругие, а молекулы не взаимодействуют и поэтому давление только положительно,
-            \item если $5 \cdot 42 - 8\frac{V}{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
+            \item если $5 \cdot 3 - 8\frac{V}{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
         \end{itemize}
         Решая последнее неравенство, получаем конкретное значение $V^*$: при $V < V^*$ тепло подводят, далее~— отводят.
         Тут *~--- некоторая точка между точками 2 и 3, конкретные значения надо досчитать:
-        $$V^* = V_0 \cdot \frac{5 \cdot 42}8 = \frac{42}{23} \cdot V_0 \implies P^* = 42P_0 - \frac{P_0}{V_0} V^* = \ldots = \frac{42}{23} \cdot P_0.$$
+        $$V^* = V_0 \cdot \frac{5 \cdot 3}8 = \frac{15}8 \cdot V_0 \implies P^* = 3P_0 - \frac{P_0}{V_0} V^* = \ldots = \frac98 \cdot P_0.$$
 
         Т.е.
         чтобы вычислить $Q_+$, надо сложить количества теплоты на участке 12 и лишь части участка 23 — участке 2*,
@@ -3676,19 +3676,19 @@
 
         Теперь возвращаемся к циклу целиком и получаем:
         \begin{align*}
-        A_\text{цикл} &= \frac 12 \cdot (2P_0 - P_0) \cdot (2V_0 - V_0) = \frac{42}{23} \cdot P_0V_0, \\
+        A_\text{цикл} &= \frac 12 \cdot (2P_0 - P_0) \cdot (2V_0 - V_0) = \frac12 \cdot P_0V_0, \\
         A_{2*} &= \frac{P^* + 2P_0}2 \cdot (V^* - V_0)
-            = \frac{\frac{42}{23} \cdot P_0 + 2P_0}2 \cdot \cbr{\frac{42}{23} \cdot V_0 - V_0}
-            = \ldots = \frac{42}{23} \cdot P_0 V_0, \\
+            = \frac{\frac98 \cdot P_0 + 2P_0}2 \cdot \cbr{\frac{15}8 \cdot V_0 - V_0}
+            = \ldots = \frac{175}{128} \cdot P_0 V_0, \\
         \Delta U_{2*} &= \frac 32 \nu R T^* - \frac 32 \nu R T_2 = \frac 32 (P^*V^* - P_0 \cdot 2V_0)
-            = \frac 32 \cbr{\frac{42}{23} \cdot P_0 \cdot \frac{42}{23} \cdot V_0 - P_0 \cdot 2V_0}
-            = \frac{42}{23} \cdot P_0 V_0, \\
-        \Delta U_{12} &= \frac 32 \nu R T_2 - \frac 32 \nu R T_1 = \frac 32 (2P_0V_0 - P_0V_0) = \ldots = \frac{42}{23} \cdot P_0 V_0, \\
+            = \frac 32 \cbr{\frac98 \cdot P_0 \cdot \frac{15}8 \cdot V_0 - P_0 \cdot 2V_0}
+            = \frac{97}{32} \cdot P_0 V_0, \\
+        \Delta U_{12} &= \frac 32 \nu R T_2 - \frac 32 \nu R T_1 = \frac 32 (2P_0V_0 - P_0V_0) = \ldots = \frac32 \cdot P_0 V_0, \\
         \eta &= \frac{A_\text{цикл}}{Q_+} = \frac{A_\text{цикл}}{Q_{12} + Q_{2*}}
             = \frac{A_\text{цикл}}{A_{12} + \Delta U_{12} + A_{2*} + \Delta U_{2*}} = \\
-            &= \frac{\frac{42}{23} \cdot P_0V_0}{0 + \frac{42}{23} \cdot P_0 V_0 + \frac{42}{23} \cdot P_0 V_0 + \frac{42}{23} \cdot P_0 V_0}
-             = \frac{\frac{42}{23}}{\frac{42}{23} + \frac{42}{23} + \frac{42}{23}}
-             = \frac{42}{23} \leftarrow \text{вжух и готово!}
+            &= \frac{\frac12 \cdot P_0V_0}{0 + \frac32 \cdot P_0 V_0 + \frac{175}{128} \cdot P_0 V_0 + \frac{97}{32} \cdot P_0 V_0}
+             = \frac{\frac12}{\frac32 + \frac{175}{128} + \frac{97}{32}}
+             = \frac{16}{97} \leftarrow \text{вжух и готово!}
         \end{align*}
 }
 \solutionspace{360pt}
@@ -3835,7 +3835,7 @@
 
 
         Теперь рассмотрим отдельно процесс 23, к остальному вернёмся позже.
-        Уравнение этой прямой в $PV$-координатах: $P(V) = 42P_0 - \frac{P_0}{V_0} V$.
+        Уравнение этой прямой в $PV$-координатах: $P(V) = 5P_0 - \frac{P_0}{V_0} V$.
         Это значит, что при изменении объёма на $\Delta V$ давление изменится на $\Delta P = - \frac{P_0}{V_0} \Delta V$, обратите внимание на знак.
 
         Рассмотрим произвольную точку в процессе 23 и дадим процессу ещё немного свершиться, при этом объём изменится на $\Delta V$, давление — на $\Delta P$, температура (иначе бы была гипербола, а не прямая) — на $\Delta T$,
@@ -3863,19 +3863,19 @@
         Q
             &= \frac 32 (P\Delta V + V \Delta P) + P \Delta V =  \frac 52 P\Delta V + \frac 32 V \Delta P = \\
             &= \frac 52 P\Delta V + \frac 32 V \cdot \cbr{- \frac{P_0}{V_0} \Delta V} = \frac{\Delta V}2 \cdot \cbr{5P - \frac{P_0}{V_0} V} = \\
-            &= \frac{\Delta V}2 \cdot \cbr{5 \cdot \cbr{42P_0 - \frac{P_0}{V_0} V} - \frac{P_0}{V_0} V}
-             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 42 - 8\frac{V}{V_0}}.
+            &= \frac{\Delta V}2 \cdot \cbr{5 \cdot \cbr{5P_0 - \frac{P_0}{V_0} V} - \frac{P_0}{V_0} V}
+             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 5 - 8\frac{V}{V_0}}.
         \end{align*}
 
         Таком образом, знак количества теплоты $Q$ на участке 23 зависит от конкретного значения $V$:
         \begin{itemize}
             \item $\Delta V > 0$ на всём участке 23, поскольку газ расширяется,
             \item $P > 0$ — всегда, у нас идеальный газ, удары о стенки сосуда абсолютно упругие, а молекулы не взаимодействуют и поэтому давление только положительно,
-            \item если $5 \cdot 42 - 8\frac{V}{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
+            \item если $5 \cdot 5 - 8\frac{V}{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
         \end{itemize}
         Решая последнее неравенство, получаем конкретное значение $V^*$: при $V < V^*$ тепло подводят, далее~— отводят.
         Тут *~--- некоторая точка между точками 2 и 3, конкретные значения надо досчитать:
-        $$V^* = V_0 \cdot \frac{5 \cdot 42}8 = \frac{42}{23} \cdot V_0 \implies P^* = 42P_0 - \frac{P_0}{V_0} V^* = \ldots = \frac{42}{23} \cdot P_0.$$
+        $$V^* = V_0 \cdot \frac{5 \cdot 5}8 = \frac{25}8 \cdot V_0 \implies P^* = 5P_0 - \frac{P_0}{V_0} V^* = \ldots = \frac{15}8 \cdot P_0.$$
 
         Т.е.
         чтобы вычислить $Q_+$, надо сложить количества теплоты на участке 12 и лишь части участка 23 — участке 2*,
@@ -3884,19 +3884,19 @@
 
         Теперь возвращаемся к циклу целиком и получаем:
         \begin{align*}
-        A_\text{цикл} &= \frac 12 \cdot (4P_0 - P_0) \cdot (4V_0 - V_0) = \frac{42}{23} \cdot P_0V_0, \\
+        A_\text{цикл} &= \frac 12 \cdot (4P_0 - P_0) \cdot (4V_0 - V_0) = \frac92 \cdot P_0V_0, \\
         A_{2*} &= \frac{P^* + 4P_0}2 \cdot (V^* - V_0)
-            = \frac{\frac{42}{23} \cdot P_0 + 4P_0}2 \cdot \cbr{\frac{42}{23} \cdot V_0 - V_0}
-            = \ldots = \frac{42}{23} \cdot P_0 V_0, \\
+            = \frac{\frac{15}8 \cdot P_0 + 4P_0}2 \cdot \cbr{\frac{25}8 \cdot V_0 - V_0}
+            = \ldots = \frac{799}{128} \cdot P_0 V_0, \\
         \Delta U_{2*} &= \frac 32 \nu R T^* - \frac 32 \nu R T_2 = \frac 32 (P^*V^* - P_0 \cdot 4V_0)
-            = \frac 32 \cbr{\frac{42}{23} \cdot P_0 \cdot \frac{42}{23} \cdot V_0 - P_0 \cdot 4V_0}
-            = \frac{42}{23} \cdot P_0 V_0, \\
-        \Delta U_{12} &= \frac 32 \nu R T_2 - \frac 32 \nu R T_1 = \frac 32 (4P_0V_0 - P_0V_0) = \ldots = \frac{42}{23} \cdot P_0 V_0, \\
+            = \frac 32 \cbr{\frac{15}8 \cdot P_0 \cdot \frac{25}8 \cdot V_0 - P_0 \cdot 4V_0}
+            = \frac{433}{32} \cdot P_0 V_0, \\
+        \Delta U_{12} &= \frac 32 \nu R T_2 - \frac 32 \nu R T_1 = \frac 32 (4P_0V_0 - P_0V_0) = \ldots = \frac92 \cdot P_0 V_0, \\
         \eta &= \frac{A_\text{цикл}}{Q_+} = \frac{A_\text{цикл}}{Q_{12} + Q_{2*}}
             = \frac{A_\text{цикл}}{A_{12} + \Delta U_{12} + A_{2*} + \Delta U_{2*}} = \\
-            &= \frac{\frac{42}{23} \cdot P_0V_0}{0 + \frac{42}{23} \cdot P_0 V_0 + \frac{42}{23} \cdot P_0 V_0 + \frac{42}{23} \cdot P_0 V_0}
-             = \frac{\frac{42}{23}}{\frac{42}{23} + \frac{42}{23} + \frac{42}{23}}
-             = \frac{42}{23} \leftarrow \text{вжух и готово!}
+            &= \frac{\frac92 \cdot P_0V_0}{0 + \frac92 \cdot P_0 V_0 + \frac{799}{128} \cdot P_0 V_0 + \frac{433}{32} \cdot P_0 V_0}
+             = \frac{\frac92}{\frac92 + \frac{799}{128} + \frac{433}{32}}
+             = \frac{144}{433} \leftarrow \text{вжух и готово!}
         \end{align*}
 }
 \solutionspace{360pt}
@@ -4043,7 +4043,7 @@
 
 
         Теперь рассмотрим отдельно процесс 23, к остальному вернёмся позже.
-        Уравнение этой прямой в $PV$-координатах: $P(V) = 42P_0 - \frac{P_0}{V_0} V$.
+        Уравнение этой прямой в $PV$-координатах: $P(V) = 7P_0 - \frac{P_0}{V_0} V$.
         Это значит, что при изменении объёма на $\Delta V$ давление изменится на $\Delta P = - \frac{P_0}{V_0} \Delta V$, обратите внимание на знак.
 
         Рассмотрим произвольную точку в процессе 23 и дадим процессу ещё немного свершиться, при этом объём изменится на $\Delta V$, давление — на $\Delta P$, температура (иначе бы была гипербола, а не прямая) — на $\Delta T$,
@@ -4071,19 +4071,19 @@
         Q
             &= \frac 32 (P\Delta V + V \Delta P) + P \Delta V =  \frac 52 P\Delta V + \frac 32 V \Delta P = \\
             &= \frac 52 P\Delta V + \frac 32 V \cdot \cbr{- \frac{P_0}{V_0} \Delta V} = \frac{\Delta V}2 \cdot \cbr{5P - \frac{P_0}{V_0} V} = \\
-            &= \frac{\Delta V}2 \cdot \cbr{5 \cdot \cbr{42P_0 - \frac{P_0}{V_0} V} - \frac{P_0}{V_0} V}
-             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 42 - 8\frac{V}{V_0}}.
+            &= \frac{\Delta V}2 \cdot \cbr{5 \cdot \cbr{7P_0 - \frac{P_0}{V_0} V} - \frac{P_0}{V_0} V}
+             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 7 - 8\frac{V}{V_0}}.
         \end{align*}
 
         Таком образом, знак количества теплоты $Q$ на участке 23 зависит от конкретного значения $V$:
         \begin{itemize}
             \item $\Delta V > 0$ на всём участке 23, поскольку газ расширяется,
             \item $P > 0$ — всегда, у нас идеальный газ, удары о стенки сосуда абсолютно упругие, а молекулы не взаимодействуют и поэтому давление только положительно,
-            \item если $5 \cdot 42 - 8\frac{V}{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
+            \item если $5 \cdot 7 - 8\frac{V}{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
         \end{itemize}
         Решая последнее неравенство, получаем конкретное значение $V^*$: при $V < V^*$ тепло подводят, далее~— отводят.
         Тут *~--- некоторая точка между точками 2 и 3, конкретные значения надо досчитать:
-        $$V^* = V_0 \cdot \frac{5 \cdot 42}8 = \frac{42}{23} \cdot V_0 \implies P^* = 42P_0 - \frac{P_0}{V_0} V^* = \ldots = \frac{42}{23} \cdot P_0.$$
+        $$V^* = V_0 \cdot \frac{5 \cdot 7}8 = \frac{35}8 \cdot V_0 \implies P^* = 7P_0 - \frac{P_0}{V_0} V^* = \ldots = \frac{21}8 \cdot P_0.$$
 
         Т.е.
         чтобы вычислить $Q_+$, надо сложить количества теплоты на участке 12 и лишь части участка 23 — участке 2*,
@@ -4092,19 +4092,19 @@
 
         Теперь возвращаемся к циклу целиком и получаем:
         \begin{align*}
-        A_\text{цикл} &= \frac 12 \cdot (6P_0 - P_0) \cdot (6V_0 - V_0) = \frac{42}{23} \cdot P_0V_0, \\
+        A_\text{цикл} &= \frac 12 \cdot (6P_0 - P_0) \cdot (6V_0 - V_0) = \frac{25}2 \cdot P_0V_0, \\
         A_{2*} &= \frac{P^* + 6P_0}2 \cdot (V^* - V_0)
-            = \frac{\frac{42}{23} \cdot P_0 + 6P_0}2 \cdot \cbr{\frac{42}{23} \cdot V_0 - V_0}
-            = \ldots = \frac{42}{23} \cdot P_0 V_0, \\
+            = \frac{\frac{21}8 \cdot P_0 + 6P_0}2 \cdot \cbr{\frac{35}8 \cdot V_0 - V_0}
+            = \ldots = \frac{1863}{128} \cdot P_0 V_0, \\
         \Delta U_{2*} &= \frac 32 \nu R T^* - \frac 32 \nu R T_2 = \frac 32 (P^*V^* - P_0 \cdot 6V_0)
-            = \frac 32 \cbr{\frac{42}{23} \cdot P_0 \cdot \frac{42}{23} \cdot V_0 - P_0 \cdot 6V_0}
-            = \frac{42}{23} \cdot P_0 V_0, \\
-        \Delta U_{12} &= \frac 32 \nu R T_2 - \frac 32 \nu R T_1 = \frac 32 (6P_0V_0 - P_0V_0) = \ldots = \frac{42}{23} \cdot P_0 V_0, \\
+            = \frac 32 \cbr{\frac{21}8 \cdot P_0 \cdot \frac{35}8 \cdot V_0 - P_0 \cdot 6V_0}
+            = \frac{969}{32} \cdot P_0 V_0, \\
+        \Delta U_{12} &= \frac 32 \nu R T_2 - \frac 32 \nu R T_1 = \frac 32 (6P_0V_0 - P_0V_0) = \ldots = \frac{15}2 \cdot P_0 V_0, \\
         \eta &= \frac{A_\text{цикл}}{Q_+} = \frac{A_\text{цикл}}{Q_{12} + Q_{2*}}
             = \frac{A_\text{цикл}}{A_{12} + \Delta U_{12} + A_{2*} + \Delta U_{2*}} = \\
-            &= \frac{\frac{42}{23} \cdot P_0V_0}{0 + \frac{42}{23} \cdot P_0 V_0 + \frac{42}{23} \cdot P_0 V_0 + \frac{42}{23} \cdot P_0 V_0}
-             = \frac{\frac{42}{23}}{\frac{42}{23} + \frac{42}{23} + \frac{42}{23}}
-             = \frac{42}{23} \leftarrow \text{вжух и готово!}
+            &= \frac{\frac{25}2 \cdot P_0V_0}{0 + \frac{15}2 \cdot P_0 V_0 + \frac{1863}{128} \cdot P_0 V_0 + \frac{969}{32} \cdot P_0 V_0}
+             = \frac{\frac{25}2}{\frac{15}2 + \frac{1863}{128} + \frac{969}{32}}
+             = \frac{400}{969} \leftarrow \text{вжух и готово!}
         \end{align*}
 }
 \solutionspace{360pt}
@@ -4251,7 +4251,7 @@
 
 
         Теперь рассмотрим отдельно процесс 23, к остальному вернёмся позже.
-        Уравнение этой прямой в $PV$-координатах: $P(V) = 42P_0 - \frac{P_0}{V_0} V$.
+        Уравнение этой прямой в $PV$-координатах: $P(V) = 3P_0 - \frac{P_0}{V_0} V$.
         Это значит, что при изменении объёма на $\Delta V$ давление изменится на $\Delta P = - \frac{P_0}{V_0} \Delta V$, обратите внимание на знак.
 
         Рассмотрим произвольную точку в процессе 23 и дадим процессу ещё немного свершиться, при этом объём изменится на $\Delta V$, давление — на $\Delta P$, температура (иначе бы была гипербола, а не прямая) — на $\Delta T$,
@@ -4279,19 +4279,19 @@
         Q
             &= \frac 32 (P\Delta V + V \Delta P) + P \Delta V =  \frac 52 P\Delta V + \frac 32 V \Delta P = \\
             &= \frac 52 P\Delta V + \frac 32 V \cdot \cbr{- \frac{P_0}{V_0} \Delta V} = \frac{\Delta V}2 \cdot \cbr{5P - \frac{P_0}{V_0} V} = \\
-            &= \frac{\Delta V}2 \cdot \cbr{5 \cdot \cbr{42P_0 - \frac{P_0}{V_0} V} - \frac{P_0}{V_0} V}
-             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 42 - 8\frac{V}{V_0}}.
+            &= \frac{\Delta V}2 \cdot \cbr{5 \cdot \cbr{3P_0 - \frac{P_0}{V_0} V} - \frac{P_0}{V_0} V}
+             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 3 - 8\frac{V}{V_0}}.
         \end{align*}
 
         Таком образом, знак количества теплоты $Q$ на участке 23 зависит от конкретного значения $V$:
         \begin{itemize}
             \item $\Delta V > 0$ на всём участке 23, поскольку газ расширяется,
             \item $P > 0$ — всегда, у нас идеальный газ, удары о стенки сосуда абсолютно упругие, а молекулы не взаимодействуют и поэтому давление только положительно,
-            \item если $5 \cdot 42 - 8\frac{V}{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
+            \item если $5 \cdot 3 - 8\frac{V}{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
         \end{itemize}
         Решая последнее неравенство, получаем конкретное значение $V^*$: при $V < V^*$ тепло подводят, далее~— отводят.
         Тут *~--- некоторая точка между точками 2 и 3, конкретные значения надо досчитать:
-        $$V^* = V_0 \cdot \frac{5 \cdot 42}8 = \frac{42}{23} \cdot V_0 \implies P^* = 42P_0 - \frac{P_0}{V_0} V^* = \ldots = \frac{42}{23} \cdot P_0.$$
+        $$V^* = V_0 \cdot \frac{5 \cdot 3}8 = \frac{15}8 \cdot V_0 \implies P^* = 3P_0 - \frac{P_0}{V_0} V^* = \ldots = \frac98 \cdot P_0.$$
 
         Т.е.
         чтобы вычислить $Q_+$, надо сложить количества теплоты на участке 12 и лишь части участка 23 — участке 2*,
@@ -4300,19 +4300,19 @@
 
         Теперь возвращаемся к циклу целиком и получаем:
         \begin{align*}
-        A_\text{цикл} &= \frac 12 \cdot (2P_0 - P_0) \cdot (2V_0 - V_0) = \frac{42}{23} \cdot P_0V_0, \\
+        A_\text{цикл} &= \frac 12 \cdot (2P_0 - P_0) \cdot (2V_0 - V_0) = \frac12 \cdot P_0V_0, \\
         A_{2*} &= \frac{P^* + 2P_0}2 \cdot (V^* - V_0)
-            = \frac{\frac{42}{23} \cdot P_0 + 2P_0}2 \cdot \cbr{\frac{42}{23} \cdot V_0 - V_0}
-            = \ldots = \frac{42}{23} \cdot P_0 V_0, \\
+            = \frac{\frac98 \cdot P_0 + 2P_0}2 \cdot \cbr{\frac{15}8 \cdot V_0 - V_0}
+            = \ldots = \frac{175}{128} \cdot P_0 V_0, \\
         \Delta U_{2*} &= \frac 32 \nu R T^* - \frac 32 \nu R T_2 = \frac 32 (P^*V^* - P_0 \cdot 2V_0)
-            = \frac 32 \cbr{\frac{42}{23} \cdot P_0 \cdot \frac{42}{23} \cdot V_0 - P_0 \cdot 2V_0}
-            = \frac{42}{23} \cdot P_0 V_0, \\
-        \Delta U_{12} &= \frac 32 \nu R T_2 - \frac 32 \nu R T_1 = \frac 32 (2P_0V_0 - P_0V_0) = \ldots = \frac{42}{23} \cdot P_0 V_0, \\
+            = \frac 32 \cbr{\frac98 \cdot P_0 \cdot \frac{15}8 \cdot V_0 - P_0 \cdot 2V_0}
+            = \frac{97}{32} \cdot P_0 V_0, \\
+        \Delta U_{12} &= \frac 32 \nu R T_2 - \frac 32 \nu R T_1 = \frac 32 (2P_0V_0 - P_0V_0) = \ldots = \frac32 \cdot P_0 V_0, \\
         \eta &= \frac{A_\text{цикл}}{Q_+} = \frac{A_\text{цикл}}{Q_{12} + Q_{2*}}
             = \frac{A_\text{цикл}}{A_{12} + \Delta U_{12} + A_{2*} + \Delta U_{2*}} = \\
-            &= \frac{\frac{42}{23} \cdot P_0V_0}{0 + \frac{42}{23} \cdot P_0 V_0 + \frac{42}{23} \cdot P_0 V_0 + \frac{42}{23} \cdot P_0 V_0}
-             = \frac{\frac{42}{23}}{\frac{42}{23} + \frac{42}{23} + \frac{42}{23}}
-             = \frac{42}{23} \leftarrow \text{вжух и готово!}
+            &= \frac{\frac12 \cdot P_0V_0}{0 + \frac32 \cdot P_0 V_0 + \frac{175}{128} \cdot P_0 V_0 + \frac{97}{32} \cdot P_0 V_0}
+             = \frac{\frac12}{\frac32 + \frac{175}{128} + \frac{97}{32}}
+             = \frac{16}{97} \leftarrow \text{вжух и готово!}
         \end{align*}
 }
 \solutionspace{360pt}
@@ -4459,7 +4459,7 @@
 
 
         Теперь рассмотрим отдельно процесс 23, к остальному вернёмся позже.
-        Уравнение этой прямой в $PV$-координатах: $P(V) = 42P_0 - \frac{P_0}{V_0} V$.
+        Уравнение этой прямой в $PV$-координатах: $P(V) = 3P_0 - \frac{P_0}{V_0} V$.
         Это значит, что при изменении объёма на $\Delta V$ давление изменится на $\Delta P = - \frac{P_0}{V_0} \Delta V$, обратите внимание на знак.
 
         Рассмотрим произвольную точку в процессе 23 и дадим процессу ещё немного свершиться, при этом объём изменится на $\Delta V$, давление — на $\Delta P$, температура (иначе бы была гипербола, а не прямая) — на $\Delta T$,
@@ -4487,19 +4487,19 @@
         Q
             &= \frac 32 (P\Delta V + V \Delta P) + P \Delta V =  \frac 52 P\Delta V + \frac 32 V \Delta P = \\
             &= \frac 52 P\Delta V + \frac 32 V \cdot \cbr{- \frac{P_0}{V_0} \Delta V} = \frac{\Delta V}2 \cdot \cbr{5P - \frac{P_0}{V_0} V} = \\
-            &= \frac{\Delta V}2 \cdot \cbr{5 \cdot \cbr{42P_0 - \frac{P_0}{V_0} V} - \frac{P_0}{V_0} V}
-             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 42 - 8\frac{V}{V_0}}.
+            &= \frac{\Delta V}2 \cdot \cbr{5 \cdot \cbr{3P_0 - \frac{P_0}{V_0} V} - \frac{P_0}{V_0} V}
+             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 3 - 8\frac{V}{V_0}}.
         \end{align*}
 
         Таком образом, знак количества теплоты $Q$ на участке 23 зависит от конкретного значения $V$:
         \begin{itemize}
             \item $\Delta V > 0$ на всём участке 23, поскольку газ расширяется,
             \item $P > 0$ — всегда, у нас идеальный газ, удары о стенки сосуда абсолютно упругие, а молекулы не взаимодействуют и поэтому давление только положительно,
-            \item если $5 \cdot 42 - 8\frac{V}{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
+            \item если $5 \cdot 3 - 8\frac{V}{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
         \end{itemize}
         Решая последнее неравенство, получаем конкретное значение $V^*$: при $V < V^*$ тепло подводят, далее~— отводят.
         Тут *~--- некоторая точка между точками 2 и 3, конкретные значения надо досчитать:
-        $$V^* = V_0 \cdot \frac{5 \cdot 42}8 = \frac{42}{23} \cdot V_0 \implies P^* = 42P_0 - \frac{P_0}{V_0} V^* = \ldots = \frac{42}{23} \cdot P_0.$$
+        $$V^* = V_0 \cdot \frac{5 \cdot 3}8 = \frac{15}8 \cdot V_0 \implies P^* = 3P_0 - \frac{P_0}{V_0} V^* = \ldots = \frac98 \cdot P_0.$$
 
         Т.е.
         чтобы вычислить $Q_+$, надо сложить количества теплоты на участке 12 и лишь части участка 23 — участке 2*,
@@ -4508,19 +4508,19 @@
 
         Теперь возвращаемся к циклу целиком и получаем:
         \begin{align*}
-        A_\text{цикл} &= \frac 12 \cdot (2P_0 - P_0) \cdot (2V_0 - V_0) = \frac{42}{23} \cdot P_0V_0, \\
+        A_\text{цикл} &= \frac 12 \cdot (2P_0 - P_0) \cdot (2V_0 - V_0) = \frac12 \cdot P_0V_0, \\
         A_{2*} &= \frac{P^* + 2P_0}2 \cdot (V^* - V_0)
-            = \frac{\frac{42}{23} \cdot P_0 + 2P_0}2 \cdot \cbr{\frac{42}{23} \cdot V_0 - V_0}
-            = \ldots = \frac{42}{23} \cdot P_0 V_0, \\
+            = \frac{\frac98 \cdot P_0 + 2P_0}2 \cdot \cbr{\frac{15}8 \cdot V_0 - V_0}
+            = \ldots = \frac{175}{128} \cdot P_0 V_0, \\
         \Delta U_{2*} &= \frac 32 \nu R T^* - \frac 32 \nu R T_2 = \frac 32 (P^*V^* - P_0 \cdot 2V_0)
-            = \frac 32 \cbr{\frac{42}{23} \cdot P_0 \cdot \frac{42}{23} \cdot V_0 - P_0 \cdot 2V_0}
-            = \frac{42}{23} \cdot P_0 V_0, \\
-        \Delta U_{12} &= \frac 32 \nu R T_2 - \frac 32 \nu R T_1 = \frac 32 (2P_0V_0 - P_0V_0) = \ldots = \frac{42}{23} \cdot P_0 V_0, \\
+            = \frac 32 \cbr{\frac98 \cdot P_0 \cdot \frac{15}8 \cdot V_0 - P_0 \cdot 2V_0}
+            = \frac{97}{32} \cdot P_0 V_0, \\
+        \Delta U_{12} &= \frac 32 \nu R T_2 - \frac 32 \nu R T_1 = \frac 32 (2P_0V_0 - P_0V_0) = \ldots = \frac32 \cdot P_0 V_0, \\
         \eta &= \frac{A_\text{цикл}}{Q_+} = \frac{A_\text{цикл}}{Q_{12} + Q_{2*}}
             = \frac{A_\text{цикл}}{A_{12} + \Delta U_{12} + A_{2*} + \Delta U_{2*}} = \\
-            &= \frac{\frac{42}{23} \cdot P_0V_0}{0 + \frac{42}{23} \cdot P_0 V_0 + \frac{42}{23} \cdot P_0 V_0 + \frac{42}{23} \cdot P_0 V_0}
-             = \frac{\frac{42}{23}}{\frac{42}{23} + \frac{42}{23} + \frac{42}{23}}
-             = \frac{42}{23} \leftarrow \text{вжух и готово!}
+            &= \frac{\frac12 \cdot P_0V_0}{0 + \frac32 \cdot P_0 V_0 + \frac{175}{128} \cdot P_0 V_0 + \frac{97}{32} \cdot P_0 V_0}
+             = \frac{\frac12}{\frac32 + \frac{175}{128} + \frac{97}{32}}
+             = \frac{16}{97} \leftarrow \text{вжух и готово!}
         \end{align*}
 }
 \solutionspace{360pt}
@@ -4667,7 +4667,7 @@
 
 
         Теперь рассмотрим отдельно процесс 23, к остальному вернёмся позже.
-        Уравнение этой прямой в $PV$-координатах: $P(V) = 42P_0 - \frac{P_0}{V_0} V$.
+        Уравнение этой прямой в $PV$-координатах: $P(V) = 4P_0 - \frac{P_0}{V_0} V$.
         Это значит, что при изменении объёма на $\Delta V$ давление изменится на $\Delta P = - \frac{P_0}{V_0} \Delta V$, обратите внимание на знак.
 
         Рассмотрим произвольную точку в процессе 23 и дадим процессу ещё немного свершиться, при этом объём изменится на $\Delta V$, давление — на $\Delta P$, температура (иначе бы была гипербола, а не прямая) — на $\Delta T$,
@@ -4695,19 +4695,19 @@
         Q
             &= \frac 32 (P\Delta V + V \Delta P) + P \Delta V =  \frac 52 P\Delta V + \frac 32 V \Delta P = \\
             &= \frac 52 P\Delta V + \frac 32 V \cdot \cbr{- \frac{P_0}{V_0} \Delta V} = \frac{\Delta V}2 \cdot \cbr{5P - \frac{P_0}{V_0} V} = \\
-            &= \frac{\Delta V}2 \cdot \cbr{5 \cdot \cbr{42P_0 - \frac{P_0}{V_0} V} - \frac{P_0}{V_0} V}
-             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 42 - 8\frac{V}{V_0}}.
+            &= \frac{\Delta V}2 \cdot \cbr{5 \cdot \cbr{4P_0 - \frac{P_0}{V_0} V} - \frac{P_0}{V_0} V}
+             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 4 - 8\frac{V}{V_0}}.
         \end{align*}
 
         Таком образом, знак количества теплоты $Q$ на участке 23 зависит от конкретного значения $V$:
         \begin{itemize}
             \item $\Delta V > 0$ на всём участке 23, поскольку газ расширяется,
             \item $P > 0$ — всегда, у нас идеальный газ, удары о стенки сосуда абсолютно упругие, а молекулы не взаимодействуют и поэтому давление только положительно,
-            \item если $5 \cdot 42 - 8\frac{V}{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
+            \item если $5 \cdot 4 - 8\frac{V}{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
         \end{itemize}
         Решая последнее неравенство, получаем конкретное значение $V^*$: при $V < V^*$ тепло подводят, далее~— отводят.
         Тут *~--- некоторая точка между точками 2 и 3, конкретные значения надо досчитать:
-        $$V^* = V_0 \cdot \frac{5 \cdot 42}8 = \frac{42}{23} \cdot V_0 \implies P^* = 42P_0 - \frac{P_0}{V_0} V^* = \ldots = \frac{42}{23} \cdot P_0.$$
+        $$V^* = V_0 \cdot \frac{5 \cdot 4}8 = \frac52 \cdot V_0 \implies P^* = 4P_0 - \frac{P_0}{V_0} V^* = \ldots = \frac32 \cdot P_0.$$
 
         Т.е.
         чтобы вычислить $Q_+$, надо сложить количества теплоты на участке 12 и лишь части участка 23 — участке 2*,
@@ -4716,19 +4716,19 @@
 
         Теперь возвращаемся к циклу целиком и получаем:
         \begin{align*}
-        A_\text{цикл} &= \frac 12 \cdot (3P_0 - P_0) \cdot (3V_0 - V_0) = \frac{42}{23} \cdot P_0V_0, \\
+        A_\text{цикл} &= \frac 12 \cdot (3P_0 - P_0) \cdot (3V_0 - V_0) = 2 \cdot P_0V_0, \\
         A_{2*} &= \frac{P^* + 3P_0}2 \cdot (V^* - V_0)
-            = \frac{\frac{42}{23} \cdot P_0 + 3P_0}2 \cdot \cbr{\frac{42}{23} \cdot V_0 - V_0}
-            = \ldots = \frac{42}{23} \cdot P_0 V_0, \\
+            = \frac{\frac32 \cdot P_0 + 3P_0}2 \cdot \cbr{\frac52 \cdot V_0 - V_0}
+            = \ldots = \frac{27}8 \cdot P_0 V_0, \\
         \Delta U_{2*} &= \frac 32 \nu R T^* - \frac 32 \nu R T_2 = \frac 32 (P^*V^* - P_0 \cdot 3V_0)
-            = \frac 32 \cbr{\frac{42}{23} \cdot P_0 \cdot \frac{42}{23} \cdot V_0 - P_0 \cdot 3V_0}
-            = \frac{42}{23} \cdot P_0 V_0, \\
-        \Delta U_{12} &= \frac 32 \nu R T_2 - \frac 32 \nu R T_1 = \frac 32 (3P_0V_0 - P_0V_0) = \ldots = \frac{42}{23} \cdot P_0 V_0, \\
+            = \frac 32 \cbr{\frac32 \cdot P_0 \cdot \frac52 \cdot V_0 - P_0 \cdot 3V_0}
+            = \frac{15}2 \cdot P_0 V_0, \\
+        \Delta U_{12} &= \frac 32 \nu R T_2 - \frac 32 \nu R T_1 = \frac 32 (3P_0V_0 - P_0V_0) = \ldots = 3 \cdot P_0 V_0, \\
         \eta &= \frac{A_\text{цикл}}{Q_+} = \frac{A_\text{цикл}}{Q_{12} + Q_{2*}}
             = \frac{A_\text{цикл}}{A_{12} + \Delta U_{12} + A_{2*} + \Delta U_{2*}} = \\
-            &= \frac{\frac{42}{23} \cdot P_0V_0}{0 + \frac{42}{23} \cdot P_0 V_0 + \frac{42}{23} \cdot P_0 V_0 + \frac{42}{23} \cdot P_0 V_0}
-             = \frac{\frac{42}{23}}{\frac{42}{23} + \frac{42}{23} + \frac{42}{23}}
-             = \frac{42}{23} \leftarrow \text{вжух и готово!}
+            &= \frac{2 \cdot P_0V_0}{0 + 3 \cdot P_0 V_0 + \frac{27}8 \cdot P_0 V_0 + \frac{15}2 \cdot P_0 V_0}
+             = \frac{2}{3 + \frac{27}8 + \frac{15}2}
+             = \frac4{15} \leftarrow \text{вжух и готово!}
         \end{align*}
 }
 \solutionspace{360pt}
@@ -4875,7 +4875,7 @@
 
 
         Теперь рассмотрим отдельно процесс 23, к остальному вернёмся позже.
-        Уравнение этой прямой в $PV$-координатах: $P(V) = 42P_0 - \frac{P_0}{V_0} V$.
+        Уравнение этой прямой в $PV$-координатах: $P(V) = 4P_0 - \frac{P_0}{V_0} V$.
         Это значит, что при изменении объёма на $\Delta V$ давление изменится на $\Delta P = - \frac{P_0}{V_0} \Delta V$, обратите внимание на знак.
 
         Рассмотрим произвольную точку в процессе 23 и дадим процессу ещё немного свершиться, при этом объём изменится на $\Delta V$, давление — на $\Delta P$, температура (иначе бы была гипербола, а не прямая) — на $\Delta T$,
@@ -4903,19 +4903,19 @@
         Q
             &= \frac 32 (P\Delta V + V \Delta P) + P \Delta V =  \frac 52 P\Delta V + \frac 32 V \Delta P = \\
             &= \frac 52 P\Delta V + \frac 32 V \cdot \cbr{- \frac{P_0}{V_0} \Delta V} = \frac{\Delta V}2 \cdot \cbr{5P - \frac{P_0}{V_0} V} = \\
-            &= \frac{\Delta V}2 \cdot \cbr{5 \cdot \cbr{42P_0 - \frac{P_0}{V_0} V} - \frac{P_0}{V_0} V}
-             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 42 - 8\frac{V}{V_0}}.
+            &= \frac{\Delta V}2 \cdot \cbr{5 \cdot \cbr{4P_0 - \frac{P_0}{V_0} V} - \frac{P_0}{V_0} V}
+             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 4 - 8\frac{V}{V_0}}.
         \end{align*}
 
         Таком образом, знак количества теплоты $Q$ на участке 23 зависит от конкретного значения $V$:
         \begin{itemize}
             \item $\Delta V > 0$ на всём участке 23, поскольку газ расширяется,
             \item $P > 0$ — всегда, у нас идеальный газ, удары о стенки сосуда абсолютно упругие, а молекулы не взаимодействуют и поэтому давление только положительно,
-            \item если $5 \cdot 42 - 8\frac{V}{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
+            \item если $5 \cdot 4 - 8\frac{V}{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
         \end{itemize}
         Решая последнее неравенство, получаем конкретное значение $V^*$: при $V < V^*$ тепло подводят, далее~— отводят.
         Тут *~--- некоторая точка между точками 2 и 3, конкретные значения надо досчитать:
-        $$V^* = V_0 \cdot \frac{5 \cdot 42}8 = \frac{42}{23} \cdot V_0 \implies P^* = 42P_0 - \frac{P_0}{V_0} V^* = \ldots = \frac{42}{23} \cdot P_0.$$
+        $$V^* = V_0 \cdot \frac{5 \cdot 4}8 = \frac52 \cdot V_0 \implies P^* = 4P_0 - \frac{P_0}{V_0} V^* = \ldots = \frac32 \cdot P_0.$$
 
         Т.е.
         чтобы вычислить $Q_+$, надо сложить количества теплоты на участке 12 и лишь части участка 23 — участке 2*,
@@ -4924,19 +4924,19 @@
 
         Теперь возвращаемся к циклу целиком и получаем:
         \begin{align*}
-        A_\text{цикл} &= \frac 12 \cdot (3P_0 - P_0) \cdot (3V_0 - V_0) = \frac{42}{23} \cdot P_0V_0, \\
+        A_\text{цикл} &= \frac 12 \cdot (3P_0 - P_0) \cdot (3V_0 - V_0) = 2 \cdot P_0V_0, \\
         A_{2*} &= \frac{P^* + 3P_0}2 \cdot (V^* - V_0)
-            = \frac{\frac{42}{23} \cdot P_0 + 3P_0}2 \cdot \cbr{\frac{42}{23} \cdot V_0 - V_0}
-            = \ldots = \frac{42}{23} \cdot P_0 V_0, \\
+            = \frac{\frac32 \cdot P_0 + 3P_0}2 \cdot \cbr{\frac52 \cdot V_0 - V_0}
+            = \ldots = \frac{27}8 \cdot P_0 V_0, \\
         \Delta U_{2*} &= \frac 32 \nu R T^* - \frac 32 \nu R T_2 = \frac 32 (P^*V^* - P_0 \cdot 3V_0)
-            = \frac 32 \cbr{\frac{42}{23} \cdot P_0 \cdot \frac{42}{23} \cdot V_0 - P_0 \cdot 3V_0}
-            = \frac{42}{23} \cdot P_0 V_0, \\
-        \Delta U_{12} &= \frac 32 \nu R T_2 - \frac 32 \nu R T_1 = \frac 32 (3P_0V_0 - P_0V_0) = \ldots = \frac{42}{23} \cdot P_0 V_0, \\
+            = \frac 32 \cbr{\frac32 \cdot P_0 \cdot \frac52 \cdot V_0 - P_0 \cdot 3V_0}
+            = \frac{15}2 \cdot P_0 V_0, \\
+        \Delta U_{12} &= \frac 32 \nu R T_2 - \frac 32 \nu R T_1 = \frac 32 (3P_0V_0 - P_0V_0) = \ldots = 3 \cdot P_0 V_0, \\
         \eta &= \frac{A_\text{цикл}}{Q_+} = \frac{A_\text{цикл}}{Q_{12} + Q_{2*}}
             = \frac{A_\text{цикл}}{A_{12} + \Delta U_{12} + A_{2*} + \Delta U_{2*}} = \\
-            &= \frac{\frac{42}{23} \cdot P_0V_0}{0 + \frac{42}{23} \cdot P_0 V_0 + \frac{42}{23} \cdot P_0 V_0 + \frac{42}{23} \cdot P_0 V_0}
-             = \frac{\frac{42}{23}}{\frac{42}{23} + \frac{42}{23} + \frac{42}{23}}
-             = \frac{42}{23} \leftarrow \text{вжух и готово!}
+            &= \frac{2 \cdot P_0V_0}{0 + 3 \cdot P_0 V_0 + \frac{27}8 \cdot P_0 V_0 + \frac{15}2 \cdot P_0 V_0}
+             = \frac{2}{3 + \frac{27}8 + \frac{15}2}
+             = \frac4{15} \leftarrow \text{вжух и готово!}
         \end{align*}
 }
 \solutionspace{360pt}
@@ -5083,7 +5083,7 @@
 
 
         Теперь рассмотрим отдельно процесс 23, к остальному вернёмся позже.
-        Уравнение этой прямой в $PV$-координатах: $P(V) = 42P_0 - \frac{P_0}{V_0} V$.
+        Уравнение этой прямой в $PV$-координатах: $P(V) = 6P_0 - \frac{P_0}{V_0} V$.
         Это значит, что при изменении объёма на $\Delta V$ давление изменится на $\Delta P = - \frac{P_0}{V_0} \Delta V$, обратите внимание на знак.
 
         Рассмотрим произвольную точку в процессе 23 и дадим процессу ещё немного свершиться, при этом объём изменится на $\Delta V$, давление — на $\Delta P$, температура (иначе бы была гипербола, а не прямая) — на $\Delta T$,
@@ -5111,19 +5111,19 @@
         Q
             &= \frac 32 (P\Delta V + V \Delta P) + P \Delta V =  \frac 52 P\Delta V + \frac 32 V \Delta P = \\
             &= \frac 52 P\Delta V + \frac 32 V \cdot \cbr{- \frac{P_0}{V_0} \Delta V} = \frac{\Delta V}2 \cdot \cbr{5P - \frac{P_0}{V_0} V} = \\
-            &= \frac{\Delta V}2 \cdot \cbr{5 \cdot \cbr{42P_0 - \frac{P_0}{V_0} V} - \frac{P_0}{V_0} V}
-             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 42 - 8\frac{V}{V_0}}.
+            &= \frac{\Delta V}2 \cdot \cbr{5 \cdot \cbr{6P_0 - \frac{P_0}{V_0} V} - \frac{P_0}{V_0} V}
+             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 6 - 8\frac{V}{V_0}}.
         \end{align*}
 
         Таком образом, знак количества теплоты $Q$ на участке 23 зависит от конкретного значения $V$:
         \begin{itemize}
             \item $\Delta V > 0$ на всём участке 23, поскольку газ расширяется,
             \item $P > 0$ — всегда, у нас идеальный газ, удары о стенки сосуда абсолютно упругие, а молекулы не взаимодействуют и поэтому давление только положительно,
-            \item если $5 \cdot 42 - 8\frac{V}{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
+            \item если $5 \cdot 6 - 8\frac{V}{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
         \end{itemize}
         Решая последнее неравенство, получаем конкретное значение $V^*$: при $V < V^*$ тепло подводят, далее~— отводят.
         Тут *~--- некоторая точка между точками 2 и 3, конкретные значения надо досчитать:
-        $$V^* = V_0 \cdot \frac{5 \cdot 42}8 = \frac{42}{23} \cdot V_0 \implies P^* = 42P_0 - \frac{P_0}{V_0} V^* = \ldots = \frac{42}{23} \cdot P_0.$$
+        $$V^* = V_0 \cdot \frac{5 \cdot 6}8 = \frac{15}4 \cdot V_0 \implies P^* = 6P_0 - \frac{P_0}{V_0} V^* = \ldots = \frac94 \cdot P_0.$$
 
         Т.е.
         чтобы вычислить $Q_+$, надо сложить количества теплоты на участке 12 и лишь части участка 23 — участке 2*,
@@ -5132,19 +5132,19 @@
 
         Теперь возвращаемся к циклу целиком и получаем:
         \begin{align*}
-        A_\text{цикл} &= \frac 12 \cdot (5P_0 - P_0) \cdot (5V_0 - V_0) = \frac{42}{23} \cdot P_0V_0, \\
+        A_\text{цикл} &= \frac 12 \cdot (5P_0 - P_0) \cdot (5V_0 - V_0) = 8 \cdot P_0V_0, \\
         A_{2*} &= \frac{P^* + 5P_0}2 \cdot (V^* - V_0)
-            = \frac{\frac{42}{23} \cdot P_0 + 5P_0}2 \cdot \cbr{\frac{42}{23} \cdot V_0 - V_0}
-            = \ldots = \frac{42}{23} \cdot P_0 V_0, \\
+            = \frac{\frac94 \cdot P_0 + 5P_0}2 \cdot \cbr{\frac{15}4 \cdot V_0 - V_0}
+            = \ldots = \frac{319}{32} \cdot P_0 V_0, \\
         \Delta U_{2*} &= \frac 32 \nu R T^* - \frac 32 \nu R T_2 = \frac 32 (P^*V^* - P_0 \cdot 5V_0)
-            = \frac 32 \cbr{\frac{42}{23} \cdot P_0 \cdot \frac{42}{23} \cdot V_0 - P_0 \cdot 5V_0}
-            = \frac{42}{23} \cdot P_0 V_0, \\
-        \Delta U_{12} &= \frac 32 \nu R T_2 - \frac 32 \nu R T_1 = \frac 32 (5P_0V_0 - P_0V_0) = \ldots = \frac{42}{23} \cdot P_0 V_0, \\
+            = \frac 32 \cbr{\frac94 \cdot P_0 \cdot \frac{15}4 \cdot V_0 - P_0 \cdot 5V_0}
+            = \frac{169}8 \cdot P_0 V_0, \\
+        \Delta U_{12} &= \frac 32 \nu R T_2 - \frac 32 \nu R T_1 = \frac 32 (5P_0V_0 - P_0V_0) = \ldots = 6 \cdot P_0 V_0, \\
         \eta &= \frac{A_\text{цикл}}{Q_+} = \frac{A_\text{цикл}}{Q_{12} + Q_{2*}}
             = \frac{A_\text{цикл}}{A_{12} + \Delta U_{12} + A_{2*} + \Delta U_{2*}} = \\
-            &= \frac{\frac{42}{23} \cdot P_0V_0}{0 + \frac{42}{23} \cdot P_0 V_0 + \frac{42}{23} \cdot P_0 V_0 + \frac{42}{23} \cdot P_0 V_0}
-             = \frac{\frac{42}{23}}{\frac{42}{23} + \frac{42}{23} + \frac{42}{23}}
-             = \frac{42}{23} \leftarrow \text{вжух и готово!}
+            &= \frac{8 \cdot P_0V_0}{0 + 6 \cdot P_0 V_0 + \frac{319}{32} \cdot P_0 V_0 + \frac{169}8 \cdot P_0 V_0}
+             = \frac{8}{6 + \frac{319}{32} + \frac{169}8}
+             = \frac{64}{169} \leftarrow \text{вжух и готово!}
         \end{align*}
 }
 \solutionspace{360pt}
@@ -5291,7 +5291,7 @@
 
 
         Теперь рассмотрим отдельно процесс 23, к остальному вернёмся позже.
-        Уравнение этой прямой в $PV$-координатах: $P(V) = 42P_0 - \frac{P_0}{V_0} V$.
+        Уравнение этой прямой в $PV$-координатах: $P(V) = 3P_0 - \frac{P_0}{V_0} V$.
         Это значит, что при изменении объёма на $\Delta V$ давление изменится на $\Delta P = - \frac{P_0}{V_0} \Delta V$, обратите внимание на знак.
 
         Рассмотрим произвольную точку в процессе 23 и дадим процессу ещё немного свершиться, при этом объём изменится на $\Delta V$, давление — на $\Delta P$, температура (иначе бы была гипербола, а не прямая) — на $\Delta T$,
@@ -5319,19 +5319,19 @@
         Q
             &= \frac 32 (P\Delta V + V \Delta P) + P \Delta V =  \frac 52 P\Delta V + \frac 32 V \Delta P = \\
             &= \frac 52 P\Delta V + \frac 32 V \cdot \cbr{- \frac{P_0}{V_0} \Delta V} = \frac{\Delta V}2 \cdot \cbr{5P - \frac{P_0}{V_0} V} = \\
-            &= \frac{\Delta V}2 \cdot \cbr{5 \cdot \cbr{42P_0 - \frac{P_0}{V_0} V} - \frac{P_0}{V_0} V}
-             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 42 - 8\frac{V}{V_0}}.
+            &= \frac{\Delta V}2 \cdot \cbr{5 \cdot \cbr{3P_0 - \frac{P_0}{V_0} V} - \frac{P_0}{V_0} V}
+             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 3 - 8\frac{V}{V_0}}.
         \end{align*}
 
         Таком образом, знак количества теплоты $Q$ на участке 23 зависит от конкретного значения $V$:
         \begin{itemize}
             \item $\Delta V > 0$ на всём участке 23, поскольку газ расширяется,
             \item $P > 0$ — всегда, у нас идеальный газ, удары о стенки сосуда абсолютно упругие, а молекулы не взаимодействуют и поэтому давление только положительно,
-            \item если $5 \cdot 42 - 8\frac{V}{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
+            \item если $5 \cdot 3 - 8\frac{V}{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
         \end{itemize}
         Решая последнее неравенство, получаем конкретное значение $V^*$: при $V < V^*$ тепло подводят, далее~— отводят.
         Тут *~--- некоторая точка между точками 2 и 3, конкретные значения надо досчитать:
-        $$V^* = V_0 \cdot \frac{5 \cdot 42}8 = \frac{42}{23} \cdot V_0 \implies P^* = 42P_0 - \frac{P_0}{V_0} V^* = \ldots = \frac{42}{23} \cdot P_0.$$
+        $$V^* = V_0 \cdot \frac{5 \cdot 3}8 = \frac{15}8 \cdot V_0 \implies P^* = 3P_0 - \frac{P_0}{V_0} V^* = \ldots = \frac98 \cdot P_0.$$
 
         Т.е.
         чтобы вычислить $Q_+$, надо сложить количества теплоты на участке 12 и лишь части участка 23 — участке 2*,
@@ -5340,19 +5340,19 @@
 
         Теперь возвращаемся к циклу целиком и получаем:
         \begin{align*}
-        A_\text{цикл} &= \frac 12 \cdot (2P_0 - P_0) \cdot (2V_0 - V_0) = \frac{42}{23} \cdot P_0V_0, \\
+        A_\text{цикл} &= \frac 12 \cdot (2P_0 - P_0) \cdot (2V_0 - V_0) = \frac12 \cdot P_0V_0, \\
         A_{2*} &= \frac{P^* + 2P_0}2 \cdot (V^* - V_0)
-            = \frac{\frac{42}{23} \cdot P_0 + 2P_0}2 \cdot \cbr{\frac{42}{23} \cdot V_0 - V_0}
-            = \ldots = \frac{42}{23} \cdot P_0 V_0, \\
+            = \frac{\frac98 \cdot P_0 + 2P_0}2 \cdot \cbr{\frac{15}8 \cdot V_0 - V_0}
+            = \ldots = \frac{175}{128} \cdot P_0 V_0, \\
         \Delta U_{2*} &= \frac 32 \nu R T^* - \frac 32 \nu R T_2 = \frac 32 (P^*V^* - P_0 \cdot 2V_0)
-            = \frac 32 \cbr{\frac{42}{23} \cdot P_0 \cdot \frac{42}{23} \cdot V_0 - P_0 \cdot 2V_0}
-            = \frac{42}{23} \cdot P_0 V_0, \\
-        \Delta U_{12} &= \frac 32 \nu R T_2 - \frac 32 \nu R T_1 = \frac 32 (2P_0V_0 - P_0V_0) = \ldots = \frac{42}{23} \cdot P_0 V_0, \\
+            = \frac 32 \cbr{\frac98 \cdot P_0 \cdot \frac{15}8 \cdot V_0 - P_0 \cdot 2V_0}
+            = \frac{97}{32} \cdot P_0 V_0, \\
+        \Delta U_{12} &= \frac 32 \nu R T_2 - \frac 32 \nu R T_1 = \frac 32 (2P_0V_0 - P_0V_0) = \ldots = \frac32 \cdot P_0 V_0, \\
         \eta &= \frac{A_\text{цикл}}{Q_+} = \frac{A_\text{цикл}}{Q_{12} + Q_{2*}}
             = \frac{A_\text{цикл}}{A_{12} + \Delta U_{12} + A_{2*} + \Delta U_{2*}} = \\
-            &= \frac{\frac{42}{23} \cdot P_0V_0}{0 + \frac{42}{23} \cdot P_0 V_0 + \frac{42}{23} \cdot P_0 V_0 + \frac{42}{23} \cdot P_0 V_0}
-             = \frac{\frac{42}{23}}{\frac{42}{23} + \frac{42}{23} + \frac{42}{23}}
-             = \frac{42}{23} \leftarrow \text{вжух и готово!}
+            &= \frac{\frac12 \cdot P_0V_0}{0 + \frac32 \cdot P_0 V_0 + \frac{175}{128} \cdot P_0 V_0 + \frac{97}{32} \cdot P_0 V_0}
+             = \frac{\frac12}{\frac32 + \frac{175}{128} + \frac{97}{32}}
+             = \frac{16}{97} \leftarrow \text{вжух и готово!}
         \end{align*}
 }
 \solutionspace{360pt}
@@ -5499,7 +5499,7 @@
 
 
         Теперь рассмотрим отдельно процесс 23, к остальному вернёмся позже.
-        Уравнение этой прямой в $PV$-координатах: $P(V) = 42P_0 - \frac{P_0}{V_0} V$.
+        Уравнение этой прямой в $PV$-координатах: $P(V) = 4P_0 - \frac{P_0}{V_0} V$.
         Это значит, что при изменении объёма на $\Delta V$ давление изменится на $\Delta P = - \frac{P_0}{V_0} \Delta V$, обратите внимание на знак.
 
         Рассмотрим произвольную точку в процессе 23 и дадим процессу ещё немного свершиться, при этом объём изменится на $\Delta V$, давление — на $\Delta P$, температура (иначе бы была гипербола, а не прямая) — на $\Delta T$,
@@ -5527,19 +5527,19 @@
         Q
             &= \frac 32 (P\Delta V + V \Delta P) + P \Delta V =  \frac 52 P\Delta V + \frac 32 V \Delta P = \\
             &= \frac 52 P\Delta V + \frac 32 V \cdot \cbr{- \frac{P_0}{V_0} \Delta V} = \frac{\Delta V}2 \cdot \cbr{5P - \frac{P_0}{V_0} V} = \\
-            &= \frac{\Delta V}2 \cdot \cbr{5 \cdot \cbr{42P_0 - \frac{P_0}{V_0} V} - \frac{P_0}{V_0} V}
-             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 42 - 8\frac{V}{V_0}}.
+            &= \frac{\Delta V}2 \cdot \cbr{5 \cdot \cbr{4P_0 - \frac{P_0}{V_0} V} - \frac{P_0}{V_0} V}
+             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 4 - 8\frac{V}{V_0}}.
         \end{align*}
 
         Таком образом, знак количества теплоты $Q$ на участке 23 зависит от конкретного значения $V$:
         \begin{itemize}
             \item $\Delta V > 0$ на всём участке 23, поскольку газ расширяется,
             \item $P > 0$ — всегда, у нас идеальный газ, удары о стенки сосуда абсолютно упругие, а молекулы не взаимодействуют и поэтому давление только положительно,
-            \item если $5 \cdot 42 - 8\frac{V}{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
+            \item если $5 \cdot 4 - 8\frac{V}{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
         \end{itemize}
         Решая последнее неравенство, получаем конкретное значение $V^*$: при $V < V^*$ тепло подводят, далее~— отводят.
         Тут *~--- некоторая точка между точками 2 и 3, конкретные значения надо досчитать:
-        $$V^* = V_0 \cdot \frac{5 \cdot 42}8 = \frac{42}{23} \cdot V_0 \implies P^* = 42P_0 - \frac{P_0}{V_0} V^* = \ldots = \frac{42}{23} \cdot P_0.$$
+        $$V^* = V_0 \cdot \frac{5 \cdot 4}8 = \frac52 \cdot V_0 \implies P^* = 4P_0 - \frac{P_0}{V_0} V^* = \ldots = \frac32 \cdot P_0.$$
 
         Т.е.
         чтобы вычислить $Q_+$, надо сложить количества теплоты на участке 12 и лишь части участка 23 — участке 2*,
@@ -5548,19 +5548,19 @@
 
         Теперь возвращаемся к циклу целиком и получаем:
         \begin{align*}
-        A_\text{цикл} &= \frac 12 \cdot (3P_0 - P_0) \cdot (3V_0 - V_0) = \frac{42}{23} \cdot P_0V_0, \\
+        A_\text{цикл} &= \frac 12 \cdot (3P_0 - P_0) \cdot (3V_0 - V_0) = 2 \cdot P_0V_0, \\
         A_{2*} &= \frac{P^* + 3P_0}2 \cdot (V^* - V_0)
-            = \frac{\frac{42}{23} \cdot P_0 + 3P_0}2 \cdot \cbr{\frac{42}{23} \cdot V_0 - V_0}
-            = \ldots = \frac{42}{23} \cdot P_0 V_0, \\
+            = \frac{\frac32 \cdot P_0 + 3P_0}2 \cdot \cbr{\frac52 \cdot V_0 - V_0}
+            = \ldots = \frac{27}8 \cdot P_0 V_0, \\
         \Delta U_{2*} &= \frac 32 \nu R T^* - \frac 32 \nu R T_2 = \frac 32 (P^*V^* - P_0 \cdot 3V_0)
-            = \frac 32 \cbr{\frac{42}{23} \cdot P_0 \cdot \frac{42}{23} \cdot V_0 - P_0 \cdot 3V_0}
-            = \frac{42}{23} \cdot P_0 V_0, \\
-        \Delta U_{12} &= \frac 32 \nu R T_2 - \frac 32 \nu R T_1 = \frac 32 (3P_0V_0 - P_0V_0) = \ldots = \frac{42}{23} \cdot P_0 V_0, \\
+            = \frac 32 \cbr{\frac32 \cdot P_0 \cdot \frac52 \cdot V_0 - P_0 \cdot 3V_0}
+            = \frac{15}2 \cdot P_0 V_0, \\
+        \Delta U_{12} &= \frac 32 \nu R T_2 - \frac 32 \nu R T_1 = \frac 32 (3P_0V_0 - P_0V_0) = \ldots = 3 \cdot P_0 V_0, \\
         \eta &= \frac{A_\text{цикл}}{Q_+} = \frac{A_\text{цикл}}{Q_{12} + Q_{2*}}
             = \frac{A_\text{цикл}}{A_{12} + \Delta U_{12} + A_{2*} + \Delta U_{2*}} = \\
-            &= \frac{\frac{42}{23} \cdot P_0V_0}{0 + \frac{42}{23} \cdot P_0 V_0 + \frac{42}{23} \cdot P_0 V_0 + \frac{42}{23} \cdot P_0 V_0}
-             = \frac{\frac{42}{23}}{\frac{42}{23} + \frac{42}{23} + \frac{42}{23}}
-             = \frac{42}{23} \leftarrow \text{вжух и готово!}
+            &= \frac{2 \cdot P_0V_0}{0 + 3 \cdot P_0 V_0 + \frac{27}8 \cdot P_0 V_0 + \frac{15}2 \cdot P_0 V_0}
+             = \frac{2}{3 + \frac{27}8 + \frac{15}2}
+             = \frac4{15} \leftarrow \text{вжух и готово!}
         \end{align*}
 }
 \solutionspace{360pt}
@@ -5707,7 +5707,7 @@
 
 
         Теперь рассмотрим отдельно процесс 23, к остальному вернёмся позже.
-        Уравнение этой прямой в $PV$-координатах: $P(V) = 42P_0 - \frac{P_0}{V_0} V$.
+        Уравнение этой прямой в $PV$-координатах: $P(V) = 6P_0 - \frac{P_0}{V_0} V$.
         Это значит, что при изменении объёма на $\Delta V$ давление изменится на $\Delta P = - \frac{P_0}{V_0} \Delta V$, обратите внимание на знак.
 
         Рассмотрим произвольную точку в процессе 23 и дадим процессу ещё немного свершиться, при этом объём изменится на $\Delta V$, давление — на $\Delta P$, температура (иначе бы была гипербола, а не прямая) — на $\Delta T$,
@@ -5735,19 +5735,19 @@
         Q
             &= \frac 32 (P\Delta V + V \Delta P) + P \Delta V =  \frac 52 P\Delta V + \frac 32 V \Delta P = \\
             &= \frac 52 P\Delta V + \frac 32 V \cdot \cbr{- \frac{P_0}{V_0} \Delta V} = \frac{\Delta V}2 \cdot \cbr{5P - \frac{P_0}{V_0} V} = \\
-            &= \frac{\Delta V}2 \cdot \cbr{5 \cdot \cbr{42P_0 - \frac{P_0}{V_0} V} - \frac{P_0}{V_0} V}
-             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 42 - 8\frac{V}{V_0}}.
+            &= \frac{\Delta V}2 \cdot \cbr{5 \cdot \cbr{6P_0 - \frac{P_0}{V_0} V} - \frac{P_0}{V_0} V}
+             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 6 - 8\frac{V}{V_0}}.
         \end{align*}
 
         Таком образом, знак количества теплоты $Q$ на участке 23 зависит от конкретного значения $V$:
         \begin{itemize}
             \item $\Delta V > 0$ на всём участке 23, поскольку газ расширяется,
             \item $P > 0$ — всегда, у нас идеальный газ, удары о стенки сосуда абсолютно упругие, а молекулы не взаимодействуют и поэтому давление только положительно,
-            \item если $5 \cdot 42 - 8\frac{V}{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
+            \item если $5 \cdot 6 - 8\frac{V}{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
         \end{itemize}
         Решая последнее неравенство, получаем конкретное значение $V^*$: при $V < V^*$ тепло подводят, далее~— отводят.
         Тут *~--- некоторая точка между точками 2 и 3, конкретные значения надо досчитать:
-        $$V^* = V_0 \cdot \frac{5 \cdot 42}8 = \frac{42}{23} \cdot V_0 \implies P^* = 42P_0 - \frac{P_0}{V_0} V^* = \ldots = \frac{42}{23} \cdot P_0.$$
+        $$V^* = V_0 \cdot \frac{5 \cdot 6}8 = \frac{15}4 \cdot V_0 \implies P^* = 6P_0 - \frac{P_0}{V_0} V^* = \ldots = \frac94 \cdot P_0.$$
 
         Т.е.
         чтобы вычислить $Q_+$, надо сложить количества теплоты на участке 12 и лишь части участка 23 — участке 2*,
@@ -5756,19 +5756,19 @@
 
         Теперь возвращаемся к циклу целиком и получаем:
         \begin{align*}
-        A_\text{цикл} &= \frac 12 \cdot (5P_0 - P_0) \cdot (5V_0 - V_0) = \frac{42}{23} \cdot P_0V_0, \\
+        A_\text{цикл} &= \frac 12 \cdot (5P_0 - P_0) \cdot (5V_0 - V_0) = 8 \cdot P_0V_0, \\
         A_{2*} &= \frac{P^* + 5P_0}2 \cdot (V^* - V_0)
-            = \frac{\frac{42}{23} \cdot P_0 + 5P_0}2 \cdot \cbr{\frac{42}{23} \cdot V_0 - V_0}
-            = \ldots = \frac{42}{23} \cdot P_0 V_0, \\
+            = \frac{\frac94 \cdot P_0 + 5P_0}2 \cdot \cbr{\frac{15}4 \cdot V_0 - V_0}
+            = \ldots = \frac{319}{32} \cdot P_0 V_0, \\
         \Delta U_{2*} &= \frac 32 \nu R T^* - \frac 32 \nu R T_2 = \frac 32 (P^*V^* - P_0 \cdot 5V_0)
-            = \frac 32 \cbr{\frac{42}{23} \cdot P_0 \cdot \frac{42}{23} \cdot V_0 - P_0 \cdot 5V_0}
-            = \frac{42}{23} \cdot P_0 V_0, \\
-        \Delta U_{12} &= \frac 32 \nu R T_2 - \frac 32 \nu R T_1 = \frac 32 (5P_0V_0 - P_0V_0) = \ldots = \frac{42}{23} \cdot P_0 V_0, \\
+            = \frac 32 \cbr{\frac94 \cdot P_0 \cdot \frac{15}4 \cdot V_0 - P_0 \cdot 5V_0}
+            = \frac{169}8 \cdot P_0 V_0, \\
+        \Delta U_{12} &= \frac 32 \nu R T_2 - \frac 32 \nu R T_1 = \frac 32 (5P_0V_0 - P_0V_0) = \ldots = 6 \cdot P_0 V_0, \\
         \eta &= \frac{A_\text{цикл}}{Q_+} = \frac{A_\text{цикл}}{Q_{12} + Q_{2*}}
             = \frac{A_\text{цикл}}{A_{12} + \Delta U_{12} + A_{2*} + \Delta U_{2*}} = \\
-            &= \frac{\frac{42}{23} \cdot P_0V_0}{0 + \frac{42}{23} \cdot P_0 V_0 + \frac{42}{23} \cdot P_0 V_0 + \frac{42}{23} \cdot P_0 V_0}
-             = \frac{\frac{42}{23}}{\frac{42}{23} + \frac{42}{23} + \frac{42}{23}}
-             = \frac{42}{23} \leftarrow \text{вжух и готово!}
+            &= \frac{8 \cdot P_0V_0}{0 + 6 \cdot P_0 V_0 + \frac{319}{32} \cdot P_0 V_0 + \frac{169}8 \cdot P_0 V_0}
+             = \frac{8}{6 + \frac{319}{32} + \frac{169}8}
+             = \frac{64}{169} \leftarrow \text{вжух и готово!}
         \end{align*}
 }
 \solutionspace{360pt}
@@ -5915,7 +5915,7 @@
 
 
         Теперь рассмотрим отдельно процесс 23, к остальному вернёмся позже.
-        Уравнение этой прямой в $PV$-координатах: $P(V) = 42P_0 - \frac{P_0}{V_0} V$.
+        Уравнение этой прямой в $PV$-координатах: $P(V) = 4P_0 - \frac{P_0}{V_0} V$.
         Это значит, что при изменении объёма на $\Delta V$ давление изменится на $\Delta P = - \frac{P_0}{V_0} \Delta V$, обратите внимание на знак.
 
         Рассмотрим произвольную точку в процессе 23 и дадим процессу ещё немного свершиться, при этом объём изменится на $\Delta V$, давление — на $\Delta P$, температура (иначе бы была гипербола, а не прямая) — на $\Delta T$,
@@ -5943,19 +5943,19 @@
         Q
             &= \frac 32 (P\Delta V + V \Delta P) + P \Delta V =  \frac 52 P\Delta V + \frac 32 V \Delta P = \\
             &= \frac 52 P\Delta V + \frac 32 V \cdot \cbr{- \frac{P_0}{V_0} \Delta V} = \frac{\Delta V}2 \cdot \cbr{5P - \frac{P_0}{V_0} V} = \\
-            &= \frac{\Delta V}2 \cdot \cbr{5 \cdot \cbr{42P_0 - \frac{P_0}{V_0} V} - \frac{P_0}{V_0} V}
-             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 42 - 8\frac{V}{V_0}}.
+            &= \frac{\Delta V}2 \cdot \cbr{5 \cdot \cbr{4P_0 - \frac{P_0}{V_0} V} - \frac{P_0}{V_0} V}
+             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 4 - 8\frac{V}{V_0}}.
         \end{align*}
 
         Таком образом, знак количества теплоты $Q$ на участке 23 зависит от конкретного значения $V$:
         \begin{itemize}
             \item $\Delta V > 0$ на всём участке 23, поскольку газ расширяется,
             \item $P > 0$ — всегда, у нас идеальный газ, удары о стенки сосуда абсолютно упругие, а молекулы не взаимодействуют и поэтому давление только положительно,
-            \item если $5 \cdot 42 - 8\frac{V}{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
+            \item если $5 \cdot 4 - 8\frac{V}{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
         \end{itemize}
         Решая последнее неравенство, получаем конкретное значение $V^*$: при $V < V^*$ тепло подводят, далее~— отводят.
         Тут *~--- некоторая точка между точками 2 и 3, конкретные значения надо досчитать:
-        $$V^* = V_0 \cdot \frac{5 \cdot 42}8 = \frac{42}{23} \cdot V_0 \implies P^* = 42P_0 - \frac{P_0}{V_0} V^* = \ldots = \frac{42}{23} \cdot P_0.$$
+        $$V^* = V_0 \cdot \frac{5 \cdot 4}8 = \frac52 \cdot V_0 \implies P^* = 4P_0 - \frac{P_0}{V_0} V^* = \ldots = \frac32 \cdot P_0.$$
 
         Т.е.
         чтобы вычислить $Q_+$, надо сложить количества теплоты на участке 12 и лишь части участка 23 — участке 2*,
@@ -5964,19 +5964,19 @@
 
         Теперь возвращаемся к циклу целиком и получаем:
         \begin{align*}
-        A_\text{цикл} &= \frac 12 \cdot (3P_0 - P_0) \cdot (3V_0 - V_0) = \frac{42}{23} \cdot P_0V_0, \\
+        A_\text{цикл} &= \frac 12 \cdot (3P_0 - P_0) \cdot (3V_0 - V_0) = 2 \cdot P_0V_0, \\
         A_{2*} &= \frac{P^* + 3P_0}2 \cdot (V^* - V_0)
-            = \frac{\frac{42}{23} \cdot P_0 + 3P_0}2 \cdot \cbr{\frac{42}{23} \cdot V_0 - V_0}
-            = \ldots = \frac{42}{23} \cdot P_0 V_0, \\
+            = \frac{\frac32 \cdot P_0 + 3P_0}2 \cdot \cbr{\frac52 \cdot V_0 - V_0}
+            = \ldots = \frac{27}8 \cdot P_0 V_0, \\
         \Delta U_{2*} &= \frac 32 \nu R T^* - \frac 32 \nu R T_2 = \frac 32 (P^*V^* - P_0 \cdot 3V_0)
-            = \frac 32 \cbr{\frac{42}{23} \cdot P_0 \cdot \frac{42}{23} \cdot V_0 - P_0 \cdot 3V_0}
-            = \frac{42}{23} \cdot P_0 V_0, \\
-        \Delta U_{12} &= \frac 32 \nu R T_2 - \frac 32 \nu R T_1 = \frac 32 (3P_0V_0 - P_0V_0) = \ldots = \frac{42}{23} \cdot P_0 V_0, \\
+            = \frac 32 \cbr{\frac32 \cdot P_0 \cdot \frac52 \cdot V_0 - P_0 \cdot 3V_0}
+            = \frac{15}2 \cdot P_0 V_0, \\
+        \Delta U_{12} &= \frac 32 \nu R T_2 - \frac 32 \nu R T_1 = \frac 32 (3P_0V_0 - P_0V_0) = \ldots = 3 \cdot P_0 V_0, \\
         \eta &= \frac{A_\text{цикл}}{Q_+} = \frac{A_\text{цикл}}{Q_{12} + Q_{2*}}
             = \frac{A_\text{цикл}}{A_{12} + \Delta U_{12} + A_{2*} + \Delta U_{2*}} = \\
-            &= \frac{\frac{42}{23} \cdot P_0V_0}{0 + \frac{42}{23} \cdot P_0 V_0 + \frac{42}{23} \cdot P_0 V_0 + \frac{42}{23} \cdot P_0 V_0}
-             = \frac{\frac{42}{23}}{\frac{42}{23} + \frac{42}{23} + \frac{42}{23}}
-             = \frac{42}{23} \leftarrow \text{вжух и готово!}
+            &= \frac{2 \cdot P_0V_0}{0 + 3 \cdot P_0 V_0 + \frac{27}8 \cdot P_0 V_0 + \frac{15}2 \cdot P_0 V_0}
+             = \frac{2}{3 + \frac{27}8 + \frac{15}2}
+             = \frac4{15} \leftarrow \text{вжух и готово!}
         \end{align*}
 }
 \solutionspace{360pt}
@@ -6123,7 +6123,7 @@
 
 
         Теперь рассмотрим отдельно процесс 23, к остальному вернёмся позже.
-        Уравнение этой прямой в $PV$-координатах: $P(V) = 42P_0 - \frac{P_0}{V_0} V$.
+        Уравнение этой прямой в $PV$-координатах: $P(V) = 5P_0 - \frac{P_0}{V_0} V$.
         Это значит, что при изменении объёма на $\Delta V$ давление изменится на $\Delta P = - \frac{P_0}{V_0} \Delta V$, обратите внимание на знак.
 
         Рассмотрим произвольную точку в процессе 23 и дадим процессу ещё немного свершиться, при этом объём изменится на $\Delta V$, давление — на $\Delta P$, температура (иначе бы была гипербола, а не прямая) — на $\Delta T$,
@@ -6151,19 +6151,19 @@
         Q
             &= \frac 32 (P\Delta V + V \Delta P) + P \Delta V =  \frac 52 P\Delta V + \frac 32 V \Delta P = \\
             &= \frac 52 P\Delta V + \frac 32 V \cdot \cbr{- \frac{P_0}{V_0} \Delta V} = \frac{\Delta V}2 \cdot \cbr{5P - \frac{P_0}{V_0} V} = \\
-            &= \frac{\Delta V}2 \cdot \cbr{5 \cdot \cbr{42P_0 - \frac{P_0}{V_0} V} - \frac{P_0}{V_0} V}
-             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 42 - 8\frac{V}{V_0}}.
+            &= \frac{\Delta V}2 \cdot \cbr{5 \cdot \cbr{5P_0 - \frac{P_0}{V_0} V} - \frac{P_0}{V_0} V}
+             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 5 - 8\frac{V}{V_0}}.
         \end{align*}
 
         Таком образом, знак количества теплоты $Q$ на участке 23 зависит от конкретного значения $V$:
         \begin{itemize}
             \item $\Delta V > 0$ на всём участке 23, поскольку газ расширяется,
             \item $P > 0$ — всегда, у нас идеальный газ, удары о стенки сосуда абсолютно упругие, а молекулы не взаимодействуют и поэтому давление только положительно,
-            \item если $5 \cdot 42 - 8\frac{V}{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
+            \item если $5 \cdot 5 - 8\frac{V}{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
         \end{itemize}
         Решая последнее неравенство, получаем конкретное значение $V^*$: при $V < V^*$ тепло подводят, далее~— отводят.
         Тут *~--- некоторая точка между точками 2 и 3, конкретные значения надо досчитать:
-        $$V^* = V_0 \cdot \frac{5 \cdot 42}8 = \frac{42}{23} \cdot V_0 \implies P^* = 42P_0 - \frac{P_0}{V_0} V^* = \ldots = \frac{42}{23} \cdot P_0.$$
+        $$V^* = V_0 \cdot \frac{5 \cdot 5}8 = \frac{25}8 \cdot V_0 \implies P^* = 5P_0 - \frac{P_0}{V_0} V^* = \ldots = \frac{15}8 \cdot P_0.$$
 
         Т.е.
         чтобы вычислить $Q_+$, надо сложить количества теплоты на участке 12 и лишь части участка 23 — участке 2*,
@@ -6172,19 +6172,19 @@
 
         Теперь возвращаемся к циклу целиком и получаем:
         \begin{align*}
-        A_\text{цикл} &= \frac 12 \cdot (4P_0 - P_0) \cdot (4V_0 - V_0) = \frac{42}{23} \cdot P_0V_0, \\
+        A_\text{цикл} &= \frac 12 \cdot (4P_0 - P_0) \cdot (4V_0 - V_0) = \frac92 \cdot P_0V_0, \\
         A_{2*} &= \frac{P^* + 4P_0}2 \cdot (V^* - V_0)
-            = \frac{\frac{42}{23} \cdot P_0 + 4P_0}2 \cdot \cbr{\frac{42}{23} \cdot V_0 - V_0}
-            = \ldots = \frac{42}{23} \cdot P_0 V_0, \\
+            = \frac{\frac{15}8 \cdot P_0 + 4P_0}2 \cdot \cbr{\frac{25}8 \cdot V_0 - V_0}
+            = \ldots = \frac{799}{128} \cdot P_0 V_0, \\
         \Delta U_{2*} &= \frac 32 \nu R T^* - \frac 32 \nu R T_2 = \frac 32 (P^*V^* - P_0 \cdot 4V_0)
-            = \frac 32 \cbr{\frac{42}{23} \cdot P_0 \cdot \frac{42}{23} \cdot V_0 - P_0 \cdot 4V_0}
-            = \frac{42}{23} \cdot P_0 V_0, \\
-        \Delta U_{12} &= \frac 32 \nu R T_2 - \frac 32 \nu R T_1 = \frac 32 (4P_0V_0 - P_0V_0) = \ldots = \frac{42}{23} \cdot P_0 V_0, \\
+            = \frac 32 \cbr{\frac{15}8 \cdot P_0 \cdot \frac{25}8 \cdot V_0 - P_0 \cdot 4V_0}
+            = \frac{433}{32} \cdot P_0 V_0, \\
+        \Delta U_{12} &= \frac 32 \nu R T_2 - \frac 32 \nu R T_1 = \frac 32 (4P_0V_0 - P_0V_0) = \ldots = \frac92 \cdot P_0 V_0, \\
         \eta &= \frac{A_\text{цикл}}{Q_+} = \frac{A_\text{цикл}}{Q_{12} + Q_{2*}}
             = \frac{A_\text{цикл}}{A_{12} + \Delta U_{12} + A_{2*} + \Delta U_{2*}} = \\
-            &= \frac{\frac{42}{23} \cdot P_0V_0}{0 + \frac{42}{23} \cdot P_0 V_0 + \frac{42}{23} \cdot P_0 V_0 + \frac{42}{23} \cdot P_0 V_0}
-             = \frac{\frac{42}{23}}{\frac{42}{23} + \frac{42}{23} + \frac{42}{23}}
-             = \frac{42}{23} \leftarrow \text{вжух и готово!}
+            &= \frac{\frac92 \cdot P_0V_0}{0 + \frac92 \cdot P_0 V_0 + \frac{799}{128} \cdot P_0 V_0 + \frac{433}{32} \cdot P_0 V_0}
+             = \frac{\frac92}{\frac92 + \frac{799}{128} + \frac{433}{32}}
+             = \frac{144}{433} \leftarrow \text{вжух и готово!}
         \end{align*}
 }
 \solutionspace{360pt}
@@ -6331,7 +6331,7 @@
 
 
         Теперь рассмотрим отдельно процесс 23, к остальному вернёмся позже.
-        Уравнение этой прямой в $PV$-координатах: $P(V) = 42P_0 - \frac{P_0}{V_0} V$.
+        Уравнение этой прямой в $PV$-координатах: $P(V) = 4P_0 - \frac{P_0}{V_0} V$.
         Это значит, что при изменении объёма на $\Delta V$ давление изменится на $\Delta P = - \frac{P_0}{V_0} \Delta V$, обратите внимание на знак.
 
         Рассмотрим произвольную точку в процессе 23 и дадим процессу ещё немного свершиться, при этом объём изменится на $\Delta V$, давление — на $\Delta P$, температура (иначе бы была гипербола, а не прямая) — на $\Delta T$,
@@ -6359,19 +6359,19 @@
         Q
             &= \frac 32 (P\Delta V + V \Delta P) + P \Delta V =  \frac 52 P\Delta V + \frac 32 V \Delta P = \\
             &= \frac 52 P\Delta V + \frac 32 V \cdot \cbr{- \frac{P_0}{V_0} \Delta V} = \frac{\Delta V}2 \cdot \cbr{5P - \frac{P_0}{V_0} V} = \\
-            &= \frac{\Delta V}2 \cdot \cbr{5 \cdot \cbr{42P_0 - \frac{P_0}{V_0} V} - \frac{P_0}{V_0} V}
-             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 42 - 8\frac{V}{V_0}}.
+            &= \frac{\Delta V}2 \cdot \cbr{5 \cdot \cbr{4P_0 - \frac{P_0}{V_0} V} - \frac{P_0}{V_0} V}
+             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 4 - 8\frac{V}{V_0}}.
         \end{align*}
 
         Таком образом, знак количества теплоты $Q$ на участке 23 зависит от конкретного значения $V$:
         \begin{itemize}
             \item $\Delta V > 0$ на всём участке 23, поскольку газ расширяется,
             \item $P > 0$ — всегда, у нас идеальный газ, удары о стенки сосуда абсолютно упругие, а молекулы не взаимодействуют и поэтому давление только положительно,
-            \item если $5 \cdot 42 - 8\frac{V}{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
+            \item если $5 \cdot 4 - 8\frac{V}{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
         \end{itemize}
         Решая последнее неравенство, получаем конкретное значение $V^*$: при $V < V^*$ тепло подводят, далее~— отводят.
         Тут *~--- некоторая точка между точками 2 и 3, конкретные значения надо досчитать:
-        $$V^* = V_0 \cdot \frac{5 \cdot 42}8 = \frac{42}{23} \cdot V_0 \implies P^* = 42P_0 - \frac{P_0}{V_0} V^* = \ldots = \frac{42}{23} \cdot P_0.$$
+        $$V^* = V_0 \cdot \frac{5 \cdot 4}8 = \frac52 \cdot V_0 \implies P^* = 4P_0 - \frac{P_0}{V_0} V^* = \ldots = \frac32 \cdot P_0.$$
 
         Т.е.
         чтобы вычислить $Q_+$, надо сложить количества теплоты на участке 12 и лишь части участка 23 — участке 2*,
@@ -6380,19 +6380,19 @@
 
         Теперь возвращаемся к циклу целиком и получаем:
         \begin{align*}
-        A_\text{цикл} &= \frac 12 \cdot (3P_0 - P_0) \cdot (3V_0 - V_0) = \frac{42}{23} \cdot P_0V_0, \\
+        A_\text{цикл} &= \frac 12 \cdot (3P_0 - P_0) \cdot (3V_0 - V_0) = 2 \cdot P_0V_0, \\
         A_{2*} &= \frac{P^* + 3P_0}2 \cdot (V^* - V_0)
-            = \frac{\frac{42}{23} \cdot P_0 + 3P_0}2 \cdot \cbr{\frac{42}{23} \cdot V_0 - V_0}
-            = \ldots = \frac{42}{23} \cdot P_0 V_0, \\
+            = \frac{\frac32 \cdot P_0 + 3P_0}2 \cdot \cbr{\frac52 \cdot V_0 - V_0}
+            = \ldots = \frac{27}8 \cdot P_0 V_0, \\
         \Delta U_{2*} &= \frac 32 \nu R T^* - \frac 32 \nu R T_2 = \frac 32 (P^*V^* - P_0 \cdot 3V_0)
-            = \frac 32 \cbr{\frac{42}{23} \cdot P_0 \cdot \frac{42}{23} \cdot V_0 - P_0 \cdot 3V_0}
-            = \frac{42}{23} \cdot P_0 V_0, \\
-        \Delta U_{12} &= \frac 32 \nu R T_2 - \frac 32 \nu R T_1 = \frac 32 (3P_0V_0 - P_0V_0) = \ldots = \frac{42}{23} \cdot P_0 V_0, \\
+            = \frac 32 \cbr{\frac32 \cdot P_0 \cdot \frac52 \cdot V_0 - P_0 \cdot 3V_0}
+            = \frac{15}2 \cdot P_0 V_0, \\
+        \Delta U_{12} &= \frac 32 \nu R T_2 - \frac 32 \nu R T_1 = \frac 32 (3P_0V_0 - P_0V_0) = \ldots = 3 \cdot P_0 V_0, \\
         \eta &= \frac{A_\text{цикл}}{Q_+} = \frac{A_\text{цикл}}{Q_{12} + Q_{2*}}
             = \frac{A_\text{цикл}}{A_{12} + \Delta U_{12} + A_{2*} + \Delta U_{2*}} = \\
-            &= \frac{\frac{42}{23} \cdot P_0V_0}{0 + \frac{42}{23} \cdot P_0 V_0 + \frac{42}{23} \cdot P_0 V_0 + \frac{42}{23} \cdot P_0 V_0}
-             = \frac{\frac{42}{23}}{\frac{42}{23} + \frac{42}{23} + \frac{42}{23}}
-             = \frac{42}{23} \leftarrow \text{вжух и готово!}
+            &= \frac{2 \cdot P_0V_0}{0 + 3 \cdot P_0 V_0 + \frac{27}8 \cdot P_0 V_0 + \frac{15}2 \cdot P_0 V_0}
+             = \frac{2}{3 + \frac{27}8 + \frac{15}2}
+             = \frac4{15} \leftarrow \text{вжух и готово!}
         \end{align*}
 }
 \solutionspace{360pt}
@@ -6539,7 +6539,7 @@
 
 
         Теперь рассмотрим отдельно процесс 23, к остальному вернёмся позже.
-        Уравнение этой прямой в $PV$-координатах: $P(V) = 42P_0 - \frac{P_0}{V_0} V$.
+        Уравнение этой прямой в $PV$-координатах: $P(V) = 3P_0 - \frac{P_0}{V_0} V$.
         Это значит, что при изменении объёма на $\Delta V$ давление изменится на $\Delta P = - \frac{P_0}{V_0} \Delta V$, обратите внимание на знак.
 
         Рассмотрим произвольную точку в процессе 23 и дадим процессу ещё немного свершиться, при этом объём изменится на $\Delta V$, давление — на $\Delta P$, температура (иначе бы была гипербола, а не прямая) — на $\Delta T$,
@@ -6567,19 +6567,19 @@
         Q
             &= \frac 32 (P\Delta V + V \Delta P) + P \Delta V =  \frac 52 P\Delta V + \frac 32 V \Delta P = \\
             &= \frac 52 P\Delta V + \frac 32 V \cdot \cbr{- \frac{P_0}{V_0} \Delta V} = \frac{\Delta V}2 \cdot \cbr{5P - \frac{P_0}{V_0} V} = \\
-            &= \frac{\Delta V}2 \cdot \cbr{5 \cdot \cbr{42P_0 - \frac{P_0}{V_0} V} - \frac{P_0}{V_0} V}
-             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 42 - 8\frac{V}{V_0}}.
+            &= \frac{\Delta V}2 \cdot \cbr{5 \cdot \cbr{3P_0 - \frac{P_0}{V_0} V} - \frac{P_0}{V_0} V}
+             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 3 - 8\frac{V}{V_0}}.
         \end{align*}
 
         Таком образом, знак количества теплоты $Q$ на участке 23 зависит от конкретного значения $V$:
         \begin{itemize}
             \item $\Delta V > 0$ на всём участке 23, поскольку газ расширяется,
             \item $P > 0$ — всегда, у нас идеальный газ, удары о стенки сосуда абсолютно упругие, а молекулы не взаимодействуют и поэтому давление только положительно,
-            \item если $5 \cdot 42 - 8\frac{V}{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
+            \item если $5 \cdot 3 - 8\frac{V}{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
         \end{itemize}
         Решая последнее неравенство, получаем конкретное значение $V^*$: при $V < V^*$ тепло подводят, далее~— отводят.
         Тут *~--- некоторая точка между точками 2 и 3, конкретные значения надо досчитать:
-        $$V^* = V_0 \cdot \frac{5 \cdot 42}8 = \frac{42}{23} \cdot V_0 \implies P^* = 42P_0 - \frac{P_0}{V_0} V^* = \ldots = \frac{42}{23} \cdot P_0.$$
+        $$V^* = V_0 \cdot \frac{5 \cdot 3}8 = \frac{15}8 \cdot V_0 \implies P^* = 3P_0 - \frac{P_0}{V_0} V^* = \ldots = \frac98 \cdot P_0.$$
 
         Т.е.
         чтобы вычислить $Q_+$, надо сложить количества теплоты на участке 12 и лишь части участка 23 — участке 2*,
@@ -6588,19 +6588,19 @@
 
         Теперь возвращаемся к циклу целиком и получаем:
         \begin{align*}
-        A_\text{цикл} &= \frac 12 \cdot (2P_0 - P_0) \cdot (2V_0 - V_0) = \frac{42}{23} \cdot P_0V_0, \\
+        A_\text{цикл} &= \frac 12 \cdot (2P_0 - P_0) \cdot (2V_0 - V_0) = \frac12 \cdot P_0V_0, \\
         A_{2*} &= \frac{P^* + 2P_0}2 \cdot (V^* - V_0)
-            = \frac{\frac{42}{23} \cdot P_0 + 2P_0}2 \cdot \cbr{\frac{42}{23} \cdot V_0 - V_0}
-            = \ldots = \frac{42}{23} \cdot P_0 V_0, \\
+            = \frac{\frac98 \cdot P_0 + 2P_0}2 \cdot \cbr{\frac{15}8 \cdot V_0 - V_0}
+            = \ldots = \frac{175}{128} \cdot P_0 V_0, \\
         \Delta U_{2*} &= \frac 32 \nu R T^* - \frac 32 \nu R T_2 = \frac 32 (P^*V^* - P_0 \cdot 2V_0)
-            = \frac 32 \cbr{\frac{42}{23} \cdot P_0 \cdot \frac{42}{23} \cdot V_0 - P_0 \cdot 2V_0}
-            = \frac{42}{23} \cdot P_0 V_0, \\
-        \Delta U_{12} &= \frac 32 \nu R T_2 - \frac 32 \nu R T_1 = \frac 32 (2P_0V_0 - P_0V_0) = \ldots = \frac{42}{23} \cdot P_0 V_0, \\
+            = \frac 32 \cbr{\frac98 \cdot P_0 \cdot \frac{15}8 \cdot V_0 - P_0 \cdot 2V_0}
+            = \frac{97}{32} \cdot P_0 V_0, \\
+        \Delta U_{12} &= \frac 32 \nu R T_2 - \frac 32 \nu R T_1 = \frac 32 (2P_0V_0 - P_0V_0) = \ldots = \frac32 \cdot P_0 V_0, \\
         \eta &= \frac{A_\text{цикл}}{Q_+} = \frac{A_\text{цикл}}{Q_{12} + Q_{2*}}
             = \frac{A_\text{цикл}}{A_{12} + \Delta U_{12} + A_{2*} + \Delta U_{2*}} = \\
-            &= \frac{\frac{42}{23} \cdot P_0V_0}{0 + \frac{42}{23} \cdot P_0 V_0 + \frac{42}{23} \cdot P_0 V_0 + \frac{42}{23} \cdot P_0 V_0}
-             = \frac{\frac{42}{23}}{\frac{42}{23} + \frac{42}{23} + \frac{42}{23}}
-             = \frac{42}{23} \leftarrow \text{вжух и готово!}
+            &= \frac{\frac12 \cdot P_0V_0}{0 + \frac32 \cdot P_0 V_0 + \frac{175}{128} \cdot P_0 V_0 + \frac{97}{32} \cdot P_0 V_0}
+             = \frac{\frac12}{\frac32 + \frac{175}{128} + \frac{97}{32}}
+             = \frac{16}{97} \leftarrow \text{вжух и готово!}
         \end{align*}
 }
 \solutionspace{360pt}
@@ -6747,7 +6747,7 @@
 
 
         Теперь рассмотрим отдельно процесс 23, к остальному вернёмся позже.
-        Уравнение этой прямой в $PV$-координатах: $P(V) = 42P_0 - \frac{P_0}{V_0} V$.
+        Уравнение этой прямой в $PV$-координатах: $P(V) = 6P_0 - \frac{P_0}{V_0} V$.
         Это значит, что при изменении объёма на $\Delta V$ давление изменится на $\Delta P = - \frac{P_0}{V_0} \Delta V$, обратите внимание на знак.
 
         Рассмотрим произвольную точку в процессе 23 и дадим процессу ещё немного свершиться, при этом объём изменится на $\Delta V$, давление — на $\Delta P$, температура (иначе бы была гипербола, а не прямая) — на $\Delta T$,
@@ -6775,19 +6775,19 @@
         Q
             &= \frac 32 (P\Delta V + V \Delta P) + P \Delta V =  \frac 52 P\Delta V + \frac 32 V \Delta P = \\
             &= \frac 52 P\Delta V + \frac 32 V \cdot \cbr{- \frac{P_0}{V_0} \Delta V} = \frac{\Delta V}2 \cdot \cbr{5P - \frac{P_0}{V_0} V} = \\
-            &= \frac{\Delta V}2 \cdot \cbr{5 \cdot \cbr{42P_0 - \frac{P_0}{V_0} V} - \frac{P_0}{V_0} V}
-             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 42 - 8\frac{V}{V_0}}.
+            &= \frac{\Delta V}2 \cdot \cbr{5 \cdot \cbr{6P_0 - \frac{P_0}{V_0} V} - \frac{P_0}{V_0} V}
+             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 6 - 8\frac{V}{V_0}}.
         \end{align*}
 
         Таком образом, знак количества теплоты $Q$ на участке 23 зависит от конкретного значения $V$:
         \begin{itemize}
             \item $\Delta V > 0$ на всём участке 23, поскольку газ расширяется,
             \item $P > 0$ — всегда, у нас идеальный газ, удары о стенки сосуда абсолютно упругие, а молекулы не взаимодействуют и поэтому давление только положительно,
-            \item если $5 \cdot 42 - 8\frac{V}{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
+            \item если $5 \cdot 6 - 8\frac{V}{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
         \end{itemize}
         Решая последнее неравенство, получаем конкретное значение $V^*$: при $V < V^*$ тепло подводят, далее~— отводят.
         Тут *~--- некоторая точка между точками 2 и 3, конкретные значения надо досчитать:
-        $$V^* = V_0 \cdot \frac{5 \cdot 42}8 = \frac{42}{23} \cdot V_0 \implies P^* = 42P_0 - \frac{P_0}{V_0} V^* = \ldots = \frac{42}{23} \cdot P_0.$$
+        $$V^* = V_0 \cdot \frac{5 \cdot 6}8 = \frac{15}4 \cdot V_0 \implies P^* = 6P_0 - \frac{P_0}{V_0} V^* = \ldots = \frac94 \cdot P_0.$$
 
         Т.е.
         чтобы вычислить $Q_+$, надо сложить количества теплоты на участке 12 и лишь части участка 23 — участке 2*,
@@ -6796,19 +6796,19 @@
 
         Теперь возвращаемся к циклу целиком и получаем:
         \begin{align*}
-        A_\text{цикл} &= \frac 12 \cdot (5P_0 - P_0) \cdot (5V_0 - V_0) = \frac{42}{23} \cdot P_0V_0, \\
+        A_\text{цикл} &= \frac 12 \cdot (5P_0 - P_0) \cdot (5V_0 - V_0) = 8 \cdot P_0V_0, \\
         A_{2*} &= \frac{P^* + 5P_0}2 \cdot (V^* - V_0)
-            = \frac{\frac{42}{23} \cdot P_0 + 5P_0}2 \cdot \cbr{\frac{42}{23} \cdot V_0 - V_0}
-            = \ldots = \frac{42}{23} \cdot P_0 V_0, \\
+            = \frac{\frac94 \cdot P_0 + 5P_0}2 \cdot \cbr{\frac{15}4 \cdot V_0 - V_0}
+            = \ldots = \frac{319}{32} \cdot P_0 V_0, \\
         \Delta U_{2*} &= \frac 32 \nu R T^* - \frac 32 \nu R T_2 = \frac 32 (P^*V^* - P_0 \cdot 5V_0)
-            = \frac 32 \cbr{\frac{42}{23} \cdot P_0 \cdot \frac{42}{23} \cdot V_0 - P_0 \cdot 5V_0}
-            = \frac{42}{23} \cdot P_0 V_0, \\
-        \Delta U_{12} &= \frac 32 \nu R T_2 - \frac 32 \nu R T_1 = \frac 32 (5P_0V_0 - P_0V_0) = \ldots = \frac{42}{23} \cdot P_0 V_0, \\
+            = \frac 32 \cbr{\frac94 \cdot P_0 \cdot \frac{15}4 \cdot V_0 - P_0 \cdot 5V_0}
+            = \frac{169}8 \cdot P_0 V_0, \\
+        \Delta U_{12} &= \frac 32 \nu R T_2 - \frac 32 \nu R T_1 = \frac 32 (5P_0V_0 - P_0V_0) = \ldots = 6 \cdot P_0 V_0, \\
         \eta &= \frac{A_\text{цикл}}{Q_+} = \frac{A_\text{цикл}}{Q_{12} + Q_{2*}}
             = \frac{A_\text{цикл}}{A_{12} + \Delta U_{12} + A_{2*} + \Delta U_{2*}} = \\
-            &= \frac{\frac{42}{23} \cdot P_0V_0}{0 + \frac{42}{23} \cdot P_0 V_0 + \frac{42}{23} \cdot P_0 V_0 + \frac{42}{23} \cdot P_0 V_0}
-             = \frac{\frac{42}{23}}{\frac{42}{23} + \frac{42}{23} + \frac{42}{23}}
-             = \frac{42}{23} \leftarrow \text{вжух и готово!}
+            &= \frac{8 \cdot P_0V_0}{0 + 6 \cdot P_0 V_0 + \frac{319}{32} \cdot P_0 V_0 + \frac{169}8 \cdot P_0 V_0}
+             = \frac{8}{6 + \frac{319}{32} + \frac{169}8}
+             = \frac{64}{169} \leftarrow \text{вжух и готово!}
         \end{align*}
 }
 \solutionspace{360pt}
@@ -6955,7 +6955,7 @@
 
 
         Теперь рассмотрим отдельно процесс 23, к остальному вернёмся позже.
-        Уравнение этой прямой в $PV$-координатах: $P(V) = 42P_0 - \frac{P_0}{V_0} V$.
+        Уравнение этой прямой в $PV$-координатах: $P(V) = 3P_0 - \frac{P_0}{V_0} V$.
         Это значит, что при изменении объёма на $\Delta V$ давление изменится на $\Delta P = - \frac{P_0}{V_0} \Delta V$, обратите внимание на знак.
 
         Рассмотрим произвольную точку в процессе 23 и дадим процессу ещё немного свершиться, при этом объём изменится на $\Delta V$, давление — на $\Delta P$, температура (иначе бы была гипербола, а не прямая) — на $\Delta T$,
@@ -6983,19 +6983,19 @@
         Q
             &= \frac 32 (P\Delta V + V \Delta P) + P \Delta V =  \frac 52 P\Delta V + \frac 32 V \Delta P = \\
             &= \frac 52 P\Delta V + \frac 32 V \cdot \cbr{- \frac{P_0}{V_0} \Delta V} = \frac{\Delta V}2 \cdot \cbr{5P - \frac{P_0}{V_0} V} = \\
-            &= \frac{\Delta V}2 \cdot \cbr{5 \cdot \cbr{42P_0 - \frac{P_0}{V_0} V} - \frac{P_0}{V_0} V}
-             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 42 - 8\frac{V}{V_0}}.
+            &= \frac{\Delta V}2 \cdot \cbr{5 \cdot \cbr{3P_0 - \frac{P_0}{V_0} V} - \frac{P_0}{V_0} V}
+             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 3 - 8\frac{V}{V_0}}.
         \end{align*}
 
         Таком образом, знак количества теплоты $Q$ на участке 23 зависит от конкретного значения $V$:
         \begin{itemize}
             \item $\Delta V > 0$ на всём участке 23, поскольку газ расширяется,
             \item $P > 0$ — всегда, у нас идеальный газ, удары о стенки сосуда абсолютно упругие, а молекулы не взаимодействуют и поэтому давление только положительно,
-            \item если $5 \cdot 42 - 8\frac{V}{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
+            \item если $5 \cdot 3 - 8\frac{V}{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
         \end{itemize}
         Решая последнее неравенство, получаем конкретное значение $V^*$: при $V < V^*$ тепло подводят, далее~— отводят.
         Тут *~--- некоторая точка между точками 2 и 3, конкретные значения надо досчитать:
-        $$V^* = V_0 \cdot \frac{5 \cdot 42}8 = \frac{42}{23} \cdot V_0 \implies P^* = 42P_0 - \frac{P_0}{V_0} V^* = \ldots = \frac{42}{23} \cdot P_0.$$
+        $$V^* = V_0 \cdot \frac{5 \cdot 3}8 = \frac{15}8 \cdot V_0 \implies P^* = 3P_0 - \frac{P_0}{V_0} V^* = \ldots = \frac98 \cdot P_0.$$
 
         Т.е.
         чтобы вычислить $Q_+$, надо сложить количества теплоты на участке 12 и лишь части участка 23 — участке 2*,
@@ -7004,19 +7004,19 @@
 
         Теперь возвращаемся к циклу целиком и получаем:
         \begin{align*}
-        A_\text{цикл} &= \frac 12 \cdot (2P_0 - P_0) \cdot (2V_0 - V_0) = \frac{42}{23} \cdot P_0V_0, \\
+        A_\text{цикл} &= \frac 12 \cdot (2P_0 - P_0) \cdot (2V_0 - V_0) = \frac12 \cdot P_0V_0, \\
         A_{2*} &= \frac{P^* + 2P_0}2 \cdot (V^* - V_0)
-            = \frac{\frac{42}{23} \cdot P_0 + 2P_0}2 \cdot \cbr{\frac{42}{23} \cdot V_0 - V_0}
-            = \ldots = \frac{42}{23} \cdot P_0 V_0, \\
+            = \frac{\frac98 \cdot P_0 + 2P_0}2 \cdot \cbr{\frac{15}8 \cdot V_0 - V_0}
+            = \ldots = \frac{175}{128} \cdot P_0 V_0, \\
         \Delta U_{2*} &= \frac 32 \nu R T^* - \frac 32 \nu R T_2 = \frac 32 (P^*V^* - P_0 \cdot 2V_0)
-            = \frac 32 \cbr{\frac{42}{23} \cdot P_0 \cdot \frac{42}{23} \cdot V_0 - P_0 \cdot 2V_0}
-            = \frac{42}{23} \cdot P_0 V_0, \\
-        \Delta U_{12} &= \frac 32 \nu R T_2 - \frac 32 \nu R T_1 = \frac 32 (2P_0V_0 - P_0V_0) = \ldots = \frac{42}{23} \cdot P_0 V_0, \\
+            = \frac 32 \cbr{\frac98 \cdot P_0 \cdot \frac{15}8 \cdot V_0 - P_0 \cdot 2V_0}
+            = \frac{97}{32} \cdot P_0 V_0, \\
+        \Delta U_{12} &= \frac 32 \nu R T_2 - \frac 32 \nu R T_1 = \frac 32 (2P_0V_0 - P_0V_0) = \ldots = \frac32 \cdot P_0 V_0, \\
         \eta &= \frac{A_\text{цикл}}{Q_+} = \frac{A_\text{цикл}}{Q_{12} + Q_{2*}}
             = \frac{A_\text{цикл}}{A_{12} + \Delta U_{12} + A_{2*} + \Delta U_{2*}} = \\
-            &= \frac{\frac{42}{23} \cdot P_0V_0}{0 + \frac{42}{23} \cdot P_0 V_0 + \frac{42}{23} \cdot P_0 V_0 + \frac{42}{23} \cdot P_0 V_0}
-             = \frac{\frac{42}{23}}{\frac{42}{23} + \frac{42}{23} + \frac{42}{23}}
-             = \frac{42}{23} \leftarrow \text{вжух и готово!}
+            &= \frac{\frac12 \cdot P_0V_0}{0 + \frac32 \cdot P_0 V_0 + \frac{175}{128} \cdot P_0 V_0 + \frac{97}{32} \cdot P_0 V_0}
+             = \frac{\frac12}{\frac32 + \frac{175}{128} + \frac{97}{32}}
+             = \frac{16}{97} \leftarrow \text{вжух и готово!}
         \end{align*}
 }
 \solutionspace{360pt}
@@ -7163,7 +7163,7 @@
 
 
         Теперь рассмотрим отдельно процесс 23, к остальному вернёмся позже.
-        Уравнение этой прямой в $PV$-координатах: $P(V) = 42P_0 - \frac{P_0}{V_0} V$.
+        Уравнение этой прямой в $PV$-координатах: $P(V) = 6P_0 - \frac{P_0}{V_0} V$.
         Это значит, что при изменении объёма на $\Delta V$ давление изменится на $\Delta P = - \frac{P_0}{V_0} \Delta V$, обратите внимание на знак.
 
         Рассмотрим произвольную точку в процессе 23 и дадим процессу ещё немного свершиться, при этом объём изменится на $\Delta V$, давление — на $\Delta P$, температура (иначе бы была гипербола, а не прямая) — на $\Delta T$,
@@ -7191,19 +7191,19 @@
         Q
             &= \frac 32 (P\Delta V + V \Delta P) + P \Delta V =  \frac 52 P\Delta V + \frac 32 V \Delta P = \\
             &= \frac 52 P\Delta V + \frac 32 V \cdot \cbr{- \frac{P_0}{V_0} \Delta V} = \frac{\Delta V}2 \cdot \cbr{5P - \frac{P_0}{V_0} V} = \\
-            &= \frac{\Delta V}2 \cdot \cbr{5 \cdot \cbr{42P_0 - \frac{P_0}{V_0} V} - \frac{P_0}{V_0} V}
-             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 42 - 8\frac{V}{V_0}}.
+            &= \frac{\Delta V}2 \cdot \cbr{5 \cdot \cbr{6P_0 - \frac{P_0}{V_0} V} - \frac{P_0}{V_0} V}
+             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 6 - 8\frac{V}{V_0}}.
         \end{align*}
 
         Таком образом, знак количества теплоты $Q$ на участке 23 зависит от конкретного значения $V$:
         \begin{itemize}
             \item $\Delta V > 0$ на всём участке 23, поскольку газ расширяется,
             \item $P > 0$ — всегда, у нас идеальный газ, удары о стенки сосуда абсолютно упругие, а молекулы не взаимодействуют и поэтому давление только положительно,
-            \item если $5 \cdot 42 - 8\frac{V}{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
+            \item если $5 \cdot 6 - 8\frac{V}{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
         \end{itemize}
         Решая последнее неравенство, получаем конкретное значение $V^*$: при $V < V^*$ тепло подводят, далее~— отводят.
         Тут *~--- некоторая точка между точками 2 и 3, конкретные значения надо досчитать:
-        $$V^* = V_0 \cdot \frac{5 \cdot 42}8 = \frac{42}{23} \cdot V_0 \implies P^* = 42P_0 - \frac{P_0}{V_0} V^* = \ldots = \frac{42}{23} \cdot P_0.$$
+        $$V^* = V_0 \cdot \frac{5 \cdot 6}8 = \frac{15}4 \cdot V_0 \implies P^* = 6P_0 - \frac{P_0}{V_0} V^* = \ldots = \frac94 \cdot P_0.$$
 
         Т.е.
         чтобы вычислить $Q_+$, надо сложить количества теплоты на участке 12 и лишь части участка 23 — участке 2*,
@@ -7212,19 +7212,19 @@
 
         Теперь возвращаемся к циклу целиком и получаем:
         \begin{align*}
-        A_\text{цикл} &= \frac 12 \cdot (5P_0 - P_0) \cdot (5V_0 - V_0) = \frac{42}{23} \cdot P_0V_0, \\
+        A_\text{цикл} &= \frac 12 \cdot (5P_0 - P_0) \cdot (5V_0 - V_0) = 8 \cdot P_0V_0, \\
         A_{2*} &= \frac{P^* + 5P_0}2 \cdot (V^* - V_0)
-            = \frac{\frac{42}{23} \cdot P_0 + 5P_0}2 \cdot \cbr{\frac{42}{23} \cdot V_0 - V_0}
-            = \ldots = \frac{42}{23} \cdot P_0 V_0, \\
+            = \frac{\frac94 \cdot P_0 + 5P_0}2 \cdot \cbr{\frac{15}4 \cdot V_0 - V_0}
+            = \ldots = \frac{319}{32} \cdot P_0 V_0, \\
         \Delta U_{2*} &= \frac 32 \nu R T^* - \frac 32 \nu R T_2 = \frac 32 (P^*V^* - P_0 \cdot 5V_0)
-            = \frac 32 \cbr{\frac{42}{23} \cdot P_0 \cdot \frac{42}{23} \cdot V_0 - P_0 \cdot 5V_0}
-            = \frac{42}{23} \cdot P_0 V_0, \\
-        \Delta U_{12} &= \frac 32 \nu R T_2 - \frac 32 \nu R T_1 = \frac 32 (5P_0V_0 - P_0V_0) = \ldots = \frac{42}{23} \cdot P_0 V_0, \\
+            = \frac 32 \cbr{\frac94 \cdot P_0 \cdot \frac{15}4 \cdot V_0 - P_0 \cdot 5V_0}
+            = \frac{169}8 \cdot P_0 V_0, \\
+        \Delta U_{12} &= \frac 32 \nu R T_2 - \frac 32 \nu R T_1 = \frac 32 (5P_0V_0 - P_0V_0) = \ldots = 6 \cdot P_0 V_0, \\
         \eta &= \frac{A_\text{цикл}}{Q_+} = \frac{A_\text{цикл}}{Q_{12} + Q_{2*}}
             = \frac{A_\text{цикл}}{A_{12} + \Delta U_{12} + A_{2*} + \Delta U_{2*}} = \\
-            &= \frac{\frac{42}{23} \cdot P_0V_0}{0 + \frac{42}{23} \cdot P_0 V_0 + \frac{42}{23} \cdot P_0 V_0 + \frac{42}{23} \cdot P_0 V_0}
-             = \frac{\frac{42}{23}}{\frac{42}{23} + \frac{42}{23} + \frac{42}{23}}
-             = \frac{42}{23} \leftarrow \text{вжух и готово!}
+            &= \frac{8 \cdot P_0V_0}{0 + 6 \cdot P_0 V_0 + \frac{319}{32} \cdot P_0 V_0 + \frac{169}8 \cdot P_0 V_0}
+             = \frac{8}{6 + \frac{319}{32} + \frac{169}8}
+             = \frac{64}{169} \leftarrow \text{вжух и готово!}
         \end{align*}
 }
 \solutionspace{360pt}
@@ -7371,7 +7371,7 @@
 
 
         Теперь рассмотрим отдельно процесс 23, к остальному вернёмся позже.
-        Уравнение этой прямой в $PV$-координатах: $P(V) = 42P_0 - \frac{P_0}{V_0} V$.
+        Уравнение этой прямой в $PV$-координатах: $P(V) = 6P_0 - \frac{P_0}{V_0} V$.
         Это значит, что при изменении объёма на $\Delta V$ давление изменится на $\Delta P = - \frac{P_0}{V_0} \Delta V$, обратите внимание на знак.
 
         Рассмотрим произвольную точку в процессе 23 и дадим процессу ещё немного свершиться, при этом объём изменится на $\Delta V$, давление — на $\Delta P$, температура (иначе бы была гипербола, а не прямая) — на $\Delta T$,
@@ -7399,19 +7399,19 @@
         Q
             &= \frac 32 (P\Delta V + V \Delta P) + P \Delta V =  \frac 52 P\Delta V + \frac 32 V \Delta P = \\
             &= \frac 52 P\Delta V + \frac 32 V \cdot \cbr{- \frac{P_0}{V_0} \Delta V} = \frac{\Delta V}2 \cdot \cbr{5P - \frac{P_0}{V_0} V} = \\
-            &= \frac{\Delta V}2 \cdot \cbr{5 \cdot \cbr{42P_0 - \frac{P_0}{V_0} V} - \frac{P_0}{V_0} V}
-             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 42 - 8\frac{V}{V_0}}.
+            &= \frac{\Delta V}2 \cdot \cbr{5 \cdot \cbr{6P_0 - \frac{P_0}{V_0} V} - \frac{P_0}{V_0} V}
+             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 6 - 8\frac{V}{V_0}}.
         \end{align*}
 
         Таком образом, знак количества теплоты $Q$ на участке 23 зависит от конкретного значения $V$:
         \begin{itemize}
             \item $\Delta V > 0$ на всём участке 23, поскольку газ расширяется,
             \item $P > 0$ — всегда, у нас идеальный газ, удары о стенки сосуда абсолютно упругие, а молекулы не взаимодействуют и поэтому давление только положительно,
-            \item если $5 \cdot 42 - 8\frac{V}{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
+            \item если $5 \cdot 6 - 8\frac{V}{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
         \end{itemize}
         Решая последнее неравенство, получаем конкретное значение $V^*$: при $V < V^*$ тепло подводят, далее~— отводят.
         Тут *~--- некоторая точка между точками 2 и 3, конкретные значения надо досчитать:
-        $$V^* = V_0 \cdot \frac{5 \cdot 42}8 = \frac{42}{23} \cdot V_0 \implies P^* = 42P_0 - \frac{P_0}{V_0} V^* = \ldots = \frac{42}{23} \cdot P_0.$$
+        $$V^* = V_0 \cdot \frac{5 \cdot 6}8 = \frac{15}4 \cdot V_0 \implies P^* = 6P_0 - \frac{P_0}{V_0} V^* = \ldots = \frac94 \cdot P_0.$$
 
         Т.е.
         чтобы вычислить $Q_+$, надо сложить количества теплоты на участке 12 и лишь части участка 23 — участке 2*,
@@ -7420,19 +7420,19 @@
 
         Теперь возвращаемся к циклу целиком и получаем:
         \begin{align*}
-        A_\text{цикл} &= \frac 12 \cdot (5P_0 - P_0) \cdot (5V_0 - V_0) = \frac{42}{23} \cdot P_0V_0, \\
+        A_\text{цикл} &= \frac 12 \cdot (5P_0 - P_0) \cdot (5V_0 - V_0) = 8 \cdot P_0V_0, \\
         A_{2*} &= \frac{P^* + 5P_0}2 \cdot (V^* - V_0)
-            = \frac{\frac{42}{23} \cdot P_0 + 5P_0}2 \cdot \cbr{\frac{42}{23} \cdot V_0 - V_0}
-            = \ldots = \frac{42}{23} \cdot P_0 V_0, \\
+            = \frac{\frac94 \cdot P_0 + 5P_0}2 \cdot \cbr{\frac{15}4 \cdot V_0 - V_0}
+            = \ldots = \frac{319}{32} \cdot P_0 V_0, \\
         \Delta U_{2*} &= \frac 32 \nu R T^* - \frac 32 \nu R T_2 = \frac 32 (P^*V^* - P_0 \cdot 5V_0)
-            = \frac 32 \cbr{\frac{42}{23} \cdot P_0 \cdot \frac{42}{23} \cdot V_0 - P_0 \cdot 5V_0}
-            = \frac{42}{23} \cdot P_0 V_0, \\
-        \Delta U_{12} &= \frac 32 \nu R T_2 - \frac 32 \nu R T_1 = \frac 32 (5P_0V_0 - P_0V_0) = \ldots = \frac{42}{23} \cdot P_0 V_0, \\
+            = \frac 32 \cbr{\frac94 \cdot P_0 \cdot \frac{15}4 \cdot V_0 - P_0 \cdot 5V_0}
+            = \frac{169}8 \cdot P_0 V_0, \\
+        \Delta U_{12} &= \frac 32 \nu R T_2 - \frac 32 \nu R T_1 = \frac 32 (5P_0V_0 - P_0V_0) = \ldots = 6 \cdot P_0 V_0, \\
         \eta &= \frac{A_\text{цикл}}{Q_+} = \frac{A_\text{цикл}}{Q_{12} + Q_{2*}}
             = \frac{A_\text{цикл}}{A_{12} + \Delta U_{12} + A_{2*} + \Delta U_{2*}} = \\
-            &= \frac{\frac{42}{23} \cdot P_0V_0}{0 + \frac{42}{23} \cdot P_0 V_0 + \frac{42}{23} \cdot P_0 V_0 + \frac{42}{23} \cdot P_0 V_0}
-             = \frac{\frac{42}{23}}{\frac{42}{23} + \frac{42}{23} + \frac{42}{23}}
-             = \frac{42}{23} \leftarrow \text{вжух и готово!}
+            &= \frac{8 \cdot P_0V_0}{0 + 6 \cdot P_0 V_0 + \frac{319}{32} \cdot P_0 V_0 + \frac{169}8 \cdot P_0 V_0}
+             = \frac{8}{6 + \frac{319}{32} + \frac{169}8}
+             = \frac{64}{169} \leftarrow \text{вжух и готово!}
         \end{align*}
 }
 \solutionspace{360pt}
