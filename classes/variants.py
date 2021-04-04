@@ -99,6 +99,7 @@ def get_all_variants():
         ]),
         ('2021-03-16 9', {'electricity.cond': ['Rymkevich748', 'Rymkevich750', 'Rymkevich751', 'Rymkevich762', 'Definitions01', 'Definitions02']}),
         ('2021-03-18 10', ['termodynamics.cycle.Rectangle_T', 'termodynamics.mkt.GraphPV_1', 'termodynamics.termo.YesNo']),
+        ('2021-03-20 10', ['termodynamics.cycle.TriangleUp_T', 'termodynamics.cycle.TriangleUp']),
         ('2021-03-23 10', ['termodynamics.cycle.TriangleUp_T', 'termodynamics.vapor.GetPhi', 'termodynamics.mkt.Basic12', 'termodynamics.termo.Definitions02']),
         ('2021-03-23 9', {'atomic.quantum': ['Fotons', 'ColorNameFromLambda', 'E_from_nu',  'E_from_lambda', 'T_Nu_from_lambda', 'Deduce01']}),
         # ('2021-03-30 10', {'termodynamics.termo': ['CycleTriangleUp']}),
