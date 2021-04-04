@@ -3,7 +3,7 @@ from generators.helpers.matter import Matter
 from generators.helpers.vapor import Vapor
 
 
-class Consts(object):
+class Consts:
     m_e = UnitValue('m_{e} = 9.1 10^{-31} кг')
     m_p = UnitValue('m_{p} = 1.672 10^{-27} кг')
     m_n = UnitValue('m_{n} = 1.675 10^{-27} кг')

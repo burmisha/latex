@@ -25,7 +25,7 @@ PAPER_TEMPLATE = r'''
 '''.strip()
 
 
-class Paper(object):
+class Paper:
     def __init__(self, date, tasks, name=None, classLetter=None, style=r'\variant'):
         self.Date = library.formatter.Date(date)
 

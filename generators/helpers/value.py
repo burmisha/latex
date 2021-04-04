@@ -104,7 +104,7 @@ def test_precisionFmt2():
 test_precisionFmt2()
 
 
-class UnitValue(object):
+class UnitValue:
     def __init__(self, line, precision=None, viewPrecision=None):
         self.__raw_line = line
         try:

@@ -150,7 +150,7 @@ def test_form_args():
 test_form_args()
 
 
-class VariantTask(object):
+class VariantTask:
     def __init__(self, pupils, date):
         self.__Stats = collections.defaultdict(int)
         self._pupils = pupils
@@ -272,7 +272,7 @@ def get_class_letter(pupils):
         return pupils.Grade
 
 
-class MultiplePaper(object):
+class MultiplePaper:
     def __init__(self, date=None, pupils=None):
         self.Date = date  # only for date in header and filename
         self.Pupils = pupils
