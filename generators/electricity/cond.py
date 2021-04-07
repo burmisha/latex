@@ -132,8 +132,54 @@ class Rymkevich762(variant.VariantTask):
 
 
 @variant.text('''
-    Два конденсатора ёмкостей {C1:Task:e} и {C2:Task:e} последовательно подключают
-    к источнику напряжения {U:Task:e} (см. рис.). Определите заряды каждого из конденсаторов.
+    \\begin{{tikzpicture}}[circuit ee IEC, x=1cm, y=1cm, semithick]
+        \\draw  (0, 0) -- (0, 2) to [capacitor={ info={ {C1:L:e} } }] (2, 2)
+                (0, 0) -- (2, 0) to [capacitor={ info={ {C2:L:e} } }] (0, 0)
+        ;
+        \\draw [-o] (0, 1) -- ++(-1, 0) node[left] { $-$ };
+        \\draw [-o] (2, 1) -- ++(1, 0) node[right] { $+$ };
+
+        \\node [right,text width = 14cm, align=justify] at (3.5,1.5) {
+        Два конденсатора ёмкостей {C1:Task:e} и {C2:Task:e} параллельно подключают
+        к источнику напряжения {U:Task:e} (см. рис.). Определите заряды каждого из конденсаторов.
+        };
+    \\end{{tikzpicture}}
+''')
+@variant.answer_short('''
+    Q_1
+        = Q_2
+        = C{U:L}
+        = \\frac{ {U:L} }{ \\frac1{ C_1 } + \\frac1{ C_2 } }
+        = \\frac{ C_1C_2{U:L} }{ C_1 + C_2 }
+        = \\frac{
+            {C1:Value} * {C2:Value} * {U:Value}
+         }{
+            {C1:Value} + {C2:Value}
+         }
+        = {Q:Value}
+''')
+@variant.arg(C1__C2=[('C_1 = %s нФ' % C1, 'C_2 = %s нФ' % C2) for C1 in [20, 30, 40, 60] for C2 in [20, 30, 40, 60] if C1 != C2])
+@variant.arg(U=['%s = %s В' % (Ul, Uv) for  Ul in ['U', 'V'] for Uv in [150, 200, 300, 400, 450]])
+class CondPosl(variant.VariantTask):
+    def GetUpdate(self, C1=None, C2=None, U=None, **kws):
+        return dict(
+            Q='Q = %.2f нКл' % (1. * C1.Value * C2.Value * U.Value / (C1.Value + C2.Value)),
+        )
+
+
+@variant.text('''
+    \\begin{{tikzpicture}}[circuit ee IEC, x=1cm, y=1cm, semithick]
+        \\draw  (0, 0) to [capacitor={ info={ {C1:L:e} } }] (1, 0)
+                       to [capacitor={ info={ {C2:L:e} } }] (2, 0)
+        ;
+        \\draw [-o] (0, 0) -- ++(-0.5, 0) node[left] { $-$ };
+        \\draw [-o] (2, 0) -- ++(0.5, 0) node[right] { $+$ };
+
+        \\node [right,text width = 14cm, align=justify] at (3.5,0) {
+        Два конденсатора ёмкостей {C1:Task:e} и {C2:Task:e} последовательно подключают
+        к источнику напряжения {U:Task:e} (см. рис.). Определите заряды каждого из конденсаторов.
+        };
+    \\end{{tikzpicture}}
 ''')
 @variant.answer_short('''
     Q_1
