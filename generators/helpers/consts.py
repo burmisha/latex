@@ -9,6 +9,7 @@ class Consts:
     m_n = UnitValue('m_{n} = 1.675 10^{-27} кг')
     e = UnitValue('e = 1.60 10^{-19} Кл', viewPrecision=1)
     eV = UnitValue('1.60 10^{-19} Дж', viewPrecision=1)
+    e_0 = UnitValue('8.85 * 10^-12 Ф / м')
     h = UnitValue('h = 6.626 10^{-34} Дж с')
     c = UnitValue('c = 3 10^{8} м / с', precision=3, viewPrecision=1)
     g_ten = UnitValue('g = 10 м / с^2', precision=2)

@@ -1,7 +1,7 @@
 import itertools
 
 import generators.variant as variant
-from generators.helpers import Consts, Fraction
+from generators.helpers import Consts, Fraction, n_times, n_word, permute
 
 
 def sign_to_mult(line):
@@ -148,3 +148,121 @@ class SumTask(variant.VariantTask):
 class Definitions01(variant.VariantTask):
     pass
 
+
+@variant.solution_space(60)
+@variant.text('''
+    Как изменится сила кулоновского взаимодействия между двумя точечными зарядами,
+    если их, первоначально покоившихся в керосине, поместить в вакуум,
+    увеличив при этом расстояние между ними в {n_text}?
+''')
+@variant.arg(n__n_text=n_times(2, 3, 4, 5, 6, 7, 8))
+class F_ratio_from_e_and_r(variant.VariantTask):  # Вишнякова 3.1.1
+    pass
+
+
+@variant.solution_space(60)
+@variant.text('''
+    Два точечных заряда взаимодействуют в среде с диэлектрической
+    проницаемостью {e1:V:e} на расстояние {r1:V:e}.
+    На каком расстоянии друг от друга нужно поместить эти заряды
+    в среде с диэлектрической проницаемостью {e2:V:e},
+    чтобы сила их взаимодействия осталась прежней?
+''')
+@variant.arg(e1=('\\vareps_1 = {}', [6, 12, 18, 54]))
+@variant.arg(e2=('\\vareps_2 = {}', [3, 9, 27, 81]))
+@variant.arg(r1=('r_1 = {} мм', [10, 15, 25, 40, 80]))
+class R_from_r_e1_e2(variant.VariantTask):  # Вишнякова 3.1.2
+    pass
+
+
+@variant.solution_space(80)
+@variant.text('''
+    {n_text} {sign} заряда расположены в вакууме вдоль одной прямой так,
+    что расстояние между соседними зарядами равно ${r}$. Сделайте рисунок,
+    и определите силу, действующую на крайний заряд.
+    Модули всех зарядов равны ${q}$ (${q} > 0$).
+''')
+@variant.arg(n__n_text=n_word(3, 4))
+@variant.arg(r=['a', 'l', 'd', 'r'])
+@variant.arg(q=['q', 'Q'])
+@variant.arg(sign=['положительных', 'отрицательных'])
+class F_from_many_q(variant.VariantTask):  # Вишнякова 3.1.3
+    pass
+
+
+@variant.solution_space(80)
+@variant.text('''
+    Маленький шарик массой {m:Value} подвешен на длинной непроводящей нити
+    и помещён в горизонтальное однородное электрическое поле с напряжённостью {E:Value:e}.
+    При этом шарик отклонился на угол ${alpha}\\degrees$.
+    Определите, каким зарядом обладает шарик. {Consts.g_ten:Task:e}.
+''')
+@variant.arg(m=('m = {} мг', [200, 400, 500, 800]))
+@variant.arg(E=('E = {} кВ / м', [50, 100, 200]))
+@variant.arg(alpha=[2, 4, 5, 10])
+class Q_from_alpha(variant.VariantTask):  # Вишнякова 3.1.4
+    pass
+
+
+@variant.solution_space(80)
+@variant.text('''
+    Электрическое поле создаётся двумя положительными точечными зарядами
+    {q1:Task:e} и {q2:Task:e}. Чему равно расстояние между этими зарядами,
+    если известно, что точка, где напряжённость электрического поля равна нулю,
+    находится на расстоянии {d:Value} от первого заряда?
+''')
+@variant.arg(q1=('q_1 = {} нКл', [2, 10, 16, 24]))
+@variant.arg(q2=('q_2 = {} нКл', [1, 4, 12, 20, 30]))
+@variant.arg(d=('d = {} см', [5, 10, 15, 20]))
+class R_from_d(variant.VariantTask):  # Вишнякова 3.1.5
+    pass
+
+
+@variant.solution_space(100)
+@variant.text('''
+    Небольшое заряженное тело начинает скользить без трения по наклонной плоскости
+    с высоты {H:Task:e}. Заряд тела {q2:Task:e}, угол наклона плоскости $\\alpha={alpha}\\degrees$.
+    В вершине прямого угла находится точесный отрицательный заряд {q1:Task:e}. найти массу тела,
+    если его кинетическая энергия в нижней точке наклонной плоскости
+    равна {E_k:Task:e}. Ответ приведите в граммах. {Consts.e_0:Task:e}
+''')
+@variant.arg(H=('H = {} см', [20, 40, 80]))
+@variant.arg(q1=('q_1 = {} мкКл', [2, -5, 10]))
+@variant.arg(q2=('q_2 = {} мкКл', [-3, 4, -5]))
+@variant.arg(alpha=[10, 15, 20])
+@variant.arg(E_k=('E_\\text{{ кин. }} = {} мДж', [50, 80, 120, 150]))
+class E_kin_prism(variant.VariantTask):  # Вишнякова 3.1.6
+    pass
+
+
+@variant.solution_space(80)
+@variant.text('''
+    Точки $A$, $B$ и $C$ образуют треугольник со сторонами $BC = {a:V:e}$, $AC = {b:V:e}$ и $AB = {c:V:e}$.
+    В точках $A$ и $C$ находятся 2 точечных заряда: {qe:V:e} и {qc:V:e}.
+    Определите потенциал в третьей вершине треугольника.
+    {Consts.e_0:Task:e}, {Consts.k:Task:e}.
+''')
+@variant.arg(a__b__c=
+    permute('6 см', '8 см', '9 см')
+    + permute('5 см', '11 см', '13 см')
+    + permute('8 см', '23 см', '25 см')
+)
+@variant.arg(qa=('q_A = {} мкКл', [-3, -2, 3, 4, 5, 6]))
+@variant.arg(qc=('q_C = {} мкКл', [-6, -5, -4, -3, -2, 3, 4]))
+class KulonDiel(variant.VariantTask):  # Вишнякова 3.1.9
+    pass
+
+
+@variant.solution_space(80)
+@variant.text('''
+    Два равных по величине положительных точечных заряда $q$ расположены
+    в вакууме в точках $A$ и $B$. Длина отрезка $AB = {n}L$.
+    Точка $С$ — середина отрезка $AB$, а точка $D$ лежит на отрезке $BC$,
+    причём $CD = \\frac{ L }{m}$. Определите, какой заряд необходимо
+    поместить в точку $C$, чтобы {what} электрического поля в точке $D$ {what_do} нулю.
+''')
+@variant.arg(m=[2, 3, 4])
+@variant.arg(n=[2, 3])
+@variant.arg(what__what_do=[('напряжённость', 'стала'), ('потенциал', 'стал'),])
+class KulonDiel(variant.VariantTask):  # Вишнякова 3.1.10
+    pass

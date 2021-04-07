@@ -84,7 +84,7 @@ class v_from_Ev_m(variant.VariantTask):  # 2335 Gendenshteyn
     '\\varphi_2 = \\varphi_1 - \\frac{ A_\\text{ эл. поля } }q = \\varphi_1 - \\frac{ - \\frac{ mv^2 }2 }q = \\varphi_1 + \\frac{ mv^2 }{ 2q } = ',
     '&= {V:Value} + \\frac{ {Consts.m_e:V} * {v:V|sqr} }{ 2 {sign} * {Consts.e:V} } \\approx {V2:V}.'
 ])
-class Phi_from_static_e(variant.VariantTask):  # 1621 Goldfarb
+class Phi_from_static_e(variant.VariantTask):  # Гольдфарб 16.21, Вишнякова 3.1.7
     def GetUpdate(self, v=None, V=None, what=None, **kws):
         sign = {
             'электрон': -1,
@@ -144,8 +144,9 @@ class Phi_from_static_e(variant.VariantTask):  # 1621 Goldfarb
     'прямоугольный равнобедренный треугольник с катетом',
     'прямоугольный равнобедренный треугольник с гипотенузой',
 ])
-class A_from_motion(variant.VariantTask):
+class A_from_motion(variant.VariantTask):  # Вишнякова 3.1.8
     pass
+
 
 @variant.solution_space(90)
 @variant.text('''
