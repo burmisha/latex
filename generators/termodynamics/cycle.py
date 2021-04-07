@@ -1,7 +1,7 @@
 import fractions
 
 import generators.variant as variant
-from generators.helpers import UnitValue, Consts, Fraction
+from generators.helpers import UnitValue, Consts, Fraction, n_times
 
 
 @variant.text('''
@@ -23,8 +23,8 @@ from generators.helpers import UnitValue, Consts, Fraction
     Определите КПД цикла Карно, температура нагревателя которого равна максимальной температуре в цикле 12341, а холодильника — минимальной.
     Ответы в обоих случаях оставьте точными в виде нескоратимой дроби, никаких округлений.
 ''')
-@variant.arg(alpha__alpha_text=[(2, 'два раза'), (3, 'три раза'), (4, 'четыре раза'), (5, 'пять раз'), (6, 'шесть раз')])
-@variant.arg(beta__beta_text=[(2, 'два раза'), (3, 'три раза'), (4, 'четыре раза'), (5, 'пять раз'), (6, 'шесть раз')])
+@variant.arg(alpha__alpha_text=n_times(2, 3, 4, 5, 6))
+@variant.arg(beta__beta_text=n_times(2, 3, 4, 5, 6))
 @variant.solution_space(360)
 @variant.answer_align([
     'A_{ 12 } &> 0, \\Delta U_{ 12 } > 0, \\implies Q_{ 12 } = A_{ 12 } + \\Delta U_{ 12 } > 0,',
@@ -94,8 +94,8 @@ class Rectangle(variant.VariantTask):
     Определите КПД цикла Карно, температура нагревателя которого равна максимальной температуре в цикле 12341, а холодильника — минимальной.
     Ответы в обоих случаях оставьте точными в виде нескоратимой дроби, никаких округлений.
 ''')
-@variant.arg(alpha__alpha_text=[(2, 'два раза'), (3, 'три раза'), (4, 'четыре раза'), (5, 'пять раз'), (6, 'шесть раз')])
-@variant.arg(beta__beta_text=[(2, 'два раза'), (3, 'три раза'), (4, 'четыре раза'), (5, 'пять раз'), (6, 'шесть раз')])
+@variant.arg(alpha__alpha_text=n_times(2, 3, 4, 5, 6))
+@variant.arg(beta__beta_text=n_times(2, 3, 4, 5, 6))
 @variant.solution_space(360)
 @variant.answer_align([
     'A_{ 12 } &= 0, \\Delta U_{ 12 } > 0, \\implies Q_{ 12 } = A_{ 12 } + \\Delta U_{ 12 } > 0.',
@@ -163,8 +163,8 @@ class Rectangle_T(variant.VariantTask):
     \\end{{itemize}}
     Бонус: замените цикл 1231 циклом, в котором 12 — изохорический нагрев в {alpha_text}, 23 — процесс, график которого в $PV$-координатах является отрезком прямой, 31 — изобарическое охлаждение, при котором температура падает в {alpha_text}.
 ''')
-@variant.arg(alpha__alpha_text=[(2, 'два раза'), (3, 'три раза'), (4, 'четыре раза'), (5, 'пять раз'), (6, 'шесть раз')])
-@variant.arg(beta__beta_text=[(2, 'два раза'), (3, 'три раза'), (4, 'четыре раза'), (5, 'пять раз'), (6, 'шесть раз')])
+@variant.arg(alpha__alpha_text=n_times(2, 3, 4, 5, 6))
+@variant.arg(beta__beta_text=n_times(2, 3, 4, 5, 6))
 @variant.solution_space(360)
 @variant.answer_align([
     'A_{ 12 } &= 0, \\Delta U_{ 12 } > 0, \\implies Q_{ 12 } = A_{ 12 } + \\Delta U_{ 12 } > 0.',
@@ -366,8 +366,8 @@ class TriangleUp_T(variant.VariantTask):
         \\item 31 — изохорический нагрев с увеличением давления в {alpha_text},
     \\end{{itemize}}
 ''')
-@variant.arg(alpha__alpha_text=[(2, 'два раза'), (3, 'три раза'), (4, 'четыре раза'), (5, 'пять раз'), (6, 'шесть раз')])
-@variant.arg(beta__beta_text=[(2, 'два раза'), (3, 'три раза'), (4, 'четыре раза'), (5, 'пять раз'), (6, 'шесть раз')])
+@variant.arg(alpha__alpha_text=n_times(2, 3, 4, 5, 6))
+@variant.arg(beta__beta_text=n_times(2, 3, 4, 5, 6))
 @variant.solution_space(360)
 @variant.answer_align([
     'A_{ 12 } &> 0, \\Delta U_{ 12 } > 0, \\implies Q_{ 12 } = A_{ 12 } + \\Delta U_{ 12 } > 0.',
