@@ -1,5 +1,3 @@
-import fractions
-
 import generators.variant as variant
 from generators.helpers import Fraction
 
@@ -59,6 +57,7 @@ class Rymkevich748(variant.VariantTask):
     {Q_max:L} = {C:L}{U:L} = {C:Value} * {U:Value} = {Q_max:Value}
     \\implies {Q_max:L} {sign} {Q:L} \\implies \\text{ {result} }
 ''')
+@variant.answer_test('{short}')
 @variant.arg(U=['%s = %d В' % (Ul, Uv) for Ul in ['U', 'V'] for Uv in [200, 300, 400, 450]])
 @variant.arg(Q=['%s = %d нКл' % (Ql, Qv) for Ql in ['Q', 'q'] for Qv in [30, 50, 60]])
 @variant.arg(C=['C = %d пФ' % Cv for Cv in [50, 80, 100, 120, 150]])
@@ -68,46 +67,82 @@ class Rymkevich750(variant.VariantTask):
         if Q_max >= Q.Value:
             sign = '\\ge'
             result = 'удастся'
+            short = 'да'
         else:
             sign = ' < '
             result = 'не удастся'
+            short = 'нет'
         return dict(
             Q_max='%s_{ \\text{ max } } = %d нКл' % (Q.Letter, Q_max),
             sign=sign,
             result=result,
+            short=short
+        )
+
+
+
+@variant.solution_space(80)
+@variant.text('''
+    Конденсатор ёмкостью {C:Value:e} был заряжен до напряжения {U1:Value:e}.
+    Затем напряжение уменьшают {what} {U2:Value:e}.
+    Определите на сколько уменьшится заряд конденсатора, ответ выразите в микрокулонах.
+''')
+@variant.answer_short('''
+    {Q_max:L} = {C:L}{U:L} = {C:Value} * {U:Value} = {Q_max:Value}
+    \\implies {Q_max:L} {sign} {Q:L} \\implies \\text{ {result} }
+''')
+@variant.answer_test('{short}')
+@variant.arg(U1=('U_1 = {} кВ', [45, 55, 65, 75]))
+@variant.arg(what=['до', 'на'])
+@variant.arg(U2=('U_2 = {} кВ', [10, 20, 30]))
+@variant.arg(C=('C = {} нФ', [20, 30, 40]))
+class Q_from_DeltaU_C(variant.VariantTask):  # Генденштейн-10-54-5
+    def GetUpdate(self, what=None, U1=None, U2=None, C=None, **kws):
+        if what == 'до':
+            q = C.Value * (U1.Value - U2.Value)
+        elif what == 'на':
+            q = C.Value * U2.Value
+        else:
+            raise RuntimeError()
+        return dict(
+            q='q = %d мкКл' % q,
         )
 
 
 @variant.solution_space(80)
 @variant.text('''
-    Как и во сколько раз изменится ёмкость плоского конденсатора при уменьшении площади пластин в {a} раз
+    Как и во сколько раз изменится ёмкость плоского конденсатора
+    при уменьшении площади пластин в {a} раз
     и уменьшении расстояния между ними в {b} раз?
+    В ответе укажите дробь или число — отношение новой ёмкости к старой.
 ''')
 @variant.answer_short('''
     \\frac{ C' }{ C }
         = \\frac{ \\eps_0\\eps \\frac S{a} }{ \\frac d{b} } \\Big/ \\frac{ \\eps_0\\eps S }{ d }
-        = \\frac{ {b} }{ {a} } {sign} 1 \\implies \\text{ {result} }
+        = \\frac{ {b} }{ {a} } = {sign} 1 \\implies \\text{ {result} }
 ''')
+@variant.answer_test('{ratio:Basic}')
 @variant.arg(a=[2, 3, 4, 5, 6, 7, 8])
 @variant.arg(b=[2, 3, 4, 5, 6, 7, 8])
 class Rymkevich751(variant.VariantTask):
     def GetUpdate(self, a=None, b=None, **kws):
-        value = fractions.Fraction(numerator=b, denominator=a)
-        if value == 1:
+        value = Fraction() * b / a
+        if value._fraction == 1:
             sign = '='
             result = 'не изменится'
         else:
-            if value > 1:
+            if value._fraction > 1:
                 sign = '>'
                 result = 'увеличится'
-            elif value < 1:
+            elif value._fraction < 1:
                 sign = '<'
                 result = 'уменьшится'
-                value = 1 / value
-            result += ' в $\\frac{value.numerator}{value.denominator}$ раз'.format(value=value)
+                value = Fraction() / value
+            result += ' в ${value:LaTeX}$ раз'.format(value=value)
         return dict(
             sign=sign,
             result=result,
+            ratio=value,
         )
 
 
@@ -115,6 +150,7 @@ class Rymkevich751(variant.VariantTask):
 @variant.text('''
     Электрическая ёмкость конденсатора равна {C:Task:e},
     при этом ему сообщён заряд {Q:Task:e}. Какова энергия заряженного конденсатора?
+    Ответ выразите в микроджоулях и округлите до целого.
 ''')
 @variant.answer_short('''
     {W:L}
