@@ -1,5 +1,3 @@
-import fractions
-
 import generators.variant as variant
 from generators.helpers import UnitValue, Consts, Fraction, n_times
 
@@ -53,11 +51,11 @@ from generators.helpers import UnitValue, Consts, Fraction, n_times
     '\\eta &= \\frac{ A_\\text{ цикл } }{ Q_+ } = \\frac{ A_\\text{ цикл } }{ Q_{ 12 } + Q_{ 41 } } '
     ' = \\frac{ A_\\text{ цикл } }{ A_{ 12 } + \\Delta U_{ 12 } + A_{ 41 } + \\Delta U_{ 41 } } = ',
     ' &= \\frac{ {A}P_0V_0 }{ {A12}P_0V_0 + \\frac 32 * {U12} * P_0V_0 + 0 + \\frac 32 * {U41} * P_0V_0 }'
-    ' = \\frac{ {A} }{ {A12} + \\frac 32 * {U12} + \\frac 32 * {U41} } = \\frac{ {eta.numerator} }{ {eta.denominator} } \\approx {eta_f}.',
+    ' = \\frac{ {A} }{ {A12} + \\frac 32 * {U12} + \\frac 32 * {U41} } = {eta:LaTeX} \\approx {eta_f}.',
 
     '\\eta_\\text{ Карно } &= 1 - \\frac{ T_\\text{ х } }{ T_\\text{ н } } = 1 - \\frac{ T_\\text{ 4 } }{ T_\\text{ 2 } }'
     ' = 1 - \\frac{ \\frac{ P_4V_4 }{ \\nu R } }{ \\frac{ P_2V_2 }{ \\nu R } } = 1 - \\frac{ P_4V_4 }{ P_2V_2 }'
-    ' = 1 - \\frac{ P_0V_0 }{ {beta}P_0 * {alpha}V_0 } = 1 - \\frac 1{ {beta} * {alpha} }  = \\frac{ {eta_max.numerator} }{ {eta_max.denominator} } \\approx {eta_max_f}.'
+    ' = 1 - \\frac{ P_0V_0 }{ {beta}P_0 * {alpha}V_0 } = 1 - \\frac 1{ {beta} * {alpha} }  = {eta_max:LaTeX} \\approx {eta_max_f}.'
 ])
 class Rectangle(variant.VariantTask):
     def GetUpdate(self, alpha=None, beta=None, **kws):
@@ -65,23 +63,17 @@ class Rectangle(variant.VariantTask):
         A12 = (alpha - 1) * beta
         U12 = (alpha - 1) * beta
         U41 = beta - 1
-        eta = fractions.Fraction(
-            numerator= 2 * A,
-            denominator=2 * A12 + 3 * U12 + 3 * U41,
-        )
-        eta_max = 1 - fractions.Fraction(
-            numerator=1,
-            denominator=alpha * beta,
-        )
+        eta = Fraction() * 2 * A / (2 * A12 + 3 * U12 + 3 * U41)
+        eta_max = Fraction() - Fraction() / (alpha * beta)
         return dict(
             A=A,
             A12=A12,
             U12=U12,
             U41=U41,
             eta=eta,
-            eta_f='%.3f' % eta,
+            eta_f='%.3f' % float(eta),
             eta_max=eta_max,
-            eta_max_f='%.3f' % eta_max,
+            eta_max_f='%.3f' % float(eta_max),
         )
 
 
@@ -393,7 +385,7 @@ class TriangleUp_T(variant.VariantTask):
     '\\eta &= \\frac{ A_\\text{ цикл } }{ Q_+ } = \\frac{ A_\\text{ цикл } }{ Q_{ 12 } + Q_{ 31 } } '
     ' = \\frac{ A_\\text{ цикл } }{ A_{ 12 } + \\Delta U_{ 12 } + A_{ 31 } + \\Delta U_{ 31 } } = ',
     ' &= \\frac{ \\frac 12 * {A} * P_0V_0 }{ {A12}P_0V_0 + \\frac 32 * {U12} * P_0V_0 + 0 + \\frac 32 * {U31} * P_0V_0 }'
-    ' = \\frac{ \\frac 12 * {A} }{ {A12} + \\frac 32 * {U12} + \\frac 32 * {U31} } = \\frac{ {eta.numerator} }{ {eta.denominator} } \\approx {eta_f}.',
+    ' = \\frac{ \\frac 12 * {A} }{ {A12} + \\frac 32 * {U12} + \\frac 32 * {U31} } = {eta:LaTeX} \\approx {eta_f}.',
 ])
 class TriangleUp(variant.VariantTask):
     def GetUpdate(self, alpha=None, beta=None, **kws):
@@ -402,10 +394,7 @@ class TriangleUp(variant.VariantTask):
         A12 = (alpha - 1) * beta
         U12 = (alpha - 1) * beta
         U31 = alpha - 1
-        eta = fractions.Fraction(
-            numerator=A,
-            denominator=2 * A12 + 3 * U31 + 3 * U12,
-        )
+        eta = Fraction() * A / (2 * A12 + 3 * U31 + 3 * U12)
         return dict(
             t=t,
             A=A,
@@ -413,5 +402,5 @@ class TriangleUp(variant.VariantTask):
             U12=U12,
             U31=U31,
             eta=eta,
-            eta_f='%.3f' % eta,
+            eta_f='%.3f' % float(eta),
         )
