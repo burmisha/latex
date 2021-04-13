@@ -59,6 +59,11 @@ class Fraction:
                         nom = self._escape_int(int(self._fraction.numerator))
                         denom = self._escape_int(int(self._fraction.denominator))
                         return f'\\frac{nom}{denom}'
+                elif main_format == 'Basic':
+                    if self._fraction.denominator == 1:
+                        return str(self._fraction.numerator)
+                    else:
+                        return f'{int(self._fraction.numerator)}/{int(self._fraction.denominator)}'
                 else:
                     raise RuntimeError(f'Unknown main format: {main_format!r} from {fmt!r}')
             else:
@@ -81,6 +86,8 @@ def test_fraction():
         ('{f:LaTeX}', Fraction(1) * 19 / 20, '\\frac{19}{20}'),
         ('{f:LaTeX}', Fraction(1) * (-19) / 20, '\\frac{-19}{20}'),
         ('{f:LaTeX}', Fraction() / (2 * 3) * (-1) + 1, '\\frac56'),
+        ('{f:Basic}', Fraction() / (2 * 3) * (-1) + 1, '5/6'),
+        ('{f:Basic}', Fraction() / (2 * 3) * (-12), '-2'),
     ]:
         res = template.format(f=frac)
         assert res == result, f'Expected {result}, got {res}'
