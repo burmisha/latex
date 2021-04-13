@@ -25,4 +25,5 @@ def n_times(*ns):
 def n_word(*ns):
     return [(n, TOTAL_TIMES[n][0]) for n in ns]
 
+
 assert n_times(3, 5) == [(3, 'три раза'), (5, 'пять раз')]

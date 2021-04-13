@@ -1,5 +1,6 @@
 import generators.variant as variant
-from generators.helpers import Fraction
+from generators.helpers import Fraction, n_times
+
 
 @variant.solution_space(40)
 @variant.text('''
@@ -124,6 +125,8 @@ class Q_from_DeltaU_C(variant.VariantTask):  # Генденштейн-10-54-5
 @variant.answer_test('{ratio:Basic}')
 @variant.arg(a=[2, 3, 4, 5, 6, 7, 8])
 @variant.arg(b=[2, 3, 4, 5, 6, 7, 8])
+# @variant.arg(a__a_times=n_times(2, 3, 4, 5, 6, 7, 8))
+# @variant.arg(b__b_times=n_times(2, 3, 4, 5, 6, 7, 8))
 class Rymkevich751(variant.VariantTask):
     def GetUpdate(self, a=None, b=None, **kws):
         value = Fraction() * b / a
