@@ -1,5 +1,5 @@
 import generators.variant as variant
-from generators.helpers import Fraction, n_times
+from generators.helpers import Fraction, n_times, letter_variants
 
 
 @variant.solution_space(40)
@@ -28,6 +28,32 @@ class Definitions01(variant.VariantTask):
 @variant.arg(v_2=['период', 'частоту'])
 class Definitions02(variant.VariantTask):
     pass
+
+
+
+@variant.solution_space(40)
+@variant.text('''
+    Установите соответствие и запишите в ответ набор цифр (без других символов).
+
+    {lv.Questions}.
+
+    {lv.Options}.
+''')
+@variant.arg(lv=letter_variants(
+    {
+        'электроёмкость': 'фарад',
+        'напряжённость электрического поля': 'Н / Кл',
+        'энергия заряженного конденсатора': 'джоуль',
+        'электрический заряд': 'кулон',
+        'разность потенциалов': 'вольт',
+    },
+    ['генри', 'ватт', 'ампер'],
+    answers_count=3,
+    mocks_count=2,
+))
+class Definitions03(variant.VariantTask):
+    pass
+
 
 
 @variant.text('''
