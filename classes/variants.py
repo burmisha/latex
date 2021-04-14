@@ -47,7 +47,7 @@ def get_all_variants():
     random_tasks = [
         ('2019-04-16 10', {'electricity.kulon_field': ['ForceTask', 'ExchangeTask', 'FieldTaskGenerator', 'SumTask']}),
         ('2019-04-30 10', {'electricity.potential': ['A_from_Q_E_l', 'E_from_U_l', 'Potential737', 'v_from_Ev_m', 'Phi_from_static_e']}),
-        ('2019-05-06 10', {'electricity.cond': ['Rymkevich748', 'Rymkevich750', 'Rymkevich751', 'Rymkevich762', 'Cond1']}),
+        ('2019-05-06 10', {'electricity.cond': ['C_from_U_Q', 'Q_is_possible', 'C_ratio', 'W_from_Q_C', 'Cond1']}),
         ('2019-05-14 10', {'electricity.om': ['Rezistor1_v1', 'Rezistor2', 'Rezistor3', 'Rezistor4']}),
         ('2019-04-19 11', {'atomic.quantum': ['Fotons', 'KernelCount', 'RadioFall', 'RadioFall2']}),
         ('2019-04-30 11', {'atomic.quantum': ['Quantum1119', 'Quantum1120']}),
@@ -97,7 +97,7 @@ def get_all_variants():
         ('2021-03-12 10', [
             'termodynamics.cycle.Rectangle', 'termodynamics.termo.DeltaQ_from_states', 'termodynamics.termo.Definitions02',
         ]),
-        ('2021-03-16 9', {'electricity.cond': ['Rymkevich748', 'Rymkevich750', 'Rymkevich751', 'Rymkevich762', 'Definitions01', 'Definitions02']}),
+        ('2021-03-16 9', {'electricity.cond': ['C_from_U_Q', 'Q_is_possible', 'C_ratio', 'W_from_Q_C', 'Definitions01', 'Definitions02']}),
         ('2021-03-18 10', ['termodynamics.cycle.Rectangle_T', 'termodynamics.mkt.GraphPV_1', 'termodynamics.termo.YesNo']),
         ('2021-03-20 10', ['termodynamics.cycle.TriangleUp_T', 'termodynamics.cycle.TriangleUp']),
         ('2021-03-23 10', ['termodynamics.cycle.TriangleUp_T', 'termodynamics.vapor.GetPhi', 'termodynamics.mkt.Basic12', 'termodynamics.termo.Definitions02']),
@@ -113,6 +113,7 @@ def get_all_variants():
         ('2021-03-30 9', {'atomic.em_waves': ['Gendenshteyn_11_11_18', 'Definitions01', 'Deduce01', 'Sound_to_value', 'Prefix']}),
         ('2021-04-01 9', {'atomic.em_waves': ['Lambda_from_E', 'Lambda_from_E_2', 'H_levels']}),
         ('2021-04-02 10',  {'electricity.potential': ['Phi_from_static_e', 'A_from_motion', 'E_phi_graphs', 'Definitions01']}),
+        ('2021-04-15 10',  {'electricity.cond': ['Definitions03', 'Definitions04', 'Q_is_possible', 'Q_from_DeltaU_C', 'C_from_U_Q', 'C_ratio', 'W_from_Q_C']}),
     ]
     for task_id, tasks_classes in random_tasks:
         pupils = library.pupils.get_class_from_string(task_id)

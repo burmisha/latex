@@ -39,6 +39,7 @@ class Definitions02(variant.VariantTask):
 
     {lv.Options}.
 ''')
+@variant.answer_test('{lv.Answer}')
 @variant.arg(lv=letter_variants(
     {
         'электроёмкость': 'фарад',
@@ -55,23 +56,55 @@ class Definitions03(variant.VariantTask):
     pass
 
 
+@variant.solution_space(40)
+@variant.text('''
+    Установите соответствие и запишите в ответ набор цифр (без других символов).
+
+    {lv.Questions}.
+
+    {lv.Options}.
+''')
+@variant.answer_test('{lv.Answer}')
+@variant.arg(lv=letter_variants(
+    {
+        'электроёмкость': '$C$',
+        'напряжённость электрического поля': '$E$',
+        'энергия заряженного конденсатора': '$W$',
+        'электрический заряд': '$Q$',
+        'разность потенциалов': '$U$',
+        'электрическая постоянная': '$\\eps_0$',
+    },
+    ['$r$', '$\\eps$'],
+    answers_count=3,
+    mocks_count=2,
+))
+class Definitions04(variant.VariantTask):
+    pass
+
 
 @variant.text('''
     Определите ёмкость конденсатора, если при его зарядке до напряжения
     {U:Task:e} он приобретает заряд {Q:Task:e}.
-    Чему при этом равны заряды обкладок конденсатора (сделайте рисунок и укажите их)?
+    % Чему при этом равны заряды обкладок конденсатора (сделайте рисунок и укажите их)?
+    Ответ выразите в нанофарадах.
 ''')
 @variant.answer_short('''
     {Q:L} = {C:L}{U:L} \\implies
     {C:L} = \\frac{Q:L:s}{U:L:s} = \\frac{Q:Value:s}{U:Value:s} = {C:Value}.
     \\text{ Заряды обкладок: ${Q:L}$ и $-{Q:L}$ }
 ''')
-@variant.arg(U=['%s = %d кВ' % (Ul, Uv) for Ul in ['U', 'V'] for Uv in [2, 3, 5, 6, 12, 15, 20]])
-@variant.arg(Q=['%s = %d нКл' % (ql, qv) for ql in ['Q', 'q'] for qv in [4, 6, 15, 18, 24, 25]])
-class Rymkevich748(variant.VariantTask):
+@variant.answer_test('{C_test}')
+# @variant.arg(U=['%s = %d кВ' % (Ul, Uv) for Ul in ['U', 'V'] for Uv in [2, 3, 5, 6, 12, 15, 20]])
+# @variant.arg(Q=['%s = %d нКл' % (ql, qv) for ql in ['Q', 'q'] for qv in [4, 6, 15, 18, 24, 25]])
+@variant.arg(U=['%s = %d кВ' % (Ul, Uv) for Ul in ['U', 'V'] for Uv in [2, 4, 20, 40, 50]])
+@variant.arg(Q=['%s = %d мКл' % (ql, qv) for ql in ['Q', 'q'] for qv in [4, 6, 15, 18, 24, 25]])
+class C_from_U_Q(variant.VariantTask):  # Rymkevich748
     def GetUpdate(self, U=None, Q=None, **kws):
+        C = 1000 * Q.Value / U.Value
         return dict(
-            C='C = %.2f пФ' % (1. * Q.Value / U.Value)
+            # C='C = %.2f пФ' % (1. * Q.Value / U.Value)
+            C='C = %d нФ' % C,
+            C_test = int(C),
         )
 
 
@@ -79,6 +112,7 @@ class Rymkevich748(variant.VariantTask):
 @variant.text('''
     На конденсаторе указано: {C:Task:e}, {U:Task:e}.
     Удастся ли его использовать для накопления заряда {Q:Task:e}?
+    (в ответе укажите «да» или «нет»)
 ''')
 @variant.answer_short('''
     {Q_max:L} = {C:L}{U:L} = {C:Value} * {U:Value} = {Q_max:Value}
@@ -88,7 +122,7 @@ class Rymkevich748(variant.VariantTask):
 @variant.arg(U=['%s = %d В' % (Ul, Uv) for Ul in ['U', 'V'] for Uv in [200, 300, 400, 450]])
 @variant.arg(Q=['%s = %d нКл' % (Ql, Qv) for Ql in ['Q', 'q'] for Qv in [30, 50, 60]])
 @variant.arg(C=['C = %d пФ' % Cv for Cv in [50, 80, 100, 120, 150]])
-class Rymkevich750(variant.VariantTask):
+class Q_is_possible(variant.VariantTask):  # Rymkevich750
     def GetUpdate(self, U=None, Q=None, C=None, **kws):
         Q_max = C.Value * U.Value / 1000
         if Q_max >= Q.Value:
@@ -114,11 +148,8 @@ class Rymkevich750(variant.VariantTask):
     Затем напряжение уменьшают {what} {U2:Value:e}.
     Определите на сколько уменьшится заряд конденсатора, ответ выразите в микрокулонах.
 ''')
-@variant.answer_short('''
-    {Q_max:L} = {C:L}{U:L} = {C:Value} * {U:Value} = {Q_max:Value}
-    \\implies {Q_max:L} {sign} {Q:L} \\implies \\text{ {result} }
-''')
-@variant.answer_test('{short}')
+@variant.answer_short('{q:L} = {C:L} * \\Delta U = {q:Value}')
+@variant.answer_test('{q_value}')
 @variant.arg(U1=('U_1 = {} кВ', [45, 55, 65, 75]))
 @variant.arg(what=['до', 'на'])
 @variant.arg(U2=('U_2 = {} кВ', [10, 20, 30]))
@@ -133,6 +164,7 @@ class Q_from_DeltaU_C(variant.VariantTask):  # Генденштейн-10-54-5
             raise RuntimeError()
         return dict(
             q='q = %d мкКл' % q,
+            q_value=q,
         )
 
 
@@ -141,7 +173,7 @@ class Q_from_DeltaU_C(variant.VariantTask):  # Генденштейн-10-54-5
     Как и во сколько раз изменится ёмкость плоского конденсатора
     при уменьшении площади пластин в {a} раз
     и уменьшении расстояния между ними в {b} раз?
-    В ответе укажите дробь или число — отношение новой ёмкости к старой.
+    В ответе укажите простую дробь или число — отношение новой ёмкости к старой.
 ''')
 @variant.answer_short('''
     \\frac{ C' }{ C }
@@ -153,7 +185,7 @@ class Q_from_DeltaU_C(variant.VariantTask):  # Генденштейн-10-54-5
 @variant.arg(b=[2, 3, 4, 5, 6, 7, 8])
 # @variant.arg(a__a_times=n_times(2, 3, 4, 5, 6, 7, 8))
 # @variant.arg(b__b_times=n_times(2, 3, 4, 5, 6, 7, 8))
-class Rymkevich751(variant.VariantTask):
+class C_ratio(variant.VariantTask):  # Rymkevich751
     def GetUpdate(self, a=None, b=None, **kws):
         value = Fraction() * b / a
         if value._fraction == 1:
@@ -187,12 +219,15 @@ class Rymkevich751(variant.VariantTask):
     = \\frac{ \\sqr{Q:Value:s} }{ 2 * {C:Value} }
     = {W:Value}
 ''')
+@variant.answer_test('{W_test}')
 @variant.arg(Q=['%s = %s нКл' % (Ql, Qv) for Ql in ['Q', 'q'] for Qv in [300, 500, 800, 900]])
 @variant.arg(C=['C = %s пФ' % Cv for Cv in [200, 400, 600, 750]])
-class Rymkevich762(variant.VariantTask):
+class W_from_Q_C(variant.VariantTask):  # Rymkevich762
     def GetUpdate(self, C=None, Q=None, **kws):
+        W = 1. * Q.Value ** 2 / 2 / C.Value
         return dict(
-            W='W = %.2f мкДж' % (1. * Q.Value ** 2 / 2 / C.Value),
+            W='W = %.2f мкДж' % W,
+            W_test=int(W + 0.5),
         )
 
 
