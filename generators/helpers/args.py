@@ -17,7 +17,7 @@ def permute(*options):
     return list(itertools.permutations(options))
 
 
-def letter_variants(answers, mocks, answers_count=None, mocks_count=None):
+def generate_letter_variants(answers, mocks, answers_count=None, mocks_count=None):
     answers_count = answers_count or 0
     mocks_count = mocks_count or 0
 
@@ -38,8 +38,19 @@ def letter_variants(answers, mocks, answers_count=None, mocks_count=None):
                 yield list(zip(variant, positions)), options
 
 
-def test_letter_variants():
-    assert list(letter_variants(
+class LetterVariant:
+    def __init__(self, questions, options):
+        self.Answer = ''.join(f'{question[1] + 1}' for question in questions)
+        self.Questions = ', '.join([
+            f'{letter}) {question[0]}' for letter, question in zip('АБВГДЕЖЗ', questions)
+        ])
+        self.Options = ', '.join([
+            f'{digit}) {option}' for digit, option in zip('123456789', options)
+        ])
+
+
+def test_generate_letter_variants():
+    assert list(generate_letter_variants(
         {'дважды два': 'четыре', 'трижды три': 'девять'},
         ['пять', 'шесть'],
         answers_count=1,
@@ -58,7 +69,7 @@ def test_letter_variants():
         ([('трижды три', 0),], ('девять', 'шесть')),
         ([('трижды три', 1),], ('шесть', 'девять')),
     ]
-    assert list(letter_variants(
+    assert list(generate_letter_variants(
         {'дважды два': 'четыре', 'трижды три': 'девять'},
         ['пять', 'шесть'],
         answers_count=1,
@@ -68,8 +79,26 @@ def test_letter_variants():
         ([('трижды три', 0),], ('девять',))
     ]
 
-test_letter_variants()
 
+def test_letter_variant():
+    letter_variant = LetterVariant(
+        [('дважды два', 1),], ('шесть', 'четыре')
+    )
+    assert letter_variant.Answer == '2'
+    assert letter_variant.Questions == 'А) дважды два'
+    assert letter_variant.Options == '1) шесть, 2) четыре'
+
+
+def letter_variants(answers, mocks, answers_count=None, mocks_count=None):
+    for questions, options in generate_letter_variants(
+        answers, mocks, answers_count=answers_count, mocks_count=mocks_count,
+    ):
+        yield LetterVariant(questions, options)
+
+
+test_generate_letter_variants()
+
+test_letter_variant()
 
 
 def n_times(*ns):
