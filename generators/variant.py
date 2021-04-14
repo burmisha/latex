@@ -240,7 +240,7 @@ class VariantTask:
         answer_test_template = self.GetAnswerTestTemplate()
 
         return problems.task.Task(
-            # NORO: do not escape_tex
+            # TODO: do not escape_tex
             laTeXFormatter.format(textTemplate),
             answer=laTeXFormatter.format(answerTemplate),
             test_answer=laTeXFormatter.format(answer_test_template, replace_comma=False),
@@ -248,9 +248,12 @@ class VariantTask:
         )
 
     def CheckStats(self):
-        stats = ''.join(str(self.__Stats.get(index, '_')) for index in range(self.GetTasksCount()))  # TODO: support tasks with 10 on more
+        if set(self.__Stats.values()) - {0, 1}:
+            stats = ''.join(str(self.__Stats.get(index, '_')) for index in range(self.GetTasksCount()))  # TODO: support tasks with 10 on more
+        else:
+            stats = ''
         log.info(
-            '%s: total of %d tasks, used %d: %r',
+            '%s: total of %d tasks, used %d: |%s|',
             type(self).__name__,
             self.GetTasksCount(),
             len(self.__Stats),
