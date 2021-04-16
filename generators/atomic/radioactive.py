@@ -1,6 +1,167 @@
 import generators.variant as variant
-from generators.helpers import Consts
+from generators.helpers import Consts, letter_variants
 
+
+@variant.solution_space(40)
+@variant.text('''
+    Установите соответствие буквам и запишите в ответ набор цифр (без других символов).
+
+    {lv.Questions}.
+
+    {lv.Options}.
+''')
+@variant.answer_test('{lv.Answer}')
+@variant.arg(lv=letter_variants(
+    {
+        '$\\alpha$-излучение': 'обладает положительным зарядом',
+        '$\\beta$-излучение': 'обладает отрицательным электрическим зарядом',
+        '$\\gamma$-излучение': 'не несёт электрического заряда',
+    },
+    [],
+    answers_count=3,
+    mocks_count=0,
+))
+@variant.answer_short('{lv.Answer}')
+class Definitions01(variant.VariantTask):
+    pass
+
+
+@variant.solution_space(40)
+@variant.text('''
+    Установите соответствие буквам и запишите в ответ набор цифр (без других символов).
+
+    {lv.Questions}.
+
+    {lv.Options}.
+''')
+@variant.answer_test('{lv.Answer}')
+@variant.arg(lv=letter_variants(
+    {
+        '$\\alpha$-излучение': 'ядра атомов гелия',
+        '$\\beta$-излучение': 'электроны',
+        '$\\gamma$-излучение': 'электромагнитное излучение',
+    },
+    [],
+    answers_count=3,
+    mocks_count=0,
+))
+@variant.answer_short('{lv.Answer}')
+class Definitions02(variant.VariantTask):
+    pass
+
+
+@variant.solution_space(40)
+@variant.text('''
+    Установите соответствие буквам и запишите в ответ набор цифр (без других символов).
+
+    {lv.Questions}.
+
+    {lv.Options}.
+''')
+@variant.answer_test('{lv.Answer}')
+@variant.arg(lv=letter_variants(
+    {
+        'атом Резерфорда': 'планетарная модель атома',
+        'атом Томсона': '«пудинг с изюмом»',
+    },
+    [],
+    answers_count=2,
+    mocks_count=0,
+))
+@variant.answer_short('{lv.Answer}')
+class Definitions03(variant.VariantTask):
+    pass
+
+
+@variant.solution_space(40)
+@variant.text('''
+    Установите соответствие буквам и запишите в ответ набор цифр (без других символов).
+
+    {lv.Questions}.
+
+    {lv.Options}.
+''')
+@variant.answer_test('{lv.Answer}')
+@variant.arg(lv=letter_variants(
+    {
+        'размер атома': '$10^{-8}\\units{ см }$',
+        'размер ядра атома': '$10^{-13}\\units{ см }$',
+    },
+    ['$10^{-15}\\units{ см }$', '$10^{-10}\\units{ см }$'],
+    answers_count=2,
+    mocks_count=1,
+))
+@variant.answer_short('{lv.Answer}')
+class Definitions04(variant.VariantTask):
+    pass
+
+
+@variant.solution_space(40)
+@variant.text('''
+    Установите соответствие буквам и запишите в ответ набор цифр (без других символов).
+
+    {lv.Questions}.
+
+    {lv.Options}.
+''')
+@variant.answer_test('{lv.Answer}')
+@variant.arg(lv=letter_variants(
+    {
+        'массовое число водорода \\ce{^{1}_{1}H}': 1,
+        'массовое число углерода \\ce{^{12}_{6}C}': 12,
+        'массовое число кислорода \\ce{^{16}_{8}O}': 16,
+        'массовое число азота \\ce{^{14}_{7}N}': 14,
+        'массовое число водорода \\ce{^{1}_{1}H}': 0,
+        'зарядовое число углерода \\ce{^{12}_{6}C}': 6,
+        'зарядовое число кислорода \\ce{^{16}_{8}O}': 8,
+        'зарядовое число азота \\ce{^{14}_{7}O}': 7,
+    },
+    [4, 10, 11, 9, 5],
+    answers_count=2,
+    mocks_count=2,
+))
+@variant.answer_short('{lv.Answer}')
+class Definitions05(variant.VariantTask):
+    pass
+
+
+@variant.solution_space(40)
+@variant.text('''
+    Установите соответствие буквам и запишите в ответ набор цифр (без других символов).
+
+    {lv.Questions}.
+
+    {lv.Options}.
+''')
+@variant.answer_test('{lv.Answer}')
+@variant.arg(lv=letter_variants(
+    {
+        'массовое число $\\alpha$-частицы': 4,
+        'массовое число $\\beta$-частицы': 0,
+        # 'массовое число $\\gamma$-частицы': 0,
+        'зарядовое число $\\alpha$-частицы': 2,
+        'зарядовое число $\\beta$-частицы': -1,
+        # 'зарядовое число $\\gamma$-частицы': 0,
+    },
+    [1, -2],
+    answers_count=3,
+    mocks_count=2,
+))
+@variant.answer_short('{lv.Answer}')
+class Definitions06(variant.VariantTask):
+    pass
+
+
+@variant.text('''
+    На какой {which} угол (в градусах) отконялись $\\alpha$-частицы
+    в опытах Резерфорда по их рассеянию на тонкой золотой фольге?
+''')
+@variant.arg(which__a=[('минимальный', 0), ('максимальный', 180)])
+@variant.answer_test('{a}')
+@variant.solution_space(40)
+@variant.answer_short('{a}\\degrees')
+class Definitions07(variant.VariantTask):
+    pass
 
 
 
