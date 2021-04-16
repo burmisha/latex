@@ -52,6 +52,7 @@ class Definitions02(variant.VariantTask):
     answers_count=3,
     mocks_count=2,
 ))
+@variant.answer_short('{lv.Answer}')
 class Definitions03(variant.VariantTask):
     pass
 
@@ -65,6 +66,7 @@ class Definitions03(variant.VariantTask):
     {lv.Options}.
 ''')
 @variant.answer_test('{lv.Answer}')
+@variant.answer_short('{lv.Answer}')
 @variant.arg(lv=letter_variants(
     {
         'электроёмкость': '$C$',
@@ -128,11 +130,11 @@ class Q_is_possible(variant.VariantTask):  # Rymkevich750
         if Q_max >= Q.Value:
             sign = '\\ge'
             result = 'удастся'
-            short = 'да'
+            short = '[Дд][Аа]'
         else:
             sign = ' < '
             result = 'не удастся'
-            short = 'нет'
+            short = '[Нн][Ее][Тт]'
         return dict(
             Q_max='%s_{ \\text{ max } } = %d нКл' % (Q.Letter, Q_max),
             sign=sign,
