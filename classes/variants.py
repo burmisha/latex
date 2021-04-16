@@ -114,6 +114,7 @@ def get_all_variants():
         ('2021-04-01 9', {'atomic.em_waves': ['Lambda_from_E', 'Lambda_from_E_2', 'H_levels']}),
         ('2021-04-02 10',  {'electricity.potential': ['Phi_from_static_e', 'A_from_motion', 'E_phi_graphs', 'Definitions01']}),
         ('2021-04-15 10',  {'electricity.cond': ['Definitions03', 'Definitions04', 'Q_is_possible', 'Q_from_DeltaU_C', 'C_from_U_Q', 'C_ratio', 'W_from_Q_C']}),
+        ('2021-04-16 9',  {'atomic.radioactive': ['Definitions01', 'Definitions02', 'Definitions03', 'Definitions04', 'Definitions05', 'Definitions06', 'Definitions07']}),
     ]
     for task_id, tasks_classes in random_tasks:
         pupils = library.pupils.get_class_from_string(task_id)
