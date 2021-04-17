@@ -51,22 +51,20 @@ def get_ss_link(title):
     return ss_link
 
 
-class TestFormGenerator:
-    def __init__(self, title=None, upTo=None, image=None, questions=None):
+class Generator:
+    def __init__(self, title=None, questions=None):
         self._tasks_count = 0
         self._title = title
-        self._up_to = upTo
-        self._image = image
         self._questions = questions
 
     def NewTask(self):
         self._tasks_count += 1
         return int(self._tasks_count)
 
-    def Generate(self):
+    def Generate(self, up_to=None, image=None):
         self._form = GoogleForm(
             title=self._title,
-            description=UP_TO_STR_FMT.format(upTo=self._up_to),
+            description=UP_TO_STR_FMT.format(upTo=up_to),
             confirmationMessage=random.choice(THUMBS_UP_CHOICES) + ' ' + CLOSE_TAB,
             link_existing=get_ss_link(self._title),
         )
@@ -89,7 +87,7 @@ class TestFormGenerator:
         #         'Сюда же можно вписать вообще любой комментарий к уроку. '
         # )
         self._form.AddImageItem(
-            url=IMAGES[self._image or DEFAULT_GIF],
+            url=IMAGES[image or DEFAULT_GIF],
             title='Всё, это конец формы, пора всё проверить (числа, лишние символы в формах, порядок заданий) и отправлять!',
             helpText='Пора проверить и отправлять',
         )

@@ -1,3 +1,4 @@
+import re
 import logging
 log = logging.getLogger(__name__)
 
@@ -88,8 +89,10 @@ class GoogleForm:
         # TODO: add .setAlignment(form.Alignment.CENTER);
 
     def FormQuery(self):
+        query = re.sub('\n {12}(\\w)', '\n    \\1', self._query)
+        query = re.sub('\n {12}\.', '\n        .', query)
         query = f'''
-function newSimpleForm(){{{self._query}
+function newSimpleForm(){{{query}
     Logger.log('Done: ' + form.getEditUrl());
 }}'''
-        return query
+        return query.lstrip()

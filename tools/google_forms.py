@@ -1,5 +1,6 @@
 import library.process
-import library.gform.form
+from library.gform.form import GoogleForm
+from library.gform.generator import Generator
 from library.gform.node import Choice, Text, TextTask
 
 import logging
@@ -7,7 +8,7 @@ log = logging.getLogger(__name__)
 
 
 def get_all_forms():
-    example = library.gform.form.GoogleForm(title='Пример', description='Отправить до полуночи', confirmationMessage='Спасибо, ты молодчина!')
+    example = GoogleForm(title='Пример', description='Отправить до полуночи', confirmationMessage='Спасибо, ты молодчина!')
     example.AddTextItem(title='Фамилия Имя', helpText='Именно в таком порядке', required=True)
     example.AddMultipleChoiceItem(title='Класс', choices=[9, 10], showOtherOption=True)
     example.AddMultipleChoiceItem(title='Школа', choices=['554, Москва'], showOtherOption=True)
@@ -56,13 +57,8 @@ def get_all_forms():
         ('2021.04.16 9М - Строение атома - 1', '11:02', 'zootopia', text_task * 7),
     ]
     for title, up_to, image, questions in forms_config:
-        form_generator = library.gform.generator.TestFormGenerator(
-            title=title,
-            upTo=up_to,
-            image=image,
-            questions=questions,
-        )
-        yield title, form_generator.Generate()
+        form_generator = Generator(title=title, questions=questions)
+        yield title, form_generator.Generate(up_to=up_to, image=image)
 
 
 def run(args):
