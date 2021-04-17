@@ -62,7 +62,7 @@ class Pupil(object):
 
 
 class Pupils(object):
-    SEARCH_MIN_THRESHOLD = 60
+    SEARCH_MIN_THRESHOLD = 55
     SEARCH_DELTA_MULTIPLIER = 0.8
 
     def __init__(self, pupils_id=None, pupils=[], letter=None, grade=None, year=None):
