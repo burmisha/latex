@@ -19,6 +19,26 @@ IMAGES = {
 
 DEFAULT_GIF = 'minions'
 
+UP_TO_STR_FMT = (
+    'Отправить до {upTo} (напомню, что Гугл-формы сохраняют время отправки). '
+    'И пожалуйста, проверьте, что выше верно указаны дата и класс '
+    '(если нет — дайте знать как можно раньше). '
+    '554 школа, Москва, 2020–2021 учебный год.'
+)
+
+THUMBS_UP_CHOICES = [
+    'Спасибо, ты молодчина!',
+    'Готово, всё сохранили!',
+    'Принято, ответы записаны!',
+]
+
+CLOSE_TAB = 'Закрой вкладку, а то иногда отправляются дубли.'
+
+INSTRUCTION = (
+    'Рекомендуется сначала просмотреть форму ответов на этой странице, '
+    'потом открыть задание и всё решить у себя в тетради, а лишь после заполнять форму. '
+    'Так ответы не потеряются и не нужно переключаться между приложениями и экранами.'
+)
 
 def get_ss_link(title):
     ss_link = None
@@ -32,35 +52,30 @@ def get_ss_link(title):
 
 
 class TestFormGenerator:
-    def __init__(self, title=None, upTo=None, image=None):
-        confirmation = random.choice([
-            'Спасибо, ты молодчина!',
-            'Готово, всё сохранили!',
-            'Принято, ответы записаны!',
-        ]) + ' Закрой вкладку, а то иногда отправляются дубли.'
-        instruction = 'Рекомендуется сначала просмотреть форму ответов на этой странице, ' \
-            'потом открыть задание и всё решить у себя в тетради, а лишь после заполнять форму. ' \
-            'Так ответы не потеряются и не нужно переключаться между приложениями и экранами.'
-        upToStr = f'Отправить до {upTo} (напомню, что Гугл-формы сохраняют время отправки). ' \
-            'И пожалуйста, проверьте, что выше верно указаны дата и класс ' \
-            '(если нет — дайте знать как можно раньше). ' \
-            '554 школа, Москва, 2020–2021 учебный год.'
+    def __init__(self, title=None, upTo=None, image=None, questions=None):
         self._tasks_count = 0
-        self._form = GoogleForm(
-            title=title,
-            description=upToStr,
-            confirmationMessage=confirmation,
-            link_existing=get_ss_link(title),
-        )
-        self._form.AddSectionHeaderItem(title=instruction)
-        self._form.AddTextItem(title='Фамилия Имя', required=True)
+        self._title = title
+        self._up_to = upTo
         self._image = image
+        self._questions = questions
 
     def NewTask(self):
         self._tasks_count += 1
         return int(self._tasks_count)
 
     def Generate(self):
+        self._form = GoogleForm(
+            title=self._title,
+            description=UP_TO_STR_FMT.format(upTo=self._up_to),
+            confirmationMessage=random.choice(THUMBS_UP_CHOICES) + ' ' + CLOSE_TAB,
+            link_existing=get_ss_link(self._title),
+        )
+        self._form.AddSectionHeaderItem(title=INSTRUCTION)
+        self._form.AddTextItem(title='Фамилия Имя', required=True)
+
+        for questions in self._questions:
+            self.AddNode(questions)
+
         self._form.AddTextItem(
             title='Если сдаёшь сильно позже, пожалуйста, кратко напиши причину',
             helpText='Если опоздание до пары минут — точно не надо, 3 минуты — скорее не надо, а больше 15 минут — точно надо.',
@@ -81,12 +96,12 @@ class TestFormGenerator:
 
         return self._form
 
-    def AddNode(self, node):
-        if isinstance(node, Choice):
-            self._form.AddMultipleChoiceItem(title=f'Задание {self.NewTask()}', choices=node._options)
-        elif isinstance(node, TextTask):
+    def AddNode(self, question):
+        if isinstance(question, Choice):
+            self._form.AddMultipleChoiceItem(title=f'Задание {self.NewTask()}', choices=question._options)
+        elif isinstance(question, TextTask):
             self._form.AddTextItem(title=f'Задание {self.NewTask()}', required=False)
-        elif isinstance(node, Text):
-            self._form.AddTextItem(title=node._text, required=False)
+        elif isinstance(question, Text):
+            self._form.AddTextItem(title=question._text, required=False)
         else:
-            raise RuntimeError(f'Invalid node {node} at {title}, {node.__class__.__name__}')
+            raise RuntimeError(f'Invalid question {question} at {title}, {question.__class__.__name__}')

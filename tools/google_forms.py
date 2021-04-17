@@ -16,7 +16,7 @@ def get_all_forms():
     example.AddImageItem(url='https://media.giphy.com/media/WxxsVAJLSBsFa/giphy.gif', title='Всё!', helpText='Пора проверить и отправлять')
     yield 'example', example
 
-    email = lambda desc: [Text(f'Электронная почта {desc}'.strip())]
+    email = lambda desc: Text(f'Электронная почта {desc}'.strip())
     abv_choices = Choice('АБВ')
     text_task = TextTask()
 
@@ -24,10 +24,10 @@ def get_all_forms():
         ('2020.10.22 10АБ - Тест по динамике - 1', '8:50', None,
             Choice(['Верно', 'Неверно', 'Недостаточно данных в условии']) * 4 +
             text_task * 6 +
-            [Text('Сколько задач на уроке сегодня было понятно?')]
+            Text('Сколько задач на уроке сегодня было понятно?')
         ),
         ('2020.10.22 9М - Тест по динамике - 1', '10:50', None,
-            abv_choices * 10 + [Text('Сколько задач на уроке сегодня было понятно?')],
+            abv_choices * 10 + Text('Сколько задач на уроке сегодня было понятно?'),
         ),
         ('2020.10.27 9М - Тест по динамике - 2', '10:50', 'incredibles', abv_choices * 8 + text_task * 4),
         ('2020.10.27 10АБ - Тест по динамике - 2', '10:05', 'incredibles', text_task * 7),
@@ -45,7 +45,7 @@ def get_all_forms():
         ('2020.11.19 9М - Законы сохранения - 1', '10:05', 'up', abv_choices * 6 + text_task * 4),
         ('2020.11.26 10АБ - Законы сохранения - 2', '12:05', 'incredibles', text_task * 10),
         ('2020.12.04 10АБ - Статика и гидростатика - 1', '12:05', 'ratatouille',
-            text_task * 7 + [Text('Ссылка на гифку'), Text('Какой вопрос добавить в опрос?')],
+            text_task * 7 + Text('Ссылка на гифку') + Text('Какой вопрос добавить в опрос?'),
         ),
         ('2020.12.08 9М - Колебания и волны - 1', '11:05', 'ratatouille', abv_choices * 8),
         ('2020.12.10 9М - Колебания и волны - 2', '11:05', 'incredibles', abv_choices * 8),
@@ -56,9 +56,12 @@ def get_all_forms():
         ('2021.04.16 9М - Строение атома - 1', '11:02', 'zootopia', text_task * 7),
     ]
     for title, up_to, image, questions in forms_config:
-        form_generator = library.gform.generator.TestFormGenerator(title=title, upTo=up_to, image=image)
-        for node in questions:
-            form_generator.AddNode(node)
+        form_generator = library.gform.generator.TestFormGenerator(
+            title=title,
+            upTo=up_to,
+            image=image,
+            questions=questions,
+        )
         yield title, form_generator.Generate()
 
 
