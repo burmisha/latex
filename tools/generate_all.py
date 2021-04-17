@@ -57,8 +57,9 @@ def run(args):
                 fileWriter.Write('school-554', paper.GetFilename(), text=paper.GetTex())
 
     if generateMultiple:
-        for pupils, date, variant_tasks in classes.variants.get_all_variants():
-            multiplePaper = generators.variant.MultiplePaper(date=date, pupils=pupils)
+        for work in classes.variants.get_all_variants():
+            date = work._date
+            multiplePaper = generators.variant.MultiplePaper(date=date, pupils=work._pupils)
             study_year_pair = date.GetStudyYearPair()
             filename = os.path.join(
                 'school-554',
@@ -66,7 +67,7 @@ def run(args):
                 multiplePaper.GetFilename(),
             )
 
-            text = multiplePaper.GetTex(variant_tasks=variant_tasks)
+            text = multiplePaper.GetTex(variant_tasks=work.get_tasks())
             task = PAPER_TEMPLATE.format(noanswers='\n\\noanswers\n', filename=filename)
             answer = PAPER_TEMPLATE.format(noanswers='', filename=filename)
 
