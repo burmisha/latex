@@ -2,12 +2,15 @@ import library.pupils
 import library.formatter
 import library.picker
 
-from library.gform.node import text_task
+from library.gform.node import Choice, Text, TextTask, text_task, abv_choices
+
 
 import generators
 
 import logging
 log = logging.getLogger(__name__)
+
+ms2_re = r'( ?м/[cс]\^?2| м/\([cс]\^?2\))?'
 
 
 def follow_dots(key, base):
@@ -37,7 +40,7 @@ class Work:
     FORCED_NOT_DISTANT = ['2020-12-24 9']
     def __init__(self, task_id=None, classes=None, human=None, thresholds=None, up_to=None, image=None, questions=None):
         self._task_id = task_id
-        self._tasks_classes = pick_classes(generators, classes)
+        self._tasks_classes = pick_classes(generators, classes) if classes else None
         self._pupils = library.pupils.get_class_from_string(task_id)
         self._date = library.formatter.Date(task_id[:10])
 
@@ -64,6 +67,162 @@ class Work:
                 task.SolutionSpace = 0
                 assert hasattr(task, 'AnswerTestTemplate')
         return tasks
+
+
+class SimpleTextWork:
+    def __init__(self, human=None, thresholds=None, up_to=None, image=None, questions=None, answers=None):
+        self._human_name = human
+        self._thresholds = thresholds
+
+        self._up_to = up_to
+        self._image = image
+        self._questions = questions
+        self._answers = answers
+
+
+def get_simple_variants():
+    email = lambda desc: Text(f'Электронная почта {desc}'.strip())
+
+    works = [
+        SimpleTextWork(
+            human='2020.10.22 10АБ - Тест по динамике - 1',
+            up_to='8:50',
+            questions=Choice(['Верно', 'Неверно', 'Недостаточно данных в условии']) * 4 + text_task * 6 + Text('Сколько задач на уроке сегодня было понятно?'),
+            answers=['Неверно', 'Верно', 'Верно', 'Неверно', '([Кк]илограмм.?|кг)', '([Нн]ьютон.?|Н)', f'1.6{ms2_re}', f'16{ms2_re}', f'2{ms2_re}', '6( Н)?'],
+            thresholds=[5, 7, 9],
+        ),
+        SimpleTextWork(
+            human='2020.10.22 9М - Тест по динамике - 1',
+            up_to='10:50',
+            questions=abv_choices * 10 + Text('Сколько задач на уроке сегодня было понятно?'),
+            answers=list('ББВВААВААБ'),
+            thresholds=[5, 7, 9],
+        ),
+        SimpleTextWork(
+            human='2020.10.27 10АБ - Тест по динамике - 2',
+            up_to='10:05', 
+            image='incredibles',
+            questions=text_task * 7,
+            answers=[13, 17, 120, 20, 2, 40, 15],
+            thresholds=[3, 4, 5],
+        ),
+        SimpleTextWork(
+            human='2020.10.27 9М - Тест по динамике - 2', 
+            up_to='10:50',
+            image='incredibles',
+            questions=abv_choices * 8 + text_task * 4,
+            answers=list('АВАВАББВ') + ['1.5', '24', '5', '50'],
+            thresholds=[4, 6, 8],
+        ),
+        SimpleTextWork(
+            human='2020.10.29 10АБ - Тест по динамике - 3',
+            up_to='12:05',
+            image='insideout',
+            questions=abv_choices * 6 + text_task * 11,
+            answers=list('ВВАВАБ') + ['400', '1000000', r'0.02( м)?', '500( Н/м)?', r'0.02', r'0.102(75)?', r'0.14', '160', '2[kк].*', '4[kк].*', r'.*\b400\b.*\b75\b.*'], 
+            thresholds=[10, 13, 15],
+        ),
+        SimpleTextWork(
+            human='2020.10.30 10АБ - Тест по динамике - 4',
+            up_to='10:05',
+            image='minions',
+            questions=abv_choices * 9 + text_task * 3,
+            answers=list('АБАВАВААБ') + [{'25600( к[мл])?': 2, '32000( к[мл])?': 1}, {'6400( км)?': 2}, {'8': 2}],
+            thresholds=[6, 8, 10],
+        ),
+        SimpleTextWork(
+            human='2020.11.03 10АБ - Тест по динамике - 5',
+            up_to='9:05', 
+            image='insideout', 
+            questions=email('(только для 10«Б», 10«А» уже присылал)') + abv_choices * 2 + text_task * 5,
+            answers=['А', 'В', 12, 240, '0.05', '100 Н?', 5],
+            thresholds=[4, 5, 6],
+        ),
+        SimpleTextWork(
+            human='2020.11.03 9М - Тест по динамике - 3',
+            up_to='11:05',
+            image='insideout', 
+            questions=email('') + abv_choices * 10,
+            answers=list('БАВАБАБВАВ'),
+            thresholds=[5, 7, 9]),
+        SimpleTextWork(
+            human='2020.11.05 9М - Тест по динамике - 4',
+            answers=list('ВБВБААВББА'),
+            thresholds=[5, 7, 9],
+        ),
+        SimpleTextWork(
+            human='2020.11.06 10АБ - Тест по динамике - 6',
+            up_to='10:05',
+            image='up',
+            questions=text_task * 8,
+            answers=[5, {'-?5': 1, '6.73': 1}, '-?3.(2[67]|3|23|256)', 0, 80, 120, 18, 5],
+            thresholds=[3, 5, 7],
+        ),
+        SimpleTextWork(
+            human='2020.11.12 9М - Динамика - 6',
+            up_to='10:15', 
+            image='zootopia',
+            questions=abv_choices * 5 + text_task * 4,
+            answers=list('АББВВ') + ['(0.5|1/2)', 2, 120, 2],
+            thresholds=[3, 5, 7],
+        ),
+        SimpleTextWork(
+            human='2020.11.13 10АБ - Законы сохранения - 1',
+            up_to='10:05', 
+            image='zootopia',
+            questions=email('(если не присылали на прошлой неделе)') + abv_choices * 6 + text_task * 4,
+            answers=list('АБАБВА') + [{8000: 2}, {'12.6': 2}, {10: 2}, {5: 2}],
+            thresholds=[4, 8, 11],
+        ),
+        SimpleTextWork(
+            human='2020.11.19 9М - Законы сохранения - 1',
+            up_to='10:05', 
+            image='up',
+            questions=abv_choices * 6 + text_task * 4,
+            answers=list('АБАБВА') + [{'2( кг\*м/с)?': 2}, {'2( м/c)?': 2}, {'3( м/с)?': 2}, {'0.1( м/c)?': 2, '1/10': 2}],
+            thresholds=[6, 8, 10],
+        ),
+        SimpleTextWork(
+            human='2020.12.04 10АБ - Статика и гидростатика - 1',
+            up_to='12:05',
+            image='ratatouille',
+            questions=text_task * 7 + Text('Ссылка на гифку') + Text('Какой вопрос добавить в опрос?'),
+            answers=[{'1/56': 2, 56: 2}, {15: 2, 12: 1}, {8: 2}, {100: 2}, {75: 2, 225: 1}, {5: 2}, {60: 2}],
+            thresholds=[6, 8, 10],
+        ),
+        SimpleTextWork(
+            human='2020.12.08 9М - Колебания и волны - 1',
+            up_to='11:05', 
+            image='ratatouille',
+            questions=abv_choices * 8,
+            answers=list('ВВАВБАВБ'),
+            thresholds=[5, 6, 7],
+        ),
+        SimpleTextWork(
+            human='2020.12.10 9М - Колебания и волны - 2',
+            up_to='11:05',
+            image='incredibles',
+            questions=abv_choices * 8,
+            answers=list('ВБВВ') + [{'Б': 1, 'В': 1}] + list('АВА'),
+            thresholds=[5, 6, 7],
+        ),
+        SimpleTextWork(
+            human='2020.12.17 9М - Колебания и волны - 3',
+            up_to='11:05', 
+            image='keanureeves',
+            questions=abv_choices * 10,
+            answers=list('АВБАВБ') + [{'А': 0, 'Б': 0}] + list('ВАБ'),
+            thresholds=[6, 7, 8],
+        ),
+        SimpleTextWork(
+            human='2020.12.22 9М - Колебания и волны - 4',
+            up_to='11:05', 
+            image='zootopia',
+            questions=abv_choices * 10,
+        ),
+    ]
+    for work in works:
+        yield work
 
 
 def get_all_variants():
@@ -292,6 +451,7 @@ def get_all_variants():
 def get_variant(key):
     key_picker = library.picker.KeyPicker(key=library.picker.letters_key)
     for work in get_all_variants():
-        key_picker.add(f'{work._date.GetFilenameText()} {work._pupils.Grade}', work.get_tasks())
+        if work._tasks_classes:
+            key_picker.add(f'{work._date.GetFilenameText()} {work._pupils.Grade}', work.get_tasks())
 
     return key_picker.get(key)
