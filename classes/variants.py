@@ -31,16 +31,30 @@ def pick_classes(base, config):
         raise RuntimeError(f'Invalid config: {config}')
 
 
-FORCED_NOT_DISTANT = ['2020-12-24 9']
+class Work:
+    FORCED_NOT_DISTANT = ['2020-12-24 9']
+    def __init__(self, task_id=None, tasks_classes=None):
+        self._task_id = task_id
+        self._tasks_classes = pick_classes(generators, tasks_classes)
+        self._pupils = library.pupils.get_class_from_string(task_id)
+        self._date = library.formatter.Date(task_id[:10])
 
+    def is_distant_task(self):
+        if self._task_id in self.FORCED_NOT_DISTANT:
+            return False
+        elif '2020-11-20' <= self._task_id <= '2021-01-01':  # use test version on distant
+            return True
+        else:
+            return False
 
-def is_distant_task(task_id):
-    if task_id in FORCED_NOT_DISTANT:
-        return False
-    elif '2020-11-20' <= task_id <= '2021-01-01':  # use test version on distant
-        return True
-    else:
-        return False
+    def get_tasks(self):
+        tasks = [task(pupils=self._pupils, date=self._date) for task in self._tasks_classes]
+        if self.is_distant_task():  # use test version on distant
+            for task in tasks:
+                task.PreferTestVersion()
+                task.SolutionSpace = 0
+                assert hasattr(task, 'AnswerTestTemplate')
+        return tasks
 
 
 def get_all_variants():
@@ -117,19 +131,8 @@ def get_all_variants():
         ('2021-04-16 9',  {'atomic.radioactive': ['Definitions01', 'Definitions02', 'Definitions03', 'Definitions04', 'Definitions05', 'Definitions06', 'Definitions07']}),
     ]
     for task_id, tasks_classes in random_tasks:
-        pupils = library.pupils.get_class_from_string(task_id)
-        date = library.formatter.Date(task_id[:10])
-
-        tasks_classes = pick_classes(generators, tasks_classes)
-
-        tasks = [task(pupils=pupils, date=date) for task in tasks_classes]
-        if is_distant_task(task_id):  # use test version on distant
-            for task in tasks:
-                task.PreferTestVersion()
-                task.SolutionSpace = 0
-                assert hasattr(task, 'AnswerTestTemplate')
-
-        yield pupils, date, tasks
+        work = Work(task_id=task_id, tasks_classes=tasks_classes)
+        yield work._pupils, work._date, work.get_tasks()
 
 
 def get_variant(key):
