@@ -4,6 +4,21 @@ from library.gform.node import Choice, TextTask, Text
 from library.gform.form import GoogleForm
 
 
+IMAGES = {
+    'minions': 'https://media.giphy.com/media/WxxsVAJLSBsFa/giphy.gif',
+    'incredibles': 'https://media.giphy.com/media/G2fKgPMXJ40WA/giphy.gif',
+    'insideout': 'https://media.giphy.com/media/dU6Ec1svWeWCk/giphy.gif',
+    'tenet': 'https://media.giphy.com/media/jV0IaIdzPy7L1vqv5T/giphy.gif',
+    'up': 'https://media.giphy.com/media/3sB5CjvsDbA6A/giphy.gif',
+    'monsters': 'https://media.giphy.com/media/19ZCKSoEvSquk/giphy.gif',
+    'zootopia': 'https://media.giphy.com/media/139Lo3rANXYt9K/giphy.gif',
+    'minion-up': 'https://media.giphy.com/media/oobNzX5ICcRZC/giphy.gif',
+    'ratatouille': 'https://media.giphy.com/media/5Wyv8urxxclm8/giphy.gif',
+    'keanureeves': 'https://media.giphy.com/media/TJrS7r0f6SOthGTiPe/giphy.gif',
+}
+
+DEFAULT_GIF = 'minions'
+
 
 def get_ss_link(title):
     ss_link = None
@@ -16,9 +31,8 @@ def get_ss_link(title):
     return ss_link
 
 
-
 class TestFormGenerator:
-    def __init__(self, title=None, upTo=None, count=None, image=None):
+    def __init__(self, title=None, upTo=None, image=None):
         confirmation = random.choice([
             'Спасибо, ты молодчина!',
             'Готово, всё сохранили!',
@@ -31,8 +45,7 @@ class TestFormGenerator:
             'И пожалуйста, проверьте, что выше верно указаны дата и класс ' \
             '(если нет — дайте знать как можно раньше). ' \
             '554 школа, Москва, 2020–2021 учебный год.'
-        self._count = count
-        self._task_number = 0
+        self._tasks_count = 0
         self._form = GoogleForm(
             title=title,
             description=upToStr,
@@ -44,24 +57,10 @@ class TestFormGenerator:
         self._image = image
 
     def NewTask(self):
-        self._task_number += 1
-        return int(self._task_number)
+        self._tasks_count += 1
+        return int(self._tasks_count)
 
     def Generate(self):
-        image = self._image or 'minions'
-        assert self._count == self._task_number or self._count is None
-        images = {
-            'minions': 'https://media.giphy.com/media/WxxsVAJLSBsFa/giphy.gif',
-            'incredibles': 'https://media.giphy.com/media/G2fKgPMXJ40WA/giphy.gif',
-            'insideout': 'https://media.giphy.com/media/dU6Ec1svWeWCk/giphy.gif',
-            'tenet': 'https://media.giphy.com/media/jV0IaIdzPy7L1vqv5T/giphy.gif',
-            'up': 'https://media.giphy.com/media/3sB5CjvsDbA6A/giphy.gif',
-            'monsters': 'https://media.giphy.com/media/19ZCKSoEvSquk/giphy.gif',
-            'zootopia': 'https://media.giphy.com/media/139Lo3rANXYt9K/giphy.gif',
-            'minion-up': 'https://media.giphy.com/media/oobNzX5ICcRZC/giphy.gif',
-            'ratatouille': 'https://media.giphy.com/media/5Wyv8urxxclm8/giphy.gif',
-            'keanureeves': 'https://media.giphy.com/media/TJrS7r0f6SOthGTiPe/giphy.gif',
-        }
         self._form.AddTextItem(
             title='Если сдаёшь сильно позже, пожалуйста, кратко напиши причину',
             helpText='Если опоздание до пары минут — точно не надо, 3 минуты — скорее не надо, а больше 15 минут — точно надо.',
@@ -75,7 +74,7 @@ class TestFormGenerator:
         #         'Сюда же можно вписать вообще любой комментарий к уроку. '
         # )
         self._form.AddImageItem(
-            url=images[image],
+            url=IMAGES[self._image or DEFAULT_GIF],
             title='Всё, это конец формы, пора всё проверить (числа, лишние символы в формах, порядок заданий) и отправлять!',
             helpText='Пора проверить и отправлять',
         )
