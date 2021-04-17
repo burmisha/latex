@@ -15,11 +15,12 @@ class ProperAnswer:
         'X': 'Х', 'x': 'х',
     }
 
-    def __init__(self, answer, value=None):
-        assert isinstance(value, (int, float)), f'Invalid value: {value}'
+    def __init__(self, answer, weight):
+        assert isinstance(weight, (int, float)), f'Invalid answer weight: {weight}'
         assert isinstance(answer, (int, str))
-        self._value = value
-        self.__re = str(answer)
+        self._value = weight
+        self.__printable_re = str(answer)  # for better answers logging
+        self._re = self._format_re(str(answer))
 
     def _format_re(self, canonic_re):
         result = str(canonic_re).strip()
@@ -32,7 +33,7 @@ class ProperAnswer:
         return result
 
     def Printable(self):
-        return str(self.__re)
+        return self.__printable_re
 
     def Value(self):
         return self._value
@@ -45,7 +46,7 @@ class ProperAnswer:
 
     def IsOk(self, value):
         value = re.sub(r'([0-9][\.,][0-9])0+\b', r'\1', value)
-        regexp = self._format_re(self.__re)
+        regexp = self._format_re(self._re)
         if re.match(self._en_to_ru(regexp), self._en_to_ru(value)):
             return True
 
@@ -53,7 +54,7 @@ class ProperAnswer:
 
 
 assert ProperAnswer('0.20', 1).IsOk('0.2')
-# assert ProperAnswer('0.20', 1).__re == '0.20'
+assert ProperAnswer('0.200', 1)._re == '^0[,\\.]2$'
 assert ProperAnswer('0.20', 1).IsOk('0,2')
 assert ProperAnswer('20', 1).IsOk('20')
 assert not ProperAnswer('20', 1).IsOk('200')

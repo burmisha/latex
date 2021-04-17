@@ -1,6 +1,5 @@
 import datetime
 from library.check.pupil_answer import PupilAnswer
-from library.check.proper_answer import ProperAnswer
 
 from library.logging import cm, color, log_list, one_line_pairs
 

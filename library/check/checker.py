@@ -46,7 +46,7 @@ class Checker:
         	raise RuntimeError(f'got invalid answer: {answer}')
 
         return [
-            ProperAnswer(key, value=value)
+            ProperAnswer(key, weight=value)
             for key, value in answer_dict.items()
         ]
 
