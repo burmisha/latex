@@ -16,6 +16,28 @@ class TabOpener:
         self._controller.open_new_tab(url)
 
 
+class Node:
+    def __mul__(self, count):
+        return [self] * count
+
+
+class Choice(Node):
+    def __init__(self, options):
+        self._options = options
+
+
+class TextTask(Node):
+    pass
+
+
+class Text(Node):
+    def __init__(self, text):
+        self._text = text
+
+
+assert len(Text('QWE') * 7) == 7
+
+
 def get_ss_link(title):
     ss_link = None
     if ' 10АБ ' in title:
@@ -50,26 +72,12 @@ class TestFormGenerator:
             link_existing=get_ss_link(title),
         )
         self._form.AddSectionHeaderItem(title=instruction)
-        self._form.AddTextItem(title='Фамилия Имя', helpText='Именно в таком порядке, пожалуйста', required=True)
+        self._form.AddTextItem(title='Фамилия Имя', required=True)
         self._image = image
 
     def NewTask(self):
         self._task_number += 1
         return int(self._task_number)
-
-    def AddTextTask(self, count=1):
-        for i in range(count):
-            task_number = self.NewTask()
-            title = f'Задание {task_number}'
-            self._form.AddTextItem(title=title, required=False)
-
-    def AddText(self, title=None, required=False):
-        self._form.AddTextItem(title=title, required=required)
-
-    def AddMultipleChoiceTask(self, choices=None, count=1):
-        for i in range(count):
-            task_number = self.NewTask()
-            self._form.AddMultipleChoiceItem(title=f'Задание {task_number}', choices=choices)
 
     def Generate(self):
         image = self._image or 'minions'
@@ -106,6 +114,17 @@ class TestFormGenerator:
 
         return self._form
 
+    def AddNode(self, node):
+        if isinstance(node, Choice):
+            self._form.AddMultipleChoiceItem(title=f'Задание {self.NewTask()}', choices=node._options)
+        elif isinstance(node, TextTask):
+            self._form.AddTextItem(title=f'Задание {self.NewTask()}', required=False)
+        elif isinstance(node, Text):
+            self._form.AddTextItem(title=node._text, required=False)
+        else:
+            raise RuntimeError(f'Invalid node {node} at {title}, {node.__class__.__name__}')
+
+
 
 def get_all_forms():
     example = library.google_forms.GoogleForm(title='Пример', description='Отправить до полуночи', confirmationMessage='Спасибо, ты молодчина!')
@@ -118,64 +137,50 @@ def get_all_forms():
     yield 'example', example
 
     choices = lambda count, variants: ('choices', count, variants)
-    abv_choices = lambda count: choices(count, ['А', 'Б', 'В'])
-    abvg_choices = lambda count: choices(count, ['А', 'Б', 'В', 'Г'])
-    abvgd_choices = lambda count: choices(count, ['А', 'Б', 'В', 'Г', 'Д'])
-    any_text = lambda count: ('any', count)
-    email = lambda desc: ('text', f'Электронная почта {desc}'.strip())
+    alpha = list('АБВГД')
+    email = lambda desc: [Text(f'Электронная почта {desc}'.strip())]
+    abv_choices = Choice(alpha[:3])
+    text_task = TextTask()
 
     forms_config = [
-        ('2020.10.22 10АБ - Тест по динамике - 1', '8:50', None, [
-            choices(4, ['Верно', 'Неверно', 'Недостаточно данных в условии']),
-            any_text(6),
-            ('text', 'Сколько задач на уроке сегодня было понятно?'),
-        ]),
-        ('2020.10.22 9М - Тест по динамике - 1', '10:50', None, [
-            abv_choices(10),
-            ('text', 'Сколько задач на уроке сегодня было понятно?'),
-        ]),
-        ('2020.10.27 9М - Тест по динамике - 2', '10:50', 'incredibles', [abv_choices(8), any_text(4)]),
-        ('2020.10.27 10АБ - Тест по динамике - 2', '10:05', 'incredibles', [any_text(7)]),
-        ('2020.10.29 10АБ - Тест по динамике - 3', '12:05', 'insideout', [abv_choices(6), any_text(11)]),
-        ('2020.10.30 10АБ - Тест по динамике - 4', '10:05', 'minions', [abv_choices(9), any_text(3)]),
-        ('2020.11.03 10АБ - Тест по динамике - 5', '9:05', 'insideout', [
-            email('(только для 10«Б», 10«А» уже присылал)'),
-            abv_choices(2),
-            any_text(5),
-        ]),
-        ('2020.11.03 9М - Тест по динамике - 3', '11:05', 'insideout', [email(''), abv_choices(10)]),
-        ('2020.11.06 10АБ - Тест по динамике - 6', '10:05', 'up', [any_text(8)]),
-        ('2020.11.12 9М - Динамика - 6', '10:15', 'zootopia', [abv_choices(5), any_text(4)]),
-        ('2020.11.13 10АБ - Законы сохранения - 1', '10:05', 'zootopia', [
-            email('(если не присылали на прошлой неделе)'),
-            abv_choices(6),
-            any_text(4),
-        ]),
-        ('2020.11.19 9М - Законы сохранения - 1', '10:05', 'up', [abv_choices(6), any_text(4)]),
-        ('2020.11.26 10АБ - Законы сохранения - 2', '12:05', 'incredibles', [any_text(10)]),
-        ('2020.12.04 10АБ - Статика и гидростатика - 1', '12:05', 'ratatouille',
-            [any_text(7), ('text', 'Ссылка на гифку'), ('text', 'Какой вопрос добавить в опрос?')],
+        ('2020.10.22 10АБ - Тест по динамике - 1', '8:50', None,
+            Choice(['Верно', 'Неверно', 'Недостаточно данных в условии']) * 4 +
+            text_task * 6 +
+            [Text('Сколько задач на уроке сегодня было понятно?')]
         ),
-        ('2020.12.08 9М - Колебания и волны - 1', '11:05', 'ratatouille', [abv_choices(8)]),
-        ('2020.12.10 9М - Колебания и волны - 2', '11:05', 'incredibles', [abv_choices(8)]),
-        ('2020.12.11 10АБ - Статика и гидростатика - 2', '11:05', 'minions', [any_text(5)]),
-        ('2020.12.17 9М - Колебания и волны - 3', '11:05', 'keanureeves', [abv_choices(10)]),
-        # ('2020.12.22 9М - Колебания и волны - 4', '11:05', 'zootopia', [abv_choices(10)]),
-        ('2021.04.15 10АБ - Электростатика - 1', '9:02', 'zootopia', [any_text(7)]),
-        ('2021.04.16 9М - Строение атома - 1', '11:02', 'zootopia', [any_text(7)]),
+        ('2020.10.22 9М - Тест по динамике - 1', '10:50', None,
+            abv_choices * 10 + [Text('Сколько задач на уроке сегодня было понятно?')],
+        ),
+        ('2020.10.27 9М - Тест по динамике - 2', '10:50', 'incredibles', abv_choices * 8 + text_task * 4),
+        ('2020.10.27 10АБ - Тест по динамике - 2', '10:05', 'incredibles', text_task * 7),
+        ('2020.10.29 10АБ - Тест по динамике - 3', '12:05', 'insideout', abv_choices * 6 + text_task * 11),
+        ('2020.10.30 10АБ - Тест по динамике - 4', '10:05', 'minions', abv_choices * 9 + text_task * 3),
+        ('2020.11.03 10АБ - Тест по динамике - 5', '9:05', 'insideout',
+            email('(только для 10«Б», 10«А» уже присылал)') + abv_choices * 2 + text_task * 5,
+        ),
+        ('2020.11.03 9М - Тест по динамике - 3', '11:05', 'insideout', email('') + abv_choices * 10),
+        ('2020.11.06 10АБ - Тест по динамике - 6', '10:05', 'up', text_task * 8),
+        ('2020.11.12 9М - Динамика - 6', '10:15', 'zootopia', abv_choices * 5 + text_task * 4),
+        ('2020.11.13 10АБ - Законы сохранения - 1', '10:05', 'zootopia',
+            email('(если не присылали на прошлой неделе)') + abv_choices * 6 + text_task * 4,
+        ),
+        ('2020.11.19 9М - Законы сохранения - 1', '10:05', 'up', abv_choices * 6 + text_task * 4),
+        ('2020.11.26 10АБ - Законы сохранения - 2', '12:05', 'incredibles', text_task * 10),
+        ('2020.12.04 10АБ - Статика и гидростатика - 1', '12:05', 'ratatouille',
+            text_task * 7 + [Text('Ссылка на гифку'), Text('Какой вопрос добавить в опрос?')],
+        ),
+        ('2020.12.08 9М - Колебания и волны - 1', '11:05', 'ratatouille', abv_choices * 8),
+        ('2020.12.10 9М - Колебания и волны - 2', '11:05', 'incredibles', abv_choices * 8),
+        ('2020.12.11 10АБ - Статика и гидростатика - 2', '11:05', 'minions', text_task * 5),
+        ('2020.12.17 9М - Колебания и волны - 3', '11:05', 'keanureeves', abv_choices * 10),
+        ('2020.12.22 9М - Колебания и волны - 4', '11:05', 'zootopia', abv_choices * 10),
+        ('2021.04.15 10АБ - Электростатика - 1', '9:02', 'zootopia', text_task * 7),
+        ('2021.04.16 9М - Строение атома - 1', '11:02', 'zootopia', text_task * 7),
     ]
     for title, up_to, image, questions in forms_config:
         form_generator = TestFormGenerator(title=title, upTo=up_to, image=image)
-        for question_config in questions:
-            if question_config[0] == 'choices':
-                form_generator.AddMultipleChoiceTask(choices=question_config[2], count=question_config[1])
-            elif question_config[0] == 'any':
-                form_generator.AddTextTask(count=question_config[1])
-            elif question_config[0] == 'text':
-                form_generator.AddText(title=question_config[1])
-            else:
-                raise RuntimeError(f'Invalid question {question_config}')
-
+        for node in questions:
+            form_generator.AddNode(node)
         yield title, form_generator.Generate()
 
 
