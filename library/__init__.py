@@ -1,5 +1,5 @@
 import library.absent
-import library.checker
+import library.check
 import library.convert
 import library.datetools
 import library.download
