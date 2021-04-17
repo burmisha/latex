@@ -44,7 +44,7 @@ class GoogleForm:
 
     def _to_json_bool(self, value):
         return str(value).lower()
-    
+
     def AddTextItem(self, title=None, helpText=None, required=False):
         iid = self._get_new_id()
         required = self._to_json_bool(required)
