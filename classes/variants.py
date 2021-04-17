@@ -2,6 +2,8 @@ import library.pupils
 import library.formatter
 import library.picker
 
+from library.gform.node import text_task
+
 import generators
 
 import logging
@@ -33,7 +35,7 @@ def pick_classes(base, config):
 
 class Work:
     FORCED_NOT_DISTANT = ['2020-12-24 9']
-    def __init__(self, task_id=None, classes=None, human=None, thresholds=None):
+    def __init__(self, task_id=None, classes=None, human=None, thresholds=None, up_to=None, image=None, questions=None):
         self._task_id = task_id
         self._tasks_classes = pick_classes(generators, classes)
         self._pupils = library.pupils.get_class_from_string(task_id)
@@ -41,6 +43,10 @@ class Work:
 
         self._human_name = human
         self._thresholds = thresholds
+
+        self._up_to = up_to
+        self._image = image
+        self._questions = questions
 
     def is_distant_task(self):
         if self._task_id in self.FORCED_NOT_DISTANT:
@@ -153,12 +159,18 @@ def get_all_variants():
             classes={'mechanics.zsi_zse': ['Ch_3_1', 'Ch_3_2', 'Ch_3_3', 'Ch_3_6', 'Ch_3_26', 'Vishnyakova_1_4_6', 'Ch_4_2', 'Ch_4_29', 'Ch_4_45', 'Vishnyakova_1_4_12']},
             human='2020.11.26 10АБ - Законы сохранения - 2',
             thresholds=[4, 6, 8],
+            up_to='12:05',
+            image='incredibles',
+            questions=text_task * 10,
         ),
         Work(
             task_id='2020-12-11 10',
             classes={'mechanics.gidro': ['Ch_6_3', 'Ch_6_8', 'Ch_6_10', 'Ch_6_16', 'Ch_6_20']},
             human='2020.12.11 10АБ - Статика и гидростатика - 2',
             thresholds=[1.5, 2.5, 3.5],
+            up_to='11:05',
+            image='minions',
+            questions=text_task * 5,
         ),
         Work(
             task_id='2020-12-24 9',
@@ -259,12 +271,18 @@ def get_all_variants():
             classes={'electricity.cond': ['Definitions03', 'Definitions04', 'Q_is_possible', 'Q_from_DeltaU_C', 'C_from_U_Q', 'C_ratio', 'W_from_Q_C']},
             human='2021.04.15 10АБ - Электростатика - 1',
             thresholds=[2, 4, 6],
+            up_to='9:02',
+            image='zootopia',
+            questions=text_task * 7
         ),
         Work(
             task_id='2021-04-16 9',
             classes={'atomic.radioactive': ['Definitions01', 'Definitions02', 'Definitions03', 'Definitions04', 'Definitions05', 'Definitions06', 'Definitions07']},
             human='2021.04.16 9М - Строение атома - 1',
             thresholds=[4, 5, 6],
+            questions=text_task * 7,
+            up_to='11:02',
+            image='zootopia',
         ),
     ]
     for work in works:

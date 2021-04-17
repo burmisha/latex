@@ -1,7 +1,9 @@
+import classes.variants
+
 import library.process
 from library.gform.form import GoogleForm
 from library.gform.generator import Generator
-from library.gform.node import Choice, Text, TextTask
+from library.gform.node import Choice, Text, TextTask, text_task, abv_choices
 
 import logging
 log = logging.getLogger(__name__)
@@ -18,9 +20,6 @@ def get_all_forms():
     yield 'example', example
 
     email = lambda desc: Text(f'Электронная почта {desc}'.strip())
-    abv_choices = Choice('АБВ')
-    text_task = TextTask()
-
     forms_config = [
         ('2020.10.22 10АБ - Тест по динамике - 1', '8:50', None,
             Choice(['Верно', 'Неверно', 'Недостаточно данных в условии']) * 4 +
@@ -44,21 +43,22 @@ def get_all_forms():
             email('(если не присылали на прошлой неделе)') + abv_choices * 6 + text_task * 4,
         ),
         ('2020.11.19 9М - Законы сохранения - 1', '10:05', 'up', abv_choices * 6 + text_task * 4),
-        ('2020.11.26 10АБ - Законы сохранения - 2', '12:05', 'incredibles', text_task * 10),
         ('2020.12.04 10АБ - Статика и гидростатика - 1', '12:05', 'ratatouille',
             text_task * 7 + Text('Ссылка на гифку') + Text('Какой вопрос добавить в опрос?'),
         ),
         ('2020.12.08 9М - Колебания и волны - 1', '11:05', 'ratatouille', abv_choices * 8),
         ('2020.12.10 9М - Колебания и волны - 2', '11:05', 'incredibles', abv_choices * 8),
-        ('2020.12.11 10АБ - Статика и гидростатика - 2', '11:05', 'minions', text_task * 5),
         ('2020.12.17 9М - Колебания и волны - 3', '11:05', 'keanureeves', abv_choices * 10),
         ('2020.12.22 9М - Колебания и волны - 4', '11:05', 'zootopia', abv_choices * 10),
-        ('2021.04.15 10АБ - Электростатика - 1', '9:02', 'zootopia', text_task * 7),
-        ('2021.04.16 9М - Строение атома - 1', '11:02', 'zootopia', text_task * 7),
     ]
     for title, up_to, image, questions in forms_config:
         form_generator = Generator(title=title, questions=questions)
         yield title, form_generator.Generate(up_to=up_to, image=image)
+
+    for work in classes.variants.get_all_variants():
+        if work._up_to is not None:
+            form_generator = Generator(title=work._human_name, questions=work._questions)
+            yield work._human_name, form_generator.Generate(up_to=work._up_to, image=work._image)
 
 
 def run(args):
