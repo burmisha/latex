@@ -198,8 +198,7 @@ def run(args):
         if args.log_query:
             log.info(f'Script: \n{query}\n')
 
-        library.process.pbcopy(query)
-        log.info('Copied query to clipboard')
+        library.process.pbcopy(query, name='query')
 
         tab_opener = TabOpener(args.browser)
         script_url = 'https://script.google.com/home'

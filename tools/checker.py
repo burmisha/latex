@@ -68,8 +68,7 @@ def run(args):
             if pupil_result:
                 result.append(f'{pupil_result._pupil.GetFullName(surnameFirst=True)}\t{pupil_result._mark}')
 
-        library.process.pbcopy('\n'.join(result))
-        log.info('Copied names and marks to clipboard')
+        library.process.pbcopy('\n'.join(result), name='names and marks')
 
 
 def populate_parser(parser):

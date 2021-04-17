@@ -11,5 +11,6 @@ def run(command):
         raise RuntimeError('Command failed: %s: %s' % (command, ' '.join(command)))
 
 
-def pbcopy(text):
+def pbcopy(text, name=None):
     subprocess.run('pbcopy', universal_newlines=True, input=text)
+    log.info(f'Copied {name or "text"} to clipboard')
