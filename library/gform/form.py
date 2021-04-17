@@ -38,6 +38,7 @@ class GoogleForm:
             // ss.getSheets()[0].setName('SOME NAME');
 '''
         self._item_id = 0
+        self._title = title
 
     def _get_new_id(self):
         self._item_id += 1

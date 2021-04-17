@@ -43,7 +43,7 @@ def run(args):
         if args.log_query:
             log.info(f'Script: \n{query}\n')
 
-        library.process.pbcopy(query, name='query')
+        library.process.pbcopy(query, name=f'query for {form._title!r}')
 
         tab_opener = library.process.TabOpener(args.browser)
         script_url = 'https://script.google.com/home'
