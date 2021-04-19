@@ -6,18 +6,34 @@ log = logging.getLogger(__name__)
 
 class Date:
     def __init__(self, date):
-        assert isinstance(date, str), 'Invalid date type: %r' % date
-        assert re.match(r'20\d\d-\d{2}-\d{2}', date), 'Invalid date format: %r' % date
+        assert isinstance(date, str), f'Invalid date type: {date!r}'
+        assert re.match(r'20\d\d-\d{2}-\d{2}', date), f'Invalid date format: {date!r}'
         self.__DateStr = date
         log.debug('Date: %r', self.__DateStr)
-        self._year = int(self.__DateStr[:4])
-        self._month = int(self.__DateStr[5:7])
-        self._day = int(self.__DateStr[8:10])
+        parts = self.__DateStr.split('-')
+        self._year = int(parts[0])
+        self._month = int(parts[1])
+        self._day = int(parts[2])
         assert 2018 <= self._year <= 2025, 'Error on year in %r' % self.__DateStr
+        assert 1 <= self._month <= 12, 'Error on month in %r' % self.__DateStr
         assert 1 <= self._day <= 31, 'Error on day in %r' % self.__DateStr
 
     def GetFilenameText(self):
         return str(self.__DateStr)
+
+    def __format__(self, fmt):
+        try:
+            if fmt == 'LaTeX':
+                return self.GetHumanText()
+            elif fmt == 'filename':
+                return self.GetFilenameText()
+            else:
+                raise RuntimeError(f'Unknown format: {fmt!r}')
+        except RuntimeError:
+            raise
+        except Exception:
+            log.error(f'Error in __format__ for {fmt} and {self.__DateStr}')
+            raise
 
     def GetHumanText(self):
         textMonth = {
