@@ -433,7 +433,7 @@ def get_all_variants():
             task_id='2021-04-15 10',
             classes={'electricity.cond': ['Definitions03', 'Definitions04', 'Q_is_possible', 'Q_from_DeltaU_C', 'C_from_U_Q', 'C_ratio', 'W_from_Q_C']},
             human='2021.04.15 10АБ - Электростатика - 1',
-            thresholds=[2, 4, 6],
+            thresholds=[3, 4, 6],
             up_to='9:02',
             image='zootopia',
             questions=text_task * 7
