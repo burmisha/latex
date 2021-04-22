@@ -249,7 +249,7 @@ def get_all_variants():
         ),
         Work(
             task_id='2019-04-19 11',
-            classes={'atomic.quantum': ['Fotons', 'KernelCount', 'RadioFall', 'RadioFall2']}
+            classes=['atomic.quantum.Fotons', 'atomic.nuclear.KernelCount', 'atomic.nuclear.RadioFall', 'atomic.quantum.RadioFall2'],
         ),
         Work(
             task_id='2019-04-30 11',

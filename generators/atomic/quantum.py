@@ -118,43 +118,6 @@ class Deduce01(variant.VariantTask):
 
 
 @variant.text('''
-    В ядре электрически нейтрального атома {nuclons} частиц.
-    Вокруг ядра обращается {electrons} электронов.
-    Сколько в ядре этого атома протонов и нейтронов?
-''')
-@variant.answer('$Z = {protons}$ протонов и $A - Z = {neutrons}$ нейтронов')
-@variant.arg(nuclons__electrons=[
-    (108, 47),  # Al
-    (65, 29),  # Cu
-    (63, 29),  # Cu
-    (121, 51),  # Sb
-    (123, 51),  # Cu
-    (190, 78),  # Pt
-])
-class KernelCount(variant.VariantTask):
-    def GetUpdate(self, nuclons=None, electrons=None, **kws):
-        return dict(
-            neutrons=nuclons - electrons,
-            protons=electrons,
-        )
-
-
-@variant.text('Запишите реакцию ${fallType}$-распада {element}.')
-@variant.arg(fallType__element=[
-    ('\\alpha', '\ce{^{238}_{92}U}'),
-    ('\\alpha', '\ce{^{144}_{60}Nd}'),
-    ('\\alpha', '\ce{^{147}_{62}Sm}'),
-    ('\\alpha', '\ce{^{148}_{62}Sm}'),
-    ('\\alpha', '\ce{^{180}_{74}W}'),
-    ('\\alpha', '\ce{^{153}_{61}Eu}'),
-    ('\\beta', '\ce{^{137}_{55}Cs}'),
-    ('\\beta', '\ce{^{22}_{11}Na}'),
-])
-class RadioFall(variant.VariantTask):
-    pass
-
-
-@variant.text('''
     Какой период полураспада радиоактивного изотопа,
     если за {time} ч в среднем распадается {delta} атомов из {total}?
 ''')
