@@ -16,7 +16,7 @@ all_particles = ['протонов', 'нейтронов', 'электронов
 
 @variant.solution_space(0)
 @variant.text('Определите число {what01} в атоме ${element:LaTeX}$.')
-@variant.answer('$Z = {element:protons}$ протонов и столько же электронов, $A - Z = {element:neutrons}$ нейтронов, {element:nuclons} нуклонов.')
+@variant.answer('$Z = {element:protons}$ протонов и столько же электронов $A = {element:nuclons}$ нуклонов, $A - Z = {element:neutrons}$ нейтронов. Ответ: {answer}')
 @variant.answer_test('{answer}')
 @variant.arg(what01=all_particles)
 @variant.arg(element=ElementsList[0:3])
@@ -27,7 +27,7 @@ class AtomCount01(variant.VariantTask):
 
 @variant.solution_space(0)
 @variant.text('Определите число {what02} в атоме ${element:LaTeX}$.')
-@variant.answer('$Z = {element:protons}$ протонов и столько же электронов, $A - Z = {element:neutrons}$ нейтронов, {element:nuclons} нуклонов.')
+@variant.answer('$Z = {element:protons}$ протонов и столько же электронов $A = {element:nuclons}$ нуклонов, $A - Z = {element:neutrons}$ нейтронов. Ответ: {answer}')
 @variant.answer_test('{answer}')
 @variant.arg(what02=all_particles)
 @variant.arg(element=ElementsList[3:7])
@@ -38,7 +38,7 @@ class AtomCount02(variant.VariantTask):
 
 @variant.solution_space(0)
 @variant.text('Определите число {what03} в атоме ${element:LaTeX}$.')
-@variant.answer('$Z = {element:protons}$ протонов и столько же электронов, $A - Z = {element:neutrons}$ нейтронов, {element:nuclons} нуклонов.')
+@variant.answer('$Z = {element:protons}$ протонов и столько же электронов $A = {element:nuclons}$ нуклонов, $A - Z = {element:neutrons}$ нейтронов. Ответ: {answer}')
 @variant.answer_test('{answer}')
 @variant.arg(what03=all_particles)
 @variant.arg(element=ElementsList[7:12])
@@ -49,7 +49,7 @@ class AtomCount03(variant.VariantTask):
 
 @variant.solution_space(0)
 @variant.text('Определите число {what04} в атоме ${element:LaTeX}$.')
-@variant.answer('$Z = {element:protons}$ протонов и столько же электронов, $A - Z = {element:neutrons}$ нейтронов, {element:nuclons} нуклонов.')
+@variant.answer('$Z = {element:protons}$ протонов и столько же электронов $A = {element:nuclons}$ нуклонов, $A - Z = {element:neutrons}$ нейтронов. Ответ: {answer}')
 @variant.answer_test('{answer}')
 @variant.arg(what04=all_particles)
 @variant.arg(element=ElementsList[12:18])
@@ -60,7 +60,7 @@ class AtomCount04(variant.VariantTask):
 
 @variant.solution_space(0)
 @variant.text('Определите число {what05} в атоме ${element:LaTeX}$.')
-@variant.answer('$Z = {element:protons}$ протонов и столько же электронов, $A - Z = {element:neutrons}$ нейтронов, {element:nuclons} нуклонов.')
+@variant.answer('$Z = {element:protons}$ протонов и столько же электронов $A = {element:nuclons}$ нуклонов, $A - Z = {element:neutrons}$ нейтронов. Ответ: {answer}')
 @variant.answer_test('{answer}')
 @variant.arg(what05=all_particles)
 @variant.arg(element=ElementsList[18:25])
@@ -71,7 +71,7 @@ class AtomCount05(variant.VariantTask):
 
 @variant.solution_space(0)
 @variant.text('Определите число {what06} в атоме ${element:LaTeX}$.')
-@variant.answer('$Z = {element:protons}$ протонов и столько же электронов, $A - Z = {element:neutrons}$ нейтронов, {element:nuclons} нуклонов.')
+@variant.answer('$Z = {element:protons}$ протонов и столько же электронов $A = {element:nuclons}$ нуклонов, $A - Z = {element:neutrons}$ нейтронов. Ответ: {answer}')
 @variant.answer_test('{answer}')
 @variant.arg(what06=all_particles)
 @variant.arg(element=ElementsList[25:33])
@@ -82,7 +82,7 @@ class AtomCount06(variant.VariantTask):
 
 @variant.solution_space(0)
 @variant.text('Определите число {what07} в атоме ${element:LaTeX}$.')
-@variant.answer('$Z = {element:protons}$ протонов и столько же электронов, $A - Z = {element:neutrons}$ нейтронов, {element:nuclons} нуклонов.')
+@variant.answer('$Z = {element:protons}$ протонов и столько же электронов $A = {element:nuclons}$ нуклонов, $A - Z = {element:neutrons}$ нейтронов. Ответ: {answer}')
 @variant.answer_test('{answer}')
 @variant.arg(what07=all_particles)
 @variant.arg(element=ElementsList[33:42])
@@ -93,7 +93,7 @@ class AtomCount07(variant.VariantTask):
 
 @variant.solution_space(0)
 @variant.text('Определите число {what08} в атоме ${element:LaTeX}$.')
-@variant.answer('$Z = {element:protons}$ протонов и столько же электронов, $A - Z = {element:neutrons}$ нейтронов, {element:nuclons} нуклонов.')
+@variant.answer('$Z = {element:protons}$ протонов и столько же электронов $A = {element:nuclons}$ нуклонов, $A - Z = {element:neutrons}$ нейтронов. Ответ: {answer}')
 @variant.answer_test('{answer}')
 @variant.arg(what08=all_particles)
 @variant.arg(element=ElementsList[42:52])
@@ -104,7 +104,7 @@ class AtomCount08(variant.VariantTask):
 
 @variant.solution_space(0)
 @variant.text('Определите число {what09} в атоме ${element:LaTeX}$.')
-@variant.answer('$Z = {element:protons}$ протонов и столько же электронов, $A - Z = {element:neutrons}$ нейтронов, {element:nuclons} нуклонов.')
+@variant.answer('$Z = {element:protons}$ протонов и столько же электронов $A = {element:nuclons}$ нуклонов, $A - Z = {element:neutrons}$ нейтронов. Ответ: {answer}')
 @variant.answer_test('{answer}')
 @variant.arg(what09=all_particles)
 @variant.arg(element=ElementsList[52:63])
@@ -115,7 +115,7 @@ class AtomCount09(variant.VariantTask):
 
 @variant.solution_space(0)
 @variant.text('Определите число {what10} в атоме ${element:LaTeX}$.')
-@variant.answer('$Z = {element:protons}$ протонов и столько же электронов, $A - Z = {element:neutrons}$ нейтронов, {element:nuclons} нуклонов.')
+@variant.answer('$Z = {element:protons}$ протонов и столько же электронов $A = {element:nuclons}$ нуклонов, $A - Z = {element:neutrons}$ нейтронов. Ответ: {answer}')
 @variant.answer_test('{answer}')
 @variant.arg(what10=all_particles)
 @variant.arg(element=ElementsList[63:75])
@@ -126,7 +126,7 @@ class AtomCount10(variant.VariantTask):
 
 @variant.solution_space(0)
 @variant.text('Определите число {what11} в атоме ${element:LaTeX}$.')
-@variant.answer('$Z = {element:protons}$ протонов и столько же электронов, $A - Z = {element:neutrons}$ нейтронов, {element:nuclons} нуклонов.')
+@variant.answer('$Z = {element:protons}$ протонов и столько же электронов $A = {element:nuclons}$ нуклонов, $A - Z = {element:neutrons}$ нейтронов. Ответ: {answer}')
 @variant.answer_test('{answer}')
 @variant.arg(what11=all_particles)
 @variant.arg(element=ElementsList[75:88])
@@ -137,7 +137,7 @@ class AtomCount11(variant.VariantTask):
 
 @variant.solution_space(0)
 @variant.text('Определите число {what12} в атоме ${element:LaTeX}$.')
-@variant.answer('$Z = {element:protons}$ протонов и столько же электронов, $A - Z = {element:neutrons}$ нейтронов, {element:nuclons} нуклонов.')
+@variant.answer('$Z = {element:protons}$ протонов и столько же электронов $A = {element:nuclons}$ нуклонов, $A - Z = {element:neutrons}$ нейтронов. Ответ: {answer}')
 @variant.answer_test('{answer}')
 @variant.arg(what12=all_particles)
 @variant.arg(element=ElementsList[88:102])
@@ -149,7 +149,7 @@ class AtomCount12(variant.VariantTask):
 
 @variant.solution_space(0)
 @variant.text('Определите число {what01} в атоме ${element01:RuText}$.')
-@variant.answer('$Z = {element01:protons}$ протонов и столько же электронов, $A - Z = {element01:neutrons}$ нейтронов, {element01:nuclons} нуклонов.')
+@variant.answer('$Z = {element01:protons}$ протонов и столько же электронов, $A = {element01:nuclons}$ нуклонов, $A - Z = {element01:neutrons}$ нейтронов. Ответ: {answer}')
 @variant.answer_test('{answer}')
 @variant.arg(what01=all_particles)
 @variant.arg(element01=ElementsList[1:4])
@@ -160,7 +160,7 @@ class AtomCount01_Text(variant.VariantTask):
 
 @variant.solution_space(0)
 @variant.text('Определите число {what02} в атоме ${element02:RuText}$.')
-@variant.answer('$Z = {element02:protons}$ протонов и столько же электронов, $A - Z = {element02:neutrons}$ нейтронов, {element02:nuclons} нуклонов.')
+@variant.answer('$Z = {element02:protons}$ протонов и столько же электронов, $A = {element02:nuclons}$ нуклонов, $A - Z = {element02:neutrons}$ нейтронов. Ответ: {answer}')
 @variant.answer_test('{answer}')
 @variant.arg(what02=all_particles)
 @variant.arg(element02=ElementsList[4:8])
@@ -171,7 +171,7 @@ class AtomCount02_Text(variant.VariantTask):
 
 @variant.solution_space(0)
 @variant.text('Определите число {what03} в атоме ${element03:RuText}$.')
-@variant.answer('$Z = {element03:protons}$ протонов и столько же электронов, $A - Z = {element03:neutrons}$ нейтронов, {element03:nuclons} нуклонов.')
+@variant.answer('$Z = {element03:protons}$ протонов и столько же электронов, $A = {element03:nuclons}$ нуклонов, $A - Z = {element03:neutrons}$ нейтронов. Ответ: {answer}')
 @variant.answer_test('{answer}')
 @variant.arg(what03=all_particles)
 @variant.arg(element03=ElementsList[8:13])
@@ -182,7 +182,7 @@ class AtomCount03_Text(variant.VariantTask):
 
 @variant.solution_space(0)
 @variant.text('Определите число {what04} в атоме ${element04:RuText}$.')
-@variant.answer('$Z = {element04:protons}$ протонов и столько же электронов, $A - Z = {element04:neutrons}$ нейтронов, {element04:nuclons} нуклонов.')
+@variant.answer('$Z = {element04:protons}$ протонов и столько же электронов, $A = {element04:nuclons}$ нуклонов, $A - Z = {element04:neutrons}$ нейтронов. Ответ: {answer}')
 @variant.answer_test('{answer}')
 @variant.arg(what04=all_particles)
 @variant.arg(element04=ElementsList[13:19])
@@ -193,7 +193,7 @@ class AtomCount04_Text(variant.VariantTask):
 
 @variant.solution_space(0)
 @variant.text('Определите число {what05} в атоме ${element05:RuText}$.')
-@variant.answer('$Z = {element05:protons}$ протонов и столько же электронов, $A - Z = {element05:neutrons}$ нейтронов, {element05:nuclons} нуклонов.')
+@variant.answer('$Z = {element05:protons}$ протонов и столько же электронов, $A = {element05:nuclons}$ нуклонов, $A - Z = {element05:neutrons}$ нейтронов. Ответ: {answer}')
 @variant.answer_test('{answer}')
 @variant.arg(what05=all_particles)
 @variant.arg(element05=ElementsList[19:26])
@@ -204,7 +204,7 @@ class AtomCount05_Text(variant.VariantTask):
 
 @variant.solution_space(0)
 @variant.text('Определите число {what06} в атоме ${element06:RuText}$.')
-@variant.answer('$Z = {element06:protons}$ протонов и столько же электронов, $A - Z = {element06:neutrons}$ нейтронов, {element06:nuclons} нуклонов.')
+@variant.answer('$Z = {element06:protons}$ протонов и столько же электронов, $A = {element06:nuclons}$ нуклонов, $A - Z = {element06:neutrons}$ нейтронов. Ответ: {answer}')
 @variant.answer_test('{answer}')
 @variant.arg(what06=all_particles)
 @variant.arg(element06=ElementsList[26:34])
@@ -215,7 +215,7 @@ class AtomCount06_Text(variant.VariantTask):
 
 @variant.solution_space(0)
 @variant.text('Определите число {what07} в атоме ${element07:RuText}$.')
-@variant.answer('$Z = {element07:protons}$ протонов и столько же электронов, $A - Z = {element07:neutrons}$ нейтронов, {element07:nuclons} нуклонов.')
+@variant.answer('$Z = {element07:protons}$ протонов и столько же электронов, $A = {element07:nuclons}$ нуклонов, $A - Z = {element07:neutrons}$ нейтронов. Ответ: {answer}')
 @variant.answer_test('{answer}')
 @variant.arg(what07=all_particles)
 @variant.arg(element07=ElementsList[34:43])
@@ -226,7 +226,7 @@ class AtomCount07_Text(variant.VariantTask):
 
 @variant.solution_space(0)
 @variant.text('Определите число {what08} в атоме ${element08:RuText}$.')
-@variant.answer('$Z = {element08:protons}$ протонов и столько же электронов, $A - Z = {element08:neutrons}$ нейтронов, {element08:nuclons} нуклонов.')
+@variant.answer('$Z = {element08:protons}$ протонов и столько же электронов, $A = {element08:nuclons}$ нуклонов, $A - Z = {element08:neutrons}$ нейтронов. Ответ: {answer}')
 @variant.answer_test('{answer}')
 @variant.arg(what08=all_particles)
 @variant.arg(element08=ElementsList[43:53])
@@ -237,7 +237,7 @@ class AtomCount08_Text(variant.VariantTask):
 
 @variant.solution_space(0)
 @variant.text('Определите число {what09} в атоме ${element09:RuText}$.')
-@variant.answer('$Z = {element09:protons}$ протонов и столько же электронов, $A - Z = {element09:neutrons}$ нейтронов, {element09:nuclons} нуклонов.')
+@variant.answer('$Z = {element09:protons}$ протонов и столько же электронов, $A = {element09:nuclons}$ нуклонов, $A - Z = {element09:neutrons}$ нейтронов. Ответ: {answer}')
 @variant.answer_test('{answer}')
 @variant.arg(what09=all_particles)
 @variant.arg(element09=ElementsList[53:64])
@@ -248,7 +248,7 @@ class AtomCount09_Text(variant.VariantTask):
 
 @variant.solution_space(0)
 @variant.text('Определите число {what10} в атоме ${element10:RuText}$.')
-@variant.answer('$Z = {element10:protons}$ протонов и столько же электронов, $A - Z = {element10:neutrons}$ нейтронов, {element10:nuclons} нуклонов.')
+@variant.answer('$Z = {element10:protons}$ протонов и столько же электронов, $A = {element10:nuclons}$ нуклонов, $A - Z = {element10:neutrons}$ нейтронов. Ответ: {answer}')
 @variant.answer_test('{answer}')
 @variant.arg(what10=all_particles)
 @variant.arg(element10=ElementsList[64:76])
@@ -259,7 +259,7 @@ class AtomCount10_Text(variant.VariantTask):
 
 @variant.solution_space(0)
 @variant.text('Определите число {what11} в атоме ${element11:RuText}$.')
-@variant.answer('$Z = {element11:protons}$ протонов и столько же электронов, $A - Z = {element11:neutrons}$ нейтронов, {element11:nuclons} нуклонов.')
+@variant.answer('$Z = {element11:protons}$ протонов и столько же электронов, $A = {element11:nuclons}$ нуклонов, $A - Z = {element11:neutrons}$ нейтронов. Ответ: {answer}')
 @variant.answer_test('{answer}')
 @variant.arg(what11=all_particles)
 @variant.arg(element11=ElementsList[76:89])
@@ -270,7 +270,7 @@ class AtomCount11_Text(variant.VariantTask):
 
 @variant.solution_space(0)
 @variant.text('Определите число {what12} в атоме ${element12:RuText}$.')
-@variant.answer('$Z = {element12:protons}$ протонов и столько же электронов, $A - Z = {element12:neutrons}$ нейтронов, {element12:nuclons} нуклонов.')
+@variant.answer('$Z = {element12:protons}$ протонов и столько же электронов, $A = {element12:nuclons}$ нуклонов, $A - Z = {element12:neutrons}$ нейтронов. Ответ: {answer}')
 @variant.answer_test('{answer}')
 @variant.arg(what12=all_particles)
 @variant.arg(element12=ElementsList[89:103])
