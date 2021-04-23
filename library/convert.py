@@ -246,7 +246,6 @@ class DocxToPdf:
         else:
             log.info(f'Converting \'{source_file}\' to \'{destination_file}\'')
 
-
         tmp_docx_file = os.path.join(self.__GroupContainerDir, '_convert_tmp.docx')
         tmp_pdf_file = os.path.join(self.__GroupContainerDir, '_convert_tmp.pdf')
         for file in [tmp_docx_file, tmp_pdf_file]:
