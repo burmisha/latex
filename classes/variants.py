@@ -454,10 +454,19 @@ def get_all_variants():
                 'AtomCount01_Text', 'AtomCount02_Text', 'AtomCount03_Text', 'AtomCount04_Text', 'AtomCount05_Text', 'AtomCount06_Text', 'AtomCount07_Text', 'AtomCount08_Text', 'AtomCount09_Text', 'AtomCount10_Text', 'AtomCount11_Text', 'AtomCount12_Text',
             ]},
             human='2021.04.23 9М - Строение атома - 2',
-            thresholds=[11, 14, 17],
-            questions=text_task * 20,
+            thresholds=[12, 16, 20],
+            questions=text_task * 24,
             up_to='11:02',
-            image='zootopia',
+            image='ratatouille',
+        ),
+        Work(
+            task_id='2021-04-23 10',
+            classes={'electricity.om': ['Definitions01', 'Definitions02', 'Definitions03', 'Definitions04', 'I_from_U_R', 'r_from_R_N', 'U_from_R1_R2_I', 'I_ratio', 'R_best_from_R_N']},
+            human='2021.04.23 10АБ - Постоянный ток - 1',
+            thresholds=[4, 6, 8],
+            questions=text_task * 9,
+            up_to='9:05',
+            image='ratatouille',
         ),
     ]
     for work in works:
