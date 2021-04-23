@@ -1,7 +1,209 @@
 import itertools
 
 import generators.variant as variant
-from generators.helpers import UnitValue
+from generators.helpers import UnitValue, letter_variants, Fraction
+
+
+@variant.solution_space(20)
+@variant.text('''
+    Установите каждой букве в соответствие ровно одну цифру и запишите ответ (только цифры, без других символов).
+
+    {lv.Questions}.
+
+    {lv.Options}.
+''')
+@variant.answer_test('{lv.Answer}')
+@variant.arg(lv=letter_variants(
+    {
+        'разность потенциалов': '$U$',
+        'электрическое сопротивление резистора': '$R$',
+        'удельное сопротивление проводника': '$\\rho$',
+        'сила тока': '$\\mathcal{I}$',
+        'длина проводника': '$l$',
+        'площадь поперечного сечения проводника': '$S$',
+    },
+    ['$D$', '$k$', '$\\lambda$'],
+    answers_count=3,
+    mocks_count=2,
+))
+@variant.answer_short('{lv.Answer}')
+class Definitions01(variant.VariantTask):
+    pass
+
+
+@variant.solution_space(20)
+@variant.text('''
+    Установите каждой букве в соответствие ровно одну цифру и запишите ответ (только цифры, без других символов).
+
+    {lv.Questions}.
+
+    {lv.Options}.
+''')
+@variant.answer_test('{lv.Answer}')
+@variant.arg(lv=letter_variants(
+    {
+
+        'разность потенциалов': 'вольт',
+        'электрическое сопротивление резистора': 'ом',
+        'электрический заряд': 'кулон',
+        'сила тока': 'ампер',
+        'длина проводника': 'метр',
+    },
+    ['генри', 'ватт', 'сименс'],
+    answers_count=3,
+    mocks_count=2,
+))
+@variant.answer_short('{lv.Answer}')
+class Definitions02(variant.VariantTask):
+    pass
+
+
+@variant.solution_space(20)
+@variant.text('''
+    Установите каждой букве в соответствие ровно одну цифру и запишите ответ (только цифры, без других символов).
+
+    {lv.Questions}.
+
+    {lv.Options}.
+''')
+@variant.answer_test('{lv.Answer}')
+@variant.arg(lv=letter_variants(
+    {
+
+        'закон Ома': '$\\mathcal{I} R = U$',
+        'электрическое сопротивление резистора': '$R = \\rho \\frac lS$',
+        'эквивалентное сопротивление 2 резисторов (параллельно)': '$\\frac{R_1R_2}{R_1 + R_2}$',
+        'эквивалентное сопротивление 2 резисторов (последовательно)': '$R_1 + R_2$',
+    },
+    ['$\\frac{2R_1R_2}{R_1 + R_2}$', '$\\frac{R_1 + R_2} 2$', '$\\sqrt{R_1R_2}$', '$\\rho = R l S$', '$R = \\rho \\frac Sl$', '$\\frac{\\mathcal{I}} R = U$' ],
+    answers_count=2,
+    mocks_count=3,
+))
+@variant.answer_short('{lv.Answer}')
+class Definitions03(variant.VariantTask):
+    pass
+
+
+@variant.solution_space(20)
+@variant.text('''
+    Установите каждой букве в соответствие ровно одну цифру и запишите ответ (только цифры, без других символов).
+
+    {lv.Questions}.
+
+    {lv.Options}.
+''')
+@variant.answer_test('{lv.Answer}')
+@variant.arg(lv=letter_variants(
+    {
+
+        'эквивалентное сопротивление 3 резисторов (параллельно)': '$\\frac{R_1R_2R_3}{R_1R_2 + R_2R_3 + R_3R_1}$',
+        'эквивалентное сопротивление 3 резисторов (последовательно)': '$R_1 + R_2 + R_3$',
+    },
+    ['$\\frac{R_1R_2R_3}{R_1 + R_2 + R_3}$', '$\\frac{R_1 + R_2 + R_3}3$', '$\\frac 3{\\frac 1{R_1} + \\frac 1{R_2} + \\frac 1{R_3}}$', '$\\sqrt{\\frac{R_1^2 + R_2^2 + R_3^2}3}$',],
+    answers_count=2,
+    mocks_count=3,
+))
+@variant.answer_short('{lv.Answer}')
+class Definitions04(variant.VariantTask):
+    pass
+
+
+@variant.solution_space(20)
+@variant.text('''
+    На резистор сопротивлением {R:V:e} подали напряжение {U:V:e}.
+    Определите ток, который потечёт через резистор, ответ выразите в амперах.
+''')
+@variant.answer_test('{I.Value}')
+@variant.answer_short('{I:L} = \\frac{U:L:s}{R:L:s} = \\frac{U:Value:s}{R:Value:s} = {I:Value}')
+@variant.arg(R=('R = {} Ом', [3, 5, 10, 15, 20, 30]))
+@variant.arg(U=('U = {} В', [120, 180, 240]))
+class I_from_U_R(variant.VariantTask):
+    def GetUpdate(self, R=None, U=None, **kws):
+        return dict(
+            I='\\mathcal{I} = %d А' % (U.Value / R.Value),
+        )
+
+
+@variant.solution_space(20)
+@variant.text('''
+    Женя собирает электрическую цепь из {N:V:e} одинаковых резисторов, каждый сопротивлением {R:V:e}.
+    Какое эквивалентное сопротивление этой цепи получится, если все резисторы подключены {how}, ответ выразите в омах.
+''')
+@variant.answer_test('{r.Value}')
+@variant.answer_short('{r:Task}')
+@variant.arg(R=('R = {} Ом', [160, 240, 320]))
+@variant.arg(N=('N = {}', [10, 20, 40]))
+@variant.arg(how=['параллельно', 'последовательно'])
+class r_from_R_N(variant.VariantTask):
+    def GetUpdate(self, R=None, N=None, how=None, **kws):
+        answer = {
+            'параллельно': R.Value / N.Value,
+            'последовательно': R.Value * N.Value,
+        }[how]
+        return dict(
+            r='r = %d Ом' % answer,
+        )
+
+@variant.solution_space(20)
+@variant.text('''
+    Два резистора сопротивлениями {R1:Task:e} и {R2:Task:e} подключены {how} и на них подано напряжение.
+    Определите, какое напряжение них подали, если в цепи идёт {I:Task:e}. Ответ выразите в вольтах и округлите до целого.
+''')
+@variant.answer_test('{U.Value}')
+@variant.answer_short('{U:Task}')
+@variant.arg(R1=('R_1 = {} кОм', [4, 10, 15]))
+@variant.arg(R2=('R_2 = {} кОм', [2, 6, 12, 20]))
+@variant.arg(I=('\\mathcal{{I}} = {} мА', [2, 3, 5]))
+@variant.arg(how=['параллельно', 'последовательно'])
+class U_from_R1_R2_I(variant.VariantTask):
+    def GetUpdate(self, R1=None, R2=None, I=None, how=None, **kws):
+        answer = {
+            'параллельно': 1. * (R1.Value * R2.Value) / (R1.Value + R2.Value) * I.Value,
+            'последовательно': 1. * (R1.Value + R2.Value) * I.Value,
+        }[how]
+        return dict(
+            U='U = %d В' % int(answer + 0.5),
+        )
+
+
+@variant.solution_space(40)
+@variant.text('''
+    Валя проводит эксперименты c 2 кусками одинаковой {which} проволки, причём второй кусок в {a} длиннее первого.
+    В одном из экспериментов Валя подаёт на первый кусок проволки напряжение в {b} раз больше, чем на второй.
+    Определите отношение сил тока в двух проволках в этом эксперименте: второй к первой.
+    В ответе укажите простую дробь или целое число.
+''')
+@variant.answer_test('{ratio:Basic}')
+@variant.answer_short('{ratio:LaTeX}')
+@variant.arg(a=[2, 3, 4, 5, 6, 7, 8, 9, 10])
+@variant.arg(b=[2, 3, 4, 5, 6, 7, 8, 9, 10])
+@variant.arg(which=['медной', 'стальной', 'алюминиевой'])
+class I_ratio(variant.VariantTask):
+    def GetUpdate(self, a=None, b=None, **kws):
+        return dict(
+            ratio=Fraction() / b / a,
+        )
+
+
+@variant.solution_space(20)
+@variant.text('''
+    В распоряжении Маши имеется {N} одинаковых резисторов, каждый сопротивлением {R:V:e}.
+    Какое {which} эквивалентное сопротивление она может из них получить? Использовать все резисторы при этом не обязательно, ответ укажите в омах.
+''')
+@variant.answer_test('{r.Value}')
+@variant.answer_short('{r:Task}')
+@variant.arg(R=('R = {} кОм', [2, 3, 4]))
+@variant.arg(N=[10, 20, 40])
+@variant.arg(which=['наименьшее', 'наибольшее'])
+class R_best_from_R_N(variant.VariantTask):
+    def GetUpdate(self, R=None, N=None, which=None, **kws):
+        answer = {
+            'наименьшее': R.Value * 1000 / N,
+            'наибольшее': R.Value * 1000 * N,
+        }[which]
+        return dict(
+            r='r = %d Ом' % answer,
+        )
 
 
 @variant.text('''
