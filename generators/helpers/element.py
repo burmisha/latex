@@ -203,7 +203,6 @@ class AllElements:
             for element in isotope.GetAll():
                 self._za_map[(element._Z, element._A)] = element
                 self._za_list.append(element)
-        print(len(self._za_map))
 
     def get_by_z_a(self, z=None, a=None):
         return self._za_map[(z, a)]
