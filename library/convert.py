@@ -328,10 +328,10 @@ class PdfToPdf:
 
     def Extract(self, pages, destination_file):
         log.info('Extracting pages %s to %s', pages, destination_file)
-        assert isinstance(pages, str)
+        assert isinstance(pages, (str, int))
         assert destination_file.endswith('.pdf')
         parts = []
-        for index, pages_range in enumerate(pages.split(',')):
+        for index, pages_range in enumerate(str(pages).split(',')):
             pages_range = pages_range.strip()
             if '-' in pages_range:
                 first_page, last_page = pages_range.split('-')
