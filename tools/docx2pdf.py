@@ -101,16 +101,16 @@ def get_extract_config():
     with open(cfg_file) as f:
         class_config_2 = yaml.safe_load(f)
 
-    for grade, grade_config in class_config_2.items():
-        dst_dir = grade_config['dst_dir']
-        for part, part_config in grade_config['parts'].items():
-            part_name = part_config['name']
-            prefix = f'{grade}-{part} - {part_name}'
+    for grade_key, grade_config in class_config_2.items():
+        grade, dst_dir = grade_key.split(' ', 1)
+        for part, part_config in grade_config.items():
+            part_index, part_name = part.split(' ', 1)
+            prefix = f'{grade}-{part_index} - {part_name}'
             pages_map = {}
-            for pages, file_name_mask in part_config['sheets'].items():
+            for pages, file_name_mask in part_config.items():
                 assert ' ' in file_name_mask
                 index, name = file_name_mask.split(' ', 1)
-                filename = f'{grade}-{part}-{index} - {part_name} - {name}.pdf'
+                filename = f'{grade}-{part_index}-{index} - {part_name} - {name}.pdf'
                 pages_map[pages] = filename
             extract_config.append((
                 library.location.udr(f'{grade} класс', f'{prefix} - Рабочая тетрадь.pdf'),
