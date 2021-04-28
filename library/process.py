@@ -17,6 +17,10 @@ def pbcopy(text, name=None):
     log.info(f'Copied {name or "text"} to clipboard')
 
 
+def say(text, rate=100):
+    subprocess.run(['say', '-r', '200'], universal_newlines=True, input=text)
+
+
 class TabOpener:
     def __init__(self, browser):
         self._controller = webbrowser.get(browser)
