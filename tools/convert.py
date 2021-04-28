@@ -1368,6 +1368,14 @@ class ZFTSH_10_3(PdfBook):
     pass
 
 
+@ppi(250)
+@one_d_structure([
+    ('10 - Энергия связи ядра', 40, 44),
+])
+class Mathus_quantum(PdfBook):
+    pass
+
+
 def runConvert(args):
     books = []
 
@@ -1410,6 +1418,16 @@ def runConvert(args):
         book = book_class(
             pdfPath=library.location.udr('Материалы - ЗФТШ', 'ЗФТШ-2013', file_name),
             dstPath=library.location.no_sync('Книги - физика - картинки', 'ЗФТШ', file_name.replace('.pdf', '')),
+        )
+        books.append(book)
+
+    mathus_config = [
+        (Mathus_quantum, '11 - Квантовая физика - пособие.pdf'),
+    ]
+    for book_class, file_name in mathus_config:
+        book = book_class(
+            pdfPath=library.location.udr('Материалы - mathus', file_name),
+            dstPath=library.location.no_sync('Книги - физика - картинки', 'mathus', file_name.replace('.pdf', '')),
         )
         books.append(book)
 
