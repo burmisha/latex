@@ -110,6 +110,93 @@ class Definitions04(variant.VariantTask):
 
 @variant.solution_space(20)
 @variant.text('''
+    Напротив физических величин укажите их обозначения и единицы измерения в СИ:
+    \\begin{{enumerate}}
+        \\item {v_1},
+        \\item {v_2},
+        \\item {v_3},
+        \\item {v_4}.
+    \\end{{enumerate}}
+''')
+@variant.arg(v_1=['сила тока', 'разность потенциалов', 'напряжение'])
+@variant.arg(v_2=['работа тока', 'мощность тока'])
+@variant.arg(v_3=['удельное сопротивление', 'ЭДС'])
+@variant.arg(v_4=['внутреннее сопротивление полной цепи', 'внешнее сопротивление полной цепи'])
+class Definitions05(variant.VariantTask):
+    pass
+
+
+@variant.solution_space(40)
+@variant.text('''
+    Запишите физический закон или формулу:
+    \\begin{{enumerate}}
+        \\item {v_1},
+        \\item {v_2},
+        \\item {v_3}.
+    \\end{{enumerate}}
+''')
+@variant.arg(v_1=['правило Кирхгофа для замкнутого контура', 'правило Кирхгофа для узла цепи'])
+@variant.arg(v_2=['закон Ома для однородного участка цепи', 'сопротивление резистора через удельное сопротивление'])
+@variant.arg(v_3=['закон Ома для неоднородного участка цепи', 'ЭДС (определение)'])
+class Definitions06(variant.VariantTask):
+    pass
+
+
+@variant.solution_space(80)
+@variant.text('''
+    Получите выражение:
+    \\begin{{enumerate}}
+        \\item {v_1},
+        \\item {v_2},
+        \\item {v_3},
+        \\item {v_4}.
+    \\end{{enumerate}}
+''')
+@variant.arg(v_1=[
+    'силы тока через выделяемую мощность и сопротивление резистора',
+    'силы тока через выделяемую мощность и напряжение на резисторе',
+    'силы тока через выделяемую мощность и разность потенциалов на резисторе',
+])
+@variant.arg(v_2=[
+    'силы тока через выделенную теплоту и сопротивление резистора',
+    'силы тока через выделенную теплоту и напряжение на резисторе',
+    'силы тока через выделенную теплоту и разность потенциалов на резисторе',
+])
+@variant.arg(v_3=[
+    'напряжение на резисторе через выделяемую мощность и сопротивление резистора',
+    'напряжение на резисторе через выделяемую мощность и силу тока через него',
+])
+@variant.arg(v_4=[
+    'напряжение на резисторе через выделенную в нём теплоту и сопротивление резистора',
+    'напряжение на резисторе через выделенную в нём теплоту и силу тока через него',
+])
+class Definitions08(variant.VariantTask):
+    pass
+
+
+@variant.solution_space(40)
+@variant.text('''
+    Получите выражение:
+    \\begin{{enumerate}}
+        \\item {v_1},
+        \\item {v_2},
+        \\item {v_3},
+        \\item {v_4}.
+    \\end{{enumerate}}
+''')
+@variant.arg(v_1=['длины проводника через его сопротивление', 'площади поперечного сечения проводника через его сопротивление'])
+@variant.arg(v_2=['сопротивление из закона Ома', 'удельное сопротивление из закона Ома'])
+@variant.arg(v_3=['внутреннее сопротивление цепи из закона Ома для полной цепи', 'внешнее сопротивление цепи из закона Ома для полной цепи'])
+@variant.arg(v_4=[
+    'эквивалентное сопротивление $n$ резисторов, соединённых последовательно, каждый сопротивлением $R$',
+    'эквивалентное сопротивление $n$ резисторов, соединённых параллельно, каждый сопротивлением $R$',
+])
+class Definitions07(variant.VariantTask):
+    pass
+
+
+@variant.solution_space(20)
+@variant.text('''
     На резистор сопротивлением {R:V:e} подали напряжение {U:V:e}.
     Определите ток, который потечёт через резистор, ответ выразите в амперах.
 ''')
@@ -206,6 +293,7 @@ class R_best_from_R_N(variant.VariantTask):
         )
 
 
+@variant.solution_space(60)
 @variant.text('''
     На резистор сопротивлением {R:Task:e} подали напряжение {U:Task:e}.
     Определите ток, который потечёт через резистор, и мощность, выделяющуюся на нём.
@@ -216,7 +304,7 @@ class R_best_from_R_N(variant.VariantTask):
 ])
 @variant.arg(R=['%s = %d Ом' % (rLetter, rValue) for rLetter, rValue in itertools.product(['r', 'R'], [5, 12, 18, 30])])
 @variant.arg(U=['%s = %d В' % (uLetter, uValue) for uLetter, uValue in itertools.product(['U', 'V'], [120, 150, 180, 240])])
-class Rezistor1_v1(variant.VariantTask):
+class P_from_R_U(variant.VariantTask):
     def GetUpdate(self, R=None, U=None, **kws):
         return dict(
             I='\\mathcal{I} = %.2f А' % (1. * U.Value / R.Value),
@@ -224,6 +312,7 @@ class Rezistor1_v1(variant.VariantTask):
         )
 
 
+@variant.solution_space(60)
 @variant.text('''
     Через резистор сопротивлением {R:Task:e} протекает электрический ток {I:Task:e}.
     Определите, чему равны напряжение на резисторе и мощность, выделяющаяся на нём.
@@ -234,7 +323,7 @@ class Rezistor1_v1(variant.VariantTask):
 ])
 @variant.arg(R=['%s = %d Ом' % (rLetter, rValue) for rLetter, rValue in itertools.product(['r', 'R'], [5, 12, 18, 30])])
 @variant.arg(I=['\\mathcal{I} = %.2f А' % iValue for iValue in [2, 3, 4, 5, 6, 8, 10, 15]])
-class Rezistor1_v2(variant.VariantTask):
+class P_from_R_I(variant.VariantTask):
     def GetUpdate(self, R=None, I=None, U=None, **kws):
         return dict(
             U='U = %d В' % (I.Value * R.Value),
@@ -242,11 +331,12 @@ class Rezistor1_v2(variant.VariantTask):
         )
 
 
+@variant.solution_space(180)
 @variant.text('''
     Замкнутая электрическая цепь состоит из ЭДС {E:Task:e} и сопротивлением ${r:L}$
     и резистора {R:Task:e}. Определите ток, протекающий в цепи. Какая тепловая энергия выделится на резисторе за время
-    {t:Task:e}? Какая работа будет совершена ЭДС за это время? Каков знак этой работы? Чему равен КПД цепи? Вычислите значения для 2 случаев:
-    ${r:L}=0$ и {r:Task:e}.
+    {t:Task:e}? Какая работа будет совершена ЭДС за это время? Каков знак этой работы? Чему равен КПД цепи? 
+    Вычислите значения для 2 случаев: ${r:L}=0$ и {r:Task:e}.
 ''')
 @variant.answer_align([
     '''{I1:L} &= \\frac{E:L:s}{R:L:s} = \\frac{E:Value:s}{R:Value:s} = {I1:Value}, ''',
@@ -268,7 +358,7 @@ class Rezistor1_v2(variant.VariantTask):
 @variant.arg(R=['R = %d Ом' % R for R in [10, 15, 24, 30]])
 @variant.arg(r=['r = %d Ом' % r for r in [10, 20, 30, 60]])
 @variant.arg(t=['\\tau = %d с' % t for t in [2, 5, 10]])
-class Rezistor2(variant.VariantTask):
+class Om_eta_full(variant.VariantTask):
     def GetUpdate(self, r=None, R=None, E=None, t=None, **kws):
         I1 = UnitValue('\\mathcal{I}_1 = %.2f А' % (1. * E.Value / R.Value))
         I2 = UnitValue('\\mathcal{I}_2 = %.2f А' % (1. * E.Value / (R.Value + r.Value)))
@@ -328,27 +418,27 @@ class Rezistor2(variant.VariantTask):
     (5, 45),    (5, 80),
     (6, 24),    (6, 54),
 ]])
-class Rezistor3(variant.VariantTask):
+class r_eta_from_Rs(variant.VariantTask):
     def GetUpdate(self, R1=None, R2=None, **kws):
-        r = UnitValue('r = %.2f Ом' % ((1. * R1.Value * R2.Value) ** 0.5))
+        r = UnitValue('r = %.1f Ом' % ((1. * R1.Value * R2.Value) ** 0.5))
         return dict(
             R1=R1,
             R2=R2,
             r=r,
             eta1='\\eta_1 = %.3f ' % (1. * R1.Value / (R1.Value + r.Value)),
             eta2='\\eta_2 = %.3f ' % (1. * R2.Value / (R2.Value + r.Value)),
-            E='\\mathcal{E} = 1234 В',
+            E='\\mathcal{E} = 1 В',
         )
 
 
 @variant.text('''
     Определите ток, протекающий через резистор {R:Task:e} и разность потенциалов на нём (см. рис. на доске),
-    если {r1:Task:e}, {r2:Task:e}, {E1:Task:e}, {E2:Task:e}
+    если {r1:Task:e}, {r2:Task:e}, {E1:Task:e}, {E2:Task:e}.
 ''')
 @variant.arg(R=['R = %d Ом' % RValue for RValue in [10, 12, 15, 18, 20]])
 @variant.arg(r1=['r_1 = %d Ом' % r1Value for r1Value in [1, 2, 3]])
 @variant.arg(r2=['r_2 = %d Ом' % r2Value for r2Value in [1, 2, 3]])
 @variant.arg(E1=['\\mathcal{E}_1 = %d В' % E1Value for E1Value in [20, 30, 40, 60]])
 @variant.arg(E2=['\\mathcal{E}_2 = %d В' % E2Value for E2Value in [20, 30, 40, 60]])
-class Rezistor4(variant.VariantTask):
+class Kirchgof_double(variant.VariantTask):
     pass

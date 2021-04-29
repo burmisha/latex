@@ -245,7 +245,7 @@ def get_all_variants():
         ),
         Work(
             task_id='2019-05-14 10',
-            classes={'electricity.om': ['Rezistor1_v1', 'Rezistor2', 'Rezistor3', 'Rezistor4']}
+            classes={'electricity.om': ['P_from_R_U', 'P_from_R_I', 'Om_eta_full', 'r_eta_from_Rs', 'Kirchgof_double']}
         ),
         Work(
             task_id='2019-04-19 11',
@@ -459,15 +459,24 @@ def get_all_variants():
             up_to='11:02',
             image='ratatouille',
         ),
+        # Work(
+        #     task_id='2021-04-23 10',
+        #     classes={'electricity.om': ['Definitions01', 'Definitions02', 'Definitions03', 'Definitions04', 'I_from_U_R', 'r_from_R_N', 'U_from_R1_R2_I', 'I_ratio', 'R_best_from_R_N']},
+        #     human='2021.04.23 10АБ - Постоянный ток - 1',
+        #     thresholds=[4, 6, 8],
+        #     questions=text_task * 9,
+        #     up_to='9:05',
+        #     image='ratatouille',
+        # ),
         Work(
-            task_id='2021-04-23 10',
-            classes={'electricity.om': ['Definitions01', 'Definitions02', 'Definitions03', 'Definitions04', 'I_from_U_R', 'r_from_R_N', 'U_from_R1_R2_I', 'I_ratio', 'R_best_from_R_N']},
-            human='2021.04.23 10АБ - Постоянный ток - 1',
-            thresholds=[4, 6, 8],
-            questions=text_task * 9,
-            up_to='9:05',
-            image='ratatouille',
+            task_id='2021-04-30 10',
+            classes={'electricity.om': ['Definitions05', 'Definitions06', 'P_from_R_U', 'P_from_R_I', 'Om_eta_full', 'r_eta_from_Rs']}
         ),
+        Work(
+            task_id='2021-04-31 10',
+            classes={'electricity.om': ['Definitions07', 'Definitions08', 'Kirchgof_double']},
+        ),
+
     ]
     for work in works:
         yield work
