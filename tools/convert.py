@@ -1,9 +1,6 @@
 import library.location
 from library.convert import PdfBook, page_shift, params, source_link, one_d_structure, two_d_structure, ppi
 
-import subprocess
-import os
-
 import logging
 log = logging.getLogger(__name__)
 
@@ -176,6 +173,7 @@ class ComicsBook(PdfBook):
 )
 class ChernoutsanBook(PdfBook):
     pass
+
 
 @page_shift(1)
 @params(['-level', '50%,90%,1.5'])
@@ -725,7 +723,7 @@ class Gendenshteyn_8(PdfBook):
         ('Работа и мощность тока', 160, 163),
         ('Закон Ома для полной цепи', 163, 166),
         ('Электрический ток в различных средах', 166, 168),
-        ('Расчёт электрических цепей', 168, 171),
+        ('Расчёт электрических цепей', 168, 170),
         ('Ответы', 187, 191),
     ]),
     # Ответы и указания 171
@@ -1349,22 +1347,118 @@ class Problems_3800(PdfBook):
     pass
 
 
+@one_d_structure([('Вступление', 1, 2), ('Теория', 3, 14), ('Задачи', 14, 16)])
+class ZFTSH_8_1(PdfBook):
+    pass
 
-@one_d_structure([
-    ('Вступление', 1, 2),
-    ('Теория', 3, 26),
-    ('Задачи', 26, 28),
-])
+
+@one_d_structure([('Вступление', 1, 2), ('Теория', 3, 19), ('Задачи', 19, 20)])
+class ZFTSH_8_2(PdfBook):
+    pass
+
+
+@one_d_structure([('Вступление', 1, 2), ('Теория', 3, 24), ('Задачи', 24, 28)])
+class ZFTSH_8_3(PdfBook):
+    pass
+
+
+@one_d_structure([('Вступление', 1, 2), ('Теория', 3, 20), ('Задачи', 20, 23)])
+class ZFTSH_8_4(PdfBook):
+    pass
+
+
+@one_d_structure([('Вступление', 1, 2), ('Теория', 3, 16), ('Задачи', 16, 20)])
+class ZFTSH_8_5(PdfBook):
+    pass
+
+
+@one_d_structure([('Вступление', 1, 2), ('Теория', 3, 27), ('Задачи', 27, 28)])
+class ZFTSH_9_1(PdfBook):
+    pass
+
+
+@one_d_structure([('Вступление', 1, 2), ('Теория', 3, 26), ('Задачи', 26, 28)])
+class ZFTSH_9_2(PdfBook):
+    pass
+
+
+@one_d_structure([('Вступление', 1, 2), ('Теория', 3, 25), ('Задачи', 25, 28)])
+class ZFTSH_9_3(PdfBook):
+    pass
+
+
+@one_d_structure([('Вступление', 1, 2), ('Теория', 3, 26), ('Задачи', 26, 28)])
+class ZFTSH_9_4(PdfBook):
+    pass
+
+
+@one_d_structure([('Вступление', 1, 2), ('Теория', 3, 23), ('Задачи', 23, 26)])
+class ZFTSH_9_5(PdfBook):
+    pass
+
+
+@one_d_structure([('Вступление', 1, 2), ('Теория', 3, 21), ('Задачи', 21, 24)])
+class ZFTSH_9_6(PdfBook):
+    pass
+
+
+@one_d_structure([('Вступление', 1, 2), ('Теория', 3, 24), ('Задачи', 24, 28)])
+class ZFTSH_10_1(PdfBook):
+    pass
+
+
+@one_d_structure([('Вступление', 1, 2), ('Теория', 3, 26), ('Задачи', 26, 28)])
 class ZFTSH_10_2(PdfBook):
     pass
 
 
-@one_d_structure([
-    ('Вступление', 1, 2),
-    ('Теория', 3, 22),
-    ('Задачи', 22, 25),
-])
+@one_d_structure([('Вступление', 1, 2), ('Теория', 3, 22), ('Задачи', 22, 25)])
 class ZFTSH_10_3(PdfBook):
+    pass
+
+
+@one_d_structure([('Вступление', 1, 2), ('Теория', 3, 30), ('Задачи', 30, 32)])
+class ZFTSH_10_4(PdfBook):
+    pass
+
+
+@one_d_structure([('Вступление', 1, 1), ('Теория', 2, 15), ('Задачи', 16, 16)])
+class ZFTSH_10_5(PdfBook):
+    pass
+
+
+@one_d_structure([('Вступление', 1, 2), ('Теория', 3, 14), ('Задачи', 14, 16)])
+class ZFTSH_10_6(PdfBook):
+    pass
+
+
+@one_d_structure([('Вступление', 1, 2), ('Теория', 3, 29), ('Задачи', 29, 32)])
+class ZFTSH_11_1(PdfBook):
+    pass
+
+
+@one_d_structure([('Вступление', 1, 2), ('Теория', 3, 25), ('Задачи', 26, 28)])
+class ZFTSH_11_2(PdfBook):
+    pass
+
+
+@one_d_structure([('Вступление', 1, 2), ('Теория', 3, 29), ('Задачи', 29, 32)])
+class ZFTSH_11_3(PdfBook):
+    pass
+
+
+@one_d_structure([('Вступление', 1, 2), ('Теория', 3, 29), ('Задачи', 29, 32)])
+class ZFTSH_11_4(PdfBook):
+    pass
+
+
+@one_d_structure([('Вступление', 1, 2), ('Теория', 3, 27), ('Задачи', 27, 30)])
+class ZFTSH_11_5(PdfBook):
+    pass
+
+
+@one_d_structure([('Вступление', 1, 2), ('Теория', 3, 30), ('Задачи', 30, 32)])
+class ZFTSH_11_6(PdfBook):
     pass
 
 
@@ -1376,9 +1470,7 @@ class Mathus_quantum(PdfBook):
     pass
 
 
-def runConvert(args):
-    books = []
-
+def get_all_books():
     books_config = [
         (ComicsBook, ['Физика в комиксах.pdf']),
         (ChernoutsanBook, ['Сборники', 'Сборник - Черноуцан - 2011.pdf']),
@@ -1402,36 +1494,55 @@ def runConvert(args):
         (Problems_3800, ['Сборники', '3800 задач по физике.pdf']),
         (Bendrikov, ['Сборники', 'Бендриков - Лебедь рак и щука - 2010.pdf']),
     ]
-
-    for bookClass, pdfPath in books_config:
-        book = bookClass(
+    for book_class, pdfPath in books_config:
+        yield book_class(
             pdfPath=library.location.udr('Книги - физика', *pdfPath),
             dstPath=library.location.no_sync('Книги - физика - картинки', pdfPath[-1].replace('.pdf', '')),
         )
-        books.append(book)
 
     zftsh_config = [
+        (ZFTSH_8_1, 'Физика 8 - 1 - Гидростатика и аэростатика.pdf'),
+        (ZFTSH_8_2, 'Физика 8 - 2 - Тепловые явления.pdf'),
+        (ZFTSH_8_3, 'Физика 8 - 3 - Электрические явления.pdf'),
+        (ZFTSH_8_4, 'Физика 8 - 4 - Законы отражения и преломления.pdf'),
+        (ZFTSH_8_5, 'Физика 8 - 5 - Тонкие линзы.pdf'),
+        (ZFTSH_9_1, 'Физика 9 - 1 - Векторы в физике.pdf'),
+        (ZFTSH_9_2, 'Физика 9 - 2 - Кинематика.pdf'),
+        (ZFTSH_9_3, 'Физика 9 - 3 - Динамика.pdf'),
+        (ZFTSH_9_4, 'Физика 9 - 4 - Статика.pdf'),
+        (ZFTSH_9_5, 'Физика 9 - 5 - Работа и энергия.pdf'),
+        (ZFTSH_9_6, 'Физика 9 - 6 - Движение по окружности.pdf'),
+        (ZFTSH_10_1, 'Физика 10 - 1 - Импульс, сохранение, изменение.pdf'),
         (ZFTSH_10_2, 'Физика 10 - 2 - МКТ, идеальный газ.pdf'),
         (ZFTSH_10_3, 'Физика 10 - 3 - Сохранение энергии, тепловые процессы.pdf'),
+        (ZFTSH_10_4, 'Физика 10 - 4 - Электростатика.pdf'),
+        (ZFTSH_10_5, 'Физика 10 - 5 - Постоянный ток.pdf'),
+        (ZFTSH_10_6, 'Физика 10 - 6 - Магнитное поле.pdf'),
+        (ZFTSH_11_1, 'Физика 11 - 1 - Основные законы механики.pdf'),
+        (ZFTSH_11_2, 'Физика 11 - 2 - Молекулярная физика и термодинамика.pdf'),
+        (ZFTSH_11_3, 'Физика 11 - 3 - Электростатика и законы постоянного тока.pdf'),
+        (ZFTSH_11_4, 'Физика 11 - 4 - Электромагнитная индукция и колебания.pdf'),
+        (ZFTSH_11_5, 'Физика 11 - 5 - Геометрическая оптика.pdf'),
+        (ZFTSH_11_6, 'Физика 11 - 6 - Физическая оптика и квантовая физика.pdf'),
     ]
     for book_class, file_name in zftsh_config:
-        book = book_class(
+        yield book_class(
             pdfPath=library.location.udr('Материалы - ЗФТШ', 'ЗФТШ-2013', file_name),
             dstPath=library.location.no_sync('Книги - физика - картинки', 'ЗФТШ', file_name.replace('.pdf', '')),
         )
-        books.append(book)
 
     mathus_config = [
         (Mathus_quantum, '11 - Квантовая физика - пособие.pdf'),
     ]
     for book_class, file_name in mathus_config:
-        book = book_class(
+        yield book_class(
             pdfPath=library.location.udr('Материалы - mathus', file_name),
             dstPath=library.location.no_sync('Книги - физика - картинки', 'mathus', file_name.replace('.pdf', '')),
         )
-        books.append(book)
 
-    for book in books:
+
+def runConvert(args):
+    for book in get_all_books():
         book.GetStrangeFiles(remove=False)
         book.Save(overwrite=args.overwrite_existing)
         book.GetStrangeFiles(remove=args.remove_strange_files)
