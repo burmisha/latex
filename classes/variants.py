@@ -476,6 +476,11 @@ def get_all_variants():
             task_id='2021-04-31 10',
             classes={'electricity.om': ['Definitions07', 'Definitions08', 'Kirchgof_double']},
         ),
+        Work(
+            task_id='2021-04-30 9',
+            classes={'atomic': ['nuclear.KernelCount', 'nuclear.RadioFall', 'radioactive.BK_53_12', 'radioactive.Delta_m_from_m', 'em_waves.H_levels']},
+        ),
+
 
     ]
     for work in works:

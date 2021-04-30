@@ -283,6 +283,7 @@ class AtomCount12_Text(variant.VariantTask):
     В ядре электрически нейтрального атома {nuclons} частиц.
     Вокруг ядра обращается {electrons} электронов.
     Сколько в ядре этого атома протонов и нейтронов?
+    Назовите этот элемент.
 ''')
 @variant.answer('$Z = {protons}$ протонов и $A - Z = {neutrons}$ нейтронов')
 @variant.arg(nuclons__electrons=[
@@ -301,6 +302,7 @@ class KernelCount(variant.VariantTask):
         )
 
 
+@variant.solution_space(80)
 @variant.text('Запишите реакцию ${fallType}$-распада ${element:LaTeX}$.')
 @variant.arg(fallType__element=[
     ('\\alpha', Elements.get_by_z_a(92, 238)),

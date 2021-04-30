@@ -1,5 +1,5 @@
 import generators.variant as variant
-from generators.helpers import Consts, letter_variants
+from generators.helpers import Consts, letter_variants, Elements
 
 
 @variant.solution_space(40)
@@ -254,10 +254,11 @@ class BK_53_03(variant.VariantTask):  # Вишнякова - Базовый ку
         )
 
 
-@variant.solution_space(150)
+@variant.solution_space(100)
 @variant.text('''
     Энергия связи ядра {element} равна ${E:Value}$.
-    Найти дефект массы этого ядра. Ответ выразите в а.е.м. и кг. Скорость света ${Consts.c:Task}$.
+    Найти дефект массы этого ядра. Ответ выразите в а.е.м. и кг.
+    Скорость света {Consts.c_4:Task|e}, элементарный заряд {Consts.e:Task|e}.
 ''')
 @variant.answer_align([
     'E_\\text{ св. } &= \\Delta m c^2 \\implies',
@@ -293,3 +294,22 @@ class BK_53_12(variant.VariantTask):  # Вишнякова - Базовый ку
             dm=dm,
             aem=aem,
         )
+
+
+@variant.solution_space(150)
+@variant.text('''
+    Определите деффект массы (в а.е.м.) и энергию связи (в МэВ) ядра атома {element:LaTeX},
+    если его масса составляет {m_aem:Value|e}.
+    Считать {Consts.m_p_aem:Task|e}, {Consts.m_n_aem:Task|e}.
+''')
+@variant.arg(element__m_aem=[
+    # https://ru.wikipedia.org/wiki/%D0%A1%D0%B2%D0%BE%D0%B4%D0%BD%D0%B0%D1%8F_%D1%82%D0%B0%D0%B1%D0%BB%D0%B8%D1%86%D0%B0_%D0%B8%D0%B7%D0%BE%D1%82%D0%BE%D0%BF%D0%BE%D0%B2
+    (Elements.get_by_z_a(1, 2), 'm = 2.0141 а.е.м.'),
+    (Elements.get_by_z_a(1, 3), 'm = 3.01605 а.е.м.'),
+    (Elements.get_by_z_a(2, 3), 'm = 3.01603 а.е.м.'),
+    (Elements.get_by_z_a(2, 4), 'm = 4.0026 а.е.м.'),
+    (Elements.get_by_z_a(2, 6), 'm = 6.0189 а.е.м.'),
+    (Elements.get_by_z_a(2, 8), 'm = 8.0225 а.е.м.'),
+])
+class Delta_m_from_m(variant.VariantTask):
+    pass
