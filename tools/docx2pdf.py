@@ -33,8 +33,8 @@ class PdfExtractor:
 
 def get_convert_config():
     return [
-        (library.location.udr('11 класс', 'Вишнякова'), None, False, '.*Вишнякова - [0-9].*'),
-        (library.location.udr('11 класс', 'Вишнякова'), None, False, '.*Вишнякова - .* - Все условия.*'),
+        (library.location.udr('11 класс', 'Вишнякова'), 'generated', False, '.*Вишнякова - [0-9].*'),
+        (library.location.udr('11 класс', 'Вишнякова'), 'generated', False, '.*Вишнякова - .* - Все условия.*'),
         (library.location.udr('10 класс'), None, False, '.*Рабочая тетрадь.*'),
         (library.location.udr('9 класс'), None, False, '.*Рабочая тетрадь.*'),
         (
@@ -74,7 +74,7 @@ def get_extract_config():
     extract_config = [
         (
             library.location.udr('11 класс', 'Вишнякова', 'Вишнякова - Базовый курс - Все условия.pdf'),
-            None,
+            library.location.udr('11 класс', 'Вишнякова', 'generated'),
             {
                 '1': 'Вишнякова - 1.1 - Кинематика - БК - условия.pdf',
                 '2': 'Вишнякова - 1.2 - Динамика - БК - условия.pdf',
