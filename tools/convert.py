@@ -1,5 +1,5 @@
 import library.location
-from library.convert import PdfBook, page_shift, params, source_link, one_d_structure, two_d_structure, ppi
+from library.convert import PdfBook, page_shift, params, source_link, zero_d_structure, one_d_structure, two_d_structure, ppi
 
 import logging
 log = logging.getLogger(__name__)
@@ -1347,117 +1347,140 @@ class Problems_3800(PdfBook):
     pass
 
 
-@one_d_structure([('Вступление', 1, 2), ('Теория', 3, 14), ('Задачи', 14, 16)])
+@ppi(250)
+@zero_d_structure([('Вступление', 1, 2), ('Теория', 3, 14), ('Задачи', 14, 16)])
 class ZFTSH_8_1(PdfBook):
     pass
 
 
-@one_d_structure([('Вступление', 1, 2), ('Теория', 3, 19), ('Задачи', 19, 20)])
+@ppi(250)
+@zero_d_structure([('Вступление', 1, 2), ('Теория', 3, 19), ('Задачи', 19, 20)])
 class ZFTSH_8_2(PdfBook):
     pass
 
 
-@one_d_structure([('Вступление', 1, 2), ('Теория', 3, 24), ('Задачи', 24, 28)])
+@ppi(250)
+@zero_d_structure([('Вступление', 1, 2), ('Теория', 3, 24), ('Задачи', 24, 28)])
 class ZFTSH_8_3(PdfBook):
     pass
 
 
-@one_d_structure([('Вступление', 1, 2), ('Теория', 3, 20), ('Задачи', 20, 23)])
+@ppi(250)
+@zero_d_structure([('Вступление', 1, 2), ('Теория', 3, 20), ('Задачи', 20, 23)])
 class ZFTSH_8_4(PdfBook):
     pass
 
 
-@one_d_structure([('Вступление', 1, 2), ('Теория', 3, 16), ('Задачи', 16, 20)])
+@ppi(250)
+@zero_d_structure([('Вступление', 1, 2), ('Теория', 3, 16), ('Задачи', 16, 20)])
 class ZFTSH_8_5(PdfBook):
     pass
 
 
-@one_d_structure([('Вступление', 1, 2), ('Теория', 3, 27), ('Задачи', 27, 28)])
+@ppi(250)
+@zero_d_structure([('Вступление', 1, 2), ('Теория', 3, 27), ('Задачи', 27, 28)])
 class ZFTSH_9_1(PdfBook):
     pass
 
 
-@one_d_structure([('Вступление', 1, 2), ('Теория', 3, 26), ('Задачи', 26, 28)])
+@ppi(250)
+@zero_d_structure([('Вступление', 1, 2), ('Теория', 3, 26), ('Задачи', 26, 28)])
 class ZFTSH_9_2(PdfBook):
     pass
 
 
-@one_d_structure([('Вступление', 1, 2), ('Теория', 3, 25), ('Задачи', 25, 28)])
+@ppi(250)
+@zero_d_structure([('Вступление', 1, 2), ('Теория', 3, 25), ('Задачи', 25, 28)])
 class ZFTSH_9_3(PdfBook):
     pass
 
 
-@one_d_structure([('Вступление', 1, 2), ('Теория', 3, 26), ('Задачи', 26, 28)])
+@ppi(250)
+@zero_d_structure([('Вступление', 1, 2), ('Теория', 3, 26), ('Задачи', 26, 28)])
 class ZFTSH_9_4(PdfBook):
     pass
 
 
-@one_d_structure([('Вступление', 1, 2), ('Теория', 3, 23), ('Задачи', 23, 26)])
+@ppi(250)
+@zero_d_structure([('Вступление', 1, 2), ('Теория', 3, 23), ('Задачи', 23, 26)])
 class ZFTSH_9_5(PdfBook):
     pass
 
 
-@one_d_structure([('Вступление', 1, 2), ('Теория', 3, 21), ('Задачи', 21, 24)])
+@ppi(250)
+@zero_d_structure([('Вступление', 1, 2), ('Теория', 3, 21), ('Задачи', 21, 24)])
 class ZFTSH_9_6(PdfBook):
     pass
 
 
-@one_d_structure([('Вступление', 1, 2), ('Теория', 3, 24), ('Задачи', 24, 28)])
+@ppi(250)
+@zero_d_structure([('Вступление', 1, 2), ('Теория', 3, 24), ('Задачи', 24, 28)])
 class ZFTSH_10_1(PdfBook):
     pass
 
 
-@one_d_structure([('Вступление', 1, 2), ('Теория', 3, 26), ('Задачи', 26, 28)])
+@ppi(250)
+@zero_d_structure([('Вступление', 1, 2), ('Теория', 3, 26), ('Задачи', 26, 28)])
 class ZFTSH_10_2(PdfBook):
     pass
 
 
-@one_d_structure([('Вступление', 1, 2), ('Теория', 3, 22), ('Задачи', 22, 25)])
+@ppi(250)
+@zero_d_structure([('Вступление', 1, 2), ('Теория', 3, 22), ('Задачи', 22, 25)])
 class ZFTSH_10_3(PdfBook):
     pass
 
 
-@one_d_structure([('Вступление', 1, 2), ('Теория', 3, 30), ('Задачи', 30, 32)])
+@ppi(250)
+@zero_d_structure([('Вступление', 1, 2), ('Теория', 3, 30), ('Задачи', 30, 32)])
 class ZFTSH_10_4(PdfBook):
     pass
 
 
-@one_d_structure([('Вступление', 1, 1), ('Теория', 2, 15), ('Задачи', 16, 16)])
+@ppi(250)
+@zero_d_structure([('Вступление', 1, 1), ('Теория', 2, 15), ('Задачи', 16, 16)])
 class ZFTSH_10_5(PdfBook):
     pass
 
 
-@one_d_structure([('Вступление', 1, 2), ('Теория', 3, 14), ('Задачи', 14, 16)])
+@ppi(250)
+@zero_d_structure([('Вступление', 1, 2), ('Теория', 3, 14), ('Задачи', 14, 16)])
 class ZFTSH_10_6(PdfBook):
     pass
 
 
-@one_d_structure([('Вступление', 1, 2), ('Теория', 3, 29), ('Задачи', 29, 32)])
+@ppi(250)
+@zero_d_structure([('Вступление', 1, 2), ('Теория', 3, 29), ('Задачи', 29, 32)])
 class ZFTSH_11_1(PdfBook):
     pass
 
 
-@one_d_structure([('Вступление', 1, 2), ('Теория', 3, 25), ('Задачи', 26, 28)])
+@ppi(250)
+@zero_d_structure([('Вступление', 1, 2), ('Теория', 3, 25), ('Задачи', 26, 28)])
 class ZFTSH_11_2(PdfBook):
     pass
 
 
-@one_d_structure([('Вступление', 1, 2), ('Теория', 3, 29), ('Задачи', 29, 32)])
+@ppi(250)
+@zero_d_structure([('Вступление', 1, 2), ('Теория', 3, 29), ('Задачи', 29, 32)])
 class ZFTSH_11_3(PdfBook):
     pass
 
 
-@one_d_structure([('Вступление', 1, 2), ('Теория', 3, 29), ('Задачи', 29, 32)])
+@ppi(250)
+@zero_d_structure([('Вступление', 1, 2), ('Теория', 3, 29), ('Задачи', 29, 32)])
 class ZFTSH_11_4(PdfBook):
     pass
 
 
-@one_d_structure([('Вступление', 1, 2), ('Теория', 3, 27), ('Задачи', 27, 30)])
+@ppi(250)
+@zero_d_structure([('Вступление', 1, 2), ('Теория', 3, 27), ('Задачи', 27, 30)])
 class ZFTSH_11_5(PdfBook):
     pass
 
 
-@one_d_structure([('Вступление', 1, 2), ('Теория', 3, 30), ('Задачи', 30, 32)])
+@ppi(250)
+@zero_d_structure([('Вступление', 1, 2), ('Теория', 3, 30), ('Задачи', 30, 32)])
 class ZFTSH_11_6(PdfBook):
     pass
 
@@ -1543,6 +1566,7 @@ def get_all_books():
 
 def runConvert(args):
     for book in get_all_books():
+        book.Validate(create_missing=args.create_missing)
         book.GetStrangeFiles(remove=False)
         book.Save(overwrite=args.overwrite_existing)
         book.GetStrangeFiles(remove=args.remove_strange_files)
@@ -1551,4 +1575,5 @@ def runConvert(args):
 def populate_parser(parser):
     parser.add_argument('--remove-strange-files', help='Remove strange files', action='store_true')
     parser.add_argument('--overwrite-existing', help='Overwrite already extracted files', action='store_true')
+    parser.add_argument('--create-missing', help='Create missing root dirs for books', action='store_true')
     parser.set_defaults(func=runConvert)

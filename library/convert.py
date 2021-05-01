@@ -84,9 +84,6 @@ class PdfBook:
         pageShift=None,
     ):
         assert pdfPath.endswith('.pdf')
-        assert library.files.is_file(pdfPath)
-        assert library.files.is_dir(dstPath)
-
         assert library.files.path_is_ok(pdfPath)
         assert library.files.path_is_ok(dstPath)
         self.PdfPath = pdfPath
@@ -97,6 +94,15 @@ class PdfBook:
 
         if not hasattr(self, '_magick_params'):
             self._magick_params = []
+
+    def Validate(self, create_missing=False):
+        assert library.files.is_file(self.PdfPath)
+        if create_missing:
+            if not os.path.isdir(self.DstPath):
+                log.info(f'Create missing {self.DstPath }')
+                os.mkdir(self.DstPath)
+
+        assert library.files.is_dir(self.DstPath)
 
     def GetPageShift(self, pageNumber):
         if hasattr(self, 'PageShift'):
@@ -194,6 +200,13 @@ def params(params_list):
     def decorator(cls):
         assert isinstance(params_list, list)
         cls._magick_params = params_list
+        return cls
+    return decorator
+
+
+def zero_d_structure(data, **kws):
+    def decorator(cls):
+        cls._structure = ZeroDStructure(data, **kws)
         return cls
     return decorator
 
