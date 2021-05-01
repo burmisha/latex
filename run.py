@@ -2,6 +2,7 @@
 
 import tools
 from library.logging import cm, color
+from library.process import say
 
 import argparse
 import time
@@ -103,11 +104,17 @@ def main():
     try:
         args.func(args)
         finish_time = time.time()
-        log.info(cm('Finished in %.2f seconds', color=color.Green), finish_time - start_time)
+        delta = finish_time - start_time
+        log.info(cm('Finished in %.2f seconds', color=color.Green), delta)
+        if delta >= 300:
+            say('Готово', rate=250)
     except Exception as e:
         finish_time = time.time()
         log.critical(f'Error message: {cm(e, color=color.Red)}')
-        log.exception(cm(f'Failed in {finish_time - start_time:.2f} seconds', color=color.Red))
+        delta = finish_time - start_time
+        log.exception(cm(f'Failed in {delta:.2f} seconds', color=color.Red))
+        if delta >= 30:
+            say(f'Ошибка: {e}', rate=250)
 
 
 if __name__ == '__main__':
