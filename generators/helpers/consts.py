@@ -22,6 +22,7 @@ class Consts:
     k_boltzmann = UnitValue('k = 1.38 10^-23 Дж / К')
     N_A = UnitValue('N_A = 6.02 10^23 / моль')
     R = UnitValue('R = 8.31 Дж / моль К')
+    one_aem_eV = UnitValue('931.5 МэВ')
 
     vapor = Vapor()
 

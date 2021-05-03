@@ -144,6 +144,10 @@ class Element:
             self._ru = isotopes_cfg[Z][1]
             self._X = isotopes_cfg[Z][0]
 
+        self.e = int(self._Z)
+        self.p = int(self._Z)
+        self.n = self._A - self._Z
+
     def get_ce(self):
         return f'\\ce{{^{{{self._A}}}_{{{self._Z}}}{{{self._X}}}}}'
 
@@ -162,6 +166,8 @@ class Element:
     def beta(self):
         return self.beta_minus()
 
+
+
     def __format__(self, fmt):
         try:
             fmt_parts = fmt.replace(':', '|').split('|')
@@ -172,13 +178,13 @@ class Element:
                 elif main_format == 'RuText':
                     return self.get_ru()
                 elif main_format == 'electrons':
-                    return str(self._Z)
+                    return str(self.e)
                 elif main_format == 'nuclons':
-                    return str(self._A)
+                    return str(self.p + self.n)
                 elif main_format == 'protons':
-                    return str(self._Z)
+                    return str(self.p)
                 elif main_format == 'neutrons':
-                    return str(self._A - self._Z)
+                    return str(self.n)
                 else:
                     raise RuntimeError(f'Unknown main format: {main_format!r} from {fmt!r}')
             else:

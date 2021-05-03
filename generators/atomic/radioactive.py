@@ -287,7 +287,7 @@ class BK_53_03(variant.VariantTask):  # Вишнякова - Базовый ку
 ])
 class BK_53_12(variant.VariantTask):  # Вишнякова - Базовый курс 5.3 - задача 12
     def GetUpdate(self, E=None, **kws):
-        dm = E.Mult(Consts.e, precisionInc=1).Div(Consts.c).Div(Consts.c, units='кг')
+        dm = E.Mult(Consts.e, precisionInc=1).Div(Consts.c_4).Div(Consts.c_4, units='кг')
         aem = dm.Div(Consts.aem, units='а.е.м.')
         return dict(
             eV=E.Value,
@@ -302,6 +302,10 @@ class BK_53_12(variant.VariantTask):  # Вишнякова - Базовый ку
     если его масса составляет {m_aem:Value|e}.
     Считать {Consts.m_p_aem:Task|e}, {Consts.m_n_aem:Task|e}.
 ''')
+@variant.answer_align([
+    '{dm:L} &= (A - Z){Consts.m_n_aem:L} + Z{Consts.m_p_aem:L} - m = {element.n} * {Consts.m_n_aem:V} + {element.p} * {Consts.m_p_aem:V} - {m_aem:V} \\approx {dm:V}',
+    '{dE:L} &= {dm:L} c^2 \\approx {dm.Value:.4f} * {Consts.one_aem_eV:V} \\approx {dE:V}',
+])
 @variant.arg(element__m_aem=[
     # https://ru.wikipedia.org/wiki/%D0%A1%D0%B2%D0%BE%D0%B4%D0%BD%D0%B0%D1%8F_%D1%82%D0%B0%D0%B1%D0%BB%D0%B8%D1%86%D0%B0_%D0%B8%D0%B7%D0%BE%D1%82%D0%BE%D0%BF%D0%BE%D0%B2
     (Elements.get_by_z_a(1, 2), 'm = 2.0141 а.е.м.'),
@@ -312,4 +316,10 @@ class BK_53_12(variant.VariantTask):  # Вишнякова - Базовый ку
     (Elements.get_by_z_a(2, 8), 'm = 8.0225 а.е.м.'),
 ])
 class Delta_m_from_m(variant.VariantTask):
-    pass
+    def GetUpdate(self, element, m_aem, **kws):
+        dm = element.n * Consts.m_n_aem.Value + element.p * Consts.m_p_aem.Value - m_aem.Value
+        dE = dm * Consts.one_aem_eV.Value
+        return dict(
+            dm='\\Delta m = %.5f а.е.м.' % dm,
+            dE='E_\\text{ св. } = %.2f МэВ' % dE,
+        )
