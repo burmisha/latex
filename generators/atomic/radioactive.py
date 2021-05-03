@@ -263,8 +263,8 @@ class BK_53_03(variant.VariantTask):  # Вишнякова - Базовый ку
 @variant.answer_align([
     'E_\\text{ св. } &= \\Delta m c^2 \\implies',
     '''\\implies
-        \\Delta m &= \\frac { E_\\text{ св. } }{ c^2 } = \\frac{E:Value|s}{Consts.c:Value|sqr|s}
-        = \\frac{ {eV} * 10^6 * {Consts.eV:Value} }{Consts.c:Value|sqr|s}
+        \\Delta m &= \\frac { E_\\text{ св. } }{ c^2 } = \\frac{E:Value|s}{c:V|sqr|s}
+        = \\frac{ {eV} * 10^6 * {Consts.eV:Value} }{c:V|sqr|s}
         \\approx {dm:Value} \\approx {aem:Value}''',
 ])
 @variant.arg(element__E=[  # https://www.calc.ru/Energiya-Svyazi-Nekotorykh-Yader.html
@@ -287,12 +287,14 @@ class BK_53_03(variant.VariantTask):  # Вишнякова - Базовый ку
 ])
 class BK_53_12(variant.VariantTask):  # Вишнякова - Базовый курс 5.3 - задача 12
     def GetUpdate(self, E=None, **kws):
-        dm = E.Mult(Consts.e, precisionInc=1).Div(Consts.c_4).Div(Consts.c_4, units='кг')
+        c = Consts.c_4
+        dm = E.Mult(Consts.e, precisionInc=1).Div(c).Div(c, units='кг')
         aem = dm.Div(Consts.aem, units='а.е.м.')
         return dict(
             eV=E.Value,
             dm=dm,
             aem=aem,
+            c=c,
         )
 
 

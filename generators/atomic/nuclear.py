@@ -285,7 +285,7 @@ class AtomCount12_Text(variant.VariantTask):
     Сколько в ядре этого атома протонов и нейтронов?
     Назовите этот элемент.
 ''')
-@variant.answer('$Z = {protons}$ протонов и $A - Z = {neutrons}$ нейтронов')
+@variant.answer('$Z = {protons}$ протонов и $A - Z = {neutrons}$ нейтронов, так что это {element:RuText}: ${element:LaTeX}$')
 @variant.arg(nuclons__electrons=[
     (108, 47),  # Al
     (65, 29),  # Cu
@@ -299,6 +299,7 @@ class KernelCount(variant.VariantTask):
         return dict(
             neutrons=nuclons - electrons,
             protons=electrons,
+            element=Elements.get_by_z_a(z=electrons, a=nuclons)
         )
 
 
