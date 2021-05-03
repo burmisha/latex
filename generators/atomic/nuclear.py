@@ -304,6 +304,7 @@ class KernelCount(variant.VariantTask):
 
 @variant.solution_space(80)
 @variant.text('Запишите реакцию ${fallType}$-распада ${element:LaTeX}$.')
+@variant.answer('${element:LaTeX} \\to {res:LaTeX} + {add}$')
 @variant.arg(fallType__element=[
     ('\\alpha', Elements.get_by_z_a(92, 238)),
     ('\\alpha', Elements.get_by_z_a(60, 144)),
@@ -315,4 +316,16 @@ class KernelCount(variant.VariantTask):
     ('\\beta', Elements.get_by_z_a(11, 22)),
 ])
 class RadioFall(variant.VariantTask):
-    pass
+    def GetUpdate(self, fallType, element, **kws):
+        if 'alpha' in fallType:
+            res = element.alpha()
+            add = '\\ce{ ^4_2 He }'
+        elif 'beta' in fallType:
+            res = element.beta()
+            add = 'e^- + \\tilde\\nu_e'
+        else:
+            raise RuntimeError(f'Unknown fallType: {fallType}')
+        return dict(
+            res=res,
+            add=add,
+        )
