@@ -3,6 +3,11 @@ import itertools
 import generators.variant as variant
 from generators.helpers import UnitValue, letter_variants, Fraction
 
+from library.logging import colorize_json
+
+import logging
+log = logging.getLogger(__name__)
+
 
 @variant.solution_space(20)
 @variant.text('''
@@ -335,7 +340,7 @@ class P_from_R_I(variant.VariantTask):
 @variant.text('''
     Замкнутая электрическая цепь состоит из ЭДС {E:Task:e} и сопротивлением ${r:L}$
     и резистора {R:Task:e}. Определите ток, протекающий в цепи. Какая тепловая энергия выделится на резисторе за время
-    {t:Task:e}? Какая работа будет совершена ЭДС за это время? Каков знак этой работы? Чему равен КПД цепи? 
+    {t:Task:e}? Какая работа будет совершена ЭДС за это время? Каков знак этой работы? Чему равен КПД цепи?
     Вычислите значения для 2 случаев: ${r:L}=0$ и {r:Task:e}.
 ''')
 @variant.answer_align([
@@ -438,7 +443,68 @@ class r_eta_from_Rs(variant.VariantTask):
 @variant.arg(R=['R = %d Ом' % RValue for RValue in [10, 12, 15, 18, 20]])
 @variant.arg(r1=['r_1 = %d Ом' % r1Value for r1Value in [1, 2, 3]])
 @variant.arg(r2=['r_2 = %d Ом' % r2Value for r2Value in [1, 2, 3]])
-@variant.arg(E1=['\\mathcal{E}_1 = %d В' % E1Value for E1Value in [20, 30, 40, 60]])
-@variant.arg(E2=['\\mathcal{E}_2 = %d В' % E2Value for E2Value in [20, 30, 40, 60]])
+@variant.arg(E1=['\\ele_1 = %d В' % E1Value for E1Value in [20, 30, 40, 60]])
+@variant.arg(E2=['\\ele_2 = %d В' % E2Value for E2Value in [20, 30, 40, 60]])
+@variant.answer_tex('''
+    Обозначим на рисунке все токи: направление произвольно, но его надо зафиксировать. Всего на рисунке 3 контура и 2 узла.
+    Поэтому можно записать $3 - 1 = 2$ уравнения законов Кирхгофа для замкнутого контура и $2 - 1 = 1$ — для узлов
+    (остальные уравнения тоже можно записать, но они не дадут полезной информации, а будут лишь следствиями уже записанных).
+
+    Отметим на рисунке 2 контура (и не забуем указать направление) и 1 узел (точка «1»ы, выделена жирным). Выбор контуров и узлов не критичен: получившаяся система может быть чуть проще или сложнее, но не слишком.
+
+    \\begin{ tikzpicture }[circuit ee IEC, thick]
+        \\draw  (0, 0) to [current direction={ near end, info=$\\eli_1$ }] (0, 3)
+                to [battery={ rotate=-180,info={ $\\ele_1, r_1 $ } }]
+                (3, 3)
+                to [battery={ info'={ $\\ele_2, r_2 $ } }]
+                (6, 3) to [current direction'={ near start, info=$\\eli_2$ }] (6, 0) -- (0, 0)
+                (3, 0) to [current direction={ near start, info=$\\eli$ }, resistor={ near end, info=$R$ }] (3, 3);
+        \\draw [-{ Latex },color=red] (1.2, 1.7) arc [start angle = 135, end angle = -160, radius = 0.6];
+        \\draw [-{ Latex },color=blue] (4.2, 1.7) arc [start angle = 135, end angle = -160, radius = 0.6];
+        \\node [contact,color=green!71!black] (bottomc) at (3, 0) {  };
+        \\node [below] (bottom) at (3, 0) { $2$ };
+        \\node [above] (top) at (3, 3) { $1$ };
+    \\end{ tikzpicture }
+
+    \\begin{ align* }
+        &\\begin{ cases }
+            { \\color{ red } \\ele_1 = \\eli_1 r_1 - \\eli R }, \\\\
+            { \\color{ blue } -\\ele_2 = -\\eli_2 r_2 + \\eli R }, \\\\
+            { \\color{ green!71!black } - \\eli - \\eli_1 - \\eli_2 = 0 };
+        \\end{ cases }
+        \\qquad \\implies \\qquad
+        \\begin{ cases }
+            \\eli_1 = \\frac{ \\ele_1 + \\eli R }{ r_1 }, \\\\
+            \\eli_2 = \\frac{ \\ele_2 + \\eli R }{ r_2 }, \\\\
+            \\eli + \\eli_1 + \\eli_2 = 0;
+        \\end{ cases } \\implies \\\\
+        &\\implies
+         \\eli + \\frac{ \\ele_1 + \\eli R }{ r_1 } + \\frac{ \\ele_2 + \\eli R }{ r_2 } = 0, \\\\
+        &\\eli\\cbr{ 1 + \\frac{ R }{ r_1 } + \\frac{ R }{ r_2 } } + \\frac{ \\ele_1 }{ r_1 } + \\frac{ \\ele_2 }{ r_2 } = 0, \\\\
+        &\\eli = - \\frac{ \\frac{ \\ele_1 }{ r_1 } + \\frac{ \\ele_2 }{ r_2 } }{ 1 + \\frac{ R }{ r_1 } + \\frac{ R }{ r_2 } }
+        = - \\frac{ \\frac{E1:V|s}{r1:V|s} + \\frac{E2:V|s}{r2:V|s} }{ 1 + \\frac{R:V|s}{r1:V|s} + \\frac{R:V|s}{r2:V|s} } = - {I_ratio:LaTeX}\\units{ А } \\approx {I:Value}, \\\\
+        &U = \\varphi_2 - \\varphi_1 = \\eli R = - \\frac{ \\frac{ \\ele_1 }{ r_1 } + \\frac{ \\ele_2 }{ r_2 } }{ 1 + \\frac{ R }{ r_1 } + \\frac{ R }{ r_2 } } R \\approx {U:Value}.
+    \\end{ align* }
+    Оба ответа отрицательны, потому что мы изначально «не угадали» с направлением тока. Расчёт же показал,
+    что ток через резистор $R$ течёт в противоположную сторону: вниз на рисунке, а потенциал точки 1 больше потенциала точки 2,
+    а электрический ток ожидаемо течёт из точки с большим потенциалов в точку с меньшим.
+
+    Кстати, если продолжить расчёт и вычислить значения ещё двух токов (формулы для $\\eli_1$ и $\\eli_2$, куда подставлять, выписаны выше),
+    то по их знакам можно будет понять: угадали ли мы с их направлением или нет.
+'''
+)
 class Kirchgof_double(variant.VariantTask):
-    pass
+    def GetUpdate(self, R=None, r1=None, r2=None, E1=None, E2=None, **kws):
+        I_ratio = (
+            Fraction(numerator=E1.Value, denominator=r1.Value) + Fraction(numerator=E2.Value, denominator=r2.Value)
+        ) / (
+            Fraction(base_value=1) + Fraction(numerator=R.Value, denominator=r1.Value) + Fraction(numerator=R.Value, denominator=r2.Value)
+        )
+
+        I = '\\eli = -%.1f А' % float(I_ratio)
+        U = 'U = -%.1f В' % float(I_ratio * R.Value)
+        return dict(
+            I_ratio=I_ratio,
+            I=I,
+            U=U,
+        )

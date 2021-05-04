@@ -5,37 +5,48 @@ log = logging.getLogger(__name__)
 
 
 class Fraction:
-    def __init__(self, base_value=1):
+    def __init__(self, base_value=1, numerator=None, denominator=None):
         assert base_value == 1 or base_value == 0
-        self._fraction = fractions.Fraction(numerator=base_value, denominator=1)
+        if base_value == 0:
+            assert numerator is None
+            assert denominator is None
+            self._fraction = fractions.Fraction(numerator=base_value, denominator=1)
+        else:
+            numer = numerator or 1
+            denom = denominator or 1
+            self._fraction = fractions.Fraction(numerator=numer, denominator=denom)
+
+    @staticmethod
+    def from_fraction(fraction):
+        assert isinstance(fraction, fractions.Fraction)
+        return Fraction(
+            numerator=fraction.numerator,
+            denominator=fraction.denominator,
+        )
 
     def __mul__(self, other):
         if isinstance(other, Fraction):
-            self._fraction = self._fraction * other._fraction
+            return Fraction.from_fraction(self._fraction * other._fraction)
         else:
-            self._fraction = self._fraction * other
-        return self
+            return Fraction.from_fraction(self._fraction * other)
 
     def __add__(self, other):
         if isinstance(other, Fraction):
-            self._fraction = self._fraction + other._fraction
+            return Fraction.from_fraction(self._fraction + other._fraction)
         else:
-            self._fraction = self._fraction + other
-        return self
+            return Fraction.from_fraction(self._fraction + other)
 
     def __sub__(self, other):
         if isinstance(other, Fraction):
-            self._fraction = self._fraction - other._fraction
+            return Fraction.from_fraction(self._fraction - other._fraction)
         else:
-            self._fraction = self._fraction - other
-        return self
+            return Fraction.from_fraction(self._fraction - other)
 
     def __truediv__(self, other):
         if isinstance(other, Fraction):
-            self._fraction = self._fraction / other._fraction
+            return Fraction.from_fraction(self._fraction / other._fraction)
         else:
-            self._fraction = self._fraction / other
-        return self
+            return Fraction.from_fraction(self._fraction / other)
 
     def __float__(self):
         return float(self._fraction)
@@ -72,6 +83,9 @@ class Fraction:
             log.error(f'Error in __format__ for {fmt} and {self._fraction}')
             raise
 
+    def __str__(self):
+        return f'fraction: {self._fraction.numerator} / {self._fraction.denominator}'
+
 
 def test_fraction():
     for template, frac, result in [
@@ -103,6 +117,11 @@ def test_fraction():
     assert f'{U_bonus_12:LaTeX}'
     eta_bonus = Fraction() * A_bonus_cycle / (U_bonus_plus + A_bonus_plus + U_bonus_12)
     assert f'{eta_bonus:LaTeX}'
+
+    a = Fraction()
+    assert int(float(a)) == 1
+    b = a * 200
+    assert int(float(a)) == 1
 
 
 test_fraction()
