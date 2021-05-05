@@ -344,42 +344,50 @@ class P_from_R_I(variant.VariantTask):
     Вычислите значения для 2 случаев: ${r:L}=0$ и {r:Task:e}.
 ''')
 @variant.answer_align([
-    '''{I1:L} &= \\frac{E:L:s}{R:L:s} = \\frac{E:Value:s}{R:Value:s} = {I1:Value}, ''',
-    '''{I2:L} &= \\frac{E:L:s}{ {R:L} + {r:L} } = \\frac{E:Value:s}{ {R:Value} + {r:Value} } = {I2:Value}, ''',
+    '''{I1:L} &= \\frac{E:L:s}{R:L:s} = \\frac{E:Value:s}{R:Value:s} = {I1_ratio:LaTeX}\\units{ А } \\approx {I1:Value}, ''',
+    '''{I2:L} &= \\frac{E:L:s}{ {R:L} + {r:L} } = \\frac{E:Value:s}{ {R:Value} + {r:Value} } = {I2_ratio:LaTeX}\\units{ А } \\approx {I2:Value}, ''',
     '''{Q1:L} &= {I1:L}^2{R:L}{t:L} = \\sqr{ \\frac{E:L:s}{R:L:s} } {R:L} {t:L}
-        = \\sqr{ \\frac{E:Value:s}{R:Value:s} } * {R:Value} * {t:Value} = {Q1:Value}, ''',
+        = \\sqr{ \\frac{E:Value:s}{R:Value:s} } * {R:Value} * {t:Value} = {Q1_ratio:LaTeX}\\units{ Дж } \\approx {Q1:Value}, ''',
     '''{Q2:L} &= {I2:L}^2{R:L}{t:L} = \\sqr{ \\frac{E:L:s}{ {R:L} + {r:L} } } {R:L} {t:L}
-        = \\sqr{ \\frac{E:Value:s}{ {R:Value} + {r:Value} } } * {R:Value} * {t:Value} = {Q2:Value}, ''',
+        = \\sqr{ \\frac{E:Value:s}{ {R:Value} + {r:Value} } } * {R:Value} * {t:Value} = {Q2_ratio:LaTeX}\\units{ Дж } \\approx {Q2:Value}, ''',
     '''{A1:L} &= {I1:L}{t:L}{E:L} = \\frac{E:L:s}{ {R:L} } {t:L} {E:L}
         = \\frac{ {E:L}^2 {t:L} }{R:L|s} = \\frac{ {E:Value|sqr} * {t:Value} }{R:Value:s}
-        = {A1:Value}, \\text{ положительна }, ''',
+        = {A1_ratio:LaTeX}\\units{ Дж } \\approx {A1:Value}, \\text{ положительна }, ''',
     '''{A2:L} &= {I2:L}{t:L}{E:L} = \\frac{E:L:s}{ {R:L} + {r:L} } {t:L} {E:L}
         = \\frac{ {E:L}^2 {t:L} }{ {R:L} + {r:L} } = \\frac{ {E:Value|sqr} * {t:Value} }{ {R:Value} + {r:Value} }
-        = {A2:Value}, \\text{ положительна }, ''',
-    '''{eta1:L} &= \\frac{Q1:L:s}{A1:L:s} = \\ldots = \\frac{R:L:s}{R:L:s} = 1, ''',
-    '''{eta2:L} &= \\frac{Q2:L:s}{A2:L:s} = \\ldots = \\frac{R:L:s}{ {R:L} + {r:L} } = {eta2:Value}''',
+        = {A2_ratio:LaTeX}\\units{ Дж } \\approx {A2:Value}, \\text{ положительна }, ''',
+    '''{eta1:L} &= \\frac{Q1:L:s}{A1:L:s} = \\ldots = \\frac{R:L:s}{R:L:s} = {eta1:Value}, ''',
+    '''{eta2:L} &= \\frac{Q2:L:s}{A2:L:s} = \\ldots = \\frac{R:L:s}{ {R:L} + {r:L} } = {eta_2_ratio:LaTeX} \\approx {eta2:Value}.''',
 ])
-@variant.arg(E=['\\mathcal{E} = %d В' % E for E in [1, 2, 3, 4]])
+@variant.arg(E=['\\ele = %d В' % E for E in [1, 2, 3, 4]])
 @variant.arg(R=['R = %d Ом' % R for R in [10, 15, 24, 30]])
 @variant.arg(r=['r = %d Ом' % r for r in [10, 20, 30, 60]])
 @variant.arg(t=['\\tau = %d с' % t for t in [2, 5, 10]])
 class Om_eta_full(variant.VariantTask):
     def GetUpdate(self, r=None, R=None, E=None, t=None, **kws):
-        I1 = UnitValue('\\mathcal{I}_1 = %.2f А' % (1. * E.Value / R.Value))
-        I2 = UnitValue('\\mathcal{I}_2 = %.2f А' % (1. * E.Value / (R.Value + r.Value)))
-        Q1 = UnitValue('Q_1 = %.3f Дж' % (1. * I1.Value ** 2 * R.Value * t.Value))
-        Q2 = UnitValue('Q_2 = %.3f Дж' % (1. * I2.Value ** 2 * R.Value * t.Value))
-        A1 = UnitValue('A_1 = %.3f Дж' % (1. * I1.Value * E.Value * t.Value))
-        A2 = UnitValue('A_2 = %.3f Дж' % (1. * I2.Value * E.Value * t.Value))
+        I1_ratio = Fraction(numerator=E.Value, denominator=R.Value)
+        I2_ratio = Fraction(numerator=E.Value, denominator=R.Value + r.Value)
+        eta_2_ratio = Fraction(numerator=R.Value, denominator=R.Value + r.Value)
+        Q1_ratio = I1_ratio * I1_ratio * R.Value * t.Value
+        Q2_ratio = I2_ratio * I2_ratio * R.Value * t.Value
+        A1_ratio = I1_ratio * E.Value * t.Value
+        A2_ratio = I2_ratio * E.Value * t.Value
         return dict(
-            I1=I1,
-            I2=I2,
-            Q1=Q1,
-            Q2=Q2,
-            A1=A1,
-            A2=A2,
-            eta1='\\eta_1 = %.2f' % (1. * Q1.Value / A1.Value),
-            eta2='\\eta_2 = %.2f' % (1. * Q2.Value / A2.Value),
+            I1_ratio=I1_ratio,
+            I2_ratio=I2_ratio,
+            I1='\\eli_1 = %.2f А' % float(I1_ratio),
+            I2='\\eli_2 = %.2f А' % float(I2_ratio),
+            Q1_ratio=Q1_ratio,
+            Q2_ratio=Q2_ratio,
+            A1_ratio=A1_ratio,
+            A2_ratio=A2_ratio,
+            Q1='Q_1 = %.3f Дж' % float(Q1_ratio),
+            Q2='Q_2 = %.3f Дж' % float(Q2_ratio),
+            A1='A_1 = %.3f Дж' % float(A1_ratio),
+            A2='A_2 = %.3f Дж' % float(A2_ratio),
+            eta_2_ratio=eta_2_ratio,
+            eta1='\\eta_1 = 1',
+            eta2='\\eta_2 = %.2f' % float(eta_2_ratio),
         )
 
 
@@ -432,7 +440,7 @@ class r_eta_from_Rs(variant.VariantTask):
             r=r,
             eta1='\\eta_1 = %.3f ' % (1. * R1.Value / (R1.Value + r.Value)),
             eta2='\\eta_2 = %.3f ' % (1. * R2.Value / (R2.Value + r.Value)),
-            E='\\mathcal{E} = 1 В',
+            E='\\ele = 1 В',
         )
 
 
