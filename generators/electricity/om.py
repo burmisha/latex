@@ -212,7 +212,7 @@ class Definitions07(variant.VariantTask):
 class I_from_U_R(variant.VariantTask):
     def GetUpdate(self, R=None, U=None, **kws):
         return dict(
-            I='\\mathcal{I} = %d А' % (U.Value / R.Value),
+            I='\\eli = %d А' % (U.Value / R.Value),
         )
 
 
@@ -245,7 +245,7 @@ class r_from_R_N(variant.VariantTask):
 @variant.answer_short('{U:Task}')
 @variant.arg(R1=('R_1 = {} кОм', [4, 10, 15]))
 @variant.arg(R2=('R_2 = {} кОм', [2, 6, 12, 20]))
-@variant.arg(I=('\\mathcal{{I}} = {} мА', [2, 3, 5]))
+@variant.arg(I=('\\eli = {} мА', [2, 3, 5]))
 @variant.arg(how=['параллельно', 'последовательно'])
 class U_from_R1_R2_I(variant.VariantTask):
     def GetUpdate(self, R1=None, R2=None, I=None, how=None, **kws):
@@ -312,7 +312,7 @@ class R_best_from_R_N(variant.VariantTask):
 class P_from_R_U(variant.VariantTask):
     def GetUpdate(self, R=None, U=None, **kws):
         return dict(
-            I='\\mathcal{I} = %.2f А' % (1. * U.Value / R.Value),
+            I='\\eli = %.2f А' % (1. * U.Value / R.Value),
             P='P = %.2f Вт' % (1. * U.Value ** 2 / R.Value),
         )
 
@@ -323,11 +323,11 @@ class P_from_R_U(variant.VariantTask):
     Определите, чему равны напряжение на резисторе и мощность, выделяющаяся на нём.
 ''')
 @variant.answer_align([
-    '{U:L} &= {I:L}{R:L} = {I:Value} * {R:Value} = {U:Value}, ',
+    '{U:L} &= {I:L} {R:L} = {I:Value} * {R:Value} = {U:Value}, ',
     '{P:L} &= {I:L}^2{R:L} = {I:Value|sqr} * {R:Value} = {P:Value}',
 ])
 @variant.arg(R=['%s = %d Ом' % (rLetter, rValue) for rLetter, rValue in itertools.product(['r', 'R'], [5, 12, 18, 30])])
-@variant.arg(I=['\\mathcal{I} = %.2f А' % iValue for iValue in [2, 3, 4, 5, 6, 8, 10, 15]])
+@variant.arg(I=['\\eli = %.2f А' % iValue for iValue in [2, 3, 4, 5, 6, 8, 10, 15]])
 class P_from_R_I(variant.VariantTask):
     def GetUpdate(self, R=None, I=None, U=None, **kws):
         return dict(
@@ -350,10 +350,10 @@ class P_from_R_I(variant.VariantTask):
         = \\sqr{ \\frac{E:Value:s}{R:Value:s} } * {R:Value} * {t:Value} = {Q1_ratio:LaTeX}\\units{ Дж } \\approx {Q1:Value}, ''',
     '''{Q2:L} &= {I2:L}^2{R:L}{t:L} = \\sqr{ \\frac{E:L:s}{ {R:L} + {r:L} } } {R:L} {t:L}
         = \\sqr{ \\frac{E:Value:s}{ {R:Value} + {r:Value} } } * {R:Value} * {t:Value} = {Q2_ratio:LaTeX}\\units{ Дж } \\approx {Q2:Value}, ''',
-    '''{A1:L} &= {I1:L}{t:L}{E:L} = \\frac{E:L:s}{ {R:L} } {t:L} {E:L}
+    '''{A1:L} &= q_1{E:L} = {I1:L}{t:L}{E:L} = \\frac{E:L:s}{ {R:L} } {t:L} {E:L}
         = \\frac{ {E:L}^2 {t:L} }{R:L|s} = \\frac{ {E:Value|sqr} * {t:Value} }{R:Value:s}
         = {A1_ratio:LaTeX}\\units{ Дж } \\approx {A1:Value}, \\text{ положительна }, ''',
-    '''{A2:L} &= {I2:L}{t:L}{E:L} = \\frac{E:L:s}{ {R:L} + {r:L} } {t:L} {E:L}
+    '''{A2:L} &= q_2{E:L} = {I2:L}{t:L}{E:L} = \\frac{E:L:s}{ {R:L} + {r:L} } {t:L} {E:L}
         = \\frac{ {E:L}^2 {t:L} }{ {R:L} + {r:L} } = \\frac{ {E:Value|sqr} * {t:Value} }{ {R:Value} + {r:Value} }
         = {A2_ratio:LaTeX}\\units{ Дж } \\approx {A2:Value}, \\text{ положительна }, ''',
     '''{eta1:L} &= \\frac{Q1:L:s}{A1:L:s} = \\ldots = \\frac{R:L:s}{R:L:s} = {eta1:Value}, ''',
@@ -489,9 +489,14 @@ class r_eta_from_Rs(variant.VariantTask):
         &\\implies
          \\eli + \\frac{ \\ele_1 + \\eli R }{ r_1 } + \\frac{ \\ele_2 + \\eli R }{ r_2 } = 0, \\\\
         &\\eli\\cbr{ 1 + \\frac{ R }{ r_1 } + \\frac{ R }{ r_2 } } + \\frac{ \\ele_1 }{ r_1 } + \\frac{ \\ele_2 }{ r_2 } = 0, \\\\
-        &\\eli = - \\frac{ \\frac{ \\ele_1 }{ r_1 } + \\frac{ \\ele_2 }{ r_2 } }{ 1 + \\frac{ R }{ r_1 } + \\frac{ R }{ r_2 } }
-        = - \\frac{ \\frac{E1:V|s}{r1:V|s} + \\frac{E2:V|s}{r2:V|s} }{ 1 + \\frac{R:V|s}{r1:V|s} + \\frac{R:V|s}{r2:V|s} } = - {I_ratio:LaTeX}\\units{ А } \\approx {I:Value}, \\\\
-        &U = \\varphi_2 - \\varphi_1 = \\eli R = - \\frac{ \\frac{ \\ele_1 }{ r_1 } + \\frac{ \\ele_2 }{ r_2 } }{ 1 + \\frac{ R }{ r_1 } + \\frac{ R }{ r_2 } } R \\approx {U:Value}.
+        &\\eli
+            = - \\frac{ \\frac{ \\ele_1 }{ r_1 } + \\frac{ \\ele_2 }{ r_2 } }{ 1 + \\frac{ R }{ r_1 } + \\frac{ R }{ r_2 } }
+            = - \\frac{ \\frac{E1:V|s}{r1:V|s} + \\frac{E2:V|s}{r2:V|s} }{ 1 + \\frac{R:V|s}{r1:V|s} + \\frac{R:V|s}{r2:V|s} }
+            = - {I_ratio:LaTeX}\\units{ А }
+            \\approx {I:Value}, \\\\
+        &U  = \\varphi_2 - \\varphi_1 = \\eli R
+            = - \\frac{ \\frac{ \\ele_1 }{ r_1 } + \\frac{ \\ele_2 }{ r_2 } }{ 1 + \\frac{ R }{ r_1 } + \\frac{ R }{ r_2 } } R
+            \\approx {U:Value}.
     \\end{ align* }
     Оба ответа отрицательны, потому что мы изначально «не угадали» с направлением тока. Расчёт же показал,
     что ток через резистор $R$ течёт в противоположную сторону: вниз на рисунке, а потенциал точки 1 больше потенциала точки 2,
