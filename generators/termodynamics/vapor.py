@@ -53,7 +53,7 @@ class GetPhi(variant.VariantTask):
 @variant.arg(t=('{}', [15, 20, 25, 30, 40, 50, 60, 70, 80, 90, 100]))
 @variant.arg(phi=('{}', [20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80]))
 @variant.answer_tex('''
-    Уравнение состояние идеального газа (и учтём, что $R = {Consts.N_A:L} * {Consts.k_boltzmann:L}$, 
+    Уравнение состояния идеального газа (и учтём, что $R = {Consts.N_A:L} * {Consts.k_boltzmann:L}$,
     это чуть упростит выячичления, но вовсе не обязательно это делать):
     $$
         PV = \\nu RT = \\frac{ N }{Consts.N_A:L:s} RT \\implies N = PV * \\frac{Consts.N_A:L:s}{ RT }=  \\frac{ PV }{ {Consts.k_boltzmann:L}T }
@@ -62,19 +62,19 @@ class GetPhi(variant.VariantTask):
 
     Получаем плотность пара в сосуде $\\varphi = \\frac{ P }{P_np:L:s} \\implies P = \\varphi {P_np:L}.$
 
-    И подставляем в ответ (по сути, его можно было получить быстрее из формул $P = nkT, n = \\frac NV$): 
+    И подставляем в ответ (по сути, его можно было получить быстрее из формул $P = nkT, n = \\frac NV$):
     $$
         N = \\frac{ \\varphi * {P_np:L} * V }{ {Consts.k_boltzmann:L}T }
          = \\frac{ {phi_share} * {P_np:V} * {V:V} }{ {Consts.k_boltzmann:V} * {T:V} }
          \\approx {N:V}.
     $$
 
-    Другой вариант решения (через плотности) приводит в результату: 
+    Другой вариант решения (через плотности) приводит в результату:
     $$
-        N = {Consts.N_A:L} \\nu = {Consts.N_A:L} * \\frac{ m }{ {mu:L} } 
-          = {Consts.N_A:L} \\frac{ \\rho V }{ {mu:L} } 
-          = {Consts.N_A:L} \\frac{ \\varphi * {rho_np:L} * V }{ {mu:L} } 
-          = {Consts.N_A:V} * \\frac{ {phi_share} * {rho_np:V} * {V:V} }{ {mu:V} } 
+        N = {Consts.N_A:L} \\nu = {Consts.N_A:L} * \\frac{ m }{ {mu:L} }
+          = {Consts.N_A:L} \\frac{ \\rho V }{ {mu:L} }
+          = {Consts.N_A:L} \\frac{ \\varphi * {rho_np:L} * V }{ {mu:L} }
+          = {Consts.N_A:V} * \\frac{ {phi_share} * {rho_np:V} * {V:V} }{ {mu:V} }
           \\approx {N2:V}.
     $$
 ''')
@@ -89,7 +89,7 @@ class GetNFromPhi(variant.VariantTask):
         rho_np_value = Consts.vapor.get_rho_by_t(t_int)
 
         N = 1. * int(phi) / 100 * P_np_value * V.Value / Consts.k_boltzmann.Value / T * 1000
-        N2 = 1. * int(phi) / 100 * rho_np_value * V.Value / mu_value * Consts.N_A.Value 
+        N2 = 1. * int(phi) / 100 * rho_np_value * V.Value / mu_value * Consts.N_A.Value
         return dict(
             P_np=f'P_{{ \\text{{ нас. пара {t} }} \\celsius }} = %.3f кПа' % P_np_value,
             rho_np=f'\\rho_{{ \\text{{ нас. пара {t} }} \\celsius }} = %.3f г/м^3' % rho_np_value,
@@ -120,26 +120,26 @@ class GetNFromPhi(variant.VariantTask):
 @variant.answer_tex('''
     Парциальное давление насыщенного водяного пара при ${t1}\\celsius$ ищем по таблице: $${P_np_1:Task}.$$
 
-    Парциальное давление водяного пара 
+    Парциальное давление водяного пара
     $${P1:L} = \\varphi_1 * {P_np_1:L} = {phi_1} * {P_np_1:V} = {P1:V}.$$
 
     Точку росы определяем по таблице: при какой температуре пар с давлением {P1:Task:e} станет насыщенным: ${t}\\celsius$.
 
     После нагрева парциальное давление пара возрастёт:
     $$
-        \\frac{ {P1:L} * V }{ {T1:L} } = \\nu R = \\frac{ {P2:L} * V }{ {T2:L} } 
+        \\frac{ {P1:L} * V }{ {T1:L} } = \\nu R = \\frac{ {P2:L} * V }{ {T2:L} }
         \\implies {P2:L} = {P1:L} * \\frac{T2:L:s}{T1:L:s} = {P1:V} * \\frac{T2:V:s}{T1:V:s} \\approx {P2:V}.
     $$
 
-    Парциальное давление насыщенного водяного пара при ${t2}\\celsius$ ищем по таблице: {P_np_2:Task:e}. 
-    Теперь определяем влажность: 
+    Парциальное давление насыщенного водяного пара при ${t2}\\celsius$ ищем по таблице: {P_np_2:Task:e}.
+    Теперь определяем влажность:
     $$
         \\varphi_2 = \\frac{P2:L:s}{P_np_2:L:s} = \\frac{P2:V:s}{P_np_2:V:s} \\approx {phi2} = {phi2_percent}\%.
     $$
 
     Или же выражаем то же самое через плотности (плотность не изменяется при изохорном нагревании $\\rho_1 =\\rho_2 = \\rho$, в отличие от давления):
     $$
-        \\varphi_2 = \\frac{ \\rho }{rho_np_2:L:s} = \\frac{ \\varphi_1{rho_np_1:L} }{rho_np_2:L:s} 
+        \\varphi_2 = \\frac{ \\rho }{rho_np_2:L:s} = \\frac{ \\varphi_1{rho_np_1:L} }{rho_np_2:L:s}
         = \\frac{ {phi_1} * {rho_np_1:V} }{rho_np_2:V:s} \\approx {phi_2_rho} = {phi2_percent_rho}\%.
     $$
     Сравните 2 последних результата.
@@ -190,7 +190,7 @@ class GetPFromPhi(variant.VariantTask):
 
     Сперва определим новое давление сухого воздуха из уравнения состояния идеального газа:
     $$
-        \\frac{ {P_air_new:L} * V }{ {T2:L} } = \\nu R = \\frac{ {P_air_old:L} * V }{ {T1:L} } 
+        \\frac{ {P_air_new:L} * V }{ {T2:L} } = \\nu R = \\frac{ {P_air_old:L} * V }{ {T1:L} }
         \\implies {P_air_new:L} = {P_air_old:L} * \\frac{T2:L:s}{T1:L:s} = {P_air_old:V} * \\frac{T2:V:s}{T1:V:s} \\approx {P_air_new:V}.
     $$
 
