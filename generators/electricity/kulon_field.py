@@ -50,7 +50,7 @@ class ForceTask(variant.VariantTask):
     'F &= k\\frac{ \\abs{ q_1 }\\abs { q_2 } }{ \\sqr{ {n} {letter} } }'
     '   = k\\frac{ \\abs{ {charges[0]} } * \\abs{ {charges[1]} } }{ {n}^2 * {letter}^2 }, \\text{ {res[0]} };',
     '''
-    q'_1 &= q'_2, q_1 + q_2 = q'_1 + q'_2 \\implies  q'_1 = q'_2 = q = \\frac{ q_1 + q_2 }2 = \\frac{ {charges[0]} + {charges[1]} }2 = {q_ratio:LaTeX}{chargeLetter} \\implies''',
+    q'_1 &= q'_2, q_1 + q_2 = q'_1 + q'_2 \\implies  q'_1 = q'_2 = \\frac{ q_1 + q_2 }2 = \\frac{ {charges[0]} + {charges[1]} }2 = {q_ratio:LaTeX}{chargeLetter} \\implies''',
     '''
     \\implies F'  &= k\\frac{ \\abs{ q'_1 }\\abs{ q'_2 } }{ \\sqr{ {n} {letter} } }
         = k\\frac{ \\sqr{ {q_ratio:LaTeX}{chargeLetter} } }{ {n}^2 * {letter}^2 },
