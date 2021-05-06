@@ -21,11 +21,11 @@ from generators.helpers import Consts
 @variant.arg(E=['E = %d кВ / м' % ev for ev in [2, 4, 20]])
 class A_from_Q_E_l(variant.VariantTask):  # Рымкевич 728(737)
     def GetUpdate(self, l=None, q=None, E=None, **kws):
-        A = 1. * E.Value * q.Value * l.Value
+        A = 1. * E.Value * q.Value * l.Value / 100
         dE = -A
         return dict(
-            A=f'{A:.1f} 10^-7 Дж',
-            dE=f'{dE:.1f} 10^-7 Дж',
+            A=f'{A:.1f} мкДж',
+            dE=f'{dE:.1f} мкДж',
         )
 
 
@@ -44,7 +44,7 @@ class A_from_Q_E_l(variant.VariantTask):  # Рымкевич 728(737)
 class E_from_U_l(variant.VariantTask):  # Рымкевич 735(737)
     def GetUpdate(self, U=None, l=None, **kws):
         return dict(
-            E='%.1f кВ' % (1. * U.Value / l.Value * 100),
+            E='%.1f кВ / м' % (1. * U.Value / l.Value * 100),
         )
 
 
