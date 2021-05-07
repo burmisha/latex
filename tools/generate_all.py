@@ -25,9 +25,9 @@ PAPER_TEMPLATE = r'''
 def run(args):
     fileWriter = library.files.FileWriter(args.filter)
 
-    generateProblems = True
-    generateLists = True
-    generateMultiple = True
+    generateProblems = args.problems
+    generateLists = args.lists
+    generateMultiple = args.multiple
 
     if generateProblems:
         tasksGenerators = [
@@ -44,6 +44,8 @@ def run(args):
             problemsPath = os.path.join('problems', tasksGenerator.GetBookName())
             for task in sorted(tasksGenerator(), key=lambda task: task.GetFilename()):
                 fileWriter.Write(problemsPath, task.GetFilename(), text=task.GetTex())
+    else:
+        log.warn('Skipping problems')
 
     if generateLists:
         papersGenerators = [
@@ -55,6 +57,8 @@ def run(args):
         for papersGenerator in papersGenerators:
             for paper in papersGenerator():
                 fileWriter.Write('school-554', paper.GetFilename(), text=paper.GetTex())
+    else:
+        log.warn('Skipping lists')
 
     if generateMultiple:
         for work in classes.variants.get_all_variants():
@@ -81,9 +85,14 @@ def run(args):
 
         if args.show_manual:
             fileWriter.ShowManual(extensions=['tex'])
+    else:
+        log.warn('Skipping multiple')
 
 
 def populate_parser(parser):
     parser.add_argument('--show-manual', '--sm', help='Show manual files', action='store_true')
     parser.add_argument('--filter', help='Process only files matching filter')
+    parser.add_argument('-p', '--problems', help='Generate problems', action='store_true')
+    parser.add_argument('-l', '--lists', help='Generate list', action='store_true')
+    parser.add_argument('-m', '--multiple', help='Generate multiple', action='store_true')
     parser.set_defaults(func=run)
