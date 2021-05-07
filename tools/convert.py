@@ -1516,6 +1516,11 @@ class FIPI_kodificator_2019(PdfBook):
     pass
 
 
+@ppi(250)
+@zero_d_structure([('Кодификатор', 1, 8)])
+class FIPI_kodificator_2021(PdfBook):
+    pass
+
 
 def get_all_books():
     books_config = [
@@ -1590,6 +1595,10 @@ def get_all_books():
     yield FIPI_kodificator_2019(
         pdfPath=library.location.udr('11 ЕГЭ', '2019-ФИПИ', 'ФИ_КОДИФ 2019.pdf'),
         dstPath=library.location.no_sync('Книги - физика - картинки', '11 - ЕГЭ', 'Кодификатор ФИПИ 2019'),
+    )
+    yield FIPI_kodificator_2021(
+        pdfPath=library.location.udr('11 ЕГЭ', 'fi-ege-2021', 'ФИ-11 ЕГЭ 2021 КОДИФ.pdf'),
+        dstPath=library.location.no_sync('Книги - физика - картинки', '11 - ЕГЭ', 'Кодификатор ФИПИ 2021'),
     )
 
 
