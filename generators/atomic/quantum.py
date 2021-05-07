@@ -15,7 +15,7 @@ from generators.helpers import UnitValue, Consts
         = \\frac{ E_{ \\text { общая } } }{ E_{ \\text { одного фотона } } }
         = \\frac{ Pt }{ h\\nu } = \\frac{ Pt }{ h \\frac c { \\lambda } }
         = \\frac{ Pt\\lambda }{ hc }
-       = \\frac{
+        = \\frac{
             {power:Value} * {minutes} * 60 \\units{ с } * {length:Value}
          }{
             {h:V} * {c:V}
@@ -126,7 +126,6 @@ class E_from_nu(variant.VariantTask):
             E_eV=E_eV,
         )
 
-# 
 
 @variant.solution_space(80)
 @variant.text('''
