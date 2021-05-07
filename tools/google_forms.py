@@ -20,7 +20,7 @@ def get_all_forms():
     for work in classes.variants.get_all_variants():
         gform = work.get_gform()
         if gform:
-            yield work._human_name, gform
+            yield work._task_id, gform
 
 
 def run(args):

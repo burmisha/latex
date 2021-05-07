@@ -44,7 +44,6 @@ class Work:
         self,
         task_id=None,
         classes=None,
-        human=None,
         thresholds=None,
         up_to=None,
         image=None,
@@ -54,9 +53,8 @@ class Work:
         self._task_id = task_id
         self._tasks_classes = pick_classes(generators, classes) if classes else None
         self._pupils = library.pupils.get_class_from_string(task_id)
-        self._date = library.formatter.Date(task_id[:10])
+        self._date = library.formatter.Date(task_id.split()[0])
 
-        self._human_name = human
         self._thresholds = thresholds
 
         self._up_to = up_to
@@ -64,7 +62,7 @@ class Work:
         self._questions = questions
         self._answers = answers
 
-    def is_distant_task(self):
+    def _is_distant_task(self):
         if self._task_id in self.FORCED_NOT_DISTANT:
             return False
         elif '2020-11-20' <= self._task_id <= '2021-01-01':  # use test version on distant
@@ -74,15 +72,24 @@ class Work:
 
     def get_tasks(self):
         tasks = [task(pupils=self._pupils, date=self._date) for task in self._tasks_classes]
-        if self.is_distant_task():  # use test version on distant
+        if self._is_distant_task():  # use test version on distant
             for task in tasks:
                 task.PreferTestVersion()
                 task.SolutionSpace = 0
                 assert hasattr(task, 'AnswerTestTemplate')
         return tasks
 
+    def get_human_name(self):
+        res = ' '.join(
+            [
+                f'{self._date:dots}',
+                f'{self._pupils.Grade}{self._pupils.Letter}',
+            ] + self._task_id.split()[2:]
+        )
+        return res
+
     def get_checker(self):
-        if self._human_name is None:
+        if self._up_to is None:
             return None
         elif self._tasks_classes:
             answers = self.get_tasks()
@@ -90,8 +97,9 @@ class Work:
             answers = self._answers
         else:
             return None
+
         checker = library.check.checker.Checker(
-            self._human_name,
+            self.get_human_name(),
             answers,
             self._thresholds
         )
@@ -100,7 +108,7 @@ class Work:
     def get_gform(self):
         if self._up_to is None:
             return None
-        form_generator = Generator(title=self._human_name, questions=self._questions)
+        form_generator = Generator(title=self.get_human_name(), questions=self._questions)
         return form_generator.Generate(up_to=self._up_to, image=self._image)
 
 
@@ -109,24 +117,21 @@ def get_all_variants():
 
     works = [
         Work(
-            task_id='2020-10-22 10АБ',
-            human='2020.10.22 10АБ - Тест по динамике - 1',
+            task_id='2020-10-22 10АБ - Тест по динамике - 1',
             up_to='8:50',
             questions=Choice(['Верно', 'Неверно', 'Недостаточно данных в условии']) * 4 + text_task * 6 + Text('Сколько задач на уроке сегодня было понятно?'),
             answers=['Неверно', 'Верно', 'Верно', 'Неверно', '([Кк]илограмм.?|кг)', '([Нн]ьютон.?|Н)', f'1.6{ms2_re}', f'16{ms2_re}', f'2{ms2_re}', '6( Н)?'],
             thresholds=[5, 7, 9],
         ),
         Work(
-            task_id='2020-10-22 9М',
-            human='2020.10.22 9М - Тест по динамике - 1',
+            task_id='2020-10-22 9М - Тест по динамике - 1',
             up_to='10:50',
             questions=abv_choices * 10 + Text('Сколько задач на уроке сегодня было понятно?'),
             answers=list('ББВВААВААБ'),
             thresholds=[5, 7, 9],
         ),
         Work(
-            task_id='2020-10-27 10АБ',
-            human='2020.10.27 10АБ - Тест по динамике - 2',
+            task_id='2020-10-27 10АБ - Тест по динамике - 2',
             up_to='10:05',
             image='incredibles',
             questions=text_task * 7,
@@ -134,8 +139,7 @@ def get_all_variants():
             thresholds=[3, 4, 5],
         ),
         Work(
-            task_id='2020-10-27 9М',
-            human='2020.10.27 9М - Тест по динамике - 2',
+            task_id='2020-10-27 9М - Тест по динамике - 2',
             up_to='10:50',
             image='incredibles',
             questions=abv_choices * 8 + text_task * 4,
@@ -143,8 +147,7 @@ def get_all_variants():
             thresholds=[4, 6, 8],
         ),
         Work(
-            task_id='2020-10-29 10АБ',
-            human='2020.10.29 10АБ - Тест по динамике - 3',
+            task_id='2020-10-29 10АБ - Тест по динамике - 3',
             up_to='12:05',
             image='insideout',
             questions=abv_choices * 6 + text_task * 11,
@@ -152,8 +155,7 @@ def get_all_variants():
             thresholds=[10, 13, 15],
         ),
         Work(
-            task_id='2020-10-30 10АБ',
-            human='2020.10.30 10АБ - Тест по динамике - 4',
+            task_id='2020-10-30 10АБ - Тест по динамике - 4',
             up_to='10:05',
             image='minions',
             questions=abv_choices * 9 + text_task * 3,
@@ -161,8 +163,7 @@ def get_all_variants():
             thresholds=[6, 8, 10],
         ),
         Work(
-            task_id='2020-11-03 10АБ',
-            human='2020.11.03 10АБ - Тест по динамике - 5',
+            task_id='2020-11-03 10АБ - Тест по динамике - 5',
             up_to='9:05',
             image='insideout',
             questions=email('(только для 10«Б», 10«А» уже присылал)') + abv_choices * 2 + text_task * 5,
@@ -170,8 +171,7 @@ def get_all_variants():
             thresholds=[4, 5, 6],
         ),
         Work(
-            task_id='2020-11-03 9М',
-            human='2020.11.03 9М - Тест по динамике - 3',
+            task_id='2020-11-03 9М - Тест по динамике - 3',
             up_to='11:05',
             image='insideout',
             questions=email('') + abv_choices * 10,
@@ -179,8 +179,7 @@ def get_all_variants():
             thresholds=[5, 7, 9],
         ),
         Work(
-            task_id='2020-11-05 9М',
-            human='2020.11.05 9М - Тест по динамике - 4',
+            task_id='2020-11-05 9М - Тест по динамике - 4',
             up_to='10:05',
             image='incredibles',
             questions=abv_choices * 10,
@@ -188,8 +187,7 @@ def get_all_variants():
             thresholds=[5, 7, 9],
         ),
         Work(
-            task_id='2020-11-06 10АБ',
-            human='2020.11.06 10АБ - Тест по динамике - 6',
+            task_id='2020-11-06 10АБ - Тест по динамике - 6',
             up_to='10:05',
             image='up',
             questions=text_task * 8,
@@ -197,8 +195,7 @@ def get_all_variants():
             thresholds=[3, 5, 7],
         ),
         Work(
-            task_id='2020-11-12 9М',
-            human='2020.11.12 9М - Динамика - 6',
+            task_id='2020-11-12 9М - Динамика - 6',
             up_to='10:15',
             image='zootopia',
             questions=abv_choices * 5 + text_task * 4,
@@ -206,8 +203,7 @@ def get_all_variants():
             thresholds=[3, 5, 7],
         ),
         Work(
-            task_id='2020-11-13 10АБ',
-            human='2020.11.13 10АБ - Законы сохранения - 1',
+            task_id='2020-11-13 10АБ - Законы сохранения - 1',
             up_to='10:05',
             image='zootopia',
             questions=email('(если не присылали на прошлой неделе)') + abv_choices * 6 + text_task * 4,
@@ -215,8 +211,7 @@ def get_all_variants():
             thresholds=[4, 8, 11],
         ),
         Work(
-            task_id='2020-11-19 9М',
-            human='2020.11.19 9М - Законы сохранения - 1',
+            task_id='2020-11-19 9М - Законы сохранения - 1',
             up_to='10:05',
             image='up',
             questions=abv_choices * 6 + text_task * 4,
@@ -224,8 +219,7 @@ def get_all_variants():
             thresholds=[6, 8, 10],
         ),
         Work(
-            task_id='2020-12-04 10АБ',
-            human='2020.12.04 10АБ - Статика и гидростатика - 1',
+            task_id='2020-12-04 10АБ - Статика и гидростатика - 1',
             up_to='12:05',
             image='ratatouille',
             questions=text_task * 7 + Text('Ссылка на гифку') + Text('Какой вопрос добавить в опрос?'),
@@ -233,8 +227,7 @@ def get_all_variants():
             thresholds=[6, 8, 10],
         ),
         Work(
-            task_id='2020-12-08 9М',
-            human='2020.12.08 9М - Колебания и волны - 1',
+            task_id='2020-12-08 9М - Колебания и волны - 1',
             up_to='11:05',
             image='ratatouille',
             questions=abv_choices * 8,
@@ -242,8 +235,7 @@ def get_all_variants():
             thresholds=[5, 6, 7],
         ),
         Work(
-            task_id='2020-12-10 9М',
-            human='2020.12.10 9М - Колебания и волны - 2',
+            task_id='2020-12-10 9М - Колебания и волны - 2',
             up_to='11:05',
             image='incredibles',
             questions=abv_choices * 8,
@@ -251,8 +243,7 @@ def get_all_variants():
             thresholds=[5, 6, 7],
         ),
         Work(
-            task_id='2020-12-17 9М',
-            human='2020.12.17 9М - Колебания и волны - 3',
+            task_id='2020-12-17 9М - Колебания и волны - 3',
             up_to='11:05',
             image='keanureeves',
             questions=abv_choices * 10,
@@ -260,8 +251,7 @@ def get_all_variants():
             thresholds=[6, 7, 8],
         ),
         Work(
-            task_id='2020-12-22 9М',
-            human='2020.12.22 9М - Колебания и волны - 4',
+            task_id='2020-12-22 9М - Колебания и волны - 4',
             up_to='11:05',
             image='zootopia',
             questions=abv_choices * 10,
@@ -353,18 +343,16 @@ def get_all_variants():
             classes={'mechanics.kinematics': ['Theory_1_simple', 'Chernoutsan_1_2', 'Chernoutsan_1_2_1']}
         ),
         Work(
-            task_id='2020-11-26 10',
+            task_id='2020-11-26 10 - Законы сохранения - 2',
             classes={'mechanics.zsi_zse': ['Ch_3_1', 'Ch_3_2', 'Ch_3_3', 'Ch_3_6', 'Ch_3_26', 'Vishnyakova_1_4_6', 'Ch_4_2', 'Ch_4_29', 'Ch_4_45', 'Vishnyakova_1_4_12']},
-            human='2020.11.26 10АБ - Законы сохранения - 2',
             thresholds=[4, 6, 8],
             up_to='12:05',
             image='incredibles',
             questions=text_task * 10,
         ),
         Work(
-            task_id='2020-12-11 10',
+            task_id='2020-12-11 10 - Статика и гидростатика - 2',
             classes={'mechanics.gidro': ['Ch_6_3', 'Ch_6_8', 'Ch_6_10', 'Ch_6_16', 'Ch_6_20']},
-            human='2020.12.11 10АБ - Статика и гидростатика - 2',
             thresholds=[1.5, 2.5, 3.5],
             up_to='11:05',
             image='minions',
@@ -465,39 +453,35 @@ def get_all_variants():
             classes={'electricity.potential': ['Phi_from_static_e', 'A_from_motion', 'E_phi_graphs', 'Definitions01']}
         ),
         # Work(
-        #     task_id='2021-04-15 10',
+        #     task_id='2021-04-15 10 - Электростатика - 1',
         #     classes={'electricity.cond': ['Definitions03', 'Definitions04', 'Q_is_possible', 'Q_from_DeltaU_C', 'C_from_U_Q', 'C_ratio', 'W_from_Q_C']},
-        #     human='2021.04.15 10АБ - Электростатика - 1',
         #     thresholds=[3, 4, 6],
         #     up_to='9:02',
         #     image='zootopia',
         #     questions=text_task * 7
         # ),
         # Work(
-        #     task_id='2021-04-16 9',
+        #     task_id='2021-04-16 9 - Строение атома - 1',
         #     classes={'atomic.radioactive': ['Definitions01', 'Definitions02', 'Definitions03', 'Definitions04', 'Definitions05', 'Definitions06', 'Definitions07']},
-        #     human='2021.04.16 9М - Строение атома - 1',
         #     thresholds=[4, 5, 6],
         #     questions=text_task * 7,
         #     up_to='11:02',
         #     image='zootopia',
         # ),
         Work(
-            task_id='2021-04-23 9',
+            task_id='2021-04-23 9 - Строение атома - 2',
             classes={'atomic.nuclear': [
                 'AtomCount01', 'AtomCount02', 'AtomCount03', 'AtomCount04', 'AtomCount05', 'AtomCount06', 'AtomCount07', 'AtomCount08', 'AtomCount09', 'AtomCount10', 'AtomCount11', 'AtomCount12',
                 'AtomCount01_Text', 'AtomCount02_Text', 'AtomCount03_Text', 'AtomCount04_Text', 'AtomCount05_Text', 'AtomCount06_Text', 'AtomCount07_Text', 'AtomCount08_Text', 'AtomCount09_Text', 'AtomCount10_Text', 'AtomCount11_Text', 'AtomCount12_Text',
             ]},
-            human='2021.04.23 9М - Строение атома - 2',
             thresholds=[12, 16, 20],
             questions=text_task * 24,
             up_to='11:02',
             image='ratatouille',
         ),
         # Work(
-        #     task_id='2021-04-23 10',
+        #     task_id='2021-04-23 10 - Постоянный ток - 1',
         #     classes={'electricity.om': ['Definitions01', 'Definitions02', 'Definitions03', 'Definitions04', 'I_from_U_R', 'r_from_R_N', 'U_from_R1_R2_I', 'I_ratio', 'R_best_from_R_N']},
-        #     human='2021.04.23 10АБ - Постоянный ток - 1',
         #     thresholds=[4, 6, 8],
         #     questions=text_task * 9,
         #     up_to='9:05',
@@ -517,12 +501,3 @@ def get_all_variants():
         ),
     ]
     return works
-
-
-def get_variant(key):
-    key_picker = library.picker.KeyPicker(key=library.picker.letters_key)
-    for work in get_all_variants():
-        if work._tasks_classes:
-            key_picker.add(f'{work._date.GetFilenameText()} {work._pupils.Grade}', work.get_tasks())
-
-    return key_picker.get(key)

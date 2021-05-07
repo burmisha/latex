@@ -15,7 +15,7 @@ def run(args):
     for work in classes.variants.get_all_variants():
         work_checker = work.get_checker()
         if work_checker:
-            key_picker.add(work._human_name, work_checker)
+            key_picker.add(work._task_id, work_checker)
 
     if args.all:
         for checker in key_picker.all(checker_filter):

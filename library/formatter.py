@@ -27,6 +27,8 @@ class Date:
                 return self.GetHumanText()
             elif fmt == 'filename':
                 return self.GetFilenameText()
+            elif fmt == 'dots':
+                return f'{self._year}.{self._month:02d}.{self._day:02d}'
             else:
                 raise RuntimeError(f'Unknown format: {fmt!r}')
         except RuntimeError:
