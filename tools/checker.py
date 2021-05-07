@@ -6,14 +6,19 @@ import classes.variants
 import logging
 log = logging.getLogger(__name__)
 
-def get_checkers():
-    for work in classes.variants.get_simple_variants():
-        if work._answers is not None:
-            yield work._human_name, library.check.checker.Checker(work._human_name, work._answers, work._thresholds)
 
+def get_checkers():
     for work in classes.variants.get_all_variants():
-        if work._human_name is not None:
-            yield work._human_name, library.check.checker.Checker(work._human_name, work.get_tasks(), work._thresholds)
+        if work._human_name is None:
+            continue
+        elif work._tasks_classes:
+            answers = work.get_tasks()
+        elif work._answers:
+            answers = work._answers
+        else:
+            continue
+        checker = library.check.checker.Checker(work._human_name, answers, work._thresholds)
+        yield work._human_name, checker
 
 
 def run(args):

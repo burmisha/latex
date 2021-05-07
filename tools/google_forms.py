@@ -18,15 +18,10 @@ def get_all_forms():
     example.AddImageItem(url='https://media.giphy.com/media/WxxsVAJLSBsFa/giphy.gif', title='Всё!', helpText='Пора проверить и отправлять')
     yield 'example', example
 
-    variants = [
-        classes.variants.get_all_variants(),
-        classes.variants.get_simple_variants(),
-    ]
-    for variant in variants:
-        for work in variant:
-            if work._up_to is not None:
-                form_generator = Generator(title=work._human_name, questions=work._questions)
-                yield work._human_name, form_generator.Generate(up_to=work._up_to, image=work._image)
+    for work in classes.variants.get_all_variants():
+        if work._up_to is not None:
+            form_generator = Generator(title=work._human_name, questions=work._questions)
+            yield work._human_name, form_generator.Generate(up_to=work._up_to, image=work._image)
 
 
 def run(args):
