@@ -1,9 +1,10 @@
 import library.pupils
 import library.formatter
 import library.picker
+import library.check
 
 from library.gform.node import Choice, Text, TextTask, text_task, abv_choices
-
+from library.gform.generator import Generator
 
 import generators
 
@@ -80,6 +81,28 @@ class Work:
                 assert hasattr(task, 'AnswerTestTemplate')
         return tasks
 
+    def get_checker(self):
+        if self._human_name is None:
+            return None
+        elif self._tasks_classes:
+            answers = self.get_tasks()
+        elif self._answers:
+            answers = self._answers
+        else:
+            return None
+        checker = library.check.checker.Checker(
+            self._human_name,
+            answers,
+            self._thresholds
+        )
+        return checker
+
+    def get_gform(self):
+        if self._up_to is None:
+            return None
+        form_generator = Generator(title=self._human_name, questions=self._questions)
+        return form_generator.Generate(up_to=self._up_to, image=self._image)
+
 
 def get_all_variants():
     email = lambda desc: Text(f'Электронная почта {desc}'.strip())
@@ -104,7 +127,7 @@ def get_all_variants():
         Work(
             task_id='2020-10-27 10АБ',
             human='2020.10.27 10АБ - Тест по динамике - 2',
-            up_to='10:05', 
+            up_to='10:05',
             image='incredibles',
             questions=text_task * 7,
             answers=[13, 17, 120, 20, 2, 40, 15],
@@ -112,7 +135,7 @@ def get_all_variants():
         ),
         Work(
             task_id='2020-10-27 9М',
-            human='2020.10.27 9М - Тест по динамике - 2', 
+            human='2020.10.27 9М - Тест по динамике - 2',
             up_to='10:50',
             image='incredibles',
             questions=abv_choices * 8 + text_task * 4,
@@ -125,7 +148,7 @@ def get_all_variants():
             up_to='12:05',
             image='insideout',
             questions=abv_choices * 6 + text_task * 11,
-            answers=list('ВВАВАБ') + ['400', '1000000', r'0.02( м)?', '500( Н/м)?', r'0.02', r'0.102(75)?', r'0.14', '160', '2[kк].*', '4[kк].*', r'.*\b400\b.*\b75\b.*'], 
+            answers=list('ВВАВАБ') + ['400', '1000000', r'0.02( м)?', '500( Н/м)?', r'0.02', r'0.102(75)?', r'0.14', '160', '2[kк].*', '4[kк].*', r'.*\b400\b.*\b75\b.*'],
             thresholds=[10, 13, 15],
         ),
         Work(
@@ -140,8 +163,8 @@ def get_all_variants():
         Work(
             task_id='2020-11-03 10АБ',
             human='2020.11.03 10АБ - Тест по динамике - 5',
-            up_to='9:05', 
-            image='insideout', 
+            up_to='9:05',
+            image='insideout',
             questions=email('(только для 10«Б», 10«А» уже присылал)') + abv_choices * 2 + text_task * 5,
             answers=['А', 'В', 12, 240, '0.05', '100 Н?', 5],
             thresholds=[4, 5, 6],
@@ -150,7 +173,7 @@ def get_all_variants():
             task_id='2020-11-03 9М',
             human='2020.11.03 9М - Тест по динамике - 3',
             up_to='11:05',
-            image='insideout', 
+            image='insideout',
             questions=email('') + abv_choices * 10,
             answers=list('БАВАБАБВАВ'),
             thresholds=[5, 7, 9],
@@ -176,7 +199,7 @@ def get_all_variants():
         Work(
             task_id='2020-11-12 9М',
             human='2020.11.12 9М - Динамика - 6',
-            up_to='10:15', 
+            up_to='10:15',
             image='zootopia',
             questions=abv_choices * 5 + text_task * 4,
             answers=list('АББВВ') + ['(0.5|1/2)', 2, 120, 2],
@@ -185,7 +208,7 @@ def get_all_variants():
         Work(
             task_id='2020-11-13 10АБ',
             human='2020.11.13 10АБ - Законы сохранения - 1',
-            up_to='10:05', 
+            up_to='10:05',
             image='zootopia',
             questions=email('(если не присылали на прошлой неделе)') + abv_choices * 6 + text_task * 4,
             answers=list('АБАБВА') + [{8000: 2}, {'12.6': 2}, {10: 2}, {5: 2}],
@@ -194,7 +217,7 @@ def get_all_variants():
         Work(
             task_id='2020-11-19 9М',
             human='2020.11.19 9М - Законы сохранения - 1',
-            up_to='10:05', 
+            up_to='10:05',
             image='up',
             questions=abv_choices * 6 + text_task * 4,
             answers=list('АБАБВА') + [{'2( кг\*м/с)?': 2}, {'2( м/c)?': 2}, {'3( м/с)?': 2}, {'0.1( м/c)?': 2, '1/10': 2}],
@@ -212,7 +235,7 @@ def get_all_variants():
         Work(
             task_id='2020-12-08 9М',
             human='2020.12.08 9М - Колебания и волны - 1',
-            up_to='11:05', 
+            up_to='11:05',
             image='ratatouille',
             questions=abv_choices * 8,
             answers=list('ВВАВБАВБ'),
@@ -230,7 +253,7 @@ def get_all_variants():
         Work(
             task_id='2020-12-17 9М',
             human='2020.12.17 9М - Колебания и волны - 3',
-            up_to='11:05', 
+            up_to='11:05',
             image='keanureeves',
             questions=abv_choices * 10,
             answers=list('АВБАВБ') + [{'А': 0, 'Б': 0}] + list('ВАБ'),
@@ -239,7 +262,7 @@ def get_all_variants():
         Work(
             task_id='2020-12-22 9М',
             human='2020.12.22 9М - Колебания и волны - 4',
-            up_to='11:05', 
+            up_to='11:05',
             image='zootopia',
             questions=abv_choices * 10,
         ),

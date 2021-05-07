@@ -7,27 +7,15 @@ import logging
 log = logging.getLogger(__name__)
 
 
-def get_checkers():
-    for work in classes.variants.get_all_variants():
-        if work._human_name is None:
-            continue
-        elif work._tasks_classes:
-            answers = work.get_tasks()
-        elif work._answers:
-            answers = work._answers
-        else:
-            continue
-        checker = library.check.checker.Checker(work._human_name, answers, work._thresholds)
-        yield work._human_name, checker
-
-
 def run(args):
     checker_filter = args.filter
     pupil_filter = args.name
 
     key_picker = library.picker.KeyPicker(key=library.picker.letters_key)
-    for key, checker in get_checkers():
-        key_picker.add(key, checker)
+    for work in classes.variants.get_all_variants():
+        work_checker = work.get_checker()
+        if work_checker:
+            key_picker.add(work._human_name, work_checker)
 
     if args.all:
         for checker in key_picker.all(checker_filter):

@@ -2,7 +2,6 @@ import classes.variants
 
 import library.process
 from library.gform.form import GoogleForm
-from library.gform.generator import Generator
 
 import logging
 log = logging.getLogger(__name__)
@@ -19,9 +18,9 @@ def get_all_forms():
     yield 'example', example
 
     for work in classes.variants.get_all_variants():
-        if work._up_to is not None:
-            form_generator = Generator(title=work._human_name, questions=work._questions)
-            yield work._human_name, form_generator.Generate(up_to=work._up_to, image=work._image)
+        gform = work.get_gform()
+        if gform:
+            yield work._human_name, gform
 
 
 def run(args):
