@@ -58,6 +58,10 @@ def run(args):
 
     if generateMultiple:
         for work in classes.variants.get_all_variants():
+            tasks = work.get_tasks()
+            if not tasks:
+                continue
+
             date = work._date
             multiplePaper = generators.variant.MultiplePaper(date=date, pupils=work._pupils)
             study_year_pair = date.GetStudyYearPair()
@@ -67,7 +71,7 @@ def run(args):
                 multiplePaper.GetFilename(),
             )
 
-            text = multiplePaper.GetTex(variant_tasks=work.get_tasks())
+            text = multiplePaper.GetTex(variant_tasks=tasks)
             task = PAPER_TEMPLATE.format(noanswers='\n\\noanswers\n', filename=filename)
             answer = PAPER_TEMPLATE.format(noanswers='', filename=filename)
 

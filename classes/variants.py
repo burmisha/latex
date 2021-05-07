@@ -71,6 +71,9 @@ class Work:
             return False
 
     def get_tasks(self):
+        if not self._tasks_classes:
+            return None
+
         tasks = [task(pupils=self._pupils, date=self._date) for task in self._tasks_classes]
         if self._is_distant_task():  # use test version on distant
             for task in tasks:
@@ -116,6 +119,90 @@ def get_all_variants():
     email = lambda desc: Text(f'Электронная почта {desc}'.strip())
 
     works = [
+        Work(
+            task_id='2019-04-16 10',
+            classes={'electricity.kulon_field': ['ForceTask', 'ExchangeTask', 'FieldTaskGenerator', 'SumTask']},
+        ),
+        Work(
+            task_id='2019-04-19 11',
+            classes=['atomic.quantum.Fotons', 'atomic.nuclear.KernelCount', 'atomic.nuclear.RadioFall', 'atomic.quantum.RadioFall2'],
+        ),
+        Work(
+            task_id='2019-04-30 10',
+            classes={'electricity.potential': ['A_from_Q_E_l', 'E_from_U_l', 'Potential737', 'v_from_Ev_m', 'Phi_from_static_e']},
+        ),
+        Work(
+            task_id='2019-04-30 11',
+            classes={'atomic.quantum': ['Quantum1119', 'Quantum1120']},
+        ),
+        Work(
+            task_id='2019-05-06 10',
+            classes={'electricity.cond': ['C_from_U_Q', 'Q_is_possible', 'C_ratio', 'W_from_Q_C', 'Cond1']},
+        ),
+        Work(
+            task_id='2019-05-14 10',
+            classes={'electricity.om': ['P_from_R_U', 'P_from_R_I', 'Om_eta_full', 'r_eta_from_Rs', 'Kirchgof_double']},
+        ),
+        Work(
+            task_id='2019-09-11 11Т',
+            classes={'electricity.magnet': ['ConstMagnet0', 'ConstMagnet1', 'ConstMagnet2', 'ConstMagnet3']},
+        ),
+        Work(
+            task_id='2019-09-30 11S',
+            classes={'electricity.magnet': ['Chernoutsan11_01', 'Chernoutsan11_02', 'Chernoutsan11_5']},
+        ),
+        Work(
+            task_id='2019-11-13 11Т',
+            classes={'mechanics.waves': ['Waves01', 'Ch1238', 'Ch1240', 'Waves02']},
+        ),
+        Work(
+            task_id='2019-11-25 9А',
+            classes={'mechanics.zsi_zse': ['Ch_3_1', 'Ch_3_2', 'Ch_3_3', 'Ch_3_24', 'Ch_3_26']},
+        ),
+        Work(
+            task_id='2019-11-27 8',
+            classes={'termodynamics.termo': ['Ch_8_6', 'Ch_8_7', 'Ch_8_10', 'Ch_8_13', 'Ch_8_35']},
+        ),
+        Work(
+            task_id='2019-12-17 9А',
+            classes={'mechanics.koleb': ['Nu01', 'Nu02', 'Nu03', 'Nu04', 'Nu05']},
+        ),
+        Work(
+            task_id='2019-12-24 9А',
+            classes={'mechanics.waves': ['Waves00', 'Waves03', 'Waves04', 'Waves05']},
+        ),
+        Work(
+            task_id='2020-01-20 9Л',
+            classes={'mechanics.koleb': ['Nu01', 'Nu02', 'Nu03', 'Nu04', 'Nu05']},
+        ),
+        Work(
+            task_id='2020-03-04 11Т',
+            classes=['atomic.em_waves.Gendenshteyn_11_11_18', {'optics.wave': ['Vishnyakova_example_11', 'Belolipetsky_5_196']}]
+        ),
+        Work(
+            task_id='2020-04-22 9А',
+            classes={'atomic.radioactive': ['BK_53_01', 'BK_53_02', 'BK_53_03', 'BK_53_12']},
+        ),
+        Work(
+            task_id='2020-04-28 9Л',
+            classes=['atomic.em_waves.Gendenshteyn_11_11_18', 'atomic.em_waves.Lambda_from_E', 'atomic.em_waves.Lambda_from_E_2', 'atomic.em_waves.H_levels']
+        ),
+        Work(
+            task_id='2020-04-29 11Т',
+            classes={'atomic': [
+                {'sto': ['Equations', 'E_ratio_from_v_ratio', 'E_P_from_v_ratio', 'beta_from_l_reduction']},
+                {'em_waves': ['Lambda_from_E', 'Lambda_from_E_2', 'H_levels']}, 'quantum.Fotons',
+                {'radioactive': ['BK_53_01', 'BK_53_02', 'BK_53_03', 'BK_53_12']}
+            ]},
+        ),
+        Work(
+            task_id='2020-09-10 10',
+            classes={'mechanics.kinematics': ['Theory_1', 'Vectors_SumAndDiff', 'Chernoutsan_1_2', 'Vectors_SpeedSum']},
+        ),
+        Work(
+            task_id='2020-09-10 9',
+            classes={'mechanics.kinematics': ['Theory_1_simple', 'Chernoutsan_1_2', 'Chernoutsan_1_2_1']},
+        ),
         Work(
             task_id='2020-10-22 10АБ - Тест по динамике - 1',
             up_to='8:50',
@@ -219,6 +306,14 @@ def get_all_variants():
             thresholds=[6, 8, 10],
         ),
         Work(
+            task_id='2020-11-26 10 - Законы сохранения - 2',
+            classes={'mechanics.zsi_zse': ['Ch_3_1', 'Ch_3_2', 'Ch_3_3', 'Ch_3_6', 'Ch_3_26', 'Vishnyakova_1_4_6', 'Ch_4_2', 'Ch_4_29', 'Ch_4_45', 'Vishnyakova_1_4_12']},
+            thresholds=[4, 6, 8],
+            up_to='12:05',
+            image='incredibles',
+            questions=text_task * 10,
+        ),
+        Work(
             task_id='2020-12-04 10АБ - Статика и гидростатика - 1',
             up_to='12:05',
             image='ratatouille',
@@ -243,6 +338,14 @@ def get_all_variants():
             thresholds=[5, 6, 7],
         ),
         Work(
+            task_id='2020-12-11 10 - Статика и гидростатика - 2',
+            classes={'mechanics.gidro': ['Ch_6_3', 'Ch_6_8', 'Ch_6_10', 'Ch_6_16', 'Ch_6_20']},
+            thresholds=[1.5, 2.5, 3.5],
+            up_to='11:05',
+            image='minions',
+            questions=text_task * 5,
+        ),
+        Work(
             task_id='2020-12-17 9М - Колебания и волны - 3',
             up_to='11:05',
             image='keanureeves',
@@ -257,176 +360,64 @@ def get_all_variants():
             questions=abv_choices * 10,
         ),
         Work(
-            task_id='2019-04-16 10',
-            classes={'electricity.kulon_field': ['ForceTask', 'ExchangeTask', 'FieldTaskGenerator', 'SumTask']}
-        ),
-        Work(
-            task_id='2019-04-30 10',
-            classes={'electricity.potential': ['A_from_Q_E_l', 'E_from_U_l', 'Potential737', 'v_from_Ev_m', 'Phi_from_static_e']}
-        ),
-        Work(
-            task_id='2019-05-06 10',
-            classes={'electricity.cond': ['C_from_U_Q', 'Q_is_possible', 'C_ratio', 'W_from_Q_C', 'Cond1']}
-        ),
-        Work(
-            task_id='2019-05-14 10',
-            classes={'electricity.om': ['P_from_R_U', 'P_from_R_I', 'Om_eta_full', 'r_eta_from_Rs', 'Kirchgof_double']}
-        ),
-        Work(
-            task_id='2019-04-19 11',
-            classes=['atomic.quantum.Fotons', 'atomic.nuclear.KernelCount', 'atomic.nuclear.RadioFall', 'atomic.quantum.RadioFall2'],
-        ),
-        Work(
-            task_id='2019-04-30 11',
-            classes={'atomic.quantum': ['Quantum1119', 'Quantum1120']}
-        ),
-        Work(
-            task_id='2019-11-27 8',
-            classes={'termodynamics.termo': ['Ch_8_6', 'Ch_8_7', 'Ch_8_10', 'Ch_8_13', 'Ch_8_35']}
-        ),
-        Work(
-            task_id='2019-11-25 9А',
-            classes={'mechanics.zsi_zse': ['Ch_3_1', 'Ch_3_2', 'Ch_3_3', 'Ch_3_24', 'Ch_3_26']}
-        ),
-        Work(
-            task_id='2019-12-17 9А',
-            classes={'mechanics.koleb': ['Nu01', 'Nu02', 'Nu03', 'Nu04', 'Nu05']}
-        ),
-        Work(
-            task_id='2019-12-24 9А',
-            classes={'mechanics.waves': ['Waves00', 'Waves03', 'Waves04', 'Waves05']}
-        ),
-        Work(
-            task_id='2020-04-22 9А',
-            classes={'atomic.radioactive': ['BK_53_01', 'BK_53_02', 'BK_53_03', 'BK_53_12']}
-        ),
-        Work(
-            task_id='2020-01-20 9Л',
-            classes={'mechanics.koleb': ['Nu01', 'Nu02', 'Nu03', 'Nu04', 'Nu05']}
-        ),
-        Work(
-            task_id='2020-04-28 9Л',
-            classes=['atomic.em_waves.Gendenshteyn_11_11_18', 'atomic.em_waves.Lambda_from_E', 'atomic.em_waves.Lambda_from_E_2', 'atomic.em_waves.H_levels']),
-        Work(
-            task_id='2019-09-11 11Т',
-            classes={'electricity.magnet': ['ConstMagnet0', 'ConstMagnet1', 'ConstMagnet2', 'ConstMagnet3']}
-        ),
-        Work(
-            task_id='2019-11-13 11Т',
-            classes={'mechanics.waves': ['Waves01', 'Ch1238', 'Ch1240', 'Waves02']},
-        ),
-        Work(
-            task_id='2020-03-04 11Т',
-            classes=[
-                'atomic.em_waves.Gendenshteyn_11_11_18',
-                {'optics.wave': ['Vishnyakova_example_11', 'Belolipetsky_5_196']}
-            ]
-        ),
-        Work(
-            task_id='2020-04-29 11Т',
-            classes={'atomic': [
-                {'sto': ['Equations', 'E_ratio_from_v_ratio', 'E_P_from_v_ratio', 'beta_from_l_reduction']},
-                {'em_waves': ['Lambda_from_E', 'Lambda_from_E_2', 'H_levels']}, 'quantum.Fotons',  # atomic-1
-                {'radioactive': ['BK_53_01', 'BK_53_02', 'BK_53_03', 'BK_53_12']},  # atomic-2
-            ]}
-        ),
-        Work(
-            task_id='2019-09-30 11S',
-            classes={'electricity.magnet': ['Chernoutsan11_01', 'Chernoutsan11_02', 'Chernoutsan11_5']}
-        ),
-        Work(
-            task_id='2020-09-10 10',
-            classes={'mechanics.kinematics': ['Theory_1', 'Vectors_SumAndDiff', 'Chernoutsan_1_2', 'Vectors_SpeedSum']}
-        ),
-        Work(
-            task_id='2020-09-10 9',
-            classes={'mechanics.kinematics': ['Theory_1_simple', 'Chernoutsan_1_2', 'Chernoutsan_1_2_1']}
-        ),
-        Work(
-            task_id='2020-11-26 10 - Законы сохранения - 2',
-            classes={'mechanics.zsi_zse': ['Ch_3_1', 'Ch_3_2', 'Ch_3_3', 'Ch_3_6', 'Ch_3_26', 'Vishnyakova_1_4_6', 'Ch_4_2', 'Ch_4_29', 'Ch_4_45', 'Vishnyakova_1_4_12']},
-            thresholds=[4, 6, 8],
-            up_to='12:05',
-            image='incredibles',
-            questions=text_task * 10,
-        ),
-        Work(
-            task_id='2020-12-11 10 - Статика и гидростатика - 2',
-            classes={'mechanics.gidro': ['Ch_6_3', 'Ch_6_8', 'Ch_6_10', 'Ch_6_16', 'Ch_6_20']},
-            thresholds=[1.5, 2.5, 3.5],
-            up_to='11:05',
-            image='minions',
-            questions=text_task * 5,
-        ),
-        Work(
             task_id='2020-12-24 9',
-            classes={'mechanics.koleb': ['Nu01', 'Nu02', 'Nu03', 'Nu04', 'Nu05']}
+            classes={'mechanics.koleb': ['Nu01', 'Nu02', 'Nu03', 'Nu04', 'Nu05']},
         ),
         Work(
             task_id='2021-01-21 9',
-            classes={'mechanics.koleb': ['Nu01', 'Nu02', 'Nu03', 'Nu04', 'Nu05']}
+            classes={'mechanics.koleb': ['Nu01', 'Nu02', 'Nu03', 'Nu04', 'Nu05']},
         ),
         Work(
             task_id='2021-01-22 10',
-            classes={'termodynamics.mkt': [
-                'Basic01',
-                'Basic02', 'Basic03', 'Basic04',
-                'Basic05', 'CountNu', 'CountMass', 'CountParticles'
-            ]
-        }),
+            classes={'termodynamics.mkt': [ 'Basic01', 'Basic02', 'Basic03', 'Basic04', 'Basic05', 'CountNu', 'CountMass', 'CountParticles' ]},
+        ),
         Work(
             task_id='2021-01-29 10',
-            classes={'termodynamics.mkt': [
-                # 'Celsuis',
-                'Basic06', 'Basic07', 'Basic08', 'Basic09', 'Basic10', 'Basic11',
-            ]}
+            classes={'termodynamics.mkt': ['Basic06', 'Basic07', 'Basic08', 'Basic09', 'Basic10', 'Basic11',]},
         ),
         Work(
             task_id='2021-03-02 10',
-            classes={'termodynamics.mkt': [
-                'Basic12', 'Basic13', 'GraphPV_1', 'GraphPV_2', 'ZFTSH_10_2_9_kv', 'ZFTSH_10_2_2_kv', 'Polytrope',
-            ]}
+            classes={'termodynamics.mkt': ['Basic12', 'Basic13', 'GraphPV_1', 'GraphPV_2', 'ZFTSH_10_2_9_kv', 'ZFTSH_10_2_2_kv', 'Polytrope',]},
         ),
         Work(
             task_id='2021-03-04 10',
-            classes={'termodynamics.termo': [
-                'YesNo', 'P_from_V_and_U', 'A_on_P_const', 'DeltaU_on_P_const', 'DeltaU_from_DeltaT', 'Q_from_DeltaU', 'Q_from_DeltaU_and_A',
-            ],
-        }),
+            classes={'termodynamics.termo': ['YesNo', 'P_from_V_and_U', 'A_on_P_const', 'DeltaU_on_P_const', 'DeltaU_from_DeltaT', 'Q_from_DeltaU', 'Q_from_DeltaU_and_A',],},
+        ),
         Work(
             task_id='2021-03-05 10',
             classes=[{'termodynamics.mkt': ['Basic12', 'GraphPV_2', 'ZFTSH_10_2_9_kv', 'ZFTSH_10_2_2_kv', 'Polytrope']}],
         ),
         Work(
             task_id='2021-03-11 10',
-            classes={'termodynamics.termo': [
-                'Definitions01', 'V_from_P_and_U', 'A_on_P_const', 'A_from_DeltaT', 'DeltaU_on_P_const', 'DeltaU_from_DeltaT', 'Q_from_DeltaU', 'Q_from_DeltaU_and_A',
-            ]},
+            classes={'termodynamics.termo': ['Definitions01', 'V_from_P_and_U', 'A_on_P_const', 'A_from_DeltaT', 'DeltaU_on_P_const', 'DeltaU_from_DeltaT', 'Q_from_DeltaU', 'Q_from_DeltaU_and_A',]},
         ),
         Work(
             task_id='2021-03-12 10',
-            classes=['termodynamics.cycle.Rectangle', 'termodynamics.termo.DeltaQ_from_states', 'termodynamics.termo.Definitions02',
-        ]),
+            classes=['termodynamics.cycle.Rectangle', 'termodynamics.termo.DeltaQ_from_states', 'termodynamics.termo.Definitions02',]
+        ),
         Work(
             task_id='2021-03-16 9',
-            classes={'electricity.cond': ['C_from_U_Q', 'Q_is_possible', 'C_ratio', 'W_from_Q_C', 'Definitions01', 'Definitions02']}
+            classes={'electricity.cond': ['C_from_U_Q', 'Q_is_possible', 'C_ratio', 'W_from_Q_C', 'Definitions01', 'Definitions02']},
         ),
         Work(
             task_id='2021-03-18 10',
-            classes=['termodynamics.cycle.Rectangle_T', 'termodynamics.mkt.GraphPV_1', 'termodynamics.termo.YesNo']),
+            classes={'termodynamics': ['cycle.Rectangle_T', 'mkt.GraphPV_1', 'termo.YesNo']},
+        ),
         Work(
             task_id='2021-03-20 10',
-            classes=['termodynamics.cycle.TriangleUp_T', 'termodynamics.cycle.TriangleUp']),
+            classes={'termodynamics': ['cycle.TriangleUp_T', 'cycle.TriangleUp']},
+        ),
         Work(
             task_id='2021-03-23 10',
-            classes=['termodynamics.cycle.TriangleUp_T', 'termodynamics.vapor.GetPhi', 'termodynamics.mkt.Basic12', 'termodynamics.termo.Definitions02']),
+            classes={'termodynamics': ['cycle.TriangleUp_T', 'vapor.GetPhi', 'mkt.Basic12', 'termo.Definitions02']},
+        ),
         Work(
             task_id='2021-03-23 9',
-            classes={'atomic.quantum': ['Fotons', 'ColorNameFromLambda', 'E_from_nu',  'E_from_lambda', 'T_Nu_from_lambda', 'Deduce01']}
+            classes={'atomic.quantum': ['Fotons', 'ColorNameFromLambda', 'E_from_nu',  'E_from_lambda', 'T_Nu_from_lambda', 'Deduce01']},
         ),
         Work(
             task_id='2021-03-25 10',
-            classes={'electricity.kulon_field': ['ForceTask', 'ExchangeTask', 'FieldTaskGenerator', 'SumTask']}
+            classes={'electricity.kulon_field': ['ForceTask', 'ExchangeTask', 'FieldTaskGenerator', 'SumTask']},
         ),
         Work(
             task_id='2021-03-26 10',
@@ -434,23 +425,19 @@ def get_all_variants():
         ),
         Work(
             task_id='2021-03-30 10',
-            classes={'electricity': [
-                'kulon_field.ExchangeTask', 'kulon_field.FieldTaskGenerator',
-                'potential.E_from_U_l', 'potential.A_from_Q_E_l',
-                'kulon_field.Definitions01',
-            ]}
+            classes={'electricity': ['kulon_field.ExchangeTask', 'kulon_field.FieldTaskGenerator', 'potential.E_from_U_l', 'potential.A_from_Q_E_l', 'kulon_field.Definitions01']},
         ),
         Work(
             task_id='2021-03-30 9',
-            classes={'atomic.em_waves': ['Gendenshteyn_11_11_18', 'Definitions01', 'Deduce01', 'Sound_to_value', 'Prefix']}
+            classes={'atomic.em_waves': ['Gendenshteyn_11_11_18', 'Definitions01', 'Deduce01', 'Sound_to_value', 'Prefix']},
         ),
         Work(
             task_id='2021-04-01 9',
-            classes={'atomic.em_waves': ['Lambda_from_E', 'Lambda_from_E_2', 'H_levels']}
+            classes={'atomic.em_waves': ['Lambda_from_E', 'Lambda_from_E_2', 'H_levels']},
         ),
         Work(
             task_id='2021-04-02 10',
-            classes={'electricity.potential': ['Phi_from_static_e', 'A_from_motion', 'E_phi_graphs', 'Definitions01']}
+            classes={'electricity.potential': ['Phi_from_static_e', 'A_from_motion', 'E_phi_graphs', 'Definitions01']},
         ),
         # Work(
         #     task_id='2021-04-15 10 - Электростатика - 1',
@@ -458,7 +445,7 @@ def get_all_variants():
         #     thresholds=[3, 4, 6],
         #     up_to='9:02',
         #     image='zootopia',
-        #     questions=text_task * 7
+        #     questions=text_task * 7,
         # ),
         # Work(
         #     task_id='2021-04-16 9 - Строение атома - 1',
@@ -468,17 +455,6 @@ def get_all_variants():
         #     up_to='11:02',
         #     image='zootopia',
         # ),
-        Work(
-            task_id='2021-04-23 9 - Строение атома - 2',
-            classes={'atomic.nuclear': [
-                'AtomCount01', 'AtomCount02', 'AtomCount03', 'AtomCount04', 'AtomCount05', 'AtomCount06', 'AtomCount07', 'AtomCount08', 'AtomCount09', 'AtomCount10', 'AtomCount11', 'AtomCount12',
-                'AtomCount01_Text', 'AtomCount02_Text', 'AtomCount03_Text', 'AtomCount04_Text', 'AtomCount05_Text', 'AtomCount06_Text', 'AtomCount07_Text', 'AtomCount08_Text', 'AtomCount09_Text', 'AtomCount10_Text', 'AtomCount11_Text', 'AtomCount12_Text',
-            ]},
-            thresholds=[12, 16, 20],
-            questions=text_task * 24,
-            up_to='11:02',
-            image='ratatouille',
-        ),
         # Work(
         #     task_id='2021-04-23 10 - Постоянный ток - 1',
         #     classes={'electricity.om': ['Definitions01', 'Definitions02', 'Definitions03', 'Definitions04', 'I_from_U_R', 'r_from_R_N', 'U_from_R1_R2_I', 'I_ratio', 'R_best_from_R_N']},
@@ -488,16 +464,24 @@ def get_all_variants():
         #     image='ratatouille',
         # ),
         Work(
-            task_id='2021-04-30 10',
-            classes={'electricity.om': ['Definitions05', 'Definitions06', 'P_from_R_U', 'P_from_R_I', 'Om_eta_full', 'r_eta_from_Rs']}
+            task_id='2021-04-23 9 - Строение атома - 2',
+            classes={'atomic.nuclear': ['AtomCount01', 'AtomCount02', 'AtomCount03', 'AtomCount04', 'AtomCount05', 'AtomCount06', 'AtomCount07', 'AtomCount08', 'AtomCount09', 'AtomCount10', 'AtomCount11', 'AtomCount12','AtomCount01_Text', 'AtomCount02_Text', 'AtomCount03_Text', 'AtomCount04_Text', 'AtomCount05_Text', 'AtomCount06_Text', 'AtomCount07_Text', 'AtomCount08_Text', 'AtomCount09_Text', 'AtomCount10_Text', 'AtomCount11_Text', 'AtomCount12_Text',]},
+            thresholds=[12, 16, 20],
+            questions=text_task * 24,
+            up_to='11:02',
+            image='ratatouille',
         ),
         Work(
-            task_id='2021-04-31 10',
-            classes={'electricity.om': ['Definitions07', 'Definitions08', 'Kirchgof_double']},
+            task_id='2021-04-30 10',
+            classes={'electricity.om': ['Definitions05', 'Definitions06', 'P_from_R_U', 'P_from_R_I', 'Om_eta_full', 'r_eta_from_Rs']},
         ),
         Work(
             task_id='2021-04-30 9',
             classes={'atomic': ['nuclear.KernelCount', 'nuclear.RadioFall', 'radioactive.BK_53_12', 'radioactive.Delta_m_from_m', 'em_waves.H_levels']},
+        ),
+        Work(
+            task_id='2021-04-31 10',
+            classes={'electricity.om': ['Definitions07', 'Definitions08', 'Kirchgof_double']},
         ),
     ]
     return works
