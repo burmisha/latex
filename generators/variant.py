@@ -75,12 +75,17 @@ assert isinstance(check_unit_value('-2 Дж'), UnitValue)
 assert isinstance(check_unit_value('1.6 м'), UnitValue)
 
 
+def flatten_generator_values(args):
+    for key, value in args.items():
+        args[key] = list(value)
+
+
 def form_args(kwargs):
+    # TODO: replace __ with ,
     keys = []
     values = []
     assert isinstance(kwargs, collections.OrderedDict), kwargs
     for key, value in kwargs.items():
-        value = list(value)
         if any(isinstance(v, tuple) or isinstance(v, list) for v in value):
             for v in value:
                 assert isinstance(v, tuple) or isinstance(v, list)
@@ -102,6 +107,52 @@ def form_args(kwargs):
         yield result
 
 
+def validate_args(args):
+    keys = []
+    values = []
+    assert isinstance(args, collections.OrderedDict), f'Expected OrderedDict, got {args}'
+    for key, value in args.items():
+        assert isinstance(key, str)
+        if any(isinstance(v, tuple) for v in value):
+            assert all(isinstance(v, tuple) for v in value)
+            key = tuple(part.strip() for part in key.split('__'))
+            assert all(len(v) == len(key) for v in value)
+
+        keys.append(key)
+        values.append(value)
+
+    return keys, values
+
+
+def prod(nums):
+    r = 1
+    for n in nums:
+        r *= n
+    return r
+
+def form_args_by_index(args, index):
+    keys, values = validate_args(args)
+
+    new_index = int(index)
+    rs = []
+    for i in range(len(values)):
+        d = prod([len(v) for v in values[i+1:]])
+        r = new_index // d
+        new_index %= d
+        rs.append(r)
+
+    result = {}
+    for key, value, r in zip(keys, values, rs):
+        vs = value[r]
+
+        if isinstance(key, tuple):
+            result.update(dict(zip(key, vs)))
+        else:
+            result[key] = vs
+
+    return result
+
+
 def test_form_args():
     od = collections.OrderedDict()
     od['a'] = [1, 2]
@@ -112,6 +163,8 @@ def test_form_args():
         {'a': 2, 'b': 7},
         {'a': 2, 'b': 8},
     ]
+    assert form_args_by_index(od, 1) == {'a': 1, 'b': 8}
+    assert form_args_by_index(od, 2) == {'a': 2, 'b': 7}
 
     od = collections.OrderedDict()
     od['b'] = [7, 8]
@@ -134,6 +187,8 @@ def test_form_args():
         {'a': 2, 'b': 8, 'c': 88},
         {'a': 2, 'b': 9, 'c': 99},
     ]
+    assert form_args_by_index(od, 2) == {'a': 1, 'b': 9, 'c': 99}
+    assert form_args_by_index(od, 3) == {'a': 2, 'b': 7, 'c': 77}
 
     od = collections.OrderedDict()
     od['b__c'] = [(7, 77), (8, 88), (9, 99)]
@@ -146,6 +201,8 @@ def test_form_args():
         {'a': 1, 'b': 9, 'c': 99},
         {'a': 2, 'b': 9, 'c': 99},
     ]
+    assert form_args_by_index(od, 2) == {'a': 1, 'b': 8, 'c': 88}
+    assert form_args_by_index(od, 3) == {'a': 2, 'b': 8, 'c': 88}
 
 test_form_args()
 
@@ -156,6 +213,7 @@ class VariantTask:
         self._pupils = pupils
         self._date = date
         self._expanded_args_list = None
+        self._variants_count = None
         self._prefer_test_version = False
 
     def PreferTestVersion(self):
@@ -193,46 +251,48 @@ class VariantTask:
         else:
             return None
 
-    def _get_expanded_args_list(self):
-        try:
-            if self._expanded_args_list is None:
-                self._expanded_args_list = []
-                if self.ArgsList is None:  # only one variant
-                    args = collections.OrderedDict()
-                else:
-                    args = self.ArgsList
+    def _get_args_from_index(self, index):
+        if self.ArgsDict is None:  # only one variant
+            args = collections.OrderedDict()
+            res = {}
+        else:
+            flatten_generator_values(self.ArgsDict)
+            res = form_args_by_index(self.ArgsDict, index)
 
-                for res in form_args(args):
-                    try:
-                        for k, v in res.items():
-                            res[k] = check_unit_value(v)
-                        res['Consts'] = Consts
-                        for k, v in self.GetUpdate(**res).items():
-                            res[k] = check_unit_value(v)
-                    except:
-                        log.error(f'Cannot enrich {type(self)}, args: {res}')
-                        raise
-                    self._expanded_args_list.append(res)
+        try:
+            for k, v in res.items():
+                res[k] = check_unit_value(v)
+            res['Consts'] = Consts
+            for k, v in self.GetUpdate(**res).items():
+                res[k] = check_unit_value(v)
         except:
-            log.error(f'Could not _get_expanded_args_list for {type(self)}')
+            log.error(f'Cannot enrich {type(self)}, args: {res}')
             raise
 
-        return self._expanded_args_list
+        return res
 
     def GetTasksCount(self):
-        return len(self._get_expanded_args_list())
+        if self._variants_count is None:
+            self._variants_count = 1
+            if self.ArgsDict:
+                flatten_generator_values(self.ArgsDict)
+                for value in self.ArgsDict.values():
+                    self._variants_count *= len(value)
+
+        return int(self._variants_count)
 
     def GetRandomTask(self, pupil):
-        if self.ArgsList is None:
+        if self.ArgsDict is None:
             args = ''
         else:
-            args = '__'.join(sorted(self.ArgsList.keys()))
+            args = '__'.join(sorted(self.ArgsDict.keys()))
         hash_md5 = hashlib.md5()
         hash_md5.update((self._get_random_str(pupil) + args).encode('utf-8'))
-        randomHash = hash_md5.hexdigest()[8:16] # use only part of hash
+        randomHash = hash_md5.hexdigest()[8:16]  # use only part of hash
         randomIndex = int(randomHash, 16) % self.GetTasksCount()
         self.__Stats[randomIndex] += 1
-        args = self._get_expanded_args_list()[randomIndex]
+        args = self._get_args_from_index(randomIndex)
+
         laTeXFormatter = LaTeXFormatter(args)
 
         textTemplate = self.GetTextTemplate()
@@ -248,6 +308,7 @@ class VariantTask:
         )
 
     def CheckStats(self):
+        # TODO: very slow on large tasks
         if set(self.__Stats.values()) - {0, 1}:
             stats = ''.join(str(self.__Stats.get(index, '_')) for index in range(self.GetTasksCount()))  # TODO: support tasks with 10 on more
         else:
@@ -398,26 +459,26 @@ def answer_tex(text):
 
 
 def no_args(cls):
-    assert not hasattr(cls, 'ArgsList')
-    cls.ArgsList = None
+    assert not hasattr(cls, 'ArgsDict')
+    cls.ArgsDict = None
     return cls
 
 
 def arg(**kws):
     def decorator(cls):
         assert len(kws) == 1, f'Invalid arg for {cls}: {kws}'
-        if hasattr(cls, 'ArgsList'):
-            assert isinstance(cls.ArgsList, collections.OrderedDict), f'Invalid ArgsList for {cls}: {cls.ArgsList}'
+        if hasattr(cls, 'ArgsDict'):
+            assert isinstance(cls.ArgsDict, collections.OrderedDict), f'Invalid ArgsDict for {cls}: {cls.ArgsDict}'
         else:
-            cls.ArgsList = collections.OrderedDict()
+            cls.ArgsDict = collections.OrderedDict()
         for key, value in kws.items():
-            assert key not in cls.ArgsList, f'Already used key in ArgsList: {key}'
+            assert key not in cls.ArgsDict, f'Already used key in ArgsDict: {key}'
             if isinstance(value, tuple):
                 assert len(value) == 2
                 assert '{}' in value[0], f'No {{}} in {template}'
-                cls.ArgsList[key] = [value[0].format(option) for option in value[1]]
+                cls.ArgsDict[key] = [value[0].format(option) for option in value[1]]
             else:
-                cls.ArgsList[key] = value
+                cls.ArgsDict[key] = value
         return cls
 
     return decorator
