@@ -2,10 +2,10 @@
 
 import collections
 import hashlib
-import itertools
 import re
 
 from generators.helpers import UnitValue, Consts
+from generators.helpers.vars import Vars
 
 import library
 import problems
@@ -75,138 +75,6 @@ assert isinstance(check_unit_value('-2 Дж'), UnitValue)
 assert isinstance(check_unit_value('1.6 м'), UnitValue)
 
 
-def flatten_generator_values(args):
-    for key, value in args.items():
-        args[key] = list(value)
-
-
-def form_args(kwargs):
-    # TODO: replace __ with ,
-    keys = []
-    values = []
-    assert isinstance(kwargs, collections.OrderedDict), kwargs
-    for key, value in kwargs.items():
-        if any(isinstance(v, tuple) or isinstance(v, list) for v in value):
-            for v in value:
-                assert isinstance(v, tuple) or isinstance(v, list)
-            if isinstance(key, str) and '__' in key:
-                key = tuple(part.strip() for part in key.split('__'))
-                for v in value:
-                    assert len(key) == len(v), '%r' % [key, value]
-
-        keys.append(key)
-        values.append(value)
-
-    for row in itertools.product(*values):
-        result = {}
-        for key, value in zip(keys, row):
-            if isinstance(key, tuple):
-                result.update(dict(zip(key, value)))
-            else:
-                result[key] = value
-        yield result
-
-
-def validate_args(args):
-    keys = []
-    values = []
-    assert isinstance(args, collections.OrderedDict), f'Expected OrderedDict, got {args}'
-    for key, value in args.items():
-        assert isinstance(key, str)
-        if any(isinstance(v, tuple) for v in value):
-            assert all(isinstance(v, tuple) for v in value)
-            key = tuple(part.strip() for part in key.split('__'))
-            assert all(len(v) == len(key) for v in value)
-
-        keys.append(key)
-        values.append(value)
-
-    return keys, values
-
-
-def prod(nums):
-    r = 1
-    for n in nums:
-        r *= n
-    return r
-
-def form_args_by_index(args, index):
-    keys, values = validate_args(args)
-
-    new_index = int(index)
-    rs = []
-    for i in range(len(values)):
-        d = prod([len(v) for v in values[i+1:]])
-        r = new_index // d
-        new_index %= d
-        rs.append(r)
-
-    result = {}
-    for key, value, r in zip(keys, values, rs):
-        vs = value[r]
-
-        if isinstance(key, tuple):
-            result.update(dict(zip(key, vs)))
-        else:
-            result[key] = vs
-
-    return result
-
-
-def test_form_args():
-    od = collections.OrderedDict()
-    od['a'] = [1, 2]
-    od['b'] = [7, 8]
-    assert list(form_args(od)) == [
-        {'a': 1, 'b': 7},
-        {'a': 1, 'b': 8},
-        {'a': 2, 'b': 7},
-        {'a': 2, 'b': 8},
-    ]
-    assert form_args_by_index(od, 1) == {'a': 1, 'b': 8}
-    assert form_args_by_index(od, 2) == {'a': 2, 'b': 7}
-
-    od = collections.OrderedDict()
-    od['b'] = [7, 8]
-    od['a'] = [1, 2]
-    assert list(form_args(od)) == [
-        {'a': 1, 'b': 7},
-        {'a': 2, 'b': 7},
-        {'a': 1, 'b': 8},
-        {'a': 2, 'b': 8},
-    ]
-
-    od = collections.OrderedDict()
-    od['a'] = [1, 2]
-    od['b__c'] = [(7, 77), (8, 88), (9, 99)]
-    assert list(form_args(od)) == [
-        {'a': 1, 'b': 7, 'c': 77},
-        {'a': 1, 'b': 8, 'c': 88},
-        {'a': 1, 'b': 9, 'c': 99},
-        {'a': 2, 'b': 7, 'c': 77},
-        {'a': 2, 'b': 8, 'c': 88},
-        {'a': 2, 'b': 9, 'c': 99},
-    ]
-    assert form_args_by_index(od, 2) == {'a': 1, 'b': 9, 'c': 99}
-    assert form_args_by_index(od, 3) == {'a': 2, 'b': 7, 'c': 77}
-
-    od = collections.OrderedDict()
-    od['b__c'] = [(7, 77), (8, 88), (9, 99)]
-    od['a'] = [1, 2]
-    assert list(form_args(od)) == [
-        {'a': 1, 'b': 7, 'c': 77},
-        {'a': 2, 'b': 7, 'c': 77},
-        {'a': 1, 'b': 8, 'c': 88},
-        {'a': 2, 'b': 8, 'c': 88},
-        {'a': 1, 'b': 9, 'c': 99},
-        {'a': 2, 'b': 9, 'c': 99},
-    ]
-    assert form_args_by_index(od, 2) == {'a': 1, 'b': 8, 'c': 88}
-    assert form_args_by_index(od, 3) == {'a': 2, 'b': 8, 'c': 88}
-
-test_form_args()
-
-
 class VariantTask:
     def __init__(self, pupils, date):
         self.__Stats = collections.defaultdict(int)
@@ -252,12 +120,10 @@ class VariantTask:
             return None
 
     def _get_args_from_index(self, index):
-        if self.ArgsDict is None:  # only one variant
-            args = collections.OrderedDict()
+        if self._vars is None:  # only one variant
             res = {}
         else:
-            flatten_generator_values(self.ArgsDict)
-            res = form_args_by_index(self.ArgsDict, index)
+            res = self._vars.form_one(index)
 
         try:
             for k, v in res.items():
@@ -272,20 +138,15 @@ class VariantTask:
         return res
 
     def GetTasksCount(self):
-        if self._variants_count is None:
-            self._variants_count = 1
-            if self.ArgsDict:
-                flatten_generator_values(self.ArgsDict)
-                for value in self.ArgsDict.values():
-                    self._variants_count *= len(value)
-
-        return int(self._variants_count)
+        if self._vars is None:
+            return 1
+        return self._vars.total_count()
 
     def GetRandomTask(self, pupil):
-        if self.ArgsDict is None:
+        if self._vars is None:
             args = ''
         else:
-            args = '__'.join(sorted(self.ArgsDict.keys()))
+            args = '__'.join(sorted(self._vars._original_keys))
         hash_md5 = hashlib.md5()
         hash_md5.update((self._get_random_str(pupil) + args).encode('utf-8'))
         randomHash = hash_md5.hexdigest()[8:16]  # use only part of hash
@@ -309,10 +170,10 @@ class VariantTask:
 
     def CheckStats(self):
         # TODO: very slow on large tasks
-        if set(self.__Stats.values()) - {0, 1}:
-            stats = ''.join(str(self.__Stats.get(index, '_')) for index in range(self.GetTasksCount()))  # TODO: support tasks with 10 on more
-        else:
-            stats = ''
+        # if set(self.__Stats.values()) - {0, 1}:
+        #     stats = ''.join(str(self.__Stats.get(index, '_')) for index in range(self.GetTasksCount()))  # TODO: support tasks with 10 on more
+        # else:
+        stats = ''
         log.info(
             '%s: total of %d tasks, used %d: |%s|',
             type(self).__name__,
@@ -459,26 +320,27 @@ def answer_tex(text):
 
 
 def no_args(cls):
-    assert not hasattr(cls, 'ArgsDict')
-    cls.ArgsDict = None
+    assert not hasattr(cls, '_vars')
+    cls._vars = None
     return cls
 
 
 def arg(**kws):
     def decorator(cls):
         assert len(kws) == 1, f'Invalid arg for {cls}: {kws}'
-        if hasattr(cls, 'ArgsDict'):
-            assert isinstance(cls.ArgsDict, collections.OrderedDict), f'Invalid ArgsDict for {cls}: {cls.ArgsDict}'
+        if hasattr(cls, '_vars'):
+            assert isinstance(cls._vars, Vars), f'Invalid _vars for {cls}: {cls._vars}'
         else:
-            cls.ArgsDict = collections.OrderedDict()
+            cls._vars = Vars()
         for key, value in kws.items():
-            assert key not in cls.ArgsDict, f'Already used key in ArgsDict: {key}'
             if isinstance(value, tuple):
                 assert len(value) == 2
                 assert '{}' in value[0], f'No {{}} in {template}'
-                cls.ArgsDict[key] = [value[0].format(option) for option in value[1]]
+                cls._vars.add(
+                    key, [value[0].format(option) for option in value[1]]
+                )
             else:
-                cls.ArgsDict[key] = value
+                cls._vars.add(key, value)
         return cls
 
     return decorator

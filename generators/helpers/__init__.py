@@ -4,3 +4,4 @@ from generators.helpers.fraction import Fraction
 from generators.helpers.consts import Consts
 from generators.helpers.element import Elements, ElementsList
 from generators.helpers.value import UnitValue
+import generators.helpers.vars
