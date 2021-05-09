@@ -120,10 +120,7 @@ class VariantTask:
             return None
 
     def _get_args_from_index(self, index):
-        if self._vars is None:  # only one variant
-            res = {}
-        else:
-            res = self._vars.form_one(index)
+        res = self._vars.form_one(index)
 
         try:
             for k, v in res.items():
@@ -138,8 +135,6 @@ class VariantTask:
         return res
 
     def GetTasksCount(self):
-        if self._vars is None:
-            return 1
         return self._vars.total_count()
 
     def GetRandomTask(self, pupil):
@@ -321,7 +316,8 @@ def answer_tex(text):
 
 def no_args(cls):
     assert not hasattr(cls, '_vars')
-    cls._vars = None
+    cls._vars = Vars()
+    cls._vars._flatten()  # only one variant
     return cls
 
 

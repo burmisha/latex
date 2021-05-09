@@ -19,6 +19,7 @@ class Vars:
         for index, (key, values) in enumerate(zip(self._keys, self._values)):
             # TODO: replace __ with ,
             assert isinstance(key, str), f'key {key} is not str'
+            # TODO: lazy getter for large lists
             self._values[index] = list(values)
             values = self._values[index]
             if any(isinstance(v, tuple) for v in values):
@@ -31,6 +32,11 @@ class Vars:
 
         # TODO: check all parts of key
         # assert key not in self._keys, f'Already used key {key}'
+
+        self._denoms = [1 for v in self._values]
+        for i in range(len(self._values) - 2, -1, -1):
+            self._denoms[i] = self._denoms[i + 1] * len(self._values[i + 1])
+
 
     def add(self, key, values):
         try:
@@ -66,19 +72,12 @@ class Vars:
 
     def form_one(self, index):
         self._flatten()
-        denoms = [1 for v in self._values]
-        for i in range(len(self._values) - 2, -1, -1):
-            denoms[i] = denoms[i + 1] * len(self._values[i + 1])
-
-        new_index = int(index)
-        rs = []
-        for i in range(len(self._values)):
-            rs.append(new_index // denoms[i])
-            new_index %= denoms[i]
 
         result = {}
-        for key, value, r in zip(self._keys, self._values, rs):
-            vs = value[r]
+        new_index = int(index)
+        for key, value, denom in zip(self._keys, self._values, self._denoms):
+            vs = value[new_index // denom]
+            new_index %= denom
 
             if isinstance(key, tuple):
                 result.update(dict(zip(key, vs)))
@@ -121,14 +120,7 @@ def test_vars():
         {'a': 2, 'b': 7, 'c': 77},
         {'a': 2, 'b': 8, 'c': 88},
         {'a': 2, 'b': 9, 'c': 99},
-    ], f'''{list(vars.form_all())} {[
-        {'a': 1, 'b': 7, 'c': 77},
-        {'a': 1, 'b': 8, 'c': 88},
-        {'a': 1, 'b': 9, 'c': 99},
-        {'a': 2, 'b': 7, 'c': 77},
-        {'a': 2, 'b': 8, 'c': 88},
-        {'a': 2, 'b': 9, 'c': 99},
-    ]}'''
+    ]
     assert vars.form_one(2) == {'a': 1, 'b': 9, 'c': 99}
     assert vars.form_one(3) == {'a': 2, 'b': 7, 'c': 77}
 
@@ -146,5 +138,9 @@ def test_vars():
     assert vars.form_one(2) == {'a': 1, 'b': 8, 'c': 88}
     assert vars.form_one(3) == {'a': 2, 'b': 8, 'c': 88}
 
-test_vars()
+    vars = Vars()
+    assert list(vars.form_all()) == [{}]
+    assert vars.form_one(0) == {}
 
+
+test_vars()
