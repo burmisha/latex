@@ -671,19 +671,91 @@ class Kirchgof_double(variant.VariantTask):
     \\end{{itemize}}
     так что переходим к третьему резистору. Будет похоже, но кого это когда останавливало...
 
+    \\begin{ align* }
+    {I3:L} 
+        &=  \\frac{ {I2:L}{R2:L} - {E2:L} + {E3:L} }{R3:L:s} 
+        =
+        \\cfrac{
+            \\frac{ 
+                ({E2:L} - {E1:L}){R3:L} + ({E2:L} - {E3:L}){R1:L}
+            }{ 
+                {R1:L}{R3:L} + {R2:L}{R3:L} + {R2:L}{R1:L}
+            } * {R2:L} - {E2:L} + {E3:L} }{R3:L:s}
+        = \\\\ &=
+        \\frac{ 
+            {E2:L}{R3:L}{R2:L} - {E1:L}{R3:L}{R2:L} + {E2:L}{R1:L}{R2:L} - {E3:L}{R1:L}{R2:L} 
+            - {E2:L}{R1:L}{R3:L} - {E2:L}{R2:L}{R3:L} - {E2:L}{R2:L}{R1:L}
+            + {E3:L}{R1:L}{R3:L} + {E3:L}{R2:L}{R3:L} + {E3:L}{R2:L}{R1:L}
+        }{ \\cbr{ {R1:L}{R3:L} + {R2:L}{R3:L} + {R2:L}{R1:L} } * {R3:L} } 
+        = \\\\ &=
+        \\frac{ 
+            - {E1:L}{R3:L}{R2:L} - {E2:L}{R1:L}{R3:L} + {E3:L}{R1:L}{R3:L} + {E3:L}{R2:L}{R3:L}
+        }{ \\cbr{ {R1:L}{R3:L} + {R2:L}{R3:L} + {R2:L}{R1:L} } * {R3:L} } 
+        =
+        \\frac{ 
+            - {E1:L}{R2:L} - {E2:L}{R1:L} + {E3:L}{R1:L} + {E3:L}{R2:L}
+        }{ {R1:L}{R3:L} + {R2:L}{R3:L} + {R2:L}{R1:L} } 
+        = \\\\ &=
+        \\frac{ 
+            {R1:L}({E3:L} - {E2:L}) + {R2:L}({E3:L} - {E1:L})
+        }{ {R1:L}{R3:L} + {R2:L}{R3:L} + {R2:L}{R1:L} }
+        =
+        \\frac{
+            \\cfrac{ {E3:L} - {E2:L} }{R2:L:s} + \\cfrac{ {E3:L} - {E1:L} }{R1:L:s}
+        }{ \\cfrac{R3:L:s}{R2:L:s} + \\cfrac{R3:L:s}{R1:L:s} + 1 } 
+        =
+        \\frac{
+            \\cfrac{ {E3:V} - {E2:V} }{R2:V:s} + \\cfrac{ {E3:V} - {E1:V} }{R1:V:s}
+        }{ \\cfrac{R3:V:s}{R2:V:s} + \\cfrac{R3:V:s}{R1:V:s} + 1 } 
+        = {I3_ratio:LaTeX}\\units{ А } \\approx {I3:Value}. \\\\
+    {U3:L} 
+        &=
+        {I3:L}{R3:L} 
+        =
+        \\frac{
+            \\cfrac{ {E3:V} - {E2:V} }{R2:V:s} + \\cfrac{ {E3:V} - {E1:V} }{R1:V:s}
+        }{ \\cfrac{R3:V:s}{R2:V:s} + \\cfrac{R3:V:s}{R1:V:s} + 1 } * {R3:L}
+        =
+        {I3_ratio:LaTeX}\\units{ А } * {R3:V} = {U3_ratio:LaTeX}\\units{ В } \\approx {U3:Value}.
+    \\end{ align* }
+
+    Положительные ответы говорят, что мы угадали на рисунке направление тока, отрицательные — что не угадали,
+    и ток течёт в противоположную сторону. Напомним, что направление тока — это направление движения положительных зарядов,
+    а в металлах носители заряда — электроны, которые заряжены отрицательно.
 '''
 )
 class Kirchgof_triple(variant.VariantTask):
     def GetUpdate(self, R1=None, R2=None, R3=None, E1=None, E2=None, E3=None, **kws):
-        I1_ratio = Fraction(numerator=42, denominator=23)
-        I2_ratio = Fraction(numerator=42, denominator=23)
-        I3_ratio = Fraction(numerator=42, denominator=23)
+        I1_ratio = (
+            Fraction(numerator=E1.Value - E3.Value, denominator=R3.Value)
+            + Fraction(numerator=E1.Value - E2.Value, denominator=R2.Value)
+        ) / (
+            Fraction(numerator=R1.Value, denominator=R2.Value) 
+            + Fraction(numerator=R1.Value, denominator=R3.Value)
+            + 1
+        )
+        I2_ratio = (
+            Fraction(numerator=E2.Value - E1.Value, denominator=R1.Value)
+            + Fraction(numerator=E2.Value - E3.Value, denominator=R3.Value)
+        ) / (
+            Fraction(numerator=R2.Value, denominator=R1.Value) 
+            + Fraction(numerator=R2.Value, denominator=R3.Value)
+            + 1
+        )
+        I3_ratio = (
+            Fraction(numerator=E3.Value - E1.Value, denominator=R1.Value)
+            + Fraction(numerator=E3.Value - E2.Value, denominator=R2.Value)
+        ) / (
+            Fraction(numerator=R3.Value, denominator=R1.Value) 
+            + Fraction(numerator=R3.Value, denominator=R2.Value)
+            + 1
+        )
         I1 = '\\eli_1 = %.2f А' % float(I1_ratio)
         I2 = '\\eli_2 = %.2f А' % float(I2_ratio)
         I3 = '\\eli_3 = %.2f А' % float(I3_ratio)
-        U1_ratio = Fraction(numerator=42, denominator=23)
-        U2_ratio = Fraction(numerator=42, denominator=23)
-        U3_ratio = Fraction(numerator=42, denominator=23)
+        U1_ratio = I1_ratio * R1.Value
+        U2_ratio = I2_ratio * R2.Value
+        U3_ratio = I3_ratio * R3.Value
         U1 = 'U_1 = %.2f В' % float(U1_ratio)
         U2 = 'U_2 = %.2f В' % float(U2_ratio)
         U3 = 'U_3 = %.2f В' % float(U3_ratio)
