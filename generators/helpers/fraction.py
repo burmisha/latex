@@ -64,12 +64,18 @@ class Fraction:
             if len(fmt_parts) == 1:
                 main_format = fmt_parts[0]
                 if main_format == 'LaTeX':
-                    if self._fraction.denominator == 1:
-                        return str(self._fraction.numerator)
+                    if self._fraction < 0:
+                        prefix = '-'
+                        num = - self._fraction.numerator
                     else:
-                        nom = self._escape_int(int(self._fraction.numerator))
+                        prefix = ''
+                        num = self._fraction.numerator
+                    if self._fraction.denominator == 1:
+                        return prefix + str(num)
+                    else:
+                        nom = self._escape_int(int(num))
                         denom = self._escape_int(int(self._fraction.denominator))
-                        return f'\\frac{nom}{denom}'
+                        return f'{prefix}\\frac{nom}{denom}'
                 elif main_format == 'Basic':
                     if self._fraction.denominator == 1:
                         return str(self._fraction.numerator)
@@ -98,7 +104,7 @@ def test_fraction():
         ('{f:LaTeX}', Fraction(1) * 2 / 2, '1'),
         ('{f:LaTeX}', Fraction(1) * 2 / 4, '\\frac12'),
         ('{f:LaTeX}', Fraction(1) * 19 / 20, '\\frac{19}{20}'),
-        ('{f:LaTeX}', Fraction(1) * (-19) / 20, '\\frac{-19}{20}'),
+        ('{f:LaTeX}', Fraction(1) * (-19) / 20, '-\\frac{19}{20}'),
         ('{f:LaTeX}', Fraction() / (2 * 3) * (-1) + 1, '\\frac56'),
         ('{f:Basic}', Fraction() / (2 * 3) * (-1) + 1, '5/6'),
         ('{f:Basic}', Fraction() / (2 * 3) * (-12), '-2'),
