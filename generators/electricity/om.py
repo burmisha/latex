@@ -521,3 +521,183 @@ class Kirchgof_double(variant.VariantTask):
             I=I,
             U=U,
         )
+
+
+@variant.text('''
+    Определите ток $\\eli_{index}$, протекающий через резистор $R_{index}$ (см. рис.), 
+    направление этого тока и разность потенциалов $U_{index}$ на этом резисторе,
+    если {R1:Task:e}, {R2:Task:e}, {R3:Task:e}, {E1:Task:e}, {E2:Task:e}, {E3:Task:e}.
+    Внутренним сопротивлением всех трёх ЭДС пренебречь.
+    Ответы получите в виде несократимых дробей, а также определите приближённые значения.
+
+    \\begin{ tikzpicture }[circuit ee IEC, thick]
+        \\foreach \\contact/\\x in { 1/0, 2/3, 3/6 }
+        { 
+            \\node [contact] (top contact \\contact) at (\\x, 0) {  };
+            \\node [contact] (bottom contact \\contact) at (\\x, 4) {  };
+        }
+        \\draw  (bottom contact 1) -- (bottom contact 2) -- (bottom contact 3);
+        \\draw  (top contact 1) -- (top contact 2) -- (top contact 3);
+        \\draw  (bottom contact 1) to [resistor={ near start, info={R1:Letter:e} }, battery={ near end, info={E1:Letter:e} }] (top contact 1);
+        \\draw  (bottom contact 2) to [resistor={ near start, info={R2:Letter:e} }, battery={ near end, info={E2:Letter:e} }] (top contact 2);
+        \\draw  (bottom contact 3) to [resistor={ near start, info={R3:Letter:e} }, battery={ near end, info={E3:Letter:e} }] (top contact 3);
+    \\end{ tikzpicture }
+
+''')
+@variant.arg(index=[1, 2, 3])
+@variant.arg(R1=('R_1 = {} Ом', [2, 3, 4]))
+@variant.arg(R2=('R_2 = {} Ом', [5, 6, 8]))
+@variant.arg(R3=('R_3 = {} Ом', [10, 12, 15]))
+@variant.arg(E1=('\\ele_1 = {} В', [4, 5]))
+@variant.arg(E2=('\\ele_2 = {} В', [3, 6]))
+@variant.arg(E3=('\\ele_3 = {} В', [2, 8]))
+@variant.answer_tex('''
+    План:
+    \\begin{{itemize}}
+        \\item отметим на рисунке произвольно направления токов (если получим отрицательный ответ, значит не угадали направление и только),
+        \\item выберем и обозначим на рисунке контуры (здесь всего 3, значит будет нужно $3-1=2$), для них запишем законы Кирхгофа,
+        \\item выберем и выделим на рисунке нетривиальные узлы (здесь всего 2, значит будет нужно $2-1=1$), для него запишем закон Кирхгофа,
+        \\item попытаемся решить получившуюся систему. В конкретном решении мы пытались первым делом найти {I2:L:e}, но, возможно, в вашем варианте будет быстрее решать систему в другом порядке. Мы всё же проделаем всё в лоб, подробно и целиком.
+    \\end{{itemize}}
+
+
+    \\begin{ tikzpicture }[circuit ee IEC, thick]
+        \\foreach \\contact/\\x in { 1/0, 2/3, 3/6 }
+        { 
+            \\node [contact] (top contact \\contact) at (\\x, 0) {  };
+            \\node [contact] (bottom contact \\contact) at (\\x, 4) {  };
+        }
+        \\draw  (bottom contact 1) -- (bottom contact 2) -- (bottom contact 3);
+        \\draw  (top contact 1) -- (top contact 2) -- (top contact 3);
+        \\draw  (bottom contact 1) to [resistor={ near start, info={R1:Letter:e} }, current direction'={ midway, info={I1:Letter:e} }, battery={ near end, info={E1:Letter:e} }] (top contact 1);
+        \\draw  (bottom contact 2) to [resistor={ near start, info={R2:Letter:e} }, current direction'={ midway, info={I2:Letter:e} }, battery={ near end, info={E2:Letter:e} }] (top contact 2);
+        \\draw  (bottom contact 3) to [resistor={ near start, info={R3:Letter:e} }, current direction'={ midway, info={I3:Letter:e} }, battery={ near end, info={E3:Letter:e} }] (top contact 3);
+        \\draw [-{ Latex },color=red] (1.2, 2.5) arc [start angle = 135, end angle = -160, radius = 0.6];
+        \\draw [-{ Latex },color=blue] (4.2, 2.5) arc [start angle = 135, end angle = -160, radius = 0.6];
+        \\node [contact,color=green!71!black] (bottomc) at (bottom contact 2) {  };
+    \\end{ tikzpicture }
+
+    \\begin{ align* }
+        &\\begin{ cases }
+            { \\color{ red } {I1:L}{R1:L} - {I2:L}{R2:L} = {E1:L} - {E2:L} }, \\\\
+            { \\color{ blue } {I2:L}{R2:L} - {I3:L}{R3:L} = {E2:L} - {E3:L} }, \\\\
+            { \\color{ green!71!black } {I1:L} + {I2:L} + {I3:L} = 0 };
+        \\end{ cases }
+        \\qquad \\implies \\qquad
+        \\begin{ cases }
+            {I1:L} = \\frac{ {E1:L} - {E2:L} + {I2:L}{R2:L} }{ {R1:L} }, \\\\
+            {I3:L} = \\frac{ {I2:L}{R2:L} - {E2:L} + {E3:L} }{ {R3:L} }, \\\\
+            {I1:L} + {I2:L} + {I3:L} = 0, \\\\
+        \\end{ cases } \\implies \\\\
+        \\implies
+            &{I2:L} + \\frac{ {E1:L} - {E2:L} + {I2:L}{R2:L} }{ {R1:L} } + \\frac{ {I2:L}{R2:L} - {E2:L} + {E3:L} }{ {R3:L} } = 0, \\\\
+        &   {I2:L}\\cbr{ 1 + \\frac{R2:L:s}{R1:L:s} + \\frac{R2:L:s}{R3:L:s} } + \\frac{ {E1:L} - {E2:L} }{R1:L:s} + \\frac{ {E3:L} - {E2:L} }{R3:L:s} = 0, \\\\
+        &   {I2:L} = \\cfrac{ \\cfrac{ {E2:L} - {E1:L} }{R1:L:s} + \\cfrac{ {E2:L} - {E3:L} }{R3:L:s} }{ 1 + \\cfrac{R2:L:s}{R1:L:s} + \\cfrac{R2:L:s}{R3:L:s} }
+            = \\cfrac{ \\cfrac{ {E2:V} - {E1:V} }{R1:V:s} + \\cfrac{ {E2:V} - {E3:V} }{R3:V:s} }{ 1 + \\cfrac{R2:V:s}{R1:V:s} + \\cfrac{R2:V:s}{R3:V:s} }
+            = {I2_ratio:LaTeX}\\units{ А } \\approx {I2:Value}, \\\\
+        &   {U2:L} = {I2:L}{R2:L} = \\cfrac{ \\cfrac{ {E2:L} - {E1:L} }{R1:L:s} + \\cfrac{ {E2:L} - {E3:L} }{R3:L:s} }{ 1 + \\cfrac{R2:L:s}{R1:L:s} + \\cfrac{R2:L:s}{R3:L:s} } * {R2:L}
+            = \\cfrac{ \\cfrac{ {E2:V} - {E1:V} }{R1:V:s} + \\cfrac{ {E2:V} - {E3:V} }{R3:V:s} }{ 1 + \\cfrac{R2:V:s}{R1:V:s} + \\cfrac{R2:V:s}{R3:V:s} } * {R2:V}
+            = {I2_ratio:LaTeX}\\units{ А } * {R2:V} = {U2_ratio:LaTeX}\\units{ В } \\approx {U2:Value}.
+    \\end{ align* }
+
+    Одну пару силы тока и напряжения получили. Для некоторых вариантов это уже ответ, но не у всех. 
+    Для упрощения записи преобразуем (чтобы избавитсья от 4-этажной дроби) и подставим в уже полученные уравнения:
+
+    \\begin{ align* }
+    {I2:L} 
+        &=
+        \\frac{ \\frac{ {E2:L} - {E1:L} }{R1:L:s} + \\frac{ {E2:L} - {E3:L} }{R3:L:s} }{ 1 + \\frac{R2:L:s}{R1:L:s} + \\frac{R2:L:s}{R3:L:s} }
+        =
+        \\frac{ ({E2:L} - {E1:L}){R3:L} + ({E2:L} - {E3:L}){R1:L} }{ {R1:L}{R3:L} + {R2:L}{R3:L} + {R2:L}{R1:L} },
+        \\\\
+    {I1:L} 
+        &=  \\frac{ {E1:L} - {E2:L} + {I2:L}{R2:L} }{ {R1:L} } 
+        =   \\frac{ {E1:L} - {E2:L} + \\cfrac{ ({E2:L} - {E1:L}){R3:L} + ({E2:L} - {E3:L}){R1:L} }{ {R1:L}{R3:L} + {R2:L}{R3:L} + {R2:L}{R1:L} } * {R2:L} }{ {R1:L} } = \\\\
+        &=  \\frac{ 
+            {E1:L}{R1:L}{R3:L} + {E1:L}{R2:L}{R3:L} + {E1:L}{R2:L}{R1:L}
+            - {E2:L}{R1:L}{R3:L} - {E2:L}{R2:L}{R3:L} - {E2:L}{R2:L}{R1:L}
+            + {E2:L}{R3:L}{R2:L} - {E1:L}{R3:L}{R2:L} + {E2:L}{R1:L}{R2:L} - {E3:L}{R1:L}{R2:L}
+        }{ {R1:L} * \\cbr{ {R1:L}{R3:L} + {R2:L}{R3:L} + {R2:L}{R1:L} } } 
+        = \\\\ &=
+        \\frac{ 
+            {E1:L}\\cbr{ {R1:L}{R3:L} + {R2:L}{R3:L} + {R2:L}{R1:L} - {R3:L}{R2:L} }
+            + {E2:L}\\cbr{ - {R1:L}{R3:L} - {R2:L}{R3:L} - {R2:L}{R1:L} + {R3:L}{R2:L} + {R1:L}{R2:L} }
+            - {E3:L}{R1:L}{R2:L}
+        }{ {R1:L} * \\cbr{ {R1:L}{R3:L} + {R2:L}{R3:L} + {R2:L}{R1:L} } }
+        = \\\\ &=
+        \\frac{ 
+            {E1:L}\\cbr{ {R1:L}{R3:L} + {R2:L}{R1:L} }
+            + {E2:L}\\cbr{ - {R1:L}{R3:L} } 
+            - {E3:L}{R1:L}{R2:L}
+        }{ {R1:L} * \\cbr{ {R1:L}{R3:L} + {R2:L}{R3:L} + {R2:L}{R1:L} } }
+        =
+        \\frac{ 
+            {E1:L}\\cbr{ {R3:L} + {R2:L} } - {E2:L}{R3:L} - {E3:L}{R2:L}
+        }{ {R1:L}{R3:L} + {R2:L}{R3:L} + {R2:L}{R1:L} }
+        = \\\\ &=
+        \\frac{ 
+            ({E1:L} - {E3:L}){R2:L} + ({E1:L} - {E2:L}){R3:L}
+        }{ {R1:L}{R3:L} + {R2:L}{R3:L} + {R2:L}{R1:L} }
+        =
+        \\frac{
+            \\cfrac{ {E1:L} - {E3:L} }{R3:L:s} + \\cfrac{ {E1:L} - {E2:L} }{R2:L:s}
+        }{ \\cfrac{R1:L:s}{R2:L:s} + 1 + \\cfrac{R1:L:s}{R3:L:s} } 
+        =
+        \\frac{
+            \\cfrac{ {E1:V} - {E3:V} }{R3:V:s} + \\cfrac{ {E1:V} - {E2:V} }{R2:V:s}
+        }{ \\cfrac{R1:V:s}{R2:V:s} + 1 + \\cfrac{R1:V:s}{R3:V:s} } 
+        = {I1_ratio:LaTeX}\\units{ А } \\approx {I1:Value}. \\\\
+    {U1:L} 
+        &=
+        {I1:L}{R1:L} 
+        =
+        \\frac{
+            \\cfrac{ {E1:L} - {E3:L} }{R3:L:s} + \\cfrac{ {E1:L} - {E2:L} }{R2:L:s}
+        }{ \\cfrac{R1:L:s}{R2:L:s} + 1 + \\cfrac{R1:L:s}{R3:L:s} } * {R1:L}
+        =
+        {I1_ratio:LaTeX}\\units{ А } * {R1:V} = {U1_ratio:LaTeX}\\units{ В } \\approx {U1:Value}.
+    \\end{ align* }
+
+    Если вы проделали все эти вычисления выше вместе со мной, то
+    \\begin{{itemize}}
+        \\item вы совершили ошибку, выбрав неверный путь решения: 
+        слишком длинное решение, очень легко ошибиться в индексах, дробях, знаках или потерять какой-то множитель,
+        \\item можно было выразить из исходной системы другие токи и получить сразу нажный вам,
+        а не какой-то 2-й,
+        \\item можно было сэкономить: все три резистора и ЭДС соединены одинаково, 
+        поэтому ответ для 1-го резистора должен отличаться лишь перестановкой индексов (этот факт крайне полезен при проверке ответа, у нас всё сошлось),
+        я специально подгонял выражение для {I1:L:e} к этому виду, вынося за скобки и преобразуя дробь,
+        \\item вы молодец, потому что не побоялись и получили верный ответ грамотным способом,
+    \\end{{itemize}}
+    так что переходим к третьему резистору. Будет похоже, но кого это когда останавливало...
+
+'''
+)
+class Kirchgof_triple(variant.VariantTask):
+    def GetUpdate(self, R1=None, R2=None, R3=None, E1=None, E2=None, E3=None, **kws):
+        I1_ratio = Fraction(numerator=42, denominator=23)
+        I2_ratio = Fraction(numerator=42, denominator=23)
+        I3_ratio = Fraction(numerator=42, denominator=23)
+        I1 = '\\eli_1 = %.2f А' % float(I1_ratio)
+        I2 = '\\eli_2 = %.2f А' % float(I2_ratio)
+        I3 = '\\eli_3 = %.2f А' % float(I3_ratio)
+        U1_ratio = Fraction(numerator=42, denominator=23)
+        U2_ratio = Fraction(numerator=42, denominator=23)
+        U3_ratio = Fraction(numerator=42, denominator=23)
+        U1 = 'U_1 = %.2f В' % float(U1_ratio)
+        U2 = 'U_2 = %.2f В' % float(U2_ratio)
+        U3 = 'U_3 = %.2f В' % float(U3_ratio)
+        return dict(
+            I1_ratio=I1_ratio,
+            I2_ratio=I2_ratio,
+            I3_ratio=I3_ratio,
+            I1=I1,
+            I2=I2,
+            I3=I3,
+            U1_ratio=U1_ratio,
+            U2_ratio=U2_ratio,
+            U3_ratio=U3_ratio,
+            U1=U1,
+            U2=U2,
+            U3=U3,
+        )
