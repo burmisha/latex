@@ -23,19 +23,21 @@ def generate_letter_variants(answers, mocks, answers_count=None, mocks_count=Non
 
     assert isinstance(answers, dict)
     assert isinstance(mocks, list)
-    assert len(set(answers.values())) == len(answers)
-    assert len(set(mocks)) == len(mocks)
-    assert not (set(mocks) & set(answers.values()))
-    all_texts = set(mocks) | set(answers.values())
+    all_answers = set(mocks) | set(answers.values())
+    assert len(all_answers) == len(answers) + len(mocks)
 
-    variants = list(itertools.permutations(answers.keys(), r=answers_count))
-    for variant in variants:
-        proper_texts = set(answers[question] for question in variant)
-        for wrong_text in itertools.permutations(sorted(all_texts - proper_texts), r=mocks_count):
-            available_texts = sorted(proper_texts | set(wrong_text))
-            for options in itertools.permutations(available_texts):
-                positions = [options.index(answers[question]) for question in variant]
-                yield list(zip(variant, positions)), options
+    for questions in itertools.permutations(list(answers.items()), r=answers_count):
+        question_texts = [question[0] for question in questions]
+        proper_answers = list(enumerate(question[1] for question in questions))
+        proper_answers_texts = set(proper_answer[1] for proper_answer in proper_answers)
+        available_wrong_answers = [(None, answer) for answer in sorted(all_answers - proper_answers_texts)]
+        for wrong_answers in itertools.permutations(available_wrong_answers, mocks_count):
+            for answers in itertools.permutations(proper_answers + list(wrong_answers)):
+                indexes = [None for i in range(answers_count)]
+                for index, answer in enumerate(answers):
+                    if answer[0] is not None:
+                        indexes[answer[0]] = index
+                yield list(zip(question_texts, indexes)), [answer[1] for answer in answers]
 
 
 class LetterVariant:
@@ -50,33 +52,35 @@ class LetterVariant:
 
 
 def test_generate_letter_variants():
-    assert list(generate_letter_variants(
+    res = list(generate_letter_variants(
         {'дважды два': 'четыре', 'трижды три': 'девять'},
         ['пять', 'шесть'],
         answers_count=1,
         mocks_count=1,
-    )) == [
-        ([('дважды два', 1),], ('девять', 'четыре')),
-        ([('дважды два', 0),], ('четыре', 'девять')),
-        ([('дважды два', 1),], ('пять', 'четыре')),
-        ([('дважды два', 0),], ('четыре', 'пять')),
-        ([('дважды два', 0),], ('четыре', 'шесть')),
-        ([('дважды два', 1),], ('шесть', 'четыре')),
-        ([('трижды три', 0),], ('девять', 'пять')),
-        ([('трижды три', 1),], ('пять', 'девять')),
-        ([('трижды три', 0),], ('девять', 'четыре')),
-        ([('трижды три', 1),], ('четыре', 'девять')),
-        ([('трижды три', 0),], ('девять', 'шесть')),
-        ([('трижды три', 1),], ('шесть', 'девять')),
+    ))
+    canonic = [
+        ([('дважды два', 0),], ['четыре', 'девять']),
+        ([('дважды два', 1),], ['девять', 'четыре']),
+        ([('дважды два', 0),], ['четыре', 'пять']),
+        ([('дважды два', 1),], ['пять', 'четыре']),
+        ([('дважды два', 0),], ['четыре', 'шесть']),
+        ([('дважды два', 1),], ['шесть', 'четыре']),
+        ([('трижды три', 0),], ['девять', 'пять']),
+        ([('трижды три', 1),], ['пять', 'девять']),
+        ([('трижды три', 0),], ['девять', 'четыре']),
+        ([('трижды три', 1),], ['четыре', 'девять']),
+        ([('трижды три', 0),], ['девять', 'шесть']),
+        ([('трижды три', 1),], ['шесть', 'девять']),
     ]
+    assert res == canonic, f'Error:\n  expected:\t{canonic}\n  got:\t\t{res}'
     assert list(generate_letter_variants(
         {'дважды два': 'четыре', 'трижды три': 'девять'},
         ['пять', 'шесть'],
         answers_count=1,
         mocks_count=0,
     )) == [
-        ([('дважды два', 0),], ('четыре',)),
-        ([('трижды три', 0),], ('девять',))
+        ([('дважды два', 0),], ['четыре',]),
+        ([('трижды три', 0),], ['девять',]),
     ]
 
 
