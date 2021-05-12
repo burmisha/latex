@@ -774,3 +774,59 @@ class Kirchgof_triple(variant.VariantTask):
             U2=U2,
             U3=U3,
         )
+
+
+@variant.text('''
+    Определите показания амперметра ${index_a}$ (см. рис.) и разность потенциалов на резисторе ${index_r}$, 
+    если сопротиваления всех резисторов равны: $R_1 = R_2 = R_3 = R_4 = R_5 = R_6 = {R:Task}$,
+    а напряжение, поданное на цепь, равно {U:Task:e}.
+    Ответы получите в виде несократимых дробей, а также определите приближённые значения. Амперметры считать идеальными.
+
+    \\begin{ tikzpicture }[circuit ee IEC, thick]
+        \\node [contact]  (left contact) at (3, 0) {  };
+        \\node [contact]  (right contact) at (9, 0) {  };
+        \\draw  (left contact) -- ++(up:2) to [resistor={ very near start, info=$R_2$ }, amperemeter={ midway, info=$1$ }, resistor={ very near end, info=$R_3$ } ] ++(right:6) -- (right contact);
+        \\draw  (left contact) -- ++(down:2) to [resistor={ very near start, info=$R_5$ }, resistor={ midway, info=$R_6$ }, amperemeter={ very near end, info=$3$ }] ++(right:6) -- (right contact);
+        \\draw  (left contact) ++(left:3) to [resistor={ info=$R_1$ }] (left contact) to [amperemeter={ near start, info=$2$ }, resistor={ near end , info=$R_4$ }] (right contact) -- ++(right:0.5);
+    \\end{ tikzpicture }
+
+''')
+@variant.arg(index_a=[1, 2, 3])
+@variant.arg(index_r=[1, 2, 3, 4, 5, 6])
+@variant.arg(R=('R = {} Ом', [2, 4, 5, 10]))
+@variant.arg(U=('U = {} В', [30, 60, 90, 120, 150]))
+@variant.answer_align([
+    'R_0 &= R + \\frac 1{ \\frac 1{ R + R } + \\frac 1{ R } + \\frac 1{ R + R } } = R + \\frac 1{ \\frac 2R } = \\frac 32 R,',
+    '\\eli &= \\frac U{ R_0 } = \\frac { 2U }{ 3R },',
+    'U_1 &= \\eli R_1 = \\frac { 2U }{ 3R } * R = \\frac 23 U = {U1:Value},',
+    'U_{ 23 } &= U_{ 56 } = U_4 = U - \\eli R_1 = U - \\frac { 2U }{ 3R } * R = \\frac U3 = {U4:Value},',
+    '\\eli_2 &= \\frac{ U_4 }{ R_4 } = \\frac{ U }{ 3R } \\approx {I2:Value},',
+    '\\eli_1 &= \\frac{ U_{ 23 } }{ R_{ 23 } } = \\frac{ \\frac U3 }{ R + R } = \\frac U{ 6R } \\approx {I1:Value},',
+    '\\eli_3 &= \\frac{ U_{ 56 } }{ R_{ 56 } } = \\frac{ \\frac U3 }{ R + R } = \\frac U{ 6R } \\approx {I3:Value},',
+    'U_2 &= \\eli_1 R_2 = \\frac U{ 6R } * R = \\frac U6 = {U2:Value},',
+    'U_3 &= \\eli_1 R_3 = \\frac U{ 6R } * R = \\frac U3 = {U3:Value},',
+    'U_5 &= \\eli_3 R_5 = \\frac U{ 6R } * R = \\frac U5 = {U5:Value},',
+    'U_6 &= \\eli_3 R_6 = \\frac U{ 6R } * R = \\frac U6 = {U6:Value}.',
+])
+class Circuit_six(variant.VariantTask):
+    def GetUpdate(self, R=None, U=None, index_a=None, index_r=None, **kws):
+        U1 = Fraction(numerator=2 * U.Value, denominator=3)
+        U2 = Fraction(numerator=U.Value, denominator=6)
+        U3 = Fraction(numerator=U.Value, denominator=6)
+        U4 = Fraction(numerator=U.Value, denominator=3)
+        U5 = Fraction(numerator=U.Value, denominator=6)
+        U6 = Fraction(numerator=U.Value, denominator=6)
+        I1 = Fraction(numerator=U.Value, denominator=6 * R.Value)
+        I2 = Fraction(numerator=U.Value, denominator=3 * R.Value)
+        I3 = Fraction(numerator=U.Value, denominator=6 * R.Value)
+        return dict(
+            U1='U_1 = %.1f В' % float(U1),
+            U2='U_2 = %.1f В' % float(U2),
+            U3='U_3 = %.1f В' % float(U3),
+            U4='U_4 = %.1f В' % float(U4),
+            U5='U_5 = %.1f В' % float(U5),
+            U6='U_6 = %.1f В' % float(U6),
+            I1='\\eli_1 = %.1f А' % float(I1),
+            I2='\\eli_2 = %.1f А' % float(I2),
+            I3='\\eli_3 = %.1f А' % float(I3),
+        )
