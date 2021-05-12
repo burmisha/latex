@@ -524,6 +524,78 @@ class Kirchgof_double(variant.VariantTask):
 
 
 @variant.text('''
+    Определите ток, протекающий через резистор {R:Task:e} и разность потенциалов на нём (см. рис.),
+    если {E1:Task:e}, {E2:Task:e}, {r1:Task:e}, {r2:Task:e}.
+
+    \\begin{ tikzpicture }[circuit ee IEC, thick]
+        \\draw  (0, 0) to [battery={ rotate=-180,info={ $\\ele_1, r_1 $ } }] (0, 3)
+                -- (5, 3)
+                to [battery={ rotate=-180, info'={ $\\ele_2, r_2 $ } }] (5, 0)
+                -- (0, 0)
+                (2.5, 0) to [resistor={ info=$R$ }] (2.5, 3);
+    \\end{ tikzpicture }
+''')
+@variant.arg(R=['R = %d Ом' % RValue for RValue in [10, 12, 15, 18, 20]])
+@variant.arg(r1=['r_1 = %d Ом' % r1Value for r1Value in [1, 2, 3]])
+@variant.arg(r2=['r_2 = %d Ом' % r2Value for r2Value in [2, 4, 6]])
+@variant.arg(E1=['\\ele_1 = %d В' % E1Value for E1Value in [6, 12, 18]])
+@variant.arg(E2=['\\ele_2 = %d В' % E2Value for E2Value in [5, 15, 25]])
+@variant.answer_tex('''
+    \\begin{ tikzpicture }[circuit ee IEC, thick]
+        \\draw  (0, 0) to [battery={ rotate=-180,info={ $\\ele_1, r_1 $ } }, current direction={ near end, info=$\\eli_1$ }] (0, 3)
+                -- (5, 3)
+                to [battery={ rotate=-180, info'={ $\\ele_2, r_2 $ } }, current direction={ near end, info=$\\eli_2$ }] (5, 0)
+                -- (0, 0)
+                (2.5, 0) to [resistor={ info=$R$ }, current direction'={ near end, info=$\\eli$ }] (2.5, 3);
+        \\draw [-{ Latex },color=red] (0.8, 1.9) arc [start angle = 135, end angle = -160, radius = 0.6];
+        \\draw [-{ Latex },color=blue] (3.5, 1.9) arc [start angle = 135, end angle = -160, radius = 0.6];
+        \\node [contact,color=green!71!black] (topc) at (2.5, 3) {  };
+        \\node [above] (top) at (2.5, 3) { $1$ };
+    \\end{ tikzpicture }
+
+    \\begin{ align* }
+        &\\begin{ cases }
+            { \\color{ red } {E1:L} = \\eli_1 {r1:L} + {I:L} {R:L} }, \\\\
+            { \\color{ blue } {E2:L} = \\eli_2 {r2:L} - {I:L} {R:L} }, \\\\
+            { \\color{ green!71!black } {I:L} - \\eli_1 - \\eli_2 = 0 };
+        \\end{ cases }
+        \\qquad \\implies \\qquad
+        \\begin{ cases }
+            \\eli_1 = \\frac{ {E1:L} - {I:L} {R:L} }{r1:L:s}, \\\\
+            \\eli_2 = \\frac{ {E2:L} + {I:L} {R:L} }{r2:L:s}, \\\\
+            {I:L} - \\eli_1 - \\eli_2 = 0;
+        \\end{ cases } \\implies \\\\
+        &\\implies {I:L} - \\frac{ {E1:L} - {I:L} {R:L} }{r1:L:s} + \\frac{ {E2:L} + {I:L} {R:L} }{r2:L:s} = 0, \\\\
+        &{I:L}\\cbr{ 1 + \\frac{R:L:s}{r1:L:s} + \\frac{R:L:s}{r2:L:s} } - \\frac{E1:L:s}{r1:L:s} + \\frac{E2:L:s}{r2:L:s} = 0, \\\\
+        &{I:L}
+            = \\frac{ \\frac{E1:L:s}{r1:L:s} - \\frac{E2:L:s}{r2:L:s} }{ 1 + \\frac{R:L:s}{r1:L:s} + \\frac{R:L:s}{r2:L:s} }
+            = \\frac{ \\frac{E1:V:s}{r1:V:s} - \\frac{E2:V:s}{r2:V:s} }{ 1 + \\frac{R:V:s}{r1:V:s} + \\frac{R:V:s}{r2:V:s} }
+            = {I_ratio:LaTeX}\\units{ А }
+            \\approx {I:Value}, \\\\
+        &U  = {I:L} {R:L} = \\frac{ \\frac{E1:L:s}{r1:L:s} - \\frac{E2:L:s}{r2:L:s} }{ 1 + \\frac{R:L:s}{r1:L:s} + \\frac{R:L:s}{r2:L:s} } R
+            \\approx {U:Value}.
+    \\end{ align* }
+'''
+)
+class Kirchgof_double_2(variant.VariantTask):
+    pass
+    def GetUpdate(self, R=None, r1=None, r2=None, E1=None, E2=None, **kws):
+        I_ratio = (
+            Fraction(numerator=E1.Value, denominator=r1.Value) - Fraction(numerator=E2.Value, denominator=r2.Value)
+        ) / (
+            Fraction(base_value=1) + Fraction(numerator=R.Value, denominator=r1.Value) + Fraction(numerator=R.Value, denominator=r2.Value)
+        )
+
+        I = '\\eli = %.3f А' % float(I_ratio)
+        U = 'U = %.3f В' % float(I_ratio * R.Value)
+        return dict(
+            I_ratio=I_ratio,
+            I=I,
+            U=U,
+        )
+
+
+@variant.text('''
     Определите ток $\\eli_{index}$, протекающий через резистор $R_{index}$ (см. рис.), 
     направление этого тока и разность потенциалов $U_{index}$ на этом резисторе,
     если {R1:Task:e}, {R2:Task:e}, {R3:Task:e}, {E1:Task:e}, {E2:Task:e}, {E3:Task:e}.
@@ -773,6 +845,47 @@ class Kirchgof_triple(variant.VariantTask):
             U1=U1,
             U2=U2,
             U3=U3,
+        )
+
+
+@variant.text('''
+    При подключении к источнику тока с ЭДС равным {E:Value:e} 
+    резистора сопротивлением {R1:Value:e} в цепи течёт ток силой {I1:Value:e}.
+    После этого {how} с первым проводником подключают ещё один сопротивлением {R2:Value:e}.
+    Определите 
+    \\begin{{itemize}}
+        \\item внутренее сопротивление источника тока,
+        \\item новую силу тока в цепи,
+        \\item мощность тока во втором проводнике.
+    \\end{{itemize}}
+''')
+@variant.arg(r=('r = {} Ом', [1, 2, 3]))
+@variant.arg(how=['параллельно', 'последовательно'])
+@variant.arg(R1=('R_1 = {} Ом', [6, 12, 20]))
+@variant.arg(R2=('R_2 = {} Ом', [5, 10, 15]))
+@variant.arg(I1=('\\eli_1 = {} А', [2, 3, 5, 7, 11]))
+@variant.answer_align([
+    '{I1:L} &= \\frac{E:L:s}{ {R1:L} + {r:L} } \\implies {r:L} = \\frac{E:L:s}{I1:L:s} - {R1:L} = \\frac{E:V:s}{I1:V:s} - {R1:V} = {r:V},',
+    '{I2:L} &= \\frac{E:L:s}{ R + {r:L} } = {I2_ratio:LaTeX}\\units{ А } \\approx {I2:V},',
+    '{P2:L} &= {I2:L:sqr}{ R + {r:L} } = {P2_ratio:LaTeX}\\units{ Вт } \\approx {P2:V}.',
+])
+class Update_external_R(variant.VariantTask):
+    def GetUpdate(self, r=None, how=None, R1=None, R2=None, I1=None, **kws):
+        E_value = I1.Value * (r.Value + R1.Value)
+        E = '\\ele = %d В' % E_value
+        if how == 'параллельно':
+            R_ratio = Fraction(numerator=R1.Value * R2.Value, denominator=R1.Value + R2.Value)
+        elif how == 'последовательно':
+            R_ratio = Fraction(numerator=R1.Value + R2.Value)
+        I2_ratio = Fraction(numerator=E_value) / (R_ratio + r.Value)
+        P2_ratio = I2_ratio * I2_ratio * R2.Value
+        return dict(
+            E=E,
+            R_ratio=R_ratio,
+            I2_ratio=I2_ratio,
+            I2='\\eli_2 = %.2f' % float(I2_ratio),
+            P2_ratio=P2_ratio,
+            P2='P\'_2 = %.2f' % float(P2_ratio),
         )
 
 
