@@ -541,6 +541,8 @@ class Kirchgof_double(variant.VariantTask):
 @variant.arg(E1=['\\ele_1 = %d В' % E1Value for E1Value in [6, 12, 18]])
 @variant.arg(E2=['\\ele_2 = %d В' % E2Value for E2Value in [5, 15, 25]])
 @variant.answer_tex('''
+    Выберем 2 контура и один узел, запишем для них законы Кирхгофа:
+
     \\begin{ tikzpicture }[circuit ee IEC, thick]
         \\draw  (0, 0) to [battery={ rotate=-180,info={ $\\ele_1, r_1 $ } }, current direction={ near end, info=$\\eli_1$ }] (0, 3)
                 -- (5, 3)
