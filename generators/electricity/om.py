@@ -777,6 +777,44 @@ class Kirchgof_triple(variant.VariantTask):
 
 
 @variant.text('''
+    Определите эквивалентное сопротиваление цепи на рисунке, если известны сопротивления резисторов:
+    {R1:Task:e}, {R2:Task:e}, {R3:Task:e}, {R4:Task:e}.
+    При каком напряжении поданном на эту цепь, в ней потечёт ток равный {I:Task:e}?
+
+    \\begin{ tikzpicture }[rotate={rotate}, circuit ee IEC, thick]
+        \\node [contact]  (contact1) at (-1.5, 0) {  };
+        \\draw  (0, 0) to [resistor={ info=$R_1$ }] ++(left:1.5);
+        \\draw  (0, 0) -- ++(up:1.5) to [resistor={ near start, info=$R_2$ }, resistor={ near end, info=$R_3$ }] ++(right:3);
+        \\draw  (0, 0) to [resistor={ info=$R_4$ }] ++(right:3) -- ++(up:1.5);
+        {appendix}
+    \\end{ tikzpicture }
+''')
+@variant.arg(rotate=[0, 90, 180, 270])
+@variant.arg(second_node=[0, 1])
+@variant.arg(R1=('R_1 = {} Ом', [1, 2]))
+@variant.arg(R2=('R_2 = {} Ом', [3, 4, 5]))
+@variant.arg(R3=('R_3 = {} Ом', [1, 2, 3]))
+@variant.arg(R4=('R_4 = {} Ом', [2, 3, 4]))
+@variant.arg(I=('\\eli = {} А', [2, 5, 10]))
+@variant.answer_short('R={R_ratio:LaTeX}\\units{ Ом } \\approx {R:V} \\implies U = \\eli R \\approx {U:V}.')
+class Circuit_four(variant.VariantTask):
+    def GetUpdate(self, rotate=None, second_node=None, R1=None, R2=None, R3=None, R4=None, I=None, **kws):
+        if second_node == 0:
+            appendix = '\\draw  (3, 1.5) -- ++(right:0.5); \\node [contact] (contact2) at (3.5, 1.5) {  };'
+            R_ratio = Fraction(numerator=(R2.Value + R3.Value) * R4.Value, denominator=R2.Value + R3.Value + R4.Value) + R1.Value
+        elif second_node == 1:
+            appendix = '\\draw  (1.5, 1.5) -- ++(up:1); \\node [contact] (contact2) at (1.5, 2.5) {  };'
+            R_ratio = Fraction(numerator=R2.Value * (R3.Value + R4.Value), denominator=R2.Value + R3.Value + R4.Value) + R1.Value
+        return dict(
+            appendix=appendix,
+            R_ratio=R_ratio,
+            R='R = %.2f Ом' % float(R_ratio),
+            U='U = %.1f В' % (I.Value * float(R_ratio)),
+        )
+
+
+
+@variant.text('''
     Определите показания амперметра ${index_a}$ (см. рис.) и разность потенциалов на резисторе ${index_r}$, 
     если сопротиваления всех резисторов равны: $R_1 = R_2 = R_3 = R_4 = R_5 = R_6 = {R:Task}$,
     а напряжение, поданное на цепь, равно {U:Task:e}.
