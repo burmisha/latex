@@ -20,7 +20,7 @@ def precisionFmt2(value, precision):
 
     isNegative = value < 0
     absValue = abs(value)
-    assert absValue >= 10 ** -7
+    assert absValue >= 10 ** -7, f'Got value of {absValue}'
     assert 1 <= precision <= 10
 
     rawValue = '%.20f' % absValue

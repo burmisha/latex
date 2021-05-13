@@ -80,6 +80,8 @@ class Work:
                 task.PreferTestVersion()
                 task.SolutionSpace = 0
                 assert hasattr(task, 'AnswerTestTemplate')
+        for task in tasks:
+            task.validate()
         return tasks
 
     def get_human_name(self):
@@ -483,5 +485,18 @@ def get_all_variants():
             task_id='2021-04-31 10',
             classes={'electricity.om': ['Definitions07', 'Definitions08', 'Kirchgof_double']},
         ),
+        Work(
+            task_id='2021-05-12 10',
+            classes={'electricity.om': ['Circuit_four', 'Circuit_six', 'Kirchgof_double_2']},
+        ),
+        Work(
+            task_id='2021-05-13 10',
+            classes={'electricity.om': ['Update_external_R', 'Kirchgof_triple']},
+        ),
+        Work(
+            task_id='2021-05-13 9',
+            classes={'atomic.radioactive': ['BK_53_01', 'BK_53_02', 'BK_53_03', 'BK_53_12']},
+        ),
+
     ]
     return works

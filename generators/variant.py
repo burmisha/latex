@@ -84,6 +84,9 @@ class VariantTask:
         self._variants_count = None
         self._prefer_test_version = False
 
+    def validate(self):
+        pass
+
     def PreferTestVersion(self):
         self._prefer_test_version = True
 
