@@ -869,24 +869,34 @@ class Kirchgof_triple(variant.VariantTask):
 @variant.arg(I1=('\\eli_1 = {} А', [2, 3, 5, 7, 11]))
 @variant.answer_align([
     '{I1:L} &= \\frac{E:L:s}{ {R1:L} + {r:L} } \\implies {r:L} = \\frac{E:L:s}{I1:L:s} - {R1:L} = \\frac{E:V:s}{I1:V:s} - {R1:V} = {r:V},',
-    '{I2:L} &= \\frac{E:L:s}{ R + {r:L} } = {I2_ratio:LaTeX}\\units{ А } \\approx {I2:V},',
-    '{P2:L} &= {I2:L:sqr}{R2:L} = {P2_ratio:LaTeX}\\units{ Вт } \\approx {P2:V}.',
+    'R\' &= {R_formula} = {R_ratio:LaTeX}\\units{ Ом },',
+    '{I2:L} &= \\frac{E:L:s}{ R\' + {r:L} } = {I2_ratio:LaTeX}\\units{ А } \\approx {I2:V},',
+    '{P2:L} &= {P_formula} = {P2_ratio:LaTeX}\\units{ Вт } \\approx {P2:V}.',
 ])
 class Update_external_R(variant.VariantTask):
     def GetUpdate(self, r=None, how=None, R1=None, R2=None, I1=None, **kws):
         E_value = I1.Value * (r.Value + R1.Value)
         E = '\\ele = %d В' % E_value
         if how == 'параллельно':
+            R_formula = f'\\frac{{ {R1:L}{R2:L} }}{{ {R1:L} + {R2:L} }}'
             R_ratio = Fraction(numerator=R1.Value * R2.Value, denominator=R1.Value + R2.Value)
+            I2_ratio = Fraction(numerator=E_value) / (R_ratio + r.Value)
+            P_formula = f'\\frac{{ U_2^2 }}{R2:L:s} \\equiv \\frac{{ \\sqr{{ \\eli_2 R\' }} }}{R2:L:s}'
+            P2_ratio = (I2_ratio * R_ratio * I2_ratio * R_ratio) / R2.Value
         elif how == 'последовательно':
+            R_formula = f'{R1:L} + {R2:L}'
             R_ratio = Fraction(numerator=R1.Value + R2.Value)
-        I2_ratio = Fraction(numerator=E_value) / (R_ratio + r.Value)
-        P2_ratio = I2_ratio * I2_ratio * R2.Value
+            I2_ratio = Fraction(numerator=E_value) / (R_ratio + r.Value)
+            P_formula = f'\\eli_2^2 {R2:L:s}'
+            P2_ratio = I2_ratio * I2_ratio * R2.Value
+
         return dict(
             E=E,
+            R_formula=R_formula,
             R_ratio=R_ratio,
             I2_ratio=I2_ratio,
             I2='\\eli_2 = %.2f А' % float(I2_ratio),
+            P_formula=P_formula,
             P2_ratio=P2_ratio,
             P2='P\'_2 = %.1f Вт' % float(P2_ratio),
         )
