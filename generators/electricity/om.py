@@ -524,6 +524,53 @@ class Kirchgof_double(variant.VariantTask):
 
 
 @variant.text('''
+    Определите ток, протекающий через резистор $R_{index}$, разность потенциалов на нём (см. рис.)
+    и выделяющуюся на нём мощность, если известны $r_1, r_2, \\ele_1, \\ele_2, R_1, R_2$.
+
+    \\begin{ tikzpicture }[circuit ee IEC, thick]
+        \\draw  (0, 0) -- ++(up:2)
+                to [
+                    battery={ very near start, rotate={rotate1}, info={ $\\ele_1, r_1 $ } },
+                    resistor={ midway, info=$R_1$ },
+                    battery={ very near end, rotate={rotate2}, info={ $\\ele_2, r_2 $ } }
+                ] ++(right:5)
+                -- ++(down:2)
+                to [resistor={ info=$R_2$ }] ++(left:5);
+    \\end{ tikzpicture }
+''')
+@variant.arg(index=[1, 2])
+@variant.arg(rotate1=[0, -180])
+@variant.arg(rotate2=[0, -180])
+class Kirchgof_plain(variant.VariantTask):
+    pass
+
+
+@variant.text('''
+    Два резистора сопротивлениями $R_1={a}R$ и $R_2={b}R$ подключены {how} к источнику напряжения.
+    Определите, в каком резисторе выделяется большая тепловая мощность и во сколько раз?
+''')
+@variant.arg(a=[3, 5, 7])
+@variant.arg(b=[2, 4, 6, 8])
+@variant.arg(how=['параллельно', 'последовательно'])
+class Compare_power(variant.VariantTask):  # Вишнякова - 17
+    pass
+
+
+@variant.text('''
+    Если батарею замкнуть на резистор сопротивлением $R_1$, то в цепи потечёт ток $\\eli_1$,
+    а если на другой $R_2$ — то $\\eli_2$. Определите:
+    \\begin{{itemize}}
+        \\item ЭДС батареи,
+        \\item внутреннее сопротивление батареи,
+        \\item ток короткого замыкания.
+    \\end{{itemize}}
+''')
+@variant.no_args
+class Short_i(variant.VariantTask):  # Вишнякова - 7
+    pass
+
+
+@variant.text('''
     Определите ток, протекающий через резистор {R:Task:e} и разность потенциалов на нём (см. рис.),
     если {E1:Task:e}, {E2:Task:e}, {r1:Task:e}, {r2:Task:e}.
 
@@ -857,7 +904,7 @@ class Kirchgof_triple(variant.VariantTask):
     После этого {how} с первым проводником подключают ещё один сопротивлением {R2:Value:e}.
     Определите 
     \\begin{{itemize}}
-        \\item внутренее сопротивление источника тока,
+        \\item внутреннее сопротивление источника тока,
         \\item новую силу тока в цепи,
         \\item мощность тока во втором проводнике.
     \\end{{itemize}}
