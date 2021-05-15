@@ -95,6 +95,10 @@ class PdfBook:
         if not hasattr(self, '_magick_params'):
             self._magick_params = []
 
+    def set_structure(self, structure):
+        assert isinstance(structure, Structure)
+        self._structure = structure
+
     def Validate(self, create_missing=False):
         assert library.files.is_file(self.PdfPath)
         if create_missing:
