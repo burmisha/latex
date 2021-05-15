@@ -343,23 +343,26 @@ class PdfToPdf:
         self._source_file = source_file
         self._tmp_dir = os.path.join(library.location.Location.Home, 'tmp')
 
+    def _get_pages_range(self, str_range):
+        pages_range = pages_range.strip()
+        if '-' in pages_range:
+            first_page, last_page = pages_range.split('-')
+        elif '+' in pages_range:
+            first_page, more_pages = pages_range.split('+')
+            last_page = int(first_page) + int(more_pages)
+        else:
+            first_page, last_page = pages_range, pages_range
+        first_page, last_page = int(first_page), int(last_page)  # including both
+        assert first_page <= last_page
+        return first_page, last_page
+
     def Extract(self, pages, destination_file):
         log.info('Extracting pages %s to %s', pages, destination_file)
         assert isinstance(pages, (str, int))
         assert destination_file.endswith('.pdf')
         parts = []
         for index, pages_range in enumerate(str(pages).split(',')):
-            pages_range = pages_range.strip()
-            if '-' in pages_range:
-                first_page, last_page = pages_range.split('-')
-            elif '+' in pages_range:
-                first_page, more_pages = pages_range.split('+')
-                last_page = int(first_page) + int(more_pages)
-            else:
-                first_page, last_page = pages_range, pages_range
-            first_page, last_page = int(first_page), int(last_page)  # including both
-            assert first_page <= last_page
-
+            first_page, last_page = self._get_pages_range(pages_range)
             part_file = os.path.join(self._tmp_dir, 'part_%d.pdf')
             for page_index in range(first_page, last_page + 1):
                 parts.append(part_file % page_index)
