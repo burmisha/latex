@@ -344,7 +344,7 @@ class PdfToPdf:
         self._tmp_dir = os.path.join(library.location.Location.Home, 'tmp')
 
     def _get_pages_range(self, str_range):
-        pages_range = pages_range.strip()
+        pages_range = str_range.strip()
         if '-' in pages_range:
             first_page, last_page = pages_range.split('-')
         elif '+' in pages_range:
