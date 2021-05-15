@@ -83,7 +83,7 @@ class PdfBook:
         dstPath=None,
         pageShift=None,
     ):
-        assert pdfPath.endswith('.pdf')
+        assert pdfPath.endswith('.pdf'), f'Invalid pdf name: {pdfPath}'
         assert library.files.path_is_ok(pdfPath)
         assert library.files.path_is_ok(dstPath)
         self.PdfPath = pdfPath
