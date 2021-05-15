@@ -541,8 +541,45 @@ class Kirchgof_double(variant.VariantTask):
 @variant.arg(index=[1, 2])
 @variant.arg(rotate1=[0, -180])
 @variant.arg(rotate2=[0, -180])
+@variant.answer_tex('''
+    Нетривиальных узлов нет, поэтому все законы Кирхгофа для узлов будут иметь вид
+    $\\eli-\\eli=0$ и ничем нам не помогут. Впрочем, если бы мы обозначили токи на разных участках контура $\\eli_1, \\eli_2, \\eli_3, \\ldots$,
+    то именно эти законы бы помогли понять, что все эти токи равны: $\\eli_1 - \\eli_2 = 0$ и т.д.
+    Так что запишем закон Кирхгофа для единственного замкнутого контура:
+
+    \\begin{ tikzpicture }[circuit ee IEC, thick]
+        \\draw  (0, 0) -- ++(up:2)
+                to [
+                    battery={ very near start, rotate={rotate1}, info={ $\\ele_1, r_1 $ } },
+                    resistor={ midway, info=$R_1$ },
+                    battery={ very near end, rotate={rotate2}, info={ $\\ele_2, r_2 $ } }
+                ] ++(right:5)
+                -- ++(down:2)
+                to [resistor={ info=$R_2$ }, current direction={ near end, info=$\\eli$ }] ++(left:5);
+        \\draw [-{ Latex }] (2, 1.4) arc [start angle = 135, end angle = -160, radius = 0.6];
+    \\end{ tikzpicture }
+
+    \\begin{ align* }
+        &{sign1} \\ele_1 + {sign2} \\ele_2 = \\eli R_1 + \\eli r_2 + \\eli R_2 + \\eli r_1, \\\\
+        &{sign1} \\ele_1 + {sign2} \\ele_2 = \\eli (R_1 + r_2 + R_2 + r_1), \\\\
+        &\\eli = \\frac{ {sign1} \\ele_1 + {sign2} \\ele_2 }{ R_1 + r_2 + R_2 + r_1 }, \\\\
+        &U_{index} = \\eli R_{index} = \\frac{ {sign1} \\ele_1 + {sign2} \\ele_2 }{ R_1 + r_2 + R_2 + r_1 } * R_{index}, \\\\
+        &P_{index} = \\eli^2 R_{index} = \\frac{ \\sqr{ {sign1} \\ele_1 + {sign2} \\ele_2 } }{ \\sqr{ R_1 + r_2 + R_2 + r_1 } } * R_{index}.
+    \\end{ align* }
+
+    Отметим, что это ответ для тока $\\eli$ меняет знак, если отметить его на рисунке в другую сторону.
+    А вот выбор направления контура — не повлияет.
+''')
 class Kirchgof_plain(variant.VariantTask):
-    pass
+    def GetUpdate(self, index=None, rotate1=None, rotate2=None, **kws):
+        signs = {
+            0: '-',
+            -180: '',
+        }
+        return dict(
+            sign1=signs[rotate1],
+            sign2=signs[rotate2],
+        )
 
 
 @variant.text('''
@@ -552,8 +589,23 @@ class Kirchgof_plain(variant.VariantTask):
 @variant.arg(a=[3, 5, 7])
 @variant.arg(b=[2, 4, 6, 8])
 @variant.arg(how=['параллельно', 'последовательно'])
+@variant.answer('Подключены {how}, поэтому  ${equals1} \\implies \\frac{ P_2 }{ P_1 } = {equals2} = {ratio:LaTeX}$.')
 class Compare_power(variant.VariantTask):  # Вишнякова - 17
-    pass
+    def GetUpdate(self, a=None, b=None, how=None, **kws):
+        if how == 'параллельно':
+            equals1 = 'U_1 = U_2 = U'
+            equals2 = '\\frac{ \\frac{ U_2^2 }{ R_2 } }{ \\frac{ U_1^2 }{ R_1 } } = \\frac{ U^2R_1 }{ U^2R_2 } = \\frac{ R_1 }{ R_2 }'
+            ratio = Fraction(numerator=a, denominator=b)
+        elif how == 'последовательно':
+            equals1 = '\\eli_1 = \\eli_2 = \\eli'
+            equals2 = '\\frac{ \\eli_2^2 R_2 }{ \\eli_1^2 R_1 } = \\frac{ \\eli_2^2R_2 }{ \\eli_1R_1 } = \\frac{ R_2 }{ R_1 }'
+            ratio = Fraction(numerator=b, denominator=a)
+
+        return dict(
+            equals1=equals1,
+            equals2=equals2,
+            ratio=ratio,
+        )
 
 
 @variant.text('''
@@ -566,6 +618,33 @@ class Compare_power(variant.VariantTask):  # Вишнякова - 17
     \\end{{itemize}}
 ''')
 @variant.no_args
+@variant.answer_tex('''
+    Запишем закон Ома для полной цепи 2 раза для обеих способов подключения
+    (короткое замыкание рассмотрим позже).
+
+    \\begin{ align* }
+        &\\begin{ cases }
+            \\ele = \\eli_1(R_1 + r), \\\\
+            \\ele = \\eli_2(R_2 + r); \\\\
+        \\end{ cases } \\\\
+        &\\eli_1(R_1 + r) = \\eli_2(R_2 + r), \\\\
+        &\\eli_1 R_1 + \\eli_1r = \\eli_2 R_2 + \\eli_2r, \\\\
+        &\\eli_1 R_1 - \\eli_2 R_2 = - \\eli_1r  + \\eli_2r = (\\eli_2 - \\eli_1)r, \\\\
+        r &= \\frac{ \\eli_1 R_1 - \\eli_2 R_2 }{ \\eli_2 - \\eli_1 }, \\\\
+        \\ele &= \\eli_1(R_1 + r)
+            = \\eli_1\\cbr{ R_1 + \\frac{ \\eli_1 R_1 - \\eli_2 R_2 }{ \\eli_2 - \\eli_1 } }
+            = \\eli_1 * \\frac{ R_1\\eli_2 - R_1\\eli_1 + \\eli_1 R_1 - \\eli_2 R_2 }{ \\eli_2 - \\eli_1 } \\\\
+            &= \\eli_1 * \\frac{ R_1\\eli_2 - \\eli_2 R_2 }{ \\eli_2 - \\eli_1 }
+            = \\frac{ \\eli_1 \\eli_2 (R_1- R_2) }{ \\eli_2 - \\eli_1 }. \\\\
+    \\end{ align* }
+
+    Короткое замыкание означает, что сопротивление внешней нагрузки 0:
+    $$
+        \\eli_\\text{ к. з. } = \\frac \\ele { 0 + r } = \\frac \\ele r
+            = \\frac{ \\cfrac{ \\eli_1 \\eli_2 (R_1- R_2) }{ \\eli_2 - \\eli_1 } }{ \\cfrac{ \\eli_1 R_1 - \\eli_2 R_2 }{ \\eli_2 - \\eli_1 } }
+            = \\frac{ \\eli_1 \\eli_2 (R_1- R_2) }{ \\eli_1 R_1 - \\eli_2 R_2 }.
+    $$
+''')
 class Short_i(variant.VariantTask):  # Вишнякова - 7
     pass
 
