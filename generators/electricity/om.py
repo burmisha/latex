@@ -564,11 +564,11 @@ class Kirchgof_double(variant.VariantTask):
         &{sign1} \\ele_1 + {sign2} \\ele_2 = \\eli (R_1 + r_2 + R_2 + r_1), \\\\
         &\\eli = \\frac{ {sign1} \\ele_1 + {sign2} \\ele_2 }{ R_1 + r_2 + R_2 + r_1 }, \\\\
         &U_{index} = \\eli R_{index} = \\frac{ {sign1} \\ele_1 + {sign2} \\ele_2 }{ R_1 + r_2 + R_2 + r_1 } * R_{index}, \\\\
-        &P_{index} = \\eli^2 R_{index} = \\frac{ \\sqr{ {sign1} \\ele_1 + {sign2} \\ele_2 } }{ \\sqr{ R_1 + r_2 + R_2 + r_1 } } * R_{index}.
+        &P_{index} = \\eli^2 R_{index} = \\frac{ \\sqr{ {sign1} \\ele_1 + {sign2} \\ele_2 } R_{index} }{ \\sqr{ R_1 + r_2 + R_2 + r_1 } }.
     \\end{ align* }
 
     Отметим, что это ответ для тока $\\eli$ меняет знак, если отметить его на рисунке в другую сторону.
-    А вот выбор направления контура — не повлияет.
+    А вот выбор направления контура — не повлияет на ответ.
 ''')
 class Kirchgof_plain(variant.VariantTask):
     def GetUpdate(self, index=None, rotate1=None, rotate2=None, **kws):
@@ -635,14 +635,16 @@ class Compare_power(variant.VariantTask):  # Вишнякова - 17
             = \\eli_1\\cbr{ R_1 + \\frac{ \\eli_1 R_1 - \\eli_2 R_2 }{ \\eli_2 - \\eli_1 } }
             = \\eli_1 * \\frac{ R_1\\eli_2 - R_1\\eli_1 + \\eli_1 R_1 - \\eli_2 R_2 }{ \\eli_2 - \\eli_1 } \\\\
             &= \\eli_1 * \\frac{ R_1\\eli_2 - \\eli_2 R_2 }{ \\eli_2 - \\eli_1 }
-            = \\frac{ \\eli_1 \\eli_2 (R_1- R_2) }{ \\eli_2 - \\eli_1 }. \\\\
+            = \\frac{ \\eli_1 \\eli_2 (R_1 - R_2) }{ \\eli_2 - \\eli_1 }
+            \\equiv \\frac{ \\eli_1 \\eli_2 (R_2 - R_1) }{ \\eli_1 - \\eli_2 }.
     \\end{ align* }
 
     Короткое замыкание означает, что сопротивление внешней нагрузки 0:
     $$
         \\eli_\\text{ к. з. } = \\frac \\ele { 0 + r } = \\frac \\ele r
-            = \\frac{ \\cfrac{ \\eli_1 \\eli_2 (R_1- R_2) }{ \\eli_2 - \\eli_1 } }{ \\cfrac{ \\eli_1 R_1 - \\eli_2 R_2 }{ \\eli_2 - \\eli_1 } }
-            = \\frac{ \\eli_1 \\eli_2 (R_1- R_2) }{ \\eli_1 R_1 - \\eli_2 R_2 }.
+            = \\frac{ \\cfrac{ \\eli_1 \\eli_2 (R_1 - R_2) }{ \\eli_2 - \\eli_1 } }{ \\cfrac{ \\eli_1 R_1 - \\eli_2 R_2 }{ \\eli_2 - \\eli_1 } }
+            = \\frac{ \\eli_1 \\eli_2 (R_1 - R_2) }{ \\eli_1 R_1 - \\eli_2 R_2 }
+            \\equiv \\frac{ \\eli_1 \\eli_2 (R_2 - R_1) }{ \\eli_2 R_2 - \\eli_1 R_1 }.
     $$
 ''')
 class Short_i(variant.VariantTask):  # Вишнякова - 7
