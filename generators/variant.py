@@ -61,11 +61,14 @@ assert LaTeXFormatter({}).format('node 0.2', replace_comma=True) == r'node 0.2'
 assert LaTeXFormatter({'a': '0.20'}).format({'{a}': 0.3}, replace_comma=False) == {'0.20': 0.3}
 
 
-def check_unit_value(v):
-    if isinstance(v, str) and (('=' in v and len(v) >= 3) or re.match(r'-?\d.* \w', v, re.UNICODE)):
-        return UnitValue(v)
-    else:
-        return v
+def check_unit_value(value):
+    if isinstance(value, str):
+        if value.count('=') == 1 and len(value) >= 3:
+            return UnitValue(value)
+        elif re.match(r'-?\d.* \w', value, re.UNICODE):
+            return UnitValue(value)
+
+    return value
 
 
 assert isinstance(check_unit_value('2 суток'), UnitValue)
