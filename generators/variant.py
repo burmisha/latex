@@ -301,7 +301,8 @@ def answer_align(template_lines):
         assert not hasattr(cls, 'AnswerTemplate')
         lines = []
         for line in template_lines:
-            assert '&' in line, f'No & in {line[:40]}'
+            if '&' not in line:
+                line = '&' + line
             lines.append(escape_tex(line))
         template = '\\begin{{align*}}\n' + ' \\\\\n'.join(lines) + '\n\\end{{align*}}'
         cls.AnswerTemplate = template.replace('\n\n', '\n')

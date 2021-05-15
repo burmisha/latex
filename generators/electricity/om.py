@@ -350,7 +350,7 @@ class P_from_R_I(variant.VariantTask):
         = \\sqr{ \\frac{E:Value:s}{R:Value:s} } * {R:Value} * {t:Value} = {Q1_ratio:LaTeX}\\units{ Дж } \\approx {Q1:Value}, ''',
     '''{Q2:L} &= {I2:L}^2{R:L}{t:L} = \\sqr{ \\frac{E:L:s}{ {R:L} + {r:L} } } {R:L} {t:L}
         = \\sqr{ \\frac{E:Value:s}{ {R:Value} + {r:Value} } } * {R:Value} * {t:Value} = {Q2_ratio:LaTeX}\\units{ Дж } \\approx {Q2:Value}, ''',
-    '''{A1:L} &= q_1{E:L} = {I1:L}{t:L}{E:L} = \\frac{E:L:s}{ {R:L} } {t:L} {E:L}
+    '''{A1:L} &= q_1{E:L} = {I1:L}{t:L}{E:L} = \\frac{E:L:s}{R:L:s} {t:L} {E:L}
         = \\frac{ {E:L}^2 {t:L} }{R:L|s} = \\frac{ {E:Value|sqr} * {t:Value} }{R:Value:s}
         = {A1_ratio:LaTeX}\\units{ Дж } \\approx {A1:Value}, \\text{ положительна }, ''',
     '''{A2:L} &= q_2{E:L} = {I2:L}{t:L}{E:L} = \\frac{E:L:s}{ {R:L} + {r:L} } {t:L} {E:L}
@@ -706,12 +706,12 @@ class Kirchgof_double_2(variant.VariantTask):
         \\end{ cases }
         \\qquad \\implies \\qquad
         \\begin{ cases }
-            {I1:L} = \\frac{ {E1:L} - {E2:L} + {I2:L}{R2:L} }{ {R1:L} }, \\\\
-            {I3:L} = \\frac{ {I2:L}{R2:L} - {E2:L} + {E3:L} }{ {R3:L} }, \\\\
+            {I1:L} = \\frac{ {E1:L} - {E2:L} + {I2:L}{R2:L} }{R1:L:s}, \\\\
+            {I3:L} = \\frac{ {I2:L}{R2:L} - {E2:L} + {E3:L} }{R3:L:s}, \\\\
             {I1:L} + {I2:L} + {I3:L} = 0, \\\\
         \\end{ cases } \\implies \\\\
         \\implies
-            &{I2:L} + \\frac{ {E1:L} - {E2:L} + {I2:L}{R2:L} }{ {R1:L} } + \\frac{ {I2:L}{R2:L} - {E2:L} + {E3:L} }{ {R3:L} } = 0, \\\\
+            &{I2:L} + \\frac{ {E1:L} - {E2:L} + {I2:L}{R2:L} }{R1:L:s} + \\frac{ {I2:L}{R2:L} - {E2:L} + {E3:L} }{R3:L:s} = 0, \\\\
         &   {I2:L}\\cbr{ 1 + \\frac{R2:L:s}{R1:L:s} + \\frac{R2:L:s}{R3:L:s} } + \\frac{ {E1:L} - {E2:L} }{R1:L:s} + \\frac{ {E3:L} - {E2:L} }{R3:L:s} = 0, \\\\
         &   {I2:L} = \\cfrac{ \\cfrac{ {E2:L} - {E1:L} }{R1:L:s} + \\cfrac{ {E2:L} - {E3:L} }{R3:L:s} }{ 1 + \\cfrac{R2:L:s}{R1:L:s} + \\cfrac{R2:L:s}{R3:L:s} }
             = \\cfrac{ \\cfrac{ {E2:V} - {E1:V} }{R1:V:s} + \\cfrac{ {E2:V} - {E3:V} }{R3:V:s} }{ 1 + \\cfrac{R2:V:s}{R1:V:s} + \\cfrac{R2:V:s}{R3:V:s} }
@@ -732,8 +732,8 @@ class Kirchgof_double_2(variant.VariantTask):
         \\frac{ ({E2:L} - {E1:L}){R3:L} + ({E2:L} - {E3:L}){R1:L} }{ {R1:L}{R3:L} + {R2:L}{R3:L} + {R2:L}{R1:L} },
         \\\\
     {I1:L} 
-        &=  \\frac{ {E1:L} - {E2:L} + {I2:L}{R2:L} }{ {R1:L} } 
-        =   \\frac{ {E1:L} - {E2:L} + \\cfrac{ ({E2:L} - {E1:L}){R3:L} + ({E2:L} - {E3:L}){R1:L} }{ {R1:L}{R3:L} + {R2:L}{R3:L} + {R2:L}{R1:L} } * {R2:L} }{ {R1:L} } = \\\\
+        &=  \\frac{ {E1:L} - {E2:L} + {I2:L}{R2:L} }{R1:L:s} 
+        =   \\frac{ {E1:L} - {E2:L} + \\cfrac{ ({E2:L} - {E1:L}){R3:L} + ({E2:L} - {E3:L}){R1:L} }{ {R1:L}{R3:L} + {R2:L}{R3:L} + {R2:L}{R1:L} } * {R2:L} }{R1:L:s} = \\\\
         &=  \\frac{ 
             {E1:L}{R1:L}{R3:L} + {E1:L}{R2:L}{R3:L} + {E1:L}{R2:L}{R1:L}
             - {E2:L}{R1:L}{R3:L} - {E2:L}{R2:L}{R3:L} - {E2:L}{R2:L}{R1:L}

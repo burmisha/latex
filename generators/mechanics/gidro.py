@@ -7,7 +7,7 @@ from generators.helpers import Consts
     Определите высоту столба жидкости. Принять {rho:Task|e}, {Consts.g_ten:Task|e}.
 ''')
 @variant.answer_short(
-    '{p:L} = {rho:L}g{h:L} \\implies {h:L} = \\frac{ {p:L:s} }{ g{rho:L} } '
+    '{p:L} = {rho:L}g{h:L} \\implies {h:L} = \\frac{p:L:s}{ g{rho:L} } '
     '= \\frac{ {p:Value:s} }{ {Consts.g_ten:Value} * {rho:Value} } = {h:Value}.'
 )
 @variant.answer_test('{h:TestAnswer}')
@@ -96,8 +96,8 @@ class Ch_6_10(variant.VariantTask):
 ''')
 @variant.answer_short(
     '{rho:L}{Consts.g_ten:L}{h1:L} = {Consts.water.rho:L}{Consts.g_ten:L}{h2:L} \\implies '
-    '{h2:L} = {h1:L} \\frac{ {rho:L} }{ {Consts.water.rho:L} } '
-    '= {h1:Value} * \\frac{ {rho:Value} }{ {Consts.water.rho:Value} } '
+    '{h2:L} = {h1:L} \\frac{rho:L:s}{Consts.water.rho:L:s} } '
+    '= {h1:Value} * \\frac{rho:Value:s}{Consts.water.rho:Value:s} '
     '= {h2:Value}'
 )
 @variant.answer_test({'{h2:TestAnswer}': 1, '{h2_m:TestAnswer}': 0.7})
@@ -136,11 +136,11 @@ class Ch_6_16(variant.VariantTask):
     Ответ выразите в сантиметрах. {Consts.water.rho:Task|e}.
 ''')
 @variant.answer_align([
-    '{S1:L}h_1 &= {S2:L}h_2 \\implies h_1 = h_2 \\frac{ {S2:L} }{ {S1:L} } ',
-    '\\frac{ {m:L}{Consts.g_ten:L} }{ {S1:L} } &= {Consts.water.rho:L}{Consts.g_ten:L}(h_1 + h_2) '
-    '= {Consts.water.rho:L}{Consts.g_ten:L} * h_2 \\cbr{ 1 + \\frac{ {S2:L} }{ {S1:L} } }',
+    '{S1:L}h_1 &= {S2:L}h_2 \\implies h_1 = h_2 \\frac{S2:L:s}{S1:L:s} ',
+    '\\frac{ {m:L}{Consts.g_ten:L} }{S1:L:s} &= {Consts.water.rho:L}{Consts.g_ten:L}(h_1 + h_2) '
+    '= {Consts.water.rho:L}{Consts.g_ten:L} * h_2 \\cbr{ 1 + \\frac{S2:L:s}{S1:L:s} }',
     'h_2 &= \\frac{ {m:L}{Consts.g_ten:L} }{ {S1:L}{Consts.water.rho:L}{Consts.g_ten:L} } * '
-    '\\frac{ {S1:L} }{ {S1:L} + {S2:L} } = \\frac{ {m:L} }{ {Consts.water.rho:L}({S1:L} + {S2:L}) }'
+    '\\frac{S1:L:s}{ {S1:L} + {S2:L} } = \\frac{m:L:s}{ {Consts.water.rho:L}({S1:L} + {S2:L}) }'
     ' = {h2:Value}',
 ])
 @variant.answer_test('{h2:TestAnswer}')

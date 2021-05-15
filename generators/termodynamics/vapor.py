@@ -71,10 +71,10 @@ class GetPhi(variant.VariantTask):
 
     Другой вариант решения (через плотности) приводит в результату:
     $$
-        N = {Consts.N_A:L} \\nu = {Consts.N_A:L} * \\frac{ m }{ {mu:L} }
-          = {Consts.N_A:L} \\frac{ \\rho V }{ {mu:L} }
-          = {Consts.N_A:L} \\frac{ \\varphi * {rho_np:L} * V }{ {mu:L} }
-          = {Consts.N_A:V} * \\frac{ {phi_share} * {rho_np:V} * {V:V} }{ {mu:V} }
+        N = {Consts.N_A:L} \\nu = {Consts.N_A:L} * \\frac{ m }{mu:L:s}
+          = {Consts.N_A:L} \\frac{ \\rho V }{mu:L:s}
+          = {Consts.N_A:L} \\frac{ \\varphi * {rho_np:L} * V }{mu:L:s}
+          = {Consts.N_A:V} * \\frac{ {phi_share} * {rho_np:V} * {V:V} }{mu:V:s}
           \\approx {N2:V}.
     $$
 ''')
@@ -127,7 +127,7 @@ class GetNFromPhi(variant.VariantTask):
 
     После нагрева парциальное давление пара возрастёт:
     $$
-        \\frac{ {P1:L} * V }{ {T1:L} } = \\nu R = \\frac{ {P2:L} * V }{ {T2:L} }
+        \\frac{ {P1:L} * V }{T1:L:s} = \\nu R = \\frac{ {P2:L} * V }{T2:L:s}
         \\implies {P2:L} = {P1:L} * \\frac{T2:L:s}{T1:L:s} = {P1:V} * \\frac{T2:V:s}{T1:V:s} \\approx {P2:V}.
     $$
 
@@ -190,7 +190,7 @@ class GetPFromPhi(variant.VariantTask):
 
     Сперва определим новое давление сухого воздуха из уравнения состояния идеального газа:
     $$
-        \\frac{ {P_air_new:L} * V }{ {T2:L} } = \\nu R = \\frac{ {P_air_old:L} * V }{ {T1:L} }
+        \\frac{ {P_air_new:L} * V }{T2:L:s} = \\nu R = \\frac{ {P_air_old:L} * V }{T1:L:s}
         \\implies {P_air_new:L} = {P_air_old:L} * \\frac{T2:L:s}{T1:L:s} = {P_air_old:V} * \\frac{T2:V:s}{T1:V:s} \\approx {P_air_new:V}.
     $$
 

@@ -251,7 +251,7 @@ class W_from_Q_C(variant.VariantTask):  # Rymkevich762
     Q_1
         = Q_2
         = C{U:L}
-        = \\frac{ {U:L} }{ \\frac1{ C_1 } + \\frac1{ C_2 } }
+        = \\frac{U:L:s}{ \\frac1{ C_1 } + \\frac1{ C_2 } }
         = \\frac{ C_1C_2{U:L} }{ C_1 + C_2 }
         = \\frac{
             {C1:Value} * {C2:Value} * {U:Value}
@@ -287,7 +287,7 @@ class CondPosl(variant.VariantTask):
     Q_1
         = Q_2
         = C{U:L}
-        = \\frac{ {U:L} }{ \\frac1{ C_1 } + \\frac1{ C_2 } }
+        = \\frac{U:L:s}{ \\frac1{ C_1 } + \\frac1{ C_2 } }
         = \\frac{ C_1C_2{U:L} }{ C_1 + C_2 }
         = \\frac{
             {C1:Value} * {C2:Value} * {U:Value}
