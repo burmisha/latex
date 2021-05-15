@@ -494,6 +494,10 @@ def get_all_variants():
             classes={'electricity.om': ['Update_external_R', 'Kirchgof_triple']},
         ),
         Work(
+            task_id='2021-05-14 10',
+            classes={'electricity.om': ['Compare_power', 'Short_i', 'Kirchgof_plain']},
+        ),
+        Work(
             task_id='2021-05-13 9',
             classes={'atomic.radioactive': ['BK_53_01', 'BK_53_02', 'BK_53_03', 'BK_53_12']},
         ),
