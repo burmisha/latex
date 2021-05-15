@@ -7,7 +7,7 @@ for line in $(cat <BurmistrovSanduleanu2012SpamText.tex | sed 's|utf8|cp1251|g' 
 do
 	# echo $line
     if [ "${line:1:5}" = "input" ]; then
-    	# f = 
+    	# f =
     	echo " " >>$file
     	cat $(echo $line | sed 's|\\input{||' | sed 's|}||' |sed 's|.tex||'| awk '{print $1".tex"}') >>$file
     	echo " " >>$file

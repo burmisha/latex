@@ -645,7 +645,7 @@ class Kirchgof_double_2(variant.VariantTask):
 
 
 @variant.text('''
-    Определите ток $\\eli_{index}$, протекающий через резистор $R_{index}$ (см. рис.), 
+    Определите ток $\\eli_{index}$, протекающий через резистор $R_{index}$ (см. рис.),
     направление этого тока и разность потенциалов $U_{index}$ на этом резисторе,
     если {R1:Task:e}, {R2:Task:e}, {R3:Task:e}, {E1:Task:e}, {E2:Task:e}, {E3:Task:e}.
     Внутренним сопротивлением всех трёх ЭДС пренебречь.
@@ -653,7 +653,7 @@ class Kirchgof_double_2(variant.VariantTask):
 
     \\begin{ tikzpicture }[circuit ee IEC, thick]
         \\foreach \\contact/\\x in { 1/0, 2/3, 3/6 }
-        { 
+        {
             \\node [contact] (top contact \\contact) at (\\x, 0) {  };
             \\node [contact] (bottom contact \\contact) at (\\x, 4) {  };
         }
@@ -684,7 +684,7 @@ class Kirchgof_double_2(variant.VariantTask):
 
     \\begin{ tikzpicture }[circuit ee IEC, thick]
         \\foreach \\contact/\\x in { 1/0, 2/3, 3/6 }
-        { 
+        {
             \\node [contact] (top contact \\contact) at (\\x, 0) {  };
             \\node [contact] (bottom contact \\contact) at (\\x, 4) {  };
         }
@@ -721,56 +721,56 @@ class Kirchgof_double_2(variant.VariantTask):
             = {I2_ratio:LaTeX}\\units{ А } * {R2:V} = {U2_ratio:LaTeX}\\units{ В } \\approx {U2:Value}.
     \\end{ align* }
 
-    Одну пару силы тока и напряжения получили. Для некоторых вариантов это уже ответ, но не у всех. 
+    Одну пару силы тока и напряжения получили. Для некоторых вариантов это уже ответ, но не у всех.
     Для упрощения записи преобразуем (чтобы избавитсья от 4-этажной дроби) и подставим в уже полученные уравнения:
 
     \\begin{ align* }
-    {I2:L} 
+    {I2:L}
         &=
         \\frac{ \\frac{ {E2:L} - {E1:L} }{R1:L:s} + \\frac{ {E2:L} - {E3:L} }{R3:L:s} }{ 1 + \\frac{R2:L:s}{R1:L:s} + \\frac{R2:L:s}{R3:L:s} }
         =
         \\frac{ ({E2:L} - {E1:L}){R3:L} + ({E2:L} - {E3:L}){R1:L} }{ {R1:L}{R3:L} + {R2:L}{R3:L} + {R2:L}{R1:L} },
         \\\\
-    {I1:L} 
-        &=  \\frac{ {E1:L} - {E2:L} + {I2:L}{R2:L} }{R1:L:s} 
+    {I1:L}
+        &=  \\frac{ {E1:L} - {E2:L} + {I2:L}{R2:L} }{R1:L:s}
         =   \\frac{ {E1:L} - {E2:L} + \\cfrac{ ({E2:L} - {E1:L}){R3:L} + ({E2:L} - {E3:L}){R1:L} }{ {R1:L}{R3:L} + {R2:L}{R3:L} + {R2:L}{R1:L} } * {R2:L} }{R1:L:s} = \\\\
-        &=  \\frac{ 
+        &=  \\frac{
             {E1:L}{R1:L}{R3:L} + {E1:L}{R2:L}{R3:L} + {E1:L}{R2:L}{R1:L}
             - {E2:L}{R1:L}{R3:L} - {E2:L}{R2:L}{R3:L} - {E2:L}{R2:L}{R1:L}
             + {E2:L}{R3:L}{R2:L} - {E1:L}{R3:L}{R2:L} + {E2:L}{R1:L}{R2:L} - {E3:L}{R1:L}{R2:L}
-        }{ {R1:L} * \\cbr{ {R1:L}{R3:L} + {R2:L}{R3:L} + {R2:L}{R1:L} } } 
+        }{ {R1:L} * \\cbr{ {R1:L}{R3:L} + {R2:L}{R3:L} + {R2:L}{R1:L} } }
         = \\\\ &=
-        \\frac{ 
+        \\frac{
             {E1:L}\\cbr{ {R1:L}{R3:L} + {R2:L}{R3:L} + {R2:L}{R1:L} - {R3:L}{R2:L} }
             + {E2:L}\\cbr{ - {R1:L}{R3:L} - {R2:L}{R3:L} - {R2:L}{R1:L} + {R3:L}{R2:L} + {R1:L}{R2:L} }
             - {E3:L}{R1:L}{R2:L}
         }{ {R1:L} * \\cbr{ {R1:L}{R3:L} + {R2:L}{R3:L} + {R2:L}{R1:L} } }
         = \\\\ &=
-        \\frac{ 
+        \\frac{
             {E1:L}\\cbr{ {R1:L}{R3:L} + {R2:L}{R1:L} }
-            + {E2:L}\\cbr{ - {R1:L}{R3:L} } 
+            + {E2:L}\\cbr{ - {R1:L}{R3:L} }
             - {E3:L}{R1:L}{R2:L}
         }{ {R1:L} * \\cbr{ {R1:L}{R3:L} + {R2:L}{R3:L} + {R2:L}{R1:L} } }
         =
-        \\frac{ 
+        \\frac{
             {E1:L}\\cbr{ {R3:L} + {R2:L} } - {E2:L}{R3:L} - {E3:L}{R2:L}
         }{ {R1:L}{R3:L} + {R2:L}{R3:L} + {R2:L}{R1:L} }
         = \\\\ &=
-        \\frac{ 
+        \\frac{
             ({E1:L} - {E3:L}){R2:L} + ({E1:L} - {E2:L}){R3:L}
         }{ {R1:L}{R3:L} + {R2:L}{R3:L} + {R2:L}{R1:L} }
         =
         \\frac{
             \\cfrac{ {E1:L} - {E3:L} }{R3:L:s} + \\cfrac{ {E1:L} - {E2:L} }{R2:L:s}
-        }{ \\cfrac{R1:L:s}{R2:L:s} + 1 + \\cfrac{R1:L:s}{R3:L:s} } 
+        }{ \\cfrac{R1:L:s}{R2:L:s} + 1 + \\cfrac{R1:L:s}{R3:L:s} }
         =
         \\frac{
             \\cfrac{ {E1:V} - {E3:V} }{R3:V:s} + \\cfrac{ {E1:V} - {E2:V} }{R2:V:s}
-        }{ \\cfrac{R1:V:s}{R2:V:s} + 1 + \\cfrac{R1:V:s}{R3:V:s} } 
+        }{ \\cfrac{R1:V:s}{R2:V:s} + 1 + \\cfrac{R1:V:s}{R3:V:s} }
         = {I1_ratio:LaTeX}\\units{ А } \\approx {I1:Value}. \\\\
-    {U1:L} 
+    {U1:L}
         &=
-        {I1:L}{R1:L} 
+        {I1:L}{R1:L}
         =
         \\frac{
             \\cfrac{ {E1:L} - {E3:L} }{R3:L:s} + \\cfrac{ {E1:L} - {E2:L} }{R2:L:s}
@@ -781,11 +781,11 @@ class Kirchgof_double_2(variant.VariantTask):
 
     Если вы проделали все эти вычисления выше вместе со мной, то
     \\begin{{itemize}}
-        \\item вы совершили ошибку, выбрав неверный путь решения: 
+        \\item вы совершили ошибку, выбрав неверный путь решения:
         слишком длинное решение, очень легко ошибиться в индексах, дробях, знаках или потерять какой-то множитель,
         \\item можно было выразить из исходной системы другие токи и получить сразу нажный вам,
         а не какой-то 2-й,
-        \\item можно было сэкономить: все три резистора и ЭДС соединены одинаково, 
+        \\item можно было сэкономить: все три резистора и ЭДС соединены одинаково,
         поэтому ответ для 1-го резистора должен отличаться лишь перестановкой индексов (этот факт крайне полезен при проверке ответа, у нас всё сошлось),
         я специально подгонял выражение для {I1:L:e} к этому виду, вынося за скобки и преобразуя дробь,
         \\item вы молодец, потому что не побоялись и получили верный ответ грамотным способом,
@@ -793,45 +793,45 @@ class Kirchgof_double_2(variant.VariantTask):
     так что переходим к третьему резистору. Будет похоже, но кого это когда останавливало...
 
     \\begin{ align* }
-    {I3:L} 
-        &=  \\frac{ {I2:L}{R2:L} - {E2:L} + {E3:L} }{R3:L:s} 
+    {I3:L}
+        &=  \\frac{ {I2:L}{R2:L} - {E2:L} + {E3:L} }{R3:L:s}
         =
         \\cfrac{
-            \\cfrac{ 
+            \\cfrac{
                 ({E2:L} - {E1:L}){R3:L} + ({E2:L} - {E3:L}){R1:L}
-            }{ 
+            }{
                 {R1:L}{R3:L} + {R2:L}{R3:L} + {R2:L}{R1:L}
             } * {R2:L} - {E2:L} + {E3:L} }{R3:L:s}
         = \\\\ &=
-        \\frac{ 
-            {E2:L}{R3:L}{R2:L} - {E1:L}{R3:L}{R2:L} + {E2:L}{R1:L}{R2:L} - {E3:L}{R1:L}{R2:L} 
+        \\frac{
+            {E2:L}{R3:L}{R2:L} - {E1:L}{R3:L}{R2:L} + {E2:L}{R1:L}{R2:L} - {E3:L}{R1:L}{R2:L}
             - {E2:L}{R1:L}{R3:L} - {E2:L}{R2:L}{R3:L} - {E2:L}{R2:L}{R1:L}
             + {E3:L}{R1:L}{R3:L} + {E3:L}{R2:L}{R3:L} + {E3:L}{R2:L}{R1:L}
-        }{ \\cbr{ {R1:L}{R3:L} + {R2:L}{R3:L} + {R2:L}{R1:L} } * {R3:L} } 
+        }{ \\cbr{ {R1:L}{R3:L} + {R2:L}{R3:L} + {R2:L}{R1:L} } * {R3:L} }
         = \\\\ &=
-        \\frac{ 
+        \\frac{
             - {E1:L}{R3:L}{R2:L} - {E2:L}{R1:L}{R3:L} + {E3:L}{R1:L}{R3:L} + {E3:L}{R2:L}{R3:L}
-        }{ \\cbr{ {R1:L}{R3:L} + {R2:L}{R3:L} + {R2:L}{R1:L} } * {R3:L} } 
+        }{ \\cbr{ {R1:L}{R3:L} + {R2:L}{R3:L} + {R2:L}{R1:L} } * {R3:L} }
         =
-        \\frac{ 
+        \\frac{
             - {E1:L}{R2:L} - {E2:L}{R1:L} + {E3:L}{R1:L} + {E3:L}{R2:L}
-        }{ {R1:L}{R3:L} + {R2:L}{R3:L} + {R2:L}{R1:L} } 
+        }{ {R1:L}{R3:L} + {R2:L}{R3:L} + {R2:L}{R1:L} }
         = \\\\ &=
-        \\frac{ 
+        \\frac{
             {R1:L}({E3:L} - {E2:L}) + {R2:L}({E3:L} - {E1:L})
         }{ {R1:L}{R3:L} + {R2:L}{R3:L} + {R2:L}{R1:L} }
         =
         \\frac{
             \\cfrac{ {E3:L} - {E2:L} }{R2:L:s} + \\cfrac{ {E3:L} - {E1:L} }{R1:L:s}
-        }{ \\cfrac{R3:L:s}{R2:L:s} + \\cfrac{R3:L:s}{R1:L:s} + 1 } 
+        }{ \\cfrac{R3:L:s}{R2:L:s} + \\cfrac{R3:L:s}{R1:L:s} + 1 }
         =
         \\frac{
             \\cfrac{ {E3:V} - {E2:V} }{R2:V:s} + \\cfrac{ {E3:V} - {E1:V} }{R1:V:s}
-        }{ \\cfrac{R3:V:s}{R2:V:s} + \\cfrac{R3:V:s}{R1:V:s} + 1 } 
+        }{ \\cfrac{R3:V:s}{R2:V:s} + \\cfrac{R3:V:s}{R1:V:s} + 1 }
         = {I3_ratio:LaTeX}\\units{ А } \\approx {I3:Value}. \\\\
-    {U3:L} 
+    {U3:L}
         &=
-        {I3:L}{R3:L} 
+        {I3:L}{R3:L}
         =
         \\frac{
             \\cfrac{ {E3:L} - {E2:L} }{R2:L:s} + \\cfrac{ {E3:L} - {E1:L} }{R1:L:s}
@@ -841,7 +841,7 @@ class Kirchgof_double_2(variant.VariantTask):
     \\end{ align* }
 
     Положительные ответы говорят, что мы угадали на рисунке направление тока (тут нет нашей заслуги, повезло),
-    отрицательные — что не угадали (и в этом нет ошибки), и ток течёт в противоположную сторону. 
+    отрицательные — что не угадали (и в этом нет ошибки), и ток течёт в противоположную сторону.
     Напомним, что направление тока — это направление движения положительных зарядов,
     а в металлах носители заряда — электроны, которые заряжены отрицательно.
 '''
@@ -852,7 +852,7 @@ class Kirchgof_triple(variant.VariantTask):
             Fraction(numerator=E1.Value - E3.Value, denominator=R3.Value)
             + Fraction(numerator=E1.Value - E2.Value, denominator=R2.Value)
         ) / (
-            Fraction(numerator=R1.Value, denominator=R2.Value) 
+            Fraction(numerator=R1.Value, denominator=R2.Value)
             + Fraction(numerator=R1.Value, denominator=R3.Value)
             + 1
         )
@@ -860,7 +860,7 @@ class Kirchgof_triple(variant.VariantTask):
             Fraction(numerator=E2.Value - E1.Value, denominator=R1.Value)
             + Fraction(numerator=E2.Value - E3.Value, denominator=R3.Value)
         ) / (
-            Fraction(numerator=R2.Value, denominator=R1.Value) 
+            Fraction(numerator=R2.Value, denominator=R1.Value)
             + Fraction(numerator=R2.Value, denominator=R3.Value)
             + 1
         )
@@ -868,7 +868,7 @@ class Kirchgof_triple(variant.VariantTask):
             Fraction(numerator=E3.Value - E1.Value, denominator=R1.Value)
             + Fraction(numerator=E3.Value - E2.Value, denominator=R2.Value)
         ) / (
-            Fraction(numerator=R3.Value, denominator=R1.Value) 
+            Fraction(numerator=R3.Value, denominator=R1.Value)
             + Fraction(numerator=R3.Value, denominator=R2.Value)
             + 1
         )
@@ -899,10 +899,10 @@ class Kirchgof_triple(variant.VariantTask):
 
 @variant.solution_space(180)
 @variant.text('''
-    При подключении к источнику тока с ЭДС равным {E:Value:e} 
+    При подключении к источнику тока с ЭДС равным {E:Value:e}
     резистора сопротивлением {R1:Value:e} в цепи течёт ток силой {I1:Value:e}.
     После этого {how} с первым проводником подключают ещё один сопротивлением {R2:Value:e}.
-    Определите 
+    Определите
     \\begin{{itemize}}
         \\item внутреннее сопротивление источника тока,
         \\item новую силу тока в цепи,
@@ -950,7 +950,7 @@ class Update_external_R(variant.VariantTask):
 
 
 @variant.text('''
-    Определите эквивалентное сопротивление цепи на рисунке (между выделенными на рисунке контактами), 
+    Определите эквивалентное сопротивление цепи на рисунке (между выделенными на рисунке контактами),
     если известны сопротивления всех резисторов: {R1:Task:e}, {R2:Task:e}, {R3:Task:e}, {R4:Task:e}.
     При каком напряжении поданном на эту цепь, в ней потечёт ток равный {I:Task:e}?
 
@@ -988,7 +988,7 @@ class Circuit_four(variant.VariantTask):
 
 
 @variant.text('''
-    Определите показания амперметра ${index_a}$ (см. рис.) и разность потенциалов на резисторе ${index_r}$, 
+    Определите показания амперметра ${index_a}$ (см. рис.) и разность потенциалов на резисторе ${index_r}$,
     если сопротивления всех резисторов равны: $R_1 = R_2 = R_3 = R_4 = R_5 = R_6 = {R:Task}$,
     а напряжение, поданное на цепь, равно {U:Task:e}.
     Ответы получите в виде несократимых дробей, а также определите приближённые значения. Амперметры считать идеальными.

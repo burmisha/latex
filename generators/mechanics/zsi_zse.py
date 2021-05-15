@@ -144,7 +144,7 @@ class Ch_3_24(variant.VariantTask):
 # @variant.arg(u=['u = %.1f м / с' % u for u in [1.0, 1.5, 2.0]])
 @variant.answer_align([
     '&\\text{ ЗСИ в проекции на ось, соединяющую центры тел: } m_1 v_1 - m_2 v_1 = (m_1 + m_2) v_2 \\implies',
-    '''&\\implies \\frac{ m_1 }{ m_2 } v_1 - v_1 = \\cbr{ \\frac{ m_1 }{ m_2 } + 1 } v_2 \\implies 
+    '''&\\implies \\frac{ m_1 }{ m_2 } v_1 - v_1 = \\cbr{ \\frac{ m_1 }{ m_2 } + 1 } v_2 \\implies
     \\frac{ m_1 }{ m_2 } (v_1 - v_2) = v_2 + v_1 \\implies \\frac{ m_1 }{ m_2 } = \\frac{ v_2 + v_1 }{ v_1 - v_2 } = {answer}''',
 ])
 @variant.answer_test('{answer}')

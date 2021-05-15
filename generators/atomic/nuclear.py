@@ -6,7 +6,7 @@ def get_element_answer(what, element):
 	return {
         'протонов': f'{element:protons}',
         'нейтронов': f'{element:neutrons}',
-        'электронов': f'{element:electrons}', 
+        'электронов': f'{element:electrons}',
         'нуклонов': f'{element:nuclons}',
     }[what]
 

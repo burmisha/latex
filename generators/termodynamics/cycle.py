@@ -199,8 +199,8 @@ class Rectangle_T(variant.VariantTask):
         \\draw[dashed] (0, 2) node[left] { $P_1 = P_0$ } -| (3, 0) node[below] { $V_1 = V_2 = V_0$  };
         \\draw[dashed] (0, 6) node[left] { $P_2 = P_3 = {alpha}P_0$ } -| (9, 0) node[below] { $V_3 = {beta}V_0$ };
 
-        \\draw (3, 2) node[above left]{ 1 } node[below left]{ $T_1 = T_0$ } 
-               (3, 6) node[below left]{ 2 } node[above]{ $T_2 = {alpha}T_0$ } 
+        \\draw (3, 2) node[above left]{ 1 } node[below left]{ $T_1 = T_0$ }
+               (3, 6) node[below left]{ 2 } node[above]{ $T_2 = {alpha}T_0$ }
                (9, 6) node[above right]{ 3 } node[below right]{ $T_3 = {t}T_0$ };
         \\draw[midar] (3, 2) -- (3, 6);
         \\draw[midar] (3, 6) -- (9, 6);
@@ -233,8 +233,8 @@ class Rectangle_T(variant.VariantTask):
         \\draw[dashed] (0, 5) node[left] { $P$ } -| (4.5, 0) node[below] { $V$ };
         \\draw[dashed] (0, 4.6) node[left] { $P'$ } -| (5.1, 0) node[below] { $V'$ };
 
-        \\draw (3, 2) node[above left]{ 1 } node[below left]{ $T_1 = T_0$ } 
-               (3, 6) node[below left]{ 2 } node[above]{ $T_2 = {alpha}T_0$ } 
+        \\draw (3, 2) node[above left]{ 1 } node[below left]{ $T_1 = T_0$ }
+               (3, 6) node[below left]{ 2 } node[above]{ $T_2 = {alpha}T_0$ }
                (9, 2) node[above right]{ 3 } node[below right]{ $T_3 = {alpha}T_0$ };
         \\draw[midar] (3, 2) -- (3, 6);
         \\draw[midar] (3, 6) -- (9, 2);

@@ -327,20 +327,22 @@ def no_args(cls):
 
 def arg(**kws):
     def decorator(cls):
-        assert len(kws) == 1, f'Invalid arg for {cls}: {kws}'
+        assert len(kws) == 1, f'Expected only one arg for {cls}, got {kws}'
+
         if hasattr(cls, '_vars'):
             assert isinstance(cls._vars, Vars), f'Invalid _vars for {cls}: {cls._vars}'
         else:
             cls._vars = Vars()
+
         for key, value in kws.items():
             if isinstance(value, tuple):
                 assert len(value) == 2
-                assert '{}' in value[0], f'No {{}} in {template}'
-                cls._vars.add(
-                    key, [value[0].format(option) for option in value[1]]
-                )
+                assert '{}' in value[0], f'No {{}} in {value}'
+                options = [value[0].format(option) for option in value[1]]
             else:
-                cls._vars.add(key, value)
+                options = value
+            cls._vars.add(key, options)
+
         return cls
 
     return decorator

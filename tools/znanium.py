@@ -80,7 +80,7 @@ def run(args):
     rootPath = library.files.UdrPath('Материалы - Znanium')
     for bookName, bookUrl, dataUrl, password, pageCount, descDict in [
         (
-            'Горбушин', 
+            'Горбушин',
             'https://znanium.com/catalog/document?id=338171',
             'https://znanium.com/read?id=338172',
             'нулевые',

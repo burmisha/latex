@@ -1,4 +1,4 @@
-import itertools  
+import itertools
 
 TOTAL_TIMES = {
     2: ('два', 'раза'),

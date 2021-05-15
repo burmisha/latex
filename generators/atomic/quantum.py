@@ -11,7 +11,7 @@ from generators.helpers import UnitValue, Consts
     Длина волны излучения {length:Value:e}. {h:Task:e}.
 ''')
 @variant.answer_short('''
-    N 
+    N
         = \\frac{ E_{ \\text { общая } } }{ E_{ \\text { одного фотона } } }
         = \\frac{ Pt }{ h\\nu } = \\frac{ Pt }{ h \\frac c { \\lambda } }
         = \\frac{ Pt\\lambda }{ hc }
@@ -45,7 +45,7 @@ class Fotons(variant.VariantTask):
 
 # Длина волны рентгеновского излучения больше длины волны видимого излучения.
 # Частота волны инфракрасного излучения больше частоты волны гамма-излучения.
-# Скорость распространения инфракрасного излучения составляет 200000 км/с 
+# Скорость распространения инфракрасного излучения составляет 200000 км/с
 # Скорость любого электромагнитного излучения в вакууме составляет ровно 299792458 м/с. Там целое число в дробной части (после запятой) исключительно нули.
 # Ультрафиолетовое излучение невидимо для человеческого глаза, однако при высокой интенсивности может нанести вред здоровью.
 # Чем больше длина волны, тем ниже способность этой волны огибать препятствия.
@@ -53,7 +53,7 @@ class Fotons(variant.VariantTask):
 
 @variant.solution_space(80)
 @variant.text('''
-    Определите название цвета по длине волны в вакууме 
+    Определите название цвета по длине волны в вакууме
     и частоту колебаний электромагнитного поля в ней:
     \\begin{{enumerate}}
         \\item {q1:V:e},
@@ -70,7 +70,7 @@ class Fotons(variant.VariantTask):
         \\item ${q4:V} \\to$ {a4}, $\\nu_4 = \\frac c{ \\lambda_4 } \\approx {nu4:V}$.
     \\end{{enumerate}}
 
-    $\\nu = \\frac 1 T = \\frac c{ \\lambda } = \\frac {Consts.c_4:Value:s}{ l * {mkm:V} } \\approx \\frac{nu_0:V:s}l$, 
+    $\\nu = \\frac 1 T = \\frac c{ \\lambda } = \\frac {Consts.c_4:Value:s}{ l * {mkm:V} } \\approx \\frac{nu_0:V:s}l$,
     где $l$~--- численное значение длины волны в мкм.
 ''')
 @variant.arg(q1__a1=[('450 нм', 'синий'), ('580 нм', 'жёлтый '), ('660 нм', 'красный')])
@@ -92,8 +92,8 @@ class ColorNameFromLambda(variant.VariantTask):
 
 @variant.solution_space(80)
 @variant.text('''
-    Определите {what} колебаний вектора напряженности {of} 
-    в электромагнитной волне в вакууме, длина который составляет {lmbd:V:e}. 
+    Определите {what} колебаний вектора напряженности {of}
+    в электромагнитной волне в вакууме, длина который составляет {lmbd:V:e}.
 ''')
 @variant.answer_align([
     '\\lambda &= c T \\implies T = \\frac{ \\lambda }{ c } = \\frac{lmbd:V:s}{Consts.c:V:s} = {T:V},',
@@ -112,7 +112,7 @@ class T_Nu_from_lambda(variant.VariantTask):
 
 @variant.solution_space(80)
 @variant.text('''
-    Определите энергию фотона излучения частотой {nu:V:e}. 
+    Определите энергию фотона излучения частотой {nu:V:e}.
     Ответ получите в джоулях и в электронвольтах.
 ''')
 @variant.answer_short('E = h \\nu = {Consts.h:V} * {nu:V} \\approx {E:V} \\approx {E_eV:V}')

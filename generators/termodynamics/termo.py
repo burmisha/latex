@@ -305,11 +305,11 @@ class A_from_DeltaT(variant.VariantTask):
 @variant.arg(what=['количество теплоты, сообщённое газу', 'работу, совершённую газом'])
 @variant.answer_align([
     '''Q &= A' + \\Delta U, A' = \\frac 1{N} Q \\implies Q * \\cbr{ 1 - \\frac 1{N} } = \\Delta U \\implies '''
-    '''Q = \\frac{ \\Delta U }{ 1 - \\frac 1{N} } = \\frac{ {dU:V} }{ 1 - \\frac 1{N} } \\approx {Q:V}.''',
+    '''Q = \\frac{ \\Delta U }{ 1 - \\frac 1{N} } = \\frac{dU:V:s}{ 1 - \\frac 1{N} } \\approx {Q:V}.''',
     '''A' &= \\frac 1{N} Q
     = \\frac 1{N} * \\frac{ \\Delta U }{ 1 - \\frac 1{N} }
     = \\frac{ \\Delta U }{ {N} - 1 }
-    = \\frac{ {dU:V} }{ {N} - 1 } \\approx {A:V}.''',
+    = \\frac{dU:V:s}{ {N} - 1 } \\approx {A:V}.''',
 ])
 class Q_from_DeltaU(variant.VariantTask):
     def GetUpdate(self, N=None, dU=None, **kws):

@@ -405,7 +405,6 @@ class YoutubePlaylist:
                 return True, suffix
 
         raise RuntimeError(f'Could not resolve duplicate {title!r}, check {url}')
-                    
 
     def ListVideos(self):
         log.debug(f'Looking for videos in {cm(self._Url, color=color.Cyan)}')

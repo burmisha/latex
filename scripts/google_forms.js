@@ -10,7 +10,7 @@ function newSimpleForm() {
 
     var nameItem = form.addTextItem();
     nameItem.setTitle('Имя Фамилия');
-      
+
     var classItem = form.addMultipleChoiceItem();
     classItem.setTitle('Класс (на сентябрь 2020 г.)')
         .setChoices([
@@ -27,7 +27,7 @@ function newSimpleForm() {
             schoolItem.createChoice('554, Москва'),
         ])
         .showOtherOption(true);
-      
+
     var counts = [8, 18, 8];
     for (const [partIndex, partSize] of counts.entries()) {
         var part = partIndex + 1;
@@ -35,7 +35,7 @@ function newSimpleForm() {
         Logger.log('title ' + title);
         var item = form.addSectionHeaderItem();
         item.setTitle(title);
-        
+
         for (const problemIndex of Array(partSize).keys()) {
             var problem = part.toString() + '.' + (problemIndex + 1).toString();
             var item = form.addTextItem();  // short text

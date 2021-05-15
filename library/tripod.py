@@ -179,7 +179,7 @@ class Report(object):
 \end{{multicols*}}
 
 \end{{document}}
-        
+
         '''.strip().format(
             self=self,
             dimensions='\n\n'.join(dimension.GetTex() for dimension in self.Dimensions),
