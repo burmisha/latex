@@ -159,12 +159,12 @@ class AvgSpeed_electron(variant.VariantTask):
 
 
 @variant.text('''
-    {who} стартует на {what} и в течение {t:V:e} двигается с постоянным ускорением {a:V:e}. 
+    {who} стартует на {what} и в течение {t:Task:e} двигается с постоянным ускорением {a:V:e}. 
     Определите
     \\begin{{itemize}}
         \\item какую скорость при этом удастся достичь,
         \\item какой путь за это время будет пройден,
-        \\item среднюю скорость за всё время движения, если после начального ускорения продолжить движение равномерно ещё в течение времени $n{t:L}$
+        \\item среднюю скорость за всё время движения, если после начального ускорения продолжить движение равномерно ещё в течение времени ${n}{t:L}$
     \\end{{itemize}}
 ''')
 @variant.arg(who=['Валя', 'Женя', 'Саша'])
@@ -194,7 +194,7 @@ class V_and_S_from_g_and_t(variant.VariantTask):
     \\end{{itemize}}
 ''')
 @variant.arg(what=['радиусом', 'диаметром'])
-@variant.arg(l=('l = {} v', [2, 3, 4, 5]))
+@variant.arg(l=('l = {} м', [2, 3, 4, 5]))
 @variant.arg(n=[5, 6, 10])
 class All_from_l_and_n(variant.VariantTask):
     pass
@@ -218,4 +218,3 @@ class Stones_into_river(variant.VariantTask):
         return dict(
             who2 = who[:3] + 'и'
         )
-

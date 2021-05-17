@@ -20,16 +20,10 @@ class Many_blocks(variant.VariantTask):
         )
 
 
-# \begin{tikzpicture}[x=0.65cm,y=0.65cm,semithick,decoration={
-#   markings,   mark=between positions 0.07 and 0.9 step 11mm with {\arrow{stealth}}}
-#   %,dash patern=on 5pt off 10pt
-#   ]
-
-
 @variant.text('''
     Два бруска связаны лёгкой нерастяжимой нитью и перекинуты через неподвижный блок (см. рис.).
     Определите силу натяжения нити и ускорения брусков. Силами трения пренебречь, массы брусков
-    равны {m1:Task:e} и {m2:Task:e}.
+    равны {m1:Task:e} и {m2:Task:e}, {Consts.g_ten:Task:e}.
 
     \\begin{ tikzpicture }[x=1.5cm,y=1.5cm,thick]
         \\draw 
@@ -50,3 +44,13 @@ class Many_blocks(variant.VariantTask):
 class Two_blocks_on_block(variant.VariantTask):
     pass
 
+
+@variant.text('''
+    Тело массой {m:V:e} лежит на горизонтальной поверхности. Коэффициент трения между поверхностью и телом {mu:V:e}.
+    К телу приложена горизонтальная сила {F:V:e}. Определите силу трения, действующую на тело, и ускорение тела. {Consts.g_ten:Task:e}.
+''')
+@variant.arg(m=('m = {} кг', ['1.4', '2', '2.7']))
+@variant.arg(mu=('\\mu = {}', ['0.15', '0.2', '0.25']))
+@variant.arg(F=('F = {} Н', ['2.5', '3.5', '4.5', '5.5']))
+class F_tren(variant.VariantTask):
+    pass

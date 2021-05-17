@@ -511,6 +511,7 @@ def get_all_variants():
                 'mechanics.kinematics.Stones_into_river',
                 'mechanics.dynamics.Many_blocks',
                 'mechanics.dynamics.Two_blocks_on_block',
+                'mechanics.dynamics.F_tren',
             ],
         ),
 
