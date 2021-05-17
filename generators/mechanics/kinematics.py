@@ -114,8 +114,8 @@ class Chernoutsan_1_2(variant.VariantTask):
 ''')
 @variant.arg(who=['Саша', 'Валя', 'Женя'])
 @variant.arg(whose=['её', 'его'])
-@variant.arg(l=['l = %d м' % l for l in [25, 50]])
-@variant.arg(s=['s = %d м' % s for s in range(150, 350, 20)])
+@variant.arg(l=('l = {} м', [25, 50]))
+@variant.arg(s=('s = {} м', range(150, 350, 20)))
 @variant.answer_short('{d:Value}')
 class Chernoutsan_1_2_1(variant.VariantTask):
      def GetUpdate(self, l=None, s=None, **kws):
@@ -141,3 +141,81 @@ class Chernoutsan_1_2_1(variant.VariantTask):
 ])
 class Vectors_SpeedSum(variant.VariantTask):
     pass
+
+
+@variant.text('''
+    Электрон летит прямолинейно из точки $A$ в точку $B$, за ним при этом наблюдает экспериментатор Глюк.
+    Глюк заметил, что первую {part} {what} электрон равномерно двигался со скоростью {v1:V:e}, 
+    затем его практически мгновенно ускорило электрическое поле 
+    и остаток {what} электрон вновь равномерно двигался со скоростью {v2:V:e}.
+    Определите среднюю скорость электрона. Ответ выразите в м/с и округлите до тысяч.
+''')
+@variant.arg(part__denominator=[('половину', 2), ('треть', 3), ('четверть', 4)])
+@variant.arg(v1=('v_1 = {} 10^5 км / ч', [2, 4]))
+@variant.arg(v2=('v_2 = {} 10^5 км / ч', [3, 6]))
+@variant.arg(what=['времени', 'пути'])
+class AvgSpeed_electron(variant.VariantTask):
+    pass
+
+
+@variant.text('''
+    {who} стартует на {what} и в течение {t:V:e} двигается с постоянным ускорением {a:V:e}. 
+    Определите
+    \\begin{{itemize}}
+        \\item какую скорость при этом удастся достичь,
+        \\item какой путь за это время будет пройден,
+        \\item среднюю скорость за всё время движения, если после начального ускорения продолжить движение равномерно ещё в течение времени $n{t:L}$
+    \\end{{itemize}}
+''')
+@variant.arg(who=['Валя', 'Женя', 'Саша'])
+@variant.arg(what=['велосипеде', 'мотоцикле', 'лошади'])
+@variant.arg(t=('t = {} c', [2, 3, 4, 5, 10]))
+@variant.arg(a=('a = {} м / с^2', ['0.5', '1.5', '2', '2.5']))
+@variant.arg(n=[2, 3, 4])
+class A_plus_V(variant.VariantTask):
+    pass
+
+
+@variant.text('''
+    Какой путь тело пройдёт за {which} секунду после начала свободного падения?
+    Какую скорость в {point} этой секунды оно имеет?
+''')
+@variant.arg(n__which=[(2, 'вторую'), (3, 'третью'), (4, 'четвёртую'), (5, 'пятую'), (6, 'шестую')])
+@variant.arg(point=['начале', 'конце'])
+class V_and_S_from_g_and_t(variant.VariantTask):
+    pass
+
+
+@variant.text('''
+    Карусель {what} {l:V:e} равномерно совершает {n} оборотов в минуту. Определите
+    \\begin{{itemize}} 
+        \\item период и частоту её обращения, 
+        \\item скорость и ускорение крайних её точек.
+    \\end{{itemize}}
+''')
+@variant.arg(what=['радиусом', 'диаметром'])
+@variant.arg(l=('l = {} v', [2, 3, 4, 5]))
+@variant.arg(n=[5, 6, 10])
+class All_from_l_and_n(variant.VariantTask):
+    pass
+
+
+@variant.text('''
+    {who} стоит на обрыве над рекой и методично и строго горизонтально кидает в неё камушки.
+    За этим всем наблюдает экспериментатор Глюк, который уже выяснил, что камушки падают в реку спустя {t:Value:e} после броска,
+    а вот дальность полёта оценить сложнее: придётся лезть в воду. Выручите Глюка и определите:
+    \\begin{{itemize}}
+        \\item высоту обрыва (вместе с ростом {who2}).
+        \\item дальность полёта камушков (по горизонтали) и их скорость при падении, приняв начальную скорость броска равной {v:Task:e}.
+    \\end{{itemize}}
+    Сопротивлением воздуха пренебречь, {Consts.g_ten:Task:e}.
+''')
+@variant.arg(who=['Даша', 'Маша', 'Миша', 'Паша'])
+@variant.arg(t=('t = {} с', ['1.2', '1.3', '1.4', '1.5', '1.6', '1.7', '1.8']))
+@variant.arg(v=('v = {} м / с', ['12', '13', '14', '15', '16', '17', '18']))
+class Stones_into_river(variant.VariantTask):
+    def GetUpdate(self, who=None, t=None, v=None, **kws):
+        return dict(
+            who2 = who[:3] + 'и'
+        )
+
