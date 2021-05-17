@@ -504,3 +504,15 @@ class Polytrope(variant.VariantTask):
         return dict(
             ans='%.3f' % ans,
         )
+
+
+@variant.solution_space(120)
+@variant.text('''
+    Плотность воздуха при нормальных условиях равна {rho:V:e}. Чему равна плотность воздуха 
+    при температуре ${t}\\celsius$ и давлении {p:Value:e}?
+''')
+@variant.arg(rho=['1.3 кг / м^3'])
+@variant.arg(t=[50, 100, 150, 200])
+@variant.arg(p=('p = {} кПа', [50, 80, 120, 150]))
+class Air_rho(variant.VariantTask):
+    pass

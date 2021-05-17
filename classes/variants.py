@@ -139,7 +139,7 @@ def get_all_variants():
         ),
         Work(
             task_id='2019-05-06 10',
-            classes={'electricity.cond': ['C_from_U_Q', 'Q_is_possible', 'C_ratio', 'W_from_Q_C', 'Cond1']},
+            classes={'electricity.cond': ['C_from_U_Q', 'Q_is_possible', 'C_ratio', 'W_from_Q_C', 'Cond_posled']},
         ),
         Work(
             task_id='2019-05-14 10',
@@ -504,7 +504,7 @@ def get_all_variants():
         Work(
             task_id='2021-05-18 10',
             classes=[
-                'mechanics.kinematics.AvgSpeed_electron',
+                # 'mechanics.kinematics.AvgSpeed_electron',
                 'mechanics.kinematics.A_plus_V',
                 'mechanics.kinematics.V_and_S_from_g_and_t',
                 'mechanics.kinematics.All_from_l_and_n',
@@ -512,6 +512,17 @@ def get_all_variants():
                 'mechanics.dynamics.Many_blocks',
                 'mechanics.dynamics.Two_blocks_on_block',
                 'mechanics.dynamics.F_tren',
+                'mechanics.gidro.Rho_from_n',
+                'mechanics.statics.Sterzhen',
+                'mechanics.zsi_zse.Ch_4_45',
+                'mechanics.zsi_zse.Ch_4_2',
+                'mechanics.zsi_zse.Ek_ratio_Ep',
+                'termodynamics.mkt.Air_rho',
+                'termodynamics.mkt.ZFTSH_10_2_9_kv',
+                'termodynamics.termo.Q_from_DeltaU',
+                'electricity.cond.Cond_posled',
+                'electricity.kulon_field.F_from_many_q',
+                'electricity.om.P_ratio',
             ],
         ),
 

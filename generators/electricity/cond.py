@@ -270,17 +270,19 @@ class CondPosl(variant.VariantTask):
 
 
 @variant.text('''
-    \\begin{{tikzpicture}}[circuit ee IEC, x=1cm, y=1cm, semithick]
+    Два конденсатора ёмкостей {C1:Task:e} и {C2:Task:e} последовательно подключают
+    к источнику напряжения {U:Task:e} (см. рис.). 
+    % Определите заряды каждого из конденсаторов.
+    Определите заряд {which} конденсатора.
+
+    \\begin{{tikzpicture}}[circuit ee IEC, semithick]
         \\draw  (0, 0) to [capacitor={ info={ {C1:L:e} } }] (1, 0)
                        to [capacitor={ info={ {C2:L:e} } }] (2, 0)
         ;
-        \\draw [-o] (0, 0) -- ++(-0.5, 0) node[left] { $-$ };
-        \\draw [-o] (2, 0) -- ++(0.5, 0) node[right] { $+$ };
-
-        \\node [right,text width = 14cm, align=justify] at (3.5,0) {
-        Два конденсатора ёмкостей {C1:Task:e} и {C2:Task:e} последовательно подключают
-        к источнику напряжения {U:Task:e} (см. рис.). Определите заряды каждого из конденсаторов.
-        };
+        % \\draw [-o] (0, 0) -- ++(-0.5, 0) node[left] { $-$ };
+        % \\draw [-o] (2, 0) -- ++(0.5, 0) node[right] { $+$ };
+        \\draw [-o] (0, 0) -- ++(-0.5, 0) node[left] {  };
+        \\draw [-o] (2, 0) -- ++(0.5, 0) node[right] {  };
     \\end{{tikzpicture}}
 ''')
 @variant.answer_short('''
@@ -298,7 +300,8 @@ class CondPosl(variant.VariantTask):
 ''')
 @variant.arg(C1__C2=[('C_1 = %s нФ' % C1, 'C_2 = %s нФ' % C2) for C1 in [20, 30, 40, 60] for C2 in [20, 30, 40, 60] if C1 != C2])
 @variant.arg(U=['%s = %s В' % (Ul, Uv) for  Ul in ['U', 'V'] for Uv in [150, 200, 300, 400, 450]])
-class Cond1(variant.VariantTask):
+@variant.arg(which=['первого', 'второго'])
+class Cond_posled(variant.VariantTask):
     def GetUpdate(self, C1=None, C2=None, U=None, **kws):
         return dict(
             Q='Q = %.2f нКл' % (1. * C1.Value * C2.Value * U.Value / (C1.Value + C2.Value)),

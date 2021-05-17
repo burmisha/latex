@@ -277,6 +277,29 @@ class I_ratio(variant.VariantTask):
         )
 
 
+@variant.solution_space(40)
+@variant.text('''
+    Юлия проводит эксперименты c 2 кусками одинаковой {which} проволки, причём второй кусок в {a} длиннее первого.
+    В одном из экспериментов Юлия подаёт на первый кусок проволки напряжение в {b} раз больше, чем на второй.
+    Определите отношения в двух проволках в этом эксперименте (второй к первой):
+    \\begin{{itemize}}
+        \\item отношение сил тока,
+        \\item отношение выделяющихся мощностей.
+    \\end{{itemize}}
+''')
+# @variant.answer_test('{ratio:Basic}')
+@variant.answer_short('\\eli_2 / \\eli_1 = {ratio_i:LaTeX}, \\P_2 / \\P_1 = {ratio_P:LaTeX}, ')
+@variant.arg(a=[2, 3, 4, 5, 6, 7, 8, 9, 10])
+@variant.arg(b=[2, 3, 4, 5, 6, 7, 8, 9, 10])
+@variant.arg(which=['медной', 'стальной', 'алюминиевой'])
+class P_ratio(variant.VariantTask):
+    def GetUpdate(self, a=None, b=None, **kws):
+        return dict(
+            ratio_i=Fraction() / b / a,
+            ratio_P=Fraction() / b / a,
+        )
+
+
 @variant.solution_space(20)
 @variant.text('''
     В распоряжении Маши имеется {N} одинаковых резисторов, каждый сопротивлением {R:V:e}.

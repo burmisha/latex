@@ -208,9 +208,10 @@ class Vishnyakova_1_4_12(variant.VariantTask):
         )
 
 
+@variant.solution_space(60)
 @variant.text('''
     Определите работу силы, которая обеспечит {what} тела массой {m:Value:e} на высоту {h:Value:e} с постоянным ускорением {a:Value:e}.
-    Примите {Consts.g_ten:Task:e}.
+    % Примите {Consts.g_ten:Task:e}.
 ''')
 @variant.answer_align([
     '&\\text{ Для подъёма: } A = Fh = (mg + ma) h = m(g+a)h,',
@@ -251,9 +252,12 @@ class Ch_4_29(variant.VariantTask):
 
 
 @variant.text('''
-    Тонкий {what} длиной {l:Value:e} и массой {m:Value:e} лежит на горизонтальной поверхности.
-    Какую минимальную работу надо совершить, чтобы поставить его на землю в вертикальное положение?
-    Примите {Consts.g_ten:Task:e}.
+    Тонкий однородный {what} длиной {l:Value:e} и массой {m:Value:e} лежит на горизонтальной поверхности.
+    \\begin{{itemize}}
+        \\item Какую минимальную силу надо приложить к одному из его концов, чтобы оторвать его от этой поверхности?
+        \\item Какую минимальную работу надо совершить, чтобы поставить его на землю в вертикальное положение?
+    \\end{{itemize}}
+    % Примите {Consts.g_ten:Task:e}.
 ''')
 @variant.answer_short('A = mg\\frac l2 = {A:Task}')
 @variant.answer_test('{A:TestAnswer}')
@@ -265,3 +269,14 @@ class Ch_4_45(variant.VariantTask):
         return dict(
             A='%d Дж' % (m.Value * l.Value * Consts.g_ten.Value / 2)
         )
+
+
+@variant.solution_space(100)
+@variant.text('''
+    Тело бросили вертикально вверх со скоростью {v:Value:e}. 
+    На какой высоте кинетическая энергия тела составит {how} от потенциальной?
+''')
+@variant.arg(how__n=[('половину', 2), ('треть', 3)])
+@variant.arg(v=('v_0 = {} м / c', [10, 14, 20]))
+class Ek_ratio_Ep(variant.VariantTask):
+    pass

@@ -163,3 +163,12 @@ class Ch_6_20(variant.VariantTask):
             h2='h_2 = %d см' % (100 * 10 * m.Value / Consts.water.rho.Value / (S1.Value + S2.Value)),
         )
 
+
+@variant.text('''
+    Определите плотность неизвестного вещества, если известно, что опускании тела из него 
+    в {matter} оно будет плавать и на {how} выступать над поверхностью жидкости.
+''')
+@variant.arg(matter__rho=[('подсолнечное масло', 900), ('керосин', 800)])
+@variant.arg(how__n=[('половину', 2), ('треть', 3), ('четверть', 4)])
+class Rho_from_n(variant.VariantTask):
+    pass

@@ -171,7 +171,7 @@ class AvgSpeed_electron(variant.VariantTask):
 @variant.arg(what=['велосипеде', 'мотоцикле', 'лошади'])
 @variant.arg(t=('t = {} c', [2, 3, 4, 5, 10]))
 @variant.arg(a=('a = {} м / с^2', ['0.5', '1.5', '2', '2.5']))
-@variant.arg(n=[2, 3, 4])
+@variant.arg(n=[2, 3])
 class A_plus_V(variant.VariantTask):
     pass
 
@@ -186,6 +186,7 @@ class V_and_S_from_g_and_t(variant.VariantTask):
     pass
 
 
+@variant.solution_space(80)
 @variant.text('''
     Карусель {what} {l:V:e} равномерно совершает {n} оборотов в минуту. Определите
     \\begin{{itemize}} 
@@ -208,7 +209,7 @@ class All_from_l_and_n(variant.VariantTask):
         \\item высоту обрыва (вместе с ростом {who2}).
         \\item дальность полёта камушков (по горизонтали) и их скорость при падении, приняв начальную скорость броска равной {v:Task:e}.
     \\end{{itemize}}
-    Сопротивлением воздуха пренебречь, {Consts.g_ten:Task:e}.
+    Сопротивлением воздуха пренебречь.
 ''')
 @variant.arg(who=['Даша', 'Маша', 'Миша', 'Паша'])
 @variant.arg(t=('t = {} с', ['1.2', '1.3', '1.4', '1.5', '1.6', '1.7', '1.8']))
