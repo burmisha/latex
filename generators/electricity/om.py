@@ -1,7 +1,7 @@
 import itertools
 
 import generators.variant as variant
-from generators.helpers import UnitValue, letter_variants, Fraction
+from generators.helpers import UnitValue, letter_variants, Fraction, n_times
 
 from library.logging import colorize_json
 
@@ -279,8 +279,8 @@ class I_ratio(variant.VariantTask):
 
 @variant.solution_space(40)
 @variant.text('''
-    Юлия проводит эксперименты c 2 кусками одинаковой {which} проволки, причём второй кусок в {a} длиннее первого.
-    В одном из экспериментов Юлия подаёт на первый кусок проволки напряжение в {b} раз больше, чем на второй.
+    Юлия проводит эксперименты c 2 кусками одинаковой {which} проволки, причём второй кусок в {times_a} длиннее первого.
+    В одном из экспериментов Юлия подаёт на первый кусок проволки напряжение в {times_b} раз больше, чем на второй.
     Определите отношения в двух проволках в этом эксперименте (второй к первой):
     \\begin{{itemize}}
         \\item отношение сил тока,
@@ -289,11 +289,11 @@ class I_ratio(variant.VariantTask):
 ''')
 # @variant.answer_test('{ratio:Basic}')
 @variant.answer_short('\\eli_2 / \\eli_1 = {ratio_i:LaTeX}, \\P_2 / \\P_1 = {ratio_P:LaTeX}, ')
-@variant.arg(a=[2, 3, 4, 5, 6, 7, 8, 9, 10])
-@variant.arg(b=[2, 3, 4, 5, 6, 7, 8, 9, 10])
+@variant.arg(a__times_a=n_times(2, 3, 4, 5, 6, 7, 8, 9, 10))
+@variant.arg(b__times_b=n_times(2, 3, 4, 5, 6, 7, 8, 9, 10))
 @variant.arg(which=['медной', 'стальной', 'алюминиевой'])
 class P_ratio(variant.VariantTask):
-    def GetUpdate(self, a=None, b=None, **kws):
+    def GetUpdate(self, a=None, times_a=None, b=None, times_b=None, **kws):
         return dict(
             ratio_i=Fraction() / b / a,
             ratio_P=Fraction() / b / a,
