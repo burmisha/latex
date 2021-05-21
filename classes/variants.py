@@ -143,7 +143,13 @@ def get_all_variants():
         ),
         Work(
             task_id='2019-05-14 10',
-            classes={'electricity.om': ['P_from_R_U', 'P_from_R_I', 'Om_eta_full', 'r_eta_from_Rs', 'Kirchgof_double']},
+            classes=[
+                'electricity.om.P_from_R_U',
+                'electricity.om.P_from_R_I',
+                'electricity.full_circuit.Om_eta_full',
+                'electricity.full_circuit.r_eta_from_Rs',
+                'electricity.kirchgoff.Kirchgof_double',
+            ],
         ),
         Work(
             task_id='2019-09-11 11Т',
@@ -475,7 +481,10 @@ def get_all_variants():
         # ),
         Work(
             task_id='2021-04-30 10',
-            classes={'electricity.om': ['Definitions05', 'Definitions06', 'P_from_R_U', 'P_from_R_I', 'Om_eta_full', 'r_eta_from_Rs']},
+            classes={
+                'electricity.om': ['Definitions05', 'Definitions06', 'P_from_R_U', 'P_from_R_I'],
+                'electricity.full_circuit': ['Om_eta_full', 'r_eta_from_Rs'],
+            },
         ),
         Work(
             task_id='2021-04-30 9',
@@ -483,19 +492,19 @@ def get_all_variants():
         ),
         Work(
             task_id='2021-04-31 10',
-            classes={'electricity.om': ['Definitions07', 'Definitions08', 'Kirchgof_double']},
+            classes=['electricity.om.Definitions07', 'electricity.om.Definitions08', 'electricity.kirchgoff.Kirchgof_double'],
         ),
         Work(
             task_id='2021-05-12 10',
-            classes={'electricity.om': ['Circuit_four', 'Circuit_six', 'Kirchgof_double_2']},
+            classes=['electricity.om.Circuit_four', 'electricity.om.Circuit_six', 'electricity.kirchgoff.Kirchgof_double_2'],
         ),
         Work(
             task_id='2021-05-13 10',
-            classes={'electricity.om': ['Update_external_R', 'Kirchgof_triple']},
+            classes=['electricity.full_circuit.Update_external_R', 'electricity.kirchgoff.Kirchgof_triple'],
         ),
         Work(
             task_id='2021-05-14 10',
-            classes={'electricity.om': ['Compare_power', 'Short_i', 'Kirchgof_plain']},
+            classes=['electricity.om.Compare_power', 'electricity.full_circuit.Short_i', 'electricity.kirchgoff.Kirchgof_plain'],
         ),
         Work(
             task_id='2021-05-13 9',
