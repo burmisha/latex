@@ -1,5 +1,5 @@
 import generators.variant as variant
-
+from generators.helpers import Consts, Fraction, UnitValue
 
 @variant.text('''
     Запишите определения, формулы и физические законы (можно сокращать, но не упустите ключевое):
@@ -145,8 +145,8 @@ class Vectors_SpeedSum(variant.VariantTask):
 
 @variant.text('''
     Электрон летит прямолинейно из точки $A$ в точку $B$, за ним при этом наблюдает экспериментатор Глюк.
-    Глюк заметил, что первую {part} {what} электрон равномерно двигался со скоростью {v1:V:e}, 
-    затем его практически мгновенно ускорило электрическое поле 
+    Глюк заметил, что первую {part} {what} электрон равномерно двигался со скоростью {v1:V:e},
+    затем его практически мгновенно ускорило электрическое поле
     и остаток {what} электрон вновь равномерно двигался со скоростью {v2:V:e}.
     Определите среднюю скорость электрона. Ответ выразите в м/с и округлите до тысяч.
 ''')
@@ -159,7 +159,7 @@ class AvgSpeed_electron(variant.VariantTask):
 
 
 @variant.text('''
-    {who} стартует на {what} и в течение {t:Task:e} двигается с постоянным ускорением {a:V:e}. 
+    {who} стартует на {what} и в течение {t:Task:e} двигается с постоянным ускорением {a:V:e}.
     Определите
     \\begin{{itemize}}
         \\item какую скорость при этом удастся достичь,
@@ -172,8 +172,19 @@ class AvgSpeed_electron(variant.VariantTask):
 @variant.arg(t=('t = {} c', [2, 3, 4, 5, 10]))
 @variant.arg(a=('a = {} м / с^2', ['0.5', '1.5', '2', '2.5']))
 @variant.arg(n=[2, 3])
+@variant.answer_align([
+    'v &= v_0 + a t = at = {a:Value} * {t:Value} = {v:Value},',
+    's_x &= v_0t + \\frac{ a t^2 }2 = \\frac{ a t^2 }2 = \\frac{ {a:Value} * {t:Value:sqr} }2 = {s:Value},',
+    'v_\\text{ сред. } &= \\frac{ s_\\text{ общ } }{ t_\\text{ общ. } } = \\frac{ s_x + v * {n}t }{ t + {n}t } = \\frac{ \\frac{ a t^2 }2 + at * {n}t }{ t (1 + {n}) } =',
+    '&= at * \\frac{ \\frac 12 + {n} }{ 1 + {n} } = {a:Value} * {t:Value} * \\frac{ \\frac 12 + {n} }{ 1 + {n} } \\approx {v_avg:Value}.'
+])
 class A_plus_V(variant.VariantTask):
-    pass
+    def GetUpdate(self, what=None, t=None, a=None, n=None, **kws):
+        return dict(
+            v='v = %.1f м / с' % (t.Value * a.Value) ,
+            s='s_x = %.1f м' % (t.Value * (a.Value ** 2) / 2) ,
+            v_avg='v_\\text{ сред. } = %.2f м / c' % (t.Value * a.Value * (1 / 2 + n) / (1 + n)) ,
+        )
 
 
 @variant.text('''
@@ -182,23 +193,55 @@ class A_plus_V(variant.VariantTask):
 ''')
 @variant.arg(n__which=[(2, 'вторую'), (3, 'третью'), (4, 'четвёртую'), (5, 'пятую'), (6, 'шестую')])
 @variant.arg(point=['начале', 'конце'])
+@variant.answer_align([
+    '{s:Letter} &= -s_y = -(y_2-y_1) = y_1 - y_2 = \\cbr{ y_{ 0y } + v_{ 0y }t_1 - \\frac{ gt_1^2 }2 } - \\cbr{ y_{ 0y } + v_{ 0y }t_2 - \\frac{ gt_2^2 }2 } =',
+    '&= \\frac{ gt_2^2 }2 - \\frac{ gt_1^2 }2 = \\frac g2\\cbr{ t_2^2 - t_1^2 } = {s:Value},',
+    '{v:Letter} &= v_{ 0y } - gt = -gt = {Consts.g_ten:Value} * {t:Value} = -{v:Value}.'
+])
 class V_and_S_from_g_and_t(variant.VariantTask):
-    pass
+    def GetUpdate(self, n=None, which=None, point=None, **kws):
+        t_value = {
+            'начале': n - 1,
+            'конце': n,
+        }[point]
+        return dict(
+            t='t = %d с' % t_value,
+            v='v_y = %d м / с' % (t_value * Consts.g_ten.Value),
+            s='s = %.1f м' % (((n ** 2) - (n - 1) ** 2) * Consts.g_ten.Value / 2),
+        )
 
 
 @variant.solution_space(80)
 @variant.text('''
     Карусель {what} {l:V:e} равномерно совершает {n} оборотов в минуту. Определите
-    \\begin{{itemize}} 
-        \\item период и частоту её обращения, 
+    \\begin{{itemize}}
+        \\item период и частоту её обращения,
         \\item скорость и ускорение крайних её точек.
     \\end{{itemize}}
 ''')
 @variant.arg(what=['радиусом', 'диаметром'])
 @variant.arg(l=('l = {} м', [2, 3, 4, 5]))
 @variant.arg(n=[5, 6, 10])
+@variant.answer_align([
+    't &= {t:Value}, r = {r:Value}, n = {n}\\units{ оборотов },',
+    'T &= \\frac tN = \\frac{t:Value:s}{ {n} } \\approx {T:Value},',
+    'v &= \\frac{ 2 \\pi r }{ T } = \\frac{ 2 \\pi r }{ T } =  \\frac{ 2 \\pi r n }{ t } \\approx {v:Value},',
+    'a &= \\frac{ v^2 }{ r } =  \\frac{ 4 \\pi^2 r n^2 }{ t^2 } \\approx {a:Value}.'
+])
 class All_from_l_and_n(variant.VariantTask):
-    pass
+    def GetUpdate(self, what=None, l=None, n=None, **kws):
+        r_ratio = Fraction(numerator=l.Value, denominator={'радиусом': 1, 'диаметром': 2}[what])
+        t = UnitValue('t = 60 с')
+        r = UnitValue('r = %.1f м' % float(r_ratio))
+        return dict(
+            t=t,
+            r=r,
+            T='T = %.2f c' % (t.Value / n),
+            nu='\\nu = %.2f Гц' % (n / t.Value),
+            v='v = %.2f м / c' % (float(r_ratio) * 2 * Consts.pi * n / t.Value),
+            a='a = %.2f м / с^2' % (float(r_ratio) * 4 * (Consts.pi ** 2) * (n ** 2) / (t.Value ** 2)),
+        )
+
 
 
 @variant.text('''
