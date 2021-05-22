@@ -107,6 +107,7 @@ test_precisionFmt2()
 class UnitValue:
     def __init__(self, line, precision=None, viewPrecision=None):
         self.__raw_line = line
+        self._is_zero = None
         try:
             self._load(line, precision=precision)
         except Exception:
@@ -118,8 +119,11 @@ class UnitValue:
     def _parse_precision(self, value_part):
         precisionStr = value_part.replace('.', '').lstrip('0')
         if not precisionStr:
-            assert value_part == '0', f'Could not get precision from {value_part!r}'
+            assert value_part in ['0', '0.0', '0.00'], f'Could not get precision from {value_part!r}'
+            self._is_zero = True
             precisionStr = '0'
+        else:
+            self._is_zero = False
         precision = len(precisionStr)
         if precisionStr[0] == '1' and precision >= 2:
             precision -= 1
@@ -204,7 +208,10 @@ class UnitValue:
 
     def get_value_str(self):
         if self._value_str is None:
-            valueStr = precisionFmt2(self.Value, self.ViewPrecision or self.Precision)
+            if self._is_zero:
+                valueStr = '0'
+            else:
+                valueStr = precisionFmt2(self.Value, self.ViewPrecision or self.Precision)
             self._precisionFmt2 = str(valueStr)
             valueStr = valueStr.replace('.', '{,}')
             if self.ValuePower:
@@ -289,5 +296,6 @@ assert '{:Value}'.format(UnitValue('T = 1.7 суток')) == '1{,}7\\,\\text{с�
 assert '{:Value}'.format(UnitValue('12 км / ч')) == '12\\,\\frac{\\text{км}}{\\text{ч}}'
 assert '{:Value}'.format(UnitValue('50 км / ч')) == '50\\,\\frac{\\text{км}}{\\text{ч}}'
 assert '{:TestAnswer}'.format(UnitValue('4 см')) == '4'
+assert '{:Value}'.format(UnitValue('0 см')) == '0\\,\\text{см}'
+assert '{:Value}'.format(UnitValue('0.0 см')) == '0\\,\\text{см}'
 assert '{:TestAnswer}'.format(UnitValue('2.5 м')) == r'2.5', '{:TestAnswer}'.format(UnitValue('2.5 м'))
-
