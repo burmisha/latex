@@ -170,5 +170,13 @@ class Ch_6_20(variant.VariantTask):
 ''')
 @variant.arg(matter__rho=[('подсолнечное масло', 900), ('керосин', 800)])
 @variant.arg(how__n=[('половину', 2), ('треть', 3), ('четверть', 4)])
+@variant.answer_short(
+    'F_\\text{ Арх. } = F_\\text{ тяж. } \\implies \\rho_\\text{ ж. } g V_\\text{ погр. } = m g \\implies'
+    '\\rho_\\text{ ж. } g \\cbr{ V -\\frac V{n} } = \\rho V g \\implies '
+    '\\rho = \\rho_\\text{ ж. }\\cbr{ 1 -\\frac 1{n} } \\approx {rho2:V}'
+)
 class Rho_from_n(variant.VariantTask):
-    pass
+    def GetUpdate(self, matter=None, rho=None, how=None, n=None, **kws):
+        return dict(
+            rho2='\\rho = %d кг / м^3' % (rho * (1 - 1 / n)),
+        )

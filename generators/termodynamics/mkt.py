@@ -469,7 +469,7 @@ class ZFTSH_10_2_9_kv(variant.VariantTask):
 @variant.arg(t=[7, 17, 27, 37, 47])
 @variant.answer_short('''
     PV = \\frac m\\mu RT \\implies m = \\frac{ PV \\mu }{ RT } =
-    \\frac{ {P:V} * {V:V} * {gas.mu:V} }{ {Consts.R:V} * \\cbr{ {t} + 273 }\\units{{К}} }
+    \\frac{ {P:V} * {V:V} * {gas.mu:V} }{ {Consts.R:V} * \\cbr{ {t} + 273 }\\units{ К } }
     \\approx {m:V}.
 ''')
 
@@ -514,5 +514,17 @@ class Polytrope(variant.VariantTask):
 @variant.arg(rho=['1.3 кг / м^3'])
 @variant.arg(t=[50, 100, 150, 200])
 @variant.arg(p=('p = {} кПа', [50, 80, 120, 150]))
+@variant.answer_align([
+    '\\text{ В общем случае: } PV = \\frac m{ \\mu } RT \\implies \\rho = \\frac mV = \\frac m{ \\frac{ \\frac m{ \\mu } RT }P } = \\frac{ P\\mu }{ RT },',
+    '\\text{ У нас 2 состояния: } \\rho_1 = \\frac{ P_1\\mu }{ RT_1 }, \\rho_2 = \\frac{ P_2\\mu }{ RT_2 } \\implies \\frac{ \\rho_2 }{ \\rho_1 } = \\frac{ \\frac{ P_2\\mu }{ RT_2 } }{ \\frac{ P_1\\mu }{ RT_1 } } = \\frac{ P_2T_1 }{ P_1T_2 } \\implies',
+    '\\implies \\rho_2 = \\rho_1 *  \\frac{ P_2T_1 }{ P_1T_2 } = {rho:V} * \\frac{ {p:V} * {T1}\\units{ К } }{ {Consts.p_atm:V} * {T2}\\units{ К } } \\approx {rho2:V}.'
+])
 class Air_rho(variant.VariantTask):
-    pass
+    def GetUpdate(self, rho=None, p=None, t=None, **kws):
+        T1 = 273
+        T2 = t + 273
+        return dict(
+            rho2='\\rho_2 = %.2f кг / м^3' % (rho.Value * p.Value / Consts.p_atm.Value * T1 / T2),
+            T1=T1,
+            T2=T2,
+        )

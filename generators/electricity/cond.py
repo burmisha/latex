@@ -304,5 +304,5 @@ class CondPosl(variant.VariantTask):
 class Cond_posled(variant.VariantTask):
     def GetUpdate(self, C1=None, C2=None, U=None, **kws):
         return dict(
-            Q='Q = %.2f нКл' % (1. * C1.Value * C2.Value * U.Value / (C1.Value + C2.Value)),
+            Q='Q = %.2f мкКл' % (1. * C1.Value * C2.Value * U.Value / (C1.Value + C2.Value) / 1000),
         )

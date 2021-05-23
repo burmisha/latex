@@ -283,7 +283,10 @@ class I_ratio(variant.VariantTask):
     \\end{{itemize}}
 ''')
 # @variant.answer_test('{ratio:Basic}')
-@variant.answer_short('\\eli_2 / \\eli_1 = {ratio_i:LaTeX}, \\P_2 / \\P_1 = {ratio_P:LaTeX}, ')
+@variant.answer_short(
+    'R_2 = {a}R_1, U_1 = {b}U_2 \\implies '
+    ' \\eli_2 / \\eli_1 = \\frac{ U_2 / R_2 }{ U_1 / R_1 } = \\frac{ U_2 }{ U_1 } * \\frac{ R_1 }{ R_2 } = {ratio_i:LaTeX},'
+    ' P_2 / P_1 = \\frac{ U_2^2 / R_2 }{ U_1^2 / R_1 } = \\sqr{ \\frac{ U_2 }{ U_1 } } * \\frac{ R_1 }{ R_2 } = {ratio_P:LaTeX}.')
 @variant.arg(a__times_a=n_times(2, 3, 4, 5, 6, 7, 8, 9, 10))
 @variant.arg(b__times_b=n_times(2, 3, 4, 5, 6, 7, 8, 9, 10))
 @variant.arg(which=['медной', 'стальной', 'алюминиевой'])
@@ -291,7 +294,7 @@ class P_ratio(variant.VariantTask):
     def GetUpdate(self, a=None, times_a=None, b=None, times_b=None, **kws):
         return dict(
             ratio_i=Fraction() / b / a,
-            ratio_P=Fraction() / b / a,
+            ratio_P=Fraction() / b / b / a,
         )
 
 

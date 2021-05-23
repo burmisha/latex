@@ -259,7 +259,7 @@ class Ch_4_29(variant.VariantTask):
     \\end{{itemize}}
     % Примите {Consts.g_ten:Task:e}.
 ''')
-@variant.answer_short('A = mg\\frac l2 = {A:Task}')
+@variant.answer_short('F = \\frac{ mg }2 \\approx {F:V}, A = mg\\frac l2 = {A:V}')
 @variant.answer_test('{A:TestAnswer}')
 @variant.arg(what=['лом', 'шест', 'кусок арматуры'])
 @variant.arg(m=['m = %d кг' % m for m in [10, 20, 30]])
@@ -267,7 +267,8 @@ class Ch_4_29(variant.VariantTask):
 class Ch_4_45(variant.VariantTask):
     def GetUpdate(self, what=None, m=None, l=None, **kws):
         return dict(
-            A='%d Дж' % (m.Value * l.Value * Consts.g_ten.Value / 2)
+            F='F = %d Н' % (m.Value * Consts.g_ten.Value),
+            A='A = %d Дж' % (m.Value * l.Value * Consts.g_ten.Value / 2),
         )
 
 
@@ -278,5 +279,13 @@ class Ch_4_45(variant.VariantTask):
 ''')
 @variant.arg(how__n=[('половину', 2), ('треть', 3)])
 @variant.arg(v=('v_0 = {} м / c', [10, 14, 20]))
+@variant.answer_align([
+    '0 + \\frac{ mv_0^2 }2 = E_p + E_k, E_k = \\frac 1{n} E_p \\implies',
+    '\\implies \\frac{ mv_0^2 }2 = E_p + \\frac 1{n} E_p = E_p\\cbr{ 1 + \\frac 1{n} } = mgh\\cbr{ 1 + \\frac 1{n} } \\implies',
+    '\\implies h = \\frac{ \\frac{ mv_0^2 }2 }{ mg\\cbr{ 1 + \\frac 1{n} } } = \\frac{ v_0^2 }{ 2g } * \\frac 1{ 1 + \\frac 1{n} } \\approx {h:V}.'
+    ])
 class Ek_ratio_Ep(variant.VariantTask):
-    pass
+    def GetUpdate(self, how=None, n=None, v=None, **kws):
+        return dict(
+            h='h = %.1f м' % (v.Value ** 2 / 2 / Consts.g_ten.Value / (1 + 1 / n)),
+        )

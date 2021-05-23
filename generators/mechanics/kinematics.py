@@ -256,9 +256,17 @@ class All_from_l_and_n(variant.VariantTask):
 ''')
 @variant.arg(who=['Даша', 'Маша', 'Миша', 'Паша'])
 @variant.arg(t=('t = {} с', ['1.2', '1.3', '1.4', '1.5', '1.6', '1.7', '1.8']))
-@variant.arg(v=('v = {} м / с', ['12', '13', '14', '15', '16', '17', '18']))
+@variant.arg(v=('v_0 = {} м / с', ['12', '13', '14', '15', '16', '17', '18']))
+@variant.answer_align([
+    'y &= y_0 + v_{ 0y }t - \\frac{ gt^2 }2 = h - \\frac{ gt^2 }2, \\qquad y(\\tau) = 0 \\implies h - \\frac{ g\\tau^2 }2 = 0 \\implies h = \\frac{ g\\tau^2 }2 \\approx {h:Value}.',
+    'x &= x_0 + v_{ 0x }t = v_{ 0x }t \\implies L = v_0\\tau \\approx {L:Value}.',
+    'v = \\sqrt{ v_x^2 + v_y^2 } = \\sqrt{ v_{ 0x }^2 + \\sqr{ v_{ 0y } - g\\tau } } = \\sqrt{ v_0^2 + \\sqr{ g\\tau } } \\approx {v_res:Value}.'
+])
 class Stones_into_river(variant.VariantTask):
     def GetUpdate(self, who=None, t=None, v=None, **kws):
         return dict(
-            who2 = who[:3] + 'и'
+            who2=who[:3] + 'и',
+            h='h = %.1f м' % (Consts.g_ten.Value * t.Value ** 2 / 2),
+            L='L = %.1f м' % (v.Value * t.Value),
+            v_res='v = %.1f м / c' % ((v.Value ** 2 + (Consts.g_ten.Value * t.Value) ** 2) ** 0.5),
         )

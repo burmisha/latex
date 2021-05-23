@@ -186,8 +186,16 @@ class R_from_r_e1_e2(variant.VariantTask):  # Вишнякова 3.1.2
 @variant.arg(r=['a', 'l', 'd', 'r'])
 @variant.arg(q=['q', 'Q'])
 @variant.arg(sign=['положительных', 'отрицательных'])
+@variant.answer_short('F = \\sum_i F_i = \\ldots = {ratio:LaTeX} \\frac{ k{q}^2 }{ {r}^2 }.')
 class F_from_many_q(variant.VariantTask):  # Вишнякова 3.1.3
-    pass
+    def GetUpdate(self, n=None, n_text=None, r=None, q=None, **kws):
+        if n == 3:
+            ratio = Fraction() + Fraction() / 4
+        elif n == 4:
+            ratio = Fraction() + Fraction() / 4 + Fraction() / 9
+        return dict(
+            ratio=ratio,
+        )
 
 
 @variant.solution_space(80)

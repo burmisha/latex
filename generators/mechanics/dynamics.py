@@ -1,6 +1,7 @@
 import generators.variant as variant
 from generators.helpers import Consts, Fraction, UnitValue
 
+
 @variant.text('''
     {many} одинаковых брусков массой {m:V:e} каждый лежат на гладком горизонтальном столе.
     Бруски пронумерованы от 1 до {N} и последовательно связаны между собой
@@ -66,10 +67,6 @@ class Many_blocks(variant.VariantTask):
             {m2:L}g - {m1:L}g = {m1:L}a + {m2:L}a, \\\\
             T = {m1:L}a + {m1:L}g, \\\\
         \\end{ cases } \\\\
-        &\\begin{ cases }
-            {m2:L}g - {m1:L}g = {m1:L}a + {m2:L}a, \\\\
-            T = {m1:L}a + {m1:L}g, \\\\
-        \\end{ cases } \\\\
         a &= \\frac{ {m2:L} - {m1:L} }{ {m1:L} + {m2:L} } * g = \\frac{ {m2:V} - {m1:V} }{ {m1:V} + {m2:V} } * {Consts.g_ten:Value} \\approx {a:Value}, \\\\
         T &= {m1:L}(a + g) = {m1:L} * g * \\cbr{ \\frac{ {m2:L} - {m1:L} }{ {m1:L} + {m2:L} } + 1 } = {m1:L} * g * \\frac{ 2{m2:L} }{ {m1:L} + {m2:L} } = \\\\
             &= \\frac{ 2 {m2:L} {m1:L} g }{ {m1:L} + {m2:L} } = \\frac{ 2 * {m2:V} * {m1:V} * {Consts.g_ten:Value }}{ {m1:V} + {m2:V} } \\approx {T:Value}.
@@ -94,9 +91,9 @@ class Two_blocks_on_block(variant.VariantTask):
 @variant.arg(mu=('\\mu = {}', ['0.15', '0.2', '0.25']))
 @variant.arg(F=('F = {} Н', ['2.5', '3.5', '4.5', '5.5']))
 @variant.answer_align([
-    '{F_max:L} &= \\mu N = \\mu m g = {mu:Value} * {m:V} * {Consts.g_ten:V} = {F_max:V},',
-    '{F_max:L} &{sign} {F:L} \\implies {F_tren:L} = {F_tren:V}, {a:L} = \\frac{ {F:L} - {F_tren:L} }{m:L:s} = {a:V},',
-    '\\text{ при равенстве возможны оба варианта: и едет, и не едет. }',
+    '{F_max:L} = \\mu N = \\mu m g = {mu:Value} * {m:V} * {Consts.g_ten:V} = {F_max:V},',
+    '{F_max:L} {sign} {F:L} \\implies {F_tren:L} = {F_tren:V}, {a:L} = \\frac{ {F:L} - {F_tren:L} }{m:L:s} = {a:V},',
+    '\\text{ при равенстве возможны оба варианта: и едет, и не едет, но на ответы это не влияет. }',
 ])
 class F_tren(variant.VariantTask):
     def GetUpdate(self, m=None, mu=None, F=None, **kws):
