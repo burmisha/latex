@@ -182,7 +182,7 @@ class A_plus_V(variant.VariantTask):
     def GetUpdate(self, what=None, t=None, a=None, n=None, **kws):
         return dict(
             v='v = %.1f м / с' % (t.Value * a.Value) ,
-            s='s_x = %.1f м' % (t.Value * (a.Value ** 2) / 2) ,
+            s='s_x = %.1f м' % (t.Value ** 2 * a.Value / 2) ,
             v_avg='v_\\text{ сред. } = %.2f м / c' % (t.Value * a.Value * (1 / 2 + n) / (1 + n)) ,
         )
 
@@ -225,6 +225,7 @@ class V_and_S_from_g_and_t(variant.VariantTask):
 @variant.answer_align([
     't &= {t:Value}, r = {r:Value}, n = {n}\\units{ оборотов },',
     'T &= \\frac tN = \\frac{t:Value:s}{ {n} } \\approx {T:Value},',
+    '\\nu &= \\frac 1T = \\frac{ {n} }{t:Value:s} \\approx {nu:Value},',
     'v &= \\frac{ 2 \\pi r }{ T } = \\frac{ 2 \\pi r }{ T } =  \\frac{ 2 \\pi r n }{ t } \\approx {v:Value},',
     'a &= \\frac{ v^2 }{ r } =  \\frac{ 4 \\pi^2 r n^2 }{ t^2 } \\approx {a:Value}.'
 ])
@@ -259,7 +260,7 @@ class All_from_l_and_n(variant.VariantTask):
 @variant.arg(v=('v_0 = {} м / с', ['12', '13', '14', '15', '16', '17', '18']))
 @variant.answer_align([
     'y &= y_0 + v_{ 0y }t - \\frac{ gt^2 }2 = h - \\frac{ gt^2 }2, \\qquad y(\\tau) = 0 \\implies h - \\frac{ g\\tau^2 }2 = 0 \\implies h = \\frac{ g\\tau^2 }2 \\approx {h:Value}.',
-    'x &= x_0 + v_{ 0x }t = v_{ 0x }t \\implies L = v_0\\tau \\approx {L:Value}.',
+    'x &= x_0 + v_{ 0x }t = v_0t \\implies L = v_0\\tau \\approx {L:Value}.',
     'v = \\sqrt{ v_x^2 + v_y^2 } = \\sqrt{ v_{ 0x }^2 + \\sqr{ v_{ 0y } - g\\tau } } = \\sqrt{ v_0^2 + \\sqr{ g\\tau } } \\approx {v_res:Value}.'
 ])
 class Stones_into_river(variant.VariantTask):
