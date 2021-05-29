@@ -27,12 +27,12 @@ class Gendenshteyn_11_11_18(variant.VariantTask):
 @variant.solution_space(20)
 @variant.text('''
     Напротив физических величин укажите их обозначения и единицы измерения в СИ, а в пункте «г)» запишите физический закон или формулу:
-    \\begin{{enumerate}}
+    \\begin{enumerate}
         \\item {v_1},
         \\item {v_2},
         \\item {v_3},
         \\item {v_4}.
-    \\end{{enumerate}}
+    \\end{enumerate}
 ''')
 @variant.arg(v_1=['скорость света в среде', 'корость света в вакууме'])
 @variant.arg(v_2=['длина волны', 'частоты волны'])
@@ -51,11 +51,11 @@ class Definitions01(variant.VariantTask):
 @variant.solution_space(60)
 @variant.text('''
     Выразите (нужен вывод из базовых физических законов):
-    \\begin{{enumerate}}
+    \\begin{enumerate}
         \\item {v_1},
         \\item {v_2},
         \\item {v_3}.
-    \\end{{enumerate}}
+    \\end{enumerate}
 ''')
 @variant.arg(v_1=[
     'период колебаний через длину волны и скорость её распространения',
@@ -76,12 +76,12 @@ class Deduce01(variant.VariantTask):
 @variant.solution_space(100)
 @variant.text('''
     Укажите букву, соответствующую физическую величину (из текущего раздела), её едииницы измерения в СИ и выразите её из какого-либо уравнения:
-    \\begin{{enumerate}}
+    \\begin{enumerate}
         \\item {v_1},
         \\item {v_2},
         \\item {v_3},
         \\item {v_4}.
-    \\end{{enumerate}}
+    \\end{enumerate}
 ''')
 @variant.arg(v_1=['«йэ»', '«л\'амбда»'])
 @variant.arg(v_2=['«вэ»', '«цэ»'])
@@ -94,12 +94,12 @@ class Sound_to_value(variant.VariantTask):
 @variant.solution_space(0)
 @variant.text('''
     Напротив каждой приставки единиц СИ укажите её полное название и соответствующий множитель:
-    \\begin{{enumerate}}
+    \\begin{enumerate}
         \\item {v_1},
         \\item {v_2},
         \\item {v_3},
         \\item {v_4}.
-    \\end{{enumerate}}
+    \\end{enumerate}
 ''')
 @variant.arg(v_1=['м', 'М'])
 @variant.arg(v_2=['к', 'мк'])

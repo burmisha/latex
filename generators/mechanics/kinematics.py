@@ -3,12 +3,12 @@ from generators.helpers import Consts, Fraction, UnitValue
 
 @variant.text('''
     Запишите определения, формулы и физические законы (можно сокращать, но не упустите ключевое):
-    \\begin{{enumerate}}
+    \\begin{enumerate}
         \\item {item_1},
         \\item {item_2},
         \\item {item_3},
         \\item {item_4}.
-    \\end{{enumerate}}
+    \\end{enumerate}
 ''')
 @variant.arg(item_1=[
     'основная задача механики',
@@ -37,11 +37,11 @@ class Theory_1(variant.VariantTask):
 
 @variant.text('''
     Запишите определения, формулы и физические законы (можно сокращать, но не упустите ключевое):
-    \\begin{{enumerate}}
+    \\begin{enumerate}
         \\item {item_1},
         \\item {item_2},
         \\item {item_3}.
-    \\end{{enumerate}}
+    \\end{enumerate}
 ''')
 @variant.arg(item_1=[
     'основная задача механики',
@@ -63,12 +63,12 @@ class Theory_1_simple(variant.VariantTask):
 
 @variant.text('''
     Положив $\\vec a = {i1}\\vec i + {j1} \\vec j, \\vec b = {i2}\\vec i + {j2} \\vec j$,
-    \\begin{{enumerate}}
+    \\begin{enumerate}
         \\item найдите сумму векторов $\\vec a + \\vec b$,
         \\item постройте сумму векторов $\\vec a + \\vec b$ на чертеже,
         \\item определите модуль суммы векторов $\\modul{{\\vec a + \\vec b}}$,
         \\item вычислите разность векторов $\\vec a - \\vec b.$
-    \\end{{enumerate}}
+    \\end{enumerate}
 ''')
 @variant.arg(i1=[2, -2, 3, -3])
 @variant.arg(i2=[3, -3, 4, -4])
@@ -161,11 +161,11 @@ class AvgSpeed_electron(variant.VariantTask):
 @variant.text('''
     {who} стартует на {what} и в течение {t:Task:e} двигается с постоянным ускорением {a:V:e}.
     Определите
-    \\begin{{itemize}}
+    \\begin{itemize}
         \\item какую скорость при этом удастся достичь,
         \\item какой путь за это время будет пройден,
         \\item среднюю скорость за всё время движения, если после начального ускорения продолжить движение равномерно ещё в течение времени ${n}{t:L}$
-    \\end{{itemize}}
+    \\end{itemize}
 ''')
 @variant.arg(who=['Валя', 'Женя', 'Саша'])
 @variant.arg(what=['велосипеде', 'мотоцикле', 'лошади'])
@@ -214,10 +214,10 @@ class V_and_S_from_g_and_t(variant.VariantTask):
 @variant.solution_space(80)
 @variant.text('''
     Карусель {what} {l:V:e} равномерно совершает {n} оборотов в минуту. Определите
-    \\begin{{itemize}}
+    \\begin{itemize}
         \\item период и частоту её обращения,
         \\item скорость и ускорение крайних её точек.
-    \\end{{itemize}}
+    \\end{itemize}
 ''')
 @variant.arg(what=['радиусом', 'диаметром'])
 @variant.arg(l=('l = {} м', [2, 3, 4, 5]))
@@ -249,10 +249,10 @@ class All_from_l_and_n(variant.VariantTask):
     {who} стоит на обрыве над рекой и методично и строго горизонтально кидает в неё камушки.
     За этим всем наблюдает экспериментатор Глюк, который уже выяснил, что камушки падают в реку спустя {t:Value:e} после броска,
     а вот дальность полёта оценить сложнее: придётся лезть в воду. Выручите Глюка и определите:
-    \\begin{{itemize}}
+    \\begin{itemize}
         \\item высоту обрыва (вместе с ростом {who2}).
         \\item дальность полёта камушков (по горизонтали) и их скорость при падении, приняв начальную скорость броска равной {v:Task:e}.
-    \\end{{itemize}}
+    \\end{itemize}
     Сопротивлением воздуха пренебречь.
 ''')
 @variant.arg(who=['Даша', 'Маша', 'Миша', 'Паша'])

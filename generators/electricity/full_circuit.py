@@ -5,11 +5,11 @@ from generators.helpers import UnitValue, letter_variants, Fraction, n_times
 @variant.text('''
     Если батарею замкнуть на резистор сопротивлением $R_1$, то в цепи потечёт ток $\\eli_1$,
     а если на другой $R_2$ — то $\\eli_2$. Определите:
-    \\begin{{itemize}}
+    \\begin{itemize}
         \\item ЭДС батареи,
         \\item внутреннее сопротивление батареи,
         \\item ток короткого замыкания.
-    \\end{{itemize}}
+    \\end{itemize}
 ''')
 @variant.no_args
 @variant.answer_tex('''
@@ -18,11 +18,11 @@ from generators.helpers import UnitValue, letter_variants, Fraction, n_times
     с законом Кирхгофа. Получим систему из 2 уравнений и 2 неизвестных, решим в удобном порядке,
     ибо нам всё равно понадобятся обе.
 
-    \\begin{ align* }
-        &\\begin{ cases }
+    \\begin{align*}
+        &\\begin{cases}
             \\ele = \\eli_1(R_1 + r), \\\\
             \\ele = \\eli_2(R_2 + r); \\\\
-        \\end{ cases } \\\\
+        \\end{cases} \\\\
         &\\eli_1(R_1 + r) = \\eli_2(R_2 + r), \\\\
         &\\eli_1 R_1 + \\eli_1r = \\eli_2 R_2 + \\eli_2r, \\\\
         &\\eli_1 R_1 - \\eli_2 R_2 = - \\eli_1r  + \\eli_2r = (\\eli_2 - \\eli_1)r, \\\\
@@ -34,7 +34,7 @@ from generators.helpers import UnitValue, letter_variants, Fraction, n_times
             &= \\eli_1 * \\frac{ R_1\\eli_2 - \\eli_2 R_2 }{ \\eli_2 - \\eli_1 }
             = \\frac{ \\eli_1 \\eli_2 (R_1 - R_2) }{ \\eli_2 - \\eli_1 }
             \\equiv \\frac{ \\eli_1 \\eli_2 (R_2 - R_1) }{ \\eli_1 - \\eli_2 }.
-    \\end{ align* }
+    \\end{align*}
 
     Короткое замыкание происходит в ситуации, когда внешнее сопротивление равно 0
     (при этом цепь замкнута, хотя нагрузки и нет вовсе):
@@ -46,13 +46,13 @@ from generators.helpers import UnitValue, letter_variants, Fraction, n_times
     $$
 
     Важные пункты:
-    \\begin{{itemize}}
+    \\begin{itemize}
         \\item В ответах есть только те величины, которые есть в условии
             (и ещё физические постоянные могут встретиться, но нам не понадобилось).
         \\item Мы упростили выражения, который пошли в ответы (благо у нас даже получилось:
             приведение к общему знаменателю укоротило ответ). Надо доделывать.
         \\item Всё ответы симметричны относительно замены резисторов 1 и 2 (ведь при этом изменятся и токи).
-    \\end{{itemize}}
+    \\end{itemize}
 ''')
 class Short_i(variant.VariantTask):  # Вишнякова - 7
     pass
@@ -65,11 +65,11 @@ class Short_i(variant.VariantTask):  # Вишнякова - 7
     резистора сопротивлением {R1:Value:e} в цепи течёт ток силой {I1:Value:e}.
     После этого {how} с первым проводником подключают ещё один сопротивлением {R2:Value:e}.
     Определите
-    \\begin{{itemize}}
+    \\begin{itemize}
         \\item внутреннее сопротивление источника тока,
         \\item новую силу тока в цепи,
         \\item мощность тока во втором проводнике.
-    \\end{{itemize}}
+    \\end{itemize}
 ''')
 @variant.arg(r=('r = {} Ом', [1, 2, 3]))
 @variant.arg(how=['параллельно', 'последовательно'])

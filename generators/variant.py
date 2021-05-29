@@ -22,43 +22,112 @@ PAPER_TEMPLATE = r'''
 '''.strip()
 
 
+def escape_tex(template):
+    replacements = [
+        ('{', '{{'),
+        ('}', '}}'),
+        (' * ', ' \\cdot '),
+    ]
+    tmpl = str(template)
+    for src, dst in replacements:
+        tmpl = tmpl.replace(src, dst)
+    return tmpl
+
+
 class LaTeXFormatter:
-    def __init__(self, args):
+    def __init__(self, args=None):
+        if args is None:
+            args = {}
+        assert isinstance(args, dict)
         self._args = args
+        self._args['Consts'] = Consts
+        self._keys = set(self._args.keys())
 
     def __substitute(self, line, replace_comma):
         assert isinstance(line, str)
-        result = line.format(**(self._args))
+        result = escape_tex(line)
+        subs = {}
+        for key in self._keys:
+            for regexp in [
+                '',
+                '[\.\w]*\[[\\.\\:\\|\\*\\w\]]*',
+                '([\.\w\]\[])*\\:[\\.\\:\\|\\*\\w]*',
+            ]:
+                regexp = '{{(' + key + regexp + ')}}'
+                result, n = re.subn(regexp, r'{\1}', result)
+                subs[key] = subs.get(key, 0) + n
+
+        try:
+            result = result.format(**(self._args))
+        except Exception as e:
+            log.error(f'Error {e} while formatting line with {len(self._args)} args:\n{line}\n\n{result}')
+            for k, v in self._args.items():
+                log.error(f'  arg {k}: {type(v)}')
+            log.error(f'Subs: {subs}')
+            raise
+
         # dirty hacks for tikz
         if replace_comma and ('node' not in line) and ('draw' not in line):
             result = re.sub('(\\d)\.(\\d)', '\\1{,}\\2', result)
+
         result = re.sub(r'\+ +-', '-', result)
         return result
 
     def format(self, value, replace_comma=True):
-        try:
-            if value is None:
-                return None
-            elif isinstance(value, str):
-                return self.__substitute(value, replace_comma=replace_comma)
-            elif isinstance(value, dict):
-                return dict(
-                    (self.__substitute(k, replace_comma=replace_comma), v)
-                    for k, v in value.items()
-                )
-            else:
-                raise RuntimeError(f'LaTeXFormatter does not support {value}')
-        except:
-            log.error(f'Cannot format template for {type(value)}')
-            log.error(f'Template: {value}')
-            log.error(f'Args: {self._args}')
-            raise
+        if value is None:
+            return None
+        elif isinstance(value, str):
+            return self.__substitute(value, replace_comma)
+        elif isinstance(value, dict):
+            return {
+                self.__substitute(k, replace_comma): v
+                for k, v in value.items()
+            }
+        else:
+            log.error(f'LaTeXFormatter value: {value}')
+            raise RuntimeError(f'LaTeXFormatter does not support {type(value)}: {value}')
 
 
-assert LaTeXFormatter({}).format('0.2', replace_comma=False) == '0.2'
-assert LaTeXFormatter({}).format('0.2', replace_comma=True) == r'0{,}2'
-assert LaTeXFormatter({}).format('node 0.2', replace_comma=True) == r'node 0.2'
-assert LaTeXFormatter({'a': '0.20'}).format({'{a}': 0.3}, replace_comma=False) == {'0.20': 0.3}
+def test_replace_comma():
+    assert LaTeXFormatter().format('0.2', replace_comma=False) == '0.2'
+    assert LaTeXFormatter().format('0.2', replace_comma=True) == r'0{,}2'
+    assert LaTeXFormatter().format('node 0.2', replace_comma=True) == r'node 0.2'
+
+test_replace_comma()
+
+def test_substitute():
+    for args, value, result in [
+        (dict(a=2), {'{a}': 3}, {'2': 3}),
+        (dict(a='0.20'), {'{a}': 0.3}, {'0{,}20': 0.3}),
+        (dict(a=2), '{a}', '2'),
+        (dict(a=2), '{a}', '2'),
+        (dict(a=2), '{ab}[asd]', '{ab}[asd]'),
+        (dict(a=[2, 3]), '{a[1]}', '3'),
+        (dict(a=2), '{b}', '{b}'),
+        (dict(a=2), '{b:.1d|as}', '{b:.1d|as}'),
+        (dict(a=2, b=3), '{a}{b}', '23'),
+        (dict(a=2, b=3), '{{a}}{b}', '{2}3'),
+        (dict(a=2, b=3), '{ {a} }{b}', '{ 2 }3'),
+        (dict(a=UnitValue('1 м')), '{a:V}', r'1\,\text{м}'),
+        (dict(a=UnitValue('1 м')), '{a:V|sqr}', r'\sqr{ 1\,\text{м} }'),
+        ({}, '{Consts.c:Letter}', r'c'),
+        ({}, '{Consts.p_atm:Task:e}', r'$p_{\text{aтм}} = 100\,\text{кПа}$'),
+        ({}, '{ {Consts.c:Letter} }', r'{ c }'),
+        (dict(a=1), '{Consts.c:Letter}', r'c'),
+        (dict(a=1), '\\begin{qq}', r'\begin{qq}'),
+        (dict(a=1), '\\begin{qq*}', r'\begin{qq*}'),
+        ({}, '\\begin{align*}F &= \sqrt{ F_a^2 + F_b^2 }\\end{align*}', r'\begin{align*}F &= \sqrt{ F_a^2 + F_b^2 }\end{align*}'),
+    ]:
+        res = LaTeXFormatter(args).format(value)
+        assert res == result, f'''
+  Expected: {result}
+  Got: {res}
+    value: {value}
+    args: {args}
+'''
+
+
+test_substitute()
 
 
 def check_unit_value(value):
@@ -162,7 +231,6 @@ class VariantTask:
         answer_test_template = self.GetAnswerTestTemplate()
 
         return problems.task.Task(
-            # TODO: do not escape_tex
             laTeXFormatter.format(textTemplate),
             answer=laTeXFormatter.format(answerTemplate),
             test_answer=laTeXFormatter.format(answer_test_template, replace_comma=False),
@@ -236,20 +304,6 @@ class MultiplePaper:
         return filename
 
 
-def escape_tex(template):
-    replacements = [
-        ('{\n', '{{\n'),
-        ('\n}', '\n}}'),
-        ('{ ', '{{'),
-        (' }', '}}'),
-        (' * ', ' \\cdot '),
-    ]
-    tmpl = str(template)
-    for src, dst in replacements:
-        tmpl = tmpl.replace(src, dst)
-    return tmpl
-
-
 def solution_space(space):
     def decorator(cls):
         assert not hasattr(cls, 'SolutionSpace')
@@ -262,7 +316,7 @@ def solution_space(space):
 def text(template_str):
     def decorator(cls):
         assert not hasattr(cls, 'TextTemplate')
-        cls.TextTemplate = escape_tex(template_str)
+        cls.TextTemplate = template_str
         return cls
     return decorator
 
@@ -270,7 +324,7 @@ def text(template_str):
 def text_test(template_str):
     def decorator(cls):
         assert not hasattr(cls, 'TextTestTemplate')
-        cls.TextTestTemplate = escape_tex(template_str)
+        cls.TextTestTemplate = template_str
         return cls
     return decorator
 
@@ -278,7 +332,7 @@ def text_test(template_str):
 def answer(template_str):
     def decorator(cls):
         assert not hasattr(cls, 'AnswerTemplate')
-        cls.AnswerTemplate = escape_tex(template_str)
+        cls.AnswerTemplate = template_str
         return cls
     return decorator
 
@@ -286,7 +340,7 @@ def answer(template_str):
 def answer_short(template_str):
     def decorator(cls):
         assert not hasattr(cls, 'AnswerTemplate')
-        cls.AnswerTemplate = '${}$'.format(escape_tex(template_str))
+        cls.AnswerTemplate = f'${template_str}$'
         return cls
     return decorator
 
@@ -306,8 +360,8 @@ def answer_align(template_lines):
         for line in template_lines:
             if '&' not in line:
                 line = '&' + line
-            lines.append(escape_tex(line))
-        template = '\\begin{{align*}}\n' + ' \\\\\n'.join(lines) + '\n\\end{{align*}}'
+            lines.append(line)
+        template = '\\begin{align*}\n' + ' \\\\\n'.join(lines) + '\n\\end{align*}'
         cls.AnswerTemplate = template.replace('\n\n', '\n')
         return cls
     return decorator
@@ -316,7 +370,7 @@ def answer_align(template_lines):
 def answer_tex(text):
     def decorator(cls):
         assert not hasattr(cls, 'AnswerTex')
-        cls.AnswerTex = escape_tex(text)
+        cls.AnswerTex = text
         return cls
     return decorator
 

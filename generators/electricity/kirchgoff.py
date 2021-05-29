@@ -18,7 +18,7 @@ from generators.helpers import UnitValue, letter_variants, Fraction, n_times
 
     Отметим на рисунке 2 контура (и не забуем указать направление) и 1 узел (точка «1»ы, выделена жирным). Выбор контуров и узлов не критичен: получившаяся система может быть чуть проще или сложнее, но не слишком.
 
-    \\begin{ tikzpicture }[circuit ee IEC, thick]
+    \\begin{tikzpicture}[circuit ee IEC, thick]
         \\draw  (0, 0) to [current direction={ near end, info=$\\eli_1$ }] (0, 3)
                 to [battery={ rotate=-180,info={ $\\ele_1, r_1 $ } }]
                 (3, 3)
@@ -30,20 +30,20 @@ from generators.helpers import UnitValue, letter_variants, Fraction, n_times
         \\node [contact,color=green!71!black] (bottomc) at (3, 0) {  };
         \\node [below] (bottom) at (3, 0) { $2$ };
         \\node [above] (top) at (3, 3) { $1$ };
-    \\end{ tikzpicture }
+    \\end{tikzpicture}
 
-    \\begin{ align* }
-        &\\begin{ cases }
+    \\begin{align*}
+        &\\begin{cases}
             { \\color{ red } \\ele_1 = \\eli_1 r_1 - \\eli R }, \\\\
             { \\color{ blue } -\\ele_2 = -\\eli_2 r_2 + \\eli R }, \\\\
             { \\color{ green!71!black } - \\eli - \\eli_1 - \\eli_2 = 0 };
-        \\end{ cases }
+        \\end{cases}
         \\qquad \\implies \\qquad
-        \\begin{ cases }
+        \\begin{cases}
             \\eli_1 = \\frac{ \\ele_1 + \\eli R }{ r_1 }, \\\\
             \\eli_2 = \\frac{ \\ele_2 + \\eli R }{ r_2 }, \\\\
             \\eli + \\eli_1 + \\eli_2 = 0;
-        \\end{ cases } \\implies \\\\
+        \\end{cases} \\implies \\\\
         &\\implies
          \\eli + \\frac{ \\ele_1 + \\eli R }{ r_1 } + \\frac{ \\ele_2 + \\eli R }{ r_2 } = 0, \\\\
         &\\eli\\cbr{ 1 + \\frac{ R }{ r_1 } + \\frac{ R }{ r_2 } } + \\frac{ \\ele_1 }{ r_1 } + \\frac{ \\ele_2 }{ r_2 } = 0, \\\\
@@ -55,7 +55,7 @@ from generators.helpers import UnitValue, letter_variants, Fraction, n_times
         &U  = \\varphi_2 - \\varphi_1 = \\eli R
             = - \\frac{ \\frac{ \\ele_1 }{ r_1 } + \\frac{ \\ele_2 }{ r_2 } }{ 1 + \\frac{ R }{ r_1 } + \\frac{ R }{ r_2 } } R
             \\approx {U:Value}.
-    \\end{ align* }
+    \\end{align*}
     Оба ответа отрицательны, потому что мы изначально «не угадали» с направлением тока. Расчёт же показал,
     что ток через резистор $R$ течёт в противоположную сторону: вниз на рисунке, а потенциал точки 1 больше потенциала точки 2,
     а электрический ток ожидаемо течёт из точки с большим потенциалов в точку с меньшим.
@@ -85,7 +85,7 @@ class Kirchgof_double(variant.VariantTask):
     Определите ток, протекающий через резистор $R_{index}$, разность потенциалов на нём (см. рис.)
     и выделяющуюся на нём мощность, если известны $r_1, r_2, \\ele_1, \\ele_2, R_1, R_2$.
 
-    \\begin{ tikzpicture }[circuit ee IEC, thick]
+    \\begin{tikzpicture}[circuit ee IEC, thick]
         \\draw  (0, 0) -- ++(up:2)
                 to [
                     battery={ very near start, rotate={rotate1}, info={ $\\ele_1, r_1 $ } },
@@ -94,7 +94,7 @@ class Kirchgof_double(variant.VariantTask):
                 ] ++(right:5)
                 -- ++(down:2)
                 to [resistor={ info=$R_2$ }] ++(left:5);
-    \\end{ tikzpicture }
+    \\end{tikzpicture}
 ''')
 @variant.arg(index=[1, 2])
 @variant.arg(rotate1=[0, -180])
@@ -105,7 +105,7 @@ class Kirchgof_double(variant.VariantTask):
     то именно эти законы бы помогли понять, что все эти токи равны: $\\eli_1 - \\eli_2 = 0$ и т.д.
     Так что запишем закон Кирхгофа для единственного замкнутого контура:
 
-    \\begin{ tikzpicture }[circuit ee IEC, thick]
+    \\begin{tikzpicture}[circuit ee IEC, thick]
         \\draw  (0, 0) -- ++(up:2)
                 to [
                     battery={ very near start, rotate={rotate1}, info={ $\\ele_1, r_1 $ } },
@@ -115,15 +115,15 @@ class Kirchgof_double(variant.VariantTask):
                 -- ++(down:2)
                 to [resistor={ info=$R_2$ }, current direction={ near end, info=$\\eli$ }] ++(left:5);
         \\draw [-{ Latex }] (2, 1.4) arc [start angle = 135, end angle = -160, radius = 0.6];
-    \\end{ tikzpicture }
+    \\end{tikzpicture}
 
-    \\begin{ align* }
+    \\begin{align*}
         &{sign1} \\ele_1 + {sign2} \\ele_2 = \\eli R_1 + \\eli r_2 + \\eli R_2 + \\eli r_1, \\\\
         &{sign1} \\ele_1 + {sign2} \\ele_2 = \\eli (R_1 + r_2 + R_2 + r_1), \\\\
         &\\eli = \\frac{ {sign1} \\ele_1 + {sign2} \\ele_2 }{ R_1 + r_2 + R_2 + r_1 }, \\\\
         &U_{index} = \\eli R_{index} = \\frac{ {sign1} \\ele_1 + {sign2} \\ele_2 }{ R_1 + r_2 + R_2 + r_1 } * R_{index}, \\\\
         &P_{index} = \\eli^2 R_{index} = \\frac{ \\sqr{ {sign1} \\ele_1 + {sign2} \\ele_2 } R_{index} }{ \\sqr{ R_1 + r_2 + R_2 + r_1 } }.
-    \\end{ align* }
+    \\end{align*}
 
     Отметим, что ответ для тока $\\eli$ меняет знак, если отметить его на рисунке в другую сторону.
     Поэтому критично важно указывать на рисунке направление тока, иначе невозможно утверждать, что ответ верный.
@@ -147,13 +147,13 @@ class Kirchgof_plain(variant.VariantTask):
     Определите ток, протекающий через резистор {R:Task:e} и разность потенциалов на нём (см. рис.),
     если {E1:Task:e}, {E2:Task:e}, {r1:Task:e}, {r2:Task:e}.
 
-    \\begin{ tikzpicture }[circuit ee IEC, thick]
+    \\begin{tikzpicture}[circuit ee IEC, thick]
         \\draw  (0, 0) to [battery={ rotate=-180,info={ $\\ele_1, r_1 $ } }] (0, 3)
                 -- (5, 3)
                 to [battery={ rotate=-180, info'={ $\\ele_2, r_2 $ } }] (5, 0)
                 -- (0, 0)
                 (2.5, 0) to [resistor={ info=$R$ }] (2.5, 3);
-    \\end{ tikzpicture }
+    \\end{tikzpicture}
 ''')
 @variant.arg(R=['R = %d Ом' % RValue for RValue in [10, 12, 15, 18, 20]])
 @variant.arg(r1=['r_1 = %d Ом' % r1Value for r1Value in [1, 2, 3]])
@@ -163,7 +163,7 @@ class Kirchgof_plain(variant.VariantTask):
 @variant.answer_tex('''
     Выберем 2 контура и один узел, запишем для них законы Кирхгофа:
 
-    \\begin{ tikzpicture }[circuit ee IEC, thick]
+    \\begin{tikzpicture}[circuit ee IEC, thick]
         \\draw  (0, 0) to [battery={ rotate=-180,info={ $\\ele_1, r_1 $ } }, current direction={ near end, info=$\\eli_1$ }] (0, 3)
                 -- (5, 3)
                 to [battery={ rotate=-180, info'={ $\\ele_2, r_2 $ } }, current direction={ near end, info=$\\eli_2$ }] (5, 0)
@@ -173,20 +173,20 @@ class Kirchgof_plain(variant.VariantTask):
         \\draw [-{ Latex },color=blue] (3.5, 1.9) arc [start angle = 135, end angle = -160, radius = 0.6];
         \\node [contact,color=green!71!black] (topc) at (2.5, 3) {  };
         \\node [above] (top) at (2.5, 3) { $1$ };
-    \\end{ tikzpicture }
+    \\end{tikzpicture}
 
-    \\begin{ align* }
-        &\\begin{ cases }
+    \\begin{align*}
+        &\\begin{cases}
             { \\color{ red } {E1:L} = \\eli_1 {r1:L} + {I:L} {R:L} }, \\\\
             { \\color{ blue } {E2:L} = \\eli_2 {r2:L} - {I:L} {R:L} }, \\\\
             { \\color{ green!71!black } {I:L} - \\eli_1 - \\eli_2 = 0 };
-        \\end{ cases }
+        \\end{cases}
         \\qquad \\implies \\qquad
-        \\begin{ cases }
+        \\begin{cases}
             \\eli_1 = \\frac{ {E1:L} - {I:L} {R:L} }{r1:L:s}, \\\\
             \\eli_2 = \\frac{ {E2:L} + {I:L} {R:L} }{r2:L:s}, \\\\
             {I:L} - \\eli_1 - \\eli_2 = 0;
-        \\end{ cases } \\implies \\\\
+        \\end{cases} \\implies \\\\
         &\\implies {I:L} - \\frac{ {E1:L} - {I:L} {R:L} }{r1:L:s} + \\frac{ {E2:L} + {I:L} {R:L} }{r2:L:s} = 0, \\\\
         &{I:L}\\cbr{ 1 + \\frac{R:L:s}{r1:L:s} + \\frac{R:L:s}{r2:L:s} } - \\frac{E1:L:s}{r1:L:s} + \\frac{E2:L:s}{r2:L:s} = 0, \\\\
         &{I:L}
@@ -196,7 +196,7 @@ class Kirchgof_plain(variant.VariantTask):
             \\approx {I:Value}, \\\\
         &U  = {I:L} {R:L} = \\frac{ \\frac{E1:L:s}{r1:L:s} - \\frac{E2:L:s}{r2:L:s} }{ 1 + \\frac{R:L:s}{r1:L:s} + \\frac{R:L:s}{r2:L:s} } R
             \\approx {U:Value}.
-    \\end{ align* }
+    \\end{align*}
 '''
 )
 class Kirchgof_double_2(variant.VariantTask):
@@ -224,7 +224,7 @@ class Kirchgof_double_2(variant.VariantTask):
     Внутренним сопротивлением всех трёх ЭДС пренебречь.
     Ответы получите в виде несократимых дробей, а также определите приближённые значения.
 
-    \\begin{ tikzpicture }[circuit ee IEC, thick]
+    \\begin{tikzpicture}[circuit ee IEC, thick]
         \\foreach \\contact/\\x in { 1/0, 2/3, 3/6 }
         {
             \\node [contact] (top contact \\contact) at (\\x, 0) {  };
@@ -235,7 +235,7 @@ class Kirchgof_double_2(variant.VariantTask):
         \\draw  (bottom contact 1) to [resistor={ near start, info={R1:Letter:e} }, battery={ near end, info={E1:Letter:e} }] (top contact 1);
         \\draw  (bottom contact 2) to [resistor={ near start, info={R2:Letter:e} }, battery={ near end, info={E2:Letter:e} }] (top contact 2);
         \\draw  (bottom contact 3) to [resistor={ near start, info={R3:Letter:e} }, battery={ near end, info={E3:Letter:e} }] (top contact 3);
-    \\end{ tikzpicture }
+    \\end{tikzpicture}
 
 ''')
 @variant.arg(index=[1, 2, 3])
@@ -247,15 +247,15 @@ class Kirchgof_double_2(variant.VariantTask):
 @variant.arg(E3=('\\ele_3 = {} В', [2, 8]))
 @variant.answer_tex('''
     План:
-    \\begin{{itemize}}
+    \\begin{itemize}
         \\item отметим на рисунке произвольно направления токов (если получим отрицательный ответ, значит не угадали направление и только),
         \\item выберем и обозначим на рисунке контуры (здесь всего 3, значит будет нужно $3-1=2$), для них запишем законы Кирхгофа,
         \\item выберем и выделим на рисунке нетривиальные узлы (здесь всего 2, значит будет нужно $2-1=1$), для него запишем закон Кирхгофа,
         \\item попытаемся решить получившуюся систему. В конкретном решении мы пытались первым делом найти {I2:L:e}, но, возможно, в вашем варианте будет быстрее решать систему в другом порядке. Мы всё же проделаем всё в лоб, подробно и целиком.
-    \\end{{itemize}}
+    \\end{itemize}
 
 
-    \\begin{ tikzpicture }[circuit ee IEC, thick]
+    \\begin{tikzpicture}[circuit ee IEC, thick]
         \\foreach \\contact/\\x in { 1/0, 2/3, 3/6 }
         {
             \\node [contact] (top contact \\contact) at (\\x, 0) {  };
@@ -269,20 +269,20 @@ class Kirchgof_double_2(variant.VariantTask):
         \\draw [-{ Latex },color=red] (1.2, 2.5) arc [start angle = 135, end angle = -160, radius = 0.6];
         \\draw [-{ Latex },color=blue] (4.2, 2.5) arc [start angle = 135, end angle = -160, radius = 0.6];
         \\node [contact,color=green!71!black] (bottomc) at (bottom contact 2) {  };
-    \\end{ tikzpicture }
+    \\end{tikzpicture}
 
-    \\begin{ align* }
-        &\\begin{ cases }
+    \\begin{align*}
+        &\\begin{cases}
             { \\color{ red } {I1:L}{R1:L} - {I2:L}{R2:L} = {E1:L} - {E2:L} }, \\\\
             { \\color{ blue } {I2:L}{R2:L} - {I3:L}{R3:L} = {E2:L} - {E3:L} }, \\\\
             { \\color{ green!71!black } {I1:L} + {I2:L} + {I3:L} = 0 };
-        \\end{ cases }
+        \\end{cases}
         \\qquad \\implies \\qquad
-        \\begin{ cases }
+        \\begin{cases}
             {I1:L} = \\frac{ {E1:L} - {E2:L} + {I2:L}{R2:L} }{R1:L:s}, \\\\
             {I3:L} = \\frac{ {I2:L}{R2:L} - {E2:L} + {E3:L} }{R3:L:s}, \\\\
             {I1:L} + {I2:L} + {I3:L} = 0, \\\\
-        \\end{ cases } \\implies \\\\
+        \\end{cases} \\implies \\\\
         \\implies
             &{I2:L} + \\frac{ {E1:L} - {E2:L} + {I2:L}{R2:L} }{R1:L:s} + \\frac{ {I2:L}{R2:L} - {E2:L} + {E3:L} }{R3:L:s} = 0, \\\\
         &   {I2:L}\\cbr{ 1 + \\frac{R2:L:s}{R1:L:s} + \\frac{R2:L:s}{R3:L:s} } + \\frac{ {E1:L} - {E2:L} }{R1:L:s} + \\frac{ {E3:L} - {E2:L} }{R3:L:s} = 0, \\\\
@@ -292,12 +292,12 @@ class Kirchgof_double_2(variant.VariantTask):
         &   {U2:L} = {I2:L}{R2:L} = \\cfrac{ \\cfrac{ {E2:L} - {E1:L} }{R1:L:s} + \\cfrac{ {E2:L} - {E3:L} }{R3:L:s} }{ 1 + \\cfrac{R2:L:s}{R1:L:s} + \\cfrac{R2:L:s}{R3:L:s} } * {R2:L}
             = \\cfrac{ \\cfrac{ {E2:V} - {E1:V} }{R1:V:s} + \\cfrac{ {E2:V} - {E3:V} }{R3:V:s} }{ 1 + \\cfrac{R2:V:s}{R1:V:s} + \\cfrac{R2:V:s}{R3:V:s} } * {R2:V}
             = {I2_ratio:LaTeX}\\units{ А } * {R2:V} = {U2_ratio:LaTeX}\\units{ В } \\approx {U2:Value}.
-    \\end{ align* }
+    \\end{align*}
 
     Одну пару силы тока и напряжения получили. Для некоторых вариантов это уже ответ, но не у всех.
     Для упрощения записи преобразуем (чтобы избавитсья от 4-этажной дроби) и подставим в уже полученные уравнения:
 
-    \\begin{ align* }
+    \\begin{align*}
     {I2:L}
         &=
         \\frac{ \\frac{ {E2:L} - {E1:L} }{R1:L:s} + \\frac{ {E2:L} - {E3:L} }{R3:L:s} }{ 1 + \\frac{R2:L:s}{R1:L:s} + \\frac{R2:L:s}{R3:L:s} }
@@ -350,10 +350,10 @@ class Kirchgof_double_2(variant.VariantTask):
         }{ \\cfrac{R1:L:s}{R2:L:s} + 1 + \\cfrac{R1:L:s}{R3:L:s} } * {R1:L}
         =
         {I1_ratio:LaTeX}\\units{ А } * {R1:V} = {U1_ratio:LaTeX}\\units{ В } \\approx {U1:Value}.
-    \\end{ align* }
+    \\end{align*}
 
     Если вы проделали все эти вычисления выше вместе со мной, то
-    \\begin{{itemize}}
+    \\begin{itemize}
         \\item вы совершили ошибку, выбрав неверный путь решения:
         слишком длинное решение, очень легко ошибиться в индексах, дробях, знаках или потерять какой-то множитель,
         \\item можно было выразить из исходной системы другие токи и получить сразу нажный вам,
@@ -362,10 +362,10 @@ class Kirchgof_double_2(variant.VariantTask):
         поэтому ответ для 1-го резистора должен отличаться лишь перестановкой индексов (этот факт крайне полезен при проверке ответа, у нас всё сошлось),
         я специально подгонял выражение для {I1:L:e} к этому виду, вынося за скобки и преобразуя дробь,
         \\item вы молодец, потому что не побоялись и получили верный ответ грамотным способом,
-    \\end{{itemize}}
+    \\end{itemize}
     так что переходим к третьему резистору. Будет похоже, но кого это когда останавливало...
 
-    \\begin{ align* }
+    \\begin{align*}
     {I3:L}
         &=  \\frac{ {I2:L}{R2:L} - {E2:L} + {E3:L} }{R3:L:s}
         =
@@ -411,7 +411,7 @@ class Kirchgof_double_2(variant.VariantTask):
         }{ \\cfrac{R3:L:s}{R2:L:s} + \\cfrac{R3:L:s}{R1:L:s} + 1 } * {R3:L}
         =
         {I3_ratio:LaTeX}\\units{ А } * {R3:V} = {U3_ratio:LaTeX}\\units{ В } \\approx {U3:Value}.
-    \\end{ align* }
+    \\end{align*}
 
     Положительные ответы говорят, что мы угадали на рисунке направление тока (тут нет нашей заслуги, повезло),
     отрицательные — что не угадали (и в этом нет ошибки), и ток течёт в противоположную сторону.

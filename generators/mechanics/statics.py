@@ -7,7 +7,7 @@ from generators.helpers import Consts, Fraction, UnitValue
 	Определите силу, действующую на {which} опору однородного горизонтального стержня длиной {l:Task:e}
 	и массой {M:Task:e}, к которому подвешен груз массой {m:Task:e} на расстоянии {b:V:e} от правого конца (см. рис.).
 
-    \\begin{ tikzpicture }[thick]
+    \\begin{tikzpicture}[thick]
         \\draw 
             (-2, -0.1) rectangle (2, 0.1)
             (-0.5, -0.1) -- (-0.5, -1)
@@ -21,7 +21,7 @@ from generators.helpers import Consts, Fraction, UnitValue
         ;
         \\node [right] (m_small) at (-0.3, -1.15) {m:L:e:s};
         \\node [above] (M_big) at (0, 0.1) {M:L:e:s};
-    \\end{ tikzpicture }
+    \\end{tikzpicture}
 ''')
 @variant.arg(which=['левую', 'правую'])
 @variant.arg(m=('m = {} кг', [2, 3, 4]))
@@ -29,14 +29,14 @@ from generators.helpers import Consts, Fraction, UnitValue
 @variant.arg(a=('a = {} м', [1, 3, 5]))
 @variant.arg(b=('b = {} м', [2, 4]))
 @variant.answer_tex('''
-    \\begin{ align* }
-        &\\begin{ cases }
+    \\begin{align*}
+        &\\begin{cases}
             F_1 + F_2 - mg - Mg= 0, \\\\
             F_1 * 0 - mg * a - Mg * \\frac l2 + F_2 * l = 0,
-        \\end{ cases } \\\\
+        \\end{cases} \\\\
         F_2 &= \\frac{ mga + Mg\\frac l2 }l = \\frac al * mg + \\frac{ Mg }2 \\approx {F2:Value}, \\\\
         F_1 &= mg + Mg - F_2 = mg + Mg - \\frac al * mg - \\frac{ Mg }2 = \\frac bl * mg + \\frac{ Mg }2 \\approx {F1:Value}.
-    \\end{ align* }
+    \\end{align*}
 '''
 )
 class Sterzhen(variant.VariantTask):

@@ -3,7 +3,7 @@ from generators.helpers.matter import Matter
 from generators.helpers.vapor import Vapor
 
 
-class Consts:
+class ConstsBase:
     pi = 3.14159
     m_e = UnitValue('m_{e} = 9.1 10^{-31} кг')
     m_p = UnitValue('m_{p} = 1.672 10^{-27} кг')
@@ -85,6 +85,9 @@ class Consts:
         name='аргон',
         mu='40 г / моль',
     )
+
+
+Consts = ConstsBase()
 
 
 def test_calculation():

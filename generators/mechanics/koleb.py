@@ -3,12 +3,12 @@ import generators.variant as variant
 
 @variant.text('''
     Дайте определения:
-    \\begin{{itemize}}
+    \\begin{itemize}
         \\item {koleb},
         \\item {free},
         \\item {const},
         \\item {what}.
-    \\end{{itemize}}
+    \\end{itemize}
 ''')
 @variant.arg(koleb=['гармонические колебания', 'механические колебания'])
 @variant.arg(free=['свободные колебания', 'вынужденные колебания'])

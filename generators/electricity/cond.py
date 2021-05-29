@@ -5,10 +5,10 @@ from generators.helpers import Fraction, n_times, letter_variants
 @variant.solution_space(40)
 @variant.text('''
     Напротив физических величин укажите их обозначения и единицы измерения в СИ:
-    \\begin{{enumerate}}
+    \\begin{enumerate}
         \\item ёмкость конденсатора,
         \\item индуктивность катушки.
-    \\end{{enumerate}}
+    \\end{enumerate}
 ''')
 @variant.no_args
 class Definitions01(variant.VariantTask):
@@ -18,11 +18,11 @@ class Definitions01(variant.VariantTask):
 @variant.solution_space(40)
 @variant.text('''
     Запишите формулы, выражающие:
-    \\begin{{enumerate}}
+    \\begin{enumerate}
         \\item заряд конденсатора через его ёмкость и поданное напряжение,
         \\item энергию конденсатора через {v_1},
         \\item {v_2} колебаний в электромагнитном контуре, состоящем из конденсатора и катушки индуктивности,
-    \\end{{enumerate}}
+    \\end{enumerate}
 ''')
 @variant.arg(v_1=['его ёмкость и поданное напряжение', 'его ёмкость и заряд', 'его заряд и поданное напряжение'])
 @variant.arg(v_2=['период', 'частоту'])
@@ -234,7 +234,7 @@ class W_from_Q_C(variant.VariantTask):  # Rymkevich762
 
 
 @variant.text('''
-    \\begin{{tikzpicture}}[circuit ee IEC, x=1cm, y=1cm, semithick]
+    \\begin{tikzpicture}[circuit ee IEC, x=1cm, y=1cm, semithick]
         \\draw  (0, 0) -- (0, 2) to [capacitor={ info={ {C1:L:e} } }] (2, 2)
                 (0, 0) -- (2, 0) to [capacitor={ info={ {C2:L:e} } }] (0, 0)
         ;
@@ -245,7 +245,7 @@ class W_from_Q_C(variant.VariantTask):  # Rymkevich762
         Два конденсатора ёмкостей {C1:Task:e} и {C2:Task:e} параллельно подключают
         к источнику напряжения {U:Task:e} (см. рис.). Определите заряды каждого из конденсаторов.
         };
-    \\end{{tikzpicture}}
+    \\end{tikzpicture}
 ''')
 @variant.answer_short('''
     Q_1
@@ -275,7 +275,7 @@ class CondPosl(variant.VariantTask):
     % Определите заряды каждого из конденсаторов.
     Определите заряд {which} конденсатора.
 
-    \\begin{{tikzpicture}}[circuit ee IEC, semithick]
+    \\begin{tikzpicture}[circuit ee IEC, semithick]
         \\draw  (0, 0) to [capacitor={ info={ {C1:L:e} } }] (1, 0)
                        to [capacitor={ info={ {C2:L:e} } }] (2, 0)
         ;
@@ -283,7 +283,7 @@ class CondPosl(variant.VariantTask):
         % \\draw [-o] (2, 0) -- ++(0.5, 0) node[right] { $+$ };
         \\draw [-o] (0, 0) -- ++(-0.5, 0) node[left] {  };
         \\draw [-o] (2, 0) -- ++(0.5, 0) node[right] {  };
-    \\end{{tikzpicture}}
+    \\end{tikzpicture}
 ''')
 @variant.answer_short('''
     Q_1

@@ -55,20 +55,20 @@ class Fotons(variant.VariantTask):
 @variant.text('''
     Определите название цвета по длине волны в вакууме
     и частоту колебаний электромагнитного поля в ней:
-    \\begin{{enumerate}}
+    \\begin{enumerate}
         \\item {q1:V:e},
         \\item {q2:V:e},
         \\item {q3:V:e},
         \\item {q4:V:e}.
-    \\end{{enumerate}}
+    \\end{enumerate}
 ''')
 @variant.answer_tex('''
-    \\begin{{enumerate}}
+    \\begin{enumerate}
         \\item ${q1:V} \\to$ {a1}, $\\nu_1 = \\frac c{ \\lambda_1 } \\approx {nu1:V}$,
         \\item ${q2:V} \\to$ {a2}, $\\nu_2 = \\frac c{ \\lambda_2 } \\approx {nu2:V}$,
         \\item ${q3:V} \\to$ {a3}, $\\nu_3 = \\frac c{ \\lambda_3 } \\approx {nu3:V}$,
         \\item ${q4:V} \\to$ {a4}, $\\nu_4 = \\frac c{ \\lambda_4 } \\approx {nu4:V}$.
-    \\end{{enumerate}}
+    \\end{enumerate}
 
     $\\nu = \\frac 1 T = \\frac c{ \\lambda } = \\frac {Consts.c_4:Value:s}{ l * {mkm:V} } \\approx \\frac{nu_0:V:s}l$,
     где $l$~--- численное значение длины волны в мкм.
@@ -149,10 +149,10 @@ class E_from_lambda(variant.VariantTask):
 @variant.solution_space(40)
 @variant.text('''
     Из формулы Планка выразите (нужен вывод, не только ответ)...
-    \\begin{{enumerate}}
+    \\begin{enumerate}
         \\item длину соответствующей электромагнитной волны,
         \\item {second}.
-    \\end{{enumerate}}
+    \\end{enumerate}
 ''')
 @variant.arg(second=[
     'период колебаний индукции магнитного поля в соответствующей электромагнитной волне',

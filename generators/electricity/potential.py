@@ -6,11 +6,11 @@ from generators.helpers import Consts
     В однородном электрическом поле напряжённостью {E:Task:e}
     переместили заряд {q:Task:e} в направлении силовой линии
     на {l:Task:e}. Определите
-    \\begin{{itemize}}
+    \\begin{itemize}
         \\item работу поля,
         \\item изменение потенциальной энергии заряда.
         % \\item напряжение между начальной и конечной точками перемещения.
-    \\end{{itemize}}
+    \\end{itemize}
 ''')
 @variant.answer_align([
     'A &= F * {l:L} * \\cos \\alpha = {E:L}{q:L} * {l:L} * 1 = {E:L}{q:L}{l:L} = {E:Value} * {q:Value} * {l:Value} = {A:V},',
@@ -157,13 +157,13 @@ class A_from_motion(variant.VariantTask):  # Вишнякова 3.1.8
         \\item проекции напряжённости электрического поля,
         \\item потенциала электрического поля.
     \\end{ enumerate }
-    \\begin{ tikzpicture }
+    \\begin{tikzpicture}
         \\draw[-{ Latex }] (0, 0) -- (0, 3.5) node[below right] { $x$ };
         \\draw[thick]
             (-0.05, 0.5) -- (0.05, 0.5)     (0, 0.5) node[left] { $-{d:V}$ }     (0.5, 0.5) -- (4, 0.5) node[right] { {phi_1:V:e} }
             (-0.05, 1.5) -- (0.05, 1.5)     (0, 1.5) node[left] { $0$ }         (0.5, 1.5) -- (4, 1.5) node[right] { {zero:V:e} }
             (-0.05, 2.5) -- (0.05, 2.5)     (0, 2.5) node[left] { ${d:V}$ }    (0.5, 2.5) -- (4, 2.5) node[right] { {phi_2:V:e} };
-    \\end{ tikzpicture }
+    \\end{tikzpicture}
 ''')
 @variant.arg(d=('d = {} см', [2, 3]))
 @variant.arg(phi_1=('\\varphi_1 = {} В', [-90, -30, 30, 90, 150]))

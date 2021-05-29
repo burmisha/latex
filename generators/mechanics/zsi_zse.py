@@ -253,10 +253,10 @@ class Ch_4_29(variant.VariantTask):
 
 @variant.text('''
     Тонкий однородный {what} длиной {l:Value:e} и массой {m:Value:e} лежит на горизонтальной поверхности.
-    \\begin{{itemize}}
+    \\begin{itemize}
         \\item Какую минимальную силу надо приложить к одному из его концов, чтобы оторвать его от этой поверхности?
         \\item Какую минимальную работу надо совершить, чтобы поставить его на землю в вертикальное положение?
-    \\end{{itemize}}
+    \\end{itemize}
     % Примите {Consts.g_ten:Task:e}.
 ''')
 @variant.answer_short('F = \\frac{ mg }2 \\approx {F:V}, A = mg\\frac l2 = {A:V}')

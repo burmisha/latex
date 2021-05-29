@@ -8,7 +8,7 @@ from generators.helpers import UnitValue, Consts, Fraction, n_times
     23 — изохорическое охлаждение газа, при котором температура уменьшается в {beta_text},
     34 — изобара, 41 — изохора.
     % Для этого:
-    % \\begin{{enumerate}}
+    % \\begin{enumerate}
     %     \\item сделайте рисунок в $PV$-координатах,
     %     \\item выберите удобные обозначения, чтобы не запутаться в множестве температур, давлений и объёмов,
     %     \\item вычислите необходимые соотнощения между температурами, давлениями и объёмами
@@ -17,7 +17,7 @@ from generators.helpers import UnitValue, Consts, Fraction, n_times
     %     потребуется первое начало термодинамики, отдельный расчёт работ на участках через площади фигур и изменений внутренней энергии),
     %     \\item вычислите полную работу газа в цикле,
     %     \\item подставьте всё в формулу для КПД, упростите и доведите до ответа.
-    % \\end{{enumerate}}
+    % \\end{enumerate}
     Определите КПД цикла Карно, температура нагревателя которого равна максимальной температуре в цикле 12341, а холодильника — минимальной.
     Ответы в обоих случаях оставьте точными в виде нескоратимой дроби, никаких округлений.
 ''')
@@ -148,11 +148,11 @@ class Rectangle_T(variant.VariantTask):
 
 @variant.text('''
     Определите КПД (оставив ответ точным в виде нескоратимой дроби) цикла 1231, рабочим телом которого является идеальный одноатомный газ, если
-    \\begin{{itemize}}
+    \\begin{itemize}
         \\item 12 — изохорический нагрев в {alpha_text},
         \\item 23 — изобарическое расширение, при котором температура растёт в {beta_text},
         \\item 31 — процесс, график которого в $PV$-координатах является отрезком прямой.
-    \\end{{itemize}}
+    \\end{itemize}
     Бонус: замените цикл 1231 циклом, в котором 12 — изохорический нагрев в {alpha_text}, 23 — процесс, график которого в $PV$-координатах является отрезком прямой, 31 — изобарическое охлаждение, при котором температура падает в {alpha_text}.
 ''')
 @variant.arg(alpha__alpha_text=n_times(2, 3, 4, 5, 6))
@@ -192,7 +192,7 @@ class Rectangle_T(variant.VariantTask):
 @variant.answer_tex('''
     График процесса не в масштабе (эта часть пока не готова и сделать автоматически аккуратно сложно), но с верными подписями (а для решения этого достаточно):
 
-    \\begin{ tikzpicture }[thick]
+    \\begin{tikzpicture}[thick]
         \\draw[-{ Latex }] (0, 0) -- (0, 7) node[above left] { $P$ };
         \\draw[-{ Latex }] (0, 0) -- (10, 0) node[right] { $V$ };
 
@@ -205,14 +205,14 @@ class Rectangle_T(variant.VariantTask):
         \\draw[midar] (3, 2) -- (3, 6);
         \\draw[midar] (3, 6) -- (9, 6);
         \\draw[midar] (9, 6) -- (3, 2);
-    \\end{ tikzpicture }
+    \\end{tikzpicture}
 
     Решение бонуса:
-    \\begin{ align* }
+    \\begin{align*}
         A_{ 12 } &= 0, \\Delta U_{ 12 } > 0, \\implies Q_{ 12 } = A_{ 12 } + \\Delta U_{ 12 } > 0, \\\\
         A_{ 23 } &> 0, \\Delta U_{ 23 } \\text{  — ничего нельзя сказать, нужно исследовать отдельно }, \\\\
         A_{ 31 } &< 0, \\Delta U_{ 31 } < 0, \\implies Q_{ 31 } = A_{ 31 } + \\Delta U_{ 31 } < 0. \\\\
-    \\end{ align* }
+    \\end{align*}
 
     Уравнения состояния идеального газа для точек 1, 2, 3: $P_1V_1 = \\nu R T_1, P_2V_2 = \\nu R T_2, P_3V_3 = \\nu R T_3$.
     Пусть $P_0$, $V_0$, $T_0$ — давление, объём и температура в точке 1 (минимальные во всём цикле).
@@ -223,7 +223,7 @@ class Rectangle_T(variant.VariantTask):
 
     Таким образом, используя новые обозначения, состояния газа в точках 1, 2 и 3 описываются макропараметрами $(P_0, V_0, T_0), ({alpha}P_0, V_0, {alpha}T_0), (P_0, {alpha}V_0, {alpha}T_0)$ соответственно.
 
-    \\begin{ tikzpicture }[thick]
+    \\begin{tikzpicture}[thick]
         \\draw[-{ Latex }] (0, 0) -- (0, 7) node[above left] { $P$ };
         \\draw[-{ Latex }] (0, 0) -- (10, 0) node[right] { $V$ };
 
@@ -240,7 +240,7 @@ class Rectangle_T(variant.VariantTask):
         \\draw[midar] (3, 6) -- (9, 2);
         \\draw[midar] (9, 2) -- (3, 2);
         \\draw   (4.5, 5) node[above right]{ $T$ } (5.1, 4.6) node[above right]{ $T'$ };
-    \\end{ tikzpicture }
+    \\end{tikzpicture}
 
 
     Теперь рассмотрим отдельно процесс 23, к остальному вернёмся позже. Уравнение этой прямой в $PV$-координатах: $P(V) = {a1}P_0 - \\frac{ P_0 }{ V_0 } V$.
@@ -250,11 +250,11 @@ class Rectangle_T(variant.VariantTask):
     т.е. из состояния $(P, V, T)$ мы перешли в $(P', V', T')$, причём  $P' = P + \\Delta P, V' = V + \\Delta V, T' = T + \\Delta T$.
 
     При этом изменится внутренняя энергия:
-    \\begin{ align* }
+    \\begin{align*}
     \\Delta U
         &= U' - U = \\frac 32 \\nu R T' - \\frac 32 \\nu R T = \\frac 32 (P+\\Delta P) (V+\\Delta V) - \\frac 32 PV\\\\
         &= \\frac 32 ((P+\\Delta P) (V+\\Delta V) - PV) = \\frac 32 (P\\Delta V + V \\Delta P + \\Delta P \\Delta V).
-    \\end{ align* }
+    \\end{align*}
 
     Рассмотрим малые изменения объёма, тогда и изменение давления будем малым (т.к. $\\Delta P = - \\frac{ P_0 }{ V_0 } \\Delta V$),
     а третьим слагаемым в выражении для $\\Delta U$  можно пренебречь по сравнению с двумя другими:
@@ -265,13 +265,13 @@ class Rectangle_T(variant.VariantTask):
     $$A = \\frac{ P + P\' }2 \\Delta V = \\cbr{ P + \\frac{ \\Delta P }2 } \\Delta V = P \\Delta V.$$
 
     Подведённое количество теплоты, используя первое начало термодинамики, будет равно
-    \\begin{ align* }
+    \\begin{align*}
     Q
         &= \\frac 32 (P\\Delta V + V \\Delta P) + P \\Delta V =  \\frac 52 P\\Delta V + \\frac 32 V \\Delta P = \\\\
         &= \\frac 52 P\\Delta V + \\frac 32 V * \\cbr{ - \\frac{ P_0 }{ V_0 } \\Delta V } = \\frac{ \\Delta V }2 * \\cbr{ 5P - \\frac{ P_0 }{ V_0 } V } = \\\\
         &= \\frac{ \\Delta V }2 * \\cbr{ 5 * \\cbr{ {a1}P_0 - \\frac{ P_0 }{ V_0 } V } - \\frac{ P_0 }{ V_0 } V }
          = \\frac{ \\Delta V * P_0 }2 * \\cbr{ 5 * {a1} - 8\\frac{ V }{ V_0 } }.
-    \\end{ align* }
+    \\end{align*}
 
     Таком образом, знак количества теплоты $Q$ на участке 23 зависит от конкретного значения $V$:
     \\begin{ itemize }
@@ -287,7 +287,7 @@ class Rectangle_T(variant.VariantTask):
     той его части где это количество теплоты положительно. Имеем: $Q_+ = Q_{ 12 } + Q_{ 2* }$.
 
     Теперь возвращаемся к циклу целиком и получаем:
-    \\begin{ align* }
+    \\begin{align*}
     A_\\text{ цикл } &= \\frac 12 * ({alpha}P_0 - P_0) * ({alpha}V_0 - V_0) = {A_bonus_cycle:LaTeX} * P_0V_0, \\\\
     A_{ 2* } &= \\frac{ P^* + {alpha}P_0 }2 * (V^* - V_0)
         = \\frac{ {P_star:LaTeX} * P_0 + {alpha}P_0 }2 * \\cbr{ {V_star:LaTeX} * V_0 - V_0 }
@@ -301,7 +301,7 @@ class Rectangle_T(variant.VariantTask):
         &= \\frac{ {A_bonus_cycle:LaTeX} * P_0V_0 }{ 0 + {U_bonus_12:LaTeX} * P_0 V_0 + {A_bonus_plus:LaTeX} * P_0 V_0 + {U_bonus_plus:LaTeX} * P_0 V_0 }
          = \\frac{ {A_bonus_cycle:LaTeX} }{ {U_bonus_12:LaTeX} + {A_bonus_plus:LaTeX} + {U_bonus_plus:LaTeX} }
          = {eta_bonus:LaTeX} \\leftarrow \\text{ вжух и готово! }
-    \\end{ align* }
+    \\end{align*}
 '''
 )
 class TriangleUp_T(variant.VariantTask):
@@ -352,11 +352,11 @@ class TriangleUp_T(variant.VariantTask):
 
 @variant.text('''
     Определите КПД (оставив ответ точным в виде нескоратимой дроби) цикла 1231, рабочим телом которого является идеальный одноатомный газ, если
-    \\begin{{itemize}}
+    \\begin{itemize}
         \\item 12 — изобарическое расширение,
         \\item 23 — процесс, график которого в $PV$-координатах является отрезком прямой, а объём уменьшается в {beta_text},
         \\item 31 — изохорический нагрев с увеличением давления в {alpha_text},
-    \\end{{itemize}}
+    \\end{itemize}
 ''')
 @variant.arg(alpha__alpha_text=n_times(2, 3, 4, 5, 6))
 @variant.arg(beta__beta_text=n_times(2, 3, 4, 5, 6))

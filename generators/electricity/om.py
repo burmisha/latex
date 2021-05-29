@@ -111,12 +111,12 @@ class Definitions04(variant.VariantTask):
 @variant.solution_space(20)
 @variant.text('''
     Напротив физических величин укажите их обозначения и единицы измерения в СИ:
-    \\begin{{enumerate}}
+    \\begin{enumerate}
         \\item {v_1},
         \\item {v_2},
         \\item {v_3},
         \\item {v_4}.
-    \\end{{enumerate}}
+    \\end{enumerate}
 ''')
 @variant.arg(v_1=['сила тока', 'разность потенциалов', 'напряжение'])
 @variant.arg(v_2=['работа тока', 'мощность тока'])
@@ -129,11 +129,11 @@ class Definitions05(variant.VariantTask):
 @variant.solution_space(40)
 @variant.text('''
     Запишите физический закон или формулу:
-    \\begin{{enumerate}}
+    \\begin{enumerate}
         \\item {v_1},
         \\item {v_2},
         \\item {v_3}.
-    \\end{{enumerate}}
+    \\end{enumerate}
 ''')
 @variant.arg(v_1=['правило Кирхгофа для замкнутого контура', 'правило Кирхгофа для узла цепи'])
 @variant.arg(v_2=['закон Ома для однородного участка цепи', 'сопротивление резистора через удельное сопротивление'])
@@ -145,12 +145,12 @@ class Definitions06(variant.VariantTask):
 @variant.solution_space(80)
 @variant.text('''
     Получите выражение:
-    \\begin{{enumerate}}
+    \\begin{enumerate}
         \\item {v_1},
         \\item {v_2},
         \\item {v_3},
         \\item {v_4}.
-    \\end{{enumerate}}
+    \\end{enumerate}
 ''')
 @variant.arg(v_1=[
     'силы тока через выделяемую мощность и сопротивление резистора',
@@ -177,12 +177,12 @@ class Definitions08(variant.VariantTask):
 @variant.solution_space(40)
 @variant.text('''
     Получите выражение:
-    \\begin{{enumerate}}
+    \\begin{enumerate}
         \\item {v_1},
         \\item {v_2},
         \\item {v_3},
         \\item {v_4}.
-    \\end{{enumerate}}
+    \\end{enumerate}
 ''')
 @variant.arg(v_1=['длины проводника через его сопротивление', 'площади поперечного сечения проводника через его сопротивление'])
 @variant.arg(v_2=['сопротивление из закона Ома', 'удельное сопротивление из закона Ома'])
@@ -277,10 +277,10 @@ class I_ratio(variant.VariantTask):
     Юлия проводит эксперименты c 2 кусками одинаковой {which} проволки, причём второй кусок в {times_a} длиннее первого.
     В одном из экспериментов Юлия подаёт на первый кусок проволки напряжение в {times_b} раз больше, чем на второй.
     Определите отношения в двух проволках в этом эксперименте (второй к первой):
-    \\begin{{itemize}}
+    \\begin{itemize}
         \\item отношение сил тока,
         \\item отношение выделяющихся мощностей.
-    \\end{{itemize}}
+    \\end{itemize}
 ''')
 # @variant.answer_test('{ratio:Basic}')
 @variant.answer_short(
@@ -388,13 +388,13 @@ class Compare_power(variant.VariantTask):  # Вишнякова - 17
     если известны сопротивления всех резисторов: {R1:Task:e}, {R2:Task:e}, {R3:Task:e}, {R4:Task:e}.
     При каком напряжении поданном на эту цепь, в ней потечёт ток равный {I:Task:e}?
 
-    \\begin{ tikzpicture }[rotate={rotate}, circuit ee IEC, thick]
+    \\begin{tikzpicture}[rotate={rotate}, circuit ee IEC, thick]
         \\node [contact]  (contact1) at (-1.5, 0) {  };
         \\draw  (0, 0) to [resistor={ info=$R_1$ }] ++(left:1.5);
         \\draw  (0, 0) -- ++(up:1.5) to [resistor={ near start, info=$R_2$ }, resistor={ near end, info=$R_3$ }] ++(right:3);
         \\draw  (0, 0) to [resistor={ info=$R_4$ }] ++(right:3) -- ++(up:1.5);
         {appendix}
-    \\end{ tikzpicture }
+    \\end{tikzpicture}
 ''')
 @variant.arg(rotate=[0, 90, 180, 270])
 @variant.arg(second_node=[0, 1])
@@ -426,13 +426,13 @@ class Circuit_four(variant.VariantTask):
     а напряжение, поданное на цепь, равно {U:Task:e}.
     Ответы получите в виде несократимых дробей, а также определите приближённые значения. Амперметры считать идеальными.
 
-    \\begin{ tikzpicture }[circuit ee IEC, thick]
+    \\begin{tikzpicture}[circuit ee IEC, thick]
         \\node [contact]  (left contact) at (3, 0) {  };
         \\node [contact]  (right contact) at (9, 0) {  };
         \\draw  (left contact) -- ++(up:2) to [resistor={ very near start, info=$R_2$ }, amperemeter={ midway, info=$1$ }, resistor={ very near end, info=$R_3$ } ] ++(right:6) -- (right contact);
         \\draw  (left contact) -- ++(down:2) to [resistor={ very near start, info=$R_5$ }, resistor={ midway, info=$R_6$ }, amperemeter={ very near end, info=$3$ }] ++(right:6) -- (right contact);
         \\draw  (left contact) ++(left:3) to [resistor={ info=$R_1$ }] (left contact) to [amperemeter={ near start, info=$2$ }, resistor={ near end , info=$R_4$ }] (right contact) -- ++(right:0.5);
-    \\end{ tikzpicture }
+    \\end{tikzpicture}
 
 ''')
 @variant.arg(index_a=[1, 2, 3])

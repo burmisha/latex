@@ -23,11 +23,11 @@ class Basic01(variant.VariantTask):
 @variant.solution_space(0)
 @variant.text('''
     Напротив каждой физической величины укажите её обозначение и единицы измерения в СИ:
-    \\begin{{enumerate}}
+    \\begin{enumerate}
         \\item {first},
         \\item {second},
         \\item {third}.
-    \\end{{enumerate}}
+    \\end{enumerate}
 ''')
 @variant.arg(first=['масса', 'объём'])
 @variant.arg(second=['плотность', 'количество вещества'])
@@ -39,10 +39,10 @@ class Basic02(variant.VariantTask):
 @variant.solution_space(60)
 @variant.text('''
     Ответьте на вопросы и запишите формулы:
-    \\begin{{enumerate}}
+    \\begin{enumerate}
         \\item {what},
         \\item {formula}.
-    \\end{{enumerate}}
+    \\end{enumerate}
 ''')
 @variant.arg(what=[
     'сформилируйте, что такое броуновское движение',
@@ -59,11 +59,11 @@ class Basic03(variant.VariantTask):
 @variant.solution_space(30)
 @variant.text('''
     Определите молярную массу веществ (не табличное значение, а вычислением по таблице Менделеева):
-    \\begin{{enumerate}}
+    \\begin{enumerate}
         \\item {first},
         \\item {second},
         \\item {third}.
-    \\end{{enumerate}}
+    \\end{enumerate}
 ''')
 @variant.arg(first=['гелий', 'неон'])
 @variant.arg(second=['азот', 'кислород'])
@@ -74,7 +74,7 @@ class Basic04(variant.VariantTask):
 
 @variant.text('''
     Укажите, верны ли утверждения («да» или «нет» слева от каждого утверждения):
-    \\begin{{enumerate}}
+    \\begin{enumerate}
         \\item В твёрдом состоянии вещества связи между молекулами наиболее сильны (в сравнении с жидким и газообразным состояниями).
         \\item Любая частица (например, картошечка в супе) находится в броуновском движении, однако наблюдать его технически возможно только для малых частиц.
         \\item Сжимаемость газов объясняется проникновением атомов молекул друг в друга и уменьшением межатомного расстояния внутри молекул.
@@ -83,7 +83,7 @@ class Basic04(variant.VariantTask):
         \\item Если в двух телах одинаковое число протонов и нейтронов (между телами), то и массы тел с большой точностью окажутся равны.
         \\item При определении размеров молекул мы зачастую пренебрегаем их формой, не различая радиус и диаметр, а то и вовсе считая их форму кубической.
         \\item Диффузия вызвана тепловым движением молекул и может наблюдаться в твердых, жидких и газообразных веществах.
-    \\end{{enumerate}}
+    \\end{enumerate}
 ''')
 @variant.no_args
 @variant.solution_space(0)
@@ -158,11 +158,11 @@ class CountParticles(variant.VariantTask):
 @variant.solution_space(40)
 @variant.text('''
     Переведите температуры из шкалы Цельсия в шкалу Кельвина (или обратно).
-    \\begin{{enumerate}}
+    \\begin{enumerate}
         \\item ${T1:Value} = $
         \\item ${T2:Value} = $
         \\item ${T3:Value} = $
-    \\end{{enumerate}}
+    \\end{enumerate}
 ''')
 @variant.arg(T1=['%d \\celsius' % v for v in [50, 100, 200, 250, 300]])
 @variant.arg(T2=['%d К' % v for v in [50, 100, 200, 250, 300]])
@@ -173,7 +173,7 @@ class Celsuis(variant.VariantTask):
 
 @variant.text('''
     Укажите, верны ли утверждения («да» или «нет» слева от каждого утверждения):
-    \\begin{{enumerate}}
+    \\begin{enumerate}
         \\item Увеличение температуры на 3 градуса цельсия всегда соответствует увеличению на 3 градуса кельвина.
         \\item Температуру тела всегда можно понизить на 30 кельвин (пусть при этом и может произойти фазовый переход).
         % \\item Температуру тела всегда можно повысить на 30 кельвин (пусть при этом и может произойти фазовый переход).
@@ -192,7 +192,7 @@ class Celsuis(variant.VariantTask):
         \\item Все процессы: изохорный, изобарный, изотермный по умолчанию предполагают, что количество вещества в них не изменяется.
         \\item При горении, например, водорода в кислороде (2H2+O2-2H2O), не изменяется, ни масса вещества участвующего в реакции, ни его количество. Также при этом не изменяется и количество протонов, нейтронов и электронов.
         \\item Каждый набор макропараметров идеального газа (P, V и T) задаёт точку в трехмерном пространстве. При их изменении образуется линия в этом пространстве. Строя графики изопроцессов в координатах PV, VT, PT мы строим проекцию этой линии на одну из плоскостей.
-    \\end{{enumerate}}
+    \\end{enumerate}
 ''')
 @variant.no_args
 @variant.solution_space(0)
@@ -203,11 +203,11 @@ class Basic06(variant.VariantTask):
 @variant.solution_space(0)
 @variant.text('''
     Выразите:
-    \\begin{{enumerate}}
+    \\begin{enumerate}
         \\item {formula1},
         \\item {formula2},
         \\item {formula3}.
-    \\end{{enumerate}}
+    \\end{enumerate}
 ''')
 @variant.arg(formula1=[
     'плотность тела через его массу и объём',
@@ -229,11 +229,11 @@ class Basic07(variant.VariantTask):
 @variant.solution_space(0)
 @variant.text('''
     Напротив каждой физической величины укажите её обозначение и единицы измерения в СИ:
-    \\begin{{enumerate}}
+    \\begin{enumerate}
         \\item {fv_1},
         \\item {fv_2},
         \\item {fv_3}.
-    \\end{{enumerate}}
+    \\end{enumerate}
 ''')
 @variant.arg(fv_1=[
     'температура в Кельвинах',
@@ -252,12 +252,12 @@ class Basic08(variant.VariantTask):
 @variant.solution_space(0)
 @variant.text('''
     Запишите, как бы вы обозначили...
-    \\begin{{enumerate}}
+    \\begin{enumerate}
         \\item {fv_1},
         \\item {fv_2},
         \\item {fv_3},
         \\item {fv_4}.
-    \\end{{enumerate}}
+    \\end{enumerate}
 ''')
 @variant.arg(fv_1=[
     'увеличение давления в сосуде с газом',
@@ -283,13 +283,13 @@ class Basic09(variant.VariantTask):
 @variant.solution_space(0)
 @variant.text('''
     Запишите, какие физические величины соответствуют следующим единицам измерения (указать название и обозначение),
-    \\begin{{enumerate}}
+    \\begin{enumerate}
         \\item {fv_1},
         \\item {fv_2},
         \\item {fv_3},
         \\item {fv_4},
         \\item {fv_5}.
-    \\end{{enumerate}}
+    \\end{enumerate}
 ''')
 @variant.arg(fv_1=[
     'кельвин',
@@ -317,12 +317,12 @@ class Basic10(variant.VariantTask):
 
 @variant.text('''
     Выразите одну величину через остальные, используя при необходимости постоянную Больцмана, число Авогадро или универсальную газовую постоянную:
-    \\begin{{enumerate}}
+    \\begin{enumerate}
         \\item {fv_1},
         \\item {fv_2},
         \\item {fv_3},
         \\item {fv_4},
-    \\end{{enumerate}}
+    \\end{enumerate}
 ''')
 @variant.arg(fv_1=[
     'температуру газа через его давление, объем, число частиц',
@@ -350,11 +350,11 @@ class Basic11(variant.VariantTask):
 @variant.solution_space(0)
 @variant.text('''
     Из уравнения состояния идеального газа выведите или выразите...
-    \\begin{{enumerate}}
+    \\begin{enumerate}
         \\item {first},
         \\item {second},
         \\item {third}.
-    \\end{{enumerate}}
+    \\end{enumerate}
 ''')
 @variant.arg(first=[
     'объём',

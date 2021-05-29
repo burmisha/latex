@@ -5,10 +5,10 @@ from generators.helpers import UnitValue, Consts
 @variant.solution_space(80)
 @variant.text('''
     При температуре ${t1}\\celsius$ относительная влажность воздуха составляет ${phi1}\%$.
-    \\begin{{itemize}}
+    \\begin{itemize}
         \\item Определите точку росы для этого воздуха.
         \\item Какой станет относительная влажность этого воздуха, если нагреть его до ${t2}\\celsius$?
-    \\end{{itemize}}
+    \\end{itemize}
 ''')
 @variant.arg(t1=('{}', [15, 20, 25, 30]))
 @variant.arg(t2=('{}', [40, 50, 60, 70, 80]))
@@ -104,14 +104,14 @@ class GetNFromPhi(variant.VariantTask):
 @variant.solution_space(200)
 @variant.text('''
     В герметичном сосуде находится влажный воздух при температуре ${t1}\\celsius$ и относительной влажности ${phi1}\%$.
-    \\begin{{enumerate}}
+    \\begin{enumerate}
         \\item Чему равно парциальное давление насыщенного водяного пара при этой температуре?
         \\item Чему равно парциальное давление водяного пара?
         \\item Определите точку росы этого пара?
         \\item Каким станет парциальное давление водяного пара, если сосуд нагреть до ${t2}\\celsius$?
         \\item Чему будет равна относительная влажность воздуха, если сосуд нагреть до ${t2}\\celsius$?
         \\item Получите ответ на предыдущий вопрос, используя плотности, а не давления.
-    \\end{{enumerate}}
+    \\end{enumerate}
 ''')
 @variant.arg(V=('{} л', [3, 6, 9, 12, 15]))
 @variant.arg(t1=('{}', [15, 20, 25, 30, 40]))
@@ -263,10 +263,10 @@ class GetPFromM(variant.VariantTask):
 @variant.solution_space(40)
 @variant.text('''
     Напротив физических величин запишите определение, обозначение и единицы измерения в системе СИ (если есть):
-    \\begin{{enumerate}}
+    \\begin{enumerate}
         \\item {v_1},
         \\item {v_2}.
-    \\end{{enumerate}}
+    \\end{enumerate}
 ''')
 @variant.arg(v_1=['абсолютная влажность', 'относительная влажность'])
 @variant.arg(v_2=['насыщенный пар', 'динамическое равновесие'])

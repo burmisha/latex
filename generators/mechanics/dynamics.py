@@ -39,7 +39,7 @@ class Many_blocks(variant.VariantTask):
     равны {m1:Task:e} и {m2:Task:e}.
     % {Consts.g_ten:Task:e}.
 
-    \\begin{ tikzpicture }[x=1.5cm,y=1.5cm,thick]
+    \\begin{tikzpicture}[x=1.5cm,y=1.5cm,thick]
         \\draw
             (-0.4, 0) rectangle (-0.2, 1.2)
             (0.15, 0.5) rectangle (0.45, 1)
@@ -51,26 +51,26 @@ class Many_blocks(variant.VariantTask):
         \\draw[pattern={ Lines[angle=51,distance=3pt] },pattern color=black,draw=none] (-0.7, 2.5) rectangle (0.7, 2.75);
         \\node [left] (left) at (-0.4, 0.6) {m1:L:e:s};
         \\node [right] (right) at (0.4, 0.75) {m2:L:e:s};
-    \\end{ tikzpicture }
+    \\end{tikzpicture}
 ''')
 @variant.arg(m1=('m_1 = {} кг', [5, 8, 11]))
 @variant.arg(m2=('m_2 = {} кг', [4, 6, 10, 14]))
 @variant.answer_tex('''
     Предположим, что левый брусок ускоряется вверх, тогда правый ускоряется вниз (с тем же ускорением).
     Запишем 2-й закон Ньютона 2 раза (для обоих тел) в проекции на вертикальную оси, направив её вверх.
-    \\begin{ align* }
-        &\\begin{ cases }
+    \\begin{align*}
+        &\\begin{cases}
             T - {m1:L}g = {m1:L}a, \\\\
             T - {m2:L}g = -{m2:L}a,
-        \\end{ cases } \\\\
-        &\\begin{ cases }
+        \\end{cases} \\\\
+        &\\begin{cases}
             {m2:L}g - {m1:L}g = {m1:L}a + {m2:L}a, \\\\
             T = {m1:L}a + {m1:L}g, \\\\
-        \\end{ cases } \\\\
+        \\end{cases} \\\\
         a &= \\frac{ {m2:L} - {m1:L} }{ {m1:L} + {m2:L} } * g = \\frac{ {m2:V} - {m1:V} }{ {m1:V} + {m2:V} } * {Consts.g_ten:Value} \\approx {a:Value}, \\\\
         T &= {m1:L}(a + g) = {m1:L} * g * \\cbr{ \\frac{ {m2:L} - {m1:L} }{ {m1:L} + {m2:L} } + 1 } = {m1:L} * g * \\frac{ 2{m2:L} }{ {m1:L} + {m2:L} } = \\\\
-            &= \\frac{ 2 {m2:L} {m1:L} g }{ {m1:L} + {m2:L} } = \\frac{ 2 * {m2:V} * {m1:V} * {Consts.g_ten:Value }}{ {m1:V} + {m2:V} } \\approx {T:Value}.
-    \\end{ align* }
+            &= \\frac{ 2 {m2:L} {m1:L} g }{ {m1:L} + {m2:L} } = \\frac{ 2 * {m2:V} * {m1:V} * {Consts.g_ten:Value} }{ {m1:V} + {m2:V} } \\approx {T:Value}.
+    \\end{align*}
     Отрицательный ответ говорит, что мы лишь не угадали с направлением ускорений. Сила же всегда положительна.
 '''
 )

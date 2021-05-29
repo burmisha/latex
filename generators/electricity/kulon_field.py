@@ -17,10 +17,10 @@ def sign_to_mult(line):
 ''')
 @variant.answer_short('''
     F
-        = k\\frac{ {first:L}{second:L} }{ {distance:L}^2 }
-        = {Consts.k:Value} * \\frac{ {first:Value} * {second:Value} }{ {distance:Value|sqr} }
-        = {value:LaTeX} * 10^{ {power} }\\units{ Н }
-          \\approx { {approx:.2f} } * 10^{ {power} }\\units{ Н }
+        = k\\frac{{first:L}{second:L}}{{distance:L}^2}
+        = {Consts.k:Value} * \\frac{{first:Value} * {second:Value}}{{distance:Value|sqr}}
+        = {value:LaTeX} * 10^{{power}}\\units{Н}
+          \\approx {{approx:.2f}} * 10^{{power}}\\units{Н}
 ''')
 @variant.arg(first__second=[('q_1 = %d нКл' % f, 'q_2 = %d нКл' % s) for f in range(2, 5) for s in range(2, 5) if f != s])
 @variant.arg(distance=['%s = %d см' % (l, d) for d in [2, 3, 5, 6] for l in ['r', 'l', 'd'] ])
@@ -40,11 +40,11 @@ class ForceTask(variant.VariantTask):
     Два одинаковых маленьких проводящих заряженных шарика находятся на расстоянии~${letter}$ друг от друга.
     Заряд первого равен~${charges[0]}$, второго~--- ${charges[1]}$.
     Шарики приводят в соприкосновение, а после опять разводят на расстояние~${n}{letter}$.
-    \\begin{{itemize}}
+    \\begin{itemize}
         \\item Каким стал заряд каждого из шариков?
         \\item Определите характер (притяжение или отталкивание) и силу взаимодействия шариков до и после соприкосновения.
         \\item Как изменилась сила взаимодействия шариков после соприкосновения?
-    \\end{{itemize}}
+    \\end{itemize}
 ''')
 @variant.answer_align([
     'F &= k\\frac{ \\abs{ q_1 }\\abs { q_2 } }{ \\sqr{ {n} {letter} } }'
@@ -134,12 +134,12 @@ class SumTask(variant.VariantTask):
 
 @variant.solution_space(0)
 @variant.text('''
-    \\begin{{enumerate}}
+    \\begin{enumerate}
         \\item Запишите (формулой) {first}.
         \\item Зарисуйте электрическое поле точечного {second} электрического заряда.
         \\item Запишите формулу для вычисления {third} электрического поля точечного заряда.
         \\item Запишите принцип суперпозиции (правило сложения) {fourth}.
-    \\end{{enumerate}}
+    \\end{enumerate}
 ''')
 @variant.arg(first=['закон Кулона (в вакууме)', 'закон сохранения электрического заряда'])
 @variant.arg(second=['положительного', 'отрицательного'])
