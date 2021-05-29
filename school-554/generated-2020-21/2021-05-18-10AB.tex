@@ -16,7 +16,7 @@
 \answer{%
     \begin{align*}
     v &= v_0 + a t = at = 0{,}5\,\frac{\text{м}}{\text{с}^{2}} \cdot 4\,\text{c} = 2{,}0\,\frac{\text{м}}{\text{с}}, \\
-    s_x &= v_0t + \frac{a t^2}2 = \frac{a t^2}2 = \frac{0{,}5\,\frac{\text{м}}{\text{с}^{2}} \cdot \sqr{ 4\,\text{c} }}2 = 0{,}5\,\text{м}, \\
+    s_x &= v_0t + \frac{a t^2}2 = \frac{a t^2}2 = \frac{0{,}5\,\frac{\text{м}}{\text{с}^{2}} \cdot \sqr{ 4\,\text{c} }}2 = 4{,}0\,\text{м}, \\
     v_\text{сред.} &= \frac{s_\text{общ}}{t_\text{общ.}} = \frac{s_x + v \cdot 2t}{t + 2t} = \frac{\frac{a t^2}2 + at \cdot 2t}{t (1 + 2)} = \\
     &= at \cdot \frac{\frac 12 + 2}{1 + 2} = 0{,}5\,\frac{\text{м}}{\text{с}^{2}} \cdot 4\,\text{c} \cdot \frac{\frac 12 + 2}{1 + 2} \approx 1{,}67\,\frac{\text{м}}{\text{c}}.
     \end{align*}
@@ -50,6 +50,7 @@
     \begin{align*}
     t &= 60\,\text{с}, r = 1{,}5\,\text{м}, n = 6\units{оборотов}, \\
     T &= \frac tN = \frac{ 60\,\text{с} }{6} \approx 10{,}00\,\text{c}, \\
+    \nu &= \frac 1T = \frac{6}{ 60\,\text{с} } \approx 0{,}10\,\text{Гц}, \\
     v &= \frac{2 \pi r}{T} = \frac{2 \pi r}{T} =  \frac{2 \pi r n}{t} \approx 0{,}94\,\frac{\text{м}}{\text{c}}, \\
     a &= \frac{v^2}{r} =  \frac{4 \pi^2 r n^2}{t^2} \approx 0{,}59\,\frac{\text{м}}{\text{с}^{2}}.
     \end{align*}
@@ -72,7 +73,7 @@
     \begin{align*}
     y &= y_0 + v_{0y}t - \frac{gt^2}2 = h - \frac{gt^2}2, \qquad y(\tau) = 0 \implies h - \frac{g\tau^2}2 = 0 \implies h = \frac{g\tau^2}2 \approx 12{,}8\,\text{м}.
     \\
-    x &= x_0 + v_{0x}t = v_{0x}t \implies L = v_0\tau \approx 28{,}8\,\text{м}.
+    x &= x_0 + v_{0x}t = v_0t \implies L = v_0\tau \approx 28{,}8\,\text{м}.
     \\
     &v = \sqrt{v_x^2 + v_y^2} = \sqrt{v_{0x}^2 + \sqr{v_{0y} - g\tau}} = \sqrt{v_0^2 + \sqr{g\tau}} \approx 24{,}1\,\frac{\text{м}}{\text{c}}.
     \end{align*}
@@ -409,6 +410,7 @@
     \begin{align*}
     t &= 60\,\text{с}, r = 1{,}0\,\text{м}, n = 10\units{оборотов}, \\
     T &= \frac tN = \frac{ 60\,\text{с} }{10} \approx 6{,}00\,\text{c}, \\
+    \nu &= \frac 1T = \frac{10}{ 60\,\text{с} } \approx 0{,}17\,\text{Гц}, \\
     v &= \frac{2 \pi r}{T} = \frac{2 \pi r}{T} =  \frac{2 \pi r n}{t} \approx 1{,}05\,\frac{\text{м}}{\text{c}}, \\
     a &= \frac{v^2}{r} =  \frac{4 \pi^2 r n^2}{t^2} \approx 1{,}10\,\frac{\text{м}}{\text{с}^{2}}.
     \end{align*}
@@ -431,7 +433,7 @@
     \begin{align*}
     y &= y_0 + v_{0y}t - \frac{gt^2}2 = h - \frac{gt^2}2, \qquad y(\tau) = 0 \implies h - \frac{g\tau^2}2 = 0 \implies h = \frac{g\tau^2}2 \approx 7{,}2\,\text{м}.
     \\
-    x &= x_0 + v_{0x}t = v_{0x}t \implies L = v_0\tau \approx 21{,}6\,\text{м}.
+    x &= x_0 + v_{0x}t = v_0t \implies L = v_0\tau \approx 21{,}6\,\text{м}.
     \\
     &v = \sqrt{v_x^2 + v_y^2} = \sqrt{v_{0x}^2 + \sqr{v_{0y} - g\tau}} = \sqrt{v_0^2 + \sqr{g\tau}} \approx 21{,}6\,\frac{\text{м}}{\text{c}}.
     \end{align*}
@@ -734,7 +736,7 @@
 \answer{%
     \begin{align*}
     v &= v_0 + a t = at = 2{,}5\,\frac{\text{м}}{\text{с}^{2}} \cdot 4\,\text{c} = 10{,}0\,\frac{\text{м}}{\text{с}}, \\
-    s_x &= v_0t + \frac{a t^2}2 = \frac{a t^2}2 = \frac{2{,}5\,\frac{\text{м}}{\text{с}^{2}} \cdot \sqr{ 4\,\text{c} }}2 = 12{,}5\,\text{м}, \\
+    s_x &= v_0t + \frac{a t^2}2 = \frac{a t^2}2 = \frac{2{,}5\,\frac{\text{м}}{\text{с}^{2}} \cdot \sqr{ 4\,\text{c} }}2 = 20{,}0\,\text{м}, \\
     v_\text{сред.} &= \frac{s_\text{общ}}{t_\text{общ.}} = \frac{s_x + v \cdot 3t}{t + 3t} = \frac{\frac{a t^2}2 + at \cdot 3t}{t (1 + 3)} = \\
     &= at \cdot \frac{\frac 12 + 3}{1 + 3} = 2{,}5\,\frac{\text{м}}{\text{с}^{2}} \cdot 4\,\text{c} \cdot \frac{\frac 12 + 3}{1 + 3} \approx 8{,}75\,\frac{\text{м}}{\text{c}}.
     \end{align*}
@@ -768,6 +770,7 @@
     \begin{align*}
     t &= 60\,\text{с}, r = 1{,}5\,\text{м}, n = 6\units{оборотов}, \\
     T &= \frac tN = \frac{ 60\,\text{с} }{6} \approx 10{,}00\,\text{c}, \\
+    \nu &= \frac 1T = \frac{6}{ 60\,\text{с} } \approx 0{,}10\,\text{Гц}, \\
     v &= \frac{2 \pi r}{T} = \frac{2 \pi r}{T} =  \frac{2 \pi r n}{t} \approx 0{,}94\,\frac{\text{м}}{\text{c}}, \\
     a &= \frac{v^2}{r} =  \frac{4 \pi^2 r n^2}{t^2} \approx 0{,}59\,\frac{\text{м}}{\text{с}^{2}}.
     \end{align*}
@@ -790,7 +793,7 @@
     \begin{align*}
     y &= y_0 + v_{0y}t - \frac{gt^2}2 = h - \frac{gt^2}2, \qquad y(\tau) = 0 \implies h - \frac{g\tau^2}2 = 0 \implies h = \frac{g\tau^2}2 \approx 8{,}5\,\text{м}.
     \\
-    x &= x_0 + v_{0x}t = v_{0x}t \implies L = v_0\tau \approx 23{,}4\,\text{м}.
+    x &= x_0 + v_{0x}t = v_0t \implies L = v_0\tau \approx 23{,}4\,\text{м}.
     \\
     &v = \sqrt{v_x^2 + v_y^2} = \sqrt{v_{0x}^2 + \sqr{v_{0y} - g\tau}} = \sqrt{v_0^2 + \sqr{g\tau}} \approx 22{,}2\,\frac{\text{м}}{\text{c}}.
     \end{align*}
@@ -1093,7 +1096,7 @@
 \answer{%
     \begin{align*}
     v &= v_0 + a t = at = 0{,}5\,\frac{\text{м}}{\text{с}^{2}} \cdot 3\,\text{c} = 1{,}5\,\frac{\text{м}}{\text{с}}, \\
-    s_x &= v_0t + \frac{a t^2}2 = \frac{a t^2}2 = \frac{0{,}5\,\frac{\text{м}}{\text{с}^{2}} \cdot \sqr{ 3\,\text{c} }}2 = 0{,}4\,\text{м}, \\
+    s_x &= v_0t + \frac{a t^2}2 = \frac{a t^2}2 = \frac{0{,}5\,\frac{\text{м}}{\text{с}^{2}} \cdot \sqr{ 3\,\text{c} }}2 = 2{,}2\,\text{м}, \\
     v_\text{сред.} &= \frac{s_\text{общ}}{t_\text{общ.}} = \frac{s_x + v \cdot 2t}{t + 2t} = \frac{\frac{a t^2}2 + at \cdot 2t}{t (1 + 2)} = \\
     &= at \cdot \frac{\frac 12 + 2}{1 + 2} = 0{,}5\,\frac{\text{м}}{\text{с}^{2}} \cdot 3\,\text{c} \cdot \frac{\frac 12 + 2}{1 + 2} \approx 1{,}25\,\frac{\text{м}}{\text{c}}.
     \end{align*}
@@ -1127,6 +1130,7 @@
     \begin{align*}
     t &= 60\,\text{с}, r = 1{,}5\,\text{м}, n = 10\units{оборотов}, \\
     T &= \frac tN = \frac{ 60\,\text{с} }{10} \approx 6{,}00\,\text{c}, \\
+    \nu &= \frac 1T = \frac{10}{ 60\,\text{с} } \approx 0{,}17\,\text{Гц}, \\
     v &= \frac{2 \pi r}{T} = \frac{2 \pi r}{T} =  \frac{2 \pi r n}{t} \approx 1{,}57\,\frac{\text{м}}{\text{c}}, \\
     a &= \frac{v^2}{r} =  \frac{4 \pi^2 r n^2}{t^2} \approx 1{,}64\,\frac{\text{м}}{\text{с}^{2}}.
     \end{align*}
@@ -1149,7 +1153,7 @@
     \begin{align*}
     y &= y_0 + v_{0y}t - \frac{gt^2}2 = h - \frac{gt^2}2, \qquad y(\tau) = 0 \implies h - \frac{g\tau^2}2 = 0 \implies h = \frac{g\tau^2}2 \approx 8{,}5\,\text{м}.
     \\
-    x &= x_0 + v_{0x}t = v_{0x}t \implies L = v_0\tau \approx 22{,}1\,\text{м}.
+    x &= x_0 + v_{0x}t = v_0t \implies L = v_0\tau \approx 22{,}1\,\text{м}.
     \\
     &v = \sqrt{v_x^2 + v_y^2} = \sqrt{v_{0x}^2 + \sqr{v_{0y} - g\tau}} = \sqrt{v_0^2 + \sqr{g\tau}} \approx 21{,}4\,\frac{\text{м}}{\text{c}}.
     \end{align*}
@@ -1486,6 +1490,7 @@
     \begin{align*}
     t &= 60\,\text{с}, r = 2{,}0\,\text{м}, n = 10\units{оборотов}, \\
     T &= \frac tN = \frac{ 60\,\text{с} }{10} \approx 6{,}00\,\text{c}, \\
+    \nu &= \frac 1T = \frac{10}{ 60\,\text{с} } \approx 0{,}17\,\text{Гц}, \\
     v &= \frac{2 \pi r}{T} = \frac{2 \pi r}{T} =  \frac{2 \pi r n}{t} \approx 2{,}09\,\frac{\text{м}}{\text{c}}, \\
     a &= \frac{v^2}{r} =  \frac{4 \pi^2 r n^2}{t^2} \approx 2{,}19\,\frac{\text{м}}{\text{с}^{2}}.
     \end{align*}
@@ -1508,7 +1513,7 @@
     \begin{align*}
     y &= y_0 + v_{0y}t - \frac{gt^2}2 = h - \frac{gt^2}2, \qquad y(\tau) = 0 \implies h - \frac{g\tau^2}2 = 0 \implies h = \frac{g\tau^2}2 \approx 11{,}2\,\text{м}.
     \\
-    x &= x_0 + v_{0x}t = v_{0x}t \implies L = v_0\tau \approx 22{,}5\,\text{м}.
+    x &= x_0 + v_{0x}t = v_0t \implies L = v_0\tau \approx 22{,}5\,\text{м}.
     \\
     &v = \sqrt{v_x^2 + v_y^2} = \sqrt{v_{0x}^2 + \sqr{v_{0y} - g\tau}} = \sqrt{v_0^2 + \sqr{g\tau}} \approx 21{,}2\,\frac{\text{м}}{\text{c}}.
     \end{align*}
@@ -1811,7 +1816,7 @@
 \answer{%
     \begin{align*}
     v &= v_0 + a t = at = 1{,}5\,\frac{\text{м}}{\text{с}^{2}} \cdot 10\,\text{c} = 15{,}0\,\frac{\text{м}}{\text{с}}, \\
-    s_x &= v_0t + \frac{a t^2}2 = \frac{a t^2}2 = \frac{1{,}5\,\frac{\text{м}}{\text{с}^{2}} \cdot \sqr{ 10\,\text{c} }}2 = 11{,}2\,\text{м}, \\
+    s_x &= v_0t + \frac{a t^2}2 = \frac{a t^2}2 = \frac{1{,}5\,\frac{\text{м}}{\text{с}^{2}} \cdot \sqr{ 10\,\text{c} }}2 = 75{,}0\,\text{м}, \\
     v_\text{сред.} &= \frac{s_\text{общ}}{t_\text{общ.}} = \frac{s_x + v \cdot 3t}{t + 3t} = \frac{\frac{a t^2}2 + at \cdot 3t}{t (1 + 3)} = \\
     &= at \cdot \frac{\frac 12 + 3}{1 + 3} = 1{,}5\,\frac{\text{м}}{\text{с}^{2}} \cdot 10\,\text{c} \cdot \frac{\frac 12 + 3}{1 + 3} \approx 13{,}12\,\frac{\text{м}}{\text{c}}.
     \end{align*}
@@ -1845,6 +1850,7 @@
     \begin{align*}
     t &= 60\,\text{с}, r = 2{,}5\,\text{м}, n = 10\units{оборотов}, \\
     T &= \frac tN = \frac{ 60\,\text{с} }{10} \approx 6{,}00\,\text{c}, \\
+    \nu &= \frac 1T = \frac{10}{ 60\,\text{с} } \approx 0{,}17\,\text{Гц}, \\
     v &= \frac{2 \pi r}{T} = \frac{2 \pi r}{T} =  \frac{2 \pi r n}{t} \approx 2{,}62\,\frac{\text{м}}{\text{c}}, \\
     a &= \frac{v^2}{r} =  \frac{4 \pi^2 r n^2}{t^2} \approx 2{,}74\,\frac{\text{м}}{\text{с}^{2}}.
     \end{align*}
@@ -1867,7 +1873,7 @@
     \begin{align*}
     y &= y_0 + v_{0y}t - \frac{gt^2}2 = h - \frac{gt^2}2, \qquad y(\tau) = 0 \implies h - \frac{g\tau^2}2 = 0 \implies h = \frac{g\tau^2}2 \approx 7{,}2\,\text{м}.
     \\
-    x &= x_0 + v_{0x}t = v_{0x}t \implies L = v_0\tau \approx 16{,}8\,\text{м}.
+    x &= x_0 + v_{0x}t = v_0t \implies L = v_0\tau \approx 16{,}8\,\text{м}.
     \\
     &v = \sqrt{v_x^2 + v_y^2} = \sqrt{v_{0x}^2 + \sqr{v_{0y} - g\tau}} = \sqrt{v_0^2 + \sqr{g\tau}} \approx 18{,}4\,\frac{\text{м}}{\text{c}}.
     \end{align*}
@@ -2170,7 +2176,7 @@
 \answer{%
     \begin{align*}
     v &= v_0 + a t = at = 2\,\frac{\text{м}}{\text{с}^{2}} \cdot 4\,\text{c} = 8{,}0\,\frac{\text{м}}{\text{с}}, \\
-    s_x &= v_0t + \frac{a t^2}2 = \frac{a t^2}2 = \frac{2\,\frac{\text{м}}{\text{с}^{2}} \cdot \sqr{ 4\,\text{c} }}2 = 8{,}0\,\text{м}, \\
+    s_x &= v_0t + \frac{a t^2}2 = \frac{a t^2}2 = \frac{2\,\frac{\text{м}}{\text{с}^{2}} \cdot \sqr{ 4\,\text{c} }}2 = 16{,}0\,\text{м}, \\
     v_\text{сред.} &= \frac{s_\text{общ}}{t_\text{общ.}} = \frac{s_x + v \cdot 2t}{t + 2t} = \frac{\frac{a t^2}2 + at \cdot 2t}{t (1 + 2)} = \\
     &= at \cdot \frac{\frac 12 + 2}{1 + 2} = 2\,\frac{\text{м}}{\text{с}^{2}} \cdot 4\,\text{c} \cdot \frac{\frac 12 + 2}{1 + 2} \approx 6{,}67\,\frac{\text{м}}{\text{c}}.
     \end{align*}
@@ -2204,6 +2210,7 @@
     \begin{align*}
     t &= 60\,\text{с}, r = 2{,}0\,\text{м}, n = 6\units{оборотов}, \\
     T &= \frac tN = \frac{ 60\,\text{с} }{6} \approx 10{,}00\,\text{c}, \\
+    \nu &= \frac 1T = \frac{6}{ 60\,\text{с} } \approx 0{,}10\,\text{Гц}, \\
     v &= \frac{2 \pi r}{T} = \frac{2 \pi r}{T} =  \frac{2 \pi r n}{t} \approx 1{,}26\,\frac{\text{м}}{\text{c}}, \\
     a &= \frac{v^2}{r} =  \frac{4 \pi^2 r n^2}{t^2} \approx 0{,}79\,\frac{\text{м}}{\text{с}^{2}}.
     \end{align*}
@@ -2226,7 +2233,7 @@
     \begin{align*}
     y &= y_0 + v_{0y}t - \frac{gt^2}2 = h - \frac{gt^2}2, \qquad y(\tau) = 0 \implies h - \frac{g\tau^2}2 = 0 \implies h = \frac{g\tau^2}2 \approx 12{,}8\,\text{м}.
     \\
-    x &= x_0 + v_{0x}t = v_{0x}t \implies L = v_0\tau \approx 25{,}6\,\text{м}.
+    x &= x_0 + v_{0x}t = v_0t \implies L = v_0\tau \approx 25{,}6\,\text{м}.
     \\
     &v = \sqrt{v_x^2 + v_y^2} = \sqrt{v_{0x}^2 + \sqr{v_{0y} - g\tau}} = \sqrt{v_0^2 + \sqr{g\tau}} \approx 22{,}6\,\frac{\text{м}}{\text{c}}.
     \end{align*}
@@ -2529,7 +2536,7 @@
 \answer{%
     \begin{align*}
     v &= v_0 + a t = at = 0{,}5\,\frac{\text{м}}{\text{с}^{2}} \cdot 10\,\text{c} = 5{,}0\,\frac{\text{м}}{\text{с}}, \\
-    s_x &= v_0t + \frac{a t^2}2 = \frac{a t^2}2 = \frac{0{,}5\,\frac{\text{м}}{\text{с}^{2}} \cdot \sqr{ 10\,\text{c} }}2 = 1{,}2\,\text{м}, \\
+    s_x &= v_0t + \frac{a t^2}2 = \frac{a t^2}2 = \frac{0{,}5\,\frac{\text{м}}{\text{с}^{2}} \cdot \sqr{ 10\,\text{c} }}2 = 25{,}0\,\text{м}, \\
     v_\text{сред.} &= \frac{s_\text{общ}}{t_\text{общ.}} = \frac{s_x + v \cdot 3t}{t + 3t} = \frac{\frac{a t^2}2 + at \cdot 3t}{t (1 + 3)} = \\
     &= at \cdot \frac{\frac 12 + 3}{1 + 3} = 0{,}5\,\frac{\text{м}}{\text{с}^{2}} \cdot 10\,\text{c} \cdot \frac{\frac 12 + 3}{1 + 3} \approx 4{,}38\,\frac{\text{м}}{\text{c}}.
     \end{align*}
@@ -2563,6 +2570,7 @@
     \begin{align*}
     t &= 60\,\text{с}, r = 4{,}0\,\text{м}, n = 6\units{оборотов}, \\
     T &= \frac tN = \frac{ 60\,\text{с} }{6} \approx 10{,}00\,\text{c}, \\
+    \nu &= \frac 1T = \frac{6}{ 60\,\text{с} } \approx 0{,}10\,\text{Гц}, \\
     v &= \frac{2 \pi r}{T} = \frac{2 \pi r}{T} =  \frac{2 \pi r n}{t} \approx 2{,}51\,\frac{\text{м}}{\text{c}}, \\
     a &= \frac{v^2}{r} =  \frac{4 \pi^2 r n^2}{t^2} \approx 1{,}58\,\frac{\text{м}}{\text{с}^{2}}.
     \end{align*}
@@ -2585,7 +2593,7 @@
     \begin{align*}
     y &= y_0 + v_{0y}t - \frac{gt^2}2 = h - \frac{gt^2}2, \qquad y(\tau) = 0 \implies h - \frac{g\tau^2}2 = 0 \implies h = \frac{g\tau^2}2 \approx 8{,}5\,\text{м}.
     \\
-    x &= x_0 + v_{0x}t = v_{0x}t \implies L = v_0\tau \approx 16{,}9\,\text{м}.
+    x &= x_0 + v_{0x}t = v_0t \implies L = v_0\tau \approx 16{,}9\,\text{м}.
     \\
     &v = \sqrt{v_x^2 + v_y^2} = \sqrt{v_{0x}^2 + \sqr{v_{0y} - g\tau}} = \sqrt{v_0^2 + \sqr{g\tau}} \approx 18{,}4\,\frac{\text{м}}{\text{c}}.
     \end{align*}
@@ -2888,7 +2896,7 @@
 \answer{%
     \begin{align*}
     v &= v_0 + a t = at = 2{,}5\,\frac{\text{м}}{\text{с}^{2}} \cdot 5\,\text{c} = 12{,}5\,\frac{\text{м}}{\text{с}}, \\
-    s_x &= v_0t + \frac{a t^2}2 = \frac{a t^2}2 = \frac{2{,}5\,\frac{\text{м}}{\text{с}^{2}} \cdot \sqr{ 5\,\text{c} }}2 = 15{,}6\,\text{м}, \\
+    s_x &= v_0t + \frac{a t^2}2 = \frac{a t^2}2 = \frac{2{,}5\,\frac{\text{м}}{\text{с}^{2}} \cdot \sqr{ 5\,\text{c} }}2 = 31{,}2\,\text{м}, \\
     v_\text{сред.} &= \frac{s_\text{общ}}{t_\text{общ.}} = \frac{s_x + v \cdot 3t}{t + 3t} = \frac{\frac{a t^2}2 + at \cdot 3t}{t (1 + 3)} = \\
     &= at \cdot \frac{\frac 12 + 3}{1 + 3} = 2{,}5\,\frac{\text{м}}{\text{с}^{2}} \cdot 5\,\text{c} \cdot \frac{\frac 12 + 3}{1 + 3} \approx 10{,}94\,\frac{\text{м}}{\text{c}}.
     \end{align*}
@@ -2922,6 +2930,7 @@
     \begin{align*}
     t &= 60\,\text{с}, r = 4{,}0\,\text{м}, n = 10\units{оборотов}, \\
     T &= \frac tN = \frac{ 60\,\text{с} }{10} \approx 6{,}00\,\text{c}, \\
+    \nu &= \frac 1T = \frac{10}{ 60\,\text{с} } \approx 0{,}17\,\text{Гц}, \\
     v &= \frac{2 \pi r}{T} = \frac{2 \pi r}{T} =  \frac{2 \pi r n}{t} \approx 4{,}19\,\frac{\text{м}}{\text{c}}, \\
     a &= \frac{v^2}{r} =  \frac{4 \pi^2 r n^2}{t^2} \approx 4{,}39\,\frac{\text{м}}{\text{с}^{2}}.
     \end{align*}
@@ -2944,7 +2953,7 @@
     \begin{align*}
     y &= y_0 + v_{0y}t - \frac{gt^2}2 = h - \frac{gt^2}2, \qquad y(\tau) = 0 \implies h - \frac{g\tau^2}2 = 0 \implies h = \frac{g\tau^2}2 \approx 7{,}2\,\text{м}.
     \\
-    x &= x_0 + v_{0x}t = v_{0x}t \implies L = v_0\tau \approx 14{,}4\,\text{м}.
+    x &= x_0 + v_{0x}t = v_0t \implies L = v_0\tau \approx 14{,}4\,\text{м}.
     \\
     &v = \sqrt{v_x^2 + v_y^2} = \sqrt{v_{0x}^2 + \sqr{v_{0y} - g\tau}} = \sqrt{v_0^2 + \sqr{g\tau}} \approx 17{,}0\,\frac{\text{м}}{\text{c}}.
     \end{align*}
@@ -3247,7 +3256,7 @@
 \answer{%
     \begin{align*}
     v &= v_0 + a t = at = 2\,\frac{\text{м}}{\text{с}^{2}} \cdot 3\,\text{c} = 6{,}0\,\frac{\text{м}}{\text{с}}, \\
-    s_x &= v_0t + \frac{a t^2}2 = \frac{a t^2}2 = \frac{2\,\frac{\text{м}}{\text{с}^{2}} \cdot \sqr{ 3\,\text{c} }}2 = 6{,}0\,\text{м}, \\
+    s_x &= v_0t + \frac{a t^2}2 = \frac{a t^2}2 = \frac{2\,\frac{\text{м}}{\text{с}^{2}} \cdot \sqr{ 3\,\text{c} }}2 = 9{,}0\,\text{м}, \\
     v_\text{сред.} &= \frac{s_\text{общ}}{t_\text{общ.}} = \frac{s_x + v \cdot 3t}{t + 3t} = \frac{\frac{a t^2}2 + at \cdot 3t}{t (1 + 3)} = \\
     &= at \cdot \frac{\frac 12 + 3}{1 + 3} = 2\,\frac{\text{м}}{\text{с}^{2}} \cdot 3\,\text{c} \cdot \frac{\frac 12 + 3}{1 + 3} \approx 5{,}25\,\frac{\text{м}}{\text{c}}.
     \end{align*}
@@ -3281,6 +3290,7 @@
     \begin{align*}
     t &= 60\,\text{с}, r = 2{,}5\,\text{м}, n = 5\units{оборотов}, \\
     T &= \frac tN = \frac{ 60\,\text{с} }{5} \approx 12{,}00\,\text{c}, \\
+    \nu &= \frac 1T = \frac{5}{ 60\,\text{с} } \approx 0{,}08\,\text{Гц}, \\
     v &= \frac{2 \pi r}{T} = \frac{2 \pi r}{T} =  \frac{2 \pi r n}{t} \approx 1{,}31\,\frac{\text{м}}{\text{c}}, \\
     a &= \frac{v^2}{r} =  \frac{4 \pi^2 r n^2}{t^2} \approx 0{,}69\,\frac{\text{м}}{\text{с}^{2}}.
     \end{align*}
@@ -3303,7 +3313,7 @@
     \begin{align*}
     y &= y_0 + v_{0y}t - \frac{gt^2}2 = h - \frac{gt^2}2, \qquad y(\tau) = 0 \implies h - \frac{g\tau^2}2 = 0 \implies h = \frac{g\tau^2}2 \approx 7{,}2\,\text{м}.
     \\
-    x &= x_0 + v_{0x}t = v_{0x}t \implies L = v_0\tau \approx 21{,}6\,\text{м}.
+    x &= x_0 + v_{0x}t = v_0t \implies L = v_0\tau \approx 21{,}6\,\text{м}.
     \\
     &v = \sqrt{v_x^2 + v_y^2} = \sqrt{v_{0x}^2 + \sqr{v_{0y} - g\tau}} = \sqrt{v_0^2 + \sqr{g\tau}} \approx 21{,}6\,\frac{\text{м}}{\text{c}}.
     \end{align*}
@@ -3606,7 +3616,7 @@
 \answer{%
     \begin{align*}
     v &= v_0 + a t = at = 1{,}5\,\frac{\text{м}}{\text{с}^{2}} \cdot 10\,\text{c} = 15{,}0\,\frac{\text{м}}{\text{с}}, \\
-    s_x &= v_0t + \frac{a t^2}2 = \frac{a t^2}2 = \frac{1{,}5\,\frac{\text{м}}{\text{с}^{2}} \cdot \sqr{ 10\,\text{c} }}2 = 11{,}2\,\text{м}, \\
+    s_x &= v_0t + \frac{a t^2}2 = \frac{a t^2}2 = \frac{1{,}5\,\frac{\text{м}}{\text{с}^{2}} \cdot \sqr{ 10\,\text{c} }}2 = 75{,}0\,\text{м}, \\
     v_\text{сред.} &= \frac{s_\text{общ}}{t_\text{общ.}} = \frac{s_x + v \cdot 2t}{t + 2t} = \frac{\frac{a t^2}2 + at \cdot 2t}{t (1 + 2)} = \\
     &= at \cdot \frac{\frac 12 + 2}{1 + 2} = 1{,}5\,\frac{\text{м}}{\text{с}^{2}} \cdot 10\,\text{c} \cdot \frac{\frac 12 + 2}{1 + 2} \approx 12{,}50\,\frac{\text{м}}{\text{c}}.
     \end{align*}
@@ -3640,6 +3650,7 @@
     \begin{align*}
     t &= 60\,\text{с}, r = 1{,}5\,\text{м}, n = 5\units{оборотов}, \\
     T &= \frac tN = \frac{ 60\,\text{с} }{5} \approx 12{,}00\,\text{c}, \\
+    \nu &= \frac 1T = \frac{5}{ 60\,\text{с} } \approx 0{,}08\,\text{Гц}, \\
     v &= \frac{2 \pi r}{T} = \frac{2 \pi r}{T} =  \frac{2 \pi r n}{t} \approx 0{,}79\,\frac{\text{м}}{\text{c}}, \\
     a &= \frac{v^2}{r} =  \frac{4 \pi^2 r n^2}{t^2} \approx 0{,}41\,\frac{\text{м}}{\text{с}^{2}}.
     \end{align*}
@@ -3662,7 +3673,7 @@
     \begin{align*}
     y &= y_0 + v_{0y}t - \frac{gt^2}2 = h - \frac{gt^2}2, \qquad y(\tau) = 0 \implies h - \frac{g\tau^2}2 = 0 \implies h = \frac{g\tau^2}2 \approx 7{,}2\,\text{м}.
     \\
-    x &= x_0 + v_{0x}t = v_{0x}t \implies L = v_0\tau \approx 14{,}4\,\text{м}.
+    x &= x_0 + v_{0x}t = v_0t \implies L = v_0\tau \approx 14{,}4\,\text{м}.
     \\
     &v = \sqrt{v_x^2 + v_y^2} = \sqrt{v_{0x}^2 + \sqr{v_{0y} - g\tau}} = \sqrt{v_0^2 + \sqr{g\tau}} \approx 17{,}0\,\frac{\text{м}}{\text{c}}.
     \end{align*}
@@ -3965,7 +3976,7 @@
 \answer{%
     \begin{align*}
     v &= v_0 + a t = at = 2\,\frac{\text{м}}{\text{с}^{2}} \cdot 10\,\text{c} = 20{,}0\,\frac{\text{м}}{\text{с}}, \\
-    s_x &= v_0t + \frac{a t^2}2 = \frac{a t^2}2 = \frac{2\,\frac{\text{м}}{\text{с}^{2}} \cdot \sqr{ 10\,\text{c} }}2 = 20{,}0\,\text{м}, \\
+    s_x &= v_0t + \frac{a t^2}2 = \frac{a t^2}2 = \frac{2\,\frac{\text{м}}{\text{с}^{2}} \cdot \sqr{ 10\,\text{c} }}2 = 100{,}0\,\text{м}, \\
     v_\text{сред.} &= \frac{s_\text{общ}}{t_\text{общ.}} = \frac{s_x + v \cdot 3t}{t + 3t} = \frac{\frac{a t^2}2 + at \cdot 3t}{t (1 + 3)} = \\
     &= at \cdot \frac{\frac 12 + 3}{1 + 3} = 2\,\frac{\text{м}}{\text{с}^{2}} \cdot 10\,\text{c} \cdot \frac{\frac 12 + 3}{1 + 3} \approx 17{,}50\,\frac{\text{м}}{\text{c}}.
     \end{align*}
@@ -3999,6 +4010,7 @@
     \begin{align*}
     t &= 60\,\text{с}, r = 2{,}5\,\text{м}, n = 10\units{оборотов}, \\
     T &= \frac tN = \frac{ 60\,\text{с} }{10} \approx 6{,}00\,\text{c}, \\
+    \nu &= \frac 1T = \frac{10}{ 60\,\text{с} } \approx 0{,}17\,\text{Гц}, \\
     v &= \frac{2 \pi r}{T} = \frac{2 \pi r}{T} =  \frac{2 \pi r n}{t} \approx 2{,}62\,\frac{\text{м}}{\text{c}}, \\
     a &= \frac{v^2}{r} =  \frac{4 \pi^2 r n^2}{t^2} \approx 2{,}74\,\frac{\text{м}}{\text{с}^{2}}.
     \end{align*}
@@ -4021,7 +4033,7 @@
     \begin{align*}
     y &= y_0 + v_{0y}t - \frac{gt^2}2 = h - \frac{gt^2}2, \qquad y(\tau) = 0 \implies h - \frac{g\tau^2}2 = 0 \implies h = \frac{g\tau^2}2 \approx 14{,}4\,\text{м}.
     \\
-    x &= x_0 + v_{0x}t = v_{0x}t \implies L = v_0\tau \approx 28{,}9\,\text{м}.
+    x &= x_0 + v_{0x}t = v_0t \implies L = v_0\tau \approx 28{,}9\,\text{м}.
     \\
     &v = \sqrt{v_x^2 + v_y^2} = \sqrt{v_{0x}^2 + \sqr{v_{0y} - g\tau}} = \sqrt{v_0^2 + \sqr{g\tau}} \approx 24{,}0\,\frac{\text{м}}{\text{c}}.
     \end{align*}
@@ -4324,7 +4336,7 @@
 \answer{%
     \begin{align*}
     v &= v_0 + a t = at = 2{,}5\,\frac{\text{м}}{\text{с}^{2}} \cdot 5\,\text{c} = 12{,}5\,\frac{\text{м}}{\text{с}}, \\
-    s_x &= v_0t + \frac{a t^2}2 = \frac{a t^2}2 = \frac{2{,}5\,\frac{\text{м}}{\text{с}^{2}} \cdot \sqr{ 5\,\text{c} }}2 = 15{,}6\,\text{м}, \\
+    s_x &= v_0t + \frac{a t^2}2 = \frac{a t^2}2 = \frac{2{,}5\,\frac{\text{м}}{\text{с}^{2}} \cdot \sqr{ 5\,\text{c} }}2 = 31{,}2\,\text{м}, \\
     v_\text{сред.} &= \frac{s_\text{общ}}{t_\text{общ.}} = \frac{s_x + v \cdot 3t}{t + 3t} = \frac{\frac{a t^2}2 + at \cdot 3t}{t (1 + 3)} = \\
     &= at \cdot \frac{\frac 12 + 3}{1 + 3} = 2{,}5\,\frac{\text{м}}{\text{с}^{2}} \cdot 5\,\text{c} \cdot \frac{\frac 12 + 3}{1 + 3} \approx 10{,}94\,\frac{\text{м}}{\text{c}}.
     \end{align*}
@@ -4358,6 +4370,7 @@
     \begin{align*}
     t &= 60\,\text{с}, r = 2{,}0\,\text{м}, n = 10\units{оборотов}, \\
     T &= \frac tN = \frac{ 60\,\text{с} }{10} \approx 6{,}00\,\text{c}, \\
+    \nu &= \frac 1T = \frac{10}{ 60\,\text{с} } \approx 0{,}17\,\text{Гц}, \\
     v &= \frac{2 \pi r}{T} = \frac{2 \pi r}{T} =  \frac{2 \pi r n}{t} \approx 2{,}09\,\frac{\text{м}}{\text{c}}, \\
     a &= \frac{v^2}{r} =  \frac{4 \pi^2 r n^2}{t^2} \approx 2{,}19\,\frac{\text{м}}{\text{с}^{2}}.
     \end{align*}
@@ -4380,7 +4393,7 @@
     \begin{align*}
     y &= y_0 + v_{0y}t - \frac{gt^2}2 = h - \frac{gt^2}2, \qquad y(\tau) = 0 \implies h - \frac{g\tau^2}2 = 0 \implies h = \frac{g\tau^2}2 \approx 7{,}2\,\text{м}.
     \\
-    x &= x_0 + v_{0x}t = v_{0x}t \implies L = v_0\tau \approx 20{,}4\,\text{м}.
+    x &= x_0 + v_{0x}t = v_0t \implies L = v_0\tau \approx 20{,}4\,\text{м}.
     \\
     &v = \sqrt{v_x^2 + v_y^2} = \sqrt{v_{0x}^2 + \sqr{v_{0y} - g\tau}} = \sqrt{v_0^2 + \sqr{g\tau}} \approx 20{,}8\,\frac{\text{м}}{\text{c}}.
     \end{align*}
@@ -4683,7 +4696,7 @@
 \answer{%
     \begin{align*}
     v &= v_0 + a t = at = 1{,}5\,\frac{\text{м}}{\text{с}^{2}} \cdot 3\,\text{c} = 4{,}5\,\frac{\text{м}}{\text{с}}, \\
-    s_x &= v_0t + \frac{a t^2}2 = \frac{a t^2}2 = \frac{1{,}5\,\frac{\text{м}}{\text{с}^{2}} \cdot \sqr{ 3\,\text{c} }}2 = 3{,}4\,\text{м}, \\
+    s_x &= v_0t + \frac{a t^2}2 = \frac{a t^2}2 = \frac{1{,}5\,\frac{\text{м}}{\text{с}^{2}} \cdot \sqr{ 3\,\text{c} }}2 = 6{,}8\,\text{м}, \\
     v_\text{сред.} &= \frac{s_\text{общ}}{t_\text{общ.}} = \frac{s_x + v \cdot 2t}{t + 2t} = \frac{\frac{a t^2}2 + at \cdot 2t}{t (1 + 2)} = \\
     &= at \cdot \frac{\frac 12 + 2}{1 + 2} = 1{,}5\,\frac{\text{м}}{\text{с}^{2}} \cdot 3\,\text{c} \cdot \frac{\frac 12 + 2}{1 + 2} \approx 3{,}75\,\frac{\text{м}}{\text{c}}.
     \end{align*}
@@ -4717,6 +4730,7 @@
     \begin{align*}
     t &= 60\,\text{с}, r = 4{,}0\,\text{м}, n = 10\units{оборотов}, \\
     T &= \frac tN = \frac{ 60\,\text{с} }{10} \approx 6{,}00\,\text{c}, \\
+    \nu &= \frac 1T = \frac{10}{ 60\,\text{с} } \approx 0{,}17\,\text{Гц}, \\
     v &= \frac{2 \pi r}{T} = \frac{2 \pi r}{T} =  \frac{2 \pi r n}{t} \approx 4{,}19\,\frac{\text{м}}{\text{c}}, \\
     a &= \frac{v^2}{r} =  \frac{4 \pi^2 r n^2}{t^2} \approx 4{,}39\,\frac{\text{м}}{\text{с}^{2}}.
     \end{align*}
@@ -4739,7 +4753,7 @@
     \begin{align*}
     y &= y_0 + v_{0y}t - \frac{gt^2}2 = h - \frac{gt^2}2, \qquad y(\tau) = 0 \implies h - \frac{g\tau^2}2 = 0 \implies h = \frac{g\tau^2}2 \approx 8{,}5\,\text{м}.
     \\
-    x &= x_0 + v_{0x}t = v_{0x}t \implies L = v_0\tau \approx 16{,}9\,\text{м}.
+    x &= x_0 + v_{0x}t = v_0t \implies L = v_0\tau \approx 16{,}9\,\text{м}.
     \\
     &v = \sqrt{v_x^2 + v_y^2} = \sqrt{v_{0x}^2 + \sqr{v_{0y} - g\tau}} = \sqrt{v_0^2 + \sqr{g\tau}} \approx 18{,}4\,\frac{\text{м}}{\text{c}}.
     \end{align*}
@@ -5042,7 +5056,7 @@
 \answer{%
     \begin{align*}
     v &= v_0 + a t = at = 1{,}5\,\frac{\text{м}}{\text{с}^{2}} \cdot 10\,\text{c} = 15{,}0\,\frac{\text{м}}{\text{с}}, \\
-    s_x &= v_0t + \frac{a t^2}2 = \frac{a t^2}2 = \frac{1{,}5\,\frac{\text{м}}{\text{с}^{2}} \cdot \sqr{ 10\,\text{c} }}2 = 11{,}2\,\text{м}, \\
+    s_x &= v_0t + \frac{a t^2}2 = \frac{a t^2}2 = \frac{1{,}5\,\frac{\text{м}}{\text{с}^{2}} \cdot \sqr{ 10\,\text{c} }}2 = 75{,}0\,\text{м}, \\
     v_\text{сред.} &= \frac{s_\text{общ}}{t_\text{общ.}} = \frac{s_x + v \cdot 2t}{t + 2t} = \frac{\frac{a t^2}2 + at \cdot 2t}{t (1 + 2)} = \\
     &= at \cdot \frac{\frac 12 + 2}{1 + 2} = 1{,}5\,\frac{\text{м}}{\text{с}^{2}} \cdot 10\,\text{c} \cdot \frac{\frac 12 + 2}{1 + 2} \approx 12{,}50\,\frac{\text{м}}{\text{c}}.
     \end{align*}
@@ -5076,6 +5090,7 @@
     \begin{align*}
     t &= 60\,\text{с}, r = 2{,}5\,\text{м}, n = 10\units{оборотов}, \\
     T &= \frac tN = \frac{ 60\,\text{с} }{10} \approx 6{,}00\,\text{c}, \\
+    \nu &= \frac 1T = \frac{10}{ 60\,\text{с} } \approx 0{,}17\,\text{Гц}, \\
     v &= \frac{2 \pi r}{T} = \frac{2 \pi r}{T} =  \frac{2 \pi r n}{t} \approx 2{,}62\,\frac{\text{м}}{\text{c}}, \\
     a &= \frac{v^2}{r} =  \frac{4 \pi^2 r n^2}{t^2} \approx 2{,}74\,\frac{\text{м}}{\text{с}^{2}}.
     \end{align*}
@@ -5098,7 +5113,7 @@
     \begin{align*}
     y &= y_0 + v_{0y}t - \frac{gt^2}2 = h - \frac{gt^2}2, \qquad y(\tau) = 0 \implies h - \frac{g\tau^2}2 = 0 \implies h = \frac{g\tau^2}2 \approx 8{,}5\,\text{м}.
     \\
-    x &= x_0 + v_{0x}t = v_{0x}t \implies L = v_0\tau \approx 23{,}4\,\text{м}.
+    x &= x_0 + v_{0x}t = v_0t \implies L = v_0\tau \approx 23{,}4\,\text{м}.
     \\
     &v = \sqrt{v_x^2 + v_y^2} = \sqrt{v_{0x}^2 + \sqr{v_{0y} - g\tau}} = \sqrt{v_0^2 + \sqr{g\tau}} \approx 22{,}2\,\frac{\text{м}}{\text{c}}.
     \end{align*}
@@ -5401,7 +5416,7 @@
 \answer{%
     \begin{align*}
     v &= v_0 + a t = at = 0{,}5\,\frac{\text{м}}{\text{с}^{2}} \cdot 4\,\text{c} = 2{,}0\,\frac{\text{м}}{\text{с}}, \\
-    s_x &= v_0t + \frac{a t^2}2 = \frac{a t^2}2 = \frac{0{,}5\,\frac{\text{м}}{\text{с}^{2}} \cdot \sqr{ 4\,\text{c} }}2 = 0{,}5\,\text{м}, \\
+    s_x &= v_0t + \frac{a t^2}2 = \frac{a t^2}2 = \frac{0{,}5\,\frac{\text{м}}{\text{с}^{2}} \cdot \sqr{ 4\,\text{c} }}2 = 4{,}0\,\text{м}, \\
     v_\text{сред.} &= \frac{s_\text{общ}}{t_\text{общ.}} = \frac{s_x + v \cdot 3t}{t + 3t} = \frac{\frac{a t^2}2 + at \cdot 3t}{t (1 + 3)} = \\
     &= at \cdot \frac{\frac 12 + 3}{1 + 3} = 0{,}5\,\frac{\text{м}}{\text{с}^{2}} \cdot 4\,\text{c} \cdot \frac{\frac 12 + 3}{1 + 3} \approx 1{,}75\,\frac{\text{м}}{\text{c}}.
     \end{align*}
@@ -5435,6 +5450,7 @@
     \begin{align*}
     t &= 60\,\text{с}, r = 2{,}0\,\text{м}, n = 10\units{оборотов}, \\
     T &= \frac tN = \frac{ 60\,\text{с} }{10} \approx 6{,}00\,\text{c}, \\
+    \nu &= \frac 1T = \frac{10}{ 60\,\text{с} } \approx 0{,}17\,\text{Гц}, \\
     v &= \frac{2 \pi r}{T} = \frac{2 \pi r}{T} =  \frac{2 \pi r n}{t} \approx 2{,}09\,\frac{\text{м}}{\text{c}}, \\
     a &= \frac{v^2}{r} =  \frac{4 \pi^2 r n^2}{t^2} \approx 2{,}19\,\frac{\text{м}}{\text{с}^{2}}.
     \end{align*}
@@ -5457,7 +5473,7 @@
     \begin{align*}
     y &= y_0 + v_{0y}t - \frac{gt^2}2 = h - \frac{gt^2}2, \qquad y(\tau) = 0 \implies h - \frac{g\tau^2}2 = 0 \implies h = \frac{g\tau^2}2 \approx 11{,}2\,\text{м}.
     \\
-    x &= x_0 + v_{0x}t = v_{0x}t \implies L = v_0\tau \approx 24{,}0\,\text{м}.
+    x &= x_0 + v_{0x}t = v_0t \implies L = v_0\tau \approx 24{,}0\,\text{м}.
     \\
     &v = \sqrt{v_x^2 + v_y^2} = \sqrt{v_{0x}^2 + \sqr{v_{0y} - g\tau}} = \sqrt{v_0^2 + \sqr{g\tau}} \approx 21{,}9\,\frac{\text{м}}{\text{c}}.
     \end{align*}
@@ -5760,7 +5776,7 @@
 \answer{%
     \begin{align*}
     v &= v_0 + a t = at = 2{,}5\,\frac{\text{м}}{\text{с}^{2}} \cdot 4\,\text{c} = 10{,}0\,\frac{\text{м}}{\text{с}}, \\
-    s_x &= v_0t + \frac{a t^2}2 = \frac{a t^2}2 = \frac{2{,}5\,\frac{\text{м}}{\text{с}^{2}} \cdot \sqr{ 4\,\text{c} }}2 = 12{,}5\,\text{м}, \\
+    s_x &= v_0t + \frac{a t^2}2 = \frac{a t^2}2 = \frac{2{,}5\,\frac{\text{м}}{\text{с}^{2}} \cdot \sqr{ 4\,\text{c} }}2 = 20{,}0\,\text{м}, \\
     v_\text{сред.} &= \frac{s_\text{общ}}{t_\text{общ.}} = \frac{s_x + v \cdot 2t}{t + 2t} = \frac{\frac{a t^2}2 + at \cdot 2t}{t (1 + 2)} = \\
     &= at \cdot \frac{\frac 12 + 2}{1 + 2} = 2{,}5\,\frac{\text{м}}{\text{с}^{2}} \cdot 4\,\text{c} \cdot \frac{\frac 12 + 2}{1 + 2} \approx 8{,}33\,\frac{\text{м}}{\text{c}}.
     \end{align*}
@@ -5794,6 +5810,7 @@
     \begin{align*}
     t &= 60\,\text{с}, r = 5{,}0\,\text{м}, n = 6\units{оборотов}, \\
     T &= \frac tN = \frac{ 60\,\text{с} }{6} \approx 10{,}00\,\text{c}, \\
+    \nu &= \frac 1T = \frac{6}{ 60\,\text{с} } \approx 0{,}10\,\text{Гц}, \\
     v &= \frac{2 \pi r}{T} = \frac{2 \pi r}{T} =  \frac{2 \pi r n}{t} \approx 3{,}14\,\frac{\text{м}}{\text{c}}, \\
     a &= \frac{v^2}{r} =  \frac{4 \pi^2 r n^2}{t^2} \approx 1{,}97\,\frac{\text{м}}{\text{с}^{2}}.
     \end{align*}
@@ -5816,7 +5833,7 @@
     \begin{align*}
     y &= y_0 + v_{0y}t - \frac{gt^2}2 = h - \frac{gt^2}2, \qquad y(\tau) = 0 \implies h - \frac{g\tau^2}2 = 0 \implies h = \frac{g\tau^2}2 \approx 11{,}2\,\text{м}.
     \\
-    x &= x_0 + v_{0x}t = v_{0x}t \implies L = v_0\tau \approx 27{,}0\,\text{м}.
+    x &= x_0 + v_{0x}t = v_0t \implies L = v_0\tau \approx 27{,}0\,\text{м}.
     \\
     &v = \sqrt{v_x^2 + v_y^2} = \sqrt{v_{0x}^2 + \sqr{v_{0y} - g\tau}} = \sqrt{v_0^2 + \sqr{g\tau}} \approx 23{,}4\,\frac{\text{м}}{\text{c}}.
     \end{align*}
@@ -6119,7 +6136,7 @@
 \answer{%
     \begin{align*}
     v &= v_0 + a t = at = 2{,}5\,\frac{\text{м}}{\text{с}^{2}} \cdot 4\,\text{c} = 10{,}0\,\frac{\text{м}}{\text{с}}, \\
-    s_x &= v_0t + \frac{a t^2}2 = \frac{a t^2}2 = \frac{2{,}5\,\frac{\text{м}}{\text{с}^{2}} \cdot \sqr{ 4\,\text{c} }}2 = 12{,}5\,\text{м}, \\
+    s_x &= v_0t + \frac{a t^2}2 = \frac{a t^2}2 = \frac{2{,}5\,\frac{\text{м}}{\text{с}^{2}} \cdot \sqr{ 4\,\text{c} }}2 = 20{,}0\,\text{м}, \\
     v_\text{сред.} &= \frac{s_\text{общ}}{t_\text{общ.}} = \frac{s_x + v \cdot 3t}{t + 3t} = \frac{\frac{a t^2}2 + at \cdot 3t}{t (1 + 3)} = \\
     &= at \cdot \frac{\frac 12 + 3}{1 + 3} = 2{,}5\,\frac{\text{м}}{\text{с}^{2}} \cdot 4\,\text{c} \cdot \frac{\frac 12 + 3}{1 + 3} \approx 8{,}75\,\frac{\text{м}}{\text{c}}.
     \end{align*}
@@ -6153,6 +6170,7 @@
     \begin{align*}
     t &= 60\,\text{с}, r = 3{,}0\,\text{м}, n = 10\units{оборотов}, \\
     T &= \frac tN = \frac{ 60\,\text{с} }{10} \approx 6{,}00\,\text{c}, \\
+    \nu &= \frac 1T = \frac{10}{ 60\,\text{с} } \approx 0{,}17\,\text{Гц}, \\
     v &= \frac{2 \pi r}{T} = \frac{2 \pi r}{T} =  \frac{2 \pi r n}{t} \approx 3{,}14\,\frac{\text{м}}{\text{c}}, \\
     a &= \frac{v^2}{r} =  \frac{4 \pi^2 r n^2}{t^2} \approx 3{,}29\,\frac{\text{м}}{\text{с}^{2}}.
     \end{align*}
@@ -6175,7 +6193,7 @@
     \begin{align*}
     y &= y_0 + v_{0y}t - \frac{gt^2}2 = h - \frac{gt^2}2, \qquad y(\tau) = 0 \implies h - \frac{g\tau^2}2 = 0 \implies h = \frac{g\tau^2}2 \approx 8{,}5\,\text{м}.
     \\
-    x &= x_0 + v_{0x}t = v_{0x}t \implies L = v_0\tau \approx 16{,}9\,\text{м}.
+    x &= x_0 + v_{0x}t = v_0t \implies L = v_0\tau \approx 16{,}9\,\text{м}.
     \\
     &v = \sqrt{v_x^2 + v_y^2} = \sqrt{v_{0x}^2 + \sqr{v_{0y} - g\tau}} = \sqrt{v_0^2 + \sqr{g\tau}} \approx 18{,}4\,\frac{\text{м}}{\text{c}}.
     \end{align*}
@@ -6478,7 +6496,7 @@
 \answer{%
     \begin{align*}
     v &= v_0 + a t = at = 1{,}5\,\frac{\text{м}}{\text{с}^{2}} \cdot 4\,\text{c} = 6{,}0\,\frac{\text{м}}{\text{с}}, \\
-    s_x &= v_0t + \frac{a t^2}2 = \frac{a t^2}2 = \frac{1{,}5\,\frac{\text{м}}{\text{с}^{2}} \cdot \sqr{ 4\,\text{c} }}2 = 4{,}5\,\text{м}, \\
+    s_x &= v_0t + \frac{a t^2}2 = \frac{a t^2}2 = \frac{1{,}5\,\frac{\text{м}}{\text{с}^{2}} \cdot \sqr{ 4\,\text{c} }}2 = 12{,}0\,\text{м}, \\
     v_\text{сред.} &= \frac{s_\text{общ}}{t_\text{общ.}} = \frac{s_x + v \cdot 3t}{t + 3t} = \frac{\frac{a t^2}2 + at \cdot 3t}{t (1 + 3)} = \\
     &= at \cdot \frac{\frac 12 + 3}{1 + 3} = 1{,}5\,\frac{\text{м}}{\text{с}^{2}} \cdot 4\,\text{c} \cdot \frac{\frac 12 + 3}{1 + 3} \approx 5{,}25\,\frac{\text{м}}{\text{c}}.
     \end{align*}
@@ -6512,6 +6530,7 @@
     \begin{align*}
     t &= 60\,\text{с}, r = 2{,}0\,\text{м}, n = 10\units{оборотов}, \\
     T &= \frac tN = \frac{ 60\,\text{с} }{10} \approx 6{,}00\,\text{c}, \\
+    \nu &= \frac 1T = \frac{10}{ 60\,\text{с} } \approx 0{,}17\,\text{Гц}, \\
     v &= \frac{2 \pi r}{T} = \frac{2 \pi r}{T} =  \frac{2 \pi r n}{t} \approx 2{,}09\,\frac{\text{м}}{\text{c}}, \\
     a &= \frac{v^2}{r} =  \frac{4 \pi^2 r n^2}{t^2} \approx 2{,}19\,\frac{\text{м}}{\text{с}^{2}}.
     \end{align*}
@@ -6534,7 +6553,7 @@
     \begin{align*}
     y &= y_0 + v_{0y}t - \frac{gt^2}2 = h - \frac{gt^2}2, \qquad y(\tau) = 0 \implies h - \frac{g\tau^2}2 = 0 \implies h = \frac{g\tau^2}2 \approx 11{,}2\,\text{м}.
     \\
-    x &= x_0 + v_{0x}t = v_{0x}t \implies L = v_0\tau \approx 27{,}0\,\text{м}.
+    x &= x_0 + v_{0x}t = v_0t \implies L = v_0\tau \approx 27{,}0\,\text{м}.
     \\
     &v = \sqrt{v_x^2 + v_y^2} = \sqrt{v_{0x}^2 + \sqr{v_{0y} - g\tau}} = \sqrt{v_0^2 + \sqr{g\tau}} \approx 23{,}4\,\frac{\text{м}}{\text{c}}.
     \end{align*}
@@ -6837,7 +6856,7 @@
 \answer{%
     \begin{align*}
     v &= v_0 + a t = at = 2\,\frac{\text{м}}{\text{с}^{2}} \cdot 10\,\text{c} = 20{,}0\,\frac{\text{м}}{\text{с}}, \\
-    s_x &= v_0t + \frac{a t^2}2 = \frac{a t^2}2 = \frac{2\,\frac{\text{м}}{\text{с}^{2}} \cdot \sqr{ 10\,\text{c} }}2 = 20{,}0\,\text{м}, \\
+    s_x &= v_0t + \frac{a t^2}2 = \frac{a t^2}2 = \frac{2\,\frac{\text{м}}{\text{с}^{2}} \cdot \sqr{ 10\,\text{c} }}2 = 100{,}0\,\text{м}, \\
     v_\text{сред.} &= \frac{s_\text{общ}}{t_\text{общ.}} = \frac{s_x + v \cdot 2t}{t + 2t} = \frac{\frac{a t^2}2 + at \cdot 2t}{t (1 + 2)} = \\
     &= at \cdot \frac{\frac 12 + 2}{1 + 2} = 2\,\frac{\text{м}}{\text{с}^{2}} \cdot 10\,\text{c} \cdot \frac{\frac 12 + 2}{1 + 2} \approx 16{,}67\,\frac{\text{м}}{\text{c}}.
     \end{align*}
@@ -6871,6 +6890,7 @@
     \begin{align*}
     t &= 60\,\text{с}, r = 2{,}5\,\text{м}, n = 6\units{оборотов}, \\
     T &= \frac tN = \frac{ 60\,\text{с} }{6} \approx 10{,}00\,\text{c}, \\
+    \nu &= \frac 1T = \frac{6}{ 60\,\text{с} } \approx 0{,}10\,\text{Гц}, \\
     v &= \frac{2 \pi r}{T} = \frac{2 \pi r}{T} =  \frac{2 \pi r n}{t} \approx 1{,}57\,\frac{\text{м}}{\text{c}}, \\
     a &= \frac{v^2}{r} =  \frac{4 \pi^2 r n^2}{t^2} \approx 0{,}99\,\frac{\text{м}}{\text{с}^{2}}.
     \end{align*}
@@ -6893,7 +6913,7 @@
     \begin{align*}
     y &= y_0 + v_{0y}t - \frac{gt^2}2 = h - \frac{gt^2}2, \qquad y(\tau) = 0 \implies h - \frac{g\tau^2}2 = 0 \implies h = \frac{g\tau^2}2 \approx 14{,}4\,\text{м}.
     \\
-    x &= x_0 + v_{0x}t = v_{0x}t \implies L = v_0\tau \approx 20{,}4\,\text{м}.
+    x &= x_0 + v_{0x}t = v_0t \implies L = v_0\tau \approx 20{,}4\,\text{м}.
     \\
     &v = \sqrt{v_x^2 + v_y^2} = \sqrt{v_{0x}^2 + \sqr{v_{0y} - g\tau}} = \sqrt{v_0^2 + \sqr{g\tau}} \approx 20{,}8\,\frac{\text{м}}{\text{c}}.
     \end{align*}
@@ -7196,7 +7216,7 @@
 \answer{%
     \begin{align*}
     v &= v_0 + a t = at = 2\,\frac{\text{м}}{\text{с}^{2}} \cdot 10\,\text{c} = 20{,}0\,\frac{\text{м}}{\text{с}}, \\
-    s_x &= v_0t + \frac{a t^2}2 = \frac{a t^2}2 = \frac{2\,\frac{\text{м}}{\text{с}^{2}} \cdot \sqr{ 10\,\text{c} }}2 = 20{,}0\,\text{м}, \\
+    s_x &= v_0t + \frac{a t^2}2 = \frac{a t^2}2 = \frac{2\,\frac{\text{м}}{\text{с}^{2}} \cdot \sqr{ 10\,\text{c} }}2 = 100{,}0\,\text{м}, \\
     v_\text{сред.} &= \frac{s_\text{общ}}{t_\text{общ.}} = \frac{s_x + v \cdot 2t}{t + 2t} = \frac{\frac{a t^2}2 + at \cdot 2t}{t (1 + 2)} = \\
     &= at \cdot \frac{\frac 12 + 2}{1 + 2} = 2\,\frac{\text{м}}{\text{с}^{2}} \cdot 10\,\text{c} \cdot \frac{\frac 12 + 2}{1 + 2} \approx 16{,}67\,\frac{\text{м}}{\text{c}}.
     \end{align*}
@@ -7230,6 +7250,7 @@
     \begin{align*}
     t &= 60\,\text{с}, r = 4{,}0\,\text{м}, n = 5\units{оборотов}, \\
     T &= \frac tN = \frac{ 60\,\text{с} }{5} \approx 12{,}00\,\text{c}, \\
+    \nu &= \frac 1T = \frac{5}{ 60\,\text{с} } \approx 0{,}08\,\text{Гц}, \\
     v &= \frac{2 \pi r}{T} = \frac{2 \pi r}{T} =  \frac{2 \pi r n}{t} \approx 2{,}09\,\frac{\text{м}}{\text{c}}, \\
     a &= \frac{v^2}{r} =  \frac{4 \pi^2 r n^2}{t^2} \approx 1{,}10\,\frac{\text{м}}{\text{с}^{2}}.
     \end{align*}
@@ -7252,7 +7273,7 @@
     \begin{align*}
     y &= y_0 + v_{0y}t - \frac{gt^2}2 = h - \frac{gt^2}2, \qquad y(\tau) = 0 \implies h - \frac{g\tau^2}2 = 0 \implies h = \frac{g\tau^2}2 \approx 7{,}2\,\text{м}.
     \\
-    x &= x_0 + v_{0x}t = v_{0x}t \implies L = v_0\tau \approx 18{,}0\,\text{м}.
+    x &= x_0 + v_{0x}t = v_0t \implies L = v_0\tau \approx 18{,}0\,\text{м}.
     \\
     &v = \sqrt{v_x^2 + v_y^2} = \sqrt{v_{0x}^2 + \sqr{v_{0y} - g\tau}} = \sqrt{v_0^2 + \sqr{g\tau}} \approx 19{,}2\,\frac{\text{м}}{\text{c}}.
     \end{align*}
@@ -7555,7 +7576,7 @@
 \answer{%
     \begin{align*}
     v &= v_0 + a t = at = 1{,}5\,\frac{\text{м}}{\text{с}^{2}} \cdot 10\,\text{c} = 15{,}0\,\frac{\text{м}}{\text{с}}, \\
-    s_x &= v_0t + \frac{a t^2}2 = \frac{a t^2}2 = \frac{1{,}5\,\frac{\text{м}}{\text{с}^{2}} \cdot \sqr{ 10\,\text{c} }}2 = 11{,}2\,\text{м}, \\
+    s_x &= v_0t + \frac{a t^2}2 = \frac{a t^2}2 = \frac{1{,}5\,\frac{\text{м}}{\text{с}^{2}} \cdot \sqr{ 10\,\text{c} }}2 = 75{,}0\,\text{м}, \\
     v_\text{сред.} &= \frac{s_\text{общ}}{t_\text{общ.}} = \frac{s_x + v \cdot 3t}{t + 3t} = \frac{\frac{a t^2}2 + at \cdot 3t}{t (1 + 3)} = \\
     &= at \cdot \frac{\frac 12 + 3}{1 + 3} = 1{,}5\,\frac{\text{м}}{\text{с}^{2}} \cdot 10\,\text{c} \cdot \frac{\frac 12 + 3}{1 + 3} \approx 13{,}12\,\frac{\text{м}}{\text{c}}.
     \end{align*}
@@ -7589,6 +7610,7 @@
     \begin{align*}
     t &= 60\,\text{с}, r = 1{,}5\,\text{м}, n = 10\units{оборотов}, \\
     T &= \frac tN = \frac{ 60\,\text{с} }{10} \approx 6{,}00\,\text{c}, \\
+    \nu &= \frac 1T = \frac{10}{ 60\,\text{с} } \approx 0{,}17\,\text{Гц}, \\
     v &= \frac{2 \pi r}{T} = \frac{2 \pi r}{T} =  \frac{2 \pi r n}{t} \approx 1{,}57\,\frac{\text{м}}{\text{c}}, \\
     a &= \frac{v^2}{r} =  \frac{4 \pi^2 r n^2}{t^2} \approx 1{,}64\,\frac{\text{м}}{\text{с}^{2}}.
     \end{align*}
@@ -7611,7 +7633,7 @@
     \begin{align*}
     y &= y_0 + v_{0y}t - \frac{gt^2}2 = h - \frac{gt^2}2, \qquad y(\tau) = 0 \implies h - \frac{g\tau^2}2 = 0 \implies h = \frac{g\tau^2}2 \approx 12{,}8\,\text{м}.
     \\
-    x &= x_0 + v_{0x}t = v_{0x}t \implies L = v_0\tau \approx 22{,}4\,\text{м}.
+    x &= x_0 + v_{0x}t = v_0t \implies L = v_0\tau \approx 22{,}4\,\text{м}.
     \\
     &v = \sqrt{v_x^2 + v_y^2} = \sqrt{v_{0x}^2 + \sqr{v_{0y} - g\tau}} = \sqrt{v_0^2 + \sqr{g\tau}} \approx 21{,}3\,\frac{\text{м}}{\text{c}}.
     \end{align*}
@@ -7914,7 +7936,7 @@
 \answer{%
     \begin{align*}
     v &= v_0 + a t = at = 2{,}5\,\frac{\text{м}}{\text{с}^{2}} \cdot 3\,\text{c} = 7{,}5\,\frac{\text{м}}{\text{с}}, \\
-    s_x &= v_0t + \frac{a t^2}2 = \frac{a t^2}2 = \frac{2{,}5\,\frac{\text{м}}{\text{с}^{2}} \cdot \sqr{ 3\,\text{c} }}2 = 9{,}4\,\text{м}, \\
+    s_x &= v_0t + \frac{a t^2}2 = \frac{a t^2}2 = \frac{2{,}5\,\frac{\text{м}}{\text{с}^{2}} \cdot \sqr{ 3\,\text{c} }}2 = 11{,}2\,\text{м}, \\
     v_\text{сред.} &= \frac{s_\text{общ}}{t_\text{общ.}} = \frac{s_x + v \cdot 3t}{t + 3t} = \frac{\frac{a t^2}2 + at \cdot 3t}{t (1 + 3)} = \\
     &= at \cdot \frac{\frac 12 + 3}{1 + 3} = 2{,}5\,\frac{\text{м}}{\text{с}^{2}} \cdot 3\,\text{c} \cdot \frac{\frac 12 + 3}{1 + 3} \approx 6{,}56\,\frac{\text{м}}{\text{c}}.
     \end{align*}
@@ -7948,6 +7970,7 @@
     \begin{align*}
     t &= 60\,\text{с}, r = 2{,}0\,\text{м}, n = 6\units{оборотов}, \\
     T &= \frac tN = \frac{ 60\,\text{с} }{6} \approx 10{,}00\,\text{c}, \\
+    \nu &= \frac 1T = \frac{6}{ 60\,\text{с} } \approx 0{,}10\,\text{Гц}, \\
     v &= \frac{2 \pi r}{T} = \frac{2 \pi r}{T} =  \frac{2 \pi r n}{t} \approx 1{,}26\,\frac{\text{м}}{\text{c}}, \\
     a &= \frac{v^2}{r} =  \frac{4 \pi^2 r n^2}{t^2} \approx 0{,}79\,\frac{\text{м}}{\text{с}^{2}}.
     \end{align*}
@@ -7970,7 +7993,7 @@
     \begin{align*}
     y &= y_0 + v_{0y}t - \frac{gt^2}2 = h - \frac{gt^2}2, \qquad y(\tau) = 0 \implies h - \frac{g\tau^2}2 = 0 \implies h = \frac{g\tau^2}2 \approx 8{,}5\,\text{м}.
     \\
-    x &= x_0 + v_{0x}t = v_{0x}t \implies L = v_0\tau \approx 16{,}9\,\text{м}.
+    x &= x_0 + v_{0x}t = v_0t \implies L = v_0\tau \approx 16{,}9\,\text{м}.
     \\
     &v = \sqrt{v_x^2 + v_y^2} = \sqrt{v_{0x}^2 + \sqr{v_{0y} - g\tau}} = \sqrt{v_0^2 + \sqr{g\tau}} \approx 18{,}4\,\frac{\text{м}}{\text{c}}.
     \end{align*}
@@ -8273,7 +8296,7 @@
 \answer{%
     \begin{align*}
     v &= v_0 + a t = at = 0{,}5\,\frac{\text{м}}{\text{с}^{2}} \cdot 5\,\text{c} = 2{,}5\,\frac{\text{м}}{\text{с}}, \\
-    s_x &= v_0t + \frac{a t^2}2 = \frac{a t^2}2 = \frac{0{,}5\,\frac{\text{м}}{\text{с}^{2}} \cdot \sqr{ 5\,\text{c} }}2 = 0{,}6\,\text{м}, \\
+    s_x &= v_0t + \frac{a t^2}2 = \frac{a t^2}2 = \frac{0{,}5\,\frac{\text{м}}{\text{с}^{2}} \cdot \sqr{ 5\,\text{c} }}2 = 6{,}2\,\text{м}, \\
     v_\text{сред.} &= \frac{s_\text{общ}}{t_\text{общ.}} = \frac{s_x + v \cdot 3t}{t + 3t} = \frac{\frac{a t^2}2 + at \cdot 3t}{t (1 + 3)} = \\
     &= at \cdot \frac{\frac 12 + 3}{1 + 3} = 0{,}5\,\frac{\text{м}}{\text{с}^{2}} \cdot 5\,\text{c} \cdot \frac{\frac 12 + 3}{1 + 3} \approx 2{,}19\,\frac{\text{м}}{\text{c}}.
     \end{align*}
@@ -8307,6 +8330,7 @@
     \begin{align*}
     t &= 60\,\text{с}, r = 5{,}0\,\text{м}, n = 6\units{оборотов}, \\
     T &= \frac tN = \frac{ 60\,\text{с} }{6} \approx 10{,}00\,\text{c}, \\
+    \nu &= \frac 1T = \frac{6}{ 60\,\text{с} } \approx 0{,}10\,\text{Гц}, \\
     v &= \frac{2 \pi r}{T} = \frac{2 \pi r}{T} =  \frac{2 \pi r n}{t} \approx 3{,}14\,\frac{\text{м}}{\text{c}}, \\
     a &= \frac{v^2}{r} =  \frac{4 \pi^2 r n^2}{t^2} \approx 1{,}97\,\frac{\text{м}}{\text{с}^{2}}.
     \end{align*}
@@ -8329,7 +8353,7 @@
     \begin{align*}
     y &= y_0 + v_{0y}t - \frac{gt^2}2 = h - \frac{gt^2}2, \qquad y(\tau) = 0 \implies h - \frac{g\tau^2}2 = 0 \implies h = \frac{g\tau^2}2 \approx 14{,}4\,\text{м}.
     \\
-    x &= x_0 + v_{0x}t = v_{0x}t \implies L = v_0\tau \approx 25{,}5\,\text{м}.
+    x &= x_0 + v_{0x}t = v_0t \implies L = v_0\tau \approx 25{,}5\,\text{м}.
     \\
     &v = \sqrt{v_x^2 + v_y^2} = \sqrt{v_{0x}^2 + \sqr{v_{0y} - g\tau}} = \sqrt{v_0^2 + \sqr{g\tau}} \approx 22{,}7\,\frac{\text{м}}{\text{c}}.
     \end{align*}
@@ -8632,7 +8656,7 @@
 \answer{%
     \begin{align*}
     v &= v_0 + a t = at = 1{,}5\,\frac{\text{м}}{\text{с}^{2}} \cdot 2\,\text{c} = 3{,}0\,\frac{\text{м}}{\text{с}}, \\
-    s_x &= v_0t + \frac{a t^2}2 = \frac{a t^2}2 = \frac{1{,}5\,\frac{\text{м}}{\text{с}^{2}} \cdot \sqr{ 2\,\text{c} }}2 = 2{,}2\,\text{м}, \\
+    s_x &= v_0t + \frac{a t^2}2 = \frac{a t^2}2 = \frac{1{,}5\,\frac{\text{м}}{\text{с}^{2}} \cdot \sqr{ 2\,\text{c} }}2 = 3{,}0\,\text{м}, \\
     v_\text{сред.} &= \frac{s_\text{общ}}{t_\text{общ.}} = \frac{s_x + v \cdot 3t}{t + 3t} = \frac{\frac{a t^2}2 + at \cdot 3t}{t (1 + 3)} = \\
     &= at \cdot \frac{\frac 12 + 3}{1 + 3} = 1{,}5\,\frac{\text{м}}{\text{с}^{2}} \cdot 2\,\text{c} \cdot \frac{\frac 12 + 3}{1 + 3} \approx 2{,}62\,\frac{\text{м}}{\text{c}}.
     \end{align*}
@@ -8666,6 +8690,7 @@
     \begin{align*}
     t &= 60\,\text{с}, r = 3{,}0\,\text{м}, n = 6\units{оборотов}, \\
     T &= \frac tN = \frac{ 60\,\text{с} }{6} \approx 10{,}00\,\text{c}, \\
+    \nu &= \frac 1T = \frac{6}{ 60\,\text{с} } \approx 0{,}10\,\text{Гц}, \\
     v &= \frac{2 \pi r}{T} = \frac{2 \pi r}{T} =  \frac{2 \pi r n}{t} \approx 1{,}88\,\frac{\text{м}}{\text{c}}, \\
     a &= \frac{v^2}{r} =  \frac{4 \pi^2 r n^2}{t^2} \approx 1{,}18\,\frac{\text{м}}{\text{с}^{2}}.
     \end{align*}
@@ -8688,7 +8713,7 @@
     \begin{align*}
     y &= y_0 + v_{0y}t - \frac{gt^2}2 = h - \frac{gt^2}2, \qquad y(\tau) = 0 \implies h - \frac{g\tau^2}2 = 0 \implies h = \frac{g\tau^2}2 \approx 7{,}2\,\text{м}.
     \\
-    x &= x_0 + v_{0x}t = v_{0x}t \implies L = v_0\tau \approx 14{,}4\,\text{м}.
+    x &= x_0 + v_{0x}t = v_0t \implies L = v_0\tau \approx 14{,}4\,\text{м}.
     \\
     &v = \sqrt{v_x^2 + v_y^2} = \sqrt{v_{0x}^2 + \sqr{v_{0y} - g\tau}} = \sqrt{v_0^2 + \sqr{g\tau}} \approx 17{,}0\,\frac{\text{м}}{\text{c}}.
     \end{align*}
@@ -8991,7 +9016,7 @@
 \answer{%
     \begin{align*}
     v &= v_0 + a t = at = 1{,}5\,\frac{\text{м}}{\text{с}^{2}} \cdot 3\,\text{c} = 4{,}5\,\frac{\text{м}}{\text{с}}, \\
-    s_x &= v_0t + \frac{a t^2}2 = \frac{a t^2}2 = \frac{1{,}5\,\frac{\text{м}}{\text{с}^{2}} \cdot \sqr{ 3\,\text{c} }}2 = 3{,}4\,\text{м}, \\
+    s_x &= v_0t + \frac{a t^2}2 = \frac{a t^2}2 = \frac{1{,}5\,\frac{\text{м}}{\text{с}^{2}} \cdot \sqr{ 3\,\text{c} }}2 = 6{,}8\,\text{м}, \\
     v_\text{сред.} &= \frac{s_\text{общ}}{t_\text{общ.}} = \frac{s_x + v \cdot 2t}{t + 2t} = \frac{\frac{a t^2}2 + at \cdot 2t}{t (1 + 2)} = \\
     &= at \cdot \frac{\frac 12 + 2}{1 + 2} = 1{,}5\,\frac{\text{м}}{\text{с}^{2}} \cdot 3\,\text{c} \cdot \frac{\frac 12 + 2}{1 + 2} \approx 3{,}75\,\frac{\text{м}}{\text{c}}.
     \end{align*}
@@ -9025,6 +9050,7 @@
     \begin{align*}
     t &= 60\,\text{с}, r = 1{,}5\,\text{м}, n = 5\units{оборотов}, \\
     T &= \frac tN = \frac{ 60\,\text{с} }{5} \approx 12{,}00\,\text{c}, \\
+    \nu &= \frac 1T = \frac{5}{ 60\,\text{с} } \approx 0{,}08\,\text{Гц}, \\
     v &= \frac{2 \pi r}{T} = \frac{2 \pi r}{T} =  \frac{2 \pi r n}{t} \approx 0{,}79\,\frac{\text{м}}{\text{c}}, \\
     a &= \frac{v^2}{r} =  \frac{4 \pi^2 r n^2}{t^2} \approx 0{,}41\,\frac{\text{м}}{\text{с}^{2}}.
     \end{align*}
@@ -9047,7 +9073,7 @@
     \begin{align*}
     y &= y_0 + v_{0y}t - \frac{gt^2}2 = h - \frac{gt^2}2, \qquad y(\tau) = 0 \implies h - \frac{g\tau^2}2 = 0 \implies h = \frac{g\tau^2}2 \approx 14{,}4\,\text{м}.
     \\
-    x &= x_0 + v_{0x}t = v_{0x}t \implies L = v_0\tau \approx 23{,}8\,\text{м}.
+    x &= x_0 + v_{0x}t = v_0t \implies L = v_0\tau \approx 23{,}8\,\text{м}.
     \\
     &v = \sqrt{v_x^2 + v_y^2} = \sqrt{v_{0x}^2 + \sqr{v_{0y} - g\tau}} = \sqrt{v_0^2 + \sqr{g\tau}} \approx 22{,}0\,\frac{\text{м}}{\text{c}}.
     \end{align*}
@@ -9350,7 +9376,7 @@
 \answer{%
     \begin{align*}
     v &= v_0 + a t = at = 2{,}5\,\frac{\text{м}}{\text{с}^{2}} \cdot 5\,\text{c} = 12{,}5\,\frac{\text{м}}{\text{с}}, \\
-    s_x &= v_0t + \frac{a t^2}2 = \frac{a t^2}2 = \frac{2{,}5\,\frac{\text{м}}{\text{с}^{2}} \cdot \sqr{ 5\,\text{c} }}2 = 15{,}6\,\text{м}, \\
+    s_x &= v_0t + \frac{a t^2}2 = \frac{a t^2}2 = \frac{2{,}5\,\frac{\text{м}}{\text{с}^{2}} \cdot \sqr{ 5\,\text{c} }}2 = 31{,}2\,\text{м}, \\
     v_\text{сред.} &= \frac{s_\text{общ}}{t_\text{общ.}} = \frac{s_x + v \cdot 3t}{t + 3t} = \frac{\frac{a t^2}2 + at \cdot 3t}{t (1 + 3)} = \\
     &= at \cdot \frac{\frac 12 + 3}{1 + 3} = 2{,}5\,\frac{\text{м}}{\text{с}^{2}} \cdot 5\,\text{c} \cdot \frac{\frac 12 + 3}{1 + 3} \approx 10{,}94\,\frac{\text{м}}{\text{c}}.
     \end{align*}
@@ -9384,6 +9410,7 @@
     \begin{align*}
     t &= 60\,\text{с}, r = 1{,}0\,\text{м}, n = 10\units{оборотов}, \\
     T &= \frac tN = \frac{ 60\,\text{с} }{10} \approx 6{,}00\,\text{c}, \\
+    \nu &= \frac 1T = \frac{10}{ 60\,\text{с} } \approx 0{,}17\,\text{Гц}, \\
     v &= \frac{2 \pi r}{T} = \frac{2 \pi r}{T} =  \frac{2 \pi r n}{t} \approx 1{,}05\,\frac{\text{м}}{\text{c}}, \\
     a &= \frac{v^2}{r} =  \frac{4 \pi^2 r n^2}{t^2} \approx 1{,}10\,\frac{\text{м}}{\text{с}^{2}}.
     \end{align*}
@@ -9406,7 +9433,7 @@
     \begin{align*}
     y &= y_0 + v_{0y}t - \frac{gt^2}2 = h - \frac{gt^2}2, \qquad y(\tau) = 0 \implies h - \frac{g\tau^2}2 = 0 \implies h = \frac{g\tau^2}2 \approx 9{,}8\,\text{м}.
     \\
-    x &= x_0 + v_{0x}t = v_{0x}t \implies L = v_0\tau \approx 22{,}4\,\text{м}.
+    x &= x_0 + v_{0x}t = v_0t \implies L = v_0\tau \approx 22{,}4\,\text{м}.
     \\
     &v = \sqrt{v_x^2 + v_y^2} = \sqrt{v_{0x}^2 + \sqr{v_{0y} - g\tau}} = \sqrt{v_0^2 + \sqr{g\tau}} \approx 21{,}3\,\frac{\text{м}}{\text{c}}.
     \end{align*}
@@ -9709,7 +9736,7 @@
 \answer{%
     \begin{align*}
     v &= v_0 + a t = at = 2{,}5\,\frac{\text{м}}{\text{с}^{2}} \cdot 3\,\text{c} = 7{,}5\,\frac{\text{м}}{\text{с}}, \\
-    s_x &= v_0t + \frac{a t^2}2 = \frac{a t^2}2 = \frac{2{,}5\,\frac{\text{м}}{\text{с}^{2}} \cdot \sqr{ 3\,\text{c} }}2 = 9{,}4\,\text{м}, \\
+    s_x &= v_0t + \frac{a t^2}2 = \frac{a t^2}2 = \frac{2{,}5\,\frac{\text{м}}{\text{с}^{2}} \cdot \sqr{ 3\,\text{c} }}2 = 11{,}2\,\text{м}, \\
     v_\text{сред.} &= \frac{s_\text{общ}}{t_\text{общ.}} = \frac{s_x + v \cdot 3t}{t + 3t} = \frac{\frac{a t^2}2 + at \cdot 3t}{t (1 + 3)} = \\
     &= at \cdot \frac{\frac 12 + 3}{1 + 3} = 2{,}5\,\frac{\text{м}}{\text{с}^{2}} \cdot 3\,\text{c} \cdot \frac{\frac 12 + 3}{1 + 3} \approx 6{,}56\,\frac{\text{м}}{\text{c}}.
     \end{align*}
@@ -9743,6 +9770,7 @@
     \begin{align*}
     t &= 60\,\text{с}, r = 1{,}0\,\text{м}, n = 6\units{оборотов}, \\
     T &= \frac tN = \frac{ 60\,\text{с} }{6} \approx 10{,}00\,\text{c}, \\
+    \nu &= \frac 1T = \frac{6}{ 60\,\text{с} } \approx 0{,}10\,\text{Гц}, \\
     v &= \frac{2 \pi r}{T} = \frac{2 \pi r}{T} =  \frac{2 \pi r n}{t} \approx 0{,}63\,\frac{\text{м}}{\text{c}}, \\
     a &= \frac{v^2}{r} =  \frac{4 \pi^2 r n^2}{t^2} \approx 0{,}39\,\frac{\text{м}}{\text{с}^{2}}.
     \end{align*}
@@ -9765,7 +9793,7 @@
     \begin{align*}
     y &= y_0 + v_{0y}t - \frac{gt^2}2 = h - \frac{gt^2}2, \qquad y(\tau) = 0 \implies h - \frac{g\tau^2}2 = 0 \implies h = \frac{g\tau^2}2 \approx 12{,}8\,\text{м}.
     \\
-    x &= x_0 + v_{0x}t = v_{0x}t \implies L = v_0\tau \approx 25{,}6\,\text{м}.
+    x &= x_0 + v_{0x}t = v_0t \implies L = v_0\tau \approx 25{,}6\,\text{м}.
     \\
     &v = \sqrt{v_x^2 + v_y^2} = \sqrt{v_{0x}^2 + \sqr{v_{0y} - g\tau}} = \sqrt{v_0^2 + \sqr{g\tau}} \approx 22{,}6\,\frac{\text{м}}{\text{c}}.
     \end{align*}
@@ -10068,7 +10096,7 @@
 \answer{%
     \begin{align*}
     v &= v_0 + a t = at = 0{,}5\,\frac{\text{м}}{\text{с}^{2}} \cdot 3\,\text{c} = 1{,}5\,\frac{\text{м}}{\text{с}}, \\
-    s_x &= v_0t + \frac{a t^2}2 = \frac{a t^2}2 = \frac{0{,}5\,\frac{\text{м}}{\text{с}^{2}} \cdot \sqr{ 3\,\text{c} }}2 = 0{,}4\,\text{м}, \\
+    s_x &= v_0t + \frac{a t^2}2 = \frac{a t^2}2 = \frac{0{,}5\,\frac{\text{м}}{\text{с}^{2}} \cdot \sqr{ 3\,\text{c} }}2 = 2{,}2\,\text{м}, \\
     v_\text{сред.} &= \frac{s_\text{общ}}{t_\text{общ.}} = \frac{s_x + v \cdot 2t}{t + 2t} = \frac{\frac{a t^2}2 + at \cdot 2t}{t (1 + 2)} = \\
     &= at \cdot \frac{\frac 12 + 2}{1 + 2} = 0{,}5\,\frac{\text{м}}{\text{с}^{2}} \cdot 3\,\text{c} \cdot \frac{\frac 12 + 2}{1 + 2} \approx 1{,}25\,\frac{\text{м}}{\text{c}}.
     \end{align*}
@@ -10102,6 +10130,7 @@
     \begin{align*}
     t &= 60\,\text{с}, r = 1{,}0\,\text{м}, n = 6\units{оборотов}, \\
     T &= \frac tN = \frac{ 60\,\text{с} }{6} \approx 10{,}00\,\text{c}, \\
+    \nu &= \frac 1T = \frac{6}{ 60\,\text{с} } \approx 0{,}10\,\text{Гц}, \\
     v &= \frac{2 \pi r}{T} = \frac{2 \pi r}{T} =  \frac{2 \pi r n}{t} \approx 0{,}63\,\frac{\text{м}}{\text{c}}, \\
     a &= \frac{v^2}{r} =  \frac{4 \pi^2 r n^2}{t^2} \approx 0{,}39\,\frac{\text{м}}{\text{с}^{2}}.
     \end{align*}
@@ -10124,7 +10153,7 @@
     \begin{align*}
     y &= y_0 + v_{0y}t - \frac{gt^2}2 = h - \frac{gt^2}2, \qquad y(\tau) = 0 \implies h - \frac{g\tau^2}2 = 0 \implies h = \frac{g\tau^2}2 \approx 7{,}2\,\text{м}.
     \\
-    x &= x_0 + v_{0x}t = v_{0x}t \implies L = v_0\tau \approx 18{,}0\,\text{м}.
+    x &= x_0 + v_{0x}t = v_0t \implies L = v_0\tau \approx 18{,}0\,\text{м}.
     \\
     &v = \sqrt{v_x^2 + v_y^2} = \sqrt{v_{0x}^2 + \sqr{v_{0y} - g\tau}} = \sqrt{v_0^2 + \sqr{g\tau}} \approx 19{,}2\,\frac{\text{м}}{\text{c}}.
     \end{align*}
@@ -10427,7 +10456,7 @@
 \answer{%
     \begin{align*}
     v &= v_0 + a t = at = 1{,}5\,\frac{\text{м}}{\text{с}^{2}} \cdot 10\,\text{c} = 15{,}0\,\frac{\text{м}}{\text{с}}, \\
-    s_x &= v_0t + \frac{a t^2}2 = \frac{a t^2}2 = \frac{1{,}5\,\frac{\text{м}}{\text{с}^{2}} \cdot \sqr{ 10\,\text{c} }}2 = 11{,}2\,\text{м}, \\
+    s_x &= v_0t + \frac{a t^2}2 = \frac{a t^2}2 = \frac{1{,}5\,\frac{\text{м}}{\text{с}^{2}} \cdot \sqr{ 10\,\text{c} }}2 = 75{,}0\,\text{м}, \\
     v_\text{сред.} &= \frac{s_\text{общ}}{t_\text{общ.}} = \frac{s_x + v \cdot 3t}{t + 3t} = \frac{\frac{a t^2}2 + at \cdot 3t}{t (1 + 3)} = \\
     &= at \cdot \frac{\frac 12 + 3}{1 + 3} = 1{,}5\,\frac{\text{м}}{\text{с}^{2}} \cdot 10\,\text{c} \cdot \frac{\frac 12 + 3}{1 + 3} \approx 13{,}12\,\frac{\text{м}}{\text{c}}.
     \end{align*}
@@ -10461,6 +10490,7 @@
     \begin{align*}
     t &= 60\,\text{с}, r = 1{,}5\,\text{м}, n = 10\units{оборотов}, \\
     T &= \frac tN = \frac{ 60\,\text{с} }{10} \approx 6{,}00\,\text{c}, \\
+    \nu &= \frac 1T = \frac{10}{ 60\,\text{с} } \approx 0{,}17\,\text{Гц}, \\
     v &= \frac{2 \pi r}{T} = \frac{2 \pi r}{T} =  \frac{2 \pi r n}{t} \approx 1{,}57\,\frac{\text{м}}{\text{c}}, \\
     a &= \frac{v^2}{r} =  \frac{4 \pi^2 r n^2}{t^2} \approx 1{,}64\,\frac{\text{м}}{\text{с}^{2}}.
     \end{align*}
@@ -10483,7 +10513,7 @@
     \begin{align*}
     y &= y_0 + v_{0y}t - \frac{gt^2}2 = h - \frac{gt^2}2, \qquad y(\tau) = 0 \implies h - \frac{g\tau^2}2 = 0 \implies h = \frac{g\tau^2}2 \approx 12{,}8\,\text{м}.
     \\
-    x &= x_0 + v_{0x}t = v_{0x}t \implies L = v_0\tau \approx 20{,}8\,\text{м}.
+    x &= x_0 + v_{0x}t = v_0t \implies L = v_0\tau \approx 20{,}8\,\text{м}.
     \\
     &v = \sqrt{v_x^2 + v_y^2} = \sqrt{v_{0x}^2 + \sqr{v_{0y} - g\tau}} = \sqrt{v_0^2 + \sqr{g\tau}} \approx 20{,}6\,\frac{\text{м}}{\text{c}}.
     \end{align*}
@@ -10786,7 +10816,7 @@
 \answer{%
     \begin{align*}
     v &= v_0 + a t = at = 2{,}5\,\frac{\text{м}}{\text{с}^{2}} \cdot 4\,\text{c} = 10{,}0\,\frac{\text{м}}{\text{с}}, \\
-    s_x &= v_0t + \frac{a t^2}2 = \frac{a t^2}2 = \frac{2{,}5\,\frac{\text{м}}{\text{с}^{2}} \cdot \sqr{ 4\,\text{c} }}2 = 12{,}5\,\text{м}, \\
+    s_x &= v_0t + \frac{a t^2}2 = \frac{a t^2}2 = \frac{2{,}5\,\frac{\text{м}}{\text{с}^{2}} \cdot \sqr{ 4\,\text{c} }}2 = 20{,}0\,\text{м}, \\
     v_\text{сред.} &= \frac{s_\text{общ}}{t_\text{общ.}} = \frac{s_x + v \cdot 3t}{t + 3t} = \frac{\frac{a t^2}2 + at \cdot 3t}{t (1 + 3)} = \\
     &= at \cdot \frac{\frac 12 + 3}{1 + 3} = 2{,}5\,\frac{\text{м}}{\text{с}^{2}} \cdot 4\,\text{c} \cdot \frac{\frac 12 + 3}{1 + 3} \approx 8{,}75\,\frac{\text{м}}{\text{c}}.
     \end{align*}
@@ -10820,6 +10850,7 @@
     \begin{align*}
     t &= 60\,\text{с}, r = 1{,}0\,\text{м}, n = 6\units{оборотов}, \\
     T &= \frac tN = \frac{ 60\,\text{с} }{6} \approx 10{,}00\,\text{c}, \\
+    \nu &= \frac 1T = \frac{6}{ 60\,\text{с} } \approx 0{,}10\,\text{Гц}, \\
     v &= \frac{2 \pi r}{T} = \frac{2 \pi r}{T} =  \frac{2 \pi r n}{t} \approx 0{,}63\,\frac{\text{м}}{\text{c}}, \\
     a &= \frac{v^2}{r} =  \frac{4 \pi^2 r n^2}{t^2} \approx 0{,}39\,\frac{\text{м}}{\text{с}^{2}}.
     \end{align*}
@@ -10842,7 +10873,7 @@
     \begin{align*}
     y &= y_0 + v_{0y}t - \frac{gt^2}2 = h - \frac{gt^2}2, \qquad y(\tau) = 0 \implies h - \frac{g\tau^2}2 = 0 \implies h = \frac{g\tau^2}2 \approx 12{,}8\,\text{м}.
     \\
-    x &= x_0 + v_{0x}t = v_{0x}t \implies L = v_0\tau \approx 22{,}4\,\text{м}.
+    x &= x_0 + v_{0x}t = v_0t \implies L = v_0\tau \approx 22{,}4\,\text{м}.
     \\
     &v = \sqrt{v_x^2 + v_y^2} = \sqrt{v_{0x}^2 + \sqr{v_{0y} - g\tau}} = \sqrt{v_0^2 + \sqr{g\tau}} \approx 21{,}3\,\frac{\text{м}}{\text{c}}.
     \end{align*}
@@ -11145,7 +11176,7 @@
 \answer{%
     \begin{align*}
     v &= v_0 + a t = at = 2\,\frac{\text{м}}{\text{с}^{2}} \cdot 4\,\text{c} = 8{,}0\,\frac{\text{м}}{\text{с}}, \\
-    s_x &= v_0t + \frac{a t^2}2 = \frac{a t^2}2 = \frac{2\,\frac{\text{м}}{\text{с}^{2}} \cdot \sqr{ 4\,\text{c} }}2 = 8{,}0\,\text{м}, \\
+    s_x &= v_0t + \frac{a t^2}2 = \frac{a t^2}2 = \frac{2\,\frac{\text{м}}{\text{с}^{2}} \cdot \sqr{ 4\,\text{c} }}2 = 16{,}0\,\text{м}, \\
     v_\text{сред.} &= \frac{s_\text{общ}}{t_\text{общ.}} = \frac{s_x + v \cdot 2t}{t + 2t} = \frac{\frac{a t^2}2 + at \cdot 2t}{t (1 + 2)} = \\
     &= at \cdot \frac{\frac 12 + 2}{1 + 2} = 2\,\frac{\text{м}}{\text{с}^{2}} \cdot 4\,\text{c} \cdot \frac{\frac 12 + 2}{1 + 2} \approx 6{,}67\,\frac{\text{м}}{\text{c}}.
     \end{align*}
@@ -11179,6 +11210,7 @@
     \begin{align*}
     t &= 60\,\text{с}, r = 4{,}0\,\text{м}, n = 10\units{оборотов}, \\
     T &= \frac tN = \frac{ 60\,\text{с} }{10} \approx 6{,}00\,\text{c}, \\
+    \nu &= \frac 1T = \frac{10}{ 60\,\text{с} } \approx 0{,}17\,\text{Гц}, \\
     v &= \frac{2 \pi r}{T} = \frac{2 \pi r}{T} =  \frac{2 \pi r n}{t} \approx 4{,}19\,\frac{\text{м}}{\text{c}}, \\
     a &= \frac{v^2}{r} =  \frac{4 \pi^2 r n^2}{t^2} \approx 4{,}39\,\frac{\text{м}}{\text{с}^{2}}.
     \end{align*}
@@ -11201,7 +11233,7 @@
     \begin{align*}
     y &= y_0 + v_{0y}t - \frac{gt^2}2 = h - \frac{gt^2}2, \qquad y(\tau) = 0 \implies h - \frac{g\tau^2}2 = 0 \implies h = \frac{g\tau^2}2 \approx 12{,}8\,\text{м}.
     \\
-    x &= x_0 + v_{0x}t = v_{0x}t \implies L = v_0\tau \approx 19{,}2\,\text{м}.
+    x &= x_0 + v_{0x}t = v_0t \implies L = v_0\tau \approx 19{,}2\,\text{м}.
     \\
     &v = \sqrt{v_x^2 + v_y^2} = \sqrt{v_{0x}^2 + \sqr{v_{0y} - g\tau}} = \sqrt{v_0^2 + \sqr{g\tau}} \approx 20{,}0\,\frac{\text{м}}{\text{c}}.
     \end{align*}
@@ -11504,7 +11536,7 @@
 \answer{%
     \begin{align*}
     v &= v_0 + a t = at = 0{,}5\,\frac{\text{м}}{\text{с}^{2}} \cdot 2\,\text{c} = 1{,}0\,\frac{\text{м}}{\text{с}}, \\
-    s_x &= v_0t + \frac{a t^2}2 = \frac{a t^2}2 = \frac{0{,}5\,\frac{\text{м}}{\text{с}^{2}} \cdot \sqr{ 2\,\text{c} }}2 = 0{,}2\,\text{м}, \\
+    s_x &= v_0t + \frac{a t^2}2 = \frac{a t^2}2 = \frac{0{,}5\,\frac{\text{м}}{\text{с}^{2}} \cdot \sqr{ 2\,\text{c} }}2 = 1{,}0\,\text{м}, \\
     v_\text{сред.} &= \frac{s_\text{общ}}{t_\text{общ.}} = \frac{s_x + v \cdot 3t}{t + 3t} = \frac{\frac{a t^2}2 + at \cdot 3t}{t (1 + 3)} = \\
     &= at \cdot \frac{\frac 12 + 3}{1 + 3} = 0{,}5\,\frac{\text{м}}{\text{с}^{2}} \cdot 2\,\text{c} \cdot \frac{\frac 12 + 3}{1 + 3} \approx 0{,}88\,\frac{\text{м}}{\text{c}}.
     \end{align*}
@@ -11538,6 +11570,7 @@
     \begin{align*}
     t &= 60\,\text{с}, r = 2{,}5\,\text{м}, n = 6\units{оборотов}, \\
     T &= \frac tN = \frac{ 60\,\text{с} }{6} \approx 10{,}00\,\text{c}, \\
+    \nu &= \frac 1T = \frac{6}{ 60\,\text{с} } \approx 0{,}10\,\text{Гц}, \\
     v &= \frac{2 \pi r}{T} = \frac{2 \pi r}{T} =  \frac{2 \pi r n}{t} \approx 1{,}57\,\frac{\text{м}}{\text{c}}, \\
     a &= \frac{v^2}{r} =  \frac{4 \pi^2 r n^2}{t^2} \approx 0{,}99\,\frac{\text{м}}{\text{с}^{2}}.
     \end{align*}
@@ -11560,7 +11593,7 @@
     \begin{align*}
     y &= y_0 + v_{0y}t - \frac{gt^2}2 = h - \frac{gt^2}2, \qquad y(\tau) = 0 \implies h - \frac{g\tau^2}2 = 0 \implies h = \frac{g\tau^2}2 \approx 8{,}5\,\text{м}.
     \\
-    x &= x_0 + v_{0x}t = v_{0x}t \implies L = v_0\tau \approx 19{,}5\,\text{м}.
+    x &= x_0 + v_{0x}t = v_0t \implies L = v_0\tau \approx 19{,}5\,\text{м}.
     \\
     &v = \sqrt{v_x^2 + v_y^2} = \sqrt{v_{0x}^2 + \sqr{v_{0y} - g\tau}} = \sqrt{v_0^2 + \sqr{g\tau}} \approx 19{,}8\,\frac{\text{м}}{\text{c}}.
     \end{align*}
@@ -11863,7 +11896,7 @@
 \answer{%
     \begin{align*}
     v &= v_0 + a t = at = 2\,\frac{\text{м}}{\text{с}^{2}} \cdot 10\,\text{c} = 20{,}0\,\frac{\text{м}}{\text{с}}, \\
-    s_x &= v_0t + \frac{a t^2}2 = \frac{a t^2}2 = \frac{2\,\frac{\text{м}}{\text{с}^{2}} \cdot \sqr{ 10\,\text{c} }}2 = 20{,}0\,\text{м}, \\
+    s_x &= v_0t + \frac{a t^2}2 = \frac{a t^2}2 = \frac{2\,\frac{\text{м}}{\text{с}^{2}} \cdot \sqr{ 10\,\text{c} }}2 = 100{,}0\,\text{м}, \\
     v_\text{сред.} &= \frac{s_\text{общ}}{t_\text{общ.}} = \frac{s_x + v \cdot 3t}{t + 3t} = \frac{\frac{a t^2}2 + at \cdot 3t}{t (1 + 3)} = \\
     &= at \cdot \frac{\frac 12 + 3}{1 + 3} = 2\,\frac{\text{м}}{\text{с}^{2}} \cdot 10\,\text{c} \cdot \frac{\frac 12 + 3}{1 + 3} \approx 17{,}50\,\frac{\text{м}}{\text{c}}.
     \end{align*}
@@ -11897,6 +11930,7 @@
     \begin{align*}
     t &= 60\,\text{с}, r = 3{,}0\,\text{м}, n = 6\units{оборотов}, \\
     T &= \frac tN = \frac{ 60\,\text{с} }{6} \approx 10{,}00\,\text{c}, \\
+    \nu &= \frac 1T = \frac{6}{ 60\,\text{с} } \approx 0{,}10\,\text{Гц}, \\
     v &= \frac{2 \pi r}{T} = \frac{2 \pi r}{T} =  \frac{2 \pi r n}{t} \approx 1{,}88\,\frac{\text{м}}{\text{c}}, \\
     a &= \frac{v^2}{r} =  \frac{4 \pi^2 r n^2}{t^2} \approx 1{,}18\,\frac{\text{м}}{\text{с}^{2}}.
     \end{align*}
@@ -11919,7 +11953,7 @@
     \begin{align*}
     y &= y_0 + v_{0y}t - \frac{gt^2}2 = h - \frac{gt^2}2, \qquad y(\tau) = 0 \implies h - \frac{g\tau^2}2 = 0 \implies h = \frac{g\tau^2}2 \approx 14{,}4\,\text{м}.
     \\
-    x &= x_0 + v_{0x}t = v_{0x}t \implies L = v_0\tau \approx 28{,}9\,\text{м}.
+    x &= x_0 + v_{0x}t = v_0t \implies L = v_0\tau \approx 28{,}9\,\text{м}.
     \\
     &v = \sqrt{v_x^2 + v_y^2} = \sqrt{v_{0x}^2 + \sqr{v_{0y} - g\tau}} = \sqrt{v_0^2 + \sqr{g\tau}} \approx 24{,}0\,\frac{\text{м}}{\text{c}}.
     \end{align*}
@@ -12222,7 +12256,7 @@
 \answer{%
     \begin{align*}
     v &= v_0 + a t = at = 1{,}5\,\frac{\text{м}}{\text{с}^{2}} \cdot 5\,\text{c} = 7{,}5\,\frac{\text{м}}{\text{с}}, \\
-    s_x &= v_0t + \frac{a t^2}2 = \frac{a t^2}2 = \frac{1{,}5\,\frac{\text{м}}{\text{с}^{2}} \cdot \sqr{ 5\,\text{c} }}2 = 5{,}6\,\text{м}, \\
+    s_x &= v_0t + \frac{a t^2}2 = \frac{a t^2}2 = \frac{1{,}5\,\frac{\text{м}}{\text{с}^{2}} \cdot \sqr{ 5\,\text{c} }}2 = 18{,}8\,\text{м}, \\
     v_\text{сред.} &= \frac{s_\text{общ}}{t_\text{общ.}} = \frac{s_x + v \cdot 3t}{t + 3t} = \frac{\frac{a t^2}2 + at \cdot 3t}{t (1 + 3)} = \\
     &= at \cdot \frac{\frac 12 + 3}{1 + 3} = 1{,}5\,\frac{\text{м}}{\text{с}^{2}} \cdot 5\,\text{c} \cdot \frac{\frac 12 + 3}{1 + 3} \approx 6{,}56\,\frac{\text{м}}{\text{c}}.
     \end{align*}
@@ -12256,6 +12290,7 @@
     \begin{align*}
     t &= 60\,\text{с}, r = 1{,}0\,\text{м}, n = 6\units{оборотов}, \\
     T &= \frac tN = \frac{ 60\,\text{с} }{6} \approx 10{,}00\,\text{c}, \\
+    \nu &= \frac 1T = \frac{6}{ 60\,\text{с} } \approx 0{,}10\,\text{Гц}, \\
     v &= \frac{2 \pi r}{T} = \frac{2 \pi r}{T} =  \frac{2 \pi r n}{t} \approx 0{,}63\,\frac{\text{м}}{\text{c}}, \\
     a &= \frac{v^2}{r} =  \frac{4 \pi^2 r n^2}{t^2} \approx 0{,}39\,\frac{\text{м}}{\text{с}^{2}}.
     \end{align*}
@@ -12278,7 +12313,7 @@
     \begin{align*}
     y &= y_0 + v_{0y}t - \frac{gt^2}2 = h - \frac{gt^2}2, \qquad y(\tau) = 0 \implies h - \frac{g\tau^2}2 = 0 \implies h = \frac{g\tau^2}2 \approx 14{,}4\,\text{м}.
     \\
-    x &= x_0 + v_{0x}t = v_{0x}t \implies L = v_0\tau \approx 28{,}9\,\text{м}.
+    x &= x_0 + v_{0x}t = v_0t \implies L = v_0\tau \approx 28{,}9\,\text{м}.
     \\
     &v = \sqrt{v_x^2 + v_y^2} = \sqrt{v_{0x}^2 + \sqr{v_{0y} - g\tau}} = \sqrt{v_0^2 + \sqr{g\tau}} \approx 24{,}0\,\frac{\text{м}}{\text{c}}.
     \end{align*}
@@ -12581,7 +12616,7 @@
 \answer{%
     \begin{align*}
     v &= v_0 + a t = at = 2{,}5\,\frac{\text{м}}{\text{с}^{2}} \cdot 3\,\text{c} = 7{,}5\,\frac{\text{м}}{\text{с}}, \\
-    s_x &= v_0t + \frac{a t^2}2 = \frac{a t^2}2 = \frac{2{,}5\,\frac{\text{м}}{\text{с}^{2}} \cdot \sqr{ 3\,\text{c} }}2 = 9{,}4\,\text{м}, \\
+    s_x &= v_0t + \frac{a t^2}2 = \frac{a t^2}2 = \frac{2{,}5\,\frac{\text{м}}{\text{с}^{2}} \cdot \sqr{ 3\,\text{c} }}2 = 11{,}2\,\text{м}, \\
     v_\text{сред.} &= \frac{s_\text{общ}}{t_\text{общ.}} = \frac{s_x + v \cdot 3t}{t + 3t} = \frac{\frac{a t^2}2 + at \cdot 3t}{t (1 + 3)} = \\
     &= at \cdot \frac{\frac 12 + 3}{1 + 3} = 2{,}5\,\frac{\text{м}}{\text{с}^{2}} \cdot 3\,\text{c} \cdot \frac{\frac 12 + 3}{1 + 3} \approx 6{,}56\,\frac{\text{м}}{\text{c}}.
     \end{align*}
@@ -12615,6 +12650,7 @@
     \begin{align*}
     t &= 60\,\text{с}, r = 4{,}0\,\text{м}, n = 5\units{оборотов}, \\
     T &= \frac tN = \frac{ 60\,\text{с} }{5} \approx 12{,}00\,\text{c}, \\
+    \nu &= \frac 1T = \frac{5}{ 60\,\text{с} } \approx 0{,}08\,\text{Гц}, \\
     v &= \frac{2 \pi r}{T} = \frac{2 \pi r}{T} =  \frac{2 \pi r n}{t} \approx 2{,}09\,\frac{\text{м}}{\text{c}}, \\
     a &= \frac{v^2}{r} =  \frac{4 \pi^2 r n^2}{t^2} \approx 1{,}10\,\frac{\text{м}}{\text{с}^{2}}.
     \end{align*}
@@ -12637,7 +12673,7 @@
     \begin{align*}
     y &= y_0 + v_{0y}t - \frac{gt^2}2 = h - \frac{gt^2}2, \qquad y(\tau) = 0 \implies h - \frac{g\tau^2}2 = 0 \implies h = \frac{g\tau^2}2 \approx 8{,}5\,\text{м}.
     \\
-    x &= x_0 + v_{0x}t = v_{0x}t \implies L = v_0\tau \approx 19{,}5\,\text{м}.
+    x &= x_0 + v_{0x}t = v_0t \implies L = v_0\tau \approx 19{,}5\,\text{м}.
     \\
     &v = \sqrt{v_x^2 + v_y^2} = \sqrt{v_{0x}^2 + \sqr{v_{0y} - g\tau}} = \sqrt{v_0^2 + \sqr{g\tau}} \approx 19{,}8\,\frac{\text{м}}{\text{c}}.
     \end{align*}

@@ -68,34 +68,35 @@
 
 \tasknumber{5}%
 \task{%
-    \begin{tikzpicture}[circuit ee IEC, x=1cm, y=1cm, semithick]
+    Два конденсатора ёмкостей $C_1 = 40\,\text{нФ}$ и $C_2 = 20\,\text{нФ}$ последовательно подключают
+    к источнику напряжения $V = 150\,\text{В}$ (см.
+    рис.).
+    % Определите заряды каждого из конденсаторов.
+    Определите заряд первого конденсатора.
+
+    \begin{tikzpicture}[circuit ee IEC, semithick]
         \draw  (0, 0) to [capacitor={info={$C_1$}}] (1, 0)
                        to [capacitor={info={$C_2$}}] (2, 0)
         ;
-        \draw [-o] (0, 0) -- ++(-0.5, 0) node[left] {$-$};
-        \draw [-o] (2, 0) -- ++(0.5, 0) node[right] {$+$};
-
-        \node [right,text width = 14cm, align=justify] at (3.5,0) {
-        Два конденсатора ёмкостей $C_1 = 30\,\text{нФ}$ и $C_2 = 60\,\text{нФ}$ последовательно подключают
-        к источнику напряжения $U = 300\,\text{В}$ (см.
-        рис.).
-        Определите заряды каждого из конденсаторов.
-       };
+        % \draw [-o] (0, 0) -- ++(-0.5, 0) node[left] {$-$};
+        % \draw [-o] (2, 0) -- ++(0.5, 0) node[right] {$+$};
+        \draw [-o] (0, 0) -- ++(-0.5, 0) node[left] {};
+        \draw [-o] (2, 0) -- ++(0.5, 0) node[right] {};
     \end{tikzpicture}
 }
 \answer{%
     $
         Q_1
             = Q_2
-            = CU
-            = \frac{ U }{\frac1{C_1} + \frac1{C_2}}
-            = \frac{C_1C_2U}{C_1 + C_2}
+            = CV
+            = \frac{ V }{\frac1{C_1} + \frac1{C_2}}
+            = \frac{C_1C_2V}{C_1 + C_2}
             = \frac{
-                30\,\text{нФ} \cdot 60\,\text{нФ} \cdot 300\,\text{В}
+                40\,\text{нФ} \cdot 20\,\text{нФ} \cdot 150\,\text{В}
             }{
-                30\,\text{нФ} + 60\,\text{нФ}
+                40\,\text{нФ} + 20\,\text{нФ}
             }
-            = 6000{,}00\,\text{нКл}
+            = 2{,}00\,\text{мкКл}
     $
 }
 
@@ -168,19 +169,20 @@
 
 \tasknumber{5}%
 \task{%
-    \begin{tikzpicture}[circuit ee IEC, x=1cm, y=1cm, semithick]
+    Два конденсатора ёмкостей $C_1 = 60\,\text{нФ}$ и $C_2 = 40\,\text{нФ}$ последовательно подключают
+    к источнику напряжения $U = 300\,\text{В}$ (см.
+    рис.).
+    % Определите заряды каждого из конденсаторов.
+    Определите заряд первого конденсатора.
+
+    \begin{tikzpicture}[circuit ee IEC, semithick]
         \draw  (0, 0) to [capacitor={info={$C_1$}}] (1, 0)
                        to [capacitor={info={$C_2$}}] (2, 0)
         ;
-        \draw [-o] (0, 0) -- ++(-0.5, 0) node[left] {$-$};
-        \draw [-o] (2, 0) -- ++(0.5, 0) node[right] {$+$};
-
-        \node [right,text width = 14cm, align=justify] at (3.5,0) {
-        Два конденсатора ёмкостей $C_1 = 30\,\text{нФ}$ и $C_2 = 40\,\text{нФ}$ последовательно подключают
-        к источнику напряжения $U = 200\,\text{В}$ (см.
-        рис.).
-        Определите заряды каждого из конденсаторов.
-       };
+        % \draw [-o] (0, 0) -- ++(-0.5, 0) node[left] {$-$};
+        % \draw [-o] (2, 0) -- ++(0.5, 0) node[right] {$+$};
+        \draw [-o] (0, 0) -- ++(-0.5, 0) node[left] {};
+        \draw [-o] (2, 0) -- ++(0.5, 0) node[right] {};
     \end{tikzpicture}
 }
 \answer{%
@@ -191,11 +193,11 @@
             = \frac{ U }{\frac1{C_1} + \frac1{C_2}}
             = \frac{C_1C_2U}{C_1 + C_2}
             = \frac{
-                30\,\text{нФ} \cdot 40\,\text{нФ} \cdot 200\,\text{В}
+                60\,\text{нФ} \cdot 40\,\text{нФ} \cdot 300\,\text{В}
             }{
-                30\,\text{нФ} + 40\,\text{нФ}
+                60\,\text{нФ} + 40\,\text{нФ}
             }
-            = 3428{,}57\,\text{нКл}
+            = 7{,}20\,\text{мкКл}
     $
 }
 
@@ -268,34 +270,35 @@
 
 \tasknumber{5}%
 \task{%
-    \begin{tikzpicture}[circuit ee IEC, x=1cm, y=1cm, semithick]
+    Два конденсатора ёмкостей $C_1 = 40\,\text{нФ}$ и $C_2 = 30\,\text{нФ}$ последовательно подключают
+    к источнику напряжения $U = 150\,\text{В}$ (см.
+    рис.).
+    % Определите заряды каждого из конденсаторов.
+    Определите заряд первого конденсатора.
+
+    \begin{tikzpicture}[circuit ee IEC, semithick]
         \draw  (0, 0) to [capacitor={info={$C_1$}}] (1, 0)
                        to [capacitor={info={$C_2$}}] (2, 0)
         ;
-        \draw [-o] (0, 0) -- ++(-0.5, 0) node[left] {$-$};
-        \draw [-o] (2, 0) -- ++(0.5, 0) node[right] {$+$};
-
-        \node [right,text width = 14cm, align=justify] at (3.5,0) {
-        Два конденсатора ёмкостей $C_1 = 30\,\text{нФ}$ и $C_2 = 40\,\text{нФ}$ последовательно подключают
-        к источнику напряжения $V = 200\,\text{В}$ (см.
-        рис.).
-        Определите заряды каждого из конденсаторов.
-       };
+        % \draw [-o] (0, 0) -- ++(-0.5, 0) node[left] {$-$};
+        % \draw [-o] (2, 0) -- ++(0.5, 0) node[right] {$+$};
+        \draw [-o] (0, 0) -- ++(-0.5, 0) node[left] {};
+        \draw [-o] (2, 0) -- ++(0.5, 0) node[right] {};
     \end{tikzpicture}
 }
 \answer{%
     $
         Q_1
             = Q_2
-            = CV
-            = \frac{ V }{\frac1{C_1} + \frac1{C_2}}
-            = \frac{C_1C_2V}{C_1 + C_2}
+            = CU
+            = \frac{ U }{\frac1{C_1} + \frac1{C_2}}
+            = \frac{C_1C_2U}{C_1 + C_2}
             = \frac{
-                30\,\text{нФ} \cdot 40\,\text{нФ} \cdot 200\,\text{В}
+                40\,\text{нФ} \cdot 30\,\text{нФ} \cdot 150\,\text{В}
             }{
-                30\,\text{нФ} + 40\,\text{нФ}
+                40\,\text{нФ} + 30\,\text{нФ}
             }
-            = 3428{,}57\,\text{нКл}
+            = 2{,}57\,\text{мкКл}
     $
 }
 
@@ -368,34 +371,35 @@
 
 \tasknumber{5}%
 \task{%
-    \begin{tikzpicture}[circuit ee IEC, x=1cm, y=1cm, semithick]
+    Два конденсатора ёмкостей $C_1 = 40\,\text{нФ}$ и $C_2 = 20\,\text{нФ}$ последовательно подключают
+    к источнику напряжения $V = 450\,\text{В}$ (см.
+    рис.).
+    % Определите заряды каждого из конденсаторов.
+    Определите заряд второго конденсатора.
+
+    \begin{tikzpicture}[circuit ee IEC, semithick]
         \draw  (0, 0) to [capacitor={info={$C_1$}}] (1, 0)
                        to [capacitor={info={$C_2$}}] (2, 0)
         ;
-        \draw [-o] (0, 0) -- ++(-0.5, 0) node[left] {$-$};
-        \draw [-o] (2, 0) -- ++(0.5, 0) node[right] {$+$};
-
-        \node [right,text width = 14cm, align=justify] at (3.5,0) {
-        Два конденсатора ёмкостей $C_1 = 20\,\text{нФ}$ и $C_2 = 30\,\text{нФ}$ последовательно подключают
-        к источнику напряжения $U = 200\,\text{В}$ (см.
-        рис.).
-        Определите заряды каждого из конденсаторов.
-       };
+        % \draw [-o] (0, 0) -- ++(-0.5, 0) node[left] {$-$};
+        % \draw [-o] (2, 0) -- ++(0.5, 0) node[right] {$+$};
+        \draw [-o] (0, 0) -- ++(-0.5, 0) node[left] {};
+        \draw [-o] (2, 0) -- ++(0.5, 0) node[right] {};
     \end{tikzpicture}
 }
 \answer{%
     $
         Q_1
             = Q_2
-            = CU
-            = \frac{ U }{\frac1{C_1} + \frac1{C_2}}
-            = \frac{C_1C_2U}{C_1 + C_2}
+            = CV
+            = \frac{ V }{\frac1{C_1} + \frac1{C_2}}
+            = \frac{C_1C_2V}{C_1 + C_2}
             = \frac{
-                20\,\text{нФ} \cdot 30\,\text{нФ} \cdot 200\,\text{В}
+                40\,\text{нФ} \cdot 20\,\text{нФ} \cdot 450\,\text{В}
             }{
-                20\,\text{нФ} + 30\,\text{нФ}
+                40\,\text{нФ} + 20\,\text{нФ}
             }
-            = 2400{,}00\,\text{нКл}
+            = 6{,}00\,\text{мкКл}
     $
 }
 
@@ -468,34 +472,35 @@
 
 \tasknumber{5}%
 \task{%
-    \begin{tikzpicture}[circuit ee IEC, x=1cm, y=1cm, semithick]
+    Два конденсатора ёмкостей $C_1 = 60\,\text{нФ}$ и $C_2 = 20\,\text{нФ}$ последовательно подключают
+    к источнику напряжения $U = 450\,\text{В}$ (см.
+    рис.).
+    % Определите заряды каждого из конденсаторов.
+    Определите заряд первого конденсатора.
+
+    \begin{tikzpicture}[circuit ee IEC, semithick]
         \draw  (0, 0) to [capacitor={info={$C_1$}}] (1, 0)
                        to [capacitor={info={$C_2$}}] (2, 0)
         ;
-        \draw [-o] (0, 0) -- ++(-0.5, 0) node[left] {$-$};
-        \draw [-o] (2, 0) -- ++(0.5, 0) node[right] {$+$};
-
-        \node [right,text width = 14cm, align=justify] at (3.5,0) {
-        Два конденсатора ёмкостей $C_1 = 60\,\text{нФ}$ и $C_2 = 30\,\text{нФ}$ последовательно подключают
-        к источнику напряжения $V = 200\,\text{В}$ (см.
-        рис.).
-        Определите заряды каждого из конденсаторов.
-       };
+        % \draw [-o] (0, 0) -- ++(-0.5, 0) node[left] {$-$};
+        % \draw [-o] (2, 0) -- ++(0.5, 0) node[right] {$+$};
+        \draw [-o] (0, 0) -- ++(-0.5, 0) node[left] {};
+        \draw [-o] (2, 0) -- ++(0.5, 0) node[right] {};
     \end{tikzpicture}
 }
 \answer{%
     $
         Q_1
             = Q_2
-            = CV
-            = \frac{ V }{\frac1{C_1} + \frac1{C_2}}
-            = \frac{C_1C_2V}{C_1 + C_2}
+            = CU
+            = \frac{ U }{\frac1{C_1} + \frac1{C_2}}
+            = \frac{C_1C_2U}{C_1 + C_2}
             = \frac{
-                60\,\text{нФ} \cdot 30\,\text{нФ} \cdot 200\,\text{В}
+                60\,\text{нФ} \cdot 20\,\text{нФ} \cdot 450\,\text{В}
             }{
-                60\,\text{нФ} + 30\,\text{нФ}
+                60\,\text{нФ} + 20\,\text{нФ}
             }
-            = 4000{,}00\,\text{нКл}
+            = 6{,}75\,\text{мкКл}
     $
 }
 
@@ -568,19 +573,20 @@
 
 \tasknumber{5}%
 \task{%
-    \begin{tikzpicture}[circuit ee IEC, x=1cm, y=1cm, semithick]
+    Два конденсатора ёмкостей $C_1 = 60\,\text{нФ}$ и $C_2 = 30\,\text{нФ}$ последовательно подключают
+    к источнику напряжения $V = 200\,\text{В}$ (см.
+    рис.).
+    % Определите заряды каждого из конденсаторов.
+    Определите заряд первого конденсатора.
+
+    \begin{tikzpicture}[circuit ee IEC, semithick]
         \draw  (0, 0) to [capacitor={info={$C_1$}}] (1, 0)
                        to [capacitor={info={$C_2$}}] (2, 0)
         ;
-        \draw [-o] (0, 0) -- ++(-0.5, 0) node[left] {$-$};
-        \draw [-o] (2, 0) -- ++(0.5, 0) node[right] {$+$};
-
-        \node [right,text width = 14cm, align=justify] at (3.5,0) {
-        Два конденсатора ёмкостей $C_1 = 20\,\text{нФ}$ и $C_2 = 40\,\text{нФ}$ последовательно подключают
-        к источнику напряжения $V = 400\,\text{В}$ (см.
-        рис.).
-        Определите заряды каждого из конденсаторов.
-       };
+        % \draw [-o] (0, 0) -- ++(-0.5, 0) node[left] {$-$};
+        % \draw [-o] (2, 0) -- ++(0.5, 0) node[right] {$+$};
+        \draw [-o] (0, 0) -- ++(-0.5, 0) node[left] {};
+        \draw [-o] (2, 0) -- ++(0.5, 0) node[right] {};
     \end{tikzpicture}
 }
 \answer{%
@@ -591,11 +597,11 @@
             = \frac{ V }{\frac1{C_1} + \frac1{C_2}}
             = \frac{C_1C_2V}{C_1 + C_2}
             = \frac{
-                20\,\text{нФ} \cdot 40\,\text{нФ} \cdot 400\,\text{В}
+                60\,\text{нФ} \cdot 30\,\text{нФ} \cdot 200\,\text{В}
             }{
-                20\,\text{нФ} + 40\,\text{нФ}
+                60\,\text{нФ} + 30\,\text{нФ}
             }
-            = 5333{,}33\,\text{нКл}
+            = 4{,}00\,\text{мкКл}
     $
 }
 
@@ -668,34 +674,35 @@
 
 \tasknumber{5}%
 \task{%
-    \begin{tikzpicture}[circuit ee IEC, x=1cm, y=1cm, semithick]
+    Два конденсатора ёмкостей $C_1 = 30\,\text{нФ}$ и $C_2 = 20\,\text{нФ}$ последовательно подключают
+    к источнику напряжения $U = 200\,\text{В}$ (см.
+    рис.).
+    % Определите заряды каждого из конденсаторов.
+    Определите заряд второго конденсатора.
+
+    \begin{tikzpicture}[circuit ee IEC, semithick]
         \draw  (0, 0) to [capacitor={info={$C_1$}}] (1, 0)
                        to [capacitor={info={$C_2$}}] (2, 0)
         ;
-        \draw [-o] (0, 0) -- ++(-0.5, 0) node[left] {$-$};
-        \draw [-o] (2, 0) -- ++(0.5, 0) node[right] {$+$};
-
-        \node [right,text width = 14cm, align=justify] at (3.5,0) {
-        Два конденсатора ёмкостей $C_1 = 30\,\text{нФ}$ и $C_2 = 20\,\text{нФ}$ последовательно подключают
-        к источнику напряжения $V = 300\,\text{В}$ (см.
-        рис.).
-        Определите заряды каждого из конденсаторов.
-       };
+        % \draw [-o] (0, 0) -- ++(-0.5, 0) node[left] {$-$};
+        % \draw [-o] (2, 0) -- ++(0.5, 0) node[right] {$+$};
+        \draw [-o] (0, 0) -- ++(-0.5, 0) node[left] {};
+        \draw [-o] (2, 0) -- ++(0.5, 0) node[right] {};
     \end{tikzpicture}
 }
 \answer{%
     $
         Q_1
             = Q_2
-            = CV
-            = \frac{ V }{\frac1{C_1} + \frac1{C_2}}
-            = \frac{C_1C_2V}{C_1 + C_2}
+            = CU
+            = \frac{ U }{\frac1{C_1} + \frac1{C_2}}
+            = \frac{C_1C_2U}{C_1 + C_2}
             = \frac{
-                30\,\text{нФ} \cdot 20\,\text{нФ} \cdot 300\,\text{В}
+                30\,\text{нФ} \cdot 20\,\text{нФ} \cdot 200\,\text{В}
             }{
                 30\,\text{нФ} + 20\,\text{нФ}
             }
-            = 3600{,}00\,\text{нКл}
+            = 2{,}40\,\text{мкКл}
     $
 }
 
@@ -768,34 +775,35 @@
 
 \tasknumber{5}%
 \task{%
-    \begin{tikzpicture}[circuit ee IEC, x=1cm, y=1cm, semithick]
+    Два конденсатора ёмкостей $C_1 = 30\,\text{нФ}$ и $C_2 = 40\,\text{нФ}$ последовательно подключают
+    к источнику напряжения $U = 150\,\text{В}$ (см.
+    рис.).
+    % Определите заряды каждого из конденсаторов.
+    Определите заряд первого конденсатора.
+
+    \begin{tikzpicture}[circuit ee IEC, semithick]
         \draw  (0, 0) to [capacitor={info={$C_1$}}] (1, 0)
                        to [capacitor={info={$C_2$}}] (2, 0)
         ;
-        \draw [-o] (0, 0) -- ++(-0.5, 0) node[left] {$-$};
-        \draw [-o] (2, 0) -- ++(0.5, 0) node[right] {$+$};
-
-        \node [right,text width = 14cm, align=justify] at (3.5,0) {
-        Два конденсатора ёмкостей $C_1 = 40\,\text{нФ}$ и $C_2 = 60\,\text{нФ}$ последовательно подключают
-        к источнику напряжения $V = 450\,\text{В}$ (см.
-        рис.).
-        Определите заряды каждого из конденсаторов.
-       };
+        % \draw [-o] (0, 0) -- ++(-0.5, 0) node[left] {$-$};
+        % \draw [-o] (2, 0) -- ++(0.5, 0) node[right] {$+$};
+        \draw [-o] (0, 0) -- ++(-0.5, 0) node[left] {};
+        \draw [-o] (2, 0) -- ++(0.5, 0) node[right] {};
     \end{tikzpicture}
 }
 \answer{%
     $
         Q_1
             = Q_2
-            = CV
-            = \frac{ V }{\frac1{C_1} + \frac1{C_2}}
-            = \frac{C_1C_2V}{C_1 + C_2}
+            = CU
+            = \frac{ U }{\frac1{C_1} + \frac1{C_2}}
+            = \frac{C_1C_2U}{C_1 + C_2}
             = \frac{
-                40\,\text{нФ} \cdot 60\,\text{нФ} \cdot 450\,\text{В}
+                30\,\text{нФ} \cdot 40\,\text{нФ} \cdot 150\,\text{В}
             }{
-                40\,\text{нФ} + 60\,\text{нФ}
+                30\,\text{нФ} + 40\,\text{нФ}
             }
-            = 10800{,}00\,\text{нКл}
+            = 2{,}57\,\text{мкКл}
     $
 }
 
@@ -868,34 +876,35 @@
 
 \tasknumber{5}%
 \task{%
-    \begin{tikzpicture}[circuit ee IEC, x=1cm, y=1cm, semithick]
+    Два конденсатора ёмкостей $C_1 = 20\,\text{нФ}$ и $C_2 = 30\,\text{нФ}$ последовательно подключают
+    к источнику напряжения $V = 450\,\text{В}$ (см.
+    рис.).
+    % Определите заряды каждого из конденсаторов.
+    Определите заряд первого конденсатора.
+
+    \begin{tikzpicture}[circuit ee IEC, semithick]
         \draw  (0, 0) to [capacitor={info={$C_1$}}] (1, 0)
                        to [capacitor={info={$C_2$}}] (2, 0)
         ;
-        \draw [-o] (0, 0) -- ++(-0.5, 0) node[left] {$-$};
-        \draw [-o] (2, 0) -- ++(0.5, 0) node[right] {$+$};
-
-        \node [right,text width = 14cm, align=justify] at (3.5,0) {
-        Два конденсатора ёмкостей $C_1 = 40\,\text{нФ}$ и $C_2 = 60\,\text{нФ}$ последовательно подключают
-        к источнику напряжения $U = 150\,\text{В}$ (см.
-        рис.).
-        Определите заряды каждого из конденсаторов.
-       };
+        % \draw [-o] (0, 0) -- ++(-0.5, 0) node[left] {$-$};
+        % \draw [-o] (2, 0) -- ++(0.5, 0) node[right] {$+$};
+        \draw [-o] (0, 0) -- ++(-0.5, 0) node[left] {};
+        \draw [-o] (2, 0) -- ++(0.5, 0) node[right] {};
     \end{tikzpicture}
 }
 \answer{%
     $
         Q_1
             = Q_2
-            = CU
-            = \frac{ U }{\frac1{C_1} + \frac1{C_2}}
-            = \frac{C_1C_2U}{C_1 + C_2}
+            = CV
+            = \frac{ V }{\frac1{C_1} + \frac1{C_2}}
+            = \frac{C_1C_2V}{C_1 + C_2}
             = \frac{
-                40\,\text{нФ} \cdot 60\,\text{нФ} \cdot 150\,\text{В}
+                20\,\text{нФ} \cdot 30\,\text{нФ} \cdot 450\,\text{В}
             }{
-                40\,\text{нФ} + 60\,\text{нФ}
+                20\,\text{нФ} + 30\,\text{нФ}
             }
-            = 3600{,}00\,\text{нКл}
+            = 5{,}40\,\text{мкКл}
     $
 }
 
@@ -968,34 +977,35 @@
 
 \tasknumber{5}%
 \task{%
-    \begin{tikzpicture}[circuit ee IEC, x=1cm, y=1cm, semithick]
+    Два конденсатора ёмкостей $C_1 = 60\,\text{нФ}$ и $C_2 = 30\,\text{нФ}$ последовательно подключают
+    к источнику напряжения $V = 150\,\text{В}$ (см.
+    рис.).
+    % Определите заряды каждого из конденсаторов.
+    Определите заряд первого конденсатора.
+
+    \begin{tikzpicture}[circuit ee IEC, semithick]
         \draw  (0, 0) to [capacitor={info={$C_1$}}] (1, 0)
                        to [capacitor={info={$C_2$}}] (2, 0)
         ;
-        \draw [-o] (0, 0) -- ++(-0.5, 0) node[left] {$-$};
-        \draw [-o] (2, 0) -- ++(0.5, 0) node[right] {$+$};
-
-        \node [right,text width = 14cm, align=justify] at (3.5,0) {
-        Два конденсатора ёмкостей $C_1 = 60\,\text{нФ}$ и $C_2 = 30\,\text{нФ}$ последовательно подключают
-        к источнику напряжения $U = 450\,\text{В}$ (см.
-        рис.).
-        Определите заряды каждого из конденсаторов.
-       };
+        % \draw [-o] (0, 0) -- ++(-0.5, 0) node[left] {$-$};
+        % \draw [-o] (2, 0) -- ++(0.5, 0) node[right] {$+$};
+        \draw [-o] (0, 0) -- ++(-0.5, 0) node[left] {};
+        \draw [-o] (2, 0) -- ++(0.5, 0) node[right] {};
     \end{tikzpicture}
 }
 \answer{%
     $
         Q_1
             = Q_2
-            = CU
-            = \frac{ U }{\frac1{C_1} + \frac1{C_2}}
-            = \frac{C_1C_2U}{C_1 + C_2}
+            = CV
+            = \frac{ V }{\frac1{C_1} + \frac1{C_2}}
+            = \frac{C_1C_2V}{C_1 + C_2}
             = \frac{
-                60\,\text{нФ} \cdot 30\,\text{нФ} \cdot 450\,\text{В}
+                60\,\text{нФ} \cdot 30\,\text{нФ} \cdot 150\,\text{В}
             }{
                 60\,\text{нФ} + 30\,\text{нФ}
             }
-            = 9000{,}00\,\text{нКл}
+            = 3{,}00\,\text{мкКл}
     $
 }
 
@@ -1068,19 +1078,20 @@
 
 \tasknumber{5}%
 \task{%
-    \begin{tikzpicture}[circuit ee IEC, x=1cm, y=1cm, semithick]
+    Два конденсатора ёмкостей $C_1 = 60\,\text{нФ}$ и $C_2 = 30\,\text{нФ}$ последовательно подключают
+    к источнику напряжения $V = 200\,\text{В}$ (см.
+    рис.).
+    % Определите заряды каждого из конденсаторов.
+    Определите заряд первого конденсатора.
+
+    \begin{tikzpicture}[circuit ee IEC, semithick]
         \draw  (0, 0) to [capacitor={info={$C_1$}}] (1, 0)
                        to [capacitor={info={$C_2$}}] (2, 0)
         ;
-        \draw [-o] (0, 0) -- ++(-0.5, 0) node[left] {$-$};
-        \draw [-o] (2, 0) -- ++(0.5, 0) node[right] {$+$};
-
-        \node [right,text width = 14cm, align=justify] at (3.5,0) {
-        Два конденсатора ёмкостей $C_1 = 40\,\text{нФ}$ и $C_2 = 60\,\text{нФ}$ последовательно подключают
-        к источнику напряжения $V = 300\,\text{В}$ (см.
-        рис.).
-        Определите заряды каждого из конденсаторов.
-       };
+        % \draw [-o] (0, 0) -- ++(-0.5, 0) node[left] {$-$};
+        % \draw [-o] (2, 0) -- ++(0.5, 0) node[right] {$+$};
+        \draw [-o] (0, 0) -- ++(-0.5, 0) node[left] {};
+        \draw [-o] (2, 0) -- ++(0.5, 0) node[right] {};
     \end{tikzpicture}
 }
 \answer{%
@@ -1091,11 +1102,11 @@
             = \frac{ V }{\frac1{C_1} + \frac1{C_2}}
             = \frac{C_1C_2V}{C_1 + C_2}
             = \frac{
-                40\,\text{нФ} \cdot 60\,\text{нФ} \cdot 300\,\text{В}
+                60\,\text{нФ} \cdot 30\,\text{нФ} \cdot 200\,\text{В}
             }{
-                40\,\text{нФ} + 60\,\text{нФ}
+                60\,\text{нФ} + 30\,\text{нФ}
             }
-            = 7200{,}00\,\text{нКл}
+            = 4{,}00\,\text{мкКл}
     $
 }
 
@@ -1168,34 +1179,35 @@
 
 \tasknumber{5}%
 \task{%
-    \begin{tikzpicture}[circuit ee IEC, x=1cm, y=1cm, semithick]
+    Два конденсатора ёмкостей $C_1 = 30\,\text{нФ}$ и $C_2 = 60\,\text{нФ}$ последовательно подключают
+    к источнику напряжения $V = 150\,\text{В}$ (см.
+    рис.).
+    % Определите заряды каждого из конденсаторов.
+    Определите заряд первого конденсатора.
+
+    \begin{tikzpicture}[circuit ee IEC, semithick]
         \draw  (0, 0) to [capacitor={info={$C_1$}}] (1, 0)
                        to [capacitor={info={$C_2$}}] (2, 0)
         ;
-        \draw [-o] (0, 0) -- ++(-0.5, 0) node[left] {$-$};
-        \draw [-o] (2, 0) -- ++(0.5, 0) node[right] {$+$};
-
-        \node [right,text width = 14cm, align=justify] at (3.5,0) {
-        Два конденсатора ёмкостей $C_1 = 60\,\text{нФ}$ и $C_2 = 30\,\text{нФ}$ последовательно подключают
-        к источнику напряжения $U = 200\,\text{В}$ (см.
-        рис.).
-        Определите заряды каждого из конденсаторов.
-       };
+        % \draw [-o] (0, 0) -- ++(-0.5, 0) node[left] {$-$};
+        % \draw [-o] (2, 0) -- ++(0.5, 0) node[right] {$+$};
+        \draw [-o] (0, 0) -- ++(-0.5, 0) node[left] {};
+        \draw [-o] (2, 0) -- ++(0.5, 0) node[right] {};
     \end{tikzpicture}
 }
 \answer{%
     $
         Q_1
             = Q_2
-            = CU
-            = \frac{ U }{\frac1{C_1} + \frac1{C_2}}
-            = \frac{C_1C_2U}{C_1 + C_2}
+            = CV
+            = \frac{ V }{\frac1{C_1} + \frac1{C_2}}
+            = \frac{C_1C_2V}{C_1 + C_2}
             = \frac{
-                60\,\text{нФ} \cdot 30\,\text{нФ} \cdot 200\,\text{В}
+                30\,\text{нФ} \cdot 60\,\text{нФ} \cdot 150\,\text{В}
             }{
-                60\,\text{нФ} + 30\,\text{нФ}
+                30\,\text{нФ} + 60\,\text{нФ}
             }
-            = 4000{,}00\,\text{нКл}
+            = 3{,}00\,\text{мкКл}
     $
 }
 
@@ -1268,19 +1280,20 @@
 
 \tasknumber{5}%
 \task{%
-    \begin{tikzpicture}[circuit ee IEC, x=1cm, y=1cm, semithick]
+    Два конденсатора ёмкостей $C_1 = 20\,\text{нФ}$ и $C_2 = 60\,\text{нФ}$ последовательно подключают
+    к источнику напряжения $V = 300\,\text{В}$ (см.
+    рис.).
+    % Определите заряды каждого из конденсаторов.
+    Определите заряд первого конденсатора.
+
+    \begin{tikzpicture}[circuit ee IEC, semithick]
         \draw  (0, 0) to [capacitor={info={$C_1$}}] (1, 0)
                        to [capacitor={info={$C_2$}}] (2, 0)
         ;
-        \draw [-o] (0, 0) -- ++(-0.5, 0) node[left] {$-$};
-        \draw [-o] (2, 0) -- ++(0.5, 0) node[right] {$+$};
-
-        \node [right,text width = 14cm, align=justify] at (3.5,0) {
-        Два конденсатора ёмкостей $C_1 = 20\,\text{нФ}$ и $C_2 = 60\,\text{нФ}$ последовательно подключают
-        к источнику напряжения $V = 400\,\text{В}$ (см.
-        рис.).
-        Определите заряды каждого из конденсаторов.
-       };
+        % \draw [-o] (0, 0) -- ++(-0.5, 0) node[left] {$-$};
+        % \draw [-o] (2, 0) -- ++(0.5, 0) node[right] {$+$};
+        \draw [-o] (0, 0) -- ++(-0.5, 0) node[left] {};
+        \draw [-o] (2, 0) -- ++(0.5, 0) node[right] {};
     \end{tikzpicture}
 }
 \answer{%
@@ -1291,11 +1304,11 @@
             = \frac{ V }{\frac1{C_1} + \frac1{C_2}}
             = \frac{C_1C_2V}{C_1 + C_2}
             = \frac{
-                20\,\text{нФ} \cdot 60\,\text{нФ} \cdot 400\,\text{В}
+                20\,\text{нФ} \cdot 60\,\text{нФ} \cdot 300\,\text{В}
             }{
                 20\,\text{нФ} + 60\,\text{нФ}
             }
-            = 6000{,}00\,\text{нКл}
+            = 4{,}50\,\text{мкКл}
     $
 }
 
@@ -1368,34 +1381,35 @@
 
 \tasknumber{5}%
 \task{%
-    \begin{tikzpicture}[circuit ee IEC, x=1cm, y=1cm, semithick]
+    Два конденсатора ёмкостей $C_1 = 40\,\text{нФ}$ и $C_2 = 30\,\text{нФ}$ последовательно подключают
+    к источнику напряжения $V = 300\,\text{В}$ (см.
+    рис.).
+    % Определите заряды каждого из конденсаторов.
+    Определите заряд второго конденсатора.
+
+    \begin{tikzpicture}[circuit ee IEC, semithick]
         \draw  (0, 0) to [capacitor={info={$C_1$}}] (1, 0)
                        to [capacitor={info={$C_2$}}] (2, 0)
         ;
-        \draw [-o] (0, 0) -- ++(-0.5, 0) node[left] {$-$};
-        \draw [-o] (2, 0) -- ++(0.5, 0) node[right] {$+$};
-
-        \node [right,text width = 14cm, align=justify] at (3.5,0) {
-        Два конденсатора ёмкостей $C_1 = 30\,\text{нФ}$ и $C_2 = 60\,\text{нФ}$ последовательно подключают
-        к источнику напряжения $U = 400\,\text{В}$ (см.
-        рис.).
-        Определите заряды каждого из конденсаторов.
-       };
+        % \draw [-o] (0, 0) -- ++(-0.5, 0) node[left] {$-$};
+        % \draw [-o] (2, 0) -- ++(0.5, 0) node[right] {$+$};
+        \draw [-o] (0, 0) -- ++(-0.5, 0) node[left] {};
+        \draw [-o] (2, 0) -- ++(0.5, 0) node[right] {};
     \end{tikzpicture}
 }
 \answer{%
     $
         Q_1
             = Q_2
-            = CU
-            = \frac{ U }{\frac1{C_1} + \frac1{C_2}}
-            = \frac{C_1C_2U}{C_1 + C_2}
+            = CV
+            = \frac{ V }{\frac1{C_1} + \frac1{C_2}}
+            = \frac{C_1C_2V}{C_1 + C_2}
             = \frac{
-                30\,\text{нФ} \cdot 60\,\text{нФ} \cdot 400\,\text{В}
+                40\,\text{нФ} \cdot 30\,\text{нФ} \cdot 300\,\text{В}
             }{
-                30\,\text{нФ} + 60\,\text{нФ}
+                40\,\text{нФ} + 30\,\text{нФ}
             }
-            = 8000{,}00\,\text{нКл}
+            = 5{,}14\,\text{мкКл}
     $
 }
 
@@ -1468,34 +1482,35 @@
 
 \tasknumber{5}%
 \task{%
-    \begin{tikzpicture}[circuit ee IEC, x=1cm, y=1cm, semithick]
+    Два конденсатора ёмкостей $C_1 = 20\,\text{нФ}$ и $C_2 = 30\,\text{нФ}$ последовательно подключают
+    к источнику напряжения $U = 300\,\text{В}$ (см.
+    рис.).
+    % Определите заряды каждого из конденсаторов.
+    Определите заряд второго конденсатора.
+
+    \begin{tikzpicture}[circuit ee IEC, semithick]
         \draw  (0, 0) to [capacitor={info={$C_1$}}] (1, 0)
                        to [capacitor={info={$C_2$}}] (2, 0)
         ;
-        \draw [-o] (0, 0) -- ++(-0.5, 0) node[left] {$-$};
-        \draw [-o] (2, 0) -- ++(0.5, 0) node[right] {$+$};
-
-        \node [right,text width = 14cm, align=justify] at (3.5,0) {
-        Два конденсатора ёмкостей $C_1 = 40\,\text{нФ}$ и $C_2 = 30\,\text{нФ}$ последовательно подключают
-        к источнику напряжения $V = 300\,\text{В}$ (см.
-        рис.).
-        Определите заряды каждого из конденсаторов.
-       };
+        % \draw [-o] (0, 0) -- ++(-0.5, 0) node[left] {$-$};
+        % \draw [-o] (2, 0) -- ++(0.5, 0) node[right] {$+$};
+        \draw [-o] (0, 0) -- ++(-0.5, 0) node[left] {};
+        \draw [-o] (2, 0) -- ++(0.5, 0) node[right] {};
     \end{tikzpicture}
 }
 \answer{%
     $
         Q_1
             = Q_2
-            = CV
-            = \frac{ V }{\frac1{C_1} + \frac1{C_2}}
-            = \frac{C_1C_2V}{C_1 + C_2}
+            = CU
+            = \frac{ U }{\frac1{C_1} + \frac1{C_2}}
+            = \frac{C_1C_2U}{C_1 + C_2}
             = \frac{
-                40\,\text{нФ} \cdot 30\,\text{нФ} \cdot 300\,\text{В}
+                20\,\text{нФ} \cdot 30\,\text{нФ} \cdot 300\,\text{В}
             }{
-                40\,\text{нФ} + 30\,\text{нФ}
+                20\,\text{нФ} + 30\,\text{нФ}
             }
-            = 5142{,}86\,\text{нКл}
+            = 3{,}60\,\text{мкКл}
     $
 }
 
@@ -1568,19 +1583,20 @@
 
 \tasknumber{5}%
 \task{%
-    \begin{tikzpicture}[circuit ee IEC, x=1cm, y=1cm, semithick]
+    Два конденсатора ёмкостей $C_1 = 60\,\text{нФ}$ и $C_2 = 40\,\text{нФ}$ последовательно подключают
+    к источнику напряжения $V = 450\,\text{В}$ (см.
+    рис.).
+    % Определите заряды каждого из конденсаторов.
+    Определите заряд второго конденсатора.
+
+    \begin{tikzpicture}[circuit ee IEC, semithick]
         \draw  (0, 0) to [capacitor={info={$C_1$}}] (1, 0)
                        to [capacitor={info={$C_2$}}] (2, 0)
         ;
-        \draw [-o] (0, 0) -- ++(-0.5, 0) node[left] {$-$};
-        \draw [-o] (2, 0) -- ++(0.5, 0) node[right] {$+$};
-
-        \node [right,text width = 14cm, align=justify] at (3.5,0) {
-        Два конденсатора ёмкостей $C_1 = 60\,\text{нФ}$ и $C_2 = 30\,\text{нФ}$ последовательно подключают
-        к источнику напряжения $V = 200\,\text{В}$ (см.
-        рис.).
-        Определите заряды каждого из конденсаторов.
-       };
+        % \draw [-o] (0, 0) -- ++(-0.5, 0) node[left] {$-$};
+        % \draw [-o] (2, 0) -- ++(0.5, 0) node[right] {$+$};
+        \draw [-o] (0, 0) -- ++(-0.5, 0) node[left] {};
+        \draw [-o] (2, 0) -- ++(0.5, 0) node[right] {};
     \end{tikzpicture}
 }
 \answer{%
@@ -1591,11 +1607,11 @@
             = \frac{ V }{\frac1{C_1} + \frac1{C_2}}
             = \frac{C_1C_2V}{C_1 + C_2}
             = \frac{
-                60\,\text{нФ} \cdot 30\,\text{нФ} \cdot 200\,\text{В}
+                60\,\text{нФ} \cdot 40\,\text{нФ} \cdot 450\,\text{В}
             }{
-                60\,\text{нФ} + 30\,\text{нФ}
+                60\,\text{нФ} + 40\,\text{нФ}
             }
-            = 4000{,}00\,\text{нКл}
+            = 10{,}80\,\text{мкКл}
     $
 }
 
@@ -1668,19 +1684,20 @@
 
 \tasknumber{5}%
 \task{%
-    \begin{tikzpicture}[circuit ee IEC, x=1cm, y=1cm, semithick]
+    Два конденсатора ёмкостей $C_1 = 30\,\text{нФ}$ и $C_2 = 60\,\text{нФ}$ последовательно подключают
+    к источнику напряжения $V = 300\,\text{В}$ (см.
+    рис.).
+    % Определите заряды каждого из конденсаторов.
+    Определите заряд второго конденсатора.
+
+    \begin{tikzpicture}[circuit ee IEC, semithick]
         \draw  (0, 0) to [capacitor={info={$C_1$}}] (1, 0)
                        to [capacitor={info={$C_2$}}] (2, 0)
         ;
-        \draw [-o] (0, 0) -- ++(-0.5, 0) node[left] {$-$};
-        \draw [-o] (2, 0) -- ++(0.5, 0) node[right] {$+$};
-
-        \node [right,text width = 14cm, align=justify] at (3.5,0) {
-        Два конденсатора ёмкостей $C_1 = 60\,\text{нФ}$ и $C_2 = 20\,\text{нФ}$ последовательно подключают
-        к источнику напряжения $V = 300\,\text{В}$ (см.
-        рис.).
-        Определите заряды каждого из конденсаторов.
-       };
+        % \draw [-o] (0, 0) -- ++(-0.5, 0) node[left] {$-$};
+        % \draw [-o] (2, 0) -- ++(0.5, 0) node[right] {$+$};
+        \draw [-o] (0, 0) -- ++(-0.5, 0) node[left] {};
+        \draw [-o] (2, 0) -- ++(0.5, 0) node[right] {};
     \end{tikzpicture}
 }
 \answer{%
@@ -1691,11 +1708,11 @@
             = \frac{ V }{\frac1{C_1} + \frac1{C_2}}
             = \frac{C_1C_2V}{C_1 + C_2}
             = \frac{
-                60\,\text{нФ} \cdot 20\,\text{нФ} \cdot 300\,\text{В}
+                30\,\text{нФ} \cdot 60\,\text{нФ} \cdot 300\,\text{В}
             }{
-                60\,\text{нФ} + 20\,\text{нФ}
+                30\,\text{нФ} + 60\,\text{нФ}
             }
-            = 4500{,}00\,\text{нКл}
+            = 6{,}00\,\text{мкКл}
     $
 }
 
@@ -1768,34 +1785,35 @@
 
 \tasknumber{5}%
 \task{%
-    \begin{tikzpicture}[circuit ee IEC, x=1cm, y=1cm, semithick]
+    Два конденсатора ёмкостей $C_1 = 40\,\text{нФ}$ и $C_2 = 30\,\text{нФ}$ последовательно подключают
+    к источнику напряжения $V = 300\,\text{В}$ (см.
+    рис.).
+    % Определите заряды каждого из конденсаторов.
+    Определите заряд второго конденсатора.
+
+    \begin{tikzpicture}[circuit ee IEC, semithick]
         \draw  (0, 0) to [capacitor={info={$C_1$}}] (1, 0)
                        to [capacitor={info={$C_2$}}] (2, 0)
         ;
-        \draw [-o] (0, 0) -- ++(-0.5, 0) node[left] {$-$};
-        \draw [-o] (2, 0) -- ++(0.5, 0) node[right] {$+$};
-
-        \node [right,text width = 14cm, align=justify] at (3.5,0) {
-        Два конденсатора ёмкостей $C_1 = 20\,\text{нФ}$ и $C_2 = 40\,\text{нФ}$ последовательно подключают
-        к источнику напряжения $U = 200\,\text{В}$ (см.
-        рис.).
-        Определите заряды каждого из конденсаторов.
-       };
+        % \draw [-o] (0, 0) -- ++(-0.5, 0) node[left] {$-$};
+        % \draw [-o] (2, 0) -- ++(0.5, 0) node[right] {$+$};
+        \draw [-o] (0, 0) -- ++(-0.5, 0) node[left] {};
+        \draw [-o] (2, 0) -- ++(0.5, 0) node[right] {};
     \end{tikzpicture}
 }
 \answer{%
     $
         Q_1
             = Q_2
-            = CU
-            = \frac{ U }{\frac1{C_1} + \frac1{C_2}}
-            = \frac{C_1C_2U}{C_1 + C_2}
+            = CV
+            = \frac{ V }{\frac1{C_1} + \frac1{C_2}}
+            = \frac{C_1C_2V}{C_1 + C_2}
             = \frac{
-                20\,\text{нФ} \cdot 40\,\text{нФ} \cdot 200\,\text{В}
+                40\,\text{нФ} \cdot 30\,\text{нФ} \cdot 300\,\text{В}
             }{
-                20\,\text{нФ} + 40\,\text{нФ}
+                40\,\text{нФ} + 30\,\text{нФ}
             }
-            = 2666{,}67\,\text{нКл}
+            = 5{,}14\,\text{мкКл}
     $
 }
 
@@ -1868,34 +1886,35 @@
 
 \tasknumber{5}%
 \task{%
-    \begin{tikzpicture}[circuit ee IEC, x=1cm, y=1cm, semithick]
+    Два конденсатора ёмкостей $C_1 = 20\,\text{нФ}$ и $C_2 = 60\,\text{нФ}$ последовательно подключают
+    к источнику напряжения $V = 300\,\text{В}$ (см.
+    рис.).
+    % Определите заряды каждого из конденсаторов.
+    Определите заряд второго конденсатора.
+
+    \begin{tikzpicture}[circuit ee IEC, semithick]
         \draw  (0, 0) to [capacitor={info={$C_1$}}] (1, 0)
                        to [capacitor={info={$C_2$}}] (2, 0)
         ;
-        \draw [-o] (0, 0) -- ++(-0.5, 0) node[left] {$-$};
-        \draw [-o] (2, 0) -- ++(0.5, 0) node[right] {$+$};
-
-        \node [right,text width = 14cm, align=justify] at (3.5,0) {
-        Два конденсатора ёмкостей $C_1 = 20\,\text{нФ}$ и $C_2 = 60\,\text{нФ}$ последовательно подключают
-        к источнику напряжения $U = 200\,\text{В}$ (см.
-        рис.).
-        Определите заряды каждого из конденсаторов.
-       };
+        % \draw [-o] (0, 0) -- ++(-0.5, 0) node[left] {$-$};
+        % \draw [-o] (2, 0) -- ++(0.5, 0) node[right] {$+$};
+        \draw [-o] (0, 0) -- ++(-0.5, 0) node[left] {};
+        \draw [-o] (2, 0) -- ++(0.5, 0) node[right] {};
     \end{tikzpicture}
 }
 \answer{%
     $
         Q_1
             = Q_2
-            = CU
-            = \frac{ U }{\frac1{C_1} + \frac1{C_2}}
-            = \frac{C_1C_2U}{C_1 + C_2}
+            = CV
+            = \frac{ V }{\frac1{C_1} + \frac1{C_2}}
+            = \frac{C_1C_2V}{C_1 + C_2}
             = \frac{
-                20\,\text{нФ} \cdot 60\,\text{нФ} \cdot 200\,\text{В}
+                20\,\text{нФ} \cdot 60\,\text{нФ} \cdot 300\,\text{В}
             }{
                 20\,\text{нФ} + 60\,\text{нФ}
             }
-            = 3000{,}00\,\text{нКл}
+            = 4{,}50\,\text{мкКл}
     $
 }
 
@@ -1968,19 +1987,20 @@
 
 \tasknumber{5}%
 \task{%
-    \begin{tikzpicture}[circuit ee IEC, x=1cm, y=1cm, semithick]
+    Два конденсатора ёмкостей $C_1 = 20\,\text{нФ}$ и $C_2 = 40\,\text{нФ}$ последовательно подключают
+    к источнику напряжения $U = 150\,\text{В}$ (см.
+    рис.).
+    % Определите заряды каждого из конденсаторов.
+    Определите заряд второго конденсатора.
+
+    \begin{tikzpicture}[circuit ee IEC, semithick]
         \draw  (0, 0) to [capacitor={info={$C_1$}}] (1, 0)
                        to [capacitor={info={$C_2$}}] (2, 0)
         ;
-        \draw [-o] (0, 0) -- ++(-0.5, 0) node[left] {$-$};
-        \draw [-o] (2, 0) -- ++(0.5, 0) node[right] {$+$};
-
-        \node [right,text width = 14cm, align=justify] at (3.5,0) {
-        Два конденсатора ёмкостей $C_1 = 40\,\text{нФ}$ и $C_2 = 60\,\text{нФ}$ последовательно подключают
-        к источнику напряжения $U = 450\,\text{В}$ (см.
-        рис.).
-        Определите заряды каждого из конденсаторов.
-       };
+        % \draw [-o] (0, 0) -- ++(-0.5, 0) node[left] {$-$};
+        % \draw [-o] (2, 0) -- ++(0.5, 0) node[right] {$+$};
+        \draw [-o] (0, 0) -- ++(-0.5, 0) node[left] {};
+        \draw [-o] (2, 0) -- ++(0.5, 0) node[right] {};
     \end{tikzpicture}
 }
 \answer{%
@@ -1991,11 +2011,11 @@
             = \frac{ U }{\frac1{C_1} + \frac1{C_2}}
             = \frac{C_1C_2U}{C_1 + C_2}
             = \frac{
-                40\,\text{нФ} \cdot 60\,\text{нФ} \cdot 450\,\text{В}
+                20\,\text{нФ} \cdot 40\,\text{нФ} \cdot 150\,\text{В}
             }{
-                40\,\text{нФ} + 60\,\text{нФ}
+                20\,\text{нФ} + 40\,\text{нФ}
             }
-            = 10800{,}00\,\text{нКл}
+            = 2{,}00\,\text{мкКл}
     $
 }
 
@@ -2068,34 +2088,35 @@
 
 \tasknumber{5}%
 \task{%
-    \begin{tikzpicture}[circuit ee IEC, x=1cm, y=1cm, semithick]
+    Два конденсатора ёмкостей $C_1 = 60\,\text{нФ}$ и $C_2 = 30\,\text{нФ}$ последовательно подключают
+    к источнику напряжения $U = 400\,\text{В}$ (см.
+    рис.).
+    % Определите заряды каждого из конденсаторов.
+    Определите заряд второго конденсатора.
+
+    \begin{tikzpicture}[circuit ee IEC, semithick]
         \draw  (0, 0) to [capacitor={info={$C_1$}}] (1, 0)
                        to [capacitor={info={$C_2$}}] (2, 0)
         ;
-        \draw [-o] (0, 0) -- ++(-0.5, 0) node[left] {$-$};
-        \draw [-o] (2, 0) -- ++(0.5, 0) node[right] {$+$};
-
-        \node [right,text width = 14cm, align=justify] at (3.5,0) {
-        Два конденсатора ёмкостей $C_1 = 40\,\text{нФ}$ и $C_2 = 30\,\text{нФ}$ последовательно подключают
-        к источнику напряжения $V = 400\,\text{В}$ (см.
-        рис.).
-        Определите заряды каждого из конденсаторов.
-       };
+        % \draw [-o] (0, 0) -- ++(-0.5, 0) node[left] {$-$};
+        % \draw [-o] (2, 0) -- ++(0.5, 0) node[right] {$+$};
+        \draw [-o] (0, 0) -- ++(-0.5, 0) node[left] {};
+        \draw [-o] (2, 0) -- ++(0.5, 0) node[right] {};
     \end{tikzpicture}
 }
 \answer{%
     $
         Q_1
             = Q_2
-            = CV
-            = \frac{ V }{\frac1{C_1} + \frac1{C_2}}
-            = \frac{C_1C_2V}{C_1 + C_2}
+            = CU
+            = \frac{ U }{\frac1{C_1} + \frac1{C_2}}
+            = \frac{C_1C_2U}{C_1 + C_2}
             = \frac{
-                40\,\text{нФ} \cdot 30\,\text{нФ} \cdot 400\,\text{В}
+                60\,\text{нФ} \cdot 30\,\text{нФ} \cdot 400\,\text{В}
             }{
-                40\,\text{нФ} + 30\,\text{нФ}
+                60\,\text{нФ} + 30\,\text{нФ}
             }
-            = 6857{,}14\,\text{нКл}
+            = 8{,}00\,\text{мкКл}
     $
 }
 
@@ -2168,34 +2189,35 @@
 
 \tasknumber{5}%
 \task{%
-    \begin{tikzpicture}[circuit ee IEC, x=1cm, y=1cm, semithick]
+    Два конденсатора ёмкостей $C_1 = 20\,\text{нФ}$ и $C_2 = 60\,\text{нФ}$ последовательно подключают
+    к источнику напряжения $V = 150\,\text{В}$ (см.
+    рис.).
+    % Определите заряды каждого из конденсаторов.
+    Определите заряд первого конденсатора.
+
+    \begin{tikzpicture}[circuit ee IEC, semithick]
         \draw  (0, 0) to [capacitor={info={$C_1$}}] (1, 0)
                        to [capacitor={info={$C_2$}}] (2, 0)
         ;
-        \draw [-o] (0, 0) -- ++(-0.5, 0) node[left] {$-$};
-        \draw [-o] (2, 0) -- ++(0.5, 0) node[right] {$+$};
-
-        \node [right,text width = 14cm, align=justify] at (3.5,0) {
-        Два конденсатора ёмкостей $C_1 = 30\,\text{нФ}$ и $C_2 = 40\,\text{нФ}$ последовательно подключают
-        к источнику напряжения $U = 200\,\text{В}$ (см.
-        рис.).
-        Определите заряды каждого из конденсаторов.
-       };
+        % \draw [-o] (0, 0) -- ++(-0.5, 0) node[left] {$-$};
+        % \draw [-o] (2, 0) -- ++(0.5, 0) node[right] {$+$};
+        \draw [-o] (0, 0) -- ++(-0.5, 0) node[left] {};
+        \draw [-o] (2, 0) -- ++(0.5, 0) node[right] {};
     \end{tikzpicture}
 }
 \answer{%
     $
         Q_1
             = Q_2
-            = CU
-            = \frac{ U }{\frac1{C_1} + \frac1{C_2}}
-            = \frac{C_1C_2U}{C_1 + C_2}
+            = CV
+            = \frac{ V }{\frac1{C_1} + \frac1{C_2}}
+            = \frac{C_1C_2V}{C_1 + C_2}
             = \frac{
-                30\,\text{нФ} \cdot 40\,\text{нФ} \cdot 200\,\text{В}
+                20\,\text{нФ} \cdot 60\,\text{нФ} \cdot 150\,\text{В}
             }{
-                30\,\text{нФ} + 40\,\text{нФ}
+                20\,\text{нФ} + 60\,\text{нФ}
             }
-            = 3428{,}57\,\text{нКл}
+            = 2{,}25\,\text{мкКл}
     $
 }
 
@@ -2268,19 +2290,20 @@
 
 \tasknumber{5}%
 \task{%
-    \begin{tikzpicture}[circuit ee IEC, x=1cm, y=1cm, semithick]
+    Два конденсатора ёмкостей $C_1 = 40\,\text{нФ}$ и $C_2 = 60\,\text{нФ}$ последовательно подключают
+    к источнику напряжения $V = 200\,\text{В}$ (см.
+    рис.).
+    % Определите заряды каждого из конденсаторов.
+    Определите заряд второго конденсатора.
+
+    \begin{tikzpicture}[circuit ee IEC, semithick]
         \draw  (0, 0) to [capacitor={info={$C_1$}}] (1, 0)
                        to [capacitor={info={$C_2$}}] (2, 0)
         ;
-        \draw [-o] (0, 0) -- ++(-0.5, 0) node[left] {$-$};
-        \draw [-o] (2, 0) -- ++(0.5, 0) node[right] {$+$};
-
-        \node [right,text width = 14cm, align=justify] at (3.5,0) {
-        Два конденсатора ёмкостей $C_1 = 30\,\text{нФ}$ и $C_2 = 60\,\text{нФ}$ последовательно подключают
-        к источнику напряжения $V = 450\,\text{В}$ (см.
-        рис.).
-        Определите заряды каждого из конденсаторов.
-       };
+        % \draw [-o] (0, 0) -- ++(-0.5, 0) node[left] {$-$};
+        % \draw [-o] (2, 0) -- ++(0.5, 0) node[right] {$+$};
+        \draw [-o] (0, 0) -- ++(-0.5, 0) node[left] {};
+        \draw [-o] (2, 0) -- ++(0.5, 0) node[right] {};
     \end{tikzpicture}
 }
 \answer{%
@@ -2291,11 +2314,11 @@
             = \frac{ V }{\frac1{C_1} + \frac1{C_2}}
             = \frac{C_1C_2V}{C_1 + C_2}
             = \frac{
-                30\,\text{нФ} \cdot 60\,\text{нФ} \cdot 450\,\text{В}
+                40\,\text{нФ} \cdot 60\,\text{нФ} \cdot 200\,\text{В}
             }{
-                30\,\text{нФ} + 60\,\text{нФ}
+                40\,\text{нФ} + 60\,\text{нФ}
             }
-            = 9000{,}00\,\text{нКл}
+            = 4{,}80\,\text{мкКл}
     $
 }
 
@@ -2368,34 +2391,35 @@
 
 \tasknumber{5}%
 \task{%
-    \begin{tikzpicture}[circuit ee IEC, x=1cm, y=1cm, semithick]
+    Два конденсатора ёмкостей $C_1 = 20\,\text{нФ}$ и $C_2 = 40\,\text{нФ}$ последовательно подключают
+    к источнику напряжения $U = 150\,\text{В}$ (см.
+    рис.).
+    % Определите заряды каждого из конденсаторов.
+    Определите заряд первого конденсатора.
+
+    \begin{tikzpicture}[circuit ee IEC, semithick]
         \draw  (0, 0) to [capacitor={info={$C_1$}}] (1, 0)
                        to [capacitor={info={$C_2$}}] (2, 0)
         ;
-        \draw [-o] (0, 0) -- ++(-0.5, 0) node[left] {$-$};
-        \draw [-o] (2, 0) -- ++(0.5, 0) node[right] {$+$};
-
-        \node [right,text width = 14cm, align=justify] at (3.5,0) {
-        Два конденсатора ёмкостей $C_1 = 60\,\text{нФ}$ и $C_2 = 20\,\text{нФ}$ последовательно подключают
-        к источнику напряжения $V = 200\,\text{В}$ (см.
-        рис.).
-        Определите заряды каждого из конденсаторов.
-       };
+        % \draw [-o] (0, 0) -- ++(-0.5, 0) node[left] {$-$};
+        % \draw [-o] (2, 0) -- ++(0.5, 0) node[right] {$+$};
+        \draw [-o] (0, 0) -- ++(-0.5, 0) node[left] {};
+        \draw [-o] (2, 0) -- ++(0.5, 0) node[right] {};
     \end{tikzpicture}
 }
 \answer{%
     $
         Q_1
             = Q_2
-            = CV
-            = \frac{ V }{\frac1{C_1} + \frac1{C_2}}
-            = \frac{C_1C_2V}{C_1 + C_2}
+            = CU
+            = \frac{ U }{\frac1{C_1} + \frac1{C_2}}
+            = \frac{C_1C_2U}{C_1 + C_2}
             = \frac{
-                60\,\text{нФ} \cdot 20\,\text{нФ} \cdot 200\,\text{В}
+                20\,\text{нФ} \cdot 40\,\text{нФ} \cdot 150\,\text{В}
             }{
-                60\,\text{нФ} + 20\,\text{нФ}
+                20\,\text{нФ} + 40\,\text{нФ}
             }
-            = 3000{,}00\,\text{нКл}
+            = 2{,}00\,\text{мкКл}
     $
 }
 
@@ -2468,34 +2492,35 @@
 
 \tasknumber{5}%
 \task{%
-    \begin{tikzpicture}[circuit ee IEC, x=1cm, y=1cm, semithick]
+    Два конденсатора ёмкостей $C_1 = 40\,\text{нФ}$ и $C_2 = 30\,\text{нФ}$ последовательно подключают
+    к источнику напряжения $U = 450\,\text{В}$ (см.
+    рис.).
+    % Определите заряды каждого из конденсаторов.
+    Определите заряд первого конденсатора.
+
+    \begin{tikzpicture}[circuit ee IEC, semithick]
         \draw  (0, 0) to [capacitor={info={$C_1$}}] (1, 0)
                        to [capacitor={info={$C_2$}}] (2, 0)
         ;
-        \draw [-o] (0, 0) -- ++(-0.5, 0) node[left] {$-$};
-        \draw [-o] (2, 0) -- ++(0.5, 0) node[right] {$+$};
-
-        \node [right,text width = 14cm, align=justify] at (3.5,0) {
-        Два конденсатора ёмкостей $C_1 = 30\,\text{нФ}$ и $C_2 = 60\,\text{нФ}$ последовательно подключают
-        к источнику напряжения $V = 450\,\text{В}$ (см.
-        рис.).
-        Определите заряды каждого из конденсаторов.
-       };
+        % \draw [-o] (0, 0) -- ++(-0.5, 0) node[left] {$-$};
+        % \draw [-o] (2, 0) -- ++(0.5, 0) node[right] {$+$};
+        \draw [-o] (0, 0) -- ++(-0.5, 0) node[left] {};
+        \draw [-o] (2, 0) -- ++(0.5, 0) node[right] {};
     \end{tikzpicture}
 }
 \answer{%
     $
         Q_1
             = Q_2
-            = CV
-            = \frac{ V }{\frac1{C_1} + \frac1{C_2}}
-            = \frac{C_1C_2V}{C_1 + C_2}
+            = CU
+            = \frac{ U }{\frac1{C_1} + \frac1{C_2}}
+            = \frac{C_1C_2U}{C_1 + C_2}
             = \frac{
-                30\,\text{нФ} \cdot 60\,\text{нФ} \cdot 450\,\text{В}
+                40\,\text{нФ} \cdot 30\,\text{нФ} \cdot 450\,\text{В}
             }{
-                30\,\text{нФ} + 60\,\text{нФ}
+                40\,\text{нФ} + 30\,\text{нФ}
             }
-            = 9000{,}00\,\text{нКл}
+            = 7{,}71\,\text{мкКл}
     $
 }
 
@@ -2568,19 +2593,20 @@
 
 \tasknumber{5}%
 \task{%
-    \begin{tikzpicture}[circuit ee IEC, x=1cm, y=1cm, semithick]
+    Два конденсатора ёмкостей $C_1 = 60\,\text{нФ}$ и $C_2 = 20\,\text{нФ}$ последовательно подключают
+    к источнику напряжения $V = 450\,\text{В}$ (см.
+    рис.).
+    % Определите заряды каждого из конденсаторов.
+    Определите заряд второго конденсатора.
+
+    \begin{tikzpicture}[circuit ee IEC, semithick]
         \draw  (0, 0) to [capacitor={info={$C_1$}}] (1, 0)
                        to [capacitor={info={$C_2$}}] (2, 0)
         ;
-        \draw [-o] (0, 0) -- ++(-0.5, 0) node[left] {$-$};
-        \draw [-o] (2, 0) -- ++(0.5, 0) node[right] {$+$};
-
-        \node [right,text width = 14cm, align=justify] at (3.5,0) {
-        Два конденсатора ёмкостей $C_1 = 20\,\text{нФ}$ и $C_2 = 60\,\text{нФ}$ последовательно подключают
-        к источнику напряжения $V = 200\,\text{В}$ (см.
-        рис.).
-        Определите заряды каждого из конденсаторов.
-       };
+        % \draw [-o] (0, 0) -- ++(-0.5, 0) node[left] {$-$};
+        % \draw [-o] (2, 0) -- ++(0.5, 0) node[right] {$+$};
+        \draw [-o] (0, 0) -- ++(-0.5, 0) node[left] {};
+        \draw [-o] (2, 0) -- ++(0.5, 0) node[right] {};
     \end{tikzpicture}
 }
 \answer{%
@@ -2591,11 +2617,11 @@
             = \frac{ V }{\frac1{C_1} + \frac1{C_2}}
             = \frac{C_1C_2V}{C_1 + C_2}
             = \frac{
-                20\,\text{нФ} \cdot 60\,\text{нФ} \cdot 200\,\text{В}
+                60\,\text{нФ} \cdot 20\,\text{нФ} \cdot 450\,\text{В}
             }{
-                20\,\text{нФ} + 60\,\text{нФ}
+                60\,\text{нФ} + 20\,\text{нФ}
             }
-            = 3000{,}00\,\text{нКл}
+            = 6{,}75\,\text{мкКл}
     $
 }
 
@@ -2668,34 +2694,35 @@
 
 \tasknumber{5}%
 \task{%
-    \begin{tikzpicture}[circuit ee IEC, x=1cm, y=1cm, semithick]
+    Два конденсатора ёмкостей $C_1 = 30\,\text{нФ}$ и $C_2 = 40\,\text{нФ}$ последовательно подключают
+    к источнику напряжения $V = 150\,\text{В}$ (см.
+    рис.).
+    % Определите заряды каждого из конденсаторов.
+    Определите заряд первого конденсатора.
+
+    \begin{tikzpicture}[circuit ee IEC, semithick]
         \draw  (0, 0) to [capacitor={info={$C_1$}}] (1, 0)
                        to [capacitor={info={$C_2$}}] (2, 0)
         ;
-        \draw [-o] (0, 0) -- ++(-0.5, 0) node[left] {$-$};
-        \draw [-o] (2, 0) -- ++(0.5, 0) node[right] {$+$};
-
-        \node [right,text width = 14cm, align=justify] at (3.5,0) {
-        Два конденсатора ёмкостей $C_1 = 40\,\text{нФ}$ и $C_2 = 60\,\text{нФ}$ последовательно подключают
-        к источнику напряжения $U = 450\,\text{В}$ (см.
-        рис.).
-        Определите заряды каждого из конденсаторов.
-       };
+        % \draw [-o] (0, 0) -- ++(-0.5, 0) node[left] {$-$};
+        % \draw [-o] (2, 0) -- ++(0.5, 0) node[right] {$+$};
+        \draw [-o] (0, 0) -- ++(-0.5, 0) node[left] {};
+        \draw [-o] (2, 0) -- ++(0.5, 0) node[right] {};
     \end{tikzpicture}
 }
 \answer{%
     $
         Q_1
             = Q_2
-            = CU
-            = \frac{ U }{\frac1{C_1} + \frac1{C_2}}
-            = \frac{C_1C_2U}{C_1 + C_2}
+            = CV
+            = \frac{ V }{\frac1{C_1} + \frac1{C_2}}
+            = \frac{C_1C_2V}{C_1 + C_2}
             = \frac{
-                40\,\text{нФ} \cdot 60\,\text{нФ} \cdot 450\,\text{В}
+                30\,\text{нФ} \cdot 40\,\text{нФ} \cdot 150\,\text{В}
             }{
-                40\,\text{нФ} + 60\,\text{нФ}
+                30\,\text{нФ} + 40\,\text{нФ}
             }
-            = 10800{,}00\,\text{нКл}
+            = 2{,}57\,\text{мкКл}
     $
 }
 
@@ -2768,34 +2795,35 @@
 
 \tasknumber{5}%
 \task{%
-    \begin{tikzpicture}[circuit ee IEC, x=1cm, y=1cm, semithick]
+    Два конденсатора ёмкостей $C_1 = 20\,\text{нФ}$ и $C_2 = 40\,\text{нФ}$ последовательно подключают
+    к источнику напряжения $V = 400\,\text{В}$ (см.
+    рис.).
+    % Определите заряды каждого из конденсаторов.
+    Определите заряд первого конденсатора.
+
+    \begin{tikzpicture}[circuit ee IEC, semithick]
         \draw  (0, 0) to [capacitor={info={$C_1$}}] (1, 0)
                        to [capacitor={info={$C_2$}}] (2, 0)
         ;
-        \draw [-o] (0, 0) -- ++(-0.5, 0) node[left] {$-$};
-        \draw [-o] (2, 0) -- ++(0.5, 0) node[right] {$+$};
-
-        \node [right,text width = 14cm, align=justify] at (3.5,0) {
-        Два конденсатора ёмкостей $C_1 = 40\,\text{нФ}$ и $C_2 = 60\,\text{нФ}$ последовательно подключают
-        к источнику напряжения $U = 300\,\text{В}$ (см.
-        рис.).
-        Определите заряды каждого из конденсаторов.
-       };
+        % \draw [-o] (0, 0) -- ++(-0.5, 0) node[left] {$-$};
+        % \draw [-o] (2, 0) -- ++(0.5, 0) node[right] {$+$};
+        \draw [-o] (0, 0) -- ++(-0.5, 0) node[left] {};
+        \draw [-o] (2, 0) -- ++(0.5, 0) node[right] {};
     \end{tikzpicture}
 }
 \answer{%
     $
         Q_1
             = Q_2
-            = CU
-            = \frac{ U }{\frac1{C_1} + \frac1{C_2}}
-            = \frac{C_1C_2U}{C_1 + C_2}
+            = CV
+            = \frac{ V }{\frac1{C_1} + \frac1{C_2}}
+            = \frac{C_1C_2V}{C_1 + C_2}
             = \frac{
-                40\,\text{нФ} \cdot 60\,\text{нФ} \cdot 300\,\text{В}
+                20\,\text{нФ} \cdot 40\,\text{нФ} \cdot 400\,\text{В}
             }{
-                40\,\text{нФ} + 60\,\text{нФ}
+                20\,\text{нФ} + 40\,\text{нФ}
             }
-            = 7200{,}00\,\text{нКл}
+            = 5{,}33\,\text{мкКл}
     $
 }
 
@@ -2868,34 +2896,35 @@
 
 \tasknumber{5}%
 \task{%
-    \begin{tikzpicture}[circuit ee IEC, x=1cm, y=1cm, semithick]
+    Два конденсатора ёмкостей $C_1 = 40\,\text{нФ}$ и $C_2 = 60\,\text{нФ}$ последовательно подключают
+    к источнику напряжения $V = 150\,\text{В}$ (см.
+    рис.).
+    % Определите заряды каждого из конденсаторов.
+    Определите заряд второго конденсатора.
+
+    \begin{tikzpicture}[circuit ee IEC, semithick]
         \draw  (0, 0) to [capacitor={info={$C_1$}}] (1, 0)
                        to [capacitor={info={$C_2$}}] (2, 0)
         ;
-        \draw [-o] (0, 0) -- ++(-0.5, 0) node[left] {$-$};
-        \draw [-o] (2, 0) -- ++(0.5, 0) node[right] {$+$};
-
-        \node [right,text width = 14cm, align=justify] at (3.5,0) {
-        Два конденсатора ёмкостей $C_1 = 60\,\text{нФ}$ и $C_2 = 30\,\text{нФ}$ последовательно подключают
-        к источнику напряжения $U = 200\,\text{В}$ (см.
-        рис.).
-        Определите заряды каждого из конденсаторов.
-       };
+        % \draw [-o] (0, 0) -- ++(-0.5, 0) node[left] {$-$};
+        % \draw [-o] (2, 0) -- ++(0.5, 0) node[right] {$+$};
+        \draw [-o] (0, 0) -- ++(-0.5, 0) node[left] {};
+        \draw [-o] (2, 0) -- ++(0.5, 0) node[right] {};
     \end{tikzpicture}
 }
 \answer{%
     $
         Q_1
             = Q_2
-            = CU
-            = \frac{ U }{\frac1{C_1} + \frac1{C_2}}
-            = \frac{C_1C_2U}{C_1 + C_2}
+            = CV
+            = \frac{ V }{\frac1{C_1} + \frac1{C_2}}
+            = \frac{C_1C_2V}{C_1 + C_2}
             = \frac{
-                60\,\text{нФ} \cdot 30\,\text{нФ} \cdot 200\,\text{В}
+                40\,\text{нФ} \cdot 60\,\text{нФ} \cdot 150\,\text{В}
             }{
-                60\,\text{нФ} + 30\,\text{нФ}
+                40\,\text{нФ} + 60\,\text{нФ}
             }
-            = 4000{,}00\,\text{нКл}
+            = 3{,}60\,\text{мкКл}
     $
 }
 
@@ -2968,34 +2997,35 @@
 
 \tasknumber{5}%
 \task{%
-    \begin{tikzpicture}[circuit ee IEC, x=1cm, y=1cm, semithick]
+    Два конденсатора ёмкостей $C_1 = 20\,\text{нФ}$ и $C_2 = 40\,\text{нФ}$ последовательно подключают
+    к источнику напряжения $U = 450\,\text{В}$ (см.
+    рис.).
+    % Определите заряды каждого из конденсаторов.
+    Определите заряд второго конденсатора.
+
+    \begin{tikzpicture}[circuit ee IEC, semithick]
         \draw  (0, 0) to [capacitor={info={$C_1$}}] (1, 0)
                        to [capacitor={info={$C_2$}}] (2, 0)
         ;
-        \draw [-o] (0, 0) -- ++(-0.5, 0) node[left] {$-$};
-        \draw [-o] (2, 0) -- ++(0.5, 0) node[right] {$+$};
-
-        \node [right,text width = 14cm, align=justify] at (3.5,0) {
-        Два конденсатора ёмкостей $C_1 = 60\,\text{нФ}$ и $C_2 = 40\,\text{нФ}$ последовательно подключают
-        к источнику напряжения $V = 150\,\text{В}$ (см.
-        рис.).
-        Определите заряды каждого из конденсаторов.
-       };
+        % \draw [-o] (0, 0) -- ++(-0.5, 0) node[left] {$-$};
+        % \draw [-o] (2, 0) -- ++(0.5, 0) node[right] {$+$};
+        \draw [-o] (0, 0) -- ++(-0.5, 0) node[left] {};
+        \draw [-o] (2, 0) -- ++(0.5, 0) node[right] {};
     \end{tikzpicture}
 }
 \answer{%
     $
         Q_1
             = Q_2
-            = CV
-            = \frac{ V }{\frac1{C_1} + \frac1{C_2}}
-            = \frac{C_1C_2V}{C_1 + C_2}
+            = CU
+            = \frac{ U }{\frac1{C_1} + \frac1{C_2}}
+            = \frac{C_1C_2U}{C_1 + C_2}
             = \frac{
-                60\,\text{нФ} \cdot 40\,\text{нФ} \cdot 150\,\text{В}
+                20\,\text{нФ} \cdot 40\,\text{нФ} \cdot 450\,\text{В}
             }{
-                60\,\text{нФ} + 40\,\text{нФ}
+                20\,\text{нФ} + 40\,\text{нФ}
             }
-            = 3600{,}00\,\text{нКл}
+            = 6{,}00\,\text{мкКл}
     $
 }
 
@@ -3068,19 +3098,20 @@
 
 \tasknumber{5}%
 \task{%
-    \begin{tikzpicture}[circuit ee IEC, x=1cm, y=1cm, semithick]
+    Два конденсатора ёмкостей $C_1 = 30\,\text{нФ}$ и $C_2 = 20\,\text{нФ}$ последовательно подключают
+    к источнику напряжения $U = 300\,\text{В}$ (см.
+    рис.).
+    % Определите заряды каждого из конденсаторов.
+    Определите заряд первого конденсатора.
+
+    \begin{tikzpicture}[circuit ee IEC, semithick]
         \draw  (0, 0) to [capacitor={info={$C_1$}}] (1, 0)
                        to [capacitor={info={$C_2$}}] (2, 0)
         ;
-        \draw [-o] (0, 0) -- ++(-0.5, 0) node[left] {$-$};
-        \draw [-o] (2, 0) -- ++(0.5, 0) node[right] {$+$};
-
-        \node [right,text width = 14cm, align=justify] at (3.5,0) {
-        Два конденсатора ёмкостей $C_1 = 20\,\text{нФ}$ и $C_2 = 30\,\text{нФ}$ последовательно подключают
-        к источнику напряжения $U = 400\,\text{В}$ (см.
-        рис.).
-        Определите заряды каждого из конденсаторов.
-       };
+        % \draw [-o] (0, 0) -- ++(-0.5, 0) node[left] {$-$};
+        % \draw [-o] (2, 0) -- ++(0.5, 0) node[right] {$+$};
+        \draw [-o] (0, 0) -- ++(-0.5, 0) node[left] {};
+        \draw [-o] (2, 0) -- ++(0.5, 0) node[right] {};
     \end{tikzpicture}
 }
 \answer{%
@@ -3091,11 +3122,11 @@
             = \frac{ U }{\frac1{C_1} + \frac1{C_2}}
             = \frac{C_1C_2U}{C_1 + C_2}
             = \frac{
-                20\,\text{нФ} \cdot 30\,\text{нФ} \cdot 400\,\text{В}
+                30\,\text{нФ} \cdot 20\,\text{нФ} \cdot 300\,\text{В}
             }{
-                20\,\text{нФ} + 30\,\text{нФ}
+                30\,\text{нФ} + 20\,\text{нФ}
             }
-            = 4800{,}00\,\text{нКл}
+            = 3{,}60\,\text{мкКл}
     $
 }
 
@@ -3168,34 +3199,35 @@
 
 \tasknumber{5}%
 \task{%
-    \begin{tikzpicture}[circuit ee IEC, x=1cm, y=1cm, semithick]
+    Два конденсатора ёмкостей $C_1 = 20\,\text{нФ}$ и $C_2 = 40\,\text{нФ}$ последовательно подключают
+    к источнику напряжения $U = 200\,\text{В}$ (см.
+    рис.).
+    % Определите заряды каждого из конденсаторов.
+    Определите заряд второго конденсатора.
+
+    \begin{tikzpicture}[circuit ee IEC, semithick]
         \draw  (0, 0) to [capacitor={info={$C_1$}}] (1, 0)
                        to [capacitor={info={$C_2$}}] (2, 0)
         ;
-        \draw [-o] (0, 0) -- ++(-0.5, 0) node[left] {$-$};
-        \draw [-o] (2, 0) -- ++(0.5, 0) node[right] {$+$};
-
-        \node [right,text width = 14cm, align=justify] at (3.5,0) {
-        Два конденсатора ёмкостей $C_1 = 30\,\text{нФ}$ и $C_2 = 40\,\text{нФ}$ последовательно подключают
-        к источнику напряжения $V = 200\,\text{В}$ (см.
-        рис.).
-        Определите заряды каждого из конденсаторов.
-       };
+        % \draw [-o] (0, 0) -- ++(-0.5, 0) node[left] {$-$};
+        % \draw [-o] (2, 0) -- ++(0.5, 0) node[right] {$+$};
+        \draw [-o] (0, 0) -- ++(-0.5, 0) node[left] {};
+        \draw [-o] (2, 0) -- ++(0.5, 0) node[right] {};
     \end{tikzpicture}
 }
 \answer{%
     $
         Q_1
             = Q_2
-            = CV
-            = \frac{ V }{\frac1{C_1} + \frac1{C_2}}
-            = \frac{C_1C_2V}{C_1 + C_2}
+            = CU
+            = \frac{ U }{\frac1{C_1} + \frac1{C_2}}
+            = \frac{C_1C_2U}{C_1 + C_2}
             = \frac{
-                30\,\text{нФ} \cdot 40\,\text{нФ} \cdot 200\,\text{В}
+                20\,\text{нФ} \cdot 40\,\text{нФ} \cdot 200\,\text{В}
             }{
-                30\,\text{нФ} + 40\,\text{нФ}
+                20\,\text{нФ} + 40\,\text{нФ}
             }
-            = 3428{,}57\,\text{нКл}
+            = 2{,}67\,\text{мкКл}
     $
 }
 
@@ -3268,19 +3300,20 @@
 
 \tasknumber{5}%
 \task{%
-    \begin{tikzpicture}[circuit ee IEC, x=1cm, y=1cm, semithick]
+    Два конденсатора ёмкостей $C_1 = 20\,\text{нФ}$ и $C_2 = 30\,\text{нФ}$ последовательно подключают
+    к источнику напряжения $V = 300\,\text{В}$ (см.
+    рис.).
+    % Определите заряды каждого из конденсаторов.
+    Определите заряд второго конденсатора.
+
+    \begin{tikzpicture}[circuit ee IEC, semithick]
         \draw  (0, 0) to [capacitor={info={$C_1$}}] (1, 0)
                        to [capacitor={info={$C_2$}}] (2, 0)
         ;
-        \draw [-o] (0, 0) -- ++(-0.5, 0) node[left] {$-$};
-        \draw [-o] (2, 0) -- ++(0.5, 0) node[right] {$+$};
-
-        \node [right,text width = 14cm, align=justify] at (3.5,0) {
-        Два конденсатора ёмкостей $C_1 = 30\,\text{нФ}$ и $C_2 = 20\,\text{нФ}$ последовательно подключают
-        к источнику напряжения $V = 150\,\text{В}$ (см.
-        рис.).
-        Определите заряды каждого из конденсаторов.
-       };
+        % \draw [-o] (0, 0) -- ++(-0.5, 0) node[left] {$-$};
+        % \draw [-o] (2, 0) -- ++(0.5, 0) node[right] {$+$};
+        \draw [-o] (0, 0) -- ++(-0.5, 0) node[left] {};
+        \draw [-o] (2, 0) -- ++(0.5, 0) node[right] {};
     \end{tikzpicture}
 }
 \answer{%
@@ -3291,11 +3324,11 @@
             = \frac{ V }{\frac1{C_1} + \frac1{C_2}}
             = \frac{C_1C_2V}{C_1 + C_2}
             = \frac{
-                30\,\text{нФ} \cdot 20\,\text{нФ} \cdot 150\,\text{В}
+                20\,\text{нФ} \cdot 30\,\text{нФ} \cdot 300\,\text{В}
             }{
-                30\,\text{нФ} + 20\,\text{нФ}
+                20\,\text{нФ} + 30\,\text{нФ}
             }
-            = 1800{,}00\,\text{нКл}
+            = 3{,}60\,\text{мкКл}
     $
 }
 % autogenerated
