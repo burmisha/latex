@@ -153,6 +153,7 @@ def run(args):
             'https://www.youtube.com/watch?v=jKw3n1Gsrtw': '2021 - Александр Гудков - АКВАДИСКОТЕКА',
             'https://www.youtube.com/watch?v=-vt3FHuqDM0': '2021 - Следственный комитет - поздравление с днём рождения',
             'https://www.youtube.com/watch?v=2k9CIfJsONw': '2021 - The Trial of the Chicago 7 - FULL FEATURE - Netflix',
+            'https://www.youtube.com/watch?v=dOR41kRQ2tg': '2017 - American Anarchist - Американский анархист',
         },
     }
     for dirname, videos in videos_download_cfg.items():
