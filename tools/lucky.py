@@ -1,4 +1,5 @@
 import library.pupils
+import library.datetools
 
 import random
 import time
@@ -7,8 +8,11 @@ import logging
 log = logging.getLogger(__name__)
 
 
-def getLucky(grade=None, count=None, seed=None):
-    className = f'2020 {grade}'
+def get_lucky(grade=None, count=None, seed=None):
+    now_ts = int(time.time())
+    if not seed:
+        seed = now_ts
+    className = library.datetools.formatTimestamp(now_ts, f'%Y-%m-%d {grade}')
     pupilsList = list(library.pupils.get_class_from_string(className).Iterate())
     random.seed(seed)
     random.shuffle(pupilsList)
@@ -20,11 +24,11 @@ def getLucky(grade=None, count=None, seed=None):
 
 
 def run(args):
-    getLucky(grade=args.grade, count=args.count, seed=args.seed)
+    get_lucky(grade=args.grade, count=args.count, seed=args.seed)
 
 
 def populate_parser(parser):
     parser.add_argument('-g', '--grade', help='Grade', type=int, choices=[9, 10])
     parser.add_argument('-c', '--count', help='Count', type=int)
-    parser.add_argument('-s', '--seed', help='Random seed (default is now)', type=int, default=int(time.time()))
+    parser.add_argument('-s', '--seed', help='Random seed (None or 0 is now)', type=int, default=0)
     parser.set_defaults(func=run)
