@@ -192,11 +192,11 @@ class UnitValue:
 
     def _apply_pipes(self, line, pipes):
         pipes_dict = {
-            's': '{{ {} }}',
+            's': '{{{}}}',
             'b': '\\left({}\\right)',
             'e': '${}$',
-            'sqr': '\\sqr{{ {} }}',
-            'sqrt': '\\sqrt{{ {} }}',
+            'sqr': '\\sqr{{{}}}',
+            'sqrt': '\\sqrt{{{}}}',
             'cdot': '{} \\cdot'
         }
         for pipe in pipes:

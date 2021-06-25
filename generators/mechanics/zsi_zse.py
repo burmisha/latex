@@ -45,7 +45,7 @@ class Ch_3_1(variant.VariantTask):
 @variant.answer_align([
     '{p1:L} &= {m:L}{v1:L} = {m:Value} * {v1:Value} = {p1:Value},',
     '{p2:L} &= {m:L}{v2:L} = {m:Value} * {v2:Value} = {p2:Value},',
-    '{p:L} &= \\abs{ {p1:L} - {p2:L} } = \\abs{ {m:L}({v1:L} - {v2:L}) }= {p:Value}.',
+    '{p:L} &= \\abs{{p1:L} - {p2:L}} = \\abs{{m:L}({v1:L} - {v2:L})}= {p:Value}.',
 ])
 @variant.answer_test('{p:TestAnswer}')
 @variant.arg(m=['m = %d кг' % m for m in [2, 5, 10]])
@@ -74,7 +74,7 @@ class Ch_3_2(variant.VariantTask):
 @variant.answer_align([
     '{p1:L} &= {m:L}{v1:L} = {m:Value} * {v1:Value} = {p1:Value},',
     '{p2:L} &= {m:L}{v2:L} = {m:Value} * {v2:Value} = {p2:Value},',
-    '{p:L} &= \\sqrt{ {p1:L}^2 + {p2:L}^2 } = {m:L}\\sqrt{ {v1:L}^2 + {v2:L}^2 } = {p:Value}.',
+    '{p:L} &= \\sqrt{{p1:L}^2 + {p2:L}^2} = {m:L}\\sqrt{{v1:L}^2 + {v2:L}^2} = {p:Value}.',
 ])
 @variant.answer_test('{p:TestAnswer}')
 @variant.arg(v1__v2__v=[(
@@ -121,8 +121,8 @@ class Ch_3_6(variant.VariantTask):
     а также определите скорость их совместного движения.
 ''')
 @variant.answer_align([
-    '\\text{ ЗСИ: } &M * v + {n} * \\cbr{ m * 0 } =  M * u + {n} * \\cbr{ m * u } \\implies',
-    '&\\implies u = v * \\frac{ M }{ M + nm } = {v:Value} *  \\frac{M:Value|s}{ {M:Value} + {n} * {m:Value} } \\approx {u:Value}.',
+    '\\text{ЗСИ: } &M * v + {n} * \\cbr{m * 0} =  M * u + {n} * \\cbr{m * u} \\implies',
+    '&\\implies u = v * \\frac M{M + nm} = {v:Value} *  \\frac{M:Value|s}{{M:Value} + {n} * {m:Value}} \\approx {u:Value}.',
 ])
 @variant.arg(M=['M = %d т' % M for M in [120, 150, 210]])
 @variant.arg(m=['m = %d т' % m for m in [30, 40, 50]])
@@ -143,9 +143,9 @@ class Ch_3_24(variant.VariantTask):
 # @variant.arg(v=['v = %f м / с' % v for v in [3, 4, 5, 6]])
 # @variant.arg(u=['u = %.1f м / с' % u for u in [1.0, 1.5, 2.0]])
 @variant.answer_align([
-    '&\\text{ ЗСИ в проекции на ось, соединяющую центры тел: } m_1 v_1 - m_2 v_1 = (m_1 + m_2) v_2 \\implies',
-    '''&\\implies \\frac{ m_1 }{ m_2 } v_1 - v_1 = \\cbr{ \\frac{ m_1 }{ m_2 } + 1 } v_2 \\implies
-    \\frac{ m_1 }{ m_2 } (v_1 - v_2) = v_2 + v_1 \\implies \\frac{ m_1 }{ m_2 } = \\frac{ v_2 + v_1 }{ v_1 - v_2 } = {answer}''',
+    '&\\text{ЗСИ в проекции на ось, соединяющую центры тел: } m_1 v_1 - m_2 v_1 = (m_1 + m_2) v_2 \\implies',
+    '''&\\implies \\frac{m_1}{m_2} v_1 - v_1 = \\cbr{\\frac{m_1}{m_2} + 1} v_2 \\implies
+    \\frac{m_1}{m_2} (v_1 - v_2) = v_2 + v_1 \\implies \\frac{m_1}{m_2} = \\frac{v_2 + v_1}{v_1 - v_2} = {answer}''',
 ])
 @variant.answer_test('{answer}')
 @variant.arg(v1__v2=[(
@@ -176,9 +176,9 @@ class Ch_3_26(variant.VariantTask):
     Определите во сколько раз уменьшилась скорость шара после столкновения.
 ''')
 @variant.answer_align([
-    '&\\text{ ЗСИ в проекции на ось, соединяющую центры тел: } ',
+    '&\\text{ЗСИ в проекции на ось, соединяющую центры тел: } ',
     '&mv + {N}m * 0 = (m + {N}m) v\' \\implies',
-    '&v\' = v\\frac{ m }{ {N}m + m } = \\frac{ v }{ {N} + 1 } \\implies \\frac{ v }{ v\' } = {answer}',
+    '&v\' = v\\frac m{{N}m + m} = \\frac v{{N} + 1} \\implies \\frac v{v\'} = {answer}',
 ])
 @variant.answer_test('{answer}')
 @variant.arg(N=list(range(5, 15)))
@@ -194,9 +194,9 @@ class Vishnyakova_1_4_6(variant.VariantTask):
     требуется совершить работу {A1:Value:e}. Какую работу нужно совершить, чтобы увеличить скорость этого тела от $v$ до ${n}v$?
 ''')
 @variant.answer_align([
-    '&\\text{ Изменение кинетической энергии равно работе внешних сил: }',
-    '&A_1 = \\frac{ mv^2 }2 - \\frac{ m * 0^2 }2 = \\frac{ mv^2 }2, A_2 = \\frac{ m\\sqr{ {n}v } }2 - \\frac{ mv^2 }2 \\implies ',
-    '&\\implies A_2 = \\frac{ mv^2 }2 \\cbr{ {n}^2 - 1 } = A_1 * \\cbr{ {n}^2 - 1 } = {A2:Value}.'
+    '&\\text{Изменение кинетической энергии равно работе внешних сил: }',
+    '&A_1 = \\frac{mv^2}2 - \\frac{m * 0^2}2 = \\frac{mv^2}2, A_2 = \\frac{m\\sqr{{n}v }}2 - \\frac{mv^2}2 \\implies ',
+    '&\\implies A_2 = \\frac{mv^2}2 \\cbr{{n}^2 - 1} = A_1 * \\cbr{{n}^2 - 1} = {A2:Value}.'
 ])
 @variant.answer_test('{A2:TestAnswer}')
 @variant.arg(A1=['A = %d Дж' % A for A in [10, 20, 40, 100, 200]])
@@ -214,9 +214,9 @@ class Vishnyakova_1_4_12(variant.VariantTask):
     % Примите {Consts.g_ten:Task:e}.
 ''')
 @variant.answer_align([
-    '&\\text{ Для подъёма: } A = Fh = (mg + ma) h = m(g+a)h,',
-    '&\\text{ Для спуска: } A = -Fh = -(mg - ma) h = -m(g-a)h,',
-    '&\\text{ В результате получаем: } {A:Task}.',
+    '&\\text{Для подъёма: } A = Fh = (mg + ma) h = m(g+a)h,',
+    '&\\text{Для спуска: } A = -Fh = -(mg - ma) h = -m(g-a)h,',
+    '&\\text{В результате получаем: } {A:Task}.',
 ])
 @variant.answer_test('{A:TestAnswer}')
 @variant.arg(what__mult=[('подъём', +1), ('спуск', -1)])
@@ -236,8 +236,8 @@ class Ch_4_2(variant.VariantTask):
     Пренебрегая сопротивлением воздуха и считая падение тела свободным, определите работу силы тяжести в течение наблюдаемого промежутка времени.
 ''')
 @variant.answer_align([
-    '&\\text{ Изменение кинетической энергии равно работе внешних сил: }',
-    '&\\Delta E_k = E_k\' - E_k = A_\\text{ тяж } \\implies A_\\text{ тяж } = \\frac{ mv\'^2 }2 - \\frac{ mv_0^2 }2 = {A:Value}.'
+    '&\\text{Изменение кинетической энергии равно работе внешних сил: }',
+    '&\\Delta E_k = E_k\' - E_k = A_\\text{тяж} \\implies A_\\text{тяж} = \\frac{mv\'^2}2 - \\frac{mv_0^2}2 = {A:Value}.'
 ])
 @variant.answer_test('{A:TestAnswer}')
 @variant.arg(how=['вертикально вверх', 'горизонтально', 'под углом $45\\degrees$ к горизонту', 'под углом $30\\degrees$ к горизонту'])
@@ -259,7 +259,7 @@ class Ch_4_29(variant.VariantTask):
     \\end{itemize}
     % Примите {Consts.g_ten:Task:e}.
 ''')
-@variant.answer_short('F = \\frac{ mg }2 \\approx {F:V}, A = mg\\frac l2 = {A:V}')
+@variant.answer_short('F = \\frac{mg}2 \\approx {F:V}, A = mg\\frac l2 = {A:V}')
 @variant.answer_test('{A:TestAnswer}')
 @variant.arg(what=['лом', 'шест', 'кусок арматуры'])
 @variant.arg(m=['m = %d кг' % m for m in [10, 20, 30]])
@@ -280,9 +280,9 @@ class Ch_4_45(variant.VariantTask):
 @variant.arg(how__n=[('половину', 2), ('треть', 3)])
 @variant.arg(v=('v_0 = {} м / c', [10, 14, 20]))
 @variant.answer_align([
-    '0 + \\frac{ mv_0^2 }2 = E_p + E_k, E_k = \\frac 1{n} E_p \\implies',
-    '\\implies \\frac{ mv_0^2 }2 = E_p + \\frac 1{n} E_p = E_p\\cbr{ 1 + \\frac 1{n} } = mgh\\cbr{ 1 + \\frac 1{n} } \\implies',
-    '\\implies h = \\frac{ \\frac{ mv_0^2 }2 }{ mg\\cbr{ 1 + \\frac 1{n} } } = \\frac{ v_0^2 }{ 2g } * \\frac 1{ 1 + \\frac 1{n} } \\approx {h:V}.'
+    '0 + \\frac{mv_0^2}2 = E_p + E_k, E_k = \\frac 1{n} E_p \\implies',
+    '\\implies \\frac{mv_0^2}2 = E_p + \\frac 1{n} E_p = E_p\\cbr{1 + \\frac 1{n}} = mgh\\cbr{1 + \\frac 1{n}} \\implies',
+    '\\implies h = \\frac{\\frac{mv_0^2}2}{mg\\cbr{1 + \\frac 1{n}}} = \\frac{v_0^2}{2g} * \\frac 1{1 + \\frac 1{n}} \\approx {h:V}.'
     ])
 class Ek_ratio_Ep(variant.VariantTask):
     def GetUpdate(self, how=None, n=None, v=None, **kws):

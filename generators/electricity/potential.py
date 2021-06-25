@@ -14,7 +14,7 @@ from generators.helpers import Consts
 ''')
 @variant.answer_align([
     'A &= F * {l:L} * \\cos \\alpha = {E:L}{q:L} * {l:L} * 1 = {E:L}{q:L}{l:L} = {E:Value} * {q:Value} * {l:Value} = {A:V},',
-    '\\Delta E_\\text{ пот. } &= -A = {dE:V}'
+    '\\Delta E_\\text{пот.} &= -A = {dE:V}'
 ])
 @variant.arg(q=['%s = %d нКл' % (ql, qv) for ql in ['Q', 'q'] for qv in [-10, 10, -25, 25, -40, 40]])
 @variant.arg(l=['%s = %d см' % (ll, lv) for ll in ['l', 'r', 'd'] for lv in [2, 4, 5, 10]])
@@ -38,7 +38,7 @@ class A_from_Q_E_l(variant.VariantTask):  # Рымкевич 728(737)
 @variant.arg(U=['%s = %d кВ' % (ul, uv) for ul in ['U', 'V'] for uv in [2, 3, 4, 5, 6]])
 @variant.arg(l=['%s = %d см' % (ll, lv) for ll in ['l', 'r', 'd'] for lv in [10, 20, 30, 40]])
 @variant.answer_short('''
-    E_x = -\\frac{ \\Delta \\varphi }{ \\Delta x } \\implies
+    E_x = -\\frac{\\Delta \\varphi}{\\Delta x} \\implies
     E = \\frac{U:L:s}{l:L:s} = \\frac{U:V:s}{l:V:s} = {E:V}.
 ''')
 class E_from_U_l(variant.VariantTask):  # Рымкевич 735(737)
@@ -62,7 +62,7 @@ class Potential737(variant.VariantTask):  # Рымкевич 737(739)
 
 @variant.solution_space(40)
 @variant.text('При какой скорости {what} его кинетическая энергия равна {E:Task:e}?')
-@variant.arg(E=('E_\\text{{ к }} = {} эВ', [4, 8, 20, 30, 40, 50, 200, 400, 600, 1000]))
+@variant.arg(E=('E_\\text{{к}} = {} эВ', [4, 8, 20, 30, 40, 50, 200, 400, 600, 1000]))
 @variant.arg(what=['электрона', 'позитрона', 'протона', 'нейтрона'])
 class v_from_Ev_m(variant.VariantTask):  # 2335 Gendenshteyn
     pass
@@ -79,10 +79,10 @@ class v_from_Ev_m(variant.VariantTask):  # 2335 Gendenshteyn
 @variant.arg(V=['\\varphi = %d В' % Vv for Vv in [200, 400, 600, 800, 1000]])
 @variant.arg(what=['Электрон $e^-$', 'Позитрон $e^+$'])
 @variant.answer_align([
-    'A_\\text{ внешних сил } &= \\Delta E_\\text{ кин. } \\implies A_\\text{ эл. поля } = 0 - \\frac{ mv^2 }2.',
-    'A_\\text{ эл. поля } &= q(\\varphi_1 - \\varphi_2) \\implies'
-    '\\varphi_2 = \\varphi_1 - \\frac{ A_\\text{ эл. поля } }q = \\varphi_1 - \\frac{ - \\frac{ mv^2 }2 }q = \\varphi_1 + \\frac{ mv^2 }{ 2q } = ',
-    '&= {V:Value} + \\frac{ {Consts.m_e:V} * {v:V|sqr} }{ 2 {sign} * {Consts.e:V} } \\approx {V2:V}.'
+    'A_\\text{внешних сил} &= \\Delta E_\\text{кин.} \\implies A_\\text{эл. поля} = 0 - \\frac{mv^2}2.',
+    'A_\\text{эл. поля} &= q(\\varphi_1 - \\varphi_2) \\implies'
+    '\\varphi_2 = \\varphi_1 - \\frac{A_\\text{эл. поля}}q = \\varphi_1 - \\frac{- \\frac{mv^2}2}q = \\varphi_1 + \\frac{mv^2}{2q} = ',
+    '&= {V:Value} + \\frac{{Consts.m_e:V} * {v:V|sqr}}{2 {sign} * {Consts.e:V}} \\approx {V2:V}.'
 ])
 class Phi_from_static_e(variant.VariantTask):  # Гольдфарб 16.21, Вишнякова 3.1.7
     def GetUpdate(self, v=None, V=None, what=None, **kws):
@@ -110,10 +110,10 @@ class Phi_from_static_e(variant.VariantTask):  # Гольдфарб 16.21, Ви�
 @variant.arg(V=['\\varphi = %d В' % Vv for Vv in [200, 400, 600, 800, 1000]])
 @variant.arg(what=['Электрон $e^-$', 'Позитрон $e^+$'])
 @variant.answer_align([
-    'A_\\text{ внешних сил } &= \\Delta E_\\text{ кин. } \\implies A_\\text{ эл. поля } = 0 - \\frac{ mv^2 }2.',
-    'A_\\text{ эл. поля } &= q(\\varphi_1 - \\varphi_2) \\implies'
-    '\\varphi_2 = \\varphi_1 - \\frac{ A_\\text{ эл. поля } }q = \\varphi_1 - \\frac{ - \\frac{ mv^2 }2 }q = \\varphi_1 + \\frac{ mv^2 }{ 2q } = ',
-    '&= {V:Value} + \\frac{ {Consts.m_e:V} * {v:V|sqr} }{ 2 {sign} * {Consts.e:V} } \\approx {V2:V}.'
+    'A_\\text{внешних сил} &= \\Delta E_\\text{кин.} \\implies A_\\text{эл. поля} = 0 - \\frac{mv^2}2.',
+    'A_\\text{эл. поля} &= q(\\varphi_1 - \\varphi_2) \\implies'
+    '\\varphi_2 = \\varphi_1 - \\frac{A_\\text{эл. поля}}q = \\varphi_1 - \\frac{- \\frac{mv^2}2}q = \\varphi_1 + \\frac{mv^2}{2q} = ',
+    '&= {V:Value} + \\frac{{Consts.m_e:V} * {v:V|sqr}}{2 {sign} * {Consts.e:V}} \\approx {V2:V}.'
 ])
 class Phi_from_static_e(variant.VariantTask):  # 1621 Goldfarb
     def GetUpdate(self, v=None, V=None, what=None, **kws):
@@ -153,16 +153,16 @@ class A_from_motion(variant.VariantTask):  # Вишнякова 3.1.8
     На рисунке показано расположение трёх металлических пластин и указаны их потенциалы.
     Размеры пластин кораздо больше расстояния между ними. Отмечены также ось и начало координат.
     Дорисуйте на рисунке электрическое поле и постройте графики зависимости от координаты $x$:
-    \\begin{ enumerate }
+    \\begin{enumerate}
         \\item проекции напряжённости электрического поля,
         \\item потенциала электрического поля.
-    \\end{ enumerate }
+    \\end{enumerate}
     \\begin{tikzpicture}
-        \\draw[-{ Latex }] (0, 0) -- (0, 3.5) node[below right] { $x$ };
+        \\draw[-{Latex}] (0, 0) -- (0, 3.5) node[below right] {$x$};
         \\draw[thick]
-            (-0.05, 0.5) -- (0.05, 0.5)     (0, 0.5) node[left] { $-{d:V}$ }     (0.5, 0.5) -- (4, 0.5) node[right] { {phi_1:V:e} }
-            (-0.05, 1.5) -- (0.05, 1.5)     (0, 1.5) node[left] { $0$ }         (0.5, 1.5) -- (4, 1.5) node[right] { {zero:V:e} }
-            (-0.05, 2.5) -- (0.05, 2.5)     (0, 2.5) node[left] { ${d:V}$ }    (0.5, 2.5) -- (4, 2.5) node[right] { {phi_2:V:e} };
+            (-0.05, 0.5) -- (0.05, 0.5)     (0, 0.5) node[left] {$-{d:V}$}     (0.5, 0.5) -- (4, 0.5) node[right] {{phi_1:V:e}}
+            (-0.05, 1.5) -- (0.05, 1.5)     (0, 1.5) node[left] {$0$}         (0.5, 1.5) -- (4, 1.5) node[right] {{zero:V:e}}
+            (-0.05, 2.5) -- (0.05, 2.5)     (0, 2.5) node[left] {${d:V}$}    (0.5, 2.5) -- (4, 2.5) node[right] {{phi_2:V:e}};
     \\end{tikzpicture}
 ''')
 @variant.arg(d=('d = {} см', [2, 3]))
@@ -177,13 +177,13 @@ class E_phi_graphs(variant.VariantTask):
 
 @variant.solution_space(0)
 @variant.text('''
-    \\begin{ enumerate }
+    \\begin{enumerate}
         \\item Запишите {first}.
         \\item Из теоремы Гаусса выведите (нужен рисунок, применение и результат) формулу для напряженности электростатического поля {what}.
         \\item Зарисуйте электрическое поле точечного {second} электрического заряда.
         \\item Запишите формулу для вычисления {third} электрического поля точечного заряда в диэлектрике.
         \\item Запишите принцип суперпозиции (правило сложения) {fourth}.
-    \\end{ enumerate }
+    \\end{enumerate}
 ''')
 @variant.arg(first=['теорему Гаусса', 'закон Кулона (в диэлектрике)', 'закон сохранения электрического заряда'])
 @variant.arg(what=['снаружи равномерно заряженной сферы', 'внутри равномерно заряженной сферы', 'около равномерно заряженной бесконечной плоскости'])

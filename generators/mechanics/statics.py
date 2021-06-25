@@ -15,7 +15,7 @@ from generators.helpers import Consts, Fraction, UnitValue
        		(-2, -0.1) -- +(0.15,-0.9) -- +(-0.15,-0.9) -- cycle
         	(2, -0.1) -- +(0.15,-0.9) -- +(-0.15,-0.9) -- cycle
         ;
-        \\draw[pattern={ Lines[angle=51,distance=2pt] },pattern color=black,draw=none]
+        \\draw[pattern={Lines[angle=51,distance=2pt]},pattern color=black,draw=none]
         	(-2.15, -1.15) rectangle +(0.3, 0.15)
         	(2.15, -1.15) rectangle +(-0.3, 0.15)
         ;
@@ -34,8 +34,8 @@ from generators.helpers import Consts, Fraction, UnitValue
             F_1 + F_2 - mg - Mg= 0, \\\\
             F_1 * 0 - mg * a - Mg * \\frac l2 + F_2 * l = 0,
         \\end{cases} \\\\
-        F_2 &= \\frac{ mga + Mg\\frac l2 }l = \\frac al * mg + \\frac{ Mg }2 \\approx {F2:Value}, \\\\
-        F_1 &= mg + Mg - F_2 = mg + Mg - \\frac al * mg - \\frac{ Mg }2 = \\frac bl * mg + \\frac{ Mg }2 \\approx {F1:Value}.
+        F_2 &= \\frac{mga + Mg\\frac l2}l = \\frac al * mg + \\frac{Mg}2 \\approx {F2:Value}, \\\\
+        F_1 &= mg + Mg - F_2 = mg + Mg - \\frac al * mg - \\frac{Mg}2 = \\frac bl * mg + \\frac{Mg}2 \\approx {F1:Value}.
     \\end{align*}
 '''
 )

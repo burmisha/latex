@@ -7,8 +7,8 @@ from generators.helpers import Consts
     Определите высоту столба жидкости. Принять {rho:Task|e}, {Consts.g_ten:Task|e}.
 ''')
 @variant.answer_short(
-    '{p:L} = {rho:L}g{h:L} \\implies {h:L} = \\frac{p:L:s}{ g{rho:L} } '
-    '= \\frac{ {p:Value:s} }{ {Consts.g_ten:Value} * {rho:Value} } = {h:Value}.'
+    '{p:L} = {rho:L}g{h:L} \\implies {h:L} = \\frac{p:L:s}{g{rho:L}} '
+    '= \\frac{{p:Value:s}}{{Consts.g_ten:Value} * {rho:Value}} = {h:Value}.'
 )
 @variant.answer_test('{h:TestAnswer}')
 @variant.arg(matter__rho__p=[
@@ -46,8 +46,8 @@ class Ch_6_3(variant.VariantTask):
 ''')
 @variant.answer_short(
     'p = {Consts.water.rho:L} {Consts.g_ten:L} {h:L} + {Consts.p_atm:L} = {N} {Consts.p_atm:L} \\implies '
-    '{h:L} = \\frac{ ({N}-1) {Consts.p_atm:L} }{ {Consts.g_ten:L} {Consts.water.rho:L} } '
-    '= \\frac{ ({N}-1) * {Consts.p_atm:Value} }{ {Consts.g_ten:Value} * {Consts.water.rho:Value} } = {h:Value}.'
+    '{h:L} = \\frac{({N}-1) {Consts.p_atm:L}}{{Consts.g_ten:L} {Consts.water.rho:L}} '
+    '= \\frac{({N}-1) * {Consts.p_atm:Value}}{{Consts.g_ten:Value} * {Consts.water.rho:Value}} = {h:Value}.'
 )
 @variant.answer_test('{h:TestAnswer}')
 @variant.arg(N=[2, 3, 4, 5, 6, 7, 8, 9, 10])
@@ -66,7 +66,7 @@ class Ch_6_8(variant.VariantTask):
 ''')
 @variant.answer_short(
     '\\Delta F = {m:L}{Consts.g_ten:L}, '
-    '\\Delta p = \\frac{ \\Delta F }{S:L|s} = \\frac{ {m:L}{Consts.g_ten:L} }{S:L|s}, '
+    '\\Delta p = \\frac{\\Delta F}{S:L|s} = \\frac{{m:L}{Consts.g_ten:L}}{S:L|s}, '
     '{ans:Task}.'
 )
 @variant.answer_test('{ans:TestAnswer}')
@@ -96,7 +96,7 @@ class Ch_6_10(variant.VariantTask):
 ''')
 @variant.answer_short(
     '{rho:L}{Consts.g_ten:L}{h1:L} = {Consts.water.rho:L}{Consts.g_ten:L}{h2:L} \\implies '
-    '{h2:L} = {h1:L} \\frac{rho:L:s}{Consts.water.rho:L:s} } '
+    '{h2:L} = {h1:L} \\frac{rho:L:s}{Consts.water.rho:L:s}} '
     '= {h1:Value} * \\frac{rho:Value:s}{Consts.water.rho:Value:s} '
     '= {h2:Value}'
 )
@@ -137,10 +137,10 @@ class Ch_6_16(variant.VariantTask):
 ''')
 @variant.answer_align([
     '{S1:L}h_1 &= {S2:L}h_2 \\implies h_1 = h_2 \\frac{S2:L:s}{S1:L:s} ',
-    '\\frac{ {m:L}{Consts.g_ten:L} }{S1:L:s} &= {Consts.water.rho:L}{Consts.g_ten:L}(h_1 + h_2) '
-    '= {Consts.water.rho:L}{Consts.g_ten:L} * h_2 \\cbr{ 1 + \\frac{S2:L:s}{S1:L:s} }',
-    'h_2 &= \\frac{ {m:L}{Consts.g_ten:L} }{ {S1:L}{Consts.water.rho:L}{Consts.g_ten:L} } * '
-    '\\frac{S1:L:s}{ {S1:L} + {S2:L} } = \\frac{m:L:s}{ {Consts.water.rho:L}({S1:L} + {S2:L}) }'
+    '\\frac{{m:L}{Consts.g_ten:L}}{S1:L:s} &= {Consts.water.rho:L}{Consts.g_ten:L}(h_1 + h_2) '
+    '= {Consts.water.rho:L}{Consts.g_ten:L} * h_2 \\cbr{1 + \\frac{S2:L:s}{S1:L:s}}',
+    'h_2 &= \\frac{{m:L}{Consts.g_ten:L}}{{S1:L}{Consts.water.rho:L}{Consts.g_ten:L}} * '
+    '\\frac{S1:L:s}{{S1:L} + {S2:L}} = \\frac{m:L:s}{{Consts.water.rho:L}({S1:L} + {S2:L})}'
     ' = {h2:Value}',
 ])
 @variant.answer_test('{h2:TestAnswer}')
@@ -171,9 +171,9 @@ class Ch_6_20(variant.VariantTask):
 @variant.arg(matter__rho=[('подсолнечное масло', 900), ('керосин', 800)])
 @variant.arg(how__n=[('половину', 2), ('треть', 3), ('четверть', 4)])
 @variant.answer_short(
-    'F_\\text{ Арх. } = F_\\text{ тяж. } \\implies \\rho_\\text{ ж. } g V_\\text{ погр. } = m g \\implies'
-    '\\rho_\\text{ ж. } g \\cbr{ V -\\frac V{n} } = \\rho V g \\implies '
-    '\\rho = \\rho_\\text{ ж. }\\cbr{ 1 -\\frac 1{n} } \\approx {rho2:V}'
+    'F_\\text{Арх.} = F_\\text{тяж.} \\implies \\rho_\\text{ж.} g V_\\text{погр.} = m g \\implies'
+    '\\rho_\\text{ж.} g \\cbr{V -\\frac V{n}} = \\rho V g \\implies '
+    '\\rho = \\rho_\\text{ж.}\\cbr{1 -\\frac 1{n}} \\approx {rho2:V}'
 )
 class Rho_from_n(variant.VariantTask):
     def GetUpdate(self, matter=None, rho=None, how=None, n=None, **kws):

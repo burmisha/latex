@@ -41,7 +41,7 @@ class Definitions02(variant.VariantTask):
 @variant.answer_short('''
     Q
         = \\lambda m \\implies m
-        = \\frac Q{ \\lambda }
+        = \\frac Q{\\lambda}
         = \\frac {Q:Value:s}{lmbd:Value:s}
         \\approx {m:Value}
 ''')
@@ -62,7 +62,7 @@ class Ch_8_6(variant.VariantTask):
     Q
         = - \\lambda m
         = - {lmbd:Value} * {m:Value}
-        = - {Q:Value} \\implies \\abs{ Q } = {Q:Value}
+        = - {Q:Value} \\implies \\abs{Q:L:s} = {Q:Value}
 ''')
 @variant.arg(metall__lmbd=[
     ('свинца', Consts.lead.lmbd),
@@ -80,13 +80,13 @@ class Ch_8_7(variant.VariantTask):
 
 @variant.text('''
     Какое количество теплоты необходимо для превращения воды массой {m:Value:e} при $t = {t}\\celsius$
-    в пар при температуре $t_{ 100 } = 100\\celsius$?
+    в пар при температуре $t_{100} = 100\\celsius$?
 ''')
 @variant.answer_short('''
     Q
         = cm\\Delta t + Lm
-        = m\\cbr{ c(t_{ 100 } - t) + L }
-        = {m:Value} * \\cbr{ {c:Value}\\cbr{ 100\\celsius - {t}\\celsius } + {L:Value} }
+        = m\\cbr{c(t_{100} - t) + L}
+        = {m:Value} * \\cbr{{c:Value}\\cbr{100\\celsius - {t}\\celsius} + {L:Value}}
         = {Q:Value}
 ''')
 @variant.arg(m=['m = %d кг' % m for m in [2, 3, 4, 5, 15]])
@@ -103,16 +103,16 @@ class Ch_8_10(variant.VariantTask):
 
 
 @variant.text('''
-    Воду температурой $t = {t}\\celsius$ нагрели и превратили в пар при температуре $t_{ 100 } = 100\\celsius$,
+    Воду температурой $t = {t}\\celsius$ нагрели и превратили в пар при температуре $t_{100} = 100\\celsius$,
     потратив {Q:Value:e}. Определите массу воды.
 ''')
 @variant.answer_short('''
     Q
         = cm\\Delta t + Lm
-        = m\\cbr{ c(t_{ 100 } - t) + L }
+        = m\\cbr{c(t_{100} - t) + L}
     \\implies
-    m = \\frac{ Q }{ c(t_{ 100 } - t) + L }
-        = \\frac {Q:Value:s}{ {c:Value}\\cbr{ 100\\celsius - {t}\\celsius } + {L:Value} }
+    m = \\frac Q{c(t_{100} - t) + L}
+        = \\frac {Q:Value:s}{{c:Value}\\cbr{100\\celsius - {t}\\celsius} + {L:Value}}
         \\approx {m:Value}
 ''')
 @variant.arg(Q=['Q = %d кДж' % Q for Q in [2000, 2500, 4000, 5000]])
@@ -141,8 +141,8 @@ class Ch_8_13(variant.VariantTask):
     'c_1 (\\theta - t_1) + c_2 (\\theta - t_2) &= 0, ',
     'c_1 \\theta - c_1 t_1 + c_2 \\theta - c_2 t_2 &= 0, ',
     '(c_1 + c_2)\\theta &= c_1 t_1 + c_2 t_2, ',
-    '''\\theta &= \\frac{ c_1 t_1 + c_2 t_2 }{ c_1 + c_2 }
-        = \\frac{ {c1:Value} * {t1}\\celsius + {c2:Value} *  {t2}\\celsius }{ {c1:Value} + {c2:Value} }
+    '''\\theta &= \\frac{c_1 t_1 + c_2 t_2}{c_1 + c_2}
+        = \\frac{{c1:Value} * {t1}\\celsius + {c2:Value} *  {t2}\\celsius}{{c1:Value} + {c2:Value}}
         \\approx {theta} \\celsius.''',
 ])
 @variant.arg(metall__c=[
@@ -212,7 +212,7 @@ class V_from_P_and_U(variant.VariantTask):
 @variant.arg(V2=('V_2 = {} л', [450, 550, 650]))
 @variant.arg(P=('P = {} атм', [1.2, 1.5, 1.8, 2.5, 3.5]))
 @variant.answer_short(
-    'A = P\\Delta V = P(V_2 - V_1) = {P:V} * \\cbr{ {V2:V} - {V1:V} } = {A:V}.'
+    'A = P\\Delta V = P(V_2 - V_1) = {P:V} * \\cbr{{V2:V} - {V1:V}} = {A:V}.'
 )
 class A_on_P_const(variant.VariantTask):
     def GetUpdate(self, P=None, V1=None, V2=None, **kws):
@@ -234,9 +234,9 @@ class A_on_P_const(variant.VariantTask):
 @variant.answer_align([
     'P_1V_1 &= \\nu R T_1, P_2V_2 = \\nu R T_2,',
     '\\Delta U &= U_2-U_1 = \\frac 32 \\nu R T_2- \\frac 32 \\nu R T_1 = \\frac 32 P_2 V_2 - \\frac 32 P_1 V_1'
-    '= \\frac 32 * \\cbr{ {P2:V} * {V2:V} - {P1:V} * {V1:V} } = {dU:V}.',
-    '\\frac{ T_2 }{ T_1 } &= \\frac{ \\frac{ P_2V_2 }{ \\nu R } }{ \\frac{ P_1V_1 }{ \\nu R } } = \\frac{ P_2V_2 }{ P_1V_1 }'
-    '= \\frac{ {P2:V} * {V2:V} }{ {P1:V} * {V1:V} } \\approx {ratio}.',
+    '= \\frac 32 * \\cbr{{P2:V} * {V2:V} - {P1:V} * {V1:V}} = {dU:V}.',
+    '\\frac{T_2}{T_1} &= \\frac{\\frac{P_2V_2}{\\nu R}}{\\frac{P_1V_1}{\\nu R}} = \\frac{P_2V_2}{P_1V_1}'
+    '= \\frac{{P2:V} * {V2:V}}{{P1:V} * {V1:V}} \\approx {ratio}.',
 ])
 class DeltaU_on_P_const(variant.VariantTask):
     def GetUpdate(self, P1=None, P2=None, V1=None, V2=None, **kws):
@@ -258,7 +258,7 @@ class DeltaU_on_P_const(variant.VariantTask):
 @variant.answer_short('''
     \\Delta U = \\frac 32 \\nu R {dT:Letter}
         = {sgn} \\frac 32 * {nu:V} * {Consts.R:V} * {dT:V}
-        = {dU:V}. \\text{ {ans}. }
+        = {dU:V}. \\text{{ans}.}
 ''')
 class DeltaU_from_DeltaT(variant.VariantTask):
     def GetUpdate(self, what=None, sign=None, nu=None, dT=None, **kws):
@@ -279,10 +279,10 @@ class DeltaU_from_DeltaT(variant.VariantTask):
 @variant.arg(nu=('\\nu = {} моль', [30, 40, 50, 60]))
 @variant.arg(dT=('\\Delta T = {} К', [15, 25, 45, 60, 80, 120]))
 @variant.answer_align([
-    'Q &= 0, Q = \\Delta U + A_\\text{ газа } \\implies',
-    '\\implies A_\\text{ газа } &= - \\Delta U = - \\frac 32 \\nu R \\Delta T '
+    'Q &= 0, Q = \\Delta U + A_\\text{газа} \\implies',
+    '\\implies A_\\text{газа} &= - \\Delta U = - \\frac 32 \\nu R \\Delta T '
     '= {sgn} \\frac 32 * {nu:V} * {Consts.R:V} * {dT:V}'
-    '= {A:V}, \\text{ {ans}. }'
+    '= {A:V}, \\text{{ans}.}'
 ])
 class A_from_DeltaT(variant.VariantTask):
     def GetUpdate(self, what=None, sign=None, nu=None, dT=None, **kws):
@@ -304,12 +304,12 @@ class A_from_DeltaT(variant.VariantTask):
 @variant.arg(dU=('\\Delta U = {} Дж', [1200, 1500, 2400, 3000]))
 @variant.arg(what=['количество теплоты, сообщённое газу', 'работу, совершённую газом'])
 @variant.answer_align([
-    '''Q &= A' + \\Delta U, A' = \\frac 1{N} Q \\implies Q * \\cbr{ 1 - \\frac 1{N} } = \\Delta U \\implies '''
-    '''Q = \\frac{ \\Delta U }{ 1 - \\frac 1{N} } = \\frac{dU:V:s}{ 1 - \\frac 1{N} } \\approx {Q:V}.''',
+    '''Q &= A' + \\Delta U, A' = \\frac 1{N} Q \\implies Q * \\cbr{1 - \\frac 1{N}} = \\Delta U \\implies '''
+    '''Q = \\frac{\\Delta U}{1 - \\frac 1{N}} = \\frac{dU:V:s}{1 - \\frac 1{N}} \\approx {Q:V}.''',
     '''A' &= \\frac 1{N} Q
-    = \\frac 1{N} * \\frac{ \\Delta U }{ 1 - \\frac 1{N} }
-    = \\frac{ \\Delta U }{ {N} - 1 }
-    = \\frac{dU:V:s}{ {N} - 1 } \\approx {A:V}.''',
+    = \\frac 1{N} * \\frac{\\Delta U}{1 - \\frac 1{N}}
+    = \\frac{\\Delta U}{{N} - 1}
+    = \\frac{dU:V:s}{{N} - 1} \\approx {A:V}.''',
 ])
 class Q_from_DeltaU(variant.VariantTask):
     def GetUpdate(self, N=None, dU=None, **kws):
@@ -331,9 +331,9 @@ class Q_from_DeltaU(variant.VariantTask):
 @variant.arg(dU=('\\Delta U = {} Дж', [150, 250, 350, 450]))
 @variant.arg(A=('{} Дж', [100, 200, 300]))
 @variant.answer_short('''
-    Q = A_\\text{ газа } + \\Delta U, A_\\text{ газа } = -A_\\text{ внешняя }
-    \\implies Q = A_\\text{ газа } + \\Delta U = {sign_who} {A:V} + {sign_what} {dU:V} = {Q:V}.
-    \\text{ {ans}. }
+    Q = A_\\text{газа} + \\Delta U, A_\\text{газа} = -A_\\text{внешняя}
+    \\implies Q = A_\\text{газа} + \\Delta U = {sign_who} {A:V} + {sign_what} {dU:V} = {Q:V}.
+    \\text{{ans}.}
 ''')
 class Q_from_DeltaU_and_A(variant.VariantTask):
     def GetUpdate(self, A=None, dU=None, what=None, sign_what=None, who=None, sign_who=None, **kws):
@@ -366,8 +366,8 @@ class Q_from_DeltaU_and_A(variant.VariantTask):
 @variant.arg(q6__a6=[('изохорном', 'нет'), ('изобарном', 'да'), ('изотермическом', 'да')])
 @variant.arg(q8__a8=[('одноатомному', 'да'), ('двухоатомному', 'нет'), ('трёхатомному', 'нет')])
 @variant.solution_space(0)
-# @variant.answer_short('''\\text{ {a1}, да, {a3}, {a4}, да, нет, да, {a8} }''')
-@variant.answer_short('''\\text{ {a1}, {a3}, {a5}, {a6}, {a8} }''')
+# @variant.answer_short('''\\text{{a1}, да, {a3}, {a4}, да, нет, да, {a8}}''')
+@variant.answer_short('''\\text{{a1}, {a3}, {a5}, {a6}, {a8}}''')
 class YesNo(variant.VariantTask):
     pass
 
@@ -391,9 +391,9 @@ class YesNo(variant.VariantTask):
 @variant.answer_align([
     'P_1V_1 &= \\nu R T_1, P_2V_2 = \\nu R T_2,',
     '\\Delta U &= U_2-U_1 = \\frac 32 \\nu R T_2- \\frac 32 \\nu R T_1 = \\frac 32 P_2 V_2 - \\frac 32 P_1 V_1'
-    '= \\frac 32 * \\cbr{ {P2:V} * {V2:V} - {P1:V} * {V1:V} } = {dU:V}.',
-    'A_\\text{ газа } &= \\frac{ P_2 + P_1 } 2 * (V_2 - V_1) = \\frac{ {P2:V} + {P1:V} } 2 * ({V2:V} - {V1:V}) = {A:V},',
-    'Q &= A_\\text{ газа } + \\Delta U = \\frac 32 (P_2 V_2 - P_1 V_1) + \\frac{ P_2 + P_1 } 2 * (V_2 - V_1) = {dU:V} + {A:V} = {Q:V}.'
+    '= \\frac 32 * \\cbr{{P2:V} * {V2:V} - {P1:V} * {V1:V}} = {dU:V}.',
+    'A_\\text{газа} &= \\frac{P_2 + P_1} 2 * (V_2 - V_1) = \\frac{{P2:V} + {P1:V}} 2 * ({V2:V} - {V1:V}) = {A:V},',
+    'Q &= A_\\text{газа} + \\Delta U = \\frac 32 (P_2 V_2 - P_1 V_1) + \\frac{P_2 + P_1} 2 * (V_2 - V_1) = {dU:V} + {A:V} = {Q:V}.'
 ])
 class DeltaQ_from_states(variant.VariantTask):
     def GetUpdate(self, P1=None, P2=None, V1=None, V2=None, **kws):

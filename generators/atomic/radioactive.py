@@ -84,10 +84,10 @@ class Definitions03(variant.VariantTask):
 @variant.answer_test('{lv.Answer}')
 @variant.arg(lv=letter_variants(
     {
-        'размер атома': '$10^{-8}\\units{ см }$',
-        'размер ядра атома': '$10^{-13}\\units{ см }$',
+        'размер атома': '$10^{-8}\\units{см}$',
+        'размер ядра атома': '$10^{-13}\\units{см}$',
     },
-    ['$10^{-15}\\units{ см }$', '$10^{-10}\\units{ см }$'],
+    ['$10^{-15}\\units{см}$', '$10^{-10}\\units{см }$'],
     answers_count=2,
     mocks_count=1,
 ))
@@ -171,13 +171,13 @@ class Definitions07(variant.VariantTask):
     равное {when} периодам полураспада? Ответ выразить в процентах.
 ''')
 @variant.answer_align([
-    '''N &= N_0 * 2^{ - \\frac t{ T_{ 1/2 } } } \\implies
-    \\frac N{ N_0 } = 2^{ - \\frac t{ T_{ 1/2 } } }
-    = 2^{ -{t} } \\approx {N_value:.2f} \\approx {N_percent:.0f}\\%''',
-    '''N_\\text{ расп. } &= N_0 - N = N_0 - N_0 * 2^{ - \\frac t{ T_{ 1/2 } } }
-    = N_0\\cbr{ 1 - 2^{ - \\frac t{ T_{ 1/2 } } } } \\implies
-    \\frac { N_\\text{ расп. } }{ N_0 } = 1 - 2^{ - \\frac t{ T_{ 1/2 } } }
-    = 1 - 2^{ -{t} } \\approx {N_left_value:.2f} \\approx {N_left_percent:.0f}\\%''',
+    '''N &= N_0 * 2^{- \\frac t{T_{1/2}}} \\implies
+    \\frac N{N_0} = 2^{- \\frac t{T_{1/2}}}
+    = 2^{-{t}} \\approx {N_value:.2f} \\approx {N_percent:.0f}\\%''',
+    '''N_\\text{расп.} &= N_0 - N = N_0 - N_0 * 2^{-\\frac t{T_{1/2}}}
+    = N_0\\cbr{1 - 2^{-\\frac t{T_{1/2}}}} \\implies
+    \\frac{N_\\text{расп.}}{N_0} = 1 - 2^{-\\frac t{T_{1/2}}}
+    = 1 - 2^{-{t}} \\approx {N_left_value:.2f} \\approx {N_left_percent:.0f}\\%''',
 ])
 @variant.arg(what=['распадётся', 'останется'])
 @variant.arg(when__t=[
@@ -204,8 +204,8 @@ class BK_53_01(variant.VariantTask):  # Вишнякова - Базовый ку
     останется через ${t:Value}$, если период его полураспада составляет ${T:Value}$?
 ''')
 @variant.answer_align([
-    '''N &= N_0 * 2^{ - \\frac t{ T_{ 1/2 } } }
-    = 2^{ - \\frac {t:Value|s}{T:Value|s} }
+    '''N &= N_0 * 2^{-\\frac t{T_{1/2}}}
+    = 2^{-\\frac{t:Value|s}{T:Value|s}}
     \\approx {share} \\approx {percent}\\%''',
 ])
 @variant.arg(t=['t = %s суток' % t for t in ['91.2', '136.8', '182.4']])
@@ -227,17 +227,17 @@ class BK_53_02(variant.VariantTask):  # Вишнякова - Базовый ку
 ''')
 @variant.answer_align([
     '''
-        N &= N_0 * 2^{ - \\frac t{ T_{ 1/2 } } }
-        \\implies \\frac N{ N_0 } = 2^{ - \\frac t{ T_{ 1/2 } } }
-        \\implies \\frac 1{ {num} } = 2^{ - \\frac {t:Value|s}{ T_{ 1/2 } } }
-        \\implies {log_num} = \\frac {t:Value|s}{ T_{ 1/2 } }
-        \\implies T_{ 1/2 } = \\frac {t:Value|s}{log_num} \\approx {T:Value}.
+        N &= N_0 * 2^{-\\frac t{T_{1/2}}}
+        \\implies \\frac N{N_0} = 2^{-\\frac t{T_{1/2}}}
+        \\implies \\frac 1{{num}} = 2^{-\\frac {t:Value|s}{T_{1/2}}}
+        \\implies {log_num} = \\frac {t:Value|s}{T_{1/2}}
+        \\implies T_{1/2} = \\frac {t:Value|s}{log_num} \\approx {T:Value}.
     ''',
     '''
-        \\delta &= \\frac{ N(t) }{ N_0 } - \\frac{ N(2t) }{ N_0 }
-        = 2^{ - \\frac t{ T_{ 1/2 } } } - 2^{ - \\frac { 2t }{ T_{ 1/2 } } }
-        = 2^{ - \\frac t{ T_{ 1/2 } } }\\cbr{ 1 - 2^{ - \\frac { t }{ T_{ 1/2 } } } }
-        = \\frac 1{ {num} } * \\cbr{ 1 - \\frac 1{ {num} } } \\approx {res:.3f}''',
+        \\delta &= \\frac{N(t)}{N_0} - \\frac{N(2t)}{N_0}
+        = 2^{-\\frac t{T_{1/2}}} - 2^{-\\frac {2t}{T_{1/2}}}
+        = 2^{-\\frac t{T_{1/2}}}\\cbr{1 - 2^{-\\frac t{T_{1/2}}}}
+        = \\frac 1{{num}} * \\cbr{1-\\frac 1{{num}}} \\approx {res:.3f}''',
 ])
 @variant.arg(how__num__log_num=[
     ('четверть', 4, 2),
@@ -261,10 +261,10 @@ class BK_53_03(variant.VariantTask):  # Вишнякова - Базовый ку
     Скорость света {Consts.c_4:Task|e}, элементарный заряд {Consts.e:Task|e}.
 ''')
 @variant.answer_align([
-    'E_\\text{ св. } &= \\Delta m c^2 \\implies',
+    'E_\\text{св.} &= \\Delta m c^2 \\implies',
     '''\\implies
-        \\Delta m &= \\frac { E_\\text{ св. } }{ c^2 } = \\frac{E:Value|s}{c:V|sqr|s}
-        = \\frac{ {eV} * 10^6 * {Consts.eV:Value} }{c:V|sqr|s}
+        \\Delta m &= \\frac {E_\\text{св.}}{c^2} = \\frac{E:Value|s}{c:V|sqr|s}
+        = \\frac{{eV} * 10^6 * {Consts.eV:Value}}{c:V|sqr|s}
         \\approx {dm:Value} \\approx {aem:Value}''',
 ])
 @variant.arg(element__E=[  # https://www.calc.ru/Energiya-Svyazi-Nekotorykh-Yader.html
@@ -323,5 +323,5 @@ class Delta_m_from_m(variant.VariantTask):
         dE = dm * Consts.one_aem_eV.Value
         return dict(
             dm='\\Delta m = %.5f а.е.м.' % dm,
-            dE='E_\\text{ св. } = %.2f МэВ' % dE,
+            dE='E_\\text{св.} = %.2f МэВ' % dE,
         )

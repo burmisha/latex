@@ -47,15 +47,15 @@ class ForceTask(variant.VariantTask):
     \\end{itemize}
 ''')
 @variant.answer_align([
-    'F &= k\\frac{ \\abs{ q_1 }\\abs { q_2 } }{ \\sqr{ {n} {letter} } }'
-    '   = k\\frac{ \\abs{ {charges[0]} } * \\abs{ {charges[1]} } }{ {n}^2 * {letter}^2 }, \\text{ {res[0]} };',
+    'F &= k\\frac{\\abs{q_1}\\abs {q_2}}{\\sqr{{n} {letter}}}'
+    '   = k\\frac{\\abs{{charges[0]}} * \\abs{{charges[1]}}}{{n}^2 * {letter}^2}, \\text{{res[0]}};',
     '''
-    q'_1 &= q'_2, q_1 + q_2 = q'_1 + q'_2 \\implies  q'_1 = q'_2 = \\frac{ q_1 + q_2 }2 = \\frac{ {charges[0]} + {charges[1]} }2 = {q_ratio:LaTeX}{chargeLetter} \\implies''',
+    q'_1 &= q'_2, q_1 + q_2 = q'_1 + q'_2 \\implies  q'_1 = q'_2 = \\frac{q_1 + q_2}2 = \\frac{{charges[0]} + {charges[1]}}2 = {q_ratio:LaTeX}{chargeLetter} \\implies''',
     '''
-    \\implies F'  &= k\\frac{ \\abs{ q'_1 }\\abs{ q'_2 } }{ \\sqr{ {n} {letter} } }
-        = k\\frac{ \\sqr{ {q_ratio:LaTeX}{chargeLetter} } }{ {n}^2 * {letter}^2 },
-    \\text{ {res[1]} },''',
-    '\\frac{ F\' }{ F } &= \\frac{ \\sqr{ {q_ratio:LaTeX}{chargeLetter} } }{ {n}^2 * \\abs{ {charges[0]} } * \\abs{ {charges[1]} } } = {ratio:LaTeX}.'
+    \\implies F'  &= k\\frac{\\abs{q'_1}\\abs{q'_2}}{\\sqr{{n} {letter}}}
+        = k\\frac{\\sqr{{q_ratio:LaTeX}{chargeLetter}}}{{n}^2 * {letter}^2},
+    \\text{{res[1]}},''',
+    '\\frac{F\'}F &= \\frac{\\sqr{{q_ratio:LaTeX}{chargeLetter}}}{{n}^2 * \\abs{{charges[0]}} * \\abs{{charges[1]}}} = {ratio:LaTeX}.'
 ])
 @variant.arg(first_charge__second_charge=[(fc, sc) for fc in range(3, 9, 2) for sc in range(2, 10, 2)])
 @variant.arg(n=[2, 3, 4])
@@ -107,9 +107,9 @@ class FieldTaskGenerator(variant.VariantTask):
 
 @variant.text('''
     Заряд $q_1$ создает в точке $A$ электрическое поле
-    по величине равное~$E_1={values[0]}\\funits{ В }{ м }$,
-    а $q_2$~--- $E_2={values[1]}\\funits{ В }{ м }$.
-    Угол между векторами $\\vect{ E_1 }$ и $\\vect{ E_2 }$ равен ${angleLetter}$.
+    по величине равное~$E_1={values[0]}\\funits{В}{м}$,
+    а $q_2$~--- $E_2={values[1]}\\funits{В}{м}$.
+    Угол между векторами $\\vect{E_1}$ и $\\vect{E_2}$ равен ${angleLetter}$.
     Определите величину суммарного электрического поля в точке $A$,
     создаваемого обоими зарядами $q_1$ и $q_2$.
     Сделайте рисунки и вычислите значение для двух значений угла ${angleLetter}$:
@@ -186,7 +186,7 @@ class R_from_r_e1_e2(variant.VariantTask):  # Вишнякова 3.1.2
 @variant.arg(r=['a', 'l', 'd', 'r'])
 @variant.arg(q=['q', 'Q'])
 @variant.arg(sign=['положительных', 'отрицательных'])
-@variant.answer_short('F = \\sum_i F_i = \\ldots = {ratio:LaTeX} \\frac{ k{q}^2 }{ {r}^2 }.')
+@variant.answer_short('F = \\sum_i F_i = \\ldots = {ratio:LaTeX} \\frac{k{q}^2}{{r}^2}.')
 class F_from_many_q(variant.VariantTask):  # Вишнякова 3.1.3
     def GetUpdate(self, n=None, n_text=None, r=None, q=None, **kws):
         if n == 3:
@@ -238,7 +238,7 @@ class R_from_d(variant.VariantTask):  # Вишнякова 3.1.5
 @variant.arg(q1=('q_1 = {} мкКл', [2, -5, 10]))
 @variant.arg(q2=('q_2 = {} мкКл', [-3, 4, -5]))
 @variant.arg(alpha=[10, 15, 20])
-@variant.arg(E_k=('E_\\text{{ кин. }} = {} мДж', [50, 80, 120, 150]))
+@variant.arg(E_k=('E_\\text{{кин.}} = {} мДж', [50, 80, 120, 150]))
 class E_kin_prism(variant.VariantTask):  # Вишнякова 3.1.6
     pass
 
@@ -266,7 +266,7 @@ class KulonDiel(variant.VariantTask):  # Вишнякова 3.1.9
     Два равных по величине положительных точечных заряда $q$ расположены
     в вакууме в точках $A$ и $B$. Длина отрезка $AB = {n}L$.
     Точка $С$ — середина отрезка $AB$, а точка $D$ лежит на отрезке $BC$,
-    причём $CD = \\frac{ L }{m}$. Определите, какой заряд необходимо
+    причём $CD = \\frac Lm$. Определите, какой заряд необходимо
     поместить в точку $C$, чтобы {what} электрического поля в точке $D$ {what_do} нулю.
 ''')
 @variant.arg(m=[2, 3, 4])

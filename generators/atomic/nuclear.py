@@ -320,7 +320,7 @@ class RadioFall(variant.VariantTask):
     def GetUpdate(self, fallType, element, **kws):
         if 'alpha' in fallType:
             res = element.alpha()
-            add = '\\ce{ ^4_2 He }'
+            add = '\\ce{^4_2 He}'
         elif 'beta' in fallType:
             res = element.beta()
             add = 'e^- + \\tilde\\nu_e'

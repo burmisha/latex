@@ -26,23 +26,23 @@ from generators.helpers import UnitValue, letter_variants, Fraction, n_times
         &\\eli_1(R_1 + r) = \\eli_2(R_2 + r), \\\\
         &\\eli_1 R_1 + \\eli_1r = \\eli_2 R_2 + \\eli_2r, \\\\
         &\\eli_1 R_1 - \\eli_2 R_2 = - \\eli_1r  + \\eli_2r = (\\eli_2 - \\eli_1)r, \\\\
-        r &= \\frac{ \\eli_1 R_1 - \\eli_2 R_2 }{ \\eli_2 - \\eli_1 }
-            \\equiv \\frac{ \\eli_2 R_2 - \\eli_1 R_1 }{ \\eli_1 - \\eli_2 }, \\\\
+        r &= \\frac{\\eli_1 R_1 - \\eli_2 R_2}{\\eli_2 - \\eli_1}
+            \\equiv \\frac{\\eli_2 R_2 - \\eli_1 R_1}{\\eli_1 - \\eli_2}, \\\\
         \\ele &= \\eli_1(R_1 + r)
-            = \\eli_1\\cbr{ R_1 + \\frac{ \\eli_1 R_1 - \\eli_2 R_2 }{ \\eli_2 - \\eli_1 } }
-            = \\eli_1 * \\frac{ R_1\\eli_2 - R_1\\eli_1 + \\eli_1 R_1 - \\eli_2 R_2 }{ \\eli_2 - \\eli_1 } \\\\
-            &= \\eli_1 * \\frac{ R_1\\eli_2 - \\eli_2 R_2 }{ \\eli_2 - \\eli_1 }
-            = \\frac{ \\eli_1 \\eli_2 (R_1 - R_2) }{ \\eli_2 - \\eli_1 }
-            \\equiv \\frac{ \\eli_1 \\eli_2 (R_2 - R_1) }{ \\eli_1 - \\eli_2 }.
+            = \\eli_1\\cbr{R_1 + \\frac{\\eli_1 R_1 - \\eli_2 R_2}{\\eli_2 - \\eli_1}}
+            = \\eli_1 * \\frac{R_1\\eli_2 - R_1\\eli_1 + \\eli_1 R_1 - \\eli_2 R_2}{\\eli_2 - \\eli_1} \\\\
+            &= \\eli_1 * \\frac{R_1\\eli_2 - \\eli_2 R_2}{\\eli_2 - \\eli_1}
+            = \\frac{\\eli_1 \\eli_2 (R_1 - R_2)}{\\eli_2 - \\eli_1}
+            \\equiv \\frac{\\eli_1 \\eli_2 (R_2 - R_1)}{\\eli_1 - \\eli_2}.
     \\end{align*}
 
     Короткое замыкание происходит в ситуации, когда внешнее сопротивление равно 0
     (при этом цепь замкнута, хотя нагрузки и нет вовсе):
     $$
-        \\eli_\\text{ к. з. } = \\frac \\ele { 0 + r } = \\frac \\ele r
-            = \\frac{ \\cfrac{ \\eli_1 \\eli_2 (R_1 - R_2) }{ \\eli_2 - \\eli_1 } }{ \\cfrac{ \\eli_1 R_1 - \\eli_2 R_2 }{ \\eli_2 - \\eli_1 } }
-            = \\frac{ \\eli_1 \\eli_2 (R_1 - R_2) }{ \\eli_1 R_1 - \\eli_2 R_2 }
-            \\equiv \\frac{ \\eli_1 \\eli_2 (R_2 - R_1) }{ \\eli_2 R_2 - \\eli_1 R_1 }.
+        \\eli_\\text{к. з.} = \\frac \\ele {0 + r} = \\frac \\ele r
+            = \\frac{\\cfrac{\\eli_1 \\eli_2 (R_1 - R_2)}{\\eli_2 - \\eli_1}}{\\cfrac{\\eli_1 R_1 - \\eli_2 R_2}{\\eli_2 - \\eli_1}}
+            = \\frac{\\eli_1 \\eli_2 (R_1 - R_2)}{\\eli_1 R_1 - \\eli_2 R_2}
+            \\equiv \\frac{\\eli_1 \\eli_2 (R_2 - R_1)}{\\eli_2 R_2 - \\eli_1 R_1}.
     $$
 
     Важные пункты:
@@ -77,20 +77,20 @@ class Short_i(variant.VariantTask):  # Вишнякова - 7
 @variant.arg(R2=('R_2 = {} Ом', [5, 10, 15]))
 @variant.arg(I1=('\\eli_1 = {} А', [2, 3, 5, 7, 11]))
 @variant.answer_align([
-    '{I1:L} &= \\frac{E:L:s}{ {R1:L} + {r:L} } \\implies {r:L} = \\frac{E:L:s}{I1:L:s} - {R1:L} = \\frac{E:V:s}{I1:V:s} - {R1:V} = {r:V},',
-    'R\' &= {R_formula} = {R_ratio:LaTeX}\\units{ Ом },',
-    '{I2:L} &= \\frac{E:L:s}{ R\' + {r:L} } = {I2_ratio:LaTeX}\\units{ А } \\approx {I2:V},',
-    '{P2:L} &= {P_formula} = {P2_ratio:LaTeX}\\units{ Вт } \\approx {P2:V}.',
+    '{I1:L} &= \\frac{E:L:s}{{R1:L} + {r:L}} \\implies {r:L} = \\frac{E:L:s}{I1:L:s} - {R1:L} = \\frac{E:V:s}{I1:V:s} - {R1:V} = {r:V},',
+    'R\' &= {R_formula} = {R_ratio:LaTeX}\\units{Ом},',
+    '{I2:L} &= \\frac{E:L:s}{R\' + {r:L}} = {I2_ratio:LaTeX}\\units{А} \\approx {I2:V},',
+    '{P2:L} &= {P_formula} = {P2_ratio:LaTeX}\\units{Вт} \\approx {P2:V}.',
 ])
 class Update_external_R(variant.VariantTask):
     def GetUpdate(self, r=None, how=None, R1=None, R2=None, I1=None, **kws):
         E_value = I1.Value * (r.Value + R1.Value)
         E = '\\ele = %d В' % E_value
         if how == 'параллельно':
-            R_formula = f'\\frac{{ {R1:L}{R2:L} }}{{ {R1:L} + {R2:L} }}'
+            R_formula = f'\\frac{{{R1:L}{R2:L}}}{{{R1:L} + {R2:L}}}'
             R_ratio = Fraction(numerator=R1.Value * R2.Value, denominator=R1.Value + R2.Value)
             I2_ratio = Fraction(numerator=E_value) / (R_ratio + r.Value)
-            P_formula = f'\\frac{{ U_2^2 }}{R2:L:s} \\equiv \\frac{{ \\sqr{{ \\eli_2 R\' }} }}{R2:L:s}'
+            P_formula = f'\\frac{{U_2^2}}{R2:L:s} \\equiv \\frac{{\\sqr{{\\eli_2 R\'}}}}{R2:L:s}'
             P2_ratio = (I2_ratio * R_ratio * I2_ratio * R_ratio) / R2.Value
         elif how == 'последовательно':
             R_formula = f'{R1:L} + {R2:L}'
@@ -120,20 +120,20 @@ class Update_external_R(variant.VariantTask):
     Вычислите значения для 2 случаев: ${r:L}=0$ и {r:Task:e}.
 ''')
 @variant.answer_align([
-    '''{I1:L} &= \\frac{E:L:s}{R:L:s} = \\frac{E:Value:s}{R:Value:s} = {I1_ratio:LaTeX}\\units{ А } \\approx {I1:Value}, ''',
-    '''{I2:L} &= \\frac{E:L:s}{ {R:L} + {r:L} } = \\frac{E:Value:s}{ {R:Value} + {r:Value} } = {I2_ratio:LaTeX}\\units{ А } \\approx {I2:Value}, ''',
-    '''{Q1:L} &= {I1:L}^2{R:L}{t:L} = \\sqr{ \\frac{E:L:s}{R:L:s} } {R:L} {t:L}
-        = \\sqr{ \\frac{E:Value:s}{R:Value:s} } * {R:Value} * {t:Value} = {Q1_ratio:LaTeX}\\units{ Дж } \\approx {Q1:Value}, ''',
-    '''{Q2:L} &= {I2:L}^2{R:L}{t:L} = \\sqr{ \\frac{E:L:s}{ {R:L} + {r:L} } } {R:L} {t:L}
-        = \\sqr{ \\frac{E:Value:s}{ {R:Value} + {r:Value} } } * {R:Value} * {t:Value} = {Q2_ratio:LaTeX}\\units{ Дж } \\approx {Q2:Value}, ''',
+    '''{I1:L} &= \\frac{E:L:s}{R:L:s} = \\frac{E:Value:s}{R:Value:s} = {I1_ratio:LaTeX}\\units{А} \\approx {I1:Value}, ''',
+    '''{I2:L} &= \\frac{E:L:s}{{R:L} + {r:L}} = \\frac{E:Value:s}{{R:Value} + {r:Value}} = {I2_ratio:LaTeX}\\units{А} \\approx {I2:Value}, ''',
+    '''{Q1:L} &= {I1:L}^2{R:L}{t:L} = \\sqr{\\frac{E:L:s}{R:L:s}} {R:L} {t:L}
+        = \\sqr{\\frac{E:Value:s}{R:Value:s}} * {R:Value} * {t:Value} = {Q1_ratio:LaTeX}\\units{Дж} \\approx {Q1:Value}, ''',
+    '''{Q2:L} &= {I2:L}^2{R:L}{t:L} = \\sqr{\\frac{E:L:s}{{R:L} + {r:L}}} {R:L} {t:L}
+        = \\sqr{\\frac{E:Value:s}{{R:Value} + {r:Value}}} * {R:Value} * {t:Value} = {Q2_ratio:LaTeX}\\units{Дж} \\approx {Q2:Value}, ''',
     '''{A1:L} &= q_1{E:L} = {I1:L}{t:L}{E:L} = \\frac{E:L:s}{R:L:s} {t:L} {E:L}
-        = \\frac{ {E:L}^2 {t:L} }{R:L|s} = \\frac{ {E:Value|sqr} * {t:Value} }{R:Value:s}
-        = {A1_ratio:LaTeX}\\units{ Дж } \\approx {A1:Value}, \\text{ положительна }, ''',
-    '''{A2:L} &= q_2{E:L} = {I2:L}{t:L}{E:L} = \\frac{E:L:s}{ {R:L} + {r:L} } {t:L} {E:L}
-        = \\frac{ {E:L}^2 {t:L} }{ {R:L} + {r:L} } = \\frac{ {E:Value|sqr} * {t:Value} }{ {R:Value} + {r:Value} }
-        = {A2_ratio:LaTeX}\\units{ Дж } \\approx {A2:Value}, \\text{ положительна }, ''',
+        = \\frac{{E:L}^2 {t:L}}{R:L|s} = \\frac{{E:Value|sqr} * {t:Value}}{R:Value:s}
+        = {A1_ratio:LaTeX}\\units{Дж} \\approx {A1:Value}, \\text{положительна}, ''',
+    '''{A2:L} &= q_2{E:L} = {I2:L}{t:L}{E:L} = \\frac{E:L:s}{{R:L} + {r:L}} {t:L} {E:L}
+        = \\frac{{E:L}^2 {t:L}}{{R:L} + {r:L}} = \\frac{{E:Value|sqr} * {t:Value}}{{R:Value} + {r:Value}}
+        = {A2_ratio:LaTeX}\\units{Дж} \\approx {A2:Value}, \\text{положительна}, ''',
     '''{eta1:L} &= \\frac{Q1:L:s}{A1:L:s} = \\ldots = \\frac{R:L:s}{R:L:s} = {eta1:Value}, ''',
-    '''{eta2:L} &= \\frac{Q2:L:s}{A2:L:s} = \\ldots = \\frac{R:L:s}{ {R:L} + {r:L} } = {eta_2_ratio:LaTeX} \\approx {eta2:Value}.''',
+    '''{eta2:L} &= \\frac{Q2:L:s}{A2:L:s} = \\ldots = \\frac{R:L:s}{{R:L} + {r:L}} = {eta_2_ratio:LaTeX} \\approx {eta2:Value}.''',
 ])
 @variant.arg(E=['\\ele = %d В' % E for E in [1, 2, 3, 4]])
 @variant.arg(R=['R = %d Ом' % R for R in [10, 15, 24, 30]])
@@ -173,29 +173,29 @@ class Om_eta_full(variant.VariantTask):
 ''')
 @variant.answer_align([
     '''
-    P_1 &= \\sqr{ \\frac{E:L:s}{ {R1:L} + {r:L} } }{R1:L},
-    P_2  = \\sqr{ \\frac{E:L:s}{ {R2:L} + {r:L} } }{R2:L},
+    P_1 &= \\sqr{\\frac{E:L:s}{{R1:L} + {r:L}}}{R1:L},
+    P_2  = \\sqr{\\frac{E:L:s}{{R2:L} + {r:L}}}{R2:L},
     P_1 = P_2 \\implies ''',
     '''
-    &\\implies {R1:L} \\sqr{ {R2:L} + {r:L} } = {R2:L} \\sqr{ {R1:L} + {r:L} } \\implies ''',
+    &\\implies {R1:L} \\sqr{{R2:L} + {r:L}} = {R2:L} \\sqr{{R1:L} + {r:L}} \\implies ''',
     '''
     &\\implies {R1:L} {R2:L}^2 + 2 {R1:L} {R2:L} {r:L} + {R1:L} {r:L}^2 =
                 {R2:L} {R1:L}^2 + 2 {R2:L} {R1:L} {r:L} + {R2:L} {r:L}^2  \\implies ''',
     '''&\\implies {r:L}^2 ({R2:L} - {R1:L}) = {R2:L}^2 {R2:L} - {R1:L}^2 {R2:L} \\implies ''',
     '''&\\implies {r:L}
-        = \\sqrt{ {R1:L} {R2:L} \\frac{ {R2:L} - {R1:L} }{ {R2:L} - {R1:L} } }
-        = \\sqrt{ {R1:L} {R2:L} }
-        = \\sqrt{ {R1:Value} * {R2:Value} }
+        = \\sqrt{{R1:L} {R2:L} \\frac{{R2:L} - {R1:L}}{{R2:L} - {R1:L}}}
+        = \\sqrt{{R1:L} {R2:L}}
+        = \\sqrt{{R1:Value} * {R2:Value}}
         = {r:Value}. '''
    ,
    '''{eta1:L}
-        &= \\frac{R1:L:s}{ {R1:L} + {r:L} }
-        = \\frac{ {R1:L|sqrt} }{ {R1:L|sqrt} + {R2:L|sqrt} }
+        &= \\frac{R1:L:s}{{R1:L} + {r:L}}
+        = \\frac{{R1:L|sqrt}}{{R1:L|sqrt} + {R2:L|sqrt}}
         = {eta1:Value}, '''
    ,
    '''{eta2:L}
-        &= \\frac{R2:L:s}{ {R2:L} + {r:L} }
-        = \\frac{R2:L|sqrt|s}{ {R2:L|sqrt} + {R1:L|sqrt} }
+        &= \\frac{R2:L:s}{{R2:L} + {r:L}}
+        = \\frac{R2:L|sqrt|s}{{R2:L|sqrt} + {R1:L|sqrt}}
         = {eta2:Value}''',
 ])
 @variant.arg(R1__R2=[('R_1 = %.2f Ом' % R_1, 'R_2 = %.2f Ом' % R_2) for R_1, R_2 in [

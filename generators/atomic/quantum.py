@@ -12,15 +12,15 @@ from generators.helpers import UnitValue, Consts
 ''')
 @variant.answer_short('''
     N
-        = \\frac{ E_{ \\text { общая } } }{ E_{ \\text { одного фотона } } }
-        = \\frac{ Pt }{ h\\nu } = \\frac{ Pt }{ h \\frac c { \\lambda } }
-        = \\frac{ Pt\\lambda }{ hc }
+        = \\frac{E_{\\text{общая}}}{E_{\\text{одного фотона}}}
+        = \\frac{Pt}{h\\nu} = \\frac{Pt}{h \\frac c\\lambda}
+        = \\frac{Pt\\lambda}{hc}
         = \\frac{
-            {power:Value} * {minutes} * 60 \\units{ с } * {length:Value}
-         }{
+            {power:Value} * {minutes} * 60 \\units{с} * {length:Value}
+        }{
             {h:V} * {c:V}
         }
-       \\approx {approx} * 10^{ {answerPower} }\\units{ фотонов }
+        \\approx {approx} * 10^{{answerPower}}\\units{фотонов}
 ''')
 @variant.arg(minutes=[5, 10, 20, 30, 40, 60, 120])
 @variant.arg(power=('P = {} мВт', [15, 40, 75, 200]))
@@ -64,13 +64,13 @@ class Fotons(variant.VariantTask):
 ''')
 @variant.answer_tex('''
     \\begin{enumerate}
-        \\item ${q1:V} \\to$ {a1}, $\\nu_1 = \\frac c{ \\lambda_1 } \\approx {nu1:V}$,
-        \\item ${q2:V} \\to$ {a2}, $\\nu_2 = \\frac c{ \\lambda_2 } \\approx {nu2:V}$,
-        \\item ${q3:V} \\to$ {a3}, $\\nu_3 = \\frac c{ \\lambda_3 } \\approx {nu3:V}$,
-        \\item ${q4:V} \\to$ {a4}, $\\nu_4 = \\frac c{ \\lambda_4 } \\approx {nu4:V}$.
+        \\item ${q1:V} \\to$ {a1}, $\\nu_1 = \\frac c{\\lambda_1} \\approx {nu1:V}$,
+        \\item ${q2:V} \\to$ {a2}, $\\nu_2 = \\frac c{\\lambda_2} \\approx {nu2:V}$,
+        \\item ${q3:V} \\to$ {a3}, $\\nu_3 = \\frac c{\\lambda_3} \\approx {nu3:V}$,
+        \\item ${q4:V} \\to$ {a4}, $\\nu_4 = \\frac c{\\lambda_4} \\approx {nu4:V}$.
     \\end{enumerate}
 
-    $\\nu = \\frac 1 T = \\frac c{ \\lambda } = \\frac {Consts.c_4:Value:s}{ l * {mkm:V} } \\approx \\frac{nu_0:V:s}l$,
+    $\\nu = \\frac 1 T = \\frac c{\\lambda} = \\frac {Consts.c_4:Value:s}{l * {mkm:V}} \\approx \\frac{nu_0:V:s}l$,
     где $l$~--- численное значение длины волны в мкм.
 ''')
 @variant.arg(q1__a1=[('450 нм', 'синий'), ('580 нм', 'жёлтый '), ('660 нм', 'красный')])
@@ -96,8 +96,8 @@ class ColorNameFromLambda(variant.VariantTask):
     в электромагнитной волне в вакууме, длина который составляет {lmbd:V:e}.
 ''')
 @variant.answer_align([
-    '\\lambda &= c T \\implies T = \\frac{ \\lambda }{ c } = \\frac{lmbd:V:s}{Consts.c:V:s} = {T:V},',
-    '\\lambda &= c T = c * \\frac 1{ \\nu } \\implies \\nu = \\frac{ c }{ \\lambda } = \\frac{Consts.c:V:s}{lmbd:V:s} = {nu:V}.',
+    '\\lambda &= c T \\implies T = \\frac{\\lambda}c = \\frac{lmbd:V:s}{Consts.c:V:s} = {T:V},',
+    '\\lambda &= c T = c * \\frac 1\\nu \\implies \\nu = \\frac c{\\lambda} = \\frac{Consts.c:V:s}{lmbd:V:s} = {nu:V}.',
 ])
 @variant.arg(what=['период', 'частоту'])
 @variant.arg(of=['электрического поля', 'индукции магнитного поля'])
@@ -132,7 +132,7 @@ class E_from_nu(variant.VariantTask):
     Определите энергию {of} с длиной волны {lmbd:V:e}. Ответ выразите в {in_what}.
     Способен ли человеческий глаз увидеть один такой квант? А импульс таких квантов?'
 ''')
-@variant.answer_short('E = h \\nu = \\frac{ hc }{ \\lambda } = \\frac{ {Consts.h:V} * {Consts.c:V} }{lmbd:V:s} \\approx {E:V} \\approx {E_eV:V}')
+@variant.answer_short('E = h\\nu = \\frac{hc}{\\lambda} = \\frac{{Consts.h:V} * {Consts.c:V}}{lmbd:V:s} \\approx {E:V} \\approx {E_eV:V}')
 @variant.arg(lmbd=('{} нм', [150, 200, 400, 500, 600, 700, 850, 900]))
 @variant.arg(of=['кванта света', 'фотона'])
 @variant.arg(in_what=['джоулях', 'электронвольтах'])
@@ -167,15 +167,15 @@ class Deduce01(variant.VariantTask):
     если за {time} ч в среднем распадается {delta} атомов из {total}?
 ''')
 @variant.answer_short('''
-    N(t) = N_0 * 2^{ -\\frac t{ \\tau_\\frac12 }  }
-    \\implies \\log_2\\frac N{ N_0 } = - \\frac t{ \\tau_\\frac 12 }
-    \\implies \\tau_\\frac 12 = - \\frac t { \\log_2\\frac N{ N_0 } }
-                              =   \\frac t { \\log_2\\frac { N_0 }N }
+    N(t) = N_0 * 2^{-\\frac t{\\tau_{\\frac12}}}
+    \\implies \\log_2\\frac N{N_0} = - \\frac t{\\tau_\\frac 12}
+    \\implies \\tau_\\frac 12 = - \\frac t{\\log_2\\frac N{N_0}}
+                              =   \\frac t{\\log_2\\frac{N_0}N}
     = \\frac{
-        {time} \\units{ ч }
+        {time} \\units{ч}
     }
     {
-        \\log_2\\frac{ {total} }{ {total} - {delta} }
+        \\log_2\\frac{{total}}{{total} - {delta}}
     }
     \\approx {T:Value}.
 ''')

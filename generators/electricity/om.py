@@ -285,8 +285,8 @@ class I_ratio(variant.VariantTask):
 # @variant.answer_test('{ratio:Basic}')
 @variant.answer_short(
     'R_2 = {a}R_1, U_1 = {b}U_2 \\implies '
-    ' \\eli_2 / \\eli_1 = \\frac{ U_2 / R_2 }{ U_1 / R_1 } = \\frac{ U_2 }{ U_1 } * \\frac{ R_1 }{ R_2 } = {ratio_i:LaTeX},'
-    ' P_2 / P_1 = \\frac{ U_2^2 / R_2 }{ U_1^2 / R_1 } = \\sqr{ \\frac{ U_2 }{ U_1 } } * \\frac{ R_1 }{ R_2 } = {ratio_P:LaTeX}.')
+    ' \\eli_2 / \\eli_1 = \\frac{U_2 / R_2}{U_1 / R_1} = \\frac{U_2}{U_1} * \\frac{R_1}{R_2} = {ratio_i:LaTeX},'
+    ' P_2 / P_1 = \\frac{U_2^2 / R_2}{U_1^2 / R_1} = \\sqr{\\frac{U_2}{U_1}} * \\frac{R_1}{R_2} = {ratio_P:LaTeX}.')
 @variant.arg(a__times_a=n_times(2, 3, 4, 5, 6, 7, 8, 9, 10))
 @variant.arg(b__times_b=n_times(2, 3, 4, 5, 6, 7, 8, 9, 10))
 @variant.arg(which=['медной', 'стальной', 'алюминиевой'])
@@ -326,7 +326,7 @@ class R_best_from_R_N(variant.VariantTask):
 ''')
 @variant.answer_align([
     '{I:L} &= \\frac{U:L:s}{R:L:s} = \\frac{U:Value:s}{R:Value:s} = {I:Value}, ',
-    '{P:L} &= \\frac{ {U:L}^2 }{R:L:s} = \\frac{U:Value|sqr|s}{R:Value:s} = {P:Value}',
+    '{P:L} &= \\frac{{U:L}^2}{R:L:s} = \\frac{U:Value|sqr|s}{R:Value:s} = {P:Value}',
 ])
 @variant.arg(R=['%s = %d Ом' % (rLetter, rValue) for rLetter, rValue in itertools.product(['r', 'R'], [5, 12, 18, 30])])
 @variant.arg(U=['%s = %d В' % (uLetter, uValue) for uLetter, uValue in itertools.product(['U', 'V'], [120, 150, 180, 240])])
@@ -364,16 +364,16 @@ class P_from_R_I(variant.VariantTask):
 @variant.arg(a=[3, 5, 7])
 @variant.arg(b=[2, 4, 6, 8])
 @variant.arg(how=['параллельно', 'последовательно'])
-@variant.answer('Подключены {how}, поэтому  ${equals1} \\implies \\frac{ P_2 }{ P_1 } = {equals2} = {ratio:LaTeX}$.')
+@variant.answer('Подключены {how}, поэтому  ${equals1} \\implies \\frac{P_2}{P_1} = {equals2} = {ratio:LaTeX}$.')
 class Compare_power(variant.VariantTask):  # Вишнякова - 17
     def GetUpdate(self, a=None, b=None, how=None, **kws):
         if how == 'параллельно':
             equals1 = 'U_1 = U_2 = U'
-            equals2 = '\\frac{ \\frac{ U_2^2 }{ R_2 } }{ \\frac{ U_1^2 }{ R_1 } } = \\frac{ U^2R_1 }{ U^2R_2 } = \\frac{ R_1 }{ R_2 }'
+            equals2 = '\\frac{\\frac{U_2^2}{R_2}}{\\frac{U_1^2}{R_1}} = \\frac{U^2R_1}{U^2R_2} = \\frac{R_1}{R_2}'
             ratio = Fraction(numerator=a, denominator=b)
         elif how == 'последовательно':
             equals1 = '\\eli_1 = \\eli_2 = \\eli'
-            equals2 = '\\frac{ \\eli_2^2 R_2 }{ \\eli_1^2 R_1 } = \\frac{ \\eli_2^2R_2 }{ \\eli_1R_1 } = \\frac{ R_2 }{ R_1 }'
+            equals2 = '\\frac{\\eli_2^2 R_2}{\\eli_1^2 R_1} = \\frac{\\eli_2^2R_2}{\\eli_1R_1} = \\frac{R_2}{R_1}'
             ratio = Fraction(numerator=b, denominator=a)
 
         return dict(
@@ -389,10 +389,10 @@ class Compare_power(variant.VariantTask):  # Вишнякова - 17
     При каком напряжении поданном на эту цепь, в ней потечёт ток равный {I:Task:e}?
 
     \\begin{tikzpicture}[rotate={rotate}, circuit ee IEC, thick]
-        \\node [contact]  (contact1) at (-1.5, 0) {  };
-        \\draw  (0, 0) to [resistor={ info=$R_1$ }] ++(left:1.5);
-        \\draw  (0, 0) -- ++(up:1.5) to [resistor={ near start, info=$R_2$ }, resistor={ near end, info=$R_3$ }] ++(right:3);
-        \\draw  (0, 0) to [resistor={ info=$R_4$ }] ++(right:3) -- ++(up:1.5);
+        \\node [contact]  (contact1) at (-1.5, 0) {};
+        \\draw  (0, 0) to [resistor={info=$R_1$}] ++(left:1.5);
+        \\draw  (0, 0) -- ++(up:1.5) to [resistor={near start, info=$R_2$}, resistor={near end, info=$R_3$}] ++(right:3);
+        \\draw  (0, 0) to [resistor={info=$R_4$}] ++(right:3) -- ++(up:1.5);
         {appendix}
     \\end{tikzpicture}
 ''')
@@ -403,14 +403,14 @@ class Compare_power(variant.VariantTask):  # Вишнякова - 17
 @variant.arg(R3=('R_3 = {} Ом', [1, 2, 3]))
 @variant.arg(R4=('R_4 = {} Ом', [2, 3, 4]))
 @variant.arg(I=('\\eli = {} А', [2, 5, 10]))
-@variant.answer_short('R={R_ratio:LaTeX}\\units{ Ом } \\approx {R:V} \\implies U = \\eli R \\approx {U:V}.')
+@variant.answer_short('R={R_ratio:LaTeX}\\units{Ом} \\approx {R:V} \\implies U = \\eli R \\approx {U:V}.')
 class Circuit_four(variant.VariantTask):
     def GetUpdate(self, rotate=None, second_node=None, R1=None, R2=None, R3=None, R4=None, I=None, **kws):
         if second_node == 0:
-            appendix = '\\draw  (3, 1.5) -- ++(right:0.5); \\node [contact] (contact2) at (3.5, 1.5) {  };'
+            appendix = '\\draw  (3, 1.5) -- ++(right:0.5); \\node [contact] (contact2) at (3.5, 1.5) {};'
             R_ratio = Fraction(numerator=(R2.Value + R3.Value) * R4.Value, denominator=R2.Value + R3.Value + R4.Value) + R1.Value
         elif second_node == 1:
-            appendix = '\\draw  (1.5, 1.5) -- ++(up:1); \\node [contact] (contact2) at (1.5, 2.5) {  };'
+            appendix = '\\draw  (1.5, 1.5) -- ++(up:1); \\node [contact] (contact2) at (1.5, 2.5) {};'
             R_ratio = Fraction(numerator=R2.Value * (R3.Value + R4.Value), denominator=R2.Value + R3.Value + R4.Value) + R1.Value
         return dict(
             appendix=appendix,
@@ -427,11 +427,11 @@ class Circuit_four(variant.VariantTask):
     Ответы получите в виде несократимых дробей, а также определите приближённые значения. Амперметры считать идеальными.
 
     \\begin{tikzpicture}[circuit ee IEC, thick]
-        \\node [contact]  (left contact) at (3, 0) {  };
-        \\node [contact]  (right contact) at (9, 0) {  };
-        \\draw  (left contact) -- ++(up:2) to [resistor={ very near start, info=$R_2$ }, amperemeter={ midway, info=$1$ }, resistor={ very near end, info=$R_3$ } ] ++(right:6) -- (right contact);
-        \\draw  (left contact) -- ++(down:2) to [resistor={ very near start, info=$R_5$ }, resistor={ midway, info=$R_6$ }, amperemeter={ very near end, info=$3$ }] ++(right:6) -- (right contact);
-        \\draw  (left contact) ++(left:3) to [resistor={ info=$R_1$ }] (left contact) to [amperemeter={ near start, info=$2$ }, resistor={ near end , info=$R_4$ }] (right contact) -- ++(right:0.5);
+        \\node [contact]  (left contact) at (3, 0) {};
+        \\node [contact]  (right contact) at (9, 0) {};
+        \\draw  (left contact) -- ++(up:2) to [resistor={very near start, info=$R_2$}, amperemeter={midway, info=$1$}, resistor={very near end, info=$R_3$} ] ++(right:6) -- (right contact);
+        \\draw  (left contact) -- ++(down:2) to [resistor={very near start, info=$R_5$}, resistor={midway, info=$R_6$}, amperemeter={very near end, info=$3$}] ++(right:6) -- (right contact);
+        \\draw  (left contact) ++(left:3) to [resistor={info=$R_1$}] (left contact) to [amperemeter={near start, info=$2$}, resistor={near end , info=$R_4$}] (right contact) -- ++(right:0.5);
     \\end{tikzpicture}
 
 ''')
@@ -440,17 +440,17 @@ class Circuit_four(variant.VariantTask):
 @variant.arg(R=('R = {} Ом', [2, 4, 5, 10]))
 @variant.arg(U=('U = {} В', [30, 60, 90, 120, 150]))
 @variant.answer_align([
-    'R_0 &= R + \\frac 1{ \\frac 1{ R + R } + \\frac 1{ R } + \\frac 1{ R + R } } = R + \\frac 1{ \\frac 2R } = \\frac 32 R,',
-    '\\eli &= \\frac U{ R_0 } = \\frac { 2U }{ 3R },',
-    'U_1 &= \\eli R_1 = \\frac { 2U }{ 3R } * R = \\frac 23 U = {U1:Value},',
-    'U_{ 23 } &= U_{ 56 } = U_4 = U - \\eli R_1 = U - \\frac { 2U }{ 3R } * R = \\frac U3 = {U4:Value},',
-    '\\eli_2 &= \\frac{ U_4 }{ R_4 } = \\frac{ U }{ 3R } \\approx {I2:Value},',
-    '\\eli_1 &= \\frac{ U_{ 23 } }{ R_{ 23 } } = \\frac{ \\frac U3 }{ R + R } = \\frac U{ 6R } \\approx {I1:Value},',
-    '\\eli_3 &= \\frac{ U_{ 56 } }{ R_{ 56 } } = \\frac{ \\frac U3 }{ R + R } = \\frac U{ 6R } \\approx {I3:Value},',
-    'U_2 &= \\eli_1 R_2 = \\frac U{ 6R } * R = \\frac U6 = {U2:Value},',
-    'U_3 &= \\eli_1 R_3 = \\frac U{ 6R } * R = \\frac U3 = {U3:Value},',
-    'U_5 &= \\eli_3 R_5 = \\frac U{ 6R } * R = \\frac U5 = {U5:Value},',
-    'U_6 &= \\eli_3 R_6 = \\frac U{ 6R } * R = \\frac U6 = {U6:Value}.',
+    'R_0 &= R + \\frac 1{\\frac 1{R+R} + \\frac 1{R:L} + \\frac 1{R+R}} = R + \\frac 1{\\frac 2R} = \\frac 32 R,',
+    '\\eli &= \\frac U{R_0} = \\frac {2U}{3R},',
+    'U_1 &= \\eli R_1 = \\frac {2U}{3R} * R = \\frac 23 U = {U1:Value},',
+    'U_{23} &= U_{56} = U_4 = U - \\eli R_1 = U - \\frac {2U}{3R} * R = \\frac U3 = {U4:Value},',
+    '\\eli_2 &= \\frac{U_4}{R_4} = \\frac{U:L}{3R} \\approx {I2:Value},',
+    '\\eli_1 &= \\frac{U_{23}}{R_{23}} = \\frac{\\frac U3}{R+R} = \\frac U{6R} \\approx {I1:Value},',
+    '\\eli_3 &= \\frac{U_{56}}{R_{56}} = \\frac{\\frac U3}{R+R} = \\frac U{6R} \\approx {I3:Value},',
+    'U_2 &= \\eli_1 R_2 = \\frac U{6R} * R = \\frac U6 = {U2:Value},',
+    'U_3 &= \\eli_1 R_3 = \\frac U{6R} * R = \\frac U3 = {U3:Value},',
+    'U_5 &= \\eli_3 R_5 = \\frac U{6R} * R = \\frac U5 = {U5:Value},',
+    'U_6 &= \\eli_3 R_6 = \\frac U{6R} * R = \\frac U6 = {U6:Value}.',
 ])
 class Circuit_six(variant.VariantTask):
     def GetUpdate(self, R=None, U=None, index_a=None, index_r=None, **kws):

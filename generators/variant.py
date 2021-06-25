@@ -70,7 +70,14 @@ class LaTeXFormatter:
         if replace_comma and ('node' not in line) and ('draw' not in line):
             result = re.sub('(\\d)\.(\\d)', '\\1{,}\\2', result)
 
-        result = re.sub(r'\+ +-', '-', result)
+
+        subs = [
+            (r'\+ +-', '-'),
+            (r'(\S) +}', r'\1 }'),
+            ('{ +', '{ '),
+        ]
+        for src, dst in subs:
+            result = re.sub(src, dst, result)
         return result
 
     def format(self, value, replace_comma=True):
@@ -84,7 +91,6 @@ class LaTeXFormatter:
                 for k, v in value.items()
             }
         else:
-            log.error(f'LaTeXFormatter value: {value}')
             raise RuntimeError(f'LaTeXFormatter does not support {type(value)}: {value}')
 
 
@@ -97,6 +103,8 @@ test_replace_comma()
 
 def test_substitute():
     for args, value, result in [
+        ({}, '{}', '{}'),
+        ({}, '{    }', '{ }'),
         (dict(a=2), {'{a}': 3}, {'2': 3}),
         (dict(a='0.20'), {'{a}': 0.3}, {'0{,}20': 0.3}),
         (dict(a=2), '{a}', '2'),
@@ -109,7 +117,7 @@ def test_substitute():
         (dict(a=2, b=3), '{{a}}{b}', '{2}3'),
         (dict(a=2, b=3), '{ {a} }{b}', '{ 2 }3'),
         (dict(a=UnitValue('1 м')), '{a:V}', r'1\,\text{м}'),
-        (dict(a=UnitValue('1 м')), '{a:V|sqr}', r'\sqr{ 1\,\text{м} }'),
+        (dict(a=UnitValue('1 м')), '{a:V|sqr}', r'\sqr{1\,\text{м}}'),
         ({}, '{Consts.c:Letter}', r'c'),
         ({}, '{Consts.p_atm:Task:e}', r'$p_{\text{aтм}} = 100\,\text{кПа}$'),
         ({}, '{ {Consts.c:Letter} }', r'{ c }'),
@@ -386,10 +394,9 @@ def arg(**kws):
     def decorator(cls):
         assert len(kws) == 1, f'Expected only one arg for {cls}, got {kws}'
 
-        if hasattr(cls, '_vars'):
-            assert isinstance(cls._vars, Vars), f'Invalid _vars for {cls}: {cls._vars}'
-        else:
+        if not hasattr(cls, '_vars'):
             cls._vars = Vars()
+        assert isinstance(cls._vars, Vars), f'Invalid _vars for {cls}: {cls._vars}'
 
         for key, value in kws.items():
             if isinstance(value, tuple):

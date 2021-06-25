@@ -174,16 +174,16 @@ class AvgSpeed_electron(variant.VariantTask):
 @variant.arg(n=[2, 3])
 @variant.answer_align([
     'v &= v_0 + a t = at = {a:Value} * {t:Value} = {v:Value},',
-    's_x &= v_0t + \\frac{ a t^2 }2 = \\frac{ a t^2 }2 = \\frac{ {a:Value} * {t:Value:sqr} }2 = {s:Value},',
-    'v_\\text{ сред. } &= \\frac{ s_\\text{ общ } }{ t_\\text{ общ. } } = \\frac{ s_x + v * {n}t }{ t + {n}t } = \\frac{ \\frac{ a t^2 }2 + at * {n}t }{ t (1 + {n}) } =',
-    '&= at * \\frac{ \\frac 12 + {n} }{ 1 + {n} } = {a:Value} * {t:Value} * \\frac{ \\frac 12 + {n} }{ 1 + {n} } \\approx {v_avg:Value}.'
+    's_x &= v_0t + \\frac{a t^2}2 = \\frac{a t^2}2 = \\frac{{a:Value} * {t:Value:sqr}}2 = {s:Value},',
+    'v_\\text{сред.} &= \\frac{s_\\text{общ}}{t_\\text{общ.}} = \\frac{s_x + v * {n}t}{t + {n}t} = \\frac{\\frac{a t^2}2 + at * {n}t}{t (1 + {n})} =',
+    '&= at * \\frac{\\frac 12 + {n}}{1 + {n}} = {a:Value} * {t:Value} * \\frac{\\frac 12 + {n}}{1 + {n}} \\approx {v_avg:Value}.'
 ])
 class A_plus_V(variant.VariantTask):
     def GetUpdate(self, what=None, t=None, a=None, n=None, **kws):
         return dict(
             v='v = %.1f м / с' % (t.Value * a.Value) ,
             s='s_x = %.1f м' % (t.Value ** 2 * a.Value / 2) ,
-            v_avg='v_\\text{ сред. } = %.2f м / c' % (t.Value * a.Value * (1 / 2 + n) / (1 + n)) ,
+            v_avg='v_\\text{сред.} = %.2f м / c' % (t.Value * a.Value * (1 / 2 + n) / (1 + n)) ,
         )
 
 
@@ -194,9 +194,9 @@ class A_plus_V(variant.VariantTask):
 @variant.arg(n__which=[(2, 'вторую'), (3, 'третью'), (4, 'четвёртую'), (5, 'пятую'), (6, 'шестую')])
 @variant.arg(point=['начале', 'конце'])
 @variant.answer_align([
-    '{s:Letter} &= -s_y = -(y_2-y_1) = y_1 - y_2 = \\cbr{ y_{ 0y } + v_{ 0y }t_1 - \\frac{ gt_1^2 }2 } - \\cbr{ y_{ 0y } + v_{ 0y }t_2 - \\frac{ gt_2^2 }2 } =',
-    '&= \\frac{ gt_2^2 }2 - \\frac{ gt_1^2 }2 = \\frac g2\\cbr{ t_2^2 - t_1^2 } = {s:Value},',
-    '{v:Letter} &= v_{ 0y } - gt = -gt = {Consts.g_ten:Value} * {t:Value} = -{v:Value}.'
+    '{s:Letter} &= -s_y = -(y_2-y_1) = y_1 - y_2 = \\cbr{y_0 + v_{0y}t_1 - \\frac{gt_1^2}2} - \\cbr{y_0 + v_{0y}t_2 - \\frac{gt_2^2}2} =',
+    '&= \\frac{gt_2^2}2 - \\frac{gt_1^2}2 = \\frac g2\\cbr{t_2^2 - t_1^2} = {s:Value},',
+    '{v:Letter} &= v_{0y} - gt = -gt = {Consts.g_ten:Value} * {t:Value} = -{v:Value}.'
 ])
 class V_and_S_from_g_and_t(variant.VariantTask):
     def GetUpdate(self, n=None, which=None, point=None, **kws):
@@ -223,11 +223,11 @@ class V_and_S_from_g_and_t(variant.VariantTask):
 @variant.arg(l=('l = {} м', [2, 3, 4, 5]))
 @variant.arg(n=[5, 6, 10])
 @variant.answer_align([
-    't &= {t:Value}, r = {r:Value}, n = {n}\\units{ оборотов },',
-    'T &= \\frac tN = \\frac{t:Value:s}{ {n} } \\approx {T:Value},',
-    '\\nu &= \\frac 1T = \\frac{ {n} }{t:Value:s} \\approx {nu:Value},',
-    'v &= \\frac{ 2 \\pi r }{ T } = \\frac{ 2 \\pi r }{ T } =  \\frac{ 2 \\pi r n }{ t } \\approx {v:Value},',
-    'a &= \\frac{ v^2 }{ r } =  \\frac{ 4 \\pi^2 r n^2 }{ t^2 } \\approx {a:Value}.'
+    't &= {t:Value}, r = {r:Value}, n = {n}\\units{оборотов},',
+    'T &= \\frac tN = \\frac{t:Value:s}{{n}} \\approx {T:Value},',
+    '\\nu &= \\frac 1T = \\frac{{n}}{t:Value:s} \\approx {nu:Value},',
+    'v &= \\frac{2 \\pi r}T = \\frac{2 \\pi r}T =  \\frac{2 \\pi r n}t \\approx {v:Value},',
+    'a &= \\frac{v^2}r =  \\frac{4 \\pi^2 r n^2}{t^2} \\approx {a:Value}.'
 ])
 class All_from_l_and_n(variant.VariantTask):
     def GetUpdate(self, what=None, l=None, n=None, **kws):
@@ -259,9 +259,9 @@ class All_from_l_and_n(variant.VariantTask):
 @variant.arg(t=('t = {} с', ['1.2', '1.3', '1.4', '1.5', '1.6', '1.7', '1.8']))
 @variant.arg(v=('v_0 = {} м / с', ['12', '13', '14', '15', '16', '17', '18']))
 @variant.answer_align([
-    'y &= y_0 + v_{ 0y }t - \\frac{ gt^2 }2 = h - \\frac{ gt^2 }2, \\qquad y(\\tau) = 0 \\implies h - \\frac{ g\\tau^2 }2 = 0 \\implies h = \\frac{ g\\tau^2 }2 \\approx {h:Value}.',
-    'x &= x_0 + v_{ 0x }t = v_0t \\implies L = v_0\\tau \\approx {L:Value}.',
-    'v = \\sqrt{ v_x^2 + v_y^2 } = \\sqrt{ v_{ 0x }^2 + \\sqr{ v_{ 0y } - g\\tau } } = \\sqrt{ v_0^2 + \\sqr{ g\\tau } } \\approx {v_res:Value}.'
+    'y &= y_0 + v_{0y}t - \\frac{gt^2}2 = h - \\frac{gt^2}2, \\qquad y(\\tau) = 0 \\implies h - \\frac{g\\tau^2}2 = 0 \\implies h = \\frac{g\\tau^2}2 \\approx {h:Value}.',
+    'x &= x_0 + v_{0x}t = v_0t \\implies L = v_0\\tau \\approx {L:Value}.',
+    'v = \\sqrt{v_x^2 + v_y^2} = \\sqrt{v_{0x}^2 + \\sqr{v_{0y} - g\\tau}} = \\sqrt{v_0^2 + \\sqr{g\\tau}} \\approx {v_res:Value}.'
 ])
 class Stones_into_river(variant.VariantTask):
     def GetUpdate(self, who=None, t=None, v=None, **kws):

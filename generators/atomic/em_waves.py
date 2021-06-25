@@ -11,9 +11,9 @@ from generators.helpers import UnitValue, Consts, Fraction
 @variant.arg(n=['n = 1.%d' % n for n in [3, 4, 5, 6, 7]])
 @variant.arg(lmbd=['\\lambda = %d нм' % lmbd for lmbd in [400, 500, 600, 700]])
 @variant.answer_align([
-    '''\\nu &= \\frac 1T = \\frac 1{ \\lambda/c } = \\frac c\\lambda = \\frac{Consts.c:Value|s}{lmbd:Value|s} \\approx {nu:Value},''',
-    '''\\nu' = \\nu &\\cbr{ \\text{ или  } T' = T } \\implies \\lambda' = v'T' = \\frac vn T = \\frac{ vt }n = \\frac \\lambda n = \\frac{lmbd:Value|s}{n:Value|s} \\approx {lmbd_1:Value}.''',
-    '&\\text{ 380 нм---фиол---440---син---485---гол---500---зел---565---жёл---590---оранж---625---крас---780 нм }',
+    '''\\nu &= \\frac 1T = \\frac 1{\\lambda/c} = \\frac c\\lambda = \\frac{Consts.c:Value|s}{lmbd:Value|s} \\approx {nu:Value},''',
+    '''\\nu' = \\nu &\\cbr{\\text{или } T' = T} \\implies \\lambda' = v'T' = \\frac vn T = \\frac{ vt }n = \\frac \\lambda n = \\frac{lmbd:Value|s}{n:Value|s} \\approx {lmbd_1:Value}.''',
+    '&\\text{380 нм---фиол---440---син---485---гол---500---зел---565---жёл---590---оранж---625---крас---780 нм}',
 ])
 @variant.solution_space(180)
 class Gendenshteyn_11_11_18(variant.VariantTask):
@@ -118,8 +118,8 @@ class Prefix(variant.VariantTask):
 ''')
 @variant.answer_short('''
     E = h\\nu = h \\frac c\\lambda
-    \\implies \\lambda = \\frac{ hc }{ E }
-        = \\frac{ {Consts.h:Value} * {Consts.c:Value|s} }{E:Value|s}
+    \\implies \\lambda = \\frac{hc}E
+        = \\frac{{Consts.h:Value} * {Consts.c:Value|s}}{E:Value|s}
         = {lmbd:Value}.
 ''')
 @variant.arg(E=['E = %s 10^{-19} Дж' % E for E in ['4.04', '5.05', '2.02', '7.07', '1.01', '0.55']])
@@ -140,8 +140,8 @@ class Lambda_from_E(variant.VariantTask):  # Вишнякова - Базовый
 ''')
 @variant.answer_short('''
     E = h\\nu = h \\frac c\\lambda
-    \\implies \\lambda = \\frac{ hc }{ E }
-        = \\frac{ {Consts.h:Value} * {Consts.c:Value|s} }{E:Value|s}
+    \\implies \\lambda = \\frac{hc}E
+        = \\frac{{Consts.h:Value} * {Consts.c:Value|s}}{E:Value|s}
         = {lmbd:Value}.
 ''')
 @variant.arg(E=['E = %d 10^{-19} Дж' % E for E in [2, 3, 4, 6]])
@@ -164,7 +164,7 @@ class Lambda_from_E_2(variant.VariantTask):  # Вишнякова - Базовы
     Отметьте все соответствующие переходы на рисунке и укажите,
     при каком переходе (среди отмеченных) {what} излучённого фотона {minmax}.
 ''')
-@variant.answer_short('N = {N}, \\text{ {answer} }')
+@variant.answer_short('N = {N}, \\text{{answer}}')
 @variant.arg(n=[3, 4, 5])
 @variant.arg(what__what_sign=[
     ('энергия', 1),

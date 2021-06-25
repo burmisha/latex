@@ -88,7 +88,7 @@ class Basic04(variant.VariantTask):
 @variant.no_args
 @variant.solution_space(0)
 @variant.answer_short('''
-    \\text{ да, да, нет, нет, нет, да, да, да }
+    \\text{да, да, нет, нет, нет, да, да, да}
 ''')
 class Basic05(variant.VariantTask):
     pass
@@ -101,7 +101,7 @@ class Basic05(variant.VariantTask):
     '9 10^22', '9 10^23', '9 10^24', '9 10^25',
     '12 10^22', '12 10^23', '12 10^24', '12 10^25',
 ])
-@variant.answer_short('\\nu = \\frac{ N }{Consts.N_A:L|s} = \\frac{N:V|s}{Consts.N_A:V|s} = {nu:V}.')
+@variant.answer_short('\\nu = \\frac N{Consts.N_A:L|s} = \\frac{N:V|s}{Consts.N_A:V|s} = {nu:V}.')
 class CountNu(variant.VariantTask):
     def GetUpdate(self, N=None, **kws):
         return dict(
@@ -298,18 +298,18 @@ class Basic09(variant.VariantTask):
 @variant.arg(fv_2=['мПа', 'МПа'])
 @variant.arg(fv_3=['эВ', 'мкДж', 'мДж'])
 @variant.arg(fv_4=[
-    '$\\frac{ \\text{ кг } }{ \\text{ м }^3 }$',
-    '$\\frac{ \\text{ г } }{ \\text{ л } }$',
-    '$\\frac{ 1 }{ \\text{ м }^3 }$',
-    '$\\frac{ 1 }{ \\text{ л } }$',
-    '$\\text{ м }^3$',
-    '$\\text{ л }$',
+    '$\\frac{\\text{кг}}{\\text{м}^3}$',
+    '$\\frac{\\text{г}}{\\text{л}}$',
+    '$\\frac{1}{\\text{м}^3}$',
+    '$\\frac{1}{\\text{л}}$',
+    '$\\text{м}^3$',
+    '$\\text{л}$',
 ])
 @variant.arg(fv_5=[
-    '$\\units{ г }$',
-    '$\\units{ моль }$',
-    '$\\funits{ г }{ моль }$',
-    '$\\funits{ кг }{ моль }$',
+    '$\\units{г}$',
+    '$\\units{моль}$',
+    '$\\funits{г}{моль}$',
+    '$\\funits{кг}{моль}$',
 ])
 class Basic10(variant.VariantTask):
     pass
@@ -435,13 +435,13 @@ class GraphPV_2(variant.VariantTask):
 ])
 @variant.arg(T=[f'T = {t+5+273} К' for t in range(15)])
 @variant.answer_align([
-    'T\\text{ — const } &\\implies P_1V_1 = \\nu RT = P_2V_2.',
+    'T\\text{— const} &\\implies P_1V_1 = \\nu RT = P_2V_2.',
     'V_2 = \\frac 1{n} V_1 &\\implies P_1V_1 = P_2 * \\frac 1{n}V_1 \\implies P_2 = {n}P_1 = {n}{Consts.p_atm:L}.',
     'P_2 = {Consts.p_atm:L} + {Consts.water.rho:L} {Consts.g_ten:L} h \\implies '
-    'h = \\frac{ P_2 - {Consts.p_atm:L} }{ {Consts.water.rho:L} {Consts.g_ten:L} }'
-    ' &= \\frac{ {n}{Consts.p_atm:L} - {Consts.p_atm:L} }{ {Consts.water.rho:L} {Consts.g_ten:L} }'
-    ' = \\frac{ {n_1} * {Consts.p_atm:L} }{ {Consts.water.rho:L} {Consts.g_ten:L} } = ',
-    ' &= \\frac{ {n_1} * {Consts.p_atm:V} }{ {Consts.water.rho:V} *  {Consts.g_ten:V} } \\approx {h:V}.'
+    'h = \\frac{P_2 - {Consts.p_atm:L}}{{Consts.water.rho:L} {Consts.g_ten:L}}'
+    ' &= \\frac{{n}{Consts.p_atm:L} - {Consts.p_atm:L}}{{Consts.water.rho:L} {Consts.g_ten:L}}'
+    ' = \\frac{{n_1} * {Consts.p_atm:L}}{{Consts.water.rho:L} {Consts.g_ten:L}} = ',
+    ' &= \\frac{{n_1} * {Consts.p_atm:V}}{{Consts.water.rho:V} *  {Consts.g_ten:V}} \\approx {h:V}.'
 ])
 class ZFTSH_10_2_9_kv(variant.VariantTask):
     def GetUpdate(self, ratio=None, n=None, T=None, **kws):
@@ -453,7 +453,7 @@ class ZFTSH_10_2_9_kv(variant.VariantTask):
 
 @variant.solution_space(120)
 @variant.text('''
-    В замкнутом сосуде объёмом {V:Value:e} находится {gas.Name} ($\\mu = {gas.mu:V}$) под давлением ${p}\\units{ атм }$.
+    В замкнутом сосуде объёмом {V:Value:e} находится {gas.Name} ($\\mu = {gas.mu:V}$) под давлением ${p}\\units{атм}$.
     Определите массу газа в сосуде и выразите её в граммах, приняв температуру газа равной ${t}\\celsius$.
 ''')
 @variant.arg(gas=[
@@ -468,8 +468,8 @@ class ZFTSH_10_2_9_kv(variant.VariantTask):
 @variant.arg(p=[2.5, 3, 3.5, 4, 4.5, 5])
 @variant.arg(t=[7, 17, 27, 37, 47])
 @variant.answer_short('''
-    PV = \\frac m\\mu RT \\implies m = \\frac{ PV \\mu }{ RT } =
-    \\frac{ {P:V} * {V:V} * {gas.mu:V} }{ {Consts.R:V} * \\cbr{ {t} + 273 }\\units{ К } }
+    PV = \\frac m\\mu RT \\implies m = \\frac{PV \\mu}{RT} =
+    \\frac{{P:V} * {V:V} * {gas.mu:V}}{{Consts.R:V} * \\cbr{{t} + 273}\\units{К}}
     \\approx {m:V}.
 ''')
 
@@ -483,7 +483,7 @@ class ZFTSH_10_2_2_kv(variant.VariantTask):
 
 @variant.solution_space(120)
 @variant.text('''
-    Идеальный газ в экспериментальной установке подвергут политропному процессу $PV^n\\text{ — const }$
+    Идеальный газ в экспериментальной установке подвергут политропному процессу $PV^n\\text{— const}$
     с показателем политропы $n={n}$. В одном из экспериментов объём газа {what} в ${how}$ раза.
     Как при этом изменилась температура газа (выросла или уменьшилась, на сколько или во сколько раз)?
 ''')
@@ -492,9 +492,9 @@ class ZFTSH_10_2_2_kv(variant.VariantTask):
 @variant.arg(how=[2, 3, 4])
 @variant.answer_align([
     'P_1V_1^n &= P_2V_2^n, P_1V_1 = \\nu R T_1, P_2V_2 = \\nu R T_2 \\implies'
-    '\\frac{ \\nu R T_1 }{ V_1 } V_1^n = \\frac{ \\nu R T_2 }{ V_2 } V_2^n \\implies',
-    '\\implies T_1V_1^{ n-1 } &= T_2V_2^{ n - 1 } \\implies'
-    '\\frac{ T_2 }{ T_1 } = \\cbr{ \\frac{ V_1 }{ V_2 } }^{ n-1 } \\approx {ans}'
+    '\\frac{\\nu R T_1}{V_1} V_1^n = \\frac{\\nu R T_2}{V_2} V_2^n \\implies',
+    '\\implies T_1V_1^{n-1} &= T_2V_2^{n-1} \\implies'
+    '\\frac{T_2}{T_1} = \\cbr{\\frac{V_1}{V_2}}^{n-1} \\approx {ans}'
 ])
 class Polytrope(variant.VariantTask):
     def GetUpdate(self, what=None, n=None, how=None, **kws):
@@ -515,9 +515,9 @@ class Polytrope(variant.VariantTask):
 @variant.arg(t=[50, 100, 150, 200])
 @variant.arg(p=('p = {} кПа', [50, 80, 120, 150]))
 @variant.answer_align([
-    '\\text{ В общем случае: } PV = \\frac m{ \\mu } RT \\implies \\rho = \\frac mV = \\frac m{ \\frac{ \\frac m{ \\mu } RT }P } = \\frac{ P\\mu }{ RT },',
-    '\\text{ У нас 2 состояния: } \\rho_1 = \\frac{ P_1\\mu }{ RT_1 }, \\rho_2 = \\frac{ P_2\\mu }{ RT_2 } \\implies \\frac{ \\rho_2 }{ \\rho_1 } = \\frac{ \\frac{ P_2\\mu }{ RT_2 } }{ \\frac{ P_1\\mu }{ RT_1 } } = \\frac{ P_2T_1 }{ P_1T_2 } \\implies',
-    '\\implies \\rho_2 = \\rho_1 *  \\frac{ P_2T_1 }{ P_1T_2 } = {rho:V} * \\frac{ {p:V} * {T1}\\units{ К } }{ {Consts.p_atm:V} * {T2}\\units{ К } } \\approx {rho2:V}.'
+    '\\text{В общем случае:} PV = \\frac m{\\mu} RT \\implies \\rho = \\frac mV = \\frac m{\\frac{\\frac m{\\mu} RT}P} = \\frac{P\\mu}{RT},',
+    '\\text{У нас 2 состояния:} \\rho_1 = \\frac{P_1\\mu}{RT_1}, \\rho_2 = \\frac{P_2\\mu}{RT_2} \\implies \\frac{\\rho_2}{\\rho_1} = \\frac{\\frac{P_2\\mu}{RT_2}}{\\frac{P_1\\mu}{RT_1}} = \\frac{P_2T_1}{P_1T_2} \\implies',
+    '\\implies \\rho_2 = \\rho_1 *  \\frac{P_2T_1}{P_1T_2} = {rho:V} * \\frac{{p:V} * {T1}\\units{К}}{{Consts.p_atm:V} * {T2}\\units{К}} \\approx {rho2:V}.'
 ])
 class Air_rho(variant.VariantTask):
     def GetUpdate(self, rho=None, p=None, t=None, **kws):

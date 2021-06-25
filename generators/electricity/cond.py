@@ -93,7 +93,7 @@ class Definitions04(variant.VariantTask):
 @variant.answer_short('''
     {Q:L} = {C:L}{U:L} \\implies
     {C:L} = \\frac{Q:L:s}{U:L:s} = \\frac{Q:Value:s}{U:Value:s} = {C:Value}.
-    \\text{ Заряды обкладок: ${Q:L}$ и $-{Q:L}$ }
+    \\text{ Заряды обкладок: ${Q:L}$ и $-{Q:L}$}
 ''')
 @variant.answer_test('{C_test}')
 # @variant.arg(U=['%s = %d кВ' % (Ul, Uv) for Ul in ['U', 'V'] for Uv in [2, 3, 5, 6, 12, 15, 20]])
@@ -118,7 +118,7 @@ class C_from_U_Q(variant.VariantTask):  # Rymkevich748
 ''')
 @variant.answer_short('''
     {Q_max:L} = {C:L}{U:L} = {C:Value} * {U:Value} = {Q_max:Value}
-    \\implies {Q_max:L} {sign} {Q:L} \\implies \\text{ {result} }
+    \\implies {Q_max:L} {sign} {Q:L} \\implies \\text{{result}}
 ''')
 @variant.answer_test('{short}')
 @variant.arg(U=['%s = %d В' % (Ul, Uv) for Ul in ['U', 'V'] for Uv in [200, 300, 400, 450]])
@@ -136,7 +136,7 @@ class Q_is_possible(variant.VariantTask):  # Rymkevich750
             result = 'не удастся'
             short = '[Нн][Ее][Тт]'
         return dict(
-            Q_max='%s_{ \\text{ max } } = %d нКл' % (Q.Letter, Q_max),
+            Q_max='%s_{\\text{max}} = %d нКл' % (Q.Letter, Q_max),
             sign=sign,
             result=result,
             short=short
@@ -178,9 +178,9 @@ class Q_from_DeltaU_C(variant.VariantTask):  # Генденштейн-10-54-5
     В ответе укажите простую дробь или число — отношение новой ёмкости к старой.
 ''')
 @variant.answer_short('''
-    \\frac{ C' }{ C }
-        = \\frac{ \\eps_0\\eps \\frac S{a} }{ \\frac d{b} } \\Big/ \\frac{ \\eps_0\\eps S }{ d }
-        = \\frac{ {b} }{ {a} } = {sign} 1 \\implies \\text{ {result} }
+    \\frac{C'}C
+        = \\frac{\\eps_0\\eps \\frac S{a}}{\\frac d{b}} \\Big/ \\frac{\\eps_0\\eps S}d
+        = \\frac{{b}}{{a}} = {sign} 1 \\implies \\text{{result}}
 ''')
 @variant.answer_test('{ratio:Basic}')
 @variant.arg(a=[2, 3, 4, 5, 6, 7, 8])
@@ -217,8 +217,8 @@ class C_ratio(variant.VariantTask):  # Rymkevich751
 ''')
 @variant.answer_short('''
     {W:L}
-    = \\frac{ {Q:L}^2 }{ 2{C:L} }
-    = \\frac{ \\sqr{Q:Value:s} }{ 2 * {C:Value} }
+    = \\frac{{Q:L}^2}{2{C:L}}
+    = \\frac{\\sqr{Q:Value:s}}{2 * {C:Value}}
     = {W:Value}
 ''')
 @variant.answer_test('{W_test}')
@@ -235,11 +235,11 @@ class W_from_Q_C(variant.VariantTask):  # Rymkevich762
 
 @variant.text('''
     \\begin{tikzpicture}[circuit ee IEC, x=1cm, y=1cm, semithick]
-        \\draw  (0, 0) -- (0, 2) to [capacitor={ info={ {C1:L:e} } }] (2, 2)
-                (0, 0) -- (2, 0) to [capacitor={ info={ {C2:L:e} } }] (0, 0)
+        \\draw  (0, 0) -- (0, 2) to [capacitor={info={{C1:L:e}}}] (2, 2)
+                (0, 0) -- (2, 0) to [capacitor={info={{C2:L:e}}}] (0, 0)
         ;
-        \\draw [-o] (0, 1) -- ++(-1, 0) node[left] { $-$ };
-        \\draw [-o] (2, 1) -- ++(1, 0) node[right] { $+$ };
+        \\draw [-o] (0, 1) -- ++(-1, 0) node[left] {$-$};
+        \\draw [-o] (2, 1) -- ++(1, 0) node[right] {$+$};
 
         \\node [right,text width = 14cm, align=justify] at (3.5,1.5) {
         Два конденсатора ёмкостей {C1:Task:e} и {C2:Task:e} параллельно подключают
@@ -251,8 +251,8 @@ class W_from_Q_C(variant.VariantTask):  # Rymkevich762
     Q_1
         = Q_2
         = C{U:L}
-        = \\frac{U:L:s}{ \\frac1{ C_1 } + \\frac1{ C_2 } }
-        = \\frac{ C_1C_2{U:L} }{ C_1 + C_2 }
+        = \\frac{U:L:s}{\\frac1{C_1} + \\frac1{C_2}}
+        = \\frac{C_1C_2{U:L}}{C_1 + C_2}
         = \\frac{
             {C1:Value} * {C2:Value} * {U:Value}
          }{
@@ -276,21 +276,21 @@ class CondPosl(variant.VariantTask):
     Определите заряд {which} конденсатора.
 
     \\begin{tikzpicture}[circuit ee IEC, semithick]
-        \\draw  (0, 0) to [capacitor={ info={ {C1:L:e} } }] (1, 0)
-                       to [capacitor={ info={ {C2:L:e} } }] (2, 0)
+        \\draw  (0, 0) to [capacitor={info={{C1:L:e}}}] (1, 0)
+                       to [capacitor={info={{C2:L:e}}}] (2, 0)
         ;
-        % \\draw [-o] (0, 0) -- ++(-0.5, 0) node[left] { $-$ };
-        % \\draw [-o] (2, 0) -- ++(0.5, 0) node[right] { $+$ };
-        \\draw [-o] (0, 0) -- ++(-0.5, 0) node[left] {  };
-        \\draw [-o] (2, 0) -- ++(0.5, 0) node[right] {  };
+        % \\draw [-o] (0, 0) -- ++(-0.5, 0) node[left] {$-$};
+        % \\draw [-o] (2, 0) -- ++(0.5, 0) node[right] {$+$};
+        \\draw [-o] (0, 0) -- ++(-0.5, 0) node[left] {};
+        \\draw [-o] (2, 0) -- ++(0.5, 0) node[right] {};
     \\end{tikzpicture}
 ''')
 @variant.answer_short('''
     Q_1
         = Q_2
         = C{U:L}
-        = \\frac{U:L:s}{ \\frac1{ C_1 } + \\frac1{ C_2 } }
-        = \\frac{ C_1C_2{U:L} }{ C_1 + C_2 }
+        = \\frac{U:L:s}{\\frac1{C_1} + \\frac1{C_2}}
+        = \\frac{C_1C_2{U:L}}{C_1 + C_2}
         = \\frac{
             {C1:Value} * {C2:Value} * {U:Value}
          }{

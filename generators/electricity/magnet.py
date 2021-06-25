@@ -12,12 +12,12 @@ log = logging.getLogger(__name__)
 @variant.text('''
     Верно ли, что
     \\begin{itemize}
-        \item   если распилить постоянный магнит на 2, то мы получим 2 магнита:
+        \\item   если распилить постоянный магнит на 2, то мы получим 2 магнита:
                 один только с южным полюсом, а второй — только с северным,
-        \item   линии магнитного поля всегда замкнуты,
-        \item   линии магнитного поля могут пересекаться в полюсах магнитов,
-        \item   линии магнитного всегда начинаются у северного полюса и заканчиваются у южного,
-        \item   Северный географическию полюс Земли в точности совпадает с южным магнитным полюсом Земли?
+        \\item   линии магнитного поля всегда замкнуты,
+        \\item   линии магнитного поля могут пересекаться в полюсах магнитов,
+        \\item   линии магнитного всегда начинаются у северного полюса и заканчиваются у южного,
+        \\item   Северный географическию полюс Земли в точности совпадает с южным магнитным полюсом Земли?
     \\end{itemize}
 ''')
 @variant.no_args
@@ -78,9 +78,9 @@ class ConstMagnet3(variant.VariantTask):
     Какая сила будет действовать на этот проводник при пропусканиии по нему тока {I:Task|e}?
 ''')
 @variant.answer_align([
-    '''F &= \\sqrt{ F_a^2 + F_b^2 } = \\sqrt{ \\sqr{ \\mathcal{ I }Ba } + \\sqr{ \\mathcal{ I }Bb } }
-            = \\mathcal{ I }B\\sqrt{ a^2 + b^2 } = \\mathcal{ I }B\\sqrt{ a^2 + (l - a)^2 } = ''',
-    '&= {I:Value} * {B:Value} * \\sqrt{ {a:Value|sqr} + \\sqr{ {l:Value} - {a:Value} } } = {F:Value}.',
+    '''F &= \\sqrt{F_a^2 + F_b^2} = \\sqrt{\\sqr{{I:L}Ba} + \\sqr{{I:L}Bb}}
+            = {I:L}B\\sqrt{a^2 + b^2} = {I:L}B\\sqrt{a^2 + (l - a)^2} = ''',
+    '&= {I:Value} * {B:Value} * \\sqrt{{a:Value|sqr} + \\sqr{{l:Value} - {a:Value}}} = {F:Value}.',
 ])
 @variant.arg(l__a=[('l = %d см' % (a + b), 'a = %d см' % a) for a, b in [
     (30, 40), (40, 30), (3, 4), (4, 3),
@@ -103,10 +103,10 @@ class Chernoutsan11_01(variant.VariantTask):
     Масса единицы длины проводника {rho:Task|e}, {Consts.g_ten:Task|e}.
 ''')
 @variant.answer_short('''
-        mg = B\\mathcal{ I } l, m=\\rho l
-        \\implies \\mathcal{ I }
-            = \\frac{ g\\rho } { B }
-            = \\frac{ {Consts.g_ten:Value} * {rho:Value} }{B:Value|s}
+        mg = B{I:L} l, m=\\rho l
+        \\implies {I:L}
+            = \\frac{g\\rho}B
+            = \\frac{{Consts.g_ten:Value} * {rho:Value}}{B:Value|s}
             = {I:Value}.
 ''')
 @variant.arg(B=['B = %d мТл' % B for B in [10, 20, 50, 100]])
@@ -124,8 +124,8 @@ class Chernoutsan11_02(variant.VariantTask):
     Проводник перпендикулярен линиям поля и движется в направлении силы Ампера.
 ''')
 @variant.answer_short('''
-    A   = F * d = B\\mathcal{ I } l  * d
-        = {B:Value}  * {I:Value}  * {l:Value}  * {d:Value}
+    A   = F * d = B {I:L} l * d
+        = {B:Value} * {I:Value} * {l:Value} * {d:Value}
         = {A:Value}.
 ''')
 @variant.arg(l=['l = %d см' % l for l in [20, 30, 40, 50]])

@@ -6,7 +6,7 @@ from generators.helpers import Consts
 @variant.text('''
     Для частицы, движущейся с релятивистской скоростью,
     выразите ${x}$ и ${y}$ через $m$, ${a}$ и ${b}$, где
-    $E_\\text{ кин }$~--- кинетическая энергия частицы,
+    $E_\\text{кин}$~--- кинетическая энергия частицы,
     $E_0$~--- её энергия покоя,
     а $p, v, m$~--- её импульс, скорость и масса.
 ''')
@@ -27,22 +27,22 @@ class Equations(variant.VariantTask):
     Каково при этом отношение {energy} к его энергии покоя $E_0$?
 ''')
 @variant.answer_align([
-    '''E &= \\frac{ E_0 }{ \\sqrt{ 1 - \\frac{ v^2 }{ c^2 } } }
-        \\implies \\frac{ E }{ E_0 }
-            = \\frac 1{ \\sqrt{ 1 - \\frac{ v^2 }{ c^2 } } }
-            = \\frac 1{ \\sqrt{ 1 - \\sqr{ 0.{percent} } } }
+    '''E &= \\frac{E_0}{\\sqrt{1 - \\frac{v^2}{c^2}}}
+        \\implies \\frac E{E_0}
+            = \\frac 1{\\sqrt{1 - \\frac{v^2}{c^2}}}
+            = \\frac 1{\\sqrt{1 - \\sqr{0.{percent}}}}
             \\approx {E:.3f},
     ''',
     '''
-    E_{ \\text{ кин } } &= E - E_0
-        \\implies \\frac{ E_{ \\text{ кин } } }{ E_0 }
-            = \\frac{ E }{ E_0 } - 1
-            = \\frac 1{ \\sqrt{ 1 - \\frac{ v^2 }{ c^2 } } } - 1
-            = \\frac 1{ \\sqrt{ 1 - \\sqr{ 0.{percent} } } } - 1
+    E_{\\text{кин}} &= E - E_0
+        \\implies \\frac{E_{\\text{кин}}}{E_0}
+            = \\frac E{E_0} - 1
+            = \\frac 1{\\sqrt{1 - \\frac{v^2}{c^2}}} - 1
+            = \\frac 1{\\sqrt{1 - \\sqr{0.{percent}}}} - 1
             \\approx {E_kin:.3f}.''',
 ])
 @variant.arg(what=['Протон', 'Позитрон'])
-@variant.arg(energy=['полной энергии частицы $E$', 'кинетической энергии частицы $E_\\text{ кин. }$'])
+@variant.arg(energy=['полной энергии частицы $E$', 'кинетической энергии частицы $E_\\text{кин.}$'])
 @variant.arg(percent=['9', '8', '7', '6'])
 class E_ratio_from_v_ratio(variant.VariantTask):  # Вишнякова - Базовый курс 4 - задача 1
     def GetUpdate(self, energy=None, percent=None, **kws):
@@ -59,21 +59,21 @@ class E_ratio_from_v_ratio(variant.VariantTask):  # Вишнякова - Баз�
     Определите его {x} (в ответе приведите формулу и укажите численное значение).
 ''')
 @variant.answer_align([
-    '''E &= \\frac{ mc^2 }{  \\sqrt{ 1 - \\frac{ v^2 }{ c^2 } } }
-        \\approx \\frac{ {m:Value} * {Consts.c:Value|sqr} }{ \\sqrt{ 1 - 0.{percent}^2 } }
+    '''{E:L} &= \\frac{mc^2}{\\sqrt{1 - \\frac{v^2}{c^2}}}
+        \\approx \\frac{{m:Value} * {Consts.c:Value|sqr}}{\\sqrt{1 - 0.{percent}^2}}
         \\approx {E:Value},
     ''',
     '''
-    E_{ \\text{ кин } } &= \\frac{ mc^2 }{ \\sqrt{ 1 - \\frac{ v^2 }{ c^2 } } } - mc^2
-        = mc^2 \\cbr{ \\frac 1{ \\sqrt{ 1 - \\frac{ v^2 }{ c^2 } } } - 1 } \\approx''',
+    {E_kin:L} &= \\frac{mc^2}{\\sqrt{1 - \\frac{v^2}{c^2}}} - mc^2
+        = mc^2 \\cbr{\\frac 1{\\sqrt{1 - \\frac{v^2}{c^2}}} - 1} \\approx''',
     '''
-        &\\approx \\cbr{ {m:Value} * {Consts.c:Value|sqr} }
-        * \\cbr{ \\frac 1{ \\sqrt{ 1 - 0.{percent}^2 } } - 1 }
+        &\\approx \\cbr{{m:Value} * {Consts.c:Value|sqr}}
+        * \\cbr{\\frac 1{\\sqrt{1 - 0.{percent}^2}} - 1}
         \\approx {E_kin:Value},
     ''',
     '''
-    p &= \\frac{ mv }{ \\sqrt{ 1 - \\frac{ v^2 }{ c^2 } } }
-        \\approx \\frac{ {m:Value} * 0.{percent} * {Consts.c:Value} }{ \\sqrt{ 1 - 0.{percent}^2 } }
+    {p:L} &= \\frac{mv}{\\sqrt{1 - \\frac{v^2}{c^2}}}
+        \\approx \\frac{{m:Value} * 0.{percent} * {Consts.c:Value}}{\\sqrt{1 - 0.{percent}^2}}
         \\approx {p:Value}.'''
 ])
 @variant.arg(what=['Протон', 'Электрон'])
@@ -91,11 +91,11 @@ class E_P_from_v_ratio(variant.VariantTask):  # Вишнякова - Базов�
                 value=m.Value * Consts.c.Value ** 2 / ((1. - share ** 2) ** 0.5),
                 power=m.Power + 2 * Consts.c.Power,
             ),
-            E_kin='{value:.1f} 10^{power} Дж'.format(
+            E_kin='E_{{\\text{{кин}}}} = {value:.1f} 10^{power} Дж'.format(
                 value=m.Value * Consts.c.Value ** 2 * (1. / ((1. - share ** 2) ** 0.5) - 1),
                 power=m.Power + 2 * Consts.c.Power,
             ),
-            p='{value:.1f} 10^{power} кг м / с'.format(
+            p='p = {value:.1f} 10^{power} кг м / с'.format(
                 value=m.Value * share * Consts.c.Value / ((1. - share ** 2) ** 0.5),
                 power=m.Power + Consts.c.Power,
             ),
@@ -109,14 +109,14 @@ class E_P_from_v_ratio(variant.VariantTask):  # Вишнякова - Базов�
     составит {percent}\\%?
 ''')
 @variant.answer_align([
-    '''l_0 &= \\frac{ l }{ \\sqrt{ 1 - \\frac { v^2 }{ c^2 } } }
-    \\implies 1 - \\frac{ v^2 }{ c^2 } = \\sqr{ \\frac l{ l_0 } }
-    \\implies \\frac v c = \\sqrt{ 1 - \\sqr{ \\frac l{ l_0 } } } \\implies
+    '''l_0 &= \\frac l{\\sqrt{1 - \\frac{v^2}{c^2}}}
+    \\implies 1 - \\frac{v^2}{c^2} = \\sqr{\\frac l{l_0}}
+    \\implies \\frac v c = \\sqrt{1 - \\sqr{\\frac l{l_0}}} \\implies
     ''',
     '''
-    \\implies v &= c\\sqrt{ 1 - \\sqr{ \\frac l{ l_0 } } }
-    = {Consts.c:Value} * \\sqrt{ 1 - \\sqr{ \\frac { l_0 - 0.{percent}l_0 }{ l_0 } } }
-    = {Consts.c:Value} * \\sqrt{ 1 - \\sqr{ 1 - 0.{percent} } } \\approx ''',
+    \\implies v &= c\\sqrt{1 - \\sqr{\\frac l{l_0}}}
+    = {Consts.c:Value} * \\sqrt{1 - \\sqr{\\frac {l_0 - 0.{percent}l_0}{l_0}}}
+    = {Consts.c:Value} * \\sqrt{1 - \\sqr{1 - 0.{percent}}} \\approx ''',
     '''
     &\\approx {answerShare:.3f}c
     \\approx {speed:Value}

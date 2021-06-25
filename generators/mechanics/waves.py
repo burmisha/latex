@@ -29,14 +29,14 @@ class Waves00(variant.VariantTask):
     Чему станет равен период колебаний, если массу пружинного маятника увеличить в ${alpha}$ раз?
 ''')
 @variant.answer_short('''
-    T'  = 2\\pi\\sqrt{ \\frac { m' }k }
-        = 2\\pi\\sqrt{ \\frac { \\alpha m }k }
-        = \\sqrt{ \\alpha } * 2\\pi\\sqrt{ \\frac mk }
-        = \\sqrt{ \\alpha } * T
-        = T\\sqrt{ \\alpha }
-        = \\frac 1\\nu * \\sqrt{ \\alpha }
-        = \\frac{ \\sqrt{ \\alpha } }{ \\nu }
-        = \\frac{ \\sqrt{ {alpha} } }{nu:Value:s}
+    T'  = 2\\pi\\sqrt{\\frac {m'}k}
+        = 2\\pi\\sqrt{\\frac {\\alpha m}k}
+        = \\sqrt{\\alpha} * 2\\pi\\sqrt{\\frac mk}
+        = \\sqrt{\\alpha} * T
+        = T\\sqrt{\\alpha}
+        = \\frac 1\\nu * \\sqrt{\\alpha}
+        = \\frac{\\sqrt{\\alpha}}{\\nu}
+        = \\frac{\\sqrt{{alpha}}}{nu:Value:s}
         = {T1:Value}
 ''')
 @variant.arg(nu=['\\nu = %s Гц' % nu for nu in ['2', '4', '5', '8']])
@@ -56,9 +56,9 @@ class Waves01(variant.VariantTask):
 ''')
 @variant.answer_align([
     '''
-        E_{ \\text{ полная механическая } } &= E_{ \\text{ max кинетическая } }
-        = \\frac{ m v_{ \\max }^2 }2 = \\frac{ {m:Value} * {v:Value|sqr} }2 = {E:Value},''',
-    'A_{ E_{ \\text{ потенциальная } } } &= \\frac{ E_{ \\text{ полная механическая } } }2 = {E2:Value}.'
+        E_{\\text{полная механическая}} &= E_{\\text{max кинетическая}}
+        = \\frac{m v_{\\max}^2}2 = \\frac{{m:Value} * {v:Value|sqr}}2 = {E:Value},''',
+    'A_{E_{\\text{потенциальная}}} &= \\frac{E_{\\text{полная механическая}}}2 = {E2:Value}.'
 ])
 @variant.arg(mLetter=['m', 'M'])
 @variant.arg(mValue=[100, 200, 250, 400])
@@ -77,7 +77,7 @@ class Waves02(variant.VariantTask):
     если длина волны равна {lmbd:Value:e}. Сколько между ними ещё уместилось гребней?
 ''')
 @variant.answer_short('''
-    l = (n_2 - n_1) * \\lambda = \\cbr{ {n2} - {n1} } * {lmbd:Value} = {l:Value},
+    l = (n_2 - n_1) * \\lambda = \\cbr{{n2} - {n1}} * {lmbd:Value} = {l:Value},
     \\quad n = n_2 - n_1 - 1 = {n2} - {n1} - 1 = {n}
 ''')
 @variant.arg(first__n1=[
@@ -106,7 +106,7 @@ class Waves03(variant.VariantTask):
     колеблющийся с периодом {T:Value:e}, возбуждает волны длиной
     {lmbd:Value:e}.
 ''')
-@variant.answer_short('\\lambda = vT \\implies v = \\frac{ \\lambda }T = \\frac{lmbd:Value:s}{T:Value:s} = {v:Value:s}')
+@variant.answer_short('\\lambda = vT \\implies v = \\frac{\\lambda}T = \\frac{lmbd:Value:s}{T:Value:s} = {v:Value:s}')
 @variant.arg(lmbd=['\\lambda = %.1f м' % lmbd for lmbd in [1.2, 1.5, 2.1, 2.4]])
 @variant.arg(T=['T = %d мc' % T for T in [2, 3, 4, 5, 6]])
 class Waves04(variant.VariantTask):
@@ -122,13 +122,13 @@ class Waves04(variant.VariantTask):
     если скорость распространения волн {v:Value:e}?
 ''')
 @variant.answer_align([
-    u"\\lambda &= \\frac L{ N-1 } = \\frac { vt }{ N-1 } = \\frac { {v:Value} * {t:Value} }{ {N:Value} - 1 } = {lmbd:Value}, ",
-    u"T &= \\frac { \\lambda }{ v } = \\frac { vt }{ \\cbr{ N-1 }v } = \\frac { t }{ N-1 } =  \\frac {t:Value:s}{ {N:Value} - 1 } = {T:Value}, ",
-    u"\\nu &= \\frac 1T = \\frac { N-1 }{ t } = \\frac { {N:Value} - 1 }{t:Value:s} = {nu:Value}. ",
-    u"&\\text{ Если же считать гребни целиком, т.е. не вычитать единицу: } ",
-    u"\\lambda' &= \\frac L{ N } = \\frac { vt }{ N } = \\frac { {v:Value} * {t:Value} }{N:Value:s} = {lmbd_1:Value}, ",
-    u"T' &= \\frac { \\lambda' }{ v } = \\frac { vt }{ Nv } = \\frac tN =  \\frac {t:Value:s}{N:Value:s} = {T_1:Value}, ",
-    u"\\nu' &= \\frac 1{ T' } = \\frac { N }{ t } = \\frac {N:Value:s}{t:Value:s} = {nu_1:Value}. ",
+    u"\\lambda &= \\frac L{N-1} = \\frac {vt}{N-1} = \\frac {{v:Value} * {t:Value}}{{N:Value} - 1} = {lmbd:Value}, ",
+    u"T &= \\frac {\\lambda}{v:L} = \\frac {vt}{\\cbr{N-1}v} = \\frac t{N-1} =  \\frac {t:Value:s}{{N:Value} - 1} = {T:Value}, ",
+    u"\\nu &= \\frac 1T = \\frac {N-1}t = \\frac {{N:Value} - 1}{t:Value:s} = {nu:Value}. ",
+    u"&\\text{Если же считать гребни целиком, т.е. не вычитать единицу:} ",
+    u"\\lambda' &= \\frac L{N:L:s} = \\frac {vt}{N:L:s} = \\frac {{v:Value} * {t:Value}}{N:Value:s} = {lmbd_1:Value}, ",
+    u"T' &= \\frac {\\lambda'}{v:L} = \\frac {vt}{Nv} = \\frac tN =  \\frac {t:Value:s}{N:Value:s} = {T_1:Value}, ",
+    u"\\nu' &= \\frac 1{T'} = \\frac {N:L:s}t = \\frac {N:Value:s}{t:Value:s} = {nu_1:Value}. ",
 ])
 @variant.arg(N=['N = %d' % N for N in [4, 5, 6]])
 @variant.arg(t=['t = %d c' % t for t in [5, 6, 8, 10]])
@@ -151,13 +151,13 @@ class Waves05(variant.VariantTask):
 ''')
 @variant.answer_short('''
     \\lambda_1
-        = v T_1 = v * \\frac 1{ \\nu_1 } = \\frac{ v }{ \\nu_1 }
+        = v T_1 = v * \\frac 1{\\nu_1} = \\frac{v:L}{\\nu_1}
         = \\frac{v:Value:s}{nu_1:Value:s} = {l_1:Value},
     \\quad
     \\lambda_2
-        = c T_2 = c * \\frac 1{ \\nu_2 } = \\frac{ c }{ \\nu_2 }
+        = c T_2 = c * \\frac 1{\\nu_2} = \\frac c{\\nu_2}
         = \\frac{c:Value:s}{nu_2:Value:s} = {l_2:Value},
-    \\quad n = \\frac{ \\lambda_2 }{ \\lambda_1 } \\approx {n:Value}
+    \\quad n = \\frac{\\lambda_2}{\\lambda_1} \\approx {n:Value}
 ''')
 @variant.arg(nu_1=['\\nu_1 = %s Гц' % nu_1 for nu_1 in [150, 200, 300, 500]])
 @variant.arg(nu_2=['\\nu_2 = %s МГц' % nu_2 for nu_2 in [200, 500, 800]])
@@ -177,9 +177,9 @@ class Ch1238(variant.VariantTask):
     совершают колебания с разностью фаз ${delta}$?
 ''')
 @variant.answer_short('''
-    \\frac l\\lambda = \\frac \\varphi{ 2\\pi } + k (k\\in\\mathbb{ N })
-    \\implies \\lambda = \\frac l{ \\frac \\varphi{ 2\\pi } + k } = \\frac { 2\\pi l }{ \\varphi + 2\\pi k },
-    \\quad \\lambda_0 = \\frac { 2\\pi l }{ \\varphi } = {lmbd:Value}
+    \\frac l\\lambda = \\frac \\varphi{2\\pi} + k (k\\in\\mathbb{N:L:s})
+    \\implies \\lambda = \\frac l{\\frac \\varphi{2\\pi} + k} = \\frac {2\\pi l}{\\varphi + 2\\pi k},
+    \\quad \\lambda_0 = \\frac {2\\pi l}{\\varphi} = {lmbd:Value}
 ''')
 @variant.arg(delta__frac=[
     ('\\frac{\\pi}{8}', 1. / 16),
