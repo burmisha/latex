@@ -89,9 +89,14 @@ class Pupils(object):
         ])
 
     def get_path(self, *args, archive=True):
+        if archive:
+            suffix = '- private'
+        else:
+            suffix = '- public'
+
         return library.location.udr(
             f'{self.Grade} класс',
-            f'{self.Year} {self.Grade}{self.Letter} Физика' + (' - Архив' if archive else ''),
+            f'{self.Year} {self.Grade}{self.Letter} Физика {suffix}',
             *args,
         )
 
@@ -187,10 +192,14 @@ def get_class_from_string(value, addMyself=False, onlyMe=False):
     if re.match(r'20\d\d[\.-]\d{2}[\.-]\d{2}', date_part):
         if int(date_part[5:7]) <= 8:  # Aug
             year -= 1
-    elif re.match(r'20\d\d', date_part):
+    elif f'{year}' == date_part:
+        pass
+    elif f'{year}-{year+1}' == date_part:
+        pass
+    elif f'{year}-' + f'{year+1}'[2:] == date_part:
         pass
     else:
-        raise RuntimeError(f'Could not guess class from {value}')
+        raise RuntimeError(f'Could not guess class from {value}: {date_part} {class_part} {year}')
 
     key = f'{year} {class_part}'
     pupils = names_picker.get(key)

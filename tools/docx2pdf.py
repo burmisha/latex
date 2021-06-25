@@ -1,6 +1,7 @@
 import library.convert
 import library.files
 import library.location
+import library.pupils
 
 import os
 import yaml
@@ -16,10 +17,8 @@ class PdfExtractor:
             self._destination_directory = os.path.join(os.path.dirname(self._source_file), destination_directory)
         else:
             self._destination_directory = os.path.dirname(self._source_file)
-        assert os.path.exists(self._source_file), f'No file {self._source_file}'
-        assert os.path.isfile(self._source_file), f'Not file {self._source_file}'
-        assert os.path.exists(self._destination_directory), f'No dir {self._destination_directory}'
-        assert os.path.isdir(self._destination_directory), f'Not dir {self._destination_directory}'
+        assert library.files.is_file(self._source_file)
+        assert library.files.is_dir(self._destination_directory)
 
         self._pdf2pdf = library.convert.PdfToPdf(self._source_file)
 
@@ -32,6 +31,9 @@ class PdfExtractor:
 
 
 def get_convert_config():
+    pupils_9m = library.pupils.get_class_from_string('2020 9М')
+    pupils_10ab = library.pupils.get_class_from_string('2020 10АБ')
+
     return [
         (library.location.udr('11 класс', 'Вишнякова'), 'generated', False, '.*Вишнякова - [0-9].*'),
         (library.location.udr('11 класс', 'Вишнякова'), 'generated', False, '.*Вишнякова - .* - Все условия.*'),
@@ -50,14 +52,14 @@ def get_convert_config():
             r'.*\b[Кк]ружок.*\.docx$',
         ),
         (
-            library.location.udr('10 класс', '2020-21 10АБ Физика - Архив'),
-            library.location.udr('10 класс', '2020-21 10АБ Физика'),
+            pupils_10ab.get_path(archive=True),
+            pupils_10ab.get_path(archive=False),
             False,
             r'.*с урока.*\.docx$',
         ),
         (
-            library.location.udr('9 класс', '2020-21 9М Физика - Архив'),
-            library.location.udr('9 класс', '2020-21 9М Физика'),
+            pupils_9m.get_path(archive=True),
+            pupils_9m.get_path(archive=False),
             False,
             r'.*с урока.*\.docx$',
         ),
@@ -101,20 +103,24 @@ def get_extract_config():
     with open(cfg_file) as f:
         class_config_2 = yaml.safe_load(f)
 
-    for grade_key, grade_config in class_config_2.items():
-        grade, dst_dir = grade_key.split(' ', 1)
-        for part, part_config in grade_config.items():
+    for class_name, class_config in class_config_2.items():
+        pupils = library.pupils.get_class_from_string(class_name)
+        grade = pupils.Grade
+        dst_dir = pupils.get_path(archive=False)
+
+        for part, part_config in class_config.items():
             part_index, part_name = part.split(' ', 1)
             prefix = f'{grade}-{part_index} - {part_name}'
+
             pages_map = {}
-            for pages, file_name_mask in part_config.items():
-                assert ' ' in file_name_mask
-                index, name = file_name_mask.split(' ', 1)
-                filename = f'{grade}-{part_index}-{index} - {part_name} - {name}.pdf'
+            for pages, lesson_name in part_config.items():
+                lesson_index, lesson_name = lesson_name.split(' ', 1)
+                filename = f'{grade}-{part_index}-{lesson_index} - {part_name} - {lesson_name}.pdf'
                 pages_map[pages] = filename
+
             extract_config.append((
                 library.location.udr(f'{grade} класс', f'{prefix} - Рабочая тетрадь.pdf'),
-                library.location.udr(f'{grade} класс', f'{dst_dir}', prefix),
+                os.path.join(dst_dir, prefix),
                 pages_map,
             ))
 
