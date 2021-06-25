@@ -42,7 +42,7 @@
             \draw[-{Latex}] (0, 0) -- (0, 7) node[above left] {$P$};
             \draw[-{Latex}] (0, 0) -- (10, 0) node[right] {$V$};
 
-            \draw[dashed] (0, 2) node[left] {$P_1 = P_0$} -| (3, 0) node[below] {$V_1 = V_2 = V_0$ };
+            \draw[dashed] (0, 2) node[left] {$P_1 = P_0$} -| (3, 0) node[below] {$V_1 = V_2 = V_0$};
             \draw[dashed] (0, 6) node[left] {$P_2 = P_3 = 3P_0$} -| (9, 0) node[below] {$V_3 = 4V_0$};
 
             \draw (3, 2) node[above left]{1} node[below left]{$T_1 = T_0$}
@@ -120,14 +120,14 @@
             &= \frac 32 (P\Delta V + V \Delta P) + P \Delta V =  \frac 52 P\Delta V + \frac 32 V \Delta P = \\
             &= \frac 52 P\Delta V + \frac 32 V \cdot \cbr{- \frac{P_0}{V_0} \Delta V} = \frac{\Delta V}2 \cdot \cbr{5P - \frac{P_0}{V_0} V} = \\
             &= \frac{\Delta V}2 \cdot \cbr{5 \cdot \cbr{4P_0 - \frac{P_0}{V_0} V} - \frac{P_0}{V_0} V}
-             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 4 - 8\frac{V}{V_0}}.
+             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 4 - 8\fracV{V_0}}.
         \end{align*}
 
         Таком образом, знак количества теплоты $Q$ на участке 23 зависит от конкретного значения $V$:
         \begin{itemize}
             \item $\Delta V > 0$ на всём участке 23, поскольку газ расширяется,
             \item $P > 0$ — всегда, у нас идеальный газ, удары о стенки сосуда абсолютно упругие, а молекулы не взаимодействуют и поэтому давление только положительно,
-            \item если $5 \cdot 4 - 8\frac{V}{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
+            \item если $5 \cdot 4 - 8\fracV{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
         \end{itemize}
         Решая последнее неравенство, получаем конкретное значение $V^*$: при $V < V^*$ тепло подводят, далее~— отводят.
         Тут *~--- некоторая точка между точками 2 и 3, конкретные значения надо досчитать:
@@ -151,7 +151,7 @@
         \eta &= \frac{A_\text{цикл}}{Q_+} = \frac{A_\text{цикл}}{Q_{12} + Q_{2*}}
             = \frac{A_\text{цикл}}{A_{12} + \Delta U_{12} + A_{2*} + \Delta U_{2*}} = \\
             &= \frac{2 \cdot P_0V_0}{0 + 3 \cdot P_0 V_0 + \frac{27}8 \cdot P_0 V_0 + \frac98 \cdot P_0 V_0}
-             = \frac{2}{3 + \frac{27}8 + \frac98}
+             = \frac{A_bonus_cycle:LaTeX}{3 + \frac{27}8 + \frac98}
              = \frac4{15} \leftarrow \text{вжух и готово!}
         \end{align*}
 }
@@ -168,22 +168,22 @@
 \answer{%
     \begin{align*}
     &\text{Значения плотности насыщенного водяного пара определяем по таблице:} \\
-    &\rho_{ \text{ нас.
-    пара 25 } \celsius } = 23{,}000\,\frac{\text{г}}{\text{м}^{3}}, \rho_{ \text{ нас.
-    пара 80 } \celsius } = 293{,}000\,\frac{\text{г}}{\text{м}^{3}}.
+    &\rho_{\text{нас.
+    пара 25} \celsius} = 23{,}000\,\frac{\text{г}}{\text{м}^{3}}, \rho_{\text{нас.
+    пара 80} \celsius} = 293{,}000\,\frac{\text{г}}{\text{м}^{3}}.
     \\
-    \varphi_1 &= \frac{ \rho_\text{ пара } }{ \rho_{ \text{ нас.
-    пара 25 } \celsius } } \implies { \rho_\text{ пара } } = \rho_{ \text{ нас.
-    пара 25 } \celsius } \cdot \varphi_1 = 23{,}000\,\frac{\text{г}}{\text{м}^{3}} \cdot 0{,}70 = 16{,}100\,\frac{\text{г}}{\text{м}^{3}}.
+    \varphi_1 &= \frac{\rho_\text{пара}}{\rho_{\text{нас.
+    пара 25} \celsius}} \implies {\rho_\text{пара}} = \rho_{\text{нас.
+    пара 25} \celsius} \cdot \varphi_1 = 23{,}000\,\frac{\text{г}}{\text{м}^{3}} \cdot 0{,}70 = 16{,}100\,\frac{\text{г}}{\text{м}^{3}}.
     \\
-    &\text{По таблице определяем, при какой температуре пар с такой плотностью станет насыщенным: }  \\
+    &\text{По таблице определяем, при какой температуре пар с такой плотностью станет насыщенным:}  \\
     t_\text{росы} &= 18{,}8\celsius, \\
-    \varphi_2 &= \frac{ \rho_\text{ пара } }{ \rho_{ \text{ нас.
-    пара 80 } \celsius } } = \frac{\rho_{ \text{ нас.
-    пара 25 } \celsius } \cdot \varphi_1}{ \rho_{ \text{ нас.
-    пара 80 } \celsius } }= \varphi_1 \cdot \frac{ \rho_{ \text{ нас.
-    пара 25 } \celsius } }{ \rho_{ \text{ нас.
-    пара 80 } \celsius } } = 0{,}70 \cdot \frac{ 23{,}000\,\frac{\text{г}}{\text{м}^{3}} }{ 293{,}000\,\frac{\text{г}}{\text{м}^{3}} } = 0{,}055 \approx 5{,}5\%.
+    \varphi_2 &= \frac{\rho_\text{пара}}{\rho_{\text{нас.
+    пара 80} \celsius}} = \frac{\rho_{\text{нас.
+    пара 25} \celsius} \cdot \varphi_1}{\rho_{\text{нас.
+    пара 80} \celsius}}= \varphi_1 \cdot \frac{\rho_{\text{нас.
+    пара 25} \celsius}}{\rho_{\text{нас.
+    пара 80} \celsius}} = 0{,}70 \cdot \frac{23{,}000\,\frac{\text{г}}{\text{м}^{3}}}{293{,}000\,\frac{\text{г}}{\text{м}^{3}}} = 0{,}055 \approx 5{,}5\%.
     \end{align*}
 }
 \solutionspace{80pt}
@@ -250,7 +250,7 @@
             \draw[-{Latex}] (0, 0) -- (0, 7) node[above left] {$P$};
             \draw[-{Latex}] (0, 0) -- (10, 0) node[right] {$V$};
 
-            \draw[dashed] (0, 2) node[left] {$P_1 = P_0$} -| (3, 0) node[below] {$V_1 = V_2 = V_0$ };
+            \draw[dashed] (0, 2) node[left] {$P_1 = P_0$} -| (3, 0) node[below] {$V_1 = V_2 = V_0$};
             \draw[dashed] (0, 6) node[left] {$P_2 = P_3 = 2P_0$} -| (9, 0) node[below] {$V_3 = 6V_0$};
 
             \draw (3, 2) node[above left]{1} node[below left]{$T_1 = T_0$}
@@ -328,14 +328,14 @@
             &= \frac 32 (P\Delta V + V \Delta P) + P \Delta V =  \frac 52 P\Delta V + \frac 32 V \Delta P = \\
             &= \frac 52 P\Delta V + \frac 32 V \cdot \cbr{- \frac{P_0}{V_0} \Delta V} = \frac{\Delta V}2 \cdot \cbr{5P - \frac{P_0}{V_0} V} = \\
             &= \frac{\Delta V}2 \cdot \cbr{5 \cdot \cbr{3P_0 - \frac{P_0}{V_0} V} - \frac{P_0}{V_0} V}
-             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 3 - 8\frac{V}{V_0}}.
+             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 3 - 8\fracV{V_0}}.
         \end{align*}
 
         Таком образом, знак количества теплоты $Q$ на участке 23 зависит от конкретного значения $V$:
         \begin{itemize}
             \item $\Delta V > 0$ на всём участке 23, поскольку газ расширяется,
             \item $P > 0$ — всегда, у нас идеальный газ, удары о стенки сосуда абсолютно упругие, а молекулы не взаимодействуют и поэтому давление только положительно,
-            \item если $5 \cdot 3 - 8\frac{V}{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
+            \item если $5 \cdot 3 - 8\fracV{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
         \end{itemize}
         Решая последнее неравенство, получаем конкретное значение $V^*$: при $V < V^*$ тепло подводят, далее~— отводят.
         Тут *~--- некоторая точка между точками 2 и 3, конкретные значения надо досчитать:
@@ -359,7 +359,7 @@
         \eta &= \frac{A_\text{цикл}}{Q_+} = \frac{A_\text{цикл}}{Q_{12} + Q_{2*}}
             = \frac{A_\text{цикл}}{A_{12} + \Delta U_{12} + A_{2*} + \Delta U_{2*}} = \\
             &= \frac{\frac12 \cdot P_0V_0}{0 + \frac32 \cdot P_0 V_0 + \frac{175}{128} \cdot P_0 V_0 + \frac{21}{128} \cdot P_0 V_0}
-             = \frac{\frac12}{\frac32 + \frac{175}{128} + \frac{21}{128}}
+             = \frac{A_bonus_cycle:LaTeX}{\frac32 + \frac{175}{128} + \frac{21}{128}}
              = \frac{16}{97} \leftarrow \text{вжух и готово!}
         \end{align*}
 }
@@ -376,22 +376,22 @@
 \answer{%
     \begin{align*}
     &\text{Значения плотности насыщенного водяного пара определяем по таблице:} \\
-    &\rho_{ \text{ нас.
-    пара 30 } \celsius } = 30{,}300\,\frac{\text{г}}{\text{м}^{3}}, \rho_{ \text{ нас.
-    пара 60 } \celsius } = 130{,}000\,\frac{\text{г}}{\text{м}^{3}}.
+    &\rho_{\text{нас.
+    пара 30} \celsius} = 30{,}300\,\frac{\text{г}}{\text{м}^{3}}, \rho_{\text{нас.
+    пара 60} \celsius} = 130{,}000\,\frac{\text{г}}{\text{м}^{3}}.
     \\
-    \varphi_1 &= \frac{ \rho_\text{ пара } }{ \rho_{ \text{ нас.
-    пара 30 } \celsius } } \implies { \rho_\text{ пара } } = \rho_{ \text{ нас.
-    пара 30 } \celsius } \cdot \varphi_1 = 30{,}300\,\frac{\text{г}}{\text{м}^{3}} \cdot 0{,}70 = 21{,}210\,\frac{\text{г}}{\text{м}^{3}}.
+    \varphi_1 &= \frac{\rho_\text{пара}}{\rho_{\text{нас.
+    пара 30} \celsius}} \implies {\rho_\text{пара}} = \rho_{\text{нас.
+    пара 30} \celsius} \cdot \varphi_1 = 30{,}300\,\frac{\text{г}}{\text{м}^{3}} \cdot 0{,}70 = 21{,}210\,\frac{\text{г}}{\text{м}^{3}}.
     \\
-    &\text{По таблице определяем, при какой температуре пар с такой плотностью станет насыщенным: }  \\
+    &\text{По таблице определяем, при какой температуре пар с такой плотностью станет насыщенным:}  \\
     t_\text{росы} &= 23{,}5\celsius, \\
-    \varphi_2 &= \frac{ \rho_\text{ пара } }{ \rho_{ \text{ нас.
-    пара 60 } \celsius } } = \frac{\rho_{ \text{ нас.
-    пара 30 } \celsius } \cdot \varphi_1}{ \rho_{ \text{ нас.
-    пара 60 } \celsius } }= \varphi_1 \cdot \frac{ \rho_{ \text{ нас.
-    пара 30 } \celsius } }{ \rho_{ \text{ нас.
-    пара 60 } \celsius } } = 0{,}70 \cdot \frac{ 30{,}300\,\frac{\text{г}}{\text{м}^{3}} }{ 130{,}000\,\frac{\text{г}}{\text{м}^{3}} } = 0{,}163 \approx 16{,}3\%.
+    \varphi_2 &= \frac{\rho_\text{пара}}{\rho_{\text{нас.
+    пара 60} \celsius}} = \frac{\rho_{\text{нас.
+    пара 30} \celsius} \cdot \varphi_1}{\rho_{\text{нас.
+    пара 60} \celsius}}= \varphi_1 \cdot \frac{\rho_{\text{нас.
+    пара 30} \celsius}}{\rho_{\text{нас.
+    пара 60} \celsius}} = 0{,}70 \cdot \frac{30{,}300\,\frac{\text{г}}{\text{м}^{3}}}{130{,}000\,\frac{\text{г}}{\text{м}^{3}}} = 0{,}163 \approx 16{,}3\%.
     \end{align*}
 }
 \solutionspace{80pt}
@@ -458,7 +458,7 @@
             \draw[-{Latex}] (0, 0) -- (0, 7) node[above left] {$P$};
             \draw[-{Latex}] (0, 0) -- (10, 0) node[right] {$V$};
 
-            \draw[dashed] (0, 2) node[left] {$P_1 = P_0$} -| (3, 0) node[below] {$V_1 = V_2 = V_0$ };
+            \draw[dashed] (0, 2) node[left] {$P_1 = P_0$} -| (3, 0) node[below] {$V_1 = V_2 = V_0$};
             \draw[dashed] (0, 6) node[left] {$P_2 = P_3 = 6P_0$} -| (9, 0) node[below] {$V_3 = 6V_0$};
 
             \draw (3, 2) node[above left]{1} node[below left]{$T_1 = T_0$}
@@ -536,14 +536,14 @@
             &= \frac 32 (P\Delta V + V \Delta P) + P \Delta V =  \frac 52 P\Delta V + \frac 32 V \Delta P = \\
             &= \frac 52 P\Delta V + \frac 32 V \cdot \cbr{- \frac{P_0}{V_0} \Delta V} = \frac{\Delta V}2 \cdot \cbr{5P - \frac{P_0}{V_0} V} = \\
             &= \frac{\Delta V}2 \cdot \cbr{5 \cdot \cbr{7P_0 - \frac{P_0}{V_0} V} - \frac{P_0}{V_0} V}
-             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 7 - 8\frac{V}{V_0}}.
+             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 7 - 8\fracV{V_0}}.
         \end{align*}
 
         Таком образом, знак количества теплоты $Q$ на участке 23 зависит от конкретного значения $V$:
         \begin{itemize}
             \item $\Delta V > 0$ на всём участке 23, поскольку газ расширяется,
             \item $P > 0$ — всегда, у нас идеальный газ, удары о стенки сосуда абсолютно упругие, а молекулы не взаимодействуют и поэтому давление только положительно,
-            \item если $5 \cdot 7 - 8\frac{V}{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
+            \item если $5 \cdot 7 - 8\fracV{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
         \end{itemize}
         Решая последнее неравенство, получаем конкретное значение $V^*$: при $V < V^*$ тепло подводят, далее~— отводят.
         Тут *~--- некоторая точка между точками 2 и 3, конкретные значения надо досчитать:
@@ -567,7 +567,7 @@
         \eta &= \frac{A_\text{цикл}}{Q_+} = \frac{A_\text{цикл}}{Q_{12} + Q_{2*}}
             = \frac{A_\text{цикл}}{A_{12} + \Delta U_{12} + A_{2*} + \Delta U_{2*}} = \\
             &= \frac{\frac{25}2 \cdot P_0V_0}{0 + \frac{15}2 \cdot P_0 V_0 + \frac{1863}{128} \cdot P_0 V_0 + \frac{1053}{128} \cdot P_0 V_0}
-             = \frac{\frac{25}2}{\frac{15}2 + \frac{1863}{128} + \frac{1053}{128}}
+             = \frac{A_bonus_cycle:LaTeX}{\frac{15}2 + \frac{1863}{128} + \frac{1053}{128}}
              = \frac{400}{969} \leftarrow \text{вжух и готово!}
         \end{align*}
 }
@@ -584,22 +584,22 @@
 \answer{%
     \begin{align*}
     &\text{Значения плотности насыщенного водяного пара определяем по таблице:} \\
-    &\rho_{ \text{ нас.
-    пара 15 } \celsius } = 12{,}800\,\frac{\text{г}}{\text{м}^{3}}, \rho_{ \text{ нас.
-    пара 70 } \celsius } = 198{,}000\,\frac{\text{г}}{\text{м}^{3}}.
+    &\rho_{\text{нас.
+    пара 15} \celsius} = 12{,}800\,\frac{\text{г}}{\text{м}^{3}}, \rho_{\text{нас.
+    пара 70} \celsius} = 198{,}000\,\frac{\text{г}}{\text{м}^{3}}.
     \\
-    \varphi_1 &= \frac{ \rho_\text{ пара } }{ \rho_{ \text{ нас.
-    пара 15 } \celsius } } \implies { \rho_\text{ пара } } = \rho_{ \text{ нас.
-    пара 15 } \celsius } \cdot \varphi_1 = 12{,}800\,\frac{\text{г}}{\text{м}^{3}} \cdot 0{,}75 = 9{,}600\,\frac{\text{г}}{\text{м}^{3}}.
+    \varphi_1 &= \frac{\rho_\text{пара}}{\rho_{\text{нас.
+    пара 15} \celsius}} \implies {\rho_\text{пара}} = \rho_{\text{нас.
+    пара 15} \celsius} \cdot \varphi_1 = 12{,}800\,\frac{\text{г}}{\text{м}^{3}} \cdot 0{,}75 = 9{,}600\,\frac{\text{г}}{\text{м}^{3}}.
     \\
-    &\text{По таблице определяем, при какой температуре пар с такой плотностью станет насыщенным: }  \\
+    &\text{По таблице определяем, при какой температуре пар с такой плотностью станет насыщенным:}  \\
     t_\text{росы} &= 10{,}3\celsius, \\
-    \varphi_2 &= \frac{ \rho_\text{ пара } }{ \rho_{ \text{ нас.
-    пара 70 } \celsius } } = \frac{\rho_{ \text{ нас.
-    пара 15 } \celsius } \cdot \varphi_1}{ \rho_{ \text{ нас.
-    пара 70 } \celsius } }= \varphi_1 \cdot \frac{ \rho_{ \text{ нас.
-    пара 15 } \celsius } }{ \rho_{ \text{ нас.
-    пара 70 } \celsius } } = 0{,}75 \cdot \frac{ 12{,}800\,\frac{\text{г}}{\text{м}^{3}} }{ 198{,}000\,\frac{\text{г}}{\text{м}^{3}} } = 0{,}048 \approx 4{,}8\%.
+    \varphi_2 &= \frac{\rho_\text{пара}}{\rho_{\text{нас.
+    пара 70} \celsius}} = \frac{\rho_{\text{нас.
+    пара 15} \celsius} \cdot \varphi_1}{\rho_{\text{нас.
+    пара 70} \celsius}}= \varphi_1 \cdot \frac{\rho_{\text{нас.
+    пара 15} \celsius}}{\rho_{\text{нас.
+    пара 70} \celsius}} = 0{,}75 \cdot \frac{12{,}800\,\frac{\text{г}}{\text{м}^{3}}}{198{,}000\,\frac{\text{г}}{\text{м}^{3}}} = 0{,}048 \approx 4{,}8\%.
     \end{align*}
 }
 \solutionspace{80pt}
@@ -666,7 +666,7 @@
             \draw[-{Latex}] (0, 0) -- (0, 7) node[above left] {$P$};
             \draw[-{Latex}] (0, 0) -- (10, 0) node[right] {$V$};
 
-            \draw[dashed] (0, 2) node[left] {$P_1 = P_0$} -| (3, 0) node[below] {$V_1 = V_2 = V_0$ };
+            \draw[dashed] (0, 2) node[left] {$P_1 = P_0$} -| (3, 0) node[below] {$V_1 = V_2 = V_0$};
             \draw[dashed] (0, 6) node[left] {$P_2 = P_3 = 5P_0$} -| (9, 0) node[below] {$V_3 = 3V_0$};
 
             \draw (3, 2) node[above left]{1} node[below left]{$T_1 = T_0$}
@@ -744,14 +744,14 @@
             &= \frac 32 (P\Delta V + V \Delta P) + P \Delta V =  \frac 52 P\Delta V + \frac 32 V \Delta P = \\
             &= \frac 52 P\Delta V + \frac 32 V \cdot \cbr{- \frac{P_0}{V_0} \Delta V} = \frac{\Delta V}2 \cdot \cbr{5P - \frac{P_0}{V_0} V} = \\
             &= \frac{\Delta V}2 \cdot \cbr{5 \cdot \cbr{6P_0 - \frac{P_0}{V_0} V} - \frac{P_0}{V_0} V}
-             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 6 - 8\frac{V}{V_0}}.
+             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 6 - 8\fracV{V_0}}.
         \end{align*}
 
         Таком образом, знак количества теплоты $Q$ на участке 23 зависит от конкретного значения $V$:
         \begin{itemize}
             \item $\Delta V > 0$ на всём участке 23, поскольку газ расширяется,
             \item $P > 0$ — всегда, у нас идеальный газ, удары о стенки сосуда абсолютно упругие, а молекулы не взаимодействуют и поэтому давление только положительно,
-            \item если $5 \cdot 6 - 8\frac{V}{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
+            \item если $5 \cdot 6 - 8\fracV{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
         \end{itemize}
         Решая последнее неравенство, получаем конкретное значение $V^*$: при $V < V^*$ тепло подводят, далее~— отводят.
         Тут *~--- некоторая точка между точками 2 и 3, конкретные значения надо досчитать:
@@ -775,7 +775,7 @@
         \eta &= \frac{A_\text{цикл}}{Q_+} = \frac{A_\text{цикл}}{Q_{12} + Q_{2*}}
             = \frac{A_\text{цикл}}{A_{12} + \Delta U_{12} + A_{2*} + \Delta U_{2*}} = \\
             &= \frac{8 \cdot P_0V_0}{0 + 6 \cdot P_0 V_0 + \frac{319}{32} \cdot P_0 V_0 + \frac{165}{32} \cdot P_0 V_0}
-             = \frac{8}{6 + \frac{319}{32} + \frac{165}{32}}
+             = \frac{A_bonus_cycle:LaTeX}{6 + \frac{319}{32} + \frac{165}{32}}
              = \frac{64}{169} \leftarrow \text{вжух и готово!}
         \end{align*}
 }
@@ -792,22 +792,22 @@
 \answer{%
     \begin{align*}
     &\text{Значения плотности насыщенного водяного пара определяем по таблице:} \\
-    &\rho_{ \text{ нас.
-    пара 20 } \celsius } = 17{,}300\,\frac{\text{г}}{\text{м}^{3}}, \rho_{ \text{ нас.
-    пара 40 } \celsius } = 51{,}200\,\frac{\text{г}}{\text{м}^{3}}.
+    &\rho_{\text{нас.
+    пара 20} \celsius} = 17{,}300\,\frac{\text{г}}{\text{м}^{3}}, \rho_{\text{нас.
+    пара 40} \celsius} = 51{,}200\,\frac{\text{г}}{\text{м}^{3}}.
     \\
-    \varphi_1 &= \frac{ \rho_\text{ пара } }{ \rho_{ \text{ нас.
-    пара 20 } \celsius } } \implies { \rho_\text{ пара } } = \rho_{ \text{ нас.
-    пара 20 } \celsius } \cdot \varphi_1 = 17{,}300\,\frac{\text{г}}{\text{м}^{3}} \cdot 0{,}60 = 10{,}380\,\frac{\text{г}}{\text{м}^{3}}.
+    \varphi_1 &= \frac{\rho_\text{пара}}{\rho_{\text{нас.
+    пара 20} \celsius}} \implies {\rho_\text{пара}} = \rho_{\text{нас.
+    пара 20} \celsius} \cdot \varphi_1 = 17{,}300\,\frac{\text{г}}{\text{м}^{3}} \cdot 0{,}60 = 10{,}380\,\frac{\text{г}}{\text{м}^{3}}.
     \\
-    &\text{По таблице определяем, при какой температуре пар с такой плотностью станет насыщенным: }  \\
+    &\text{По таблице определяем, при какой температуре пар с такой плотностью станет насыщенным:}  \\
     t_\text{росы} &= 11{,}5\celsius, \\
-    \varphi_2 &= \frac{ \rho_\text{ пара } }{ \rho_{ \text{ нас.
-    пара 40 } \celsius } } = \frac{\rho_{ \text{ нас.
-    пара 20 } \celsius } \cdot \varphi_1}{ \rho_{ \text{ нас.
-    пара 40 } \celsius } }= \varphi_1 \cdot \frac{ \rho_{ \text{ нас.
-    пара 20 } \celsius } }{ \rho_{ \text{ нас.
-    пара 40 } \celsius } } = 0{,}60 \cdot \frac{ 17{,}300\,\frac{\text{г}}{\text{м}^{3}} }{ 51{,}200\,\frac{\text{г}}{\text{м}^{3}} } = 0{,}203 \approx 20{,}3\%.
+    \varphi_2 &= \frac{\rho_\text{пара}}{\rho_{\text{нас.
+    пара 40} \celsius}} = \frac{\rho_{\text{нас.
+    пара 20} \celsius} \cdot \varphi_1}{\rho_{\text{нас.
+    пара 40} \celsius}}= \varphi_1 \cdot \frac{\rho_{\text{нас.
+    пара 20} \celsius}}{\rho_{\text{нас.
+    пара 40} \celsius}} = 0{,}60 \cdot \frac{17{,}300\,\frac{\text{г}}{\text{м}^{3}}}{51{,}200\,\frac{\text{г}}{\text{м}^{3}}} = 0{,}203 \approx 20{,}3\%.
     \end{align*}
 }
 \solutionspace{80pt}
@@ -874,7 +874,7 @@
             \draw[-{Latex}] (0, 0) -- (0, 7) node[above left] {$P$};
             \draw[-{Latex}] (0, 0) -- (10, 0) node[right] {$V$};
 
-            \draw[dashed] (0, 2) node[left] {$P_1 = P_0$} -| (3, 0) node[below] {$V_1 = V_2 = V_0$ };
+            \draw[dashed] (0, 2) node[left] {$P_1 = P_0$} -| (3, 0) node[below] {$V_1 = V_2 = V_0$};
             \draw[dashed] (0, 6) node[left] {$P_2 = P_3 = 3P_0$} -| (9, 0) node[below] {$V_3 = 6V_0$};
 
             \draw (3, 2) node[above left]{1} node[below left]{$T_1 = T_0$}
@@ -952,14 +952,14 @@
             &= \frac 32 (P\Delta V + V \Delta P) + P \Delta V =  \frac 52 P\Delta V + \frac 32 V \Delta P = \\
             &= \frac 52 P\Delta V + \frac 32 V \cdot \cbr{- \frac{P_0}{V_0} \Delta V} = \frac{\Delta V}2 \cdot \cbr{5P - \frac{P_0}{V_0} V} = \\
             &= \frac{\Delta V}2 \cdot \cbr{5 \cdot \cbr{4P_0 - \frac{P_0}{V_0} V} - \frac{P_0}{V_0} V}
-             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 4 - 8\frac{V}{V_0}}.
+             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 4 - 8\fracV{V_0}}.
         \end{align*}
 
         Таком образом, знак количества теплоты $Q$ на участке 23 зависит от конкретного значения $V$:
         \begin{itemize}
             \item $\Delta V > 0$ на всём участке 23, поскольку газ расширяется,
             \item $P > 0$ — всегда, у нас идеальный газ, удары о стенки сосуда абсолютно упругие, а молекулы не взаимодействуют и поэтому давление только положительно,
-            \item если $5 \cdot 4 - 8\frac{V}{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
+            \item если $5 \cdot 4 - 8\fracV{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
         \end{itemize}
         Решая последнее неравенство, получаем конкретное значение $V^*$: при $V < V^*$ тепло подводят, далее~— отводят.
         Тут *~--- некоторая точка между точками 2 и 3, конкретные значения надо досчитать:
@@ -983,7 +983,7 @@
         \eta &= \frac{A_\text{цикл}}{Q_+} = \frac{A_\text{цикл}}{Q_{12} + Q_{2*}}
             = \frac{A_\text{цикл}}{A_{12} + \Delta U_{12} + A_{2*} + \Delta U_{2*}} = \\
             &= \frac{2 \cdot P_0V_0}{0 + 3 \cdot P_0 V_0 + \frac{27}8 \cdot P_0 V_0 + \frac98 \cdot P_0 V_0}
-             = \frac{2}{3 + \frac{27}8 + \frac98}
+             = \frac{A_bonus_cycle:LaTeX}{3 + \frac{27}8 + \frac98}
              = \frac4{15} \leftarrow \text{вжух и готово!}
         \end{align*}
 }
@@ -1000,22 +1000,22 @@
 \answer{%
     \begin{align*}
     &\text{Значения плотности насыщенного водяного пара определяем по таблице:} \\
-    &\rho_{ \text{ нас.
-    пара 25 } \celsius } = 23{,}000\,\frac{\text{г}}{\text{м}^{3}}, \rho_{ \text{ нас.
-    пара 50 } \celsius } = 83{,}000\,\frac{\text{г}}{\text{м}^{3}}.
+    &\rho_{\text{нас.
+    пара 25} \celsius} = 23{,}000\,\frac{\text{г}}{\text{м}^{3}}, \rho_{\text{нас.
+    пара 50} \celsius} = 83{,}000\,\frac{\text{г}}{\text{м}^{3}}.
     \\
-    \varphi_1 &= \frac{ \rho_\text{ пара } }{ \rho_{ \text{ нас.
-    пара 25 } \celsius } } \implies { \rho_\text{ пара } } = \rho_{ \text{ нас.
-    пара 25 } \celsius } \cdot \varphi_1 = 23{,}000\,\frac{\text{г}}{\text{м}^{3}} \cdot 0{,}45 = 10{,}350\,\frac{\text{г}}{\text{м}^{3}}.
+    \varphi_1 &= \frac{\rho_\text{пара}}{\rho_{\text{нас.
+    пара 25} \celsius}} \implies {\rho_\text{пара}} = \rho_{\text{нас.
+    пара 25} \celsius} \cdot \varphi_1 = 23{,}000\,\frac{\text{г}}{\text{м}^{3}} \cdot 0{,}45 = 10{,}350\,\frac{\text{г}}{\text{м}^{3}}.
     \\
-    &\text{По таблице определяем, при какой температуре пар с такой плотностью станет насыщенным: }  \\
+    &\text{По таблице определяем, при какой температуре пар с такой плотностью станет насыщенным:}  \\
     t_\text{росы} &= 11{,}5\celsius, \\
-    \varphi_2 &= \frac{ \rho_\text{ пара } }{ \rho_{ \text{ нас.
-    пара 50 } \celsius } } = \frac{\rho_{ \text{ нас.
-    пара 25 } \celsius } \cdot \varphi_1}{ \rho_{ \text{ нас.
-    пара 50 } \celsius } }= \varphi_1 \cdot \frac{ \rho_{ \text{ нас.
-    пара 25 } \celsius } }{ \rho_{ \text{ нас.
-    пара 50 } \celsius } } = 0{,}45 \cdot \frac{ 23{,}000\,\frac{\text{г}}{\text{м}^{3}} }{ 83{,}000\,\frac{\text{г}}{\text{м}^{3}} } = 0{,}125 \approx 12{,}5\%.
+    \varphi_2 &= \frac{\rho_\text{пара}}{\rho_{\text{нас.
+    пара 50} \celsius}} = \frac{\rho_{\text{нас.
+    пара 25} \celsius} \cdot \varphi_1}{\rho_{\text{нас.
+    пара 50} \celsius}}= \varphi_1 \cdot \frac{\rho_{\text{нас.
+    пара 25} \celsius}}{\rho_{\text{нас.
+    пара 50} \celsius}} = 0{,}45 \cdot \frac{23{,}000\,\frac{\text{г}}{\text{м}^{3}}}{83{,}000\,\frac{\text{г}}{\text{м}^{3}}} = 0{,}125 \approx 12{,}5\%.
     \end{align*}
 }
 \solutionspace{80pt}
@@ -1082,7 +1082,7 @@
             \draw[-{Latex}] (0, 0) -- (0, 7) node[above left] {$P$};
             \draw[-{Latex}] (0, 0) -- (10, 0) node[right] {$V$};
 
-            \draw[dashed] (0, 2) node[left] {$P_1 = P_0$} -| (3, 0) node[below] {$V_1 = V_2 = V_0$ };
+            \draw[dashed] (0, 2) node[left] {$P_1 = P_0$} -| (3, 0) node[below] {$V_1 = V_2 = V_0$};
             \draw[dashed] (0, 6) node[left] {$P_2 = P_3 = 2P_0$} -| (9, 0) node[below] {$V_3 = 6V_0$};
 
             \draw (3, 2) node[above left]{1} node[below left]{$T_1 = T_0$}
@@ -1160,14 +1160,14 @@
             &= \frac 32 (P\Delta V + V \Delta P) + P \Delta V =  \frac 52 P\Delta V + \frac 32 V \Delta P = \\
             &= \frac 52 P\Delta V + \frac 32 V \cdot \cbr{- \frac{P_0}{V_0} \Delta V} = \frac{\Delta V}2 \cdot \cbr{5P - \frac{P_0}{V_0} V} = \\
             &= \frac{\Delta V}2 \cdot \cbr{5 \cdot \cbr{3P_0 - \frac{P_0}{V_0} V} - \frac{P_0}{V_0} V}
-             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 3 - 8\frac{V}{V_0}}.
+             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 3 - 8\fracV{V_0}}.
         \end{align*}
 
         Таком образом, знак количества теплоты $Q$ на участке 23 зависит от конкретного значения $V$:
         \begin{itemize}
             \item $\Delta V > 0$ на всём участке 23, поскольку газ расширяется,
             \item $P > 0$ — всегда, у нас идеальный газ, удары о стенки сосуда абсолютно упругие, а молекулы не взаимодействуют и поэтому давление только положительно,
-            \item если $5 \cdot 3 - 8\frac{V}{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
+            \item если $5 \cdot 3 - 8\fracV{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
         \end{itemize}
         Решая последнее неравенство, получаем конкретное значение $V^*$: при $V < V^*$ тепло подводят, далее~— отводят.
         Тут *~--- некоторая точка между точками 2 и 3, конкретные значения надо досчитать:
@@ -1191,7 +1191,7 @@
         \eta &= \frac{A_\text{цикл}}{Q_+} = \frac{A_\text{цикл}}{Q_{12} + Q_{2*}}
             = \frac{A_\text{цикл}}{A_{12} + \Delta U_{12} + A_{2*} + \Delta U_{2*}} = \\
             &= \frac{\frac12 \cdot P_0V_0}{0 + \frac32 \cdot P_0 V_0 + \frac{175}{128} \cdot P_0 V_0 + \frac{21}{128} \cdot P_0 V_0}
-             = \frac{\frac12}{\frac32 + \frac{175}{128} + \frac{21}{128}}
+             = \frac{A_bonus_cycle:LaTeX}{\frac32 + \frac{175}{128} + \frac{21}{128}}
              = \frac{16}{97} \leftarrow \text{вжух и готово!}
         \end{align*}
 }
@@ -1208,22 +1208,22 @@
 \answer{%
     \begin{align*}
     &\text{Значения плотности насыщенного водяного пара определяем по таблице:} \\
-    &\rho_{ \text{ нас.
-    пара 20 } \celsius } = 17{,}300\,\frac{\text{г}}{\text{м}^{3}}, \rho_{ \text{ нас.
-    пара 50 } \celsius } = 83{,}000\,\frac{\text{г}}{\text{м}^{3}}.
+    &\rho_{\text{нас.
+    пара 20} \celsius} = 17{,}300\,\frac{\text{г}}{\text{м}^{3}}, \rho_{\text{нас.
+    пара 50} \celsius} = 83{,}000\,\frac{\text{г}}{\text{м}^{3}}.
     \\
-    \varphi_1 &= \frac{ \rho_\text{ пара } }{ \rho_{ \text{ нас.
-    пара 20 } \celsius } } \implies { \rho_\text{ пара } } = \rho_{ \text{ нас.
-    пара 20 } \celsius } \cdot \varphi_1 = 17{,}300\,\frac{\text{г}}{\text{м}^{3}} \cdot 0{,}75 = 12{,}975\,\frac{\text{г}}{\text{м}^{3}}.
+    \varphi_1 &= \frac{\rho_\text{пара}}{\rho_{\text{нас.
+    пара 20} \celsius}} \implies {\rho_\text{пара}} = \rho_{\text{нас.
+    пара 20} \celsius} \cdot \varphi_1 = 17{,}300\,\frac{\text{г}}{\text{м}^{3}} \cdot 0{,}75 = 12{,}975\,\frac{\text{г}}{\text{м}^{3}}.
     \\
-    &\text{По таблице определяем, при какой температуре пар с такой плотностью станет насыщенным: }  \\
+    &\text{По таблице определяем, при какой температуре пар с такой плотностью станет насыщенным:}  \\
     t_\text{росы} &= 15{,}2\celsius, \\
-    \varphi_2 &= \frac{ \rho_\text{ пара } }{ \rho_{ \text{ нас.
-    пара 50 } \celsius } } = \frac{\rho_{ \text{ нас.
-    пара 20 } \celsius } \cdot \varphi_1}{ \rho_{ \text{ нас.
-    пара 50 } \celsius } }= \varphi_1 \cdot \frac{ \rho_{ \text{ нас.
-    пара 20 } \celsius } }{ \rho_{ \text{ нас.
-    пара 50 } \celsius } } = 0{,}75 \cdot \frac{ 17{,}300\,\frac{\text{г}}{\text{м}^{3}} }{ 83{,}000\,\frac{\text{г}}{\text{м}^{3}} } = 0{,}156 \approx 15{,}6\%.
+    \varphi_2 &= \frac{\rho_\text{пара}}{\rho_{\text{нас.
+    пара 50} \celsius}} = \frac{\rho_{\text{нас.
+    пара 20} \celsius} \cdot \varphi_1}{\rho_{\text{нас.
+    пара 50} \celsius}}= \varphi_1 \cdot \frac{\rho_{\text{нас.
+    пара 20} \celsius}}{\rho_{\text{нас.
+    пара 50} \celsius}} = 0{,}75 \cdot \frac{17{,}300\,\frac{\text{г}}{\text{м}^{3}}}{83{,}000\,\frac{\text{г}}{\text{м}^{3}}} = 0{,}156 \approx 15{,}6\%.
     \end{align*}
 }
 \solutionspace{80pt}
@@ -1290,7 +1290,7 @@
             \draw[-{Latex}] (0, 0) -- (0, 7) node[above left] {$P$};
             \draw[-{Latex}] (0, 0) -- (10, 0) node[right] {$V$};
 
-            \draw[dashed] (0, 2) node[left] {$P_1 = P_0$} -| (3, 0) node[below] {$V_1 = V_2 = V_0$ };
+            \draw[dashed] (0, 2) node[left] {$P_1 = P_0$} -| (3, 0) node[below] {$V_1 = V_2 = V_0$};
             \draw[dashed] (0, 6) node[left] {$P_2 = P_3 = 5P_0$} -| (9, 0) node[below] {$V_3 = 6V_0$};
 
             \draw (3, 2) node[above left]{1} node[below left]{$T_1 = T_0$}
@@ -1368,14 +1368,14 @@
             &= \frac 32 (P\Delta V + V \Delta P) + P \Delta V =  \frac 52 P\Delta V + \frac 32 V \Delta P = \\
             &= \frac 52 P\Delta V + \frac 32 V \cdot \cbr{- \frac{P_0}{V_0} \Delta V} = \frac{\Delta V}2 \cdot \cbr{5P - \frac{P_0}{V_0} V} = \\
             &= \frac{\Delta V}2 \cdot \cbr{5 \cdot \cbr{6P_0 - \frac{P_0}{V_0} V} - \frac{P_0}{V_0} V}
-             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 6 - 8\frac{V}{V_0}}.
+             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 6 - 8\fracV{V_0}}.
         \end{align*}
 
         Таком образом, знак количества теплоты $Q$ на участке 23 зависит от конкретного значения $V$:
         \begin{itemize}
             \item $\Delta V > 0$ на всём участке 23, поскольку газ расширяется,
             \item $P > 0$ — всегда, у нас идеальный газ, удары о стенки сосуда абсолютно упругие, а молекулы не взаимодействуют и поэтому давление только положительно,
-            \item если $5 \cdot 6 - 8\frac{V}{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
+            \item если $5 \cdot 6 - 8\fracV{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
         \end{itemize}
         Решая последнее неравенство, получаем конкретное значение $V^*$: при $V < V^*$ тепло подводят, далее~— отводят.
         Тут *~--- некоторая точка между точками 2 и 3, конкретные значения надо досчитать:
@@ -1399,7 +1399,7 @@
         \eta &= \frac{A_\text{цикл}}{Q_+} = \frac{A_\text{цикл}}{Q_{12} + Q_{2*}}
             = \frac{A_\text{цикл}}{A_{12} + \Delta U_{12} + A_{2*} + \Delta U_{2*}} = \\
             &= \frac{8 \cdot P_0V_0}{0 + 6 \cdot P_0 V_0 + \frac{319}{32} \cdot P_0 V_0 + \frac{165}{32} \cdot P_0 V_0}
-             = \frac{8}{6 + \frac{319}{32} + \frac{165}{32}}
+             = \frac{A_bonus_cycle:LaTeX}{6 + \frac{319}{32} + \frac{165}{32}}
              = \frac{64}{169} \leftarrow \text{вжух и готово!}
         \end{align*}
 }
@@ -1416,22 +1416,22 @@
 \answer{%
     \begin{align*}
     &\text{Значения плотности насыщенного водяного пара определяем по таблице:} \\
-    &\rho_{ \text{ нас.
-    пара 20 } \celsius } = 17{,}300\,\frac{\text{г}}{\text{м}^{3}}, \rho_{ \text{ нас.
-    пара 40 } \celsius } = 51{,}200\,\frac{\text{г}}{\text{м}^{3}}.
+    &\rho_{\text{нас.
+    пара 20} \celsius} = 17{,}300\,\frac{\text{г}}{\text{м}^{3}}, \rho_{\text{нас.
+    пара 40} \celsius} = 51{,}200\,\frac{\text{г}}{\text{м}^{3}}.
     \\
-    \varphi_1 &= \frac{ \rho_\text{ пара } }{ \rho_{ \text{ нас.
-    пара 20 } \celsius } } \implies { \rho_\text{ пара } } = \rho_{ \text{ нас.
-    пара 20 } \celsius } \cdot \varphi_1 = 17{,}300\,\frac{\text{г}}{\text{м}^{3}} \cdot 0{,}45 = 7{,}785\,\frac{\text{г}}{\text{м}^{3}}.
+    \varphi_1 &= \frac{\rho_\text{пара}}{\rho_{\text{нас.
+    пара 20} \celsius}} \implies {\rho_\text{пара}} = \rho_{\text{нас.
+    пара 20} \celsius} \cdot \varphi_1 = 17{,}300\,\frac{\text{г}}{\text{м}^{3}} \cdot 0{,}45 = 7{,}785\,\frac{\text{г}}{\text{м}^{3}}.
     \\
-    &\text{По таблице определяем, при какой температуре пар с такой плотностью станет насыщенным: }  \\
+    &\text{По таблице определяем, при какой температуре пар с такой плотностью станет насыщенным:}  \\
     t_\text{росы} &= 7{,}0\celsius, \\
-    \varphi_2 &= \frac{ \rho_\text{ пара } }{ \rho_{ \text{ нас.
-    пара 40 } \celsius } } = \frac{\rho_{ \text{ нас.
-    пара 20 } \celsius } \cdot \varphi_1}{ \rho_{ \text{ нас.
-    пара 40 } \celsius } }= \varphi_1 \cdot \frac{ \rho_{ \text{ нас.
-    пара 20 } \celsius } }{ \rho_{ \text{ нас.
-    пара 40 } \celsius } } = 0{,}45 \cdot \frac{ 17{,}300\,\frac{\text{г}}{\text{м}^{3}} }{ 51{,}200\,\frac{\text{г}}{\text{м}^{3}} } = 0{,}152 \approx 15{,}2\%.
+    \varphi_2 &= \frac{\rho_\text{пара}}{\rho_{\text{нас.
+    пара 40} \celsius}} = \frac{\rho_{\text{нас.
+    пара 20} \celsius} \cdot \varphi_1}{\rho_{\text{нас.
+    пара 40} \celsius}}= \varphi_1 \cdot \frac{\rho_{\text{нас.
+    пара 20} \celsius}}{\rho_{\text{нас.
+    пара 40} \celsius}} = 0{,}45 \cdot \frac{17{,}300\,\frac{\text{г}}{\text{м}^{3}}}{51{,}200\,\frac{\text{г}}{\text{м}^{3}}} = 0{,}152 \approx 15{,}2\%.
     \end{align*}
 }
 \solutionspace{80pt}
@@ -1498,7 +1498,7 @@
             \draw[-{Latex}] (0, 0) -- (0, 7) node[above left] {$P$};
             \draw[-{Latex}] (0, 0) -- (10, 0) node[right] {$V$};
 
-            \draw[dashed] (0, 2) node[left] {$P_1 = P_0$} -| (3, 0) node[below] {$V_1 = V_2 = V_0$ };
+            \draw[dashed] (0, 2) node[left] {$P_1 = P_0$} -| (3, 0) node[below] {$V_1 = V_2 = V_0$};
             \draw[dashed] (0, 6) node[left] {$P_2 = P_3 = 4P_0$} -| (9, 0) node[below] {$V_3 = 4V_0$};
 
             \draw (3, 2) node[above left]{1} node[below left]{$T_1 = T_0$}
@@ -1576,14 +1576,14 @@
             &= \frac 32 (P\Delta V + V \Delta P) + P \Delta V =  \frac 52 P\Delta V + \frac 32 V \Delta P = \\
             &= \frac 52 P\Delta V + \frac 32 V \cdot \cbr{- \frac{P_0}{V_0} \Delta V} = \frac{\Delta V}2 \cdot \cbr{5P - \frac{P_0}{V_0} V} = \\
             &= \frac{\Delta V}2 \cdot \cbr{5 \cdot \cbr{5P_0 - \frac{P_0}{V_0} V} - \frac{P_0}{V_0} V}
-             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 5 - 8\frac{V}{V_0}}.
+             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 5 - 8\fracV{V_0}}.
         \end{align*}
 
         Таком образом, знак количества теплоты $Q$ на участке 23 зависит от конкретного значения $V$:
         \begin{itemize}
             \item $\Delta V > 0$ на всём участке 23, поскольку газ расширяется,
             \item $P > 0$ — всегда, у нас идеальный газ, удары о стенки сосуда абсолютно упругие, а молекулы не взаимодействуют и поэтому давление только положительно,
-            \item если $5 \cdot 5 - 8\frac{V}{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
+            \item если $5 \cdot 5 - 8\fracV{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
         \end{itemize}
         Решая последнее неравенство, получаем конкретное значение $V^*$: при $V < V^*$ тепло подводят, далее~— отводят.
         Тут *~--- некоторая точка между точками 2 и 3, конкретные значения надо досчитать:
@@ -1607,7 +1607,7 @@
         \eta &= \frac{A_\text{цикл}}{Q_+} = \frac{A_\text{цикл}}{Q_{12} + Q_{2*}}
             = \frac{A_\text{цикл}}{A_{12} + \Delta U_{12} + A_{2*} + \Delta U_{2*}} = \\
             &= \frac{\frac92 \cdot P_0V_0}{0 + \frac92 \cdot P_0 V_0 + \frac{799}{128} \cdot P_0 V_0 + \frac{357}{128} \cdot P_0 V_0}
-             = \frac{\frac92}{\frac92 + \frac{799}{128} + \frac{357}{128}}
+             = \frac{A_bonus_cycle:LaTeX}{\frac92 + \frac{799}{128} + \frac{357}{128}}
              = \frac{144}{433} \leftarrow \text{вжух и готово!}
         \end{align*}
 }
@@ -1624,22 +1624,22 @@
 \answer{%
     \begin{align*}
     &\text{Значения плотности насыщенного водяного пара определяем по таблице:} \\
-    &\rho_{ \text{ нас.
-    пара 20 } \celsius } = 17{,}300\,\frac{\text{г}}{\text{м}^{3}}, \rho_{ \text{ нас.
-    пара 80 } \celsius } = 293{,}000\,\frac{\text{г}}{\text{м}^{3}}.
+    &\rho_{\text{нас.
+    пара 20} \celsius} = 17{,}300\,\frac{\text{г}}{\text{м}^{3}}, \rho_{\text{нас.
+    пара 80} \celsius} = 293{,}000\,\frac{\text{г}}{\text{м}^{3}}.
     \\
-    \varphi_1 &= \frac{ \rho_\text{ пара } }{ \rho_{ \text{ нас.
-    пара 20 } \celsius } } \implies { \rho_\text{ пара } } = \rho_{ \text{ нас.
-    пара 20 } \celsius } \cdot \varphi_1 = 17{,}300\,\frac{\text{г}}{\text{м}^{3}} \cdot 0{,}50 = 8{,}650\,\frac{\text{г}}{\text{м}^{3}}.
+    \varphi_1 &= \frac{\rho_\text{пара}}{\rho_{\text{нас.
+    пара 20} \celsius}} \implies {\rho_\text{пара}} = \rho_{\text{нас.
+    пара 20} \celsius} \cdot \varphi_1 = 17{,}300\,\frac{\text{г}}{\text{м}^{3}} \cdot 0{,}50 = 8{,}650\,\frac{\text{г}}{\text{м}^{3}}.
     \\
-    &\text{По таблице определяем, при какой температуре пар с такой плотностью станет насыщенным: }  \\
+    &\text{По таблице определяем, при какой температуре пар с такой плотностью станет насыщенным:}  \\
     t_\text{росы} &= 8{,}7\celsius, \\
-    \varphi_2 &= \frac{ \rho_\text{ пара } }{ \rho_{ \text{ нас.
-    пара 80 } \celsius } } = \frac{\rho_{ \text{ нас.
-    пара 20 } \celsius } \cdot \varphi_1}{ \rho_{ \text{ нас.
-    пара 80 } \celsius } }= \varphi_1 \cdot \frac{ \rho_{ \text{ нас.
-    пара 20 } \celsius } }{ \rho_{ \text{ нас.
-    пара 80 } \celsius } } = 0{,}50 \cdot \frac{ 17{,}300\,\frac{\text{г}}{\text{м}^{3}} }{ 293{,}000\,\frac{\text{г}}{\text{м}^{3}} } = 0{,}030 \approx 3{,}0\%.
+    \varphi_2 &= \frac{\rho_\text{пара}}{\rho_{\text{нас.
+    пара 80} \celsius}} = \frac{\rho_{\text{нас.
+    пара 20} \celsius} \cdot \varphi_1}{\rho_{\text{нас.
+    пара 80} \celsius}}= \varphi_1 \cdot \frac{\rho_{\text{нас.
+    пара 20} \celsius}}{\rho_{\text{нас.
+    пара 80} \celsius}} = 0{,}50 \cdot \frac{17{,}300\,\frac{\text{г}}{\text{м}^{3}}}{293{,}000\,\frac{\text{г}}{\text{м}^{3}}} = 0{,}030 \approx 3{,}0\%.
     \end{align*}
 }
 \solutionspace{80pt}
@@ -1706,7 +1706,7 @@
             \draw[-{Latex}] (0, 0) -- (0, 7) node[above left] {$P$};
             \draw[-{Latex}] (0, 0) -- (10, 0) node[right] {$V$};
 
-            \draw[dashed] (0, 2) node[left] {$P_1 = P_0$} -| (3, 0) node[below] {$V_1 = V_2 = V_0$ };
+            \draw[dashed] (0, 2) node[left] {$P_1 = P_0$} -| (3, 0) node[below] {$V_1 = V_2 = V_0$};
             \draw[dashed] (0, 6) node[left] {$P_2 = P_3 = 6P_0$} -| (9, 0) node[below] {$V_3 = 3V_0$};
 
             \draw (3, 2) node[above left]{1} node[below left]{$T_1 = T_0$}
@@ -1784,14 +1784,14 @@
             &= \frac 32 (P\Delta V + V \Delta P) + P \Delta V =  \frac 52 P\Delta V + \frac 32 V \Delta P = \\
             &= \frac 52 P\Delta V + \frac 32 V \cdot \cbr{- \frac{P_0}{V_0} \Delta V} = \frac{\Delta V}2 \cdot \cbr{5P - \frac{P_0}{V_0} V} = \\
             &= \frac{\Delta V}2 \cdot \cbr{5 \cdot \cbr{7P_0 - \frac{P_0}{V_0} V} - \frac{P_0}{V_0} V}
-             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 7 - 8\frac{V}{V_0}}.
+             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 7 - 8\fracV{V_0}}.
         \end{align*}
 
         Таком образом, знак количества теплоты $Q$ на участке 23 зависит от конкретного значения $V$:
         \begin{itemize}
             \item $\Delta V > 0$ на всём участке 23, поскольку газ расширяется,
             \item $P > 0$ — всегда, у нас идеальный газ, удары о стенки сосуда абсолютно упругие, а молекулы не взаимодействуют и поэтому давление только положительно,
-            \item если $5 \cdot 7 - 8\frac{V}{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
+            \item если $5 \cdot 7 - 8\fracV{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
         \end{itemize}
         Решая последнее неравенство, получаем конкретное значение $V^*$: при $V < V^*$ тепло подводят, далее~— отводят.
         Тут *~--- некоторая точка между точками 2 и 3, конкретные значения надо досчитать:
@@ -1815,7 +1815,7 @@
         \eta &= \frac{A_\text{цикл}}{Q_+} = \frac{A_\text{цикл}}{Q_{12} + Q_{2*}}
             = \frac{A_\text{цикл}}{A_{12} + \Delta U_{12} + A_{2*} + \Delta U_{2*}} = \\
             &= \frac{\frac{25}2 \cdot P_0V_0}{0 + \frac{15}2 \cdot P_0 V_0 + \frac{1863}{128} \cdot P_0 V_0 + \frac{1053}{128} \cdot P_0 V_0}
-             = \frac{\frac{25}2}{\frac{15}2 + \frac{1863}{128} + \frac{1053}{128}}
+             = \frac{A_bonus_cycle:LaTeX}{\frac{15}2 + \frac{1863}{128} + \frac{1053}{128}}
              = \frac{400}{969} \leftarrow \text{вжух и готово!}
         \end{align*}
 }
@@ -1832,22 +1832,22 @@
 \answer{%
     \begin{align*}
     &\text{Значения плотности насыщенного водяного пара определяем по таблице:} \\
-    &\rho_{ \text{ нас.
-    пара 30 } \celsius } = 30{,}300\,\frac{\text{г}}{\text{м}^{3}}, \rho_{ \text{ нас.
-    пара 80 } \celsius } = 293{,}000\,\frac{\text{г}}{\text{м}^{3}}.
+    &\rho_{\text{нас.
+    пара 30} \celsius} = 30{,}300\,\frac{\text{г}}{\text{м}^{3}}, \rho_{\text{нас.
+    пара 80} \celsius} = 293{,}000\,\frac{\text{г}}{\text{м}^{3}}.
     \\
-    \varphi_1 &= \frac{ \rho_\text{ пара } }{ \rho_{ \text{ нас.
-    пара 30 } \celsius } } \implies { \rho_\text{ пара } } = \rho_{ \text{ нас.
-    пара 30 } \celsius } \cdot \varphi_1 = 30{,}300\,\frac{\text{г}}{\text{м}^{3}} \cdot 0{,}65 = 19{,}695\,\frac{\text{г}}{\text{м}^{3}}.
+    \varphi_1 &= \frac{\rho_\text{пара}}{\rho_{\text{нас.
+    пара 30} \celsius}} \implies {\rho_\text{пара}} = \rho_{\text{нас.
+    пара 30} \celsius} \cdot \varphi_1 = 30{,}300\,\frac{\text{г}}{\text{м}^{3}} \cdot 0{,}65 = 19{,}695\,\frac{\text{г}}{\text{м}^{3}}.
     \\
-    &\text{По таблице определяем, при какой температуре пар с такой плотностью станет насыщенным: }  \\
+    &\text{По таблице определяем, при какой температуре пар с такой плотностью станет насыщенным:}  \\
     t_\text{росы} &= 22{,}2\celsius, \\
-    \varphi_2 &= \frac{ \rho_\text{ пара } }{ \rho_{ \text{ нас.
-    пара 80 } \celsius } } = \frac{\rho_{ \text{ нас.
-    пара 30 } \celsius } \cdot \varphi_1}{ \rho_{ \text{ нас.
-    пара 80 } \celsius } }= \varphi_1 \cdot \frac{ \rho_{ \text{ нас.
-    пара 30 } \celsius } }{ \rho_{ \text{ нас.
-    пара 80 } \celsius } } = 0{,}65 \cdot \frac{ 30{,}300\,\frac{\text{г}}{\text{м}^{3}} }{ 293{,}000\,\frac{\text{г}}{\text{м}^{3}} } = 0{,}067 \approx 6{,}7\%.
+    \varphi_2 &= \frac{\rho_\text{пара}}{\rho_{\text{нас.
+    пара 80} \celsius}} = \frac{\rho_{\text{нас.
+    пара 30} \celsius} \cdot \varphi_1}{\rho_{\text{нас.
+    пара 80} \celsius}}= \varphi_1 \cdot \frac{\rho_{\text{нас.
+    пара 30} \celsius}}{\rho_{\text{нас.
+    пара 80} \celsius}} = 0{,}65 \cdot \frac{30{,}300\,\frac{\text{г}}{\text{м}^{3}}}{293{,}000\,\frac{\text{г}}{\text{м}^{3}}} = 0{,}067 \approx 6{,}7\%.
     \end{align*}
 }
 \solutionspace{80pt}
@@ -1914,7 +1914,7 @@
             \draw[-{Latex}] (0, 0) -- (0, 7) node[above left] {$P$};
             \draw[-{Latex}] (0, 0) -- (10, 0) node[right] {$V$};
 
-            \draw[dashed] (0, 2) node[left] {$P_1 = P_0$} -| (3, 0) node[below] {$V_1 = V_2 = V_0$ };
+            \draw[dashed] (0, 2) node[left] {$P_1 = P_0$} -| (3, 0) node[below] {$V_1 = V_2 = V_0$};
             \draw[dashed] (0, 6) node[left] {$P_2 = P_3 = 5P_0$} -| (9, 0) node[below] {$V_3 = 6V_0$};
 
             \draw (3, 2) node[above left]{1} node[below left]{$T_1 = T_0$}
@@ -1992,14 +1992,14 @@
             &= \frac 32 (P\Delta V + V \Delta P) + P \Delta V =  \frac 52 P\Delta V + \frac 32 V \Delta P = \\
             &= \frac 52 P\Delta V + \frac 32 V \cdot \cbr{- \frac{P_0}{V_0} \Delta V} = \frac{\Delta V}2 \cdot \cbr{5P - \frac{P_0}{V_0} V} = \\
             &= \frac{\Delta V}2 \cdot \cbr{5 \cdot \cbr{6P_0 - \frac{P_0}{V_0} V} - \frac{P_0}{V_0} V}
-             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 6 - 8\frac{V}{V_0}}.
+             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 6 - 8\fracV{V_0}}.
         \end{align*}
 
         Таком образом, знак количества теплоты $Q$ на участке 23 зависит от конкретного значения $V$:
         \begin{itemize}
             \item $\Delta V > 0$ на всём участке 23, поскольку газ расширяется,
             \item $P > 0$ — всегда, у нас идеальный газ, удары о стенки сосуда абсолютно упругие, а молекулы не взаимодействуют и поэтому давление только положительно,
-            \item если $5 \cdot 6 - 8\frac{V}{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
+            \item если $5 \cdot 6 - 8\fracV{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
         \end{itemize}
         Решая последнее неравенство, получаем конкретное значение $V^*$: при $V < V^*$ тепло подводят, далее~— отводят.
         Тут *~--- некоторая точка между точками 2 и 3, конкретные значения надо досчитать:
@@ -2023,7 +2023,7 @@
         \eta &= \frac{A_\text{цикл}}{Q_+} = \frac{A_\text{цикл}}{Q_{12} + Q_{2*}}
             = \frac{A_\text{цикл}}{A_{12} + \Delta U_{12} + A_{2*} + \Delta U_{2*}} = \\
             &= \frac{8 \cdot P_0V_0}{0 + 6 \cdot P_0 V_0 + \frac{319}{32} \cdot P_0 V_0 + \frac{165}{32} \cdot P_0 V_0}
-             = \frac{8}{6 + \frac{319}{32} + \frac{165}{32}}
+             = \frac{A_bonus_cycle:LaTeX}{6 + \frac{319}{32} + \frac{165}{32}}
              = \frac{64}{169} \leftarrow \text{вжух и готово!}
         \end{align*}
 }
@@ -2040,22 +2040,22 @@
 \answer{%
     \begin{align*}
     &\text{Значения плотности насыщенного водяного пара определяем по таблице:} \\
-    &\rho_{ \text{ нас.
-    пара 20 } \celsius } = 17{,}300\,\frac{\text{г}}{\text{м}^{3}}, \rho_{ \text{ нас.
-    пара 70 } \celsius } = 198{,}000\,\frac{\text{г}}{\text{м}^{3}}.
+    &\rho_{\text{нас.
+    пара 20} \celsius} = 17{,}300\,\frac{\text{г}}{\text{м}^{3}}, \rho_{\text{нас.
+    пара 70} \celsius} = 198{,}000\,\frac{\text{г}}{\text{м}^{3}}.
     \\
-    \varphi_1 &= \frac{ \rho_\text{ пара } }{ \rho_{ \text{ нас.
-    пара 20 } \celsius } } \implies { \rho_\text{ пара } } = \rho_{ \text{ нас.
-    пара 20 } \celsius } \cdot \varphi_1 = 17{,}300\,\frac{\text{г}}{\text{м}^{3}} \cdot 0{,}55 = 9{,}515\,\frac{\text{г}}{\text{м}^{3}}.
+    \varphi_1 &= \frac{\rho_\text{пара}}{\rho_{\text{нас.
+    пара 20} \celsius}} \implies {\rho_\text{пара}} = \rho_{\text{нас.
+    пара 20} \celsius} \cdot \varphi_1 = 17{,}300\,\frac{\text{г}}{\text{м}^{3}} \cdot 0{,}55 = 9{,}515\,\frac{\text{г}}{\text{м}^{3}}.
     \\
-    &\text{По таблице определяем, при какой температуре пар с такой плотностью станет насыщенным: }  \\
+    &\text{По таблице определяем, при какой температуре пар с такой плотностью станет насыщенным:}  \\
     t_\text{росы} &= 10{,}2\celsius, \\
-    \varphi_2 &= \frac{ \rho_\text{ пара } }{ \rho_{ \text{ нас.
-    пара 70 } \celsius } } = \frac{\rho_{ \text{ нас.
-    пара 20 } \celsius } \cdot \varphi_1}{ \rho_{ \text{ нас.
-    пара 70 } \celsius } }= \varphi_1 \cdot \frac{ \rho_{ \text{ нас.
-    пара 20 } \celsius } }{ \rho_{ \text{ нас.
-    пара 70 } \celsius } } = 0{,}55 \cdot \frac{ 17{,}300\,\frac{\text{г}}{\text{м}^{3}} }{ 198{,}000\,\frac{\text{г}}{\text{м}^{3}} } = 0{,}048 \approx 4{,}8\%.
+    \varphi_2 &= \frac{\rho_\text{пара}}{\rho_{\text{нас.
+    пара 70} \celsius}} = \frac{\rho_{\text{нас.
+    пара 20} \celsius} \cdot \varphi_1}{\rho_{\text{нас.
+    пара 70} \celsius}}= \varphi_1 \cdot \frac{\rho_{\text{нас.
+    пара 20} \celsius}}{\rho_{\text{нас.
+    пара 70} \celsius}} = 0{,}55 \cdot \frac{17{,}300\,\frac{\text{г}}{\text{м}^{3}}}{198{,}000\,\frac{\text{г}}{\text{м}^{3}}} = 0{,}048 \approx 4{,}8\%.
     \end{align*}
 }
 \solutionspace{80pt}
@@ -2122,7 +2122,7 @@
             \draw[-{Latex}] (0, 0) -- (0, 7) node[above left] {$P$};
             \draw[-{Latex}] (0, 0) -- (10, 0) node[right] {$V$};
 
-            \draw[dashed] (0, 2) node[left] {$P_1 = P_0$} -| (3, 0) node[below] {$V_1 = V_2 = V_0$ };
+            \draw[dashed] (0, 2) node[left] {$P_1 = P_0$} -| (3, 0) node[below] {$V_1 = V_2 = V_0$};
             \draw[dashed] (0, 6) node[left] {$P_2 = P_3 = 4P_0$} -| (9, 0) node[below] {$V_3 = 5V_0$};
 
             \draw (3, 2) node[above left]{1} node[below left]{$T_1 = T_0$}
@@ -2200,14 +2200,14 @@
             &= \frac 32 (P\Delta V + V \Delta P) + P \Delta V =  \frac 52 P\Delta V + \frac 32 V \Delta P = \\
             &= \frac 52 P\Delta V + \frac 32 V \cdot \cbr{- \frac{P_0}{V_0} \Delta V} = \frac{\Delta V}2 \cdot \cbr{5P - \frac{P_0}{V_0} V} = \\
             &= \frac{\Delta V}2 \cdot \cbr{5 \cdot \cbr{5P_0 - \frac{P_0}{V_0} V} - \frac{P_0}{V_0} V}
-             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 5 - 8\frac{V}{V_0}}.
+             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 5 - 8\fracV{V_0}}.
         \end{align*}
 
         Таком образом, знак количества теплоты $Q$ на участке 23 зависит от конкретного значения $V$:
         \begin{itemize}
             \item $\Delta V > 0$ на всём участке 23, поскольку газ расширяется,
             \item $P > 0$ — всегда, у нас идеальный газ, удары о стенки сосуда абсолютно упругие, а молекулы не взаимодействуют и поэтому давление только положительно,
-            \item если $5 \cdot 5 - 8\frac{V}{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
+            \item если $5 \cdot 5 - 8\fracV{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
         \end{itemize}
         Решая последнее неравенство, получаем конкретное значение $V^*$: при $V < V^*$ тепло подводят, далее~— отводят.
         Тут *~--- некоторая точка между точками 2 и 3, конкретные значения надо досчитать:
@@ -2231,7 +2231,7 @@
         \eta &= \frac{A_\text{цикл}}{Q_+} = \frac{A_\text{цикл}}{Q_{12} + Q_{2*}}
             = \frac{A_\text{цикл}}{A_{12} + \Delta U_{12} + A_{2*} + \Delta U_{2*}} = \\
             &= \frac{\frac92 \cdot P_0V_0}{0 + \frac92 \cdot P_0 V_0 + \frac{799}{128} \cdot P_0 V_0 + \frac{357}{128} \cdot P_0 V_0}
-             = \frac{\frac92}{\frac92 + \frac{799}{128} + \frac{357}{128}}
+             = \frac{A_bonus_cycle:LaTeX}{\frac92 + \frac{799}{128} + \frac{357}{128}}
              = \frac{144}{433} \leftarrow \text{вжух и готово!}
         \end{align*}
 }
@@ -2248,22 +2248,22 @@
 \answer{%
     \begin{align*}
     &\text{Значения плотности насыщенного водяного пара определяем по таблице:} \\
-    &\rho_{ \text{ нас.
-    пара 15 } \celsius } = 12{,}800\,\frac{\text{г}}{\text{м}^{3}}, \rho_{ \text{ нас.
-    пара 70 } \celsius } = 198{,}000\,\frac{\text{г}}{\text{м}^{3}}.
+    &\rho_{\text{нас.
+    пара 15} \celsius} = 12{,}800\,\frac{\text{г}}{\text{м}^{3}}, \rho_{\text{нас.
+    пара 70} \celsius} = 198{,}000\,\frac{\text{г}}{\text{м}^{3}}.
     \\
-    \varphi_1 &= \frac{ \rho_\text{ пара } }{ \rho_{ \text{ нас.
-    пара 15 } \celsius } } \implies { \rho_\text{ пара } } = \rho_{ \text{ нас.
-    пара 15 } \celsius } \cdot \varphi_1 = 12{,}800\,\frac{\text{г}}{\text{м}^{3}} \cdot 0{,}50 = 6{,}400\,\frac{\text{г}}{\text{м}^{3}}.
+    \varphi_1 &= \frac{\rho_\text{пара}}{\rho_{\text{нас.
+    пара 15} \celsius}} \implies {\rho_\text{пара}} = \rho_{\text{нас.
+    пара 15} \celsius} \cdot \varphi_1 = 12{,}800\,\frac{\text{г}}{\text{м}^{3}} \cdot 0{,}50 = 6{,}400\,\frac{\text{г}}{\text{м}^{3}}.
     \\
-    &\text{По таблице определяем, при какой температуре пар с такой плотностью станет насыщенным: }  \\
+    &\text{По таблице определяем, при какой температуре пар с такой плотностью станет насыщенным:}  \\
     t_\text{росы} &= 4{,}0\celsius, \\
-    \varphi_2 &= \frac{ \rho_\text{ пара } }{ \rho_{ \text{ нас.
-    пара 70 } \celsius } } = \frac{\rho_{ \text{ нас.
-    пара 15 } \celsius } \cdot \varphi_1}{ \rho_{ \text{ нас.
-    пара 70 } \celsius } }= \varphi_1 \cdot \frac{ \rho_{ \text{ нас.
-    пара 15 } \celsius } }{ \rho_{ \text{ нас.
-    пара 70 } \celsius } } = 0{,}50 \cdot \frac{ 12{,}800\,\frac{\text{г}}{\text{м}^{3}} }{ 198{,}000\,\frac{\text{г}}{\text{м}^{3}} } = 0{,}032 \approx 3{,}2\%.
+    \varphi_2 &= \frac{\rho_\text{пара}}{\rho_{\text{нас.
+    пара 70} \celsius}} = \frac{\rho_{\text{нас.
+    пара 15} \celsius} \cdot \varphi_1}{\rho_{\text{нас.
+    пара 70} \celsius}}= \varphi_1 \cdot \frac{\rho_{\text{нас.
+    пара 15} \celsius}}{\rho_{\text{нас.
+    пара 70} \celsius}} = 0{,}50 \cdot \frac{12{,}800\,\frac{\text{г}}{\text{м}^{3}}}{198{,}000\,\frac{\text{г}}{\text{м}^{3}}} = 0{,}032 \approx 3{,}2\%.
     \end{align*}
 }
 \solutionspace{80pt}
@@ -2330,7 +2330,7 @@
             \draw[-{Latex}] (0, 0) -- (0, 7) node[above left] {$P$};
             \draw[-{Latex}] (0, 0) -- (10, 0) node[right] {$V$};
 
-            \draw[dashed] (0, 2) node[left] {$P_1 = P_0$} -| (3, 0) node[below] {$V_1 = V_2 = V_0$ };
+            \draw[dashed] (0, 2) node[left] {$P_1 = P_0$} -| (3, 0) node[below] {$V_1 = V_2 = V_0$};
             \draw[dashed] (0, 6) node[left] {$P_2 = P_3 = 3P_0$} -| (9, 0) node[below] {$V_3 = 4V_0$};
 
             \draw (3, 2) node[above left]{1} node[below left]{$T_1 = T_0$}
@@ -2408,14 +2408,14 @@
             &= \frac 32 (P\Delta V + V \Delta P) + P \Delta V =  \frac 52 P\Delta V + \frac 32 V \Delta P = \\
             &= \frac 52 P\Delta V + \frac 32 V \cdot \cbr{- \frac{P_0}{V_0} \Delta V} = \frac{\Delta V}2 \cdot \cbr{5P - \frac{P_0}{V_0} V} = \\
             &= \frac{\Delta V}2 \cdot \cbr{5 \cdot \cbr{4P_0 - \frac{P_0}{V_0} V} - \frac{P_0}{V_0} V}
-             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 4 - 8\frac{V}{V_0}}.
+             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 4 - 8\fracV{V_0}}.
         \end{align*}
 
         Таком образом, знак количества теплоты $Q$ на участке 23 зависит от конкретного значения $V$:
         \begin{itemize}
             \item $\Delta V > 0$ на всём участке 23, поскольку газ расширяется,
             \item $P > 0$ — всегда, у нас идеальный газ, удары о стенки сосуда абсолютно упругие, а молекулы не взаимодействуют и поэтому давление только положительно,
-            \item если $5 \cdot 4 - 8\frac{V}{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
+            \item если $5 \cdot 4 - 8\fracV{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
         \end{itemize}
         Решая последнее неравенство, получаем конкретное значение $V^*$: при $V < V^*$ тепло подводят, далее~— отводят.
         Тут *~--- некоторая точка между точками 2 и 3, конкретные значения надо досчитать:
@@ -2439,7 +2439,7 @@
         \eta &= \frac{A_\text{цикл}}{Q_+} = \frac{A_\text{цикл}}{Q_{12} + Q_{2*}}
             = \frac{A_\text{цикл}}{A_{12} + \Delta U_{12} + A_{2*} + \Delta U_{2*}} = \\
             &= \frac{2 \cdot P_0V_0}{0 + 3 \cdot P_0 V_0 + \frac{27}8 \cdot P_0 V_0 + \frac98 \cdot P_0 V_0}
-             = \frac{2}{3 + \frac{27}8 + \frac98}
+             = \frac{A_bonus_cycle:LaTeX}{3 + \frac{27}8 + \frac98}
              = \frac4{15} \leftarrow \text{вжух и готово!}
         \end{align*}
 }
@@ -2456,22 +2456,22 @@
 \answer{%
     \begin{align*}
     &\text{Значения плотности насыщенного водяного пара определяем по таблице:} \\
-    &\rho_{ \text{ нас.
-    пара 30 } \celsius } = 30{,}300\,\frac{\text{г}}{\text{м}^{3}}, \rho_{ \text{ нас.
-    пара 50 } \celsius } = 83{,}000\,\frac{\text{г}}{\text{м}^{3}}.
+    &\rho_{\text{нас.
+    пара 30} \celsius} = 30{,}300\,\frac{\text{г}}{\text{м}^{3}}, \rho_{\text{нас.
+    пара 50} \celsius} = 83{,}000\,\frac{\text{г}}{\text{м}^{3}}.
     \\
-    \varphi_1 &= \frac{ \rho_\text{ пара } }{ \rho_{ \text{ нас.
-    пара 30 } \celsius } } \implies { \rho_\text{ пара } } = \rho_{ \text{ нас.
-    пара 30 } \celsius } \cdot \varphi_1 = 30{,}300\,\frac{\text{г}}{\text{м}^{3}} \cdot 0{,}65 = 19{,}695\,\frac{\text{г}}{\text{м}^{3}}.
+    \varphi_1 &= \frac{\rho_\text{пара}}{\rho_{\text{нас.
+    пара 30} \celsius}} \implies {\rho_\text{пара}} = \rho_{\text{нас.
+    пара 30} \celsius} \cdot \varphi_1 = 30{,}300\,\frac{\text{г}}{\text{м}^{3}} \cdot 0{,}65 = 19{,}695\,\frac{\text{г}}{\text{м}^{3}}.
     \\
-    &\text{По таблице определяем, при какой температуре пар с такой плотностью станет насыщенным: }  \\
+    &\text{По таблице определяем, при какой температуре пар с такой плотностью станет насыщенным:}  \\
     t_\text{росы} &= 22{,}2\celsius, \\
-    \varphi_2 &= \frac{ \rho_\text{ пара } }{ \rho_{ \text{ нас.
-    пара 50 } \celsius } } = \frac{\rho_{ \text{ нас.
-    пара 30 } \celsius } \cdot \varphi_1}{ \rho_{ \text{ нас.
-    пара 50 } \celsius } }= \varphi_1 \cdot \frac{ \rho_{ \text{ нас.
-    пара 30 } \celsius } }{ \rho_{ \text{ нас.
-    пара 50 } \celsius } } = 0{,}65 \cdot \frac{ 30{,}300\,\frac{\text{г}}{\text{м}^{3}} }{ 83{,}000\,\frac{\text{г}}{\text{м}^{3}} } = 0{,}237 \approx 23{,}7\%.
+    \varphi_2 &= \frac{\rho_\text{пара}}{\rho_{\text{нас.
+    пара 50} \celsius}} = \frac{\rho_{\text{нас.
+    пара 30} \celsius} \cdot \varphi_1}{\rho_{\text{нас.
+    пара 50} \celsius}}= \varphi_1 \cdot \frac{\rho_{\text{нас.
+    пара 30} \celsius}}{\rho_{\text{нас.
+    пара 50} \celsius}} = 0{,}65 \cdot \frac{30{,}300\,\frac{\text{г}}{\text{м}^{3}}}{83{,}000\,\frac{\text{г}}{\text{м}^{3}}} = 0{,}237 \approx 23{,}7\%.
     \end{align*}
 }
 \solutionspace{80pt}
@@ -2538,7 +2538,7 @@
             \draw[-{Latex}] (0, 0) -- (0, 7) node[above left] {$P$};
             \draw[-{Latex}] (0, 0) -- (10, 0) node[right] {$V$};
 
-            \draw[dashed] (0, 2) node[left] {$P_1 = P_0$} -| (3, 0) node[below] {$V_1 = V_2 = V_0$ };
+            \draw[dashed] (0, 2) node[left] {$P_1 = P_0$} -| (3, 0) node[below] {$V_1 = V_2 = V_0$};
             \draw[dashed] (0, 6) node[left] {$P_2 = P_3 = 4P_0$} -| (9, 0) node[below] {$V_3 = 4V_0$};
 
             \draw (3, 2) node[above left]{1} node[below left]{$T_1 = T_0$}
@@ -2616,14 +2616,14 @@
             &= \frac 32 (P\Delta V + V \Delta P) + P \Delta V =  \frac 52 P\Delta V + \frac 32 V \Delta P = \\
             &= \frac 52 P\Delta V + \frac 32 V \cdot \cbr{- \frac{P_0}{V_0} \Delta V} = \frac{\Delta V}2 \cdot \cbr{5P - \frac{P_0}{V_0} V} = \\
             &= \frac{\Delta V}2 \cdot \cbr{5 \cdot \cbr{5P_0 - \frac{P_0}{V_0} V} - \frac{P_0}{V_0} V}
-             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 5 - 8\frac{V}{V_0}}.
+             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 5 - 8\fracV{V_0}}.
         \end{align*}
 
         Таком образом, знак количества теплоты $Q$ на участке 23 зависит от конкретного значения $V$:
         \begin{itemize}
             \item $\Delta V > 0$ на всём участке 23, поскольку газ расширяется,
             \item $P > 0$ — всегда, у нас идеальный газ, удары о стенки сосуда абсолютно упругие, а молекулы не взаимодействуют и поэтому давление только положительно,
-            \item если $5 \cdot 5 - 8\frac{V}{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
+            \item если $5 \cdot 5 - 8\fracV{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
         \end{itemize}
         Решая последнее неравенство, получаем конкретное значение $V^*$: при $V < V^*$ тепло подводят, далее~— отводят.
         Тут *~--- некоторая точка между точками 2 и 3, конкретные значения надо досчитать:
@@ -2647,7 +2647,7 @@
         \eta &= \frac{A_\text{цикл}}{Q_+} = \frac{A_\text{цикл}}{Q_{12} + Q_{2*}}
             = \frac{A_\text{цикл}}{A_{12} + \Delta U_{12} + A_{2*} + \Delta U_{2*}} = \\
             &= \frac{\frac92 \cdot P_0V_0}{0 + \frac92 \cdot P_0 V_0 + \frac{799}{128} \cdot P_0 V_0 + \frac{357}{128} \cdot P_0 V_0}
-             = \frac{\frac92}{\frac92 + \frac{799}{128} + \frac{357}{128}}
+             = \frac{A_bonus_cycle:LaTeX}{\frac92 + \frac{799}{128} + \frac{357}{128}}
              = \frac{144}{433} \leftarrow \text{вжух и готово!}
         \end{align*}
 }
@@ -2664,22 +2664,22 @@
 \answer{%
     \begin{align*}
     &\text{Значения плотности насыщенного водяного пара определяем по таблице:} \\
-    &\rho_{ \text{ нас.
-    пара 15 } \celsius } = 12{,}800\,\frac{\text{г}}{\text{м}^{3}}, \rho_{ \text{ нас.
-    пара 50 } \celsius } = 83{,}000\,\frac{\text{г}}{\text{м}^{3}}.
+    &\rho_{\text{нас.
+    пара 15} \celsius} = 12{,}800\,\frac{\text{г}}{\text{м}^{3}}, \rho_{\text{нас.
+    пара 50} \celsius} = 83{,}000\,\frac{\text{г}}{\text{м}^{3}}.
     \\
-    \varphi_1 &= \frac{ \rho_\text{ пара } }{ \rho_{ \text{ нас.
-    пара 15 } \celsius } } \implies { \rho_\text{ пара } } = \rho_{ \text{ нас.
-    пара 15 } \celsius } \cdot \varphi_1 = 12{,}800\,\frac{\text{г}}{\text{м}^{3}} \cdot 0{,}60 = 7{,}680\,\frac{\text{г}}{\text{м}^{3}}.
+    \varphi_1 &= \frac{\rho_\text{пара}}{\rho_{\text{нас.
+    пара 15} \celsius}} \implies {\rho_\text{пара}} = \rho_{\text{нас.
+    пара 15} \celsius} \cdot \varphi_1 = 12{,}800\,\frac{\text{г}}{\text{м}^{3}} \cdot 0{,}60 = 7{,}680\,\frac{\text{г}}{\text{м}^{3}}.
     \\
-    &\text{По таблице определяем, при какой температуре пар с такой плотностью станет насыщенным: }  \\
+    &\text{По таблице определяем, при какой температуре пар с такой плотностью станет насыщенным:}  \\
     t_\text{росы} &= 6{,}8\celsius, \\
-    \varphi_2 &= \frac{ \rho_\text{ пара } }{ \rho_{ \text{ нас.
-    пара 50 } \celsius } } = \frac{\rho_{ \text{ нас.
-    пара 15 } \celsius } \cdot \varphi_1}{ \rho_{ \text{ нас.
-    пара 50 } \celsius } }= \varphi_1 \cdot \frac{ \rho_{ \text{ нас.
-    пара 15 } \celsius } }{ \rho_{ \text{ нас.
-    пара 50 } \celsius } } = 0{,}60 \cdot \frac{ 12{,}800\,\frac{\text{г}}{\text{м}^{3}} }{ 83{,}000\,\frac{\text{г}}{\text{м}^{3}} } = 0{,}093 \approx 9{,}3\%.
+    \varphi_2 &= \frac{\rho_\text{пара}}{\rho_{\text{нас.
+    пара 50} \celsius}} = \frac{\rho_{\text{нас.
+    пара 15} \celsius} \cdot \varphi_1}{\rho_{\text{нас.
+    пара 50} \celsius}}= \varphi_1 \cdot \frac{\rho_{\text{нас.
+    пара 15} \celsius}}{\rho_{\text{нас.
+    пара 50} \celsius}} = 0{,}60 \cdot \frac{12{,}800\,\frac{\text{г}}{\text{м}^{3}}}{83{,}000\,\frac{\text{г}}{\text{м}^{3}}} = 0{,}093 \approx 9{,}3\%.
     \end{align*}
 }
 \solutionspace{80pt}
@@ -2746,7 +2746,7 @@
             \draw[-{Latex}] (0, 0) -- (0, 7) node[above left] {$P$};
             \draw[-{Latex}] (0, 0) -- (10, 0) node[right] {$V$};
 
-            \draw[dashed] (0, 2) node[left] {$P_1 = P_0$} -| (3, 0) node[below] {$V_1 = V_2 = V_0$ };
+            \draw[dashed] (0, 2) node[left] {$P_1 = P_0$} -| (3, 0) node[below] {$V_1 = V_2 = V_0$};
             \draw[dashed] (0, 6) node[left] {$P_2 = P_3 = 3P_0$} -| (9, 0) node[below] {$V_3 = 6V_0$};
 
             \draw (3, 2) node[above left]{1} node[below left]{$T_1 = T_0$}
@@ -2824,14 +2824,14 @@
             &= \frac 32 (P\Delta V + V \Delta P) + P \Delta V =  \frac 52 P\Delta V + \frac 32 V \Delta P = \\
             &= \frac 52 P\Delta V + \frac 32 V \cdot \cbr{- \frac{P_0}{V_0} \Delta V} = \frac{\Delta V}2 \cdot \cbr{5P - \frac{P_0}{V_0} V} = \\
             &= \frac{\Delta V}2 \cdot \cbr{5 \cdot \cbr{4P_0 - \frac{P_0}{V_0} V} - \frac{P_0}{V_0} V}
-             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 4 - 8\frac{V}{V_0}}.
+             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 4 - 8\fracV{V_0}}.
         \end{align*}
 
         Таком образом, знак количества теплоты $Q$ на участке 23 зависит от конкретного значения $V$:
         \begin{itemize}
             \item $\Delta V > 0$ на всём участке 23, поскольку газ расширяется,
             \item $P > 0$ — всегда, у нас идеальный газ, удары о стенки сосуда абсолютно упругие, а молекулы не взаимодействуют и поэтому давление только положительно,
-            \item если $5 \cdot 4 - 8\frac{V}{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
+            \item если $5 \cdot 4 - 8\fracV{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
         \end{itemize}
         Решая последнее неравенство, получаем конкретное значение $V^*$: при $V < V^*$ тепло подводят, далее~— отводят.
         Тут *~--- некоторая точка между точками 2 и 3, конкретные значения надо досчитать:
@@ -2855,7 +2855,7 @@
         \eta &= \frac{A_\text{цикл}}{Q_+} = \frac{A_\text{цикл}}{Q_{12} + Q_{2*}}
             = \frac{A_\text{цикл}}{A_{12} + \Delta U_{12} + A_{2*} + \Delta U_{2*}} = \\
             &= \frac{2 \cdot P_0V_0}{0 + 3 \cdot P_0 V_0 + \frac{27}8 \cdot P_0 V_0 + \frac98 \cdot P_0 V_0}
-             = \frac{2}{3 + \frac{27}8 + \frac98}
+             = \frac{A_bonus_cycle:LaTeX}{3 + \frac{27}8 + \frac98}
              = \frac4{15} \leftarrow \text{вжух и готово!}
         \end{align*}
 }
@@ -2872,22 +2872,22 @@
 \answer{%
     \begin{align*}
     &\text{Значения плотности насыщенного водяного пара определяем по таблице:} \\
-    &\rho_{ \text{ нас.
-    пара 25 } \celsius } = 23{,}000\,\frac{\text{г}}{\text{м}^{3}}, \rho_{ \text{ нас.
-    пара 70 } \celsius } = 198{,}000\,\frac{\text{г}}{\text{м}^{3}}.
+    &\rho_{\text{нас.
+    пара 25} \celsius} = 23{,}000\,\frac{\text{г}}{\text{м}^{3}}, \rho_{\text{нас.
+    пара 70} \celsius} = 198{,}000\,\frac{\text{г}}{\text{м}^{3}}.
     \\
-    \varphi_1 &= \frac{ \rho_\text{ пара } }{ \rho_{ \text{ нас.
-    пара 25 } \celsius } } \implies { \rho_\text{ пара } } = \rho_{ \text{ нас.
-    пара 25 } \celsius } \cdot \varphi_1 = 23{,}000\,\frac{\text{г}}{\text{м}^{3}} \cdot 0{,}75 = 17{,}250\,\frac{\text{г}}{\text{м}^{3}}.
+    \varphi_1 &= \frac{\rho_\text{пара}}{\rho_{\text{нас.
+    пара 25} \celsius}} \implies {\rho_\text{пара}} = \rho_{\text{нас.
+    пара 25} \celsius} \cdot \varphi_1 = 23{,}000\,\frac{\text{г}}{\text{м}^{3}} \cdot 0{,}75 = 17{,}250\,\frac{\text{г}}{\text{м}^{3}}.
     \\
-    &\text{По таблице определяем, при какой температуре пар с такой плотностью станет насыщенным: }  \\
+    &\text{По таблице определяем, при какой температуре пар с такой плотностью станет насыщенным:}  \\
     t_\text{росы} &= 19{,}9\celsius, \\
-    \varphi_2 &= \frac{ \rho_\text{ пара } }{ \rho_{ \text{ нас.
-    пара 70 } \celsius } } = \frac{\rho_{ \text{ нас.
-    пара 25 } \celsius } \cdot \varphi_1}{ \rho_{ \text{ нас.
-    пара 70 } \celsius } }= \varphi_1 \cdot \frac{ \rho_{ \text{ нас.
-    пара 25 } \celsius } }{ \rho_{ \text{ нас.
-    пара 70 } \celsius } } = 0{,}75 \cdot \frac{ 23{,}000\,\frac{\text{г}}{\text{м}^{3}} }{ 198{,}000\,\frac{\text{г}}{\text{м}^{3}} } = 0{,}087 \approx 8{,}7\%.
+    \varphi_2 &= \frac{\rho_\text{пара}}{\rho_{\text{нас.
+    пара 70} \celsius}} = \frac{\rho_{\text{нас.
+    пара 25} \celsius} \cdot \varphi_1}{\rho_{\text{нас.
+    пара 70} \celsius}}= \varphi_1 \cdot \frac{\rho_{\text{нас.
+    пара 25} \celsius}}{\rho_{\text{нас.
+    пара 70} \celsius}} = 0{,}75 \cdot \frac{23{,}000\,\frac{\text{г}}{\text{м}^{3}}}{198{,}000\,\frac{\text{г}}{\text{м}^{3}}} = 0{,}087 \approx 8{,}7\%.
     \end{align*}
 }
 \solutionspace{80pt}
@@ -2954,7 +2954,7 @@
             \draw[-{Latex}] (0, 0) -- (0, 7) node[above left] {$P$};
             \draw[-{Latex}] (0, 0) -- (10, 0) node[right] {$V$};
 
-            \draw[dashed] (0, 2) node[left] {$P_1 = P_0$} -| (3, 0) node[below] {$V_1 = V_2 = V_0$ };
+            \draw[dashed] (0, 2) node[left] {$P_1 = P_0$} -| (3, 0) node[below] {$V_1 = V_2 = V_0$};
             \draw[dashed] (0, 6) node[left] {$P_2 = P_3 = 5P_0$} -| (9, 0) node[below] {$V_3 = 5V_0$};
 
             \draw (3, 2) node[above left]{1} node[below left]{$T_1 = T_0$}
@@ -3032,14 +3032,14 @@
             &= \frac 32 (P\Delta V + V \Delta P) + P \Delta V =  \frac 52 P\Delta V + \frac 32 V \Delta P = \\
             &= \frac 52 P\Delta V + \frac 32 V \cdot \cbr{- \frac{P_0}{V_0} \Delta V} = \frac{\Delta V}2 \cdot \cbr{5P - \frac{P_0}{V_0} V} = \\
             &= \frac{\Delta V}2 \cdot \cbr{5 \cdot \cbr{6P_0 - \frac{P_0}{V_0} V} - \frac{P_0}{V_0} V}
-             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 6 - 8\frac{V}{V_0}}.
+             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 6 - 8\fracV{V_0}}.
         \end{align*}
 
         Таком образом, знак количества теплоты $Q$ на участке 23 зависит от конкретного значения $V$:
         \begin{itemize}
             \item $\Delta V > 0$ на всём участке 23, поскольку газ расширяется,
             \item $P > 0$ — всегда, у нас идеальный газ, удары о стенки сосуда абсолютно упругие, а молекулы не взаимодействуют и поэтому давление только положительно,
-            \item если $5 \cdot 6 - 8\frac{V}{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
+            \item если $5 \cdot 6 - 8\fracV{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
         \end{itemize}
         Решая последнее неравенство, получаем конкретное значение $V^*$: при $V < V^*$ тепло подводят, далее~— отводят.
         Тут *~--- некоторая точка между точками 2 и 3, конкретные значения надо досчитать:
@@ -3063,7 +3063,7 @@
         \eta &= \frac{A_\text{цикл}}{Q_+} = \frac{A_\text{цикл}}{Q_{12} + Q_{2*}}
             = \frac{A_\text{цикл}}{A_{12} + \Delta U_{12} + A_{2*} + \Delta U_{2*}} = \\
             &= \frac{8 \cdot P_0V_0}{0 + 6 \cdot P_0 V_0 + \frac{319}{32} \cdot P_0 V_0 + \frac{165}{32} \cdot P_0 V_0}
-             = \frac{8}{6 + \frac{319}{32} + \frac{165}{32}}
+             = \frac{A_bonus_cycle:LaTeX}{6 + \frac{319}{32} + \frac{165}{32}}
              = \frac{64}{169} \leftarrow \text{вжух и готово!}
         \end{align*}
 }
@@ -3080,22 +3080,22 @@
 \answer{%
     \begin{align*}
     &\text{Значения плотности насыщенного водяного пара определяем по таблице:} \\
-    &\rho_{ \text{ нас.
-    пара 30 } \celsius } = 30{,}300\,\frac{\text{г}}{\text{м}^{3}}, \rho_{ \text{ нас.
-    пара 70 } \celsius } = 198{,}000\,\frac{\text{г}}{\text{м}^{3}}.
+    &\rho_{\text{нас.
+    пара 30} \celsius} = 30{,}300\,\frac{\text{г}}{\text{м}^{3}}, \rho_{\text{нас.
+    пара 70} \celsius} = 198{,}000\,\frac{\text{г}}{\text{м}^{3}}.
     \\
-    \varphi_1 &= \frac{ \rho_\text{ пара } }{ \rho_{ \text{ нас.
-    пара 30 } \celsius } } \implies { \rho_\text{ пара } } = \rho_{ \text{ нас.
-    пара 30 } \celsius } \cdot \varphi_1 = 30{,}300\,\frac{\text{г}}{\text{м}^{3}} \cdot 0{,}55 = 16{,}665\,\frac{\text{г}}{\text{м}^{3}}.
+    \varphi_1 &= \frac{\rho_\text{пара}}{\rho_{\text{нас.
+    пара 30} \celsius}} \implies {\rho_\text{пара}} = \rho_{\text{нас.
+    пара 30} \celsius} \cdot \varphi_1 = 30{,}300\,\frac{\text{г}}{\text{м}^{3}} \cdot 0{,}55 = 16{,}665\,\frac{\text{г}}{\text{м}^{3}}.
     \\
-    &\text{По таблице определяем, при какой температуре пар с такой плотностью станет насыщенным: }  \\
+    &\text{По таблице определяем, при какой температуре пар с такой плотностью станет насыщенным:}  \\
     t_\text{росы} &= 19{,}4\celsius, \\
-    \varphi_2 &= \frac{ \rho_\text{ пара } }{ \rho_{ \text{ нас.
-    пара 70 } \celsius } } = \frac{\rho_{ \text{ нас.
-    пара 30 } \celsius } \cdot \varphi_1}{ \rho_{ \text{ нас.
-    пара 70 } \celsius } }= \varphi_1 \cdot \frac{ \rho_{ \text{ нас.
-    пара 30 } \celsius } }{ \rho_{ \text{ нас.
-    пара 70 } \celsius } } = 0{,}55 \cdot \frac{ 30{,}300\,\frac{\text{г}}{\text{м}^{3}} }{ 198{,}000\,\frac{\text{г}}{\text{м}^{3}} } = 0{,}084 \approx 8{,}4\%.
+    \varphi_2 &= \frac{\rho_\text{пара}}{\rho_{\text{нас.
+    пара 70} \celsius}} = \frac{\rho_{\text{нас.
+    пара 30} \celsius} \cdot \varphi_1}{\rho_{\text{нас.
+    пара 70} \celsius}}= \varphi_1 \cdot \frac{\rho_{\text{нас.
+    пара 30} \celsius}}{\rho_{\text{нас.
+    пара 70} \celsius}} = 0{,}55 \cdot \frac{30{,}300\,\frac{\text{г}}{\text{м}^{3}}}{198{,}000\,\frac{\text{г}}{\text{м}^{3}}} = 0{,}084 \approx 8{,}4\%.
     \end{align*}
 }
 \solutionspace{80pt}
@@ -3162,7 +3162,7 @@
             \draw[-{Latex}] (0, 0) -- (0, 7) node[above left] {$P$};
             \draw[-{Latex}] (0, 0) -- (10, 0) node[right] {$V$};
 
-            \draw[dashed] (0, 2) node[left] {$P_1 = P_0$} -| (3, 0) node[below] {$V_1 = V_2 = V_0$ };
+            \draw[dashed] (0, 2) node[left] {$P_1 = P_0$} -| (3, 0) node[below] {$V_1 = V_2 = V_0$};
             \draw[dashed] (0, 6) node[left] {$P_2 = P_3 = 2P_0$} -| (9, 0) node[below] {$V_3 = 2V_0$};
 
             \draw (3, 2) node[above left]{1} node[below left]{$T_1 = T_0$}
@@ -3240,14 +3240,14 @@
             &= \frac 32 (P\Delta V + V \Delta P) + P \Delta V =  \frac 52 P\Delta V + \frac 32 V \Delta P = \\
             &= \frac 52 P\Delta V + \frac 32 V \cdot \cbr{- \frac{P_0}{V_0} \Delta V} = \frac{\Delta V}2 \cdot \cbr{5P - \frac{P_0}{V_0} V} = \\
             &= \frac{\Delta V}2 \cdot \cbr{5 \cdot \cbr{3P_0 - \frac{P_0}{V_0} V} - \frac{P_0}{V_0} V}
-             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 3 - 8\frac{V}{V_0}}.
+             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 3 - 8\fracV{V_0}}.
         \end{align*}
 
         Таком образом, знак количества теплоты $Q$ на участке 23 зависит от конкретного значения $V$:
         \begin{itemize}
             \item $\Delta V > 0$ на всём участке 23, поскольку газ расширяется,
             \item $P > 0$ — всегда, у нас идеальный газ, удары о стенки сосуда абсолютно упругие, а молекулы не взаимодействуют и поэтому давление только положительно,
-            \item если $5 \cdot 3 - 8\frac{V}{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
+            \item если $5 \cdot 3 - 8\fracV{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
         \end{itemize}
         Решая последнее неравенство, получаем конкретное значение $V^*$: при $V < V^*$ тепло подводят, далее~— отводят.
         Тут *~--- некоторая точка между точками 2 и 3, конкретные значения надо досчитать:
@@ -3271,7 +3271,7 @@
         \eta &= \frac{A_\text{цикл}}{Q_+} = \frac{A_\text{цикл}}{Q_{12} + Q_{2*}}
             = \frac{A_\text{цикл}}{A_{12} + \Delta U_{12} + A_{2*} + \Delta U_{2*}} = \\
             &= \frac{\frac12 \cdot P_0V_0}{0 + \frac32 \cdot P_0 V_0 + \frac{175}{128} \cdot P_0 V_0 + \frac{21}{128} \cdot P_0 V_0}
-             = \frac{\frac12}{\frac32 + \frac{175}{128} + \frac{21}{128}}
+             = \frac{A_bonus_cycle:LaTeX}{\frac32 + \frac{175}{128} + \frac{21}{128}}
              = \frac{16}{97} \leftarrow \text{вжух и готово!}
         \end{align*}
 }
@@ -3288,22 +3288,22 @@
 \answer{%
     \begin{align*}
     &\text{Значения плотности насыщенного водяного пара определяем по таблице:} \\
-    &\rho_{ \text{ нас.
-    пара 20 } \celsius } = 17{,}300\,\frac{\text{г}}{\text{м}^{3}}, \rho_{ \text{ нас.
-    пара 70 } \celsius } = 198{,}000\,\frac{\text{г}}{\text{м}^{3}}.
+    &\rho_{\text{нас.
+    пара 20} \celsius} = 17{,}300\,\frac{\text{г}}{\text{м}^{3}}, \rho_{\text{нас.
+    пара 70} \celsius} = 198{,}000\,\frac{\text{г}}{\text{м}^{3}}.
     \\
-    \varphi_1 &= \frac{ \rho_\text{ пара } }{ \rho_{ \text{ нас.
-    пара 20 } \celsius } } \implies { \rho_\text{ пара } } = \rho_{ \text{ нас.
-    пара 20 } \celsius } \cdot \varphi_1 = 17{,}300\,\frac{\text{г}}{\text{м}^{3}} \cdot 0{,}55 = 9{,}515\,\frac{\text{г}}{\text{м}^{3}}.
+    \varphi_1 &= \frac{\rho_\text{пара}}{\rho_{\text{нас.
+    пара 20} \celsius}} \implies {\rho_\text{пара}} = \rho_{\text{нас.
+    пара 20} \celsius} \cdot \varphi_1 = 17{,}300\,\frac{\text{г}}{\text{м}^{3}} \cdot 0{,}55 = 9{,}515\,\frac{\text{г}}{\text{м}^{3}}.
     \\
-    &\text{По таблице определяем, при какой температуре пар с такой плотностью станет насыщенным: }  \\
+    &\text{По таблице определяем, при какой температуре пар с такой плотностью станет насыщенным:}  \\
     t_\text{росы} &= 10{,}2\celsius, \\
-    \varphi_2 &= \frac{ \rho_\text{ пара } }{ \rho_{ \text{ нас.
-    пара 70 } \celsius } } = \frac{\rho_{ \text{ нас.
-    пара 20 } \celsius } \cdot \varphi_1}{ \rho_{ \text{ нас.
-    пара 70 } \celsius } }= \varphi_1 \cdot \frac{ \rho_{ \text{ нас.
-    пара 20 } \celsius } }{ \rho_{ \text{ нас.
-    пара 70 } \celsius } } = 0{,}55 \cdot \frac{ 17{,}300\,\frac{\text{г}}{\text{м}^{3}} }{ 198{,}000\,\frac{\text{г}}{\text{м}^{3}} } = 0{,}048 \approx 4{,}8\%.
+    \varphi_2 &= \frac{\rho_\text{пара}}{\rho_{\text{нас.
+    пара 70} \celsius}} = \frac{\rho_{\text{нас.
+    пара 20} \celsius} \cdot \varphi_1}{\rho_{\text{нас.
+    пара 70} \celsius}}= \varphi_1 \cdot \frac{\rho_{\text{нас.
+    пара 20} \celsius}}{\rho_{\text{нас.
+    пара 70} \celsius}} = 0{,}55 \cdot \frac{17{,}300\,\frac{\text{г}}{\text{м}^{3}}}{198{,}000\,\frac{\text{г}}{\text{м}^{3}}} = 0{,}048 \approx 4{,}8\%.
     \end{align*}
 }
 \solutionspace{80pt}
@@ -3370,7 +3370,7 @@
             \draw[-{Latex}] (0, 0) -- (0, 7) node[above left] {$P$};
             \draw[-{Latex}] (0, 0) -- (10, 0) node[right] {$V$};
 
-            \draw[dashed] (0, 2) node[left] {$P_1 = P_0$} -| (3, 0) node[below] {$V_1 = V_2 = V_0$ };
+            \draw[dashed] (0, 2) node[left] {$P_1 = P_0$} -| (3, 0) node[below] {$V_1 = V_2 = V_0$};
             \draw[dashed] (0, 6) node[left] {$P_2 = P_3 = 3P_0$} -| (9, 0) node[below] {$V_3 = 2V_0$};
 
             \draw (3, 2) node[above left]{1} node[below left]{$T_1 = T_0$}
@@ -3448,14 +3448,14 @@
             &= \frac 32 (P\Delta V + V \Delta P) + P \Delta V =  \frac 52 P\Delta V + \frac 32 V \Delta P = \\
             &= \frac 52 P\Delta V + \frac 32 V \cdot \cbr{- \frac{P_0}{V_0} \Delta V} = \frac{\Delta V}2 \cdot \cbr{5P - \frac{P_0}{V_0} V} = \\
             &= \frac{\Delta V}2 \cdot \cbr{5 \cdot \cbr{4P_0 - \frac{P_0}{V_0} V} - \frac{P_0}{V_0} V}
-             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 4 - 8\frac{V}{V_0}}.
+             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 4 - 8\fracV{V_0}}.
         \end{align*}
 
         Таком образом, знак количества теплоты $Q$ на участке 23 зависит от конкретного значения $V$:
         \begin{itemize}
             \item $\Delta V > 0$ на всём участке 23, поскольку газ расширяется,
             \item $P > 0$ — всегда, у нас идеальный газ, удары о стенки сосуда абсолютно упругие, а молекулы не взаимодействуют и поэтому давление только положительно,
-            \item если $5 \cdot 4 - 8\frac{V}{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
+            \item если $5 \cdot 4 - 8\fracV{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
         \end{itemize}
         Решая последнее неравенство, получаем конкретное значение $V^*$: при $V < V^*$ тепло подводят, далее~— отводят.
         Тут *~--- некоторая точка между точками 2 и 3, конкретные значения надо досчитать:
@@ -3479,7 +3479,7 @@
         \eta &= \frac{A_\text{цикл}}{Q_+} = \frac{A_\text{цикл}}{Q_{12} + Q_{2*}}
             = \frac{A_\text{цикл}}{A_{12} + \Delta U_{12} + A_{2*} + \Delta U_{2*}} = \\
             &= \frac{2 \cdot P_0V_0}{0 + 3 \cdot P_0 V_0 + \frac{27}8 \cdot P_0 V_0 + \frac98 \cdot P_0 V_0}
-             = \frac{2}{3 + \frac{27}8 + \frac98}
+             = \frac{A_bonus_cycle:LaTeX}{3 + \frac{27}8 + \frac98}
              = \frac4{15} \leftarrow \text{вжух и готово!}
         \end{align*}
 }
@@ -3496,22 +3496,22 @@
 \answer{%
     \begin{align*}
     &\text{Значения плотности насыщенного водяного пара определяем по таблице:} \\
-    &\rho_{ \text{ нас.
-    пара 15 } \celsius } = 12{,}800\,\frac{\text{г}}{\text{м}^{3}}, \rho_{ \text{ нас.
-    пара 50 } \celsius } = 83{,}000\,\frac{\text{г}}{\text{м}^{3}}.
+    &\rho_{\text{нас.
+    пара 15} \celsius} = 12{,}800\,\frac{\text{г}}{\text{м}^{3}}, \rho_{\text{нас.
+    пара 50} \celsius} = 83{,}000\,\frac{\text{г}}{\text{м}^{3}}.
     \\
-    \varphi_1 &= \frac{ \rho_\text{ пара } }{ \rho_{ \text{ нас.
-    пара 15 } \celsius } } \implies { \rho_\text{ пара } } = \rho_{ \text{ нас.
-    пара 15 } \celsius } \cdot \varphi_1 = 12{,}800\,\frac{\text{г}}{\text{м}^{3}} \cdot 0{,}60 = 7{,}680\,\frac{\text{г}}{\text{м}^{3}}.
+    \varphi_1 &= \frac{\rho_\text{пара}}{\rho_{\text{нас.
+    пара 15} \celsius}} \implies {\rho_\text{пара}} = \rho_{\text{нас.
+    пара 15} \celsius} \cdot \varphi_1 = 12{,}800\,\frac{\text{г}}{\text{м}^{3}} \cdot 0{,}60 = 7{,}680\,\frac{\text{г}}{\text{м}^{3}}.
     \\
-    &\text{По таблице определяем, при какой температуре пар с такой плотностью станет насыщенным: }  \\
+    &\text{По таблице определяем, при какой температуре пар с такой плотностью станет насыщенным:}  \\
     t_\text{росы} &= 6{,}8\celsius, \\
-    \varphi_2 &= \frac{ \rho_\text{ пара } }{ \rho_{ \text{ нас.
-    пара 50 } \celsius } } = \frac{\rho_{ \text{ нас.
-    пара 15 } \celsius } \cdot \varphi_1}{ \rho_{ \text{ нас.
-    пара 50 } \celsius } }= \varphi_1 \cdot \frac{ \rho_{ \text{ нас.
-    пара 15 } \celsius } }{ \rho_{ \text{ нас.
-    пара 50 } \celsius } } = 0{,}60 \cdot \frac{ 12{,}800\,\frac{\text{г}}{\text{м}^{3}} }{ 83{,}000\,\frac{\text{г}}{\text{м}^{3}} } = 0{,}093 \approx 9{,}3\%.
+    \varphi_2 &= \frac{\rho_\text{пара}}{\rho_{\text{нас.
+    пара 50} \celsius}} = \frac{\rho_{\text{нас.
+    пара 15} \celsius} \cdot \varphi_1}{\rho_{\text{нас.
+    пара 50} \celsius}}= \varphi_1 \cdot \frac{\rho_{\text{нас.
+    пара 15} \celsius}}{\rho_{\text{нас.
+    пара 50} \celsius}} = 0{,}60 \cdot \frac{12{,}800\,\frac{\text{г}}{\text{м}^{3}}}{83{,}000\,\frac{\text{г}}{\text{м}^{3}}} = 0{,}093 \approx 9{,}3\%.
     \end{align*}
 }
 \solutionspace{80pt}
@@ -3578,7 +3578,7 @@
             \draw[-{Latex}] (0, 0) -- (0, 7) node[above left] {$P$};
             \draw[-{Latex}] (0, 0) -- (10, 0) node[right] {$V$};
 
-            \draw[dashed] (0, 2) node[left] {$P_1 = P_0$} -| (3, 0) node[below] {$V_1 = V_2 = V_0$ };
+            \draw[dashed] (0, 2) node[left] {$P_1 = P_0$} -| (3, 0) node[below] {$V_1 = V_2 = V_0$};
             \draw[dashed] (0, 6) node[left] {$P_2 = P_3 = 2P_0$} -| (9, 0) node[below] {$V_3 = 2V_0$};
 
             \draw (3, 2) node[above left]{1} node[below left]{$T_1 = T_0$}
@@ -3656,14 +3656,14 @@
             &= \frac 32 (P\Delta V + V \Delta P) + P \Delta V =  \frac 52 P\Delta V + \frac 32 V \Delta P = \\
             &= \frac 52 P\Delta V + \frac 32 V \cdot \cbr{- \frac{P_0}{V_0} \Delta V} = \frac{\Delta V}2 \cdot \cbr{5P - \frac{P_0}{V_0} V} = \\
             &= \frac{\Delta V}2 \cdot \cbr{5 \cdot \cbr{3P_0 - \frac{P_0}{V_0} V} - \frac{P_0}{V_0} V}
-             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 3 - 8\frac{V}{V_0}}.
+             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 3 - 8\fracV{V_0}}.
         \end{align*}
 
         Таком образом, знак количества теплоты $Q$ на участке 23 зависит от конкретного значения $V$:
         \begin{itemize}
             \item $\Delta V > 0$ на всём участке 23, поскольку газ расширяется,
             \item $P > 0$ — всегда, у нас идеальный газ, удары о стенки сосуда абсолютно упругие, а молекулы не взаимодействуют и поэтому давление только положительно,
-            \item если $5 \cdot 3 - 8\frac{V}{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
+            \item если $5 \cdot 3 - 8\fracV{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
         \end{itemize}
         Решая последнее неравенство, получаем конкретное значение $V^*$: при $V < V^*$ тепло подводят, далее~— отводят.
         Тут *~--- некоторая точка между точками 2 и 3, конкретные значения надо досчитать:
@@ -3687,7 +3687,7 @@
         \eta &= \frac{A_\text{цикл}}{Q_+} = \frac{A_\text{цикл}}{Q_{12} + Q_{2*}}
             = \frac{A_\text{цикл}}{A_{12} + \Delta U_{12} + A_{2*} + \Delta U_{2*}} = \\
             &= \frac{\frac12 \cdot P_0V_0}{0 + \frac32 \cdot P_0 V_0 + \frac{175}{128} \cdot P_0 V_0 + \frac{21}{128} \cdot P_0 V_0}
-             = \frac{\frac12}{\frac32 + \frac{175}{128} + \frac{21}{128}}
+             = \frac{A_bonus_cycle:LaTeX}{\frac32 + \frac{175}{128} + \frac{21}{128}}
              = \frac{16}{97} \leftarrow \text{вжух и готово!}
         \end{align*}
 }
@@ -3704,22 +3704,22 @@
 \answer{%
     \begin{align*}
     &\text{Значения плотности насыщенного водяного пара определяем по таблице:} \\
-    &\rho_{ \text{ нас.
-    пара 25 } \celsius } = 23{,}000\,\frac{\text{г}}{\text{м}^{3}}, \rho_{ \text{ нас.
-    пара 40 } \celsius } = 51{,}200\,\frac{\text{г}}{\text{м}^{3}}.
+    &\rho_{\text{нас.
+    пара 25} \celsius} = 23{,}000\,\frac{\text{г}}{\text{м}^{3}}, \rho_{\text{нас.
+    пара 40} \celsius} = 51{,}200\,\frac{\text{г}}{\text{м}^{3}}.
     \\
-    \varphi_1 &= \frac{ \rho_\text{ пара } }{ \rho_{ \text{ нас.
-    пара 25 } \celsius } } \implies { \rho_\text{ пара } } = \rho_{ \text{ нас.
-    пара 25 } \celsius } \cdot \varphi_1 = 23{,}000\,\frac{\text{г}}{\text{м}^{3}} \cdot 0{,}65 = 14{,}950\,\frac{\text{г}}{\text{м}^{3}}.
+    \varphi_1 &= \frac{\rho_\text{пара}}{\rho_{\text{нас.
+    пара 25} \celsius}} \implies {\rho_\text{пара}} = \rho_{\text{нас.
+    пара 25} \celsius} \cdot \varphi_1 = 23{,}000\,\frac{\text{г}}{\text{м}^{3}} \cdot 0{,}65 = 14{,}950\,\frac{\text{г}}{\text{м}^{3}}.
     \\
-    &\text{По таблице определяем, при какой температуре пар с такой плотностью станет насыщенным: }  \\
+    &\text{По таблице определяем, при какой температуре пар с такой плотностью станет насыщенным:}  \\
     t_\text{росы} &= 17{,}5\celsius, \\
-    \varphi_2 &= \frac{ \rho_\text{ пара } }{ \rho_{ \text{ нас.
-    пара 40 } \celsius } } = \frac{\rho_{ \text{ нас.
-    пара 25 } \celsius } \cdot \varphi_1}{ \rho_{ \text{ нас.
-    пара 40 } \celsius } }= \varphi_1 \cdot \frac{ \rho_{ \text{ нас.
-    пара 25 } \celsius } }{ \rho_{ \text{ нас.
-    пара 40 } \celsius } } = 0{,}65 \cdot \frac{ 23{,}000\,\frac{\text{г}}{\text{м}^{3}} }{ 51{,}200\,\frac{\text{г}}{\text{м}^{3}} } = 0{,}292 \approx 29{,}2\%.
+    \varphi_2 &= \frac{\rho_\text{пара}}{\rho_{\text{нас.
+    пара 40} \celsius}} = \frac{\rho_{\text{нас.
+    пара 25} \celsius} \cdot \varphi_1}{\rho_{\text{нас.
+    пара 40} \celsius}}= \varphi_1 \cdot \frac{\rho_{\text{нас.
+    пара 25} \celsius}}{\rho_{\text{нас.
+    пара 40} \celsius}} = 0{,}65 \cdot \frac{23{,}000\,\frac{\text{г}}{\text{м}^{3}}}{51{,}200\,\frac{\text{г}}{\text{м}^{3}}} = 0{,}292 \approx 29{,}2\%.
     \end{align*}
 }
 \solutionspace{80pt}
@@ -3786,7 +3786,7 @@
             \draw[-{Latex}] (0, 0) -- (0, 7) node[above left] {$P$};
             \draw[-{Latex}] (0, 0) -- (10, 0) node[right] {$V$};
 
-            \draw[dashed] (0, 2) node[left] {$P_1 = P_0$} -| (3, 0) node[below] {$V_1 = V_2 = V_0$ };
+            \draw[dashed] (0, 2) node[left] {$P_1 = P_0$} -| (3, 0) node[below] {$V_1 = V_2 = V_0$};
             \draw[dashed] (0, 6) node[left] {$P_2 = P_3 = 4P_0$} -| (9, 0) node[below] {$V_3 = 5V_0$};
 
             \draw (3, 2) node[above left]{1} node[below left]{$T_1 = T_0$}
@@ -3864,14 +3864,14 @@
             &= \frac 32 (P\Delta V + V \Delta P) + P \Delta V =  \frac 52 P\Delta V + \frac 32 V \Delta P = \\
             &= \frac 52 P\Delta V + \frac 32 V \cdot \cbr{- \frac{P_0}{V_0} \Delta V} = \frac{\Delta V}2 \cdot \cbr{5P - \frac{P_0}{V_0} V} = \\
             &= \frac{\Delta V}2 \cdot \cbr{5 \cdot \cbr{5P_0 - \frac{P_0}{V_0} V} - \frac{P_0}{V_0} V}
-             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 5 - 8\frac{V}{V_0}}.
+             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 5 - 8\fracV{V_0}}.
         \end{align*}
 
         Таком образом, знак количества теплоты $Q$ на участке 23 зависит от конкретного значения $V$:
         \begin{itemize}
             \item $\Delta V > 0$ на всём участке 23, поскольку газ расширяется,
             \item $P > 0$ — всегда, у нас идеальный газ, удары о стенки сосуда абсолютно упругие, а молекулы не взаимодействуют и поэтому давление только положительно,
-            \item если $5 \cdot 5 - 8\frac{V}{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
+            \item если $5 \cdot 5 - 8\fracV{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
         \end{itemize}
         Решая последнее неравенство, получаем конкретное значение $V^*$: при $V < V^*$ тепло подводят, далее~— отводят.
         Тут *~--- некоторая точка между точками 2 и 3, конкретные значения надо досчитать:
@@ -3895,7 +3895,7 @@
         \eta &= \frac{A_\text{цикл}}{Q_+} = \frac{A_\text{цикл}}{Q_{12} + Q_{2*}}
             = \frac{A_\text{цикл}}{A_{12} + \Delta U_{12} + A_{2*} + \Delta U_{2*}} = \\
             &= \frac{\frac92 \cdot P_0V_0}{0 + \frac92 \cdot P_0 V_0 + \frac{799}{128} \cdot P_0 V_0 + \frac{357}{128} \cdot P_0 V_0}
-             = \frac{\frac92}{\frac92 + \frac{799}{128} + \frac{357}{128}}
+             = \frac{A_bonus_cycle:LaTeX}{\frac92 + \frac{799}{128} + \frac{357}{128}}
              = \frac{144}{433} \leftarrow \text{вжух и готово!}
         \end{align*}
 }
@@ -3912,22 +3912,22 @@
 \answer{%
     \begin{align*}
     &\text{Значения плотности насыщенного водяного пара определяем по таблице:} \\
-    &\rho_{ \text{ нас.
-    пара 30 } \celsius } = 30{,}300\,\frac{\text{г}}{\text{м}^{3}}, \rho_{ \text{ нас.
-    пара 70 } \celsius } = 198{,}000\,\frac{\text{г}}{\text{м}^{3}}.
+    &\rho_{\text{нас.
+    пара 30} \celsius} = 30{,}300\,\frac{\text{г}}{\text{м}^{3}}, \rho_{\text{нас.
+    пара 70} \celsius} = 198{,}000\,\frac{\text{г}}{\text{м}^{3}}.
     \\
-    \varphi_1 &= \frac{ \rho_\text{ пара } }{ \rho_{ \text{ нас.
-    пара 30 } \celsius } } \implies { \rho_\text{ пара } } = \rho_{ \text{ нас.
-    пара 30 } \celsius } \cdot \varphi_1 = 30{,}300\,\frac{\text{г}}{\text{м}^{3}} \cdot 0{,}60 = 18{,}180\,\frac{\text{г}}{\text{м}^{3}}.
+    \varphi_1 &= \frac{\rho_\text{пара}}{\rho_{\text{нас.
+    пара 30} \celsius}} \implies {\rho_\text{пара}} = \rho_{\text{нас.
+    пара 30} \celsius} \cdot \varphi_1 = 30{,}300\,\frac{\text{г}}{\text{м}^{3}} \cdot 0{,}60 = 18{,}180\,\frac{\text{г}}{\text{м}^{3}}.
     \\
-    &\text{По таблице определяем, при какой температуре пар с такой плотностью станет насыщенным: }  \\
+    &\text{По таблице определяем, при какой температуре пар с такой плотностью станет насыщенным:}  \\
     t_\text{росы} &= 20{,}9\celsius, \\
-    \varphi_2 &= \frac{ \rho_\text{ пара } }{ \rho_{ \text{ нас.
-    пара 70 } \celsius } } = \frac{\rho_{ \text{ нас.
-    пара 30 } \celsius } \cdot \varphi_1}{ \rho_{ \text{ нас.
-    пара 70 } \celsius } }= \varphi_1 \cdot \frac{ \rho_{ \text{ нас.
-    пара 30 } \celsius } }{ \rho_{ \text{ нас.
-    пара 70 } \celsius } } = 0{,}60 \cdot \frac{ 30{,}300\,\frac{\text{г}}{\text{м}^{3}} }{ 198{,}000\,\frac{\text{г}}{\text{м}^{3}} } = 0{,}092 \approx 9{,}2\%.
+    \varphi_2 &= \frac{\rho_\text{пара}}{\rho_{\text{нас.
+    пара 70} \celsius}} = \frac{\rho_{\text{нас.
+    пара 30} \celsius} \cdot \varphi_1}{\rho_{\text{нас.
+    пара 70} \celsius}}= \varphi_1 \cdot \frac{\rho_{\text{нас.
+    пара 30} \celsius}}{\rho_{\text{нас.
+    пара 70} \celsius}} = 0{,}60 \cdot \frac{30{,}300\,\frac{\text{г}}{\text{м}^{3}}}{198{,}000\,\frac{\text{г}}{\text{м}^{3}}} = 0{,}092 \approx 9{,}2\%.
     \end{align*}
 }
 \solutionspace{80pt}
@@ -3994,7 +3994,7 @@
             \draw[-{Latex}] (0, 0) -- (0, 7) node[above left] {$P$};
             \draw[-{Latex}] (0, 0) -- (10, 0) node[right] {$V$};
 
-            \draw[dashed] (0, 2) node[left] {$P_1 = P_0$} -| (3, 0) node[below] {$V_1 = V_2 = V_0$ };
+            \draw[dashed] (0, 2) node[left] {$P_1 = P_0$} -| (3, 0) node[below] {$V_1 = V_2 = V_0$};
             \draw[dashed] (0, 6) node[left] {$P_2 = P_3 = 6P_0$} -| (9, 0) node[below] {$V_3 = 2V_0$};
 
             \draw (3, 2) node[above left]{1} node[below left]{$T_1 = T_0$}
@@ -4072,14 +4072,14 @@
             &= \frac 32 (P\Delta V + V \Delta P) + P \Delta V =  \frac 52 P\Delta V + \frac 32 V \Delta P = \\
             &= \frac 52 P\Delta V + \frac 32 V \cdot \cbr{- \frac{P_0}{V_0} \Delta V} = \frac{\Delta V}2 \cdot \cbr{5P - \frac{P_0}{V_0} V} = \\
             &= \frac{\Delta V}2 \cdot \cbr{5 \cdot \cbr{7P_0 - \frac{P_0}{V_0} V} - \frac{P_0}{V_0} V}
-             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 7 - 8\frac{V}{V_0}}.
+             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 7 - 8\fracV{V_0}}.
         \end{align*}
 
         Таком образом, знак количества теплоты $Q$ на участке 23 зависит от конкретного значения $V$:
         \begin{itemize}
             \item $\Delta V > 0$ на всём участке 23, поскольку газ расширяется,
             \item $P > 0$ — всегда, у нас идеальный газ, удары о стенки сосуда абсолютно упругие, а молекулы не взаимодействуют и поэтому давление только положительно,
-            \item если $5 \cdot 7 - 8\frac{V}{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
+            \item если $5 \cdot 7 - 8\fracV{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
         \end{itemize}
         Решая последнее неравенство, получаем конкретное значение $V^*$: при $V < V^*$ тепло подводят, далее~— отводят.
         Тут *~--- некоторая точка между точками 2 и 3, конкретные значения надо досчитать:
@@ -4103,7 +4103,7 @@
         \eta &= \frac{A_\text{цикл}}{Q_+} = \frac{A_\text{цикл}}{Q_{12} + Q_{2*}}
             = \frac{A_\text{цикл}}{A_{12} + \Delta U_{12} + A_{2*} + \Delta U_{2*}} = \\
             &= \frac{\frac{25}2 \cdot P_0V_0}{0 + \frac{15}2 \cdot P_0 V_0 + \frac{1863}{128} \cdot P_0 V_0 + \frac{1053}{128} \cdot P_0 V_0}
-             = \frac{\frac{25}2}{\frac{15}2 + \frac{1863}{128} + \frac{1053}{128}}
+             = \frac{A_bonus_cycle:LaTeX}{\frac{15}2 + \frac{1863}{128} + \frac{1053}{128}}
              = \frac{400}{969} \leftarrow \text{вжух и готово!}
         \end{align*}
 }
@@ -4120,22 +4120,22 @@
 \answer{%
     \begin{align*}
     &\text{Значения плотности насыщенного водяного пара определяем по таблице:} \\
-    &\rho_{ \text{ нас.
-    пара 15 } \celsius } = 12{,}800\,\frac{\text{г}}{\text{м}^{3}}, \rho_{ \text{ нас.
-    пара 70 } \celsius } = 198{,}000\,\frac{\text{г}}{\text{м}^{3}}.
+    &\rho_{\text{нас.
+    пара 15} \celsius} = 12{,}800\,\frac{\text{г}}{\text{м}^{3}}, \rho_{\text{нас.
+    пара 70} \celsius} = 198{,}000\,\frac{\text{г}}{\text{м}^{3}}.
     \\
-    \varphi_1 &= \frac{ \rho_\text{ пара } }{ \rho_{ \text{ нас.
-    пара 15 } \celsius } } \implies { \rho_\text{ пара } } = \rho_{ \text{ нас.
-    пара 15 } \celsius } \cdot \varphi_1 = 12{,}800\,\frac{\text{г}}{\text{м}^{3}} \cdot 0{,}70 = 8{,}960\,\frac{\text{г}}{\text{м}^{3}}.
+    \varphi_1 &= \frac{\rho_\text{пара}}{\rho_{\text{нас.
+    пара 15} \celsius}} \implies {\rho_\text{пара}} = \rho_{\text{нас.
+    пара 15} \celsius} \cdot \varphi_1 = 12{,}800\,\frac{\text{г}}{\text{м}^{3}} \cdot 0{,}70 = 8{,}960\,\frac{\text{г}}{\text{м}^{3}}.
     \\
-    &\text{По таблице определяем, при какой температуре пар с такой плотностью станет насыщенным: }  \\
+    &\text{По таблице определяем, при какой температуре пар с такой плотностью станет насыщенным:}  \\
     t_\text{росы} &= 9{,}3\celsius, \\
-    \varphi_2 &= \frac{ \rho_\text{ пара } }{ \rho_{ \text{ нас.
-    пара 70 } \celsius } } = \frac{\rho_{ \text{ нас.
-    пара 15 } \celsius } \cdot \varphi_1}{ \rho_{ \text{ нас.
-    пара 70 } \celsius } }= \varphi_1 \cdot \frac{ \rho_{ \text{ нас.
-    пара 15 } \celsius } }{ \rho_{ \text{ нас.
-    пара 70 } \celsius } } = 0{,}70 \cdot \frac{ 12{,}800\,\frac{\text{г}}{\text{м}^{3}} }{ 198{,}000\,\frac{\text{г}}{\text{м}^{3}} } = 0{,}045 \approx 4{,}5\%.
+    \varphi_2 &= \frac{\rho_\text{пара}}{\rho_{\text{нас.
+    пара 70} \celsius}} = \frac{\rho_{\text{нас.
+    пара 15} \celsius} \cdot \varphi_1}{\rho_{\text{нас.
+    пара 70} \celsius}}= \varphi_1 \cdot \frac{\rho_{\text{нас.
+    пара 15} \celsius}}{\rho_{\text{нас.
+    пара 70} \celsius}} = 0{,}70 \cdot \frac{12{,}800\,\frac{\text{г}}{\text{м}^{3}}}{198{,}000\,\frac{\text{г}}{\text{м}^{3}}} = 0{,}045 \approx 4{,}5\%.
     \end{align*}
 }
 \solutionspace{80pt}
@@ -4202,7 +4202,7 @@
             \draw[-{Latex}] (0, 0) -- (0, 7) node[above left] {$P$};
             \draw[-{Latex}] (0, 0) -- (10, 0) node[right] {$V$};
 
-            \draw[dashed] (0, 2) node[left] {$P_1 = P_0$} -| (3, 0) node[below] {$V_1 = V_2 = V_0$ };
+            \draw[dashed] (0, 2) node[left] {$P_1 = P_0$} -| (3, 0) node[below] {$V_1 = V_2 = V_0$};
             \draw[dashed] (0, 6) node[left] {$P_2 = P_3 = 2P_0$} -| (9, 0) node[below] {$V_3 = 2V_0$};
 
             \draw (3, 2) node[above left]{1} node[below left]{$T_1 = T_0$}
@@ -4280,14 +4280,14 @@
             &= \frac 32 (P\Delta V + V \Delta P) + P \Delta V =  \frac 52 P\Delta V + \frac 32 V \Delta P = \\
             &= \frac 52 P\Delta V + \frac 32 V \cdot \cbr{- \frac{P_0}{V_0} \Delta V} = \frac{\Delta V}2 \cdot \cbr{5P - \frac{P_0}{V_0} V} = \\
             &= \frac{\Delta V}2 \cdot \cbr{5 \cdot \cbr{3P_0 - \frac{P_0}{V_0} V} - \frac{P_0}{V_0} V}
-             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 3 - 8\frac{V}{V_0}}.
+             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 3 - 8\fracV{V_0}}.
         \end{align*}
 
         Таком образом, знак количества теплоты $Q$ на участке 23 зависит от конкретного значения $V$:
         \begin{itemize}
             \item $\Delta V > 0$ на всём участке 23, поскольку газ расширяется,
             \item $P > 0$ — всегда, у нас идеальный газ, удары о стенки сосуда абсолютно упругие, а молекулы не взаимодействуют и поэтому давление только положительно,
-            \item если $5 \cdot 3 - 8\frac{V}{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
+            \item если $5 \cdot 3 - 8\fracV{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
         \end{itemize}
         Решая последнее неравенство, получаем конкретное значение $V^*$: при $V < V^*$ тепло подводят, далее~— отводят.
         Тут *~--- некоторая точка между точками 2 и 3, конкретные значения надо досчитать:
@@ -4311,7 +4311,7 @@
         \eta &= \frac{A_\text{цикл}}{Q_+} = \frac{A_\text{цикл}}{Q_{12} + Q_{2*}}
             = \frac{A_\text{цикл}}{A_{12} + \Delta U_{12} + A_{2*} + \Delta U_{2*}} = \\
             &= \frac{\frac12 \cdot P_0V_0}{0 + \frac32 \cdot P_0 V_0 + \frac{175}{128} \cdot P_0 V_0 + \frac{21}{128} \cdot P_0 V_0}
-             = \frac{\frac12}{\frac32 + \frac{175}{128} + \frac{21}{128}}
+             = \frac{A_bonus_cycle:LaTeX}{\frac32 + \frac{175}{128} + \frac{21}{128}}
              = \frac{16}{97} \leftarrow \text{вжух и готово!}
         \end{align*}
 }
@@ -4328,22 +4328,22 @@
 \answer{%
     \begin{align*}
     &\text{Значения плотности насыщенного водяного пара определяем по таблице:} \\
-    &\rho_{ \text{ нас.
-    пара 25 } \celsius } = 23{,}000\,\frac{\text{г}}{\text{м}^{3}}, \rho_{ \text{ нас.
-    пара 60 } \celsius } = 130{,}000\,\frac{\text{г}}{\text{м}^{3}}.
+    &\rho_{\text{нас.
+    пара 25} \celsius} = 23{,}000\,\frac{\text{г}}{\text{м}^{3}}, \rho_{\text{нас.
+    пара 60} \celsius} = 130{,}000\,\frac{\text{г}}{\text{м}^{3}}.
     \\
-    \varphi_1 &= \frac{ \rho_\text{ пара } }{ \rho_{ \text{ нас.
-    пара 25 } \celsius } } \implies { \rho_\text{ пара } } = \rho_{ \text{ нас.
-    пара 25 } \celsius } \cdot \varphi_1 = 23{,}000\,\frac{\text{г}}{\text{м}^{3}} \cdot 0{,}75 = 17{,}250\,\frac{\text{г}}{\text{м}^{3}}.
+    \varphi_1 &= \frac{\rho_\text{пара}}{\rho_{\text{нас.
+    пара 25} \celsius}} \implies {\rho_\text{пара}} = \rho_{\text{нас.
+    пара 25} \celsius} \cdot \varphi_1 = 23{,}000\,\frac{\text{г}}{\text{м}^{3}} \cdot 0{,}75 = 17{,}250\,\frac{\text{г}}{\text{м}^{3}}.
     \\
-    &\text{По таблице определяем, при какой температуре пар с такой плотностью станет насыщенным: }  \\
+    &\text{По таблице определяем, при какой температуре пар с такой плотностью станет насыщенным:}  \\
     t_\text{росы} &= 19{,}9\celsius, \\
-    \varphi_2 &= \frac{ \rho_\text{ пара } }{ \rho_{ \text{ нас.
-    пара 60 } \celsius } } = \frac{\rho_{ \text{ нас.
-    пара 25 } \celsius } \cdot \varphi_1}{ \rho_{ \text{ нас.
-    пара 60 } \celsius } }= \varphi_1 \cdot \frac{ \rho_{ \text{ нас.
-    пара 25 } \celsius } }{ \rho_{ \text{ нас.
-    пара 60 } \celsius } } = 0{,}75 \cdot \frac{ 23{,}000\,\frac{\text{г}}{\text{м}^{3}} }{ 130{,}000\,\frac{\text{г}}{\text{м}^{3}} } = 0{,}133 \approx 13{,}3\%.
+    \varphi_2 &= \frac{\rho_\text{пара}}{\rho_{\text{нас.
+    пара 60} \celsius}} = \frac{\rho_{\text{нас.
+    пара 25} \celsius} \cdot \varphi_1}{\rho_{\text{нас.
+    пара 60} \celsius}}= \varphi_1 \cdot \frac{\rho_{\text{нас.
+    пара 25} \celsius}}{\rho_{\text{нас.
+    пара 60} \celsius}} = 0{,}75 \cdot \frac{23{,}000\,\frac{\text{г}}{\text{м}^{3}}}{130{,}000\,\frac{\text{г}}{\text{м}^{3}}} = 0{,}133 \approx 13{,}3\%.
     \end{align*}
 }
 \solutionspace{80pt}
@@ -4410,7 +4410,7 @@
             \draw[-{Latex}] (0, 0) -- (0, 7) node[above left] {$P$};
             \draw[-{Latex}] (0, 0) -- (10, 0) node[right] {$V$};
 
-            \draw[dashed] (0, 2) node[left] {$P_1 = P_0$} -| (3, 0) node[below] {$V_1 = V_2 = V_0$ };
+            \draw[dashed] (0, 2) node[left] {$P_1 = P_0$} -| (3, 0) node[below] {$V_1 = V_2 = V_0$};
             \draw[dashed] (0, 6) node[left] {$P_2 = P_3 = 2P_0$} -| (9, 0) node[below] {$V_3 = 3V_0$};
 
             \draw (3, 2) node[above left]{1} node[below left]{$T_1 = T_0$}
@@ -4488,14 +4488,14 @@
             &= \frac 32 (P\Delta V + V \Delta P) + P \Delta V =  \frac 52 P\Delta V + \frac 32 V \Delta P = \\
             &= \frac 52 P\Delta V + \frac 32 V \cdot \cbr{- \frac{P_0}{V_0} \Delta V} = \frac{\Delta V}2 \cdot \cbr{5P - \frac{P_0}{V_0} V} = \\
             &= \frac{\Delta V}2 \cdot \cbr{5 \cdot \cbr{3P_0 - \frac{P_0}{V_0} V} - \frac{P_0}{V_0} V}
-             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 3 - 8\frac{V}{V_0}}.
+             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 3 - 8\fracV{V_0}}.
         \end{align*}
 
         Таком образом, знак количества теплоты $Q$ на участке 23 зависит от конкретного значения $V$:
         \begin{itemize}
             \item $\Delta V > 0$ на всём участке 23, поскольку газ расширяется,
             \item $P > 0$ — всегда, у нас идеальный газ, удары о стенки сосуда абсолютно упругие, а молекулы не взаимодействуют и поэтому давление только положительно,
-            \item если $5 \cdot 3 - 8\frac{V}{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
+            \item если $5 \cdot 3 - 8\fracV{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
         \end{itemize}
         Решая последнее неравенство, получаем конкретное значение $V^*$: при $V < V^*$ тепло подводят, далее~— отводят.
         Тут *~--- некоторая точка между точками 2 и 3, конкретные значения надо досчитать:
@@ -4519,7 +4519,7 @@
         \eta &= \frac{A_\text{цикл}}{Q_+} = \frac{A_\text{цикл}}{Q_{12} + Q_{2*}}
             = \frac{A_\text{цикл}}{A_{12} + \Delta U_{12} + A_{2*} + \Delta U_{2*}} = \\
             &= \frac{\frac12 \cdot P_0V_0}{0 + \frac32 \cdot P_0 V_0 + \frac{175}{128} \cdot P_0 V_0 + \frac{21}{128} \cdot P_0 V_0}
-             = \frac{\frac12}{\frac32 + \frac{175}{128} + \frac{21}{128}}
+             = \frac{A_bonus_cycle:LaTeX}{\frac32 + \frac{175}{128} + \frac{21}{128}}
              = \frac{16}{97} \leftarrow \text{вжух и готово!}
         \end{align*}
 }
@@ -4536,22 +4536,22 @@
 \answer{%
     \begin{align*}
     &\text{Значения плотности насыщенного водяного пара определяем по таблице:} \\
-    &\rho_{ \text{ нас.
-    пара 15 } \celsius } = 12{,}800\,\frac{\text{г}}{\text{м}^{3}}, \rho_{ \text{ нас.
-    пара 80 } \celsius } = 293{,}000\,\frac{\text{г}}{\text{м}^{3}}.
+    &\rho_{\text{нас.
+    пара 15} \celsius} = 12{,}800\,\frac{\text{г}}{\text{м}^{3}}, \rho_{\text{нас.
+    пара 80} \celsius} = 293{,}000\,\frac{\text{г}}{\text{м}^{3}}.
     \\
-    \varphi_1 &= \frac{ \rho_\text{ пара } }{ \rho_{ \text{ нас.
-    пара 15 } \celsius } } \implies { \rho_\text{ пара } } = \rho_{ \text{ нас.
-    пара 15 } \celsius } \cdot \varphi_1 = 12{,}800\,\frac{\text{г}}{\text{м}^{3}} \cdot 0{,}50 = 6{,}400\,\frac{\text{г}}{\text{м}^{3}}.
+    \varphi_1 &= \frac{\rho_\text{пара}}{\rho_{\text{нас.
+    пара 15} \celsius}} \implies {\rho_\text{пара}} = \rho_{\text{нас.
+    пара 15} \celsius} \cdot \varphi_1 = 12{,}800\,\frac{\text{г}}{\text{м}^{3}} \cdot 0{,}50 = 6{,}400\,\frac{\text{г}}{\text{м}^{3}}.
     \\
-    &\text{По таблице определяем, при какой температуре пар с такой плотностью станет насыщенным: }  \\
+    &\text{По таблице определяем, при какой температуре пар с такой плотностью станет насыщенным:}  \\
     t_\text{росы} &= 4{,}0\celsius, \\
-    \varphi_2 &= \frac{ \rho_\text{ пара } }{ \rho_{ \text{ нас.
-    пара 80 } \celsius } } = \frac{\rho_{ \text{ нас.
-    пара 15 } \celsius } \cdot \varphi_1}{ \rho_{ \text{ нас.
-    пара 80 } \celsius } }= \varphi_1 \cdot \frac{ \rho_{ \text{ нас.
-    пара 15 } \celsius } }{ \rho_{ \text{ нас.
-    пара 80 } \celsius } } = 0{,}50 \cdot \frac{ 12{,}800\,\frac{\text{г}}{\text{м}^{3}} }{ 293{,}000\,\frac{\text{г}}{\text{м}^{3}} } = 0{,}022 \approx 2{,}2\%.
+    \varphi_2 &= \frac{\rho_\text{пара}}{\rho_{\text{нас.
+    пара 80} \celsius}} = \frac{\rho_{\text{нас.
+    пара 15} \celsius} \cdot \varphi_1}{\rho_{\text{нас.
+    пара 80} \celsius}}= \varphi_1 \cdot \frac{\rho_{\text{нас.
+    пара 15} \celsius}}{\rho_{\text{нас.
+    пара 80} \celsius}} = 0{,}50 \cdot \frac{12{,}800\,\frac{\text{г}}{\text{м}^{3}}}{293{,}000\,\frac{\text{г}}{\text{м}^{3}}} = 0{,}022 \approx 2{,}2\%.
     \end{align*}
 }
 \solutionspace{80pt}
@@ -4618,7 +4618,7 @@
             \draw[-{Latex}] (0, 0) -- (0, 7) node[above left] {$P$};
             \draw[-{Latex}] (0, 0) -- (10, 0) node[right] {$V$};
 
-            \draw[dashed] (0, 2) node[left] {$P_1 = P_0$} -| (3, 0) node[below] {$V_1 = V_2 = V_0$ };
+            \draw[dashed] (0, 2) node[left] {$P_1 = P_0$} -| (3, 0) node[below] {$V_1 = V_2 = V_0$};
             \draw[dashed] (0, 6) node[left] {$P_2 = P_3 = 3P_0$} -| (9, 0) node[below] {$V_3 = 2V_0$};
 
             \draw (3, 2) node[above left]{1} node[below left]{$T_1 = T_0$}
@@ -4696,14 +4696,14 @@
             &= \frac 32 (P\Delta V + V \Delta P) + P \Delta V =  \frac 52 P\Delta V + \frac 32 V \Delta P = \\
             &= \frac 52 P\Delta V + \frac 32 V \cdot \cbr{- \frac{P_0}{V_0} \Delta V} = \frac{\Delta V}2 \cdot \cbr{5P - \frac{P_0}{V_0} V} = \\
             &= \frac{\Delta V}2 \cdot \cbr{5 \cdot \cbr{4P_0 - \frac{P_0}{V_0} V} - \frac{P_0}{V_0} V}
-             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 4 - 8\frac{V}{V_0}}.
+             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 4 - 8\fracV{V_0}}.
         \end{align*}
 
         Таком образом, знак количества теплоты $Q$ на участке 23 зависит от конкретного значения $V$:
         \begin{itemize}
             \item $\Delta V > 0$ на всём участке 23, поскольку газ расширяется,
             \item $P > 0$ — всегда, у нас идеальный газ, удары о стенки сосуда абсолютно упругие, а молекулы не взаимодействуют и поэтому давление только положительно,
-            \item если $5 \cdot 4 - 8\frac{V}{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
+            \item если $5 \cdot 4 - 8\fracV{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
         \end{itemize}
         Решая последнее неравенство, получаем конкретное значение $V^*$: при $V < V^*$ тепло подводят, далее~— отводят.
         Тут *~--- некоторая точка между точками 2 и 3, конкретные значения надо досчитать:
@@ -4727,7 +4727,7 @@
         \eta &= \frac{A_\text{цикл}}{Q_+} = \frac{A_\text{цикл}}{Q_{12} + Q_{2*}}
             = \frac{A_\text{цикл}}{A_{12} + \Delta U_{12} + A_{2*} + \Delta U_{2*}} = \\
             &= \frac{2 \cdot P_0V_0}{0 + 3 \cdot P_0 V_0 + \frac{27}8 \cdot P_0 V_0 + \frac98 \cdot P_0 V_0}
-             = \frac{2}{3 + \frac{27}8 + \frac98}
+             = \frac{A_bonus_cycle:LaTeX}{3 + \frac{27}8 + \frac98}
              = \frac4{15} \leftarrow \text{вжух и готово!}
         \end{align*}
 }
@@ -4744,22 +4744,22 @@
 \answer{%
     \begin{align*}
     &\text{Значения плотности насыщенного водяного пара определяем по таблице:} \\
-    &\rho_{ \text{ нас.
-    пара 30 } \celsius } = 30{,}300\,\frac{\text{г}}{\text{м}^{3}}, \rho_{ \text{ нас.
-    пара 70 } \celsius } = 198{,}000\,\frac{\text{г}}{\text{м}^{3}}.
+    &\rho_{\text{нас.
+    пара 30} \celsius} = 30{,}300\,\frac{\text{г}}{\text{м}^{3}}, \rho_{\text{нас.
+    пара 70} \celsius} = 198{,}000\,\frac{\text{г}}{\text{м}^{3}}.
     \\
-    \varphi_1 &= \frac{ \rho_\text{ пара } }{ \rho_{ \text{ нас.
-    пара 30 } \celsius } } \implies { \rho_\text{ пара } } = \rho_{ \text{ нас.
-    пара 30 } \celsius } \cdot \varphi_1 = 30{,}300\,\frac{\text{г}}{\text{м}^{3}} \cdot 0{,}75 = 22{,}725\,\frac{\text{г}}{\text{м}^{3}}.
+    \varphi_1 &= \frac{\rho_\text{пара}}{\rho_{\text{нас.
+    пара 30} \celsius}} \implies {\rho_\text{пара}} = \rho_{\text{нас.
+    пара 30} \celsius} \cdot \varphi_1 = 30{,}300\,\frac{\text{г}}{\text{м}^{3}} \cdot 0{,}75 = 22{,}725\,\frac{\text{г}}{\text{м}^{3}}.
     \\
-    &\text{По таблице определяем, при какой температуре пар с такой плотностью станет насыщенным: }  \\
+    &\text{По таблице определяем, при какой температуре пар с такой плотностью станет насыщенным:}  \\
     t_\text{росы} &= 24{,}8\celsius, \\
-    \varphi_2 &= \frac{ \rho_\text{ пара } }{ \rho_{ \text{ нас.
-    пара 70 } \celsius } } = \frac{\rho_{ \text{ нас.
-    пара 30 } \celsius } \cdot \varphi_1}{ \rho_{ \text{ нас.
-    пара 70 } \celsius } }= \varphi_1 \cdot \frac{ \rho_{ \text{ нас.
-    пара 30 } \celsius } }{ \rho_{ \text{ нас.
-    пара 70 } \celsius } } = 0{,}75 \cdot \frac{ 30{,}300\,\frac{\text{г}}{\text{м}^{3}} }{ 198{,}000\,\frac{\text{г}}{\text{м}^{3}} } = 0{,}115 \approx 11{,}5\%.
+    \varphi_2 &= \frac{\rho_\text{пара}}{\rho_{\text{нас.
+    пара 70} \celsius}} = \frac{\rho_{\text{нас.
+    пара 30} \celsius} \cdot \varphi_1}{\rho_{\text{нас.
+    пара 70} \celsius}}= \varphi_1 \cdot \frac{\rho_{\text{нас.
+    пара 30} \celsius}}{\rho_{\text{нас.
+    пара 70} \celsius}} = 0{,}75 \cdot \frac{30{,}300\,\frac{\text{г}}{\text{м}^{3}}}{198{,}000\,\frac{\text{г}}{\text{м}^{3}}} = 0{,}115 \approx 11{,}5\%.
     \end{align*}
 }
 \solutionspace{80pt}
@@ -4826,7 +4826,7 @@
             \draw[-{Latex}] (0, 0) -- (0, 7) node[above left] {$P$};
             \draw[-{Latex}] (0, 0) -- (10, 0) node[right] {$V$};
 
-            \draw[dashed] (0, 2) node[left] {$P_1 = P_0$} -| (3, 0) node[below] {$V_1 = V_2 = V_0$ };
+            \draw[dashed] (0, 2) node[left] {$P_1 = P_0$} -| (3, 0) node[below] {$V_1 = V_2 = V_0$};
             \draw[dashed] (0, 6) node[left] {$P_2 = P_3 = 3P_0$} -| (9, 0) node[below] {$V_3 = 6V_0$};
 
             \draw (3, 2) node[above left]{1} node[below left]{$T_1 = T_0$}
@@ -4904,14 +4904,14 @@
             &= \frac 32 (P\Delta V + V \Delta P) + P \Delta V =  \frac 52 P\Delta V + \frac 32 V \Delta P = \\
             &= \frac 52 P\Delta V + \frac 32 V \cdot \cbr{- \frac{P_0}{V_0} \Delta V} = \frac{\Delta V}2 \cdot \cbr{5P - \frac{P_0}{V_0} V} = \\
             &= \frac{\Delta V}2 \cdot \cbr{5 \cdot \cbr{4P_0 - \frac{P_0}{V_0} V} - \frac{P_0}{V_0} V}
-             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 4 - 8\frac{V}{V_0}}.
+             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 4 - 8\fracV{V_0}}.
         \end{align*}
 
         Таком образом, знак количества теплоты $Q$ на участке 23 зависит от конкретного значения $V$:
         \begin{itemize}
             \item $\Delta V > 0$ на всём участке 23, поскольку газ расширяется,
             \item $P > 0$ — всегда, у нас идеальный газ, удары о стенки сосуда абсолютно упругие, а молекулы не взаимодействуют и поэтому давление только положительно,
-            \item если $5 \cdot 4 - 8\frac{V}{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
+            \item если $5 \cdot 4 - 8\fracV{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
         \end{itemize}
         Решая последнее неравенство, получаем конкретное значение $V^*$: при $V < V^*$ тепло подводят, далее~— отводят.
         Тут *~--- некоторая точка между точками 2 и 3, конкретные значения надо досчитать:
@@ -4935,7 +4935,7 @@
         \eta &= \frac{A_\text{цикл}}{Q_+} = \frac{A_\text{цикл}}{Q_{12} + Q_{2*}}
             = \frac{A_\text{цикл}}{A_{12} + \Delta U_{12} + A_{2*} + \Delta U_{2*}} = \\
             &= \frac{2 \cdot P_0V_0}{0 + 3 \cdot P_0 V_0 + \frac{27}8 \cdot P_0 V_0 + \frac98 \cdot P_0 V_0}
-             = \frac{2}{3 + \frac{27}8 + \frac98}
+             = \frac{A_bonus_cycle:LaTeX}{3 + \frac{27}8 + \frac98}
              = \frac4{15} \leftarrow \text{вжух и готово!}
         \end{align*}
 }
@@ -4952,22 +4952,22 @@
 \answer{%
     \begin{align*}
     &\text{Значения плотности насыщенного водяного пара определяем по таблице:} \\
-    &\rho_{ \text{ нас.
-    пара 30 } \celsius } = 30{,}300\,\frac{\text{г}}{\text{м}^{3}}, \rho_{ \text{ нас.
-    пара 80 } \celsius } = 293{,}000\,\frac{\text{г}}{\text{м}^{3}}.
+    &\rho_{\text{нас.
+    пара 30} \celsius} = 30{,}300\,\frac{\text{г}}{\text{м}^{3}}, \rho_{\text{нас.
+    пара 80} \celsius} = 293{,}000\,\frac{\text{г}}{\text{м}^{3}}.
     \\
-    \varphi_1 &= \frac{ \rho_\text{ пара } }{ \rho_{ \text{ нас.
-    пара 30 } \celsius } } \implies { \rho_\text{ пара } } = \rho_{ \text{ нас.
-    пара 30 } \celsius } \cdot \varphi_1 = 30{,}300\,\frac{\text{г}}{\text{м}^{3}} \cdot 0{,}70 = 21{,}210\,\frac{\text{г}}{\text{м}^{3}}.
+    \varphi_1 &= \frac{\rho_\text{пара}}{\rho_{\text{нас.
+    пара 30} \celsius}} \implies {\rho_\text{пара}} = \rho_{\text{нас.
+    пара 30} \celsius} \cdot \varphi_1 = 30{,}300\,\frac{\text{г}}{\text{м}^{3}} \cdot 0{,}70 = 21{,}210\,\frac{\text{г}}{\text{м}^{3}}.
     \\
-    &\text{По таблице определяем, при какой температуре пар с такой плотностью станет насыщенным: }  \\
+    &\text{По таблице определяем, при какой температуре пар с такой плотностью станет насыщенным:}  \\
     t_\text{росы} &= 23{,}5\celsius, \\
-    \varphi_2 &= \frac{ \rho_\text{ пара } }{ \rho_{ \text{ нас.
-    пара 80 } \celsius } } = \frac{\rho_{ \text{ нас.
-    пара 30 } \celsius } \cdot \varphi_1}{ \rho_{ \text{ нас.
-    пара 80 } \celsius } }= \varphi_1 \cdot \frac{ \rho_{ \text{ нас.
-    пара 30 } \celsius } }{ \rho_{ \text{ нас.
-    пара 80 } \celsius } } = 0{,}70 \cdot \frac{ 30{,}300\,\frac{\text{г}}{\text{м}^{3}} }{ 293{,}000\,\frac{\text{г}}{\text{м}^{3}} } = 0{,}072 \approx 7{,}2\%.
+    \varphi_2 &= \frac{\rho_\text{пара}}{\rho_{\text{нас.
+    пара 80} \celsius}} = \frac{\rho_{\text{нас.
+    пара 30} \celsius} \cdot \varphi_1}{\rho_{\text{нас.
+    пара 80} \celsius}}= \varphi_1 \cdot \frac{\rho_{\text{нас.
+    пара 30} \celsius}}{\rho_{\text{нас.
+    пара 80} \celsius}} = 0{,}70 \cdot \frac{30{,}300\,\frac{\text{г}}{\text{м}^{3}}}{293{,}000\,\frac{\text{г}}{\text{м}^{3}}} = 0{,}072 \approx 7{,}2\%.
     \end{align*}
 }
 \solutionspace{80pt}
@@ -5034,7 +5034,7 @@
             \draw[-{Latex}] (0, 0) -- (0, 7) node[above left] {$P$};
             \draw[-{Latex}] (0, 0) -- (10, 0) node[right] {$V$};
 
-            \draw[dashed] (0, 2) node[left] {$P_1 = P_0$} -| (3, 0) node[below] {$V_1 = V_2 = V_0$ };
+            \draw[dashed] (0, 2) node[left] {$P_1 = P_0$} -| (3, 0) node[below] {$V_1 = V_2 = V_0$};
             \draw[dashed] (0, 6) node[left] {$P_2 = P_3 = 5P_0$} -| (9, 0) node[below] {$V_3 = 3V_0$};
 
             \draw (3, 2) node[above left]{1} node[below left]{$T_1 = T_0$}
@@ -5112,14 +5112,14 @@
             &= \frac 32 (P\Delta V + V \Delta P) + P \Delta V =  \frac 52 P\Delta V + \frac 32 V \Delta P = \\
             &= \frac 52 P\Delta V + \frac 32 V \cdot \cbr{- \frac{P_0}{V_0} \Delta V} = \frac{\Delta V}2 \cdot \cbr{5P - \frac{P_0}{V_0} V} = \\
             &= \frac{\Delta V}2 \cdot \cbr{5 \cdot \cbr{6P_0 - \frac{P_0}{V_0} V} - \frac{P_0}{V_0} V}
-             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 6 - 8\frac{V}{V_0}}.
+             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 6 - 8\fracV{V_0}}.
         \end{align*}
 
         Таком образом, знак количества теплоты $Q$ на участке 23 зависит от конкретного значения $V$:
         \begin{itemize}
             \item $\Delta V > 0$ на всём участке 23, поскольку газ расширяется,
             \item $P > 0$ — всегда, у нас идеальный газ, удары о стенки сосуда абсолютно упругие, а молекулы не взаимодействуют и поэтому давление только положительно,
-            \item если $5 \cdot 6 - 8\frac{V}{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
+            \item если $5 \cdot 6 - 8\fracV{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
         \end{itemize}
         Решая последнее неравенство, получаем конкретное значение $V^*$: при $V < V^*$ тепло подводят, далее~— отводят.
         Тут *~--- некоторая точка между точками 2 и 3, конкретные значения надо досчитать:
@@ -5143,7 +5143,7 @@
         \eta &= \frac{A_\text{цикл}}{Q_+} = \frac{A_\text{цикл}}{Q_{12} + Q_{2*}}
             = \frac{A_\text{цикл}}{A_{12} + \Delta U_{12} + A_{2*} + \Delta U_{2*}} = \\
             &= \frac{8 \cdot P_0V_0}{0 + 6 \cdot P_0 V_0 + \frac{319}{32} \cdot P_0 V_0 + \frac{165}{32} \cdot P_0 V_0}
-             = \frac{8}{6 + \frac{319}{32} + \frac{165}{32}}
+             = \frac{A_bonus_cycle:LaTeX}{6 + \frac{319}{32} + \frac{165}{32}}
              = \frac{64}{169} \leftarrow \text{вжух и готово!}
         \end{align*}
 }
@@ -5160,22 +5160,22 @@
 \answer{%
     \begin{align*}
     &\text{Значения плотности насыщенного водяного пара определяем по таблице:} \\
-    &\rho_{ \text{ нас.
-    пара 30 } \celsius } = 30{,}300\,\frac{\text{г}}{\text{м}^{3}}, \rho_{ \text{ нас.
-    пара 40 } \celsius } = 51{,}200\,\frac{\text{г}}{\text{м}^{3}}.
+    &\rho_{\text{нас.
+    пара 30} \celsius} = 30{,}300\,\frac{\text{г}}{\text{м}^{3}}, \rho_{\text{нас.
+    пара 40} \celsius} = 51{,}200\,\frac{\text{г}}{\text{м}^{3}}.
     \\
-    \varphi_1 &= \frac{ \rho_\text{ пара } }{ \rho_{ \text{ нас.
-    пара 30 } \celsius } } \implies { \rho_\text{ пара } } = \rho_{ \text{ нас.
-    пара 30 } \celsius } \cdot \varphi_1 = 30{,}300\,\frac{\text{г}}{\text{м}^{3}} \cdot 0{,}60 = 18{,}180\,\frac{\text{г}}{\text{м}^{3}}.
+    \varphi_1 &= \frac{\rho_\text{пара}}{\rho_{\text{нас.
+    пара 30} \celsius}} \implies {\rho_\text{пара}} = \rho_{\text{нас.
+    пара 30} \celsius} \cdot \varphi_1 = 30{,}300\,\frac{\text{г}}{\text{м}^{3}} \cdot 0{,}60 = 18{,}180\,\frac{\text{г}}{\text{м}^{3}}.
     \\
-    &\text{По таблице определяем, при какой температуре пар с такой плотностью станет насыщенным: }  \\
+    &\text{По таблице определяем, при какой температуре пар с такой плотностью станет насыщенным:}  \\
     t_\text{росы} &= 20{,}9\celsius, \\
-    \varphi_2 &= \frac{ \rho_\text{ пара } }{ \rho_{ \text{ нас.
-    пара 40 } \celsius } } = \frac{\rho_{ \text{ нас.
-    пара 30 } \celsius } \cdot \varphi_1}{ \rho_{ \text{ нас.
-    пара 40 } \celsius } }= \varphi_1 \cdot \frac{ \rho_{ \text{ нас.
-    пара 30 } \celsius } }{ \rho_{ \text{ нас.
-    пара 40 } \celsius } } = 0{,}60 \cdot \frac{ 30{,}300\,\frac{\text{г}}{\text{м}^{3}} }{ 51{,}200\,\frac{\text{г}}{\text{м}^{3}} } = 0{,}355 \approx 35{,}5\%.
+    \varphi_2 &= \frac{\rho_\text{пара}}{\rho_{\text{нас.
+    пара 40} \celsius}} = \frac{\rho_{\text{нас.
+    пара 30} \celsius} \cdot \varphi_1}{\rho_{\text{нас.
+    пара 40} \celsius}}= \varphi_1 \cdot \frac{\rho_{\text{нас.
+    пара 30} \celsius}}{\rho_{\text{нас.
+    пара 40} \celsius}} = 0{,}60 \cdot \frac{30{,}300\,\frac{\text{г}}{\text{м}^{3}}}{51{,}200\,\frac{\text{г}}{\text{м}^{3}}} = 0{,}355 \approx 35{,}5\%.
     \end{align*}
 }
 \solutionspace{80pt}
@@ -5242,7 +5242,7 @@
             \draw[-{Latex}] (0, 0) -- (0, 7) node[above left] {$P$};
             \draw[-{Latex}] (0, 0) -- (10, 0) node[right] {$V$};
 
-            \draw[dashed] (0, 2) node[left] {$P_1 = P_0$} -| (3, 0) node[below] {$V_1 = V_2 = V_0$ };
+            \draw[dashed] (0, 2) node[left] {$P_1 = P_0$} -| (3, 0) node[below] {$V_1 = V_2 = V_0$};
             \draw[dashed] (0, 6) node[left] {$P_2 = P_3 = 2P_0$} -| (9, 0) node[below] {$V_3 = 4V_0$};
 
             \draw (3, 2) node[above left]{1} node[below left]{$T_1 = T_0$}
@@ -5320,14 +5320,14 @@
             &= \frac 32 (P\Delta V + V \Delta P) + P \Delta V =  \frac 52 P\Delta V + \frac 32 V \Delta P = \\
             &= \frac 52 P\Delta V + \frac 32 V \cdot \cbr{- \frac{P_0}{V_0} \Delta V} = \frac{\Delta V}2 \cdot \cbr{5P - \frac{P_0}{V_0} V} = \\
             &= \frac{\Delta V}2 \cdot \cbr{5 \cdot \cbr{3P_0 - \frac{P_0}{V_0} V} - \frac{P_0}{V_0} V}
-             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 3 - 8\frac{V}{V_0}}.
+             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 3 - 8\fracV{V_0}}.
         \end{align*}
 
         Таком образом, знак количества теплоты $Q$ на участке 23 зависит от конкретного значения $V$:
         \begin{itemize}
             \item $\Delta V > 0$ на всём участке 23, поскольку газ расширяется,
             \item $P > 0$ — всегда, у нас идеальный газ, удары о стенки сосуда абсолютно упругие, а молекулы не взаимодействуют и поэтому давление только положительно,
-            \item если $5 \cdot 3 - 8\frac{V}{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
+            \item если $5 \cdot 3 - 8\fracV{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
         \end{itemize}
         Решая последнее неравенство, получаем конкретное значение $V^*$: при $V < V^*$ тепло подводят, далее~— отводят.
         Тут *~--- некоторая точка между точками 2 и 3, конкретные значения надо досчитать:
@@ -5351,7 +5351,7 @@
         \eta &= \frac{A_\text{цикл}}{Q_+} = \frac{A_\text{цикл}}{Q_{12} + Q_{2*}}
             = \frac{A_\text{цикл}}{A_{12} + \Delta U_{12} + A_{2*} + \Delta U_{2*}} = \\
             &= \frac{\frac12 \cdot P_0V_0}{0 + \frac32 \cdot P_0 V_0 + \frac{175}{128} \cdot P_0 V_0 + \frac{21}{128} \cdot P_0 V_0}
-             = \frac{\frac12}{\frac32 + \frac{175}{128} + \frac{21}{128}}
+             = \frac{A_bonus_cycle:LaTeX}{\frac32 + \frac{175}{128} + \frac{21}{128}}
              = \frac{16}{97} \leftarrow \text{вжух и готово!}
         \end{align*}
 }
@@ -5368,22 +5368,22 @@
 \answer{%
     \begin{align*}
     &\text{Значения плотности насыщенного водяного пара определяем по таблице:} \\
-    &\rho_{ \text{ нас.
-    пара 15 } \celsius } = 12{,}800\,\frac{\text{г}}{\text{м}^{3}}, \rho_{ \text{ нас.
-    пара 80 } \celsius } = 293{,}000\,\frac{\text{г}}{\text{м}^{3}}.
+    &\rho_{\text{нас.
+    пара 15} \celsius} = 12{,}800\,\frac{\text{г}}{\text{м}^{3}}, \rho_{\text{нас.
+    пара 80} \celsius} = 293{,}000\,\frac{\text{г}}{\text{м}^{3}}.
     \\
-    \varphi_1 &= \frac{ \rho_\text{ пара } }{ \rho_{ \text{ нас.
-    пара 15 } \celsius } } \implies { \rho_\text{ пара } } = \rho_{ \text{ нас.
-    пара 15 } \celsius } \cdot \varphi_1 = 12{,}800\,\frac{\text{г}}{\text{м}^{3}} \cdot 0{,}75 = 9{,}600\,\frac{\text{г}}{\text{м}^{3}}.
+    \varphi_1 &= \frac{\rho_\text{пара}}{\rho_{\text{нас.
+    пара 15} \celsius}} \implies {\rho_\text{пара}} = \rho_{\text{нас.
+    пара 15} \celsius} \cdot \varphi_1 = 12{,}800\,\frac{\text{г}}{\text{м}^{3}} \cdot 0{,}75 = 9{,}600\,\frac{\text{г}}{\text{м}^{3}}.
     \\
-    &\text{По таблице определяем, при какой температуре пар с такой плотностью станет насыщенным: }  \\
+    &\text{По таблице определяем, при какой температуре пар с такой плотностью станет насыщенным:}  \\
     t_\text{росы} &= 10{,}3\celsius, \\
-    \varphi_2 &= \frac{ \rho_\text{ пара } }{ \rho_{ \text{ нас.
-    пара 80 } \celsius } } = \frac{\rho_{ \text{ нас.
-    пара 15 } \celsius } \cdot \varphi_1}{ \rho_{ \text{ нас.
-    пара 80 } \celsius } }= \varphi_1 \cdot \frac{ \rho_{ \text{ нас.
-    пара 15 } \celsius } }{ \rho_{ \text{ нас.
-    пара 80 } \celsius } } = 0{,}75 \cdot \frac{ 12{,}800\,\frac{\text{г}}{\text{м}^{3}} }{ 293{,}000\,\frac{\text{г}}{\text{м}^{3}} } = 0{,}033 \approx 3{,}3\%.
+    \varphi_2 &= \frac{\rho_\text{пара}}{\rho_{\text{нас.
+    пара 80} \celsius}} = \frac{\rho_{\text{нас.
+    пара 15} \celsius} \cdot \varphi_1}{\rho_{\text{нас.
+    пара 80} \celsius}}= \varphi_1 \cdot \frac{\rho_{\text{нас.
+    пара 15} \celsius}}{\rho_{\text{нас.
+    пара 80} \celsius}} = 0{,}75 \cdot \frac{12{,}800\,\frac{\text{г}}{\text{м}^{3}}}{293{,}000\,\frac{\text{г}}{\text{м}^{3}}} = 0{,}033 \approx 3{,}3\%.
     \end{align*}
 }
 \solutionspace{80pt}
@@ -5450,7 +5450,7 @@
             \draw[-{Latex}] (0, 0) -- (0, 7) node[above left] {$P$};
             \draw[-{Latex}] (0, 0) -- (10, 0) node[right] {$V$};
 
-            \draw[dashed] (0, 2) node[left] {$P_1 = P_0$} -| (3, 0) node[below] {$V_1 = V_2 = V_0$ };
+            \draw[dashed] (0, 2) node[left] {$P_1 = P_0$} -| (3, 0) node[below] {$V_1 = V_2 = V_0$};
             \draw[dashed] (0, 6) node[left] {$P_2 = P_3 = 3P_0$} -| (9, 0) node[below] {$V_3 = 4V_0$};
 
             \draw (3, 2) node[above left]{1} node[below left]{$T_1 = T_0$}
@@ -5528,14 +5528,14 @@
             &= \frac 32 (P\Delta V + V \Delta P) + P \Delta V =  \frac 52 P\Delta V + \frac 32 V \Delta P = \\
             &= \frac 52 P\Delta V + \frac 32 V \cdot \cbr{- \frac{P_0}{V_0} \Delta V} = \frac{\Delta V}2 \cdot \cbr{5P - \frac{P_0}{V_0} V} = \\
             &= \frac{\Delta V}2 \cdot \cbr{5 \cdot \cbr{4P_0 - \frac{P_0}{V_0} V} - \frac{P_0}{V_0} V}
-             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 4 - 8\frac{V}{V_0}}.
+             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 4 - 8\fracV{V_0}}.
         \end{align*}
 
         Таком образом, знак количества теплоты $Q$ на участке 23 зависит от конкретного значения $V$:
         \begin{itemize}
             \item $\Delta V > 0$ на всём участке 23, поскольку газ расширяется,
             \item $P > 0$ — всегда, у нас идеальный газ, удары о стенки сосуда абсолютно упругие, а молекулы не взаимодействуют и поэтому давление только положительно,
-            \item если $5 \cdot 4 - 8\frac{V}{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
+            \item если $5 \cdot 4 - 8\fracV{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
         \end{itemize}
         Решая последнее неравенство, получаем конкретное значение $V^*$: при $V < V^*$ тепло подводят, далее~— отводят.
         Тут *~--- некоторая точка между точками 2 и 3, конкретные значения надо досчитать:
@@ -5559,7 +5559,7 @@
         \eta &= \frac{A_\text{цикл}}{Q_+} = \frac{A_\text{цикл}}{Q_{12} + Q_{2*}}
             = \frac{A_\text{цикл}}{A_{12} + \Delta U_{12} + A_{2*} + \Delta U_{2*}} = \\
             &= \frac{2 \cdot P_0V_0}{0 + 3 \cdot P_0 V_0 + \frac{27}8 \cdot P_0 V_0 + \frac98 \cdot P_0 V_0}
-             = \frac{2}{3 + \frac{27}8 + \frac98}
+             = \frac{A_bonus_cycle:LaTeX}{3 + \frac{27}8 + \frac98}
              = \frac4{15} \leftarrow \text{вжух и готово!}
         \end{align*}
 }
@@ -5576,22 +5576,22 @@
 \answer{%
     \begin{align*}
     &\text{Значения плотности насыщенного водяного пара определяем по таблице:} \\
-    &\rho_{ \text{ нас.
-    пара 20 } \celsius } = 17{,}300\,\frac{\text{г}}{\text{м}^{3}}, \rho_{ \text{ нас.
-    пара 70 } \celsius } = 198{,}000\,\frac{\text{г}}{\text{м}^{3}}.
+    &\rho_{\text{нас.
+    пара 20} \celsius} = 17{,}300\,\frac{\text{г}}{\text{м}^{3}}, \rho_{\text{нас.
+    пара 70} \celsius} = 198{,}000\,\frac{\text{г}}{\text{м}^{3}}.
     \\
-    \varphi_1 &= \frac{ \rho_\text{ пара } }{ \rho_{ \text{ нас.
-    пара 20 } \celsius } } \implies { \rho_\text{ пара } } = \rho_{ \text{ нас.
-    пара 20 } \celsius } \cdot \varphi_1 = 17{,}300\,\frac{\text{г}}{\text{м}^{3}} \cdot 0{,}40 = 6{,}920\,\frac{\text{г}}{\text{м}^{3}}.
+    \varphi_1 &= \frac{\rho_\text{пара}}{\rho_{\text{нас.
+    пара 20} \celsius}} \implies {\rho_\text{пара}} = \rho_{\text{нас.
+    пара 20} \celsius} \cdot \varphi_1 = 17{,}300\,\frac{\text{г}}{\text{м}^{3}} \cdot 0{,}40 = 6{,}920\,\frac{\text{г}}{\text{м}^{3}}.
     \\
-    &\text{По таблице определяем, при какой температуре пар с такой плотностью станет насыщенным: }  \\
+    &\text{По таблице определяем, при какой температуре пар с такой плотностью станет насыщенным:}  \\
     t_\text{росы} &= 5{,}2\celsius, \\
-    \varphi_2 &= \frac{ \rho_\text{ пара } }{ \rho_{ \text{ нас.
-    пара 70 } \celsius } } = \frac{\rho_{ \text{ нас.
-    пара 20 } \celsius } \cdot \varphi_1}{ \rho_{ \text{ нас.
-    пара 70 } \celsius } }= \varphi_1 \cdot \frac{ \rho_{ \text{ нас.
-    пара 20 } \celsius } }{ \rho_{ \text{ нас.
-    пара 70 } \celsius } } = 0{,}40 \cdot \frac{ 17{,}300\,\frac{\text{г}}{\text{м}^{3}} }{ 198{,}000\,\frac{\text{г}}{\text{м}^{3}} } = 0{,}035 \approx 3{,}5\%.
+    \varphi_2 &= \frac{\rho_\text{пара}}{\rho_{\text{нас.
+    пара 70} \celsius}} = \frac{\rho_{\text{нас.
+    пара 20} \celsius} \cdot \varphi_1}{\rho_{\text{нас.
+    пара 70} \celsius}}= \varphi_1 \cdot \frac{\rho_{\text{нас.
+    пара 20} \celsius}}{\rho_{\text{нас.
+    пара 70} \celsius}} = 0{,}40 \cdot \frac{17{,}300\,\frac{\text{г}}{\text{м}^{3}}}{198{,}000\,\frac{\text{г}}{\text{м}^{3}}} = 0{,}035 \approx 3{,}5\%.
     \end{align*}
 }
 \solutionspace{80pt}
@@ -5658,7 +5658,7 @@
             \draw[-{Latex}] (0, 0) -- (0, 7) node[above left] {$P$};
             \draw[-{Latex}] (0, 0) -- (10, 0) node[right] {$V$};
 
-            \draw[dashed] (0, 2) node[left] {$P_1 = P_0$} -| (3, 0) node[below] {$V_1 = V_2 = V_0$ };
+            \draw[dashed] (0, 2) node[left] {$P_1 = P_0$} -| (3, 0) node[below] {$V_1 = V_2 = V_0$};
             \draw[dashed] (0, 6) node[left] {$P_2 = P_3 = 5P_0$} -| (9, 0) node[below] {$V_3 = 5V_0$};
 
             \draw (3, 2) node[above left]{1} node[below left]{$T_1 = T_0$}
@@ -5736,14 +5736,14 @@
             &= \frac 32 (P\Delta V + V \Delta P) + P \Delta V =  \frac 52 P\Delta V + \frac 32 V \Delta P = \\
             &= \frac 52 P\Delta V + \frac 32 V \cdot \cbr{- \frac{P_0}{V_0} \Delta V} = \frac{\Delta V}2 \cdot \cbr{5P - \frac{P_0}{V_0} V} = \\
             &= \frac{\Delta V}2 \cdot \cbr{5 \cdot \cbr{6P_0 - \frac{P_0}{V_0} V} - \frac{P_0}{V_0} V}
-             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 6 - 8\frac{V}{V_0}}.
+             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 6 - 8\fracV{V_0}}.
         \end{align*}
 
         Таком образом, знак количества теплоты $Q$ на участке 23 зависит от конкретного значения $V$:
         \begin{itemize}
             \item $\Delta V > 0$ на всём участке 23, поскольку газ расширяется,
             \item $P > 0$ — всегда, у нас идеальный газ, удары о стенки сосуда абсолютно упругие, а молекулы не взаимодействуют и поэтому давление только положительно,
-            \item если $5 \cdot 6 - 8\frac{V}{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
+            \item если $5 \cdot 6 - 8\fracV{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
         \end{itemize}
         Решая последнее неравенство, получаем конкретное значение $V^*$: при $V < V^*$ тепло подводят, далее~— отводят.
         Тут *~--- некоторая точка между точками 2 и 3, конкретные значения надо досчитать:
@@ -5767,7 +5767,7 @@
         \eta &= \frac{A_\text{цикл}}{Q_+} = \frac{A_\text{цикл}}{Q_{12} + Q_{2*}}
             = \frac{A_\text{цикл}}{A_{12} + \Delta U_{12} + A_{2*} + \Delta U_{2*}} = \\
             &= \frac{8 \cdot P_0V_0}{0 + 6 \cdot P_0 V_0 + \frac{319}{32} \cdot P_0 V_0 + \frac{165}{32} \cdot P_0 V_0}
-             = \frac{8}{6 + \frac{319}{32} + \frac{165}{32}}
+             = \frac{A_bonus_cycle:LaTeX}{6 + \frac{319}{32} + \frac{165}{32}}
              = \frac{64}{169} \leftarrow \text{вжух и готово!}
         \end{align*}
 }
@@ -5784,22 +5784,22 @@
 \answer{%
     \begin{align*}
     &\text{Значения плотности насыщенного водяного пара определяем по таблице:} \\
-    &\rho_{ \text{ нас.
-    пара 15 } \celsius } = 12{,}800\,\frac{\text{г}}{\text{м}^{3}}, \rho_{ \text{ нас.
-    пара 60 } \celsius } = 130{,}000\,\frac{\text{г}}{\text{м}^{3}}.
+    &\rho_{\text{нас.
+    пара 15} \celsius} = 12{,}800\,\frac{\text{г}}{\text{м}^{3}}, \rho_{\text{нас.
+    пара 60} \celsius} = 130{,}000\,\frac{\text{г}}{\text{м}^{3}}.
     \\
-    \varphi_1 &= \frac{ \rho_\text{ пара } }{ \rho_{ \text{ нас.
-    пара 15 } \celsius } } \implies { \rho_\text{ пара } } = \rho_{ \text{ нас.
-    пара 15 } \celsius } \cdot \varphi_1 = 12{,}800\,\frac{\text{г}}{\text{м}^{3}} \cdot 0{,}45 = 5{,}760\,\frac{\text{г}}{\text{м}^{3}}.
+    \varphi_1 &= \frac{\rho_\text{пара}}{\rho_{\text{нас.
+    пара 15} \celsius}} \implies {\rho_\text{пара}} = \rho_{\text{нас.
+    пара 15} \celsius} \cdot \varphi_1 = 12{,}800\,\frac{\text{г}}{\text{м}^{3}} \cdot 0{,}45 = 5{,}760\,\frac{\text{г}}{\text{м}^{3}}.
     \\
-    &\text{По таблице определяем, при какой температуре пар с такой плотностью станет насыщенным: }  \\
+    &\text{По таблице определяем, при какой температуре пар с такой плотностью станет насыщенным:}  \\
     t_\text{росы} &= 2{,}4\celsius, \\
-    \varphi_2 &= \frac{ \rho_\text{ пара } }{ \rho_{ \text{ нас.
-    пара 60 } \celsius } } = \frac{\rho_{ \text{ нас.
-    пара 15 } \celsius } \cdot \varphi_1}{ \rho_{ \text{ нас.
-    пара 60 } \celsius } }= \varphi_1 \cdot \frac{ \rho_{ \text{ нас.
-    пара 15 } \celsius } }{ \rho_{ \text{ нас.
-    пара 60 } \celsius } } = 0{,}45 \cdot \frac{ 12{,}800\,\frac{\text{г}}{\text{м}^{3}} }{ 130{,}000\,\frac{\text{г}}{\text{м}^{3}} } = 0{,}044 \approx 4{,}4\%.
+    \varphi_2 &= \frac{\rho_\text{пара}}{\rho_{\text{нас.
+    пара 60} \celsius}} = \frac{\rho_{\text{нас.
+    пара 15} \celsius} \cdot \varphi_1}{\rho_{\text{нас.
+    пара 60} \celsius}}= \varphi_1 \cdot \frac{\rho_{\text{нас.
+    пара 15} \celsius}}{\rho_{\text{нас.
+    пара 60} \celsius}} = 0{,}45 \cdot \frac{12{,}800\,\frac{\text{г}}{\text{м}^{3}}}{130{,}000\,\frac{\text{г}}{\text{м}^{3}}} = 0{,}044 \approx 4{,}4\%.
     \end{align*}
 }
 \solutionspace{80pt}
@@ -5866,7 +5866,7 @@
             \draw[-{Latex}] (0, 0) -- (0, 7) node[above left] {$P$};
             \draw[-{Latex}] (0, 0) -- (10, 0) node[right] {$V$};
 
-            \draw[dashed] (0, 2) node[left] {$P_1 = P_0$} -| (3, 0) node[below] {$V_1 = V_2 = V_0$ };
+            \draw[dashed] (0, 2) node[left] {$P_1 = P_0$} -| (3, 0) node[below] {$V_1 = V_2 = V_0$};
             \draw[dashed] (0, 6) node[left] {$P_2 = P_3 = 3P_0$} -| (9, 0) node[below] {$V_3 = 6V_0$};
 
             \draw (3, 2) node[above left]{1} node[below left]{$T_1 = T_0$}
@@ -5944,14 +5944,14 @@
             &= \frac 32 (P\Delta V + V \Delta P) + P \Delta V =  \frac 52 P\Delta V + \frac 32 V \Delta P = \\
             &= \frac 52 P\Delta V + \frac 32 V \cdot \cbr{- \frac{P_0}{V_0} \Delta V} = \frac{\Delta V}2 \cdot \cbr{5P - \frac{P_0}{V_0} V} = \\
             &= \frac{\Delta V}2 \cdot \cbr{5 \cdot \cbr{4P_0 - \frac{P_0}{V_0} V} - \frac{P_0}{V_0} V}
-             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 4 - 8\frac{V}{V_0}}.
+             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 4 - 8\fracV{V_0}}.
         \end{align*}
 
         Таком образом, знак количества теплоты $Q$ на участке 23 зависит от конкретного значения $V$:
         \begin{itemize}
             \item $\Delta V > 0$ на всём участке 23, поскольку газ расширяется,
             \item $P > 0$ — всегда, у нас идеальный газ, удары о стенки сосуда абсолютно упругие, а молекулы не взаимодействуют и поэтому давление только положительно,
-            \item если $5 \cdot 4 - 8\frac{V}{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
+            \item если $5 \cdot 4 - 8\fracV{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
         \end{itemize}
         Решая последнее неравенство, получаем конкретное значение $V^*$: при $V < V^*$ тепло подводят, далее~— отводят.
         Тут *~--- некоторая точка между точками 2 и 3, конкретные значения надо досчитать:
@@ -5975,7 +5975,7 @@
         \eta &= \frac{A_\text{цикл}}{Q_+} = \frac{A_\text{цикл}}{Q_{12} + Q_{2*}}
             = \frac{A_\text{цикл}}{A_{12} + \Delta U_{12} + A_{2*} + \Delta U_{2*}} = \\
             &= \frac{2 \cdot P_0V_0}{0 + 3 \cdot P_0 V_0 + \frac{27}8 \cdot P_0 V_0 + \frac98 \cdot P_0 V_0}
-             = \frac{2}{3 + \frac{27}8 + \frac98}
+             = \frac{A_bonus_cycle:LaTeX}{3 + \frac{27}8 + \frac98}
              = \frac4{15} \leftarrow \text{вжух и готово!}
         \end{align*}
 }
@@ -5992,22 +5992,22 @@
 \answer{%
     \begin{align*}
     &\text{Значения плотности насыщенного водяного пара определяем по таблице:} \\
-    &\rho_{ \text{ нас.
-    пара 25 } \celsius } = 23{,}000\,\frac{\text{г}}{\text{м}^{3}}, \rho_{ \text{ нас.
-    пара 60 } \celsius } = 130{,}000\,\frac{\text{г}}{\text{м}^{3}}.
+    &\rho_{\text{нас.
+    пара 25} \celsius} = 23{,}000\,\frac{\text{г}}{\text{м}^{3}}, \rho_{\text{нас.
+    пара 60} \celsius} = 130{,}000\,\frac{\text{г}}{\text{м}^{3}}.
     \\
-    \varphi_1 &= \frac{ \rho_\text{ пара } }{ \rho_{ \text{ нас.
-    пара 25 } \celsius } } \implies { \rho_\text{ пара } } = \rho_{ \text{ нас.
-    пара 25 } \celsius } \cdot \varphi_1 = 23{,}000\,\frac{\text{г}}{\text{м}^{3}} \cdot 0{,}70 = 16{,}100\,\frac{\text{г}}{\text{м}^{3}}.
+    \varphi_1 &= \frac{\rho_\text{пара}}{\rho_{\text{нас.
+    пара 25} \celsius}} \implies {\rho_\text{пара}} = \rho_{\text{нас.
+    пара 25} \celsius} \cdot \varphi_1 = 23{,}000\,\frac{\text{г}}{\text{м}^{3}} \cdot 0{,}70 = 16{,}100\,\frac{\text{г}}{\text{м}^{3}}.
     \\
-    &\text{По таблице определяем, при какой температуре пар с такой плотностью станет насыщенным: }  \\
+    &\text{По таблице определяем, при какой температуре пар с такой плотностью станет насыщенным:}  \\
     t_\text{росы} &= 18{,}8\celsius, \\
-    \varphi_2 &= \frac{ \rho_\text{ пара } }{ \rho_{ \text{ нас.
-    пара 60 } \celsius } } = \frac{\rho_{ \text{ нас.
-    пара 25 } \celsius } \cdot \varphi_1}{ \rho_{ \text{ нас.
-    пара 60 } \celsius } }= \varphi_1 \cdot \frac{ \rho_{ \text{ нас.
-    пара 25 } \celsius } }{ \rho_{ \text{ нас.
-    пара 60 } \celsius } } = 0{,}70 \cdot \frac{ 23{,}000\,\frac{\text{г}}{\text{м}^{3}} }{ 130{,}000\,\frac{\text{г}}{\text{м}^{3}} } = 0{,}124 \approx 12{,}4\%.
+    \varphi_2 &= \frac{\rho_\text{пара}}{\rho_{\text{нас.
+    пара 60} \celsius}} = \frac{\rho_{\text{нас.
+    пара 25} \celsius} \cdot \varphi_1}{\rho_{\text{нас.
+    пара 60} \celsius}}= \varphi_1 \cdot \frac{\rho_{\text{нас.
+    пара 25} \celsius}}{\rho_{\text{нас.
+    пара 60} \celsius}} = 0{,}70 \cdot \frac{23{,}000\,\frac{\text{г}}{\text{м}^{3}}}{130{,}000\,\frac{\text{г}}{\text{м}^{3}}} = 0{,}124 \approx 12{,}4\%.
     \end{align*}
 }
 \solutionspace{80pt}
@@ -6074,7 +6074,7 @@
             \draw[-{Latex}] (0, 0) -- (0, 7) node[above left] {$P$};
             \draw[-{Latex}] (0, 0) -- (10, 0) node[right] {$V$};
 
-            \draw[dashed] (0, 2) node[left] {$P_1 = P_0$} -| (3, 0) node[below] {$V_1 = V_2 = V_0$ };
+            \draw[dashed] (0, 2) node[left] {$P_1 = P_0$} -| (3, 0) node[below] {$V_1 = V_2 = V_0$};
             \draw[dashed] (0, 6) node[left] {$P_2 = P_3 = 4P_0$} -| (9, 0) node[below] {$V_3 = 2V_0$};
 
             \draw (3, 2) node[above left]{1} node[below left]{$T_1 = T_0$}
@@ -6152,14 +6152,14 @@
             &= \frac 32 (P\Delta V + V \Delta P) + P \Delta V =  \frac 52 P\Delta V + \frac 32 V \Delta P = \\
             &= \frac 52 P\Delta V + \frac 32 V \cdot \cbr{- \frac{P_0}{V_0} \Delta V} = \frac{\Delta V}2 \cdot \cbr{5P - \frac{P_0}{V_0} V} = \\
             &= \frac{\Delta V}2 \cdot \cbr{5 \cdot \cbr{5P_0 - \frac{P_0}{V_0} V} - \frac{P_0}{V_0} V}
-             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 5 - 8\frac{V}{V_0}}.
+             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 5 - 8\fracV{V_0}}.
         \end{align*}
 
         Таком образом, знак количества теплоты $Q$ на участке 23 зависит от конкретного значения $V$:
         \begin{itemize}
             \item $\Delta V > 0$ на всём участке 23, поскольку газ расширяется,
             \item $P > 0$ — всегда, у нас идеальный газ, удары о стенки сосуда абсолютно упругие, а молекулы не взаимодействуют и поэтому давление только положительно,
-            \item если $5 \cdot 5 - 8\frac{V}{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
+            \item если $5 \cdot 5 - 8\fracV{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
         \end{itemize}
         Решая последнее неравенство, получаем конкретное значение $V^*$: при $V < V^*$ тепло подводят, далее~— отводят.
         Тут *~--- некоторая точка между точками 2 и 3, конкретные значения надо досчитать:
@@ -6183,7 +6183,7 @@
         \eta &= \frac{A_\text{цикл}}{Q_+} = \frac{A_\text{цикл}}{Q_{12} + Q_{2*}}
             = \frac{A_\text{цикл}}{A_{12} + \Delta U_{12} + A_{2*} + \Delta U_{2*}} = \\
             &= \frac{\frac92 \cdot P_0V_0}{0 + \frac92 \cdot P_0 V_0 + \frac{799}{128} \cdot P_0 V_0 + \frac{357}{128} \cdot P_0 V_0}
-             = \frac{\frac92}{\frac92 + \frac{799}{128} + \frac{357}{128}}
+             = \frac{A_bonus_cycle:LaTeX}{\frac92 + \frac{799}{128} + \frac{357}{128}}
              = \frac{144}{433} \leftarrow \text{вжух и готово!}
         \end{align*}
 }
@@ -6200,22 +6200,22 @@
 \answer{%
     \begin{align*}
     &\text{Значения плотности насыщенного водяного пара определяем по таблице:} \\
-    &\rho_{ \text{ нас.
-    пара 15 } \celsius } = 12{,}800\,\frac{\text{г}}{\text{м}^{3}}, \rho_{ \text{ нас.
-    пара 70 } \celsius } = 198{,}000\,\frac{\text{г}}{\text{м}^{3}}.
+    &\rho_{\text{нас.
+    пара 15} \celsius} = 12{,}800\,\frac{\text{г}}{\text{м}^{3}}, \rho_{\text{нас.
+    пара 70} \celsius} = 198{,}000\,\frac{\text{г}}{\text{м}^{3}}.
     \\
-    \varphi_1 &= \frac{ \rho_\text{ пара } }{ \rho_{ \text{ нас.
-    пара 15 } \celsius } } \implies { \rho_\text{ пара } } = \rho_{ \text{ нас.
-    пара 15 } \celsius } \cdot \varphi_1 = 12{,}800\,\frac{\text{г}}{\text{м}^{3}} \cdot 0{,}40 = 5{,}120\,\frac{\text{г}}{\text{м}^{3}}.
+    \varphi_1 &= \frac{\rho_\text{пара}}{\rho_{\text{нас.
+    пара 15} \celsius}} \implies {\rho_\text{пара}} = \rho_{\text{нас.
+    пара 15} \celsius} \cdot \varphi_1 = 12{,}800\,\frac{\text{г}}{\text{м}^{3}} \cdot 0{,}40 = 5{,}120\,\frac{\text{г}}{\text{м}^{3}}.
     \\
-    &\text{По таблице определяем, при какой температуре пар с такой плотностью станет насыщенным: }  \\
+    &\text{По таблице определяем, при какой температуре пар с такой плотностью станет насыщенным:}  \\
     t_\text{росы} &= 0{,}7\celsius, \\
-    \varphi_2 &= \frac{ \rho_\text{ пара } }{ \rho_{ \text{ нас.
-    пара 70 } \celsius } } = \frac{\rho_{ \text{ нас.
-    пара 15 } \celsius } \cdot \varphi_1}{ \rho_{ \text{ нас.
-    пара 70 } \celsius } }= \varphi_1 \cdot \frac{ \rho_{ \text{ нас.
-    пара 15 } \celsius } }{ \rho_{ \text{ нас.
-    пара 70 } \celsius } } = 0{,}40 \cdot \frac{ 12{,}800\,\frac{\text{г}}{\text{м}^{3}} }{ 198{,}000\,\frac{\text{г}}{\text{м}^{3}} } = 0{,}026 \approx 2{,}6\%.
+    \varphi_2 &= \frac{\rho_\text{пара}}{\rho_{\text{нас.
+    пара 70} \celsius}} = \frac{\rho_{\text{нас.
+    пара 15} \celsius} \cdot \varphi_1}{\rho_{\text{нас.
+    пара 70} \celsius}}= \varphi_1 \cdot \frac{\rho_{\text{нас.
+    пара 15} \celsius}}{\rho_{\text{нас.
+    пара 70} \celsius}} = 0{,}40 \cdot \frac{12{,}800\,\frac{\text{г}}{\text{м}^{3}}}{198{,}000\,\frac{\text{г}}{\text{м}^{3}}} = 0{,}026 \approx 2{,}6\%.
     \end{align*}
 }
 \solutionspace{80pt}
@@ -6282,7 +6282,7 @@
             \draw[-{Latex}] (0, 0) -- (0, 7) node[above left] {$P$};
             \draw[-{Latex}] (0, 0) -- (10, 0) node[right] {$V$};
 
-            \draw[dashed] (0, 2) node[left] {$P_1 = P_0$} -| (3, 0) node[below] {$V_1 = V_2 = V_0$ };
+            \draw[dashed] (0, 2) node[left] {$P_1 = P_0$} -| (3, 0) node[below] {$V_1 = V_2 = V_0$};
             \draw[dashed] (0, 6) node[left] {$P_2 = P_3 = 3P_0$} -| (9, 0) node[below] {$V_3 = 2V_0$};
 
             \draw (3, 2) node[above left]{1} node[below left]{$T_1 = T_0$}
@@ -6360,14 +6360,14 @@
             &= \frac 32 (P\Delta V + V \Delta P) + P \Delta V =  \frac 52 P\Delta V + \frac 32 V \Delta P = \\
             &= \frac 52 P\Delta V + \frac 32 V \cdot \cbr{- \frac{P_0}{V_0} \Delta V} = \frac{\Delta V}2 \cdot \cbr{5P - \frac{P_0}{V_0} V} = \\
             &= \frac{\Delta V}2 \cdot \cbr{5 \cdot \cbr{4P_0 - \frac{P_0}{V_0} V} - \frac{P_0}{V_0} V}
-             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 4 - 8\frac{V}{V_0}}.
+             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 4 - 8\fracV{V_0}}.
         \end{align*}
 
         Таком образом, знак количества теплоты $Q$ на участке 23 зависит от конкретного значения $V$:
         \begin{itemize}
             \item $\Delta V > 0$ на всём участке 23, поскольку газ расширяется,
             \item $P > 0$ — всегда, у нас идеальный газ, удары о стенки сосуда абсолютно упругие, а молекулы не взаимодействуют и поэтому давление только положительно,
-            \item если $5 \cdot 4 - 8\frac{V}{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
+            \item если $5 \cdot 4 - 8\fracV{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
         \end{itemize}
         Решая последнее неравенство, получаем конкретное значение $V^*$: при $V < V^*$ тепло подводят, далее~— отводят.
         Тут *~--- некоторая точка между точками 2 и 3, конкретные значения надо досчитать:
@@ -6391,7 +6391,7 @@
         \eta &= \frac{A_\text{цикл}}{Q_+} = \frac{A_\text{цикл}}{Q_{12} + Q_{2*}}
             = \frac{A_\text{цикл}}{A_{12} + \Delta U_{12} + A_{2*} + \Delta U_{2*}} = \\
             &= \frac{2 \cdot P_0V_0}{0 + 3 \cdot P_0 V_0 + \frac{27}8 \cdot P_0 V_0 + \frac98 \cdot P_0 V_0}
-             = \frac{2}{3 + \frac{27}8 + \frac98}
+             = \frac{A_bonus_cycle:LaTeX}{3 + \frac{27}8 + \frac98}
              = \frac4{15} \leftarrow \text{вжух и готово!}
         \end{align*}
 }
@@ -6408,22 +6408,22 @@
 \answer{%
     \begin{align*}
     &\text{Значения плотности насыщенного водяного пара определяем по таблице:} \\
-    &\rho_{ \text{ нас.
-    пара 20 } \celsius } = 17{,}300\,\frac{\text{г}}{\text{м}^{3}}, \rho_{ \text{ нас.
-    пара 50 } \celsius } = 83{,}000\,\frac{\text{г}}{\text{м}^{3}}.
+    &\rho_{\text{нас.
+    пара 20} \celsius} = 17{,}300\,\frac{\text{г}}{\text{м}^{3}}, \rho_{\text{нас.
+    пара 50} \celsius} = 83{,}000\,\frac{\text{г}}{\text{м}^{3}}.
     \\
-    \varphi_1 &= \frac{ \rho_\text{ пара } }{ \rho_{ \text{ нас.
-    пара 20 } \celsius } } \implies { \rho_\text{ пара } } = \rho_{ \text{ нас.
-    пара 20 } \celsius } \cdot \varphi_1 = 17{,}300\,\frac{\text{г}}{\text{м}^{3}} \cdot 0{,}75 = 12{,}975\,\frac{\text{г}}{\text{м}^{3}}.
+    \varphi_1 &= \frac{\rho_\text{пара}}{\rho_{\text{нас.
+    пара 20} \celsius}} \implies {\rho_\text{пара}} = \rho_{\text{нас.
+    пара 20} \celsius} \cdot \varphi_1 = 17{,}300\,\frac{\text{г}}{\text{м}^{3}} \cdot 0{,}75 = 12{,}975\,\frac{\text{г}}{\text{м}^{3}}.
     \\
-    &\text{По таблице определяем, при какой температуре пар с такой плотностью станет насыщенным: }  \\
+    &\text{По таблице определяем, при какой температуре пар с такой плотностью станет насыщенным:}  \\
     t_\text{росы} &= 15{,}2\celsius, \\
-    \varphi_2 &= \frac{ \rho_\text{ пара } }{ \rho_{ \text{ нас.
-    пара 50 } \celsius } } = \frac{\rho_{ \text{ нас.
-    пара 20 } \celsius } \cdot \varphi_1}{ \rho_{ \text{ нас.
-    пара 50 } \celsius } }= \varphi_1 \cdot \frac{ \rho_{ \text{ нас.
-    пара 20 } \celsius } }{ \rho_{ \text{ нас.
-    пара 50 } \celsius } } = 0{,}75 \cdot \frac{ 17{,}300\,\frac{\text{г}}{\text{м}^{3}} }{ 83{,}000\,\frac{\text{г}}{\text{м}^{3}} } = 0{,}156 \approx 15{,}6\%.
+    \varphi_2 &= \frac{\rho_\text{пара}}{\rho_{\text{нас.
+    пара 50} \celsius}} = \frac{\rho_{\text{нас.
+    пара 20} \celsius} \cdot \varphi_1}{\rho_{\text{нас.
+    пара 50} \celsius}}= \varphi_1 \cdot \frac{\rho_{\text{нас.
+    пара 20} \celsius}}{\rho_{\text{нас.
+    пара 50} \celsius}} = 0{,}75 \cdot \frac{17{,}300\,\frac{\text{г}}{\text{м}^{3}}}{83{,}000\,\frac{\text{г}}{\text{м}^{3}}} = 0{,}156 \approx 15{,}6\%.
     \end{align*}
 }
 \solutionspace{80pt}
@@ -6490,7 +6490,7 @@
             \draw[-{Latex}] (0, 0) -- (0, 7) node[above left] {$P$};
             \draw[-{Latex}] (0, 0) -- (10, 0) node[right] {$V$};
 
-            \draw[dashed] (0, 2) node[left] {$P_1 = P_0$} -| (3, 0) node[below] {$V_1 = V_2 = V_0$ };
+            \draw[dashed] (0, 2) node[left] {$P_1 = P_0$} -| (3, 0) node[below] {$V_1 = V_2 = V_0$};
             \draw[dashed] (0, 6) node[left] {$P_2 = P_3 = 2P_0$} -| (9, 0) node[below] {$V_3 = 5V_0$};
 
             \draw (3, 2) node[above left]{1} node[below left]{$T_1 = T_0$}
@@ -6568,14 +6568,14 @@
             &= \frac 32 (P\Delta V + V \Delta P) + P \Delta V =  \frac 52 P\Delta V + \frac 32 V \Delta P = \\
             &= \frac 52 P\Delta V + \frac 32 V \cdot \cbr{- \frac{P_0}{V_0} \Delta V} = \frac{\Delta V}2 \cdot \cbr{5P - \frac{P_0}{V_0} V} = \\
             &= \frac{\Delta V}2 \cdot \cbr{5 \cdot \cbr{3P_0 - \frac{P_0}{V_0} V} - \frac{P_0}{V_0} V}
-             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 3 - 8\frac{V}{V_0}}.
+             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 3 - 8\fracV{V_0}}.
         \end{align*}
 
         Таком образом, знак количества теплоты $Q$ на участке 23 зависит от конкретного значения $V$:
         \begin{itemize}
             \item $\Delta V > 0$ на всём участке 23, поскольку газ расширяется,
             \item $P > 0$ — всегда, у нас идеальный газ, удары о стенки сосуда абсолютно упругие, а молекулы не взаимодействуют и поэтому давление только положительно,
-            \item если $5 \cdot 3 - 8\frac{V}{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
+            \item если $5 \cdot 3 - 8\fracV{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
         \end{itemize}
         Решая последнее неравенство, получаем конкретное значение $V^*$: при $V < V^*$ тепло подводят, далее~— отводят.
         Тут *~--- некоторая точка между точками 2 и 3, конкретные значения надо досчитать:
@@ -6599,7 +6599,7 @@
         \eta &= \frac{A_\text{цикл}}{Q_+} = \frac{A_\text{цикл}}{Q_{12} + Q_{2*}}
             = \frac{A_\text{цикл}}{A_{12} + \Delta U_{12} + A_{2*} + \Delta U_{2*}} = \\
             &= \frac{\frac12 \cdot P_0V_0}{0 + \frac32 \cdot P_0 V_0 + \frac{175}{128} \cdot P_0 V_0 + \frac{21}{128} \cdot P_0 V_0}
-             = \frac{\frac12}{\frac32 + \frac{175}{128} + \frac{21}{128}}
+             = \frac{A_bonus_cycle:LaTeX}{\frac32 + \frac{175}{128} + \frac{21}{128}}
              = \frac{16}{97} \leftarrow \text{вжух и готово!}
         \end{align*}
 }
@@ -6616,22 +6616,22 @@
 \answer{%
     \begin{align*}
     &\text{Значения плотности насыщенного водяного пара определяем по таблице:} \\
-    &\rho_{ \text{ нас.
-    пара 25 } \celsius } = 23{,}000\,\frac{\text{г}}{\text{м}^{3}}, \rho_{ \text{ нас.
-    пара 60 } \celsius } = 130{,}000\,\frac{\text{г}}{\text{м}^{3}}.
+    &\rho_{\text{нас.
+    пара 25} \celsius} = 23{,}000\,\frac{\text{г}}{\text{м}^{3}}, \rho_{\text{нас.
+    пара 60} \celsius} = 130{,}000\,\frac{\text{г}}{\text{м}^{3}}.
     \\
-    \varphi_1 &= \frac{ \rho_\text{ пара } }{ \rho_{ \text{ нас.
-    пара 25 } \celsius } } \implies { \rho_\text{ пара } } = \rho_{ \text{ нас.
-    пара 25 } \celsius } \cdot \varphi_1 = 23{,}000\,\frac{\text{г}}{\text{м}^{3}} \cdot 0{,}75 = 17{,}250\,\frac{\text{г}}{\text{м}^{3}}.
+    \varphi_1 &= \frac{\rho_\text{пара}}{\rho_{\text{нас.
+    пара 25} \celsius}} \implies {\rho_\text{пара}} = \rho_{\text{нас.
+    пара 25} \celsius} \cdot \varphi_1 = 23{,}000\,\frac{\text{г}}{\text{м}^{3}} \cdot 0{,}75 = 17{,}250\,\frac{\text{г}}{\text{м}^{3}}.
     \\
-    &\text{По таблице определяем, при какой температуре пар с такой плотностью станет насыщенным: }  \\
+    &\text{По таблице определяем, при какой температуре пар с такой плотностью станет насыщенным:}  \\
     t_\text{росы} &= 19{,}9\celsius, \\
-    \varphi_2 &= \frac{ \rho_\text{ пара } }{ \rho_{ \text{ нас.
-    пара 60 } \celsius } } = \frac{\rho_{ \text{ нас.
-    пара 25 } \celsius } \cdot \varphi_1}{ \rho_{ \text{ нас.
-    пара 60 } \celsius } }= \varphi_1 \cdot \frac{ \rho_{ \text{ нас.
-    пара 25 } \celsius } }{ \rho_{ \text{ нас.
-    пара 60 } \celsius } } = 0{,}75 \cdot \frac{ 23{,}000\,\frac{\text{г}}{\text{м}^{3}} }{ 130{,}000\,\frac{\text{г}}{\text{м}^{3}} } = 0{,}133 \approx 13{,}3\%.
+    \varphi_2 &= \frac{\rho_\text{пара}}{\rho_{\text{нас.
+    пара 60} \celsius}} = \frac{\rho_{\text{нас.
+    пара 25} \celsius} \cdot \varphi_1}{\rho_{\text{нас.
+    пара 60} \celsius}}= \varphi_1 \cdot \frac{\rho_{\text{нас.
+    пара 25} \celsius}}{\rho_{\text{нас.
+    пара 60} \celsius}} = 0{,}75 \cdot \frac{23{,}000\,\frac{\text{г}}{\text{м}^{3}}}{130{,}000\,\frac{\text{г}}{\text{м}^{3}}} = 0{,}133 \approx 13{,}3\%.
     \end{align*}
 }
 \solutionspace{80pt}
@@ -6698,7 +6698,7 @@
             \draw[-{Latex}] (0, 0) -- (0, 7) node[above left] {$P$};
             \draw[-{Latex}] (0, 0) -- (10, 0) node[right] {$V$};
 
-            \draw[dashed] (0, 2) node[left] {$P_1 = P_0$} -| (3, 0) node[below] {$V_1 = V_2 = V_0$ };
+            \draw[dashed] (0, 2) node[left] {$P_1 = P_0$} -| (3, 0) node[below] {$V_1 = V_2 = V_0$};
             \draw[dashed] (0, 6) node[left] {$P_2 = P_3 = 5P_0$} -| (9, 0) node[below] {$V_3 = 6V_0$};
 
             \draw (3, 2) node[above left]{1} node[below left]{$T_1 = T_0$}
@@ -6776,14 +6776,14 @@
             &= \frac 32 (P\Delta V + V \Delta P) + P \Delta V =  \frac 52 P\Delta V + \frac 32 V \Delta P = \\
             &= \frac 52 P\Delta V + \frac 32 V \cdot \cbr{- \frac{P_0}{V_0} \Delta V} = \frac{\Delta V}2 \cdot \cbr{5P - \frac{P_0}{V_0} V} = \\
             &= \frac{\Delta V}2 \cdot \cbr{5 \cdot \cbr{6P_0 - \frac{P_0}{V_0} V} - \frac{P_0}{V_0} V}
-             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 6 - 8\frac{V}{V_0}}.
+             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 6 - 8\fracV{V_0}}.
         \end{align*}
 
         Таком образом, знак количества теплоты $Q$ на участке 23 зависит от конкретного значения $V$:
         \begin{itemize}
             \item $\Delta V > 0$ на всём участке 23, поскольку газ расширяется,
             \item $P > 0$ — всегда, у нас идеальный газ, удары о стенки сосуда абсолютно упругие, а молекулы не взаимодействуют и поэтому давление только положительно,
-            \item если $5 \cdot 6 - 8\frac{V}{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
+            \item если $5 \cdot 6 - 8\fracV{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
         \end{itemize}
         Решая последнее неравенство, получаем конкретное значение $V^*$: при $V < V^*$ тепло подводят, далее~— отводят.
         Тут *~--- некоторая точка между точками 2 и 3, конкретные значения надо досчитать:
@@ -6807,7 +6807,7 @@
         \eta &= \frac{A_\text{цикл}}{Q_+} = \frac{A_\text{цикл}}{Q_{12} + Q_{2*}}
             = \frac{A_\text{цикл}}{A_{12} + \Delta U_{12} + A_{2*} + \Delta U_{2*}} = \\
             &= \frac{8 \cdot P_0V_0}{0 + 6 \cdot P_0 V_0 + \frac{319}{32} \cdot P_0 V_0 + \frac{165}{32} \cdot P_0 V_0}
-             = \frac{8}{6 + \frac{319}{32} + \frac{165}{32}}
+             = \frac{A_bonus_cycle:LaTeX}{6 + \frac{319}{32} + \frac{165}{32}}
              = \frac{64}{169} \leftarrow \text{вжух и готово!}
         \end{align*}
 }
@@ -6824,22 +6824,22 @@
 \answer{%
     \begin{align*}
     &\text{Значения плотности насыщенного водяного пара определяем по таблице:} \\
-    &\rho_{ \text{ нас.
-    пара 20 } \celsius } = 17{,}300\,\frac{\text{г}}{\text{м}^{3}}, \rho_{ \text{ нас.
-    пара 50 } \celsius } = 83{,}000\,\frac{\text{г}}{\text{м}^{3}}.
+    &\rho_{\text{нас.
+    пара 20} \celsius} = 17{,}300\,\frac{\text{г}}{\text{м}^{3}}, \rho_{\text{нас.
+    пара 50} \celsius} = 83{,}000\,\frac{\text{г}}{\text{м}^{3}}.
     \\
-    \varphi_1 &= \frac{ \rho_\text{ пара } }{ \rho_{ \text{ нас.
-    пара 20 } \celsius } } \implies { \rho_\text{ пара } } = \rho_{ \text{ нас.
-    пара 20 } \celsius } \cdot \varphi_1 = 17{,}300\,\frac{\text{г}}{\text{м}^{3}} \cdot 0{,}50 = 8{,}650\,\frac{\text{г}}{\text{м}^{3}}.
+    \varphi_1 &= \frac{\rho_\text{пара}}{\rho_{\text{нас.
+    пара 20} \celsius}} \implies {\rho_\text{пара}} = \rho_{\text{нас.
+    пара 20} \celsius} \cdot \varphi_1 = 17{,}300\,\frac{\text{г}}{\text{м}^{3}} \cdot 0{,}50 = 8{,}650\,\frac{\text{г}}{\text{м}^{3}}.
     \\
-    &\text{По таблице определяем, при какой температуре пар с такой плотностью станет насыщенным: }  \\
+    &\text{По таблице определяем, при какой температуре пар с такой плотностью станет насыщенным:}  \\
     t_\text{росы} &= 8{,}7\celsius, \\
-    \varphi_2 &= \frac{ \rho_\text{ пара } }{ \rho_{ \text{ нас.
-    пара 50 } \celsius } } = \frac{\rho_{ \text{ нас.
-    пара 20 } \celsius } \cdot \varphi_1}{ \rho_{ \text{ нас.
-    пара 50 } \celsius } }= \varphi_1 \cdot \frac{ \rho_{ \text{ нас.
-    пара 20 } \celsius } }{ \rho_{ \text{ нас.
-    пара 50 } \celsius } } = 0{,}50 \cdot \frac{ 17{,}300\,\frac{\text{г}}{\text{м}^{3}} }{ 83{,}000\,\frac{\text{г}}{\text{м}^{3}} } = 0{,}104 \approx 10{,}4\%.
+    \varphi_2 &= \frac{\rho_\text{пара}}{\rho_{\text{нас.
+    пара 50} \celsius}} = \frac{\rho_{\text{нас.
+    пара 20} \celsius} \cdot \varphi_1}{\rho_{\text{нас.
+    пара 50} \celsius}}= \varphi_1 \cdot \frac{\rho_{\text{нас.
+    пара 20} \celsius}}{\rho_{\text{нас.
+    пара 50} \celsius}} = 0{,}50 \cdot \frac{17{,}300\,\frac{\text{г}}{\text{м}^{3}}}{83{,}000\,\frac{\text{г}}{\text{м}^{3}}} = 0{,}104 \approx 10{,}4\%.
     \end{align*}
 }
 \solutionspace{80pt}
@@ -6906,7 +6906,7 @@
             \draw[-{Latex}] (0, 0) -- (0, 7) node[above left] {$P$};
             \draw[-{Latex}] (0, 0) -- (10, 0) node[right] {$V$};
 
-            \draw[dashed] (0, 2) node[left] {$P_1 = P_0$} -| (3, 0) node[below] {$V_1 = V_2 = V_0$ };
+            \draw[dashed] (0, 2) node[left] {$P_1 = P_0$} -| (3, 0) node[below] {$V_1 = V_2 = V_0$};
             \draw[dashed] (0, 6) node[left] {$P_2 = P_3 = 2P_0$} -| (9, 0) node[below] {$V_3 = 2V_0$};
 
             \draw (3, 2) node[above left]{1} node[below left]{$T_1 = T_0$}
@@ -6984,14 +6984,14 @@
             &= \frac 32 (P\Delta V + V \Delta P) + P \Delta V =  \frac 52 P\Delta V + \frac 32 V \Delta P = \\
             &= \frac 52 P\Delta V + \frac 32 V \cdot \cbr{- \frac{P_0}{V_0} \Delta V} = \frac{\Delta V}2 \cdot \cbr{5P - \frac{P_0}{V_0} V} = \\
             &= \frac{\Delta V}2 \cdot \cbr{5 \cdot \cbr{3P_0 - \frac{P_0}{V_0} V} - \frac{P_0}{V_0} V}
-             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 3 - 8\frac{V}{V_0}}.
+             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 3 - 8\fracV{V_0}}.
         \end{align*}
 
         Таком образом, знак количества теплоты $Q$ на участке 23 зависит от конкретного значения $V$:
         \begin{itemize}
             \item $\Delta V > 0$ на всём участке 23, поскольку газ расширяется,
             \item $P > 0$ — всегда, у нас идеальный газ, удары о стенки сосуда абсолютно упругие, а молекулы не взаимодействуют и поэтому давление только положительно,
-            \item если $5 \cdot 3 - 8\frac{V}{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
+            \item если $5 \cdot 3 - 8\fracV{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
         \end{itemize}
         Решая последнее неравенство, получаем конкретное значение $V^*$: при $V < V^*$ тепло подводят, далее~— отводят.
         Тут *~--- некоторая точка между точками 2 и 3, конкретные значения надо досчитать:
@@ -7015,7 +7015,7 @@
         \eta &= \frac{A_\text{цикл}}{Q_+} = \frac{A_\text{цикл}}{Q_{12} + Q_{2*}}
             = \frac{A_\text{цикл}}{A_{12} + \Delta U_{12} + A_{2*} + \Delta U_{2*}} = \\
             &= \frac{\frac12 \cdot P_0V_0}{0 + \frac32 \cdot P_0 V_0 + \frac{175}{128} \cdot P_0 V_0 + \frac{21}{128} \cdot P_0 V_0}
-             = \frac{\frac12}{\frac32 + \frac{175}{128} + \frac{21}{128}}
+             = \frac{A_bonus_cycle:LaTeX}{\frac32 + \frac{175}{128} + \frac{21}{128}}
              = \frac{16}{97} \leftarrow \text{вжух и готово!}
         \end{align*}
 }
@@ -7032,22 +7032,22 @@
 \answer{%
     \begin{align*}
     &\text{Значения плотности насыщенного водяного пара определяем по таблице:} \\
-    &\rho_{ \text{ нас.
-    пара 30 } \celsius } = 30{,}300\,\frac{\text{г}}{\text{м}^{3}}, \rho_{ \text{ нас.
-    пара 60 } \celsius } = 130{,}000\,\frac{\text{г}}{\text{м}^{3}}.
+    &\rho_{\text{нас.
+    пара 30} \celsius} = 30{,}300\,\frac{\text{г}}{\text{м}^{3}}, \rho_{\text{нас.
+    пара 60} \celsius} = 130{,}000\,\frac{\text{г}}{\text{м}^{3}}.
     \\
-    \varphi_1 &= \frac{ \rho_\text{ пара } }{ \rho_{ \text{ нас.
-    пара 30 } \celsius } } \implies { \rho_\text{ пара } } = \rho_{ \text{ нас.
-    пара 30 } \celsius } \cdot \varphi_1 = 30{,}300\,\frac{\text{г}}{\text{м}^{3}} \cdot 0{,}50 = 15{,}150\,\frac{\text{г}}{\text{м}^{3}}.
+    \varphi_1 &= \frac{\rho_\text{пара}}{\rho_{\text{нас.
+    пара 30} \celsius}} \implies {\rho_\text{пара}} = \rho_{\text{нас.
+    пара 30} \celsius} \cdot \varphi_1 = 30{,}300\,\frac{\text{г}}{\text{м}^{3}} \cdot 0{,}50 = 15{,}150\,\frac{\text{г}}{\text{м}^{3}}.
     \\
-    &\text{По таблице определяем, при какой температуре пар с такой плотностью станет насыщенным: }  \\
+    &\text{По таблице определяем, при какой температуре пар с такой плотностью станет насыщенным:}  \\
     t_\text{росы} &= 17{,}7\celsius, \\
-    \varphi_2 &= \frac{ \rho_\text{ пара } }{ \rho_{ \text{ нас.
-    пара 60 } \celsius } } = \frac{\rho_{ \text{ нас.
-    пара 30 } \celsius } \cdot \varphi_1}{ \rho_{ \text{ нас.
-    пара 60 } \celsius } }= \varphi_1 \cdot \frac{ \rho_{ \text{ нас.
-    пара 30 } \celsius } }{ \rho_{ \text{ нас.
-    пара 60 } \celsius } } = 0{,}50 \cdot \frac{ 30{,}300\,\frac{\text{г}}{\text{м}^{3}} }{ 130{,}000\,\frac{\text{г}}{\text{м}^{3}} } = 0{,}117 \approx 11{,}7\%.
+    \varphi_2 &= \frac{\rho_\text{пара}}{\rho_{\text{нас.
+    пара 60} \celsius}} = \frac{\rho_{\text{нас.
+    пара 30} \celsius} \cdot \varphi_1}{\rho_{\text{нас.
+    пара 60} \celsius}}= \varphi_1 \cdot \frac{\rho_{\text{нас.
+    пара 30} \celsius}}{\rho_{\text{нас.
+    пара 60} \celsius}} = 0{,}50 \cdot \frac{30{,}300\,\frac{\text{г}}{\text{м}^{3}}}{130{,}000\,\frac{\text{г}}{\text{м}^{3}}} = 0{,}117 \approx 11{,}7\%.
     \end{align*}
 }
 \solutionspace{80pt}
@@ -7114,7 +7114,7 @@
             \draw[-{Latex}] (0, 0) -- (0, 7) node[above left] {$P$};
             \draw[-{Latex}] (0, 0) -- (10, 0) node[right] {$V$};
 
-            \draw[dashed] (0, 2) node[left] {$P_1 = P_0$} -| (3, 0) node[below] {$V_1 = V_2 = V_0$ };
+            \draw[dashed] (0, 2) node[left] {$P_1 = P_0$} -| (3, 0) node[below] {$V_1 = V_2 = V_0$};
             \draw[dashed] (0, 6) node[left] {$P_2 = P_3 = 5P_0$} -| (9, 0) node[below] {$V_3 = 6V_0$};
 
             \draw (3, 2) node[above left]{1} node[below left]{$T_1 = T_0$}
@@ -7192,14 +7192,14 @@
             &= \frac 32 (P\Delta V + V \Delta P) + P \Delta V =  \frac 52 P\Delta V + \frac 32 V \Delta P = \\
             &= \frac 52 P\Delta V + \frac 32 V \cdot \cbr{- \frac{P_0}{V_0} \Delta V} = \frac{\Delta V}2 \cdot \cbr{5P - \frac{P_0}{V_0} V} = \\
             &= \frac{\Delta V}2 \cdot \cbr{5 \cdot \cbr{6P_0 - \frac{P_0}{V_0} V} - \frac{P_0}{V_0} V}
-             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 6 - 8\frac{V}{V_0}}.
+             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 6 - 8\fracV{V_0}}.
         \end{align*}
 
         Таком образом, знак количества теплоты $Q$ на участке 23 зависит от конкретного значения $V$:
         \begin{itemize}
             \item $\Delta V > 0$ на всём участке 23, поскольку газ расширяется,
             \item $P > 0$ — всегда, у нас идеальный газ, удары о стенки сосуда абсолютно упругие, а молекулы не взаимодействуют и поэтому давление только положительно,
-            \item если $5 \cdot 6 - 8\frac{V}{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
+            \item если $5 \cdot 6 - 8\fracV{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
         \end{itemize}
         Решая последнее неравенство, получаем конкретное значение $V^*$: при $V < V^*$ тепло подводят, далее~— отводят.
         Тут *~--- некоторая точка между точками 2 и 3, конкретные значения надо досчитать:
@@ -7223,7 +7223,7 @@
         \eta &= \frac{A_\text{цикл}}{Q_+} = \frac{A_\text{цикл}}{Q_{12} + Q_{2*}}
             = \frac{A_\text{цикл}}{A_{12} + \Delta U_{12} + A_{2*} + \Delta U_{2*}} = \\
             &= \frac{8 \cdot P_0V_0}{0 + 6 \cdot P_0 V_0 + \frac{319}{32} \cdot P_0 V_0 + \frac{165}{32} \cdot P_0 V_0}
-             = \frac{8}{6 + \frac{319}{32} + \frac{165}{32}}
+             = \frac{A_bonus_cycle:LaTeX}{6 + \frac{319}{32} + \frac{165}{32}}
              = \frac{64}{169} \leftarrow \text{вжух и готово!}
         \end{align*}
 }
@@ -7240,22 +7240,22 @@
 \answer{%
     \begin{align*}
     &\text{Значения плотности насыщенного водяного пара определяем по таблице:} \\
-    &\rho_{ \text{ нас.
-    пара 30 } \celsius } = 30{,}300\,\frac{\text{г}}{\text{м}^{3}}, \rho_{ \text{ нас.
-    пара 50 } \celsius } = 83{,}000\,\frac{\text{г}}{\text{м}^{3}}.
+    &\rho_{\text{нас.
+    пара 30} \celsius} = 30{,}300\,\frac{\text{г}}{\text{м}^{3}}, \rho_{\text{нас.
+    пара 50} \celsius} = 83{,}000\,\frac{\text{г}}{\text{м}^{3}}.
     \\
-    \varphi_1 &= \frac{ \rho_\text{ пара } }{ \rho_{ \text{ нас.
-    пара 30 } \celsius } } \implies { \rho_\text{ пара } } = \rho_{ \text{ нас.
-    пара 30 } \celsius } \cdot \varphi_1 = 30{,}300\,\frac{\text{г}}{\text{м}^{3}} \cdot 0{,}65 = 19{,}695\,\frac{\text{г}}{\text{м}^{3}}.
+    \varphi_1 &= \frac{\rho_\text{пара}}{\rho_{\text{нас.
+    пара 30} \celsius}} \implies {\rho_\text{пара}} = \rho_{\text{нас.
+    пара 30} \celsius} \cdot \varphi_1 = 30{,}300\,\frac{\text{г}}{\text{м}^{3}} \cdot 0{,}65 = 19{,}695\,\frac{\text{г}}{\text{м}^{3}}.
     \\
-    &\text{По таблице определяем, при какой температуре пар с такой плотностью станет насыщенным: }  \\
+    &\text{По таблице определяем, при какой температуре пар с такой плотностью станет насыщенным:}  \\
     t_\text{росы} &= 22{,}2\celsius, \\
-    \varphi_2 &= \frac{ \rho_\text{ пара } }{ \rho_{ \text{ нас.
-    пара 50 } \celsius } } = \frac{\rho_{ \text{ нас.
-    пара 30 } \celsius } \cdot \varphi_1}{ \rho_{ \text{ нас.
-    пара 50 } \celsius } }= \varphi_1 \cdot \frac{ \rho_{ \text{ нас.
-    пара 30 } \celsius } }{ \rho_{ \text{ нас.
-    пара 50 } \celsius } } = 0{,}65 \cdot \frac{ 30{,}300\,\frac{\text{г}}{\text{м}^{3}} }{ 83{,}000\,\frac{\text{г}}{\text{м}^{3}} } = 0{,}237 \approx 23{,}7\%.
+    \varphi_2 &= \frac{\rho_\text{пара}}{\rho_{\text{нас.
+    пара 50} \celsius}} = \frac{\rho_{\text{нас.
+    пара 30} \celsius} \cdot \varphi_1}{\rho_{\text{нас.
+    пара 50} \celsius}}= \varphi_1 \cdot \frac{\rho_{\text{нас.
+    пара 30} \celsius}}{\rho_{\text{нас.
+    пара 50} \celsius}} = 0{,}65 \cdot \frac{30{,}300\,\frac{\text{г}}{\text{м}^{3}}}{83{,}000\,\frac{\text{г}}{\text{м}^{3}}} = 0{,}237 \approx 23{,}7\%.
     \end{align*}
 }
 \solutionspace{80pt}
@@ -7322,7 +7322,7 @@
             \draw[-{Latex}] (0, 0) -- (0, 7) node[above left] {$P$};
             \draw[-{Latex}] (0, 0) -- (10, 0) node[right] {$V$};
 
-            \draw[dashed] (0, 2) node[left] {$P_1 = P_0$} -| (3, 0) node[below] {$V_1 = V_2 = V_0$ };
+            \draw[dashed] (0, 2) node[left] {$P_1 = P_0$} -| (3, 0) node[below] {$V_1 = V_2 = V_0$};
             \draw[dashed] (0, 6) node[left] {$P_2 = P_3 = 5P_0$} -| (9, 0) node[below] {$V_3 = 2V_0$};
 
             \draw (3, 2) node[above left]{1} node[below left]{$T_1 = T_0$}
@@ -7400,14 +7400,14 @@
             &= \frac 32 (P\Delta V + V \Delta P) + P \Delta V =  \frac 52 P\Delta V + \frac 32 V \Delta P = \\
             &= \frac 52 P\Delta V + \frac 32 V \cdot \cbr{- \frac{P_0}{V_0} \Delta V} = \frac{\Delta V}2 \cdot \cbr{5P - \frac{P_0}{V_0} V} = \\
             &= \frac{\Delta V}2 \cdot \cbr{5 \cdot \cbr{6P_0 - \frac{P_0}{V_0} V} - \frac{P_0}{V_0} V}
-             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 6 - 8\frac{V}{V_0}}.
+             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 6 - 8\fracV{V_0}}.
         \end{align*}
 
         Таком образом, знак количества теплоты $Q$ на участке 23 зависит от конкретного значения $V$:
         \begin{itemize}
             \item $\Delta V > 0$ на всём участке 23, поскольку газ расширяется,
             \item $P > 0$ — всегда, у нас идеальный газ, удары о стенки сосуда абсолютно упругие, а молекулы не взаимодействуют и поэтому давление только положительно,
-            \item если $5 \cdot 6 - 8\frac{V}{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
+            \item если $5 \cdot 6 - 8\fracV{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
         \end{itemize}
         Решая последнее неравенство, получаем конкретное значение $V^*$: при $V < V^*$ тепло подводят, далее~— отводят.
         Тут *~--- некоторая точка между точками 2 и 3, конкретные значения надо досчитать:
@@ -7431,7 +7431,7 @@
         \eta &= \frac{A_\text{цикл}}{Q_+} = \frac{A_\text{цикл}}{Q_{12} + Q_{2*}}
             = \frac{A_\text{цикл}}{A_{12} + \Delta U_{12} + A_{2*} + \Delta U_{2*}} = \\
             &= \frac{8 \cdot P_0V_0}{0 + 6 \cdot P_0 V_0 + \frac{319}{32} \cdot P_0 V_0 + \frac{165}{32} \cdot P_0 V_0}
-             = \frac{8}{6 + \frac{319}{32} + \frac{165}{32}}
+             = \frac{A_bonus_cycle:LaTeX}{6 + \frac{319}{32} + \frac{165}{32}}
              = \frac{64}{169} \leftarrow \text{вжух и готово!}
         \end{align*}
 }
@@ -7448,22 +7448,22 @@
 \answer{%
     \begin{align*}
     &\text{Значения плотности насыщенного водяного пара определяем по таблице:} \\
-    &\rho_{ \text{ нас.
-    пара 25 } \celsius } = 23{,}000\,\frac{\text{г}}{\text{м}^{3}}, \rho_{ \text{ нас.
-    пара 70 } \celsius } = 198{,}000\,\frac{\text{г}}{\text{м}^{3}}.
+    &\rho_{\text{нас.
+    пара 25} \celsius} = 23{,}000\,\frac{\text{г}}{\text{м}^{3}}, \rho_{\text{нас.
+    пара 70} \celsius} = 198{,}000\,\frac{\text{г}}{\text{м}^{3}}.
     \\
-    \varphi_1 &= \frac{ \rho_\text{ пара } }{ \rho_{ \text{ нас.
-    пара 25 } \celsius } } \implies { \rho_\text{ пара } } = \rho_{ \text{ нас.
-    пара 25 } \celsius } \cdot \varphi_1 = 23{,}000\,\frac{\text{г}}{\text{м}^{3}} \cdot 0{,}70 = 16{,}100\,\frac{\text{г}}{\text{м}^{3}}.
+    \varphi_1 &= \frac{\rho_\text{пара}}{\rho_{\text{нас.
+    пара 25} \celsius}} \implies {\rho_\text{пара}} = \rho_{\text{нас.
+    пара 25} \celsius} \cdot \varphi_1 = 23{,}000\,\frac{\text{г}}{\text{м}^{3}} \cdot 0{,}70 = 16{,}100\,\frac{\text{г}}{\text{м}^{3}}.
     \\
-    &\text{По таблице определяем, при какой температуре пар с такой плотностью станет насыщенным: }  \\
+    &\text{По таблице определяем, при какой температуре пар с такой плотностью станет насыщенным:}  \\
     t_\text{росы} &= 18{,}8\celsius, \\
-    \varphi_2 &= \frac{ \rho_\text{ пара } }{ \rho_{ \text{ нас.
-    пара 70 } \celsius } } = \frac{\rho_{ \text{ нас.
-    пара 25 } \celsius } \cdot \varphi_1}{ \rho_{ \text{ нас.
-    пара 70 } \celsius } }= \varphi_1 \cdot \frac{ \rho_{ \text{ нас.
-    пара 25 } \celsius } }{ \rho_{ \text{ нас.
-    пара 70 } \celsius } } = 0{,}70 \cdot \frac{ 23{,}000\,\frac{\text{г}}{\text{м}^{3}} }{ 198{,}000\,\frac{\text{г}}{\text{м}^{3}} } = 0{,}081 \approx 8{,}1\%.
+    \varphi_2 &= \frac{\rho_\text{пара}}{\rho_{\text{нас.
+    пара 70} \celsius}} = \frac{\rho_{\text{нас.
+    пара 25} \celsius} \cdot \varphi_1}{\rho_{\text{нас.
+    пара 70} \celsius}}= \varphi_1 \cdot \frac{\rho_{\text{нас.
+    пара 25} \celsius}}{\rho_{\text{нас.
+    пара 70} \celsius}} = 0{,}70 \cdot \frac{23{,}000\,\frac{\text{г}}{\text{м}^{3}}}{198{,}000\,\frac{\text{г}}{\text{м}^{3}}} = 0{,}081 \approx 8{,}1\%.
     \end{align*}
 }
 \solutionspace{80pt}

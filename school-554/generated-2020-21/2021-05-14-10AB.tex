@@ -9,7 +9,7 @@
     Определите, в каком резисторе выделяется большая тепловая мощность и во сколько раз?
 }
 \answer{%
-    Подключены последовательно, поэтому  $\eli_1 = \eli_2 = \eli \implies \frac{P_2}{P_1} = \frac{ \eli_2^2 R_2 }{ \eli_1^2 R_1 } = \frac{ \eli_2^2R_2 }{ \eli_1R_1 } = \frac{ R_2 }{ R_1 } = \frac85$.
+    Подключены последовательно, поэтому  $\eli_1 = \eli_2 = \eli \implies \frac{P_2}{P_1} = \frac{\eli_2^2 R_2}{\eli_1^2 R_1} = \frac{\eli_2^2R_2}{\eli_1R_1} = \frac{R_2}{R_1} = \frac85$.
 }
 \solutionspace{120pt}
 
@@ -81,9 +81,9 @@
     \begin{tikzpicture}[circuit ee IEC, thick]
         \draw  (0, 0) -- ++(up:2)
                 to [
-                    battery={very near start, rotate=-180, info={$\ele_1, r_1 $}},
-                    resistor={midway, info=$R_1$},
-                    battery={very near end, rotate=0, info={$\ele_2, r_2 $}}
+                    battery={ very near start, rotate=-180, info={$\ele_1, r_1 $}},
+                    resistor={ midway, info=$R_1$},
+                    battery={ very near end, rotate=0, info={$\ele_2, r_2 $}}
                 ] ++(right:5)
                 -- ++(down:2)
                 to [resistor={info=$R_2$}] ++(left:5);
@@ -99,9 +99,9 @@
     \begin{tikzpicture}[circuit ee IEC, thick]
         \draw  (0, 0) -- ++(up:2)
                 to [
-                    battery={very near start, rotate=-180, info={$\ele_1, r_1 $}},
-                    resistor={midway, info=$R_1$},
-                    battery={very near end, rotate=0, info={$\ele_2, r_2 $}}
+                    battery={ very near start, rotate=-180, info={$\ele_1, r_1 $}},
+                    resistor={ midway, info=$R_1$},
+                    battery={ very near end, rotate=0, info={$\ele_2, r_2 $}}
                 ] ++(right:5)
                 -- ++(down:2)
                 to [resistor={info=$R_2$}, current direction={near end, info=$\eli$}] ++(left:5);
@@ -111,9 +111,9 @@
     \begin{align*}
         & \ele_1 - \ele_2 = \eli R_1 + \eli r_2 + \eli R_2 + \eli r_1, \\
         & \ele_1 - \ele_2 = \eli (R_1 + r_2 + R_2 + r_1), \\
-        &\eli = \frac{ \ele_1 - \ele_2}{R_1 + r_2 + R_2 + r_1}, \\
-        &U_1 = \eli R_1 = \frac{ \ele_1 - \ele_2}{R_1 + r_2 + R_2 + r_1} \cdot R_1, \\
-        &P_1 = \eli^2 R_1 = \frac{\sqr{ \ele_1 - \ele_2} R_1}{\sqr{R_1 + r_2 + R_2 + r_1}}.
+        &\eli = \frac{ \ele_1 - \ele_2 }{ R_1 + r_2 + R_2 + r_1 }, \\
+        &U_1 = \eli R_1 = \frac{ \ele_1 - \ele_2 }{ R_1 + r_2 + R_2 + r_1 } \cdot R_1, \\
+        &P_1 = \eli^2 R_1 = \frac{\sqr{ \ele_1 - \ele_2 } R_1}{ \sqr{ R_1 + r_2 + R_2 + r_1 }}.
     \end{align*}
 
     Отметим, что ответ для тока $\eli$ меняет знак, если отметить его на рисунке в другую сторону.
@@ -132,7 +132,7 @@
     Определите, в каком резисторе выделяется большая тепловая мощность и во сколько раз?
 }
 \answer{%
-    Подключены последовательно, поэтому  $\eli_1 = \eli_2 = \eli \implies \frac{P_2}{P_1} = \frac{ \eli_2^2 R_2 }{ \eli_1^2 R_1 } = \frac{ \eli_2^2R_2 }{ \eli_1R_1 } = \frac{ R_2 }{ R_1 } = \frac25$.
+    Подключены последовательно, поэтому  $\eli_1 = \eli_2 = \eli \implies \frac{P_2}{P_1} = \frac{\eli_2^2 R_2}{\eli_1^2 R_1} = \frac{\eli_2^2R_2}{\eli_1R_1} = \frac{R_2}{R_1} = \frac25$.
 }
 \solutionspace{120pt}
 
@@ -204,9 +204,9 @@
     \begin{tikzpicture}[circuit ee IEC, thick]
         \draw  (0, 0) -- ++(up:2)
                 to [
-                    battery={very near start, rotate=0, info={$\ele_1, r_1 $}},
-                    resistor={midway, info=$R_1$},
-                    battery={very near end, rotate=0, info={$\ele_2, r_2 $}}
+                    battery={ very near start, rotate=0, info={$\ele_1, r_1 $}},
+                    resistor={ midway, info=$R_1$},
+                    battery={ very near end, rotate=0, info={$\ele_2, r_2 $}}
                 ] ++(right:5)
                 -- ++(down:2)
                 to [resistor={info=$R_2$}] ++(left:5);
@@ -222,9 +222,9 @@
     \begin{tikzpicture}[circuit ee IEC, thick]
         \draw  (0, 0) -- ++(up:2)
                 to [
-                    battery={very near start, rotate=0, info={$\ele_1, r_1 $}},
-                    resistor={midway, info=$R_1$},
-                    battery={very near end, rotate=0, info={$\ele_2, r_2 $}}
+                    battery={ very near start, rotate=0, info={$\ele_1, r_1 $}},
+                    resistor={ midway, info=$R_1$},
+                    battery={ very near end, rotate=0, info={$\ele_2, r_2 $}}
                 ] ++(right:5)
                 -- ++(down:2)
                 to [resistor={info=$R_2$}, current direction={near end, info=$\eli$}] ++(left:5);
@@ -234,9 +234,9 @@
     \begin{align*}
         &- \ele_1 - \ele_2 = \eli R_1 + \eli r_2 + \eli R_2 + \eli r_1, \\
         &- \ele_1 - \ele_2 = \eli (R_1 + r_2 + R_2 + r_1), \\
-        &\eli = \frac{- \ele_1 - \ele_2}{R_1 + r_2 + R_2 + r_1}, \\
-        &U_2 = \eli R_2 = \frac{- \ele_1 - \ele_2}{R_1 + r_2 + R_2 + r_1} \cdot R_2, \\
-        &P_2 = \eli^2 R_2 = \frac{\sqr{- \ele_1 - \ele_2} R_2}{\sqr{R_1 + r_2 + R_2 + r_1}}.
+        &\eli = \frac{- \ele_1 - \ele_2 }{ R_1 + r_2 + R_2 + r_1 }, \\
+        &U_2 = \eli R_2 = \frac{- \ele_1 - \ele_2 }{ R_1 + r_2 + R_2 + r_1 } \cdot R_2, \\
+        &P_2 = \eli^2 R_2 = \frac{\sqr{- \ele_1 - \ele_2 } R_2}{ \sqr{ R_1 + r_2 + R_2 + r_1 }}.
     \end{align*}
 
     Отметим, что ответ для тока $\eli$ меняет знак, если отметить его на рисунке в другую сторону.
@@ -255,7 +255,7 @@
     Определите, в каком резисторе выделяется большая тепловая мощность и во сколько раз?
 }
 \answer{%
-    Подключены параллельно, поэтому  $U_1 = U_2 = U \implies \frac{P_2}{P_1} = \frac{ \frac{ U_2^2 }{ R_2 } }{ \frac{ U_1^2 }{ R_1 } } = \frac{ U^2R_1 }{ U^2R_2 } = \frac{ R_1 }{ R_2 } = \frac52$.
+    Подключены параллельно, поэтому  $U_1 = U_2 = U \implies \frac{P_2}{P_1} = \frac{\frac{U_2^2}{R_2}}{\frac{U_1^2}{R_1}} = \frac{U^2R_1}{U^2R_2} = \frac{R_1}{R_2} = \frac52$.
 }
 \solutionspace{120pt}
 
@@ -327,9 +327,9 @@
     \begin{tikzpicture}[circuit ee IEC, thick]
         \draw  (0, 0) -- ++(up:2)
                 to [
-                    battery={very near start, rotate=0, info={$\ele_1, r_1 $}},
-                    resistor={midway, info=$R_1$},
-                    battery={very near end, rotate=0, info={$\ele_2, r_2 $}}
+                    battery={ very near start, rotate=0, info={$\ele_1, r_1 $}},
+                    resistor={ midway, info=$R_1$},
+                    battery={ very near end, rotate=0, info={$\ele_2, r_2 $}}
                 ] ++(right:5)
                 -- ++(down:2)
                 to [resistor={info=$R_2$}] ++(left:5);
@@ -345,9 +345,9 @@
     \begin{tikzpicture}[circuit ee IEC, thick]
         \draw  (0, 0) -- ++(up:2)
                 to [
-                    battery={very near start, rotate=0, info={$\ele_1, r_1 $}},
-                    resistor={midway, info=$R_1$},
-                    battery={very near end, rotate=0, info={$\ele_2, r_2 $}}
+                    battery={ very near start, rotate=0, info={$\ele_1, r_1 $}},
+                    resistor={ midway, info=$R_1$},
+                    battery={ very near end, rotate=0, info={$\ele_2, r_2 $}}
                 ] ++(right:5)
                 -- ++(down:2)
                 to [resistor={info=$R_2$}, current direction={near end, info=$\eli$}] ++(left:5);
@@ -357,9 +357,9 @@
     \begin{align*}
         &- \ele_1 - \ele_2 = \eli R_1 + \eli r_2 + \eli R_2 + \eli r_1, \\
         &- \ele_1 - \ele_2 = \eli (R_1 + r_2 + R_2 + r_1), \\
-        &\eli = \frac{- \ele_1 - \ele_2}{R_1 + r_2 + R_2 + r_1}, \\
-        &U_1 = \eli R_1 = \frac{- \ele_1 - \ele_2}{R_1 + r_2 + R_2 + r_1} \cdot R_1, \\
-        &P_1 = \eli^2 R_1 = \frac{\sqr{- \ele_1 - \ele_2} R_1}{\sqr{R_1 + r_2 + R_2 + r_1}}.
+        &\eli = \frac{- \ele_1 - \ele_2 }{ R_1 + r_2 + R_2 + r_1 }, \\
+        &U_1 = \eli R_1 = \frac{- \ele_1 - \ele_2 }{ R_1 + r_2 + R_2 + r_1 } \cdot R_1, \\
+        &P_1 = \eli^2 R_1 = \frac{\sqr{- \ele_1 - \ele_2 } R_1}{ \sqr{ R_1 + r_2 + R_2 + r_1 }}.
     \end{align*}
 
     Отметим, что ответ для тока $\eli$ меняет знак, если отметить его на рисунке в другую сторону.
@@ -378,7 +378,7 @@
     Определите, в каком резисторе выделяется большая тепловая мощность и во сколько раз?
 }
 \answer{%
-    Подключены параллельно, поэтому  $U_1 = U_2 = U \implies \frac{P_2}{P_1} = \frac{ \frac{ U_2^2 }{ R_2 } }{ \frac{ U_1^2 }{ R_1 } } = \frac{ U^2R_1 }{ U^2R_2 } = \frac{ R_1 }{ R_2 } = \frac32$.
+    Подключены параллельно, поэтому  $U_1 = U_2 = U \implies \frac{P_2}{P_1} = \frac{\frac{U_2^2}{R_2}}{\frac{U_1^2}{R_1}} = \frac{U^2R_1}{U^2R_2} = \frac{R_1}{R_2} = \frac32$.
 }
 \solutionspace{120pt}
 
@@ -450,9 +450,9 @@
     \begin{tikzpicture}[circuit ee IEC, thick]
         \draw  (0, 0) -- ++(up:2)
                 to [
-                    battery={very near start, rotate=0, info={$\ele_1, r_1 $}},
-                    resistor={midway, info=$R_1$},
-                    battery={very near end, rotate=-180, info={$\ele_2, r_2 $}}
+                    battery={ very near start, rotate=0, info={$\ele_1, r_1 $}},
+                    resistor={ midway, info=$R_1$},
+                    battery={ very near end, rotate=-180, info={$\ele_2, r_2 $}}
                 ] ++(right:5)
                 -- ++(down:2)
                 to [resistor={info=$R_2$}] ++(left:5);
@@ -468,9 +468,9 @@
     \begin{tikzpicture}[circuit ee IEC, thick]
         \draw  (0, 0) -- ++(up:2)
                 to [
-                    battery={very near start, rotate=0, info={$\ele_1, r_1 $}},
-                    resistor={midway, info=$R_1$},
-                    battery={very near end, rotate=-180, info={$\ele_2, r_2 $}}
+                    battery={ very near start, rotate=0, info={$\ele_1, r_1 $}},
+                    resistor={ midway, info=$R_1$},
+                    battery={ very near end, rotate=-180, info={$\ele_2, r_2 $}}
                 ] ++(right:5)
                 -- ++(down:2)
                 to [resistor={info=$R_2$}, current direction={near end, info=$\eli$}] ++(left:5);
@@ -480,9 +480,9 @@
     \begin{align*}
         &- \ele_1 +  \ele_2 = \eli R_1 + \eli r_2 + \eli R_2 + \eli r_1, \\
         &- \ele_1 +  \ele_2 = \eli (R_1 + r_2 + R_2 + r_1), \\
-        &\eli = \frac{- \ele_1 +  \ele_2}{R_1 + r_2 + R_2 + r_1}, \\
-        &U_1 = \eli R_1 = \frac{- \ele_1 +  \ele_2}{R_1 + r_2 + R_2 + r_1} \cdot R_1, \\
-        &P_1 = \eli^2 R_1 = \frac{\sqr{- \ele_1 +  \ele_2} R_1}{\sqr{R_1 + r_2 + R_2 + r_1}}.
+        &\eli = \frac{- \ele_1 +  \ele_2 }{ R_1 + r_2 + R_2 + r_1 }, \\
+        &U_1 = \eli R_1 = \frac{- \ele_1 +  \ele_2 }{ R_1 + r_2 + R_2 + r_1 } \cdot R_1, \\
+        &P_1 = \eli^2 R_1 = \frac{\sqr{- \ele_1 +  \ele_2 } R_1}{ \sqr{ R_1 + r_2 + R_2 + r_1 }}.
     \end{align*}
 
     Отметим, что ответ для тока $\eli$ меняет знак, если отметить его на рисунке в другую сторону.
@@ -501,7 +501,7 @@
     Определите, в каком резисторе выделяется большая тепловая мощность и во сколько раз?
 }
 \answer{%
-    Подключены последовательно, поэтому  $\eli_1 = \eli_2 = \eli \implies \frac{P_2}{P_1} = \frac{ \eli_2^2 R_2 }{ \eli_1^2 R_1 } = \frac{ \eli_2^2R_2 }{ \eli_1R_1 } = \frac{ R_2 }{ R_1 } = \frac25$.
+    Подключены последовательно, поэтому  $\eli_1 = \eli_2 = \eli \implies \frac{P_2}{P_1} = \frac{\eli_2^2 R_2}{\eli_1^2 R_1} = \frac{\eli_2^2R_2}{\eli_1R_1} = \frac{R_2}{R_1} = \frac25$.
 }
 \solutionspace{120pt}
 
@@ -573,9 +573,9 @@
     \begin{tikzpicture}[circuit ee IEC, thick]
         \draw  (0, 0) -- ++(up:2)
                 to [
-                    battery={very near start, rotate=-180, info={$\ele_1, r_1 $}},
-                    resistor={midway, info=$R_1$},
-                    battery={very near end, rotate=-180, info={$\ele_2, r_2 $}}
+                    battery={ very near start, rotate=-180, info={$\ele_1, r_1 $}},
+                    resistor={ midway, info=$R_1$},
+                    battery={ very near end, rotate=-180, info={$\ele_2, r_2 $}}
                 ] ++(right:5)
                 -- ++(down:2)
                 to [resistor={info=$R_2$}] ++(left:5);
@@ -591,9 +591,9 @@
     \begin{tikzpicture}[circuit ee IEC, thick]
         \draw  (0, 0) -- ++(up:2)
                 to [
-                    battery={very near start, rotate=-180, info={$\ele_1, r_1 $}},
-                    resistor={midway, info=$R_1$},
-                    battery={very near end, rotate=-180, info={$\ele_2, r_2 $}}
+                    battery={ very near start, rotate=-180, info={$\ele_1, r_1 $}},
+                    resistor={ midway, info=$R_1$},
+                    battery={ very near end, rotate=-180, info={$\ele_2, r_2 $}}
                 ] ++(right:5)
                 -- ++(down:2)
                 to [resistor={info=$R_2$}, current direction={near end, info=$\eli$}] ++(left:5);
@@ -603,9 +603,9 @@
     \begin{align*}
         & \ele_1 +  \ele_2 = \eli R_1 + \eli r_2 + \eli R_2 + \eli r_1, \\
         & \ele_1 +  \ele_2 = \eli (R_1 + r_2 + R_2 + r_1), \\
-        &\eli = \frac{ \ele_1 +  \ele_2}{R_1 + r_2 + R_2 + r_1}, \\
-        &U_2 = \eli R_2 = \frac{ \ele_1 +  \ele_2}{R_1 + r_2 + R_2 + r_1} \cdot R_2, \\
-        &P_2 = \eli^2 R_2 = \frac{\sqr{ \ele_1 +  \ele_2} R_2}{\sqr{R_1 + r_2 + R_2 + r_1}}.
+        &\eli = \frac{ \ele_1 +  \ele_2 }{ R_1 + r_2 + R_2 + r_1 }, \\
+        &U_2 = \eli R_2 = \frac{ \ele_1 +  \ele_2 }{ R_1 + r_2 + R_2 + r_1 } \cdot R_2, \\
+        &P_2 = \eli^2 R_2 = \frac{\sqr{ \ele_1 +  \ele_2 } R_2}{ \sqr{ R_1 + r_2 + R_2 + r_1 }}.
     \end{align*}
 
     Отметим, что ответ для тока $\eli$ меняет знак, если отметить его на рисунке в другую сторону.
@@ -624,7 +624,7 @@
     Определите, в каком резисторе выделяется большая тепловая мощность и во сколько раз?
 }
 \answer{%
-    Подключены последовательно, поэтому  $\eli_1 = \eli_2 = \eli \implies \frac{P_2}{P_1} = \frac{ \eli_2^2 R_2 }{ \eli_1^2 R_1 } = \frac{ \eli_2^2R_2 }{ \eli_1R_1 } = \frac{ R_2 }{ R_1 } = \frac25$.
+    Подключены последовательно, поэтому  $\eli_1 = \eli_2 = \eli \implies \frac{P_2}{P_1} = \frac{\eli_2^2 R_2}{\eli_1^2 R_1} = \frac{\eli_2^2R_2}{\eli_1R_1} = \frac{R_2}{R_1} = \frac25$.
 }
 \solutionspace{120pt}
 
@@ -696,9 +696,9 @@
     \begin{tikzpicture}[circuit ee IEC, thick]
         \draw  (0, 0) -- ++(up:2)
                 to [
-                    battery={very near start, rotate=0, info={$\ele_1, r_1 $}},
-                    resistor={midway, info=$R_1$},
-                    battery={very near end, rotate=0, info={$\ele_2, r_2 $}}
+                    battery={ very near start, rotate=0, info={$\ele_1, r_1 $}},
+                    resistor={ midway, info=$R_1$},
+                    battery={ very near end, rotate=0, info={$\ele_2, r_2 $}}
                 ] ++(right:5)
                 -- ++(down:2)
                 to [resistor={info=$R_2$}] ++(left:5);
@@ -714,9 +714,9 @@
     \begin{tikzpicture}[circuit ee IEC, thick]
         \draw  (0, 0) -- ++(up:2)
                 to [
-                    battery={very near start, rotate=0, info={$\ele_1, r_1 $}},
-                    resistor={midway, info=$R_1$},
-                    battery={very near end, rotate=0, info={$\ele_2, r_2 $}}
+                    battery={ very near start, rotate=0, info={$\ele_1, r_1 $}},
+                    resistor={ midway, info=$R_1$},
+                    battery={ very near end, rotate=0, info={$\ele_2, r_2 $}}
                 ] ++(right:5)
                 -- ++(down:2)
                 to [resistor={info=$R_2$}, current direction={near end, info=$\eli$}] ++(left:5);
@@ -726,9 +726,9 @@
     \begin{align*}
         &- \ele_1 - \ele_2 = \eli R_1 + \eli r_2 + \eli R_2 + \eli r_1, \\
         &- \ele_1 - \ele_2 = \eli (R_1 + r_2 + R_2 + r_1), \\
-        &\eli = \frac{- \ele_1 - \ele_2}{R_1 + r_2 + R_2 + r_1}, \\
-        &U_2 = \eli R_2 = \frac{- \ele_1 - \ele_2}{R_1 + r_2 + R_2 + r_1} \cdot R_2, \\
-        &P_2 = \eli^2 R_2 = \frac{\sqr{- \ele_1 - \ele_2} R_2}{\sqr{R_1 + r_2 + R_2 + r_1}}.
+        &\eli = \frac{- \ele_1 - \ele_2 }{ R_1 + r_2 + R_2 + r_1 }, \\
+        &U_2 = \eli R_2 = \frac{- \ele_1 - \ele_2 }{ R_1 + r_2 + R_2 + r_1 } \cdot R_2, \\
+        &P_2 = \eli^2 R_2 = \frac{\sqr{- \ele_1 - \ele_2 } R_2}{ \sqr{ R_1 + r_2 + R_2 + r_1 }}.
     \end{align*}
 
     Отметим, что ответ для тока $\eli$ меняет знак, если отметить его на рисунке в другую сторону.
@@ -747,7 +747,7 @@
     Определите, в каком резисторе выделяется большая тепловая мощность и во сколько раз?
 }
 \answer{%
-    Подключены последовательно, поэтому  $\eli_1 = \eli_2 = \eli \implies \frac{P_2}{P_1} = \frac{ \eli_2^2 R_2 }{ \eli_1^2 R_1 } = \frac{ \eli_2^2R_2 }{ \eli_1R_1 } = \frac{ R_2 }{ R_1 } = \frac23$.
+    Подключены последовательно, поэтому  $\eli_1 = \eli_2 = \eli \implies \frac{P_2}{P_1} = \frac{\eli_2^2 R_2}{\eli_1^2 R_1} = \frac{\eli_2^2R_2}{\eli_1R_1} = \frac{R_2}{R_1} = \frac23$.
 }
 \solutionspace{120pt}
 
@@ -819,9 +819,9 @@
     \begin{tikzpicture}[circuit ee IEC, thick]
         \draw  (0, 0) -- ++(up:2)
                 to [
-                    battery={very near start, rotate=0, info={$\ele_1, r_1 $}},
-                    resistor={midway, info=$R_1$},
-                    battery={very near end, rotate=-180, info={$\ele_2, r_2 $}}
+                    battery={ very near start, rotate=0, info={$\ele_1, r_1 $}},
+                    resistor={ midway, info=$R_1$},
+                    battery={ very near end, rotate=-180, info={$\ele_2, r_2 $}}
                 ] ++(right:5)
                 -- ++(down:2)
                 to [resistor={info=$R_2$}] ++(left:5);
@@ -837,9 +837,9 @@
     \begin{tikzpicture}[circuit ee IEC, thick]
         \draw  (0, 0) -- ++(up:2)
                 to [
-                    battery={very near start, rotate=0, info={$\ele_1, r_1 $}},
-                    resistor={midway, info=$R_1$},
-                    battery={very near end, rotate=-180, info={$\ele_2, r_2 $}}
+                    battery={ very near start, rotate=0, info={$\ele_1, r_1 $}},
+                    resistor={ midway, info=$R_1$},
+                    battery={ very near end, rotate=-180, info={$\ele_2, r_2 $}}
                 ] ++(right:5)
                 -- ++(down:2)
                 to [resistor={info=$R_2$}, current direction={near end, info=$\eli$}] ++(left:5);
@@ -849,9 +849,9 @@
     \begin{align*}
         &- \ele_1 +  \ele_2 = \eli R_1 + \eli r_2 + \eli R_2 + \eli r_1, \\
         &- \ele_1 +  \ele_2 = \eli (R_1 + r_2 + R_2 + r_1), \\
-        &\eli = \frac{- \ele_1 +  \ele_2}{R_1 + r_2 + R_2 + r_1}, \\
-        &U_1 = \eli R_1 = \frac{- \ele_1 +  \ele_2}{R_1 + r_2 + R_2 + r_1} \cdot R_1, \\
-        &P_1 = \eli^2 R_1 = \frac{\sqr{- \ele_1 +  \ele_2} R_1}{\sqr{R_1 + r_2 + R_2 + r_1}}.
+        &\eli = \frac{- \ele_1 +  \ele_2 }{ R_1 + r_2 + R_2 + r_1 }, \\
+        &U_1 = \eli R_1 = \frac{- \ele_1 +  \ele_2 }{ R_1 + r_2 + R_2 + r_1 } \cdot R_1, \\
+        &P_1 = \eli^2 R_1 = \frac{\sqr{- \ele_1 +  \ele_2 } R_1}{ \sqr{ R_1 + r_2 + R_2 + r_1 }}.
     \end{align*}
 
     Отметим, что ответ для тока $\eli$ меняет знак, если отметить его на рисунке в другую сторону.
@@ -870,7 +870,7 @@
     Определите, в каком резисторе выделяется большая тепловая мощность и во сколько раз?
 }
 \answer{%
-    Подключены параллельно, поэтому  $U_1 = U_2 = U \implies \frac{P_2}{P_1} = \frac{ \frac{ U_2^2 }{ R_2 } }{ \frac{ U_1^2 }{ R_1 } } = \frac{ U^2R_1 }{ U^2R_2 } = \frac{ R_1 }{ R_2 } = \frac34$.
+    Подключены параллельно, поэтому  $U_1 = U_2 = U \implies \frac{P_2}{P_1} = \frac{\frac{U_2^2}{R_2}}{\frac{U_1^2}{R_1}} = \frac{U^2R_1}{U^2R_2} = \frac{R_1}{R_2} = \frac34$.
 }
 \solutionspace{120pt}
 
@@ -942,9 +942,9 @@
     \begin{tikzpicture}[circuit ee IEC, thick]
         \draw  (0, 0) -- ++(up:2)
                 to [
-                    battery={very near start, rotate=-180, info={$\ele_1, r_1 $}},
-                    resistor={midway, info=$R_1$},
-                    battery={very near end, rotate=0, info={$\ele_2, r_2 $}}
+                    battery={ very near start, rotate=-180, info={$\ele_1, r_1 $}},
+                    resistor={ midway, info=$R_1$},
+                    battery={ very near end, rotate=0, info={$\ele_2, r_2 $}}
                 ] ++(right:5)
                 -- ++(down:2)
                 to [resistor={info=$R_2$}] ++(left:5);
@@ -960,9 +960,9 @@
     \begin{tikzpicture}[circuit ee IEC, thick]
         \draw  (0, 0) -- ++(up:2)
                 to [
-                    battery={very near start, rotate=-180, info={$\ele_1, r_1 $}},
-                    resistor={midway, info=$R_1$},
-                    battery={very near end, rotate=0, info={$\ele_2, r_2 $}}
+                    battery={ very near start, rotate=-180, info={$\ele_1, r_1 $}},
+                    resistor={ midway, info=$R_1$},
+                    battery={ very near end, rotate=0, info={$\ele_2, r_2 $}}
                 ] ++(right:5)
                 -- ++(down:2)
                 to [resistor={info=$R_2$}, current direction={near end, info=$\eli$}] ++(left:5);
@@ -972,9 +972,9 @@
     \begin{align*}
         & \ele_1 - \ele_2 = \eli R_1 + \eli r_2 + \eli R_2 + \eli r_1, \\
         & \ele_1 - \ele_2 = \eli (R_1 + r_2 + R_2 + r_1), \\
-        &\eli = \frac{ \ele_1 - \ele_2}{R_1 + r_2 + R_2 + r_1}, \\
-        &U_1 = \eli R_1 = \frac{ \ele_1 - \ele_2}{R_1 + r_2 + R_2 + r_1} \cdot R_1, \\
-        &P_1 = \eli^2 R_1 = \frac{\sqr{ \ele_1 - \ele_2} R_1}{\sqr{R_1 + r_2 + R_2 + r_1}}.
+        &\eli = \frac{ \ele_1 - \ele_2 }{ R_1 + r_2 + R_2 + r_1 }, \\
+        &U_1 = \eli R_1 = \frac{ \ele_1 - \ele_2 }{ R_1 + r_2 + R_2 + r_1 } \cdot R_1, \\
+        &P_1 = \eli^2 R_1 = \frac{\sqr{ \ele_1 - \ele_2 } R_1}{ \sqr{ R_1 + r_2 + R_2 + r_1 }}.
     \end{align*}
 
     Отметим, что ответ для тока $\eli$ меняет знак, если отметить его на рисунке в другую сторону.
@@ -993,7 +993,7 @@
     Определите, в каком резисторе выделяется большая тепловая мощность и во сколько раз?
 }
 \answer{%
-    Подключены последовательно, поэтому  $\eli_1 = \eli_2 = \eli \implies \frac{P_2}{P_1} = \frac{ \eli_2^2 R_2 }{ \eli_1^2 R_1 } = \frac{ \eli_2^2R_2 }{ \eli_1R_1 } = \frac{ R_2 }{ R_1 } = \frac23$.
+    Подключены последовательно, поэтому  $\eli_1 = \eli_2 = \eli \implies \frac{P_2}{P_1} = \frac{\eli_2^2 R_2}{\eli_1^2 R_1} = \frac{\eli_2^2R_2}{\eli_1R_1} = \frac{R_2}{R_1} = \frac23$.
 }
 \solutionspace{120pt}
 
@@ -1065,9 +1065,9 @@
     \begin{tikzpicture}[circuit ee IEC, thick]
         \draw  (0, 0) -- ++(up:2)
                 to [
-                    battery={very near start, rotate=-180, info={$\ele_1, r_1 $}},
-                    resistor={midway, info=$R_1$},
-                    battery={very near end, rotate=-180, info={$\ele_2, r_2 $}}
+                    battery={ very near start, rotate=-180, info={$\ele_1, r_1 $}},
+                    resistor={ midway, info=$R_1$},
+                    battery={ very near end, rotate=-180, info={$\ele_2, r_2 $}}
                 ] ++(right:5)
                 -- ++(down:2)
                 to [resistor={info=$R_2$}] ++(left:5);
@@ -1083,9 +1083,9 @@
     \begin{tikzpicture}[circuit ee IEC, thick]
         \draw  (0, 0) -- ++(up:2)
                 to [
-                    battery={very near start, rotate=-180, info={$\ele_1, r_1 $}},
-                    resistor={midway, info=$R_1$},
-                    battery={very near end, rotate=-180, info={$\ele_2, r_2 $}}
+                    battery={ very near start, rotate=-180, info={$\ele_1, r_1 $}},
+                    resistor={ midway, info=$R_1$},
+                    battery={ very near end, rotate=-180, info={$\ele_2, r_2 $}}
                 ] ++(right:5)
                 -- ++(down:2)
                 to [resistor={info=$R_2$}, current direction={near end, info=$\eli$}] ++(left:5);
@@ -1095,9 +1095,9 @@
     \begin{align*}
         & \ele_1 +  \ele_2 = \eli R_1 + \eli r_2 + \eli R_2 + \eli r_1, \\
         & \ele_1 +  \ele_2 = \eli (R_1 + r_2 + R_2 + r_1), \\
-        &\eli = \frac{ \ele_1 +  \ele_2}{R_1 + r_2 + R_2 + r_1}, \\
-        &U_1 = \eli R_1 = \frac{ \ele_1 +  \ele_2}{R_1 + r_2 + R_2 + r_1} \cdot R_1, \\
-        &P_1 = \eli^2 R_1 = \frac{\sqr{ \ele_1 +  \ele_2} R_1}{\sqr{R_1 + r_2 + R_2 + r_1}}.
+        &\eli = \frac{ \ele_1 +  \ele_2 }{ R_1 + r_2 + R_2 + r_1 }, \\
+        &U_1 = \eli R_1 = \frac{ \ele_1 +  \ele_2 }{ R_1 + r_2 + R_2 + r_1 } \cdot R_1, \\
+        &P_1 = \eli^2 R_1 = \frac{\sqr{ \ele_1 +  \ele_2 } R_1}{ \sqr{ R_1 + r_2 + R_2 + r_1 }}.
     \end{align*}
 
     Отметим, что ответ для тока $\eli$ меняет знак, если отметить его на рисунке в другую сторону.
@@ -1116,7 +1116,7 @@
     Определите, в каком резисторе выделяется большая тепловая мощность и во сколько раз?
 }
 \answer{%
-    Подключены параллельно, поэтому  $U_1 = U_2 = U \implies \frac{P_2}{P_1} = \frac{ \frac{ U_2^2 }{ R_2 } }{ \frac{ U_1^2 }{ R_1 } } = \frac{ U^2R_1 }{ U^2R_2 } = \frac{ R_1 }{ R_2 } = \frac32$.
+    Подключены параллельно, поэтому  $U_1 = U_2 = U \implies \frac{P_2}{P_1} = \frac{\frac{U_2^2}{R_2}}{\frac{U_1^2}{R_1}} = \frac{U^2R_1}{U^2R_2} = \frac{R_1}{R_2} = \frac32$.
 }
 \solutionspace{120pt}
 
@@ -1188,9 +1188,9 @@
     \begin{tikzpicture}[circuit ee IEC, thick]
         \draw  (0, 0) -- ++(up:2)
                 to [
-                    battery={very near start, rotate=-180, info={$\ele_1, r_1 $}},
-                    resistor={midway, info=$R_1$},
-                    battery={very near end, rotate=-180, info={$\ele_2, r_2 $}}
+                    battery={ very near start, rotate=-180, info={$\ele_1, r_1 $}},
+                    resistor={ midway, info=$R_1$},
+                    battery={ very near end, rotate=-180, info={$\ele_2, r_2 $}}
                 ] ++(right:5)
                 -- ++(down:2)
                 to [resistor={info=$R_2$}] ++(left:5);
@@ -1206,9 +1206,9 @@
     \begin{tikzpicture}[circuit ee IEC, thick]
         \draw  (0, 0) -- ++(up:2)
                 to [
-                    battery={very near start, rotate=-180, info={$\ele_1, r_1 $}},
-                    resistor={midway, info=$R_1$},
-                    battery={very near end, rotate=-180, info={$\ele_2, r_2 $}}
+                    battery={ very near start, rotate=-180, info={$\ele_1, r_1 $}},
+                    resistor={ midway, info=$R_1$},
+                    battery={ very near end, rotate=-180, info={$\ele_2, r_2 $}}
                 ] ++(right:5)
                 -- ++(down:2)
                 to [resistor={info=$R_2$}, current direction={near end, info=$\eli$}] ++(left:5);
@@ -1218,9 +1218,9 @@
     \begin{align*}
         & \ele_1 +  \ele_2 = \eli R_1 + \eli r_2 + \eli R_2 + \eli r_1, \\
         & \ele_1 +  \ele_2 = \eli (R_1 + r_2 + R_2 + r_1), \\
-        &\eli = \frac{ \ele_1 +  \ele_2}{R_1 + r_2 + R_2 + r_1}, \\
-        &U_1 = \eli R_1 = \frac{ \ele_1 +  \ele_2}{R_1 + r_2 + R_2 + r_1} \cdot R_1, \\
-        &P_1 = \eli^2 R_1 = \frac{\sqr{ \ele_1 +  \ele_2} R_1}{\sqr{R_1 + r_2 + R_2 + r_1}}.
+        &\eli = \frac{ \ele_1 +  \ele_2 }{ R_1 + r_2 + R_2 + r_1 }, \\
+        &U_1 = \eli R_1 = \frac{ \ele_1 +  \ele_2 }{ R_1 + r_2 + R_2 + r_1 } \cdot R_1, \\
+        &P_1 = \eli^2 R_1 = \frac{\sqr{ \ele_1 +  \ele_2 } R_1}{ \sqr{ R_1 + r_2 + R_2 + r_1 }}.
     \end{align*}
 
     Отметим, что ответ для тока $\eli$ меняет знак, если отметить его на рисунке в другую сторону.
@@ -1239,7 +1239,7 @@
     Определите, в каком резисторе выделяется большая тепловая мощность и во сколько раз?
 }
 \answer{%
-    Подключены последовательно, поэтому  $\eli_1 = \eli_2 = \eli \implies \frac{P_2}{P_1} = \frac{ \eli_2^2 R_2 }{ \eli_1^2 R_1 } = \frac{ \eli_2^2R_2 }{ \eli_1R_1 } = \frac{ R_2 }{ R_1 } = \frac83$.
+    Подключены последовательно, поэтому  $\eli_1 = \eli_2 = \eli \implies \frac{P_2}{P_1} = \frac{\eli_2^2 R_2}{\eli_1^2 R_1} = \frac{\eli_2^2R_2}{\eli_1R_1} = \frac{R_2}{R_1} = \frac83$.
 }
 \solutionspace{120pt}
 
@@ -1311,9 +1311,9 @@
     \begin{tikzpicture}[circuit ee IEC, thick]
         \draw  (0, 0) -- ++(up:2)
                 to [
-                    battery={very near start, rotate=-180, info={$\ele_1, r_1 $}},
-                    resistor={midway, info=$R_1$},
-                    battery={very near end, rotate=0, info={$\ele_2, r_2 $}}
+                    battery={ very near start, rotate=-180, info={$\ele_1, r_1 $}},
+                    resistor={ midway, info=$R_1$},
+                    battery={ very near end, rotate=0, info={$\ele_2, r_2 $}}
                 ] ++(right:5)
                 -- ++(down:2)
                 to [resistor={info=$R_2$}] ++(left:5);
@@ -1329,9 +1329,9 @@
     \begin{tikzpicture}[circuit ee IEC, thick]
         \draw  (0, 0) -- ++(up:2)
                 to [
-                    battery={very near start, rotate=-180, info={$\ele_1, r_1 $}},
-                    resistor={midway, info=$R_1$},
-                    battery={very near end, rotate=0, info={$\ele_2, r_2 $}}
+                    battery={ very near start, rotate=-180, info={$\ele_1, r_1 $}},
+                    resistor={ midway, info=$R_1$},
+                    battery={ very near end, rotate=0, info={$\ele_2, r_2 $}}
                 ] ++(right:5)
                 -- ++(down:2)
                 to [resistor={info=$R_2$}, current direction={near end, info=$\eli$}] ++(left:5);
@@ -1341,9 +1341,9 @@
     \begin{align*}
         & \ele_1 - \ele_2 = \eli R_1 + \eli r_2 + \eli R_2 + \eli r_1, \\
         & \ele_1 - \ele_2 = \eli (R_1 + r_2 + R_2 + r_1), \\
-        &\eli = \frac{ \ele_1 - \ele_2}{R_1 + r_2 + R_2 + r_1}, \\
-        &U_2 = \eli R_2 = \frac{ \ele_1 - \ele_2}{R_1 + r_2 + R_2 + r_1} \cdot R_2, \\
-        &P_2 = \eli^2 R_2 = \frac{\sqr{ \ele_1 - \ele_2} R_2}{\sqr{R_1 + r_2 + R_2 + r_1}}.
+        &\eli = \frac{ \ele_1 - \ele_2 }{ R_1 + r_2 + R_2 + r_1 }, \\
+        &U_2 = \eli R_2 = \frac{ \ele_1 - \ele_2 }{ R_1 + r_2 + R_2 + r_1 } \cdot R_2, \\
+        &P_2 = \eli^2 R_2 = \frac{\sqr{ \ele_1 - \ele_2 } R_2}{ \sqr{ R_1 + r_2 + R_2 + r_1 }}.
     \end{align*}
 
     Отметим, что ответ для тока $\eli$ меняет знак, если отметить его на рисунке в другую сторону.
@@ -1362,7 +1362,7 @@
     Определите, в каком резисторе выделяется большая тепловая мощность и во сколько раз?
 }
 \answer{%
-    Подключены параллельно, поэтому  $U_1 = U_2 = U \implies \frac{P_2}{P_1} = \frac{ \frac{ U_2^2 }{ R_2 } }{ \frac{ U_1^2 }{ R_1 } } = \frac{ U^2R_1 }{ U^2R_2 } = \frac{ R_1 }{ R_2 } = \frac54$.
+    Подключены параллельно, поэтому  $U_1 = U_2 = U \implies \frac{P_2}{P_1} = \frac{\frac{U_2^2}{R_2}}{\frac{U_1^2}{R_1}} = \frac{U^2R_1}{U^2R_2} = \frac{R_1}{R_2} = \frac54$.
 }
 \solutionspace{120pt}
 
@@ -1434,9 +1434,9 @@
     \begin{tikzpicture}[circuit ee IEC, thick]
         \draw  (0, 0) -- ++(up:2)
                 to [
-                    battery={very near start, rotate=-180, info={$\ele_1, r_1 $}},
-                    resistor={midway, info=$R_1$},
-                    battery={very near end, rotate=0, info={$\ele_2, r_2 $}}
+                    battery={ very near start, rotate=-180, info={$\ele_1, r_1 $}},
+                    resistor={ midway, info=$R_1$},
+                    battery={ very near end, rotate=0, info={$\ele_2, r_2 $}}
                 ] ++(right:5)
                 -- ++(down:2)
                 to [resistor={info=$R_2$}] ++(left:5);
@@ -1452,9 +1452,9 @@
     \begin{tikzpicture}[circuit ee IEC, thick]
         \draw  (0, 0) -- ++(up:2)
                 to [
-                    battery={very near start, rotate=-180, info={$\ele_1, r_1 $}},
-                    resistor={midway, info=$R_1$},
-                    battery={very near end, rotate=0, info={$\ele_2, r_2 $}}
+                    battery={ very near start, rotate=-180, info={$\ele_1, r_1 $}},
+                    resistor={ midway, info=$R_1$},
+                    battery={ very near end, rotate=0, info={$\ele_2, r_2 $}}
                 ] ++(right:5)
                 -- ++(down:2)
                 to [resistor={info=$R_2$}, current direction={near end, info=$\eli$}] ++(left:5);
@@ -1464,9 +1464,9 @@
     \begin{align*}
         & \ele_1 - \ele_2 = \eli R_1 + \eli r_2 + \eli R_2 + \eli r_1, \\
         & \ele_1 - \ele_2 = \eli (R_1 + r_2 + R_2 + r_1), \\
-        &\eli = \frac{ \ele_1 - \ele_2}{R_1 + r_2 + R_2 + r_1}, \\
-        &U_1 = \eli R_1 = \frac{ \ele_1 - \ele_2}{R_1 + r_2 + R_2 + r_1} \cdot R_1, \\
-        &P_1 = \eli^2 R_1 = \frac{\sqr{ \ele_1 - \ele_2} R_1}{\sqr{R_1 + r_2 + R_2 + r_1}}.
+        &\eli = \frac{ \ele_1 - \ele_2 }{ R_1 + r_2 + R_2 + r_1 }, \\
+        &U_1 = \eli R_1 = \frac{ \ele_1 - \ele_2 }{ R_1 + r_2 + R_2 + r_1 } \cdot R_1, \\
+        &P_1 = \eli^2 R_1 = \frac{\sqr{ \ele_1 - \ele_2 } R_1}{ \sqr{ R_1 + r_2 + R_2 + r_1 }}.
     \end{align*}
 
     Отметим, что ответ для тока $\eli$ меняет знак, если отметить его на рисунке в другую сторону.
@@ -1485,7 +1485,7 @@
     Определите, в каком резисторе выделяется большая тепловая мощность и во сколько раз?
 }
 \answer{%
-    Подключены последовательно, поэтому  $\eli_1 = \eli_2 = \eli \implies \frac{P_2}{P_1} = \frac{ \eli_2^2 R_2 }{ \eli_1^2 R_1 } = \frac{ \eli_2^2R_2 }{ \eli_1R_1 } = \frac{ R_2 }{ R_1 } = \frac83$.
+    Подключены последовательно, поэтому  $\eli_1 = \eli_2 = \eli \implies \frac{P_2}{P_1} = \frac{\eli_2^2 R_2}{\eli_1^2 R_1} = \frac{\eli_2^2R_2}{\eli_1R_1} = \frac{R_2}{R_1} = \frac83$.
 }
 \solutionspace{120pt}
 
@@ -1557,9 +1557,9 @@
     \begin{tikzpicture}[circuit ee IEC, thick]
         \draw  (0, 0) -- ++(up:2)
                 to [
-                    battery={very near start, rotate=0, info={$\ele_1, r_1 $}},
-                    resistor={midway, info=$R_1$},
-                    battery={very near end, rotate=-180, info={$\ele_2, r_2 $}}
+                    battery={ very near start, rotate=0, info={$\ele_1, r_1 $}},
+                    resistor={ midway, info=$R_1$},
+                    battery={ very near end, rotate=-180, info={$\ele_2, r_2 $}}
                 ] ++(right:5)
                 -- ++(down:2)
                 to [resistor={info=$R_2$}] ++(left:5);
@@ -1575,9 +1575,9 @@
     \begin{tikzpicture}[circuit ee IEC, thick]
         \draw  (0, 0) -- ++(up:2)
                 to [
-                    battery={very near start, rotate=0, info={$\ele_1, r_1 $}},
-                    resistor={midway, info=$R_1$},
-                    battery={very near end, rotate=-180, info={$\ele_2, r_2 $}}
+                    battery={ very near start, rotate=0, info={$\ele_1, r_1 $}},
+                    resistor={ midway, info=$R_1$},
+                    battery={ very near end, rotate=-180, info={$\ele_2, r_2 $}}
                 ] ++(right:5)
                 -- ++(down:2)
                 to [resistor={info=$R_2$}, current direction={near end, info=$\eli$}] ++(left:5);
@@ -1587,9 +1587,9 @@
     \begin{align*}
         &- \ele_1 +  \ele_2 = \eli R_1 + \eli r_2 + \eli R_2 + \eli r_1, \\
         &- \ele_1 +  \ele_2 = \eli (R_1 + r_2 + R_2 + r_1), \\
-        &\eli = \frac{- \ele_1 +  \ele_2}{R_1 + r_2 + R_2 + r_1}, \\
-        &U_1 = \eli R_1 = \frac{- \ele_1 +  \ele_2}{R_1 + r_2 + R_2 + r_1} \cdot R_1, \\
-        &P_1 = \eli^2 R_1 = \frac{\sqr{- \ele_1 +  \ele_2} R_1}{\sqr{R_1 + r_2 + R_2 + r_1}}.
+        &\eli = \frac{- \ele_1 +  \ele_2 }{ R_1 + r_2 + R_2 + r_1 }, \\
+        &U_1 = \eli R_1 = \frac{- \ele_1 +  \ele_2 }{ R_1 + r_2 + R_2 + r_1 } \cdot R_1, \\
+        &P_1 = \eli^2 R_1 = \frac{\sqr{- \ele_1 +  \ele_2 } R_1}{ \sqr{ R_1 + r_2 + R_2 + r_1 }}.
     \end{align*}
 
     Отметим, что ответ для тока $\eli$ меняет знак, если отметить его на рисунке в другую сторону.
@@ -1608,7 +1608,7 @@
     Определите, в каком резисторе выделяется большая тепловая мощность и во сколько раз?
 }
 \answer{%
-    Подключены последовательно, поэтому  $\eli_1 = \eli_2 = \eli \implies \frac{P_2}{P_1} = \frac{ \eli_2^2 R_2 }{ \eli_1^2 R_1 } = \frac{ \eli_2^2R_2 }{ \eli_1R_1 } = \frac{ R_2 }{ R_1 } = \frac45$.
+    Подключены последовательно, поэтому  $\eli_1 = \eli_2 = \eli \implies \frac{P_2}{P_1} = \frac{\eli_2^2 R_2}{\eli_1^2 R_1} = \frac{\eli_2^2R_2}{\eli_1R_1} = \frac{R_2}{R_1} = \frac45$.
 }
 \solutionspace{120pt}
 
@@ -1680,9 +1680,9 @@
     \begin{tikzpicture}[circuit ee IEC, thick]
         \draw  (0, 0) -- ++(up:2)
                 to [
-                    battery={very near start, rotate=0, info={$\ele_1, r_1 $}},
-                    resistor={midway, info=$R_1$},
-                    battery={very near end, rotate=0, info={$\ele_2, r_2 $}}
+                    battery={ very near start, rotate=0, info={$\ele_1, r_1 $}},
+                    resistor={ midway, info=$R_1$},
+                    battery={ very near end, rotate=0, info={$\ele_2, r_2 $}}
                 ] ++(right:5)
                 -- ++(down:2)
                 to [resistor={info=$R_2$}] ++(left:5);
@@ -1698,9 +1698,9 @@
     \begin{tikzpicture}[circuit ee IEC, thick]
         \draw  (0, 0) -- ++(up:2)
                 to [
-                    battery={very near start, rotate=0, info={$\ele_1, r_1 $}},
-                    resistor={midway, info=$R_1$},
-                    battery={very near end, rotate=0, info={$\ele_2, r_2 $}}
+                    battery={ very near start, rotate=0, info={$\ele_1, r_1 $}},
+                    resistor={ midway, info=$R_1$},
+                    battery={ very near end, rotate=0, info={$\ele_2, r_2 $}}
                 ] ++(right:5)
                 -- ++(down:2)
                 to [resistor={info=$R_2$}, current direction={near end, info=$\eli$}] ++(left:5);
@@ -1710,9 +1710,9 @@
     \begin{align*}
         &- \ele_1 - \ele_2 = \eli R_1 + \eli r_2 + \eli R_2 + \eli r_1, \\
         &- \ele_1 - \ele_2 = \eli (R_1 + r_2 + R_2 + r_1), \\
-        &\eli = \frac{- \ele_1 - \ele_2}{R_1 + r_2 + R_2 + r_1}, \\
-        &U_1 = \eli R_1 = \frac{- \ele_1 - \ele_2}{R_1 + r_2 + R_2 + r_1} \cdot R_1, \\
-        &P_1 = \eli^2 R_1 = \frac{\sqr{- \ele_1 - \ele_2} R_1}{\sqr{R_1 + r_2 + R_2 + r_1}}.
+        &\eli = \frac{- \ele_1 - \ele_2 }{ R_1 + r_2 + R_2 + r_1 }, \\
+        &U_1 = \eli R_1 = \frac{- \ele_1 - \ele_2 }{ R_1 + r_2 + R_2 + r_1 } \cdot R_1, \\
+        &P_1 = \eli^2 R_1 = \frac{\sqr{- \ele_1 - \ele_2 } R_1}{ \sqr{ R_1 + r_2 + R_2 + r_1 }}.
     \end{align*}
 
     Отметим, что ответ для тока $\eli$ меняет знак, если отметить его на рисунке в другую сторону.
@@ -1731,7 +1731,7 @@
     Определите, в каком резисторе выделяется большая тепловая мощность и во сколько раз?
 }
 \answer{%
-    Подключены последовательно, поэтому  $\eli_1 = \eli_2 = \eli \implies \frac{P_2}{P_1} = \frac{ \eli_2^2 R_2 }{ \eli_1^2 R_1 } = \frac{ \eli_2^2R_2 }{ \eli_1R_1 } = \frac{ R_2 }{ R_1 } = \frac47$.
+    Подключены последовательно, поэтому  $\eli_1 = \eli_2 = \eli \implies \frac{P_2}{P_1} = \frac{\eli_2^2 R_2}{\eli_1^2 R_1} = \frac{\eli_2^2R_2}{\eli_1R_1} = \frac{R_2}{R_1} = \frac47$.
 }
 \solutionspace{120pt}
 
@@ -1803,9 +1803,9 @@
     \begin{tikzpicture}[circuit ee IEC, thick]
         \draw  (0, 0) -- ++(up:2)
                 to [
-                    battery={very near start, rotate=-180, info={$\ele_1, r_1 $}},
-                    resistor={midway, info=$R_1$},
-                    battery={very near end, rotate=-180, info={$\ele_2, r_2 $}}
+                    battery={ very near start, rotate=-180, info={$\ele_1, r_1 $}},
+                    resistor={ midway, info=$R_1$},
+                    battery={ very near end, rotate=-180, info={$\ele_2, r_2 $}}
                 ] ++(right:5)
                 -- ++(down:2)
                 to [resistor={info=$R_2$}] ++(left:5);
@@ -1821,9 +1821,9 @@
     \begin{tikzpicture}[circuit ee IEC, thick]
         \draw  (0, 0) -- ++(up:2)
                 to [
-                    battery={very near start, rotate=-180, info={$\ele_1, r_1 $}},
-                    resistor={midway, info=$R_1$},
-                    battery={very near end, rotate=-180, info={$\ele_2, r_2 $}}
+                    battery={ very near start, rotate=-180, info={$\ele_1, r_1 $}},
+                    resistor={ midway, info=$R_1$},
+                    battery={ very near end, rotate=-180, info={$\ele_2, r_2 $}}
                 ] ++(right:5)
                 -- ++(down:2)
                 to [resistor={info=$R_2$}, current direction={near end, info=$\eli$}] ++(left:5);
@@ -1833,9 +1833,9 @@
     \begin{align*}
         & \ele_1 +  \ele_2 = \eli R_1 + \eli r_2 + \eli R_2 + \eli r_1, \\
         & \ele_1 +  \ele_2 = \eli (R_1 + r_2 + R_2 + r_1), \\
-        &\eli = \frac{ \ele_1 +  \ele_2}{R_1 + r_2 + R_2 + r_1}, \\
-        &U_2 = \eli R_2 = \frac{ \ele_1 +  \ele_2}{R_1 + r_2 + R_2 + r_1} \cdot R_2, \\
-        &P_2 = \eli^2 R_2 = \frac{\sqr{ \ele_1 +  \ele_2} R_2}{\sqr{R_1 + r_2 + R_2 + r_1}}.
+        &\eli = \frac{ \ele_1 +  \ele_2 }{ R_1 + r_2 + R_2 + r_1 }, \\
+        &U_2 = \eli R_2 = \frac{ \ele_1 +  \ele_2 }{ R_1 + r_2 + R_2 + r_1 } \cdot R_2, \\
+        &P_2 = \eli^2 R_2 = \frac{\sqr{ \ele_1 +  \ele_2 } R_2}{ \sqr{ R_1 + r_2 + R_2 + r_1 }}.
     \end{align*}
 
     Отметим, что ответ для тока $\eli$ меняет знак, если отметить его на рисунке в другую сторону.
@@ -1854,7 +1854,7 @@
     Определите, в каком резисторе выделяется большая тепловая мощность и во сколько раз?
 }
 \answer{%
-    Подключены последовательно, поэтому  $\eli_1 = \eli_2 = \eli \implies \frac{P_2}{P_1} = \frac{ \eli_2^2 R_2 }{ \eli_1^2 R_1 } = \frac{ \eli_2^2R_2 }{ \eli_1R_1 } = \frac{ R_2 }{ R_1 } = \frac65$.
+    Подключены последовательно, поэтому  $\eli_1 = \eli_2 = \eli \implies \frac{P_2}{P_1} = \frac{\eli_2^2 R_2}{\eli_1^2 R_1} = \frac{\eli_2^2R_2}{\eli_1R_1} = \frac{R_2}{R_1} = \frac65$.
 }
 \solutionspace{120pt}
 
@@ -1926,9 +1926,9 @@
     \begin{tikzpicture}[circuit ee IEC, thick]
         \draw  (0, 0) -- ++(up:2)
                 to [
-                    battery={very near start, rotate=-180, info={$\ele_1, r_1 $}},
-                    resistor={midway, info=$R_1$},
-                    battery={very near end, rotate=-180, info={$\ele_2, r_2 $}}
+                    battery={ very near start, rotate=-180, info={$\ele_1, r_1 $}},
+                    resistor={ midway, info=$R_1$},
+                    battery={ very near end, rotate=-180, info={$\ele_2, r_2 $}}
                 ] ++(right:5)
                 -- ++(down:2)
                 to [resistor={info=$R_2$}] ++(left:5);
@@ -1944,9 +1944,9 @@
     \begin{tikzpicture}[circuit ee IEC, thick]
         \draw  (0, 0) -- ++(up:2)
                 to [
-                    battery={very near start, rotate=-180, info={$\ele_1, r_1 $}},
-                    resistor={midway, info=$R_1$},
-                    battery={very near end, rotate=-180, info={$\ele_2, r_2 $}}
+                    battery={ very near start, rotate=-180, info={$\ele_1, r_1 $}},
+                    resistor={ midway, info=$R_1$},
+                    battery={ very near end, rotate=-180, info={$\ele_2, r_2 $}}
                 ] ++(right:5)
                 -- ++(down:2)
                 to [resistor={info=$R_2$}, current direction={near end, info=$\eli$}] ++(left:5);
@@ -1956,9 +1956,9 @@
     \begin{align*}
         & \ele_1 +  \ele_2 = \eli R_1 + \eli r_2 + \eli R_2 + \eli r_1, \\
         & \ele_1 +  \ele_2 = \eli (R_1 + r_2 + R_2 + r_1), \\
-        &\eli = \frac{ \ele_1 +  \ele_2}{R_1 + r_2 + R_2 + r_1}, \\
-        &U_1 = \eli R_1 = \frac{ \ele_1 +  \ele_2}{R_1 + r_2 + R_2 + r_1} \cdot R_1, \\
-        &P_1 = \eli^2 R_1 = \frac{\sqr{ \ele_1 +  \ele_2} R_1}{\sqr{R_1 + r_2 + R_2 + r_1}}.
+        &\eli = \frac{ \ele_1 +  \ele_2 }{ R_1 + r_2 + R_2 + r_1 }, \\
+        &U_1 = \eli R_1 = \frac{ \ele_1 +  \ele_2 }{ R_1 + r_2 + R_2 + r_1 } \cdot R_1, \\
+        &P_1 = \eli^2 R_1 = \frac{\sqr{ \ele_1 +  \ele_2 } R_1}{ \sqr{ R_1 + r_2 + R_2 + r_1 }}.
     \end{align*}
 
     Отметим, что ответ для тока $\eli$ меняет знак, если отметить его на рисунке в другую сторону.
@@ -1977,7 +1977,7 @@
     Определите, в каком резисторе выделяется большая тепловая мощность и во сколько раз?
 }
 \answer{%
-    Подключены параллельно, поэтому  $U_1 = U_2 = U \implies \frac{P_2}{P_1} = \frac{ \frac{ U_2^2 }{ R_2 } }{ \frac{ U_1^2 }{ R_1 } } = \frac{ U^2R_1 }{ U^2R_2 } = \frac{ R_1 }{ R_2 } = \frac34$.
+    Подключены параллельно, поэтому  $U_1 = U_2 = U \implies \frac{P_2}{P_1} = \frac{\frac{U_2^2}{R_2}}{\frac{U_1^2}{R_1}} = \frac{U^2R_1}{U^2R_2} = \frac{R_1}{R_2} = \frac34$.
 }
 \solutionspace{120pt}
 
@@ -2049,9 +2049,9 @@
     \begin{tikzpicture}[circuit ee IEC, thick]
         \draw  (0, 0) -- ++(up:2)
                 to [
-                    battery={very near start, rotate=0, info={$\ele_1, r_1 $}},
-                    resistor={midway, info=$R_1$},
-                    battery={very near end, rotate=-180, info={$\ele_2, r_2 $}}
+                    battery={ very near start, rotate=0, info={$\ele_1, r_1 $}},
+                    resistor={ midway, info=$R_1$},
+                    battery={ very near end, rotate=-180, info={$\ele_2, r_2 $}}
                 ] ++(right:5)
                 -- ++(down:2)
                 to [resistor={info=$R_2$}] ++(left:5);
@@ -2067,9 +2067,9 @@
     \begin{tikzpicture}[circuit ee IEC, thick]
         \draw  (0, 0) -- ++(up:2)
                 to [
-                    battery={very near start, rotate=0, info={$\ele_1, r_1 $}},
-                    resistor={midway, info=$R_1$},
-                    battery={very near end, rotate=-180, info={$\ele_2, r_2 $}}
+                    battery={ very near start, rotate=0, info={$\ele_1, r_1 $}},
+                    resistor={ midway, info=$R_1$},
+                    battery={ very near end, rotate=-180, info={$\ele_2, r_2 $}}
                 ] ++(right:5)
                 -- ++(down:2)
                 to [resistor={info=$R_2$}, current direction={near end, info=$\eli$}] ++(left:5);
@@ -2079,9 +2079,9 @@
     \begin{align*}
         &- \ele_1 +  \ele_2 = \eli R_1 + \eli r_2 + \eli R_2 + \eli r_1, \\
         &- \ele_1 +  \ele_2 = \eli (R_1 + r_2 + R_2 + r_1), \\
-        &\eli = \frac{- \ele_1 +  \ele_2}{R_1 + r_2 + R_2 + r_1}, \\
-        &U_2 = \eli R_2 = \frac{- \ele_1 +  \ele_2}{R_1 + r_2 + R_2 + r_1} \cdot R_2, \\
-        &P_2 = \eli^2 R_2 = \frac{\sqr{- \ele_1 +  \ele_2} R_2}{\sqr{R_1 + r_2 + R_2 + r_1}}.
+        &\eli = \frac{- \ele_1 +  \ele_2 }{ R_1 + r_2 + R_2 + r_1 }, \\
+        &U_2 = \eli R_2 = \frac{- \ele_1 +  \ele_2 }{ R_1 + r_2 + R_2 + r_1 } \cdot R_2, \\
+        &P_2 = \eli^2 R_2 = \frac{\sqr{- \ele_1 +  \ele_2 } R_2}{ \sqr{ R_1 + r_2 + R_2 + r_1 }}.
     \end{align*}
 
     Отметим, что ответ для тока $\eli$ меняет знак, если отметить его на рисунке в другую сторону.
@@ -2100,7 +2100,7 @@
     Определите, в каком резисторе выделяется большая тепловая мощность и во сколько раз?
 }
 \answer{%
-    Подключены последовательно, поэтому  $\eli_1 = \eli_2 = \eli \implies \frac{P_2}{P_1} = \frac{ \eli_2^2 R_2 }{ \eli_1^2 R_1 } = \frac{ \eli_2^2R_2 }{ \eli_1R_1 } = \frac{ R_2 }{ R_1 } = \frac83$.
+    Подключены последовательно, поэтому  $\eli_1 = \eli_2 = \eli \implies \frac{P_2}{P_1} = \frac{\eli_2^2 R_2}{\eli_1^2 R_1} = \frac{\eli_2^2R_2}{\eli_1R_1} = \frac{R_2}{R_1} = \frac83$.
 }
 \solutionspace{120pt}
 
@@ -2172,9 +2172,9 @@
     \begin{tikzpicture}[circuit ee IEC, thick]
         \draw  (0, 0) -- ++(up:2)
                 to [
-                    battery={very near start, rotate=-180, info={$\ele_1, r_1 $}},
-                    resistor={midway, info=$R_1$},
-                    battery={very near end, rotate=0, info={$\ele_2, r_2 $}}
+                    battery={ very near start, rotate=-180, info={$\ele_1, r_1 $}},
+                    resistor={ midway, info=$R_1$},
+                    battery={ very near end, rotate=0, info={$\ele_2, r_2 $}}
                 ] ++(right:5)
                 -- ++(down:2)
                 to [resistor={info=$R_2$}] ++(left:5);
@@ -2190,9 +2190,9 @@
     \begin{tikzpicture}[circuit ee IEC, thick]
         \draw  (0, 0) -- ++(up:2)
                 to [
-                    battery={very near start, rotate=-180, info={$\ele_1, r_1 $}},
-                    resistor={midway, info=$R_1$},
-                    battery={very near end, rotate=0, info={$\ele_2, r_2 $}}
+                    battery={ very near start, rotate=-180, info={$\ele_1, r_1 $}},
+                    resistor={ midway, info=$R_1$},
+                    battery={ very near end, rotate=0, info={$\ele_2, r_2 $}}
                 ] ++(right:5)
                 -- ++(down:2)
                 to [resistor={info=$R_2$}, current direction={near end, info=$\eli$}] ++(left:5);
@@ -2202,9 +2202,9 @@
     \begin{align*}
         & \ele_1 - \ele_2 = \eli R_1 + \eli r_2 + \eli R_2 + \eli r_1, \\
         & \ele_1 - \ele_2 = \eli (R_1 + r_2 + R_2 + r_1), \\
-        &\eli = \frac{ \ele_1 - \ele_2}{R_1 + r_2 + R_2 + r_1}, \\
-        &U_2 = \eli R_2 = \frac{ \ele_1 - \ele_2}{R_1 + r_2 + R_2 + r_1} \cdot R_2, \\
-        &P_2 = \eli^2 R_2 = \frac{\sqr{ \ele_1 - \ele_2} R_2}{\sqr{R_1 + r_2 + R_2 + r_1}}.
+        &\eli = \frac{ \ele_1 - \ele_2 }{ R_1 + r_2 + R_2 + r_1 }, \\
+        &U_2 = \eli R_2 = \frac{ \ele_1 - \ele_2 }{ R_1 + r_2 + R_2 + r_1 } \cdot R_2, \\
+        &P_2 = \eli^2 R_2 = \frac{\sqr{ \ele_1 - \ele_2 } R_2}{ \sqr{ R_1 + r_2 + R_2 + r_1 }}.
     \end{align*}
 
     Отметим, что ответ для тока $\eli$ меняет знак, если отметить его на рисунке в другую сторону.
@@ -2223,7 +2223,7 @@
     Определите, в каком резисторе выделяется большая тепловая мощность и во сколько раз?
 }
 \answer{%
-    Подключены параллельно, поэтому  $U_1 = U_2 = U \implies \frac{P_2}{P_1} = \frac{ \frac{ U_2^2 }{ R_2 } }{ \frac{ U_1^2 }{ R_1 } } = \frac{ U^2R_1 }{ U^2R_2 } = \frac{ R_1 }{ R_2 } = \frac56$.
+    Подключены параллельно, поэтому  $U_1 = U_2 = U \implies \frac{P_2}{P_1} = \frac{\frac{U_2^2}{R_2}}{\frac{U_1^2}{R_1}} = \frac{U^2R_1}{U^2R_2} = \frac{R_1}{R_2} = \frac56$.
 }
 \solutionspace{120pt}
 
@@ -2295,9 +2295,9 @@
     \begin{tikzpicture}[circuit ee IEC, thick]
         \draw  (0, 0) -- ++(up:2)
                 to [
-                    battery={very near start, rotate=0, info={$\ele_1, r_1 $}},
-                    resistor={midway, info=$R_1$},
-                    battery={very near end, rotate=-180, info={$\ele_2, r_2 $}}
+                    battery={ very near start, rotate=0, info={$\ele_1, r_1 $}},
+                    resistor={ midway, info=$R_1$},
+                    battery={ very near end, rotate=-180, info={$\ele_2, r_2 $}}
                 ] ++(right:5)
                 -- ++(down:2)
                 to [resistor={info=$R_2$}] ++(left:5);
@@ -2313,9 +2313,9 @@
     \begin{tikzpicture}[circuit ee IEC, thick]
         \draw  (0, 0) -- ++(up:2)
                 to [
-                    battery={very near start, rotate=0, info={$\ele_1, r_1 $}},
-                    resistor={midway, info=$R_1$},
-                    battery={very near end, rotate=-180, info={$\ele_2, r_2 $}}
+                    battery={ very near start, rotate=0, info={$\ele_1, r_1 $}},
+                    resistor={ midway, info=$R_1$},
+                    battery={ very near end, rotate=-180, info={$\ele_2, r_2 $}}
                 ] ++(right:5)
                 -- ++(down:2)
                 to [resistor={info=$R_2$}, current direction={near end, info=$\eli$}] ++(left:5);
@@ -2325,9 +2325,9 @@
     \begin{align*}
         &- \ele_1 +  \ele_2 = \eli R_1 + \eli r_2 + \eli R_2 + \eli r_1, \\
         &- \ele_1 +  \ele_2 = \eli (R_1 + r_2 + R_2 + r_1), \\
-        &\eli = \frac{- \ele_1 +  \ele_2}{R_1 + r_2 + R_2 + r_1}, \\
-        &U_2 = \eli R_2 = \frac{- \ele_1 +  \ele_2}{R_1 + r_2 + R_2 + r_1} \cdot R_2, \\
-        &P_2 = \eli^2 R_2 = \frac{\sqr{- \ele_1 +  \ele_2} R_2}{\sqr{R_1 + r_2 + R_2 + r_1}}.
+        &\eli = \frac{- \ele_1 +  \ele_2 }{ R_1 + r_2 + R_2 + r_1 }, \\
+        &U_2 = \eli R_2 = \frac{- \ele_1 +  \ele_2 }{ R_1 + r_2 + R_2 + r_1 } \cdot R_2, \\
+        &P_2 = \eli^2 R_2 = \frac{\sqr{- \ele_1 +  \ele_2 } R_2}{ \sqr{ R_1 + r_2 + R_2 + r_1 }}.
     \end{align*}
 
     Отметим, что ответ для тока $\eli$ меняет знак, если отметить его на рисунке в другую сторону.
@@ -2346,7 +2346,7 @@
     Определите, в каком резисторе выделяется большая тепловая мощность и во сколько раз?
 }
 \answer{%
-    Подключены параллельно, поэтому  $U_1 = U_2 = U \implies \frac{P_2}{P_1} = \frac{ \frac{ U_2^2 }{ R_2 } }{ \frac{ U_1^2 }{ R_1 } } = \frac{ U^2R_1 }{ U^2R_2 } = \frac{ R_1 }{ R_2 } = \frac56$.
+    Подключены параллельно, поэтому  $U_1 = U_2 = U \implies \frac{P_2}{P_1} = \frac{\frac{U_2^2}{R_2}}{\frac{U_1^2}{R_1}} = \frac{U^2R_1}{U^2R_2} = \frac{R_1}{R_2} = \frac56$.
 }
 \solutionspace{120pt}
 
@@ -2418,9 +2418,9 @@
     \begin{tikzpicture}[circuit ee IEC, thick]
         \draw  (0, 0) -- ++(up:2)
                 to [
-                    battery={very near start, rotate=0, info={$\ele_1, r_1 $}},
-                    resistor={midway, info=$R_1$},
-                    battery={very near end, rotate=0, info={$\ele_2, r_2 $}}
+                    battery={ very near start, rotate=0, info={$\ele_1, r_1 $}},
+                    resistor={ midway, info=$R_1$},
+                    battery={ very near end, rotate=0, info={$\ele_2, r_2 $}}
                 ] ++(right:5)
                 -- ++(down:2)
                 to [resistor={info=$R_2$}] ++(left:5);
@@ -2436,9 +2436,9 @@
     \begin{tikzpicture}[circuit ee IEC, thick]
         \draw  (0, 0) -- ++(up:2)
                 to [
-                    battery={very near start, rotate=0, info={$\ele_1, r_1 $}},
-                    resistor={midway, info=$R_1$},
-                    battery={very near end, rotate=0, info={$\ele_2, r_2 $}}
+                    battery={ very near start, rotate=0, info={$\ele_1, r_1 $}},
+                    resistor={ midway, info=$R_1$},
+                    battery={ very near end, rotate=0, info={$\ele_2, r_2 $}}
                 ] ++(right:5)
                 -- ++(down:2)
                 to [resistor={info=$R_2$}, current direction={near end, info=$\eli$}] ++(left:5);
@@ -2448,9 +2448,9 @@
     \begin{align*}
         &- \ele_1 - \ele_2 = \eli R_1 + \eli r_2 + \eli R_2 + \eli r_1, \\
         &- \ele_1 - \ele_2 = \eli (R_1 + r_2 + R_2 + r_1), \\
-        &\eli = \frac{- \ele_1 - \ele_2}{R_1 + r_2 + R_2 + r_1}, \\
-        &U_2 = \eli R_2 = \frac{- \ele_1 - \ele_2}{R_1 + r_2 + R_2 + r_1} \cdot R_2, \\
-        &P_2 = \eli^2 R_2 = \frac{\sqr{- \ele_1 - \ele_2} R_2}{\sqr{R_1 + r_2 + R_2 + r_1}}.
+        &\eli = \frac{- \ele_1 - \ele_2 }{ R_1 + r_2 + R_2 + r_1 }, \\
+        &U_2 = \eli R_2 = \frac{- \ele_1 - \ele_2 }{ R_1 + r_2 + R_2 + r_1 } \cdot R_2, \\
+        &P_2 = \eli^2 R_2 = \frac{\sqr{- \ele_1 - \ele_2 } R_2}{ \sqr{ R_1 + r_2 + R_2 + r_1 }}.
     \end{align*}
 
     Отметим, что ответ для тока $\eli$ меняет знак, если отметить его на рисунке в другую сторону.
@@ -2469,7 +2469,7 @@
     Определите, в каком резисторе выделяется большая тепловая мощность и во сколько раз?
 }
 \answer{%
-    Подключены последовательно, поэтому  $\eli_1 = \eli_2 = \eli \implies \frac{P_2}{P_1} = \frac{ \eli_2^2 R_2 }{ \eli_1^2 R_1 } = \frac{ \eli_2^2R_2 }{ \eli_1R_1 } = \frac{ R_2 }{ R_1 } = \frac47$.
+    Подключены последовательно, поэтому  $\eli_1 = \eli_2 = \eli \implies \frac{P_2}{P_1} = \frac{\eli_2^2 R_2}{\eli_1^2 R_1} = \frac{\eli_2^2R_2}{\eli_1R_1} = \frac{R_2}{R_1} = \frac47$.
 }
 \solutionspace{120pt}
 
@@ -2541,9 +2541,9 @@
     \begin{tikzpicture}[circuit ee IEC, thick]
         \draw  (0, 0) -- ++(up:2)
                 to [
-                    battery={very near start, rotate=-180, info={$\ele_1, r_1 $}},
-                    resistor={midway, info=$R_1$},
-                    battery={very near end, rotate=-180, info={$\ele_2, r_2 $}}
+                    battery={ very near start, rotate=-180, info={$\ele_1, r_1 $}},
+                    resistor={ midway, info=$R_1$},
+                    battery={ very near end, rotate=-180, info={$\ele_2, r_2 $}}
                 ] ++(right:5)
                 -- ++(down:2)
                 to [resistor={info=$R_2$}] ++(left:5);
@@ -2559,9 +2559,9 @@
     \begin{tikzpicture}[circuit ee IEC, thick]
         \draw  (0, 0) -- ++(up:2)
                 to [
-                    battery={very near start, rotate=-180, info={$\ele_1, r_1 $}},
-                    resistor={midway, info=$R_1$},
-                    battery={very near end, rotate=-180, info={$\ele_2, r_2 $}}
+                    battery={ very near start, rotate=-180, info={$\ele_1, r_1 $}},
+                    resistor={ midway, info=$R_1$},
+                    battery={ very near end, rotate=-180, info={$\ele_2, r_2 $}}
                 ] ++(right:5)
                 -- ++(down:2)
                 to [resistor={info=$R_2$}, current direction={near end, info=$\eli$}] ++(left:5);
@@ -2571,9 +2571,9 @@
     \begin{align*}
         & \ele_1 +  \ele_2 = \eli R_1 + \eli r_2 + \eli R_2 + \eli r_1, \\
         & \ele_1 +  \ele_2 = \eli (R_1 + r_2 + R_2 + r_1), \\
-        &\eli = \frac{ \ele_1 +  \ele_2}{R_1 + r_2 + R_2 + r_1}, \\
-        &U_1 = \eli R_1 = \frac{ \ele_1 +  \ele_2}{R_1 + r_2 + R_2 + r_1} \cdot R_1, \\
-        &P_1 = \eli^2 R_1 = \frac{\sqr{ \ele_1 +  \ele_2} R_1}{\sqr{R_1 + r_2 + R_2 + r_1}}.
+        &\eli = \frac{ \ele_1 +  \ele_2 }{ R_1 + r_2 + R_2 + r_1 }, \\
+        &U_1 = \eli R_1 = \frac{ \ele_1 +  \ele_2 }{ R_1 + r_2 + R_2 + r_1 } \cdot R_1, \\
+        &P_1 = \eli^2 R_1 = \frac{\sqr{ \ele_1 +  \ele_2 } R_1}{ \sqr{ R_1 + r_2 + R_2 + r_1 }}.
     \end{align*}
 
     Отметим, что ответ для тока $\eli$ меняет знак, если отметить его на рисунке в другую сторону.
@@ -2592,7 +2592,7 @@
     Определите, в каком резисторе выделяется большая тепловая мощность и во сколько раз?
 }
 \answer{%
-    Подключены параллельно, поэтому  $U_1 = U_2 = U \implies \frac{P_2}{P_1} = \frac{ \frac{ U_2^2 }{ R_2 } }{ \frac{ U_1^2 }{ R_1 } } = \frac{ U^2R_1 }{ U^2R_2 } = \frac{ R_1 }{ R_2 } = \frac78$.
+    Подключены параллельно, поэтому  $U_1 = U_2 = U \implies \frac{P_2}{P_1} = \frac{\frac{U_2^2}{R_2}}{\frac{U_1^2}{R_1}} = \frac{U^2R_1}{U^2R_2} = \frac{R_1}{R_2} = \frac78$.
 }
 \solutionspace{120pt}
 
@@ -2664,9 +2664,9 @@
     \begin{tikzpicture}[circuit ee IEC, thick]
         \draw  (0, 0) -- ++(up:2)
                 to [
-                    battery={very near start, rotate=-180, info={$\ele_1, r_1 $}},
-                    resistor={midway, info=$R_1$},
-                    battery={very near end, rotate=-180, info={$\ele_2, r_2 $}}
+                    battery={ very near start, rotate=-180, info={$\ele_1, r_1 $}},
+                    resistor={ midway, info=$R_1$},
+                    battery={ very near end, rotate=-180, info={$\ele_2, r_2 $}}
                 ] ++(right:5)
                 -- ++(down:2)
                 to [resistor={info=$R_2$}] ++(left:5);
@@ -2682,9 +2682,9 @@
     \begin{tikzpicture}[circuit ee IEC, thick]
         \draw  (0, 0) -- ++(up:2)
                 to [
-                    battery={very near start, rotate=-180, info={$\ele_1, r_1 $}},
-                    resistor={midway, info=$R_1$},
-                    battery={very near end, rotate=-180, info={$\ele_2, r_2 $}}
+                    battery={ very near start, rotate=-180, info={$\ele_1, r_1 $}},
+                    resistor={ midway, info=$R_1$},
+                    battery={ very near end, rotate=-180, info={$\ele_2, r_2 $}}
                 ] ++(right:5)
                 -- ++(down:2)
                 to [resistor={info=$R_2$}, current direction={near end, info=$\eli$}] ++(left:5);
@@ -2694,9 +2694,9 @@
     \begin{align*}
         & \ele_1 +  \ele_2 = \eli R_1 + \eli r_2 + \eli R_2 + \eli r_1, \\
         & \ele_1 +  \ele_2 = \eli (R_1 + r_2 + R_2 + r_1), \\
-        &\eli = \frac{ \ele_1 +  \ele_2}{R_1 + r_2 + R_2 + r_1}, \\
-        &U_2 = \eli R_2 = \frac{ \ele_1 +  \ele_2}{R_1 + r_2 + R_2 + r_1} \cdot R_2, \\
-        &P_2 = \eli^2 R_2 = \frac{\sqr{ \ele_1 +  \ele_2} R_2}{\sqr{R_1 + r_2 + R_2 + r_1}}.
+        &\eli = \frac{ \ele_1 +  \ele_2 }{ R_1 + r_2 + R_2 + r_1 }, \\
+        &U_2 = \eli R_2 = \frac{ \ele_1 +  \ele_2 }{ R_1 + r_2 + R_2 + r_1 } \cdot R_2, \\
+        &P_2 = \eli^2 R_2 = \frac{\sqr{ \ele_1 +  \ele_2 } R_2}{ \sqr{ R_1 + r_2 + R_2 + r_1 }}.
     \end{align*}
 
     Отметим, что ответ для тока $\eli$ меняет знак, если отметить его на рисунке в другую сторону.
@@ -2715,7 +2715,7 @@
     Определите, в каком резисторе выделяется большая тепловая мощность и во сколько раз?
 }
 \answer{%
-    Подключены последовательно, поэтому  $\eli_1 = \eli_2 = \eli \implies \frac{P_2}{P_1} = \frac{ \eli_2^2 R_2 }{ \eli_1^2 R_1 } = \frac{ \eli_2^2R_2 }{ \eli_1R_1 } = \frac{ R_2 }{ R_1 } = 2$.
+    Подключены последовательно, поэтому  $\eli_1 = \eli_2 = \eli \implies \frac{P_2}{P_1} = \frac{\eli_2^2 R_2}{\eli_1^2 R_1} = \frac{\eli_2^2R_2}{\eli_1R_1} = \frac{R_2}{R_1} = 2$.
 }
 \solutionspace{120pt}
 
@@ -2787,9 +2787,9 @@
     \begin{tikzpicture}[circuit ee IEC, thick]
         \draw  (0, 0) -- ++(up:2)
                 to [
-                    battery={very near start, rotate=-180, info={$\ele_1, r_1 $}},
-                    resistor={midway, info=$R_1$},
-                    battery={very near end, rotate=-180, info={$\ele_2, r_2 $}}
+                    battery={ very near start, rotate=-180, info={$\ele_1, r_1 $}},
+                    resistor={ midway, info=$R_1$},
+                    battery={ very near end, rotate=-180, info={$\ele_2, r_2 $}}
                 ] ++(right:5)
                 -- ++(down:2)
                 to [resistor={info=$R_2$}] ++(left:5);
@@ -2805,9 +2805,9 @@
     \begin{tikzpicture}[circuit ee IEC, thick]
         \draw  (0, 0) -- ++(up:2)
                 to [
-                    battery={very near start, rotate=-180, info={$\ele_1, r_1 $}},
-                    resistor={midway, info=$R_1$},
-                    battery={very near end, rotate=-180, info={$\ele_2, r_2 $}}
+                    battery={ very near start, rotate=-180, info={$\ele_1, r_1 $}},
+                    resistor={ midway, info=$R_1$},
+                    battery={ very near end, rotate=-180, info={$\ele_2, r_2 $}}
                 ] ++(right:5)
                 -- ++(down:2)
                 to [resistor={info=$R_2$}, current direction={near end, info=$\eli$}] ++(left:5);
@@ -2817,9 +2817,9 @@
     \begin{align*}
         & \ele_1 +  \ele_2 = \eli R_1 + \eli r_2 + \eli R_2 + \eli r_1, \\
         & \ele_1 +  \ele_2 = \eli (R_1 + r_2 + R_2 + r_1), \\
-        &\eli = \frac{ \ele_1 +  \ele_2}{R_1 + r_2 + R_2 + r_1}, \\
-        &U_1 = \eli R_1 = \frac{ \ele_1 +  \ele_2}{R_1 + r_2 + R_2 + r_1} \cdot R_1, \\
-        &P_1 = \eli^2 R_1 = \frac{\sqr{ \ele_1 +  \ele_2} R_1}{\sqr{R_1 + r_2 + R_2 + r_1}}.
+        &\eli = \frac{ \ele_1 +  \ele_2 }{ R_1 + r_2 + R_2 + r_1 }, \\
+        &U_1 = \eli R_1 = \frac{ \ele_1 +  \ele_2 }{ R_1 + r_2 + R_2 + r_1 } \cdot R_1, \\
+        &P_1 = \eli^2 R_1 = \frac{\sqr{ \ele_1 +  \ele_2 } R_1}{ \sqr{ R_1 + r_2 + R_2 + r_1 }}.
     \end{align*}
 
     Отметим, что ответ для тока $\eli$ меняет знак, если отметить его на рисунке в другую сторону.
@@ -2838,7 +2838,7 @@
     Определите, в каком резисторе выделяется большая тепловая мощность и во сколько раз?
 }
 \answer{%
-    Подключены последовательно, поэтому  $\eli_1 = \eli_2 = \eli \implies \frac{P_2}{P_1} = \frac{ \eli_2^2 R_2 }{ \eli_1^2 R_1 } = \frac{ \eli_2^2R_2 }{ \eli_1R_1 } = \frac{ R_2 }{ R_1 } = \frac47$.
+    Подключены последовательно, поэтому  $\eli_1 = \eli_2 = \eli \implies \frac{P_2}{P_1} = \frac{\eli_2^2 R_2}{\eli_1^2 R_1} = \frac{\eli_2^2R_2}{\eli_1R_1} = \frac{R_2}{R_1} = \frac47$.
 }
 \solutionspace{120pt}
 
@@ -2910,9 +2910,9 @@
     \begin{tikzpicture}[circuit ee IEC, thick]
         \draw  (0, 0) -- ++(up:2)
                 to [
-                    battery={very near start, rotate=0, info={$\ele_1, r_1 $}},
-                    resistor={midway, info=$R_1$},
-                    battery={very near end, rotate=-180, info={$\ele_2, r_2 $}}
+                    battery={ very near start, rotate=0, info={$\ele_1, r_1 $}},
+                    resistor={ midway, info=$R_1$},
+                    battery={ very near end, rotate=-180, info={$\ele_2, r_2 $}}
                 ] ++(right:5)
                 -- ++(down:2)
                 to [resistor={info=$R_2$}] ++(left:5);
@@ -2928,9 +2928,9 @@
     \begin{tikzpicture}[circuit ee IEC, thick]
         \draw  (0, 0) -- ++(up:2)
                 to [
-                    battery={very near start, rotate=0, info={$\ele_1, r_1 $}},
-                    resistor={midway, info=$R_1$},
-                    battery={very near end, rotate=-180, info={$\ele_2, r_2 $}}
+                    battery={ very near start, rotate=0, info={$\ele_1, r_1 $}},
+                    resistor={ midway, info=$R_1$},
+                    battery={ very near end, rotate=-180, info={$\ele_2, r_2 $}}
                 ] ++(right:5)
                 -- ++(down:2)
                 to [resistor={info=$R_2$}, current direction={near end, info=$\eli$}] ++(left:5);
@@ -2940,9 +2940,9 @@
     \begin{align*}
         &- \ele_1 +  \ele_2 = \eli R_1 + \eli r_2 + \eli R_2 + \eli r_1, \\
         &- \ele_1 +  \ele_2 = \eli (R_1 + r_2 + R_2 + r_1), \\
-        &\eli = \frac{- \ele_1 +  \ele_2}{R_1 + r_2 + R_2 + r_1}, \\
-        &U_1 = \eli R_1 = \frac{- \ele_1 +  \ele_2}{R_1 + r_2 + R_2 + r_1} \cdot R_1, \\
-        &P_1 = \eli^2 R_1 = \frac{\sqr{- \ele_1 +  \ele_2} R_1}{\sqr{R_1 + r_2 + R_2 + r_1}}.
+        &\eli = \frac{- \ele_1 +  \ele_2 }{ R_1 + r_2 + R_2 + r_1 }, \\
+        &U_1 = \eli R_1 = \frac{- \ele_1 +  \ele_2 }{ R_1 + r_2 + R_2 + r_1 } \cdot R_1, \\
+        &P_1 = \eli^2 R_1 = \frac{\sqr{- \ele_1 +  \ele_2 } R_1}{ \sqr{ R_1 + r_2 + R_2 + r_1 }}.
     \end{align*}
 
     Отметим, что ответ для тока $\eli$ меняет знак, если отметить его на рисунке в другую сторону.
@@ -2961,7 +2961,7 @@
     Определите, в каком резисторе выделяется большая тепловая мощность и во сколько раз?
 }
 \answer{%
-    Подключены параллельно, поэтому  $U_1 = U_2 = U \implies \frac{P_2}{P_1} = \frac{ \frac{ U_2^2 }{ R_2 } }{ \frac{ U_1^2 }{ R_1 } } = \frac{ U^2R_1 }{ U^2R_2 } = \frac{ R_1 }{ R_2 } = \frac58$.
+    Подключены параллельно, поэтому  $U_1 = U_2 = U \implies \frac{P_2}{P_1} = \frac{\frac{U_2^2}{R_2}}{\frac{U_1^2}{R_1}} = \frac{U^2R_1}{U^2R_2} = \frac{R_1}{R_2} = \frac58$.
 }
 \solutionspace{120pt}
 
@@ -3033,9 +3033,9 @@
     \begin{tikzpicture}[circuit ee IEC, thick]
         \draw  (0, 0) -- ++(up:2)
                 to [
-                    battery={very near start, rotate=-180, info={$\ele_1, r_1 $}},
-                    resistor={midway, info=$R_1$},
-                    battery={very near end, rotate=0, info={$\ele_2, r_2 $}}
+                    battery={ very near start, rotate=-180, info={$\ele_1, r_1 $}},
+                    resistor={ midway, info=$R_1$},
+                    battery={ very near end, rotate=0, info={$\ele_2, r_2 $}}
                 ] ++(right:5)
                 -- ++(down:2)
                 to [resistor={info=$R_2$}] ++(left:5);
@@ -3051,9 +3051,9 @@
     \begin{tikzpicture}[circuit ee IEC, thick]
         \draw  (0, 0) -- ++(up:2)
                 to [
-                    battery={very near start, rotate=-180, info={$\ele_1, r_1 $}},
-                    resistor={midway, info=$R_1$},
-                    battery={very near end, rotate=0, info={$\ele_2, r_2 $}}
+                    battery={ very near start, rotate=-180, info={$\ele_1, r_1 $}},
+                    resistor={ midway, info=$R_1$},
+                    battery={ very near end, rotate=0, info={$\ele_2, r_2 $}}
                 ] ++(right:5)
                 -- ++(down:2)
                 to [resistor={info=$R_2$}, current direction={near end, info=$\eli$}] ++(left:5);
@@ -3063,9 +3063,9 @@
     \begin{align*}
         & \ele_1 - \ele_2 = \eli R_1 + \eli r_2 + \eli R_2 + \eli r_1, \\
         & \ele_1 - \ele_2 = \eli (R_1 + r_2 + R_2 + r_1), \\
-        &\eli = \frac{ \ele_1 - \ele_2}{R_1 + r_2 + R_2 + r_1}, \\
-        &U_2 = \eli R_2 = \frac{ \ele_1 - \ele_2}{R_1 + r_2 + R_2 + r_1} \cdot R_2, \\
-        &P_2 = \eli^2 R_2 = \frac{\sqr{ \ele_1 - \ele_2} R_2}{\sqr{R_1 + r_2 + R_2 + r_1}}.
+        &\eli = \frac{ \ele_1 - \ele_2 }{ R_1 + r_2 + R_2 + r_1 }, \\
+        &U_2 = \eli R_2 = \frac{ \ele_1 - \ele_2 }{ R_1 + r_2 + R_2 + r_1 } \cdot R_2, \\
+        &P_2 = \eli^2 R_2 = \frac{\sqr{ \ele_1 - \ele_2 } R_2}{ \sqr{ R_1 + r_2 + R_2 + r_1 }}.
     \end{align*}
 
     Отметим, что ответ для тока $\eli$ меняет знак, если отметить его на рисунке в другую сторону.
@@ -3084,7 +3084,7 @@
     Определите, в каком резисторе выделяется большая тепловая мощность и во сколько раз?
 }
 \answer{%
-    Подключены последовательно, поэтому  $\eli_1 = \eli_2 = \eli \implies \frac{P_2}{P_1} = \frac{ \eli_2^2 R_2 }{ \eli_1^2 R_1 } = \frac{ \eli_2^2R_2 }{ \eli_1R_1 } = \frac{ R_2 }{ R_1 } = \frac85$.
+    Подключены последовательно, поэтому  $\eli_1 = \eli_2 = \eli \implies \frac{P_2}{P_1} = \frac{\eli_2^2 R_2}{\eli_1^2 R_1} = \frac{\eli_2^2R_2}{\eli_1R_1} = \frac{R_2}{R_1} = \frac85$.
 }
 \solutionspace{120pt}
 
@@ -3156,9 +3156,9 @@
     \begin{tikzpicture}[circuit ee IEC, thick]
         \draw  (0, 0) -- ++(up:2)
                 to [
-                    battery={very near start, rotate=0, info={$\ele_1, r_1 $}},
-                    resistor={midway, info=$R_1$},
-                    battery={very near end, rotate=-180, info={$\ele_2, r_2 $}}
+                    battery={ very near start, rotate=0, info={$\ele_1, r_1 $}},
+                    resistor={ midway, info=$R_1$},
+                    battery={ very near end, rotate=-180, info={$\ele_2, r_2 $}}
                 ] ++(right:5)
                 -- ++(down:2)
                 to [resistor={info=$R_2$}] ++(left:5);
@@ -3174,9 +3174,9 @@
     \begin{tikzpicture}[circuit ee IEC, thick]
         \draw  (0, 0) -- ++(up:2)
                 to [
-                    battery={very near start, rotate=0, info={$\ele_1, r_1 $}},
-                    resistor={midway, info=$R_1$},
-                    battery={very near end, rotate=-180, info={$\ele_2, r_2 $}}
+                    battery={ very near start, rotate=0, info={$\ele_1, r_1 $}},
+                    resistor={ midway, info=$R_1$},
+                    battery={ very near end, rotate=-180, info={$\ele_2, r_2 $}}
                 ] ++(right:5)
                 -- ++(down:2)
                 to [resistor={info=$R_2$}, current direction={near end, info=$\eli$}] ++(left:5);
@@ -3186,9 +3186,9 @@
     \begin{align*}
         &- \ele_1 +  \ele_2 = \eli R_1 + \eli r_2 + \eli R_2 + \eli r_1, \\
         &- \ele_1 +  \ele_2 = \eli (R_1 + r_2 + R_2 + r_1), \\
-        &\eli = \frac{- \ele_1 +  \ele_2}{R_1 + r_2 + R_2 + r_1}, \\
-        &U_1 = \eli R_1 = \frac{- \ele_1 +  \ele_2}{R_1 + r_2 + R_2 + r_1} \cdot R_1, \\
-        &P_1 = \eli^2 R_1 = \frac{\sqr{- \ele_1 +  \ele_2} R_1}{\sqr{R_1 + r_2 + R_2 + r_1}}.
+        &\eli = \frac{- \ele_1 +  \ele_2 }{ R_1 + r_2 + R_2 + r_1 }, \\
+        &U_1 = \eli R_1 = \frac{- \ele_1 +  \ele_2 }{ R_1 + r_2 + R_2 + r_1 } \cdot R_1, \\
+        &P_1 = \eli^2 R_1 = \frac{\sqr{- \ele_1 +  \ele_2 } R_1}{ \sqr{ R_1 + r_2 + R_2 + r_1 }}.
     \end{align*}
 
     Отметим, что ответ для тока $\eli$ меняет знак, если отметить его на рисунке в другую сторону.
@@ -3207,7 +3207,7 @@
     Определите, в каком резисторе выделяется большая тепловая мощность и во сколько раз?
 }
 \answer{%
-    Подключены параллельно, поэтому  $U_1 = U_2 = U \implies \frac{P_2}{P_1} = \frac{ \frac{ U_2^2 }{ R_2 } }{ \frac{ U_1^2 }{ R_1 } } = \frac{ U^2R_1 }{ U^2R_2 } = \frac{ R_1 }{ R_2 } = \frac56$.
+    Подключены параллельно, поэтому  $U_1 = U_2 = U \implies \frac{P_2}{P_1} = \frac{\frac{U_2^2}{R_2}}{\frac{U_1^2}{R_1}} = \frac{U^2R_1}{U^2R_2} = \frac{R_1}{R_2} = \frac56$.
 }
 \solutionspace{120pt}
 
@@ -3279,9 +3279,9 @@
     \begin{tikzpicture}[circuit ee IEC, thick]
         \draw  (0, 0) -- ++(up:2)
                 to [
-                    battery={very near start, rotate=-180, info={$\ele_1, r_1 $}},
-                    resistor={midway, info=$R_1$},
-                    battery={very near end, rotate=0, info={$\ele_2, r_2 $}}
+                    battery={ very near start, rotate=-180, info={$\ele_1, r_1 $}},
+                    resistor={ midway, info=$R_1$},
+                    battery={ very near end, rotate=0, info={$\ele_2, r_2 $}}
                 ] ++(right:5)
                 -- ++(down:2)
                 to [resistor={info=$R_2$}] ++(left:5);
@@ -3297,9 +3297,9 @@
     \begin{tikzpicture}[circuit ee IEC, thick]
         \draw  (0, 0) -- ++(up:2)
                 to [
-                    battery={very near start, rotate=-180, info={$\ele_1, r_1 $}},
-                    resistor={midway, info=$R_1$},
-                    battery={very near end, rotate=0, info={$\ele_2, r_2 $}}
+                    battery={ very near start, rotate=-180, info={$\ele_1, r_1 $}},
+                    resistor={ midway, info=$R_1$},
+                    battery={ very near end, rotate=0, info={$\ele_2, r_2 $}}
                 ] ++(right:5)
                 -- ++(down:2)
                 to [resistor={info=$R_2$}, current direction={near end, info=$\eli$}] ++(left:5);
@@ -3309,9 +3309,9 @@
     \begin{align*}
         & \ele_1 - \ele_2 = \eli R_1 + \eli r_2 + \eli R_2 + \eli r_1, \\
         & \ele_1 - \ele_2 = \eli (R_1 + r_2 + R_2 + r_1), \\
-        &\eli = \frac{ \ele_1 - \ele_2}{R_1 + r_2 + R_2 + r_1}, \\
-        &U_1 = \eli R_1 = \frac{ \ele_1 - \ele_2}{R_1 + r_2 + R_2 + r_1} \cdot R_1, \\
-        &P_1 = \eli^2 R_1 = \frac{\sqr{ \ele_1 - \ele_2} R_1}{\sqr{R_1 + r_2 + R_2 + r_1}}.
+        &\eli = \frac{ \ele_1 - \ele_2 }{ R_1 + r_2 + R_2 + r_1 }, \\
+        &U_1 = \eli R_1 = \frac{ \ele_1 - \ele_2 }{ R_1 + r_2 + R_2 + r_1 } \cdot R_1, \\
+        &P_1 = \eli^2 R_1 = \frac{\sqr{ \ele_1 - \ele_2 } R_1}{ \sqr{ R_1 + r_2 + R_2 + r_1 }}.
     \end{align*}
 
     Отметим, что ответ для тока $\eli$ меняет знак, если отметить его на рисунке в другую сторону.
@@ -3330,7 +3330,7 @@
     Определите, в каком резисторе выделяется большая тепловая мощность и во сколько раз?
 }
 \answer{%
-    Подключены параллельно, поэтому  $U_1 = U_2 = U \implies \frac{P_2}{P_1} = \frac{ \frac{ U_2^2 }{ R_2 } }{ \frac{ U_1^2 }{ R_1 } } = \frac{ U^2R_1 }{ U^2R_2 } = \frac{ R_1 }{ R_2 } = \frac38$.
+    Подключены параллельно, поэтому  $U_1 = U_2 = U \implies \frac{P_2}{P_1} = \frac{\frac{U_2^2}{R_2}}{\frac{U_1^2}{R_1}} = \frac{U^2R_1}{U^2R_2} = \frac{R_1}{R_2} = \frac38$.
 }
 \solutionspace{120pt}
 
@@ -3402,9 +3402,9 @@
     \begin{tikzpicture}[circuit ee IEC, thick]
         \draw  (0, 0) -- ++(up:2)
                 to [
-                    battery={very near start, rotate=-180, info={$\ele_1, r_1 $}},
-                    resistor={midway, info=$R_1$},
-                    battery={very near end, rotate=0, info={$\ele_2, r_2 $}}
+                    battery={ very near start, rotate=-180, info={$\ele_1, r_1 $}},
+                    resistor={ midway, info=$R_1$},
+                    battery={ very near end, rotate=0, info={$\ele_2, r_2 $}}
                 ] ++(right:5)
                 -- ++(down:2)
                 to [resistor={info=$R_2$}] ++(left:5);
@@ -3420,9 +3420,9 @@
     \begin{tikzpicture}[circuit ee IEC, thick]
         \draw  (0, 0) -- ++(up:2)
                 to [
-                    battery={very near start, rotate=-180, info={$\ele_1, r_1 $}},
-                    resistor={midway, info=$R_1$},
-                    battery={very near end, rotate=0, info={$\ele_2, r_2 $}}
+                    battery={ very near start, rotate=-180, info={$\ele_1, r_1 $}},
+                    resistor={ midway, info=$R_1$},
+                    battery={ very near end, rotate=0, info={$\ele_2, r_2 $}}
                 ] ++(right:5)
                 -- ++(down:2)
                 to [resistor={info=$R_2$}, current direction={near end, info=$\eli$}] ++(left:5);
@@ -3432,9 +3432,9 @@
     \begin{align*}
         & \ele_1 - \ele_2 = \eli R_1 + \eli r_2 + \eli R_2 + \eli r_1, \\
         & \ele_1 - \ele_2 = \eli (R_1 + r_2 + R_2 + r_1), \\
-        &\eli = \frac{ \ele_1 - \ele_2}{R_1 + r_2 + R_2 + r_1}, \\
-        &U_2 = \eli R_2 = \frac{ \ele_1 - \ele_2}{R_1 + r_2 + R_2 + r_1} \cdot R_2, \\
-        &P_2 = \eli^2 R_2 = \frac{\sqr{ \ele_1 - \ele_2} R_2}{\sqr{R_1 + r_2 + R_2 + r_1}}.
+        &\eli = \frac{ \ele_1 - \ele_2 }{ R_1 + r_2 + R_2 + r_1 }, \\
+        &U_2 = \eli R_2 = \frac{ \ele_1 - \ele_2 }{ R_1 + r_2 + R_2 + r_1 } \cdot R_2, \\
+        &P_2 = \eli^2 R_2 = \frac{\sqr{ \ele_1 - \ele_2 } R_2}{ \sqr{ R_1 + r_2 + R_2 + r_1 }}.
     \end{align*}
 
     Отметим, что ответ для тока $\eli$ меняет знак, если отметить его на рисунке в другую сторону.
@@ -3453,7 +3453,7 @@
     Определите, в каком резисторе выделяется большая тепловая мощность и во сколько раз?
 }
 \answer{%
-    Подключены последовательно, поэтому  $\eli_1 = \eli_2 = \eli \implies \frac{P_2}{P_1} = \frac{ \eli_2^2 R_2 }{ \eli_1^2 R_1 } = \frac{ \eli_2^2R_2 }{ \eli_1R_1 } = \frac{ R_2 }{ R_1 } = \frac83$.
+    Подключены последовательно, поэтому  $\eli_1 = \eli_2 = \eli \implies \frac{P_2}{P_1} = \frac{\eli_2^2 R_2}{\eli_1^2 R_1} = \frac{\eli_2^2R_2}{\eli_1R_1} = \frac{R_2}{R_1} = \frac83$.
 }
 \solutionspace{120pt}
 
@@ -3525,9 +3525,9 @@
     \begin{tikzpicture}[circuit ee IEC, thick]
         \draw  (0, 0) -- ++(up:2)
                 to [
-                    battery={very near start, rotate=0, info={$\ele_1, r_1 $}},
-                    resistor={midway, info=$R_1$},
-                    battery={very near end, rotate=0, info={$\ele_2, r_2 $}}
+                    battery={ very near start, rotate=0, info={$\ele_1, r_1 $}},
+                    resistor={ midway, info=$R_1$},
+                    battery={ very near end, rotate=0, info={$\ele_2, r_2 $}}
                 ] ++(right:5)
                 -- ++(down:2)
                 to [resistor={info=$R_2$}] ++(left:5);
@@ -3543,9 +3543,9 @@
     \begin{tikzpicture}[circuit ee IEC, thick]
         \draw  (0, 0) -- ++(up:2)
                 to [
-                    battery={very near start, rotate=0, info={$\ele_1, r_1 $}},
-                    resistor={midway, info=$R_1$},
-                    battery={very near end, rotate=0, info={$\ele_2, r_2 $}}
+                    battery={ very near start, rotate=0, info={$\ele_1, r_1 $}},
+                    resistor={ midway, info=$R_1$},
+                    battery={ very near end, rotate=0, info={$\ele_2, r_2 $}}
                 ] ++(right:5)
                 -- ++(down:2)
                 to [resistor={info=$R_2$}, current direction={near end, info=$\eli$}] ++(left:5);
@@ -3555,9 +3555,9 @@
     \begin{align*}
         &- \ele_1 - \ele_2 = \eli R_1 + \eli r_2 + \eli R_2 + \eli r_1, \\
         &- \ele_1 - \ele_2 = \eli (R_1 + r_2 + R_2 + r_1), \\
-        &\eli = \frac{- \ele_1 - \ele_2}{R_1 + r_2 + R_2 + r_1}, \\
-        &U_1 = \eli R_1 = \frac{- \ele_1 - \ele_2}{R_1 + r_2 + R_2 + r_1} \cdot R_1, \\
-        &P_1 = \eli^2 R_1 = \frac{\sqr{- \ele_1 - \ele_2} R_1}{\sqr{R_1 + r_2 + R_2 + r_1}}.
+        &\eli = \frac{- \ele_1 - \ele_2 }{ R_1 + r_2 + R_2 + r_1 }, \\
+        &U_1 = \eli R_1 = \frac{- \ele_1 - \ele_2 }{ R_1 + r_2 + R_2 + r_1 } \cdot R_1, \\
+        &P_1 = \eli^2 R_1 = \frac{\sqr{- \ele_1 - \ele_2 } R_1}{ \sqr{ R_1 + r_2 + R_2 + r_1 }}.
     \end{align*}
 
     Отметим, что ответ для тока $\eli$ меняет знак, если отметить его на рисунке в другую сторону.
@@ -3576,7 +3576,7 @@
     Определите, в каком резисторе выделяется большая тепловая мощность и во сколько раз?
 }
 \answer{%
-    Подключены последовательно, поэтому  $\eli_1 = \eli_2 = \eli \implies \frac{P_2}{P_1} = \frac{ \eli_2^2 R_2 }{ \eli_1^2 R_1 } = \frac{ \eli_2^2R_2 }{ \eli_1R_1 } = \frac{ R_2 }{ R_1 } = \frac25$.
+    Подключены последовательно, поэтому  $\eli_1 = \eli_2 = \eli \implies \frac{P_2}{P_1} = \frac{\eli_2^2 R_2}{\eli_1^2 R_1} = \frac{\eli_2^2R_2}{\eli_1R_1} = \frac{R_2}{R_1} = \frac25$.
 }
 \solutionspace{120pt}
 
@@ -3648,9 +3648,9 @@
     \begin{tikzpicture}[circuit ee IEC, thick]
         \draw  (0, 0) -- ++(up:2)
                 to [
-                    battery={very near start, rotate=-180, info={$\ele_1, r_1 $}},
-                    resistor={midway, info=$R_1$},
-                    battery={very near end, rotate=-180, info={$\ele_2, r_2 $}}
+                    battery={ very near start, rotate=-180, info={$\ele_1, r_1 $}},
+                    resistor={ midway, info=$R_1$},
+                    battery={ very near end, rotate=-180, info={$\ele_2, r_2 $}}
                 ] ++(right:5)
                 -- ++(down:2)
                 to [resistor={info=$R_2$}] ++(left:5);
@@ -3666,9 +3666,9 @@
     \begin{tikzpicture}[circuit ee IEC, thick]
         \draw  (0, 0) -- ++(up:2)
                 to [
-                    battery={very near start, rotate=-180, info={$\ele_1, r_1 $}},
-                    resistor={midway, info=$R_1$},
-                    battery={very near end, rotate=-180, info={$\ele_2, r_2 $}}
+                    battery={ very near start, rotate=-180, info={$\ele_1, r_1 $}},
+                    resistor={ midway, info=$R_1$},
+                    battery={ very near end, rotate=-180, info={$\ele_2, r_2 $}}
                 ] ++(right:5)
                 -- ++(down:2)
                 to [resistor={info=$R_2$}, current direction={near end, info=$\eli$}] ++(left:5);
@@ -3678,9 +3678,9 @@
     \begin{align*}
         & \ele_1 +  \ele_2 = \eli R_1 + \eli r_2 + \eli R_2 + \eli r_1, \\
         & \ele_1 +  \ele_2 = \eli (R_1 + r_2 + R_2 + r_1), \\
-        &\eli = \frac{ \ele_1 +  \ele_2}{R_1 + r_2 + R_2 + r_1}, \\
-        &U_2 = \eli R_2 = \frac{ \ele_1 +  \ele_2}{R_1 + r_2 + R_2 + r_1} \cdot R_2, \\
-        &P_2 = \eli^2 R_2 = \frac{\sqr{ \ele_1 +  \ele_2} R_2}{\sqr{R_1 + r_2 + R_2 + r_1}}.
+        &\eli = \frac{ \ele_1 +  \ele_2 }{ R_1 + r_2 + R_2 + r_1 }, \\
+        &U_2 = \eli R_2 = \frac{ \ele_1 +  \ele_2 }{ R_1 + r_2 + R_2 + r_1 } \cdot R_2, \\
+        &P_2 = \eli^2 R_2 = \frac{\sqr{ \ele_1 +  \ele_2 } R_2}{ \sqr{ R_1 + r_2 + R_2 + r_1 }}.
     \end{align*}
 
     Отметим, что ответ для тока $\eli$ меняет знак, если отметить его на рисунке в другую сторону.
@@ -3699,7 +3699,7 @@
     Определите, в каком резисторе выделяется большая тепловая мощность и во сколько раз?
 }
 \answer{%
-    Подключены последовательно, поэтому  $\eli_1 = \eli_2 = \eli \implies \frac{P_2}{P_1} = \frac{ \eli_2^2 R_2 }{ \eli_1^2 R_1 } = \frac{ \eli_2^2R_2 }{ \eli_1R_1 } = \frac{ R_2 }{ R_1 } = \frac47$.
+    Подключены последовательно, поэтому  $\eli_1 = \eli_2 = \eli \implies \frac{P_2}{P_1} = \frac{\eli_2^2 R_2}{\eli_1^2 R_1} = \frac{\eli_2^2R_2}{\eli_1R_1} = \frac{R_2}{R_1} = \frac47$.
 }
 \solutionspace{120pt}
 
@@ -3771,9 +3771,9 @@
     \begin{tikzpicture}[circuit ee IEC, thick]
         \draw  (0, 0) -- ++(up:2)
                 to [
-                    battery={very near start, rotate=0, info={$\ele_1, r_1 $}},
-                    resistor={midway, info=$R_1$},
-                    battery={very near end, rotate=0, info={$\ele_2, r_2 $}}
+                    battery={ very near start, rotate=0, info={$\ele_1, r_1 $}},
+                    resistor={ midway, info=$R_1$},
+                    battery={ very near end, rotate=0, info={$\ele_2, r_2 $}}
                 ] ++(right:5)
                 -- ++(down:2)
                 to [resistor={info=$R_2$}] ++(left:5);
@@ -3789,9 +3789,9 @@
     \begin{tikzpicture}[circuit ee IEC, thick]
         \draw  (0, 0) -- ++(up:2)
                 to [
-                    battery={very near start, rotate=0, info={$\ele_1, r_1 $}},
-                    resistor={midway, info=$R_1$},
-                    battery={very near end, rotate=0, info={$\ele_2, r_2 $}}
+                    battery={ very near start, rotate=0, info={$\ele_1, r_1 $}},
+                    resistor={ midway, info=$R_1$},
+                    battery={ very near end, rotate=0, info={$\ele_2, r_2 $}}
                 ] ++(right:5)
                 -- ++(down:2)
                 to [resistor={info=$R_2$}, current direction={near end, info=$\eli$}] ++(left:5);
@@ -3801,9 +3801,9 @@
     \begin{align*}
         &- \ele_1 - \ele_2 = \eli R_1 + \eli r_2 + \eli R_2 + \eli r_1, \\
         &- \ele_1 - \ele_2 = \eli (R_1 + r_2 + R_2 + r_1), \\
-        &\eli = \frac{- \ele_1 - \ele_2}{R_1 + r_2 + R_2 + r_1}, \\
-        &U_1 = \eli R_1 = \frac{- \ele_1 - \ele_2}{R_1 + r_2 + R_2 + r_1} \cdot R_1, \\
-        &P_1 = \eli^2 R_1 = \frac{\sqr{- \ele_1 - \ele_2} R_1}{\sqr{R_1 + r_2 + R_2 + r_1}}.
+        &\eli = \frac{- \ele_1 - \ele_2 }{ R_1 + r_2 + R_2 + r_1 }, \\
+        &U_1 = \eli R_1 = \frac{- \ele_1 - \ele_2 }{ R_1 + r_2 + R_2 + r_1 } \cdot R_1, \\
+        &P_1 = \eli^2 R_1 = \frac{\sqr{- \ele_1 - \ele_2 } R_1}{ \sqr{ R_1 + r_2 + R_2 + r_1 }}.
     \end{align*}
 
     Отметим, что ответ для тока $\eli$ меняет знак, если отметить его на рисунке в другую сторону.
@@ -3822,7 +3822,7 @@
     Определите, в каком резисторе выделяется большая тепловая мощность и во сколько раз?
 }
 \answer{%
-    Подключены последовательно, поэтому  $\eli_1 = \eli_2 = \eli \implies \frac{P_2}{P_1} = \frac{ \eli_2^2 R_2 }{ \eli_1^2 R_1 } = \frac{ \eli_2^2R_2 }{ \eli_1R_1 } = \frac{ R_2 }{ R_1 } = \frac43$.
+    Подключены последовательно, поэтому  $\eli_1 = \eli_2 = \eli \implies \frac{P_2}{P_1} = \frac{\eli_2^2 R_2}{\eli_1^2 R_1} = \frac{\eli_2^2R_2}{\eli_1R_1} = \frac{R_2}{R_1} = \frac43$.
 }
 \solutionspace{120pt}
 
@@ -3894,9 +3894,9 @@
     \begin{tikzpicture}[circuit ee IEC, thick]
         \draw  (0, 0) -- ++(up:2)
                 to [
-                    battery={very near start, rotate=0, info={$\ele_1, r_1 $}},
-                    resistor={midway, info=$R_1$},
-                    battery={very near end, rotate=-180, info={$\ele_2, r_2 $}}
+                    battery={ very near start, rotate=0, info={$\ele_1, r_1 $}},
+                    resistor={ midway, info=$R_1$},
+                    battery={ very near end, rotate=-180, info={$\ele_2, r_2 $}}
                 ] ++(right:5)
                 -- ++(down:2)
                 to [resistor={info=$R_2$}] ++(left:5);
@@ -3912,9 +3912,9 @@
     \begin{tikzpicture}[circuit ee IEC, thick]
         \draw  (0, 0) -- ++(up:2)
                 to [
-                    battery={very near start, rotate=0, info={$\ele_1, r_1 $}},
-                    resistor={midway, info=$R_1$},
-                    battery={very near end, rotate=-180, info={$\ele_2, r_2 $}}
+                    battery={ very near start, rotate=0, info={$\ele_1, r_1 $}},
+                    resistor={ midway, info=$R_1$},
+                    battery={ very near end, rotate=-180, info={$\ele_2, r_2 $}}
                 ] ++(right:5)
                 -- ++(down:2)
                 to [resistor={info=$R_2$}, current direction={near end, info=$\eli$}] ++(left:5);
@@ -3924,9 +3924,9 @@
     \begin{align*}
         &- \ele_1 +  \ele_2 = \eli R_1 + \eli r_2 + \eli R_2 + \eli r_1, \\
         &- \ele_1 +  \ele_2 = \eli (R_1 + r_2 + R_2 + r_1), \\
-        &\eli = \frac{- \ele_1 +  \ele_2}{R_1 + r_2 + R_2 + r_1}, \\
-        &U_1 = \eli R_1 = \frac{- \ele_1 +  \ele_2}{R_1 + r_2 + R_2 + r_1} \cdot R_1, \\
-        &P_1 = \eli^2 R_1 = \frac{\sqr{- \ele_1 +  \ele_2} R_1}{\sqr{R_1 + r_2 + R_2 + r_1}}.
+        &\eli = \frac{- \ele_1 +  \ele_2 }{ R_1 + r_2 + R_2 + r_1 }, \\
+        &U_1 = \eli R_1 = \frac{- \ele_1 +  \ele_2 }{ R_1 + r_2 + R_2 + r_1 } \cdot R_1, \\
+        &P_1 = \eli^2 R_1 = \frac{\sqr{- \ele_1 +  \ele_2 } R_1}{ \sqr{ R_1 + r_2 + R_2 + r_1 }}.
     \end{align*}
 
     Отметим, что ответ для тока $\eli$ меняет знак, если отметить его на рисунке в другую сторону.
@@ -3945,7 +3945,7 @@
     Определите, в каком резисторе выделяется большая тепловая мощность и во сколько раз?
 }
 \answer{%
-    Подключены последовательно, поэтому  $\eli_1 = \eli_2 = \eli \implies \frac{P_2}{P_1} = \frac{ \eli_2^2 R_2 }{ \eli_1^2 R_1 } = \frac{ \eli_2^2R_2 }{ \eli_1R_1 } = \frac{ R_2 }{ R_1 } = \frac65$.
+    Подключены последовательно, поэтому  $\eli_1 = \eli_2 = \eli \implies \frac{P_2}{P_1} = \frac{\eli_2^2 R_2}{\eli_1^2 R_1} = \frac{\eli_2^2R_2}{\eli_1R_1} = \frac{R_2}{R_1} = \frac65$.
 }
 \solutionspace{120pt}
 
@@ -4017,9 +4017,9 @@
     \begin{tikzpicture}[circuit ee IEC, thick]
         \draw  (0, 0) -- ++(up:2)
                 to [
-                    battery={very near start, rotate=-180, info={$\ele_1, r_1 $}},
-                    resistor={midway, info=$R_1$},
-                    battery={very near end, rotate=-180, info={$\ele_2, r_2 $}}
+                    battery={ very near start, rotate=-180, info={$\ele_1, r_1 $}},
+                    resistor={ midway, info=$R_1$},
+                    battery={ very near end, rotate=-180, info={$\ele_2, r_2 $}}
                 ] ++(right:5)
                 -- ++(down:2)
                 to [resistor={info=$R_2$}] ++(left:5);
@@ -4035,9 +4035,9 @@
     \begin{tikzpicture}[circuit ee IEC, thick]
         \draw  (0, 0) -- ++(up:2)
                 to [
-                    battery={very near start, rotate=-180, info={$\ele_1, r_1 $}},
-                    resistor={midway, info=$R_1$},
-                    battery={very near end, rotate=-180, info={$\ele_2, r_2 $}}
+                    battery={ very near start, rotate=-180, info={$\ele_1, r_1 $}},
+                    resistor={ midway, info=$R_1$},
+                    battery={ very near end, rotate=-180, info={$\ele_2, r_2 $}}
                 ] ++(right:5)
                 -- ++(down:2)
                 to [resistor={info=$R_2$}, current direction={near end, info=$\eli$}] ++(left:5);
@@ -4047,9 +4047,9 @@
     \begin{align*}
         & \ele_1 +  \ele_2 = \eli R_1 + \eli r_2 + \eli R_2 + \eli r_1, \\
         & \ele_1 +  \ele_2 = \eli (R_1 + r_2 + R_2 + r_1), \\
-        &\eli = \frac{ \ele_1 +  \ele_2}{R_1 + r_2 + R_2 + r_1}, \\
-        &U_2 = \eli R_2 = \frac{ \ele_1 +  \ele_2}{R_1 + r_2 + R_2 + r_1} \cdot R_2, \\
-        &P_2 = \eli^2 R_2 = \frac{\sqr{ \ele_1 +  \ele_2} R_2}{\sqr{R_1 + r_2 + R_2 + r_1}}.
+        &\eli = \frac{ \ele_1 +  \ele_2 }{ R_1 + r_2 + R_2 + r_1 }, \\
+        &U_2 = \eli R_2 = \frac{ \ele_1 +  \ele_2 }{ R_1 + r_2 + R_2 + r_1 } \cdot R_2, \\
+        &P_2 = \eli^2 R_2 = \frac{\sqr{ \ele_1 +  \ele_2 } R_2}{ \sqr{ R_1 + r_2 + R_2 + r_1 }}.
     \end{align*}
 
     Отметим, что ответ для тока $\eli$ меняет знак, если отметить его на рисунке в другую сторону.
@@ -4068,7 +4068,7 @@
     Определите, в каком резисторе выделяется большая тепловая мощность и во сколько раз?
 }
 \answer{%
-    Подключены последовательно, поэтому  $\eli_1 = \eli_2 = \eli \implies \frac{P_2}{P_1} = \frac{ \eli_2^2 R_2 }{ \eli_1^2 R_1 } = \frac{ \eli_2^2R_2 }{ \eli_1R_1 } = \frac{ R_2 }{ R_1 } = \frac43$.
+    Подключены последовательно, поэтому  $\eli_1 = \eli_2 = \eli \implies \frac{P_2}{P_1} = \frac{\eli_2^2 R_2}{\eli_1^2 R_1} = \frac{\eli_2^2R_2}{\eli_1R_1} = \frac{R_2}{R_1} = \frac43$.
 }
 \solutionspace{120pt}
 
@@ -4140,9 +4140,9 @@
     \begin{tikzpicture}[circuit ee IEC, thick]
         \draw  (0, 0) -- ++(up:2)
                 to [
-                    battery={very near start, rotate=-180, info={$\ele_1, r_1 $}},
-                    resistor={midway, info=$R_1$},
-                    battery={very near end, rotate=-180, info={$\ele_2, r_2 $}}
+                    battery={ very near start, rotate=-180, info={$\ele_1, r_1 $}},
+                    resistor={ midway, info=$R_1$},
+                    battery={ very near end, rotate=-180, info={$\ele_2, r_2 $}}
                 ] ++(right:5)
                 -- ++(down:2)
                 to [resistor={info=$R_2$}] ++(left:5);
@@ -4158,9 +4158,9 @@
     \begin{tikzpicture}[circuit ee IEC, thick]
         \draw  (0, 0) -- ++(up:2)
                 to [
-                    battery={very near start, rotate=-180, info={$\ele_1, r_1 $}},
-                    resistor={midway, info=$R_1$},
-                    battery={very near end, rotate=-180, info={$\ele_2, r_2 $}}
+                    battery={ very near start, rotate=-180, info={$\ele_1, r_1 $}},
+                    resistor={ midway, info=$R_1$},
+                    battery={ very near end, rotate=-180, info={$\ele_2, r_2 $}}
                 ] ++(right:5)
                 -- ++(down:2)
                 to [resistor={info=$R_2$}, current direction={near end, info=$\eli$}] ++(left:5);
@@ -4170,9 +4170,9 @@
     \begin{align*}
         & \ele_1 +  \ele_2 = \eli R_1 + \eli r_2 + \eli R_2 + \eli r_1, \\
         & \ele_1 +  \ele_2 = \eli (R_1 + r_2 + R_2 + r_1), \\
-        &\eli = \frac{ \ele_1 +  \ele_2}{R_1 + r_2 + R_2 + r_1}, \\
-        &U_2 = \eli R_2 = \frac{ \ele_1 +  \ele_2}{R_1 + r_2 + R_2 + r_1} \cdot R_2, \\
-        &P_2 = \eli^2 R_2 = \frac{\sqr{ \ele_1 +  \ele_2} R_2}{\sqr{R_1 + r_2 + R_2 + r_1}}.
+        &\eli = \frac{ \ele_1 +  \ele_2 }{ R_1 + r_2 + R_2 + r_1 }, \\
+        &U_2 = \eli R_2 = \frac{ \ele_1 +  \ele_2 }{ R_1 + r_2 + R_2 + r_1 } \cdot R_2, \\
+        &P_2 = \eli^2 R_2 = \frac{\sqr{ \ele_1 +  \ele_2 } R_2}{ \sqr{ R_1 + r_2 + R_2 + r_1 }}.
     \end{align*}
 
     Отметим, что ответ для тока $\eli$ меняет знак, если отметить его на рисунке в другую сторону.
@@ -4191,7 +4191,7 @@
     Определите, в каком резисторе выделяется большая тепловая мощность и во сколько раз?
 }
 \answer{%
-    Подключены последовательно, поэтому  $\eli_1 = \eli_2 = \eli \implies \frac{P_2}{P_1} = \frac{ \eli_2^2 R_2 }{ \eli_1^2 R_1 } = \frac{ \eli_2^2R_2 }{ \eli_1R_1 } = \frac{ R_2 }{ R_1 } = \frac85$.
+    Подключены последовательно, поэтому  $\eli_1 = \eli_2 = \eli \implies \frac{P_2}{P_1} = \frac{\eli_2^2 R_2}{\eli_1^2 R_1} = \frac{\eli_2^2R_2}{\eli_1R_1} = \frac{R_2}{R_1} = \frac85$.
 }
 \solutionspace{120pt}
 
@@ -4263,9 +4263,9 @@
     \begin{tikzpicture}[circuit ee IEC, thick]
         \draw  (0, 0) -- ++(up:2)
                 to [
-                    battery={very near start, rotate=0, info={$\ele_1, r_1 $}},
-                    resistor={midway, info=$R_1$},
-                    battery={very near end, rotate=0, info={$\ele_2, r_2 $}}
+                    battery={ very near start, rotate=0, info={$\ele_1, r_1 $}},
+                    resistor={ midway, info=$R_1$},
+                    battery={ very near end, rotate=0, info={$\ele_2, r_2 $}}
                 ] ++(right:5)
                 -- ++(down:2)
                 to [resistor={info=$R_2$}] ++(left:5);
@@ -4281,9 +4281,9 @@
     \begin{tikzpicture}[circuit ee IEC, thick]
         \draw  (0, 0) -- ++(up:2)
                 to [
-                    battery={very near start, rotate=0, info={$\ele_1, r_1 $}},
-                    resistor={midway, info=$R_1$},
-                    battery={very near end, rotate=0, info={$\ele_2, r_2 $}}
+                    battery={ very near start, rotate=0, info={$\ele_1, r_1 $}},
+                    resistor={ midway, info=$R_1$},
+                    battery={ very near end, rotate=0, info={$\ele_2, r_2 $}}
                 ] ++(right:5)
                 -- ++(down:2)
                 to [resistor={info=$R_2$}, current direction={near end, info=$\eli$}] ++(left:5);
@@ -4293,9 +4293,9 @@
     \begin{align*}
         &- \ele_1 - \ele_2 = \eli R_1 + \eli r_2 + \eli R_2 + \eli r_1, \\
         &- \ele_1 - \ele_2 = \eli (R_1 + r_2 + R_2 + r_1), \\
-        &\eli = \frac{- \ele_1 - \ele_2}{R_1 + r_2 + R_2 + r_1}, \\
-        &U_2 = \eli R_2 = \frac{- \ele_1 - \ele_2}{R_1 + r_2 + R_2 + r_1} \cdot R_2, \\
-        &P_2 = \eli^2 R_2 = \frac{\sqr{- \ele_1 - \ele_2} R_2}{\sqr{R_1 + r_2 + R_2 + r_1}}.
+        &\eli = \frac{- \ele_1 - \ele_2 }{ R_1 + r_2 + R_2 + r_1 }, \\
+        &U_2 = \eli R_2 = \frac{- \ele_1 - \ele_2 }{ R_1 + r_2 + R_2 + r_1 } \cdot R_2, \\
+        &P_2 = \eli^2 R_2 = \frac{\sqr{- \ele_1 - \ele_2 } R_2}{ \sqr{ R_1 + r_2 + R_2 + r_1 }}.
     \end{align*}
 
     Отметим, что ответ для тока $\eli$ меняет знак, если отметить его на рисунке в другую сторону.
@@ -4314,7 +4314,7 @@
     Определите, в каком резисторе выделяется большая тепловая мощность и во сколько раз?
 }
 \answer{%
-    Подключены последовательно, поэтому  $\eli_1 = \eli_2 = \eli \implies \frac{P_2}{P_1} = \frac{ \eli_2^2 R_2 }{ \eli_1^2 R_1 } = \frac{ \eli_2^2R_2 }{ \eli_1R_1 } = \frac{ R_2 }{ R_1 } = \frac27$.
+    Подключены последовательно, поэтому  $\eli_1 = \eli_2 = \eli \implies \frac{P_2}{P_1} = \frac{\eli_2^2 R_2}{\eli_1^2 R_1} = \frac{\eli_2^2R_2}{\eli_1R_1} = \frac{R_2}{R_1} = \frac27$.
 }
 \solutionspace{120pt}
 
@@ -4386,9 +4386,9 @@
     \begin{tikzpicture}[circuit ee IEC, thick]
         \draw  (0, 0) -- ++(up:2)
                 to [
-                    battery={very near start, rotate=0, info={$\ele_1, r_1 $}},
-                    resistor={midway, info=$R_1$},
-                    battery={very near end, rotate=0, info={$\ele_2, r_2 $}}
+                    battery={ very near start, rotate=0, info={$\ele_1, r_1 $}},
+                    resistor={ midway, info=$R_1$},
+                    battery={ very near end, rotate=0, info={$\ele_2, r_2 $}}
                 ] ++(right:5)
                 -- ++(down:2)
                 to [resistor={info=$R_2$}] ++(left:5);
@@ -4404,9 +4404,9 @@
     \begin{tikzpicture}[circuit ee IEC, thick]
         \draw  (0, 0) -- ++(up:2)
                 to [
-                    battery={very near start, rotate=0, info={$\ele_1, r_1 $}},
-                    resistor={midway, info=$R_1$},
-                    battery={very near end, rotate=0, info={$\ele_2, r_2 $}}
+                    battery={ very near start, rotate=0, info={$\ele_1, r_1 $}},
+                    resistor={ midway, info=$R_1$},
+                    battery={ very near end, rotate=0, info={$\ele_2, r_2 $}}
                 ] ++(right:5)
                 -- ++(down:2)
                 to [resistor={info=$R_2$}, current direction={near end, info=$\eli$}] ++(left:5);
@@ -4416,9 +4416,9 @@
     \begin{align*}
         &- \ele_1 - \ele_2 = \eli R_1 + \eli r_2 + \eli R_2 + \eli r_1, \\
         &- \ele_1 - \ele_2 = \eli (R_1 + r_2 + R_2 + r_1), \\
-        &\eli = \frac{- \ele_1 - \ele_2}{R_1 + r_2 + R_2 + r_1}, \\
-        &U_1 = \eli R_1 = \frac{- \ele_1 - \ele_2}{R_1 + r_2 + R_2 + r_1} \cdot R_1, \\
-        &P_1 = \eli^2 R_1 = \frac{\sqr{- \ele_1 - \ele_2} R_1}{\sqr{R_1 + r_2 + R_2 + r_1}}.
+        &\eli = \frac{- \ele_1 - \ele_2 }{ R_1 + r_2 + R_2 + r_1 }, \\
+        &U_1 = \eli R_1 = \frac{- \ele_1 - \ele_2 }{ R_1 + r_2 + R_2 + r_1 } \cdot R_1, \\
+        &P_1 = \eli^2 R_1 = \frac{\sqr{- \ele_1 - \ele_2 } R_1}{ \sqr{ R_1 + r_2 + R_2 + r_1 }}.
     \end{align*}
 
     Отметим, что ответ для тока $\eli$ меняет знак, если отметить его на рисунке в другую сторону.

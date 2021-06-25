@@ -14,7 +14,7 @@
         \draw  (0, 0) to [resistor={info=$R_1$}] ++(left:1.5);
         \draw  (0, 0) -- ++(up:1.5) to [resistor={near start, info=$R_2$}, resistor={near end, info=$R_3$}] ++(right:3);
         \draw  (0, 0) to [resistor={info=$R_4$}] ++(right:3) -- ++(up:1.5);
-        \draw  (3, 1.5) -- ++(right:0.5); \node [contact] (contact2) at (3.5, 1.5) {  };
+        \draw  (3, 1.5) -- ++(right:0.5); \node [contact] (contact2) at (3.5, 1.5) {};
     \end{tikzpicture}
 }
 \answer{%
@@ -41,13 +41,13 @@
 }
 \answer{%
     \begin{align*}
-    R_0 &= R + \frac 1{\frac 1{R + R} + \frac 1{R} + \frac 1{R + R}} = R + \frac 1{\frac 2R} = \frac 32 R, \\
+    R_0 &= R + \frac 1{\frac 1{R+R} + \frac 1R + \frac 1{R+R}} = R + \frac 1{\frac 2R} = \frac 32 R, \\
     \eli &= \frac U{R_0} = \frac {2U}{3R}, \\
     U_1 &= \eli R_1 = \frac {2U}{3R} \cdot R = \frac 23 U = 80{,}0\,\text{В}, \\
     U_{23} &= U_{56} = U_4 = U - \eli R_1 = U - \frac {2U}{3R} \cdot R = \frac U3 = 40{,}0\,\text{В}, \\
-    \eli_2 &= \frac{U_4}{R_4} = \frac{U}{3R} \approx 8{,}0\,\text{А}, \\
-    \eli_1 &= \frac{U_{23}}{R_{23}} = \frac{\frac U3}{R + R} = \frac U{6R} \approx 4{,}0\,\text{А}, \\
-    \eli_3 &= \frac{U_{56}}{R_{56}} = \frac{\frac U3}{R + R} = \frac U{6R} \approx 4{,}0\,\text{А}, \\
+    \eli_2 &= \frac{U_4}{R_4} = \fracU{3R} \approx 8{,}0\,\text{А}, \\
+    \eli_1 &= \frac{U_{23}}{R_{23}} = \frac{\frac U3}{R+R} = \frac U{6R} \approx 4{,}0\,\text{А}, \\
+    \eli_3 &= \frac{U_{56}}{R_{56}} = \frac{\frac U3}{R+R} = \frac U{6R} \approx 4{,}0\,\text{А}, \\
     U_2 &= \eli_1 R_2 = \frac U{6R} \cdot R = \frac U6 = 20{,}0\,\text{В}, \\
     U_3 &= \eli_1 R_3 = \frac U{6R} \cdot R = \frac U3 = 20{,}0\,\text{В}, \\
     U_5 &= \eli_3 R_5 = \frac U{6R} \cdot R = \frac U5 = 20{,}0\,\text{В}, \\
@@ -63,9 +63,9 @@
     если $\ele_1 = 18\,\text{В}$, $\ele_2 = 25\,\text{В}$, $r_1 = 2\,\text{Ом}$, $r_2 = 6\,\text{Ом}$.
 
     \begin{tikzpicture}[circuit ee IEC, thick]
-        \draw  (0, 0) to [battery={rotate=-180,info={$\ele_1, r_1 $}}] (0, 3)
+        \draw  (0, 0) to [battery={rotate=-180,info={$\ele_1, r_1$}}] (0, 3)
                 -- (5, 3)
-                to [battery={rotate=-180, info'={$\ele_2, r_2 $}}] (5, 0)
+                to [battery={rotate=-180, info'={$\ele_2, r_2$}}] (5, 0)
                 -- (0, 0)
                 (2.5, 0) to [resistor={info=$R$}] (2.5, 3);
     \end{tikzpicture}
@@ -74,9 +74,9 @@
     Выберем 2 контура и один узел, запишем для них законы Кирхгофа:
 
     \begin{tikzpicture}[circuit ee IEC, thick]
-        \draw  (0, 0) to [battery={rotate=-180,info={$\ele_1, r_1 $}}, current direction={near end, info=$\eli_1$}] (0, 3)
+        \draw  (0, 0) to [battery={rotate=-180,info={$\ele_1, r_1$}}, current direction={near end, info=$\eli_1$}] (0, 3)
                 -- (5, 3)
-                to [battery={rotate=-180, info'={$\ele_2, r_2 $}}, current direction={near end, info=$\eli_2$}] (5, 0)
+                to [battery={rotate=-180, info'={$\ele_2, r_2$}}, current direction={near end, info=$\eli_2$}] (5, 0)
                 -- (0, 0)
                 (2.5, 0) to [resistor={info=$R$}, current direction'={near end, info=$\eli$}] (2.5, 3);
         \draw [-{Latex},color=red] (0.8, 1.9) arc [start angle = 135, end angle = -160, radius = 0.6];
@@ -93,18 +93,18 @@
         \end{cases}
         \qquad \implies \qquad
         \begin{cases}
-            \eli_1 = \frac{\ele_1 - \eli R}{ r_1 }, \\
-            \eli_2 = \frac{\ele_2 + \eli R}{ r_2 }, \\
+            \eli_1 = \frac{\ele_1 - \eli R}{r_1}, \\
+            \eli_2 = \frac{\ele_2 + \eli R}{r_2}, \\
             \eli - \eli_1 - \eli_2 = 0;
         \end{cases} \implies \\
-        &\implies \eli - \frac{\ele_1 - \eli R}{ r_1 } + \frac{\ele_2 + \eli R}{ r_2 } = 0, \\
-        &\eli\cbr{1 + \frac{ R }{ r_1 } + \frac{ R }{ r_2 }} - \frac{ \ele_1 }{ r_1 } + \frac{ \ele_2 }{ r_2 } = 0, \\
+        &\implies \eli - \frac{\ele_1 - \eli R}{r_1} + \frac{\ele_2 + \eli R}{r_2} = 0, \\
+        &\eli\cbr{ 1 + \frac{R}{r_1} + \frac{R}{r_2}} - \frac{\ele_1}{r_1} + \frac{\ele_2}{r_2} = 0, \\
         &\eli
-            = \frac{\frac{ \ele_1 }{ r_1 } - \frac{ \ele_2 }{ r_2 }}{1 + \frac{ R }{ r_1 } + \frac{ R }{ r_2 }}
-            = \frac{\frac{ 18\,\text{В} }{ 2\,\text{Ом} } - \frac{ 25\,\text{В} }{ 6\,\text{Ом} }}{1 + \frac{ 18\,\text{Ом} }{ 2\,\text{Ом} } + \frac{ 18\,\text{Ом} }{ 6\,\text{Ом} }}
+            = \frac{\frac{\ele_1}{r_1} - \frac{\ele_2}{r_2}}{ 1 + \frac{R}{r_1} + \frac{R}{r_2}}
+            = \frac{\frac{18\,\text{В}}{2\,\text{Ом}} - \frac{25\,\text{В}}{6\,\text{Ом}}}{ 1 + \frac{18\,\text{Ом}}{2\,\text{Ом}} + \frac{18\,\text{Ом}}{6\,\text{Ом}}}
             = \frac{29}{78}\units{А}
             \approx 0{,}372\,\text{А}, \\
-        &U  = \eli R = \frac{\frac{ \ele_1 }{ r_1 } - \frac{ \ele_2 }{ r_2 }}{1 + \frac{ R }{ r_1 } + \frac{ R }{ r_2 }} R
+        &U  = \eli R = \frac{\frac{\ele_1}{r_1} - \frac{\ele_2}{r_2}}{ 1 + \frac{R}{r_1} + \frac{R}{r_2}} R
             \approx 6{,}692\,\text{В}.
     \end{align*}
 }
@@ -124,7 +124,7 @@
         \draw  (0, 0) to [resistor={info=$R_1$}] ++(left:1.5);
         \draw  (0, 0) -- ++(up:1.5) to [resistor={near start, info=$R_2$}, resistor={near end, info=$R_3$}] ++(right:3);
         \draw  (0, 0) to [resistor={info=$R_4$}] ++(right:3) -- ++(up:1.5);
-        \draw  (1.5, 1.5) -- ++(up:1); \node [contact] (contact2) at (1.5, 2.5) {  };
+        \draw  (1.5, 1.5) -- ++(up:1); \node [contact] (contact2) at (1.5, 2.5) {};
     \end{tikzpicture}
 }
 \answer{%
@@ -151,13 +151,13 @@
 }
 \answer{%
     \begin{align*}
-    R_0 &= R + \frac 1{\frac 1{R + R} + \frac 1{R} + \frac 1{R + R}} = R + \frac 1{\frac 2R} = \frac 32 R, \\
+    R_0 &= R + \frac 1{\frac 1{R+R} + \frac 1R + \frac 1{R+R}} = R + \frac 1{\frac 2R} = \frac 32 R, \\
     \eli &= \frac U{R_0} = \frac {2U}{3R}, \\
     U_1 &= \eli R_1 = \frac {2U}{3R} \cdot R = \frac 23 U = 60{,}0\,\text{В}, \\
     U_{23} &= U_{56} = U_4 = U - \eli R_1 = U - \frac {2U}{3R} \cdot R = \frac U3 = 30{,}0\,\text{В}, \\
-    \eli_2 &= \frac{U_4}{R_4} = \frac{U}{3R} \approx 3{,}0\,\text{А}, \\
-    \eli_1 &= \frac{U_{23}}{R_{23}} = \frac{\frac U3}{R + R} = \frac U{6R} \approx 1{,}5\,\text{А}, \\
-    \eli_3 &= \frac{U_{56}}{R_{56}} = \frac{\frac U3}{R + R} = \frac U{6R} \approx 1{,}5\,\text{А}, \\
+    \eli_2 &= \frac{U_4}{R_4} = \fracU{3R} \approx 3{,}0\,\text{А}, \\
+    \eli_1 &= \frac{U_{23}}{R_{23}} = \frac{\frac U3}{R+R} = \frac U{6R} \approx 1{,}5\,\text{А}, \\
+    \eli_3 &= \frac{U_{56}}{R_{56}} = \frac{\frac U3}{R+R} = \frac U{6R} \approx 1{,}5\,\text{А}, \\
     U_2 &= \eli_1 R_2 = \frac U{6R} \cdot R = \frac U6 = 15{,}0\,\text{В}, \\
     U_3 &= \eli_1 R_3 = \frac U{6R} \cdot R = \frac U3 = 15{,}0\,\text{В}, \\
     U_5 &= \eli_3 R_5 = \frac U{6R} \cdot R = \frac U5 = 15{,}0\,\text{В}, \\
@@ -173,9 +173,9 @@
     если $\ele_1 = 12\,\text{В}$, $\ele_2 = 25\,\text{В}$, $r_1 = 2\,\text{Ом}$, $r_2 = 6\,\text{Ом}$.
 
     \begin{tikzpicture}[circuit ee IEC, thick]
-        \draw  (0, 0) to [battery={rotate=-180,info={$\ele_1, r_1 $}}] (0, 3)
+        \draw  (0, 0) to [battery={rotate=-180,info={$\ele_1, r_1$}}] (0, 3)
                 -- (5, 3)
-                to [battery={rotate=-180, info'={$\ele_2, r_2 $}}] (5, 0)
+                to [battery={rotate=-180, info'={$\ele_2, r_2$}}] (5, 0)
                 -- (0, 0)
                 (2.5, 0) to [resistor={info=$R$}] (2.5, 3);
     \end{tikzpicture}
@@ -184,9 +184,9 @@
     Выберем 2 контура и один узел, запишем для них законы Кирхгофа:
 
     \begin{tikzpicture}[circuit ee IEC, thick]
-        \draw  (0, 0) to [battery={rotate=-180,info={$\ele_1, r_1 $}}, current direction={near end, info=$\eli_1$}] (0, 3)
+        \draw  (0, 0) to [battery={rotate=-180,info={$\ele_1, r_1$}}, current direction={near end, info=$\eli_1$}] (0, 3)
                 -- (5, 3)
-                to [battery={rotate=-180, info'={$\ele_2, r_2 $}}, current direction={near end, info=$\eli_2$}] (5, 0)
+                to [battery={rotate=-180, info'={$\ele_2, r_2$}}, current direction={near end, info=$\eli_2$}] (5, 0)
                 -- (0, 0)
                 (2.5, 0) to [resistor={info=$R$}, current direction'={near end, info=$\eli$}] (2.5, 3);
         \draw [-{Latex},color=red] (0.8, 1.9) arc [start angle = 135, end angle = -160, radius = 0.6];
@@ -203,18 +203,18 @@
         \end{cases}
         \qquad \implies \qquad
         \begin{cases}
-            \eli_1 = \frac{\ele_1 - \eli R}{ r_1 }, \\
-            \eli_2 = \frac{\ele_2 + \eli R}{ r_2 }, \\
+            \eli_1 = \frac{\ele_1 - \eli R}{r_1}, \\
+            \eli_2 = \frac{\ele_2 + \eli R}{r_2}, \\
             \eli - \eli_1 - \eli_2 = 0;
         \end{cases} \implies \\
-        &\implies \eli - \frac{\ele_1 - \eli R}{ r_1 } + \frac{\ele_2 + \eli R}{ r_2 } = 0, \\
-        &\eli\cbr{1 + \frac{ R }{ r_1 } + \frac{ R }{ r_2 }} - \frac{ \ele_1 }{ r_1 } + \frac{ \ele_2 }{ r_2 } = 0, \\
+        &\implies \eli - \frac{\ele_1 - \eli R}{r_1} + \frac{\ele_2 + \eli R}{r_2} = 0, \\
+        &\eli\cbr{ 1 + \frac{R}{r_1} + \frac{R}{r_2}} - \frac{\ele_1}{r_1} + \frac{\ele_2}{r_2} = 0, \\
         &\eli
-            = \frac{\frac{ \ele_1 }{ r_1 } - \frac{ \ele_2 }{ r_2 }}{1 + \frac{ R }{ r_1 } + \frac{ R }{ r_2 }}
-            = \frac{\frac{ 12\,\text{В} }{ 2\,\text{Ом} } - \frac{ 25\,\text{В} }{ 6\,\text{Ом} }}{1 + \frac{ 10\,\text{Ом} }{ 2\,\text{Ом} } + \frac{ 10\,\text{Ом} }{ 6\,\text{Ом} }}
+            = \frac{\frac{\ele_1}{r_1} - \frac{\ele_2}{r_2}}{ 1 + \frac{R}{r_1} + \frac{R}{r_2}}
+            = \frac{\frac{12\,\text{В}}{2\,\text{Ом}} - \frac{25\,\text{В}}{6\,\text{Ом}}}{ 1 + \frac{10\,\text{Ом}}{2\,\text{Ом}} + \frac{10\,\text{Ом}}{6\,\text{Ом}}}
             = \frac{11}{46}\units{А}
             \approx 0{,}239\,\text{А}, \\
-        &U  = \eli R = \frac{\frac{ \ele_1 }{ r_1 } - \frac{ \ele_2 }{ r_2 }}{1 + \frac{ R }{ r_1 } + \frac{ R }{ r_2 }} R
+        &U  = \eli R = \frac{\frac{\ele_1}{r_1} - \frac{\ele_2}{r_2}}{ 1 + \frac{R}{r_1} + \frac{R}{r_2}} R
             \approx 2{,}391\,\text{В}.
     \end{align*}
 }
@@ -234,7 +234,7 @@
         \draw  (0, 0) to [resistor={info=$R_1$}] ++(left:1.5);
         \draw  (0, 0) -- ++(up:1.5) to [resistor={near start, info=$R_2$}, resistor={near end, info=$R_3$}] ++(right:3);
         \draw  (0, 0) to [resistor={info=$R_4$}] ++(right:3) -- ++(up:1.5);
-        \draw  (1.5, 1.5) -- ++(up:1); \node [contact] (contact2) at (1.5, 2.5) {  };
+        \draw  (1.5, 1.5) -- ++(up:1); \node [contact] (contact2) at (1.5, 2.5) {};
     \end{tikzpicture}
 }
 \answer{%
@@ -261,13 +261,13 @@
 }
 \answer{%
     \begin{align*}
-    R_0 &= R + \frac 1{\frac 1{R + R} + \frac 1{R} + \frac 1{R + R}} = R + \frac 1{\frac 2R} = \frac 32 R, \\
+    R_0 &= R + \frac 1{\frac 1{R+R} + \frac 1R + \frac 1{R+R}} = R + \frac 1{\frac 2R} = \frac 32 R, \\
     \eli &= \frac U{R_0} = \frac {2U}{3R}, \\
     U_1 &= \eli R_1 = \frac {2U}{3R} \cdot R = \frac 23 U = 20{,}0\,\text{В}, \\
     U_{23} &= U_{56} = U_4 = U - \eli R_1 = U - \frac {2U}{3R} \cdot R = \frac U3 = 10{,}0\,\text{В}, \\
-    \eli_2 &= \frac{U_4}{R_4} = \frac{U}{3R} \approx 1{,}0\,\text{А}, \\
-    \eli_1 &= \frac{U_{23}}{R_{23}} = \frac{\frac U3}{R + R} = \frac U{6R} \approx 0{,}5\,\text{А}, \\
-    \eli_3 &= \frac{U_{56}}{R_{56}} = \frac{\frac U3}{R + R} = \frac U{6R} \approx 0{,}5\,\text{А}, \\
+    \eli_2 &= \frac{U_4}{R_4} = \fracU{3R} \approx 1{,}0\,\text{А}, \\
+    \eli_1 &= \frac{U_{23}}{R_{23}} = \frac{\frac U3}{R+R} = \frac U{6R} \approx 0{,}5\,\text{А}, \\
+    \eli_3 &= \frac{U_{56}}{R_{56}} = \frac{\frac U3}{R+R} = \frac U{6R} \approx 0{,}5\,\text{А}, \\
     U_2 &= \eli_1 R_2 = \frac U{6R} \cdot R = \frac U6 = 5{,}0\,\text{В}, \\
     U_3 &= \eli_1 R_3 = \frac U{6R} \cdot R = \frac U3 = 5{,}0\,\text{В}, \\
     U_5 &= \eli_3 R_5 = \frac U{6R} \cdot R = \frac U5 = 5{,}0\,\text{В}, \\
@@ -283,9 +283,9 @@
     если $\ele_1 = 18\,\text{В}$, $\ele_2 = 5\,\text{В}$, $r_1 = 3\,\text{Ом}$, $r_2 = 2\,\text{Ом}$.
 
     \begin{tikzpicture}[circuit ee IEC, thick]
-        \draw  (0, 0) to [battery={rotate=-180,info={$\ele_1, r_1 $}}] (0, 3)
+        \draw  (0, 0) to [battery={rotate=-180,info={$\ele_1, r_1$}}] (0, 3)
                 -- (5, 3)
-                to [battery={rotate=-180, info'={$\ele_2, r_2 $}}] (5, 0)
+                to [battery={rotate=-180, info'={$\ele_2, r_2$}}] (5, 0)
                 -- (0, 0)
                 (2.5, 0) to [resistor={info=$R$}] (2.5, 3);
     \end{tikzpicture}
@@ -294,9 +294,9 @@
     Выберем 2 контура и один узел, запишем для них законы Кирхгофа:
 
     \begin{tikzpicture}[circuit ee IEC, thick]
-        \draw  (0, 0) to [battery={rotate=-180,info={$\ele_1, r_1 $}}, current direction={near end, info=$\eli_1$}] (0, 3)
+        \draw  (0, 0) to [battery={rotate=-180,info={$\ele_1, r_1$}}, current direction={near end, info=$\eli_1$}] (0, 3)
                 -- (5, 3)
-                to [battery={rotate=-180, info'={$\ele_2, r_2 $}}, current direction={near end, info=$\eli_2$}] (5, 0)
+                to [battery={rotate=-180, info'={$\ele_2, r_2$}}, current direction={near end, info=$\eli_2$}] (5, 0)
                 -- (0, 0)
                 (2.5, 0) to [resistor={info=$R$}, current direction'={near end, info=$\eli$}] (2.5, 3);
         \draw [-{Latex},color=red] (0.8, 1.9) arc [start angle = 135, end angle = -160, radius = 0.6];
@@ -313,18 +313,18 @@
         \end{cases}
         \qquad \implies \qquad
         \begin{cases}
-            \eli_1 = \frac{\ele_1 - \eli R}{ r_1 }, \\
-            \eli_2 = \frac{\ele_2 + \eli R}{ r_2 }, \\
+            \eli_1 = \frac{\ele_1 - \eli R}{r_1}, \\
+            \eli_2 = \frac{\ele_2 + \eli R}{r_2}, \\
             \eli - \eli_1 - \eli_2 = 0;
         \end{cases} \implies \\
-        &\implies \eli - \frac{\ele_1 - \eli R}{ r_1 } + \frac{\ele_2 + \eli R}{ r_2 } = 0, \\
-        &\eli\cbr{1 + \frac{ R }{ r_1 } + \frac{ R }{ r_2 }} - \frac{ \ele_1 }{ r_1 } + \frac{ \ele_2 }{ r_2 } = 0, \\
+        &\implies \eli - \frac{\ele_1 - \eli R}{r_1} + \frac{\ele_2 + \eli R}{r_2} = 0, \\
+        &\eli\cbr{ 1 + \frac{R}{r_1} + \frac{R}{r_2}} - \frac{\ele_1}{r_1} + \frac{\ele_2}{r_2} = 0, \\
         &\eli
-            = \frac{\frac{ \ele_1 }{ r_1 } - \frac{ \ele_2 }{ r_2 }}{1 + \frac{ R }{ r_1 } + \frac{ R }{ r_2 }}
-            = \frac{\frac{ 18\,\text{В} }{ 3\,\text{Ом} } - \frac{ 5\,\text{В} }{ 2\,\text{Ом} }}{1 + \frac{ 20\,\text{Ом} }{ 3\,\text{Ом} } + \frac{ 20\,\text{Ом} }{ 2\,\text{Ом} }}
+            = \frac{\frac{\ele_1}{r_1} - \frac{\ele_2}{r_2}}{ 1 + \frac{R}{r_1} + \frac{R}{r_2}}
+            = \frac{\frac{18\,\text{В}}{3\,\text{Ом}} - \frac{5\,\text{В}}{2\,\text{Ом}}}{ 1 + \frac{20\,\text{Ом}}{3\,\text{Ом}} + \frac{20\,\text{Ом}}{2\,\text{Ом}}}
             = \frac{21}{106}\units{А}
             \approx 0{,}198\,\text{А}, \\
-        &U  = \eli R = \frac{\frac{ \ele_1 }{ r_1 } - \frac{ \ele_2 }{ r_2 }}{1 + \frac{ R }{ r_1 } + \frac{ R }{ r_2 }} R
+        &U  = \eli R = \frac{\frac{\ele_1}{r_1} - \frac{\ele_2}{r_2}}{ 1 + \frac{R}{r_1} + \frac{R}{r_2}} R
             \approx 3{,}962\,\text{В}.
     \end{align*}
 }
@@ -344,7 +344,7 @@
         \draw  (0, 0) to [resistor={info=$R_1$}] ++(left:1.5);
         \draw  (0, 0) -- ++(up:1.5) to [resistor={near start, info=$R_2$}, resistor={near end, info=$R_3$}] ++(right:3);
         \draw  (0, 0) to [resistor={info=$R_4$}] ++(right:3) -- ++(up:1.5);
-        \draw  (1.5, 1.5) -- ++(up:1); \node [contact] (contact2) at (1.5, 2.5) {  };
+        \draw  (1.5, 1.5) -- ++(up:1); \node [contact] (contact2) at (1.5, 2.5) {};
     \end{tikzpicture}
 }
 \answer{%
@@ -371,13 +371,13 @@
 }
 \answer{%
     \begin{align*}
-    R_0 &= R + \frac 1{\frac 1{R + R} + \frac 1{R} + \frac 1{R + R}} = R + \frac 1{\frac 2R} = \frac 32 R, \\
+    R_0 &= R + \frac 1{\frac 1{R+R} + \frac 1R + \frac 1{R+R}} = R + \frac 1{\frac 2R} = \frac 32 R, \\
     \eli &= \frac U{R_0} = \frac {2U}{3R}, \\
     U_1 &= \eli R_1 = \frac {2U}{3R} \cdot R = \frac 23 U = 100{,}0\,\text{В}, \\
     U_{23} &= U_{56} = U_4 = U - \eli R_1 = U - \frac {2U}{3R} \cdot R = \frac U3 = 50{,}0\,\text{В}, \\
-    \eli_2 &= \frac{U_4}{R_4} = \frac{U}{3R} \approx 25{,}0\,\text{А}, \\
-    \eli_1 &= \frac{U_{23}}{R_{23}} = \frac{\frac U3}{R + R} = \frac U{6R} \approx 12{,}5\,\text{А}, \\
-    \eli_3 &= \frac{U_{56}}{R_{56}} = \frac{\frac U3}{R + R} = \frac U{6R} \approx 12{,}5\,\text{А}, \\
+    \eli_2 &= \frac{U_4}{R_4} = \fracU{3R} \approx 25{,}0\,\text{А}, \\
+    \eli_1 &= \frac{U_{23}}{R_{23}} = \frac{\frac U3}{R+R} = \frac U{6R} \approx 12{,}5\,\text{А}, \\
+    \eli_3 &= \frac{U_{56}}{R_{56}} = \frac{\frac U3}{R+R} = \frac U{6R} \approx 12{,}5\,\text{А}, \\
     U_2 &= \eli_1 R_2 = \frac U{6R} \cdot R = \frac U6 = 25{,}0\,\text{В}, \\
     U_3 &= \eli_1 R_3 = \frac U{6R} \cdot R = \frac U3 = 25{,}0\,\text{В}, \\
     U_5 &= \eli_3 R_5 = \frac U{6R} \cdot R = \frac U5 = 25{,}0\,\text{В}, \\
@@ -393,9 +393,9 @@
     если $\ele_1 = 12\,\text{В}$, $\ele_2 = 25\,\text{В}$, $r_1 = 1\,\text{Ом}$, $r_2 = 6\,\text{Ом}$.
 
     \begin{tikzpicture}[circuit ee IEC, thick]
-        \draw  (0, 0) to [battery={rotate=-180,info={$\ele_1, r_1 $}}] (0, 3)
+        \draw  (0, 0) to [battery={rotate=-180,info={$\ele_1, r_1$}}] (0, 3)
                 -- (5, 3)
-                to [battery={rotate=-180, info'={$\ele_2, r_2 $}}] (5, 0)
+                to [battery={rotate=-180, info'={$\ele_2, r_2$}}] (5, 0)
                 -- (0, 0)
                 (2.5, 0) to [resistor={info=$R$}] (2.5, 3);
     \end{tikzpicture}
@@ -404,9 +404,9 @@
     Выберем 2 контура и один узел, запишем для них законы Кирхгофа:
 
     \begin{tikzpicture}[circuit ee IEC, thick]
-        \draw  (0, 0) to [battery={rotate=-180,info={$\ele_1, r_1 $}}, current direction={near end, info=$\eli_1$}] (0, 3)
+        \draw  (0, 0) to [battery={rotate=-180,info={$\ele_1, r_1$}}, current direction={near end, info=$\eli_1$}] (0, 3)
                 -- (5, 3)
-                to [battery={rotate=-180, info'={$\ele_2, r_2 $}}, current direction={near end, info=$\eli_2$}] (5, 0)
+                to [battery={rotate=-180, info'={$\ele_2, r_2$}}, current direction={near end, info=$\eli_2$}] (5, 0)
                 -- (0, 0)
                 (2.5, 0) to [resistor={info=$R$}, current direction'={near end, info=$\eli$}] (2.5, 3);
         \draw [-{Latex},color=red] (0.8, 1.9) arc [start angle = 135, end angle = -160, radius = 0.6];
@@ -423,18 +423,18 @@
         \end{cases}
         \qquad \implies \qquad
         \begin{cases}
-            \eli_1 = \frac{\ele_1 - \eli R}{ r_1 }, \\
-            \eli_2 = \frac{\ele_2 + \eli R}{ r_2 }, \\
+            \eli_1 = \frac{\ele_1 - \eli R}{r_1}, \\
+            \eli_2 = \frac{\ele_2 + \eli R}{r_2}, \\
             \eli - \eli_1 - \eli_2 = 0;
         \end{cases} \implies \\
-        &\implies \eli - \frac{\ele_1 - \eli R}{ r_1 } + \frac{\ele_2 + \eli R}{ r_2 } = 0, \\
-        &\eli\cbr{1 + \frac{ R }{ r_1 } + \frac{ R }{ r_2 }} - \frac{ \ele_1 }{ r_1 } + \frac{ \ele_2 }{ r_2 } = 0, \\
+        &\implies \eli - \frac{\ele_1 - \eli R}{r_1} + \frac{\ele_2 + \eli R}{r_2} = 0, \\
+        &\eli\cbr{ 1 + \frac{R}{r_1} + \frac{R}{r_2}} - \frac{\ele_1}{r_1} + \frac{\ele_2}{r_2} = 0, \\
         &\eli
-            = \frac{\frac{ \ele_1 }{ r_1 } - \frac{ \ele_2 }{ r_2 }}{1 + \frac{ R }{ r_1 } + \frac{ R }{ r_2 }}
-            = \frac{\frac{ 12\,\text{В} }{ 1\,\text{Ом} } - \frac{ 25\,\text{В} }{ 6\,\text{Ом} }}{1 + \frac{ 15\,\text{Ом} }{ 1\,\text{Ом} } + \frac{ 15\,\text{Ом} }{ 6\,\text{Ом} }}
+            = \frac{\frac{\ele_1}{r_1} - \frac{\ele_2}{r_2}}{ 1 + \frac{R}{r_1} + \frac{R}{r_2}}
+            = \frac{\frac{12\,\text{В}}{1\,\text{Ом}} - \frac{25\,\text{В}}{6\,\text{Ом}}}{ 1 + \frac{15\,\text{Ом}}{1\,\text{Ом}} + \frac{15\,\text{Ом}}{6\,\text{Ом}}}
             = \frac{47}{111}\units{А}
             \approx 0{,}423\,\text{А}, \\
-        &U  = \eli R = \frac{\frac{ \ele_1 }{ r_1 } - \frac{ \ele_2 }{ r_2 }}{1 + \frac{ R }{ r_1 } + \frac{ R }{ r_2 }} R
+        &U  = \eli R = \frac{\frac{\ele_1}{r_1} - \frac{\ele_2}{r_2}}{ 1 + \frac{R}{r_1} + \frac{R}{r_2}} R
             \approx 6{,}351\,\text{В}.
     \end{align*}
 }
@@ -454,7 +454,7 @@
         \draw  (0, 0) to [resistor={info=$R_1$}] ++(left:1.5);
         \draw  (0, 0) -- ++(up:1.5) to [resistor={near start, info=$R_2$}, resistor={near end, info=$R_3$}] ++(right:3);
         \draw  (0, 0) to [resistor={info=$R_4$}] ++(right:3) -- ++(up:1.5);
-        \draw  (1.5, 1.5) -- ++(up:1); \node [contact] (contact2) at (1.5, 2.5) {  };
+        \draw  (1.5, 1.5) -- ++(up:1); \node [contact] (contact2) at (1.5, 2.5) {};
     \end{tikzpicture}
 }
 \answer{%
@@ -481,13 +481,13 @@
 }
 \answer{%
     \begin{align*}
-    R_0 &= R + \frac 1{\frac 1{R + R} + \frac 1{R} + \frac 1{R + R}} = R + \frac 1{\frac 2R} = \frac 32 R, \\
+    R_0 &= R + \frac 1{\frac 1{R+R} + \frac 1R + \frac 1{R+R}} = R + \frac 1{\frac 2R} = \frac 32 R, \\
     \eli &= \frac U{R_0} = \frac {2U}{3R}, \\
     U_1 &= \eli R_1 = \frac {2U}{3R} \cdot R = \frac 23 U = 40{,}0\,\text{В}, \\
     U_{23} &= U_{56} = U_4 = U - \eli R_1 = U - \frac {2U}{3R} \cdot R = \frac U3 = 20{,}0\,\text{В}, \\
-    \eli_2 &= \frac{U_4}{R_4} = \frac{U}{3R} \approx 5{,}0\,\text{А}, \\
-    \eli_1 &= \frac{U_{23}}{R_{23}} = \frac{\frac U3}{R + R} = \frac U{6R} \approx 2{,}5\,\text{А}, \\
-    \eli_3 &= \frac{U_{56}}{R_{56}} = \frac{\frac U3}{R + R} = \frac U{6R} \approx 2{,}5\,\text{А}, \\
+    \eli_2 &= \frac{U_4}{R_4} = \fracU{3R} \approx 5{,}0\,\text{А}, \\
+    \eli_1 &= \frac{U_{23}}{R_{23}} = \frac{\frac U3}{R+R} = \frac U{6R} \approx 2{,}5\,\text{А}, \\
+    \eli_3 &= \frac{U_{56}}{R_{56}} = \frac{\frac U3}{R+R} = \frac U{6R} \approx 2{,}5\,\text{А}, \\
     U_2 &= \eli_1 R_2 = \frac U{6R} \cdot R = \frac U6 = 10{,}0\,\text{В}, \\
     U_3 &= \eli_1 R_3 = \frac U{6R} \cdot R = \frac U3 = 10{,}0\,\text{В}, \\
     U_5 &= \eli_3 R_5 = \frac U{6R} \cdot R = \frac U5 = 10{,}0\,\text{В}, \\
@@ -503,9 +503,9 @@
     если $\ele_1 = 12\,\text{В}$, $\ele_2 = 25\,\text{В}$, $r_1 = 1\,\text{Ом}$, $r_2 = 4\,\text{Ом}$.
 
     \begin{tikzpicture}[circuit ee IEC, thick]
-        \draw  (0, 0) to [battery={rotate=-180,info={$\ele_1, r_1 $}}] (0, 3)
+        \draw  (0, 0) to [battery={rotate=-180,info={$\ele_1, r_1$}}] (0, 3)
                 -- (5, 3)
-                to [battery={rotate=-180, info'={$\ele_2, r_2 $}}] (5, 0)
+                to [battery={rotate=-180, info'={$\ele_2, r_2$}}] (5, 0)
                 -- (0, 0)
                 (2.5, 0) to [resistor={info=$R$}] (2.5, 3);
     \end{tikzpicture}
@@ -514,9 +514,9 @@
     Выберем 2 контура и один узел, запишем для них законы Кирхгофа:
 
     \begin{tikzpicture}[circuit ee IEC, thick]
-        \draw  (0, 0) to [battery={rotate=-180,info={$\ele_1, r_1 $}}, current direction={near end, info=$\eli_1$}] (0, 3)
+        \draw  (0, 0) to [battery={rotate=-180,info={$\ele_1, r_1$}}, current direction={near end, info=$\eli_1$}] (0, 3)
                 -- (5, 3)
-                to [battery={rotate=-180, info'={$\ele_2, r_2 $}}, current direction={near end, info=$\eli_2$}] (5, 0)
+                to [battery={rotate=-180, info'={$\ele_2, r_2$}}, current direction={near end, info=$\eli_2$}] (5, 0)
                 -- (0, 0)
                 (2.5, 0) to [resistor={info=$R$}, current direction'={near end, info=$\eli$}] (2.5, 3);
         \draw [-{Latex},color=red] (0.8, 1.9) arc [start angle = 135, end angle = -160, radius = 0.6];
@@ -533,18 +533,18 @@
         \end{cases}
         \qquad \implies \qquad
         \begin{cases}
-            \eli_1 = \frac{\ele_1 - \eli R}{ r_1 }, \\
-            \eli_2 = \frac{\ele_2 + \eli R}{ r_2 }, \\
+            \eli_1 = \frac{\ele_1 - \eli R}{r_1}, \\
+            \eli_2 = \frac{\ele_2 + \eli R}{r_2}, \\
             \eli - \eli_1 - \eli_2 = 0;
         \end{cases} \implies \\
-        &\implies \eli - \frac{\ele_1 - \eli R}{ r_1 } + \frac{\ele_2 + \eli R}{ r_2 } = 0, \\
-        &\eli\cbr{1 + \frac{ R }{ r_1 } + \frac{ R }{ r_2 }} - \frac{ \ele_1 }{ r_1 } + \frac{ \ele_2 }{ r_2 } = 0, \\
+        &\implies \eli - \frac{\ele_1 - \eli R}{r_1} + \frac{\ele_2 + \eli R}{r_2} = 0, \\
+        &\eli\cbr{ 1 + \frac{R}{r_1} + \frac{R}{r_2}} - \frac{\ele_1}{r_1} + \frac{\ele_2}{r_2} = 0, \\
         &\eli
-            = \frac{\frac{ \ele_1 }{ r_1 } - \frac{ \ele_2 }{ r_2 }}{1 + \frac{ R }{ r_1 } + \frac{ R }{ r_2 }}
-            = \frac{\frac{ 12\,\text{В} }{ 1\,\text{Ом} } - \frac{ 25\,\text{В} }{ 4\,\text{Ом} }}{1 + \frac{ 20\,\text{Ом} }{ 1\,\text{Ом} } + \frac{ 20\,\text{Ом} }{ 4\,\text{Ом} }}
+            = \frac{\frac{\ele_1}{r_1} - \frac{\ele_2}{r_2}}{ 1 + \frac{R}{r_1} + \frac{R}{r_2}}
+            = \frac{\frac{12\,\text{В}}{1\,\text{Ом}} - \frac{25\,\text{В}}{4\,\text{Ом}}}{ 1 + \frac{20\,\text{Ом}}{1\,\text{Ом}} + \frac{20\,\text{Ом}}{4\,\text{Ом}}}
             = \frac{23}{104}\units{А}
             \approx 0{,}221\,\text{А}, \\
-        &U  = \eli R = \frac{\frac{ \ele_1 }{ r_1 } - \frac{ \ele_2 }{ r_2 }}{1 + \frac{ R }{ r_1 } + \frac{ R }{ r_2 }} R
+        &U  = \eli R = \frac{\frac{\ele_1}{r_1} - \frac{\ele_2}{r_2}}{ 1 + \frac{R}{r_1} + \frac{R}{r_2}} R
             \approx 4{,}423\,\text{В}.
     \end{align*}
 }
@@ -564,7 +564,7 @@
         \draw  (0, 0) to [resistor={info=$R_1$}] ++(left:1.5);
         \draw  (0, 0) -- ++(up:1.5) to [resistor={near start, info=$R_2$}, resistor={near end, info=$R_3$}] ++(right:3);
         \draw  (0, 0) to [resistor={info=$R_4$}] ++(right:3) -- ++(up:1.5);
-        \draw  (3, 1.5) -- ++(right:0.5); \node [contact] (contact2) at (3.5, 1.5) {  };
+        \draw  (3, 1.5) -- ++(right:0.5); \node [contact] (contact2) at (3.5, 1.5) {};
     \end{tikzpicture}
 }
 \answer{%
@@ -591,13 +591,13 @@
 }
 \answer{%
     \begin{align*}
-    R_0 &= R + \frac 1{\frac 1{R + R} + \frac 1{R} + \frac 1{R + R}} = R + \frac 1{\frac 2R} = \frac 32 R, \\
+    R_0 &= R + \frac 1{\frac 1{R+R} + \frac 1R + \frac 1{R+R}} = R + \frac 1{\frac 2R} = \frac 32 R, \\
     \eli &= \frac U{R_0} = \frac {2U}{3R}, \\
     U_1 &= \eli R_1 = \frac {2U}{3R} \cdot R = \frac 23 U = 60{,}0\,\text{В}, \\
     U_{23} &= U_{56} = U_4 = U - \eli R_1 = U - \frac {2U}{3R} \cdot R = \frac U3 = 30{,}0\,\text{В}, \\
-    \eli_2 &= \frac{U_4}{R_4} = \frac{U}{3R} \approx 6{,}0\,\text{А}, \\
-    \eli_1 &= \frac{U_{23}}{R_{23}} = \frac{\frac U3}{R + R} = \frac U{6R} \approx 3{,}0\,\text{А}, \\
-    \eli_3 &= \frac{U_{56}}{R_{56}} = \frac{\frac U3}{R + R} = \frac U{6R} \approx 3{,}0\,\text{А}, \\
+    \eli_2 &= \frac{U_4}{R_4} = \fracU{3R} \approx 6{,}0\,\text{А}, \\
+    \eli_1 &= \frac{U_{23}}{R_{23}} = \frac{\frac U3}{R+R} = \frac U{6R} \approx 3{,}0\,\text{А}, \\
+    \eli_3 &= \frac{U_{56}}{R_{56}} = \frac{\frac U3}{R+R} = \frac U{6R} \approx 3{,}0\,\text{А}, \\
     U_2 &= \eli_1 R_2 = \frac U{6R} \cdot R = \frac U6 = 15{,}0\,\text{В}, \\
     U_3 &= \eli_1 R_3 = \frac U{6R} \cdot R = \frac U3 = 15{,}0\,\text{В}, \\
     U_5 &= \eli_3 R_5 = \frac U{6R} \cdot R = \frac U5 = 15{,}0\,\text{В}, \\
@@ -613,9 +613,9 @@
     если $\ele_1 = 12\,\text{В}$, $\ele_2 = 15\,\text{В}$, $r_1 = 1\,\text{Ом}$, $r_2 = 2\,\text{Ом}$.
 
     \begin{tikzpicture}[circuit ee IEC, thick]
-        \draw  (0, 0) to [battery={rotate=-180,info={$\ele_1, r_1 $}}] (0, 3)
+        \draw  (0, 0) to [battery={rotate=-180,info={$\ele_1, r_1$}}] (0, 3)
                 -- (5, 3)
-                to [battery={rotate=-180, info'={$\ele_2, r_2 $}}] (5, 0)
+                to [battery={rotate=-180, info'={$\ele_2, r_2$}}] (5, 0)
                 -- (0, 0)
                 (2.5, 0) to [resistor={info=$R$}] (2.5, 3);
     \end{tikzpicture}
@@ -624,9 +624,9 @@
     Выберем 2 контура и один узел, запишем для них законы Кирхгофа:
 
     \begin{tikzpicture}[circuit ee IEC, thick]
-        \draw  (0, 0) to [battery={rotate=-180,info={$\ele_1, r_1 $}}, current direction={near end, info=$\eli_1$}] (0, 3)
+        \draw  (0, 0) to [battery={rotate=-180,info={$\ele_1, r_1$}}, current direction={near end, info=$\eli_1$}] (0, 3)
                 -- (5, 3)
-                to [battery={rotate=-180, info'={$\ele_2, r_2 $}}, current direction={near end, info=$\eli_2$}] (5, 0)
+                to [battery={rotate=-180, info'={$\ele_2, r_2$}}, current direction={near end, info=$\eli_2$}] (5, 0)
                 -- (0, 0)
                 (2.5, 0) to [resistor={info=$R$}, current direction'={near end, info=$\eli$}] (2.5, 3);
         \draw [-{Latex},color=red] (0.8, 1.9) arc [start angle = 135, end angle = -160, radius = 0.6];
@@ -643,18 +643,18 @@
         \end{cases}
         \qquad \implies \qquad
         \begin{cases}
-            \eli_1 = \frac{\ele_1 - \eli R}{ r_1 }, \\
-            \eli_2 = \frac{\ele_2 + \eli R}{ r_2 }, \\
+            \eli_1 = \frac{\ele_1 - \eli R}{r_1}, \\
+            \eli_2 = \frac{\ele_2 + \eli R}{r_2}, \\
             \eli - \eli_1 - \eli_2 = 0;
         \end{cases} \implies \\
-        &\implies \eli - \frac{\ele_1 - \eli R}{ r_1 } + \frac{\ele_2 + \eli R}{ r_2 } = 0, \\
-        &\eli\cbr{1 + \frac{ R }{ r_1 } + \frac{ R }{ r_2 }} - \frac{ \ele_1 }{ r_1 } + \frac{ \ele_2 }{ r_2 } = 0, \\
+        &\implies \eli - \frac{\ele_1 - \eli R}{r_1} + \frac{\ele_2 + \eli R}{r_2} = 0, \\
+        &\eli\cbr{ 1 + \frac{R}{r_1} + \frac{R}{r_2}} - \frac{\ele_1}{r_1} + \frac{\ele_2}{r_2} = 0, \\
         &\eli
-            = \frac{\frac{ \ele_1 }{ r_1 } - \frac{ \ele_2 }{ r_2 }}{1 + \frac{ R }{ r_1 } + \frac{ R }{ r_2 }}
-            = \frac{\frac{ 12\,\text{В} }{ 1\,\text{Ом} } - \frac{ 15\,\text{В} }{ 2\,\text{Ом} }}{1 + \frac{ 18\,\text{Ом} }{ 1\,\text{Ом} } + \frac{ 18\,\text{Ом} }{ 2\,\text{Ом} }}
+            = \frac{\frac{\ele_1}{r_1} - \frac{\ele_2}{r_2}}{ 1 + \frac{R}{r_1} + \frac{R}{r_2}}
+            = \frac{\frac{12\,\text{В}}{1\,\text{Ом}} - \frac{15\,\text{В}}{2\,\text{Ом}}}{ 1 + \frac{18\,\text{Ом}}{1\,\text{Ом}} + \frac{18\,\text{Ом}}{2\,\text{Ом}}}
             = \frac9{56}\units{А}
             \approx 0{,}161\,\text{А}, \\
-        &U  = \eli R = \frac{\frac{ \ele_1 }{ r_1 } - \frac{ \ele_2 }{ r_2 }}{1 + \frac{ R }{ r_1 } + \frac{ R }{ r_2 }} R
+        &U  = \eli R = \frac{\frac{\ele_1}{r_1} - \frac{\ele_2}{r_2}}{ 1 + \frac{R}{r_1} + \frac{R}{r_2}} R
             \approx 2{,}893\,\text{В}.
     \end{align*}
 }
@@ -674,7 +674,7 @@
         \draw  (0, 0) to [resistor={info=$R_1$}] ++(left:1.5);
         \draw  (0, 0) -- ++(up:1.5) to [resistor={near start, info=$R_2$}, resistor={near end, info=$R_3$}] ++(right:3);
         \draw  (0, 0) to [resistor={info=$R_4$}] ++(right:3) -- ++(up:1.5);
-        \draw  (3, 1.5) -- ++(right:0.5); \node [contact] (contact2) at (3.5, 1.5) {  };
+        \draw  (3, 1.5) -- ++(right:0.5); \node [contact] (contact2) at (3.5, 1.5) {};
     \end{tikzpicture}
 }
 \answer{%
@@ -701,13 +701,13 @@
 }
 \answer{%
     \begin{align*}
-    R_0 &= R + \frac 1{\frac 1{R + R} + \frac 1{R} + \frac 1{R + R}} = R + \frac 1{\frac 2R} = \frac 32 R, \\
+    R_0 &= R + \frac 1{\frac 1{R+R} + \frac 1R + \frac 1{R+R}} = R + \frac 1{\frac 2R} = \frac 32 R, \\
     \eli &= \frac U{R_0} = \frac {2U}{3R}, \\
     U_1 &= \eli R_1 = \frac {2U}{3R} \cdot R = \frac 23 U = 40{,}0\,\text{В}, \\
     U_{23} &= U_{56} = U_4 = U - \eli R_1 = U - \frac {2U}{3R} \cdot R = \frac U3 = 20{,}0\,\text{В}, \\
-    \eli_2 &= \frac{U_4}{R_4} = \frac{U}{3R} \approx 10{,}0\,\text{А}, \\
-    \eli_1 &= \frac{U_{23}}{R_{23}} = \frac{\frac U3}{R + R} = \frac U{6R} \approx 5{,}0\,\text{А}, \\
-    \eli_3 &= \frac{U_{56}}{R_{56}} = \frac{\frac U3}{R + R} = \frac U{6R} \approx 5{,}0\,\text{А}, \\
+    \eli_2 &= \frac{U_4}{R_4} = \fracU{3R} \approx 10{,}0\,\text{А}, \\
+    \eli_1 &= \frac{U_{23}}{R_{23}} = \frac{\frac U3}{R+R} = \frac U{6R} \approx 5{,}0\,\text{А}, \\
+    \eli_3 &= \frac{U_{56}}{R_{56}} = \frac{\frac U3}{R+R} = \frac U{6R} \approx 5{,}0\,\text{А}, \\
     U_2 &= \eli_1 R_2 = \frac U{6R} \cdot R = \frac U6 = 10{,}0\,\text{В}, \\
     U_3 &= \eli_1 R_3 = \frac U{6R} \cdot R = \frac U3 = 10{,}0\,\text{В}, \\
     U_5 &= \eli_3 R_5 = \frac U{6R} \cdot R = \frac U5 = 10{,}0\,\text{В}, \\
@@ -723,9 +723,9 @@
     если $\ele_1 = 12\,\text{В}$, $\ele_2 = 15\,\text{В}$, $r_1 = 2\,\text{Ом}$, $r_2 = 4\,\text{Ом}$.
 
     \begin{tikzpicture}[circuit ee IEC, thick]
-        \draw  (0, 0) to [battery={rotate=-180,info={$\ele_1, r_1 $}}] (0, 3)
+        \draw  (0, 0) to [battery={rotate=-180,info={$\ele_1, r_1$}}] (0, 3)
                 -- (5, 3)
-                to [battery={rotate=-180, info'={$\ele_2, r_2 $}}] (5, 0)
+                to [battery={rotate=-180, info'={$\ele_2, r_2$}}] (5, 0)
                 -- (0, 0)
                 (2.5, 0) to [resistor={info=$R$}] (2.5, 3);
     \end{tikzpicture}
@@ -734,9 +734,9 @@
     Выберем 2 контура и один узел, запишем для них законы Кирхгофа:
 
     \begin{tikzpicture}[circuit ee IEC, thick]
-        \draw  (0, 0) to [battery={rotate=-180,info={$\ele_1, r_1 $}}, current direction={near end, info=$\eli_1$}] (0, 3)
+        \draw  (0, 0) to [battery={rotate=-180,info={$\ele_1, r_1$}}, current direction={near end, info=$\eli_1$}] (0, 3)
                 -- (5, 3)
-                to [battery={rotate=-180, info'={$\ele_2, r_2 $}}, current direction={near end, info=$\eli_2$}] (5, 0)
+                to [battery={rotate=-180, info'={$\ele_2, r_2$}}, current direction={near end, info=$\eli_2$}] (5, 0)
                 -- (0, 0)
                 (2.5, 0) to [resistor={info=$R$}, current direction'={near end, info=$\eli$}] (2.5, 3);
         \draw [-{Latex},color=red] (0.8, 1.9) arc [start angle = 135, end angle = -160, radius = 0.6];
@@ -753,18 +753,18 @@
         \end{cases}
         \qquad \implies \qquad
         \begin{cases}
-            \eli_1 = \frac{\ele_1 - \eli R}{ r_1 }, \\
-            \eli_2 = \frac{\ele_2 + \eli R}{ r_2 }, \\
+            \eli_1 = \frac{\ele_1 - \eli R}{r_1}, \\
+            \eli_2 = \frac{\ele_2 + \eli R}{r_2}, \\
             \eli - \eli_1 - \eli_2 = 0;
         \end{cases} \implies \\
-        &\implies \eli - \frac{\ele_1 - \eli R}{ r_1 } + \frac{\ele_2 + \eli R}{ r_2 } = 0, \\
-        &\eli\cbr{1 + \frac{ R }{ r_1 } + \frac{ R }{ r_2 }} - \frac{ \ele_1 }{ r_1 } + \frac{ \ele_2 }{ r_2 } = 0, \\
+        &\implies \eli - \frac{\ele_1 - \eli R}{r_1} + \frac{\ele_2 + \eli R}{r_2} = 0, \\
+        &\eli\cbr{ 1 + \frac{R}{r_1} + \frac{R}{r_2}} - \frac{\ele_1}{r_1} + \frac{\ele_2}{r_2} = 0, \\
         &\eli
-            = \frac{\frac{ \ele_1 }{ r_1 } - \frac{ \ele_2 }{ r_2 }}{1 + \frac{ R }{ r_1 } + \frac{ R }{ r_2 }}
-            = \frac{\frac{ 12\,\text{В} }{ 2\,\text{Ом} } - \frac{ 15\,\text{В} }{ 4\,\text{Ом} }}{1 + \frac{ 12\,\text{Ом} }{ 2\,\text{Ом} } + \frac{ 12\,\text{Ом} }{ 4\,\text{Ом} }}
+            = \frac{\frac{\ele_1}{r_1} - \frac{\ele_2}{r_2}}{ 1 + \frac{R}{r_1} + \frac{R}{r_2}}
+            = \frac{\frac{12\,\text{В}}{2\,\text{Ом}} - \frac{15\,\text{В}}{4\,\text{Ом}}}{ 1 + \frac{12\,\text{Ом}}{2\,\text{Ом}} + \frac{12\,\text{Ом}}{4\,\text{Ом}}}
             = \frac9{40}\units{А}
             \approx 0{,}225\,\text{А}, \\
-        &U  = \eli R = \frac{\frac{ \ele_1 }{ r_1 } - \frac{ \ele_2 }{ r_2 }}{1 + \frac{ R }{ r_1 } + \frac{ R }{ r_2 }} R
+        &U  = \eli R = \frac{\frac{\ele_1}{r_1} - \frac{\ele_2}{r_2}}{ 1 + \frac{R}{r_1} + \frac{R}{r_2}} R
             \approx 2{,}700\,\text{В}.
     \end{align*}
 }
@@ -784,7 +784,7 @@
         \draw  (0, 0) to [resistor={info=$R_1$}] ++(left:1.5);
         \draw  (0, 0) -- ++(up:1.5) to [resistor={near start, info=$R_2$}, resistor={near end, info=$R_3$}] ++(right:3);
         \draw  (0, 0) to [resistor={info=$R_4$}] ++(right:3) -- ++(up:1.5);
-        \draw  (3, 1.5) -- ++(right:0.5); \node [contact] (contact2) at (3.5, 1.5) {  };
+        \draw  (3, 1.5) -- ++(right:0.5); \node [contact] (contact2) at (3.5, 1.5) {};
     \end{tikzpicture}
 }
 \answer{%
@@ -811,13 +811,13 @@
 }
 \answer{%
     \begin{align*}
-    R_0 &= R + \frac 1{\frac 1{R + R} + \frac 1{R} + \frac 1{R + R}} = R + \frac 1{\frac 2R} = \frac 32 R, \\
+    R_0 &= R + \frac 1{\frac 1{R+R} + \frac 1R + \frac 1{R+R}} = R + \frac 1{\frac 2R} = \frac 32 R, \\
     \eli &= \frac U{R_0} = \frac {2U}{3R}, \\
     U_1 &= \eli R_1 = \frac {2U}{3R} \cdot R = \frac 23 U = 80{,}0\,\text{В}, \\
     U_{23} &= U_{56} = U_4 = U - \eli R_1 = U - \frac {2U}{3R} \cdot R = \frac U3 = 40{,}0\,\text{В}, \\
-    \eli_2 &= \frac{U_4}{R_4} = \frac{U}{3R} \approx 8{,}0\,\text{А}, \\
-    \eli_1 &= \frac{U_{23}}{R_{23}} = \frac{\frac U3}{R + R} = \frac U{6R} \approx 4{,}0\,\text{А}, \\
-    \eli_3 &= \frac{U_{56}}{R_{56}} = \frac{\frac U3}{R + R} = \frac U{6R} \approx 4{,}0\,\text{А}, \\
+    \eli_2 &= \frac{U_4}{R_4} = \fracU{3R} \approx 8{,}0\,\text{А}, \\
+    \eli_1 &= \frac{U_{23}}{R_{23}} = \frac{\frac U3}{R+R} = \frac U{6R} \approx 4{,}0\,\text{А}, \\
+    \eli_3 &= \frac{U_{56}}{R_{56}} = \frac{\frac U3}{R+R} = \frac U{6R} \approx 4{,}0\,\text{А}, \\
     U_2 &= \eli_1 R_2 = \frac U{6R} \cdot R = \frac U6 = 20{,}0\,\text{В}, \\
     U_3 &= \eli_1 R_3 = \frac U{6R} \cdot R = \frac U3 = 20{,}0\,\text{В}, \\
     U_5 &= \eli_3 R_5 = \frac U{6R} \cdot R = \frac U5 = 20{,}0\,\text{В}, \\
@@ -833,9 +833,9 @@
     если $\ele_1 = 18\,\text{В}$, $\ele_2 = 25\,\text{В}$, $r_1 = 3\,\text{Ом}$, $r_2 = 6\,\text{Ом}$.
 
     \begin{tikzpicture}[circuit ee IEC, thick]
-        \draw  (0, 0) to [battery={rotate=-180,info={$\ele_1, r_1 $}}] (0, 3)
+        \draw  (0, 0) to [battery={rotate=-180,info={$\ele_1, r_1$}}] (0, 3)
                 -- (5, 3)
-                to [battery={rotate=-180, info'={$\ele_2, r_2 $}}] (5, 0)
+                to [battery={rotate=-180, info'={$\ele_2, r_2$}}] (5, 0)
                 -- (0, 0)
                 (2.5, 0) to [resistor={info=$R$}] (2.5, 3);
     \end{tikzpicture}
@@ -844,9 +844,9 @@
     Выберем 2 контура и один узел, запишем для них законы Кирхгофа:
 
     \begin{tikzpicture}[circuit ee IEC, thick]
-        \draw  (0, 0) to [battery={rotate=-180,info={$\ele_1, r_1 $}}, current direction={near end, info=$\eli_1$}] (0, 3)
+        \draw  (0, 0) to [battery={rotate=-180,info={$\ele_1, r_1$}}, current direction={near end, info=$\eli_1$}] (0, 3)
                 -- (5, 3)
-                to [battery={rotate=-180, info'={$\ele_2, r_2 $}}, current direction={near end, info=$\eli_2$}] (5, 0)
+                to [battery={rotate=-180, info'={$\ele_2, r_2$}}, current direction={near end, info=$\eli_2$}] (5, 0)
                 -- (0, 0)
                 (2.5, 0) to [resistor={info=$R$}, current direction'={near end, info=$\eli$}] (2.5, 3);
         \draw [-{Latex},color=red] (0.8, 1.9) arc [start angle = 135, end angle = -160, radius = 0.6];
@@ -863,18 +863,18 @@
         \end{cases}
         \qquad \implies \qquad
         \begin{cases}
-            \eli_1 = \frac{\ele_1 - \eli R}{ r_1 }, \\
-            \eli_2 = \frac{\ele_2 + \eli R}{ r_2 }, \\
+            \eli_1 = \frac{\ele_1 - \eli R}{r_1}, \\
+            \eli_2 = \frac{\ele_2 + \eli R}{r_2}, \\
             \eli - \eli_1 - \eli_2 = 0;
         \end{cases} \implies \\
-        &\implies \eli - \frac{\ele_1 - \eli R}{ r_1 } + \frac{\ele_2 + \eli R}{ r_2 } = 0, \\
-        &\eli\cbr{1 + \frac{ R }{ r_1 } + \frac{ R }{ r_2 }} - \frac{ \ele_1 }{ r_1 } + \frac{ \ele_2 }{ r_2 } = 0, \\
+        &\implies \eli - \frac{\ele_1 - \eli R}{r_1} + \frac{\ele_2 + \eli R}{r_2} = 0, \\
+        &\eli\cbr{ 1 + \frac{R}{r_1} + \frac{R}{r_2}} - \frac{\ele_1}{r_1} + \frac{\ele_2}{r_2} = 0, \\
         &\eli
-            = \frac{\frac{ \ele_1 }{ r_1 } - \frac{ \ele_2 }{ r_2 }}{1 + \frac{ R }{ r_1 } + \frac{ R }{ r_2 }}
-            = \frac{\frac{ 18\,\text{В} }{ 3\,\text{Ом} } - \frac{ 25\,\text{В} }{ 6\,\text{Ом} }}{1 + \frac{ 12\,\text{Ом} }{ 3\,\text{Ом} } + \frac{ 12\,\text{Ом} }{ 6\,\text{Ом} }}
+            = \frac{\frac{\ele_1}{r_1} - \frac{\ele_2}{r_2}}{ 1 + \frac{R}{r_1} + \frac{R}{r_2}}
+            = \frac{\frac{18\,\text{В}}{3\,\text{Ом}} - \frac{25\,\text{В}}{6\,\text{Ом}}}{ 1 + \frac{12\,\text{Ом}}{3\,\text{Ом}} + \frac{12\,\text{Ом}}{6\,\text{Ом}}}
             = \frac{11}{42}\units{А}
             \approx 0{,}262\,\text{А}, \\
-        &U  = \eli R = \frac{\frac{ \ele_1 }{ r_1 } - \frac{ \ele_2 }{ r_2 }}{1 + \frac{ R }{ r_1 } + \frac{ R }{ r_2 }} R
+        &U  = \eli R = \frac{\frac{\ele_1}{r_1} - \frac{\ele_2}{r_2}}{ 1 + \frac{R}{r_1} + \frac{R}{r_2}} R
             \approx 3{,}143\,\text{В}.
     \end{align*}
 }
@@ -894,7 +894,7 @@
         \draw  (0, 0) to [resistor={info=$R_1$}] ++(left:1.5);
         \draw  (0, 0) -- ++(up:1.5) to [resistor={near start, info=$R_2$}, resistor={near end, info=$R_3$}] ++(right:3);
         \draw  (0, 0) to [resistor={info=$R_4$}] ++(right:3) -- ++(up:1.5);
-        \draw  (3, 1.5) -- ++(right:0.5); \node [contact] (contact2) at (3.5, 1.5) {  };
+        \draw  (3, 1.5) -- ++(right:0.5); \node [contact] (contact2) at (3.5, 1.5) {};
     \end{tikzpicture}
 }
 \answer{%
@@ -921,13 +921,13 @@
 }
 \answer{%
     \begin{align*}
-    R_0 &= R + \frac 1{\frac 1{R + R} + \frac 1{R} + \frac 1{R + R}} = R + \frac 1{\frac 2R} = \frac 32 R, \\
+    R_0 &= R + \frac 1{\frac 1{R+R} + \frac 1R + \frac 1{R+R}} = R + \frac 1{\frac 2R} = \frac 32 R, \\
     \eli &= \frac U{R_0} = \frac {2U}{3R}, \\
     U_1 &= \eli R_1 = \frac {2U}{3R} \cdot R = \frac 23 U = 20{,}0\,\text{В}, \\
     U_{23} &= U_{56} = U_4 = U - \eli R_1 = U - \frac {2U}{3R} \cdot R = \frac U3 = 10{,}0\,\text{В}, \\
-    \eli_2 &= \frac{U_4}{R_4} = \frac{U}{3R} \approx 2{,}0\,\text{А}, \\
-    \eli_1 &= \frac{U_{23}}{R_{23}} = \frac{\frac U3}{R + R} = \frac U{6R} \approx 1{,}0\,\text{А}, \\
-    \eli_3 &= \frac{U_{56}}{R_{56}} = \frac{\frac U3}{R + R} = \frac U{6R} \approx 1{,}0\,\text{А}, \\
+    \eli_2 &= \frac{U_4}{R_4} = \fracU{3R} \approx 2{,}0\,\text{А}, \\
+    \eli_1 &= \frac{U_{23}}{R_{23}} = \frac{\frac U3}{R+R} = \frac U{6R} \approx 1{,}0\,\text{А}, \\
+    \eli_3 &= \frac{U_{56}}{R_{56}} = \frac{\frac U3}{R+R} = \frac U{6R} \approx 1{,}0\,\text{А}, \\
     U_2 &= \eli_1 R_2 = \frac U{6R} \cdot R = \frac U6 = 5{,}0\,\text{В}, \\
     U_3 &= \eli_1 R_3 = \frac U{6R} \cdot R = \frac U3 = 5{,}0\,\text{В}, \\
     U_5 &= \eli_3 R_5 = \frac U{6R} \cdot R = \frac U5 = 5{,}0\,\text{В}, \\
@@ -943,9 +943,9 @@
     если $\ele_1 = 18\,\text{В}$, $\ele_2 = 25\,\text{В}$, $r_1 = 3\,\text{Ом}$, $r_2 = 4\,\text{Ом}$.
 
     \begin{tikzpicture}[circuit ee IEC, thick]
-        \draw  (0, 0) to [battery={rotate=-180,info={$\ele_1, r_1 $}}] (0, 3)
+        \draw  (0, 0) to [battery={rotate=-180,info={$\ele_1, r_1$}}] (0, 3)
                 -- (5, 3)
-                to [battery={rotate=-180, info'={$\ele_2, r_2 $}}] (5, 0)
+                to [battery={rotate=-180, info'={$\ele_2, r_2$}}] (5, 0)
                 -- (0, 0)
                 (2.5, 0) to [resistor={info=$R$}] (2.5, 3);
     \end{tikzpicture}
@@ -954,9 +954,9 @@
     Выберем 2 контура и один узел, запишем для них законы Кирхгофа:
 
     \begin{tikzpicture}[circuit ee IEC, thick]
-        \draw  (0, 0) to [battery={rotate=-180,info={$\ele_1, r_1 $}}, current direction={near end, info=$\eli_1$}] (0, 3)
+        \draw  (0, 0) to [battery={rotate=-180,info={$\ele_1, r_1$}}, current direction={near end, info=$\eli_1$}] (0, 3)
                 -- (5, 3)
-                to [battery={rotate=-180, info'={$\ele_2, r_2 $}}, current direction={near end, info=$\eli_2$}] (5, 0)
+                to [battery={rotate=-180, info'={$\ele_2, r_2$}}, current direction={near end, info=$\eli_2$}] (5, 0)
                 -- (0, 0)
                 (2.5, 0) to [resistor={info=$R$}, current direction'={near end, info=$\eli$}] (2.5, 3);
         \draw [-{Latex},color=red] (0.8, 1.9) arc [start angle = 135, end angle = -160, radius = 0.6];
@@ -973,18 +973,18 @@
         \end{cases}
         \qquad \implies \qquad
         \begin{cases}
-            \eli_1 = \frac{\ele_1 - \eli R}{ r_1 }, \\
-            \eli_2 = \frac{\ele_2 + \eli R}{ r_2 }, \\
+            \eli_1 = \frac{\ele_1 - \eli R}{r_1}, \\
+            \eli_2 = \frac{\ele_2 + \eli R}{r_2}, \\
             \eli - \eli_1 - \eli_2 = 0;
         \end{cases} \implies \\
-        &\implies \eli - \frac{\ele_1 - \eli R}{ r_1 } + \frac{\ele_2 + \eli R}{ r_2 } = 0, \\
-        &\eli\cbr{1 + \frac{ R }{ r_1 } + \frac{ R }{ r_2 }} - \frac{ \ele_1 }{ r_1 } + \frac{ \ele_2 }{ r_2 } = 0, \\
+        &\implies \eli - \frac{\ele_1 - \eli R}{r_1} + \frac{\ele_2 + \eli R}{r_2} = 0, \\
+        &\eli\cbr{ 1 + \frac{R}{r_1} + \frac{R}{r_2}} - \frac{\ele_1}{r_1} + \frac{\ele_2}{r_2} = 0, \\
         &\eli
-            = \frac{\frac{ \ele_1 }{ r_1 } - \frac{ \ele_2 }{ r_2 }}{1 + \frac{ R }{ r_1 } + \frac{ R }{ r_2 }}
-            = \frac{\frac{ 18\,\text{В} }{ 3\,\text{Ом} } - \frac{ 25\,\text{В} }{ 4\,\text{Ом} }}{1 + \frac{ 12\,\text{Ом} }{ 3\,\text{Ом} } + \frac{ 12\,\text{Ом} }{ 4\,\text{Ом} }}
+            = \frac{\frac{\ele_1}{r_1} - \frac{\ele_2}{r_2}}{ 1 + \frac{R}{r_1} + \frac{R}{r_2}}
+            = \frac{\frac{18\,\text{В}}{3\,\text{Ом}} - \frac{25\,\text{В}}{4\,\text{Ом}}}{ 1 + \frac{12\,\text{Ом}}{3\,\text{Ом}} + \frac{12\,\text{Ом}}{4\,\text{Ом}}}
             = -\frac1{32}\units{А}
             \approx -0{,}031000\,\text{А}, \\
-        &U  = \eli R = \frac{\frac{ \ele_1 }{ r_1 } - \frac{ \ele_2 }{ r_2 }}{1 + \frac{ R }{ r_1 } + \frac{ R }{ r_2 }} R
+        &U  = \eli R = \frac{\frac{\ele_1}{r_1} - \frac{\ele_2}{r_2}}{ 1 + \frac{R}{r_1} + \frac{R}{r_2}} R
             \approx -0{,}37500\,\text{В}.
     \end{align*}
 }
@@ -1004,7 +1004,7 @@
         \draw  (0, 0) to [resistor={info=$R_1$}] ++(left:1.5);
         \draw  (0, 0) -- ++(up:1.5) to [resistor={near start, info=$R_2$}, resistor={near end, info=$R_3$}] ++(right:3);
         \draw  (0, 0) to [resistor={info=$R_4$}] ++(right:3) -- ++(up:1.5);
-        \draw  (1.5, 1.5) -- ++(up:1); \node [contact] (contact2) at (1.5, 2.5) {  };
+        \draw  (1.5, 1.5) -- ++(up:1); \node [contact] (contact2) at (1.5, 2.5) {};
     \end{tikzpicture}
 }
 \answer{%
@@ -1031,13 +1031,13 @@
 }
 \answer{%
     \begin{align*}
-    R_0 &= R + \frac 1{\frac 1{R + R} + \frac 1{R} + \frac 1{R + R}} = R + \frac 1{\frac 2R} = \frac 32 R, \\
+    R_0 &= R + \frac 1{\frac 1{R+R} + \frac 1R + \frac 1{R+R}} = R + \frac 1{\frac 2R} = \frac 32 R, \\
     \eli &= \frac U{R_0} = \frac {2U}{3R}, \\
     U_1 &= \eli R_1 = \frac {2U}{3R} \cdot R = \frac 23 U = 80{,}0\,\text{В}, \\
     U_{23} &= U_{56} = U_4 = U - \eli R_1 = U - \frac {2U}{3R} \cdot R = \frac U3 = 40{,}0\,\text{В}, \\
-    \eli_2 &= \frac{U_4}{R_4} = \frac{U}{3R} \approx 8{,}0\,\text{А}, \\
-    \eli_1 &= \frac{U_{23}}{R_{23}} = \frac{\frac U3}{R + R} = \frac U{6R} \approx 4{,}0\,\text{А}, \\
-    \eli_3 &= \frac{U_{56}}{R_{56}} = \frac{\frac U3}{R + R} = \frac U{6R} \approx 4{,}0\,\text{А}, \\
+    \eli_2 &= \frac{U_4}{R_4} = \fracU{3R} \approx 8{,}0\,\text{А}, \\
+    \eli_1 &= \frac{U_{23}}{R_{23}} = \frac{\frac U3}{R+R} = \frac U{6R} \approx 4{,}0\,\text{А}, \\
+    \eli_3 &= \frac{U_{56}}{R_{56}} = \frac{\frac U3}{R+R} = \frac U{6R} \approx 4{,}0\,\text{А}, \\
     U_2 &= \eli_1 R_2 = \frac U{6R} \cdot R = \frac U6 = 20{,}0\,\text{В}, \\
     U_3 &= \eli_1 R_3 = \frac U{6R} \cdot R = \frac U3 = 20{,}0\,\text{В}, \\
     U_5 &= \eli_3 R_5 = \frac U{6R} \cdot R = \frac U5 = 20{,}0\,\text{В}, \\
@@ -1053,9 +1053,9 @@
     если $\ele_1 = 18\,\text{В}$, $\ele_2 = 25\,\text{В}$, $r_1 = 2\,\text{Ом}$, $r_2 = 2\,\text{Ом}$.
 
     \begin{tikzpicture}[circuit ee IEC, thick]
-        \draw  (0, 0) to [battery={rotate=-180,info={$\ele_1, r_1 $}}] (0, 3)
+        \draw  (0, 0) to [battery={rotate=-180,info={$\ele_1, r_1$}}] (0, 3)
                 -- (5, 3)
-                to [battery={rotate=-180, info'={$\ele_2, r_2 $}}] (5, 0)
+                to [battery={rotate=-180, info'={$\ele_2, r_2$}}] (5, 0)
                 -- (0, 0)
                 (2.5, 0) to [resistor={info=$R$}] (2.5, 3);
     \end{tikzpicture}
@@ -1064,9 +1064,9 @@
     Выберем 2 контура и один узел, запишем для них законы Кирхгофа:
 
     \begin{tikzpicture}[circuit ee IEC, thick]
-        \draw  (0, 0) to [battery={rotate=-180,info={$\ele_1, r_1 $}}, current direction={near end, info=$\eli_1$}] (0, 3)
+        \draw  (0, 0) to [battery={rotate=-180,info={$\ele_1, r_1$}}, current direction={near end, info=$\eli_1$}] (0, 3)
                 -- (5, 3)
-                to [battery={rotate=-180, info'={$\ele_2, r_2 $}}, current direction={near end, info=$\eli_2$}] (5, 0)
+                to [battery={rotate=-180, info'={$\ele_2, r_2$}}, current direction={near end, info=$\eli_2$}] (5, 0)
                 -- (0, 0)
                 (2.5, 0) to [resistor={info=$R$}, current direction'={near end, info=$\eli$}] (2.5, 3);
         \draw [-{Latex},color=red] (0.8, 1.9) arc [start angle = 135, end angle = -160, radius = 0.6];
@@ -1083,18 +1083,18 @@
         \end{cases}
         \qquad \implies \qquad
         \begin{cases}
-            \eli_1 = \frac{\ele_1 - \eli R}{ r_1 }, \\
-            \eli_2 = \frac{\ele_2 + \eli R}{ r_2 }, \\
+            \eli_1 = \frac{\ele_1 - \eli R}{r_1}, \\
+            \eli_2 = \frac{\ele_2 + \eli R}{r_2}, \\
             \eli - \eli_1 - \eli_2 = 0;
         \end{cases} \implies \\
-        &\implies \eli - \frac{\ele_1 - \eli R}{ r_1 } + \frac{\ele_2 + \eli R}{ r_2 } = 0, \\
-        &\eli\cbr{1 + \frac{ R }{ r_1 } + \frac{ R }{ r_2 }} - \frac{ \ele_1 }{ r_1 } + \frac{ \ele_2 }{ r_2 } = 0, \\
+        &\implies \eli - \frac{\ele_1 - \eli R}{r_1} + \frac{\ele_2 + \eli R}{r_2} = 0, \\
+        &\eli\cbr{ 1 + \frac{R}{r_1} + \frac{R}{r_2}} - \frac{\ele_1}{r_1} + \frac{\ele_2}{r_2} = 0, \\
         &\eli
-            = \frac{\frac{ \ele_1 }{ r_1 } - \frac{ \ele_2 }{ r_2 }}{1 + \frac{ R }{ r_1 } + \frac{ R }{ r_2 }}
-            = \frac{\frac{ 18\,\text{В} }{ 2\,\text{Ом} } - \frac{ 25\,\text{В} }{ 2\,\text{Ом} }}{1 + \frac{ 10\,\text{Ом} }{ 2\,\text{Ом} } + \frac{ 10\,\text{Ом} }{ 2\,\text{Ом} }}
+            = \frac{\frac{\ele_1}{r_1} - \frac{\ele_2}{r_2}}{ 1 + \frac{R}{r_1} + \frac{R}{r_2}}
+            = \frac{\frac{18\,\text{В}}{2\,\text{Ом}} - \frac{25\,\text{В}}{2\,\text{Ом}}}{ 1 + \frac{10\,\text{Ом}}{2\,\text{Ом}} + \frac{10\,\text{Ом}}{2\,\text{Ом}}}
             = -\frac7{22}\units{А}
             \approx -0{,}31800\,\text{А}, \\
-        &U  = \eli R = \frac{\frac{ \ele_1 }{ r_1 } - \frac{ \ele_2 }{ r_2 }}{1 + \frac{ R }{ r_1 } + \frac{ R }{ r_2 }} R
+        &U  = \eli R = \frac{\frac{\ele_1}{r_1} - \frac{\ele_2}{r_2}}{ 1 + \frac{R}{r_1} + \frac{R}{r_2}} R
             \approx -3{,}1820\,\text{В}.
     \end{align*}
 }
@@ -1114,7 +1114,7 @@
         \draw  (0, 0) to [resistor={info=$R_1$}] ++(left:1.5);
         \draw  (0, 0) -- ++(up:1.5) to [resistor={near start, info=$R_2$}, resistor={near end, info=$R_3$}] ++(right:3);
         \draw  (0, 0) to [resistor={info=$R_4$}] ++(right:3) -- ++(up:1.5);
-        \draw  (1.5, 1.5) -- ++(up:1); \node [contact] (contact2) at (1.5, 2.5) {  };
+        \draw  (1.5, 1.5) -- ++(up:1); \node [contact] (contact2) at (1.5, 2.5) {};
     \end{tikzpicture}
 }
 \answer{%
@@ -1141,13 +1141,13 @@
 }
 \answer{%
     \begin{align*}
-    R_0 &= R + \frac 1{\frac 1{R + R} + \frac 1{R} + \frac 1{R + R}} = R + \frac 1{\frac 2R} = \frac 32 R, \\
+    R_0 &= R + \frac 1{\frac 1{R+R} + \frac 1R + \frac 1{R+R}} = R + \frac 1{\frac 2R} = \frac 32 R, \\
     \eli &= \frac U{R_0} = \frac {2U}{3R}, \\
     U_1 &= \eli R_1 = \frac {2U}{3R} \cdot R = \frac 23 U = 20{,}0\,\text{В}, \\
     U_{23} &= U_{56} = U_4 = U - \eli R_1 = U - \frac {2U}{3R} \cdot R = \frac U3 = 10{,}0\,\text{В}, \\
-    \eli_2 &= \frac{U_4}{R_4} = \frac{U}{3R} \approx 1{,}0\,\text{А}, \\
-    \eli_1 &= \frac{U_{23}}{R_{23}} = \frac{\frac U3}{R + R} = \frac U{6R} \approx 0{,}5\,\text{А}, \\
-    \eli_3 &= \frac{U_{56}}{R_{56}} = \frac{\frac U3}{R + R} = \frac U{6R} \approx 0{,}5\,\text{А}, \\
+    \eli_2 &= \frac{U_4}{R_4} = \fracU{3R} \approx 1{,}0\,\text{А}, \\
+    \eli_1 &= \frac{U_{23}}{R_{23}} = \frac{\frac U3}{R+R} = \frac U{6R} \approx 0{,}5\,\text{А}, \\
+    \eli_3 &= \frac{U_{56}}{R_{56}} = \frac{\frac U3}{R+R} = \frac U{6R} \approx 0{,}5\,\text{А}, \\
     U_2 &= \eli_1 R_2 = \frac U{6R} \cdot R = \frac U6 = 5{,}0\,\text{В}, \\
     U_3 &= \eli_1 R_3 = \frac U{6R} \cdot R = \frac U3 = 5{,}0\,\text{В}, \\
     U_5 &= \eli_3 R_5 = \frac U{6R} \cdot R = \frac U5 = 5{,}0\,\text{В}, \\
@@ -1163,9 +1163,9 @@
     если $\ele_1 = 6\,\text{В}$, $\ele_2 = 5\,\text{В}$, $r_1 = 1\,\text{Ом}$, $r_2 = 4\,\text{Ом}$.
 
     \begin{tikzpicture}[circuit ee IEC, thick]
-        \draw  (0, 0) to [battery={rotate=-180,info={$\ele_1, r_1 $}}] (0, 3)
+        \draw  (0, 0) to [battery={rotate=-180,info={$\ele_1, r_1$}}] (0, 3)
                 -- (5, 3)
-                to [battery={rotate=-180, info'={$\ele_2, r_2 $}}] (5, 0)
+                to [battery={rotate=-180, info'={$\ele_2, r_2$}}] (5, 0)
                 -- (0, 0)
                 (2.5, 0) to [resistor={info=$R$}] (2.5, 3);
     \end{tikzpicture}
@@ -1174,9 +1174,9 @@
     Выберем 2 контура и один узел, запишем для них законы Кирхгофа:
 
     \begin{tikzpicture}[circuit ee IEC, thick]
-        \draw  (0, 0) to [battery={rotate=-180,info={$\ele_1, r_1 $}}, current direction={near end, info=$\eli_1$}] (0, 3)
+        \draw  (0, 0) to [battery={rotate=-180,info={$\ele_1, r_1$}}, current direction={near end, info=$\eli_1$}] (0, 3)
                 -- (5, 3)
-                to [battery={rotate=-180, info'={$\ele_2, r_2 $}}, current direction={near end, info=$\eli_2$}] (5, 0)
+                to [battery={rotate=-180, info'={$\ele_2, r_2$}}, current direction={near end, info=$\eli_2$}] (5, 0)
                 -- (0, 0)
                 (2.5, 0) to [resistor={info=$R$}, current direction'={near end, info=$\eli$}] (2.5, 3);
         \draw [-{Latex},color=red] (0.8, 1.9) arc [start angle = 135, end angle = -160, radius = 0.6];
@@ -1193,18 +1193,18 @@
         \end{cases}
         \qquad \implies \qquad
         \begin{cases}
-            \eli_1 = \frac{\ele_1 - \eli R}{ r_1 }, \\
-            \eli_2 = \frac{\ele_2 + \eli R}{ r_2 }, \\
+            \eli_1 = \frac{\ele_1 - \eli R}{r_1}, \\
+            \eli_2 = \frac{\ele_2 + \eli R}{r_2}, \\
             \eli - \eli_1 - \eli_2 = 0;
         \end{cases} \implies \\
-        &\implies \eli - \frac{\ele_1 - \eli R}{ r_1 } + \frac{\ele_2 + \eli R}{ r_2 } = 0, \\
-        &\eli\cbr{1 + \frac{ R }{ r_1 } + \frac{ R }{ r_2 }} - \frac{ \ele_1 }{ r_1 } + \frac{ \ele_2 }{ r_2 } = 0, \\
+        &\implies \eli - \frac{\ele_1 - \eli R}{r_1} + \frac{\ele_2 + \eli R}{r_2} = 0, \\
+        &\eli\cbr{ 1 + \frac{R}{r_1} + \frac{R}{r_2}} - \frac{\ele_1}{r_1} + \frac{\ele_2}{r_2} = 0, \\
         &\eli
-            = \frac{\frac{ \ele_1 }{ r_1 } - \frac{ \ele_2 }{ r_2 }}{1 + \frac{ R }{ r_1 } + \frac{ R }{ r_2 }}
-            = \frac{\frac{ 6\,\text{В} }{ 1\,\text{Ом} } - \frac{ 5\,\text{В} }{ 4\,\text{Ом} }}{1 + \frac{ 20\,\text{Ом} }{ 1\,\text{Ом} } + \frac{ 20\,\text{Ом} }{ 4\,\text{Ом} }}
+            = \frac{\frac{\ele_1}{r_1} - \frac{\ele_2}{r_2}}{ 1 + \frac{R}{r_1} + \frac{R}{r_2}}
+            = \frac{\frac{6\,\text{В}}{1\,\text{Ом}} - \frac{5\,\text{В}}{4\,\text{Ом}}}{ 1 + \frac{20\,\text{Ом}}{1\,\text{Ом}} + \frac{20\,\text{Ом}}{4\,\text{Ом}}}
             = \frac{19}{104}\units{А}
             \approx 0{,}183\,\text{А}, \\
-        &U  = \eli R = \frac{\frac{ \ele_1 }{ r_1 } - \frac{ \ele_2 }{ r_2 }}{1 + \frac{ R }{ r_1 } + \frac{ R }{ r_2 }} R
+        &U  = \eli R = \frac{\frac{\ele_1}{r_1} - \frac{\ele_2}{r_2}}{ 1 + \frac{R}{r_1} + \frac{R}{r_2}} R
             \approx 3{,}654\,\text{В}.
     \end{align*}
 }
@@ -1224,7 +1224,7 @@
         \draw  (0, 0) to [resistor={info=$R_1$}] ++(left:1.5);
         \draw  (0, 0) -- ++(up:1.5) to [resistor={near start, info=$R_2$}, resistor={near end, info=$R_3$}] ++(right:3);
         \draw  (0, 0) to [resistor={info=$R_4$}] ++(right:3) -- ++(up:1.5);
-        \draw  (1.5, 1.5) -- ++(up:1); \node [contact] (contact2) at (1.5, 2.5) {  };
+        \draw  (1.5, 1.5) -- ++(up:1); \node [contact] (contact2) at (1.5, 2.5) {};
     \end{tikzpicture}
 }
 \answer{%
@@ -1251,13 +1251,13 @@
 }
 \answer{%
     \begin{align*}
-    R_0 &= R + \frac 1{\frac 1{R + R} + \frac 1{R} + \frac 1{R + R}} = R + \frac 1{\frac 2R} = \frac 32 R, \\
+    R_0 &= R + \frac 1{\frac 1{R+R} + \frac 1R + \frac 1{R+R}} = R + \frac 1{\frac 2R} = \frac 32 R, \\
     \eli &= \frac U{R_0} = \frac {2U}{3R}, \\
     U_1 &= \eli R_1 = \frac {2U}{3R} \cdot R = \frac 23 U = 60{,}0\,\text{В}, \\
     U_{23} &= U_{56} = U_4 = U - \eli R_1 = U - \frac {2U}{3R} \cdot R = \frac U3 = 30{,}0\,\text{В}, \\
-    \eli_2 &= \frac{U_4}{R_4} = \frac{U}{3R} \approx 6{,}0\,\text{А}, \\
-    \eli_1 &= \frac{U_{23}}{R_{23}} = \frac{\frac U3}{R + R} = \frac U{6R} \approx 3{,}0\,\text{А}, \\
-    \eli_3 &= \frac{U_{56}}{R_{56}} = \frac{\frac U3}{R + R} = \frac U{6R} \approx 3{,}0\,\text{А}, \\
+    \eli_2 &= \frac{U_4}{R_4} = \fracU{3R} \approx 6{,}0\,\text{А}, \\
+    \eli_1 &= \frac{U_{23}}{R_{23}} = \frac{\frac U3}{R+R} = \frac U{6R} \approx 3{,}0\,\text{А}, \\
+    \eli_3 &= \frac{U_{56}}{R_{56}} = \frac{\frac U3}{R+R} = \frac U{6R} \approx 3{,}0\,\text{А}, \\
     U_2 &= \eli_1 R_2 = \frac U{6R} \cdot R = \frac U6 = 15{,}0\,\text{В}, \\
     U_3 &= \eli_1 R_3 = \frac U{6R} \cdot R = \frac U3 = 15{,}0\,\text{В}, \\
     U_5 &= \eli_3 R_5 = \frac U{6R} \cdot R = \frac U5 = 15{,}0\,\text{В}, \\
@@ -1273,9 +1273,9 @@
     если $\ele_1 = 18\,\text{В}$, $\ele_2 = 5\,\text{В}$, $r_1 = 3\,\text{Ом}$, $r_2 = 2\,\text{Ом}$.
 
     \begin{tikzpicture}[circuit ee IEC, thick]
-        \draw  (0, 0) to [battery={rotate=-180,info={$\ele_1, r_1 $}}] (0, 3)
+        \draw  (0, 0) to [battery={rotate=-180,info={$\ele_1, r_1$}}] (0, 3)
                 -- (5, 3)
-                to [battery={rotate=-180, info'={$\ele_2, r_2 $}}] (5, 0)
+                to [battery={rotate=-180, info'={$\ele_2, r_2$}}] (5, 0)
                 -- (0, 0)
                 (2.5, 0) to [resistor={info=$R$}] (2.5, 3);
     \end{tikzpicture}
@@ -1284,9 +1284,9 @@
     Выберем 2 контура и один узел, запишем для них законы Кирхгофа:
 
     \begin{tikzpicture}[circuit ee IEC, thick]
-        \draw  (0, 0) to [battery={rotate=-180,info={$\ele_1, r_1 $}}, current direction={near end, info=$\eli_1$}] (0, 3)
+        \draw  (0, 0) to [battery={rotate=-180,info={$\ele_1, r_1$}}, current direction={near end, info=$\eli_1$}] (0, 3)
                 -- (5, 3)
-                to [battery={rotate=-180, info'={$\ele_2, r_2 $}}, current direction={near end, info=$\eli_2$}] (5, 0)
+                to [battery={rotate=-180, info'={$\ele_2, r_2$}}, current direction={near end, info=$\eli_2$}] (5, 0)
                 -- (0, 0)
                 (2.5, 0) to [resistor={info=$R$}, current direction'={near end, info=$\eli$}] (2.5, 3);
         \draw [-{Latex},color=red] (0.8, 1.9) arc [start angle = 135, end angle = -160, radius = 0.6];
@@ -1303,18 +1303,18 @@
         \end{cases}
         \qquad \implies \qquad
         \begin{cases}
-            \eli_1 = \frac{\ele_1 - \eli R}{ r_1 }, \\
-            \eli_2 = \frac{\ele_2 + \eli R}{ r_2 }, \\
+            \eli_1 = \frac{\ele_1 - \eli R}{r_1}, \\
+            \eli_2 = \frac{\ele_2 + \eli R}{r_2}, \\
             \eli - \eli_1 - \eli_2 = 0;
         \end{cases} \implies \\
-        &\implies \eli - \frac{\ele_1 - \eli R}{ r_1 } + \frac{\ele_2 + \eli R}{ r_2 } = 0, \\
-        &\eli\cbr{1 + \frac{ R }{ r_1 } + \frac{ R }{ r_2 }} - \frac{ \ele_1 }{ r_1 } + \frac{ \ele_2 }{ r_2 } = 0, \\
+        &\implies \eli - \frac{\ele_1 - \eli R}{r_1} + \frac{\ele_2 + \eli R}{r_2} = 0, \\
+        &\eli\cbr{ 1 + \frac{R}{r_1} + \frac{R}{r_2}} - \frac{\ele_1}{r_1} + \frac{\ele_2}{r_2} = 0, \\
         &\eli
-            = \frac{\frac{ \ele_1 }{ r_1 } - \frac{ \ele_2 }{ r_2 }}{1 + \frac{ R }{ r_1 } + \frac{ R }{ r_2 }}
-            = \frac{\frac{ 18\,\text{В} }{ 3\,\text{Ом} } - \frac{ 5\,\text{В} }{ 2\,\text{Ом} }}{1 + \frac{ 10\,\text{Ом} }{ 3\,\text{Ом} } + \frac{ 10\,\text{Ом} }{ 2\,\text{Ом} }}
+            = \frac{\frac{\ele_1}{r_1} - \frac{\ele_2}{r_2}}{ 1 + \frac{R}{r_1} + \frac{R}{r_2}}
+            = \frac{\frac{18\,\text{В}}{3\,\text{Ом}} - \frac{5\,\text{В}}{2\,\text{Ом}}}{ 1 + \frac{10\,\text{Ом}}{3\,\text{Ом}} + \frac{10\,\text{Ом}}{2\,\text{Ом}}}
             = \frac38\units{А}
             \approx 0{,}375\,\text{А}, \\
-        &U  = \eli R = \frac{\frac{ \ele_1 }{ r_1 } - \frac{ \ele_2 }{ r_2 }}{1 + \frac{ R }{ r_1 } + \frac{ R }{ r_2 }} R
+        &U  = \eli R = \frac{\frac{\ele_1}{r_1} - \frac{\ele_2}{r_2}}{ 1 + \frac{R}{r_1} + \frac{R}{r_2}} R
             \approx 3{,}750\,\text{В}.
     \end{align*}
 }
@@ -1334,7 +1334,7 @@
         \draw  (0, 0) to [resistor={info=$R_1$}] ++(left:1.5);
         \draw  (0, 0) -- ++(up:1.5) to [resistor={near start, info=$R_2$}, resistor={near end, info=$R_3$}] ++(right:3);
         \draw  (0, 0) to [resistor={info=$R_4$}] ++(right:3) -- ++(up:1.5);
-        \draw  (1.5, 1.5) -- ++(up:1); \node [contact] (contact2) at (1.5, 2.5) {  };
+        \draw  (1.5, 1.5) -- ++(up:1); \node [contact] (contact2) at (1.5, 2.5) {};
     \end{tikzpicture}
 }
 \answer{%
@@ -1361,13 +1361,13 @@
 }
 \answer{%
     \begin{align*}
-    R_0 &= R + \frac 1{\frac 1{R + R} + \frac 1{R} + \frac 1{R + R}} = R + \frac 1{\frac 2R} = \frac 32 R, \\
+    R_0 &= R + \frac 1{\frac 1{R+R} + \frac 1R + \frac 1{R+R}} = R + \frac 1{\frac 2R} = \frac 32 R, \\
     \eli &= \frac U{R_0} = \frac {2U}{3R}, \\
     U_1 &= \eli R_1 = \frac {2U}{3R} \cdot R = \frac 23 U = 100{,}0\,\text{В}, \\
     U_{23} &= U_{56} = U_4 = U - \eli R_1 = U - \frac {2U}{3R} \cdot R = \frac U3 = 50{,}0\,\text{В}, \\
-    \eli_2 &= \frac{U_4}{R_4} = \frac{U}{3R} \approx 10{,}0\,\text{А}, \\
-    \eli_1 &= \frac{U_{23}}{R_{23}} = \frac{\frac U3}{R + R} = \frac U{6R} \approx 5{,}0\,\text{А}, \\
-    \eli_3 &= \frac{U_{56}}{R_{56}} = \frac{\frac U3}{R + R} = \frac U{6R} \approx 5{,}0\,\text{А}, \\
+    \eli_2 &= \frac{U_4}{R_4} = \fracU{3R} \approx 10{,}0\,\text{А}, \\
+    \eli_1 &= \frac{U_{23}}{R_{23}} = \frac{\frac U3}{R+R} = \frac U{6R} \approx 5{,}0\,\text{А}, \\
+    \eli_3 &= \frac{U_{56}}{R_{56}} = \frac{\frac U3}{R+R} = \frac U{6R} \approx 5{,}0\,\text{А}, \\
     U_2 &= \eli_1 R_2 = \frac U{6R} \cdot R = \frac U6 = 25{,}0\,\text{В}, \\
     U_3 &= \eli_1 R_3 = \frac U{6R} \cdot R = \frac U3 = 25{,}0\,\text{В}, \\
     U_5 &= \eli_3 R_5 = \frac U{6R} \cdot R = \frac U5 = 25{,}0\,\text{В}, \\
@@ -1383,9 +1383,9 @@
     если $\ele_1 = 18\,\text{В}$, $\ele_2 = 5\,\text{В}$, $r_1 = 2\,\text{Ом}$, $r_2 = 4\,\text{Ом}$.
 
     \begin{tikzpicture}[circuit ee IEC, thick]
-        \draw  (0, 0) to [battery={rotate=-180,info={$\ele_1, r_1 $}}] (0, 3)
+        \draw  (0, 0) to [battery={rotate=-180,info={$\ele_1, r_1$}}] (0, 3)
                 -- (5, 3)
-                to [battery={rotate=-180, info'={$\ele_2, r_2 $}}] (5, 0)
+                to [battery={rotate=-180, info'={$\ele_2, r_2$}}] (5, 0)
                 -- (0, 0)
                 (2.5, 0) to [resistor={info=$R$}] (2.5, 3);
     \end{tikzpicture}
@@ -1394,9 +1394,9 @@
     Выберем 2 контура и один узел, запишем для них законы Кирхгофа:
 
     \begin{tikzpicture}[circuit ee IEC, thick]
-        \draw  (0, 0) to [battery={rotate=-180,info={$\ele_1, r_1 $}}, current direction={near end, info=$\eli_1$}] (0, 3)
+        \draw  (0, 0) to [battery={rotate=-180,info={$\ele_1, r_1$}}, current direction={near end, info=$\eli_1$}] (0, 3)
                 -- (5, 3)
-                to [battery={rotate=-180, info'={$\ele_2, r_2 $}}, current direction={near end, info=$\eli_2$}] (5, 0)
+                to [battery={rotate=-180, info'={$\ele_2, r_2$}}, current direction={near end, info=$\eli_2$}] (5, 0)
                 -- (0, 0)
                 (2.5, 0) to [resistor={info=$R$}, current direction'={near end, info=$\eli$}] (2.5, 3);
         \draw [-{Latex},color=red] (0.8, 1.9) arc [start angle = 135, end angle = -160, radius = 0.6];
@@ -1413,18 +1413,18 @@
         \end{cases}
         \qquad \implies \qquad
         \begin{cases}
-            \eli_1 = \frac{\ele_1 - \eli R}{ r_1 }, \\
-            \eli_2 = \frac{\ele_2 + \eli R}{ r_2 }, \\
+            \eli_1 = \frac{\ele_1 - \eli R}{r_1}, \\
+            \eli_2 = \frac{\ele_2 + \eli R}{r_2}, \\
             \eli - \eli_1 - \eli_2 = 0;
         \end{cases} \implies \\
-        &\implies \eli - \frac{\ele_1 - \eli R}{ r_1 } + \frac{\ele_2 + \eli R}{ r_2 } = 0, \\
-        &\eli\cbr{1 + \frac{ R }{ r_1 } + \frac{ R }{ r_2 }} - \frac{ \ele_1 }{ r_1 } + \frac{ \ele_2 }{ r_2 } = 0, \\
+        &\implies \eli - \frac{\ele_1 - \eli R}{r_1} + \frac{\ele_2 + \eli R}{r_2} = 0, \\
+        &\eli\cbr{ 1 + \frac{R}{r_1} + \frac{R}{r_2}} - \frac{\ele_1}{r_1} + \frac{\ele_2}{r_2} = 0, \\
         &\eli
-            = \frac{\frac{ \ele_1 }{ r_1 } - \frac{ \ele_2 }{ r_2 }}{1 + \frac{ R }{ r_1 } + \frac{ R }{ r_2 }}
-            = \frac{\frac{ 18\,\text{В} }{ 2\,\text{Ом} } - \frac{ 5\,\text{В} }{ 4\,\text{Ом} }}{1 + \frac{ 20\,\text{Ом} }{ 2\,\text{Ом} } + \frac{ 20\,\text{Ом} }{ 4\,\text{Ом} }}
+            = \frac{\frac{\ele_1}{r_1} - \frac{\ele_2}{r_2}}{ 1 + \frac{R}{r_1} + \frac{R}{r_2}}
+            = \frac{\frac{18\,\text{В}}{2\,\text{Ом}} - \frac{5\,\text{В}}{4\,\text{Ом}}}{ 1 + \frac{20\,\text{Ом}}{2\,\text{Ом}} + \frac{20\,\text{Ом}}{4\,\text{Ом}}}
             = \frac{31}{64}\units{А}
             \approx 0{,}484\,\text{А}, \\
-        &U  = \eli R = \frac{\frac{ \ele_1 }{ r_1 } - \frac{ \ele_2 }{ r_2 }}{1 + \frac{ R }{ r_1 } + \frac{ R }{ r_2 }} R
+        &U  = \eli R = \frac{\frac{\ele_1}{r_1} - \frac{\ele_2}{r_2}}{ 1 + \frac{R}{r_1} + \frac{R}{r_2}} R
             \approx 9{,}688\,\text{В}.
     \end{align*}
 }
@@ -1444,7 +1444,7 @@
         \draw  (0, 0) to [resistor={info=$R_1$}] ++(left:1.5);
         \draw  (0, 0) -- ++(up:1.5) to [resistor={near start, info=$R_2$}, resistor={near end, info=$R_3$}] ++(right:3);
         \draw  (0, 0) to [resistor={info=$R_4$}] ++(right:3) -- ++(up:1.5);
-        \draw  (1.5, 1.5) -- ++(up:1); \node [contact] (contact2) at (1.5, 2.5) {  };
+        \draw  (1.5, 1.5) -- ++(up:1); \node [contact] (contact2) at (1.5, 2.5) {};
     \end{tikzpicture}
 }
 \answer{%
@@ -1471,13 +1471,13 @@
 }
 \answer{%
     \begin{align*}
-    R_0 &= R + \frac 1{\frac 1{R + R} + \frac 1{R} + \frac 1{R + R}} = R + \frac 1{\frac 2R} = \frac 32 R, \\
+    R_0 &= R + \frac 1{\frac 1{R+R} + \frac 1R + \frac 1{R+R}} = R + \frac 1{\frac 2R} = \frac 32 R, \\
     \eli &= \frac U{R_0} = \frac {2U}{3R}, \\
     U_1 &= \eli R_1 = \frac {2U}{3R} \cdot R = \frac 23 U = 60{,}0\,\text{В}, \\
     U_{23} &= U_{56} = U_4 = U - \eli R_1 = U - \frac {2U}{3R} \cdot R = \frac U3 = 30{,}0\,\text{В}, \\
-    \eli_2 &= \frac{U_4}{R_4} = \frac{U}{3R} \approx 15{,}0\,\text{А}, \\
-    \eli_1 &= \frac{U_{23}}{R_{23}} = \frac{\frac U3}{R + R} = \frac U{6R} \approx 7{,}5\,\text{А}, \\
-    \eli_3 &= \frac{U_{56}}{R_{56}} = \frac{\frac U3}{R + R} = \frac U{6R} \approx 7{,}5\,\text{А}, \\
+    \eli_2 &= \frac{U_4}{R_4} = \fracU{3R} \approx 15{,}0\,\text{А}, \\
+    \eli_1 &= \frac{U_{23}}{R_{23}} = \frac{\frac U3}{R+R} = \frac U{6R} \approx 7{,}5\,\text{А}, \\
+    \eli_3 &= \frac{U_{56}}{R_{56}} = \frac{\frac U3}{R+R} = \frac U{6R} \approx 7{,}5\,\text{А}, \\
     U_2 &= \eli_1 R_2 = \frac U{6R} \cdot R = \frac U6 = 15{,}0\,\text{В}, \\
     U_3 &= \eli_1 R_3 = \frac U{6R} \cdot R = \frac U3 = 15{,}0\,\text{В}, \\
     U_5 &= \eli_3 R_5 = \frac U{6R} \cdot R = \frac U5 = 15{,}0\,\text{В}, \\
@@ -1493,9 +1493,9 @@
     если $\ele_1 = 6\,\text{В}$, $\ele_2 = 5\,\text{В}$, $r_1 = 2\,\text{Ом}$, $r_2 = 6\,\text{Ом}$.
 
     \begin{tikzpicture}[circuit ee IEC, thick]
-        \draw  (0, 0) to [battery={rotate=-180,info={$\ele_1, r_1 $}}] (0, 3)
+        \draw  (0, 0) to [battery={rotate=-180,info={$\ele_1, r_1$}}] (0, 3)
                 -- (5, 3)
-                to [battery={rotate=-180, info'={$\ele_2, r_2 $}}] (5, 0)
+                to [battery={rotate=-180, info'={$\ele_2, r_2$}}] (5, 0)
                 -- (0, 0)
                 (2.5, 0) to [resistor={info=$R$}] (2.5, 3);
     \end{tikzpicture}
@@ -1504,9 +1504,9 @@
     Выберем 2 контура и один узел, запишем для них законы Кирхгофа:
 
     \begin{tikzpicture}[circuit ee IEC, thick]
-        \draw  (0, 0) to [battery={rotate=-180,info={$\ele_1, r_1 $}}, current direction={near end, info=$\eli_1$}] (0, 3)
+        \draw  (0, 0) to [battery={rotate=-180,info={$\ele_1, r_1$}}, current direction={near end, info=$\eli_1$}] (0, 3)
                 -- (5, 3)
-                to [battery={rotate=-180, info'={$\ele_2, r_2 $}}, current direction={near end, info=$\eli_2$}] (5, 0)
+                to [battery={rotate=-180, info'={$\ele_2, r_2$}}, current direction={near end, info=$\eli_2$}] (5, 0)
                 -- (0, 0)
                 (2.5, 0) to [resistor={info=$R$}, current direction'={near end, info=$\eli$}] (2.5, 3);
         \draw [-{Latex},color=red] (0.8, 1.9) arc [start angle = 135, end angle = -160, radius = 0.6];
@@ -1523,18 +1523,18 @@
         \end{cases}
         \qquad \implies \qquad
         \begin{cases}
-            \eli_1 = \frac{\ele_1 - \eli R}{ r_1 }, \\
-            \eli_2 = \frac{\ele_2 + \eli R}{ r_2 }, \\
+            \eli_1 = \frac{\ele_1 - \eli R}{r_1}, \\
+            \eli_2 = \frac{\ele_2 + \eli R}{r_2}, \\
             \eli - \eli_1 - \eli_2 = 0;
         \end{cases} \implies \\
-        &\implies \eli - \frac{\ele_1 - \eli R}{ r_1 } + \frac{\ele_2 + \eli R}{ r_2 } = 0, \\
-        &\eli\cbr{1 + \frac{ R }{ r_1 } + \frac{ R }{ r_2 }} - \frac{ \ele_1 }{ r_1 } + \frac{ \ele_2 }{ r_2 } = 0, \\
+        &\implies \eli - \frac{\ele_1 - \eli R}{r_1} + \frac{\ele_2 + \eli R}{r_2} = 0, \\
+        &\eli\cbr{ 1 + \frac{R}{r_1} + \frac{R}{r_2}} - \frac{\ele_1}{r_1} + \frac{\ele_2}{r_2} = 0, \\
         &\eli
-            = \frac{\frac{ \ele_1 }{ r_1 } - \frac{ \ele_2 }{ r_2 }}{1 + \frac{ R }{ r_1 } + \frac{ R }{ r_2 }}
-            = \frac{\frac{ 6\,\text{В} }{ 2\,\text{Ом} } - \frac{ 5\,\text{В} }{ 6\,\text{Ом} }}{1 + \frac{ 18\,\text{Ом} }{ 2\,\text{Ом} } + \frac{ 18\,\text{Ом} }{ 6\,\text{Ом} }}
+            = \frac{\frac{\ele_1}{r_1} - \frac{\ele_2}{r_2}}{ 1 + \frac{R}{r_1} + \frac{R}{r_2}}
+            = \frac{\frac{6\,\text{В}}{2\,\text{Ом}} - \frac{5\,\text{В}}{6\,\text{Ом}}}{ 1 + \frac{18\,\text{Ом}}{2\,\text{Ом}} + \frac{18\,\text{Ом}}{6\,\text{Ом}}}
             = \frac16\units{А}
             \approx 0{,}167\,\text{А}, \\
-        &U  = \eli R = \frac{\frac{ \ele_1 }{ r_1 } - \frac{ \ele_2 }{ r_2 }}{1 + \frac{ R }{ r_1 } + \frac{ R }{ r_2 }} R
+        &U  = \eli R = \frac{\frac{\ele_1}{r_1} - \frac{\ele_2}{r_2}}{ 1 + \frac{R}{r_1} + \frac{R}{r_2}} R
             \approx 3{,}000\,\text{В}.
     \end{align*}
 }
@@ -1554,7 +1554,7 @@
         \draw  (0, 0) to [resistor={info=$R_1$}] ++(left:1.5);
         \draw  (0, 0) -- ++(up:1.5) to [resistor={near start, info=$R_2$}, resistor={near end, info=$R_3$}] ++(right:3);
         \draw  (0, 0) to [resistor={info=$R_4$}] ++(right:3) -- ++(up:1.5);
-        \draw  (3, 1.5) -- ++(right:0.5); \node [contact] (contact2) at (3.5, 1.5) {  };
+        \draw  (3, 1.5) -- ++(right:0.5); \node [contact] (contact2) at (3.5, 1.5) {};
     \end{tikzpicture}
 }
 \answer{%
@@ -1581,13 +1581,13 @@
 }
 \answer{%
     \begin{align*}
-    R_0 &= R + \frac 1{\frac 1{R + R} + \frac 1{R} + \frac 1{R + R}} = R + \frac 1{\frac 2R} = \frac 32 R, \\
+    R_0 &= R + \frac 1{\frac 1{R+R} + \frac 1R + \frac 1{R+R}} = R + \frac 1{\frac 2R} = \frac 32 R, \\
     \eli &= \frac U{R_0} = \frac {2U}{3R}, \\
     U_1 &= \eli R_1 = \frac {2U}{3R} \cdot R = \frac 23 U = 100{,}0\,\text{В}, \\
     U_{23} &= U_{56} = U_4 = U - \eli R_1 = U - \frac {2U}{3R} \cdot R = \frac U3 = 50{,}0\,\text{В}, \\
-    \eli_2 &= \frac{U_4}{R_4} = \frac{U}{3R} \approx 5{,}0\,\text{А}, \\
-    \eli_1 &= \frac{U_{23}}{R_{23}} = \frac{\frac U3}{R + R} = \frac U{6R} \approx 2{,}5\,\text{А}, \\
-    \eli_3 &= \frac{U_{56}}{R_{56}} = \frac{\frac U3}{R + R} = \frac U{6R} \approx 2{,}5\,\text{А}, \\
+    \eli_2 &= \frac{U_4}{R_4} = \fracU{3R} \approx 5{,}0\,\text{А}, \\
+    \eli_1 &= \frac{U_{23}}{R_{23}} = \frac{\frac U3}{R+R} = \frac U{6R} \approx 2{,}5\,\text{А}, \\
+    \eli_3 &= \frac{U_{56}}{R_{56}} = \frac{\frac U3}{R+R} = \frac U{6R} \approx 2{,}5\,\text{А}, \\
     U_2 &= \eli_1 R_2 = \frac U{6R} \cdot R = \frac U6 = 25{,}0\,\text{В}, \\
     U_3 &= \eli_1 R_3 = \frac U{6R} \cdot R = \frac U3 = 25{,}0\,\text{В}, \\
     U_5 &= \eli_3 R_5 = \frac U{6R} \cdot R = \frac U5 = 25{,}0\,\text{В}, \\
@@ -1603,9 +1603,9 @@
     если $\ele_1 = 18\,\text{В}$, $\ele_2 = 15\,\text{В}$, $r_1 = 3\,\text{Ом}$, $r_2 = 4\,\text{Ом}$.
 
     \begin{tikzpicture}[circuit ee IEC, thick]
-        \draw  (0, 0) to [battery={rotate=-180,info={$\ele_1, r_1 $}}] (0, 3)
+        \draw  (0, 0) to [battery={rotate=-180,info={$\ele_1, r_1$}}] (0, 3)
                 -- (5, 3)
-                to [battery={rotate=-180, info'={$\ele_2, r_2 $}}] (5, 0)
+                to [battery={rotate=-180, info'={$\ele_2, r_2$}}] (5, 0)
                 -- (0, 0)
                 (2.5, 0) to [resistor={info=$R$}] (2.5, 3);
     \end{tikzpicture}
@@ -1614,9 +1614,9 @@
     Выберем 2 контура и один узел, запишем для них законы Кирхгофа:
 
     \begin{tikzpicture}[circuit ee IEC, thick]
-        \draw  (0, 0) to [battery={rotate=-180,info={$\ele_1, r_1 $}}, current direction={near end, info=$\eli_1$}] (0, 3)
+        \draw  (0, 0) to [battery={rotate=-180,info={$\ele_1, r_1$}}, current direction={near end, info=$\eli_1$}] (0, 3)
                 -- (5, 3)
-                to [battery={rotate=-180, info'={$\ele_2, r_2 $}}, current direction={near end, info=$\eli_2$}] (5, 0)
+                to [battery={rotate=-180, info'={$\ele_2, r_2$}}, current direction={near end, info=$\eli_2$}] (5, 0)
                 -- (0, 0)
                 (2.5, 0) to [resistor={info=$R$}, current direction'={near end, info=$\eli$}] (2.5, 3);
         \draw [-{Latex},color=red] (0.8, 1.9) arc [start angle = 135, end angle = -160, radius = 0.6];
@@ -1633,18 +1633,18 @@
         \end{cases}
         \qquad \implies \qquad
         \begin{cases}
-            \eli_1 = \frac{\ele_1 - \eli R}{ r_1 }, \\
-            \eli_2 = \frac{\ele_2 + \eli R}{ r_2 }, \\
+            \eli_1 = \frac{\ele_1 - \eli R}{r_1}, \\
+            \eli_2 = \frac{\ele_2 + \eli R}{r_2}, \\
             \eli - \eli_1 - \eli_2 = 0;
         \end{cases} \implies \\
-        &\implies \eli - \frac{\ele_1 - \eli R}{ r_1 } + \frac{\ele_2 + \eli R}{ r_2 } = 0, \\
-        &\eli\cbr{1 + \frac{ R }{ r_1 } + \frac{ R }{ r_2 }} - \frac{ \ele_1 }{ r_1 } + \frac{ \ele_2 }{ r_2 } = 0, \\
+        &\implies \eli - \frac{\ele_1 - \eli R}{r_1} + \frac{\ele_2 + \eli R}{r_2} = 0, \\
+        &\eli\cbr{ 1 + \frac{R}{r_1} + \frac{R}{r_2}} - \frac{\ele_1}{r_1} + \frac{\ele_2}{r_2} = 0, \\
         &\eli
-            = \frac{\frac{ \ele_1 }{ r_1 } - \frac{ \ele_2 }{ r_2 }}{1 + \frac{ R }{ r_1 } + \frac{ R }{ r_2 }}
-            = \frac{\frac{ 18\,\text{В} }{ 3\,\text{Ом} } - \frac{ 15\,\text{В} }{ 4\,\text{Ом} }}{1 + \frac{ 20\,\text{Ом} }{ 3\,\text{Ом} } + \frac{ 20\,\text{Ом} }{ 4\,\text{Ом} }}
+            = \frac{\frac{\ele_1}{r_1} - \frac{\ele_2}{r_2}}{ 1 + \frac{R}{r_1} + \frac{R}{r_2}}
+            = \frac{\frac{18\,\text{В}}{3\,\text{Ом}} - \frac{15\,\text{В}}{4\,\text{Ом}}}{ 1 + \frac{20\,\text{Ом}}{3\,\text{Ом}} + \frac{20\,\text{Ом}}{4\,\text{Ом}}}
             = \frac{27}{152}\units{А}
             \approx 0{,}178\,\text{А}, \\
-        &U  = \eli R = \frac{\frac{ \ele_1 }{ r_1 } - \frac{ \ele_2 }{ r_2 }}{1 + \frac{ R }{ r_1 } + \frac{ R }{ r_2 }} R
+        &U  = \eli R = \frac{\frac{\ele_1}{r_1} - \frac{\ele_2}{r_2}}{ 1 + \frac{R}{r_1} + \frac{R}{r_2}} R
             \approx 3{,}553\,\text{В}.
     \end{align*}
 }
@@ -1664,7 +1664,7 @@
         \draw  (0, 0) to [resistor={info=$R_1$}] ++(left:1.5);
         \draw  (0, 0) -- ++(up:1.5) to [resistor={near start, info=$R_2$}, resistor={near end, info=$R_3$}] ++(right:3);
         \draw  (0, 0) to [resistor={info=$R_4$}] ++(right:3) -- ++(up:1.5);
-        \draw  (3, 1.5) -- ++(right:0.5); \node [contact] (contact2) at (3.5, 1.5) {  };
+        \draw  (3, 1.5) -- ++(right:0.5); \node [contact] (contact2) at (3.5, 1.5) {};
     \end{tikzpicture}
 }
 \answer{%
@@ -1691,13 +1691,13 @@
 }
 \answer{%
     \begin{align*}
-    R_0 &= R + \frac 1{\frac 1{R + R} + \frac 1{R} + \frac 1{R + R}} = R + \frac 1{\frac 2R} = \frac 32 R, \\
+    R_0 &= R + \frac 1{\frac 1{R+R} + \frac 1R + \frac 1{R+R}} = R + \frac 1{\frac 2R} = \frac 32 R, \\
     \eli &= \frac U{R_0} = \frac {2U}{3R}, \\
     U_1 &= \eli R_1 = \frac {2U}{3R} \cdot R = \frac 23 U = 20{,}0\,\text{В}, \\
     U_{23} &= U_{56} = U_4 = U - \eli R_1 = U - \frac {2U}{3R} \cdot R = \frac U3 = 10{,}0\,\text{В}, \\
-    \eli_2 &= \frac{U_4}{R_4} = \frac{U}{3R} \approx 2{,}5\,\text{А}, \\
-    \eli_1 &= \frac{U_{23}}{R_{23}} = \frac{\frac U3}{R + R} = \frac U{6R} \approx 1{,}2\,\text{А}, \\
-    \eli_3 &= \frac{U_{56}}{R_{56}} = \frac{\frac U3}{R + R} = \frac U{6R} \approx 1{,}2\,\text{А}, \\
+    \eli_2 &= \frac{U_4}{R_4} = \fracU{3R} \approx 2{,}5\,\text{А}, \\
+    \eli_1 &= \frac{U_{23}}{R_{23}} = \frac{\frac U3}{R+R} = \frac U{6R} \approx 1{,}2\,\text{А}, \\
+    \eli_3 &= \frac{U_{56}}{R_{56}} = \frac{\frac U3}{R+R} = \frac U{6R} \approx 1{,}2\,\text{А}, \\
     U_2 &= \eli_1 R_2 = \frac U{6R} \cdot R = \frac U6 = 5{,}0\,\text{В}, \\
     U_3 &= \eli_1 R_3 = \frac U{6R} \cdot R = \frac U3 = 5{,}0\,\text{В}, \\
     U_5 &= \eli_3 R_5 = \frac U{6R} \cdot R = \frac U5 = 5{,}0\,\text{В}, \\
@@ -1713,9 +1713,9 @@
     если $\ele_1 = 18\,\text{В}$, $\ele_2 = 25\,\text{В}$, $r_1 = 2\,\text{Ом}$, $r_2 = 2\,\text{Ом}$.
 
     \begin{tikzpicture}[circuit ee IEC, thick]
-        \draw  (0, 0) to [battery={rotate=-180,info={$\ele_1, r_1 $}}] (0, 3)
+        \draw  (0, 0) to [battery={rotate=-180,info={$\ele_1, r_1$}}] (0, 3)
                 -- (5, 3)
-                to [battery={rotate=-180, info'={$\ele_2, r_2 $}}] (5, 0)
+                to [battery={rotate=-180, info'={$\ele_2, r_2$}}] (5, 0)
                 -- (0, 0)
                 (2.5, 0) to [resistor={info=$R$}] (2.5, 3);
     \end{tikzpicture}
@@ -1724,9 +1724,9 @@
     Выберем 2 контура и один узел, запишем для них законы Кирхгофа:
 
     \begin{tikzpicture}[circuit ee IEC, thick]
-        \draw  (0, 0) to [battery={rotate=-180,info={$\ele_1, r_1 $}}, current direction={near end, info=$\eli_1$}] (0, 3)
+        \draw  (0, 0) to [battery={rotate=-180,info={$\ele_1, r_1$}}, current direction={near end, info=$\eli_1$}] (0, 3)
                 -- (5, 3)
-                to [battery={rotate=-180, info'={$\ele_2, r_2 $}}, current direction={near end, info=$\eli_2$}] (5, 0)
+                to [battery={rotate=-180, info'={$\ele_2, r_2$}}, current direction={near end, info=$\eli_2$}] (5, 0)
                 -- (0, 0)
                 (2.5, 0) to [resistor={info=$R$}, current direction'={near end, info=$\eli$}] (2.5, 3);
         \draw [-{Latex},color=red] (0.8, 1.9) arc [start angle = 135, end angle = -160, radius = 0.6];
@@ -1743,18 +1743,18 @@
         \end{cases}
         \qquad \implies \qquad
         \begin{cases}
-            \eli_1 = \frac{\ele_1 - \eli R}{ r_1 }, \\
-            \eli_2 = \frac{\ele_2 + \eli R}{ r_2 }, \\
+            \eli_1 = \frac{\ele_1 - \eli R}{r_1}, \\
+            \eli_2 = \frac{\ele_2 + \eli R}{r_2}, \\
             \eli - \eli_1 - \eli_2 = 0;
         \end{cases} \implies \\
-        &\implies \eli - \frac{\ele_1 - \eli R}{ r_1 } + \frac{\ele_2 + \eli R}{ r_2 } = 0, \\
-        &\eli\cbr{1 + \frac{ R }{ r_1 } + \frac{ R }{ r_2 }} - \frac{ \ele_1 }{ r_1 } + \frac{ \ele_2 }{ r_2 } = 0, \\
+        &\implies \eli - \frac{\ele_1 - \eli R}{r_1} + \frac{\ele_2 + \eli R}{r_2} = 0, \\
+        &\eli\cbr{ 1 + \frac{R}{r_1} + \frac{R}{r_2}} - \frac{\ele_1}{r_1} + \frac{\ele_2}{r_2} = 0, \\
         &\eli
-            = \frac{\frac{ \ele_1 }{ r_1 } - \frac{ \ele_2 }{ r_2 }}{1 + \frac{ R }{ r_1 } + \frac{ R }{ r_2 }}
-            = \frac{\frac{ 18\,\text{В} }{ 2\,\text{Ом} } - \frac{ 25\,\text{В} }{ 2\,\text{Ом} }}{1 + \frac{ 12\,\text{Ом} }{ 2\,\text{Ом} } + \frac{ 12\,\text{Ом} }{ 2\,\text{Ом} }}
+            = \frac{\frac{\ele_1}{r_1} - \frac{\ele_2}{r_2}}{ 1 + \frac{R}{r_1} + \frac{R}{r_2}}
+            = \frac{\frac{18\,\text{В}}{2\,\text{Ом}} - \frac{25\,\text{В}}{2\,\text{Ом}}}{ 1 + \frac{12\,\text{Ом}}{2\,\text{Ом}} + \frac{12\,\text{Ом}}{2\,\text{Ом}}}
             = -\frac7{26}\units{А}
             \approx -0{,}26900\,\text{А}, \\
-        &U  = \eli R = \frac{\frac{ \ele_1 }{ r_1 } - \frac{ \ele_2 }{ r_2 }}{1 + \frac{ R }{ r_1 } + \frac{ R }{ r_2 }} R
+        &U  = \eli R = \frac{\frac{\ele_1}{r_1} - \frac{\ele_2}{r_2}}{ 1 + \frac{R}{r_1} + \frac{R}{r_2}} R
             \approx -3{,}2310\,\text{В}.
     \end{align*}
 }
@@ -1774,7 +1774,7 @@
         \draw  (0, 0) to [resistor={info=$R_1$}] ++(left:1.5);
         \draw  (0, 0) -- ++(up:1.5) to [resistor={near start, info=$R_2$}, resistor={near end, info=$R_3$}] ++(right:3);
         \draw  (0, 0) to [resistor={info=$R_4$}] ++(right:3) -- ++(up:1.5);
-        \draw  (1.5, 1.5) -- ++(up:1); \node [contact] (contact2) at (1.5, 2.5) {  };
+        \draw  (1.5, 1.5) -- ++(up:1); \node [contact] (contact2) at (1.5, 2.5) {};
     \end{tikzpicture}
 }
 \answer{%
@@ -1801,13 +1801,13 @@
 }
 \answer{%
     \begin{align*}
-    R_0 &= R + \frac 1{\frac 1{R + R} + \frac 1{R} + \frac 1{R + R}} = R + \frac 1{\frac 2R} = \frac 32 R, \\
+    R_0 &= R + \frac 1{\frac 1{R+R} + \frac 1R + \frac 1{R+R}} = R + \frac 1{\frac 2R} = \frac 32 R, \\
     \eli &= \frac U{R_0} = \frac {2U}{3R}, \\
     U_1 &= \eli R_1 = \frac {2U}{3R} \cdot R = \frac 23 U = 20{,}0\,\text{В}, \\
     U_{23} &= U_{56} = U_4 = U - \eli R_1 = U - \frac {2U}{3R} \cdot R = \frac U3 = 10{,}0\,\text{В}, \\
-    \eli_2 &= \frac{U_4}{R_4} = \frac{U}{3R} \approx 1{,}0\,\text{А}, \\
-    \eli_1 &= \frac{U_{23}}{R_{23}} = \frac{\frac U3}{R + R} = \frac U{6R} \approx 0{,}5\,\text{А}, \\
-    \eli_3 &= \frac{U_{56}}{R_{56}} = \frac{\frac U3}{R + R} = \frac U{6R} \approx 0{,}5\,\text{А}, \\
+    \eli_2 &= \frac{U_4}{R_4} = \fracU{3R} \approx 1{,}0\,\text{А}, \\
+    \eli_1 &= \frac{U_{23}}{R_{23}} = \frac{\frac U3}{R+R} = \frac U{6R} \approx 0{,}5\,\text{А}, \\
+    \eli_3 &= \frac{U_{56}}{R_{56}} = \frac{\frac U3}{R+R} = \frac U{6R} \approx 0{,}5\,\text{А}, \\
     U_2 &= \eli_1 R_2 = \frac U{6R} \cdot R = \frac U6 = 5{,}0\,\text{В}, \\
     U_3 &= \eli_1 R_3 = \frac U{6R} \cdot R = \frac U3 = 5{,}0\,\text{В}, \\
     U_5 &= \eli_3 R_5 = \frac U{6R} \cdot R = \frac U5 = 5{,}0\,\text{В}, \\
@@ -1823,9 +1823,9 @@
     если $\ele_1 = 18\,\text{В}$, $\ele_2 = 5\,\text{В}$, $r_1 = 1\,\text{Ом}$, $r_2 = 2\,\text{Ом}$.
 
     \begin{tikzpicture}[circuit ee IEC, thick]
-        \draw  (0, 0) to [battery={rotate=-180,info={$\ele_1, r_1 $}}] (0, 3)
+        \draw  (0, 0) to [battery={rotate=-180,info={$\ele_1, r_1$}}] (0, 3)
                 -- (5, 3)
-                to [battery={rotate=-180, info'={$\ele_2, r_2 $}}] (5, 0)
+                to [battery={rotate=-180, info'={$\ele_2, r_2$}}] (5, 0)
                 -- (0, 0)
                 (2.5, 0) to [resistor={info=$R$}] (2.5, 3);
     \end{tikzpicture}
@@ -1834,9 +1834,9 @@
     Выберем 2 контура и один узел, запишем для них законы Кирхгофа:
 
     \begin{tikzpicture}[circuit ee IEC, thick]
-        \draw  (0, 0) to [battery={rotate=-180,info={$\ele_1, r_1 $}}, current direction={near end, info=$\eli_1$}] (0, 3)
+        \draw  (0, 0) to [battery={rotate=-180,info={$\ele_1, r_1$}}, current direction={near end, info=$\eli_1$}] (0, 3)
                 -- (5, 3)
-                to [battery={rotate=-180, info'={$\ele_2, r_2 $}}, current direction={near end, info=$\eli_2$}] (5, 0)
+                to [battery={rotate=-180, info'={$\ele_2, r_2$}}, current direction={near end, info=$\eli_2$}] (5, 0)
                 -- (0, 0)
                 (2.5, 0) to [resistor={info=$R$}, current direction'={near end, info=$\eli$}] (2.5, 3);
         \draw [-{Latex},color=red] (0.8, 1.9) arc [start angle = 135, end angle = -160, radius = 0.6];
@@ -1853,18 +1853,18 @@
         \end{cases}
         \qquad \implies \qquad
         \begin{cases}
-            \eli_1 = \frac{\ele_1 - \eli R}{ r_1 }, \\
-            \eli_2 = \frac{\ele_2 + \eli R}{ r_2 }, \\
+            \eli_1 = \frac{\ele_1 - \eli R}{r_1}, \\
+            \eli_2 = \frac{\ele_2 + \eli R}{r_2}, \\
             \eli - \eli_1 - \eli_2 = 0;
         \end{cases} \implies \\
-        &\implies \eli - \frac{\ele_1 - \eli R}{ r_1 } + \frac{\ele_2 + \eli R}{ r_2 } = 0, \\
-        &\eli\cbr{1 + \frac{ R }{ r_1 } + \frac{ R }{ r_2 }} - \frac{ \ele_1 }{ r_1 } + \frac{ \ele_2 }{ r_2 } = 0, \\
+        &\implies \eli - \frac{\ele_1 - \eli R}{r_1} + \frac{\ele_2 + \eli R}{r_2} = 0, \\
+        &\eli\cbr{ 1 + \frac{R}{r_1} + \frac{R}{r_2}} - \frac{\ele_1}{r_1} + \frac{\ele_2}{r_2} = 0, \\
         &\eli
-            = \frac{\frac{ \ele_1 }{ r_1 } - \frac{ \ele_2 }{ r_2 }}{1 + \frac{ R }{ r_1 } + \frac{ R }{ r_2 }}
-            = \frac{\frac{ 18\,\text{В} }{ 1\,\text{Ом} } - \frac{ 5\,\text{В} }{ 2\,\text{Ом} }}{1 + \frac{ 10\,\text{Ом} }{ 1\,\text{Ом} } + \frac{ 10\,\text{Ом} }{ 2\,\text{Ом} }}
+            = \frac{\frac{\ele_1}{r_1} - \frac{\ele_2}{r_2}}{ 1 + \frac{R}{r_1} + \frac{R}{r_2}}
+            = \frac{\frac{18\,\text{В}}{1\,\text{Ом}} - \frac{5\,\text{В}}{2\,\text{Ом}}}{ 1 + \frac{10\,\text{Ом}}{1\,\text{Ом}} + \frac{10\,\text{Ом}}{2\,\text{Ом}}}
             = \frac{31}{32}\units{А}
             \approx 0{,}969\,\text{А}, \\
-        &U  = \eli R = \frac{\frac{ \ele_1 }{ r_1 } - \frac{ \ele_2 }{ r_2 }}{1 + \frac{ R }{ r_1 } + \frac{ R }{ r_2 }} R
+        &U  = \eli R = \frac{\frac{\ele_1}{r_1} - \frac{\ele_2}{r_2}}{ 1 + \frac{R}{r_1} + \frac{R}{r_2}} R
             \approx 9{,}688\,\text{В}.
     \end{align*}
 }
@@ -1884,7 +1884,7 @@
         \draw  (0, 0) to [resistor={info=$R_1$}] ++(left:1.5);
         \draw  (0, 0) -- ++(up:1.5) to [resistor={near start, info=$R_2$}, resistor={near end, info=$R_3$}] ++(right:3);
         \draw  (0, 0) to [resistor={info=$R_4$}] ++(right:3) -- ++(up:1.5);
-        \draw  (3, 1.5) -- ++(right:0.5); \node [contact] (contact2) at (3.5, 1.5) {  };
+        \draw  (3, 1.5) -- ++(right:0.5); \node [contact] (contact2) at (3.5, 1.5) {};
     \end{tikzpicture}
 }
 \answer{%
@@ -1911,13 +1911,13 @@
 }
 \answer{%
     \begin{align*}
-    R_0 &= R + \frac 1{\frac 1{R + R} + \frac 1{R} + \frac 1{R + R}} = R + \frac 1{\frac 2R} = \frac 32 R, \\
+    R_0 &= R + \frac 1{\frac 1{R+R} + \frac 1R + \frac 1{R+R}} = R + \frac 1{\frac 2R} = \frac 32 R, \\
     \eli &= \frac U{R_0} = \frac {2U}{3R}, \\
     U_1 &= \eli R_1 = \frac {2U}{3R} \cdot R = \frac 23 U = 100{,}0\,\text{В}, \\
     U_{23} &= U_{56} = U_4 = U - \eli R_1 = U - \frac {2U}{3R} \cdot R = \frac U3 = 50{,}0\,\text{В}, \\
-    \eli_2 &= \frac{U_4}{R_4} = \frac{U}{3R} \approx 12{,}5\,\text{А}, \\
-    \eli_1 &= \frac{U_{23}}{R_{23}} = \frac{\frac U3}{R + R} = \frac U{6R} \approx 6{,}2\,\text{А}, \\
-    \eli_3 &= \frac{U_{56}}{R_{56}} = \frac{\frac U3}{R + R} = \frac U{6R} \approx 6{,}2\,\text{А}, \\
+    \eli_2 &= \frac{U_4}{R_4} = \fracU{3R} \approx 12{,}5\,\text{А}, \\
+    \eli_1 &= \frac{U_{23}}{R_{23}} = \frac{\frac U3}{R+R} = \frac U{6R} \approx 6{,}2\,\text{А}, \\
+    \eli_3 &= \frac{U_{56}}{R_{56}} = \frac{\frac U3}{R+R} = \frac U{6R} \approx 6{,}2\,\text{А}, \\
     U_2 &= \eli_1 R_2 = \frac U{6R} \cdot R = \frac U6 = 25{,}0\,\text{В}, \\
     U_3 &= \eli_1 R_3 = \frac U{6R} \cdot R = \frac U3 = 25{,}0\,\text{В}, \\
     U_5 &= \eli_3 R_5 = \frac U{6R} \cdot R = \frac U5 = 25{,}0\,\text{В}, \\
@@ -1933,9 +1933,9 @@
     если $\ele_1 = 12\,\text{В}$, $\ele_2 = 5\,\text{В}$, $r_1 = 1\,\text{Ом}$, $r_2 = 6\,\text{Ом}$.
 
     \begin{tikzpicture}[circuit ee IEC, thick]
-        \draw  (0, 0) to [battery={rotate=-180,info={$\ele_1, r_1 $}}] (0, 3)
+        \draw  (0, 0) to [battery={rotate=-180,info={$\ele_1, r_1$}}] (0, 3)
                 -- (5, 3)
-                to [battery={rotate=-180, info'={$\ele_2, r_2 $}}] (5, 0)
+                to [battery={rotate=-180, info'={$\ele_2, r_2$}}] (5, 0)
                 -- (0, 0)
                 (2.5, 0) to [resistor={info=$R$}] (2.5, 3);
     \end{tikzpicture}
@@ -1944,9 +1944,9 @@
     Выберем 2 контура и один узел, запишем для них законы Кирхгофа:
 
     \begin{tikzpicture}[circuit ee IEC, thick]
-        \draw  (0, 0) to [battery={rotate=-180,info={$\ele_1, r_1 $}}, current direction={near end, info=$\eli_1$}] (0, 3)
+        \draw  (0, 0) to [battery={rotate=-180,info={$\ele_1, r_1$}}, current direction={near end, info=$\eli_1$}] (0, 3)
                 -- (5, 3)
-                to [battery={rotate=-180, info'={$\ele_2, r_2 $}}, current direction={near end, info=$\eli_2$}] (5, 0)
+                to [battery={rotate=-180, info'={$\ele_2, r_2$}}, current direction={near end, info=$\eli_2$}] (5, 0)
                 -- (0, 0)
                 (2.5, 0) to [resistor={info=$R$}, current direction'={near end, info=$\eli$}] (2.5, 3);
         \draw [-{Latex},color=red] (0.8, 1.9) arc [start angle = 135, end angle = -160, radius = 0.6];
@@ -1963,18 +1963,18 @@
         \end{cases}
         \qquad \implies \qquad
         \begin{cases}
-            \eli_1 = \frac{\ele_1 - \eli R}{ r_1 }, \\
-            \eli_2 = \frac{\ele_2 + \eli R}{ r_2 }, \\
+            \eli_1 = \frac{\ele_1 - \eli R}{r_1}, \\
+            \eli_2 = \frac{\ele_2 + \eli R}{r_2}, \\
             \eli - \eli_1 - \eli_2 = 0;
         \end{cases} \implies \\
-        &\implies \eli - \frac{\ele_1 - \eli R}{ r_1 } + \frac{\ele_2 + \eli R}{ r_2 } = 0, \\
-        &\eli\cbr{1 + \frac{ R }{ r_1 } + \frac{ R }{ r_2 }} - \frac{ \ele_1 }{ r_1 } + \frac{ \ele_2 }{ r_2 } = 0, \\
+        &\implies \eli - \frac{\ele_1 - \eli R}{r_1} + \frac{\ele_2 + \eli R}{r_2} = 0, \\
+        &\eli\cbr{ 1 + \frac{R}{r_1} + \frac{R}{r_2}} - \frac{\ele_1}{r_1} + \frac{\ele_2}{r_2} = 0, \\
         &\eli
-            = \frac{\frac{ \ele_1 }{ r_1 } - \frac{ \ele_2 }{ r_2 }}{1 + \frac{ R }{ r_1 } + \frac{ R }{ r_2 }}
-            = \frac{\frac{ 12\,\text{В} }{ 1\,\text{Ом} } - \frac{ 5\,\text{В} }{ 6\,\text{Ом} }}{1 + \frac{ 15\,\text{Ом} }{ 1\,\text{Ом} } + \frac{ 15\,\text{Ом} }{ 6\,\text{Ом} }}
+            = \frac{\frac{\ele_1}{r_1} - \frac{\ele_2}{r_2}}{ 1 + \frac{R}{r_1} + \frac{R}{r_2}}
+            = \frac{\frac{12\,\text{В}}{1\,\text{Ом}} - \frac{5\,\text{В}}{6\,\text{Ом}}}{ 1 + \frac{15\,\text{Ом}}{1\,\text{Ом}} + \frac{15\,\text{Ом}}{6\,\text{Ом}}}
             = \frac{67}{111}\units{А}
             \approx 0{,}604\,\text{А}, \\
-        &U  = \eli R = \frac{\frac{ \ele_1 }{ r_1 } - \frac{ \ele_2 }{ r_2 }}{1 + \frac{ R }{ r_1 } + \frac{ R }{ r_2 }} R
+        &U  = \eli R = \frac{\frac{\ele_1}{r_1} - \frac{\ele_2}{r_2}}{ 1 + \frac{R}{r_1} + \frac{R}{r_2}} R
             \approx 9{,}054\,\text{В}.
     \end{align*}
 }
@@ -1994,7 +1994,7 @@
         \draw  (0, 0) to [resistor={info=$R_1$}] ++(left:1.5);
         \draw  (0, 0) -- ++(up:1.5) to [resistor={near start, info=$R_2$}, resistor={near end, info=$R_3$}] ++(right:3);
         \draw  (0, 0) to [resistor={info=$R_4$}] ++(right:3) -- ++(up:1.5);
-        \draw  (1.5, 1.5) -- ++(up:1); \node [contact] (contact2) at (1.5, 2.5) {  };
+        \draw  (1.5, 1.5) -- ++(up:1); \node [contact] (contact2) at (1.5, 2.5) {};
     \end{tikzpicture}
 }
 \answer{%
@@ -2021,13 +2021,13 @@
 }
 \answer{%
     \begin{align*}
-    R_0 &= R + \frac 1{\frac 1{R + R} + \frac 1{R} + \frac 1{R + R}} = R + \frac 1{\frac 2R} = \frac 32 R, \\
+    R_0 &= R + \frac 1{\frac 1{R+R} + \frac 1R + \frac 1{R+R}} = R + \frac 1{\frac 2R} = \frac 32 R, \\
     \eli &= \frac U{R_0} = \frac {2U}{3R}, \\
     U_1 &= \eli R_1 = \frac {2U}{3R} \cdot R = \frac 23 U = 60{,}0\,\text{В}, \\
     U_{23} &= U_{56} = U_4 = U - \eli R_1 = U - \frac {2U}{3R} \cdot R = \frac U3 = 30{,}0\,\text{В}, \\
-    \eli_2 &= \frac{U_4}{R_4} = \frac{U}{3R} \approx 6{,}0\,\text{А}, \\
-    \eli_1 &= \frac{U_{23}}{R_{23}} = \frac{\frac U3}{R + R} = \frac U{6R} \approx 3{,}0\,\text{А}, \\
-    \eli_3 &= \frac{U_{56}}{R_{56}} = \frac{\frac U3}{R + R} = \frac U{6R} \approx 3{,}0\,\text{А}, \\
+    \eli_2 &= \frac{U_4}{R_4} = \fracU{3R} \approx 6{,}0\,\text{А}, \\
+    \eli_1 &= \frac{U_{23}}{R_{23}} = \frac{\frac U3}{R+R} = \frac U{6R} \approx 3{,}0\,\text{А}, \\
+    \eli_3 &= \frac{U_{56}}{R_{56}} = \frac{\frac U3}{R+R} = \frac U{6R} \approx 3{,}0\,\text{А}, \\
     U_2 &= \eli_1 R_2 = \frac U{6R} \cdot R = \frac U6 = 15{,}0\,\text{В}, \\
     U_3 &= \eli_1 R_3 = \frac U{6R} \cdot R = \frac U3 = 15{,}0\,\text{В}, \\
     U_5 &= \eli_3 R_5 = \frac U{6R} \cdot R = \frac U5 = 15{,}0\,\text{В}, \\
@@ -2043,9 +2043,9 @@
     если $\ele_1 = 6\,\text{В}$, $\ele_2 = 5\,\text{В}$, $r_1 = 1\,\text{Ом}$, $r_2 = 4\,\text{Ом}$.
 
     \begin{tikzpicture}[circuit ee IEC, thick]
-        \draw  (0, 0) to [battery={rotate=-180,info={$\ele_1, r_1 $}}] (0, 3)
+        \draw  (0, 0) to [battery={rotate=-180,info={$\ele_1, r_1$}}] (0, 3)
                 -- (5, 3)
-                to [battery={rotate=-180, info'={$\ele_2, r_2 $}}] (5, 0)
+                to [battery={rotate=-180, info'={$\ele_2, r_2$}}] (5, 0)
                 -- (0, 0)
                 (2.5, 0) to [resistor={info=$R$}] (2.5, 3);
     \end{tikzpicture}
@@ -2054,9 +2054,9 @@
     Выберем 2 контура и один узел, запишем для них законы Кирхгофа:
 
     \begin{tikzpicture}[circuit ee IEC, thick]
-        \draw  (0, 0) to [battery={rotate=-180,info={$\ele_1, r_1 $}}, current direction={near end, info=$\eli_1$}] (0, 3)
+        \draw  (0, 0) to [battery={rotate=-180,info={$\ele_1, r_1$}}, current direction={near end, info=$\eli_1$}] (0, 3)
                 -- (5, 3)
-                to [battery={rotate=-180, info'={$\ele_2, r_2 $}}, current direction={near end, info=$\eli_2$}] (5, 0)
+                to [battery={rotate=-180, info'={$\ele_2, r_2$}}, current direction={near end, info=$\eli_2$}] (5, 0)
                 -- (0, 0)
                 (2.5, 0) to [resistor={info=$R$}, current direction'={near end, info=$\eli$}] (2.5, 3);
         \draw [-{Latex},color=red] (0.8, 1.9) arc [start angle = 135, end angle = -160, radius = 0.6];
@@ -2073,18 +2073,18 @@
         \end{cases}
         \qquad \implies \qquad
         \begin{cases}
-            \eli_1 = \frac{\ele_1 - \eli R}{ r_1 }, \\
-            \eli_2 = \frac{\ele_2 + \eli R}{ r_2 }, \\
+            \eli_1 = \frac{\ele_1 - \eli R}{r_1}, \\
+            \eli_2 = \frac{\ele_2 + \eli R}{r_2}, \\
             \eli - \eli_1 - \eli_2 = 0;
         \end{cases} \implies \\
-        &\implies \eli - \frac{\ele_1 - \eli R}{ r_1 } + \frac{\ele_2 + \eli R}{ r_2 } = 0, \\
-        &\eli\cbr{1 + \frac{ R }{ r_1 } + \frac{ R }{ r_2 }} - \frac{ \ele_1 }{ r_1 } + \frac{ \ele_2 }{ r_2 } = 0, \\
+        &\implies \eli - \frac{\ele_1 - \eli R}{r_1} + \frac{\ele_2 + \eli R}{r_2} = 0, \\
+        &\eli\cbr{ 1 + \frac{R}{r_1} + \frac{R}{r_2}} - \frac{\ele_1}{r_1} + \frac{\ele_2}{r_2} = 0, \\
         &\eli
-            = \frac{\frac{ \ele_1 }{ r_1 } - \frac{ \ele_2 }{ r_2 }}{1 + \frac{ R }{ r_1 } + \frac{ R }{ r_2 }}
-            = \frac{\frac{ 6\,\text{В} }{ 1\,\text{Ом} } - \frac{ 5\,\text{В} }{ 4\,\text{Ом} }}{1 + \frac{ 12\,\text{Ом} }{ 1\,\text{Ом} } + \frac{ 12\,\text{Ом} }{ 4\,\text{Ом} }}
+            = \frac{\frac{\ele_1}{r_1} - \frac{\ele_2}{r_2}}{ 1 + \frac{R}{r_1} + \frac{R}{r_2}}
+            = \frac{\frac{6\,\text{В}}{1\,\text{Ом}} - \frac{5\,\text{В}}{4\,\text{Ом}}}{ 1 + \frac{12\,\text{Ом}}{1\,\text{Ом}} + \frac{12\,\text{Ом}}{4\,\text{Ом}}}
             = \frac{19}{64}\units{А}
             \approx 0{,}297\,\text{А}, \\
-        &U  = \eli R = \frac{\frac{ \ele_1 }{ r_1 } - \frac{ \ele_2 }{ r_2 }}{1 + \frac{ R }{ r_1 } + \frac{ R }{ r_2 }} R
+        &U  = \eli R = \frac{\frac{\ele_1}{r_1} - \frac{\ele_2}{r_2}}{ 1 + \frac{R}{r_1} + \frac{R}{r_2}} R
             \approx 3{,}562\,\text{В}.
     \end{align*}
 }
@@ -2104,7 +2104,7 @@
         \draw  (0, 0) to [resistor={info=$R_1$}] ++(left:1.5);
         \draw  (0, 0) -- ++(up:1.5) to [resistor={near start, info=$R_2$}, resistor={near end, info=$R_3$}] ++(right:3);
         \draw  (0, 0) to [resistor={info=$R_4$}] ++(right:3) -- ++(up:1.5);
-        \draw  (1.5, 1.5) -- ++(up:1); \node [contact] (contact2) at (1.5, 2.5) {  };
+        \draw  (1.5, 1.5) -- ++(up:1); \node [contact] (contact2) at (1.5, 2.5) {};
     \end{tikzpicture}
 }
 \answer{%
@@ -2131,13 +2131,13 @@
 }
 \answer{%
     \begin{align*}
-    R_0 &= R + \frac 1{\frac 1{R + R} + \frac 1{R} + \frac 1{R + R}} = R + \frac 1{\frac 2R} = \frac 32 R, \\
+    R_0 &= R + \frac 1{\frac 1{R+R} + \frac 1R + \frac 1{R+R}} = R + \frac 1{\frac 2R} = \frac 32 R, \\
     \eli &= \frac U{R_0} = \frac {2U}{3R}, \\
     U_1 &= \eli R_1 = \frac {2U}{3R} \cdot R = \frac 23 U = 20{,}0\,\text{В}, \\
     U_{23} &= U_{56} = U_4 = U - \eli R_1 = U - \frac {2U}{3R} \cdot R = \frac U3 = 10{,}0\,\text{В}, \\
-    \eli_2 &= \frac{U_4}{R_4} = \frac{U}{3R} \approx 5{,}0\,\text{А}, \\
-    \eli_1 &= \frac{U_{23}}{R_{23}} = \frac{\frac U3}{R + R} = \frac U{6R} \approx 2{,}5\,\text{А}, \\
-    \eli_3 &= \frac{U_{56}}{R_{56}} = \frac{\frac U3}{R + R} = \frac U{6R} \approx 2{,}5\,\text{А}, \\
+    \eli_2 &= \frac{U_4}{R_4} = \fracU{3R} \approx 5{,}0\,\text{А}, \\
+    \eli_1 &= \frac{U_{23}}{R_{23}} = \frac{\frac U3}{R+R} = \frac U{6R} \approx 2{,}5\,\text{А}, \\
+    \eli_3 &= \frac{U_{56}}{R_{56}} = \frac{\frac U3}{R+R} = \frac U{6R} \approx 2{,}5\,\text{А}, \\
     U_2 &= \eli_1 R_2 = \frac U{6R} \cdot R = \frac U6 = 5{,}0\,\text{В}, \\
     U_3 &= \eli_1 R_3 = \frac U{6R} \cdot R = \frac U3 = 5{,}0\,\text{В}, \\
     U_5 &= \eli_3 R_5 = \frac U{6R} \cdot R = \frac U5 = 5{,}0\,\text{В}, \\
@@ -2153,9 +2153,9 @@
     если $\ele_1 = 6\,\text{В}$, $\ele_2 = 25\,\text{В}$, $r_1 = 2\,\text{Ом}$, $r_2 = 4\,\text{Ом}$.
 
     \begin{tikzpicture}[circuit ee IEC, thick]
-        \draw  (0, 0) to [battery={rotate=-180,info={$\ele_1, r_1 $}}] (0, 3)
+        \draw  (0, 0) to [battery={rotate=-180,info={$\ele_1, r_1$}}] (0, 3)
                 -- (5, 3)
-                to [battery={rotate=-180, info'={$\ele_2, r_2 $}}] (5, 0)
+                to [battery={rotate=-180, info'={$\ele_2, r_2$}}] (5, 0)
                 -- (0, 0)
                 (2.5, 0) to [resistor={info=$R$}] (2.5, 3);
     \end{tikzpicture}
@@ -2164,9 +2164,9 @@
     Выберем 2 контура и один узел, запишем для них законы Кирхгофа:
 
     \begin{tikzpicture}[circuit ee IEC, thick]
-        \draw  (0, 0) to [battery={rotate=-180,info={$\ele_1, r_1 $}}, current direction={near end, info=$\eli_1$}] (0, 3)
+        \draw  (0, 0) to [battery={rotate=-180,info={$\ele_1, r_1$}}, current direction={near end, info=$\eli_1$}] (0, 3)
                 -- (5, 3)
-                to [battery={rotate=-180, info'={$\ele_2, r_2 $}}, current direction={near end, info=$\eli_2$}] (5, 0)
+                to [battery={rotate=-180, info'={$\ele_2, r_2$}}, current direction={near end, info=$\eli_2$}] (5, 0)
                 -- (0, 0)
                 (2.5, 0) to [resistor={info=$R$}, current direction'={near end, info=$\eli$}] (2.5, 3);
         \draw [-{Latex},color=red] (0.8, 1.9) arc [start angle = 135, end angle = -160, radius = 0.6];
@@ -2183,18 +2183,18 @@
         \end{cases}
         \qquad \implies \qquad
         \begin{cases}
-            \eli_1 = \frac{\ele_1 - \eli R}{ r_1 }, \\
-            \eli_2 = \frac{\ele_2 + \eli R}{ r_2 }, \\
+            \eli_1 = \frac{\ele_1 - \eli R}{r_1}, \\
+            \eli_2 = \frac{\ele_2 + \eli R}{r_2}, \\
             \eli - \eli_1 - \eli_2 = 0;
         \end{cases} \implies \\
-        &\implies \eli - \frac{\ele_1 - \eli R}{ r_1 } + \frac{\ele_2 + \eli R}{ r_2 } = 0, \\
-        &\eli\cbr{1 + \frac{ R }{ r_1 } + \frac{ R }{ r_2 }} - \frac{ \ele_1 }{ r_1 } + \frac{ \ele_2 }{ r_2 } = 0, \\
+        &\implies \eli - \frac{\ele_1 - \eli R}{r_1} + \frac{\ele_2 + \eli R}{r_2} = 0, \\
+        &\eli\cbr{ 1 + \frac{R}{r_1} + \frac{R}{r_2}} - \frac{\ele_1}{r_1} + \frac{\ele_2}{r_2} = 0, \\
         &\eli
-            = \frac{\frac{ \ele_1 }{ r_1 } - \frac{ \ele_2 }{ r_2 }}{1 + \frac{ R }{ r_1 } + \frac{ R }{ r_2 }}
-            = \frac{\frac{ 6\,\text{В} }{ 2\,\text{Ом} } - \frac{ 25\,\text{В} }{ 4\,\text{Ом} }}{1 + \frac{ 10\,\text{Ом} }{ 2\,\text{Ом} } + \frac{ 10\,\text{Ом} }{ 4\,\text{Ом} }}
+            = \frac{\frac{\ele_1}{r_1} - \frac{\ele_2}{r_2}}{ 1 + \frac{R}{r_1} + \frac{R}{r_2}}
+            = \frac{\frac{6\,\text{В}}{2\,\text{Ом}} - \frac{25\,\text{В}}{4\,\text{Ом}}}{ 1 + \frac{10\,\text{Ом}}{2\,\text{Ом}} + \frac{10\,\text{Ом}}{4\,\text{Ом}}}
             = -\frac{13}{34}\units{А}
             \approx -0{,}38200\,\text{А}, \\
-        &U  = \eli R = \frac{\frac{ \ele_1 }{ r_1 } - \frac{ \ele_2 }{ r_2 }}{1 + \frac{ R }{ r_1 } + \frac{ R }{ r_2 }} R
+        &U  = \eli R = \frac{\frac{\ele_1}{r_1} - \frac{\ele_2}{r_2}}{ 1 + \frac{R}{r_1} + \frac{R}{r_2}} R
             \approx -3{,}8240\,\text{В}.
     \end{align*}
 }
@@ -2214,7 +2214,7 @@
         \draw  (0, 0) to [resistor={info=$R_1$}] ++(left:1.5);
         \draw  (0, 0) -- ++(up:1.5) to [resistor={near start, info=$R_2$}, resistor={near end, info=$R_3$}] ++(right:3);
         \draw  (0, 0) to [resistor={info=$R_4$}] ++(right:3) -- ++(up:1.5);
-        \draw  (1.5, 1.5) -- ++(up:1); \node [contact] (contact2) at (1.5, 2.5) {  };
+        \draw  (1.5, 1.5) -- ++(up:1); \node [contact] (contact2) at (1.5, 2.5) {};
     \end{tikzpicture}
 }
 \answer{%
@@ -2241,13 +2241,13 @@
 }
 \answer{%
     \begin{align*}
-    R_0 &= R + \frac 1{\frac 1{R + R} + \frac 1{R} + \frac 1{R + R}} = R + \frac 1{\frac 2R} = \frac 32 R, \\
+    R_0 &= R + \frac 1{\frac 1{R+R} + \frac 1R + \frac 1{R+R}} = R + \frac 1{\frac 2R} = \frac 32 R, \\
     \eli &= \frac U{R_0} = \frac {2U}{3R}, \\
     U_1 &= \eli R_1 = \frac {2U}{3R} \cdot R = \frac 23 U = 60{,}0\,\text{В}, \\
     U_{23} &= U_{56} = U_4 = U - \eli R_1 = U - \frac {2U}{3R} \cdot R = \frac U3 = 30{,}0\,\text{В}, \\
-    \eli_2 &= \frac{U_4}{R_4} = \frac{U}{3R} \approx 6{,}0\,\text{А}, \\
-    \eli_1 &= \frac{U_{23}}{R_{23}} = \frac{\frac U3}{R + R} = \frac U{6R} \approx 3{,}0\,\text{А}, \\
-    \eli_3 &= \frac{U_{56}}{R_{56}} = \frac{\frac U3}{R + R} = \frac U{6R} \approx 3{,}0\,\text{А}, \\
+    \eli_2 &= \frac{U_4}{R_4} = \fracU{3R} \approx 6{,}0\,\text{А}, \\
+    \eli_1 &= \frac{U_{23}}{R_{23}} = \frac{\frac U3}{R+R} = \frac U{6R} \approx 3{,}0\,\text{А}, \\
+    \eli_3 &= \frac{U_{56}}{R_{56}} = \frac{\frac U3}{R+R} = \frac U{6R} \approx 3{,}0\,\text{А}, \\
     U_2 &= \eli_1 R_2 = \frac U{6R} \cdot R = \frac U6 = 15{,}0\,\text{В}, \\
     U_3 &= \eli_1 R_3 = \frac U{6R} \cdot R = \frac U3 = 15{,}0\,\text{В}, \\
     U_5 &= \eli_3 R_5 = \frac U{6R} \cdot R = \frac U5 = 15{,}0\,\text{В}, \\
@@ -2263,9 +2263,9 @@
     если $\ele_1 = 6\,\text{В}$, $\ele_2 = 15\,\text{В}$, $r_1 = 1\,\text{Ом}$, $r_2 = 2\,\text{Ом}$.
 
     \begin{tikzpicture}[circuit ee IEC, thick]
-        \draw  (0, 0) to [battery={rotate=-180,info={$\ele_1, r_1 $}}] (0, 3)
+        \draw  (0, 0) to [battery={rotate=-180,info={$\ele_1, r_1$}}] (0, 3)
                 -- (5, 3)
-                to [battery={rotate=-180, info'={$\ele_2, r_2 $}}] (5, 0)
+                to [battery={rotate=-180, info'={$\ele_2, r_2$}}] (5, 0)
                 -- (0, 0)
                 (2.5, 0) to [resistor={info=$R$}] (2.5, 3);
     \end{tikzpicture}
@@ -2274,9 +2274,9 @@
     Выберем 2 контура и один узел, запишем для них законы Кирхгофа:
 
     \begin{tikzpicture}[circuit ee IEC, thick]
-        \draw  (0, 0) to [battery={rotate=-180,info={$\ele_1, r_1 $}}, current direction={near end, info=$\eli_1$}] (0, 3)
+        \draw  (0, 0) to [battery={rotate=-180,info={$\ele_1, r_1$}}, current direction={near end, info=$\eli_1$}] (0, 3)
                 -- (5, 3)
-                to [battery={rotate=-180, info'={$\ele_2, r_2 $}}, current direction={near end, info=$\eli_2$}] (5, 0)
+                to [battery={rotate=-180, info'={$\ele_2, r_2$}}, current direction={near end, info=$\eli_2$}] (5, 0)
                 -- (0, 0)
                 (2.5, 0) to [resistor={info=$R$}, current direction'={near end, info=$\eli$}] (2.5, 3);
         \draw [-{Latex},color=red] (0.8, 1.9) arc [start angle = 135, end angle = -160, radius = 0.6];
@@ -2293,18 +2293,18 @@
         \end{cases}
         \qquad \implies \qquad
         \begin{cases}
-            \eli_1 = \frac{\ele_1 - \eli R}{ r_1 }, \\
-            \eli_2 = \frac{\ele_2 + \eli R}{ r_2 }, \\
+            \eli_1 = \frac{\ele_1 - \eli R}{r_1}, \\
+            \eli_2 = \frac{\ele_2 + \eli R}{r_2}, \\
             \eli - \eli_1 - \eli_2 = 0;
         \end{cases} \implies \\
-        &\implies \eli - \frac{\ele_1 - \eli R}{ r_1 } + \frac{\ele_2 + \eli R}{ r_2 } = 0, \\
-        &\eli\cbr{1 + \frac{ R }{ r_1 } + \frac{ R }{ r_2 }} - \frac{ \ele_1 }{ r_1 } + \frac{ \ele_2 }{ r_2 } = 0, \\
+        &\implies \eli - \frac{\ele_1 - \eli R}{r_1} + \frac{\ele_2 + \eli R}{r_2} = 0, \\
+        &\eli\cbr{ 1 + \frac{R}{r_1} + \frac{R}{r_2}} - \frac{\ele_1}{r_1} + \frac{\ele_2}{r_2} = 0, \\
         &\eli
-            = \frac{\frac{ \ele_1 }{ r_1 } - \frac{ \ele_2 }{ r_2 }}{1 + \frac{ R }{ r_1 } + \frac{ R }{ r_2 }}
-            = \frac{\frac{ 6\,\text{В} }{ 1\,\text{Ом} } - \frac{ 15\,\text{В} }{ 2\,\text{Ом} }}{1 + \frac{ 20\,\text{Ом} }{ 1\,\text{Ом} } + \frac{ 20\,\text{Ом} }{ 2\,\text{Ом} }}
+            = \frac{\frac{\ele_1}{r_1} - \frac{\ele_2}{r_2}}{ 1 + \frac{R}{r_1} + \frac{R}{r_2}}
+            = \frac{\frac{6\,\text{В}}{1\,\text{Ом}} - \frac{15\,\text{В}}{2\,\text{Ом}}}{ 1 + \frac{20\,\text{Ом}}{1\,\text{Ом}} + \frac{20\,\text{Ом}}{2\,\text{Ом}}}
             = -\frac3{62}\units{А}
             \approx -0{,}048000\,\text{А}, \\
-        &U  = \eli R = \frac{\frac{ \ele_1 }{ r_1 } - \frac{ \ele_2 }{ r_2 }}{1 + \frac{ R }{ r_1 } + \frac{ R }{ r_2 }} R
+        &U  = \eli R = \frac{\frac{\ele_1}{r_1} - \frac{\ele_2}{r_2}}{ 1 + \frac{R}{r_1} + \frac{R}{r_2}} R
             \approx -0{,}96800\,\text{В}.
     \end{align*}
 }
@@ -2324,7 +2324,7 @@
         \draw  (0, 0) to [resistor={info=$R_1$}] ++(left:1.5);
         \draw  (0, 0) -- ++(up:1.5) to [resistor={near start, info=$R_2$}, resistor={near end, info=$R_3$}] ++(right:3);
         \draw  (0, 0) to [resistor={info=$R_4$}] ++(right:3) -- ++(up:1.5);
-        \draw  (1.5, 1.5) -- ++(up:1); \node [contact] (contact2) at (1.5, 2.5) {  };
+        \draw  (1.5, 1.5) -- ++(up:1); \node [contact] (contact2) at (1.5, 2.5) {};
     \end{tikzpicture}
 }
 \answer{%
@@ -2351,13 +2351,13 @@
 }
 \answer{%
     \begin{align*}
-    R_0 &= R + \frac 1{\frac 1{R + R} + \frac 1{R} + \frac 1{R + R}} = R + \frac 1{\frac 2R} = \frac 32 R, \\
+    R_0 &= R + \frac 1{\frac 1{R+R} + \frac 1R + \frac 1{R+R}} = R + \frac 1{\frac 2R} = \frac 32 R, \\
     \eli &= \frac U{R_0} = \frac {2U}{3R}, \\
     U_1 &= \eli R_1 = \frac {2U}{3R} \cdot R = \frac 23 U = 80{,}0\,\text{В}, \\
     U_{23} &= U_{56} = U_4 = U - \eli R_1 = U - \frac {2U}{3R} \cdot R = \frac U3 = 40{,}0\,\text{В}, \\
-    \eli_2 &= \frac{U_4}{R_4} = \frac{U}{3R} \approx 10{,}0\,\text{А}, \\
-    \eli_1 &= \frac{U_{23}}{R_{23}} = \frac{\frac U3}{R + R} = \frac U{6R} \approx 5{,}0\,\text{А}, \\
-    \eli_3 &= \frac{U_{56}}{R_{56}} = \frac{\frac U3}{R + R} = \frac U{6R} \approx 5{,}0\,\text{А}, \\
+    \eli_2 &= \frac{U_4}{R_4} = \fracU{3R} \approx 10{,}0\,\text{А}, \\
+    \eli_1 &= \frac{U_{23}}{R_{23}} = \frac{\frac U3}{R+R} = \frac U{6R} \approx 5{,}0\,\text{А}, \\
+    \eli_3 &= \frac{U_{56}}{R_{56}} = \frac{\frac U3}{R+R} = \frac U{6R} \approx 5{,}0\,\text{А}, \\
     U_2 &= \eli_1 R_2 = \frac U{6R} \cdot R = \frac U6 = 20{,}0\,\text{В}, \\
     U_3 &= \eli_1 R_3 = \frac U{6R} \cdot R = \frac U3 = 20{,}0\,\text{В}, \\
     U_5 &= \eli_3 R_5 = \frac U{6R} \cdot R = \frac U5 = 20{,}0\,\text{В}, \\
@@ -2373,9 +2373,9 @@
     если $\ele_1 = 12\,\text{В}$, $\ele_2 = 25\,\text{В}$, $r_1 = 3\,\text{Ом}$, $r_2 = 6\,\text{Ом}$.
 
     \begin{tikzpicture}[circuit ee IEC, thick]
-        \draw  (0, 0) to [battery={rotate=-180,info={$\ele_1, r_1 $}}] (0, 3)
+        \draw  (0, 0) to [battery={rotate=-180,info={$\ele_1, r_1$}}] (0, 3)
                 -- (5, 3)
-                to [battery={rotate=-180, info'={$\ele_2, r_2 $}}] (5, 0)
+                to [battery={rotate=-180, info'={$\ele_2, r_2$}}] (5, 0)
                 -- (0, 0)
                 (2.5, 0) to [resistor={info=$R$}] (2.5, 3);
     \end{tikzpicture}
@@ -2384,9 +2384,9 @@
     Выберем 2 контура и один узел, запишем для них законы Кирхгофа:
 
     \begin{tikzpicture}[circuit ee IEC, thick]
-        \draw  (0, 0) to [battery={rotate=-180,info={$\ele_1, r_1 $}}, current direction={near end, info=$\eli_1$}] (0, 3)
+        \draw  (0, 0) to [battery={rotate=-180,info={$\ele_1, r_1$}}, current direction={near end, info=$\eli_1$}] (0, 3)
                 -- (5, 3)
-                to [battery={rotate=-180, info'={$\ele_2, r_2 $}}, current direction={near end, info=$\eli_2$}] (5, 0)
+                to [battery={rotate=-180, info'={$\ele_2, r_2$}}, current direction={near end, info=$\eli_2$}] (5, 0)
                 -- (0, 0)
                 (2.5, 0) to [resistor={info=$R$}, current direction'={near end, info=$\eli$}] (2.5, 3);
         \draw [-{Latex},color=red] (0.8, 1.9) arc [start angle = 135, end angle = -160, radius = 0.6];
@@ -2403,18 +2403,18 @@
         \end{cases}
         \qquad \implies \qquad
         \begin{cases}
-            \eli_1 = \frac{\ele_1 - \eli R}{ r_1 }, \\
-            \eli_2 = \frac{\ele_2 + \eli R}{ r_2 }, \\
+            \eli_1 = \frac{\ele_1 - \eli R}{r_1}, \\
+            \eli_2 = \frac{\ele_2 + \eli R}{r_2}, \\
             \eli - \eli_1 - \eli_2 = 0;
         \end{cases} \implies \\
-        &\implies \eli - \frac{\ele_1 - \eli R}{ r_1 } + \frac{\ele_2 + \eli R}{ r_2 } = 0, \\
-        &\eli\cbr{1 + \frac{ R }{ r_1 } + \frac{ R }{ r_2 }} - \frac{ \ele_1 }{ r_1 } + \frac{ \ele_2 }{ r_2 } = 0, \\
+        &\implies \eli - \frac{\ele_1 - \eli R}{r_1} + \frac{\ele_2 + \eli R}{r_2} = 0, \\
+        &\eli\cbr{ 1 + \frac{R}{r_1} + \frac{R}{r_2}} - \frac{\ele_1}{r_1} + \frac{\ele_2}{r_2} = 0, \\
         &\eli
-            = \frac{\frac{ \ele_1 }{ r_1 } - \frac{ \ele_2 }{ r_2 }}{1 + \frac{ R }{ r_1 } + \frac{ R }{ r_2 }}
-            = \frac{\frac{ 12\,\text{В} }{ 3\,\text{Ом} } - \frac{ 25\,\text{В} }{ 6\,\text{Ом} }}{1 + \frac{ 20\,\text{Ом} }{ 3\,\text{Ом} } + \frac{ 20\,\text{Ом} }{ 6\,\text{Ом} }}
+            = \frac{\frac{\ele_1}{r_1} - \frac{\ele_2}{r_2}}{ 1 + \frac{R}{r_1} + \frac{R}{r_2}}
+            = \frac{\frac{12\,\text{В}}{3\,\text{Ом}} - \frac{25\,\text{В}}{6\,\text{Ом}}}{ 1 + \frac{20\,\text{Ом}}{3\,\text{Ом}} + \frac{20\,\text{Ом}}{6\,\text{Ом}}}
             = -\frac1{66}\units{А}
             \approx -0{,}0150000\,\text{А}, \\
-        &U  = \eli R = \frac{\frac{ \ele_1 }{ r_1 } - \frac{ \ele_2 }{ r_2 }}{1 + \frac{ R }{ r_1 } + \frac{ R }{ r_2 }} R
+        &U  = \eli R = \frac{\frac{\ele_1}{r_1} - \frac{\ele_2}{r_2}}{ 1 + \frac{R}{r_1} + \frac{R}{r_2}} R
             \approx -0{,}30300\,\text{В}.
     \end{align*}
 }
@@ -2434,7 +2434,7 @@
         \draw  (0, 0) to [resistor={info=$R_1$}] ++(left:1.5);
         \draw  (0, 0) -- ++(up:1.5) to [resistor={near start, info=$R_2$}, resistor={near end, info=$R_3$}] ++(right:3);
         \draw  (0, 0) to [resistor={info=$R_4$}] ++(right:3) -- ++(up:1.5);
-        \draw  (1.5, 1.5) -- ++(up:1); \node [contact] (contact2) at (1.5, 2.5) {  };
+        \draw  (1.5, 1.5) -- ++(up:1); \node [contact] (contact2) at (1.5, 2.5) {};
     \end{tikzpicture}
 }
 \answer{%
@@ -2461,13 +2461,13 @@
 }
 \answer{%
     \begin{align*}
-    R_0 &= R + \frac 1{\frac 1{R + R} + \frac 1{R} + \frac 1{R + R}} = R + \frac 1{\frac 2R} = \frac 32 R, \\
+    R_0 &= R + \frac 1{\frac 1{R+R} + \frac 1R + \frac 1{R+R}} = R + \frac 1{\frac 2R} = \frac 32 R, \\
     \eli &= \frac U{R_0} = \frac {2U}{3R}, \\
     U_1 &= \eli R_1 = \frac {2U}{3R} \cdot R = \frac 23 U = 100{,}0\,\text{В}, \\
     U_{23} &= U_{56} = U_4 = U - \eli R_1 = U - \frac {2U}{3R} \cdot R = \frac U3 = 50{,}0\,\text{В}, \\
-    \eli_2 &= \frac{U_4}{R_4} = \frac{U}{3R} \approx 5{,}0\,\text{А}, \\
-    \eli_1 &= \frac{U_{23}}{R_{23}} = \frac{\frac U3}{R + R} = \frac U{6R} \approx 2{,}5\,\text{А}, \\
-    \eli_3 &= \frac{U_{56}}{R_{56}} = \frac{\frac U3}{R + R} = \frac U{6R} \approx 2{,}5\,\text{А}, \\
+    \eli_2 &= \frac{U_4}{R_4} = \fracU{3R} \approx 5{,}0\,\text{А}, \\
+    \eli_1 &= \frac{U_{23}}{R_{23}} = \frac{\frac U3}{R+R} = \frac U{6R} \approx 2{,}5\,\text{А}, \\
+    \eli_3 &= \frac{U_{56}}{R_{56}} = \frac{\frac U3}{R+R} = \frac U{6R} \approx 2{,}5\,\text{А}, \\
     U_2 &= \eli_1 R_2 = \frac U{6R} \cdot R = \frac U6 = 25{,}0\,\text{В}, \\
     U_3 &= \eli_1 R_3 = \frac U{6R} \cdot R = \frac U3 = 25{,}0\,\text{В}, \\
     U_5 &= \eli_3 R_5 = \frac U{6R} \cdot R = \frac U5 = 25{,}0\,\text{В}, \\
@@ -2483,9 +2483,9 @@
     если $\ele_1 = 6\,\text{В}$, $\ele_2 = 5\,\text{В}$, $r_1 = 2\,\text{Ом}$, $r_2 = 2\,\text{Ом}$.
 
     \begin{tikzpicture}[circuit ee IEC, thick]
-        \draw  (0, 0) to [battery={rotate=-180,info={$\ele_1, r_1 $}}] (0, 3)
+        \draw  (0, 0) to [battery={rotate=-180,info={$\ele_1, r_1$}}] (0, 3)
                 -- (5, 3)
-                to [battery={rotate=-180, info'={$\ele_2, r_2 $}}] (5, 0)
+                to [battery={rotate=-180, info'={$\ele_2, r_2$}}] (5, 0)
                 -- (0, 0)
                 (2.5, 0) to [resistor={info=$R$}] (2.5, 3);
     \end{tikzpicture}
@@ -2494,9 +2494,9 @@
     Выберем 2 контура и один узел, запишем для них законы Кирхгофа:
 
     \begin{tikzpicture}[circuit ee IEC, thick]
-        \draw  (0, 0) to [battery={rotate=-180,info={$\ele_1, r_1 $}}, current direction={near end, info=$\eli_1$}] (0, 3)
+        \draw  (0, 0) to [battery={rotate=-180,info={$\ele_1, r_1$}}, current direction={near end, info=$\eli_1$}] (0, 3)
                 -- (5, 3)
-                to [battery={rotate=-180, info'={$\ele_2, r_2 $}}, current direction={near end, info=$\eli_2$}] (5, 0)
+                to [battery={rotate=-180, info'={$\ele_2, r_2$}}, current direction={near end, info=$\eli_2$}] (5, 0)
                 -- (0, 0)
                 (2.5, 0) to [resistor={info=$R$}, current direction'={near end, info=$\eli$}] (2.5, 3);
         \draw [-{Latex},color=red] (0.8, 1.9) arc [start angle = 135, end angle = -160, radius = 0.6];
@@ -2513,18 +2513,18 @@
         \end{cases}
         \qquad \implies \qquad
         \begin{cases}
-            \eli_1 = \frac{\ele_1 - \eli R}{ r_1 }, \\
-            \eli_2 = \frac{\ele_2 + \eli R}{ r_2 }, \\
+            \eli_1 = \frac{\ele_1 - \eli R}{r_1}, \\
+            \eli_2 = \frac{\ele_2 + \eli R}{r_2}, \\
             \eli - \eli_1 - \eli_2 = 0;
         \end{cases} \implies \\
-        &\implies \eli - \frac{\ele_1 - \eli R}{ r_1 } + \frac{\ele_2 + \eli R}{ r_2 } = 0, \\
-        &\eli\cbr{1 + \frac{ R }{ r_1 } + \frac{ R }{ r_2 }} - \frac{ \ele_1 }{ r_1 } + \frac{ \ele_2 }{ r_2 } = 0, \\
+        &\implies \eli - \frac{\ele_1 - \eli R}{r_1} + \frac{\ele_2 + \eli R}{r_2} = 0, \\
+        &\eli\cbr{ 1 + \frac{R}{r_1} + \frac{R}{r_2}} - \frac{\ele_1}{r_1} + \frac{\ele_2}{r_2} = 0, \\
         &\eli
-            = \frac{\frac{ \ele_1 }{ r_1 } - \frac{ \ele_2 }{ r_2 }}{1 + \frac{ R }{ r_1 } + \frac{ R }{ r_2 }}
-            = \frac{\frac{ 6\,\text{В} }{ 2\,\text{Ом} } - \frac{ 5\,\text{В} }{ 2\,\text{Ом} }}{1 + \frac{ 20\,\text{Ом} }{ 2\,\text{Ом} } + \frac{ 20\,\text{Ом} }{ 2\,\text{Ом} }}
+            = \frac{\frac{\ele_1}{r_1} - \frac{\ele_2}{r_2}}{ 1 + \frac{R}{r_1} + \frac{R}{r_2}}
+            = \frac{\frac{6\,\text{В}}{2\,\text{Ом}} - \frac{5\,\text{В}}{2\,\text{Ом}}}{ 1 + \frac{20\,\text{Ом}}{2\,\text{Ом}} + \frac{20\,\text{Ом}}{2\,\text{Ом}}}
             = \frac1{42}\units{А}
             \approx 0{,}024\,\text{А}, \\
-        &U  = \eli R = \frac{\frac{ \ele_1 }{ r_1 } - \frac{ \ele_2 }{ r_2 }}{1 + \frac{ R }{ r_1 } + \frac{ R }{ r_2 }} R
+        &U  = \eli R = \frac{\frac{\ele_1}{r_1} - \frac{\ele_2}{r_2}}{ 1 + \frac{R}{r_1} + \frac{R}{r_2}} R
             \approx 0{,}476\,\text{В}.
     \end{align*}
 }
@@ -2544,7 +2544,7 @@
         \draw  (0, 0) to [resistor={info=$R_1$}] ++(left:1.5);
         \draw  (0, 0) -- ++(up:1.5) to [resistor={near start, info=$R_2$}, resistor={near end, info=$R_3$}] ++(right:3);
         \draw  (0, 0) to [resistor={info=$R_4$}] ++(right:3) -- ++(up:1.5);
-        \draw  (3, 1.5) -- ++(right:0.5); \node [contact] (contact2) at (3.5, 1.5) {  };
+        \draw  (3, 1.5) -- ++(right:0.5); \node [contact] (contact2) at (3.5, 1.5) {};
     \end{tikzpicture}
 }
 \answer{%
@@ -2571,13 +2571,13 @@
 }
 \answer{%
     \begin{align*}
-    R_0 &= R + \frac 1{\frac 1{R + R} + \frac 1{R} + \frac 1{R + R}} = R + \frac 1{\frac 2R} = \frac 32 R, \\
+    R_0 &= R + \frac 1{\frac 1{R+R} + \frac 1R + \frac 1{R+R}} = R + \frac 1{\frac 2R} = \frac 32 R, \\
     \eli &= \frac U{R_0} = \frac {2U}{3R}, \\
     U_1 &= \eli R_1 = \frac {2U}{3R} \cdot R = \frac 23 U = 100{,}0\,\text{В}, \\
     U_{23} &= U_{56} = U_4 = U - \eli R_1 = U - \frac {2U}{3R} \cdot R = \frac U3 = 50{,}0\,\text{В}, \\
-    \eli_2 &= \frac{U_4}{R_4} = \frac{U}{3R} \approx 25{,}0\,\text{А}, \\
-    \eli_1 &= \frac{U_{23}}{R_{23}} = \frac{\frac U3}{R + R} = \frac U{6R} \approx 12{,}5\,\text{А}, \\
-    \eli_3 &= \frac{U_{56}}{R_{56}} = \frac{\frac U3}{R + R} = \frac U{6R} \approx 12{,}5\,\text{А}, \\
+    \eli_2 &= \frac{U_4}{R_4} = \fracU{3R} \approx 25{,}0\,\text{А}, \\
+    \eli_1 &= \frac{U_{23}}{R_{23}} = \frac{\frac U3}{R+R} = \frac U{6R} \approx 12{,}5\,\text{А}, \\
+    \eli_3 &= \frac{U_{56}}{R_{56}} = \frac{\frac U3}{R+R} = \frac U{6R} \approx 12{,}5\,\text{А}, \\
     U_2 &= \eli_1 R_2 = \frac U{6R} \cdot R = \frac U6 = 25{,}0\,\text{В}, \\
     U_3 &= \eli_1 R_3 = \frac U{6R} \cdot R = \frac U3 = 25{,}0\,\text{В}, \\
     U_5 &= \eli_3 R_5 = \frac U{6R} \cdot R = \frac U5 = 25{,}0\,\text{В}, \\
@@ -2593,9 +2593,9 @@
     если $\ele_1 = 12\,\text{В}$, $\ele_2 = 5\,\text{В}$, $r_1 = 3\,\text{Ом}$, $r_2 = 2\,\text{Ом}$.
 
     \begin{tikzpicture}[circuit ee IEC, thick]
-        \draw  (0, 0) to [battery={rotate=-180,info={$\ele_1, r_1 $}}] (0, 3)
+        \draw  (0, 0) to [battery={rotate=-180,info={$\ele_1, r_1$}}] (0, 3)
                 -- (5, 3)
-                to [battery={rotate=-180, info'={$\ele_2, r_2 $}}] (5, 0)
+                to [battery={rotate=-180, info'={$\ele_2, r_2$}}] (5, 0)
                 -- (0, 0)
                 (2.5, 0) to [resistor={info=$R$}] (2.5, 3);
     \end{tikzpicture}
@@ -2604,9 +2604,9 @@
     Выберем 2 контура и один узел, запишем для них законы Кирхгофа:
 
     \begin{tikzpicture}[circuit ee IEC, thick]
-        \draw  (0, 0) to [battery={rotate=-180,info={$\ele_1, r_1 $}}, current direction={near end, info=$\eli_1$}] (0, 3)
+        \draw  (0, 0) to [battery={rotate=-180,info={$\ele_1, r_1$}}, current direction={near end, info=$\eli_1$}] (0, 3)
                 -- (5, 3)
-                to [battery={rotate=-180, info'={$\ele_2, r_2 $}}, current direction={near end, info=$\eli_2$}] (5, 0)
+                to [battery={rotate=-180, info'={$\ele_2, r_2$}}, current direction={near end, info=$\eli_2$}] (5, 0)
                 -- (0, 0)
                 (2.5, 0) to [resistor={info=$R$}, current direction'={near end, info=$\eli$}] (2.5, 3);
         \draw [-{Latex},color=red] (0.8, 1.9) arc [start angle = 135, end angle = -160, radius = 0.6];
@@ -2623,18 +2623,18 @@
         \end{cases}
         \qquad \implies \qquad
         \begin{cases}
-            \eli_1 = \frac{\ele_1 - \eli R}{ r_1 }, \\
-            \eli_2 = \frac{\ele_2 + \eli R}{ r_2 }, \\
+            \eli_1 = \frac{\ele_1 - \eli R}{r_1}, \\
+            \eli_2 = \frac{\ele_2 + \eli R}{r_2}, \\
             \eli - \eli_1 - \eli_2 = 0;
         \end{cases} \implies \\
-        &\implies \eli - \frac{\ele_1 - \eli R}{ r_1 } + \frac{\ele_2 + \eli R}{ r_2 } = 0, \\
-        &\eli\cbr{1 + \frac{ R }{ r_1 } + \frac{ R }{ r_2 }} - \frac{ \ele_1 }{ r_1 } + \frac{ \ele_2 }{ r_2 } = 0, \\
+        &\implies \eli - \frac{\ele_1 - \eli R}{r_1} + \frac{\ele_2 + \eli R}{r_2} = 0, \\
+        &\eli\cbr{ 1 + \frac{R}{r_1} + \frac{R}{r_2}} - \frac{\ele_1}{r_1} + \frac{\ele_2}{r_2} = 0, \\
         &\eli
-            = \frac{\frac{ \ele_1 }{ r_1 } - \frac{ \ele_2 }{ r_2 }}{1 + \frac{ R }{ r_1 } + \frac{ R }{ r_2 }}
-            = \frac{\frac{ 12\,\text{В} }{ 3\,\text{Ом} } - \frac{ 5\,\text{В} }{ 2\,\text{Ом} }}{1 + \frac{ 20\,\text{Ом} }{ 3\,\text{Ом} } + \frac{ 20\,\text{Ом} }{ 2\,\text{Ом} }}
+            = \frac{\frac{\ele_1}{r_1} - \frac{\ele_2}{r_2}}{ 1 + \frac{R}{r_1} + \frac{R}{r_2}}
+            = \frac{\frac{12\,\text{В}}{3\,\text{Ом}} - \frac{5\,\text{В}}{2\,\text{Ом}}}{ 1 + \frac{20\,\text{Ом}}{3\,\text{Ом}} + \frac{20\,\text{Ом}}{2\,\text{Ом}}}
             = \frac9{106}\units{А}
             \approx 0{,}085\,\text{А}, \\
-        &U  = \eli R = \frac{\frac{ \ele_1 }{ r_1 } - \frac{ \ele_2 }{ r_2 }}{1 + \frac{ R }{ r_1 } + \frac{ R }{ r_2 }} R
+        &U  = \eli R = \frac{\frac{\ele_1}{r_1} - \frac{\ele_2}{r_2}}{ 1 + \frac{R}{r_1} + \frac{R}{r_2}} R
             \approx 1{,}698\,\text{В}.
     \end{align*}
 }
@@ -2654,7 +2654,7 @@
         \draw  (0, 0) to [resistor={info=$R_1$}] ++(left:1.5);
         \draw  (0, 0) -- ++(up:1.5) to [resistor={near start, info=$R_2$}, resistor={near end, info=$R_3$}] ++(right:3);
         \draw  (0, 0) to [resistor={info=$R_4$}] ++(right:3) -- ++(up:1.5);
-        \draw  (3, 1.5) -- ++(right:0.5); \node [contact] (contact2) at (3.5, 1.5) {  };
+        \draw  (3, 1.5) -- ++(right:0.5); \node [contact] (contact2) at (3.5, 1.5) {};
     \end{tikzpicture}
 }
 \answer{%
@@ -2681,13 +2681,13 @@
 }
 \answer{%
     \begin{align*}
-    R_0 &= R + \frac 1{\frac 1{R + R} + \frac 1{R} + \frac 1{R + R}} = R + \frac 1{\frac 2R} = \frac 32 R, \\
+    R_0 &= R + \frac 1{\frac 1{R+R} + \frac 1R + \frac 1{R+R}} = R + \frac 1{\frac 2R} = \frac 32 R, \\
     \eli &= \frac U{R_0} = \frac {2U}{3R}, \\
     U_1 &= \eli R_1 = \frac {2U}{3R} \cdot R = \frac 23 U = 60{,}0\,\text{В}, \\
     U_{23} &= U_{56} = U_4 = U - \eli R_1 = U - \frac {2U}{3R} \cdot R = \frac U3 = 30{,}0\,\text{В}, \\
-    \eli_2 &= \frac{U_4}{R_4} = \frac{U}{3R} \approx 3{,}0\,\text{А}, \\
-    \eli_1 &= \frac{U_{23}}{R_{23}} = \frac{\frac U3}{R + R} = \frac U{6R} \approx 1{,}5\,\text{А}, \\
-    \eli_3 &= \frac{U_{56}}{R_{56}} = \frac{\frac U3}{R + R} = \frac U{6R} \approx 1{,}5\,\text{А}, \\
+    \eli_2 &= \frac{U_4}{R_4} = \fracU{3R} \approx 3{,}0\,\text{А}, \\
+    \eli_1 &= \frac{U_{23}}{R_{23}} = \frac{\frac U3}{R+R} = \frac U{6R} \approx 1{,}5\,\text{А}, \\
+    \eli_3 &= \frac{U_{56}}{R_{56}} = \frac{\frac U3}{R+R} = \frac U{6R} \approx 1{,}5\,\text{А}, \\
     U_2 &= \eli_1 R_2 = \frac U{6R} \cdot R = \frac U6 = 15{,}0\,\text{В}, \\
     U_3 &= \eli_1 R_3 = \frac U{6R} \cdot R = \frac U3 = 15{,}0\,\text{В}, \\
     U_5 &= \eli_3 R_5 = \frac U{6R} \cdot R = \frac U5 = 15{,}0\,\text{В}, \\
@@ -2703,9 +2703,9 @@
     если $\ele_1 = 12\,\text{В}$, $\ele_2 = 25\,\text{В}$, $r_1 = 2\,\text{Ом}$, $r_2 = 2\,\text{Ом}$.
 
     \begin{tikzpicture}[circuit ee IEC, thick]
-        \draw  (0, 0) to [battery={rotate=-180,info={$\ele_1, r_1 $}}] (0, 3)
+        \draw  (0, 0) to [battery={rotate=-180,info={$\ele_1, r_1$}}] (0, 3)
                 -- (5, 3)
-                to [battery={rotate=-180, info'={$\ele_2, r_2 $}}] (5, 0)
+                to [battery={rotate=-180, info'={$\ele_2, r_2$}}] (5, 0)
                 -- (0, 0)
                 (2.5, 0) to [resistor={info=$R$}] (2.5, 3);
     \end{tikzpicture}
@@ -2714,9 +2714,9 @@
     Выберем 2 контура и один узел, запишем для них законы Кирхгофа:
 
     \begin{tikzpicture}[circuit ee IEC, thick]
-        \draw  (0, 0) to [battery={rotate=-180,info={$\ele_1, r_1 $}}, current direction={near end, info=$\eli_1$}] (0, 3)
+        \draw  (0, 0) to [battery={rotate=-180,info={$\ele_1, r_1$}}, current direction={near end, info=$\eli_1$}] (0, 3)
                 -- (5, 3)
-                to [battery={rotate=-180, info'={$\ele_2, r_2 $}}, current direction={near end, info=$\eli_2$}] (5, 0)
+                to [battery={rotate=-180, info'={$\ele_2, r_2$}}, current direction={near end, info=$\eli_2$}] (5, 0)
                 -- (0, 0)
                 (2.5, 0) to [resistor={info=$R$}, current direction'={near end, info=$\eli$}] (2.5, 3);
         \draw [-{Latex},color=red] (0.8, 1.9) arc [start angle = 135, end angle = -160, radius = 0.6];
@@ -2733,18 +2733,18 @@
         \end{cases}
         \qquad \implies \qquad
         \begin{cases}
-            \eli_1 = \frac{\ele_1 - \eli R}{ r_1 }, \\
-            \eli_2 = \frac{\ele_2 + \eli R}{ r_2 }, \\
+            \eli_1 = \frac{\ele_1 - \eli R}{r_1}, \\
+            \eli_2 = \frac{\ele_2 + \eli R}{r_2}, \\
             \eli - \eli_1 - \eli_2 = 0;
         \end{cases} \implies \\
-        &\implies \eli - \frac{\ele_1 - \eli R}{ r_1 } + \frac{\ele_2 + \eli R}{ r_2 } = 0, \\
-        &\eli\cbr{1 + \frac{ R }{ r_1 } + \frac{ R }{ r_2 }} - \frac{ \ele_1 }{ r_1 } + \frac{ \ele_2 }{ r_2 } = 0, \\
+        &\implies \eli - \frac{\ele_1 - \eli R}{r_1} + \frac{\ele_2 + \eli R}{r_2} = 0, \\
+        &\eli\cbr{ 1 + \frac{R}{r_1} + \frac{R}{r_2}} - \frac{\ele_1}{r_1} + \frac{\ele_2}{r_2} = 0, \\
         &\eli
-            = \frac{\frac{ \ele_1 }{ r_1 } - \frac{ \ele_2 }{ r_2 }}{1 + \frac{ R }{ r_1 } + \frac{ R }{ r_2 }}
-            = \frac{\frac{ 12\,\text{В} }{ 2\,\text{Ом} } - \frac{ 25\,\text{В} }{ 2\,\text{Ом} }}{1 + \frac{ 10\,\text{Ом} }{ 2\,\text{Ом} } + \frac{ 10\,\text{Ом} }{ 2\,\text{Ом} }}
+            = \frac{\frac{\ele_1}{r_1} - \frac{\ele_2}{r_2}}{ 1 + \frac{R}{r_1} + \frac{R}{r_2}}
+            = \frac{\frac{12\,\text{В}}{2\,\text{Ом}} - \frac{25\,\text{В}}{2\,\text{Ом}}}{ 1 + \frac{10\,\text{Ом}}{2\,\text{Ом}} + \frac{10\,\text{Ом}}{2\,\text{Ом}}}
             = -\frac{13}{22}\units{А}
             \approx -0{,}59100\,\text{А}, \\
-        &U  = \eli R = \frac{\frac{ \ele_1 }{ r_1 } - \frac{ \ele_2 }{ r_2 }}{1 + \frac{ R }{ r_1 } + \frac{ R }{ r_2 }} R
+        &U  = \eli R = \frac{\frac{\ele_1}{r_1} - \frac{\ele_2}{r_2}}{ 1 + \frac{R}{r_1} + \frac{R}{r_2}} R
             \approx -5{,}9090\,\text{В}.
     \end{align*}
 }
@@ -2764,7 +2764,7 @@
         \draw  (0, 0) to [resistor={info=$R_1$}] ++(left:1.5);
         \draw  (0, 0) -- ++(up:1.5) to [resistor={near start, info=$R_2$}, resistor={near end, info=$R_3$}] ++(right:3);
         \draw  (0, 0) to [resistor={info=$R_4$}] ++(right:3) -- ++(up:1.5);
-        \draw  (1.5, 1.5) -- ++(up:1); \node [contact] (contact2) at (1.5, 2.5) {  };
+        \draw  (1.5, 1.5) -- ++(up:1); \node [contact] (contact2) at (1.5, 2.5) {};
     \end{tikzpicture}
 }
 \answer{%
@@ -2791,13 +2791,13 @@
 }
 \answer{%
     \begin{align*}
-    R_0 &= R + \frac 1{\frac 1{R + R} + \frac 1{R} + \frac 1{R + R}} = R + \frac 1{\frac 2R} = \frac 32 R, \\
+    R_0 &= R + \frac 1{\frac 1{R+R} + \frac 1R + \frac 1{R+R}} = R + \frac 1{\frac 2R} = \frac 32 R, \\
     \eli &= \frac U{R_0} = \frac {2U}{3R}, \\
     U_1 &= \eli R_1 = \frac {2U}{3R} \cdot R = \frac 23 U = 80{,}0\,\text{В}, \\
     U_{23} &= U_{56} = U_4 = U - \eli R_1 = U - \frac {2U}{3R} \cdot R = \frac U3 = 40{,}0\,\text{В}, \\
-    \eli_2 &= \frac{U_4}{R_4} = \frac{U}{3R} \approx 4{,}0\,\text{А}, \\
-    \eli_1 &= \frac{U_{23}}{R_{23}} = \frac{\frac U3}{R + R} = \frac U{6R} \approx 2{,}0\,\text{А}, \\
-    \eli_3 &= \frac{U_{56}}{R_{56}} = \frac{\frac U3}{R + R} = \frac U{6R} \approx 2{,}0\,\text{А}, \\
+    \eli_2 &= \frac{U_4}{R_4} = \fracU{3R} \approx 4{,}0\,\text{А}, \\
+    \eli_1 &= \frac{U_{23}}{R_{23}} = \frac{\frac U3}{R+R} = \frac U{6R} \approx 2{,}0\,\text{А}, \\
+    \eli_3 &= \frac{U_{56}}{R_{56}} = \frac{\frac U3}{R+R} = \frac U{6R} \approx 2{,}0\,\text{А}, \\
     U_2 &= \eli_1 R_2 = \frac U{6R} \cdot R = \frac U6 = 20{,}0\,\text{В}, \\
     U_3 &= \eli_1 R_3 = \frac U{6R} \cdot R = \frac U3 = 20{,}0\,\text{В}, \\
     U_5 &= \eli_3 R_5 = \frac U{6R} \cdot R = \frac U5 = 20{,}0\,\text{В}, \\
@@ -2813,9 +2813,9 @@
     если $\ele_1 = 18\,\text{В}$, $\ele_2 = 25\,\text{В}$, $r_1 = 3\,\text{Ом}$, $r_2 = 4\,\text{Ом}$.
 
     \begin{tikzpicture}[circuit ee IEC, thick]
-        \draw  (0, 0) to [battery={rotate=-180,info={$\ele_1, r_1 $}}] (0, 3)
+        \draw  (0, 0) to [battery={rotate=-180,info={$\ele_1, r_1$}}] (0, 3)
                 -- (5, 3)
-                to [battery={rotate=-180, info'={$\ele_2, r_2 $}}] (5, 0)
+                to [battery={rotate=-180, info'={$\ele_2, r_2$}}] (5, 0)
                 -- (0, 0)
                 (2.5, 0) to [resistor={info=$R$}] (2.5, 3);
     \end{tikzpicture}
@@ -2824,9 +2824,9 @@
     Выберем 2 контура и один узел, запишем для них законы Кирхгофа:
 
     \begin{tikzpicture}[circuit ee IEC, thick]
-        \draw  (0, 0) to [battery={rotate=-180,info={$\ele_1, r_1 $}}, current direction={near end, info=$\eli_1$}] (0, 3)
+        \draw  (0, 0) to [battery={rotate=-180,info={$\ele_1, r_1$}}, current direction={near end, info=$\eli_1$}] (0, 3)
                 -- (5, 3)
-                to [battery={rotate=-180, info'={$\ele_2, r_2 $}}, current direction={near end, info=$\eli_2$}] (5, 0)
+                to [battery={rotate=-180, info'={$\ele_2, r_2$}}, current direction={near end, info=$\eli_2$}] (5, 0)
                 -- (0, 0)
                 (2.5, 0) to [resistor={info=$R$}, current direction'={near end, info=$\eli$}] (2.5, 3);
         \draw [-{Latex},color=red] (0.8, 1.9) arc [start angle = 135, end angle = -160, radius = 0.6];
@@ -2843,18 +2843,18 @@
         \end{cases}
         \qquad \implies \qquad
         \begin{cases}
-            \eli_1 = \frac{\ele_1 - \eli R}{ r_1 }, \\
-            \eli_2 = \frac{\ele_2 + \eli R}{ r_2 }, \\
+            \eli_1 = \frac{\ele_1 - \eli R}{r_1}, \\
+            \eli_2 = \frac{\ele_2 + \eli R}{r_2}, \\
             \eli - \eli_1 - \eli_2 = 0;
         \end{cases} \implies \\
-        &\implies \eli - \frac{\ele_1 - \eli R}{ r_1 } + \frac{\ele_2 + \eli R}{ r_2 } = 0, \\
-        &\eli\cbr{1 + \frac{ R }{ r_1 } + \frac{ R }{ r_2 }} - \frac{ \ele_1 }{ r_1 } + \frac{ \ele_2 }{ r_2 } = 0, \\
+        &\implies \eli - \frac{\ele_1 - \eli R}{r_1} + \frac{\ele_2 + \eli R}{r_2} = 0, \\
+        &\eli\cbr{ 1 + \frac{R}{r_1} + \frac{R}{r_2}} - \frac{\ele_1}{r_1} + \frac{\ele_2}{r_2} = 0, \\
         &\eli
-            = \frac{\frac{ \ele_1 }{ r_1 } - \frac{ \ele_2 }{ r_2 }}{1 + \frac{ R }{ r_1 } + \frac{ R }{ r_2 }}
-            = \frac{\frac{ 18\,\text{В} }{ 3\,\text{Ом} } - \frac{ 25\,\text{В} }{ 4\,\text{Ом} }}{1 + \frac{ 12\,\text{Ом} }{ 3\,\text{Ом} } + \frac{ 12\,\text{Ом} }{ 4\,\text{Ом} }}
+            = \frac{\frac{\ele_1}{r_1} - \frac{\ele_2}{r_2}}{ 1 + \frac{R}{r_1} + \frac{R}{r_2}}
+            = \frac{\frac{18\,\text{В}}{3\,\text{Ом}} - \frac{25\,\text{В}}{4\,\text{Ом}}}{ 1 + \frac{12\,\text{Ом}}{3\,\text{Ом}} + \frac{12\,\text{Ом}}{4\,\text{Ом}}}
             = -\frac1{32}\units{А}
             \approx -0{,}031000\,\text{А}, \\
-        &U  = \eli R = \frac{\frac{ \ele_1 }{ r_1 } - \frac{ \ele_2 }{ r_2 }}{1 + \frac{ R }{ r_1 } + \frac{ R }{ r_2 }} R
+        &U  = \eli R = \frac{\frac{\ele_1}{r_1} - \frac{\ele_2}{r_2}}{ 1 + \frac{R}{r_1} + \frac{R}{r_2}} R
             \approx -0{,}37500\,\text{В}.
     \end{align*}
 }
@@ -2874,7 +2874,7 @@
         \draw  (0, 0) to [resistor={info=$R_1$}] ++(left:1.5);
         \draw  (0, 0) -- ++(up:1.5) to [resistor={near start, info=$R_2$}, resistor={near end, info=$R_3$}] ++(right:3);
         \draw  (0, 0) to [resistor={info=$R_4$}] ++(right:3) -- ++(up:1.5);
-        \draw  (1.5, 1.5) -- ++(up:1); \node [contact] (contact2) at (1.5, 2.5) {  };
+        \draw  (1.5, 1.5) -- ++(up:1); \node [contact] (contact2) at (1.5, 2.5) {};
     \end{tikzpicture}
 }
 \answer{%
@@ -2901,13 +2901,13 @@
 }
 \answer{%
     \begin{align*}
-    R_0 &= R + \frac 1{\frac 1{R + R} + \frac 1{R} + \frac 1{R + R}} = R + \frac 1{\frac 2R} = \frac 32 R, \\
+    R_0 &= R + \frac 1{\frac 1{R+R} + \frac 1R + \frac 1{R+R}} = R + \frac 1{\frac 2R} = \frac 32 R, \\
     \eli &= \frac U{R_0} = \frac {2U}{3R}, \\
     U_1 &= \eli R_1 = \frac {2U}{3R} \cdot R = \frac 23 U = 100{,}0\,\text{В}, \\
     U_{23} &= U_{56} = U_4 = U - \eli R_1 = U - \frac {2U}{3R} \cdot R = \frac U3 = 50{,}0\,\text{В}, \\
-    \eli_2 &= \frac{U_4}{R_4} = \frac{U}{3R} \approx 10{,}0\,\text{А}, \\
-    \eli_1 &= \frac{U_{23}}{R_{23}} = \frac{\frac U3}{R + R} = \frac U{6R} \approx 5{,}0\,\text{А}, \\
-    \eli_3 &= \frac{U_{56}}{R_{56}} = \frac{\frac U3}{R + R} = \frac U{6R} \approx 5{,}0\,\text{А}, \\
+    \eli_2 &= \frac{U_4}{R_4} = \fracU{3R} \approx 10{,}0\,\text{А}, \\
+    \eli_1 &= \frac{U_{23}}{R_{23}} = \frac{\frac U3}{R+R} = \frac U{6R} \approx 5{,}0\,\text{А}, \\
+    \eli_3 &= \frac{U_{56}}{R_{56}} = \frac{\frac U3}{R+R} = \frac U{6R} \approx 5{,}0\,\text{А}, \\
     U_2 &= \eli_1 R_2 = \frac U{6R} \cdot R = \frac U6 = 25{,}0\,\text{В}, \\
     U_3 &= \eli_1 R_3 = \frac U{6R} \cdot R = \frac U3 = 25{,}0\,\text{В}, \\
     U_5 &= \eli_3 R_5 = \frac U{6R} \cdot R = \frac U5 = 25{,}0\,\text{В}, \\
@@ -2923,9 +2923,9 @@
     если $\ele_1 = 12\,\text{В}$, $\ele_2 = 25\,\text{В}$, $r_1 = 1\,\text{Ом}$, $r_2 = 6\,\text{Ом}$.
 
     \begin{tikzpicture}[circuit ee IEC, thick]
-        \draw  (0, 0) to [battery={rotate=-180,info={$\ele_1, r_1 $}}] (0, 3)
+        \draw  (0, 0) to [battery={rotate=-180,info={$\ele_1, r_1$}}] (0, 3)
                 -- (5, 3)
-                to [battery={rotate=-180, info'={$\ele_2, r_2 $}}] (5, 0)
+                to [battery={rotate=-180, info'={$\ele_2, r_2$}}] (5, 0)
                 -- (0, 0)
                 (2.5, 0) to [resistor={info=$R$}] (2.5, 3);
     \end{tikzpicture}
@@ -2934,9 +2934,9 @@
     Выберем 2 контура и один узел, запишем для них законы Кирхгофа:
 
     \begin{tikzpicture}[circuit ee IEC, thick]
-        \draw  (0, 0) to [battery={rotate=-180,info={$\ele_1, r_1 $}}, current direction={near end, info=$\eli_1$}] (0, 3)
+        \draw  (0, 0) to [battery={rotate=-180,info={$\ele_1, r_1$}}, current direction={near end, info=$\eli_1$}] (0, 3)
                 -- (5, 3)
-                to [battery={rotate=-180, info'={$\ele_2, r_2 $}}, current direction={near end, info=$\eli_2$}] (5, 0)
+                to [battery={rotate=-180, info'={$\ele_2, r_2$}}, current direction={near end, info=$\eli_2$}] (5, 0)
                 -- (0, 0)
                 (2.5, 0) to [resistor={info=$R$}, current direction'={near end, info=$\eli$}] (2.5, 3);
         \draw [-{Latex},color=red] (0.8, 1.9) arc [start angle = 135, end angle = -160, radius = 0.6];
@@ -2953,18 +2953,18 @@
         \end{cases}
         \qquad \implies \qquad
         \begin{cases}
-            \eli_1 = \frac{\ele_1 - \eli R}{ r_1 }, \\
-            \eli_2 = \frac{\ele_2 + \eli R}{ r_2 }, \\
+            \eli_1 = \frac{\ele_1 - \eli R}{r_1}, \\
+            \eli_2 = \frac{\ele_2 + \eli R}{r_2}, \\
             \eli - \eli_1 - \eli_2 = 0;
         \end{cases} \implies \\
-        &\implies \eli - \frac{\ele_1 - \eli R}{ r_1 } + \frac{\ele_2 + \eli R}{ r_2 } = 0, \\
-        &\eli\cbr{1 + \frac{ R }{ r_1 } + \frac{ R }{ r_2 }} - \frac{ \ele_1 }{ r_1 } + \frac{ \ele_2 }{ r_2 } = 0, \\
+        &\implies \eli - \frac{\ele_1 - \eli R}{r_1} + \frac{\ele_2 + \eli R}{r_2} = 0, \\
+        &\eli\cbr{ 1 + \frac{R}{r_1} + \frac{R}{r_2}} - \frac{\ele_1}{r_1} + \frac{\ele_2}{r_2} = 0, \\
         &\eli
-            = \frac{\frac{ \ele_1 }{ r_1 } - \frac{ \ele_2 }{ r_2 }}{1 + \frac{ R }{ r_1 } + \frac{ R }{ r_2 }}
-            = \frac{\frac{ 12\,\text{В} }{ 1\,\text{Ом} } - \frac{ 25\,\text{В} }{ 6\,\text{Ом} }}{1 + \frac{ 10\,\text{Ом} }{ 1\,\text{Ом} } + \frac{ 10\,\text{Ом} }{ 6\,\text{Ом} }}
+            = \frac{\frac{\ele_1}{r_1} - \frac{\ele_2}{r_2}}{ 1 + \frac{R}{r_1} + \frac{R}{r_2}}
+            = \frac{\frac{12\,\text{В}}{1\,\text{Ом}} - \frac{25\,\text{В}}{6\,\text{Ом}}}{ 1 + \frac{10\,\text{Ом}}{1\,\text{Ом}} + \frac{10\,\text{Ом}}{6\,\text{Ом}}}
             = \frac{47}{76}\units{А}
             \approx 0{,}618\,\text{А}, \\
-        &U  = \eli R = \frac{\frac{ \ele_1 }{ r_1 } - \frac{ \ele_2 }{ r_2 }}{1 + \frac{ R }{ r_1 } + \frac{ R }{ r_2 }} R
+        &U  = \eli R = \frac{\frac{\ele_1}{r_1} - \frac{\ele_2}{r_2}}{ 1 + \frac{R}{r_1} + \frac{R}{r_2}} R
             \approx 6{,}184\,\text{В}.
     \end{align*}
 }
@@ -2984,7 +2984,7 @@
         \draw  (0, 0) to [resistor={info=$R_1$}] ++(left:1.5);
         \draw  (0, 0) -- ++(up:1.5) to [resistor={near start, info=$R_2$}, resistor={near end, info=$R_3$}] ++(right:3);
         \draw  (0, 0) to [resistor={info=$R_4$}] ++(right:3) -- ++(up:1.5);
-        \draw  (1.5, 1.5) -- ++(up:1); \node [contact] (contact2) at (1.5, 2.5) {  };
+        \draw  (1.5, 1.5) -- ++(up:1); \node [contact] (contact2) at (1.5, 2.5) {};
     \end{tikzpicture}
 }
 \answer{%
@@ -3011,13 +3011,13 @@
 }
 \answer{%
     \begin{align*}
-    R_0 &= R + \frac 1{\frac 1{R + R} + \frac 1{R} + \frac 1{R + R}} = R + \frac 1{\frac 2R} = \frac 32 R, \\
+    R_0 &= R + \frac 1{\frac 1{R+R} + \frac 1R + \frac 1{R+R}} = R + \frac 1{\frac 2R} = \frac 32 R, \\
     \eli &= \frac U{R_0} = \frac {2U}{3R}, \\
     U_1 &= \eli R_1 = \frac {2U}{3R} \cdot R = \frac 23 U = 100{,}0\,\text{В}, \\
     U_{23} &= U_{56} = U_4 = U - \eli R_1 = U - \frac {2U}{3R} \cdot R = \frac U3 = 50{,}0\,\text{В}, \\
-    \eli_2 &= \frac{U_4}{R_4} = \frac{U}{3R} \approx 5{,}0\,\text{А}, \\
-    \eli_1 &= \frac{U_{23}}{R_{23}} = \frac{\frac U3}{R + R} = \frac U{6R} \approx 2{,}5\,\text{А}, \\
-    \eli_3 &= \frac{U_{56}}{R_{56}} = \frac{\frac U3}{R + R} = \frac U{6R} \approx 2{,}5\,\text{А}, \\
+    \eli_2 &= \frac{U_4}{R_4} = \fracU{3R} \approx 5{,}0\,\text{А}, \\
+    \eli_1 &= \frac{U_{23}}{R_{23}} = \frac{\frac U3}{R+R} = \frac U{6R} \approx 2{,}5\,\text{А}, \\
+    \eli_3 &= \frac{U_{56}}{R_{56}} = \frac{\frac U3}{R+R} = \frac U{6R} \approx 2{,}5\,\text{А}, \\
     U_2 &= \eli_1 R_2 = \frac U{6R} \cdot R = \frac U6 = 25{,}0\,\text{В}, \\
     U_3 &= \eli_1 R_3 = \frac U{6R} \cdot R = \frac U3 = 25{,}0\,\text{В}, \\
     U_5 &= \eli_3 R_5 = \frac U{6R} \cdot R = \frac U5 = 25{,}0\,\text{В}, \\
@@ -3033,9 +3033,9 @@
     если $\ele_1 = 12\,\text{В}$, $\ele_2 = 5\,\text{В}$, $r_1 = 1\,\text{Ом}$, $r_2 = 2\,\text{Ом}$.
 
     \begin{tikzpicture}[circuit ee IEC, thick]
-        \draw  (0, 0) to [battery={rotate=-180,info={$\ele_1, r_1 $}}] (0, 3)
+        \draw  (0, 0) to [battery={rotate=-180,info={$\ele_1, r_1$}}] (0, 3)
                 -- (5, 3)
-                to [battery={rotate=-180, info'={$\ele_2, r_2 $}}] (5, 0)
+                to [battery={rotate=-180, info'={$\ele_2, r_2$}}] (5, 0)
                 -- (0, 0)
                 (2.5, 0) to [resistor={info=$R$}] (2.5, 3);
     \end{tikzpicture}
@@ -3044,9 +3044,9 @@
     Выберем 2 контура и один узел, запишем для них законы Кирхгофа:
 
     \begin{tikzpicture}[circuit ee IEC, thick]
-        \draw  (0, 0) to [battery={rotate=-180,info={$\ele_1, r_1 $}}, current direction={near end, info=$\eli_1$}] (0, 3)
+        \draw  (0, 0) to [battery={rotate=-180,info={$\ele_1, r_1$}}, current direction={near end, info=$\eli_1$}] (0, 3)
                 -- (5, 3)
-                to [battery={rotate=-180, info'={$\ele_2, r_2 $}}, current direction={near end, info=$\eli_2$}] (5, 0)
+                to [battery={rotate=-180, info'={$\ele_2, r_2$}}, current direction={near end, info=$\eli_2$}] (5, 0)
                 -- (0, 0)
                 (2.5, 0) to [resistor={info=$R$}, current direction'={near end, info=$\eli$}] (2.5, 3);
         \draw [-{Latex},color=red] (0.8, 1.9) arc [start angle = 135, end angle = -160, radius = 0.6];
@@ -3063,18 +3063,18 @@
         \end{cases}
         \qquad \implies \qquad
         \begin{cases}
-            \eli_1 = \frac{\ele_1 - \eli R}{ r_1 }, \\
-            \eli_2 = \frac{\ele_2 + \eli R}{ r_2 }, \\
+            \eli_1 = \frac{\ele_1 - \eli R}{r_1}, \\
+            \eli_2 = \frac{\ele_2 + \eli R}{r_2}, \\
             \eli - \eli_1 - \eli_2 = 0;
         \end{cases} \implies \\
-        &\implies \eli - \frac{\ele_1 - \eli R}{ r_1 } + \frac{\ele_2 + \eli R}{ r_2 } = 0, \\
-        &\eli\cbr{1 + \frac{ R }{ r_1 } + \frac{ R }{ r_2 }} - \frac{ \ele_1 }{ r_1 } + \frac{ \ele_2 }{ r_2 } = 0, \\
+        &\implies \eli - \frac{\ele_1 - \eli R}{r_1} + \frac{\ele_2 + \eli R}{r_2} = 0, \\
+        &\eli\cbr{ 1 + \frac{R}{r_1} + \frac{R}{r_2}} - \frac{\ele_1}{r_1} + \frac{\ele_2}{r_2} = 0, \\
         &\eli
-            = \frac{\frac{ \ele_1 }{ r_1 } - \frac{ \ele_2 }{ r_2 }}{1 + \frac{ R }{ r_1 } + \frac{ R }{ r_2 }}
-            = \frac{\frac{ 12\,\text{В} }{ 1\,\text{Ом} } - \frac{ 5\,\text{В} }{ 2\,\text{Ом} }}{1 + \frac{ 10\,\text{Ом} }{ 1\,\text{Ом} } + \frac{ 10\,\text{Ом} }{ 2\,\text{Ом} }}
+            = \frac{\frac{\ele_1}{r_1} - \frac{\ele_2}{r_2}}{ 1 + \frac{R}{r_1} + \frac{R}{r_2}}
+            = \frac{\frac{12\,\text{В}}{1\,\text{Ом}} - \frac{5\,\text{В}}{2\,\text{Ом}}}{ 1 + \frac{10\,\text{Ом}}{1\,\text{Ом}} + \frac{10\,\text{Ом}}{2\,\text{Ом}}}
             = \frac{19}{32}\units{А}
             \approx 0{,}594\,\text{А}, \\
-        &U  = \eli R = \frac{\frac{ \ele_1 }{ r_1 } - \frac{ \ele_2 }{ r_2 }}{1 + \frac{ R }{ r_1 } + \frac{ R }{ r_2 }} R
+        &U  = \eli R = \frac{\frac{\ele_1}{r_1} - \frac{\ele_2}{r_2}}{ 1 + \frac{R}{r_1} + \frac{R}{r_2}} R
             \approx 5{,}938\,\text{В}.
     \end{align*}
 }
@@ -3094,7 +3094,7 @@
         \draw  (0, 0) to [resistor={info=$R_1$}] ++(left:1.5);
         \draw  (0, 0) -- ++(up:1.5) to [resistor={near start, info=$R_2$}, resistor={near end, info=$R_3$}] ++(right:3);
         \draw  (0, 0) to [resistor={info=$R_4$}] ++(right:3) -- ++(up:1.5);
-        \draw  (1.5, 1.5) -- ++(up:1); \node [contact] (contact2) at (1.5, 2.5) {  };
+        \draw  (1.5, 1.5) -- ++(up:1); \node [contact] (contact2) at (1.5, 2.5) {};
     \end{tikzpicture}
 }
 \answer{%
@@ -3121,13 +3121,13 @@
 }
 \answer{%
     \begin{align*}
-    R_0 &= R + \frac 1{\frac 1{R + R} + \frac 1{R} + \frac 1{R + R}} = R + \frac 1{\frac 2R} = \frac 32 R, \\
+    R_0 &= R + \frac 1{\frac 1{R+R} + \frac 1R + \frac 1{R+R}} = R + \frac 1{\frac 2R} = \frac 32 R, \\
     \eli &= \frac U{R_0} = \frac {2U}{3R}, \\
     U_1 &= \eli R_1 = \frac {2U}{3R} \cdot R = \frac 23 U = 60{,}0\,\text{В}, \\
     U_{23} &= U_{56} = U_4 = U - \eli R_1 = U - \frac {2U}{3R} \cdot R = \frac U3 = 30{,}0\,\text{В}, \\
-    \eli_2 &= \frac{U_4}{R_4} = \frac{U}{3R} \approx 6{,}0\,\text{А}, \\
-    \eli_1 &= \frac{U_{23}}{R_{23}} = \frac{\frac U3}{R + R} = \frac U{6R} \approx 3{,}0\,\text{А}, \\
-    \eli_3 &= \frac{U_{56}}{R_{56}} = \frac{\frac U3}{R + R} = \frac U{6R} \approx 3{,}0\,\text{А}, \\
+    \eli_2 &= \frac{U_4}{R_4} = \fracU{3R} \approx 6{,}0\,\text{А}, \\
+    \eli_1 &= \frac{U_{23}}{R_{23}} = \frac{\frac U3}{R+R} = \frac U{6R} \approx 3{,}0\,\text{А}, \\
+    \eli_3 &= \frac{U_{56}}{R_{56}} = \frac{\frac U3}{R+R} = \frac U{6R} \approx 3{,}0\,\text{А}, \\
     U_2 &= \eli_1 R_2 = \frac U{6R} \cdot R = \frac U6 = 15{,}0\,\text{В}, \\
     U_3 &= \eli_1 R_3 = \frac U{6R} \cdot R = \frac U3 = 15{,}0\,\text{В}, \\
     U_5 &= \eli_3 R_5 = \frac U{6R} \cdot R = \frac U5 = 15{,}0\,\text{В}, \\
@@ -3143,9 +3143,9 @@
     если $\ele_1 = 18\,\text{В}$, $\ele_2 = 25\,\text{В}$, $r_1 = 2\,\text{Ом}$, $r_2 = 4\,\text{Ом}$.
 
     \begin{tikzpicture}[circuit ee IEC, thick]
-        \draw  (0, 0) to [battery={rotate=-180,info={$\ele_1, r_1 $}}] (0, 3)
+        \draw  (0, 0) to [battery={rotate=-180,info={$\ele_1, r_1$}}] (0, 3)
                 -- (5, 3)
-                to [battery={rotate=-180, info'={$\ele_2, r_2 $}}] (5, 0)
+                to [battery={rotate=-180, info'={$\ele_2, r_2$}}] (5, 0)
                 -- (0, 0)
                 (2.5, 0) to [resistor={info=$R$}] (2.5, 3);
     \end{tikzpicture}
@@ -3154,9 +3154,9 @@
     Выберем 2 контура и один узел, запишем для них законы Кирхгофа:
 
     \begin{tikzpicture}[circuit ee IEC, thick]
-        \draw  (0, 0) to [battery={rotate=-180,info={$\ele_1, r_1 $}}, current direction={near end, info=$\eli_1$}] (0, 3)
+        \draw  (0, 0) to [battery={rotate=-180,info={$\ele_1, r_1$}}, current direction={near end, info=$\eli_1$}] (0, 3)
                 -- (5, 3)
-                to [battery={rotate=-180, info'={$\ele_2, r_2 $}}, current direction={near end, info=$\eli_2$}] (5, 0)
+                to [battery={rotate=-180, info'={$\ele_2, r_2$}}, current direction={near end, info=$\eli_2$}] (5, 0)
                 -- (0, 0)
                 (2.5, 0) to [resistor={info=$R$}, current direction'={near end, info=$\eli$}] (2.5, 3);
         \draw [-{Latex},color=red] (0.8, 1.9) arc [start angle = 135, end angle = -160, radius = 0.6];
@@ -3173,18 +3173,18 @@
         \end{cases}
         \qquad \implies \qquad
         \begin{cases}
-            \eli_1 = \frac{\ele_1 - \eli R}{ r_1 }, \\
-            \eli_2 = \frac{\ele_2 + \eli R}{ r_2 }, \\
+            \eli_1 = \frac{\ele_1 - \eli R}{r_1}, \\
+            \eli_2 = \frac{\ele_2 + \eli R}{r_2}, \\
             \eli - \eli_1 - \eli_2 = 0;
         \end{cases} \implies \\
-        &\implies \eli - \frac{\ele_1 - \eli R}{ r_1 } + \frac{\ele_2 + \eli R}{ r_2 } = 0, \\
-        &\eli\cbr{1 + \frac{ R }{ r_1 } + \frac{ R }{ r_2 }} - \frac{ \ele_1 }{ r_1 } + \frac{ \ele_2 }{ r_2 } = 0, \\
+        &\implies \eli - \frac{\ele_1 - \eli R}{r_1} + \frac{\ele_2 + \eli R}{r_2} = 0, \\
+        &\eli\cbr{ 1 + \frac{R}{r_1} + \frac{R}{r_2}} - \frac{\ele_1}{r_1} + \frac{\ele_2}{r_2} = 0, \\
         &\eli
-            = \frac{\frac{ \ele_1 }{ r_1 } - \frac{ \ele_2 }{ r_2 }}{1 + \frac{ R }{ r_1 } + \frac{ R }{ r_2 }}
-            = \frac{\frac{ 18\,\text{В} }{ 2\,\text{Ом} } - \frac{ 25\,\text{В} }{ 4\,\text{Ом} }}{1 + \frac{ 15\,\text{Ом} }{ 2\,\text{Ом} } + \frac{ 15\,\text{Ом} }{ 4\,\text{Ом} }}
+            = \frac{\frac{\ele_1}{r_1} - \frac{\ele_2}{r_2}}{ 1 + \frac{R}{r_1} + \frac{R}{r_2}}
+            = \frac{\frac{18\,\text{В}}{2\,\text{Ом}} - \frac{25\,\text{В}}{4\,\text{Ом}}}{ 1 + \frac{15\,\text{Ом}}{2\,\text{Ом}} + \frac{15\,\text{Ом}}{4\,\text{Ом}}}
             = \frac{11}{49}\units{А}
             \approx 0{,}224\,\text{А}, \\
-        &U  = \eli R = \frac{\frac{ \ele_1 }{ r_1 } - \frac{ \ele_2 }{ r_2 }}{1 + \frac{ R }{ r_1 } + \frac{ R }{ r_2 }} R
+        &U  = \eli R = \frac{\frac{\ele_1}{r_1} - \frac{\ele_2}{r_2}}{ 1 + \frac{R}{r_1} + \frac{R}{r_2}} R
             \approx 3{,}367\,\text{В}.
     \end{align*}
 }
@@ -3204,7 +3204,7 @@
         \draw  (0, 0) to [resistor={info=$R_1$}] ++(left:1.5);
         \draw  (0, 0) -- ++(up:1.5) to [resistor={near start, info=$R_2$}, resistor={near end, info=$R_3$}] ++(right:3);
         \draw  (0, 0) to [resistor={info=$R_4$}] ++(right:3) -- ++(up:1.5);
-        \draw  (1.5, 1.5) -- ++(up:1); \node [contact] (contact2) at (1.5, 2.5) {  };
+        \draw  (1.5, 1.5) -- ++(up:1); \node [contact] (contact2) at (1.5, 2.5) {};
     \end{tikzpicture}
 }
 \answer{%
@@ -3231,13 +3231,13 @@
 }
 \answer{%
     \begin{align*}
-    R_0 &= R + \frac 1{\frac 1{R + R} + \frac 1{R} + \frac 1{R + R}} = R + \frac 1{\frac 2R} = \frac 32 R, \\
+    R_0 &= R + \frac 1{\frac 1{R+R} + \frac 1R + \frac 1{R+R}} = R + \frac 1{\frac 2R} = \frac 32 R, \\
     \eli &= \frac U{R_0} = \frac {2U}{3R}, \\
     U_1 &= \eli R_1 = \frac {2U}{3R} \cdot R = \frac 23 U = 20{,}0\,\text{В}, \\
     U_{23} &= U_{56} = U_4 = U - \eli R_1 = U - \frac {2U}{3R} \cdot R = \frac U3 = 10{,}0\,\text{В}, \\
-    \eli_2 &= \frac{U_4}{R_4} = \frac{U}{3R} \approx 2{,}5\,\text{А}, \\
-    \eli_1 &= \frac{U_{23}}{R_{23}} = \frac{\frac U3}{R + R} = \frac U{6R} \approx 1{,}2\,\text{А}, \\
-    \eli_3 &= \frac{U_{56}}{R_{56}} = \frac{\frac U3}{R + R} = \frac U{6R} \approx 1{,}2\,\text{А}, \\
+    \eli_2 &= \frac{U_4}{R_4} = \fracU{3R} \approx 2{,}5\,\text{А}, \\
+    \eli_1 &= \frac{U_{23}}{R_{23}} = \frac{\frac U3}{R+R} = \frac U{6R} \approx 1{,}2\,\text{А}, \\
+    \eli_3 &= \frac{U_{56}}{R_{56}} = \frac{\frac U3}{R+R} = \frac U{6R} \approx 1{,}2\,\text{А}, \\
     U_2 &= \eli_1 R_2 = \frac U{6R} \cdot R = \frac U6 = 5{,}0\,\text{В}, \\
     U_3 &= \eli_1 R_3 = \frac U{6R} \cdot R = \frac U3 = 5{,}0\,\text{В}, \\
     U_5 &= \eli_3 R_5 = \frac U{6R} \cdot R = \frac U5 = 5{,}0\,\text{В}, \\
@@ -3253,9 +3253,9 @@
     если $\ele_1 = 12\,\text{В}$, $\ele_2 = 5\,\text{В}$, $r_1 = 2\,\text{Ом}$, $r_2 = 6\,\text{Ом}$.
 
     \begin{tikzpicture}[circuit ee IEC, thick]
-        \draw  (0, 0) to [battery={rotate=-180,info={$\ele_1, r_1 $}}] (0, 3)
+        \draw  (0, 0) to [battery={rotate=-180,info={$\ele_1, r_1$}}] (0, 3)
                 -- (5, 3)
-                to [battery={rotate=-180, info'={$\ele_2, r_2 $}}] (5, 0)
+                to [battery={rotate=-180, info'={$\ele_2, r_2$}}] (5, 0)
                 -- (0, 0)
                 (2.5, 0) to [resistor={info=$R$}] (2.5, 3);
     \end{tikzpicture}
@@ -3264,9 +3264,9 @@
     Выберем 2 контура и один узел, запишем для них законы Кирхгофа:
 
     \begin{tikzpicture}[circuit ee IEC, thick]
-        \draw  (0, 0) to [battery={rotate=-180,info={$\ele_1, r_1 $}}, current direction={near end, info=$\eli_1$}] (0, 3)
+        \draw  (0, 0) to [battery={rotate=-180,info={$\ele_1, r_1$}}, current direction={near end, info=$\eli_1$}] (0, 3)
                 -- (5, 3)
-                to [battery={rotate=-180, info'={$\ele_2, r_2 $}}, current direction={near end, info=$\eli_2$}] (5, 0)
+                to [battery={rotate=-180, info'={$\ele_2, r_2$}}, current direction={near end, info=$\eli_2$}] (5, 0)
                 -- (0, 0)
                 (2.5, 0) to [resistor={info=$R$}, current direction'={near end, info=$\eli$}] (2.5, 3);
         \draw [-{Latex},color=red] (0.8, 1.9) arc [start angle = 135, end angle = -160, radius = 0.6];
@@ -3283,18 +3283,18 @@
         \end{cases}
         \qquad \implies \qquad
         \begin{cases}
-            \eli_1 = \frac{\ele_1 - \eli R}{ r_1 }, \\
-            \eli_2 = \frac{\ele_2 + \eli R}{ r_2 }, \\
+            \eli_1 = \frac{\ele_1 - \eli R}{r_1}, \\
+            \eli_2 = \frac{\ele_2 + \eli R}{r_2}, \\
             \eli - \eli_1 - \eli_2 = 0;
         \end{cases} \implies \\
-        &\implies \eli - \frac{\ele_1 - \eli R}{ r_1 } + \frac{\ele_2 + \eli R}{ r_2 } = 0, \\
-        &\eli\cbr{1 + \frac{ R }{ r_1 } + \frac{ R }{ r_2 }} - \frac{ \ele_1 }{ r_1 } + \frac{ \ele_2 }{ r_2 } = 0, \\
+        &\implies \eli - \frac{\ele_1 - \eli R}{r_1} + \frac{\ele_2 + \eli R}{r_2} = 0, \\
+        &\eli\cbr{ 1 + \frac{R}{r_1} + \frac{R}{r_2}} - \frac{\ele_1}{r_1} + \frac{\ele_2}{r_2} = 0, \\
         &\eli
-            = \frac{\frac{ \ele_1 }{ r_1 } - \frac{ \ele_2 }{ r_2 }}{1 + \frac{ R }{ r_1 } + \frac{ R }{ r_2 }}
-            = \frac{\frac{ 12\,\text{В} }{ 2\,\text{Ом} } - \frac{ 5\,\text{В} }{ 6\,\text{Ом} }}{1 + \frac{ 15\,\text{Ом} }{ 2\,\text{Ом} } + \frac{ 15\,\text{Ом} }{ 6\,\text{Ом} }}
+            = \frac{\frac{\ele_1}{r_1} - \frac{\ele_2}{r_2}}{ 1 + \frac{R}{r_1} + \frac{R}{r_2}}
+            = \frac{\frac{12\,\text{В}}{2\,\text{Ом}} - \frac{5\,\text{В}}{6\,\text{Ом}}}{ 1 + \frac{15\,\text{Ом}}{2\,\text{Ом}} + \frac{15\,\text{Ом}}{6\,\text{Ом}}}
             = \frac{31}{66}\units{А}
             \approx 0{,}470\,\text{А}, \\
-        &U  = \eli R = \frac{\frac{ \ele_1 }{ r_1 } - \frac{ \ele_2 }{ r_2 }}{1 + \frac{ R }{ r_1 } + \frac{ R }{ r_2 }} R
+        &U  = \eli R = \frac{\frac{\ele_1}{r_1} - \frac{\ele_2}{r_2}}{ 1 + \frac{R}{r_1} + \frac{R}{r_2}} R
             \approx 7{,}045\,\text{В}.
     \end{align*}
 }
@@ -3314,7 +3314,7 @@
         \draw  (0, 0) to [resistor={info=$R_1$}] ++(left:1.5);
         \draw  (0, 0) -- ++(up:1.5) to [resistor={near start, info=$R_2$}, resistor={near end, info=$R_3$}] ++(right:3);
         \draw  (0, 0) to [resistor={info=$R_4$}] ++(right:3) -- ++(up:1.5);
-        \draw  (1.5, 1.5) -- ++(up:1); \node [contact] (contact2) at (1.5, 2.5) {  };
+        \draw  (1.5, 1.5) -- ++(up:1); \node [contact] (contact2) at (1.5, 2.5) {};
     \end{tikzpicture}
 }
 \answer{%
@@ -3341,13 +3341,13 @@
 }
 \answer{%
     \begin{align*}
-    R_0 &= R + \frac 1{\frac 1{R + R} + \frac 1{R} + \frac 1{R + R}} = R + \frac 1{\frac 2R} = \frac 32 R, \\
+    R_0 &= R + \frac 1{\frac 1{R+R} + \frac 1R + \frac 1{R+R}} = R + \frac 1{\frac 2R} = \frac 32 R, \\
     \eli &= \frac U{R_0} = \frac {2U}{3R}, \\
     U_1 &= \eli R_1 = \frac {2U}{3R} \cdot R = \frac 23 U = 100{,}0\,\text{В}, \\
     U_{23} &= U_{56} = U_4 = U - \eli R_1 = U - \frac {2U}{3R} \cdot R = \frac U3 = 50{,}0\,\text{В}, \\
-    \eli_2 &= \frac{U_4}{R_4} = \frac{U}{3R} \approx 10{,}0\,\text{А}, \\
-    \eli_1 &= \frac{U_{23}}{R_{23}} = \frac{\frac U3}{R + R} = \frac U{6R} \approx 5{,}0\,\text{А}, \\
-    \eli_3 &= \frac{U_{56}}{R_{56}} = \frac{\frac U3}{R + R} = \frac U{6R} \approx 5{,}0\,\text{А}, \\
+    \eli_2 &= \frac{U_4}{R_4} = \fracU{3R} \approx 10{,}0\,\text{А}, \\
+    \eli_1 &= \frac{U_{23}}{R_{23}} = \frac{\frac U3}{R+R} = \frac U{6R} \approx 5{,}0\,\text{А}, \\
+    \eli_3 &= \frac{U_{56}}{R_{56}} = \frac{\frac U3}{R+R} = \frac U{6R} \approx 5{,}0\,\text{А}, \\
     U_2 &= \eli_1 R_2 = \frac U{6R} \cdot R = \frac U6 = 25{,}0\,\text{В}, \\
     U_3 &= \eli_1 R_3 = \frac U{6R} \cdot R = \frac U3 = 25{,}0\,\text{В}, \\
     U_5 &= \eli_3 R_5 = \frac U{6R} \cdot R = \frac U5 = 25{,}0\,\text{В}, \\
@@ -3363,9 +3363,9 @@
     если $\ele_1 = 6\,\text{В}$, $\ele_2 = 25\,\text{В}$, $r_1 = 3\,\text{Ом}$, $r_2 = 6\,\text{Ом}$.
 
     \begin{tikzpicture}[circuit ee IEC, thick]
-        \draw  (0, 0) to [battery={rotate=-180,info={$\ele_1, r_1 $}}] (0, 3)
+        \draw  (0, 0) to [battery={rotate=-180,info={$\ele_1, r_1$}}] (0, 3)
                 -- (5, 3)
-                to [battery={rotate=-180, info'={$\ele_2, r_2 $}}] (5, 0)
+                to [battery={rotate=-180, info'={$\ele_2, r_2$}}] (5, 0)
                 -- (0, 0)
                 (2.5, 0) to [resistor={info=$R$}] (2.5, 3);
     \end{tikzpicture}
@@ -3374,9 +3374,9 @@
     Выберем 2 контура и один узел, запишем для них законы Кирхгофа:
 
     \begin{tikzpicture}[circuit ee IEC, thick]
-        \draw  (0, 0) to [battery={rotate=-180,info={$\ele_1, r_1 $}}, current direction={near end, info=$\eli_1$}] (0, 3)
+        \draw  (0, 0) to [battery={rotate=-180,info={$\ele_1, r_1$}}, current direction={near end, info=$\eli_1$}] (0, 3)
                 -- (5, 3)
-                to [battery={rotate=-180, info'={$\ele_2, r_2 $}}, current direction={near end, info=$\eli_2$}] (5, 0)
+                to [battery={rotate=-180, info'={$\ele_2, r_2$}}, current direction={near end, info=$\eli_2$}] (5, 0)
                 -- (0, 0)
                 (2.5, 0) to [resistor={info=$R$}, current direction'={near end, info=$\eli$}] (2.5, 3);
         \draw [-{Latex},color=red] (0.8, 1.9) arc [start angle = 135, end angle = -160, radius = 0.6];
@@ -3393,18 +3393,18 @@
         \end{cases}
         \qquad \implies \qquad
         \begin{cases}
-            \eli_1 = \frac{\ele_1 - \eli R}{ r_1 }, \\
-            \eli_2 = \frac{\ele_2 + \eli R}{ r_2 }, \\
+            \eli_1 = \frac{\ele_1 - \eli R}{r_1}, \\
+            \eli_2 = \frac{\ele_2 + \eli R}{r_2}, \\
             \eli - \eli_1 - \eli_2 = 0;
         \end{cases} \implies \\
-        &\implies \eli - \frac{\ele_1 - \eli R}{ r_1 } + \frac{\ele_2 + \eli R}{ r_2 } = 0, \\
-        &\eli\cbr{1 + \frac{ R }{ r_1 } + \frac{ R }{ r_2 }} - \frac{ \ele_1 }{ r_1 } + \frac{ \ele_2 }{ r_2 } = 0, \\
+        &\implies \eli - \frac{\ele_1 - \eli R}{r_1} + \frac{\ele_2 + \eli R}{r_2} = 0, \\
+        &\eli\cbr{ 1 + \frac{R}{r_1} + \frac{R}{r_2}} - \frac{\ele_1}{r_1} + \frac{\ele_2}{r_2} = 0, \\
         &\eli
-            = \frac{\frac{ \ele_1 }{ r_1 } - \frac{ \ele_2 }{ r_2 }}{1 + \frac{ R }{ r_1 } + \frac{ R }{ r_2 }}
-            = \frac{\frac{ 6\,\text{В} }{ 3\,\text{Ом} } - \frac{ 25\,\text{В} }{ 6\,\text{Ом} }}{1 + \frac{ 15\,\text{Ом} }{ 3\,\text{Ом} } + \frac{ 15\,\text{Ом} }{ 6\,\text{Ом} }}
+            = \frac{\frac{\ele_1}{r_1} - \frac{\ele_2}{r_2}}{ 1 + \frac{R}{r_1} + \frac{R}{r_2}}
+            = \frac{\frac{6\,\text{В}}{3\,\text{Ом}} - \frac{25\,\text{В}}{6\,\text{Ом}}}{ 1 + \frac{15\,\text{Ом}}{3\,\text{Ом}} + \frac{15\,\text{Ом}}{6\,\text{Ом}}}
             = -\frac{13}{51}\units{А}
             \approx -0{,}25500\,\text{А}, \\
-        &U  = \eli R = \frac{\frac{ \ele_1 }{ r_1 } - \frac{ \ele_2 }{ r_2 }}{1 + \frac{ R }{ r_1 } + \frac{ R }{ r_2 }} R
+        &U  = \eli R = \frac{\frac{\ele_1}{r_1} - \frac{\ele_2}{r_2}}{ 1 + \frac{R}{r_1} + \frac{R}{r_2}} R
             \approx -3{,}8240\,\text{В}.
     \end{align*}
 }
@@ -3424,7 +3424,7 @@
         \draw  (0, 0) to [resistor={info=$R_1$}] ++(left:1.5);
         \draw  (0, 0) -- ++(up:1.5) to [resistor={near start, info=$R_2$}, resistor={near end, info=$R_3$}] ++(right:3);
         \draw  (0, 0) to [resistor={info=$R_4$}] ++(right:3) -- ++(up:1.5);
-        \draw  (1.5, 1.5) -- ++(up:1); \node [contact] (contact2) at (1.5, 2.5) {  };
+        \draw  (1.5, 1.5) -- ++(up:1); \node [contact] (contact2) at (1.5, 2.5) {};
     \end{tikzpicture}
 }
 \answer{%
@@ -3451,13 +3451,13 @@
 }
 \answer{%
     \begin{align*}
-    R_0 &= R + \frac 1{\frac 1{R + R} + \frac 1{R} + \frac 1{R + R}} = R + \frac 1{\frac 2R} = \frac 32 R, \\
+    R_0 &= R + \frac 1{\frac 1{R+R} + \frac 1R + \frac 1{R+R}} = R + \frac 1{\frac 2R} = \frac 32 R, \\
     \eli &= \frac U{R_0} = \frac {2U}{3R}, \\
     U_1 &= \eli R_1 = \frac {2U}{3R} \cdot R = \frac 23 U = 20{,}0\,\text{В}, \\
     U_{23} &= U_{56} = U_4 = U - \eli R_1 = U - \frac {2U}{3R} \cdot R = \frac U3 = 10{,}0\,\text{В}, \\
-    \eli_2 &= \frac{U_4}{R_4} = \frac{U}{3R} \approx 2{,}0\,\text{А}, \\
-    \eli_1 &= \frac{U_{23}}{R_{23}} = \frac{\frac U3}{R + R} = \frac U{6R} \approx 1{,}0\,\text{А}, \\
-    \eli_3 &= \frac{U_{56}}{R_{56}} = \frac{\frac U3}{R + R} = \frac U{6R} \approx 1{,}0\,\text{А}, \\
+    \eli_2 &= \frac{U_4}{R_4} = \fracU{3R} \approx 2{,}0\,\text{А}, \\
+    \eli_1 &= \frac{U_{23}}{R_{23}} = \frac{\frac U3}{R+R} = \frac U{6R} \approx 1{,}0\,\text{А}, \\
+    \eli_3 &= \frac{U_{56}}{R_{56}} = \frac{\frac U3}{R+R} = \frac U{6R} \approx 1{,}0\,\text{А}, \\
     U_2 &= \eli_1 R_2 = \frac U{6R} \cdot R = \frac U6 = 5{,}0\,\text{В}, \\
     U_3 &= \eli_1 R_3 = \frac U{6R} \cdot R = \frac U3 = 5{,}0\,\text{В}, \\
     U_5 &= \eli_3 R_5 = \frac U{6R} \cdot R = \frac U5 = 5{,}0\,\text{В}, \\
@@ -3473,9 +3473,9 @@
     если $\ele_1 = 12\,\text{В}$, $\ele_2 = 15\,\text{В}$, $r_1 = 1\,\text{Ом}$, $r_2 = 2\,\text{Ом}$.
 
     \begin{tikzpicture}[circuit ee IEC, thick]
-        \draw  (0, 0) to [battery={rotate=-180,info={$\ele_1, r_1 $}}] (0, 3)
+        \draw  (0, 0) to [battery={rotate=-180,info={$\ele_1, r_1$}}] (0, 3)
                 -- (5, 3)
-                to [battery={rotate=-180, info'={$\ele_2, r_2 $}}] (5, 0)
+                to [battery={rotate=-180, info'={$\ele_2, r_2$}}] (5, 0)
                 -- (0, 0)
                 (2.5, 0) to [resistor={info=$R$}] (2.5, 3);
     \end{tikzpicture}
@@ -3484,9 +3484,9 @@
     Выберем 2 контура и один узел, запишем для них законы Кирхгофа:
 
     \begin{tikzpicture}[circuit ee IEC, thick]
-        \draw  (0, 0) to [battery={rotate=-180,info={$\ele_1, r_1 $}}, current direction={near end, info=$\eli_1$}] (0, 3)
+        \draw  (0, 0) to [battery={rotate=-180,info={$\ele_1, r_1$}}, current direction={near end, info=$\eli_1$}] (0, 3)
                 -- (5, 3)
-                to [battery={rotate=-180, info'={$\ele_2, r_2 $}}, current direction={near end, info=$\eli_2$}] (5, 0)
+                to [battery={rotate=-180, info'={$\ele_2, r_2$}}, current direction={near end, info=$\eli_2$}] (5, 0)
                 -- (0, 0)
                 (2.5, 0) to [resistor={info=$R$}, current direction'={near end, info=$\eli$}] (2.5, 3);
         \draw [-{Latex},color=red] (0.8, 1.9) arc [start angle = 135, end angle = -160, radius = 0.6];
@@ -3503,18 +3503,18 @@
         \end{cases}
         \qquad \implies \qquad
         \begin{cases}
-            \eli_1 = \frac{\ele_1 - \eli R}{ r_1 }, \\
-            \eli_2 = \frac{\ele_2 + \eli R}{ r_2 }, \\
+            \eli_1 = \frac{\ele_1 - \eli R}{r_1}, \\
+            \eli_2 = \frac{\ele_2 + \eli R}{r_2}, \\
             \eli - \eli_1 - \eli_2 = 0;
         \end{cases} \implies \\
-        &\implies \eli - \frac{\ele_1 - \eli R}{ r_1 } + \frac{\ele_2 + \eli R}{ r_2 } = 0, \\
-        &\eli\cbr{1 + \frac{ R }{ r_1 } + \frac{ R }{ r_2 }} - \frac{ \ele_1 }{ r_1 } + \frac{ \ele_2 }{ r_2 } = 0, \\
+        &\implies \eli - \frac{\ele_1 - \eli R}{r_1} + \frac{\ele_2 + \eli R}{r_2} = 0, \\
+        &\eli\cbr{ 1 + \frac{R}{r_1} + \frac{R}{r_2}} - \frac{\ele_1}{r_1} + \frac{\ele_2}{r_2} = 0, \\
         &\eli
-            = \frac{\frac{ \ele_1 }{ r_1 } - \frac{ \ele_2 }{ r_2 }}{1 + \frac{ R }{ r_1 } + \frac{ R }{ r_2 }}
-            = \frac{\frac{ 12\,\text{В} }{ 1\,\text{Ом} } - \frac{ 15\,\text{В} }{ 2\,\text{Ом} }}{1 + \frac{ 18\,\text{Ом} }{ 1\,\text{Ом} } + \frac{ 18\,\text{Ом} }{ 2\,\text{Ом} }}
+            = \frac{\frac{\ele_1}{r_1} - \frac{\ele_2}{r_2}}{ 1 + \frac{R}{r_1} + \frac{R}{r_2}}
+            = \frac{\frac{12\,\text{В}}{1\,\text{Ом}} - \frac{15\,\text{В}}{2\,\text{Ом}}}{ 1 + \frac{18\,\text{Ом}}{1\,\text{Ом}} + \frac{18\,\text{Ом}}{2\,\text{Ом}}}
             = \frac9{56}\units{А}
             \approx 0{,}161\,\text{А}, \\
-        &U  = \eli R = \frac{\frac{ \ele_1 }{ r_1 } - \frac{ \ele_2 }{ r_2 }}{1 + \frac{ R }{ r_1 } + \frac{ R }{ r_2 }} R
+        &U  = \eli R = \frac{\frac{\ele_1}{r_1} - \frac{\ele_2}{r_2}}{ 1 + \frac{R}{r_1} + \frac{R}{r_2}} R
             \approx 2{,}893\,\text{В}.
     \end{align*}
 }
@@ -3534,7 +3534,7 @@
         \draw  (0, 0) to [resistor={info=$R_1$}] ++(left:1.5);
         \draw  (0, 0) -- ++(up:1.5) to [resistor={near start, info=$R_2$}, resistor={near end, info=$R_3$}] ++(right:3);
         \draw  (0, 0) to [resistor={info=$R_4$}] ++(right:3) -- ++(up:1.5);
-        \draw  (1.5, 1.5) -- ++(up:1); \node [contact] (contact2) at (1.5, 2.5) {  };
+        \draw  (1.5, 1.5) -- ++(up:1); \node [contact] (contact2) at (1.5, 2.5) {};
     \end{tikzpicture}
 }
 \answer{%
@@ -3561,13 +3561,13 @@
 }
 \answer{%
     \begin{align*}
-    R_0 &= R + \frac 1{\frac 1{R + R} + \frac 1{R} + \frac 1{R + R}} = R + \frac 1{\frac 2R} = \frac 32 R, \\
+    R_0 &= R + \frac 1{\frac 1{R+R} + \frac 1R + \frac 1{R+R}} = R + \frac 1{\frac 2R} = \frac 32 R, \\
     \eli &= \frac U{R_0} = \frac {2U}{3R}, \\
     U_1 &= \eli R_1 = \frac {2U}{3R} \cdot R = \frac 23 U = 40{,}0\,\text{В}, \\
     U_{23} &= U_{56} = U_4 = U - \eli R_1 = U - \frac {2U}{3R} \cdot R = \frac U3 = 20{,}0\,\text{В}, \\
-    \eli_2 &= \frac{U_4}{R_4} = \frac{U}{3R} \approx 5{,}0\,\text{А}, \\
-    \eli_1 &= \frac{U_{23}}{R_{23}} = \frac{\frac U3}{R + R} = \frac U{6R} \approx 2{,}5\,\text{А}, \\
-    \eli_3 &= \frac{U_{56}}{R_{56}} = \frac{\frac U3}{R + R} = \frac U{6R} \approx 2{,}5\,\text{А}, \\
+    \eli_2 &= \frac{U_4}{R_4} = \fracU{3R} \approx 5{,}0\,\text{А}, \\
+    \eli_1 &= \frac{U_{23}}{R_{23}} = \frac{\frac U3}{R+R} = \frac U{6R} \approx 2{,}5\,\text{А}, \\
+    \eli_3 &= \frac{U_{56}}{R_{56}} = \frac{\frac U3}{R+R} = \frac U{6R} \approx 2{,}5\,\text{А}, \\
     U_2 &= \eli_1 R_2 = \frac U{6R} \cdot R = \frac U6 = 10{,}0\,\text{В}, \\
     U_3 &= \eli_1 R_3 = \frac U{6R} \cdot R = \frac U3 = 10{,}0\,\text{В}, \\
     U_5 &= \eli_3 R_5 = \frac U{6R} \cdot R = \frac U5 = 10{,}0\,\text{В}, \\
@@ -3583,9 +3583,9 @@
     если $\ele_1 = 18\,\text{В}$, $\ele_2 = 5\,\text{В}$, $r_1 = 3\,\text{Ом}$, $r_2 = 4\,\text{Ом}$.
 
     \begin{tikzpicture}[circuit ee IEC, thick]
-        \draw  (0, 0) to [battery={rotate=-180,info={$\ele_1, r_1 $}}] (0, 3)
+        \draw  (0, 0) to [battery={rotate=-180,info={$\ele_1, r_1$}}] (0, 3)
                 -- (5, 3)
-                to [battery={rotate=-180, info'={$\ele_2, r_2 $}}] (5, 0)
+                to [battery={rotate=-180, info'={$\ele_2, r_2$}}] (5, 0)
                 -- (0, 0)
                 (2.5, 0) to [resistor={info=$R$}] (2.5, 3);
     \end{tikzpicture}
@@ -3594,9 +3594,9 @@
     Выберем 2 контура и один узел, запишем для них законы Кирхгофа:
 
     \begin{tikzpicture}[circuit ee IEC, thick]
-        \draw  (0, 0) to [battery={rotate=-180,info={$\ele_1, r_1 $}}, current direction={near end, info=$\eli_1$}] (0, 3)
+        \draw  (0, 0) to [battery={rotate=-180,info={$\ele_1, r_1$}}, current direction={near end, info=$\eli_1$}] (0, 3)
                 -- (5, 3)
-                to [battery={rotate=-180, info'={$\ele_2, r_2 $}}, current direction={near end, info=$\eli_2$}] (5, 0)
+                to [battery={rotate=-180, info'={$\ele_2, r_2$}}, current direction={near end, info=$\eli_2$}] (5, 0)
                 -- (0, 0)
                 (2.5, 0) to [resistor={info=$R$}, current direction'={near end, info=$\eli$}] (2.5, 3);
         \draw [-{Latex},color=red] (0.8, 1.9) arc [start angle = 135, end angle = -160, radius = 0.6];
@@ -3613,18 +3613,18 @@
         \end{cases}
         \qquad \implies \qquad
         \begin{cases}
-            \eli_1 = \frac{\ele_1 - \eli R}{ r_1 }, \\
-            \eli_2 = \frac{\ele_2 + \eli R}{ r_2 }, \\
+            \eli_1 = \frac{\ele_1 - \eli R}{r_1}, \\
+            \eli_2 = \frac{\ele_2 + \eli R}{r_2}, \\
             \eli - \eli_1 - \eli_2 = 0;
         \end{cases} \implies \\
-        &\implies \eli - \frac{\ele_1 - \eli R}{ r_1 } + \frac{\ele_2 + \eli R}{ r_2 } = 0, \\
-        &\eli\cbr{1 + \frac{ R }{ r_1 } + \frac{ R }{ r_2 }} - \frac{ \ele_1 }{ r_1 } + \frac{ \ele_2 }{ r_2 } = 0, \\
+        &\implies \eli - \frac{\ele_1 - \eli R}{r_1} + \frac{\ele_2 + \eli R}{r_2} = 0, \\
+        &\eli\cbr{ 1 + \frac{R}{r_1} + \frac{R}{r_2}} - \frac{\ele_1}{r_1} + \frac{\ele_2}{r_2} = 0, \\
         &\eli
-            = \frac{\frac{ \ele_1 }{ r_1 } - \frac{ \ele_2 }{ r_2 }}{1 + \frac{ R }{ r_1 } + \frac{ R }{ r_2 }}
-            = \frac{\frac{ 18\,\text{В} }{ 3\,\text{Ом} } - \frac{ 5\,\text{В} }{ 4\,\text{Ом} }}{1 + \frac{ 10\,\text{Ом} }{ 3\,\text{Ом} } + \frac{ 10\,\text{Ом} }{ 4\,\text{Ом} }}
+            = \frac{\frac{\ele_1}{r_1} - \frac{\ele_2}{r_2}}{ 1 + \frac{R}{r_1} + \frac{R}{r_2}}
+            = \frac{\frac{18\,\text{В}}{3\,\text{Ом}} - \frac{5\,\text{В}}{4\,\text{Ом}}}{ 1 + \frac{10\,\text{Ом}}{3\,\text{Ом}} + \frac{10\,\text{Ом}}{4\,\text{Ом}}}
             = \frac{57}{82}\units{А}
             \approx 0{,}695\,\text{А}, \\
-        &U  = \eli R = \frac{\frac{ \ele_1 }{ r_1 } - \frac{ \ele_2 }{ r_2 }}{1 + \frac{ R }{ r_1 } + \frac{ R }{ r_2 }} R
+        &U  = \eli R = \frac{\frac{\ele_1}{r_1} - \frac{\ele_2}{r_2}}{ 1 + \frac{R}{r_1} + \frac{R}{r_2}} R
             \approx 6{,}951\,\text{В}.
     \end{align*}
 }
@@ -3644,7 +3644,7 @@
         \draw  (0, 0) to [resistor={info=$R_1$}] ++(left:1.5);
         \draw  (0, 0) -- ++(up:1.5) to [resistor={near start, info=$R_2$}, resistor={near end, info=$R_3$}] ++(right:3);
         \draw  (0, 0) to [resistor={info=$R_4$}] ++(right:3) -- ++(up:1.5);
-        \draw  (1.5, 1.5) -- ++(up:1); \node [contact] (contact2) at (1.5, 2.5) {  };
+        \draw  (1.5, 1.5) -- ++(up:1); \node [contact] (contact2) at (1.5, 2.5) {};
     \end{tikzpicture}
 }
 \answer{%
@@ -3671,13 +3671,13 @@
 }
 \answer{%
     \begin{align*}
-    R_0 &= R + \frac 1{\frac 1{R + R} + \frac 1{R} + \frac 1{R + R}} = R + \frac 1{\frac 2R} = \frac 32 R, \\
+    R_0 &= R + \frac 1{\frac 1{R+R} + \frac 1R + \frac 1{R+R}} = R + \frac 1{\frac 2R} = \frac 32 R, \\
     \eli &= \frac U{R_0} = \frac {2U}{3R}, \\
     U_1 &= \eli R_1 = \frac {2U}{3R} \cdot R = \frac 23 U = 60{,}0\,\text{В}, \\
     U_{23} &= U_{56} = U_4 = U - \eli R_1 = U - \frac {2U}{3R} \cdot R = \frac U3 = 30{,}0\,\text{В}, \\
-    \eli_2 &= \frac{U_4}{R_4} = \frac{U}{3R} \approx 6{,}0\,\text{А}, \\
-    \eli_1 &= \frac{U_{23}}{R_{23}} = \frac{\frac U3}{R + R} = \frac U{6R} \approx 3{,}0\,\text{А}, \\
-    \eli_3 &= \frac{U_{56}}{R_{56}} = \frac{\frac U3}{R + R} = \frac U{6R} \approx 3{,}0\,\text{А}, \\
+    \eli_2 &= \frac{U_4}{R_4} = \fracU{3R} \approx 6{,}0\,\text{А}, \\
+    \eli_1 &= \frac{U_{23}}{R_{23}} = \frac{\frac U3}{R+R} = \frac U{6R} \approx 3{,}0\,\text{А}, \\
+    \eli_3 &= \frac{U_{56}}{R_{56}} = \frac{\frac U3}{R+R} = \frac U{6R} \approx 3{,}0\,\text{А}, \\
     U_2 &= \eli_1 R_2 = \frac U{6R} \cdot R = \frac U6 = 15{,}0\,\text{В}, \\
     U_3 &= \eli_1 R_3 = \frac U{6R} \cdot R = \frac U3 = 15{,}0\,\text{В}, \\
     U_5 &= \eli_3 R_5 = \frac U{6R} \cdot R = \frac U5 = 15{,}0\,\text{В}, \\
@@ -3693,9 +3693,9 @@
     если $\ele_1 = 12\,\text{В}$, $\ele_2 = 25\,\text{В}$, $r_1 = 3\,\text{Ом}$, $r_2 = 6\,\text{Ом}$.
 
     \begin{tikzpicture}[circuit ee IEC, thick]
-        \draw  (0, 0) to [battery={rotate=-180,info={$\ele_1, r_1 $}}] (0, 3)
+        \draw  (0, 0) to [battery={rotate=-180,info={$\ele_1, r_1$}}] (0, 3)
                 -- (5, 3)
-                to [battery={rotate=-180, info'={$\ele_2, r_2 $}}] (5, 0)
+                to [battery={rotate=-180, info'={$\ele_2, r_2$}}] (5, 0)
                 -- (0, 0)
                 (2.5, 0) to [resistor={info=$R$}] (2.5, 3);
     \end{tikzpicture}
@@ -3704,9 +3704,9 @@
     Выберем 2 контура и один узел, запишем для них законы Кирхгофа:
 
     \begin{tikzpicture}[circuit ee IEC, thick]
-        \draw  (0, 0) to [battery={rotate=-180,info={$\ele_1, r_1 $}}, current direction={near end, info=$\eli_1$}] (0, 3)
+        \draw  (0, 0) to [battery={rotate=-180,info={$\ele_1, r_1$}}, current direction={near end, info=$\eli_1$}] (0, 3)
                 -- (5, 3)
-                to [battery={rotate=-180, info'={$\ele_2, r_2 $}}, current direction={near end, info=$\eli_2$}] (5, 0)
+                to [battery={rotate=-180, info'={$\ele_2, r_2$}}, current direction={near end, info=$\eli_2$}] (5, 0)
                 -- (0, 0)
                 (2.5, 0) to [resistor={info=$R$}, current direction'={near end, info=$\eli$}] (2.5, 3);
         \draw [-{Latex},color=red] (0.8, 1.9) arc [start angle = 135, end angle = -160, radius = 0.6];
@@ -3723,18 +3723,18 @@
         \end{cases}
         \qquad \implies \qquad
         \begin{cases}
-            \eli_1 = \frac{\ele_1 - \eli R}{ r_1 }, \\
-            \eli_2 = \frac{\ele_2 + \eli R}{ r_2 }, \\
+            \eli_1 = \frac{\ele_1 - \eli R}{r_1}, \\
+            \eli_2 = \frac{\ele_2 + \eli R}{r_2}, \\
             \eli - \eli_1 - \eli_2 = 0;
         \end{cases} \implies \\
-        &\implies \eli - \frac{\ele_1 - \eli R}{ r_1 } + \frac{\ele_2 + \eli R}{ r_2 } = 0, \\
-        &\eli\cbr{1 + \frac{ R }{ r_1 } + \frac{ R }{ r_2 }} - \frac{ \ele_1 }{ r_1 } + \frac{ \ele_2 }{ r_2 } = 0, \\
+        &\implies \eli - \frac{\ele_1 - \eli R}{r_1} + \frac{\ele_2 + \eli R}{r_2} = 0, \\
+        &\eli\cbr{ 1 + \frac{R}{r_1} + \frac{R}{r_2}} - \frac{\ele_1}{r_1} + \frac{\ele_2}{r_2} = 0, \\
         &\eli
-            = \frac{\frac{ \ele_1 }{ r_1 } - \frac{ \ele_2 }{ r_2 }}{1 + \frac{ R }{ r_1 } + \frac{ R }{ r_2 }}
-            = \frac{\frac{ 12\,\text{В} }{ 3\,\text{Ом} } - \frac{ 25\,\text{В} }{ 6\,\text{Ом} }}{1 + \frac{ 15\,\text{Ом} }{ 3\,\text{Ом} } + \frac{ 15\,\text{Ом} }{ 6\,\text{Ом} }}
+            = \frac{\frac{\ele_1}{r_1} - \frac{\ele_2}{r_2}}{ 1 + \frac{R}{r_1} + \frac{R}{r_2}}
+            = \frac{\frac{12\,\text{В}}{3\,\text{Ом}} - \frac{25\,\text{В}}{6\,\text{Ом}}}{ 1 + \frac{15\,\text{Ом}}{3\,\text{Ом}} + \frac{15\,\text{Ом}}{6\,\text{Ом}}}
             = -\frac1{51}\units{А}
             \approx -0{,}020000\,\text{А}, \\
-        &U  = \eli R = \frac{\frac{ \ele_1 }{ r_1 } - \frac{ \ele_2 }{ r_2 }}{1 + \frac{ R }{ r_1 } + \frac{ R }{ r_2 }} R
+        &U  = \eli R = \frac{\frac{\ele_1}{r_1} - \frac{\ele_2}{r_2}}{ 1 + \frac{R}{r_1} + \frac{R}{r_2}} R
             \approx -0{,}29400\,\text{В}.
     \end{align*}
 }
@@ -3754,7 +3754,7 @@
         \draw  (0, 0) to [resistor={info=$R_1$}] ++(left:1.5);
         \draw  (0, 0) -- ++(up:1.5) to [resistor={near start, info=$R_2$}, resistor={near end, info=$R_3$}] ++(right:3);
         \draw  (0, 0) to [resistor={info=$R_4$}] ++(right:3) -- ++(up:1.5);
-        \draw  (1.5, 1.5) -- ++(up:1); \node [contact] (contact2) at (1.5, 2.5) {  };
+        \draw  (1.5, 1.5) -- ++(up:1); \node [contact] (contact2) at (1.5, 2.5) {};
     \end{tikzpicture}
 }
 \answer{%
@@ -3781,13 +3781,13 @@
 }
 \answer{%
     \begin{align*}
-    R_0 &= R + \frac 1{\frac 1{R + R} + \frac 1{R} + \frac 1{R + R}} = R + \frac 1{\frac 2R} = \frac 32 R, \\
+    R_0 &= R + \frac 1{\frac 1{R+R} + \frac 1R + \frac 1{R+R}} = R + \frac 1{\frac 2R} = \frac 32 R, \\
     \eli &= \frac U{R_0} = \frac {2U}{3R}, \\
     U_1 &= \eli R_1 = \frac {2U}{3R} \cdot R = \frac 23 U = 80{,}0\,\text{В}, \\
     U_{23} &= U_{56} = U_4 = U - \eli R_1 = U - \frac {2U}{3R} \cdot R = \frac U3 = 40{,}0\,\text{В}, \\
-    \eli_2 &= \frac{U_4}{R_4} = \frac{U}{3R} \approx 8{,}0\,\text{А}, \\
-    \eli_1 &= \frac{U_{23}}{R_{23}} = \frac{\frac U3}{R + R} = \frac U{6R} \approx 4{,}0\,\text{А}, \\
-    \eli_3 &= \frac{U_{56}}{R_{56}} = \frac{\frac U3}{R + R} = \frac U{6R} \approx 4{,}0\,\text{А}, \\
+    \eli_2 &= \frac{U_4}{R_4} = \fracU{3R} \approx 8{,}0\,\text{А}, \\
+    \eli_1 &= \frac{U_{23}}{R_{23}} = \frac{\frac U3}{R+R} = \frac U{6R} \approx 4{,}0\,\text{А}, \\
+    \eli_3 &= \frac{U_{56}}{R_{56}} = \frac{\frac U3}{R+R} = \frac U{6R} \approx 4{,}0\,\text{А}, \\
     U_2 &= \eli_1 R_2 = \frac U{6R} \cdot R = \frac U6 = 20{,}0\,\text{В}, \\
     U_3 &= \eli_1 R_3 = \frac U{6R} \cdot R = \frac U3 = 20{,}0\,\text{В}, \\
     U_5 &= \eli_3 R_5 = \frac U{6R} \cdot R = \frac U5 = 20{,}0\,\text{В}, \\
@@ -3803,9 +3803,9 @@
     если $\ele_1 = 6\,\text{В}$, $\ele_2 = 25\,\text{В}$, $r_1 = 1\,\text{Ом}$, $r_2 = 2\,\text{Ом}$.
 
     \begin{tikzpicture}[circuit ee IEC, thick]
-        \draw  (0, 0) to [battery={rotate=-180,info={$\ele_1, r_1 $}}] (0, 3)
+        \draw  (0, 0) to [battery={rotate=-180,info={$\ele_1, r_1$}}] (0, 3)
                 -- (5, 3)
-                to [battery={rotate=-180, info'={$\ele_2, r_2 $}}] (5, 0)
+                to [battery={rotate=-180, info'={$\ele_2, r_2$}}] (5, 0)
                 -- (0, 0)
                 (2.5, 0) to [resistor={info=$R$}] (2.5, 3);
     \end{tikzpicture}
@@ -3814,9 +3814,9 @@
     Выберем 2 контура и один узел, запишем для них законы Кирхгофа:
 
     \begin{tikzpicture}[circuit ee IEC, thick]
-        \draw  (0, 0) to [battery={rotate=-180,info={$\ele_1, r_1 $}}, current direction={near end, info=$\eli_1$}] (0, 3)
+        \draw  (0, 0) to [battery={rotate=-180,info={$\ele_1, r_1$}}, current direction={near end, info=$\eli_1$}] (0, 3)
                 -- (5, 3)
-                to [battery={rotate=-180, info'={$\ele_2, r_2 $}}, current direction={near end, info=$\eli_2$}] (5, 0)
+                to [battery={rotate=-180, info'={$\ele_2, r_2$}}, current direction={near end, info=$\eli_2$}] (5, 0)
                 -- (0, 0)
                 (2.5, 0) to [resistor={info=$R$}, current direction'={near end, info=$\eli$}] (2.5, 3);
         \draw [-{Latex},color=red] (0.8, 1.9) arc [start angle = 135, end angle = -160, radius = 0.6];
@@ -3833,18 +3833,18 @@
         \end{cases}
         \qquad \implies \qquad
         \begin{cases}
-            \eli_1 = \frac{\ele_1 - \eli R}{ r_1 }, \\
-            \eli_2 = \frac{\ele_2 + \eli R}{ r_2 }, \\
+            \eli_1 = \frac{\ele_1 - \eli R}{r_1}, \\
+            \eli_2 = \frac{\ele_2 + \eli R}{r_2}, \\
             \eli - \eli_1 - \eli_2 = 0;
         \end{cases} \implies \\
-        &\implies \eli - \frac{\ele_1 - \eli R}{ r_1 } + \frac{\ele_2 + \eli R}{ r_2 } = 0, \\
-        &\eli\cbr{1 + \frac{ R }{ r_1 } + \frac{ R }{ r_2 }} - \frac{ \ele_1 }{ r_1 } + \frac{ \ele_2 }{ r_2 } = 0, \\
+        &\implies \eli - \frac{\ele_1 - \eli R}{r_1} + \frac{\ele_2 + \eli R}{r_2} = 0, \\
+        &\eli\cbr{ 1 + \frac{R}{r_1} + \frac{R}{r_2}} - \frac{\ele_1}{r_1} + \frac{\ele_2}{r_2} = 0, \\
         &\eli
-            = \frac{\frac{ \ele_1 }{ r_1 } - \frac{ \ele_2 }{ r_2 }}{1 + \frac{ R }{ r_1 } + \frac{ R }{ r_2 }}
-            = \frac{\frac{ 6\,\text{В} }{ 1\,\text{Ом} } - \frac{ 25\,\text{В} }{ 2\,\text{Ом} }}{1 + \frac{ 18\,\text{Ом} }{ 1\,\text{Ом} } + \frac{ 18\,\text{Ом} }{ 2\,\text{Ом} }}
+            = \frac{\frac{\ele_1}{r_1} - \frac{\ele_2}{r_2}}{ 1 + \frac{R}{r_1} + \frac{R}{r_2}}
+            = \frac{\frac{6\,\text{В}}{1\,\text{Ом}} - \frac{25\,\text{В}}{2\,\text{Ом}}}{ 1 + \frac{18\,\text{Ом}}{1\,\text{Ом}} + \frac{18\,\text{Ом}}{2\,\text{Ом}}}
             = -\frac{13}{56}\units{А}
             \approx -0{,}23200\,\text{А}, \\
-        &U  = \eli R = \frac{\frac{ \ele_1 }{ r_1 } - \frac{ \ele_2 }{ r_2 }}{1 + \frac{ R }{ r_1 } + \frac{ R }{ r_2 }} R
+        &U  = \eli R = \frac{\frac{\ele_1}{r_1} - \frac{\ele_2}{r_2}}{ 1 + \frac{R}{r_1} + \frac{R}{r_2}} R
             \approx -4{,}1790\,\text{В}.
     \end{align*}
 }
@@ -3864,7 +3864,7 @@
         \draw  (0, 0) to [resistor={info=$R_1$}] ++(left:1.5);
         \draw  (0, 0) -- ++(up:1.5) to [resistor={near start, info=$R_2$}, resistor={near end, info=$R_3$}] ++(right:3);
         \draw  (0, 0) to [resistor={info=$R_4$}] ++(right:3) -- ++(up:1.5);
-        \draw  (3, 1.5) -- ++(right:0.5); \node [contact] (contact2) at (3.5, 1.5) {  };
+        \draw  (3, 1.5) -- ++(right:0.5); \node [contact] (contact2) at (3.5, 1.5) {};
     \end{tikzpicture}
 }
 \answer{%
@@ -3891,13 +3891,13 @@
 }
 \answer{%
     \begin{align*}
-    R_0 &= R + \frac 1{\frac 1{R + R} + \frac 1{R} + \frac 1{R + R}} = R + \frac 1{\frac 2R} = \frac 32 R, \\
+    R_0 &= R + \frac 1{\frac 1{R+R} + \frac 1R + \frac 1{R+R}} = R + \frac 1{\frac 2R} = \frac 32 R, \\
     \eli &= \frac U{R_0} = \frac {2U}{3R}, \\
     U_1 &= \eli R_1 = \frac {2U}{3R} \cdot R = \frac 23 U = 60{,}0\,\text{В}, \\
     U_{23} &= U_{56} = U_4 = U - \eli R_1 = U - \frac {2U}{3R} \cdot R = \frac U3 = 30{,}0\,\text{В}, \\
-    \eli_2 &= \frac{U_4}{R_4} = \frac{U}{3R} \approx 3{,}0\,\text{А}, \\
-    \eli_1 &= \frac{U_{23}}{R_{23}} = \frac{\frac U3}{R + R} = \frac U{6R} \approx 1{,}5\,\text{А}, \\
-    \eli_3 &= \frac{U_{56}}{R_{56}} = \frac{\frac U3}{R + R} = \frac U{6R} \approx 1{,}5\,\text{А}, \\
+    \eli_2 &= \frac{U_4}{R_4} = \fracU{3R} \approx 3{,}0\,\text{А}, \\
+    \eli_1 &= \frac{U_{23}}{R_{23}} = \frac{\frac U3}{R+R} = \frac U{6R} \approx 1{,}5\,\text{А}, \\
+    \eli_3 &= \frac{U_{56}}{R_{56}} = \frac{\frac U3}{R+R} = \frac U{6R} \approx 1{,}5\,\text{А}, \\
     U_2 &= \eli_1 R_2 = \frac U{6R} \cdot R = \frac U6 = 15{,}0\,\text{В}, \\
     U_3 &= \eli_1 R_3 = \frac U{6R} \cdot R = \frac U3 = 15{,}0\,\text{В}, \\
     U_5 &= \eli_3 R_5 = \frac U{6R} \cdot R = \frac U5 = 15{,}0\,\text{В}, \\
@@ -3913,9 +3913,9 @@
     если $\ele_1 = 18\,\text{В}$, $\ele_2 = 15\,\text{В}$, $r_1 = 2\,\text{Ом}$, $r_2 = 6\,\text{Ом}$.
 
     \begin{tikzpicture}[circuit ee IEC, thick]
-        \draw  (0, 0) to [battery={rotate=-180,info={$\ele_1, r_1 $}}] (0, 3)
+        \draw  (0, 0) to [battery={rotate=-180,info={$\ele_1, r_1$}}] (0, 3)
                 -- (5, 3)
-                to [battery={rotate=-180, info'={$\ele_2, r_2 $}}] (5, 0)
+                to [battery={rotate=-180, info'={$\ele_2, r_2$}}] (5, 0)
                 -- (0, 0)
                 (2.5, 0) to [resistor={info=$R$}] (2.5, 3);
     \end{tikzpicture}
@@ -3924,9 +3924,9 @@
     Выберем 2 контура и один узел, запишем для них законы Кирхгофа:
 
     \begin{tikzpicture}[circuit ee IEC, thick]
-        \draw  (0, 0) to [battery={rotate=-180,info={$\ele_1, r_1 $}}, current direction={near end, info=$\eli_1$}] (0, 3)
+        \draw  (0, 0) to [battery={rotate=-180,info={$\ele_1, r_1$}}, current direction={near end, info=$\eli_1$}] (0, 3)
                 -- (5, 3)
-                to [battery={rotate=-180, info'={$\ele_2, r_2 $}}, current direction={near end, info=$\eli_2$}] (5, 0)
+                to [battery={rotate=-180, info'={$\ele_2, r_2$}}, current direction={near end, info=$\eli_2$}] (5, 0)
                 -- (0, 0)
                 (2.5, 0) to [resistor={info=$R$}, current direction'={near end, info=$\eli$}] (2.5, 3);
         \draw [-{Latex},color=red] (0.8, 1.9) arc [start angle = 135, end angle = -160, radius = 0.6];
@@ -3943,18 +3943,18 @@
         \end{cases}
         \qquad \implies \qquad
         \begin{cases}
-            \eli_1 = \frac{\ele_1 - \eli R}{ r_1 }, \\
-            \eli_2 = \frac{\ele_2 + \eli R}{ r_2 }, \\
+            \eli_1 = \frac{\ele_1 - \eli R}{r_1}, \\
+            \eli_2 = \frac{\ele_2 + \eli R}{r_2}, \\
             \eli - \eli_1 - \eli_2 = 0;
         \end{cases} \implies \\
-        &\implies \eli - \frac{\ele_1 - \eli R}{ r_1 } + \frac{\ele_2 + \eli R}{ r_2 } = 0, \\
-        &\eli\cbr{1 + \frac{ R }{ r_1 } + \frac{ R }{ r_2 }} - \frac{ \ele_1 }{ r_1 } + \frac{ \ele_2 }{ r_2 } = 0, \\
+        &\implies \eli - \frac{\ele_1 - \eli R}{r_1} + \frac{\ele_2 + \eli R}{r_2} = 0, \\
+        &\eli\cbr{ 1 + \frac{R}{r_1} + \frac{R}{r_2}} - \frac{\ele_1}{r_1} + \frac{\ele_2}{r_2} = 0, \\
         &\eli
-            = \frac{\frac{ \ele_1 }{ r_1 } - \frac{ \ele_2 }{ r_2 }}{1 + \frac{ R }{ r_1 } + \frac{ R }{ r_2 }}
-            = \frac{\frac{ 18\,\text{В} }{ 2\,\text{Ом} } - \frac{ 15\,\text{В} }{ 6\,\text{Ом} }}{1 + \frac{ 10\,\text{Ом} }{ 2\,\text{Ом} } + \frac{ 10\,\text{Ом} }{ 6\,\text{Ом} }}
+            = \frac{\frac{\ele_1}{r_1} - \frac{\ele_2}{r_2}}{ 1 + \frac{R}{r_1} + \frac{R}{r_2}}
+            = \frac{\frac{18\,\text{В}}{2\,\text{Ом}} - \frac{15\,\text{В}}{6\,\text{Ом}}}{ 1 + \frac{10\,\text{Ом}}{2\,\text{Ом}} + \frac{10\,\text{Ом}}{6\,\text{Ом}}}
             = \frac{39}{46}\units{А}
             \approx 0{,}848\,\text{А}, \\
-        &U  = \eli R = \frac{\frac{ \ele_1 }{ r_1 } - \frac{ \ele_2 }{ r_2 }}{1 + \frac{ R }{ r_1 } + \frac{ R }{ r_2 }} R
+        &U  = \eli R = \frac{\frac{\ele_1}{r_1} - \frac{\ele_2}{r_2}}{ 1 + \frac{R}{r_1} + \frac{R}{r_2}} R
             \approx 8{,}478\,\text{В}.
     \end{align*}
 }

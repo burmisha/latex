@@ -42,7 +42,7 @@
             \draw[-{Latex}] (0, 0) -- (0, 7) node[above left] {$P$};
             \draw[-{Latex}] (0, 0) -- (10, 0) node[right] {$V$};
 
-            \draw[dashed] (0, 2) node[left] {$P_1 = P_0$} -| (3, 0) node[below] {$V_1 = V_2 = V_0$ };
+            \draw[dashed] (0, 2) node[left] {$P_1 = P_0$} -| (3, 0) node[below] {$V_1 = V_2 = V_0$};
             \draw[dashed] (0, 6) node[left] {$P_2 = P_3 = 6P_0$} -| (9, 0) node[below] {$V_3 = 3V_0$};
 
             \draw (3, 2) node[above left]{1} node[below left]{$T_1 = T_0$}
@@ -120,14 +120,14 @@
             &= \frac 32 (P\Delta V + V \Delta P) + P \Delta V =  \frac 52 P\Delta V + \frac 32 V \Delta P = \\
             &= \frac 52 P\Delta V + \frac 32 V \cdot \cbr{- \frac{P_0}{V_0} \Delta V} = \frac{\Delta V}2 \cdot \cbr{5P - \frac{P_0}{V_0} V} = \\
             &= \frac{\Delta V}2 \cdot \cbr{5 \cdot \cbr{7P_0 - \frac{P_0}{V_0} V} - \frac{P_0}{V_0} V}
-             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 7 - 8\frac{V}{V_0}}.
+             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 7 - 8\fracV{V_0}}.
         \end{align*}
 
         Таком образом, знак количества теплоты $Q$ на участке 23 зависит от конкретного значения $V$:
         \begin{itemize}
             \item $\Delta V > 0$ на всём участке 23, поскольку газ расширяется,
             \item $P > 0$ — всегда, у нас идеальный газ, удары о стенки сосуда абсолютно упругие, а молекулы не взаимодействуют и поэтому давление только положительно,
-            \item если $5 \cdot 7 - 8\frac{V}{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
+            \item если $5 \cdot 7 - 8\fracV{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
         \end{itemize}
         Решая последнее неравенство, получаем конкретное значение $V^*$: при $V < V^*$ тепло подводят, далее~— отводят.
         Тут *~--- некоторая точка между точками 2 и 3, конкретные значения надо досчитать:
@@ -151,7 +151,7 @@
         \eta &= \frac{A_\text{цикл}}{Q_+} = \frac{A_\text{цикл}}{Q_{12} + Q_{2*}}
             = \frac{A_\text{цикл}}{A_{12} + \Delta U_{12} + A_{2*} + \Delta U_{2*}} = \\
             &= \frac{\frac{25}2 \cdot P_0V_0}{0 + \frac{15}2 \cdot P_0 V_0 + \frac{1863}{128} \cdot P_0 V_0 + \frac{1053}{128} \cdot P_0 V_0}
-             = \frac{\frac{25}2}{\frac{15}2 + \frac{1863}{128} + \frac{1053}{128}}
+             = \frac{A_bonus_cycle:LaTeX}{\frac{15}2 + \frac{1863}{128} + \frac{1053}{128}}
              = \frac{400}{969} \leftarrow \text{вжух и готово!}
         \end{align*}
 }
@@ -229,7 +229,7 @@
             \draw[-{Latex}] (0, 0) -- (0, 7) node[above left] {$P$};
             \draw[-{Latex}] (0, 0) -- (10, 0) node[right] {$V$};
 
-            \draw[dashed] (0, 2) node[left] {$P_1 = P_0$} -| (3, 0) node[below] {$V_1 = V_2 = V_0$ };
+            \draw[dashed] (0, 2) node[left] {$P_1 = P_0$} -| (3, 0) node[below] {$V_1 = V_2 = V_0$};
             \draw[dashed] (0, 6) node[left] {$P_2 = P_3 = 5P_0$} -| (9, 0) node[below] {$V_3 = 3V_0$};
 
             \draw (3, 2) node[above left]{1} node[below left]{$T_1 = T_0$}
@@ -307,14 +307,14 @@
             &= \frac 32 (P\Delta V + V \Delta P) + P \Delta V =  \frac 52 P\Delta V + \frac 32 V \Delta P = \\
             &= \frac 52 P\Delta V + \frac 32 V \cdot \cbr{- \frac{P_0}{V_0} \Delta V} = \frac{\Delta V}2 \cdot \cbr{5P - \frac{P_0}{V_0} V} = \\
             &= \frac{\Delta V}2 \cdot \cbr{5 \cdot \cbr{6P_0 - \frac{P_0}{V_0} V} - \frac{P_0}{V_0} V}
-             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 6 - 8\frac{V}{V_0}}.
+             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 6 - 8\fracV{V_0}}.
         \end{align*}
 
         Таком образом, знак количества теплоты $Q$ на участке 23 зависит от конкретного значения $V$:
         \begin{itemize}
             \item $\Delta V > 0$ на всём участке 23, поскольку газ расширяется,
             \item $P > 0$ — всегда, у нас идеальный газ, удары о стенки сосуда абсолютно упругие, а молекулы не взаимодействуют и поэтому давление только положительно,
-            \item если $5 \cdot 6 - 8\frac{V}{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
+            \item если $5 \cdot 6 - 8\fracV{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
         \end{itemize}
         Решая последнее неравенство, получаем конкретное значение $V^*$: при $V < V^*$ тепло подводят, далее~— отводят.
         Тут *~--- некоторая точка между точками 2 и 3, конкретные значения надо досчитать:
@@ -338,7 +338,7 @@
         \eta &= \frac{A_\text{цикл}}{Q_+} = \frac{A_\text{цикл}}{Q_{12} + Q_{2*}}
             = \frac{A_\text{цикл}}{A_{12} + \Delta U_{12} + A_{2*} + \Delta U_{2*}} = \\
             &= \frac{8 \cdot P_0V_0}{0 + 6 \cdot P_0 V_0 + \frac{319}{32} \cdot P_0 V_0 + \frac{165}{32} \cdot P_0 V_0}
-             = \frac{8}{6 + \frac{319}{32} + \frac{165}{32}}
+             = \frac{A_bonus_cycle:LaTeX}{6 + \frac{319}{32} + \frac{165}{32}}
              = \frac{64}{169} \leftarrow \text{вжух и готово!}
         \end{align*}
 }
@@ -416,7 +416,7 @@
             \draw[-{Latex}] (0, 0) -- (0, 7) node[above left] {$P$};
             \draw[-{Latex}] (0, 0) -- (10, 0) node[right] {$V$};
 
-            \draw[dashed] (0, 2) node[left] {$P_1 = P_0$} -| (3, 0) node[below] {$V_1 = V_2 = V_0$ };
+            \draw[dashed] (0, 2) node[left] {$P_1 = P_0$} -| (3, 0) node[below] {$V_1 = V_2 = V_0$};
             \draw[dashed] (0, 6) node[left] {$P_2 = P_3 = 3P_0$} -| (9, 0) node[below] {$V_3 = 4V_0$};
 
             \draw (3, 2) node[above left]{1} node[below left]{$T_1 = T_0$}
@@ -494,14 +494,14 @@
             &= \frac 32 (P\Delta V + V \Delta P) + P \Delta V =  \frac 52 P\Delta V + \frac 32 V \Delta P = \\
             &= \frac 52 P\Delta V + \frac 32 V \cdot \cbr{- \frac{P_0}{V_0} \Delta V} = \frac{\Delta V}2 \cdot \cbr{5P - \frac{P_0}{V_0} V} = \\
             &= \frac{\Delta V}2 \cdot \cbr{5 \cdot \cbr{4P_0 - \frac{P_0}{V_0} V} - \frac{P_0}{V_0} V}
-             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 4 - 8\frac{V}{V_0}}.
+             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 4 - 8\fracV{V_0}}.
         \end{align*}
 
         Таком образом, знак количества теплоты $Q$ на участке 23 зависит от конкретного значения $V$:
         \begin{itemize}
             \item $\Delta V > 0$ на всём участке 23, поскольку газ расширяется,
             \item $P > 0$ — всегда, у нас идеальный газ, удары о стенки сосуда абсолютно упругие, а молекулы не взаимодействуют и поэтому давление только положительно,
-            \item если $5 \cdot 4 - 8\frac{V}{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
+            \item если $5 \cdot 4 - 8\fracV{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
         \end{itemize}
         Решая последнее неравенство, получаем конкретное значение $V^*$: при $V < V^*$ тепло подводят, далее~— отводят.
         Тут *~--- некоторая точка между точками 2 и 3, конкретные значения надо досчитать:
@@ -525,7 +525,7 @@
         \eta &= \frac{A_\text{цикл}}{Q_+} = \frac{A_\text{цикл}}{Q_{12} + Q_{2*}}
             = \frac{A_\text{цикл}}{A_{12} + \Delta U_{12} + A_{2*} + \Delta U_{2*}} = \\
             &= \frac{2 \cdot P_0V_0}{0 + 3 \cdot P_0 V_0 + \frac{27}8 \cdot P_0 V_0 + \frac98 \cdot P_0 V_0}
-             = \frac{2}{3 + \frac{27}8 + \frac98}
+             = \frac{A_bonus_cycle:LaTeX}{3 + \frac{27}8 + \frac98}
              = \frac4{15} \leftarrow \text{вжух и готово!}
         \end{align*}
 }
@@ -603,7 +603,7 @@
             \draw[-{Latex}] (0, 0) -- (0, 7) node[above left] {$P$};
             \draw[-{Latex}] (0, 0) -- (10, 0) node[right] {$V$};
 
-            \draw[dashed] (0, 2) node[left] {$P_1 = P_0$} -| (3, 0) node[below] {$V_1 = V_2 = V_0$ };
+            \draw[dashed] (0, 2) node[left] {$P_1 = P_0$} -| (3, 0) node[below] {$V_1 = V_2 = V_0$};
             \draw[dashed] (0, 6) node[left] {$P_2 = P_3 = 4P_0$} -| (9, 0) node[below] {$V_3 = 4V_0$};
 
             \draw (3, 2) node[above left]{1} node[below left]{$T_1 = T_0$}
@@ -681,14 +681,14 @@
             &= \frac 32 (P\Delta V + V \Delta P) + P \Delta V =  \frac 52 P\Delta V + \frac 32 V \Delta P = \\
             &= \frac 52 P\Delta V + \frac 32 V \cdot \cbr{- \frac{P_0}{V_0} \Delta V} = \frac{\Delta V}2 \cdot \cbr{5P - \frac{P_0}{V_0} V} = \\
             &= \frac{\Delta V}2 \cdot \cbr{5 \cdot \cbr{5P_0 - \frac{P_0}{V_0} V} - \frac{P_0}{V_0} V}
-             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 5 - 8\frac{V}{V_0}}.
+             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 5 - 8\fracV{V_0}}.
         \end{align*}
 
         Таком образом, знак количества теплоты $Q$ на участке 23 зависит от конкретного значения $V$:
         \begin{itemize}
             \item $\Delta V > 0$ на всём участке 23, поскольку газ расширяется,
             \item $P > 0$ — всегда, у нас идеальный газ, удары о стенки сосуда абсолютно упругие, а молекулы не взаимодействуют и поэтому давление только положительно,
-            \item если $5 \cdot 5 - 8\frac{V}{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
+            \item если $5 \cdot 5 - 8\fracV{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
         \end{itemize}
         Решая последнее неравенство, получаем конкретное значение $V^*$: при $V < V^*$ тепло подводят, далее~— отводят.
         Тут *~--- некоторая точка между точками 2 и 3, конкретные значения надо досчитать:
@@ -712,7 +712,7 @@
         \eta &= \frac{A_\text{цикл}}{Q_+} = \frac{A_\text{цикл}}{Q_{12} + Q_{2*}}
             = \frac{A_\text{цикл}}{A_{12} + \Delta U_{12} + A_{2*} + \Delta U_{2*}} = \\
             &= \frac{\frac92 \cdot P_0V_0}{0 + \frac92 \cdot P_0 V_0 + \frac{799}{128} \cdot P_0 V_0 + \frac{357}{128} \cdot P_0 V_0}
-             = \frac{\frac92}{\frac92 + \frac{799}{128} + \frac{357}{128}}
+             = \frac{A_bonus_cycle:LaTeX}{\frac92 + \frac{799}{128} + \frac{357}{128}}
              = \frac{144}{433} \leftarrow \text{вжух и готово!}
         \end{align*}
 }
@@ -790,7 +790,7 @@
             \draw[-{Latex}] (0, 0) -- (0, 7) node[above left] {$P$};
             \draw[-{Latex}] (0, 0) -- (10, 0) node[right] {$V$};
 
-            \draw[dashed] (0, 2) node[left] {$P_1 = P_0$} -| (3, 0) node[below] {$V_1 = V_2 = V_0$ };
+            \draw[dashed] (0, 2) node[left] {$P_1 = P_0$} -| (3, 0) node[below] {$V_1 = V_2 = V_0$};
             \draw[dashed] (0, 6) node[left] {$P_2 = P_3 = 5P_0$} -| (9, 0) node[below] {$V_3 = 3V_0$};
 
             \draw (3, 2) node[above left]{1} node[below left]{$T_1 = T_0$}
@@ -868,14 +868,14 @@
             &= \frac 32 (P\Delta V + V \Delta P) + P \Delta V =  \frac 52 P\Delta V + \frac 32 V \Delta P = \\
             &= \frac 52 P\Delta V + \frac 32 V \cdot \cbr{- \frac{P_0}{V_0} \Delta V} = \frac{\Delta V}2 \cdot \cbr{5P - \frac{P_0}{V_0} V} = \\
             &= \frac{\Delta V}2 \cdot \cbr{5 \cdot \cbr{6P_0 - \frac{P_0}{V_0} V} - \frac{P_0}{V_0} V}
-             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 6 - 8\frac{V}{V_0}}.
+             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 6 - 8\fracV{V_0}}.
         \end{align*}
 
         Таком образом, знак количества теплоты $Q$ на участке 23 зависит от конкретного значения $V$:
         \begin{itemize}
             \item $\Delta V > 0$ на всём участке 23, поскольку газ расширяется,
             \item $P > 0$ — всегда, у нас идеальный газ, удары о стенки сосуда абсолютно упругие, а молекулы не взаимодействуют и поэтому давление только положительно,
-            \item если $5 \cdot 6 - 8\frac{V}{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
+            \item если $5 \cdot 6 - 8\fracV{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
         \end{itemize}
         Решая последнее неравенство, получаем конкретное значение $V^*$: при $V < V^*$ тепло подводят, далее~— отводят.
         Тут *~--- некоторая точка между точками 2 и 3, конкретные значения надо досчитать:
@@ -899,7 +899,7 @@
         \eta &= \frac{A_\text{цикл}}{Q_+} = \frac{A_\text{цикл}}{Q_{12} + Q_{2*}}
             = \frac{A_\text{цикл}}{A_{12} + \Delta U_{12} + A_{2*} + \Delta U_{2*}} = \\
             &= \frac{8 \cdot P_0V_0}{0 + 6 \cdot P_0 V_0 + \frac{319}{32} \cdot P_0 V_0 + \frac{165}{32} \cdot P_0 V_0}
-             = \frac{8}{6 + \frac{319}{32} + \frac{165}{32}}
+             = \frac{A_bonus_cycle:LaTeX}{6 + \frac{319}{32} + \frac{165}{32}}
              = \frac{64}{169} \leftarrow \text{вжух и готово!}
         \end{align*}
 }
@@ -977,7 +977,7 @@
             \draw[-{Latex}] (0, 0) -- (0, 7) node[above left] {$P$};
             \draw[-{Latex}] (0, 0) -- (10, 0) node[right] {$V$};
 
-            \draw[dashed] (0, 2) node[left] {$P_1 = P_0$} -| (3, 0) node[below] {$V_1 = V_2 = V_0$ };
+            \draw[dashed] (0, 2) node[left] {$P_1 = P_0$} -| (3, 0) node[below] {$V_1 = V_2 = V_0$};
             \draw[dashed] (0, 6) node[left] {$P_2 = P_3 = 2P_0$} -| (9, 0) node[below] {$V_3 = 3V_0$};
 
             \draw (3, 2) node[above left]{1} node[below left]{$T_1 = T_0$}
@@ -1055,14 +1055,14 @@
             &= \frac 32 (P\Delta V + V \Delta P) + P \Delta V =  \frac 52 P\Delta V + \frac 32 V \Delta P = \\
             &= \frac 52 P\Delta V + \frac 32 V \cdot \cbr{- \frac{P_0}{V_0} \Delta V} = \frac{\Delta V}2 \cdot \cbr{5P - \frac{P_0}{V_0} V} = \\
             &= \frac{\Delta V}2 \cdot \cbr{5 \cdot \cbr{3P_0 - \frac{P_0}{V_0} V} - \frac{P_0}{V_0} V}
-             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 3 - 8\frac{V}{V_0}}.
+             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 3 - 8\fracV{V_0}}.
         \end{align*}
 
         Таком образом, знак количества теплоты $Q$ на участке 23 зависит от конкретного значения $V$:
         \begin{itemize}
             \item $\Delta V > 0$ на всём участке 23, поскольку газ расширяется,
             \item $P > 0$ — всегда, у нас идеальный газ, удары о стенки сосуда абсолютно упругие, а молекулы не взаимодействуют и поэтому давление только положительно,
-            \item если $5 \cdot 3 - 8\frac{V}{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
+            \item если $5 \cdot 3 - 8\fracV{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
         \end{itemize}
         Решая последнее неравенство, получаем конкретное значение $V^*$: при $V < V^*$ тепло подводят, далее~— отводят.
         Тут *~--- некоторая точка между точками 2 и 3, конкретные значения надо досчитать:
@@ -1086,7 +1086,7 @@
         \eta &= \frac{A_\text{цикл}}{Q_+} = \frac{A_\text{цикл}}{Q_{12} + Q_{2*}}
             = \frac{A_\text{цикл}}{A_{12} + \Delta U_{12} + A_{2*} + \Delta U_{2*}} = \\
             &= \frac{\frac12 \cdot P_0V_0}{0 + \frac32 \cdot P_0 V_0 + \frac{175}{128} \cdot P_0 V_0 + \frac{21}{128} \cdot P_0 V_0}
-             = \frac{\frac12}{\frac32 + \frac{175}{128} + \frac{21}{128}}
+             = \frac{A_bonus_cycle:LaTeX}{\frac32 + \frac{175}{128} + \frac{21}{128}}
              = \frac{16}{97} \leftarrow \text{вжух и готово!}
         \end{align*}
 }
@@ -1164,7 +1164,7 @@
             \draw[-{Latex}] (0, 0) -- (0, 7) node[above left] {$P$};
             \draw[-{Latex}] (0, 0) -- (10, 0) node[right] {$V$};
 
-            \draw[dashed] (0, 2) node[left] {$P_1 = P_0$} -| (3, 0) node[below] {$V_1 = V_2 = V_0$ };
+            \draw[dashed] (0, 2) node[left] {$P_1 = P_0$} -| (3, 0) node[below] {$V_1 = V_2 = V_0$};
             \draw[dashed] (0, 6) node[left] {$P_2 = P_3 = 2P_0$} -| (9, 0) node[below] {$V_3 = 2V_0$};
 
             \draw (3, 2) node[above left]{1} node[below left]{$T_1 = T_0$}
@@ -1242,14 +1242,14 @@
             &= \frac 32 (P\Delta V + V \Delta P) + P \Delta V =  \frac 52 P\Delta V + \frac 32 V \Delta P = \\
             &= \frac 52 P\Delta V + \frac 32 V \cdot \cbr{- \frac{P_0}{V_0} \Delta V} = \frac{\Delta V}2 \cdot \cbr{5P - \frac{P_0}{V_0} V} = \\
             &= \frac{\Delta V}2 \cdot \cbr{5 \cdot \cbr{3P_0 - \frac{P_0}{V_0} V} - \frac{P_0}{V_0} V}
-             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 3 - 8\frac{V}{V_0}}.
+             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 3 - 8\fracV{V_0}}.
         \end{align*}
 
         Таком образом, знак количества теплоты $Q$ на участке 23 зависит от конкретного значения $V$:
         \begin{itemize}
             \item $\Delta V > 0$ на всём участке 23, поскольку газ расширяется,
             \item $P > 0$ — всегда, у нас идеальный газ, удары о стенки сосуда абсолютно упругие, а молекулы не взаимодействуют и поэтому давление только положительно,
-            \item если $5 \cdot 3 - 8\frac{V}{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
+            \item если $5 \cdot 3 - 8\fracV{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
         \end{itemize}
         Решая последнее неравенство, получаем конкретное значение $V^*$: при $V < V^*$ тепло подводят, далее~— отводят.
         Тут *~--- некоторая точка между точками 2 и 3, конкретные значения надо досчитать:
@@ -1273,7 +1273,7 @@
         \eta &= \frac{A_\text{цикл}}{Q_+} = \frac{A_\text{цикл}}{Q_{12} + Q_{2*}}
             = \frac{A_\text{цикл}}{A_{12} + \Delta U_{12} + A_{2*} + \Delta U_{2*}} = \\
             &= \frac{\frac12 \cdot P_0V_0}{0 + \frac32 \cdot P_0 V_0 + \frac{175}{128} \cdot P_0 V_0 + \frac{21}{128} \cdot P_0 V_0}
-             = \frac{\frac12}{\frac32 + \frac{175}{128} + \frac{21}{128}}
+             = \frac{A_bonus_cycle:LaTeX}{\frac32 + \frac{175}{128} + \frac{21}{128}}
              = \frac{16}{97} \leftarrow \text{вжух и готово!}
         \end{align*}
 }
@@ -1351,7 +1351,7 @@
             \draw[-{Latex}] (0, 0) -- (0, 7) node[above left] {$P$};
             \draw[-{Latex}] (0, 0) -- (10, 0) node[right] {$V$};
 
-            \draw[dashed] (0, 2) node[left] {$P_1 = P_0$} -| (3, 0) node[below] {$V_1 = V_2 = V_0$ };
+            \draw[dashed] (0, 2) node[left] {$P_1 = P_0$} -| (3, 0) node[below] {$V_1 = V_2 = V_0$};
             \draw[dashed] (0, 6) node[left] {$P_2 = P_3 = 4P_0$} -| (9, 0) node[below] {$V_3 = 5V_0$};
 
             \draw (3, 2) node[above left]{1} node[below left]{$T_1 = T_0$}
@@ -1429,14 +1429,14 @@
             &= \frac 32 (P\Delta V + V \Delta P) + P \Delta V =  \frac 52 P\Delta V + \frac 32 V \Delta P = \\
             &= \frac 52 P\Delta V + \frac 32 V \cdot \cbr{- \frac{P_0}{V_0} \Delta V} = \frac{\Delta V}2 \cdot \cbr{5P - \frac{P_0}{V_0} V} = \\
             &= \frac{\Delta V}2 \cdot \cbr{5 \cdot \cbr{5P_0 - \frac{P_0}{V_0} V} - \frac{P_0}{V_0} V}
-             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 5 - 8\frac{V}{V_0}}.
+             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 5 - 8\fracV{V_0}}.
         \end{align*}
 
         Таком образом, знак количества теплоты $Q$ на участке 23 зависит от конкретного значения $V$:
         \begin{itemize}
             \item $\Delta V > 0$ на всём участке 23, поскольку газ расширяется,
             \item $P > 0$ — всегда, у нас идеальный газ, удары о стенки сосуда абсолютно упругие, а молекулы не взаимодействуют и поэтому давление только положительно,
-            \item если $5 \cdot 5 - 8\frac{V}{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
+            \item если $5 \cdot 5 - 8\fracV{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
         \end{itemize}
         Решая последнее неравенство, получаем конкретное значение $V^*$: при $V < V^*$ тепло подводят, далее~— отводят.
         Тут *~--- некоторая точка между точками 2 и 3, конкретные значения надо досчитать:
@@ -1460,7 +1460,7 @@
         \eta &= \frac{A_\text{цикл}}{Q_+} = \frac{A_\text{цикл}}{Q_{12} + Q_{2*}}
             = \frac{A_\text{цикл}}{A_{12} + \Delta U_{12} + A_{2*} + \Delta U_{2*}} = \\
             &= \frac{\frac92 \cdot P_0V_0}{0 + \frac92 \cdot P_0 V_0 + \frac{799}{128} \cdot P_0 V_0 + \frac{357}{128} \cdot P_0 V_0}
-             = \frac{\frac92}{\frac92 + \frac{799}{128} + \frac{357}{128}}
+             = \frac{A_bonus_cycle:LaTeX}{\frac92 + \frac{799}{128} + \frac{357}{128}}
              = \frac{144}{433} \leftarrow \text{вжух и готово!}
         \end{align*}
 }
@@ -1538,7 +1538,7 @@
             \draw[-{Latex}] (0, 0) -- (0, 7) node[above left] {$P$};
             \draw[-{Latex}] (0, 0) -- (10, 0) node[right] {$V$};
 
-            \draw[dashed] (0, 2) node[left] {$P_1 = P_0$} -| (3, 0) node[below] {$V_1 = V_2 = V_0$ };
+            \draw[dashed] (0, 2) node[left] {$P_1 = P_0$} -| (3, 0) node[below] {$V_1 = V_2 = V_0$};
             \draw[dashed] (0, 6) node[left] {$P_2 = P_3 = 4P_0$} -| (9, 0) node[below] {$V_3 = 6V_0$};
 
             \draw (3, 2) node[above left]{1} node[below left]{$T_1 = T_0$}
@@ -1616,14 +1616,14 @@
             &= \frac 32 (P\Delta V + V \Delta P) + P \Delta V =  \frac 52 P\Delta V + \frac 32 V \Delta P = \\
             &= \frac 52 P\Delta V + \frac 32 V \cdot \cbr{- \frac{P_0}{V_0} \Delta V} = \frac{\Delta V}2 \cdot \cbr{5P - \frac{P_0}{V_0} V} = \\
             &= \frac{\Delta V}2 \cdot \cbr{5 \cdot \cbr{5P_0 - \frac{P_0}{V_0} V} - \frac{P_0}{V_0} V}
-             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 5 - 8\frac{V}{V_0}}.
+             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 5 - 8\fracV{V_0}}.
         \end{align*}
 
         Таком образом, знак количества теплоты $Q$ на участке 23 зависит от конкретного значения $V$:
         \begin{itemize}
             \item $\Delta V > 0$ на всём участке 23, поскольку газ расширяется,
             \item $P > 0$ — всегда, у нас идеальный газ, удары о стенки сосуда абсолютно упругие, а молекулы не взаимодействуют и поэтому давление только положительно,
-            \item если $5 \cdot 5 - 8\frac{V}{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
+            \item если $5 \cdot 5 - 8\fracV{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
         \end{itemize}
         Решая последнее неравенство, получаем конкретное значение $V^*$: при $V < V^*$ тепло подводят, далее~— отводят.
         Тут *~--- некоторая точка между точками 2 и 3, конкретные значения надо досчитать:
@@ -1647,7 +1647,7 @@
         \eta &= \frac{A_\text{цикл}}{Q_+} = \frac{A_\text{цикл}}{Q_{12} + Q_{2*}}
             = \frac{A_\text{цикл}}{A_{12} + \Delta U_{12} + A_{2*} + \Delta U_{2*}} = \\
             &= \frac{\frac92 \cdot P_0V_0}{0 + \frac92 \cdot P_0 V_0 + \frac{799}{128} \cdot P_0 V_0 + \frac{357}{128} \cdot P_0 V_0}
-             = \frac{\frac92}{\frac92 + \frac{799}{128} + \frac{357}{128}}
+             = \frac{A_bonus_cycle:LaTeX}{\frac92 + \frac{799}{128} + \frac{357}{128}}
              = \frac{144}{433} \leftarrow \text{вжух и готово!}
         \end{align*}
 }
@@ -1725,7 +1725,7 @@
             \draw[-{Latex}] (0, 0) -- (0, 7) node[above left] {$P$};
             \draw[-{Latex}] (0, 0) -- (10, 0) node[right] {$V$};
 
-            \draw[dashed] (0, 2) node[left] {$P_1 = P_0$} -| (3, 0) node[below] {$V_1 = V_2 = V_0$ };
+            \draw[dashed] (0, 2) node[left] {$P_1 = P_0$} -| (3, 0) node[below] {$V_1 = V_2 = V_0$};
             \draw[dashed] (0, 6) node[left] {$P_2 = P_3 = 2P_0$} -| (9, 0) node[below] {$V_3 = 6V_0$};
 
             \draw (3, 2) node[above left]{1} node[below left]{$T_1 = T_0$}
@@ -1803,14 +1803,14 @@
             &= \frac 32 (P\Delta V + V \Delta P) + P \Delta V =  \frac 52 P\Delta V + \frac 32 V \Delta P = \\
             &= \frac 52 P\Delta V + \frac 32 V \cdot \cbr{- \frac{P_0}{V_0} \Delta V} = \frac{\Delta V}2 \cdot \cbr{5P - \frac{P_0}{V_0} V} = \\
             &= \frac{\Delta V}2 \cdot \cbr{5 \cdot \cbr{3P_0 - \frac{P_0}{V_0} V} - \frac{P_0}{V_0} V}
-             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 3 - 8\frac{V}{V_0}}.
+             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 3 - 8\fracV{V_0}}.
         \end{align*}
 
         Таком образом, знак количества теплоты $Q$ на участке 23 зависит от конкретного значения $V$:
         \begin{itemize}
             \item $\Delta V > 0$ на всём участке 23, поскольку газ расширяется,
             \item $P > 0$ — всегда, у нас идеальный газ, удары о стенки сосуда абсолютно упругие, а молекулы не взаимодействуют и поэтому давление только положительно,
-            \item если $5 \cdot 3 - 8\frac{V}{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
+            \item если $5 \cdot 3 - 8\fracV{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
         \end{itemize}
         Решая последнее неравенство, получаем конкретное значение $V^*$: при $V < V^*$ тепло подводят, далее~— отводят.
         Тут *~--- некоторая точка между точками 2 и 3, конкретные значения надо досчитать:
@@ -1834,7 +1834,7 @@
         \eta &= \frac{A_\text{цикл}}{Q_+} = \frac{A_\text{цикл}}{Q_{12} + Q_{2*}}
             = \frac{A_\text{цикл}}{A_{12} + \Delta U_{12} + A_{2*} + \Delta U_{2*}} = \\
             &= \frac{\frac12 \cdot P_0V_0}{0 + \frac32 \cdot P_0 V_0 + \frac{175}{128} \cdot P_0 V_0 + \frac{21}{128} \cdot P_0 V_0}
-             = \frac{\frac12}{\frac32 + \frac{175}{128} + \frac{21}{128}}
+             = \frac{A_bonus_cycle:LaTeX}{\frac32 + \frac{175}{128} + \frac{21}{128}}
              = \frac{16}{97} \leftarrow \text{вжух и готово!}
         \end{align*}
 }
@@ -1912,7 +1912,7 @@
             \draw[-{Latex}] (0, 0) -- (0, 7) node[above left] {$P$};
             \draw[-{Latex}] (0, 0) -- (10, 0) node[right] {$V$};
 
-            \draw[dashed] (0, 2) node[left] {$P_1 = P_0$} -| (3, 0) node[below] {$V_1 = V_2 = V_0$ };
+            \draw[dashed] (0, 2) node[left] {$P_1 = P_0$} -| (3, 0) node[below] {$V_1 = V_2 = V_0$};
             \draw[dashed] (0, 6) node[left] {$P_2 = P_3 = 4P_0$} -| (9, 0) node[below] {$V_3 = 5V_0$};
 
             \draw (3, 2) node[above left]{1} node[below left]{$T_1 = T_0$}
@@ -1990,14 +1990,14 @@
             &= \frac 32 (P\Delta V + V \Delta P) + P \Delta V =  \frac 52 P\Delta V + \frac 32 V \Delta P = \\
             &= \frac 52 P\Delta V + \frac 32 V \cdot \cbr{- \frac{P_0}{V_0} \Delta V} = \frac{\Delta V}2 \cdot \cbr{5P - \frac{P_0}{V_0} V} = \\
             &= \frac{\Delta V}2 \cdot \cbr{5 \cdot \cbr{5P_0 - \frac{P_0}{V_0} V} - \frac{P_0}{V_0} V}
-             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 5 - 8\frac{V}{V_0}}.
+             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 5 - 8\fracV{V_0}}.
         \end{align*}
 
         Таком образом, знак количества теплоты $Q$ на участке 23 зависит от конкретного значения $V$:
         \begin{itemize}
             \item $\Delta V > 0$ на всём участке 23, поскольку газ расширяется,
             \item $P > 0$ — всегда, у нас идеальный газ, удары о стенки сосуда абсолютно упругие, а молекулы не взаимодействуют и поэтому давление только положительно,
-            \item если $5 \cdot 5 - 8\frac{V}{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
+            \item если $5 \cdot 5 - 8\fracV{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
         \end{itemize}
         Решая последнее неравенство, получаем конкретное значение $V^*$: при $V < V^*$ тепло подводят, далее~— отводят.
         Тут *~--- некоторая точка между точками 2 и 3, конкретные значения надо досчитать:
@@ -2021,7 +2021,7 @@
         \eta &= \frac{A_\text{цикл}}{Q_+} = \frac{A_\text{цикл}}{Q_{12} + Q_{2*}}
             = \frac{A_\text{цикл}}{A_{12} + \Delta U_{12} + A_{2*} + \Delta U_{2*}} = \\
             &= \frac{\frac92 \cdot P_0V_0}{0 + \frac92 \cdot P_0 V_0 + \frac{799}{128} \cdot P_0 V_0 + \frac{357}{128} \cdot P_0 V_0}
-             = \frac{\frac92}{\frac92 + \frac{799}{128} + \frac{357}{128}}
+             = \frac{A_bonus_cycle:LaTeX}{\frac92 + \frac{799}{128} + \frac{357}{128}}
              = \frac{144}{433} \leftarrow \text{вжух и готово!}
         \end{align*}
 }
@@ -2099,7 +2099,7 @@
             \draw[-{Latex}] (0, 0) -- (0, 7) node[above left] {$P$};
             \draw[-{Latex}] (0, 0) -- (10, 0) node[right] {$V$};
 
-            \draw[dashed] (0, 2) node[left] {$P_1 = P_0$} -| (3, 0) node[below] {$V_1 = V_2 = V_0$ };
+            \draw[dashed] (0, 2) node[left] {$P_1 = P_0$} -| (3, 0) node[below] {$V_1 = V_2 = V_0$};
             \draw[dashed] (0, 6) node[left] {$P_2 = P_3 = 3P_0$} -| (9, 0) node[below] {$V_3 = 6V_0$};
 
             \draw (3, 2) node[above left]{1} node[below left]{$T_1 = T_0$}
@@ -2177,14 +2177,14 @@
             &= \frac 32 (P\Delta V + V \Delta P) + P \Delta V =  \frac 52 P\Delta V + \frac 32 V \Delta P = \\
             &= \frac 52 P\Delta V + \frac 32 V \cdot \cbr{- \frac{P_0}{V_0} \Delta V} = \frac{\Delta V}2 \cdot \cbr{5P - \frac{P_0}{V_0} V} = \\
             &= \frac{\Delta V}2 \cdot \cbr{5 \cdot \cbr{4P_0 - \frac{P_0}{V_0} V} - \frac{P_0}{V_0} V}
-             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 4 - 8\frac{V}{V_0}}.
+             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 4 - 8\fracV{V_0}}.
         \end{align*}
 
         Таком образом, знак количества теплоты $Q$ на участке 23 зависит от конкретного значения $V$:
         \begin{itemize}
             \item $\Delta V > 0$ на всём участке 23, поскольку газ расширяется,
             \item $P > 0$ — всегда, у нас идеальный газ, удары о стенки сосуда абсолютно упругие, а молекулы не взаимодействуют и поэтому давление только положительно,
-            \item если $5 \cdot 4 - 8\frac{V}{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
+            \item если $5 \cdot 4 - 8\fracV{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
         \end{itemize}
         Решая последнее неравенство, получаем конкретное значение $V^*$: при $V < V^*$ тепло подводят, далее~— отводят.
         Тут *~--- некоторая точка между точками 2 и 3, конкретные значения надо досчитать:
@@ -2208,7 +2208,7 @@
         \eta &= \frac{A_\text{цикл}}{Q_+} = \frac{A_\text{цикл}}{Q_{12} + Q_{2*}}
             = \frac{A_\text{цикл}}{A_{12} + \Delta U_{12} + A_{2*} + \Delta U_{2*}} = \\
             &= \frac{2 \cdot P_0V_0}{0 + 3 \cdot P_0 V_0 + \frac{27}8 \cdot P_0 V_0 + \frac98 \cdot P_0 V_0}
-             = \frac{2}{3 + \frac{27}8 + \frac98}
+             = \frac{A_bonus_cycle:LaTeX}{3 + \frac{27}8 + \frac98}
              = \frac4{15} \leftarrow \text{вжух и готово!}
         \end{align*}
 }
@@ -2286,7 +2286,7 @@
             \draw[-{Latex}] (0, 0) -- (0, 7) node[above left] {$P$};
             \draw[-{Latex}] (0, 0) -- (10, 0) node[right] {$V$};
 
-            \draw[dashed] (0, 2) node[left] {$P_1 = P_0$} -| (3, 0) node[below] {$V_1 = V_2 = V_0$ };
+            \draw[dashed] (0, 2) node[left] {$P_1 = P_0$} -| (3, 0) node[below] {$V_1 = V_2 = V_0$};
             \draw[dashed] (0, 6) node[left] {$P_2 = P_3 = 3P_0$} -| (9, 0) node[below] {$V_3 = 3V_0$};
 
             \draw (3, 2) node[above left]{1} node[below left]{$T_1 = T_0$}
@@ -2364,14 +2364,14 @@
             &= \frac 32 (P\Delta V + V \Delta P) + P \Delta V =  \frac 52 P\Delta V + \frac 32 V \Delta P = \\
             &= \frac 52 P\Delta V + \frac 32 V \cdot \cbr{- \frac{P_0}{V_0} \Delta V} = \frac{\Delta V}2 \cdot \cbr{5P - \frac{P_0}{V_0} V} = \\
             &= \frac{\Delta V}2 \cdot \cbr{5 \cdot \cbr{4P_0 - \frac{P_0}{V_0} V} - \frac{P_0}{V_0} V}
-             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 4 - 8\frac{V}{V_0}}.
+             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 4 - 8\fracV{V_0}}.
         \end{align*}
 
         Таком образом, знак количества теплоты $Q$ на участке 23 зависит от конкретного значения $V$:
         \begin{itemize}
             \item $\Delta V > 0$ на всём участке 23, поскольку газ расширяется,
             \item $P > 0$ — всегда, у нас идеальный газ, удары о стенки сосуда абсолютно упругие, а молекулы не взаимодействуют и поэтому давление только положительно,
-            \item если $5 \cdot 4 - 8\frac{V}{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
+            \item если $5 \cdot 4 - 8\fracV{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
         \end{itemize}
         Решая последнее неравенство, получаем конкретное значение $V^*$: при $V < V^*$ тепло подводят, далее~— отводят.
         Тут *~--- некоторая точка между точками 2 и 3, конкретные значения надо досчитать:
@@ -2395,7 +2395,7 @@
         \eta &= \frac{A_\text{цикл}}{Q_+} = \frac{A_\text{цикл}}{Q_{12} + Q_{2*}}
             = \frac{A_\text{цикл}}{A_{12} + \Delta U_{12} + A_{2*} + \Delta U_{2*}} = \\
             &= \frac{2 \cdot P_0V_0}{0 + 3 \cdot P_0 V_0 + \frac{27}8 \cdot P_0 V_0 + \frac98 \cdot P_0 V_0}
-             = \frac{2}{3 + \frac{27}8 + \frac98}
+             = \frac{A_bonus_cycle:LaTeX}{3 + \frac{27}8 + \frac98}
              = \frac4{15} \leftarrow \text{вжух и готово!}
         \end{align*}
 }
@@ -2473,7 +2473,7 @@
             \draw[-{Latex}] (0, 0) -- (0, 7) node[above left] {$P$};
             \draw[-{Latex}] (0, 0) -- (10, 0) node[right] {$V$};
 
-            \draw[dashed] (0, 2) node[left] {$P_1 = P_0$} -| (3, 0) node[below] {$V_1 = V_2 = V_0$ };
+            \draw[dashed] (0, 2) node[left] {$P_1 = P_0$} -| (3, 0) node[below] {$V_1 = V_2 = V_0$};
             \draw[dashed] (0, 6) node[left] {$P_2 = P_3 = 5P_0$} -| (9, 0) node[below] {$V_3 = 2V_0$};
 
             \draw (3, 2) node[above left]{1} node[below left]{$T_1 = T_0$}
@@ -2551,14 +2551,14 @@
             &= \frac 32 (P\Delta V + V \Delta P) + P \Delta V =  \frac 52 P\Delta V + \frac 32 V \Delta P = \\
             &= \frac 52 P\Delta V + \frac 32 V \cdot \cbr{- \frac{P_0}{V_0} \Delta V} = \frac{\Delta V}2 \cdot \cbr{5P - \frac{P_0}{V_0} V} = \\
             &= \frac{\Delta V}2 \cdot \cbr{5 \cdot \cbr{6P_0 - \frac{P_0}{V_0} V} - \frac{P_0}{V_0} V}
-             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 6 - 8\frac{V}{V_0}}.
+             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 6 - 8\fracV{V_0}}.
         \end{align*}
 
         Таком образом, знак количества теплоты $Q$ на участке 23 зависит от конкретного значения $V$:
         \begin{itemize}
             \item $\Delta V > 0$ на всём участке 23, поскольку газ расширяется,
             \item $P > 0$ — всегда, у нас идеальный газ, удары о стенки сосуда абсолютно упругие, а молекулы не взаимодействуют и поэтому давление только положительно,
-            \item если $5 \cdot 6 - 8\frac{V}{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
+            \item если $5 \cdot 6 - 8\fracV{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
         \end{itemize}
         Решая последнее неравенство, получаем конкретное значение $V^*$: при $V < V^*$ тепло подводят, далее~— отводят.
         Тут *~--- некоторая точка между точками 2 и 3, конкретные значения надо досчитать:
@@ -2582,7 +2582,7 @@
         \eta &= \frac{A_\text{цикл}}{Q_+} = \frac{A_\text{цикл}}{Q_{12} + Q_{2*}}
             = \frac{A_\text{цикл}}{A_{12} + \Delta U_{12} + A_{2*} + \Delta U_{2*}} = \\
             &= \frac{8 \cdot P_0V_0}{0 + 6 \cdot P_0 V_0 + \frac{319}{32} \cdot P_0 V_0 + \frac{165}{32} \cdot P_0 V_0}
-             = \frac{8}{6 + \frac{319}{32} + \frac{165}{32}}
+             = \frac{A_bonus_cycle:LaTeX}{6 + \frac{319}{32} + \frac{165}{32}}
              = \frac{64}{169} \leftarrow \text{вжух и готово!}
         \end{align*}
 }
@@ -2660,7 +2660,7 @@
             \draw[-{Latex}] (0, 0) -- (0, 7) node[above left] {$P$};
             \draw[-{Latex}] (0, 0) -- (10, 0) node[right] {$V$};
 
-            \draw[dashed] (0, 2) node[left] {$P_1 = P_0$} -| (3, 0) node[below] {$V_1 = V_2 = V_0$ };
+            \draw[dashed] (0, 2) node[left] {$P_1 = P_0$} -| (3, 0) node[below] {$V_1 = V_2 = V_0$};
             \draw[dashed] (0, 6) node[left] {$P_2 = P_3 = 6P_0$} -| (9, 0) node[below] {$V_3 = 4V_0$};
 
             \draw (3, 2) node[above left]{1} node[below left]{$T_1 = T_0$}
@@ -2738,14 +2738,14 @@
             &= \frac 32 (P\Delta V + V \Delta P) + P \Delta V =  \frac 52 P\Delta V + \frac 32 V \Delta P = \\
             &= \frac 52 P\Delta V + \frac 32 V \cdot \cbr{- \frac{P_0}{V_0} \Delta V} = \frac{\Delta V}2 \cdot \cbr{5P - \frac{P_0}{V_0} V} = \\
             &= \frac{\Delta V}2 \cdot \cbr{5 \cdot \cbr{7P_0 - \frac{P_0}{V_0} V} - \frac{P_0}{V_0} V}
-             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 7 - 8\frac{V}{V_0}}.
+             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 7 - 8\fracV{V_0}}.
         \end{align*}
 
         Таком образом, знак количества теплоты $Q$ на участке 23 зависит от конкретного значения $V$:
         \begin{itemize}
             \item $\Delta V > 0$ на всём участке 23, поскольку газ расширяется,
             \item $P > 0$ — всегда, у нас идеальный газ, удары о стенки сосуда абсолютно упругие, а молекулы не взаимодействуют и поэтому давление только положительно,
-            \item если $5 \cdot 7 - 8\frac{V}{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
+            \item если $5 \cdot 7 - 8\fracV{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
         \end{itemize}
         Решая последнее неравенство, получаем конкретное значение $V^*$: при $V < V^*$ тепло подводят, далее~— отводят.
         Тут *~--- некоторая точка между точками 2 и 3, конкретные значения надо досчитать:
@@ -2769,7 +2769,7 @@
         \eta &= \frac{A_\text{цикл}}{Q_+} = \frac{A_\text{цикл}}{Q_{12} + Q_{2*}}
             = \frac{A_\text{цикл}}{A_{12} + \Delta U_{12} + A_{2*} + \Delta U_{2*}} = \\
             &= \frac{\frac{25}2 \cdot P_0V_0}{0 + \frac{15}2 \cdot P_0 V_0 + \frac{1863}{128} \cdot P_0 V_0 + \frac{1053}{128} \cdot P_0 V_0}
-             = \frac{\frac{25}2}{\frac{15}2 + \frac{1863}{128} + \frac{1053}{128}}
+             = \frac{A_bonus_cycle:LaTeX}{\frac{15}2 + \frac{1863}{128} + \frac{1053}{128}}
              = \frac{400}{969} \leftarrow \text{вжух и готово!}
         \end{align*}
 }
@@ -2847,7 +2847,7 @@
             \draw[-{Latex}] (0, 0) -- (0, 7) node[above left] {$P$};
             \draw[-{Latex}] (0, 0) -- (10, 0) node[right] {$V$};
 
-            \draw[dashed] (0, 2) node[left] {$P_1 = P_0$} -| (3, 0) node[below] {$V_1 = V_2 = V_0$ };
+            \draw[dashed] (0, 2) node[left] {$P_1 = P_0$} -| (3, 0) node[below] {$V_1 = V_2 = V_0$};
             \draw[dashed] (0, 6) node[left] {$P_2 = P_3 = 2P_0$} -| (9, 0) node[below] {$V_3 = 4V_0$};
 
             \draw (3, 2) node[above left]{1} node[below left]{$T_1 = T_0$}
@@ -2925,14 +2925,14 @@
             &= \frac 32 (P\Delta V + V \Delta P) + P \Delta V =  \frac 52 P\Delta V + \frac 32 V \Delta P = \\
             &= \frac 52 P\Delta V + \frac 32 V \cdot \cbr{- \frac{P_0}{V_0} \Delta V} = \frac{\Delta V}2 \cdot \cbr{5P - \frac{P_0}{V_0} V} = \\
             &= \frac{\Delta V}2 \cdot \cbr{5 \cdot \cbr{3P_0 - \frac{P_0}{V_0} V} - \frac{P_0}{V_0} V}
-             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 3 - 8\frac{V}{V_0}}.
+             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 3 - 8\fracV{V_0}}.
         \end{align*}
 
         Таком образом, знак количества теплоты $Q$ на участке 23 зависит от конкретного значения $V$:
         \begin{itemize}
             \item $\Delta V > 0$ на всём участке 23, поскольку газ расширяется,
             \item $P > 0$ — всегда, у нас идеальный газ, удары о стенки сосуда абсолютно упругие, а молекулы не взаимодействуют и поэтому давление только положительно,
-            \item если $5 \cdot 3 - 8\frac{V}{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
+            \item если $5 \cdot 3 - 8\fracV{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
         \end{itemize}
         Решая последнее неравенство, получаем конкретное значение $V^*$: при $V < V^*$ тепло подводят, далее~— отводят.
         Тут *~--- некоторая точка между точками 2 и 3, конкретные значения надо досчитать:
@@ -2956,7 +2956,7 @@
         \eta &= \frac{A_\text{цикл}}{Q_+} = \frac{A_\text{цикл}}{Q_{12} + Q_{2*}}
             = \frac{A_\text{цикл}}{A_{12} + \Delta U_{12} + A_{2*} + \Delta U_{2*}} = \\
             &= \frac{\frac12 \cdot P_0V_0}{0 + \frac32 \cdot P_0 V_0 + \frac{175}{128} \cdot P_0 V_0 + \frac{21}{128} \cdot P_0 V_0}
-             = \frac{\frac12}{\frac32 + \frac{175}{128} + \frac{21}{128}}
+             = \frac{A_bonus_cycle:LaTeX}{\frac32 + \frac{175}{128} + \frac{21}{128}}
              = \frac{16}{97} \leftarrow \text{вжух и готово!}
         \end{align*}
 }
@@ -3034,7 +3034,7 @@
             \draw[-{Latex}] (0, 0) -- (0, 7) node[above left] {$P$};
             \draw[-{Latex}] (0, 0) -- (10, 0) node[right] {$V$};
 
-            \draw[dashed] (0, 2) node[left] {$P_1 = P_0$} -| (3, 0) node[below] {$V_1 = V_2 = V_0$ };
+            \draw[dashed] (0, 2) node[left] {$P_1 = P_0$} -| (3, 0) node[below] {$V_1 = V_2 = V_0$};
             \draw[dashed] (0, 6) node[left] {$P_2 = P_3 = 2P_0$} -| (9, 0) node[below] {$V_3 = 5V_0$};
 
             \draw (3, 2) node[above left]{1} node[below left]{$T_1 = T_0$}
@@ -3112,14 +3112,14 @@
             &= \frac 32 (P\Delta V + V \Delta P) + P \Delta V =  \frac 52 P\Delta V + \frac 32 V \Delta P = \\
             &= \frac 52 P\Delta V + \frac 32 V \cdot \cbr{- \frac{P_0}{V_0} \Delta V} = \frac{\Delta V}2 \cdot \cbr{5P - \frac{P_0}{V_0} V} = \\
             &= \frac{\Delta V}2 \cdot \cbr{5 \cdot \cbr{3P_0 - \frac{P_0}{V_0} V} - \frac{P_0}{V_0} V}
-             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 3 - 8\frac{V}{V_0}}.
+             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 3 - 8\fracV{V_0}}.
         \end{align*}
 
         Таком образом, знак количества теплоты $Q$ на участке 23 зависит от конкретного значения $V$:
         \begin{itemize}
             \item $\Delta V > 0$ на всём участке 23, поскольку газ расширяется,
             \item $P > 0$ — всегда, у нас идеальный газ, удары о стенки сосуда абсолютно упругие, а молекулы не взаимодействуют и поэтому давление только положительно,
-            \item если $5 \cdot 3 - 8\frac{V}{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
+            \item если $5 \cdot 3 - 8\fracV{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
         \end{itemize}
         Решая последнее неравенство, получаем конкретное значение $V^*$: при $V < V^*$ тепло подводят, далее~— отводят.
         Тут *~--- некоторая точка между точками 2 и 3, конкретные значения надо досчитать:
@@ -3143,7 +3143,7 @@
         \eta &= \frac{A_\text{цикл}}{Q_+} = \frac{A_\text{цикл}}{Q_{12} + Q_{2*}}
             = \frac{A_\text{цикл}}{A_{12} + \Delta U_{12} + A_{2*} + \Delta U_{2*}} = \\
             &= \frac{\frac12 \cdot P_0V_0}{0 + \frac32 \cdot P_0 V_0 + \frac{175}{128} \cdot P_0 V_0 + \frac{21}{128} \cdot P_0 V_0}
-             = \frac{\frac12}{\frac32 + \frac{175}{128} + \frac{21}{128}}
+             = \frac{A_bonus_cycle:LaTeX}{\frac32 + \frac{175}{128} + \frac{21}{128}}
              = \frac{16}{97} \leftarrow \text{вжух и готово!}
         \end{align*}
 }
@@ -3221,7 +3221,7 @@
             \draw[-{Latex}] (0, 0) -- (0, 7) node[above left] {$P$};
             \draw[-{Latex}] (0, 0) -- (10, 0) node[right] {$V$};
 
-            \draw[dashed] (0, 2) node[left] {$P_1 = P_0$} -| (3, 0) node[below] {$V_1 = V_2 = V_0$ };
+            \draw[dashed] (0, 2) node[left] {$P_1 = P_0$} -| (3, 0) node[below] {$V_1 = V_2 = V_0$};
             \draw[dashed] (0, 6) node[left] {$P_2 = P_3 = 4P_0$} -| (9, 0) node[below] {$V_3 = 3V_0$};
 
             \draw (3, 2) node[above left]{1} node[below left]{$T_1 = T_0$}
@@ -3299,14 +3299,14 @@
             &= \frac 32 (P\Delta V + V \Delta P) + P \Delta V =  \frac 52 P\Delta V + \frac 32 V \Delta P = \\
             &= \frac 52 P\Delta V + \frac 32 V \cdot \cbr{- \frac{P_0}{V_0} \Delta V} = \frac{\Delta V}2 \cdot \cbr{5P - \frac{P_0}{V_0} V} = \\
             &= \frac{\Delta V}2 \cdot \cbr{5 \cdot \cbr{5P_0 - \frac{P_0}{V_0} V} - \frac{P_0}{V_0} V}
-             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 5 - 8\frac{V}{V_0}}.
+             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 5 - 8\fracV{V_0}}.
         \end{align*}
 
         Таком образом, знак количества теплоты $Q$ на участке 23 зависит от конкретного значения $V$:
         \begin{itemize}
             \item $\Delta V > 0$ на всём участке 23, поскольку газ расширяется,
             \item $P > 0$ — всегда, у нас идеальный газ, удары о стенки сосуда абсолютно упругие, а молекулы не взаимодействуют и поэтому давление только положительно,
-            \item если $5 \cdot 5 - 8\frac{V}{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
+            \item если $5 \cdot 5 - 8\fracV{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
         \end{itemize}
         Решая последнее неравенство, получаем конкретное значение $V^*$: при $V < V^*$ тепло подводят, далее~— отводят.
         Тут *~--- некоторая точка между точками 2 и 3, конкретные значения надо досчитать:
@@ -3330,7 +3330,7 @@
         \eta &= \frac{A_\text{цикл}}{Q_+} = \frac{A_\text{цикл}}{Q_{12} + Q_{2*}}
             = \frac{A_\text{цикл}}{A_{12} + \Delta U_{12} + A_{2*} + \Delta U_{2*}} = \\
             &= \frac{\frac92 \cdot P_0V_0}{0 + \frac92 \cdot P_0 V_0 + \frac{799}{128} \cdot P_0 V_0 + \frac{357}{128} \cdot P_0 V_0}
-             = \frac{\frac92}{\frac92 + \frac{799}{128} + \frac{357}{128}}
+             = \frac{A_bonus_cycle:LaTeX}{\frac92 + \frac{799}{128} + \frac{357}{128}}
              = \frac{144}{433} \leftarrow \text{вжух и готово!}
         \end{align*}
 }
@@ -3408,7 +3408,7 @@
             \draw[-{Latex}] (0, 0) -- (0, 7) node[above left] {$P$};
             \draw[-{Latex}] (0, 0) -- (10, 0) node[right] {$V$};
 
-            \draw[dashed] (0, 2) node[left] {$P_1 = P_0$} -| (3, 0) node[below] {$V_1 = V_2 = V_0$ };
+            \draw[dashed] (0, 2) node[left] {$P_1 = P_0$} -| (3, 0) node[below] {$V_1 = V_2 = V_0$};
             \draw[dashed] (0, 6) node[left] {$P_2 = P_3 = 4P_0$} -| (9, 0) node[below] {$V_3 = 3V_0$};
 
             \draw (3, 2) node[above left]{1} node[below left]{$T_1 = T_0$}
@@ -3486,14 +3486,14 @@
             &= \frac 32 (P\Delta V + V \Delta P) + P \Delta V =  \frac 52 P\Delta V + \frac 32 V \Delta P = \\
             &= \frac 52 P\Delta V + \frac 32 V \cdot \cbr{- \frac{P_0}{V_0} \Delta V} = \frac{\Delta V}2 \cdot \cbr{5P - \frac{P_0}{V_0} V} = \\
             &= \frac{\Delta V}2 \cdot \cbr{5 \cdot \cbr{5P_0 - \frac{P_0}{V_0} V} - \frac{P_0}{V_0} V}
-             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 5 - 8\frac{V}{V_0}}.
+             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 5 - 8\fracV{V_0}}.
         \end{align*}
 
         Таком образом, знак количества теплоты $Q$ на участке 23 зависит от конкретного значения $V$:
         \begin{itemize}
             \item $\Delta V > 0$ на всём участке 23, поскольку газ расширяется,
             \item $P > 0$ — всегда, у нас идеальный газ, удары о стенки сосуда абсолютно упругие, а молекулы не взаимодействуют и поэтому давление только положительно,
-            \item если $5 \cdot 5 - 8\frac{V}{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
+            \item если $5 \cdot 5 - 8\fracV{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
         \end{itemize}
         Решая последнее неравенство, получаем конкретное значение $V^*$: при $V < V^*$ тепло подводят, далее~— отводят.
         Тут *~--- некоторая точка между точками 2 и 3, конкретные значения надо досчитать:
@@ -3517,7 +3517,7 @@
         \eta &= \frac{A_\text{цикл}}{Q_+} = \frac{A_\text{цикл}}{Q_{12} + Q_{2*}}
             = \frac{A_\text{цикл}}{A_{12} + \Delta U_{12} + A_{2*} + \Delta U_{2*}} = \\
             &= \frac{\frac92 \cdot P_0V_0}{0 + \frac92 \cdot P_0 V_0 + \frac{799}{128} \cdot P_0 V_0 + \frac{357}{128} \cdot P_0 V_0}
-             = \frac{\frac92}{\frac92 + \frac{799}{128} + \frac{357}{128}}
+             = \frac{A_bonus_cycle:LaTeX}{\frac92 + \frac{799}{128} + \frac{357}{128}}
              = \frac{144}{433} \leftarrow \text{вжух и готово!}
         \end{align*}
 }
@@ -3595,7 +3595,7 @@
             \draw[-{Latex}] (0, 0) -- (0, 7) node[above left] {$P$};
             \draw[-{Latex}] (0, 0) -- (10, 0) node[right] {$V$};
 
-            \draw[dashed] (0, 2) node[left] {$P_1 = P_0$} -| (3, 0) node[below] {$V_1 = V_2 = V_0$ };
+            \draw[dashed] (0, 2) node[left] {$P_1 = P_0$} -| (3, 0) node[below] {$V_1 = V_2 = V_0$};
             \draw[dashed] (0, 6) node[left] {$P_2 = P_3 = 3P_0$} -| (9, 0) node[below] {$V_3 = 2V_0$};
 
             \draw (3, 2) node[above left]{1} node[below left]{$T_1 = T_0$}
@@ -3673,14 +3673,14 @@
             &= \frac 32 (P\Delta V + V \Delta P) + P \Delta V =  \frac 52 P\Delta V + \frac 32 V \Delta P = \\
             &= \frac 52 P\Delta V + \frac 32 V \cdot \cbr{- \frac{P_0}{V_0} \Delta V} = \frac{\Delta V}2 \cdot \cbr{5P - \frac{P_0}{V_0} V} = \\
             &= \frac{\Delta V}2 \cdot \cbr{5 \cdot \cbr{4P_0 - \frac{P_0}{V_0} V} - \frac{P_0}{V_0} V}
-             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 4 - 8\frac{V}{V_0}}.
+             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 4 - 8\fracV{V_0}}.
         \end{align*}
 
         Таком образом, знак количества теплоты $Q$ на участке 23 зависит от конкретного значения $V$:
         \begin{itemize}
             \item $\Delta V > 0$ на всём участке 23, поскольку газ расширяется,
             \item $P > 0$ — всегда, у нас идеальный газ, удары о стенки сосуда абсолютно упругие, а молекулы не взаимодействуют и поэтому давление только положительно,
-            \item если $5 \cdot 4 - 8\frac{V}{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
+            \item если $5 \cdot 4 - 8\fracV{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
         \end{itemize}
         Решая последнее неравенство, получаем конкретное значение $V^*$: при $V < V^*$ тепло подводят, далее~— отводят.
         Тут *~--- некоторая точка между точками 2 и 3, конкретные значения надо досчитать:
@@ -3704,7 +3704,7 @@
         \eta &= \frac{A_\text{цикл}}{Q_+} = \frac{A_\text{цикл}}{Q_{12} + Q_{2*}}
             = \frac{A_\text{цикл}}{A_{12} + \Delta U_{12} + A_{2*} + \Delta U_{2*}} = \\
             &= \frac{2 \cdot P_0V_0}{0 + 3 \cdot P_0 V_0 + \frac{27}8 \cdot P_0 V_0 + \frac98 \cdot P_0 V_0}
-             = \frac{2}{3 + \frac{27}8 + \frac98}
+             = \frac{A_bonus_cycle:LaTeX}{3 + \frac{27}8 + \frac98}
              = \frac4{15} \leftarrow \text{вжух и готово!}
         \end{align*}
 }
@@ -3782,7 +3782,7 @@
             \draw[-{Latex}] (0, 0) -- (0, 7) node[above left] {$P$};
             \draw[-{Latex}] (0, 0) -- (10, 0) node[right] {$V$};
 
-            \draw[dashed] (0, 2) node[left] {$P_1 = P_0$} -| (3, 0) node[below] {$V_1 = V_2 = V_0$ };
+            \draw[dashed] (0, 2) node[left] {$P_1 = P_0$} -| (3, 0) node[below] {$V_1 = V_2 = V_0$};
             \draw[dashed] (0, 6) node[left] {$P_2 = P_3 = 4P_0$} -| (9, 0) node[below] {$V_3 = 6V_0$};
 
             \draw (3, 2) node[above left]{1} node[below left]{$T_1 = T_0$}
@@ -3860,14 +3860,14 @@
             &= \frac 32 (P\Delta V + V \Delta P) + P \Delta V =  \frac 52 P\Delta V + \frac 32 V \Delta P = \\
             &= \frac 52 P\Delta V + \frac 32 V \cdot \cbr{- \frac{P_0}{V_0} \Delta V} = \frac{\Delta V}2 \cdot \cbr{5P - \frac{P_0}{V_0} V} = \\
             &= \frac{\Delta V}2 \cdot \cbr{5 \cdot \cbr{5P_0 - \frac{P_0}{V_0} V} - \frac{P_0}{V_0} V}
-             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 5 - 8\frac{V}{V_0}}.
+             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 5 - 8\fracV{V_0}}.
         \end{align*}
 
         Таком образом, знак количества теплоты $Q$ на участке 23 зависит от конкретного значения $V$:
         \begin{itemize}
             \item $\Delta V > 0$ на всём участке 23, поскольку газ расширяется,
             \item $P > 0$ — всегда, у нас идеальный газ, удары о стенки сосуда абсолютно упругие, а молекулы не взаимодействуют и поэтому давление только положительно,
-            \item если $5 \cdot 5 - 8\frac{V}{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
+            \item если $5 \cdot 5 - 8\fracV{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
         \end{itemize}
         Решая последнее неравенство, получаем конкретное значение $V^*$: при $V < V^*$ тепло подводят, далее~— отводят.
         Тут *~--- некоторая точка между точками 2 и 3, конкретные значения надо досчитать:
@@ -3891,7 +3891,7 @@
         \eta &= \frac{A_\text{цикл}}{Q_+} = \frac{A_\text{цикл}}{Q_{12} + Q_{2*}}
             = \frac{A_\text{цикл}}{A_{12} + \Delta U_{12} + A_{2*} + \Delta U_{2*}} = \\
             &= \frac{\frac92 \cdot P_0V_0}{0 + \frac92 \cdot P_0 V_0 + \frac{799}{128} \cdot P_0 V_0 + \frac{357}{128} \cdot P_0 V_0}
-             = \frac{\frac92}{\frac92 + \frac{799}{128} + \frac{357}{128}}
+             = \frac{A_bonus_cycle:LaTeX}{\frac92 + \frac{799}{128} + \frac{357}{128}}
              = \frac{144}{433} \leftarrow \text{вжух и готово!}
         \end{align*}
 }
@@ -3969,7 +3969,7 @@
             \draw[-{Latex}] (0, 0) -- (0, 7) node[above left] {$P$};
             \draw[-{Latex}] (0, 0) -- (10, 0) node[right] {$V$};
 
-            \draw[dashed] (0, 2) node[left] {$P_1 = P_0$} -| (3, 0) node[below] {$V_1 = V_2 = V_0$ };
+            \draw[dashed] (0, 2) node[left] {$P_1 = P_0$} -| (3, 0) node[below] {$V_1 = V_2 = V_0$};
             \draw[dashed] (0, 6) node[left] {$P_2 = P_3 = 5P_0$} -| (9, 0) node[below] {$V_3 = 5V_0$};
 
             \draw (3, 2) node[above left]{1} node[below left]{$T_1 = T_0$}
@@ -4047,14 +4047,14 @@
             &= \frac 32 (P\Delta V + V \Delta P) + P \Delta V =  \frac 52 P\Delta V + \frac 32 V \Delta P = \\
             &= \frac 52 P\Delta V + \frac 32 V \cdot \cbr{- \frac{P_0}{V_0} \Delta V} = \frac{\Delta V}2 \cdot \cbr{5P - \frac{P_0}{V_0} V} = \\
             &= \frac{\Delta V}2 \cdot \cbr{5 \cdot \cbr{6P_0 - \frac{P_0}{V_0} V} - \frac{P_0}{V_0} V}
-             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 6 - 8\frac{V}{V_0}}.
+             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 6 - 8\fracV{V_0}}.
         \end{align*}
 
         Таком образом, знак количества теплоты $Q$ на участке 23 зависит от конкретного значения $V$:
         \begin{itemize}
             \item $\Delta V > 0$ на всём участке 23, поскольку газ расширяется,
             \item $P > 0$ — всегда, у нас идеальный газ, удары о стенки сосуда абсолютно упругие, а молекулы не взаимодействуют и поэтому давление только положительно,
-            \item если $5 \cdot 6 - 8\frac{V}{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
+            \item если $5 \cdot 6 - 8\fracV{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
         \end{itemize}
         Решая последнее неравенство, получаем конкретное значение $V^*$: при $V < V^*$ тепло подводят, далее~— отводят.
         Тут *~--- некоторая точка между точками 2 и 3, конкретные значения надо досчитать:
@@ -4078,7 +4078,7 @@
         \eta &= \frac{A_\text{цикл}}{Q_+} = \frac{A_\text{цикл}}{Q_{12} + Q_{2*}}
             = \frac{A_\text{цикл}}{A_{12} + \Delta U_{12} + A_{2*} + \Delta U_{2*}} = \\
             &= \frac{8 \cdot P_0V_0}{0 + 6 \cdot P_0 V_0 + \frac{319}{32} \cdot P_0 V_0 + \frac{165}{32} \cdot P_0 V_0}
-             = \frac{8}{6 + \frac{319}{32} + \frac{165}{32}}
+             = \frac{A_bonus_cycle:LaTeX}{6 + \frac{319}{32} + \frac{165}{32}}
              = \frac{64}{169} \leftarrow \text{вжух и готово!}
         \end{align*}
 }
@@ -4156,7 +4156,7 @@
             \draw[-{Latex}] (0, 0) -- (0, 7) node[above left] {$P$};
             \draw[-{Latex}] (0, 0) -- (10, 0) node[right] {$V$};
 
-            \draw[dashed] (0, 2) node[left] {$P_1 = P_0$} -| (3, 0) node[below] {$V_1 = V_2 = V_0$ };
+            \draw[dashed] (0, 2) node[left] {$P_1 = P_0$} -| (3, 0) node[below] {$V_1 = V_2 = V_0$};
             \draw[dashed] (0, 6) node[left] {$P_2 = P_3 = 4P_0$} -| (9, 0) node[below] {$V_3 = 6V_0$};
 
             \draw (3, 2) node[above left]{1} node[below left]{$T_1 = T_0$}
@@ -4234,14 +4234,14 @@
             &= \frac 32 (P\Delta V + V \Delta P) + P \Delta V =  \frac 52 P\Delta V + \frac 32 V \Delta P = \\
             &= \frac 52 P\Delta V + \frac 32 V \cdot \cbr{- \frac{P_0}{V_0} \Delta V} = \frac{\Delta V}2 \cdot \cbr{5P - \frac{P_0}{V_0} V} = \\
             &= \frac{\Delta V}2 \cdot \cbr{5 \cdot \cbr{5P_0 - \frac{P_0}{V_0} V} - \frac{P_0}{V_0} V}
-             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 5 - 8\frac{V}{V_0}}.
+             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 5 - 8\fracV{V_0}}.
         \end{align*}
 
         Таком образом, знак количества теплоты $Q$ на участке 23 зависит от конкретного значения $V$:
         \begin{itemize}
             \item $\Delta V > 0$ на всём участке 23, поскольку газ расширяется,
             \item $P > 0$ — всегда, у нас идеальный газ, удары о стенки сосуда абсолютно упругие, а молекулы не взаимодействуют и поэтому давление только положительно,
-            \item если $5 \cdot 5 - 8\frac{V}{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
+            \item если $5 \cdot 5 - 8\fracV{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
         \end{itemize}
         Решая последнее неравенство, получаем конкретное значение $V^*$: при $V < V^*$ тепло подводят, далее~— отводят.
         Тут *~--- некоторая точка между точками 2 и 3, конкретные значения надо досчитать:
@@ -4265,7 +4265,7 @@
         \eta &= \frac{A_\text{цикл}}{Q_+} = \frac{A_\text{цикл}}{Q_{12} + Q_{2*}}
             = \frac{A_\text{цикл}}{A_{12} + \Delta U_{12} + A_{2*} + \Delta U_{2*}} = \\
             &= \frac{\frac92 \cdot P_0V_0}{0 + \frac92 \cdot P_0 V_0 + \frac{799}{128} \cdot P_0 V_0 + \frac{357}{128} \cdot P_0 V_0}
-             = \frac{\frac92}{\frac92 + \frac{799}{128} + \frac{357}{128}}
+             = \frac{A_bonus_cycle:LaTeX}{\frac92 + \frac{799}{128} + \frac{357}{128}}
              = \frac{144}{433} \leftarrow \text{вжух и готово!}
         \end{align*}
 }
@@ -4343,7 +4343,7 @@
             \draw[-{Latex}] (0, 0) -- (0, 7) node[above left] {$P$};
             \draw[-{Latex}] (0, 0) -- (10, 0) node[right] {$V$};
 
-            \draw[dashed] (0, 2) node[left] {$P_1 = P_0$} -| (3, 0) node[below] {$V_1 = V_2 = V_0$ };
+            \draw[dashed] (0, 2) node[left] {$P_1 = P_0$} -| (3, 0) node[below] {$V_1 = V_2 = V_0$};
             \draw[dashed] (0, 6) node[left] {$P_2 = P_3 = 4P_0$} -| (9, 0) node[below] {$V_3 = 4V_0$};
 
             \draw (3, 2) node[above left]{1} node[below left]{$T_1 = T_0$}
@@ -4421,14 +4421,14 @@
             &= \frac 32 (P\Delta V + V \Delta P) + P \Delta V =  \frac 52 P\Delta V + \frac 32 V \Delta P = \\
             &= \frac 52 P\Delta V + \frac 32 V \cdot \cbr{- \frac{P_0}{V_0} \Delta V} = \frac{\Delta V}2 \cdot \cbr{5P - \frac{P_0}{V_0} V} = \\
             &= \frac{\Delta V}2 \cdot \cbr{5 \cdot \cbr{5P_0 - \frac{P_0}{V_0} V} - \frac{P_0}{V_0} V}
-             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 5 - 8\frac{V}{V_0}}.
+             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 5 - 8\fracV{V_0}}.
         \end{align*}
 
         Таком образом, знак количества теплоты $Q$ на участке 23 зависит от конкретного значения $V$:
         \begin{itemize}
             \item $\Delta V > 0$ на всём участке 23, поскольку газ расширяется,
             \item $P > 0$ — всегда, у нас идеальный газ, удары о стенки сосуда абсолютно упругие, а молекулы не взаимодействуют и поэтому давление только положительно,
-            \item если $5 \cdot 5 - 8\frac{V}{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
+            \item если $5 \cdot 5 - 8\fracV{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
         \end{itemize}
         Решая последнее неравенство, получаем конкретное значение $V^*$: при $V < V^*$ тепло подводят, далее~— отводят.
         Тут *~--- некоторая точка между точками 2 и 3, конкретные значения надо досчитать:
@@ -4452,7 +4452,7 @@
         \eta &= \frac{A_\text{цикл}}{Q_+} = \frac{A_\text{цикл}}{Q_{12} + Q_{2*}}
             = \frac{A_\text{цикл}}{A_{12} + \Delta U_{12} + A_{2*} + \Delta U_{2*}} = \\
             &= \frac{\frac92 \cdot P_0V_0}{0 + \frac92 \cdot P_0 V_0 + \frac{799}{128} \cdot P_0 V_0 + \frac{357}{128} \cdot P_0 V_0}
-             = \frac{\frac92}{\frac92 + \frac{799}{128} + \frac{357}{128}}
+             = \frac{A_bonus_cycle:LaTeX}{\frac92 + \frac{799}{128} + \frac{357}{128}}
              = \frac{144}{433} \leftarrow \text{вжух и готово!}
         \end{align*}
 }
@@ -4530,7 +4530,7 @@
             \draw[-{Latex}] (0, 0) -- (0, 7) node[above left] {$P$};
             \draw[-{Latex}] (0, 0) -- (10, 0) node[right] {$V$};
 
-            \draw[dashed] (0, 2) node[left] {$P_1 = P_0$} -| (3, 0) node[below] {$V_1 = V_2 = V_0$ };
+            \draw[dashed] (0, 2) node[left] {$P_1 = P_0$} -| (3, 0) node[below] {$V_1 = V_2 = V_0$};
             \draw[dashed] (0, 6) node[left] {$P_2 = P_3 = 5P_0$} -| (9, 0) node[below] {$V_3 = 4V_0$};
 
             \draw (3, 2) node[above left]{1} node[below left]{$T_1 = T_0$}
@@ -4608,14 +4608,14 @@
             &= \frac 32 (P\Delta V + V \Delta P) + P \Delta V =  \frac 52 P\Delta V + \frac 32 V \Delta P = \\
             &= \frac 52 P\Delta V + \frac 32 V \cdot \cbr{- \frac{P_0}{V_0} \Delta V} = \frac{\Delta V}2 \cdot \cbr{5P - \frac{P_0}{V_0} V} = \\
             &= \frac{\Delta V}2 \cdot \cbr{5 \cdot \cbr{6P_0 - \frac{P_0}{V_0} V} - \frac{P_0}{V_0} V}
-             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 6 - 8\frac{V}{V_0}}.
+             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 6 - 8\fracV{V_0}}.
         \end{align*}
 
         Таком образом, знак количества теплоты $Q$ на участке 23 зависит от конкретного значения $V$:
         \begin{itemize}
             \item $\Delta V > 0$ на всём участке 23, поскольку газ расширяется,
             \item $P > 0$ — всегда, у нас идеальный газ, удары о стенки сосуда абсолютно упругие, а молекулы не взаимодействуют и поэтому давление только положительно,
-            \item если $5 \cdot 6 - 8\frac{V}{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
+            \item если $5 \cdot 6 - 8\fracV{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
         \end{itemize}
         Решая последнее неравенство, получаем конкретное значение $V^*$: при $V < V^*$ тепло подводят, далее~— отводят.
         Тут *~--- некоторая точка между точками 2 и 3, конкретные значения надо досчитать:
@@ -4639,7 +4639,7 @@
         \eta &= \frac{A_\text{цикл}}{Q_+} = \frac{A_\text{цикл}}{Q_{12} + Q_{2*}}
             = \frac{A_\text{цикл}}{A_{12} + \Delta U_{12} + A_{2*} + \Delta U_{2*}} = \\
             &= \frac{8 \cdot P_0V_0}{0 + 6 \cdot P_0 V_0 + \frac{319}{32} \cdot P_0 V_0 + \frac{165}{32} \cdot P_0 V_0}
-             = \frac{8}{6 + \frac{319}{32} + \frac{165}{32}}
+             = \frac{A_bonus_cycle:LaTeX}{6 + \frac{319}{32} + \frac{165}{32}}
              = \frac{64}{169} \leftarrow \text{вжух и готово!}
         \end{align*}
 }
@@ -4717,7 +4717,7 @@
             \draw[-{Latex}] (0, 0) -- (0, 7) node[above left] {$P$};
             \draw[-{Latex}] (0, 0) -- (10, 0) node[right] {$V$};
 
-            \draw[dashed] (0, 2) node[left] {$P_1 = P_0$} -| (3, 0) node[below] {$V_1 = V_2 = V_0$ };
+            \draw[dashed] (0, 2) node[left] {$P_1 = P_0$} -| (3, 0) node[below] {$V_1 = V_2 = V_0$};
             \draw[dashed] (0, 6) node[left] {$P_2 = P_3 = 4P_0$} -| (9, 0) node[below] {$V_3 = 5V_0$};
 
             \draw (3, 2) node[above left]{1} node[below left]{$T_1 = T_0$}
@@ -4795,14 +4795,14 @@
             &= \frac 32 (P\Delta V + V \Delta P) + P \Delta V =  \frac 52 P\Delta V + \frac 32 V \Delta P = \\
             &= \frac 52 P\Delta V + \frac 32 V \cdot \cbr{- \frac{P_0}{V_0} \Delta V} = \frac{\Delta V}2 \cdot \cbr{5P - \frac{P_0}{V_0} V} = \\
             &= \frac{\Delta V}2 \cdot \cbr{5 \cdot \cbr{5P_0 - \frac{P_0}{V_0} V} - \frac{P_0}{V_0} V}
-             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 5 - 8\frac{V}{V_0}}.
+             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 5 - 8\fracV{V_0}}.
         \end{align*}
 
         Таком образом, знак количества теплоты $Q$ на участке 23 зависит от конкретного значения $V$:
         \begin{itemize}
             \item $\Delta V > 0$ на всём участке 23, поскольку газ расширяется,
             \item $P > 0$ — всегда, у нас идеальный газ, удары о стенки сосуда абсолютно упругие, а молекулы не взаимодействуют и поэтому давление только положительно,
-            \item если $5 \cdot 5 - 8\frac{V}{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
+            \item если $5 \cdot 5 - 8\fracV{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
         \end{itemize}
         Решая последнее неравенство, получаем конкретное значение $V^*$: при $V < V^*$ тепло подводят, далее~— отводят.
         Тут *~--- некоторая точка между точками 2 и 3, конкретные значения надо досчитать:
@@ -4826,7 +4826,7 @@
         \eta &= \frac{A_\text{цикл}}{Q_+} = \frac{A_\text{цикл}}{Q_{12} + Q_{2*}}
             = \frac{A_\text{цикл}}{A_{12} + \Delta U_{12} + A_{2*} + \Delta U_{2*}} = \\
             &= \frac{\frac92 \cdot P_0V_0}{0 + \frac92 \cdot P_0 V_0 + \frac{799}{128} \cdot P_0 V_0 + \frac{357}{128} \cdot P_0 V_0}
-             = \frac{\frac92}{\frac92 + \frac{799}{128} + \frac{357}{128}}
+             = \frac{A_bonus_cycle:LaTeX}{\frac92 + \frac{799}{128} + \frac{357}{128}}
              = \frac{144}{433} \leftarrow \text{вжух и готово!}
         \end{align*}
 }
@@ -4904,7 +4904,7 @@
             \draw[-{Latex}] (0, 0) -- (0, 7) node[above left] {$P$};
             \draw[-{Latex}] (0, 0) -- (10, 0) node[right] {$V$};
 
-            \draw[dashed] (0, 2) node[left] {$P_1 = P_0$} -| (3, 0) node[below] {$V_1 = V_2 = V_0$ };
+            \draw[dashed] (0, 2) node[left] {$P_1 = P_0$} -| (3, 0) node[below] {$V_1 = V_2 = V_0$};
             \draw[dashed] (0, 6) node[left] {$P_2 = P_3 = 5P_0$} -| (9, 0) node[below] {$V_3 = 5V_0$};
 
             \draw (3, 2) node[above left]{1} node[below left]{$T_1 = T_0$}
@@ -4982,14 +4982,14 @@
             &= \frac 32 (P\Delta V + V \Delta P) + P \Delta V =  \frac 52 P\Delta V + \frac 32 V \Delta P = \\
             &= \frac 52 P\Delta V + \frac 32 V \cdot \cbr{- \frac{P_0}{V_0} \Delta V} = \frac{\Delta V}2 \cdot \cbr{5P - \frac{P_0}{V_0} V} = \\
             &= \frac{\Delta V}2 \cdot \cbr{5 \cdot \cbr{6P_0 - \frac{P_0}{V_0} V} - \frac{P_0}{V_0} V}
-             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 6 - 8\frac{V}{V_0}}.
+             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 6 - 8\fracV{V_0}}.
         \end{align*}
 
         Таком образом, знак количества теплоты $Q$ на участке 23 зависит от конкретного значения $V$:
         \begin{itemize}
             \item $\Delta V > 0$ на всём участке 23, поскольку газ расширяется,
             \item $P > 0$ — всегда, у нас идеальный газ, удары о стенки сосуда абсолютно упругие, а молекулы не взаимодействуют и поэтому давление только положительно,
-            \item если $5 \cdot 6 - 8\frac{V}{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
+            \item если $5 \cdot 6 - 8\fracV{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
         \end{itemize}
         Решая последнее неравенство, получаем конкретное значение $V^*$: при $V < V^*$ тепло подводят, далее~— отводят.
         Тут *~--- некоторая точка между точками 2 и 3, конкретные значения надо досчитать:
@@ -5013,7 +5013,7 @@
         \eta &= \frac{A_\text{цикл}}{Q_+} = \frac{A_\text{цикл}}{Q_{12} + Q_{2*}}
             = \frac{A_\text{цикл}}{A_{12} + \Delta U_{12} + A_{2*} + \Delta U_{2*}} = \\
             &= \frac{8 \cdot P_0V_0}{0 + 6 \cdot P_0 V_0 + \frac{319}{32} \cdot P_0 V_0 + \frac{165}{32} \cdot P_0 V_0}
-             = \frac{8}{6 + \frac{319}{32} + \frac{165}{32}}
+             = \frac{A_bonus_cycle:LaTeX}{6 + \frac{319}{32} + \frac{165}{32}}
              = \frac{64}{169} \leftarrow \text{вжух и готово!}
         \end{align*}
 }
@@ -5091,7 +5091,7 @@
             \draw[-{Latex}] (0, 0) -- (0, 7) node[above left] {$P$};
             \draw[-{Latex}] (0, 0) -- (10, 0) node[right] {$V$};
 
-            \draw[dashed] (0, 2) node[left] {$P_1 = P_0$} -| (3, 0) node[below] {$V_1 = V_2 = V_0$ };
+            \draw[dashed] (0, 2) node[left] {$P_1 = P_0$} -| (3, 0) node[below] {$V_1 = V_2 = V_0$};
             \draw[dashed] (0, 6) node[left] {$P_2 = P_3 = 6P_0$} -| (9, 0) node[below] {$V_3 = 6V_0$};
 
             \draw (3, 2) node[above left]{1} node[below left]{$T_1 = T_0$}
@@ -5169,14 +5169,14 @@
             &= \frac 32 (P\Delta V + V \Delta P) + P \Delta V =  \frac 52 P\Delta V + \frac 32 V \Delta P = \\
             &= \frac 52 P\Delta V + \frac 32 V \cdot \cbr{- \frac{P_0}{V_0} \Delta V} = \frac{\Delta V}2 \cdot \cbr{5P - \frac{P_0}{V_0} V} = \\
             &= \frac{\Delta V}2 \cdot \cbr{5 \cdot \cbr{7P_0 - \frac{P_0}{V_0} V} - \frac{P_0}{V_0} V}
-             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 7 - 8\frac{V}{V_0}}.
+             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 7 - 8\fracV{V_0}}.
         \end{align*}
 
         Таком образом, знак количества теплоты $Q$ на участке 23 зависит от конкретного значения $V$:
         \begin{itemize}
             \item $\Delta V > 0$ на всём участке 23, поскольку газ расширяется,
             \item $P > 0$ — всегда, у нас идеальный газ, удары о стенки сосуда абсолютно упругие, а молекулы не взаимодействуют и поэтому давление только положительно,
-            \item если $5 \cdot 7 - 8\frac{V}{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
+            \item если $5 \cdot 7 - 8\fracV{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
         \end{itemize}
         Решая последнее неравенство, получаем конкретное значение $V^*$: при $V < V^*$ тепло подводят, далее~— отводят.
         Тут *~--- некоторая точка между точками 2 и 3, конкретные значения надо досчитать:
@@ -5200,7 +5200,7 @@
         \eta &= \frac{A_\text{цикл}}{Q_+} = \frac{A_\text{цикл}}{Q_{12} + Q_{2*}}
             = \frac{A_\text{цикл}}{A_{12} + \Delta U_{12} + A_{2*} + \Delta U_{2*}} = \\
             &= \frac{\frac{25}2 \cdot P_0V_0}{0 + \frac{15}2 \cdot P_0 V_0 + \frac{1863}{128} \cdot P_0 V_0 + \frac{1053}{128} \cdot P_0 V_0}
-             = \frac{\frac{25}2}{\frac{15}2 + \frac{1863}{128} + \frac{1053}{128}}
+             = \frac{A_bonus_cycle:LaTeX}{\frac{15}2 + \frac{1863}{128} + \frac{1053}{128}}
              = \frac{400}{969} \leftarrow \text{вжух и готово!}
         \end{align*}
 }
@@ -5278,7 +5278,7 @@
             \draw[-{Latex}] (0, 0) -- (0, 7) node[above left] {$P$};
             \draw[-{Latex}] (0, 0) -- (10, 0) node[right] {$V$};
 
-            \draw[dashed] (0, 2) node[left] {$P_1 = P_0$} -| (3, 0) node[below] {$V_1 = V_2 = V_0$ };
+            \draw[dashed] (0, 2) node[left] {$P_1 = P_0$} -| (3, 0) node[below] {$V_1 = V_2 = V_0$};
             \draw[dashed] (0, 6) node[left] {$P_2 = P_3 = 2P_0$} -| (9, 0) node[below] {$V_3 = 6V_0$};
 
             \draw (3, 2) node[above left]{1} node[below left]{$T_1 = T_0$}
@@ -5356,14 +5356,14 @@
             &= \frac 32 (P\Delta V + V \Delta P) + P \Delta V =  \frac 52 P\Delta V + \frac 32 V \Delta P = \\
             &= \frac 52 P\Delta V + \frac 32 V \cdot \cbr{- \frac{P_0}{V_0} \Delta V} = \frac{\Delta V}2 \cdot \cbr{5P - \frac{P_0}{V_0} V} = \\
             &= \frac{\Delta V}2 \cdot \cbr{5 \cdot \cbr{3P_0 - \frac{P_0}{V_0} V} - \frac{P_0}{V_0} V}
-             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 3 - 8\frac{V}{V_0}}.
+             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 3 - 8\fracV{V_0}}.
         \end{align*}
 
         Таком образом, знак количества теплоты $Q$ на участке 23 зависит от конкретного значения $V$:
         \begin{itemize}
             \item $\Delta V > 0$ на всём участке 23, поскольку газ расширяется,
             \item $P > 0$ — всегда, у нас идеальный газ, удары о стенки сосуда абсолютно упругие, а молекулы не взаимодействуют и поэтому давление только положительно,
-            \item если $5 \cdot 3 - 8\frac{V}{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
+            \item если $5 \cdot 3 - 8\fracV{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
         \end{itemize}
         Решая последнее неравенство, получаем конкретное значение $V^*$: при $V < V^*$ тепло подводят, далее~— отводят.
         Тут *~--- некоторая точка между точками 2 и 3, конкретные значения надо досчитать:
@@ -5387,7 +5387,7 @@
         \eta &= \frac{A_\text{цикл}}{Q_+} = \frac{A_\text{цикл}}{Q_{12} + Q_{2*}}
             = \frac{A_\text{цикл}}{A_{12} + \Delta U_{12} + A_{2*} + \Delta U_{2*}} = \\
             &= \frac{\frac12 \cdot P_0V_0}{0 + \frac32 \cdot P_0 V_0 + \frac{175}{128} \cdot P_0 V_0 + \frac{21}{128} \cdot P_0 V_0}
-             = \frac{\frac12}{\frac32 + \frac{175}{128} + \frac{21}{128}}
+             = \frac{A_bonus_cycle:LaTeX}{\frac32 + \frac{175}{128} + \frac{21}{128}}
              = \frac{16}{97} \leftarrow \text{вжух и готово!}
         \end{align*}
 }
@@ -5465,7 +5465,7 @@
             \draw[-{Latex}] (0, 0) -- (0, 7) node[above left] {$P$};
             \draw[-{Latex}] (0, 0) -- (10, 0) node[right] {$V$};
 
-            \draw[dashed] (0, 2) node[left] {$P_1 = P_0$} -| (3, 0) node[below] {$V_1 = V_2 = V_0$ };
+            \draw[dashed] (0, 2) node[left] {$P_1 = P_0$} -| (3, 0) node[below] {$V_1 = V_2 = V_0$};
             \draw[dashed] (0, 6) node[left] {$P_2 = P_3 = 4P_0$} -| (9, 0) node[below] {$V_3 = 6V_0$};
 
             \draw (3, 2) node[above left]{1} node[below left]{$T_1 = T_0$}
@@ -5543,14 +5543,14 @@
             &= \frac 32 (P\Delta V + V \Delta P) + P \Delta V =  \frac 52 P\Delta V + \frac 32 V \Delta P = \\
             &= \frac 52 P\Delta V + \frac 32 V \cdot \cbr{- \frac{P_0}{V_0} \Delta V} = \frac{\Delta V}2 \cdot \cbr{5P - \frac{P_0}{V_0} V} = \\
             &= \frac{\Delta V}2 \cdot \cbr{5 \cdot \cbr{5P_0 - \frac{P_0}{V_0} V} - \frac{P_0}{V_0} V}
-             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 5 - 8\frac{V}{V_0}}.
+             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 5 - 8\fracV{V_0}}.
         \end{align*}
 
         Таком образом, знак количества теплоты $Q$ на участке 23 зависит от конкретного значения $V$:
         \begin{itemize}
             \item $\Delta V > 0$ на всём участке 23, поскольку газ расширяется,
             \item $P > 0$ — всегда, у нас идеальный газ, удары о стенки сосуда абсолютно упругие, а молекулы не взаимодействуют и поэтому давление только положительно,
-            \item если $5 \cdot 5 - 8\frac{V}{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
+            \item если $5 \cdot 5 - 8\fracV{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
         \end{itemize}
         Решая последнее неравенство, получаем конкретное значение $V^*$: при $V < V^*$ тепло подводят, далее~— отводят.
         Тут *~--- некоторая точка между точками 2 и 3, конкретные значения надо досчитать:
@@ -5574,7 +5574,7 @@
         \eta &= \frac{A_\text{цикл}}{Q_+} = \frac{A_\text{цикл}}{Q_{12} + Q_{2*}}
             = \frac{A_\text{цикл}}{A_{12} + \Delta U_{12} + A_{2*} + \Delta U_{2*}} = \\
             &= \frac{\frac92 \cdot P_0V_0}{0 + \frac92 \cdot P_0 V_0 + \frac{799}{128} \cdot P_0 V_0 + \frac{357}{128} \cdot P_0 V_0}
-             = \frac{\frac92}{\frac92 + \frac{799}{128} + \frac{357}{128}}
+             = \frac{A_bonus_cycle:LaTeX}{\frac92 + \frac{799}{128} + \frac{357}{128}}
              = \frac{144}{433} \leftarrow \text{вжух и готово!}
         \end{align*}
 }
@@ -5652,7 +5652,7 @@
             \draw[-{Latex}] (0, 0) -- (0, 7) node[above left] {$P$};
             \draw[-{Latex}] (0, 0) -- (10, 0) node[right] {$V$};
 
-            \draw[dashed] (0, 2) node[left] {$P_1 = P_0$} -| (3, 0) node[below] {$V_1 = V_2 = V_0$ };
+            \draw[dashed] (0, 2) node[left] {$P_1 = P_0$} -| (3, 0) node[below] {$V_1 = V_2 = V_0$};
             \draw[dashed] (0, 6) node[left] {$P_2 = P_3 = 6P_0$} -| (9, 0) node[below] {$V_3 = 4V_0$};
 
             \draw (3, 2) node[above left]{1} node[below left]{$T_1 = T_0$}
@@ -5730,14 +5730,14 @@
             &= \frac 32 (P\Delta V + V \Delta P) + P \Delta V =  \frac 52 P\Delta V + \frac 32 V \Delta P = \\
             &= \frac 52 P\Delta V + \frac 32 V \cdot \cbr{- \frac{P_0}{V_0} \Delta V} = \frac{\Delta V}2 \cdot \cbr{5P - \frac{P_0}{V_0} V} = \\
             &= \frac{\Delta V}2 \cdot \cbr{5 \cdot \cbr{7P_0 - \frac{P_0}{V_0} V} - \frac{P_0}{V_0} V}
-             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 7 - 8\frac{V}{V_0}}.
+             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 7 - 8\fracV{V_0}}.
         \end{align*}
 
         Таком образом, знак количества теплоты $Q$ на участке 23 зависит от конкретного значения $V$:
         \begin{itemize}
             \item $\Delta V > 0$ на всём участке 23, поскольку газ расширяется,
             \item $P > 0$ — всегда, у нас идеальный газ, удары о стенки сосуда абсолютно упругие, а молекулы не взаимодействуют и поэтому давление только положительно,
-            \item если $5 \cdot 7 - 8\frac{V}{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
+            \item если $5 \cdot 7 - 8\fracV{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
         \end{itemize}
         Решая последнее неравенство, получаем конкретное значение $V^*$: при $V < V^*$ тепло подводят, далее~— отводят.
         Тут *~--- некоторая точка между точками 2 и 3, конкретные значения надо досчитать:
@@ -5761,7 +5761,7 @@
         \eta &= \frac{A_\text{цикл}}{Q_+} = \frac{A_\text{цикл}}{Q_{12} + Q_{2*}}
             = \frac{A_\text{цикл}}{A_{12} + \Delta U_{12} + A_{2*} + \Delta U_{2*}} = \\
             &= \frac{\frac{25}2 \cdot P_0V_0}{0 + \frac{15}2 \cdot P_0 V_0 + \frac{1863}{128} \cdot P_0 V_0 + \frac{1053}{128} \cdot P_0 V_0}
-             = \frac{\frac{25}2}{\frac{15}2 + \frac{1863}{128} + \frac{1053}{128}}
+             = \frac{A_bonus_cycle:LaTeX}{\frac{15}2 + \frac{1863}{128} + \frac{1053}{128}}
              = \frac{400}{969} \leftarrow \text{вжух и готово!}
         \end{align*}
 }
@@ -5839,7 +5839,7 @@
             \draw[-{Latex}] (0, 0) -- (0, 7) node[above left] {$P$};
             \draw[-{Latex}] (0, 0) -- (10, 0) node[right] {$V$};
 
-            \draw[dashed] (0, 2) node[left] {$P_1 = P_0$} -| (3, 0) node[below] {$V_1 = V_2 = V_0$ };
+            \draw[dashed] (0, 2) node[left] {$P_1 = P_0$} -| (3, 0) node[below] {$V_1 = V_2 = V_0$};
             \draw[dashed] (0, 6) node[left] {$P_2 = P_3 = 5P_0$} -| (9, 0) node[below] {$V_3 = 6V_0$};
 
             \draw (3, 2) node[above left]{1} node[below left]{$T_1 = T_0$}
@@ -5917,14 +5917,14 @@
             &= \frac 32 (P\Delta V + V \Delta P) + P \Delta V =  \frac 52 P\Delta V + \frac 32 V \Delta P = \\
             &= \frac 52 P\Delta V + \frac 32 V \cdot \cbr{- \frac{P_0}{V_0} \Delta V} = \frac{\Delta V}2 \cdot \cbr{5P - \frac{P_0}{V_0} V} = \\
             &= \frac{\Delta V}2 \cdot \cbr{5 \cdot \cbr{6P_0 - \frac{P_0}{V_0} V} - \frac{P_0}{V_0} V}
-             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 6 - 8\frac{V}{V_0}}.
+             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 6 - 8\fracV{V_0}}.
         \end{align*}
 
         Таком образом, знак количества теплоты $Q$ на участке 23 зависит от конкретного значения $V$:
         \begin{itemize}
             \item $\Delta V > 0$ на всём участке 23, поскольку газ расширяется,
             \item $P > 0$ — всегда, у нас идеальный газ, удары о стенки сосуда абсолютно упругие, а молекулы не взаимодействуют и поэтому давление только положительно,
-            \item если $5 \cdot 6 - 8\frac{V}{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
+            \item если $5 \cdot 6 - 8\fracV{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
         \end{itemize}
         Решая последнее неравенство, получаем конкретное значение $V^*$: при $V < V^*$ тепло подводят, далее~— отводят.
         Тут *~--- некоторая точка между точками 2 и 3, конкретные значения надо досчитать:
@@ -5948,7 +5948,7 @@
         \eta &= \frac{A_\text{цикл}}{Q_+} = \frac{A_\text{цикл}}{Q_{12} + Q_{2*}}
             = \frac{A_\text{цикл}}{A_{12} + \Delta U_{12} + A_{2*} + \Delta U_{2*}} = \\
             &= \frac{8 \cdot P_0V_0}{0 + 6 \cdot P_0 V_0 + \frac{319}{32} \cdot P_0 V_0 + \frac{165}{32} \cdot P_0 V_0}
-             = \frac{8}{6 + \frac{319}{32} + \frac{165}{32}}
+             = \frac{A_bonus_cycle:LaTeX}{6 + \frac{319}{32} + \frac{165}{32}}
              = \frac{64}{169} \leftarrow \text{вжух и готово!}
         \end{align*}
 }
@@ -6026,7 +6026,7 @@
             \draw[-{Latex}] (0, 0) -- (0, 7) node[above left] {$P$};
             \draw[-{Latex}] (0, 0) -- (10, 0) node[right] {$V$};
 
-            \draw[dashed] (0, 2) node[left] {$P_1 = P_0$} -| (3, 0) node[below] {$V_1 = V_2 = V_0$ };
+            \draw[dashed] (0, 2) node[left] {$P_1 = P_0$} -| (3, 0) node[below] {$V_1 = V_2 = V_0$};
             \draw[dashed] (0, 6) node[left] {$P_2 = P_3 = 2P_0$} -| (9, 0) node[below] {$V_3 = 3V_0$};
 
             \draw (3, 2) node[above left]{1} node[below left]{$T_1 = T_0$}
@@ -6104,14 +6104,14 @@
             &= \frac 32 (P\Delta V + V \Delta P) + P \Delta V =  \frac 52 P\Delta V + \frac 32 V \Delta P = \\
             &= \frac 52 P\Delta V + \frac 32 V \cdot \cbr{- \frac{P_0}{V_0} \Delta V} = \frac{\Delta V}2 \cdot \cbr{5P - \frac{P_0}{V_0} V} = \\
             &= \frac{\Delta V}2 \cdot \cbr{5 \cdot \cbr{3P_0 - \frac{P_0}{V_0} V} - \frac{P_0}{V_0} V}
-             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 3 - 8\frac{V}{V_0}}.
+             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 3 - 8\fracV{V_0}}.
         \end{align*}
 
         Таком образом, знак количества теплоты $Q$ на участке 23 зависит от конкретного значения $V$:
         \begin{itemize}
             \item $\Delta V > 0$ на всём участке 23, поскольку газ расширяется,
             \item $P > 0$ — всегда, у нас идеальный газ, удары о стенки сосуда абсолютно упругие, а молекулы не взаимодействуют и поэтому давление только положительно,
-            \item если $5 \cdot 3 - 8\frac{V}{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
+            \item если $5 \cdot 3 - 8\fracV{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
         \end{itemize}
         Решая последнее неравенство, получаем конкретное значение $V^*$: при $V < V^*$ тепло подводят, далее~— отводят.
         Тут *~--- некоторая точка между точками 2 и 3, конкретные значения надо досчитать:
@@ -6135,7 +6135,7 @@
         \eta &= \frac{A_\text{цикл}}{Q_+} = \frac{A_\text{цикл}}{Q_{12} + Q_{2*}}
             = \frac{A_\text{цикл}}{A_{12} + \Delta U_{12} + A_{2*} + \Delta U_{2*}} = \\
             &= \frac{\frac12 \cdot P_0V_0}{0 + \frac32 \cdot P_0 V_0 + \frac{175}{128} \cdot P_0 V_0 + \frac{21}{128} \cdot P_0 V_0}
-             = \frac{\frac12}{\frac32 + \frac{175}{128} + \frac{21}{128}}
+             = \frac{A_bonus_cycle:LaTeX}{\frac32 + \frac{175}{128} + \frac{21}{128}}
              = \frac{16}{97} \leftarrow \text{вжух и готово!}
         \end{align*}
 }
@@ -6213,7 +6213,7 @@
             \draw[-{Latex}] (0, 0) -- (0, 7) node[above left] {$P$};
             \draw[-{Latex}] (0, 0) -- (10, 0) node[right] {$V$};
 
-            \draw[dashed] (0, 2) node[left] {$P_1 = P_0$} -| (3, 0) node[below] {$V_1 = V_2 = V_0$ };
+            \draw[dashed] (0, 2) node[left] {$P_1 = P_0$} -| (3, 0) node[below] {$V_1 = V_2 = V_0$};
             \draw[dashed] (0, 6) node[left] {$P_2 = P_3 = 3P_0$} -| (9, 0) node[below] {$V_3 = 3V_0$};
 
             \draw (3, 2) node[above left]{1} node[below left]{$T_1 = T_0$}
@@ -6291,14 +6291,14 @@
             &= \frac 32 (P\Delta V + V \Delta P) + P \Delta V =  \frac 52 P\Delta V + \frac 32 V \Delta P = \\
             &= \frac 52 P\Delta V + \frac 32 V \cdot \cbr{- \frac{P_0}{V_0} \Delta V} = \frac{\Delta V}2 \cdot \cbr{5P - \frac{P_0}{V_0} V} = \\
             &= \frac{\Delta V}2 \cdot \cbr{5 \cdot \cbr{4P_0 - \frac{P_0}{V_0} V} - \frac{P_0}{V_0} V}
-             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 4 - 8\frac{V}{V_0}}.
+             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 4 - 8\fracV{V_0}}.
         \end{align*}
 
         Таком образом, знак количества теплоты $Q$ на участке 23 зависит от конкретного значения $V$:
         \begin{itemize}
             \item $\Delta V > 0$ на всём участке 23, поскольку газ расширяется,
             \item $P > 0$ — всегда, у нас идеальный газ, удары о стенки сосуда абсолютно упругие, а молекулы не взаимодействуют и поэтому давление только положительно,
-            \item если $5 \cdot 4 - 8\frac{V}{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
+            \item если $5 \cdot 4 - 8\fracV{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
         \end{itemize}
         Решая последнее неравенство, получаем конкретное значение $V^*$: при $V < V^*$ тепло подводят, далее~— отводят.
         Тут *~--- некоторая точка между точками 2 и 3, конкретные значения надо досчитать:
@@ -6322,7 +6322,7 @@
         \eta &= \frac{A_\text{цикл}}{Q_+} = \frac{A_\text{цикл}}{Q_{12} + Q_{2*}}
             = \frac{A_\text{цикл}}{A_{12} + \Delta U_{12} + A_{2*} + \Delta U_{2*}} = \\
             &= \frac{2 \cdot P_0V_0}{0 + 3 \cdot P_0 V_0 + \frac{27}8 \cdot P_0 V_0 + \frac98 \cdot P_0 V_0}
-             = \frac{2}{3 + \frac{27}8 + \frac98}
+             = \frac{A_bonus_cycle:LaTeX}{3 + \frac{27}8 + \frac98}
              = \frac4{15} \leftarrow \text{вжух и готово!}
         \end{align*}
 }
@@ -6400,7 +6400,7 @@
             \draw[-{Latex}] (0, 0) -- (0, 7) node[above left] {$P$};
             \draw[-{Latex}] (0, 0) -- (10, 0) node[right] {$V$};
 
-            \draw[dashed] (0, 2) node[left] {$P_1 = P_0$} -| (3, 0) node[below] {$V_1 = V_2 = V_0$ };
+            \draw[dashed] (0, 2) node[left] {$P_1 = P_0$} -| (3, 0) node[below] {$V_1 = V_2 = V_0$};
             \draw[dashed] (0, 6) node[left] {$P_2 = P_3 = 2P_0$} -| (9, 0) node[below] {$V_3 = 3V_0$};
 
             \draw (3, 2) node[above left]{1} node[below left]{$T_1 = T_0$}
@@ -6478,14 +6478,14 @@
             &= \frac 32 (P\Delta V + V \Delta P) + P \Delta V =  \frac 52 P\Delta V + \frac 32 V \Delta P = \\
             &= \frac 52 P\Delta V + \frac 32 V \cdot \cbr{- \frac{P_0}{V_0} \Delta V} = \frac{\Delta V}2 \cdot \cbr{5P - \frac{P_0}{V_0} V} = \\
             &= \frac{\Delta V}2 \cdot \cbr{5 \cdot \cbr{3P_0 - \frac{P_0}{V_0} V} - \frac{P_0}{V_0} V}
-             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 3 - 8\frac{V}{V_0}}.
+             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 3 - 8\fracV{V_0}}.
         \end{align*}
 
         Таком образом, знак количества теплоты $Q$ на участке 23 зависит от конкретного значения $V$:
         \begin{itemize}
             \item $\Delta V > 0$ на всём участке 23, поскольку газ расширяется,
             \item $P > 0$ — всегда, у нас идеальный газ, удары о стенки сосуда абсолютно упругие, а молекулы не взаимодействуют и поэтому давление только положительно,
-            \item если $5 \cdot 3 - 8\frac{V}{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
+            \item если $5 \cdot 3 - 8\fracV{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
         \end{itemize}
         Решая последнее неравенство, получаем конкретное значение $V^*$: при $V < V^*$ тепло подводят, далее~— отводят.
         Тут *~--- некоторая точка между точками 2 и 3, конкретные значения надо досчитать:
@@ -6509,7 +6509,7 @@
         \eta &= \frac{A_\text{цикл}}{Q_+} = \frac{A_\text{цикл}}{Q_{12} + Q_{2*}}
             = \frac{A_\text{цикл}}{A_{12} + \Delta U_{12} + A_{2*} + \Delta U_{2*}} = \\
             &= \frac{\frac12 \cdot P_0V_0}{0 + \frac32 \cdot P_0 V_0 + \frac{175}{128} \cdot P_0 V_0 + \frac{21}{128} \cdot P_0 V_0}
-             = \frac{\frac12}{\frac32 + \frac{175}{128} + \frac{21}{128}}
+             = \frac{A_bonus_cycle:LaTeX}{\frac32 + \frac{175}{128} + \frac{21}{128}}
              = \frac{16}{97} \leftarrow \text{вжух и готово!}
         \end{align*}
 }
@@ -6587,7 +6587,7 @@
             \draw[-{Latex}] (0, 0) -- (0, 7) node[above left] {$P$};
             \draw[-{Latex}] (0, 0) -- (10, 0) node[right] {$V$};
 
-            \draw[dashed] (0, 2) node[left] {$P_1 = P_0$} -| (3, 0) node[below] {$V_1 = V_2 = V_0$ };
+            \draw[dashed] (0, 2) node[left] {$P_1 = P_0$} -| (3, 0) node[below] {$V_1 = V_2 = V_0$};
             \draw[dashed] (0, 6) node[left] {$P_2 = P_3 = 6P_0$} -| (9, 0) node[below] {$V_3 = 5V_0$};
 
             \draw (3, 2) node[above left]{1} node[below left]{$T_1 = T_0$}
@@ -6665,14 +6665,14 @@
             &= \frac 32 (P\Delta V + V \Delta P) + P \Delta V =  \frac 52 P\Delta V + \frac 32 V \Delta P = \\
             &= \frac 52 P\Delta V + \frac 32 V \cdot \cbr{- \frac{P_0}{V_0} \Delta V} = \frac{\Delta V}2 \cdot \cbr{5P - \frac{P_0}{V_0} V} = \\
             &= \frac{\Delta V}2 \cdot \cbr{5 \cdot \cbr{7P_0 - \frac{P_0}{V_0} V} - \frac{P_0}{V_0} V}
-             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 7 - 8\frac{V}{V_0}}.
+             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 7 - 8\fracV{V_0}}.
         \end{align*}
 
         Таком образом, знак количества теплоты $Q$ на участке 23 зависит от конкретного значения $V$:
         \begin{itemize}
             \item $\Delta V > 0$ на всём участке 23, поскольку газ расширяется,
             \item $P > 0$ — всегда, у нас идеальный газ, удары о стенки сосуда абсолютно упругие, а молекулы не взаимодействуют и поэтому давление только положительно,
-            \item если $5 \cdot 7 - 8\frac{V}{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
+            \item если $5 \cdot 7 - 8\fracV{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
         \end{itemize}
         Решая последнее неравенство, получаем конкретное значение $V^*$: при $V < V^*$ тепло подводят, далее~— отводят.
         Тут *~--- некоторая точка между точками 2 и 3, конкретные значения надо досчитать:
@@ -6696,7 +6696,7 @@
         \eta &= \frac{A_\text{цикл}}{Q_+} = \frac{A_\text{цикл}}{Q_{12} + Q_{2*}}
             = \frac{A_\text{цикл}}{A_{12} + \Delta U_{12} + A_{2*} + \Delta U_{2*}} = \\
             &= \frac{\frac{25}2 \cdot P_0V_0}{0 + \frac{15}2 \cdot P_0 V_0 + \frac{1863}{128} \cdot P_0 V_0 + \frac{1053}{128} \cdot P_0 V_0}
-             = \frac{\frac{25}2}{\frac{15}2 + \frac{1863}{128} + \frac{1053}{128}}
+             = \frac{A_bonus_cycle:LaTeX}{\frac{15}2 + \frac{1863}{128} + \frac{1053}{128}}
              = \frac{400}{969} \leftarrow \text{вжух и готово!}
         \end{align*}
 }
