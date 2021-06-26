@@ -151,7 +151,7 @@ class Waves05(variant.VariantTask):
 ''')
 @variant.answer_short('''
     \\lambda_1
-        = v T_1 = v * \\frac 1{\\nu_1} = \\frac{v:L}{\\nu_1}
+        = v T_1 = v * \\frac 1{\\nu_1} = \\frac {v:L}{\\nu_1}
         = \\frac{v:Value:s}{nu_1:Value:s} = {l_1:Value},
     \\quad
     \\lambda_2

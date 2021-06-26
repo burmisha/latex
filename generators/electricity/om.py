@@ -444,7 +444,7 @@ class Circuit_four(variant.VariantTask):
     '\\eli &= \\frac U{R_0} = \\frac {2U}{3R},',
     'U_1 &= \\eli R_1 = \\frac {2U}{3R} * R = \\frac 23 U = {U1:Value},',
     'U_{23} &= U_{56} = U_4 = U - \\eli R_1 = U - \\frac {2U}{3R} * R = \\frac U3 = {U4:Value},',
-    '\\eli_2 &= \\frac{U_4}{R_4} = \\frac{U:L}{3R} \\approx {I2:Value},',
+    '\\eli_2 &= \\frac{U_4}{R_4} = \\frac U{3R} \\approx {I2:Value},',
     '\\eli_1 &= \\frac{U_{23}}{R_{23}} = \\frac{\\frac U3}{R+R} = \\frac U{6R} \\approx {I1:Value},',
     '\\eli_3 &= \\frac{U_{56}}{R_{56}} = \\frac{\\frac U3}{R+R} = \\frac U{6R} \\approx {I3:Value},',
     'U_2 &= \\eli_1 R_2 = \\frac U{6R} * R = \\frac U6 = {U2:Value},',

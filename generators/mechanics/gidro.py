@@ -96,7 +96,7 @@ class Ch_6_10(variant.VariantTask):
 ''')
 @variant.answer_short(
     '{rho:L}{Consts.g_ten:L}{h1:L} = {Consts.water.rho:L}{Consts.g_ten:L}{h2:L} \\implies '
-    '{h2:L} = {h1:L} \\frac{rho:L:s}{Consts.water.rho:L:s}} '
+    '{h2:L} = {h1:L} \\frac{rho:L:s}{Consts.water.rho:L:s} '
     '= {h1:Value} * \\frac{rho:Value:s}{Consts.water.rho:Value:s} '
     '= {h2:Value}'
 )
