@@ -276,7 +276,6 @@ def run(args):
                     log.info(f'{video}, {topic_index}')
 
 
-
 def populate_parser(parser):
     parser.add_argument('-s', '--save', help='Save videos to hard drive', action='store_true')
     parser.add_argument('-p', '--pavel-viktor', help='Add Pavel Viktor', action='store_true')

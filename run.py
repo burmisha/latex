@@ -11,8 +11,8 @@ import logging
 log = logging.getLogger('main')
 
 DEFAULT_LOG_FIELDS = [
-    # '%(asctime)s.%(msecs)03d',
-    '%(name)15s:%(lineno)-4d',
+    '%(asctime)s.%(msecs)03d',
+    '%(name)20s:%(lineno)-4d',
     # '%(levelname)-7s',
     ' %(message)s',
 ]
@@ -64,6 +64,7 @@ def CreateArgumentsParser():
     subparsers = parser.add_subparsers()
     for mode_name, help_message, populate_module in [
         ('absent', 'Check absent files', tools.absent),
+        ('build', 'Build pdf files from LaTeX', tools.build),
         ('checker', 'Check csv forms', tools.checker),
         ('convert', 'Convert pdf books into jpeg', tools.convert),
         ('dnevnik', 'Run mesh tools', tools.dnevnik),
@@ -114,7 +115,8 @@ def main():
         delta = finish_time - start_time
         log.exception(cm(f'Failed in {delta:.2f} seconds', color=color.Red))
         if delta >= 30:
-            say(f'Ошибка: {e}', rate=250)
+            msg = str(e)[:30]
+            say(f'Ошибка: {msg}', rate=250)
 
 
 if __name__ == '__main__':

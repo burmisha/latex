@@ -1,15 +1,29 @@
 import subprocess
 import webbrowser
+import time
 
 import logging
 log = logging.getLogger(__name__)
 
+from library.logging import cm, color
 
-def run(command):
-    log.debug('Running %s', ' '.join(command))
-    result = subprocess.call(command)
-    if result != 0:
-        raise RuntimeError('Command failed: %s: %s' % (command, ' '.join(command)))
+
+def now_ts():
+    return time.time()
+
+
+def run(command, cwd=None):
+    str_sommand = ' '.join(command)
+    start = now_ts()
+    result = subprocess.run(command, capture_output=True, cwd=cwd)
+    end = now_ts()
+    delta = f'{end - start:.3f}'
+    if result.returncode == 0:
+        log.debug(f'Completed {cm(str_sommand, color=color.Cyan)} in {cm(delta, color=color.Cyan)} seconds')
+    else:
+        log.debug(f'Failed {cm(str_sommand, color=color.Red)} in {cm(delta, color=color.Red)} seconds')
+        raise RuntimeError(f'Command failed: {str_sommand}')
+    return result
 
 
 def pbcopy(text, name=None):
