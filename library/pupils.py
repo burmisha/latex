@@ -100,11 +100,11 @@ class Pupils(object):
             *args,
         )
 
-    def Iterate(self):
-        me = ['Михаил Бурмистров']
+    def Iterate(self, only_me=False):
         yield self._me
-        for pupil in self._pupils_list:
-            yield pupil
+        if not only_me:
+            for pupil in self._pupils_list:
+                yield pupil
 
     def FindByName(self, name, use_raw_if_missing=True):
         best_keys = process.extract(name, self._name_lookup.keys(), limit=2, scorer=fuzz.token_sort_ratio)

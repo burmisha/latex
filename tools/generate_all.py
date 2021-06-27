@@ -75,7 +75,7 @@ def run(args):
                 multiplePaper.GetFilename(),
             )
 
-            text = multiplePaper.GetTex(variant_tasks=tasks)
+            text = multiplePaper.GetTex(variant_tasks=tasks, only_me=args.only_me)
             task = PAPER_TEMPLATE.format(noanswers='\n\\noanswers\n', filename=filename)
             answer = PAPER_TEMPLATE.format(noanswers='', filename=filename)
 
@@ -95,4 +95,5 @@ def populate_parser(parser):
     parser.add_argument('-p', '--problems', help='Generate problems', action='store_true')
     parser.add_argument('-l', '--lists', help='Generate list', action='store_true')
     parser.add_argument('-m', '--multiple', help='Generate multiple', action='store_true')
+    parser.add_argument('-o', '--only-me', help='Use only one variant', action='store_true')
     parser.set_defaults(func=run)

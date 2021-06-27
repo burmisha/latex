@@ -279,9 +279,9 @@ class MultiplePaper:
         self.Date = date  # only for date in header and filename
         self.Pupils = pupils
 
-    def GetTex(self, variant_tasks=None, withAnswers=False):
+    def GetTex(self, variant_tasks=None, withAnswers=False, only_me=False):
         paper_tex = []
-        for pupil in self.Pupils.Iterate():
+        for pupil in self.Pupils.Iterate(only_me=only_me):
             pupil_tex = [
                 f'\\addpersonalvariant{{{pupil.name} {pupil.surname}}}'
             ]
