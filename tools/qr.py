@@ -74,6 +74,9 @@ def run(args):
             ('https://notion.so/8acf3ff3b2874cefabbfa78d2db4f07e', '2020-summer-marathon.png'),
             ('https://notion.so/f28319ef853940bd88d8729ba23b1eab', '2020-21-10A.png'),
             ('https://notion.so/a7e4f5156a9b428397e3b495ffce7881', '2020-21-9M.png'),
+            ('https://jamboard.google.com/d/1lI-2Lm1g38idTWHZuP8ZgnyBA_K0lyw9k8tsJaSKPHk/edit', '2021.07.09 Летний институт.png'),
+            ('https://burmisha.notion.site/0c8b8d1351ee4f419df0ecabb11edf00', '2021-22-11BA.png'),
+            ('https://burmisha.notion.site/d8c12e76df38443881b6524482e4d485', '2021-22-11B.png'),
         ],
     )
 
