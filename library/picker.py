@@ -26,7 +26,11 @@ class KeyPicker:
 
     def _get_matched_keys(self, flt):
         flt_key = self._make_key(flt) if flt else None
-        return flt_key, sorted([key for key in self._options if not flt or flt_key in key])
+        result = sorted([key for key in self._options if not flt or flt_key in key])
+        if len(result) > 1:
+            if result.count(flt_key) == 1:
+                return flt_key, [flt_key]
+        return flt_key, result
 
     def get(self, flt=None):
         assert flt is None or isinstance(flt, str)
