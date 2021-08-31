@@ -37,6 +37,7 @@ def get_convert_config():
     return [
         (library.location.udr('11 класс', 'Вишнякова'), 'generated', False, '.*Вишнякова - [0-9].*'),
         (library.location.udr('11 класс', 'Вишнякова'), 'generated', False, '.*Вишнякова - .* - Все условия.*'),
+        (library.location.udr('11 класс'), None, False, '.*Рабочая тетрадь.*'),
         (library.location.udr('10 класс'), None, False, '.*Рабочая тетрадь.*'),
         (library.location.udr('9 класс'), None, False, '.*Рабочая тетрадь.*'),
         (
