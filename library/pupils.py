@@ -78,10 +78,12 @@ class Pupils(object):
         self.LatinLetter = {
             'А1': 'A1',
             'А': 'A',
+            'Б': 'Б',
             'Т': 'T',
             'Л': 'L',
             'М': 'M',
             'АБ': 'AB',
+            'БА': 'BA',
         }[self.Letter]
         self._name_lookup = dict([
             (f'{pupil.name} {pupil.surname}', pupil)
@@ -90,13 +92,13 @@ class Pupils(object):
 
     def get_path(self, *args, archive=True):
         if archive:
-            suffix = '- private'
+            suffix = ' - private'
         else:
-            suffix = '- public'
+            suffix = ''
 
         return library.location.udr(
             f'{self.Grade} класс',
-            f'{self.Year} {self.Grade}{self.Letter} Физика {suffix}',
+            f'{self.Year} {self.Grade}{self.Letter} Физика{suffix}',
             *args,
         )
 
@@ -182,8 +184,8 @@ def get_class_from_string(value, addMyself=False, onlyMe=False):
     if search_by_id:
         return search_by_id
 
-    assert isinstance(value, str), f'Trying to search not by str: {value}'
-    assert ' ' in value, f'No space in class name: {value}'
+    assert isinstance(value, str), f'Trying to search not by str: {value!r}'
+    assert ' ' in value, f'No space in class name: {value!r}'
 
     parts = value.split()
     date_part, class_part = parts[0], parts[1]
@@ -203,7 +205,7 @@ def get_class_from_string(value, addMyself=False, onlyMe=False):
 
     key = f'{year} {class_part}'
     pupils = names_picker.get(key)
-    assert pupils
+    assert pupils, f'Could not find pupils by key {key}'
 
     log.debug(f'Got {pupils} (search by: {key!r})')
     return pupils
