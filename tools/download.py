@@ -139,6 +139,7 @@ def run(args):
             'https://www.youtube.com/watch?v=denwtwcfvZw': '8 - Стабилитрон',
             'https://www.youtube.com/watch?v=4E1AxUMUz-g': '9 - Дисперсия света',
             'https://www.youtube.com/watch?v=BhYKN21olBw': '9 - Brain Damage',
+            'https://www.youtube.com/watch?v=eFUBPqwLxjY': '8 - 40 - Магнитное взаимодействие токов',
             'https://www.youtube.com/watch?v=mh-LTSGjFsE': '9 - 10 - Закон Гука и энергия упругой деформации',
             'https://www.youtube.com/watch?v=F4JL2vvYd8c': '9-5-1 - НИЯУ МИФИ - Опыт Эрстеда со стрелкой',
         },
