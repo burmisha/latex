@@ -534,6 +534,9 @@ def get_all_variants():
                 'electricity.om.P_ratio',
             ],
         ),
-
+        Work(
+            task_id='2021-09-07 11Б',
+            classes={'electricity.magnet': ['ConstMagnet0', 'ConstMagnet01', 'ConstMagnet1', 'ConstMagnet2', 'ConstMagnet3']},
+        ),
     ]
     return works

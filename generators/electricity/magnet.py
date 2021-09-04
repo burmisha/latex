@@ -10,18 +10,47 @@ log = logging.getLogger(__name__)
 
 
 @variant.text('''
-    Верно ли, что
+    Укажите, верны ли утверждения («да» или «нет» слева от каждого утверждения):
     \\begin{itemize}
-        \\item   если распилить постоянный магнит на 2, то мы получим 2 магнита:
-                один только с южным полюсом, а второй — только с северным,
-        \\item   линии магнитного поля всегда замкнуты,
-        \\item   линии магнитного поля могут пересекаться в полюсах магнитов,
-        \\item   линии магнитного всегда начинаются у северного полюса и заканчиваются у южного,
-        \\item   Северный географическию полюс Земли в точности совпадает с южным магнитным полюсом Земли?
+        \\item  Если распилить постоянный магнит на 2, то мы получим 2 магнита:
+                один только с южным полюсом, а второй — только с северным.
+        \\item  Полосовой магнит можно распилить {q2} разрезами на {r2} магнита поменьше.
+        \\item  Между линиями индукции магнитного поля величина этого поля пренебрежимо мала.
+        \\item  Линии магнитного поля всегда замкнуты.
+        \\item  Линии магнитного поля могут пересекаться в полюсах магнитов.
+        \\item  Линии магнитного всегда начинаются у северного полюса и заканчиваются у южного.
+        \\item  Чем гуще линии — тем {q7} магнитное поле.
+        \\item  Северный географический полюс Земли в точности совпадает с {q8} магнитным полюсом Земли.
+        \\item  Если в компасе установить сильный магнит, то его не удастся отклонить слабым магнитом неподалёку.
+                Так не делают лишь потому, что компас станет слишком неудобным в бытовом использовании.
+        \\item  Внутри магнита есть магнитное поле, поэтому для честности мы обязаны рисовать поле как снаружи, так и внутри него.
     \\end{itemize}
 ''')
-@variant.no_args
+@variant.arg(q2__r2=[(2, 3), (3, 4)])
+@variant.arg(q7__a7=[('слабее', 'нет'), ('сильнее', 'да'),])
+@variant.arg(q8=['южным', 'северным'])
+@variant.solution_space(0)
+@variant.answer_short('\\text{нет, да, нет, да, да, нет, {a7}, нет, нет, да}')
 class ConstMagnet0(variant.VariantTask):
+    pass
+
+
+@variant.text('''
+    Изобразите линии индукции магнитного поля вокруг постоянного магнита.
+
+    \\begin{tikzpicture}[x=1cm,y=1cm,thick]
+        \\draw (0, 0) rectangle (3, 0.6);
+        \\node [right] (right) at (0, 0.3) {{L}};
+        \\node [left] (left) at (3, 0.3) {{R}};
+        \\node [right] (right) at (0, 2) {};
+        \\node [right] (right) at (0, -2) {};
+        \\node [right] (right) at (-2, 0) {};
+        \\node [right] (right) at (5, 0) {};
+    \\end{tikzpicture}
+''')
+@variant.arg(L__R=[('N', 'S'), ('S', 'N')])
+@variant.solution_space(0)
+class ConstMagnet01(variant.VariantTask):
     pass
 
 
@@ -32,6 +61,7 @@ class ConstMagnet0(variant.VariantTask):
 ''')
 @variant.arg(variant=['а', 'б', 'в', 'г'])
 @variant.arg(points=[' и '.join(points) for points in itertools.combinations('ABCD', 2)])
+@variant.solution_space(80)
 class ConstMagnet1(variant.VariantTask):
     pass
 
@@ -42,6 +72,7 @@ class ConstMagnet1(variant.VariantTask):
     Сделайте рисунок, укажите направление протекания электрического тока,
     изобразите линии индукции магнитного поля.
 ''')
+@variant.solution_space(80)
 @variant.arg(variant__direction__point=itertools.chain(
     itertools.product(
         ['а', 'б'],
@@ -68,6 +99,7 @@ class ConstMagnet2(variant.VariantTask):
 @variant.arg(variant=['а', 'б', 'в', 'г'])
 @variant.arg(points=[' и '.join(points) for points in itertools.combinations('ABCD', 2)])
 @variant.arg(what=['притяжение', 'отталкивание'])
+@variant.solution_space(80)
 class ConstMagnet3(variant.VariantTask):
     pass
 
