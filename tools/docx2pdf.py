@@ -33,6 +33,7 @@ class PdfExtractor:
 def get_convert_config():
     pupils_9m = library.pupils.get_class_from_string('2020 9М')
     pupils_10ab = library.pupils.get_class_from_string('2020 10АБ')
+    pupils_11ba = library.pupils.get_class_from_string('2021 11БА')
 
     return [
         (library.location.udr('11 класс', 'Вишнякова'), 'generated', False, '.*Вишнякова - [0-9].*'),
@@ -63,6 +64,12 @@ def get_convert_config():
             pupils_9m.get_path(archive=False),
             False,
             r'.*с урока.*\.docx$',
+        ),
+        (
+            pupils_11ba.get_path('11-1 - Магнитное поле', archive=True),
+            pupils_11ba.get_path('11-1 - Магнитное поле', archive=False),
+            False,
+            r'.* - решения\.docx$',
         ),
         (
             library.location.udr('8 класс', '2020-21 Архив'),
