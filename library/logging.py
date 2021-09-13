@@ -46,7 +46,7 @@ class ColorMessage:
                 message += self.BoldTemplate
             message += str(line)
             if color or bg or bold:
-            	message += self.ResetTemplate
+                message += self.ResetTemplate
             return message
         else:
             return line

@@ -43,7 +43,7 @@ class Checker:
                 assert isinstance(key, (str, int))
             answer_dict = answer
         else:
-        	raise RuntimeError(f'got invalid answer: {answer}')
+            raise RuntimeError(f'got invalid answer: {answer}')
 
         return [
             ProperAnswer(key, weight=value)
