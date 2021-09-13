@@ -78,7 +78,7 @@ class Pupils(object):
         self.LatinLetter = {
             'А1': 'A1',
             'А': 'A',
-            'Б': 'Б',
+            'Б': 'B',
             'Т': 'T',
             'Л': 'L',
             'М': 'M',
