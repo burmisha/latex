@@ -535,8 +535,16 @@ def get_all_variants():
             ],
         ),
         Work(
-            task_id='2021-09-07 11Б',
-            classes={'electricity.magnet': ['ConstMagnet0', 'ConstMagnet01', 'ConstMagnet1', 'ConstMagnet2', 'ConstMagnet3']},
+            task_id='2021-09-07 11БА',
+            classes={'electricity.magnet': ['ConstMagnet0', 'ConstMagnet01', 'ConstMagnet02', 'ConstMagnet1', 'ConstMagnet2']},
         ),
+        Work(
+            task_id='2021-09-08 11Б',
+            classes={'electricity.magnet': ['ConstMagnet0', 'ConstMagnet01', 'ConstMagnet02', 'ConstMagnet1', 'ConstMagnet2']},
+        ),
+        # Work(
+        #     task_id='2021-09-08 11Б',
+        #     classes={'electricity.magnet': ['ConstMagnet0', 'ConstMagnet01', 'ConstMagnet02', 'ConstMagnet1', 'ConstMagnet2', 'ConstMagnet3']},
+        # ),
     ]
     return works
