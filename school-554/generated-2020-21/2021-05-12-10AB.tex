@@ -3848,4 +3848,114 @@
             \approx -4{,}1790\,\text{В}.
     \end{align*}
 }
+
+\variantsplitter
+
+\addpersonalvariant{Арсений Трофимов}
+
+\tasknumber{1}%
+\task{%
+    Определите эквивалентное сопротивление цепи на рисунке (между выделенными на рисунке контактами),
+    если известны сопротивления всех резисторов: $R_1 = 1\,\text{Ом}$, $R_2 = 5\,\text{Ом}$, $R_3 = 3\,\text{Ом}$, $R_4 = 4\,\text{Ом}$.
+    При каком напряжении поданном на эту цепь, в ней потечёт ток равный $\eli = 10\,\text{А}$?
+
+    \begin{tikzpicture}[rotate=90, circuit ee IEC, thick]
+        \node [contact]  (contact1) at (-1.5, 0) {};
+        \draw  (0, 0) to [resistor={info=$R_1$}] ++(left:1.5);
+        \draw  (0, 0) -- ++(up:1.5) to [resistor={near start, info=$R_2$}, resistor={near end, info=$R_3$}] ++(right:3);
+        \draw  (0, 0) to [resistor={info=$R_4$}] ++(right:3) -- ++(up:1.5);
+        \draw  (3, 1.5) -- ++(right:0.5); \node [contact] (contact2) at (3.5, 1.5) {};
+    \end{tikzpicture}
+}
+\answer{%
+    $R=\frac{11}3\units{Ом} \approx 3{,}67\,\text{Ом} \implies U = \eli R \approx 36{,}7\,\text{В}.$
+}
+\solutionspace{120pt}
+
+\tasknumber{2}%
+\task{%
+    Определите показания амперметра $2$ (см.
+    рис.) и разность потенциалов на резисторе $1$,
+    если сопротивления всех резисторов равны: $R_1 = R_2 = R_3 = R_4 = R_5 = R_6 = R = 10\,\text{Ом}$,
+    а напряжение, поданное на цепь, равно $U = 90\,\text{В}$.
+    Ответы получите в виде несократимых дробей, а также определите приближённые значения.
+    Амперметры считать идеальными.
+
+    \begin{tikzpicture}[circuit ee IEC, thick]
+        \node [contact]  (left contact) at (3, 0) {};
+        \node [contact]  (right contact) at (9, 0) {};
+        \draw  (left contact) -- ++(up:2) to [resistor={very near start, info=$R_2$}, amperemeter={midway, info=$1$}, resistor={very near end, info=$R_3$} ] ++(right:6) -- (right contact);
+        \draw  (left contact) -- ++(down:2) to [resistor={very near start, info=$R_5$}, resistor={midway, info=$R_6$}, amperemeter={very near end, info=$3$}] ++(right:6) -- (right contact);
+        \draw  (left contact) ++(left:3) to [resistor={info=$R_1$}] (left contact) to [amperemeter={near start, info=$2$}, resistor={near end , info=$R_4$}] (right contact) -- ++(right:0.5);
+    \end{tikzpicture}
+}
+\answer{%
+    \begin{align*}
+    R_0 &= R + \frac 1{\frac 1{R+R} + \frac 1R + \frac 1{R+R}} = R + \frac 1{\frac 2R} = \frac 32 R, \\
+    \eli &= \frac U{R_0} = \frac {2U}{3R}, \\
+    U_1 &= \eli R_1 = \frac {2U}{3R} \cdot R = \frac 23 U = 60{,}0\,\text{В}, \\
+    U_{23} &= U_{56} = U_4 = U - \eli R_1 = U - \frac {2U}{3R} \cdot R = \frac U3 = 30{,}0\,\text{В}, \\
+    \eli_2 &= \frac{U_4}{R_4} = \frac U{3R} \approx 3{,}0\,\text{А}, \\
+    \eli_1 &= \frac{U_{23}}{R_{23}} = \frac{\frac U3}{R+R} = \frac U{6R} \approx 1{,}5\,\text{А}, \\
+    \eli_3 &= \frac{U_{56}}{R_{56}} = \frac{\frac U3}{R+R} = \frac U{6R} \approx 1{,}5\,\text{А}, \\
+    U_2 &= \eli_1 R_2 = \frac U{6R} \cdot R = \frac U6 = 15{,}0\,\text{В}, \\
+    U_3 &= \eli_1 R_3 = \frac U{6R} \cdot R = \frac U3 = 15{,}0\,\text{В}, \\
+    U_5 &= \eli_3 R_5 = \frac U{6R} \cdot R = \frac U5 = 15{,}0\,\text{В}, \\
+    U_6 &= \eli_3 R_6 = \frac U{6R} \cdot R = \frac U6 = 15{,}0\,\text{В}.
+    \end{align*}
+}
+\solutionspace{120pt}
+
+\tasknumber{3}%
+\task{%
+    Определите ток, протекающий через резистор $R = 10\,\text{Ом}$ и разность потенциалов на нём (см.
+    рис.),
+    если $\ele_1 = 18\,\text{В}$, $\ele_2 = 15\,\text{В}$, $r_1 = 2\,\text{Ом}$, $r_2 = 6\,\text{Ом}$.
+
+    \begin{tikzpicture}[circuit ee IEC, thick]
+        \draw  (0, 0) to [battery={rotate=-180,info={$\ele_1, r_1$}}] (0, 3)
+                -- (5, 3)
+                to [battery={rotate=-180, info'={$\ele_2, r_2$}}] (5, 0)
+                -- (0, 0)
+                (2.5, 0) to [resistor={info=$R$}] (2.5, 3);
+    \end{tikzpicture}
+}
+\answer{%
+    Выберем 2 контура и один узел, запишем для них законы Кирхгофа:
+
+    \begin{tikzpicture}[circuit ee IEC, thick]
+        \draw  (0, 0) to [battery={rotate=-180,info={$\ele_1, r_1$}}, current direction={near end, info=$\eli_1$}] (0, 3)
+                -- (5, 3)
+                to [battery={rotate=-180, info'={$\ele_2, r_2$}}, current direction={near end, info=$\eli_2$}] (5, 0)
+                -- (0, 0)
+                (2.5, 0) to [resistor={info=$R$}, current direction'={near end, info=$\eli$}] (2.5, 3);
+        \draw [-{Latex},color=red] (0.8, 1.9) arc [start angle = 135, end angle = -160, radius = 0.6];
+        \draw [-{Latex},color=blue] (3.5, 1.9) arc [start angle = 135, end angle = -160, radius = 0.6];
+        \node [contact,color=green!71!black] (topc) at (2.5, 3) {};
+        \node [above] (top) at (2.5, 3) {$1$};
+    \end{tikzpicture}
+
+    \begin{align*}
+        &\begin{cases}
+            {\color{red} \ele_1 = \eli_1 r_1 + \eli R}, \\
+            {\color{blue} \ele_2 = \eli_2 r_2 - \eli R}, \\
+            {\color{green!71!black} \eli - \eli_1 - \eli_2 = 0};
+        \end{cases}
+        \qquad \implies \qquad
+        \begin{cases}
+            \eli_1 = \frac{\ele_1 - \eli R}{r_1}, \\
+            \eli_2 = \frac{\ele_2 + \eli R}{r_2}, \\
+            \eli - \eli_1 - \eli_2 = 0;
+        \end{cases} \implies \\
+        &\implies \eli - \frac{\ele_1 - \eli R}{r_1} + \frac{\ele_2 + \eli R}{r_2} = 0, \\
+        &\eli\cbr{ 1 + \frac{R}{r_1} + \frac{R}{r_2}} - \frac{\ele_1}{r_1} + \frac{\ele_2}{r_2} = 0, \\
+        &\eli
+            = \frac{\frac{\ele_1}{r_1} - \frac{\ele_2}{r_2}}{ 1 + \frac{R}{r_1} + \frac{R}{r_2}}
+            = \frac{\frac{18\,\text{В}}{2\,\text{Ом}} - \frac{15\,\text{В}}{6\,\text{Ом}}}{ 1 + \frac{10\,\text{Ом}}{2\,\text{Ом}} + \frac{10\,\text{Ом}}{6\,\text{Ом}}}
+            = \frac{39}{46}\units{А}
+            \approx 0{,}848\,\text{А}, \\
+        &U  = \eli R = \frac{\frac{\ele_1}{r_1} - \frac{\ele_2}{r_2}}{ 1 + \frac{R}{r_1} + \frac{R}{r_2}} R
+            \approx 8{,}478\,\text{В}.
+    \end{align*}
+}
 % autogenerated

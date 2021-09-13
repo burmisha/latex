@@ -7278,4 +7278,212 @@
         \item внутренняя энергия идеального одноатомного газа.
     \end{enumerate}
 }
+
+\variantsplitter
+
+\addpersonalvariant{Арсений Трофимов}
+
+\tasknumber{1}%
+\task{%
+    Определите КПД (оставив ответ точным в виде нескоратимой дроби) цикла 1231, рабочим телом которого является идеальный одноатомный газ, если
+    \begin{itemize}
+        \item 12 — изохорический нагрев в пять раз,
+        \item 23 — изобарическое расширение, при котором температура растёт в два раза,
+        \item 31 — процесс, график которого в $PV$-координатах является отрезком прямой.
+    \end{itemize}
+    Бонус: замените цикл 1231 циклом, в котором 12 — изохорический нагрев в пять раз, 23 — процесс, график которого в $PV$-координатах является отрезком прямой, 31 — изобарическое охлаждение, при котором температура падает в пять раз.
+}
+\answer{%
+    \begin{align*}
+    A_{12} &= 0, \Delta U_{12} > 0, \implies Q_{12} = A_{12} + \Delta U_{12} > 0.
+    \\
+    A_{23} &> 0, \Delta U_{23} > 0, \implies Q_{23} = A_{23} + \Delta U_{23} > 0, \\
+    A_{31} &= 0, \Delta U_{31} < 0, \implies Q_{31} = A_{31} + \Delta U_{31} < 0.
+    \\
+    P_1V_1 &= \nu R T_1, P_2V_2 = \nu R T_2, P_3V_3 = \nu R T_3 \text{ — уравнения состояния идеального газа}, \\
+    &\text{Пусть $P_0$, $V_0$, $T_0$ — давление, объём и температура в точке 1 (минимальные во всём цикле):} \\
+    P_1 &= P_0, P_2 = P_3, V_1 = V_2 = V_0, \text{остальные соотношения нужно считать} \\
+    T_2 &= 5T_1 = 5T_0 \text{(по условию)} \implies \frac{P_2}{P_1} = \frac{P_2V_0}{P_1V_0} = \frac{P_2 V_2}{P_1 V_1}= \frac{\nu R T_2}{\nu R T_1} = \frac{T_2}{T_1} = 5 \implies P_2 = 5 P_1 = 5 P_0, \\
+    T_3 &= 2T_2 = 10T_0 \text{(по условию)} \implies \frac{V_3}{V_2} = \frac{P_3V_3}{P_2V_2}= \frac{\nu R T_3}{\nu R T_2} = \frac{T_3}{T_2} = 2 \implies V_3 = 2 V_2 = 2 V_0.
+    \\
+    A_\text{цикл} &= \frac 12 (2P_0 - P_0)(5V_0 - V_0) = \frac 12 \cdot 4 \cdot P_0V_0, \\
+    A_{23} &= 5P_0 \cdot (2V_0 - V_0) = 5P_0V_0, \\
+    \Delta U_{23} &= \frac 32 \nu R T_3 - \frac 32 \nu R T_2 = \frac 32 P_3 V_3 - \frac 32 P_2 V_2 = \frac 32 \cdot 5 P_0 \cdot 2 V_0 -  \frac 32 \cdot 5 P_0 \cdot V_0 = \frac 32 \cdot 5 \cdot P_0V_0, \\
+    \Delta U_{12} &= \frac 32 \nu R T_2 - \frac 32 \nu R T_1 = \frac 32 P_2 V_2 - \frac 32 P_1 V_1 = \frac 32 \cdot 5 P_0V_0 - \frac 32 P_0V_0 = \frac 32 \cdot 4 \cdot P_0V_0.
+    \\
+    \eta &= \frac{A_\text{цикл}}{Q_+} = \frac{A_\text{цикл}}{Q_{12} + Q_{23}}  = \frac{A_\text{цикл}}{A_{12} + \Delta U_{12} + A_{23} + \Delta U_{23}} =  \\
+     &= \frac{\frac 12 \cdot 4 \cdot P_0V_0}{0 + \frac 32 \cdot 4 \cdot P_0V_0 + 5P_0V_0 + \frac 32 \cdot 5 \cdot P_0V_0} = \frac{\frac 12 \cdot 4}{\frac 32 \cdot 4 + 5 + \frac 32 \cdot 5} = \frac4{37} \approx 0.108.
+    \end{align*}
+
+
+        График процесса не в масштабе (эта часть пока не готова и сделать автоматически аккуратно сложно), но с верными подписями (а для решения этого достаточно):
+
+        \begin{tikzpicture}[thick]
+            \draw[-{Latex}] (0, 0) -- (0, 7) node[above left] {$P$};
+            \draw[-{Latex}] (0, 0) -- (10, 0) node[right] {$V$};
+
+            \draw[dashed] (0, 2) node[left] {$P_1 = P_0$} -| (3, 0) node[below] {$V_1 = V_2 = V_0$};
+            \draw[dashed] (0, 6) node[left] {$P_2 = P_3 = 5P_0$} -| (9, 0) node[below] {$V_3 = 2V_0$};
+
+            \draw (3, 2) node[above left]{1} node[below left]{$T_1 = T_0$}
+                   (3, 6) node[below left]{2} node[above]{$T_2 = 5T_0$}
+                   (9, 6) node[above right]{3} node[below right]{$T_3 = 10T_0$};
+            \draw[midar] (3, 2) -- (3, 6);
+            \draw[midar] (3, 6) -- (9, 6);
+            \draw[midar] (9, 6) -- (3, 2);
+        \end{tikzpicture}
+
+        Решение бонуса:
+        \begin{align*}
+            A_{12} &= 0, \Delta U_{12} > 0, \implies Q_{12} = A_{12} + \Delta U_{12} > 0, \\
+            A_{23} &> 0, \Delta U_{23} \text{ — ничего нельзя сказать, нужно исследовать отдельно}, \\
+            A_{31} &< 0, \Delta U_{31} < 0, \implies Q_{31} = A_{31} + \Delta U_{31} < 0.
+            \\
+        \end{align*}
+
+        Уравнения состояния идеального газа для точек 1, 2, 3: $P_1V_1 = \nu R T_1, P_2V_2 = \nu R T_2, P_3V_3 = \nu R T_3$.
+        Пусть $P_0$, $V_0$, $T_0$ — давление, объём и температура в точке 1 (минимальные во всём цикле).
+
+        12 --- изохора, $\frac{P_1V_1}{T_1} = \nu R = \frac{P_2V_2}{T_2}, V_2=V_1=V_0 \implies \frac{P_1}{T_1} =  \frac{P_2}{T_2} \implies P_2 = P_1 \frac{T_2}{T_1} = 5P_0$,
+
+        31 --- изобара, $\frac{P_1V_1}{T_1} = \nu R = \frac{P_3V_3}{T_3}, P_3=P_1=P_0 \implies \frac{V_3}{T_3} =  \frac{V_1}{T_1} \implies V_3 = V_1 \frac{T_3}{T_1} = 5V_0$,
+
+        Таким образом, используя новые обозначения, состояния газа в точках 1, 2 и 3 описываются макропараметрами $(P_0, V_0, T_0), (5P_0, V_0, 5T_0), (P_0, 5V_0, 5T_0)$ соответственно.
+
+        \begin{tikzpicture}[thick]
+            \draw[-{Latex}] (0, 0) -- (0, 7) node[above left] {$P$};
+            \draw[-{Latex}] (0, 0) -- (10, 0) node[right] {$V$};
+
+            \draw[dashed] (0, 2) node[left] {$P_1 = P_3 = P_0$} -| (9, 0) node[below] {$V_3 = 5V_0$};
+            \draw[dashed] (0, 6) node[left] {$P_2 = 5P_0$} -| (3, 0) node[below] {$V_1 = V_2 = V_0$};
+
+            \draw[dashed] (0, 5) node[left] {$P$} -| (4.5, 0) node[below] {$V$};
+            \draw[dashed] (0, 4.6) node[left] {$P'$} -| (5.1, 0) node[below] {$V'$};
+
+            \draw (3, 2) node[above left]{1} node[below left]{$T_1 = T_0$}
+                   (3, 6) node[below left]{2} node[above]{$T_2 = 5T_0$}
+                   (9, 2) node[above right]{3} node[below right]{$T_3 = 5T_0$};
+            \draw[midar] (3, 2) -- (3, 6);
+            \draw[midar] (3, 6) -- (9, 2);
+            \draw[midar] (9, 2) -- (3, 2);
+            \draw   (4.5, 5) node[above right]{$T$} (5.1, 4.6) node[above right]{$T'$};
+        \end{tikzpicture}
+
+
+        Теперь рассмотрим отдельно процесс 23, к остальному вернёмся позже.
+        Уравнение этой прямой в $PV$-координатах: $P(V) = 6P_0 - \frac{P_0}{V_0} V$.
+        Это значит, что при изменении объёма на $\Delta V$ давление изменится на $\Delta P = - \frac{P_0}{V_0} \Delta V$, обратите внимание на знак.
+
+        Рассмотрим произвольную точку в процессе 23 и дадим процессу ещё немного свершиться, при этом объём изменится на $\Delta V$, давление — на $\Delta P$, температура (иначе бы была гипербола, а не прямая) — на $\Delta T$,
+        т.е.
+        из состояния $(P, V, T)$ мы перешли в $(P', V', T')$, причём  $P' = P + \Delta P, V' = V + \Delta V, T' = T + \Delta T$.
+
+        При этом изменится внутренняя энергия:
+        \begin{align*}
+        \Delta U
+            &= U' - U = \frac 32 \nu R T' - \frac 32 \nu R T = \frac 32 (P+\Delta P) (V+\Delta V) - \frac 32 PV\\
+            &= \frac 32 ((P+\Delta P) (V+\Delta V) - PV) = \frac 32 (P\Delta V + V \Delta P + \Delta P \Delta V).
+        \end{align*}
+
+        Рассмотрим малые изменения объёма, тогда и изменение давления будем малым (т.к.
+        $\Delta P = - \frac{P_0}{V_0} \Delta V$),
+        а третьим слагаемым в выражении для $\Delta U$  можно пренебречь по сравнению с двумя другими:
+        два первых это малые величины, а третье — произведение двух малых.
+        Тогда $\Delta U = \frac 32 (P\Delta V + V \Delta P)$.
+
+        Работа газа при этом малом изменении объёма — это площадь трапеции (тут ещё раз пренебрегли малым слагаемым):
+        $$A = \frac{P + P'}2 \Delta V = \cbr{P + \frac{\Delta P}2} \Delta V = P \Delta V.$$
+
+        Подведённое количество теплоты, используя первое начало термодинамики, будет равно
+        \begin{align*}
+        Q
+            &= \frac 32 (P\Delta V + V \Delta P) + P \Delta V =  \frac 52 P\Delta V + \frac 32 V \Delta P = \\
+            &= \frac 52 P\Delta V + \frac 32 V \cdot \cbr{- \frac{P_0}{V_0} \Delta V} = \frac{\Delta V}2 \cdot \cbr{5P - \frac{P_0}{V_0} V} = \\
+            &= \frac{\Delta V}2 \cdot \cbr{5 \cdot \cbr{6P_0 - \frac{P_0}{V_0} V} - \frac{P_0}{V_0} V}
+             = \frac{\Delta V \cdot P_0}2 \cdot \cbr{5 \cdot 6 - 8\frac V{V_0}}.
+        \end{align*}
+
+        Таком образом, знак количества теплоты $Q$ на участке 23 зависит от конкретного значения $V$:
+        \begin{itemize}
+            \item $\Delta V > 0$ на всём участке 23, поскольку газ расширяется,
+            \item $P > 0$ — всегда, у нас идеальный газ, удары о стенки сосуда абсолютно упругие, а молекулы не взаимодействуют и поэтому давление только положительно,
+            \item если $5 \cdot 6 - 8\frac V{V_0} > 0$ — тепло подводят, если же меньше нуля — отводят.
+        \end{itemize}
+        Решая последнее неравенство, получаем конкретное значение $V^*$: при $V < V^*$ тепло подводят, далее~— отводят.
+        Тут *~--- некоторая точка между точками 2 и 3, конкретные значения надо досчитать:
+        $$V^* = V_0 \cdot \frac{5 \cdot 6}8 = \frac{15}4 \cdot V_0 \implies P^* = 6P_0 - \frac{P_0}{V_0} V^* = \ldots = \frac94 \cdot P_0.$$
+
+        Т.е.
+        чтобы вычислить $Q_+$, надо сложить количества теплоты на участке 12 и лишь части участка 23 — участке 2*,
+        той его части где это количество теплоты положительно.
+        Имеем: $Q_+ = Q_{12} + Q_{2*}$.
+
+        Теперь возвращаемся к циклу целиком и получаем:
+        \begin{align*}
+        A_\text{цикл} &= \frac 12 \cdot (5P_0 - P_0) \cdot (5V_0 - V_0) = 8 \cdot P_0V_0, \\
+        A_{2*} &= \frac{P^* + 5P_0}2 \cdot (V^* - V_0)
+            = \frac{\frac94 \cdot P_0 + 5P_0}2 \cdot \cbr{\frac{15}4 \cdot V_0 - V_0}
+            = \ldots = \frac{319}{32} \cdot P_0 V_0, \\
+        \Delta U_{2*} &= \frac 32 \nu R T^* - \frac 32 \nu R T_2 = \frac 32 (P^*V^* - P_0 \cdot 5V_0)
+            = \frac 32 \cbr{\frac94 \cdot P_0 \cdot \frac{15}4 \cdot V_0 - P_0 \cdot 5V_0}
+            = \frac{165}{32} \cdot P_0 V_0, \\
+        \Delta U_{12} &= \frac 32 \nu R T_2 - \frac 32 \nu R T_1 = \frac 32 (5P_0V_0 - P_0V_0) = \ldots = 6 \cdot P_0 V_0, \\
+        \eta &= \frac{A_\text{цикл}}{Q_+} = \frac{A_\text{цикл}}{Q_{12} + Q_{2*}}
+            = \frac{A_\text{цикл}}{A_{12} + \Delta U_{12} + A_{2*} + \Delta U_{2*}} = \\
+            &= \frac{8 \cdot P_0V_0}{0 + 6 \cdot P_0 V_0 + \frac{319}{32} \cdot P_0 V_0 + \frac{165}{32} \cdot P_0 V_0}
+             = \frac{A_bonus_cycle:LaTeX}{6 + \frac{319}{32} + \frac{165}{32}}
+             = \frac{64}{169} \leftarrow \text{вжух и готово!}
+        \end{align*}
+}
+\solutionspace{360pt}
+
+\tasknumber{2}%
+\task{%
+    При температуре $25\celsius$ относительная влажность воздуха составляет $70\%$.
+    \begin{itemize}
+        \item Определите точку росы для этого воздуха.
+        \item Какой станет относительная влажность этого воздуха, если нагреть его до $70\celsius$?
+    \end{itemize}
+}
+\answer{%
+    \begin{align*}
+    &\text{Значения плотности насыщенного водяного пара определяем по таблице:} \\
+    &\rho_{\text{нас.
+    пара 25} \celsius} = 23{,}000\,\frac{\text{г}}{\text{м}^{3}}, \rho_{\text{нас.
+    пара 70} \celsius} = 198{,}000\,\frac{\text{г}}{\text{м}^{3}}.
+    \\
+    \varphi_1 &= \frac{\rho_\text{пара}}{\rho_{\text{нас.
+    пара 25} \celsius}} \implies {\rho_\text{пара}} = \rho_{\text{нас.
+    пара 25} \celsius} \cdot \varphi_1 = 23{,}000\,\frac{\text{г}}{\text{м}^{3}} \cdot 0{,}70 = 16{,}100\,\frac{\text{г}}{\text{м}^{3}}.
+    \\
+    &\text{По таблице определяем, при какой температуре пар с такой плотностью станет насыщенным:}  \\
+    t_\text{росы} &= 18{,}8\celsius, \\
+    \varphi_2 &= \frac{\rho_\text{пара}}{\rho_{\text{нас.
+    пара 70} \celsius}} = \frac{\rho_{\text{нас.
+    пара 25} \celsius} \cdot \varphi_1}{\rho_{\text{нас.
+    пара 70} \celsius}}= \varphi_1 \cdot \frac{\rho_{\text{нас.
+    пара 25} \celsius}}{\rho_{\text{нас.
+    пара 70} \celsius}} = 0{,}70 \cdot \frac{23{,}000\,\frac{\text{г}}{\text{м}^{3}}}{198{,}000\,\frac{\text{г}}{\text{м}^{3}}} = 0{,}081 \approx 8{,}1\%.
+    \end{align*}
+}
+\solutionspace{80pt}
+
+\tasknumber{3}%
+\task{%
+    Из уравнения состояния идеального газа выведите или выразите...
+    \begin{enumerate}
+        \item объём,
+        \item температуру,
+        \item концентрацию молекул газа.
+    \end{enumerate}
+}
+
+\tasknumber{4}%
+\task{%
+    Запишите формулы и рядом с каждой физичической величиной укажите её название и единицы измерения в СИ:
+    \begin{enumerate}
+        \item первое начало термодинамики,
+        \item внутренняя энергия идеального одноатомного газа.
+    \end{enumerate}
+}
 % autogenerated
