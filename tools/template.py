@@ -12,19 +12,21 @@ import os
 def runTemplate(args):
     nowDelta = library.datetools.NowDelta()
     ipadTemplate = library.location.udr('Шаблоны', 'template-2-columns.docx')
+    one_column_template = library.location.udr('Шаблоны', 'template-1-column.docx')
 
     fileCopier = library.files.FileCopier(ipadTemplate, destination_dir=library.location.udr('11 класс', 'Вишнякова'))
+    one_column = library.files.FileCopier(one_column_template, destination_dir=library.location.udr('11 класс', 'Вишнякова'))
     chapters = [
         # '1.1 - Кинематика',
         # '1.2 - Динамика',
         # '1.3 - Статика',
-        '1.4 - Законы сохранения',
+        # '1.4 - Законы сохранения',
         # '1.5 - Колебания и волны',
         # '2.1 - Молекулярная физика',
         # '2.2 - Термодинамика',
         # '3.1 - Электрическое поле',
         # '3.2 - Законы постоянного тока',
-        # '3.3 - Магнитное поле',
+        '3.3 - Магнитное поле',
         # '3.4 - Электромагнитная индукция',
         # '3.5 - Электромагнитные колебания и волны',
         # '3.6 - Оптика',
@@ -38,7 +40,7 @@ def runTemplate(args):
         # 'УК',  # углубленный курс
     ]
     for chapter, course in itertools.product(chapters, courses):
-        fileCopier.CreateFile(f'Вишнякова - {chapter} - {course} - решения.docx')
+        one_column.CreateFile(f'Вишнякова - {chapter} - {course} - решения.docx')
 
     ipadCopier = library.files.FileCopier(ipadTemplate)
 
@@ -126,13 +128,13 @@ def runTemplate(args):
     )
     fileMover.Move(
         source=ipad_distant,
-        destination=library.location.udr('10 класс', '2020-21 10АБ Физика - Архив'),
+        destination=library.location.udr('10 класс', '2020-21 10АБ Физика'),
         re='^....-..-..-10 .* с урока.*\.docx$',
         matching=lambda b: first_date <= b[:10] <= last_date,
     )
     fileMover.Move(
         source=ipad_distant,
-        destination=library.location.udr('9 класс', '2020-21 9М Физика - Архив'),
+        destination=library.location.udr('9 класс', '2020-21 9М Физика'),
         re='^....-..-..-9 .* с урока.*\.docx$',
         matching=lambda b: first_date <= b[:10] <= last_date,
     )
