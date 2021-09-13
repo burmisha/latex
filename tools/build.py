@@ -11,10 +11,13 @@ log = logging.getLogger(__name__)
 
 
 def run(args):
+    years = [2018, 2019, 2020, 2021]
+    if not args.all:
+        years = years[-1:]
+        log.warn(f'Processing only latest year: {years}')
     generared_paths = [
-        library.location.root('school-554', 'generated-2018-19'),
-        library.location.root('school-554', 'generated-2019-20'),
-        library.location.root('school-554', 'generated-2020-21'),
+        library.location.root('school-554', f'generated-{year}-{year-2000+1}')
+        for year in years
     ]
 
     filenames_regex = '.*(task|answer).*'
@@ -52,4 +55,5 @@ def run(args):
 
 def populate_parser(parser):
     parser.add_argument('--clean', help='Delete tmp files', action='store_true', default=False)
+    parser.add_argument('--all', help='Build all files (not only latest year)', action='store_true', default=False)
     parser.set_defaults(func=run)
