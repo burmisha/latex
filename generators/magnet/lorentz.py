@@ -8,6 +8,70 @@ log = logging.getLogger(__name__)
 
 
 @variant.text('''
+    Положительно заряженная частица движется со скоростью $v$ в магнитном поле перпендикулярно линиям его индукции.
+    Индукция магнитного поля равна $B$, масса частицы $m$, её заряд — $q$
+    Выведите из базовых физических законов формулы для радиуса траектории частицы и её {what}.
+''')
+@variant.solution_space(120)
+@variant.arg(what=['периода обращения', 'угловой скорости', 'частоты обращения'])
+@variant.answer_short('''
+    F = ma, F = qvB, a = v^2 / R \\implies R = \\frac{mv}{qB}.
+    \\quad T = \\frac{2\\pi R}{v} = \\frac{2\\pi m}{qB}.
+    \\quad \\omega = \\frac vR = \\frac{qB}{m}.
+    \\quad \\nu = \\frac 1T = \\frac{qB}{2\\pi m}.
+''')
+class Force13(variant.VariantTask):
+    pass
+
+
+@variant.text('''
+    {what} со скоростью {v:V:e} влетает в магнитное поле индукцией {B:V:e} перпендикулярно линиям его индукции.
+    Определите радиус траектории частицы, для вычислений воспользуйтесь табличными значениями.
+''')
+@variant.solution_space(120)
+@variant.arg(what__m=[('Электрон', Consts.m_e), ('Протон', Consts.m_p)])
+@variant.arg(v=('v = {} км/c', ['2 10^3', '3 10^3', '5 10^3', '2 10^4', '3 10^4', '5 10^4']))
+@variant.arg(B=('B = {} мТл', [20, 40, 50, 200, 300, 500]))
+@variant.answer_short('''
+    F = ma, F = evB, a = v^2 / R \\implies R = \\frac{mv}{eB} = \\frac{{m:V} * {v:V}}{{e:V} * {B:V}} \\approx {R:V}.
+''')
+class Force14(variant.VariantTask):
+    def GetUpdate(self, what=None, m=None, v=None, B=None, **kws):
+        R = (m.Value * v.Value) / (Consts.e.Value * B.Value)
+        return dict(R='R = %.2f м' % R, e=Consts.e)
+
+
+@variant.text('''
+    {which} частица находится в постоянном {field} поле, а её мгновенная скорость {how} линиям его {lines}.
+    По какой траектории движется частица? (прямая, гипербола, парабола, окружность, спираль, ...)
+    Действием всех других полей пренебречь.
+''')
+@variant.solution_space(120)
+@variant.arg(which=['Незаряженная', 'Заряженная'])
+@variant.arg(field__lines=[('магнитном', 'индукции'), ('электростатическом', 'напряжённости')])
+@variant.arg(how=['параллельна', 'перпендикулярна'])
+@variant.answer_short('\\text{{answer}}')
+class Force15(variant.VariantTask):
+    def GetUpdate(self, which=None, field=None, lines=None, how=None, **kws):
+        if 'езаряжен' in which:
+            answer = 'Прямая'
+        else:
+            if 'магн' in field:
+                if 'паралл' in how:
+                    answer = 'Прямая'
+                else:
+                    answer = 'Окружность'
+            else:
+                if 'паралл' in how:
+                    answer = 'Прямая'
+                else:
+                    answer = 'Парабола'
+
+        return dict(answer=answer)
+
+
+
+@variant.text('''
     Узкий пучок протонов, нейтронов и электронов влетает в однородное магнитное поле перпендикулярно его линиям (см. рис). 
     Определите отношение скоростей/кинетических энергий/импульсов частиц {first} и {second}, по их трекам.
 ''')
