@@ -153,11 +153,11 @@ def get_all_variants():
         ),
         Work(
             task_id='2019-09-11 11Т',
-            classes={'electricity.magnet': ['ConstMagnet0', 'ConstMagnet1', 'ConstMagnet2', 'ConstMagnet3']},
+            classes={'magnet.magnet': ['ConstMagnet0', 'ConstMagnet1', 'ConstMagnet2', 'ConstMagnet3']},
         ),
         Work(
             task_id='2019-09-30 11S',
-            classes={'electricity.magnet': ['Chernoutsan11_01', 'Chernoutsan11_02', 'Chernoutsan11_5']},
+            classes={'magnet.magnet': ['Chernoutsan11_01', 'Chernoutsan11_02', 'Chernoutsan11_5']},
         ),
         Work(
             task_id='2019-11-13 11Т',
@@ -536,15 +536,15 @@ def get_all_variants():
         ),
         Work(
             task_id='2021-09-07 11БА',
-            classes={'electricity.magnet': ['ConstMagnet0', 'ConstMagnet01', 'ConstMagnet02', 'ConstMagnet1', 'ConstMagnet2']},
+            classes={'magnet.magnet': ['ConstMagnet0', 'ConstMagnet01', 'ConstMagnet02', 'ConstMagnet1', 'ConstMagnet2']},
         ),
         Work(
             task_id='2021-09-08 11Б',
-            classes={'electricity.magnet': ['ConstMagnet0', 'ConstMagnet01', 'ConstMagnet02', 'ConstMagnet1', 'ConstMagnet2']},
+            classes={'magnet.magnet': ['ConstMagnet0', 'ConstMagnet01', 'ConstMagnet02', 'ConstMagnet1', 'ConstMagnet2']},
         ),
         Work(
             task_id='2021-09-14 11БА',
-            classes={'electricity.magnet': ['Force10', 'Force11', 'Force12', 'Force13', 'Force14', 'Force15']},
+            classes={'magnet.magnet': ['Force10', 'Force11', 'Force12', 'Force13', 'Force14', 'Force15']},
         ),
     ]
     return works
