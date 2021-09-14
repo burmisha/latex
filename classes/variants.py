@@ -546,5 +546,9 @@ def get_all_variants():
             task_id='2021-09-14 11БА',
             classes={'magnet': ['magnet.Force10', 'magnet.Force11', 'magnet.Force12', 'lorentz.Force13', 'lorentz.Force14', 'lorentz.Force15']},
         ),
+        Work(
+            task_id='2021-09-15 11БА',
+            classes={'magnet': ['ampere.Chernoutsan11_5', 'ampere.Chernoutsan11_02', 'lorentz.BaseR', 'lorentz.Force16', 'lorentz.Force18']},
+        ),
     ]
     return works

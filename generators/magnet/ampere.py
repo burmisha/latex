@@ -9,7 +9,7 @@ log = logging.getLogger(__name__)
 
 @variant.text('''
     Проводник массой {m:V:e} и длиной {l:V:e} подвешен на двух нитях горизонтально в однородном горизонтальном магнитном поле индукцией {B:V:e} (см. рис).
-    По проводнику протекает электрический ток силой {I:V:e}. Определите, во сколько раз увеличится натяжение нитей, если увеличить {what} в {n} раза.
+    По проводнику протекает электрический ток силой {I:V:e}. Определите, во сколько раз увеличится натяжение нитей, если увеличить {what} в {N} раза.
 ''')
 @variant.solution_space(120)
 @variant.arg(m=('m = {} г', [20, 40, 50]))
@@ -33,14 +33,15 @@ class Force19(variant.VariantTask):
         = {B:Value} * {I:Value} * {l:Value} * {d:Value}
         = {A:Value}.
 ''')
-@variant.arg(l=['l = %d см' % l for l in [20, 30, 40, 50]])
-@variant.arg(I=['\\mathcal{I} = %d А' % I for I in [5, 10, 20]])
-@variant.arg(B=['B = %f Тл' % B for B in [0.1, 0.2, 0.5]])
-@variant.arg(d=['d = %d см' % d for d in [20, 50, 80]])
+@variant.arg(l=('l = {} см', [20, 30, 40, 50]))
+@variant.arg(I=('\\eli = {} А', [5, 10, 20]))
+@variant.arg(B=('B = {} Тл', [0.1, 0.2, 0.5]))
+@variant.arg(d=('d = {} см', [20, 50, 80]))
+@variant.solution_space(80)
 class Chernoutsan11_5(variant.VariantTask):
     def GetUpdate(self, B=None, I=None, l=None, d=None, **kws):
         return dict(
-            A='A = %.5f Дж' % (10 ** (-4) * 1.0 * B.Value * I.Value * l.Value * d.Value),
+            A='A = %.3f Дж' % (10 ** (-4) * 1.0 * B.Value * I.Value * l.Value * d.Value),
         )
 
 
