@@ -5,6 +5,7 @@ from library.logging import cm, color
 from library.process import say
 
 import argparse
+import sys
 import time
 
 import logging
@@ -117,6 +118,7 @@ def main():
         if delta >= 30:
             msg = str(e)[:30]
             say(f'Ошибка: {msg}', rate=250)
+        sys.exit(1)
 
 
 if __name__ == '__main__':
