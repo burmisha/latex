@@ -60,14 +60,45 @@ class Definitions02(variant.VariantTask):
     pass
 
 
+@variant.text('''
+    Однородное магнитное поле пронизывает плоский контур площадью {S:V:e}.
+    Индукция магнитного поля равна {B:V:e}.
+    Чему равен магнитный поток через контур, если его плоскость
+    расположена под углом ${angle}\\degrees$ к вектору магнитной индукции?
+    Ответ выразите в милливеберах и округлите до целого, единицы измерения писать не нужно.
+''')
+@variant.solution_space(100)
+@variant.arg(S=('S = {} см^2', [200, 400, 600, 800]))
+@variant.arg(B=('B = {} мТл', [300, 500, 700]))
+@variant.arg(angle=[0, 30, 60, 90])
+@variant.answer_short('\\alpha = {alpha}\\degrees, {Phi:Letter} = BS\\cos\\alpha = {Phi:Value} \\to {PhiAnswer}')
+@variant.answer_test('{PhiAnswer}')
+class Find_F_easy(variant.VariantTask):
+    def GetUpdate(self, S=None, B=None, angle=None, **kws):
+        alpha = 90 - angle
+
+        if alpha == 90:
+            Phi = 0
+            PhiAnswer = 0
+        else:
+            Phi = B.Value * S.Value * math.cos(alpha * math.pi / 180) / 1000
+            PhiAnswer = int(Phi + 0.5)
+
+        assert PhiAnswer == 0 or PhiAnswer >= 10
+        return dict(
+            alpha=alpha,
+            Phi=f'\\Phi_B = {Phi:.2f} мВб',
+            PhiAnswer=PhiAnswer,
+        )
+
 
 @variant.text('''
     Определите магнитный поток через контур,
     находящийся в однородном магнитном поле индукцией {B:V:e}.
     Контур имеет форму {figure} {a:V:e} и {b:V:e}.
-    Угол между {between} и вектором индукции магнитного поля 
-    составляет ${angle}\\degrees$ градусов.
-    Ответ выразите в милливеберах и округлите до целого.
+    Угол между {between} и вектором индукции магнитного поля
+    составляет ${angle}\\degrees$.
+    Ответ выразите в милливеберах и округлите до целого, единицы измерения писать не нужно.
 ''')
 @variant.solution_space(100)
 @variant.arg(figure=['прямоугольного треугольника с катетами', 'прямоугольника со сторонами'])
@@ -76,7 +107,7 @@ class Definitions02(variant.VariantTask):
 @variant.arg(B=('B = {} мТл', [300, 500, 700]))
 @variant.arg(between=['плоскостью контура', 'нормалью к плоскости контура'])
 @variant.arg(angle=[10, 20, 40, 50, 70, 80])
-@variant.answer_short('{Phi:Task} \\to {PhiAnswer}')
+@variant.answer_short('\\alpha={alpha}\\degrees, {Phi:L} = BS\\cos\\alpha = {Phi:V} \\to {PhiAnswer}')
 @variant.answer_test('{PhiAnswer}')
 class Find_F_hard(variant.VariantTask):
     def GetUpdate(self, figure=None, a=None, b=None, B=None, between=None, angle=None, **kws):
@@ -108,7 +139,7 @@ class Find_F_hard(variant.VariantTask):
     если {what} {pole} полюсом (см. рис).
 ''')
 @variant.arg(pole=['южным', 'северным'])
-@variant.arg(what__ans=[('вдвигать', 'Б'), ('выдвигать', 'В')])
+@variant.arg(what__ans=[('вдвигать', 'В'), ('выдвигать', 'А')])
 @variant.answer_test('{ans}')
 @variant.answer('\\text{{ans}}')
 @variant.solution_space(0)
@@ -130,11 +161,34 @@ class Action2(variant.VariantTask):
 
 
 @variant.text('''
+    Магнитный поток, пронизывающий замкнутый контур, равномерно изменяется от {Phi1:V:e} до {Phi2:V:e} за {t:V:e}.
+    Чему равна ЭДС в контуре? Ответ выразите в милливольтах и округлите до целого, единицы измерения писать не нужно.
+''')
+@variant.arg(Phi1=('\\Phi_1 = {} мВб', [35, 65, 95]))
+@variant.arg(Phi2=('\\Phi_2 = {} мВб', [20, 50, 80, 110]))
+@variant.arg(t=('t = {} c', [1.1, 1.3, 1.5]))
+@variant.answer_test('{E_answer}')
+@variant.answer_short('{E:Task} \\to {E_answer}')
+@variant.solution_space(60)
+class Find_E_easy(variant.VariantTask):
+    def GetUpdate(self, Phi1=None, Phi2=None, t=None, **kws):
+        E = abs(Phi1.Value - Phi2.Value) / t.Value
+        E_answer = int(E + 0.5)
+
+        assert E_answer >= 10, [E_answer]
+        return dict(
+            E=f'\\ele = {E:.3f} мВ',
+            E_answer=E_answer,
+        )
+
+
+
+@variant.text('''
     Какой средний индукционный ток возник в плоском контуре площадью {S:V:e}
     и сопротивлением {R:V:e}, если сперва он располагался {how} линиям индукции магнитного поля,
-    а затем его за {t:V:e} повернули, и теперь угол между {between} и индукцией магнитного поля 
-    равен ${angle}\\degrees$. Магнитное поле однородно, его индукция равна {B:V:e}. 
-    Ответ выразите в микроамперах и округлите до целых (в ответ запишите только число).
+    а затем его за {t:V:e} повернули, и теперь угол между {between} и индукцией магнитного поля
+    равен ${angle}\\degrees$. Магнитное поле однородно, его индукция равна {B:V:e}.
+    Ответ выразите в микроамперах и округлите до целого, единицы измерения писать не нужно.
 ''')
 @variant.solution_space(100)
 @variant.arg(how=['параллельной', 'перпендикулярно'])
