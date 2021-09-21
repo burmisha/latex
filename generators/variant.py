@@ -4,7 +4,7 @@ import collections
 import hashlib
 import re
 
-from generators.helpers import UnitValue, Consts
+from generators.helpers import UnitValue, Consts, letter_variants
 from generators.helpers.vars import Vars
 
 import library
@@ -50,6 +50,7 @@ class LaTeXFormatter:
         for key in self._keys:
             for regexp in [
                 '',
+                '\.\w+',
                 '[\.\w]*\[[\\.\\:\\|\\*\\w\]]*',
                 '([\.\w\]\[])*\\:[\\.\\:\\|\\*\\w]*',
             ]:
@@ -101,6 +102,13 @@ def test_replace_comma():
 
 test_replace_comma()
 
+lv = list(letter_variants(
+    {'дважды два': 'четыре', 'трижды три': 'девять'},
+    ['пять', 'шесть'],
+    answers_count=1,
+    mocks_count=1,
+))[0]
+
 def test_substitute():
     for args, value, result in [
         ({}, '{}', '{}'),
@@ -125,6 +133,7 @@ def test_substitute():
         (dict(a=1), '\\begin{qq}', r'\begin{qq}'),
         (dict(a=1), '\\begin{qq*}', r'\begin{qq*}'),
         ({}, '\\begin{align*}F &= \sqrt{ F_a^2 + F_b^2 }\\end{align*}', r'\begin{align*}F &= \sqrt{ F_a^2 + F_b^2 }\end{align*}'),
+        (dict(lv=lv), '{lv.Questions}', 'А) дважды два'),
     ]:
         res = LaTeXFormatter(args).format(value)
         assert res == result, f'''
