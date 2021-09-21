@@ -23,7 +23,7 @@ UP_TO_STR_FMT = (
     'Отправить до {upTo} (напомню, что Гугл-формы сохраняют время отправки). '
     'И пожалуйста, проверьте, что выше верно указаны дата и класс '
     '(если нет — дайте знать как можно раньше). '
-    '554 школа, Москва, 2020–2021 учебный год.'
+    '554 школа, Москва, 2021–2022 учебный год.'
 )
 
 THUMBS_UP_CHOICES = [
@@ -46,6 +46,8 @@ def get_ss_link(title):
         ss_link = '1Ba2UNTV3T3Rtzh3yraxJfVGvnVgbs_Y-IklyWUjebyg'
     elif ' 9М ' in title:
         ss_link = '1cpTrWurYvugcLdbrmiNuFxKoMRml4qxt_a0kqdLHg7c'
+    elif ' 11БА ' in title:
+        ss_link = '109qhL_yg4096RfYU8TcYy7srTXp9pKT43G4ABBE2lW4'
     else:
         raise RuntimeError(f'Could not link spreadsheet for {title}')
     return ss_link
