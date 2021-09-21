@@ -1623,6 +1623,17 @@ class FIPI_demo(PdfBook):
     pass
 
 
+@ppi(200)
+@zero_d_structure([('Статград - ЕГЭ', 1, 39)])
+class Statgrad39(PdfBook):
+    pass
+
+
+@ppi(200)
+@zero_d_structure([('Бланки - ЕГЭ', 1, 9)])
+class BlankiEge(PdfBook):
+    pass
+
 
 def get_all_books():
     books_config = [
@@ -1719,6 +1730,15 @@ def get_all_books():
     yield FIPI_demo(
         pdfPath=library.location.udr('11 ЕГЭ', 'fi-ege-2021', 'ФИ-11 ЕГЭ 2021 ДЕМО.pdf'),
         dstPath=library.location.no_sync('Книги - физика - картинки', '11 - ЕГЭ', 'Демовариант 2021'),
+    )
+    yield Statgrad39(
+        pdfPath=library.location.udr('11 ЕГЭ', 'Статград', '2021 Статград ЕГЭ-5', 'Zadanie_FI11_17052021.pdf'),
+        dstPath=library.location.no_sync('Книги - физика - картинки', '11 - ЕГЭ', 'Статград 2021-05-17'),
+    )
+
+    yield BlankiEge(
+        pdfPath=library.location.udr('11 ЕГЭ', 'blanki-ege-2020-all.pdf'),
+        dstPath=library.location.no_sync('Книги - физика - картинки', '11 - ЕГЭ', 'Бланки'),
     )
 
 
