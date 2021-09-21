@@ -77,6 +77,7 @@ def run(args):
             ('https://jamboard.google.com/d/1lI-2Lm1g38idTWHZuP8ZgnyBA_K0lyw9k8tsJaSKPHk/edit', '2021.07.09 Летний институт.png'),
             ('https://burmisha.notion.site/0c8b8d1351ee4f419df0ecabb11edf00', '2021-22-11BA.png'),
             ('https://burmisha.notion.site/d8c12e76df38443881b6524482e4d485', '2021-22-11B.png'),
+            ('Нет, этот QR-код — лишь пасхалка, тут нет решений, но спасибо за попытку. На ЕГЭ так не получится.', '2021-22-no-solution.png'),
         ],
     )
 
