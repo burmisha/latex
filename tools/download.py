@@ -155,6 +155,14 @@ def run(args):
             'https://www.youtube.com/watch?v=-vt3FHuqDM0': '2021 - Следственный комитет - поздравление с днём рождения',
             'https://www.youtube.com/watch?v=2k9CIfJsONw': '2021 - The Trial of the Chicago 7 - FULL FEATURE - Netflix',
             'https://www.youtube.com/watch?v=dOR41kRQ2tg': '2017 - American Anarchist - Американский анархист',
+            'https://www.youtube.com/watch?v=i8fD_jG_TM8': 'FREE BEATS',
+        },
+        'Veritasium': {
+            'https://www.youtube.com/watch?v=AaZ_RSt0KP8': '2021.08.31 - The Universe is Hostile to Computers',
+            'https://www.youtube.com/watch?v=jOTM9T59IX4': '2021.08.31 - The Universe is Hostile to Computers - Rus',
+        },
+        '3Blue1Brown': {
+            'https://www.youtube.com/watch?v=jOTM9T59IX4': 'How to send a self-correcting message',
         },
     }
     for dirname, videos in videos_download_cfg.items():
