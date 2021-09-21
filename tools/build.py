@@ -1,4 +1,5 @@
 import os
+import shutil
 
 import library.location
 import library.files
@@ -29,10 +30,16 @@ def run(args):
             regexp=filenames_regex,
         )
         for filename in sorted(tex_files):
+            assert filename.endswith('.tex')
             basename = os.path.basename(filename)
             cmd = ['latexmk', '-pdf', basename]
             log.info(f'Building {cm(basename, color=color.Green)}')
             library.process.run(cmd, cwd=dir_name)
+            pdf_name = basename[:-3] + 'pdf'
+            src = os.path.join(dir_name, pdf_name)
+            dst = os.path.join(dir_name, 'pdf', pdf_name)
+            log.info(f'Copy to {dst}')
+            shutil.copy(src, dst)
 
     if args.clean:
         for dir_name in generared_paths:
