@@ -550,5 +550,17 @@ def get_all_variants():
             task_id='2021-09-15 11БА',
             classes={'magnet': ['ampere.Chernoutsan11_5', 'ampere.Chernoutsan11_02', 'lorentz.BaseR', 'lorentz.Force16', 'lorentz.Force18']},
         ),
+        Work(
+            task_id='2021-09-16 11Б',
+            classes={'magnet': ['magnet.Force10', 'magnet.Force11', 'magnet.Force12', 'ampere.Chernoutsan11_02', 'lorentz.BaseR', 'lorentz.Force17']},
+        ),
+        Work(
+            task_id='2021-09-22 11БА - ЭМИ - 1',
+            classes={'magnet.emi': ['Definitions01', 'Definitions02', 'Find_F_easy', 'Action1', 'Action2', 'Find_E_easy', 'Find_F_hard', 'Find_I_hard']},
+            thresholds=[3, 5, 7],
+            up_to='10:00',
+            image='zootopia',
+            questions=text_task * 7,
+        ),
     ]
     return works
