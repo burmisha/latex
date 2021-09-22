@@ -560,7 +560,7 @@ def get_all_variants():
             thresholds=[3, 5, 7],
             up_to='10:00',
             image='zootopia',
-            questions=text_task * 7,
+            questions=text_task * 8,
         ),
     ]
     return works
