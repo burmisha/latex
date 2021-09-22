@@ -1,5 +1,3 @@
-
-:q
 import itertools
 
 import generators.variant as variant

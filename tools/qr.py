@@ -78,7 +78,8 @@ def run(args):
             ('https://burmisha.notion.site/0c8b8d1351ee4f419df0ecabb11edf00', '2021-22-11BA.png'),
             ('https://burmisha.notion.site/d8c12e76df38443881b6524482e4d485', '2021-22-11B.png'),
             ('Нет, этот QR-код — лишь пасхалка, тут нет решений, но спасибо за попытку. На ЕГЭ так не получится.', '2021-22-no-solution.png'),
-            ('https://docs.google.com/forms/d/e/1FAIpQLSdOU2U2NUijIxX4SN_Pj57_t4D1D3SHU4xplw6YlQ8xllFOLQ/viewform', '2021.09.22-11BA.png')
+            ('https://docs.google.com/forms/d/e/1FAIpQLSdOU2U2NUijIxX4SN_Pj57_t4D1D3SHU4xplw6YlQ8xllFOLQ/viewform', '2021.09.22-11BA.png'),
+            ('https://docs.google.com/forms/d/e/1FAIpQLScA0LnmDQrtTSbRY1Xd3kdSrrWjtJXx8zpzDAdGF7gBGp3Kjw/viewform', '2021.09.23-11B.png'),
         ],
     )
 
