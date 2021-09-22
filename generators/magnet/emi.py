@@ -1,3 +1,5 @@
+
+:q
 import itertools
 
 import generators.variant as variant
@@ -168,7 +170,13 @@ class Action2(variant.VariantTask):
 @variant.arg(Phi2=('\\Phi_2 = {} мВб', [20, 50, 80, 110]))
 @variant.arg(t=('t = {} c', [1.1, 1.3, 1.5]))
 @variant.answer_test('{E_answer}')
-@variant.answer_short('{E:Task} \\to {E_answer}')
+@variant.answer_short('''
+    {E:Letter}
+    = \\frac{\\abs{\\Delta \\Phi}}{\\Delta t}
+    = \\frac{\\abs{{Phi2:L} - {Phi1:L}}}{\\Delta t}
+    = \\frac{\\abs{{Phi2:V} - {Phi1:V}}}{\\Delta t}
+    = {E:V} \\to {E_answer}
+''')
 @variant.solution_space(60)
 class Find_E_easy(variant.VariantTask):
     def GetUpdate(self, Phi1=None, Phi2=None, t=None, **kws):
