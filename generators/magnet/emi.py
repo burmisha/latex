@@ -81,10 +81,9 @@ class Find_F_easy(variant.VariantTask):
             Phi = 0
             PhiAnswer = 0
         else:
-            Phi = B.Value * S.Value * math.cos(alpha * math.pi / 180) / 1000
+            Phi = B.Value * S.Value * math.cos(alpha * math.pi / 180) * 10 ** (B.Power + S.Power) * 1000
             PhiAnswer = int(Phi + 0.5)
-
-        assert PhiAnswer == 0 or PhiAnswer >= 10
+        assert PhiAnswer == 0 or PhiAnswer >= 2
         return dict(
             alpha=alpha,
             Phi=f'\\Phi_B = {Phi:.2f} мВб',
@@ -131,6 +130,7 @@ class Find_F_hard(variant.VariantTask):
         return dict(
             Phi=f'\\Phi_B = {Phi:.2f} мВб',
             PhiAnswer=PhiAnswer,
+            alpha=alpha,
         )
 
 
