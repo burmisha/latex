@@ -749,14 +749,14 @@ class Gendenshteyn_10(PdfBook):
     ('Магнитное поле', [  # 1-4
         ('Магнитные взаимодействия. Магнитное поле', 4, 6),
         ('Закон Ампера', 6, 11),
-        ('Сила Лоренца', 11, 15),
+        ('Сила Лоренца', 11, 14),
         ('Проводники и заряженные частицы в магнитном поле', 15, 19),
         ('Ответы', 95, 97),
     ]),
     ('Электромагнитная индукция', [  # 5-8
-        ('Явление электромагнитной индукции. Правило Ленца', 20, 24),
-        ('Закон электромагнитной индукции', 24, 28),
-        ('Самоиндукция. Энергия магнитного поля', 28, 31),
+        ('Явление электромагнитной индукции. Правило Ленца', 20, 23),
+        ('Закон электромагнитной индукции', 24, 27),
+        ('Самоиндукция. Энергия магнитного поля', 28, 30),
         ('Применение закона электромагнитной индукции', 31, 33),
         ('Ответы', 97, 98),
     ]),
@@ -1629,7 +1629,7 @@ class Statgrad39(PdfBook):
     pass
 
 
-@ppi(200)
+@ppi(300)
 @zero_d_structure([('Бланки - ЕГЭ', 1, 9)])
 class BlankiEge(PdfBook):
     pass
@@ -1746,7 +1746,7 @@ def runConvert(args):
     for book in get_all_books():
         book.Validate(create_missing=args.create_missing)
         book.GetStrangeFiles(remove=False)
-        book.Save(overwrite=args.overwrite_existing)
+        book.Save(overwrite=args.overwrite_existing, dry_run=args.dry_run)
         book.GetStrangeFiles(remove=args.remove_strange_files)
 
 
@@ -1754,4 +1754,5 @@ def populate_parser(parser):
     parser.add_argument('--remove-strange-files', help='Remove strange files', action='store_true')
     parser.add_argument('--overwrite-existing', help='Overwrite already extracted files', action='store_true')
     parser.add_argument('--create-missing', help='Create missing root dirs for books', action='store_true')
+    parser.add_argument('--dry-run', help='Do not create anything', action='store_true')
     parser.set_defaults(func=runConvert)
