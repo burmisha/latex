@@ -45,13 +45,12 @@ class Force13(variant.VariantTask):
 @variant.arg(v=('v = {} км/c', ['2 10^3', '3 10^3', '5 10^3', '2 10^4', '3 10^4', '5 10^4']))
 @variant.arg(B=('B = {} мТл', [20, 40, 50, 200, 300, 500]))
 @variant.answer_short('''
-    F = ma, F = evB, a = v^2 / R \\implies R = \\frac{mv}{eB} = \\frac{{m:V} * {v:V}}{{e:V} * {B:V}} \\approx {R:V}.
+    F = ma, F = evB, a = v^2 / R \\implies R = \\frac{mv}{eB} = \\frac{{m:V} * {v:V}}{{Consts.e:V} * {B:V}} \\approx {R:V}.
 ''')
 class Force14(variant.VariantTask):
     def GetUpdate(self, what=None, m=None, v=None, B=None):
-        # TODO: WTF
-        R = (m.Value * v.Value) / (Consts.e.Value * B.Value) * 10 ** (v.Power + B.Power - 2)
-        return dict(R='R = %.2f м' % R, e=Consts.e)
+        R = (m.Value * v.Value) / (Consts.e.Value * B.Value) * 10 ** (m.Power + v.Power - B.Power - Consts.e.Power)
+        return dict(R='R = %.6f м' % R)
 
 
 @variant.text('''
