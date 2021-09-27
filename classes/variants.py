@@ -51,7 +51,7 @@ class Work:
         answers=None,
     ):
         self._task_id = task_id
-        self._tasks_classes = pick_classes(generators, classes) if classes else None
+        self._tasks_classes = list(pick_classes(generators, classes)) if classes else None
         self._pupils = library.pupils.get_class_from_string(task_id)
         self._date = library.formatter.Date(task_id.split()[0])
 
@@ -61,6 +61,14 @@ class Work:
         self._image = image
         self._questions = questions
         self._answers = answers
+
+        if self.has_gform:
+            assert self.get_human_name(), f'No human_name for task {self._task_id}'
+            assert self._questions, f'No questions for task {self._task_id}'
+            assert self._up_to, f'No up_to for task {self._task_id}'
+            if self._questions and self._tasks_classes:
+                q_count = sum(1 for q in self._questions if isinstance(q, (Choice, TextTask)))
+                assert q_count == len(self._tasks_classes), f'Broken answers count for {self._task_id}: {q_count} vs {len(self._tasks_classes)}, {self._tasks_classes}'
 
     def _is_distant_task(self):
         if self._task_id in self.FORCED_NOT_DISTANT:
@@ -110,8 +118,12 @@ class Work:
         )
         return checker
 
+    @property
+    def has_gform(self):
+        return self._up_to is not None
+
     def get_gform(self):
-        if self._up_to is None:
+        if not self.has_gform:
             return None
         form_generator = Generator(title=self.get_human_name(), questions=self._questions)
         return form_generator.Generate(up_to=self._up_to, image=self._image)
@@ -127,7 +139,7 @@ def get_all_variants():
         ),
         Work(
             task_id='2019-04-19 11',
-            classes=['atomic.quantum.Fotons', 'atomic.nuclear.KernelCount', 'atomic.nuclear.RadioFall', 'atomic.quantum.RadioFall2'],
+            classes={'atomic': ['quantum.Fotons', 'nuclear.KernelCount', 'nuclear.RadioFall', 'quantum.RadioFall2']},
         ),
         Work(
             task_id='2019-04-30 10',
@@ -143,13 +155,13 @@ def get_all_variants():
         ),
         Work(
             task_id='2019-05-14 10',
-            classes=[
-                'electricity.om.P_from_R_U',
-                'electricity.om.P_from_R_I',
-                'electricity.full_circuit.Om_eta_full',
-                'electricity.full_circuit.r_eta_from_Rs',
-                'electricity.kirchgoff.Kirchgof_double',
-            ],
+            classes={'electricity': [
+                'om.P_from_R_U',
+                'om.P_from_R_I',
+                'full_circuit.Om_eta_full',
+                'full_circuit.r_eta_from_Rs',
+                'kirchgoff.Kirchgof_double',
+            ]},
         ),
         Work(
             task_id='2019-09-11 11Т',
@@ -193,7 +205,7 @@ def get_all_variants():
         ),
         Work(
             task_id='2020-04-28 9Л',
-            classes=['atomic.em_waves.Gendenshteyn_11_11_18', 'atomic.em_waves.Lambda_from_E', 'atomic.em_waves.Lambda_from_E_2', 'atomic.em_waves.H_levels']
+            classes={'atomic': ['em_waves.Gendenshteyn_11_11_18', 'em_waves.Lambda_from_E', 'em_waves.Lambda_from_E_2', 'em_waves.H_levels']},
         ),
         Work(
             task_id='2020-04-29 11Т',
@@ -401,7 +413,7 @@ def get_all_variants():
         ),
         Work(
             task_id='2021-03-12 10',
-            classes=['termodynamics.cycle.Rectangle', 'termodynamics.termo.DeltaQ_from_states', 'termodynamics.termo.Definitions02',]
+            classes={'termodynamics': ['cycle.Rectangle', 'termo.DeltaQ_from_states', 'termo.Definitions02']},
         ),
         Work(
             task_id='2021-03-16 9',
@@ -413,7 +425,7 @@ def get_all_variants():
         ),
         Work(
             task_id='2021-03-20 10',
-            classes={'termodynamics': ['cycle.TriangleUp_T', 'cycle.TriangleUp']},
+            classes={'termodynamics.cycle': ['TriangleUp_T', 'TriangleUp']},
         ),
         Work(
             task_id='2021-03-23 10',
@@ -492,19 +504,19 @@ def get_all_variants():
         ),
         Work(
             task_id='2021-04-31 10',
-            classes=['electricity.om.Definitions07', 'electricity.om.Definitions08', 'electricity.kirchgoff.Kirchgof_double'],
+            classes={'electricity': ['om.Definitions07', 'om.Definitions08', 'kirchgoff.Kirchgof_double']},
         ),
         Work(
             task_id='2021-05-12 10',
-            classes=['electricity.om.Circuit_four', 'electricity.om.Circuit_six', 'electricity.kirchgoff.Kirchgof_double_2'],
+            classes={'electricity': ['om.Circuit_four', 'om.Circuit_six', 'kirchgoff.Kirchgof_double_2']},
         ),
         Work(
             task_id='2021-05-13 10',
-            classes=['electricity.full_circuit.Update_external_R', 'electricity.kirchgoff.Kirchgof_triple'],
+            classes={'electricity': ['full_circuit.Update_external_R', 'kirchgoff.Kirchgof_triple']},
         ),
         Work(
             task_id='2021-05-14 10',
-            classes=['electricity.om.Compare_power', 'electricity.full_circuit.Short_i', 'electricity.kirchgoff.Kirchgof_plain'],
+            classes={'electricity': ['om.Compare_power', 'full_circuit.Short_i', 'kirchgoff.Kirchgof_plain']},
         ),
         Work(
             task_id='2021-05-13 9',
@@ -554,30 +566,29 @@ def get_all_variants():
             task_id='2021-09-16 11Б',
             classes={'magnet': ['magnet.Force10', 'magnet.Force11', 'magnet.Force12', 'ampere.Chernoutsan11_02', 'lorentz.BaseR', 'lorentz.Force17']},
         ),
+        # Work(
+        #     task_id='2021-09-22 11БА - ЭМИ - 1',
+        #     classes={'magnet.emi': ['Definitions01', 'Definitions02', 'Find_F_easy', 'Action1', 'Action2', 'Find_E_easy', 'Find_F_hard', 'Find_I_hard']},
+        #     thresholds=[3, 5, 7],
+        #     up_to='10:00',
+        #     image='zootopia',
+        #     questions=text_task * 8,
+        # ),
+        # Work(
+        #     task_id='2021-09-23 11Б - ЭМИ - 1',
+        #     classes={'magnet.emi': ['Definitions01', 'Definitions02', 'Find_F_easy', 'Action1', 'Action2', 'Find_E_easy', 'Find_F_hard']},
+        #     thresholds=[2, 4, 5],
+        #     up_to='11:00',
+        #     image='ratatouille',
+        #     questions=text_task * 7,
+        # ),
         Work(
-            task_id='2021-09-22 11БА - ЭМИ - 1',
-            classes={'magnet.emi': ['Definitions01', 'Definitions02', 'Find_F_easy', 'Action1', 'Action2', 'Find_E_easy', 'Find_F_hard', 'Find_I_hard']},
-            thresholds=[3, 5, 7],
-            up_to='10:00',
-            image='zootopia',
-            questions=text_task * 8,
-        ),
-        Work(
-            task_id='2021-09-23 11Б - ЭМИ - 1',
-            classes={'magnet.emi': ['Definitions01', 'Definitions02', 'Find_F_easy', 'Action1', 'Action2', 'Find_E_easy', 'Find_F_hard']},
-            thresholds=[2, 4, 5],
-            up_to='11:00',
-            image='ratatouille',
-            questions=text_task * 7,
-        ),
-        Work(
-            task_id='2021-09-28 11Б - ЭМИ - 1',
+            task_id='2021-09-28 11БА - ЭМИ - 2',
             classes={'magnet': ['emi.Definitions03', 'induction.Definitions01', 'induction.Definitions02', 'induction.Definitions03', 'induction.Find_E_easy', 'induction.Find_Phi_1']},
             thresholds=[3, 4, 5],
-            up_to='9:00',
+            up_to='10:00',
             image='zootopia',
             questions=text_task * 6,
         ),
-
     ]
     return works
