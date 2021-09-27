@@ -134,17 +134,19 @@ class PdfBook:
         assert library.files.path_is_ok(fileName)
         return fileName
 
-    def ExtractPage(self, pageNumber, dirName=None, nameTemplate=None, overwrite=False):
+    def ExtractPage(self, *, pageNumber=None, dirName=None, nameTemplate=None, overwrite=False, dry_run=False):
         assert isinstance(pageNumber, int)
         assert 1 <= pageNumber < 1000, f'Invalid pageNumber: {pageNumber}'
         pageIndex = self.GetPageShift(pageNumber) + pageNumber - 1
         assert 0 <= pageIndex < 1000, f'Invalid pageIndex: {pageIndex}'
 
         fileName = self.GetFilename(dirName, nameTemplate, pageNumber)
-        log.info(f'  Page {pageNumber} -> {fileName}')
-
         if os.path.exists(fileName) and not overwrite:
-            log.debug(f'Already generated {fileName}')
+            log.debug(f'Already generated from {pageNumber}: {fileName}')
+            return
+
+        log.info(f'  Page {pageNumber} -> {fileName}')
+        if dry_run:
             return
 
         command = [
@@ -166,14 +168,14 @@ class PdfBook:
         ]
         library.process.run(command)
 
-    def Save(self, overwrite=False):
+    def Save(self, *, overwrite=False, dry_run=False):
         data = list(self._structure())
         log.info(f'Saving {len(data)} pages from \'{self.PdfPath}\' to \'{self.DstPath}\'')
         for pageNumber, dirName, nameTemplate in data:
-            self.ExtractPage(pageNumber, dirName=dirName, nameTemplate=nameTemplate, overwrite=overwrite)
+            self.ExtractPage(pageNumber=pageNumber, dirName=dirName, nameTemplate=nameTemplate, overwrite=overwrite, dry_run=dry_run)
 
     def GetStrangeFiles(self, remove=False):
-        log.debug(f'Looking for for strange files in {self.DstPath}')
+        log.debug(f'Looking for strange files in {self.DstPath}')
 
         found = set(library.files.walkFiles(self.DstPath, extensions=['.png']))
         assert all(library.files.path_is_ok(file) for file in found)
