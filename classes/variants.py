@@ -570,6 +570,14 @@ def get_all_variants():
             image='ratatouille',
             questions=text_task * 7,
         ),
+        Work(
+            task_id='2021-09-28 11Б - ЭМИ - 1',
+            classes={'magnet': ['emi.Definitions03', 'induction.Definitions01', 'induction.Definitions02', 'induction.Definitions03', 'induction.Find_E_easy', 'induction.Find_Phi_1']},
+            thresholds=[3, 4, 5],
+            up_to='9:00',
+            image='zootopia',
+            questions=text_task * 6,
+        ),
 
     ]
     return works
