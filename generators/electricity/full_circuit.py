@@ -83,7 +83,7 @@ class Short_i(variant.VariantTask):  # Вишнякова - 7
     '{P2:L} &= {P_formula} = {P2_ratio:LaTeX}\\units{Вт} \\approx {P2:V}.',
 ])
 class Update_external_R(variant.VariantTask):
-    def GetUpdate(self, r=None, how=None, R1=None, R2=None, I1=None, **kws):
+    def GetUpdate(self, r=None, how=None, R1=None, R2=None, I1=None):
         E_value = I1.Value * (r.Value + R1.Value)
         E = '\\ele = %d В' % E_value
         if how == 'параллельно':
@@ -140,7 +140,7 @@ class Update_external_R(variant.VariantTask):
 @variant.arg(r=['r = %d Ом' % r for r in [10, 20, 30, 60]])
 @variant.arg(t=['\\tau = %d с' % t for t in [2, 5, 10]])
 class Om_eta_full(variant.VariantTask):
-    def GetUpdate(self, r=None, R=None, E=None, t=None, **kws):
+    def GetUpdate(self, r=None, R=None, E=None, t=None):
         I1_ratio = Fraction(numerator=E.Value, denominator=R.Value)
         I2_ratio = Fraction(numerator=E.Value, denominator=R.Value + r.Value)
         eta_2_ratio = Fraction(numerator=R.Value, denominator=R.Value + r.Value)
@@ -208,7 +208,7 @@ class Om_eta_full(variant.VariantTask):
     (6, 24),    (6, 54),
 ]])
 class r_eta_from_Rs(variant.VariantTask):
-    def GetUpdate(self, R1=None, R2=None, **kws):
+    def GetUpdate(self, R1=None, R2=None):
         r = UnitValue('r = %.1f Ом' % ((1. * R1.Value * R2.Value) ** 0.5))
         return dict(
             R1=R1,

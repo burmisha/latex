@@ -39,7 +39,7 @@ class Force19(variant.VariantTask):
 @variant.arg(d=('d = {} см', [20, 50, 80]))
 @variant.solution_space(80)
 class Chernoutsan11_5(variant.VariantTask):
-    def GetUpdate(self, B=None, I=None, l=None, d=None, **kws):
+    def GetUpdate(self, B=None, I=None, l=None, d=None):
         return dict(
             A='A = %.3f Дж' % (10 ** (-4) * 1.0 * B.Value * I.Value * l.Value * d.Value),
         )
@@ -63,7 +63,7 @@ class Chernoutsan11_5(variant.VariantTask):
 @variant.arg(B=['B = %d мТл' % B for B in [2, 5, 10]])
 @variant.arg(I=['\\mathcal{I} = %d А' % I for I in [10, 20, 40, 50]])
 class Chernoutsan11_01(variant.VariantTask):
-    def GetUpdate(self, l=None, a=None, B=None, I=None, **kws):
+    def GetUpdate(self, l=None, a=None, B=None, I=None):
         return dict(
             F='F = %.2f мН' % ((1.0 * a.Value ** 2 + (1.0 * l.Value - a.Value) ** 2) ** 0.5 / 100 * I.Value * B.Value),
         )
@@ -85,7 +85,7 @@ class Chernoutsan11_01(variant.VariantTask):
 @variant.arg(B=['B = %d мТл' % B for B in [10, 20, 50, 100]])
 @variant.arg(rho=['\\rho = %d г / м' % r for r in [5, 10, 20, 40, 100]])
 class Chernoutsan11_02(variant.VariantTask):
-    def GetUpdate(self, rho=None, B=None, **kws):
+    def GetUpdate(self, rho=None, B=None):
         return dict(
             I='\\mathcal{I} = %f А' % (1.0 * Consts.g_ten.Value * rho.Value / B.Value),
         )

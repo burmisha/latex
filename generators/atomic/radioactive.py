@@ -186,7 +186,7 @@ class Definitions07(variant.VariantTask):
     ('четырём', 4),
 ])
 class BK_53_01(variant.VariantTask):  # Вишнякова - Базовый курс 5.3 - задача 01
-    def GetUpdate(self, what=None, when=None, t=None, **kws):
+    def GetUpdate(self, what=None, when=None, t=None):
         share = 2. ** (-t)
         left = 1. - share
         return dict(
@@ -211,7 +211,7 @@ class BK_53_01(variant.VariantTask):  # Вишнякова - Базовый ку
 @variant.arg(t=['t = %s суток' % t for t in ['91.2', '136.8', '182.4']])
 @variant.arg(T=['T = 45.6 суток'])
 class BK_53_02(variant.VariantTask):  # Вишнякова - Базовый курс 5.3 - задача 02
-    def GetUpdate(self, t=None, T=None, **kws):
+    def GetUpdate(self, t=None, T=None):
         share = 2. ** (-t.Value / T.Value)
         return dict(
             share=share,
@@ -247,7 +247,7 @@ class BK_53_02(variant.VariantTask):  # Вишнякова - Базовый ку
 ])
 @variant.arg(t=['%d суток' % t for t in [2, 3, 4, 5]])
 class BK_53_03(variant.VariantTask):  # Вишнякова - Базовый курс 5.3 - задача 03
-    def GetUpdate(self, how=None, t=None, num=None, log_num=None, **kws):
+    def GetUpdate(self, how=None, t=None, num=None, log_num=None):
         return dict(
             T='%.1f суток' % (1. * t.Value / log_num),
             res=1. / num * (1 - 1./num),
@@ -286,7 +286,7 @@ class BK_53_03(variant.VariantTask):  # Вишнякова - Базовый ку
     ('кислорода \\ce{^{18}_{8}O}', 'E = 139.8 МэВ'),
 ])
 class BK_53_12(variant.VariantTask):  # Вишнякова - Базовый курс 5.3 - задача 12
-    def GetUpdate(self, E=None, **kws):
+    def GetUpdate(self, element=None, E=None):
         c = Consts.c_4
         dm = E.Mult(Consts.e, precisionInc=1).Div(c).Div(c, units='кг')
         aem = dm.Div(Consts.aem, units='а.е.м.')
@@ -318,7 +318,7 @@ class BK_53_12(variant.VariantTask):  # Вишнякова - Базовый ку
     (Elements.get_by_z_a(2, 8), 'm = 8.0225 а.е.м.'),
 ])
 class Delta_m_from_m(variant.VariantTask):
-    def GetUpdate(self, element, m_aem, **kws):
+    def GetUpdate(self, element, m_aem):
         dm = element.n * Consts.m_n_aem.Value + element.p * Consts.m_p_aem.Value - m_aem.Value
         dE = dm * Consts.one_aem_eV.Value
         return dict(

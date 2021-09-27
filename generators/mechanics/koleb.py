@@ -23,7 +23,7 @@ class Nu01(variant.VariantTask):
 @variant.answer_short('\\nu = \\frac 1T = \\frac 1{T:Value:s} = {nu:Value}')
 @variant.arg(T=['T = %d мс' % T for T in [2, 4, 5, 10, 20, 40, 50]])
 class Nu02(variant.VariantTask):
-    def GetUpdate(self, T=None, **kws):
+    def GetUpdate(self, T=None):
         return dict(
             nu='''\\nu = %d Гц''' % (1000 / T.Value),
         )
@@ -40,7 +40,7 @@ class Nu02(variant.VariantTask):
 @variant.arg(nu=['\\nu = %d кГц' % nu for nu in [2, 4, 5, 10, 20, 40, 50]])
 @variant.arg(t=['t = %d мин' % t for t in [1, 2, 3, 5, 10]])
 class Nu03(variant.VariantTask):
-    def GetUpdate(self, nu=None, t=None, **kws):
+    def GetUpdate(self, nu=None, t=None):
         return dict(
             T='T = %.3f мc' % (1. / nu.Value),
             N='N = %d колебаний' % (nu.Value * 1000 * t.Value * 60),
@@ -61,7 +61,7 @@ class Nu03(variant.VariantTask):
 @variant.arg(nu=['\\nu = %d Гц' % nu for nu in [2, 5, 6, 10, 20]])
 @variant.arg(t=['t = %d с' % t for t in [10, 40, 80]])
 class Nu04(variant.VariantTask):
-    def GetUpdate(self, A=None, nu=None, t=None, **kws):
+    def GetUpdate(self, A=None, nu=None, t=None):
         return dict(
             s='s = %.1f м' % (4. * A.Value / 100 * t.Value * nu.Value),
         )

@@ -80,7 +80,7 @@ class Theory_1_simple(variant.VariantTask):
     '\\modul{{\\vec a + \\vec b}} = \\sqrt{{\\sqr{i3} + \\sqr{j3}}} \\approx {modul}.'
 )
 class Vectors_SumAndDiff(variant.VariantTask):
-    def GetUpdate(self, i1=None, j1=None, i2=None, j2=None, **kws):
+    def GetUpdate(self, i1=None, j1=None, i2=None, j2=None):
         return dict(
             i3=i1 + i2,
             j3=j1 + j2,
@@ -118,7 +118,7 @@ class Chernoutsan_1_2(variant.VariantTask):
 @variant.arg(s=('s = {} м', range(150, 350, 20)))
 @variant.answer_short('{d:Value}')
 class Chernoutsan_1_2_1(variant.VariantTask):
-     def GetUpdate(self, l=None, s=None, **kws):
+     def GetUpdate(self, who=None, whose=None, l=None, s=None):
         d = s.Value % (2 * l.Value)
         d = min(d, 2 * l.Value - d)
         return dict(
@@ -179,7 +179,7 @@ class AvgSpeed_electron(variant.VariantTask):
     '&= at * \\frac{\\frac 12 + {n}}{1 + {n}} = {a:Value} * {t:Value} * \\frac{\\frac 12 + {n}}{1 + {n}} \\approx {v_avg:Value}.'
 ])
 class A_plus_V(variant.VariantTask):
-    def GetUpdate(self, what=None, t=None, a=None, n=None, **kws):
+    def GetUpdate(self, who=None, what=None, t=None, a=None, n=None):
         return dict(
             v='v = %.1f м / с' % (t.Value * a.Value) ,
             s='s_x = %.1f м' % (t.Value ** 2 * a.Value / 2) ,
@@ -199,7 +199,7 @@ class A_plus_V(variant.VariantTask):
     '{v:Letter} &= v_{0y} - gt = -gt = {Consts.g_ten:Value} * {t:Value} = -{v:Value}.'
 ])
 class V_and_S_from_g_and_t(variant.VariantTask):
-    def GetUpdate(self, n=None, which=None, point=None, **kws):
+    def GetUpdate(self, n=None, which=None, point=None):
         t_value = {
             'начале': n - 1,
             'конце': n,
@@ -230,7 +230,7 @@ class V_and_S_from_g_and_t(variant.VariantTask):
     'a &= \\frac{v^2}r =  \\frac{4 \\pi^2 r n^2}{t^2} \\approx {a:Value}.'
 ])
 class All_from_l_and_n(variant.VariantTask):
-    def GetUpdate(self, what=None, l=None, n=None, **kws):
+    def GetUpdate(self, what=None, l=None, n=None):
         r_ratio = Fraction(numerator=l.Value, denominator={'радиусом': 1, 'диаметром': 2}[what])
         t = UnitValue('t = 60 с')
         r = UnitValue('r = %.1f м' % float(r_ratio))
@@ -264,7 +264,7 @@ class All_from_l_and_n(variant.VariantTask):
     'v = \\sqrt{v_x^2 + v_y^2} = \\sqrt{v_{0x}^2 + \\sqr{v_{0y} - g\\tau}} = \\sqrt{v_0^2 + \\sqr{g\\tau}} \\approx {v_res:Value}.'
 ])
 class Stones_into_river(variant.VariantTask):
-    def GetUpdate(self, who=None, t=None, v=None, **kws):
+    def GetUpdate(self, who=None, t=None, v=None):
         return dict(
             who2=who[:3] + 'и',
             h='h = %.1f м' % (Consts.g_ten.Value * t.Value ** 2 / 2),

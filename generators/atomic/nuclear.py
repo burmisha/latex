@@ -21,7 +21,7 @@ all_particles = ['протонов', 'нейтронов', 'электронов
 @variant.arg(what01=all_particles)
 @variant.arg(element=ElementsList[0:3])
 class AtomCount01(variant.VariantTask):
-    def GetUpdate(self, element=None, what01=None, **kws):
+    def GetUpdate(self, element=None, what01=None):
         return dict(answer=get_element_answer(what01, element))
 
 
@@ -32,7 +32,7 @@ class AtomCount01(variant.VariantTask):
 @variant.arg(what02=all_particles)
 @variant.arg(element=ElementsList[3:7])
 class AtomCount02(variant.VariantTask):
-    def GetUpdate(self, element=None, what02=None, **kws):
+    def GetUpdate(self, element=None, what02=None):
         return dict(answer=get_element_answer(what02, element))
 
 
@@ -43,7 +43,7 @@ class AtomCount02(variant.VariantTask):
 @variant.arg(what03=all_particles)
 @variant.arg(element=ElementsList[7:12])
 class AtomCount03(variant.VariantTask):
-    def GetUpdate(self, element=None, what03=None, **kws):
+    def GetUpdate(self, element=None, what03=None):
         return dict(answer=get_element_answer(what03, element))
 
 
@@ -54,7 +54,7 @@ class AtomCount03(variant.VariantTask):
 @variant.arg(what04=all_particles)
 @variant.arg(element=ElementsList[12:18])
 class AtomCount04(variant.VariantTask):
-    def GetUpdate(self, element=None, what04=None, **kws):
+    def GetUpdate(self, element=None, what04=None):
         return dict(answer=get_element_answer(what04, element))
 
 
@@ -65,7 +65,7 @@ class AtomCount04(variant.VariantTask):
 @variant.arg(what05=all_particles)
 @variant.arg(element=ElementsList[18:25])
 class AtomCount05(variant.VariantTask):
-    def GetUpdate(self, element=None, what05=None, **kws):
+    def GetUpdate(self, element=None, what05=None):
         return dict(answer=get_element_answer(what05, element))
 
 
@@ -76,7 +76,7 @@ class AtomCount05(variant.VariantTask):
 @variant.arg(what06=all_particles)
 @variant.arg(element=ElementsList[25:33])
 class AtomCount06(variant.VariantTask):
-    def GetUpdate(self, element=None, what06=None, **kws):
+    def GetUpdate(self, element=None, what06=None):
         return dict(answer=get_element_answer(what06, element))
 
 
@@ -87,7 +87,7 @@ class AtomCount06(variant.VariantTask):
 @variant.arg(what07=all_particles)
 @variant.arg(element=ElementsList[33:42])
 class AtomCount07(variant.VariantTask):
-    def GetUpdate(self, element=None, what07=None, **kws):
+    def GetUpdate(self, element=None, what07=None):
         return dict(answer=get_element_answer(what07, element))
 
 
@@ -98,7 +98,7 @@ class AtomCount07(variant.VariantTask):
 @variant.arg(what08=all_particles)
 @variant.arg(element=ElementsList[42:52])
 class AtomCount08(variant.VariantTask):
-    def GetUpdate(self, element=None, what08=None, **kws):
+    def GetUpdate(self, element=None, what08=None):
         return dict(answer=get_element_answer(what08, element))
 
 
@@ -109,7 +109,7 @@ class AtomCount08(variant.VariantTask):
 @variant.arg(what09=all_particles)
 @variant.arg(element=ElementsList[52:63])
 class AtomCount09(variant.VariantTask):
-    def GetUpdate(self, element=None, what09=None, **kws):
+    def GetUpdate(self, element=None, what09=None):
         return dict(answer=get_element_answer(what09, element))
 
 
@@ -120,7 +120,7 @@ class AtomCount09(variant.VariantTask):
 @variant.arg(what10=all_particles)
 @variant.arg(element=ElementsList[63:75])
 class AtomCount10(variant.VariantTask):
-    def GetUpdate(self, element=None, what10=None, **kws):
+    def GetUpdate(self, element=None, what10=None):
         return dict(answer=get_element_answer(what10, element))
 
 
@@ -131,7 +131,7 @@ class AtomCount10(variant.VariantTask):
 @variant.arg(what11=all_particles)
 @variant.arg(element=ElementsList[75:88])
 class AtomCount11(variant.VariantTask):
-    def GetUpdate(self, element=None, what11=None, **kws):
+    def GetUpdate(self, element=None, what11=None):
         return dict(answer=get_element_answer(what11, element))
 
 
@@ -142,7 +142,7 @@ class AtomCount11(variant.VariantTask):
 @variant.arg(what12=all_particles)
 @variant.arg(element=ElementsList[88:102])
 class AtomCount12(variant.VariantTask):
-    def GetUpdate(self, element=None, what12=None, **kws):
+    def GetUpdate(self, element=None, what12=None):
         return dict(answer=get_element_answer(what12, element))
 
 
@@ -154,7 +154,7 @@ class AtomCount12(variant.VariantTask):
 @variant.arg(what01=all_particles)
 @variant.arg(element01=ElementsList[1:4])
 class AtomCount01_Text(variant.VariantTask):
-    def GetUpdate(self, element01=None, what01=None, **kws):
+    def GetUpdate(self, element01=None, what01=None):
         return dict(answer=get_element_answer(what01, element01))
 
 
@@ -165,7 +165,7 @@ class AtomCount01_Text(variant.VariantTask):
 @variant.arg(what02=all_particles)
 @variant.arg(element02=ElementsList[4:8])
 class AtomCount02_Text(variant.VariantTask):
-    def GetUpdate(self, element02=None, what02=None, **kws):
+    def GetUpdate(self, element02=None, what02=None):
         return dict(answer=get_element_answer(what02, element02))
 
 
@@ -176,7 +176,7 @@ class AtomCount02_Text(variant.VariantTask):
 @variant.arg(what03=all_particles)
 @variant.arg(element03=ElementsList[8:13])
 class AtomCount03_Text(variant.VariantTask):
-    def GetUpdate(self, element03=None, what03=None, **kws):
+    def GetUpdate(self, element03=None, what03=None):
         return dict(answer=get_element_answer(what03, element03))
 
 
@@ -187,7 +187,7 @@ class AtomCount03_Text(variant.VariantTask):
 @variant.arg(what04=all_particles)
 @variant.arg(element04=ElementsList[13:19])
 class AtomCount04_Text(variant.VariantTask):
-    def GetUpdate(self, element04=None, what04=None, **kws):
+    def GetUpdate(self, element04=None, what04=None):
         return dict(answer=get_element_answer(what04, element04))
 
 
@@ -198,7 +198,7 @@ class AtomCount04_Text(variant.VariantTask):
 @variant.arg(what05=all_particles)
 @variant.arg(element05=ElementsList[19:26])
 class AtomCount05_Text(variant.VariantTask):
-    def GetUpdate(self, element05=None, what05=None, **kws):
+    def GetUpdate(self, element05=None, what05=None):
         return dict(answer=get_element_answer(what05, element05))
 
 
@@ -209,7 +209,7 @@ class AtomCount05_Text(variant.VariantTask):
 @variant.arg(what06=all_particles)
 @variant.arg(element06=ElementsList[26:34])
 class AtomCount06_Text(variant.VariantTask):
-    def GetUpdate(self, element06=None, what06=None, **kws):
+    def GetUpdate(self, element06=None, what06=None):
         return dict(answer=get_element_answer(what06, element06))
 
 
@@ -220,7 +220,7 @@ class AtomCount06_Text(variant.VariantTask):
 @variant.arg(what07=all_particles)
 @variant.arg(element07=ElementsList[34:43])
 class AtomCount07_Text(variant.VariantTask):
-    def GetUpdate(self, element07=None, what07=None, **kws):
+    def GetUpdate(self, element07=None, what07=None):
         return dict(answer=get_element_answer(what07, element07))
 
 
@@ -231,7 +231,7 @@ class AtomCount07_Text(variant.VariantTask):
 @variant.arg(what08=all_particles)
 @variant.arg(element08=ElementsList[43:53])
 class AtomCount08_Text(variant.VariantTask):
-    def GetUpdate(self, element08=None, what08=None, **kws):
+    def GetUpdate(self, element08=None, what08=None):
         return dict(answer=get_element_answer(what08, element08))
 
 
@@ -242,7 +242,7 @@ class AtomCount08_Text(variant.VariantTask):
 @variant.arg(what09=all_particles)
 @variant.arg(element09=ElementsList[53:64])
 class AtomCount09_Text(variant.VariantTask):
-    def GetUpdate(self, element09=None, what09=None, **kws):
+    def GetUpdate(self, element09=None, what09=None):
         return dict(answer=get_element_answer(what09, element09))
 
 
@@ -253,7 +253,7 @@ class AtomCount09_Text(variant.VariantTask):
 @variant.arg(what10=all_particles)
 @variant.arg(element10=ElementsList[64:76])
 class AtomCount10_Text(variant.VariantTask):
-    def GetUpdate(self, element10=None, what10=None, **kws):
+    def GetUpdate(self, element10=None, what10=None):
         return dict(answer=get_element_answer(what10, element10))
 
 
@@ -264,7 +264,7 @@ class AtomCount10_Text(variant.VariantTask):
 @variant.arg(what11=all_particles)
 @variant.arg(element11=ElementsList[76:89])
 class AtomCount11_Text(variant.VariantTask):
-    def GetUpdate(self, element11=None, what11=None, **kws):
+    def GetUpdate(self, element11=None, what11=None):
         return dict(answer=get_element_answer(what11, element11))
 
 
@@ -275,7 +275,7 @@ class AtomCount11_Text(variant.VariantTask):
 @variant.arg(what12=all_particles)
 @variant.arg(element12=ElementsList[89:103])
 class AtomCount12_Text(variant.VariantTask):
-    def GetUpdate(self, element12=None, what12=None, **kws):
+    def GetUpdate(self, element12=None, what12=None):
         return dict(answer=get_element_answer(what12, element12))
 
 
@@ -295,7 +295,7 @@ class AtomCount12_Text(variant.VariantTask):
     (190, 78),  # Pt
 ])
 class KernelCount(variant.VariantTask):
-    def GetUpdate(self, nuclons=None, electrons=None, **kws):
+    def GetUpdate(self, nuclons=None, electrons=None):
         return dict(
             neutrons=nuclons - electrons,
             protons=electrons,
@@ -317,7 +317,7 @@ class KernelCount(variant.VariantTask):
     ('\\beta', Elements.get_by_z_a(11, 22)),
 ])
 class RadioFall(variant.VariantTask):
-    def GetUpdate(self, fallType, element, **kws):
+    def GetUpdate(self, fallType, element):
         if 'alpha' in fallType:
             res = element.alpha()
             add = '\\ce{^4_2 He}'

@@ -26,7 +26,7 @@ from generators.helpers import UnitValue, Consts
 @variant.arg(power=('P = {} мВт', [15, 40, 75, 200]))
 @variant.arg(length=('\\lambda = {} нм', [500, 600, 750]))
 class Fotons(variant.VariantTask):
-    def GetUpdate(self, power=None, minutes=None, length=None, **kws):
+    def GetUpdate(self, power=None, minutes=None, length=None):
         answer = 1. * power.Value * minutes * length.Value / 6.626 * 2 / (10 ** 5)
         return dict(
             answerValue=answer,
@@ -78,7 +78,7 @@ class Fotons(variant.VariantTask):
 @variant.arg(q3__a3=[('530 нм', 'зелёный'), ('720 нм', 'красный'), ('610 нм', 'оранжевый')])
 @variant.arg(q4__a4=[('580 нм', 'зелёный'), ('490 нм', 'голубой'), ('420 нм', 'фиолетовый')])
 class ColorNameFromLambda(variant.VariantTask):
-    def GetUpdate(self, q1=None, q2=None, q3=None, q4=None, **kws):
+    def GetUpdate(self, q1=None, a1=None, q2=None, a2=None, q3=None, a3=None, q4=None, a4=None):
         mkm = UnitValue('1 мкм')
         return dict(
             mkm=mkm,
@@ -103,7 +103,7 @@ class ColorNameFromLambda(variant.VariantTask):
 @variant.arg(of=['электрического поля', 'индукции магнитного поля'])
 @variant.arg(lmbd=['%d %s' % (l, s) for l in [2, 3, 5] for s in ['м', 'см']])
 class T_Nu_from_lambda(variant.VariantTask):
-    def GetUpdate(self, lmbd=None, **kws):
+    def GetUpdate(self, what=None, of=None, lmbd=None):
         return dict(
             T=lmbd.Div(Consts.c, units='с'),
             nu=Consts.c.Div(lmbd, units='Гц'),
@@ -118,7 +118,7 @@ class T_Nu_from_lambda(variant.VariantTask):
 @variant.answer_short('E = h \\nu = {Consts.h:V} * {nu:V} \\approx {E:V} \\approx {E_eV:V}')
 @variant.arg(nu=('{} 10^16 Гц', [4, 5, 6, 7, 8, 9]))
 class E_from_nu(variant.VariantTask):
-    def GetUpdate(self, nu=None, **kws):
+    def GetUpdate(self, nu=None):
         E = Consts.h.Mult(nu, units='Дж', precisionInc=1)
         E_eV = E.Div(Consts.e, units='эВ')
         return dict(
@@ -137,7 +137,7 @@ class E_from_nu(variant.VariantTask):
 @variant.arg(of=['кванта света', 'фотона'])
 @variant.arg(in_what=['джоулях', 'электронвольтах'])
 class E_from_lambda(variant.VariantTask):
-    def GetUpdate(self, lmbd=None, **kws):
+    def GetUpdate(self, lmbd=None, of=None, in_what=None):
         E = Consts.h.Mult(Consts.c, units='Дж').Div(lmbd, units='Дж')
         E_eV = E.Div(Consts.e, units='эВ')
         return dict(
@@ -187,7 +187,7 @@ class Deduce01(variant.VariantTask):
     (8, 300, 400),
 ])
 class RadioFall2(variant.VariantTask):
-    def GetUpdate(self, time=None, total=None, delta=None, **kws):
+    def GetUpdate(self, time=None, total=None, delta=None):
         return dict(
             T='%.1f ч' % (time / math.log(total / (total - delta), 2)),
         )

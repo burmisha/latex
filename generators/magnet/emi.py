@@ -98,7 +98,7 @@ class Definitions03(variant.VariantTask):
 @variant.answer_short('\\alpha = {alpha}\\degrees, {Phi:Letter} = BS\\cos\\alpha = {Phi:Value} \\to {PhiAnswer}')
 @variant.answer_test('{PhiAnswer}')
 class Find_F_easy(variant.VariantTask):
-    def GetUpdate(self, S=None, B=None, angle=None, **kws):
+    def GetUpdate(self, S=None, B=None, angle=None):
         alpha = 90 - angle
 
         if alpha == 90:
@@ -133,7 +133,7 @@ class Find_F_easy(variant.VariantTask):
 @variant.answer_short('\\alpha={alpha}\\degrees, {Phi:L} = BS\\cos\\alpha = {Phi:V} \\to {PhiAnswer}')
 @variant.answer_test('{PhiAnswer}')
 class Find_F_hard(variant.VariantTask):
-    def GetUpdate(self, figure=None, a=None, b=None, B=None, between=None, angle=None, **kws):
+    def GetUpdate(self, figure=None, a=None, b=None, B=None, between=None, angle=None):
         S = a.Value * b.Value * 10 ** (a.Power + b.Power)
         if 'треугольник' in figure:
             S /= 2
@@ -201,7 +201,7 @@ class Action2(variant.VariantTask):
 ''')
 @variant.solution_space(60)
 class Find_E_easy(variant.VariantTask):
-    def GetUpdate(self, Phi1=None, Phi2=None, t=None, **kws):
+    def GetUpdate(self, Phi1=None, Phi2=None, t=None):
         E = abs(Phi1.Value - Phi2.Value) / t.Value
         E_answer = int(E + 0.5)
 
@@ -239,7 +239,7 @@ class Find_E_easy(variant.VariantTask):
 ])
 @variant.answer_test('{I_answer}')
 class Find_I_hard(variant.VariantTask):
-    def GetUpdate(self, how=None, S=None, t=None, B=None, R=None, between=None, angle=None, **kws):
+    def GetUpdate(self, how=None, S=None, t=None, B=None, R=None, between=None, angle=None):
         if 'перп' in how:
             alpha_1 = 0
         else:

@@ -99,7 +99,7 @@ class Definitions03(variant.VariantTask):
 ''')
 @variant.solution_space(60)
 class Find_E_easy(variant.VariantTask):
-    def GetUpdate(self, I1=None, I2=None, t=None, L=None, **kws):
+    def GetUpdate(self, I1=None, I2=None, t=None, L=None):
         E = abs(I1.Value - I2.Value) / t.Value * L.Value
         E_answer = int(E + 0.5)
 
@@ -129,7 +129,7 @@ class Find_E_easy(variant.VariantTask):
 ''')
 @variant.solution_space(60)
 class Find_Phi_1(variant.VariantTask):
-    def GetUpdate(self, I=None, L=None, n=None, **kws):
+    def GetUpdate(self, I=None, L=None, n=None):
         Phi1 = L.Value * I.Value / n
         Phi1_answer = int(Phi1 + 0.5)
 

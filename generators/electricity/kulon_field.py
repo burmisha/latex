@@ -25,7 +25,7 @@ def sign_to_mult(line):
 @variant.arg(first__second=[('q_1 = %d нКл' % f, 'q_2 = %d нКл' % s) for f in range(2, 5) for s in range(2, 5) if f != s])
 @variant.arg(distance=['%s = %d см' % (l, d) for d in [2, 3, 5, 6] for l in ['r', 'l', 'd'] ])
 class ForceTask(variant.VariantTask):
-    def GetUpdate(self, first=None, second=None, distance=None, **kws):
+    def GetUpdate(self, first=None, second=None, distance=None):
         # answer = kqq/r**2
         value = Fraction() * first.Value * second.Value * Consts.k.Value / (distance.Value ** 2)
         return dict(
@@ -64,7 +64,7 @@ class ForceTask(variant.VariantTask):
 @variant.arg(chargeLetter=['q', 'Q'])
 @variant.arg(letter=['l', 'd', 'r'])
 class ExchangeTask(variant.VariantTask):
-    def GetUpdate(self, sign_1=None, sign_2=None, chargeLetter=None, letter=None, first_charge=None, second_charge=None, n=None, **kws):
+    def GetUpdate(self, sign_1=None, sign_2=None, chargeLetter=None, letter=None, first_charge=None, second_charge=None, n=None):
         charges = [
             '{}{}{}'.format(sign_1, first_charge, chargeLetter),
             '{}{}{}'.format(sign_2, second_charge, chargeLetter),
@@ -92,7 +92,7 @@ class ExchangeTask(variant.VariantTask):
 @variant.arg(charges=[['+q', '-q'], ['-q', '-q'], ['+Q', '+Q'], ['-Q', '+Q']])
 @variant.arg(letter=['a', 'l', 'r', 'd'])
 class FieldTaskGenerator(variant.VariantTask):
-    def GetUpdate(self, firstPoint=None, secondPoint=None, letter='l', **kws):
+    def GetUpdate(self, firstPoint=None, secondPoint=None, charges=None, letter=None):
         coords = {
             'up': '(0; {})'.format(letter),
             'down': '(0; -{})'.format(letter),
@@ -188,7 +188,7 @@ class R_from_r_e1_e2(variant.VariantTask):  # Вишнякова 3.1.2
 @variant.arg(sign=['положительных', 'отрицательных'])
 @variant.answer_short('F = \\sum_i F_i = \\ldots = {ratio:LaTeX} \\frac{k{q}^2}{{r}^2}.')
 class F_from_many_q(variant.VariantTask):  # Вишнякова 3.1.3
-    def GetUpdate(self, n=None, n_text=None, r=None, q=None, **kws):
+    def GetUpdate(self, n=None, n_text=None, r=None, q=None, sign=None):
         if n == 3:
             ratio = Fraction() + Fraction() / 4
         elif n == 4:

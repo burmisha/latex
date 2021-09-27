@@ -11,7 +11,7 @@ from generators.helpers import Consts
 @variant.arg(v=['%d м / с' % v for v in [150, 200, 250, 300, 500]])
 @variant.arg(t=['%d час' % v for v in [2, 3, 4, 5]] + ['%d сут' % v for v in [2, 3, 4, 5]])
 class Basic01(variant.VariantTask):
-    def GetUpdate(self, v=None, t=None, **kws):
+    def GetUpdate(self, v=None, t=None):
         if 'час' in f'{t:Value}':
             mult = 3600
         elif 'сут' in f'{t:Value}':
@@ -103,7 +103,7 @@ class Basic05(variant.VariantTask):
 ])
 @variant.answer_short('\\nu = \\frac N{Consts.N_A:L|s} = \\frac{N:V|s}{Consts.N_A:V|s} = {nu:V}.')
 class CountNu(variant.VariantTask):
-    def GetUpdate(self, N=None, **kws):
+    def GetUpdate(self, N=None):
         return dict(
             nu=N.Div(Consts.N_A, units='моль'),
         )
@@ -126,7 +126,7 @@ class CountNu(variant.VariantTask):
 ])
 @variant.answer_short('m = \\mu\\nu = {mu:Value} * {nu:Value} = {m:Value}.')
 class CountMass(variant.VariantTask):
-    def GetUpdate(self, nu=None, mu=None, **kws):
+    def GetUpdate(self, nu=None, what=None, mu=None, formula=None):
         return dict(
             m='{} г'.format(nu.Value * mu.Value),
         )
@@ -149,7 +149,7 @@ class CountMass(variant.VariantTask):
 ])
 @variant.answer_short('N = {Consts.N_A:L}\\nu = {Consts.N_A:L}\\frac{m:L|s}{mu:L|s} = {Consts.N_A:Value} * \\frac{m:V|s}{mu:V|s} = {N:V}.')
 class CountParticles(variant.VariantTask):
-    def GetUpdate(self, m=None, mu=None, **kws):
+    def GetUpdate(self, m=None, what=None, mu=None, formula=None):
         return dict(
             N=m.Div(mu).Mult(Consts.N_A),
         )
@@ -444,7 +444,7 @@ class GraphPV_2(variant.VariantTask):
     ' &= \\frac{{n_1} * {Consts.p_atm:V}}{{Consts.water.rho:V} *  {Consts.g_ten:V}} \\approx {h:V}.'
 ])
 class ZFTSH_10_2_9_kv(variant.VariantTask):
-    def GetUpdate(self, ratio=None, n=None, T=None, **kws):
+    def GetUpdate(self, ratio=None, n=None, T=None):
         return dict(
             n_1=n - 1,
             h='%d м' % ((n - 1) * Consts.p_atm.Value * 1000 / Consts.water.rho.Value / Consts.g_ten.Value),
@@ -474,7 +474,7 @@ class ZFTSH_10_2_9_kv(variant.VariantTask):
 ''')
 
 class ZFTSH_10_2_2_kv(variant.VariantTask):
-    def GetUpdate(self, gas=None, V=None, p=None, t=None, **kws):
+    def GetUpdate(self, gas=None, V=None, p=None, t=None):
         return dict(
             P='%.1f атм' % p,
             m='%.2f г' % (p * Consts.p_atm.Value * 1000 * V.Value * gas.mu.Value / 1000 / Consts.R.Value / (t + 273)),
@@ -497,7 +497,7 @@ class ZFTSH_10_2_2_kv(variant.VariantTask):
     '\\frac{T_2}{T_1} = \\cbr{\\frac{V_1}{V_2}}^{n-1} \\approx {ans}'
 ])
 class Polytrope(variant.VariantTask):
-    def GetUpdate(self, what=None, n=None, how=None, **kws):
+    def GetUpdate(self, what=None, n=None, how=None):
         ans = how ** (n - 1)
         if what == 'увеличился':
             ans = 1 / ans
@@ -520,7 +520,7 @@ class Polytrope(variant.VariantTask):
     '\\implies \\rho_2 = \\rho_1 *  \\frac{P_2T_1}{P_1T_2} = {rho:V} * \\frac{{p:V} * {T1}\\units{К}}{{Consts.p_atm:V} * {T2}\\units{К}} \\approx {rho2:V}.'
 ])
 class Air_rho(variant.VariantTask):
-    def GetUpdate(self, rho=None, p=None, t=None, **kws):
+    def GetUpdate(self, rho=None, p=None, t=None):
         T1 = 273
         T2 = t + 273
         return dict(

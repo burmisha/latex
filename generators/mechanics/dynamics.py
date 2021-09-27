@@ -19,7 +19,7 @@ from generators.helpers import Consts, Fraction, UnitValue
     'T &= m\'a = {k}m * \\frac{{F:L}}{{N} {m:L}} = \\frac{{k}}{{N}} {F:L} \\approx {T:V}.'
 ])
 class Many_blocks(variant.VariantTask):
-     def GetUpdate(self, many=None, N=None, which=None, i=None, F=None, m=None, **kws):
+     def GetUpdate(self, many=None, N=None, which=None, i=None, F=None, m=None):
         k = {
             'наибольшим': i,
             'наименьшим':  N - i,
@@ -75,7 +75,7 @@ class Many_blocks(variant.VariantTask):
 '''
 )
 class Two_blocks_on_block(variant.VariantTask):
-    def GetUpdate(self, m1=None, m2=None, **kws):
+    def GetUpdate(self, m1=None, m2=None):
         return dict(
             a='a = %.2f м / c^2' % ((m2.Value - m1.Value) / (m1.Value + m2.Value) * Consts.g_ten.Value),
             T='T = %.1f Н' % (2 * Consts.g_ten.Value * m1.Value * m2.Value / (m1.Value + m2.Value)),
@@ -96,7 +96,7 @@ class Two_blocks_on_block(variant.VariantTask):
     '\\text{ при равенстве возможны оба варианта: и едет, и не едет, но на ответы это не влияет.}',
 ])
 class F_tren(variant.VariantTask):
-    def GetUpdate(self, m=None, mu=None, F=None, **kws):
+    def GetUpdate(self, m=None, mu=None, F=None):
         F_max_value = mu.Value * m.Value * Consts.g_ten.Value
         if F_max_value > F.Value:
             sign = '>'

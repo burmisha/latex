@@ -45,7 +45,7 @@ class Equations(variant.VariantTask):
 @variant.arg(energy=['полной энергии частицы $E$', 'кинетической энергии частицы $E_\\text{кин.}$'])
 @variant.arg(percent=['9', '8', '7', '6'])
 class E_ratio_from_v_ratio(variant.VariantTask):  # Вишнякова - Базовый курс 4 - задача 1
-    def GetUpdate(self, energy=None, percent=None, **kws):
+    def GetUpdate(self, what=None, energy=None, percent=None):
         share = float('0.' + percent)
         return dict(
             E=1. / ((1. - share ** 2) ** 0.5),
@@ -80,7 +80,7 @@ class E_ratio_from_v_ratio(variant.VariantTask):  # Вишнякова - Баз�
 @variant.arg(x=['полную энергию', 'кинетическую энергию', 'импульс'])
 @variant.arg(percent=['85', '75', '65'])
 class E_P_from_v_ratio(variant.VariantTask):  # Вишнякова - Базовый курс 4._ - задача 3
-    def GetUpdate(self, what=None, percent=None, **kws):
+    def GetUpdate(self, what=None, x=None, percent=None):
         m = {
             'Протон': Consts.m_p,
             'Электрон': Consts.m_e,
@@ -125,7 +125,7 @@ class E_P_from_v_ratio(variant.VariantTask):  # Вишнякова - Базов�
 @variant.arg(what=['км/ч', 'м/с', 'долях скорости света'])
 @variant.arg(percent=['50', '30', '10'])
 class beta_from_l_reduction(variant.VariantTask):  # Вишнякова - Базовый курс 4._ - задача 6
-    def GetUpdate(self, percent=None, **kws):
+    def GetUpdate(self, what=None, percent=None):
         share = float('0.' + percent)
         answerShare = (1. - (1. - share) ** 2) ** 0.5
         return dict(

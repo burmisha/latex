@@ -65,7 +65,7 @@ from generators.helpers import UnitValue, letter_variants, Fraction, n_times
 '''
 )
 class Kirchgof_double(variant.VariantTask):
-    def GetUpdate(self, R=None, r1=None, r2=None, E1=None, E2=None, **kws):
+    def GetUpdate(self, R=None, r1=None, r2=None, E1=None, E2=None):
         I_ratio = (
             Fraction(numerator=E1.Value, denominator=r1.Value) + Fraction(numerator=E2.Value, denominator=r2.Value)
         ) / (
@@ -131,7 +131,7 @@ class Kirchgof_double(variant.VariantTask):
     там тоже необходимо направление.
 ''')
 class Kirchgof_plain(variant.VariantTask):
-    def GetUpdate(self, index=None, rotate1=None, rotate2=None, **kws):
+    def GetUpdate(self, index=None, rotate1=None, rotate2=None):
         signs = {
             0: '-',
             -180: '',
@@ -201,7 +201,7 @@ class Kirchgof_plain(variant.VariantTask):
 )
 class Kirchgof_double_2(variant.VariantTask):
     pass
-    def GetUpdate(self, R=None, r1=None, r2=None, E1=None, E2=None, **kws):
+    def GetUpdate(self, R=None, r1=None, r2=None, E1=None, E2=None):
         I_ratio = (
             Fraction(numerator=E1.Value, denominator=r1.Value) - Fraction(numerator=E2.Value, denominator=r2.Value)
         ) / (
@@ -420,7 +420,7 @@ class Kirchgof_double_2(variant.VariantTask):
 '''
 )
 class Kirchgof_triple(variant.VariantTask):
-    def GetUpdate(self, R1=None, R2=None, R3=None, E1=None, E2=None, E3=None, **kws):
+    def GetUpdate(self, R1=None, R2=None, R3=None, E1=None, E2=None, E3=None, index=None):
         I1_ratio = (
             Fraction(numerator=E1.Value - E3.Value, denominator=R3.Value)
             + Fraction(numerator=E1.Value - E2.Value, denominator=R2.Value)

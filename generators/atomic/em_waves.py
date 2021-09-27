@@ -17,7 +17,7 @@ from generators.helpers import UnitValue, Consts, Fraction
 ])
 @variant.solution_space(180)
 class Gendenshteyn_11_11_18(variant.VariantTask):
-    def GetUpdate(self, n=None, lmbd=None, **kws):
+    def GetUpdate(self, n=None, lmbd=None):
         return dict(
             nu=Consts.c.Div(lmbd, units='Гц', powerShift=3),
             lmbd_1=lmbd.Div(n, units='м', precisionInc=2),
@@ -124,7 +124,7 @@ class Prefix(variant.VariantTask):
 ''')
 @variant.arg(E=['E = %s 10^{-19} Дж' % E for E in ['4.04', '5.05', '2.02', '7.07', '1.01', '0.55']])
 class Lambda_from_E(variant.VariantTask):  # Вишнякова - Базовый курс 5.2 - задача 01
-    def GetUpdate(self, E=None, **kws):
+    def GetUpdate(self, E=None):
         return dict(
             lmbd='{value:.2f} 10^{power} м'.format(
                 value=Consts.h.Value * Consts.c.Value / E.Value,
@@ -146,7 +146,7 @@ class Lambda_from_E(variant.VariantTask):  # Вишнякова - Базовый
 ''')
 @variant.arg(E=['E = %d 10^{-19} Дж' % E for E in [2, 3, 4, 6]])
 class Lambda_from_E_2(variant.VariantTask):  # Вишнякова - Базовый курс 5.2 - задача 02
-    def GetUpdate(self, E=None, **kws):
+    def GetUpdate(self, E=None):
         return dict(
             lmbd='{value:.2f} 10^{power} м'.format(
                 value=Consts.h.Value * Consts.c.Value / E.Value,
@@ -176,7 +176,7 @@ class Lambda_from_E_2(variant.VariantTask):  # Вишнякова - Базовы
     ('максимальна', 1),
 ])
 class H_levels(variant.VariantTask):  # Вишнякова - Базовый курс 5.2 - задача 07
-    def GetUpdate(self, n=None, what=None, minmax=None, what_sign=None, minmax_sign=None, **kws):
+    def GetUpdate(self, n=None, what=None, minmax=None, what_sign=None, minmax_sign=None):
         answer = {
             1: 'самая длинная линия',
             -1: 'самая короткая линия',

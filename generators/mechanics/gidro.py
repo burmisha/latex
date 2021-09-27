@@ -29,7 +29,7 @@ from generators.helpers import Consts
     ]
 ])
 class Ch_6_3(variant.VariantTask):
-    def GetUpdate(self, matter=None, rho=None, p=None, **kws):
+    def GetUpdate(self, matter=None, rho=None, p=None):
         value = 1000 * p.Value / Consts.g_ten.Value / rho.Value
         if int(value) == value:
             h = 'h = %d м' % value
@@ -52,7 +52,7 @@ class Ch_6_3(variant.VariantTask):
 @variant.answer_test('{h:TestAnswer}')
 @variant.arg(N=[2, 3, 4, 5, 6, 7, 8, 9, 10])
 class Ch_6_8(variant.VariantTask):
-    def GetUpdate(self, N=None, p=None, **kws):
+    def GetUpdate(self, N=None, p=None):
         return dict(
             h='h = %d м' % (1000 * Consts.p_atm.Value * (N-1) / Consts.g_ten.Value / Consts.water.rho.Value),
         )
@@ -78,7 +78,7 @@ class Ch_6_8(variant.VariantTask):
     # 'уровень жидкости',  # not for test
 ])
 class Ch_6_10(variant.VariantTask):
-    def GetUpdate(self, m=None, S=None, what=None, **kws):
+    def GetUpdate(self, m=None, S=None, what=None):
         ans = {
             'сила давления на дно сосуда': '\\Delta F = %d Н' % (m.Value * Consts.g_ten.Value / 1000),
             'давление на дно сосуда': '\\Delta p = %d Па' % (m.Value * Consts.g_ten.Value / S.Value / 1000),
@@ -121,7 +121,7 @@ class Ch_6_10(variant.VariantTask):
     ]
 ])
 class Ch_6_16(variant.VariantTask):
-    def GetUpdate(self, h1=None, rho=None, **kws):
+    def GetUpdate(self, matter=None, h1=None, rho=None):
         return dict(
             h2='h_2 = %d см' % (h1.Value * rho.Value / Consts.water.rho.Value),
             h2_m = 'h_2 = %.2f м' % (h1.Value * rho.Value / Consts.water.rho.Value / 100),
@@ -158,7 +158,7 @@ class Ch_6_16(variant.VariantTask):
     ]
 ])
 class Ch_6_20(variant.VariantTask):
-    def GetUpdate(self, S1=None, S2=None, m=None, **kws):
+    def GetUpdate(self, S1=None, S2=None, m=None):
         return dict(
             h2='h_2 = %d см' % (100 * 10 * m.Value / Consts.water.rho.Value / (S1.Value + S2.Value)),
         )
@@ -176,7 +176,7 @@ class Ch_6_20(variant.VariantTask):
     '\\rho = \\rho_\\text{ж.}\\cbr{1 -\\frac 1{n}} \\approx {rho2:V}'
 )
 class Rho_from_n(variant.VariantTask):
-    def GetUpdate(self, matter=None, rho=None, how=None, n=None, **kws):
+    def GetUpdate(self, matter=None, rho=None, how=None, n=None):
         return dict(
             rho2='\\rho = %d кг / м^3' % (rho * (1 - 1 / n)),
         )

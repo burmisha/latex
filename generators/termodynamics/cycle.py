@@ -58,7 +58,7 @@ from generators.helpers import UnitValue, Consts, Fraction, n_times
     ' = 1 - \\frac{P_0V_0}{{beta}P_0 * {alpha}V_0} = 1 - \\frac 1{{beta} * {alpha}}  = {eta_max:LaTeX} \\approx {eta_max_f}.'
 ])
 class Rectangle(variant.VariantTask):
-    def GetUpdate(self, alpha=None, beta=None, **kws):
+    def GetUpdate(self, alpha=None, alpha_text=None, beta=None, beta_text=None):
         A = (alpha - 1) * (beta - 1)
         A12 = (alpha - 1) * beta
         U12 = (alpha - 1) * beta
@@ -125,7 +125,7 @@ class Rectangle(variant.VariantTask):
     ' = 1 - \\frac{T_0}{{t}T_0} = 1 - \\frac 1{{t}}  = {eta_max:LaTeX} \\approx {eta_max_f}.'
 ])
 class Rectangle_T(variant.VariantTask):
-    def GetUpdate(self, alpha=None, beta=None, **kws):
+    def GetUpdate(self, alpha=None, alpha_text=None, beta=None, beta_text=None):
         t = alpha * beta
         A = (alpha - 1) * (beta - 1)
         A23 = (beta - 1) * alpha
@@ -305,7 +305,7 @@ class Rectangle_T(variant.VariantTask):
 '''
 )
 class TriangleUp_T(variant.VariantTask):
-    def GetUpdate(self, alpha=None, beta=None, **kws):
+    def GetUpdate(self, alpha=None, alpha_text=None, beta=None, beta_text=None):
         t = alpha * beta
         A = (alpha - 1) * (beta - 1)
         A23 = (beta - 1) * alpha
@@ -388,7 +388,7 @@ class TriangleUp_T(variant.VariantTask):
     ' = \\frac{\\frac 12 * {A}}{{A12} + \\frac 32 * {U12} + \\frac 32 * {U31}} = {eta:LaTeX} \\approx {eta_f}.',
 ])
 class TriangleUp(variant.VariantTask):
-    def GetUpdate(self, alpha=None, beta=None, **kws):
+    def GetUpdate(self, alpha=None, alpha_text=None, beta=None, beta_text=None):
         t = alpha * beta
         A = (alpha - 1) * (beta - 1)
         A12 = (alpha - 1) * beta

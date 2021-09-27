@@ -23,7 +23,7 @@ from generators.helpers import UnitValue, Consts
     '= \\varphi_1 * \\frac{rho_np_1:L:s}{rho_np_2:L:s} = {phi1_ratio} * \\frac{rho_np_1:V:s}{rho_np_2:V:s} = {phi2} \\approx {phi2_ratio}\\%.'
 ])
 class GetPhi(variant.VariantTask):
-    def GetUpdate(self, t1=None, t2=None, phi1=None, **kws):
+    def GetUpdate(self, t1=None, t2=None, phi1=None):
         np_1 = Consts.vapor.get_rho_by_t(int(t1))
         np_2 = Consts.vapor.get_rho_by_t(int(t2))
         rho_np_1 = f'\\rho_{{\\text{{нас. пара {t1}}} \\celsius}}= {np_1:.3f} г / м^3'
@@ -79,7 +79,7 @@ class GetPhi(variant.VariantTask):
     $$
 ''')
 class GetNFromPhi(variant.VariantTask):
-    def GetUpdate(self, phi=None, V=None, t=None, **kws):
+    def GetUpdate(self, phi=None, V=None, t=None):
         mu_value = 18
 
         t_int = int(t)
@@ -145,7 +145,7 @@ class GetNFromPhi(variant.VariantTask):
     Сравните 2 последних результата.
 ''')
 class GetPFromPhi(variant.VariantTask):
-    def GetUpdate(self, phi1=None, V=None, t1=None, t2=None, **kws):
+    def GetUpdate(self, phi1=None, V=None, t1=None, t2=None):
         P_np_1_value = Consts.vapor.get_p_by_t(int(t1))
         P_np_2_value = Consts.vapor.get_p_by_t(int(t2))
         phi_1 = 1. * int(phi1) / 100
@@ -216,7 +216,7 @@ class GetPFromPhi(variant.VariantTask):
     Тут получаем ответ: {P_2:Task:e}.
 ''')
 class GetPFromM(variant.VariantTask):
-    def GetUpdate(self, P_air_old=None, V=None, t1=None, t2=None, m=None, **kws):
+    def GetUpdate(self, P_air_old=None, V=None, t1=None, t2=None, m=None):
         mu_value = 18
         mu = f'\\mu = {mu_value} г / моль'
 

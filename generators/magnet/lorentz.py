@@ -48,7 +48,7 @@ class Force13(variant.VariantTask):
     F = ma, F = evB, a = v^2 / R \\implies R = \\frac{mv}{eB} = \\frac{{m:V} * {v:V}}{{e:V} * {B:V}} \\approx {R:V}.
 ''')
 class Force14(variant.VariantTask):
-    def GetUpdate(self, what=None, m=None, v=None, B=None, **kws):
+    def GetUpdate(self, what=None, m=None, v=None, B=None):
         # TODO: WTF
         R = (m.Value * v.Value) / (Consts.e.Value * B.Value) * 10 ** (v.Power + B.Power - 2)
         return dict(R='R = %.2f м' % R, e=Consts.e)
@@ -65,7 +65,7 @@ class Force14(variant.VariantTask):
 @variant.arg(how=['параллельна', 'перпендикулярна'])
 @variant.answer_short('\\text{{answer}}')
 class Force15(variant.VariantTask):
-    def GetUpdate(self, which=None, field=None, lines=None, how=None, **kws):
+    def GetUpdate(self, which=None, field=None, lines=None, how=None):
         if 'езаряжен' in which:
             answer = 'Прямая'
         else:

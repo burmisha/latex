@@ -20,7 +20,7 @@ from generators.helpers import Consts
 @variant.arg(l=['%s = %d см' % (ll, lv) for ll in ['l', 'r', 'd'] for lv in [2, 4, 5, 10]])
 @variant.arg(E=['E = %d кВ / м' % ev for ev in [2, 4, 20]])
 class A_from_Q_E_l(variant.VariantTask):  # Рымкевич 728(737)
-    def GetUpdate(self, l=None, q=None, E=None, **kws):
+    def GetUpdate(self, l=None, q=None, E=None):
         A = 1. * E.Value * q.Value * l.Value / 100
         dE = -A
         return dict(
@@ -42,7 +42,7 @@ class A_from_Q_E_l(variant.VariantTask):  # Рымкевич 728(737)
     E = \\frac{U:L:s}{l:L:s} = \\frac{U:V:s}{l:V:s} = {E:V}.
 ''')
 class E_from_U_l(variant.VariantTask):  # Рымкевич 735(737)
-    def GetUpdate(self, U=None, l=None, **kws):
+    def GetUpdate(self, U=None, l=None):
         return dict(
             E='%.1f кВ / м' % (1. * U.Value / l.Value * 100),
         )
@@ -85,7 +85,7 @@ class v_from_Ev_m(variant.VariantTask):  # 2335 Gendenshteyn
     '&= {V:Value} + \\frac{{Consts.m_e:V} * {v:V|sqr}}{2 {sign} * {Consts.e:V}} \\approx {V2:V}.'
 ])
 class Phi_from_static_e(variant.VariantTask):  # Гольдфарб 16.21, Вишнякова 3.1.7
-    def GetUpdate(self, v=None, V=None, what=None, **kws):
+    def GetUpdate(self, v=None, V=None, what=None):
         sign = {
             'электрон': -1,
             'позитрон': 1,
@@ -116,7 +116,7 @@ class Phi_from_static_e(variant.VariantTask):  # Гольдфарб 16.21, Ви�
     '&= {V:Value} + \\frac{{Consts.m_e:V} * {v:V|sqr}}{2 {sign} * {Consts.e:V}} \\approx {V2:V}.'
 ])
 class Phi_from_static_e(variant.VariantTask):  # 1621 Goldfarb
-    def GetUpdate(self, v=None, V=None, what=None, **kws):
+    def GetUpdate(self, v=None, V=None, what=None):
         sign = {
             'электрон': -1,
             'позитрон': 1,
@@ -169,7 +169,7 @@ class A_from_motion(variant.VariantTask):  # Вишнякова 3.1.8
 @variant.arg(phi_1=('\\varphi_1 = {} В', [-90, -30, 30, 90, 150]))
 @variant.arg(phi_2=('\\varphi_1 = {} В', [-120, -60, 60, 120]))
 class E_phi_graphs(variant.VariantTask):
-    def GetUpdate(self, d=None, phi_1=None, phi_2=None, **kws):
+    def GetUpdate(self, d=None, phi_1=None, phi_2=None):
         return dict(
             zero='0 В',
         )

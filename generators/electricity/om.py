@@ -205,7 +205,7 @@ class Definitions07(variant.VariantTask):
 @variant.arg(R=('R = {} Ом', [3, 5, 10, 15, 20, 30]))
 @variant.arg(U=('U = {} В', [120, 180, 240]))
 class I_from_U_R(variant.VariantTask):
-    def GetUpdate(self, R=None, U=None, **kws):
+    def GetUpdate(self, R=None, U=None):
         return dict(
             I='\\eli = %d А' % (U.Value / R.Value),
         )
@@ -222,7 +222,7 @@ class I_from_U_R(variant.VariantTask):
 @variant.arg(N=('N = {}', [10, 20, 40]))
 @variant.arg(how=['параллельно', 'последовательно'])
 class r_from_R_N(variant.VariantTask):
-    def GetUpdate(self, R=None, N=None, how=None, **kws):
+    def GetUpdate(self, R=None, N=None, how=None):
         answer = {
             'параллельно': R.Value / N.Value,
             'последовательно': R.Value * N.Value,
@@ -243,7 +243,7 @@ class r_from_R_N(variant.VariantTask):
 @variant.arg(I=('\\eli = {} мА', [2, 3, 5]))
 @variant.arg(how=['параллельно', 'последовательно'])
 class U_from_R1_R2_I(variant.VariantTask):
-    def GetUpdate(self, R1=None, R2=None, I=None, how=None, **kws):
+    def GetUpdate(self, R1=None, R2=None, I=None, how=None):
         answer = {
             'параллельно': 1. * (R1.Value * R2.Value) / (R1.Value + R2.Value) * I.Value,
             'последовательно': 1. * (R1.Value + R2.Value) * I.Value,
@@ -266,7 +266,7 @@ class U_from_R1_R2_I(variant.VariantTask):
 @variant.arg(b=[2, 3, 4, 5, 6, 7, 8, 9, 10])
 @variant.arg(which=['медной', 'стальной', 'алюминиевой'])
 class I_ratio(variant.VariantTask):
-    def GetUpdate(self, a=None, b=None, **kws):
+    def GetUpdate(self, a=None, b=None):
         return dict(
             ratio=Fraction() / b / a,
         )
@@ -291,7 +291,7 @@ class I_ratio(variant.VariantTask):
 @variant.arg(b__times_b=n_times(2, 3, 4, 5, 6, 7, 8, 9, 10))
 @variant.arg(which=['медной', 'стальной', 'алюминиевой'])
 class P_ratio(variant.VariantTask):
-    def GetUpdate(self, a=None, times_a=None, b=None, times_b=None, **kws):
+    def GetUpdate(self, a=None, times_a=None, b=None, times_b=None, which=None):
         return dict(
             ratio_i=Fraction() / b / a,
             ratio_P=Fraction() / b / b / a,
@@ -309,7 +309,7 @@ class P_ratio(variant.VariantTask):
 @variant.arg(N=[10, 20, 40])
 @variant.arg(which=['наименьшее', 'наибольшее'])
 class R_best_from_R_N(variant.VariantTask):
-    def GetUpdate(self, R=None, N=None, which=None, **kws):
+    def GetUpdate(self, R=None, N=None, which=None):
         answer = {
             'наименьшее': R.Value * 1000 / N,
             'наибольшее': R.Value * 1000 * N,
@@ -331,7 +331,7 @@ class R_best_from_R_N(variant.VariantTask):
 @variant.arg(R=['%s = %d Ом' % (rLetter, rValue) for rLetter, rValue in itertools.product(['r', 'R'], [5, 12, 18, 30])])
 @variant.arg(U=['%s = %d В' % (uLetter, uValue) for uLetter, uValue in itertools.product(['U', 'V'], [120, 150, 180, 240])])
 class P_from_R_U(variant.VariantTask):
-    def GetUpdate(self, R=None, U=None, **kws):
+    def GetUpdate(self, R=None, U=None):
         return dict(
             I='\\eli = %.2f А' % (1. * U.Value / R.Value),
             P='P = %.2f Вт' % (1. * U.Value ** 2 / R.Value),
@@ -350,7 +350,7 @@ class P_from_R_U(variant.VariantTask):
 @variant.arg(R=['%s = %d Ом' % (rLetter, rValue) for rLetter, rValue in itertools.product(['r', 'R'], [5, 12, 18, 30])])
 @variant.arg(I=['\\eli = %.2f А' % iValue for iValue in [2, 3, 4, 5, 6, 8, 10, 15]])
 class P_from_R_I(variant.VariantTask):
-    def GetUpdate(self, R=None, I=None, U=None, **kws):
+    def GetUpdate(self, R=None, I=None, U=None):
         return dict(
             U='U = %d В' % (I.Value * R.Value),
             P='P = %d Вт' % (I.Value ** 2 * R.Value),
@@ -366,7 +366,7 @@ class P_from_R_I(variant.VariantTask):
 @variant.arg(how=['параллельно', 'последовательно'])
 @variant.answer('Подключены {how}, поэтому  ${equals1} \\implies \\frac{P_2}{P_1} = {equals2} = {ratio:LaTeX}$.')
 class Compare_power(variant.VariantTask):  # Вишнякова - 17
-    def GetUpdate(self, a=None, b=None, how=None, **kws):
+    def GetUpdate(self, a=None, b=None, how=None):
         if how == 'параллельно':
             equals1 = 'U_1 = U_2 = U'
             equals2 = '\\frac{\\frac{U_2^2}{R_2}}{\\frac{U_1^2}{R_1}} = \\frac{U^2R_1}{U^2R_2} = \\frac{R_1}{R_2}'
@@ -405,7 +405,7 @@ class Compare_power(variant.VariantTask):  # Вишнякова - 17
 @variant.arg(I=('\\eli = {} А', [2, 5, 10]))
 @variant.answer_short('R={R_ratio:LaTeX}\\units{Ом} \\approx {R:V} \\implies U = \\eli R \\approx {U:V}.')
 class Circuit_four(variant.VariantTask):
-    def GetUpdate(self, rotate=None, second_node=None, R1=None, R2=None, R3=None, R4=None, I=None, **kws):
+    def GetUpdate(self, rotate=None, second_node=None, R1=None, R2=None, R3=None, R4=None, I=None):
         if second_node == 0:
             appendix = '\\draw  (3, 1.5) -- ++(right:0.5); \\node [contact] (contact2) at (3.5, 1.5) {};'
             R_ratio = Fraction(numerator=(R2.Value + R3.Value) * R4.Value, denominator=R2.Value + R3.Value + R4.Value) + R1.Value
@@ -453,7 +453,7 @@ class Circuit_four(variant.VariantTask):
     'U_6 &= \\eli_3 R_6 = \\frac U{6R} * R = \\frac U6 = {U6:Value}.',
 ])
 class Circuit_six(variant.VariantTask):
-    def GetUpdate(self, R=None, U=None, index_a=None, index_r=None, **kws):
+    def GetUpdate(self, R=None, U=None, index_a=None, index_r=None):
         U1 = Fraction(numerator=2 * U.Value, denominator=3)
         U2 = Fraction(numerator=U.Value, denominator=6)
         U3 = Fraction(numerator=U.Value, denominator=6)

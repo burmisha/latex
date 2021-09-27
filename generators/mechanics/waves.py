@@ -42,7 +42,7 @@ class Waves00(variant.VariantTask):
 @variant.arg(nu=['\\nu = %s Гц' % nu for nu in ['2', '4', '5', '8']])
 @variant.arg(alpha=['4', '16', '25'])
 class Waves01(variant.VariantTask):
-    def GetUpdate(self, alpha=None, nu=None, **kws):
+    def GetUpdate(self, alpha=None, nu=None):
         return dict(
             T1='T\' = %.2f с' % (math.sqrt(int(alpha)) / int(nu.Value)),
         )
@@ -64,7 +64,7 @@ class Waves01(variant.VariantTask):
 @variant.arg(mValue=[100, 200, 250, 400])
 @variant.arg(v=['v = %d м / с' % v for v in [1, 2, 4, 5]])
 class Waves02(variant.VariantTask):
-    def GetUpdate(self, mLetter=None, mValue=None, v=None, **kws):
+    def GetUpdate(self, mLetter=None, mValue=None, v=None):
         return dict(
             m='%s = %d г' % (mLetter, mValue),
             E='E_1 = %.3f Дж' % (0.001 * mValue * (v.Value ** 2) / 2),
@@ -94,7 +94,7 @@ class Waves02(variant.VariantTask):
 ])
 @variant.arg(lmbd=['\\lambda = %d м' % lmbd for lmbd in [3, 4, 5, 6]])
 class Waves03(variant.VariantTask):
-    def GetUpdate(self, n1=None, n2=None, lmbd=None, **kws):
+    def GetUpdate(self, first=None, n1=None, second=None, n2=None, lmbd=None):
         return dict(
             l='l = %d м' % ((n2 - n1) * lmbd.Value),
             n=n2 - n1 - 1,
@@ -110,7 +110,7 @@ class Waves03(variant.VariantTask):
 @variant.arg(lmbd=['\\lambda = %.1f м' % lmbd for lmbd in [1.2, 1.5, 2.1, 2.4]])
 @variant.arg(T=['T = %d мc' % T for T in [2, 3, 4, 5, 6]])
 class Waves04(variant.VariantTask):
-    def GetUpdate(self, lmbd=None, T=None, **kws):
+    def GetUpdate(self, lmbd=None, T=None):
         return dict(
             v='v = %.1f м / c' % (1000. * lmbd.Value / T.Value),
         )
@@ -134,7 +134,7 @@ class Waves04(variant.VariantTask):
 @variant.arg(t=['t = %d c' % t for t in [5, 6, 8, 10]])
 @variant.arg(v=['v = %d м / с' % v for v in [1, 2, 3, 4, 5]])
 class Waves05(variant.VariantTask):
-    def GetUpdate(self, N=None, t=None, v=None, **kws):
+    def GetUpdate(self, N=None, t=None, v=None):
         return dict(
             lmbd='\\lambda = %.2f м' % (1. * v.Value * t.Value / (N.Value - 1)),
             T='T = %.2f с' % (1. * t.Value / (N.Value - 1)),
@@ -162,7 +162,7 @@ class Waves05(variant.VariantTask):
 @variant.arg(nu_1=['\\nu_1 = %s Гц' % nu_1 for nu_1 in [150, 200, 300, 500]])
 @variant.arg(nu_2=['\\nu_2 = %s МГц' % nu_2 for nu_2 in [200, 500, 800]])
 class Ch1238(variant.VariantTask):
-    def GetUpdate(self, nu_1=None, nu_2=None, **kws):
+    def GetUpdate(self, nu_1=None, nu_2=None):
         return dict(
             v='v = 320 м / с',
             c='c = 300 Мм / с',
@@ -190,7 +190,7 @@ class Ch1238(variant.VariantTask):
 ])
 @variant.arg(l=['l = %d см' % l for l in [20, 25, 40, 50, 75]])
 class Ch1240(variant.VariantTask):
-    def GetUpdate(self, l=None, frac=None, **kws):
+    def GetUpdate(self, delta=None, frac=None, l=None):
         return dict(
             lmbd='\\lambda = %.2f см' % (1. * l.Value / frac),
         )

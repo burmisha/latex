@@ -40,7 +40,7 @@ from generators.helpers import Consts, Fraction, UnitValue
 '''
 )
 class Sterzhen(variant.VariantTask):
-    def GetUpdate(self, which=None, m=None, M=None, a=None, b=None, **kws):
+    def GetUpdate(self, which=None, m=None, M=None, a=None, b=None):
         l_value = a.Value + b.Value
         return dict(
             l='l = %d м' % l_value,

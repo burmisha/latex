@@ -47,7 +47,7 @@ class Definitions02(variant.VariantTask):
 ''')
 @variant.arg(Q=['Q = %d МДж' % Q for Q in [2, 3, 4, 5, 6, 7, 8, 9]])
 class Ch_8_6(variant.VariantTask):
-    def GetUpdate(self, Q=None, **kws):
+    def GetUpdate(self, Q=None):
         lmbd = Consts.water.lmbd
         return dict(
             lmbd=lmbd,
@@ -72,7 +72,7 @@ class Ch_8_6(variant.VariantTask):
 ])
 @variant.arg(m=['m = %d кг' % m for m in [15, 20, 25, 30, 50, 75]])
 class Ch_8_7(variant.VariantTask):
-    def GetUpdate(self, m=None, metall=None, lmbd=None, **kws):
+    def GetUpdate(self, m=None, metall=None, lmbd=None):
         return dict(
             Q='Q = %.1f МДж' % (0.001 * m.Value * lmbd.Value),
         )
@@ -92,7 +92,7 @@ class Ch_8_7(variant.VariantTask):
 @variant.arg(m=['m = %d кг' % m for m in [2, 3, 4, 5, 15]])
 @variant.arg(t=[20, 30, 40, 50, 60, 70])
 class Ch_8_10(variant.VariantTask):
-    def GetUpdate(self, m=None, t=None, **kws):
+    def GetUpdate(self, m=None, t=None):
         c = Consts.water.c
         L = Consts.water.L
         return dict(
@@ -118,7 +118,7 @@ class Ch_8_10(variant.VariantTask):
 @variant.arg(Q=['Q = %d кДж' % Q for Q in [2000, 2500, 4000, 5000]])
 @variant.arg(t=[10, 30, 40, 50, 60, 70])
 class Ch_8_13(variant.VariantTask):
-    def GetUpdate(self, Q=None, t=None, **kws):
+    def GetUpdate(self, Q=None, t=None):
         c =  Consts.water.c
         L = Consts.water.L
         return dict(
@@ -153,7 +153,7 @@ class Ch_8_13(variant.VariantTask):
 @variant.arg(T=[70, 80, 90, 100])
 @variant.arg(t=[10, 20, 30])
 class Ch_8_35(variant.VariantTask):
-    def GetUpdate(self, metall=None, T=None, t=None, c=None, **kws):
+    def GetUpdate(self, metall=None, T=None, t=None, c=None):
         c_water = Consts.water.c
         return dict(
             c1=c_water,
@@ -176,7 +176,7 @@ class Ch_8_35(variant.VariantTask):
     '= \\frac 23 * \\frac{U:V:s}{V:V:s} \\approx {P:V}.'
 )
 class P_from_V_and_U(variant.VariantTask):
-    def GetUpdate(self, U=None, V=None, **kws):
+    def GetUpdate(self, U=None, V=None):
         return dict(
             P='%.2d кПа' % (2 / 3 * U.Value / V.Value),
         )
@@ -195,7 +195,7 @@ class P_from_V_and_U(variant.VariantTask):
     '= \\frac 23 * \\frac{U:V:s}{P:V:s} \\approx {V:V}.'
 )
 class V_from_P_and_U(variant.VariantTask):
-    def GetUpdate(self, U=None, P=None, **kws):
+    def GetUpdate(self, U=None, P=None):
         return dict(
             V='%.2f м^3' % (2 / 3 * U.Value * 1000 / P.Value / 100000),
         )
@@ -215,7 +215,7 @@ class V_from_P_and_U(variant.VariantTask):
     'A = P\\Delta V = P(V_2 - V_1) = {P:V} * \\cbr{{V2:V} - {V1:V}} = {A:V}.'
 )
 class A_on_P_const(variant.VariantTask):
-    def GetUpdate(self, P=None, V1=None, V2=None, **kws):
+    def GetUpdate(self, P=None, V1=None, V2=None):
         return dict(
             A='%.1f кДж' % (P.Value * 100000 * (V2.Value - V1.Value) / 1000 / 1000),
         )
@@ -239,7 +239,7 @@ class A_on_P_const(variant.VariantTask):
     '= \\frac{{P2:V} * {V2:V}}{{P1:V} * {V1:V}} \\approx {ratio}.',
 ])
 class DeltaU_on_P_const(variant.VariantTask):
-    def GetUpdate(self, P1=None, P2=None, V1=None, V2=None, **kws):
+    def GetUpdate(self, P1=None, P2=None, V1=None, V2=None):
         return dict(
             dU='%d Дж' % (1000 * 3 / 2 * (P2.Value * V2.Value - P1.Value * V1.Value)),
             ratio='%.2f' % (1. * P2.Value * V2.Value / (P1.Value * V1.Value)),
@@ -261,7 +261,7 @@ class DeltaU_on_P_const(variant.VariantTask):
         = {dU:V}. \\text{{ans}.}
 ''')
 class DeltaU_from_DeltaT(variant.VariantTask):
-    def GetUpdate(self, what=None, sign=None, nu=None, dT=None, **kws):
+    def GetUpdate(self, what=None, sign=None, nu=None, dT=None):
         return dict(
             sgn='-' if sign == -1 else '',
             dU='%d Дж' % (3 / 2 * nu.Value * Consts.R.Value * dT.Value * sign),
@@ -285,7 +285,7 @@ class DeltaU_from_DeltaT(variant.VariantTask):
     '= {A:V}, \\text{{ans}.}'
 ])
 class A_from_DeltaT(variant.VariantTask):
-    def GetUpdate(self, what=None, sign=None, nu=None, dT=None, **kws):
+    def GetUpdate(self, what=None, sign=None, nu=None, dT=None):
         return dict(
             sgn='' if sign == -1 else '-',
             A='%.1f кДж' % (- 3 / 2 * nu.Value * Consts.R.Value * dT.Value * sign / 1000),
@@ -312,7 +312,7 @@ class A_from_DeltaT(variant.VariantTask):
     = \\frac{dU:V:s}{{N} - 1} \\approx {A:V}.''',
 ])
 class Q_from_DeltaU(variant.VariantTask):
-    def GetUpdate(self, N=None, dU=None, **kws):
+    def GetUpdate(self, ratio=None, N=None, dU=None, what=None):
         return dict(
             Q='%d Дж' % (dU.Value * N / (N - 1)),
             A='%d Дж' % (dU.Value / (N - 1)),
@@ -336,7 +336,7 @@ class Q_from_DeltaU(variant.VariantTask):
     \\text{{ans}.}
 ''')
 class Q_from_DeltaU_and_A(variant.VariantTask):
-    def GetUpdate(self, A=None, dU=None, what=None, sign_what=None, who=None, sign_who=None, **kws):
+    def GetUpdate(self, who=None, sign_who=None, what=None, sign_what=None, dU=None, A=None):
         Q = dU.Value * sign_what + A.Value * sign_who
         return dict(
             Q='%d Дж' % Q,
@@ -396,7 +396,7 @@ class YesNo(variant.VariantTask):
     'Q &= A_\\text{газа} + \\Delta U = \\frac 32 (P_2 V_2 - P_1 V_1) + \\frac{P_2 + P_1} 2 * (V_2 - V_1) = {dU:V} + {A:V} = {Q:V}.'
 ])
 class DeltaQ_from_states(variant.VariantTask):
-    def GetUpdate(self, P1=None, P2=None, V1=None, V2=None, **kws):
+    def GetUpdate(self, P1=None, P2=None, V1=None, V2=None):
         A = (1000 * 1 / 2 * (P2.Value + P1.Value) * (V2.Value - V1.Value))
         dU = (1000 * 3 / 2 * (P2.Value * V2.Value - P1.Value * V1.Value))
         return dict(

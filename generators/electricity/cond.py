@@ -101,7 +101,7 @@ class Definitions04(variant.VariantTask):
 @variant.arg(U=['%s = %d кВ' % (Ul, Uv) for Ul in ['U', 'V'] for Uv in [2, 4, 20, 40, 50]])
 @variant.arg(Q=['%s = %d мКл' % (ql, qv) for ql in ['Q', 'q'] for qv in [4, 6, 15, 18, 24, 25]])
 class C_from_U_Q(variant.VariantTask):  # Rymkevich748
-    def GetUpdate(self, U=None, Q=None, **kws):
+    def GetUpdate(self, U=None, Q=None):
         C = 1000 * Q.Value / U.Value
         return dict(
             # C='C = %.2f пФ' % (1. * Q.Value / U.Value)
@@ -125,7 +125,7 @@ class C_from_U_Q(variant.VariantTask):  # Rymkevich748
 @variant.arg(Q=['%s = %d нКл' % (Ql, Qv) for Ql in ['Q', 'q'] for Qv in [30, 50, 60]])
 @variant.arg(C=['C = %d пФ' % Cv for Cv in [50, 80, 100, 120, 150]])
 class Q_is_possible(variant.VariantTask):  # Rymkevich750
-    def GetUpdate(self, U=None, Q=None, C=None, **kws):
+    def GetUpdate(self, U=None, Q=None, C=None):
         Q_max = C.Value * U.Value / 1000
         if Q_max >= Q.Value:
             sign = '\\ge'
@@ -157,7 +157,7 @@ class Q_is_possible(variant.VariantTask):  # Rymkevich750
 @variant.arg(U2=('U_2 = {} кВ', [10, 20, 30]))
 @variant.arg(C=('C = {} нФ', [20, 30, 40]))
 class Q_from_DeltaU_C(variant.VariantTask):  # Генденштейн-10-54-5
-    def GetUpdate(self, what=None, U1=None, U2=None, C=None, **kws):
+    def GetUpdate(self, what=None, U1=None, U2=None, C=None):
         if what == 'до':
             q = C.Value * (U1.Value - U2.Value)
         elif what == 'на':
@@ -188,7 +188,7 @@ class Q_from_DeltaU_C(variant.VariantTask):  # Генденштейн-10-54-5
 # @variant.arg(a__a_times=n_times(2, 3, 4, 5, 6, 7, 8))
 # @variant.arg(b__b_times=n_times(2, 3, 4, 5, 6, 7, 8))
 class C_ratio(variant.VariantTask):  # Rymkevich751
-    def GetUpdate(self, a=None, b=None, **kws):
+    def GetUpdate(self, a=None, b=None):
         value = Fraction() * b / a
         if value._fraction == 1:
             sign = '='
@@ -225,7 +225,7 @@ class C_ratio(variant.VariantTask):  # Rymkevich751
 @variant.arg(Q=['%s = %s нКл' % (Ql, Qv) for Ql in ['Q', 'q'] for Qv in [300, 500, 800, 900]])
 @variant.arg(C=['C = %s пФ' % Cv for Cv in [200, 400, 600, 750]])
 class W_from_Q_C(variant.VariantTask):  # Rymkevich762
-    def GetUpdate(self, C=None, Q=None, **kws):
+    def GetUpdate(self, C=None, Q=None):
         W = 1. * Q.Value ** 2 / 2 / C.Value
         return dict(
             W='W = %.2f мкДж' % W,
@@ -263,7 +263,7 @@ class W_from_Q_C(variant.VariantTask):  # Rymkevich762
 @variant.arg(C1__C2=[('C_1 = %s нФ' % C1, 'C_2 = %s нФ' % C2) for C1 in [20, 30, 40, 60] for C2 in [20, 30, 40, 60] if C1 != C2])
 @variant.arg(U=['%s = %s В' % (Ul, Uv) for  Ul in ['U', 'V'] for Uv in [150, 200, 300, 400, 450]])
 class CondPosl(variant.VariantTask):
-    def GetUpdate(self, C1=None, C2=None, U=None, **kws):
+    def GetUpdate(self, C1=None, C2=None, U=None):
         return dict(
             Q='Q = %.2f нКл' % (1. * C1.Value * C2.Value * U.Value / (C1.Value + C2.Value)),
         )
@@ -302,7 +302,7 @@ class CondPosl(variant.VariantTask):
 @variant.arg(U=['%s = %s В' % (Ul, Uv) for  Ul in ['U', 'V'] for Uv in [150, 200, 300, 400, 450]])
 @variant.arg(which=['первого', 'второго'])
 class Cond_posled(variant.VariantTask):
-    def GetUpdate(self, C1=None, C2=None, U=None, **kws):
+    def GetUpdate(self, C1=None, C2=None, U=None, which=None):
         return dict(
             Q='Q = %.2f мкКл' % (1. * C1.Value * C2.Value * U.Value / (C1.Value + C2.Value) / 1000),
         )

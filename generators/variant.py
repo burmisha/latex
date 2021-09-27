@@ -9,6 +9,7 @@ from generators.helpers.vars import Vars
 
 import library
 import problems
+from library.logging import cm, color
 
 import logging
 log = logging.getLogger(__name__)
@@ -217,11 +218,11 @@ class VariantTask:
         try:
             for k, v in res.items():
                 res[k] = check_unit_value(v)
-            res['Consts'] = Consts
             for k, v in self.GetUpdate(**res).items():
                 res[k] = check_unit_value(v)
         except:
-            log.error(f'Cannot enrich {type(self)}, args: {res}')
+            log.error(f'Cannot enrich {cm(type(self), color=color.Green)}, args: {res}')
+
             raise
 
         return res
