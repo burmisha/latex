@@ -60,6 +60,30 @@ class Definitions02(variant.VariantTask):
     pass
 
 
+@variant.solution_space(20)
+@variant.text('''
+    Установите каждой букве в соответствие ровно одну цифру и запишите в ответ только цифры (без других символов).
+
+    {lv.Questions}.
+
+    {lv.Options}.
+''')
+@variant.answer_test('{lv.Answer}')
+@variant.arg(lv=letter_variants(
+    {
+        '$\\ele$': '$-\\frac{\\Delta \\Phi}{\\Delta t}$',
+        '$\\Delta t$': '$t_2 - t_1$',
+        '$\\Delta \\Phi$': '$\\Phi_2 - \\Phi_1$',
+    },
+    ['$t_1 - t_2$', '$\\Phi_1 - \\Phi_2$'],
+    answers_count=3,
+    mocks_count=2,
+))
+@variant.answer_short('{lv.Answer}')
+class Definitions03(variant.VariantTask):
+    pass
+
+
 @variant.text('''
     Однородное магнитное поле пронизывает плоский контур площадью {S:V:e}.
     Индукция магнитного поля равна {B:V:e}.
