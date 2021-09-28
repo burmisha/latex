@@ -118,7 +118,7 @@ class Find_E_easy(variant.VariantTask):
 @variant.arg(I=('\\eli = {} А', [5, 6, 7]))
 @variant.arg(L=('L = {} мГн', [50, 60, 70, 80, 90]))
 @variant.arg(n=[20, 30, 40])
-@variant.answer_test('{E_answer}')
+@variant.answer_test('{Phi1_answer}')
 @variant.answer_short('''
     {Phi1:L}
     = \\frac{\\Phi}{N}
