@@ -594,5 +594,9 @@ def get_all_variants():
             task_id='2021-09-30 11БА - ЭМИ - 3',
             classes={'magnet.induction': ['W_from_L_or_Phi', 'L_W_ratio', 'L_from_BIRn', 'E_rotation', 'F_speed']},
         ),
+        Work(
+            task_id='2021-09-30 11Б - ЭМИ - 2',
+            classes={'magnet': ['emi.Definitions03', 'induction.Definitions01', 'induction.Definitions02', 'induction.Definitions03', 'induction.Find_E_easy', 'induction.Find_Phi_1', 'induction.W_from_L_or_Phi', 'induction.L_W_ratio']},
+        ),
     ]
     return works
