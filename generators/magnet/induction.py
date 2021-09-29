@@ -6,7 +6,7 @@ from generators.helpers import Consts, letter_variants, n_times, UnitValue, Frac
 import math
 
 
-@variant.solution_space(0)
+@variant.solution_space(10)
 @variant.text('''
     Установите каждой букве в соответствие ровно одну цифру и запишите ответ (только цифры, без других символов).
 
@@ -30,7 +30,7 @@ class Definitions01(variant.VariantTask):
     pass
 
 
-@variant.solution_space(0)
+@variant.solution_space(10)
 @variant.text('''
     Установите каждой букве в соответствие ровно одну цифру и запишите ответ (только цифры, без других символов).
 
@@ -47,7 +47,7 @@ class Definitions01(variant.VariantTask):
         'электрический ток': '$\\eli$',
         'электрический заряд': '$q$',
     },
-    ['$R$', '$g$', '$\\phi$'],
+    ['$R$', '$g$', '$\\varphi$', '$\\ele$'],
     answers_count=3,
     mocks_count=2,
 ))
@@ -56,7 +56,7 @@ class Definitions02(variant.VariantTask):
     pass
 
 
-@variant.solution_space(0)
+@variant.solution_space(10)
 @variant.text('''
     Установите каждой букве в соответствие ровно одну цифру и запишите ответ (только цифры, без других символов).
 
@@ -70,10 +70,11 @@ class Definitions02(variant.VariantTask):
         'индукция магнитного поля': 'Тл',
         'поток магнитной индукции': 'Вб',
         'индуктивность': 'Гн',
+        'длина проводника': 'м',
         'время': 'с',
     },
-    ['м', 'Кл', 'А'],
-    answers_count=3,
+    ['м / с', 'Кл', 'А', 'Вт'],
+    answers_count=2,
     mocks_count=2,
 ))
 @variant.answer_short('{lv.Answer}')
