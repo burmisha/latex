@@ -221,7 +221,9 @@ class VariantTask:
             for k, v in self.GetUpdate(**res).items():
                 res[k] = check_unit_value(v)
         except:
-            log.error(f'Cannot enrich {cm(type(self), color=color.Green)}, args: {res}')
+            log.error(f'Cannot enrich {cm(type(self), color=color.Green)} with args')
+            for k, v in res.items():
+                log.error(f'  {cm(k, color=color.Cyan)} of type {cm(type(v), color=color.Cyan)}: {v!r}')
 
             raise
 
