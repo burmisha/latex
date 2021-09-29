@@ -1,7 +1,7 @@
 import itertools
 
 import generators.variant as variant
-from generators.helpers import Consts, letter_variants
+from generators.helpers import Consts, letter_variants, n_times, UnitValue, Fraction
 
 import math
 
@@ -122,9 +122,9 @@ class Find_E_easy(variant.VariantTask):
 @variant.answer_short('''
     {Phi1:L}
     = \\frac{\\Phi}{N}
-    = \\frac{{L:L}{I:L}}{N} 
+    = \\frac{{L:L}{I:L}}{N}
     = \\frac{{L:V} * {I:V}}{{n}}
-    \\approx {Phi1:V} 
+    \\approx {Phi1:V}
     \\to {Phi1_answer}
 ''')
 @variant.solution_space(60)
@@ -137,4 +137,149 @@ class Find_Phi_1(variant.VariantTask):
         return dict(
             Phi1=f'\\Phi_\\text{{1 виток}} = {Phi1:.3f} мВб',
             Phi1_answer=Phi1_answer,
+        )
+
+
+@variant.text('Определите энергию магнитного поля в катушке индуктивностью {L:V:e}, если {what} равен {value:V:e}.')
+@variant.solution_space(60)
+@variant.arg(L=('L = {} мГн', [200, 300, 400, 600]))
+@variant.arg(what__value=[
+        ('её собственный магнитный поток', v) for v in ['3 Вб', '4 Вб', '5 Вб', '6 Вб', '7 Вб', '8 Вб']
+    ]+ [
+        ('протекающий через неё ток', v) for v in ['3 А', '4 А', '5 А', '6 А', '7 А', '8 А']
+    ]
+)
+@variant.answer_short('{answer_short}')
+class W_from_L_or_Phi(variant.VariantTask):
+    def GetUpdate(self, what=None, value=None, L=None):
+        if 'поток' in what:
+            W_value = value.Value ** 2 / 2 / L.Value * 10 ** (0 - L.Power)
+            W = UnitValue(f'W = {W_value:.2f} Дж')
+            answer_short = f'W = \\frac{{\\Phi^2}}{{2L}} = \\frac{{\\sqr{{{value:V}}}}}{{2 \\cdot {L:V}}} \\approx {W:V}'
+        else:
+            W_value = value.Value ** 2 * L.Value / 2 * 10 ** L.Power
+            W = UnitValue(f'W = {W_value:.2f} Дж')
+            answer_short = f'W = \\frac{{L\\eli^2}}2 = \\frac{{{L:V} \\cdot \\sqr{{{value:V}}}}}2 \\approx {W:V}'
+
+        return dict(answer_short=answer_short)
+
+
+@variant.text('''
+    В одной катушке индуктивностью {L:V:e} протекает электрический ток силой {I:V:e}.
+    А в другой — с индуктивностью в {n_text} {what} — ток в {m_text} сильнее.
+    Определите энергию магнитного поля первой катушки, индуктивность второй катушки
+    и отношение энергий магнитного поля в этих двух катушках.
+''')
+@variant.arg(L=('L_1 = {} мГн', list(range(123, 800, 11))))
+@variant.arg(I=('\\eli_1 = {} мА', list(range(450, 900, 23))))
+@variant.arg(n__n_text=n_times(2, 3, 4, 5, 6, 7, 8))
+@variant.arg(m__m_text=n_times(3, 4, 5, 6))
+@variant.arg(what=['больше', 'меньше'])
+@variant.answer_short('''
+    L_2 = {l:LaTeX}L_1 = {L2:V}, \\quad
+    {W1:L} = \\frac{{L:L}{I:L}^2}2 = \\frac{{L:V} * {I:V|sqr}}2 \\approx {W1:V}, \\quad
+    \\frac{W_2}{W_1} = \\frac{\\frac{L_2\\eli_2^2}2}{\\frac{L_1\\eli_1^2}2} = {W2_W1:LaTeX}
+''')
+@variant.solution_space(90)
+class L_W_ratio(variant.VariantTask):
+    def GetUpdate(self, L=None, I=None, n=None, n_text=None, m=None, m_text=None, what=None):
+        if what == 'больше':
+            l = Fraction() * n
+            L2 = L.Value * n
+        else:
+            l = Fraction() / n
+            L2 = L.Value / n
+        W1 = L.Value * I.Value ** 2 / 2 * 10 ** (L.Power + 2 * I.Power)
+        W2_W1 = l * m ** 2
+        return dict(
+            l=l,
+            L2=f'L_2 = {L2:.2f} мГн',
+            W1=f'W_1 = {W1:.3f} Дж',
+            W2_W1=W2_W1,
+        )
+
+
+@variant.text('''
+    Определите индуктивность катушки, если при пропускании тока силой {I:V:e}
+    в ней возникает магнитное поле индукцией {B:V:e}.
+    Катушка представляет собой цилиндр радиусом {R:V:e} и высотой {h:V:e}.
+    Число витков в катушке {n}.
+''')
+@variant.solution_space(90)
+@variant.arg(B=('B = {} Тл', [2, 5, 8]))
+@variant.arg(I=('\\eli = {} А', [1.5, 2.5, 3]))
+@variant.arg(R=('R = {} см', [3, 4, 5]))
+@variant.arg(h=('h = {} мм', [6, 7, 8]))
+@variant.arg(n=[200, 400, 500])
+@variant.answer_short('''
+    \\Phi = L\\eli,
+    \\Phi = BSN,
+    S=\\pi R^2
+    \\implies L = \\frac{\\pi B R^2 N}{\\eli} = \\frac{\\pi * {B:V} * {R:V|sqr} * {n}}{I:V:s}
+    \\approx {L:V}.
+''')
+class L_from_BIRn(variant.VariantTask):
+    def GetUpdate(self, B=None, I=None, R=None, h=None, n=None):
+        L = math.pi * B.Value * R.Value ** 2 * n / I.Value * 10 ** (B.Power + 2 * R.Power - I.Power)
+        return dict(
+            L=f'L = {L:.2f} Гн'
+        )
+
+
+@variant.text('''
+    Тонкий прямой тержень длиной {l:V:e} вращается в горизонтальной плоскости
+    вокруг одного из своих концов.
+    Однородное магнитное поле индукцией {B:V:e} направлено вертикально.
+    Чему равна разность потенциалов на концах стержня?
+''')
+@variant.solution_space(120)
+@variant.arg(l=('l = {} см', [20, 25, 30, 40, 50]))
+@variant.arg(B=('B = {} мТл', [150, 200, 300, 400]))
+@variant.arg(T=('T = {} c', [2, 3, 4, 5]))
+@variant.answer_short('''
+    {E:L}
+        = \\frac{\\Delta \\Phi}{\\Delta t}
+        = \\frac{B\\Delta S}{\\Delta t}
+        = \\frac{B \\frac 12 l^2 \\Delta \\alpha}{\\Delta t}
+        = \\frac{B l^2 \\omega}2, \\quad
+    \\omega = \\frac{2 \\pi}T \\implies
+    \\ele_i = \\frac{\\pi B l^2}T \\approx {E:V}.
+''')
+class E_rotation(variant.VariantTask):
+    def GetUpdate(self, l=None, B=None, T=None):
+        E = math.pi * B.Value * l.Value ** 2 / T.Value * 10 ** (B.Power + 2 * l.Power - T.Power)
+        return dict(
+            E=f'\\ele_i = {E:.3f} В'
+        )
+
+
+@variant.text('''
+    Стержень лежит на горизонтальных рельсах,
+    замкнутых резистором сопротивлением {R:V:e} (см. рис. на доске). Расстояние между рельсами {l:V:e}.
+    Конструкция помещена в вертикальное однородное магнитное поле индукцией {B:V:e}.
+    Какую силу необходимо прикладывать к стержню, чтобы двигать его вдоль рельс с постоянной скоростью {v:V:e}?
+    Трением пренебречь, сопротивления рельс и стержня малы по сравнению с сопротивлением резистора.
+    Ответ выразите в миллиньютонах.
+''')
+@variant.solution_space(120)
+@variant.arg(l=('l = {} см', [50, 60, 70, 80]))
+@variant.arg(R=('R = {} Ом', [2, 3, 4]))
+@variant.arg(B=('B = {} мТл', [150, 200, 300, 400]))
+@variant.arg(v=('v = {} м / c', [2, 3, 4, 5]))
+@variant.answer_short('''
+    {F:L}
+        = F_A
+        = \\eli B l
+        = \\frac{\\ele}R * B l
+        = \\frac{B v l}R * B l
+        = \\frac{B^2 v l^2}R
+        = \\frac{{B:V|sqr} * {v:V} * {l:V|sqr}}{R:V:s}
+        \\approx {F:V}.
+''')
+
+class F_speed(variant.VariantTask):
+    def GetUpdate(self, l=None, R=None, B=None, v=None):
+        F = B.Value ** 2 * l.Value ** 2 * v.Value / R.Value * 10 ** (2 * B.Power + 2 * l.Power + v.Power - R.Power) * 1000
+        return dict(
+            F=f'F = {F:.2f} мН'
         )

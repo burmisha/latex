@@ -590,5 +590,9 @@ def get_all_variants():
             image='zootopia',
             questions=text_task * 6,
         ),
+        Work(
+            task_id='2021-09-30 11БА - ЭМИ - 3',
+            classes={'magnet.induction': ['W_from_L_or_Phi', 'L_W_ratio', 'L_from_BIRn', 'E_rotation', 'F_speed']},
+        ),
     ]
     return works
