@@ -284,3 +284,183 @@ class F_speed(variant.VariantTask):
         return dict(
             F=f'F = {F:.2f} мН'
         )
+
+
+@variant.text('''
+    Плоская прямоугольная рамка со сторонами {a:V:e} и {b:V:e} находится в однородном вертикальном магнитном поле
+    с индукцией {B:V:e}. Сопротивление рамки {R:V:e}. Вектор магнитной индукции {how} плоскости рамки.
+    Рамку повернули на ${angle}\\degrees$ вокруг одной из её горизонтальных сторон. Какой заряд протёк по рамке?
+    Ответ выразите в микрокулонах и округлите до целого.
+''')
+@variant.solution_space(120)
+@variant.arg(how=['параллелен', 'перпендикулярен'])
+@variant.arg(angle=[30, 60])
+@variant.arg(a=('a = {} см', [20, 30, 40]))
+@variant.arg(b=('b = {} см', [25, 50, 60]))
+@variant.arg(R=('R = {} Ом', [8, 12, 15]))
+@variant.arg(B=('B = {} мТл', [120, 150, 200, 300]))
+@variant.answer_align([
+    '\\ele_i &= - \\frac{\\Delta \\Phi_i}{\\Delta t}, \\eli_i = \\frac{\\ele_i}{R:L:s}, \\Delta q_i = \\eli_i\\Delta t'
+        '\\implies \\Delta q_i = \\frac{\\ele_i}{R:L:s} * \\Delta t '
+        '= - \\frac 1{R:L:s} \\frac{\\Delta \\Phi_i}{\\Delta t} * \\Delta t'
+        '= - \\frac{\\Delta \\Phi_i}{R:L:s} \\implies',
+
+    '\\implies \\Delta q &= q_2 - q_1 = \\sum_i \\Delta q_i '
+        '= \\sum_i \\cbr{ - \\frac{\\Delta \\Phi_i}{R:L:s}} '
+        '= -\\frac 1{R:L:s} \\sum_i \\Delta \\Phi_i = -\\frac{\\Phi_2 - \\Phi_1}{R:L:s}.',
+
+    'q &= \\abs{\\Delta q} = \\frac {\\abs{\\Phi_2 - \\Phi_1}}{R:L:s}'
+        '= \\frac {\\abs{BS \\cos \\varphi_2 - BS \\cos \\varphi_1}}{R:L:s}'
+        '= \\frac {B S}{R:L:s}\\abs{\\cos \\varphi_2 - \\cos \\varphi_1}'
+        '= \\frac {B a b}{R:L:s}\\abs{\\cos \\varphi_2 - \\cos \\varphi_1},',
+
+    '\\varphi_1 &= {phi1}\\degrees, \\varphi_2 = {phi2}\\degrees,',
+
+    'q&= \\frac {{B:V} * {a:V} * {b:V}}{R:V:s}\\abs{\\cos {phi2}\\degrees - \\cos {phi1}\\degrees} \\approx {q:V} \\to {q_answer}.',
+])
+class q_from_B_a_b_r(variant.VariantTask):  # Вишнякова 3.4.7
+    def GetUpdate(self, B=None, how=None, angle=None, a=None, b=None, R=None):
+        if 'перп' in how:
+            phi1 = 0
+            phi2 = angle
+        else:
+            phi1 = 90
+            phi2 = 90 - angle
+
+        q_value = (
+            B.Value * a.Value * b.Value * abs(math.cos(phi2 * math.pi / 180) - math.cos(phi1 * math.pi / 180)) / R.Value
+            * 10 ** (B.Power + a.Power + b.Power - R.Power)
+        ) * 10 ** 6
+        q_answer = int(q_value + 0.5)
+        assert q_answer >= 10
+        return dict(
+            phi1=phi1,
+            phi2=phi2,
+            q='q = %.2f мкКл' % q_value,
+            q_answer=q_answer,
+        )
+
+
+@variant.text('''
+    Прямолинейный проводник длиной $\\ell$ перемещают в однородном магнитном поле с индукцией $B$.
+    Проводник, вектор его скорости и вектор индукции поля взаимно перпендикулярны.
+    Определите зависимость ускорения от времени, если разность потенциалов на концах проводника
+    изменяется по закону $\\Delta \\varphi = kt^{n}$.
+''')
+@variant.solution_space(80)
+@variant.arg(n=[2, 3, 4])
+@variant.answer_short('''
+    \\Delta \\varphi = Bv\\ell = kt^{n} \\implies v = \\frac{kt^{n}}{B\\ell} \\implies a(t) = \\frac{v(t)}{t} = \\frac{kt^{n_1}}{B\\ell}
+''')
+class a_from_n(variant.VariantTask):  # Вишнякова 3.4.11
+    def GetUpdate(self, n=None):
+        if n == 2:
+            n_1 = '{}'
+        else:
+            n_1 = n - 1
+        return dict(
+            n_1=n_1,
+        )
+
+
+@variant.text('''
+    При изменении силы тока в проводнике по закону $\\eli = {a} {sign} {b}t$ (в системе СИ),
+    в нём возникает ЭДС самоиндукции {E:V:e}. Чему равна индуктивность проводника?
+    Ответ выразите в миллигенри и округлите до целого.
+''')
+@variant.solution_space(80)
+@variant.arg(a=[2, 3, 4, 5, 6, 7])
+@variant.arg(b=[0.4, 0.5, 0.8, 1.5])
+@variant.arg(sign=['-', '+'])
+@variant.arg(E=('\\ele = {} мВ', [150, 200, 300, 400]))
+@variant.answer_short('''
+    {E:L} = L\\frac{\\abs{\\Delta \\eli}}{\\Delta t} = L * \\abs{ {sign} {b} } \\text{(в СИ)}
+    \\implies L = \\frac{E:L:s}{ {b} } = \\frac{E:V:s}{ {b} } \\approx {L:V:s}
+''')
+class L_from_b(variant.VariantTask):  # Вишнякова 3.4.14
+    def GetUpdate(self, a=None, b=None, sign=None, E=None):
+        L = E.Value / b
+        L_answer = int(L + 0.5)
+        return dict(
+            L=f'L = {L:.1f} мГн',
+            L_answer=L_answer,
+        )
+
+
+@variant.text('''
+    Резистор сопротивлением {R:Task:e} и катушка индуктивностью {L:Task:e} (и пренебрежимо малым сопротивлением)
+    подключены параллельно к источнику тока с ЭДС {E:Task:e} и внутренним сопротивлением {r:Task:e} (см. рис. на доске).
+    Какое количество теплоты выделится в цепи после размыкания ключа $K$?
+''')
+@variant.solution_space(150)
+@variant.arg(E=('\\ele = {} В', [5, 6, 8, 12]))
+@variant.arg(R=('R = {} Ом', [3, 4, 5]))
+@variant.arg(r=('r = {} Ом', [1, 2]))
+@variant.arg(L=('L = {} Гн', [0.2, 0.4, 0.5]))
+@variant.answer_align([
+    '&\\text{закон Ома для полной цепи}: \\eli = \\frac{E:L:s}{r + R_\\text{внешнее}} = \\frac{E:L:s}{r + \\frac{R * 0}{R + 0}} = \\frac{E:L:s}{r:L:s},',
+    'Q &= W_m = \\frac{L\\eli^2}2 = \\frac{L\\sqr{\\frac{E:L:s}{r:L:s}}}2 = '
+    '\\frac L2\\frac{{E:L}^2}{{r:L}^2} = '
+    '\\frac{L:V:s}2 * \\sqr{\\frac{E:V:s}{r:V:s}} \\approx {Q:V}.'
+])
+class W_kirchgof(variant.VariantTask):  # Вишнякова 3.4 УК
+    def GetUpdate(self, E=None, R=None, r=None, L=None):
+        Q = L.Value / 2 * (E.Value / r.Value) ** 2
+        return dict(
+            Q=f'Q = {Q:.2f} Дж',
+        )
+
+
+@variant.text('''
+    По параллельным рельсам, расположенным под углом ${angle}\\degrees$ к горизонтали,
+    соскальзывает проводник массой {m:V:e}: без трения и с постоянной скоростью {v:V:e} .
+    Рельсы замнуты резистором сопротивлением {R:V:e}.
+    Вся система находитится в однородном вертикальном магнитном поле (см. рис. на доске).
+    Определите индукцию магнитного поля и ток, протекающий в проводнике.
+    Сопротивлением проводника, рельс и соединительных проводов пренебречь, ускорение свободного падения принять равным {g:Task:e}.
+''')
+@variant.solution_space(150)
+@variant.arg(m=('m = {} г', [50, 100, 150, 200]))
+@variant.arg(R=('R = {} Ом', [5, 8, 12]))
+@variant.arg(v=('v = {} м/с', [12, 15]))
+@variant.arg(l=('\\ell = {} см', [20, 40, 60]))
+@variant.arg(angle=[10, 15, 20, 25])
+@variant.answer_align([
+    '\\ele &= {B:L}_\\bot v {l:L}, {B:L}_\\bot = {B:L}\\cos \\alpha, {I:L} = \\frac{\\ele}R,',
+    'F_A &= {I:L} {B:L} {l:L} = \\frac{\\ele}R {B:L} {l:L},',
+
+    'F_A \\cos \\alpha &= mg \\sin \\alpha '
+        '\\implies \\frac{\\ele}R {B:L} \\ell \\cos \\alpha = mg \\sin \\alpha',
+
+        '&\\frac{{B:L} \\cos \\alpha * v {l:L}}R {B:L} {l:L} \\cos \\alpha = mg \\sin \\alpha' 
+        '\\implies \\frac{{B:L}^2 \\cos^2 \\alpha  * v {l:L}^2}R = mg \\sin \\alpha,',
+
+    '{B:L} &= '
+        '\\sqrt{\\frac{mg R \\sin \\alpha}{v {l:L}^2 \\cos^2 \\alpha}} '
+        '= \\sqrt{\\frac{{m:V} * {g:V} * {R:V} * \\sin {angle}\\degrees}{{v:V} * {l:V|sqr} * \\cos^2 {angle}\\degrees}}'
+        '\\approx {B:V},',
+
+    '{I:L} &= \\frac{\\ele}R'
+        '= \\frac{B_\\bot v {l:L}}R '
+        '= \\frac {v {l:L} \\cos \\alpha}R \\sqrt{\\frac{mg R \\sin \\alpha}{v {l:L}^2 \\cos \\alpha}}'
+        '=\\sqrt{\\frac{mg v \\sin \\alpha}{R:L:s}}'
+        '=\\sqrt{\\frac{{m:V} * {g:V} * {v:V} * \\sin {angle}\\degrees}{R:V:s}} '
+        '\\approx {I:V}.',
+])
+class B_angle_hard(variant.VariantTask):  # Вишнякова 3.4 УК
+    def GetUpdate(self, m=None, R=None, v=None, l=None, angle=None):
+        a_radian = angle * math.pi / 180
+        g = Consts.g_ten
+        BB = 1. * m.Value * g.Value * R.Value * math.sin(a_radian) / math.cos(a_radian) ** 2 / v.Value / l.Value ** 2 * 10 ** (
+            m.Power + g.Power + R.Power - v.Power - 2 * l.Power
+        )
+        B = BB ** 0.5
+        II = 1. * m.Value * g.Value * v.Value * math.sin(a_radian) / R.Value * 10 ** (
+            m.Power + g.Power + v.Power - R.Power
+        )
+        I = II ** 0.5
+        return dict(
+            g=g,
+            B=f'B = {B:.2f} Тл',
+            I=f'\\eli = {I:.2f} А',
+        )
