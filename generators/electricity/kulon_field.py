@@ -18,21 +18,17 @@ def sign_to_mult(line):
 @variant.answer_short('''
     F
         = k\\frac{{first:L}{second:L}}{{distance:L}^2}
-        = {Consts.k:Value} * \\frac{{first:Value} * {second:Value}}{{distance:Value|sqr}}
-        = {value:LaTeX} * 10^{{power}}\\units{Н}
-          \\approx {{approx:.2f}} * 10^{{power}}\\units{Н}
+        = {Consts.k:V} * \\frac{{first:V} * {second:V}}{{distance:V|sqr}}
+        \\approx {F:V}
 ''')
 @variant.arg(first__second=[('q_1 = %d нКл' % f, 'q_2 = %d нКл' % s) for f in range(2, 5) for s in range(2, 5) if f != s])
 @variant.arg(distance=['%s = %d см' % (l, d) for d in [2, 3, 5, 6] for l in ['r', 'l', 'd'] ])
 class ForceTask(variant.VariantTask):
     def GetUpdate(self, first=None, second=None, distance=None):
-        # answer = kqq/r**2
-        value = Fraction() * first.Value * second.Value * Consts.k.Value / (distance.Value ** 2)
+        F = Consts.k * first * second / distance / distance  # kqq/r**2
+        mul = 10 ** 6
         return dict(
-            value=value,
-            power=Consts.k.Power - first.Power - second.Power - 2 * distance.Power,
-            approx=float(value._fraction),
-            distance=distance,
+            F=f'F = {F.SI_Value * mul:.3f} мкН',
         )
 
 
@@ -200,8 +196,8 @@ class F_from_many_q(variant.VariantTask):  # Вишнякова 3.1.3
 
 @variant.solution_space(80)
 @variant.text('''
-    Маленький шарик массой {m:Value} подвешен на длинной непроводящей нити
-    и помещён в горизонтальное однородное электрическое поле с напряжённостью {E:Value:e}.
+    Маленький шарик массой {m:V} подвешен на длинной непроводящей нити
+    и помещён в горизонтальное однородное электрическое поле с напряжённостью {E:V:e}.
     При этом шарик отклонился на угол ${alpha}\\degrees$.
     Определите, каким зарядом обладает шарик. {Consts.g_ten:Task:e}.
 ''')
@@ -217,7 +213,7 @@ class Q_from_alpha(variant.VariantTask):  # Вишнякова 3.1.4
     Электрическое поле создаётся двумя положительными точечными зарядами
     {q1:Task:e} и {q2:Task:e}. Чему равно расстояние между этими зарядами,
     если известно, что точка, где напряжённость электрического поля равна нулю,
-    находится на расстоянии {d:Value} от первого заряда?
+    находится на расстоянии {d:V} от первого заряда?
 ''')
 @variant.arg(q1=('q_1 = {} нКл', [2, 10, 16, 24]))
 @variant.arg(q2=('q_2 = {} нКл', [1, 4, 12, 20, 30]))

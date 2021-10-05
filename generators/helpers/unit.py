@@ -70,6 +70,7 @@ class OneUnit:
                 'K',   # kelvin
                 'моль',
                 'Гн',
+                'Гц',
             ]:
                 if line.endswith(suffix):
                     main = suffix

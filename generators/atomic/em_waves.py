@@ -122,15 +122,12 @@ class Prefix(variant.VariantTask):
         = \\frac{{Consts.h:Value} * {Consts.c:Value|s}}{E:Value|s}
         = {lmbd:Value}.
 ''')
-@variant.arg(E=['E = %s 10^{-19} Дж' % E for E in ['4.04', '5.05', '2.02', '7.07', '1.01', '0.55']])
+@variant.arg(E=('E = {} 10^{{-19}} Дж', ['4.04', '5.05', '2.02', '7.07', '1.01', '0.55']))
 class Lambda_from_E(variant.VariantTask):  # Вишнякова - Базовый курс 5.2 - задача 01
     def GetUpdate(self, E=None):
-        return dict(
-            lmbd='{value:.2f} 10^{power} м'.format(
-                value=Consts.h.Value * Consts.c.Value / E.Value,
-                power=Consts.h.Power + Consts.c.Power - E.Power,
-            ),
-        )
+        lmbd = Consts.c * Consts.h / E
+        mul = 10 ** 9
+        return dict(lmbd=f'\\lambda = {lmbd.SI_Value * mul:.2f} нм')
 
 
 @variant.solution_space(150)
@@ -147,12 +144,9 @@ class Lambda_from_E(variant.VariantTask):  # Вишнякова - Базовый
 @variant.arg(E=['E = %d 10^{-19} Дж' % E for E in [2, 3, 4, 6]])
 class Lambda_from_E_2(variant.VariantTask):  # Вишнякова - Базовый курс 5.2 - задача 02
     def GetUpdate(self, E=None):
-        return dict(
-            lmbd='{value:.2f} 10^{power} м'.format(
-                value=Consts.h.Value * Consts.c.Value / E.Value,
-                power=Consts.h.Power + Consts.c.Power - E.Power,
-            ),
-        )
+        lmbd = Consts.h * Consts.c / E
+        mul = 10 ** 9
+        return dict(lmbd=f'\\lambda = {lmbd.SI_Value * mul:.2f} нм')
 
 
 @variant.solution_space(150)

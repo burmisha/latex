@@ -42,11 +42,11 @@ class Nu02(variant.VariantTask):
 @variant.arg(t=('t = {} мин', [1, 2, 3, 5, 10]))
 class Nu03(variant.VariantTask):
     def GetUpdate(self, nu=None, t=None):
-        T = 1. / nu.Value
-        N = nu.Value * 1000 * t.Value * 60
+        T = nu / nu / nu  # TODO: 1 / nu
+        N = nu * t * 60
         return dict(
-            T=f'T = {T:.3f} мc',
-            N=f'N = {N} колебаний',
+            T=f'T = {T.SI_Value * 1000:.3f} мc',
+            N=f'N = {N.SI_Value:.0f} колебаний',
         )
 
 
@@ -60,10 +60,8 @@ class Nu03(variant.VariantTask):
 @variant.arg(t=('t = {} с', [10, 40, 80]))
 class Nu04(variant.VariantTask):
     def GetUpdate(self, A=None, nu=None, t=None):
-        s = 4 * A.Value * t.Value * nu.Value * 10 ** (A.Power + t.Power + nu.Power)
-        return dict(
-            s=f's = {s:.1f} м',
-        )
+        s = 4 * A * t * nu
+        return dict(s=f's = {s.SI_Value:.1f} м')
 
 
 @variant.text('''

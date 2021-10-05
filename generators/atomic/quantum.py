@@ -7,8 +7,8 @@ from generators.helpers import UnitValue, Consts
 
 @variant.text('''
     Сколько фотонов испускает за {minutes} минут лазер,
-    если мощность его излучения {power:Value:e}?
-    Длина волны излучения {length:Value:e}. {h:Task:e}.
+    если мощность его излучения {power:V:e}?
+    Длина волны излучения {length:V:e}. {h:Task:e}.
 ''')
 @variant.answer_short('''
     N
@@ -16,7 +16,7 @@ from generators.helpers import UnitValue, Consts
         = \\frac{Pt}{h\\nu} = \\frac{Pt}{h \\frac c\\lambda}
         = \\frac{Pt\\lambda}{hc}
         = \\frac{
-            {power:Value} * {minutes} * 60 \\units{с} * {length:Value}
+            {power:V} * {minutes} * 60 \\units{с} * {length:V}
         }{
             {h:V} * {c:V}
         }
@@ -27,13 +27,16 @@ from generators.helpers import UnitValue, Consts
 @variant.arg(length=('\\lambda = {} нм', [500, 600, 750]))
 class Fotons(variant.VariantTask):
     def GetUpdate(self, power=None, minutes=None, length=None):
-        answer = 1. * power.Value * minutes * length.Value / 6.626 * 2 / (10 ** 5)
+        h = Consts.h
+        c = Consts.c
+        mul = 10 ** 20
+        answer = power * 60 * minutes * length / h / c / mul
         return dict(
             answerValue=answer,
-            answerPower=15 + 5,
-            approx='%.2f' % float(answer),
-            h=Consts.h,
-            c=Consts.c,
+            answerPower=20,
+            approx=f'{answer.SI_Value:.2f}',
+            h=h,
+            c=c,
         )
 
 
@@ -70,7 +73,7 @@ class Fotons(variant.VariantTask):
         \\item ${q4:V} \\to$ {a4}, $\\nu_4 = \\frac c{\\lambda_4} \\approx {nu4:V}$.
     \\end{enumerate}
 
-    $\\nu = \\frac 1 T = \\frac c{\\lambda} = \\frac {Consts.c_4:Value:s}{l * {mkm:V}} \\approx \\frac{nu_0:V:s}l$,
+    $\\nu = \\frac 1 T = \\frac c{\\lambda} = \\frac {Consts.c_4:V:s}{l * {mkm:V}} \\approx \\frac{nu_0:V:s}l$,
     где $l$~--- численное значение длины волны в мкм.
 ''')
 @variant.arg(q1__a1=[('450 нм', 'синий'), ('580 нм', 'жёлтый '), ('660 нм', 'красный')])
@@ -177,7 +180,7 @@ class Deduce01(variant.VariantTask):
     {
         \\log_2\\frac{{total}}{{total} - {delta}}
     }
-    \\approx {T:Value}.
+    \\approx {T:V}.
 ''')
 @variant.arg(time__delta__total=[
     (12, 7500, 8000),
@@ -195,7 +198,7 @@ class RadioFall2(variant.VariantTask):
 
 @variant.text('''
     Определите длину волны лучей, фотоны которых имеют энергию
-    равную кинетической энергии электрона, ускоренного напряжением {V:Value|e}.
+    равную кинетической энергии электрона, ускоренного напряжением {V:V|e}.
 ''')
 @variant.arg(V=['%d В' % v for v in [1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610]])
 class Quantum1119(variant.VariantTask):  # 1119 Рымкевич
@@ -204,7 +207,7 @@ class Quantum1119(variant.VariantTask):  # 1119 Рымкевич
 
 @variant.text('''
     Лучше всего нейтронное излучение ослабляет вода: в 4 раза лучше бетона и в 3 раза лучше свинца.
-    Толщина слоя половинного ослабления $\\gamma$-излучения для воды равна {d1:Value|e}.
+    Толщина слоя половинного ослабления $\\gamma$-излучения для воды равна {d1:V|e}.
     Во сколько раз ослабит нейтронное излучение слой воды толщиной {d:Task|e}?
 ''')
 @variant.arg(d1=['3 см'])

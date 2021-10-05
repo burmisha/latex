@@ -86,19 +86,23 @@ class E_P_from_v_ratio(variant.VariantTask):  # Вишнякова - Базов�
             'Электрон': Consts.m_e,
         }[what]
         share = float('0.' + percent)
+        gamma = 1 / ((1. - share ** 2) ** 0.5)
+
+        c = Consts.c
+
+        E = m * c * c * gamma
+        E_kin = m * c * c * (gamma - 1)
+        p = m * c * share * gamma
+
+        power = -12
+        power_p = -21
+        mul = 10 ** (-power)
+        mul_p = 10 ** (-power_p)
+
         return dict(
-            E='{value:.1f} 10^{power} Дж'.format(
-                value=m.Value * Consts.c.Value ** 2 / ((1. - share ** 2) ** 0.5),
-                power=m.Power + 2 * Consts.c.Power,
-            ),
-            E_kin='E_{{\\text{{кин}}}} = {value:.1f} 10^{power} Дж'.format(
-                value=m.Value * Consts.c.Value ** 2 * (1. / ((1. - share ** 2) ** 0.5) - 1),
-                power=m.Power + 2 * Consts.c.Power,
-            ),
-            p='p = {value:.1f} 10^{power} кг м / с'.format(
-                value=m.Value * share * Consts.c.Value / ((1. - share ** 2) ** 0.5),
-                power=m.Power + Consts.c.Power,
-            ),
+            E=f'E = {E.SI_Value * mul:.3f} 10^{power} Дж',
+            E_kin=f'E_{{\\text{{кин}}}} = {E_kin.SI_Value * mul:.3f} 10^{power} Дж',
+            p=f'p = {p.SI_Value * mul_p:.3f} 10^{power_p} кг м / с',
             m=m,
         )
 

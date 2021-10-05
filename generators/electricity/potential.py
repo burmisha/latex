@@ -82,7 +82,7 @@ class v_from_Ev_m(variant.VariantTask):  # 2335 Gendenshteyn
     'A_\\text{внешних сил} &= \\Delta E_\\text{кин.} \\implies A_\\text{эл. поля} = 0 - \\frac{mv^2}2.',
     'A_\\text{эл. поля} &= q(\\varphi_1 - \\varphi_2) \\implies'
     '\\varphi_2 = \\varphi_1 - \\frac{A_\\text{эл. поля}}q = \\varphi_1 - \\frac{- \\frac{mv^2}2}q = \\varphi_1 + \\frac{mv^2}{2q} = ',
-    '&= {V:Value} + \\frac{{Consts.m_e:V} * {v:V|sqr}}{2 {sign} * {Consts.e:V}} \\approx {V2:V}.'
+    '&= {V:Value} + \\frac{{m_e:V} * {v:V|sqr}}{2 {sign} * {e:V}} \\approx {V2:V}.'
 ])
 class Phi_from_static_e(variant.VariantTask):  # Гольдфарб 16.21, Вишнякова 3.1.7
     def GetUpdate(self, v=None, V=None, what=None):
@@ -90,11 +90,14 @@ class Phi_from_static_e(variant.VariantTask):  # Гольдфарб 16.21, Ви�
             'электрон': -1,
             'позитрон': 1,
         }[what.split()[0].lower()]
-        power = Consts.m_e.Power + 2 * v.Power - Consts.e.Power
-        V2 = V.Value + 1. / 2 * sign * Consts.m_e.Value * (v.Value ** 2) / Consts.e.Value * (10 ** power)
+        e = Consts.e
+        m = Consts.m_e
+        V2 = V.SI_Value + (m_e * v * v / 2 / e * sign).SI_Value
         return dict(
             V2=f'\\varphi_2 = {V2:.1f} В',
-            sign=' * (-1) ' if sign == -1 else ''
+            sign=' * (-1) ' if sign == -1 else '',
+            m_e=m_e,
+            e=e,
         )
 
 
@@ -113,7 +116,7 @@ class Phi_from_static_e(variant.VariantTask):  # Гольдфарб 16.21, Ви�
     'A_\\text{внешних сил} &= \\Delta E_\\text{кин.} \\implies A_\\text{эл. поля} = 0 - \\frac{mv^2}2.',
     'A_\\text{эл. поля} &= q(\\varphi_1 - \\varphi_2) \\implies'
     '\\varphi_2 = \\varphi_1 - \\frac{A_\\text{эл. поля}}q = \\varphi_1 - \\frac{- \\frac{mv^2}2}q = \\varphi_1 + \\frac{mv^2}{2q} = ',
-    '&= {V:Value} + \\frac{{Consts.m_e:V} * {v:V|sqr}}{2 {sign} * {Consts.e:V}} \\approx {V2:V}.'
+    '&= {V:Value} + \\frac{{m_e:V} * {v:V|sqr}}{2 {sign} * {e:V}} \\approx {V2:V}.'
 ])
 class Phi_from_static_e(variant.VariantTask):  # 1621 Goldfarb
     def GetUpdate(self, v=None, V=None, what=None):
@@ -121,11 +124,14 @@ class Phi_from_static_e(variant.VariantTask):  # 1621 Goldfarb
             'электрон': -1,
             'позитрон': 1,
         }[what.split()[0].lower()]
-        power = Consts.m_e.Power + 2 * v.Power - Consts.e.Power
-        V2 = V.Value + 1. / 2 * sign * Consts.m_e.Value * (v.Value ** 2) / Consts.e.Value * (10 ** power)
+        m_e = Consts.m_e
+        e = Consts.e
+        V2 = V.SI_Value + (m_e * v * v / 2 / e * sign).SI_Value
         return dict(
             V2=f'\\varphi_2 = {V2:.1f} В',
-            sign=' * (-1) ' if sign == -1 else ''
+            sign=' * (-1) ' if sign == -1 else '',
+            m_e=m_e,
+            e=e,
         )
 
 
