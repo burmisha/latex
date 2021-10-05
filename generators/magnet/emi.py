@@ -95,22 +95,23 @@ class Definitions03(variant.VariantTask):
 @variant.arg(S=('S = {} см^2', [200, 400, 600, 800]))
 @variant.arg(B=('B = {} мТл', [300, 500, 700]))
 @variant.arg(angle=[0, 30, 60, 90])
-@variant.answer_short('\\alpha = {alpha}\\degrees, {Phi:Letter} = BS\\cos\\alpha = {Phi:Value} \\to {PhiAnswer}')
+@variant.answer_short('\\alpha = {alpha}\\degrees, {Phi:Letter} = BS\\cos\\alpha = {Phi:V} \\to {PhiAnswer}')
 @variant.answer_test('{PhiAnswer}')
 class Find_F_easy(variant.VariantTask):
     def GetUpdate(self, S=None, B=None, angle=None):
         alpha = 90 - angle
 
+        mul = 1000
         if alpha == 90:
             Phi = 0
             PhiAnswer = 0
         else:
-            Phi = B.Value * S.Value * math.cos(alpha * math.pi / 180) * 10 ** (B.Power + S.Power) * 1000
-            PhiAnswer = int(Phi + 0.5)
+            Phi = B * S * math.cos(alpha * math.pi / 180)
+            PhiAnswer = int(Phi * mul + 0.5)
         assert PhiAnswer == 0 or PhiAnswer >= 2
         return dict(
             alpha=alpha,
-            Phi=f'\\Phi_B = {Phi:.2f} мВб',
+            Phi=f'\\Phi_B = {Phi.SI_Value * mul:.2f} мВб',
             PhiAnswer=PhiAnswer,
         )
 
@@ -134,7 +135,7 @@ class Find_F_easy(variant.VariantTask):
 @variant.answer_test('{PhiAnswer}')
 class Find_F_hard(variant.VariantTask):
     def GetUpdate(self, figure=None, a=None, b=None, B=None, between=None, angle=None):
-        S = a.Value * b.Value * 10 ** (a.Power + b.Power)
+        S = a * b
         if 'треугольник' in figure:
             S /= 2
 
@@ -143,16 +144,17 @@ class Find_F_hard(variant.VariantTask):
         else:
             alpha = 90 - angle
 
+        mul = 1000
         if alpha == 90:
             Phi = 0
             PhiAnswer = 0
         else:
-            Phi = B.Value * S * math.cos(alpha * math.pi / 180)
-            PhiAnswer = int(Phi + 0.5)
+            Phi = B * S * math.cos(alpha * math.pi / 180)
+            PhiAnswer = int(Phi.SI_Value * mul + 0.5)
 
         assert PhiAnswer == 0 or PhiAnswer >= 10, [Phi, a, b, S, alpha, alpha * math.pi / 180]
         return dict(
-            Phi=f'\\Phi_B = {Phi:.2f} мВб',
+            Phi=f'\\Phi_B = {Phi.SI_Value * mul:.2f} мВб',
             PhiAnswer=PhiAnswer,
             alpha=alpha,
         )
@@ -234,8 +236,8 @@ class Find_E_easy(variant.VariantTask):
     '{I:Letter} &= \\frac \\ele R = \\frac{\\Delta \\Phi}{R\\Delta t}'
     '= \\frac{ \\abs{ B S \\cos\\alpha_2 - B S \\cos\\alpha_1 } }{R\\Delta t}'
     '= \\frac{ B S \\abs{ \\cos\\alpha_2 -  \\cos\\alpha_1 } }{R\\Delta t} = ',
-    '&= \\frac{ {B:V} * {S:V} \\abs{ \\cos{alpha_2}\\degrees -  \\cos{alpha_1}\\degrees } }{{R:Value} * {t:Value}}'
-    '\\approx {I:Value} \\to {I_answer}',
+    '&= \\frac{ {B:V} * {S:V} \\abs{ \\cos{alpha_2}\\degrees -  \\cos{alpha_1}\\degrees } }{{R:V} * {t:V}}'
+    '\\approx {I:V} \\to {I_answer}',
 ])
 @variant.answer_test('{I_answer}')
 class Find_I_hard(variant.VariantTask):
@@ -252,15 +254,16 @@ class Find_I_hard(variant.VariantTask):
 
         assert alpha_1 != alpha_2
 
-        Phi_1 = B.Value * S.Value * math.cos(alpha_1 * math.pi / 180) * 10 ** (S.Power + B.Power)
-        Phi_2 = B.Value * S.Value * math.cos(alpha_2 * math.pi / 180) * 10 ** (S.Power + B.Power)
+        Phi_1 = B * S * math.cos(alpha_1 * math.pi / 180)
+        Phi_2 = B * S * math.cos(alpha_2 * math.pi / 180)
 
-        I = abs(Phi_2 - Phi_1) / t.Value / R.Value * 10 ** (-t.Power - R.Power) * 10 ** 6
-        I_answer = int(I + 0.5)
+        mul = 10 ** 6
+        I = abs(Phi_2 - Phi_1) / t / R
+        I_answer = int(I.SI_Value * mul + 0.5)
 
         assert I_answer >= 10, [I_answer]
         return dict(
-            I=f'\\eli = {I:.3f} мкА',
+            I=f'\\eli = {I.SI_Value * mul:.3f} мкА',
             alpha_1=alpha_1,
             alpha_2=alpha_2,
             I_answer=I_answer,

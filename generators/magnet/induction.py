@@ -154,12 +154,12 @@ class Find_Phi_1(variant.VariantTask):
 class W_from_L_or_Phi(variant.VariantTask):
     def GetUpdate(self, what=None, value=None, L=None):
         if 'поток' in what:
-            W_value = value.Value ** 2 / 2 / L.Value * 10 ** (0 - L.Power)
-            W = UnitValue(f'W = {W_value:.2f} Дж')
+            W_UV = value * value / (2 * L)
+            W = UnitValue(f'W = {W_UV.SI_Value:.2f} Дж')
             answer_short = f'W = \\frac{{\\Phi^2}}{{2L}} = \\frac{{\\sqr{{{value:V}}}}}{{2 \\cdot {L:V}}} \\approx {W:V}'
         else:
-            W_value = value.Value ** 2 * L.Value / 2 * 10 ** L.Power
-            W = UnitValue(f'W = {W_value:.2f} Дж')
+            W_UV = value * value * L / 2
+            W = UnitValue(f'W = {W_UV.SI_Value:.2f} Дж')
             answer_short = f'W = \\frac{{L\\eli^2}}2 = \\frac{{{L:V} \\cdot \\sqr{{{value:V}}}}}2 \\approx {W:V}'
 
         return dict(answer_short=answer_short)
@@ -186,16 +186,16 @@ class L_W_ratio(variant.VariantTask):
     def GetUpdate(self, L=None, I=None, n=None, n_text=None, m=None, m_text=None, what=None):
         if what == 'больше':
             l = Fraction() * n
-            L2 = L.Value * n
+            L2 = L * n
         else:
             l = Fraction() / n
-            L2 = L.Value / n
-        W1 = L.Value * I.Value ** 2 / 2 * 10 ** (L.Power + 2 * I.Power)
+            L2 = L / n
+        W1 = L * I * I / 2
         W2_W1 = l * m ** 2
         return dict(
             l=l,
-            L2=f'L_2 = {L2:.2f} мГн',
-            W1=f'W_1 = {W1:.3f} Дж',
+            L2=f'L_2 = {L2.Value:.2f} мГн',
+            W1=f'W_1 = {W1.SI_Value:.3f} Дж',
             W2_W1=W2_W1,
         )
 
@@ -221,9 +221,9 @@ class L_W_ratio(variant.VariantTask):
 ''')
 class L_from_BIRn(variant.VariantTask):
     def GetUpdate(self, B=None, I=None, R=None, h=None, n=None):
-        L = math.pi * B.Value * R.Value ** 2 * n / I.Value * 10 ** (B.Power + 2 * R.Power - I.Power)
+        L = math.pi * B * R * R * n / I
         return dict(
-            L=f'L = {L:.2f} Гн'
+            L=f'L = {L.Value:.2f} Гн'
         )
 
 
@@ -248,9 +248,9 @@ class L_from_BIRn(variant.VariantTask):
 ''')
 class E_rotation(variant.VariantTask):
     def GetUpdate(self, l=None, B=None, T=None):
-        E = math.pi * B.Value * l.Value ** 2 / T.Value * 10 ** (B.Power + 2 * l.Power - T.Power) * 1000
+        E = math.pi * B * l * l / T
         return dict(
-            E=f'\\ele_i = {E:.1f} мВ'
+            E=f'\\ele_i = {E.SI_Value * 1000:.1f} мВ'
         )
 
 
@@ -280,9 +280,9 @@ class E_rotation(variant.VariantTask):
 
 class F_speed(variant.VariantTask):
     def GetUpdate(self, l=None, R=None, B=None, v=None):
-        F = B.Value ** 2 * l.Value ** 2 * v.Value / R.Value * 10 ** (2 * B.Power + 2 * l.Power + v.Power - R.Power) * 1000
+        F = B * B * l * l * v / R
         return dict(
-            F=f'F = {F:.2f} мН'
+            F=f'F = {F.SI_Value * 1000:.2f} мН'
         )
 
 
@@ -327,16 +327,13 @@ class q_from_B_a_b_r(variant.VariantTask):  # Вишнякова 3.4.7
             phi1 = 90
             phi2 = 90 - angle
 
-        q_value = (
-            B.Value * a.Value * b.Value * abs(math.cos(phi2 * math.pi / 180) - math.cos(phi1 * math.pi / 180)) / R.Value
-            * 10 ** (B.Power + a.Power + b.Power - R.Power)
-        ) * 10 ** 6
-        q_answer = int(q_value + 0.5)
+        q = B * a * b * abs(math.cos(phi2 * math.pi / 180) - math.cos(phi1 * math.pi / 180)) / R
+        q_answer = int(q.SI_Value * 10 ** 6 + 0.5)
         assert q_answer >= 10
         return dict(
             phi1=phi1,
             phi2=phi2,
-            q='q = %.2f мкКл' % q_value,
+            q=f'q = {q.SI_Value* 10 ** 6:.2f} мкКл',
             q_answer=q_answer,
         )
 
@@ -379,10 +376,10 @@ class a_from_n(variant.VariantTask):  # Вишнякова 3.4.11
 ''')
 class L_from_b(variant.VariantTask):  # Вишнякова 3.4.14
     def GetUpdate(self, a=None, b=None, sign=None, E=None):
-        L = E.Value / b
-        L_answer = int(L + 0.5)
+        L = E / b
+        L_answer = int(L.Value + 0.5)
         return dict(
-            L=f'L = {L:.1f} мГн',
+            L=f'L = {L.Value:.1f} мГн',
             L_answer=L_answer,
         )
 
@@ -405,9 +402,9 @@ class L_from_b(variant.VariantTask):  # Вишнякова 3.4.14
 ])
 class W_kirchgof(variant.VariantTask):  # Вишнякова 3.4 УК
     def GetUpdate(self, E=None, R=None, r=None, L=None):
-        Q = L.Value / 2 * (E.Value / r.Value) ** 2
+        Q = L / 2 * E * E / r / r
         return dict(
-            Q=f'Q = {Q:.2f} Дж',
+            Q=f'Q = {Q.Value:.2f} Дж',
         )
 
 
@@ -432,7 +429,7 @@ class W_kirchgof(variant.VariantTask):  # Вишнякова 3.4 УК
     'F_A \\cos \\alpha &= mg \\sin \\alpha '
         '\\implies \\frac{\\ele}R {B:L} \\ell \\cos \\alpha = mg \\sin \\alpha',
 
-        '&\\frac{{B:L} \\cos \\alpha * v {l:L}}R {B:L} {l:L} \\cos \\alpha = mg \\sin \\alpha' 
+        '&\\frac{{B:L} \\cos \\alpha * v {l:L}}R {B:L} {l:L} \\cos \\alpha = mg \\sin \\alpha'
         '\\implies \\frac{{B:L}^2 \\cos^2 \\alpha  * v {l:L}^2}R = mg \\sin \\alpha,',
 
     '{B:L} &= '
@@ -451,14 +448,10 @@ class B_angle_hard(variant.VariantTask):  # Вишнякова 3.4 УК
     def GetUpdate(self, m=None, R=None, v=None, l=None, angle=None):
         a_radian = angle * math.pi / 180
         g = Consts.g_ten
-        BB = 1. * m.Value * g.Value * R.Value * math.sin(a_radian) / math.cos(a_radian) ** 2 / v.Value / l.Value ** 2 * 10 ** (
-            m.Power + g.Power + R.Power - v.Power - 2 * l.Power
-        )
-        B = BB ** 0.5
-        II = 1. * m.Value * g.Value * v.Value * math.sin(a_radian) / R.Value * 10 ** (
-            m.Power + g.Power + v.Power - R.Power
-        )
-        I = II ** 0.5
+        BB = m * g * R * math.sin(a_radian) / (math.cos(a_radian) ** 2) / v / l / l
+        B = BB.SI_Value ** 0.5
+        II = m * g * v * math.sin(a_radian) / R
+        I = II.SI_Value ** 0.5
         return dict(
             g=g,
             B=f'B = {B:.2f} Тл',

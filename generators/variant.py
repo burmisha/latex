@@ -62,10 +62,18 @@ class LaTeXFormatter:
         try:
             result = result.format(**(self._args))
         except Exception as e:
-            log.error(f'Error {e} while formatting line with {len(self._args)} args:\n{line}\n\n{result}')
+            log.error(f'''Error {cm(e, color=color.Red)} while formatting line with {len(self._args)} args
+Line:
+{line}
+
+Substitutions:
+{subs}
+
+Preprocessed result:
+{result}
+''')
             for k, v in self._args.items():
-                log.error(f'  arg {k}: {type(v)}')
-            log.error(f'Subs: {subs}')
+                log.error(f'  arg {cm(k, color=color.Blue)}: {cm(type(v), color=color.Green)} is {cm(v, color=color.Red)}')
             raise
 
         # dirty hacks for tikz

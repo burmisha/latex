@@ -21,7 +21,7 @@ def precisionFmt2(value, precision):
     isNegative = value < 0
     absValue = abs(value)
     assert absValue >= 10 ** -7, f'Got value of {absValue}'
-    assert 1 <= precision <= 10
+    assert 1 <= precision <= 10, f'Got precision {precision} for {value}'
 
     rawValue = '%.20f' % absValue
     assert 'e' not in rawValue
@@ -63,8 +63,10 @@ def test_precisionFmt2():
         (1.99, 3, '1.990'),
         (19.9, 2, '19.9'),
         (19.9, 1, '20'),
+        (12, 1, '12'),
         (12, 2, '12'),
         (20, 2, '20'),
+        (20, 1, '20'),
         (2.99, 2, '3.0'),
         (29.9, 2, '30'),
         (299., 2, '300'),
@@ -253,6 +255,19 @@ class UnitValue:
 
     def Div(self, other, **kws):
         return self._calculate(other, action='div', **kws)
+
+    def __mul__(self, other):
+        return self.Mult(other)
+
+    def __truediv__(self, other):
+        return self.Div(other)
+
+    def __rmul__(self, other):
+        return self.Mult(other)
+
+    @property
+    def SI_Value(self):
+        return self.Value * 10 ** self.Power
 
     def _calculate(self, other, action=None, precisionInc=0, units='', powerShift=0):
         # TODO: skips units now
