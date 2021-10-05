@@ -20,30 +20,33 @@ class Nu01(variant.VariantTask):
 
 @variant.solution_space(60)
 @variant.text('Определите частоту колебаний, если их период составляет {T:Task:e}.')
-@variant.answer_short('\\nu = \\frac 1T = \\frac 1{T:Value:s} = {nu:Value}')
-@variant.arg(T=['T = %d мс' % T for T in [2, 4, 5, 10, 20, 40, 50]])
+@variant.answer_short('\\nu = \\frac 1T = \\frac 1{T:V:s} = {nu:V}')
+@variant.arg(T=('T = {} мс', [2, 4, 5, 10, 20, 40, 50]))
 class Nu02(variant.VariantTask):
     def GetUpdate(self, T=None):
+        nu = int(1000 / T.Value)
         return dict(
-            nu='''\\nu = %d Гц''' % (1000 / T.Value),
+            nu=f'\\nu = {nu} Гц',
         )
 
 
 @variant.text('''
     Определите период колебаний, если их частота составляет {nu:Task:e}.
-    Сколько колебаний произойдёт за {t:Task:e}?
+    Ответ выразите в миллисекундах. Сколько колебаний произойдёт за {t:Task:e}?
 ''')
 @variant.answer_align([
-    'T &= \\frac 1\\nu = \\frac 1{nu:Value:s} = {T:Value},',
-    'N &= \\nu t = {nu:Value|cdot}{t:Value} = {N:Value}.',
+    'T &= \\frac 1\\nu = \\frac 1{nu:V:s} = {T:V},',
+    'N &= \\nu t = {nu:V|cdot}{t:V} = {N:V}.',
 ])
-@variant.arg(nu=['\\nu = %d кГц' % nu for nu in [2, 4, 5, 10, 20, 40, 50]])
-@variant.arg(t=['t = %d мин' % t for t in [1, 2, 3, 5, 10]])
+@variant.arg(nu=('\\nu = {} кГц', [2, 4, 5, 10, 20, 40, 50]))
+@variant.arg(t=('t = {} мин', [1, 2, 3, 5, 10]))
 class Nu03(variant.VariantTask):
     def GetUpdate(self, nu=None, t=None):
+        T = 1. / nu.Value
+        N = nu.Value * 1000 * t.Value * 60
         return dict(
-            T='T = %.3f мc' % (1. / nu.Value),
-            N='N = %d колебаний' % (nu.Value * 1000 * t.Value * 60),
+            T=f'T = {T:.3f} мc',
+            N=f'N = {N} колебаний',
         )
 
 
@@ -51,19 +54,15 @@ class Nu03(variant.VariantTask):
     Амплитуда колебаний точки составляет {A:Task:e}, а частота~--- {nu:Task:e}.
     Определите, какой путь преодолеет эта точка за {t:Task:e}.
 ''')
-@variant.answer_short('''
-    s
-        = 4A * N = 4A * \\frac tT = 4A * t\\nu
-        = 4 * {A:Value} * {t:Value} * {nu:Value}
-        = {s:Value}
-''')
-@variant.arg(A=['A = %d см' % A for A in [2, 3, 5, 10, 15]])
-@variant.arg(nu=['\\nu = %d Гц' % nu for nu in [2, 5, 6, 10, 20]])
-@variant.arg(t=['t = %d с' % t for t in [10, 40, 80]])
+@variant.answer_short('s = 4A * N = 4A * \\frac tT = 4A * t\\nu = 4 * {A:V} * {t:V} * {nu:V} = {s:V}')
+@variant.arg(A=('A = {} см', [2, 3, 5, 10, 15]))
+@variant.arg(nu=('\\nu = {} Гц', [2, 5, 6, 10, 20]))
+@variant.arg(t=('t = {} с', [10, 40, 80]))
 class Nu04(variant.VariantTask):
     def GetUpdate(self, A=None, nu=None, t=None):
+        s = 4 * A.Value * t.Value * nu.Value * 10 ** (A.Power + t.Power + nu.Power)
         return dict(
-            s='s = %.1f м' % (4. * A.Value / 100 * t.Value * nu.Value),
+            s=f's = {s:.1f} м',
         )
 
 
@@ -71,7 +70,7 @@ class Nu04(variant.VariantTask):
     Изобразите график гармонических колебаний, амплитуда которых составляла бы
     {A:Task:e}, а период {T:Task:e}.
 ''')
-@variant.arg(A=['A = %d см' % A for A in [1, 2, 3, 5, 6, 15, 30, 40, 75]])
-@variant.arg(T=['T = %d с' % T for T in [2, 4, 6, 8, 10]])
+@variant.arg(A=('A = {} см', [1, 2, 3, 5, 6, 15, 30, 40, 75]))
+@variant.arg(T=('T = {} с', [2, 4, 6, 8, 10]))
 class Nu05(variant.VariantTask):
     pass

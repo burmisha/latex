@@ -17,7 +17,7 @@ import generators.variant as variant
     \\end{itemize}
     (4 из 8~--- это «–»)
 ''')
-@variant.answer('''нет, да, да, нет, да, да, нет, да''')
+@variant.answer('нет, да, да, нет, да, да, нет, да''')
 @variant.no_args
 @variant.solution_space(20)
 class Waves00(variant.VariantTask):
@@ -36,15 +36,16 @@ class Waves00(variant.VariantTask):
         = T\\sqrt{\\alpha}
         = \\frac 1\\nu * \\sqrt{\\alpha}
         = \\frac{\\sqrt{\\alpha}}{\\nu}
-        = \\frac{\\sqrt{{alpha}}}{nu:Value:s}
-        = {T1:Value}
+        = \\frac{\\sqrt{{alpha}}}{nu:V:s}
+        = {T1:V}
 ''')
-@variant.arg(nu=['\\nu = %s Гц' % nu for nu in ['2', '4', '5', '8']])
-@variant.arg(alpha=['4', '16', '25'])
+@variant.arg(nu=('\\nu = {} Гц', [2, 4, 5, 8]))
+@variant.arg(alpha=[4, 16, 25])
 class Waves01(variant.VariantTask):
     def GetUpdate(self, alpha=None, nu=None):
+        T1 = alpha ** 0.5 / nu.Value
         return dict(
-            T1='T\' = %.2f с' % (math.sqrt(int(alpha)) / int(nu.Value)),
+            T1=f'T\' = {T1:.2f} с',
         )
 
 
@@ -57,12 +58,12 @@ class Waves01(variant.VariantTask):
 @variant.answer_align([
     '''
         E_{\\text{полная механическая}} &= E_{\\text{max кинетическая}}
-        = \\frac{m v_{\\max}^2}2 = \\frac{{m:Value} * {v:Value|sqr}}2 = {E:Value},''',
-    'A_{E_{\\text{потенциальная}}} &= \\frac{E_{\\text{полная механическая}}}2 = {E2:Value}.'
+        = \\frac{m v_{\\max}^2}2 = \\frac{{m:V} * {v:V|sqr}}2 = {E:V},''',
+    'A_{E_{\\text{потенциальная}}} &= \\frac{E_{\\text{полная механическая}}}2 = {E2:V}.'
 ])
 @variant.arg(mLetter=['m', 'M'])
 @variant.arg(mValue=[100, 200, 250, 400])
-@variant.arg(v=['v = %d м / с' % v for v in [1, 2, 4, 5]])
+@variant.arg(v=('v = {} м / с', [1, 2, 4, 5]))
 class Waves02(variant.VariantTask):
     def GetUpdate(self, mLetter=None, mValue=None, v=None):
         return dict(
@@ -74,10 +75,10 @@ class Waves02(variant.VariantTask):
 
 @variant.text('''
     Определите расстояние между {first} и {second} гребнями волн,
-    если длина волны равна {lmbd:Value:e}. Сколько между ними ещё уместилось гребней?
+    если длина волны равна {lmbd:V:e}. Сколько между ними ещё уместилось гребней?
 ''')
 @variant.answer_short('''
-    l = (n_2 - n_1) * \\lambda = \\cbr{{n2} - {n1}} * {lmbd:Value} = {l:Value},
+    l = (n_2 - n_1) * \\lambda = \\cbr{{n2} - {n1}} * {lmbd:V} = {l:V},
     \\quad n = n_2 - n_1 - 1 = {n2} - {n1} - 1 = {n}
 ''')
 @variant.arg(first__n1=[
@@ -92,7 +93,7 @@ class Waves02(variant.VariantTask):
     ('девятым', 9),
     ('десятым', 10),
 ])
-@variant.arg(lmbd=['\\lambda = %d м' % lmbd for lmbd in [3, 4, 5, 6]])
+@variant.arg(lmbd=('\\lambda = {} м', [3, 4, 5, 6]))
 class Waves03(variant.VariantTask):
     def GetUpdate(self, first=None, n1=None, second=None, n2=None, lmbd=None):
         return dict(
@@ -103,12 +104,12 @@ class Waves03(variant.VariantTask):
 
 @variant.text('''
     Определите скорость звука в среде, если источник звука,
-    колеблющийся с периодом {T:Value:e}, возбуждает волны длиной
-    {lmbd:Value:e}.
+    колеблющийся с периодом {T:V:e}, возбуждает волны длиной
+    {lmbd:V:e}.
 ''')
-@variant.answer_short('\\lambda = vT \\implies v = \\frac{\\lambda}T = \\frac{lmbd:Value:s}{T:Value:s} = {v:Value:s}')
-@variant.arg(lmbd=['\\lambda = %.1f м' % lmbd for lmbd in [1.2, 1.5, 2.1, 2.4]])
-@variant.arg(T=['T = %d мc' % T for T in [2, 3, 4, 5, 6]])
+@variant.answer_short('\\lambda = vT \\implies v = \\frac{\\lambda}T = \\frac{lmbd:V:s}{T:V:s} = {v:V:s}')
+@variant.arg(lmbd=('\\lambda = {} м', [1.2, 1.5, 2.1, 2.4]))
+@variant.arg(T=('T = {} мc', [2, 3, 4, 5, 6]))
 class Waves04(variant.VariantTask):
     def GetUpdate(self, lmbd=None, T=None):
         return dict(
@@ -117,22 +118,22 @@ class Waves04(variant.VariantTask):
 
 
 @variant.text('''
-    Мимо неподвижного наблюдателя прошло {N:Value:e} гребней волн за {t:Value:e},
+    Мимо неподвижного наблюдателя прошло {N:V:e} гребней волн за {t:V:e},
     начиная с первого. Каковы длина, период и частота волны,
-    если скорость распространения волн {v:Value:e}?
+    если скорость распространения волн {v:V:e}?
 ''')
 @variant.answer_align([
-    u"\\lambda &= \\frac L{N-1} = \\frac {vt}{N-1} = \\frac {{v:Value} * {t:Value}}{{N:Value} - 1} = {lmbd:Value}, ",
-    u"T &= \\frac {\\lambda}{v:L} = \\frac {vt}{\\cbr{N-1}v} = \\frac t{N-1} =  \\frac {t:Value:s}{{N:Value} - 1} = {T:Value}, ",
-    u"\\nu &= \\frac 1T = \\frac {N-1}t = \\frac {{N:Value} - 1}{t:Value:s} = {nu:Value}. ",
+    u"\\lambda &= \\frac L{N-1} = \\frac {vt}{N-1} = \\frac {{v:V} * {t:V}}{{N:V} - 1} = {lmbd:V}, ",
+    u"T &= \\frac {\\lambda}{v:L} = \\frac {vt}{\\cbr{N-1}v} = \\frac t{N-1} =  \\frac {t:V:s}{{N:V} - 1} = {T:V}, ",
+    u"\\nu &= \\frac 1T = \\frac {N-1}t = \\frac {{N:V} - 1}{t:V:s} = {nu:V}. ",
     u"&\\text{Если же считать гребни целиком, т.е. не вычитать единицу:} ",
-    u"\\lambda' &= \\frac L{N:L:s} = \\frac {vt}{N:L:s} = \\frac {{v:Value} * {t:Value}}{N:Value:s} = {lmbd_1:Value}, ",
-    u"T' &= \\frac {\\lambda'}{v:L} = \\frac {vt}{Nv} = \\frac tN =  \\frac {t:Value:s}{N:Value:s} = {T_1:Value}, ",
-    u"\\nu' &= \\frac 1{T'} = \\frac {N:L:s}t = \\frac {N:Value:s}{t:Value:s} = {nu_1:Value}. ",
+    u"\\lambda' &= \\frac L{N:L:s} = \\frac {vt}{N:L:s} = \\frac {{v:V} * {t:V}}{N:V:s} = {lmbd_1:V}, ",
+    u"T' &= \\frac {\\lambda'}{v:L} = \\frac {vt}{Nv} = \\frac tN =  \\frac {t:V:s}{N:V:s} = {T_1:V}, ",
+    u"\\nu' &= \\frac 1{T'} = \\frac {N:L:s}t = \\frac {N:V:s}{t:V:s} = {nu_1:V}. ",
 ])
-@variant.arg(N=['N = %d' % N for N in [4, 5, 6]])
-@variant.arg(t=['t = %d c' % t for t in [5, 6, 8, 10]])
-@variant.arg(v=['v = %d м / с' % v for v in [1, 2, 3, 4, 5]])
+@variant.arg(N=('N = {}', [4, 5, 6]))
+@variant.arg(t=('t = {} c', [5, 6, 8, 10]))
+@variant.arg(v=('v = {} м / с', [1, 2, 3, 4, 5]))
 class Waves05(variant.VariantTask):
     def GetUpdate(self, N=None, t=None, v=None):
         return dict(
@@ -150,24 +151,21 @@ class Waves05(variant.VariantTask):
     Какая больше, во сколько раз? Скорость звука примите равной {v:Task:e}.
 ''')
 @variant.answer_short('''
-    \\lambda_1
-        = v T_1 = v * \\frac 1{\\nu_1} = \\frac {v:L}{\\nu_1}
-        = \\frac{v:Value:s}{nu_1:Value:s} = {l_1:Value},
+    {l1:L} = {v:L} T_1 = {v:L} * \\frac 1{nu_1:L:s} = \\frac {v:L}{nu_1:L:s} = \\frac{v:V:s}{nu_1:V:s} = {l1:V},
     \\quad
-    \\lambda_2
-        = c T_2 = c * \\frac 1{\\nu_2} = \\frac c{\\nu_2}
-        = \\frac{c:Value:s}{nu_2:Value:s} = {l_2:Value},
-    \\quad n = \\frac{\\lambda_2}{\\lambda_1} \\approx {n:Value}
+    {l2:L} = {c:L} T_2 = {c:L} * \\frac 1{nu_2:L:s} = \\frac {c:L}{nu_2:L:s} = \\frac{c:V:s}{nu_2:V:s} = {l2:V},
+    \\quad 
+    n = \\frac{l2:L:s}{l1:L:s} \\approx {n:V}.
 ''')
-@variant.arg(nu_1=['\\nu_1 = %s Гц' % nu_1 for nu_1 in [150, 200, 300, 500]])
-@variant.arg(nu_2=['\\nu_2 = %s МГц' % nu_2 for nu_2 in [200, 500, 800]])
+@variant.arg(nu_1=('\\nu_1 = {} Гц', [150, 200, 300, 500]))
+@variant.arg(nu_2=('\\nu_2 = {} МГц', [200, 500, 800]))
 class Ch1238(variant.VariantTask):
     def GetUpdate(self, nu_1=None, nu_2=None):
         return dict(
             v='v = 320 м / с',
             c='c = 300 Мм / с',
-            l_1='l_1 = %.2f м' % (320. / nu_1.Value),
-            l_2='l_2 = %.2f м' % (300. / nu_2.Value),
+            l1='\\lambda_1 = %.2f м' % (320. / nu_1.Value),
+            l2='\\lambda_2 = %.2f м' % (300. / nu_2.Value),
             n='n = %.2f' % ((300. / nu_2.Value) / (320. / nu_1.Value)),
         )
 
@@ -179,7 +177,7 @@ class Ch1238(variant.VariantTask):
 @variant.answer_short('''
     \\frac l\\lambda = \\frac \\varphi{2\\pi} + k (k\\in\\mathbb{N:L:s})
     \\implies \\lambda = \\frac l{\\frac \\varphi{2\\pi} + k} = \\frac {2\\pi l}{\\varphi + 2\\pi k},
-    \\quad \\lambda_0 = \\frac {2\\pi l}{\\varphi} = {lmbd:Value}
+    \\quad \\lambda_0 = \\frac {2\\pi l}{\\varphi} = {lmbd:V}
 ''')
 @variant.arg(delta__frac=[
     ('\\frac{\\pi}{8}', 1. / 16),
@@ -188,7 +186,7 @@ class Ch1238(variant.VariantTask):
     ('\\frac{\\pi}{2}', 1. / 4),
     ('\\frac{3\\pi}{4}', 3. / 8),
 ])
-@variant.arg(l=['l = %d см' % l for l in [20, 25, 40, 50, 75]])
+@variant.arg(l=('l = {} см', [20, 25, 40, 50, 75]))
 class Ch1240(variant.VariantTask):
     def GetUpdate(self, delta=None, frac=None, l=None):
         return dict(
