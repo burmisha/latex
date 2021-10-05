@@ -149,11 +149,15 @@ test_substitute()
 
 
 def check_unit_value(value):
-    if isinstance(value, str):
-        if value.count('=') == 1 and len(value) >= 3:
-            return UnitValue(value)
-        elif re.match(r'-?\d.* \w', value, re.UNICODE):
-            return UnitValue(value)
+    try:
+        if isinstance(value, str):
+            if value.count('=') == 1 and len(value) >= 3:
+                return UnitValue(value)
+            elif re.match(r'-?\d.* \w', value, re.UNICODE):
+                return UnitValue(value)
+    except:
+        log.error(f'Failed to check_unit_value for {cm(value, color=color.Red)}')
+        raise
 
     return value
 
