@@ -170,7 +170,7 @@ class UnitValue:
                 else:
                     self._units.append(OneUnit(part, isNumerator))
 
-        self.Power = sum(unit.SiPower if unit.IsNumerator else -unit.SiPower for unit in self._units) + self.ValuePower
+        self._power = sum(unit.SiPower if unit.IsNumerator else -unit.SiPower for unit in self._units) + self.ValuePower
 
     def __str__(self):
         return f'UVS {self.__raw_line}'
@@ -267,7 +267,7 @@ class UnitValue:
 
     @property
     def SI_Value(self):
-        return self.Value * 10 ** self.Power
+        return self.Value * 10 ** self._power
 
     def _calculate(self, other, action=None, precisionInc=0, units='', powerShift=0):
         # TODO: skips units now
@@ -276,15 +276,15 @@ class UnitValue:
             precision = min(min(self.Precision, other.Precision) + precisionInc, 7)
             if action == 'mult':
                 value = 1. * self.Value * other.Value
-                power = self.Power + other.Power
+                power = self._power + other._power
             elif action == 'div':
                 value = 1. * self.Value / other.Value
-                power = self.Power - other.Power
+                power = self._power - other._power
             else:
                 raise NotImplementedError('Could not apply %s' % action)
         elif isinstance(other, (int, float)):
             precision = min(self.Precision + precisionInc, 7)
-            power = self.Power
+            power = self._power
             if action == 'mult':
                 value = 1. * self.Value * other
             elif action == 'div':
@@ -304,7 +304,7 @@ class UnitValue:
 
 
 for src, canonic in [
-    (UnitValue('50 мТл').Value * (10 ** UnitValue('50 мТл').Power), 0.05),
+    (UnitValue('50 мТл').Value * (10 ** UnitValue('50 мТл')._power), 0.05),
     ('{:Task}'.format(UnitValue('c = 3 10^{8} м / с')), 'c = 3 \\cdot 10^{8}\\,\\frac{\\text{м}}{\\text{с}}'),
     ('{:Task}'.format(UnitValue('t = 8 суток')), 't = 8\\,\\text{суток}'),
     ('{:Value}'.format(UnitValue('m = 1.67 10^-27 кг')), '1{,}67 \\cdot 10^{-27}\\,\\text{кг}'),

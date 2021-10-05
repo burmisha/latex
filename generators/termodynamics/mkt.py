@@ -104,8 +104,9 @@ class Basic05(variant.VariantTask):
 @variant.answer_short('\\nu = \\frac N{Consts.N_A:L|s} = \\frac{N:V|s}{Consts.N_A:V|s} = {nu:V}.')
 class CountNu(variant.VariantTask):
     def GetUpdate(self, N=None):
+        nu = N / Consts.N_A
         return dict(
-            nu=N.Div(Consts.N_A, units='моль'),
+            nu=f'\\nu = {nu.SI_Value:.2f} моль',
         )
 
 
@@ -127,8 +128,9 @@ class CountNu(variant.VariantTask):
 @variant.answer_short('m = \\mu\\nu = {mu:Value} * {nu:Value} = {m:Value}.')
 class CountMass(variant.VariantTask):
     def GetUpdate(self, nu=None, what=None, mu=None, formula=None):
+        m = nu * mu
         return dict(
-            m='{} г'.format(nu.Value * mu.Value),
+            m=f'{m.SI_Value * 1000:.0f} г',
         )
 
 
@@ -523,8 +525,9 @@ class Air_rho(variant.VariantTask):
     def GetUpdate(self, rho=None, p=None, t=None):
         T1 = 273
         T2 = t + 273
+        rho2 = rho * p / Consts.p_atm * T1 / T2
         return dict(
-            rho2='\\rho_2 = %.2f кг / м^3' % (rho.Value * p.Value / Consts.p_atm.Value * T1 / T2),
+            rho2=f'\\rho_2 = {rho2.SI_Value:.2f} кг / м^3',
             T1=T1,
             T2=T2,
         )
