@@ -1,0 +1,3256 @@
+\setdate{5~октября~2021}
+\setclass{11«БА»}
+
+\addpersonalvariant{Михаил Бурмистров}
+
+\tasknumber{1}%
+\task{%
+    При изменении силы тока в проводнике по закону $\eli = 5 + 0{,}4t$ (в системе СИ),
+    в нём возникает ЭДС самоиндукции $150\,\text{мВ}$.
+    Чему равна индуктивность проводника?
+    Ответ выразите в миллигенри и округлите до целого.
+}
+\answer{%
+    $
+        \ele = L\frac{\abs{\Delta \eli}}{\Delta t} = L \cdot \abs{ + 0{,}4 } \text{(в СИ)}
+        \implies L = \frac{\ele}{ 0{,}4 } = \frac{150\,\text{мВ}}{ 0{,}4 } \approx {375{,}0\,\text{мГн}}
+    $
+}
+\solutionspace{80pt}
+
+\tasknumber{2}%
+\task{%
+    Прямолинейный проводник длиной $\ell$ перемещают в однородном магнитном поле с индукцией $B$.
+    Проводник, вектор его скорости и вектор индукции поля взаимно перпендикулярны.
+    Определите зависимость ускорения от времени, если разность потенциалов на концах проводника
+    изменяется по закону $\Delta \varphi = kt^2$.
+}
+\answer{%
+    $
+        \Delta \varphi = Bv\ell = kt^2 \implies v = \frac{kt^2}{B\ell} \implies a(t) = \frac{v(t)}{t} = \frac{kt^{}}{B\ell}
+    $
+}
+\solutionspace{80pt}
+
+\tasknumber{3}%
+\task{%
+    Плоская прямоугольная рамка со сторонами $30\,\text{см}$ и $60\,\text{см}$ находится в однородном вертикальном магнитном поле
+    с индукцией $120\,\text{мТл}$.
+    Сопротивление рамки $8\,\text{Ом}$.
+    Вектор магнитной индукции перпендикулярен плоскости рамки.
+    Рамку повернули на $60\degrees$ вокруг одной из её горизонтальных сторон.
+    Какой заряд протёк по рамке?
+    Ответ выразите в микрокулонах и округлите до целого.
+}
+\answer{%
+    \begin{align*}
+    \ele_i &= - \frac{\Delta \Phi_i}{\Delta t}, \eli_i = \frac{\ele_i}{R}, \Delta q_i = \eli_i\Delta t\implies \Delta q_i = \frac{\ele_i}{R} \cdot \Delta t = - \frac 1{R} \frac{\Delta \Phi_i}{\Delta t} \cdot \Delta t= - \frac{\Delta \Phi_i}{R} \implies \\
+    \implies \Delta q &= q_2 - q_1 = \sum_i \Delta q_i = \sum_i \cbr{ - \frac{\Delta \Phi_i}{R}} = -\frac 1{R} \sum_i \Delta \Phi_i = -\frac{\Phi_2 - \Phi_1}{R}.
+    \\
+    q &= \abs{\Delta q} = \frac {\abs{\Phi_2 - \Phi_1}}{R}= \frac {\abs{BS \cos \varphi_2 - BS \cos \varphi_1}}{R}= \frac {B S}{R}\abs{\cos \varphi_2 - \cos \varphi_1}= \frac {B a b}{R}\abs{\cos \varphi_2 - \cos \varphi_1}, \\
+    \varphi_1 &= 0\degrees, \varphi_2 = 60\degrees, \\
+    q&= \frac {120\,\text{мТл} \cdot 30\,\text{см} \cdot 60\,\text{см}}{8\,\text{Ом}}\abs{\cos 60\degrees - \cos 0\degrees} \approx 1350{,}00\,\text{мкКл} \to 1350.
+    \end{align*}
+}
+\solutionspace{120pt}
+
+\tasknumber{4}%
+\task{%
+    Резистор сопротивлением $R = 4\,\text{Ом}$ и катушка индуктивностью $L = 0{,}4\,\text{Гн}$ (и пренебрежимо малым сопротивлением)
+    подключены параллельно к источнику тока с ЭДС $\ele = 6\,\text{В}$ и внутренним сопротивлением $r = 2\,\text{Ом}$ (см.
+    рис.
+    на доске).
+    Какое количество теплоты выделится в цепи после размыкания ключа $K$?
+}
+\answer{%
+    \begin{align*}
+    &\text{закон Ома для полной цепи}: \eli = \frac{\ele}{r + R_\text{внешнее}} = \frac{\ele}{r + \frac{R \cdot 0}{R + 0}} = \frac{\ele}{r}, \\
+    Q &= W_m = \frac{L\eli^2}2 = \frac{L\sqr{\frac{\ele}{r}}}2 = \frac L2\frac{\ele^2}{r^2} = \frac{0{,}4\,\text{Гн}}2 \cdot \sqr{\frac{6\,\text{В}}{2\,\text{Ом}}} \approx 1{,}80\,\text{Дж}.
+    \end{align*}
+}
+\solutionspace{150pt}
+
+\tasknumber{5}%
+\task{%
+    По параллельным рельсам, расположенным под углом $10\degrees$ к горизонтали,
+    соскальзывает проводник массой $100\,\text{г}$: без трения и с постоянной скоростью $12\,\frac{\text{м}}{\text{с}}$ .
+    Рельсы замнуты резистором сопротивлением $12\,\text{Ом}$.
+    Вся система находитится в однородном вертикальном магнитном поле (см.
+    рис.
+    на доске).
+    Определите индукцию магнитного поля и ток, протекающий в проводнике.
+    Сопротивлением проводника, рельс и соединительных проводов пренебречь, ускорение свободного падения принять равным $g = 10\,\frac{\text{м}}{\text{с}^{2}}$.
+}
+\answer{%
+    \begin{align*}
+    \ele &= B_\bot v \ell, B_\bot = B\cos \alpha, \eli = \frac{\ele}R, \\
+    F_A &= \eli B \ell = \frac{\ele}R B \ell, \\
+    F_A \cos \alpha &= mg \sin \alpha \implies \frac{\ele}R B \ell \cos \alpha = mg \sin \alpha \\
+    &\frac{B \cos \alpha \cdot v \ell}R B \ell \cos \alpha = mg \sin \alpha\implies \frac{B^2 \cos^2 \alpha  \cdot v \ell^2}R = mg \sin \alpha, \\
+    B &= \sqrt{\frac{mg R \sin \alpha}{v \ell^2 \cos^2 \alpha}} = \sqrt{\frac{100\,\text{г} \cdot 10\,\frac{\text{м}}{\text{с}^{2}} \cdot 12\,\text{Ом} \cdot \sin 10\degrees}{12\,\frac{\text{м}}{\text{с}} \cdot \sqr{60\,\text{см}} \cdot \cos^2 10\degrees}}\approx 0{,}71\,\text{Тл}, \\
+    \eli &= \frac{\ele}R= \frac{B_\bot v \ell}R = \frac {v \ell \cos \alpha}R \sqrt{\frac{mg R \sin \alpha}{v \ell^2 \cos \alpha}}=\sqrt{\frac{mg v \sin \alpha}{R}}=\sqrt{\frac{100\,\text{г} \cdot 10\,\frac{\text{м}}{\text{с}^{2}} \cdot 12\,\frac{\text{м}}{\text{с}} \cdot \sin 10\degrees}{12\,\text{Ом}}} \approx 0{,}42\,\text{А}.
+    \end{align*}
+}
+
+\variantsplitter
+
+\addpersonalvariant{Ирина Ан}
+
+\tasknumber{1}%
+\task{%
+    При изменении силы тока в проводнике по закону $\eli = 2 + 0{,}8t$ (в системе СИ),
+    в нём возникает ЭДС самоиндукции $400\,\text{мВ}$.
+    Чему равна индуктивность проводника?
+    Ответ выразите в миллигенри и округлите до целого.
+}
+\answer{%
+    $
+        \ele = L\frac{\abs{\Delta \eli}}{\Delta t} = L \cdot \abs{ + 0{,}8 } \text{(в СИ)}
+        \implies L = \frac{\ele}{ 0{,}8 } = \frac{400\,\text{мВ}}{ 0{,}8 } \approx {500{,}0\,\text{мГн}}
+    $
+}
+\solutionspace{80pt}
+
+\tasknumber{2}%
+\task{%
+    Прямолинейный проводник длиной $\ell$ перемещают в однородном магнитном поле с индукцией $B$.
+    Проводник, вектор его скорости и вектор индукции поля взаимно перпендикулярны.
+    Определите зависимость ускорения от времени, если разность потенциалов на концах проводника
+    изменяется по закону $\Delta \varphi = kt^4$.
+}
+\answer{%
+    $
+        \Delta \varphi = Bv\ell = kt^4 \implies v = \frac{kt^4}{B\ell} \implies a(t) = \frac{v(t)}{t} = \frac{kt^3}{B\ell}
+    $
+}
+\solutionspace{80pt}
+
+\tasknumber{3}%
+\task{%
+    Плоская прямоугольная рамка со сторонами $20\,\text{см}$ и $50\,\text{см}$ находится в однородном вертикальном магнитном поле
+    с индукцией $120\,\text{мТл}$.
+    Сопротивление рамки $8\,\text{Ом}$.
+    Вектор магнитной индукции перпендикулярен плоскости рамки.
+    Рамку повернули на $60\degrees$ вокруг одной из её горизонтальных сторон.
+    Какой заряд протёк по рамке?
+    Ответ выразите в микрокулонах и округлите до целого.
+}
+\answer{%
+    \begin{align*}
+    \ele_i &= - \frac{\Delta \Phi_i}{\Delta t}, \eli_i = \frac{\ele_i}{R}, \Delta q_i = \eli_i\Delta t\implies \Delta q_i = \frac{\ele_i}{R} \cdot \Delta t = - \frac 1{R} \frac{\Delta \Phi_i}{\Delta t} \cdot \Delta t= - \frac{\Delta \Phi_i}{R} \implies \\
+    \implies \Delta q &= q_2 - q_1 = \sum_i \Delta q_i = \sum_i \cbr{ - \frac{\Delta \Phi_i}{R}} = -\frac 1{R} \sum_i \Delta \Phi_i = -\frac{\Phi_2 - \Phi_1}{R}.
+    \\
+    q &= \abs{\Delta q} = \frac {\abs{\Phi_2 - \Phi_1}}{R}= \frac {\abs{BS \cos \varphi_2 - BS \cos \varphi_1}}{R}= \frac {B S}{R}\abs{\cos \varphi_2 - \cos \varphi_1}= \frac {B a b}{R}\abs{\cos \varphi_2 - \cos \varphi_1}, \\
+    \varphi_1 &= 0\degrees, \varphi_2 = 60\degrees, \\
+    q&= \frac {120\,\text{мТл} \cdot 20\,\text{см} \cdot 50\,\text{см}}{8\,\text{Ом}}\abs{\cos 60\degrees - \cos 0\degrees} \approx 750{,}00\,\text{мкКл} \to 750.
+    \end{align*}
+}
+\solutionspace{120pt}
+
+\tasknumber{4}%
+\task{%
+    Резистор сопротивлением $R = 3\,\text{Ом}$ и катушка индуктивностью $L = 0{,}5\,\text{Гн}$ (и пренебрежимо малым сопротивлением)
+    подключены параллельно к источнику тока с ЭДС $\ele = 8\,\text{В}$ и внутренним сопротивлением $r = 1\,\text{Ом}$ (см.
+    рис.
+    на доске).
+    Какое количество теплоты выделится в цепи после размыкания ключа $K$?
+}
+\answer{%
+    \begin{align*}
+    &\text{закон Ома для полной цепи}: \eli = \frac{\ele}{r + R_\text{внешнее}} = \frac{\ele}{r + \frac{R \cdot 0}{R + 0}} = \frac{\ele}{r}, \\
+    Q &= W_m = \frac{L\eli^2}2 = \frac{L\sqr{\frac{\ele}{r}}}2 = \frac L2\frac{\ele^2}{r^2} = \frac{0{,}5\,\text{Гн}}2 \cdot \sqr{\frac{8\,\text{В}}{1\,\text{Ом}}} \approx 16{,}00\,\text{Дж}.
+    \end{align*}
+}
+\solutionspace{150pt}
+
+\tasknumber{5}%
+\task{%
+    По параллельным рельсам, расположенным под углом $20\degrees$ к горизонтали,
+    соскальзывает проводник массой $50\,\text{г}$: без трения и с постоянной скоростью $12\,\frac{\text{м}}{\text{с}}$ .
+    Рельсы замнуты резистором сопротивлением $5\,\text{Ом}$.
+    Вся система находитится в однородном вертикальном магнитном поле (см.
+    рис.
+    на доске).
+    Определите индукцию магнитного поля и ток, протекающий в проводнике.
+    Сопротивлением проводника, рельс и соединительных проводов пренебречь, ускорение свободного падения принять равным $g = 10\,\frac{\text{м}}{\text{с}^{2}}$.
+}
+\answer{%
+    \begin{align*}
+    \ele &= B_\bot v \ell, B_\bot = B\cos \alpha, \eli = \frac{\ele}R, \\
+    F_A &= \eli B \ell = \frac{\ele}R B \ell, \\
+    F_A \cos \alpha &= mg \sin \alpha \implies \frac{\ele}R B \ell \cos \alpha = mg \sin \alpha \\
+    &\frac{B \cos \alpha \cdot v \ell}R B \ell \cos \alpha = mg \sin \alpha\implies \frac{B^2 \cos^2 \alpha  \cdot v \ell^2}R = mg \sin \alpha, \\
+    B &= \sqrt{\frac{mg R \sin \alpha}{v \ell^2 \cos^2 \alpha}} = \sqrt{\frac{50\,\text{г} \cdot 10\,\frac{\text{м}}{\text{с}^{2}} \cdot 5\,\text{Ом} \cdot \sin 20\degrees}{12\,\frac{\text{м}}{\text{с}} \cdot \sqr{20\,\text{см}} \cdot \cos^2 20\degrees}}\approx 1{,}42\,\text{Тл}, \\
+    \eli &= \frac{\ele}R= \frac{B_\bot v \ell}R = \frac {v \ell \cos \alpha}R \sqrt{\frac{mg R \sin \alpha}{v \ell^2 \cos \alpha}}=\sqrt{\frac{mg v \sin \alpha}{R}}=\sqrt{\frac{50\,\text{г} \cdot 10\,\frac{\text{м}}{\text{с}^{2}} \cdot 12\,\frac{\text{м}}{\text{с}} \cdot \sin 20\degrees}{5\,\text{Ом}}} \approx 0{,}64\,\text{А}.
+    \end{align*}
+}
+
+\variantsplitter
+
+\addpersonalvariant{Софья Андрианова}
+
+\tasknumber{1}%
+\task{%
+    При изменении силы тока в проводнике по закону $\eli = 3 - 0{,}8t$ (в системе СИ),
+    в нём возникает ЭДС самоиндукции $300\,\text{мВ}$.
+    Чему равна индуктивность проводника?
+    Ответ выразите в миллигенри и округлите до целого.
+}
+\answer{%
+    $
+        \ele = L\frac{\abs{\Delta \eli}}{\Delta t} = L \cdot \abs{ - 0{,}8 } \text{(в СИ)}
+        \implies L = \frac{\ele}{ 0{,}8 } = \frac{300\,\text{мВ}}{ 0{,}8 } \approx {375{,}0\,\text{мГн}}
+    $
+}
+\solutionspace{80pt}
+
+\tasknumber{2}%
+\task{%
+    Прямолинейный проводник длиной $\ell$ перемещают в однородном магнитном поле с индукцией $B$.
+    Проводник, вектор его скорости и вектор индукции поля взаимно перпендикулярны.
+    Определите зависимость ускорения от времени, если разность потенциалов на концах проводника
+    изменяется по закону $\Delta \varphi = kt^3$.
+}
+\answer{%
+    $
+        \Delta \varphi = Bv\ell = kt^3 \implies v = \frac{kt^3}{B\ell} \implies a(t) = \frac{v(t)}{t} = \frac{kt^2}{B\ell}
+    $
+}
+\solutionspace{80pt}
+
+\tasknumber{3}%
+\task{%
+    Плоская прямоугольная рамка со сторонами $30\,\text{см}$ и $50\,\text{см}$ находится в однородном вертикальном магнитном поле
+    с индукцией $200\,\text{мТл}$.
+    Сопротивление рамки $12\,\text{Ом}$.
+    Вектор магнитной индукции перпендикулярен плоскости рамки.
+    Рамку повернули на $30\degrees$ вокруг одной из её горизонтальных сторон.
+    Какой заряд протёк по рамке?
+    Ответ выразите в микрокулонах и округлите до целого.
+}
+\answer{%
+    \begin{align*}
+    \ele_i &= - \frac{\Delta \Phi_i}{\Delta t}, \eli_i = \frac{\ele_i}{R}, \Delta q_i = \eli_i\Delta t\implies \Delta q_i = \frac{\ele_i}{R} \cdot \Delta t = - \frac 1{R} \frac{\Delta \Phi_i}{\Delta t} \cdot \Delta t= - \frac{\Delta \Phi_i}{R} \implies \\
+    \implies \Delta q &= q_2 - q_1 = \sum_i \Delta q_i = \sum_i \cbr{ - \frac{\Delta \Phi_i}{R}} = -\frac 1{R} \sum_i \Delta \Phi_i = -\frac{\Phi_2 - \Phi_1}{R}.
+    \\
+    q &= \abs{\Delta q} = \frac {\abs{\Phi_2 - \Phi_1}}{R}= \frac {\abs{BS \cos \varphi_2 - BS \cos \varphi_1}}{R}= \frac {B S}{R}\abs{\cos \varphi_2 - \cos \varphi_1}= \frac {B a b}{R}\abs{\cos \varphi_2 - \cos \varphi_1}, \\
+    \varphi_1 &= 0\degrees, \varphi_2 = 30\degrees, \\
+    q&= \frac {200\,\text{мТл} \cdot 30\,\text{см} \cdot 50\,\text{см}}{12\,\text{Ом}}\abs{\cos 30\degrees - \cos 0\degrees} \approx 334{,}94\,\text{мкКл} \to 335.
+    \end{align*}
+}
+\solutionspace{120pt}
+
+\tasknumber{4}%
+\task{%
+    Резистор сопротивлением $R = 5\,\text{Ом}$ и катушка индуктивностью $L = 0{,}5\,\text{Гн}$ (и пренебрежимо малым сопротивлением)
+    подключены параллельно к источнику тока с ЭДС $\ele = 8\,\text{В}$ и внутренним сопротивлением $r = 1\,\text{Ом}$ (см.
+    рис.
+    на доске).
+    Какое количество теплоты выделится в цепи после размыкания ключа $K$?
+}
+\answer{%
+    \begin{align*}
+    &\text{закон Ома для полной цепи}: \eli = \frac{\ele}{r + R_\text{внешнее}} = \frac{\ele}{r + \frac{R \cdot 0}{R + 0}} = \frac{\ele}{r}, \\
+    Q &= W_m = \frac{L\eli^2}2 = \frac{L\sqr{\frac{\ele}{r}}}2 = \frac L2\frac{\ele^2}{r^2} = \frac{0{,}5\,\text{Гн}}2 \cdot \sqr{\frac{8\,\text{В}}{1\,\text{Ом}}} \approx 16{,}00\,\text{Дж}.
+    \end{align*}
+}
+\solutionspace{150pt}
+
+\tasknumber{5}%
+\task{%
+    По параллельным рельсам, расположенным под углом $25\degrees$ к горизонтали,
+    соскальзывает проводник массой $100\,\text{г}$: без трения и с постоянной скоростью $15\,\frac{\text{м}}{\text{с}}$ .
+    Рельсы замнуты резистором сопротивлением $5\,\text{Ом}$.
+    Вся система находитится в однородном вертикальном магнитном поле (см.
+    рис.
+    на доске).
+    Определите индукцию магнитного поля и ток, протекающий в проводнике.
+    Сопротивлением проводника, рельс и соединительных проводов пренебречь, ускорение свободного падения принять равным $g = 10\,\frac{\text{м}}{\text{с}^{2}}$.
+}
+\answer{%
+    \begin{align*}
+    \ele &= B_\bot v \ell, B_\bot = B\cos \alpha, \eli = \frac{\ele}R, \\
+    F_A &= \eli B \ell = \frac{\ele}R B \ell, \\
+    F_A \cos \alpha &= mg \sin \alpha \implies \frac{\ele}R B \ell \cos \alpha = mg \sin \alpha \\
+    &\frac{B \cos \alpha \cdot v \ell}R B \ell \cos \alpha = mg \sin \alpha\implies \frac{B^2 \cos^2 \alpha  \cdot v \ell^2}R = mg \sin \alpha, \\
+    B &= \sqrt{\frac{mg R \sin \alpha}{v \ell^2 \cos^2 \alpha}} = \sqrt{\frac{100\,\text{г} \cdot 10\,\frac{\text{м}}{\text{с}^{2}} \cdot 5\,\text{Ом} \cdot \sin 25\degrees}{15\,\frac{\text{м}}{\text{с}} \cdot \sqr{20\,\text{см}} \cdot \cos^2 25\degrees}}\approx 2{,}07\,\text{Тл}, \\
+    \eli &= \frac{\ele}R= \frac{B_\bot v \ell}R = \frac {v \ell \cos \alpha}R \sqrt{\frac{mg R \sin \alpha}{v \ell^2 \cos \alpha}}=\sqrt{\frac{mg v \sin \alpha}{R}}=\sqrt{\frac{100\,\text{г} \cdot 10\,\frac{\text{м}}{\text{с}^{2}} \cdot 15\,\frac{\text{м}}{\text{с}} \cdot \sin 25\degrees}{5\,\text{Ом}}} \approx 1{,}13\,\text{А}.
+    \end{align*}
+}
+
+\variantsplitter
+
+\addpersonalvariant{Владимир Артемчук}
+
+\tasknumber{1}%
+\task{%
+    При изменении силы тока в проводнике по закону $\eli = 2 - 0{,}8t$ (в системе СИ),
+    в нём возникает ЭДС самоиндукции $200\,\text{мВ}$.
+    Чему равна индуктивность проводника?
+    Ответ выразите в миллигенри и округлите до целого.
+}
+\answer{%
+    $
+        \ele = L\frac{\abs{\Delta \eli}}{\Delta t} = L \cdot \abs{ - 0{,}8 } \text{(в СИ)}
+        \implies L = \frac{\ele}{ 0{,}8 } = \frac{200\,\text{мВ}}{ 0{,}8 } \approx {250{,}0\,\text{мГн}}
+    $
+}
+\solutionspace{80pt}
+
+\tasknumber{2}%
+\task{%
+    Прямолинейный проводник длиной $\ell$ перемещают в однородном магнитном поле с индукцией $B$.
+    Проводник, вектор его скорости и вектор индукции поля взаимно перпендикулярны.
+    Определите зависимость ускорения от времени, если разность потенциалов на концах проводника
+    изменяется по закону $\Delta \varphi = kt^2$.
+}
+\answer{%
+    $
+        \Delta \varphi = Bv\ell = kt^2 \implies v = \frac{kt^2}{B\ell} \implies a(t) = \frac{v(t)}{t} = \frac{kt^{}}{B\ell}
+    $
+}
+\solutionspace{80pt}
+
+\tasknumber{3}%
+\task{%
+    Плоская прямоугольная рамка со сторонами $40\,\text{см}$ и $50\,\text{см}$ находится в однородном вертикальном магнитном поле
+    с индукцией $120\,\text{мТл}$.
+    Сопротивление рамки $8\,\text{Ом}$.
+    Вектор магнитной индукции перпендикулярен плоскости рамки.
+    Рамку повернули на $60\degrees$ вокруг одной из её горизонтальных сторон.
+    Какой заряд протёк по рамке?
+    Ответ выразите в микрокулонах и округлите до целого.
+}
+\answer{%
+    \begin{align*}
+    \ele_i &= - \frac{\Delta \Phi_i}{\Delta t}, \eli_i = \frac{\ele_i}{R}, \Delta q_i = \eli_i\Delta t\implies \Delta q_i = \frac{\ele_i}{R} \cdot \Delta t = - \frac 1{R} \frac{\Delta \Phi_i}{\Delta t} \cdot \Delta t= - \frac{\Delta \Phi_i}{R} \implies \\
+    \implies \Delta q &= q_2 - q_1 = \sum_i \Delta q_i = \sum_i \cbr{ - \frac{\Delta \Phi_i}{R}} = -\frac 1{R} \sum_i \Delta \Phi_i = -\frac{\Phi_2 - \Phi_1}{R}.
+    \\
+    q &= \abs{\Delta q} = \frac {\abs{\Phi_2 - \Phi_1}}{R}= \frac {\abs{BS \cos \varphi_2 - BS \cos \varphi_1}}{R}= \frac {B S}{R}\abs{\cos \varphi_2 - \cos \varphi_1}= \frac {B a b}{R}\abs{\cos \varphi_2 - \cos \varphi_1}, \\
+    \varphi_1 &= 0\degrees, \varphi_2 = 60\degrees, \\
+    q&= \frac {120\,\text{мТл} \cdot 40\,\text{см} \cdot 50\,\text{см}}{8\,\text{Ом}}\abs{\cos 60\degrees - \cos 0\degrees} \approx 1500{,}00\,\text{мкКл} \to 1500.
+    \end{align*}
+}
+\solutionspace{120pt}
+
+\tasknumber{4}%
+\task{%
+    Резистор сопротивлением $R = 5\,\text{Ом}$ и катушка индуктивностью $L = 0{,}2\,\text{Гн}$ (и пренебрежимо малым сопротивлением)
+    подключены параллельно к источнику тока с ЭДС $\ele = 12\,\text{В}$ и внутренним сопротивлением $r = 2\,\text{Ом}$ (см.
+    рис.
+    на доске).
+    Какое количество теплоты выделится в цепи после размыкания ключа $K$?
+}
+\answer{%
+    \begin{align*}
+    &\text{закон Ома для полной цепи}: \eli = \frac{\ele}{r + R_\text{внешнее}} = \frac{\ele}{r + \frac{R \cdot 0}{R + 0}} = \frac{\ele}{r}, \\
+    Q &= W_m = \frac{L\eli^2}2 = \frac{L\sqr{\frac{\ele}{r}}}2 = \frac L2\frac{\ele^2}{r^2} = \frac{0{,}2\,\text{Гн}}2 \cdot \sqr{\frac{12\,\text{В}}{2\,\text{Ом}}} \approx 3{,}60\,\text{Дж}.
+    \end{align*}
+}
+\solutionspace{150pt}
+
+\tasknumber{5}%
+\task{%
+    По параллельным рельсам, расположенным под углом $15\degrees$ к горизонтали,
+    соскальзывает проводник массой $150\,\text{г}$: без трения и с постоянной скоростью $12\,\frac{\text{м}}{\text{с}}$ .
+    Рельсы замнуты резистором сопротивлением $5\,\text{Ом}$.
+    Вся система находитится в однородном вертикальном магнитном поле (см.
+    рис.
+    на доске).
+    Определите индукцию магнитного поля и ток, протекающий в проводнике.
+    Сопротивлением проводника, рельс и соединительных проводов пренебречь, ускорение свободного падения принять равным $g = 10\,\frac{\text{м}}{\text{с}^{2}}$.
+}
+\answer{%
+    \begin{align*}
+    \ele &= B_\bot v \ell, B_\bot = B\cos \alpha, \eli = \frac{\ele}R, \\
+    F_A &= \eli B \ell = \frac{\ele}R B \ell, \\
+    F_A \cos \alpha &= mg \sin \alpha \implies \frac{\ele}R B \ell \cos \alpha = mg \sin \alpha \\
+    &\frac{B \cos \alpha \cdot v \ell}R B \ell \cos \alpha = mg \sin \alpha\implies \frac{B^2 \cos^2 \alpha  \cdot v \ell^2}R = mg \sin \alpha, \\
+    B &= \sqrt{\frac{mg R \sin \alpha}{v \ell^2 \cos^2 \alpha}} = \sqrt{\frac{150\,\text{г} \cdot 10\,\frac{\text{м}}{\text{с}^{2}} \cdot 5\,\text{Ом} \cdot \sin 15\degrees}{12\,\frac{\text{м}}{\text{с}} \cdot \sqr{20\,\text{см}} \cdot \cos^2 15\degrees}}\approx 2{,}08\,\text{Тл}, \\
+    \eli &= \frac{\ele}R= \frac{B_\bot v \ell}R = \frac {v \ell \cos \alpha}R \sqrt{\frac{mg R \sin \alpha}{v \ell^2 \cos \alpha}}=\sqrt{\frac{mg v \sin \alpha}{R}}=\sqrt{\frac{150\,\text{г} \cdot 10\,\frac{\text{м}}{\text{с}^{2}} \cdot 12\,\frac{\text{м}}{\text{с}} \cdot \sin 15\degrees}{5\,\text{Ом}}} \approx 0{,}97\,\text{А}.
+    \end{align*}
+}
+
+\variantsplitter
+
+\addpersonalvariant{Софья Белянкина}
+
+\tasknumber{1}%
+\task{%
+    При изменении силы тока в проводнике по закону $\eli = 4 + 0{,}5t$ (в системе СИ),
+    в нём возникает ЭДС самоиндукции $400\,\text{мВ}$.
+    Чему равна индуктивность проводника?
+    Ответ выразите в миллигенри и округлите до целого.
+}
+\answer{%
+    $
+        \ele = L\frac{\abs{\Delta \eli}}{\Delta t} = L \cdot \abs{ + 0{,}5 } \text{(в СИ)}
+        \implies L = \frac{\ele}{ 0{,}5 } = \frac{400\,\text{мВ}}{ 0{,}5 } \approx {800{,}0\,\text{мГн}}
+    $
+}
+\solutionspace{80pt}
+
+\tasknumber{2}%
+\task{%
+    Прямолинейный проводник длиной $\ell$ перемещают в однородном магнитном поле с индукцией $B$.
+    Проводник, вектор его скорости и вектор индукции поля взаимно перпендикулярны.
+    Определите зависимость ускорения от времени, если разность потенциалов на концах проводника
+    изменяется по закону $\Delta \varphi = kt^4$.
+}
+\answer{%
+    $
+        \Delta \varphi = Bv\ell = kt^4 \implies v = \frac{kt^4}{B\ell} \implies a(t) = \frac{v(t)}{t} = \frac{kt^3}{B\ell}
+    $
+}
+\solutionspace{80pt}
+
+\tasknumber{3}%
+\task{%
+    Плоская прямоугольная рамка со сторонами $40\,\text{см}$ и $60\,\text{см}$ находится в однородном вертикальном магнитном поле
+    с индукцией $120\,\text{мТл}$.
+    Сопротивление рамки $8\,\text{Ом}$.
+    Вектор магнитной индукции параллелен плоскости рамки.
+    Рамку повернули на $60\degrees$ вокруг одной из её горизонтальных сторон.
+    Какой заряд протёк по рамке?
+    Ответ выразите в микрокулонах и округлите до целого.
+}
+\answer{%
+    \begin{align*}
+    \ele_i &= - \frac{\Delta \Phi_i}{\Delta t}, \eli_i = \frac{\ele_i}{R}, \Delta q_i = \eli_i\Delta t\implies \Delta q_i = \frac{\ele_i}{R} \cdot \Delta t = - \frac 1{R} \frac{\Delta \Phi_i}{\Delta t} \cdot \Delta t= - \frac{\Delta \Phi_i}{R} \implies \\
+    \implies \Delta q &= q_2 - q_1 = \sum_i \Delta q_i = \sum_i \cbr{ - \frac{\Delta \Phi_i}{R}} = -\frac 1{R} \sum_i \Delta \Phi_i = -\frac{\Phi_2 - \Phi_1}{R}.
+    \\
+    q &= \abs{\Delta q} = \frac {\abs{\Phi_2 - \Phi_1}}{R}= \frac {\abs{BS \cos \varphi_2 - BS \cos \varphi_1}}{R}= \frac {B S}{R}\abs{\cos \varphi_2 - \cos \varphi_1}= \frac {B a b}{R}\abs{\cos \varphi_2 - \cos \varphi_1}, \\
+    \varphi_1 &= 90\degrees, \varphi_2 = 30\degrees, \\
+    q&= \frac {120\,\text{мТл} \cdot 40\,\text{см} \cdot 60\,\text{см}}{8\,\text{Ом}}\abs{\cos 30\degrees - \cos 90\degrees} \approx 3117{,}69\,\text{мкКл} \to 3118.
+    \end{align*}
+}
+\solutionspace{120pt}
+
+\tasknumber{4}%
+\task{%
+    Резистор сопротивлением $R = 3\,\text{Ом}$ и катушка индуктивностью $L = 0{,}5\,\text{Гн}$ (и пренебрежимо малым сопротивлением)
+    подключены параллельно к источнику тока с ЭДС $\ele = 12\,\text{В}$ и внутренним сопротивлением $r = 1\,\text{Ом}$ (см.
+    рис.
+    на доске).
+    Какое количество теплоты выделится в цепи после размыкания ключа $K$?
+}
+\answer{%
+    \begin{align*}
+    &\text{закон Ома для полной цепи}: \eli = \frac{\ele}{r + R_\text{внешнее}} = \frac{\ele}{r + \frac{R \cdot 0}{R + 0}} = \frac{\ele}{r}, \\
+    Q &= W_m = \frac{L\eli^2}2 = \frac{L\sqr{\frac{\ele}{r}}}2 = \frac L2\frac{\ele^2}{r^2} = \frac{0{,}5\,\text{Гн}}2 \cdot \sqr{\frac{12\,\text{В}}{1\,\text{Ом}}} \approx 36{,}00\,\text{Дж}.
+    \end{align*}
+}
+\solutionspace{150pt}
+
+\tasknumber{5}%
+\task{%
+    По параллельным рельсам, расположенным под углом $20\degrees$ к горизонтали,
+    соскальзывает проводник массой $150\,\text{г}$: без трения и с постоянной скоростью $15\,\frac{\text{м}}{\text{с}}$ .
+    Рельсы замнуты резистором сопротивлением $12\,\text{Ом}$.
+    Вся система находитится в однородном вертикальном магнитном поле (см.
+    рис.
+    на доске).
+    Определите индукцию магнитного поля и ток, протекающий в проводнике.
+    Сопротивлением проводника, рельс и соединительных проводов пренебречь, ускорение свободного падения принять равным $g = 10\,\frac{\text{м}}{\text{с}^{2}}$.
+}
+\answer{%
+    \begin{align*}
+    \ele &= B_\bot v \ell, B_\bot = B\cos \alpha, \eli = \frac{\ele}R, \\
+    F_A &= \eli B \ell = \frac{\ele}R B \ell, \\
+    F_A \cos \alpha &= mg \sin \alpha \implies \frac{\ele}R B \ell \cos \alpha = mg \sin \alpha \\
+    &\frac{B \cos \alpha \cdot v \ell}R B \ell \cos \alpha = mg \sin \alpha\implies \frac{B^2 \cos^2 \alpha  \cdot v \ell^2}R = mg \sin \alpha, \\
+    B &= \sqrt{\frac{mg R \sin \alpha}{v \ell^2 \cos^2 \alpha}} = \sqrt{\frac{150\,\text{г} \cdot 10\,\frac{\text{м}}{\text{с}^{2}} \cdot 12\,\text{Ом} \cdot \sin 20\degrees}{15\,\frac{\text{м}}{\text{с}} \cdot \sqr{20\,\text{см}} \cdot \cos^2 20\degrees}}\approx 3{,}41\,\text{Тл}, \\
+    \eli &= \frac{\ele}R= \frac{B_\bot v \ell}R = \frac {v \ell \cos \alpha}R \sqrt{\frac{mg R \sin \alpha}{v \ell^2 \cos \alpha}}=\sqrt{\frac{mg v \sin \alpha}{R}}=\sqrt{\frac{150\,\text{г} \cdot 10\,\frac{\text{м}}{\text{с}^{2}} \cdot 15\,\frac{\text{м}}{\text{с}} \cdot \sin 20\degrees}{12\,\text{Ом}}} \approx 0{,}80\,\text{А}.
+    \end{align*}
+}
+
+\variantsplitter
+
+\addpersonalvariant{Варвара Егиазарян}
+
+\tasknumber{1}%
+\task{%
+    При изменении силы тока в проводнике по закону $\eli = 5 - 0{,}4t$ (в системе СИ),
+    в нём возникает ЭДС самоиндукции $150\,\text{мВ}$.
+    Чему равна индуктивность проводника?
+    Ответ выразите в миллигенри и округлите до целого.
+}
+\answer{%
+    $
+        \ele = L\frac{\abs{\Delta \eli}}{\Delta t} = L \cdot \abs{ - 0{,}4 } \text{(в СИ)}
+        \implies L = \frac{\ele}{ 0{,}4 } = \frac{150\,\text{мВ}}{ 0{,}4 } \approx {375{,}0\,\text{мГн}}
+    $
+}
+\solutionspace{80pt}
+
+\tasknumber{2}%
+\task{%
+    Прямолинейный проводник длиной $\ell$ перемещают в однородном магнитном поле с индукцией $B$.
+    Проводник, вектор его скорости и вектор индукции поля взаимно перпендикулярны.
+    Определите зависимость ускорения от времени, если разность потенциалов на концах проводника
+    изменяется по закону $\Delta \varphi = kt^4$.
+}
+\answer{%
+    $
+        \Delta \varphi = Bv\ell = kt^4 \implies v = \frac{kt^4}{B\ell} \implies a(t) = \frac{v(t)}{t} = \frac{kt^3}{B\ell}
+    $
+}
+\solutionspace{80pt}
+
+\tasknumber{3}%
+\task{%
+    Плоская прямоугольная рамка со сторонами $40\,\text{см}$ и $50\,\text{см}$ находится в однородном вертикальном магнитном поле
+    с индукцией $120\,\text{мТл}$.
+    Сопротивление рамки $8\,\text{Ом}$.
+    Вектор магнитной индукции перпендикулярен плоскости рамки.
+    Рамку повернули на $30\degrees$ вокруг одной из её горизонтальных сторон.
+    Какой заряд протёк по рамке?
+    Ответ выразите в микрокулонах и округлите до целого.
+}
+\answer{%
+    \begin{align*}
+    \ele_i &= - \frac{\Delta \Phi_i}{\Delta t}, \eli_i = \frac{\ele_i}{R}, \Delta q_i = \eli_i\Delta t\implies \Delta q_i = \frac{\ele_i}{R} \cdot \Delta t = - \frac 1{R} \frac{\Delta \Phi_i}{\Delta t} \cdot \Delta t= - \frac{\Delta \Phi_i}{R} \implies \\
+    \implies \Delta q &= q_2 - q_1 = \sum_i \Delta q_i = \sum_i \cbr{ - \frac{\Delta \Phi_i}{R}} = -\frac 1{R} \sum_i \Delta \Phi_i = -\frac{\Phi_2 - \Phi_1}{R}.
+    \\
+    q &= \abs{\Delta q} = \frac {\abs{\Phi_2 - \Phi_1}}{R}= \frac {\abs{BS \cos \varphi_2 - BS \cos \varphi_1}}{R}= \frac {B S}{R}\abs{\cos \varphi_2 - \cos \varphi_1}= \frac {B a b}{R}\abs{\cos \varphi_2 - \cos \varphi_1}, \\
+    \varphi_1 &= 0\degrees, \varphi_2 = 30\degrees, \\
+    q&= \frac {120\,\text{мТл} \cdot 40\,\text{см} \cdot 50\,\text{см}}{8\,\text{Ом}}\abs{\cos 30\degrees - \cos 0\degrees} \approx 401{,}92\,\text{мкКл} \to 402.
+    \end{align*}
+}
+\solutionspace{120pt}
+
+\tasknumber{4}%
+\task{%
+    Резистор сопротивлением $R = 4\,\text{Ом}$ и катушка индуктивностью $L = 0{,}2\,\text{Гн}$ (и пренебрежимо малым сопротивлением)
+    подключены параллельно к источнику тока с ЭДС $\ele = 12\,\text{В}$ и внутренним сопротивлением $r = 1\,\text{Ом}$ (см.
+    рис.
+    на доске).
+    Какое количество теплоты выделится в цепи после размыкания ключа $K$?
+}
+\answer{%
+    \begin{align*}
+    &\text{закон Ома для полной цепи}: \eli = \frac{\ele}{r + R_\text{внешнее}} = \frac{\ele}{r + \frac{R \cdot 0}{R + 0}} = \frac{\ele}{r}, \\
+    Q &= W_m = \frac{L\eli^2}2 = \frac{L\sqr{\frac{\ele}{r}}}2 = \frac L2\frac{\ele^2}{r^2} = \frac{0{,}2\,\text{Гн}}2 \cdot \sqr{\frac{12\,\text{В}}{1\,\text{Ом}}} \approx 14{,}40\,\text{Дж}.
+    \end{align*}
+}
+\solutionspace{150pt}
+
+\tasknumber{5}%
+\task{%
+    По параллельным рельсам, расположенным под углом $15\degrees$ к горизонтали,
+    соскальзывает проводник массой $50\,\text{г}$: без трения и с постоянной скоростью $12\,\frac{\text{м}}{\text{с}}$ .
+    Рельсы замнуты резистором сопротивлением $8\,\text{Ом}$.
+    Вся система находитится в однородном вертикальном магнитном поле (см.
+    рис.
+    на доске).
+    Определите индукцию магнитного поля и ток, протекающий в проводнике.
+    Сопротивлением проводника, рельс и соединительных проводов пренебречь, ускорение свободного падения принять равным $g = 10\,\frac{\text{м}}{\text{с}^{2}}$.
+}
+\answer{%
+    \begin{align*}
+    \ele &= B_\bot v \ell, B_\bot = B\cos \alpha, \eli = \frac{\ele}R, \\
+    F_A &= \eli B \ell = \frac{\ele}R B \ell, \\
+    F_A \cos \alpha &= mg \sin \alpha \implies \frac{\ele}R B \ell \cos \alpha = mg \sin \alpha \\
+    &\frac{B \cos \alpha \cdot v \ell}R B \ell \cos \alpha = mg \sin \alpha\implies \frac{B^2 \cos^2 \alpha  \cdot v \ell^2}R = mg \sin \alpha, \\
+    B &= \sqrt{\frac{mg R \sin \alpha}{v \ell^2 \cos^2 \alpha}} = \sqrt{\frac{50\,\text{г} \cdot 10\,\frac{\text{м}}{\text{с}^{2}} \cdot 8\,\text{Ом} \cdot \sin 15\degrees}{12\,\frac{\text{м}}{\text{с}} \cdot \sqr{20\,\text{см}} \cdot \cos^2 15\degrees}}\approx 1{,}52\,\text{Тл}, \\
+    \eli &= \frac{\ele}R= \frac{B_\bot v \ell}R = \frac {v \ell \cos \alpha}R \sqrt{\frac{mg R \sin \alpha}{v \ell^2 \cos \alpha}}=\sqrt{\frac{mg v \sin \alpha}{R}}=\sqrt{\frac{50\,\text{г} \cdot 10\,\frac{\text{м}}{\text{с}^{2}} \cdot 12\,\frac{\text{м}}{\text{с}} \cdot \sin 15\degrees}{8\,\text{Ом}}} \approx 0{,}44\,\text{А}.
+    \end{align*}
+}
+
+\variantsplitter
+
+\addpersonalvariant{Владислав Емелин}
+
+\tasknumber{1}%
+\task{%
+    При изменении силы тока в проводнике по закону $\eli = 6 - 0{,}8t$ (в системе СИ),
+    в нём возникает ЭДС самоиндукции $400\,\text{мВ}$.
+    Чему равна индуктивность проводника?
+    Ответ выразите в миллигенри и округлите до целого.
+}
+\answer{%
+    $
+        \ele = L\frac{\abs{\Delta \eli}}{\Delta t} = L \cdot \abs{ - 0{,}8 } \text{(в СИ)}
+        \implies L = \frac{\ele}{ 0{,}8 } = \frac{400\,\text{мВ}}{ 0{,}8 } \approx {500{,}0\,\text{мГн}}
+    $
+}
+\solutionspace{80pt}
+
+\tasknumber{2}%
+\task{%
+    Прямолинейный проводник длиной $\ell$ перемещают в однородном магнитном поле с индукцией $B$.
+    Проводник, вектор его скорости и вектор индукции поля взаимно перпендикулярны.
+    Определите зависимость ускорения от времени, если разность потенциалов на концах проводника
+    изменяется по закону $\Delta \varphi = kt^2$.
+}
+\answer{%
+    $
+        \Delta \varphi = Bv\ell = kt^2 \implies v = \frac{kt^2}{B\ell} \implies a(t) = \frac{v(t)}{t} = \frac{kt^{}}{B\ell}
+    $
+}
+\solutionspace{80pt}
+
+\tasknumber{3}%
+\task{%
+    Плоская прямоугольная рамка со сторонами $30\,\text{см}$ и $25\,\text{см}$ находится в однородном вертикальном магнитном поле
+    с индукцией $120\,\text{мТл}$.
+    Сопротивление рамки $15\,\text{Ом}$.
+    Вектор магнитной индукции перпендикулярен плоскости рамки.
+    Рамку повернули на $30\degrees$ вокруг одной из её горизонтальных сторон.
+    Какой заряд протёк по рамке?
+    Ответ выразите в микрокулонах и округлите до целого.
+}
+\answer{%
+    \begin{align*}
+    \ele_i &= - \frac{\Delta \Phi_i}{\Delta t}, \eli_i = \frac{\ele_i}{R}, \Delta q_i = \eli_i\Delta t\implies \Delta q_i = \frac{\ele_i}{R} \cdot \Delta t = - \frac 1{R} \frac{\Delta \Phi_i}{\Delta t} \cdot \Delta t= - \frac{\Delta \Phi_i}{R} \implies \\
+    \implies \Delta q &= q_2 - q_1 = \sum_i \Delta q_i = \sum_i \cbr{ - \frac{\Delta \Phi_i}{R}} = -\frac 1{R} \sum_i \Delta \Phi_i = -\frac{\Phi_2 - \Phi_1}{R}.
+    \\
+    q &= \abs{\Delta q} = \frac {\abs{\Phi_2 - \Phi_1}}{R}= \frac {\abs{BS \cos \varphi_2 - BS \cos \varphi_1}}{R}= \frac {B S}{R}\abs{\cos \varphi_2 - \cos \varphi_1}= \frac {B a b}{R}\abs{\cos \varphi_2 - \cos \varphi_1}, \\
+    \varphi_1 &= 0\degrees, \varphi_2 = 30\degrees, \\
+    q&= \frac {120\,\text{мТл} \cdot 30\,\text{см} \cdot 25\,\text{см}}{15\,\text{Ом}}\abs{\cos 30\degrees - \cos 0\degrees} \approx 80{,}38\,\text{мкКл} \to 80.
+    \end{align*}
+}
+\solutionspace{120pt}
+
+\tasknumber{4}%
+\task{%
+    Резистор сопротивлением $R = 5\,\text{Ом}$ и катушка индуктивностью $L = 0{,}4\,\text{Гн}$ (и пренебрежимо малым сопротивлением)
+    подключены параллельно к источнику тока с ЭДС $\ele = 6\,\text{В}$ и внутренним сопротивлением $r = 2\,\text{Ом}$ (см.
+    рис.
+    на доске).
+    Какое количество теплоты выделится в цепи после размыкания ключа $K$?
+}
+\answer{%
+    \begin{align*}
+    &\text{закон Ома для полной цепи}: \eli = \frac{\ele}{r + R_\text{внешнее}} = \frac{\ele}{r + \frac{R \cdot 0}{R + 0}} = \frac{\ele}{r}, \\
+    Q &= W_m = \frac{L\eli^2}2 = \frac{L\sqr{\frac{\ele}{r}}}2 = \frac L2\frac{\ele^2}{r^2} = \frac{0{,}4\,\text{Гн}}2 \cdot \sqr{\frac{6\,\text{В}}{2\,\text{Ом}}} \approx 1{,}80\,\text{Дж}.
+    \end{align*}
+}
+\solutionspace{150pt}
+
+\tasknumber{5}%
+\task{%
+    По параллельным рельсам, расположенным под углом $20\degrees$ к горизонтали,
+    соскальзывает проводник массой $50\,\text{г}$: без трения и с постоянной скоростью $15\,\frac{\text{м}}{\text{с}}$ .
+    Рельсы замнуты резистором сопротивлением $12\,\text{Ом}$.
+    Вся система находитится в однородном вертикальном магнитном поле (см.
+    рис.
+    на доске).
+    Определите индукцию магнитного поля и ток, протекающий в проводнике.
+    Сопротивлением проводника, рельс и соединительных проводов пренебречь, ускорение свободного падения принять равным $g = 10\,\frac{\text{м}}{\text{с}^{2}}$.
+}
+\answer{%
+    \begin{align*}
+    \ele &= B_\bot v \ell, B_\bot = B\cos \alpha, \eli = \frac{\ele}R, \\
+    F_A &= \eli B \ell = \frac{\ele}R B \ell, \\
+    F_A \cos \alpha &= mg \sin \alpha \implies \frac{\ele}R B \ell \cos \alpha = mg \sin \alpha \\
+    &\frac{B \cos \alpha \cdot v \ell}R B \ell \cos \alpha = mg \sin \alpha\implies \frac{B^2 \cos^2 \alpha  \cdot v \ell^2}R = mg \sin \alpha, \\
+    B &= \sqrt{\frac{mg R \sin \alpha}{v \ell^2 \cos^2 \alpha}} = \sqrt{\frac{50\,\text{г} \cdot 10\,\frac{\text{м}}{\text{с}^{2}} \cdot 12\,\text{Ом} \cdot \sin 20\degrees}{15\,\frac{\text{м}}{\text{с}} \cdot \sqr{40\,\text{см}} \cdot \cos^2 20\degrees}}\approx 0{,}98\,\text{Тл}, \\
+    \eli &= \frac{\ele}R= \frac{B_\bot v \ell}R = \frac {v \ell \cos \alpha}R \sqrt{\frac{mg R \sin \alpha}{v \ell^2 \cos \alpha}}=\sqrt{\frac{mg v \sin \alpha}{R}}=\sqrt{\frac{50\,\text{г} \cdot 10\,\frac{\text{м}}{\text{с}^{2}} \cdot 15\,\frac{\text{м}}{\text{с}} \cdot \sin 20\degrees}{12\,\text{Ом}}} \approx 0{,}46\,\text{А}.
+    \end{align*}
+}
+
+\variantsplitter
+
+\addpersonalvariant{Артём Жичин}
+
+\tasknumber{1}%
+\task{%
+    При изменении силы тока в проводнике по закону $\eli = 5 + 0{,}4t$ (в системе СИ),
+    в нём возникает ЭДС самоиндукции $150\,\text{мВ}$.
+    Чему равна индуктивность проводника?
+    Ответ выразите в миллигенри и округлите до целого.
+}
+\answer{%
+    $
+        \ele = L\frac{\abs{\Delta \eli}}{\Delta t} = L \cdot \abs{ + 0{,}4 } \text{(в СИ)}
+        \implies L = \frac{\ele}{ 0{,}4 } = \frac{150\,\text{мВ}}{ 0{,}4 } \approx {375{,}0\,\text{мГн}}
+    $
+}
+\solutionspace{80pt}
+
+\tasknumber{2}%
+\task{%
+    Прямолинейный проводник длиной $\ell$ перемещают в однородном магнитном поле с индукцией $B$.
+    Проводник, вектор его скорости и вектор индукции поля взаимно перпендикулярны.
+    Определите зависимость ускорения от времени, если разность потенциалов на концах проводника
+    изменяется по закону $\Delta \varphi = kt^3$.
+}
+\answer{%
+    $
+        \Delta \varphi = Bv\ell = kt^3 \implies v = \frac{kt^3}{B\ell} \implies a(t) = \frac{v(t)}{t} = \frac{kt^2}{B\ell}
+    $
+}
+\solutionspace{80pt}
+
+\tasknumber{3}%
+\task{%
+    Плоская прямоугольная рамка со сторонами $40\,\text{см}$ и $25\,\text{см}$ находится в однородном вертикальном магнитном поле
+    с индукцией $300\,\text{мТл}$.
+    Сопротивление рамки $8\,\text{Ом}$.
+    Вектор магнитной индукции перпендикулярен плоскости рамки.
+    Рамку повернули на $30\degrees$ вокруг одной из её горизонтальных сторон.
+    Какой заряд протёк по рамке?
+    Ответ выразите в микрокулонах и округлите до целого.
+}
+\answer{%
+    \begin{align*}
+    \ele_i &= - \frac{\Delta \Phi_i}{\Delta t}, \eli_i = \frac{\ele_i}{R}, \Delta q_i = \eli_i\Delta t\implies \Delta q_i = \frac{\ele_i}{R} \cdot \Delta t = - \frac 1{R} \frac{\Delta \Phi_i}{\Delta t} \cdot \Delta t= - \frac{\Delta \Phi_i}{R} \implies \\
+    \implies \Delta q &= q_2 - q_1 = \sum_i \Delta q_i = \sum_i \cbr{ - \frac{\Delta \Phi_i}{R}} = -\frac 1{R} \sum_i \Delta \Phi_i = -\frac{\Phi_2 - \Phi_1}{R}.
+    \\
+    q &= \abs{\Delta q} = \frac {\abs{\Phi_2 - \Phi_1}}{R}= \frac {\abs{BS \cos \varphi_2 - BS \cos \varphi_1}}{R}= \frac {B S}{R}\abs{\cos \varphi_2 - \cos \varphi_1}= \frac {B a b}{R}\abs{\cos \varphi_2 - \cos \varphi_1}, \\
+    \varphi_1 &= 0\degrees, \varphi_2 = 30\degrees, \\
+    q&= \frac {300\,\text{мТл} \cdot 40\,\text{см} \cdot 25\,\text{см}}{8\,\text{Ом}}\abs{\cos 30\degrees - \cos 0\degrees} \approx 502{,}40\,\text{мкКл} \to 502.
+    \end{align*}
+}
+\solutionspace{120pt}
+
+\tasknumber{4}%
+\task{%
+    Резистор сопротивлением $R = 5\,\text{Ом}$ и катушка индуктивностью $L = 0{,}4\,\text{Гн}$ (и пренебрежимо малым сопротивлением)
+    подключены параллельно к источнику тока с ЭДС $\ele = 12\,\text{В}$ и внутренним сопротивлением $r = 1\,\text{Ом}$ (см.
+    рис.
+    на доске).
+    Какое количество теплоты выделится в цепи после размыкания ключа $K$?
+}
+\answer{%
+    \begin{align*}
+    &\text{закон Ома для полной цепи}: \eli = \frac{\ele}{r + R_\text{внешнее}} = \frac{\ele}{r + \frac{R \cdot 0}{R + 0}} = \frac{\ele}{r}, \\
+    Q &= W_m = \frac{L\eli^2}2 = \frac{L\sqr{\frac{\ele}{r}}}2 = \frac L2\frac{\ele^2}{r^2} = \frac{0{,}4\,\text{Гн}}2 \cdot \sqr{\frac{12\,\text{В}}{1\,\text{Ом}}} \approx 28{,}80\,\text{Дж}.
+    \end{align*}
+}
+\solutionspace{150pt}
+
+\tasknumber{5}%
+\task{%
+    По параллельным рельсам, расположенным под углом $15\degrees$ к горизонтали,
+    соскальзывает проводник массой $150\,\text{г}$: без трения и с постоянной скоростью $12\,\frac{\text{м}}{\text{с}}$ .
+    Рельсы замнуты резистором сопротивлением $12\,\text{Ом}$.
+    Вся система находитится в однородном вертикальном магнитном поле (см.
+    рис.
+    на доске).
+    Определите индукцию магнитного поля и ток, протекающий в проводнике.
+    Сопротивлением проводника, рельс и соединительных проводов пренебречь, ускорение свободного падения принять равным $g = 10\,\frac{\text{м}}{\text{с}^{2}}$.
+}
+\answer{%
+    \begin{align*}
+    \ele &= B_\bot v \ell, B_\bot = B\cos \alpha, \eli = \frac{\ele}R, \\
+    F_A &= \eli B \ell = \frac{\ele}R B \ell, \\
+    F_A \cos \alpha &= mg \sin \alpha \implies \frac{\ele}R B \ell \cos \alpha = mg \sin \alpha \\
+    &\frac{B \cos \alpha \cdot v \ell}R B \ell \cos \alpha = mg \sin \alpha\implies \frac{B^2 \cos^2 \alpha  \cdot v \ell^2}R = mg \sin \alpha, \\
+    B &= \sqrt{\frac{mg R \sin \alpha}{v \ell^2 \cos^2 \alpha}} = \sqrt{\frac{150\,\text{г} \cdot 10\,\frac{\text{м}}{\text{с}^{2}} \cdot 12\,\text{Ом} \cdot \sin 15\degrees}{12\,\frac{\text{м}}{\text{с}} \cdot \sqr{20\,\text{см}} \cdot \cos^2 15\degrees}}\approx 3{,}23\,\text{Тл}, \\
+    \eli &= \frac{\ele}R= \frac{B_\bot v \ell}R = \frac {v \ell \cos \alpha}R \sqrt{\frac{mg R \sin \alpha}{v \ell^2 \cos \alpha}}=\sqrt{\frac{mg v \sin \alpha}{R}}=\sqrt{\frac{150\,\text{г} \cdot 10\,\frac{\text{м}}{\text{с}^{2}} \cdot 12\,\frac{\text{м}}{\text{с}} \cdot \sin 15\degrees}{12\,\text{Ом}}} \approx 0{,}62\,\text{А}.
+    \end{align*}
+}
+
+\variantsplitter
+
+\addpersonalvariant{Дарья Кошман}
+
+\tasknumber{1}%
+\task{%
+    При изменении силы тока в проводнике по закону $\eli = 3 + 0{,}8t$ (в системе СИ),
+    в нём возникает ЭДС самоиндукции $300\,\text{мВ}$.
+    Чему равна индуктивность проводника?
+    Ответ выразите в миллигенри и округлите до целого.
+}
+\answer{%
+    $
+        \ele = L\frac{\abs{\Delta \eli}}{\Delta t} = L \cdot \abs{ + 0{,}8 } \text{(в СИ)}
+        \implies L = \frac{\ele}{ 0{,}8 } = \frac{300\,\text{мВ}}{ 0{,}8 } \approx {375{,}0\,\text{мГн}}
+    $
+}
+\solutionspace{80pt}
+
+\tasknumber{2}%
+\task{%
+    Прямолинейный проводник длиной $\ell$ перемещают в однородном магнитном поле с индукцией $B$.
+    Проводник, вектор его скорости и вектор индукции поля взаимно перпендикулярны.
+    Определите зависимость ускорения от времени, если разность потенциалов на концах проводника
+    изменяется по закону $\Delta \varphi = kt^2$.
+}
+\answer{%
+    $
+        \Delta \varphi = Bv\ell = kt^2 \implies v = \frac{kt^2}{B\ell} \implies a(t) = \frac{v(t)}{t} = \frac{kt^{}}{B\ell}
+    $
+}
+\solutionspace{80pt}
+
+\tasknumber{3}%
+\task{%
+    Плоская прямоугольная рамка со сторонами $30\,\text{см}$ и $60\,\text{см}$ находится в однородном вертикальном магнитном поле
+    с индукцией $300\,\text{мТл}$.
+    Сопротивление рамки $12\,\text{Ом}$.
+    Вектор магнитной индукции перпендикулярен плоскости рамки.
+    Рамку повернули на $30\degrees$ вокруг одной из её горизонтальных сторон.
+    Какой заряд протёк по рамке?
+    Ответ выразите в микрокулонах и округлите до целого.
+}
+\answer{%
+    \begin{align*}
+    \ele_i &= - \frac{\Delta \Phi_i}{\Delta t}, \eli_i = \frac{\ele_i}{R}, \Delta q_i = \eli_i\Delta t\implies \Delta q_i = \frac{\ele_i}{R} \cdot \Delta t = - \frac 1{R} \frac{\Delta \Phi_i}{\Delta t} \cdot \Delta t= - \frac{\Delta \Phi_i}{R} \implies \\
+    \implies \Delta q &= q_2 - q_1 = \sum_i \Delta q_i = \sum_i \cbr{ - \frac{\Delta \Phi_i}{R}} = -\frac 1{R} \sum_i \Delta \Phi_i = -\frac{\Phi_2 - \Phi_1}{R}.
+    \\
+    q &= \abs{\Delta q} = \frac {\abs{\Phi_2 - \Phi_1}}{R}= \frac {\abs{BS \cos \varphi_2 - BS \cos \varphi_1}}{R}= \frac {B S}{R}\abs{\cos \varphi_2 - \cos \varphi_1}= \frac {B a b}{R}\abs{\cos \varphi_2 - \cos \varphi_1}, \\
+    \varphi_1 &= 0\degrees, \varphi_2 = 30\degrees, \\
+    q&= \frac {300\,\text{мТл} \cdot 30\,\text{см} \cdot 60\,\text{см}}{12\,\text{Ом}}\abs{\cos 30\degrees - \cos 0\degrees} \approx 602{,}89\,\text{мкКл} \to 603.
+    \end{align*}
+}
+\solutionspace{120pt}
+
+\tasknumber{4}%
+\task{%
+    Резистор сопротивлением $R = 5\,\text{Ом}$ и катушка индуктивностью $L = 0{,}2\,\text{Гн}$ (и пренебрежимо малым сопротивлением)
+    подключены параллельно к источнику тока с ЭДС $\ele = 12\,\text{В}$ и внутренним сопротивлением $r = 2\,\text{Ом}$ (см.
+    рис.
+    на доске).
+    Какое количество теплоты выделится в цепи после размыкания ключа $K$?
+}
+\answer{%
+    \begin{align*}
+    &\text{закон Ома для полной цепи}: \eli = \frac{\ele}{r + R_\text{внешнее}} = \frac{\ele}{r + \frac{R \cdot 0}{R + 0}} = \frac{\ele}{r}, \\
+    Q &= W_m = \frac{L\eli^2}2 = \frac{L\sqr{\frac{\ele}{r}}}2 = \frac L2\frac{\ele^2}{r^2} = \frac{0{,}2\,\text{Гн}}2 \cdot \sqr{\frac{12\,\text{В}}{2\,\text{Ом}}} \approx 3{,}60\,\text{Дж}.
+    \end{align*}
+}
+\solutionspace{150pt}
+
+\tasknumber{5}%
+\task{%
+    По параллельным рельсам, расположенным под углом $10\degrees$ к горизонтали,
+    соскальзывает проводник массой $200\,\text{г}$: без трения и с постоянной скоростью $15\,\frac{\text{м}}{\text{с}}$ .
+    Рельсы замнуты резистором сопротивлением $8\,\text{Ом}$.
+    Вся система находитится в однородном вертикальном магнитном поле (см.
+    рис.
+    на доске).
+    Определите индукцию магнитного поля и ток, протекающий в проводнике.
+    Сопротивлением проводника, рельс и соединительных проводов пренебречь, ускорение свободного падения принять равным $g = 10\,\frac{\text{м}}{\text{с}^{2}}$.
+}
+\answer{%
+    \begin{align*}
+    \ele &= B_\bot v \ell, B_\bot = B\cos \alpha, \eli = \frac{\ele}R, \\
+    F_A &= \eli B \ell = \frac{\ele}R B \ell, \\
+    F_A \cos \alpha &= mg \sin \alpha \implies \frac{\ele}R B \ell \cos \alpha = mg \sin \alpha \\
+    &\frac{B \cos \alpha \cdot v \ell}R B \ell \cos \alpha = mg \sin \alpha\implies \frac{B^2 \cos^2 \alpha  \cdot v \ell^2}R = mg \sin \alpha, \\
+    B &= \sqrt{\frac{mg R \sin \alpha}{v \ell^2 \cos^2 \alpha}} = \sqrt{\frac{200\,\text{г} \cdot 10\,\frac{\text{м}}{\text{с}^{2}} \cdot 8\,\text{Ом} \cdot \sin 10\degrees}{15\,\frac{\text{м}}{\text{с}} \cdot \sqr{60\,\text{см}} \cdot \cos^2 10\degrees}}\approx 0{,}73\,\text{Тл}, \\
+    \eli &= \frac{\ele}R= \frac{B_\bot v \ell}R = \frac {v \ell \cos \alpha}R \sqrt{\frac{mg R \sin \alpha}{v \ell^2 \cos \alpha}}=\sqrt{\frac{mg v \sin \alpha}{R}}=\sqrt{\frac{200\,\text{г} \cdot 10\,\frac{\text{м}}{\text{с}^{2}} \cdot 15\,\frac{\text{м}}{\text{с}} \cdot \sin 10\degrees}{8\,\text{Ом}}} \approx 0{,}81\,\text{А}.
+    \end{align*}
+}
+
+\variantsplitter
+
+\addpersonalvariant{Анна Кузьмичёва}
+
+\tasknumber{1}%
+\task{%
+    При изменении силы тока в проводнике по закону $\eli = 2 - 0{,}8t$ (в системе СИ),
+    в нём возникает ЭДС самоиндукции $150\,\text{мВ}$.
+    Чему равна индуктивность проводника?
+    Ответ выразите в миллигенри и округлите до целого.
+}
+\answer{%
+    $
+        \ele = L\frac{\abs{\Delta \eli}}{\Delta t} = L \cdot \abs{ - 0{,}8 } \text{(в СИ)}
+        \implies L = \frac{\ele}{ 0{,}8 } = \frac{150\,\text{мВ}}{ 0{,}8 } \approx {187{,}5\,\text{мГн}}
+    $
+}
+\solutionspace{80pt}
+
+\tasknumber{2}%
+\task{%
+    Прямолинейный проводник длиной $\ell$ перемещают в однородном магнитном поле с индукцией $B$.
+    Проводник, вектор его скорости и вектор индукции поля взаимно перпендикулярны.
+    Определите зависимость ускорения от времени, если разность потенциалов на концах проводника
+    изменяется по закону $\Delta \varphi = kt^4$.
+}
+\answer{%
+    $
+        \Delta \varphi = Bv\ell = kt^4 \implies v = \frac{kt^4}{B\ell} \implies a(t) = \frac{v(t)}{t} = \frac{kt^3}{B\ell}
+    $
+}
+\solutionspace{80pt}
+
+\tasknumber{3}%
+\task{%
+    Плоская прямоугольная рамка со сторонами $40\,\text{см}$ и $50\,\text{см}$ находится в однородном вертикальном магнитном поле
+    с индукцией $300\,\text{мТл}$.
+    Сопротивление рамки $8\,\text{Ом}$.
+    Вектор магнитной индукции параллелен плоскости рамки.
+    Рамку повернули на $60\degrees$ вокруг одной из её горизонтальных сторон.
+    Какой заряд протёк по рамке?
+    Ответ выразите в микрокулонах и округлите до целого.
+}
+\answer{%
+    \begin{align*}
+    \ele_i &= - \frac{\Delta \Phi_i}{\Delta t}, \eli_i = \frac{\ele_i}{R}, \Delta q_i = \eli_i\Delta t\implies \Delta q_i = \frac{\ele_i}{R} \cdot \Delta t = - \frac 1{R} \frac{\Delta \Phi_i}{\Delta t} \cdot \Delta t= - \frac{\Delta \Phi_i}{R} \implies \\
+    \implies \Delta q &= q_2 - q_1 = \sum_i \Delta q_i = \sum_i \cbr{ - \frac{\Delta \Phi_i}{R}} = -\frac 1{R} \sum_i \Delta \Phi_i = -\frac{\Phi_2 - \Phi_1}{R}.
+    \\
+    q &= \abs{\Delta q} = \frac {\abs{\Phi_2 - \Phi_1}}{R}= \frac {\abs{BS \cos \varphi_2 - BS \cos \varphi_1}}{R}= \frac {B S}{R}\abs{\cos \varphi_2 - \cos \varphi_1}= \frac {B a b}{R}\abs{\cos \varphi_2 - \cos \varphi_1}, \\
+    \varphi_1 &= 90\degrees, \varphi_2 = 30\degrees, \\
+    q&= \frac {300\,\text{мТл} \cdot 40\,\text{см} \cdot 50\,\text{см}}{8\,\text{Ом}}\abs{\cos 30\degrees - \cos 90\degrees} \approx 6495{,}19\,\text{мкКл} \to 6495.
+    \end{align*}
+}
+\solutionspace{120pt}
+
+\tasknumber{4}%
+\task{%
+    Резистор сопротивлением $R = 5\,\text{Ом}$ и катушка индуктивностью $L = 0{,}4\,\text{Гн}$ (и пренебрежимо малым сопротивлением)
+    подключены параллельно к источнику тока с ЭДС $\ele = 6\,\text{В}$ и внутренним сопротивлением $r = 1\,\text{Ом}$ (см.
+    рис.
+    на доске).
+    Какое количество теплоты выделится в цепи после размыкания ключа $K$?
+}
+\answer{%
+    \begin{align*}
+    &\text{закон Ома для полной цепи}: \eli = \frac{\ele}{r + R_\text{внешнее}} = \frac{\ele}{r + \frac{R \cdot 0}{R + 0}} = \frac{\ele}{r}, \\
+    Q &= W_m = \frac{L\eli^2}2 = \frac{L\sqr{\frac{\ele}{r}}}2 = \frac L2\frac{\ele^2}{r^2} = \frac{0{,}4\,\text{Гн}}2 \cdot \sqr{\frac{6\,\text{В}}{1\,\text{Ом}}} \approx 7{,}20\,\text{Дж}.
+    \end{align*}
+}
+\solutionspace{150pt}
+
+\tasknumber{5}%
+\task{%
+    По параллельным рельсам, расположенным под углом $15\degrees$ к горизонтали,
+    соскальзывает проводник массой $50\,\text{г}$: без трения и с постоянной скоростью $15\,\frac{\text{м}}{\text{с}}$ .
+    Рельсы замнуты резистором сопротивлением $5\,\text{Ом}$.
+    Вся система находитится в однородном вертикальном магнитном поле (см.
+    рис.
+    на доске).
+    Определите индукцию магнитного поля и ток, протекающий в проводнике.
+    Сопротивлением проводника, рельс и соединительных проводов пренебречь, ускорение свободного падения принять равным $g = 10\,\frac{\text{м}}{\text{с}^{2}}$.
+}
+\answer{%
+    \begin{align*}
+    \ele &= B_\bot v \ell, B_\bot = B\cos \alpha, \eli = \frac{\ele}R, \\
+    F_A &= \eli B \ell = \frac{\ele}R B \ell, \\
+    F_A \cos \alpha &= mg \sin \alpha \implies \frac{\ele}R B \ell \cos \alpha = mg \sin \alpha \\
+    &\frac{B \cos \alpha \cdot v \ell}R B \ell \cos \alpha = mg \sin \alpha\implies \frac{B^2 \cos^2 \alpha  \cdot v \ell^2}R = mg \sin \alpha, \\
+    B &= \sqrt{\frac{mg R \sin \alpha}{v \ell^2 \cos^2 \alpha}} = \sqrt{\frac{50\,\text{г} \cdot 10\,\frac{\text{м}}{\text{с}^{2}} \cdot 5\,\text{Ом} \cdot \sin 15\degrees}{15\,\frac{\text{м}}{\text{с}} \cdot \sqr{20\,\text{см}} \cdot \cos^2 15\degrees}}\approx 1{,}08\,\text{Тл}, \\
+    \eli &= \frac{\ele}R= \frac{B_\bot v \ell}R = \frac {v \ell \cos \alpha}R \sqrt{\frac{mg R \sin \alpha}{v \ell^2 \cos \alpha}}=\sqrt{\frac{mg v \sin \alpha}{R}}=\sqrt{\frac{50\,\text{г} \cdot 10\,\frac{\text{м}}{\text{с}^{2}} \cdot 15\,\frac{\text{м}}{\text{с}} \cdot \sin 15\degrees}{5\,\text{Ом}}} \approx 0{,}62\,\text{А}.
+    \end{align*}
+}
+
+\variantsplitter
+
+\addpersonalvariant{Алёна Куприянова}
+
+\tasknumber{1}%
+\task{%
+    При изменении силы тока в проводнике по закону $\eli = 6 + 0{,}8t$ (в системе СИ),
+    в нём возникает ЭДС самоиндукции $150\,\text{мВ}$.
+    Чему равна индуктивность проводника?
+    Ответ выразите в миллигенри и округлите до целого.
+}
+\answer{%
+    $
+        \ele = L\frac{\abs{\Delta \eli}}{\Delta t} = L \cdot \abs{ + 0{,}8 } \text{(в СИ)}
+        \implies L = \frac{\ele}{ 0{,}8 } = \frac{150\,\text{мВ}}{ 0{,}8 } \approx {187{,}5\,\text{мГн}}
+    $
+}
+\solutionspace{80pt}
+
+\tasknumber{2}%
+\task{%
+    Прямолинейный проводник длиной $\ell$ перемещают в однородном магнитном поле с индукцией $B$.
+    Проводник, вектор его скорости и вектор индукции поля взаимно перпендикулярны.
+    Определите зависимость ускорения от времени, если разность потенциалов на концах проводника
+    изменяется по закону $\Delta \varphi = kt^3$.
+}
+\answer{%
+    $
+        \Delta \varphi = Bv\ell = kt^3 \implies v = \frac{kt^3}{B\ell} \implies a(t) = \frac{v(t)}{t} = \frac{kt^2}{B\ell}
+    $
+}
+\solutionspace{80pt}
+
+\tasknumber{3}%
+\task{%
+    Плоская прямоугольная рамка со сторонами $40\,\text{см}$ и $60\,\text{см}$ находится в однородном вертикальном магнитном поле
+    с индукцией $150\,\text{мТл}$.
+    Сопротивление рамки $15\,\text{Ом}$.
+    Вектор магнитной индукции перпендикулярен плоскости рамки.
+    Рамку повернули на $60\degrees$ вокруг одной из её горизонтальных сторон.
+    Какой заряд протёк по рамке?
+    Ответ выразите в микрокулонах и округлите до целого.
+}
+\answer{%
+    \begin{align*}
+    \ele_i &= - \frac{\Delta \Phi_i}{\Delta t}, \eli_i = \frac{\ele_i}{R}, \Delta q_i = \eli_i\Delta t\implies \Delta q_i = \frac{\ele_i}{R} \cdot \Delta t = - \frac 1{R} \frac{\Delta \Phi_i}{\Delta t} \cdot \Delta t= - \frac{\Delta \Phi_i}{R} \implies \\
+    \implies \Delta q &= q_2 - q_1 = \sum_i \Delta q_i = \sum_i \cbr{ - \frac{\Delta \Phi_i}{R}} = -\frac 1{R} \sum_i \Delta \Phi_i = -\frac{\Phi_2 - \Phi_1}{R}.
+    \\
+    q &= \abs{\Delta q} = \frac {\abs{\Phi_2 - \Phi_1}}{R}= \frac {\abs{BS \cos \varphi_2 - BS \cos \varphi_1}}{R}= \frac {B S}{R}\abs{\cos \varphi_2 - \cos \varphi_1}= \frac {B a b}{R}\abs{\cos \varphi_2 - \cos \varphi_1}, \\
+    \varphi_1 &= 0\degrees, \varphi_2 = 60\degrees, \\
+    q&= \frac {150\,\text{мТл} \cdot 40\,\text{см} \cdot 60\,\text{см}}{15\,\text{Ом}}\abs{\cos 60\degrees - \cos 0\degrees} \approx 1200{,}00\,\text{мкКл} \to 1200.
+    \end{align*}
+}
+\solutionspace{120pt}
+
+\tasknumber{4}%
+\task{%
+    Резистор сопротивлением $R = 3\,\text{Ом}$ и катушка индуктивностью $L = 0{,}4\,\text{Гн}$ (и пренебрежимо малым сопротивлением)
+    подключены параллельно к источнику тока с ЭДС $\ele = 6\,\text{В}$ и внутренним сопротивлением $r = 1\,\text{Ом}$ (см.
+    рис.
+    на доске).
+    Какое количество теплоты выделится в цепи после размыкания ключа $K$?
+}
+\answer{%
+    \begin{align*}
+    &\text{закон Ома для полной цепи}: \eli = \frac{\ele}{r + R_\text{внешнее}} = \frac{\ele}{r + \frac{R \cdot 0}{R + 0}} = \frac{\ele}{r}, \\
+    Q &= W_m = \frac{L\eli^2}2 = \frac{L\sqr{\frac{\ele}{r}}}2 = \frac L2\frac{\ele^2}{r^2} = \frac{0{,}4\,\text{Гн}}2 \cdot \sqr{\frac{6\,\text{В}}{1\,\text{Ом}}} \approx 7{,}20\,\text{Дж}.
+    \end{align*}
+}
+\solutionspace{150pt}
+
+\tasknumber{5}%
+\task{%
+    По параллельным рельсам, расположенным под углом $10\degrees$ к горизонтали,
+    соскальзывает проводник массой $50\,\text{г}$: без трения и с постоянной скоростью $12\,\frac{\text{м}}{\text{с}}$ .
+    Рельсы замнуты резистором сопротивлением $12\,\text{Ом}$.
+    Вся система находитится в однородном вертикальном магнитном поле (см.
+    рис.
+    на доске).
+    Определите индукцию магнитного поля и ток, протекающий в проводнике.
+    Сопротивлением проводника, рельс и соединительных проводов пренебречь, ускорение свободного падения принять равным $g = 10\,\frac{\text{м}}{\text{с}^{2}}$.
+}
+\answer{%
+    \begin{align*}
+    \ele &= B_\bot v \ell, B_\bot = B\cos \alpha, \eli = \frac{\ele}R, \\
+    F_A &= \eli B \ell = \frac{\ele}R B \ell, \\
+    F_A \cos \alpha &= mg \sin \alpha \implies \frac{\ele}R B \ell \cos \alpha = mg \sin \alpha \\
+    &\frac{B \cos \alpha \cdot v \ell}R B \ell \cos \alpha = mg \sin \alpha\implies \frac{B^2 \cos^2 \alpha  \cdot v \ell^2}R = mg \sin \alpha, \\
+    B &= \sqrt{\frac{mg R \sin \alpha}{v \ell^2 \cos^2 \alpha}} = \sqrt{\frac{50\,\text{г} \cdot 10\,\frac{\text{м}}{\text{с}^{2}} \cdot 12\,\text{Ом} \cdot \sin 10\degrees}{12\,\frac{\text{м}}{\text{с}} \cdot \sqr{40\,\text{см}} \cdot \cos^2 10\degrees}}\approx 0{,}75\,\text{Тл}, \\
+    \eli &= \frac{\ele}R= \frac{B_\bot v \ell}R = \frac {v \ell \cos \alpha}R \sqrt{\frac{mg R \sin \alpha}{v \ell^2 \cos \alpha}}=\sqrt{\frac{mg v \sin \alpha}{R}}=\sqrt{\frac{50\,\text{г} \cdot 10\,\frac{\text{м}}{\text{с}^{2}} \cdot 12\,\frac{\text{м}}{\text{с}} \cdot \sin 10\degrees}{12\,\text{Ом}}} \approx 0{,}29\,\text{А}.
+    \end{align*}
+}
+
+\variantsplitter
+
+\addpersonalvariant{Ярослав Лавровский}
+
+\tasknumber{1}%
+\task{%
+    При изменении силы тока в проводнике по закону $\eli = 5 - 0{,}4t$ (в системе СИ),
+    в нём возникает ЭДС самоиндукции $300\,\text{мВ}$.
+    Чему равна индуктивность проводника?
+    Ответ выразите в миллигенри и округлите до целого.
+}
+\answer{%
+    $
+        \ele = L\frac{\abs{\Delta \eli}}{\Delta t} = L \cdot \abs{ - 0{,}4 } \text{(в СИ)}
+        \implies L = \frac{\ele}{ 0{,}4 } = \frac{300\,\text{мВ}}{ 0{,}4 } \approx {750{,}0\,\text{мГн}}
+    $
+}
+\solutionspace{80pt}
+
+\tasknumber{2}%
+\task{%
+    Прямолинейный проводник длиной $\ell$ перемещают в однородном магнитном поле с индукцией $B$.
+    Проводник, вектор его скорости и вектор индукции поля взаимно перпендикулярны.
+    Определите зависимость ускорения от времени, если разность потенциалов на концах проводника
+    изменяется по закону $\Delta \varphi = kt^4$.
+}
+\answer{%
+    $
+        \Delta \varphi = Bv\ell = kt^4 \implies v = \frac{kt^4}{B\ell} \implies a(t) = \frac{v(t)}{t} = \frac{kt^3}{B\ell}
+    $
+}
+\solutionspace{80pt}
+
+\tasknumber{3}%
+\task{%
+    Плоская прямоугольная рамка со сторонами $30\,\text{см}$ и $60\,\text{см}$ находится в однородном вертикальном магнитном поле
+    с индукцией $300\,\text{мТл}$.
+    Сопротивление рамки $8\,\text{Ом}$.
+    Вектор магнитной индукции перпендикулярен плоскости рамки.
+    Рамку повернули на $60\degrees$ вокруг одной из её горизонтальных сторон.
+    Какой заряд протёк по рамке?
+    Ответ выразите в микрокулонах и округлите до целого.
+}
+\answer{%
+    \begin{align*}
+    \ele_i &= - \frac{\Delta \Phi_i}{\Delta t}, \eli_i = \frac{\ele_i}{R}, \Delta q_i = \eli_i\Delta t\implies \Delta q_i = \frac{\ele_i}{R} \cdot \Delta t = - \frac 1{R} \frac{\Delta \Phi_i}{\Delta t} \cdot \Delta t= - \frac{\Delta \Phi_i}{R} \implies \\
+    \implies \Delta q &= q_2 - q_1 = \sum_i \Delta q_i = \sum_i \cbr{ - \frac{\Delta \Phi_i}{R}} = -\frac 1{R} \sum_i \Delta \Phi_i = -\frac{\Phi_2 - \Phi_1}{R}.
+    \\
+    q &= \abs{\Delta q} = \frac {\abs{\Phi_2 - \Phi_1}}{R}= \frac {\abs{BS \cos \varphi_2 - BS \cos \varphi_1}}{R}= \frac {B S}{R}\abs{\cos \varphi_2 - \cos \varphi_1}= \frac {B a b}{R}\abs{\cos \varphi_2 - \cos \varphi_1}, \\
+    \varphi_1 &= 0\degrees, \varphi_2 = 60\degrees, \\
+    q&= \frac {300\,\text{мТл} \cdot 30\,\text{см} \cdot 60\,\text{см}}{8\,\text{Ом}}\abs{\cos 60\degrees - \cos 0\degrees} \approx 3375{,}00\,\text{мкКл} \to 3375.
+    \end{align*}
+}
+\solutionspace{120pt}
+
+\tasknumber{4}%
+\task{%
+    Резистор сопротивлением $R = 5\,\text{Ом}$ и катушка индуктивностью $L = 0{,}5\,\text{Гн}$ (и пренебрежимо малым сопротивлением)
+    подключены параллельно к источнику тока с ЭДС $\ele = 12\,\text{В}$ и внутренним сопротивлением $r = 1\,\text{Ом}$ (см.
+    рис.
+    на доске).
+    Какое количество теплоты выделится в цепи после размыкания ключа $K$?
+}
+\answer{%
+    \begin{align*}
+    &\text{закон Ома для полной цепи}: \eli = \frac{\ele}{r + R_\text{внешнее}} = \frac{\ele}{r + \frac{R \cdot 0}{R + 0}} = \frac{\ele}{r}, \\
+    Q &= W_m = \frac{L\eli^2}2 = \frac{L\sqr{\frac{\ele}{r}}}2 = \frac L2\frac{\ele^2}{r^2} = \frac{0{,}5\,\text{Гн}}2 \cdot \sqr{\frac{12\,\text{В}}{1\,\text{Ом}}} \approx 36{,}00\,\text{Дж}.
+    \end{align*}
+}
+\solutionspace{150pt}
+
+\tasknumber{5}%
+\task{%
+    По параллельным рельсам, расположенным под углом $25\degrees$ к горизонтали,
+    соскальзывает проводник массой $150\,\text{г}$: без трения и с постоянной скоростью $12\,\frac{\text{м}}{\text{с}}$ .
+    Рельсы замнуты резистором сопротивлением $8\,\text{Ом}$.
+    Вся система находитится в однородном вертикальном магнитном поле (см.
+    рис.
+    на доске).
+    Определите индукцию магнитного поля и ток, протекающий в проводнике.
+    Сопротивлением проводника, рельс и соединительных проводов пренебречь, ускорение свободного падения принять равным $g = 10\,\frac{\text{м}}{\text{с}^{2}}$.
+}
+\answer{%
+    \begin{align*}
+    \ele &= B_\bot v \ell, B_\bot = B\cos \alpha, \eli = \frac{\ele}R, \\
+    F_A &= \eli B \ell = \frac{\ele}R B \ell, \\
+    F_A \cos \alpha &= mg \sin \alpha \implies \frac{\ele}R B \ell \cos \alpha = mg \sin \alpha \\
+    &\frac{B \cos \alpha \cdot v \ell}R B \ell \cos \alpha = mg \sin \alpha\implies \frac{B^2 \cos^2 \alpha  \cdot v \ell^2}R = mg \sin \alpha, \\
+    B &= \sqrt{\frac{mg R \sin \alpha}{v \ell^2 \cos^2 \alpha}} = \sqrt{\frac{150\,\text{г} \cdot 10\,\frac{\text{м}}{\text{с}^{2}} \cdot 8\,\text{Ом} \cdot \sin 25\degrees}{12\,\frac{\text{м}}{\text{с}} \cdot \sqr{20\,\text{см}} \cdot \cos^2 25\degrees}}\approx 3{,}59\,\text{Тл}, \\
+    \eli &= \frac{\ele}R= \frac{B_\bot v \ell}R = \frac {v \ell \cos \alpha}R \sqrt{\frac{mg R \sin \alpha}{v \ell^2 \cos \alpha}}=\sqrt{\frac{mg v \sin \alpha}{R}}=\sqrt{\frac{150\,\text{г} \cdot 10\,\frac{\text{м}}{\text{с}^{2}} \cdot 12\,\frac{\text{м}}{\text{с}} \cdot \sin 25\degrees}{8\,\text{Ом}}} \approx 0{,}98\,\text{А}.
+    \end{align*}
+}
+
+\variantsplitter
+
+\addpersonalvariant{Анастасия Ламанова}
+
+\tasknumber{1}%
+\task{%
+    При изменении силы тока в проводнике по закону $\eli = 5 + 0{,}8t$ (в системе СИ),
+    в нём возникает ЭДС самоиндукции $150\,\text{мВ}$.
+    Чему равна индуктивность проводника?
+    Ответ выразите в миллигенри и округлите до целого.
+}
+\answer{%
+    $
+        \ele = L\frac{\abs{\Delta \eli}}{\Delta t} = L \cdot \abs{ + 0{,}8 } \text{(в СИ)}
+        \implies L = \frac{\ele}{ 0{,}8 } = \frac{150\,\text{мВ}}{ 0{,}8 } \approx {187{,}5\,\text{мГн}}
+    $
+}
+\solutionspace{80pt}
+
+\tasknumber{2}%
+\task{%
+    Прямолинейный проводник длиной $\ell$ перемещают в однородном магнитном поле с индукцией $B$.
+    Проводник, вектор его скорости и вектор индукции поля взаимно перпендикулярны.
+    Определите зависимость ускорения от времени, если разность потенциалов на концах проводника
+    изменяется по закону $\Delta \varphi = kt^4$.
+}
+\answer{%
+    $
+        \Delta \varphi = Bv\ell = kt^4 \implies v = \frac{kt^4}{B\ell} \implies a(t) = \frac{v(t)}{t} = \frac{kt^3}{B\ell}
+    $
+}
+\solutionspace{80pt}
+
+\tasknumber{3}%
+\task{%
+    Плоская прямоугольная рамка со сторонами $40\,\text{см}$ и $25\,\text{см}$ находится в однородном вертикальном магнитном поле
+    с индукцией $300\,\text{мТл}$.
+    Сопротивление рамки $15\,\text{Ом}$.
+    Вектор магнитной индукции параллелен плоскости рамки.
+    Рамку повернули на $30\degrees$ вокруг одной из её горизонтальных сторон.
+    Какой заряд протёк по рамке?
+    Ответ выразите в микрокулонах и округлите до целого.
+}
+\answer{%
+    \begin{align*}
+    \ele_i &= - \frac{\Delta \Phi_i}{\Delta t}, \eli_i = \frac{\ele_i}{R}, \Delta q_i = \eli_i\Delta t\implies \Delta q_i = \frac{\ele_i}{R} \cdot \Delta t = - \frac 1{R} \frac{\Delta \Phi_i}{\Delta t} \cdot \Delta t= - \frac{\Delta \Phi_i}{R} \implies \\
+    \implies \Delta q &= q_2 - q_1 = \sum_i \Delta q_i = \sum_i \cbr{ - \frac{\Delta \Phi_i}{R}} = -\frac 1{R} \sum_i \Delta \Phi_i = -\frac{\Phi_2 - \Phi_1}{R}.
+    \\
+    q &= \abs{\Delta q} = \frac {\abs{\Phi_2 - \Phi_1}}{R}= \frac {\abs{BS \cos \varphi_2 - BS \cos \varphi_1}}{R}= \frac {B S}{R}\abs{\cos \varphi_2 - \cos \varphi_1}= \frac {B a b}{R}\abs{\cos \varphi_2 - \cos \varphi_1}, \\
+    \varphi_1 &= 90\degrees, \varphi_2 = 60\degrees, \\
+    q&= \frac {300\,\text{мТл} \cdot 40\,\text{см} \cdot 25\,\text{см}}{15\,\text{Ом}}\abs{\cos 60\degrees - \cos 90\degrees} \approx 1000{,}00\,\text{мкКл} \to 1000.
+    \end{align*}
+}
+\solutionspace{120pt}
+
+\tasknumber{4}%
+\task{%
+    Резистор сопротивлением $R = 4\,\text{Ом}$ и катушка индуктивностью $L = 0{,}5\,\text{Гн}$ (и пренебрежимо малым сопротивлением)
+    подключены параллельно к источнику тока с ЭДС $\ele = 5\,\text{В}$ и внутренним сопротивлением $r = 1\,\text{Ом}$ (см.
+    рис.
+    на доске).
+    Какое количество теплоты выделится в цепи после размыкания ключа $K$?
+}
+\answer{%
+    \begin{align*}
+    &\text{закон Ома для полной цепи}: \eli = \frac{\ele}{r + R_\text{внешнее}} = \frac{\ele}{r + \frac{R \cdot 0}{R + 0}} = \frac{\ele}{r}, \\
+    Q &= W_m = \frac{L\eli^2}2 = \frac{L\sqr{\frac{\ele}{r}}}2 = \frac L2\frac{\ele^2}{r^2} = \frac{0{,}5\,\text{Гн}}2 \cdot \sqr{\frac{5\,\text{В}}{1\,\text{Ом}}} \approx 6{,}25\,\text{Дж}.
+    \end{align*}
+}
+\solutionspace{150pt}
+
+\tasknumber{5}%
+\task{%
+    По параллельным рельсам, расположенным под углом $10\degrees$ к горизонтали,
+    соскальзывает проводник массой $150\,\text{г}$: без трения и с постоянной скоростью $12\,\frac{\text{м}}{\text{с}}$ .
+    Рельсы замнуты резистором сопротивлением $12\,\text{Ом}$.
+    Вся система находитится в однородном вертикальном магнитном поле (см.
+    рис.
+    на доске).
+    Определите индукцию магнитного поля и ток, протекающий в проводнике.
+    Сопротивлением проводника, рельс и соединительных проводов пренебречь, ускорение свободного падения принять равным $g = 10\,\frac{\text{м}}{\text{с}^{2}}$.
+}
+\answer{%
+    \begin{align*}
+    \ele &= B_\bot v \ell, B_\bot = B\cos \alpha, \eli = \frac{\ele}R, \\
+    F_A &= \eli B \ell = \frac{\ele}R B \ell, \\
+    F_A \cos \alpha &= mg \sin \alpha \implies \frac{\ele}R B \ell \cos \alpha = mg \sin \alpha \\
+    &\frac{B \cos \alpha \cdot v \ell}R B \ell \cos \alpha = mg \sin \alpha\implies \frac{B^2 \cos^2 \alpha  \cdot v \ell^2}R = mg \sin \alpha, \\
+    B &= \sqrt{\frac{mg R \sin \alpha}{v \ell^2 \cos^2 \alpha}} = \sqrt{\frac{150\,\text{г} \cdot 10\,\frac{\text{м}}{\text{с}^{2}} \cdot 12\,\text{Ом} \cdot \sin 10\degrees}{12\,\frac{\text{м}}{\text{с}} \cdot \sqr{60\,\text{см}} \cdot \cos^2 10\degrees}}\approx 0{,}86\,\text{Тл}, \\
+    \eli &= \frac{\ele}R= \frac{B_\bot v \ell}R = \frac {v \ell \cos \alpha}R \sqrt{\frac{mg R \sin \alpha}{v \ell^2 \cos \alpha}}=\sqrt{\frac{mg v \sin \alpha}{R}}=\sqrt{\frac{150\,\text{г} \cdot 10\,\frac{\text{м}}{\text{с}^{2}} \cdot 12\,\frac{\text{м}}{\text{с}} \cdot \sin 10\degrees}{12\,\text{Ом}}} \approx 0{,}51\,\text{А}.
+    \end{align*}
+}
+
+\variantsplitter
+
+\addpersonalvariant{Виктория Легонькова}
+
+\tasknumber{1}%
+\task{%
+    При изменении силы тока в проводнике по закону $\eli = 5 + 0{,}5t$ (в системе СИ),
+    в нём возникает ЭДС самоиндукции $200\,\text{мВ}$.
+    Чему равна индуктивность проводника?
+    Ответ выразите в миллигенри и округлите до целого.
+}
+\answer{%
+    $
+        \ele = L\frac{\abs{\Delta \eli}}{\Delta t} = L \cdot \abs{ + 0{,}5 } \text{(в СИ)}
+        \implies L = \frac{\ele}{ 0{,}5 } = \frac{200\,\text{мВ}}{ 0{,}5 } \approx {400{,}0\,\text{мГн}}
+    $
+}
+\solutionspace{80pt}
+
+\tasknumber{2}%
+\task{%
+    Прямолинейный проводник длиной $\ell$ перемещают в однородном магнитном поле с индукцией $B$.
+    Проводник, вектор его скорости и вектор индукции поля взаимно перпендикулярны.
+    Определите зависимость ускорения от времени, если разность потенциалов на концах проводника
+    изменяется по закону $\Delta \varphi = kt^2$.
+}
+\answer{%
+    $
+        \Delta \varphi = Bv\ell = kt^2 \implies v = \frac{kt^2}{B\ell} \implies a(t) = \frac{v(t)}{t} = \frac{kt^{}}{B\ell}
+    $
+}
+\solutionspace{80pt}
+
+\tasknumber{3}%
+\task{%
+    Плоская прямоугольная рамка со сторонами $30\,\text{см}$ и $25\,\text{см}$ находится в однородном вертикальном магнитном поле
+    с индукцией $300\,\text{мТл}$.
+    Сопротивление рамки $15\,\text{Ом}$.
+    Вектор магнитной индукции перпендикулярен плоскости рамки.
+    Рамку повернули на $30\degrees$ вокруг одной из её горизонтальных сторон.
+    Какой заряд протёк по рамке?
+    Ответ выразите в микрокулонах и округлите до целого.
+}
+\answer{%
+    \begin{align*}
+    \ele_i &= - \frac{\Delta \Phi_i}{\Delta t}, \eli_i = \frac{\ele_i}{R}, \Delta q_i = \eli_i\Delta t\implies \Delta q_i = \frac{\ele_i}{R} \cdot \Delta t = - \frac 1{R} \frac{\Delta \Phi_i}{\Delta t} \cdot \Delta t= - \frac{\Delta \Phi_i}{R} \implies \\
+    \implies \Delta q &= q_2 - q_1 = \sum_i \Delta q_i = \sum_i \cbr{ - \frac{\Delta \Phi_i}{R}} = -\frac 1{R} \sum_i \Delta \Phi_i = -\frac{\Phi_2 - \Phi_1}{R}.
+    \\
+    q &= \abs{\Delta q} = \frac {\abs{\Phi_2 - \Phi_1}}{R}= \frac {\abs{BS \cos \varphi_2 - BS \cos \varphi_1}}{R}= \frac {B S}{R}\abs{\cos \varphi_2 - \cos \varphi_1}= \frac {B a b}{R}\abs{\cos \varphi_2 - \cos \varphi_1}, \\
+    \varphi_1 &= 0\degrees, \varphi_2 = 30\degrees, \\
+    q&= \frac {300\,\text{мТл} \cdot 30\,\text{см} \cdot 25\,\text{см}}{15\,\text{Ом}}\abs{\cos 30\degrees - \cos 0\degrees} \approx 200{,}96\,\text{мкКл} \to 201.
+    \end{align*}
+}
+\solutionspace{120pt}
+
+\tasknumber{4}%
+\task{%
+    Резистор сопротивлением $R = 3\,\text{Ом}$ и катушка индуктивностью $L = 0{,}4\,\text{Гн}$ (и пренебрежимо малым сопротивлением)
+    подключены параллельно к источнику тока с ЭДС $\ele = 5\,\text{В}$ и внутренним сопротивлением $r = 2\,\text{Ом}$ (см.
+    рис.
+    на доске).
+    Какое количество теплоты выделится в цепи после размыкания ключа $K$?
+}
+\answer{%
+    \begin{align*}
+    &\text{закон Ома для полной цепи}: \eli = \frac{\ele}{r + R_\text{внешнее}} = \frac{\ele}{r + \frac{R \cdot 0}{R + 0}} = \frac{\ele}{r}, \\
+    Q &= W_m = \frac{L\eli^2}2 = \frac{L\sqr{\frac{\ele}{r}}}2 = \frac L2\frac{\ele^2}{r^2} = \frac{0{,}4\,\text{Гн}}2 \cdot \sqr{\frac{5\,\text{В}}{2\,\text{Ом}}} \approx 1{,}25\,\text{Дж}.
+    \end{align*}
+}
+\solutionspace{150pt}
+
+\tasknumber{5}%
+\task{%
+    По параллельным рельсам, расположенным под углом $25\degrees$ к горизонтали,
+    соскальзывает проводник массой $200\,\text{г}$: без трения и с постоянной скоростью $12\,\frac{\text{м}}{\text{с}}$ .
+    Рельсы замнуты резистором сопротивлением $12\,\text{Ом}$.
+    Вся система находитится в однородном вертикальном магнитном поле (см.
+    рис.
+    на доске).
+    Определите индукцию магнитного поля и ток, протекающий в проводнике.
+    Сопротивлением проводника, рельс и соединительных проводов пренебречь, ускорение свободного падения принять равным $g = 10\,\frac{\text{м}}{\text{с}^{2}}$.
+}
+\answer{%
+    \begin{align*}
+    \ele &= B_\bot v \ell, B_\bot = B\cos \alpha, \eli = \frac{\ele}R, \\
+    F_A &= \eli B \ell = \frac{\ele}R B \ell, \\
+    F_A \cos \alpha &= mg \sin \alpha \implies \frac{\ele}R B \ell \cos \alpha = mg \sin \alpha \\
+    &\frac{B \cos \alpha \cdot v \ell}R B \ell \cos \alpha = mg \sin \alpha\implies \frac{B^2 \cos^2 \alpha  \cdot v \ell^2}R = mg \sin \alpha, \\
+    B &= \sqrt{\frac{mg R \sin \alpha}{v \ell^2 \cos^2 \alpha}} = \sqrt{\frac{200\,\text{г} \cdot 10\,\frac{\text{м}}{\text{с}^{2}} \cdot 12\,\text{Ом} \cdot \sin 25\degrees}{12\,\frac{\text{м}}{\text{с}} \cdot \sqr{20\,\text{см}} \cdot \cos^2 25\degrees}}\approx 5{,}07\,\text{Тл}, \\
+    \eli &= \frac{\ele}R= \frac{B_\bot v \ell}R = \frac {v \ell \cos \alpha}R \sqrt{\frac{mg R \sin \alpha}{v \ell^2 \cos \alpha}}=\sqrt{\frac{mg v \sin \alpha}{R}}=\sqrt{\frac{200\,\text{г} \cdot 10\,\frac{\text{м}}{\text{с}^{2}} \cdot 12\,\frac{\text{м}}{\text{с}} \cdot \sin 25\degrees}{12\,\text{Ом}}} \approx 0{,}92\,\text{А}.
+    \end{align*}
+}
+
+\variantsplitter
+
+\addpersonalvariant{Семён Мартынов}
+
+\tasknumber{1}%
+\task{%
+    При изменении силы тока в проводнике по закону $\eli = 6 - 0{,}4t$ (в системе СИ),
+    в нём возникает ЭДС самоиндукции $150\,\text{мВ}$.
+    Чему равна индуктивность проводника?
+    Ответ выразите в миллигенри и округлите до целого.
+}
+\answer{%
+    $
+        \ele = L\frac{\abs{\Delta \eli}}{\Delta t} = L \cdot \abs{ - 0{,}4 } \text{(в СИ)}
+        \implies L = \frac{\ele}{ 0{,}4 } = \frac{150\,\text{мВ}}{ 0{,}4 } \approx {375{,}0\,\text{мГн}}
+    $
+}
+\solutionspace{80pt}
+
+\tasknumber{2}%
+\task{%
+    Прямолинейный проводник длиной $\ell$ перемещают в однородном магнитном поле с индукцией $B$.
+    Проводник, вектор его скорости и вектор индукции поля взаимно перпендикулярны.
+    Определите зависимость ускорения от времени, если разность потенциалов на концах проводника
+    изменяется по закону $\Delta \varphi = kt^4$.
+}
+\answer{%
+    $
+        \Delta \varphi = Bv\ell = kt^4 \implies v = \frac{kt^4}{B\ell} \implies a(t) = \frac{v(t)}{t} = \frac{kt^3}{B\ell}
+    $
+}
+\solutionspace{80pt}
+
+\tasknumber{3}%
+\task{%
+    Плоская прямоугольная рамка со сторонами $20\,\text{см}$ и $50\,\text{см}$ находится в однородном вертикальном магнитном поле
+    с индукцией $120\,\text{мТл}$.
+    Сопротивление рамки $8\,\text{Ом}$.
+    Вектор магнитной индукции перпендикулярен плоскости рамки.
+    Рамку повернули на $60\degrees$ вокруг одной из её горизонтальных сторон.
+    Какой заряд протёк по рамке?
+    Ответ выразите в микрокулонах и округлите до целого.
+}
+\answer{%
+    \begin{align*}
+    \ele_i &= - \frac{\Delta \Phi_i}{\Delta t}, \eli_i = \frac{\ele_i}{R}, \Delta q_i = \eli_i\Delta t\implies \Delta q_i = \frac{\ele_i}{R} \cdot \Delta t = - \frac 1{R} \frac{\Delta \Phi_i}{\Delta t} \cdot \Delta t= - \frac{\Delta \Phi_i}{R} \implies \\
+    \implies \Delta q &= q_2 - q_1 = \sum_i \Delta q_i = \sum_i \cbr{ - \frac{\Delta \Phi_i}{R}} = -\frac 1{R} \sum_i \Delta \Phi_i = -\frac{\Phi_2 - \Phi_1}{R}.
+    \\
+    q &= \abs{\Delta q} = \frac {\abs{\Phi_2 - \Phi_1}}{R}= \frac {\abs{BS \cos \varphi_2 - BS \cos \varphi_1}}{R}= \frac {B S}{R}\abs{\cos \varphi_2 - \cos \varphi_1}= \frac {B a b}{R}\abs{\cos \varphi_2 - \cos \varphi_1}, \\
+    \varphi_1 &= 0\degrees, \varphi_2 = 60\degrees, \\
+    q&= \frac {120\,\text{мТл} \cdot 20\,\text{см} \cdot 50\,\text{см}}{8\,\text{Ом}}\abs{\cos 60\degrees - \cos 0\degrees} \approx 750{,}00\,\text{мкКл} \to 750.
+    \end{align*}
+}
+\solutionspace{120pt}
+
+\tasknumber{4}%
+\task{%
+    Резистор сопротивлением $R = 4\,\text{Ом}$ и катушка индуктивностью $L = 0{,}5\,\text{Гн}$ (и пренебрежимо малым сопротивлением)
+    подключены параллельно к источнику тока с ЭДС $\ele = 8\,\text{В}$ и внутренним сопротивлением $r = 2\,\text{Ом}$ (см.
+    рис.
+    на доске).
+    Какое количество теплоты выделится в цепи после размыкания ключа $K$?
+}
+\answer{%
+    \begin{align*}
+    &\text{закон Ома для полной цепи}: \eli = \frac{\ele}{r + R_\text{внешнее}} = \frac{\ele}{r + \frac{R \cdot 0}{R + 0}} = \frac{\ele}{r}, \\
+    Q &= W_m = \frac{L\eli^2}2 = \frac{L\sqr{\frac{\ele}{r}}}2 = \frac L2\frac{\ele^2}{r^2} = \frac{0{,}5\,\text{Гн}}2 \cdot \sqr{\frac{8\,\text{В}}{2\,\text{Ом}}} \approx 4{,}00\,\text{Дж}.
+    \end{align*}
+}
+\solutionspace{150pt}
+
+\tasknumber{5}%
+\task{%
+    По параллельным рельсам, расположенным под углом $10\degrees$ к горизонтали,
+    соскальзывает проводник массой $50\,\text{г}$: без трения и с постоянной скоростью $12\,\frac{\text{м}}{\text{с}}$ .
+    Рельсы замнуты резистором сопротивлением $12\,\text{Ом}$.
+    Вся система находитится в однородном вертикальном магнитном поле (см.
+    рис.
+    на доске).
+    Определите индукцию магнитного поля и ток, протекающий в проводнике.
+    Сопротивлением проводника, рельс и соединительных проводов пренебречь, ускорение свободного падения принять равным $g = 10\,\frac{\text{м}}{\text{с}^{2}}$.
+}
+\answer{%
+    \begin{align*}
+    \ele &= B_\bot v \ell, B_\bot = B\cos \alpha, \eli = \frac{\ele}R, \\
+    F_A &= \eli B \ell = \frac{\ele}R B \ell, \\
+    F_A \cos \alpha &= mg \sin \alpha \implies \frac{\ele}R B \ell \cos \alpha = mg \sin \alpha \\
+    &\frac{B \cos \alpha \cdot v \ell}R B \ell \cos \alpha = mg \sin \alpha\implies \frac{B^2 \cos^2 \alpha  \cdot v \ell^2}R = mg \sin \alpha, \\
+    B &= \sqrt{\frac{mg R \sin \alpha}{v \ell^2 \cos^2 \alpha}} = \sqrt{\frac{50\,\text{г} \cdot 10\,\frac{\text{м}}{\text{с}^{2}} \cdot 12\,\text{Ом} \cdot \sin 10\degrees}{12\,\frac{\text{м}}{\text{с}} \cdot \sqr{20\,\text{см}} \cdot \cos^2 10\degrees}}\approx 1{,}50\,\text{Тл}, \\
+    \eli &= \frac{\ele}R= \frac{B_\bot v \ell}R = \frac {v \ell \cos \alpha}R \sqrt{\frac{mg R \sin \alpha}{v \ell^2 \cos \alpha}}=\sqrt{\frac{mg v \sin \alpha}{R}}=\sqrt{\frac{50\,\text{г} \cdot 10\,\frac{\text{м}}{\text{с}^{2}} \cdot 12\,\frac{\text{м}}{\text{с}} \cdot \sin 10\degrees}{12\,\text{Ом}}} \approx 0{,}29\,\text{А}.
+    \end{align*}
+}
+
+\variantsplitter
+
+\addpersonalvariant{Варвара Минаева}
+
+\tasknumber{1}%
+\task{%
+    При изменении силы тока в проводнике по закону $\eli = 2 - 0{,}4t$ (в системе СИ),
+    в нём возникает ЭДС самоиндукции $150\,\text{мВ}$.
+    Чему равна индуктивность проводника?
+    Ответ выразите в миллигенри и округлите до целого.
+}
+\answer{%
+    $
+        \ele = L\frac{\abs{\Delta \eli}}{\Delta t} = L \cdot \abs{ - 0{,}4 } \text{(в СИ)}
+        \implies L = \frac{\ele}{ 0{,}4 } = \frac{150\,\text{мВ}}{ 0{,}4 } \approx {375{,}0\,\text{мГн}}
+    $
+}
+\solutionspace{80pt}
+
+\tasknumber{2}%
+\task{%
+    Прямолинейный проводник длиной $\ell$ перемещают в однородном магнитном поле с индукцией $B$.
+    Проводник, вектор его скорости и вектор индукции поля взаимно перпендикулярны.
+    Определите зависимость ускорения от времени, если разность потенциалов на концах проводника
+    изменяется по закону $\Delta \varphi = kt^3$.
+}
+\answer{%
+    $
+        \Delta \varphi = Bv\ell = kt^3 \implies v = \frac{kt^3}{B\ell} \implies a(t) = \frac{v(t)}{t} = \frac{kt^2}{B\ell}
+    $
+}
+\solutionspace{80pt}
+
+\tasknumber{3}%
+\task{%
+    Плоская прямоугольная рамка со сторонами $30\,\text{см}$ и $50\,\text{см}$ находится в однородном вертикальном магнитном поле
+    с индукцией $150\,\text{мТл}$.
+    Сопротивление рамки $12\,\text{Ом}$.
+    Вектор магнитной индукции перпендикулярен плоскости рамки.
+    Рамку повернули на $30\degrees$ вокруг одной из её горизонтальных сторон.
+    Какой заряд протёк по рамке?
+    Ответ выразите в микрокулонах и округлите до целого.
+}
+\answer{%
+    \begin{align*}
+    \ele_i &= - \frac{\Delta \Phi_i}{\Delta t}, \eli_i = \frac{\ele_i}{R}, \Delta q_i = \eli_i\Delta t\implies \Delta q_i = \frac{\ele_i}{R} \cdot \Delta t = - \frac 1{R} \frac{\Delta \Phi_i}{\Delta t} \cdot \Delta t= - \frac{\Delta \Phi_i}{R} \implies \\
+    \implies \Delta q &= q_2 - q_1 = \sum_i \Delta q_i = \sum_i \cbr{ - \frac{\Delta \Phi_i}{R}} = -\frac 1{R} \sum_i \Delta \Phi_i = -\frac{\Phi_2 - \Phi_1}{R}.
+    \\
+    q &= \abs{\Delta q} = \frac {\abs{\Phi_2 - \Phi_1}}{R}= \frac {\abs{BS \cos \varphi_2 - BS \cos \varphi_1}}{R}= \frac {B S}{R}\abs{\cos \varphi_2 - \cos \varphi_1}= \frac {B a b}{R}\abs{\cos \varphi_2 - \cos \varphi_1}, \\
+    \varphi_1 &= 0\degrees, \varphi_2 = 30\degrees, \\
+    q&= \frac {150\,\text{мТл} \cdot 30\,\text{см} \cdot 50\,\text{см}}{12\,\text{Ом}}\abs{\cos 30\degrees - \cos 0\degrees} \approx 251{,}20\,\text{мкКл} \to 251.
+    \end{align*}
+}
+\solutionspace{120pt}
+
+\tasknumber{4}%
+\task{%
+    Резистор сопротивлением $R = 3\,\text{Ом}$ и катушка индуктивностью $L = 0{,}2\,\text{Гн}$ (и пренебрежимо малым сопротивлением)
+    подключены параллельно к источнику тока с ЭДС $\ele = 5\,\text{В}$ и внутренним сопротивлением $r = 1\,\text{Ом}$ (см.
+    рис.
+    на доске).
+    Какое количество теплоты выделится в цепи после размыкания ключа $K$?
+}
+\answer{%
+    \begin{align*}
+    &\text{закон Ома для полной цепи}: \eli = \frac{\ele}{r + R_\text{внешнее}} = \frac{\ele}{r + \frac{R \cdot 0}{R + 0}} = \frac{\ele}{r}, \\
+    Q &= W_m = \frac{L\eli^2}2 = \frac{L\sqr{\frac{\ele}{r}}}2 = \frac L2\frac{\ele^2}{r^2} = \frac{0{,}2\,\text{Гн}}2 \cdot \sqr{\frac{5\,\text{В}}{1\,\text{Ом}}} \approx 2{,}50\,\text{Дж}.
+    \end{align*}
+}
+\solutionspace{150pt}
+
+\tasknumber{5}%
+\task{%
+    По параллельным рельсам, расположенным под углом $15\degrees$ к горизонтали,
+    соскальзывает проводник массой $100\,\text{г}$: без трения и с постоянной скоростью $12\,\frac{\text{м}}{\text{с}}$ .
+    Рельсы замнуты резистором сопротивлением $8\,\text{Ом}$.
+    Вся система находитится в однородном вертикальном магнитном поле (см.
+    рис.
+    на доске).
+    Определите индукцию магнитного поля и ток, протекающий в проводнике.
+    Сопротивлением проводника, рельс и соединительных проводов пренебречь, ускорение свободного падения принять равным $g = 10\,\frac{\text{м}}{\text{с}^{2}}$.
+}
+\answer{%
+    \begin{align*}
+    \ele &= B_\bot v \ell, B_\bot = B\cos \alpha, \eli = \frac{\ele}R, \\
+    F_A &= \eli B \ell = \frac{\ele}R B \ell, \\
+    F_A \cos \alpha &= mg \sin \alpha \implies \frac{\ele}R B \ell \cos \alpha = mg \sin \alpha \\
+    &\frac{B \cos \alpha \cdot v \ell}R B \ell \cos \alpha = mg \sin \alpha\implies \frac{B^2 \cos^2 \alpha  \cdot v \ell^2}R = mg \sin \alpha, \\
+    B &= \sqrt{\frac{mg R \sin \alpha}{v \ell^2 \cos^2 \alpha}} = \sqrt{\frac{100\,\text{г} \cdot 10\,\frac{\text{м}}{\text{с}^{2}} \cdot 8\,\text{Ом} \cdot \sin 15\degrees}{12\,\frac{\text{м}}{\text{с}} \cdot \sqr{40\,\text{см}} \cdot \cos^2 15\degrees}}\approx 1{,}08\,\text{Тл}, \\
+    \eli &= \frac{\ele}R= \frac{B_\bot v \ell}R = \frac {v \ell \cos \alpha}R \sqrt{\frac{mg R \sin \alpha}{v \ell^2 \cos \alpha}}=\sqrt{\frac{mg v \sin \alpha}{R}}=\sqrt{\frac{100\,\text{г} \cdot 10\,\frac{\text{м}}{\text{с}^{2}} \cdot 12\,\frac{\text{м}}{\text{с}} \cdot \sin 15\degrees}{8\,\text{Ом}}} \approx 0{,}62\,\text{А}.
+    \end{align*}
+}
+
+\variantsplitter
+
+\addpersonalvariant{Леонид Никитин}
+
+\tasknumber{1}%
+\task{%
+    При изменении силы тока в проводнике по закону $\eli = 6 - 0{,}5t$ (в системе СИ),
+    в нём возникает ЭДС самоиндукции $200\,\text{мВ}$.
+    Чему равна индуктивность проводника?
+    Ответ выразите в миллигенри и округлите до целого.
+}
+\answer{%
+    $
+        \ele = L\frac{\abs{\Delta \eli}}{\Delta t} = L \cdot \abs{ - 0{,}5 } \text{(в СИ)}
+        \implies L = \frac{\ele}{ 0{,}5 } = \frac{200\,\text{мВ}}{ 0{,}5 } \approx {400{,}0\,\text{мГн}}
+    $
+}
+\solutionspace{80pt}
+
+\tasknumber{2}%
+\task{%
+    Прямолинейный проводник длиной $\ell$ перемещают в однородном магнитном поле с индукцией $B$.
+    Проводник, вектор его скорости и вектор индукции поля взаимно перпендикулярны.
+    Определите зависимость ускорения от времени, если разность потенциалов на концах проводника
+    изменяется по закону $\Delta \varphi = kt^3$.
+}
+\answer{%
+    $
+        \Delta \varphi = Bv\ell = kt^3 \implies v = \frac{kt^3}{B\ell} \implies a(t) = \frac{v(t)}{t} = \frac{kt^2}{B\ell}
+    $
+}
+\solutionspace{80pt}
+
+\tasknumber{3}%
+\task{%
+    Плоская прямоугольная рамка со сторонами $20\,\text{см}$ и $50\,\text{см}$ находится в однородном вертикальном магнитном поле
+    с индукцией $150\,\text{мТл}$.
+    Сопротивление рамки $8\,\text{Ом}$.
+    Вектор магнитной индукции параллелен плоскости рамки.
+    Рамку повернули на $30\degrees$ вокруг одной из её горизонтальных сторон.
+    Какой заряд протёк по рамке?
+    Ответ выразите в микрокулонах и округлите до целого.
+}
+\answer{%
+    \begin{align*}
+    \ele_i &= - \frac{\Delta \Phi_i}{\Delta t}, \eli_i = \frac{\ele_i}{R}, \Delta q_i = \eli_i\Delta t\implies \Delta q_i = \frac{\ele_i}{R} \cdot \Delta t = - \frac 1{R} \frac{\Delta \Phi_i}{\Delta t} \cdot \Delta t= - \frac{\Delta \Phi_i}{R} \implies \\
+    \implies \Delta q &= q_2 - q_1 = \sum_i \Delta q_i = \sum_i \cbr{ - \frac{\Delta \Phi_i}{R}} = -\frac 1{R} \sum_i \Delta \Phi_i = -\frac{\Phi_2 - \Phi_1}{R}.
+    \\
+    q &= \abs{\Delta q} = \frac {\abs{\Phi_2 - \Phi_1}}{R}= \frac {\abs{BS \cos \varphi_2 - BS \cos \varphi_1}}{R}= \frac {B S}{R}\abs{\cos \varphi_2 - \cos \varphi_1}= \frac {B a b}{R}\abs{\cos \varphi_2 - \cos \varphi_1}, \\
+    \varphi_1 &= 90\degrees, \varphi_2 = 60\degrees, \\
+    q&= \frac {150\,\text{мТл} \cdot 20\,\text{см} \cdot 50\,\text{см}}{8\,\text{Ом}}\abs{\cos 60\degrees - \cos 90\degrees} \approx 937{,}50\,\text{мкКл} \to 938.
+    \end{align*}
+}
+\solutionspace{120pt}
+
+\tasknumber{4}%
+\task{%
+    Резистор сопротивлением $R = 4\,\text{Ом}$ и катушка индуктивностью $L = 0{,}2\,\text{Гн}$ (и пренебрежимо малым сопротивлением)
+    подключены параллельно к источнику тока с ЭДС $\ele = 8\,\text{В}$ и внутренним сопротивлением $r = 2\,\text{Ом}$ (см.
+    рис.
+    на доске).
+    Какое количество теплоты выделится в цепи после размыкания ключа $K$?
+}
+\answer{%
+    \begin{align*}
+    &\text{закон Ома для полной цепи}: \eli = \frac{\ele}{r + R_\text{внешнее}} = \frac{\ele}{r + \frac{R \cdot 0}{R + 0}} = \frac{\ele}{r}, \\
+    Q &= W_m = \frac{L\eli^2}2 = \frac{L\sqr{\frac{\ele}{r}}}2 = \frac L2\frac{\ele^2}{r^2} = \frac{0{,}2\,\text{Гн}}2 \cdot \sqr{\frac{8\,\text{В}}{2\,\text{Ом}}} \approx 1{,}60\,\text{Дж}.
+    \end{align*}
+}
+\solutionspace{150pt}
+
+\tasknumber{5}%
+\task{%
+    По параллельным рельсам, расположенным под углом $15\degrees$ к горизонтали,
+    соскальзывает проводник массой $50\,\text{г}$: без трения и с постоянной скоростью $12\,\frac{\text{м}}{\text{с}}$ .
+    Рельсы замнуты резистором сопротивлением $8\,\text{Ом}$.
+    Вся система находитится в однородном вертикальном магнитном поле (см.
+    рис.
+    на доске).
+    Определите индукцию магнитного поля и ток, протекающий в проводнике.
+    Сопротивлением проводника, рельс и соединительных проводов пренебречь, ускорение свободного падения принять равным $g = 10\,\frac{\text{м}}{\text{с}^{2}}$.
+}
+\answer{%
+    \begin{align*}
+    \ele &= B_\bot v \ell, B_\bot = B\cos \alpha, \eli = \frac{\ele}R, \\
+    F_A &= \eli B \ell = \frac{\ele}R B \ell, \\
+    F_A \cos \alpha &= mg \sin \alpha \implies \frac{\ele}R B \ell \cos \alpha = mg \sin \alpha \\
+    &\frac{B \cos \alpha \cdot v \ell}R B \ell \cos \alpha = mg \sin \alpha\implies \frac{B^2 \cos^2 \alpha  \cdot v \ell^2}R = mg \sin \alpha, \\
+    B &= \sqrt{\frac{mg R \sin \alpha}{v \ell^2 \cos^2 \alpha}} = \sqrt{\frac{50\,\text{г} \cdot 10\,\frac{\text{м}}{\text{с}^{2}} \cdot 8\,\text{Ом} \cdot \sin 15\degrees}{12\,\frac{\text{м}}{\text{с}} \cdot \sqr{60\,\text{см}} \cdot \cos^2 15\degrees}}\approx 0{,}51\,\text{Тл}, \\
+    \eli &= \frac{\ele}R= \frac{B_\bot v \ell}R = \frac {v \ell \cos \alpha}R \sqrt{\frac{mg R \sin \alpha}{v \ell^2 \cos \alpha}}=\sqrt{\frac{mg v \sin \alpha}{R}}=\sqrt{\frac{50\,\text{г} \cdot 10\,\frac{\text{м}}{\text{с}^{2}} \cdot 12\,\frac{\text{м}}{\text{с}} \cdot \sin 15\degrees}{8\,\text{Ом}}} \approx 0{,}44\,\text{А}.
+    \end{align*}
+}
+
+\variantsplitter
+
+\addpersonalvariant{Тимофей Полетаев}
+
+\tasknumber{1}%
+\task{%
+    При изменении силы тока в проводнике по закону $\eli = 5 + 0{,}4t$ (в системе СИ),
+    в нём возникает ЭДС самоиндукции $300\,\text{мВ}$.
+    Чему равна индуктивность проводника?
+    Ответ выразите в миллигенри и округлите до целого.
+}
+\answer{%
+    $
+        \ele = L\frac{\abs{\Delta \eli}}{\Delta t} = L \cdot \abs{ + 0{,}4 } \text{(в СИ)}
+        \implies L = \frac{\ele}{ 0{,}4 } = \frac{300\,\text{мВ}}{ 0{,}4 } \approx {750{,}0\,\text{мГн}}
+    $
+}
+\solutionspace{80pt}
+
+\tasknumber{2}%
+\task{%
+    Прямолинейный проводник длиной $\ell$ перемещают в однородном магнитном поле с индукцией $B$.
+    Проводник, вектор его скорости и вектор индукции поля взаимно перпендикулярны.
+    Определите зависимость ускорения от времени, если разность потенциалов на концах проводника
+    изменяется по закону $\Delta \varphi = kt^4$.
+}
+\answer{%
+    $
+        \Delta \varphi = Bv\ell = kt^4 \implies v = \frac{kt^4}{B\ell} \implies a(t) = \frac{v(t)}{t} = \frac{kt^3}{B\ell}
+    $
+}
+\solutionspace{80pt}
+
+\tasknumber{3}%
+\task{%
+    Плоская прямоугольная рамка со сторонами $40\,\text{см}$ и $60\,\text{см}$ находится в однородном вертикальном магнитном поле
+    с индукцией $120\,\text{мТл}$.
+    Сопротивление рамки $15\,\text{Ом}$.
+    Вектор магнитной индукции параллелен плоскости рамки.
+    Рамку повернули на $60\degrees$ вокруг одной из её горизонтальных сторон.
+    Какой заряд протёк по рамке?
+    Ответ выразите в микрокулонах и округлите до целого.
+}
+\answer{%
+    \begin{align*}
+    \ele_i &= - \frac{\Delta \Phi_i}{\Delta t}, \eli_i = \frac{\ele_i}{R}, \Delta q_i = \eli_i\Delta t\implies \Delta q_i = \frac{\ele_i}{R} \cdot \Delta t = - \frac 1{R} \frac{\Delta \Phi_i}{\Delta t} \cdot \Delta t= - \frac{\Delta \Phi_i}{R} \implies \\
+    \implies \Delta q &= q_2 - q_1 = \sum_i \Delta q_i = \sum_i \cbr{ - \frac{\Delta \Phi_i}{R}} = -\frac 1{R} \sum_i \Delta \Phi_i = -\frac{\Phi_2 - \Phi_1}{R}.
+    \\
+    q &= \abs{\Delta q} = \frac {\abs{\Phi_2 - \Phi_1}}{R}= \frac {\abs{BS \cos \varphi_2 - BS \cos \varphi_1}}{R}= \frac {B S}{R}\abs{\cos \varphi_2 - \cos \varphi_1}= \frac {B a b}{R}\abs{\cos \varphi_2 - \cos \varphi_1}, \\
+    \varphi_1 &= 90\degrees, \varphi_2 = 30\degrees, \\
+    q&= \frac {120\,\text{мТл} \cdot 40\,\text{см} \cdot 60\,\text{см}}{15\,\text{Ом}}\abs{\cos 30\degrees - \cos 90\degrees} \approx 1662{,}77\,\text{мкКл} \to 1663.
+    \end{align*}
+}
+\solutionspace{120pt}
+
+\tasknumber{4}%
+\task{%
+    Резистор сопротивлением $R = 3\,\text{Ом}$ и катушка индуктивностью $L = 0{,}5\,\text{Гн}$ (и пренебрежимо малым сопротивлением)
+    подключены параллельно к источнику тока с ЭДС $\ele = 12\,\text{В}$ и внутренним сопротивлением $r = 2\,\text{Ом}$ (см.
+    рис.
+    на доске).
+    Какое количество теплоты выделится в цепи после размыкания ключа $K$?
+}
+\answer{%
+    \begin{align*}
+    &\text{закон Ома для полной цепи}: \eli = \frac{\ele}{r + R_\text{внешнее}} = \frac{\ele}{r + \frac{R \cdot 0}{R + 0}} = \frac{\ele}{r}, \\
+    Q &= W_m = \frac{L\eli^2}2 = \frac{L\sqr{\frac{\ele}{r}}}2 = \frac L2\frac{\ele^2}{r^2} = \frac{0{,}5\,\text{Гн}}2 \cdot \sqr{\frac{12\,\text{В}}{2\,\text{Ом}}} \approx 9{,}00\,\text{Дж}.
+    \end{align*}
+}
+\solutionspace{150pt}
+
+\tasknumber{5}%
+\task{%
+    По параллельным рельсам, расположенным под углом $20\degrees$ к горизонтали,
+    соскальзывает проводник массой $150\,\text{г}$: без трения и с постоянной скоростью $15\,\frac{\text{м}}{\text{с}}$ .
+    Рельсы замнуты резистором сопротивлением $5\,\text{Ом}$.
+    Вся система находитится в однородном вертикальном магнитном поле (см.
+    рис.
+    на доске).
+    Определите индукцию магнитного поля и ток, протекающий в проводнике.
+    Сопротивлением проводника, рельс и соединительных проводов пренебречь, ускорение свободного падения принять равным $g = 10\,\frac{\text{м}}{\text{с}^{2}}$.
+}
+\answer{%
+    \begin{align*}
+    \ele &= B_\bot v \ell, B_\bot = B\cos \alpha, \eli = \frac{\ele}R, \\
+    F_A &= \eli B \ell = \frac{\ele}R B \ell, \\
+    F_A \cos \alpha &= mg \sin \alpha \implies \frac{\ele}R B \ell \cos \alpha = mg \sin \alpha \\
+    &\frac{B \cos \alpha \cdot v \ell}R B \ell \cos \alpha = mg \sin \alpha\implies \frac{B^2 \cos^2 \alpha  \cdot v \ell^2}R = mg \sin \alpha, \\
+    B &= \sqrt{\frac{mg R \sin \alpha}{v \ell^2 \cos^2 \alpha}} = \sqrt{\frac{150\,\text{г} \cdot 10\,\frac{\text{м}}{\text{с}^{2}} \cdot 5\,\text{Ом} \cdot \sin 20\degrees}{15\,\frac{\text{м}}{\text{с}} \cdot \sqr{40\,\text{см}} \cdot \cos^2 20\degrees}}\approx 1{,}10\,\text{Тл}, \\
+    \eli &= \frac{\ele}R= \frac{B_\bot v \ell}R = \frac {v \ell \cos \alpha}R \sqrt{\frac{mg R \sin \alpha}{v \ell^2 \cos \alpha}}=\sqrt{\frac{mg v \sin \alpha}{R}}=\sqrt{\frac{150\,\text{г} \cdot 10\,\frac{\text{м}}{\text{с}^{2}} \cdot 15\,\frac{\text{м}}{\text{с}} \cdot \sin 20\degrees}{5\,\text{Ом}}} \approx 1{,}24\,\text{А}.
+    \end{align*}
+}
+
+\variantsplitter
+
+\addpersonalvariant{Андрей Рожков}
+
+\tasknumber{1}%
+\task{%
+    При изменении силы тока в проводнике по закону $\eli = 3 + 0{,}5t$ (в системе СИ),
+    в нём возникает ЭДС самоиндукции $150\,\text{мВ}$.
+    Чему равна индуктивность проводника?
+    Ответ выразите в миллигенри и округлите до целого.
+}
+\answer{%
+    $
+        \ele = L\frac{\abs{\Delta \eli}}{\Delta t} = L \cdot \abs{ + 0{,}5 } \text{(в СИ)}
+        \implies L = \frac{\ele}{ 0{,}5 } = \frac{150\,\text{мВ}}{ 0{,}5 } \approx {300{,}0\,\text{мГн}}
+    $
+}
+\solutionspace{80pt}
+
+\tasknumber{2}%
+\task{%
+    Прямолинейный проводник длиной $\ell$ перемещают в однородном магнитном поле с индукцией $B$.
+    Проводник, вектор его скорости и вектор индукции поля взаимно перпендикулярны.
+    Определите зависимость ускорения от времени, если разность потенциалов на концах проводника
+    изменяется по закону $\Delta \varphi = kt^4$.
+}
+\answer{%
+    $
+        \Delta \varphi = Bv\ell = kt^4 \implies v = \frac{kt^4}{B\ell} \implies a(t) = \frac{v(t)}{t} = \frac{kt^3}{B\ell}
+    $
+}
+\solutionspace{80pt}
+
+\tasknumber{3}%
+\task{%
+    Плоская прямоугольная рамка со сторонами $20\,\text{см}$ и $50\,\text{см}$ находится в однородном вертикальном магнитном поле
+    с индукцией $120\,\text{мТл}$.
+    Сопротивление рамки $8\,\text{Ом}$.
+    Вектор магнитной индукции перпендикулярен плоскости рамки.
+    Рамку повернули на $60\degrees$ вокруг одной из её горизонтальных сторон.
+    Какой заряд протёк по рамке?
+    Ответ выразите в микрокулонах и округлите до целого.
+}
+\answer{%
+    \begin{align*}
+    \ele_i &= - \frac{\Delta \Phi_i}{\Delta t}, \eli_i = \frac{\ele_i}{R}, \Delta q_i = \eli_i\Delta t\implies \Delta q_i = \frac{\ele_i}{R} \cdot \Delta t = - \frac 1{R} \frac{\Delta \Phi_i}{\Delta t} \cdot \Delta t= - \frac{\Delta \Phi_i}{R} \implies \\
+    \implies \Delta q &= q_2 - q_1 = \sum_i \Delta q_i = \sum_i \cbr{ - \frac{\Delta \Phi_i}{R}} = -\frac 1{R} \sum_i \Delta \Phi_i = -\frac{\Phi_2 - \Phi_1}{R}.
+    \\
+    q &= \abs{\Delta q} = \frac {\abs{\Phi_2 - \Phi_1}}{R}= \frac {\abs{BS \cos \varphi_2 - BS \cos \varphi_1}}{R}= \frac {B S}{R}\abs{\cos \varphi_2 - \cos \varphi_1}= \frac {B a b}{R}\abs{\cos \varphi_2 - \cos \varphi_1}, \\
+    \varphi_1 &= 0\degrees, \varphi_2 = 60\degrees, \\
+    q&= \frac {120\,\text{мТл} \cdot 20\,\text{см} \cdot 50\,\text{см}}{8\,\text{Ом}}\abs{\cos 60\degrees - \cos 0\degrees} \approx 750{,}00\,\text{мкКл} \to 750.
+    \end{align*}
+}
+\solutionspace{120pt}
+
+\tasknumber{4}%
+\task{%
+    Резистор сопротивлением $R = 3\,\text{Ом}$ и катушка индуктивностью $L = 0{,}2\,\text{Гн}$ (и пренебрежимо малым сопротивлением)
+    подключены параллельно к источнику тока с ЭДС $\ele = 12\,\text{В}$ и внутренним сопротивлением $r = 2\,\text{Ом}$ (см.
+    рис.
+    на доске).
+    Какое количество теплоты выделится в цепи после размыкания ключа $K$?
+}
+\answer{%
+    \begin{align*}
+    &\text{закон Ома для полной цепи}: \eli = \frac{\ele}{r + R_\text{внешнее}} = \frac{\ele}{r + \frac{R \cdot 0}{R + 0}} = \frac{\ele}{r}, \\
+    Q &= W_m = \frac{L\eli^2}2 = \frac{L\sqr{\frac{\ele}{r}}}2 = \frac L2\frac{\ele^2}{r^2} = \frac{0{,}2\,\text{Гн}}2 \cdot \sqr{\frac{12\,\text{В}}{2\,\text{Ом}}} \approx 3{,}60\,\text{Дж}.
+    \end{align*}
+}
+\solutionspace{150pt}
+
+\tasknumber{5}%
+\task{%
+    По параллельным рельсам, расположенным под углом $10\degrees$ к горизонтали,
+    соскальзывает проводник массой $200\,\text{г}$: без трения и с постоянной скоростью $12\,\frac{\text{м}}{\text{с}}$ .
+    Рельсы замнуты резистором сопротивлением $12\,\text{Ом}$.
+    Вся система находитится в однородном вертикальном магнитном поле (см.
+    рис.
+    на доске).
+    Определите индукцию магнитного поля и ток, протекающий в проводнике.
+    Сопротивлением проводника, рельс и соединительных проводов пренебречь, ускорение свободного падения принять равным $g = 10\,\frac{\text{м}}{\text{с}^{2}}$.
+}
+\answer{%
+    \begin{align*}
+    \ele &= B_\bot v \ell, B_\bot = B\cos \alpha, \eli = \frac{\ele}R, \\
+    F_A &= \eli B \ell = \frac{\ele}R B \ell, \\
+    F_A \cos \alpha &= mg \sin \alpha \implies \frac{\ele}R B \ell \cos \alpha = mg \sin \alpha \\
+    &\frac{B \cos \alpha \cdot v \ell}R B \ell \cos \alpha = mg \sin \alpha\implies \frac{B^2 \cos^2 \alpha  \cdot v \ell^2}R = mg \sin \alpha, \\
+    B &= \sqrt{\frac{mg R \sin \alpha}{v \ell^2 \cos^2 \alpha}} = \sqrt{\frac{200\,\text{г} \cdot 10\,\frac{\text{м}}{\text{с}^{2}} \cdot 12\,\text{Ом} \cdot \sin 10\degrees}{12\,\frac{\text{м}}{\text{с}} \cdot \sqr{40\,\text{см}} \cdot \cos^2 10\degrees}}\approx 1{,}50\,\text{Тл}, \\
+    \eli &= \frac{\ele}R= \frac{B_\bot v \ell}R = \frac {v \ell \cos \alpha}R \sqrt{\frac{mg R \sin \alpha}{v \ell^2 \cos \alpha}}=\sqrt{\frac{mg v \sin \alpha}{R}}=\sqrt{\frac{200\,\text{г} \cdot 10\,\frac{\text{м}}{\text{с}^{2}} \cdot 12\,\frac{\text{м}}{\text{с}} \cdot \sin 10\degrees}{12\,\text{Ом}}} \approx 0{,}59\,\text{А}.
+    \end{align*}
+}
+
+\variantsplitter
+
+\addpersonalvariant{Рената Таржиманова}
+
+\tasknumber{1}%
+\task{%
+    При изменении силы тока в проводнике по закону $\eli = 2 + 0{,}4t$ (в системе СИ),
+    в нём возникает ЭДС самоиндукции $200\,\text{мВ}$.
+    Чему равна индуктивность проводника?
+    Ответ выразите в миллигенри и округлите до целого.
+}
+\answer{%
+    $
+        \ele = L\frac{\abs{\Delta \eli}}{\Delta t} = L \cdot \abs{ + 0{,}4 } \text{(в СИ)}
+        \implies L = \frac{\ele}{ 0{,}4 } = \frac{200\,\text{мВ}}{ 0{,}4 } \approx {500{,}0\,\text{мГн}}
+    $
+}
+\solutionspace{80pt}
+
+\tasknumber{2}%
+\task{%
+    Прямолинейный проводник длиной $\ell$ перемещают в однородном магнитном поле с индукцией $B$.
+    Проводник, вектор его скорости и вектор индукции поля взаимно перпендикулярны.
+    Определите зависимость ускорения от времени, если разность потенциалов на концах проводника
+    изменяется по закону $\Delta \varphi = kt^4$.
+}
+\answer{%
+    $
+        \Delta \varphi = Bv\ell = kt^4 \implies v = \frac{kt^4}{B\ell} \implies a(t) = \frac{v(t)}{t} = \frac{kt^3}{B\ell}
+    $
+}
+\solutionspace{80pt}
+
+\tasknumber{3}%
+\task{%
+    Плоская прямоугольная рамка со сторонами $30\,\text{см}$ и $60\,\text{см}$ находится в однородном вертикальном магнитном поле
+    с индукцией $200\,\text{мТл}$.
+    Сопротивление рамки $8\,\text{Ом}$.
+    Вектор магнитной индукции параллелен плоскости рамки.
+    Рамку повернули на $60\degrees$ вокруг одной из её горизонтальных сторон.
+    Какой заряд протёк по рамке?
+    Ответ выразите в микрокулонах и округлите до целого.
+}
+\answer{%
+    \begin{align*}
+    \ele_i &= - \frac{\Delta \Phi_i}{\Delta t}, \eli_i = \frac{\ele_i}{R}, \Delta q_i = \eli_i\Delta t\implies \Delta q_i = \frac{\ele_i}{R} \cdot \Delta t = - \frac 1{R} \frac{\Delta \Phi_i}{\Delta t} \cdot \Delta t= - \frac{\Delta \Phi_i}{R} \implies \\
+    \implies \Delta q &= q_2 - q_1 = \sum_i \Delta q_i = \sum_i \cbr{ - \frac{\Delta \Phi_i}{R}} = -\frac 1{R} \sum_i \Delta \Phi_i = -\frac{\Phi_2 - \Phi_1}{R}.
+    \\
+    q &= \abs{\Delta q} = \frac {\abs{\Phi_2 - \Phi_1}}{R}= \frac {\abs{BS \cos \varphi_2 - BS \cos \varphi_1}}{R}= \frac {B S}{R}\abs{\cos \varphi_2 - \cos \varphi_1}= \frac {B a b}{R}\abs{\cos \varphi_2 - \cos \varphi_1}, \\
+    \varphi_1 &= 90\degrees, \varphi_2 = 30\degrees, \\
+    q&= \frac {200\,\text{мТл} \cdot 30\,\text{см} \cdot 60\,\text{см}}{8\,\text{Ом}}\abs{\cos 30\degrees - \cos 90\degrees} \approx 3897{,}11\,\text{мкКл} \to 3897.
+    \end{align*}
+}
+\solutionspace{120pt}
+
+\tasknumber{4}%
+\task{%
+    Резистор сопротивлением $R = 4\,\text{Ом}$ и катушка индуктивностью $L = 0{,}5\,\text{Гн}$ (и пренебрежимо малым сопротивлением)
+    подключены параллельно к источнику тока с ЭДС $\ele = 5\,\text{В}$ и внутренним сопротивлением $r = 1\,\text{Ом}$ (см.
+    рис.
+    на доске).
+    Какое количество теплоты выделится в цепи после размыкания ключа $K$?
+}
+\answer{%
+    \begin{align*}
+    &\text{закон Ома для полной цепи}: \eli = \frac{\ele}{r + R_\text{внешнее}} = \frac{\ele}{r + \frac{R \cdot 0}{R + 0}} = \frac{\ele}{r}, \\
+    Q &= W_m = \frac{L\eli^2}2 = \frac{L\sqr{\frac{\ele}{r}}}2 = \frac L2\frac{\ele^2}{r^2} = \frac{0{,}5\,\text{Гн}}2 \cdot \sqr{\frac{5\,\text{В}}{1\,\text{Ом}}} \approx 6{,}25\,\text{Дж}.
+    \end{align*}
+}
+\solutionspace{150pt}
+
+\tasknumber{5}%
+\task{%
+    По параллельным рельсам, расположенным под углом $20\degrees$ к горизонтали,
+    соскальзывает проводник массой $50\,\text{г}$: без трения и с постоянной скоростью $12\,\frac{\text{м}}{\text{с}}$ .
+    Рельсы замнуты резистором сопротивлением $5\,\text{Ом}$.
+    Вся система находитится в однородном вертикальном магнитном поле (см.
+    рис.
+    на доске).
+    Определите индукцию магнитного поля и ток, протекающий в проводнике.
+    Сопротивлением проводника, рельс и соединительных проводов пренебречь, ускорение свободного падения принять равным $g = 10\,\frac{\text{м}}{\text{с}^{2}}$.
+}
+\answer{%
+    \begin{align*}
+    \ele &= B_\bot v \ell, B_\bot = B\cos \alpha, \eli = \frac{\ele}R, \\
+    F_A &= \eli B \ell = \frac{\ele}R B \ell, \\
+    F_A \cos \alpha &= mg \sin \alpha \implies \frac{\ele}R B \ell \cos \alpha = mg \sin \alpha \\
+    &\frac{B \cos \alpha \cdot v \ell}R B \ell \cos \alpha = mg \sin \alpha\implies \frac{B^2 \cos^2 \alpha  \cdot v \ell^2}R = mg \sin \alpha, \\
+    B &= \sqrt{\frac{mg R \sin \alpha}{v \ell^2 \cos^2 \alpha}} = \sqrt{\frac{50\,\text{г} \cdot 10\,\frac{\text{м}}{\text{с}^{2}} \cdot 5\,\text{Ом} \cdot \sin 20\degrees}{12\,\frac{\text{м}}{\text{с}} \cdot \sqr{20\,\text{см}} \cdot \cos^2 20\degrees}}\approx 1{,}42\,\text{Тл}, \\
+    \eli &= \frac{\ele}R= \frac{B_\bot v \ell}R = \frac {v \ell \cos \alpha}R \sqrt{\frac{mg R \sin \alpha}{v \ell^2 \cos \alpha}}=\sqrt{\frac{mg v \sin \alpha}{R}}=\sqrt{\frac{50\,\text{г} \cdot 10\,\frac{\text{м}}{\text{с}^{2}} \cdot 12\,\frac{\text{м}}{\text{с}} \cdot \sin 20\degrees}{5\,\text{Ом}}} \approx 0{,}64\,\text{А}.
+    \end{align*}
+}
+
+\variantsplitter
+
+\addpersonalvariant{Андрей Щербаков}
+
+\tasknumber{1}%
+\task{%
+    При изменении силы тока в проводнике по закону $\eli = 3 - 1{,}5t$ (в системе СИ),
+    в нём возникает ЭДС самоиндукции $150\,\text{мВ}$.
+    Чему равна индуктивность проводника?
+    Ответ выразите в миллигенри и округлите до целого.
+}
+\answer{%
+    $
+        \ele = L\frac{\abs{\Delta \eli}}{\Delta t} = L \cdot \abs{ - 1{,}5 } \text{(в СИ)}
+        \implies L = \frac{\ele}{ 1{,}5 } = \frac{150\,\text{мВ}}{ 1{,}5 } \approx {100{,}0\,\text{мГн}}
+    $
+}
+\solutionspace{80pt}
+
+\tasknumber{2}%
+\task{%
+    Прямолинейный проводник длиной $\ell$ перемещают в однородном магнитном поле с индукцией $B$.
+    Проводник, вектор его скорости и вектор индукции поля взаимно перпендикулярны.
+    Определите зависимость ускорения от времени, если разность потенциалов на концах проводника
+    изменяется по закону $\Delta \varphi = kt^4$.
+}
+\answer{%
+    $
+        \Delta \varphi = Bv\ell = kt^4 \implies v = \frac{kt^4}{B\ell} \implies a(t) = \frac{v(t)}{t} = \frac{kt^3}{B\ell}
+    $
+}
+\solutionspace{80pt}
+
+\tasknumber{3}%
+\task{%
+    Плоская прямоугольная рамка со сторонами $20\,\text{см}$ и $50\,\text{см}$ находится в однородном вертикальном магнитном поле
+    с индукцией $150\,\text{мТл}$.
+    Сопротивление рамки $8\,\text{Ом}$.
+    Вектор магнитной индукции параллелен плоскости рамки.
+    Рамку повернули на $60\degrees$ вокруг одной из её горизонтальных сторон.
+    Какой заряд протёк по рамке?
+    Ответ выразите в микрокулонах и округлите до целого.
+}
+\answer{%
+    \begin{align*}
+    \ele_i &= - \frac{\Delta \Phi_i}{\Delta t}, \eli_i = \frac{\ele_i}{R}, \Delta q_i = \eli_i\Delta t\implies \Delta q_i = \frac{\ele_i}{R} \cdot \Delta t = - \frac 1{R} \frac{\Delta \Phi_i}{\Delta t} \cdot \Delta t= - \frac{\Delta \Phi_i}{R} \implies \\
+    \implies \Delta q &= q_2 - q_1 = \sum_i \Delta q_i = \sum_i \cbr{ - \frac{\Delta \Phi_i}{R}} = -\frac 1{R} \sum_i \Delta \Phi_i = -\frac{\Phi_2 - \Phi_1}{R}.
+    \\
+    q &= \abs{\Delta q} = \frac {\abs{\Phi_2 - \Phi_1}}{R}= \frac {\abs{BS \cos \varphi_2 - BS \cos \varphi_1}}{R}= \frac {B S}{R}\abs{\cos \varphi_2 - \cos \varphi_1}= \frac {B a b}{R}\abs{\cos \varphi_2 - \cos \varphi_1}, \\
+    \varphi_1 &= 90\degrees, \varphi_2 = 30\degrees, \\
+    q&= \frac {150\,\text{мТл} \cdot 20\,\text{см} \cdot 50\,\text{см}}{8\,\text{Ом}}\abs{\cos 30\degrees - \cos 90\degrees} \approx 1623{,}80\,\text{мкКл} \to 1624.
+    \end{align*}
+}
+\solutionspace{120pt}
+
+\tasknumber{4}%
+\task{%
+    Резистор сопротивлением $R = 4\,\text{Ом}$ и катушка индуктивностью $L = 0{,}2\,\text{Гн}$ (и пренебрежимо малым сопротивлением)
+    подключены параллельно к источнику тока с ЭДС $\ele = 6\,\text{В}$ и внутренним сопротивлением $r = 1\,\text{Ом}$ (см.
+    рис.
+    на доске).
+    Какое количество теплоты выделится в цепи после размыкания ключа $K$?
+}
+\answer{%
+    \begin{align*}
+    &\text{закон Ома для полной цепи}: \eli = \frac{\ele}{r + R_\text{внешнее}} = \frac{\ele}{r + \frac{R \cdot 0}{R + 0}} = \frac{\ele}{r}, \\
+    Q &= W_m = \frac{L\eli^2}2 = \frac{L\sqr{\frac{\ele}{r}}}2 = \frac L2\frac{\ele^2}{r^2} = \frac{0{,}2\,\text{Гн}}2 \cdot \sqr{\frac{6\,\text{В}}{1\,\text{Ом}}} \approx 3{,}60\,\text{Дж}.
+    \end{align*}
+}
+\solutionspace{150pt}
+
+\tasknumber{5}%
+\task{%
+    По параллельным рельсам, расположенным под углом $25\degrees$ к горизонтали,
+    соскальзывает проводник массой $50\,\text{г}$: без трения и с постоянной скоростью $12\,\frac{\text{м}}{\text{с}}$ .
+    Рельсы замнуты резистором сопротивлением $8\,\text{Ом}$.
+    Вся система находитится в однородном вертикальном магнитном поле (см.
+    рис.
+    на доске).
+    Определите индукцию магнитного поля и ток, протекающий в проводнике.
+    Сопротивлением проводника, рельс и соединительных проводов пренебречь, ускорение свободного падения принять равным $g = 10\,\frac{\text{м}}{\text{с}^{2}}$.
+}
+\answer{%
+    \begin{align*}
+    \ele &= B_\bot v \ell, B_\bot = B\cos \alpha, \eli = \frac{\ele}R, \\
+    F_A &= \eli B \ell = \frac{\ele}R B \ell, \\
+    F_A \cos \alpha &= mg \sin \alpha \implies \frac{\ele}R B \ell \cos \alpha = mg \sin \alpha \\
+    &\frac{B \cos \alpha \cdot v \ell}R B \ell \cos \alpha = mg \sin \alpha\implies \frac{B^2 \cos^2 \alpha  \cdot v \ell^2}R = mg \sin \alpha, \\
+    B &= \sqrt{\frac{mg R \sin \alpha}{v \ell^2 \cos^2 \alpha}} = \sqrt{\frac{50\,\text{г} \cdot 10\,\frac{\text{м}}{\text{с}^{2}} \cdot 8\,\text{Ом} \cdot \sin 25\degrees}{12\,\frac{\text{м}}{\text{с}} \cdot \sqr{40\,\text{см}} \cdot \cos^2 25\degrees}}\approx 1{,}04\,\text{Тл}, \\
+    \eli &= \frac{\ele}R= \frac{B_\bot v \ell}R = \frac {v \ell \cos \alpha}R \sqrt{\frac{mg R \sin \alpha}{v \ell^2 \cos \alpha}}=\sqrt{\frac{mg v \sin \alpha}{R}}=\sqrt{\frac{50\,\text{г} \cdot 10\,\frac{\text{м}}{\text{с}^{2}} \cdot 12\,\frac{\text{м}}{\text{с}} \cdot \sin 25\degrees}{8\,\text{Ом}}} \approx 0{,}56\,\text{А}.
+    \end{align*}
+}
+
+\variantsplitter
+
+\addpersonalvariant{Михаил Ярошевский}
+
+\tasknumber{1}%
+\task{%
+    При изменении силы тока в проводнике по закону $\eli = 3 - 0{,}8t$ (в системе СИ),
+    в нём возникает ЭДС самоиндукции $400\,\text{мВ}$.
+    Чему равна индуктивность проводника?
+    Ответ выразите в миллигенри и округлите до целого.
+}
+\answer{%
+    $
+        \ele = L\frac{\abs{\Delta \eli}}{\Delta t} = L \cdot \abs{ - 0{,}8 } \text{(в СИ)}
+        \implies L = \frac{\ele}{ 0{,}8 } = \frac{400\,\text{мВ}}{ 0{,}8 } \approx {500{,}0\,\text{мГн}}
+    $
+}
+\solutionspace{80pt}
+
+\tasknumber{2}%
+\task{%
+    Прямолинейный проводник длиной $\ell$ перемещают в однородном магнитном поле с индукцией $B$.
+    Проводник, вектор его скорости и вектор индукции поля взаимно перпендикулярны.
+    Определите зависимость ускорения от времени, если разность потенциалов на концах проводника
+    изменяется по закону $\Delta \varphi = kt^4$.
+}
+\answer{%
+    $
+        \Delta \varphi = Bv\ell = kt^4 \implies v = \frac{kt^4}{B\ell} \implies a(t) = \frac{v(t)}{t} = \frac{kt^3}{B\ell}
+    $
+}
+\solutionspace{80pt}
+
+\tasknumber{3}%
+\task{%
+    Плоская прямоугольная рамка со сторонами $40\,\text{см}$ и $25\,\text{см}$ находится в однородном вертикальном магнитном поле
+    с индукцией $300\,\text{мТл}$.
+    Сопротивление рамки $12\,\text{Ом}$.
+    Вектор магнитной индукции параллелен плоскости рамки.
+    Рамку повернули на $30\degrees$ вокруг одной из её горизонтальных сторон.
+    Какой заряд протёк по рамке?
+    Ответ выразите в микрокулонах и округлите до целого.
+}
+\answer{%
+    \begin{align*}
+    \ele_i &= - \frac{\Delta \Phi_i}{\Delta t}, \eli_i = \frac{\ele_i}{R}, \Delta q_i = \eli_i\Delta t\implies \Delta q_i = \frac{\ele_i}{R} \cdot \Delta t = - \frac 1{R} \frac{\Delta \Phi_i}{\Delta t} \cdot \Delta t= - \frac{\Delta \Phi_i}{R} \implies \\
+    \implies \Delta q &= q_2 - q_1 = \sum_i \Delta q_i = \sum_i \cbr{ - \frac{\Delta \Phi_i}{R}} = -\frac 1{R} \sum_i \Delta \Phi_i = -\frac{\Phi_2 - \Phi_1}{R}.
+    \\
+    q &= \abs{\Delta q} = \frac {\abs{\Phi_2 - \Phi_1}}{R}= \frac {\abs{BS \cos \varphi_2 - BS \cos \varphi_1}}{R}= \frac {B S}{R}\abs{\cos \varphi_2 - \cos \varphi_1}= \frac {B a b}{R}\abs{\cos \varphi_2 - \cos \varphi_1}, \\
+    \varphi_1 &= 90\degrees, \varphi_2 = 60\degrees, \\
+    q&= \frac {300\,\text{мТл} \cdot 40\,\text{см} \cdot 25\,\text{см}}{12\,\text{Ом}}\abs{\cos 60\degrees - \cos 90\degrees} \approx 1250{,}00\,\text{мкКл} \to 1250.
+    \end{align*}
+}
+\solutionspace{120pt}
+
+\tasknumber{4}%
+\task{%
+    Резистор сопротивлением $R = 4\,\text{Ом}$ и катушка индуктивностью $L = 0{,}2\,\text{Гн}$ (и пренебрежимо малым сопротивлением)
+    подключены параллельно к источнику тока с ЭДС $\ele = 12\,\text{В}$ и внутренним сопротивлением $r = 1\,\text{Ом}$ (см.
+    рис.
+    на доске).
+    Какое количество теплоты выделится в цепи после размыкания ключа $K$?
+}
+\answer{%
+    \begin{align*}
+    &\text{закон Ома для полной цепи}: \eli = \frac{\ele}{r + R_\text{внешнее}} = \frac{\ele}{r + \frac{R \cdot 0}{R + 0}} = \frac{\ele}{r}, \\
+    Q &= W_m = \frac{L\eli^2}2 = \frac{L\sqr{\frac{\ele}{r}}}2 = \frac L2\frac{\ele^2}{r^2} = \frac{0{,}2\,\text{Гн}}2 \cdot \sqr{\frac{12\,\text{В}}{1\,\text{Ом}}} \approx 14{,}40\,\text{Дж}.
+    \end{align*}
+}
+\solutionspace{150pt}
+
+\tasknumber{5}%
+\task{%
+    По параллельным рельсам, расположенным под углом $10\degrees$ к горизонтали,
+    соскальзывает проводник массой $150\,\text{г}$: без трения и с постоянной скоростью $15\,\frac{\text{м}}{\text{с}}$ .
+    Рельсы замнуты резистором сопротивлением $5\,\text{Ом}$.
+    Вся система находитится в однородном вертикальном магнитном поле (см.
+    рис.
+    на доске).
+    Определите индукцию магнитного поля и ток, протекающий в проводнике.
+    Сопротивлением проводника, рельс и соединительных проводов пренебречь, ускорение свободного падения принять равным $g = 10\,\frac{\text{м}}{\text{с}^{2}}$.
+}
+\answer{%
+    \begin{align*}
+    \ele &= B_\bot v \ell, B_\bot = B\cos \alpha, \eli = \frac{\ele}R, \\
+    F_A &= \eli B \ell = \frac{\ele}R B \ell, \\
+    F_A \cos \alpha &= mg \sin \alpha \implies \frac{\ele}R B \ell \cos \alpha = mg \sin \alpha \\
+    &\frac{B \cos \alpha \cdot v \ell}R B \ell \cos \alpha = mg \sin \alpha\implies \frac{B^2 \cos^2 \alpha  \cdot v \ell^2}R = mg \sin \alpha, \\
+    B &= \sqrt{\frac{mg R \sin \alpha}{v \ell^2 \cos^2 \alpha}} = \sqrt{\frac{150\,\text{г} \cdot 10\,\frac{\text{м}}{\text{с}^{2}} \cdot 5\,\text{Ом} \cdot \sin 10\degrees}{15\,\frac{\text{м}}{\text{с}} \cdot \sqr{40\,\text{см}} \cdot \cos^2 10\degrees}}\approx 0{,}75\,\text{Тл}, \\
+    \eli &= \frac{\ele}R= \frac{B_\bot v \ell}R = \frac {v \ell \cos \alpha}R \sqrt{\frac{mg R \sin \alpha}{v \ell^2 \cos \alpha}}=\sqrt{\frac{mg v \sin \alpha}{R}}=\sqrt{\frac{150\,\text{г} \cdot 10\,\frac{\text{м}}{\text{с}^{2}} \cdot 15\,\frac{\text{м}}{\text{с}} \cdot \sin 10\degrees}{5\,\text{Ом}}} \approx 0{,}88\,\text{А}.
+    \end{align*}
+}
+
+\variantsplitter
+
+\addpersonalvariant{Алексей Алимпиев}
+
+\tasknumber{1}%
+\task{%
+    При изменении силы тока в проводнике по закону $\eli = 4 - 0{,}5t$ (в системе СИ),
+    в нём возникает ЭДС самоиндукции $150\,\text{мВ}$.
+    Чему равна индуктивность проводника?
+    Ответ выразите в миллигенри и округлите до целого.
+}
+\answer{%
+    $
+        \ele = L\frac{\abs{\Delta \eli}}{\Delta t} = L \cdot \abs{ - 0{,}5 } \text{(в СИ)}
+        \implies L = \frac{\ele}{ 0{,}5 } = \frac{150\,\text{мВ}}{ 0{,}5 } \approx {300{,}0\,\text{мГн}}
+    $
+}
+\solutionspace{80pt}
+
+\tasknumber{2}%
+\task{%
+    Прямолинейный проводник длиной $\ell$ перемещают в однородном магнитном поле с индукцией $B$.
+    Проводник, вектор его скорости и вектор индукции поля взаимно перпендикулярны.
+    Определите зависимость ускорения от времени, если разность потенциалов на концах проводника
+    изменяется по закону $\Delta \varphi = kt^4$.
+}
+\answer{%
+    $
+        \Delta \varphi = Bv\ell = kt^4 \implies v = \frac{kt^4}{B\ell} \implies a(t) = \frac{v(t)}{t} = \frac{kt^3}{B\ell}
+    $
+}
+\solutionspace{80pt}
+
+\tasknumber{3}%
+\task{%
+    Плоская прямоугольная рамка со сторонами $20\,\text{см}$ и $50\,\text{см}$ находится в однородном вертикальном магнитном поле
+    с индукцией $150\,\text{мТл}$.
+    Сопротивление рамки $12\,\text{Ом}$.
+    Вектор магнитной индукции перпендикулярен плоскости рамки.
+    Рамку повернули на $30\degrees$ вокруг одной из её горизонтальных сторон.
+    Какой заряд протёк по рамке?
+    Ответ выразите в микрокулонах и округлите до целого.
+}
+\answer{%
+    \begin{align*}
+    \ele_i &= - \frac{\Delta \Phi_i}{\Delta t}, \eli_i = \frac{\ele_i}{R}, \Delta q_i = \eli_i\Delta t\implies \Delta q_i = \frac{\ele_i}{R} \cdot \Delta t = - \frac 1{R} \frac{\Delta \Phi_i}{\Delta t} \cdot \Delta t= - \frac{\Delta \Phi_i}{R} \implies \\
+    \implies \Delta q &= q_2 - q_1 = \sum_i \Delta q_i = \sum_i \cbr{ - \frac{\Delta \Phi_i}{R}} = -\frac 1{R} \sum_i \Delta \Phi_i = -\frac{\Phi_2 - \Phi_1}{R}.
+    \\
+    q &= \abs{\Delta q} = \frac {\abs{\Phi_2 - \Phi_1}}{R}= \frac {\abs{BS \cos \varphi_2 - BS \cos \varphi_1}}{R}= \frac {B S}{R}\abs{\cos \varphi_2 - \cos \varphi_1}= \frac {B a b}{R}\abs{\cos \varphi_2 - \cos \varphi_1}, \\
+    \varphi_1 &= 0\degrees, \varphi_2 = 30\degrees, \\
+    q&= \frac {150\,\text{мТл} \cdot 20\,\text{см} \cdot 50\,\text{см}}{12\,\text{Ом}}\abs{\cos 30\degrees - \cos 0\degrees} \approx 167{,}47\,\text{мкКл} \to 167.
+    \end{align*}
+}
+\solutionspace{120pt}
+
+\tasknumber{4}%
+\task{%
+    Резистор сопротивлением $R = 4\,\text{Ом}$ и катушка индуктивностью $L = 0{,}5\,\text{Гн}$ (и пренебрежимо малым сопротивлением)
+    подключены параллельно к источнику тока с ЭДС $\ele = 8\,\text{В}$ и внутренним сопротивлением $r = 1\,\text{Ом}$ (см.
+    рис.
+    на доске).
+    Какое количество теплоты выделится в цепи после размыкания ключа $K$?
+}
+\answer{%
+    \begin{align*}
+    &\text{закон Ома для полной цепи}: \eli = \frac{\ele}{r + R_\text{внешнее}} = \frac{\ele}{r + \frac{R \cdot 0}{R + 0}} = \frac{\ele}{r}, \\
+    Q &= W_m = \frac{L\eli^2}2 = \frac{L\sqr{\frac{\ele}{r}}}2 = \frac L2\frac{\ele^2}{r^2} = \frac{0{,}5\,\text{Гн}}2 \cdot \sqr{\frac{8\,\text{В}}{1\,\text{Ом}}} \approx 16{,}00\,\text{Дж}.
+    \end{align*}
+}
+\solutionspace{150pt}
+
+\tasknumber{5}%
+\task{%
+    По параллельным рельсам, расположенным под углом $10\degrees$ к горизонтали,
+    соскальзывает проводник массой $50\,\text{г}$: без трения и с постоянной скоростью $15\,\frac{\text{м}}{\text{с}}$ .
+    Рельсы замнуты резистором сопротивлением $8\,\text{Ом}$.
+    Вся система находитится в однородном вертикальном магнитном поле (см.
+    рис.
+    на доске).
+    Определите индукцию магнитного поля и ток, протекающий в проводнике.
+    Сопротивлением проводника, рельс и соединительных проводов пренебречь, ускорение свободного падения принять равным $g = 10\,\frac{\text{м}}{\text{с}^{2}}$.
+}
+\answer{%
+    \begin{align*}
+    \ele &= B_\bot v \ell, B_\bot = B\cos \alpha, \eli = \frac{\ele}R, \\
+    F_A &= \eli B \ell = \frac{\ele}R B \ell, \\
+    F_A \cos \alpha &= mg \sin \alpha \implies \frac{\ele}R B \ell \cos \alpha = mg \sin \alpha \\
+    &\frac{B \cos \alpha \cdot v \ell}R B \ell \cos \alpha = mg \sin \alpha\implies \frac{B^2 \cos^2 \alpha  \cdot v \ell^2}R = mg \sin \alpha, \\
+    B &= \sqrt{\frac{mg R \sin \alpha}{v \ell^2 \cos^2 \alpha}} = \sqrt{\frac{50\,\text{г} \cdot 10\,\frac{\text{м}}{\text{с}^{2}} \cdot 8\,\text{Ом} \cdot \sin 10\degrees}{15\,\frac{\text{м}}{\text{с}} \cdot \sqr{20\,\text{см}} \cdot \cos^2 10\degrees}}\approx 1{,}09\,\text{Тл}, \\
+    \eli &= \frac{\ele}R= \frac{B_\bot v \ell}R = \frac {v \ell \cos \alpha}R \sqrt{\frac{mg R \sin \alpha}{v \ell^2 \cos \alpha}}=\sqrt{\frac{mg v \sin \alpha}{R}}=\sqrt{\frac{50\,\text{г} \cdot 10\,\frac{\text{м}}{\text{с}^{2}} \cdot 15\,\frac{\text{м}}{\text{с}} \cdot \sin 10\degrees}{8\,\text{Ом}}} \approx 0{,}40\,\text{А}.
+    \end{align*}
+}
+
+\variantsplitter
+
+\addpersonalvariant{Евгений Васин}
+
+\tasknumber{1}%
+\task{%
+    При изменении силы тока в проводнике по закону $\eli = 4 - 0{,}4t$ (в системе СИ),
+    в нём возникает ЭДС самоиндукции $400\,\text{мВ}$.
+    Чему равна индуктивность проводника?
+    Ответ выразите в миллигенри и округлите до целого.
+}
+\answer{%
+    $
+        \ele = L\frac{\abs{\Delta \eli}}{\Delta t} = L \cdot \abs{ - 0{,}4 } \text{(в СИ)}
+        \implies L = \frac{\ele}{ 0{,}4 } = \frac{400\,\text{мВ}}{ 0{,}4 } \approx {1000{,}0\,\text{мГн}}
+    $
+}
+\solutionspace{80pt}
+
+\tasknumber{2}%
+\task{%
+    Прямолинейный проводник длиной $\ell$ перемещают в однородном магнитном поле с индукцией $B$.
+    Проводник, вектор его скорости и вектор индукции поля взаимно перпендикулярны.
+    Определите зависимость ускорения от времени, если разность потенциалов на концах проводника
+    изменяется по закону $\Delta \varphi = kt^2$.
+}
+\answer{%
+    $
+        \Delta \varphi = Bv\ell = kt^2 \implies v = \frac{kt^2}{B\ell} \implies a(t) = \frac{v(t)}{t} = \frac{kt^{}}{B\ell}
+    $
+}
+\solutionspace{80pt}
+
+\tasknumber{3}%
+\task{%
+    Плоская прямоугольная рамка со сторонами $20\,\text{см}$ и $60\,\text{см}$ находится в однородном вертикальном магнитном поле
+    с индукцией $150\,\text{мТл}$.
+    Сопротивление рамки $12\,\text{Ом}$.
+    Вектор магнитной индукции параллелен плоскости рамки.
+    Рамку повернули на $30\degrees$ вокруг одной из её горизонтальных сторон.
+    Какой заряд протёк по рамке?
+    Ответ выразите в микрокулонах и округлите до целого.
+}
+\answer{%
+    \begin{align*}
+    \ele_i &= - \frac{\Delta \Phi_i}{\Delta t}, \eli_i = \frac{\ele_i}{R}, \Delta q_i = \eli_i\Delta t\implies \Delta q_i = \frac{\ele_i}{R} \cdot \Delta t = - \frac 1{R} \frac{\Delta \Phi_i}{\Delta t} \cdot \Delta t= - \frac{\Delta \Phi_i}{R} \implies \\
+    \implies \Delta q &= q_2 - q_1 = \sum_i \Delta q_i = \sum_i \cbr{ - \frac{\Delta \Phi_i}{R}} = -\frac 1{R} \sum_i \Delta \Phi_i = -\frac{\Phi_2 - \Phi_1}{R}.
+    \\
+    q &= \abs{\Delta q} = \frac {\abs{\Phi_2 - \Phi_1}}{R}= \frac {\abs{BS \cos \varphi_2 - BS \cos \varphi_1}}{R}= \frac {B S}{R}\abs{\cos \varphi_2 - \cos \varphi_1}= \frac {B a b}{R}\abs{\cos \varphi_2 - \cos \varphi_1}, \\
+    \varphi_1 &= 90\degrees, \varphi_2 = 60\degrees, \\
+    q&= \frac {150\,\text{мТл} \cdot 20\,\text{см} \cdot 60\,\text{см}}{12\,\text{Ом}}\abs{\cos 60\degrees - \cos 90\degrees} \approx 750{,}00\,\text{мкКл} \to 750.
+    \end{align*}
+}
+\solutionspace{120pt}
+
+\tasknumber{4}%
+\task{%
+    Резистор сопротивлением $R = 4\,\text{Ом}$ и катушка индуктивностью $L = 0{,}4\,\text{Гн}$ (и пренебрежимо малым сопротивлением)
+    подключены параллельно к источнику тока с ЭДС $\ele = 6\,\text{В}$ и внутренним сопротивлением $r = 1\,\text{Ом}$ (см.
+    рис.
+    на доске).
+    Какое количество теплоты выделится в цепи после размыкания ключа $K$?
+}
+\answer{%
+    \begin{align*}
+    &\text{закон Ома для полной цепи}: \eli = \frac{\ele}{r + R_\text{внешнее}} = \frac{\ele}{r + \frac{R \cdot 0}{R + 0}} = \frac{\ele}{r}, \\
+    Q &= W_m = \frac{L\eli^2}2 = \frac{L\sqr{\frac{\ele}{r}}}2 = \frac L2\frac{\ele^2}{r^2} = \frac{0{,}4\,\text{Гн}}2 \cdot \sqr{\frac{6\,\text{В}}{1\,\text{Ом}}} \approx 7{,}20\,\text{Дж}.
+    \end{align*}
+}
+\solutionspace{150pt}
+
+\tasknumber{5}%
+\task{%
+    По параллельным рельсам, расположенным под углом $25\degrees$ к горизонтали,
+    соскальзывает проводник массой $150\,\text{г}$: без трения и с постоянной скоростью $12\,\frac{\text{м}}{\text{с}}$ .
+    Рельсы замнуты резистором сопротивлением $5\,\text{Ом}$.
+    Вся система находитится в однородном вертикальном магнитном поле (см.
+    рис.
+    на доске).
+    Определите индукцию магнитного поля и ток, протекающий в проводнике.
+    Сопротивлением проводника, рельс и соединительных проводов пренебречь, ускорение свободного падения принять равным $g = 10\,\frac{\text{м}}{\text{с}^{2}}$.
+}
+\answer{%
+    \begin{align*}
+    \ele &= B_\bot v \ell, B_\bot = B\cos \alpha, \eli = \frac{\ele}R, \\
+    F_A &= \eli B \ell = \frac{\ele}R B \ell, \\
+    F_A \cos \alpha &= mg \sin \alpha \implies \frac{\ele}R B \ell \cos \alpha = mg \sin \alpha \\
+    &\frac{B \cos \alpha \cdot v \ell}R B \ell \cos \alpha = mg \sin \alpha\implies \frac{B^2 \cos^2 \alpha  \cdot v \ell^2}R = mg \sin \alpha, \\
+    B &= \sqrt{\frac{mg R \sin \alpha}{v \ell^2 \cos^2 \alpha}} = \sqrt{\frac{150\,\text{г} \cdot 10\,\frac{\text{м}}{\text{с}^{2}} \cdot 5\,\text{Ом} \cdot \sin 25\degrees}{12\,\frac{\text{м}}{\text{с}} \cdot \sqr{40\,\text{см}} \cdot \cos^2 25\degrees}}\approx 1{,}42\,\text{Тл}, \\
+    \eli &= \frac{\ele}R= \frac{B_\bot v \ell}R = \frac {v \ell \cos \alpha}R \sqrt{\frac{mg R \sin \alpha}{v \ell^2 \cos \alpha}}=\sqrt{\frac{mg v \sin \alpha}{R}}=\sqrt{\frac{150\,\text{г} \cdot 10\,\frac{\text{м}}{\text{с}^{2}} \cdot 12\,\frac{\text{м}}{\text{с}} \cdot \sin 25\degrees}{5\,\text{Ом}}} \approx 1{,}23\,\text{А}.
+    \end{align*}
+}
+
+\variantsplitter
+
+\addpersonalvariant{Вячеслав Волохов}
+
+\tasknumber{1}%
+\task{%
+    При изменении силы тока в проводнике по закону $\eli = 3 - 1{,}5t$ (в системе СИ),
+    в нём возникает ЭДС самоиндукции $150\,\text{мВ}$.
+    Чему равна индуктивность проводника?
+    Ответ выразите в миллигенри и округлите до целого.
+}
+\answer{%
+    $
+        \ele = L\frac{\abs{\Delta \eli}}{\Delta t} = L \cdot \abs{ - 1{,}5 } \text{(в СИ)}
+        \implies L = \frac{\ele}{ 1{,}5 } = \frac{150\,\text{мВ}}{ 1{,}5 } \approx {100{,}0\,\text{мГн}}
+    $
+}
+\solutionspace{80pt}
+
+\tasknumber{2}%
+\task{%
+    Прямолинейный проводник длиной $\ell$ перемещают в однородном магнитном поле с индукцией $B$.
+    Проводник, вектор его скорости и вектор индукции поля взаимно перпендикулярны.
+    Определите зависимость ускорения от времени, если разность потенциалов на концах проводника
+    изменяется по закону $\Delta \varphi = kt^2$.
+}
+\answer{%
+    $
+        \Delta \varphi = Bv\ell = kt^2 \implies v = \frac{kt^2}{B\ell} \implies a(t) = \frac{v(t)}{t} = \frac{kt^{}}{B\ell}
+    $
+}
+\solutionspace{80pt}
+
+\tasknumber{3}%
+\task{%
+    Плоская прямоугольная рамка со сторонами $30\,\text{см}$ и $50\,\text{см}$ находится в однородном вертикальном магнитном поле
+    с индукцией $150\,\text{мТл}$.
+    Сопротивление рамки $15\,\text{Ом}$.
+    Вектор магнитной индукции параллелен плоскости рамки.
+    Рамку повернули на $60\degrees$ вокруг одной из её горизонтальных сторон.
+    Какой заряд протёк по рамке?
+    Ответ выразите в микрокулонах и округлите до целого.
+}
+\answer{%
+    \begin{align*}
+    \ele_i &= - \frac{\Delta \Phi_i}{\Delta t}, \eli_i = \frac{\ele_i}{R}, \Delta q_i = \eli_i\Delta t\implies \Delta q_i = \frac{\ele_i}{R} \cdot \Delta t = - \frac 1{R} \frac{\Delta \Phi_i}{\Delta t} \cdot \Delta t= - \frac{\Delta \Phi_i}{R} \implies \\
+    \implies \Delta q &= q_2 - q_1 = \sum_i \Delta q_i = \sum_i \cbr{ - \frac{\Delta \Phi_i}{R}} = -\frac 1{R} \sum_i \Delta \Phi_i = -\frac{\Phi_2 - \Phi_1}{R}.
+    \\
+    q &= \abs{\Delta q} = \frac {\abs{\Phi_2 - \Phi_1}}{R}= \frac {\abs{BS \cos \varphi_2 - BS \cos \varphi_1}}{R}= \frac {B S}{R}\abs{\cos \varphi_2 - \cos \varphi_1}= \frac {B a b}{R}\abs{\cos \varphi_2 - \cos \varphi_1}, \\
+    \varphi_1 &= 90\degrees, \varphi_2 = 30\degrees, \\
+    q&= \frac {150\,\text{мТл} \cdot 30\,\text{см} \cdot 50\,\text{см}}{15\,\text{Ом}}\abs{\cos 30\degrees - \cos 90\degrees} \approx 1299{,}04\,\text{мкКл} \to 1299.
+    \end{align*}
+}
+\solutionspace{120pt}
+
+\tasknumber{4}%
+\task{%
+    Резистор сопротивлением $R = 4\,\text{Ом}$ и катушка индуктивностью $L = 0{,}4\,\text{Гн}$ (и пренебрежимо малым сопротивлением)
+    подключены параллельно к источнику тока с ЭДС $\ele = 8\,\text{В}$ и внутренним сопротивлением $r = 2\,\text{Ом}$ (см.
+    рис.
+    на доске).
+    Какое количество теплоты выделится в цепи после размыкания ключа $K$?
+}
+\answer{%
+    \begin{align*}
+    &\text{закон Ома для полной цепи}: \eli = \frac{\ele}{r + R_\text{внешнее}} = \frac{\ele}{r + \frac{R \cdot 0}{R + 0}} = \frac{\ele}{r}, \\
+    Q &= W_m = \frac{L\eli^2}2 = \frac{L\sqr{\frac{\ele}{r}}}2 = \frac L2\frac{\ele^2}{r^2} = \frac{0{,}4\,\text{Гн}}2 \cdot \sqr{\frac{8\,\text{В}}{2\,\text{Ом}}} \approx 3{,}20\,\text{Дж}.
+    \end{align*}
+}
+\solutionspace{150pt}
+
+\tasknumber{5}%
+\task{%
+    По параллельным рельсам, расположенным под углом $20\degrees$ к горизонтали,
+    соскальзывает проводник массой $200\,\text{г}$: без трения и с постоянной скоростью $15\,\frac{\text{м}}{\text{с}}$ .
+    Рельсы замнуты резистором сопротивлением $5\,\text{Ом}$.
+    Вся система находитится в однородном вертикальном магнитном поле (см.
+    рис.
+    на доске).
+    Определите индукцию магнитного поля и ток, протекающий в проводнике.
+    Сопротивлением проводника, рельс и соединительных проводов пренебречь, ускорение свободного падения принять равным $g = 10\,\frac{\text{м}}{\text{с}^{2}}$.
+}
+\answer{%
+    \begin{align*}
+    \ele &= B_\bot v \ell, B_\bot = B\cos \alpha, \eli = \frac{\ele}R, \\
+    F_A &= \eli B \ell = \frac{\ele}R B \ell, \\
+    F_A \cos \alpha &= mg \sin \alpha \implies \frac{\ele}R B \ell \cos \alpha = mg \sin \alpha \\
+    &\frac{B \cos \alpha \cdot v \ell}R B \ell \cos \alpha = mg \sin \alpha\implies \frac{B^2 \cos^2 \alpha  \cdot v \ell^2}R = mg \sin \alpha, \\
+    B &= \sqrt{\frac{mg R \sin \alpha}{v \ell^2 \cos^2 \alpha}} = \sqrt{\frac{200\,\text{г} \cdot 10\,\frac{\text{м}}{\text{с}^{2}} \cdot 5\,\text{Ом} \cdot \sin 20\degrees}{15\,\frac{\text{м}}{\text{с}} \cdot \sqr{20\,\text{см}} \cdot \cos^2 20\degrees}}\approx 2{,}54\,\text{Тл}, \\
+    \eli &= \frac{\ele}R= \frac{B_\bot v \ell}R = \frac {v \ell \cos \alpha}R \sqrt{\frac{mg R \sin \alpha}{v \ell^2 \cos \alpha}}=\sqrt{\frac{mg v \sin \alpha}{R}}=\sqrt{\frac{200\,\text{г} \cdot 10\,\frac{\text{м}}{\text{с}^{2}} \cdot 15\,\frac{\text{м}}{\text{с}} \cdot \sin 20\degrees}{5\,\text{Ом}}} \approx 1{,}43\,\text{А}.
+    \end{align*}
+}
+
+\variantsplitter
+
+\addpersonalvariant{Герман Говоров}
+
+\tasknumber{1}%
+\task{%
+    При изменении силы тока в проводнике по закону $\eli = 6 - 0{,}5t$ (в системе СИ),
+    в нём возникает ЭДС самоиндукции $400\,\text{мВ}$.
+    Чему равна индуктивность проводника?
+    Ответ выразите в миллигенри и округлите до целого.
+}
+\answer{%
+    $
+        \ele = L\frac{\abs{\Delta \eli}}{\Delta t} = L \cdot \abs{ - 0{,}5 } \text{(в СИ)}
+        \implies L = \frac{\ele}{ 0{,}5 } = \frac{400\,\text{мВ}}{ 0{,}5 } \approx {800{,}0\,\text{мГн}}
+    $
+}
+\solutionspace{80pt}
+
+\tasknumber{2}%
+\task{%
+    Прямолинейный проводник длиной $\ell$ перемещают в однородном магнитном поле с индукцией $B$.
+    Проводник, вектор его скорости и вектор индукции поля взаимно перпендикулярны.
+    Определите зависимость ускорения от времени, если разность потенциалов на концах проводника
+    изменяется по закону $\Delta \varphi = kt^3$.
+}
+\answer{%
+    $
+        \Delta \varphi = Bv\ell = kt^3 \implies v = \frac{kt^3}{B\ell} \implies a(t) = \frac{v(t)}{t} = \frac{kt^2}{B\ell}
+    $
+}
+\solutionspace{80pt}
+
+\tasknumber{3}%
+\task{%
+    Плоская прямоугольная рамка со сторонами $30\,\text{см}$ и $25\,\text{см}$ находится в однородном вертикальном магнитном поле
+    с индукцией $150\,\text{мТл}$.
+    Сопротивление рамки $12\,\text{Ом}$.
+    Вектор магнитной индукции перпендикулярен плоскости рамки.
+    Рамку повернули на $30\degrees$ вокруг одной из её горизонтальных сторон.
+    Какой заряд протёк по рамке?
+    Ответ выразите в микрокулонах и округлите до целого.
+}
+\answer{%
+    \begin{align*}
+    \ele_i &= - \frac{\Delta \Phi_i}{\Delta t}, \eli_i = \frac{\ele_i}{R}, \Delta q_i = \eli_i\Delta t\implies \Delta q_i = \frac{\ele_i}{R} \cdot \Delta t = - \frac 1{R} \frac{\Delta \Phi_i}{\Delta t} \cdot \Delta t= - \frac{\Delta \Phi_i}{R} \implies \\
+    \implies \Delta q &= q_2 - q_1 = \sum_i \Delta q_i = \sum_i \cbr{ - \frac{\Delta \Phi_i}{R}} = -\frac 1{R} \sum_i \Delta \Phi_i = -\frac{\Phi_2 - \Phi_1}{R}.
+    \\
+    q &= \abs{\Delta q} = \frac {\abs{\Phi_2 - \Phi_1}}{R}= \frac {\abs{BS \cos \varphi_2 - BS \cos \varphi_1}}{R}= \frac {B S}{R}\abs{\cos \varphi_2 - \cos \varphi_1}= \frac {B a b}{R}\abs{\cos \varphi_2 - \cos \varphi_1}, \\
+    \varphi_1 &= 0\degrees, \varphi_2 = 30\degrees, \\
+    q&= \frac {150\,\text{мТл} \cdot 30\,\text{см} \cdot 25\,\text{см}}{12\,\text{Ом}}\abs{\cos 30\degrees - \cos 0\degrees} \approx 125{,}60\,\text{мкКл} \to 126.
+    \end{align*}
+}
+\solutionspace{120pt}
+
+\tasknumber{4}%
+\task{%
+    Резистор сопротивлением $R = 3\,\text{Ом}$ и катушка индуктивностью $L = 0{,}4\,\text{Гн}$ (и пренебрежимо малым сопротивлением)
+    подключены параллельно к источнику тока с ЭДС $\ele = 6\,\text{В}$ и внутренним сопротивлением $r = 2\,\text{Ом}$ (см.
+    рис.
+    на доске).
+    Какое количество теплоты выделится в цепи после размыкания ключа $K$?
+}
+\answer{%
+    \begin{align*}
+    &\text{закон Ома для полной цепи}: \eli = \frac{\ele}{r + R_\text{внешнее}} = \frac{\ele}{r + \frac{R \cdot 0}{R + 0}} = \frac{\ele}{r}, \\
+    Q &= W_m = \frac{L\eli^2}2 = \frac{L\sqr{\frac{\ele}{r}}}2 = \frac L2\frac{\ele^2}{r^2} = \frac{0{,}4\,\text{Гн}}2 \cdot \sqr{\frac{6\,\text{В}}{2\,\text{Ом}}} \approx 1{,}80\,\text{Дж}.
+    \end{align*}
+}
+\solutionspace{150pt}
+
+\tasknumber{5}%
+\task{%
+    По параллельным рельсам, расположенным под углом $15\degrees$ к горизонтали,
+    соскальзывает проводник массой $50\,\text{г}$: без трения и с постоянной скоростью $15\,\frac{\text{м}}{\text{с}}$ .
+    Рельсы замнуты резистором сопротивлением $12\,\text{Ом}$.
+    Вся система находитится в однородном вертикальном магнитном поле (см.
+    рис.
+    на доске).
+    Определите индукцию магнитного поля и ток, протекающий в проводнике.
+    Сопротивлением проводника, рельс и соединительных проводов пренебречь, ускорение свободного падения принять равным $g = 10\,\frac{\text{м}}{\text{с}^{2}}$.
+}
+\answer{%
+    \begin{align*}
+    \ele &= B_\bot v \ell, B_\bot = B\cos \alpha, \eli = \frac{\ele}R, \\
+    F_A &= \eli B \ell = \frac{\ele}R B \ell, \\
+    F_A \cos \alpha &= mg \sin \alpha \implies \frac{\ele}R B \ell \cos \alpha = mg \sin \alpha \\
+    &\frac{B \cos \alpha \cdot v \ell}R B \ell \cos \alpha = mg \sin \alpha\implies \frac{B^2 \cos^2 \alpha  \cdot v \ell^2}R = mg \sin \alpha, \\
+    B &= \sqrt{\frac{mg R \sin \alpha}{v \ell^2 \cos^2 \alpha}} = \sqrt{\frac{50\,\text{г} \cdot 10\,\frac{\text{м}}{\text{с}^{2}} \cdot 12\,\text{Ом} \cdot \sin 15\degrees}{15\,\frac{\text{м}}{\text{с}} \cdot \sqr{40\,\text{см}} \cdot \cos^2 15\degrees}}\approx 0{,}83\,\text{Тл}, \\
+    \eli &= \frac{\ele}R= \frac{B_\bot v \ell}R = \frac {v \ell \cos \alpha}R \sqrt{\frac{mg R \sin \alpha}{v \ell^2 \cos \alpha}}=\sqrt{\frac{mg v \sin \alpha}{R}}=\sqrt{\frac{50\,\text{г} \cdot 10\,\frac{\text{м}}{\text{с}^{2}} \cdot 15\,\frac{\text{м}}{\text{с}} \cdot \sin 15\degrees}{12\,\text{Ом}}} \approx 0{,}40\,\text{А}.
+    \end{align*}
+}
+
+\variantsplitter
+
+\addpersonalvariant{София Журавлёва}
+
+\tasknumber{1}%
+\task{%
+    При изменении силы тока в проводнике по закону $\eli = 4 - 0{,}5t$ (в системе СИ),
+    в нём возникает ЭДС самоиндукции $150\,\text{мВ}$.
+    Чему равна индуктивность проводника?
+    Ответ выразите в миллигенри и округлите до целого.
+}
+\answer{%
+    $
+        \ele = L\frac{\abs{\Delta \eli}}{\Delta t} = L \cdot \abs{ - 0{,}5 } \text{(в СИ)}
+        \implies L = \frac{\ele}{ 0{,}5 } = \frac{150\,\text{мВ}}{ 0{,}5 } \approx {300{,}0\,\text{мГн}}
+    $
+}
+\solutionspace{80pt}
+
+\tasknumber{2}%
+\task{%
+    Прямолинейный проводник длиной $\ell$ перемещают в однородном магнитном поле с индукцией $B$.
+    Проводник, вектор его скорости и вектор индукции поля взаимно перпендикулярны.
+    Определите зависимость ускорения от времени, если разность потенциалов на концах проводника
+    изменяется по закону $\Delta \varphi = kt^2$.
+}
+\answer{%
+    $
+        \Delta \varphi = Bv\ell = kt^2 \implies v = \frac{kt^2}{B\ell} \implies a(t) = \frac{v(t)}{t} = \frac{kt^{}}{B\ell}
+    $
+}
+\solutionspace{80pt}
+
+\tasknumber{3}%
+\task{%
+    Плоская прямоугольная рамка со сторонами $40\,\text{см}$ и $25\,\text{см}$ находится в однородном вертикальном магнитном поле
+    с индукцией $200\,\text{мТл}$.
+    Сопротивление рамки $8\,\text{Ом}$.
+    Вектор магнитной индукции перпендикулярен плоскости рамки.
+    Рамку повернули на $60\degrees$ вокруг одной из её горизонтальных сторон.
+    Какой заряд протёк по рамке?
+    Ответ выразите в микрокулонах и округлите до целого.
+}
+\answer{%
+    \begin{align*}
+    \ele_i &= - \frac{\Delta \Phi_i}{\Delta t}, \eli_i = \frac{\ele_i}{R}, \Delta q_i = \eli_i\Delta t\implies \Delta q_i = \frac{\ele_i}{R} \cdot \Delta t = - \frac 1{R} \frac{\Delta \Phi_i}{\Delta t} \cdot \Delta t= - \frac{\Delta \Phi_i}{R} \implies \\
+    \implies \Delta q &= q_2 - q_1 = \sum_i \Delta q_i = \sum_i \cbr{ - \frac{\Delta \Phi_i}{R}} = -\frac 1{R} \sum_i \Delta \Phi_i = -\frac{\Phi_2 - \Phi_1}{R}.
+    \\
+    q &= \abs{\Delta q} = \frac {\abs{\Phi_2 - \Phi_1}}{R}= \frac {\abs{BS \cos \varphi_2 - BS \cos \varphi_1}}{R}= \frac {B S}{R}\abs{\cos \varphi_2 - \cos \varphi_1}= \frac {B a b}{R}\abs{\cos \varphi_2 - \cos \varphi_1}, \\
+    \varphi_1 &= 0\degrees, \varphi_2 = 60\degrees, \\
+    q&= \frac {200\,\text{мТл} \cdot 40\,\text{см} \cdot 25\,\text{см}}{8\,\text{Ом}}\abs{\cos 60\degrees - \cos 0\degrees} \approx 1250{,}00\,\text{мкКл} \to 1250.
+    \end{align*}
+}
+\solutionspace{120pt}
+
+\tasknumber{4}%
+\task{%
+    Резистор сопротивлением $R = 4\,\text{Ом}$ и катушка индуктивностью $L = 0{,}5\,\text{Гн}$ (и пренебрежимо малым сопротивлением)
+    подключены параллельно к источнику тока с ЭДС $\ele = 6\,\text{В}$ и внутренним сопротивлением $r = 1\,\text{Ом}$ (см.
+    рис.
+    на доске).
+    Какое количество теплоты выделится в цепи после размыкания ключа $K$?
+}
+\answer{%
+    \begin{align*}
+    &\text{закон Ома для полной цепи}: \eli = \frac{\ele}{r + R_\text{внешнее}} = \frac{\ele}{r + \frac{R \cdot 0}{R + 0}} = \frac{\ele}{r}, \\
+    Q &= W_m = \frac{L\eli^2}2 = \frac{L\sqr{\frac{\ele}{r}}}2 = \frac L2\frac{\ele^2}{r^2} = \frac{0{,}5\,\text{Гн}}2 \cdot \sqr{\frac{6\,\text{В}}{1\,\text{Ом}}} \approx 9{,}00\,\text{Дж}.
+    \end{align*}
+}
+\solutionspace{150pt}
+
+\tasknumber{5}%
+\task{%
+    По параллельным рельсам, расположенным под углом $10\degrees$ к горизонтали,
+    соскальзывает проводник массой $200\,\text{г}$: без трения и с постоянной скоростью $15\,\frac{\text{м}}{\text{с}}$ .
+    Рельсы замнуты резистором сопротивлением $5\,\text{Ом}$.
+    Вся система находитится в однородном вертикальном магнитном поле (см.
+    рис.
+    на доске).
+    Определите индукцию магнитного поля и ток, протекающий в проводнике.
+    Сопротивлением проводника, рельс и соединительных проводов пренебречь, ускорение свободного падения принять равным $g = 10\,\frac{\text{м}}{\text{с}^{2}}$.
+}
+\answer{%
+    \begin{align*}
+    \ele &= B_\bot v \ell, B_\bot = B\cos \alpha, \eli = \frac{\ele}R, \\
+    F_A &= \eli B \ell = \frac{\ele}R B \ell, \\
+    F_A \cos \alpha &= mg \sin \alpha \implies \frac{\ele}R B \ell \cos \alpha = mg \sin \alpha \\
+    &\frac{B \cos \alpha \cdot v \ell}R B \ell \cos \alpha = mg \sin \alpha\implies \frac{B^2 \cos^2 \alpha  \cdot v \ell^2}R = mg \sin \alpha, \\
+    B &= \sqrt{\frac{mg R \sin \alpha}{v \ell^2 \cos^2 \alpha}} = \sqrt{\frac{200\,\text{г} \cdot 10\,\frac{\text{м}}{\text{с}^{2}} \cdot 5\,\text{Ом} \cdot \sin 10\degrees}{15\,\frac{\text{м}}{\text{с}} \cdot \sqr{40\,\text{см}} \cdot \cos^2 10\degrees}}\approx 0{,}86\,\text{Тл}, \\
+    \eli &= \frac{\ele}R= \frac{B_\bot v \ell}R = \frac {v \ell \cos \alpha}R \sqrt{\frac{mg R \sin \alpha}{v \ell^2 \cos \alpha}}=\sqrt{\frac{mg v \sin \alpha}{R}}=\sqrt{\frac{200\,\text{г} \cdot 10\,\frac{\text{м}}{\text{с}^{2}} \cdot 15\,\frac{\text{м}}{\text{с}} \cdot \sin 10\degrees}{5\,\text{Ом}}} \approx 1{,}02\,\text{А}.
+    \end{align*}
+}
+
+\variantsplitter
+
+\addpersonalvariant{Константин Козлов}
+
+\tasknumber{1}%
+\task{%
+    При изменении силы тока в проводнике по закону $\eli = 6 + 1{,}5t$ (в системе СИ),
+    в нём возникает ЭДС самоиндукции $400\,\text{мВ}$.
+    Чему равна индуктивность проводника?
+    Ответ выразите в миллигенри и округлите до целого.
+}
+\answer{%
+    $
+        \ele = L\frac{\abs{\Delta \eli}}{\Delta t} = L \cdot \abs{ + 1{,}5 } \text{(в СИ)}
+        \implies L = \frac{\ele}{ 1{,}5 } = \frac{400\,\text{мВ}}{ 1{,}5 } \approx {266{,}7\,\text{мГн}}
+    $
+}
+\solutionspace{80pt}
+
+\tasknumber{2}%
+\task{%
+    Прямолинейный проводник длиной $\ell$ перемещают в однородном магнитном поле с индукцией $B$.
+    Проводник, вектор его скорости и вектор индукции поля взаимно перпендикулярны.
+    Определите зависимость ускорения от времени, если разность потенциалов на концах проводника
+    изменяется по закону $\Delta \varphi = kt^4$.
+}
+\answer{%
+    $
+        \Delta \varphi = Bv\ell = kt^4 \implies v = \frac{kt^4}{B\ell} \implies a(t) = \frac{v(t)}{t} = \frac{kt^3}{B\ell}
+    $
+}
+\solutionspace{80pt}
+
+\tasknumber{3}%
+\task{%
+    Плоская прямоугольная рамка со сторонами $30\,\text{см}$ и $60\,\text{см}$ находится в однородном вертикальном магнитном поле
+    с индукцией $120\,\text{мТл}$.
+    Сопротивление рамки $12\,\text{Ом}$.
+    Вектор магнитной индукции перпендикулярен плоскости рамки.
+    Рамку повернули на $60\degrees$ вокруг одной из её горизонтальных сторон.
+    Какой заряд протёк по рамке?
+    Ответ выразите в микрокулонах и округлите до целого.
+}
+\answer{%
+    \begin{align*}
+    \ele_i &= - \frac{\Delta \Phi_i}{\Delta t}, \eli_i = \frac{\ele_i}{R}, \Delta q_i = \eli_i\Delta t\implies \Delta q_i = \frac{\ele_i}{R} \cdot \Delta t = - \frac 1{R} \frac{\Delta \Phi_i}{\Delta t} \cdot \Delta t= - \frac{\Delta \Phi_i}{R} \implies \\
+    \implies \Delta q &= q_2 - q_1 = \sum_i \Delta q_i = \sum_i \cbr{ - \frac{\Delta \Phi_i}{R}} = -\frac 1{R} \sum_i \Delta \Phi_i = -\frac{\Phi_2 - \Phi_1}{R}.
+    \\
+    q &= \abs{\Delta q} = \frac {\abs{\Phi_2 - \Phi_1}}{R}= \frac {\abs{BS \cos \varphi_2 - BS \cos \varphi_1}}{R}= \frac {B S}{R}\abs{\cos \varphi_2 - \cos \varphi_1}= \frac {B a b}{R}\abs{\cos \varphi_2 - \cos \varphi_1}, \\
+    \varphi_1 &= 0\degrees, \varphi_2 = 60\degrees, \\
+    q&= \frac {120\,\text{мТл} \cdot 30\,\text{см} \cdot 60\,\text{см}}{12\,\text{Ом}}\abs{\cos 60\degrees - \cos 0\degrees} \approx 900{,}00\,\text{мкКл} \to 900.
+    \end{align*}
+}
+\solutionspace{120pt}
+
+\tasknumber{4}%
+\task{%
+    Резистор сопротивлением $R = 3\,\text{Ом}$ и катушка индуктивностью $L = 0{,}2\,\text{Гн}$ (и пренебрежимо малым сопротивлением)
+    подключены параллельно к источнику тока с ЭДС $\ele = 8\,\text{В}$ и внутренним сопротивлением $r = 1\,\text{Ом}$ (см.
+    рис.
+    на доске).
+    Какое количество теплоты выделится в цепи после размыкания ключа $K$?
+}
+\answer{%
+    \begin{align*}
+    &\text{закон Ома для полной цепи}: \eli = \frac{\ele}{r + R_\text{внешнее}} = \frac{\ele}{r + \frac{R \cdot 0}{R + 0}} = \frac{\ele}{r}, \\
+    Q &= W_m = \frac{L\eli^2}2 = \frac{L\sqr{\frac{\ele}{r}}}2 = \frac L2\frac{\ele^2}{r^2} = \frac{0{,}2\,\text{Гн}}2 \cdot \sqr{\frac{8\,\text{В}}{1\,\text{Ом}}} \approx 6{,}40\,\text{Дж}.
+    \end{align*}
+}
+\solutionspace{150pt}
+
+\tasknumber{5}%
+\task{%
+    По параллельным рельсам, расположенным под углом $10\degrees$ к горизонтали,
+    соскальзывает проводник массой $150\,\text{г}$: без трения и с постоянной скоростью $12\,\frac{\text{м}}{\text{с}}$ .
+    Рельсы замнуты резистором сопротивлением $12\,\text{Ом}$.
+    Вся система находитится в однородном вертикальном магнитном поле (см.
+    рис.
+    на доске).
+    Определите индукцию магнитного поля и ток, протекающий в проводнике.
+    Сопротивлением проводника, рельс и соединительных проводов пренебречь, ускорение свободного падения принять равным $g = 10\,\frac{\text{м}}{\text{с}^{2}}$.
+}
+\answer{%
+    \begin{align*}
+    \ele &= B_\bot v \ell, B_\bot = B\cos \alpha, \eli = \frac{\ele}R, \\
+    F_A &= \eli B \ell = \frac{\ele}R B \ell, \\
+    F_A \cos \alpha &= mg \sin \alpha \implies \frac{\ele}R B \ell \cos \alpha = mg \sin \alpha \\
+    &\frac{B \cos \alpha \cdot v \ell}R B \ell \cos \alpha = mg \sin \alpha\implies \frac{B^2 \cos^2 \alpha  \cdot v \ell^2}R = mg \sin \alpha, \\
+    B &= \sqrt{\frac{mg R \sin \alpha}{v \ell^2 \cos^2 \alpha}} = \sqrt{\frac{150\,\text{г} \cdot 10\,\frac{\text{м}}{\text{с}^{2}} \cdot 12\,\text{Ом} \cdot \sin 10\degrees}{12\,\frac{\text{м}}{\text{с}} \cdot \sqr{40\,\text{см}} \cdot \cos^2 10\degrees}}\approx 1{,}30\,\text{Тл}, \\
+    \eli &= \frac{\ele}R= \frac{B_\bot v \ell}R = \frac {v \ell \cos \alpha}R \sqrt{\frac{mg R \sin \alpha}{v \ell^2 \cos \alpha}}=\sqrt{\frac{mg v \sin \alpha}{R}}=\sqrt{\frac{150\,\text{г} \cdot 10\,\frac{\text{м}}{\text{с}^{2}} \cdot 12\,\frac{\text{м}}{\text{с}} \cdot \sin 10\degrees}{12\,\text{Ом}}} \approx 0{,}51\,\text{А}.
+    \end{align*}
+}
+
+\variantsplitter
+
+\addpersonalvariant{Наталья Кравченко}
+
+\tasknumber{1}%
+\task{%
+    При изменении силы тока в проводнике по закону $\eli = 2 + 0{,}4t$ (в системе СИ),
+    в нём возникает ЭДС самоиндукции $200\,\text{мВ}$.
+    Чему равна индуктивность проводника?
+    Ответ выразите в миллигенри и округлите до целого.
+}
+\answer{%
+    $
+        \ele = L\frac{\abs{\Delta \eli}}{\Delta t} = L \cdot \abs{ + 0{,}4 } \text{(в СИ)}
+        \implies L = \frac{\ele}{ 0{,}4 } = \frac{200\,\text{мВ}}{ 0{,}4 } \approx {500{,}0\,\text{мГн}}
+    $
+}
+\solutionspace{80pt}
+
+\tasknumber{2}%
+\task{%
+    Прямолинейный проводник длиной $\ell$ перемещают в однородном магнитном поле с индукцией $B$.
+    Проводник, вектор его скорости и вектор индукции поля взаимно перпендикулярны.
+    Определите зависимость ускорения от времени, если разность потенциалов на концах проводника
+    изменяется по закону $\Delta \varphi = kt^2$.
+}
+\answer{%
+    $
+        \Delta \varphi = Bv\ell = kt^2 \implies v = \frac{kt^2}{B\ell} \implies a(t) = \frac{v(t)}{t} = \frac{kt^{}}{B\ell}
+    $
+}
+\solutionspace{80pt}
+
+\tasknumber{3}%
+\task{%
+    Плоская прямоугольная рамка со сторонами $20\,\text{см}$ и $25\,\text{см}$ находится в однородном вертикальном магнитном поле
+    с индукцией $300\,\text{мТл}$.
+    Сопротивление рамки $15\,\text{Ом}$.
+    Вектор магнитной индукции перпендикулярен плоскости рамки.
+    Рамку повернули на $30\degrees$ вокруг одной из её горизонтальных сторон.
+    Какой заряд протёк по рамке?
+    Ответ выразите в микрокулонах и округлите до целого.
+}
+\answer{%
+    \begin{align*}
+    \ele_i &= - \frac{\Delta \Phi_i}{\Delta t}, \eli_i = \frac{\ele_i}{R}, \Delta q_i = \eli_i\Delta t\implies \Delta q_i = \frac{\ele_i}{R} \cdot \Delta t = - \frac 1{R} \frac{\Delta \Phi_i}{\Delta t} \cdot \Delta t= - \frac{\Delta \Phi_i}{R} \implies \\
+    \implies \Delta q &= q_2 - q_1 = \sum_i \Delta q_i = \sum_i \cbr{ - \frac{\Delta \Phi_i}{R}} = -\frac 1{R} \sum_i \Delta \Phi_i = -\frac{\Phi_2 - \Phi_1}{R}.
+    \\
+    q &= \abs{\Delta q} = \frac {\abs{\Phi_2 - \Phi_1}}{R}= \frac {\abs{BS \cos \varphi_2 - BS \cos \varphi_1}}{R}= \frac {B S}{R}\abs{\cos \varphi_2 - \cos \varphi_1}= \frac {B a b}{R}\abs{\cos \varphi_2 - \cos \varphi_1}, \\
+    \varphi_1 &= 0\degrees, \varphi_2 = 30\degrees, \\
+    q&= \frac {300\,\text{мТл} \cdot 20\,\text{см} \cdot 25\,\text{см}}{15\,\text{Ом}}\abs{\cos 30\degrees - \cos 0\degrees} \approx 133{,}97\,\text{мкКл} \to 134.
+    \end{align*}
+}
+\solutionspace{120pt}
+
+\tasknumber{4}%
+\task{%
+    Резистор сопротивлением $R = 4\,\text{Ом}$ и катушка индуктивностью $L = 0{,}2\,\text{Гн}$ (и пренебрежимо малым сопротивлением)
+    подключены параллельно к источнику тока с ЭДС $\ele = 8\,\text{В}$ и внутренним сопротивлением $r = 2\,\text{Ом}$ (см.
+    рис.
+    на доске).
+    Какое количество теплоты выделится в цепи после размыкания ключа $K$?
+}
+\answer{%
+    \begin{align*}
+    &\text{закон Ома для полной цепи}: \eli = \frac{\ele}{r + R_\text{внешнее}} = \frac{\ele}{r + \frac{R \cdot 0}{R + 0}} = \frac{\ele}{r}, \\
+    Q &= W_m = \frac{L\eli^2}2 = \frac{L\sqr{\frac{\ele}{r}}}2 = \frac L2\frac{\ele^2}{r^2} = \frac{0{,}2\,\text{Гн}}2 \cdot \sqr{\frac{8\,\text{В}}{2\,\text{Ом}}} \approx 1{,}60\,\text{Дж}.
+    \end{align*}
+}
+\solutionspace{150pt}
+
+\tasknumber{5}%
+\task{%
+    По параллельным рельсам, расположенным под углом $10\degrees$ к горизонтали,
+    соскальзывает проводник массой $150\,\text{г}$: без трения и с постоянной скоростью $12\,\frac{\text{м}}{\text{с}}$ .
+    Рельсы замнуты резистором сопротивлением $5\,\text{Ом}$.
+    Вся система находитится в однородном вертикальном магнитном поле (см.
+    рис.
+    на доске).
+    Определите индукцию магнитного поля и ток, протекающий в проводнике.
+    Сопротивлением проводника, рельс и соединительных проводов пренебречь, ускорение свободного падения принять равным $g = 10\,\frac{\text{м}}{\text{с}^{2}}$.
+}
+\answer{%
+    \begin{align*}
+    \ele &= B_\bot v \ell, B_\bot = B\cos \alpha, \eli = \frac{\ele}R, \\
+    F_A &= \eli B \ell = \frac{\ele}R B \ell, \\
+    F_A \cos \alpha &= mg \sin \alpha \implies \frac{\ele}R B \ell \cos \alpha = mg \sin \alpha \\
+    &\frac{B \cos \alpha \cdot v \ell}R B \ell \cos \alpha = mg \sin \alpha\implies \frac{B^2 \cos^2 \alpha  \cdot v \ell^2}R = mg \sin \alpha, \\
+    B &= \sqrt{\frac{mg R \sin \alpha}{v \ell^2 \cos^2 \alpha}} = \sqrt{\frac{150\,\text{г} \cdot 10\,\frac{\text{м}}{\text{с}^{2}} \cdot 5\,\text{Ом} \cdot \sin 10\degrees}{12\,\frac{\text{м}}{\text{с}} \cdot \sqr{60\,\text{см}} \cdot \cos^2 10\degrees}}\approx 0{,}56\,\text{Тл}, \\
+    \eli &= \frac{\ele}R= \frac{B_\bot v \ell}R = \frac {v \ell \cos \alpha}R \sqrt{\frac{mg R \sin \alpha}{v \ell^2 \cos \alpha}}=\sqrt{\frac{mg v \sin \alpha}{R}}=\sqrt{\frac{150\,\text{г} \cdot 10\,\frac{\text{м}}{\text{с}^{2}} \cdot 12\,\frac{\text{м}}{\text{с}} \cdot \sin 10\degrees}{5\,\text{Ом}}} \approx 0{,}79\,\text{А}.
+    \end{align*}
+}
+
+\variantsplitter
+
+\addpersonalvariant{Сергей Малышев}
+
+\tasknumber{1}%
+\task{%
+    При изменении силы тока в проводнике по закону $\eli = 3 + 0{,}8t$ (в системе СИ),
+    в нём возникает ЭДС самоиндукции $400\,\text{мВ}$.
+    Чему равна индуктивность проводника?
+    Ответ выразите в миллигенри и округлите до целого.
+}
+\answer{%
+    $
+        \ele = L\frac{\abs{\Delta \eli}}{\Delta t} = L \cdot \abs{ + 0{,}8 } \text{(в СИ)}
+        \implies L = \frac{\ele}{ 0{,}8 } = \frac{400\,\text{мВ}}{ 0{,}8 } \approx {500{,}0\,\text{мГн}}
+    $
+}
+\solutionspace{80pt}
+
+\tasknumber{2}%
+\task{%
+    Прямолинейный проводник длиной $\ell$ перемещают в однородном магнитном поле с индукцией $B$.
+    Проводник, вектор его скорости и вектор индукции поля взаимно перпендикулярны.
+    Определите зависимость ускорения от времени, если разность потенциалов на концах проводника
+    изменяется по закону $\Delta \varphi = kt^4$.
+}
+\answer{%
+    $
+        \Delta \varphi = Bv\ell = kt^4 \implies v = \frac{kt^4}{B\ell} \implies a(t) = \frac{v(t)}{t} = \frac{kt^3}{B\ell}
+    $
+}
+\solutionspace{80pt}
+
+\tasknumber{3}%
+\task{%
+    Плоская прямоугольная рамка со сторонами $20\,\text{см}$ и $50\,\text{см}$ находится в однородном вертикальном магнитном поле
+    с индукцией $200\,\text{мТл}$.
+    Сопротивление рамки $12\,\text{Ом}$.
+    Вектор магнитной индукции перпендикулярен плоскости рамки.
+    Рамку повернули на $60\degrees$ вокруг одной из её горизонтальных сторон.
+    Какой заряд протёк по рамке?
+    Ответ выразите в микрокулонах и округлите до целого.
+}
+\answer{%
+    \begin{align*}
+    \ele_i &= - \frac{\Delta \Phi_i}{\Delta t}, \eli_i = \frac{\ele_i}{R}, \Delta q_i = \eli_i\Delta t\implies \Delta q_i = \frac{\ele_i}{R} \cdot \Delta t = - \frac 1{R} \frac{\Delta \Phi_i}{\Delta t} \cdot \Delta t= - \frac{\Delta \Phi_i}{R} \implies \\
+    \implies \Delta q &= q_2 - q_1 = \sum_i \Delta q_i = \sum_i \cbr{ - \frac{\Delta \Phi_i}{R}} = -\frac 1{R} \sum_i \Delta \Phi_i = -\frac{\Phi_2 - \Phi_1}{R}.
+    \\
+    q &= \abs{\Delta q} = \frac {\abs{\Phi_2 - \Phi_1}}{R}= \frac {\abs{BS \cos \varphi_2 - BS \cos \varphi_1}}{R}= \frac {B S}{R}\abs{\cos \varphi_2 - \cos \varphi_1}= \frac {B a b}{R}\abs{\cos \varphi_2 - \cos \varphi_1}, \\
+    \varphi_1 &= 0\degrees, \varphi_2 = 60\degrees, \\
+    q&= \frac {200\,\text{мТл} \cdot 20\,\text{см} \cdot 50\,\text{см}}{12\,\text{Ом}}\abs{\cos 60\degrees - \cos 0\degrees} \approx 833{,}33\,\text{мкКл} \to 833.
+    \end{align*}
+}
+\solutionspace{120pt}
+
+\tasknumber{4}%
+\task{%
+    Резистор сопротивлением $R = 5\,\text{Ом}$ и катушка индуктивностью $L = 0{,}5\,\text{Гн}$ (и пренебрежимо малым сопротивлением)
+    подключены параллельно к источнику тока с ЭДС $\ele = 5\,\text{В}$ и внутренним сопротивлением $r = 1\,\text{Ом}$ (см.
+    рис.
+    на доске).
+    Какое количество теплоты выделится в цепи после размыкания ключа $K$?
+}
+\answer{%
+    \begin{align*}
+    &\text{закон Ома для полной цепи}: \eli = \frac{\ele}{r + R_\text{внешнее}} = \frac{\ele}{r + \frac{R \cdot 0}{R + 0}} = \frac{\ele}{r}, \\
+    Q &= W_m = \frac{L\eli^2}2 = \frac{L\sqr{\frac{\ele}{r}}}2 = \frac L2\frac{\ele^2}{r^2} = \frac{0{,}5\,\text{Гн}}2 \cdot \sqr{\frac{5\,\text{В}}{1\,\text{Ом}}} \approx 6{,}25\,\text{Дж}.
+    \end{align*}
+}
+\solutionspace{150pt}
+
+\tasknumber{5}%
+\task{%
+    По параллельным рельсам, расположенным под углом $20\degrees$ к горизонтали,
+    соскальзывает проводник массой $100\,\text{г}$: без трения и с постоянной скоростью $15\,\frac{\text{м}}{\text{с}}$ .
+    Рельсы замнуты резистором сопротивлением $12\,\text{Ом}$.
+    Вся система находитится в однородном вертикальном магнитном поле (см.
+    рис.
+    на доске).
+    Определите индукцию магнитного поля и ток, протекающий в проводнике.
+    Сопротивлением проводника, рельс и соединительных проводов пренебречь, ускорение свободного падения принять равным $g = 10\,\frac{\text{м}}{\text{с}^{2}}$.
+}
+\answer{%
+    \begin{align*}
+    \ele &= B_\bot v \ell, B_\bot = B\cos \alpha, \eli = \frac{\ele}R, \\
+    F_A &= \eli B \ell = \frac{\ele}R B \ell, \\
+    F_A \cos \alpha &= mg \sin \alpha \implies \frac{\ele}R B \ell \cos \alpha = mg \sin \alpha \\
+    &\frac{B \cos \alpha \cdot v \ell}R B \ell \cos \alpha = mg \sin \alpha\implies \frac{B^2 \cos^2 \alpha  \cdot v \ell^2}R = mg \sin \alpha, \\
+    B &= \sqrt{\frac{mg R \sin \alpha}{v \ell^2 \cos^2 \alpha}} = \sqrt{\frac{100\,\text{г} \cdot 10\,\frac{\text{м}}{\text{с}^{2}} \cdot 12\,\text{Ом} \cdot \sin 20\degrees}{15\,\frac{\text{м}}{\text{с}} \cdot \sqr{20\,\text{см}} \cdot \cos^2 20\degrees}}\approx 2{,}78\,\text{Тл}, \\
+    \eli &= \frac{\ele}R= \frac{B_\bot v \ell}R = \frac {v \ell \cos \alpha}R \sqrt{\frac{mg R \sin \alpha}{v \ell^2 \cos \alpha}}=\sqrt{\frac{mg v \sin \alpha}{R}}=\sqrt{\frac{100\,\text{г} \cdot 10\,\frac{\text{м}}{\text{с}^{2}} \cdot 15\,\frac{\text{м}}{\text{с}} \cdot \sin 20\degrees}{12\,\text{Ом}}} \approx 0{,}65\,\text{А}.
+    \end{align*}
+}
+
+\variantsplitter
+
+\addpersonalvariant{Алина Полканова}
+
+\tasknumber{1}%
+\task{%
+    При изменении силы тока в проводнике по закону $\eli = 4 - 1{,}5t$ (в системе СИ),
+    в нём возникает ЭДС самоиндукции $300\,\text{мВ}$.
+    Чему равна индуктивность проводника?
+    Ответ выразите в миллигенри и округлите до целого.
+}
+\answer{%
+    $
+        \ele = L\frac{\abs{\Delta \eli}}{\Delta t} = L \cdot \abs{ - 1{,}5 } \text{(в СИ)}
+        \implies L = \frac{\ele}{ 1{,}5 } = \frac{300\,\text{мВ}}{ 1{,}5 } \approx {200{,}0\,\text{мГн}}
+    $
+}
+\solutionspace{80pt}
+
+\tasknumber{2}%
+\task{%
+    Прямолинейный проводник длиной $\ell$ перемещают в однородном магнитном поле с индукцией $B$.
+    Проводник, вектор его скорости и вектор индукции поля взаимно перпендикулярны.
+    Определите зависимость ускорения от времени, если разность потенциалов на концах проводника
+    изменяется по закону $\Delta \varphi = kt^2$.
+}
+\answer{%
+    $
+        \Delta \varphi = Bv\ell = kt^2 \implies v = \frac{kt^2}{B\ell} \implies a(t) = \frac{v(t)}{t} = \frac{kt^{}}{B\ell}
+    $
+}
+\solutionspace{80pt}
+
+\tasknumber{3}%
+\task{%
+    Плоская прямоугольная рамка со сторонами $20\,\text{см}$ и $60\,\text{см}$ находится в однородном вертикальном магнитном поле
+    с индукцией $120\,\text{мТл}$.
+    Сопротивление рамки $15\,\text{Ом}$.
+    Вектор магнитной индукции параллелен плоскости рамки.
+    Рамку повернули на $60\degrees$ вокруг одной из её горизонтальных сторон.
+    Какой заряд протёк по рамке?
+    Ответ выразите в микрокулонах и округлите до целого.
+}
+\answer{%
+    \begin{align*}
+    \ele_i &= - \frac{\Delta \Phi_i}{\Delta t}, \eli_i = \frac{\ele_i}{R}, \Delta q_i = \eli_i\Delta t\implies \Delta q_i = \frac{\ele_i}{R} \cdot \Delta t = - \frac 1{R} \frac{\Delta \Phi_i}{\Delta t} \cdot \Delta t= - \frac{\Delta \Phi_i}{R} \implies \\
+    \implies \Delta q &= q_2 - q_1 = \sum_i \Delta q_i = \sum_i \cbr{ - \frac{\Delta \Phi_i}{R}} = -\frac 1{R} \sum_i \Delta \Phi_i = -\frac{\Phi_2 - \Phi_1}{R}.
+    \\
+    q &= \abs{\Delta q} = \frac {\abs{\Phi_2 - \Phi_1}}{R}= \frac {\abs{BS \cos \varphi_2 - BS \cos \varphi_1}}{R}= \frac {B S}{R}\abs{\cos \varphi_2 - \cos \varphi_1}= \frac {B a b}{R}\abs{\cos \varphi_2 - \cos \varphi_1}, \\
+    \varphi_1 &= 90\degrees, \varphi_2 = 30\degrees, \\
+    q&= \frac {120\,\text{мТл} \cdot 20\,\text{см} \cdot 60\,\text{см}}{15\,\text{Ом}}\abs{\cos 30\degrees - \cos 90\degrees} \approx 831{,}38\,\text{мкКл} \to 831.
+    \end{align*}
+}
+\solutionspace{120pt}
+
+\tasknumber{4}%
+\task{%
+    Резистор сопротивлением $R = 3\,\text{Ом}$ и катушка индуктивностью $L = 0{,}2\,\text{Гн}$ (и пренебрежимо малым сопротивлением)
+    подключены параллельно к источнику тока с ЭДС $\ele = 12\,\text{В}$ и внутренним сопротивлением $r = 1\,\text{Ом}$ (см.
+    рис.
+    на доске).
+    Какое количество теплоты выделится в цепи после размыкания ключа $K$?
+}
+\answer{%
+    \begin{align*}
+    &\text{закон Ома для полной цепи}: \eli = \frac{\ele}{r + R_\text{внешнее}} = \frac{\ele}{r + \frac{R \cdot 0}{R + 0}} = \frac{\ele}{r}, \\
+    Q &= W_m = \frac{L\eli^2}2 = \frac{L\sqr{\frac{\ele}{r}}}2 = \frac L2\frac{\ele^2}{r^2} = \frac{0{,}2\,\text{Гн}}2 \cdot \sqr{\frac{12\,\text{В}}{1\,\text{Ом}}} \approx 14{,}40\,\text{Дж}.
+    \end{align*}
+}
+\solutionspace{150pt}
+
+\tasknumber{5}%
+\task{%
+    По параллельным рельсам, расположенным под углом $25\degrees$ к горизонтали,
+    соскальзывает проводник массой $150\,\text{г}$: без трения и с постоянной скоростью $12\,\frac{\text{м}}{\text{с}}$ .
+    Рельсы замнуты резистором сопротивлением $8\,\text{Ом}$.
+    Вся система находитится в однородном вертикальном магнитном поле (см.
+    рис.
+    на доске).
+    Определите индукцию магнитного поля и ток, протекающий в проводнике.
+    Сопротивлением проводника, рельс и соединительных проводов пренебречь, ускорение свободного падения принять равным $g = 10\,\frac{\text{м}}{\text{с}^{2}}$.
+}
+\answer{%
+    \begin{align*}
+    \ele &= B_\bot v \ell, B_\bot = B\cos \alpha, \eli = \frac{\ele}R, \\
+    F_A &= \eli B \ell = \frac{\ele}R B \ell, \\
+    F_A \cos \alpha &= mg \sin \alpha \implies \frac{\ele}R B \ell \cos \alpha = mg \sin \alpha \\
+    &\frac{B \cos \alpha \cdot v \ell}R B \ell \cos \alpha = mg \sin \alpha\implies \frac{B^2 \cos^2 \alpha  \cdot v \ell^2}R = mg \sin \alpha, \\
+    B &= \sqrt{\frac{mg R \sin \alpha}{v \ell^2 \cos^2 \alpha}} = \sqrt{\frac{150\,\text{г} \cdot 10\,\frac{\text{м}}{\text{с}^{2}} \cdot 8\,\text{Ом} \cdot \sin 25\degrees}{12\,\frac{\text{м}}{\text{с}} \cdot \sqr{60\,\text{см}} \cdot \cos^2 25\degrees}}\approx 1{,}20\,\text{Тл}, \\
+    \eli &= \frac{\ele}R= \frac{B_\bot v \ell}R = \frac {v \ell \cos \alpha}R \sqrt{\frac{mg R \sin \alpha}{v \ell^2 \cos \alpha}}=\sqrt{\frac{mg v \sin \alpha}{R}}=\sqrt{\frac{150\,\text{г} \cdot 10\,\frac{\text{м}}{\text{с}^{2}} \cdot 12\,\frac{\text{м}}{\text{с}} \cdot \sin 25\degrees}{8\,\text{Ом}}} \approx 0{,}98\,\text{А}.
+    \end{align*}
+}
+
+\variantsplitter
+
+\addpersonalvariant{Сергей Пономарёв}
+
+\tasknumber{1}%
+\task{%
+    При изменении силы тока в проводнике по закону $\eli = 7 + 0{,}5t$ (в системе СИ),
+    в нём возникает ЭДС самоиндукции $200\,\text{мВ}$.
+    Чему равна индуктивность проводника?
+    Ответ выразите в миллигенри и округлите до целого.
+}
+\answer{%
+    $
+        \ele = L\frac{\abs{\Delta \eli}}{\Delta t} = L \cdot \abs{ + 0{,}5 } \text{(в СИ)}
+        \implies L = \frac{\ele}{ 0{,}5 } = \frac{200\,\text{мВ}}{ 0{,}5 } \approx {400{,}0\,\text{мГн}}
+    $
+}
+\solutionspace{80pt}
+
+\tasknumber{2}%
+\task{%
+    Прямолинейный проводник длиной $\ell$ перемещают в однородном магнитном поле с индукцией $B$.
+    Проводник, вектор его скорости и вектор индукции поля взаимно перпендикулярны.
+    Определите зависимость ускорения от времени, если разность потенциалов на концах проводника
+    изменяется по закону $\Delta \varphi = kt^2$.
+}
+\answer{%
+    $
+        \Delta \varphi = Bv\ell = kt^2 \implies v = \frac{kt^2}{B\ell} \implies a(t) = \frac{v(t)}{t} = \frac{kt^{}}{B\ell}
+    $
+}
+\solutionspace{80pt}
+
+\tasknumber{3}%
+\task{%
+    Плоская прямоугольная рамка со сторонами $30\,\text{см}$ и $60\,\text{см}$ находится в однородном вертикальном магнитном поле
+    с индукцией $150\,\text{мТл}$.
+    Сопротивление рамки $8\,\text{Ом}$.
+    Вектор магнитной индукции параллелен плоскости рамки.
+    Рамку повернули на $30\degrees$ вокруг одной из её горизонтальных сторон.
+    Какой заряд протёк по рамке?
+    Ответ выразите в микрокулонах и округлите до целого.
+}
+\answer{%
+    \begin{align*}
+    \ele_i &= - \frac{\Delta \Phi_i}{\Delta t}, \eli_i = \frac{\ele_i}{R}, \Delta q_i = \eli_i\Delta t\implies \Delta q_i = \frac{\ele_i}{R} \cdot \Delta t = - \frac 1{R} \frac{\Delta \Phi_i}{\Delta t} \cdot \Delta t= - \frac{\Delta \Phi_i}{R} \implies \\
+    \implies \Delta q &= q_2 - q_1 = \sum_i \Delta q_i = \sum_i \cbr{ - \frac{\Delta \Phi_i}{R}} = -\frac 1{R} \sum_i \Delta \Phi_i = -\frac{\Phi_2 - \Phi_1}{R}.
+    \\
+    q &= \abs{\Delta q} = \frac {\abs{\Phi_2 - \Phi_1}}{R}= \frac {\abs{BS \cos \varphi_2 - BS \cos \varphi_1}}{R}= \frac {B S}{R}\abs{\cos \varphi_2 - \cos \varphi_1}= \frac {B a b}{R}\abs{\cos \varphi_2 - \cos \varphi_1}, \\
+    \varphi_1 &= 90\degrees, \varphi_2 = 60\degrees, \\
+    q&= \frac {150\,\text{мТл} \cdot 30\,\text{см} \cdot 60\,\text{см}}{8\,\text{Ом}}\abs{\cos 60\degrees - \cos 90\degrees} \approx 1687{,}50\,\text{мкКл} \to 1688.
+    \end{align*}
+}
+\solutionspace{120pt}
+
+\tasknumber{4}%
+\task{%
+    Резистор сопротивлением $R = 4\,\text{Ом}$ и катушка индуктивностью $L = 0{,}2\,\text{Гн}$ (и пренебрежимо малым сопротивлением)
+    подключены параллельно к источнику тока с ЭДС $\ele = 5\,\text{В}$ и внутренним сопротивлением $r = 2\,\text{Ом}$ (см.
+    рис.
+    на доске).
+    Какое количество теплоты выделится в цепи после размыкания ключа $K$?
+}
+\answer{%
+    \begin{align*}
+    &\text{закон Ома для полной цепи}: \eli = \frac{\ele}{r + R_\text{внешнее}} = \frac{\ele}{r + \frac{R \cdot 0}{R + 0}} = \frac{\ele}{r}, \\
+    Q &= W_m = \frac{L\eli^2}2 = \frac{L\sqr{\frac{\ele}{r}}}2 = \frac L2\frac{\ele^2}{r^2} = \frac{0{,}2\,\text{Гн}}2 \cdot \sqr{\frac{5\,\text{В}}{2\,\text{Ом}}} \approx 0{,}62\,\text{Дж}.
+    \end{align*}
+}
+\solutionspace{150pt}
+
+\tasknumber{5}%
+\task{%
+    По параллельным рельсам, расположенным под углом $20\degrees$ к горизонтали,
+    соскальзывает проводник массой $150\,\text{г}$: без трения и с постоянной скоростью $12\,\frac{\text{м}}{\text{с}}$ .
+    Рельсы замнуты резистором сопротивлением $12\,\text{Ом}$.
+    Вся система находитится в однородном вертикальном магнитном поле (см.
+    рис.
+    на доске).
+    Определите индукцию магнитного поля и ток, протекающий в проводнике.
+    Сопротивлением проводника, рельс и соединительных проводов пренебречь, ускорение свободного падения принять равным $g = 10\,\frac{\text{м}}{\text{с}^{2}}$.
+}
+\answer{%
+    \begin{align*}
+    \ele &= B_\bot v \ell, B_\bot = B\cos \alpha, \eli = \frac{\ele}R, \\
+    F_A &= \eli B \ell = \frac{\ele}R B \ell, \\
+    F_A \cos \alpha &= mg \sin \alpha \implies \frac{\ele}R B \ell \cos \alpha = mg \sin \alpha \\
+    &\frac{B \cos \alpha \cdot v \ell}R B \ell \cos \alpha = mg \sin \alpha\implies \frac{B^2 \cos^2 \alpha  \cdot v \ell^2}R = mg \sin \alpha, \\
+    B &= \sqrt{\frac{mg R \sin \alpha}{v \ell^2 \cos^2 \alpha}} = \sqrt{\frac{150\,\text{г} \cdot 10\,\frac{\text{м}}{\text{с}^{2}} \cdot 12\,\text{Ом} \cdot \sin 20\degrees}{12\,\frac{\text{м}}{\text{с}} \cdot \sqr{20\,\text{см}} \cdot \cos^2 20\degrees}}\approx 3{,}81\,\text{Тл}, \\
+    \eli &= \frac{\ele}R= \frac{B_\bot v \ell}R = \frac {v \ell \cos \alpha}R \sqrt{\frac{mg R \sin \alpha}{v \ell^2 \cos \alpha}}=\sqrt{\frac{mg v \sin \alpha}{R}}=\sqrt{\frac{150\,\text{г} \cdot 10\,\frac{\text{м}}{\text{с}^{2}} \cdot 12\,\frac{\text{м}}{\text{с}} \cdot \sin 20\degrees}{12\,\text{Ом}}} \approx 0{,}72\,\text{А}.
+    \end{align*}
+}
+
+\variantsplitter
+
+\addpersonalvariant{Егор Свистушкин}
+
+\tasknumber{1}%
+\task{%
+    При изменении силы тока в проводнике по закону $\eli = 7 + 1{,}5t$ (в системе СИ),
+    в нём возникает ЭДС самоиндукции $200\,\text{мВ}$.
+    Чему равна индуктивность проводника?
+    Ответ выразите в миллигенри и округлите до целого.
+}
+\answer{%
+    $
+        \ele = L\frac{\abs{\Delta \eli}}{\Delta t} = L \cdot \abs{ + 1{,}5 } \text{(в СИ)}
+        \implies L = \frac{\ele}{ 1{,}5 } = \frac{200\,\text{мВ}}{ 1{,}5 } \approx {133{,}3\,\text{мГн}}
+    $
+}
+\solutionspace{80pt}
+
+\tasknumber{2}%
+\task{%
+    Прямолинейный проводник длиной $\ell$ перемещают в однородном магнитном поле с индукцией $B$.
+    Проводник, вектор его скорости и вектор индукции поля взаимно перпендикулярны.
+    Определите зависимость ускорения от времени, если разность потенциалов на концах проводника
+    изменяется по закону $\Delta \varphi = kt^2$.
+}
+\answer{%
+    $
+        \Delta \varphi = Bv\ell = kt^2 \implies v = \frac{kt^2}{B\ell} \implies a(t) = \frac{v(t)}{t} = \frac{kt^{}}{B\ell}
+    $
+}
+\solutionspace{80pt}
+
+\tasknumber{3}%
+\task{%
+    Плоская прямоугольная рамка со сторонами $40\,\text{см}$ и $50\,\text{см}$ находится в однородном вертикальном магнитном поле
+    с индукцией $300\,\text{мТл}$.
+    Сопротивление рамки $12\,\text{Ом}$.
+    Вектор магнитной индукции перпендикулярен плоскости рамки.
+    Рамку повернули на $60\degrees$ вокруг одной из её горизонтальных сторон.
+    Какой заряд протёк по рамке?
+    Ответ выразите в микрокулонах и округлите до целого.
+}
+\answer{%
+    \begin{align*}
+    \ele_i &= - \frac{\Delta \Phi_i}{\Delta t}, \eli_i = \frac{\ele_i}{R}, \Delta q_i = \eli_i\Delta t\implies \Delta q_i = \frac{\ele_i}{R} \cdot \Delta t = - \frac 1{R} \frac{\Delta \Phi_i}{\Delta t} \cdot \Delta t= - \frac{\Delta \Phi_i}{R} \implies \\
+    \implies \Delta q &= q_2 - q_1 = \sum_i \Delta q_i = \sum_i \cbr{ - \frac{\Delta \Phi_i}{R}} = -\frac 1{R} \sum_i \Delta \Phi_i = -\frac{\Phi_2 - \Phi_1}{R}.
+    \\
+    q &= \abs{\Delta q} = \frac {\abs{\Phi_2 - \Phi_1}}{R}= \frac {\abs{BS \cos \varphi_2 - BS \cos \varphi_1}}{R}= \frac {B S}{R}\abs{\cos \varphi_2 - \cos \varphi_1}= \frac {B a b}{R}\abs{\cos \varphi_2 - \cos \varphi_1}, \\
+    \varphi_1 &= 0\degrees, \varphi_2 = 60\degrees, \\
+    q&= \frac {300\,\text{мТл} \cdot 40\,\text{см} \cdot 50\,\text{см}}{12\,\text{Ом}}\abs{\cos 60\degrees - \cos 0\degrees} \approx 2500{,}00\,\text{мкКл} \to 2500.
+    \end{align*}
+}
+\solutionspace{120pt}
+
+\tasknumber{4}%
+\task{%
+    Резистор сопротивлением $R = 4\,\text{Ом}$ и катушка индуктивностью $L = 0{,}5\,\text{Гн}$ (и пренебрежимо малым сопротивлением)
+    подключены параллельно к источнику тока с ЭДС $\ele = 6\,\text{В}$ и внутренним сопротивлением $r = 2\,\text{Ом}$ (см.
+    рис.
+    на доске).
+    Какое количество теплоты выделится в цепи после размыкания ключа $K$?
+}
+\answer{%
+    \begin{align*}
+    &\text{закон Ома для полной цепи}: \eli = \frac{\ele}{r + R_\text{внешнее}} = \frac{\ele}{r + \frac{R \cdot 0}{R + 0}} = \frac{\ele}{r}, \\
+    Q &= W_m = \frac{L\eli^2}2 = \frac{L\sqr{\frac{\ele}{r}}}2 = \frac L2\frac{\ele^2}{r^2} = \frac{0{,}5\,\text{Гн}}2 \cdot \sqr{\frac{6\,\text{В}}{2\,\text{Ом}}} \approx 2{,}25\,\text{Дж}.
+    \end{align*}
+}
+\solutionspace{150pt}
+
+\tasknumber{5}%
+\task{%
+    По параллельным рельсам, расположенным под углом $20\degrees$ к горизонтали,
+    соскальзывает проводник массой $150\,\text{г}$: без трения и с постоянной скоростью $12\,\frac{\text{м}}{\text{с}}$ .
+    Рельсы замнуты резистором сопротивлением $5\,\text{Ом}$.
+    Вся система находитится в однородном вертикальном магнитном поле (см.
+    рис.
+    на доске).
+    Определите индукцию магнитного поля и ток, протекающий в проводнике.
+    Сопротивлением проводника, рельс и соединительных проводов пренебречь, ускорение свободного падения принять равным $g = 10\,\frac{\text{м}}{\text{с}^{2}}$.
+}
+\answer{%
+    \begin{align*}
+    \ele &= B_\bot v \ell, B_\bot = B\cos \alpha, \eli = \frac{\ele}R, \\
+    F_A &= \eli B \ell = \frac{\ele}R B \ell, \\
+    F_A \cos \alpha &= mg \sin \alpha \implies \frac{\ele}R B \ell \cos \alpha = mg \sin \alpha \\
+    &\frac{B \cos \alpha \cdot v \ell}R B \ell \cos \alpha = mg \sin \alpha\implies \frac{B^2 \cos^2 \alpha  \cdot v \ell^2}R = mg \sin \alpha, \\
+    B &= \sqrt{\frac{mg R \sin \alpha}{v \ell^2 \cos^2 \alpha}} = \sqrt{\frac{150\,\text{г} \cdot 10\,\frac{\text{м}}{\text{с}^{2}} \cdot 5\,\text{Ом} \cdot \sin 20\degrees}{12\,\frac{\text{м}}{\text{с}} \cdot \sqr{20\,\text{см}} \cdot \cos^2 20\degrees}}\approx 2{,}46\,\text{Тл}, \\
+    \eli &= \frac{\ele}R= \frac{B_\bot v \ell}R = \frac {v \ell \cos \alpha}R \sqrt{\frac{mg R \sin \alpha}{v \ell^2 \cos \alpha}}=\sqrt{\frac{mg v \sin \alpha}{R}}=\sqrt{\frac{150\,\text{г} \cdot 10\,\frac{\text{м}}{\text{с}^{2}} \cdot 12\,\frac{\text{м}}{\text{с}} \cdot \sin 20\degrees}{5\,\text{Ом}}} \approx 1{,}11\,\text{А}.
+    \end{align*}
+}
+
+\variantsplitter
+
+\addpersonalvariant{Дмитрий Соколов}
+
+\tasknumber{1}%
+\task{%
+    При изменении силы тока в проводнике по закону $\eli = 2 + 0{,}8t$ (в системе СИ),
+    в нём возникает ЭДС самоиндукции $400\,\text{мВ}$.
+    Чему равна индуктивность проводника?
+    Ответ выразите в миллигенри и округлите до целого.
+}
+\answer{%
+    $
+        \ele = L\frac{\abs{\Delta \eli}}{\Delta t} = L \cdot \abs{ + 0{,}8 } \text{(в СИ)}
+        \implies L = \frac{\ele}{ 0{,}8 } = \frac{400\,\text{мВ}}{ 0{,}8 } \approx {500{,}0\,\text{мГн}}
+    $
+}
+\solutionspace{80pt}
+
+\tasknumber{2}%
+\task{%
+    Прямолинейный проводник длиной $\ell$ перемещают в однородном магнитном поле с индукцией $B$.
+    Проводник, вектор его скорости и вектор индукции поля взаимно перпендикулярны.
+    Определите зависимость ускорения от времени, если разность потенциалов на концах проводника
+    изменяется по закону $\Delta \varphi = kt^3$.
+}
+\answer{%
+    $
+        \Delta \varphi = Bv\ell = kt^3 \implies v = \frac{kt^3}{B\ell} \implies a(t) = \frac{v(t)}{t} = \frac{kt^2}{B\ell}
+    $
+}
+\solutionspace{80pt}
+
+\tasknumber{3}%
+\task{%
+    Плоская прямоугольная рамка со сторонами $40\,\text{см}$ и $60\,\text{см}$ находится в однородном вертикальном магнитном поле
+    с индукцией $150\,\text{мТл}$.
+    Сопротивление рамки $15\,\text{Ом}$.
+    Вектор магнитной индукции перпендикулярен плоскости рамки.
+    Рамку повернули на $30\degrees$ вокруг одной из её горизонтальных сторон.
+    Какой заряд протёк по рамке?
+    Ответ выразите в микрокулонах и округлите до целого.
+}
+\answer{%
+    \begin{align*}
+    \ele_i &= - \frac{\Delta \Phi_i}{\Delta t}, \eli_i = \frac{\ele_i}{R}, \Delta q_i = \eli_i\Delta t\implies \Delta q_i = \frac{\ele_i}{R} \cdot \Delta t = - \frac 1{R} \frac{\Delta \Phi_i}{\Delta t} \cdot \Delta t= - \frac{\Delta \Phi_i}{R} \implies \\
+    \implies \Delta q &= q_2 - q_1 = \sum_i \Delta q_i = \sum_i \cbr{ - \frac{\Delta \Phi_i}{R}} = -\frac 1{R} \sum_i \Delta \Phi_i = -\frac{\Phi_2 - \Phi_1}{R}.
+    \\
+    q &= \abs{\Delta q} = \frac {\abs{\Phi_2 - \Phi_1}}{R}= \frac {\abs{BS \cos \varphi_2 - BS \cos \varphi_1}}{R}= \frac {B S}{R}\abs{\cos \varphi_2 - \cos \varphi_1}= \frac {B a b}{R}\abs{\cos \varphi_2 - \cos \varphi_1}, \\
+    \varphi_1 &= 0\degrees, \varphi_2 = 30\degrees, \\
+    q&= \frac {150\,\text{мТл} \cdot 40\,\text{см} \cdot 60\,\text{см}}{15\,\text{Ом}}\abs{\cos 30\degrees - \cos 0\degrees} \approx 321{,}54\,\text{мкКл} \to 322.
+    \end{align*}
+}
+\solutionspace{120pt}
+
+\tasknumber{4}%
+\task{%
+    Резистор сопротивлением $R = 3\,\text{Ом}$ и катушка индуктивностью $L = 0{,}5\,\text{Гн}$ (и пренебрежимо малым сопротивлением)
+    подключены параллельно к источнику тока с ЭДС $\ele = 5\,\text{В}$ и внутренним сопротивлением $r = 2\,\text{Ом}$ (см.
+    рис.
+    на доске).
+    Какое количество теплоты выделится в цепи после размыкания ключа $K$?
+}
+\answer{%
+    \begin{align*}
+    &\text{закон Ома для полной цепи}: \eli = \frac{\ele}{r + R_\text{внешнее}} = \frac{\ele}{r + \frac{R \cdot 0}{R + 0}} = \frac{\ele}{r}, \\
+    Q &= W_m = \frac{L\eli^2}2 = \frac{L\sqr{\frac{\ele}{r}}}2 = \frac L2\frac{\ele^2}{r^2} = \frac{0{,}5\,\text{Гн}}2 \cdot \sqr{\frac{5\,\text{В}}{2\,\text{Ом}}} \approx 1{,}56\,\text{Дж}.
+    \end{align*}
+}
+\solutionspace{150pt}
+
+\tasknumber{5}%
+\task{%
+    По параллельным рельсам, расположенным под углом $10\degrees$ к горизонтали,
+    соскальзывает проводник массой $200\,\text{г}$: без трения и с постоянной скоростью $12\,\frac{\text{м}}{\text{с}}$ .
+    Рельсы замнуты резистором сопротивлением $8\,\text{Ом}$.
+    Вся система находитится в однородном вертикальном магнитном поле (см.
+    рис.
+    на доске).
+    Определите индукцию магнитного поля и ток, протекающий в проводнике.
+    Сопротивлением проводника, рельс и соединительных проводов пренебречь, ускорение свободного падения принять равным $g = 10\,\frac{\text{м}}{\text{с}^{2}}$.
+}
+\answer{%
+    \begin{align*}
+    \ele &= B_\bot v \ell, B_\bot = B\cos \alpha, \eli = \frac{\ele}R, \\
+    F_A &= \eli B \ell = \frac{\ele}R B \ell, \\
+    F_A \cos \alpha &= mg \sin \alpha \implies \frac{\ele}R B \ell \cos \alpha = mg \sin \alpha \\
+    &\frac{B \cos \alpha \cdot v \ell}R B \ell \cos \alpha = mg \sin \alpha\implies \frac{B^2 \cos^2 \alpha  \cdot v \ell^2}R = mg \sin \alpha, \\
+    B &= \sqrt{\frac{mg R \sin \alpha}{v \ell^2 \cos^2 \alpha}} = \sqrt{\frac{200\,\text{г} \cdot 10\,\frac{\text{м}}{\text{с}^{2}} \cdot 8\,\text{Ом} \cdot \sin 10\degrees}{12\,\frac{\text{м}}{\text{с}} \cdot \sqr{60\,\text{см}} \cdot \cos^2 10\degrees}}\approx 0{,}81\,\text{Тл}, \\
+    \eli &= \frac{\ele}R= \frac{B_\bot v \ell}R = \frac {v \ell \cos \alpha}R \sqrt{\frac{mg R \sin \alpha}{v \ell^2 \cos \alpha}}=\sqrt{\frac{mg v \sin \alpha}{R}}=\sqrt{\frac{200\,\text{г} \cdot 10\,\frac{\text{м}}{\text{с}^{2}} \cdot 12\,\frac{\text{м}}{\text{с}} \cdot \sin 10\degrees}{8\,\text{Ом}}} \approx 0{,}72\,\text{А}.
+    \end{align*}
+}
+
+\variantsplitter
+
+\addpersonalvariant{Арсений Трофимов}
+
+\tasknumber{1}%
+\task{%
+    При изменении силы тока в проводнике по закону $\eli = 7 - 1{,}5t$ (в системе СИ),
+    в нём возникает ЭДС самоиндукции $200\,\text{мВ}$.
+    Чему равна индуктивность проводника?
+    Ответ выразите в миллигенри и округлите до целого.
+}
+\answer{%
+    $
+        \ele = L\frac{\abs{\Delta \eli}}{\Delta t} = L \cdot \abs{ - 1{,}5 } \text{(в СИ)}
+        \implies L = \frac{\ele}{ 1{,}5 } = \frac{200\,\text{мВ}}{ 1{,}5 } \approx {133{,}3\,\text{мГн}}
+    $
+}
+\solutionspace{80pt}
+
+\tasknumber{2}%
+\task{%
+    Прямолинейный проводник длиной $\ell$ перемещают в однородном магнитном поле с индукцией $B$.
+    Проводник, вектор его скорости и вектор индукции поля взаимно перпендикулярны.
+    Определите зависимость ускорения от времени, если разность потенциалов на концах проводника
+    изменяется по закону $\Delta \varphi = kt^4$.
+}
+\answer{%
+    $
+        \Delta \varphi = Bv\ell = kt^4 \implies v = \frac{kt^4}{B\ell} \implies a(t) = \frac{v(t)}{t} = \frac{kt^3}{B\ell}
+    $
+}
+\solutionspace{80pt}
+
+\tasknumber{3}%
+\task{%
+    Плоская прямоугольная рамка со сторонами $40\,\text{см}$ и $25\,\text{см}$ находится в однородном вертикальном магнитном поле
+    с индукцией $200\,\text{мТл}$.
+    Сопротивление рамки $15\,\text{Ом}$.
+    Вектор магнитной индукции перпендикулярен плоскости рамки.
+    Рамку повернули на $60\degrees$ вокруг одной из её горизонтальных сторон.
+    Какой заряд протёк по рамке?
+    Ответ выразите в микрокулонах и округлите до целого.
+}
+\answer{%
+    \begin{align*}
+    \ele_i &= - \frac{\Delta \Phi_i}{\Delta t}, \eli_i = \frac{\ele_i}{R}, \Delta q_i = \eli_i\Delta t\implies \Delta q_i = \frac{\ele_i}{R} \cdot \Delta t = - \frac 1{R} \frac{\Delta \Phi_i}{\Delta t} \cdot \Delta t= - \frac{\Delta \Phi_i}{R} \implies \\
+    \implies \Delta q &= q_2 - q_1 = \sum_i \Delta q_i = \sum_i \cbr{ - \frac{\Delta \Phi_i}{R}} = -\frac 1{R} \sum_i \Delta \Phi_i = -\frac{\Phi_2 - \Phi_1}{R}.
+    \\
+    q &= \abs{\Delta q} = \frac {\abs{\Phi_2 - \Phi_1}}{R}= \frac {\abs{BS \cos \varphi_2 - BS \cos \varphi_1}}{R}= \frac {B S}{R}\abs{\cos \varphi_2 - \cos \varphi_1}= \frac {B a b}{R}\abs{\cos \varphi_2 - \cos \varphi_1}, \\
+    \varphi_1 &= 0\degrees, \varphi_2 = 60\degrees, \\
+    q&= \frac {200\,\text{мТл} \cdot 40\,\text{см} \cdot 25\,\text{см}}{15\,\text{Ом}}\abs{\cos 60\degrees - \cos 0\degrees} \approx 666{,}67\,\text{мкКл} \to 667.
+    \end{align*}
+}
+\solutionspace{120pt}
+
+\tasknumber{4}%
+\task{%
+    Резистор сопротивлением $R = 3\,\text{Ом}$ и катушка индуктивностью $L = 0{,}2\,\text{Гн}$ (и пренебрежимо малым сопротивлением)
+    подключены параллельно к источнику тока с ЭДС $\ele = 12\,\text{В}$ и внутренним сопротивлением $r = 2\,\text{Ом}$ (см.
+    рис.
+    на доске).
+    Какое количество теплоты выделится в цепи после размыкания ключа $K$?
+}
+\answer{%
+    \begin{align*}
+    &\text{закон Ома для полной цепи}: \eli = \frac{\ele}{r + R_\text{внешнее}} = \frac{\ele}{r + \frac{R \cdot 0}{R + 0}} = \frac{\ele}{r}, \\
+    Q &= W_m = \frac{L\eli^2}2 = \frac{L\sqr{\frac{\ele}{r}}}2 = \frac L2\frac{\ele^2}{r^2} = \frac{0{,}2\,\text{Гн}}2 \cdot \sqr{\frac{12\,\text{В}}{2\,\text{Ом}}} \approx 3{,}60\,\text{Дж}.
+    \end{align*}
+}
+\solutionspace{150pt}
+
+\tasknumber{5}%
+\task{%
+    По параллельным рельсам, расположенным под углом $15\degrees$ к горизонтали,
+    соскальзывает проводник массой $100\,\text{г}$: без трения и с постоянной скоростью $15\,\frac{\text{м}}{\text{с}}$ .
+    Рельсы замнуты резистором сопротивлением $5\,\text{Ом}$.
+    Вся система находитится в однородном вертикальном магнитном поле (см.
+    рис.
+    на доске).
+    Определите индукцию магнитного поля и ток, протекающий в проводнике.
+    Сопротивлением проводника, рельс и соединительных проводов пренебречь, ускорение свободного падения принять равным $g = 10\,\frac{\text{м}}{\text{с}^{2}}$.
+}
+\answer{%
+    \begin{align*}
+    \ele &= B_\bot v \ell, B_\bot = B\cos \alpha, \eli = \frac{\ele}R, \\
+    F_A &= \eli B \ell = \frac{\ele}R B \ell, \\
+    F_A \cos \alpha &= mg \sin \alpha \implies \frac{\ele}R B \ell \cos \alpha = mg \sin \alpha \\
+    &\frac{B \cos \alpha \cdot v \ell}R B \ell \cos \alpha = mg \sin \alpha\implies \frac{B^2 \cos^2 \alpha  \cdot v \ell^2}R = mg \sin \alpha, \\
+    B &= \sqrt{\frac{mg R \sin \alpha}{v \ell^2 \cos^2 \alpha}} = \sqrt{\frac{100\,\text{г} \cdot 10\,\frac{\text{м}}{\text{с}^{2}} \cdot 5\,\text{Ом} \cdot \sin 15\degrees}{15\,\frac{\text{м}}{\text{с}} \cdot \sqr{40\,\text{см}} \cdot \cos^2 15\degrees}}\approx 0{,}76\,\text{Тл}, \\
+    \eli &= \frac{\ele}R= \frac{B_\bot v \ell}R = \frac {v \ell \cos \alpha}R \sqrt{\frac{mg R \sin \alpha}{v \ell^2 \cos \alpha}}=\sqrt{\frac{mg v \sin \alpha}{R}}=\sqrt{\frac{100\,\text{г} \cdot 10\,\frac{\text{м}}{\text{с}^{2}} \cdot 15\,\frac{\text{м}}{\text{с}} \cdot \sin 15\degrees}{5\,\text{Ом}}} \approx 0{,}88\,\text{А}.
+    \end{align*}
+}
+% autogenerated
