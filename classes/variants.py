@@ -602,5 +602,13 @@ def get_all_variants():
             task_id='2021-10-05 11БА - ЭМИ - 4',
             classes={'magnet.induction': ['L_from_b', 'a_from_n', 'q_from_B_a_b_r', 'W_kirchgof', 'B_angle_hard']},
         ),
+        Work(
+            task_id='2021-10-07 11БА - МК - 1',
+            classes={'mechanics.koleb': ['Definitions01', 'Definitions02', 'Definitions03', 'Nu02', 'Nu03', 'Nu04', 'Nu05', 'S_from_func']},
+        ),
+        Work(
+            task_id='2021-10-07 11Б - МК - 1',
+            classes={'mechanics.koleb': ['Definitions01', 'Definitions02', 'Nu02', 'Nu03', 'Nu04', 'S_from_func']},
+        ),
     ]
     return works
