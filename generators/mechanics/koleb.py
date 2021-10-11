@@ -55,15 +55,20 @@ class Definitions02(variant.VariantTask):
 @variant.solution_space(80)
 @variant.text('''
     \\begin{itemize}
-        \\item Запишите однородное дифференциальное уравнение второго порядка, описывающее гармонический осциллятор,
+        \\item Запишите линейное однородное дифференциальное уравнение второго порядка,
+            описывающее свободные незатухающие колебания гармонического осциллятора,
         \\item запишите общее решение этого уравнения,
-        \\item выделите в выписанном решении фазу и амплитуду колебаний.
+        \\item подпишите в выписанном решении фазу и амплитуду колебаний,
+        \\item запишите выражение для скорости,
+        \\item запишите выражение для ускорения.
     \\end{itemize}
 ''')
 @variant.answer_align([
     '&\\ddot x + \\omega^2 x = 0 \\Longleftrightarrow a_x + \\omega^2 x = 0,',
     '&x = A \\cos(\\omega t + \\varphi_0) \\text{ или же } x = A \\sin(\\omega t + \\varphi_0) \\text{ или же } x = a \\cos(\\omega t) + b \\sin(\\omega t),',
-    '&A \\text{\, или \,} \\sqrt{a^2 + b^2} \\text{ --- это амплитуда}, \\omega t + \\varphi_0\\text{ --- это фаза}.'
+    '&A \\text{\, или \,} \\sqrt{a^2 + b^2} \\text{ --- это амплитуда}, \\omega t + \\varphi_0\\text{ --- это фаза},'
+    '&v = \\dot x = -\\omega A \\cos(\\omega t + \\varphi_0),',
+    '&a = \\dot v = \\ddot x = -\\omega^2 A \\cos(\\omega t + \\varphi_0) = \\omega^2 x,',
 ])
 @variant.no_args
 class Definitions03(variant.VariantTask):
