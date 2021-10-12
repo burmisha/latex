@@ -610,5 +610,14 @@ def get_all_variants():
             task_id='2021-10-07 11Б - МК - 1',
             classes={'oscillation.basic': ['Definitions01', 'Definitions02', 'Nu02', 'Nu03', 'Nu04', 'S_from_func']},
         ),
+        Work(
+            task_id='2021-10-13 11БА - МК - 2',
+            classes={'oscillation': [
+                'basic.Definitions03',
+                'mechanical.Task01', 'mechanical.Task02', 'mechanical.Task03', 'mechanical.Task04', 'mechanical.Task05',
+                'mechanical.Task06', 'mechanical.Task07', 'mechanical.Task08', 'mechanical.Task09', 'mechanical.Task10',
+                'mechanical.Task11', 'mechanical.Task12', 'mechanical.Task13',
+            ]},
+        ),
     ]
     return works

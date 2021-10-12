@@ -66,7 +66,7 @@ class Definitions02(variant.VariantTask):
 @variant.answer_align([
     '&\\ddot x + \\omega^2 x = 0 \\Longleftrightarrow a_x + \\omega^2 x = 0,',
     '&x = A \\cos(\\omega t + \\varphi_0) \\text{ или же } x = A \\sin(\\omega t + \\varphi_0) \\text{ или же } x = a \\cos(\\omega t) + b \\sin(\\omega t),',
-    '&A \\text{\, или \,} \\sqrt{a^2 + b^2} \\text{ --- это амплитуда}, \\omega t + \\varphi_0\\text{ --- это фаза},'
+    '&A \\text{\, или \,} \\sqrt{a^2 + b^2} \\text{ --- это амплитуда}, \\omega t + \\varphi_0\\text{ --- это фаза},',
     '&v = \\dot x = -\\omega A \\cos(\\omega t + \\varphi_0),',
     '&a = \\dot v = \\ddot x = -\\omega^2 A \\cos(\\omega t + \\varphi_0) = \\omega^2 x,',
 ])
@@ -162,8 +162,8 @@ class Nu04(variant.VariantTask):
 
 @variant.solution_space(80)
 @variant.text('''
-    Изобразите график гармонических колебаний, амплитуда которых составляла бы
-    {A:Task:e}, а период {T:Task:e}.
+    Изобразите график гармонических колебаний,
+    амплитуда которых составляла бы {A:Task:e}, а период {T:Task:e}.
 ''')
 @variant.arg(A=('A = {} см', [1, 2, 3, 5, 6, 15, 30, 40, 75]))
 @variant.arg(T=('T = {} с', [2, 4, 6, 8, 10]))
