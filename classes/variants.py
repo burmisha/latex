@@ -185,7 +185,7 @@ def get_all_variants():
         ),
         Work(
             task_id='2019-12-17 9А',
-            classes={'mechanics.koleb': ['Nu01', 'Nu02', 'Nu03', 'Nu04', 'Nu05']},
+            classes={'oscillation.basic': ['Nu01', 'Nu02', 'Nu03', 'Nu04', 'Nu05']},
         ),
         Work(
             task_id='2019-12-24 9А',
@@ -193,7 +193,7 @@ def get_all_variants():
         ),
         Work(
             task_id='2020-01-20 9Л',
-            classes={'mechanics.koleb': ['Nu01', 'Nu02', 'Nu03', 'Nu04', 'Nu05']},
+            classes={'oscillation.basic': ['Nu01', 'Nu02', 'Nu03', 'Nu04', 'Nu05']},
         ),
         Work(
             task_id='2020-03-04 11Т',
@@ -381,11 +381,11 @@ def get_all_variants():
         ),
         Work(
             task_id='2020-12-24 9',
-            classes={'mechanics.koleb': ['Nu01', 'Nu02', 'Nu03', 'Nu04', 'Nu05']},
+            classes={'oscillation.basic': ['Nu01', 'Nu02', 'Nu03', 'Nu04', 'Nu05']},
         ),
         Work(
             task_id='2021-01-21 9',
-            classes={'mechanics.koleb': ['Nu01', 'Nu02', 'Nu03', 'Nu04', 'Nu05']},
+            classes={'oscillation.basic': ['Nu01', 'Nu02', 'Nu03', 'Nu04', 'Nu05']},
         ),
         Work(
             task_id='2021-01-22 10',
@@ -604,11 +604,11 @@ def get_all_variants():
         ),
         Work(
             task_id='2021-10-07 11БА - МК - 1',
-            classes={'mechanics.koleb': ['Definitions01', 'Definitions02', 'Definitions03', 'Nu02', 'Nu03', 'Nu04', 'Nu05', 'S_from_func']},
+            classes={'oscillation.basic': ['Definitions01', 'Definitions02', 'Definitions03', 'Nu02', 'Nu03', 'Nu04', 'Nu05', 'S_from_func']},
         ),
         Work(
             task_id='2021-10-07 11Б - МК - 1',
-            classes={'mechanics.koleb': ['Definitions01', 'Definitions02', 'Nu02', 'Nu03', 'Nu04', 'S_from_func']},
+            classes={'oscillation.basic': ['Definitions01', 'Definitions02', 'Nu02', 'Nu03', 'Nu04', 'S_from_func']},
         ),
     ]
     return works
