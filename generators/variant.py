@@ -163,9 +163,8 @@ def check_unit_value(value):
                 return UnitValue(value)
             elif re.match(r'-?\d.* \w', value, re.UNICODE):
                 return UnitValue(value)
-    except:
-        log.error(f'Failed to check_unit_value for {cm(value, color=color.Red)}')
-        raise
+    except ValueError:
+        log.debug(f'Failed to check_unit_value for {cm(value, color=color.Red)}')
 
     return value
 

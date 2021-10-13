@@ -52,7 +52,7 @@ class Definitions02(variant.VariantTask):
     pass
 
 
-@variant.solution_space(80)
+@variant.solution_space(135)
 @variant.text('''
     \\begin{itemize}
         \\item Запишите линейное однородное дифференциальное уравнение второго порядка,
