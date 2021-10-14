@@ -260,7 +260,7 @@ class Task09(variant.VariantTask):
     Груз {what} на {m:V:e}. Определите новый период колебаний маятника.
 ''')
 @variant.solution_space(120)
-@variant.arg(T=('T = {} с', [11.2, 1.3, 1.4, 1.5]))  # TODO: use 1.2
+@variant.arg(T=('T = {} с', [1.2, 1.3, 1.4, 1.5]))
 @variant.arg(m=('m = {} г', [50, 100, 150]))
 @variant.arg(M=('M = {} г', [400, 500, 600]))
 @variant.arg(what=['утяжеляют', 'облегчают'])
@@ -277,7 +277,7 @@ class Task10(variant.VariantTask):
             m2 = M.SI_Value + m.SI_Value
         elif what == 'облегчают':
             sign = '-'
-            m2 = M.SI_Value + m.SI_Value
+            m2 = M.SI_Value - m.SI_Value
         else:
             raise RuntimeError()
         T2 = T * (m2 / M.SI_Value) ** 0.5
@@ -332,7 +332,7 @@ class Task12(variant.VariantTask):
     для случая $n = {n}$. Длина маятника $\\ell$, ускорение свободного падения $g$. 
 ''')
 @variant.solution_space(120)
-@variant.arg(n__frac=[('2', 12), ('\\sqrt{2}', 8), ('\\frac{\\sqrt{3}}2', 6)])
+@variant.arg(n__frac=[('2', 12), ('\\sqrt{2}', 8), ('\\frac{2}{\\sqrt{3}}', 6)])
 @variant.answer_short('''
     T = 2\\pi\\sqrt{\\frac\\ell g}, \\qquad
     T\' = 2 * \\frac T 4 + 2 * \\frac T{{frac}} = {r1:LaTeX}T = {r2:LaTeX}\\pi\\sqrt{\\frac\\ell g}

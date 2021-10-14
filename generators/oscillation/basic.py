@@ -67,7 +67,7 @@ class Definitions02(variant.VariantTask):
     '&\\ddot x + \\omega^2 x = 0 \\Longleftrightarrow a_x + \\omega^2 x = 0,',
     '&x = A \\cos(\\omega t + \\varphi_0) \\text{ или же } x = A \\sin(\\omega t + \\varphi_0) \\text{ или же } x = a \\cos(\\omega t) + b \\sin(\\omega t),',
     '&A \\text{\, или \,} \\sqrt{a^2 + b^2} \\text{ --- это амплитуда}, \\omega t + \\varphi_0\\text{ --- это фаза},',
-    '&v = \\dot x = -\\omega A \\cos(\\omega t + \\varphi_0),',
+    '&v = \\dot x = -\\omega A \\sin(\\omega t + \\varphi_0),',
     '&a = \\dot v = \\ddot x = -\\omega^2 A \\cos(\\omega t + \\varphi_0) = \\omega^2 x,',
 ])
 @variant.no_args
