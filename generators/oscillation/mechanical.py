@@ -328,8 +328,8 @@ class Task12(variant.VariantTask):
 
 
 @variant.text('''
-    Определите период колебаний системы (см. рис. на доске), 
-    для случая $n = {n}$. Длина маятника $\\ell$, ускорение свободного падения $g$. 
+    Определите период колебаний системы: математический маятник ограничен с одной стороны стенкой (см. рис. на доске).
+    Удары маятника о стенку абсолютно упругие, $n = {n}$. Длина маятника $\\ell$, ускорение свободного падения $g$. 
 ''')
 @variant.solution_space(120)
 @variant.arg(n__frac=[('2', 12), ('\\sqrt{2}', 8), ('\\frac{2}{\\sqrt{3}}', 6)])
@@ -344,4 +344,43 @@ class Task13(variant.VariantTask):
         return dict(
             r1=r1,
             r2=r2,
+        )
+
+
+@variant.text('''
+    2 маленьких шарика скреплены лёгкой пружиной жёсткостью $k$ и длины $d$, масса каждого шарика $m$.
+    Пружина недеформирована, система летит со скоростью $v$ к стенке, 
+    расстояние от ближайшего шарика до стены $\\ell$ (см. рис. на доске). 
+    Все удары упругие, трением пренебречь, $\\frac{2mv^2}{kd^2} < 1.$
+    Через какое время шарики вновь окажутся в том же положении?
+''')
+@variant.solution_space(120)
+@variant.answer_short('''
+    F = -k * 2x = ma \\implies a + \\frac {2k}m x = 0 \\implies \\omega^2 = \\frac {2k}m \\implies
+    T = 2 * \\frac \\ell v + \\frac 12 * 2 \\pi\\sqrt{\\frac m{2k}}
+''')
+class Task14(variant.VariantTask):
+    pass
+
+
+@variant.text('''
+    Определите период колебаний жидкости в тонкой U-образной трубке постоянного сечения,
+    если длина столбика жидкости равна {l:V:e} (см. рис. на доске).
+    Вязкостью, силами трения и сопротивления, капиллярными эффектами и притяжением {what}, пренебречь.
+''')
+@variant.solution_space(150)
+@variant.arg(l=('\\ell = {} см', [45, 55, 65, 75, 85]))
+@variant.arg(what=['Юпитера', 'Сатурна', 'Марса', 'Венеры'])
+@variant.answer_short('''
+    \\Delta F &= -m \\frac {2x}\\ell g = ma
+    \\implies a + \\frac{2g}\\ell x = 0
+    \\implies \\omega^2 = \\frac{2g}\\ell 
+    \\implies T = \\frac{2\\pi}\\omega = 2\\pi\\sqrt{\\frac\\ell{2g}}
+    \\approx {T:V:e}.
+''')
+class Task15(variant.VariantTask):
+    def GetUpdate(self, *, l=None, what=None):
+        T = math.pi * 2 * (l.SI_Value / 2 / Consts.g_ten.SI_Value) ** 0.5
+        return dict(
+            T=f'{T.SI_Value:.3f} c',
         )
