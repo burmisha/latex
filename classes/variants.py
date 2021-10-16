@@ -619,5 +619,9 @@ def get_all_variants():
                 'mechanical.Task11', 'mechanical.Task12', 'mechanical.Task13',
             ]},
         ),
+        Work(
+            task_id='2021-10-19 11БА - МК - 3',
+            classes={'oscillation.mechanical': ['Task16', 'Task17', 'Task15', 'Task14', 'Task18', ]},
+        ),
     ]
     return works
