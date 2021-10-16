@@ -251,7 +251,7 @@ class Task09(variant.VariantTask):
         return dict(
             N=f'N = {N}',
             a=f'a = {a:.2f} м / c^2',
-            ans='вверх' if a > 0 else 'вниз',
+            ans='вниз' if a > 0 else 'вверх',
         )
 
 
@@ -316,14 +316,18 @@ class Task11(variant.VariantTask):
 @variant.arg(dx=('\\ell = {} мм', [30, 45, 60]))
 @variant.answer_short('''
     mg -k\\Delta x = 0 \\implies \\frac m k = \\frac{\\Delta x} g
-    \\implies T = 2\\pi \\sqrt{\\frac m k } = 2\\pi \\sqrt{\\frac{\\Delta x} g } \\approx {T:V:e}.
+    \\implies T = 2\\pi \\sqrt{\\frac m k } = 2\\pi \\sqrt{\\frac{\\Delta x} g } \\approx {T:V:e},
+    \\nu = \\frac 1T \\approx {nu:V:e}.
 ''')
 class Task12(variant.VariantTask):
     def GetUpdate(self, *, dx=None):
         g = Consts.g_ten
         T = 2 * math.pi * (dx.SI_Value / g.SI_Value) ** 0.5
+        nu = 1 / T
         return dict(
-            T=f'T = {T:.2f} с'
+            T=f'T = {T:.2f} с',
+            nu=f'\\nu = {nu:.2f} Гц',
+
         )
 
 
@@ -348,31 +352,33 @@ class Task13(variant.VariantTask):
 
 
 @variant.text('''
-    2 маленьких шарика скреплены лёгкой пружиной жёсткостью $k$ и длины $d$, масса каждого шарика $m$.
+    2 маленьких шарика скреплены лёгкой пружиной жёсткостью $k$, масса каждого шарика $m$.
     Пружина недеформирована, система летит со скоростью $v$ к стенке, 
     расстояние от ближайшего шарика до стены $\\ell$ (см. рис. на доске). 
-    Все удары упругие, трением пренебречь, $\\frac{2mv^2}{kd^2} < 1.$
+    Все удары упругие, трением пренебречь, $\\frac{mv^2}{kd^2} < \\frac 12,$ где $d$ — длина пружины.
     Через какое время шарики вновь окажутся в том же положении?
 ''')
-@variant.solution_space(120)
-@variant.answer_short('''
-    F = -k * 2x = ma \\implies a + \\frac {2k}m x = 0 \\implies \\omega^2 = \\frac {2k}m \\implies
-    T = 2 * \\frac \\ell v + \\frac 12 * 2 \\pi\\sqrt{\\frac m{2k}}
-''')
+@variant.solution_space(150)
+@variant.no_args
+@variant.answer_align([
+    'F &= -k * 2x = ma \\implies a + \\frac {2k}m x = 0 \\implies \\omega^2 = \\frac {2k}m \\implies T =\\frac{2\\pi}\\omega = 2\\pi\\sqrt{\\frac m{2k}},',
+    '\\frac{mv^2}2 &< \\frac{2k\\sqr{\\frac d2}}2 \\implies \\text{шарики между собой не ударятся},',
+    'T &= 2 * \\frac \\ell v + \\frac 12 * 2 \\pi\\sqrt{\\frac m{2k}}.',
+])
 class Task14(variant.VariantTask):
     pass
 
 
 @variant.text('''
-    Определите период колебаний жидкости в тонкой U-образной трубке постоянного сечения,
+    Определите период колебаний жидкости в тонкой $U$-образной трубке постоянного сечения,
     если длина столбика жидкости равна {l:V:e} (см. рис. на доске).
     Вязкостью, силами трения и сопротивления, капиллярными эффектами и притяжением {what}, пренебречь.
 ''')
-@variant.solution_space(150)
+@variant.solution_space(120)
 @variant.arg(l=('\\ell = {} см', [45, 55, 65, 75, 85]))
 @variant.arg(what=['Юпитера', 'Сатурна', 'Марса', 'Венеры'])
 @variant.answer_short('''
-    \\Delta F &= -m \\frac {2x}\\ell g = ma
+    \\Delta F = -m \\frac {2x}\\ell g = ma
     \\implies a + \\frac{2g}\\ell x = 0
     \\implies \\omega^2 = \\frac{2g}\\ell 
     \\implies T = \\frac{2\\pi}\\omega = 2\\pi\\sqrt{\\frac\\ell{2g}}
@@ -382,5 +388,73 @@ class Task15(variant.VariantTask):
     def GetUpdate(self, *, l=None, what=None):
         T = math.pi * 2 * (l.SI_Value / 2 / Consts.g_ten.SI_Value) ** 0.5
         return dict(
-            T=f'{T.SI_Value:.3f} c',
+            T=f'{T:.3f} c',
         )
+
+
+@variant.text('''
+    Определите период колебаний и массу груза в пружинном маятнике,
+    если максимальная скорость груза равна {v:V:e},
+    жёсткость пружины {k:V:e}, а амплитуда колебаний {A:V:e}.
+''')
+@variant.solution_space(100)
+@variant.arg(A=('A = {} см', [10, 12, 15, 20]))
+@variant.arg(v=('v = {} м / с', [2, 3, 4, 5]))
+@variant.arg(k=('k = {} Н / м', [180, 240, 300]))
+@variant.answer_align([
+    '\\frac{mv^2}2 &= \\frac{kA^2}2 \\implies m = k\\sqr{\\frac{A:L:s}{v:L:s}} \\approx {m:V},',
+    'T &= \\frac{2\\pi}\\omega = 2\\pi\\sqrt{\\frac mk} = 2\\pi\\frac{A:L:s}{v:L:s} \\approx {T:V}.',
+])
+class Task16(variant.VariantTask):
+    def GetUpdate(self, *, A=None, v=None, k=None):
+        m = k * A * A / v / v
+        T = A / v * math.pi * 2
+        return dict(
+            m=f'm = {m.SI_Value * 1000 + 0.5:.0f} г',
+            T=f'T = {T.SI_Value:.3f} c',
+        )
+
+
+@variant.text('''
+    Опредите период малых колебаний маятника (см. рис. на доске),
+    если {l:Task:e}, а {h:Task:e}.
+''')
+@variant.solution_space(80)
+@variant.arg(l=('\\ell = {} м', [0.6, 0.75, 0.9]))
+@variant.arg(h=('h = {} см', [20, 25, 35]))
+@variant.answer_short('''
+    T = 2 * \\cfrac{T_1}4 + 2 * \\cfrac{T_2}4 = \\cfrac{T_1 + T_2}2 
+    = \\cfrac{2\\pi\\sqrt{\\frac {l:L:s}{g}} + 2\\pi\\sqrt{\\frac {{l:L} - {h:L}}{g}}}2
+    = \\pi\\cbr{\\sqrt{\\frac {l:L:s}{g}} + \\sqrt{\\frac {{l:L} - {h:L}}{g}}}
+    \\approx {T:V}.
+''')
+class Task17(variant.VariantTask):
+    def GetUpdate(self, *, l=None, h=None):
+        g = Consts.g_ten
+        T = math.pi * (
+            (l.SI_Value / g.SI_Value) ** 0.5
+            + ((l.SI_Value - h.SI_Value) / g.SI_Value) ** 0.5
+        )
+        return dict(
+            T=f'T = {T:.3f} c',
+        )
+
+
+@variant.text('''
+    Доска массой $m$ и длиной $\\ell$ скользит по гладкой горизонтальной плоскости со скоростью $v$,
+    а после въезжает на шероховатую поверхность с коэффициентом трения $\\mu$ (см. рис. на доске).
+    Определите, за какое время доска остановится (от начала въезжания) и на какое расстояние въедет.
+    Ускорение свободного падения $g$, $v^2 < \\mu g \\ell.$
+''')
+@variant.solution_space(150)
+@variant.no_args
+@variant.answer_align([
+    'F_\\text{трения} &= -\\mu m \\frac x\\ell g = ma '
+    '\\implies a + \\mu \\frac g\\ell x = 0 '
+    '\\implies \\omega^2 = \\frac {\\mu g}\\ell,',
+    'T &= \\frac{2\\pi}{\\omega} = 2\\pi \\sqrt{\\frac \\ell{\\mu g}}'
+    '\\implies t = \\frac T4 = \\frac\\pi2 \\sqrt{\\frac \\ell{\\mu g}},',
+    'A &= \\frac v\\omega = v \\sqrt{\\frac \\ell{\\mu g}} \\quad (\\text{отметим, что $A < \\sqrt{\\mu g \\ell} * \\sqrt{\\frac \\ell{\\mu g}} = \\ell$}).'
+])
+class Task18(variant.VariantTask):
+    pass
