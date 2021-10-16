@@ -25,27 +25,35 @@ def run(args):
     for dir_name in generared_paths:
         tex_files = library.files.walkFiles(
             dir_name,
-            recursive=False,
+            recursive=True,
             extensions=['.tex'],
             regexp=filenames_regex,
         )
-        for filename in sorted(tex_files):
-            assert filename.endswith('.tex')
-            basename = os.path.basename(filename)
-            cmd = ['latexmk', '-pdf', basename]
-            log.info(f'Building {cm(basename, color=color.Green)}')
-            library.process.run(cmd, cwd=dir_name)
-            pdf_name = basename[:-3] + 'pdf'
-            src = os.path.join(dir_name, pdf_name)
-            dst = os.path.join(dir_name, 'pdf', pdf_name)
-            log.info(f'Copy to {dst}')
-            shutil.copy(src, dst)
+        for tex_file in sorted(tex_files):
+            assert tex_file.endswith('.tex')
+            pdf_name = tex_file[:-3] + 'pdf'
+            tex_dir = os.path.dirname(tex_file)
+            tex_name = os.path.basename(tex_file)
+
+            cmd = ['latexmk', '-pdf', tex_name]
+            log.info(f'Building {cm(tex_name, color=color.Green)}')
+            library.process.run(cmd, cwd=tex_dir)
+
+            pdf_dir = os.path.join(os.path.dirname(pdf_name), 'pdf')
+            if not os.path.isdir(pdf_dir):
+                log.info(f'Create missing {pdf_dir}')
+                os.mkdir(pdf_dir)
+
+            pdf_dst = os.path.join(pdf_dir, os.path.basename(pdf_name))
+
+            log.info(f'Copy {pdf_name} to {pdf_dst}')
+            shutil.copy(pdf_name, pdf_dst)
 
     if args.clean:
         for dir_name in generared_paths:
             misc_files = library.files.walkFiles(
                 dir_name,
-                recursive=False,
+                recursive=True,
                 extensions=[
                     '.aux',
                     '.fdb_latexmk',

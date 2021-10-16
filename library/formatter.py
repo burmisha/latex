@@ -21,6 +21,14 @@ class Date:
     def GetFilenameText(self):
         return str(self.__DateStr)
 
+    @property
+    def Year(self):
+        return self._year
+
+    @property
+    def Month(self):
+        return f'{self._month:02d}'
+
     def __format__(self, fmt):
         try:
             if fmt == 'LaTeX':

@@ -266,7 +266,7 @@ class U_from_R1_R2_I(variant.VariantTask):
 @variant.arg(b=[2, 3, 4, 5, 6, 7, 8, 9, 10])
 @variant.arg(which=['медной', 'стальной', 'алюминиевой'])
 class I_ratio(variant.VariantTask):
-    def GetUpdate(self, a=None, b=None):
+    def GetUpdate(self, a=None, b=None, which=None):
         return dict(
             ratio=Fraction() / b / a,
         )

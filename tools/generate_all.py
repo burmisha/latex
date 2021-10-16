@@ -12,7 +12,7 @@ log = logging.getLogger(__name__)
 
 
 PAPER_TEMPLATE = r'''
-\newcommand\rootpath{{../..}}
+\newcommand\rootpath{{../../..}}
 \input{{\rootpath/school-554/main}}
 \begin{{document}}
 {noanswers}
@@ -69,11 +69,15 @@ def run(args):
             date = work._date
             multiplePaper = generators.variant.MultiplePaper(date=date, pupils=work._pupils)
             study_year_pair = date.GetStudyYearPair()
-            filename = os.path.join(
+            dirname = os.path.join(
                 'school-554',
                 f'generated-{str(study_year_pair[0])}-{str(study_year_pair[1])[2:]}',
-                multiplePaper.GetFilename(),
+                f'{date.Year}-{date.Month}',
             )
+            if not os.path.isdir(dirname):
+                log.info(f'Create missing {dirname}')
+                os.mkdir(dirname)
+            filename = os.path.join(dirname, multiplePaper.GetFilename())
 
             text = multiplePaper.GetTex(variant_tasks=tasks, only_me=args.only_me)
             task = PAPER_TEMPLATE.format(noanswers='\n\\noanswers\n', filename=filename)
