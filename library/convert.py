@@ -99,6 +99,11 @@ class PdfBook:
         assert isinstance(structure, Structure)
         self._structure = structure
 
+    def should_trim(self):
+        if hasattr(self, 'enable_trim'):
+            return self.enable_trim
+        return True
+
     def Validate(self, create_missing=False):
         assert library.files.is_file(self.PdfPath)
         if create_missing:
@@ -155,7 +160,7 @@ class PdfBook:
             '-log', '%t %e',
             '-density', str(self._ppi * 3),
             '-resample', str(self._ppi),
-            '-trim',
+        ] + (['-trim'] if self.should_trim() else []) + [
             '+repage',
             # '-transparent', '"#ffffff"',
             '-type', 'Grayscale',
@@ -237,6 +242,14 @@ def source_link(link):
         cls.SourceLink = link
         return cls
     return decorator
+
+
+def disable_trim():
+    def decorator(cls):
+        cls.enable_trim = False
+        return cls
+    return decorator
+
 
 
 def ppi(value):

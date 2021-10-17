@@ -1,6 +1,7 @@
 import library.location
 from library.convert import (
     PdfBook,
+    disable_trim,
     page_shift,
     params,
     source_link,
@@ -1635,6 +1636,13 @@ class BlankiEge(PdfBook):
     pass
 
 
+@ppi(300)
+@zero_d_structure([('Кодификатор - карточки', 1, 35)])
+@disable_trim()
+class KodificatorCards(PdfBook):
+    pass
+
+
 def get_all_books():
     books_config = [
         (ComicsBook, ['Физика в комиксах.pdf']),
@@ -1739,6 +1747,11 @@ def get_all_books():
     yield BlankiEge(
         pdfPath=library.location.udr('11 ЕГЭ', 'blanki-ege-2020-all.pdf'),
         dstPath=library.location.no_sync('Книги - физика - картинки', '11 - ЕГЭ', 'Бланки'),
+    )
+
+    yield KodificatorCards(
+        pdfPath=library.location.udr('11 ЕГЭ', '11 Кодификатор.pdf'),
+        dstPath=library.location.no_sync('Книги - физика - картинки', '11 - ЕГЭ', 'Кодификатор - карточки'),
     )
 
 
