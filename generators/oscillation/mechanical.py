@@ -374,7 +374,7 @@ class Task14(variant.VariantTask):
     если длина столбика жидкости равна {l:V:e} (см. рис. на доске).
     Вязкостью, силами трения и сопротивления, капиллярными эффектами и притяжением {what}, пренебречь.
 ''')
-@variant.solution_space(120)
+@variant.solution_space(100)
 @variant.arg(l=('\\ell = {} см', [45, 55, 65, 75, 85]))
 @variant.arg(what=['Юпитера', 'Сатурна', 'Марса', 'Венеры'])
 @variant.answer_short('''
@@ -397,7 +397,7 @@ class Task15(variant.VariantTask):
     если максимальная скорость груза равна {v:V:e},
     жёсткость пружины {k:V:e}, а амплитуда колебаний {A:V:e}.
 ''')
-@variant.solution_space(100)
+@variant.solution_space(80)
 @variant.arg(A=('A = {} см', [10, 12, 15, 20]))
 @variant.arg(v=('v = {} м / с', [2, 3, 4, 5]))
 @variant.arg(k=('k = {} Н / м', [180, 240, 300]))
@@ -458,3 +458,33 @@ class Task17(variant.VariantTask):
 ])
 class Task18(variant.VariantTask):
     pass
+
+
+@variant.text('''
+    Тело совершает гармонические колебания с периодом $T$ и амплитудой $A$. 
+    Определите, какую долю периода тело находится на расстоянии {which} ${x_frac}$
+    амплитуды колебаний от положения равновесия.
+''')
+@variant.solution_space(80)
+@variant.arg(which=['больше', 'меньше'])
+@variant.arg(nom__denom=[(1, 2), (1, 3), (2, 3)])
+@variant.answer_short('t = {share:LaTeX}T \\implies \\frac tT = {share:LaTeX}')
+class Task19(variant.VariantTask):
+    def GetUpdate(self, *, which=None, nom=None, denom=None):
+        share = Fraction() * nom / denom
+        if which == 'больше':
+            share = share * (-1) + 1
+
+        if (nom, denom) == (1, 2):
+            x_frac = '\\frac{\\sqrt 2}2'
+        elif (nom, denom) == (1, 3):
+            x_frac = '\\frac 12'
+        elif (nom, denom) == (2, 3):
+            x_frac = '\\frac{\\sqrt 3}2'
+        else:
+            raise RuntimeError()
+
+        return dict(
+            x_frac=x_frac,
+            share=share,
+        )

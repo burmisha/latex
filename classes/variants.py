@@ -459,38 +459,38 @@ def get_all_variants():
             task_id='2021-04-02 10',
             classes={'electricity.potential': ['Phi_from_static_e', 'A_from_motion', 'E_phi_graphs', 'Definitions01']},
         ),
-        # Work(
-        #     task_id='2021-04-15 10 - Электростатика - 1',
-        #     classes={'electricity.cond': ['Definitions03', 'Definitions04', 'Q_is_possible', 'Q_from_DeltaU_C', 'C_from_U_Q', 'C_ratio', 'W_from_Q_C']},
-        #     thresholds=[3, 4, 6],
-        #     up_to='9:02',
-        #     image='zootopia',
-        #     questions=text_task * 7,
-        # ),
-        # Work(
-        #     task_id='2021-04-16 9 - Строение атома - 1',
-        #     classes={'atomic.radioactive': ['Definitions01', 'Definitions02', 'Definitions03', 'Definitions04', 'Definitions05', 'Definitions06', 'Definitions07']},
-        #     thresholds=[4, 5, 6],
-        #     questions=text_task * 7,
-        #     up_to='11:02',
-        #     image='zootopia',
-        # ),
-        # Work(
-        #     task_id='2021-04-23 10 - Постоянный ток - 1',
-        #     classes={'electricity.om': ['Definitions01', 'Definitions02', 'Definitions03', 'Definitions04', 'I_from_U_R', 'r_from_R_N', 'U_from_R1_R2_I', 'I_ratio', 'R_best_from_R_N']},
-        #     thresholds=[4, 6, 8],
-        #     questions=text_task * 9,
-        #     up_to='9:05',
-        #     image='ratatouille',
-        # ),
-        # Work(
-        #     task_id='2021-04-23 9 - Строение атома - 2',
-        #     classes={'atomic.nuclear': ['AtomCount01', 'AtomCount02', 'AtomCount03', 'AtomCount04', 'AtomCount05', 'AtomCount06', 'AtomCount07', 'AtomCount08', 'AtomCount09', 'AtomCount10', 'AtomCount11', 'AtomCount12','AtomCount01_Text', 'AtomCount02_Text', 'AtomCount03_Text', 'AtomCount04_Text', 'AtomCount05_Text', 'AtomCount06_Text', 'AtomCount07_Text', 'AtomCount08_Text', 'AtomCount09_Text', 'AtomCount10_Text', 'AtomCount11_Text', 'AtomCount12_Text',]},
-        #     thresholds=[12, 16, 20],
-        #     questions=text_task * 24,
-        #     up_to='11:02',
-        #     image='ratatouille',
-        # ),
+        Work(
+            task_id='2021-04-15 10 - Электростатика - 1',
+            classes={'electricity.cond': ['Definitions03', 'Definitions04', 'Q_is_possible', 'Q_from_DeltaU_C', 'C_from_U_Q', 'C_ratio', 'W_from_Q_C']},
+            thresholds=[3, 4, 6],
+            up_to='9:02',
+            image='zootopia',
+            questions=text_task * 7,
+        ),
+        Work(
+            task_id='2021-04-16 9 - Строение атома - 1',
+            classes={'atomic.radioactive': ['Definitions01', 'Definitions02', 'Definitions03', 'Definitions04', 'Definitions05', 'Definitions06', 'Definitions07']},
+            thresholds=[4, 5, 6],
+            questions=text_task * 7,
+            up_to='11:02',
+            image='zootopia',
+        ),
+        Work(
+            task_id='2021-04-23 10 - Постоянный ток - 1',
+            classes={'electricity.om': ['Definitions01', 'Definitions02', 'Definitions03', 'Definitions04', 'I_from_U_R', 'r_from_R_N', 'U_from_R1_R2_I', 'I_ratio', 'R_best_from_R_N']},
+            thresholds=[4, 6, 8],
+            questions=text_task * 9,
+            up_to='9:05',
+            image='ratatouille',
+        ),
+        Work(
+            task_id='2021-04-23 9 - Строение атома - 2',
+            classes={'atomic.nuclear': ['AtomCount01', 'AtomCount02', 'AtomCount03', 'AtomCount04', 'AtomCount05', 'AtomCount06', 'AtomCount07', 'AtomCount08', 'AtomCount09', 'AtomCount10', 'AtomCount11', 'AtomCount12','AtomCount01_Text', 'AtomCount02_Text', 'AtomCount03_Text', 'AtomCount04_Text', 'AtomCount05_Text', 'AtomCount06_Text', 'AtomCount07_Text', 'AtomCount08_Text', 'AtomCount09_Text', 'AtomCount10_Text', 'AtomCount11_Text', 'AtomCount12_Text',]},
+            thresholds=[12, 16, 20],
+            questions=text_task * 24,
+            up_to='11:02',
+            image='ratatouille',
+        ),
         Work(
             task_id='2021-04-30 10',
             classes={
@@ -612,16 +612,18 @@ def get_all_variants():
         ),
         Work(
             task_id='2021-10-13 11БА - МК - 2',
-            classes={'oscillation': [
-                'basic.Definitions03',
-                'mechanical.Task01', 'mechanical.Task02', 'mechanical.Task03', 'mechanical.Task04', 'mechanical.Task05',
-                'mechanical.Task06', 'mechanical.Task07', 'mechanical.Task08', 'mechanical.Task09', 'mechanical.Task10',
-                'mechanical.Task11', 'mechanical.Task12', 'mechanical.Task13',
-            ]},
+            classes=[
+                'oscillation.basic.Definitions03',
+                {'oscillation.mechanical': [
+                    'Task01', 'Task02', 'Task03', 'Task04', 'Task05',
+                    'Task06', 'Task07', 'Task08', 'Task09', 'Task10',
+                    'Task11', 'Task12', 'Task13',
+                ]},
+            ],
         ),
         Work(
             task_id='2021-10-19 11БА - МК - 3',
-            classes={'oscillation.mechanical': ['Task16', 'Task17', 'Task15', 'Task14', 'Task18', ]},
+            classes={'oscillation.mechanical': ['Task16', 'Task19', 'Task17', 'Task15', 'Task14', 'Task18']},
         ),
     ]
     return works
