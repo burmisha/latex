@@ -18,7 +18,7 @@ class Template(variant.VariantTask):
     Чему равно смещение тела относительно положения равновесия через {t:V:e}
     после прохождения положения {what}?
 ''')
-@variant.solution_space(120)
+@variant.solution_space(80)
 @variant.arg(A=('A = {} см', [10, 12, 14, 16, 18, 20]))
 @variant.arg(T=('T = {} c', [2, 4, 6]))
 @variant.arg(t=('t = {} c', [20, 21, 22, 23, 24, 25, 26]))
@@ -30,7 +30,6 @@ class Template(variant.VariantTask):
     '= {A:V} * \\{f} \\cbr{ 2\\pi * \\frac {t:V:s}{T:V:s}}'
     '\\approx {x:V}.'
 )
-
 class Task01(variant.VariantTask):
     def GetUpdate(self, *, A=None, T=None, t=None, what=None):
         phi = 2 * math.pi * t.SI_Value / T.SI_Value
@@ -85,7 +84,7 @@ class Task02(variant.VariantTask):
         \\item выразите из неё {what2}.
     \\end{itemize}
 ''')
-@variant.solution_space(120)
+@variant.solution_space(80)
 @variant.arg(which__what2=[
     ('математического маятника', 'длину маятника'),
     ('математического маятника', 'ускорение свободного падения'),
@@ -416,7 +415,7 @@ class Task16(variant.VariantTask):
 
 
 @variant.text('''
-    Опредите период малых колебаний маятника (см. рис. на доске),
+    Определите период малых колебаний маятника (см. рис. на доске),
     если {l:Task:e}, а {h:Task:e}.
 ''')
 @variant.solution_space(80)
@@ -424,8 +423,8 @@ class Task16(variant.VariantTask):
 @variant.arg(h=('h = {} см', [20, 25, 35]))
 @variant.answer_short('''
     T = 2 * \\cfrac{T_1}4 + 2 * \\cfrac{T_2}4 = \\cfrac{T_1 + T_2}2 
-    = \\cfrac{2\\pi\\sqrt{\\frac {l:L:s}{g}} + 2\\pi\\sqrt{\\frac {{l:L} - {h:L}}{g}}}2
-    = \\pi\\cbr{\\sqrt{\\frac {l:L:s}{g}} + \\sqrt{\\frac {{l:L} - {h:L}}{g}}}
+    = \\cfrac{2\\pi\\sqrt{\\frac {l:L:s}{g}} + 2\\pi\\sqrt{\\frac {h:L:s}{g} } }2
+    = \\pi\\cbr{\\sqrt{\\frac {l:L:s}{g}} + \\sqrt{\\frac {h:L:s}{g} } }
     \\approx {T:V}.
 ''')
 class Task17(variant.VariantTask):
@@ -433,7 +432,7 @@ class Task17(variant.VariantTask):
         g = Consts.g_ten
         T = math.pi * (
             (l.SI_Value / g.SI_Value) ** 0.5
-            + ((l.SI_Value - h.SI_Value) / g.SI_Value) ** 0.5
+            + (h.SI_Value / g.SI_Value) ** 0.5
         )
         return dict(
             T=f'T = {T:.3f} c',
@@ -462,17 +461,16 @@ class Task18(variant.VariantTask):
 
 @variant.text('''
     Тело совершает гармонические колебания с периодом $T$ и амплитудой $A$. 
-    Определите, какую долю периода тело находится на расстоянии {which} ${x_frac}$
-    амплитуды колебаний от положения равновесия.
+    Определите, какую долю периода тело находится на расстоянии {which} ${x_frac}A$ от положения равновесия.
 ''')
 @variant.solution_space(80)
-@variant.arg(which=['больше', 'меньше'])
+@variant.arg(which=['более', 'менее'])
 @variant.arg(nom__denom=[(1, 2), (1, 3), (2, 3)])
 @variant.answer_short('t = {share:LaTeX}T \\implies \\frac tT = {share:LaTeX}')
 class Task19(variant.VariantTask):
     def GetUpdate(self, *, which=None, nom=None, denom=None):
         share = Fraction() * nom / denom
-        if which == 'больше':
+        if which == 'более':
             share = share * (-1) + 1
 
         if (nom, denom) == (1, 2):
