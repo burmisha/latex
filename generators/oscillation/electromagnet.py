@@ -24,7 +24,7 @@ class Template(variant.VariantTask):
 ''')
 @variant.solution_space(80)
 @variant.arg(q1=['частоту', 'циклическую частоту'])
-@variant.arg(q2=['выразите емкость конденсатора', 'индуктивность катушки.'])
+@variant.arg(q2=['выразите ёмкость конденсатора', 'индуктивность катушки.'])
 @variant.answer_short('''
     T = 2\\pi\\sqrt{LC},
     \\nu = \\frac 1{2\\pi\\sqrt{LC}},
@@ -97,7 +97,7 @@ class Task03(variant.VariantTask):
 @variant.arg(how=['Параллельно', 'Последовательно'])
 @variant.arg(what1__what2__what3=[
     ('катушке', 'одну катушку индуктивностью', 'L'),
-    ('конденсатору', 'один конденсатор емкостью', 'C'),
+    ('конденсатору', 'один конденсатор ёмкостью', 'C'),
 ])
 @variant.arg(nom__denom=[(1, 2), (1, 3), (2, 1), (3, 1)])
 @variant.answer_short('''
@@ -141,9 +141,8 @@ class Task04(variant.VariantTask):
 
 @variant.text('''
     В колебательном контуре частота собственных колебаний {nu1:V:e}.
-    После замены катушки индуктивность на другую частота стала равной {nu2:V:e}.
-    А какой станет частота собственных колебаний, если в контур установить
-    обе эти катушки {how}?
+    После замены катушки индуктивности на другую катушку частота стала равной {nu2:V:e}.
+    А какой станет частота, если в контур установить обе эти катушки {how}?
 ''')
 @variant.solution_space(100)
 @variant.arg(how=['параллельно', 'последовательно'])
@@ -158,7 +157,7 @@ class Task04(variant.VariantTask):
         = \\frac 1{\\sqrt{\\cbr{\\frac1 {\\nu_1^2 C} + \\frac1 {\\nu_2^2 C}}C}} = ''',
     ''' &= \\frac 1{\\sqrt{\\frac1 {\\nu_1^2} + \\frac1 {\\nu_2^2}}}
         = \\frac 1{\\sqrt{ \\frac1 {nu1:V|sqr|s} + \\frac1 {nu2:V|sqr|s}}} 
-        \\approx {nu_posl:V}''',
+        \\approx {nu_posl:V},''',
     '''\\nu_\\text{паралл.} 
         &= \\frac 1{2\\pi\\sqrt{\\frac 1{\\frac 1{L_1} + \\frac 1{L_2}}C}}
         = \\frac 1{2\\pi\\sqrt{\\frac 1{\\frac 1{\\frac1 {4\\pi^2 \\nu_1^2 C}} + \\frac 1{\\frac1 {4\\pi^2 \\nu_2^2 C}}}C}} 
