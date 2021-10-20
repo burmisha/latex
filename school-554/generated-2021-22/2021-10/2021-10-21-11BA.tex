@@ -15,13 +15,13 @@
     \end{itemize}
 }
 \answer{%
-    \begin{align*}
-    T &= 2\pi\sqrt{LC} \\
-    \nu &= \frac 1{2\pi\sqrt{LC}}, \\
-    \omega &= \frac 1{\sqrt{LC}}, \\
-    L &= \frac 1C \sqr{\frac T{2\pi}}, \\
-    C &= \frac 1L \sqr{\frac T{2\pi}}.
-    \end{align*}
+    $
+        T = 2\pi\sqrt{LC},
+        \nu = \frac 1{2\pi\sqrt{LC}},
+        \omega = \frac 1{\sqrt{LC}},
+        L = \frac 1C \sqr{\frac T{2\pi}},
+        C = \frac 1L \sqr{\frac T{2\pi}}.
+    $
 }
 \solutionspace{80pt}
 
@@ -33,7 +33,7 @@
 }
 \answer{%
     $
-        \eli_{\max} = q_{\max}\omega \implies \nu = \frac{\omega}{2\pi} = \frac{\eli_{\max}}{2\pi q} \approx 0{,}716\,\text{кГц}
+        \eli_{\max} = q_{\max}\omega \implies \nu = \frac{\omega}{2\pi} = \frac{\eli_{\max}}{2\pi q} \approx 716{,}2\,\text{Гц}.
     $
 }
 \solutionspace{80pt}
@@ -52,10 +52,10 @@
 }
 \answer{%
     \begin{align*}
-    \omega &= 12\units{c}^-1, \\
+    \omega &= 12\funits{рад}{c}, \\
     T &= \frac{2\pi}\omega \approx 523{,}6\,\text{мc}, \\
     C &= \frac 1{\omega^2 L} \approx 138{,}9\,\text{мФ}, \\
-    q &= \frac{\eli_{\max}}\omega  \approx 20{,}8\,\text{мКл}.
+    q_{\max} &= \frac{\eli_{\max}}\omega  \approx 20{,}8\,\text{мКл}.
     \end{align*}
 }
 \solutionspace{80pt}
@@ -64,14 +64,44 @@
 \task{%
     Электрический колебательный контур состоит
     из катушки индуктивностью $L$ и конденсатора ёмкостью $C$.
-    параллельно катушке подключают ещё одну катушку индуктивностью $\frac13L$.
-    Как изменится период сводобных колебаний в контуре?
+    Параллельно катушке подключают ещё одну катушку индуктивностью $\frac13L$.
+    Как изменится период свободных колебаний в контуре?
+}
+\answer{%
+    $
+        T = 2\pi\sqrt{LC}, \quad
+        T' = 2\pi\sqrt{L'C'}
+            = T \sqrt{\frac{L'}L \cdot \frac{C'}C}
+            = T \sqrt{ \frac14 \cdot 1 }
+        \implies \frac{T'}T = \sqrt{ \frac14 \cdot 1 } \approx 0{,}500.
+    $
+}
+\solutionspace{100pt}
+
+\tasknumber{5}%
+\task{%
+    В колебательном контуре частота собственных колебаний $80\,\text{Гц}$.
+    После замены катушки индуктивность на другую частота стала равной $50\,\text{Гц}$.
+    А какой станет частота собственных колебаний, если в контур установить
+    обе эти катушки последовательно?
 }
 \answer{%
     \begin{align*}
-    T &= 2\pi\sqrt{LC} \\
-    T' &= 2\pi\sqrt{L'C'}= T \sqrt{\frac{L'}L \cdot \frac{C'}C} = T \sqrt{ \frac14 \cdot 1 } \\
-    &\frac{T'}T = \sqrt{ \frac14 \cdot 1 } \approx 0{,}062
+    T &= 2\pi\sqrt{LC} \implies \nu = \frac 1T = \frac 1{2\pi\sqrt{LC}} \implies L = \frac1 {4\pi^2 \nu^2 C}, \\
+    L_1 &= \frac1 {4\pi^2 \nu_1^2 C}, L_2 = \frac1 {4\pi^2 \nu_1^2 C}, \\
+    \nu_\text{послед.}
+            &= \frac 1{2\pi\sqrt{(L_1 + L_2)C}}
+            = \frac 1{2\pi\sqrt{\cbr{\frac1 {4\pi^2 \nu_1^2 C} + \frac1 {4\pi^2 \nu_2^2 C}}C}}
+            = \frac 1{\sqrt{\cbr{\frac1 {\nu_1^2 C} + \frac1 {\nu_2^2 C}}C}} =  \\
+     &= \frac 1{\sqrt{\frac1 {\nu_1^2} + \frac1 {\nu_2^2}}}
+            = \frac 1{\sqrt{ \frac1 {\sqr{80\,\text{Гц}}} + \frac1 {\sqr{50\,\text{Гц}}}}}
+            \approx 42{,}40\,\text{Гц} \\
+    \nu_\text{паралл.}
+            &= \frac 1{2\pi\sqrt{\frac 1{\frac 1{L_1} + \frac 1{L_2}}C}}
+            = \frac 1{2\pi\sqrt{\frac 1{\frac 1{\frac1 {4\pi^2 \nu_1^2 C}} + \frac 1{\frac1 {4\pi^2 \nu_2^2 C}}}C}}
+            = \frac 1{2\pi\sqrt{\frac 1{4\pi^2 \nu_1^2 C + 4\pi^2 \nu_2^2 C}C}} = \\
+     &= \frac 1{\sqrt{\frac 1{\nu_1^2 + \nu_2^2}}}
+            = \sqrt{\nu_1^2 + \nu_2^2} = \sqrt{\sqr{80\,\text{Гц}} + \sqr{50\,\text{Гц}}} \approx 94{,}34\,\text{Гц}.
     \end{align*}
 }
 
@@ -91,13 +121,13 @@
     \end{itemize}
 }
 \answer{%
-    \begin{align*}
-    T &= 2\pi\sqrt{LC} \\
-    \nu &= \frac 1{2\pi\sqrt{LC}}, \\
-    \omega &= \frac 1{\sqrt{LC}}, \\
-    L &= \frac 1C \sqr{\frac T{2\pi}}, \\
-    C &= \frac 1L \sqr{\frac T{2\pi}}.
-    \end{align*}
+    $
+        T = 2\pi\sqrt{LC},
+        \nu = \frac 1{2\pi\sqrt{LC}},
+        \omega = \frac 1{\sqrt{LC}},
+        L = \frac 1C \sqr{\frac T{2\pi}},
+        C = \frac 1L \sqr{\frac T{2\pi}}.
+    $
 }
 \solutionspace{80pt}
 
@@ -109,7 +139,7 @@
 }
 \answer{%
     $
-        \eli_{\max} = q_{\max}\omega \implies \nu = \frac{\omega}{2\pi} = \frac{\eli_{\max}}{2\pi q} \approx 0{,}955\,\text{кГц}
+        \eli_{\max} = q_{\max}\omega \implies \nu = \frac{\omega}{2\pi} = \frac{\eli_{\max}}{2\pi q} \approx 954{,}9\,\text{Гц}.
     $
 }
 \solutionspace{80pt}
@@ -128,10 +158,10 @@
 }
 \answer{%
     \begin{align*}
-    \omega &= 12\units{c}^-1, \\
+    \omega &= 12\funits{рад}{c}, \\
     T &= \frac{2\pi}\omega \approx 523{,}6\,\text{мc}, \\
     C &= \frac 1{\omega^2 L} \approx 115{,}7\,\text{мФ}, \\
-    q &= \frac{\eli_{\max}}\omega  \approx 4{,}2\,\text{мКл}.
+    q_{\max} &= \frac{\eli_{\max}}\omega  \approx 4{,}2\,\text{мКл}.
     \end{align*}
 }
 \solutionspace{80pt}
@@ -140,14 +170,44 @@
 \task{%
     Электрический колебательный контур состоит
     из катушки индуктивностью $L$ и конденсатора ёмкостью $C$.
-    последовательно катушке подключают ещё одну катушку индуктивностью $\frac12L$.
-    Как изменится период сводобных колебаний в контуре?
+    Последовательно катушке подключают ещё одну катушку индуктивностью $\frac12L$.
+    Как изменится период свободных колебаний в контуре?
+}
+\answer{%
+    $
+        T = 2\pi\sqrt{LC}, \quad
+        T' = 2\pi\sqrt{L'C'}
+            = T \sqrt{\frac{L'}L \cdot \frac{C'}C}
+            = T \sqrt{ \frac32 \cdot 1 }
+        \implies \frac{T'}T = \sqrt{ \frac32 \cdot 1 } \approx 1{,}225.
+    $
+}
+\solutionspace{100pt}
+
+\tasknumber{5}%
+\task{%
+    В колебательном контуре частота собственных колебаний $40\,\text{Гц}$.
+    После замены катушки индуктивность на другую частота стала равной $30\,\text{Гц}$.
+    А какой станет частота собственных колебаний, если в контур установить
+    обе эти катушки параллельно?
 }
 \answer{%
     \begin{align*}
-    T &= 2\pi\sqrt{LC} \\
-    T' &= 2\pi\sqrt{L'C'}= T \sqrt{\frac{L'}L \cdot \frac{C'}C} = T \sqrt{ \frac32 \cdot 1 } \\
-    &\frac{T'}T = \sqrt{ \frac32 \cdot 1 } \approx 2{,}250
+    T &= 2\pi\sqrt{LC} \implies \nu = \frac 1T = \frac 1{2\pi\sqrt{LC}} \implies L = \frac1 {4\pi^2 \nu^2 C}, \\
+    L_1 &= \frac1 {4\pi^2 \nu_1^2 C}, L_2 = \frac1 {4\pi^2 \nu_1^2 C}, \\
+    \nu_\text{послед.}
+            &= \frac 1{2\pi\sqrt{(L_1 + L_2)C}}
+            = \frac 1{2\pi\sqrt{\cbr{\frac1 {4\pi^2 \nu_1^2 C} + \frac1 {4\pi^2 \nu_2^2 C}}C}}
+            = \frac 1{\sqrt{\cbr{\frac1 {\nu_1^2 C} + \frac1 {\nu_2^2 C}}C}} =  \\
+     &= \frac 1{\sqrt{\frac1 {\nu_1^2} + \frac1 {\nu_2^2}}}
+            = \frac 1{\sqrt{ \frac1 {\sqr{40\,\text{Гц}}} + \frac1 {\sqr{30\,\text{Гц}}}}}
+            \approx 24{,}00\,\text{Гц} \\
+    \nu_\text{паралл.}
+            &= \frac 1{2\pi\sqrt{\frac 1{\frac 1{L_1} + \frac 1{L_2}}C}}
+            = \frac 1{2\pi\sqrt{\frac 1{\frac 1{\frac1 {4\pi^2 \nu_1^2 C}} + \frac 1{\frac1 {4\pi^2 \nu_2^2 C}}}C}}
+            = \frac 1{2\pi\sqrt{\frac 1{4\pi^2 \nu_1^2 C + 4\pi^2 \nu_2^2 C}C}} = \\
+     &= \frac 1{\sqrt{\frac 1{\nu_1^2 + \nu_2^2}}}
+            = \sqrt{\nu_1^2 + \nu_2^2} = \sqrt{\sqr{40\,\text{Гц}} + \sqr{30\,\text{Гц}}} \approx 50{,}00\,\text{Гц}.
     \end{align*}
 }
 
@@ -167,13 +227,13 @@
     \end{itemize}
 }
 \answer{%
-    \begin{align*}
-    T &= 2\pi\sqrt{LC} \\
-    \nu &= \frac 1{2\pi\sqrt{LC}}, \\
-    \omega &= \frac 1{\sqrt{LC}}, \\
-    L &= \frac 1C \sqr{\frac T{2\pi}}, \\
-    C &= \frac 1L \sqr{\frac T{2\pi}}.
-    \end{align*}
+    $
+        T = 2\pi\sqrt{LC},
+        \nu = \frac 1{2\pi\sqrt{LC}},
+        \omega = \frac 1{\sqrt{LC}},
+        L = \frac 1C \sqr{\frac T{2\pi}},
+        C = \frac 1L \sqr{\frac T{2\pi}}.
+    $
 }
 \solutionspace{80pt}
 
@@ -185,7 +245,7 @@
 }
 \answer{%
     $
-        \eli_{\max} = q_{\max}\omega \implies \nu = \frac{\omega}{2\pi} = \frac{\eli_{\max}}{2\pi q} \approx 0{,}537\,\text{кГц}
+        \eli_{\max} = q_{\max}\omega \implies \nu = \frac{\omega}{2\pi} = \frac{\eli_{\max}}{2\pi q} \approx 537{,}1\,\text{Гц}.
     $
 }
 \solutionspace{80pt}
@@ -204,10 +264,10 @@
 }
 \answer{%
     \begin{align*}
-    \omega &= 15\units{c}^-1, \\
+    \omega &= 15\funits{рад}{c}, \\
     T &= \frac{2\pi}\omega \approx 418{,}9\,\text{мc}, \\
     C &= \frac 1{\omega^2 L} \approx 63{,}5\,\text{мФ}, \\
-    q &= \frac{\eli_{\max}}\omega  \approx 3{,}3\,\text{мКл}.
+    q_{\max} &= \frac{\eli_{\max}}\omega  \approx 3{,}3\,\text{мКл}.
     \end{align*}
 }
 \solutionspace{80pt}
@@ -216,14 +276,44 @@
 \task{%
     Электрический колебательный контур состоит
     из катушки индуктивностью $L$ и конденсатора ёмкостью $C$.
-    параллельно катушке подключают ещё одну катушку индуктивностью $3L$.
-    Как изменится период сводобных колебаний в контуре?
+    Параллельно катушке подключают ещё одну катушку индуктивностью $3L$.
+    Как изменится период свободных колебаний в контуре?
+}
+\answer{%
+    $
+        T = 2\pi\sqrt{LC}, \quad
+        T' = 2\pi\sqrt{L'C'}
+            = T \sqrt{\frac{L'}L \cdot \frac{C'}C}
+            = T \sqrt{ \frac34 \cdot 1 }
+        \implies \frac{T'}T = \sqrt{ \frac34 \cdot 1 } \approx 0{,}866.
+    $
+}
+\solutionspace{100pt}
+
+\tasknumber{5}%
+\task{%
+    В колебательном контуре частота собственных колебаний $80\,\text{Гц}$.
+    После замены катушки индуктивность на другую частота стала равной $70\,\text{Гц}$.
+    А какой станет частота собственных колебаний, если в контур установить
+    обе эти катушки последовательно?
 }
 \answer{%
     \begin{align*}
-    T &= 2\pi\sqrt{LC} \\
-    T' &= 2\pi\sqrt{L'C'}= T \sqrt{\frac{L'}L \cdot \frac{C'}C} = T \sqrt{ \frac34 \cdot 1 } \\
-    &\frac{T'}T = \sqrt{ \frac34 \cdot 1 } \approx 0{,}562
+    T &= 2\pi\sqrt{LC} \implies \nu = \frac 1T = \frac 1{2\pi\sqrt{LC}} \implies L = \frac1 {4\pi^2 \nu^2 C}, \\
+    L_1 &= \frac1 {4\pi^2 \nu_1^2 C}, L_2 = \frac1 {4\pi^2 \nu_1^2 C}, \\
+    \nu_\text{послед.}
+            &= \frac 1{2\pi\sqrt{(L_1 + L_2)C}}
+            = \frac 1{2\pi\sqrt{\cbr{\frac1 {4\pi^2 \nu_1^2 C} + \frac1 {4\pi^2 \nu_2^2 C}}C}}
+            = \frac 1{\sqrt{\cbr{\frac1 {\nu_1^2 C} + \frac1 {\nu_2^2 C}}C}} =  \\
+     &= \frac 1{\sqrt{\frac1 {\nu_1^2} + \frac1 {\nu_2^2}}}
+            = \frac 1{\sqrt{ \frac1 {\sqr{80\,\text{Гц}}} + \frac1 {\sqr{70\,\text{Гц}}}}}
+            \approx 52{,}68\,\text{Гц} \\
+    \nu_\text{паралл.}
+            &= \frac 1{2\pi\sqrt{\frac 1{\frac 1{L_1} + \frac 1{L_2}}C}}
+            = \frac 1{2\pi\sqrt{\frac 1{\frac 1{\frac1 {4\pi^2 \nu_1^2 C}} + \frac 1{\frac1 {4\pi^2 \nu_2^2 C}}}C}}
+            = \frac 1{2\pi\sqrt{\frac 1{4\pi^2 \nu_1^2 C + 4\pi^2 \nu_2^2 C}C}} = \\
+     &= \frac 1{\sqrt{\frac 1{\nu_1^2 + \nu_2^2}}}
+            = \sqrt{\nu_1^2 + \nu_2^2} = \sqrt{\sqr{80\,\text{Гц}} + \sqr{70\,\text{Гц}}} \approx 106{,}30\,\text{Гц}.
     \end{align*}
 }
 
@@ -243,13 +333,13 @@
     \end{itemize}
 }
 \answer{%
-    \begin{align*}
-    T &= 2\pi\sqrt{LC} \\
-    \nu &= \frac 1{2\pi\sqrt{LC}}, \\
-    \omega &= \frac 1{\sqrt{LC}}, \\
-    L &= \frac 1C \sqr{\frac T{2\pi}}, \\
-    C &= \frac 1L \sqr{\frac T{2\pi}}.
-    \end{align*}
+    $
+        T = 2\pi\sqrt{LC},
+        \nu = \frac 1{2\pi\sqrt{LC}},
+        \omega = \frac 1{\sqrt{LC}},
+        L = \frac 1C \sqr{\frac T{2\pi}},
+        C = \frac 1L \sqr{\frac T{2\pi}}.
+    $
 }
 \solutionspace{80pt}
 
@@ -261,7 +351,7 @@
 }
 \answer{%
     $
-        \eli_{\max} = q_{\max}\omega \implies \nu = \frac{\omega}{2\pi} = \frac{\eli_{\max}}{2\pi q} \approx 0{,}239\,\text{кГц}
+        \eli_{\max} = q_{\max}\omega \implies \nu = \frac{\omega}{2\pi} = \frac{\eli_{\max}}{2\pi q} \approx 238{,}7\,\text{Гц}.
     $
 }
 \solutionspace{80pt}
@@ -280,10 +370,10 @@
 }
 \answer{%
     \begin{align*}
-    \omega &= 12\units{c}^-1, \\
+    \omega &= 12\funits{рад}{c}, \\
     T &= \frac{2\pi}\omega \approx 523{,}6\,\text{мc}, \\
     C &= \frac 1{\omega^2 L} \approx 115{,}7\,\text{мФ}, \\
-    q &= \frac{\eli_{\max}}\omega  \approx 25{,}0\,\text{мКл}.
+    q_{\max} &= \frac{\eli_{\max}}\omega  \approx 25{,}0\,\text{мКл}.
     \end{align*}
 }
 \solutionspace{80pt}
@@ -292,14 +382,44 @@
 \task{%
     Электрический колебательный контур состоит
     из катушки индуктивностью $L$ и конденсатора ёмкостью $C$.
-    последовательно конденсатору подключают ещё один конденсатор емкостью $\frac13L$.
-    Как изменится период сводобных колебаний в контуре?
+    Последовательно конденсатору подключают ещё один конденсатор емкостью $\frac13C$.
+    Как изменится период свободных колебаний в контуре?
+}
+\answer{%
+    $
+        T = 2\pi\sqrt{LC}, \quad
+        T' = 2\pi\sqrt{L'C'}
+            = T \sqrt{\frac{L'}L \cdot \frac{C'}C}
+            = T \sqrt{ 1 \cdot \frac14 }
+        \implies \frac{T'}T = \sqrt{ 1 \cdot \frac14 } \approx 0{,}500.
+    $
+}
+\solutionspace{100pt}
+
+\tasknumber{5}%
+\task{%
+    В колебательном контуре частота собственных колебаний $40\,\text{Гц}$.
+    После замены катушки индуктивность на другую частота стала равной $30\,\text{Гц}$.
+    А какой станет частота собственных колебаний, если в контур установить
+    обе эти катушки параллельно?
 }
 \answer{%
     \begin{align*}
-    T &= 2\pi\sqrt{LC} \\
-    T' &= 2\pi\sqrt{L'C'}= T \sqrt{\frac{L'}L \cdot \frac{C'}C} = T \sqrt{ 1 \cdot \frac14 } \\
-    &\frac{T'}T = \sqrt{ 1 \cdot \frac14 } \approx 0{,}062
+    T &= 2\pi\sqrt{LC} \implies \nu = \frac 1T = \frac 1{2\pi\sqrt{LC}} \implies L = \frac1 {4\pi^2 \nu^2 C}, \\
+    L_1 &= \frac1 {4\pi^2 \nu_1^2 C}, L_2 = \frac1 {4\pi^2 \nu_1^2 C}, \\
+    \nu_\text{послед.}
+            &= \frac 1{2\pi\sqrt{(L_1 + L_2)C}}
+            = \frac 1{2\pi\sqrt{\cbr{\frac1 {4\pi^2 \nu_1^2 C} + \frac1 {4\pi^2 \nu_2^2 C}}C}}
+            = \frac 1{\sqrt{\cbr{\frac1 {\nu_1^2 C} + \frac1 {\nu_2^2 C}}C}} =  \\
+     &= \frac 1{\sqrt{\frac1 {\nu_1^2} + \frac1 {\nu_2^2}}}
+            = \frac 1{\sqrt{ \frac1 {\sqr{40\,\text{Гц}}} + \frac1 {\sqr{30\,\text{Гц}}}}}
+            \approx 24{,}00\,\text{Гц} \\
+    \nu_\text{паралл.}
+            &= \frac 1{2\pi\sqrt{\frac 1{\frac 1{L_1} + \frac 1{L_2}}C}}
+            = \frac 1{2\pi\sqrt{\frac 1{\frac 1{\frac1 {4\pi^2 \nu_1^2 C}} + \frac 1{\frac1 {4\pi^2 \nu_2^2 C}}}C}}
+            = \frac 1{2\pi\sqrt{\frac 1{4\pi^2 \nu_1^2 C + 4\pi^2 \nu_2^2 C}C}} = \\
+     &= \frac 1{\sqrt{\frac 1{\nu_1^2 + \nu_2^2}}}
+            = \sqrt{\nu_1^2 + \nu_2^2} = \sqrt{\sqr{40\,\text{Гц}} + \sqr{30\,\text{Гц}}} \approx 50{,}00\,\text{Гц}.
     \end{align*}
 }
 
@@ -319,13 +439,13 @@
     \end{itemize}
 }
 \answer{%
-    \begin{align*}
-    T &= 2\pi\sqrt{LC} \\
-    \nu &= \frac 1{2\pi\sqrt{LC}}, \\
-    \omega &= \frac 1{\sqrt{LC}}, \\
-    L &= \frac 1C \sqr{\frac T{2\pi}}, \\
-    C &= \frac 1L \sqr{\frac T{2\pi}}.
-    \end{align*}
+    $
+        T = 2\pi\sqrt{LC},
+        \nu = \frac 1{2\pi\sqrt{LC}},
+        \omega = \frac 1{\sqrt{LC}},
+        L = \frac 1C \sqr{\frac T{2\pi}},
+        C = \frac 1L \sqr{\frac T{2\pi}}.
+    $
 }
 \solutionspace{80pt}
 
@@ -337,7 +457,7 @@
 }
 \answer{%
     $
-        \eli_{\max} = q_{\max}\omega \implies \nu = \frac{\omega}{2\pi} = \frac{\eli_{\max}}{2\pi q} \approx 0{,}716\,\text{кГц}
+        \eli_{\max} = q_{\max}\omega \implies \nu = \frac{\omega}{2\pi} = \frac{\eli_{\max}}{2\pi q} \approx 716{,}2\,\text{Гц}.
     $
 }
 \solutionspace{80pt}
@@ -356,10 +476,10 @@
 }
 \answer{%
     \begin{align*}
-    \omega &= 18\units{c}^-1, \\
+    \omega &= 18\funits{рад}{c}, \\
     T &= \frac{2\pi}\omega \approx 349{,}1\,\text{мc}, \\
     C &= \frac 1{\omega^2 L} \approx 38{,}6\,\text{мФ}, \\
-    q &= \frac{\eli_{\max}}\omega  \approx 13{,}9\,\text{мКл}.
+    q_{\max} &= \frac{\eli_{\max}}\omega  \approx 13{,}9\,\text{мКл}.
     \end{align*}
 }
 \solutionspace{80pt}
@@ -368,14 +488,44 @@
 \task{%
     Электрический колебательный контур состоит
     из катушки индуктивностью $L$ и конденсатора ёмкостью $C$.
-    последовательно конденсатору подключают ещё один конденсатор емкостью $2L$.
-    Как изменится период сводобных колебаний в контуре?
+    Последовательно конденсатору подключают ещё один конденсатор емкостью $2C$.
+    Как изменится период свободных колебаний в контуре?
+}
+\answer{%
+    $
+        T = 2\pi\sqrt{LC}, \quad
+        T' = 2\pi\sqrt{L'C'}
+            = T \sqrt{\frac{L'}L \cdot \frac{C'}C}
+            = T \sqrt{ 1 \cdot \frac23 }
+        \implies \frac{T'}T = \sqrt{ 1 \cdot \frac23 } \approx 0{,}816.
+    $
+}
+\solutionspace{100pt}
+
+\tasknumber{5}%
+\task{%
+    В колебательном контуре частота собственных колебаний $80\,\text{Гц}$.
+    После замены катушки индуктивность на другую частота стала равной $30\,\text{Гц}$.
+    А какой станет частота собственных колебаний, если в контур установить
+    обе эти катушки параллельно?
 }
 \answer{%
     \begin{align*}
-    T &= 2\pi\sqrt{LC} \\
-    T' &= 2\pi\sqrt{L'C'}= T \sqrt{\frac{L'}L \cdot \frac{C'}C} = T \sqrt{ 1 \cdot \frac23 } \\
-    &\frac{T'}T = \sqrt{ 1 \cdot \frac23 } \approx 0{,}444
+    T &= 2\pi\sqrt{LC} \implies \nu = \frac 1T = \frac 1{2\pi\sqrt{LC}} \implies L = \frac1 {4\pi^2 \nu^2 C}, \\
+    L_1 &= \frac1 {4\pi^2 \nu_1^2 C}, L_2 = \frac1 {4\pi^2 \nu_1^2 C}, \\
+    \nu_\text{послед.}
+            &= \frac 1{2\pi\sqrt{(L_1 + L_2)C}}
+            = \frac 1{2\pi\sqrt{\cbr{\frac1 {4\pi^2 \nu_1^2 C} + \frac1 {4\pi^2 \nu_2^2 C}}C}}
+            = \frac 1{\sqrt{\cbr{\frac1 {\nu_1^2 C} + \frac1 {\nu_2^2 C}}C}} =  \\
+     &= \frac 1{\sqrt{\frac1 {\nu_1^2} + \frac1 {\nu_2^2}}}
+            = \frac 1{\sqrt{ \frac1 {\sqr{80\,\text{Гц}}} + \frac1 {\sqr{30\,\text{Гц}}}}}
+            \approx 28{,}09\,\text{Гц} \\
+    \nu_\text{паралл.}
+            &= \frac 1{2\pi\sqrt{\frac 1{\frac 1{L_1} + \frac 1{L_2}}C}}
+            = \frac 1{2\pi\sqrt{\frac 1{\frac 1{\frac1 {4\pi^2 \nu_1^2 C}} + \frac 1{\frac1 {4\pi^2 \nu_2^2 C}}}C}}
+            = \frac 1{2\pi\sqrt{\frac 1{4\pi^2 \nu_1^2 C + 4\pi^2 \nu_2^2 C}C}} = \\
+     &= \frac 1{\sqrt{\frac 1{\nu_1^2 + \nu_2^2}}}
+            = \sqrt{\nu_1^2 + \nu_2^2} = \sqrt{\sqr{80\,\text{Гц}} + \sqr{30\,\text{Гц}}} \approx 85{,}44\,\text{Гц}.
     \end{align*}
 }
 
@@ -395,13 +545,13 @@
     \end{itemize}
 }
 \answer{%
-    \begin{align*}
-    T &= 2\pi\sqrt{LC} \\
-    \nu &= \frac 1{2\pi\sqrt{LC}}, \\
-    \omega &= \frac 1{\sqrt{LC}}, \\
-    L &= \frac 1C \sqr{\frac T{2\pi}}, \\
-    C &= \frac 1L \sqr{\frac T{2\pi}}.
-    \end{align*}
+    $
+        T = 2\pi\sqrt{LC},
+        \nu = \frac 1{2\pi\sqrt{LC}},
+        \omega = \frac 1{\sqrt{LC}},
+        L = \frac 1C \sqr{\frac T{2\pi}},
+        C = \frac 1L \sqr{\frac T{2\pi}}.
+    $
 }
 \solutionspace{80pt}
 
@@ -413,7 +563,7 @@
 }
 \answer{%
     $
-        \eli_{\max} = q_{\max}\omega \implies \nu = \frac{\omega}{2\pi} = \frac{\eli_{\max}}{2\pi q} \approx 0{,}716\,\text{кГц}
+        \eli_{\max} = q_{\max}\omega \implies \nu = \frac{\omega}{2\pi} = \frac{\eli_{\max}}{2\pi q} \approx 716{,}2\,\text{Гц}.
     $
 }
 \solutionspace{80pt}
@@ -432,10 +582,10 @@
 }
 \answer{%
     \begin{align*}
-    \omega &= 12\units{c}^-1, \\
+    \omega &= 12\funits{рад}{c}, \\
     T &= \frac{2\pi}\omega \approx 523{,}6\,\text{мc}, \\
     C &= \frac 1{\omega^2 L} \approx 138{,}9\,\text{мФ}, \\
-    q &= \frac{\eli_{\max}}\omega  \approx 20{,}8\,\text{мКл}.
+    q_{\max} &= \frac{\eli_{\max}}\omega  \approx 20{,}8\,\text{мКл}.
     \end{align*}
 }
 \solutionspace{80pt}
@@ -444,14 +594,44 @@
 \task{%
     Электрический колебательный контур состоит
     из катушки индуктивностью $L$ и конденсатора ёмкостью $C$.
-    параллельно конденсатору подключают ещё один конденсатор емкостью $2L$.
-    Как изменится период сводобных колебаний в контуре?
+    Параллельно конденсатору подключают ещё один конденсатор емкостью $2C$.
+    Как изменится период свободных колебаний в контуре?
+}
+\answer{%
+    $
+        T = 2\pi\sqrt{LC}, \quad
+        T' = 2\pi\sqrt{L'C'}
+            = T \sqrt{\frac{L'}L \cdot \frac{C'}C}
+            = T \sqrt{ 1 \cdot 3 }
+        \implies \frac{T'}T = \sqrt{ 1 \cdot 3 } \approx 1{,}732.
+    $
+}
+\solutionspace{100pt}
+
+\tasknumber{5}%
+\task{%
+    В колебательном контуре частота собственных колебаний $80\,\text{Гц}$.
+    После замены катушки индуктивность на другую частота стала равной $30\,\text{Гц}$.
+    А какой станет частота собственных колебаний, если в контур установить
+    обе эти катушки последовательно?
 }
 \answer{%
     \begin{align*}
-    T &= 2\pi\sqrt{LC} \\
-    T' &= 2\pi\sqrt{L'C'}= T \sqrt{\frac{L'}L \cdot \frac{C'}C} = T \sqrt{ 1 \cdot 3 } \\
-    &\frac{T'}T = \sqrt{ 1 \cdot 3 } \approx 9{,}000
+    T &= 2\pi\sqrt{LC} \implies \nu = \frac 1T = \frac 1{2\pi\sqrt{LC}} \implies L = \frac1 {4\pi^2 \nu^2 C}, \\
+    L_1 &= \frac1 {4\pi^2 \nu_1^2 C}, L_2 = \frac1 {4\pi^2 \nu_1^2 C}, \\
+    \nu_\text{послед.}
+            &= \frac 1{2\pi\sqrt{(L_1 + L_2)C}}
+            = \frac 1{2\pi\sqrt{\cbr{\frac1 {4\pi^2 \nu_1^2 C} + \frac1 {4\pi^2 \nu_2^2 C}}C}}
+            = \frac 1{\sqrt{\cbr{\frac1 {\nu_1^2 C} + \frac1 {\nu_2^2 C}}C}} =  \\
+     &= \frac 1{\sqrt{\frac1 {\nu_1^2} + \frac1 {\nu_2^2}}}
+            = \frac 1{\sqrt{ \frac1 {\sqr{80\,\text{Гц}}} + \frac1 {\sqr{30\,\text{Гц}}}}}
+            \approx 28{,}09\,\text{Гц} \\
+    \nu_\text{паралл.}
+            &= \frac 1{2\pi\sqrt{\frac 1{\frac 1{L_1} + \frac 1{L_2}}C}}
+            = \frac 1{2\pi\sqrt{\frac 1{\frac 1{\frac1 {4\pi^2 \nu_1^2 C}} + \frac 1{\frac1 {4\pi^2 \nu_2^2 C}}}C}}
+            = \frac 1{2\pi\sqrt{\frac 1{4\pi^2 \nu_1^2 C + 4\pi^2 \nu_2^2 C}C}} = \\
+     &= \frac 1{\sqrt{\frac 1{\nu_1^2 + \nu_2^2}}}
+            = \sqrt{\nu_1^2 + \nu_2^2} = \sqrt{\sqr{80\,\text{Гц}} + \sqr{30\,\text{Гц}}} \approx 85{,}44\,\text{Гц}.
     \end{align*}
 }
 
@@ -471,13 +651,13 @@
     \end{itemize}
 }
 \answer{%
-    \begin{align*}
-    T &= 2\pi\sqrt{LC} \\
-    \nu &= \frac 1{2\pi\sqrt{LC}}, \\
-    \omega &= \frac 1{\sqrt{LC}}, \\
-    L &= \frac 1C \sqr{\frac T{2\pi}}, \\
-    C &= \frac 1L \sqr{\frac T{2\pi}}.
-    \end{align*}
+    $
+        T = 2\pi\sqrt{LC},
+        \nu = \frac 1{2\pi\sqrt{LC}},
+        \omega = \frac 1{\sqrt{LC}},
+        L = \frac 1C \sqr{\frac T{2\pi}},
+        C = \frac 1L \sqr{\frac T{2\pi}}.
+    $
 }
 \solutionspace{80pt}
 
@@ -489,7 +669,7 @@
 }
 \answer{%
     $
-        \eli_{\max} = q_{\max}\omega \implies \nu = \frac{\omega}{2\pi} = \frac{\eli_{\max}}{2\pi q} \approx 0{,}716\,\text{кГц}
+        \eli_{\max} = q_{\max}\omega \implies \nu = \frac{\omega}{2\pi} = \frac{\eli_{\max}}{2\pi q} \approx 716{,}2\,\text{Гц}.
     $
 }
 \solutionspace{80pt}
@@ -508,10 +688,10 @@
 }
 \answer{%
     \begin{align*}
-    \omega &= 15\units{c}^-1, \\
+    \omega &= 15\funits{рад}{c}, \\
     T &= \frac{2\pi}\omega \approx 418{,}9\,\text{мc}, \\
     C &= \frac 1{\omega^2 L} \approx 88{,}9\,\text{мФ}, \\
-    q &= \frac{\eli_{\max}}\omega  \approx 16{,}7\,\text{мКл}.
+    q_{\max} &= \frac{\eli_{\max}}\omega  \approx 16{,}7\,\text{мКл}.
     \end{align*}
 }
 \solutionspace{80pt}
@@ -520,14 +700,44 @@
 \task{%
     Электрический колебательный контур состоит
     из катушки индуктивностью $L$ и конденсатора ёмкостью $C$.
-    последовательно катушке подключают ещё одну катушку индуктивностью $\frac13L$.
-    Как изменится период сводобных колебаний в контуре?
+    Последовательно катушке подключают ещё одну катушку индуктивностью $\frac13L$.
+    Как изменится период свободных колебаний в контуре?
+}
+\answer{%
+    $
+        T = 2\pi\sqrt{LC}, \quad
+        T' = 2\pi\sqrt{L'C'}
+            = T \sqrt{\frac{L'}L \cdot \frac{C'}C}
+            = T \sqrt{ \frac43 \cdot 1 }
+        \implies \frac{T'}T = \sqrt{ \frac43 \cdot 1 } \approx 1{,}155.
+    $
+}
+\solutionspace{100pt}
+
+\tasknumber{5}%
+\task{%
+    В колебательном контуре частота собственных колебаний $60\,\text{Гц}$.
+    После замены катушки индуктивность на другую частота стала равной $70\,\text{Гц}$.
+    А какой станет частота собственных колебаний, если в контур установить
+    обе эти катушки параллельно?
 }
 \answer{%
     \begin{align*}
-    T &= 2\pi\sqrt{LC} \\
-    T' &= 2\pi\sqrt{L'C'}= T \sqrt{\frac{L'}L \cdot \frac{C'}C} = T \sqrt{ \frac43 \cdot 1 } \\
-    &\frac{T'}T = \sqrt{ \frac43 \cdot 1 } \approx 1{,}778
+    T &= 2\pi\sqrt{LC} \implies \nu = \frac 1T = \frac 1{2\pi\sqrt{LC}} \implies L = \frac1 {4\pi^2 \nu^2 C}, \\
+    L_1 &= \frac1 {4\pi^2 \nu_1^2 C}, L_2 = \frac1 {4\pi^2 \nu_1^2 C}, \\
+    \nu_\text{послед.}
+            &= \frac 1{2\pi\sqrt{(L_1 + L_2)C}}
+            = \frac 1{2\pi\sqrt{\cbr{\frac1 {4\pi^2 \nu_1^2 C} + \frac1 {4\pi^2 \nu_2^2 C}}C}}
+            = \frac 1{\sqrt{\cbr{\frac1 {\nu_1^2 C} + \frac1 {\nu_2^2 C}}C}} =  \\
+     &= \frac 1{\sqrt{\frac1 {\nu_1^2} + \frac1 {\nu_2^2}}}
+            = \frac 1{\sqrt{ \frac1 {\sqr{60\,\text{Гц}}} + \frac1 {\sqr{70\,\text{Гц}}}}}
+            \approx 45{,}56\,\text{Гц} \\
+    \nu_\text{паралл.}
+            &= \frac 1{2\pi\sqrt{\frac 1{\frac 1{L_1} + \frac 1{L_2}}C}}
+            = \frac 1{2\pi\sqrt{\frac 1{\frac 1{\frac1 {4\pi^2 \nu_1^2 C}} + \frac 1{\frac1 {4\pi^2 \nu_2^2 C}}}C}}
+            = \frac 1{2\pi\sqrt{\frac 1{4\pi^2 \nu_1^2 C + 4\pi^2 \nu_2^2 C}C}} = \\
+     &= \frac 1{\sqrt{\frac 1{\nu_1^2 + \nu_2^2}}}
+            = \sqrt{\nu_1^2 + \nu_2^2} = \sqrt{\sqr{60\,\text{Гц}} + \sqr{70\,\text{Гц}}} \approx 92{,}20\,\text{Гц}.
     \end{align*}
 }
 
@@ -547,13 +757,13 @@
     \end{itemize}
 }
 \answer{%
-    \begin{align*}
-    T &= 2\pi\sqrt{LC} \\
-    \nu &= \frac 1{2\pi\sqrt{LC}}, \\
-    \omega &= \frac 1{\sqrt{LC}}, \\
-    L &= \frac 1C \sqr{\frac T{2\pi}}, \\
-    C &= \frac 1L \sqr{\frac T{2\pi}}.
-    \end{align*}
+    $
+        T = 2\pi\sqrt{LC},
+        \nu = \frac 1{2\pi\sqrt{LC}},
+        \omega = \frac 1{\sqrt{LC}},
+        L = \frac 1C \sqr{\frac T{2\pi}},
+        C = \frac 1L \sqr{\frac T{2\pi}}.
+    $
 }
 \solutionspace{80pt}
 
@@ -565,7 +775,7 @@
 }
 \answer{%
     $
-        \eli_{\max} = q_{\max}\omega \implies \nu = \frac{\omega}{2\pi} = \frac{\eli_{\max}}{2\pi q} \approx 0{,}239\,\text{кГц}
+        \eli_{\max} = q_{\max}\omega \implies \nu = \frac{\omega}{2\pi} = \frac{\eli_{\max}}{2\pi q} \approx 238{,}7\,\text{Гц}.
     $
 }
 \solutionspace{80pt}
@@ -584,10 +794,10 @@
 }
 \answer{%
     \begin{align*}
-    \omega &= 18\units{c}^-1, \\
+    \omega &= 18\funits{рад}{c}, \\
     T &= \frac{2\pi}\omega \approx 349{,}1\,\text{мc}, \\
     C &= \frac 1{\omega^2 L} \approx 61{,}7\,\text{мФ}, \\
-    q &= \frac{\eli_{\max}}\omega  \approx 16{,}7\,\text{мКл}.
+    q_{\max} &= \frac{\eli_{\max}}\omega  \approx 16{,}7\,\text{мКл}.
     \end{align*}
 }
 \solutionspace{80pt}
@@ -596,14 +806,44 @@
 \task{%
     Электрический колебательный контур состоит
     из катушки индуктивностью $L$ и конденсатора ёмкостью $C$.
-    последовательно конденсатору подключают ещё один конденсатор емкостью $\frac13L$.
-    Как изменится период сводобных колебаний в контуре?
+    Последовательно конденсатору подключают ещё один конденсатор емкостью $\frac13C$.
+    Как изменится период свободных колебаний в контуре?
+}
+\answer{%
+    $
+        T = 2\pi\sqrt{LC}, \quad
+        T' = 2\pi\sqrt{L'C'}
+            = T \sqrt{\frac{L'}L \cdot \frac{C'}C}
+            = T \sqrt{ 1 \cdot \frac14 }
+        \implies \frac{T'}T = \sqrt{ 1 \cdot \frac14 } \approx 0{,}500.
+    $
+}
+\solutionspace{100pt}
+
+\tasknumber{5}%
+\task{%
+    В колебательном контуре частота собственных колебаний $60\,\text{Гц}$.
+    После замены катушки индуктивность на другую частота стала равной $30\,\text{Гц}$.
+    А какой станет частота собственных колебаний, если в контур установить
+    обе эти катушки параллельно?
 }
 \answer{%
     \begin{align*}
-    T &= 2\pi\sqrt{LC} \\
-    T' &= 2\pi\sqrt{L'C'}= T \sqrt{\frac{L'}L \cdot \frac{C'}C} = T \sqrt{ 1 \cdot \frac14 } \\
-    &\frac{T'}T = \sqrt{ 1 \cdot \frac14 } \approx 0{,}062
+    T &= 2\pi\sqrt{LC} \implies \nu = \frac 1T = \frac 1{2\pi\sqrt{LC}} \implies L = \frac1 {4\pi^2 \nu^2 C}, \\
+    L_1 &= \frac1 {4\pi^2 \nu_1^2 C}, L_2 = \frac1 {4\pi^2 \nu_1^2 C}, \\
+    \nu_\text{послед.}
+            &= \frac 1{2\pi\sqrt{(L_1 + L_2)C}}
+            = \frac 1{2\pi\sqrt{\cbr{\frac1 {4\pi^2 \nu_1^2 C} + \frac1 {4\pi^2 \nu_2^2 C}}C}}
+            = \frac 1{\sqrt{\cbr{\frac1 {\nu_1^2 C} + \frac1 {\nu_2^2 C}}C}} =  \\
+     &= \frac 1{\sqrt{\frac1 {\nu_1^2} + \frac1 {\nu_2^2}}}
+            = \frac 1{\sqrt{ \frac1 {\sqr{60\,\text{Гц}}} + \frac1 {\sqr{30\,\text{Гц}}}}}
+            \approx 26{,}83\,\text{Гц} \\
+    \nu_\text{паралл.}
+            &= \frac 1{2\pi\sqrt{\frac 1{\frac 1{L_1} + \frac 1{L_2}}C}}
+            = \frac 1{2\pi\sqrt{\frac 1{\frac 1{\frac1 {4\pi^2 \nu_1^2 C}} + \frac 1{\frac1 {4\pi^2 \nu_2^2 C}}}C}}
+            = \frac 1{2\pi\sqrt{\frac 1{4\pi^2 \nu_1^2 C + 4\pi^2 \nu_2^2 C}C}} = \\
+     &= \frac 1{\sqrt{\frac 1{\nu_1^2 + \nu_2^2}}}
+            = \sqrt{\nu_1^2 + \nu_2^2} = \sqrt{\sqr{60\,\text{Гц}} + \sqr{30\,\text{Гц}}} \approx 67{,}08\,\text{Гц}.
     \end{align*}
 }
 
@@ -623,13 +863,13 @@
     \end{itemize}
 }
 \answer{%
-    \begin{align*}
-    T &= 2\pi\sqrt{LC} \\
-    \nu &= \frac 1{2\pi\sqrt{LC}}, \\
-    \omega &= \frac 1{\sqrt{LC}}, \\
-    L &= \frac 1C \sqr{\frac T{2\pi}}, \\
-    C &= \frac 1L \sqr{\frac T{2\pi}}.
-    \end{align*}
+    $
+        T = 2\pi\sqrt{LC},
+        \nu = \frac 1{2\pi\sqrt{LC}},
+        \omega = \frac 1{\sqrt{LC}},
+        L = \frac 1C \sqr{\frac T{2\pi}},
+        C = \frac 1L \sqr{\frac T{2\pi}}.
+    $
 }
 \solutionspace{80pt}
 
@@ -641,7 +881,7 @@
 }
 \answer{%
     $
-        \eli_{\max} = q_{\max}\omega \implies \nu = \frac{\omega}{2\pi} = \frac{\eli_{\max}}{2\pi q} \approx 0{,}477\,\text{кГц}
+        \eli_{\max} = q_{\max}\omega \implies \nu = \frac{\omega}{2\pi} = \frac{\eli_{\max}}{2\pi q} \approx 477{,}5\,\text{Гц}.
     $
 }
 \solutionspace{80pt}
@@ -660,10 +900,10 @@
 }
 \answer{%
     \begin{align*}
-    \omega &= 18\units{c}^-1, \\
+    \omega &= 18\funits{рад}{c}, \\
     T &= \frac{2\pi}\omega \approx 349{,}1\,\text{мc}, \\
     C &= \frac 1{\omega^2 L} \approx 38{,}6\,\text{мФ}, \\
-    q &= \frac{\eli_{\max}}\omega  \approx 16{,}7\,\text{мКл}.
+    q_{\max} &= \frac{\eli_{\max}}\omega  \approx 16{,}7\,\text{мКл}.
     \end{align*}
 }
 \solutionspace{80pt}
@@ -672,14 +912,44 @@
 \task{%
     Электрический колебательный контур состоит
     из катушки индуктивностью $L$ и конденсатора ёмкостью $C$.
-    последовательно катушке подключают ещё одну катушку индуктивностью $\frac13L$.
-    Как изменится период сводобных колебаний в контуре?
+    Последовательно катушке подключают ещё одну катушку индуктивностью $\frac13L$.
+    Как изменится период свободных колебаний в контуре?
+}
+\answer{%
+    $
+        T = 2\pi\sqrt{LC}, \quad
+        T' = 2\pi\sqrt{L'C'}
+            = T \sqrt{\frac{L'}L \cdot \frac{C'}C}
+            = T \sqrt{ \frac43 \cdot 1 }
+        \implies \frac{T'}T = \sqrt{ \frac43 \cdot 1 } \approx 1{,}155.
+    $
+}
+\solutionspace{100pt}
+
+\tasknumber{5}%
+\task{%
+    В колебательном контуре частота собственных колебаний $40\,\text{Гц}$.
+    После замены катушки индуктивность на другую частота стала равной $30\,\text{Гц}$.
+    А какой станет частота собственных колебаний, если в контур установить
+    обе эти катушки последовательно?
 }
 \answer{%
     \begin{align*}
-    T &= 2\pi\sqrt{LC} \\
-    T' &= 2\pi\sqrt{L'C'}= T \sqrt{\frac{L'}L \cdot \frac{C'}C} = T \sqrt{ \frac43 \cdot 1 } \\
-    &\frac{T'}T = \sqrt{ \frac43 \cdot 1 } \approx 1{,}778
+    T &= 2\pi\sqrt{LC} \implies \nu = \frac 1T = \frac 1{2\pi\sqrt{LC}} \implies L = \frac1 {4\pi^2 \nu^2 C}, \\
+    L_1 &= \frac1 {4\pi^2 \nu_1^2 C}, L_2 = \frac1 {4\pi^2 \nu_1^2 C}, \\
+    \nu_\text{послед.}
+            &= \frac 1{2\pi\sqrt{(L_1 + L_2)C}}
+            = \frac 1{2\pi\sqrt{\cbr{\frac1 {4\pi^2 \nu_1^2 C} + \frac1 {4\pi^2 \nu_2^2 C}}C}}
+            = \frac 1{\sqrt{\cbr{\frac1 {\nu_1^2 C} + \frac1 {\nu_2^2 C}}C}} =  \\
+     &= \frac 1{\sqrt{\frac1 {\nu_1^2} + \frac1 {\nu_2^2}}}
+            = \frac 1{\sqrt{ \frac1 {\sqr{40\,\text{Гц}}} + \frac1 {\sqr{30\,\text{Гц}}}}}
+            \approx 24{,}00\,\text{Гц} \\
+    \nu_\text{паралл.}
+            &= \frac 1{2\pi\sqrt{\frac 1{\frac 1{L_1} + \frac 1{L_2}}C}}
+            = \frac 1{2\pi\sqrt{\frac 1{\frac 1{\frac1 {4\pi^2 \nu_1^2 C}} + \frac 1{\frac1 {4\pi^2 \nu_2^2 C}}}C}}
+            = \frac 1{2\pi\sqrt{\frac 1{4\pi^2 \nu_1^2 C + 4\pi^2 \nu_2^2 C}C}} = \\
+     &= \frac 1{\sqrt{\frac 1{\nu_1^2 + \nu_2^2}}}
+            = \sqrt{\nu_1^2 + \nu_2^2} = \sqrt{\sqr{40\,\text{Гц}} + \sqr{30\,\text{Гц}}} \approx 50{,}00\,\text{Гц}.
     \end{align*}
 }
 
@@ -699,13 +969,13 @@
     \end{itemize}
 }
 \answer{%
-    \begin{align*}
-    T &= 2\pi\sqrt{LC} \\
-    \nu &= \frac 1{2\pi\sqrt{LC}}, \\
-    \omega &= \frac 1{\sqrt{LC}}, \\
-    L &= \frac 1C \sqr{\frac T{2\pi}}, \\
-    C &= \frac 1L \sqr{\frac T{2\pi}}.
-    \end{align*}
+    $
+        T = 2\pi\sqrt{LC},
+        \nu = \frac 1{2\pi\sqrt{LC}},
+        \omega = \frac 1{\sqrt{LC}},
+        L = \frac 1C \sqr{\frac T{2\pi}},
+        C = \frac 1L \sqr{\frac T{2\pi}}.
+    $
 }
 \solutionspace{80pt}
 
@@ -717,7 +987,7 @@
 }
 \answer{%
     $
-        \eli_{\max} = q_{\max}\omega \implies \nu = \frac{\omega}{2\pi} = \frac{\eli_{\max}}{2\pi q} \approx 0{,}637\,\text{кГц}
+        \eli_{\max} = q_{\max}\omega \implies \nu = \frac{\omega}{2\pi} = \frac{\eli_{\max}}{2\pi q} \approx 636{,}6\,\text{Гц}.
     $
 }
 \solutionspace{80pt}
@@ -736,10 +1006,10 @@
 }
 \answer{%
     \begin{align*}
-    \omega &= 15\units{c}^-1, \\
+    \omega &= 15\funits{рад}{c}, \\
     T &= \frac{2\pi}\omega \approx 418{,}9\,\text{мc}, \\
     C &= \frac 1{\omega^2 L} \approx 88{,}9\,\text{мФ}, \\
-    q &= \frac{\eli_{\max}}\omega  \approx 16{,}7\,\text{мКл}.
+    q_{\max} &= \frac{\eli_{\max}}\omega  \approx 16{,}7\,\text{мКл}.
     \end{align*}
 }
 \solutionspace{80pt}
@@ -748,14 +1018,44 @@
 \task{%
     Электрический колебательный контур состоит
     из катушки индуктивностью $L$ и конденсатора ёмкостью $C$.
-    последовательно конденсатору подключают ещё один конденсатор емкостью $\frac13L$.
-    Как изменится период сводобных колебаний в контуре?
+    Последовательно конденсатору подключают ещё один конденсатор емкостью $\frac13C$.
+    Как изменится период свободных колебаний в контуре?
+}
+\answer{%
+    $
+        T = 2\pi\sqrt{LC}, \quad
+        T' = 2\pi\sqrt{L'C'}
+            = T \sqrt{\frac{L'}L \cdot \frac{C'}C}
+            = T \sqrt{ 1 \cdot \frac14 }
+        \implies \frac{T'}T = \sqrt{ 1 \cdot \frac14 } \approx 0{,}500.
+    $
+}
+\solutionspace{100pt}
+
+\tasknumber{5}%
+\task{%
+    В колебательном контуре частота собственных колебаний $60\,\text{Гц}$.
+    После замены катушки индуктивность на другую частота стала равной $70\,\text{Гц}$.
+    А какой станет частота собственных колебаний, если в контур установить
+    обе эти катушки последовательно?
 }
 \answer{%
     \begin{align*}
-    T &= 2\pi\sqrt{LC} \\
-    T' &= 2\pi\sqrt{L'C'}= T \sqrt{\frac{L'}L \cdot \frac{C'}C} = T \sqrt{ 1 \cdot \frac14 } \\
-    &\frac{T'}T = \sqrt{ 1 \cdot \frac14 } \approx 0{,}062
+    T &= 2\pi\sqrt{LC} \implies \nu = \frac 1T = \frac 1{2\pi\sqrt{LC}} \implies L = \frac1 {4\pi^2 \nu^2 C}, \\
+    L_1 &= \frac1 {4\pi^2 \nu_1^2 C}, L_2 = \frac1 {4\pi^2 \nu_1^2 C}, \\
+    \nu_\text{послед.}
+            &= \frac 1{2\pi\sqrt{(L_1 + L_2)C}}
+            = \frac 1{2\pi\sqrt{\cbr{\frac1 {4\pi^2 \nu_1^2 C} + \frac1 {4\pi^2 \nu_2^2 C}}C}}
+            = \frac 1{\sqrt{\cbr{\frac1 {\nu_1^2 C} + \frac1 {\nu_2^2 C}}C}} =  \\
+     &= \frac 1{\sqrt{\frac1 {\nu_1^2} + \frac1 {\nu_2^2}}}
+            = \frac 1{\sqrt{ \frac1 {\sqr{60\,\text{Гц}}} + \frac1 {\sqr{70\,\text{Гц}}}}}
+            \approx 45{,}56\,\text{Гц} \\
+    \nu_\text{паралл.}
+            &= \frac 1{2\pi\sqrt{\frac 1{\frac 1{L_1} + \frac 1{L_2}}C}}
+            = \frac 1{2\pi\sqrt{\frac 1{\frac 1{\frac1 {4\pi^2 \nu_1^2 C}} + \frac 1{\frac1 {4\pi^2 \nu_2^2 C}}}C}}
+            = \frac 1{2\pi\sqrt{\frac 1{4\pi^2 \nu_1^2 C + 4\pi^2 \nu_2^2 C}C}} = \\
+     &= \frac 1{\sqrt{\frac 1{\nu_1^2 + \nu_2^2}}}
+            = \sqrt{\nu_1^2 + \nu_2^2} = \sqrt{\sqr{60\,\text{Гц}} + \sqr{70\,\text{Гц}}} \approx 92{,}20\,\text{Гц}.
     \end{align*}
 }
 
@@ -775,13 +1075,13 @@
     \end{itemize}
 }
 \answer{%
-    \begin{align*}
-    T &= 2\pi\sqrt{LC} \\
-    \nu &= \frac 1{2\pi\sqrt{LC}}, \\
-    \omega &= \frac 1{\sqrt{LC}}, \\
-    L &= \frac 1C \sqr{\frac T{2\pi}}, \\
-    C &= \frac 1L \sqr{\frac T{2\pi}}.
-    \end{align*}
+    $
+        T = 2\pi\sqrt{LC},
+        \nu = \frac 1{2\pi\sqrt{LC}},
+        \omega = \frac 1{\sqrt{LC}},
+        L = \frac 1C \sqr{\frac T{2\pi}},
+        C = \frac 1L \sqr{\frac T{2\pi}}.
+    $
 }
 \solutionspace{80pt}
 
@@ -793,7 +1093,7 @@
 }
 \answer{%
     $
-        \eli_{\max} = q_{\max}\omega \implies \nu = \frac{\omega}{2\pi} = \frac{\eli_{\max}}{2\pi q} \approx 0{,}358\,\text{кГц}
+        \eli_{\max} = q_{\max}\omega \implies \nu = \frac{\omega}{2\pi} = \frac{\eli_{\max}}{2\pi q} \approx 358{,}1\,\text{Гц}.
     $
 }
 \solutionspace{80pt}
@@ -812,10 +1112,10 @@
 }
 \answer{%
     \begin{align*}
-    \omega &= 12\units{c}^-1, \\
+    \omega &= 12\funits{рад}{c}, \\
     T &= \frac{2\pi}\omega \approx 523{,}6\,\text{мc}, \\
     C &= \frac 1{\omega^2 L} \approx 138{,}9\,\text{мФ}, \\
-    q &= \frac{\eli_{\max}}\omega  \approx 25{,}0\,\text{мКл}.
+    q_{\max} &= \frac{\eli_{\max}}\omega  \approx 25{,}0\,\text{мКл}.
     \end{align*}
 }
 \solutionspace{80pt}
@@ -824,14 +1124,44 @@
 \task{%
     Электрический колебательный контур состоит
     из катушки индуктивностью $L$ и конденсатора ёмкостью $C$.
-    параллельно катушке подключают ещё одну катушку индуктивностью $2L$.
-    Как изменится период сводобных колебаний в контуре?
+    Параллельно катушке подключают ещё одну катушку индуктивностью $2L$.
+    Как изменится период свободных колебаний в контуре?
+}
+\answer{%
+    $
+        T = 2\pi\sqrt{LC}, \quad
+        T' = 2\pi\sqrt{L'C'}
+            = T \sqrt{\frac{L'}L \cdot \frac{C'}C}
+            = T \sqrt{ \frac23 \cdot 1 }
+        \implies \frac{T'}T = \sqrt{ \frac23 \cdot 1 } \approx 0{,}816.
+    $
+}
+\solutionspace{100pt}
+
+\tasknumber{5}%
+\task{%
+    В колебательном контуре частота собственных колебаний $60\,\text{Гц}$.
+    После замены катушки индуктивность на другую частота стала равной $70\,\text{Гц}$.
+    А какой станет частота собственных колебаний, если в контур установить
+    обе эти катушки последовательно?
 }
 \answer{%
     \begin{align*}
-    T &= 2\pi\sqrt{LC} \\
-    T' &= 2\pi\sqrt{L'C'}= T \sqrt{\frac{L'}L \cdot \frac{C'}C} = T \sqrt{ \frac23 \cdot 1 } \\
-    &\frac{T'}T = \sqrt{ \frac23 \cdot 1 } \approx 0{,}444
+    T &= 2\pi\sqrt{LC} \implies \nu = \frac 1T = \frac 1{2\pi\sqrt{LC}} \implies L = \frac1 {4\pi^2 \nu^2 C}, \\
+    L_1 &= \frac1 {4\pi^2 \nu_1^2 C}, L_2 = \frac1 {4\pi^2 \nu_1^2 C}, \\
+    \nu_\text{послед.}
+            &= \frac 1{2\pi\sqrt{(L_1 + L_2)C}}
+            = \frac 1{2\pi\sqrt{\cbr{\frac1 {4\pi^2 \nu_1^2 C} + \frac1 {4\pi^2 \nu_2^2 C}}C}}
+            = \frac 1{\sqrt{\cbr{\frac1 {\nu_1^2 C} + \frac1 {\nu_2^2 C}}C}} =  \\
+     &= \frac 1{\sqrt{\frac1 {\nu_1^2} + \frac1 {\nu_2^2}}}
+            = \frac 1{\sqrt{ \frac1 {\sqr{60\,\text{Гц}}} + \frac1 {\sqr{70\,\text{Гц}}}}}
+            \approx 45{,}56\,\text{Гц} \\
+    \nu_\text{паралл.}
+            &= \frac 1{2\pi\sqrt{\frac 1{\frac 1{L_1} + \frac 1{L_2}}C}}
+            = \frac 1{2\pi\sqrt{\frac 1{\frac 1{\frac1 {4\pi^2 \nu_1^2 C}} + \frac 1{\frac1 {4\pi^2 \nu_2^2 C}}}C}}
+            = \frac 1{2\pi\sqrt{\frac 1{4\pi^2 \nu_1^2 C + 4\pi^2 \nu_2^2 C}C}} = \\
+     &= \frac 1{\sqrt{\frac 1{\nu_1^2 + \nu_2^2}}}
+            = \sqrt{\nu_1^2 + \nu_2^2} = \sqrt{\sqr{60\,\text{Гц}} + \sqr{70\,\text{Гц}}} \approx 92{,}20\,\text{Гц}.
     \end{align*}
 }
 
@@ -851,13 +1181,13 @@
     \end{itemize}
 }
 \answer{%
-    \begin{align*}
-    T &= 2\pi\sqrt{LC} \\
-    \nu &= \frac 1{2\pi\sqrt{LC}}, \\
-    \omega &= \frac 1{\sqrt{LC}}, \\
-    L &= \frac 1C \sqr{\frac T{2\pi}}, \\
-    C &= \frac 1L \sqr{\frac T{2\pi}}.
-    \end{align*}
+    $
+        T = 2\pi\sqrt{LC},
+        \nu = \frac 1{2\pi\sqrt{LC}},
+        \omega = \frac 1{\sqrt{LC}},
+        L = \frac 1C \sqr{\frac T{2\pi}},
+        C = \frac 1L \sqr{\frac T{2\pi}}.
+    $
 }
 \solutionspace{80pt}
 
@@ -869,7 +1199,7 @@
 }
 \answer{%
     $
-        \eli_{\max} = q_{\max}\omega \implies \nu = \frac{\omega}{2\pi} = \frac{\eli_{\max}}{2\pi q} \approx 1{,}074\,\text{кГц}
+        \eli_{\max} = q_{\max}\omega \implies \nu = \frac{\omega}{2\pi} = \frac{\eli_{\max}}{2\pi q} \approx 1074{,}3\,\text{Гц}.
     $
 }
 \solutionspace{80pt}
@@ -888,10 +1218,10 @@
 }
 \answer{%
     \begin{align*}
-    \omega &= 18\units{c}^-1, \\
+    \omega &= 18\funits{рад}{c}, \\
     T &= \frac{2\pi}\omega \approx 349{,}1\,\text{мc}, \\
     C &= \frac 1{\omega^2 L} \approx 38{,}6\,\text{мФ}, \\
-    q &= \frac{\eli_{\max}}\omega  \approx 13{,}9\,\text{мКл}.
+    q_{\max} &= \frac{\eli_{\max}}\omega  \approx 13{,}9\,\text{мКл}.
     \end{align*}
 }
 \solutionspace{80pt}
@@ -900,14 +1230,44 @@
 \task{%
     Электрический колебательный контур состоит
     из катушки индуктивностью $L$ и конденсатора ёмкостью $C$.
-    параллельно катушке подключают ещё одну катушку индуктивностью $3L$.
-    Как изменится период сводобных колебаний в контуре?
+    Параллельно катушке подключают ещё одну катушку индуктивностью $3L$.
+    Как изменится период свободных колебаний в контуре?
+}
+\answer{%
+    $
+        T = 2\pi\sqrt{LC}, \quad
+        T' = 2\pi\sqrt{L'C'}
+            = T \sqrt{\frac{L'}L \cdot \frac{C'}C}
+            = T \sqrt{ \frac34 \cdot 1 }
+        \implies \frac{T'}T = \sqrt{ \frac34 \cdot 1 } \approx 0{,}866.
+    $
+}
+\solutionspace{100pt}
+
+\tasknumber{5}%
+\task{%
+    В колебательном контуре частота собственных колебаний $60\,\text{Гц}$.
+    После замены катушки индуктивность на другую частота стала равной $90\,\text{Гц}$.
+    А какой станет частота собственных колебаний, если в контур установить
+    обе эти катушки параллельно?
 }
 \answer{%
     \begin{align*}
-    T &= 2\pi\sqrt{LC} \\
-    T' &= 2\pi\sqrt{L'C'}= T \sqrt{\frac{L'}L \cdot \frac{C'}C} = T \sqrt{ \frac34 \cdot 1 } \\
-    &\frac{T'}T = \sqrt{ \frac34 \cdot 1 } \approx 0{,}562
+    T &= 2\pi\sqrt{LC} \implies \nu = \frac 1T = \frac 1{2\pi\sqrt{LC}} \implies L = \frac1 {4\pi^2 \nu^2 C}, \\
+    L_1 &= \frac1 {4\pi^2 \nu_1^2 C}, L_2 = \frac1 {4\pi^2 \nu_1^2 C}, \\
+    \nu_\text{послед.}
+            &= \frac 1{2\pi\sqrt{(L_1 + L_2)C}}
+            = \frac 1{2\pi\sqrt{\cbr{\frac1 {4\pi^2 \nu_1^2 C} + \frac1 {4\pi^2 \nu_2^2 C}}C}}
+            = \frac 1{\sqrt{\cbr{\frac1 {\nu_1^2 C} + \frac1 {\nu_2^2 C}}C}} =  \\
+     &= \frac 1{\sqrt{\frac1 {\nu_1^2} + \frac1 {\nu_2^2}}}
+            = \frac 1{\sqrt{ \frac1 {\sqr{60\,\text{Гц}}} + \frac1 {\sqr{90\,\text{Гц}}}}}
+            \approx 49{,}92\,\text{Гц} \\
+    \nu_\text{паралл.}
+            &= \frac 1{2\pi\sqrt{\frac 1{\frac 1{L_1} + \frac 1{L_2}}C}}
+            = \frac 1{2\pi\sqrt{\frac 1{\frac 1{\frac1 {4\pi^2 \nu_1^2 C}} + \frac 1{\frac1 {4\pi^2 \nu_2^2 C}}}C}}
+            = \frac 1{2\pi\sqrt{\frac 1{4\pi^2 \nu_1^2 C + 4\pi^2 \nu_2^2 C}C}} = \\
+     &= \frac 1{\sqrt{\frac 1{\nu_1^2 + \nu_2^2}}}
+            = \sqrt{\nu_1^2 + \nu_2^2} = \sqrt{\sqr{60\,\text{Гц}} + \sqr{90\,\text{Гц}}} \approx 108{,}17\,\text{Гц}.
     \end{align*}
 }
 
@@ -927,13 +1287,13 @@
     \end{itemize}
 }
 \answer{%
-    \begin{align*}
-    T &= 2\pi\sqrt{LC} \\
-    \nu &= \frac 1{2\pi\sqrt{LC}}, \\
-    \omega &= \frac 1{\sqrt{LC}}, \\
-    L &= \frac 1C \sqr{\frac T{2\pi}}, \\
-    C &= \frac 1L \sqr{\frac T{2\pi}}.
-    \end{align*}
+    $
+        T = 2\pi\sqrt{LC},
+        \nu = \frac 1{2\pi\sqrt{LC}},
+        \omega = \frac 1{\sqrt{LC}},
+        L = \frac 1C \sqr{\frac T{2\pi}},
+        C = \frac 1L \sqr{\frac T{2\pi}}.
+    $
 }
 \solutionspace{80pt}
 
@@ -945,7 +1305,7 @@
 }
 \answer{%
     $
-        \eli_{\max} = q_{\max}\omega \implies \nu = \frac{\omega}{2\pi} = \frac{\eli_{\max}}{2\pi q} \approx 0{,}477\,\text{кГц}
+        \eli_{\max} = q_{\max}\omega \implies \nu = \frac{\omega}{2\pi} = \frac{\eli_{\max}}{2\pi q} \approx 477{,}5\,\text{Гц}.
     $
 }
 \solutionspace{80pt}
@@ -964,10 +1324,10 @@
 }
 \answer{%
     \begin{align*}
-    \omega &= 12\units{c}^-1, \\
+    \omega &= 12\funits{рад}{c}, \\
     T &= \frac{2\pi}\omega \approx 523{,}6\,\text{мc}, \\
     C &= \frac 1{\omega^2 L} \approx 99{,}2\,\text{мФ}, \\
-    q &= \frac{\eli_{\max}}\omega  \approx 25{,}0\,\text{мКл}.
+    q_{\max} &= \frac{\eli_{\max}}\omega  \approx 25{,}0\,\text{мКл}.
     \end{align*}
 }
 \solutionspace{80pt}
@@ -976,14 +1336,44 @@
 \task{%
     Электрический колебательный контур состоит
     из катушки индуктивностью $L$ и конденсатора ёмкостью $C$.
-    последовательно конденсатору подключают ещё один конденсатор емкостью $\frac13L$.
-    Как изменится период сводобных колебаний в контуре?
+    Последовательно конденсатору подключают ещё один конденсатор емкостью $\frac13C$.
+    Как изменится период свободных колебаний в контуре?
+}
+\answer{%
+    $
+        T = 2\pi\sqrt{LC}, \quad
+        T' = 2\pi\sqrt{L'C'}
+            = T \sqrt{\frac{L'}L \cdot \frac{C'}C}
+            = T \sqrt{ 1 \cdot \frac14 }
+        \implies \frac{T'}T = \sqrt{ 1 \cdot \frac14 } \approx 0{,}500.
+    $
+}
+\solutionspace{100pt}
+
+\tasknumber{5}%
+\task{%
+    В колебательном контуре частота собственных колебаний $40\,\text{Гц}$.
+    После замены катушки индуктивность на другую частота стала равной $50\,\text{Гц}$.
+    А какой станет частота собственных колебаний, если в контур установить
+    обе эти катушки параллельно?
 }
 \answer{%
     \begin{align*}
-    T &= 2\pi\sqrt{LC} \\
-    T' &= 2\pi\sqrt{L'C'}= T \sqrt{\frac{L'}L \cdot \frac{C'}C} = T \sqrt{ 1 \cdot \frac14 } \\
-    &\frac{T'}T = \sqrt{ 1 \cdot \frac14 } \approx 0{,}062
+    T &= 2\pi\sqrt{LC} \implies \nu = \frac 1T = \frac 1{2\pi\sqrt{LC}} \implies L = \frac1 {4\pi^2 \nu^2 C}, \\
+    L_1 &= \frac1 {4\pi^2 \nu_1^2 C}, L_2 = \frac1 {4\pi^2 \nu_1^2 C}, \\
+    \nu_\text{послед.}
+            &= \frac 1{2\pi\sqrt{(L_1 + L_2)C}}
+            = \frac 1{2\pi\sqrt{\cbr{\frac1 {4\pi^2 \nu_1^2 C} + \frac1 {4\pi^2 \nu_2^2 C}}C}}
+            = \frac 1{\sqrt{\cbr{\frac1 {\nu_1^2 C} + \frac1 {\nu_2^2 C}}C}} =  \\
+     &= \frac 1{\sqrt{\frac1 {\nu_1^2} + \frac1 {\nu_2^2}}}
+            = \frac 1{\sqrt{ \frac1 {\sqr{40\,\text{Гц}}} + \frac1 {\sqr{50\,\text{Гц}}}}}
+            \approx 31{,}23\,\text{Гц} \\
+    \nu_\text{паралл.}
+            &= \frac 1{2\pi\sqrt{\frac 1{\frac 1{L_1} + \frac 1{L_2}}C}}
+            = \frac 1{2\pi\sqrt{\frac 1{\frac 1{\frac1 {4\pi^2 \nu_1^2 C}} + \frac 1{\frac1 {4\pi^2 \nu_2^2 C}}}C}}
+            = \frac 1{2\pi\sqrt{\frac 1{4\pi^2 \nu_1^2 C + 4\pi^2 \nu_2^2 C}C}} = \\
+     &= \frac 1{\sqrt{\frac 1{\nu_1^2 + \nu_2^2}}}
+            = \sqrt{\nu_1^2 + \nu_2^2} = \sqrt{\sqr{40\,\text{Гц}} + \sqr{50\,\text{Гц}}} \approx 64{,}03\,\text{Гц}.
     \end{align*}
 }
 
@@ -1003,13 +1393,13 @@
     \end{itemize}
 }
 \answer{%
-    \begin{align*}
-    T &= 2\pi\sqrt{LC} \\
-    \nu &= \frac 1{2\pi\sqrt{LC}}, \\
-    \omega &= \frac 1{\sqrt{LC}}, \\
-    L &= \frac 1C \sqr{\frac T{2\pi}}, \\
-    C &= \frac 1L \sqr{\frac T{2\pi}}.
-    \end{align*}
+    $
+        T = 2\pi\sqrt{LC},
+        \nu = \frac 1{2\pi\sqrt{LC}},
+        \omega = \frac 1{\sqrt{LC}},
+        L = \frac 1C \sqr{\frac T{2\pi}},
+        C = \frac 1L \sqr{\frac T{2\pi}}.
+    $
 }
 \solutionspace{80pt}
 
@@ -1021,7 +1411,7 @@
 }
 \answer{%
     $
-        \eli_{\max} = q_{\max}\omega \implies \nu = \frac{\omega}{2\pi} = \frac{\eli_{\max}}{2\pi q} \approx 0{,}358\,\text{кГц}
+        \eli_{\max} = q_{\max}\omega \implies \nu = \frac{\omega}{2\pi} = \frac{\eli_{\max}}{2\pi q} \approx 358{,}1\,\text{Гц}.
     $
 }
 \solutionspace{80pt}
@@ -1040,10 +1430,10 @@
 }
 \answer{%
     \begin{align*}
-    \omega &= 15\units{c}^-1, \\
+    \omega &= 15\funits{рад}{c}, \\
     T &= \frac{2\pi}\omega \approx 418{,}9\,\text{мc}, \\
     C &= \frac 1{\omega^2 L} \approx 63{,}5\,\text{мФ}, \\
-    q &= \frac{\eli_{\max}}\omega  \approx 16{,}7\,\text{мКл}.
+    q_{\max} &= \frac{\eli_{\max}}\omega  \approx 16{,}7\,\text{мКл}.
     \end{align*}
 }
 \solutionspace{80pt}
@@ -1052,14 +1442,44 @@
 \task{%
     Электрический колебательный контур состоит
     из катушки индуктивностью $L$ и конденсатора ёмкостью $C$.
-    параллельно катушке подключают ещё одну катушку индуктивностью $\frac13L$.
-    Как изменится период сводобных колебаний в контуре?
+    Параллельно катушке подключают ещё одну катушку индуктивностью $\frac13L$.
+    Как изменится период свободных колебаний в контуре?
+}
+\answer{%
+    $
+        T = 2\pi\sqrt{LC}, \quad
+        T' = 2\pi\sqrt{L'C'}
+            = T \sqrt{\frac{L'}L \cdot \frac{C'}C}
+            = T \sqrt{ \frac14 \cdot 1 }
+        \implies \frac{T'}T = \sqrt{ \frac14 \cdot 1 } \approx 0{,}500.
+    $
+}
+\solutionspace{100pt}
+
+\tasknumber{5}%
+\task{%
+    В колебательном контуре частота собственных колебаний $80\,\text{Гц}$.
+    После замены катушки индуктивность на другую частота стала равной $70\,\text{Гц}$.
+    А какой станет частота собственных колебаний, если в контур установить
+    обе эти катушки параллельно?
 }
 \answer{%
     \begin{align*}
-    T &= 2\pi\sqrt{LC} \\
-    T' &= 2\pi\sqrt{L'C'}= T \sqrt{\frac{L'}L \cdot \frac{C'}C} = T \sqrt{ \frac14 \cdot 1 } \\
-    &\frac{T'}T = \sqrt{ \frac14 \cdot 1 } \approx 0{,}062
+    T &= 2\pi\sqrt{LC} \implies \nu = \frac 1T = \frac 1{2\pi\sqrt{LC}} \implies L = \frac1 {4\pi^2 \nu^2 C}, \\
+    L_1 &= \frac1 {4\pi^2 \nu_1^2 C}, L_2 = \frac1 {4\pi^2 \nu_1^2 C}, \\
+    \nu_\text{послед.}
+            &= \frac 1{2\pi\sqrt{(L_1 + L_2)C}}
+            = \frac 1{2\pi\sqrt{\cbr{\frac1 {4\pi^2 \nu_1^2 C} + \frac1 {4\pi^2 \nu_2^2 C}}C}}
+            = \frac 1{\sqrt{\cbr{\frac1 {\nu_1^2 C} + \frac1 {\nu_2^2 C}}C}} =  \\
+     &= \frac 1{\sqrt{\frac1 {\nu_1^2} + \frac1 {\nu_2^2}}}
+            = \frac 1{\sqrt{ \frac1 {\sqr{80\,\text{Гц}}} + \frac1 {\sqr{70\,\text{Гц}}}}}
+            \approx 52{,}68\,\text{Гц} \\
+    \nu_\text{паралл.}
+            &= \frac 1{2\pi\sqrt{\frac 1{\frac 1{L_1} + \frac 1{L_2}}C}}
+            = \frac 1{2\pi\sqrt{\frac 1{\frac 1{\frac1 {4\pi^2 \nu_1^2 C}} + \frac 1{\frac1 {4\pi^2 \nu_2^2 C}}}C}}
+            = \frac 1{2\pi\sqrt{\frac 1{4\pi^2 \nu_1^2 C + 4\pi^2 \nu_2^2 C}C}} = \\
+     &= \frac 1{\sqrt{\frac 1{\nu_1^2 + \nu_2^2}}}
+            = \sqrt{\nu_1^2 + \nu_2^2} = \sqrt{\sqr{80\,\text{Гц}} + \sqr{70\,\text{Гц}}} \approx 106{,}30\,\text{Гц}.
     \end{align*}
 }
 
@@ -1079,13 +1499,13 @@
     \end{itemize}
 }
 \answer{%
-    \begin{align*}
-    T &= 2\pi\sqrt{LC} \\
-    \nu &= \frac 1{2\pi\sqrt{LC}}, \\
-    \omega &= \frac 1{\sqrt{LC}}, \\
-    L &= \frac 1C \sqr{\frac T{2\pi}}, \\
-    C &= \frac 1L \sqr{\frac T{2\pi}}.
-    \end{align*}
+    $
+        T = 2\pi\sqrt{LC},
+        \nu = \frac 1{2\pi\sqrt{LC}},
+        \omega = \frac 1{\sqrt{LC}},
+        L = \frac 1C \sqr{\frac T{2\pi}},
+        C = \frac 1L \sqr{\frac T{2\pi}}.
+    $
 }
 \solutionspace{80pt}
 
@@ -1097,7 +1517,7 @@
 }
 \answer{%
     $
-        \eli_{\max} = q_{\max}\omega \implies \nu = \frac{\omega}{2\pi} = \frac{\eli_{\max}}{2\pi q} \approx 0{,}477\,\text{кГц}
+        \eli_{\max} = q_{\max}\omega \implies \nu = \frac{\omega}{2\pi} = \frac{\eli_{\max}}{2\pi q} \approx 477{,}5\,\text{Гц}.
     $
 }
 \solutionspace{80pt}
@@ -1116,10 +1536,10 @@
 }
 \answer{%
     \begin{align*}
-    \omega &= 15\units{c}^-1, \\
+    \omega &= 15\funits{рад}{c}, \\
     T &= \frac{2\pi}\omega \approx 418{,}9\,\text{мc}, \\
     C &= \frac 1{\omega^2 L} \approx 63{,}5\,\text{мФ}, \\
-    q &= \frac{\eli_{\max}}\omega  \approx 3{,}3\,\text{мКл}.
+    q_{\max} &= \frac{\eli_{\max}}\omega  \approx 3{,}3\,\text{мКл}.
     \end{align*}
 }
 \solutionspace{80pt}
@@ -1128,14 +1548,44 @@
 \task{%
     Электрический колебательный контур состоит
     из катушки индуктивностью $L$ и конденсатора ёмкостью $C$.
-    параллельно конденсатору подключают ещё один конденсатор емкостью $\frac12L$.
-    Как изменится период сводобных колебаний в контуре?
+    Параллельно конденсатору подключают ещё один конденсатор емкостью $\frac12C$.
+    Как изменится период свободных колебаний в контуре?
+}
+\answer{%
+    $
+        T = 2\pi\sqrt{LC}, \quad
+        T' = 2\pi\sqrt{L'C'}
+            = T \sqrt{\frac{L'}L \cdot \frac{C'}C}
+            = T \sqrt{ 1 \cdot \frac32 }
+        \implies \frac{T'}T = \sqrt{ 1 \cdot \frac32 } \approx 1{,}225.
+    $
+}
+\solutionspace{100pt}
+
+\tasknumber{5}%
+\task{%
+    В колебательном контуре частота собственных колебаний $60\,\text{Гц}$.
+    После замены катушки индуктивность на другую частота стала равной $90\,\text{Гц}$.
+    А какой станет частота собственных колебаний, если в контур установить
+    обе эти катушки параллельно?
 }
 \answer{%
     \begin{align*}
-    T &= 2\pi\sqrt{LC} \\
-    T' &= 2\pi\sqrt{L'C'}= T \sqrt{\frac{L'}L \cdot \frac{C'}C} = T \sqrt{ 1 \cdot \frac32 } \\
-    &\frac{T'}T = \sqrt{ 1 \cdot \frac32 } \approx 2{,}250
+    T &= 2\pi\sqrt{LC} \implies \nu = \frac 1T = \frac 1{2\pi\sqrt{LC}} \implies L = \frac1 {4\pi^2 \nu^2 C}, \\
+    L_1 &= \frac1 {4\pi^2 \nu_1^2 C}, L_2 = \frac1 {4\pi^2 \nu_1^2 C}, \\
+    \nu_\text{послед.}
+            &= \frac 1{2\pi\sqrt{(L_1 + L_2)C}}
+            = \frac 1{2\pi\sqrt{\cbr{\frac1 {4\pi^2 \nu_1^2 C} + \frac1 {4\pi^2 \nu_2^2 C}}C}}
+            = \frac 1{\sqrt{\cbr{\frac1 {\nu_1^2 C} + \frac1 {\nu_2^2 C}}C}} =  \\
+     &= \frac 1{\sqrt{\frac1 {\nu_1^2} + \frac1 {\nu_2^2}}}
+            = \frac 1{\sqrt{ \frac1 {\sqr{60\,\text{Гц}}} + \frac1 {\sqr{90\,\text{Гц}}}}}
+            \approx 49{,}92\,\text{Гц} \\
+    \nu_\text{паралл.}
+            &= \frac 1{2\pi\sqrt{\frac 1{\frac 1{L_1} + \frac 1{L_2}}C}}
+            = \frac 1{2\pi\sqrt{\frac 1{\frac 1{\frac1 {4\pi^2 \nu_1^2 C}} + \frac 1{\frac1 {4\pi^2 \nu_2^2 C}}}C}}
+            = \frac 1{2\pi\sqrt{\frac 1{4\pi^2 \nu_1^2 C + 4\pi^2 \nu_2^2 C}C}} = \\
+     &= \frac 1{\sqrt{\frac 1{\nu_1^2 + \nu_2^2}}}
+            = \sqrt{\nu_1^2 + \nu_2^2} = \sqrt{\sqr{60\,\text{Гц}} + \sqr{90\,\text{Гц}}} \approx 108{,}17\,\text{Гц}.
     \end{align*}
 }
 
@@ -1155,13 +1605,13 @@
     \end{itemize}
 }
 \answer{%
-    \begin{align*}
-    T &= 2\pi\sqrt{LC} \\
-    \nu &= \frac 1{2\pi\sqrt{LC}}, \\
-    \omega &= \frac 1{\sqrt{LC}}, \\
-    L &= \frac 1C \sqr{\frac T{2\pi}}, \\
-    C &= \frac 1L \sqr{\frac T{2\pi}}.
-    \end{align*}
+    $
+        T = 2\pi\sqrt{LC},
+        \nu = \frac 1{2\pi\sqrt{LC}},
+        \omega = \frac 1{\sqrt{LC}},
+        L = \frac 1C \sqr{\frac T{2\pi}},
+        C = \frac 1L \sqr{\frac T{2\pi}}.
+    $
 }
 \solutionspace{80pt}
 
@@ -1173,7 +1623,7 @@
 }
 \answer{%
     $
-        \eli_{\max} = q_{\max}\omega \implies \nu = \frac{\omega}{2\pi} = \frac{\eli_{\max}}{2\pi q} \approx 0{,}318\,\text{кГц}
+        \eli_{\max} = q_{\max}\omega \implies \nu = \frac{\omega}{2\pi} = \frac{\eli_{\max}}{2\pi q} \approx 318{,}3\,\text{Гц}.
     $
 }
 \solutionspace{80pt}
@@ -1192,10 +1642,10 @@
 }
 \answer{%
     \begin{align*}
-    \omega &= 12\units{c}^-1, \\
+    \omega &= 12\funits{рад}{c}, \\
     T &= \frac{2\pi}\omega \approx 523{,}6\,\text{мc}, \\
     C &= \frac 1{\omega^2 L} \approx 138{,}9\,\text{мФ}, \\
-    q &= \frac{\eli_{\max}}\omega  \approx 20{,}8\,\text{мКл}.
+    q_{\max} &= \frac{\eli_{\max}}\omega  \approx 20{,}8\,\text{мКл}.
     \end{align*}
 }
 \solutionspace{80pt}
@@ -1204,14 +1654,44 @@
 \task{%
     Электрический колебательный контур состоит
     из катушки индуктивностью $L$ и конденсатора ёмкостью $C$.
-    последовательно конденсатору подключают ещё один конденсатор емкостью $3L$.
-    Как изменится период сводобных колебаний в контуре?
+    Последовательно конденсатору подключают ещё один конденсатор емкостью $3C$.
+    Как изменится период свободных колебаний в контуре?
+}
+\answer{%
+    $
+        T = 2\pi\sqrt{LC}, \quad
+        T' = 2\pi\sqrt{L'C'}
+            = T \sqrt{\frac{L'}L \cdot \frac{C'}C}
+            = T \sqrt{ 1 \cdot \frac34 }
+        \implies \frac{T'}T = \sqrt{ 1 \cdot \frac34 } \approx 0{,}866.
+    $
+}
+\solutionspace{100pt}
+
+\tasknumber{5}%
+\task{%
+    В колебательном контуре частота собственных колебаний $60\,\text{Гц}$.
+    После замены катушки индуктивность на другую частота стала равной $30\,\text{Гц}$.
+    А какой станет частота собственных колебаний, если в контур установить
+    обе эти катушки параллельно?
 }
 \answer{%
     \begin{align*}
-    T &= 2\pi\sqrt{LC} \\
-    T' &= 2\pi\sqrt{L'C'}= T \sqrt{\frac{L'}L \cdot \frac{C'}C} = T \sqrt{ 1 \cdot \frac34 } \\
-    &\frac{T'}T = \sqrt{ 1 \cdot \frac34 } \approx 0{,}562
+    T &= 2\pi\sqrt{LC} \implies \nu = \frac 1T = \frac 1{2\pi\sqrt{LC}} \implies L = \frac1 {4\pi^2 \nu^2 C}, \\
+    L_1 &= \frac1 {4\pi^2 \nu_1^2 C}, L_2 = \frac1 {4\pi^2 \nu_1^2 C}, \\
+    \nu_\text{послед.}
+            &= \frac 1{2\pi\sqrt{(L_1 + L_2)C}}
+            = \frac 1{2\pi\sqrt{\cbr{\frac1 {4\pi^2 \nu_1^2 C} + \frac1 {4\pi^2 \nu_2^2 C}}C}}
+            = \frac 1{\sqrt{\cbr{\frac1 {\nu_1^2 C} + \frac1 {\nu_2^2 C}}C}} =  \\
+     &= \frac 1{\sqrt{\frac1 {\nu_1^2} + \frac1 {\nu_2^2}}}
+            = \frac 1{\sqrt{ \frac1 {\sqr{60\,\text{Гц}}} + \frac1 {\sqr{30\,\text{Гц}}}}}
+            \approx 26{,}83\,\text{Гц} \\
+    \nu_\text{паралл.}
+            &= \frac 1{2\pi\sqrt{\frac 1{\frac 1{L_1} + \frac 1{L_2}}C}}
+            = \frac 1{2\pi\sqrt{\frac 1{\frac 1{\frac1 {4\pi^2 \nu_1^2 C}} + \frac 1{\frac1 {4\pi^2 \nu_2^2 C}}}C}}
+            = \frac 1{2\pi\sqrt{\frac 1{4\pi^2 \nu_1^2 C + 4\pi^2 \nu_2^2 C}C}} = \\
+     &= \frac 1{\sqrt{\frac 1{\nu_1^2 + \nu_2^2}}}
+            = \sqrt{\nu_1^2 + \nu_2^2} = \sqrt{\sqr{60\,\text{Гц}} + \sqr{30\,\text{Гц}}} \approx 67{,}08\,\text{Гц}.
     \end{align*}
 }
 
@@ -1231,13 +1711,13 @@
     \end{itemize}
 }
 \answer{%
-    \begin{align*}
-    T &= 2\pi\sqrt{LC} \\
-    \nu &= \frac 1{2\pi\sqrt{LC}}, \\
-    \omega &= \frac 1{\sqrt{LC}}, \\
-    L &= \frac 1C \sqr{\frac T{2\pi}}, \\
-    C &= \frac 1L \sqr{\frac T{2\pi}}.
-    \end{align*}
+    $
+        T = 2\pi\sqrt{LC},
+        \nu = \frac 1{2\pi\sqrt{LC}},
+        \omega = \frac 1{\sqrt{LC}},
+        L = \frac 1C \sqr{\frac T{2\pi}},
+        C = \frac 1L \sqr{\frac T{2\pi}}.
+    $
 }
 \solutionspace{80pt}
 
@@ -1249,7 +1729,7 @@
 }
 \answer{%
     $
-        \eli_{\max} = q_{\max}\omega \implies \nu = \frac{\omega}{2\pi} = \frac{\eli_{\max}}{2\pi q} \approx 0{,}716\,\text{кГц}
+        \eli_{\max} = q_{\max}\omega \implies \nu = \frac{\omega}{2\pi} = \frac{\eli_{\max}}{2\pi q} \approx 716{,}2\,\text{Гц}.
     $
 }
 \solutionspace{80pt}
@@ -1268,10 +1748,10 @@
 }
 \answer{%
     \begin{align*}
-    \omega &= 18\units{c}^-1, \\
+    \omega &= 18\funits{рад}{c}, \\
     T &= \frac{2\pi}\omega \approx 349{,}1\,\text{мc}, \\
     C &= \frac 1{\omega^2 L} \approx 51{,}4\,\text{мФ}, \\
-    q &= \frac{\eli_{\max}}\omega  \approx 13{,}9\,\text{мКл}.
+    q_{\max} &= \frac{\eli_{\max}}\omega  \approx 13{,}9\,\text{мКл}.
     \end{align*}
 }
 \solutionspace{80pt}
@@ -1280,14 +1760,44 @@
 \task{%
     Электрический колебательный контур состоит
     из катушки индуктивностью $L$ и конденсатора ёмкостью $C$.
-    параллельно конденсатору подключают ещё один конденсатор емкостью $2L$.
-    Как изменится период сводобных колебаний в контуре?
+    Параллельно конденсатору подключают ещё один конденсатор емкостью $2C$.
+    Как изменится период свободных колебаний в контуре?
+}
+\answer{%
+    $
+        T = 2\pi\sqrt{LC}, \quad
+        T' = 2\pi\sqrt{L'C'}
+            = T \sqrt{\frac{L'}L \cdot \frac{C'}C}
+            = T \sqrt{ 1 \cdot 3 }
+        \implies \frac{T'}T = \sqrt{ 1 \cdot 3 } \approx 1{,}732.
+    $
+}
+\solutionspace{100pt}
+
+\tasknumber{5}%
+\task{%
+    В колебательном контуре частота собственных колебаний $40\,\text{Гц}$.
+    После замены катушки индуктивность на другую частота стала равной $90\,\text{Гц}$.
+    А какой станет частота собственных колебаний, если в контур установить
+    обе эти катушки последовательно?
 }
 \answer{%
     \begin{align*}
-    T &= 2\pi\sqrt{LC} \\
-    T' &= 2\pi\sqrt{L'C'}= T \sqrt{\frac{L'}L \cdot \frac{C'}C} = T \sqrt{ 1 \cdot 3 } \\
-    &\frac{T'}T = \sqrt{ 1 \cdot 3 } \approx 9{,}000
+    T &= 2\pi\sqrt{LC} \implies \nu = \frac 1T = \frac 1{2\pi\sqrt{LC}} \implies L = \frac1 {4\pi^2 \nu^2 C}, \\
+    L_1 &= \frac1 {4\pi^2 \nu_1^2 C}, L_2 = \frac1 {4\pi^2 \nu_1^2 C}, \\
+    \nu_\text{послед.}
+            &= \frac 1{2\pi\sqrt{(L_1 + L_2)C}}
+            = \frac 1{2\pi\sqrt{\cbr{\frac1 {4\pi^2 \nu_1^2 C} + \frac1 {4\pi^2 \nu_2^2 C}}C}}
+            = \frac 1{\sqrt{\cbr{\frac1 {\nu_1^2 C} + \frac1 {\nu_2^2 C}}C}} =  \\
+     &= \frac 1{\sqrt{\frac1 {\nu_1^2} + \frac1 {\nu_2^2}}}
+            = \frac 1{\sqrt{ \frac1 {\sqr{40\,\text{Гц}}} + \frac1 {\sqr{90\,\text{Гц}}}}}
+            \approx 36{,}55\,\text{Гц} \\
+    \nu_\text{паралл.}
+            &= \frac 1{2\pi\sqrt{\frac 1{\frac 1{L_1} + \frac 1{L_2}}C}}
+            = \frac 1{2\pi\sqrt{\frac 1{\frac 1{\frac1 {4\pi^2 \nu_1^2 C}} + \frac 1{\frac1 {4\pi^2 \nu_2^2 C}}}C}}
+            = \frac 1{2\pi\sqrt{\frac 1{4\pi^2 \nu_1^2 C + 4\pi^2 \nu_2^2 C}C}} = \\
+     &= \frac 1{\sqrt{\frac 1{\nu_1^2 + \nu_2^2}}}
+            = \sqrt{\nu_1^2 + \nu_2^2} = \sqrt{\sqr{40\,\text{Гц}} + \sqr{90\,\text{Гц}}} \approx 98{,}49\,\text{Гц}.
     \end{align*}
 }
 
@@ -1307,13 +1817,13 @@
     \end{itemize}
 }
 \answer{%
-    \begin{align*}
-    T &= 2\pi\sqrt{LC} \\
-    \nu &= \frac 1{2\pi\sqrt{LC}}, \\
-    \omega &= \frac 1{\sqrt{LC}}, \\
-    L &= \frac 1C \sqr{\frac T{2\pi}}, \\
-    C &= \frac 1L \sqr{\frac T{2\pi}}.
-    \end{align*}
+    $
+        T = 2\pi\sqrt{LC},
+        \nu = \frac 1{2\pi\sqrt{LC}},
+        \omega = \frac 1{\sqrt{LC}},
+        L = \frac 1C \sqr{\frac T{2\pi}},
+        C = \frac 1L \sqr{\frac T{2\pi}}.
+    $
 }
 \solutionspace{80pt}
 
@@ -1325,7 +1835,7 @@
 }
 \answer{%
     $
-        \eli_{\max} = q_{\max}\omega \implies \nu = \frac{\omega}{2\pi} = \frac{\eli_{\max}}{2\pi q} \approx 0{,}477\,\text{кГц}
+        \eli_{\max} = q_{\max}\omega \implies \nu = \frac{\omega}{2\pi} = \frac{\eli_{\max}}{2\pi q} \approx 477{,}5\,\text{Гц}.
     $
 }
 \solutionspace{80pt}
@@ -1344,10 +1854,10 @@
 }
 \answer{%
     \begin{align*}
-    \omega &= 15\units{c}^-1, \\
+    \omega &= 15\funits{рад}{c}, \\
     T &= \frac{2\pi}\omega \approx 418{,}9\,\text{мc}, \\
     C &= \frac 1{\omega^2 L} \approx 55{,}6\,\text{мФ}, \\
-    q &= \frac{\eli_{\max}}\omega  \approx 16{,}7\,\text{мКл}.
+    q_{\max} &= \frac{\eli_{\max}}\omega  \approx 16{,}7\,\text{мКл}.
     \end{align*}
 }
 \solutionspace{80pt}
@@ -1356,14 +1866,44 @@
 \task{%
     Электрический колебательный контур состоит
     из катушки индуктивностью $L$ и конденсатора ёмкостью $C$.
-    последовательно катушке подключают ещё одну катушку индуктивностью $\frac13L$.
-    Как изменится период сводобных колебаний в контуре?
+    Последовательно катушке подключают ещё одну катушку индуктивностью $\frac13L$.
+    Как изменится период свободных колебаний в контуре?
+}
+\answer{%
+    $
+        T = 2\pi\sqrt{LC}, \quad
+        T' = 2\pi\sqrt{L'C'}
+            = T \sqrt{\frac{L'}L \cdot \frac{C'}C}
+            = T \sqrt{ \frac43 \cdot 1 }
+        \implies \frac{T'}T = \sqrt{ \frac43 \cdot 1 } \approx 1{,}155.
+    $
+}
+\solutionspace{100pt}
+
+\tasknumber{5}%
+\task{%
+    В колебательном контуре частота собственных колебаний $40\,\text{Гц}$.
+    После замены катушки индуктивность на другую частота стала равной $90\,\text{Гц}$.
+    А какой станет частота собственных колебаний, если в контур установить
+    обе эти катушки параллельно?
 }
 \answer{%
     \begin{align*}
-    T &= 2\pi\sqrt{LC} \\
-    T' &= 2\pi\sqrt{L'C'}= T \sqrt{\frac{L'}L \cdot \frac{C'}C} = T \sqrt{ \frac43 \cdot 1 } \\
-    &\frac{T'}T = \sqrt{ \frac43 \cdot 1 } \approx 1{,}778
+    T &= 2\pi\sqrt{LC} \implies \nu = \frac 1T = \frac 1{2\pi\sqrt{LC}} \implies L = \frac1 {4\pi^2 \nu^2 C}, \\
+    L_1 &= \frac1 {4\pi^2 \nu_1^2 C}, L_2 = \frac1 {4\pi^2 \nu_1^2 C}, \\
+    \nu_\text{послед.}
+            &= \frac 1{2\pi\sqrt{(L_1 + L_2)C}}
+            = \frac 1{2\pi\sqrt{\cbr{\frac1 {4\pi^2 \nu_1^2 C} + \frac1 {4\pi^2 \nu_2^2 C}}C}}
+            = \frac 1{\sqrt{\cbr{\frac1 {\nu_1^2 C} + \frac1 {\nu_2^2 C}}C}} =  \\
+     &= \frac 1{\sqrt{\frac1 {\nu_1^2} + \frac1 {\nu_2^2}}}
+            = \frac 1{\sqrt{ \frac1 {\sqr{40\,\text{Гц}}} + \frac1 {\sqr{90\,\text{Гц}}}}}
+            \approx 36{,}55\,\text{Гц} \\
+    \nu_\text{паралл.}
+            &= \frac 1{2\pi\sqrt{\frac 1{\frac 1{L_1} + \frac 1{L_2}}C}}
+            = \frac 1{2\pi\sqrt{\frac 1{\frac 1{\frac1 {4\pi^2 \nu_1^2 C}} + \frac 1{\frac1 {4\pi^2 \nu_2^2 C}}}C}}
+            = \frac 1{2\pi\sqrt{\frac 1{4\pi^2 \nu_1^2 C + 4\pi^2 \nu_2^2 C}C}} = \\
+     &= \frac 1{\sqrt{\frac 1{\nu_1^2 + \nu_2^2}}}
+            = \sqrt{\nu_1^2 + \nu_2^2} = \sqrt{\sqr{40\,\text{Гц}} + \sqr{90\,\text{Гц}}} \approx 98{,}49\,\text{Гц}.
     \end{align*}
 }
 
@@ -1383,13 +1923,13 @@
     \end{itemize}
 }
 \answer{%
-    \begin{align*}
-    T &= 2\pi\sqrt{LC} \\
-    \nu &= \frac 1{2\pi\sqrt{LC}}, \\
-    \omega &= \frac 1{\sqrt{LC}}, \\
-    L &= \frac 1C \sqr{\frac T{2\pi}}, \\
-    C &= \frac 1L \sqr{\frac T{2\pi}}.
-    \end{align*}
+    $
+        T = 2\pi\sqrt{LC},
+        \nu = \frac 1{2\pi\sqrt{LC}},
+        \omega = \frac 1{\sqrt{LC}},
+        L = \frac 1C \sqr{\frac T{2\pi}},
+        C = \frac 1L \sqr{\frac T{2\pi}}.
+    $
 }
 \solutionspace{80pt}
 
@@ -1401,7 +1941,7 @@
 }
 \answer{%
     $
-        \eli_{\max} = q_{\max}\omega \implies \nu = \frac{\omega}{2\pi} = \frac{\eli_{\max}}{2\pi q} \approx 0{,}239\,\text{кГц}
+        \eli_{\max} = q_{\max}\omega \implies \nu = \frac{\omega}{2\pi} = \frac{\eli_{\max}}{2\pi q} \approx 238{,}7\,\text{Гц}.
     $
 }
 \solutionspace{80pt}
@@ -1420,10 +1960,10 @@
 }
 \answer{%
     \begin{align*}
-    \omega &= 12\units{c}^-1, \\
+    \omega &= 12\funits{рад}{c}, \\
     T &= \frac{2\pi}\omega \approx 523{,}6\,\text{мc}, \\
     C &= \frac 1{\omega^2 L} \approx 138{,}9\,\text{мФ}, \\
-    q &= \frac{\eli_{\max}}\omega  \approx 4{,}2\,\text{мКл}.
+    q_{\max} &= \frac{\eli_{\max}}\omega  \approx 4{,}2\,\text{мКл}.
     \end{align*}
 }
 \solutionspace{80pt}
@@ -1432,14 +1972,44 @@
 \task{%
     Электрический колебательный контур состоит
     из катушки индуктивностью $L$ и конденсатора ёмкостью $C$.
-    параллельно конденсатору подключают ещё один конденсатор емкостью $\frac12L$.
-    Как изменится период сводобных колебаний в контуре?
+    Параллельно конденсатору подключают ещё один конденсатор емкостью $\frac12C$.
+    Как изменится период свободных колебаний в контуре?
+}
+\answer{%
+    $
+        T = 2\pi\sqrt{LC}, \quad
+        T' = 2\pi\sqrt{L'C'}
+            = T \sqrt{\frac{L'}L \cdot \frac{C'}C}
+            = T \sqrt{ 1 \cdot \frac32 }
+        \implies \frac{T'}T = \sqrt{ 1 \cdot \frac32 } \approx 1{,}225.
+    $
+}
+\solutionspace{100pt}
+
+\tasknumber{5}%
+\task{%
+    В колебательном контуре частота собственных колебаний $60\,\text{Гц}$.
+    После замены катушки индуктивность на другую частота стала равной $90\,\text{Гц}$.
+    А какой станет частота собственных колебаний, если в контур установить
+    обе эти катушки последовательно?
 }
 \answer{%
     \begin{align*}
-    T &= 2\pi\sqrt{LC} \\
-    T' &= 2\pi\sqrt{L'C'}= T \sqrt{\frac{L'}L \cdot \frac{C'}C} = T \sqrt{ 1 \cdot \frac32 } \\
-    &\frac{T'}T = \sqrt{ 1 \cdot \frac32 } \approx 2{,}250
+    T &= 2\pi\sqrt{LC} \implies \nu = \frac 1T = \frac 1{2\pi\sqrt{LC}} \implies L = \frac1 {4\pi^2 \nu^2 C}, \\
+    L_1 &= \frac1 {4\pi^2 \nu_1^2 C}, L_2 = \frac1 {4\pi^2 \nu_1^2 C}, \\
+    \nu_\text{послед.}
+            &= \frac 1{2\pi\sqrt{(L_1 + L_2)C}}
+            = \frac 1{2\pi\sqrt{\cbr{\frac1 {4\pi^2 \nu_1^2 C} + \frac1 {4\pi^2 \nu_2^2 C}}C}}
+            = \frac 1{\sqrt{\cbr{\frac1 {\nu_1^2 C} + \frac1 {\nu_2^2 C}}C}} =  \\
+     &= \frac 1{\sqrt{\frac1 {\nu_1^2} + \frac1 {\nu_2^2}}}
+            = \frac 1{\sqrt{ \frac1 {\sqr{60\,\text{Гц}}} + \frac1 {\sqr{90\,\text{Гц}}}}}
+            \approx 49{,}92\,\text{Гц} \\
+    \nu_\text{паралл.}
+            &= \frac 1{2\pi\sqrt{\frac 1{\frac 1{L_1} + \frac 1{L_2}}C}}
+            = \frac 1{2\pi\sqrt{\frac 1{\frac 1{\frac1 {4\pi^2 \nu_1^2 C}} + \frac 1{\frac1 {4\pi^2 \nu_2^2 C}}}C}}
+            = \frac 1{2\pi\sqrt{\frac 1{4\pi^2 \nu_1^2 C + 4\pi^2 \nu_2^2 C}C}} = \\
+     &= \frac 1{\sqrt{\frac 1{\nu_1^2 + \nu_2^2}}}
+            = \sqrt{\nu_1^2 + \nu_2^2} = \sqrt{\sqr{60\,\text{Гц}} + \sqr{90\,\text{Гц}}} \approx 108{,}17\,\text{Гц}.
     \end{align*}
 }
 
@@ -1459,13 +2029,13 @@
     \end{itemize}
 }
 \answer{%
-    \begin{align*}
-    T &= 2\pi\sqrt{LC} \\
-    \nu &= \frac 1{2\pi\sqrt{LC}}, \\
-    \omega &= \frac 1{\sqrt{LC}}, \\
-    L &= \frac 1C \sqr{\frac T{2\pi}}, \\
-    C &= \frac 1L \sqr{\frac T{2\pi}}.
-    \end{align*}
+    $
+        T = 2\pi\sqrt{LC},
+        \nu = \frac 1{2\pi\sqrt{LC}},
+        \omega = \frac 1{\sqrt{LC}},
+        L = \frac 1C \sqr{\frac T{2\pi}},
+        C = \frac 1L \sqr{\frac T{2\pi}}.
+    $
 }
 \solutionspace{80pt}
 
@@ -1477,7 +2047,7 @@
 }
 \answer{%
     $
-        \eli_{\max} = q_{\max}\omega \implies \nu = \frac{\omega}{2\pi} = \frac{\eli_{\max}}{2\pi q} \approx 0{,}298\,\text{кГц}
+        \eli_{\max} = q_{\max}\omega \implies \nu = \frac{\omega}{2\pi} = \frac{\eli_{\max}}{2\pi q} \approx 298{,}4\,\text{Гц}.
     $
 }
 \solutionspace{80pt}
@@ -1496,10 +2066,10 @@
 }
 \answer{%
     \begin{align*}
-    \omega &= 18\units{c}^-1, \\
+    \omega &= 18\funits{рад}{c}, \\
     T &= \frac{2\pi}\omega \approx 349{,}1\,\text{мc}, \\
     C &= \frac 1{\omega^2 L} \approx 44{,}1\,\text{мФ}, \\
-    q &= \frac{\eli_{\max}}\omega  \approx 13{,}9\,\text{мКл}.
+    q_{\max} &= \frac{\eli_{\max}}\omega  \approx 13{,}9\,\text{мКл}.
     \end{align*}
 }
 \solutionspace{80pt}
@@ -1508,14 +2078,44 @@
 \task{%
     Электрический колебательный контур состоит
     из катушки индуктивностью $L$ и конденсатора ёмкостью $C$.
-    параллельно катушке подключают ещё одну катушку индуктивностью $3L$.
-    Как изменится период сводобных колебаний в контуре?
+    Параллельно катушке подключают ещё одну катушку индуктивностью $3L$.
+    Как изменится период свободных колебаний в контуре?
+}
+\answer{%
+    $
+        T = 2\pi\sqrt{LC}, \quad
+        T' = 2\pi\sqrt{L'C'}
+            = T \sqrt{\frac{L'}L \cdot \frac{C'}C}
+            = T \sqrt{ \frac34 \cdot 1 }
+        \implies \frac{T'}T = \sqrt{ \frac34 \cdot 1 } \approx 0{,}866.
+    $
+}
+\solutionspace{100pt}
+
+\tasknumber{5}%
+\task{%
+    В колебательном контуре частота собственных колебаний $40\,\text{Гц}$.
+    После замены катушки индуктивность на другую частота стала равной $90\,\text{Гц}$.
+    А какой станет частота собственных колебаний, если в контур установить
+    обе эти катушки параллельно?
 }
 \answer{%
     \begin{align*}
-    T &= 2\pi\sqrt{LC} \\
-    T' &= 2\pi\sqrt{L'C'}= T \sqrt{\frac{L'}L \cdot \frac{C'}C} = T \sqrt{ \frac34 \cdot 1 } \\
-    &\frac{T'}T = \sqrt{ \frac34 \cdot 1 } \approx 0{,}562
+    T &= 2\pi\sqrt{LC} \implies \nu = \frac 1T = \frac 1{2\pi\sqrt{LC}} \implies L = \frac1 {4\pi^2 \nu^2 C}, \\
+    L_1 &= \frac1 {4\pi^2 \nu_1^2 C}, L_2 = \frac1 {4\pi^2 \nu_1^2 C}, \\
+    \nu_\text{послед.}
+            &= \frac 1{2\pi\sqrt{(L_1 + L_2)C}}
+            = \frac 1{2\pi\sqrt{\cbr{\frac1 {4\pi^2 \nu_1^2 C} + \frac1 {4\pi^2 \nu_2^2 C}}C}}
+            = \frac 1{\sqrt{\cbr{\frac1 {\nu_1^2 C} + \frac1 {\nu_2^2 C}}C}} =  \\
+     &= \frac 1{\sqrt{\frac1 {\nu_1^2} + \frac1 {\nu_2^2}}}
+            = \frac 1{\sqrt{ \frac1 {\sqr{40\,\text{Гц}}} + \frac1 {\sqr{90\,\text{Гц}}}}}
+            \approx 36{,}55\,\text{Гц} \\
+    \nu_\text{паралл.}
+            &= \frac 1{2\pi\sqrt{\frac 1{\frac 1{L_1} + \frac 1{L_2}}C}}
+            = \frac 1{2\pi\sqrt{\frac 1{\frac 1{\frac1 {4\pi^2 \nu_1^2 C}} + \frac 1{\frac1 {4\pi^2 \nu_2^2 C}}}C}}
+            = \frac 1{2\pi\sqrt{\frac 1{4\pi^2 \nu_1^2 C + 4\pi^2 \nu_2^2 C}C}} = \\
+     &= \frac 1{\sqrt{\frac 1{\nu_1^2 + \nu_2^2}}}
+            = \sqrt{\nu_1^2 + \nu_2^2} = \sqrt{\sqr{40\,\text{Гц}} + \sqr{90\,\text{Гц}}} \approx 98{,}49\,\text{Гц}.
     \end{align*}
 }
 
@@ -1535,13 +2135,13 @@
     \end{itemize}
 }
 \answer{%
-    \begin{align*}
-    T &= 2\pi\sqrt{LC} \\
-    \nu &= \frac 1{2\pi\sqrt{LC}}, \\
-    \omega &= \frac 1{\sqrt{LC}}, \\
-    L &= \frac 1C \sqr{\frac T{2\pi}}, \\
-    C &= \frac 1L \sqr{\frac T{2\pi}}.
-    \end{align*}
+    $
+        T = 2\pi\sqrt{LC},
+        \nu = \frac 1{2\pi\sqrt{LC}},
+        \omega = \frac 1{\sqrt{LC}},
+        L = \frac 1C \sqr{\frac T{2\pi}},
+        C = \frac 1L \sqr{\frac T{2\pi}}.
+    $
 }
 \solutionspace{80pt}
 
@@ -1553,7 +2153,7 @@
 }
 \answer{%
     $
-        \eli_{\max} = q_{\max}\omega \implies \nu = \frac{\omega}{2\pi} = \frac{\eli_{\max}}{2\pi q} \approx 0{,}398\,\text{кГц}
+        \eli_{\max} = q_{\max}\omega \implies \nu = \frac{\omega}{2\pi} = \frac{\eli_{\max}}{2\pi q} \approx 397{,}9\,\text{Гц}.
     $
 }
 \solutionspace{80pt}
@@ -1572,10 +2172,10 @@
 }
 \answer{%
     \begin{align*}
-    \omega &= 18\units{c}^-1, \\
+    \omega &= 18\funits{рад}{c}, \\
     T &= \frac{2\pi}\omega \approx 349{,}1\,\text{мc}, \\
     C &= \frac 1{\omega^2 L} \approx 44{,}1\,\text{мФ}, \\
-    q &= \frac{\eli_{\max}}\omega  \approx 13{,}9\,\text{мКл}.
+    q_{\max} &= \frac{\eli_{\max}}\omega  \approx 13{,}9\,\text{мКл}.
     \end{align*}
 }
 \solutionspace{80pt}
@@ -1584,14 +2184,44 @@
 \task{%
     Электрический колебательный контур состоит
     из катушки индуктивностью $L$ и конденсатора ёмкостью $C$.
-    последовательно катушке подключают ещё одну катушку индуктивностью $2L$.
-    Как изменится период сводобных колебаний в контуре?
+    Последовательно катушке подключают ещё одну катушку индуктивностью $2L$.
+    Как изменится период свободных колебаний в контуре?
+}
+\answer{%
+    $
+        T = 2\pi\sqrt{LC}, \quad
+        T' = 2\pi\sqrt{L'C'}
+            = T \sqrt{\frac{L'}L \cdot \frac{C'}C}
+            = T \sqrt{ 3 \cdot 1 }
+        \implies \frac{T'}T = \sqrt{ 3 \cdot 1 } \approx 1{,}732.
+    $
+}
+\solutionspace{100pt}
+
+\tasknumber{5}%
+\task{%
+    В колебательном контуре частота собственных колебаний $40\,\text{Гц}$.
+    После замены катушки индуктивность на другую частота стала равной $90\,\text{Гц}$.
+    А какой станет частота собственных колебаний, если в контур установить
+    обе эти катушки последовательно?
 }
 \answer{%
     \begin{align*}
-    T &= 2\pi\sqrt{LC} \\
-    T' &= 2\pi\sqrt{L'C'}= T \sqrt{\frac{L'}L \cdot \frac{C'}C} = T \sqrt{ 3 \cdot 1 } \\
-    &\frac{T'}T = \sqrt{ 3 \cdot 1 } \approx 9{,}000
+    T &= 2\pi\sqrt{LC} \implies \nu = \frac 1T = \frac 1{2\pi\sqrt{LC}} \implies L = \frac1 {4\pi^2 \nu^2 C}, \\
+    L_1 &= \frac1 {4\pi^2 \nu_1^2 C}, L_2 = \frac1 {4\pi^2 \nu_1^2 C}, \\
+    \nu_\text{послед.}
+            &= \frac 1{2\pi\sqrt{(L_1 + L_2)C}}
+            = \frac 1{2\pi\sqrt{\cbr{\frac1 {4\pi^2 \nu_1^2 C} + \frac1 {4\pi^2 \nu_2^2 C}}C}}
+            = \frac 1{\sqrt{\cbr{\frac1 {\nu_1^2 C} + \frac1 {\nu_2^2 C}}C}} =  \\
+     &= \frac 1{\sqrt{\frac1 {\nu_1^2} + \frac1 {\nu_2^2}}}
+            = \frac 1{\sqrt{ \frac1 {\sqr{40\,\text{Гц}}} + \frac1 {\sqr{90\,\text{Гц}}}}}
+            \approx 36{,}55\,\text{Гц} \\
+    \nu_\text{паралл.}
+            &= \frac 1{2\pi\sqrt{\frac 1{\frac 1{L_1} + \frac 1{L_2}}C}}
+            = \frac 1{2\pi\sqrt{\frac 1{\frac 1{\frac1 {4\pi^2 \nu_1^2 C}} + \frac 1{\frac1 {4\pi^2 \nu_2^2 C}}}C}}
+            = \frac 1{2\pi\sqrt{\frac 1{4\pi^2 \nu_1^2 C + 4\pi^2 \nu_2^2 C}C}} = \\
+     &= \frac 1{\sqrt{\frac 1{\nu_1^2 + \nu_2^2}}}
+            = \sqrt{\nu_1^2 + \nu_2^2} = \sqrt{\sqr{40\,\text{Гц}} + \sqr{90\,\text{Гц}}} \approx 98{,}49\,\text{Гц}.
     \end{align*}
 }
 
@@ -1611,13 +2241,13 @@
     \end{itemize}
 }
 \answer{%
-    \begin{align*}
-    T &= 2\pi\sqrt{LC} \\
-    \nu &= \frac 1{2\pi\sqrt{LC}}, \\
-    \omega &= \frac 1{\sqrt{LC}}, \\
-    L &= \frac 1C \sqr{\frac T{2\pi}}, \\
-    C &= \frac 1L \sqr{\frac T{2\pi}}.
-    \end{align*}
+    $
+        T = 2\pi\sqrt{LC},
+        \nu = \frac 1{2\pi\sqrt{LC}},
+        \omega = \frac 1{\sqrt{LC}},
+        L = \frac 1C \sqr{\frac T{2\pi}},
+        C = \frac 1L \sqr{\frac T{2\pi}}.
+    $
 }
 \solutionspace{80pt}
 
@@ -1629,7 +2259,7 @@
 }
 \answer{%
     $
-        \eli_{\max} = q_{\max}\omega \implies \nu = \frac{\omega}{2\pi} = \frac{\eli_{\max}}{2\pi q} \approx 0{,}358\,\text{кГц}
+        \eli_{\max} = q_{\max}\omega \implies \nu = \frac{\omega}{2\pi} = \frac{\eli_{\max}}{2\pi q} \approx 358{,}1\,\text{Гц}.
     $
 }
 \solutionspace{80pt}
@@ -1648,10 +2278,10 @@
 }
 \answer{%
     \begin{align*}
-    \omega &= 18\units{c}^-1, \\
+    \omega &= 18\funits{рад}{c}, \\
     T &= \frac{2\pi}\omega \approx 349{,}1\,\text{мc}, \\
     C &= \frac 1{\omega^2 L} \approx 38{,}6\,\text{мФ}, \\
-    q &= \frac{\eli_{\max}}\omega  \approx 2{,}8\,\text{мКл}.
+    q_{\max} &= \frac{\eli_{\max}}\omega  \approx 2{,}8\,\text{мКл}.
     \end{align*}
 }
 \solutionspace{80pt}
@@ -1660,14 +2290,44 @@
 \task{%
     Электрический колебательный контур состоит
     из катушки индуктивностью $L$ и конденсатора ёмкостью $C$.
-    параллельно конденсатору подключают ещё один конденсатор емкостью $\frac12L$.
-    Как изменится период сводобных колебаний в контуре?
+    Параллельно конденсатору подключают ещё один конденсатор емкостью $\frac12C$.
+    Как изменится период свободных колебаний в контуре?
+}
+\answer{%
+    $
+        T = 2\pi\sqrt{LC}, \quad
+        T' = 2\pi\sqrt{L'C'}
+            = T \sqrt{\frac{L'}L \cdot \frac{C'}C}
+            = T \sqrt{ 1 \cdot \frac32 }
+        \implies \frac{T'}T = \sqrt{ 1 \cdot \frac32 } \approx 1{,}225.
+    $
+}
+\solutionspace{100pt}
+
+\tasknumber{5}%
+\task{%
+    В колебательном контуре частота собственных колебаний $40\,\text{Гц}$.
+    После замены катушки индуктивность на другую частота стала равной $50\,\text{Гц}$.
+    А какой станет частота собственных колебаний, если в контур установить
+    обе эти катушки параллельно?
 }
 \answer{%
     \begin{align*}
-    T &= 2\pi\sqrt{LC} \\
-    T' &= 2\pi\sqrt{L'C'}= T \sqrt{\frac{L'}L \cdot \frac{C'}C} = T \sqrt{ 1 \cdot \frac32 } \\
-    &\frac{T'}T = \sqrt{ 1 \cdot \frac32 } \approx 2{,}250
+    T &= 2\pi\sqrt{LC} \implies \nu = \frac 1T = \frac 1{2\pi\sqrt{LC}} \implies L = \frac1 {4\pi^2 \nu^2 C}, \\
+    L_1 &= \frac1 {4\pi^2 \nu_1^2 C}, L_2 = \frac1 {4\pi^2 \nu_1^2 C}, \\
+    \nu_\text{послед.}
+            &= \frac 1{2\pi\sqrt{(L_1 + L_2)C}}
+            = \frac 1{2\pi\sqrt{\cbr{\frac1 {4\pi^2 \nu_1^2 C} + \frac1 {4\pi^2 \nu_2^2 C}}C}}
+            = \frac 1{\sqrt{\cbr{\frac1 {\nu_1^2 C} + \frac1 {\nu_2^2 C}}C}} =  \\
+     &= \frac 1{\sqrt{\frac1 {\nu_1^2} + \frac1 {\nu_2^2}}}
+            = \frac 1{\sqrt{ \frac1 {\sqr{40\,\text{Гц}}} + \frac1 {\sqr{50\,\text{Гц}}}}}
+            \approx 31{,}23\,\text{Гц} \\
+    \nu_\text{паралл.}
+            &= \frac 1{2\pi\sqrt{\frac 1{\frac 1{L_1} + \frac 1{L_2}}C}}
+            = \frac 1{2\pi\sqrt{\frac 1{\frac 1{\frac1 {4\pi^2 \nu_1^2 C}} + \frac 1{\frac1 {4\pi^2 \nu_2^2 C}}}C}}
+            = \frac 1{2\pi\sqrt{\frac 1{4\pi^2 \nu_1^2 C + 4\pi^2 \nu_2^2 C}C}} = \\
+     &= \frac 1{\sqrt{\frac 1{\nu_1^2 + \nu_2^2}}}
+            = \sqrt{\nu_1^2 + \nu_2^2} = \sqrt{\sqr{40\,\text{Гц}} + \sqr{50\,\text{Гц}}} \approx 64{,}03\,\text{Гц}.
     \end{align*}
 }
 
@@ -1687,13 +2347,13 @@
     \end{itemize}
 }
 \answer{%
-    \begin{align*}
-    T &= 2\pi\sqrt{LC} \\
-    \nu &= \frac 1{2\pi\sqrt{LC}}, \\
-    \omega &= \frac 1{\sqrt{LC}}, \\
-    L &= \frac 1C \sqr{\frac T{2\pi}}, \\
-    C &= \frac 1L \sqr{\frac T{2\pi}}.
-    \end{align*}
+    $
+        T = 2\pi\sqrt{LC},
+        \nu = \frac 1{2\pi\sqrt{LC}},
+        \omega = \frac 1{\sqrt{LC}},
+        L = \frac 1C \sqr{\frac T{2\pi}},
+        C = \frac 1L \sqr{\frac T{2\pi}}.
+    $
 }
 \solutionspace{80pt}
 
@@ -1705,7 +2365,7 @@
 }
 \answer{%
     $
-        \eli_{\max} = q_{\max}\omega \implies \nu = \frac{\omega}{2\pi} = \frac{\eli_{\max}}{2\pi q} \approx 0{,}716\,\text{кГц}
+        \eli_{\max} = q_{\max}\omega \implies \nu = \frac{\omega}{2\pi} = \frac{\eli_{\max}}{2\pi q} \approx 716{,}2\,\text{Гц}.
     $
 }
 \solutionspace{80pt}
@@ -1724,10 +2384,10 @@
 }
 \answer{%
     \begin{align*}
-    \omega &= 18\units{c}^-1, \\
+    \omega &= 18\funits{рад}{c}, \\
     T &= \frac{2\pi}\omega \approx 349{,}1\,\text{мc}, \\
     C &= \frac 1{\omega^2 L} \approx 51{,}4\,\text{мФ}, \\
-    q &= \frac{\eli_{\max}}\omega  \approx 13{,}9\,\text{мКл}.
+    q_{\max} &= \frac{\eli_{\max}}\omega  \approx 13{,}9\,\text{мКл}.
     \end{align*}
 }
 \solutionspace{80pt}
@@ -1736,14 +2396,44 @@
 \task{%
     Электрический колебательный контур состоит
     из катушки индуктивностью $L$ и конденсатора ёмкостью $C$.
-    последовательно конденсатору подключают ещё один конденсатор емкостью $\frac12L$.
-    Как изменится период сводобных колебаний в контуре?
+    Последовательно конденсатору подключают ещё один конденсатор емкостью $\frac12C$.
+    Как изменится период свободных колебаний в контуре?
+}
+\answer{%
+    $
+        T = 2\pi\sqrt{LC}, \quad
+        T' = 2\pi\sqrt{L'C'}
+            = T \sqrt{\frac{L'}L \cdot \frac{C'}C}
+            = T \sqrt{ 1 \cdot \frac13 }
+        \implies \frac{T'}T = \sqrt{ 1 \cdot \frac13 } \approx 0{,}577.
+    $
+}
+\solutionspace{100pt}
+
+\tasknumber{5}%
+\task{%
+    В колебательном контуре частота собственных колебаний $40\,\text{Гц}$.
+    После замены катушки индуктивность на другую частота стала равной $30\,\text{Гц}$.
+    А какой станет частота собственных колебаний, если в контур установить
+    обе эти катушки последовательно?
 }
 \answer{%
     \begin{align*}
-    T &= 2\pi\sqrt{LC} \\
-    T' &= 2\pi\sqrt{L'C'}= T \sqrt{\frac{L'}L \cdot \frac{C'}C} = T \sqrt{ 1 \cdot \frac13 } \\
-    &\frac{T'}T = \sqrt{ 1 \cdot \frac13 } \approx 0{,}111
+    T &= 2\pi\sqrt{LC} \implies \nu = \frac 1T = \frac 1{2\pi\sqrt{LC}} \implies L = \frac1 {4\pi^2 \nu^2 C}, \\
+    L_1 &= \frac1 {4\pi^2 \nu_1^2 C}, L_2 = \frac1 {4\pi^2 \nu_1^2 C}, \\
+    \nu_\text{послед.}
+            &= \frac 1{2\pi\sqrt{(L_1 + L_2)C}}
+            = \frac 1{2\pi\sqrt{\cbr{\frac1 {4\pi^2 \nu_1^2 C} + \frac1 {4\pi^2 \nu_2^2 C}}C}}
+            = \frac 1{\sqrt{\cbr{\frac1 {\nu_1^2 C} + \frac1 {\nu_2^2 C}}C}} =  \\
+     &= \frac 1{\sqrt{\frac1 {\nu_1^2} + \frac1 {\nu_2^2}}}
+            = \frac 1{\sqrt{ \frac1 {\sqr{40\,\text{Гц}}} + \frac1 {\sqr{30\,\text{Гц}}}}}
+            \approx 24{,}00\,\text{Гц} \\
+    \nu_\text{паралл.}
+            &= \frac 1{2\pi\sqrt{\frac 1{\frac 1{L_1} + \frac 1{L_2}}C}}
+            = \frac 1{2\pi\sqrt{\frac 1{\frac 1{\frac1 {4\pi^2 \nu_1^2 C}} + \frac 1{\frac1 {4\pi^2 \nu_2^2 C}}}C}}
+            = \frac 1{2\pi\sqrt{\frac 1{4\pi^2 \nu_1^2 C + 4\pi^2 \nu_2^2 C}C}} = \\
+     &= \frac 1{\sqrt{\frac 1{\nu_1^2 + \nu_2^2}}}
+            = \sqrt{\nu_1^2 + \nu_2^2} = \sqrt{\sqr{40\,\text{Гц}} + \sqr{30\,\text{Гц}}} \approx 50{,}00\,\text{Гц}.
     \end{align*}
 }
 
@@ -1763,13 +2453,13 @@
     \end{itemize}
 }
 \answer{%
-    \begin{align*}
-    T &= 2\pi\sqrt{LC} \\
-    \nu &= \frac 1{2\pi\sqrt{LC}}, \\
-    \omega &= \frac 1{\sqrt{LC}}, \\
-    L &= \frac 1C \sqr{\frac T{2\pi}}, \\
-    C &= \frac 1L \sqr{\frac T{2\pi}}.
-    \end{align*}
+    $
+        T = 2\pi\sqrt{LC},
+        \nu = \frac 1{2\pi\sqrt{LC}},
+        \omega = \frac 1{\sqrt{LC}},
+        L = \frac 1C \sqr{\frac T{2\pi}},
+        C = \frac 1L \sqr{\frac T{2\pi}}.
+    $
 }
 \solutionspace{80pt}
 
@@ -1781,7 +2471,7 @@
 }
 \answer{%
     $
-        \eli_{\max} = q_{\max}\omega \implies \nu = \frac{\omega}{2\pi} = \frac{\eli_{\max}}{2\pi q} \approx 1{,}074\,\text{кГц}
+        \eli_{\max} = q_{\max}\omega \implies \nu = \frac{\omega}{2\pi} = \frac{\eli_{\max}}{2\pi q} \approx 1074{,}3\,\text{Гц}.
     $
 }
 \solutionspace{80pt}
@@ -1800,10 +2490,10 @@
 }
 \answer{%
     \begin{align*}
-    \omega &= 18\units{c}^-1, \\
+    \omega &= 18\funits{рад}{c}, \\
     T &= \frac{2\pi}\omega \approx 349{,}1\,\text{мc}, \\
     C &= \frac 1{\omega^2 L} \approx 44{,}1\,\text{мФ}, \\
-    q &= \frac{\eli_{\max}}\omega  \approx 2{,}8\,\text{мКл}.
+    q_{\max} &= \frac{\eli_{\max}}\omega  \approx 2{,}8\,\text{мКл}.
     \end{align*}
 }
 \solutionspace{80pt}
@@ -1812,14 +2502,44 @@
 \task{%
     Электрический колебательный контур состоит
     из катушки индуктивностью $L$ и конденсатора ёмкостью $C$.
-    параллельно катушке подключают ещё одну катушку индуктивностью $\frac13L$.
-    Как изменится период сводобных колебаний в контуре?
+    Параллельно катушке подключают ещё одну катушку индуктивностью $\frac13L$.
+    Как изменится период свободных колебаний в контуре?
+}
+\answer{%
+    $
+        T = 2\pi\sqrt{LC}, \quad
+        T' = 2\pi\sqrt{L'C'}
+            = T \sqrt{\frac{L'}L \cdot \frac{C'}C}
+            = T \sqrt{ \frac14 \cdot 1 }
+        \implies \frac{T'}T = \sqrt{ \frac14 \cdot 1 } \approx 0{,}500.
+    $
+}
+\solutionspace{100pt}
+
+\tasknumber{5}%
+\task{%
+    В колебательном контуре частота собственных колебаний $40\,\text{Гц}$.
+    После замены катушки индуктивность на другую частота стала равной $70\,\text{Гц}$.
+    А какой станет частота собственных колебаний, если в контур установить
+    обе эти катушки последовательно?
 }
 \answer{%
     \begin{align*}
-    T &= 2\pi\sqrt{LC} \\
-    T' &= 2\pi\sqrt{L'C'}= T \sqrt{\frac{L'}L \cdot \frac{C'}C} = T \sqrt{ \frac14 \cdot 1 } \\
-    &\frac{T'}T = \sqrt{ \frac14 \cdot 1 } \approx 0{,}062
+    T &= 2\pi\sqrt{LC} \implies \nu = \frac 1T = \frac 1{2\pi\sqrt{LC}} \implies L = \frac1 {4\pi^2 \nu^2 C}, \\
+    L_1 &= \frac1 {4\pi^2 \nu_1^2 C}, L_2 = \frac1 {4\pi^2 \nu_1^2 C}, \\
+    \nu_\text{послед.}
+            &= \frac 1{2\pi\sqrt{(L_1 + L_2)C}}
+            = \frac 1{2\pi\sqrt{\cbr{\frac1 {4\pi^2 \nu_1^2 C} + \frac1 {4\pi^2 \nu_2^2 C}}C}}
+            = \frac 1{\sqrt{\cbr{\frac1 {\nu_1^2 C} + \frac1 {\nu_2^2 C}}C}} =  \\
+     &= \frac 1{\sqrt{\frac1 {\nu_1^2} + \frac1 {\nu_2^2}}}
+            = \frac 1{\sqrt{ \frac1 {\sqr{40\,\text{Гц}}} + \frac1 {\sqr{70\,\text{Гц}}}}}
+            \approx 34{,}73\,\text{Гц} \\
+    \nu_\text{паралл.}
+            &= \frac 1{2\pi\sqrt{\frac 1{\frac 1{L_1} + \frac 1{L_2}}C}}
+            = \frac 1{2\pi\sqrt{\frac 1{\frac 1{\frac1 {4\pi^2 \nu_1^2 C}} + \frac 1{\frac1 {4\pi^2 \nu_2^2 C}}}C}}
+            = \frac 1{2\pi\sqrt{\frac 1{4\pi^2 \nu_1^2 C + 4\pi^2 \nu_2^2 C}C}} = \\
+     &= \frac 1{\sqrt{\frac 1{\nu_1^2 + \nu_2^2}}}
+            = \sqrt{\nu_1^2 + \nu_2^2} = \sqrt{\sqr{40\,\text{Гц}} + \sqr{70\,\text{Гц}}} \approx 80{,}62\,\text{Гц}.
     \end{align*}
 }
 
@@ -1839,13 +2559,13 @@
     \end{itemize}
 }
 \answer{%
-    \begin{align*}
-    T &= 2\pi\sqrt{LC} \\
-    \nu &= \frac 1{2\pi\sqrt{LC}}, \\
-    \omega &= \frac 1{\sqrt{LC}}, \\
-    L &= \frac 1C \sqr{\frac T{2\pi}}, \\
-    C &= \frac 1L \sqr{\frac T{2\pi}}.
-    \end{align*}
+    $
+        T = 2\pi\sqrt{LC},
+        \nu = \frac 1{2\pi\sqrt{LC}},
+        \omega = \frac 1{\sqrt{LC}},
+        L = \frac 1C \sqr{\frac T{2\pi}},
+        C = \frac 1L \sqr{\frac T{2\pi}}.
+    $
 }
 \solutionspace{80pt}
 
@@ -1857,7 +2577,7 @@
 }
 \answer{%
     $
-        \eli_{\max} = q_{\max}\omega \implies \nu = \frac{\omega}{2\pi} = \frac{\eli_{\max}}{2\pi q} \approx 1{,}074\,\text{кГц}
+        \eli_{\max} = q_{\max}\omega \implies \nu = \frac{\omega}{2\pi} = \frac{\eli_{\max}}{2\pi q} \approx 1074{,}3\,\text{Гц}.
     $
 }
 \solutionspace{80pt}
@@ -1876,10 +2596,10 @@
 }
 \answer{%
     \begin{align*}
-    \omega &= 18\units{c}^-1, \\
+    \omega &= 18\funits{рад}{c}, \\
     T &= \frac{2\pi}\omega \approx 349{,}1\,\text{мc}, \\
     C &= \frac 1{\omega^2 L} \approx 38{,}6\,\text{мФ}, \\
-    q &= \frac{\eli_{\max}}\omega  \approx 2{,}8\,\text{мКл}.
+    q_{\max} &= \frac{\eli_{\max}}\omega  \approx 2{,}8\,\text{мКл}.
     \end{align*}
 }
 \solutionspace{80pt}
@@ -1888,14 +2608,44 @@
 \task{%
     Электрический колебательный контур состоит
     из катушки индуктивностью $L$ и конденсатора ёмкостью $C$.
-    последовательно катушке подключают ещё одну катушку индуктивностью $\frac13L$.
-    Как изменится период сводобных колебаний в контуре?
+    Последовательно катушке подключают ещё одну катушку индуктивностью $\frac13L$.
+    Как изменится период свободных колебаний в контуре?
+}
+\answer{%
+    $
+        T = 2\pi\sqrt{LC}, \quad
+        T' = 2\pi\sqrt{L'C'}
+            = T \sqrt{\frac{L'}L \cdot \frac{C'}C}
+            = T \sqrt{ \frac43 \cdot 1 }
+        \implies \frac{T'}T = \sqrt{ \frac43 \cdot 1 } \approx 1{,}155.
+    $
+}
+\solutionspace{100pt}
+
+\tasknumber{5}%
+\task{%
+    В колебательном контуре частота собственных колебаний $40\,\text{Гц}$.
+    После замены катушки индуктивность на другую частота стала равной $30\,\text{Гц}$.
+    А какой станет частота собственных колебаний, если в контур установить
+    обе эти катушки параллельно?
 }
 \answer{%
     \begin{align*}
-    T &= 2\pi\sqrt{LC} \\
-    T' &= 2\pi\sqrt{L'C'}= T \sqrt{\frac{L'}L \cdot \frac{C'}C} = T \sqrt{ \frac43 \cdot 1 } \\
-    &\frac{T'}T = \sqrt{ \frac43 \cdot 1 } \approx 1{,}778
+    T &= 2\pi\sqrt{LC} \implies \nu = \frac 1T = \frac 1{2\pi\sqrt{LC}} \implies L = \frac1 {4\pi^2 \nu^2 C}, \\
+    L_1 &= \frac1 {4\pi^2 \nu_1^2 C}, L_2 = \frac1 {4\pi^2 \nu_1^2 C}, \\
+    \nu_\text{послед.}
+            &= \frac 1{2\pi\sqrt{(L_1 + L_2)C}}
+            = \frac 1{2\pi\sqrt{\cbr{\frac1 {4\pi^2 \nu_1^2 C} + \frac1 {4\pi^2 \nu_2^2 C}}C}}
+            = \frac 1{\sqrt{\cbr{\frac1 {\nu_1^2 C} + \frac1 {\nu_2^2 C}}C}} =  \\
+     &= \frac 1{\sqrt{\frac1 {\nu_1^2} + \frac1 {\nu_2^2}}}
+            = \frac 1{\sqrt{ \frac1 {\sqr{40\,\text{Гц}}} + \frac1 {\sqr{30\,\text{Гц}}}}}
+            \approx 24{,}00\,\text{Гц} \\
+    \nu_\text{паралл.}
+            &= \frac 1{2\pi\sqrt{\frac 1{\frac 1{L_1} + \frac 1{L_2}}C}}
+            = \frac 1{2\pi\sqrt{\frac 1{\frac 1{\frac1 {4\pi^2 \nu_1^2 C}} + \frac 1{\frac1 {4\pi^2 \nu_2^2 C}}}C}}
+            = \frac 1{2\pi\sqrt{\frac 1{4\pi^2 \nu_1^2 C + 4\pi^2 \nu_2^2 C}C}} = \\
+     &= \frac 1{\sqrt{\frac 1{\nu_1^2 + \nu_2^2}}}
+            = \sqrt{\nu_1^2 + \nu_2^2} = \sqrt{\sqr{40\,\text{Гц}} + \sqr{30\,\text{Гц}}} \approx 50{,}00\,\text{Гц}.
     \end{align*}
 }
 
@@ -1915,13 +2665,13 @@
     \end{itemize}
 }
 \answer{%
-    \begin{align*}
-    T &= 2\pi\sqrt{LC} \\
-    \nu &= \frac 1{2\pi\sqrt{LC}}, \\
-    \omega &= \frac 1{\sqrt{LC}}, \\
-    L &= \frac 1C \sqr{\frac T{2\pi}}, \\
-    C &= \frac 1L \sqr{\frac T{2\pi}}.
-    \end{align*}
+    $
+        T = 2\pi\sqrt{LC},
+        \nu = \frac 1{2\pi\sqrt{LC}},
+        \omega = \frac 1{\sqrt{LC}},
+        L = \frac 1C \sqr{\frac T{2\pi}},
+        C = \frac 1L \sqr{\frac T{2\pi}}.
+    $
 }
 \solutionspace{80pt}
 
@@ -1933,7 +2683,7 @@
 }
 \answer{%
     $
-        \eli_{\max} = q_{\max}\omega \implies \nu = \frac{\omega}{2\pi} = \frac{\eli_{\max}}{2\pi q} \approx 0{,}318\,\text{кГц}
+        \eli_{\max} = q_{\max}\omega \implies \nu = \frac{\omega}{2\pi} = \frac{\eli_{\max}}{2\pi q} \approx 318{,}3\,\text{Гц}.
     $
 }
 \solutionspace{80pt}
@@ -1952,10 +2702,10 @@
 }
 \answer{%
     \begin{align*}
-    \omega &= 18\units{c}^-1, \\
+    \omega &= 18\funits{рад}{c}, \\
     T &= \frac{2\pi}\omega \approx 349{,}1\,\text{мc}, \\
     C &= \frac 1{\omega^2 L} \approx 44{,}1\,\text{мФ}, \\
-    q &= \frac{\eli_{\max}}\omega  \approx 16{,}7\,\text{мКл}.
+    q_{\max} &= \frac{\eli_{\max}}\omega  \approx 16{,}7\,\text{мКл}.
     \end{align*}
 }
 \solutionspace{80pt}
@@ -1964,14 +2714,44 @@
 \task{%
     Электрический колебательный контур состоит
     из катушки индуктивностью $L$ и конденсатора ёмкостью $C$.
-    последовательно конденсатору подключают ещё один конденсатор емкостью $\frac13L$.
-    Как изменится период сводобных колебаний в контуре?
+    Последовательно конденсатору подключают ещё один конденсатор емкостью $\frac13C$.
+    Как изменится период свободных колебаний в контуре?
+}
+\answer{%
+    $
+        T = 2\pi\sqrt{LC}, \quad
+        T' = 2\pi\sqrt{L'C'}
+            = T \sqrt{\frac{L'}L \cdot \frac{C'}C}
+            = T \sqrt{ 1 \cdot \frac14 }
+        \implies \frac{T'}T = \sqrt{ 1 \cdot \frac14 } \approx 0{,}500.
+    $
+}
+\solutionspace{100pt}
+
+\tasknumber{5}%
+\task{%
+    В колебательном контуре частота собственных колебаний $80\,\text{Гц}$.
+    После замены катушки индуктивность на другую частота стала равной $30\,\text{Гц}$.
+    А какой станет частота собственных колебаний, если в контур установить
+    обе эти катушки последовательно?
 }
 \answer{%
     \begin{align*}
-    T &= 2\pi\sqrt{LC} \\
-    T' &= 2\pi\sqrt{L'C'}= T \sqrt{\frac{L'}L \cdot \frac{C'}C} = T \sqrt{ 1 \cdot \frac14 } \\
-    &\frac{T'}T = \sqrt{ 1 \cdot \frac14 } \approx 0{,}062
+    T &= 2\pi\sqrt{LC} \implies \nu = \frac 1T = \frac 1{2\pi\sqrt{LC}} \implies L = \frac1 {4\pi^2 \nu^2 C}, \\
+    L_1 &= \frac1 {4\pi^2 \nu_1^2 C}, L_2 = \frac1 {4\pi^2 \nu_1^2 C}, \\
+    \nu_\text{послед.}
+            &= \frac 1{2\pi\sqrt{(L_1 + L_2)C}}
+            = \frac 1{2\pi\sqrt{\cbr{\frac1 {4\pi^2 \nu_1^2 C} + \frac1 {4\pi^2 \nu_2^2 C}}C}}
+            = \frac 1{\sqrt{\cbr{\frac1 {\nu_1^2 C} + \frac1 {\nu_2^2 C}}C}} =  \\
+     &= \frac 1{\sqrt{\frac1 {\nu_1^2} + \frac1 {\nu_2^2}}}
+            = \frac 1{\sqrt{ \frac1 {\sqr{80\,\text{Гц}}} + \frac1 {\sqr{30\,\text{Гц}}}}}
+            \approx 28{,}09\,\text{Гц} \\
+    \nu_\text{паралл.}
+            &= \frac 1{2\pi\sqrt{\frac 1{\frac 1{L_1} + \frac 1{L_2}}C}}
+            = \frac 1{2\pi\sqrt{\frac 1{\frac 1{\frac1 {4\pi^2 \nu_1^2 C}} + \frac 1{\frac1 {4\pi^2 \nu_2^2 C}}}C}}
+            = \frac 1{2\pi\sqrt{\frac 1{4\pi^2 \nu_1^2 C + 4\pi^2 \nu_2^2 C}C}} = \\
+     &= \frac 1{\sqrt{\frac 1{\nu_1^2 + \nu_2^2}}}
+            = \sqrt{\nu_1^2 + \nu_2^2} = \sqrt{\sqr{80\,\text{Гц}} + \sqr{30\,\text{Гц}}} \approx 85{,}44\,\text{Гц}.
     \end{align*}
 }
 
@@ -1991,13 +2771,13 @@
     \end{itemize}
 }
 \answer{%
-    \begin{align*}
-    T &= 2\pi\sqrt{LC} \\
-    \nu &= \frac 1{2\pi\sqrt{LC}}, \\
-    \omega &= \frac 1{\sqrt{LC}}, \\
-    L &= \frac 1C \sqr{\frac T{2\pi}}, \\
-    C &= \frac 1L \sqr{\frac T{2\pi}}.
-    \end{align*}
+    $
+        T = 2\pi\sqrt{LC},
+        \nu = \frac 1{2\pi\sqrt{LC}},
+        \omega = \frac 1{\sqrt{LC}},
+        L = \frac 1C \sqr{\frac T{2\pi}},
+        C = \frac 1L \sqr{\frac T{2\pi}}.
+    $
 }
 \solutionspace{80pt}
 
@@ -2009,7 +2789,7 @@
 }
 \answer{%
     $
-        \eli_{\max} = q_{\max}\omega \implies \nu = \frac{\omega}{2\pi} = \frac{\eli_{\max}}{2\pi q} \approx 0{,}239\,\text{кГц}
+        \eli_{\max} = q_{\max}\omega \implies \nu = \frac{\omega}{2\pi} = \frac{\eli_{\max}}{2\pi q} \approx 238{,}7\,\text{Гц}.
     $
 }
 \solutionspace{80pt}
@@ -2028,10 +2808,10 @@
 }
 \answer{%
     \begin{align*}
-    \omega &= 15\units{c}^-1, \\
+    \omega &= 15\funits{рад}{c}, \\
     T &= \frac{2\pi}\omega \approx 418{,}9\,\text{мc}, \\
     C &= \frac 1{\omega^2 L} \approx 74{,}1\,\text{мФ}, \\
-    q &= \frac{\eli_{\max}}\omega  \approx 16{,}7\,\text{мКл}.
+    q_{\max} &= \frac{\eli_{\max}}\omega  \approx 16{,}7\,\text{мКл}.
     \end{align*}
 }
 \solutionspace{80pt}
@@ -2040,14 +2820,44 @@
 \task{%
     Электрический колебательный контур состоит
     из катушки индуктивностью $L$ и конденсатора ёмкостью $C$.
-    параллельно конденсатору подключают ещё один конденсатор емкостью $\frac12L$.
-    Как изменится период сводобных колебаний в контуре?
+    Параллельно конденсатору подключают ещё один конденсатор емкостью $\frac12C$.
+    Как изменится период свободных колебаний в контуре?
+}
+\answer{%
+    $
+        T = 2\pi\sqrt{LC}, \quad
+        T' = 2\pi\sqrt{L'C'}
+            = T \sqrt{\frac{L'}L \cdot \frac{C'}C}
+            = T \sqrt{ 1 \cdot \frac32 }
+        \implies \frac{T'}T = \sqrt{ 1 \cdot \frac32 } \approx 1{,}225.
+    $
+}
+\solutionspace{100pt}
+
+\tasknumber{5}%
+\task{%
+    В колебательном контуре частота собственных колебаний $80\,\text{Гц}$.
+    После замены катушки индуктивность на другую частота стала равной $90\,\text{Гц}$.
+    А какой станет частота собственных колебаний, если в контур установить
+    обе эти катушки параллельно?
 }
 \answer{%
     \begin{align*}
-    T &= 2\pi\sqrt{LC} \\
-    T' &= 2\pi\sqrt{L'C'}= T \sqrt{\frac{L'}L \cdot \frac{C'}C} = T \sqrt{ 1 \cdot \frac32 } \\
-    &\frac{T'}T = \sqrt{ 1 \cdot \frac32 } \approx 2{,}250
+    T &= 2\pi\sqrt{LC} \implies \nu = \frac 1T = \frac 1{2\pi\sqrt{LC}} \implies L = \frac1 {4\pi^2 \nu^2 C}, \\
+    L_1 &= \frac1 {4\pi^2 \nu_1^2 C}, L_2 = \frac1 {4\pi^2 \nu_1^2 C}, \\
+    \nu_\text{послед.}
+            &= \frac 1{2\pi\sqrt{(L_1 + L_2)C}}
+            = \frac 1{2\pi\sqrt{\cbr{\frac1 {4\pi^2 \nu_1^2 C} + \frac1 {4\pi^2 \nu_2^2 C}}C}}
+            = \frac 1{\sqrt{\cbr{\frac1 {\nu_1^2 C} + \frac1 {\nu_2^2 C}}C}} =  \\
+     &= \frac 1{\sqrt{\frac1 {\nu_1^2} + \frac1 {\nu_2^2}}}
+            = \frac 1{\sqrt{ \frac1 {\sqr{80\,\text{Гц}}} + \frac1 {\sqr{90\,\text{Гц}}}}}
+            \approx 59{,}79\,\text{Гц} \\
+    \nu_\text{паралл.}
+            &= \frac 1{2\pi\sqrt{\frac 1{\frac 1{L_1} + \frac 1{L_2}}C}}
+            = \frac 1{2\pi\sqrt{\frac 1{\frac 1{\frac1 {4\pi^2 \nu_1^2 C}} + \frac 1{\frac1 {4\pi^2 \nu_2^2 C}}}C}}
+            = \frac 1{2\pi\sqrt{\frac 1{4\pi^2 \nu_1^2 C + 4\pi^2 \nu_2^2 C}C}} = \\
+     &= \frac 1{\sqrt{\frac 1{\nu_1^2 + \nu_2^2}}}
+            = \sqrt{\nu_1^2 + \nu_2^2} = \sqrt{\sqr{80\,\text{Гц}} + \sqr{90\,\text{Гц}}} \approx 120{,}42\,\text{Гц}.
     \end{align*}
 }
 
@@ -2067,13 +2877,13 @@
     \end{itemize}
 }
 \answer{%
-    \begin{align*}
-    T &= 2\pi\sqrt{LC} \\
-    \nu &= \frac 1{2\pi\sqrt{LC}}, \\
-    \omega &= \frac 1{\sqrt{LC}}, \\
-    L &= \frac 1C \sqr{\frac T{2\pi}}, \\
-    C &= \frac 1L \sqr{\frac T{2\pi}}.
-    \end{align*}
+    $
+        T = 2\pi\sqrt{LC},
+        \nu = \frac 1{2\pi\sqrt{LC}},
+        \omega = \frac 1{\sqrt{LC}},
+        L = \frac 1C \sqr{\frac T{2\pi}},
+        C = \frac 1L \sqr{\frac T{2\pi}}.
+    $
 }
 \solutionspace{80pt}
 
@@ -2085,7 +2895,7 @@
 }
 \answer{%
     $
-        \eli_{\max} = q_{\max}\omega \implies \nu = \frac{\omega}{2\pi} = \frac{\eli_{\max}}{2\pi q} \approx 0{,}477\,\text{кГц}
+        \eli_{\max} = q_{\max}\omega \implies \nu = \frac{\omega}{2\pi} = \frac{\eli_{\max}}{2\pi q} \approx 477{,}5\,\text{Гц}.
     $
 }
 \solutionspace{80pt}
@@ -2104,10 +2914,10 @@
 }
 \answer{%
     \begin{align*}
-    \omega &= 18\units{c}^-1, \\
+    \omega &= 18\funits{рад}{c}, \\
     T &= \frac{2\pi}\omega \approx 349{,}1\,\text{мc}, \\
     C &= \frac 1{\omega^2 L} \approx 44{,}1\,\text{мФ}, \\
-    q &= \frac{\eli_{\max}}\omega  \approx 13{,}9\,\text{мКл}.
+    q_{\max} &= \frac{\eli_{\max}}\omega  \approx 13{,}9\,\text{мКл}.
     \end{align*}
 }
 \solutionspace{80pt}
@@ -2116,14 +2926,44 @@
 \task{%
     Электрический колебательный контур состоит
     из катушки индуктивностью $L$ и конденсатора ёмкостью $C$.
-    последовательно конденсатору подключают ещё один конденсатор емкостью $\frac13L$.
-    Как изменится период сводобных колебаний в контуре?
+    Последовательно конденсатору подключают ещё один конденсатор емкостью $\frac13C$.
+    Как изменится период свободных колебаний в контуре?
+}
+\answer{%
+    $
+        T = 2\pi\sqrt{LC}, \quad
+        T' = 2\pi\sqrt{L'C'}
+            = T \sqrt{\frac{L'}L \cdot \frac{C'}C}
+            = T \sqrt{ 1 \cdot \frac14 }
+        \implies \frac{T'}T = \sqrt{ 1 \cdot \frac14 } \approx 0{,}500.
+    $
+}
+\solutionspace{100pt}
+
+\tasknumber{5}%
+\task{%
+    В колебательном контуре частота собственных колебаний $60\,\text{Гц}$.
+    После замены катушки индуктивность на другую частота стала равной $90\,\text{Гц}$.
+    А какой станет частота собственных колебаний, если в контур установить
+    обе эти катушки последовательно?
 }
 \answer{%
     \begin{align*}
-    T &= 2\pi\sqrt{LC} \\
-    T' &= 2\pi\sqrt{L'C'}= T \sqrt{\frac{L'}L \cdot \frac{C'}C} = T \sqrt{ 1 \cdot \frac14 } \\
-    &\frac{T'}T = \sqrt{ 1 \cdot \frac14 } \approx 0{,}062
+    T &= 2\pi\sqrt{LC} \implies \nu = \frac 1T = \frac 1{2\pi\sqrt{LC}} \implies L = \frac1 {4\pi^2 \nu^2 C}, \\
+    L_1 &= \frac1 {4\pi^2 \nu_1^2 C}, L_2 = \frac1 {4\pi^2 \nu_1^2 C}, \\
+    \nu_\text{послед.}
+            &= \frac 1{2\pi\sqrt{(L_1 + L_2)C}}
+            = \frac 1{2\pi\sqrt{\cbr{\frac1 {4\pi^2 \nu_1^2 C} + \frac1 {4\pi^2 \nu_2^2 C}}C}}
+            = \frac 1{\sqrt{\cbr{\frac1 {\nu_1^2 C} + \frac1 {\nu_2^2 C}}C}} =  \\
+     &= \frac 1{\sqrt{\frac1 {\nu_1^2} + \frac1 {\nu_2^2}}}
+            = \frac 1{\sqrt{ \frac1 {\sqr{60\,\text{Гц}}} + \frac1 {\sqr{90\,\text{Гц}}}}}
+            \approx 49{,}92\,\text{Гц} \\
+    \nu_\text{паралл.}
+            &= \frac 1{2\pi\sqrt{\frac 1{\frac 1{L_1} + \frac 1{L_2}}C}}
+            = \frac 1{2\pi\sqrt{\frac 1{\frac 1{\frac1 {4\pi^2 \nu_1^2 C}} + \frac 1{\frac1 {4\pi^2 \nu_2^2 C}}}C}}
+            = \frac 1{2\pi\sqrt{\frac 1{4\pi^2 \nu_1^2 C + 4\pi^2 \nu_2^2 C}C}} = \\
+     &= \frac 1{\sqrt{\frac 1{\nu_1^2 + \nu_2^2}}}
+            = \sqrt{\nu_1^2 + \nu_2^2} = \sqrt{\sqr{60\,\text{Гц}} + \sqr{90\,\text{Гц}}} \approx 108{,}17\,\text{Гц}.
     \end{align*}
 }
 
@@ -2143,13 +2983,13 @@
     \end{itemize}
 }
 \answer{%
-    \begin{align*}
-    T &= 2\pi\sqrt{LC} \\
-    \nu &= \frac 1{2\pi\sqrt{LC}}, \\
-    \omega &= \frac 1{\sqrt{LC}}, \\
-    L &= \frac 1C \sqr{\frac T{2\pi}}, \\
-    C &= \frac 1L \sqr{\frac T{2\pi}}.
-    \end{align*}
+    $
+        T = 2\pi\sqrt{LC},
+        \nu = \frac 1{2\pi\sqrt{LC}},
+        \omega = \frac 1{\sqrt{LC}},
+        L = \frac 1C \sqr{\frac T{2\pi}},
+        C = \frac 1L \sqr{\frac T{2\pi}}.
+    $
 }
 \solutionspace{80pt}
 
@@ -2161,7 +3001,7 @@
 }
 \answer{%
     $
-        \eli_{\max} = q_{\max}\omega \implies \nu = \frac{\omega}{2\pi} = \frac{\eli_{\max}}{2\pi q} \approx 1{,}074\,\text{кГц}
+        \eli_{\max} = q_{\max}\omega \implies \nu = \frac{\omega}{2\pi} = \frac{\eli_{\max}}{2\pi q} \approx 1074{,}3\,\text{Гц}.
     $
 }
 \solutionspace{80pt}
@@ -2180,10 +3020,10 @@
 }
 \answer{%
     \begin{align*}
-    \omega &= 18\units{c}^-1, \\
+    \omega &= 18\funits{рад}{c}, \\
     T &= \frac{2\pi}\omega \approx 349{,}1\,\text{мc}, \\
     C &= \frac 1{\omega^2 L} \approx 61{,}7\,\text{мФ}, \\
-    q &= \frac{\eli_{\max}}\omega  \approx 16{,}7\,\text{мКл}.
+    q_{\max} &= \frac{\eli_{\max}}\omega  \approx 16{,}7\,\text{мКл}.
     \end{align*}
 }
 \solutionspace{80pt}
@@ -2192,14 +3032,44 @@
 \task{%
     Электрический колебательный контур состоит
     из катушки индуктивностью $L$ и конденсатора ёмкостью $C$.
-    последовательно конденсатору подключают ещё один конденсатор емкостью $\frac12L$.
-    Как изменится период сводобных колебаний в контуре?
+    Последовательно конденсатору подключают ещё один конденсатор емкостью $\frac12C$.
+    Как изменится период свободных колебаний в контуре?
+}
+\answer{%
+    $
+        T = 2\pi\sqrt{LC}, \quad
+        T' = 2\pi\sqrt{L'C'}
+            = T \sqrt{\frac{L'}L \cdot \frac{C'}C}
+            = T \sqrt{ 1 \cdot \frac13 }
+        \implies \frac{T'}T = \sqrt{ 1 \cdot \frac13 } \approx 0{,}577.
+    $
+}
+\solutionspace{100pt}
+
+\tasknumber{5}%
+\task{%
+    В колебательном контуре частота собственных колебаний $80\,\text{Гц}$.
+    После замены катушки индуктивность на другую частота стала равной $90\,\text{Гц}$.
+    А какой станет частота собственных колебаний, если в контур установить
+    обе эти катушки параллельно?
 }
 \answer{%
     \begin{align*}
-    T &= 2\pi\sqrt{LC} \\
-    T' &= 2\pi\sqrt{L'C'}= T \sqrt{\frac{L'}L \cdot \frac{C'}C} = T \sqrt{ 1 \cdot \frac13 } \\
-    &\frac{T'}T = \sqrt{ 1 \cdot \frac13 } \approx 0{,}111
+    T &= 2\pi\sqrt{LC} \implies \nu = \frac 1T = \frac 1{2\pi\sqrt{LC}} \implies L = \frac1 {4\pi^2 \nu^2 C}, \\
+    L_1 &= \frac1 {4\pi^2 \nu_1^2 C}, L_2 = \frac1 {4\pi^2 \nu_1^2 C}, \\
+    \nu_\text{послед.}
+            &= \frac 1{2\pi\sqrt{(L_1 + L_2)C}}
+            = \frac 1{2\pi\sqrt{\cbr{\frac1 {4\pi^2 \nu_1^2 C} + \frac1 {4\pi^2 \nu_2^2 C}}C}}
+            = \frac 1{\sqrt{\cbr{\frac1 {\nu_1^2 C} + \frac1 {\nu_2^2 C}}C}} =  \\
+     &= \frac 1{\sqrt{\frac1 {\nu_1^2} + \frac1 {\nu_2^2}}}
+            = \frac 1{\sqrt{ \frac1 {\sqr{80\,\text{Гц}}} + \frac1 {\sqr{90\,\text{Гц}}}}}
+            \approx 59{,}79\,\text{Гц} \\
+    \nu_\text{паралл.}
+            &= \frac 1{2\pi\sqrt{\frac 1{\frac 1{L_1} + \frac 1{L_2}}C}}
+            = \frac 1{2\pi\sqrt{\frac 1{\frac 1{\frac1 {4\pi^2 \nu_1^2 C}} + \frac 1{\frac1 {4\pi^2 \nu_2^2 C}}}C}}
+            = \frac 1{2\pi\sqrt{\frac 1{4\pi^2 \nu_1^2 C + 4\pi^2 \nu_2^2 C}C}} = \\
+     &= \frac 1{\sqrt{\frac 1{\nu_1^2 + \nu_2^2}}}
+            = \sqrt{\nu_1^2 + \nu_2^2} = \sqrt{\sqr{80\,\text{Гц}} + \sqr{90\,\text{Гц}}} \approx 120{,}42\,\text{Гц}.
     \end{align*}
 }
 
@@ -2219,13 +3089,13 @@
     \end{itemize}
 }
 \answer{%
-    \begin{align*}
-    T &= 2\pi\sqrt{LC} \\
-    \nu &= \frac 1{2\pi\sqrt{LC}}, \\
-    \omega &= \frac 1{\sqrt{LC}}, \\
-    L &= \frac 1C \sqr{\frac T{2\pi}}, \\
-    C &= \frac 1L \sqr{\frac T{2\pi}}.
-    \end{align*}
+    $
+        T = 2\pi\sqrt{LC},
+        \nu = \frac 1{2\pi\sqrt{LC}},
+        \omega = \frac 1{\sqrt{LC}},
+        L = \frac 1C \sqr{\frac T{2\pi}},
+        C = \frac 1L \sqr{\frac T{2\pi}}.
+    $
 }
 \solutionspace{80pt}
 
@@ -2237,7 +3107,7 @@
 }
 \answer{%
     $
-        \eli_{\max} = q_{\max}\omega \implies \nu = \frac{\omega}{2\pi} = \frac{\eli_{\max}}{2\pi q} \approx 0{,}298\,\text{кГц}
+        \eli_{\max} = q_{\max}\omega \implies \nu = \frac{\omega}{2\pi} = \frac{\eli_{\max}}{2\pi q} \approx 298{,}4\,\text{Гц}.
     $
 }
 \solutionspace{80pt}
@@ -2256,10 +3126,10 @@
 }
 \answer{%
     \begin{align*}
-    \omega &= 18\units{c}^-1, \\
+    \omega &= 18\funits{рад}{c}, \\
     T &= \frac{2\pi}\omega \approx 349{,}1\,\text{мc}, \\
     C &= \frac 1{\omega^2 L} \approx 51{,}4\,\text{мФ}, \\
-    q &= \frac{\eli_{\max}}\omega  \approx 16{,}7\,\text{мКл}.
+    q_{\max} &= \frac{\eli_{\max}}\omega  \approx 16{,}7\,\text{мКл}.
     \end{align*}
 }
 \solutionspace{80pt}
@@ -2268,14 +3138,44 @@
 \task{%
     Электрический колебательный контур состоит
     из катушки индуктивностью $L$ и конденсатора ёмкостью $C$.
-    параллельно катушке подключают ещё одну катушку индуктивностью $\frac12L$.
-    Как изменится период сводобных колебаний в контуре?
+    Параллельно катушке подключают ещё одну катушку индуктивностью $\frac12L$.
+    Как изменится период свободных колебаний в контуре?
+}
+\answer{%
+    $
+        T = 2\pi\sqrt{LC}, \quad
+        T' = 2\pi\sqrt{L'C'}
+            = T \sqrt{\frac{L'}L \cdot \frac{C'}C}
+            = T \sqrt{ \frac13 \cdot 1 }
+        \implies \frac{T'}T = \sqrt{ \frac13 \cdot 1 } \approx 0{,}577.
+    $
+}
+\solutionspace{100pt}
+
+\tasknumber{5}%
+\task{%
+    В колебательном контуре частота собственных колебаний $60\,\text{Гц}$.
+    После замены катушки индуктивность на другую частота стала равной $30\,\text{Гц}$.
+    А какой станет частота собственных колебаний, если в контур установить
+    обе эти катушки параллельно?
 }
 \answer{%
     \begin{align*}
-    T &= 2\pi\sqrt{LC} \\
-    T' &= 2\pi\sqrt{L'C'}= T \sqrt{\frac{L'}L \cdot \frac{C'}C} = T \sqrt{ \frac13 \cdot 1 } \\
-    &\frac{T'}T = \sqrt{ \frac13 \cdot 1 } \approx 0{,}111
+    T &= 2\pi\sqrt{LC} \implies \nu = \frac 1T = \frac 1{2\pi\sqrt{LC}} \implies L = \frac1 {4\pi^2 \nu^2 C}, \\
+    L_1 &= \frac1 {4\pi^2 \nu_1^2 C}, L_2 = \frac1 {4\pi^2 \nu_1^2 C}, \\
+    \nu_\text{послед.}
+            &= \frac 1{2\pi\sqrt{(L_1 + L_2)C}}
+            = \frac 1{2\pi\sqrt{\cbr{\frac1 {4\pi^2 \nu_1^2 C} + \frac1 {4\pi^2 \nu_2^2 C}}C}}
+            = \frac 1{\sqrt{\cbr{\frac1 {\nu_1^2 C} + \frac1 {\nu_2^2 C}}C}} =  \\
+     &= \frac 1{\sqrt{\frac1 {\nu_1^2} + \frac1 {\nu_2^2}}}
+            = \frac 1{\sqrt{ \frac1 {\sqr{60\,\text{Гц}}} + \frac1 {\sqr{30\,\text{Гц}}}}}
+            \approx 26{,}83\,\text{Гц} \\
+    \nu_\text{паралл.}
+            &= \frac 1{2\pi\sqrt{\frac 1{\frac 1{L_1} + \frac 1{L_2}}C}}
+            = \frac 1{2\pi\sqrt{\frac 1{\frac 1{\frac1 {4\pi^2 \nu_1^2 C}} + \frac 1{\frac1 {4\pi^2 \nu_2^2 C}}}C}}
+            = \frac 1{2\pi\sqrt{\frac 1{4\pi^2 \nu_1^2 C + 4\pi^2 \nu_2^2 C}C}} = \\
+     &= \frac 1{\sqrt{\frac 1{\nu_1^2 + \nu_2^2}}}
+            = \sqrt{\nu_1^2 + \nu_2^2} = \sqrt{\sqr{60\,\text{Гц}} + \sqr{30\,\text{Гц}}} \approx 67{,}08\,\text{Гц}.
     \end{align*}
 }
 
@@ -2295,13 +3195,13 @@
     \end{itemize}
 }
 \answer{%
-    \begin{align*}
-    T &= 2\pi\sqrt{LC} \\
-    \nu &= \frac 1{2\pi\sqrt{LC}}, \\
-    \omega &= \frac 1{\sqrt{LC}}, \\
-    L &= \frac 1C \sqr{\frac T{2\pi}}, \\
-    C &= \frac 1L \sqr{\frac T{2\pi}}.
-    \end{align*}
+    $
+        T = 2\pi\sqrt{LC},
+        \nu = \frac 1{2\pi\sqrt{LC}},
+        \omega = \frac 1{\sqrt{LC}},
+        L = \frac 1C \sqr{\frac T{2\pi}},
+        C = \frac 1L \sqr{\frac T{2\pi}}.
+    $
 }
 \solutionspace{80pt}
 
@@ -2313,7 +3213,7 @@
 }
 \answer{%
     $
-        \eli_{\max} = q_{\max}\omega \implies \nu = \frac{\omega}{2\pi} = \frac{\eli_{\max}}{2\pi q} \approx 0{,}716\,\text{кГц}
+        \eli_{\max} = q_{\max}\omega \implies \nu = \frac{\omega}{2\pi} = \frac{\eli_{\max}}{2\pi q} \approx 716{,}2\,\text{Гц}.
     $
 }
 \solutionspace{80pt}
@@ -2332,10 +3232,10 @@
 }
 \answer{%
     \begin{align*}
-    \omega &= 15\units{c}^-1, \\
+    \omega &= 15\funits{рад}{c}, \\
     T &= \frac{2\pi}\omega \approx 418{,}9\,\text{мc}, \\
     C &= \frac 1{\omega^2 L} \approx 74{,}1\,\text{мФ}, \\
-    q &= \frac{\eli_{\max}}\omega  \approx 20{,}0\,\text{мКл}.
+    q_{\max} &= \frac{\eli_{\max}}\omega  \approx 20{,}0\,\text{мКл}.
     \end{align*}
 }
 \solutionspace{80pt}
@@ -2344,14 +3244,44 @@
 \task{%
     Электрический колебательный контур состоит
     из катушки индуктивностью $L$ и конденсатора ёмкостью $C$.
-    параллельно конденсатору подключают ещё один конденсатор емкостью $\frac13L$.
-    Как изменится период сводобных колебаний в контуре?
+    Параллельно конденсатору подключают ещё один конденсатор емкостью $\frac13C$.
+    Как изменится период свободных колебаний в контуре?
+}
+\answer{%
+    $
+        T = 2\pi\sqrt{LC}, \quad
+        T' = 2\pi\sqrt{L'C'}
+            = T \sqrt{\frac{L'}L \cdot \frac{C'}C}
+            = T \sqrt{ 1 \cdot \frac43 }
+        \implies \frac{T'}T = \sqrt{ 1 \cdot \frac43 } \approx 1{,}155.
+    $
+}
+\solutionspace{100pt}
+
+\tasknumber{5}%
+\task{%
+    В колебательном контуре частота собственных колебаний $80\,\text{Гц}$.
+    После замены катушки индуктивность на другую частота стала равной $50\,\text{Гц}$.
+    А какой станет частота собственных колебаний, если в контур установить
+    обе эти катушки параллельно?
 }
 \answer{%
     \begin{align*}
-    T &= 2\pi\sqrt{LC} \\
-    T' &= 2\pi\sqrt{L'C'}= T \sqrt{\frac{L'}L \cdot \frac{C'}C} = T \sqrt{ 1 \cdot \frac43 } \\
-    &\frac{T'}T = \sqrt{ 1 \cdot \frac43 } \approx 1{,}778
+    T &= 2\pi\sqrt{LC} \implies \nu = \frac 1T = \frac 1{2\pi\sqrt{LC}} \implies L = \frac1 {4\pi^2 \nu^2 C}, \\
+    L_1 &= \frac1 {4\pi^2 \nu_1^2 C}, L_2 = \frac1 {4\pi^2 \nu_1^2 C}, \\
+    \nu_\text{послед.}
+            &= \frac 1{2\pi\sqrt{(L_1 + L_2)C}}
+            = \frac 1{2\pi\sqrt{\cbr{\frac1 {4\pi^2 \nu_1^2 C} + \frac1 {4\pi^2 \nu_2^2 C}}C}}
+            = \frac 1{\sqrt{\cbr{\frac1 {\nu_1^2 C} + \frac1 {\nu_2^2 C}}C}} =  \\
+     &= \frac 1{\sqrt{\frac1 {\nu_1^2} + \frac1 {\nu_2^2}}}
+            = \frac 1{\sqrt{ \frac1 {\sqr{80\,\text{Гц}}} + \frac1 {\sqr{50\,\text{Гц}}}}}
+            \approx 42{,}40\,\text{Гц} \\
+    \nu_\text{паралл.}
+            &= \frac 1{2\pi\sqrt{\frac 1{\frac 1{L_1} + \frac 1{L_2}}C}}
+            = \frac 1{2\pi\sqrt{\frac 1{\frac 1{\frac1 {4\pi^2 \nu_1^2 C}} + \frac 1{\frac1 {4\pi^2 \nu_2^2 C}}}C}}
+            = \frac 1{2\pi\sqrt{\frac 1{4\pi^2 \nu_1^2 C + 4\pi^2 \nu_2^2 C}C}} = \\
+     &= \frac 1{\sqrt{\frac 1{\nu_1^2 + \nu_2^2}}}
+            = \sqrt{\nu_1^2 + \nu_2^2} = \sqrt{\sqr{80\,\text{Гц}} + \sqr{50\,\text{Гц}}} \approx 94{,}34\,\text{Гц}.
     \end{align*}
 }
 
@@ -2371,13 +3301,13 @@
     \end{itemize}
 }
 \answer{%
-    \begin{align*}
-    T &= 2\pi\sqrt{LC} \\
-    \nu &= \frac 1{2\pi\sqrt{LC}}, \\
-    \omega &= \frac 1{\sqrt{LC}}, \\
-    L &= \frac 1C \sqr{\frac T{2\pi}}, \\
-    C &= \frac 1L \sqr{\frac T{2\pi}}.
-    \end{align*}
+    $
+        T = 2\pi\sqrt{LC},
+        \nu = \frac 1{2\pi\sqrt{LC}},
+        \omega = \frac 1{\sqrt{LC}},
+        L = \frac 1C \sqr{\frac T{2\pi}},
+        C = \frac 1L \sqr{\frac T{2\pi}}.
+    $
 }
 \solutionspace{80pt}
 
@@ -2389,7 +3319,7 @@
 }
 \answer{%
     $
-        \eli_{\max} = q_{\max}\omega \implies \nu = \frac{\omega}{2\pi} = \frac{\eli_{\max}}{2\pi q} \approx 0{,}318\,\text{кГц}
+        \eli_{\max} = q_{\max}\omega \implies \nu = \frac{\omega}{2\pi} = \frac{\eli_{\max}}{2\pi q} \approx 318{,}3\,\text{Гц}.
     $
 }
 \solutionspace{80pt}
@@ -2408,10 +3338,10 @@
 }
 \answer{%
     \begin{align*}
-    \omega &= 15\units{c}^-1, \\
+    \omega &= 15\funits{рад}{c}, \\
     T &= \frac{2\pi}\omega \approx 418{,}9\,\text{мc}, \\
     C &= \frac 1{\omega^2 L} \approx 55{,}6\,\text{мФ}, \\
-    q &= \frac{\eli_{\max}}\omega  \approx 3{,}3\,\text{мКл}.
+    q_{\max} &= \frac{\eli_{\max}}\omega  \approx 3{,}3\,\text{мКл}.
     \end{align*}
 }
 \solutionspace{80pt}
@@ -2420,14 +3350,44 @@
 \task{%
     Электрический колебательный контур состоит
     из катушки индуктивностью $L$ и конденсатора ёмкостью $C$.
-    параллельно катушке подключают ещё одну катушку индуктивностью $\frac13L$.
-    Как изменится период сводобных колебаний в контуре?
+    Параллельно катушке подключают ещё одну катушку индуктивностью $\frac13L$.
+    Как изменится период свободных колебаний в контуре?
+}
+\answer{%
+    $
+        T = 2\pi\sqrt{LC}, \quad
+        T' = 2\pi\sqrt{L'C'}
+            = T \sqrt{\frac{L'}L \cdot \frac{C'}C}
+            = T \sqrt{ \frac14 \cdot 1 }
+        \implies \frac{T'}T = \sqrt{ \frac14 \cdot 1 } \approx 0{,}500.
+    $
+}
+\solutionspace{100pt}
+
+\tasknumber{5}%
+\task{%
+    В колебательном контуре частота собственных колебаний $60\,\text{Гц}$.
+    После замены катушки индуктивность на другую частота стала равной $30\,\text{Гц}$.
+    А какой станет частота собственных колебаний, если в контур установить
+    обе эти катушки параллельно?
 }
 \answer{%
     \begin{align*}
-    T &= 2\pi\sqrt{LC} \\
-    T' &= 2\pi\sqrt{L'C'}= T \sqrt{\frac{L'}L \cdot \frac{C'}C} = T \sqrt{ \frac14 \cdot 1 } \\
-    &\frac{T'}T = \sqrt{ \frac14 \cdot 1 } \approx 0{,}062
+    T &= 2\pi\sqrt{LC} \implies \nu = \frac 1T = \frac 1{2\pi\sqrt{LC}} \implies L = \frac1 {4\pi^2 \nu^2 C}, \\
+    L_1 &= \frac1 {4\pi^2 \nu_1^2 C}, L_2 = \frac1 {4\pi^2 \nu_1^2 C}, \\
+    \nu_\text{послед.}
+            &= \frac 1{2\pi\sqrt{(L_1 + L_2)C}}
+            = \frac 1{2\pi\sqrt{\cbr{\frac1 {4\pi^2 \nu_1^2 C} + \frac1 {4\pi^2 \nu_2^2 C}}C}}
+            = \frac 1{\sqrt{\cbr{\frac1 {\nu_1^2 C} + \frac1 {\nu_2^2 C}}C}} =  \\
+     &= \frac 1{\sqrt{\frac1 {\nu_1^2} + \frac1 {\nu_2^2}}}
+            = \frac 1{\sqrt{ \frac1 {\sqr{60\,\text{Гц}}} + \frac1 {\sqr{30\,\text{Гц}}}}}
+            \approx 26{,}83\,\text{Гц} \\
+    \nu_\text{паралл.}
+            &= \frac 1{2\pi\sqrt{\frac 1{\frac 1{L_1} + \frac 1{L_2}}C}}
+            = \frac 1{2\pi\sqrt{\frac 1{\frac 1{\frac1 {4\pi^2 \nu_1^2 C}} + \frac 1{\frac1 {4\pi^2 \nu_2^2 C}}}C}}
+            = \frac 1{2\pi\sqrt{\frac 1{4\pi^2 \nu_1^2 C + 4\pi^2 \nu_2^2 C}C}} = \\
+     &= \frac 1{\sqrt{\frac 1{\nu_1^2 + \nu_2^2}}}
+            = \sqrt{\nu_1^2 + \nu_2^2} = \sqrt{\sqr{60\,\text{Гц}} + \sqr{30\,\text{Гц}}} \approx 67{,}08\,\text{Гц}.
     \end{align*}
 }
 
@@ -2447,13 +3407,13 @@
     \end{itemize}
 }
 \answer{%
-    \begin{align*}
-    T &= 2\pi\sqrt{LC} \\
-    \nu &= \frac 1{2\pi\sqrt{LC}}, \\
-    \omega &= \frac 1{\sqrt{LC}}, \\
-    L &= \frac 1C \sqr{\frac T{2\pi}}, \\
-    C &= \frac 1L \sqr{\frac T{2\pi}}.
-    \end{align*}
+    $
+        T = 2\pi\sqrt{LC},
+        \nu = \frac 1{2\pi\sqrt{LC}},
+        \omega = \frac 1{\sqrt{LC}},
+        L = \frac 1C \sqr{\frac T{2\pi}},
+        C = \frac 1L \sqr{\frac T{2\pi}}.
+    $
 }
 \solutionspace{80pt}
 
@@ -2465,7 +3425,7 @@
 }
 \answer{%
     $
-        \eli_{\max} = q_{\max}\omega \implies \nu = \frac{\omega}{2\pi} = \frac{\eli_{\max}}{2\pi q} \approx 0{,}318\,\text{кГц}
+        \eli_{\max} = q_{\max}\omega \implies \nu = \frac{\omega}{2\pi} = \frac{\eli_{\max}}{2\pi q} \approx 318{,}3\,\text{Гц}.
     $
 }
 \solutionspace{80pt}
@@ -2484,10 +3444,10 @@
 }
 \answer{%
     \begin{align*}
-    \omega &= 15\units{c}^-1, \\
+    \omega &= 15\funits{рад}{c}, \\
     T &= \frac{2\pi}\omega \approx 418{,}9\,\text{мc}, \\
     C &= \frac 1{\omega^2 L} \approx 63{,}5\,\text{мФ}, \\
-    q &= \frac{\eli_{\max}}\omega  \approx 16{,}7\,\text{мКл}.
+    q_{\max} &= \frac{\eli_{\max}}\omega  \approx 16{,}7\,\text{мКл}.
     \end{align*}
 }
 \solutionspace{80pt}
@@ -2496,14 +3456,44 @@
 \task{%
     Электрический колебательный контур состоит
     из катушки индуктивностью $L$ и конденсатора ёмкостью $C$.
-    последовательно катушке подключают ещё одну катушку индуктивностью $2L$.
-    Как изменится период сводобных колебаний в контуре?
+    Последовательно катушке подключают ещё одну катушку индуктивностью $2L$.
+    Как изменится период свободных колебаний в контуре?
+}
+\answer{%
+    $
+        T = 2\pi\sqrt{LC}, \quad
+        T' = 2\pi\sqrt{L'C'}
+            = T \sqrt{\frac{L'}L \cdot \frac{C'}C}
+            = T \sqrt{ 3 \cdot 1 }
+        \implies \frac{T'}T = \sqrt{ 3 \cdot 1 } \approx 1{,}732.
+    $
+}
+\solutionspace{100pt}
+
+\tasknumber{5}%
+\task{%
+    В колебательном контуре частота собственных колебаний $80\,\text{Гц}$.
+    После замены катушки индуктивность на другую частота стала равной $50\,\text{Гц}$.
+    А какой станет частота собственных колебаний, если в контур установить
+    обе эти катушки параллельно?
 }
 \answer{%
     \begin{align*}
-    T &= 2\pi\sqrt{LC} \\
-    T' &= 2\pi\sqrt{L'C'}= T \sqrt{\frac{L'}L \cdot \frac{C'}C} = T \sqrt{ 3 \cdot 1 } \\
-    &\frac{T'}T = \sqrt{ 3 \cdot 1 } \approx 9{,}000
+    T &= 2\pi\sqrt{LC} \implies \nu = \frac 1T = \frac 1{2\pi\sqrt{LC}} \implies L = \frac1 {4\pi^2 \nu^2 C}, \\
+    L_1 &= \frac1 {4\pi^2 \nu_1^2 C}, L_2 = \frac1 {4\pi^2 \nu_1^2 C}, \\
+    \nu_\text{послед.}
+            &= \frac 1{2\pi\sqrt{(L_1 + L_2)C}}
+            = \frac 1{2\pi\sqrt{\cbr{\frac1 {4\pi^2 \nu_1^2 C} + \frac1 {4\pi^2 \nu_2^2 C}}C}}
+            = \frac 1{\sqrt{\cbr{\frac1 {\nu_1^2 C} + \frac1 {\nu_2^2 C}}C}} =  \\
+     &= \frac 1{\sqrt{\frac1 {\nu_1^2} + \frac1 {\nu_2^2}}}
+            = \frac 1{\sqrt{ \frac1 {\sqr{80\,\text{Гц}}} + \frac1 {\sqr{50\,\text{Гц}}}}}
+            \approx 42{,}40\,\text{Гц} \\
+    \nu_\text{паралл.}
+            &= \frac 1{2\pi\sqrt{\frac 1{\frac 1{L_1} + \frac 1{L_2}}C}}
+            = \frac 1{2\pi\sqrt{\frac 1{\frac 1{\frac1 {4\pi^2 \nu_1^2 C}} + \frac 1{\frac1 {4\pi^2 \nu_2^2 C}}}C}}
+            = \frac 1{2\pi\sqrt{\frac 1{4\pi^2 \nu_1^2 C + 4\pi^2 \nu_2^2 C}C}} = \\
+     &= \frac 1{\sqrt{\frac 1{\nu_1^2 + \nu_2^2}}}
+            = \sqrt{\nu_1^2 + \nu_2^2} = \sqrt{\sqr{80\,\text{Гц}} + \sqr{50\,\text{Гц}}} \approx 94{,}34\,\text{Гц}.
     \end{align*}
 }
 
@@ -2523,13 +3513,13 @@
     \end{itemize}
 }
 \answer{%
-    \begin{align*}
-    T &= 2\pi\sqrt{LC} \\
-    \nu &= \frac 1{2\pi\sqrt{LC}}, \\
-    \omega &= \frac 1{\sqrt{LC}}, \\
-    L &= \frac 1C \sqr{\frac T{2\pi}}, \\
-    C &= \frac 1L \sqr{\frac T{2\pi}}.
-    \end{align*}
+    $
+        T = 2\pi\sqrt{LC},
+        \nu = \frac 1{2\pi\sqrt{LC}},
+        \omega = \frac 1{\sqrt{LC}},
+        L = \frac 1C \sqr{\frac T{2\pi}},
+        C = \frac 1L \sqr{\frac T{2\pi}}.
+    $
 }
 \solutionspace{80pt}
 
@@ -2541,7 +3531,7 @@
 }
 \answer{%
     $
-        \eli_{\max} = q_{\max}\omega \implies \nu = \frac{\omega}{2\pi} = \frac{\eli_{\max}}{2\pi q} \approx 0{,}239\,\text{кГц}
+        \eli_{\max} = q_{\max}\omega \implies \nu = \frac{\omega}{2\pi} = \frac{\eli_{\max}}{2\pi q} \approx 238{,}7\,\text{Гц}.
     $
 }
 \solutionspace{80pt}
@@ -2560,10 +3550,10 @@
 }
 \answer{%
     \begin{align*}
-    \omega &= 15\units{c}^-1, \\
+    \omega &= 15\funits{рад}{c}, \\
     T &= \frac{2\pi}\omega \approx 418{,}9\,\text{мc}, \\
     C &= \frac 1{\omega^2 L} \approx 55{,}6\,\text{мФ}, \\
-    q &= \frac{\eli_{\max}}\omega  \approx 3{,}3\,\text{мКл}.
+    q_{\max} &= \frac{\eli_{\max}}\omega  \approx 3{,}3\,\text{мКл}.
     \end{align*}
 }
 \solutionspace{80pt}
@@ -2572,14 +3562,44 @@
 \task{%
     Электрический колебательный контур состоит
     из катушки индуктивностью $L$ и конденсатора ёмкостью $C$.
-    последовательно катушке подключают ещё одну катушку индуктивностью $\frac12L$.
-    Как изменится период сводобных колебаний в контуре?
+    Последовательно катушке подключают ещё одну катушку индуктивностью $\frac12L$.
+    Как изменится период свободных колебаний в контуре?
+}
+\answer{%
+    $
+        T = 2\pi\sqrt{LC}, \quad
+        T' = 2\pi\sqrt{L'C'}
+            = T \sqrt{\frac{L'}L \cdot \frac{C'}C}
+            = T \sqrt{ \frac32 \cdot 1 }
+        \implies \frac{T'}T = \sqrt{ \frac32 \cdot 1 } \approx 1{,}225.
+    $
+}
+\solutionspace{100pt}
+
+\tasknumber{5}%
+\task{%
+    В колебательном контуре частота собственных колебаний $40\,\text{Гц}$.
+    После замены катушки индуктивность на другую частота стала равной $50\,\text{Гц}$.
+    А какой станет частота собственных колебаний, если в контур установить
+    обе эти катушки параллельно?
 }
 \answer{%
     \begin{align*}
-    T &= 2\pi\sqrt{LC} \\
-    T' &= 2\pi\sqrt{L'C'}= T \sqrt{\frac{L'}L \cdot \frac{C'}C} = T \sqrt{ \frac32 \cdot 1 } \\
-    &\frac{T'}T = \sqrt{ \frac32 \cdot 1 } \approx 2{,}250
+    T &= 2\pi\sqrt{LC} \implies \nu = \frac 1T = \frac 1{2\pi\sqrt{LC}} \implies L = \frac1 {4\pi^2 \nu^2 C}, \\
+    L_1 &= \frac1 {4\pi^2 \nu_1^2 C}, L_2 = \frac1 {4\pi^2 \nu_1^2 C}, \\
+    \nu_\text{послед.}
+            &= \frac 1{2\pi\sqrt{(L_1 + L_2)C}}
+            = \frac 1{2\pi\sqrt{\cbr{\frac1 {4\pi^2 \nu_1^2 C} + \frac1 {4\pi^2 \nu_2^2 C}}C}}
+            = \frac 1{\sqrt{\cbr{\frac1 {\nu_1^2 C} + \frac1 {\nu_2^2 C}}C}} =  \\
+     &= \frac 1{\sqrt{\frac1 {\nu_1^2} + \frac1 {\nu_2^2}}}
+            = \frac 1{\sqrt{ \frac1 {\sqr{40\,\text{Гц}}} + \frac1 {\sqr{50\,\text{Гц}}}}}
+            \approx 31{,}23\,\text{Гц} \\
+    \nu_\text{паралл.}
+            &= \frac 1{2\pi\sqrt{\frac 1{\frac 1{L_1} + \frac 1{L_2}}C}}
+            = \frac 1{2\pi\sqrt{\frac 1{\frac 1{\frac1 {4\pi^2 \nu_1^2 C}} + \frac 1{\frac1 {4\pi^2 \nu_2^2 C}}}C}}
+            = \frac 1{2\pi\sqrt{\frac 1{4\pi^2 \nu_1^2 C + 4\pi^2 \nu_2^2 C}C}} = \\
+     &= \frac 1{\sqrt{\frac 1{\nu_1^2 + \nu_2^2}}}
+            = \sqrt{\nu_1^2 + \nu_2^2} = \sqrt{\sqr{40\,\text{Гц}} + \sqr{50\,\text{Гц}}} \approx 64{,}03\,\text{Гц}.
     \end{align*}
 }
 
@@ -2599,13 +3619,13 @@
     \end{itemize}
 }
 \answer{%
-    \begin{align*}
-    T &= 2\pi\sqrt{LC} \\
-    \nu &= \frac 1{2\pi\sqrt{LC}}, \\
-    \omega &= \frac 1{\sqrt{LC}}, \\
-    L &= \frac 1C \sqr{\frac T{2\pi}}, \\
-    C &= \frac 1L \sqr{\frac T{2\pi}}.
-    \end{align*}
+    $
+        T = 2\pi\sqrt{LC},
+        \nu = \frac 1{2\pi\sqrt{LC}},
+        \omega = \frac 1{\sqrt{LC}},
+        L = \frac 1C \sqr{\frac T{2\pi}},
+        C = \frac 1L \sqr{\frac T{2\pi}}.
+    $
 }
 \solutionspace{80pt}
 
@@ -2617,7 +3637,7 @@
 }
 \answer{%
     $
-        \eli_{\max} = q_{\max}\omega \implies \nu = \frac{\omega}{2\pi} = \frac{\eli_{\max}}{2\pi q} \approx 0{,}398\,\text{кГц}
+        \eli_{\max} = q_{\max}\omega \implies \nu = \frac{\omega}{2\pi} = \frac{\eli_{\max}}{2\pi q} \approx 397{,}9\,\text{Гц}.
     $
 }
 \solutionspace{80pt}
@@ -2636,10 +3656,10 @@
 }
 \answer{%
     \begin{align*}
-    \omega &= 12\units{c}^-1, \\
+    \omega &= 12\funits{рад}{c}, \\
     T &= \frac{2\pi}\omega \approx 523{,}6\,\text{мc}, \\
     C &= \frac 1{\omega^2 L} \approx 115{,}7\,\text{мФ}, \\
-    q &= \frac{\eli_{\max}}\omega  \approx 25{,}0\,\text{мКл}.
+    q_{\max} &= \frac{\eli_{\max}}\omega  \approx 25{,}0\,\text{мКл}.
     \end{align*}
 }
 \solutionspace{80pt}
@@ -2648,14 +3668,44 @@
 \task{%
     Электрический колебательный контур состоит
     из катушки индуктивностью $L$ и конденсатора ёмкостью $C$.
-    последовательно конденсатору подключают ещё один конденсатор емкостью $2L$.
-    Как изменится период сводобных колебаний в контуре?
+    Последовательно конденсатору подключают ещё один конденсатор емкостью $2C$.
+    Как изменится период свободных колебаний в контуре?
+}
+\answer{%
+    $
+        T = 2\pi\sqrt{LC}, \quad
+        T' = 2\pi\sqrt{L'C'}
+            = T \sqrt{\frac{L'}L \cdot \frac{C'}C}
+            = T \sqrt{ 1 \cdot \frac23 }
+        \implies \frac{T'}T = \sqrt{ 1 \cdot \frac23 } \approx 0{,}816.
+    $
+}
+\solutionspace{100pt}
+
+\tasknumber{5}%
+\task{%
+    В колебательном контуре частота собственных колебаний $40\,\text{Гц}$.
+    После замены катушки индуктивность на другую частота стала равной $70\,\text{Гц}$.
+    А какой станет частота собственных колебаний, если в контур установить
+    обе эти катушки параллельно?
 }
 \answer{%
     \begin{align*}
-    T &= 2\pi\sqrt{LC} \\
-    T' &= 2\pi\sqrt{L'C'}= T \sqrt{\frac{L'}L \cdot \frac{C'}C} = T \sqrt{ 1 \cdot \frac23 } \\
-    &\frac{T'}T = \sqrt{ 1 \cdot \frac23 } \approx 0{,}444
+    T &= 2\pi\sqrt{LC} \implies \nu = \frac 1T = \frac 1{2\pi\sqrt{LC}} \implies L = \frac1 {4\pi^2 \nu^2 C}, \\
+    L_1 &= \frac1 {4\pi^2 \nu_1^2 C}, L_2 = \frac1 {4\pi^2 \nu_1^2 C}, \\
+    \nu_\text{послед.}
+            &= \frac 1{2\pi\sqrt{(L_1 + L_2)C}}
+            = \frac 1{2\pi\sqrt{\cbr{\frac1 {4\pi^2 \nu_1^2 C} + \frac1 {4\pi^2 \nu_2^2 C}}C}}
+            = \frac 1{\sqrt{\cbr{\frac1 {\nu_1^2 C} + \frac1 {\nu_2^2 C}}C}} =  \\
+     &= \frac 1{\sqrt{\frac1 {\nu_1^2} + \frac1 {\nu_2^2}}}
+            = \frac 1{\sqrt{ \frac1 {\sqr{40\,\text{Гц}}} + \frac1 {\sqr{70\,\text{Гц}}}}}
+            \approx 34{,}73\,\text{Гц} \\
+    \nu_\text{паралл.}
+            &= \frac 1{2\pi\sqrt{\frac 1{\frac 1{L_1} + \frac 1{L_2}}C}}
+            = \frac 1{2\pi\sqrt{\frac 1{\frac 1{\frac1 {4\pi^2 \nu_1^2 C}} + \frac 1{\frac1 {4\pi^2 \nu_2^2 C}}}C}}
+            = \frac 1{2\pi\sqrt{\frac 1{4\pi^2 \nu_1^2 C + 4\pi^2 \nu_2^2 C}C}} = \\
+     &= \frac 1{\sqrt{\frac 1{\nu_1^2 + \nu_2^2}}}
+            = \sqrt{\nu_1^2 + \nu_2^2} = \sqrt{\sqr{40\,\text{Гц}} + \sqr{70\,\text{Гц}}} \approx 80{,}62\,\text{Гц}.
     \end{align*}
 }
 % autogenerated
