@@ -23,6 +23,12 @@ class BaseUnit:
         self._name = name
         self._full_name = full_name
 
+    def __str__(self):
+        return self._full_name
+
+    def __repr__(self):
+        return self._full_name
+
 
 class BaseUnits:
     kg = BaseUnit('кг', 'килограм'),
@@ -34,27 +40,22 @@ class BaseUnits:
     cd = BaseUnit('кд', 'кандела'),
 
 
-ALL_BASE_UNITS = [
-    BaseUnits.kg,
-    BaseUnits.s,
-    BaseUnits.m,
-    BaseUnits.mol,
-    BaseUnits.A,
-    BaseUnits.K,
-    BaseUnits.cd,
-]
-
-
 class SimpleUnit:
-    def __init__(self, full_name, short_name, en_name, basic_units):
+    def __init__(self, full_name, short_name, en_name, base_units):
         assert isinstance(full_name, str)
         assert isinstance(short_name, str)
         assert isinstance(en_name, str)
-        assert isinstance(basic_units, dict)
+        assert isinstance(base_units, dict)
         self._full_name = full_name
         self._short_name = short_name
         self._en_name = en_name
-        self._basic_units = basic_units
+        self._base_units = base_units
+
+    def __str__(self):
+        return self._full_name
+
+    def __repr__(self):
+        return self._full_name
 
 
 class SimpleUnits:
@@ -94,6 +95,46 @@ class SimpleUnits:
     sievert = SimpleUnit('зиверт', 'Зв', 'Sv', {BaseUnits.m: 2, BaseUnits.s: -2})
 
 
+ALL_SIMPLE_UNITS = [
+    SimpleUnits.kg,
+    SimpleUnits.s,
+    SimpleUnits.m,
+    SimpleUnits.mol,
+    SimpleUnits.A,
+    SimpleUnits.K,
+    SimpleUnits.cd,
+    SimpleUnits.no_units,
+    SimpleUnits.radian,
+    SimpleUnits.steradian,
+    SimpleUnits.degree_celsius,
+    SimpleUnits.hertz,
+    SimpleUnits.newton,
+    SimpleUnits.joule,
+    SimpleUnits.watt,
+    SimpleUnits.pascal,
+    SimpleUnits.lumen,
+    SimpleUnits.lux,
+    SimpleUnits.coulomb,
+    SimpleUnits.volt,
+    SimpleUnits.ohm,
+    SimpleUnits.farad,
+    SimpleUnits.weber,
+    SimpleUnits.tesla,
+    SimpleUnits.henry,
+    SimpleUnits.siemens,
+    SimpleUnits.becquerel,
+    SimpleUnits.gray,
+    SimpleUnits.sievert,
+]
+
+
+def get_simple_unit(base_units):
+    assert isinstance(base_units, dict)
+    for simple_unit in ALL_SIMPLE_UNITS:
+        if simple_unit._base_units == base_units:
+            return simple_unit
+    raise RuntimeError(f'No simple units for {base_units}')
+
 
 # TODO: desirable
 def test_value():
@@ -112,12 +153,12 @@ def get_known_units():
         ('C', 1, SimpleUnits.degree_celsius),   # celsium
         ('К', 1, SimpleUnits.K),   # кельвин
         ('K', 1, SimpleUnits.K),   # kelvin
-        SimpleUnits.volt, 
+        SimpleUnits.volt,
         SimpleUnits.joule,
-        SimpleUnits.newton, 
+        SimpleUnits.newton,
         SimpleUnits.watt,
         SimpleUnits.ohm,
-        SimpleUnits.farad, 
+        SimpleUnits.farad,
         SimpleUnits.A,
         SimpleUnits.coulomb,
         SimpleUnits.kg,
@@ -142,6 +183,7 @@ KNOWN_UNITS = list(get_known_units())
 
 class OneUnit:
     def __init__(self, line, is_numenator):
+        self._line = line
         try:
             self._load_from_str(line)
         except:
@@ -152,6 +194,7 @@ class OneUnit:
         assert isinstance(self.HumanUnit, str)
         assert isinstance(self.HumanPower, int)
         assert isinstance(self.IsNumerator, bool)
+        assert isinstance(self.simple_unit, SimpleUnit)
 
     def get_tex(self):
         res = '\\text{%s}' % self.HumanUnit

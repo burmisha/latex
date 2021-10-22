@@ -1,4 +1,4 @@
-from generators.helpers.unit import OneUnit
+from generators.helpers.unit import OneUnit, BaseUnits, SimpleUnits, get_simple_unit
 
 import logging
 log = logging.getLogger(__name__)
@@ -255,6 +255,17 @@ class UnitValue:
             self._value_str = valueStr
         return self._value_str
 
+    def get_base_units(self):
+        total_units = {}
+        for unit in self._units:
+            mult = 1 if unit.IsNumerator else -1
+            base_units = unit.simple_unit._base_units
+            for base_unit, degree in base_units.items():
+                if base_unit not in total_units:
+                    total_units[base_unit] = 0
+                total_units[base_unit] = total_units[base_unit] + degree * mult
+        return total_units
+
     def __format__(self, fmt):
         try:
             fmt_parts = fmt.replace(':', '|').split('|')
@@ -335,19 +346,43 @@ class UnitValue:
         return r
 
 
-for src, canonic in [
-    (UnitValue('50 мТл').Value * (10 ** UnitValue('50 мТл')._power), 0.05),
-    ('{:Task}'.format(UnitValue('c = 3 10^{8} м / с')), 'c = 3 \\cdot 10^{8}\\,\\frac{\\text{м}}{\\text{с}}'),
-    ('{:Task}'.format(UnitValue('t = 8 суток')), 't = 8\\,\\text{суток}'),
-    ('{:Value}'.format(UnitValue('m = 1.67 10^-27 кг')), '1{,}67 \\cdot 10^{-27}\\,\\text{кг}'),
-    ('{:Value}'.format(UnitValue('T = 1.7 суток')), '1{,}7\\,\\text{суток}'),
-    ('{:Value}'.format(UnitValue('12 км / ч')), '12\\,\\frac{\\text{км}}{\\text{ч}}'),
-    ('{:Value}'.format(UnitValue('50 км / ч')), '50\\,\\frac{\\text{км}}{\\text{ч}}'),
-    ('{:TestAnswer}'.format(UnitValue('4 см')), '4'),
-    ('{:Value}'.format(UnitValue('0 см')), '0\\,\\text{см}'),
-    ('{:Value}'.format(UnitValue('0 см')), '0\\,\\text{см}'),
-    ('{:Task}'.format(UnitValue('A = 200 Дж')), 'A = 200\\,\\text{Дж}'),
-    ('{:TestAnswer}'.format(UnitValue('2.5 м')), r'2.5'),
-    ('{:Value}'.format(UnitValue('2 10^4 км/c')), '2 \\cdot 10^{4}\\,\\frac{\\text{км}}{\\text{c}}'),
-]:
-    assert src == canonic, f'Expected {canonic}, got {src}'
+def test_unit_value():
+    data = [
+        (UnitValue('50 мТл').Value * (10 ** UnitValue('50 мТл')._power), 0.05),
+        ('{:Task}'.format(UnitValue('c = 3 10^{8} м / с')), 'c = 3 \\cdot 10^{8}\\,\\frac{\\text{м}}{\\text{с}}'),
+        ('{:Task}'.format(UnitValue('t = 8 суток')), 't = 8\\,\\text{суток}'),
+        ('{:Value}'.format(UnitValue('m = 1.67 10^-27 кг')), '1{,}67 \\cdot 10^{-27}\\,\\text{кг}'),
+        ('{:Value}'.format(UnitValue('T = 1.7 суток')), '1{,}7\\,\\text{суток}'),
+        ('{:Value}'.format(UnitValue('12 км / ч')), '12\\,\\frac{\\text{км}}{\\text{ч}}'),
+        ('{:Value}'.format(UnitValue('50 км / ч')), '50\\,\\frac{\\text{км}}{\\text{ч}}'),
+        ('{:TestAnswer}'.format(UnitValue('4 см')), '4'),
+        ('{:Value}'.format(UnitValue('0 см')), '0\\,\\text{см}'),
+        ('{:Value}'.format(UnitValue('0 см')), '0\\,\\text{см}'),
+        ('{:Task}'.format(UnitValue('A = 200 Дж')), 'A = 200\\,\\text{Дж}'),
+        ('{:TestAnswer}'.format(UnitValue('2.5 м')), r'2.5'),
+        ('{:Value}'.format(UnitValue('2 10^4 км/c')), '2 \\cdot 10^{4}\\,\\frac{\\text{км}}{\\text{c}}'),
+    ]
+    for src, canonic in data:
+        assert src == canonic, f'Expected {canonic}, got {src}'
+
+
+test_unit_value()
+
+
+def test_get_base_units():
+    data = [
+        ('50 мДж', {BaseUnits.m: 2, BaseUnits.s: -2, BaseUnits.kg: 1}),
+        ('50 Дж с', {BaseUnits.m: 2, BaseUnits.s: -1, BaseUnits.kg: 1}),
+        ('50 мВт мс', {BaseUnits.m: 2, BaseUnits.s: -2, BaseUnits.kg: 1}),
+    ]
+    for line, base_units in data:
+        unit_value = UnitValue(line)
+        result = unit_value.get_base_units()
+        assert result == base_units, f'Expected {base_units}, got {result}'
+
+    unit_value = UnitValue('50 мВт мс')
+    result = get_simple_unit(unit_value.get_base_units())
+    assert result == SimpleUnits.joule, result
+
+
+test_get_base_units()
