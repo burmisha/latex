@@ -69,7 +69,7 @@ class Kirchgof_double(variant.VariantTask):
         I_ratio = (
             Fraction(numerator=E1.Value, denominator=r1.Value) + Fraction(numerator=E2.Value, denominator=r2.Value)
         ) / (
-            Fraction(base_value=1) + Fraction(numerator=R.Value, denominator=r1.Value) + Fraction(numerator=R.Value, denominator=r2.Value)
+            Fraction(1) + Fraction(numerator=R.Value, denominator=r1.Value) + Fraction(numerator=R.Value, denominator=r2.Value)
         )
 
         I = '\\eli = -%.1f А' % float(I_ratio)
@@ -205,7 +205,7 @@ class Kirchgof_double_2(variant.VariantTask):
         I_ratio = (
             Fraction(numerator=E1.Value, denominator=r1.Value) - Fraction(numerator=E2.Value, denominator=r2.Value)
         ) / (
-            Fraction(base_value=1) + Fraction(numerator=R.Value, denominator=r1.Value) + Fraction(numerator=R.Value, denominator=r2.Value)
+            Fraction(1) + Fraction(numerator=R.Value, denominator=r1.Value) + Fraction(numerator=R.Value, denominator=r2.Value)
         )
 
         I = '\\eli = %.3f А' % float(I_ratio)

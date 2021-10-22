@@ -185,10 +185,10 @@ class W_from_L_or_Phi(variant.VariantTask):
 class L_W_ratio(variant.VariantTask):
     def GetUpdate(self, L=None, I=None, n=None, n_text=None, m=None, m_text=None, what=None):
         if what == 'больше':
-            l = Fraction() * n
+            l = Fraction(1) * n
             L2 = L * n
         else:
-            l = Fraction() / n
+            l = Fraction(1) / n
             L2 = L / n
         W1 = L * I * I / 2
         W2_W1 = l * m ** 2

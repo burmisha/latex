@@ -342,7 +342,7 @@ class Task12(variant.VariantTask):
 ''')
 class Task13(variant.VariantTask):
     def GetUpdate(self, *, n=None, frac=None):
-        r1 = Fraction() / 2 + Fraction() * 2 / frac
+        r1 = Fraction(1) / 2 + Fraction(1) * 2 / frac
         r2 = r1 * 2
         return dict(
             r1=r1,
@@ -469,7 +469,7 @@ class Task18(variant.VariantTask):
 @variant.answer_short('t = {share:LaTeX}T \\implies \\frac tT = {share:LaTeX}')
 class Task19(variant.VariantTask):
     def GetUpdate(self, *, which=None, nom=None, denom=None):
-        share = Fraction() * nom / denom
+        share = Fraction(1) * nom / denom
         if which == 'более':
             share = share * (-1) + 1
 

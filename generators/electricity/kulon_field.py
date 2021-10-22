@@ -65,8 +65,8 @@ class ExchangeTask(variant.VariantTask):
             '{}{}{}'.format(sign_1, first_charge, chargeLetter),
             '{}{}{}'.format(sign_2, second_charge, chargeLetter),
         ]
-        q_ratio = Fraction() * (sign_to_mult(sign_1) * first_charge + sign_to_mult(sign_2) * second_charge) / 2
-        ratio = Fraction() * q_ratio * q_ratio / first_charge / second_charge / (n ** 2)
+        q_ratio = Fraction(1) * (sign_to_mult(sign_1) * first_charge + sign_to_mult(sign_2) * second_charge) / 2
+        ratio = Fraction(1) * q_ratio * q_ratio / first_charge / second_charge / (n ** 2)
         return dict(
             res=[
                 'отталкивание' if (sign_to_mult(sign_1) == sign_to_mult(sign_2)) else 'притяжение',
@@ -186,9 +186,9 @@ class R_from_r_e1_e2(variant.VariantTask):  # Вишнякова 3.1.2
 class F_from_many_q(variant.VariantTask):  # Вишнякова 3.1.3
     def GetUpdate(self, n=None, n_text=None, r=None, q=None, sign=None):
         if n == 3:
-            ratio = Fraction() + Fraction() / 4
+            ratio = Fraction(1) + Fraction(1) / 4
         elif n == 4:
-            ratio = Fraction() + Fraction() / 4 + Fraction() / 9
+            ratio = Fraction(1) + Fraction(1) / 4 + Fraction(1) / 9
         return dict(
             ratio=ratio,
         )

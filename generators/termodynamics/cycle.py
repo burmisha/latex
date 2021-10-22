@@ -63,8 +63,8 @@ class Rectangle(variant.VariantTask):
         A12 = (alpha - 1) * beta
         U12 = (alpha - 1) * beta
         U41 = beta - 1
-        eta = Fraction() * 2 * A / (2 * A12 + 3 * U12 + 3 * U41)
-        eta_max = Fraction() - Fraction() / (alpha * beta)
+        eta = Fraction(1) * 2 * A / (2 * A12 + 3 * U12 + 3 * U41)
+        eta_max = Fraction(1) - Fraction(1) / (alpha * beta)
         return dict(
             A=A,
             A12=A12,
@@ -131,8 +131,8 @@ class Rectangle_T(variant.VariantTask):
         A23 = (beta - 1) * alpha
         U23 = (beta - 1) * alpha
         U12 = alpha - 1
-        eta = Fraction() * 2 * A / (2 * A23 + 3 * U12 + 3 * U23)
-        eta_max = Fraction() / (alpha * beta) * (-1) + 1
+        eta = Fraction(1) * 2 * A / (2 * A23 + 3 * U12 + 3 * U23)
+        eta_max = Fraction(1) / (alpha * beta) * (-1) + 1
         return dict(
             t=t,
             A=A,
@@ -311,24 +311,24 @@ class TriangleUp_T(variant.VariantTask):
         A23 = (beta - 1) * alpha
         U23 = (beta - 1) * alpha
         U12 = alpha - 1
-        eta = Fraction() * A / (2 * A23 + 3 * U12 + 3 * U23)
+        eta = Fraction(1) * A / (2 * A23 + 3 * U12 + 3 * U23)
 
         a1 = alpha + 1
-        A_bonus_cycle = Fraction() * (alpha - 1) ** 2 / 2
-        A_bonus_plus = Fraction() * (11 * alpha + 3) * (5 * alpha - 3) / (16 * 8)
-        U_bonus_plus = (Fraction() * 15 * (alpha + 1) ** 2 / 64 - alpha) * 3 / 2
-        U_bonus_12 = Fraction() * (alpha - 1) / 1 * 3 / 2
-        eta_bonus = Fraction() * A_bonus_cycle / (U_bonus_plus + A_bonus_plus + U_bonus_12)
-        V_star = Fraction() * (alpha + 1) * 5 / 8
-        P_star = Fraction() * (alpha + 1) * 3 / 8
+        A_bonus_cycle = Fraction(1) * (alpha - 1) ** 2 / 2
+        A_bonus_plus = Fraction(1) * (11 * alpha + 3) * (5 * alpha - 3) / (16 * 8)
+        U_bonus_plus = (Fraction(1) * 15 * (alpha + 1) ** 2 / 64 - alpha) * 3 / 2
+        U_bonus_12 = Fraction(1) * (alpha - 1) / 1 * 3 / 2
+        eta_bonus = Fraction(1) * A_bonus_cycle / (U_bonus_plus + A_bonus_plus + U_bonus_12)
+        V_star = Fraction(1) * (alpha + 1) * 5 / 8
+        P_star = Fraction(1) * (alpha + 1) * 3 / 8
         # a1=42
-        # A_bonus_cycle=Fraction() * 42 / 23
-        # A_bonus_plus=Fraction() * 42 / 23
-        # U_bonus_plus=Fraction() * 42 / 23
-        # U_bonus_12=Fraction() * 42 / 23
-        # eta_bonus=Fraction() * 42 / 23
-        # V_star=Fraction() * 42 / 23
-        # P_star=Fraction() * 42 / 23
+        # A_bonus_cycle=Fraction(1) * 42 / 23
+        # A_bonus_plus=Fraction(1) * 42 / 23
+        # U_bonus_plus=Fraction(1) * 42 / 23
+        # U_bonus_12=Fraction(1) * 42 / 23
+        # eta_bonus=Fraction(1) * 42 / 23
+        # V_star=Fraction(1) * 42 / 23
+        # P_star=Fraction(1) * 42 / 23
 
         return dict(
             t=t,
@@ -394,7 +394,7 @@ class TriangleUp(variant.VariantTask):
         A12 = (alpha - 1) * beta
         U12 = (alpha - 1) * beta
         U31 = alpha - 1
-        eta = Fraction() * A / (2 * A12 + 3 * U31 + 3 * U12)
+        eta = Fraction(1) * A / (2 * A12 + 3 * U31 + 3 * U12)
         return dict(
             t=t,
             A=A,

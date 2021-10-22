@@ -109,9 +109,9 @@ class Task03(variant.VariantTask):
 ''')
 class Task04(variant.VariantTask):
     def GetUpdate(self, *, how=None, what1=None, what2=None, what3=None, nom=None, denom=None):
-        frac = Fraction() * nom / denom
-        l = Fraction()
-        c = Fraction()
+        frac = Fraction(1) * nom / denom
+        l = Fraction(1)
+        c = Fraction(1)
         if how == 'Параллельно':
             if what1 == 'катушке':
                 l = (frac * 1) / (frac + 1)

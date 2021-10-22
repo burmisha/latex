@@ -180,7 +180,7 @@ class Q_from_DeltaU_C(variant.VariantTask):  # Генденштейн-10-54-5
 @variant.answer_short('''
     \\frac{C'}C
         = \\frac{\\eps_0\\eps \\frac S{a}}{\\frac d{b}} \\Big/ \\frac{\\eps_0\\eps S}d
-        = \\frac{{b}}{{a}} = {sign} 1 \\implies \\text{{result}}
+        = \\frac{{b}}{{a}} = {sign} 1 \\implies \\text{{result} в ${ratio:LaTeX}$ раз}
 ''')
 @variant.answer_test('{ratio:Basic}')
 @variant.arg(a=[2, 3, 4, 5, 6, 7, 8])
@@ -189,19 +189,18 @@ class Q_from_DeltaU_C(variant.VariantTask):  # Генденштейн-10-54-5
 # @variant.arg(b__b_times=n_times(2, 3, 4, 5, 6, 7, 8))
 class C_ratio(variant.VariantTask):  # Rymkevich751
     def GetUpdate(self, a=None, b=None):
-        value = Fraction() * b / a
-        if value._fraction == 1:
+        value = Fraction(1) * b / a
+        if value == 1:
             sign = '='
             result = 'не изменится'
         else:
-            if value._fraction > 1:
+            if value > 1:
                 sign = '>'
                 result = 'увеличится'
-            elif value._fraction < 1:
+            elif value < 1:
                 sign = '<'
                 result = 'уменьшится'
-                value = Fraction() / value
-            result += ' в ${value:LaTeX}$ раз'.format(value=value)
+                value = Fraction(1) / value
         return dict(
             sign=sign,
             result=result,

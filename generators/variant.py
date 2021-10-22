@@ -6,6 +6,7 @@ import re
 
 from generators.helpers import UnitValue, Consts, letter_variants
 from generators.helpers.vars import Vars
+from generators.helpers.fraction import Fraction, FractionFormatter
 
 import library
 import problems
@@ -40,7 +41,12 @@ class LaTeXFormatter:
         if args is None:
             args = {}
         assert isinstance(args, dict)
-        self._args = args
+        self._args = {}
+        for key, value in args.items():
+            if isinstance(value, Fraction):
+                self._args[key] = FractionFormatter(value)
+            else:
+                self._args[key] = value
         self._args['Consts'] = Consts
         self._keys = set(self._args.keys())
 
@@ -154,6 +160,46 @@ def test_substitute():
 
 
 test_substitute()
+
+
+def test_fraction():
+    for template, frac, result in [
+        ('{f:LaTeX}', Fraction(), '0'),
+        ('{f:LaTeX}', Fraction(0), '0'),
+        ('{f:LaTeX}', Fraction(1), '1'),
+        ('{f:LaTeX}', Fraction(1) * (-2), '-2'),
+        ('{f:LaTeX}', Fraction(1) * 2, '2'),
+        ('{f:LaTeX}', Fraction(1) * 2 / 2, '1'),
+        ('{f:LaTeX}', Fraction(1) * 2 / 2, '1'),
+        ('{f:LaTeX}', Fraction(1) * 2 / 4, '\\frac12'),
+        ('{f:LaTeX}', Fraction(1) * 19 / 20, '\\frac{19}{20}'),
+        ('{f:LaTeX}', Fraction(1) * (-19) / 20, '-\\frac{19}{20}'),
+        ('{f:LaTeX}', Fraction(1) / (2 * 3) * (-1) + 1, '\\frac56'),
+        ('{f:Basic}', Fraction(1) / (2 * 3) * (-1) + 1, '5/6'),
+        ('{f:Basic}', Fraction(1) / (2 * 3) * (-12), '-2'),
+    ]:
+        res = LaTeXFormatter({'f': frac}).format(template)
+        assert res == result, f'Expected {result}, got {res} for {frac}'
+
+    # alpha = 3
+    # A_bonus_cycle = Fraction() * (alpha - 1) ** 2 / 2
+    # assert f'{A_bonus_cycle:LaTeX}'
+    # A_bonus_plus = Fraction() * (11 * alpha + 3) * (5 * alpha - 3) / (16 * 8)
+    # assert f'{A_bonus_plus:LaTeX}'
+    # U_bonus_plus = (Fraction() * 15 * (alpha + 1) ** 2 / 64 - alpha) * 3 / 2
+    # assert f'{U_bonus_plus:LaTeX}'
+    # U_bonus_12 = Fraction() * (alpha - 1) / 1 * 3 / 2
+    # assert f'{U_bonus_12:LaTeX}'
+    # eta_bonus = Fraction() * A_bonus_cycle / (U_bonus_plus + A_bonus_plus + U_bonus_12)
+    # assert f'{eta_bonus:LaTeX}'
+
+    # a = Fraction(1)
+    # assert int(float(a)) == 1
+    # b = a * 200
+    # assert int(float(a)) == 1
+
+
+test_fraction()
 
 
 def check_unit_value(value):

@@ -268,7 +268,7 @@ class U_from_R1_R2_I(variant.VariantTask):
 class I_ratio(variant.VariantTask):
     def GetUpdate(self, a=None, b=None, which=None):
         return dict(
-            ratio=Fraction() / b / a,
+            ratio=Fraction(1) / b / a,
         )
 
 
@@ -293,8 +293,8 @@ class I_ratio(variant.VariantTask):
 class P_ratio(variant.VariantTask):
     def GetUpdate(self, a=None, times_a=None, b=None, times_b=None, which=None):
         return dict(
-            ratio_i=Fraction() / b / a,
-            ratio_P=Fraction() / b / b / a,
+            ratio_i=Fraction(1) / b / a,
+            ratio_P=Fraction(1) / b / b / a,
         )
 
 
