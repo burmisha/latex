@@ -24,7 +24,7 @@ class Template(variant.VariantTask):
 ''')
 @variant.solution_space(80)
 @variant.arg(q1=['частоту', 'циклическую частоту'])
-@variant.arg(q2=['выразите ёмкость конденсатора', 'индуктивность катушки.'])
+@variant.arg(q2=['ёмкость конденсатора', 'индуктивность катушки'])
 @variant.answer_short('''
     T = 2\\pi\\sqrt{LC},
     \\nu = \\frac 1{2\\pi\\sqrt{LC}},
