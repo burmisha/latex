@@ -106,7 +106,68 @@ def test_precisionFmt2():
 test_precisionFmt2()
 
 
+def get_precision(line):
+    precisionStr = line.replace('-', '').replace('.', '').lstrip('0')
+    if not precisionStr:
+        assert line in ['0', '0.0', '0.00'], f'Could not get precision from {line!r}'
+        is_zero = True
+        precisionStr = '0'
+    else:
+        is_zero = False
+    precision = len(precisionStr)
+    if precisionStr[0] == '1' and precision >= 2:
+        precision -= 1
+
+    assert precision >= 1, f'Got invalid precision {self.Precision} from {line!r}'
+
+    return is_zero, precision
+
+
+def test_get_precision():
+    data = [
+        ('-2.0', False, 2),
+        ('2.0', False, 2),
+        ('2.00', False, 3),
+        ('0.0020', False, 2),
+        ('0.00200', False, 3),
+        ('20', False, 2),
+        ('200', False, 3),
+        ('192', False, 2),
+        ('0', True, 1),
+        ('0.0', True, 1),
+        ('0.00', True, 1),
+    ]
+    for line, is_zero, precision in data:
+        result = get_precision(line)
+        assert result[0] == is_zero, f'Expected {is_zero},  got {result[0]} for {line}'
+        assert result[1] == precision, f'Expected {precision},  got {result[1]} for {line}'
+
+
+test_get_precision()
+
+
+class Pipes:
+    PIPES_DICT = {
+        's': '{{{}}}',
+        'e': '${}$',
+        'sqr': '\\sqr{{{}}}',
+        'sqrt': '\\sqrt{{{}}}',
+        'cdot': '{} \\cdot'
+    }
+
+    def apply(self, line, pipes):
+        for pipe in pipes:
+            pipe_fmt = self.PIPES_DICT.get(pipe)
+            if pipe_fmt is None:
+                raise RuntimeError(f'Unknown pipe {pipe}')
+            line = pipe_fmt.format(line)
+        return line
+
+
+
 class UnitValue:
+    PIPES = Pipes()
+
     def __init__(self, line, precision=None, viewPrecision=None):
         self.__raw_line = line
         self._is_zero = None
@@ -117,19 +178,6 @@ class UnitValue:
             raise
         self.ViewPrecision = viewPrecision
         self._value_str = None
-
-    def _parse_precision(self, value_part):
-        precisionStr = value_part.replace('.', '').lstrip('0')
-        if not precisionStr:
-            assert value_part in ['0', '0.0', '0.00'], f'Could not get precision from {value_part!r}'
-            self._is_zero = True
-            precisionStr = '0'
-        else:
-            self._is_zero = False
-        precision = len(precisionStr)
-        if precisionStr[0] == '1' and precision >= 2:
-            precision -= 1
-        return precision
 
     def _load(self, line, precision=None):
         line = line.strip()
@@ -147,28 +195,32 @@ class UnitValue:
             '/': ' / ',
             '**': '^',
             ' ^': '^',
+            '^ ': '^',
         }.items():
             value_line = value_line.replace(key, value)
 
         self.ValuePower = 0
-
+        self.Value = None
         self._units = []
+
         isNumerator = True
-        for index, part in enumerate(value_line.split()):
-            if index == 0:
-                try:
-                    self.Value = int(part)
-                except ValueError:
-                    self.Value = float(part)
-                self.Precision = self._parse_precision(part) if precision is None else precision
-                assert self.Precision >= 1
+        for part in value_line.split():
+            if self.Value is None:
+                self.Value = int(part) if part.isdigit() else float(part)
+
+                if precision is None:
+                    self._is_zero, self.Precision = get_precision(part)
+                else:
+                    self.Precision = precision
+
             elif part.startswith('10^'):
                 self.ValuePower = int(part[3:].strip('{').strip('}'))
+
+            elif part == '/':
+                isNumerator = False
+
             else:
-                if part == '/':
-                    isNumerator = False
-                else:
-                    self._units.append(OneUnit(part, isNumerator))
+                self._units.append(OneUnit(part, isNumerator))
 
         self._power = sum(unit.SiPower if unit.IsNumerator else -unit.SiPower for unit in self._units) + self.ValuePower
 
@@ -181,32 +233,13 @@ class UnitValue:
     def _get_units_tex(self):
         humanNom = '\\cdot'.join(unit.get_tex() for unit in self._units if unit.IsNumerator)
         humanDen = '\\cdot'.join(unit.get_tex() for unit in self._units if not unit.IsNumerator)
-        if humanDen:
-            if humanNom:
-                units = '\,\\frac{%s}{%s}' % (humanNom, humanDen)
-            else:
-                units = '\,\\frac{1}{%s}' % (humanDen)
-        elif humanNom:
-            units = '\,' + humanNom
-        else:
-            units = ''
-        return units
-
-    def _apply_pipes(self, line, pipes):
-        pipes_dict = {
-            's': '{{{}}}',
-            'b': '\\left({}\\right)',
-            'e': '${}$',
-            'sqr': '\\sqr{{{}}}',
-            'sqrt': '\\sqrt{{{}}}',
-            'cdot': '{} \\cdot'
-        }
-        for pipe in pipes:
-            pipe_fmt = pipes_dict.get(pipe)
-            if pipe_fmt is None:
-                raise RuntimeError(f'Unknown pipe {pipe}')
-            line = pipe_fmt.format(line)
-        return line
+        if humanDen and humanNom:
+            return f'\\,\\frac{{{humanNom}}}{{{humanDen}}}'
+        elif humanDen and not humanNom:
+            return f'\\,\\frac{{1}}{{{humanDen}}}'
+        elif not humanDen and humanNom:
+            return f'\\,{humanNom}'
+        return ''
 
     def get_value_str(self):
         if self._value_str is None:
@@ -232,19 +265,18 @@ class UnitValue:
                 # assert str(int(self._precisionFmt2)) == self._precisionFmt2
                 return self._precisionFmt2
             elif main_format == 'Task':
-                with_letter = True
-                with_value = True
+                assert self.Letter and value_str
+                result = f'{self.Letter} = {value_str}'
             elif main_format == 'Value' or main_format == 'V':
-                with_letter = False
-                with_value = True
+                assert value_str
+                result = value_str
             elif main_format == 'Letter' or main_format == 'L':
-                with_letter = True
-                with_value = False
+                assert self.Letter
+                result = self.Letter
             else:
                 raise RuntimeError(f'Unknown main format: {main_format!r} from {fmt!r} for {self.__raw_line}')
 
-            result = ' = '.join(i for i, j in [[self.Letter, with_letter], [value_str, with_value]] if j and i)
-            result = self._apply_pipes(result, pipes)
+            result = self.PIPES.apply(result, pipes)
             return result
         except Exception:
             log.error(f'Error in __format__ for {fmt} and {self.__raw_line}')
@@ -313,7 +345,8 @@ for src, canonic in [
     ('{:Value}'.format(UnitValue('50 км / ч')), '50\\,\\frac{\\text{км}}{\\text{ч}}'),
     ('{:TestAnswer}'.format(UnitValue('4 см')), '4'),
     ('{:Value}'.format(UnitValue('0 см')), '0\\,\\text{см}'),
-    ('{:Value}'.format(UnitValue('0.0 см')), '0\\,\\text{см}'),
+    ('{:Value}'.format(UnitValue('0 см')), '0\\,\\text{см}'),
+    ('{:Task}'.format(UnitValue('A = 200 Дж')), 'A = 200\\,\\text{Дж}'),
     ('{:TestAnswer}'.format(UnitValue('2.5 м')), r'2.5'),
     ('{:Value}'.format(UnitValue('2 10^4 км/c')), '2 \\cdot 10^{4}\\,\\frac{\\text{км}}{\\text{c}}'),
 ]:

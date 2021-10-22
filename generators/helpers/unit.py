@@ -15,6 +15,7 @@ SI_PREFIXES = {
     'д': -1,
 }
 
+
 class BaseUnit:
     def __init__(self, name, full_name):
         assert isinstance(name, str)
@@ -31,6 +32,17 @@ class BaseUnits:
     A = BaseUnit('А', 'ампер'),
     K = BaseUnit('К', 'кельвин'),
     cd = BaseUnit('кд', 'кандела'),
+
+
+ALL_BASE_UNITS = [
+    BaseUnits.kg,
+    BaseUnits.s,
+    BaseUnits.m,
+    BaseUnits.mol,
+    BaseUnits.A,
+    BaseUnits.K,
+    BaseUnits.cd,
+]
 
 
 class SimpleUnit:
@@ -54,6 +66,9 @@ class SimpleUnits:
     A = SimpleUnit('ампер', 'А', 'A', {BaseUnits.A: 1})
     K = SimpleUnit('кельвин', 'К', 'K', {BaseUnits.K: 1})
     cd = SimpleUnit('кандела', 'кд', 'cd', {BaseUnits.cd: 1})
+
+    # for numbers without units in SI
+    no_units = SimpleUnit('', '', '', {})
 
     # see https://ru.wikipedia.org/wiki/%D0%9F%D1%80%D0%BE%D0%B8%D0%B7%D0%B2%D0%BE%D0%B4%D0%BD%D1%8B%D0%B5_%D0%B5%D0%B4%D0%B8%D0%BD%D0%B8%D1%86%D1%8B_%D0%A1%D0%98
     radian = SimpleUnit('радиан', 'рад', 'rad', {})
@@ -126,16 +141,12 @@ KNOWN_UNITS = list(get_known_units())
 
 
 class OneUnit:
-
     def __init__(self, line, is_numenator):
         try:
-            si_power, human_unit, human_power = self._parse_line(line)
+            self._load_from_str(line)
         except:
-            log.error('Error in _parse_line on %r', line)
+            log.error(f'Error in _load_from_str on {line}')
             raise
-        self.SiPower = si_power
-        self.HumanUnit = human_unit
-        self.HumanPower = human_power
         self.IsNumerator = is_numenator
         assert isinstance(self.SiPower, int)
         assert isinstance(self.HumanUnit, str)
@@ -148,33 +159,31 @@ class OneUnit:
             res += '^{%d}' % self.HumanPower
         return res
 
-    def _parse_line(self, line):
+    def _load_from_str(self, line):
         if '^' in line:
             line, power = line.split('^')
-            power = int(power)
+            self.HumanPower = int(power)
         else:
-            power = 1
+            self.HumanPower = 1
+        self.HumanUnit = line
 
-        prefix = ''
+        self.simple_unit = SimpleUnits.no_units
+        exponent = 0
         main = line
-        for suffix, multiplier, simple_unit in KNOWN_UNITS:
-            if line.endswith(suffix):
-                main = suffix
-                prefix = line[:-len(suffix)]
+        for unit, multiplier, simple_unit in KNOWN_UNITS:
+            if line.endswith(unit):
+                main = unit
+                prefix = line[:-len(unit)]
+                exponent = SI_PREFIXES[prefix]
+                self.simple_unit = simple_unit
                 break
-
-        try:
-            exponent = SI_PREFIXES[prefix]
-        except:
-            log.error(f'Could not get exponent for {line} from {prefix}')
-            raise
 
         if main == 'г':
             main = 'кг'
             exponent -= 3
         # TODO: час, сутки
 
-        return exponent * power, line, power
+        self.SiPower = exponent * self.HumanPower
 
 
 def test_one_unit():
@@ -185,12 +194,13 @@ def test_one_unit():
         ('мс^2', -6, 'мс', 2),
         ('кг^2', 0, 'кг', 2),
         ('мг^2', -12, 'мг', 2),
+        ('т', 0, 'т', 1),
     ]
     for unit_text, si_power, human_unit, human_power in data:
         unit = OneUnit(unit_text, True)
-        assert unit.SiPower == si_power, 'Expected {si_power}, got {unit.SiPower}'
-        assert unit.HumanUnit == human_unit, 'Expected {human_unit}, got {unit.HumanUnit}'
-        assert unit.HumanPower == human_power, 'Expected {human_power}, got {unit.HumanPower}'
+        assert unit.SiPower == si_power, f'Expected {si_power}, got {unit.SiPower}'
+        assert unit.HumanUnit == human_unit, f'Expected {human_unit}, got {unit.HumanUnit}'
+        assert unit.HumanPower == human_power, f'Expected {human_power}, got {unit.HumanPower}'
 
 
 test_one_unit()

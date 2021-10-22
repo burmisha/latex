@@ -226,7 +226,7 @@ class Vishnyakova_1_4_12(variant.VariantTask):
 class Ch_4_2(variant.VariantTask):
     def GetUpdate(self, what=None, mult=None, m=None, h=None, a=None):
         return dict(
-            A='%d Дж' % (mult * m.Value * h.Value * (Consts.g_ten.Value + mult * a.Value))
+            A='A = %d Дж' % (mult * m.Value * h.Value * (Consts.g_ten.Value + mult * a.Value))
         )
 
 
