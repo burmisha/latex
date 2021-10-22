@@ -18,76 +18,75 @@ SI_PREFIXES = {
 
 class OneUnit:
     def __init__(self, line, is_numenator):
-        si_unit, si_power, human_unit, human_power = self._parse_line(line)
-        self.SiUnit = si_unit
+        try:
+            si_power, human_unit, human_power = self._parse_line(line)
+        except:
+            log.error('Error in _parse_line on %r', line)
+            raise
         self.SiPower = si_power
         self.HumanUnit = human_unit
         self.HumanPower = human_power
         self.IsNumerator = is_numenator
-        assert isinstance(self.SiUnit, str)
         assert isinstance(self.SiPower, int)
         assert isinstance(self.HumanUnit, str)
         assert isinstance(self.HumanPower, int)
+        assert isinstance(self.IsNumerator, bool)
 
     def get_tex(self):
-        res = f'\\text{{{self.HumanUnit}}}'
+        res = '\\text{%s}' % self.HumanUnit
         if self.HumanPower != 1:
-            res += f'^{{{self.HumanPower}}}'
+            res += '^{%d}' % self.HumanPower
         return res
 
     def _parse_line(self, line):
-        try:
-            if '^' in line:
-                line, power = line.split('^')
-                power = int(power)
-            else:
-                power = 1
+        if '^' in line:
+            line, power = line.split('^')
+            power = int(power)
+        else:
+            power = 1
 
-            prefix = ''
-            main = line
-            for suffix in [
-                'час',
-                'сут',
-                'атм',
-                'эВ',  # электрон-вольт
-                'В',   # вольт
-                'Дж',  # джоуль
-                'Н',   # ньютон
-                'Вт',  # ватт
-                'Ом',  # ом
-                'Ф',   # фарад
-                'А',   # ампер
-                'Кл',  # кулон
-                'кг',  # килограм
-                'г',   # грам
-                'с',   # секунда
-                'м',   # метр
-                'Тл',  # тесла
-                'т',   # тонна
-                'С',   # цельсий
-                'C',   # celsium
-                'К',   # кельвин
-                'K',   # kelvin
-                'моль',
-                'Гн',
-                'Гц',
-            ]:
-                if line.endswith(suffix):
-                    main = suffix
-                    prefix = line[:-len(suffix)]
-                    break
+        prefix = ''
+        main = line
+        for suffix in [
+            'час',
+            'сут',
+            'атм',
+            'эВ',  # электрон-вольт
+            'В',   # вольт
+            'Дж',  # джоуль
+            'Н',   # ньютон
+            'Вт',  # ватт
+            'Ом',  # ом
+            'Ф',   # фарад
+            'А',   # ампер
+            'Кл',  # кулон
+            'кг',  # килограм
+            'г',   # грам
+            'с',   # секунда
+            'м',   # метр
+            'Тл',  # тесла
+            'т',   # тонна
+            'С',   # цельсий
+            'C',   # celsium
+            'К',   # кельвин
+            'K',   # kelvin
+            'моль',
+            'Гн',
+            'Гц',
+        ]:
+            if line.endswith(suffix):
+                main = suffix
+                prefix = line[:-len(suffix)]
+                break
 
-            exponent = SI_PREFIXES[prefix]
+        exponent = SI_PREFIXES[prefix]
 
-            if main == 'г':
-                main = 'кг'
-                exponent -= 3
-            # TODO: час, сутки
+        if main == 'г':
+            main = 'кг'
+            exponent -= 3
+        # TODO: час, сутки
 
-            return main, exponent * power, line, power
-        except:
-            log.error('Error in ParseItem on %r', line)
-            raise
+        return exponent * power, line, power
 
 
 class BaseUnit:

@@ -17,7 +17,6 @@ class Vars:
 
         self._fixed = True
         for index, (key, values) in enumerate(zip(self._keys, self._values)):
-            # TODO: replace __ with ,
             assert isinstance(key, str), f'key {key} is not str'
             # TODO: lazy getter for large lists
             self._values[index] = list(values)

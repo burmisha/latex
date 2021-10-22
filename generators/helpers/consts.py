@@ -1,6 +1,6 @@
 from generators.helpers.value import UnitValue
 from generators.helpers.matter import Matter
-from generators.helpers.vapor import Vapor
+from generators.helpers.vapor import Vapor, T_P_Pmm_rho
 
 
 class ConstsBase:
@@ -25,7 +25,7 @@ class ConstsBase:
     R = UnitValue('R = 8.31 Дж / моль К')
     one_aem_eV = UnitValue('931.5 МэВ')
 
-    vapor = Vapor()
+    vapor = Vapor(T_P_Pmm_rho)
 
     water = Matter(
         name='вода',
