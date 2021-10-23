@@ -1,6 +1,6 @@
 import generators.variant as variant
-from generators.helpers import Fraction, n_times, letter_variants
-from decimal import Decimal
+from generators.helpers import Fraction, n_times, letter_variants, Decimal
+
 
 @variant.solution_space(40)
 @variant.text('''
