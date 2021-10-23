@@ -1,5 +1,5 @@
 import generators.variant as variant
-from generators.helpers import UnitValue, Consts
+from generators.helpers import UnitValue, Consts, Decimal
 
 
 @variant.solution_space(20)
@@ -51,7 +51,7 @@ class Ch_8_6(variant.VariantTask):
         lmbd = Consts.water.lmbd
         return dict(
             lmbd=lmbd,
-            m='m = %.1f кг' % (1000. * Q.Value / lmbd.Value),
+            m='m = %.1f кг' % (Q.Value / lmbd.Value * 1000),
         )
 
 
@@ -74,7 +74,7 @@ class Ch_8_6(variant.VariantTask):
 class Ch_8_7(variant.VariantTask):
     def GetUpdate(self, m=None, metall=None, lmbd=None):
         return dict(
-            Q='Q = %.1f МДж' % (0.001 * m.Value * lmbd.Value),
+            Q='Q = %.1f МДж' % (m.Value * lmbd.Value / 1000),
         )
 
 
@@ -98,7 +98,7 @@ class Ch_8_10(variant.VariantTask):
         return dict(
             c=c,
             L=L,
-            Q='Q = %.2f МДж' % (m.Value * ((100. - t) * c.Value / 10 ** 6 + L.Value)),
+            Q='Q = %.2f МДж' % (m.Value * ((100 - t) * c.Value / Decimal(10) ** 6 + L.Value)),
         )
 
 
@@ -124,7 +124,7 @@ class Ch_8_13(variant.VariantTask):
         return dict(
             c=c,
             L=L,
-            m='Q = %.2f кг' % (1000. * Q.Value / ((100. - t) * c.Value + 1. * L.Value * 10 ** 6)),
+            m='Q = %.2f кг' % (1000 * Q.Value / ((100 - t) * c.Value + 1 * L.Value * Decimal(10) ** 6)),
         )
 
 
@@ -160,7 +160,7 @@ class Ch_8_35(variant.VariantTask):
             c2=c,
             t1=t,
             t2=T,
-            theta='%.1f' % ((1. * c_water.Value * t + 1. * c.Value * T) / (1. * c_water.Value + 1. * c.Value)),
+            theta='%.1f' % ((c_water.Value * t + c.Value * T) / (c_water.Value + c.Value)),
         )
 
 
@@ -178,7 +178,7 @@ class Ch_8_35(variant.VariantTask):
 class P_from_V_and_U(variant.VariantTask):
     def GetUpdate(self, U=None, V=None):
         return dict(
-            P='%.2d кПа' % (2 / 3 * U.Value / V.Value),
+            P='%.2d кПа' % (2 * U.Value / V.Value / 3),
         )
 
 
@@ -197,7 +197,7 @@ class P_from_V_and_U(variant.VariantTask):
 class V_from_P_and_U(variant.VariantTask):
     def GetUpdate(self, U=None, P=None):
         return dict(
-            V='%.2f м^3' % (2 / 3 * U.Value * 1000 / P.Value / 100000),
+            V='%.2f м^3' % (2 * U.Value * 1000 / P.Value / 100000 / 3),
         )
 
 
@@ -241,8 +241,8 @@ class A_on_P_const(variant.VariantTask):
 class DeltaU_on_P_const(variant.VariantTask):
     def GetUpdate(self, P1=None, P2=None, V1=None, V2=None):
         return dict(
-            dU='%d Дж' % (1000 * 3 / 2 * (P2.Value * V2.Value - P1.Value * V1.Value)),
-            ratio='%.2f' % (1. * P2.Value * V2.Value / (P1.Value * V1.Value)),
+            dU='%d Дж' % (1000 * 3 * (P2.Value * V2.Value - P1.Value * V1.Value) / 2),
+            ratio='%.2f' % (P2.Value * V2.Value / (P1.Value * V1.Value)),
         )
 
 
@@ -264,7 +264,7 @@ class DeltaU_from_DeltaT(variant.VariantTask):
     def GetUpdate(self, what=None, sign=None, nu=None, dT=None):
         return dict(
             sgn='-' if sign == -1 else '',
-            dU='%d Дж' % (3 / 2 * nu.Value * Consts.R.Value * dT.Value * sign),
+            dU='%d Дж' % (3 * nu.Value * Consts.R.Value * dT.Value * sign / 2),
             ans='Увеличилась' if sign == 1 else 'Уменьшилась',
         )
 
@@ -288,7 +288,7 @@ class A_from_DeltaT(variant.VariantTask):
     def GetUpdate(self, what=None, sign=None, nu=None, dT=None):
         return dict(
             sgn='' if sign == -1 else '-',
-            A='%.1f кДж' % (- 3 / 2 * nu.Value * Consts.R.Value * dT.Value * sign / 1000),
+            A='%.1f кДж' % (- 3 * nu.Value * Consts.R.Value * dT.Value * sign / 1000 / 2),
             ans='внешние силы' if sign == 1 else 'газ',
         )
 
@@ -397,8 +397,8 @@ class YesNo(variant.VariantTask):
 ])
 class DeltaQ_from_states(variant.VariantTask):
     def GetUpdate(self, P1=None, P2=None, V1=None, V2=None):
-        A = (1000 * 1 / 2 * (P2.Value + P1.Value) * (V2.Value - V1.Value))
-        dU = (1000 * 3 / 2 * (P2.Value * V2.Value - P1.Value * V1.Value))
+        A = 1000 * 1 * (P2.Value + P1.Value) * (V2.Value - V1.Value) / 2
+        dU = 1000 * 3 * (P2.Value * V2.Value - P1.Value * V1.Value) / 2
         return dict(
             A='%.2f кДж' % (A / 1000),
             dU=('%.2f кДж' % (dU / 1000)) if dU else '0 кДж',

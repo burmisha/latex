@@ -1,7 +1,7 @@
 import itertools
 
 import generators.variant as variant
-from generators.helpers import Consts
+from generators.helpers import Consts, Decimal
 
 @variant.text('''
     Для частицы, движущейся с релятивистской скоростью,
@@ -86,13 +86,13 @@ class E_P_from_v_ratio(variant.VariantTask):  # Вишнякова - Базов�
             'Электрон': Consts.m_e,
         }[what]
         share = float('0.' + percent)
-        gamma = 1 / ((1. - share ** 2) ** 0.5)
+        gamma = Decimal(1 / ((1 - share ** 2) ** 0.5))
 
         c = Consts.c
 
         E = m * c * c * gamma
         E_kin = m * c * c * (gamma - 1)
-        p = m * c * share * gamma
+        p = m * c * Decimal(share) * gamma
 
         power = -12
         power_p = -21
@@ -131,9 +131,9 @@ class E_P_from_v_ratio(variant.VariantTask):  # Вишнякова - Базов�
 class beta_from_l_reduction(variant.VariantTask):  # Вишнякова - Базовый курс 4._ - задача 6
     def GetUpdate(self, what=None, percent=None):
         share = float('0.' + percent)
-        answerShare = (1. - (1. - share) ** 2) ** 0.5
+        answerShare = Decimal((1. - (1. - share) ** 2) ** 0.5)
         return dict(
             answerShare=answerShare,
             speed='%.3f 10^8 м / с' % (answerShare * Consts.c.Value),
-            kmch='%.3f 10^8 км / ч' % (3.6 * answerShare * Consts.c.Value),
+            kmch='%.3f 10^8 км / ч' % (Decimal('3.6') * answerShare * Consts.c.Value),
         )

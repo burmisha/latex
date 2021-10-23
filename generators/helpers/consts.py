@@ -92,7 +92,7 @@ Consts = ConstsBase()
 
 def test_calculation():
     for expr, answer in [
-        ('{:Value}'.format(Consts.c.Div(UnitValue('l = 500 нм'), units='Гц', powerShift=3)), '6{,}00 \\cdot 10^{14}\\,\\text{Гц}'),
+        ('{:Value}'.format(Consts.c.Div(UnitValue('l = 500 нм'), units='Гц', powerShift=3)), '6 \\cdot 10^{14}\\,\\text{Гц}'),
         ('{:Value}'.format(UnitValue('9 10^25').Div(Consts.N_A)), '150'),
         ('{:V}'.format(UnitValue('9 10^25').Div(UnitValue('6.03 10^23'), precisionInc=1)), '149'),
         ('{:V}'.format(UnitValue('9 10^25').Div(UnitValue('6.03 10^23'), precisionInc=0)), '150'),

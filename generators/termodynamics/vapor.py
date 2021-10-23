@@ -1,5 +1,5 @@
 import generators.variant as variant
-from generators.helpers import UnitValue, Consts
+from generators.helpers import UnitValue, Consts, Decimal
 
 
 @variant.solution_space(80)
@@ -85,11 +85,11 @@ class GetNFromPhi(variant.VariantTask):
         t_int = int(t)
         T = t_int + 273
 
-        P_np_value = Consts.vapor.get_p_by_t(t_int)
-        rho_np_value = Consts.vapor.get_rho_by_t(t_int)
+        P_np_value = Decimal(Consts.vapor.get_p_by_t(t_int))
+        rho_np_value = Decimal(Consts.vapor.get_rho_by_t(t_int))
 
-        N = 1. * int(phi) / 100 * P_np_value * V.Value / Consts.k_boltzmann.Value / T * 1000
-        N2 = 1. * int(phi) / 100 * rho_np_value * V.Value / mu_value * Consts.N_A.Value
+        N = Decimal(int(phi)) / 100 * P_np_value * V.Value / Consts.k_boltzmann.Value / T * 1000
+        N2 = Decimal(int(phi)) / 100 * rho_np_value * V.Value / mu_value * Consts.N_A.Value
         return dict(
             P_np=f'P_{{\\text{{нас. пара {t}}} \\celsius}} = %.3f кПа' % P_np_value,
             rho_np=f'\\rho_{{\\text{{нас. пара {t}}} \\celsius}} = %.3f г/м^3' % rho_np_value,
@@ -226,18 +226,18 @@ class GetPFromM(variant.VariantTask):
         P_air_new_value = P_air_old.Value * (int(t2) + 273) / (int(t1) + 273)
         P_air_new = 'P\'_\\text{воздуха} = %.1f кПа' % P_air_new_value
 
-        rho_value = Consts.vapor.get_rho_by_t(int(t2))
+        rho_value = Decimal(Consts.vapor.get_rho_by_t(int(t2)))
         rho = '\\rho_\\text{н. п. %d $\\celsius$} = %.2f г / м^3' % (int(t2), rho_value)
 
-        m_np_value = 1. * rho_value * V.Value / 1000
+        m_np_value = rho_value * V.Value / 1000
         m_np = 'm_\\text{н. п.} = %.1f г' % m_np_value
         m_vapor = 'm_\\text{пара} = %.1f г' % min(m_np_value, m.Value)
-        P_vapor_1_value = 1. * min(m_np_value, m.Value) * Consts.R.Value * (int(t2) + 273) / mu_value / V.Value
+        P_vapor_1_value = min(m_np_value, m.Value) * Consts.R.Value * (int(t2) + 273) / mu_value / V.Value
         P_vapor_1 = 'P_\\text{пара} = %.1f кПа' % P_vapor_1_value
 
-        P_np_value = Consts.vapor.get_p_by_t(int(t2))
+        P_np_value = Decimal(Consts.vapor.get_p_by_t(int(t2)))
         P_np = 'P_\\text{н. п. %d $\\celsius$} = %.1f кПа' % (int(t2), P_np_value)
-        P_max_value = 1. * m.Value * Consts.R.Value * (int(t2) + 273) / mu_value / V.Value
+        P_max_value = m.Value * Consts.R.Value * (int(t2) + 273) / mu_value / V.Value
         P_max = 'P_\\text{max} = %.1f кПа' % P_max_value
         P_vapor_2 = 'P\'_\\text{пара} = %.1f кПа' % min(P_max_value, P_np_value)
 

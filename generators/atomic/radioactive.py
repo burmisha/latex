@@ -212,7 +212,7 @@ class BK_53_01(variant.VariantTask):  # Вишнякова - Базовый ку
 @variant.arg(T=['T = 45.6 суток'])
 class BK_53_02(variant.VariantTask):  # Вишнякова - Базовый курс 5.3 - задача 02
     def GetUpdate(self, t=None, T=None):
-        share = 2. ** (-t.Value / T.Value)
+        share = 2 ** int(-float(t.Value / T.Value) - 0.0000000001)
         return dict(
             share=share,
             percent=share * 100,
@@ -249,8 +249,8 @@ class BK_53_02(variant.VariantTask):  # Вишнякова - Базовый ку
 class BK_53_03(variant.VariantTask):  # Вишнякова - Базовый курс 5.3 - задача 03
     def GetUpdate(self, how=None, t=None, num=None, log_num=None):
         return dict(
-            T='%.1f суток' % (1. * t.Value / log_num),
-            res=1. / num * (1 - 1./num),
+            T='%.1f суток' % (t.Value / log_num),
+            res=1. / num * (1 - 1 / num),
         )
 
 

@@ -1,7 +1,7 @@
 import itertools
 
 import generators.variant as variant
-from generators.helpers import Consts
+from generators.helpers import Consts, Decimal
 
 import logging
 log = logging.getLogger(__name__)
@@ -65,8 +65,8 @@ class Chernoutsan11_5(variant.VariantTask):
 @variant.arg(I=('\\eli = {} А', [10, 20, 40, 50]))
 class Chernoutsan11_01(variant.VariantTask):
     def GetUpdate(self, l=None, a=None, B=None, I=None):
-        c = (1.0 * a.Value ** 2 + (1.0 * l.Value - a.Value) ** 2) ** 0.5 / 100
-        F = I * B * c
+        c = float(a.Value ** 2 + (l.Value - a.Value) ** 2) ** 0.5 / 100
+        F = I * B * Decimal(c)
         return dict(
             F=f'F = {F.SI_Value * 1000:.2f} мН',
         )

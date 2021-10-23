@@ -1,5 +1,5 @@
 import generators.variant as variant
-from generators.helpers import UnitValue, letter_variants, Fraction, n_times
+from generators.helpers import UnitValue, letter_variants, n_times
 
 
 @variant.text('''
@@ -67,13 +67,13 @@ from generators.helpers import UnitValue, letter_variants, Fraction, n_times
 class Kirchgof_double(variant.VariantTask):
     def GetUpdate(self, R=None, r1=None, r2=None, E1=None, E2=None):
         I_ratio = (
-            Fraction(numerator=E1.Value, denominator=r1.Value) + Fraction(numerator=E2.Value, denominator=r2.Value)
+            E1.frac_value / r1.frac_value + E2.frac_value / r2.frac_value
         ) / (
-            Fraction(1) + Fraction(numerator=R.Value, denominator=r1.Value) + Fraction(numerator=R.Value, denominator=r2.Value)
+            1 + R.frac_value / r1.frac_value + R.frac_value / r2.frac_value
         )
 
         I = '\\eli = -%.1f А' % float(I_ratio)
-        U = 'U = -%.1f В' % float(I_ratio * R.Value)
+        U = 'U = -%.1f В' % float(I_ratio * R.frac_value)
         return dict(
             I_ratio=I_ratio,
             I=I,
@@ -200,16 +200,15 @@ class Kirchgof_plain(variant.VariantTask):
 '''
 )
 class Kirchgof_double_2(variant.VariantTask):
-    pass
     def GetUpdate(self, R=None, r1=None, r2=None, E1=None, E2=None):
         I_ratio = (
-            Fraction(numerator=E1.Value, denominator=r1.Value) - Fraction(numerator=E2.Value, denominator=r2.Value)
+            E1.frac_value / r1.frac_value - E2.frac_value / r2.frac_value
         ) / (
-            Fraction(1) + Fraction(numerator=R.Value, denominator=r1.Value) + Fraction(numerator=R.Value, denominator=r2.Value)
+            1 + R.frac_value / r1.frac_value + R.frac_value / r2.frac_value
         )
 
         I = '\\eli = %.3f А' % float(I_ratio)
-        U = 'U = %.3f В' % float(I_ratio * R.Value)
+        U = 'U = %.3f В' % float(I_ratio * R.frac_value)
         return dict(
             I_ratio=I_ratio,
             I=I,
@@ -422,35 +421,29 @@ class Kirchgof_double_2(variant.VariantTask):
 class Kirchgof_triple(variant.VariantTask):
     def GetUpdate(self, R1=None, R2=None, R3=None, E1=None, E2=None, E3=None, index=None):
         I1_ratio = (
-            Fraction(numerator=E1.Value - E3.Value, denominator=R3.Value)
-            + Fraction(numerator=E1.Value - E2.Value, denominator=R2.Value)
+            (E1.frac_value - E3.frac_value) / R3.frac_value
+            + (E1.frac_value - E2.frac_value) / R2.frac_value
         ) / (
-            Fraction(numerator=R1.Value, denominator=R2.Value)
-            + Fraction(numerator=R1.Value, denominator=R3.Value)
-            + 1
+            R1.frac_value / R2.frac_value + R1.frac_value / R3.frac_value + 1
         )
         I2_ratio = (
-            Fraction(numerator=E2.Value - E1.Value, denominator=R1.Value)
-            + Fraction(numerator=E2.Value - E3.Value, denominator=R3.Value)
+            (E2.frac_value - E1.frac_value) / R1.frac_value
+            + (E2.frac_value - E3.frac_value) / R3.frac_value
         ) / (
-            Fraction(numerator=R2.Value, denominator=R1.Value)
-            + Fraction(numerator=R2.Value, denominator=R3.Value)
-            + 1
+            R2.frac_value / R1.frac_value + R2.frac_value / R3.frac_value + 1
         )
         I3_ratio = (
-            Fraction(numerator=E3.Value - E1.Value, denominator=R1.Value)
-            + Fraction(numerator=E3.Value - E2.Value, denominator=R2.Value)
+            (E3.frac_value - E1.frac_value) / R1.frac_value
+            + (E3.frac_value - E2.frac_value) / R2.frac_value
         ) / (
-            Fraction(numerator=R3.Value, denominator=R1.Value)
-            + Fraction(numerator=R3.Value, denominator=R2.Value)
-            + 1
+            R3.frac_value / R1.frac_value + R3.frac_value / R2.frac_value + 1
         )
         I1 = '\\eli_1 = %.2f А' % float(I1_ratio)
         I2 = '\\eli_2 = %.2f А' % float(I2_ratio)
         I3 = '\\eli_3 = %.2f А' % float(I3_ratio)
-        U1_ratio = I1_ratio * R1.Value
-        U2_ratio = I2_ratio * R2.Value
-        U3_ratio = I3_ratio * R3.Value
+        U1_ratio = I1_ratio * R1.frac_value
+        U2_ratio = I2_ratio * R2.frac_value
+        U3_ratio = I3_ratio * R3.frac_value
         U1 = 'U_1 = %.2f В' % float(U1_ratio)
         U2 = 'U_2 = %.2f В' % float(U2_ratio)
         U3 = 'U_3 = %.2f В' % float(U3_ratio)

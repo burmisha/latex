@@ -139,15 +139,15 @@ def test_substitute():
         (dict(a=2, b=3), '{a}{b}', '23'),
         (dict(a=2, b=3), '{{a}}{b}', '{2}3'),
         (dict(a=2, b=3), '{ {a} }{b}', '{ 2 }3'),
-        (dict(a=UnitValue('1 м')), '{a:V}', r'1\,\text{м}'),
-        (dict(a=UnitValue('1 м')), '{a:V|sqr}', r'\sqr{1\,\text{м}}'),
+        (dict(a=UnitValue('1 м')), '{a:V}', '1\\,\\text{м}'),
+        (dict(a=UnitValue('1 м')), '{a:V|sqr}', '\\sqr{1\\,\\text{м}}'),
         ({}, '{Consts.c:Letter}', r'c'),
         ({}, '{Consts.p_atm:Task:e}', r'$p_{\text{aтм}} = 100\,\text{кПа}$'),
         ({}, '{ {Consts.c:Letter} }', r'{ c }'),
         (dict(a=1), '{Consts.c:Letter}', r'c'),
-        (dict(a=1), '\\begin{qq}', r'\begin{qq}'),
-        (dict(a=1), '\\begin{qq*}', r'\begin{qq*}'),
-        ({}, '\\begin{align*}F &= \sqrt{ F_a^2 + F_b^2 }\\end{align*}', r'\begin{align*}F &= \sqrt{ F_a^2 + F_b^2 }\end{align*}'),
+        (dict(a=1), '\\begin{qq}', '\\begin{qq}'),
+        (dict(a=1), '\\begin{qq*}', '\\begin{qq*}'),
+        ({}, '\\begin{align*}F &= \\sqrt{ F_a^2 + F_b^2 }\\end{align*}', r'\begin{align*}F &= \sqrt{ F_a^2 + F_b^2 }\end{align*}'),
         (dict(lv=lv), '{lv.Questions}', 'А) дважды два'),
     ]:
         res = LaTeXFormatter(args).format(value)
@@ -206,7 +206,9 @@ def check_unit_value(value):
     try:
         if isinstance(value, str):
             if value.count('=') == 1 and len(value) >= 3:
-                return UnitValue(value)
+                after_eq = value.split('=')[1].strip()
+                if ('sqrt' not in after_eq) and ('frac' not in after_eq) and not after_eq.isalpha():
+                    return UnitValue(value)
             elif re.match(r'-?\d.* \w', value, re.UNICODE):
                 return UnitValue(value)
     except ValueError:
@@ -215,11 +217,27 @@ def check_unit_value(value):
     return value
 
 
-assert isinstance(check_unit_value('2 суток'), UnitValue)
-assert isinstance(check_unit_value('2 см'), UnitValue)
-assert isinstance(check_unit_value('2 Дж'), UnitValue)
-assert isinstance(check_unit_value('-2 Дж'), UnitValue)
-assert isinstance(check_unit_value('1.6 м'), UnitValue)
+def test_check_unit_value():
+    data = [
+        '2 суток',
+        '2 см',
+        '2 Дж',
+        '-2 Дж',
+        '1.6 м',
+    ]
+    for row in data:
+        isinstance(check_unit_value(row), UnitValue)
+
+    data = [
+        '2 * A \\frac{1}{\\sqrt 2} = A\\sqrt{2}',
+        '2 * A / 2 = A',
+        'A',
+    ]
+    for row in data:
+        assert not isinstance(check_unit_value(row), UnitValue)
+
+
+test_check_unit_value()
 
 
 class VariantTask:

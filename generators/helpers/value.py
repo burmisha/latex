@@ -1,57 +1,62 @@
 from generators.helpers.unit import OneUnit, BaseUnits, SimpleUnits, get_simple_unit
+from generators.helpers.fraction import decimal_to_fraction
+
+from library.logging import colorize_json, cm, color
 
 import logging
 log = logging.getLogger(__name__)
+from decimal import Decimal, ROUND_05UP
 
 
 def precisionFmt2(value, precision):
-    isInt = False
     if isinstance(value, int):
-        isInt = True
-    elif isinstance(value, str):
-        try:
-            intValue = int(value)
-        except ValueError:
-            pass
-        if str(intValue) == value:
-            isInt = True
-    if isInt:
         return str(value)
+    elif isinstance(value, str):
+        if value.isdigit():
+            return value
+
+    assert isinstance(value, (float, Decimal)), f'{value} is {type(value)}'
+
+    if int(value) == value:
+        return str(int(value))
 
     isNegative = value < 0
     absValue = abs(value)
     assert absValue >= 10 ** -7, f'Got value of {absValue}'
     assert 1 <= precision <= 10, f'Got precision {precision} for {value}'
 
-    rawValue = '%.20f' % absValue
-    assert 'e' not in rawValue
-    dot_pos = rawValue.index('.')
-    assert dot_pos is not None
-    no_dot = rawValue.replace('.', '')
-    rawDigits = no_dot.lstrip('0')
-    leading_zeros = len(no_dot) - len(rawDigits)
-    if rawDigits[0] == '1':
-        rawDigits = rawDigits[:precision + 2]
-    else:
-        rawDigits = rawDigits[:(precision + 1)]
-    if rawDigits[-1] >= '5':
-        if len(str(int(rawDigits) + 5)) > len(rawDigits):
-            leading_zeros -= 1
-        rawDigits = str(int(rawDigits) + 5)
-    rawDigits = '0' * leading_zeros + rawDigits[:-1]
+    decimal_value = Decimal(absValue)
+    shift = 0
+    while not (10 ** (precision - 1) <= decimal_value < 10 ** precision):
+        if decimal_value < 10 ** (precision - 1):
+            decimal_value *= 10
+            shift += 1
+        else:
+            decimal_value /= 10
+            shift -= 1
 
-    if dot_pos >= len(rawDigits):
-        rawDigits += '0' * (dot_pos - len(rawDigits))
-    else:
-        rawDigits = rawDigits[:dot_pos] + '.' + rawDigits[dot_pos:]
+    if str(decimal_value)[0] == '1':
+        precision += 1
+        decimal_value *= 10
+        shift += 1
+
+    decimal_value += Decimal(0.5)
+    decimal_value = Decimal(int(decimal_value))
+    decimal_value *= Decimal(10) ** (-shift)
+    decimal_value = decimal_value.quantize(Decimal(10) ** -shift)
+
+    rawDigits = str(decimal_value)
 
     if isNegative:
         rawDigits = '-' + rawDigits
-    return rawDigits.rstrip('.')
+    return rawDigits
 
 
 def test_precisionFmt2():
     for value, precision, result in [
+        (1, 1, '1'),
+        (1.0, 1, '1'),
+        (Decimal(1), 1, '1'),
         (1.7, 1, '1.7'),
         (0.091, 2, '0.091'),
         (0.095, 2, '0.095'),
@@ -69,7 +74,7 @@ def test_precisionFmt2():
         (20, 1, '20'),
         (2.99, 2, '3.0'),
         (29.9, 2, '30'),
-        (299., 2, '300'),
+        (299., 2, '299'),
         (299, 2, '299'),
         (1 + 1. / 30, 2, '1.03'),
         (1 + 1. / 300, 2, '1.00'),
@@ -100,7 +105,7 @@ def test_precisionFmt2():
         (0.0049594, 1, '0.005'),
     ]:
         res = precisionFmt2(value, precision)
-        assert res == result, f'Expected {value}, {precision} -> {result}, got {res}'
+        assert res == result, f'Expected {value}, {precision} -> {result}, got {res!r}'
 
 
 test_precisionFmt2()
@@ -174,7 +179,7 @@ class UnitValue:
         try:
             self._load(line, precision=precision)
         except Exception:
-            log.error(f'Could not load unit from {self.__raw_line}')
+            log.error(f'Could not load unit from {cm(self.__raw_line, color=color.Red)}')
             raise
         self.ViewPrecision = viewPrecision
         self._value_str = None
@@ -206,7 +211,8 @@ class UnitValue:
         isNumerator = True
         for part in value_line.split():
             if self.Value is None:
-                self.Value = int(part) if part.isdigit() else float(part)
+                self.Value = Decimal(part)
+                # self.Value = int(part) if part.isdigit() else float(part)
 
                 if precision is None:
                     self._is_zero, self.Precision = get_precision(part)
@@ -247,6 +253,7 @@ class UnitValue:
                 valueStr = '0'
             else:
                 valueStr = precisionFmt2(self.Value, self.ViewPrecision or self.Precision)
+                # print(self.Value, self.ViewPrecision or self.Precision, valueStr)
             self._precisionFmt2 = str(valueStr)
             valueStr = valueStr.replace('.', '{,}')
             if self.ValuePower:
@@ -310,7 +317,11 @@ class UnitValue:
 
     @property
     def SI_Value(self):
-        return self.Value * 10 ** self._power
+        return self.Value * Decimal(10) ** self._power
+
+    @property
+    def frac_value(self):
+        return decimal_to_fraction(self.Value)
 
     def _calculate(self, other, action=None, precisionInc=0, units='', powerShift=0):
         # TODO: skips units now
@@ -318,28 +329,30 @@ class UnitValue:
         if isinstance(other, UnitValue):
             precision = min(min(self.Precision, other.Precision) + precisionInc, 7)
             if action == 'mult':
-                value = 1. * self.Value * other.Value
+                value = self.Value * other.Value
                 power = self._power + other._power
             elif action == 'div':
-                value = 1. * self.Value / other.Value
+                value = self.Value / other.Value
                 power = self._power - other._power
             else:
-                raise NotImplementedError('Could not apply %s' % action)
-        elif isinstance(other, (int, float)):
+                raise NotImplementedError(f'Could not apply {action}')
+        elif isinstance(other, (int, float, Decimal)):
             precision = min(self.Precision + precisionInc, 7)
             power = self._power
             if action == 'mult':
-                value = 1. * self.Value * other
+                value = self.Value * Decimal(other)
             elif action == 'div':
-                value = 1. * self.Value / other
+                value = self.Value / Decimal(other)
             else:
-                raise NotImplementedError('Could not apply %s' % action)
+                raise NotImplementedError(f'Could not apply {action}')
+        else:
+            raise NotImplementedError(f'Could not apply {action}')
 
         if powerShift:
             power -= powerShift
-            value *= 10 ** powerShift
+            value *= Decimal(10) ** powerShift
         elif abs(power) <= 2:
-            value *= 10 ** power
+            value *= Decimal(10) ** power
             power -= power
 
         r = UnitValue('%.20f 10^%d %s' % (value, power, units), precision=precision)
@@ -348,7 +361,7 @@ class UnitValue:
 
 def test_unit_value():
     data = [
-        (UnitValue('50 мТл').Value * (10 ** UnitValue('50 мТл')._power), 0.05),
+        (UnitValue('50 мТл').Value * (Decimal(10) ** UnitValue('50 мТл')._power), Decimal('0.050')),
         ('{:Task}'.format(UnitValue('c = 3 10^{8} м / с')), 'c = 3 \\cdot 10^{8}\\,\\frac{\\text{м}}{\\text{с}}'),
         ('{:Task}'.format(UnitValue('t = 8 суток')), 't = 8\\,\\text{суток}'),
         ('{:Value}'.format(UnitValue('m = 1.67 10^-27 кг')), '1{,}67 \\cdot 10^{-27}\\,\\text{кг}'),
@@ -383,6 +396,8 @@ def test_get_base_units():
     unit_value = UnitValue('50 мВт мс')
     result = get_simple_unit(unit_value.get_base_units())
     assert result == SimpleUnits.joule, result
+
+    # assert unit_value.SI_Value == 50e-6, unit_value.SI_Value
 
 
 test_get_base_units()

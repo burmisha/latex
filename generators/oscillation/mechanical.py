@@ -1,5 +1,5 @@
 import generators.variant as variant
-from generators.helpers import letter_variants, Fraction, Consts
+from generators.helpers import letter_variants, Fraction, Consts, Decimal
 import math
 
 @variant.text('''
@@ -32,7 +32,7 @@ class Template(variant.VariantTask):
 )
 class Task01(variant.VariantTask):
     def GetUpdate(self, *, A=None, T=None, t=None, what=None):
-        phi = 2 * math.pi * t.SI_Value / T.SI_Value
+        phi = 2 * math.pi * float(t.SI_Value / T.SI_Value)
         if what == 'максимального отклонения':
             multiplier = math.cos(phi)
             f = 'cos'
@@ -232,7 +232,7 @@ class Task08(variant.VariantTask):
 @variant.solution_space(120)
 @variant.arg(l=('\\ell = {} см', [37, 40, 43]))
 @variant.arg(t=('t = {} с', [20, 25, 30]))
-@variant.arg(a_raw=([-2, -1.5, -0.5, 0.5, 1.5, 2.5]))
+@variant.arg(a_raw=[-2, -1.5, -0.5, 0.5, 1.5, 2.5])
 @variant.answer_short('''
     T = 2\\pi\\sqrt{\\frac\\ell {a + g}}, T = \\frac {t:L:s}{N:L:s}
     \\implies a + g = \\ell * \\frac{4 \\pi ^ 2}{T^2},
@@ -242,10 +242,10 @@ class Task08(variant.VariantTask):
 class Task09(variant.VariantTask):
     def GetUpdate(self, *, l=None, t=None, a_raw=None):
         g = 10
-        TT = 2 * math.pi * (l.SI_Value / (g + a_raw)) ** 0.5
-        N = int(t.SI_Value / TT + 0.5)
+        TT = 2 * math.pi * (float(l.SI_Value) / (g + a_raw)) ** 0.5
+        N = int(float(t.SI_Value) / TT + 0.5)
         assert 12 <= N <= 50, N
-        a = (math.pi ** 2) * 4 * (N ** 2) / (t.SI_Value ** 2) * l.SI_Value - g
+        a = (math.pi ** 2) * 4 * (N ** 2) / (float(t.SI_Value) ** 2) * float(l.SI_Value) - g
         assert -4 <= a <= 4
         return dict(
             N=f'N = {N}',
@@ -279,7 +279,7 @@ class Task10(variant.VariantTask):
             m2 = M.SI_Value - m.SI_Value
         else:
             raise RuntimeError()
-        T2 = T * (m2 / M.SI_Value) ** 0.5
+        T2 = T * float(m2 / M.SI_Value) ** 0.5
         return dict(
             T2=f'{T2.SI_Value:.2f} с',
             sign=sign,
@@ -321,7 +321,7 @@ class Task11(variant.VariantTask):
 class Task12(variant.VariantTask):
     def GetUpdate(self, *, dx=None):
         g = Consts.g_ten
-        T = 2 * math.pi * (dx.SI_Value / g.SI_Value) ** 0.5
+        T = 2 * math.pi * float(dx.SI_Value / g.SI_Value) ** 0.5
         nu = 1 / T
         return dict(
             T=f'T = {T:.2f} с',
@@ -385,7 +385,7 @@ class Task14(variant.VariantTask):
 ''')
 class Task15(variant.VariantTask):
     def GetUpdate(self, *, l=None, what=None):
-        T = math.pi * 2 * (l.SI_Value / 2 / Consts.g_ten.SI_Value) ** 0.5
+        T = math.pi * 2 * float(l.SI_Value / 2 / Consts.g_ten.SI_Value) ** 0.5
         return dict(
             T=f'{T:.3f} c',
         )
@@ -409,7 +409,7 @@ class Task16(variant.VariantTask):
         m = k * A * A / v / v
         T = A / v * math.pi * 2
         return dict(
-            m=f'm = {m.SI_Value * 1000 + 0.5:.0f} г',
+            m=f'm = {m.SI_Value * 1000 + Decimal(0.5):.0f} г',
             T=f'T = {T.SI_Value:.3f} c',
         )
 
@@ -431,8 +431,8 @@ class Task17(variant.VariantTask):
     def GetUpdate(self, *, l=None, h=None):
         g = Consts.g_ten
         T = math.pi * (
-            (l.SI_Value / g.SI_Value) ** 0.5
-            + (h.SI_Value / g.SI_Value) ** 0.5
+            float(l.SI_Value / g.SI_Value) ** 0.5
+            + float(h.SI_Value / g.SI_Value) ** 0.5
         )
         return dict(
             T=f'T = {T:.3f} c',

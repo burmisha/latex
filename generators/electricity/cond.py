@@ -1,6 +1,6 @@
 import generators.variant as variant
 from generators.helpers import Fraction, n_times, letter_variants
-
+from decimal import Decimal
 
 @variant.solution_space(40)
 @variant.text('''
@@ -225,10 +225,10 @@ class C_ratio(variant.VariantTask):  # Rymkevich751
 @variant.arg(C=['C = %s пФ' % Cv for Cv in [200, 400, 600, 750]])
 class W_from_Q_C(variant.VariantTask):  # Rymkevich762
     def GetUpdate(self, C=None, Q=None):
-        W = 1. * Q.Value ** 2 / 2 / C.Value
+        W = Q.Value ** 2 / 2 / C.Value
         return dict(
             W='W = %.2f мкДж' % W,
-            W_test=int(W + 0.5),
+            W_test=int(W + Decimal(0.5)),
         )
 
 
@@ -303,5 +303,5 @@ class CondPosl(variant.VariantTask):
 class Cond_posled(variant.VariantTask):
     def GetUpdate(self, C1=None, C2=None, U=None, which=None):
         return dict(
-            Q='Q = %.2f мкКл' % (1. * C1.Value * C2.Value * U.Value / (C1.Value + C2.Value) / 1000),
+            Q='Q = %.2f мкКл' % (C1.Value * C2.Value * U.Value / (C1.Value + C2.Value) / 1000),
         )

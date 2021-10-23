@@ -2,7 +2,7 @@ import itertools
 
 import generators.variant as variant
 from generators.helpers import UnitValue, letter_variants, Fraction, n_times
-
+from decimal import Decimal
 
 @variant.solution_space(20)
 @variant.text('''
@@ -245,11 +245,11 @@ class r_from_R_N(variant.VariantTask):
 class U_from_R1_R2_I(variant.VariantTask):
     def GetUpdate(self, R1=None, R2=None, I=None, how=None):
         answer = {
-            'параллельно': 1. * (R1.Value * R2.Value) / (R1.Value + R2.Value) * I.Value,
-            'последовательно': 1. * (R1.Value + R2.Value) * I.Value,
+            'параллельно': (R1.Value * R2.Value) / (R1.Value + R2.Value) * I.Value,
+            'последовательно': (R1.Value + R2.Value) * I.Value,
         }[how]
         return dict(
-            U='U = %d В' % int(answer + 0.5),
+            U='U = %d В' % int(answer + Decimal('0.5')),
         )
 
 
@@ -333,8 +333,8 @@ class R_best_from_R_N(variant.VariantTask):
 class P_from_R_U(variant.VariantTask):
     def GetUpdate(self, R=None, U=None):
         return dict(
-            I='\\eli = %.2f А' % (1. * U.Value / R.Value),
-            P='P = %.2f Вт' % (1. * U.Value ** 2 / R.Value),
+            I='\\eli = %.2f А' % (U.Value / R.Value),
+            P='P = %.2f Вт' % (U.Value ** 2 / R.Value),
         )
 
 
@@ -408,15 +408,15 @@ class Circuit_four(variant.VariantTask):
     def GetUpdate(self, rotate=None, second_node=None, R1=None, R2=None, R3=None, R4=None, I=None):
         if second_node == 0:
             appendix = '\\draw  (3, 1.5) -- ++(right:0.5); \\node [contact] (contact2) at (3.5, 1.5) {};'
-            R_ratio = Fraction(numerator=(R2.Value + R3.Value) * R4.Value, denominator=R2.Value + R3.Value + R4.Value) + R1.Value
+            R_ratio = (R2.frac_value + R3.frac_value) * R4.frac_value / (R2.frac_value + R3.frac_value + R4.frac_value) + R1.frac_value
         elif second_node == 1:
             appendix = '\\draw  (1.5, 1.5) -- ++(up:1); \\node [contact] (contact2) at (1.5, 2.5) {};'
-            R_ratio = Fraction(numerator=R2.Value * (R3.Value + R4.Value), denominator=R2.Value + R3.Value + R4.Value) + R1.Value
+            R_ratio = R2.frac_value * (R3.frac_value + R4.frac_value) / (R2.frac_value + R3.frac_value + R4.frac_value) + R1.frac_value
         return dict(
             appendix=appendix,
             R_ratio=R_ratio,
             R='R = %.2f Ом' % float(R_ratio),
-            U='U = %.1f В' % (I.Value * float(R_ratio)),
+            U='U = %.1f В' % (I.frac_value * R_ratio),
         )
 
 
@@ -454,15 +454,15 @@ class Circuit_four(variant.VariantTask):
 ])
 class Circuit_six(variant.VariantTask):
     def GetUpdate(self, R=None, U=None, index_a=None, index_r=None):
-        U1 = Fraction(numerator=2 * U.Value, denominator=3)
-        U2 = Fraction(numerator=U.Value, denominator=6)
-        U3 = Fraction(numerator=U.Value, denominator=6)
-        U4 = Fraction(numerator=U.Value, denominator=3)
-        U5 = Fraction(numerator=U.Value, denominator=6)
-        U6 = Fraction(numerator=U.Value, denominator=6)
-        I1 = Fraction(numerator=U.Value, denominator=6 * R.Value)
-        I2 = Fraction(numerator=U.Value, denominator=3 * R.Value)
-        I3 = Fraction(numerator=U.Value, denominator=6 * R.Value)
+        U1 = 2 * U.frac_value / 3
+        U2 = U.frac_value / 6
+        U3 = U.frac_value / 6
+        U4 = U.frac_value / 3
+        U5 = U.frac_value / 6
+        U6 = U.frac_value / 6
+        I1 = U.frac_value / (6 * R.frac_value)
+        I2 = U.frac_value / (3 * R.frac_value)
+        I3 = U.frac_value / (6 * R.frac_value)
         return dict(
             U1='U_1 = %.1f В' % float(U1),
             U2='U_2 = %.1f В' % float(U2),

@@ -1,5 +1,5 @@
 import generators.variant as variant
-from generators.helpers import UnitValue, letter_variants, Fraction, n_times
+from generators.helpers import UnitValue, letter_variants, n_times
 
 
 @variant.text('''
@@ -84,20 +84,20 @@ class Short_i(variant.VariantTask):  # Вишнякова - 7
 ])
 class Update_external_R(variant.VariantTask):
     def GetUpdate(self, r=None, how=None, R1=None, R2=None, I1=None):
-        E_value = I1.Value * (r.Value + R1.Value)
+        E_value = I1.frac_value * (r.frac_value + R1.frac_value)
         E = '\\ele = %d В' % E_value
         if how == 'параллельно':
             R_formula = f'\\frac{{{R1:L}{R2:L}}}{{{R1:L} + {R2:L}}}'
-            R_ratio = Fraction(numerator=R1.Value * R2.Value, denominator=R1.Value + R2.Value)
-            I2_ratio = Fraction(numerator=E_value) / (R_ratio + r.Value)
+            R_ratio = R1.frac_value * R2.frac_value / (R1.frac_value + R2.frac_value)
+            I2_ratio = E_value / (R_ratio + r.frac_value)
             P_formula = f'\\frac{{U_2^2}}{R2:L:s} \\equiv \\frac{{\\sqr{{\\eli_2 R\'}}}}{R2:L:s}'
-            P2_ratio = (I2_ratio * R_ratio * I2_ratio * R_ratio) / R2.Value
+            P2_ratio = (I2_ratio * R_ratio * I2_ratio * R_ratio) / R2.frac_value
         elif how == 'последовательно':
             R_formula = f'{R1:L} + {R2:L}'
-            R_ratio = Fraction(numerator=R1.Value + R2.Value)
-            I2_ratio = Fraction(numerator=E_value) / (R_ratio + r.Value)
+            R_ratio = R1.frac_value + R2.frac_value
+            I2_ratio = E_value / (R_ratio + r.frac_value)
             P_formula = f'\\eli_2^2 {R2:L:s}'
-            P2_ratio = I2_ratio * I2_ratio * R2.Value
+            P2_ratio = I2_ratio * I2_ratio * R2.frac_value
 
         return dict(
             E=E,
@@ -141,13 +141,13 @@ class Update_external_R(variant.VariantTask):
 @variant.arg(t=['\\tau = %d с' % t for t in [2, 5, 10]])
 class Om_eta_full(variant.VariantTask):
     def GetUpdate(self, r=None, R=None, E=None, t=None):
-        I1_ratio = Fraction(numerator=E.Value, denominator=R.Value)
-        I2_ratio = Fraction(numerator=E.Value, denominator=R.Value + r.Value)
-        eta_2_ratio = Fraction(numerator=R.Value, denominator=R.Value + r.Value)
-        Q1_ratio = I1_ratio * I1_ratio * R.Value * t.Value
-        Q2_ratio = I2_ratio * I2_ratio * R.Value * t.Value
-        A1_ratio = I1_ratio * E.Value * t.Value
-        A2_ratio = I2_ratio * E.Value * t.Value
+        I1_ratio = E.frac_value / R.frac_value
+        I2_ratio = E.frac_value / (R.frac_value + r.frac_value)
+        eta_2_ratio = R.frac_value / (R.frac_value + r.frac_value)
+        Q1_ratio = I1_ratio * I1_ratio * R.frac_value * t.frac_value
+        Q2_ratio = I2_ratio * I2_ratio * R.frac_value * t.frac_value
+        A1_ratio = I1_ratio * E.frac_value * t.frac_value
+        A2_ratio = I2_ratio * E.frac_value * t.frac_value
         return dict(
             I1_ratio=I1_ratio,
             I2_ratio=I2_ratio,
@@ -209,12 +209,12 @@ class Om_eta_full(variant.VariantTask):
 ]])
 class r_eta_from_Rs(variant.VariantTask):
     def GetUpdate(self, R1=None, R2=None):
-        r = UnitValue('r = %.1f Ом' % ((1. * R1.Value * R2.Value) ** 0.5))
+        r = UnitValue('r = %.1f Ом' % (float(R1.Value * R2.Value) ** 0.5))
         return dict(
             R1=R1,
             R2=R2,
             r=r,
-            eta1='\\eta_1 = %.3f ' % (1. * R1.Value / (R1.Value + r.Value)),
-            eta2='\\eta_2 = %.3f ' % (1. * R2.Value / (R2.Value + r.Value)),
+            eta1='\\eta_1 = %.3f ' % (R1.frac_value / (R1.frac_value + r.frac_value)),
+            eta2='\\eta_2 = %.3f ' % (R2.frac_value / (R2.frac_value + r.frac_value)),
             E='\\ele = 1 В',
         )

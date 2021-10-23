@@ -1,5 +1,5 @@
 import generators.variant as variant
-from generators.helpers import Consts
+from generators.helpers import Consts, Decimal
 
 
 @variant.solution_space(40)
@@ -479,7 +479,7 @@ class ZFTSH_10_2_2_kv(variant.VariantTask):
     def GetUpdate(self, gas=None, V=None, p=None, t=None):
         return dict(
             P='%.1f атм' % p,
-            m='%.2f г' % (p * Consts.p_atm.Value * 1000 * V.Value * gas.mu.Value / 1000 / Consts.R.Value / (t + 273)),
+            m='%.2f г' % (Decimal(p) * Consts.p_atm.Value * 1000 * V.Value * gas.mu.Value / 1000 / Consts.R.Value / (t + 273)),
         )
 
 

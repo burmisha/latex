@@ -1,5 +1,5 @@
 import generators.variant as variant
-from generators.helpers import Consts, Fraction, UnitValue
+from generators.helpers import Consts, UnitValue, Decimal
 
 @variant.text('''
     Запишите определения, формулы и физические законы (можно сокращать, но не упустите ключевое):
@@ -183,7 +183,7 @@ class A_plus_V(variant.VariantTask):
         return dict(
             v='v = %.1f м / с' % (t.Value * a.Value) ,
             s='s_x = %.1f м' % (t.Value ** 2 * a.Value / 2) ,
-            v_avg='v_\\text{сред.} = %.2f м / c' % (t.Value * a.Value * (1 / 2 + n) / (1 + n)) ,
+            v_avg='v_\\text{сред.} = %.2f м / c' % (float(t.Value * a.Value) * (1 / 2 + n) / (1 + n)) ,
         )
 
 
@@ -231,16 +231,17 @@ class V_and_S_from_g_and_t(variant.VariantTask):
 ])
 class All_from_l_and_n(variant.VariantTask):
     def GetUpdate(self, what=None, l=None, n=None):
-        r_ratio = Fraction(numerator=l.Value, denominator={'радиусом': 1, 'диаметром': 2}[what])
+        denominator = {'радиусом': 1, 'диаметром': 2}[what]
+        r_ratio = l.frac_value / denominator
         t = UnitValue('t = 60 с')
         r = UnitValue('r = %.1f м' % float(r_ratio))
         return dict(
             t=t,
             r=r,
             T='T = %.2f c' % (t.Value / n),
-            nu='\\nu = %.2f Гц' % (n / t.Value),
-            v='v = %.2f м / c' % (float(r_ratio) * 2 * Consts.pi * n / t.Value),
-            a='a = %.2f м / с^2' % (float(r_ratio) * 4 * (Consts.pi ** 2) * (n ** 2) / (t.Value ** 2)),
+            nu='\\nu = %.2f Гц' % (Decimal(n) / t.Value),
+            v='v = %.2f м / c' % (float(r_ratio) * 2 * Consts.pi * n / float(t.Value)),
+            a='a = %.2f м / с^2' % (float(r_ratio) * 4 * (Consts.pi ** 2) * (n ** 2) / (float(t.Value) ** 2)),
         )
 
 
@@ -267,7 +268,7 @@ class Stones_into_river(variant.VariantTask):
     def GetUpdate(self, who=None, t=None, v=None):
         return dict(
             who2=who[:3] + 'и',
-            h='h = %.1f м' % (Consts.g_ten.Value * t.Value ** 2 / 2),
+            h='h = %.1f м' % (float(Consts.g_ten.Value) * float(t.Value) ** 2 / 2),
             L='L = %.1f м' % (v.Value * t.Value),
-            v_res='v = %.1f м / c' % ((v.Value ** 2 + (Consts.g_ten.Value * t.Value) ** 2) ** 0.5),
+            v_res='v = %.1f м / c' % ((float(v.Value) ** 2 + float(Consts.g_ten.Value * t.Value) ** 2) ** 0.5),
         )

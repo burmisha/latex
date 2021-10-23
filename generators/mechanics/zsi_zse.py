@@ -1,5 +1,5 @@
 import generators.variant as variant
-from generators.helpers import Consts
+from generators.helpers import Consts, Decimal
 
 
 @variant.text('''
@@ -131,7 +131,7 @@ class Ch_3_6(variant.VariantTask):
 class Ch_3_24(variant.VariantTask):
     def GetUpdate(self, m=None, M=None, v=None, count=None, n=None):
         return dict(
-            u='u = %.2f м / с' % (1.0 * v.Value * M.Value / (M.Value + n * m.Value)),
+            u='u = %.2f м / с' % (v.Value * M.Value / (M.Value + n * m.Value)),
         )
 
 
@@ -287,5 +287,5 @@ class Ch_4_45(variant.VariantTask):
 class Ek_ratio_Ep(variant.VariantTask):
     def GetUpdate(self, how=None, n=None, v=None):
         return dict(
-            h='h = %.1f м' % (v.Value ** 2 / 2 / Consts.g_ten.Value / (1 + 1 / n)),
+            h='h = %.1f м' % (v.Value ** 2 / 2 / Consts.g_ten.Value / Decimal(1 + 1 / n)),
         )

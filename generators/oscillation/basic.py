@@ -1,5 +1,5 @@
 import generators.variant as variant
-from generators.helpers import letter_variants
+from generators.helpers import letter_variants, Decimal
 
 
 @variant.solution_space(0)
@@ -106,7 +106,7 @@ class Nu02(variant.VariantTask):
 
 @variant.solution_space(60)
 @variant.text('''
-    Координата материальной точки зависит от времени по закону ${axis} = {A:.2f} * {func} ({n}\\pi t)$ (в СИ).
+    Координата материальной точки зависит от времени по закону ${axis} = {A} * {func} ({n}\\pi t)$ (в СИ).
     Чему равен путь, пройденный точкой за {t:V:e}?
 ''')
 @variant.answer_short('\\omega = {n}\\pi \\implies \\nu = \\frac{n}2\,\\units{Гц}, N = \\nu t = {N}, s = 4AN = 4 * {A} * {N} = {s} \\text{(м)}')
@@ -114,14 +114,14 @@ class Nu02(variant.VariantTask):
 @variant.arg(n=[3, 4, 5, 6])
 @variant.arg(axis=['x', 'y', 'z'])
 @variant.arg(func=['\\sin', '\\cos'])
-@variant.arg(A=[0.02, 0.05, 0.15, 0.25])
+@variant.arg(A=['0.02', '0.05', '0.15', '0.25'])
 class S_from_func(variant.VariantTask):
     def GetUpdate(self, t=None, n=None, axis=None, A=None, func=None):
-        N = n / 2 * t.SI_Value * 60
-        s = A * 4 * N
+        N = n * t.SI_Value * 60 / 2
+        s = Decimal(A) * 4 * N
         return dict(
             N=N,
-            s=s,
+            s=str(s),
         )
 
 

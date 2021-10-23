@@ -1,7 +1,13 @@
 from fractions import Fraction
+from decimal import Decimal
 
 import logging
 log = logging.getLogger(__name__)
+
+
+def decimal_to_fraction(decimal):
+    numerator, denominator = decimal.as_integer_ratio()
+    return Fraction(numerator=numerator, denominator=denominator)
 
 
 class FractionFormatter:

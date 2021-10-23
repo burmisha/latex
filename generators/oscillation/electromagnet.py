@@ -78,8 +78,8 @@ class Task02(variant.VariantTask):
 class Task03(variant.VariantTask):
     def GetUpdate(self, *, omega=None, I=None, func=None, L=None):
         T = 2 * math.pi / omega
-        C = 1 / omega ** 2 / L.SI_Value
-        q = I.SI_Value / omega
+        C = 1 / float(omega ** 2) / float(L.SI_Value)
+        q = float(I.SI_Value) / omega
         return dict(
             T=f'T = {T * 1000:.1f} мc',
             C=f'C = {C * 1000:.1f} мФ',
@@ -167,8 +167,8 @@ class Task04(variant.VariantTask):
 ])
 class Task05(variant.VariantTask):  # 3800 14.8
     def GetUpdate(self, *, how=None, nu1=None, nu2=None):
-        nu_posl = 1 / ((1 / nu1.SI_Value ** 2 + 1 / nu2.SI_Value ** 2) ** 0.5)
-        nu_par = (nu1.SI_Value ** 2  + nu2.SI_Value ** 2) ** 0.5
+        nu_posl = 1 / (float(1 / nu1.SI_Value ** 2 + 1 / nu2.SI_Value ** 2) ** 0.5)
+        nu_par = float(nu1.SI_Value ** 2  + nu2.SI_Value ** 2) ** 0.5
         return dict(
             nu_posl=f'{nu_posl:.2f} Гц',
             nu_par=f'{nu_par:.2f} Гц',

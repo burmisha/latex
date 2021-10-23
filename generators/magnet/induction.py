@@ -1,7 +1,7 @@
 import itertools
 
 import generators.variant as variant
-from generators.helpers import Consts, letter_variants, n_times, UnitValue, Fraction
+from generators.helpers import Consts, letter_variants, n_times, UnitValue, Fraction, Decimal
 
 import math
 
@@ -102,7 +102,7 @@ class Definitions03(variant.VariantTask):
 class Find_E_easy(variant.VariantTask):
     def GetUpdate(self, I1=None, I2=None, t=None, L=None):
         E = abs(I1.Value - I2.Value) / t.Value * L.Value
-        E_answer = int(E + 0.5)
+        E_answer = int(E + Decimal(0.5))
 
         assert E_answer >= 10, [E_answer]
         return dict(
@@ -132,7 +132,7 @@ class Find_E_easy(variant.VariantTask):
 class Find_Phi_1(variant.VariantTask):
     def GetUpdate(self, I=None, L=None, n=None):
         Phi1 = L.Value * I.Value / n
-        Phi1_answer = int(Phi1 + 0.5)
+        Phi1_answer = int(Phi1 + Decimal(0.5))
 
         assert Phi1_answer >= 5, [Phi1, Phi1_answer]
         return dict(
@@ -328,7 +328,7 @@ class q_from_B_a_b_r(variant.VariantTask):  # Вишнякова 3.4.7
             phi2 = 90 - angle
 
         q = B * a * b * abs(math.cos(phi2 * math.pi / 180) - math.cos(phi1 * math.pi / 180)) / R
-        q_answer = int(q.SI_Value * 10 ** 6 + 0.5)
+        q_answer = int(q.SI_Value * 10 ** 6 + Decimal(0.5))
         assert q_answer >= 10
         return dict(
             phi1=phi1,
@@ -377,7 +377,7 @@ class a_from_n(variant.VariantTask):  # Вишнякова 3.4.11
 class L_from_b(variant.VariantTask):  # Вишнякова 3.4.14
     def GetUpdate(self, a=None, b=None, sign=None, E=None):
         L = E / b
-        L_answer = int(L.Value + 0.5)
+        L_answer = int(L.Value + Decimal(0.5))
         return dict(
             L=f'L = {L.Value:.1f} мГн',
             L_answer=L_answer,
@@ -449,9 +449,9 @@ class B_angle_hard(variant.VariantTask):  # Вишнякова 3.4 УК
         a_radian = angle * math.pi / 180
         g = Consts.g_ten
         BB = m * g * R * math.sin(a_radian) / (math.cos(a_radian) ** 2) / v / l / l
-        B = BB.SI_Value ** 0.5
+        B = float(BB.SI_Value) ** 0.5
         II = m * g * v * math.sin(a_radian) / R
-        I = II.SI_Value ** 0.5
+        I = float(II.SI_Value) ** 0.5
         return dict(
             g=g,
             B=f'B = {B:.2f} Тл',
