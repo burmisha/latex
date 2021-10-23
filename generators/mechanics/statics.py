@@ -1,5 +1,5 @@
 import generators.variant as variant
-from generators.helpers import Consts, Fraction, UnitValue
+from generators.helpers import Consts, UnitValue
 
 
 @variant.solution_space(80)

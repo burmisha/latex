@@ -1,5 +1,5 @@
 import generators.variant as variant
-from generators.helpers import UnitValue, Consts, Fraction
+from generators.helpers import UnitValue, Consts
 
 
 @variant.text('''
