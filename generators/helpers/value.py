@@ -5,51 +5,59 @@ from library.logging import colorize_json, cm, color
 
 import logging
 log = logging.getLogger(__name__)
-from decimal import Decimal, ROUND_05UP
+from decimal import Decimal
 
 
 def precisionFmt2(value, precision):
-    if isinstance(value, int):
-        return str(value)
-    elif isinstance(value, str):
-        if value.isdigit():
-            return value
-
-    assert isinstance(value, (float, Decimal)), f'{value} is {type(value)}'
+    assert isinstance(value, (int, float, Decimal)), f'Value {value} has type {type(value)}'
+    assert isinstance(precision, int), f'Got precision {precision} for {value}'
+    assert 1 <= precision <= 10, f'Got precision {precision} for {value}'
 
     if int(value) == value:
         return str(int(value))
 
-    isNegative = value < 0
-    absValue = abs(value)
-    assert absValue >= 10 ** -7, f'Got value of {absValue}'
-    assert 1 <= precision <= 10, f'Got precision {precision} for {value}'
+    abs_value = float(abs(value))
+    assert abs_value >= 10 ** -7, f'Got value of {abs_value} for {value}'
 
-    decimal_value = Decimal(absValue)
     shift = 0
-    while not (10 ** (precision - 1) <= decimal_value < 10 ** precision):
-        if decimal_value < 10 ** (precision - 1):
-            decimal_value *= 10
+    lower = 10 ** (precision - 1)
+    upper = 10 ** precision
+    while not (lower <= abs_value < upper):
+        if abs_value < lower:
+            abs_value *= 10
             shift += 1
         else:
-            decimal_value /= 10
+            abs_value /= 10
             shift -= 1
 
-    if str(decimal_value)[0] == '1':
+    leading_one = False
+    if str(abs_value).startswith('1'):
         precision += 1
-        decimal_value *= 10
+        abs_value *= 10
         shift += 1
+        leading_one = True
 
-    decimal_value += Decimal(0.5)
-    decimal_value = Decimal(int(decimal_value))
-    decimal_value *= Decimal(10) ** (-shift)
-    decimal_value = decimal_value.quantize(Decimal(10) ** -shift)
+    int_value = int(abs_value + 0.5)
+    result = str(int_value)
 
-    rawDigits = str(decimal_value)
+    more_zeros = 0
+    if len(result) < precision:
+        more_zeros = precision - len(result)
+        if more_zeros and leading_one:
+            more_zeros -= 1
+    result += '0' * more_zeros
 
-    if isNegative:
-        rawDigits = '-' + rawDigits
-    return rawDigits
+    if shift < 0:
+        result += '0' * (-shift)
+    elif shift > 0:
+        if len(result) >= shift + 1:
+            result = result[:-shift] + '.' + result[-shift:]
+        else:
+            result = '0.' + '0' * (shift - len(result)) + result
+
+    if value < 0:
+        result = '-' + result
+    return result
 
 
 def test_precisionFmt2():
@@ -103,6 +111,10 @@ def test_precisionFmt2():
         (0.0049594, 3, '0.00496'),
         (0.0049594, 2, '0.0050'),
         (0.0049594, 1, '0.005'),
+        (3 / 10 ** 7, 2, '0.00000030'),
+        (3 / 10 ** 7, 1, '0.0000003'),
+        (3 * 10 ** 7, 1, '30000000'),
+        (3 * 10 ** 7, 2, '30000000'),
     ]:
         res = precisionFmt2(value, precision)
         assert res == result, f'Expected {value}, {precision} -> {result}, got {res!r}'
@@ -115,37 +127,34 @@ def get_precision(line):
     precisionStr = line.replace('-', '').replace('.', '').lstrip('0')
     if not precisionStr:
         assert line in ['0', '0.0', '0.00'], f'Could not get precision from {line!r}'
-        is_zero = True
         precisionStr = '0'
-    else:
-        is_zero = False
+
     precision = len(precisionStr)
     if precisionStr[0] == '1' and precision >= 2:
         precision -= 1
 
-    assert precision >= 1, f'Got invalid precision {self.Precision} from {line!r}'
+    assert precision >= 1, f'Got invalid precision {precision} from {line!r}'
 
-    return is_zero, precision
+    return precision
 
 
 def test_get_precision():
     data = [
-        ('-2.0', False, 2),
-        ('2.0', False, 2),
-        ('2.00', False, 3),
-        ('0.0020', False, 2),
-        ('0.00200', False, 3),
-        ('20', False, 2),
-        ('200', False, 3),
-        ('192', False, 2),
-        ('0', True, 1),
-        ('0.0', True, 1),
-        ('0.00', True, 1),
+        ('-2.0', 2),
+        ('2.0', 2),
+        ('2.00', 3),
+        ('0.0020', 2),
+        ('0.00200', 3),
+        ('20', 2),
+        ('200', 3),
+        ('192', 2),
+        ('0', 1),
+        ('0.0', 1),
+        ('0.00', 1),
     ]
-    for line, is_zero, precision in data:
+    for line, precision in data:
         result = get_precision(line)
-        assert result[0] == is_zero, f'Expected {is_zero},  got {result[0]} for {line}'
-        assert result[1] == precision, f'Expected {precision},  got {result[1]} for {line}'
+        assert result == precision, f'Expected {precision},  got {result} for {line}'
 
 
 test_get_precision()
@@ -175,7 +184,6 @@ class UnitValue:
 
     def __init__(self, line, precision=None, viewPrecision=None):
         self.__raw_line = line
-        self._is_zero = None
         try:
             self._load(line, precision=precision)
         except Exception:
@@ -185,7 +193,12 @@ class UnitValue:
         self._value_str = None
 
     def _load(self, line, precision=None):
+        assert isinstance(line, str)
+        assert line.count('/') <= 1
+        assert line.count('=') <= 1
+
         line = line.strip()
+
         if '=' in line:
             letter_line, value_line = line.split('=', 1)
             letter_line = letter_line.strip()
@@ -195,7 +208,6 @@ class UnitValue:
             value_line = line
         self.Letter = letter_line
 
-        assert value_line.count('/') <= 1
         for key, value in {
             '/': ' / ',
             '**': '^',
@@ -212,12 +224,7 @@ class UnitValue:
         for part in value_line.split():
             if self.Value is None:
                 self.Value = Decimal(part)
-                # self.Value = int(part) if part.isdigit() else float(part)
-
-                if precision is None:
-                    self._is_zero, self.Precision = get_precision(part)
-                else:
-                    self.Precision = precision
+                self.Precision = get_precision(part) if precision is None else precision
 
             elif part.startswith('10^'):
                 self.ValuePower = int(part[3:].strip('{').strip('}'))
@@ -249,11 +256,10 @@ class UnitValue:
 
     def get_value_str(self):
         if self._value_str is None:
-            if self._is_zero:
+            if self.Value.is_zero():
                 valueStr = '0'
             else:
                 valueStr = precisionFmt2(self.Value, self.ViewPrecision or self.Precision)
-                # print(self.Value, self.ViewPrecision or self.Precision, valueStr)
             self._precisionFmt2 = str(valueStr)
             valueStr = valueStr.replace('.', '{,}')
             if self.ValuePower:
@@ -397,7 +403,7 @@ def test_get_base_units():
     result = get_simple_unit(unit_value.get_base_units())
     assert result == SimpleUnits.joule, result
 
-    # assert unit_value.SI_Value == 50e-6, unit_value.SI_Value
+    assert unit_value.SI_Value == Decimal('0.00005')
 
 
 test_get_base_units()
