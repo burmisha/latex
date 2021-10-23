@@ -17,7 +17,6 @@ def precisionFmt2(value, precision):
         return str(int(value))
 
     abs_value = float(abs(value))
-    assert abs_value >= 10 ** -7, f'Got value of {abs_value} for {value}'
 
     shift = 0
     lower = 10 ** (precision - 1)
@@ -235,7 +234,7 @@ class UnitValue:
             else:
                 self._units.append(OneUnit(part, isNumerator))
 
-        self._power = sum(unit.SiPower if unit.IsNumerator else -unit.SiPower for unit in self._units) + self.ValuePower
+        # self._power = sum(unit.SiPower if unit.IsNumerator else -unit.SiPower for unit in self._units) + self.ValuePower
 
     def __str__(self):
         return f'UVS {self.__raw_line}'
@@ -323,51 +322,49 @@ class UnitValue:
 
     @property
     def SI_Value(self):
-        return self.Value * Decimal(10) ** self._power
+        result = self.Value * Decimal(10) ** self.ValuePower
+        for unit in self._units:
+            if unit.IsNumerator:
+                result *= unit.SiMultiplier
+            else:
+                result /= unit.SiMultiplier
+        return result
 
     @property
     def frac_value(self):
         return decimal_to_fraction(self.Value)
 
-    def _calculate(self, other, action=None, precisionInc=0, units='', powerShift=0):
-        # TODO: skips units now
+    def _calculate(self, other, action=None, precisionInc=0, units=''):
+        MAX_PRECISION = 7
 
-        if isinstance(other, UnitValue):
-            precision = min(min(self.Precision, other.Precision) + precisionInc, 7)
-            if action == 'mult':
-                value = self.Value * other.Value
-                power = self._power + other._power
-            elif action == 'div':
-                value = self.Value / other.Value
-                power = self._power - other._power
-            else:
-                raise NotImplementedError(f'Could not apply {action}')
-        elif isinstance(other, (int, float, Decimal)):
-            precision = min(self.Precision + precisionInc, 7)
-            power = self._power
-            if action == 'mult':
-                value = self.Value * Decimal(other)
-            elif action == 'div':
-                value = self.Value / Decimal(other)
-            else:
-                raise NotImplementedError(f'Could not apply {action}')
+        if isinstance(other, (int, float, Decimal)):
+            other = UnitValue(str(other))
+
+        assert isinstance(other, UnitValue)
+
+        precision = min(min(self.Precision, other.Precision) + precisionInc, MAX_PRECISION)
+        if action == 'mult':
+            value = self.SI_Value * other.SI_Value
+        elif action == 'div':
+            value = self.SI_Value / other.SI_Value
         else:
-            raise NotImplementedError(f'Could not apply {action}')
+            raise NotImplementedError(f'Could not apply unknown action {action!r}')
 
-        if powerShift:
-            power -= powerShift
-            value *= Decimal(10) ** powerShift
-        elif abs(power) <= 2:
-            value *= Decimal(10) ** power
-            power -= power
+        t = value
+        if value > 10 ** 5 or value < 10 ** -4:
+            power = int(abs(value).log10()) // 3 * 3
+            value *= Decimal(10) ** -power
+        else:
+            power = 0
 
-        r = UnitValue('%.20f 10^%d %s' % (value, power, units), precision=precision)
+
+        line = f'{value} 10^{{{power}}} {units}'
+        r = UnitValue(line, precision=precision)
         return r
 
 
 def test_unit_value():
     data = [
-        (UnitValue('50 мТл').Value * (Decimal(10) ** UnitValue('50 мТл')._power), Decimal('0.050')),
         ('{:Task}'.format(UnitValue('c = 3 10^{8} м / с')), 'c = 3 \\cdot 10^{8}\\,\\frac{\\text{м}}{\\text{с}}'),
         ('{:Task}'.format(UnitValue('t = 8 суток')), 't = 8\\,\\text{суток}'),
         ('{:Value}'.format(UnitValue('m = 1.67 10^-27 кг')), '1{,}67 \\cdot 10^{-27}\\,\\text{кг}'),
@@ -377,12 +374,17 @@ def test_unit_value():
         ('{:TestAnswer}'.format(UnitValue('4 см')), '4'),
         ('{:Value}'.format(UnitValue('0 см')), '0\\,\\text{см}'),
         ('{:Value}'.format(UnitValue('0 см')), '0\\,\\text{см}'),
+        ('{:Value}'.format(UnitValue('2 а.е.м.')), '2\\,\\text{а.е.м.}'),
         ('{:Task}'.format(UnitValue('A = 200 Дж')), 'A = 200\\,\\text{Дж}'),
         ('{:TestAnswer}'.format(UnitValue('2.5 м')), r'2.5'),
         ('{:Value}'.format(UnitValue('2 10^4 км/c')), '2 \\cdot 10^{4}\\,\\frac{\\text{км}}{\\text{c}}'),
+        # ('{:V}'.format(UnitValue('600000000000000000 Гц', precision=3)), '6 \\cdot 10^{14}\\,\\text{Гц}'),  # TODO
     ]
-    for src, canonic in data:
-        assert src == canonic, f'Expected {canonic}, got {src}'
+    for res, canonic in data:
+        assert res == canonic, f'Expected {canonic!r}, got {res!r}'
+
+    assert (UnitValue('10 мин') * UnitValue('5 Гц')).SI_Value == 3000, (UnitValue('10 мин') * UnitValue('5 Гц')).SI_Value
+    assert UnitValue('1230 * 10^2').SI_Value == 123000
 
 
 test_unit_value()

@@ -1,7 +1,7 @@
 from generators.helpers.value import UnitValue
 from generators.helpers.matter import Matter
 from generators.helpers.vapor import Vapor, T_P_Pmm_rho
-
+from generators.helpers.fraction import Decimal
 
 class ConstsBase:
     pi = 3.14159
@@ -91,13 +91,19 @@ Consts = ConstsBase()
 
 
 def test_calculation():
-    for expr, answer in [
-        ('{:Value}'.format(Consts.c.Div(UnitValue('l = 500 нм'), units='Гц', powerShift=3)), '6 \\cdot 10^{14}\\,\\text{Гц}'),
-        ('{:Value}'.format(UnitValue('9 10^25').Div(Consts.N_A)), '150'),
-        ('{:V}'.format(UnitValue('9 10^25').Div(UnitValue('6.03 10^23'), precisionInc=1)), '149'),
-        ('{:V}'.format(UnitValue('9 10^25').Div(UnitValue('6.03 10^23'), precisionInc=0)), '150'),
-        # (UnitValue('2 10^4 км/c').Value * Consts.m_p.Value / Consts.e.Value / UnitValue('200 мТл').Value * 10 ** 2, 1),
-    ]:
-        assert expr == answer, f'Expected |{answer}|, got |{expr}|'
+    data = [
+        (Consts.c.Div(UnitValue('l = 500 нм'), units='Гц'), '600 \\cdot 10^{12}\\,\\text{Гц}'),
+        (UnitValue('9 10^25').Div(Consts.N_A), '150'),
+        (UnitValue('9 10^25').Div(UnitValue('6.03 10^23'), precisionInc=1), '149'),
+        (UnitValue('9 10^25').Div(UnitValue('6.03 10^23'), precisionInc=0), '150'),
+        ((UnitValue('E = 31.99 МэВ') * Consts.e / Consts.c / Consts.c).Div(Consts.aem, units='а.е.м.'),  '0{,}034\\,\\text{а.е.м.}'),
+        ((UnitValue('E = 39.2 МэВ') * Consts.e / Consts.c).Div(Consts.c, units='кг'),  '70 \\cdot 10^{-30}\\,\\text{кг}'),
+        (UnitValue('20 г') / UnitValue('142 г / моль') * Consts.N_A, '85 \\cdot 10^{21}'),
+    ]
+    for unit_value, answer in data:
+        result = '{:V}'.format(unit_value)
+        assert result == answer, f'Expected |{answer}|, got |{result}|'
+
+    assert UnitValue('2 10^4 км/c').Value * Consts.m_p.Value / Consts.e.Value / UnitValue('200 мТл').Value * 10 ** 2 == Decimal('1.045')
 
 test_calculation()

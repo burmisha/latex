@@ -1,3 +1,4 @@
+from decimal import Decimal
 import logging
 log = logging.getLogger(__name__)
 
@@ -190,17 +191,33 @@ class OneUnit:
             log.error(f'Error in _load_from_str on {line}')
             raise
         self.IsNumerator = is_numenator
-        assert isinstance(self.SiPower, int)
         assert isinstance(self.HumanUnit, str)
         assert isinstance(self.HumanPower, int)
         assert isinstance(self.IsNumerator, bool)
         assert isinstance(self.simple_unit, SimpleUnit)
 
-    def get_tex(self):
-        res = '\\text{%s}' % self.HumanUnit
-        if self.HumanPower != 1:
-            res += '^{%d}' % self.HumanPower
+    def get_tex(self, human=True):
+        if self._Multiplier == 1 or human:
+            res = '\\text{%s}' % self.HumanUnit
+            if self.HumanPower != 1:
+                res += '^{%d}' % self.HumanPower
+        else:
+            res = '%d \\cdot \\text{%s}' % (self._Multiplier, self.HumanUnit)
+            if self.HumanPower != 1:
+                res = '\\cbr{%s}^{%d}' % (res, self.HumanPower)
         return res
+
+    @property
+    def SiPower(self):
+        return self.HumanPower * self._exponent
+
+    @property
+    def SiMultiplier(self):
+        return self.Multiplier * Decimal(10) ** self.SiPower
+
+    @property
+    def Multiplier(self):
+        return Decimal(self._Multiplier) ** self.HumanPower
 
     def _load_from_str(self, line):
         if '^' in line:
@@ -209,41 +226,62 @@ class OneUnit:
         else:
             self.HumanPower = 1
         self.HumanUnit = line
+        self._Multiplier = 1
 
         self.simple_unit = SimpleUnits.no_units
-        exponent = 0
+        self._exponent = 0
         main = line
         for unit, multiplier, simple_unit in KNOWN_UNITS:
             if line.endswith(unit):
                 main = unit
                 prefix = line[:-len(unit)]
-                exponent = SI_PREFIXES[prefix]
+                self._exponent = SI_PREFIXES[prefix]
                 self.simple_unit = simple_unit
                 break
 
         if main == 'г':
-            main = 'кг'
-            exponent -= 3
-        # TODO: час, сутки
-
-        self.SiPower = exponent * self.HumanPower
+            self.simple_unit = SimpleUnits.kg
+            self._exponent -= 3
+        elif main == 'ц':
+            self.simple_unit = SimpleUnits.kg
+            self._exponent += 2
+        elif main == 'т':
+            self.simple_unit = SimpleUnits.kg
+            self._exponent += 3
+        elif main.startswith('сут') or main == 'день' or main == 'дней' or main == 'дня':
+            self.simple_unit = SimpleUnits.s
+            self._Multiplier = 86400
+        elif main == 'час' or main == 'часа' or main == 'часов':
+            self.simple_unit = SimpleUnits.s
+            self._Multiplier = 3600
+        elif main == 'мин' or main.startswith('минут'):
+            self.simple_unit = SimpleUnits.s
+            self._Multiplier = 60
 
 
 def test_one_unit():
     data = [
-        ('мВ', -3, 'мВ', 1),
-        ('мВт', -3, 'мВт', 1),
-        ('МэВ', 6, 'МэВ', 1),
-        ('мс^2', -6, 'мс', 2),
-        ('кг^2', 0, 'кг', 2),
-        ('мг^2', -12, 'мг', 2),
-        ('т', 0, 'т', 1),
+        ('мВ', -3, 'мВ', 1, SimpleUnits.volt),
+        ('мВт', -3, 'мВт', 1, SimpleUnits.watt),
+        ('МэВ', 6, 'МэВ', 1, SimpleUnits.joule),
+        ('мс^2', -6, 'мс', 2, SimpleUnits.s),
+        ('кг^2', 0, 'кг', 2, SimpleUnits.kg),
+        ('мг^2', -12, 'мг', 2, SimpleUnits.kg),
+        ('т', 3, 'т', 1, SimpleUnits.kg),
+        ('сут', 0, 'сут', 1, SimpleUnits.s),
+        ('ц^2', 4, 'ц', 2, SimpleUnits.kg),
     ]
-    for unit_text, si_power, human_unit, human_power in data:
+    for unit_text, si_power, human_unit, human_power, simple_unit in data:
         unit = OneUnit(unit_text, True)
         assert unit.SiPower == si_power, f'Expected {si_power}, got {unit.SiPower}'
         assert unit.HumanUnit == human_unit, f'Expected {human_unit}, got {unit.HumanUnit}'
         assert unit.HumanPower == human_power, f'Expected {human_power}, got {unit.HumanPower}'
+        assert unit.simple_unit == simple_unit, f'Expected {simple_unit}, got {unit.simple_unit}'
+
+    unit = OneUnit('мин^2', True)
+    assert unit.Multiplier == 3600, f'Expected {3600}, got {unit.Multiplier}'
+    assert unit.get_tex(human=True) == '\\text{мин}^{2}', f'Got {unit.get_tex(human=True)}'
+    assert unit.get_tex(human=False) == '\\cbr{60 \\cdot \\text{мин}}^{2}', f'Got {unit.get_tex(human=False)}'
 
 
 test_one_unit()

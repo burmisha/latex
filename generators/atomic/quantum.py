@@ -86,10 +86,10 @@ class ColorNameFromLambda(variant.VariantTask):
         return dict(
             mkm=mkm,
             nu_0=Consts.c_4.Div(mkm, units='Гц', precisionInc=3),
-            nu1=Consts.c.Div(q1, units='Гц', powerShift=3),
-            nu2=Consts.c.Div(q2, units='Гц', powerShift=3),
-            nu3=Consts.c.Div(q3, units='Гц', powerShift=3),
-            nu4=Consts.c.Div(q4, units='Гц', powerShift=3),
+            nu1=Consts.c.Div(q1, units='Гц'),
+            nu2=Consts.c.Div(q2, units='Гц'),
+            nu3=Consts.c.Div(q3, units='Гц'),
+            nu4=Consts.c.Div(q4, units='Гц'),
         )
 
 

@@ -117,7 +117,7 @@ class Nu02(variant.VariantTask):
 @variant.arg(A=['0.02', '0.05', '0.15', '0.25'])
 class S_from_func(variant.VariantTask):
     def GetUpdate(self, t=None, n=None, axis=None, A=None, func=None):
-        N = n * t.SI_Value * 60 / 2
+        N = n * t.SI_Value / 2
         s = Decimal(A) * 4 * N
         return dict(
             N=N,
@@ -139,7 +139,7 @@ class S_from_func(variant.VariantTask):
 class Nu03(variant.VariantTask):
     def GetUpdate(self, nu=None, t=None):
         T = nu / nu / nu  # TODO: 1 / nu
-        N = nu * t * 60
+        N = nu * t
         return dict(
             T=f'T = {T.SI_Value * 1000:.3f} мc',
             N=f'N = {N.SI_Value:.0f} колебаний',

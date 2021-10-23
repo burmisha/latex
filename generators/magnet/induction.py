@@ -194,7 +194,7 @@ class L_W_ratio(variant.VariantTask):
         W2_W1 = l * m ** 2
         return dict(
             l=l,
-            L2=f'L_2 = {L2.Value:.2f} мГн',
+            L2=f'L_2 = {L2.SI_Value * 1000:.2f} мГн',
             W1=f'W_1 = {W1.SI_Value:.3f} Дж',
             W2_W1=W2_W1,
         )
@@ -377,9 +377,9 @@ class a_from_n(variant.VariantTask):  # Вишнякова 3.4.11
 class L_from_b(variant.VariantTask):  # Вишнякова 3.4.14
     def GetUpdate(self, a=None, b=None, sign=None, E=None):
         L = E / b
-        L_answer = int(L.Value + Decimal(0.5))
+        L_answer = int(L.SI_Value * 1000 + Decimal(0.5))
         return dict(
-            L=f'L = {L.Value:.1f} мГн',
+            L=f'L = {L.SI_Value * 1000:.1f} мГн',
             L_answer=L_answer,
         )
 
