@@ -334,7 +334,7 @@ class UnitValue:
     def frac_value(self):
         return decimal_to_fraction(self.Value)
 
-    def _calculate(self, other, action=None, precisionInc=0, units=''):
+    def _calculate(self, other, action=None, precisionInc=0, units=None):
         MAX_PRECISION = 7
 
         if isinstance(other, (int, float, Decimal)):
@@ -342,11 +342,22 @@ class UnitValue:
 
         assert isinstance(other, UnitValue)
 
+        this_units = self.get_base_units()
+        other_units = other.get_base_units()
+        used_units = set(this_units) | set(other_units)
+
+        calced_units = {}
+
         precision = min(min(self.Precision, other.Precision) + precisionInc, MAX_PRECISION)
         if action == 'mult':
             value = self.SI_Value * other.SI_Value
+            for key in used_units:
+                calced_units[key] = this_units.get(key, 0) + other_units.get(key, 0)
+
         elif action == 'div':
             value = self.SI_Value / other.SI_Value
+            for key in used_units:
+                calced_units[key] = this_units.get(key, 0) - other_units.get(key, 0)
         else:
             raise NotImplementedError(f'Could not apply unknown action {action!r}')
 
@@ -357,6 +368,13 @@ class UnitValue:
         else:
             power = 0
 
+        if not units:
+            nom_units = [(key, value) for key, value in calced_units.items() if value > 0]
+            denom_units = [(key, value) for key, value in calced_units.items() if value < 0]
+            units = ' '.join([f'{key._name}^{value}' for key, value in nom_units])
+            if denom_units:
+                units += ' / '
+                units += ' '.join([f'{key._name}^{value}' for key, value in denom_units])
 
         line = f'{value} 10^{{{power}}} {units}'
         r = UnitValue(line, precision=precision)
@@ -383,6 +401,8 @@ def test_unit_value():
     for res, canonic in data:
         assert res == canonic, f'Expected {canonic!r}, got {res!r}'
 
+    assert UnitValue('5 Гц').get_base_units() == {BaseUnits.s: -1}
+    # assert UnitValue('Гц').get_base_units() == {BaseUnits.s: -1}  # TODO
     assert (UnitValue('10 мин') * UnitValue('5 Гц')).SI_Value == 3000, (UnitValue('10 мин') * UnitValue('5 Гц')).SI_Value
     assert UnitValue('1230 * 10^2').SI_Value == 123000
 
@@ -395,6 +415,7 @@ def test_get_base_units():
         ('50 мДж', {BaseUnits.m: 2, BaseUnits.s: -2, BaseUnits.kg: 1}),
         ('50 Дж с', {BaseUnits.m: 2, BaseUnits.s: -1, BaseUnits.kg: 1}),
         ('50 мВт мс', {BaseUnits.m: 2, BaseUnits.s: -2, BaseUnits.kg: 1}),
+        ('50 Гц', {BaseUnits.s: -1}),
     ]
     for line, base_units in data:
         unit_value = UnitValue(line)

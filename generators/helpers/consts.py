@@ -93,11 +93,12 @@ Consts = ConstsBase()
 def test_calculation():
     data = [
         (Consts.c.Div(UnitValue('l = 500 нм'), units='Гц'), '600 \\cdot 10^{12}\\,\\text{Гц}'),
-        (UnitValue('9 10^25').Div(Consts.N_A), '150'),
+        (UnitValue('9 10^25').Div(Consts.N_A), '150\\,\\text{моль}'),
         (UnitValue('9 10^25').Div(UnitValue('6.03 10^23'), precisionInc=1), '149'),
         (UnitValue('9 10^25').Div(UnitValue('6.03 10^23'), precisionInc=0), '150'),
-        ((UnitValue('E = 31.99 МэВ') * Consts.e / Consts.c / Consts.c).Div(Consts.aem, units='а.е.м.'),  '0{,}034\\,\\text{а.е.м.}'),
-        ((UnitValue('E = 39.2 МэВ') * Consts.e / Consts.c).Div(Consts.c, units='кг'),  '70 \\cdot 10^{-30}\\,\\text{кг}'),
+        ((UnitValue('E = 31.99 МэВ') / Consts.c / Consts.c).Div(Consts.aem, units='а.е.м.'), '0{,}0342\\,\\text{а.е.м.}'),
+        ((UnitValue('E = 39.2 МэВ') / Consts.c).Div(Consts.c, units='кг'),  '69{,}7 \\cdot 10^{-30}\\,\\text{кг}'),
+        (UnitValue('E = 39.2 МэВ') / Consts.c / Consts.c,  '69{,}7 \\cdot 10^{-30}\\,\\text{кг}'),
         (UnitValue('20 г') / UnitValue('142 г / моль') * Consts.N_A, '85 \\cdot 10^{21}'),
     ]
     for unit_value, answer in data:
@@ -105,5 +106,6 @@ def test_calculation():
         assert result == answer, f'Expected |{answer}|, got |{result}|'
 
     assert UnitValue('2 10^4 км/c').Value * Consts.m_p.Value / Consts.e.Value / UnitValue('200 мТл').Value * 10 ** 2 == Decimal('1.045')
+
 
 test_calculation()

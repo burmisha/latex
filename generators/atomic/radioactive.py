@@ -288,7 +288,7 @@ class BK_53_03(variant.VariantTask):  # Вишнякова - Базовый ку
 class BK_53_12(variant.VariantTask):  # Вишнякова - Базовый курс 5.3 - задача 12
     def GetUpdate(self, element=None, E=None):
         c = Consts.c_4
-        dm = E.Mult(Consts.e, precisionInc=1).Div(c).Div(c, units='кг')
+        dm = E / c / c
         aem = dm.Div(Consts.aem, units='а.е.м.')
         return dict(
             eV=E.Value,

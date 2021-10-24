@@ -32,13 +32,13 @@ class BaseUnit:
 
 
 class BaseUnits:
-    kg = BaseUnit('кг', 'килограм'),
-    s = BaseUnit('с', 'секунда'),
-    m = BaseUnit('м', 'метр'),
-    mol = BaseUnit('моль', 'моль'),
-    A = BaseUnit('А', 'ампер'),
-    K = BaseUnit('К', 'кельвин'),
-    cd = BaseUnit('кд', 'кандела'),
+    kg = BaseUnit('кг', 'килограмм')
+    s = BaseUnit('с', 'секунда')
+    m = BaseUnit('м', 'метр')
+    mol = BaseUnit('моль', 'моль')
+    A = BaseUnit('А', 'ампер')
+    K = BaseUnit('К', 'кельвин')
+    cd = BaseUnit('кд', 'кандела')
 
 
 class SimpleUnit:
@@ -61,7 +61,7 @@ class SimpleUnit:
 
 class SimpleUnits:
     # base units
-    kg = SimpleUnit('килограм', 'кг', 'kg', {BaseUnits.kg: 1})
+    kg = SimpleUnit('килограмм', 'кг', 'kg', {BaseUnits.kg: 1})
     s = SimpleUnit('секунда', 'с', 's', {BaseUnits.s: 1})
     m = SimpleUnit('метр', 'м', 'm', {BaseUnits.m: 1})
     mol = SimpleUnit('моль', 'моль', 'mol', {BaseUnits.mol: 1})
@@ -76,7 +76,7 @@ class SimpleUnits:
     radian = SimpleUnit('радиан', 'рад', 'rad', {})
     steradian = SimpleUnit('стерадиан', 'ср', 'sr', {})
     degree_celsius = SimpleUnit('градус Цельсия', '°C', '°C', {BaseUnits.K: 1})
-    hertz = SimpleUnit('герц', 'Гц', 'Hz', {BaseUnits.s: 1})
+    hertz = SimpleUnit('герц', 'Гц', 'Hz', {BaseUnits.s: -1})
     newton = SimpleUnit('ньютон', 'Н', 'N', {BaseUnits.kg: 1, BaseUnits.m: 1, BaseUnits.s: -2})
     joule = SimpleUnit('джоуль', 'Дж', 'J', {BaseUnits.kg: 1, BaseUnits.m: 2, BaseUnits.s: -2})
     watt = SimpleUnit('ватт', 'Вт', 'W', {BaseUnits.kg: 1, BaseUnits.m: 2, BaseUnits.s: -3})
@@ -131,8 +131,9 @@ ALL_SIMPLE_UNITS = [
 
 def get_simple_unit(base_units):
     assert isinstance(base_units, dict)
+    search = {key: value for key, value in base_units.items() if value != 0}
     for simple_unit in ALL_SIMPLE_UNITS:
-        if simple_unit._base_units == base_units:
+        if simple_unit._base_units == search:
             return simple_unit
     raise RuntimeError(f'No simple units for {base_units}')
 
@@ -257,6 +258,12 @@ class OneUnit:
         elif main == 'мин' or main.startswith('минут'):
             self.simple_unit = SimpleUnits.s
             self._Multiplier = 60
+        elif main == 'эВ':
+            self.simple_unit = SimpleUnits.joule
+            self._Multiplier = Decimal('1.60e-19')
+        elif main == 'а.е.м.':
+            self.simple_unit = SimpleUnits.kg
+            self._Multiplier = Decimal('1.66054e-27')
 
 
 def test_one_unit():
