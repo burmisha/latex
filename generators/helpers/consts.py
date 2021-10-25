@@ -93,12 +93,12 @@ Consts = ConstsBase()
 
 def test_calculation():
     data = [
-        (Consts.c.Div(UnitValue('l = 500 нм'), units='Гц'), '600 \\cdot 10^{12}\\,\\text{Гц}'),
-        (UnitValue('9 10^25').Div(Consts.N_A), '150\\,\\text{моль}'),
-        (UnitValue('9 10^25').Div(UnitValue('6.03 10^23'), precisionInc=1), '149'),
-        (UnitValue('9 10^25').Div(UnitValue('6.03 10^23'), precisionInc=0), '150'),
-        ((UnitValue('E = 31.99 МэВ') / Consts.c / Consts.c).Div(Consts.aem, units='а.е.м.'), '0{,}0342\\,\\text{а.е.м.}'),
-        ((UnitValue('E = 39.2 МэВ') / Consts.c).Div(Consts.c, units='кг'),  '69{,}7 \\cdot 10^{-30}\\,\\text{кг}'),
+        (Consts.c / UnitValue('l = 500 нм'), '600 \\cdot 10^{12}\\,\\text{Гц}'),
+        (UnitValue('9 10^25') / Consts.N_A, '150\\,\\text{моль}'),
+        ((UnitValue('9 10^25') / UnitValue('6.03 10^23')).IncPrecision(), '149'),
+        (UnitValue('9 10^25') / UnitValue('6.03 10^23'), '150'),
+        ((UnitValue('E = 31.99 МэВ') / Consts.c / Consts.c).As('а.е.м.'), '0{,}0342\\,\\text{а.е.м.}'),
+        (UnitValue('E = 39.2 МэВ') / Consts.c / Consts.c,  '69{,}7 \\cdot 10^{-30}\\,\\text{кг}'),
         (UnitValue('E = 39.2 МэВ') / Consts.c / Consts.c,  '69{,}7 \\cdot 10^{-30}\\,\\text{кг}'),
         (UnitValue('20 г') / UnitValue('142 г / моль') * Consts.N_A, '85 \\cdot 10^{21}'),
         (Consts.h * Consts.c, r'0{,}1988 \cdot 10^{-24}\,\frac{\text{кг}\cdot\text{м}^{3}}{\text{с}^{2}}'),

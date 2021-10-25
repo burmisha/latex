@@ -20,7 +20,7 @@ class Gendenshteyn_11_11_18(variant.VariantTask):
     def GetUpdate(self, n=None, lmbd=None):
         return dict(
             nu=Consts.c / lmbd,
-            lmbd_1=lmbd.Div(n, precisionInc=2),
+            lmbd_1=(lmbd / n).IncPrecision(3),
         )
 
 

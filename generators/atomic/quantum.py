@@ -122,7 +122,7 @@ class T_Nu_from_lambda(variant.VariantTask):
 @variant.arg(nu=('{} 10^16 Гц', [4, 5, 6, 7, 8, 9]))
 class E_from_nu(variant.VariantTask):
     def GetUpdate(self, nu=None):
-        E = Consts.h.Mult(nu, precisionInc=1)
+        E = (Consts.h * nu).IncPrecision(1)
         return dict(
             E=E,
             E_eV=E.As('эВ'),

@@ -199,11 +199,14 @@ class UnitValue:
         self._letter = letter.strip()
         return self
 
-    def IncPrecision(self, incPrecision):
+    def IncPrecision(self, incPrecision=1):
         assert isinstance(incPrecision, int)
-        assert incPrecision >= 1
+        assert incPrecision >= 1, incPrecision
         self.Precision += 1
-        self.ViewPrecision += 1
+        if self.ViewPrecision:
+            self.ViewPrecision += 1
+
+        return self
 
     def _load(self, line, precision=None):
         assert isinstance(line, str)
@@ -331,20 +334,14 @@ class UnitValue:
             log.error(f'Error in __format__ for format {fmt!r} and raw line {self.__raw_line!r}')
             raise
 
-    def Mult(self, other, **kws):
-        return self._calculate(other, action='mult', **kws)
-
-    def Div(self, other, **kws):
-        return self._calculate(other, action='div', **kws)
-
     def __mul__(self, other):
-        return self.Mult(other)
+        return self._calculate(other, action='mult')
 
     def __truediv__(self, other):
-        return self.Div(other)
+        return self._calculate(other, action='div')
 
     def __rmul__(self, other):
-        return self.Mult(other)
+        return self._calculate(other, action='mult')
 
     @property
     def SI_Value(self):
@@ -360,7 +357,7 @@ class UnitValue:
     def frac_value(self):
         return decimal_to_fraction(self.Value)
 
-    def _calculate(self, other, action=None, precisionInc=0, units=None):
+    def _calculate(self, other, action=None, units=None):
         MAX_PRECISION = 7
 
         if isinstance(other, (int, float, Decimal)):
@@ -378,7 +375,7 @@ class UnitValue:
             precision = min(self.Precision, other.Precision)
         else:
             precision = self.Precision
-        precision = min(precision + precisionInc, MAX_PRECISION)
+        precision = min(precision, MAX_PRECISION)
 
         if action == 'mult':
             value = self.SI_Value * other.SI_Value
@@ -420,8 +417,10 @@ class UnitValue:
     def As(self, other):
         assert isinstance(other, str)
         other_uv = UnitValue(other)
-        assert self.get_base_units() == other_uv.get_base_units()
-        result = self.Div(other_uv, units=other)
+        this_units = self.get_base_units()
+        other_units = other_uv.get_base_units()
+        assert this_units == other_units, f'Got {this_units} and {other_units} for {self!s} and {other!s}'
+        result = self._calculate(other_uv, action='div', units=other)
         return result
 
 
