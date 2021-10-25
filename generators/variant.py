@@ -204,6 +204,9 @@ test_fraction()
 
 def check_unit_value(value):
     try:
+        if isinstance(value, UnitValue):
+            return value
+
         if isinstance(value, str):
             if value.count('=') == 1 and len(value) >= 3:
                 after_eq = value.split('=')[1].strip()

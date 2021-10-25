@@ -30,7 +30,7 @@ class Vars:
             assert isinstance(self._values[index], list)
 
         # TODO: check all parts of key
-        # assert key not in self._keys, f'Already used key {key}'
+        # assert key not in self._keys, f'Already used key {key}: {self._keys}'
 
         self._denoms = [1 for v in self._values]
         for i in range(len(self._values) - 2, -1, -1):
