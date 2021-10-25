@@ -199,6 +199,12 @@ class UnitValue:
         self._letter = letter.strip()
         return self
 
+    def IncPrecision(self, incPrecision):
+        assert isinstance(incPrecision, int)
+        assert incPrecision >= 1
+        self.Precision += 1
+        self.ViewPrecision += 1
+
     def _load(self, line, precision=None):
         assert isinstance(line, str)
         assert line.count('/') <= 1
@@ -399,8 +405,9 @@ class UnitValue:
                 units = simple_unit._short_name
 
             else:
-                nom_units = [(key, value) for key, value in calced_units.items() if value > 0]
-                denom_units = [(key, abs(value)) for key, value in calced_units.items() if value < 0]
+                sorted_units = sorted(calced_units.items())
+                nom_units = [(key, value) for key, value in sorted_units if value > 0]
+                denom_units = [(key, abs(value)) for key, value in sorted_units if value < 0]
                 units = ' '.join([f'{key._name}^{value}' for key, value in nom_units])
                 if denom_units:
                     units += ' / '

@@ -18,11 +18,13 @@ SI_PREFIXES = {
 
 
 class BaseUnit:
-    def __init__(self, name, full_name):
+    def __init__(self, name, full_name, order):
         assert isinstance(name, str)
         assert isinstance(full_name, str)
+        assert isinstance(order, int)
         self._name = name
         self._full_name = full_name
+        self._order = order
 
     def __str__(self):
         return self._full_name
@@ -30,15 +32,19 @@ class BaseUnit:
     def __repr__(self):
         return self._full_name
 
+    def __lt__(self, other):
+        return self._order < other._order
+
+
 
 class BaseUnits:
-    kg = BaseUnit('кг', 'килограмм')
-    s = BaseUnit('с', 'секунда')
-    m = BaseUnit('м', 'метр')
-    mol = BaseUnit('моль', 'моль')
-    A = BaseUnit('А', 'ампер')
-    K = BaseUnit('К', 'кельвин')
-    cd = BaseUnit('кд', 'кандела')
+    kg = BaseUnit('кг', 'килограмм', 1)
+    s = BaseUnit('с', 'секунда', 2)
+    m = BaseUnit('м', 'метр', 3)
+    mol = BaseUnit('моль', 'моль', 4)
+    A = BaseUnit('А', 'ампер', 5)
+    K = BaseUnit('К', 'кельвин', 6)
+    cd = BaseUnit('кд', 'кандела', 7)
 
 
 class SimpleUnit:

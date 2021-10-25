@@ -101,7 +101,7 @@ def test_calculation():
         ((UnitValue('E = 39.2 МэВ') / Consts.c).Div(Consts.c, units='кг'),  '69{,}7 \\cdot 10^{-30}\\,\\text{кг}'),
         (UnitValue('E = 39.2 МэВ') / Consts.c / Consts.c,  '69{,}7 \\cdot 10^{-30}\\,\\text{кг}'),
         (UnitValue('20 г') / UnitValue('142 г / моль') * Consts.N_A, '85 \\cdot 10^{21}'),
-        (Consts.h * Consts.c, r'0{,}1988 \cdot 10^{-24}\,\frac{\text{м}^{3}\cdot\text{кг}}{\text{с}^{2}}'),
+        (Consts.h * Consts.c, r'0{,}1988 \cdot 10^{-24}\,\frac{\text{кг}\cdot\text{м}^{3}}{\text{с}^{2}}'),
         (Consts.h * Consts.c / UnitValue('200 нм'), r'0{,}994 \cdot 10^{-18}\,\text{Дж}'),
     ]
     for unit_value, answer in data:
