@@ -289,11 +289,10 @@ class BK_53_12(variant.VariantTask):  # Вишнякова - Базовый ку
     def GetUpdate(self, element=None, E=None):
         c = Consts.c_4
         dm = E / c / c
-        aem = dm.Div(Consts.aem, units='а.е.м.')
         return dict(
             eV=E.Value,
             dm=dm,
-            aem=aem,
+            aem=dm.As('а.е.м.'),
             c=c,
         )
 

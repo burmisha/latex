@@ -223,7 +223,7 @@ class UnitValue:
 
         self.ValuePower = 0
         self.Value = Decimal(1)
-        self.Precision = 1
+        self.Precision = 3  # TODO
         self._ValueWasSet = False
         self._units = []
 
@@ -405,6 +405,13 @@ class UnitValue:
         r = UnitValue(line, precision=precision)
         return r
 
+    def As(self, other):
+        assert isinstance(other, str)
+        other_uv = UnitValue(other)
+        assert self.get_base_units() == other_uv.get_base_units()
+        result = self.Div(other_uv, units=other)
+        return result
+
 
 def test_unit_value():
     data = [
@@ -462,8 +469,25 @@ def test_get_base_units():
     unit_value = UnitValue('50 мВт мс')
     result = get_simple_unit(unit_value.get_base_units())
     assert result == SimpleUnits.joule, result
-
     assert unit_value.SI_Value == Decimal('0.00005')
 
 
 test_get_base_units()
+
+
+def test_as_conversion():
+    data = [
+        ('10^-17 Дж', 'эВ', '62{,}5\\,\\text{эВ}'),
+        ('10^-12 Дж', 'МэВ', '6{,}25\\,\\text{МэВ}'),
+        ('100 10^-12 Дж', 'МэВ', '625\\,\\text{МэВ}'),
+        ('100 кэВ', 'Дж', '16 \\cdot 10^{-15}\\,\\text{Дж}'),
+        ('10^-24 кг', 'а.е.м.', '602\\,\\text{а.е.м.}'),
+        ('10^-24 г', 'а.е.м.', '0{,}602\\,\\text{а.е.м.}'),
+    ]
+    for line, as_to, canonic in data:
+        unit_value = UnitValue(line)
+        result = '{:V}'.format(unit_value.As(as_to))
+        assert result == canonic, f'Expected {canonic}, got {result} for {line!r} to {as_to}'
+
+
+test_as_conversion()
