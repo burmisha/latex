@@ -3,18 +3,18 @@ import logging
 log = logging.getLogger(__name__)
 
 
-SI_PREFIXES = {
-    '': 0,
-    'к': 3,
-    'М': 6,
-    'Г': 9,
-    'м': -3,
-    'мк': -6,
-    'н': -9,
-    'п': -12,
-    'с': -2,
-    'д': -1,
-}
+SI_PREFIXES = [
+    ('', 0),
+    ('к', 3),
+    ('М', 6),
+    ('Г', 9),
+    ('м', -3),
+    ('мк', -6),
+    ('н', -9),
+    ('п', -12),
+    ('с', -2),
+    ('д', -1),
+]
 
 
 class BaseUnit:
@@ -181,14 +181,28 @@ def get_known_units():
         ('г', 1 / 1000, SimpleUnits.kg),   # грам
         ('т', 1000, SimpleUnits.kg),   # тонна
     ]
+    known_units = {}
     for row in units:
-        if isinstance(row, SimpleUnit):
-            yield row._short_name, 1, row
-        else:
-            yield row
+        for si_prefix, si_power in SI_PREFIXES:
+            if isinstance(row, SimpleUnit):
+                unit, multiplier, simple_unit = row._short_name, 1, row
+            else:
+                unit, multiplier, simple_unit = row[0], row[1], row[2]
+
+            if unit == 'кг' and si_prefix != '':
+                pass
+            elif unit == 'г' and si_prefix == 'к':
+                pass
+            else:
+                if (si_prefix + unit) in known_units:
+                    raise RuntimeError(f'Already found {si_prefix} {unit}: {known_units[si_prefix + unit]}')
+                known_units[si_prefix + unit] = (multiplier, simple_unit, si_prefix, si_power)
+
+    return known_units
 
 
-KNOWN_UNITS = list(get_known_units())
+
+KNOWN_UNITS = get_known_units()
 
 
 class OneUnit:
@@ -243,13 +257,12 @@ class OneUnit:
         self.simple_unit = SimpleUnits.no_units
         self._exponent = 0
         main = line
-        for unit, multiplier, simple_unit in KNOWN_UNITS:
-            if line.endswith(unit):
-                main = unit
-                prefix = line[:-len(unit)]
-                self._exponent = SI_PREFIXES[prefix]
-                self.simple_unit = simple_unit
-                break
+
+        if line in KNOWN_UNITS:
+            multiplier, simple_unit, si_prefix, si_power = KNOWN_UNITS[line]
+            main = line[len(si_prefix):]
+            self._exponent = si_power
+            self.simple_unit = simple_unit
 
         if main == 'г':
             self.simple_unit = SimpleUnits.kg
