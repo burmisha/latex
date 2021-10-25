@@ -70,7 +70,7 @@ class Task02(variant.VariantTask):
 @variant.arg(L=('L = {} мГн', [50, 60, 70, 80]))
 @variant.arg(func=['sin', 'cos'])
 @variant.answer_align([
-    '\\omega &= {omega}\\funits{рад}{c},',
+    '\\omega &= {omega}\\funits{рад}{c}, \\qquad \\eli_{\\max} = {I:V},',
     'T &= \\frac{2\\pi}\\omega \\approx {T:V},',
     'C &= \\frac 1{\\omega^2 L} \\approx {C:V},',
     '{q:L} &= \\frac{\\eli_{\\max}}\\omega  \\approx {q:V}.',
