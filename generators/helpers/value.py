@@ -183,6 +183,7 @@ class UnitValue:
 
     def __init__(self, line, precision=None, viewPrecision=None):
         self.__raw_line = line
+        self._letter = None
         try:
             self._load(line, precision=precision)
         except Exception:
@@ -190,6 +191,13 @@ class UnitValue:
             raise
         self.ViewPrecision = viewPrecision
         self._value_str = None
+
+    def SetLetter(self, letter):
+        if self._letter:
+            raise RuntimeError(f'Could not overwrite letter for {self} to {letter}')
+        assert isinstance(letter, str)
+        self._letter = letter.strip()
+        return self
 
     def _load(self, line, precision=None):
         assert isinstance(line, str)
@@ -200,12 +208,10 @@ class UnitValue:
 
         if '=' in line:
             letter_line, value_line = line.split('=', 1)
-            letter_line = letter_line.strip()
             value_line = value_line.strip()
+            self.SetLetter(letter_line)
         else:
-            letter_line = None
             value_line = line
-        self.Letter = letter_line
 
         for key, value in {
             '/': ' / ',
@@ -288,14 +294,14 @@ class UnitValue:
                 # assert str(int(self._precisionFmt2)) == self._precisionFmt2
                 return self._precisionFmt2
             elif main_format == 'Task':
-                assert self.Letter and value_str
-                result = f'{self.Letter} = {value_str}'
+                assert self._letter and value_str
+                result = f'{self._letter} = {value_str}'
             elif main_format == 'Value' or main_format == 'V':
                 assert value_str
                 result = value_str
             elif main_format == 'Letter' or main_format == 'L':
-                assert self.Letter
-                result = self.Letter
+                assert self._letter
+                result = self._letter
             else:
                 raise RuntimeError(f'Unknown main format: {main_format!r} from {fmt!r} for {self.__raw_line}')
 
@@ -383,28 +389,31 @@ class UnitValue:
 
 def test_unit_value():
     data = [
-        ('{:Task}'.format(UnitValue('c = 3 10^{8} м / с')), 'c = 3 \\cdot 10^{8}\\,\\frac{\\text{м}}{\\text{с}}'),
-        ('{:Task}'.format(UnitValue('t = 8 суток')), 't = 8\\,\\text{суток}'),
-        ('{:Value}'.format(UnitValue('m = 1.67 10^-27 кг')), '1{,}67 \\cdot 10^{-27}\\,\\text{кг}'),
-        ('{:Value}'.format(UnitValue('T = 1.7 суток')), '1{,}7\\,\\text{суток}'),
-        ('{:Value}'.format(UnitValue('12 км / ч')), '12\\,\\frac{\\text{км}}{\\text{ч}}'),
-        ('{:Value}'.format(UnitValue('50 км / ч')), '50\\,\\frac{\\text{км}}{\\text{ч}}'),
-        ('{:TestAnswer}'.format(UnitValue('4 см')), '4'),
-        ('{:Value}'.format(UnitValue('0 см')), '0\\,\\text{см}'),
-        ('{:Value}'.format(UnitValue('0 см')), '0\\,\\text{см}'),
-        ('{:Value}'.format(UnitValue('2 а.е.м.')), '2\\,\\text{а.е.м.}'),
-        ('{:Task}'.format(UnitValue('A = 200 Дж')), 'A = 200\\,\\text{Дж}'),
-        ('{:TestAnswer}'.format(UnitValue('2.5 м')), r'2.5'),
-        ('{:Value}'.format(UnitValue('2 10^4 км/c')), '2 \\cdot 10^{4}\\,\\frac{\\text{км}}{\\text{c}}'),
+        ('{:Task}', UnitValue('c = 3 10^{8} м / с'), 'c = 3 \\cdot 10^{8}\\,\\frac{\\text{м}}{\\text{с}}'),
+        ('{:Task}', UnitValue('t = 8 суток'), 't = 8\\,\\text{суток}'),
+        ('{:Value}', UnitValue('m = 1.67 10^-27 кг'), '1{,}67 \\cdot 10^{-27}\\,\\text{кг}'),
+        ('{:Value}', UnitValue('T = 1.7 суток'), '1{,}7\\,\\text{суток}'),
+        ('{:Value}', UnitValue('12 км / ч'), '12\\,\\frac{\\text{км}}{\\text{ч}}'),
+        ('{:Value}', UnitValue('50 км / ч'), '50\\,\\frac{\\text{км}}{\\text{ч}}'),
+        ('{:TestAnswer}', UnitValue('4 см'), '4'),
+        ('{:Value}', UnitValue('0 см'), '0\\,\\text{см}'),
+        ('{:Value}', UnitValue('0 см'), '0\\,\\text{см}'),
+        ('{:Value}', UnitValue('2 а.е.м.'), '2\\,\\text{а.е.м.}'),
+        ('{:Task}', UnitValue('A = 200 Дж'), 'A = 200\\,\\text{Дж}'),
+        ('{:TestAnswer}', UnitValue('2.5 м'), r'2.5'),
+        ('{:Value}', UnitValue('2 10^4 км/c'), '2 \\cdot 10^{4}\\,\\frac{\\text{км}}{\\text{c}}'),
         # ('{:V}'.format(UnitValue('600000000000000000 Гц', precision=3)), '6 \\cdot 10^{14}\\,\\text{Гц}'),  # TODO
     ]
-    for res, canonic in data:
-        assert res == canonic, f'Expected {canonic!r}, got {res!r}'
+    for fmt, unit_value, canonic in data:
+        result = fmt.format(unit_value)
+        assert result == canonic, f'Expected {canonic!r} for {unit_value}, got {result!r}'
 
     assert UnitValue('5 Гц').get_base_units() == {BaseUnits.s: -1}
-    # assert UnitValue('Гц').get_base_units() == {BaseUnits.s: -1}  # TODO
+    # assert UnitValue('Гц').get_base_units() == {BaseUnits.s: -1}
     assert (UnitValue('10 мин') * UnitValue('5 Гц')).SI_Value == 3000, (UnitValue('10 мин') * UnitValue('5 Гц')).SI_Value
     assert UnitValue('1230 * 10^2').SI_Value == 123000
+    assert UnitValue('0 см').SetLetter('l')._letter == 'l'
+
 
 
 test_unit_value()

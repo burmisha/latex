@@ -136,7 +136,7 @@ class Q_is_possible(variant.VariantTask):  # Rymkevich750
             result = 'не удастся'
             short = '[Нн][Ее][Тт]'
         return dict(
-            Q_max='%s_{\\text{max}} = %d нКл' % (Q.Letter, Q_max),
+            Q_max=f'{Q:L}_{{\\text{{max}}}} = {Q_max} нКл',
             sign=sign,
             result=result,
             short=short
