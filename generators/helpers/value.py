@@ -454,6 +454,8 @@ def test_unit_value():
         ('{:V}', UnitValue('Гц') * UnitValue('500'), '500\\,\\text{Гц}'),
         ('{:V}', UnitValue('2 кг') * UnitValue('5 м / с') * 3, '30\\,\\frac{\\text{кг}\\cdot\\text{м}}{\\text{с}}'),
         ('{:V}', UnitValue('20 м/с') / UnitValue('10 м/с^2'), '2\\,\\text{с}'),
+        ('{:V}', UnitValue('20 м/с') * UnitValue('20 м/с'), '400\\,\\text{Гр}'),
+        ('{:V}', UnitValue('400 Гр') / UnitValue('10 м/с^2'), '40\\,\\text{м}'),
         ('{:V}', UnitValue('20 м/с') * UnitValue('20 м/с') / UnitValue('10 м/с^2'), '40\\,\\text{м}'),
         ('{:V}', UnitValue('10 мин') * UnitValue('5 Гц'), '3000'),
         ('{:Task}', (UnitValue('10 мин') * UnitValue('5 Гц')).SetLetter('l'), 'l = 3000'),
@@ -480,6 +482,7 @@ def test_get_base_units():
         ('50 Дж с', {BaseUnits.m: 2, BaseUnits.s: -1, BaseUnits.kg: 1}),
         ('50 мВт мс', {BaseUnits.m: 2, BaseUnits.s: -2, BaseUnits.kg: 1}),
         ('50 Гц', {BaseUnits.s: -1}),
+        ('1 Гр', {BaseUnits.m: 2, BaseUnits.s: -2}),
     ]
     for line, base_units in data:
         unit_value = UnitValue(line)

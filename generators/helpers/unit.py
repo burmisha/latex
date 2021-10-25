@@ -99,9 +99,9 @@ class SimpleUnits:
     siemens = SimpleUnit('сименс', 'См', 'S', {BaseUnits.kg: -1, BaseUnits.m: -2, BaseUnits.s: 3, BaseUnits.A: 2})
 
     # TODO: enable as Гр is not giga-R
-    # becquerel = SimpleUnit('беккерель', 'Бк', 'Bq', {BaseUnits.s: -1})
-    # gray = SimpleUnit('грей', 'Гр', 'Gy', {BaseUnits.m: 2, BaseUnits.s: -2})
-    # sievert = SimpleUnit('зиверт', 'Зв', 'Sv', {BaseUnits.m: 2, BaseUnits.s: -2})
+    becquerel = SimpleUnit('беккерель', 'Бк', 'Bq', {BaseUnits.s: -1})
+    gray = SimpleUnit('грей', 'Гр', 'Gy', {BaseUnits.m: 2, BaseUnits.s: -2})
+    sievert = SimpleUnit('зиверт', 'Зв', 'Sv', {BaseUnits.m: 2, BaseUnits.s: -2})
 
 
 ALL_SIMPLE_UNITS = [
@@ -131,9 +131,9 @@ ALL_SIMPLE_UNITS = [
     SimpleUnits.tesla,
     SimpleUnits.henry,
     SimpleUnits.siemens,
-    # SimpleUnits.becquerel,
-    # SimpleUnits.gray,
-    # SimpleUnits.sievert,
+    SimpleUnits.becquerel,
+    SimpleUnits.gray,
+    SimpleUnits.sievert,
 ]
 
 
@@ -161,23 +161,8 @@ def get_known_units():
         ('эВ', 1.6 * 10 ** -19, SimpleUnits.joule),  # электрон-вольт
         ('С', 1, SimpleUnits.degree_celsius),   # цельсий
         ('C', 1, SimpleUnits.degree_celsius),   # celsium
-        ('К', 1, SimpleUnits.K),   # кельвин
         ('K', 1, SimpleUnits.K),   # kelvin
-        SimpleUnits.volt,
-        SimpleUnits.joule,
-        SimpleUnits.newton,
-        SimpleUnits.watt,
-        SimpleUnits.ohm,
-        SimpleUnits.farad,
-        SimpleUnits.A,
-        SimpleUnits.coulomb,
-        SimpleUnits.kg,
-        SimpleUnits.s,
-        SimpleUnits.m,
-        SimpleUnits.tesla,
-        SimpleUnits.mol,
-        SimpleUnits.henry,
-        SimpleUnits.hertz,
+    ] + ALL_SIMPLE_UNITS + [
         ('г', 1 / 1000, SimpleUnits.kg),   # грам
         ('т', 1000, SimpleUnits.kg),   # тонна
     ]
@@ -189,14 +174,15 @@ def get_known_units():
             else:
                 unit, multiplier, simple_unit = row[0], row[1], row[2]
 
-            if unit == 'кг' and si_prefix != '':
-                pass
-            elif unit == 'г' and si_prefix == 'к':
-                pass
-            else:
-                if (si_prefix + unit) in known_units:
-                    raise RuntimeError(f'Already found {si_prefix} {unit}: {known_units[si_prefix + unit]}')
-                known_units[si_prefix + unit] = (multiplier, simple_unit, si_prefix, si_power)
+            if unit:
+                if unit == 'кг' and si_prefix != '':
+                    pass
+                elif unit == 'г' and si_prefix == 'к':
+                    pass
+                else:
+                    if (si_prefix + unit) in known_units:
+                        raise RuntimeError(f'Already found {si_prefix} {unit}: {known_units[si_prefix + unit]}')
+                    known_units[si_prefix + unit] = (multiplier, simple_unit, si_prefix, si_power)
 
     return known_units
 
@@ -301,6 +287,7 @@ def test_one_unit():
         ('т', 3, 'т', 1, SimpleUnits.kg),
         ('сут', 0, 'сут', 1, SimpleUnits.s),
         ('ц^2', 4, 'ц', 2, SimpleUnits.kg),
+        ('Гр', 0, 'Гр', 1, SimpleUnits.gray),
     ]
     for unit_text, si_power, human_unit, human_power, simple_unit in data:
         unit = OneUnit(unit_text, True)
