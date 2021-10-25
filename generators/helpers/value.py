@@ -6,7 +6,7 @@ from library.logging import colorize_json, cm, color
 import logging
 log = logging.getLogger(__name__)
 from decimal import Decimal
-
+import math
 
 def precisionFmt2(value, precision):
     assert isinstance(value, (int, float, Decimal)), f'Value {value} has type {type(value)}'
@@ -223,7 +223,7 @@ class UnitValue:
 
         self.ValuePower = 0
         self.Value = Decimal(1)
-        self.Precision = 3  # TODO
+        self.Precision = 1  # TODO
         self._ValueWasSet = False
         self._units = []
 
@@ -368,7 +368,12 @@ class UnitValue:
 
         calced_units = {}
 
-        precision = min(min(self.Precision, other.Precision) + precisionInc, MAX_PRECISION)
+        if other._ValueWasSet:
+            precision = min(self.Precision, other.Precision)
+        else:
+            precision = self.Precision
+        precision = min(precision + precisionInc, MAX_PRECISION)
+
         if action == 'mult':
             value = self.SI_Value * other.SI_Value
             for key in used_units:
@@ -477,12 +482,13 @@ test_get_base_units()
 
 def test_as_conversion():
     data = [
-        ('10^-17 Дж', 'эВ', '62{,}5\\,\\text{эВ}'),
-        ('10^-12 Дж', 'МэВ', '6{,}25\\,\\text{МэВ}'),
+        ('10^-17 Дж', 'эВ', '60\\,\\text{эВ}'),
+        ('10^-12 Дж', 'МэВ', '6\\,\\text{МэВ}'),
         ('100 10^-12 Дж', 'МэВ', '625\\,\\text{МэВ}'),
         ('100 кэВ', 'Дж', '16 \\cdot 10^{-15}\\,\\text{Дж}'),
-        ('10^-24 кг', 'а.е.м.', '602\\,\\text{а.е.м.}'),
-        ('10^-24 г', 'а.е.м.', '0{,}602\\,\\text{а.е.м.}'),
+        ('10^-24 кг', 'а.е.м.', '600\\,\\text{а.е.м.}'),
+        ('1000 10^-27 кг', 'а.е.м.', '602\\,\\text{а.е.м.}'),
+        ('10^-24 г', 'а.е.м.', '0{,}6\\,\\text{а.е.м.}'),
     ]
     for line, as_to, canonic in data:
         unit_value = UnitValue(line)
