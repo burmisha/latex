@@ -82,14 +82,14 @@ class Fotons(variant.VariantTask):
 @variant.arg(q4__a4=[('580 нм', 'зелёный'), ('490 нм', 'голубой'), ('420 нм', 'фиолетовый')])
 class ColorNameFromLambda(variant.VariantTask):
     def GetUpdate(self, q1=None, a1=None, q2=None, a2=None, q3=None, a3=None, q4=None, a4=None):
-        mkm = UnitValue('1 мкм')
+        mkm = UnitValue('1.0000 мкм')
         return dict(
             mkm=mkm,
-            nu_0=Consts.c_4.Div(mkm, units='Гц', precisionInc=3),
-            nu1=Consts.c.Div(q1, units='Гц'),
-            nu2=Consts.c.Div(q2, units='Гц'),
-            nu3=Consts.c.Div(q3, units='Гц'),
-            nu4=Consts.c.Div(q4, units='Гц'),
+            nu_0=Consts.c_4 / mkm,
+            nu1=Consts.c /q1,
+            nu2=Consts.c /q2,
+            nu3=Consts.c /q3,
+            nu4=Consts.c /q4,
         )
 
 

@@ -19,8 +19,8 @@ from generators.helpers import UnitValue, Consts
 class Gendenshteyn_11_11_18(variant.VariantTask):
     def GetUpdate(self, n=None, lmbd=None):
         return dict(
-            nu=Consts.c.Div(lmbd, units='Гц'),
-            lmbd_1=lmbd.Div(n, units='м', precisionInc=2),
+            nu=Consts.c / lmbd,
+            lmbd_1=lmbd.Div(n, precisionInc=2),
         )
 
 
