@@ -97,9 +97,11 @@ class SimpleUnits:
     tesla = SimpleUnit('тесла', 'Тл', 'T', {BaseUnits.kg: 1, BaseUnits.s: -2, BaseUnits.A: -1})
     henry = SimpleUnit('генри', 'Гн', 'H', {BaseUnits.kg: 1, BaseUnits.m: 2, BaseUnits.s: -2, BaseUnits.A: -2})
     siemens = SimpleUnit('сименс', 'См', 'S', {BaseUnits.kg: -1, BaseUnits.m: -2, BaseUnits.s: 3, BaseUnits.A: 2})
-    becquerel = SimpleUnit('беккерель', 'Бк', 'Bq', {BaseUnits.s: -1})
-    gray = SimpleUnit('грей', 'Гр', 'Gy', {BaseUnits.m: 2, BaseUnits.s: -2})
-    sievert = SimpleUnit('зиверт', 'Зв', 'Sv', {BaseUnits.m: 2, BaseUnits.s: -2})
+
+    # TODO: enable as Гр is not giga-R
+    # becquerel = SimpleUnit('беккерель', 'Бк', 'Bq', {BaseUnits.s: -1})
+    # gray = SimpleUnit('грей', 'Гр', 'Gy', {BaseUnits.m: 2, BaseUnits.s: -2})
+    # sievert = SimpleUnit('зиверт', 'Зв', 'Sv', {BaseUnits.m: 2, BaseUnits.s: -2})
 
 
 ALL_SIMPLE_UNITS = [
@@ -129,9 +131,9 @@ ALL_SIMPLE_UNITS = [
     SimpleUnits.tesla,
     SimpleUnits.henry,
     SimpleUnits.siemens,
-    SimpleUnits.becquerel,
-    SimpleUnits.gray,
-    SimpleUnits.sievert,
+    # SimpleUnits.becquerel,
+    # SimpleUnits.gray,
+    # SimpleUnits.sievert,
 ]
 
 

@@ -103,6 +103,8 @@ def test_calculation():
         (UnitValue('20 г') / UnitValue('142 г / моль') * Consts.N_A, '85 \\cdot 10^{21}'),
         (Consts.h * Consts.c, r'0{,}1988 \cdot 10^{-24}\,\frac{\text{кг}\cdot\text{м}^{3}}{\text{с}^{2}}'),
         (Consts.h * Consts.c / UnitValue('200 нм'), r'0{,}994 \cdot 10^{-18}\,\text{Дж}'),
+        (UnitValue('10 м/с') / Consts.g_ten, r'1\,\text{с}'),
+        (UnitValue('10 м/с') * UnitValue('10 м/с') / Consts.g_ten, r'10\,\text{м}'),
     ]
     for unit_value, answer in data:
         result = '{:V}'.format(unit_value)

@@ -8,6 +8,7 @@ log = logging.getLogger(__name__)
 from decimal import Decimal
 import math
 
+
 def precisionFmt2(value, precision):
     assert isinstance(value, (int, float, Decimal)), f'Value {value} has type {type(value)}'
     assert isinstance(precision, int), f'Got precision {precision} for {value}'
@@ -410,7 +411,12 @@ class UnitValue:
                     units += ' / '
                     units += ' '.join([f'{key._name}^{value}' for key, value in denom_units])
 
-        line = f'{value} 10^{{{power}}} {units}'
+        line = f'{value}'
+        if power:
+            line += f' 10^{{{power}}}'
+        if units:
+            line += f' {units}'
+
         r = UnitValue(line, precision=precision)
         return r
 
@@ -446,6 +452,9 @@ def test_unit_value():
         ('{:V}', UnitValue('Гц'), '1\\,\\text{Гц}'),
         ('{:V}', UnitValue('Гц') * UnitValue('500'), '500\\,\\text{Гц}'),
         ('{:V}', UnitValue('Гц') * UnitValue('500'), '500\\,\\text{Гц}'),
+        ('{:V}', UnitValue('2 кг') * UnitValue('5 м / с') * 3, '30\\,\\frac{\\text{кг}\\cdot\\text{м}}{\\text{с}}'),
+        ('{:V}', UnitValue('20 м/с') / UnitValue('10 м/с^2'), '2\\,\\text{с}'),
+        ('{:V}', UnitValue('20 м/с') * UnitValue('20 м/с') / UnitValue('10 м/с^2'), '40\\,\\text{м}'),
         ('{:V}', UnitValue('10 мин') * UnitValue('5 Гц'), '3000'),
         ('{:Task}', (UnitValue('10 мин') * UnitValue('5 Гц')).SetLetter('l'), 'l = 3000'),
         ('{:Value}', UnitValue('2 10^4 км/c'), '2 \\cdot 10^{4}\\,\\frac{\\text{км}}{\\text{c}}'),

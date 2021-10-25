@@ -25,8 +25,8 @@ from generators.helpers import Consts, Decimal
 class Ch_3_1(variant.VariantTask):
     def GetUpdate(self, m1=None, m2=None, v1=None, v2=None):
         return dict(
-            p1='p_1 = %d кг м / с' % (m1.Value * v1.Value),
-            p2='p_2 = %d кг м / с' % (m2.Value * v2.Value),
+            p1=(m1 * v1).SetLetter('p_1'),
+            p2=(m2 * v2).SetLetter('p_2'),
             p='p = %d кг м / с' % (m1.Value * v1.Value + m2.Value * v2.Value),
         )
 
@@ -54,8 +54,8 @@ class Ch_3_1(variant.VariantTask):
 class Ch_3_2(variant.VariantTask):
     def GetUpdate(self, m=None, v1=None, v2=None):
         return dict(
-            p1='p_1 = %d кг м / с' % (m.Value * v1.Value),
-            p2='p_2 = %d кг м / с' % (m.Value * v2.Value),
+            p1=(m * v1).SetLetter('p_1'),
+            p2=(m * v2).SetLetter('p_2'),
             p='p = %d кг м / с' % abs(m.Value * v1.Value - m.Value * v2.Value),
         )
 
@@ -90,8 +90,8 @@ class Ch_3_2(variant.VariantTask):
 class Ch_3_3(variant.VariantTask):
     def GetUpdate(self, m=None, v1=None, v2=None, v=None):
         return dict(
-            p1='p_1 = %d кг м / с' % (m.Value * v1.Value),
-            p2='p_2 = %d кг м / с' % (m.Value * v2.Value),
+            p1=(m * v1).SetLetter('p_1'),
+            p2=(m * v2).SetLetter('p_2'),
             p='p = %d кг м / с' % (m.Value * v.Value),
         )
 
@@ -106,11 +106,11 @@ class Ch_3_3(variant.VariantTask):
 @variant.answer_test('{delta_p:TestAnswer}')
 @variant.arg(which__mult=[('упругим', 2), ('неупругим', 1)])
 @variant.arg(m=['m = %d кг' % m for m in [1, 2, 4]])
-@variant.arg(v=['v = %d м / c' % v for v in [10, 15, 20, 25]])
+@variant.arg(v=['v = %d м / с' % v for v in [10, 15, 20, 25]])
 class Ch_3_6(variant.VariantTask):
     def GetUpdate(self, m=None, v=None, which=None, mult=None):
         return dict(
-            delta_p='\\Delta p = %d кг м / с' % (mult * m.Value * v.Value),
+            delta_p=(m * v * mult).SetLetter('\\Delta p')
         )
 
 
@@ -220,7 +220,7 @@ class Vishnyakova_1_4_12(variant.VariantTask):
 ])
 @variant.answer_test('{A:TestAnswer}')
 @variant.arg(what__mult=[('подъём', +1), ('спуск', -1)])
-@variant.arg(a=['a = %d м / c^2' % a for a in [2, 3, 4, 6]])
+@variant.arg(a=['a = %d м / с^2' % a for a in [2, 3, 4, 6]])
 @variant.arg(m=['m = %d кг' % m for m in [2, 3, 5]])
 @variant.arg(h=['h = %d м' % h for h in [2, 5, 10]])
 class Ch_4_2(variant.VariantTask):
@@ -242,8 +242,8 @@ class Ch_4_2(variant.VariantTask):
 @variant.answer_test('{A:TestAnswer}')
 @variant.arg(how=['вертикально вверх', 'горизонтально', 'под углом $45\\degrees$ к горизонту', 'под углом $30\\degrees$ к горизонту'])
 @variant.arg(m=['m = %d кг' % m for m in [1, 2, 3]])
-@variant.arg(v0=['v_0 = %d м / c' % v for v in [2, 4, 6]])
-@variant.arg(v=['v = %d м / c' % v for v in [8, 10, 12]])
+@variant.arg(v0=['v_0 = %d м / с' % v for v in [2, 4, 6]])
+@variant.arg(v=['v = %d м / с' % v for v in [8, 10, 12]])
 class Ch_4_29(variant.VariantTask):
     def GetUpdate(self, how=None, m=None, v=None, v0=None):
         return dict(
@@ -267,8 +267,8 @@ class Ch_4_29(variant.VariantTask):
 class Ch_4_45(variant.VariantTask):
     def GetUpdate(self, what=None, m=None, l=None):
         return dict(
-            F='F = %d Н' % (m.Value * Consts.g_ten.Value),
-            A='A = %d Дж' % (m.Value * l.Value * Consts.g_ten.Value / 2),
+            F=(m * Consts.g_ten).SetLetter('F'),
+            A=(m * l * Consts.g_ten / 2).SetLetter('A'),
         )
 
 
@@ -278,7 +278,7 @@ class Ch_4_45(variant.VariantTask):
     На какой высоте кинетическая энергия тела составит {how} от потенциальной?
 ''')
 @variant.arg(how__n=[('половину', 2), ('треть', 3)])
-@variant.arg(v=('v_0 = {} м / c', [10, 14, 20]))
+@variant.arg(v=('v_0 = {} м / с', [10, 14, 20]))
 @variant.answer_align([
     '0 + \\frac{mv_0^2}2 = E_p + E_k, E_k = \\frac 1{n} E_p \\implies',
     '\\implies \\frac{mv_0^2}2 = E_p + \\frac 1{n} E_p = E_p\\cbr{1 + \\frac 1{n}} = mgh\\cbr{1 + \\frac 1{n}} \\implies',
@@ -287,5 +287,5 @@ class Ch_4_45(variant.VariantTask):
 class Ek_ratio_Ep(variant.VariantTask):
     def GetUpdate(self, how=None, n=None, v=None):
         return dict(
-            h='h = %.1f м' % (v.Value ** 2 / 2 / Consts.g_ten.Value / Decimal(1 + 1 / n)),
+            h=(v * v / 2 / Consts.g_ten / (1 + 1 / n)).SetLetter('h').IncPrecision(1),
         )
