@@ -295,7 +295,7 @@ class UnitValue:
             for base_unit, degree in base_units.items():
                 if base_unit not in total_units:
                     total_units[base_unit] = 0
-                total_units[base_unit] = total_units[base_unit] + degree * mult
+                total_units[base_unit] = total_units[base_unit] + degree * mult * unit.HumanPower
         return total_units
 
     def __format__(self, fmt):
@@ -395,7 +395,7 @@ class UnitValue:
 
             else:
                 nom_units = [(key, value) for key, value in calced_units.items() if value > 0]
-                denom_units = [(key, value) for key, value in calced_units.items() if value < 0]
+                denom_units = [(key, abs(value)) for key, value in calced_units.items() if value < 0]
                 units = ' '.join([f'{key._name}^{value}' for key, value in nom_units])
                 if denom_units:
                     units += ' / '
@@ -448,6 +448,7 @@ def test_get_base_units():
         ('', {}),
         ('1', {}),
         ('Гц', {BaseUnits.s: -1}),
+        ('м^3 кг^1 / с^2', {BaseUnits.m: 3, BaseUnits.s: -2, BaseUnits.kg: 1}),
         ('50 мДж', {BaseUnits.m: 2, BaseUnits.s: -2, BaseUnits.kg: 1}),
         ('50 Дж с', {BaseUnits.m: 2, BaseUnits.s: -1, BaseUnits.kg: 1}),
         ('50 мВт мс', {BaseUnits.m: 2, BaseUnits.s: -2, BaseUnits.kg: 1}),
@@ -456,7 +457,7 @@ def test_get_base_units():
     for line, base_units in data:
         unit_value = UnitValue(line)
         result = unit_value.get_base_units()
-        assert result == base_units, f'Expected {base_units}, got {result}'
+        assert result == base_units, f'Expected {base_units}, got {result} for {unit_value!r}'
 
     unit_value = UnitValue('50 мВт мс')
     result = get_simple_unit(unit_value.get_base_units())

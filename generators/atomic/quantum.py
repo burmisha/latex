@@ -108,8 +108,8 @@ class ColorNameFromLambda(variant.VariantTask):
 class T_Nu_from_lambda(variant.VariantTask):
     def GetUpdate(self, what=None, of=None, lmbd=None):
         return dict(
-            T=lmbd.Div(Consts.c, units='с'),
-            nu=Consts.c.Div(lmbd, units='Гц'),
+            T=lmbd / Consts.c,
+            nu=Consts.c / lmbd,
         )
 
 
@@ -122,7 +122,7 @@ class T_Nu_from_lambda(variant.VariantTask):
 @variant.arg(nu=('{} 10^16 Гц', [4, 5, 6, 7, 8, 9]))
 class E_from_nu(variant.VariantTask):
     def GetUpdate(self, nu=None):
-        E = Consts.h.Mult(nu, units='Дж', precisionInc=1)
+        E = Consts.h.Mult(nu, precisionInc=1)
         E_eV = E.Div(Consts.e, units='эВ')
         return dict(
             E=E,
@@ -141,7 +141,7 @@ class E_from_nu(variant.VariantTask):
 @variant.arg(in_what=['джоулях', 'электронвольтах'])
 class E_from_lambda(variant.VariantTask):
     def GetUpdate(self, lmbd=None, of=None, in_what=None):
-        E = Consts.h.Mult(Consts.c, units='Дж').Div(lmbd, units='Дж')
+        E = Consts.h * Consts.c / lmbd
         E_eV = E.Div(Consts.e, units='эВ')
         return dict(
             E=E,

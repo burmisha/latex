@@ -197,6 +197,9 @@ class OneUnit:
         assert isinstance(self.IsNumerator, bool)
         assert isinstance(self.simple_unit, SimpleUnit)
 
+    def __str__(self):
+        return f'unit: {self._line} is_num: {self.IsNumerator}'
+
     def get_tex(self, human=True):
         if self._Multiplier == 1 or human:
             res = '\\text{%s}' % self.HumanUnit
