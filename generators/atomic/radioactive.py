@@ -206,13 +206,13 @@ class BK_53_01(variant.VariantTask):  # Вишнякова - Базовый ку
 @variant.answer_align([
     '''N &= N_0 * 2^{-\\frac t{T_{1/2}}}
     = 2^{-\\frac{t:Value|s}{T:Value|s}}
-    \\approx {share} \\approx {percent}\\%''',
+    \\approx {share:.4f} = {percent:.2f}\\%''',
 ])
 @variant.arg(t=['t = %s суток' % t for t in ['91.2', '136.8', '182.4']])
 @variant.arg(T=['T = 45.6 суток'])
 class BK_53_02(variant.VariantTask):  # Вишнякова - Базовый курс 5.3 - задача 02
     def GetUpdate(self, t=None, T=None):
-        share = 2 ** int(-float(t.Value / T.Value) - 0.0000000001)
+        share = 2 ** float(- (t / T).SI_Value)
         return dict(
             share=share,
             percent=share * 100,
@@ -249,7 +249,7 @@ class BK_53_02(variant.VariantTask):  # Вишнякова - Базовый ку
 class BK_53_03(variant.VariantTask):  # Вишнякова - Базовый курс 5.3 - задача 03
     def GetUpdate(self, how=None, t=None, num=None, log_num=None):
         return dict(
-            T='%.1f суток' % (t.Value / log_num),
+            T=(t / log_num).IncPrecision(1).As('суток'),
             res=1. / num * (1 - 1 / num),
         )
 
