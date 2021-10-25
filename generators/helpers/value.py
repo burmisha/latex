@@ -222,14 +222,27 @@ class UnitValue:
             value_line = value_line.replace(key, value)
 
         self.ValuePower = 0
-        self.Value = None
+        self.Value = Decimal(1)
+        self.Precision = 1
+        self._ValueWasSet = False
         self._units = []
 
         isNumerator = True
         for part in value_line.split():
-            if self.Value is None:
+            try:
+                float(part)
+            except ValueError:
+                is_value = False
+            else:
+                is_value = True
+
+            if is_value:
+                if self._ValueWasSet:
+                    raise RuntimeError('Multiple values')
                 self.Value = Decimal(part)
                 self.Precision = get_precision(part) if precision is None else precision
+                self._ValueWasSet = True
+
 
             elif part.startswith('10^'):
                 self.ValuePower = int(part[3:].strip('{').strip('}'))
@@ -237,10 +250,11 @@ class UnitValue:
             elif part == '/':
                 isNumerator = False
 
+            elif part == '*':
+                continue
+
             else:
                 self._units.append(OneUnit(part, isNumerator))
-
-        # self._power = sum(unit.SiPower if unit.IsNumerator else -unit.SiPower for unit in self._units) + self.ValuePower
 
     def __str__(self):
         return f'UVS {self.__raw_line}'
@@ -303,12 +317,12 @@ class UnitValue:
                 assert self._letter
                 result = self._letter
             else:
-                raise RuntimeError(f'Unknown main format: {main_format!r} from {fmt!r} for {self.__raw_line}')
+                raise RuntimeError(f'Unknown main format: {main_format!r} from {fmt!r} for {self.__raw_line!r}')
 
             result = self.PIPES.apply(result, pipes)
             return result
         except Exception:
-            log.error(f'Error in __format__ for {fmt} and {self.__raw_line}')
+            log.error(f'Error in __format__ for format {fmt!r} and raw line {self.__raw_line!r}')
             raise
 
     def Mult(self, other, **kws):
@@ -375,12 +389,17 @@ class UnitValue:
             power = 0
 
         if not units:
-            nom_units = [(key, value) for key, value in calced_units.items() if value > 0]
-            denom_units = [(key, value) for key, value in calced_units.items() if value < 0]
-            units = ' '.join([f'{key._name}^{value}' for key, value in nom_units])
-            if denom_units:
-                units += ' / '
-                units += ' '.join([f'{key._name}^{value}' for key, value in denom_units])
+            simple_unit = get_simple_unit(calced_units)
+            if simple_unit:
+                units = simple_unit._short_name
+
+            else:
+                nom_units = [(key, value) for key, value in calced_units.items() if value > 0]
+                denom_units = [(key, value) for key, value in calced_units.items() if value < 0]
+                units = ' '.join([f'{key._name}^{value}' for key, value in nom_units])
+                if denom_units:
+                    units += ' / '
+                    units += ' '.join([f'{key._name}^{value}' for key, value in denom_units])
 
         line = f'{value} 10^{{{power}}} {units}'
         r = UnitValue(line, precision=precision)
@@ -401,19 +420,24 @@ def test_unit_value():
         ('{:Value}', UnitValue('2 а.е.м.'), '2\\,\\text{а.е.м.}'),
         ('{:Task}', UnitValue('A = 200 Дж'), 'A = 200\\,\\text{Дж}'),
         ('{:TestAnswer}', UnitValue('2.5 м'), r'2.5'),
+        ('{:V}', UnitValue(''), '1'),
+        ('{:V}', UnitValue('0'), '0'),
+        ('{:V}', UnitValue('1'), '1'),
+        ('{:V}', UnitValue('1230 10^2'), '1230 \\cdot 10^{2}'),
+        ('{:V}', UnitValue('1230 * 10^2'), '1230 \\cdot 10^{2}'),
+        ('{:V}', UnitValue('Гц'), '1\\,\\text{Гц}'),
+        ('{:V}', UnitValue('Гц') * UnitValue('500'), '500\\,\\text{Гц}'),
+        ('{:V}', UnitValue('Гц') * UnitValue('500'), '500\\,\\text{Гц}'),
+        ('{:V}', UnitValue('10 мин') * UnitValue('5 Гц'), '3000'),
+        ('{:Task}', (UnitValue('10 мин') * UnitValue('5 Гц')).SetLetter('l'), 'l = 3000'),
         ('{:Value}', UnitValue('2 10^4 км/c'), '2 \\cdot 10^{4}\\,\\frac{\\text{км}}{\\text{c}}'),
         # ('{:V}'.format(UnitValue('600000000000000000 Гц', precision=3)), '6 \\cdot 10^{14}\\,\\text{Гц}'),  # TODO
     ]
     for fmt, unit_value, canonic in data:
         result = fmt.format(unit_value)
-        assert result == canonic, f'Expected {canonic!r} for {unit_value}, got {result!r}'
+        assert result == canonic, f'Expected {canonic!r} for {unit_value!r}, got {result!r}'
 
-    assert UnitValue('5 Гц').get_base_units() == {BaseUnits.s: -1}
-    # assert UnitValue('Гц').get_base_units() == {BaseUnits.s: -1}
-    assert (UnitValue('10 мин') * UnitValue('5 Гц')).SI_Value == 3000, (UnitValue('10 мин') * UnitValue('5 Гц')).SI_Value
     assert UnitValue('1230 * 10^2').SI_Value == 123000
-    assert UnitValue('0 см').SetLetter('l')._letter == 'l'
-
 
 
 test_unit_value()
@@ -421,6 +445,9 @@ test_unit_value()
 
 def test_get_base_units():
     data = [
+        ('', {}),
+        ('1', {}),
+        ('Гц', {BaseUnits.s: -1}),
         ('50 мДж', {BaseUnits.m: 2, BaseUnits.s: -2, BaseUnits.kg: 1}),
         ('50 Дж с', {BaseUnits.m: 2, BaseUnits.s: -1, BaseUnits.kg: 1}),
         ('50 мВт мс', {BaseUnits.m: 2, BaseUnits.s: -2, BaseUnits.kg: 1}),

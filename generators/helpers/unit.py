@@ -135,7 +135,7 @@ def get_simple_unit(base_units):
     for simple_unit in ALL_SIMPLE_UNITS:
         if simple_unit._base_units == search:
             return simple_unit
-    raise RuntimeError(f'No simple units for {base_units}')
+    return None
 
 
 # TODO: desirable
