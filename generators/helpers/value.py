@@ -483,6 +483,8 @@ def test_get_base_units():
         ('50 мВт мс', {BaseUnits.m: 2, BaseUnits.s: -2, BaseUnits.kg: 1}),
         ('50 Гц', {BaseUnits.s: -1}),
         ('1 Гр', {BaseUnits.m: 2, BaseUnits.s: -2}),
+        ('1 г', {BaseUnits.kg: 1}),
+        ('1 а.е.м.', {BaseUnits.kg: 1}),
     ]
     for line, base_units in data:
         unit_value = UnitValue(line)

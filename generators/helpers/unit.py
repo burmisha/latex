@@ -4,7 +4,6 @@ log = logging.getLogger(__name__)
 
 
 SI_PREFIXES = [
-    ('', 0),
     ('к', 3),
     ('М', 6),
     ('Г', 9),
@@ -47,6 +46,9 @@ class BaseUnits:
     cd = BaseUnit('кд', 'кандела', 7)
 
 
+ALL_SIMPLE_UNITS = []
+
+
 class SimpleUnit:
     def __init__(self, full_name, short_name, en_name, base_units):
         assert isinstance(full_name, str)
@@ -57,6 +59,7 @@ class SimpleUnit:
         self._short_name = short_name
         self._en_name = en_name
         self._base_units = base_units
+        ALL_SIMPLE_UNITS.append(self)
 
     def __str__(self):
         return self._full_name
@@ -104,39 +107,6 @@ class SimpleUnits:
     sievert = SimpleUnit('зиверт', 'Зв', 'Sv', {BaseUnits.m: 2, BaseUnits.s: -2})
 
 
-ALL_SIMPLE_UNITS = [
-    SimpleUnits.kg,
-    SimpleUnits.s,
-    SimpleUnits.m,
-    SimpleUnits.mol,
-    SimpleUnits.A,
-    SimpleUnits.K,
-    SimpleUnits.cd,
-    SimpleUnits.no_units,
-    SimpleUnits.radian,
-    SimpleUnits.steradian,
-    SimpleUnits.degree_celsius,
-    SimpleUnits.hertz,
-    SimpleUnits.newton,
-    SimpleUnits.joule,
-    SimpleUnits.watt,
-    SimpleUnits.pascal,
-    SimpleUnits.lumen,
-    SimpleUnits.lux,
-    SimpleUnits.coulomb,
-    SimpleUnits.volt,
-    SimpleUnits.ohm,
-    SimpleUnits.farad,
-    SimpleUnits.weber,
-    SimpleUnits.tesla,
-    SimpleUnits.henry,
-    SimpleUnits.siemens,
-    SimpleUnits.becquerel,
-    SimpleUnits.gray,
-    SimpleUnits.sievert,
-]
-
-
 def get_simple_unit(base_units):
     assert isinstance(base_units, dict)
     search = {key: value for key, value in base_units.items() if value != 0}
@@ -151,29 +121,50 @@ def test_value():
     Value('10 г') + Value('5 см^3') * Value('2000 кг / м^3') == Value('20 г')
 
 
-
-
 def get_known_units():
     units = [
+        ('минут', 60, SimpleUnits.s),
+        ('мин', 60, SimpleUnits.s),
+
         ('час', 3600, SimpleUnits.s),
+        ('часов', 3600, SimpleUnits.s),
+        ('часа', 3600, SimpleUnits.s),
+
         ('сут', 86400, SimpleUnits.s),
+        ('суток', 86400, SimpleUnits.s),
+        ('дня', 86400, SimpleUnits.s),
+        ('дней', 86400, SimpleUnits.s),
+        ('день', 86400, SimpleUnits.s),
+
         ('атм', 100000, SimpleUnits.pascal),
-        ('эВ', 1.6 * 10 ** -19, SimpleUnits.joule),  # электрон-вольт
+        ('эВ', Decimal('1.60e-19'), SimpleUnits.joule),  # электронвольт
         ('С', 1, SimpleUnits.degree_celsius),   # цельсий
         ('C', 1, SimpleUnits.degree_celsius),   # celsium
         ('K', 1, SimpleUnits.K),   # kelvin
     ] + ALL_SIMPLE_UNITS + [
-        ('г', 1 / 1000, SimpleUnits.kg),   # грам
+        ('г', Decimal('0.001'), SimpleUnits.kg),   # грам
         ('т', 1000, SimpleUnits.kg),   # тонна
+        ('ц', 100, SimpleUnits.kg),   # центнер
+        ('а.е.м.', Decimal('1.66054e-27'), SimpleUnits.kg)
     ]
+
     known_units = {}
     for row in units:
-        for si_prefix, si_power in SI_PREFIXES:
-            if isinstance(row, SimpleUnit):
-                unit, multiplier, simple_unit = row._short_name, 1, row
-            else:
-                unit, multiplier, simple_unit = row[0], row[1], row[2]
+        if isinstance(row, SimpleUnit):
+            unit, multiplier, simple_unit = row._short_name, 1, row
+        else:
+            unit, multiplier, simple_unit = row[0], row[1], row[2]
 
+
+        prefixes = [('', 0)]
+        if unit == 'эВ':
+            prefixes.extend(SI_PREFIXES)
+        elif unit == 'г':
+            prefixes.extend([p for p in SI_PREFIXES if p[1] <= -3])
+        elif isinstance(row, SimpleUnit) and unit != 'кг':
+            prefixes.extend(SI_PREFIXES)
+
+        for si_prefix, si_power in prefixes:
             if unit:
                 if unit == 'кг' and si_prefix != '':
                     pass
@@ -187,19 +178,24 @@ def get_known_units():
     return known_units
 
 
-
 KNOWN_UNITS = get_known_units()
 
 
 class OneUnit:
     def __init__(self, line, is_numenator):
         self._line = line
+        self.IsNumerator = is_numenator
+
+        self._exponent = 0
+        self.simple_unit = SimpleUnits.no_units
+        self._Multiplier = 1
+
         try:
             self._load_from_str(line)
         except:
             log.error(f'Error in _load_from_str on {line}')
             raise
-        self.IsNumerator = is_numenator
+
         assert isinstance(self.HumanUnit, str)
         assert isinstance(self.HumanPower, int)
         assert isinstance(self.IsNumerator, bool)
@@ -237,64 +233,39 @@ class OneUnit:
             self.HumanPower = int(power)
         else:
             self.HumanPower = 1
-        self.HumanUnit = line
-        self._Multiplier = 1
 
-        self.simple_unit = SimpleUnits.no_units
-        self._exponent = 0
-        main = line
+        self.HumanUnit = line
 
         if line in KNOWN_UNITS:
             multiplier, simple_unit, si_prefix, si_power = KNOWN_UNITS[line]
-            main = line[len(si_prefix):]
             self._exponent = si_power
             self.simple_unit = simple_unit
-
-        if main == 'г':
-            self.simple_unit = SimpleUnits.kg
-            self._exponent -= 3
-        elif main == 'ц':
-            self.simple_unit = SimpleUnits.kg
-            self._exponent += 2
-        elif main == 'т':
-            self.simple_unit = SimpleUnits.kg
-            self._exponent += 3
-        elif main.startswith('сут') or main == 'день' or main == 'дней' or main == 'дня':
-            self.simple_unit = SimpleUnits.s
-            self._Multiplier = 86400
-        elif main == 'час' or main == 'часа' or main == 'часов':
-            self.simple_unit = SimpleUnits.s
-            self._Multiplier = 3600
-        elif main == 'мин' or main.startswith('минут'):
-            self.simple_unit = SimpleUnits.s
-            self._Multiplier = 60
-        elif main == 'эВ':
-            self.simple_unit = SimpleUnits.joule
-            self._Multiplier = Decimal('1.60e-19')
-        elif main == 'а.е.м.':
-            self.simple_unit = SimpleUnits.kg
-            self._Multiplier = Decimal('1.66054e-27')
+            self._Multiplier = multiplier
 
 
 def test_one_unit():
     data = [
+        ('г', 0, 'г', 1, SimpleUnits.kg),
+        ('мг', -3, 'мг', 1, SimpleUnits.kg),
+        ('кг', 0, 'кг', 1, SimpleUnits.kg),
+        ('а.е.м.', 0, 'а.е.м.', 1, SimpleUnits.kg),
         ('мВ', -3, 'мВ', 1, SimpleUnits.volt),
         ('мВт', -3, 'мВт', 1, SimpleUnits.watt),
         ('МэВ', 6, 'МэВ', 1, SimpleUnits.joule),
         ('мс^2', -6, 'мс', 2, SimpleUnits.s),
         ('кг^2', 0, 'кг', 2, SimpleUnits.kg),
-        ('мг^2', -12, 'мг', 2, SimpleUnits.kg),
-        ('т', 3, 'т', 1, SimpleUnits.kg),
+        ('мг^2', -6, 'мг', 2, SimpleUnits.kg),
+        ('т', 0, 'т', 1, SimpleUnits.kg),
         ('сут', 0, 'сут', 1, SimpleUnits.s),
-        ('ц^2', 4, 'ц', 2, SimpleUnits.kg),
+        ('ц^2', 0, 'ц', 2, SimpleUnits.kg),
         ('Гр', 0, 'Гр', 1, SimpleUnits.gray),
     ]
     for unit_text, si_power, human_unit, human_power, simple_unit in data:
         unit = OneUnit(unit_text, True)
-        assert unit.SiPower == si_power, f'Expected {si_power}, got {unit.SiPower}'
-        assert unit.HumanUnit == human_unit, f'Expected {human_unit}, got {unit.HumanUnit}'
-        assert unit.HumanPower == human_power, f'Expected {human_power}, got {unit.HumanPower}'
-        assert unit.simple_unit == simple_unit, f'Expected {simple_unit}, got {unit.simple_unit}'
+        assert unit.SiPower == si_power, f'Expected SiPower {si_power}, got {unit.SiPower} for {unit!s}'
+        assert unit.HumanUnit == human_unit, f'Expected HumanUnit {human_unit}, got {unit.HumanUnit} for {unit!s}'
+        assert unit.HumanPower == human_power, f'Expected HumanPower {human_power}, got {unit.HumanPower} for {unit!s}'
+        assert unit.simple_unit == simple_unit, f'Expected simple_unit {simple_unit}, got {unit.simple_unit} for {unit!s}'
 
     unit = OneUnit('мин^2', True)
     assert unit.Multiplier == 3600, f'Expected {3600}, got {unit.Multiplier}'
