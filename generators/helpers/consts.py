@@ -7,8 +7,8 @@ from generators.helpers.fraction import Decimal
 class ConstsBase:
     pi = 3.14159
     m_e = UnitValue('m_{e} = 9.1 10^{-31} кг')
-    m_p = UnitValue('m_{p} = 1.672 10^{-27} кг')
-    m_n = UnitValue('m_{n} = 1.675 10^{-27} кг')
+    m_p = UnitValue('m_{p} = 1.67262 10^{-27} кг', viewPrecision=3)
+    m_n = UnitValue('m_{n} = 1.67493 10^{-27} кг', viewPrecision=3)
     m_p_aem = UnitValue('m_{p} = 1.00728 а.е.м.')
     m_n_aem = UnitValue('m_{n} = 1.00867 а.е.м.')
     e = UnitValue('e = 1.60 10^{-19} Кл', viewPrecision=1)
@@ -105,12 +105,16 @@ def test_calculation():
         (Consts.h * Consts.c / UnitValue('200 нм'), r'0{,}994 \cdot 10^{-18}\,\text{Дж}'),
         (UnitValue('10 м/с') / Consts.g_ten, r'1\,\text{с}'),
         (UnitValue('10 м/с') * UnitValue('10 м/с') / Consts.g_ten, r'10\,\text{м}'),
+        (Consts.m_p_aem, r'1{,}00728\,\text{а.е.м.}'),
+        (Consts.m_n_aem, r'1{,}00867\,\text{а.е.м.}'),
+        (Consts.m_p.As('а.е.м.'), r'1{,}00727\,\text{а.е.м.}'),  # TODO
+        (Consts.m_n.As('а.е.м.'), r'1{,}00867\,\text{а.е.м.}'),
     ]
     for unit_value, answer in data:
         result = '{:V}'.format(unit_value)
         assert result == answer, f'Expected |{answer}|, got |{result}|'
 
-    assert UnitValue('2 10^4 км/c').Value * Consts.m_p.Value / Consts.e.Value / UnitValue('200 мТл').Value * 10 ** 2 == Decimal('1.045')
+    assert UnitValue('2 10^4 км/c').Value * Consts.m_p.Value / Consts.e.Value / UnitValue('200 мТл').Value * 10 ** 2 == Decimal('1.0453875')
 
 
 test_calculation()

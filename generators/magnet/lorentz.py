@@ -49,8 +49,9 @@ class Force13(variant.VariantTask):
 ''')
 class Force14(variant.VariantTask):
     def GetUpdate(self, what=None, m=None, v=None, B=None):
-        R = m * v / (Consts.e * B)
-        return dict(R=f'R = {R.SI_Value:.6f} м')
+        return dict(
+            R=(m * v / Consts.e / B).IncPrecision(2)
+        )
 
 
 @variant.text('''

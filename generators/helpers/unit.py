@@ -122,7 +122,7 @@ def test_value():
 
 
 def get_known_units():
-    units = [
+    units = ALL_SIMPLE_UNITS + [
         ('минут', 60, SimpleUnits.s),
         ('мин', 60, SimpleUnits.s),
 
@@ -141,7 +141,6 @@ def get_known_units():
         ('С', 1, SimpleUnits.degree_celsius),   # цельсий
         ('C', 1, SimpleUnits.degree_celsius),   # celsium
         ('K', 1, SimpleUnits.K),   # kelvin
-    ] + ALL_SIMPLE_UNITS + [
         ('г', Decimal('0.001'), SimpleUnits.kg),   # грам
         ('т', 1000, SimpleUnits.kg),   # тонна
         ('ц', 100, SimpleUnits.kg),   # центнер
@@ -271,6 +270,11 @@ def test_one_unit():
     assert unit.Multiplier == 3600, f'Expected {3600}, got {unit.Multiplier}'
     assert unit.get_tex(human=True) == '\\text{мин}^{2}', f'Got {unit.get_tex(human=True)}'
     assert unit.get_tex(human=False) == '\\cbr{60 \\cdot \\text{мин}}^{2}', f'Got {unit.get_tex(human=False)}'
+
+    assert 'ммг' not in KNOWN_UNITS
+    assert 'кмг' not in KNOWN_UNITS
+    assert 'мкг' in KNOWN_UNITS
+    assert 'кц' not in KNOWN_UNITS
 
 
 test_one_unit()
