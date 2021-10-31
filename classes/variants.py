@@ -173,7 +173,7 @@ def get_all_variants():
         ),
         Work(
             task_id='2019-11-13 11Т',
-            classes={'mechanics.waves': ['Waves01', 'Ch1238', 'Ch1240', 'Waves02']},
+            classes={'oscillation.waves': ['Waves01', 'Ch1238', 'Ch1240', 'Waves02']},
         ),
         Work(
             task_id='2019-11-25 9А',
@@ -189,7 +189,7 @@ def get_all_variants():
         ),
         Work(
             task_id='2019-12-24 9А',
-            classes={'mechanics.waves': ['Waves00', 'Waves03', 'Waves04', 'Waves05']},
+            classes={'oscillation.waves': ['Waves00', 'Waves03', 'Waves04', 'Waves05']},
         ),
         Work(
             task_id='2020-01-20 9Л',
