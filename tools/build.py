@@ -21,7 +21,7 @@ def run(args):
         for year in years
     ]
 
-    filenames_regex = '.*(task|answer).*'
+    filenames_regex = '.*(task|answer|classwork).*'
     for dir_name in generared_paths:
         tex_files = library.files.walkFiles(
             dir_name,
