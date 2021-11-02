@@ -99,7 +99,7 @@
         - "gendenshteyn-8: 12-00-my-4, 12-00-my-5, 12-00-my-6, 12-00-my-7"
 
 # 10
-"2019-04-16 10":
+"2019-04-16 10Т":
     style: "\\twocolumns{40pt}{\\twovariants{40pt}{\\variant}}{\\twovariants{20pt}{\\variant}}"
     tasks:
         - "gendenshteyn-10: 21-13, 21-17, 21-27, 22-20, 22-31, 22-35"

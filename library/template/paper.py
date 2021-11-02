@@ -57,6 +57,6 @@ class Paper:
         filename = f'{self.Date.GetFilenameText()}-{self.Pupils.Grade}'
         if self.Pupils.LatinLetter:
             filename += self.Pupils.LatinLetter
-        filename += '.tex'
+        filename += '-classwork.tex'
 
         return filename
