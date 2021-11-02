@@ -1,0 +1,230 @@
+\newcommand\rootpath{../../..}
+\input{\rootpath/school-554/main}
+\begin{document}
+
+{\setdate{29~апреля~2020}
+\setclass{11«Т»}
+
+\addpersonalvariant{Михаил Бурмистров}
+
+\tasknumber{1}%
+\task{%
+    Для частицы, движущейся с релятивистской скоростью,
+    выразите $v$ и $E_0$ через $m$, $p$ и $E_\text{кин}$, где
+    $E_\text{кин}$~--- кинетическая энергия частицы,
+    $E_0$~--- её энергия покоя,
+    а $p, v, m$~--- её импульс, скорость и масса.
+}
+\solutionspace{200pt}
+
+\tasknumber{2}%
+\task{%
+    Протон движется со скоростью $0{,}8\,c$, где $c$~--- скорость света в вакууме.
+    Каково при этом отношение кинетической энергии частицы $E_\text{кин.}$ к его энергии покоя $E_0$?
+}
+\answer{%
+    \begin{align*}
+    E &= \frac{E_0}{\sqrt{1 - \frac{v^2}{c^2}}}
+            \implies \frac E{E_0}
+                = \frac 1{\sqrt{1 - \frac{v^2}{c^2}}}
+                = \frac 1{\sqrt{1 - \sqr{0{,}8}}}
+                \approx 1{,}667,
+         \\
+        E_{\text{кин}} &= E - E_0
+            \implies \frac{E_{\text{кин}}}{E_0}
+                = \frac E{E_0} - 1
+                = \frac 1{\sqrt{1 - \frac{v^2}{c^2}}} - 1
+                = \frac 1{\sqrt{1 - \sqr{0{,}8}}} - 1
+                \approx 0{,}667.
+    \end{align*}
+}
+\solutionspace{150pt}
+
+\tasknumber{3}%
+\task{%
+    Электрон движется со скоростью $0{,}85\,c$, где $c$~--- скорость света в вакууме.
+    Определите его полную энергию (в ответе приведите формулу и укажите численное значение).
+}
+\answer{%
+    \begin{align*}
+    E &= \frac{mc^2}{\sqrt{1 - \frac{v^2}{c^2}}}
+            \approx \frac{9{,}1 \cdot 10^{-31}\,\text{кг} \cdot \sqr{3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}}}{\sqrt{1 - 0{,}85^2}}
+            \approx 0{,}155 \cdot 10^{-12}\,\text{Дж},
+         \\
+        E_{\text{кин}} &= \frac{mc^2}{\sqrt{1 - \frac{v^2}{c^2}}} - mc^2
+            = mc^2 \cbr{\frac 1{\sqrt{1 - \frac{v^2}{c^2}}} - 1} \approx \\
+            &\approx \cbr{9{,}1 \cdot 10^{-31}\,\text{кг} \cdot \sqr{3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}}}
+            \cdot \cbr{\frac 1{\sqrt{1 - 0{,}85^2}} - 1}
+            \approx 0{,}074 \cdot 10^{-12}\,\text{Дж},
+         \\
+        p &= \frac{mv}{\sqrt{1 - \frac{v^2}{c^2}}}
+            \approx \frac{9{,}1 \cdot 10^{-31}\,\text{кг} \cdot 0{,}85 \cdot 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}}{\sqrt{1 - 0{,}85^2}}
+            \approx 0{,}441 \cdot 10^{-21}\,\frac{\text{кг}\cdot\text{м}}{\text{с}}.
+    \end{align*}
+}
+\solutionspace{150pt}
+
+\tasknumber{4}%
+\task{%
+    При какой скорости движения (в м/с) релятивистское сокращение длины движущегося тела
+    составит 50\%?
+}
+\answer{%
+    \begin{align*}
+    l_0 &= \frac l{\sqrt{1 - \frac{v^2}{c^2}}}
+        \implies 1 - \frac{v^2}{c^2} = \sqr{\frac l{l_0}}
+        \implies \frac v c = \sqrt{1 - \sqr{\frac l{l_0}}} \implies
+         \\
+        \implies v &= c\sqrt{1 - \sqr{\frac l{l_0}}}
+        = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} \cdot \sqrt{1 - \sqr{\frac {l_0 - 0{,}50l_0}{l_0}}}
+        = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} \cdot \sqrt{1 - \sqr{1 - 0{,}50}} \approx  \\
+        &\approx 0{,}866c
+        \approx 2{,}598 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}
+        \approx 9{,}353 \cdot 10^{8}\,\frac{\text{км}}{\text{ч}}.
+    \end{align*}
+}
+\solutionspace{150pt}
+
+\tasknumber{5}%
+\task{%
+    При переходе электрона в атоме с одной стационарной орбиты на другую
+    излучается фотон с энергией $2{,}02 \cdot 10^{-19}\,\text{Дж}$.
+    Какова длина волны этой линии спектра?
+    Постоянная Планка $h = 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с}$, скорость света $c = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}$.
+}
+\answer{%
+    $
+        E = h\nu = h \frac c\lambda
+        \implies \lambda = \frac{hc}E
+            = \frac{6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с} \cdot {3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}}}{2{,}02 \cdot 10^{-19}\,\text{Дж}}
+            = 984{,}06\,\text{нм}.
+    $
+}
+\solutionspace{150pt}
+
+\tasknumber{6}%
+\task{%
+    Излучение какой длины волны поглотил атом водорода, если полная энергия в атоме увеличилась на $2 \cdot 10^{-19}\,\text{Дж}$?
+    Постоянная Планка $h = 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с}$, скорость света $c = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}$.
+}
+\answer{%
+    $
+        E = h\nu = h \frac c\lambda
+        \implies \lambda = \frac{hc}E
+            = \frac{6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с} \cdot {3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}}}{2 \cdot 10^{-19}\,\text{Дж}}
+            = 993{,}90\,\text{нм}.
+    $
+}
+\solutionspace{150pt}
+
+\tasknumber{7}%
+\task{%
+    Сделайте схематичный рисунок энергетических уровней атома водорода
+    и отметьте на нём первый (основной) уровень и последующие.
+    Сколько различных длин волн может испустить атом водорода,
+    находящийся в 4-м возбуждённом состоянии?
+    Отметьте все соответствующие переходы на рисунке и укажите,
+    при каком переходе (среди отмеченных) энергия излучённого фотона максимальна.
+}
+\answer{%
+    $N = 6{,}0, \text{самая длинная линия}$
+}
+\solutionspace{150pt}
+
+\tasknumber{8}%
+\task{%
+    Сколько фотонов испускает за 20 минут лазер,
+    если мощность его излучения $200\,\text{мВт}$?
+    Длина волны излучения $600\,\text{нм}$.
+    $h = 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с}$.
+}
+\answer{%
+    $
+        N
+            = \frac{E_{\text{общая}}}{E_{\text{одного фотона}}}
+            = \frac{Pt}{h\nu} = \frac{Pt}{h \frac c\lambda}
+            = \frac{Pt\lambda}{hc}
+            = \frac{
+                200\,\text{мВт} \cdot 20 \cdot 60 \units{с} \cdot 600\,\text{нм}
+            }{
+                6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с} \cdot 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}
+            }
+            \approx 7{,}24 \cdot 10^{20}\units{фотонов}
+    $
+}
+\solutionspace{120pt}
+
+\tasknumber{9}%
+\task{%
+    Какая доля (от начального количества) радиоактивных ядер распадётся через время,
+    равное четырём периодам полураспада? Ответ выразить в процентах.
+}
+\answer{%
+    \begin{align*}
+    N &= N_0 \cdot 2^{- \frac t{T_{1/2}}} \implies
+        \frac N{N_0} = 2^{- \frac t{T_{1/2}}}
+        = 2^{-4} \approx 0{,}06 \approx 6\% \\
+    N_\text{расп.} &= N_0 - N = N_0 - N_0 \cdot 2^{-\frac t{T_{1/2}}}
+        = N_0\cbr{1 - 2^{-\frac t{T_{1/2}}}} \implies
+        \frac{N_\text{расп.}}{N_0} = 1 - 2^{-\frac t{T_{1/2}}}
+        = 1 - 2^{-4} \approx 0{,}94 \approx 94\%
+    \end{align*}
+}
+\solutionspace{150pt}
+
+\tasknumber{10}%
+\task{%
+    Сколько процентов ядер радиоактивного железа $\ce{^{59}Fe}$
+    останется через $182{,}4\,\text{суток}$, если период его полураспада составляет $45{,}6\,\text{суток}$?
+}
+\answer{%
+    \begin{align*}
+    N &= N_0 \cdot 2^{-\frac t{T_{1/2}}}
+        = 2^{-\frac{182{,}4\,\text{суток}}{45{,}6\,\text{суток}}}
+        \approx 0{,}0625 = 6{,}25\%
+    \end{align*}
+}
+\solutionspace{150pt}
+
+\tasknumber{11}%
+\task{%
+    За $4\,\text{суток}$ от начального количества ядер радиоизотопа осталась четверть.
+    Каков период полураспада этого изотопа (ответ приведите в сутках)?
+    Какая ещё доля (также от начального количества) распадётся, если подождать ещё столько же?
+}
+\answer{%
+    \begin{align*}
+            N &= N_0 \cdot 2^{-\frac t{T_{1/2}}}
+            \implies \frac N{N_0} = 2^{-\frac t{T_{1/2}}}
+            \implies \frac 1{4} = 2^{-\frac {4\,\text{суток}}{T_{1/2}}}
+            \implies 2 = \frac {4\,\text{суток}}{T_{1/2}}
+            \implies T_{1/2} = \frac {4\,\text{суток}}2 \approx 2\,\text{суток}.
+         \\
+            \delta &= \frac{N(t)}{N_0} - \frac{N(2t)}{N_0}
+            = 2^{-\frac t{T_{1/2}}} - 2^{-\frac {2t}{T_{1/2}}}
+            = 2^{-\frac t{T_{1/2}}}\cbr{1 - 2^{-\frac t{T_{1/2}}}}
+            = \frac 1{4} \cdot \cbr{1-\frac 1{4}} \approx 0{,}188
+    \end{align*}
+}
+\solutionspace{150pt}
+
+\tasknumber{12}%
+\task{%
+    Энергия связи ядра азота \ce{^{14}_{7}N} равна $115{,}5\,\text{МэВ}$.
+    Найти дефект массы этого ядра.
+    Ответ выразите в а.е.м.
+    и кг.
+    Скорость света $c = 2{,}998 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}$, элементарный заряд $e = 1{,}6 \cdot 10^{-19}\,\text{Кл}$.
+}
+\answer{%
+    \begin{align*}
+    E_\text{св.} &= \Delta m c^2 \implies \\
+    \implies
+            \Delta m &= \frac {E_\text{св.}}{c^2} = \frac{115{,}5\,\text{МэВ}}{\sqr{2{,}998 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}}}
+            = \frac{115{,}5 \cdot 10^6 \cdot 1{,}6 \cdot 10^{-19}\,\text{Дж}}{\sqr{2{,}998 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}}}
+            \approx 0{,}206 \cdot 10^{-27}\,\text{кг} \approx 0{,}1238\,\text{а.е.м.}
+    \end{align*}
+}}
+
+\end{document}
+% autogenerated
