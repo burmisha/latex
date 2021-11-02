@@ -26,12 +26,11 @@ PAPER_TEMPLATE = r'''
 
 
 class Paper:
-    def __init__(self, date, tasks, name=None, classLetter=None, style=r'\variant'):
+    def __init__(self, date, tasks, classLetter=None, style=r'\variant'):
         self.Date = library.formatter.Date(date)
 
         assert isinstance(tasks, list)
         self.Tasks = tasks
-        self.Name = name
         self.ClassLetter = classLetter
         self.Style = style
 
@@ -55,12 +54,10 @@ class Paper:
         return result
 
     def GetFilename(self):
-        filename = '%s-%s' % (self.Date.GetFilenameText(), self.ClassLetter)
-        if self.Name:
-            filename += '-' + self.Name
-        filename += '.tex'
-        filename = os.path.join('%s-class' % self.ClassLetter, filename)
-        log.debug('Got filename %r', filename)
+        filename = os.path.join(
+            f'{self.ClassLetter}-class',
+            f'{self.Date.GetFilenameText()}-{self.ClassLetter}.tex',
+        )
         return filename
 
 

@@ -41,7 +41,7 @@ def run(args):
         ]
         for tasksGenerator in tasksGenerators:
             log.info('Using %r for tasks in %r', tasksGenerator, tasksGenerator.GetBookName())
-            problemsPath = os.path.join('problems', tasksGenerator.GetBookName())
+            problemsPath = library.location.root('problems', tasksGenerator.GetBookName())
             for task in sorted(tasksGenerator(), key=lambda task: task.GetFilename()):
                 fileWriter.Write(problemsPath, task.GetFilename(), text=task.GetTex())
     else:
@@ -56,7 +56,8 @@ def run(args):
         ]
         for papersGenerator in papersGenerators:
             for paper in papersGenerator():
-                fileWriter.Write('school-554', paper.GetFilename(), text=paper.GetTex())
+                filename = library.location.root('school-554', paper.GetFilename())
+                fileWriter.Write(filename, text=paper.GetTex())
     else:
         log.warn('Skipping lists')
 
@@ -68,10 +69,10 @@ def run(args):
 
             date = work._date
             multiplePaper = generators.variant.MultiplePaper(date=date, pupils=work._pupils)
-            study_year_pair = date.GetStudyYearPair()
-            dirname = os.path.join(
+            first_start, second_year = date.GetStudyYearPair()
+            dirname = library.location.root(
                 'school-554',
-                f'generated-{str(study_year_pair[0])}-{str(study_year_pair[1])[2:]}',
+                f'generated-{first_start}-{str(second_year)[2:]}',
                 f'{date.Year}-{date.Month}',
             )
             if not os.path.isdir(dirname):
