@@ -26,11 +26,12 @@ PAPER_TEMPLATE = r'''
 
 
 class Paper:
-    def __init__(self, date, tasks, classLetter=None, style=r'\variant'):
+    def __init__(self, date, tasks, classLetter=None, style=None):
         self.Date = library.formatter.Date(date)
 
         assert isinstance(tasks, list)
         assert isinstance(classLetter, int)
+        assert isinstance(style, str)
         self.Tasks = tasks
         self.ClassLetter = str(classLetter)
         self.Style = style
