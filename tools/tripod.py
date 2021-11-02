@@ -1,5 +1,5 @@
 import library.files
-import library.logging
+import library.location
 import library.tripod
 
 import os
@@ -19,13 +19,19 @@ def getTripodReports():
 
 def run(args):
     fileWriter = library.files.FileWriter()
-    tripodFormat = args.format
-    getText, extension = {
-        'tex': (lambda r: r.GetTex(), 'tex'),
-        'txt': (lambda r: r.GetText(), 'txt'),
-    }[tripodFormat]
+    tripod_format = args.format
+
     for className, report in getTripodReports():
-        fileWriter.Write(os.path.join('school-554', 'tripod'), className + '-tripod.%s' % extension, text=getText(report))
+        filename = library.location.root('school-554', 'tripod', f'{className}-tripod.{tripod_format}')
+
+        if tripod_format == 'tex':
+            text = report.GetTex()
+        elif tripod_format == 'txt':
+            text = report.GetText()
+        else:
+            raise RuntimeError(f'Invalid tripod format: {tripod_format}')
+
+        fileWriter.Write(filename, text=text)
 
 
 def populate_parser(parser):
