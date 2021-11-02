@@ -58,7 +58,6 @@ def run(args):
                 paper = classes.paper.Paper(date, tasks, classLetter=classLetter, style=data['style'])
                 filename = library.location.root('school-554', paper.GetFilename())
                 fileWriter.Write(filename, text=paper.GetTex())
-
     else:
         log.warn('Skipping lists')
 
@@ -71,7 +70,7 @@ def run(args):
             date = work._date
             multiplePaper = generators.variant.MultiplePaper(date=date, pupils=work._pupils)
             first_start, second_year = date.GetStudyYearPair()
-            dirname = library.location.root(
+            dirname = os.path.join(
                 'school-554',
                 f'generated-{first_start}-{str(second_year)[2:]}',
                 f'{date.Year}-{date.Month}',
