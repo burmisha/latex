@@ -57,7 +57,18 @@ def run(args):
                 book, tasks_line = task_item.split(':')
                 tasks.append((book, [task.strip() for task in tasks_line.split(',')]))
             paper = classes.paper.Paper(date, tasks, classLetter=classLetter, style=data['style'])
-            filename = library.location.root('school-554', paper.GetFilename())
+
+            first_start, second_year = paper.Date.GetStudyYearPair()
+            pupils = library.pupils.get_class_from_string(f'{paper.Date.GetFilenameText()} {paper.ClassLetter}')
+            dirname = os.path.join(
+                'school-554',
+                f'generated-{first_start}-{str(second_year)[2:]}',
+                f'{paper.Date.Year}-{paper.Date.Month}',
+            )
+            if not os.path.isdir(dirname):
+                log.info(f'Create missing {dirname}')
+                os.mkdir(dirname)
+            filename = os.path.join(dirname, paper.GetFilename())
             fileWriter.Write(filename, text=paper.GetTex())
     else:
         log.warn('Skipping lists')

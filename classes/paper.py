@@ -7,7 +7,7 @@ import os
 log = logging.getLogger(__name__)
 
 PAPER_TEMPLATE = r'''
-\newcommand\rootpath{{../..}}
+\newcommand\rootpath{{../../..}}
 \input{{\rootpath/school-554/main}}
 \begin{{document}}
 \noanswers
@@ -57,10 +57,11 @@ class Paper:
         return result
 
     def GetFilename(self):
-        class_id = library.pupils.get_class_from_string(f'{self.Date.GetFilenameText()} {self.ClassLetter}')
-        class_number = ''.join(i for i in self.ClassLetter if i.isdigit())
-        filename = os.path.join(
-            f'{class_number}-class',
-            f'{self.Date.GetFilenameText()}-{class_number}.tex',
-        )
+        pupils = library.pupils.get_class_from_string(f'{self.Date.GetFilenameText()} {self.ClassLetter}')
+        filename = f'{self.Date.GetFilenameText()}-{pupils.Grade}.tex'
+
+        # filename = f'{self.Date.GetFilenameText()}-{pupils.Grade}'
+        # if self.Pupils.LatinLetter:
+        #     filename += self.Pupils.LatinLetter
+
         return filename
