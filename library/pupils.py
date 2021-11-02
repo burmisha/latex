@@ -141,6 +141,12 @@ class Pupils(object):
     def __str__(self):
         return f'{len(self._pupils_list)} pupils from {self._id}'
 
+    def get_class_letter(self):
+        if self.Letter:
+            return '{}«{}»'.format(self.Grade, self.Letter)
+        else:
+            return self.Grade
+
 
 class NamesPicker:
     def __init__(self, pupils_file):

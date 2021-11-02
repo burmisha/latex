@@ -64,13 +64,11 @@ def run(args):
     if generateLists:
         papers_config = library.files.load_yaml_data('classes.yaml')
         for paper_id, data in papers_config.items():
-            date, classLetter = paper_id.split()
-
             tasks = []
             for task_item in data['tasks']:
                 book, tasks_line = task_item.split(':')
                 tasks.append((book, [task.strip() for task in tasks_line.split(',')]))
-            paper = classes.paper.Paper(date, tasks, classLetter=classLetter, style=data['style'])
+            paper = classes.paper.Paper(paper_id, tasks, style=data['style'])
             dirname = get_dir_from_date(paper.Date, create_missing=True)
             filename = os.path.join(dirname, paper.GetFilename())
             fileWriter.Write(filename, text=paper.GetTex())

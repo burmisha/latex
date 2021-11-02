@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 import library
 import logging
 import os
@@ -26,14 +24,13 @@ PAPER_TEMPLATE = r'''
 
 
 class Paper:
-    def __init__(self, date, tasks, classLetter=None, style=None):
-        self.Date = library.formatter.Date(date)
+    def __init__(self, paper_id, tasks, style=None):
+        self.Date = library.formatter.Date(paper_id.split()[0])
+        self.Pupils = library.pupils.get_class_from_string(paper_id)
 
         assert isinstance(tasks, list)
-        assert isinstance(classLetter, str)
         assert isinstance(style, str)
         self.Tasks = tasks
-        self.ClassLetter = classLetter
         self.Style = style
 
     def GetTex(self):
@@ -50,17 +47,16 @@ class Paper:
                 tasks.append('\\%s{%d}\\libproblem{%s}{%s}' % (taskMarker, index, book, problem))
         result = PAPER_TEMPLATE.format(
             date=self.Date.GetHumanText(),
-            classLetter=self.ClassLetter,
+            classLetter=self.Pupils.get_class_letter(),
             tasks='\n\n'.join('    ' + task for task in tasks),
             style=self.Style,
         )
         return result
 
     def GetFilename(self):
-        pupils = library.pupils.get_class_from_string(f'{self.Date.GetFilenameText()} {self.ClassLetter}')
-        filename = f'{self.Date.GetFilenameText()}-{pupils.Grade}'
-        if pupils.LatinLetter:
-            filename += pupils.LatinLetter
+        filename = f'{self.Date.GetFilenameText()}-{self.Pupils.Grade}'
+        if self.Pupils.LatinLetter:
+            filename += self.Pupils.LatinLetter
         filename += '.tex'
 
         return filename

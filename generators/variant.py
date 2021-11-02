@@ -357,13 +357,6 @@ class VariantTask:
         ])
 
 
-def get_class_letter(pupils):
-    if pupils.Letter:
-        return '{}«{}»'.format(pupils.Grade, pupils.Letter)
-    else:
-        return pupils.Grade
-
-
 class MultiplePaper:
     def __init__(self, date=None, pupils=None):
         self.Date = date  # only for date in header and filename
@@ -388,7 +381,7 @@ class MultiplePaper:
 
         result = PAPER_TEMPLATE.format(
             date=self.Date.GetHumanText(),
-            classLetter=get_class_letter(self.Pupils),
+            classLetter=self.Pupils.get_class_letter(),
             text=paper_tex,
             noanswers='' if withAnswers else '\\noanswers',
         )
