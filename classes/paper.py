@@ -58,10 +58,9 @@ class Paper:
 
     def GetFilename(self):
         pupils = library.pupils.get_class_from_string(f'{self.Date.GetFilenameText()} {self.ClassLetter}')
-        filename = f'{self.Date.GetFilenameText()}-{pupils.Grade}.tex'
-
-        # filename = f'{self.Date.GetFilenameText()}-{pupils.Grade}'
-        # if self.Pupils.LatinLetter:
-        #     filename += self.Pupils.LatinLetter
+        filename = f'{self.Date.GetFilenameText()}-{pupils.Grade}'
+        if pupils.LatinLetter:
+            filename += pupils.LatinLetter
+        filename += '.tex'
 
         return filename

@@ -22,6 +22,20 @@ PAPER_TEMPLATE = r'''
 '''
 
 
+def get_dir_from_date(date, create_missing=False):
+    first_start, second_year = date.GetStudyYearPair()
+    dirname = os.path.join(
+        'school-554',
+        f'generated-{first_start}-{str(second_year)[2:]}',
+        f'{date.Year}-{date.Month}',
+    )
+    if not os.path.isdir(dirname) and create_missing:
+        log.info(f'Create missing {dirname}')
+        os.mkdir(dirname)
+    return dirname
+
+
+
 def run(args):
     fileWriter = library.files.FileWriter(args.filter)
 
@@ -57,17 +71,7 @@ def run(args):
                 book, tasks_line = task_item.split(':')
                 tasks.append((book, [task.strip() for task in tasks_line.split(',')]))
             paper = classes.paper.Paper(date, tasks, classLetter=classLetter, style=data['style'])
-
-            first_start, second_year = paper.Date.GetStudyYearPair()
-            pupils = library.pupils.get_class_from_string(f'{paper.Date.GetFilenameText()} {paper.ClassLetter}')
-            dirname = os.path.join(
-                'school-554',
-                f'generated-{first_start}-{str(second_year)[2:]}',
-                f'{paper.Date.Year}-{paper.Date.Month}',
-            )
-            if not os.path.isdir(dirname):
-                log.info(f'Create missing {dirname}')
-                os.mkdir(dirname)
+            dirname = get_dir_from_date(paper.Date, create_missing=True)
             filename = os.path.join(dirname, paper.GetFilename())
             fileWriter.Write(filename, text=paper.GetTex())
     else:
@@ -81,15 +85,7 @@ def run(args):
 
             date = work._date
             multiplePaper = generators.variant.MultiplePaper(date=date, pupils=work._pupils)
-            first_start, second_year = date.GetStudyYearPair()
-            dirname = os.path.join(
-                'school-554',
-                f'generated-{first_start}-{str(second_year)[2:]}',
-                f'{date.Year}-{date.Month}',
-            )
-            if not os.path.isdir(dirname):
-                log.info(f'Create missing {dirname}')
-                os.mkdir(dirname)
+            dirname = get_dir_from_date(date, create_missing=True)
             filename = os.path.join(dirname, multiplePaper.GetFilename())
 
             text = multiplePaper.GetTex(variant_tasks=tasks, only_me=args.only_me)
