@@ -30,8 +30,9 @@ class Paper:
         self.Date = library.formatter.Date(date)
 
         assert isinstance(tasks, list)
+        assert isinstance(classLetter, int)
         self.Tasks = tasks
-        self.ClassLetter = classLetter
+        self.ClassLetter = str(classLetter)
         self.Style = style
 
     def GetTex(self):
@@ -39,12 +40,13 @@ class Paper:
         index = 0
         for book, problems in self.Tasks:
             for problem in problems:
-                taskMarker = 'tasknumber'
                 if problem.endswith('*'):
                     problem = problem.strip('*')
                     taskMarker = 'starnumber'
+                else:
+                    taskMarker = 'tasknumber'
                 index += 1
-                tasks.append(r'\%s{%d}\libproblem{%s}{%s}' % (taskMarker, index, book, problem))
+                tasks.append('\\%s{%d}\\libproblem{%s}{%s}' % (taskMarker, index, book, problem))
         result = PAPER_TEMPLATE.format(
             date=self.Date.GetHumanText(),
             classLetter=self.ClassLetter,
@@ -59,8 +61,3 @@ class Paper:
             f'{self.Date.GetFilenameText()}-{self.ClassLetter}.tex',
         )
         return filename
-
-
-class PaperGenerator(object):
-    def __call__(self):
-        raise NotImplementedError()

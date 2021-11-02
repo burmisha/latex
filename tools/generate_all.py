@@ -48,16 +48,17 @@ def run(args):
         log.warn('Skipping problems')
 
     if generateLists:
-        papersGenerators = [
-            classes.class1807.Class1807(),
-            classes.class1808.Class1808(),
-            classes.class1810.Class1810(),
-            classes.class1911.Class1911(),
-        ]
-        for papersGenerator in papersGenerators:
-            for paper in papersGenerator():
+        papers_config = library.files.load_yaml_data('classes.yaml')
+        for classLetter, papers in papers_config.items():
+            for date, data in papers.items():
+                tasks = []
+                for task_item in  data['tasks']:
+                    book, tasks_line = task_item.split(':')
+                    tasks.append((book, [task.strip() for task in tasks_line.split(',')]))
+                paper = classes.paper.Paper(date, tasks, classLetter=classLetter, style=data['style'])
                 filename = library.location.root('school-554', paper.GetFilename())
                 fileWriter.Write(filename, text=paper.GetTex())
+
     else:
         log.warn('Skipping lists')
 
