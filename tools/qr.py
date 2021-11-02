@@ -1,3 +1,4 @@
+import library.files
 import library.location
 
 import qrcode  # https://pypi.org/project/qrcode/
@@ -5,7 +6,6 @@ import qrcode.image.svg
 import qrcode.image.pure
 
 import os
-import yaml
 
 import logging
 log = logging.getLogger(__name__)
@@ -66,9 +66,7 @@ def run(args):
         correction_level=Generator.CORRECTION_LEVELS[args.correction_level],
     )
 
-    qr_file = library.location.root('data', 'qr.yaml')
-    with open(qr_file) as f:
-        qr_config = yaml.safe_load(f)
+    qr_config = library.files.load_yaml_data('qr.yaml')
 
     qrGenerator.Make(
         method=args.method,

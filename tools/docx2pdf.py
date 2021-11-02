@@ -107,9 +107,7 @@ def get_extract_config():
         ),
     ]
 
-    cfg_file = library.location.root('data', 'docx_2_pdf.yaml')
-    with open(cfg_file) as f:
-        class_config_2 = yaml.safe_load(f)
+    class_config_2 = library.files.load_yaml_data('docx_2_pdf.yaml')
 
     for class_name, class_config in class_config_2.items():
         pupils = library.pupils.get_class_from_string(class_name)

@@ -20,9 +20,7 @@ class TopicDetector:
     SEARCH_DELTA_MULTIPLIER = 0.95
 
     def __init__(self):
-        topics_file = library.location.root('data', 'topics.yaml')
-        with open(topics_file) as f:
-            config = yaml.safe_load(f)
+        config = library.files.load_yaml_data('topics.yaml')
 
         self._matcher = collections.defaultdict(list)
         for grade, parts in config.items():

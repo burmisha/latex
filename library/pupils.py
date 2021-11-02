@@ -2,8 +2,8 @@ from fuzzywuzzy import process, fuzz
 
 import collections
 import re
-import yaml
 
+import library.files
 import library.location
 import library.picker
 
@@ -144,8 +144,7 @@ class Pupils(object):
 
 class NamesPicker:
     def __init__(self, pupils_file):
-        with open(pupils_file) as f:
-            config = yaml.safe_load(f)
+        config = library.files.load_yaml_data(pupils_file)
         cfg = collections.defaultdict(list)
         for name, classes_names in config.items():
             if name.endswith(' - 2') or name.endswith(' - 3'):
@@ -176,7 +175,7 @@ class NamesPicker:
         return self._key_picker.get(key)
 
 
-names_picker = NamesPicker(library.location.root('data', 'pupils.yaml'))
+names_picker = NamesPicker('pupils.yaml')
 
 
 def get_class_from_string(value, addMyself=False, onlyMe=False):

@@ -8,6 +8,7 @@ import io
 import os
 import re
 import shutil
+import yaml
 import zipfile
 
 import logging
@@ -280,3 +281,10 @@ class ZippedCsv:
                 reader = csv.DictReader(data)
                 for row in reader:
                     yield row
+
+
+def load_yaml_data(yaml_file):
+    full_path = library.location.root('data', yaml_file)
+    log.info(f'Loading yaml from {cm(full_path, color=color.Blue)}')
+    with open(full_path) as f:
+        return yaml.safe_load(f)
