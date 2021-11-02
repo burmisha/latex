@@ -68,7 +68,7 @@ def run(args):
             for task_item in data['tasks']:
                 book, tasks_line = task_item.split(':')
                 tasks.append((book, [task.strip() for task in tasks_line.split(',')]))
-            paper = classes.paper.Paper(paper_id, tasks, style=data['style'])
+            paper = library.template.paper.Paper(paper_id, tasks, style=data['style'])
             dirname = get_dir_from_date(paper.Date, create_missing=True)
             filename = os.path.join(dirname, paper.GetFilename())
             fileWriter.Write(filename, text=paper.GetTex())
