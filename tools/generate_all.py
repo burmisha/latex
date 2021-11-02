@@ -21,6 +21,17 @@ PAPER_TEMPLATE = r'''
 '''
 
 
+DEBUG_TEMPLATE = r'''
+\newcommand\rootpath{{../../..}}
+\input{{\rootpath/school-554/main}}
+\begin{{document}}
+
+{{{debug_tex}}}
+
+\end{{document}}
+'''
+
+
 def get_dir_from_date(date, create_missing=False):
     first_start, second_year = date.GetStudyYearPair()
     dirname = os.path.join(
@@ -85,13 +96,15 @@ def run(args):
             dirname = get_dir_from_date(date, create_missing=True)
             filename = os.path.join(dirname, multiplePaper.GetFilename())
 
-            text = multiplePaper.GetTex(variant_tasks=tasks, only_me=args.only_me)
+            text = multiplePaper.GetTex(variant_tasks=tasks, only_me=False)
             task = PAPER_TEMPLATE.format(noanswers='\n\\noanswers\n', filename=filename)
             answer = PAPER_TEMPLATE.format(noanswers='', filename=filename)
+            debug_tex = DEBUG_TEMPLATE.format(debug_tex=multiplePaper.GetTex(variant_tasks=tasks, only_me=True))
 
             fileWriter.Write(f'{filename}.tex', text=text)
             fileWriter.Write(f'{filename}-task.tex', text=task)
             fileWriter.Write(f'{filename}-answer.tex', text=answer)
+            fileWriter.Write(f'{filename}-debug.tex', text=debug_tex)
 
         if args.show_manual:
             fileWriter.ShowManual(extensions=['tex'])
@@ -105,5 +118,4 @@ def populate_parser(parser):
     parser.add_argument('-p', '--problems', help='Generate problems', action='store_true')
     parser.add_argument('-l', '--lists', help='Generate list', action='store_true')
     parser.add_argument('-m', '--multiple', help='Generate multiple', action='store_true')
-    parser.add_argument('-o', '--only-me', help='Use only one variant', action='store_true')
     parser.set_defaults(func=run)
