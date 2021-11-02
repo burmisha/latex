@@ -1,7 +1,7 @@
 import library.check
 import library.picker
 import library.process
-import classes.variants
+import tools.variants
 
 import logging
 log = logging.getLogger(__name__)

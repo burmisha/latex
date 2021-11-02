@@ -2,7 +2,6 @@ import os
 import time
 
 import problems
-import classes
 import generators
 import library
 import tools
@@ -76,7 +75,7 @@ def run(args):
         log.warn('Skipping lists')
 
     if generateMultiple:
-        for work in classes.variants.get_all_variants():
+        for work in tools.variants.get_all_variants():
             tasks = work.get_tasks()
             if not tasks:
                 continue
