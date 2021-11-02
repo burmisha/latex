@@ -10,7 +10,7 @@ import library.picker
 import logging
 log = logging.getLogger(__name__)
 
-from library.logging import cm
+from library.logging import cm, color
 
 
 class Pupil(object):
@@ -169,6 +169,7 @@ class NamesPicker:
                 grade=grade,
                 year=int(start_year),
             )
+            log.info(f'Adding class for key {cm(pupils_id, color=color.Green)}')
             self._key_picker.add(pupils_id, pupils)
 
     def get(self, key):
@@ -204,7 +205,10 @@ def get_class_from_string(value, addMyself=False, onlyMe=False):
 
     key = f'{year} {class_part}'
     pupils = names_picker.get(key)
-    assert pupils, f'Could not find pupils by key {key}'
+    assert pupils, f'Could not find pupils by key {value!r}: got key {key!r}'
 
     log.debug(f'Got {pupils} (search by: {key!r})')
     return pupils
+
+
+assert get_class_from_string('2019 11Т')

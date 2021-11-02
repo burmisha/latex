@@ -38,7 +38,7 @@ class KeyPicker:
         if len(matched_keys) > 1:
             keys = [self._keys[key] for key in matched_keys]
             keys = log_list(sorted(keys))
-            log.warning(f'Too many matches for filter {flt}:{keys}')
+            log.warning(f'Too many matches for filter {flt!r}:{keys}')
             return None
         elif len(matched_keys) == 1:
             key = matched_keys[0]

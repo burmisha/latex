@@ -30,10 +30,10 @@ class Paper:
         self.Date = library.formatter.Date(date)
 
         assert isinstance(tasks, list)
-        assert isinstance(classLetter, int)
+        assert isinstance(classLetter, str)
         assert isinstance(style, str)
         self.Tasks = tasks
-        self.ClassLetter = str(classLetter)
+        self.ClassLetter = classLetter
         self.Style = style
 
     def GetTex(self):
@@ -57,8 +57,10 @@ class Paper:
         return result
 
     def GetFilename(self):
+        class_id = library.pupils.get_class_from_string(f'{self.Date.GetFilenameText()} {self.ClassLetter}')
+        class_number = ''.join(i for i in self.ClassLetter if i.isdigit())
         filename = os.path.join(
-            f'{self.ClassLetter}-class',
-            f'{self.Date.GetFilenameText()}-{self.ClassLetter}.tex',
+            f'{class_number}-class',
+            f'{self.Date.GetFilenameText()}-{class_number}.tex',
         )
         return filename
