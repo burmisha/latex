@@ -49,7 +49,7 @@ class Generator:
 
     def Make(self, config=None, method=None, force=False):
         log.info(f'Destination dir: {cm(self.__path, color=color.Green)}')
-        for link, file in config:
+        for file, link in config:
             filename = os.path.join(self.__path, file)
             assert filename.endswith('.' + method.split('-')[0])
             if not os.path.exists(filename) or force:
