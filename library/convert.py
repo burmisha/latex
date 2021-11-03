@@ -375,32 +375,28 @@ class DocxToPdf:
         self.__GroupContainerDir = os.path.join(library.location.Location.Home, 'Library', 'Group Containers', 'UBF8T346G9.Office')
         assert library.files.is_dir(self.__GroupContainerDir)
 
-
-        def get_apple_sript(self, *, docx: str=None, pdf: str=None) -> str:
-            """
-                https://stackoverflow.com/questions/2940916/how-do-i-embed-an-applescript-in-a-python-script
-                https://discussions.apple.com/thread/7571530
-                https://superuser.com/questions/338165/convert-batch-of-word-files-to-pdfs-in-mac-os-x
-                https://stackoverflow.com/questions/51844514/macos-automator-applescript-solution-for-exporting-docx-to-pdf
-                https://stackoverflow.com/questions/16534292/basic-powershell-batch-convert-word-docx-to-pdf
-                https://apple.stackexchange.com/questions/59532/create-automator-service-with-a-python-script
-                https://developer.apple.com/library/archive/documentation/AppleScript/Conceptual/AppleScriptX/Concepts/work_with_as.html#//apple_ref/doc/uid/TP40001568-BABEBGCF
-                https://stackoverflow.com/questions/31697325/apple-script-ms-word-page-count-in-folder
-                https://forums.macrumors.com/threads/applescript-ms-word-delete-last-sentence-paragraph.1767586/
-            """
-            return f'''
-                tell application "Microsoft Word"
-                    activate
-                    set tmp_docx_file to "{docx}"
-                    set tmp_pdf_file to "{pdf}"
-                    open tmp_docx_file
-                    save as active document file name tmp_pdf_file file format format PDF
-                    close active window saving no
-                end tell
-            '''
-
-
-
+    def get_apple_sript(self, *, docx: str=None, pdf: str=None) -> str:
+        """
+            https://stackoverflow.com/questions/2940916/how-do-i-embed-an-applescript-in-a-python-script
+            https://discussions.apple.com/thread/7571530
+            https://superuser.com/questions/338165/convert-batch-of-word-files-to-pdfs-in-mac-os-x
+            https://stackoverflow.com/questions/51844514/macos-automator-applescript-solution-for-exporting-docx-to-pdf
+            https://stackoverflow.com/questions/16534292/basic-powershell-batch-convert-word-docx-to-pdf
+            https://apple.stackexchange.com/questions/59532/create-automator-service-with-a-python-script
+            https://developer.apple.com/library/archive/documentation/AppleScript/Conceptual/AppleScriptX/Concepts/work_with_as.html#//apple_ref/doc/uid/TP40001568-BABEBGCF
+            https://stackoverflow.com/questions/31697325/apple-script-ms-word-page-count-in-folder
+            https://forums.macrumors.com/threads/applescript-ms-word-delete-last-sentence-paragraph.1767586/
+        """
+        return f'''
+            tell application "Microsoft Word"
+                activate
+                set tmp_docx_file to "{docx}"
+                set tmp_pdf_file to "{pdf}"
+                open tmp_docx_file
+                save as active document file name tmp_pdf_file file format format PDF
+                close active window saving no
+            end tell
+        '''
 
     def ConvertFile(self, source_file, destination_file):
         assert library.files.is_file(source_file)
