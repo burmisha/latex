@@ -1,3 +1,4 @@
+attrs==21.2.0
 fuzzywuzzy
 pafy==0.5.5
 requests==2.22.0

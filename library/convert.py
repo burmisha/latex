@@ -7,16 +7,26 @@ import os
 import platform
 import subprocess
 import shutil
+import attr
+
+from typing import List
 
 import logging
 log = logging.getLogger(__name__)
 
 
+@attr.s
+class DestinationPage:
+    index: int = attr.ib()
+    dst_dir: str = attr.ib()
+    name_template: str = attr.ib()
+
+
 class Structure:
-    def __call__(self):
+    def get_pages(self):
         raise NotImplementedError('Could not get structure')
 
-    def _impl(self, sub_dir=None, start_index=None, parts=None):
+    def _get_plain_pages(self, sub_dir=None, start_index=None, parts=None):
         has_digit = all(part[0].isdigit() for part, _, _ in parts)  # all subfiles start with digit
         for index, (part_name, first, last) in enumerate(parts, start_index):
             if first > last:
@@ -29,7 +39,11 @@ class Structure:
                 name = f'{index:02d} {part_name}'
 
             for page in range(first, last + 1):
-                yield page, sub_dir(index, name), name
+                yield DestinationPage(
+                    index=page,
+                    dst_dir=sub_dir(index, name),
+                    name_template=name,
+                )
 
 
 class ZeroDStructure(Structure):
@@ -37,8 +51,8 @@ class ZeroDStructure(Structure):
         self.Data = data
         self.StartIndex = startIndex
 
-    def __call__(self):
-        for result in self._impl(
+    def get_pages(self):
+        for result in self._get_plain_pages(
             sub_dir=lambda index, name: None,
             start_index=self.StartIndex,
             parts=self.Data,
@@ -51,8 +65,8 @@ class OneDStructure(Structure):
         self.Data = data
         self.StartIndex = startIndex
 
-    def __call__(self):
-        for result in self._impl(
+    def get_pages(self):
+        for result in self._get_plain_pages(
             sub_dir=lambda index, name: f'{name}',
             start_index=self.StartIndex,
             parts=self.Data,
@@ -66,14 +80,59 @@ class TwoDStructure(Structure):
         self.FirstLevelStartIndex = firstLevelStartIndex
         self.SecondLevelStartIndex = secondLevelStartIndex
 
-    def __call__(self):
+    def get_pages(self):
         for chapterIndex, (chapterName, parts) in enumerate(self.Data, self.FirstLevelStartIndex):
-            for result in self._impl(
+            for result in self._get_plain_pages(
                 sub_dir=lambda index, name: f'{chapterIndex:02d} {chapterName}',
                 start_index=self.SecondLevelStartIndex,
                 parts=parts,
             ):
                 yield result
+
+
+def test_structures():
+    data = [
+        (
+            ZeroDStructure([('Раздел', 1, 3)]),
+            [DestinationPage(1, None, '01 Раздел'), DestinationPage(2, None, '01 Раздел'), DestinationPage(3, None, '01 Раздел')],
+        ),
+        (
+            OneDStructure([('Кинематика', 2, 3), ('Динамика', 3, 3)]),
+            [DestinationPage(2, '01 Кинематика', '01 Кинематика'), DestinationPage(3, '01 Кинематика', '01 Кинематика'), DestinationPage(3, '02 Динамика', '02 Динамика')],
+        ),
+        (
+            TwoDStructure([
+                ('А', [('Б', 1, 2), ('В', 2, 2)]),
+                ('Ф', [('Д', 3, 3), ('Г', 4, 4)]),
+            ]),
+            [
+                DestinationPage(1, '01 А', '01 Б'),
+                DestinationPage(2, '01 А', '01 Б'),
+                DestinationPage(2, '01 А', '02 В'),
+                DestinationPage(3, '02 Ф', '01 Д'),
+                DestinationPage(4, '02 Ф', '02 Г'),
+            ],
+        ),
+        (
+            TwoDStructure([
+                ('А', [('3 Б', 1, 2), ('4 В', 2, 2)]),
+                ('Ф', [('Д', 3, 3), ('Г', 4, 4)]),
+            ]),
+            [
+                DestinationPage(1, '01 А', '3 Б'),
+                DestinationPage(2, '01 А', '3 Б'),
+                DestinationPage(2, '01 А', '4 В'),
+                DestinationPage(3, '02 Ф', '01 Д'),
+                DestinationPage(4, '02 Ф', '02 Г'),
+            ],
+        ),
+    ]
+    for structure, canonic in data:
+        result = list(structure.get_pages())
+        assert result == canonic, f'Broken structure:\nexpected:\t{canonic}\ngot:\t\t{result}'
+
+
+test_structures()
 
 
 class PdfBook:
@@ -113,14 +172,21 @@ class PdfBook:
 
         assert library.files.is_dir(self.DstPath)
 
-    def GetPageShift(self, pageNumber):
+    def get_pdf_index(self, page_index: int):
+        assert 1 <= page_index < 1000, f'Invalid page index: {page_index}'
+
         if hasattr(self, 'PageShift'):
             if isinstance(self.PageShift, int):
-                return self.PageShift
+                page_shift = self.PageShift
             else:
-                return self.PageShift(pageNumber)
+                page_shift = self.PageShift(page_index)
         else:
-            return 0
+            page_shift = 0
+
+        pdf_index = page_shift + page_index - 1
+        assert 0 <= pdf_index < 1000, f'Invalid pdf index: {pdf_index}'
+
+        return pdf_index
 
     def EnsureDir(self, dirname):
         assert library.files.path_is_ok(dirname)
@@ -128,33 +194,22 @@ class PdfBook:
             log.info(f'Create missing {dirname}')
             os.mkdir(dirname)
 
-    def GetFilename(self, dirName, nameTemplate, pageNumber):
+    def GetFilename(self, page):
         self.EnsureDir(self.DstPath)
-        if dirName:
-            dirName = os.path.join(self.DstPath, dirName)
-            self.EnsureDir(dirName)
+
+        if page.dst_dir:
+            dir_name = os.path.join(self.DstPath, page.dst_dir)
+            self.EnsureDir(dir_name)
         else:
-            dirName = self.DstPath
-        fileName = os.path.join(dirName, f'{nameTemplate} - {pageNumber:03d}.png')
+            dir_name = self.DstPath
+
+        fileName = os.path.join(dir_name, f'{page.name_template} - {page.index:03d}.png')
         assert library.files.path_is_ok(fileName)
+
         return fileName
 
-    def ExtractPage(self, *, pageNumber=None, dirName=None, nameTemplate=None, overwrite=False, dry_run=False):
-        assert isinstance(pageNumber, int)
-        assert 1 <= pageNumber < 1000, f'Invalid pageNumber: {pageNumber}'
-        pageIndex = self.GetPageShift(pageNumber) + pageNumber - 1
-        assert 0 <= pageIndex < 1000, f'Invalid pageIndex: {pageIndex}'
-
-        fileName = self.GetFilename(dirName, nameTemplate, pageNumber)
-        if os.path.exists(fileName) and not overwrite:
-            log.debug(f'Already generated from {pageNumber}: {fileName}')
-            return
-
-        log.info(f'  Page {pageNumber} -> {fileName}')
-        if dry_run:
-            return
-
-        command = [
+    def get_magick_params(self) -> List[str]:
+        return [
             'magick',
             'convert',
             '-log', '%t %e',
@@ -167,17 +222,32 @@ class PdfBook:
             '-background', 'white',
             # '-define', 'png:compression-level=9',
             '-flatten',
-        ] + self._magick_params + [
-            f'{self.PdfPath}[{pageIndex}]',
-            fileName,
-        ]
+        ] + self._magick_params
+
+    def _extract_page(self, *, page=None, overwrite=False, dry_run=False):
+        pdf_index = self.get_pdf_index(page.index) + page.index - 1
+
+        filename = self.GetFilename(page)
+        if os.path.exists(filename) and not overwrite:
+            log.debug(f'Already generated from {page.index}: {filename}')
+            return
+
+        log.info(f'  Page {page.index} -> {filename}')
+        if dry_run:
+            return
+
+        command = self.get_magick_params() + [f'{self.PdfPath}[{pdf_index}]', fileName]
         library.process.run(command)
 
     def Save(self, *, overwrite=False, dry_run=False):
-        data = list(self._structure())
-        log.info(f'Saving {len(data)} pages from \'{self.PdfPath}\' to \'{self.DstPath}\'')
-        for pageNumber, dirName, nameTemplate in data:
-            self.ExtractPage(pageNumber=pageNumber, dirName=dirName, nameTemplate=nameTemplate, overwrite=overwrite, dry_run=dry_run)
+        pages = list(self._structure.get_pages())
+        log.info(f'Saving {len(pages)} pages from \'{self.PdfPath}\' to \'{self.DstPath}\'')
+        for page in pages:
+            self._extract_page(
+                page=page,
+                overwrite=overwrite,
+                dry_run=dry_run,
+            )
 
     def GetStrangeFiles(self, remove=False):
         log.debug(f'Looking for strange files in {self.DstPath}')
@@ -186,15 +256,15 @@ class PdfBook:
         assert all(library.files.path_is_ok(file) for file in found)
 
         knownFiles = []
-        for pageNumber, dirName, nameTemplate in self._structure():
-            filename = self.GetFilename(dirName, nameTemplate, pageNumber)
+        for page in self._structure.get_pages():
+            filename = self.GetFilename(page)
             knownFiles.append(filename)
 
         known = set(knownFiles)
         strange = sorted(found - known)
         log.info(f'Found {len(strange)} strange files (expected {len(known)}, found {len(found)}) in {self.DstPath}')
         for file in strange:
-            log.info(f'Unknown file {file}', )
+            log.info(f'Unknown file {file}')
             assert library.files.path_is_ok(file, raise_on_error=False)
             if remove:
                 os.remove(file)
