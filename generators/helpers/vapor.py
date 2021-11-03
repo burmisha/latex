@@ -173,7 +173,7 @@ class Vapor:
         for index in range(len(self.T_P_Pmm_rho) - 1):
             yield self.T_P_Pmm_rho[index], self.T_P_Pmm_rho[index + 1]
 
-    def _get_index_by_index(self, value, search_index, result_index):
+    def _get_index_by_index(self, *, value=None, search_index=None, result_index=None):
         for row, next_row in self._get_rows_pairs():
             if row[search_index] <= value < next_row[search_index]:
                 return (value - row[search_index]) / (next_row[search_index] - row[search_index]) * (next_row[result_index] - row[result_index]) + row[result_index]
@@ -189,16 +189,16 @@ class Vapor:
         raise RuntimeError()
 
     def get_rho_by_t(self, t):
-        return self._get_index_by_index(t, 0, 3)
+        return self._get_index_by_index(value=t, search_index=0, result_index=3)
 
     def get_p_by_t(self, t):
-        return self._get_index_by_index(t, 0, 1)
+        return self._get_index_by_index(value=t, search_index=0, result_index=1)
 
     def get_t_by_rho(self, rho):
-        return self._get_index_by_index(rho, 3, 0)
+        return self._get_index_by_index(value=rho, search_index=3, result_index=0)
 
-    def get_t_by_p(self, rho):
-        return self._get_index_by_index(rho, 1, 0)
+    def get_t_by_p(self, p):
+        return self._get_index_by_index(value=p, search_index=1, result_index=0)
 
 
 def test_vapor():
