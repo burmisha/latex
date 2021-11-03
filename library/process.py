@@ -26,6 +26,17 @@ def run(command, cwd=None):
     return result
 
 
+def communicate(*, command=None, input=None):
+    start = now_ts()
+    p = subprocess.Popen(command, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    stdout, stderr = p.communicate(input.encode('utf-8'))
+    end = now_ts()
+    delta = f'{end - start:.3f}'
+    assert stdout == b'', f'expecting empty stdout, got {stdout.decode("utf-8")}'
+    assert stderr == b'', f'expecting empty stderr, got {stderr.decode("utf-8")}'
+    assert p.returncode == 0, f'returncode expected to be 0, got {p.returncode}'
+
+
 def pbcopy(text, name=None):
     subprocess.run('pbcopy', universal_newlines=True, input=text)
     log.info(f'Copied {name or "text"} to clipboard')
