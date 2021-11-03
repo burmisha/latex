@@ -9,7 +9,7 @@ import subprocess
 import shutil
 import attr
 
-from typing import List
+from typing import List, Union
 
 import logging
 log = logging.getLogger(__name__)
@@ -20,6 +20,44 @@ class DestinationPage:
     index: int = attr.ib()
     dst_dir: str = attr.ib()
     name_template: str = attr.ib()
+
+
+class PagesRange:
+    first_index: int = attr.ib()  # including
+    last_index: int = attr.ib()  # including
+
+    def __init__(self, str_range: Union[int, str]):
+        pages_range = str(str_range).strip()
+        if '-' in pages_range:
+            first_page, last_page = pages_range.split('-')
+        elif '+' in pages_range:
+            first_page, more_pages = pages_range.split('+')
+            last_page = int(first_page) + int(more_pages)
+        else:
+            first_page, last_page = pages_range, pages_range
+        self.first_index = int(first_page)
+        self.last_index = int(last_page)
+        assert self.first_index <= self.last_index
+
+    def get_pages_indicies(self):
+        for page in range(self.first_index, self.last_index + 1):
+            yield page
+
+
+def test_pages_range():
+    data = [
+        (1, [1]),
+        ('1', [1]),
+        ('1+2', [1, 2, 3]),
+        ('1-3', [1, 2, 3]),
+    ]
+    for pages_range_str, canonic in data:
+        pages_range = PagesRange(pages_range_str)
+        result = list(pages_range.get_pages_indicies())
+        assert result == canonic, f'Broken get_pages_indicies:\nexpected:\t{canonic}\ngot:\t\t{result}'
+
+
+test_pages_range()
 
 
 class Structure:
@@ -416,7 +454,6 @@ class DocxToPdf:
         log.info(f'Converted {new_converted:2d} files and found {already_converted_count:2d} existing in \'{source_directory}\'')
 
 
-
 class PdfToPdf:
     '''
     https://apple.stackexchange.com/questions/99210/mac-os-x-how-to-merge-pdf-files-in-a-directory-according-to-their-file-names
@@ -428,33 +465,21 @@ class PdfToPdf:
         self._source_file = source_file
         self._tmp_dir = os.path.join(library.location.Location.Home, 'tmp')
 
-    def _get_pages_range(self, str_range):
-        pages_range = str_range.strip()
-        if '-' in pages_range:
-            first_page, last_page = pages_range.split('-')
-        elif '+' in pages_range:
-            first_page, more_pages = pages_range.split('+')
-            last_page = int(first_page) + int(more_pages)
-        else:
-            first_page, last_page = pages_range, pages_range
-        first_page, last_page = int(first_page), int(last_page)  # including both
-        assert first_page <= last_page
-        return first_page, last_page
-
     def Extract(self, pages, destination_file):
         log.info('Extracting pages %s to %s', pages, destination_file)
         assert isinstance(pages, (str, int))
         assert destination_file.endswith('.pdf')
         parts = []
-        for index, pages_range in enumerate(str(pages).split(',')):
-            first_page, last_page = self._get_pages_range(pages_range)
-            part_file = os.path.join(self._tmp_dir, 'part_%d.pdf')
-            for page_index in range(first_page, last_page + 1):
-                parts.append(part_file % page_index)
+        for index, pages_range_str in enumerate(str(pages).split(',')):
+            pages_range = PagesRange(pages_range_str)
+            parts.extend([
+                os.path.join(self._tmp_dir, f'part_{page_index}.pdf')
+                for page_index in pages_range.get_pages_indicies()
+            ])
             separate_command = [
                 'pdfseparate',
-                '-f', '%d' % first_page,
-                '-l', '%d' % last_page,
+                '-f', f'{pages_range.first_index}',
+                '-l', f'{pages_range.last_index}',
                 self._source_file,
                 part_file,
             ]
