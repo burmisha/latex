@@ -1,7 +1,8 @@
 import library.files
 import library.location
-import library.logging
 import library.process
+
+from library.logging import cm, color
 
 import os
 import platform
@@ -196,7 +197,8 @@ class PdfBook:
         assert isinstance(structure, Structure)
         self._structure = structure
 
-    def should_trim(self):
+    @property
+    def should_trim(self) -> bool:
         if hasattr(self, 'enable_trim'):
             return self.enable_trim
         return True
@@ -205,7 +207,7 @@ class PdfBook:
         assert library.files.is_file(self.PdfPath)
         if create_missing:
             if not os.path.isdir(self.DstPath):
-                log.info(f'Create missing {self.DstPath }')
+                log.info(f'Create missing {self.DstPath}')
                 os.mkdir(self.DstPath)
 
         assert library.files.is_dir(self.DstPath)
@@ -253,7 +255,7 @@ class PdfBook:
             '-log', '%t %e',
             '-density', str(self._ppi * 3),
             '-resample', str(self._ppi),
-        ] + (['-trim'] if self.should_trim() else []) + [
+        ] + (['-trim'] if self.should_trim else []) + [
             '+repage',
             # '-transparent', '"#ffffff"',
             '-type', 'Grayscale',
@@ -263,47 +265,42 @@ class PdfBook:
         ] + self._magick_params
 
     def _extract_page(self, *, page=None, overwrite=False, dry_run=False):
-        pdf_index = self.get_pdf_index(page.index) + page.index - 1
+        pdf_index = self.get_pdf_index(page.index)
 
         filename = self.GetFilename(page)
         if os.path.exists(filename) and not overwrite:
             log.debug(f'Already generated from {page.index}: {filename}')
             return
 
-        log.info(f'  Page {page.index} -> {filename}')
+        log.info(f'  page {page.index} -> {os.path.basename(filename)!r}')
         if dry_run:
             return
 
-        command = self.get_magick_params() + [f'{self.PdfPath}[{pdf_index}]', fileName]
+        command = self.get_magick_params() + [f'{self.PdfPath}[{pdf_index}]', filename]
         library.process.run(command)
 
     def Save(self, *, overwrite=False, dry_run=False):
-        pages = list(self._structure.get_pages())
-        log.info(f'Saving {len(pages)} pages from \'{self.PdfPath}\' to \'{self.DstPath}\'')
-        for page in pages:
+        for page in self._structure.get_pages():
             self._extract_page(
                 page=page,
                 overwrite=overwrite,
                 dry_run=dry_run,
             )
 
-    def GetStrangeFiles(self, remove=False):
-        log.debug(f'Looking for strange files in {self.DstPath}')
+    def __str__(self):
+        basename = os.path.basename(self.PdfPath)
+        pages_count = len(list(self._structure.get_pages()))
+        return f'book {cm(basename, color=color.Green)} with {cm(pages_count, color=color.Green)} pages:\nSource file:\t\t{self.PdfPath}\nDestination dir:\t{self.DstPath}'
 
+    def GetStrangeFiles(self, remove=False):
         found = set(library.files.walkFiles(self.DstPath, extensions=['.png']))
         assert all(library.files.path_is_ok(file) for file in found)
 
-        knownFiles = []
-        for page in self._structure.get_pages():
-            filename = self.GetFilename(page)
-            knownFiles.append(filename)
-
-        known = set(knownFiles)
+        known = set([self.GetFilename(page) for page in self._structure.get_pages()])
         strange = sorted(found - known)
-        log.info(f'Found {len(strange)} strange files (expected {len(known)}, found {len(found)}) in {self.DstPath}')
+        log.info(f'  expected {cm(len(known), color=color.Blue)} files, found {cm(len(found), color=color.Blue)} ones -> got {cm(len(strange), color=color.Blue)} strange files')
         for file in strange:
-            log.info(f'Unknown file {file}')
-            assert library.files.path_is_ok(file, raise_on_error=False)
+            log.info(f'Unknown file {cm(file, color=color.Red)!r}')
             if remove:
                 os.remove(file)
 

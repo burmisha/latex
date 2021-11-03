@@ -13,16 +13,16 @@ def now_ts():
 
 
 def run(command, cwd=None):
-    str_sommand = ' '.join(command)
+    str_command = ' '.join(command)
     start = now_ts()
     result = subprocess.run(command, capture_output=True, cwd=cwd)
     end = now_ts()
     delta = f'{end - start:.3f}'
     if result.returncode == 0:
-        log.debug(f'Completed {cm(str_sommand, color=color.Cyan)} in {cm(delta, color=color.Cyan)} seconds')
+        log.debug(f'Completed {cm(str_command, color=color.Cyan)} in {cm(delta, color=color.Cyan)} seconds')
     else:
-        log.debug(f'Failed {cm(str_sommand, color=color.Red)} in {cm(delta, color=color.Red)} seconds')
-        raise RuntimeError(f'Command failed: {str_sommand}')
+        log.debug(f'Failed {cm(str_command, color=color.Red)} in {cm(delta, color=color.Red)} seconds')
+        raise RuntimeError(f'Command failed with code {result.returncode}, command: {str_command!r}')
     return result
 
 

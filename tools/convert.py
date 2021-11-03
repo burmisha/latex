@@ -1762,8 +1762,8 @@ def get_all_books():
 
 def runConvert(args):
     for book in get_all_books():
+        log.info(f'Processing {book}')
         book.Validate(create_missing=args.create_missing)
-        book.GetStrangeFiles(remove=False)
         book.Save(overwrite=args.overwrite_existing, dry_run=args.dry_run)
         book.GetStrangeFiles(remove=args.remove_strange_files)
 
