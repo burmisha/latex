@@ -39,7 +39,7 @@ def communicate(*, command=None, input=None):
 
 def pbcopy(text, name=None):
     subprocess.run('pbcopy', universal_newlines=True, input=text)
-    log.info(f'Copied {name or "text"} to clipboard')
+    log.info(f'Copied {name or "text"} of size {len(text)} to clipboard')
 
 
 def say(text, rate=100):

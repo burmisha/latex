@@ -10,6 +10,10 @@ import subprocess
 import shutil
 import attr
 
+
+import pytesseract
+from PIL import Image
+
 from typing import List, Union
 
 import logging
@@ -303,6 +307,20 @@ class PdfBook:
             log.info(f'Unknown file {cm(file, color=color.Red)!r}')
             if remove:
                 os.remove(file)
+
+    def decode_as_text(self):
+        result = ''
+        languages = [
+            'rus',
+            'eng',
+            'equ',
+        ]
+        for page in self._structure.get_pages():
+            filename = self.GetFilename(page)
+            log.info(f'Reading page {page}')
+            result += pytesseract.image_to_string(Image.open(filename), lang='+'.join(languages))
+
+        return result
 
 
 def page_shift(shift):

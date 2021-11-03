@@ -1,4 +1,6 @@
 import library.location
+import library.process
+
 from library.convert import (
     PdfBook,
     disable_trim,
@@ -1766,6 +1768,8 @@ def runConvert(args):
         book.Validate(create_missing=args.create_missing)
         book.Save(overwrite=args.overwrite_existing, dry_run=args.dry_run)
         book.GetStrangeFiles(remove=args.remove_strange_files)
+        # if 'Вишнякова' in book.PdfPath:
+        #     library.process.pbcopy(book.decode_as_text())
 
 
 def populate_parser(parser):
