@@ -9,6 +9,8 @@ import library.formatter
 import library.gform
 import library.location
 import library.logging
+import library.mesh
+import library.normalize
 import library.process
 import library.pupils
 import library.secrets
