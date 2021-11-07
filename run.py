@@ -75,6 +75,7 @@ def CreateArgumentsParser():
         ('gforms', 'Create JS scripts for Google Forms', tools.google_forms),
         ('lucky', 'Find lucky pupils', tools.lucky),
         ('qr', 'Form QR codes', tools.qr),
+        ('recognize', 'Recognize books', tools.recognize),
         ('reshu-ege', 'Reshu EGE', tools.reshuege),
         ('template', 'Create template files', tools.template),
         ('tripod', 'Generate tripod results', tools.tripod),

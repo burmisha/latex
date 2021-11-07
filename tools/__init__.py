@@ -10,6 +10,7 @@ import tools.generate_all
 import tools.google_forms
 import tools.lucky
 import tools.qr
+import tools.recognize
 import tools.reshuege
 import tools.template
 import tools.tripod
