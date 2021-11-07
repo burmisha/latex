@@ -308,17 +308,22 @@ class PdfBook:
             if remove:
                 os.remove(file)
 
-    def decode_as_text(self):
+    def decode_as_text(self, *, indices=None):
         result = ''
         languages = [
             'rus',
-            'eng',
-            'equ',
+            # 'eng',
+            'equ',  # https://tesseract-ocr.github.io/tessdoc/Data-Files
         ]
+        log.info(f'Reading pages {indices}')
+        processed_indices = set()
         for page in self._structure.get_pages():
+            if page.index in processed_indices or (indices and page.index not in indices):
+                continue
             filename = self.GetFilename(page)
             log.info(f'Reading page {page}')
             result += pytesseract.image_to_string(Image.open(filename), lang='+'.join(languages))
+            processed_indices.add(page.index)
 
         return result
 
