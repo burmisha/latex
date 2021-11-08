@@ -28,8 +28,10 @@ def run(command, cwd=None):
 
 def communicate(*, command=None, input=None):
     start = now_ts()
+    log.info(f'command {command}')
+    log.info(f'input {input}')
     p = subprocess.Popen(command, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-    stdout, stderr = p.communicate(input.encode('utf-8'))
+    stdout, stderr = p.communicate(input)
     end = now_ts()
     delta = f'{end - start:.3f}'
     assert stdout == b'', f'expecting empty stdout, got {stdout.decode("utf-8")}'

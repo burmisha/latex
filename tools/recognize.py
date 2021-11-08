@@ -1,5 +1,6 @@
 from tools.books import get_all_books
 from library.convert import PagesRange
+from library.normalize import format_plain_text
 
 import library.process
 
@@ -22,7 +23,9 @@ def runRecognize(args):
         if not fnmatch.fnmatch(basename, fn_filter):
             continue
         log.info(f'Processing {book}')
-        library.process.pbcopy(book.decode_as_text(indices=indices))
+        text = book.decode_as_text(indices=indices)
+        text = format_plain_text(text)
+        library.process.pbcopy(text)
 
 
 def populate_parser(parser):
