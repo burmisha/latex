@@ -312,7 +312,7 @@ class PdfBook:
         result = ''
         languages = [
             'rus',
-            # 'eng',
+            'eng',
             'equ',  # https://tesseract-ocr.github.io/tessdoc/Data-Files
         ]
         log.info(f'Reading pages {indices}')
@@ -321,7 +321,7 @@ class PdfBook:
             if page.index in processed_indices or (indices and page.index not in indices):
                 continue
             filename = self.GetFilename(page)
-            log.info(f'Reading page {page}')
+            log.info(f'Reading {page}')
             result += pytesseract.image_to_string(Image.open(filename), lang='+'.join(languages))
             processed_indices.add(page.index)
 
@@ -493,16 +493,14 @@ class PdfToPdf:
         parts = []
         for index, pages_range_str in enumerate(str(pages).split(',')):
             pages_range = PagesRange(pages_range_str)
-            parts.extend([
-                os.path.join(self._tmp_dir, f'part_{page_index}.pdf')
-                for page_index in pages_range.get_pages_indicies()
-            ])
+            part_template = os.path.join(self._tmp_dir, 'part_%d.pdf')
+            parts.extend([part_template % page_index for page_index in pages_range.get_pages_indicies()])
             separate_command = [
                 'pdfseparate',
                 '-f', f'{pages_range.first_index}',
                 '-l', f'{pages_range.last_index}',
                 self._source_file,
-                part_file,
+                part_template,
             ]
             library.process.run(separate_command)
 
