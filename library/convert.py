@@ -321,10 +321,17 @@ class PdfBook:
                 continue
             filename = self.GetFilename(page)
             log.info(f'Reading {page}')
-            result += pytesseract.image_to_string(Image.open(filename), lang='+'.join(languages))
+            text = pytesseract.image_to_string(Image.open(filename), lang='+'.join(languages))
+            text = text.strip()
+
+            index_str = str(page.index)
+            if text[-len(index_str):] == index_str:
+                text = text[:-len(index_str)]
+
+            result += text.strip() + '\n'
             processed_indices.add(page.index)
 
-        return result.strip()
+        return result
 
 
 def page_shift(shift):

@@ -68,9 +68,10 @@ def format_plain_text(text: str, fill=False) -> str:
     r = text.replace('-\n', '').replace('.\n', '. ').replace(' -\n', ' - ')
     r = re.sub(r'(\w)\n(\w)', r'\1 \2', r)
     r = r.replace('\n \n', '\n\n')
-    r = re.sub(r'\n\n\n+', r'\n\n\n', r)
-    r = re.sub(r' (\w)\) ', r'\n \1) ', r)
+    r = re.sub(r' (\w)\) ', r'\n     \1) ', r)
+    r = re.sub(r'^(\w)\) ', r'    \1) ', r)
     r = re.sub(r',\n+', r', ', r)
+    r = re.sub(r'\n\n+', r'\n', r)
     if fill:
         return textwrap.fill(
             r,
@@ -90,7 +91,7 @@ def format_plain_text(text: str, fill=False) -> str:
 def test_format_plain_text():
     data = [
         ('a-\nb', 'ab'),
-        ('a-\nb\n\nc', 'ab\n\nc'),
+        ('a-\nb\n\nc', 'ab\nc'),
         ('''2. Металлический стержень мас-
 сой т и длиной Г подвешен горизон-
 тально на двух лёгких проводах дли-
