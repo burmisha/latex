@@ -24,7 +24,7 @@ def runRecognize(args):
             continue
         log.info(f'Processing {book}')
         text = book.decode_as_text(indices=indices)
-        text = format_plain_text(text)
+        text = format_plain_text(text, fill=False)
         library.process.pbcopy(text)
 
 

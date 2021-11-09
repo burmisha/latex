@@ -64,16 +64,27 @@ def test_title_canonizer():
 test_title_canonizer()
 
 
-def format_plain_text(text: str) -> str:
-    r = text.replace('-\n', '').replace(',\n', ', ').replace('.\n', '. ').replace(' -\n', ' - ')
+def format_plain_text(text: str, fill=False) -> str:
+    r = text.replace('-\n', '').replace('.\n', '. ').replace(' -\n', ' - ')
     r = re.sub(r'(\w)\n(\w)', r'\1 \2', r)
     r = r.replace('\n \n', '\n\n')
     r = re.sub(r'\n\n\n+', r'\n\n\n', r)
-    return textwrap.fill(
-        r,
-        width=120,
-        replace_whitespace=False,
-    )
+    r = re.sub(r' (\w)\) ', r'\n \1) ', r)
+    r = re.sub(r',\n+', r', ', r)
+    if fill:
+        return textwrap.fill(
+            r,
+            width=120,
+            expand_tabs=True,
+            replace_whitespace=False,
+            break_long_words=False,
+            drop_whitespace=True,
+            break_on_hyphens=False,
+            tabsize=4,
+        )
+    else:
+        return r
+
 
 
 def test_format_plain_text():
@@ -103,8 +114,8 @@ def test_format_plain_text():
         ),
     ]
     for text, canonic in data:
-        result = format_plain_text(text)
-        assert result == canonic, f'Expected {canonic!r}, got {result!r}:\n\n{canonic}\n\n{result}'
+        result = format_plain_text(text, fill=True)
+        assert result == canonic, f'Expected\n{canonic!r}\ngot\n{result!r}:\n\n{canonic}\n\n{result}'
 
 
 test_format_plain_text()

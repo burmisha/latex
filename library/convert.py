@@ -45,8 +45,7 @@ class PagesRange:
         assert self.first_index <= self.last_index
 
     def get_pages_indicies(self):
-        for page in range(self.first_index, self.last_index + 1):
-            yield page
+        return list(range(self.first_index, self.last_index + 1))
 
 
 def test_pages_range():
@@ -58,7 +57,7 @@ def test_pages_range():
     ]
     for pages_range_str, canonic in data:
         pages_range = PagesRange(pages_range_str)
-        result = list(pages_range.get_pages_indicies())
+        result = pages_range.get_pages_indicies()
         assert result == canonic, f'Broken get_pages_indicies:\nexpected:\t{canonic}\ngot:\t\t{result}'
 
 
@@ -325,7 +324,7 @@ class PdfBook:
             result += pytesseract.image_to_string(Image.open(filename), lang='+'.join(languages))
             processed_indices.add(page.index)
 
-        return result
+        return result.strip()
 
 
 def page_shift(shift):
@@ -487,13 +486,13 @@ class PdfToPdf:
         self._tmp_dir = os.path.join(library.location.Location.Home, 'tmp')
 
     def Extract(self, pages, destination_file):
-        log.info('Extracting pages %s to %s', pages, destination_file)
+        log.info(f'Extracting pages {pages} to {destination_file}')
         assert isinstance(pages, (str, int))
         assert destination_file.endswith('.pdf')
         parts = []
         for index, pages_range_str in enumerate(str(pages).split(',')):
             pages_range = PagesRange(pages_range_str)
-            part_template = os.path.join(self._tmp_dir, 'part_%d.pdf')
+            part_template = os.path.join(self._tmp_dir, 'part_%d.pdf')  # pdfseparate requires %d in output
             parts.extend([part_template % page_index for page_index in pages_range.get_pages_indicies()])
             separate_command = [
                 'pdfseparate',

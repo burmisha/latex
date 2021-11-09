@@ -10,8 +10,6 @@ def runConvert(args):
         book.Validate(create_missing=args.create_missing)
         book.Save(overwrite=args.overwrite_existing, dry_run=args.dry_run)
         book.GetStrangeFiles(remove=args.remove_strange_files)
-        # if 'Генденштейн' in book.PdfPath and '11' in book.PdfPath:
-        #     library.process.pbcopy(book.decode_as_text(indices=list(range(4, 14))))
 
 
 def populate_parser(parser):
