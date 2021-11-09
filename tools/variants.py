@@ -633,5 +633,9 @@ def get_all_variants():
             task_id='2021-10-21 11БА - ЭМК - 1',
             classes={'oscillation.electromagnet': ['Task01', 'Task02', 'Task03', 'Task04', 'Task05']},
         ),
+        Work(
+            task_id='2021-11-10 11БА - ЭМК - 2',
+            classes={'oscillation.electromagnet': ['Task04_2', 'Task06', 'Task07', 'Task08', 'Task09']},
+        ),
     ]
     return works

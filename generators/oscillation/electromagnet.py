@@ -1,6 +1,6 @@
 import generators.variant as variant
 
-from generators.helpers import letter_variants, Fraction, Consts
+from generators.helpers import letter_variants, Fraction, Consts, n_times
 
 import math
 
@@ -48,7 +48,7 @@ class Task02(variant.VariantTask):
 
 
 @variant.text('''
-    В колебательном контура сила тока изменяется 
+    В колебательном контура сила тока изменяется
     по закону $\\eli={I.SI_Value:.2f}\\{func}({omega}t)$ (в СИ).
     Индуктивность катушки при этом равна {L:V:e}. Определите:
     \\begin{itemize}
@@ -82,7 +82,7 @@ class Task03(variant.VariantTask):
 
 @variant.text('''
     Электрический колебательный контур состоит
-    из катушки индуктивностью $L$ и конденсатора ёмкостью $C$. 
+    из катушки индуктивностью $L$ и конденсатора ёмкостью $C$.
     {how} {what1} подключают ещё {what2} ${frac:LaTeX}{what3}$.
     Как изменится период свободных колебаний в контуре?
 ''')
@@ -118,7 +118,7 @@ class Task04(variant.VariantTask):
             elif what1 == 'конденсатору':
                 c = (frac * 1) / (frac + 1)
             else:
-                raise RuntimeError()                
+                raise RuntimeError()
         else:
             raise RuntimeError()
 
@@ -129,6 +129,66 @@ class Task04(variant.VariantTask):
             l=l,
             c=c,
             ans=f'{ans:.3f}'
+        )
+
+
+@variant.text('''
+    Электрический колебательный контур состоит
+    из катушки индуктивностью $L$ и конденсатора ёмкостью $C$.
+    {how} {what1} подключают ещё {what2} ${frac:LaTeX}{what3}$.
+    Как изменится частота свободных колебаний в контуре?
+''')
+@variant.solution_space(100)
+@variant.arg(how=['Параллельно', 'Последовательно'])
+@variant.arg(what1__what2__what3=[
+    ('катушке', 'одну катушку индуктивностью', 'L'),
+    ('конденсатору', 'один конденсатор ёмкостью', 'C'),
+])
+@variant.arg(nom__denom=[(1, 2), (1, 3), (2, 1), (3, 1)])
+@variant.answer_short('''
+    T = 2\\pi\\sqrt{LC}, \\quad
+    T' = 2\\pi\\sqrt{L'C'}
+        = T \\sqrt{\\frac{L'}L * \\frac{C'}C}
+        = T \\sqrt{ {l:LaTeX} * {c:LaTeX} }
+    \\implies \\frac{\\nu'}{\\nu} = \\frac{T}{T'} = \\frac1{\\sqrt{ {l:LaTeX} * {c:LaTeX} }} \\approx {ans}.
+''')
+class Task04_2(variant.VariantTask):
+    def GetUpdate(self, *, how=None, what1=None, what2=None, what3=None, nom=None, denom=None):
+        frac = Fraction(1) * nom / denom
+        l = Fraction(1)
+        c = Fraction(1)
+        if how == 'Параллельно':
+            if what1 == 'катушке':
+                l = (frac * 1) / (frac + 1)
+            elif what1 == 'конденсатору':
+                c = frac + 1
+            else:
+                raise RuntimeError()
+        elif how == 'Последовательно':
+            if what1 == 'катушке':
+                l = frac + 1
+            elif what1 == 'конденсатору':
+                c = (frac * 1) / (frac + 1)
+            else:
+                raise RuntimeError()
+        else:
+            raise RuntimeError()
+
+        ans = 1 / float(l * c) ** 0.5
+
+        if ans > 1:
+            answer = f'увеличится в ${ans:.2f}$ раз'
+        elif ans < 1:
+            answer = f'уменьшится в ${1 / ans:.2f}$ раз'
+        elif ans == 1:
+            answer = f'не изменится'
+
+        return dict(
+            frac=frac,
+            l=l,
+            c=c,
+            ans=f'{ans:.3f}',
+            answer=answer,
         )
 
 
@@ -144,18 +204,18 @@ class Task04(variant.VariantTask):
 @variant.answer_align([
     'T &= 2\\pi\\sqrt{LC} \\implies \\nu = \\frac 1T = \\frac 1{2\\pi\\sqrt{LC}} \\implies L = \\frac1 {4\\pi^2 \\nu^2 C},',
     'L_1 &= \\frac1 {4\\pi^2 \\nu_1^2 C}, L_2 = \\frac1 {4\\pi^2 \\nu_1^2 C},',
-    '''\\nu_\\text{послед.} 
+    '''\\nu_\\text{послед.}
         &= \\frac 1{2\\pi\\sqrt{(L_1 + L_2)C}}
         = \\frac 1{2\\pi\\sqrt{\\cbr{\\frac1 {4\\pi^2 \\nu_1^2 C} + \\frac1 {4\\pi^2 \\nu_2^2 C}}C}}
         = \\frac 1{\\sqrt{\\cbr{\\frac1 {\\nu_1^2 C} + \\frac1 {\\nu_2^2 C}}C}} = ''',
     ''' &= \\frac 1{\\sqrt{\\frac1 {\\nu_1^2} + \\frac1 {\\nu_2^2}}}
-        = \\frac 1{\\sqrt{ \\frac1 {nu1:V|sqr|s} + \\frac1 {nu2:V|sqr|s}}} 
+        = \\frac 1{\\sqrt{ \\frac1 {nu1:V|sqr|s} + \\frac1 {nu2:V|sqr|s}}}
         \\approx {nu_posl:V},''',
-    '''\\nu_\\text{паралл.} 
+    '''\\nu_\\text{паралл.}
         &= \\frac 1{2\\pi\\sqrt{\\frac 1{\\frac 1{L_1} + \\frac 1{L_2}}C}}
-        = \\frac 1{2\\pi\\sqrt{\\frac 1{\\frac 1{\\frac1 {4\\pi^2 \\nu_1^2 C}} + \\frac 1{\\frac1 {4\\pi^2 \\nu_2^2 C}}}C}} 
+        = \\frac 1{2\\pi\\sqrt{\\frac 1{\\frac 1{\\frac1 {4\\pi^2 \\nu_1^2 C}} + \\frac 1{\\frac1 {4\\pi^2 \\nu_2^2 C}}}C}}
         = \\frac 1{2\\pi\\sqrt{\\frac 1{4\\pi^2 \\nu_1^2 C + 4\\pi^2 \\nu_2^2 C}C}} =''',
-    ''' &= \\frac 1{\\sqrt{\\frac 1{\\nu_1^2 + \\nu_2^2}}} 
+    ''' &= \\frac 1{\\sqrt{\\frac 1{\\nu_1^2 + \\nu_2^2}}}
         = \\sqrt{\\nu_1^2 + \\nu_2^2} = \\sqrt{{nu1:V|sqr} + {nu2:V|sqr}} \\approx {nu_par:V}.'''
 ])
 class Task05(variant.VariantTask):  # 3800 14.8
@@ -166,3 +226,114 @@ class Task05(variant.VariantTask):  # 3800 14.8
             nu_posl=f'{nu_posl:.2f} Гц',
             nu_par=f'{nu_par:.2f} Гц',
         )
+
+
+@variant.text('''
+    В $LC$-контуре ёмкость конденсатора {C:V:e}, а максимальное напряжение на нём {Um:V:e}.
+    Определите энергию магнитного поля катушки в момент времени, когда напряжение на конденсаторе оказалось равным {U:V:e}.
+''')
+@variant.solution_space(100)
+@variant.arg(C=('C = {} мкФ', [2, 4, 6, 8]))
+@variant.arg(Um=('U_m = {} В', [7, 9, 12]))
+@variant.arg(U=('U = {} В', [1, 3, 5]))
+@variant.answer_align([
+    'W &= \\frac{LI^2}2 + \\frac{CU^2}2 = \\frac{CU_m^2}2 \\implies W_L = \\frac{CU_m^2}2 - \\frac{CU^2}2 = \\frac C2(U_m^2 - U^2) =',
+    '&= \\frac {C:V:s}2 \\cbr{{Um:V|sqr} - {U:V|sqr}} \\approx {Wl:V}.'
+])
+class Task06(variant.VariantTask):  # Вишнякова 3.5.11
+    def GetUpdate(self, *, C=None, Um=None, U=None):
+        Wl = C.SI_Value / 2 * (Um.SI_Value ** 2 - U.SI_Value ** 2)
+        return dict(
+            Wl=f'W_L = {Wl * 1000000:.1f} мкДж',
+        )
+
+
+@variant.text('''
+    Конденсатор ёмкостью {C:V:e} зарядили до напряжения {U:V:e} и подключили к катушке индуктивностью {L:V:e}.
+    Определите максимальную энергию {what} и период колебаний в $LC$-контуре.
+''')
+@variant.solution_space(100)
+@variant.arg(what=['магнитного поля катушки', 'электрического поля конденсатора'])
+@variant.arg(C=('C = {} мкФ', [2, 4, 6, 8]))
+@variant.arg(U=('U = {} В', [5, 8, 10]))
+@variant.arg(L=('L = {} мГн', [20, 25, 30, 40]))
+@variant.answer_align([
+    'W &= \\frac{CU^2}2 = \\frac{{C:V} * {U:V|sqr}}2 \\approx {W:V},',
+    'T &= 2\\pi\\sqrt{LC}= 2\\pi\\sqrt{{L:V} * {C:V}} \\approx {T:V}',
+])
+class Task07(variant.VariantTask):
+    def GetUpdate(self, *, C=None, U=None, L=None, what=None):
+        T = 2 * math.pi * float(L.SI_Value * C.SI_Value) ** 0.5
+        return dict(
+            W=(C * U * U / 2).SetLetter('W').As('мкДж'),
+            T=f'T = {T * 1000:.2f} мс.',
+        )
+
+
+@variant.text('''
+    Во сколько раз (и как) изменится {what} свободных незатухающих колебаний в контуре,
+    если его индуктивность {what_l} в {nl_times}, а ёмкость {what_c} в {nc_times} раз?
+''')
+@variant.solution_space(100)
+@variant.arg(what=['частота', 'период', 'циклическая частота'])
+@variant.arg(what_l=['уменьшить', 'увеличить'])
+@variant.arg(what_c=['уменьшить', 'увеличить'])
+@variant.arg(nl__nl_times=n_times(2, 3, 4, 5, 6))
+@variant.arg(nc__nc_times=n_times(3, 4, 5, 6, 7))
+@variant.answer_short('\\text{{answer}}')
+class Task08(variant.VariantTask):
+    def GetUpdate(self, *, what=None, what_l=None, what_c=None, nl=None, nl_times=None, nc=None, nc_times=None):
+        n = Fraction(1)
+        if what_l == 'увеличить':
+            n *= nl
+        elif what_l == 'уменьшить':
+            n /= nl
+        else:
+            raise RuntimeError(f'Invalid {what_l}')
+        if what_c == 'увеличить':
+            n *= nc
+        elif what_c == 'уменьшить':
+            n /= nc
+        else:
+            raise RuntimeError(f'Invalid {what_c}')
+
+        if what == 'частота':
+            n = 1 / n
+        elif what == 'период':
+            pass
+        elif what == 'циклическая частота':
+            n = 1 / n
+        else:
+            raise RuntimeError(f'Invalid {what}')
+
+        n_value = float(n) ** 0.5
+
+        if n > 1:
+            answer = f'увеличится в ${n_value:.2f}$ раз'
+        elif n < 1:
+            answer = f'уменьшится в ${1 / n_value:.2f}$ раз'
+        elif n == 1:
+            answer = f'не изменится'
+
+        return dict(
+            answer=answer,
+        )
+
+
+
+@variant.text('''
+    В схеме (см. рис. на доске) при разомкнутом ключе $K$ конденсатор ёмкостью {C:Task:e} заряжен до напряжения {U0:Task:e}.
+    ЭДС батареи {E:Task:e}, индуктивность катушки {L:Task:e}. Определите
+    \\begin{itemize}
+        \\item чему равен установившийся ток в цепи после замыкания ключа?
+        \\item чему равен максимальный ток в цепи после замыкания ключа?
+    \\end{itemize}
+    Внутренним сопротивлением батареи и омическим сопротивлением катушки пренебречь, $D$ — идеальный диод.
+''')
+@variant.solution_space(100)
+@variant.arg(C=('C = {} мкФ', [10]))
+@variant.arg(U0=('U_0 = {} В', [10]))
+@variant.arg(L=('L = {} В', [0.1]))
+@variant.arg(E=('\\ele = {} В', [15]))
+class Task09(variant.VariantTask):  # 3.120 Чешев
+    pass
