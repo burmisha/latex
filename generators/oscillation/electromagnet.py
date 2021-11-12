@@ -270,9 +270,26 @@ class Task07(variant.VariantTask):
         )
 
 
+class Relation:
+    def __init__(self):
+        self._value = Fraction(1)
+
+    def More(self, what, value):
+        if 'велич' in what:
+            self._value *= nl
+        elif 'меньш' in what:
+            self._value /= value
+        else:
+            raise RuntimeError(f'Invalid {what!r}')
+
+    def Inv(self, what, *args):
+        if what in args:
+            self._value = 1 / self._value
+
+
 @variant.text('''
     Во сколько раз (и как) изменится {what} свободных незатухающих колебаний в контуре,
-    если его индуктивность {what_l} в {nl_times}, а ёмкость {what_c} в {nc_times} раз?
+    если его индуктивность {what_l} в {nl_times}, а ёмкость {what_c} в {nc_times}?
 ''')
 @variant.solution_space(100)
 @variant.arg(what=['частота', 'период', 'циклическая частота'])
