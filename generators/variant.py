@@ -407,6 +407,7 @@ def solution_space(space):
 def text(template_str):
     def decorator(cls):
         assert not hasattr(cls, 'TextTemplate')
+        assert '\t' not in template_str
         cls.TextTemplate = template_str
         return cls
     return decorator
@@ -415,6 +416,7 @@ def text(template_str):
 def text_test(template_str):
     def decorator(cls):
         assert not hasattr(cls, 'TextTestTemplate')
+        assert '\t' not in template_str
         cls.TextTestTemplate = template_str
         return cls
     return decorator
@@ -423,6 +425,7 @@ def text_test(template_str):
 def answer(template_str):
     def decorator(cls):
         assert not hasattr(cls, 'AnswerTemplate')
+        assert '\t' not in template_str
         cls.AnswerTemplate = template_str
         return cls
     return decorator
