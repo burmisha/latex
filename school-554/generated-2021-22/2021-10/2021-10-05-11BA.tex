@@ -2698,6 +2698,99 @@
 
 \variantsplitter
 
+\addpersonalvariant{Матвей Кузьмин}
+
+\tasknumber{1}%
+\task{%
+    При изменении силы тока в проводнике по закону $\eli = 2 - 0{,}4t$ (в системе СИ),
+    в нём возникает ЭДС самоиндукции $200\,\text{мВ}$.
+    Чему равна индуктивность проводника?
+    Ответ выразите в миллигенри и округлите до целого.
+}
+\answer{%
+    $
+        \ele = L\frac{\abs{\Delta \eli}}{\Delta t} = L \cdot \abs{ - 0{,}4 } \text{(в СИ)}
+        \implies L = \frac{\ele}{ 0{,}4 } = \frac{200\,\text{мВ}}{ 0{,}4 } \approx {500\,\text{мГн}}
+    $
+}
+\solutionspace{80pt}
+
+\tasknumber{2}%
+\task{%
+    Прямолинейный проводник длиной $\ell$ перемещают в однородном магнитном поле с индукцией $B$.
+    Проводник, вектор его скорости и вектор индукции поля взаимно перпендикулярны.
+    Определите зависимость ускорения от времени, если разность потенциалов на концах проводника
+    изменяется по закону $\Delta \varphi = kt^3$.
+}
+\answer{%
+    $
+        \Delta \varphi = Bv\ell = kt^3 \implies v = \frac{kt^3}{B\ell} \implies a(t) = \frac{v(t)}{t} = \frac{kt^2}{B\ell}
+    $
+}
+\solutionspace{80pt}
+
+\tasknumber{3}%
+\task{%
+    Плоская прямоугольная рамка со сторонами $40\,\text{см}$ и $60\,\text{см}$ находится в однородном вертикальном магнитном поле
+    с индукцией $150\,\text{мТл}$.
+    Сопротивление рамки $12\,\text{Ом}$.
+    Вектор магнитной индукции параллелен плоскости рамки.
+    Рамку повернули на $30\degrees$ вокруг одной из её горизонтальных сторон.
+    Какой заряд протёк по рамке?
+    Ответ выразите в микрокулонах и округлите до целого.
+}
+\answer{%
+    \begin{align*}
+    \ele_i &= - \frac{\Delta \Phi_i}{\Delta t}, \eli_i = \frac{\ele_i}{R}, \Delta q_i = \eli_i\Delta t\implies \Delta q_i = \frac{\ele_i}{R} \cdot \Delta t = - \frac 1{R} \frac{\Delta \Phi_i}{\Delta t} \cdot \Delta t= - \frac{\Delta \Phi_i}{R} \implies \\
+    \implies \Delta q &= q_2 - q_1 = \sum_i \Delta q_i = \sum_i \cbr{ - \frac{\Delta \Phi_i}{R}} = -\frac 1{R} \sum_i \Delta \Phi_i = -\frac{\Phi_2 - \Phi_1}{R}.
+    \\
+    q &= \abs{\Delta q} = \frac {\abs{\Phi_2 - \Phi_1}}{R}= \frac {\abs{BS \cos \varphi_2 - BS \cos \varphi_1}}{R}= \frac {B S}{R}\abs{\cos \varphi_2 - \cos \varphi_1}= \frac {B a b}{R}\abs{\cos \varphi_2 - \cos \varphi_1}, \\
+    \varphi_1 &= 90\degrees, \varphi_2 = 60\degrees, \\
+    q&= \frac {150\,\text{мТл} \cdot 40\,\text{см} \cdot 60\,\text{см}}{12\,\text{Ом}}\abs{\cos 60\degrees - \cos 90\degrees} \approx 1500\,\text{мкКл} \to 1500.
+    \end{align*}
+}
+\solutionspace{120pt}
+
+\tasknumber{4}%
+\task{%
+    Резистор сопротивлением $R = 5\,\text{Ом}$ и катушка индуктивностью $L = 0{,}4\,\text{Гн}$ (и пренебрежимо малым сопротивлением)
+    подключены параллельно к источнику тока с ЭДС $\ele = 8\,\text{В}$ и внутренним сопротивлением $r = 1\,\text{Ом}$ (см.
+    рис.
+    на доске).
+    Какое количество теплоты выделится в цепи после размыкания ключа $K$?
+}
+\answer{%
+    \begin{align*}
+    &\text{закон Ома для полной цепи}: \eli = \frac{\ele}{r + R_\text{внешнее}} = \frac{\ele}{r + \frac{R \cdot 0}{R + 0}} = \frac{\ele}{r}, \\
+    Q &= W_m = \frac{L\eli^2}2 = \frac{L\sqr{\frac{\ele}{r}}}2 = \frac L2\frac{\ele^2}{r^2} = \frac{0{,}4\,\text{Гн}}2 \cdot \sqr{\frac{8\,\text{В}}{1\,\text{Ом}}} \approx 12{,}80\,\text{Дж}.
+    \end{align*}
+}
+\solutionspace{150pt}
+
+\tasknumber{5}%
+\task{%
+    По параллельным рельсам, расположенным под углом $15\degrees$ к горизонтали,
+    соскальзывает проводник массой $50\,\text{г}$: без трения и с постоянной скоростью $15\,\frac{\text{м}}{\text{с}}$.
+    Рельсы замнуты резистором сопротивлением $5\,\text{Ом}$, расстояние между рельсами $60\,\text{см}$.
+    Вся система находитится в однородном вертикальном магнитном поле (см.
+    рис.
+    на доске).
+    Определите индукцию магнитного поля и ток, протекающий в проводнике.
+    Сопротивлением проводника, рельс и соединительных проводов пренебречь, ускорение свободного падения принять равным $g = 10\,\frac{\text{м}}{\text{с}^{2}}$.
+}
+\answer{%
+    \begin{align*}
+    \ele &= B_\bot v \ell, B_\bot = B\cos \alpha, \eli = \frac{\ele}R, \\
+    F_A &= \eli B \ell = \frac{\ele}R B \ell, \\
+    F_A \cos \alpha &= mg \sin \alpha \implies \frac{\ele}R B \ell \cos \alpha = mg \sin \alpha \\
+    &\frac{B \cos \alpha \cdot v \ell}R B \ell \cos \alpha = mg \sin \alpha\implies \frac{B^2 \cos^2 \alpha  \cdot v \ell^2}R = mg \sin \alpha, \\
+    B &= \sqrt{\frac{mg R \sin \alpha}{v \ell^2 \cos^2 \alpha}} = \sqrt{\frac{50\,\text{г} \cdot 10\,\frac{\text{м}}{\text{с}^{2}} \cdot 5\,\text{Ом} \cdot \sin 15\degrees}{15\,\frac{\text{м}}{\text{с}} \cdot \sqr{60\,\text{см}} \cdot \cos^2 15\degrees}}\approx 0{,}36\,\text{Тл}, \\
+    \eli &= \frac{\ele}R= \frac{B_\bot v \ell}R = \frac {v \ell \cos \alpha}R \sqrt{\frac{mg R \sin \alpha}{v \ell^2 \cos^2 \alpha}}=\sqrt{\frac{mg v \sin \alpha}{R}}=\sqrt{\frac{50\,\text{г} \cdot 10\,\frac{\text{м}}{\text{с}^{2}} \cdot 15\,\frac{\text{м}}{\text{с}} \cdot \sin 15\degrees}{5\,\text{Ом}}} \approx 0{,}62\,\text{А}.
+    \end{align*}
+}
+
+\variantsplitter
+
 \addpersonalvariant{Сергей Малышев}
 
 \tasknumber{1}%

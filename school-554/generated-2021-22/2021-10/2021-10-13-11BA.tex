@@ -6149,6 +6149,218 @@
 
 \variantsplitter
 
+\addpersonalvariant{Матвей Кузьмин}
+
+\tasknumber{1}%
+\task{%
+    \begin{itemize}
+        \item Запишите линейное однородное дифференциальное уравнение второго порядка,
+            описывающее свободные незатухающие колебания гармонического осциллятора,
+        \item запишите общее решение этого уравнения,
+        \item подпишите в выписанном решении фазу и амплитуду колебаний,
+        \item запишите выражение для скорости,
+        \item запишите выражение для ускорения.
+    \end{itemize}
+}
+\answer{%
+    \begin{align*}
+    &\ddot x + \omega^2 x = 0 \Longleftrightarrow a_x + \omega^2 x = 0, \\
+    &x = A \cos(\omega t + \varphi_0) \text{ или же } x = A \sin(\omega t + \varphi_0) \text{ или же } x = a \cos(\omega t) + b \sin(\omega t), \\
+    &A \text{\, или \,} \sqrt{a^2 + b^2} \text{ --- это амплитуда}, \omega t + \varphi_0\text{ --- это фаза}, \\
+    &v = \dot x = -\omega A \sin(\omega t + \varphi_0), \\
+    &a = \dot v = \ddot x = -\omega^2 A \cos(\omega t + \varphi_0) = -\omega^2 x,
+    \end{align*}
+}
+\solutionspace{135pt}
+
+\tasknumber{2}%
+\task{%
+    Тело колеблется по гармоническому закону,
+    амплитуда этих колебаний $16\,\text{см}$, период $2\,\text{c}$.
+    Чему равно смещение тела относительно положения равновесия через $20\,\text{c}$
+    после прохождения положения равновесия?
+}
+\answer{%
+    $x = A \sin \omega t = A \sin \cbr{ \frac {2\pi}T t } = A \sin \cbr{ 2\pi \frac tT } = 16\,\text{см} \cdot \sin \cbr{ 2\pi \cdot \frac {20\,\text{c}}{2\,\text{c}}}\approx 0\,\text{см}.$
+}
+\solutionspace{80pt}
+
+\tasknumber{3}%
+\task{%
+    Тело совершает гармонические колебания с периодом $5\,\text{c}$.
+    За какое время тело смещается от положения наибольшего отклонения до смещения в половину амплитуды?
+}
+\answer{%
+    $t = \frac T{6} \approx 0{,}8\,\text{c}.$
+}
+\solutionspace{120pt}
+
+\tasknumber{4}%
+\task{%
+    Запишите формулу для периода колебаний пружинного маятника и ...
+    \begin{itemize}
+        \item укажите названия всех физических величин в формуле,
+        \item выразите из неё циклическую частоту колебаний
+        \item выразите из неё жёсткость пружины.
+    \end{itemize}
+}
+\answer{%
+    \begin{align*}
+    T &= 2\pi \sqrt{\frac lg} \implies \nu = \frac 1T = \frac 1{2\pi}\sqrt{\frac gl}, \omega = 2\pi\nu = \sqrt{\frac gl}, l = g\sqr{\frac T{2\pi}}, g = l\sqr{\frac {2\pi}T} \\
+    T &= 2\pi \sqrt{\frac mk} \implies \nu = \frac 1T = \frac 1{2\pi}\sqrt{\frac km}, \omega = 2\pi\nu = \sqrt{\frac km}, m = k\sqr{\frac T{2\pi}}, k = m\sqr{\frac {2\pi}T}
+    \end{align*}
+}
+\solutionspace{80pt}
+
+\tasknumber{5}%
+\task{%
+    Частота колебаний пружинного маятника равна $10\,\text{Гц}$.
+    Определите периоды колебаний
+    \begin{itemize}
+        \item потенциальной энергии системы,
+        \item ускорения груза,
+        \item модуля ускорения груза.
+    \end{itemize}
+}
+\answer{%
+    $T = \frac 1\nu \approx 100\,\text{мc}, T_1 = \frac T2 \approx 50\,\text{мc}, T_2 = T \approx 100\,\text{мc}, T_3 = \frac T2 \approx 50\,\text{мc}.$
+}
+\solutionspace{80pt}
+
+\tasknumber{6}%
+\task{%
+    Тело колеблется по гармоническому закону с амплитудой $6\,\text{см}$.
+    Какой минимальный путь тело может пройти за половину периода?
+}
+\answer{%
+    $2A \approx 12\,\text{см}.$
+}
+\solutionspace{80pt}
+
+\tasknumber{7}%
+\task{%
+    Период колебаний математического маятника равен $5\,\text{с}$,
+    а их амплитуда — $10\,\text{см}$.
+    Определите амплитуду колебаний скорости маятника.
+}
+\answer{%
+    $
+        T = \frac{2\pi}{\omega}
+        \implies \omega = \frac{2\pi}{T}
+        \implies v_{\max} = \omega A = \frac{2\pi}{T}A
+        \approx 12{,}6\,\frac{\text{см}}{\text{с}}.
+    $
+}
+\solutionspace{100pt}
+
+\tasknumber{8}%
+\task{%
+    Определите период колебаний груза массой $m$, подвешенного к пружине жёсткостью $k$.
+    Ускорение свободного падения $g$.
+}
+\answer{%
+    \begin{align*}
+    &-kx_0 + mg = 0, \\
+    F &= -k(x_0 + \Delta x), \\
+    ma &= -k(x_0 + \Delta x) + mg, \\
+    ma &= -kx_0 -k \Delta x + mg = -mg -k \Delta x + mg = -k \Delta x, \\
+    a &+ \frac k m x = 0, \\
+    \omega^2 &= \frac k m \implies T = \frac{2\pi}\omega = 2\pi\sqrt{\frac m k}.
+    \end{align*}
+}
+\solutionspace{150pt}
+
+\tasknumber{9}%
+\task{%
+    Куб со стороной $a$ и плотности $\rho$ плавает в жидкости плотностью $\rho_0$.
+    Определите частоту колебаний куба, считая, что 4 грани куба всегда вертикальны.
+}
+\answer{%
+    \begin{align*}
+    \Delta F &= -\rho_0 g a^2 \Delta x,\Delta F = m\ddot x, m = \rho a^3\implies \rho a^3 \ddot x = -\rho_0 g a^2 \Delta x \implies \\
+    \implies \ddot x &= -\frac{\rho_0}{\rho} \frac g a \Delta x\implies \omega^2 = \frac{\rho_0}{\rho} \cdot \frac g a\implies T = \frac{2 \pi}{\omega} = 2 \pi\sqrt{\frac{\rho}{\rho_0} \cdot \frac a g}.
+    \end{align*}
+}
+\solutionspace{150pt}
+
+\tasknumber{10}%
+\task{%
+    Математический маятник с нитью длиной $43\,\text{см}$ подвешен к потолку в лифте.
+    За $30\,\text{с}$ маятник совершил $22$ колебаний.
+    Определите модуль и направление ускорения лифта.
+    Куда движется лифт?
+}
+\answer{%
+    $
+        T = 2\pi\sqrt{\frac\ell {a + g}}, T = \frac {t}{N}
+        \implies a + g = \ell \cdot \frac{4 \pi ^ 2}{T^2},
+        a = \ell \cdot \frac{4 \pi ^ 2}{T^2} - g = \ell \cdot \frac{4 \pi ^ 2 N^2}{t^2} - g \approx -0{,}87\,\frac{\text{м}}{\text{c}^{2}},
+        \text{вверх}.
+    $
+}
+\solutionspace{120pt}
+
+\tasknumber{11}%
+\task{%
+    Масса груза в пружинном маятнике равна $500\,\text{г}$, при этом период его колебаний равен $1{,}3\,\text{с}$.
+    Груз облегчают на $50\,\text{г}$.
+    Определите новый период колебаний маятника.
+}
+\answer{%
+    $
+        T'
+            = 2\pi\sqrt{\frac{M - m}{k}}
+            = 2\pi\sqrt{\frac{M}{k} \cdot \frac{M - m}{M}}
+            = T\sqrt{\frac{M - m}{M}} =  T\sqrt{1 - \frac{m}{M}} \approx 1{,}23\,\text{с}.
+    $
+}
+\solutionspace{120pt}
+
+\tasknumber{12}%
+\task{%
+    При какой длине нити математического маятника период колебаний груза массой $300\,\text{г}$
+    окажется равен периоду колебаний этого же груза в пружинном маятнике с пружиной жёсткостью $40\,\frac{\text{Н}}{\text{м}}$?
+}
+\answer{%
+    $
+        2\pi \sqrt{\frac \ell g} = 2\pi \sqrt{\frac m k}
+        \implies \frac \ell g = \frac m k
+        \implies \ell = g \frac m k \approx 7{,}5\,\text{см}.
+    $
+}
+\solutionspace{120pt}
+
+\tasknumber{13}%
+\task{%
+    Груз подвесили к пружине, при этом удлинение пружины составило $60\,\text{мм}$.
+    Определите частоту колебаний пружинного маятника, собранного из этой пружины и этого груза.
+}
+\answer{%
+    $
+        mg -k\Delta x = 0 \implies \frac m k = \frac{\Delta x} g
+        \implies T = 2\pi \sqrt{\frac m k } = 2\pi \sqrt{\frac{\Delta x} g } \approx $0{,}49\,\text{с}$,
+        \nu = \frac 1T \approx $2{,}05\,\text{Гц}$.
+    $
+}
+\solutionspace{120pt}
+
+\tasknumber{14}%
+\task{%
+    Определите период колебаний системы: математический маятник ограничен с одной стороны стенкой (см.
+    рис.
+    на доске).
+    Удары маятника о стенку абсолютно упругие, $n = \sqrt{2}$.
+    Длина маятника $\ell$, ускорение свободного падения $g$.
+}
+\answer{%
+    $
+        T = 2\pi\sqrt{\frac\ell g}, \qquad
+        T' = 2 \cdot \frac T 4 + 2 \cdot \frac T{8} = \frac34T = \frac32\pi\sqrt{\frac\ell g}
+    $
+}
+
+\variantsplitter
+
 \addpersonalvariant{Сергей Малышев}
 
 \tasknumber{1}%
