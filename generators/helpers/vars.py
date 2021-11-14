@@ -1,4 +1,5 @@
 import itertools
+import re
 
 import logging
 log = logging.getLogger(__name__)
@@ -38,10 +39,21 @@ class Vars:
 
 
     def add(self, key, values):
+        str_re = re.compile(r'^(-?\d+(\.\d+)?/)+-?\d+(\.\d+)?$')
         if isinstance(values, tuple):
             assert len(values) == 2
             assert '{}' in values[0], f'No {{}} in {values}'
             values = [values[0].format(option) for option in values[1]]
+        elif isinstance(values, str):
+            parts = values.split()
+            for index, part in enumerate(parts):
+                if '/' in part and str_re.match(part):
+                    split_values = part.split('/')
+                    assert all(float(i) for i in split_values), f'part: '
+                    prefix = ' '.join(parts[:index])
+                    suffix = ' '.join(parts[index + 1:])
+                    values = [f'{prefix} {v} {suffix}' for v in split_values]
+                    break
 
         try:
             assert not self._fixed
@@ -145,6 +157,16 @@ def test_vars():
     vars = Vars()
     assert list(vars.form_all()) == [{}]
     assert vars.form_one(0) == {}
+
+    vars = Vars()
+    vars.add('a', 'a_{ыфвфыв} = 4/5.0/8/-3 Дж / с')
+    assert list(vars.form_all()) == [
+        {'a': 'a_{ыфвфыв} = 4 Дж / с'},
+        {'a': 'a_{ыфвфыв} = 5.0 Дж / с'},
+        {'a': 'a_{ыфвфыв} = 8 Дж / с'},
+        {'a': 'a_{ыфвфыв} = -3 Дж / с'},
+    ]
+    assert vars.form_one(0) == {'a': 'a_{ыфвфыв} = 4 Дж / с'}
 
 
 test_vars()
