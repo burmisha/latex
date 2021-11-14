@@ -39,7 +39,7 @@ class Waves00(variant.VariantTask):
         = \\frac{\\sqrt{{alpha}}}{nu:V:s}
         = {T1:V}
 ''')
-@variant.arg(nu=('\\nu = {} Гц', [2, 4, 5, 8]))
+@variant.arg(nu='\\nu = 2/4/5/8 Гц')
 @variant.arg(alpha=[4, 16, 25])
 class Waves01(variant.VariantTask):
     def GetUpdate(self, alpha=None, nu=None):
@@ -63,7 +63,7 @@ class Waves01(variant.VariantTask):
 ])
 @variant.arg(mLetter=['m', 'M'])
 @variant.arg(mValue=[100, 200, 250, 400])
-@variant.arg(v=('v = {} м / с', [1, 2, 4, 5]))
+@variant.arg(v='v = 1/2/4/5 м / с')
 class Waves02(variant.VariantTask):
     def GetUpdate(self, mLetter=None, mValue=None, v=None):
         return dict(
@@ -93,7 +93,7 @@ class Waves02(variant.VariantTask):
     ('девятым', 9),
     ('десятым', 10),
 ])
-@variant.arg(lmbd=('\\lambda = {} м', [3, 4, 5, 6]))
+@variant.arg(lmbd='\\lambda = 3/4/5/6 м')
 class Waves03(variant.VariantTask):
     def GetUpdate(self, first=None, n1=None, second=None, n2=None, lmbd=None):
         return dict(
@@ -108,8 +108,8 @@ class Waves03(variant.VariantTask):
     {lmbd:V:e}.
 ''')
 @variant.answer_short('\\lambda = vT \\implies v = \\frac{\\lambda}T = \\frac{lmbd:V:s}{T:V:s} = {v:V:s}')
-@variant.arg(lmbd=('\\lambda = {} м', [1.2, 1.5, 2.1, 2.4]))
-@variant.arg(T=('T = {} мc', [2, 3, 4, 5, 6]))
+@variant.arg(lmbd='\\lambda = 1.2/1.5/2.1/2.4 м')
+@variant.arg(T='T = 2/3/4/5/6 мc')
 class Waves04(variant.VariantTask):
     def GetUpdate(self, lmbd=None, T=None):
         return dict(
@@ -131,9 +131,9 @@ class Waves04(variant.VariantTask):
     u"T' &= \\frac {\\lambda'}{v:L} = \\frac {vt}{Nv} = \\frac tN =  \\frac {t:V:s}{N:V:s} = {T_1:V}, ",
     u"\\nu' &= \\frac 1{T'} = \\frac {N:L:s}t = \\frac {N:V:s}{t:V:s} = {nu_1:V}. ",
 ])
-@variant.arg(N=('N = {}', [4, 5, 6]))
-@variant.arg(t=('t = {} c', [5, 6, 8, 10]))
-@variant.arg(v=('v = {} м / с', [1, 2, 3, 4, 5]))
+@variant.arg(N='N = 4/5/6')
+@variant.arg(t='t = 5/6/8/10 c')
+@variant.arg(v='v = 1/2/3/4/5 м / с')
 class Waves05(variant.VariantTask):
     def GetUpdate(self, N=None, t=None, v=None):
         return dict(
@@ -157,8 +157,8 @@ class Waves05(variant.VariantTask):
     \\quad 
     n = \\frac{l2:L:s}{l1:L:s} \\approx {n:V}.
 ''')
-@variant.arg(nu_1=('\\nu_1 = {} Гц', [150, 200, 300, 500]))
-@variant.arg(nu_2=('\\nu_2 = {} МГц', [200, 500, 800]))
+@variant.arg(nu_1='\\nu_1 = 150/200/300/500 Гц')
+@variant.arg(nu_2='\\nu_2 = 200/500/800 МГц')
 class Ch1238(variant.VariantTask):
     def GetUpdate(self, nu_1=None, nu_2=None):
         return dict(
@@ -186,7 +186,7 @@ class Ch1238(variant.VariantTask):
     ('\\frac{\\pi}{2}', 1. / 4),
     ('\\frac{3\\pi}{4}', 3. / 8),
 ])
-@variant.arg(l=('l = {} см', [20, 25, 40, 50, 75]))
+@variant.arg(l='l = 20/25/40/50/75 см')
 class Ch1240(variant.VariantTask):
     def GetUpdate(self, delta=None, frac=None, l=None):
         return dict(

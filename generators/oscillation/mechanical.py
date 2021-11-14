@@ -10,9 +10,9 @@ import math
     после прохождения положения {what}?
 ''')
 @variant.solution_space(80)
-@variant.arg(A=('A = {} см', [10, 12, 14, 16, 18, 20]))
-@variant.arg(T=('T = {} c', [2, 4, 6]))
-@variant.arg(t=('t = {} c', [20, 21, 22, 23, 24, 25, 26]))
+@variant.arg(A='A = 10/12/14/16/18/20 см')
+@variant.arg(T='T = 2/4/6 c')
+@variant.arg(t='t = 20/21/22/23/24/25/26 c')
 @variant.arg(what=['равновесия', 'максимального отклонения'])
 @variant.answer_short(
     'x = A \\{f} \\omega t '
@@ -49,7 +49,7 @@ class Task01(variant.VariantTask):
     За какое время тело смещается от положения {position} до смещения в половину амплитуды?
 ''')
 @variant.solution_space(120)
-@variant.arg(T=('T = {} c', [4, 5, 6]))
+@variant.arg(T='T = 4/5/6 c')
 @variant.arg(position=['наибольшего отклонения', 'равновесия'])
 @variant.answer_short('t = \\frac T{{denom}} \\approx {t:V}.')
 class Task02(variant.VariantTask):
@@ -108,7 +108,7 @@ class Task03(variant.VariantTask):
     \\end{itemize}
 ''')
 @variant.solution_space(80)
-@variant.arg(nu=('\\nu = {} Гц', [8, 10, 12, 15]) )
+@variant.arg(nu='\\nu = 8/10/12/15 Гц')
 @variant.arg(what=['пружинного маятника', 'математического маятника'])
 @variant.arg(what1=['потенциальной энергии системы', 'кинетической энергии системы'])
 @variant.arg(what2=['скорости', 'ускорения'])
@@ -128,7 +128,7 @@ class Task04(variant.VariantTask):
     Какой {which} путь тело может пройти за {how} периода?
 ''')
 @variant.solution_space(80)
-@variant.arg(A=('A = {} см', [4, 6, 12]))
+@variant.arg(A='A = 4/6/12 см')
 @variant.arg(which=['минимальный', 'максимальный'])
 @variant.arg(how=['половину', 'четверть', 'одну шестую долю'])
 @variant.answer_short('{answer} \\approx {s:V}.')
@@ -162,8 +162,8 @@ class Task05(variant.VariantTask):
     а их амплитуда — {A:V:e}. Определите {what}.
 ''')
 @variant.solution_space(100)
-@variant.arg(A=('A = {} см', [10, 15, 20]))
-@variant.arg(T=('T = {} с', [2, 3, 4, 5]))
+@variant.arg(A='A = 10/15/20 см')
+@variant.arg(T='T = 2/3/4/5 с')
 @variant.arg(what=['максимальную скорость маятника', 'амплитуду колебаний скорости маятника'])
 @variant.answer_short('''
     T = \\frac{2\\pi}{\\omega}
@@ -221,8 +221,8 @@ class Task08(variant.VariantTask):
     Определите модуль и направление ускорения лифта. Куда движется лифт?
 ''')
 @variant.solution_space(120)
-@variant.arg(l=('\\ell = {} см', [37, 40, 43]))
-@variant.arg(t=('t = {} с', [20, 25, 30]))
+@variant.arg(l='\\ell = 37/40/43 см')
+@variant.arg(t='t = 20/25/30 с')
 @variant.arg(a_raw=[-2, -1.5, -0.5, 0.5, 1.5, 2.5])
 @variant.answer_short('''
     T = 2\\pi\\sqrt{\\frac\\ell {a + g}}, T = \\frac {t:L:s}{N:L:s}
@@ -250,9 +250,9 @@ class Task09(variant.VariantTask):
     Груз {what} на {m:V:e}. Определите новый период колебаний маятника.
 ''')
 @variant.solution_space(120)
-@variant.arg(T=('T = {} с', [1.2, 1.3, 1.4, 1.5]))
-@variant.arg(m=('m = {} г', [50, 100, 150]))
-@variant.arg(M=('M = {} г', [400, 500, 600]))
+@variant.arg(T='T = 1.2/1.3/1.4/1.5 с')
+@variant.arg(m='m = 50/100/150 г')
+@variant.arg(M='M = 400/500/600 г')
 @variant.arg(what=['утяжеляют', 'облегчают'])
 @variant.answer_short('''
     T' 
@@ -282,8 +282,8 @@ class Task10(variant.VariantTask):
     окажется равен периоду колебаний этого же груза в пружинном маятнике с пружиной жёсткостью {k:V:e}?
 ''')
 @variant.solution_space(120)
-@variant.arg(m=('m = {} г', [200, 300, 400]))
-@variant.arg(k=('k = {} Н/м', [40, 50, 60]))
+@variant.arg(m='m = 200/300/400 г')
+@variant.arg(k='k = 40/50/60 Н/м')
 @variant.answer_short('''
     2\\pi \\sqrt{\\frac \\ell g} = 2\\pi \\sqrt{\\frac m k}
     \\implies \\frac \\ell g = \\frac m k
@@ -303,7 +303,7 @@ class Task11(variant.VariantTask):
     Определите частоту колебаний пружинного маятника, собранного из этой пружины и этого груза.
 ''')
 @variant.solution_space(120)
-@variant.arg(dx=('\\ell = {} мм', [30, 45, 60]))
+@variant.arg(dx='\\ell = 30/45/60 мм')
 @variant.answer_short('''
     mg -k\\Delta x = 0 \\implies \\frac m k = \\frac{\\Delta x} g
     \\implies T = 2\\pi \\sqrt{\\frac m k } = 2\\pi \\sqrt{\\frac{\\Delta x} g } \\approx {T:V:e},
