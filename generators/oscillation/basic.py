@@ -95,7 +95,7 @@ class Nu01(variant.VariantTask):
 @variant.solution_space(40)
 @variant.text('Определите частоту колебаний, если их период составляет {T:Task:e}.')
 @variant.answer_short('\\nu = \\frac 1T = \\frac 1{T:V:s} = {nu:V}')
-@variant.arg(T=('T = {} мс', [2, 4, 5, 10, 20, 40, 50]))
+@variant.arg(T='T = 2/4/5/10/20/40/50 мс')
 class Nu02(variant.VariantTask):
     def GetUpdate(self, T=None):
         nu = T / T / T  # TODO: 1 / T
@@ -110,7 +110,7 @@ class Nu02(variant.VariantTask):
     Чему равен путь, пройденный точкой за {t:V:e}?
 ''')
 @variant.answer_short('\\omega = {n}\\pi \\implies \\nu = \\frac{n}2\,\\units{Гц}, N = \\nu t = {N}, s = 4AN = 4 * {A} * {N} = {s} \\text{(м)}')
-@variant.arg(t=('t = {} мин', [2, 3, 4]))
+@variant.arg(t='t = 2/3/4 мин')
 @variant.arg(n=[3, 4, 5, 6])
 @variant.arg(axis=['x', 'y', 'z'])
 @variant.arg(func=['\\sin', '\\cos'])
@@ -133,8 +133,8 @@ class S_from_func(variant.VariantTask):
     'T &= \\frac 1\\nu = \\frac 1{nu:V:s} = {T:V},',
     'N &= \\nu t = {nu:V|cdot}{t:V} = {N:V}.',
 ])
-@variant.arg(nu=('\\nu = {} кГц', [2, 4, 5, 10, 20, 40, 50]))
-@variant.arg(t=('t = {} мин', [1, 2, 3, 5, 10]))
+@variant.arg(nu='\\nu = 2/4/5/10/20/40/50 кГц')
+@variant.arg(t='t = 1/2/3/5/10 мин')
 @variant.solution_space(40)
 class Nu03(variant.VariantTask):
     def GetUpdate(self, nu=None, t=None):
@@ -151,9 +151,9 @@ class Nu03(variant.VariantTask):
     Определите, какой путь преодолеет эта точка за {t:Task:e}.
 ''')
 @variant.answer_short('s = 4A * N = 4A * \\frac tT = 4A * t\\nu = 4 * {A:V} * {t:V} * {nu:V} = {s:V}')
-@variant.arg(A=('A = {} см', [2, 3, 5, 10, 15]))
-@variant.arg(nu=('\\nu = {} Гц', [2, 5, 6, 10, 20]))
-@variant.arg(t=('t = {} с', [10, 40, 80]))
+@variant.arg(A='A = 2/3/5/10/15 см')
+@variant.arg(nu='\\nu = 2/5/6/10/20 Гц')
+@variant.arg(t='t = 10/40/80 с')
 class Nu04(variant.VariantTask):
     def GetUpdate(self, A=None, nu=None, t=None):
         s = 4 * A * t * nu

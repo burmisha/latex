@@ -34,8 +34,8 @@ class Task01(variant.VariantTask):
     а максимальный ток — {I:V:e}. Определите частоту колебаний.
 ''')
 @variant.solution_space(80)
-@variant.arg(I=('\\eli_{{\\max}} = {} мА', [120, 150, 180, 240, 270]))
-@variant.arg(q=('q_{{\\max}} = {} мкКл', [40, 60, 80]))
+@variant.arg(I='\\eli_{\\max} = 120/150/180/240/270 мА')
+@variant.arg(q='q_{\\max} = 40/60/80 мкКл')
 @variant.answer_short('''
     {I:L} = {q:L}\\omega \\implies \\nu = \\frac{\\omega}{2\\pi} = \\frac{I:L:s}{2\\pi q} \\approx {nu:V}.
 ''')
@@ -59,8 +59,8 @@ class Task02(variant.VariantTask):
 ''')
 @variant.solution_space(80)
 @variant.arg(omega=[12, 15, 18])
-@variant.arg(I=('\\eli = {} A', [0.05, 0.25, 0.30]))
-@variant.arg(L=('L = {} мГн', [50, 60, 70, 80]))
+@variant.arg(I='\\eli = 0.05/0.25/0.30 A')
+@variant.arg(L='L = 50/60/70/80 мГн')
 @variant.arg(func=['sin', 'cos'])
 @variant.answer_align([
     '\\omega &= {omega}\\funits{рад}{c}, \\qquad \\eli_{\\max} = {I:V},',
