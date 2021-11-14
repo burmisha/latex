@@ -222,22 +222,18 @@ def check_unit_value(value):
 
 def test_check_unit_value():
     data = [
-        '2 суток',
-        '2 см',
-        '2 Дж',
-        '-2 Дж',
-        '1.6 м',
+        ('2 суток', True),
+        ('2 см', True),
+        ('2 Дж', True),
+        ('-2 Дж', True),
+        ('1.6 м', True),
+        ('2 * A \\frac{1}{\\sqrt 2} = A\\sqrt{2}', False),
+        ('2 * A / 2 = A', False),
+        ('A', False),
     ]
-    for row in data:
-        isinstance(check_unit_value(row), UnitValue)
-
-    data = [
-        '2 * A \\frac{1}{\\sqrt 2} = A\\sqrt{2}',
-        '2 * A / 2 = A',
-        'A',
-    ]
-    for row in data:
-        assert not isinstance(check_unit_value(row), UnitValue)
+    for row, is_uv in data:
+        result = isinstance(check_unit_value(row), UnitValue)
+        assert result is is_uv
 
 
 test_check_unit_value()
@@ -434,6 +430,7 @@ def answer(template_str):
 def answer_short(template_str):
     def decorator(cls):
         assert not hasattr(cls, 'AnswerTemplate')
+        assert '\t' not in template_str
         cls.AnswerTemplate = f'${template_str}$'
         return cls
     return decorator
@@ -456,6 +453,7 @@ def answer_align(template_lines):
                 line = '&' + line
             lines.append(line)
         template = '\\begin{align*}\n' + ' \\\\\n'.join(lines) + '\n\\end{align*}'
+        assert '\t' not in template
         cls.AnswerTemplate = template.replace('\n\n', '\n')
         return cls
     return decorator
@@ -480,18 +478,13 @@ def arg(**kws):
     def decorator(cls):
         assert len(kws) == 1, f'Expected only one arg for {cls}, got {kws}'
 
-        if not hasattr(cls, '_vars'):
+        if hasattr(cls, '_vars'):
+            assert isinstance(cls._vars, Vars), f'Invalid _vars for {cls}: {cls._vars}'
+        else:
             cls._vars = Vars()
-        assert isinstance(cls._vars, Vars), f'Invalid _vars for {cls}: {cls._vars}'
 
         for key, value in kws.items():
-            if isinstance(value, tuple):
-                assert len(value) == 2
-                assert '{}' in value[0], f'No {{}} in {value}'
-                options = [value[0].format(option) for option in value[1]]
-            else:
-                options = value
-            cls._vars.add(key, options)
+            cls._vars.add(key, value)
 
         return cls
 

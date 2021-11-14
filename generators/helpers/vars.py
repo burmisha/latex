@@ -38,6 +38,11 @@ class Vars:
 
 
     def add(self, key, values):
+        if isinstance(values, tuple):
+            assert len(values) == 2
+            assert '{}' in values[0], f'No {{}} in {values}'
+            values = [values[0].format(option) for option in values[1]]
+
         try:
             assert not self._fixed
             self._original_keys.append(key)
