@@ -499,7 +499,7 @@ class PdfToPdf:
         parts = []
         for index, pages_range_str in enumerate(str(pages).split(',')):
             pages_range = PagesRange(pages_range_str)
-            part_template = os.path.join(self._tmp_dir, 'part_%d.pdf')  # pdfseparate requires %d in output
+            part_template = os.path.join(self._tmp_dir, f'part_{index}_%d.pdf')  # pdfseparate requires %d in output
             parts.extend([part_template % page_index for page_index in pages_range.get_pages_indicies()])
             separate_command = [
                 'pdfseparate',
