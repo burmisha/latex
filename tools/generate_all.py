@@ -59,6 +59,7 @@ def run(args):
             problems.gendenshteyn8.Gendenshteyn8(),
             problems.gendenshteyn10.Gendenshteyn10(),
             problems.gendenshteyn11.Gendenshteyn11(),
+            problems.gendenshteyn11.Gendenshteyn11_2(),
             problems.getaclass.GetAClass(),
             problems.savchenko.Savchenko(),
             problems.cheshev.Cheshev(),
