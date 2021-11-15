@@ -76,6 +76,7 @@ def CreateArgumentsParser():
         ('lucky', 'Find lucky pupils', tools.lucky),
         ('qr', 'Form QR codes', tools.qr),
         ('recognize', 'Recognize books', tools.recognize),
+        ('recombinate', 'Recognize books', tools.recombinate),
         ('reshu-ege', 'Reshu EGE', tools.reshuege),
         ('template', 'Create template files', tools.template),
         ('tripod', 'Generate tripod results', tools.tripod),

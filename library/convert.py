@@ -495,7 +495,7 @@ class PdfToPdf:
     def Extract(self, pages, destination_file):
         log.info(f'Extracting pages {pages} to {destination_file}')
         assert isinstance(pages, (str, int))
-        assert destination_file.endswith('.pdf')
+        assert destination_file.endswith('.pdf'), f'Invalid destination_file name: {destination_file!r}'
         parts = []
         for index, pages_range_str in enumerate(str(pages).split(',')):
             pages_range = PagesRange(pages_range_str)
