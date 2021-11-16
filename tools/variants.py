@@ -197,7 +197,7 @@ def get_all_variants():
         ),
         Work(
             task_id='2020-03-04 11Т',
-            classes=['atomic.em_waves.Gendenshteyn_11_11_18', {'optics.wave': ['Vishnyakova_example_11', 'Belolipetsky_5_196']}]
+            classes=['oscillation.em_waves.Gendenshteyn_11_11_18', {'optics.wave': ['Vishnyakova_example_11', 'Belolipetsky_5_196']}]
         ),
         Work(
             task_id='2020-04-22 9А',
@@ -205,13 +205,13 @@ def get_all_variants():
         ),
         Work(
             task_id='2020-04-28 9Л',
-            classes={'atomic': ['em_waves.Gendenshteyn_11_11_18', 'em_waves.Lambda_from_E', 'em_waves.Lambda_from_E_2', 'em_waves.H_levels']},
+            classes=['oscillation.em_waves.Gendenshteyn_11_11_18', {'atomic.h_levels': ['Lambda_from_E', 'Lambda_from_E_2', 'H_levels']}],
         ),
         Work(
             task_id='2020-04-29 11Т',
             classes={'atomic': [
                 {'sto': ['Equations', 'E_ratio_from_v_ratio', 'E_P_from_v_ratio', 'beta_from_l_reduction']},
-                {'em_waves': ['Lambda_from_E', 'Lambda_from_E_2', 'H_levels']}, 'quantum.Fotons',
+                {'h_levels': ['Lambda_from_E', 'Lambda_from_E_2', 'H_levels']}, 'quantum.Fotons',
                 {'radioactive': ['BK_53_01', 'BK_53_02', 'BK_53_03', 'BK_53_12']}
             ]},
         ),
@@ -449,11 +449,11 @@ def get_all_variants():
         ),
         Work(
             task_id='2021-03-30 9',
-            classes={'atomic.em_waves': ['Gendenshteyn_11_11_18', 'Definitions01', 'Deduce01', 'Sound_to_value', 'Prefix']},
+            classes={'oscillation.em_waves': ['Gendenshteyn_11_11_18', 'Definitions01', 'Deduce01', 'Sound_to_value', 'Prefix']},
         ),
         Work(
             task_id='2021-04-01 9',
-            classes={'atomic.em_waves': ['Lambda_from_E', 'Lambda_from_E_2', 'H_levels']},
+            classes={'atomic.h_levels': ['Lambda_from_E', 'Lambda_from_E_2', 'H_levels']},
         ),
         Work(
             task_id='2021-04-02 10',
@@ -500,7 +500,7 @@ def get_all_variants():
         ),
         Work(
             task_id='2021-04-30 9',
-            classes={'atomic': ['nuclear.KernelCount', 'nuclear.RadioFall', 'radioactive.BK_53_12', 'radioactive.Delta_m_from_m', 'em_waves.H_levels']},
+            classes={'atomic': ['nuclear.KernelCount', 'nuclear.RadioFall', 'radioactive.BK_53_12', 'radioactive.Delta_m_from_m', 'h_levels.H_levels']},
         ),
         Work(
             task_id='2021-04-31 10',
