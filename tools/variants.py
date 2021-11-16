@@ -644,7 +644,7 @@ def get_all_variants():
         Work(
             task_id='2021-11-17 11БА - ЭМВ - 1',
             classes=[
-                {'oscillation.em_waves': ['Chernoutsan_12_50', 'Chernoutsan_12_51', 'Chernoutsan_12_52']},
+                {'oscillation.em_waves': ['Gendenshteyn_11_11_18', 'Sound_to_value_no_quant', 'Chernoutsan_12_50', 'Chernoutsan_12_51', 'Chernoutsan_12_52']},
                 {'oscillation.dc_transform': ['Chernoutsan_12_55', 'Chernoutsan_12_56', 'Chernoutsan_12_57']},
             ],
         ),
