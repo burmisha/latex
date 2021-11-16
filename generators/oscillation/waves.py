@@ -147,6 +147,24 @@ class Waves05(variant.VariantTask):
 
 
 @variant.text('''
+    Найдите скорость распространения звука в материале, в котором колебания
+    с периодом 0,01 с вызывают звуковую волну, имеющую длину 10 м.
+''')
+@variant.solution_space(100)
+class Chernoutsan_12_36(variant.VariantTask):
+    pass
+
+
+@variant.text('''
+    Скорость распространения звука в воздухе 340 м/с, а в некоторой жидкости 1360 м/с.
+    Во сколько раз увеличится длина звуковой волны при переходе из воздуха в жидкость?'''
+)
+@variant.solution_space(100)
+class Chernoutsan_12_37(variant.VariantTask):
+    pass
+
+
+@variant.text('''
     Сравните длины звуковой волны частотой {nu_1:Task:e} и радиоволны частотой {nu_2:Task:e}.
     Какая больше, во сколько раз? Скорость звука примите равной {v:Task:e}.
 ''')
@@ -154,12 +172,12 @@ class Waves05(variant.VariantTask):
     {l1:L} = {v:L} T_1 = {v:L} * \\frac 1{nu_1:L:s} = \\frac {v:L}{nu_1:L:s} = \\frac{v:V:s}{nu_1:V:s} = {l1:V},
     \\quad
     {l2:L} = {c:L} T_2 = {c:L} * \\frac 1{nu_2:L:s} = \\frac {c:L}{nu_2:L:s} = \\frac{c:V:s}{nu_2:V:s} = {l2:V},
-    \\quad 
+    \\quad
     n = \\frac{l2:L:s}{l1:L:s} \\approx {n:V}.
 ''')
 @variant.arg(nu_1='\\nu_1 = 150/200/300/500 Гц')
 @variant.arg(nu_2='\\nu_2 = 200/500/800 МГц')
-class Ch1238(variant.VariantTask):
+class Chernoutsan_12_38(variant.VariantTask):
     def GetUpdate(self, nu_1=None, nu_2=None):
         return dict(
             v='v = 320 м / с',
@@ -168,6 +186,16 @@ class Ch1238(variant.VariantTask):
             l2='\\lambda_2 = %.2f м' % (300 / nu_2.Value),
             n='n = %.2f' % ((300 / nu_2.Value) / (320 / nu_1.Value)),
         )
+
+
+@variant.text('''
+    Волна с частотой 10 Гц распространяется в некоторой среде, причем разность фаз в двух точках,
+    находящихся на расстоянии | м одна от другой на одной прямой с источником колебаний, равна т радиан. Н
+    айдите скорость распространения волны в этой среде.
+''')
+@variant.solution_space(100)
+class Chernoutsan_12_39(variant.VariantTask):
+    pass
 
 
 @variant.text('''
@@ -187,8 +215,29 @@ class Ch1238(variant.VariantTask):
     ('\\frac{3\\pi}{4}', 3. / 8),
 ])
 @variant.arg(l='l = 20/25/40/50/75 см')
-class Ch1240(variant.VariantTask):
+class Chernoutsan_12_40(variant.VariantTask):
     def GetUpdate(self, delta=None, frac=None, l=None):
         return dict(
             lmbd='\\lambda = %.2f см' % (float(l.Value) / frac),
         )
+
+
+@variant.text('''
+    Имеются два когерентных источника звука. В точке, отстоящей от первого источника на 2,3 м,
+    а от второго — на 2,48 м, звук не слышен.
+    Минимальная частота, при которой это возможно, равна 1 кГц.
+    Найдите скорость распространения звука.
+''')
+@variant.solution_space(100)
+class Chernoutsan_12_41(variant.VariantTask):
+    pass
+
+
+@variant.text('''
+    Два когерентных источника звука частотой 1 кГц излучают волны, распространяющиеся со скоростью 340 м/с.
+    В некоторой точке, расположенной на расстоянии 2,6 м от одного источника, звук не слышен.
+    Чему равно минимальное расстояние (в см) от этой точки до второго источника, если известно, что оно больше 2,6 м?'''
+)
+@variant.solution_space(100)
+class Chernoutsan_12_42(variant.VariantTask):
+    pass

@@ -173,7 +173,7 @@ def get_all_variants():
         ),
         Work(
             task_id='2019-11-13 11Т',
-            classes={'oscillation.waves': ['Waves01', 'Ch1238', 'Ch1240', 'Waves02']},
+            classes={'oscillation.waves': ['Waves01', 'Chernoutsan_12_38', 'Chernoutsan_12_40', 'Waves02']},
         ),
         Work(
             task_id='2019-11-25 9А',
@@ -640,6 +640,10 @@ def get_all_variants():
         Work(
             task_id='2021-11-11 11Б - ЭМК - 1',
             classes={'oscillation.electromagnet': ['Task01', 'Task08', 'Task02', 'Task03']},
+        ),
+        Work(
+            task_id='2021-11-17 11БА - ЭМВ - 1',
+            classes={'oscillation.em_waves': ['Chernoutsan_12_50', 'Chernoutsan_12_51', 'Chernoutsan_12_52', ]},
         ),
     ]
     return works
