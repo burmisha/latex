@@ -5,24 +5,105 @@
 
 \tasknumber{1}%
 \task{%
-    На какую частоту волны настроен радиоприемник, если его колебательный контур
-    обладает индуктивностью $200\,\text{мкГн}$ и емкостью $750\,\text{пФ}$?
+    Длина волны света в~вакууме $\lambda = 500\,\text{нм}$.
+    Какова частота этой световой волны?
+    Какова длина этой волны в среде с показателем преломления $n = 1{,}4$?
+    Может ли человек увидеть такую волну света, и если да, то какой именно цвет соответствует этим волнам в вакууме и в этой среде?
 }
-\solutionspace{100pt}
+\answer{%
+    \begin{align*}
+    \nu &= \frac 1T = \frac 1{\lambda/c} = \frac c\lambda = \frac{3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}}{500\,\text{нм}} \approx 600 \cdot 10^{12}\,\text{Гц}, \\
+    \nu' &= \nu &\cbr{\text{или } T' = T} \implies \lambda' = v'T' = \frac vn T = \frac{ vt }n = \frac \lambda n = \frac{500\,\text{нм}}{1{,}4} \approx 0{,}36 \cdot 10^{-6}\,\text{м}.
+    \\
+    &\text{380 нм---фиол---440---син---485---гол---500---зел---565---жёл---590---оранж---625---крас---780 нм}, \\
+    &\text{увидит}
+    \end{align*}
+}
+\solutionspace{60pt}
 
 \tasknumber{2}%
 \task{%
-    Колебательный контур настроен на частоту $4{,}5 \cdot 10^{7}\,\text{Гц}$.
-    Во сколько раз и как надо изменить емкость конденсатора для перестройки контура на длину волны $40\,\text{м}$?
+    Укажите букву, соответствующую физическую величину (из текущего раздела), её единицы измерения в СИ и выразите её из какого-либо физического закона:
+    \begin{enumerate}
+        \item «л'амбда»,
+        \item «вэ»,
+        \item «н'у»,
+        \item «эн».
+    \end{enumerate}
 }
-\solutionspace{100pt}
 
 \tasknumber{3}%
+\task{%
+    На какую частоту волны настроен радиоприемник, если его колебательный контур
+    обладает индуктивностью $200\,\text{мкГн}$ и ёмкостью $750\,\text{пФ}$?
+}
+\answer{%
+    \begin{align*}
+    T = 2\pi\sqrt{LC} \implies \nu &= \frac 1T = \frac 1{ 2\pi\sqrt{LC} } = \frac 1{ 2\pi\sqrt{200\,\text{мкГн} \cdot 750\,\text{пФ}}} \approx 0{,}411\,\text{МГц}, \\
+    \lambda &= cT = c \cdot 2\pi\sqrt{LC} = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} \cdot 2\pi\sqrt{200\,\text{мкГн} \cdot 750\,\text{пФ}} \approx 730\,\text{м}.
+    \end{align*}
+}
+\solutionspace{80pt}
+
+\tasknumber{4}%
+\task{%
+    Колебательный контур настроен на частоту $1{,}8 \cdot 10^{7}\,\text{Гц}$.
+    Во сколько раз и как надо изменить ёмкость конденсатора для перенастройки контура на длину волны $40\,\text{м}$?
+}
+\answer{%
+    \begin{align*}
+    T_1 &= 2\pi\sqrt{L_1C_1} \implies \nu_1 = \frac 1{T_1} = \frac 1{ 2\pi\sqrt{L_1C_1} } \implies L_1C_1 = \frac 1{\sqr{2\pi \nu_1}}, \\
+    L_2C_2 &= \frac 1{\sqr{2\pi \nu_2}} = \frac 1{\sqr{2\pi \frac 1{T_2}}} = \frac 1{\sqr{2\pi \frac c{\lambda_2}}}, \\
+    \frac{L_2C_2}{L_1C_1} &= \frac {\sqr{2\pi \nu}}{\sqr{2\pi \frac c{\lambda_2}}} =  \sqr{ \frac {\nu}{\frac c{\lambda_2}} } = \sqr{ \frac {\nu\lambda_2}{c} } = \sqr{ \frac { 1{,}8 \cdot 10^{7}\,\text{Гц} \cdot 40\,\text{м} }{3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}} } \approx 5{,}8.
+    \end{align*}
+}
+\solutionspace{80pt}
+
+\tasknumber{5}%
 \task{%
     Колебательный контур, состоящий из катушки индуктивности
     и воздушного конденсатора, настроен на длину волны $20\,\text{м}$.
     При этом расстояние между пластинами конденсатора $4{,}5\,\text{мм}$.
     Каким должно быть это расстояние, чтобы контур был настроен на длину волны $80\,\text{м}$?
+}
+\answer{%
+    \begin{align*}
+    \lambda &= cT = c \cdot 2\pi\sqrt{LC}, \quad C = \frac{\eps\eps_0 S}d \implies \lambda^2 = 4 \pi^2 c^2 L \frac{\eps\eps_0 S}d, \\
+    \frac{\lambda_2^2}{\lambda_1^2} &= \frac{d_1}{d_2} \implies d_2 =  d_1 \cdot \sqr{\frac{\lambda_1}{\lambda_2}} =  4{,}5\,\text{мм} \cdot \sqr{\frac{20\,\text{м}}{80\,\text{м}}} \approx 0{,}281\,\text{мм}
+    \end{align*}
+}
+\solutionspace{80pt}
+
+\tasknumber{6}%
+\task{%
+    Сила тока в первичной обмотке трансформатора $2\,\text{А}$, напряжение на её концах $120\,\text{В}$.
+    Напряжение на концах вторичной обмотки $60\,\text{В}$.
+    Определите силу тока во вторичной обмотке.
+    Потерями в трансформаторе пренебречь.
+}
+\answer{%
+    $U_1\eli_1 = U_2\eli_2 \implies \eli_2 = \eli_1 \cdot \frac{U_1}{U_2} = 2\,\text{А} \cdot \frac{120\,\text{В}}{60\,\text{В}} \approx 4\,\text{А}$
+}
+\solutionspace{60pt}
+
+\tasknumber{7}%
+\task{%
+    Под каким напряжением находится первичная обмотка трансформатора, имеющая $1500$ витков,
+    если во вторичной обмотке $1000$ витков и напряжение на ней $150\,\text{В}$?
+}
+\answer{%
+    $\frac{U_2}{U_1}  = \frac{N_2}{N_1} \implies U_1 = U_2 \cdot \frac{N_1}{N_2} = 150\,\text{В} \cdot \frac{1500}{1000} \approx 225\,\text{В}$
+}
+\solutionspace{40pt}
+
+\tasknumber{8}%
+\task{%
+    Сила тока в первичной обмотке трансформатора $636\,\text{мА}$, напряжение на её концах $300\,\text{В}$.
+    Сила тока во вторичной обмотке $3{,}2\,\text{А}$, напряжение на её концах $57\,\text{В}$.
+    Определите КПД трансформатора.
+}
+\answer{%
+    $\eta = \frac{ U_2\eli_2 }{ U_1\eli_1 } = \frac{ 57\,\text{В} \cdot 3{,}2\,\text{А} }{ 300\,\text{В} \cdot 636\,\text{мА} } \approx 0{,}950, \quad 1-\eta \approx 0{,}050$
 }
 
 \variantsplitter
@@ -31,24 +112,105 @@
 
 \tasknumber{1}%
 \task{%
-    На какую длину волны настроен радиоприемник, если его колебательный контур
-    обладает индуктивностью $600\,\text{мкГн}$ и емкостью $800\,\text{пФ}$?
+    Длина волны света в~вакууме $\lambda = 700\,\text{нм}$.
+    Какова частота этой световой волны?
+    Какова длина этой волны в среде с показателем преломления $n = 1{,}4$?
+    Может ли человек увидеть такую волну света, и если да, то какой именно цвет соответствует этим волнам в вакууме и в этой среде?
 }
-\solutionspace{100pt}
+\answer{%
+    \begin{align*}
+    \nu &= \frac 1T = \frac 1{\lambda/c} = \frac c\lambda = \frac{3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}}{700\,\text{нм}} \approx 429 \cdot 10^{12}\,\text{Гц}, \\
+    \nu' &= \nu &\cbr{\text{или } T' = T} \implies \lambda' = v'T' = \frac vn T = \frac{ vt }n = \frac \lambda n = \frac{700\,\text{нм}}{1{,}4} \approx 0{,}50 \cdot 10^{-6}\,\text{м}.
+    \\
+    &\text{380 нм---фиол---440---син---485---гол---500---зел---565---жёл---590---оранж---625---крас---780 нм}, \\
+    &\text{увидит}
+    \end{align*}
+}
+\solutionspace{60pt}
 
 \tasknumber{2}%
 \task{%
-    Колебательный контур настроен на частоту $2{,}5 \cdot 10^{7}\,\text{Гц}$.
-    Во сколько раз и как надо изменить емкость конденсатора для перестройки контура на длину волны $20\,\text{м}$?
+    Укажите букву, соответствующую физическую величину (из текущего раздела), её единицы измерения в СИ и выразите её из какого-либо физического закона:
+    \begin{enumerate}
+        \item «эл'»,
+        \item «цэ»,
+        \item «н'у»,
+        \item «тэ».
+    \end{enumerate}
 }
-\solutionspace{100pt}
 
 \tasknumber{3}%
+\task{%
+    На какую длину волны настроен радиоприемник, если его колебательный контур
+    обладает индуктивностью $600\,\text{мкГн}$ и ёмкостью $800\,\text{пФ}$?
+}
+\answer{%
+    \begin{align*}
+    T = 2\pi\sqrt{LC} \implies \nu &= \frac 1T = \frac 1{ 2\pi\sqrt{LC} } = \frac 1{ 2\pi\sqrt{600\,\text{мкГн} \cdot 800\,\text{пФ}}} \approx 0{,}230\,\text{МГц}, \\
+    \lambda &= cT = c \cdot 2\pi\sqrt{LC} = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} \cdot 2\pi\sqrt{600\,\text{мкГн} \cdot 800\,\text{пФ}} \approx 1306\,\text{м}.
+    \end{align*}
+}
+\solutionspace{80pt}
+
+\tasknumber{4}%
+\task{%
+    Колебательный контур настроен на частоту $1{,}8 \cdot 10^{7}\,\text{Гц}$.
+    Во сколько раз и как надо изменить ёмкость конденсатора для перенастройки контура на длину волны $30\,\text{м}$?
+}
+\answer{%
+    \begin{align*}
+    T_1 &= 2\pi\sqrt{L_1C_1} \implies \nu_1 = \frac 1{T_1} = \frac 1{ 2\pi\sqrt{L_1C_1} } \implies L_1C_1 = \frac 1{\sqr{2\pi \nu_1}}, \\
+    L_2C_2 &= \frac 1{\sqr{2\pi \nu_2}} = \frac 1{\sqr{2\pi \frac 1{T_2}}} = \frac 1{\sqr{2\pi \frac c{\lambda_2}}}, \\
+    \frac{L_2C_2}{L_1C_1} &= \frac {\sqr{2\pi \nu}}{\sqr{2\pi \frac c{\lambda_2}}} =  \sqr{ \frac {\nu}{\frac c{\lambda_2}} } = \sqr{ \frac {\nu\lambda_2}{c} } = \sqr{ \frac { 1{,}8 \cdot 10^{7}\,\text{Гц} \cdot 30\,\text{м} }{3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}} } \approx 3{,}2.
+    \end{align*}
+}
+\solutionspace{80pt}
+
+\tasknumber{5}%
 \task{%
     Колебательный контур, состоящий из катушки индуктивности
     и воздушного конденсатора, настроен на длину волны $120\,\text{м}$.
     При этом расстояние между пластинами конденсатора $3\,\text{мм}$.
     Каким должно быть это расстояние, чтобы контур был настроен на длину волны $60\,\text{м}$?
+}
+\answer{%
+    \begin{align*}
+    \lambda &= cT = c \cdot 2\pi\sqrt{LC}, \quad C = \frac{\eps\eps_0 S}d \implies \lambda^2 = 4 \pi^2 c^2 L \frac{\eps\eps_0 S}d, \\
+    \frac{\lambda_2^2}{\lambda_1^2} &= \frac{d_1}{d_2} \implies d_2 =  d_1 \cdot \sqr{\frac{\lambda_1}{\lambda_2}} =  3\,\text{мм} \cdot \sqr{\frac{120\,\text{м}}{60\,\text{м}}} \approx 12\,\text{мм}
+    \end{align*}
+}
+\solutionspace{80pt}
+
+\tasknumber{6}%
+\task{%
+    Сила тока в первичной обмотке трансформатора $2\,\text{А}$, напряжение на её концах $220\,\text{В}$.
+    Напряжение на концах вторичной обмотки $40\,\text{В}$.
+    Определите силу тока во вторичной обмотке.
+    Потерями в трансформаторе пренебречь.
+}
+\answer{%
+    $U_1\eli_1 = U_2\eli_2 \implies \eli_2 = \eli_1 \cdot \frac{U_1}{U_2} = 2\,\text{А} \cdot \frac{220\,\text{В}}{40\,\text{В}} \approx 11\,\text{А}$
+}
+\solutionspace{60pt}
+
+\tasknumber{7}%
+\task{%
+    Под каким напряжением находится первичная обмотка трансформатора, имеющая $1200$ витков,
+    если во вторичной обмотке $1000$ витков и напряжение на ней $70\,\text{В}$?
+}
+\answer{%
+    $\frac{U_2}{U_1}  = \frac{N_2}{N_1} \implies U_1 = U_2 \cdot \frac{N_1}{N_2} = 70\,\text{В} \cdot \frac{1200}{1000} \approx 84\,\text{В}$
+}
+\solutionspace{40pt}
+
+\tasknumber{8}%
+\task{%
+    Сила тока в первичной обмотке трансформатора $412\,\text{мА}$, напряжение на её концах $250\,\text{В}$.
+    Сила тока во вторичной обмотке $2{,}4\,\text{А}$, напряжение на её концах $42\,\text{В}$.
+    Определите долю потерей трансформатора.
+}
+\answer{%
+    $\eta = \frac{ U_2\eli_2 }{ U_1\eli_1 } = \frac{ 42\,\text{В} \cdot 2{,}4\,\text{А} }{ 250\,\text{В} \cdot 412\,\text{мА} } \approx 0{,}970, \quad 1-\eta \approx 0{,}030$
 }
 
 \variantsplitter
@@ -57,24 +219,105 @@
 
 \tasknumber{1}%
 \task{%
-    На какую длину волны настроен радиоприемник, если его колебательный контур
-    обладает индуктивностью $200\,\text{мкГн}$ и емкостью $700\,\text{пФ}$?
+    Длина волны света в~вакууме $\lambda = 400\,\text{нм}$.
+    Какова частота этой световой волны?
+    Какова длина этой волны в среде с показателем преломления $n = 1{,}6$?
+    Может ли человек увидеть такую волну света, и если да, то какой именно цвет соответствует этим волнам в вакууме и в этой среде?
 }
-\solutionspace{100pt}
+\answer{%
+    \begin{align*}
+    \nu &= \frac 1T = \frac 1{\lambda/c} = \frac c\lambda = \frac{3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}}{400\,\text{нм}} \approx 750 \cdot 10^{12}\,\text{Гц}, \\
+    \nu' &= \nu &\cbr{\text{или } T' = T} \implies \lambda' = v'T' = \frac vn T = \frac{ vt }n = \frac \lambda n = \frac{400\,\text{нм}}{1{,}6} \approx 0{,}25 \cdot 10^{-6}\,\text{м}.
+    \\
+    &\text{380 нм---фиол---440---син---485---гол---500---зел---565---жёл---590---оранж---625---крас---780 нм}, \\
+    &\text{увидит}
+    \end{align*}
+}
+\solutionspace{60pt}
 
 \tasknumber{2}%
 \task{%
-    Колебательный контур настроен на частоту $4{,}5 \cdot 10^{7}\,\text{Гц}$.
-    Во сколько раз и как надо изменить емкость конденсатора для перестройки контура на длину волны $30\,\text{м}$?
+    Укажите букву, соответствующую физическую величину (из текущего раздела), её единицы измерения в СИ и выразите её из какого-либо физического закона:
+    \begin{enumerate}
+        \item «л'амбда»,
+        \item «вэ»,
+        \item «н'у»,
+        \item «эн».
+    \end{enumerate}
 }
-\solutionspace{100pt}
 
 \tasknumber{3}%
+\task{%
+    На какую длину волны настроен радиоприемник, если его колебательный контур
+    обладает индуктивностью $200\,\text{мкГн}$ и ёмкостью $700\,\text{пФ}$?
+}
+\answer{%
+    \begin{align*}
+    T = 2\pi\sqrt{LC} \implies \nu &= \frac 1T = \frac 1{ 2\pi\sqrt{LC} } = \frac 1{ 2\pi\sqrt{200\,\text{мкГн} \cdot 700\,\text{пФ}}} \approx 0{,}425\,\text{МГц}, \\
+    \lambda &= cT = c \cdot 2\pi\sqrt{LC} = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} \cdot 2\pi\sqrt{200\,\text{мкГн} \cdot 700\,\text{пФ}} \approx 705\,\text{м}.
+    \end{align*}
+}
+\solutionspace{80pt}
+
+\tasknumber{4}%
+\task{%
+    Колебательный контур настроен на частоту $0{,}8 \cdot 10^{7}\,\text{Гц}$.
+    Во сколько раз и как надо изменить ёмкость конденсатора для перенастройки контура на длину волны $25\,\text{м}$?
+}
+\answer{%
+    \begin{align*}
+    T_1 &= 2\pi\sqrt{L_1C_1} \implies \nu_1 = \frac 1{T_1} = \frac 1{ 2\pi\sqrt{L_1C_1} } \implies L_1C_1 = \frac 1{\sqr{2\pi \nu_1}}, \\
+    L_2C_2 &= \frac 1{\sqr{2\pi \nu_2}} = \frac 1{\sqr{2\pi \frac 1{T_2}}} = \frac 1{\sqr{2\pi \frac c{\lambda_2}}}, \\
+    \frac{L_2C_2}{L_1C_1} &= \frac {\sqr{2\pi \nu}}{\sqr{2\pi \frac c{\lambda_2}}} =  \sqr{ \frac {\nu}{\frac c{\lambda_2}} } = \sqr{ \frac {\nu\lambda_2}{c} } = \sqr{ \frac { 0{,}8 \cdot 10^{7}\,\text{Гц} \cdot 25\,\text{м} }{3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}} } \approx 0{,}44.
+    \end{align*}
+}
+\solutionspace{80pt}
+
+\tasknumber{5}%
 \task{%
     Колебательный контур, состоящий из катушки индуктивности
     и воздушного конденсатора, настроен на длину волны $30\,\text{м}$.
     При этом расстояние между пластинами конденсатора $3\,\text{мм}$.
     Каким должно быть это расстояние, чтобы контур был настроен на длину волны $100\,\text{м}$?
+}
+\answer{%
+    \begin{align*}
+    \lambda &= cT = c \cdot 2\pi\sqrt{LC}, \quad C = \frac{\eps\eps_0 S}d \implies \lambda^2 = 4 \pi^2 c^2 L \frac{\eps\eps_0 S}d, \\
+    \frac{\lambda_2^2}{\lambda_1^2} &= \frac{d_1}{d_2} \implies d_2 =  d_1 \cdot \sqr{\frac{\lambda_1}{\lambda_2}} =  3\,\text{мм} \cdot \sqr{\frac{30\,\text{м}}{100\,\text{м}}} \approx 0{,}270\,\text{мм}
+    \end{align*}
+}
+\solutionspace{80pt}
+
+\tasknumber{6}%
+\task{%
+    Сила тока в первичной обмотке трансформатора $4\,\text{А}$, напряжение на её концах $320\,\text{В}$.
+    Напряжение на концах вторичной обмотки $40\,\text{В}$.
+    Определите силу тока во вторичной обмотке.
+    Потерями в трансформаторе пренебречь.
+}
+\answer{%
+    $U_1\eli_1 = U_2\eli_2 \implies \eli_2 = \eli_1 \cdot \frac{U_1}{U_2} = 4\,\text{А} \cdot \frac{320\,\text{В}}{40\,\text{В}} \approx 32\,\text{А}$
+}
+\solutionspace{60pt}
+
+\tasknumber{7}%
+\task{%
+    Под каким напряжением находится первичная обмотка трансформатора, имеющая $500$ витков,
+    если во вторичной обмотке $200$ витков и напряжение на ней $130\,\text{В}$?
+}
+\answer{%
+    $\frac{U_2}{U_1}  = \frac{N_2}{N_1} \implies U_1 = U_2 \cdot \frac{N_1}{N_2} = 130\,\text{В} \cdot \frac{500}{200} \approx 325\,\text{В}$
+}
+\solutionspace{40pt}
+
+\tasknumber{8}%
+\task{%
+    Сила тока в первичной обмотке трансформатора $636\,\text{мА}$, напряжение на её концах $200\,\text{В}$.
+    Сила тока во вторичной обмотке $2{,}4\,\text{А}$, напряжение на её концах $51\,\text{В}$.
+    Определите долю потерей трансформатора.
+}
+\answer{%
+    $\eta = \frac{ U_2\eli_2 }{ U_1\eli_1 } = \frac{ 51\,\text{В} \cdot 2{,}4\,\text{А} }{ 200\,\text{В} \cdot 636\,\text{мА} } \approx 0{,}970, \quad 1-\eta \approx 0{,}030$
 }
 
 \variantsplitter
@@ -83,24 +326,105 @@
 
 \tasknumber{1}%
 \task{%
-    На какую частоту волны настроен радиоприемник, если его колебательный контур
-    обладает индуктивностью $300\,\text{мкГн}$ и емкостью $800\,\text{пФ}$?
+    Длина волны света в~вакууме $\lambda = 500\,\text{нм}$.
+    Какова частота этой световой волны?
+    Какова длина этой волны в среде с показателем преломления $n = 1{,}7$?
+    Может ли человек увидеть такую волну света, и если да, то какой именно цвет соответствует этим волнам в вакууме и в этой среде?
 }
-\solutionspace{100pt}
+\answer{%
+    \begin{align*}
+    \nu &= \frac 1T = \frac 1{\lambda/c} = \frac c\lambda = \frac{3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}}{500\,\text{нм}} \approx 600 \cdot 10^{12}\,\text{Гц}, \\
+    \nu' &= \nu &\cbr{\text{или } T' = T} \implies \lambda' = v'T' = \frac vn T = \frac{ vt }n = \frac \lambda n = \frac{500\,\text{нм}}{1{,}7} \approx 0{,}29 \cdot 10^{-6}\,\text{м}.
+    \\
+    &\text{380 нм---фиол---440---син---485---гол---500---зел---565---жёл---590---оранж---625---крас---780 нм}, \\
+    &\text{увидит}
+    \end{align*}
+}
+\solutionspace{60pt}
 
 \tasknumber{2}%
 \task{%
-    Колебательный контур настроен на частоту $1{,}5 \cdot 10^{7}\,\text{Гц}$.
-    Во сколько раз и как надо изменить емкость конденсатора для перестройки контура на длину волны $25\,\text{м}$?
+    Укажите букву, соответствующую физическую величину (из текущего раздела), её единицы измерения в СИ и выразите её из какого-либо физического закона:
+    \begin{enumerate}
+        \item «эл'»,
+        \item «цэ»,
+        \item «н'у»,
+        \item «эн».
+    \end{enumerate}
 }
-\solutionspace{100pt}
 
 \tasknumber{3}%
+\task{%
+    На какую частоту волны настроен радиоприемник, если его колебательный контур
+    обладает индуктивностью $300\,\text{мкГн}$ и ёмкостью $800\,\text{пФ}$?
+}
+\answer{%
+    \begin{align*}
+    T = 2\pi\sqrt{LC} \implies \nu &= \frac 1T = \frac 1{ 2\pi\sqrt{LC} } = \frac 1{ 2\pi\sqrt{300\,\text{мкГн} \cdot 800\,\text{пФ}}} \approx 0{,}325\,\text{МГц}, \\
+    \lambda &= cT = c \cdot 2\pi\sqrt{LC} = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} \cdot 2\pi\sqrt{300\,\text{мкГн} \cdot 800\,\text{пФ}} \approx 923\,\text{м}.
+    \end{align*}
+}
+\solutionspace{80pt}
+
+\tasknumber{4}%
+\task{%
+    Колебательный контур настроен на частоту $2{,}5 \cdot 10^{7}\,\text{Гц}$.
+    Во сколько раз и как надо изменить индуктивность катушки для перенастройки контура на длину волны $50\,\text{м}$?
+}
+\answer{%
+    \begin{align*}
+    T_1 &= 2\pi\sqrt{L_1C_1} \implies \nu_1 = \frac 1{T_1} = \frac 1{ 2\pi\sqrt{L_1C_1} } \implies L_1C_1 = \frac 1{\sqr{2\pi \nu_1}}, \\
+    L_2C_2 &= \frac 1{\sqr{2\pi \nu_2}} = \frac 1{\sqr{2\pi \frac 1{T_2}}} = \frac 1{\sqr{2\pi \frac c{\lambda_2}}}, \\
+    \frac{L_2C_2}{L_1C_1} &= \frac {\sqr{2\pi \nu}}{\sqr{2\pi \frac c{\lambda_2}}} =  \sqr{ \frac {\nu}{\frac c{\lambda_2}} } = \sqr{ \frac {\nu\lambda_2}{c} } = \sqr{ \frac { 2{,}5 \cdot 10^{7}\,\text{Гц} \cdot 50\,\text{м} }{3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}} } \approx 17{,}36.
+    \end{align*}
+}
+\solutionspace{80pt}
+
+\tasknumber{5}%
 \task{%
     Колебательный контур, состоящий из катушки индуктивности
     и воздушного конденсатора, настроен на длину волны $120\,\text{м}$.
     При этом расстояние между пластинами конденсатора $2{,}5\,\text{мм}$.
     Каким должно быть это расстояние, чтобы контур был настроен на длину волны $100\,\text{м}$?
+}
+\answer{%
+    \begin{align*}
+    \lambda &= cT = c \cdot 2\pi\sqrt{LC}, \quad C = \frac{\eps\eps_0 S}d \implies \lambda^2 = 4 \pi^2 c^2 L \frac{\eps\eps_0 S}d, \\
+    \frac{\lambda_2^2}{\lambda_1^2} &= \frac{d_1}{d_2} \implies d_2 =  d_1 \cdot \sqr{\frac{\lambda_1}{\lambda_2}} =  2{,}5\,\text{мм} \cdot \sqr{\frac{120\,\text{м}}{100\,\text{м}}} \approx 3{,}60\,\text{мм}
+    \end{align*}
+}
+\solutionspace{80pt}
+
+\tasknumber{6}%
+\task{%
+    Сила тока в первичной обмотке трансформатора $4\,\text{А}$, напряжение на её концах $120\,\text{В}$.
+    Напряжение на концах вторичной обмотки $40\,\text{В}$.
+    Определите силу тока во вторичной обмотке.
+    Потерями в трансформаторе пренебречь.
+}
+\answer{%
+    $U_1\eli_1 = U_2\eli_2 \implies \eli_2 = \eli_1 \cdot \frac{U_1}{U_2} = 4\,\text{А} \cdot \frac{120\,\text{В}}{40\,\text{В}} \approx 12\,\text{А}$
+}
+\solutionspace{60pt}
+
+\tasknumber{7}%
+\task{%
+    Под каким напряжением находится первичная обмотка трансформатора, имеющая $500$ витков,
+    если во вторичной обмотке $1000$ витков и напряжение на ней $130\,\text{В}$?
+}
+\answer{%
+    $\frac{U_2}{U_1}  = \frac{N_2}{N_1} \implies U_1 = U_2 \cdot \frac{N_1}{N_2} = 130\,\text{В} \cdot \frac{500}{1000} \approx 65\,\text{В}$
+}
+\solutionspace{40pt}
+
+\tasknumber{8}%
+\task{%
+    Сила тока в первичной обмотке трансформатора $859\,\text{мА}$, напряжение на её концах $200\,\text{В}$.
+    Сила тока во вторичной обмотке $4{,}3\,\text{А}$, напряжение на её концах $38\,\text{В}$.
+    Определите долю потерей трансформатора.
+}
+\answer{%
+    $\eta = \frac{ U_2\eli_2 }{ U_1\eli_1 } = \frac{ 38\,\text{В} \cdot 4{,}3\,\text{А} }{ 200\,\text{В} \cdot 859\,\text{мА} } \approx 0{,}960, \quad 1-\eta \approx 0{,}040$
 }
 
 \variantsplitter
@@ -109,24 +433,105 @@
 
 \tasknumber{1}%
 \task{%
-    На какую частоту волны настроен радиоприемник, если его колебательный контур
-    обладает индуктивностью $600\,\text{мкГн}$ и емкостью $700\,\text{пФ}$?
+    Длина волны света в~вакууме $\lambda = 500\,\text{нм}$.
+    Какова частота этой световой волны?
+    Какова длина этой волны в среде с показателем преломления $n = 1{,}5$?
+    Может ли человек увидеть такую волну света, и если да, то какой именно цвет соответствует этим волнам в вакууме и в этой среде?
 }
-\solutionspace{100pt}
+\answer{%
+    \begin{align*}
+    \nu &= \frac 1T = \frac 1{\lambda/c} = \frac c\lambda = \frac{3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}}{500\,\text{нм}} \approx 600 \cdot 10^{12}\,\text{Гц}, \\
+    \nu' &= \nu &\cbr{\text{или } T' = T} \implies \lambda' = v'T' = \frac vn T = \frac{ vt }n = \frac \lambda n = \frac{500\,\text{нм}}{1{,}5} \approx 0{,}33 \cdot 10^{-6}\,\text{м}.
+    \\
+    &\text{380 нм---фиол---440---син---485---гол---500---зел---565---жёл---590---оранж---625---крас---780 нм}, \\
+    &\text{увидит}
+    \end{align*}
+}
+\solutionspace{60pt}
 
 \tasknumber{2}%
 \task{%
-    Колебательный контур настроен на частоту $3{,}2 \cdot 10^{7}\,\text{Гц}$.
-    Во сколько раз и как надо изменить емкость конденсатора для перестройки контура на длину волны $25\,\text{м}$?
+    Укажите букву, соответствующую физическую величину (из текущего раздела), её единицы измерения в СИ и выразите её из какого-либо физического закона:
+    \begin{enumerate}
+        \item «эл'»,
+        \item «вэ»,
+        \item «бал'шайа цэ»,
+        \item «тэ».
+    \end{enumerate}
 }
-\solutionspace{100pt}
 
 \tasknumber{3}%
+\task{%
+    На какую частоту волны настроен радиоприемник, если его колебательный контур
+    обладает индуктивностью $600\,\text{мкГн}$ и ёмкостью $700\,\text{пФ}$?
+}
+\answer{%
+    \begin{align*}
+    T = 2\pi\sqrt{LC} \implies \nu &= \frac 1T = \frac 1{ 2\pi\sqrt{LC} } = \frac 1{ 2\pi\sqrt{600\,\text{мкГн} \cdot 700\,\text{пФ}}} \approx 0{,}246\,\text{МГц}, \\
+    \lambda &= cT = c \cdot 2\pi\sqrt{LC} = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} \cdot 2\pi\sqrt{600\,\text{мкГн} \cdot 700\,\text{пФ}} \approx 1222\,\text{м}.
+    \end{align*}
+}
+\solutionspace{80pt}
+
+\tasknumber{4}%
+\task{%
+    Колебательный контур настроен на частоту $2{,}5 \cdot 10^{7}\,\text{Гц}$.
+    Во сколько раз и как надо изменить индуктивность катушки для перенастройки контура на длину волны $30\,\text{м}$?
+}
+\answer{%
+    \begin{align*}
+    T_1 &= 2\pi\sqrt{L_1C_1} \implies \nu_1 = \frac 1{T_1} = \frac 1{ 2\pi\sqrt{L_1C_1} } \implies L_1C_1 = \frac 1{\sqr{2\pi \nu_1}}, \\
+    L_2C_2 &= \frac 1{\sqr{2\pi \nu_2}} = \frac 1{\sqr{2\pi \frac 1{T_2}}} = \frac 1{\sqr{2\pi \frac c{\lambda_2}}}, \\
+    \frac{L_2C_2}{L_1C_1} &= \frac {\sqr{2\pi \nu}}{\sqr{2\pi \frac c{\lambda_2}}} =  \sqr{ \frac {\nu}{\frac c{\lambda_2}} } = \sqr{ \frac {\nu\lambda_2}{c} } = \sqr{ \frac { 2{,}5 \cdot 10^{7}\,\text{Гц} \cdot 30\,\text{м} }{3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}} } \approx 6{,}25.
+    \end{align*}
+}
+\solutionspace{80pt}
+
+\tasknumber{5}%
 \task{%
     Колебательный контур, состоящий из катушки индуктивности
     и воздушного конденсатора, настроен на длину волны $50\,\text{м}$.
     При этом расстояние между пластинами конденсатора $5\,\text{мм}$.
     Каким должно быть это расстояние, чтобы контур был настроен на длину волны $45\,\text{м}$?
+}
+\answer{%
+    \begin{align*}
+    \lambda &= cT = c \cdot 2\pi\sqrt{LC}, \quad C = \frac{\eps\eps_0 S}d \implies \lambda^2 = 4 \pi^2 c^2 L \frac{\eps\eps_0 S}d, \\
+    \frac{\lambda_2^2}{\lambda_1^2} &= \frac{d_1}{d_2} \implies d_2 =  d_1 \cdot \sqr{\frac{\lambda_1}{\lambda_2}} =  5\,\text{мм} \cdot \sqr{\frac{50\,\text{м}}{45\,\text{м}}} \approx 6{,}17\,\text{мм}
+    \end{align*}
+}
+\solutionspace{80pt}
+
+\tasknumber{6}%
+\task{%
+    Сила тока в первичной обмотке трансформатора $3\,\text{А}$, напряжение на её концах $120\,\text{В}$.
+    Напряжение на концах вторичной обмотки $60\,\text{В}$.
+    Определите силу тока во вторичной обмотке.
+    Потерями в трансформаторе пренебречь.
+}
+\answer{%
+    $U_1\eli_1 = U_2\eli_2 \implies \eli_2 = \eli_1 \cdot \frac{U_1}{U_2} = 3\,\text{А} \cdot \frac{120\,\text{В}}{60\,\text{В}} \approx 6\,\text{А}$
+}
+\solutionspace{60pt}
+
+\tasknumber{7}%
+\task{%
+    Под каким напряжением находится первичная обмотка трансформатора, имеющая $800$ витков,
+    если во вторичной обмотке $1000$ витков и напряжение на ней $90\,\text{В}$?
+}
+\answer{%
+    $\frac{U_2}{U_1}  = \frac{N_2}{N_1} \implies U_1 = U_2 \cdot \frac{N_1}{N_2} = 90\,\text{В} \cdot \frac{800}{1000} \approx 72\,\text{В}$
+}
+\solutionspace{40pt}
+
+\tasknumber{8}%
+\task{%
+    Сила тока в первичной обмотке трансформатора $784\,\text{мА}$, напряжение на её концах $250\,\text{В}$.
+    Сила тока во вторичной обмотке $4{,}3\,\text{А}$, напряжение на её концах $43\,\text{В}$.
+    Определите КПД трансформатора.
+}
+\answer{%
+    $\eta = \frac{ U_2\eli_2 }{ U_1\eli_1 } = \frac{ 43\,\text{В} \cdot 4{,}3\,\text{А} }{ 250\,\text{В} \cdot 784\,\text{мА} } \approx 0{,}940, \quad 1-\eta \approx 0{,}060$
 }
 
 \variantsplitter
@@ -135,24 +540,105 @@
 
 \tasknumber{1}%
 \task{%
-    На какую длину волны настроен радиоприемник, если его колебательный контур
-    обладает индуктивностью $200\,\text{мкГн}$ и емкостью $650\,\text{пФ}$?
+    Длина волны света в~вакууме $\lambda = 600\,\text{нм}$.
+    Какова частота этой световой волны?
+    Какова длина этой волны в среде с показателем преломления $n = 1{,}5$?
+    Может ли человек увидеть такую волну света, и если да, то какой именно цвет соответствует этим волнам в вакууме и в этой среде?
 }
-\solutionspace{100pt}
+\answer{%
+    \begin{align*}
+    \nu &= \frac 1T = \frac 1{\lambda/c} = \frac c\lambda = \frac{3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}}{600\,\text{нм}} \approx 500 \cdot 10^{12}\,\text{Гц}, \\
+    \nu' &= \nu &\cbr{\text{или } T' = T} \implies \lambda' = v'T' = \frac vn T = \frac{ vt }n = \frac \lambda n = \frac{600\,\text{нм}}{1{,}5} \approx 0{,}40 \cdot 10^{-6}\,\text{м}.
+    \\
+    &\text{380 нм---фиол---440---син---485---гол---500---зел---565---жёл---590---оранж---625---крас---780 нм}, \\
+    &\text{увидит}
+    \end{align*}
+}
+\solutionspace{60pt}
 
 \tasknumber{2}%
 \task{%
-    Колебательный контур настроен на частоту $0{,}8 \cdot 10^{7}\,\text{Гц}$.
-    Во сколько раз и как надо изменить емкость конденсатора для перестройки контура на длину волны $20\,\text{м}$?
+    Укажите букву, соответствующую физическую величину (из текущего раздела), её единицы измерения в СИ и выразите её из какого-либо физического закона:
+    \begin{enumerate}
+        \item «л'амбда»,
+        \item «цэ»,
+        \item «бал'шайа цэ»,
+        \item «тэ».
+    \end{enumerate}
 }
-\solutionspace{100pt}
 
 \tasknumber{3}%
+\task{%
+    На какую длину волны настроен радиоприемник, если его колебательный контур
+    обладает индуктивностью $200\,\text{мкГн}$ и ёмкостью $650\,\text{пФ}$?
+}
+\answer{%
+    \begin{align*}
+    T = 2\pi\sqrt{LC} \implies \nu &= \frac 1T = \frac 1{ 2\pi\sqrt{LC} } = \frac 1{ 2\pi\sqrt{200\,\text{мкГн} \cdot 650\,\text{пФ}}} \approx 0{,}441\,\text{МГц}, \\
+    \lambda &= cT = c \cdot 2\pi\sqrt{LC} = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} \cdot 2\pi\sqrt{200\,\text{мкГн} \cdot 650\,\text{пФ}} \approx 680\,\text{м}.
+    \end{align*}
+}
+\solutionspace{80pt}
+
+\tasknumber{4}%
+\task{%
+    Колебательный контур настроен на частоту $2{,}5 \cdot 10^{7}\,\text{Гц}$.
+    Во сколько раз и как надо изменить ёмкость конденсатора для перенастройки контура на длину волны $50\,\text{м}$?
+}
+\answer{%
+    \begin{align*}
+    T_1 &= 2\pi\sqrt{L_1C_1} \implies \nu_1 = \frac 1{T_1} = \frac 1{ 2\pi\sqrt{L_1C_1} } \implies L_1C_1 = \frac 1{\sqr{2\pi \nu_1}}, \\
+    L_2C_2 &= \frac 1{\sqr{2\pi \nu_2}} = \frac 1{\sqr{2\pi \frac 1{T_2}}} = \frac 1{\sqr{2\pi \frac c{\lambda_2}}}, \\
+    \frac{L_2C_2}{L_1C_1} &= \frac {\sqr{2\pi \nu}}{\sqr{2\pi \frac c{\lambda_2}}} =  \sqr{ \frac {\nu}{\frac c{\lambda_2}} } = \sqr{ \frac {\nu\lambda_2}{c} } = \sqr{ \frac { 2{,}5 \cdot 10^{7}\,\text{Гц} \cdot 50\,\text{м} }{3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}} } \approx 17{,}36.
+    \end{align*}
+}
+\solutionspace{80pt}
+
+\tasknumber{5}%
 \task{%
     Колебательный контур, состоящий из катушки индуктивности
     и воздушного конденсатора, настроен на длину волны $20\,\text{м}$.
     При этом расстояние между пластинами конденсатора $4{,}5\,\text{мм}$.
     Каким должно быть это расстояние, чтобы контур был настроен на длину волны $150\,\text{м}$?
+}
+\answer{%
+    \begin{align*}
+    \lambda &= cT = c \cdot 2\pi\sqrt{LC}, \quad C = \frac{\eps\eps_0 S}d \implies \lambda^2 = 4 \pi^2 c^2 L \frac{\eps\eps_0 S}d, \\
+    \frac{\lambda_2^2}{\lambda_1^2} &= \frac{d_1}{d_2} \implies d_2 =  d_1 \cdot \sqr{\frac{\lambda_1}{\lambda_2}} =  4{,}5\,\text{мм} \cdot \sqr{\frac{20\,\text{м}}{150\,\text{м}}} \approx 0{,}0800\,\text{мм}
+    \end{align*}
+}
+\solutionspace{80pt}
+
+\tasknumber{6}%
+\task{%
+    Сила тока в первичной обмотке трансформатора $5\,\text{А}$, напряжение на её концах $220\,\text{В}$.
+    Напряжение на концах вторичной обмотки $80\,\text{В}$.
+    Определите силу тока во вторичной обмотке.
+    Потерями в трансформаторе пренебречь.
+}
+\answer{%
+    $U_1\eli_1 = U_2\eli_2 \implies \eli_2 = \eli_1 \cdot \frac{U_1}{U_2} = 5\,\text{А} \cdot \frac{220\,\text{В}}{80\,\text{В}} \approx 14\,\text{А}$
+}
+\solutionspace{60pt}
+
+\tasknumber{7}%
+\task{%
+    Под каким напряжением находится первичная обмотка трансформатора, имеющая $1500$ витков,
+    если во вторичной обмотке $2000$ витков и напряжение на ней $50\,\text{В}$?
+}
+\answer{%
+    $\frac{U_2}{U_1}  = \frac{N_2}{N_1} \implies U_1 = U_2 \cdot \frac{N_1}{N_2} = 50\,\text{В} \cdot \frac{1500}{2000} \approx 38\,\text{В}$
+}
+\solutionspace{40pt}
+
+\tasknumber{8}%
+\task{%
+    Сила тока в первичной обмотке трансформатора $784\,\text{мА}$, напряжение на её концах $300\,\text{В}$.
+    Сила тока во вторичной обмотке $3{,}2\,\text{А}$, напряжение на её концах $71\,\text{В}$.
+    Определите КПД трансформатора.
+}
+\answer{%
+    $\eta = \frac{ U_2\eli_2 }{ U_1\eli_1 } = \frac{ 71\,\text{В} \cdot 3{,}2\,\text{А} }{ 300\,\text{В} \cdot 784\,\text{мА} } \approx 0{,}960, \quad 1-\eta \approx 0{,}040$
 }
 
 \variantsplitter
@@ -161,24 +647,105 @@
 
 \tasknumber{1}%
 \task{%
-    На какую длину волны настроен радиоприемник, если его колебательный контур
-    обладает индуктивностью $600\,\text{мкГн}$ и емкостью $800\,\text{пФ}$?
+    Длина волны света в~вакууме $\lambda = 600\,\text{нм}$.
+    Какова частота этой световой волны?
+    Какова длина этой волны в среде с показателем преломления $n = 1{,}3$?
+    Может ли человек увидеть такую волну света, и если да, то какой именно цвет соответствует этим волнам в вакууме и в этой среде?
 }
-\solutionspace{100pt}
+\answer{%
+    \begin{align*}
+    \nu &= \frac 1T = \frac 1{\lambda/c} = \frac c\lambda = \frac{3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}}{600\,\text{нм}} \approx 500 \cdot 10^{12}\,\text{Гц}, \\
+    \nu' &= \nu &\cbr{\text{или } T' = T} \implies \lambda' = v'T' = \frac vn T = \frac{ vt }n = \frac \lambda n = \frac{600\,\text{нм}}{1{,}3} \approx 0{,}46 \cdot 10^{-6}\,\text{м}.
+    \\
+    &\text{380 нм---фиол---440---син---485---гол---500---зел---565---жёл---590---оранж---625---крас---780 нм}, \\
+    &\text{увидит}
+    \end{align*}
+}
+\solutionspace{60pt}
 
 \tasknumber{2}%
 \task{%
-    Колебательный контур настроен на частоту $1{,}8 \cdot 10^{7}\,\text{Гц}$.
-    Во сколько раз и как надо изменить емкость конденсатора для перестройки контура на длину волны $50\,\text{м}$?
+    Укажите букву, соответствующую физическую величину (из текущего раздела), её единицы измерения в СИ и выразите её из какого-либо физического закона:
+    \begin{enumerate}
+        \item «эл'»,
+        \item «цэ»,
+        \item «бал'шайа цэ»,
+        \item «тэ».
+    \end{enumerate}
 }
-\solutionspace{100pt}
 
 \tasknumber{3}%
+\task{%
+    На какую длину волны настроен радиоприемник, если его колебательный контур
+    обладает индуктивностью $600\,\text{мкГн}$ и ёмкостью $800\,\text{пФ}$?
+}
+\answer{%
+    \begin{align*}
+    T = 2\pi\sqrt{LC} \implies \nu &= \frac 1T = \frac 1{ 2\pi\sqrt{LC} } = \frac 1{ 2\pi\sqrt{600\,\text{мкГн} \cdot 800\,\text{пФ}}} \approx 0{,}230\,\text{МГц}, \\
+    \lambda &= cT = c \cdot 2\pi\sqrt{LC} = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} \cdot 2\pi\sqrt{600\,\text{мкГн} \cdot 800\,\text{пФ}} \approx 1306\,\text{м}.
+    \end{align*}
+}
+\solutionspace{80pt}
+
+\tasknumber{4}%
+\task{%
+    Колебательный контур настроен на частоту $4{,}5 \cdot 10^{7}\,\text{Гц}$.
+    Во сколько раз и как надо изменить индуктивность катушки для перенастройки контура на длину волны $30\,\text{м}$?
+}
+\answer{%
+    \begin{align*}
+    T_1 &= 2\pi\sqrt{L_1C_1} \implies \nu_1 = \frac 1{T_1} = \frac 1{ 2\pi\sqrt{L_1C_1} } \implies L_1C_1 = \frac 1{\sqr{2\pi \nu_1}}, \\
+    L_2C_2 &= \frac 1{\sqr{2\pi \nu_2}} = \frac 1{\sqr{2\pi \frac 1{T_2}}} = \frac 1{\sqr{2\pi \frac c{\lambda_2}}}, \\
+    \frac{L_2C_2}{L_1C_1} &= \frac {\sqr{2\pi \nu}}{\sqr{2\pi \frac c{\lambda_2}}} =  \sqr{ \frac {\nu}{\frac c{\lambda_2}} } = \sqr{ \frac {\nu\lambda_2}{c} } = \sqr{ \frac { 4{,}5 \cdot 10^{7}\,\text{Гц} \cdot 30\,\text{м} }{3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}} } \approx 20{,}3.
+    \end{align*}
+}
+\solutionspace{80pt}
+
+\tasknumber{5}%
 \task{%
     Колебательный контур, состоящий из катушки индуктивности
     и воздушного конденсатора, настроен на длину волны $180\,\text{м}$.
     При этом расстояние между пластинами конденсатора $2\,\text{мм}$.
     Каким должно быть это расстояние, чтобы контур был настроен на длину волны $150\,\text{м}$?
+}
+\answer{%
+    \begin{align*}
+    \lambda &= cT = c \cdot 2\pi\sqrt{LC}, \quad C = \frac{\eps\eps_0 S}d \implies \lambda^2 = 4 \pi^2 c^2 L \frac{\eps\eps_0 S}d, \\
+    \frac{\lambda_2^2}{\lambda_1^2} &= \frac{d_1}{d_2} \implies d_2 =  d_1 \cdot \sqr{\frac{\lambda_1}{\lambda_2}} =  2\,\text{мм} \cdot \sqr{\frac{180\,\text{м}}{150\,\text{м}}} \approx 2{,}88\,\text{мм}
+    \end{align*}
+}
+\solutionspace{80pt}
+
+\tasknumber{6}%
+\task{%
+    Сила тока в первичной обмотке трансформатора $2\,\text{А}$, напряжение на её концах $120\,\text{В}$.
+    Напряжение на концах вторичной обмотки $40\,\text{В}$.
+    Определите силу тока во вторичной обмотке.
+    Потерями в трансформаторе пренебречь.
+}
+\answer{%
+    $U_1\eli_1 = U_2\eli_2 \implies \eli_2 = \eli_1 \cdot \frac{U_1}{U_2} = 2\,\text{А} \cdot \frac{120\,\text{В}}{40\,\text{В}} \approx 6\,\text{А}$
+}
+\solutionspace{60pt}
+
+\tasknumber{7}%
+\task{%
+    Под каким напряжением находится первичная обмотка трансформатора, имеющая $1200$ витков,
+    если во вторичной обмотке $1000$ витков и напряжение на ней $130\,\text{В}$?
+}
+\answer{%
+    $\frac{U_2}{U_1}  = \frac{N_2}{N_1} \implies U_1 = U_2 \cdot \frac{N_1}{N_2} = 130\,\text{В} \cdot \frac{1200}{1000} \approx 156\,\text{В}$
+}
+\solutionspace{40pt}
+
+\tasknumber{8}%
+\task{%
+    Сила тока в первичной обмотке трансформатора $784\,\text{мА}$, напряжение на её концах $300\,\text{В}$.
+    Сила тока во вторичной обмотке $2{,}4\,\text{А}$, напряжение на её концах $94\,\text{В}$.
+    Определите долю потерей трансформатора.
+}
+\answer{%
+    $\eta = \frac{ U_2\eli_2 }{ U_1\eli_1 } = \frac{ 94\,\text{В} \cdot 2{,}4\,\text{А} }{ 300\,\text{В} \cdot 784\,\text{мА} } \approx 0{,}960, \quad 1-\eta \approx 0{,}040$
 }
 
 \variantsplitter
@@ -187,24 +754,105 @@
 
 \tasknumber{1}%
 \task{%
-    На какую частоту волны настроен радиоприемник, если его колебательный контур
-    обладает индуктивностью $300\,\text{мкГн}$ и емкостью $700\,\text{пФ}$?
+    Длина волны света в~вакууме $\lambda = 500\,\text{нм}$.
+    Какова частота этой световой волны?
+    Какова длина этой волны в среде с показателем преломления $n = 1{,}5$?
+    Может ли человек увидеть такую волну света, и если да, то какой именно цвет соответствует этим волнам в вакууме и в этой среде?
 }
-\solutionspace{100pt}
+\answer{%
+    \begin{align*}
+    \nu &= \frac 1T = \frac 1{\lambda/c} = \frac c\lambda = \frac{3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}}{500\,\text{нм}} \approx 600 \cdot 10^{12}\,\text{Гц}, \\
+    \nu' &= \nu &\cbr{\text{или } T' = T} \implies \lambda' = v'T' = \frac vn T = \frac{ vt }n = \frac \lambda n = \frac{500\,\text{нм}}{1{,}5} \approx 0{,}33 \cdot 10^{-6}\,\text{м}.
+    \\
+    &\text{380 нм---фиол---440---син---485---гол---500---зел---565---жёл---590---оранж---625---крас---780 нм}, \\
+    &\text{увидит}
+    \end{align*}
+}
+\solutionspace{60pt}
 
 \tasknumber{2}%
 \task{%
-    Колебательный контур настроен на частоту $1{,}8 \cdot 10^{7}\,\text{Гц}$.
-    Во сколько раз и как надо изменить емкость конденсатора для перестройки контура на длину волны $50\,\text{м}$?
+    Укажите букву, соответствующую физическую величину (из текущего раздела), её единицы измерения в СИ и выразите её из какого-либо физического закона:
+    \begin{enumerate}
+        \item «л'амбда»,
+        \item «вэ»,
+        \item «н'у»,
+        \item «эн».
+    \end{enumerate}
 }
-\solutionspace{100pt}
 
 \tasknumber{3}%
+\task{%
+    На какую частоту волны настроен радиоприемник, если его колебательный контур
+    обладает индуктивностью $300\,\text{мкГн}$ и ёмкостью $700\,\text{пФ}$?
+}
+\answer{%
+    \begin{align*}
+    T = 2\pi\sqrt{LC} \implies \nu &= \frac 1T = \frac 1{ 2\pi\sqrt{LC} } = \frac 1{ 2\pi\sqrt{300\,\text{мкГн} \cdot 700\,\text{пФ}}} \approx 0{,}347\,\text{МГц}, \\
+    \lambda &= cT = c \cdot 2\pi\sqrt{LC} = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} \cdot 2\pi\sqrt{300\,\text{мкГн} \cdot 700\,\text{пФ}} \approx 864\,\text{м}.
+    \end{align*}
+}
+\solutionspace{80pt}
+
+\tasknumber{4}%
+\task{%
+    Колебательный контур настроен на частоту $0{,}5 \cdot 10^{7}\,\text{Гц}$.
+    Во сколько раз и как надо изменить индуктивность катушки для перенастройки контура на длину волны $40\,\text{м}$?
+}
+\answer{%
+    \begin{align*}
+    T_1 &= 2\pi\sqrt{L_1C_1} \implies \nu_1 = \frac 1{T_1} = \frac 1{ 2\pi\sqrt{L_1C_1} } \implies L_1C_1 = \frac 1{\sqr{2\pi \nu_1}}, \\
+    L_2C_2 &= \frac 1{\sqr{2\pi \nu_2}} = \frac 1{\sqr{2\pi \frac 1{T_2}}} = \frac 1{\sqr{2\pi \frac c{\lambda_2}}}, \\
+    \frac{L_2C_2}{L_1C_1} &= \frac {\sqr{2\pi \nu}}{\sqr{2\pi \frac c{\lambda_2}}} =  \sqr{ \frac {\nu}{\frac c{\lambda_2}} } = \sqr{ \frac {\nu\lambda_2}{c} } = \sqr{ \frac { 0{,}5 \cdot 10^{7}\,\text{Гц} \cdot 40\,\text{м} }{3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}} } \approx 0{,}44.
+    \end{align*}
+}
+\solutionspace{80pt}
+
+\tasknumber{5}%
 \task{%
     Колебательный контур, состоящий из катушки индуктивности
     и воздушного конденсатора, настроен на длину волны $50\,\text{м}$.
     При этом расстояние между пластинами конденсатора $4\,\text{мм}$.
     Каким должно быть это расстояние, чтобы контур был настроен на длину волны $45\,\text{м}$?
+}
+\answer{%
+    \begin{align*}
+    \lambda &= cT = c \cdot 2\pi\sqrt{LC}, \quad C = \frac{\eps\eps_0 S}d \implies \lambda^2 = 4 \pi^2 c^2 L \frac{\eps\eps_0 S}d, \\
+    \frac{\lambda_2^2}{\lambda_1^2} &= \frac{d_1}{d_2} \implies d_2 =  d_1 \cdot \sqr{\frac{\lambda_1}{\lambda_2}} =  4\,\text{мм} \cdot \sqr{\frac{50\,\text{м}}{45\,\text{м}}} \approx 4{,}94\,\text{мм}
+    \end{align*}
+}
+\solutionspace{80pt}
+
+\tasknumber{6}%
+\task{%
+    Сила тока в первичной обмотке трансформатора $4\,\text{А}$, напряжение на её концах $320\,\text{В}$.
+    Напряжение на концах вторичной обмотки $20\,\text{В}$.
+    Определите силу тока во вторичной обмотке.
+    Потерями в трансформаторе пренебречь.
+}
+\answer{%
+    $U_1\eli_1 = U_2\eli_2 \implies \eli_2 = \eli_1 \cdot \frac{U_1}{U_2} = 4\,\text{А} \cdot \frac{320\,\text{В}}{20\,\text{В}} \approx 64\,\text{А}$
+}
+\solutionspace{60pt}
+
+\tasknumber{7}%
+\task{%
+    Под каким напряжением находится первичная обмотка трансформатора, имеющая $500$ витков,
+    если во вторичной обмотке $1000$ витков и напряжение на ней $70\,\text{В}$?
+}
+\answer{%
+    $\frac{U_2}{U_1}  = \frac{N_2}{N_1} \implies U_1 = U_2 \cdot \frac{N_1}{N_2} = 70\,\text{В} \cdot \frac{500}{1000} \approx 35\,\text{В}$
+}
+\solutionspace{40pt}
+
+\tasknumber{8}%
+\task{%
+    Сила тока в первичной обмотке трансформатора $784\,\text{мА}$, напряжение на её концах $300\,\text{В}$.
+    Сила тока во вторичной обмотке $3{,}2\,\text{А}$, напряжение на её концах $70\,\text{В}$.
+    Определите КПД трансформатора.
+}
+\answer{%
+    $\eta = \frac{ U_2\eli_2 }{ U_1\eli_1 } = \frac{ 70\,\text{В} \cdot 3{,}2\,\text{А} }{ 300\,\text{В} \cdot 784\,\text{мА} } \approx 0{,}950, \quad 1-\eta \approx 0{,}050$
 }
 
 \variantsplitter
@@ -213,24 +861,105 @@
 
 \tasknumber{1}%
 \task{%
-    На какую частоту волны настроен радиоприемник, если его колебательный контур
-    обладает индуктивностью $300\,\text{мкГн}$ и емкостью $800\,\text{пФ}$?
+    Длина волны света в~вакууме $\lambda = 500\,\text{нм}$.
+    Какова частота этой световой волны?
+    Какова длина этой волны в среде с показателем преломления $n = 1{,}5$?
+    Может ли человек увидеть такую волну света, и если да, то какой именно цвет соответствует этим волнам в вакууме и в этой среде?
 }
-\solutionspace{100pt}
+\answer{%
+    \begin{align*}
+    \nu &= \frac 1T = \frac 1{\lambda/c} = \frac c\lambda = \frac{3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}}{500\,\text{нм}} \approx 600 \cdot 10^{12}\,\text{Гц}, \\
+    \nu' &= \nu &\cbr{\text{или } T' = T} \implies \lambda' = v'T' = \frac vn T = \frac{ vt }n = \frac \lambda n = \frac{500\,\text{нм}}{1{,}5} \approx 0{,}33 \cdot 10^{-6}\,\text{м}.
+    \\
+    &\text{380 нм---фиол---440---син---485---гол---500---зел---565---жёл---590---оранж---625---крас---780 нм}, \\
+    &\text{увидит}
+    \end{align*}
+}
+\solutionspace{60pt}
 
 \tasknumber{2}%
 \task{%
-    Колебательный контур настроен на частоту $4{,}5 \cdot 10^{7}\,\text{Гц}$.
-    Во сколько раз и как надо изменить емкость конденсатора для перестройки контура на длину волны $30\,\text{м}$?
+    Укажите букву, соответствующую физическую величину (из текущего раздела), её единицы измерения в СИ и выразите её из какого-либо физического закона:
+    \begin{enumerate}
+        \item «л'амбда»,
+        \item «вэ»,
+        \item «бал'шайа цэ»,
+        \item «эн».
+    \end{enumerate}
 }
-\solutionspace{100pt}
 
 \tasknumber{3}%
+\task{%
+    На какую частоту волны настроен радиоприемник, если его колебательный контур
+    обладает индуктивностью $300\,\text{мкГн}$ и ёмкостью $800\,\text{пФ}$?
+}
+\answer{%
+    \begin{align*}
+    T = 2\pi\sqrt{LC} \implies \nu &= \frac 1T = \frac 1{ 2\pi\sqrt{LC} } = \frac 1{ 2\pi\sqrt{300\,\text{мкГн} \cdot 800\,\text{пФ}}} \approx 0{,}325\,\text{МГц}, \\
+    \lambda &= cT = c \cdot 2\pi\sqrt{LC} = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} \cdot 2\pi\sqrt{300\,\text{мкГн} \cdot 800\,\text{пФ}} \approx 923\,\text{м}.
+    \end{align*}
+}
+\solutionspace{80pt}
+
+\tasknumber{4}%
+\task{%
+    Колебательный контур настроен на частоту $4{,}5 \cdot 10^{7}\,\text{Гц}$.
+    Во сколько раз и как надо изменить ёмкость конденсатора для перенастройки контура на длину волны $50\,\text{м}$?
+}
+\answer{%
+    \begin{align*}
+    T_1 &= 2\pi\sqrt{L_1C_1} \implies \nu_1 = \frac 1{T_1} = \frac 1{ 2\pi\sqrt{L_1C_1} } \implies L_1C_1 = \frac 1{\sqr{2\pi \nu_1}}, \\
+    L_2C_2 &= \frac 1{\sqr{2\pi \nu_2}} = \frac 1{\sqr{2\pi \frac 1{T_2}}} = \frac 1{\sqr{2\pi \frac c{\lambda_2}}}, \\
+    \frac{L_2C_2}{L_1C_1} &= \frac {\sqr{2\pi \nu}}{\sqr{2\pi \frac c{\lambda_2}}} =  \sqr{ \frac {\nu}{\frac c{\lambda_2}} } = \sqr{ \frac {\nu\lambda_2}{c} } = \sqr{ \frac { 4{,}5 \cdot 10^{7}\,\text{Гц} \cdot 50\,\text{м} }{3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}} } \approx 56{,}3.
+    \end{align*}
+}
+\solutionspace{80pt}
+
+\tasknumber{5}%
 \task{%
     Колебательный контур, состоящий из катушки индуктивности
     и воздушного конденсатора, настроен на длину волны $20\,\text{м}$.
     При этом расстояние между пластинами конденсатора $2{,}5\,\text{мм}$.
     Каким должно быть это расстояние, чтобы контур был настроен на длину волны $100\,\text{м}$?
+}
+\answer{%
+    \begin{align*}
+    \lambda &= cT = c \cdot 2\pi\sqrt{LC}, \quad C = \frac{\eps\eps_0 S}d \implies \lambda^2 = 4 \pi^2 c^2 L \frac{\eps\eps_0 S}d, \\
+    \frac{\lambda_2^2}{\lambda_1^2} &= \frac{d_1}{d_2} \implies d_2 =  d_1 \cdot \sqr{\frac{\lambda_1}{\lambda_2}} =  2{,}5\,\text{мм} \cdot \sqr{\frac{20\,\text{м}}{100\,\text{м}}} \approx 0{,}1000\,\text{мм}
+    \end{align*}
+}
+\solutionspace{80pt}
+
+\tasknumber{6}%
+\task{%
+    Сила тока в первичной обмотке трансформатора $3\,\text{А}$, напряжение на её концах $220\,\text{В}$.
+    Напряжение на концах вторичной обмотки $20\,\text{В}$.
+    Определите силу тока во вторичной обмотке.
+    Потерями в трансформаторе пренебречь.
+}
+\answer{%
+    $U_1\eli_1 = U_2\eli_2 \implies \eli_2 = \eli_1 \cdot \frac{U_1}{U_2} = 3\,\text{А} \cdot \frac{220\,\text{В}}{20\,\text{В}} \approx 33\,\text{А}$
+}
+\solutionspace{60pt}
+
+\tasknumber{7}%
+\task{%
+    Под каким напряжением находится первичная обмотка трансформатора, имеющая $1500$ витков,
+    если во вторичной обмотке $2000$ витков и напряжение на ней $130\,\text{В}$?
+}
+\answer{%
+    $\frac{U_2}{U_1}  = \frac{N_2}{N_1} \implies U_1 = U_2 \cdot \frac{N_1}{N_2} = 130\,\text{В} \cdot \frac{1500}{2000} \approx 98\,\text{В}$
+}
+\solutionspace{40pt}
+
+\tasknumber{8}%
+\task{%
+    Сила тока в первичной обмотке трансформатора $859\,\text{мА}$, напряжение на её концах $300\,\text{В}$.
+    Сила тока во вторичной обмотке $4{,}3\,\text{А}$, напряжение на её концах $58\,\text{В}$.
+    Определите КПД трансформатора.
+}
+\answer{%
+    $\eta = \frac{ U_2\eli_2 }{ U_1\eli_1 } = \frac{ 58\,\text{В} \cdot 4{,}3\,\text{А} }{ 300\,\text{В} \cdot 859\,\text{мА} } \approx 0{,}960, \quad 1-\eta \approx 0{,}040$
 }
 
 \variantsplitter
@@ -239,24 +968,105 @@
 
 \tasknumber{1}%
 \task{%
-    На какую частоту волны настроен радиоприемник, если его колебательный контур
-    обладает индуктивностью $600\,\text{мкГн}$ и емкостью $800\,\text{пФ}$?
+    Длина волны света в~вакууме $\lambda = 500\,\text{нм}$.
+    Какова частота этой световой волны?
+    Какова длина этой волны в среде с показателем преломления $n = 1{,}4$?
+    Может ли человек увидеть такую волну света, и если да, то какой именно цвет соответствует этим волнам в вакууме и в этой среде?
 }
-\solutionspace{100pt}
+\answer{%
+    \begin{align*}
+    \nu &= \frac 1T = \frac 1{\lambda/c} = \frac c\lambda = \frac{3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}}{500\,\text{нм}} \approx 600 \cdot 10^{12}\,\text{Гц}, \\
+    \nu' &= \nu &\cbr{\text{или } T' = T} \implies \lambda' = v'T' = \frac vn T = \frac{ vt }n = \frac \lambda n = \frac{500\,\text{нм}}{1{,}4} \approx 0{,}36 \cdot 10^{-6}\,\text{м}.
+    \\
+    &\text{380 нм---фиол---440---син---485---гол---500---зел---565---жёл---590---оранж---625---крас---780 нм}, \\
+    &\text{увидит}
+    \end{align*}
+}
+\solutionspace{60pt}
 
 \tasknumber{2}%
 \task{%
-    Колебательный контур настроен на частоту $2{,}5 \cdot 10^{7}\,\text{Гц}$.
-    Во сколько раз и как надо изменить емкость конденсатора для перестройки контура на длину волны $30\,\text{м}$?
+    Укажите букву, соответствующую физическую величину (из текущего раздела), её единицы измерения в СИ и выразите её из какого-либо физического закона:
+    \begin{enumerate}
+        \item «л'амбда»,
+        \item «цэ»,
+        \item «бал'шайа цэ»,
+        \item «тэ».
+    \end{enumerate}
 }
-\solutionspace{100pt}
 
 \tasknumber{3}%
+\task{%
+    На какую частоту волны настроен радиоприемник, если его колебательный контур
+    обладает индуктивностью $600\,\text{мкГн}$ и ёмкостью $800\,\text{пФ}$?
+}
+\answer{%
+    \begin{align*}
+    T = 2\pi\sqrt{LC} \implies \nu &= \frac 1T = \frac 1{ 2\pi\sqrt{LC} } = \frac 1{ 2\pi\sqrt{600\,\text{мкГн} \cdot 800\,\text{пФ}}} \approx 0{,}230\,\text{МГц}, \\
+    \lambda &= cT = c \cdot 2\pi\sqrt{LC} = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} \cdot 2\pi\sqrt{600\,\text{мкГн} \cdot 800\,\text{пФ}} \approx 1306\,\text{м}.
+    \end{align*}
+}
+\solutionspace{80pt}
+
+\tasknumber{4}%
+\task{%
+    Колебательный контур настроен на частоту $3{,}2 \cdot 10^{7}\,\text{Гц}$.
+    Во сколько раз и как надо изменить ёмкость конденсатора для перенастройки контура на длину волны $20\,\text{м}$?
+}
+\answer{%
+    \begin{align*}
+    T_1 &= 2\pi\sqrt{L_1C_1} \implies \nu_1 = \frac 1{T_1} = \frac 1{ 2\pi\sqrt{L_1C_1} } \implies L_1C_1 = \frac 1{\sqr{2\pi \nu_1}}, \\
+    L_2C_2 &= \frac 1{\sqr{2\pi \nu_2}} = \frac 1{\sqr{2\pi \frac 1{T_2}}} = \frac 1{\sqr{2\pi \frac c{\lambda_2}}}, \\
+    \frac{L_2C_2}{L_1C_1} &= \frac {\sqr{2\pi \nu}}{\sqr{2\pi \frac c{\lambda_2}}} =  \sqr{ \frac {\nu}{\frac c{\lambda_2}} } = \sqr{ \frac {\nu\lambda_2}{c} } = \sqr{ \frac { 3{,}2 \cdot 10^{7}\,\text{Гц} \cdot 20\,\text{м} }{3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}} } \approx 4{,}55.
+    \end{align*}
+}
+\solutionspace{80pt}
+
+\tasknumber{5}%
 \task{%
     Колебательный контур, состоящий из катушки индуктивности
     и воздушного конденсатора, настроен на длину волны $120\,\text{м}$.
     При этом расстояние между пластинами конденсатора $2\,\text{мм}$.
     Каким должно быть это расстояние, чтобы контур был настроен на длину волны $80\,\text{м}$?
+}
+\answer{%
+    \begin{align*}
+    \lambda &= cT = c \cdot 2\pi\sqrt{LC}, \quad C = \frac{\eps\eps_0 S}d \implies \lambda^2 = 4 \pi^2 c^2 L \frac{\eps\eps_0 S}d, \\
+    \frac{\lambda_2^2}{\lambda_1^2} &= \frac{d_1}{d_2} \implies d_2 =  d_1 \cdot \sqr{\frac{\lambda_1}{\lambda_2}} =  2\,\text{мм} \cdot \sqr{\frac{120\,\text{м}}{80\,\text{м}}} \approx 4{,}50\,\text{мм}
+    \end{align*}
+}
+\solutionspace{80pt}
+
+\tasknumber{6}%
+\task{%
+    Сила тока в первичной обмотке трансформатора $2\,\text{А}$, напряжение на её концах $320\,\text{В}$.
+    Напряжение на концах вторичной обмотки $40\,\text{В}$.
+    Определите силу тока во вторичной обмотке.
+    Потерями в трансформаторе пренебречь.
+}
+\answer{%
+    $U_1\eli_1 = U_2\eli_2 \implies \eli_2 = \eli_1 \cdot \frac{U_1}{U_2} = 2\,\text{А} \cdot \frac{320\,\text{В}}{40\,\text{В}} \approx 16\,\text{А}$
+}
+\solutionspace{60pt}
+
+\tasknumber{7}%
+\task{%
+    Под каким напряжением находится первичная обмотка трансформатора, имеющая $500$ витков,
+    если во вторичной обмотке $2000$ витков и напряжение на ней $110\,\text{В}$?
+}
+\answer{%
+    $\frac{U_2}{U_1}  = \frac{N_2}{N_1} \implies U_1 = U_2 \cdot \frac{N_1}{N_2} = 110\,\text{В} \cdot \frac{500}{2000} \approx 28\,\text{В}$
+}
+\solutionspace{40pt}
+
+\tasknumber{8}%
+\task{%
+    Сила тока в первичной обмотке трансформатора $542\,\text{мА}$, напряжение на её концах $300\,\text{В}$.
+    Сила тока во вторичной обмотке $2{,}4\,\text{А}$, напряжение на её концах $65\,\text{В}$.
+    Определите долю потерей трансформатора.
+}
+\answer{%
+    $\eta = \frac{ U_2\eli_2 }{ U_1\eli_1 } = \frac{ 65\,\text{В} \cdot 2{,}4\,\text{А} }{ 300\,\text{В} \cdot 542\,\text{мА} } \approx 0{,}960, \quad 1-\eta \approx 0{,}040$
 }
 
 \variantsplitter
@@ -265,24 +1075,105 @@
 
 \tasknumber{1}%
 \task{%
-    На какую длину волны настроен радиоприемник, если его колебательный контур
-    обладает индуктивностью $600\,\text{мкГн}$ и емкостью $600\,\text{пФ}$?
+    Длина волны света в~вакууме $\lambda = 400\,\text{нм}$.
+    Какова частота этой световой волны?
+    Какова длина этой волны в среде с показателем преломления $n = 1{,}7$?
+    Может ли человек увидеть такую волну света, и если да, то какой именно цвет соответствует этим волнам в вакууме и в этой среде?
 }
-\solutionspace{100pt}
+\answer{%
+    \begin{align*}
+    \nu &= \frac 1T = \frac 1{\lambda/c} = \frac c\lambda = \frac{3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}}{400\,\text{нм}} \approx 750 \cdot 10^{12}\,\text{Гц}, \\
+    \nu' &= \nu &\cbr{\text{или } T' = T} \implies \lambda' = v'T' = \frac vn T = \frac{ vt }n = \frac \lambda n = \frac{400\,\text{нм}}{1{,}7} \approx 0{,}24 \cdot 10^{-6}\,\text{м}.
+    \\
+    &\text{380 нм---фиол---440---син---485---гол---500---зел---565---жёл---590---оранж---625---крас---780 нм}, \\
+    &\text{увидит}
+    \end{align*}
+}
+\solutionspace{60pt}
 
 \tasknumber{2}%
 \task{%
-    Колебательный контур настроен на частоту $4{,}5 \cdot 10^{7}\,\text{Гц}$.
-    Во сколько раз и как надо изменить емкость конденсатора для перестройки контура на длину волны $20\,\text{м}$?
+    Укажите букву, соответствующую физическую величину (из текущего раздела), её единицы измерения в СИ и выразите её из какого-либо физического закона:
+    \begin{enumerate}
+        \item «л'амбда»,
+        \item «цэ»,
+        \item «бал'шайа цэ»,
+        \item «эн».
+    \end{enumerate}
 }
-\solutionspace{100pt}
 
 \tasknumber{3}%
+\task{%
+    На какую длину волны настроен радиоприемник, если его колебательный контур
+    обладает индуктивностью $600\,\text{мкГн}$ и ёмкостью $600\,\text{пФ}$?
+}
+\answer{%
+    \begin{align*}
+    T = 2\pi\sqrt{LC} \implies \nu &= \frac 1T = \frac 1{ 2\pi\sqrt{LC} } = \frac 1{ 2\pi\sqrt{600\,\text{мкГн} \cdot 600\,\text{пФ}}} \approx 0{,}265\,\text{МГц}, \\
+    \lambda &= cT = c \cdot 2\pi\sqrt{LC} = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} \cdot 2\pi\sqrt{600\,\text{мкГн} \cdot 600\,\text{пФ}} \approx 1131\,\text{м}.
+    \end{align*}
+}
+\solutionspace{80pt}
+
+\tasknumber{4}%
+\task{%
+    Колебательный контур настроен на частоту $0{,}8 \cdot 10^{7}\,\text{Гц}$.
+    Во сколько раз и как надо изменить индуктивность катушки для перенастройки контура на длину волны $20\,\text{м}$?
+}
+\answer{%
+    \begin{align*}
+    T_1 &= 2\pi\sqrt{L_1C_1} \implies \nu_1 = \frac 1{T_1} = \frac 1{ 2\pi\sqrt{L_1C_1} } \implies L_1C_1 = \frac 1{\sqr{2\pi \nu_1}}, \\
+    L_2C_2 &= \frac 1{\sqr{2\pi \nu_2}} = \frac 1{\sqr{2\pi \frac 1{T_2}}} = \frac 1{\sqr{2\pi \frac c{\lambda_2}}}, \\
+    \frac{L_2C_2}{L_1C_1} &= \frac {\sqr{2\pi \nu}}{\sqr{2\pi \frac c{\lambda_2}}} =  \sqr{ \frac {\nu}{\frac c{\lambda_2}} } = \sqr{ \frac {\nu\lambda_2}{c} } = \sqr{ \frac { 0{,}8 \cdot 10^{7}\,\text{Гц} \cdot 20\,\text{м} }{3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}} } \approx 0{,}28.
+    \end{align*}
+}
+\solutionspace{80pt}
+
+\tasknumber{5}%
 \task{%
     Колебательный контур, состоящий из катушки индуктивности
     и воздушного конденсатора, настроен на длину волны $120\,\text{м}$.
     При этом расстояние между пластинами конденсатора $4{,}5\,\text{мм}$.
     Каким должно быть это расстояние, чтобы контур был настроен на длину волны $80\,\text{м}$?
+}
+\answer{%
+    \begin{align*}
+    \lambda &= cT = c \cdot 2\pi\sqrt{LC}, \quad C = \frac{\eps\eps_0 S}d \implies \lambda^2 = 4 \pi^2 c^2 L \frac{\eps\eps_0 S}d, \\
+    \frac{\lambda_2^2}{\lambda_1^2} &= \frac{d_1}{d_2} \implies d_2 =  d_1 \cdot \sqr{\frac{\lambda_1}{\lambda_2}} =  4{,}5\,\text{мм} \cdot \sqr{\frac{120\,\text{м}}{80\,\text{м}}} \approx 10{,}13\,\text{мм}
+    \end{align*}
+}
+\solutionspace{80pt}
+
+\tasknumber{6}%
+\task{%
+    Сила тока в первичной обмотке трансформатора $2\,\text{А}$, напряжение на её концах $220\,\text{В}$.
+    Напряжение на концах вторичной обмотки $80\,\text{В}$.
+    Определите силу тока во вторичной обмотке.
+    Потерями в трансформаторе пренебречь.
+}
+\answer{%
+    $U_1\eli_1 = U_2\eli_2 \implies \eli_2 = \eli_1 \cdot \frac{U_1}{U_2} = 2\,\text{А} \cdot \frac{220\,\text{В}}{80\,\text{В}} \approx 6\,\text{А}$
+}
+\solutionspace{60pt}
+
+\tasknumber{7}%
+\task{%
+    Под каким напряжением находится первичная обмотка трансформатора, имеющая $1200$ витков,
+    если во вторичной обмотке $2000$ витков и напряжение на ней $110\,\text{В}$?
+}
+\answer{%
+    $\frac{U_2}{U_1}  = \frac{N_2}{N_1} \implies U_1 = U_2 \cdot \frac{N_1}{N_2} = 110\,\text{В} \cdot \frac{1200}{2000} \approx 66\,\text{В}$
+}
+\solutionspace{40pt}
+
+\tasknumber{8}%
+\task{%
+    Сила тока в первичной обмотке трансформатора $542\,\text{мА}$, напряжение на её концах $300\,\text{В}$.
+    Сила тока во вторичной обмотке $4{,}3\,\text{А}$, напряжение на её концах $37\,\text{В}$.
+    Определите КПД трансформатора.
+}
+\answer{%
+    $\eta = \frac{ U_2\eli_2 }{ U_1\eli_1 } = \frac{ 37\,\text{В} \cdot 4{,}3\,\text{А} }{ 300\,\text{В} \cdot 542\,\text{мА} } \approx 0{,}970, \quad 1-\eta \approx 0{,}030$
 }
 
 \variantsplitter
@@ -291,24 +1182,105 @@
 
 \tasknumber{1}%
 \task{%
-    На какую частоту волны настроен радиоприемник, если его колебательный контур
-    обладает индуктивностью $600\,\text{мкГн}$ и емкостью $750\,\text{пФ}$?
+    Длина волны света в~вакууме $\lambda = 600\,\text{нм}$.
+    Какова частота этой световой волны?
+    Какова длина этой волны в среде с показателем преломления $n = 1{,}6$?
+    Может ли человек увидеть такую волну света, и если да, то какой именно цвет соответствует этим волнам в вакууме и в этой среде?
 }
-\solutionspace{100pt}
+\answer{%
+    \begin{align*}
+    \nu &= \frac 1T = \frac 1{\lambda/c} = \frac c\lambda = \frac{3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}}{600\,\text{нм}} \approx 500 \cdot 10^{12}\,\text{Гц}, \\
+    \nu' &= \nu &\cbr{\text{или } T' = T} \implies \lambda' = v'T' = \frac vn T = \frac{ vt }n = \frac \lambda n = \frac{600\,\text{нм}}{1{,}6} \approx 0{,}38 \cdot 10^{-6}\,\text{м}.
+    \\
+    &\text{380 нм---фиол---440---син---485---гол---500---зел---565---жёл---590---оранж---625---крас---780 нм}, \\
+    &\text{увидит}
+    \end{align*}
+}
+\solutionspace{60pt}
 
 \tasknumber{2}%
 \task{%
-    Колебательный контур настроен на частоту $1{,}5 \cdot 10^{7}\,\text{Гц}$.
-    Во сколько раз и как надо изменить емкость конденсатора для перестройки контура на длину волны $20\,\text{м}$?
+    Укажите букву, соответствующую физическую величину (из текущего раздела), её единицы измерения в СИ и выразите её из какого-либо физического закона:
+    \begin{enumerate}
+        \item «л'амбда»,
+        \item «вэ»,
+        \item «бал'шайа цэ»,
+        \item «тэ».
+    \end{enumerate}
 }
-\solutionspace{100pt}
 
 \tasknumber{3}%
+\task{%
+    На какую частоту волны настроен радиоприемник, если его колебательный контур
+    обладает индуктивностью $600\,\text{мкГн}$ и ёмкостью $750\,\text{пФ}$?
+}
+\answer{%
+    \begin{align*}
+    T = 2\pi\sqrt{LC} \implies \nu &= \frac 1T = \frac 1{ 2\pi\sqrt{LC} } = \frac 1{ 2\pi\sqrt{600\,\text{мкГн} \cdot 750\,\text{пФ}}} \approx 0{,}237\,\text{МГц}, \\
+    \lambda &= cT = c \cdot 2\pi\sqrt{LC} = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} \cdot 2\pi\sqrt{600\,\text{мкГн} \cdot 750\,\text{пФ}} \approx 1265\,\text{м}.
+    \end{align*}
+}
+\solutionspace{80pt}
+
+\tasknumber{4}%
+\task{%
+    Колебательный контур настроен на частоту $0{,}5 \cdot 10^{7}\,\text{Гц}$.
+    Во сколько раз и как надо изменить индуктивность катушки для перенастройки контура на длину волны $30\,\text{м}$?
+}
+\answer{%
+    \begin{align*}
+    T_1 &= 2\pi\sqrt{L_1C_1} \implies \nu_1 = \frac 1{T_1} = \frac 1{ 2\pi\sqrt{L_1C_1} } \implies L_1C_1 = \frac 1{\sqr{2\pi \nu_1}}, \\
+    L_2C_2 &= \frac 1{\sqr{2\pi \nu_2}} = \frac 1{\sqr{2\pi \frac 1{T_2}}} = \frac 1{\sqr{2\pi \frac c{\lambda_2}}}, \\
+    \frac{L_2C_2}{L_1C_1} &= \frac {\sqr{2\pi \nu}}{\sqr{2\pi \frac c{\lambda_2}}} =  \sqr{ \frac {\nu}{\frac c{\lambda_2}} } = \sqr{ \frac {\nu\lambda_2}{c} } = \sqr{ \frac { 0{,}5 \cdot 10^{7}\,\text{Гц} \cdot 30\,\text{м} }{3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}} } \approx 0{,}25.
+    \end{align*}
+}
+\solutionspace{80pt}
+
+\tasknumber{5}%
 \task{%
     Колебательный контур, состоящий из катушки индуктивности
     и воздушного конденсатора, настроен на длину волны $50\,\text{м}$.
     При этом расстояние между пластинами конденсатора $5\,\text{мм}$.
     Каким должно быть это расстояние, чтобы контур был настроен на длину волны $150\,\text{м}$?
+}
+\answer{%
+    \begin{align*}
+    \lambda &= cT = c \cdot 2\pi\sqrt{LC}, \quad C = \frac{\eps\eps_0 S}d \implies \lambda^2 = 4 \pi^2 c^2 L \frac{\eps\eps_0 S}d, \\
+    \frac{\lambda_2^2}{\lambda_1^2} &= \frac{d_1}{d_2} \implies d_2 =  d_1 \cdot \sqr{\frac{\lambda_1}{\lambda_2}} =  5\,\text{мм} \cdot \sqr{\frac{50\,\text{м}}{150\,\text{м}}} \approx 0{,}556\,\text{мм}
+    \end{align*}
+}
+\solutionspace{80pt}
+
+\tasknumber{6}%
+\task{%
+    Сила тока в первичной обмотке трансформатора $3\,\text{А}$, напряжение на её концах $220\,\text{В}$.
+    Напряжение на концах вторичной обмотки $40\,\text{В}$.
+    Определите силу тока во вторичной обмотке.
+    Потерями в трансформаторе пренебречь.
+}
+\answer{%
+    $U_1\eli_1 = U_2\eli_2 \implies \eli_2 = \eli_1 \cdot \frac{U_1}{U_2} = 3\,\text{А} \cdot \frac{220\,\text{В}}{40\,\text{В}} \approx 17\,\text{А}$
+}
+\solutionspace{60pt}
+
+\tasknumber{7}%
+\task{%
+    Под каким напряжением находится первичная обмотка трансформатора, имеющая $1200$ витков,
+    если во вторичной обмотке $2000$ витков и напряжение на ней $90\,\text{В}$?
+}
+\answer{%
+    $\frac{U_2}{U_1}  = \frac{N_2}{N_1} \implies U_1 = U_2 \cdot \frac{N_1}{N_2} = 90\,\text{В} \cdot \frac{1200}{2000} \approx 54\,\text{В}$
+}
+\solutionspace{40pt}
+
+\tasknumber{8}%
+\task{%
+    Сила тока в первичной обмотке трансформатора $412\,\text{мА}$, напряжение на её концах $250\,\text{В}$.
+    Сила тока во вторичной обмотке $3{,}2\,\text{А}$, напряжение на её концах $31\,\text{В}$.
+    Определите КПД трансформатора.
+}
+\answer{%
+    $\eta = \frac{ U_2\eli_2 }{ U_1\eli_1 } = \frac{ 31\,\text{В} \cdot 3{,}2\,\text{А} }{ 250\,\text{В} \cdot 412\,\text{мА} } \approx 0{,}960, \quad 1-\eta \approx 0{,}040$
 }
 
 \variantsplitter
@@ -317,24 +1289,105 @@
 
 \tasknumber{1}%
 \task{%
-    На какую частоту волны настроен радиоприемник, если его колебательный контур
-    обладает индуктивностью $200\,\text{мкГн}$ и емкостью $750\,\text{пФ}$?
+    Длина волны света в~вакууме $\lambda = 400\,\text{нм}$.
+    Какова частота этой световой волны?
+    Какова длина этой волны в среде с показателем преломления $n = 1{,}5$?
+    Может ли человек увидеть такую волну света, и если да, то какой именно цвет соответствует этим волнам в вакууме и в этой среде?
 }
-\solutionspace{100pt}
+\answer{%
+    \begin{align*}
+    \nu &= \frac 1T = \frac 1{\lambda/c} = \frac c\lambda = \frac{3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}}{400\,\text{нм}} \approx 750 \cdot 10^{12}\,\text{Гц}, \\
+    \nu' &= \nu &\cbr{\text{или } T' = T} \implies \lambda' = v'T' = \frac vn T = \frac{ vt }n = \frac \lambda n = \frac{400\,\text{нм}}{1{,}5} \approx 0{,}27 \cdot 10^{-6}\,\text{м}.
+    \\
+    &\text{380 нм---фиол---440---син---485---гол---500---зел---565---жёл---590---оранж---625---крас---780 нм}, \\
+    &\text{увидит}
+    \end{align*}
+}
+\solutionspace{60pt}
 
 \tasknumber{2}%
 \task{%
-    Колебательный контур настроен на частоту $4{,}5 \cdot 10^{7}\,\text{Гц}$.
-    Во сколько раз и как надо изменить емкость конденсатора для перестройки контура на длину волны $40\,\text{м}$?
+    Укажите букву, соответствующую физическую величину (из текущего раздела), её единицы измерения в СИ и выразите её из какого-либо физического закона:
+    \begin{enumerate}
+        \item «л'амбда»,
+        \item «цэ»,
+        \item «н'у»,
+        \item «эн».
+    \end{enumerate}
 }
-\solutionspace{100pt}
 
 \tasknumber{3}%
+\task{%
+    На какую частоту волны настроен радиоприемник, если его колебательный контур
+    обладает индуктивностью $200\,\text{мкГн}$ и ёмкостью $750\,\text{пФ}$?
+}
+\answer{%
+    \begin{align*}
+    T = 2\pi\sqrt{LC} \implies \nu &= \frac 1T = \frac 1{ 2\pi\sqrt{LC} } = \frac 1{ 2\pi\sqrt{200\,\text{мкГн} \cdot 750\,\text{пФ}}} \approx 0{,}411\,\text{МГц}, \\
+    \lambda &= cT = c \cdot 2\pi\sqrt{LC} = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} \cdot 2\pi\sqrt{200\,\text{мкГн} \cdot 750\,\text{пФ}} \approx 730\,\text{м}.
+    \end{align*}
+}
+\solutionspace{80pt}
+
+\tasknumber{4}%
+\task{%
+    Колебательный контур настроен на частоту $4{,}5 \cdot 10^{7}\,\text{Гц}$.
+    Во сколько раз и как надо изменить ёмкость конденсатора для перенастройки контура на длину волны $25\,\text{м}$?
+}
+\answer{%
+    \begin{align*}
+    T_1 &= 2\pi\sqrt{L_1C_1} \implies \nu_1 = \frac 1{T_1} = \frac 1{ 2\pi\sqrt{L_1C_1} } \implies L_1C_1 = \frac 1{\sqr{2\pi \nu_1}}, \\
+    L_2C_2 &= \frac 1{\sqr{2\pi \nu_2}} = \frac 1{\sqr{2\pi \frac 1{T_2}}} = \frac 1{\sqr{2\pi \frac c{\lambda_2}}}, \\
+    \frac{L_2C_2}{L_1C_1} &= \frac {\sqr{2\pi \nu}}{\sqr{2\pi \frac c{\lambda_2}}} =  \sqr{ \frac {\nu}{\frac c{\lambda_2}} } = \sqr{ \frac {\nu\lambda_2}{c} } = \sqr{ \frac { 4{,}5 \cdot 10^{7}\,\text{Гц} \cdot 25\,\text{м} }{3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}} } \approx 14{,}06.
+    \end{align*}
+}
+\solutionspace{80pt}
+
+\tasknumber{5}%
 \task{%
     Колебательный контур, состоящий из катушки индуктивности
     и воздушного конденсатора, настроен на длину волны $180\,\text{м}$.
     При этом расстояние между пластинами конденсатора $3{,}5\,\text{мм}$.
     Каким должно быть это расстояние, чтобы контур был настроен на длину волны $80\,\text{м}$?
+}
+\answer{%
+    \begin{align*}
+    \lambda &= cT = c \cdot 2\pi\sqrt{LC}, \quad C = \frac{\eps\eps_0 S}d \implies \lambda^2 = 4 \pi^2 c^2 L \frac{\eps\eps_0 S}d, \\
+    \frac{\lambda_2^2}{\lambda_1^2} &= \frac{d_1}{d_2} \implies d_2 =  d_1 \cdot \sqr{\frac{\lambda_1}{\lambda_2}} =  3{,}5\,\text{мм} \cdot \sqr{\frac{180\,\text{м}}{80\,\text{м}}} \approx 17{,}72\,\text{мм}
+    \end{align*}
+}
+\solutionspace{80pt}
+
+\tasknumber{6}%
+\task{%
+    Сила тока в первичной обмотке трансформатора $5\,\text{А}$, напряжение на её концах $320\,\text{В}$.
+    Напряжение на концах вторичной обмотки $40\,\text{В}$.
+    Определите силу тока во вторичной обмотке.
+    Потерями в трансформаторе пренебречь.
+}
+\answer{%
+    $U_1\eli_1 = U_2\eli_2 \implies \eli_2 = \eli_1 \cdot \frac{U_1}{U_2} = 5\,\text{А} \cdot \frac{320\,\text{В}}{40\,\text{В}} \approx 40\,\text{А}$
+}
+\solutionspace{60pt}
+
+\tasknumber{7}%
+\task{%
+    Под каким напряжением находится первичная обмотка трансформатора, имеющая $1500$ витков,
+    если во вторичной обмотке $200$ витков и напряжение на ней $90\,\text{В}$?
+}
+\answer{%
+    $\frac{U_2}{U_1}  = \frac{N_2}{N_1} \implies U_1 = U_2 \cdot \frac{N_1}{N_2} = 90\,\text{В} \cdot \frac{1500}{200} \approx 675\,\text{В}$
+}
+\solutionspace{40pt}
+
+\tasknumber{8}%
+\task{%
+    Сила тока в первичной обмотке трансформатора $412\,\text{мА}$, напряжение на её концах $300\,\text{В}$.
+    Сила тока во вторичной обмотке $4{,}3\,\text{А}$, напряжение на её концах $28\,\text{В}$.
+    Определите КПД трансформатора.
+}
+\answer{%
+    $\eta = \frac{ U_2\eli_2 }{ U_1\eli_1 } = \frac{ 28\,\text{В} \cdot 4{,}3\,\text{А} }{ 300\,\text{В} \cdot 412\,\text{мА} } \approx 0{,}970, \quad 1-\eta \approx 0{,}030$
 }
 
 \variantsplitter
@@ -343,24 +1396,105 @@
 
 \tasknumber{1}%
 \task{%
-    На какую частоту волны настроен радиоприемник, если его колебательный контур
-    обладает индуктивностью $200\,\text{мкГн}$ и емкостью $750\,\text{пФ}$?
+    Длина волны света в~вакууме $\lambda = 500\,\text{нм}$.
+    Какова частота этой световой волны?
+    Какова длина этой волны в среде с показателем преломления $n = 1{,}6$?
+    Может ли человек увидеть такую волну света, и если да, то какой именно цвет соответствует этим волнам в вакууме и в этой среде?
 }
-\solutionspace{100pt}
+\answer{%
+    \begin{align*}
+    \nu &= \frac 1T = \frac 1{\lambda/c} = \frac c\lambda = \frac{3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}}{500\,\text{нм}} \approx 600 \cdot 10^{12}\,\text{Гц}, \\
+    \nu' &= \nu &\cbr{\text{или } T' = T} \implies \lambda' = v'T' = \frac vn T = \frac{ vt }n = \frac \lambda n = \frac{500\,\text{нм}}{1{,}6} \approx 0{,}31 \cdot 10^{-6}\,\text{м}.
+    \\
+    &\text{380 нм---фиол---440---син---485---гол---500---зел---565---жёл---590---оранж---625---крас---780 нм}, \\
+    &\text{увидит}
+    \end{align*}
+}
+\solutionspace{60pt}
 
 \tasknumber{2}%
 \task{%
-    Колебательный контур настроен на частоту $0{,}5 \cdot 10^{7}\,\text{Гц}$.
-    Во сколько раз и как надо изменить емкость конденсатора для перестройки контура на длину волны $50\,\text{м}$?
+    Укажите букву, соответствующую физическую величину (из текущего раздела), её единицы измерения в СИ и выразите её из какого-либо физического закона:
+    \begin{enumerate}
+        \item «эл'»,
+        \item «вэ»,
+        \item «н'у»,
+        \item «эн».
+    \end{enumerate}
 }
-\solutionspace{100pt}
 
 \tasknumber{3}%
+\task{%
+    На какую частоту волны настроен радиоприемник, если его колебательный контур
+    обладает индуктивностью $200\,\text{мкГн}$ и ёмкостью $750\,\text{пФ}$?
+}
+\answer{%
+    \begin{align*}
+    T = 2\pi\sqrt{LC} \implies \nu &= \frac 1T = \frac 1{ 2\pi\sqrt{LC} } = \frac 1{ 2\pi\sqrt{200\,\text{мкГн} \cdot 750\,\text{пФ}}} \approx 0{,}411\,\text{МГц}, \\
+    \lambda &= cT = c \cdot 2\pi\sqrt{LC} = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} \cdot 2\pi\sqrt{200\,\text{мкГн} \cdot 750\,\text{пФ}} \approx 730\,\text{м}.
+    \end{align*}
+}
+\solutionspace{80pt}
+
+\tasknumber{4}%
+\task{%
+    Колебательный контур настроен на частоту $0{,}8 \cdot 10^{7}\,\text{Гц}$.
+    Во сколько раз и как надо изменить индуктивность катушки для перенастройки контура на длину волны $20\,\text{м}$?
+}
+\answer{%
+    \begin{align*}
+    T_1 &= 2\pi\sqrt{L_1C_1} \implies \nu_1 = \frac 1{T_1} = \frac 1{ 2\pi\sqrt{L_1C_1} } \implies L_1C_1 = \frac 1{\sqr{2\pi \nu_1}}, \\
+    L_2C_2 &= \frac 1{\sqr{2\pi \nu_2}} = \frac 1{\sqr{2\pi \frac 1{T_2}}} = \frac 1{\sqr{2\pi \frac c{\lambda_2}}}, \\
+    \frac{L_2C_2}{L_1C_1} &= \frac {\sqr{2\pi \nu}}{\sqr{2\pi \frac c{\lambda_2}}} =  \sqr{ \frac {\nu}{\frac c{\lambda_2}} } = \sqr{ \frac {\nu\lambda_2}{c} } = \sqr{ \frac { 0{,}8 \cdot 10^{7}\,\text{Гц} \cdot 20\,\text{м} }{3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}} } \approx 0{,}28.
+    \end{align*}
+}
+\solutionspace{80pt}
+
+\tasknumber{5}%
 \task{%
     Колебательный контур, состоящий из катушки индуктивности
     и воздушного конденсатора, настроен на длину волны $20\,\text{м}$.
     При этом расстояние между пластинами конденсатора $3\,\text{мм}$.
     Каким должно быть это расстояние, чтобы контур был настроен на длину волны $80\,\text{м}$?
+}
+\answer{%
+    \begin{align*}
+    \lambda &= cT = c \cdot 2\pi\sqrt{LC}, \quad C = \frac{\eps\eps_0 S}d \implies \lambda^2 = 4 \pi^2 c^2 L \frac{\eps\eps_0 S}d, \\
+    \frac{\lambda_2^2}{\lambda_1^2} &= \frac{d_1}{d_2} \implies d_2 =  d_1 \cdot \sqr{\frac{\lambda_1}{\lambda_2}} =  3\,\text{мм} \cdot \sqr{\frac{20\,\text{м}}{80\,\text{м}}} \approx 0{,}1875\,\text{мм}
+    \end{align*}
+}
+\solutionspace{80pt}
+
+\tasknumber{6}%
+\task{%
+    Сила тока в первичной обмотке трансформатора $3\,\text{А}$, напряжение на её концах $320\,\text{В}$.
+    Напряжение на концах вторичной обмотки $20\,\text{В}$.
+    Определите силу тока во вторичной обмотке.
+    Потерями в трансформаторе пренебречь.
+}
+\answer{%
+    $U_1\eli_1 = U_2\eli_2 \implies \eli_2 = \eli_1 \cdot \frac{U_1}{U_2} = 3\,\text{А} \cdot \frac{320\,\text{В}}{20\,\text{В}} \approx 48\,\text{А}$
+}
+\solutionspace{60pt}
+
+\tasknumber{7}%
+\task{%
+    Под каким напряжением находится первичная обмотка трансформатора, имеющая $1200$ витков,
+    если во вторичной обмотке $1000$ витков и напряжение на ней $150\,\text{В}$?
+}
+\answer{%
+    $\frac{U_2}{U_1}  = \frac{N_2}{N_1} \implies U_1 = U_2 \cdot \frac{N_1}{N_2} = 150\,\text{В} \cdot \frac{1200}{1000} \approx 180\,\text{В}$
+}
+\solutionspace{40pt}
+
+\tasknumber{8}%
+\task{%
+    Сила тока в первичной обмотке трансформатора $542\,\text{мА}$, напряжение на её концах $300\,\text{В}$.
+    Сила тока во вторичной обмотке $3{,}2\,\text{А}$, напряжение на её концах $48\,\text{В}$.
+    Определите КПД трансформатора.
+}
+\answer{%
+    $\eta = \frac{ U_2\eli_2 }{ U_1\eli_1 } = \frac{ 48\,\text{В} \cdot 3{,}2\,\text{А} }{ 300\,\text{В} \cdot 542\,\text{мА} } \approx 0{,}940, \quad 1-\eta \approx 0{,}060$
 }
 
 \variantsplitter
@@ -369,24 +1503,105 @@
 
 \tasknumber{1}%
 \task{%
-    На какую длину волны настроен радиоприемник, если его колебательный контур
-    обладает индуктивностью $200\,\text{мкГн}$ и емкостью $800\,\text{пФ}$?
+    Длина волны света в~вакууме $\lambda = 700\,\text{нм}$.
+    Какова частота этой световой волны?
+    Какова длина этой волны в среде с показателем преломления $n = 1{,}6$?
+    Может ли человек увидеть такую волну света, и если да, то какой именно цвет соответствует этим волнам в вакууме и в этой среде?
 }
-\solutionspace{100pt}
+\answer{%
+    \begin{align*}
+    \nu &= \frac 1T = \frac 1{\lambda/c} = \frac c\lambda = \frac{3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}}{700\,\text{нм}} \approx 429 \cdot 10^{12}\,\text{Гц}, \\
+    \nu' &= \nu &\cbr{\text{или } T' = T} \implies \lambda' = v'T' = \frac vn T = \frac{ vt }n = \frac \lambda n = \frac{700\,\text{нм}}{1{,}6} \approx 0{,}44 \cdot 10^{-6}\,\text{м}.
+    \\
+    &\text{380 нм---фиол---440---син---485---гол---500---зел---565---жёл---590---оранж---625---крас---780 нм}, \\
+    &\text{увидит}
+    \end{align*}
+}
+\solutionspace{60pt}
 
 \tasknumber{2}%
 \task{%
-    Колебательный контур настроен на частоту $1{,}8 \cdot 10^{7}\,\text{Гц}$.
-    Во сколько раз и как надо изменить емкость конденсатора для перестройки контура на длину волны $20\,\text{м}$?
+    Укажите букву, соответствующую физическую величину (из текущего раздела), её единицы измерения в СИ и выразите её из какого-либо физического закона:
+    \begin{enumerate}
+        \item «эл'»,
+        \item «цэ»,
+        \item «н'у»,
+        \item «эн».
+    \end{enumerate}
 }
-\solutionspace{100pt}
 
 \tasknumber{3}%
+\task{%
+    На какую длину волны настроен радиоприемник, если его колебательный контур
+    обладает индуктивностью $200\,\text{мкГн}$ и ёмкостью $800\,\text{пФ}$?
+}
+\answer{%
+    \begin{align*}
+    T = 2\pi\sqrt{LC} \implies \nu &= \frac 1T = \frac 1{ 2\pi\sqrt{LC} } = \frac 1{ 2\pi\sqrt{200\,\text{мкГн} \cdot 800\,\text{пФ}}} \approx 0{,}398\,\text{МГц}, \\
+    \lambda &= cT = c \cdot 2\pi\sqrt{LC} = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} \cdot 2\pi\sqrt{200\,\text{мкГн} \cdot 800\,\text{пФ}} \approx 754\,\text{м}.
+    \end{align*}
+}
+\solutionspace{80pt}
+
+\tasknumber{4}%
+\task{%
+    Колебательный контур настроен на частоту $0{,}5 \cdot 10^{7}\,\text{Гц}$.
+    Во сколько раз и как надо изменить ёмкость конденсатора для перенастройки контура на длину волны $30\,\text{м}$?
+}
+\answer{%
+    \begin{align*}
+    T_1 &= 2\pi\sqrt{L_1C_1} \implies \nu_1 = \frac 1{T_1} = \frac 1{ 2\pi\sqrt{L_1C_1} } \implies L_1C_1 = \frac 1{\sqr{2\pi \nu_1}}, \\
+    L_2C_2 &= \frac 1{\sqr{2\pi \nu_2}} = \frac 1{\sqr{2\pi \frac 1{T_2}}} = \frac 1{\sqr{2\pi \frac c{\lambda_2}}}, \\
+    \frac{L_2C_2}{L_1C_1} &= \frac {\sqr{2\pi \nu}}{\sqr{2\pi \frac c{\lambda_2}}} =  \sqr{ \frac {\nu}{\frac c{\lambda_2}} } = \sqr{ \frac {\nu\lambda_2}{c} } = \sqr{ \frac { 0{,}5 \cdot 10^{7}\,\text{Гц} \cdot 30\,\text{м} }{3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}} } \approx 0{,}25.
+    \end{align*}
+}
+\solutionspace{80pt}
+
+\tasknumber{5}%
 \task{%
     Колебательный контур, состоящий из катушки индуктивности
     и воздушного конденсатора, настроен на длину волны $20\,\text{м}$.
     При этом расстояние между пластинами конденсатора $5\,\text{мм}$.
     Каким должно быть это расстояние, чтобы контур был настроен на длину волны $45\,\text{м}$?
+}
+\answer{%
+    \begin{align*}
+    \lambda &= cT = c \cdot 2\pi\sqrt{LC}, \quad C = \frac{\eps\eps_0 S}d \implies \lambda^2 = 4 \pi^2 c^2 L \frac{\eps\eps_0 S}d, \\
+    \frac{\lambda_2^2}{\lambda_1^2} &= \frac{d_1}{d_2} \implies d_2 =  d_1 \cdot \sqr{\frac{\lambda_1}{\lambda_2}} =  5\,\text{мм} \cdot \sqr{\frac{20\,\text{м}}{45\,\text{м}}} \approx 0{,}988\,\text{мм}
+    \end{align*}
+}
+\solutionspace{80pt}
+
+\tasknumber{6}%
+\task{%
+    Сила тока в первичной обмотке трансформатора $2\,\text{А}$, напряжение на её концах $220\,\text{В}$.
+    Напряжение на концах вторичной обмотки $20\,\text{В}$.
+    Определите силу тока во вторичной обмотке.
+    Потерями в трансформаторе пренебречь.
+}
+\answer{%
+    $U_1\eli_1 = U_2\eli_2 \implies \eli_2 = \eli_1 \cdot \frac{U_1}{U_2} = 2\,\text{А} \cdot \frac{220\,\text{В}}{20\,\text{В}} \approx 22\,\text{А}$
+}
+\solutionspace{60pt}
+
+\tasknumber{7}%
+\task{%
+    Под каким напряжением находится первичная обмотка трансформатора, имеющая $1500$ витков,
+    если во вторичной обмотке $1000$ витков и напряжение на ней $50\,\text{В}$?
+}
+\answer{%
+    $\frac{U_2}{U_1}  = \frac{N_2}{N_1} \implies U_1 = U_2 \cdot \frac{N_1}{N_2} = 50\,\text{В} \cdot \frac{1500}{1000} \approx 75\,\text{В}$
+}
+\solutionspace{40pt}
+
+\tasknumber{8}%
+\task{%
+    Сила тока в первичной обмотке трансформатора $784\,\text{мА}$, напряжение на её концах $250\,\text{В}$.
+    Сила тока во вторичной обмотке $5{,}1\,\text{А}$, напряжение на её концах $37\,\text{В}$.
+    Определите КПД трансформатора.
+}
+\answer{%
+    $\eta = \frac{ U_2\eli_2 }{ U_1\eli_1 } = \frac{ 37\,\text{В} \cdot 5{,}1\,\text{А} }{ 250\,\text{В} \cdot 784\,\text{мА} } \approx 0{,}960, \quad 1-\eta \approx 0{,}040$
 }
 
 \variantsplitter
@@ -395,24 +1610,105 @@
 
 \tasknumber{1}%
 \task{%
-    На какую длину волны настроен радиоприемник, если его колебательный контур
-    обладает индуктивностью $300\,\text{мкГн}$ и емкостью $750\,\text{пФ}$?
+    Длина волны света в~вакууме $\lambda = 400\,\text{нм}$.
+    Какова частота этой световой волны?
+    Какова длина этой волны в среде с показателем преломления $n = 1{,}5$?
+    Может ли человек увидеть такую волну света, и если да, то какой именно цвет соответствует этим волнам в вакууме и в этой среде?
 }
-\solutionspace{100pt}
+\answer{%
+    \begin{align*}
+    \nu &= \frac 1T = \frac 1{\lambda/c} = \frac c\lambda = \frac{3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}}{400\,\text{нм}} \approx 750 \cdot 10^{12}\,\text{Гц}, \\
+    \nu' &= \nu &\cbr{\text{или } T' = T} \implies \lambda' = v'T' = \frac vn T = \frac{ vt }n = \frac \lambda n = \frac{400\,\text{нм}}{1{,}5} \approx 0{,}27 \cdot 10^{-6}\,\text{м}.
+    \\
+    &\text{380 нм---фиол---440---син---485---гол---500---зел---565---жёл---590---оранж---625---крас---780 нм}, \\
+    &\text{увидит}
+    \end{align*}
+}
+\solutionspace{60pt}
 
 \tasknumber{2}%
 \task{%
-    Колебательный контур настроен на частоту $0{,}5 \cdot 10^{7}\,\text{Гц}$.
-    Во сколько раз и как надо изменить емкость конденсатора для перестройки контура на длину волны $30\,\text{м}$?
+    Укажите букву, соответствующую физическую величину (из текущего раздела), её единицы измерения в СИ и выразите её из какого-либо физического закона:
+    \begin{enumerate}
+        \item «л'амбда»,
+        \item «вэ»,
+        \item «н'у»,
+        \item «тэ».
+    \end{enumerate}
 }
-\solutionspace{100pt}
 
 \tasknumber{3}%
+\task{%
+    На какую длину волны настроен радиоприемник, если его колебательный контур
+    обладает индуктивностью $300\,\text{мкГн}$ и ёмкостью $750\,\text{пФ}$?
+}
+\answer{%
+    \begin{align*}
+    T = 2\pi\sqrt{LC} \implies \nu &= \frac 1T = \frac 1{ 2\pi\sqrt{LC} } = \frac 1{ 2\pi\sqrt{300\,\text{мкГн} \cdot 750\,\text{пФ}}} \approx 0{,}336\,\text{МГц}, \\
+    \lambda &= cT = c \cdot 2\pi\sqrt{LC} = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} \cdot 2\pi\sqrt{300\,\text{мкГн} \cdot 750\,\text{пФ}} \approx 894\,\text{м}.
+    \end{align*}
+}
+\solutionspace{80pt}
+
+\tasknumber{4}%
+\task{%
+    Колебательный контур настроен на частоту $2{,}5 \cdot 10^{7}\,\text{Гц}$.
+    Во сколько раз и как надо изменить ёмкость конденсатора для перенастройки контура на длину волны $50\,\text{м}$?
+}
+\answer{%
+    \begin{align*}
+    T_1 &= 2\pi\sqrt{L_1C_1} \implies \nu_1 = \frac 1{T_1} = \frac 1{ 2\pi\sqrt{L_1C_1} } \implies L_1C_1 = \frac 1{\sqr{2\pi \nu_1}}, \\
+    L_2C_2 &= \frac 1{\sqr{2\pi \nu_2}} = \frac 1{\sqr{2\pi \frac 1{T_2}}} = \frac 1{\sqr{2\pi \frac c{\lambda_2}}}, \\
+    \frac{L_2C_2}{L_1C_1} &= \frac {\sqr{2\pi \nu}}{\sqr{2\pi \frac c{\lambda_2}}} =  \sqr{ \frac {\nu}{\frac c{\lambda_2}} } = \sqr{ \frac {\nu\lambda_2}{c} } = \sqr{ \frac { 2{,}5 \cdot 10^{7}\,\text{Гц} \cdot 50\,\text{м} }{3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}} } \approx 17{,}36.
+    \end{align*}
+}
+\solutionspace{80pt}
+
+\tasknumber{5}%
 \task{%
     Колебательный контур, состоящий из катушки индуктивности
     и воздушного конденсатора, настроен на длину волны $120\,\text{м}$.
     При этом расстояние между пластинами конденсатора $4{,}5\,\text{мм}$.
     Каким должно быть это расстояние, чтобы контур был настроен на длину волны $45\,\text{м}$?
+}
+\answer{%
+    \begin{align*}
+    \lambda &= cT = c \cdot 2\pi\sqrt{LC}, \quad C = \frac{\eps\eps_0 S}d \implies \lambda^2 = 4 \pi^2 c^2 L \frac{\eps\eps_0 S}d, \\
+    \frac{\lambda_2^2}{\lambda_1^2} &= \frac{d_1}{d_2} \implies d_2 =  d_1 \cdot \sqr{\frac{\lambda_1}{\lambda_2}} =  4{,}5\,\text{мм} \cdot \sqr{\frac{120\,\text{м}}{45\,\text{м}}} \approx 32\,\text{мм}
+    \end{align*}
+}
+\solutionspace{80pt}
+
+\tasknumber{6}%
+\task{%
+    Сила тока в первичной обмотке трансформатора $3\,\text{А}$, напряжение на её концах $120\,\text{В}$.
+    Напряжение на концах вторичной обмотки $80\,\text{В}$.
+    Определите силу тока во вторичной обмотке.
+    Потерями в трансформаторе пренебречь.
+}
+\answer{%
+    $U_1\eli_1 = U_2\eli_2 \implies \eli_2 = \eli_1 \cdot \frac{U_1}{U_2} = 3\,\text{А} \cdot \frac{120\,\text{В}}{80\,\text{В}} \approx 5\,\text{А}$
+}
+\solutionspace{60pt}
+
+\tasknumber{7}%
+\task{%
+    Под каким напряжением находится первичная обмотка трансформатора, имеющая $1200$ витков,
+    если во вторичной обмотке $1000$ витков и напряжение на ней $110\,\text{В}$?
+}
+\answer{%
+    $\frac{U_2}{U_1}  = \frac{N_2}{N_1} \implies U_1 = U_2 \cdot \frac{N_1}{N_2} = 110\,\text{В} \cdot \frac{1200}{1000} \approx 132\,\text{В}$
+}
+\solutionspace{40pt}
+
+\tasknumber{8}%
+\task{%
+    Сила тока в первичной обмотке трансформатора $923\,\text{мА}$, напряжение на её концах $300\,\text{В}$.
+    Сила тока во вторичной обмотке $2{,}4\,\text{А}$, напряжение на её концах $112\,\text{В}$.
+    Определите КПД трансформатора.
+}
+\answer{%
+    $\eta = \frac{ U_2\eli_2 }{ U_1\eli_1 } = \frac{ 112\,\text{В} \cdot 2{,}4\,\text{А} }{ 300\,\text{В} \cdot 923\,\text{мА} } \approx 0{,}970, \quad 1-\eta \approx 0{,}030$
 }
 
 \variantsplitter
@@ -421,24 +1717,105 @@
 
 \tasknumber{1}%
 \task{%
-    На какую частоту волны настроен радиоприемник, если его колебательный контур
-    обладает индуктивностью $200\,\text{мкГн}$ и емкостью $600\,\text{пФ}$?
+    Длина волны света в~вакууме $\lambda = 500\,\text{нм}$.
+    Какова частота этой световой волны?
+    Какова длина этой волны в среде с показателем преломления $n = 1{,}3$?
+    Может ли человек увидеть такую волну света, и если да, то какой именно цвет соответствует этим волнам в вакууме и в этой среде?
 }
-\solutionspace{100pt}
+\answer{%
+    \begin{align*}
+    \nu &= \frac 1T = \frac 1{\lambda/c} = \frac c\lambda = \frac{3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}}{500\,\text{нм}} \approx 600 \cdot 10^{12}\,\text{Гц}, \\
+    \nu' &= \nu &\cbr{\text{или } T' = T} \implies \lambda' = v'T' = \frac vn T = \frac{ vt }n = \frac \lambda n = \frac{500\,\text{нм}}{1{,}3} \approx 0{,}38 \cdot 10^{-6}\,\text{м}.
+    \\
+    &\text{380 нм---фиол---440---син---485---гол---500---зел---565---жёл---590---оранж---625---крас---780 нм}, \\
+    &\text{увидит}
+    \end{align*}
+}
+\solutionspace{60pt}
 
 \tasknumber{2}%
 \task{%
-    Колебательный контур настроен на частоту $0{,}5 \cdot 10^{7}\,\text{Гц}$.
-    Во сколько раз и как надо изменить емкость конденсатора для перестройки контура на длину волны $50\,\text{м}$?
+    Укажите букву, соответствующую физическую величину (из текущего раздела), её единицы измерения в СИ и выразите её из какого-либо физического закона:
+    \begin{enumerate}
+        \item «эл'»,
+        \item «вэ»,
+        \item «бал'шайа цэ»,
+        \item «эн».
+    \end{enumerate}
 }
-\solutionspace{100pt}
 
 \tasknumber{3}%
+\task{%
+    На какую частоту волны настроен радиоприемник, если его колебательный контур
+    обладает индуктивностью $200\,\text{мкГн}$ и ёмкостью $600\,\text{пФ}$?
+}
+\answer{%
+    \begin{align*}
+    T = 2\pi\sqrt{LC} \implies \nu &= \frac 1T = \frac 1{ 2\pi\sqrt{LC} } = \frac 1{ 2\pi\sqrt{200\,\text{мкГн} \cdot 600\,\text{пФ}}} \approx 0{,}459\,\text{МГц}, \\
+    \lambda &= cT = c \cdot 2\pi\sqrt{LC} = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} \cdot 2\pi\sqrt{200\,\text{мкГн} \cdot 600\,\text{пФ}} \approx 653\,\text{м}.
+    \end{align*}
+}
+\solutionspace{80pt}
+
+\tasknumber{4}%
+\task{%
+    Колебательный контур настроен на частоту $3{,}2 \cdot 10^{7}\,\text{Гц}$.
+    Во сколько раз и как надо изменить индуктивность катушки для перенастройки контура на длину волны $20\,\text{м}$?
+}
+\answer{%
+    \begin{align*}
+    T_1 &= 2\pi\sqrt{L_1C_1} \implies \nu_1 = \frac 1{T_1} = \frac 1{ 2\pi\sqrt{L_1C_1} } \implies L_1C_1 = \frac 1{\sqr{2\pi \nu_1}}, \\
+    L_2C_2 &= \frac 1{\sqr{2\pi \nu_2}} = \frac 1{\sqr{2\pi \frac 1{T_2}}} = \frac 1{\sqr{2\pi \frac c{\lambda_2}}}, \\
+    \frac{L_2C_2}{L_1C_1} &= \frac {\sqr{2\pi \nu}}{\sqr{2\pi \frac c{\lambda_2}}} =  \sqr{ \frac {\nu}{\frac c{\lambda_2}} } = \sqr{ \frac {\nu\lambda_2}{c} } = \sqr{ \frac { 3{,}2 \cdot 10^{7}\,\text{Гц} \cdot 20\,\text{м} }{3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}} } \approx 4{,}55.
+    \end{align*}
+}
+\solutionspace{80pt}
+
+\tasknumber{5}%
 \task{%
     Колебательный контур, состоящий из катушки индуктивности
     и воздушного конденсатора, настроен на длину волны $20\,\text{м}$.
     При этом расстояние между пластинами конденсатора $2\,\text{мм}$.
     Каким должно быть это расстояние, чтобы контур был настроен на длину волны $80\,\text{м}$?
+}
+\answer{%
+    \begin{align*}
+    \lambda &= cT = c \cdot 2\pi\sqrt{LC}, \quad C = \frac{\eps\eps_0 S}d \implies \lambda^2 = 4 \pi^2 c^2 L \frac{\eps\eps_0 S}d, \\
+    \frac{\lambda_2^2}{\lambda_1^2} &= \frac{d_1}{d_2} \implies d_2 =  d_1 \cdot \sqr{\frac{\lambda_1}{\lambda_2}} =  2\,\text{мм} \cdot \sqr{\frac{20\,\text{м}}{80\,\text{м}}} \approx 0{,}1250\,\text{мм}
+    \end{align*}
+}
+\solutionspace{80pt}
+
+\tasknumber{6}%
+\task{%
+    Сила тока в первичной обмотке трансформатора $2\,\text{А}$, напряжение на её концах $220\,\text{В}$.
+    Напряжение на концах вторичной обмотки $20\,\text{В}$.
+    Определите силу тока во вторичной обмотке.
+    Потерями в трансформаторе пренебречь.
+}
+\answer{%
+    $U_1\eli_1 = U_2\eli_2 \implies \eli_2 = \eli_1 \cdot \frac{U_1}{U_2} = 2\,\text{А} \cdot \frac{220\,\text{В}}{20\,\text{В}} \approx 22\,\text{А}$
+}
+\solutionspace{60pt}
+
+\tasknumber{7}%
+\task{%
+    Под каким напряжением находится первичная обмотка трансформатора, имеющая $1200$ витков,
+    если во вторичной обмотке $200$ витков и напряжение на ней $90\,\text{В}$?
+}
+\answer{%
+    $\frac{U_2}{U_1}  = \frac{N_2}{N_1} \implies U_1 = U_2 \cdot \frac{N_1}{N_2} = 90\,\text{В} \cdot \frac{1200}{200} \approx 540\,\text{В}$
+}
+\solutionspace{40pt}
+
+\tasknumber{8}%
+\task{%
+    Сила тока в первичной обмотке трансформатора $859\,\text{мА}$, напряжение на её концах $250\,\text{В}$.
+    Сила тока во вторичной обмотке $3{,}2\,\text{А}$, напряжение на её концах $65\,\text{В}$.
+    Определите долю потерей трансформатора.
+}
+\answer{%
+    $\eta = \frac{ U_2\eli_2 }{ U_1\eli_1 } = \frac{ 65\,\text{В} \cdot 3{,}2\,\text{А} }{ 250\,\text{В} \cdot 859\,\text{мА} } \approx 0{,}970, \quad 1-\eta \approx 0{,}030$
 }
 
 \variantsplitter
@@ -447,24 +1824,105 @@
 
 \tasknumber{1}%
 \task{%
-    На какую длину волны настроен радиоприемник, если его колебательный контур
-    обладает индуктивностью $200\,\text{мкГн}$ и емкостью $650\,\text{пФ}$?
+    Длина волны света в~вакууме $\lambda = 500\,\text{нм}$.
+    Какова частота этой световой волны?
+    Какова длина этой волны в среде с показателем преломления $n = 1{,}6$?
+    Может ли человек увидеть такую волну света, и если да, то какой именно цвет соответствует этим волнам в вакууме и в этой среде?
 }
-\solutionspace{100pt}
+\answer{%
+    \begin{align*}
+    \nu &= \frac 1T = \frac 1{\lambda/c} = \frac c\lambda = \frac{3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}}{500\,\text{нм}} \approx 600 \cdot 10^{12}\,\text{Гц}, \\
+    \nu' &= \nu &\cbr{\text{или } T' = T} \implies \lambda' = v'T' = \frac vn T = \frac{ vt }n = \frac \lambda n = \frac{500\,\text{нм}}{1{,}6} \approx 0{,}31 \cdot 10^{-6}\,\text{м}.
+    \\
+    &\text{380 нм---фиол---440---син---485---гол---500---зел---565---жёл---590---оранж---625---крас---780 нм}, \\
+    &\text{увидит}
+    \end{align*}
+}
+\solutionspace{60pt}
 
 \tasknumber{2}%
 \task{%
-    Колебательный контур настроен на частоту $1{,}8 \cdot 10^{7}\,\text{Гц}$.
-    Во сколько раз и как надо изменить емкость конденсатора для перестройки контура на длину волны $40\,\text{м}$?
+    Укажите букву, соответствующую физическую величину (из текущего раздела), её единицы измерения в СИ и выразите её из какого-либо физического закона:
+    \begin{enumerate}
+        \item «эл'»,
+        \item «цэ»,
+        \item «н'у»,
+        \item «эн».
+    \end{enumerate}
 }
-\solutionspace{100pt}
 
 \tasknumber{3}%
+\task{%
+    На какую длину волны настроен радиоприемник, если его колебательный контур
+    обладает индуктивностью $200\,\text{мкГн}$ и ёмкостью $650\,\text{пФ}$?
+}
+\answer{%
+    \begin{align*}
+    T = 2\pi\sqrt{LC} \implies \nu &= \frac 1T = \frac 1{ 2\pi\sqrt{LC} } = \frac 1{ 2\pi\sqrt{200\,\text{мкГн} \cdot 650\,\text{пФ}}} \approx 0{,}441\,\text{МГц}, \\
+    \lambda &= cT = c \cdot 2\pi\sqrt{LC} = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} \cdot 2\pi\sqrt{200\,\text{мкГн} \cdot 650\,\text{пФ}} \approx 680\,\text{м}.
+    \end{align*}
+}
+\solutionspace{80pt}
+
+\tasknumber{4}%
+\task{%
+    Колебательный контур настроен на частоту $2{,}5 \cdot 10^{7}\,\text{Гц}$.
+    Во сколько раз и как надо изменить ёмкость конденсатора для перенастройки контура на длину волны $50\,\text{м}$?
+}
+\answer{%
+    \begin{align*}
+    T_1 &= 2\pi\sqrt{L_1C_1} \implies \nu_1 = \frac 1{T_1} = \frac 1{ 2\pi\sqrt{L_1C_1} } \implies L_1C_1 = \frac 1{\sqr{2\pi \nu_1}}, \\
+    L_2C_2 &= \frac 1{\sqr{2\pi \nu_2}} = \frac 1{\sqr{2\pi \frac 1{T_2}}} = \frac 1{\sqr{2\pi \frac c{\lambda_2}}}, \\
+    \frac{L_2C_2}{L_1C_1} &= \frac {\sqr{2\pi \nu}}{\sqr{2\pi \frac c{\lambda_2}}} =  \sqr{ \frac {\nu}{\frac c{\lambda_2}} } = \sqr{ \frac {\nu\lambda_2}{c} } = \sqr{ \frac { 2{,}5 \cdot 10^{7}\,\text{Гц} \cdot 50\,\text{м} }{3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}} } \approx 17{,}36.
+    \end{align*}
+}
+\solutionspace{80pt}
+
+\tasknumber{5}%
 \task{%
     Колебательный контур, состоящий из катушки индуктивности
     и воздушного конденсатора, настроен на длину волны $50\,\text{м}$.
     При этом расстояние между пластинами конденсатора $4{,}5\,\text{мм}$.
     Каким должно быть это расстояние, чтобы контур был настроен на длину волны $150\,\text{м}$?
+}
+\answer{%
+    \begin{align*}
+    \lambda &= cT = c \cdot 2\pi\sqrt{LC}, \quad C = \frac{\eps\eps_0 S}d \implies \lambda^2 = 4 \pi^2 c^2 L \frac{\eps\eps_0 S}d, \\
+    \frac{\lambda_2^2}{\lambda_1^2} &= \frac{d_1}{d_2} \implies d_2 =  d_1 \cdot \sqr{\frac{\lambda_1}{\lambda_2}} =  4{,}5\,\text{мм} \cdot \sqr{\frac{50\,\text{м}}{150\,\text{м}}} \approx 0{,}500\,\text{мм}
+    \end{align*}
+}
+\solutionspace{80pt}
+
+\tasknumber{6}%
+\task{%
+    Сила тока в первичной обмотке трансформатора $2\,\text{А}$, напряжение на её концах $120\,\text{В}$.
+    Напряжение на концах вторичной обмотки $80\,\text{В}$.
+    Определите силу тока во вторичной обмотке.
+    Потерями в трансформаторе пренебречь.
+}
+\answer{%
+    $U_1\eli_1 = U_2\eli_2 \implies \eli_2 = \eli_1 \cdot \frac{U_1}{U_2} = 2\,\text{А} \cdot \frac{120\,\text{В}}{80\,\text{В}} \approx 3\,\text{А}$
+}
+\solutionspace{60pt}
+
+\tasknumber{7}%
+\task{%
+    Под каким напряжением находится первичная обмотка трансформатора, имеющая $800$ витков,
+    если во вторичной обмотке $200$ витков и напряжение на ней $130\,\text{В}$?
+}
+\answer{%
+    $\frac{U_2}{U_1}  = \frac{N_2}{N_1} \implies U_1 = U_2 \cdot \frac{N_1}{N_2} = 130\,\text{В} \cdot \frac{800}{200} \approx 520\,\text{В}$
+}
+\solutionspace{40pt}
+
+\tasknumber{8}%
+\task{%
+    Сила тока в первичной обмотке трансформатора $542\,\text{мА}$, напряжение на её концах $250\,\text{В}$.
+    Сила тока во вторичной обмотке $3{,}2\,\text{А}$, напряжение на её концах $41\,\text{В}$.
+    Определите КПД трансформатора.
+}
+\answer{%
+    $\eta = \frac{ U_2\eli_2 }{ U_1\eli_1 } = \frac{ 41\,\text{В} \cdot 3{,}2\,\text{А} }{ 250\,\text{В} \cdot 542\,\text{мА} } \approx 0{,}970, \quad 1-\eta \approx 0{,}030$
 }
 
 \variantsplitter
@@ -473,24 +1931,105 @@
 
 \tasknumber{1}%
 \task{%
-    На какую длину волны настроен радиоприемник, если его колебательный контур
-    обладает индуктивностью $300\,\text{мкГн}$ и емкостью $650\,\text{пФ}$?
+    Длина волны света в~вакууме $\lambda = 700\,\text{нм}$.
+    Какова частота этой световой волны?
+    Какова длина этой волны в среде с показателем преломления $n = 1{,}6$?
+    Может ли человек увидеть такую волну света, и если да, то какой именно цвет соответствует этим волнам в вакууме и в этой среде?
 }
-\solutionspace{100pt}
+\answer{%
+    \begin{align*}
+    \nu &= \frac 1T = \frac 1{\lambda/c} = \frac c\lambda = \frac{3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}}{700\,\text{нм}} \approx 429 \cdot 10^{12}\,\text{Гц}, \\
+    \nu' &= \nu &\cbr{\text{или } T' = T} \implies \lambda' = v'T' = \frac vn T = \frac{ vt }n = \frac \lambda n = \frac{700\,\text{нм}}{1{,}6} \approx 0{,}44 \cdot 10^{-6}\,\text{м}.
+    \\
+    &\text{380 нм---фиол---440---син---485---гол---500---зел---565---жёл---590---оранж---625---крас---780 нм}, \\
+    &\text{увидит}
+    \end{align*}
+}
+\solutionspace{60pt}
 
 \tasknumber{2}%
 \task{%
-    Колебательный контур настроен на частоту $1{,}8 \cdot 10^{7}\,\text{Гц}$.
-    Во сколько раз и как надо изменить емкость конденсатора для перестройки контура на длину волны $40\,\text{м}$?
+    Укажите букву, соответствующую физическую величину (из текущего раздела), её единицы измерения в СИ и выразите её из какого-либо физического закона:
+    \begin{enumerate}
+        \item «эл'»,
+        \item «вэ»,
+        \item «бал'шайа цэ»,
+        \item «тэ».
+    \end{enumerate}
 }
-\solutionspace{100pt}
 
 \tasknumber{3}%
+\task{%
+    На какую длину волны настроен радиоприемник, если его колебательный контур
+    обладает индуктивностью $300\,\text{мкГн}$ и ёмкостью $650\,\text{пФ}$?
+}
+\answer{%
+    \begin{align*}
+    T = 2\pi\sqrt{LC} \implies \nu &= \frac 1T = \frac 1{ 2\pi\sqrt{LC} } = \frac 1{ 2\pi\sqrt{300\,\text{мкГн} \cdot 650\,\text{пФ}}} \approx 0{,}360\,\text{МГц}, \\
+    \lambda &= cT = c \cdot 2\pi\sqrt{LC} = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} \cdot 2\pi\sqrt{300\,\text{мкГн} \cdot 650\,\text{пФ}} \approx 833\,\text{м}.
+    \end{align*}
+}
+\solutionspace{80pt}
+
+\tasknumber{4}%
+\task{%
+    Колебательный контур настроен на частоту $0{,}5 \cdot 10^{7}\,\text{Гц}$.
+    Во сколько раз и как надо изменить индуктивность катушки для перенастройки контура на длину волны $50\,\text{м}$?
+}
+\answer{%
+    \begin{align*}
+    T_1 &= 2\pi\sqrt{L_1C_1} \implies \nu_1 = \frac 1{T_1} = \frac 1{ 2\pi\sqrt{L_1C_1} } \implies L_1C_1 = \frac 1{\sqr{2\pi \nu_1}}, \\
+    L_2C_2 &= \frac 1{\sqr{2\pi \nu_2}} = \frac 1{\sqr{2\pi \frac 1{T_2}}} = \frac 1{\sqr{2\pi \frac c{\lambda_2}}}, \\
+    \frac{L_2C_2}{L_1C_1} &= \frac {\sqr{2\pi \nu}}{\sqr{2\pi \frac c{\lambda_2}}} =  \sqr{ \frac {\nu}{\frac c{\lambda_2}} } = \sqr{ \frac {\nu\lambda_2}{c} } = \sqr{ \frac { 0{,}5 \cdot 10^{7}\,\text{Гц} \cdot 50\,\text{м} }{3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}} } \approx 0{,}69.
+    \end{align*}
+}
+\solutionspace{80pt}
+
+\tasknumber{5}%
 \task{%
     Колебательный контур, состоящий из катушки индуктивности
     и воздушного конденсатора, настроен на длину волны $180\,\text{м}$.
     При этом расстояние между пластинами конденсатора $3\,\text{мм}$.
     Каким должно быть это расстояние, чтобы контур был настроен на длину волны $60\,\text{м}$?
+}
+\answer{%
+    \begin{align*}
+    \lambda &= cT = c \cdot 2\pi\sqrt{LC}, \quad C = \frac{\eps\eps_0 S}d \implies \lambda^2 = 4 \pi^2 c^2 L \frac{\eps\eps_0 S}d, \\
+    \frac{\lambda_2^2}{\lambda_1^2} &= \frac{d_1}{d_2} \implies d_2 =  d_1 \cdot \sqr{\frac{\lambda_1}{\lambda_2}} =  3\,\text{мм} \cdot \sqr{\frac{180\,\text{м}}{60\,\text{м}}} \approx 27\,\text{мм}
+    \end{align*}
+}
+\solutionspace{80pt}
+
+\tasknumber{6}%
+\task{%
+    Сила тока в первичной обмотке трансформатора $5\,\text{А}$, напряжение на её концах $320\,\text{В}$.
+    Напряжение на концах вторичной обмотки $20\,\text{В}$.
+    Определите силу тока во вторичной обмотке.
+    Потерями в трансформаторе пренебречь.
+}
+\answer{%
+    $U_1\eli_1 = U_2\eli_2 \implies \eli_2 = \eli_1 \cdot \frac{U_1}{U_2} = 5\,\text{А} \cdot \frac{320\,\text{В}}{20\,\text{В}} \approx 80\,\text{А}$
+}
+\solutionspace{60pt}
+
+\tasknumber{7}%
+\task{%
+    Под каким напряжением находится первичная обмотка трансформатора, имеющая $800$ витков,
+    если во вторичной обмотке $200$ витков и напряжение на ней $90\,\text{В}$?
+}
+\answer{%
+    $\frac{U_2}{U_1}  = \frac{N_2}{N_1} \implies U_1 = U_2 \cdot \frac{N_1}{N_2} = 90\,\text{В} \cdot \frac{800}{200} \approx 360\,\text{В}$
+}
+\solutionspace{40pt}
+
+\tasknumber{8}%
+\task{%
+    Сила тока в первичной обмотке трансформатора $923\,\text{мА}$, напряжение на её концах $300\,\text{В}$.
+    Сила тока во вторичной обмотке $3{,}2\,\text{А}$, напряжение на её концах $82\,\text{В}$.
+    Определите КПД трансформатора.
+}
+\answer{%
+    $\eta = \frac{ U_2\eli_2 }{ U_1\eli_1 } = \frac{ 82\,\text{В} \cdot 3{,}2\,\text{А} }{ 300\,\text{В} \cdot 923\,\text{мА} } \approx 0{,}950, \quad 1-\eta \approx 0{,}050$
 }
 
 \variantsplitter
@@ -499,24 +2038,105 @@
 
 \tasknumber{1}%
 \task{%
-    На какую длину волны настроен радиоприемник, если его колебательный контур
-    обладает индуктивностью $600\,\text{мкГн}$ и емкостью $800\,\text{пФ}$?
+    Длина волны света в~вакууме $\lambda = 600\,\text{нм}$.
+    Какова частота этой световой волны?
+    Какова длина этой волны в среде с показателем преломления $n = 1{,}5$?
+    Может ли человек увидеть такую волну света, и если да, то какой именно цвет соответствует этим волнам в вакууме и в этой среде?
 }
-\solutionspace{100pt}
+\answer{%
+    \begin{align*}
+    \nu &= \frac 1T = \frac 1{\lambda/c} = \frac c\lambda = \frac{3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}}{600\,\text{нм}} \approx 500 \cdot 10^{12}\,\text{Гц}, \\
+    \nu' &= \nu &\cbr{\text{или } T' = T} \implies \lambda' = v'T' = \frac vn T = \frac{ vt }n = \frac \lambda n = \frac{600\,\text{нм}}{1{,}5} \approx 0{,}40 \cdot 10^{-6}\,\text{м}.
+    \\
+    &\text{380 нм---фиол---440---син---485---гол---500---зел---565---жёл---590---оранж---625---крас---780 нм}, \\
+    &\text{увидит}
+    \end{align*}
+}
+\solutionspace{60pt}
 
 \tasknumber{2}%
 \task{%
-    Колебательный контур настроен на частоту $1{,}5 \cdot 10^{7}\,\text{Гц}$.
-    Во сколько раз и как надо изменить емкость конденсатора для перестройки контура на длину волны $25\,\text{м}$?
+    Укажите букву, соответствующую физическую величину (из текущего раздела), её единицы измерения в СИ и выразите её из какого-либо физического закона:
+    \begin{enumerate}
+        \item «л'амбда»,
+        \item «вэ»,
+        \item «н'у»,
+        \item «тэ».
+    \end{enumerate}
 }
-\solutionspace{100pt}
 
 \tasknumber{3}%
+\task{%
+    На какую длину волны настроен радиоприемник, если его колебательный контур
+    обладает индуктивностью $600\,\text{мкГн}$ и ёмкостью $800\,\text{пФ}$?
+}
+\answer{%
+    \begin{align*}
+    T = 2\pi\sqrt{LC} \implies \nu &= \frac 1T = \frac 1{ 2\pi\sqrt{LC} } = \frac 1{ 2\pi\sqrt{600\,\text{мкГн} \cdot 800\,\text{пФ}}} \approx 0{,}230\,\text{МГц}, \\
+    \lambda &= cT = c \cdot 2\pi\sqrt{LC} = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} \cdot 2\pi\sqrt{600\,\text{мкГн} \cdot 800\,\text{пФ}} \approx 1306\,\text{м}.
+    \end{align*}
+}
+\solutionspace{80pt}
+
+\tasknumber{4}%
+\task{%
+    Колебательный контур настроен на частоту $0{,}5 \cdot 10^{7}\,\text{Гц}$.
+    Во сколько раз и как надо изменить ёмкость конденсатора для перенастройки контура на длину волны $50\,\text{м}$?
+}
+\answer{%
+    \begin{align*}
+    T_1 &= 2\pi\sqrt{L_1C_1} \implies \nu_1 = \frac 1{T_1} = \frac 1{ 2\pi\sqrt{L_1C_1} } \implies L_1C_1 = \frac 1{\sqr{2\pi \nu_1}}, \\
+    L_2C_2 &= \frac 1{\sqr{2\pi \nu_2}} = \frac 1{\sqr{2\pi \frac 1{T_2}}} = \frac 1{\sqr{2\pi \frac c{\lambda_2}}}, \\
+    \frac{L_2C_2}{L_1C_1} &= \frac {\sqr{2\pi \nu}}{\sqr{2\pi \frac c{\lambda_2}}} =  \sqr{ \frac {\nu}{\frac c{\lambda_2}} } = \sqr{ \frac {\nu\lambda_2}{c} } = \sqr{ \frac { 0{,}5 \cdot 10^{7}\,\text{Гц} \cdot 50\,\text{м} }{3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}} } \approx 0{,}69.
+    \end{align*}
+}
+\solutionspace{80pt}
+
+\tasknumber{5}%
 \task{%
     Колебательный контур, состоящий из катушки индуктивности
     и воздушного конденсатора, настроен на длину волны $120\,\text{м}$.
     При этом расстояние между пластинами конденсатора $3{,}5\,\text{мм}$.
     Каким должно быть это расстояние, чтобы контур был настроен на длину волны $100\,\text{м}$?
+}
+\answer{%
+    \begin{align*}
+    \lambda &= cT = c \cdot 2\pi\sqrt{LC}, \quad C = \frac{\eps\eps_0 S}d \implies \lambda^2 = 4 \pi^2 c^2 L \frac{\eps\eps_0 S}d, \\
+    \frac{\lambda_2^2}{\lambda_1^2} &= \frac{d_1}{d_2} \implies d_2 =  d_1 \cdot \sqr{\frac{\lambda_1}{\lambda_2}} =  3{,}5\,\text{мм} \cdot \sqr{\frac{120\,\text{м}}{100\,\text{м}}} \approx 5{,}04\,\text{мм}
+    \end{align*}
+}
+\solutionspace{80pt}
+
+\tasknumber{6}%
+\task{%
+    Сила тока в первичной обмотке трансформатора $2\,\text{А}$, напряжение на её концах $120\,\text{В}$.
+    Напряжение на концах вторичной обмотки $40\,\text{В}$.
+    Определите силу тока во вторичной обмотке.
+    Потерями в трансформаторе пренебречь.
+}
+\answer{%
+    $U_1\eli_1 = U_2\eli_2 \implies \eli_2 = \eli_1 \cdot \frac{U_1}{U_2} = 2\,\text{А} \cdot \frac{120\,\text{В}}{40\,\text{В}} \approx 6\,\text{А}$
+}
+\solutionspace{60pt}
+
+\tasknumber{7}%
+\task{%
+    Под каким напряжением находится первичная обмотка трансформатора, имеющая $800$ витков,
+    если во вторичной обмотке $2000$ витков и напряжение на ней $50\,\text{В}$?
+}
+\answer{%
+    $\frac{U_2}{U_1}  = \frac{N_2}{N_1} \implies U_1 = U_2 \cdot \frac{N_1}{N_2} = 50\,\text{В} \cdot \frac{800}{2000} \approx 20\,\text{В}$
+}
+\solutionspace{40pt}
+
+\tasknumber{8}%
+\task{%
+    Сила тока в первичной обмотке трансформатора $542\,\text{мА}$, напряжение на её концах $250\,\text{В}$.
+    Сила тока во вторичной обмотке $4{,}3\,\text{А}$, напряжение на её концах $31\,\text{В}$.
+    Определите долю потерей трансформатора.
+}
+\answer{%
+    $\eta = \frac{ U_2\eli_2 }{ U_1\eli_1 } = \frac{ 31\,\text{В} \cdot 4{,}3\,\text{А} }{ 250\,\text{В} \cdot 542\,\text{мА} } \approx 0{,}970, \quad 1-\eta \approx 0{,}030$
 }
 
 \variantsplitter
@@ -525,24 +2145,105 @@
 
 \tasknumber{1}%
 \task{%
-    На какую длину волны настроен радиоприемник, если его колебательный контур
-    обладает индуктивностью $300\,\text{мкГн}$ и емкостью $750\,\text{пФ}$?
+    Длина волны света в~вакууме $\lambda = 400\,\text{нм}$.
+    Какова частота этой световой волны?
+    Какова длина этой волны в среде с показателем преломления $n = 1{,}6$?
+    Может ли человек увидеть такую волну света, и если да, то какой именно цвет соответствует этим волнам в вакууме и в этой среде?
 }
-\solutionspace{100pt}
+\answer{%
+    \begin{align*}
+    \nu &= \frac 1T = \frac 1{\lambda/c} = \frac c\lambda = \frac{3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}}{400\,\text{нм}} \approx 750 \cdot 10^{12}\,\text{Гц}, \\
+    \nu' &= \nu &\cbr{\text{или } T' = T} \implies \lambda' = v'T' = \frac vn T = \frac{ vt }n = \frac \lambda n = \frac{400\,\text{нм}}{1{,}6} \approx 0{,}25 \cdot 10^{-6}\,\text{м}.
+    \\
+    &\text{380 нм---фиол---440---син---485---гол---500---зел---565---жёл---590---оранж---625---крас---780 нм}, \\
+    &\text{увидит}
+    \end{align*}
+}
+\solutionspace{60pt}
 
 \tasknumber{2}%
 \task{%
-    Колебательный контур настроен на частоту $0{,}8 \cdot 10^{7}\,\text{Гц}$.
-    Во сколько раз и как надо изменить емкость конденсатора для перестройки контура на длину волны $20\,\text{м}$?
+    Укажите букву, соответствующую физическую величину (из текущего раздела), её единицы измерения в СИ и выразите её из какого-либо физического закона:
+    \begin{enumerate}
+        \item «эл'»,
+        \item «цэ»,
+        \item «бал'шайа цэ»,
+        \item «эн».
+    \end{enumerate}
 }
-\solutionspace{100pt}
 
 \tasknumber{3}%
+\task{%
+    На какую длину волны настроен радиоприемник, если его колебательный контур
+    обладает индуктивностью $300\,\text{мкГн}$ и ёмкостью $750\,\text{пФ}$?
+}
+\answer{%
+    \begin{align*}
+    T = 2\pi\sqrt{LC} \implies \nu &= \frac 1T = \frac 1{ 2\pi\sqrt{LC} } = \frac 1{ 2\pi\sqrt{300\,\text{мкГн} \cdot 750\,\text{пФ}}} \approx 0{,}336\,\text{МГц}, \\
+    \lambda &= cT = c \cdot 2\pi\sqrt{LC} = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} \cdot 2\pi\sqrt{300\,\text{мкГн} \cdot 750\,\text{пФ}} \approx 894\,\text{м}.
+    \end{align*}
+}
+\solutionspace{80pt}
+
+\tasknumber{4}%
+\task{%
+    Колебательный контур настроен на частоту $0{,}8 \cdot 10^{7}\,\text{Гц}$.
+    Во сколько раз и как надо изменить ёмкость конденсатора для перенастройки контура на длину волны $30\,\text{м}$?
+}
+\answer{%
+    \begin{align*}
+    T_1 &= 2\pi\sqrt{L_1C_1} \implies \nu_1 = \frac 1{T_1} = \frac 1{ 2\pi\sqrt{L_1C_1} } \implies L_1C_1 = \frac 1{\sqr{2\pi \nu_1}}, \\
+    L_2C_2 &= \frac 1{\sqr{2\pi \nu_2}} = \frac 1{\sqr{2\pi \frac 1{T_2}}} = \frac 1{\sqr{2\pi \frac c{\lambda_2}}}, \\
+    \frac{L_2C_2}{L_1C_1} &= \frac {\sqr{2\pi \nu}}{\sqr{2\pi \frac c{\lambda_2}}} =  \sqr{ \frac {\nu}{\frac c{\lambda_2}} } = \sqr{ \frac {\nu\lambda_2}{c} } = \sqr{ \frac { 0{,}8 \cdot 10^{7}\,\text{Гц} \cdot 30\,\text{м} }{3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}} } \approx 0{,}64.
+    \end{align*}
+}
+\solutionspace{80pt}
+
+\tasknumber{5}%
 \task{%
     Колебательный контур, состоящий из катушки индуктивности
     и воздушного конденсатора, настроен на длину волны $20\,\text{м}$.
     При этом расстояние между пластинами конденсатора $4{,}5\,\text{мм}$.
     Каким должно быть это расстояние, чтобы контур был настроен на длину волны $80\,\text{м}$?
+}
+\answer{%
+    \begin{align*}
+    \lambda &= cT = c \cdot 2\pi\sqrt{LC}, \quad C = \frac{\eps\eps_0 S}d \implies \lambda^2 = 4 \pi^2 c^2 L \frac{\eps\eps_0 S}d, \\
+    \frac{\lambda_2^2}{\lambda_1^2} &= \frac{d_1}{d_2} \implies d_2 =  d_1 \cdot \sqr{\frac{\lambda_1}{\lambda_2}} =  4{,}5\,\text{мм} \cdot \sqr{\frac{20\,\text{м}}{80\,\text{м}}} \approx 0{,}281\,\text{мм}
+    \end{align*}
+}
+\solutionspace{80pt}
+
+\tasknumber{6}%
+\task{%
+    Сила тока в первичной обмотке трансформатора $2\,\text{А}$, напряжение на её концах $220\,\text{В}$.
+    Напряжение на концах вторичной обмотки $20\,\text{В}$.
+    Определите силу тока во вторичной обмотке.
+    Потерями в трансформаторе пренебречь.
+}
+\answer{%
+    $U_1\eli_1 = U_2\eli_2 \implies \eli_2 = \eli_1 \cdot \frac{U_1}{U_2} = 2\,\text{А} \cdot \frac{220\,\text{В}}{20\,\text{В}} \approx 22\,\text{А}$
+}
+\solutionspace{60pt}
+
+\tasknumber{7}%
+\task{%
+    Под каким напряжением находится первичная обмотка трансформатора, имеющая $1200$ витков,
+    если во вторичной обмотке $1000$ витков и напряжение на ней $150\,\text{В}$?
+}
+\answer{%
+    $\frac{U_2}{U_1}  = \frac{N_2}{N_1} \implies U_1 = U_2 \cdot \frac{N_1}{N_2} = 150\,\text{В} \cdot \frac{1200}{1000} \approx 180\,\text{В}$
+}
+\solutionspace{40pt}
+
+\tasknumber{8}%
+\task{%
+    Сила тока в первичной обмотке трансформатора $636\,\text{мА}$, напряжение на её концах $250\,\text{В}$.
+    Сила тока во вторичной обмотке $5{,}1\,\text{А}$, напряжение на её концах $30\,\text{В}$.
+    Определите КПД трансформатора.
+}
+\answer{%
+    $\eta = \frac{ U_2\eli_2 }{ U_1\eli_1 } = \frac{ 30\,\text{В} \cdot 5{,}1\,\text{А} }{ 250\,\text{В} \cdot 636\,\text{мА} } \approx 0{,}970, \quad 1-\eta \approx 0{,}030$
 }
 
 \variantsplitter
@@ -551,24 +2252,105 @@
 
 \tasknumber{1}%
 \task{%
-    На какую частоту волны настроен радиоприемник, если его колебательный контур
-    обладает индуктивностью $600\,\text{мкГн}$ и емкостью $750\,\text{пФ}$?
+    Длина волны света в~вакууме $\lambda = 500\,\text{нм}$.
+    Какова частота этой световой волны?
+    Какова длина этой волны в среде с показателем преломления $n = 1{,}4$?
+    Может ли человек увидеть такую волну света, и если да, то какой именно цвет соответствует этим волнам в вакууме и в этой среде?
 }
-\solutionspace{100pt}
+\answer{%
+    \begin{align*}
+    \nu &= \frac 1T = \frac 1{\lambda/c} = \frac c\lambda = \frac{3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}}{500\,\text{нм}} \approx 600 \cdot 10^{12}\,\text{Гц}, \\
+    \nu' &= \nu &\cbr{\text{или } T' = T} \implies \lambda' = v'T' = \frac vn T = \frac{ vt }n = \frac \lambda n = \frac{500\,\text{нм}}{1{,}4} \approx 0{,}36 \cdot 10^{-6}\,\text{м}.
+    \\
+    &\text{380 нм---фиол---440---син---485---гол---500---зел---565---жёл---590---оранж---625---крас---780 нм}, \\
+    &\text{увидит}
+    \end{align*}
+}
+\solutionspace{60pt}
 
 \tasknumber{2}%
 \task{%
-    Колебательный контур настроен на частоту $2{,}5 \cdot 10^{7}\,\text{Гц}$.
-    Во сколько раз и как надо изменить емкость конденсатора для перестройки контура на длину волны $20\,\text{м}$?
+    Укажите букву, соответствующую физическую величину (из текущего раздела), её единицы измерения в СИ и выразите её из какого-либо физического закона:
+    \begin{enumerate}
+        \item «л'амбда»,
+        \item «цэ»,
+        \item «бал'шайа цэ»,
+        \item «тэ».
+    \end{enumerate}
 }
-\solutionspace{100pt}
 
 \tasknumber{3}%
+\task{%
+    На какую частоту волны настроен радиоприемник, если его колебательный контур
+    обладает индуктивностью $600\,\text{мкГн}$ и ёмкостью $750\,\text{пФ}$?
+}
+\answer{%
+    \begin{align*}
+    T = 2\pi\sqrt{LC} \implies \nu &= \frac 1T = \frac 1{ 2\pi\sqrt{LC} } = \frac 1{ 2\pi\sqrt{600\,\text{мкГн} \cdot 750\,\text{пФ}}} \approx 0{,}237\,\text{МГц}, \\
+    \lambda &= cT = c \cdot 2\pi\sqrt{LC} = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} \cdot 2\pi\sqrt{600\,\text{мкГн} \cdot 750\,\text{пФ}} \approx 1265\,\text{м}.
+    \end{align*}
+}
+\solutionspace{80pt}
+
+\tasknumber{4}%
+\task{%
+    Колебательный контур настроен на частоту $3{,}2 \cdot 10^{7}\,\text{Гц}$.
+    Во сколько раз и как надо изменить индуктивность катушки для перенастройки контура на длину волны $30\,\text{м}$?
+}
+\answer{%
+    \begin{align*}
+    T_1 &= 2\pi\sqrt{L_1C_1} \implies \nu_1 = \frac 1{T_1} = \frac 1{ 2\pi\sqrt{L_1C_1} } \implies L_1C_1 = \frac 1{\sqr{2\pi \nu_1}}, \\
+    L_2C_2 &= \frac 1{\sqr{2\pi \nu_2}} = \frac 1{\sqr{2\pi \frac 1{T_2}}} = \frac 1{\sqr{2\pi \frac c{\lambda_2}}}, \\
+    \frac{L_2C_2}{L_1C_1} &= \frac {\sqr{2\pi \nu}}{\sqr{2\pi \frac c{\lambda_2}}} =  \sqr{ \frac {\nu}{\frac c{\lambda_2}} } = \sqr{ \frac {\nu\lambda_2}{c} } = \sqr{ \frac { 3{,}2 \cdot 10^{7}\,\text{Гц} \cdot 30\,\text{м} }{3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}} } \approx 10{,}24.
+    \end{align*}
+}
+\solutionspace{80pt}
+
+\tasknumber{5}%
 \task{%
     Колебательный контур, состоящий из катушки индуктивности
     и воздушного конденсатора, настроен на длину волны $180\,\text{м}$.
     При этом расстояние между пластинами конденсатора $4\,\text{мм}$.
     Каким должно быть это расстояние, чтобы контур был настроен на длину волны $60\,\text{м}$?
+}
+\answer{%
+    \begin{align*}
+    \lambda &= cT = c \cdot 2\pi\sqrt{LC}, \quad C = \frac{\eps\eps_0 S}d \implies \lambda^2 = 4 \pi^2 c^2 L \frac{\eps\eps_0 S}d, \\
+    \frac{\lambda_2^2}{\lambda_1^2} &= \frac{d_1}{d_2} \implies d_2 =  d_1 \cdot \sqr{\frac{\lambda_1}{\lambda_2}} =  4\,\text{мм} \cdot \sqr{\frac{180\,\text{м}}{60\,\text{м}}} \approx 36\,\text{мм}
+    \end{align*}
+}
+\solutionspace{80pt}
+
+\tasknumber{6}%
+\task{%
+    Сила тока в первичной обмотке трансформатора $4\,\text{А}$, напряжение на её концах $120\,\text{В}$.
+    Напряжение на концах вторичной обмотки $20\,\text{В}$.
+    Определите силу тока во вторичной обмотке.
+    Потерями в трансформаторе пренебречь.
+}
+\answer{%
+    $U_1\eli_1 = U_2\eli_2 \implies \eli_2 = \eli_1 \cdot \frac{U_1}{U_2} = 4\,\text{А} \cdot \frac{120\,\text{В}}{20\,\text{В}} \approx 24\,\text{А}$
+}
+\solutionspace{60pt}
+
+\tasknumber{7}%
+\task{%
+    Под каким напряжением находится первичная обмотка трансформатора, имеющая $800$ витков,
+    если во вторичной обмотке $200$ витков и напряжение на ней $150\,\text{В}$?
+}
+\answer{%
+    $\frac{U_2}{U_1}  = \frac{N_2}{N_1} \implies U_1 = U_2 \cdot \frac{N_1}{N_2} = 150\,\text{В} \cdot \frac{800}{200} \approx 600\,\text{В}$
+}
+\solutionspace{40pt}
+
+\tasknumber{8}%
+\task{%
+    Сила тока в первичной обмотке трансформатора $412\,\text{мА}$, напряжение на её концах $300\,\text{В}$.
+    Сила тока во вторичной обмотке $5{,}1\,\text{А}$, напряжение на её концах $23\,\text{В}$.
+    Определите долю потерей трансформатора.
+}
+\answer{%
+    $\eta = \frac{ U_2\eli_2 }{ U_1\eli_1 } = \frac{ 23\,\text{В} \cdot 5{,}1\,\text{А} }{ 300\,\text{В} \cdot 412\,\text{мА} } \approx 0{,}950, \quad 1-\eta \approx 0{,}050$
 }
 
 \variantsplitter
@@ -577,24 +2359,105 @@
 
 \tasknumber{1}%
 \task{%
-    На какую длину волны настроен радиоприемник, если его колебательный контур
-    обладает индуктивностью $300\,\text{мкГн}$ и емкостью $800\,\text{пФ}$?
+    Длина волны света в~вакууме $\lambda = 700\,\text{нм}$.
+    Какова частота этой световой волны?
+    Какова длина этой волны в среде с показателем преломления $n = 1{,}7$?
+    Может ли человек увидеть такую волну света, и если да, то какой именно цвет соответствует этим волнам в вакууме и в этой среде?
 }
-\solutionspace{100pt}
+\answer{%
+    \begin{align*}
+    \nu &= \frac 1T = \frac 1{\lambda/c} = \frac c\lambda = \frac{3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}}{700\,\text{нм}} \approx 429 \cdot 10^{12}\,\text{Гц}, \\
+    \nu' &= \nu &\cbr{\text{или } T' = T} \implies \lambda' = v'T' = \frac vn T = \frac{ vt }n = \frac \lambda n = \frac{700\,\text{нм}}{1{,}7} \approx 0{,}41 \cdot 10^{-6}\,\text{м}.
+    \\
+    &\text{380 нм---фиол---440---син---485---гол---500---зел---565---жёл---590---оранж---625---крас---780 нм}, \\
+    &\text{увидит}
+    \end{align*}
+}
+\solutionspace{60pt}
 
 \tasknumber{2}%
 \task{%
-    Колебательный контур настроен на частоту $0{,}5 \cdot 10^{7}\,\text{Гц}$.
-    Во сколько раз и как надо изменить емкость конденсатора для перестройки контура на длину волны $25\,\text{м}$?
+    Укажите букву, соответствующую физическую величину (из текущего раздела), её единицы измерения в СИ и выразите её из какого-либо физического закона:
+    \begin{enumerate}
+        \item «эл'»,
+        \item «цэ»,
+        \item «н'у»,
+        \item «эн».
+    \end{enumerate}
 }
-\solutionspace{100pt}
 
 \tasknumber{3}%
+\task{%
+    На какую длину волны настроен радиоприемник, если его колебательный контур
+    обладает индуктивностью $300\,\text{мкГн}$ и ёмкостью $800\,\text{пФ}$?
+}
+\answer{%
+    \begin{align*}
+    T = 2\pi\sqrt{LC} \implies \nu &= \frac 1T = \frac 1{ 2\pi\sqrt{LC} } = \frac 1{ 2\pi\sqrt{300\,\text{мкГн} \cdot 800\,\text{пФ}}} \approx 0{,}325\,\text{МГц}, \\
+    \lambda &= cT = c \cdot 2\pi\sqrt{LC} = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} \cdot 2\pi\sqrt{300\,\text{мкГн} \cdot 800\,\text{пФ}} \approx 923\,\text{м}.
+    \end{align*}
+}
+\solutionspace{80pt}
+
+\tasknumber{4}%
+\task{%
+    Колебательный контур настроен на частоту $0{,}8 \cdot 10^{7}\,\text{Гц}$.
+    Во сколько раз и как надо изменить ёмкость конденсатора для перенастройки контура на длину волны $25\,\text{м}$?
+}
+\answer{%
+    \begin{align*}
+    T_1 &= 2\pi\sqrt{L_1C_1} \implies \nu_1 = \frac 1{T_1} = \frac 1{ 2\pi\sqrt{L_1C_1} } \implies L_1C_1 = \frac 1{\sqr{2\pi \nu_1}}, \\
+    L_2C_2 &= \frac 1{\sqr{2\pi \nu_2}} = \frac 1{\sqr{2\pi \frac 1{T_2}}} = \frac 1{\sqr{2\pi \frac c{\lambda_2}}}, \\
+    \frac{L_2C_2}{L_1C_1} &= \frac {\sqr{2\pi \nu}}{\sqr{2\pi \frac c{\lambda_2}}} =  \sqr{ \frac {\nu}{\frac c{\lambda_2}} } = \sqr{ \frac {\nu\lambda_2}{c} } = \sqr{ \frac { 0{,}8 \cdot 10^{7}\,\text{Гц} \cdot 25\,\text{м} }{3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}} } \approx 0{,}44.
+    \end{align*}
+}
+\solutionspace{80pt}
+
+\tasknumber{5}%
 \task{%
     Колебательный контур, состоящий из катушки индуктивности
     и воздушного конденсатора, настроен на длину волны $20\,\text{м}$.
     При этом расстояние между пластинами конденсатора $2\,\text{мм}$.
     Каким должно быть это расстояние, чтобы контур был настроен на длину волны $100\,\text{м}$?
+}
+\answer{%
+    \begin{align*}
+    \lambda &= cT = c \cdot 2\pi\sqrt{LC}, \quad C = \frac{\eps\eps_0 S}d \implies \lambda^2 = 4 \pi^2 c^2 L \frac{\eps\eps_0 S}d, \\
+    \frac{\lambda_2^2}{\lambda_1^2} &= \frac{d_1}{d_2} \implies d_2 =  d_1 \cdot \sqr{\frac{\lambda_1}{\lambda_2}} =  2\,\text{мм} \cdot \sqr{\frac{20\,\text{м}}{100\,\text{м}}} \approx 0{,}0800\,\text{мм}
+    \end{align*}
+}
+\solutionspace{80pt}
+
+\tasknumber{6}%
+\task{%
+    Сила тока в первичной обмотке трансформатора $4\,\text{А}$, напряжение на её концах $220\,\text{В}$.
+    Напряжение на концах вторичной обмотки $40\,\text{В}$.
+    Определите силу тока во вторичной обмотке.
+    Потерями в трансформаторе пренебречь.
+}
+\answer{%
+    $U_1\eli_1 = U_2\eli_2 \implies \eli_2 = \eli_1 \cdot \frac{U_1}{U_2} = 4\,\text{А} \cdot \frac{220\,\text{В}}{40\,\text{В}} \approx 22\,\text{А}$
+}
+\solutionspace{60pt}
+
+\tasknumber{7}%
+\task{%
+    Под каким напряжением находится первичная обмотка трансформатора, имеющая $800$ витков,
+    если во вторичной обмотке $200$ витков и напряжение на ней $50\,\text{В}$?
+}
+\answer{%
+    $\frac{U_2}{U_1}  = \frac{N_2}{N_1} \implies U_1 = U_2 \cdot \frac{N_1}{N_2} = 50\,\text{В} \cdot \frac{800}{200} \approx 200\,\text{В}$
+}
+\solutionspace{40pt}
+
+\tasknumber{8}%
+\task{%
+    Сила тока в первичной обмотке трансформатора $784\,\text{мА}$, напряжение на её концах $300\,\text{В}$.
+    Сила тока во вторичной обмотке $5{,}1\,\text{А}$, напряжение на её концах $44\,\text{В}$.
+    Определите долю потерей трансформатора.
+}
+\answer{%
+    $\eta = \frac{ U_2\eli_2 }{ U_1\eli_1 } = \frac{ 44\,\text{В} \cdot 5{,}1\,\text{А} }{ 300\,\text{В} \cdot 784\,\text{мА} } \approx 0{,}960, \quad 1-\eta \approx 0{,}040$
 }
 
 \variantsplitter
@@ -603,24 +2466,105 @@
 
 \tasknumber{1}%
 \task{%
-    На какую длину волны настроен радиоприемник, если его колебательный контур
-    обладает индуктивностью $200\,\text{мкГн}$ и емкостью $600\,\text{пФ}$?
+    Длина волны света в~вакууме $\lambda = 400\,\text{нм}$.
+    Какова частота этой световой волны?
+    Какова длина этой волны в среде с показателем преломления $n = 1{,}6$?
+    Может ли человек увидеть такую волну света, и если да, то какой именно цвет соответствует этим волнам в вакууме и в этой среде?
 }
-\solutionspace{100pt}
+\answer{%
+    \begin{align*}
+    \nu &= \frac 1T = \frac 1{\lambda/c} = \frac c\lambda = \frac{3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}}{400\,\text{нм}} \approx 750 \cdot 10^{12}\,\text{Гц}, \\
+    \nu' &= \nu &\cbr{\text{или } T' = T} \implies \lambda' = v'T' = \frac vn T = \frac{ vt }n = \frac \lambda n = \frac{400\,\text{нм}}{1{,}6} \approx 0{,}25 \cdot 10^{-6}\,\text{м}.
+    \\
+    &\text{380 нм---фиол---440---син---485---гол---500---зел---565---жёл---590---оранж---625---крас---780 нм}, \\
+    &\text{увидит}
+    \end{align*}
+}
+\solutionspace{60pt}
 
 \tasknumber{2}%
 \task{%
-    Колебательный контур настроен на частоту $4{,}5 \cdot 10^{7}\,\text{Гц}$.
-    Во сколько раз и как надо изменить емкость конденсатора для перестройки контура на длину волны $30\,\text{м}$?
+    Укажите букву, соответствующую физическую величину (из текущего раздела), её единицы измерения в СИ и выразите её из какого-либо физического закона:
+    \begin{enumerate}
+        \item «л'амбда»,
+        \item «вэ»,
+        \item «н'у»,
+        \item «эн».
+    \end{enumerate}
 }
-\solutionspace{100pt}
 
 \tasknumber{3}%
+\task{%
+    На какую длину волны настроен радиоприемник, если его колебательный контур
+    обладает индуктивностью $200\,\text{мкГн}$ и ёмкостью $600\,\text{пФ}$?
+}
+\answer{%
+    \begin{align*}
+    T = 2\pi\sqrt{LC} \implies \nu &= \frac 1T = \frac 1{ 2\pi\sqrt{LC} } = \frac 1{ 2\pi\sqrt{200\,\text{мкГн} \cdot 600\,\text{пФ}}} \approx 0{,}459\,\text{МГц}, \\
+    \lambda &= cT = c \cdot 2\pi\sqrt{LC} = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} \cdot 2\pi\sqrt{200\,\text{мкГн} \cdot 600\,\text{пФ}} \approx 653\,\text{м}.
+    \end{align*}
+}
+\solutionspace{80pt}
+
+\tasknumber{4}%
+\task{%
+    Колебательный контур настроен на частоту $1{,}5 \cdot 10^{7}\,\text{Гц}$.
+    Во сколько раз и как надо изменить ёмкость конденсатора для перенастройки контура на длину волны $40\,\text{м}$?
+}
+\answer{%
+    \begin{align*}
+    T_1 &= 2\pi\sqrt{L_1C_1} \implies \nu_1 = \frac 1{T_1} = \frac 1{ 2\pi\sqrt{L_1C_1} } \implies L_1C_1 = \frac 1{\sqr{2\pi \nu_1}}, \\
+    L_2C_2 &= \frac 1{\sqr{2\pi \nu_2}} = \frac 1{\sqr{2\pi \frac 1{T_2}}} = \frac 1{\sqr{2\pi \frac c{\lambda_2}}}, \\
+    \frac{L_2C_2}{L_1C_1} &= \frac {\sqr{2\pi \nu}}{\sqr{2\pi \frac c{\lambda_2}}} =  \sqr{ \frac {\nu}{\frac c{\lambda_2}} } = \sqr{ \frac {\nu\lambda_2}{c} } = \sqr{ \frac { 1{,}5 \cdot 10^{7}\,\text{Гц} \cdot 40\,\text{м} }{3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}} } \approx 4.
+    \end{align*}
+}
+\solutionspace{80pt}
+
+\tasknumber{5}%
 \task{%
     Колебательный контур, состоящий из катушки индуктивности
     и воздушного конденсатора, настроен на длину волны $20\,\text{м}$.
     При этом расстояние между пластинами конденсатора $4\,\text{мм}$.
     Каким должно быть это расстояние, чтобы контур был настроен на длину волны $100\,\text{м}$?
+}
+\answer{%
+    \begin{align*}
+    \lambda &= cT = c \cdot 2\pi\sqrt{LC}, \quad C = \frac{\eps\eps_0 S}d \implies \lambda^2 = 4 \pi^2 c^2 L \frac{\eps\eps_0 S}d, \\
+    \frac{\lambda_2^2}{\lambda_1^2} &= \frac{d_1}{d_2} \implies d_2 =  d_1 \cdot \sqr{\frac{\lambda_1}{\lambda_2}} =  4\,\text{мм} \cdot \sqr{\frac{20\,\text{м}}{100\,\text{м}}} \approx 0{,}1600\,\text{мм}
+    \end{align*}
+}
+\solutionspace{80pt}
+
+\tasknumber{6}%
+\task{%
+    Сила тока в первичной обмотке трансформатора $3\,\text{А}$, напряжение на её концах $320\,\text{В}$.
+    Напряжение на концах вторичной обмотки $80\,\text{В}$.
+    Определите силу тока во вторичной обмотке.
+    Потерями в трансформаторе пренебречь.
+}
+\answer{%
+    $U_1\eli_1 = U_2\eli_2 \implies \eli_2 = \eli_1 \cdot \frac{U_1}{U_2} = 3\,\text{А} \cdot \frac{320\,\text{В}}{80\,\text{В}} \approx 12\,\text{А}$
+}
+\solutionspace{60pt}
+
+\tasknumber{7}%
+\task{%
+    Под каким напряжением находится первичная обмотка трансформатора, имеющая $800$ витков,
+    если во вторичной обмотке $1000$ витков и напряжение на ней $90\,\text{В}$?
+}
+\answer{%
+    $\frac{U_2}{U_1}  = \frac{N_2}{N_1} \implies U_1 = U_2 \cdot \frac{N_1}{N_2} = 90\,\text{В} \cdot \frac{800}{1000} \approx 72\,\text{В}$
+}
+\solutionspace{40pt}
+
+\tasknumber{8}%
+\task{%
+    Сила тока в первичной обмотке трансформатора $636\,\text{мА}$, напряжение на её концах $250\,\text{В}$.
+    Сила тока во вторичной обмотке $4{,}3\,\text{А}$, напряжение на её концах $35\,\text{В}$.
+    Определите КПД трансформатора.
+}
+\answer{%
+    $\eta = \frac{ U_2\eli_2 }{ U_1\eli_1 } = \frac{ 35\,\text{В} \cdot 4{,}3\,\text{А} }{ 250\,\text{В} \cdot 636\,\text{мА} } \approx 0{,}950, \quad 1-\eta \approx 0{,}050$
 }
 
 \variantsplitter
@@ -629,24 +2573,105 @@
 
 \tasknumber{1}%
 \task{%
-    На какую частоту волны настроен радиоприемник, если его колебательный контур
-    обладает индуктивностью $600\,\text{мкГн}$ и емкостью $700\,\text{пФ}$?
+    Длина волны света в~вакууме $\lambda = 400\,\text{нм}$.
+    Какова частота этой световой волны?
+    Какова длина этой волны в среде с показателем преломления $n = 1{,}3$?
+    Может ли человек увидеть такую волну света, и если да, то какой именно цвет соответствует этим волнам в вакууме и в этой среде?
 }
-\solutionspace{100pt}
+\answer{%
+    \begin{align*}
+    \nu &= \frac 1T = \frac 1{\lambda/c} = \frac c\lambda = \frac{3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}}{400\,\text{нм}} \approx 750 \cdot 10^{12}\,\text{Гц}, \\
+    \nu' &= \nu &\cbr{\text{или } T' = T} \implies \lambda' = v'T' = \frac vn T = \frac{ vt }n = \frac \lambda n = \frac{400\,\text{нм}}{1{,}3} \approx 0{,}31 \cdot 10^{-6}\,\text{м}.
+    \\
+    &\text{380 нм---фиол---440---син---485---гол---500---зел---565---жёл---590---оранж---625---крас---780 нм}, \\
+    &\text{увидит}
+    \end{align*}
+}
+\solutionspace{60pt}
 
 \tasknumber{2}%
 \task{%
-    Колебательный контур настроен на частоту $4{,}5 \cdot 10^{7}\,\text{Гц}$.
-    Во сколько раз и как надо изменить емкость конденсатора для перестройки контура на длину волны $30\,\text{м}$?
+    Укажите букву, соответствующую физическую величину (из текущего раздела), её единицы измерения в СИ и выразите её из какого-либо физического закона:
+    \begin{enumerate}
+        \item «л'амбда»,
+        \item «цэ»,
+        \item «бал'шайа цэ»,
+        \item «тэ».
+    \end{enumerate}
 }
-\solutionspace{100pt}
 
 \tasknumber{3}%
+\task{%
+    На какую частоту волны настроен радиоприемник, если его колебательный контур
+    обладает индуктивностью $600\,\text{мкГн}$ и ёмкостью $700\,\text{пФ}$?
+}
+\answer{%
+    \begin{align*}
+    T = 2\pi\sqrt{LC} \implies \nu &= \frac 1T = \frac 1{ 2\pi\sqrt{LC} } = \frac 1{ 2\pi\sqrt{600\,\text{мкГн} \cdot 700\,\text{пФ}}} \approx 0{,}246\,\text{МГц}, \\
+    \lambda &= cT = c \cdot 2\pi\sqrt{LC} = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} \cdot 2\pi\sqrt{600\,\text{мкГн} \cdot 700\,\text{пФ}} \approx 1222\,\text{м}.
+    \end{align*}
+}
+\solutionspace{80pt}
+
+\tasknumber{4}%
+\task{%
+    Колебательный контур настроен на частоту $1{,}5 \cdot 10^{7}\,\text{Гц}$.
+    Во сколько раз и как надо изменить ёмкость конденсатора для перенастройки контура на длину волны $50\,\text{м}$?
+}
+\answer{%
+    \begin{align*}
+    T_1 &= 2\pi\sqrt{L_1C_1} \implies \nu_1 = \frac 1{T_1} = \frac 1{ 2\pi\sqrt{L_1C_1} } \implies L_1C_1 = \frac 1{\sqr{2\pi \nu_1}}, \\
+    L_2C_2 &= \frac 1{\sqr{2\pi \nu_2}} = \frac 1{\sqr{2\pi \frac 1{T_2}}} = \frac 1{\sqr{2\pi \frac c{\lambda_2}}}, \\
+    \frac{L_2C_2}{L_1C_1} &= \frac {\sqr{2\pi \nu}}{\sqr{2\pi \frac c{\lambda_2}}} =  \sqr{ \frac {\nu}{\frac c{\lambda_2}} } = \sqr{ \frac {\nu\lambda_2}{c} } = \sqr{ \frac { 1{,}5 \cdot 10^{7}\,\text{Гц} \cdot 50\,\text{м} }{3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}} } \approx 6{,}3.
+    \end{align*}
+}
+\solutionspace{80pt}
+
+\tasknumber{5}%
 \task{%
     Колебательный контур, состоящий из катушки индуктивности
     и воздушного конденсатора, настроен на длину волны $50\,\text{м}$.
     При этом расстояние между пластинами конденсатора $4\,\text{мм}$.
     Каким должно быть это расстояние, чтобы контур был настроен на длину волны $60\,\text{м}$?
+}
+\answer{%
+    \begin{align*}
+    \lambda &= cT = c \cdot 2\pi\sqrt{LC}, \quad C = \frac{\eps\eps_0 S}d \implies \lambda^2 = 4 \pi^2 c^2 L \frac{\eps\eps_0 S}d, \\
+    \frac{\lambda_2^2}{\lambda_1^2} &= \frac{d_1}{d_2} \implies d_2 =  d_1 \cdot \sqr{\frac{\lambda_1}{\lambda_2}} =  4\,\text{мм} \cdot \sqr{\frac{50\,\text{м}}{60\,\text{м}}} \approx 2{,}78\,\text{мм}
+    \end{align*}
+}
+\solutionspace{80pt}
+
+\tasknumber{6}%
+\task{%
+    Сила тока в первичной обмотке трансформатора $4\,\text{А}$, напряжение на её концах $120\,\text{В}$.
+    Напряжение на концах вторичной обмотки $60\,\text{В}$.
+    Определите силу тока во вторичной обмотке.
+    Потерями в трансформаторе пренебречь.
+}
+\answer{%
+    $U_1\eli_1 = U_2\eli_2 \implies \eli_2 = \eli_1 \cdot \frac{U_1}{U_2} = 4\,\text{А} \cdot \frac{120\,\text{В}}{60\,\text{В}} \approx 8\,\text{А}$
+}
+\solutionspace{60pt}
+
+\tasknumber{7}%
+\task{%
+    Под каким напряжением находится первичная обмотка трансформатора, имеющая $800$ витков,
+    если во вторичной обмотке $200$ витков и напряжение на ней $70\,\text{В}$?
+}
+\answer{%
+    $\frac{U_2}{U_1}  = \frac{N_2}{N_1} \implies U_1 = U_2 \cdot \frac{N_1}{N_2} = 70\,\text{В} \cdot \frac{800}{200} \approx 280\,\text{В}$
+}
+\solutionspace{40pt}
+
+\tasknumber{8}%
+\task{%
+    Сила тока в первичной обмотке трансформатора $859\,\text{мА}$, напряжение на её концах $200\,\text{В}$.
+    Сила тока во вторичной обмотке $4{,}3\,\text{А}$, напряжение на её концах $38\,\text{В}$.
+    Определите КПД трансформатора.
+}
+\answer{%
+    $\eta = \frac{ U_2\eli_2 }{ U_1\eli_1 } = \frac{ 38\,\text{В} \cdot 4{,}3\,\text{А} }{ 200\,\text{В} \cdot 859\,\text{мА} } \approx 0{,}960, \quad 1-\eta \approx 0{,}040$
 }
 
 \variantsplitter
@@ -655,24 +2680,105 @@
 
 \tasknumber{1}%
 \task{%
-    На какую частоту волны настроен радиоприемник, если его колебательный контур
-    обладает индуктивностью $600\,\text{мкГн}$ и емкостью $800\,\text{пФ}$?
+    Длина волны света в~вакууме $\lambda = 600\,\text{нм}$.
+    Какова частота этой световой волны?
+    Какова длина этой волны в среде с показателем преломления $n = 1{,}5$?
+    Может ли человек увидеть такую волну света, и если да, то какой именно цвет соответствует этим волнам в вакууме и в этой среде?
 }
-\solutionspace{100pt}
+\answer{%
+    \begin{align*}
+    \nu &= \frac 1T = \frac 1{\lambda/c} = \frac c\lambda = \frac{3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}}{600\,\text{нм}} \approx 500 \cdot 10^{12}\,\text{Гц}, \\
+    \nu' &= \nu &\cbr{\text{или } T' = T} \implies \lambda' = v'T' = \frac vn T = \frac{ vt }n = \frac \lambda n = \frac{600\,\text{нм}}{1{,}5} \approx 0{,}40 \cdot 10^{-6}\,\text{м}.
+    \\
+    &\text{380 нм---фиол---440---син---485---гол---500---зел---565---жёл---590---оранж---625---крас---780 нм}, \\
+    &\text{увидит}
+    \end{align*}
+}
+\solutionspace{60pt}
 
 \tasknumber{2}%
 \task{%
-    Колебательный контур настроен на частоту $1{,}8 \cdot 10^{7}\,\text{Гц}$.
-    Во сколько раз и как надо изменить емкость конденсатора для перестройки контура на длину волны $30\,\text{м}$?
+    Укажите букву, соответствующую физическую величину (из текущего раздела), её единицы измерения в СИ и выразите её из какого-либо физического закона:
+    \begin{enumerate}
+        \item «л'амбда»,
+        \item «вэ»,
+        \item «бал'шайа цэ»,
+        \item «тэ».
+    \end{enumerate}
 }
-\solutionspace{100pt}
 
 \tasknumber{3}%
+\task{%
+    На какую частоту волны настроен радиоприемник, если его колебательный контур
+    обладает индуктивностью $600\,\text{мкГн}$ и ёмкостью $800\,\text{пФ}$?
+}
+\answer{%
+    \begin{align*}
+    T = 2\pi\sqrt{LC} \implies \nu &= \frac 1T = \frac 1{ 2\pi\sqrt{LC} } = \frac 1{ 2\pi\sqrt{600\,\text{мкГн} \cdot 800\,\text{пФ}}} \approx 0{,}230\,\text{МГц}, \\
+    \lambda &= cT = c \cdot 2\pi\sqrt{LC} = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} \cdot 2\pi\sqrt{600\,\text{мкГн} \cdot 800\,\text{пФ}} \approx 1306\,\text{м}.
+    \end{align*}
+}
+\solutionspace{80pt}
+
+\tasknumber{4}%
+\task{%
+    Колебательный контур настроен на частоту $0{,}8 \cdot 10^{7}\,\text{Гц}$.
+    Во сколько раз и как надо изменить индуктивность катушки для перенастройки контура на длину волны $50\,\text{м}$?
+}
+\answer{%
+    \begin{align*}
+    T_1 &= 2\pi\sqrt{L_1C_1} \implies \nu_1 = \frac 1{T_1} = \frac 1{ 2\pi\sqrt{L_1C_1} } \implies L_1C_1 = \frac 1{\sqr{2\pi \nu_1}}, \\
+    L_2C_2 &= \frac 1{\sqr{2\pi \nu_2}} = \frac 1{\sqr{2\pi \frac 1{T_2}}} = \frac 1{\sqr{2\pi \frac c{\lambda_2}}}, \\
+    \frac{L_2C_2}{L_1C_1} &= \frac {\sqr{2\pi \nu}}{\sqr{2\pi \frac c{\lambda_2}}} =  \sqr{ \frac {\nu}{\frac c{\lambda_2}} } = \sqr{ \frac {\nu\lambda_2}{c} } = \sqr{ \frac { 0{,}8 \cdot 10^{7}\,\text{Гц} \cdot 50\,\text{м} }{3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}} } \approx 1{,}78.
+    \end{align*}
+}
+\solutionspace{80pt}
+
+\tasknumber{5}%
 \task{%
     Колебательный контур, состоящий из катушки индуктивности
     и воздушного конденсатора, настроен на длину волны $20\,\text{м}$.
     При этом расстояние между пластинами конденсатора $3\,\text{мм}$.
     Каким должно быть это расстояние, чтобы контур был настроен на длину волны $60\,\text{м}$?
+}
+\answer{%
+    \begin{align*}
+    \lambda &= cT = c \cdot 2\pi\sqrt{LC}, \quad C = \frac{\eps\eps_0 S}d \implies \lambda^2 = 4 \pi^2 c^2 L \frac{\eps\eps_0 S}d, \\
+    \frac{\lambda_2^2}{\lambda_1^2} &= \frac{d_1}{d_2} \implies d_2 =  d_1 \cdot \sqr{\frac{\lambda_1}{\lambda_2}} =  3\,\text{мм} \cdot \sqr{\frac{20\,\text{м}}{60\,\text{м}}} \approx 0{,}333\,\text{мм}
+    \end{align*}
+}
+\solutionspace{80pt}
+
+\tasknumber{6}%
+\task{%
+    Сила тока в первичной обмотке трансформатора $2\,\text{А}$, напряжение на её концах $120\,\text{В}$.
+    Напряжение на концах вторичной обмотки $20\,\text{В}$.
+    Определите силу тока во вторичной обмотке.
+    Потерями в трансформаторе пренебречь.
+}
+\answer{%
+    $U_1\eli_1 = U_2\eli_2 \implies \eli_2 = \eli_1 \cdot \frac{U_1}{U_2} = 2\,\text{А} \cdot \frac{120\,\text{В}}{20\,\text{В}} \approx 12\,\text{А}$
+}
+\solutionspace{60pt}
+
+\tasknumber{7}%
+\task{%
+    Под каким напряжением находится первичная обмотка трансформатора, имеющая $1500$ витков,
+    если во вторичной обмотке $1000$ витков и напряжение на ней $130\,\text{В}$?
+}
+\answer{%
+    $\frac{U_2}{U_1}  = \frac{N_2}{N_1} \implies U_1 = U_2 \cdot \frac{N_1}{N_2} = 130\,\text{В} \cdot \frac{1500}{1000} \approx 195\,\text{В}$
+}
+\solutionspace{40pt}
+
+\tasknumber{8}%
+\task{%
+    Сила тока в первичной обмотке трансформатора $859\,\text{мА}$, напряжение на её концах $300\,\text{В}$.
+    Сила тока во вторичной обмотке $3{,}2\,\text{А}$, напряжение на её концах $77\,\text{В}$.
+    Определите КПД трансформатора.
+}
+\answer{%
+    $\eta = \frac{ U_2\eli_2 }{ U_1\eli_1 } = \frac{ 77\,\text{В} \cdot 3{,}2\,\text{А} }{ 300\,\text{В} \cdot 859\,\text{мА} } \approx 0{,}950, \quad 1-\eta \approx 0{,}050$
 }
 
 \variantsplitter
@@ -681,24 +2787,105 @@
 
 \tasknumber{1}%
 \task{%
-    На какую частоту волны настроен радиоприемник, если его колебательный контур
-    обладает индуктивностью $300\,\text{мкГн}$ и емкостью $700\,\text{пФ}$?
+    Длина волны света в~вакууме $\lambda = 500\,\text{нм}$.
+    Какова частота этой световой волны?
+    Какова длина этой волны в среде с показателем преломления $n = 1{,}7$?
+    Может ли человек увидеть такую волну света, и если да, то какой именно цвет соответствует этим волнам в вакууме и в этой среде?
 }
-\solutionspace{100pt}
+\answer{%
+    \begin{align*}
+    \nu &= \frac 1T = \frac 1{\lambda/c} = \frac c\lambda = \frac{3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}}{500\,\text{нм}} \approx 600 \cdot 10^{12}\,\text{Гц}, \\
+    \nu' &= \nu &\cbr{\text{или } T' = T} \implies \lambda' = v'T' = \frac vn T = \frac{ vt }n = \frac \lambda n = \frac{500\,\text{нм}}{1{,}7} \approx 0{,}29 \cdot 10^{-6}\,\text{м}.
+    \\
+    &\text{380 нм---фиол---440---син---485---гол---500---зел---565---жёл---590---оранж---625---крас---780 нм}, \\
+    &\text{увидит}
+    \end{align*}
+}
+\solutionspace{60pt}
 
 \tasknumber{2}%
 \task{%
-    Колебательный контур настроен на частоту $0{,}5 \cdot 10^{7}\,\text{Гц}$.
-    Во сколько раз и как надо изменить емкость конденсатора для перестройки контура на длину волны $20\,\text{м}$?
+    Укажите букву, соответствующую физическую величину (из текущего раздела), её единицы измерения в СИ и выразите её из какого-либо физического закона:
+    \begin{enumerate}
+        \item «л'амбда»,
+        \item «цэ»,
+        \item «бал'шайа цэ»,
+        \item «эн».
+    \end{enumerate}
 }
-\solutionspace{100pt}
 
 \tasknumber{3}%
+\task{%
+    На какую частоту волны настроен радиоприемник, если его колебательный контур
+    обладает индуктивностью $300\,\text{мкГн}$ и ёмкостью $700\,\text{пФ}$?
+}
+\answer{%
+    \begin{align*}
+    T = 2\pi\sqrt{LC} \implies \nu &= \frac 1T = \frac 1{ 2\pi\sqrt{LC} } = \frac 1{ 2\pi\sqrt{300\,\text{мкГн} \cdot 700\,\text{пФ}}} \approx 0{,}347\,\text{МГц}, \\
+    \lambda &= cT = c \cdot 2\pi\sqrt{LC} = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} \cdot 2\pi\sqrt{300\,\text{мкГн} \cdot 700\,\text{пФ}} \approx 864\,\text{м}.
+    \end{align*}
+}
+\solutionspace{80pt}
+
+\tasknumber{4}%
+\task{%
+    Колебательный контур настроен на частоту $1{,}8 \cdot 10^{7}\,\text{Гц}$.
+    Во сколько раз и как надо изменить индуктивность катушки для перенастройки контура на длину волны $30\,\text{м}$?
+}
+\answer{%
+    \begin{align*}
+    T_1 &= 2\pi\sqrt{L_1C_1} \implies \nu_1 = \frac 1{T_1} = \frac 1{ 2\pi\sqrt{L_1C_1} } \implies L_1C_1 = \frac 1{\sqr{2\pi \nu_1}}, \\
+    L_2C_2 &= \frac 1{\sqr{2\pi \nu_2}} = \frac 1{\sqr{2\pi \frac 1{T_2}}} = \frac 1{\sqr{2\pi \frac c{\lambda_2}}}, \\
+    \frac{L_2C_2}{L_1C_1} &= \frac {\sqr{2\pi \nu}}{\sqr{2\pi \frac c{\lambda_2}}} =  \sqr{ \frac {\nu}{\frac c{\lambda_2}} } = \sqr{ \frac {\nu\lambda_2}{c} } = \sqr{ \frac { 1{,}8 \cdot 10^{7}\,\text{Гц} \cdot 30\,\text{м} }{3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}} } \approx 3{,}2.
+    \end{align*}
+}
+\solutionspace{80pt}
+
+\tasknumber{5}%
 \task{%
     Колебательный контур, состоящий из катушки индуктивности
     и воздушного конденсатора, настроен на длину волны $50\,\text{м}$.
     При этом расстояние между пластинами конденсатора $3{,}5\,\text{мм}$.
     Каким должно быть это расстояние, чтобы контур был настроен на длину волны $45\,\text{м}$?
+}
+\answer{%
+    \begin{align*}
+    \lambda &= cT = c \cdot 2\pi\sqrt{LC}, \quad C = \frac{\eps\eps_0 S}d \implies \lambda^2 = 4 \pi^2 c^2 L \frac{\eps\eps_0 S}d, \\
+    \frac{\lambda_2^2}{\lambda_1^2} &= \frac{d_1}{d_2} \implies d_2 =  d_1 \cdot \sqr{\frac{\lambda_1}{\lambda_2}} =  3{,}5\,\text{мм} \cdot \sqr{\frac{50\,\text{м}}{45\,\text{м}}} \approx 4{,}32\,\text{мм}
+    \end{align*}
+}
+\solutionspace{80pt}
+
+\tasknumber{6}%
+\task{%
+    Сила тока в первичной обмотке трансформатора $2\,\text{А}$, напряжение на её концах $320\,\text{В}$.
+    Напряжение на концах вторичной обмотки $60\,\text{В}$.
+    Определите силу тока во вторичной обмотке.
+    Потерями в трансформаторе пренебречь.
+}
+\answer{%
+    $U_1\eli_1 = U_2\eli_2 \implies \eli_2 = \eli_1 \cdot \frac{U_1}{U_2} = 2\,\text{А} \cdot \frac{320\,\text{В}}{60\,\text{В}} \approx 11\,\text{А}$
+}
+\solutionspace{60pt}
+
+\tasknumber{7}%
+\task{%
+    Под каким напряжением находится первичная обмотка трансформатора, имеющая $500$ витков,
+    если во вторичной обмотке $200$ витков и напряжение на ней $150\,\text{В}$?
+}
+\answer{%
+    $\frac{U_2}{U_1}  = \frac{N_2}{N_1} \implies U_1 = U_2 \cdot \frac{N_1}{N_2} = 150\,\text{В} \cdot \frac{500}{200} \approx 375\,\text{В}$
+}
+\solutionspace{40pt}
+
+\tasknumber{8}%
+\task{%
+    Сила тока в первичной обмотке трансформатора $542\,\text{мА}$, напряжение на её концах $250\,\text{В}$.
+    Сила тока во вторичной обмотке $3{,}2\,\text{А}$, напряжение на её концах $40\,\text{В}$.
+    Определите КПД трансформатора.
+}
+\answer{%
+    $\eta = \frac{ U_2\eli_2 }{ U_1\eli_1 } = \frac{ 40\,\text{В} \cdot 3{,}2\,\text{А} }{ 250\,\text{В} \cdot 542\,\text{мА} } \approx 0{,}950, \quad 1-\eta \approx 0{,}050$
 }
 
 \variantsplitter
@@ -707,24 +2894,105 @@
 
 \tasknumber{1}%
 \task{%
-    На какую частоту волны настроен радиоприемник, если его колебательный контур
-    обладает индуктивностью $600\,\text{мкГн}$ и емкостью $750\,\text{пФ}$?
+    Длина волны света в~вакууме $\lambda = 500\,\text{нм}$.
+    Какова частота этой световой волны?
+    Какова длина этой волны в среде с показателем преломления $n = 1{,}7$?
+    Может ли человек увидеть такую волну света, и если да, то какой именно цвет соответствует этим волнам в вакууме и в этой среде?
 }
-\solutionspace{100pt}
+\answer{%
+    \begin{align*}
+    \nu &= \frac 1T = \frac 1{\lambda/c} = \frac c\lambda = \frac{3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}}{500\,\text{нм}} \approx 600 \cdot 10^{12}\,\text{Гц}, \\
+    \nu' &= \nu &\cbr{\text{или } T' = T} \implies \lambda' = v'T' = \frac vn T = \frac{ vt }n = \frac \lambda n = \frac{500\,\text{нм}}{1{,}7} \approx 0{,}29 \cdot 10^{-6}\,\text{м}.
+    \\
+    &\text{380 нм---фиол---440---син---485---гол---500---зел---565---жёл---590---оранж---625---крас---780 нм}, \\
+    &\text{увидит}
+    \end{align*}
+}
+\solutionspace{60pt}
 
 \tasknumber{2}%
 \task{%
-    Колебательный контур настроен на частоту $4{,}5 \cdot 10^{7}\,\text{Гц}$.
-    Во сколько раз и как надо изменить емкость конденсатора для перестройки контура на длину волны $50\,\text{м}$?
+    Укажите букву, соответствующую физическую величину (из текущего раздела), её единицы измерения в СИ и выразите её из какого-либо физического закона:
+    \begin{enumerate}
+        \item «эл'»,
+        \item «цэ»,
+        \item «н'у»,
+        \item «тэ».
+    \end{enumerate}
 }
-\solutionspace{100pt}
 
 \tasknumber{3}%
+\task{%
+    На какую частоту волны настроен радиоприемник, если его колебательный контур
+    обладает индуктивностью $600\,\text{мкГн}$ и ёмкостью $750\,\text{пФ}$?
+}
+\answer{%
+    \begin{align*}
+    T = 2\pi\sqrt{LC} \implies \nu &= \frac 1T = \frac 1{ 2\pi\sqrt{LC} } = \frac 1{ 2\pi\sqrt{600\,\text{мкГн} \cdot 750\,\text{пФ}}} \approx 0{,}237\,\text{МГц}, \\
+    \lambda &= cT = c \cdot 2\pi\sqrt{LC} = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} \cdot 2\pi\sqrt{600\,\text{мкГн} \cdot 750\,\text{пФ}} \approx 1265\,\text{м}.
+    \end{align*}
+}
+\solutionspace{80pt}
+
+\tasknumber{4}%
+\task{%
+    Колебательный контур настроен на частоту $1{,}8 \cdot 10^{7}\,\text{Гц}$.
+    Во сколько раз и как надо изменить ёмкость конденсатора для перенастройки контура на длину волны $30\,\text{м}$?
+}
+\answer{%
+    \begin{align*}
+    T_1 &= 2\pi\sqrt{L_1C_1} \implies \nu_1 = \frac 1{T_1} = \frac 1{ 2\pi\sqrt{L_1C_1} } \implies L_1C_1 = \frac 1{\sqr{2\pi \nu_1}}, \\
+    L_2C_2 &= \frac 1{\sqr{2\pi \nu_2}} = \frac 1{\sqr{2\pi \frac 1{T_2}}} = \frac 1{\sqr{2\pi \frac c{\lambda_2}}}, \\
+    \frac{L_2C_2}{L_1C_1} &= \frac {\sqr{2\pi \nu}}{\sqr{2\pi \frac c{\lambda_2}}} =  \sqr{ \frac {\nu}{\frac c{\lambda_2}} } = \sqr{ \frac {\nu\lambda_2}{c} } = \sqr{ \frac { 1{,}8 \cdot 10^{7}\,\text{Гц} \cdot 30\,\text{м} }{3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}} } \approx 3{,}2.
+    \end{align*}
+}
+\solutionspace{80pt}
+
+\tasknumber{5}%
 \task{%
     Колебательный контур, состоящий из катушки индуктивности
     и воздушного конденсатора, настроен на длину волны $20\,\text{м}$.
     При этом расстояние между пластинами конденсатора $2{,}5\,\text{мм}$.
     Каким должно быть это расстояние, чтобы контур был настроен на длину волны $150\,\text{м}$?
+}
+\answer{%
+    \begin{align*}
+    \lambda &= cT = c \cdot 2\pi\sqrt{LC}, \quad C = \frac{\eps\eps_0 S}d \implies \lambda^2 = 4 \pi^2 c^2 L \frac{\eps\eps_0 S}d, \\
+    \frac{\lambda_2^2}{\lambda_1^2} &= \frac{d_1}{d_2} \implies d_2 =  d_1 \cdot \sqr{\frac{\lambda_1}{\lambda_2}} =  2{,}5\,\text{мм} \cdot \sqr{\frac{20\,\text{м}}{150\,\text{м}}} \approx 0{,}0444\,\text{мм}
+    \end{align*}
+}
+\solutionspace{80pt}
+
+\tasknumber{6}%
+\task{%
+    Сила тока в первичной обмотке трансформатора $5\,\text{А}$, напряжение на её концах $220\,\text{В}$.
+    Напряжение на концах вторичной обмотки $20\,\text{В}$.
+    Определите силу тока во вторичной обмотке.
+    Потерями в трансформаторе пренебречь.
+}
+\answer{%
+    $U_1\eli_1 = U_2\eli_2 \implies \eli_2 = \eli_1 \cdot \frac{U_1}{U_2} = 5\,\text{А} \cdot \frac{220\,\text{В}}{20\,\text{В}} \approx 55\,\text{А}$
+}
+\solutionspace{60pt}
+
+\tasknumber{7}%
+\task{%
+    Под каким напряжением находится первичная обмотка трансформатора, имеющая $500$ витков,
+    если во вторичной обмотке $2000$ витков и напряжение на ней $70\,\text{В}$?
+}
+\answer{%
+    $\frac{U_2}{U_1}  = \frac{N_2}{N_1} \implies U_1 = U_2 \cdot \frac{N_1}{N_2} = 70\,\text{В} \cdot \frac{500}{2000} \approx 17{,}5\,\text{В}$
+}
+\solutionspace{40pt}
+
+\tasknumber{8}%
+\task{%
+    Сила тока в первичной обмотке трансформатора $412\,\text{мА}$, напряжение на её концах $300\,\text{В}$.
+    Сила тока во вторичной обмотке $2{,}4\,\text{А}$, напряжение на её концах $50\,\text{В}$.
+    Определите КПД трансформатора.
+}
+\answer{%
+    $\eta = \frac{ U_2\eli_2 }{ U_1\eli_1 } = \frac{ 50\,\text{В} \cdot 2{,}4\,\text{А} }{ 300\,\text{В} \cdot 412\,\text{мА} } \approx 0{,}970, \quad 1-\eta \approx 0{,}030$
 }
 
 \variantsplitter
@@ -733,24 +3001,105 @@
 
 \tasknumber{1}%
 \task{%
-    На какую частоту волны настроен радиоприемник, если его колебательный контур
-    обладает индуктивностью $600\,\text{мкГн}$ и емкостью $800\,\text{пФ}$?
+    Длина волны света в~вакууме $\lambda = 400\,\text{нм}$.
+    Какова частота этой световой волны?
+    Какова длина этой волны в среде с показателем преломления $n = 1{,}3$?
+    Может ли человек увидеть такую волну света, и если да, то какой именно цвет соответствует этим волнам в вакууме и в этой среде?
 }
-\solutionspace{100pt}
+\answer{%
+    \begin{align*}
+    \nu &= \frac 1T = \frac 1{\lambda/c} = \frac c\lambda = \frac{3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}}{400\,\text{нм}} \approx 750 \cdot 10^{12}\,\text{Гц}, \\
+    \nu' &= \nu &\cbr{\text{или } T' = T} \implies \lambda' = v'T' = \frac vn T = \frac{ vt }n = \frac \lambda n = \frac{400\,\text{нм}}{1{,}3} \approx 0{,}31 \cdot 10^{-6}\,\text{м}.
+    \\
+    &\text{380 нм---фиол---440---син---485---гол---500---зел---565---жёл---590---оранж---625---крас---780 нм}, \\
+    &\text{увидит}
+    \end{align*}
+}
+\solutionspace{60pt}
 
 \tasknumber{2}%
 \task{%
-    Колебательный контур настроен на частоту $1{,}8 \cdot 10^{7}\,\text{Гц}$.
-    Во сколько раз и как надо изменить емкость конденсатора для перестройки контура на длину волны $25\,\text{м}$?
+    Укажите букву, соответствующую физическую величину (из текущего раздела), её единицы измерения в СИ и выразите её из какого-либо физического закона:
+    \begin{enumerate}
+        \item «л'амбда»,
+        \item «цэ»,
+        \item «бал'шайа цэ»,
+        \item «эн».
+    \end{enumerate}
 }
-\solutionspace{100pt}
 
 \tasknumber{3}%
+\task{%
+    На какую частоту волны настроен радиоприемник, если его колебательный контур
+    обладает индуктивностью $600\,\text{мкГн}$ и ёмкостью $800\,\text{пФ}$?
+}
+\answer{%
+    \begin{align*}
+    T = 2\pi\sqrt{LC} \implies \nu &= \frac 1T = \frac 1{ 2\pi\sqrt{LC} } = \frac 1{ 2\pi\sqrt{600\,\text{мкГн} \cdot 800\,\text{пФ}}} \approx 0{,}230\,\text{МГц}, \\
+    \lambda &= cT = c \cdot 2\pi\sqrt{LC} = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} \cdot 2\pi\sqrt{600\,\text{мкГн} \cdot 800\,\text{пФ}} \approx 1306\,\text{м}.
+    \end{align*}
+}
+\solutionspace{80pt}
+
+\tasknumber{4}%
+\task{%
+    Колебательный контур настроен на частоту $4{,}5 \cdot 10^{7}\,\text{Гц}$.
+    Во сколько раз и как надо изменить индуктивность катушки для перенастройки контура на длину волны $40\,\text{м}$?
+}
+\answer{%
+    \begin{align*}
+    T_1 &= 2\pi\sqrt{L_1C_1} \implies \nu_1 = \frac 1{T_1} = \frac 1{ 2\pi\sqrt{L_1C_1} } \implies L_1C_1 = \frac 1{\sqr{2\pi \nu_1}}, \\
+    L_2C_2 &= \frac 1{\sqr{2\pi \nu_2}} = \frac 1{\sqr{2\pi \frac 1{T_2}}} = \frac 1{\sqr{2\pi \frac c{\lambda_2}}}, \\
+    \frac{L_2C_2}{L_1C_1} &= \frac {\sqr{2\pi \nu}}{\sqr{2\pi \frac c{\lambda_2}}} =  \sqr{ \frac {\nu}{\frac c{\lambda_2}} } = \sqr{ \frac {\nu\lambda_2}{c} } = \sqr{ \frac { 4{,}5 \cdot 10^{7}\,\text{Гц} \cdot 40\,\text{м} }{3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}} } \approx 36.
+    \end{align*}
+}
+\solutionspace{80pt}
+
+\tasknumber{5}%
 \task{%
     Колебательный контур, состоящий из катушки индуктивности
     и воздушного конденсатора, настроен на длину волны $180\,\text{м}$.
     При этом расстояние между пластинами конденсатора $2\,\text{мм}$.
     Каким должно быть это расстояние, чтобы контур был настроен на длину волны $80\,\text{м}$?
+}
+\answer{%
+    \begin{align*}
+    \lambda &= cT = c \cdot 2\pi\sqrt{LC}, \quad C = \frac{\eps\eps_0 S}d \implies \lambda^2 = 4 \pi^2 c^2 L \frac{\eps\eps_0 S}d, \\
+    \frac{\lambda_2^2}{\lambda_1^2} &= \frac{d_1}{d_2} \implies d_2 =  d_1 \cdot \sqr{\frac{\lambda_1}{\lambda_2}} =  2\,\text{мм} \cdot \sqr{\frac{180\,\text{м}}{80\,\text{м}}} \approx 10{,}13\,\text{мм}
+    \end{align*}
+}
+\solutionspace{80pt}
+
+\tasknumber{6}%
+\task{%
+    Сила тока в первичной обмотке трансформатора $5\,\text{А}$, напряжение на её концах $320\,\text{В}$.
+    Напряжение на концах вторичной обмотки $60\,\text{В}$.
+    Определите силу тока во вторичной обмотке.
+    Потерями в трансформаторе пренебречь.
+}
+\answer{%
+    $U_1\eli_1 = U_2\eli_2 \implies \eli_2 = \eli_1 \cdot \frac{U_1}{U_2} = 5\,\text{А} \cdot \frac{320\,\text{В}}{60\,\text{В}} \approx 30\,\text{А}$
+}
+\solutionspace{60pt}
+
+\tasknumber{7}%
+\task{%
+    Под каким напряжением находится первичная обмотка трансформатора, имеющая $1200$ витков,
+    если во вторичной обмотке $2000$ витков и напряжение на ней $150\,\text{В}$?
+}
+\answer{%
+    $\frac{U_2}{U_1}  = \frac{N_2}{N_1} \implies U_1 = U_2 \cdot \frac{N_1}{N_2} = 150\,\text{В} \cdot \frac{1200}{2000} \approx 90\,\text{В}$
+}
+\solutionspace{40pt}
+
+\tasknumber{8}%
+\task{%
+    Сила тока в первичной обмотке трансформатора $412\,\text{мА}$, напряжение на её концах $250\,\text{В}$.
+    Сила тока во вторичной обмотке $4{,}3\,\text{А}$, напряжение на её концах $23\,\text{В}$.
+    Определите долю потерей трансформатора.
+}
+\answer{%
+    $\eta = \frac{ U_2\eli_2 }{ U_1\eli_1 } = \frac{ 23\,\text{В} \cdot 4{,}3\,\text{А} }{ 250\,\text{В} \cdot 412\,\text{мА} } \approx 0{,}940, \quad 1-\eta \approx 0{,}060$
 }
 
 \variantsplitter
@@ -759,24 +3108,105 @@
 
 \tasknumber{1}%
 \task{%
-    На какую длину волны настроен радиоприемник, если его колебательный контур
-    обладает индуктивностью $300\,\text{мкГн}$ и емкостью $650\,\text{пФ}$?
+    Длина волны света в~вакууме $\lambda = 700\,\text{нм}$.
+    Какова частота этой световой волны?
+    Какова длина этой волны в среде с показателем преломления $n = 1{,}6$?
+    Может ли человек увидеть такую волну света, и если да, то какой именно цвет соответствует этим волнам в вакууме и в этой среде?
 }
-\solutionspace{100pt}
+\answer{%
+    \begin{align*}
+    \nu &= \frac 1T = \frac 1{\lambda/c} = \frac c\lambda = \frac{3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}}{700\,\text{нм}} \approx 429 \cdot 10^{12}\,\text{Гц}, \\
+    \nu' &= \nu &\cbr{\text{или } T' = T} \implies \lambda' = v'T' = \frac vn T = \frac{ vt }n = \frac \lambda n = \frac{700\,\text{нм}}{1{,}6} \approx 0{,}44 \cdot 10^{-6}\,\text{м}.
+    \\
+    &\text{380 нм---фиол---440---син---485---гол---500---зел---565---жёл---590---оранж---625---крас---780 нм}, \\
+    &\text{увидит}
+    \end{align*}
+}
+\solutionspace{60pt}
 
 \tasknumber{2}%
 \task{%
-    Колебательный контур настроен на частоту $4{,}5 \cdot 10^{7}\,\text{Гц}$.
-    Во сколько раз и как надо изменить емкость конденсатора для перестройки контура на длину волны $50\,\text{м}$?
+    Укажите букву, соответствующую физическую величину (из текущего раздела), её единицы измерения в СИ и выразите её из какого-либо физического закона:
+    \begin{enumerate}
+        \item «л'амбда»,
+        \item «вэ»,
+        \item «бал'шайа цэ»,
+        \item «тэ».
+    \end{enumerate}
 }
-\solutionspace{100pt}
 
 \tasknumber{3}%
+\task{%
+    На какую длину волны настроен радиоприемник, если его колебательный контур
+    обладает индуктивностью $300\,\text{мкГн}$ и ёмкостью $650\,\text{пФ}$?
+}
+\answer{%
+    \begin{align*}
+    T = 2\pi\sqrt{LC} \implies \nu &= \frac 1T = \frac 1{ 2\pi\sqrt{LC} } = \frac 1{ 2\pi\sqrt{300\,\text{мкГн} \cdot 650\,\text{пФ}}} \approx 0{,}360\,\text{МГц}, \\
+    \lambda &= cT = c \cdot 2\pi\sqrt{LC} = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} \cdot 2\pi\sqrt{300\,\text{мкГн} \cdot 650\,\text{пФ}} \approx 833\,\text{м}.
+    \end{align*}
+}
+\solutionspace{80pt}
+
+\tasknumber{4}%
+\task{%
+    Колебательный контур настроен на частоту $0{,}5 \cdot 10^{7}\,\text{Гц}$.
+    Во сколько раз и как надо изменить индуктивность катушки для перенастройки контура на длину волны $40\,\text{м}$?
+}
+\answer{%
+    \begin{align*}
+    T_1 &= 2\pi\sqrt{L_1C_1} \implies \nu_1 = \frac 1{T_1} = \frac 1{ 2\pi\sqrt{L_1C_1} } \implies L_1C_1 = \frac 1{\sqr{2\pi \nu_1}}, \\
+    L_2C_2 &= \frac 1{\sqr{2\pi \nu_2}} = \frac 1{\sqr{2\pi \frac 1{T_2}}} = \frac 1{\sqr{2\pi \frac c{\lambda_2}}}, \\
+    \frac{L_2C_2}{L_1C_1} &= \frac {\sqr{2\pi \nu}}{\sqr{2\pi \frac c{\lambda_2}}} =  \sqr{ \frac {\nu}{\frac c{\lambda_2}} } = \sqr{ \frac {\nu\lambda_2}{c} } = \sqr{ \frac { 0{,}5 \cdot 10^{7}\,\text{Гц} \cdot 40\,\text{м} }{3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}} } \approx 0{,}44.
+    \end{align*}
+}
+\solutionspace{80pt}
+
+\tasknumber{5}%
 \task{%
     Колебательный контур, состоящий из катушки индуктивности
     и воздушного конденсатора, настроен на длину волны $20\,\text{м}$.
     При этом расстояние между пластинами конденсатора $3\,\text{мм}$.
     Каким должно быть это расстояние, чтобы контур был настроен на длину волны $45\,\text{м}$?
+}
+\answer{%
+    \begin{align*}
+    \lambda &= cT = c \cdot 2\pi\sqrt{LC}, \quad C = \frac{\eps\eps_0 S}d \implies \lambda^2 = 4 \pi^2 c^2 L \frac{\eps\eps_0 S}d, \\
+    \frac{\lambda_2^2}{\lambda_1^2} &= \frac{d_1}{d_2} \implies d_2 =  d_1 \cdot \sqr{\frac{\lambda_1}{\lambda_2}} =  3\,\text{мм} \cdot \sqr{\frac{20\,\text{м}}{45\,\text{м}}} \approx 0{,}593\,\text{мм}
+    \end{align*}
+}
+\solutionspace{80pt}
+
+\tasknumber{6}%
+\task{%
+    Сила тока в первичной обмотке трансформатора $5\,\text{А}$, напряжение на её концах $220\,\text{В}$.
+    Напряжение на концах вторичной обмотки $80\,\text{В}$.
+    Определите силу тока во вторичной обмотке.
+    Потерями в трансформаторе пренебречь.
+}
+\answer{%
+    $U_1\eli_1 = U_2\eli_2 \implies \eli_2 = \eli_1 \cdot \frac{U_1}{U_2} = 5\,\text{А} \cdot \frac{220\,\text{В}}{80\,\text{В}} \approx 14\,\text{А}$
+}
+\solutionspace{60pt}
+
+\tasknumber{7}%
+\task{%
+    Под каким напряжением находится первичная обмотка трансформатора, имеющая $500$ витков,
+    если во вторичной обмотке $200$ витков и напряжение на ней $90\,\text{В}$?
+}
+\answer{%
+    $\frac{U_2}{U_1}  = \frac{N_2}{N_1} \implies U_1 = U_2 \cdot \frac{N_1}{N_2} = 90\,\text{В} \cdot \frac{500}{200} \approx 225\,\text{В}$
+}
+\solutionspace{40pt}
+
+\tasknumber{8}%
+\task{%
+    Сила тока в первичной обмотке трансформатора $784\,\text{мА}$, напряжение на её концах $300\,\text{В}$.
+    Сила тока во вторичной обмотке $2{,}4\,\text{А}$, напряжение на её концах $93\,\text{В}$.
+    Определите долю потерей трансформатора.
+}
+\answer{%
+    $\eta = \frac{ U_2\eli_2 }{ U_1\eli_1 } = \frac{ 93\,\text{В} \cdot 2{,}4\,\text{А} }{ 300\,\text{В} \cdot 784\,\text{мА} } \approx 0{,}950, \quad 1-\eta \approx 0{,}050$
 }
 
 \variantsplitter
@@ -785,24 +3215,105 @@
 
 \tasknumber{1}%
 \task{%
-    На какую длину волны настроен радиоприемник, если его колебательный контур
-    обладает индуктивностью $600\,\text{мкГн}$ и емкостью $600\,\text{пФ}$?
+    Длина волны света в~вакууме $\lambda = 700\,\text{нм}$.
+    Какова частота этой световой волны?
+    Какова длина этой волны в среде с показателем преломления $n = 1{,}4$?
+    Может ли человек увидеть такую волну света, и если да, то какой именно цвет соответствует этим волнам в вакууме и в этой среде?
 }
-\solutionspace{100pt}
+\answer{%
+    \begin{align*}
+    \nu &= \frac 1T = \frac 1{\lambda/c} = \frac c\lambda = \frac{3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}}{700\,\text{нм}} \approx 429 \cdot 10^{12}\,\text{Гц}, \\
+    \nu' &= \nu &\cbr{\text{или } T' = T} \implies \lambda' = v'T' = \frac vn T = \frac{ vt }n = \frac \lambda n = \frac{700\,\text{нм}}{1{,}4} \approx 0{,}50 \cdot 10^{-6}\,\text{м}.
+    \\
+    &\text{380 нм---фиол---440---син---485---гол---500---зел---565---жёл---590---оранж---625---крас---780 нм}, \\
+    &\text{увидит}
+    \end{align*}
+}
+\solutionspace{60pt}
 
 \tasknumber{2}%
 \task{%
-    Колебательный контур настроен на частоту $1{,}5 \cdot 10^{7}\,\text{Гц}$.
-    Во сколько раз и как надо изменить емкость конденсатора для перестройки контура на длину волны $40\,\text{м}$?
+    Укажите букву, соответствующую физическую величину (из текущего раздела), её единицы измерения в СИ и выразите её из какого-либо физического закона:
+    \begin{enumerate}
+        \item «эл'»,
+        \item «цэ»,
+        \item «н'у»,
+        \item «эн».
+    \end{enumerate}
 }
-\solutionspace{100pt}
 
 \tasknumber{3}%
+\task{%
+    На какую длину волны настроен радиоприемник, если его колебательный контур
+    обладает индуктивностью $600\,\text{мкГн}$ и ёмкостью $600\,\text{пФ}$?
+}
+\answer{%
+    \begin{align*}
+    T = 2\pi\sqrt{LC} \implies \nu &= \frac 1T = \frac 1{ 2\pi\sqrt{LC} } = \frac 1{ 2\pi\sqrt{600\,\text{мкГн} \cdot 600\,\text{пФ}}} \approx 0{,}265\,\text{МГц}, \\
+    \lambda &= cT = c \cdot 2\pi\sqrt{LC} = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} \cdot 2\pi\sqrt{600\,\text{мкГн} \cdot 600\,\text{пФ}} \approx 1131\,\text{м}.
+    \end{align*}
+}
+\solutionspace{80pt}
+
+\tasknumber{4}%
+\task{%
+    Колебательный контур настроен на частоту $2{,}5 \cdot 10^{7}\,\text{Гц}$.
+    Во сколько раз и как надо изменить индуктивность катушки для перенастройки контура на длину волны $20\,\text{м}$?
+}
+\answer{%
+    \begin{align*}
+    T_1 &= 2\pi\sqrt{L_1C_1} \implies \nu_1 = \frac 1{T_1} = \frac 1{ 2\pi\sqrt{L_1C_1} } \implies L_1C_1 = \frac 1{\sqr{2\pi \nu_1}}, \\
+    L_2C_2 &= \frac 1{\sqr{2\pi \nu_2}} = \frac 1{\sqr{2\pi \frac 1{T_2}}} = \frac 1{\sqr{2\pi \frac c{\lambda_2}}}, \\
+    \frac{L_2C_2}{L_1C_1} &= \frac {\sqr{2\pi \nu}}{\sqr{2\pi \frac c{\lambda_2}}} =  \sqr{ \frac {\nu}{\frac c{\lambda_2}} } = \sqr{ \frac {\nu\lambda_2}{c} } = \sqr{ \frac { 2{,}5 \cdot 10^{7}\,\text{Гц} \cdot 20\,\text{м} }{3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}} } \approx 2{,}78.
+    \end{align*}
+}
+\solutionspace{80pt}
+
+\tasknumber{5}%
 \task{%
     Колебательный контур, состоящий из катушки индуктивности
     и воздушного конденсатора, настроен на длину волны $20\,\text{м}$.
     При этом расстояние между пластинами конденсатора $2{,}5\,\text{мм}$.
     Каким должно быть это расстояние, чтобы контур был настроен на длину волны $150\,\text{м}$?
+}
+\answer{%
+    \begin{align*}
+    \lambda &= cT = c \cdot 2\pi\sqrt{LC}, \quad C = \frac{\eps\eps_0 S}d \implies \lambda^2 = 4 \pi^2 c^2 L \frac{\eps\eps_0 S}d, \\
+    \frac{\lambda_2^2}{\lambda_1^2} &= \frac{d_1}{d_2} \implies d_2 =  d_1 \cdot \sqr{\frac{\lambda_1}{\lambda_2}} =  2{,}5\,\text{мм} \cdot \sqr{\frac{20\,\text{м}}{150\,\text{м}}} \approx 0{,}0444\,\text{мм}
+    \end{align*}
+}
+\solutionspace{80pt}
+
+\tasknumber{6}%
+\task{%
+    Сила тока в первичной обмотке трансформатора $5\,\text{А}$, напряжение на её концах $320\,\text{В}$.
+    Напряжение на концах вторичной обмотки $40\,\text{В}$.
+    Определите силу тока во вторичной обмотке.
+    Потерями в трансформаторе пренебречь.
+}
+\answer{%
+    $U_1\eli_1 = U_2\eli_2 \implies \eli_2 = \eli_1 \cdot \frac{U_1}{U_2} = 5\,\text{А} \cdot \frac{320\,\text{В}}{40\,\text{В}} \approx 40\,\text{А}$
+}
+\solutionspace{60pt}
+
+\tasknumber{7}%
+\task{%
+    Под каким напряжением находится первичная обмотка трансформатора, имеющая $800$ витков,
+    если во вторичной обмотке $1000$ витков и напряжение на ней $70\,\text{В}$?
+}
+\answer{%
+    $\frac{U_2}{U_1}  = \frac{N_2}{N_1} \implies U_1 = U_2 \cdot \frac{N_1}{N_2} = 70\,\text{В} \cdot \frac{800}{1000} \approx 56\,\text{В}$
+}
+\solutionspace{40pt}
+
+\tasknumber{8}%
+\task{%
+    Сила тока в первичной обмотке трансформатора $784\,\text{мА}$, напряжение на её концах $300\,\text{В}$.
+    Сила тока во вторичной обмотке $3{,}2\,\text{А}$, напряжение на её концах $69\,\text{В}$.
+    Определите КПД трансформатора.
+}
+\answer{%
+    $\eta = \frac{ U_2\eli_2 }{ U_1\eli_1 } = \frac{ 69\,\text{В} \cdot 3{,}2\,\text{А} }{ 300\,\text{В} \cdot 784\,\text{мА} } \approx 0{,}940, \quad 1-\eta \approx 0{,}060$
 }
 
 \variantsplitter
@@ -811,24 +3322,105 @@
 
 \tasknumber{1}%
 \task{%
-    На какую частоту волны настроен радиоприемник, если его колебательный контур
-    обладает индуктивностью $300\,\text{мкГн}$ и емкостью $800\,\text{пФ}$?
+    Длина волны света в~вакууме $\lambda = 400\,\text{нм}$.
+    Какова частота этой световой волны?
+    Какова длина этой волны в среде с показателем преломления $n = 1{,}3$?
+    Может ли человек увидеть такую волну света, и если да, то какой именно цвет соответствует этим волнам в вакууме и в этой среде?
 }
-\solutionspace{100pt}
+\answer{%
+    \begin{align*}
+    \nu &= \frac 1T = \frac 1{\lambda/c} = \frac c\lambda = \frac{3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}}{400\,\text{нм}} \approx 750 \cdot 10^{12}\,\text{Гц}, \\
+    \nu' &= \nu &\cbr{\text{или } T' = T} \implies \lambda' = v'T' = \frac vn T = \frac{ vt }n = \frac \lambda n = \frac{400\,\text{нм}}{1{,}3} \approx 0{,}31 \cdot 10^{-6}\,\text{м}.
+    \\
+    &\text{380 нм---фиол---440---син---485---гол---500---зел---565---жёл---590---оранж---625---крас---780 нм}, \\
+    &\text{увидит}
+    \end{align*}
+}
+\solutionspace{60pt}
 
 \tasknumber{2}%
 \task{%
-    Колебательный контур настроен на частоту $1{,}5 \cdot 10^{7}\,\text{Гц}$.
-    Во сколько раз и как надо изменить емкость конденсатора для перестройки контура на длину волны $40\,\text{м}$?
+    Укажите букву, соответствующую физическую величину (из текущего раздела), её единицы измерения в СИ и выразите её из какого-либо физического закона:
+    \begin{enumerate}
+        \item «л'амбда»,
+        \item «цэ»,
+        \item «бал'шайа цэ»,
+        \item «тэ».
+    \end{enumerate}
 }
-\solutionspace{100pt}
 
 \tasknumber{3}%
+\task{%
+    На какую частоту волны настроен радиоприемник, если его колебательный контур
+    обладает индуктивностью $300\,\text{мкГн}$ и ёмкостью $800\,\text{пФ}$?
+}
+\answer{%
+    \begin{align*}
+    T = 2\pi\sqrt{LC} \implies \nu &= \frac 1T = \frac 1{ 2\pi\sqrt{LC} } = \frac 1{ 2\pi\sqrt{300\,\text{мкГн} \cdot 800\,\text{пФ}}} \approx 0{,}325\,\text{МГц}, \\
+    \lambda &= cT = c \cdot 2\pi\sqrt{LC} = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} \cdot 2\pi\sqrt{300\,\text{мкГн} \cdot 800\,\text{пФ}} \approx 923\,\text{м}.
+    \end{align*}
+}
+\solutionspace{80pt}
+
+\tasknumber{4}%
+\task{%
+    Колебательный контур настроен на частоту $2{,}5 \cdot 10^{7}\,\text{Гц}$.
+    Во сколько раз и как надо изменить ёмкость конденсатора для перенастройки контура на длину волны $30\,\text{м}$?
+}
+\answer{%
+    \begin{align*}
+    T_1 &= 2\pi\sqrt{L_1C_1} \implies \nu_1 = \frac 1{T_1} = \frac 1{ 2\pi\sqrt{L_1C_1} } \implies L_1C_1 = \frac 1{\sqr{2\pi \nu_1}}, \\
+    L_2C_2 &= \frac 1{\sqr{2\pi \nu_2}} = \frac 1{\sqr{2\pi \frac 1{T_2}}} = \frac 1{\sqr{2\pi \frac c{\lambda_2}}}, \\
+    \frac{L_2C_2}{L_1C_1} &= \frac {\sqr{2\pi \nu}}{\sqr{2\pi \frac c{\lambda_2}}} =  \sqr{ \frac {\nu}{\frac c{\lambda_2}} } = \sqr{ \frac {\nu\lambda_2}{c} } = \sqr{ \frac { 2{,}5 \cdot 10^{7}\,\text{Гц} \cdot 30\,\text{м} }{3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}} } \approx 6{,}25.
+    \end{align*}
+}
+\solutionspace{80pt}
+
+\tasknumber{5}%
 \task{%
     Колебательный контур, состоящий из катушки индуктивности
     и воздушного конденсатора, настроен на длину волны $120\,\text{м}$.
     При этом расстояние между пластинами конденсатора $4{,}5\,\text{мм}$.
     Каким должно быть это расстояние, чтобы контур был настроен на длину волны $45\,\text{м}$?
+}
+\answer{%
+    \begin{align*}
+    \lambda &= cT = c \cdot 2\pi\sqrt{LC}, \quad C = \frac{\eps\eps_0 S}d \implies \lambda^2 = 4 \pi^2 c^2 L \frac{\eps\eps_0 S}d, \\
+    \frac{\lambda_2^2}{\lambda_1^2} &= \frac{d_1}{d_2} \implies d_2 =  d_1 \cdot \sqr{\frac{\lambda_1}{\lambda_2}} =  4{,}5\,\text{мм} \cdot \sqr{\frac{120\,\text{м}}{45\,\text{м}}} \approx 32\,\text{мм}
+    \end{align*}
+}
+\solutionspace{80pt}
+
+\tasknumber{6}%
+\task{%
+    Сила тока в первичной обмотке трансформатора $3\,\text{А}$, напряжение на её концах $320\,\text{В}$.
+    Напряжение на концах вторичной обмотки $20\,\text{В}$.
+    Определите силу тока во вторичной обмотке.
+    Потерями в трансформаторе пренебречь.
+}
+\answer{%
+    $U_1\eli_1 = U_2\eli_2 \implies \eli_2 = \eli_1 \cdot \frac{U_1}{U_2} = 3\,\text{А} \cdot \frac{320\,\text{В}}{20\,\text{В}} \approx 48\,\text{А}$
+}
+\solutionspace{60pt}
+
+\tasknumber{7}%
+\task{%
+    Под каким напряжением находится первичная обмотка трансформатора, имеющая $1500$ витков,
+    если во вторичной обмотке $2000$ витков и напряжение на ней $70\,\text{В}$?
+}
+\answer{%
+    $\frac{U_2}{U_1}  = \frac{N_2}{N_1} \implies U_1 = U_2 \cdot \frac{N_1}{N_2} = 70\,\text{В} \cdot \frac{1500}{2000} \approx 53\,\text{В}$
+}
+\solutionspace{40pt}
+
+\tasknumber{8}%
+\task{%
+    Сила тока в первичной обмотке трансформатора $636\,\text{мА}$, напряжение на её концах $300\,\text{В}$.
+    Сила тока во вторичной обмотке $5{,}1\,\text{А}$, напряжение на её концах $36\,\text{В}$.
+    Определите КПД трансформатора.
+}
+\answer{%
+    $\eta = \frac{ U_2\eli_2 }{ U_1\eli_1 } = \frac{ 36\,\text{В} \cdot 5{,}1\,\text{А} }{ 300\,\text{В} \cdot 636\,\text{мА} } \approx 0{,}960, \quad 1-\eta \approx 0{,}040$
 }
 
 \variantsplitter
@@ -837,24 +3429,105 @@
 
 \tasknumber{1}%
 \task{%
-    На какую длину волны настроен радиоприемник, если его колебательный контур
-    обладает индуктивностью $600\,\text{мкГн}$ и емкостью $600\,\text{пФ}$?
+    Длина волны света в~вакууме $\lambda = 400\,\text{нм}$.
+    Какова частота этой световой волны?
+    Какова длина этой волны в среде с показателем преломления $n = 1{,}6$?
+    Может ли человек увидеть такую волну света, и если да, то какой именно цвет соответствует этим волнам в вакууме и в этой среде?
 }
-\solutionspace{100pt}
+\answer{%
+    \begin{align*}
+    \nu &= \frac 1T = \frac 1{\lambda/c} = \frac c\lambda = \frac{3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}}{400\,\text{нм}} \approx 750 \cdot 10^{12}\,\text{Гц}, \\
+    \nu' &= \nu &\cbr{\text{или } T' = T} \implies \lambda' = v'T' = \frac vn T = \frac{ vt }n = \frac \lambda n = \frac{400\,\text{нм}}{1{,}6} \approx 0{,}25 \cdot 10^{-6}\,\text{м}.
+    \\
+    &\text{380 нм---фиол---440---син---485---гол---500---зел---565---жёл---590---оранж---625---крас---780 нм}, \\
+    &\text{увидит}
+    \end{align*}
+}
+\solutionspace{60pt}
 
 \tasknumber{2}%
 \task{%
-    Колебательный контур настроен на частоту $1{,}8 \cdot 10^{7}\,\text{Гц}$.
-    Во сколько раз и как надо изменить емкость конденсатора для перестройки контура на длину волны $30\,\text{м}$?
+    Укажите букву, соответствующую физическую величину (из текущего раздела), её единицы измерения в СИ и выразите её из какого-либо физического закона:
+    \begin{enumerate}
+        \item «эл'»,
+        \item «цэ»,
+        \item «бал'шайа цэ»,
+        \item «тэ».
+    \end{enumerate}
 }
-\solutionspace{100pt}
 
 \tasknumber{3}%
+\task{%
+    На какую длину волны настроен радиоприемник, если его колебательный контур
+    обладает индуктивностью $600\,\text{мкГн}$ и ёмкостью $600\,\text{пФ}$?
+}
+\answer{%
+    \begin{align*}
+    T = 2\pi\sqrt{LC} \implies \nu &= \frac 1T = \frac 1{ 2\pi\sqrt{LC} } = \frac 1{ 2\pi\sqrt{600\,\text{мкГн} \cdot 600\,\text{пФ}}} \approx 0{,}265\,\text{МГц}, \\
+    \lambda &= cT = c \cdot 2\pi\sqrt{LC} = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} \cdot 2\pi\sqrt{600\,\text{мкГн} \cdot 600\,\text{пФ}} \approx 1131\,\text{м}.
+    \end{align*}
+}
+\solutionspace{80pt}
+
+\tasknumber{4}%
+\task{%
+    Колебательный контур настроен на частоту $2{,}5 \cdot 10^{7}\,\text{Гц}$.
+    Во сколько раз и как надо изменить индуктивность катушки для перенастройки контура на длину волны $20\,\text{м}$?
+}
+\answer{%
+    \begin{align*}
+    T_1 &= 2\pi\sqrt{L_1C_1} \implies \nu_1 = \frac 1{T_1} = \frac 1{ 2\pi\sqrt{L_1C_1} } \implies L_1C_1 = \frac 1{\sqr{2\pi \nu_1}}, \\
+    L_2C_2 &= \frac 1{\sqr{2\pi \nu_2}} = \frac 1{\sqr{2\pi \frac 1{T_2}}} = \frac 1{\sqr{2\pi \frac c{\lambda_2}}}, \\
+    \frac{L_2C_2}{L_1C_1} &= \frac {\sqr{2\pi \nu}}{\sqr{2\pi \frac c{\lambda_2}}} =  \sqr{ \frac {\nu}{\frac c{\lambda_2}} } = \sqr{ \frac {\nu\lambda_2}{c} } = \sqr{ \frac { 2{,}5 \cdot 10^{7}\,\text{Гц} \cdot 20\,\text{м} }{3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}} } \approx 2{,}78.
+    \end{align*}
+}
+\solutionspace{80pt}
+
+\tasknumber{5}%
 \task{%
     Колебательный контур, состоящий из катушки индуктивности
     и воздушного конденсатора, настроен на длину волны $120\,\text{м}$.
     При этом расстояние между пластинами конденсатора $4{,}5\,\text{мм}$.
     Каким должно быть это расстояние, чтобы контур был настроен на длину волны $150\,\text{м}$?
+}
+\answer{%
+    \begin{align*}
+    \lambda &= cT = c \cdot 2\pi\sqrt{LC}, \quad C = \frac{\eps\eps_0 S}d \implies \lambda^2 = 4 \pi^2 c^2 L \frac{\eps\eps_0 S}d, \\
+    \frac{\lambda_2^2}{\lambda_1^2} &= \frac{d_1}{d_2} \implies d_2 =  d_1 \cdot \sqr{\frac{\lambda_1}{\lambda_2}} =  4{,}5\,\text{мм} \cdot \sqr{\frac{120\,\text{м}}{150\,\text{м}}} \approx 2{,}88\,\text{мм}
+    \end{align*}
+}
+\solutionspace{80pt}
+
+\tasknumber{6}%
+\task{%
+    Сила тока в первичной обмотке трансформатора $2\,\text{А}$, напряжение на её концах $120\,\text{В}$.
+    Напряжение на концах вторичной обмотки $80\,\text{В}$.
+    Определите силу тока во вторичной обмотке.
+    Потерями в трансформаторе пренебречь.
+}
+\answer{%
+    $U_1\eli_1 = U_2\eli_2 \implies \eli_2 = \eli_1 \cdot \frac{U_1}{U_2} = 2\,\text{А} \cdot \frac{120\,\text{В}}{80\,\text{В}} \approx 3\,\text{А}$
+}
+\solutionspace{60pt}
+
+\tasknumber{7}%
+\task{%
+    Под каким напряжением находится первичная обмотка трансформатора, имеющая $1500$ витков,
+    если во вторичной обмотке $200$ витков и напряжение на ней $50\,\text{В}$?
+}
+\answer{%
+    $\frac{U_2}{U_1}  = \frac{N_2}{N_1} \implies U_1 = U_2 \cdot \frac{N_1}{N_2} = 50\,\text{В} \cdot \frac{1500}{200} \approx 375\,\text{В}$
+}
+\solutionspace{40pt}
+
+\tasknumber{8}%
+\task{%
+    Сила тока в первичной обмотке трансформатора $542\,\text{мА}$, напряжение на её концах $200\,\text{В}$.
+    Сила тока во вторичной обмотке $2{,}4\,\text{А}$, напряжение на её концах $44\,\text{В}$.
+    Определите КПД трансформатора.
+}
+\answer{%
+    $\eta = \frac{ U_2\eli_2 }{ U_1\eli_1 } = \frac{ 44\,\text{В} \cdot 2{,}4\,\text{А} }{ 200\,\text{В} \cdot 542\,\text{мА} } \approx 0{,}970, \quad 1-\eta \approx 0{,}030$
 }
 
 \variantsplitter
@@ -863,24 +3536,105 @@
 
 \tasknumber{1}%
 \task{%
-    На какую длину волны настроен радиоприемник, если его колебательный контур
-    обладает индуктивностью $300\,\text{мкГн}$ и емкостью $700\,\text{пФ}$?
+    Длина волны света в~вакууме $\lambda = 500\,\text{нм}$.
+    Какова частота этой световой волны?
+    Какова длина этой волны в среде с показателем преломления $n = 1{,}5$?
+    Может ли человек увидеть такую волну света, и если да, то какой именно цвет соответствует этим волнам в вакууме и в этой среде?
 }
-\solutionspace{100pt}
+\answer{%
+    \begin{align*}
+    \nu &= \frac 1T = \frac 1{\lambda/c} = \frac c\lambda = \frac{3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}}{500\,\text{нм}} \approx 600 \cdot 10^{12}\,\text{Гц}, \\
+    \nu' &= \nu &\cbr{\text{или } T' = T} \implies \lambda' = v'T' = \frac vn T = \frac{ vt }n = \frac \lambda n = \frac{500\,\text{нм}}{1{,}5} \approx 0{,}33 \cdot 10^{-6}\,\text{м}.
+    \\
+    &\text{380 нм---фиол---440---син---485---гол---500---зел---565---жёл---590---оранж---625---крас---780 нм}, \\
+    &\text{увидит}
+    \end{align*}
+}
+\solutionspace{60pt}
 
 \tasknumber{2}%
 \task{%
-    Колебательный контур настроен на частоту $0{,}8 \cdot 10^{7}\,\text{Гц}$.
-    Во сколько раз и как надо изменить емкость конденсатора для перестройки контура на длину волны $20\,\text{м}$?
+    Укажите букву, соответствующую физическую величину (из текущего раздела), её единицы измерения в СИ и выразите её из какого-либо физического закона:
+    \begin{enumerate}
+        \item «л'амбда»,
+        \item «цэ»,
+        \item «бал'шайа цэ»,
+        \item «тэ».
+    \end{enumerate}
 }
-\solutionspace{100pt}
 
 \tasknumber{3}%
+\task{%
+    На какую длину волны настроен радиоприемник, если его колебательный контур
+    обладает индуктивностью $300\,\text{мкГн}$ и ёмкостью $700\,\text{пФ}$?
+}
+\answer{%
+    \begin{align*}
+    T = 2\pi\sqrt{LC} \implies \nu &= \frac 1T = \frac 1{ 2\pi\sqrt{LC} } = \frac 1{ 2\pi\sqrt{300\,\text{мкГн} \cdot 700\,\text{пФ}}} \approx 0{,}347\,\text{МГц}, \\
+    \lambda &= cT = c \cdot 2\pi\sqrt{LC} = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} \cdot 2\pi\sqrt{300\,\text{мкГн} \cdot 700\,\text{пФ}} \approx 864\,\text{м}.
+    \end{align*}
+}
+\solutionspace{80pt}
+
+\tasknumber{4}%
+\task{%
+    Колебательный контур настроен на частоту $0{,}5 \cdot 10^{7}\,\text{Гц}$.
+    Во сколько раз и как надо изменить индуктивность катушки для перенастройки контура на длину волны $25\,\text{м}$?
+}
+\answer{%
+    \begin{align*}
+    T_1 &= 2\pi\sqrt{L_1C_1} \implies \nu_1 = \frac 1{T_1} = \frac 1{ 2\pi\sqrt{L_1C_1} } \implies L_1C_1 = \frac 1{\sqr{2\pi \nu_1}}, \\
+    L_2C_2 &= \frac 1{\sqr{2\pi \nu_2}} = \frac 1{\sqr{2\pi \frac 1{T_2}}} = \frac 1{\sqr{2\pi \frac c{\lambda_2}}}, \\
+    \frac{L_2C_2}{L_1C_1} &= \frac {\sqr{2\pi \nu}}{\sqr{2\pi \frac c{\lambda_2}}} =  \sqr{ \frac {\nu}{\frac c{\lambda_2}} } = \sqr{ \frac {\nu\lambda_2}{c} } = \sqr{ \frac { 0{,}5 \cdot 10^{7}\,\text{Гц} \cdot 25\,\text{м} }{3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}} } \approx 0{,}174.
+    \end{align*}
+}
+\solutionspace{80pt}
+
+\tasknumber{5}%
 \task{%
     Колебательный контур, состоящий из катушки индуктивности
     и воздушного конденсатора, настроен на длину волны $120\,\text{м}$.
     При этом расстояние между пластинами конденсатора $3\,\text{мм}$.
     Каким должно быть это расстояние, чтобы контур был настроен на длину волны $100\,\text{м}$?
+}
+\answer{%
+    \begin{align*}
+    \lambda &= cT = c \cdot 2\pi\sqrt{LC}, \quad C = \frac{\eps\eps_0 S}d \implies \lambda^2 = 4 \pi^2 c^2 L \frac{\eps\eps_0 S}d, \\
+    \frac{\lambda_2^2}{\lambda_1^2} &= \frac{d_1}{d_2} \implies d_2 =  d_1 \cdot \sqr{\frac{\lambda_1}{\lambda_2}} =  3\,\text{мм} \cdot \sqr{\frac{120\,\text{м}}{100\,\text{м}}} \approx 4{,}32\,\text{мм}
+    \end{align*}
+}
+\solutionspace{80pt}
+
+\tasknumber{6}%
+\task{%
+    Сила тока в первичной обмотке трансформатора $4\,\text{А}$, напряжение на её концах $120\,\text{В}$.
+    Напряжение на концах вторичной обмотки $60\,\text{В}$.
+    Определите силу тока во вторичной обмотке.
+    Потерями в трансформаторе пренебречь.
+}
+\answer{%
+    $U_1\eli_1 = U_2\eli_2 \implies \eli_2 = \eli_1 \cdot \frac{U_1}{U_2} = 4\,\text{А} \cdot \frac{120\,\text{В}}{60\,\text{В}} \approx 8\,\text{А}$
+}
+\solutionspace{60pt}
+
+\tasknumber{7}%
+\task{%
+    Под каким напряжением находится первичная обмотка трансформатора, имеющая $1200$ витков,
+    если во вторичной обмотке $200$ витков и напряжение на ней $110\,\text{В}$?
+}
+\answer{%
+    $\frac{U_2}{U_1}  = \frac{N_2}{N_1} \implies U_1 = U_2 \cdot \frac{N_1}{N_2} = 110\,\text{В} \cdot \frac{1200}{200} \approx 660\,\text{В}$
+}
+\solutionspace{40pt}
+
+\tasknumber{8}%
+\task{%
+    Сила тока в первичной обмотке трансформатора $784\,\text{мА}$, напряжение на её концах $200\,\text{В}$.
+    Сила тока во вторичной обмотке $5{,}1\,\text{А}$, напряжение на её концах $30\,\text{В}$.
+    Определите КПД трансформатора.
+}
+\answer{%
+    $\eta = \frac{ U_2\eli_2 }{ U_1\eli_1 } = \frac{ 30\,\text{В} \cdot 5{,}1\,\text{А} }{ 200\,\text{В} \cdot 784\,\text{мА} } \approx 0{,}960, \quad 1-\eta \approx 0{,}040$
 }
 
 \variantsplitter
@@ -889,24 +3643,105 @@
 
 \tasknumber{1}%
 \task{%
-    На какую частоту волны настроен радиоприемник, если его колебательный контур
-    обладает индуктивностью $200\,\text{мкГн}$ и емкостью $750\,\text{пФ}$?
+    Длина волны света в~вакууме $\lambda = 600\,\text{нм}$.
+    Какова частота этой световой волны?
+    Какова длина этой волны в среде с показателем преломления $n = 1{,}4$?
+    Может ли человек увидеть такую волну света, и если да, то какой именно цвет соответствует этим волнам в вакууме и в этой среде?
 }
-\solutionspace{100pt}
+\answer{%
+    \begin{align*}
+    \nu &= \frac 1T = \frac 1{\lambda/c} = \frac c\lambda = \frac{3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}}{600\,\text{нм}} \approx 500 \cdot 10^{12}\,\text{Гц}, \\
+    \nu' &= \nu &\cbr{\text{или } T' = T} \implies \lambda' = v'T' = \frac vn T = \frac{ vt }n = \frac \lambda n = \frac{600\,\text{нм}}{1{,}4} \approx 0{,}43 \cdot 10^{-6}\,\text{м}.
+    \\
+    &\text{380 нм---фиол---440---син---485---гол---500---зел---565---жёл---590---оранж---625---крас---780 нм}, \\
+    &\text{увидит}
+    \end{align*}
+}
+\solutionspace{60pt}
 
 \tasknumber{2}%
 \task{%
-    Колебательный контур настроен на частоту $0{,}8 \cdot 10^{7}\,\text{Гц}$.
-    Во сколько раз и как надо изменить емкость конденсатора для перестройки контура на длину волны $20\,\text{м}$?
+    Укажите букву, соответствующую физическую величину (из текущего раздела), её единицы измерения в СИ и выразите её из какого-либо физического закона:
+    \begin{enumerate}
+        \item «л'амбда»,
+        \item «вэ»,
+        \item «бал'шайа цэ»,
+        \item «эн».
+    \end{enumerate}
 }
-\solutionspace{100pt}
 
 \tasknumber{3}%
+\task{%
+    На какую частоту волны настроен радиоприемник, если его колебательный контур
+    обладает индуктивностью $200\,\text{мкГн}$ и ёмкостью $750\,\text{пФ}$?
+}
+\answer{%
+    \begin{align*}
+    T = 2\pi\sqrt{LC} \implies \nu &= \frac 1T = \frac 1{ 2\pi\sqrt{LC} } = \frac 1{ 2\pi\sqrt{200\,\text{мкГн} \cdot 750\,\text{пФ}}} \approx 0{,}411\,\text{МГц}, \\
+    \lambda &= cT = c \cdot 2\pi\sqrt{LC} = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} \cdot 2\pi\sqrt{200\,\text{мкГн} \cdot 750\,\text{пФ}} \approx 730\,\text{м}.
+    \end{align*}
+}
+\solutionspace{80pt}
+
+\tasknumber{4}%
+\task{%
+    Колебательный контур настроен на частоту $4{,}5 \cdot 10^{7}\,\text{Гц}$.
+    Во сколько раз и как надо изменить индуктивность катушки для перенастройки контура на длину волны $30\,\text{м}$?
+}
+\answer{%
+    \begin{align*}
+    T_1 &= 2\pi\sqrt{L_1C_1} \implies \nu_1 = \frac 1{T_1} = \frac 1{ 2\pi\sqrt{L_1C_1} } \implies L_1C_1 = \frac 1{\sqr{2\pi \nu_1}}, \\
+    L_2C_2 &= \frac 1{\sqr{2\pi \nu_2}} = \frac 1{\sqr{2\pi \frac 1{T_2}}} = \frac 1{\sqr{2\pi \frac c{\lambda_2}}}, \\
+    \frac{L_2C_2}{L_1C_1} &= \frac {\sqr{2\pi \nu}}{\sqr{2\pi \frac c{\lambda_2}}} =  \sqr{ \frac {\nu}{\frac c{\lambda_2}} } = \sqr{ \frac {\nu\lambda_2}{c} } = \sqr{ \frac { 4{,}5 \cdot 10^{7}\,\text{Гц} \cdot 30\,\text{м} }{3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}} } \approx 20{,}3.
+    \end{align*}
+}
+\solutionspace{80pt}
+
+\tasknumber{5}%
 \task{%
     Колебательный контур, состоящий из катушки индуктивности
     и воздушного конденсатора, настроен на длину волны $180\,\text{м}$.
     При этом расстояние между пластинами конденсатора $3\,\text{мм}$.
     Каким должно быть это расстояние, чтобы контур был настроен на длину волны $80\,\text{м}$?
+}
+\answer{%
+    \begin{align*}
+    \lambda &= cT = c \cdot 2\pi\sqrt{LC}, \quad C = \frac{\eps\eps_0 S}d \implies \lambda^2 = 4 \pi^2 c^2 L \frac{\eps\eps_0 S}d, \\
+    \frac{\lambda_2^2}{\lambda_1^2} &= \frac{d_1}{d_2} \implies d_2 =  d_1 \cdot \sqr{\frac{\lambda_1}{\lambda_2}} =  3\,\text{мм} \cdot \sqr{\frac{180\,\text{м}}{80\,\text{м}}} \approx 15{,}19\,\text{мм}
+    \end{align*}
+}
+\solutionspace{80pt}
+
+\tasknumber{6}%
+\task{%
+    Сила тока в первичной обмотке трансформатора $2\,\text{А}$, напряжение на её концах $220\,\text{В}$.
+    Напряжение на концах вторичной обмотки $20\,\text{В}$.
+    Определите силу тока во вторичной обмотке.
+    Потерями в трансформаторе пренебречь.
+}
+\answer{%
+    $U_1\eli_1 = U_2\eli_2 \implies \eli_2 = \eli_1 \cdot \frac{U_1}{U_2} = 2\,\text{А} \cdot \frac{220\,\text{В}}{20\,\text{В}} \approx 22\,\text{А}$
+}
+\solutionspace{60pt}
+
+\tasknumber{7}%
+\task{%
+    Под каким напряжением находится первичная обмотка трансформатора, имеющая $1200$ витков,
+    если во вторичной обмотке $200$ витков и напряжение на ней $50\,\text{В}$?
+}
+\answer{%
+    $\frac{U_2}{U_1}  = \frac{N_2}{N_1} \implies U_1 = U_2 \cdot \frac{N_1}{N_2} = 50\,\text{В} \cdot \frac{1200}{200} \approx 300\,\text{В}$
+}
+\solutionspace{40pt}
+
+\tasknumber{8}%
+\task{%
+    Сила тока в первичной обмотке трансформатора $923\,\text{мА}$, напряжение на её концах $300\,\text{В}$.
+    Сила тока во вторичной обмотке $4{,}3\,\text{А}$, напряжение на её концах $62\,\text{В}$.
+    Определите КПД трансформатора.
+}
+\answer{%
+    $\eta = \frac{ U_2\eli_2 }{ U_1\eli_1 } = \frac{ 62\,\text{В} \cdot 4{,}3\,\text{А} }{ 300\,\text{В} \cdot 923\,\text{мА} } \approx 0{,}970, \quad 1-\eta \approx 0{,}030$
 }
 
 \variantsplitter
@@ -915,23 +3750,104 @@
 
 \tasknumber{1}%
 \task{%
-    На какую частоту волны настроен радиоприемник, если его колебательный контур
-    обладает индуктивностью $300\,\text{мкГн}$ и емкостью $600\,\text{пФ}$?
+    Длина волны света в~вакууме $\lambda = 700\,\text{нм}$.
+    Какова частота этой световой волны?
+    Какова длина этой волны в среде с показателем преломления $n = 1{,}7$?
+    Может ли человек увидеть такую волну света, и если да, то какой именно цвет соответствует этим волнам в вакууме и в этой среде?
 }
-\solutionspace{100pt}
+\answer{%
+    \begin{align*}
+    \nu &= \frac 1T = \frac 1{\lambda/c} = \frac c\lambda = \frac{3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}}{700\,\text{нм}} \approx 429 \cdot 10^{12}\,\text{Гц}, \\
+    \nu' &= \nu &\cbr{\text{или } T' = T} \implies \lambda' = v'T' = \frac vn T = \frac{ vt }n = \frac \lambda n = \frac{700\,\text{нм}}{1{,}7} \approx 0{,}41 \cdot 10^{-6}\,\text{м}.
+    \\
+    &\text{380 нм---фиол---440---син---485---гол---500---зел---565---жёл---590---оранж---625---крас---780 нм}, \\
+    &\text{увидит}
+    \end{align*}
+}
+\solutionspace{60pt}
 
 \tasknumber{2}%
 \task{%
-    Колебательный контур настроен на частоту $4{,}5 \cdot 10^{7}\,\text{Гц}$.
-    Во сколько раз и как надо изменить емкость конденсатора для перестройки контура на длину волны $25\,\text{м}$?
+    Укажите букву, соответствующую физическую величину (из текущего раздела), её единицы измерения в СИ и выразите её из какого-либо физического закона:
+    \begin{enumerate}
+        \item «л'амбда»,
+        \item «цэ»,
+        \item «н'у»,
+        \item «эн».
+    \end{enumerate}
 }
-\solutionspace{100pt}
 
 \tasknumber{3}%
+\task{%
+    На какую частоту волны настроен радиоприемник, если его колебательный контур
+    обладает индуктивностью $300\,\text{мкГн}$ и ёмкостью $600\,\text{пФ}$?
+}
+\answer{%
+    \begin{align*}
+    T = 2\pi\sqrt{LC} \implies \nu &= \frac 1T = \frac 1{ 2\pi\sqrt{LC} } = \frac 1{ 2\pi\sqrt{300\,\text{мкГн} \cdot 600\,\text{пФ}}} \approx 0{,}375\,\text{МГц}, \\
+    \lambda &= cT = c \cdot 2\pi\sqrt{LC} = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} \cdot 2\pi\sqrt{300\,\text{мкГн} \cdot 600\,\text{пФ}} \approx 800\,\text{м}.
+    \end{align*}
+}
+\solutionspace{80pt}
+
+\tasknumber{4}%
+\task{%
+    Колебательный контур настроен на частоту $0{,}8 \cdot 10^{7}\,\text{Гц}$.
+    Во сколько раз и как надо изменить индуктивность катушки для перенастройки контура на длину волны $30\,\text{м}$?
+}
+\answer{%
+    \begin{align*}
+    T_1 &= 2\pi\sqrt{L_1C_1} \implies \nu_1 = \frac 1{T_1} = \frac 1{ 2\pi\sqrt{L_1C_1} } \implies L_1C_1 = \frac 1{\sqr{2\pi \nu_1}}, \\
+    L_2C_2 &= \frac 1{\sqr{2\pi \nu_2}} = \frac 1{\sqr{2\pi \frac 1{T_2}}} = \frac 1{\sqr{2\pi \frac c{\lambda_2}}}, \\
+    \frac{L_2C_2}{L_1C_1} &= \frac {\sqr{2\pi \nu}}{\sqr{2\pi \frac c{\lambda_2}}} =  \sqr{ \frac {\nu}{\frac c{\lambda_2}} } = \sqr{ \frac {\nu\lambda_2}{c} } = \sqr{ \frac { 0{,}8 \cdot 10^{7}\,\text{Гц} \cdot 30\,\text{м} }{3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}} } \approx 0{,}64.
+    \end{align*}
+}
+\solutionspace{80pt}
+
+\tasknumber{5}%
 \task{%
     Колебательный контур, состоящий из катушки индуктивности
     и воздушного конденсатора, настроен на длину волны $180\,\text{м}$.
     При этом расстояние между пластинами конденсатора $4\,\text{мм}$.
     Каким должно быть это расстояние, чтобы контур был настроен на длину волны $45\,\text{м}$?
+}
+\answer{%
+    \begin{align*}
+    \lambda &= cT = c \cdot 2\pi\sqrt{LC}, \quad C = \frac{\eps\eps_0 S}d \implies \lambda^2 = 4 \pi^2 c^2 L \frac{\eps\eps_0 S}d, \\
+    \frac{\lambda_2^2}{\lambda_1^2} &= \frac{d_1}{d_2} \implies d_2 =  d_1 \cdot \sqr{\frac{\lambda_1}{\lambda_2}} =  4\,\text{мм} \cdot \sqr{\frac{180\,\text{м}}{45\,\text{м}}} \approx 64\,\text{мм}
+    \end{align*}
+}
+\solutionspace{80pt}
+
+\tasknumber{6}%
+\task{%
+    Сила тока в первичной обмотке трансформатора $2\,\text{А}$, напряжение на её концах $220\,\text{В}$.
+    Напряжение на концах вторичной обмотки $20\,\text{В}$.
+    Определите силу тока во вторичной обмотке.
+    Потерями в трансформаторе пренебречь.
+}
+\answer{%
+    $U_1\eli_1 = U_2\eli_2 \implies \eli_2 = \eli_1 \cdot \frac{U_1}{U_2} = 2\,\text{А} \cdot \frac{220\,\text{В}}{20\,\text{В}} \approx 22\,\text{А}$
+}
+\solutionspace{60pt}
+
+\tasknumber{7}%
+\task{%
+    Под каким напряжением находится первичная обмотка трансформатора, имеющая $500$ витков,
+    если во вторичной обмотке $200$ витков и напряжение на ней $70\,\text{В}$?
+}
+\answer{%
+    $\frac{U_2}{U_1}  = \frac{N_2}{N_1} \implies U_1 = U_2 \cdot \frac{N_1}{N_2} = 70\,\text{В} \cdot \frac{500}{200} \approx 175\,\text{В}$
+}
+\solutionspace{40pt}
+
+\tasknumber{8}%
+\task{%
+    Сила тока в первичной обмотке трансформатора $412\,\text{мА}$, напряжение на её концах $300\,\text{В}$.
+    Сила тока во вторичной обмотке $2{,}4\,\text{А}$, напряжение на её концах $49\,\text{В}$.
+    Определите КПД трансформатора.
+}
+\answer{%
+    $\eta = \frac{ U_2\eli_2 }{ U_1\eli_1 } = \frac{ 49\,\text{В} \cdot 2{,}4\,\text{А} }{ 300\,\text{В} \cdot 412\,\text{мА} } \approx 0{,}950, \quad 1-\eta \approx 0{,}050$
 }
 % autogenerated
