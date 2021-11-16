@@ -13,9 +13,8 @@ import math
 @variant.arg(lmbd=['\\lambda = %d нм' % lmbd for lmbd in [400, 500, 600, 700]])
 @variant.answer_align([
     '''\\nu &= \\frac 1T = \\frac 1{\\lambda/c} = \\frac c\\lambda = \\frac{Consts.c:Value|s}{lmbd:Value|s} \\approx {nu:Value},''',
-    '''\\nu' &= \\nu &\\cbr{\\text{или } T' = T} \\implies \\lambda' = v'T' = \\frac vn T = \\frac{ vt }n = \\frac \\lambda n = \\frac{lmbd:Value|s}{n:Value|s} \\approx {lmbd_1:Value}.''',
-    '&\\text{380 нм---фиол---440---син---485---гол---500---зел---565---жёл---590---оранж---625---крас---780 нм},',
-    '&\\text{{see}}'
+    '''\\nu' &= \\nu \\cbr{\\text{или } T' = T} \\implies \\lambda' = v'T' = \\frac vn T = \\frac{ vt }n = \\frac \\lambda n = \\frac{lmbd:Value|s}{n:Value|s} \\approx {lmbd_1:Value}.''',
+    '&\\text{380 нм---фиол---440---син---485---гол---500---зел---565---жёл---590---оранж---625---крас---780 нм}, \\text{{see}}',
 ])
 @variant.solution_space(60)
 class Gendenshteyn_11_11_18(variant.VariantTask):
