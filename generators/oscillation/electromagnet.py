@@ -48,7 +48,7 @@ class Task02(variant.VariantTask):
 
 
 @variant.text('''
-    В колебательном контура сила тока изменяется
+    В колебательном контуре сила тока изменяется
     по закону $\\eli={I.SI_Value:.2f}\\{func}({omega}t)$ (в СИ).
     Индуктивность катушки при этом равна {L:V:e}. Определите:
     \\begin{itemize}
@@ -350,7 +350,7 @@ class Task08(variant.VariantTask):
 @variant.solution_space(100)
 @variant.arg(C=('C = {} мкФ', [10]))
 @variant.arg(U0=('U_0 = {} В', [10]))
-@variant.arg(L=('L = {} В', [0.1]))
+@variant.arg(L=('L = {} Гн', [0.1]))
 @variant.arg(E=('\\ele = {} В', [15]))
 class Task09(variant.VariantTask):  # 3.120 Чешев
     pass
