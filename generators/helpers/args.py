@@ -73,15 +73,18 @@ def test_generate_letter_variants():
         ([('трижды три', 1),], ['шесть', 'девять']),
     ]
     assert res == canonic, f'Error:\n  expected:\t{canonic}\n  got:\t\t{res}'
-    assert list(generate_letter_variants(
+
+    res = list(generate_letter_variants(
         {'дважды два': 'четыре', 'трижды три': 'девять'},
         ['пять', 'шесть'],
         answers_count=1,
         mocks_count=0,
-    )) == [
+    ))
+    canonic = [
         ([('дважды два', 0),], ['четыре',]),
         ([('трижды три', 0),], ['девять',]),
     ]
+    assert res == canonic, f'Error:\n  expected:\t{canonic}\n  got:\t\t{res}'
 
 
 def test_letter_variant():
