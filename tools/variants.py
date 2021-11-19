@@ -648,5 +648,11 @@ def get_all_variants():
                 {'oscillation.dc_transform': ['Chernoutsan_12_55', 'Chernoutsan_12_56', 'Chernoutsan_12_57']},
             ],
         ),
+        Work(
+            task_id='2021-11-18 11БА - ВО - 1',
+            classes=[
+                {'optics.wave': ['Vishnyakova_3_6_12', 'Vishnyakova_3_6_14', 'Vishnyakova_3_6_15', 'Vishnyakova_3_6_16', 'Vishnyakova_3_6_17', 'Vishnyakova_3_6_18', ]},
+            ],
+        ),
     ]
     return works
