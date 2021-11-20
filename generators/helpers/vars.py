@@ -45,15 +45,18 @@ class Vars:
             assert '{}' in values[0], f'No {{}} in {values}'
             values = [values[0].format(option) for option in values[1]]
         elif isinstance(values, str):
-            parts = values.split()
-            for index, part in enumerate(parts):
-                if '/' in part and str_re.match(part):
-                    split_values = part.split('/')
-                    assert all(float(i) for i in split_values), f'part: '
-                    prefix = ' '.join(parts[:index])
-                    suffix = ' '.join(parts[index + 1:])
-                    values = [f'{prefix} {v} {suffix}' for v in split_values]
-                    break
+            if any(s.isdigit() for s in values):
+                parts = values.split()
+                for index, part in enumerate(parts):
+                    if '/' in part and str_re.match(part):
+                        split_values = part.split('/')
+                        assert all(float(i) for i in split_values), f'part: '
+                        prefix = ' '.join(parts[:index])
+                        suffix = ' '.join(parts[index + 1:])
+                        values = [f'{prefix} {v} {suffix}' for v in split_values]
+                        break
+            else:
+                values = values.split('/')
 
         try:
             assert not self._fixed
@@ -168,5 +171,13 @@ def test_vars():
     ]
     assert vars.form_one(0) == {'a': 'a_{ыфвфыв} = 4 Дж / с'}
 
+    vars = Vars()
+    vars.add('a', 'й/ц/у')
+    assert list(vars.form_all()) == [
+        {'a': 'й'},
+        {'a': 'ц'},
+        {'a': 'у'},
+    ]
+    assert vars.form_one(0) == {'a': 'й'}
 
 test_vars()

@@ -64,6 +64,7 @@ class Chernoutsan_12_56(variant.VariantTask):
 @variant.answer_short('\\eta = \\frac{ {U_2:L}{I_2:L} }{ {U_1:L}{I_1:L} } = \\frac{ {U_2:V} * {I_2:V} }{ {U_1:V} * {I_1:V} } \\approx {eta:V}, \\quad 1-\\eta \\approx {eta_minus:.3f}')
 class Chernoutsan_12_57(variant.VariantTask):
     def GetUpdate(self, *, I_1=None, U_1=None, I_2=None, eta_base=None, what=None):
+        # TODO: IncPess
         U_2 = U_1 * I_1 / I_2 * eta_base
         eta = U_2 * I_2 / (U_1 * I_1)
         return dict(

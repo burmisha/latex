@@ -431,6 +431,7 @@ class UnitValue:
 
 
 def test_unit_value():
+    UV = UnitValue
     data = [
         ('{:Task}', UnitValue('c = 3 10^{8} м / с'), 'c = 3 \\cdot 10^{8}\\,\\frac{\\text{м}}{\\text{с}}'),
         ('{:Task}', UnitValue('t = 8 суток'), 't = 8\\,\\text{суток}'),
@@ -460,6 +461,8 @@ def test_unit_value():
         ('{:V}', UnitValue('10 мин') * UnitValue('5 Гц'), '3000'),
         ('{:Task}', (UnitValue('10 мин') * UnitValue('5 Гц')).SetLetter('l'), 'l = 3000'),
         ('{:Value}', UnitValue('2 10^4 км/c'), '2 \\cdot 10^{4}\\,\\frac{\\text{км}}{\\text{c}}'),
+        # ('{:Value}', UV('0.94') * UV('859 мА') * UV('200 В') / UV('4.3 А'), '0{,}95'),
+        # ('{:Value}', UV('38 В') * UV('4.3 А') / (UV('859 мА') * UV('200 В')), '0{,}95'),
         # ('{:V}'.format(UnitValue('600000000000000000 Гц', precision=3)), '6 \\cdot 10^{14}\\,\\text{Гц}'),  # TODO
     ]
     for fmt, unit_value, canonic in data:

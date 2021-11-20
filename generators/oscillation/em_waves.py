@@ -9,8 +9,8 @@ import math
     Какова длина этой волны в среде с показателем преломления {n:Task:e}?
     Может ли человек увидеть такую волну света, и если да, то какой именно цвет соответствует этим волнам в вакууме и в этой среде?
 ''')
-@variant.arg(n=['n = 1.%d' % n for n in [3, 4, 5, 6, 7]])
-@variant.arg(lmbd=['\\lambda = %d нм' % lmbd for lmbd in [400, 500, 600, 700]])
+@variant.arg(n='n = 1.3/1.4/1.5/1.6/1.7')
+@variant.arg(lmbd='\\lambda = 400/500/600/700 нм')
 @variant.answer_align([
     '''\\nu &= \\frac 1T = \\frac 1{\\lambda/c} = \\frac c\\lambda = \\frac{Consts.c:Value|s}{lmbd:Value|s} \\approx {nu:Value},''',
     '''\\nu' &= \\nu \\cbr{\\text{или } T' = T} \\implies \\lambda' = v'T' = \\frac vn T = \\frac{ vt }n = \\frac \\lambda n = \\frac{lmbd:Value|s}{n:Value|s} \\approx {lmbd_1:Value}.''',
@@ -26,7 +26,7 @@ class Gendenshteyn_11_11_18(variant.VariantTask):
             see = 'не увидит'
         return dict(
             nu=Consts.c / lmbd,
-            lmbd_1=lmbd_1.IncPrecision(3),
+            lmbd_1=lmbd_1.IncPrecision(3).As('нм'),
             see=see,
         )
 
@@ -41,16 +41,13 @@ class Gendenshteyn_11_11_18(variant.VariantTask):
         \\item {v_4}.
     \\end{enumerate}
 ''')
-@variant.arg(v_1=['скорость света в среде', 'скорость света в вакууме'])
-@variant.arg(v_2=['длина волны', 'частоты волны'])
+@variant.arg(v_1='скорость света в среде/скорость света в вакууме')
+@variant.arg(v_2='длина волны/частоты волны')
 @variant.arg(v_3=[
     'период колебаний напряжённости электрического поля в электромагнитной волне',
     'период колебаний индукции магнитного поля в электромагнитной волне',
 ])
-@variant.arg(v_4=[
-    'абсолютный показатель преломления среды',
-    'относительный показатель преломления среды',
-])
+@variant.arg(v_4='абсолютный показатель преломления среды/относительный показатель преломления среды')
 class Definitions01(variant.VariantTask):
     pass
 
@@ -142,7 +139,7 @@ class Prefix(variant.VariantTask):
     обладает индуктивностью {L:V:e} и ёмкостью {C:V:e}?
 ''')
 @variant.solution_space(80)
-@variant.arg(what=['длину', 'частоту'])
+@variant.arg(what='длину/частоту')
 @variant.arg(L='L = 200/300/600 мкГн')
 @variant.arg(C='C = 600/650/700/750/800 пФ')
 @variant.answer_align([
@@ -166,7 +163,7 @@ class Chernoutsan_12_50(variant.VariantTask):
     Во сколько раз и как надо изменить {what} для перенастройки контура на длину волны {lmbd_2:V:e}?
 ''')
 @variant.solution_space(80)
-@variant.arg(what=['ёмкость конденсатора', 'индуктивность катушки'])
+@variant.arg(what='ёмкость конденсатора/индуктивность катушки')
 @variant.arg(nu_1='\\nu = 0.5/0.8/1.5/1.8/2.5/3.2/4.5 10^7 Гц')
 @variant.arg(lmbd_2='\\lambda = 20/25/30/40/50 м')
 @variant.answer_align([
