@@ -109,6 +109,7 @@ def test_calculation():
         (Consts.m_n_aem, r'1{,}00867\,\text{а.е.м.}'),
         (Consts.m_p.As('а.е.м.'), r'1{,}00727\,\text{а.е.м.}'),  # TODO
         (Consts.m_n.As('а.е.м.'), r'1{,}00867\,\text{а.е.м.}'),
+        ((Consts.c / UnitValue('0.500 мкм')).As('ТГц'), r'600\,\text{ТГц}'),
     ]
     for unit_value, answer in data:
         result = '{:V}'.format(unit_value)

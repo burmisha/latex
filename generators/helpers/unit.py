@@ -7,6 +7,7 @@ SI_PREFIXES = [
     ('к', 3),
     ('М', 6),
     ('Г', 9),
+    ('Т', 12),
     ('м', -3),
     ('мк', -6),
     ('н', -9),
@@ -103,6 +104,7 @@ class SimpleUnits:
     becquerel = SimpleUnit('беккерель', 'Бк', 'Bq', {BaseUnits.s: -1})
     gray = SimpleUnit('грей', 'Гр', 'Gy', {BaseUnits.m: 2, BaseUnits.s: -2})
     sievert = SimpleUnit('зиверт', 'Зв', 'Sv', {BaseUnits.m: 2, BaseUnits.s: -2})
+    dioptre = SimpleUnit('диоптрия', 'дптр', 'dpt', {BaseUnits.m: -1})
 
 
 def get_simple_unit(base_units):
@@ -158,7 +160,7 @@ def get_known_units():
             prefixes.extend(SI_PREFIXES)
         elif unit == 'г':
             prefixes.extend([p for p in SI_PREFIXES if p[1] <= -3])
-        elif isinstance(row, SimpleUnit) and unit != 'кг':
+        elif isinstance(row, SimpleUnit) and unit not in ['кг', 'дптр']:
             prefixes.extend(SI_PREFIXES)
 
         for si_prefix, si_power in prefixes:
@@ -256,6 +258,7 @@ def test_one_unit():
         ('сут', 0, 'сут', 1, SimpleUnits.s),
         ('ц^2', 0, 'ц', 2, SimpleUnits.kg),
         ('Гр', 0, 'Гр', 1, SimpleUnits.gray),
+        ('дптр', 0, 'дптр', 1, SimpleUnits.dioptre),
     ]
     for unit_text, si_power, human_unit, human_power, simple_unit in data:
         unit = OneUnit(unit_text, True)
@@ -269,10 +272,16 @@ def test_one_unit():
     assert unit.get_tex(human=True) == '\\text{мин}^{2}', f'Got {unit.get_tex(human=True)}'
     assert unit.get_tex(human=False) == '\\cbr{60 \\cdot \\text{мин}}^{2}', f'Got {unit.get_tex(human=False)}'
 
-    assert 'ммг' not in KNOWN_UNITS
-    assert 'кмг' not in KNOWN_UNITS
-    assert 'мкг' in KNOWN_UNITS
-    assert 'кц' not in KNOWN_UNITS
+    data = [
+        ('ммг', False),
+        ('кмг', False),
+        ('мкг', True),
+        ('кц', False),
+        ('дптр', True),
+        ('кдптр', False),
+    ]
+    for name, canonic in data:
+        assert (name in KNOWN_UNITS) == canonic
 
 
 test_one_unit()
