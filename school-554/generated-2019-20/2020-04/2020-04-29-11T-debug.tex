@@ -10,10 +10,28 @@
 \tasknumber{1}%
 \task{%
     Для частицы, движущейся с релятивистской скоростью,
-    выразите $v$ и $E_0$ через $m$, $p$ и $E_\text{кин}$, где
-    $E_\text{кин}$~--- кинетическая энергия частицы,
-    $E_0$~--- её энергия покоя,
-    а $p, v, m$~--- её импульс, скорость и масса.
+    выразите $v$ и $p$ через $c$, $E_\text{кин}$ и $E_0$,
+    где $E_\text{кин}$~--- кинетическая энергия частицы,
+    а $E_0$, $p$ и $v$~--- её энергия покоя импульс и скорость.
+}
+\answer{%
+    \begin{align*}
+    E_\text{кин}, E_0:\quad&E = E_\text{кин} + E_0 = \frac{E_0}{\sqrt{1 - \frac{v^2}{c^2}}} \implies \sqrt{1 - \frac{v^2}{c^2}} = \frac{E_0}{{E_0} + {E_\text{кин}}} \implies v = c\sqrt{1 - \sqr{\frac{E_0}{{E_0} + {E_\text{кин}}}}} \\
+    &p = \frac{mv}{\sqrt{1 - \frac{v^2}{c^2}}} = \frac{E_0}{c^2} \cdot \sqrt{1 - \sqr{\frac{E_0}{{E_0} + {E_\text{кин}}}}} \cdot \frac{{E_\text{кин}} + {E_0}}{E_0} = \frac{E_0}{c^2} \cdot \sqrt{\sqr{\frac{{E_\text{кин}} + {E_0}}{E_0}} - 1}.
+    \\
+    E_\text{кин}, p:\quad&E_\text{кин} = E - E_0 = mc^2\cbr{\frac 1{\sqrt{1 - \frac{v^2}{c^2}}} - 1}, p = \frac{mv}{\sqrt{1 - \frac{v^2}{c^2}}} \implies \frac{E_\text{кин}}{p} = \frac{\frac 1{\sqrt{1 - \frac{v^2}{c^2}}} - 1}{\sqrt{1 - \frac{v^2}{c^2}}} \implies v = \ldots \\
+    &E_0 = E - E_\text{кин} = \frac{E_0}{\sqrt{1 - \frac{v^2}{c^2}}} - E_\text{кин} \implies E_0 = \frac{E_\text{кин}}{\frac 1{\sqrt{1 - \frac{v^2}{c^2}}} - 1} = \ldots \\
+    E_\text{кин}, v:\quad&E_\text{кин} = E - E_0 = mc^2\cbr{\frac 1{\sqrt{1 - \frac{v^2}{c^2}}} - 1} \implies m = \frac{E_\text{кин}}{c^2\cbr{\frac 1{\sqrt{1 - \frac{v^2}{c^2}}} - 1}} \\
+    &E_0 = mc^2 = \frac{E_\text{кин}}{\frac 1{\sqrt{1 - \frac{v^2}{c^2}}} - 1} \\
+    &p = \frac{mv}{\sqrt{1 - \frac{v^2}{c^2}}} = \frac{E_\text{кин}}{c^2\cbr{\frac 1{\sqrt{1 - \frac{v^2}{c^2}}} - 1}} \cdot \frac{v}{\sqrt{1 - \frac{v^2}{c^2}}} = \frac{{E_\text{кин}} v}{c^2\cbr{1 - {\sqrt{1 - \frac{v^2}{c^2}}}}} \\
+    E_0, p:\quad&E_0 = mc^2, \quad p = \frac{mv}{\sqrt{1 - \frac{v^2}{c^2}}} \implies \frac{E_0}{p} = \frac{c^2}v{\sqrt{1 - \frac{v^2}{c^2}}} = c\sqrt{\frac{c^2}{v^2} - 1} \\
+    &\sqr{\frac{E_0}{pc}} = \frac{c^2}{v^2} - 1 \implies \frac{v^2}{c^2} = \frac 1{1 + \frac{E_0^2}{p^2c^2}} \implies v = \frac c{\sqrt{1 + \frac{E_0^2}{p^2c^2}}} \\
+    &{E_\text{кин}} = E - E_0 = \sqrt{E_0^2 + p^2c^2} - E_0 \\
+    E_0, v:\quad&E_0 = mc^2 \implies m = \frac{E_0}{c^2} \qquad p = \frac{mv}{\sqrt{1 - \frac{v^2}{c^2}}} = \frac{E_0}{c^2} \cdot \frac{v}{\sqrt{1 - \frac{v^2}{c^2}}} \\
+    &E_\text{кин}= mc^2\cbr{\frac 1{\sqrt{1 - \frac{v^2}{c^2}}} - 1} = \frac{E_0}{c^2}\cbr{\frac 1{\sqrt{1 - \frac{v^2}{c^2}}} - 1} \\
+    p, v:\quad&p = \frac{mv}{\sqrt{1 - \frac{v^2}{c^2}}} \implies m = \frac p v {\sqrt{1 - \frac{v^2}{c^2}}} \implies E_0 = mc^2 =\frac {pc^2} v {\sqrt{1 - \frac{v^2}{c^2}}} \\
+    &E_\text{кин} = mc^2\cbr{\frac 1{\sqrt{1 - \frac{v^2}{c^2}}} - 1} = \frac p v {\sqrt{1 - \frac{v^2}{c^2}}}\cbr{\frac 1{\sqrt{1 - \frac{v^2}{c^2}}} - 1} = \frac p v \cbr{1 - {\sqrt{1 - \frac{v^2}{c^2}}}}
+    \end{align*}
 }
 \solutionspace{200pt}
 

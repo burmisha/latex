@@ -12,3 +12,4 @@ pytesseract==0.3.8
 python-Levenshtein
 pyyaml
 retry
+pystyle==0.6

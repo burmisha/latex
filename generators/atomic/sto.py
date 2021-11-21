@@ -5,10 +5,9 @@ from generators.helpers import Consts, Decimal
 
 @variant.text('''
     Для частицы, движущейся с релятивистской скоростью,
-    выразите ${x}$ и ${y}$ через $m$, ${a}$ и ${b}$, где
-    $E_\\text{кин}$~--- кинетическая энергия частицы,
-    $E_0$~--- её энергия покоя,
-    а $p, v, m$~--- её импульс, скорость и масса.
+    выразите ${x}$ и ${y}$ через $c$, ${a}$ и ${b}$,
+    где $E_\\text{кин}$~--- кинетическая энергия частицы,
+    а $E_0$, $p$ и $v$~--- её энергия покоя импульс и скорость.
 ''')
 @variant.arg(x__y__a__b=itertools.permutations([
     'E_\\text{кин}',
@@ -17,6 +16,37 @@ from generators.helpers import Consts, Decimal
     'v',
 ], 4))
 @variant.solution_space(200)
+@variant.arg(E_kin=['E_\\text{кин} = 1 Дж'])
+@variant.arg(E_0=['E_0 = 1 Дж'])
+@variant.arg(gamma_denom=['\\sqrt{1 - \\frac{v^2}{c^2}} = 1'])
+@variant.answer_align([
+    '{E_kin:L}, {E_0:L}:\\quad'
+        '&E = {E_kin:L} + {E_0:L} = \\frac{E_0:L:s}{gamma_denom:L:s} \\implies {gamma_denom:L} = \\frac{E_0:L:s}{{E_0:L:s} + {E_kin:L:s}} \\implies v = c\\sqrt{1 - \\sqr{\\frac{E_0:L:s}{{E_0:L:s} + {E_kin:L:s}}}}',
+        '&p = \\frac{mv}{gamma_denom:L:s} = \\frac{E_0:L:s}{c^2} * \\sqrt{1 - \\sqr{\\frac{E_0:L:s}{{E_0:L:s} + {E_kin:L:s}}}} * \\frac{{E_kin:L:s} + {E_0:L:s}}{E_0:L:s} = \\frac{E_0:L:s}{c^2} * \\sqrt{\\sqr{\\frac{{E_kin:L:s} + {E_0:L:s}}{E_0:L:s}} - 1}.',
+
+    '{E_kin:L}, p:\\quad'
+        '&{E_kin:L} = E - E_0 = mc^2\\cbr{\\frac 1{gamma_denom:L:s} - 1}, p = \\frac{mv}{gamma_denom:L:s} \\implies \\frac{E_kin:L:s}{p} = \\frac{\\frac 1{gamma_denom:L:s} - 1}{gamma_denom:L:s} \\implies v = \\ldots',
+        '&E_0 = E - {E_kin:L} = \\frac{E_0:L:s}{gamma_denom:L:s} - {E_kin:L} \\implies E_0 = \\frac{E_kin:L:s}{\\frac 1{gamma_denom:L:s} - 1} = \\ldots',
+
+    '{E_kin:L}, v:\\quad'
+        '&{E_kin:L} = E - E_0 = mc^2\\cbr{\\frac 1{gamma_denom:L:s} - 1} \\implies m = \\frac{E_kin:L:s}{c^2\\cbr{\\frac 1{gamma_denom:L:s} - 1}}',
+        '&E_0 = mc^2 = \\frac{E_kin:L:s}{\\frac 1{gamma_denom:L:s} - 1}',
+        # 'p^2 c^2 + m^2 c^4 &= \\sqr{E_0 + {E_kin:L}} \\implies p = \\frac 1c \\sqrt{\\sqr{E_0 + {E_kin:L}} - m^2 c^4} = \\ldots',
+        '&p = \\frac{mv}{gamma_denom:L:s} = \\frac{E_kin:L:s}{c^2\\cbr{\\frac 1{gamma_denom:L:s} - 1}} * \\frac{v}{gamma_denom:L:s} = \\frac{{E_kin:L:s} v}{c^2\\cbr{1 - {gamma_denom:L:s}}}',
+
+    'E_0, p:\\quad'
+        '&E_0 = mc^2, \\quad p = \\frac{mv}{gamma_denom:L:s} \\implies \\frac{E_0:L:s}{p} = \\frac{c^2}v{gamma_denom:L:s} = c\\sqrt{\\frac{c^2}{v^2} - 1}',
+        '&\\sqr{\\frac{E_0:L:s}{pc}} = \\frac{c^2}{v^2} - 1 \\implies \\frac{v^2}{c^2} = \\frac 1{1 + \\frac{E_0^2}{p^2c^2}} \\implies v = \\frac c{\\sqrt{1 + \\frac{E_0^2}{p^2c^2}}}',
+        '&{E_kin:L:s} = E - E_0 = \\sqrt{E_0^2 + p^2c^2} - E_0',
+
+    'E_0, v:\\quad'
+        '&E_0 = mc^2 \\implies m = \\frac{E_0:L:s}{c^2} \\qquad p = \\frac{mv}{gamma_denom:L:s} = \\frac{E_0:L:s}{c^2} * \\frac{v}{gamma_denom:L:s}',
+        '&{E_kin:L}= mc^2\\cbr{\\frac 1{gamma_denom:L:s} - 1} = \\frac{E_0:L:s}{c^2}\\cbr{\\frac 1{gamma_denom:L:s} - 1}',
+
+    'p, v:\\quad'
+        '&p = \\frac{mv}{gamma_denom:L:s} \\implies m = \\frac p v {gamma_denom:L:s} \\implies E_0 = mc^2 =\\frac {pc^2} v {gamma_denom:L:s}',
+        '&{E_kin:L} = mc^2\\cbr{\\frac 1{gamma_denom:L:s} - 1} = \\frac p v {gamma_denom:L:s}\\cbr{\\frac 1{gamma_denom:L:s} - 1} = \\frac p v \\cbr{1 - {gamma_denom:L:s}}',
+])
 class Equations(variant.VariantTask):
     pass
 
@@ -41,8 +71,8 @@ class Equations(variant.VariantTask):
             = \\frac 1{\\sqrt{1 - \\sqr{0.{percent}}}} - 1
             \\approx {E_kin:.3f}.''',
 ])
-@variant.arg(what=['Протон', 'Позитрон'])
-@variant.arg(energy=['полной энергии частицы $E$', 'кинетической энергии частицы $E_\\text{кин.}$'])
+@variant.arg(what='Протон/Позитрон')
+@variant.arg(energy='полной энергии частицы $E$/кинетической энергии частицы $E_\\text{кин.}$')
 @variant.arg(percent=['9', '8', '7', '6'])
 class E_ratio_from_v_ratio(variant.VariantTask):  # Вишнякова - Базовый курс 4 - задача 1
     def GetUpdate(self, what=None, energy=None, percent=None):
@@ -76,8 +106,8 @@ class E_ratio_from_v_ratio(variant.VariantTask):  # Вишнякова - Баз�
         \\approx \\frac{{m:Value} * 0.{percent} * {Consts.c:Value}}{\\sqrt{1 - 0.{percent}^2}}
         \\approx {p:Value}.'''
 ])
-@variant.arg(what=['Протон', 'Электрон'])
-@variant.arg(x=['полную энергию', 'кинетическую энергию', 'импульс'])
+@variant.arg(what='Протон/Электрон')
+@variant.arg(x='полную энергию/кинетическую энергию/импульс')
 @variant.arg(percent=['85', '75', '65'])
 class E_P_from_v_ratio(variant.VariantTask):  # Вишнякова - Базовый курс 4._ - задача 3
     def GetUpdate(self, what=None, x=None, percent=None):

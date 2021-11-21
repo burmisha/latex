@@ -25,7 +25,7 @@ class Vishnyakova_3_6_1(variant.VariantTask):
 @variant.arg(n='n = 1.3/1.4/1.5/1.6/1.7')
 class Vishnyakova_3_6_2(variant.VariantTask):
     def GetUpdate(self, *, lmbd=None, n=None):
-        c = Consts.c_4
+        c = Consts.c
         nu = (c / lmbd).As('ТГц').SetLetter('\\nu')
         return dict(
             nu=nu,
