@@ -1,5 +1,5 @@
 import generators.variant as variant
-from generators.helpers import Consts, Fraction
+from generators.helpers import Consts, Fraction, UnitValue
 
 
 @variant.text('''
@@ -24,7 +24,7 @@ from generators.helpers import Consts, Fraction
         '\\implies (l_2 - l_1)(l_2 + l_1) = 2x\\ell '
         '\\implies n\\lambda * 2L \\approx 2x_n\\ell '
         '\\implies x_n = \\frac{\\lambda L}{\\ell} n, n\\in \\mathbb{N}',
-    'x = \\frac{\\lambda L}{\\ell} * {ratio:LaTeX} = \\frac{{lmbd:V} * {L:V}}{l:V:s} * {ratio:LaTeX} \\approx {x:V}',
+    'x &= \\frac{\\lambda L}{\\ell} * {ratio:LaTeX} = \\frac{{lmbd:V} * {L:V}}{l:V:s} * {ratio:LaTeX} \\approx {x:V}',
 ])
 class Vishnyakova_example_11(variant.VariantTask):
     def GetUpdate(self, *, l=None, L=None, lmbd=None, what=None, n=None, n_text=None):
@@ -58,11 +58,31 @@ class Vishnyakova_example_11(variant.VariantTask):
 # от двух когерентных источников света, в 4 раза больше длины волны.
 # Что будет наблюдаться в данной точке?
 
-# 4. В некоторую точку пространства приходят две когерентные световые волны
-# с разностью хода 1,8 мкм. Определите, усиливается или ослабляется в этой точке
-# свет с длиной волны:
-# а) 600 нм;
-# 6) 400 нм. 
+
+@variant.text('''
+    В некоторую точку пространства приходят две когерентные световые волны
+    с разностью хода {l:V:e}. Определите, что наблюдается в этой точке.
+    Длина волны равна {lmbd:V:e}.
+''')
+@variant.solution_space(80)
+@variant.arg(lmbd='\\lambda = 400/500/600/700 нм')
+@variant.arg(n=[3, 4, 5, 6])
+@variant.arg(add=[0, 1])
+@variant.answer_short('\\text{{answer}}')
+class Gendenshteyn_11_22_4(variant.VariantTask):
+    def GetUpdate(self, *, lmbd=None, n=None, add=None):
+        l = (lmbd * (n + add / 2)).IncPrecision(1).As('мкм')
+        if add == 0:
+            answer = 'точка максимума'
+        elif add == 1:
+            answer = 'точка минимума'
+        else:
+            raise RuntimeError()
+        return dict(
+            l=l,
+            answer=answer,
+        )
+
 
 # 5. Минимальная разность хода, при которой две когерентные световые волны
 # ослабляют друг друга при интерференции, равна 250 нм. Чему равна длина волны?
@@ -128,28 +148,62 @@ class Vishnyakova_example_11(variant.VariantTask):
 
 @variant.text('''
     На стеклянную пластинку ({n1:Task:e}) нанесена прозрачная пленка ({n2:Task:e}).
-    На плёнку нормально к поверхности падает монохроматический свет с длиной волны {lmbd:Task:e}.
-    Какова должна быть минимальная толщина пленки, если в результате интерференции свет имеет {text} интенсивность?
+    На плёнку нормально к поверхности падает монохроматический свет с длиной волны {lmbd:V:e}.
+    Какова должна быть минимальная толщина пленки, если в результате интерференции отражённый свет имеет {which} интенсивность?
 ''')
-@variant.solution_space(180)
-@variant.arg(n1=['\\hat n = 1.%d' % n1 for n1 in [5, 6]])
-@variant.arg(n2=['n = 1.%d' % n2 for n2 in [2, 4, 7, 8]])
-@variant.arg(lmbd=['\\lambda = %d нм' % lmbd for lmbd in [400, 500, 600]])
-@variant.arg(text=['наибольшую', 'наименьшую'])
+@variant.solution_space(150)
+@variant.arg(n1='\\hat n = 1.5/1.6')
+@variant.arg(n2='n = 1.3/1.4/1.7/1.8')
+@variant.arg(lmbd='\\lambda = 420/480/540/640 нм')
+@variant.arg(which='наибольшую/наименьшую')
+@variant.answer_short('2 * h * {n2:L} = {delta:LaTeX} \\lambda \\implies h \\approx {h:V}')
 class Belolipetsky_5_196(variant.VariantTask):
-    pass
+    def GetUpdate(self, *, n1=None, n2=None, lmbd=None, which=None):
+        if n1.SI_Value > n2.SI_Value:
+            delta = Fraction(1) / 2
+        else:
+            delta = Fraction(0)
+
+        if which == 'наибольшую':
+            pass
+        elif which == 'наименьшую':
+            delta += Fraction(1) / 2
+        else:
+            raise RuntimeError()
+
+        if delta == 0:
+            delta += 1
+
+        return dict(
+            delta=delta,
+            h=(lmbd / 2 / float(delta) / n2).IncPrecision(1).As('нм'),
+        )
 
 
 @variant.text('''
-    Разность фаз двух интерферирующих световых волн равна ${n:V}\\pi$,
-    а разность хода между ними равна {l:V:e}. Определить длину волны.
+    Разность фаз двух интерферирующих световых волн равна ${n}\\pi$,
+    а разность хода между ними равна {l:V:e}. Определить длину и частоту волны.
 ''')
 @variant.solution_space(100)
-@variant.arg(n='n = 3/5/7/9')
-@variant.arg(l='\\ell= 7.5/9.5/10.5/12.5/15.5 10^{-7} м')
+@variant.arg(n=[3, 4, 5, 6, 7, 8])
+@variant.arg(l='\\ell = 7.5/9.5/10.5/12.5/15.5 10^{-7} м')
+@variant.answer_align([
+    '\\Delta \\varphi &= k\\Delta l = \\frac{2 \\pi}{\\lambda} \\Delta l = {n}\\pi \\implies \\lambda = {ratio:LaTeX}\\Delta l \\approx {lmbd:V},',
+    '\\nu = \\frac 1T = \\frac c\\lambda = {ratio_nu:LaTeX} \\frac c{\\Delta l} = {ratio_nu:LaTeX} * \\frac{c:V:s}{l:V:s} \\approx {nu:V}.'
+])
 class Vishnyakova_3_6_12(variant.VariantTask):
-    pass
+    def GetUpdate(self, *, l=None, n=None):
+        c = Consts.c
+        ratio = Fraction(2) / n
+        ratio_nu = Fraction(n) / 2
 
+        return dict(
+            lmbd=(l * float(ratio)).IncPrecision(1).As('нм'),
+            nu=(c / l * float(ratio_nu)).IncPrecision(1).As('ТГц'),
+            c=c,
+            ratio=ratio,
+            ratio_nu=ratio_nu,
+        )
 
 # @variant.text('''
 #     Расстояние между соседними темными интерференционными полосами на экране Ах.
@@ -162,14 +216,29 @@ class Vishnyakova_3_6_12(variant.VariantTask):
 
 
 @variant.text('''
-    Расстояние между двумя точечными когерентными источниками света $S_1$ u $S_2$ равно {d:V:e}.
-    Источники расположены в плоскости, параллельной экрану, на расстоянии {a:V:e} от него.
+    Два точечных когерентных источника света $S_1$ u $S_2$ расположены в плоскости, параллельной экрану, на расстоянии {L:V:e} от него.
     На экране в точках, лежащих на перпендикулярах, опущенных из источников света $S_1$ и $S_2$,
-    находятся два ближайших минимума (тёмные полосы).
-    Определите длину световой волны. Ответ дать в нанометрах.
+    находятся первые {which} полосы. Определите расстояние $S_1S_2$ между источниками, результат выразите в миллиметрах.
+    Длина волны равна {lmbd:V:e}.
 ''')
 @variant.solution_space(100)
-@variant.arg(d='d = 1.5/2/2.5 мм')
-@variant.arg(a='a = 7/8/9 м')
+@variant.arg(lmbd='\\lambda = 350/420/480/550/640 нм')
+@variant.arg(L='L = 2.4/3.2/4.5/5.4/7.2 м')
+@variant.arg(which='тёмные/светлые')
+@variant.answer_align([
+    'x_n = \\frac{\\lambda L}{\\ell} n, n\\in \\mathbb{N} \\leftarrow \\text{точки максимума},',
+    '{n} \\frac{\\lambda L}{\\ell} = \\ell \\implies \\ell \\sqrt{ {n} * \\lambda L } \\approx {l:V}.'
+])
 class Vishnyakova_3_6_14(variant.VariantTask):
-    pass
+    def GetUpdate(self, *, lmbd=None, L=None, which=None):
+        if which == 'тёмные':
+            n = 1
+        elif which == 'светлые':
+            n = 2
+        else:
+            raise RuntimeError()
+        l = UnitValue('%.2f мм' % (n * float(lmbd.SI_Value * L.SI_Value) ** 0.5 * 1000))
+        return dict(
+            l=l,
+            n=n,
+        )
