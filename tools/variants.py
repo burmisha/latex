@@ -197,7 +197,7 @@ def get_all_variants():
         ),
         Work(
             task_id='2020-03-04 11Т',
-            classes=['oscillation.em_waves.Gendenshteyn_11_11_18', {'optics.wave': ['Vishnyakova_example_11', 'Belolipetsky_5_196']}]
+            classes=['oscillation.em_waves.Gendenshteyn_11_11_18', {'optics.interference': ['Vishnyakova_example_11', 'Belolipetsky_5_196']}]
         ),
         Work(
             task_id='2020-04-22 9А',
@@ -651,10 +651,11 @@ def get_all_variants():
         Work(
             task_id='2021-11-18 11БА - ВО - 1',
             classes=[
-                {'optics.wave': ['Vishnyakova_example_11', 'Vishnyakova_3_6_12', 'Vishnyakova_3_6_14', 'Vishnyakova_3_6_15', 'Vishnyakova_3_6_16', 'Vishnyakova_3_6_17', 'Vishnyakova_3_6_18', ]},
+                {'optics.interference': ['Vishnyakova_example_11', 'Belolipetsky_5_196', 'Vishnyakova_3_6_12']}, 
+                {'optics.difraction': ['Vishnyakova_3_6_14', 'Vishnyakova_3_6_15', 'Vishnyakova_3_6_16', 'Vishnyakova_3_6_17', 'Vishnyakova_3_6_18']},
                 {'optics.geom': [
                     'Vishnyakova_3_6_1', 'Vishnyakova_3_6_2', 'Vishnyakova_3_6_4', 'Vishnyakova_3_6_5', 'Vishnyakova_3_6_6',
-                    'Vishnyakova_3_6_7', 'Vishnyakova_3_6_8', 'Vishnyakova_3_6_9', 'Vishnyakova_3_6_10', 'Vishnyakova_3_6_11'
+                    'Vishnyakova_3_6_7', 'Vishnyakova_3_6_8', 'Vishnyakova_3_6_9', 'Vishnyakova_3_6_10', 'Vishnyakova_3_6_11',
                 ]},
             ],
         ),

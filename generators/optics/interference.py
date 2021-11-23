@@ -124,6 +124,8 @@ class Vishnyakova_example_11(variant.VariantTask):
 # максимумами на экране? Обязательно ли будет наблюдаться максимум освещённости в точке О,
 # равноудалённой от обоих источников?
 
+
+
 @variant.text('''
     На стеклянную пластинку ({n1:Task:e}) нанесена прозрачная пленка ({n2:Task:e}).
     На плёнку нормально к поверхности падает монохроматический свет с длиной волны {lmbd:Task:e}.
@@ -170,52 +172,4 @@ class Vishnyakova_3_6_12(variant.VariantTask):
 @variant.arg(d='d = 1.5/2/2.5 мм')
 @variant.arg(a='a = 7/8/9 м')
 class Vishnyakova_3_6_14(variant.VariantTask):
-    pass
-
-
-@variant.text('''
-    На дифракционную решетку, имеющую период {d:V:e}, нормально падает монохроматическая световая волна.
-    Под углом ${phi}\\degrees$ наблюдается дифракционный максимум второго порядка.
-    Какова длина волны падающего света?
-''')
-@variant.solution_space(100)
-@variant.arg(d='d = 2/3/4 10^{-4} см')
-@variant.arg(phi='20/25/30/35/40')
-class Vishnyakova_3_6_15(variant.VariantTask):
-    pass
-
-
-@variant.text('''
-    Свет с длиной волны {lmbd:V:e} падает нормально на дифракционную решетку с периодом, равным {d:V:e}.
-    Под каким углом наблюдается дифракционный максимум первого порядка?
-''')
-@variant.solution_space(100)
-@variant.arg(lmbd='\\lambda = 0.4/0.5/0.6/0.7 мкм')
-@variant.arg(d='d = 1/2/3 мкм')
-class Vishnyakova_3_6_16(variant.VariantTask):
-    pass
-
-
-@variant.text('''
-    При нормальном падении белого света на дифракционную решетку {color} линия ({lmbd:V:e})
-    в спектре второго порядка видна под углом дифракции ${phi}\\degrees$.
-    Определить число штрихов на {l:V:e} длины этой решетки.
-''')
-@variant.solution_space(100)
-@variant.arg(color__lmbd=[
-    ('зелёная', '\\lambda = 500 нм'),
-])
-@variant.arg(phi=[20, 25, 53])
-@variant.arg(l=['1 мм', '1 см'])
-class Vishnyakova_3_6_17(variant.VariantTask):
-    pass
-
-
-@variant.text('''
-    Каков наибольший порядок спектра, который можно наблюдать при дифракции света
-    с длиной волны $\\lambda$, на дифракционной решетке с периодом $d = {n}\\lambda$?
-''')
-@variant.solution_space(100)
-@variant.arg(n='2.5/3.5/4.5')
-class Vishnyakova_3_6_18(variant.VariantTask):
     pass
