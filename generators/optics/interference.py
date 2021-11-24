@@ -149,7 +149,7 @@ class Gendenshteyn_11_22_4(variant.VariantTask):
 @variant.text('''
     На стеклянную пластинку ({n1:Task:e}) нанесена прозрачная пленка ({n2:Task:e}).
     На плёнку нормально к поверхности падает монохроматический свет с длиной волны {lmbd:V:e}.
-    Какова должна быть минимальная толщина пленки, если в результате интерференции отражённый свет имеет {which} интенсивность?
+    Какова должна быть минимальная толщина пленки, чтобы в результате интерференции отражённый свет имел {which} интенсивность?
 ''')
 @variant.solution_space(150)
 @variant.arg(n1='\\hat n = 1.5/1.6')
@@ -160,9 +160,9 @@ class Gendenshteyn_11_22_4(variant.VariantTask):
 class Belolipetsky_5_196(variant.VariantTask):
     def GetUpdate(self, *, n1=None, n2=None, lmbd=None, which=None):
         if n1.SI_Value > n2.SI_Value:
-            delta = Fraction(1) / 2
-        else:
             delta = Fraction(0)
+        else:
+            delta = Fraction(1) / 2
 
         if which == 'наибольшую':
             pass
@@ -176,7 +176,7 @@ class Belolipetsky_5_196(variant.VariantTask):
 
         return dict(
             delta=delta,
-            h=(lmbd / 2 / float(delta) / n2).IncPrecision(1).As('нм'),
+            h=(lmbd / 2 * float(delta) / n2).IncPrecision(1).As('нм'),
         )
 
 
