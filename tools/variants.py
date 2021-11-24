@@ -649,6 +649,13 @@ def get_all_variants():
             ],
         ),
         Work(
+            task_id='2021-11-24 11Б - ЭМВ - 1',
+            classes=[
+                {'oscillation.em_waves': ['Gendenshteyn_11_11_18', 'Sound_to_value_no_quant', 'Chernoutsan_12_50', 'Chernoutsan_12_51']},
+                'oscillation.electromagnet.Task03',
+            ],
+        ),
+        Work(
             task_id='2021-11-24 11БА - ВО - 1',
             classes=[
                 {'optics.interference': ['Gendenshteyn_11_22_4', 'Vishnyakova_example_11', 'Vishnyakova_3_6_12', 'Vishnyakova_3_6_14', 'Belolipetsky_5_196']}, 
