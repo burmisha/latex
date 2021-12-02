@@ -1,3 +1,4 @@
+import library
 from library.normalize import TitleCanonizer
 from library.logging import cm, colorize_json, color
 
@@ -284,7 +285,7 @@ class YoutubeVideo:
         self._dstdir = dstdir
 
     def get_filename(self):
-        assert os.path.isdir(self._dstdir)
+        assert library.files.is_dir(self._dstdir)
         return os.path.join(self._dstdir, f'{self._title}.mp4')
 
     def set_use_requests(self, use_requests):
