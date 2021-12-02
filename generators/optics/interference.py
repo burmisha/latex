@@ -227,7 +227,7 @@ class Vishnyakova_3_6_12(variant.VariantTask):
 @variant.arg(which='тёмные/светлые')
 @variant.answer_align([
     'x_n = \\frac{\\lambda L}{\\ell} n, n\\in \\mathbb{N} \\leftarrow \\text{точки максимума},',
-    '{n} \\frac{\\lambda L}{\\ell} = \\ell \\implies \\ell \\sqrt{ {n} * \\lambda L } \\approx {l:V}.'
+    '{n} \\frac{\\lambda L}{\\ell} = \\ell \\implies \\ell = \\sqrt{ {n} * \\lambda L } = \\sqrt{ {n} * {lmbd:V} * {L:V} } \\approx {l:V}.'
 ])
 class Vishnyakova_3_6_14(variant.VariantTask):
     def GetUpdate(self, *, lmbd=None, L=None, which=None):
