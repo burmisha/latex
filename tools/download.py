@@ -156,6 +156,7 @@ def run(args):
             'https://www.youtube.com/watch?v=2k9CIfJsONw': '2021 - The Trial of the Chicago 7 - FULL FEATURE - Netflix',
             'https://www.youtube.com/watch?v=dOR41kRQ2tg': '2017 - American Anarchist - Американский анархист',
             'https://www.youtube.com/watch?v=i8fD_jG_TM8': 'FREE BEATS',
+            'https://www.youtube.com/watch?v=LXpfBwApM3E': '2021 - 554 - 1 класс',
         },
         'Veritasium': {
             'https://www.youtube.com/watch?v=AaZ_RSt0KP8': '2021.08.31 - The Universe is Hostile to Computers',
