@@ -1,4 +1,5 @@
 import generators.variant as variant
+import math
 
 # @variant.text('''
 #     Расстояние между соседними темными интерференционными полосами на экране Ах.
@@ -19,8 +20,22 @@ import generators.variant as variant
 @variant.arg(which='второго/третьего/четвёртого')
 @variant.arg(d='d = 2/3/4 10^{-4} см')
 @variant.arg(phi='20/25/30/35/40')
+@variant.answer_short('''
+    d\\sin \\varphi_k = k\\lambda
+    \\implies \\lambda = \\frac{d \\sin \\varphi_k}k
+    = \\frac{{d:V} * \\sin {phi}\\degrees}{{k}} \\approx {lmbd:V}
+''')
 class Vishnyakova_3_6_15(variant.VariantTask):
-    pass
+    def GetUpdate(self, *, which=None, d=None, phi=None):
+        k = {
+            'второго': 2,
+            'третьего': 3,
+            'четвёртого': 4,
+        }[which]
+        return dict(
+            lmbd=(d * math.sin(math.pi * int(phi) / 180) / k).As('нм'),
+            k=k,
+        )
 
 
 @variant.text('''
@@ -30,8 +45,21 @@ class Vishnyakova_3_6_15(variant.VariantTask):
 @variant.solution_space(150)
 @variant.arg(lmbd='\\lambda = 0.4/0.5/0.6/0.7 мкм')
 @variant.arg(d='d = 1/2/3 мкм')
+@variant.answer_short('''
+    d\\sin \\varphi_k = k\\lambda
+    \\implies \\sin \\varphi_k = \\frac{k\\lambda}{ d }
+    = \\frac{{k} * {lmbd:V}}{d:V:s} \\approx {sin:V} \\implies \\varphi_k \\approx {phi:.1f}\\degrees
+''')
 class Vishnyakova_3_6_16(variant.VariantTask):
-    pass
+    def GetUpdate(self, *, lmbd=None, d=None):
+        k = 1
+        sin = lmbd * k / d
+        phi = math.asin(sin.SI_Value) / math.pi * 180
+        return dict(
+            k=k,
+            sin=sin,
+            phi=phi,
+        )
 
 
 @variant.text('''
@@ -54,8 +82,23 @@ class Vishnyakova_3_6_16(variant.VariantTask):
 ])
 @variant.arg(phi=[5, 12, 18, 25])
 @variant.arg(l=['1 мм', '1 см'])
+@variant.answer_short('''
+    d\\sin \\varphi_k = k\\lambda
+    \\implies d = \\frac{k\\lambda}{\\sin \\varphi_k}.
+    \\qquad N = \\frac{ l }{d} = \\frac{ l \\sin \\varphi_k}{k\\lambda}
+    = \\frac{{l:V} * \\sin {phi}\\degrees}{{k} * {lmbd:V}} \\approx {N:V}
+''')
 class Vishnyakova_3_6_17(variant.VariantTask):
-    pass
+    def GetUpdate(self, *, which=None, color=None, lmbd=None, phi=None, l=None):
+        k = {
+            'второго': 2,
+            'третьего': 3,
+            'четвёртого': 4,
+        }[which]
+        return dict(
+            N=(l * math.sin(math.pi * int(phi) / 180) / k / lmbd).IncPrecision(2),
+            k=k,
+        )
 
 
 @variant.text('''
@@ -65,5 +108,13 @@ class Vishnyakova_3_6_17(variant.VariantTask):
 ''')
 @variant.solution_space(150)
 @variant.arg(n='2.2/2.5/2.7/3.3/3.5/3.9/4.1/4.5/4.6')
+@variant.answer_short('''
+    d\\sin \\varphi_k = k\\lambda
+    \\implies k = \\frac{d\\sin \\varphi_k}{\\lambda} \\le \\frac{d * 1}{\\lambda} = {n}
+    \\implies k_{\\max} = {k_max}
+''')
 class Vishnyakova_3_6_18(variant.VariantTask):
-    pass
+    def GetUpdate(self, *, n=None):
+        return dict(
+            k_max=int(float(n.strip())),
+        )
