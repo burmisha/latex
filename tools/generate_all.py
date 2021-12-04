@@ -26,7 +26,7 @@ DEBUG_TEMPLATE = r'''
 \input{{\rootpath/school-554/main}}
 \begin{{document}}
 
-{{{debug_tex}}}
+{debug_tex}
 
 \end{{document}}
 '''
