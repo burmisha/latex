@@ -7,7 +7,7 @@ from generators.helpers import Consts, n_times
     отбрасывает на горизонтальную поверхность земли тень длиной {l:V:e}.
     Известно, что длина тени от телеграфного столба на {DL:V:e} больше. Определить высоту столба.
 ''')
-@variant.solution_space(180)
+@variant.solution_space(80)
 @variant.arg(h='h = 1.2/1.5/1.8 м')
 @variant.arg(l='\\ell = 1/2/3/4 м')
 @variant.arg(DL='\\Delta L = 5/6/7/8/9 м')
@@ -20,16 +20,24 @@ class Vishnyakova_3_6_1(variant.VariantTask):
     в которой распространяется свет с длиной волны {lmbd:V:e} и частотой {nu:V:e}.
     Скорость света в вакууме {c:V:e}.
 ''')
-@variant.solution_space(180)
+@variant.solution_space(80)
 @variant.arg(lmbd='\\lambda = 0.450/0.500/0.550/0.600/0.650 мкм')
 @variant.arg(n='n = 1.3/1.4/1.5/1.6/1.7')
+@variant.answer_short('''
+    n = \\frac{c:L:s}{v}
+    = \\frac{c:L:s}{\\frac \\lambda T}
+    = \\frac{c:L:s}{\\lambda \\nu}
+    = \\frac{c:V:s}{{lmbd:V} * {nu:V:s}}
+    \\approx{answer_n:V}
+''')
 class Vishnyakova_3_6_2(variant.VariantTask):
     def GetUpdate(self, *, lmbd=None, n=None):
         c = Consts.c
-        nu = (c / lmbd).As('ТГц').SetLetter('\\nu')
+        nu = (c / lmbd / n).IncPrecision(1).As('ТГц').SetLetter('\\nu')
         return dict(
             nu=nu,
             c=c,
+            answer_n=(c / lmbd / nu),
         )
 
 

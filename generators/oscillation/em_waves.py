@@ -95,7 +95,6 @@ class Sound_to_value(variant.VariantTask):
     pass
 
 
-
 @variant.solution_space(0)
 @variant.text('''
     Укажите букву, соответствующую физическую величину (из текущего раздела), её единицы измерения в СИ и выразите её из какого-либо физического закона:

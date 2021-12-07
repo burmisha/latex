@@ -1,5 +1,54 @@
 import generators.variant as variant
 from generators.helpers import Consts, Fraction, UnitValue
+import math
+
+
+@variant.text('''
+    Сформулируйте:
+    \\begin{itemize}
+        \\item что такое {q1},
+        \\item определение дисперсии,
+        \\item условие интерференционного максимума для света, падающего нормально на дифракционную решётку,
+        \\item условия {q4},
+    \\end{itemize}
+''')
+@variant.solution_space(40)
+@variant.arg(q1='интерференция/дифракция')
+@variant.arg(q4=['когерентности 2 источников света', 'наблюдения минимума и максимума в интерферeнционной картине'])
+class Task01(variant.VariantTask):
+    pass
+
+
+@variant.text('''
+    Произведите вычисления и округлите
+    \\begin{itemize}
+        \\item ${a1:V} * {b1:V} = \\ldots$
+        \\item $\\cfrac{a2:V:s}{b2:V:s} = \\ldots$
+        \\item ${a3:V} * {b3:V} = \\ldots$
+        \\item $3 \\pi^2 * \\cfrac{a3:V:s}{b3:V:s} = \\ldots$
+    \\end{itemize}
+''')
+@variant.solution_space(0)
+@variant.arg(a1='885.36/59.11/76.19/671.8/336.92/55.58/89.89/540.0/53.98/78.97 м')
+@variant.arg(b1='0.074/0.008/0.082/0.071/0.004/0.053/0.097/0.046/0.063/0.051 кг')
+@variant.arg(a2='0.954/0.360/0.204/0.705/0.265/0.858/0.107/0.107/0.562/0.694 с')
+@variant.arg(b2='4.6/4.3/1.0/5.2/4.8/3.3/1.1/4.9/3.2/4.6 с / м')
+@variant.arg(a3='0.0252/0.1152/0.0025/0.1364/0.0824/0.1245/0.0069/0.1286/0.0288/0.0205 А')
+@variant.arg(b3='3.66/2.05/0.12/1.43/6.18/4.14/5.89/1.51/6.46/0.06 с')
+@variant.answer_align([
+    '{a1:V} * {b1:V} &= {answer1:V}',
+    '\\cfrac{a2:V:s}{b2:V:s} &= {answer2:V}',
+    '{a3:V} * {b3:V} &= {answer3:V}',
+    '3 \\pi^2 * \\cfrac{a3:V:s}{b3:V:s} &= {answer4:V}',
+])
+class Task02(variant.VariantTask):
+    def GetUpdate(self, *, a1=None, b1=None, a2=None, b2=None, a3=None, b3=None):
+        return dict(
+            answer1=a1 * b1,
+            answer2=a2 / b2,
+            answer3=a3 * b3,
+            answer4=(a3 / b3 * (float(math.pi) ** 2) * 3).IncPrecision(2),
+        )
 
 
 @variant.text('''
@@ -16,7 +65,7 @@ from generators.helpers import Consts, Fraction, UnitValue
 @variant.arg(lmbd='\\lambda = 400/450/500/550/600 нм')
 @variant.arg(what='максимумом/минимумом')
 @variant.arg(n__n_text=[(2, 'вторым'), (3, 'третьим'), (4, 'четвёртым')])
-@variant.solution_space(180)
+@variant.solution_space(120)
 @variant.answer_align([
     'l_1^2 &= L^2 + \\sqr{x - \\frac \\ell 2}',
     'l_2^2 &= L^2 + \\sqr{x + \\frac \\ell 2}',

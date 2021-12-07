@@ -212,7 +212,7 @@ def check_unit_value(value):
                 after_eq = value.split('=')[1].strip()
                 if ('sqrt' not in after_eq) and ('frac' not in after_eq) and not after_eq.isalpha():
                     return UnitValue(value)
-            elif re.match(r'-?\d.* \w', value, re.UNICODE):
+            elif re.match(r' ?-?\d.* \w', value, re.UNICODE):
                 return UnitValue(value)
     except ValueError:
         log.debug(f'Failed to check_unit_value for {cm(value, color=color.Red)}')

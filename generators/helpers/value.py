@@ -270,7 +270,7 @@ class UnitValue:
         return f'UVS {self.__raw_line}'
 
     def __repr__(self):
-        return f'UVR {self.__raw_line!r}'
+        return f'UVR {self.__raw_line!r}@{self.ViewPrecision or self.Precision}'
 
     def _get_units_tex(self):
         humanNom = '\\cdot'.join(unit.get_tex() for unit in self._units if unit.IsNumerator)
@@ -461,6 +461,7 @@ def test_unit_value():
         ('{:V}', UnitValue('10 мин') * UnitValue('5 Гц'), '3000'),
         ('{:Task}', (UnitValue('10 мин') * UnitValue('5 Гц')).SetLetter('l'), 'l = 3000'),
         ('{:Value}', UnitValue('2 10^4 км/c'), '2 \\cdot 10^{4}\\,\\frac{\\text{км}}{\\text{c}}'),
+        ('{:Value}', (UV('0.0288 А') / UV('6.18 с') * 3 * math.pi**2).IncPrecision(1), '0{,}138\\,\\frac{\\text{А}}{\\text{с}}'),
         # ('{:Value}', UV('0.94') * UV('859 мА') * UV('200 В') / UV('4.3 А'), '0{,}95'),
         # ('{:Value}', UV('38 В') * UV('4.3 А') / (UV('859 мА') * UV('200 В')), '0{,}95'),
         # ('{:V}'.format(UnitValue('600000000000000000 Гц', precision=3)), '6 \\cdot 10^{14}\\,\\text{Гц}'),  # TODO

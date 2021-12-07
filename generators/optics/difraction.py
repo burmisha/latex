@@ -106,7 +106,7 @@ class Vishnyakova_3_6_17(variant.VariantTask):
     с длиной волны $\\lambda$, на дифракционной решётке с периодом $d = {n}\\lambda$?
     Под каким углом наблюдается последний максимум?
 ''')
-@variant.solution_space(150)
+@variant.solution_space(80)
 @variant.arg(n='2.2/2.5/2.7/3.3/3.5/3.9/4.1/4.5/4.6')
 @variant.answer_short('''
     d\\sin \\varphi_k = k\\lambda
