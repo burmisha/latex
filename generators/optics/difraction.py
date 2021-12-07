@@ -33,7 +33,7 @@ class Vishnyakova_3_6_15(variant.VariantTask):
             'четвёртого': 4,
         }[which]
         return dict(
-            lmbd=(d * math.sin(math.pi * int(phi) / 180) / k).As('нм'),
+            lmbd=(d * math.sin(math.pi * int(phi) / 180) / k).IncPrecision(2).As('нм'),
             k=k,
         )
 
