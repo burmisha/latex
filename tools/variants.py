@@ -704,5 +704,26 @@ def get_all_variants():
                 'refraction.Refraction01',
             ]},
         ),
+        Work(
+            task_id='2021-12-15 11БА - ГО - 3',
+            classes={'optics.reflection': [
+                'Chernoutsan_13_5',
+                'Chernoutsan_13_6',
+                'Chernoutsan_13_7',
+                'Chernoutsan_13_8',
+                'Chernoutsan_13_9',
+                'Chernoutsan_13_10',
+                'Chernoutsan_13_11',
+            ]},
+        ),
+        Work(
+            task_id='2021-12-16 11БА - ГО - 4',
+            classes={'optics.refraction': [
+                'Chernoutsan_13_12',
+                'Chernoutsan_13_13',
+                'Chernoutsan_13_14',
+                'Chernoutsan_13_15',
+            ]},
+        ),
     ]
     return works
