@@ -692,5 +692,16 @@ def get_all_variants():
                 {'optics.shadow': ['Shadow01', 'Shadow02']},
             ],
         ),
+        Work(
+            task_id='2021-12-14 11БА - ГО - 2',
+            classes={'optics': [
+                'interference.Task04',
+                'reflection.ReflectionRotate',
+                'reflection.ReflectionSize',
+                'reflection.ReflectionSpeed',
+                'reflection.ReflectionName',
+                'refraction.Refraction01',
+            ]},
+        ),
     ]
     return works
