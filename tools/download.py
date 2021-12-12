@@ -18,6 +18,7 @@ def run(args):
     for downloader in [
         # library.download.MathusPhys(),
         # library.download.ZnakKachestava(),
+        # library.download.PhysNsuRu(),
     ]:
         downloader.Download(library.location.udr(downloader.GetDirname()))
 

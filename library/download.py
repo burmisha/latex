@@ -234,6 +234,75 @@ class MathusPhys:
     def GetDirname(self):
         return 'Материалы - mathus'
 
+PhysNsuRu_Config = [
+    ('First%20Semester/Urok1.pdf', '1 - Урок 1 - Закон Кулона'),
+    ('First%20Semester/Urok2.pdf', '1 - Урок 2 - Теорема Гаусса'),
+    ('First%20Semester/urok3.pdf', '1 - Урок 3 - Диполь'),
+    ('First%20Semester/Urok4.pdf', '1 - Урок 4 - Мультиполи'),
+    ('First%20Semester/Urok5.pdf', '1 - Урок 5 - Уравнения Пуассона и Лапласа'),
+    ('First%20Semester/Urok6.pdf', '1 - Урок 6 - Разделение переменных в декартовых координатах'),
+    ('First%20Semester/Urok7.pdf', '1 - Урок 7 - Разделение переменных в сферических и цилиндрических координатах'),
+    ('First%20Semester/Urok8.pdf', '1 - Урок 8 - Метод изображений. Плоскость'),
+    ('First%20Semester/urok9.pdf', '1 - Урок 9 - Метод изображений. Сфера'),
+    ('First%20Semester/Urok10.pdf', '1 - Урок 10 - Электростатика в среде'),
+    ('First%20Semester/Urok11.pdf', '1 - Урок 11 - Метод изображений на границе диэлектрик-диэлектрик'),
+    ('First%20Semester/urok12.pdf', '1 - Урок 12 - Емкость 1'),
+    ('First%20Semester/urok13.pdf', '1 - Урок 13 - Емкость 2'),
+    ('First%20Semester/Urok14.pdf', '1 - Урок 14 - Энергия поля. давление. Сила'),
+    ('First%20Semester/Urok15.pdf', '1 - Урок 15 - Закон сохранения заряда. Закон Ома'),
+    ('First%20Semester/Urok16.pdf', '1 - Урок 16 - Закон сохранения заряда. Закон Ома'),
+    ('First%20Semester/Urok17.pdf', '1 - Урок 17 - Закон 3-2'),
+    ('First%20Semester/Urok18.pdf', '1 - Урок 18 - Закон Био-Савара-Лапласа. Суперпозиция. теорема Стокса'),
+    ('First%20Semester/Urok19.pdf', '1 - Урок 19 - Векторный потенциал. Магнитный диполь'),
+    ('First%20Semester/Urok20.pdf', '1 - Урок 20 - Магнитное поле в среде'),
+    ('First%20Semester/Urok21.pdf', '1 - Урок 21 - Граничные условия. Метод изображений'),
+    ('First%20Semester/Urok22.pdf', '1 - Урок 22 - Магнитные цепи. Постоянные магниты'),
+    ('First%20Semester/Urok23.pdf', '1 - Урок 23 - Индуктивность. Взаимная индукция'),
+    ('First%20Semester/Urok24.pdf', '1 - Урок 24 - Взаимная индукция'),
+    ('First%20Semester/urok25.pdf', '1 - Урок 25 - Сохранение магнитного потока'),
+    ('First%20Semester/Urok26.pdf', '1 - Урок 26 - Электромагнитная индукция'),
+    ('First%20Semester/Urok27.pdf', '1 - Урок 27 - Скин-эффект. Базовые решения - плоскость, шар, цилиндр'),
+    ('First%20Semester/Skin2.pdf', '1 - Учебник по скин-эффекту'),
+    ('Urok1.pdf', '2 - Урок 1 - Кинематика'),
+    ('Urok2.pdf', '2 - Урок 2 - Формулы Френеля'),
+    ('Urok3.pdf', '2 - Урок 3 - Фурье-анализ'),
+    ('Urok4.pdf', '2 - Урок 4 - Волновой пакет'),
+    ('Urok5.pdf', '2 - Урок 5 - Фазовая и групповая скорость'),
+    ('Urok6.pdf', '2 - Урок 6 - Соотношение неопределнностей'),
+    ('Urok7.pdf', '2 - Урок 7 - Волноводы и резонаторы'),
+    ('Urok8.pdf', '2 - Урок 8 - Резонаторы'),
+    ('Urok9.pdf', '2 - Урок 9 - Контрольная работа'),
+    ('Urok10.pdf', '2 - Урок 10 - Интерференция. Схема Юнга и Ллойда'),
+    ('Urok11.pdf', '2 - Урок 11 - Видность'),
+    ('Urok12.pdf', '2 - Урок 12 - Линии равного наклона и линии равной толщины'),
+    ('Urok13.pdf', '2 - Урок 13 - Зоны Френеля. Дифракция Френеля'),
+    ('Urok14.pdf', '2 - Урок 14 - Геометрическое представление зон Френеля'),
+    ('Urok15.pdf', '2 - Урок 15 - Дифракция Фраунгофера. Дифракционные решетки'),
+    ('Urok16.pdf', '2 - Урок 16 - Фазовые решетки'),
+    ('Urok17.pdf', '2 - Урок 17 - Фурье-оптика и голография'),
+    ('Urok18.pdf', '2 - Урок 18 - Дипольное излучение'),
+    ('UrokXXI.pdf', '2 - Урок 21 - Мультипольное излучение. Антены'),
+    ('UrokXXII.pdf', '2 - Урок 22 - Рассеяние волны. Давление света'),
+    ('UrokXXIII.pdf', '2 - Урок 23 - Преобразование векторов и полей'),
+    ('UrokXXIV.pdf', '2 - Урок 24 - Излучение релятивистской частицы'),
+]
+
+
+class PhysNsuRu:
+    def Download(self, path):
+        # url = 'http://phys.nsu.ru/cherk/Zadanie/zadaniya.htm'
+        prefix = 'http://phys.nsu.ru/cherk/Eldin/%s'
+        for suffix, filename in PhysNsuRu_Config:
+            url = prefix % suffix
+            dstFile = os.path.join(path, filename + '.pdf')
+            data = requests.get(url).content
+            with open(dstFile, 'wb') as f:
+                f.write(data)
+
+    def GetDirname(self):
+        return 'Материалы - phys.nsu.ru'
+
+
 
 class ZnakKachestava:
     def Download(self, path):
