@@ -112,7 +112,7 @@ class Vishnyakova_3_6_17(variant.VariantTask):
     d\\sin \\varphi_k = k\\lambda
     \\implies k = \\frac{d\\sin \\varphi_k}{\\lambda} \\le \\frac{d * 1}{\\lambda} = {n}
     \\implies k_{\\max} = {k_max}
-    \\implies \\alpha_{{k_max}} \\approx {alpha}\\degrees
+    \\implies \\alpha_{{k_max}} \\approx {alpha:.2f}\\degrees
 ''')
 class Vishnyakova_3_6_18(variant.VariantTask):
     def GetUpdate(self, *, n=None):

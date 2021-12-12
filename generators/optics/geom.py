@@ -2,6 +2,7 @@ import generators.variant as variant
 from generators.helpers import Consts, n_times
 import math
 
+
 @variant.text('''
     Вертикально стоящий шест высотой 1,1 м, освещенный солнцем,
     отбрасывает на горизонтальную поверхность земли тень длиной {l:V:e}.

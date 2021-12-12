@@ -304,7 +304,9 @@ class VariantTask:
         return res
 
     def GetTasksCount(self):
-        return self._vars.total_count()
+        result = self._vars.total_count()
+        assert result, f'No tasks for {self}'
+        return result
 
     def GetRandomTask(self, pupil):
         if self._vars is None:

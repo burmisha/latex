@@ -40,6 +40,7 @@ class Vars:
 
     def add(self, key, values):
         str_re = re.compile(r'^(-?\d+(\.\d+)?/)+-?\d+(\.\d+)?$')
+        assert values, f'No values for {key}'
         if isinstance(values, tuple):
             assert len(values) == 2
             assert '{}' in values[0], f'No {{}} in {values}'
