@@ -1,6 +1,6 @@
 import generators.variant as variant
 from generators.helpers import Consts, n_times
-
+import math
 
 @variant.text('''
     Вертикально стоящий шест высотой 1,1 м, освещенный солнцем,
@@ -59,25 +59,49 @@ class Vishnyakova_3_6_2(variant.VariantTask):
     Найти расстояние между точкой входа луча в воду и точкой выхода луча из воды,
     если показатель преломления воды {n:V:e}, а угол падения луча ${alpha}\\degrees$.
 ''')
-@variant.solution_space(180)
+@variant.solution_space(120)
 @variant.arg(h='h = 2/3/4 м')
 @variant.arg(n=['n = 1.33'])
 @variant.arg(alpha=[25, 30, 35])
+@variant.answer_align([
+    '\\ctg \\beta &= \\frac{h:L:s}{d:L:s} \\implies d = \\frac{h:L:s}{\\ctg \\beta}',
+    '\\frac 1{\\sin^2 \\beta} &= \\ctg^2 \\beta + 1 \\implies \\ctg \\beta = \\sqrt{\\frac 1{\\sin^2 \\beta} - 1}',
+    '\\sin\\alpha &= n\\sin \\beta \\implies \\sin \\beta = \\frac{\\sin\\alpha}{n:L:s}',
+    'd &= \\frac{h:L:s}{\\sqrt{\\frac 1{\\sin^2 \\beta} - 1}} '
+    '= \\frac{h:L:s}{\\sqrt{\\sqr{\\frac{n:L:s}{\\sin\\alpha}} - 1}}',
+    '2d &= \\frac{2{h:L:s}}{\\sqrt{\\sqr{\\frac{n:L:s}{\\sin\\alpha}} - 1}} \\approx {d2:V}',
+])
 class Vishnyakova_3_6_4(variant.VariantTask):
-    pass
+    def GetUpdate(self, *, h=None, n=None, alpha=None):
+        sin = math.sin(float(alpha) / 180 * math.pi)
+        d_value = float(h.SI_Value) * 2 * ((float(n.SI_Value) / sin) ** 2 - 1) ** -0.5
+        return dict(
+            d2=f'2d = {d_value * 100:.1f} см',
+        )
 
 
 @variant.text('''
-    Луч света падает на горизонтально расположенную стеклянную пластинку толщиной {d:V:e}.
-    Пройдя через пластину, он выходит из неё в точке, смещённой по горизонтали от точки падения на расстояние {h:V:e}
-    Показатель преломления стекла {n:V:e}. Найти синус угла падения, округлив его значение до двух знаков после запятой.
+    Луч света падает на {how} расположенную стеклянную пластинку толщиной {d:V:e}.
+    Пройдя через пластину, он выходит из неё в точке, смещённой по горизонтали от точки падения на расстояние {h:V:e}.
+    Показатель преломления стекла {n:V:e}. Найти синус угла падения.
 ''')
-@variant.solution_space(180)
+@variant.solution_space(120)
+@variant.arg(how='горизонтально/вертикально')
 @variant.arg(d='d = 4/5/6 мм')
-@variant.arg(h='h = 1.2/1.3/1.4/1.5/1.6 мм')
+@variant.arg(h='h = 1.2/1.3/1.4/1.5/1.6 см')
 @variant.arg(n='n = 1.4/1.5/1.6')
+@variant.answer_align([
+    '\\ctg \\beta &= \\frac{h:L:s}{d:L:s} \\implies',
+    '\\implies \\frac 1{\\sin^2 \\beta} &= \\ctg^2 \\beta + 1 = \\sqr{\\frac{h:L:s}{d:L:s}} + 1 \\implies',
+    '\\implies \\sin\\alpha &= n\\sin \\beta = n\\sqrt {\\frac 1{\\sqr{\\frac{h:L:s}{d:L:s}} + 1}} \\approx {sin:.2f}',
+])
 class Vishnyakova_3_6_5(variant.VariantTask):
-    pass
+    def GetUpdate(self, *, how=None, d=None, h=None, n=None):
+        sin = float(n.SI_Value) / (float((h / d).SI_Value ** 2) + 1) ** 0.5
+        assert 0.1 <= sin <= 0.9, [sin, h / d, (h / d).SI_Value]
+        return dict(
+            sin=sin,
+        )
 
 
 @variant.text('''
