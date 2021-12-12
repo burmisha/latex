@@ -267,7 +267,7 @@ class UnitValue:
                 self._units.append(OneUnit(part, isNumerator))
 
     def __str__(self):
-        return f'UVS {self.__raw_line}'
+        return f'UVS {self.__raw_line!r}'
 
     def __repr__(self):
         return f'UVR {self.__raw_line!r}@{self.ViewPrecision or self.Precision}'
