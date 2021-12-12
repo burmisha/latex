@@ -683,5 +683,14 @@ def get_all_variants():
                 {'optics.interference': ['Gendenshteyn_11_22_4', 'Vishnyakova_3_6_12', 'Vishnyakova_example_11']},
             ],
         ),
+        Work(
+            task_id='2021-12-09 11БА - ГО - 1',
+            classes=[
+                {'optics.interference': ['Task03']},
+                {'optics.geom': ['Vishnyakova_3_6_4', 'Vishnyakova_3_6_5']},
+                # {'optics.reflection': ['Reflection01']},
+                {'optics.shadow': ['Shadow01', 'Shadow02']},
+            ],
+        ),
     ]
     return works
