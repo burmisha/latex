@@ -672,7 +672,8 @@ def get_all_variants():
             classes=[
                 {'optics.interference': ['Task01', 'Task02', 'Vishnyakova_example_11']},
                 {'optics.difraction': ['Vishnyakova_3_6_18']},
-                {'optics.geom': ['Vishnyakova_3_6_1', 'Vishnyakova_3_6_2']},
+                {'optics.shadow': ['Vishnyakova_3_6_1']},
+                {'optics.geom': ['Vishnyakova_3_6_2']},
             ],
         ),
         Work(

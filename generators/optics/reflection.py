@@ -66,8 +66,7 @@ class ReflectionSize(variant.VariantTask):
 @variant.solution_space(80)
 @variant.arg(v='2/3/4 см/с')
 @variant.arg(what=['приближается к плоскому зеркалу', 'отдаляется от плоского зеркала'])
-@variant.answer_align([
-])
+@variant.answer_short('{v:V}')
 class ReflectionSpeed(variant.VariantTask):
     pass
 

@@ -24,7 +24,7 @@ import math
 @variant.answer_align([
     '\\alpha &= {alpha}\\degrees,',
     '1 * \\sin \\alpha &= n \\sin \\beta \\implies \\beta = \\arcsin\\cbr{ \\frac{\\sin \\alpha}{ n } } \\approx {beta:.2f}\\degrees,',
-    '\\varphi_1 &= \\alpha \\approx {phi1:.2f}\\degrees,',
+    '\\varphi_1 &= \\alpha \\approx {phi1}\\degrees,',
     '\\varphi_2 &= \\beta \\approx {phi2:.2f}\\degrees,',
     '\\varphi_3 &= 2\\alpha = {phi3}\\degrees,',
     '\\varphi_4 &= 180\\degrees - \\alpha + \\beta \\approx {phi4:.2f}\\degrees,',
