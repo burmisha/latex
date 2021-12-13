@@ -17,7 +17,7 @@ import math
     \\end{itemize}
     если {which} равен ${alpha_base}\\degrees$.
 ''')
-@variant.solution_space(80)
+@variant.solution_space(100)
 @variant.arg(n='1.35/1.45/1.55/1.65')
 @variant.arg(which=['угол падения', 'между падающим лучом и границей раздела сред'])
 @variant.arg(alpha_base=[22, 28, 35, 40, 50, 55, 65])
@@ -120,7 +120,7 @@ class Chernoutsan_13_14(variant.VariantTask):
 
 @variant.text('''
     В некотором прозрачном веществе свет распространяется со скоростью,
-    {how} меньшей скорости света в вакууме. Чему будет равен предельный угол 
+    {how} меньшей скорости света в вакууме. Чему будет равен предельный угол
     внутреннего отражения для поверхности раздела этого вещества с {what}?
 ''')
 @variant.solution_space(80)

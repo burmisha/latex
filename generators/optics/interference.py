@@ -52,32 +52,6 @@ class Task02(variant.VariantTask):
 
 
 @variant.text('''
-    Сформулируйте:
-    \\begin{itemize}
-        \\item принцип Гюйгенса-Френеля,
-        \\item закон {q2} (в двух частях).
-    \\end{itemize}
-''')
-@variant.solution_space(60)
-@variant.arg(q2='преломления/отражения')
-class Task03(variant.VariantTask):
-    pass
-
-
-@variant.text('''
-    \\begin{itemize}
-        \\item Cформулируйте принцип Гюйгенса-Френеля,
-        \\item запишите формулой закон {q2} и
-        \\item выведите из принципа ГФ этот самый закон {q2}
-    \\end{itemize}
-''')
-@variant.solution_space(80)
-@variant.arg(q2='преломления/отражения')
-class Task04(variant.VariantTask):
-    pass
-
-
-@variant.text('''
     Установка для наблюдения интерференции состоит
     из двух когерентных источников света и экрана.
     Расстояние между источниками {l:Task:e},

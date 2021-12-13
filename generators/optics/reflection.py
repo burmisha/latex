@@ -4,29 +4,38 @@ from generators.helpers import letter_variants, Fraction, Consts, UnitValue
 
 import math
 
-    # \\begin{tikzpicture}[use optics]
-    #     \\node[lens] at (0,0) {};
-    #     \\node[mirror] at (1cm,0) {};
-    # \\end{tikzpicture}
+
+@variant.text('''
+    Постройте изображения ${X}'{Y}'$ и ${U}'{V}'$ стрелок ${X}{Y}$ и ${U}{V}$
+    в 2 плоских зеркалах соответственно (см. рис. на доске).
+''')
+@variant.solution_space(180)
+@variant.arg(X='A/B/C')
+@variant.arg(Y='D/E/F')
+@variant.arg(U='K/L/M')
+@variant.arg(U='P/R/S')
+class Reflection01(variant.VariantTask):
+    pass
+
 
 
 @variant.text('''
-    Постройте изображения $A'B'$ и $C'D'$ стрелок $AB$ и $CD$ в зеркале.
-
-
-    \\begin{tikzpicture}[rotate={rotate}, circuit ee IEC, thick]
-        \\node [contact]  (contact1) at (-1.5, 0) {};
-        \\draw  (0, 0) to [resistor={info=$R_1$}] ++(left:1.5);
-        \\draw  (0, 0) -- ++(up:1.5) to [resistor={near start, info=$R_2$}, resistor={near end, info=$R_3$}] ++(right:3);
-        \\draw  (0, 0) to [resistor={info=$R_4$}] ++(right:3) -- ++(up:1.5);
-        {appendix}
-    \\end{tikzpicture}
+    Постройте область видимости стрелки ${X}{Y}$ в плоском зеркале (см. рис. на доске).
 ''')
-@variant.solution_space(80)
-@variant.arg(A=('A = {} a', [1]))
-@variant.answer_align([
-])
-class Reflection01(variant.VariantTask):
+@variant.solution_space(120)
+@variant.arg(X='A/B/C/D')
+@variant.arg(Y='K/L/M/N')
+class Reflection02(variant.VariantTask):
+    pass
+
+
+@variant.text('''
+    Докажите, что изображение точечного источника света в плоском зеркале можно получить,
+    «удвоив» (в векторном смысле) перпендикуляр, опущенный из источника на плоскость зеркала.
+''')
+@variant.solution_space(120)
+@variant.no_args
+class Reflection03(variant.VariantTask):
     pass
 
 
@@ -48,7 +57,7 @@ class ReflectionRotate(variant.VariantTask):
 @variant.text('''
     Плоское зеркало приближается к стационарному предмету размером {d:V:e}
     со скоростью {v:V:e}. Определите размер изображения предмета через {t:V:e} после начала движения,
-    если изначальное расстояние мужду зеркалом и предметом было равно {h:V:e}.
+    если изначальное расстояние между зеркалом и предметом было равно {h:V:e}.
 ''')
 @variant.solution_space(80)
 @variant.arg(d='5/6/7 см')
@@ -75,7 +84,7 @@ class ReflectionSpeed(variant.VariantTask):
     Запишите своё имя (не фамилию) печатными буквами
     и постройте их изображение в 2 зеркалах: вертикальном и горизонтальном.
 ''')
-@variant.solution_space(80)
+@variant.solution_space(120)
 @variant.no_args
 class ReflectionName(variant.VariantTask):
     pass
