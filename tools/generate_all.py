@@ -87,7 +87,8 @@ def run(args):
         log.warn('Skipping lists')
 
     if generateMultiple:
-        for work in tools.variants.get_all_variants():
+        flt = lambda work: work._task_id >= '2021-12'
+        for work in tools.variants.get_all_variants(flt=flt):
             tasks = work.get_tasks()
             if not tasks:
                 continue

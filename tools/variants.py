@@ -129,7 +129,7 @@ class Work:
         return form_generator.Generate(up_to=self._up_to, image=self._image)
 
 
-def get_all_variants():
+def get_all_variants(*, flt=None):
     email = lambda desc: Text(f'Электронная почта {desc}'.strip())
 
     works = [
@@ -687,7 +687,7 @@ def get_all_variants():
         Work(
             task_id='2021-12-09 11БА - ГО - 1',
             classes=[
-                {'optics.interference': ['Task03']},
+                {'optics.theory': ['Task03']},
                 {'optics.geom': ['Vishnyakova_3_6_4', 'Vishnyakova_3_6_5']},
                 # {'optics.reflection': ['Reflection01']},
                 {'optics.shadow': ['Shadow01', 'Shadow02']},
@@ -696,12 +696,16 @@ def get_all_variants():
         Work(
             task_id='2021-12-14 11БА - ГО - 2',
             classes={'optics': [
-                'interference.Task04',
+                'theory.Task04',
+                'reflection.Reflection01',
+                'reflection.Reflection02',
+                'reflection.Reflection03',
                 'reflection.ReflectionRotate',
                 'reflection.ReflectionSize',
                 'reflection.ReflectionSpeed',
                 'reflection.ReflectionName',
                 'refraction.Refraction01',
+                'shadow.Shadow01',
             ]},
         ),
         Work(
@@ -726,4 +730,6 @@ def get_all_variants():
             ]},
         ),
     ]
+    if flt:
+        works = [work for work in works if flt(work)]
     return works
