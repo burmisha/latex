@@ -8,7 +8,7 @@ from generators.helpers import Consts, UnitValue
     и массой {M:Task:e}, к которому подвешен груз массой {m:Task:e} на расстоянии {b:V:e} от правого конца (см. рис.).
 
     \\begin{tikzpicture}[thick]
-        \\draw 
+        \\draw
             (-2, -0.1) rectangle (2, 0.1)
             (-0.5, -0.1) -- (-0.5, -1)
             (-0.7, -1) rectangle (-0.3, -1.3)
