@@ -79,6 +79,7 @@ class Pupils(object):
             'А1': 'A1',
             'А': 'A',
             'Б': 'B',
+            'В': 'V',
             'Т': 'T',
             'Л': 'L',
             'М': 'M',
@@ -163,7 +164,7 @@ class NamesPicker:
         for pupils_id, names in cfg.items():
             pupils_list = []
             for fullName in names:
-                name, surname = fullName.split(' ')
+                name, surname = fullName.split(' ', 1)
                 pupils_list.append(Pupil(name=name, surname=surname))
 
             start_year, class_id, letter = pupils_id.split('-')
