@@ -37,7 +37,7 @@ class Refraction01(variant.VariantTask):
             'угол падения': alpha_base,
             'между падающим лучом и границей раздела сред': 90 - alpha_base,
         }[which]
-        beta = math.asin(math.sin(alpha_base / 180 * math.pi) / float(n)) / math.pi * 180
+        beta = math.asin(math.sin(alpha / 180 * math.pi) / float(n)) / math.pi * 180
         return dict(
             alpha=alpha,
             beta=beta,
@@ -54,7 +54,7 @@ class Refraction01(variant.VariantTask):
 @variant.arg(what=[
     '''мнимое изображение точечного источника света под поверхностью воды из воздуха
     видно на глубине в $n$ раз меньше его реальной глубины (в приближении малых углов)''',
-    '''тонкий клин с углом при вершине $\\varphi$ из стекла с показателем преломления $n$
+    '''тонкий клин с углом $\\varphi$ при вершине из стекла с показателем преломления $n$
     отклонит луч на угол $(n-1)\\varphi$ (в приближении малых углов)''',
 ])
 class Refraction02(variant.VariantTask):
