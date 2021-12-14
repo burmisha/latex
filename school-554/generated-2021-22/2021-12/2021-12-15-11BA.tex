@@ -29,7 +29,7 @@
 \task{%
     Тимур стоит перед плоским зеркалом, укрепленным на вертикальной стене.
     Какова должна быть минимальная высота зеркала, чтобы Тимур мог видеть себя в полный рост?
-    Рост Тимур $190\,\text{см}$.
+    Рост Тимура $190\,\text{см}$.
     Определите также расстояние от пола до нижнего края зеркала,
     приняв высоту головы равной $34\,\text{см}$, и считая, что глаза находятся посередине (по высоте) головы.
 }
@@ -79,6 +79,63 @@
 }
 \answer{%
     $\cos \alpha = \frac{c^2 - \sqr{2a} - \sqr{2b}}{2 \cdot 2a \cdot 2b} \approx 0{,}707 \implies \alpha = 45{,}0\degrees$
+}
+\solutionspace{80pt}
+
+\tasknumber{8}%
+\task{%
+    Докажите, что тонкий клин с углом при вершине $\varphi$ из стекла с показателем преломления $n$
+        отклонит луч на угол $(n-1)\varphi$ (в приближении малых углов).
+}
+\solutionspace{150pt}
+
+\tasknumber{9}%
+\task{%
+    На дне водоема глубиной $3\,\text{м}$ лежит зеркало.
+    Луч света, пройдя через воду, отражается от зеркала и выходит из воды.
+    Найти расстояние между точкой входа луча в воду и точкой выхода луча из воды,
+    если показатель преломления воды $1{,}33$, а угол падения луча $35\degrees$.
+}
+\answer{%
+    \begin{align*}
+    \ctg \beta &= \frac{h}{d:L:s} \implies d = \frac{h}{\ctg \beta} \\
+    \frac 1{\sin^2 \beta} &= \ctg^2 \beta + 1 \implies \ctg \beta = \sqrt{\frac 1{\sin^2 \beta} - 1} \\
+    \sin\alpha &= n\sin \beta \implies \sin \beta = \frac{\sin\alpha}{n} \\
+    d &= \frac{h}{\sqrt{\frac 1{\sin^2 \beta} - 1}} = \frac{h}{\sqrt{\sqr{\frac{n}{\sin\alpha}} - 1}} \\
+    2d &= \frac{2{h}}{\sqrt{\sqr{\frac{n}{\sin\alpha}} - 1}} \approx 286{,}8\,\text{см}
+    \end{align*}
+}
+\solutionspace{120pt}
+
+\tasknumber{10}%
+\task{%
+    Установка для наблюдения интерференции состоит
+    из двух когерентных источников света и экрана.
+    Расстояние между источниками $l = 2{,}4\,\text{мм}$,
+    а от каждого источника до экрана — $L = 2\,\text{м}$.
+    Сделайте рисунок и укажите положение нулевого максимума освещенности,
+    а также определите расстояние между третьим максимумом и нулевым максимумом.
+    Длина волны падающего света составляет $\lambda = 500\,\text{нм}$.
+}
+\answer{%
+    \begin{align*}
+    l_1^2 &= L^2 + \sqr{x - \frac \ell 2} \\
+    l_2^2 &= L^2 + \sqr{x + \frac \ell 2} \\
+    l_2^2 - l_1^2 &= 2x\ell \implies (l_2 - l_1)(l_2 + l_1) = 2x\ell \implies n\lambda \cdot 2L \approx 2x_n\ell \implies x_n = \frac{\lambda L}{\ell} n, n\in \mathbb{N} \\
+    x &= \frac{\lambda L}{\ell} \cdot 3 = \frac{500\,\text{нм} \cdot 2\,\text{м}}{2{,}4\,\text{мм}} \cdot 3 \approx 1{,}25\,\text{мм}
+    \end{align*}
+}
+\solutionspace{120pt}
+
+\tasknumber{11}%
+\task{%
+    Высота солнца над горизонтом составляет $ 55 \degrees$.
+    Посреди ровного бетонного поля стоит одинокий цилиндрический столб высотой $3\,\text{м}$ и радиусом $2\,\text{см}$.
+    Определите площадь полной тени от этого столба на бетоне.
+    Угловой размер Солнца принять равным $30'$ и считать малым углом.
+}
+\answer{%
+    $\text{трапеция} \implies S = 0{,}12\,\text{м}^{2}$
 }
 
 \variantsplitter
@@ -162,6 +219,63 @@
 \answer{%
     $\cos \alpha = \frac{c^2 - \sqr{2a} - \sqr{2b}}{2 \cdot 2a \cdot 2b} \approx 0{,}499 \implies \alpha = 60{,}0\degrees$
 }
+\solutionspace{80pt}
+
+\tasknumber{8}%
+\task{%
+    Докажите, что мнимое изображение точечного источника света под поверхностью воды из воздуха
+        видно на глубине в $n$ раз меньше его реальной глубины (в приближении малых углов).
+}
+\solutionspace{150pt}
+
+\tasknumber{9}%
+\task{%
+    На дне водоема глубиной $2\,\text{м}$ лежит зеркало.
+    Луч света, пройдя через воду, отражается от зеркала и выходит из воды.
+    Найти расстояние между точкой входа луча в воду и точкой выхода луча из воды,
+    если показатель преломления воды $1{,}33$, а угол падения луча $30\degrees$.
+}
+\answer{%
+    \begin{align*}
+    \ctg \beta &= \frac{h}{d:L:s} \implies d = \frac{h}{\ctg \beta} \\
+    \frac 1{\sin^2 \beta} &= \ctg^2 \beta + 1 \implies \ctg \beta = \sqrt{\frac 1{\sin^2 \beta} - 1} \\
+    \sin\alpha &= n\sin \beta \implies \sin \beta = \frac{\sin\alpha}{n} \\
+    d &= \frac{h}{\sqrt{\frac 1{\sin^2 \beta} - 1}} = \frac{h}{\sqrt{\sqr{\frac{n}{\sin\alpha}} - 1}} \\
+    2d &= \frac{2{h}}{\sqrt{\sqr{\frac{n}{\sin\alpha}} - 1}} \approx 162{,}3\,\text{см}
+    \end{align*}
+}
+\solutionspace{120pt}
+
+\tasknumber{10}%
+\task{%
+    Установка для наблюдения интерференции состоит
+    из двух когерентных источников света и экрана.
+    Расстояние между источниками $l = 2{,}4\,\text{мм}$,
+    а от каждого источника до экрана — $L = 4\,\text{м}$.
+    Сделайте рисунок и укажите положение нулевого максимума освещенности,
+    а также определите расстояние между третьим максимумом и нулевым максимумом.
+    Длина волны падающего света составляет $\lambda = 500\,\text{нм}$.
+}
+\answer{%
+    \begin{align*}
+    l_1^2 &= L^2 + \sqr{x - \frac \ell 2} \\
+    l_2^2 &= L^2 + \sqr{x + \frac \ell 2} \\
+    l_2^2 - l_1^2 &= 2x\ell \implies (l_2 - l_1)(l_2 + l_1) = 2x\ell \implies n\lambda \cdot 2L \approx 2x_n\ell \implies x_n = \frac{\lambda L}{\ell} n, n\in \mathbb{N} \\
+    x &= \frac{\lambda L}{\ell} \cdot 3 = \frac{500\,\text{нм} \cdot 4\,\text{м}}{2{,}4\,\text{мм}} \cdot 3 \approx 2{,}5\,\text{мм}
+    \end{align*}
+}
+\solutionspace{120pt}
+
+\tasknumber{11}%
+\task{%
+    Высота солнца над горизонтом составляет $ 35 \degrees$.
+    Посреди ровного бетонного поля стоит одинокий цилиндрический столб высотой $7\,\text{м}$ и радиусом $8\,\text{см}$.
+    Определите площадь полной тени от этого столба на бетоне.
+    Угловой размер Солнца принять равным $30'$ и считать малым углом.
+}
+\answer{%
+    $\text{трапеция} \implies S = 2{,}13\,\text{м}^{2}$
+}
 
 \variantsplitter
 
@@ -243,6 +357,63 @@
 }
 \answer{%
     $\cos \alpha = \frac{c^2 - \sqr{2a} - \sqr{2b}}{2 \cdot 2a \cdot 2b} \approx 0{,}867 \implies \alpha = 29{,}9\degrees$
+}
+\solutionspace{80pt}
+
+\tasknumber{8}%
+\task{%
+    Докажите, что тонкий клин с углом при вершине $\varphi$ из стекла с показателем преломления $n$
+        отклонит луч на угол $(n-1)\varphi$ (в приближении малых углов).
+}
+\solutionspace{150pt}
+
+\tasknumber{9}%
+\task{%
+    На дне водоема глубиной $2\,\text{м}$ лежит зеркало.
+    Луч света, пройдя через воду, отражается от зеркала и выходит из воды.
+    Найти расстояние между точкой входа луча в воду и точкой выхода луча из воды,
+    если показатель преломления воды $1{,}33$, а угол падения луча $30\degrees$.
+}
+\answer{%
+    \begin{align*}
+    \ctg \beta &= \frac{h}{d:L:s} \implies d = \frac{h}{\ctg \beta} \\
+    \frac 1{\sin^2 \beta} &= \ctg^2 \beta + 1 \implies \ctg \beta = \sqrt{\frac 1{\sin^2 \beta} - 1} \\
+    \sin\alpha &= n\sin \beta \implies \sin \beta = \frac{\sin\alpha}{n} \\
+    d &= \frac{h}{\sqrt{\frac 1{\sin^2 \beta} - 1}} = \frac{h}{\sqrt{\sqr{\frac{n}{\sin\alpha}} - 1}} \\
+    2d &= \frac{2{h}}{\sqrt{\sqr{\frac{n}{\sin\alpha}} - 1}} \approx 162{,}3\,\text{см}
+    \end{align*}
+}
+\solutionspace{120pt}
+
+\tasknumber{10}%
+\task{%
+    Установка для наблюдения интерференции состоит
+    из двух когерентных источников света и экрана.
+    Расстояние между источниками $l = 1{,}2\,\text{мм}$,
+    а от каждого источника до экрана — $L = 4\,\text{м}$.
+    Сделайте рисунок и укажите положение нулевого максимума освещенности,
+    а также определите расстояние между вторым минимумом и нулевым максимумом.
+    Длина волны падающего света составляет $\lambda = 400\,\text{нм}$.
+}
+\answer{%
+    \begin{align*}
+    l_1^2 &= L^2 + \sqr{x - \frac \ell 2} \\
+    l_2^2 &= L^2 + \sqr{x + \frac \ell 2} \\
+    l_2^2 - l_1^2 &= 2x\ell \implies (l_2 - l_1)(l_2 + l_1) = 2x\ell \implies n\lambda \cdot 2L \approx 2x_n\ell \implies x_n = \frac{\lambda L}{\ell} n, n\in \mathbb{N} \\
+    x &= \frac{\lambda L}{\ell} \cdot \frac32 = \frac{400\,\text{нм} \cdot 4\,\text{м}}{1{,}2\,\text{мм}} \cdot \frac32 \approx 2\,\text{мм}
+    \end{align*}
+}
+\solutionspace{120pt}
+
+\tasknumber{11}%
+\task{%
+    Высота солнца над горизонтом составляет $ 35 \degrees$.
+    Посреди ровного бетонного поля стоит одинокий цилиндрический столб высотой $5\,\text{м}$ и радиусом $4\,\text{см}$.
+    Определите площадь полной тени от этого столба на бетоне.
+    Угловой размер Солнца принять равным $30'$ и считать малым углом.
+}
+\answer{%
+    $\text{трапеция} \implies S = 0{,}84\,\text{м}^{2}$
 }
 
 \variantsplitter
@@ -326,6 +497,63 @@
 \answer{%
     $\cos \alpha = \frac{c^2 - \sqr{2a} - \sqr{2b}}{2 \cdot 2a \cdot 2b} \approx 0{,}501 \implies \alpha = 59{,}9\degrees$
 }
+\solutionspace{80pt}
+
+\tasknumber{8}%
+\task{%
+    Докажите, что тонкий клин с углом при вершине $\varphi$ из стекла с показателем преломления $n$
+        отклонит луч на угол $(n-1)\varphi$ (в приближении малых углов).
+}
+\solutionspace{150pt}
+
+\tasknumber{9}%
+\task{%
+    На дне водоема глубиной $2\,\text{м}$ лежит зеркало.
+    Луч света, пройдя через воду, отражается от зеркала и выходит из воды.
+    Найти расстояние между точкой входа луча в воду и точкой выхода луча из воды,
+    если показатель преломления воды $1{,}33$, а угол падения луча $25\degrees$.
+}
+\answer{%
+    \begin{align*}
+    \ctg \beta &= \frac{h}{d:L:s} \implies d = \frac{h}{\ctg \beta} \\
+    \frac 1{\sin^2 \beta} &= \ctg^2 \beta + 1 \implies \ctg \beta = \sqrt{\frac 1{\sin^2 \beta} - 1} \\
+    \sin\alpha &= n\sin \beta \implies \sin \beta = \frac{\sin\alpha}{n} \\
+    d &= \frac{h}{\sqrt{\frac 1{\sin^2 \beta} - 1}} = \frac{h}{\sqrt{\sqr{\frac{n}{\sin\alpha}} - 1}} \\
+    2d &= \frac{2{h}}{\sqrt{\sqr{\frac{n}{\sin\alpha}} - 1}} \approx 134{,}1\,\text{см}
+    \end{align*}
+}
+\solutionspace{120pt}
+
+\tasknumber{10}%
+\task{%
+    Установка для наблюдения интерференции состоит
+    из двух когерентных источников света и экрана.
+    Расстояние между источниками $l = 0{,}8\,\text{мм}$,
+    а от каждого источника до экрана — $L = 2\,\text{м}$.
+    Сделайте рисунок и укажите положение нулевого максимума освещенности,
+    а также определите расстояние между третьим минимумом и нулевым максимумом.
+    Длина волны падающего света составляет $\lambda = 600\,\text{нм}$.
+}
+\answer{%
+    \begin{align*}
+    l_1^2 &= L^2 + \sqr{x - \frac \ell 2} \\
+    l_2^2 &= L^2 + \sqr{x + \frac \ell 2} \\
+    l_2^2 - l_1^2 &= 2x\ell \implies (l_2 - l_1)(l_2 + l_1) = 2x\ell \implies n\lambda \cdot 2L \approx 2x_n\ell \implies x_n = \frac{\lambda L}{\ell} n, n\in \mathbb{N} \\
+    x &= \frac{\lambda L}{\ell} \cdot \frac52 = \frac{600\,\text{нм} \cdot 2\,\text{м}}{0{,}8\,\text{мм}} \cdot \frac52 \approx 3{,}8\,\text{мм}
+    \end{align*}
+}
+\solutionspace{120pt}
+
+\tasknumber{11}%
+\task{%
+    Высота солнца над горизонтом составляет $ 55 \degrees$.
+    Посреди ровного бетонного поля стоит одинокий цилиндрический столб высотой $7\,\text{м}$ и радиусом $10\,\text{см}$.
+    Определите площадь полной тени от этого столба на бетоне.
+    Угловой размер Солнца принять равным $30'$ и считать малым углом.
+}
+\answer{%
+    $\text{трапеция} \implies S = 1{,}16\,\text{м}^{2}$
+}
 
 \variantsplitter
 
@@ -407,6 +635,63 @@
 }
 \answer{%
     $\cos \alpha = \frac{c^2 - \sqr{2a} - \sqr{2b}}{2 \cdot 2a \cdot 2b} \approx 0{,}867 \implies \alpha = 29{,}9\degrees$
+}
+\solutionspace{80pt}
+
+\tasknumber{8}%
+\task{%
+    Докажите, что мнимое изображение точечного источника света под поверхностью воды из воздуха
+        видно на глубине в $n$ раз меньше его реальной глубины (в приближении малых углов).
+}
+\solutionspace{150pt}
+
+\tasknumber{9}%
+\task{%
+    На дне водоема глубиной $2\,\text{м}$ лежит зеркало.
+    Луч света, пройдя через воду, отражается от зеркала и выходит из воды.
+    Найти расстояние между точкой входа луча в воду и точкой выхода луча из воды,
+    если показатель преломления воды $1{,}33$, а угол падения луча $25\degrees$.
+}
+\answer{%
+    \begin{align*}
+    \ctg \beta &= \frac{h}{d:L:s} \implies d = \frac{h}{\ctg \beta} \\
+    \frac 1{\sin^2 \beta} &= \ctg^2 \beta + 1 \implies \ctg \beta = \sqrt{\frac 1{\sin^2 \beta} - 1} \\
+    \sin\alpha &= n\sin \beta \implies \sin \beta = \frac{\sin\alpha}{n} \\
+    d &= \frac{h}{\sqrt{\frac 1{\sin^2 \beta} - 1}} = \frac{h}{\sqrt{\sqr{\frac{n}{\sin\alpha}} - 1}} \\
+    2d &= \frac{2{h}}{\sqrt{\sqr{\frac{n}{\sin\alpha}} - 1}} \approx 134{,}1\,\text{см}
+    \end{align*}
+}
+\solutionspace{120pt}
+
+\tasknumber{10}%
+\task{%
+    Установка для наблюдения интерференции состоит
+    из двух когерентных источников света и экрана.
+    Расстояние между источниками $l = 1{,}2\,\text{мм}$,
+    а от каждого источника до экрана — $L = 4\,\text{м}$.
+    Сделайте рисунок и укажите положение нулевого максимума освещенности,
+    а также определите расстояние между третьим максимумом и нулевым максимумом.
+    Длина волны падающего света составляет $\lambda = 500\,\text{нм}$.
+}
+\answer{%
+    \begin{align*}
+    l_1^2 &= L^2 + \sqr{x - \frac \ell 2} \\
+    l_2^2 &= L^2 + \sqr{x + \frac \ell 2} \\
+    l_2^2 - l_1^2 &= 2x\ell \implies (l_2 - l_1)(l_2 + l_1) = 2x\ell \implies n\lambda \cdot 2L \approx 2x_n\ell \implies x_n = \frac{\lambda L}{\ell} n, n\in \mathbb{N} \\
+    x &= \frac{\lambda L}{\ell} \cdot 3 = \frac{500\,\text{нм} \cdot 4\,\text{м}}{1{,}2\,\text{мм}} \cdot 3 \approx 5{,}0\,\text{мм}
+    \end{align*}
+}
+\solutionspace{120pt}
+
+\tasknumber{11}%
+\task{%
+    Высота солнца над горизонтом составляет $ 50 \degrees$.
+    Посреди ровного бетонного поля стоит одинокий цилиндрический столб высотой $3\,\text{м}$ и радиусом $8\,\text{см}$.
+    Определите площадь полной тени от этого столба на бетоне.
+    Угловой размер Солнца принять равным $30'$ и считать малым углом.
+}
+\answer{%
+    $\text{трапеция} \implies S = 0{,}45\,\text{м}^{2}$
 }
 
 \variantsplitter
@@ -490,6 +775,63 @@
 \answer{%
     $\cos \alpha = \frac{c^2 - \sqr{2a} - \sqr{2b}}{2 \cdot 2a \cdot 2b} \approx 0{,}501 \implies \alpha = 60{,}0\degrees$
 }
+\solutionspace{80pt}
+
+\tasknumber{8}%
+\task{%
+    Докажите, что мнимое изображение точечного источника света под поверхностью воды из воздуха
+        видно на глубине в $n$ раз меньше его реальной глубины (в приближении малых углов).
+}
+\solutionspace{150pt}
+
+\tasknumber{9}%
+\task{%
+    На дне водоема глубиной $4\,\text{м}$ лежит зеркало.
+    Луч света, пройдя через воду, отражается от зеркала и выходит из воды.
+    Найти расстояние между точкой входа луча в воду и точкой выхода луча из воды,
+    если показатель преломления воды $1{,}33$, а угол падения луча $35\degrees$.
+}
+\answer{%
+    \begin{align*}
+    \ctg \beta &= \frac{h}{d:L:s} \implies d = \frac{h}{\ctg \beta} \\
+    \frac 1{\sin^2 \beta} &= \ctg^2 \beta + 1 \implies \ctg \beta = \sqrt{\frac 1{\sin^2 \beta} - 1} \\
+    \sin\alpha &= n\sin \beta \implies \sin \beta = \frac{\sin\alpha}{n} \\
+    d &= \frac{h}{\sqrt{\frac 1{\sin^2 \beta} - 1}} = \frac{h}{\sqrt{\sqr{\frac{n}{\sin\alpha}} - 1}} \\
+    2d &= \frac{2{h}}{\sqrt{\sqr{\frac{n}{\sin\alpha}} - 1}} \approx 382{,}4\,\text{см}
+    \end{align*}
+}
+\solutionspace{120pt}
+
+\tasknumber{10}%
+\task{%
+    Установка для наблюдения интерференции состоит
+    из двух когерентных источников света и экрана.
+    Расстояние между источниками $l = 2{,}4\,\text{мм}$,
+    а от каждого источника до экрана — $L = 4\,\text{м}$.
+    Сделайте рисунок и укажите положение нулевого максимума освещенности,
+    а также определите расстояние между третьим минимумом и нулевым максимумом.
+    Длина волны падающего света составляет $\lambda = 600\,\text{нм}$.
+}
+\answer{%
+    \begin{align*}
+    l_1^2 &= L^2 + \sqr{x - \frac \ell 2} \\
+    l_2^2 &= L^2 + \sqr{x + \frac \ell 2} \\
+    l_2^2 - l_1^2 &= 2x\ell \implies (l_2 - l_1)(l_2 + l_1) = 2x\ell \implies n\lambda \cdot 2L \approx 2x_n\ell \implies x_n = \frac{\lambda L}{\ell} n, n\in \mathbb{N} \\
+    x &= \frac{\lambda L}{\ell} \cdot \frac52 = \frac{600\,\text{нм} \cdot 4\,\text{м}}{2{,}4\,\text{мм}} \cdot \frac52 \approx 2{,}5\,\text{мм}
+    \end{align*}
+}
+\solutionspace{120pt}
+
+\tasknumber{11}%
+\task{%
+    Высота солнца над горизонтом составляет $ 40 \degrees$.
+    Посреди ровного бетонного поля стоит одинокий цилиндрический столб высотой $7\,\text{м}$ и радиусом $2\,\text{см}$.
+    Определите площадь полной тени от этого столба на бетоне.
+    Угловой размер Солнца принять равным $30'$ и считать малым углом.
+}
+\answer{%
+    $\text{треугольник} \implies S = 0{,}07\,\text{м}^{2}$
+}
 
 \variantsplitter
 
@@ -571,6 +913,63 @@
 }
 \answer{%
     $\cos \alpha = \frac{c^2 - \sqr{2a} - \sqr{2b}}{2 \cdot 2a \cdot 2b} \approx 0{,}707 \implies \alpha = 45{,}0\degrees$
+}
+\solutionspace{80pt}
+
+\tasknumber{8}%
+\task{%
+    Докажите, что мнимое изображение точечного источника света под поверхностью воды из воздуха
+        видно на глубине в $n$ раз меньше его реальной глубины (в приближении малых углов).
+}
+\solutionspace{150pt}
+
+\tasknumber{9}%
+\task{%
+    На дне водоема глубиной $2\,\text{м}$ лежит зеркало.
+    Луч света, пройдя через воду, отражается от зеркала и выходит из воды.
+    Найти расстояние между точкой входа луча в воду и точкой выхода луча из воды,
+    если показатель преломления воды $1{,}33$, а угол падения луча $30\degrees$.
+}
+\answer{%
+    \begin{align*}
+    \ctg \beta &= \frac{h}{d:L:s} \implies d = \frac{h}{\ctg \beta} \\
+    \frac 1{\sin^2 \beta} &= \ctg^2 \beta + 1 \implies \ctg \beta = \sqrt{\frac 1{\sin^2 \beta} - 1} \\
+    \sin\alpha &= n\sin \beta \implies \sin \beta = \frac{\sin\alpha}{n} \\
+    d &= \frac{h}{\sqrt{\frac 1{\sin^2 \beta} - 1}} = \frac{h}{\sqrt{\sqr{\frac{n}{\sin\alpha}} - 1}} \\
+    2d &= \frac{2{h}}{\sqrt{\sqr{\frac{n}{\sin\alpha}} - 1}} \approx 162{,}3\,\text{см}
+    \end{align*}
+}
+\solutionspace{120pt}
+
+\tasknumber{10}%
+\task{%
+    Установка для наблюдения интерференции состоит
+    из двух когерентных источников света и экрана.
+    Расстояние между источниками $l = 1{,}2\,\text{мм}$,
+    а от каждого источника до экрана — $L = 4\,\text{м}$.
+    Сделайте рисунок и укажите положение нулевого максимума освещенности,
+    а также определите расстояние между третьим максимумом и нулевым максимумом.
+    Длина волны падающего света составляет $\lambda = 450\,\text{нм}$.
+}
+\answer{%
+    \begin{align*}
+    l_1^2 &= L^2 + \sqr{x - \frac \ell 2} \\
+    l_2^2 &= L^2 + \sqr{x + \frac \ell 2} \\
+    l_2^2 - l_1^2 &= 2x\ell \implies (l_2 - l_1)(l_2 + l_1) = 2x\ell \implies n\lambda \cdot 2L \approx 2x_n\ell \implies x_n = \frac{\lambda L}{\ell} n, n\in \mathbb{N} \\
+    x &= \frac{\lambda L}{\ell} \cdot 3 = \frac{450\,\text{нм} \cdot 4\,\text{м}}{1{,}2\,\text{мм}} \cdot 3 \approx 4{,}5\,\text{мм}
+    \end{align*}
+}
+\solutionspace{120pt}
+
+\tasknumber{11}%
+\task{%
+    Высота солнца над горизонтом составляет $ 55 \degrees$.
+    Посреди ровного бетонного поля стоит одинокий цилиндрический столб высотой $5\,\text{м}$ и радиусом $8\,\text{см}$.
+    Определите площадь полной тени от этого столба на бетоне.
+    Угловой размер Солнца принять равным $30'$ и считать малым углом.
+}
+\answer{%
+    $\text{трапеция} \implies S = 0{,}65\,\text{м}^{2}$
 }
 
 \variantsplitter
@@ -654,6 +1053,63 @@
 \answer{%
     $\cos \alpha = \frac{c^2 - \sqr{2a} - \sqr{2b}}{2 \cdot 2a \cdot 2b} \approx 0{,}501 \implies \alpha = 59{,}9\degrees$
 }
+\solutionspace{80pt}
+
+\tasknumber{8}%
+\task{%
+    Докажите, что тонкий клин с углом при вершине $\varphi$ из стекла с показателем преломления $n$
+        отклонит луч на угол $(n-1)\varphi$ (в приближении малых углов).
+}
+\solutionspace{150pt}
+
+\tasknumber{9}%
+\task{%
+    На дне водоема глубиной $3\,\text{м}$ лежит зеркало.
+    Луч света, пройдя через воду, отражается от зеркала и выходит из воды.
+    Найти расстояние между точкой входа луча в воду и точкой выхода луча из воды,
+    если показатель преломления воды $1{,}33$, а угол падения луча $35\degrees$.
+}
+\answer{%
+    \begin{align*}
+    \ctg \beta &= \frac{h}{d:L:s} \implies d = \frac{h}{\ctg \beta} \\
+    \frac 1{\sin^2 \beta} &= \ctg^2 \beta + 1 \implies \ctg \beta = \sqrt{\frac 1{\sin^2 \beta} - 1} \\
+    \sin\alpha &= n\sin \beta \implies \sin \beta = \frac{\sin\alpha}{n} \\
+    d &= \frac{h}{\sqrt{\frac 1{\sin^2 \beta} - 1}} = \frac{h}{\sqrt{\sqr{\frac{n}{\sin\alpha}} - 1}} \\
+    2d &= \frac{2{h}}{\sqrt{\sqr{\frac{n}{\sin\alpha}} - 1}} \approx 286{,}8\,\text{см}
+    \end{align*}
+}
+\solutionspace{120pt}
+
+\tasknumber{10}%
+\task{%
+    Установка для наблюдения интерференции состоит
+    из двух когерентных источников света и экрана.
+    Расстояние между источниками $l = 1{,}5\,\text{мм}$,
+    а от каждого источника до экрана — $L = 3\,\text{м}$.
+    Сделайте рисунок и укажите положение нулевого максимума освещенности,
+    а также определите расстояние между третьим максимумом и нулевым максимумом.
+    Длина волны падающего света составляет $\lambda = 500\,\text{нм}$.
+}
+\answer{%
+    \begin{align*}
+    l_1^2 &= L^2 + \sqr{x - \frac \ell 2} \\
+    l_2^2 &= L^2 + \sqr{x + \frac \ell 2} \\
+    l_2^2 - l_1^2 &= 2x\ell \implies (l_2 - l_1)(l_2 + l_1) = 2x\ell \implies n\lambda \cdot 2L \approx 2x_n\ell \implies x_n = \frac{\lambda L}{\ell} n, n\in \mathbb{N} \\
+    x &= \frac{\lambda L}{\ell} \cdot 3 = \frac{500\,\text{нм} \cdot 3\,\text{м}}{1{,}5\,\text{мм}} \cdot 3 \approx 3\,\text{мм}
+    \end{align*}
+}
+\solutionspace{120pt}
+
+\tasknumber{11}%
+\task{%
+    Высота солнца над горизонтом составляет $ 55 \degrees$.
+    Посреди ровного бетонного поля стоит одинокий цилиндрический столб высотой $7\,\text{м}$ и радиусом $10\,\text{см}$.
+    Определите площадь полной тени от этого столба на бетоне.
+    Угловой размер Солнца принять равным $30'$ и считать малым углом.
+}
+\answer{%
+    $\text{трапеция} \implies S = 1{,}16\,\text{м}^{2}$
+}
 
 \variantsplitter
 
@@ -735,6 +1191,63 @@
 }
 \answer{%
     $\cos \alpha = \frac{c^2 - \sqr{2a} - \sqr{2b}}{2 \cdot 2a \cdot 2b} \approx 0{,}867 \implies \alpha = 29{,}9\degrees$
+}
+\solutionspace{80pt}
+
+\tasknumber{8}%
+\task{%
+    Докажите, что мнимое изображение точечного источника света под поверхностью воды из воздуха
+        видно на глубине в $n$ раз меньше его реальной глубины (в приближении малых углов).
+}
+\solutionspace{150pt}
+
+\tasknumber{9}%
+\task{%
+    На дне водоема глубиной $3\,\text{м}$ лежит зеркало.
+    Луч света, пройдя через воду, отражается от зеркала и выходит из воды.
+    Найти расстояние между точкой входа луча в воду и точкой выхода луча из воды,
+    если показатель преломления воды $1{,}33$, а угол падения луча $25\degrees$.
+}
+\answer{%
+    \begin{align*}
+    \ctg \beta &= \frac{h}{d:L:s} \implies d = \frac{h}{\ctg \beta} \\
+    \frac 1{\sin^2 \beta} &= \ctg^2 \beta + 1 \implies \ctg \beta = \sqrt{\frac 1{\sin^2 \beta} - 1} \\
+    \sin\alpha &= n\sin \beta \implies \sin \beta = \frac{\sin\alpha}{n} \\
+    d &= \frac{h}{\sqrt{\frac 1{\sin^2 \beta} - 1}} = \frac{h}{\sqrt{\sqr{\frac{n}{\sin\alpha}} - 1}} \\
+    2d &= \frac{2{h}}{\sqrt{\sqr{\frac{n}{\sin\alpha}} - 1}} \approx 201{,}1\,\text{см}
+    \end{align*}
+}
+\solutionspace{120pt}
+
+\tasknumber{10}%
+\task{%
+    Установка для наблюдения интерференции состоит
+    из двух когерентных источников света и экрана.
+    Расстояние между источниками $l = 1{,}2\,\text{мм}$,
+    а от каждого источника до экрана — $L = 2\,\text{м}$.
+    Сделайте рисунок и укажите положение нулевого максимума освещенности,
+    а также определите расстояние между вторым максимумом и нулевым максимумом.
+    Длина волны падающего света составляет $\lambda = 550\,\text{нм}$.
+}
+\answer{%
+    \begin{align*}
+    l_1^2 &= L^2 + \sqr{x - \frac \ell 2} \\
+    l_2^2 &= L^2 + \sqr{x + \frac \ell 2} \\
+    l_2^2 - l_1^2 &= 2x\ell \implies (l_2 - l_1)(l_2 + l_1) = 2x\ell \implies n\lambda \cdot 2L \approx 2x_n\ell \implies x_n = \frac{\lambda L}{\ell} n, n\in \mathbb{N} \\
+    x &= \frac{\lambda L}{\ell} \cdot 2 = \frac{550\,\text{нм} \cdot 2\,\text{м}}{1{,}2\,\text{мм}} \cdot 2 \approx 1{,}83\,\text{мм}
+    \end{align*}
+}
+\solutionspace{120pt}
+
+\tasknumber{11}%
+\task{%
+    Высота солнца над горизонтом составляет $ 40 \degrees$.
+    Посреди ровного бетонного поля стоит одинокий цилиндрический столб высотой $5\,\text{м}$ и радиусом $2\,\text{см}$.
+    Определите площадь полной тени от этого столба на бетоне.
+    Угловой размер Солнца принять равным $30'$ и считать малым углом.
+}
+\answer{%
+    $\text{треугольник} \implies S = 0{,}07\,\text{м}^{2}$
 }
 
 \variantsplitter
@@ -818,6 +1331,63 @@
 \answer{%
     $\cos \alpha = \frac{c^2 - \sqr{2a} - \sqr{2b}}{2 \cdot 2a \cdot 2b} \approx 0{,}707 \implies \alpha = 45{,}0\degrees$
 }
+\solutionspace{80pt}
+
+\tasknumber{8}%
+\task{%
+    Докажите, что мнимое изображение точечного источника света под поверхностью воды из воздуха
+        видно на глубине в $n$ раз меньше его реальной глубины (в приближении малых углов).
+}
+\solutionspace{150pt}
+
+\tasknumber{9}%
+\task{%
+    На дне водоема глубиной $4\,\text{м}$ лежит зеркало.
+    Луч света, пройдя через воду, отражается от зеркала и выходит из воды.
+    Найти расстояние между точкой входа луча в воду и точкой выхода луча из воды,
+    если показатель преломления воды $1{,}33$, а угол падения луча $25\degrees$.
+}
+\answer{%
+    \begin{align*}
+    \ctg \beta &= \frac{h}{d:L:s} \implies d = \frac{h}{\ctg \beta} \\
+    \frac 1{\sin^2 \beta} &= \ctg^2 \beta + 1 \implies \ctg \beta = \sqrt{\frac 1{\sin^2 \beta} - 1} \\
+    \sin\alpha &= n\sin \beta \implies \sin \beta = \frac{\sin\alpha}{n} \\
+    d &= \frac{h}{\sqrt{\frac 1{\sin^2 \beta} - 1}} = \frac{h}{\sqrt{\sqr{\frac{n}{\sin\alpha}} - 1}} \\
+    2d &= \frac{2{h}}{\sqrt{\sqr{\frac{n}{\sin\alpha}} - 1}} \approx 268{,}1\,\text{см}
+    \end{align*}
+}
+\solutionspace{120pt}
+
+\tasknumber{10}%
+\task{%
+    Установка для наблюдения интерференции состоит
+    из двух когерентных источников света и экрана.
+    Расстояние между источниками $l = 2{,}4\,\text{мм}$,
+    а от каждого источника до экрана — $L = 3\,\text{м}$.
+    Сделайте рисунок и укажите положение нулевого максимума освещенности,
+    а также определите расстояние между третьим максимумом и нулевым максимумом.
+    Длина волны падающего света составляет $\lambda = 400\,\text{нм}$.
+}
+\answer{%
+    \begin{align*}
+    l_1^2 &= L^2 + \sqr{x - \frac \ell 2} \\
+    l_2^2 &= L^2 + \sqr{x + \frac \ell 2} \\
+    l_2^2 - l_1^2 &= 2x\ell \implies (l_2 - l_1)(l_2 + l_1) = 2x\ell \implies n\lambda \cdot 2L \approx 2x_n\ell \implies x_n = \frac{\lambda L}{\ell} n, n\in \mathbb{N} \\
+    x &= \frac{\lambda L}{\ell} \cdot 3 = \frac{400\,\text{нм} \cdot 3\,\text{м}}{2{,}4\,\text{мм}} \cdot 3 \approx 1{,}50\,\text{мм}
+    \end{align*}
+}
+\solutionspace{120pt}
+
+\tasknumber{11}%
+\task{%
+    Высота солнца над горизонтом составляет $ 35 \degrees$.
+    Посреди ровного бетонного поля стоит одинокий цилиндрический столб высотой $7\,\text{м}$ и радиусом $8\,\text{см}$.
+    Определите площадь полной тени от этого столба на бетоне.
+    Угловой размер Солнца принять равным $30'$ и считать малым углом.
+}
+\answer{%
+    $\text{трапеция} \implies S = 2{,}13\,\text{м}^{2}$
+}
 
 \variantsplitter
 
@@ -899,6 +1469,63 @@
 }
 \answer{%
     $\cos \alpha = \frac{c^2 - \sqr{2a} - \sqr{2b}}{2 \cdot 2a \cdot 2b} \approx 0{,}865 \implies \alpha = 30{,}1\degrees$
+}
+\solutionspace{80pt}
+
+\tasknumber{8}%
+\task{%
+    Докажите, что тонкий клин с углом при вершине $\varphi$ из стекла с показателем преломления $n$
+        отклонит луч на угол $(n-1)\varphi$ (в приближении малых углов).
+}
+\solutionspace{150pt}
+
+\tasknumber{9}%
+\task{%
+    На дне водоема глубиной $4\,\text{м}$ лежит зеркало.
+    Луч света, пройдя через воду, отражается от зеркала и выходит из воды.
+    Найти расстояние между точкой входа луча в воду и точкой выхода луча из воды,
+    если показатель преломления воды $1{,}33$, а угол падения луча $35\degrees$.
+}
+\answer{%
+    \begin{align*}
+    \ctg \beta &= \frac{h}{d:L:s} \implies d = \frac{h}{\ctg \beta} \\
+    \frac 1{\sin^2 \beta} &= \ctg^2 \beta + 1 \implies \ctg \beta = \sqrt{\frac 1{\sin^2 \beta} - 1} \\
+    \sin\alpha &= n\sin \beta \implies \sin \beta = \frac{\sin\alpha}{n} \\
+    d &= \frac{h}{\sqrt{\frac 1{\sin^2 \beta} - 1}} = \frac{h}{\sqrt{\sqr{\frac{n}{\sin\alpha}} - 1}} \\
+    2d &= \frac{2{h}}{\sqrt{\sqr{\frac{n}{\sin\alpha}} - 1}} \approx 382{,}4\,\text{см}
+    \end{align*}
+}
+\solutionspace{120pt}
+
+\tasknumber{10}%
+\task{%
+    Установка для наблюдения интерференции состоит
+    из двух когерентных источников света и экрана.
+    Расстояние между источниками $l = 1{,}2\,\text{мм}$,
+    а от каждого источника до экрана — $L = 3\,\text{м}$.
+    Сделайте рисунок и укажите положение нулевого максимума освещенности,
+    а также определите расстояние между четвёртым минимумом и нулевым максимумом.
+    Длина волны падающего света составляет $\lambda = 550\,\text{нм}$.
+}
+\answer{%
+    \begin{align*}
+    l_1^2 &= L^2 + \sqr{x - \frac \ell 2} \\
+    l_2^2 &= L^2 + \sqr{x + \frac \ell 2} \\
+    l_2^2 - l_1^2 &= 2x\ell \implies (l_2 - l_1)(l_2 + l_1) = 2x\ell \implies n\lambda \cdot 2L \approx 2x_n\ell \implies x_n = \frac{\lambda L}{\ell} n, n\in \mathbb{N} \\
+    x &= \frac{\lambda L}{\ell} \cdot \frac72 = \frac{550\,\text{нм} \cdot 3\,\text{м}}{1{,}2\,\text{мм}} \cdot \frac72 \approx 4{,}8\,\text{мм}
+    \end{align*}
+}
+\solutionspace{120pt}
+
+\tasknumber{11}%
+\task{%
+    Высота солнца над горизонтом составляет $ 40 \degrees$.
+    Посреди ровного бетонного поля стоит одинокий цилиндрический столб высотой $3\,\text{м}$ и радиусом $8\,\text{см}$.
+    Определите площадь полной тени от этого столба на бетоне.
+    Угловой размер Солнца принять равным $30'$ и считать малым углом.
+}
+\answer{%
+    $\text{трапеция} \implies S = 0{,}64\,\text{м}^{2}$
 }
 
 \variantsplitter
@@ -982,6 +1609,63 @@
 \answer{%
     $\cos \alpha = \frac{c^2 - \sqr{2a} - \sqr{2b}}{2 \cdot 2a \cdot 2b} \approx 0{,}867 \implies \alpha = 29{,}9\degrees$
 }
+\solutionspace{80pt}
+
+\tasknumber{8}%
+\task{%
+    Докажите, что мнимое изображение точечного источника света под поверхностью воды из воздуха
+        видно на глубине в $n$ раз меньше его реальной глубины (в приближении малых углов).
+}
+\solutionspace{150pt}
+
+\tasknumber{9}%
+\task{%
+    На дне водоема глубиной $4\,\text{м}$ лежит зеркало.
+    Луч света, пройдя через воду, отражается от зеркала и выходит из воды.
+    Найти расстояние между точкой входа луча в воду и точкой выхода луча из воды,
+    если показатель преломления воды $1{,}33$, а угол падения луча $30\degrees$.
+}
+\answer{%
+    \begin{align*}
+    \ctg \beta &= \frac{h}{d:L:s} \implies d = \frac{h}{\ctg \beta} \\
+    \frac 1{\sin^2 \beta} &= \ctg^2 \beta + 1 \implies \ctg \beta = \sqrt{\frac 1{\sin^2 \beta} - 1} \\
+    \sin\alpha &= n\sin \beta \implies \sin \beta = \frac{\sin\alpha}{n} \\
+    d &= \frac{h}{\sqrt{\frac 1{\sin^2 \beta} - 1}} = \frac{h}{\sqrt{\sqr{\frac{n}{\sin\alpha}} - 1}} \\
+    2d &= \frac{2{h}}{\sqrt{\sqr{\frac{n}{\sin\alpha}} - 1}} \approx 324{,}6\,\text{см}
+    \end{align*}
+}
+\solutionspace{120pt}
+
+\tasknumber{10}%
+\task{%
+    Установка для наблюдения интерференции состоит
+    из двух когерентных источников света и экрана.
+    Расстояние между источниками $l = 1{,}5\,\text{мм}$,
+    а от каждого источника до экрана — $L = 3\,\text{м}$.
+    Сделайте рисунок и укажите положение нулевого максимума освещенности,
+    а также определите расстояние между третьим минимумом и нулевым максимумом.
+    Длина волны падающего света составляет $\lambda = 450\,\text{нм}$.
+}
+\answer{%
+    \begin{align*}
+    l_1^2 &= L^2 + \sqr{x - \frac \ell 2} \\
+    l_2^2 &= L^2 + \sqr{x + \frac \ell 2} \\
+    l_2^2 - l_1^2 &= 2x\ell \implies (l_2 - l_1)(l_2 + l_1) = 2x\ell \implies n\lambda \cdot 2L \approx 2x_n\ell \implies x_n = \frac{\lambda L}{\ell} n, n\in \mathbb{N} \\
+    x &= \frac{\lambda L}{\ell} \cdot \frac52 = \frac{450\,\text{нм} \cdot 3\,\text{м}}{1{,}5\,\text{мм}} \cdot \frac52 \approx 2{,}3\,\text{мм}
+    \end{align*}
+}
+\solutionspace{120pt}
+
+\tasknumber{11}%
+\task{%
+    Высота солнца над горизонтом составляет $ 35 \degrees$.
+    Посреди ровного бетонного поля стоит одинокий цилиндрический столб высотой $5\,\text{м}$ и радиусом $10\,\text{см}$.
+    Определите площадь полной тени от этого столба на бетоне.
+    Угловой размер Солнца принять равным $30'$ и считать малым углом.
+}
+\answer{%
+    $\text{трапеция} \implies S = 1{,}70\,\text{м}^{2}$
+}
 
 \variantsplitter
 
@@ -1063,6 +1747,63 @@
 }
 \answer{%
     $\cos \alpha = \frac{c^2 - \sqr{2a} - \sqr{2b}}{2 \cdot 2a \cdot 2b} \approx 0{,}707 \implies \alpha = 45{,}0\degrees$
+}
+\solutionspace{80pt}
+
+\tasknumber{8}%
+\task{%
+    Докажите, что тонкий клин с углом при вершине $\varphi$ из стекла с показателем преломления $n$
+        отклонит луч на угол $(n-1)\varphi$ (в приближении малых углов).
+}
+\solutionspace{150pt}
+
+\tasknumber{9}%
+\task{%
+    На дне водоема глубиной $2\,\text{м}$ лежит зеркало.
+    Луч света, пройдя через воду, отражается от зеркала и выходит из воды.
+    Найти расстояние между точкой входа луча в воду и точкой выхода луча из воды,
+    если показатель преломления воды $1{,}33$, а угол падения луча $25\degrees$.
+}
+\answer{%
+    \begin{align*}
+    \ctg \beta &= \frac{h}{d:L:s} \implies d = \frac{h}{\ctg \beta} \\
+    \frac 1{\sin^2 \beta} &= \ctg^2 \beta + 1 \implies \ctg \beta = \sqrt{\frac 1{\sin^2 \beta} - 1} \\
+    \sin\alpha &= n\sin \beta \implies \sin \beta = \frac{\sin\alpha}{n} \\
+    d &= \frac{h}{\sqrt{\frac 1{\sin^2 \beta} - 1}} = \frac{h}{\sqrt{\sqr{\frac{n}{\sin\alpha}} - 1}} \\
+    2d &= \frac{2{h}}{\sqrt{\sqr{\frac{n}{\sin\alpha}} - 1}} \approx 134{,}1\,\text{см}
+    \end{align*}
+}
+\solutionspace{120pt}
+
+\tasknumber{10}%
+\task{%
+    Установка для наблюдения интерференции состоит
+    из двух когерентных источников света и экрана.
+    Расстояние между источниками $l = 2{,}4\,\text{мм}$,
+    а от каждого источника до экрана — $L = 2\,\text{м}$.
+    Сделайте рисунок и укажите положение нулевого максимума освещенности,
+    а также определите расстояние между четвёртым максимумом и нулевым максимумом.
+    Длина волны падающего света составляет $\lambda = 400\,\text{нм}$.
+}
+\answer{%
+    \begin{align*}
+    l_1^2 &= L^2 + \sqr{x - \frac \ell 2} \\
+    l_2^2 &= L^2 + \sqr{x + \frac \ell 2} \\
+    l_2^2 - l_1^2 &= 2x\ell \implies (l_2 - l_1)(l_2 + l_1) = 2x\ell \implies n\lambda \cdot 2L \approx 2x_n\ell \implies x_n = \frac{\lambda L}{\ell} n, n\in \mathbb{N} \\
+    x &= \frac{\lambda L}{\ell} \cdot 4 = \frac{400\,\text{нм} \cdot 2\,\text{м}}{2{,}4\,\text{мм}} \cdot 4 \approx 1{,}33\,\text{мм}
+    \end{align*}
+}
+\solutionspace{120pt}
+
+\tasknumber{11}%
+\task{%
+    Высота солнца над горизонтом составляет $ 40 \degrees$.
+    Посреди ровного бетонного поля стоит одинокий цилиндрический столб высотой $3\,\text{м}$ и радиусом $2\,\text{см}$.
+    Определите площадь полной тени от этого столба на бетоне.
+    Угловой размер Солнца принять равным $30'$ и считать малым углом.
+}
+\answer{%
+    $\text{треугольник} \implies S = 0{,}07\,\text{м}^{2}$
 }
 
 \variantsplitter
@@ -1146,6 +1887,63 @@
 \answer{%
     $\cos \alpha = \frac{c^2 - \sqr{2a} - \sqr{2b}}{2 \cdot 2a \cdot 2b} \approx 0{,}501 \implies \alpha = 60{,}0\degrees$
 }
+\solutionspace{80pt}
+
+\tasknumber{8}%
+\task{%
+    Докажите, что тонкий клин с углом при вершине $\varphi$ из стекла с показателем преломления $n$
+        отклонит луч на угол $(n-1)\varphi$ (в приближении малых углов).
+}
+\solutionspace{150pt}
+
+\tasknumber{9}%
+\task{%
+    На дне водоема глубиной $2\,\text{м}$ лежит зеркало.
+    Луч света, пройдя через воду, отражается от зеркала и выходит из воды.
+    Найти расстояние между точкой входа луча в воду и точкой выхода луча из воды,
+    если показатель преломления воды $1{,}33$, а угол падения луча $25\degrees$.
+}
+\answer{%
+    \begin{align*}
+    \ctg \beta &= \frac{h}{d:L:s} \implies d = \frac{h}{\ctg \beta} \\
+    \frac 1{\sin^2 \beta} &= \ctg^2 \beta + 1 \implies \ctg \beta = \sqrt{\frac 1{\sin^2 \beta} - 1} \\
+    \sin\alpha &= n\sin \beta \implies \sin \beta = \frac{\sin\alpha}{n} \\
+    d &= \frac{h}{\sqrt{\frac 1{\sin^2 \beta} - 1}} = \frac{h}{\sqrt{\sqr{\frac{n}{\sin\alpha}} - 1}} \\
+    2d &= \frac{2{h}}{\sqrt{\sqr{\frac{n}{\sin\alpha}} - 1}} \approx 134{,}1\,\text{см}
+    \end{align*}
+}
+\solutionspace{120pt}
+
+\tasknumber{10}%
+\task{%
+    Установка для наблюдения интерференции состоит
+    из двух когерентных источников света и экрана.
+    Расстояние между источниками $l = 1{,}2\,\text{мм}$,
+    а от каждого источника до экрана — $L = 4\,\text{м}$.
+    Сделайте рисунок и укажите положение нулевого максимума освещенности,
+    а также определите расстояние между вторым минимумом и нулевым максимумом.
+    Длина волны падающего света составляет $\lambda = 400\,\text{нм}$.
+}
+\answer{%
+    \begin{align*}
+    l_1^2 &= L^2 + \sqr{x - \frac \ell 2} \\
+    l_2^2 &= L^2 + \sqr{x + \frac \ell 2} \\
+    l_2^2 - l_1^2 &= 2x\ell \implies (l_2 - l_1)(l_2 + l_1) = 2x\ell \implies n\lambda \cdot 2L \approx 2x_n\ell \implies x_n = \frac{\lambda L}{\ell} n, n\in \mathbb{N} \\
+    x &= \frac{\lambda L}{\ell} \cdot \frac32 = \frac{400\,\text{нм} \cdot 4\,\text{м}}{1{,}2\,\text{мм}} \cdot \frac32 \approx 2\,\text{мм}
+    \end{align*}
+}
+\solutionspace{120pt}
+
+\tasknumber{11}%
+\task{%
+    Высота солнца над горизонтом составляет $ 55 \degrees$.
+    Посреди ровного бетонного поля стоит одинокий цилиндрический столб высотой $3\,\text{м}$ и радиусом $8\,\text{см}$.
+    Определите площадь полной тени от этого столба на бетоне.
+    Угловой размер Солнца принять равным $30'$ и считать малым углом.
+}
+\answer{%
+    $\text{трапеция} \implies S = 0{,}37\,\text{м}^{2}$
+}
 
 \variantsplitter
 
@@ -1227,6 +2025,63 @@
 }
 \answer{%
     $\cos \alpha = \frac{c^2 - \sqr{2a} - \sqr{2b}}{2 \cdot 2a \cdot 2b} \approx 0{,}865 \implies \alpha = 30{,}1\degrees$
+}
+\solutionspace{80pt}
+
+\tasknumber{8}%
+\task{%
+    Докажите, что мнимое изображение точечного источника света под поверхностью воды из воздуха
+        видно на глубине в $n$ раз меньше его реальной глубины (в приближении малых углов).
+}
+\solutionspace{150pt}
+
+\tasknumber{9}%
+\task{%
+    На дне водоема глубиной $2\,\text{м}$ лежит зеркало.
+    Луч света, пройдя через воду, отражается от зеркала и выходит из воды.
+    Найти расстояние между точкой входа луча в воду и точкой выхода луча из воды,
+    если показатель преломления воды $1{,}33$, а угол падения луча $25\degrees$.
+}
+\answer{%
+    \begin{align*}
+    \ctg \beta &= \frac{h}{d:L:s} \implies d = \frac{h}{\ctg \beta} \\
+    \frac 1{\sin^2 \beta} &= \ctg^2 \beta + 1 \implies \ctg \beta = \sqrt{\frac 1{\sin^2 \beta} - 1} \\
+    \sin\alpha &= n\sin \beta \implies \sin \beta = \frac{\sin\alpha}{n} \\
+    d &= \frac{h}{\sqrt{\frac 1{\sin^2 \beta} - 1}} = \frac{h}{\sqrt{\sqr{\frac{n}{\sin\alpha}} - 1}} \\
+    2d &= \frac{2{h}}{\sqrt{\sqr{\frac{n}{\sin\alpha}} - 1}} \approx 134{,}1\,\text{см}
+    \end{align*}
+}
+\solutionspace{120pt}
+
+\tasknumber{10}%
+\task{%
+    Установка для наблюдения интерференции состоит
+    из двух когерентных источников света и экрана.
+    Расстояние между источниками $l = 1{,}5\,\text{мм}$,
+    а от каждого источника до экрана — $L = 3\,\text{м}$.
+    Сделайте рисунок и укажите положение нулевого максимума освещенности,
+    а также определите расстояние между третьим максимумом и нулевым максимумом.
+    Длина волны падающего света составляет $\lambda = 450\,\text{нм}$.
+}
+\answer{%
+    \begin{align*}
+    l_1^2 &= L^2 + \sqr{x - \frac \ell 2} \\
+    l_2^2 &= L^2 + \sqr{x + \frac \ell 2} \\
+    l_2^2 - l_1^2 &= 2x\ell \implies (l_2 - l_1)(l_2 + l_1) = 2x\ell \implies n\lambda \cdot 2L \approx 2x_n\ell \implies x_n = \frac{\lambda L}{\ell} n, n\in \mathbb{N} \\
+    x &= \frac{\lambda L}{\ell} \cdot 3 = \frac{450\,\text{нм} \cdot 3\,\text{м}}{1{,}5\,\text{мм}} \cdot 3 \approx 2{,}7\,\text{мм}
+    \end{align*}
+}
+\solutionspace{120pt}
+
+\tasknumber{11}%
+\task{%
+    Высота солнца над горизонтом составляет $ 40 \degrees$.
+    Посреди ровного бетонного поля стоит одинокий цилиндрический столб высотой $7\,\text{м}$ и радиусом $2\,\text{см}$.
+    Определите площадь полной тени от этого столба на бетоне.
+    Угловой размер Солнца принять равным $30'$ и считать малым углом.
+}
+\answer{%
+    $\text{треугольник} \implies S = 0{,}07\,\text{м}^{2}$
 }
 
 \variantsplitter
@@ -1310,6 +2165,63 @@
 \answer{%
     $\cos \alpha = \frac{c^2 - \sqr{2a} - \sqr{2b}}{2 \cdot 2a \cdot 2b} \approx 0{,}501 \implies \alpha = 59{,}9\degrees$
 }
+\solutionspace{80pt}
+
+\tasknumber{8}%
+\task{%
+    Докажите, что мнимое изображение точечного источника света под поверхностью воды из воздуха
+        видно на глубине в $n$ раз меньше его реальной глубины (в приближении малых углов).
+}
+\solutionspace{150pt}
+
+\tasknumber{9}%
+\task{%
+    На дне водоема глубиной $3\,\text{м}$ лежит зеркало.
+    Луч света, пройдя через воду, отражается от зеркала и выходит из воды.
+    Найти расстояние между точкой входа луча в воду и точкой выхода луча из воды,
+    если показатель преломления воды $1{,}33$, а угол падения луча $30\degrees$.
+}
+\answer{%
+    \begin{align*}
+    \ctg \beta &= \frac{h}{d:L:s} \implies d = \frac{h}{\ctg \beta} \\
+    \frac 1{\sin^2 \beta} &= \ctg^2 \beta + 1 \implies \ctg \beta = \sqrt{\frac 1{\sin^2 \beta} - 1} \\
+    \sin\alpha &= n\sin \beta \implies \sin \beta = \frac{\sin\alpha}{n} \\
+    d &= \frac{h}{\sqrt{\frac 1{\sin^2 \beta} - 1}} = \frac{h}{\sqrt{\sqr{\frac{n}{\sin\alpha}} - 1}} \\
+    2d &= \frac{2{h}}{\sqrt{\sqr{\frac{n}{\sin\alpha}} - 1}} \approx 243{,}4\,\text{см}
+    \end{align*}
+}
+\solutionspace{120pt}
+
+\tasknumber{10}%
+\task{%
+    Установка для наблюдения интерференции состоит
+    из двух когерентных источников света и экрана.
+    Расстояние между источниками $l = 1{,}5\,\text{мм}$,
+    а от каждого источника до экрана — $L = 3\,\text{м}$.
+    Сделайте рисунок и укажите положение нулевого максимума освещенности,
+    а также определите расстояние между вторым минимумом и нулевым максимумом.
+    Длина волны падающего света составляет $\lambda = 450\,\text{нм}$.
+}
+\answer{%
+    \begin{align*}
+    l_1^2 &= L^2 + \sqr{x - \frac \ell 2} \\
+    l_2^2 &= L^2 + \sqr{x + \frac \ell 2} \\
+    l_2^2 - l_1^2 &= 2x\ell \implies (l_2 - l_1)(l_2 + l_1) = 2x\ell \implies n\lambda \cdot 2L \approx 2x_n\ell \implies x_n = \frac{\lambda L}{\ell} n, n\in \mathbb{N} \\
+    x &= \frac{\lambda L}{\ell} \cdot \frac32 = \frac{450\,\text{нм} \cdot 3\,\text{м}}{1{,}5\,\text{мм}} \cdot \frac32 \approx 1{,}35\,\text{мм}
+    \end{align*}
+}
+\solutionspace{120pt}
+
+\tasknumber{11}%
+\task{%
+    Высота солнца над горизонтом составляет $ 35 \degrees$.
+    Посреди ровного бетонного поля стоит одинокий цилиндрический столб высотой $7\,\text{м}$ и радиусом $8\,\text{см}$.
+    Определите площадь полной тени от этого столба на бетоне.
+    Угловой размер Солнца принять равным $30'$ и считать малым углом.
+}
+\answer{%
+    $\text{трапеция} \implies S = 2{,}13\,\text{м}^{2}$
+}
 
 \variantsplitter
 
@@ -1391,6 +2303,63 @@
 }
 \answer{%
     $\cos \alpha = \frac{c^2 - \sqr{2a} - \sqr{2b}}{2 \cdot 2a \cdot 2b} \approx 0{,}501 \implies \alpha = 59{,}9\degrees$
+}
+\solutionspace{80pt}
+
+\tasknumber{8}%
+\task{%
+    Докажите, что тонкий клин с углом при вершине $\varphi$ из стекла с показателем преломления $n$
+        отклонит луч на угол $(n-1)\varphi$ (в приближении малых углов).
+}
+\solutionspace{150pt}
+
+\tasknumber{9}%
+\task{%
+    На дне водоема глубиной $3\,\text{м}$ лежит зеркало.
+    Луч света, пройдя через воду, отражается от зеркала и выходит из воды.
+    Найти расстояние между точкой входа луча в воду и точкой выхода луча из воды,
+    если показатель преломления воды $1{,}33$, а угол падения луча $30\degrees$.
+}
+\answer{%
+    \begin{align*}
+    \ctg \beta &= \frac{h}{d:L:s} \implies d = \frac{h}{\ctg \beta} \\
+    \frac 1{\sin^2 \beta} &= \ctg^2 \beta + 1 \implies \ctg \beta = \sqrt{\frac 1{\sin^2 \beta} - 1} \\
+    \sin\alpha &= n\sin \beta \implies \sin \beta = \frac{\sin\alpha}{n} \\
+    d &= \frac{h}{\sqrt{\frac 1{\sin^2 \beta} - 1}} = \frac{h}{\sqrt{\sqr{\frac{n}{\sin\alpha}} - 1}} \\
+    2d &= \frac{2{h}}{\sqrt{\sqr{\frac{n}{\sin\alpha}} - 1}} \approx 243{,}4\,\text{см}
+    \end{align*}
+}
+\solutionspace{120pt}
+
+\tasknumber{10}%
+\task{%
+    Установка для наблюдения интерференции состоит
+    из двух когерентных источников света и экрана.
+    Расстояние между источниками $l = 2{,}4\,\text{мм}$,
+    а от каждого источника до экрана — $L = 3\,\text{м}$.
+    Сделайте рисунок и укажите положение нулевого максимума освещенности,
+    а также определите расстояние между вторым минимумом и нулевым максимумом.
+    Длина волны падающего света составляет $\lambda = 550\,\text{нм}$.
+}
+\answer{%
+    \begin{align*}
+    l_1^2 &= L^2 + \sqr{x - \frac \ell 2} \\
+    l_2^2 &= L^2 + \sqr{x + \frac \ell 2} \\
+    l_2^2 - l_1^2 &= 2x\ell \implies (l_2 - l_1)(l_2 + l_1) = 2x\ell \implies n\lambda \cdot 2L \approx 2x_n\ell \implies x_n = \frac{\lambda L}{\ell} n, n\in \mathbb{N} \\
+    x &= \frac{\lambda L}{\ell} \cdot \frac32 = \frac{550\,\text{нм} \cdot 3\,\text{м}}{2{,}4\,\text{мм}} \cdot \frac32 \approx 1{,}03\,\text{мм}
+    \end{align*}
+}
+\solutionspace{120pt}
+
+\tasknumber{11}%
+\task{%
+    Высота солнца над горизонтом составляет $ 40 \degrees$.
+    Посреди ровного бетонного поля стоит одинокий цилиндрический столб высотой $3\,\text{м}$ и радиусом $10\,\text{см}$.
+    Определите площадь полной тени от этого столба на бетоне.
+    Угловой размер Солнца принять равным $30'$ и считать малым углом.
+}
+\answer{%
+    $\text{трапеция} \implies S = 0{,}79\,\text{м}^{2}$
 }
 
 \variantsplitter
@@ -1474,6 +2443,63 @@
 \answer{%
     $\cos \alpha = \frac{c^2 - \sqr{2a} - \sqr{2b}}{2 \cdot 2a \cdot 2b} \approx 0{,}707 \implies \alpha = 45{,}0\degrees$
 }
+\solutionspace{80pt}
+
+\tasknumber{8}%
+\task{%
+    Докажите, что мнимое изображение точечного источника света под поверхностью воды из воздуха
+        видно на глубине в $n$ раз меньше его реальной глубины (в приближении малых углов).
+}
+\solutionspace{150pt}
+
+\tasknumber{9}%
+\task{%
+    На дне водоема глубиной $2\,\text{м}$ лежит зеркало.
+    Луч света, пройдя через воду, отражается от зеркала и выходит из воды.
+    Найти расстояние между точкой входа луча в воду и точкой выхода луча из воды,
+    если показатель преломления воды $1{,}33$, а угол падения луча $35\degrees$.
+}
+\answer{%
+    \begin{align*}
+    \ctg \beta &= \frac{h}{d:L:s} \implies d = \frac{h}{\ctg \beta} \\
+    \frac 1{\sin^2 \beta} &= \ctg^2 \beta + 1 \implies \ctg \beta = \sqrt{\frac 1{\sin^2 \beta} - 1} \\
+    \sin\alpha &= n\sin \beta \implies \sin \beta = \frac{\sin\alpha}{n} \\
+    d &= \frac{h}{\sqrt{\frac 1{\sin^2 \beta} - 1}} = \frac{h}{\sqrt{\sqr{\frac{n}{\sin\alpha}} - 1}} \\
+    2d &= \frac{2{h}}{\sqrt{\sqr{\frac{n}{\sin\alpha}} - 1}} \approx 191{,}2\,\text{см}
+    \end{align*}
+}
+\solutionspace{120pt}
+
+\tasknumber{10}%
+\task{%
+    Установка для наблюдения интерференции состоит
+    из двух когерентных источников света и экрана.
+    Расстояние между источниками $l = 1{,}5\,\text{мм}$,
+    а от каждого источника до экрана — $L = 3\,\text{м}$.
+    Сделайте рисунок и укажите положение нулевого максимума освещенности,
+    а также определите расстояние между четвёртым минимумом и нулевым максимумом.
+    Длина волны падающего света составляет $\lambda = 450\,\text{нм}$.
+}
+\answer{%
+    \begin{align*}
+    l_1^2 &= L^2 + \sqr{x - \frac \ell 2} \\
+    l_2^2 &= L^2 + \sqr{x + \frac \ell 2} \\
+    l_2^2 - l_1^2 &= 2x\ell \implies (l_2 - l_1)(l_2 + l_1) = 2x\ell \implies n\lambda \cdot 2L \approx 2x_n\ell \implies x_n = \frac{\lambda L}{\ell} n, n\in \mathbb{N} \\
+    x &= \frac{\lambda L}{\ell} \cdot \frac72 = \frac{450\,\text{нм} \cdot 3\,\text{м}}{1{,}5\,\text{мм}} \cdot \frac72 \approx 3{,}2\,\text{мм}
+    \end{align*}
+}
+\solutionspace{120pt}
+
+\tasknumber{11}%
+\task{%
+    Высота солнца над горизонтом составляет $ 50 \degrees$.
+    Посреди ровного бетонного поля стоит одинокий цилиндрический столб высотой $7\,\text{м}$ и радиусом $10\,\text{см}$.
+    Определите площадь полной тени от этого столба на бетоне.
+    Угловой размер Солнца принять равным $30'$ и считать малым углом.
+}
+\answer{%
+    $\text{трапеция} \implies S = 1{,}41\,\text{м}^{2}$
+}
 
 \variantsplitter
 
@@ -1555,6 +2581,63 @@
 }
 \answer{%
     $\cos \alpha = \frac{c^2 - \sqr{2a} - \sqr{2b}}{2 \cdot 2a \cdot 2b} \approx 0{,}499 \implies \alpha = 60{,}1\degrees$
+}
+\solutionspace{80pt}
+
+\tasknumber{8}%
+\task{%
+    Докажите, что мнимое изображение точечного источника света под поверхностью воды из воздуха
+        видно на глубине в $n$ раз меньше его реальной глубины (в приближении малых углов).
+}
+\solutionspace{150pt}
+
+\tasknumber{9}%
+\task{%
+    На дне водоема глубиной $2\,\text{м}$ лежит зеркало.
+    Луч света, пройдя через воду, отражается от зеркала и выходит из воды.
+    Найти расстояние между точкой входа луча в воду и точкой выхода луча из воды,
+    если показатель преломления воды $1{,}33$, а угол падения луча $35\degrees$.
+}
+\answer{%
+    \begin{align*}
+    \ctg \beta &= \frac{h}{d:L:s} \implies d = \frac{h}{\ctg \beta} \\
+    \frac 1{\sin^2 \beta} &= \ctg^2 \beta + 1 \implies \ctg \beta = \sqrt{\frac 1{\sin^2 \beta} - 1} \\
+    \sin\alpha &= n\sin \beta \implies \sin \beta = \frac{\sin\alpha}{n} \\
+    d &= \frac{h}{\sqrt{\frac 1{\sin^2 \beta} - 1}} = \frac{h}{\sqrt{\sqr{\frac{n}{\sin\alpha}} - 1}} \\
+    2d &= \frac{2{h}}{\sqrt{\sqr{\frac{n}{\sin\alpha}} - 1}} \approx 191{,}2\,\text{см}
+    \end{align*}
+}
+\solutionspace{120pt}
+
+\tasknumber{10}%
+\task{%
+    Установка для наблюдения интерференции состоит
+    из двух когерентных источников света и экрана.
+    Расстояние между источниками $l = 1{,}2\,\text{мм}$,
+    а от каждого источника до экрана — $L = 4\,\text{м}$.
+    Сделайте рисунок и укажите положение нулевого максимума освещенности,
+    а также определите расстояние между третьим максимумом и нулевым максимумом.
+    Длина волны падающего света составляет $\lambda = 400\,\text{нм}$.
+}
+\answer{%
+    \begin{align*}
+    l_1^2 &= L^2 + \sqr{x - \frac \ell 2} \\
+    l_2^2 &= L^2 + \sqr{x + \frac \ell 2} \\
+    l_2^2 - l_1^2 &= 2x\ell \implies (l_2 - l_1)(l_2 + l_1) = 2x\ell \implies n\lambda \cdot 2L \approx 2x_n\ell \implies x_n = \frac{\lambda L}{\ell} n, n\in \mathbb{N} \\
+    x &= \frac{\lambda L}{\ell} \cdot 3 = \frac{400\,\text{нм} \cdot 4\,\text{м}}{1{,}2\,\text{мм}} \cdot 3 \approx 4{,}0\,\text{мм}
+    \end{align*}
+}
+\solutionspace{120pt}
+
+\tasknumber{11}%
+\task{%
+    Высота солнца над горизонтом составляет $ 50 \degrees$.
+    Посреди ровного бетонного поля стоит одинокий цилиндрический столб высотой $3\,\text{м}$ и радиусом $10\,\text{см}$.
+    Определите площадь полной тени от этого столба на бетоне.
+    Угловой размер Солнца принять равным $30'$ и считать малым углом.
+}
+\answer{%
+    $\text{трапеция} \implies S = 0{,}55\,\text{м}^{2}$
 }
 
 \variantsplitter
@@ -1638,6 +2721,63 @@
 \answer{%
     $\cos \alpha = \frac{c^2 - \sqr{2a} - \sqr{2b}}{2 \cdot 2a \cdot 2b} \approx 0{,}707 \implies \alpha = 45{,}0\degrees$
 }
+\solutionspace{80pt}
+
+\tasknumber{8}%
+\task{%
+    Докажите, что тонкий клин с углом при вершине $\varphi$ из стекла с показателем преломления $n$
+        отклонит луч на угол $(n-1)\varphi$ (в приближении малых углов).
+}
+\solutionspace{150pt}
+
+\tasknumber{9}%
+\task{%
+    На дне водоема глубиной $2\,\text{м}$ лежит зеркало.
+    Луч света, пройдя через воду, отражается от зеркала и выходит из воды.
+    Найти расстояние между точкой входа луча в воду и точкой выхода луча из воды,
+    если показатель преломления воды $1{,}33$, а угол падения луча $30\degrees$.
+}
+\answer{%
+    \begin{align*}
+    \ctg \beta &= \frac{h}{d:L:s} \implies d = \frac{h}{\ctg \beta} \\
+    \frac 1{\sin^2 \beta} &= \ctg^2 \beta + 1 \implies \ctg \beta = \sqrt{\frac 1{\sin^2 \beta} - 1} \\
+    \sin\alpha &= n\sin \beta \implies \sin \beta = \frac{\sin\alpha}{n} \\
+    d &= \frac{h}{\sqrt{\frac 1{\sin^2 \beta} - 1}} = \frac{h}{\sqrt{\sqr{\frac{n}{\sin\alpha}} - 1}} \\
+    2d &= \frac{2{h}}{\sqrt{\sqr{\frac{n}{\sin\alpha}} - 1}} \approx 162{,}3\,\text{см}
+    \end{align*}
+}
+\solutionspace{120pt}
+
+\tasknumber{10}%
+\task{%
+    Установка для наблюдения интерференции состоит
+    из двух когерентных источников света и экрана.
+    Расстояние между источниками $l = 2{,}4\,\text{мм}$,
+    а от каждого источника до экрана — $L = 3\,\text{м}$.
+    Сделайте рисунок и укажите положение нулевого максимума освещенности,
+    а также определите расстояние между четвёртым минимумом и нулевым максимумом.
+    Длина волны падающего света составляет $\lambda = 500\,\text{нм}$.
+}
+\answer{%
+    \begin{align*}
+    l_1^2 &= L^2 + \sqr{x - \frac \ell 2} \\
+    l_2^2 &= L^2 + \sqr{x + \frac \ell 2} \\
+    l_2^2 - l_1^2 &= 2x\ell \implies (l_2 - l_1)(l_2 + l_1) = 2x\ell \implies n\lambda \cdot 2L \approx 2x_n\ell \implies x_n = \frac{\lambda L}{\ell} n, n\in \mathbb{N} \\
+    x &= \frac{\lambda L}{\ell} \cdot \frac72 = \frac{500\,\text{нм} \cdot 3\,\text{м}}{2{,}4\,\text{мм}} \cdot \frac72 \approx 2{,}2\,\text{мм}
+    \end{align*}
+}
+\solutionspace{120pt}
+
+\tasknumber{11}%
+\task{%
+    Высота солнца над горизонтом составляет $ 35 \degrees$.
+    Посреди ровного бетонного поля стоит одинокий цилиндрический столб высотой $3\,\text{м}$ и радиусом $8\,\text{см}$.
+    Определите площадь полной тени от этого столба на бетоне.
+    Угловой размер Солнца принять равным $30'$ и считать малым углом.
+}
+\answer{%
+    $\text{трапеция} \implies S = 0{,}78\,\text{м}^{2}$
+}
 
 \variantsplitter
 
@@ -1719,6 +2859,63 @@
 }
 \answer{%
     $\cos \alpha = \frac{c^2 - \sqr{2a} - \sqr{2b}}{2 \cdot 2a \cdot 2b} \approx 0{,}867 \implies \alpha = 29{,}9\degrees$
+}
+\solutionspace{80pt}
+
+\tasknumber{8}%
+\task{%
+    Докажите, что мнимое изображение точечного источника света под поверхностью воды из воздуха
+        видно на глубине в $n$ раз меньше его реальной глубины (в приближении малых углов).
+}
+\solutionspace{150pt}
+
+\tasknumber{9}%
+\task{%
+    На дне водоема глубиной $2\,\text{м}$ лежит зеркало.
+    Луч света, пройдя через воду, отражается от зеркала и выходит из воды.
+    Найти расстояние между точкой входа луча в воду и точкой выхода луча из воды,
+    если показатель преломления воды $1{,}33$, а угол падения луча $35\degrees$.
+}
+\answer{%
+    \begin{align*}
+    \ctg \beta &= \frac{h}{d:L:s} \implies d = \frac{h}{\ctg \beta} \\
+    \frac 1{\sin^2 \beta} &= \ctg^2 \beta + 1 \implies \ctg \beta = \sqrt{\frac 1{\sin^2 \beta} - 1} \\
+    \sin\alpha &= n\sin \beta \implies \sin \beta = \frac{\sin\alpha}{n} \\
+    d &= \frac{h}{\sqrt{\frac 1{\sin^2 \beta} - 1}} = \frac{h}{\sqrt{\sqr{\frac{n}{\sin\alpha}} - 1}} \\
+    2d &= \frac{2{h}}{\sqrt{\sqr{\frac{n}{\sin\alpha}} - 1}} \approx 191{,}2\,\text{см}
+    \end{align*}
+}
+\solutionspace{120pt}
+
+\tasknumber{10}%
+\task{%
+    Установка для наблюдения интерференции состоит
+    из двух когерентных источников света и экрана.
+    Расстояние между источниками $l = 2{,}4\,\text{мм}$,
+    а от каждого источника до экрана — $L = 2\,\text{м}$.
+    Сделайте рисунок и укажите положение нулевого максимума освещенности,
+    а также определите расстояние между третьим максимумом и нулевым максимумом.
+    Длина волны падающего света составляет $\lambda = 500\,\text{нм}$.
+}
+\answer{%
+    \begin{align*}
+    l_1^2 &= L^2 + \sqr{x - \frac \ell 2} \\
+    l_2^2 &= L^2 + \sqr{x + \frac \ell 2} \\
+    l_2^2 - l_1^2 &= 2x\ell \implies (l_2 - l_1)(l_2 + l_1) = 2x\ell \implies n\lambda \cdot 2L \approx 2x_n\ell \implies x_n = \frac{\lambda L}{\ell} n, n\in \mathbb{N} \\
+    x &= \frac{\lambda L}{\ell} \cdot 3 = \frac{500\,\text{нм} \cdot 2\,\text{м}}{2{,}4\,\text{мм}} \cdot 3 \approx 1{,}25\,\text{мм}
+    \end{align*}
+}
+\solutionspace{120pt}
+
+\tasknumber{11}%
+\task{%
+    Высота солнца над горизонтом составляет $ 55 \degrees$.
+    Посреди ровного бетонного поля стоит одинокий цилиндрический столб высотой $3\,\text{м}$ и радиусом $10\,\text{см}$.
+    Определите площадь полной тени от этого столба на бетоне.
+    Угловой размер Солнца принять равным $30'$ и считать малым углом.
+}
+\answer{%
+    $\text{трапеция} \implies S = 0{,}45\,\text{м}^{2}$
 }
 
 \variantsplitter
@@ -1802,6 +2999,63 @@
 \answer{%
     $\cos \alpha = \frac{c^2 - \sqr{2a} - \sqr{2b}}{2 \cdot 2a \cdot 2b} \approx 0{,}865 \implies \alpha = 30{,}1\degrees$
 }
+\solutionspace{80pt}
+
+\tasknumber{8}%
+\task{%
+    Докажите, что тонкий клин с углом при вершине $\varphi$ из стекла с показателем преломления $n$
+        отклонит луч на угол $(n-1)\varphi$ (в приближении малых углов).
+}
+\solutionspace{150pt}
+
+\tasknumber{9}%
+\task{%
+    На дне водоема глубиной $4\,\text{м}$ лежит зеркало.
+    Луч света, пройдя через воду, отражается от зеркала и выходит из воды.
+    Найти расстояние между точкой входа луча в воду и точкой выхода луча из воды,
+    если показатель преломления воды $1{,}33$, а угол падения луча $30\degrees$.
+}
+\answer{%
+    \begin{align*}
+    \ctg \beta &= \frac{h}{d:L:s} \implies d = \frac{h}{\ctg \beta} \\
+    \frac 1{\sin^2 \beta} &= \ctg^2 \beta + 1 \implies \ctg \beta = \sqrt{\frac 1{\sin^2 \beta} - 1} \\
+    \sin\alpha &= n\sin \beta \implies \sin \beta = \frac{\sin\alpha}{n} \\
+    d &= \frac{h}{\sqrt{\frac 1{\sin^2 \beta} - 1}} = \frac{h}{\sqrt{\sqr{\frac{n}{\sin\alpha}} - 1}} \\
+    2d &= \frac{2{h}}{\sqrt{\sqr{\frac{n}{\sin\alpha}} - 1}} \approx 324{,}6\,\text{см}
+    \end{align*}
+}
+\solutionspace{120pt}
+
+\tasknumber{10}%
+\task{%
+    Установка для наблюдения интерференции состоит
+    из двух когерентных источников света и экрана.
+    Расстояние между источниками $l = 2{,}4\,\text{мм}$,
+    а от каждого источника до экрана — $L = 4\,\text{м}$.
+    Сделайте рисунок и укажите положение нулевого максимума освещенности,
+    а также определите расстояние между третьим максимумом и нулевым максимумом.
+    Длина волны падающего света составляет $\lambda = 550\,\text{нм}$.
+}
+\answer{%
+    \begin{align*}
+    l_1^2 &= L^2 + \sqr{x - \frac \ell 2} \\
+    l_2^2 &= L^2 + \sqr{x + \frac \ell 2} \\
+    l_2^2 - l_1^2 &= 2x\ell \implies (l_2 - l_1)(l_2 + l_1) = 2x\ell \implies n\lambda \cdot 2L \approx 2x_n\ell \implies x_n = \frac{\lambda L}{\ell} n, n\in \mathbb{N} \\
+    x &= \frac{\lambda L}{\ell} \cdot 3 = \frac{550\,\text{нм} \cdot 4\,\text{м}}{2{,}4\,\text{мм}} \cdot 3 \approx 2{,}8\,\text{мм}
+    \end{align*}
+}
+\solutionspace{120pt}
+
+\tasknumber{11}%
+\task{%
+    Высота солнца над горизонтом составляет $ 40 \degrees$.
+    Посреди ровного бетонного поля стоит одинокий цилиндрический столб высотой $7\,\text{м}$ и радиусом $2\,\text{см}$.
+    Определите площадь полной тени от этого столба на бетоне.
+    Угловой размер Солнца принять равным $30'$ и считать малым углом.
+}
+\answer{%
+    $\text{треугольник} \implies S = 0{,}07\,\text{м}^{2}$
+}
 
 \variantsplitter
 
@@ -1883,6 +3137,63 @@
 }
 \answer{%
     $\cos \alpha = \frac{c^2 - \sqr{2a} - \sqr{2b}}{2 \cdot 2a \cdot 2b} \approx 0{,}500 \implies \alpha = 60{,}0\degrees$
+}
+\solutionspace{80pt}
+
+\tasknumber{8}%
+\task{%
+    Докажите, что мнимое изображение точечного источника света под поверхностью воды из воздуха
+        видно на глубине в $n$ раз меньше его реальной глубины (в приближении малых углов).
+}
+\solutionspace{150pt}
+
+\tasknumber{9}%
+\task{%
+    На дне водоема глубиной $4\,\text{м}$ лежит зеркало.
+    Луч света, пройдя через воду, отражается от зеркала и выходит из воды.
+    Найти расстояние между точкой входа луча в воду и точкой выхода луча из воды,
+    если показатель преломления воды $1{,}33$, а угол падения луча $35\degrees$.
+}
+\answer{%
+    \begin{align*}
+    \ctg \beta &= \frac{h}{d:L:s} \implies d = \frac{h}{\ctg \beta} \\
+    \frac 1{\sin^2 \beta} &= \ctg^2 \beta + 1 \implies \ctg \beta = \sqrt{\frac 1{\sin^2 \beta} - 1} \\
+    \sin\alpha &= n\sin \beta \implies \sin \beta = \frac{\sin\alpha}{n} \\
+    d &= \frac{h}{\sqrt{\frac 1{\sin^2 \beta} - 1}} = \frac{h}{\sqrt{\sqr{\frac{n}{\sin\alpha}} - 1}} \\
+    2d &= \frac{2{h}}{\sqrt{\sqr{\frac{n}{\sin\alpha}} - 1}} \approx 382{,}4\,\text{см}
+    \end{align*}
+}
+\solutionspace{120pt}
+
+\tasknumber{10}%
+\task{%
+    Установка для наблюдения интерференции состоит
+    из двух когерентных источников света и экрана.
+    Расстояние между источниками $l = 1{,}2\,\text{мм}$,
+    а от каждого источника до экрана — $L = 2\,\text{м}$.
+    Сделайте рисунок и укажите положение нулевого максимума освещенности,
+    а также определите расстояние между вторым минимумом и нулевым максимумом.
+    Длина волны падающего света составляет $\lambda = 400\,\text{нм}$.
+}
+\answer{%
+    \begin{align*}
+    l_1^2 &= L^2 + \sqr{x - \frac \ell 2} \\
+    l_2^2 &= L^2 + \sqr{x + \frac \ell 2} \\
+    l_2^2 - l_1^2 &= 2x\ell \implies (l_2 - l_1)(l_2 + l_1) = 2x\ell \implies n\lambda \cdot 2L \approx 2x_n\ell \implies x_n = \frac{\lambda L}{\ell} n, n\in \mathbb{N} \\
+    x &= \frac{\lambda L}{\ell} \cdot \frac32 = \frac{400\,\text{нм} \cdot 2\,\text{м}}{1{,}2\,\text{мм}} \cdot \frac32 \approx 1\,\text{мм}
+    \end{align*}
+}
+\solutionspace{120pt}
+
+\tasknumber{11}%
+\task{%
+    Высота солнца над горизонтом составляет $ 55 \degrees$.
+    Посреди ровного бетонного поля стоит одинокий цилиндрический столб высотой $3\,\text{м}$ и радиусом $4\,\text{см}$.
+    Определите площадь полной тени от этого столба на бетоне.
+    Угловой размер Солнца принять равным $30'$ и считать малым углом.
+}
+\answer{%
+    $\text{трапеция} \implies S = 0{,}20\,\text{м}^{2}$
 }
 
 \variantsplitter
@@ -1966,6 +3277,63 @@
 \answer{%
     $\cos \alpha = \frac{c^2 - \sqr{2a} - \sqr{2b}}{2 \cdot 2a \cdot 2b} \approx 0{,}501 \implies \alpha = 60{,}0\degrees$
 }
+\solutionspace{80pt}
+
+\tasknumber{8}%
+\task{%
+    Докажите, что тонкий клин с углом при вершине $\varphi$ из стекла с показателем преломления $n$
+        отклонит луч на угол $(n-1)\varphi$ (в приближении малых углов).
+}
+\solutionspace{150pt}
+
+\tasknumber{9}%
+\task{%
+    На дне водоема глубиной $4\,\text{м}$ лежит зеркало.
+    Луч света, пройдя через воду, отражается от зеркала и выходит из воды.
+    Найти расстояние между точкой входа луча в воду и точкой выхода луча из воды,
+    если показатель преломления воды $1{,}33$, а угол падения луча $30\degrees$.
+}
+\answer{%
+    \begin{align*}
+    \ctg \beta &= \frac{h}{d:L:s} \implies d = \frac{h}{\ctg \beta} \\
+    \frac 1{\sin^2 \beta} &= \ctg^2 \beta + 1 \implies \ctg \beta = \sqrt{\frac 1{\sin^2 \beta} - 1} \\
+    \sin\alpha &= n\sin \beta \implies \sin \beta = \frac{\sin\alpha}{n} \\
+    d &= \frac{h}{\sqrt{\frac 1{\sin^2 \beta} - 1}} = \frac{h}{\sqrt{\sqr{\frac{n}{\sin\alpha}} - 1}} \\
+    2d &= \frac{2{h}}{\sqrt{\sqr{\frac{n}{\sin\alpha}} - 1}} \approx 324{,}6\,\text{см}
+    \end{align*}
+}
+\solutionspace{120pt}
+
+\tasknumber{10}%
+\task{%
+    Установка для наблюдения интерференции состоит
+    из двух когерентных источников света и экрана.
+    Расстояние между источниками $l = 2{,}4\,\text{мм}$,
+    а от каждого источника до экрана — $L = 4\,\text{м}$.
+    Сделайте рисунок и укажите положение нулевого максимума освещенности,
+    а также определите расстояние между четвёртым минимумом и нулевым максимумом.
+    Длина волны падающего света составляет $\lambda = 550\,\text{нм}$.
+}
+\answer{%
+    \begin{align*}
+    l_1^2 &= L^2 + \sqr{x - \frac \ell 2} \\
+    l_2^2 &= L^2 + \sqr{x + \frac \ell 2} \\
+    l_2^2 - l_1^2 &= 2x\ell \implies (l_2 - l_1)(l_2 + l_1) = 2x\ell \implies n\lambda \cdot 2L \approx 2x_n\ell \implies x_n = \frac{\lambda L}{\ell} n, n\in \mathbb{N} \\
+    x &= \frac{\lambda L}{\ell} \cdot \frac72 = \frac{550\,\text{нм} \cdot 4\,\text{м}}{2{,}4\,\text{мм}} \cdot \frac72 \approx 3{,}2\,\text{мм}
+    \end{align*}
+}
+\solutionspace{120pt}
+
+\tasknumber{11}%
+\task{%
+    Высота солнца над горизонтом составляет $ 35 \degrees$.
+    Посреди ровного бетонного поля стоит одинокий цилиндрический столб высотой $5\,\text{м}$ и радиусом $4\,\text{см}$.
+    Определите площадь полной тени от этого столба на бетоне.
+    Угловой размер Солнца принять равным $30'$ и считать малым углом.
+}
+\answer{%
+    $\text{трапеция} \implies S = 0{,}84\,\text{м}^{2}$
+}
 
 \variantsplitter
 
@@ -2047,6 +3415,63 @@
 }
 \answer{%
     $\cos \alpha = \frac{c^2 - \sqr{2a} - \sqr{2b}}{2 \cdot 2a \cdot 2b} \approx 0{,}707 \implies \alpha = 45{,}0\degrees$
+}
+\solutionspace{80pt}
+
+\tasknumber{8}%
+\task{%
+    Докажите, что тонкий клин с углом при вершине $\varphi$ из стекла с показателем преломления $n$
+        отклонит луч на угол $(n-1)\varphi$ (в приближении малых углов).
+}
+\solutionspace{150pt}
+
+\tasknumber{9}%
+\task{%
+    На дне водоема глубиной $4\,\text{м}$ лежит зеркало.
+    Луч света, пройдя через воду, отражается от зеркала и выходит из воды.
+    Найти расстояние между точкой входа луча в воду и точкой выхода луча из воды,
+    если показатель преломления воды $1{,}33$, а угол падения луча $30\degrees$.
+}
+\answer{%
+    \begin{align*}
+    \ctg \beta &= \frac{h}{d:L:s} \implies d = \frac{h}{\ctg \beta} \\
+    \frac 1{\sin^2 \beta} &= \ctg^2 \beta + 1 \implies \ctg \beta = \sqrt{\frac 1{\sin^2 \beta} - 1} \\
+    \sin\alpha &= n\sin \beta \implies \sin \beta = \frac{\sin\alpha}{n} \\
+    d &= \frac{h}{\sqrt{\frac 1{\sin^2 \beta} - 1}} = \frac{h}{\sqrt{\sqr{\frac{n}{\sin\alpha}} - 1}} \\
+    2d &= \frac{2{h}}{\sqrt{\sqr{\frac{n}{\sin\alpha}} - 1}} \approx 324{,}6\,\text{см}
+    \end{align*}
+}
+\solutionspace{120pt}
+
+\tasknumber{10}%
+\task{%
+    Установка для наблюдения интерференции состоит
+    из двух когерентных источников света и экрана.
+    Расстояние между источниками $l = 1{,}2\,\text{мм}$,
+    а от каждого источника до экрана — $L = 4\,\text{м}$.
+    Сделайте рисунок и укажите положение нулевого максимума освещенности,
+    а также определите расстояние между вторым максимумом и нулевым максимумом.
+    Длина волны падающего света составляет $\lambda = 400\,\text{нм}$.
+}
+\answer{%
+    \begin{align*}
+    l_1^2 &= L^2 + \sqr{x - \frac \ell 2} \\
+    l_2^2 &= L^2 + \sqr{x + \frac \ell 2} \\
+    l_2^2 - l_1^2 &= 2x\ell \implies (l_2 - l_1)(l_2 + l_1) = 2x\ell \implies n\lambda \cdot 2L \approx 2x_n\ell \implies x_n = \frac{\lambda L}{\ell} n, n\in \mathbb{N} \\
+    x &= \frac{\lambda L}{\ell} \cdot 2 = \frac{400\,\text{нм} \cdot 4\,\text{м}}{1{,}2\,\text{мм}} \cdot 2 \approx 2{,}7\,\text{мм}
+    \end{align*}
+}
+\solutionspace{120pt}
+
+\tasknumber{11}%
+\task{%
+    Высота солнца над горизонтом составляет $ 40 \degrees$.
+    Посреди ровного бетонного поля стоит одинокий цилиндрический столб высотой $3\,\text{м}$ и радиусом $8\,\text{см}$.
+    Определите площадь полной тени от этого столба на бетоне.
+    Угловой размер Солнца принять равным $30'$ и считать малым углом.
+}
+\answer{%
+    $\text{трапеция} \implies S = 0{,}64\,\text{м}^{2}$
 }
 
 \variantsplitter
@@ -2130,6 +3555,63 @@
 \answer{%
     $\cos \alpha = \frac{c^2 - \sqr{2a} - \sqr{2b}}{2 \cdot 2a \cdot 2b} \approx 0{,}501 \implies \alpha = 60{,}0\degrees$
 }
+\solutionspace{80pt}
+
+\tasknumber{8}%
+\task{%
+    Докажите, что мнимое изображение точечного источника света под поверхностью воды из воздуха
+        видно на глубине в $n$ раз меньше его реальной глубины (в приближении малых углов).
+}
+\solutionspace{150pt}
+
+\tasknumber{9}%
+\task{%
+    На дне водоема глубиной $4\,\text{м}$ лежит зеркало.
+    Луч света, пройдя через воду, отражается от зеркала и выходит из воды.
+    Найти расстояние между точкой входа луча в воду и точкой выхода луча из воды,
+    если показатель преломления воды $1{,}33$, а угол падения луча $35\degrees$.
+}
+\answer{%
+    \begin{align*}
+    \ctg \beta &= \frac{h}{d:L:s} \implies d = \frac{h}{\ctg \beta} \\
+    \frac 1{\sin^2 \beta} &= \ctg^2 \beta + 1 \implies \ctg \beta = \sqrt{\frac 1{\sin^2 \beta} - 1} \\
+    \sin\alpha &= n\sin \beta \implies \sin \beta = \frac{\sin\alpha}{n} \\
+    d &= \frac{h}{\sqrt{\frac 1{\sin^2 \beta} - 1}} = \frac{h}{\sqrt{\sqr{\frac{n}{\sin\alpha}} - 1}} \\
+    2d &= \frac{2{h}}{\sqrt{\sqr{\frac{n}{\sin\alpha}} - 1}} \approx 382{,}4\,\text{см}
+    \end{align*}
+}
+\solutionspace{120pt}
+
+\tasknumber{10}%
+\task{%
+    Установка для наблюдения интерференции состоит
+    из двух когерентных источников света и экрана.
+    Расстояние между источниками $l = 0{,}8\,\text{мм}$,
+    а от каждого источника до экрана — $L = 4\,\text{м}$.
+    Сделайте рисунок и укажите положение нулевого максимума освещенности,
+    а также определите расстояние между вторым максимумом и нулевым максимумом.
+    Длина волны падающего света составляет $\lambda = 600\,\text{нм}$.
+}
+\answer{%
+    \begin{align*}
+    l_1^2 &= L^2 + \sqr{x - \frac \ell 2} \\
+    l_2^2 &= L^2 + \sqr{x + \frac \ell 2} \\
+    l_2^2 - l_1^2 &= 2x\ell \implies (l_2 - l_1)(l_2 + l_1) = 2x\ell \implies n\lambda \cdot 2L \approx 2x_n\ell \implies x_n = \frac{\lambda L}{\ell} n, n\in \mathbb{N} \\
+    x &= \frac{\lambda L}{\ell} \cdot 2 = \frac{600\,\text{нм} \cdot 4\,\text{м}}{0{,}8\,\text{мм}} \cdot 2 \approx 6\,\text{мм}
+    \end{align*}
+}
+\solutionspace{120pt}
+
+\tasknumber{11}%
+\task{%
+    Высота солнца над горизонтом составляет $ 50 \degrees$.
+    Посреди ровного бетонного поля стоит одинокий цилиндрический столб высотой $3\,\text{м}$ и радиусом $8\,\text{см}$.
+    Определите площадь полной тени от этого столба на бетоне.
+    Угловой размер Солнца принять равным $30'$ и считать малым углом.
+}
+\answer{%
+    $\text{трапеция} \implies S = 0{,}45\,\text{м}^{2}$
+}
 
 \variantsplitter
 
@@ -2211,6 +3693,63 @@
 }
 \answer{%
     $\cos \alpha = \frac{c^2 - \sqr{2a} - \sqr{2b}}{2 \cdot 2a \cdot 2b} \approx 0{,}501 \implies \alpha = 59{,}9\degrees$
+}
+\solutionspace{80pt}
+
+\tasknumber{8}%
+\task{%
+    Докажите, что мнимое изображение точечного источника света под поверхностью воды из воздуха
+        видно на глубине в $n$ раз меньше его реальной глубины (в приближении малых углов).
+}
+\solutionspace{150pt}
+
+\tasknumber{9}%
+\task{%
+    На дне водоема глубиной $4\,\text{м}$ лежит зеркало.
+    Луч света, пройдя через воду, отражается от зеркала и выходит из воды.
+    Найти расстояние между точкой входа луча в воду и точкой выхода луча из воды,
+    если показатель преломления воды $1{,}33$, а угол падения луча $30\degrees$.
+}
+\answer{%
+    \begin{align*}
+    \ctg \beta &= \frac{h}{d:L:s} \implies d = \frac{h}{\ctg \beta} \\
+    \frac 1{\sin^2 \beta} &= \ctg^2 \beta + 1 \implies \ctg \beta = \sqrt{\frac 1{\sin^2 \beta} - 1} \\
+    \sin\alpha &= n\sin \beta \implies \sin \beta = \frac{\sin\alpha}{n} \\
+    d &= \frac{h}{\sqrt{\frac 1{\sin^2 \beta} - 1}} = \frac{h}{\sqrt{\sqr{\frac{n}{\sin\alpha}} - 1}} \\
+    2d &= \frac{2{h}}{\sqrt{\sqr{\frac{n}{\sin\alpha}} - 1}} \approx 324{,}6\,\text{см}
+    \end{align*}
+}
+\solutionspace{120pt}
+
+\tasknumber{10}%
+\task{%
+    Установка для наблюдения интерференции состоит
+    из двух когерентных источников света и экрана.
+    Расстояние между источниками $l = 1{,}5\,\text{мм}$,
+    а от каждого источника до экрана — $L = 3\,\text{м}$.
+    Сделайте рисунок и укажите положение нулевого максимума освещенности,
+    а также определите расстояние между четвёртым минимумом и нулевым максимумом.
+    Длина волны падающего света составляет $\lambda = 600\,\text{нм}$.
+}
+\answer{%
+    \begin{align*}
+    l_1^2 &= L^2 + \sqr{x - \frac \ell 2} \\
+    l_2^2 &= L^2 + \sqr{x + \frac \ell 2} \\
+    l_2^2 - l_1^2 &= 2x\ell \implies (l_2 - l_1)(l_2 + l_1) = 2x\ell \implies n\lambda \cdot 2L \approx 2x_n\ell \implies x_n = \frac{\lambda L}{\ell} n, n\in \mathbb{N} \\
+    x &= \frac{\lambda L}{\ell} \cdot \frac72 = \frac{600\,\text{нм} \cdot 3\,\text{м}}{1{,}5\,\text{мм}} \cdot \frac72 \approx 4{,}2\,\text{мм}
+    \end{align*}
+}
+\solutionspace{120pt}
+
+\tasknumber{11}%
+\task{%
+    Высота солнца над горизонтом составляет $ 50 \degrees$.
+    Посреди ровного бетонного поля стоит одинокий цилиндрический столб высотой $5\,\text{м}$ и радиусом $2\,\text{см}$.
+    Определите площадь полной тени от этого столба на бетоне.
+    Угловой размер Солнца принять равным $30'$ и считать малым углом.
+}
+\answer{%
+    $\text{треугольник} \implies S = 0{,}06\,\text{м}^{2}$
 }
 
 \variantsplitter
@@ -2294,6 +3833,63 @@
 \answer{%
     $\cos \alpha = \frac{c^2 - \sqr{2a} - \sqr{2b}}{2 \cdot 2a \cdot 2b} \approx 0{,}866 \implies \alpha = 30{,}0\degrees$
 }
+\solutionspace{80pt}
+
+\tasknumber{8}%
+\task{%
+    Докажите, что мнимое изображение точечного источника света под поверхностью воды из воздуха
+        видно на глубине в $n$ раз меньше его реальной глубины (в приближении малых углов).
+}
+\solutionspace{150pt}
+
+\tasknumber{9}%
+\task{%
+    На дне водоема глубиной $3\,\text{м}$ лежит зеркало.
+    Луч света, пройдя через воду, отражается от зеркала и выходит из воды.
+    Найти расстояние между точкой входа луча в воду и точкой выхода луча из воды,
+    если показатель преломления воды $1{,}33$, а угол падения луча $30\degrees$.
+}
+\answer{%
+    \begin{align*}
+    \ctg \beta &= \frac{h}{d:L:s} \implies d = \frac{h}{\ctg \beta} \\
+    \frac 1{\sin^2 \beta} &= \ctg^2 \beta + 1 \implies \ctg \beta = \sqrt{\frac 1{\sin^2 \beta} - 1} \\
+    \sin\alpha &= n\sin \beta \implies \sin \beta = \frac{\sin\alpha}{n} \\
+    d &= \frac{h}{\sqrt{\frac 1{\sin^2 \beta} - 1}} = \frac{h}{\sqrt{\sqr{\frac{n}{\sin\alpha}} - 1}} \\
+    2d &= \frac{2{h}}{\sqrt{\sqr{\frac{n}{\sin\alpha}} - 1}} \approx 243{,}4\,\text{см}
+    \end{align*}
+}
+\solutionspace{120pt}
+
+\tasknumber{10}%
+\task{%
+    Установка для наблюдения интерференции состоит
+    из двух когерентных источников света и экрана.
+    Расстояние между источниками $l = 1{,}2\,\text{мм}$,
+    а от каждого источника до экрана — $L = 2\,\text{м}$.
+    Сделайте рисунок и укажите положение нулевого максимума освещенности,
+    а также определите расстояние между третьим минимумом и нулевым максимумом.
+    Длина волны падающего света составляет $\lambda = 550\,\text{нм}$.
+}
+\answer{%
+    \begin{align*}
+    l_1^2 &= L^2 + \sqr{x - \frac \ell 2} \\
+    l_2^2 &= L^2 + \sqr{x + \frac \ell 2} \\
+    l_2^2 - l_1^2 &= 2x\ell \implies (l_2 - l_1)(l_2 + l_1) = 2x\ell \implies n\lambda \cdot 2L \approx 2x_n\ell \implies x_n = \frac{\lambda L}{\ell} n, n\in \mathbb{N} \\
+    x &= \frac{\lambda L}{\ell} \cdot \frac52 = \frac{550\,\text{нм} \cdot 2\,\text{м}}{1{,}2\,\text{мм}} \cdot \frac52 \approx 2{,}3\,\text{мм}
+    \end{align*}
+}
+\solutionspace{120pt}
+
+\tasknumber{11}%
+\task{%
+    Высота солнца над горизонтом составляет $ 55 \degrees$.
+    Посреди ровного бетонного поля стоит одинокий цилиндрический столб высотой $3\,\text{м}$ и радиусом $8\,\text{см}$.
+    Определите площадь полной тени от этого столба на бетоне.
+    Угловой размер Солнца принять равным $30'$ и считать малым углом.
+}
+\answer{%
+    $\text{трапеция} \implies S = 0{,}37\,\text{м}^{2}$
+}
 
 \variantsplitter
 
@@ -2376,6 +3972,63 @@
 \answer{%
     $\cos \alpha = \frac{c^2 - \sqr{2a} - \sqr{2b}}{2 \cdot 2a \cdot 2b} \approx 0{,}500 \implies \alpha = 60{,}0\degrees$
 }
+\solutionspace{80pt}
+
+\tasknumber{8}%
+\task{%
+    Докажите, что тонкий клин с углом при вершине $\varphi$ из стекла с показателем преломления $n$
+        отклонит луч на угол $(n-1)\varphi$ (в приближении малых углов).
+}
+\solutionspace{150pt}
+
+\tasknumber{9}%
+\task{%
+    На дне водоема глубиной $4\,\text{м}$ лежит зеркало.
+    Луч света, пройдя через воду, отражается от зеркала и выходит из воды.
+    Найти расстояние между точкой входа луча в воду и точкой выхода луча из воды,
+    если показатель преломления воды $1{,}33$, а угол падения луча $30\degrees$.
+}
+\answer{%
+    \begin{align*}
+    \ctg \beta &= \frac{h}{d:L:s} \implies d = \frac{h}{\ctg \beta} \\
+    \frac 1{\sin^2 \beta} &= \ctg^2 \beta + 1 \implies \ctg \beta = \sqrt{\frac 1{\sin^2 \beta} - 1} \\
+    \sin\alpha &= n\sin \beta \implies \sin \beta = \frac{\sin\alpha}{n} \\
+    d &= \frac{h}{\sqrt{\frac 1{\sin^2 \beta} - 1}} = \frac{h}{\sqrt{\sqr{\frac{n}{\sin\alpha}} - 1}} \\
+    2d &= \frac{2{h}}{\sqrt{\sqr{\frac{n}{\sin\alpha}} - 1}} \approx 324{,}6\,\text{см}
+    \end{align*}
+}
+\solutionspace{120pt}
+
+\tasknumber{10}%
+\task{%
+    Установка для наблюдения интерференции состоит
+    из двух когерентных источников света и экрана.
+    Расстояние между источниками $l = 1{,}5\,\text{мм}$,
+    а от каждого источника до экрана — $L = 2\,\text{м}$.
+    Сделайте рисунок и укажите положение нулевого максимума освещенности,
+    а также определите расстояние между четвёртым максимумом и нулевым максимумом.
+    Длина волны падающего света составляет $\lambda = 550\,\text{нм}$.
+}
+\answer{%
+    \begin{align*}
+    l_1^2 &= L^2 + \sqr{x - \frac \ell 2} \\
+    l_2^2 &= L^2 + \sqr{x + \frac \ell 2} \\
+    l_2^2 - l_1^2 &= 2x\ell \implies (l_2 - l_1)(l_2 + l_1) = 2x\ell \implies n\lambda \cdot 2L \approx 2x_n\ell \implies x_n = \frac{\lambda L}{\ell} n, n\in \mathbb{N} \\
+    x &= \frac{\lambda L}{\ell} \cdot 4 = \frac{550\,\text{нм} \cdot 2\,\text{м}}{1{,}5\,\text{мм}} \cdot 4 \approx 2{,}9\,\text{мм}
+    \end{align*}
+}
+\solutionspace{120pt}
+
+\tasknumber{11}%
+\task{%
+    Высота солнца над горизонтом составляет $ 40 \degrees$.
+    Посреди ровного бетонного поля стоит одинокий цилиндрический столб высотой $5\,\text{м}$ и радиусом $8\,\text{см}$.
+    Определите площадь полной тени от этого столба на бетоне.
+    Угловой размер Солнца принять равным $30'$ и считать малым углом.
+}
+\answer{%
+    $\text{трапеция} \implies S = 1{,}16\,\text{м}^{2}$
+}
 
 \variantsplitter
 
@@ -2407,7 +4060,7 @@
 \task{%
     Тимур стоит перед плоским зеркалом, укрепленным на вертикальной стене.
     Какова должна быть минимальная высота зеркала, чтобы Тимур мог видеть себя в полный рост?
-    Рост Тимур $178\,\text{см}$.
+    Рост Тимура $178\,\text{см}$.
     Определите также расстояние от пола до нижнего края зеркала,
     приняв высоту головы равной $34\,\text{см}$, и считая, что глаза находятся посередине (по высоте) головы.
 }
@@ -2457,6 +4110,63 @@
 }
 \answer{%
     $\cos \alpha = \frac{c^2 - \sqr{2a} - \sqr{2b}}{2 \cdot 2a \cdot 2b} \approx 0{,}867 \implies \alpha = 29{,}9\degrees$
+}
+\solutionspace{80pt}
+
+\tasknumber{8}%
+\task{%
+    Докажите, что тонкий клин с углом при вершине $\varphi$ из стекла с показателем преломления $n$
+        отклонит луч на угол $(n-1)\varphi$ (в приближении малых углов).
+}
+\solutionspace{150pt}
+
+\tasknumber{9}%
+\task{%
+    На дне водоема глубиной $2\,\text{м}$ лежит зеркало.
+    Луч света, пройдя через воду, отражается от зеркала и выходит из воды.
+    Найти расстояние между точкой входа луча в воду и точкой выхода луча из воды,
+    если показатель преломления воды $1{,}33$, а угол падения луча $35\degrees$.
+}
+\answer{%
+    \begin{align*}
+    \ctg \beta &= \frac{h}{d:L:s} \implies d = \frac{h}{\ctg \beta} \\
+    \frac 1{\sin^2 \beta} &= \ctg^2 \beta + 1 \implies \ctg \beta = \sqrt{\frac 1{\sin^2 \beta} - 1} \\
+    \sin\alpha &= n\sin \beta \implies \sin \beta = \frac{\sin\alpha}{n} \\
+    d &= \frac{h}{\sqrt{\frac 1{\sin^2 \beta} - 1}} = \frac{h}{\sqrt{\sqr{\frac{n}{\sin\alpha}} - 1}} \\
+    2d &= \frac{2{h}}{\sqrt{\sqr{\frac{n}{\sin\alpha}} - 1}} \approx 191{,}2\,\text{см}
+    \end{align*}
+}
+\solutionspace{120pt}
+
+\tasknumber{10}%
+\task{%
+    Установка для наблюдения интерференции состоит
+    из двух когерентных источников света и экрана.
+    Расстояние между источниками $l = 2{,}4\,\text{мм}$,
+    а от каждого источника до экрана — $L = 3\,\text{м}$.
+    Сделайте рисунок и укажите положение нулевого максимума освещенности,
+    а также определите расстояние между вторым максимумом и нулевым максимумом.
+    Длина волны падающего света составляет $\lambda = 500\,\text{нм}$.
+}
+\answer{%
+    \begin{align*}
+    l_1^2 &= L^2 + \sqr{x - \frac \ell 2} \\
+    l_2^2 &= L^2 + \sqr{x + \frac \ell 2} \\
+    l_2^2 - l_1^2 &= 2x\ell \implies (l_2 - l_1)(l_2 + l_1) = 2x\ell \implies n\lambda \cdot 2L \approx 2x_n\ell \implies x_n = \frac{\lambda L}{\ell} n, n\in \mathbb{N} \\
+    x &= \frac{\lambda L}{\ell} \cdot 2 = \frac{500\,\text{нм} \cdot 3\,\text{м}}{2{,}4\,\text{мм}} \cdot 2 \approx 1{,}25\,\text{мм}
+    \end{align*}
+}
+\solutionspace{120pt}
+
+\tasknumber{11}%
+\task{%
+    Высота солнца над горизонтом составляет $ 55 \degrees$.
+    Посреди ровного бетонного поля стоит одинокий цилиндрический столб высотой $5\,\text{м}$ и радиусом $8\,\text{см}$.
+    Определите площадь полной тени от этого столба на бетоне.
+    Угловой размер Солнца принять равным $30'$ и считать малым углом.
+}
+\answer{%
+    $\text{трапеция} \implies S = 0{,}65\,\text{м}^{2}$
 }
 
 \variantsplitter
@@ -2540,6 +4250,63 @@
 \answer{%
     $\cos \alpha = \frac{c^2 - \sqr{2a} - \sqr{2b}}{2 \cdot 2a \cdot 2b} \approx 0{,}865 \implies \alpha = 30{,}1\degrees$
 }
+\solutionspace{80pt}
+
+\tasknumber{8}%
+\task{%
+    Докажите, что тонкий клин с углом при вершине $\varphi$ из стекла с показателем преломления $n$
+        отклонит луч на угол $(n-1)\varphi$ (в приближении малых углов).
+}
+\solutionspace{150pt}
+
+\tasknumber{9}%
+\task{%
+    На дне водоема глубиной $3\,\text{м}$ лежит зеркало.
+    Луч света, пройдя через воду, отражается от зеркала и выходит из воды.
+    Найти расстояние между точкой входа луча в воду и точкой выхода луча из воды,
+    если показатель преломления воды $1{,}33$, а угол падения луча $35\degrees$.
+}
+\answer{%
+    \begin{align*}
+    \ctg \beta &= \frac{h}{d:L:s} \implies d = \frac{h}{\ctg \beta} \\
+    \frac 1{\sin^2 \beta} &= \ctg^2 \beta + 1 \implies \ctg \beta = \sqrt{\frac 1{\sin^2 \beta} - 1} \\
+    \sin\alpha &= n\sin \beta \implies \sin \beta = \frac{\sin\alpha}{n} \\
+    d &= \frac{h}{\sqrt{\frac 1{\sin^2 \beta} - 1}} = \frac{h}{\sqrt{\sqr{\frac{n}{\sin\alpha}} - 1}} \\
+    2d &= \frac{2{h}}{\sqrt{\sqr{\frac{n}{\sin\alpha}} - 1}} \approx 286{,}8\,\text{см}
+    \end{align*}
+}
+\solutionspace{120pt}
+
+\tasknumber{10}%
+\task{%
+    Установка для наблюдения интерференции состоит
+    из двух когерентных источников света и экрана.
+    Расстояние между источниками $l = 0{,}8\,\text{мм}$,
+    а от каждого источника до экрана — $L = 2\,\text{м}$.
+    Сделайте рисунок и укажите положение нулевого максимума освещенности,
+    а также определите расстояние между четвёртым минимумом и нулевым максимумом.
+    Длина волны падающего света составляет $\lambda = 450\,\text{нм}$.
+}
+\answer{%
+    \begin{align*}
+    l_1^2 &= L^2 + \sqr{x - \frac \ell 2} \\
+    l_2^2 &= L^2 + \sqr{x + \frac \ell 2} \\
+    l_2^2 - l_1^2 &= 2x\ell \implies (l_2 - l_1)(l_2 + l_1) = 2x\ell \implies n\lambda \cdot 2L \approx 2x_n\ell \implies x_n = \frac{\lambda L}{\ell} n, n\in \mathbb{N} \\
+    x &= \frac{\lambda L}{\ell} \cdot \frac72 = \frac{450\,\text{нм} \cdot 2\,\text{м}}{0{,}8\,\text{мм}} \cdot \frac72 \approx 3{,}9\,\text{мм}
+    \end{align*}
+}
+\solutionspace{120pt}
+
+\tasknumber{11}%
+\task{%
+    Высота солнца над горизонтом составляет $ 35 \degrees$.
+    Посреди ровного бетонного поля стоит одинокий цилиндрический столб высотой $5\,\text{м}$ и радиусом $2\,\text{см}$.
+    Определите площадь полной тени от этого столба на бетоне.
+    Угловой размер Солнца принять равным $30'$ и считать малым углом.
+}
+\answer{%
+    $\text{треугольник} \implies S = 0{,}08\,\text{м}^{2}$
+}
 
 \variantsplitter
 
@@ -2621,6 +4388,63 @@
 }
 \answer{%
     $\cos \alpha = \frac{c^2 - \sqr{2a} - \sqr{2b}}{2 \cdot 2a \cdot 2b} \approx 0{,}867 \implies \alpha = 29{,}9\degrees$
+}
+\solutionspace{80pt}
+
+\tasknumber{8}%
+\task{%
+    Докажите, что тонкий клин с углом при вершине $\varphi$ из стекла с показателем преломления $n$
+        отклонит луч на угол $(n-1)\varphi$ (в приближении малых углов).
+}
+\solutionspace{150pt}
+
+\tasknumber{9}%
+\task{%
+    На дне водоема глубиной $3\,\text{м}$ лежит зеркало.
+    Луч света, пройдя через воду, отражается от зеркала и выходит из воды.
+    Найти расстояние между точкой входа луча в воду и точкой выхода луча из воды,
+    если показатель преломления воды $1{,}33$, а угол падения луча $25\degrees$.
+}
+\answer{%
+    \begin{align*}
+    \ctg \beta &= \frac{h}{d:L:s} \implies d = \frac{h}{\ctg \beta} \\
+    \frac 1{\sin^2 \beta} &= \ctg^2 \beta + 1 \implies \ctg \beta = \sqrt{\frac 1{\sin^2 \beta} - 1} \\
+    \sin\alpha &= n\sin \beta \implies \sin \beta = \frac{\sin\alpha}{n} \\
+    d &= \frac{h}{\sqrt{\frac 1{\sin^2 \beta} - 1}} = \frac{h}{\sqrt{\sqr{\frac{n}{\sin\alpha}} - 1}} \\
+    2d &= \frac{2{h}}{\sqrt{\sqr{\frac{n}{\sin\alpha}} - 1}} \approx 201{,}1\,\text{см}
+    \end{align*}
+}
+\solutionspace{120pt}
+
+\tasknumber{10}%
+\task{%
+    Установка для наблюдения интерференции состоит
+    из двух когерентных источников света и экрана.
+    Расстояние между источниками $l = 2{,}4\,\text{мм}$,
+    а от каждого источника до экрана — $L = 2\,\text{м}$.
+    Сделайте рисунок и укажите положение нулевого максимума освещенности,
+    а также определите расстояние между вторым максимумом и нулевым максимумом.
+    Длина волны падающего света составляет $\lambda = 550\,\text{нм}$.
+}
+\answer{%
+    \begin{align*}
+    l_1^2 &= L^2 + \sqr{x - \frac \ell 2} \\
+    l_2^2 &= L^2 + \sqr{x + \frac \ell 2} \\
+    l_2^2 - l_1^2 &= 2x\ell \implies (l_2 - l_1)(l_2 + l_1) = 2x\ell \implies n\lambda \cdot 2L \approx 2x_n\ell \implies x_n = \frac{\lambda L}{\ell} n, n\in \mathbb{N} \\
+    x &= \frac{\lambda L}{\ell} \cdot 2 = \frac{550\,\text{нм} \cdot 2\,\text{м}}{2{,}4\,\text{мм}} \cdot 2 \approx 0{,}92\,\text{мм}
+    \end{align*}
+}
+\solutionspace{120pt}
+
+\tasknumber{11}%
+\task{%
+    Высота солнца над горизонтом составляет $ 40 \degrees$.
+    Посреди ровного бетонного поля стоит одинокий цилиндрический столб высотой $3\,\text{м}$ и радиусом $10\,\text{см}$.
+    Определите площадь полной тени от этого столба на бетоне.
+    Угловой размер Солнца принять равным $30'$ и считать малым углом.
+}
+\answer{%
+    $\text{трапеция} \implies S = 0{,}79\,\text{м}^{2}$
 }
 
 \variantsplitter
@@ -2704,6 +4528,63 @@
 \answer{%
     $\cos \alpha = \frac{c^2 - \sqr{2a} - \sqr{2b}}{2 \cdot 2a \cdot 2b} \approx 0{,}707 \implies \alpha = 45{,}0\degrees$
 }
+\solutionspace{80pt}
+
+\tasknumber{8}%
+\task{%
+    Докажите, что тонкий клин с углом при вершине $\varphi$ из стекла с показателем преломления $n$
+        отклонит луч на угол $(n-1)\varphi$ (в приближении малых углов).
+}
+\solutionspace{150pt}
+
+\tasknumber{9}%
+\task{%
+    На дне водоема глубиной $3\,\text{м}$ лежит зеркало.
+    Луч света, пройдя через воду, отражается от зеркала и выходит из воды.
+    Найти расстояние между точкой входа луча в воду и точкой выхода луча из воды,
+    если показатель преломления воды $1{,}33$, а угол падения луча $30\degrees$.
+}
+\answer{%
+    \begin{align*}
+    \ctg \beta &= \frac{h}{d:L:s} \implies d = \frac{h}{\ctg \beta} \\
+    \frac 1{\sin^2 \beta} &= \ctg^2 \beta + 1 \implies \ctg \beta = \sqrt{\frac 1{\sin^2 \beta} - 1} \\
+    \sin\alpha &= n\sin \beta \implies \sin \beta = \frac{\sin\alpha}{n} \\
+    d &= \frac{h}{\sqrt{\frac 1{\sin^2 \beta} - 1}} = \frac{h}{\sqrt{\sqr{\frac{n}{\sin\alpha}} - 1}} \\
+    2d &= \frac{2{h}}{\sqrt{\sqr{\frac{n}{\sin\alpha}} - 1}} \approx 243{,}4\,\text{см}
+    \end{align*}
+}
+\solutionspace{120pt}
+
+\tasknumber{10}%
+\task{%
+    Установка для наблюдения интерференции состоит
+    из двух когерентных источников света и экрана.
+    Расстояние между источниками $l = 1{,}2\,\text{мм}$,
+    а от каждого источника до экрана — $L = 3\,\text{м}$.
+    Сделайте рисунок и укажите положение нулевого максимума освещенности,
+    а также определите расстояние между вторым максимумом и нулевым максимумом.
+    Длина волны падающего света составляет $\lambda = 600\,\text{нм}$.
+}
+\answer{%
+    \begin{align*}
+    l_1^2 &= L^2 + \sqr{x - \frac \ell 2} \\
+    l_2^2 &= L^2 + \sqr{x + \frac \ell 2} \\
+    l_2^2 - l_1^2 &= 2x\ell \implies (l_2 - l_1)(l_2 + l_1) = 2x\ell \implies n\lambda \cdot 2L \approx 2x_n\ell \implies x_n = \frac{\lambda L}{\ell} n, n\in \mathbb{N} \\
+    x &= \frac{\lambda L}{\ell} \cdot 2 = \frac{600\,\text{нм} \cdot 3\,\text{м}}{1{,}2\,\text{мм}} \cdot 2 \approx 3\,\text{мм}
+    \end{align*}
+}
+\solutionspace{120pt}
+
+\tasknumber{11}%
+\task{%
+    Высота солнца над горизонтом составляет $ 50 \degrees$.
+    Посреди ровного бетонного поля стоит одинокий цилиндрический столб высотой $7\,\text{м}$ и радиусом $8\,\text{см}$.
+    Определите площадь полной тени от этого столба на бетоне.
+    Угловой размер Солнца принять равным $30'$ и считать малым углом.
+}
+\answer{%
+    $\text{трапеция} \implies S = 1{,}17\,\text{м}^{2}$
+}
 
 \variantsplitter
 
@@ -2785,6 +4666,63 @@
 }
 \answer{%
     $\cos \alpha = \frac{c^2 - \sqr{2a} - \sqr{2b}}{2 \cdot 2a \cdot 2b} \approx 0{,}866 \implies \alpha = 30{,}0\degrees$
+}
+\solutionspace{80pt}
+
+\tasknumber{8}%
+\task{%
+    Докажите, что мнимое изображение точечного источника света под поверхностью воды из воздуха
+        видно на глубине в $n$ раз меньше его реальной глубины (в приближении малых углов).
+}
+\solutionspace{150pt}
+
+\tasknumber{9}%
+\task{%
+    На дне водоема глубиной $4\,\text{м}$ лежит зеркало.
+    Луч света, пройдя через воду, отражается от зеркала и выходит из воды.
+    Найти расстояние между точкой входа луча в воду и точкой выхода луча из воды,
+    если показатель преломления воды $1{,}33$, а угол падения луча $25\degrees$.
+}
+\answer{%
+    \begin{align*}
+    \ctg \beta &= \frac{h}{d:L:s} \implies d = \frac{h}{\ctg \beta} \\
+    \frac 1{\sin^2 \beta} &= \ctg^2 \beta + 1 \implies \ctg \beta = \sqrt{\frac 1{\sin^2 \beta} - 1} \\
+    \sin\alpha &= n\sin \beta \implies \sin \beta = \frac{\sin\alpha}{n} \\
+    d &= \frac{h}{\sqrt{\frac 1{\sin^2 \beta} - 1}} = \frac{h}{\sqrt{\sqr{\frac{n}{\sin\alpha}} - 1}} \\
+    2d &= \frac{2{h}}{\sqrt{\sqr{\frac{n}{\sin\alpha}} - 1}} \approx 268{,}1\,\text{см}
+    \end{align*}
+}
+\solutionspace{120pt}
+
+\tasknumber{10}%
+\task{%
+    Установка для наблюдения интерференции состоит
+    из двух когерентных источников света и экрана.
+    Расстояние между источниками $l = 1{,}5\,\text{мм}$,
+    а от каждого источника до экрана — $L = 4\,\text{м}$.
+    Сделайте рисунок и укажите положение нулевого максимума освещенности,
+    а также определите расстояние между вторым минимумом и нулевым максимумом.
+    Длина волны падающего света составляет $\lambda = 500\,\text{нм}$.
+}
+\answer{%
+    \begin{align*}
+    l_1^2 &= L^2 + \sqr{x - \frac \ell 2} \\
+    l_2^2 &= L^2 + \sqr{x + \frac \ell 2} \\
+    l_2^2 - l_1^2 &= 2x\ell \implies (l_2 - l_1)(l_2 + l_1) = 2x\ell \implies n\lambda \cdot 2L \approx 2x_n\ell \implies x_n = \frac{\lambda L}{\ell} n, n\in \mathbb{N} \\
+    x &= \frac{\lambda L}{\ell} \cdot \frac32 = \frac{500\,\text{нм} \cdot 4\,\text{м}}{1{,}5\,\text{мм}} \cdot \frac32 \approx 2\,\text{мм}
+    \end{align*}
+}
+\solutionspace{120pt}
+
+\tasknumber{11}%
+\task{%
+    Высота солнца над горизонтом составляет $ 50 \degrees$.
+    Посреди ровного бетонного поля стоит одинокий цилиндрический столб высотой $5\,\text{м}$ и радиусом $2\,\text{см}$.
+    Определите площадь полной тени от этого столба на бетоне.
+    Угловой размер Солнца принять равным $30'$ и считать малым углом.
+}
+\answer{%
+    $\text{треугольник} \implies S = 0{,}06\,\text{м}^{2}$
 }
 
 \variantsplitter
@@ -2868,6 +4806,63 @@
 \answer{%
     $\cos \alpha = \frac{c^2 - \sqr{2a} - \sqr{2b}}{2 \cdot 2a \cdot 2b} \approx 0{,}707 \implies \alpha = 45{,}0\degrees$
 }
+\solutionspace{80pt}
+
+\tasknumber{8}%
+\task{%
+    Докажите, что тонкий клин с углом при вершине $\varphi$ из стекла с показателем преломления $n$
+        отклонит луч на угол $(n-1)\varphi$ (в приближении малых углов).
+}
+\solutionspace{150pt}
+
+\tasknumber{9}%
+\task{%
+    На дне водоема глубиной $4\,\text{м}$ лежит зеркало.
+    Луч света, пройдя через воду, отражается от зеркала и выходит из воды.
+    Найти расстояние между точкой входа луча в воду и точкой выхода луча из воды,
+    если показатель преломления воды $1{,}33$, а угол падения луча $25\degrees$.
+}
+\answer{%
+    \begin{align*}
+    \ctg \beta &= \frac{h}{d:L:s} \implies d = \frac{h}{\ctg \beta} \\
+    \frac 1{\sin^2 \beta} &= \ctg^2 \beta + 1 \implies \ctg \beta = \sqrt{\frac 1{\sin^2 \beta} - 1} \\
+    \sin\alpha &= n\sin \beta \implies \sin \beta = \frac{\sin\alpha}{n} \\
+    d &= \frac{h}{\sqrt{\frac 1{\sin^2 \beta} - 1}} = \frac{h}{\sqrt{\sqr{\frac{n}{\sin\alpha}} - 1}} \\
+    2d &= \frac{2{h}}{\sqrt{\sqr{\frac{n}{\sin\alpha}} - 1}} \approx 268{,}1\,\text{см}
+    \end{align*}
+}
+\solutionspace{120pt}
+
+\tasknumber{10}%
+\task{%
+    Установка для наблюдения интерференции состоит
+    из двух когерентных источников света и экрана.
+    Расстояние между источниками $l = 2{,}4\,\text{мм}$,
+    а от каждого источника до экрана — $L = 2\,\text{м}$.
+    Сделайте рисунок и укажите положение нулевого максимума освещенности,
+    а также определите расстояние между четвёртым минимумом и нулевым максимумом.
+    Длина волны падающего света составляет $\lambda = 500\,\text{нм}$.
+}
+\answer{%
+    \begin{align*}
+    l_1^2 &= L^2 + \sqr{x - \frac \ell 2} \\
+    l_2^2 &= L^2 + \sqr{x + \frac \ell 2} \\
+    l_2^2 - l_1^2 &= 2x\ell \implies (l_2 - l_1)(l_2 + l_1) = 2x\ell \implies n\lambda \cdot 2L \approx 2x_n\ell \implies x_n = \frac{\lambda L}{\ell} n, n\in \mathbb{N} \\
+    x &= \frac{\lambda L}{\ell} \cdot \frac72 = \frac{500\,\text{нм} \cdot 2\,\text{м}}{2{,}4\,\text{мм}} \cdot \frac72 \approx 1{,}46\,\text{мм}
+    \end{align*}
+}
+\solutionspace{120pt}
+
+\tasknumber{11}%
+\task{%
+    Высота солнца над горизонтом составляет $ 35 \degrees$.
+    Посреди ровного бетонного поля стоит одинокий цилиндрический столб высотой $7\,\text{м}$ и радиусом $8\,\text{см}$.
+    Определите площадь полной тени от этого столба на бетоне.
+    Угловой размер Солнца принять равным $30'$ и считать малым углом.
+}
+\answer{%
+    $\text{трапеция} \implies S = 2{,}13\,\text{м}^{2}$
+}
 
 \variantsplitter
 
@@ -2949,5 +4944,62 @@
 }
 \answer{%
     $\cos \alpha = \frac{c^2 - \sqr{2a} - \sqr{2b}}{2 \cdot 2a \cdot 2b} \approx 0{,}500 \implies \alpha = 60{,}0\degrees$
+}
+\solutionspace{80pt}
+
+\tasknumber{8}%
+\task{%
+    Докажите, что мнимое изображение точечного источника света под поверхностью воды из воздуха
+        видно на глубине в $n$ раз меньше его реальной глубины (в приближении малых углов).
+}
+\solutionspace{150pt}
+
+\tasknumber{9}%
+\task{%
+    На дне водоема глубиной $3\,\text{м}$ лежит зеркало.
+    Луч света, пройдя через воду, отражается от зеркала и выходит из воды.
+    Найти расстояние между точкой входа луча в воду и точкой выхода луча из воды,
+    если показатель преломления воды $1{,}33$, а угол падения луча $35\degrees$.
+}
+\answer{%
+    \begin{align*}
+    \ctg \beta &= \frac{h}{d:L:s} \implies d = \frac{h}{\ctg \beta} \\
+    \frac 1{\sin^2 \beta} &= \ctg^2 \beta + 1 \implies \ctg \beta = \sqrt{\frac 1{\sin^2 \beta} - 1} \\
+    \sin\alpha &= n\sin \beta \implies \sin \beta = \frac{\sin\alpha}{n} \\
+    d &= \frac{h}{\sqrt{\frac 1{\sin^2 \beta} - 1}} = \frac{h}{\sqrt{\sqr{\frac{n}{\sin\alpha}} - 1}} \\
+    2d &= \frac{2{h}}{\sqrt{\sqr{\frac{n}{\sin\alpha}} - 1}} \approx 286{,}8\,\text{см}
+    \end{align*}
+}
+\solutionspace{120pt}
+
+\tasknumber{10}%
+\task{%
+    Установка для наблюдения интерференции состоит
+    из двух когерентных источников света и экрана.
+    Расстояние между источниками $l = 1{,}2\,\text{мм}$,
+    а от каждого источника до экрана — $L = 3\,\text{м}$.
+    Сделайте рисунок и укажите положение нулевого максимума освещенности,
+    а также определите расстояние между третьим максимумом и нулевым максимумом.
+    Длина волны падающего света составляет $\lambda = 400\,\text{нм}$.
+}
+\answer{%
+    \begin{align*}
+    l_1^2 &= L^2 + \sqr{x - \frac \ell 2} \\
+    l_2^2 &= L^2 + \sqr{x + \frac \ell 2} \\
+    l_2^2 - l_1^2 &= 2x\ell \implies (l_2 - l_1)(l_2 + l_1) = 2x\ell \implies n\lambda \cdot 2L \approx 2x_n\ell \implies x_n = \frac{\lambda L}{\ell} n, n\in \mathbb{N} \\
+    x &= \frac{\lambda L}{\ell} \cdot 3 = \frac{400\,\text{нм} \cdot 3\,\text{м}}{1{,}2\,\text{мм}} \cdot 3 \approx 3\,\text{мм}
+    \end{align*}
+}
+\solutionspace{120pt}
+
+\tasknumber{11}%
+\task{%
+    Высота солнца над горизонтом составляет $ 55 \degrees$.
+    Посреди ровного бетонного поля стоит одинокий цилиндрический столб высотой $3\,\text{м}$ и радиусом $8\,\text{см}$.
+    Определите площадь полной тени от этого столба на бетоне.
+    Угловой размер Солнца принять равным $30'$ и считать малым углом.
+}
+\answer{%
+    $\text{трапеция} \implies S = 0{,}37\,\text{м}^{2}$
 }
 % autogenerated
