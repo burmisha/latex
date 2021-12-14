@@ -65,7 +65,7 @@ class ReflectionRotate(variant.VariantTask):
 ''')
 @variant.solution_space(80)
 @variant.arg(d='5/6/7 см')
-@variant.arg(v='10/20/30 см/с')
+@variant.arg(v='1/2/3 см/с')
 @variant.arg(h='50/60/70 см')
 @variant.arg(t='2/3/4/5 с')
 @variant.answer_short('{d:V}')

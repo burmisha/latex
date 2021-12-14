@@ -688,7 +688,7 @@ def get_all_variants(*, flt=None):
             task_id='2021-12-09 11БА - ГО - 1',
             classes=[
                 {'optics.theory': ['Task03']},
-                {'optics.geom': ['Vishnyakova_3_6_4', 'Vishnyakova_3_6_5']},
+                {'optics.refraction': ['Vishnyakova_3_6_4', 'Vishnyakova_3_6_5']},
                 # {'optics.reflection': ['Reflection01']},
                 {'optics.shadow': ['Shadow01', 'Shadow02']},
             ],

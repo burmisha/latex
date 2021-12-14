@@ -50,6 +50,59 @@ class Refraction01(variant.VariantTask):
 
 
 @variant.text('''
+    На дне водоема глубиной {h:V:e} лежит зеркало.
+    Луч света, пройдя через воду, отражается от зеркала и выходит из воды.
+    Найти расстояние между точкой входа луча в воду и точкой выхода луча из воды,
+    если показатель преломления воды {n:V:e}, а угол падения луча ${alpha}\\degrees$.
+''')
+@variant.solution_space(120)
+@variant.arg(h='h = 2/3/4 м')
+@variant.arg(n=['n = 1.33'])
+@variant.arg(alpha=[25, 30, 35])
+@variant.answer_align([
+    '\\ctg \\beta &= \\frac{h:L:s}{d:L:s} \\implies d = \\frac{h:L:s}{\\ctg \\beta}',
+    '\\frac 1{\\sin^2 \\beta} &= \\ctg^2 \\beta + 1 \\implies \\ctg \\beta = \\sqrt{\\frac 1{\\sin^2 \\beta} - 1}',
+    '\\sin\\alpha &= n\\sin \\beta \\implies \\sin \\beta = \\frac{\\sin\\alpha}{n:L:s}',
+    'd &= \\frac{h:L:s}{\\sqrt{\\frac 1{\\sin^2 \\beta} - 1}} '
+    '= \\frac{h:L:s}{\\sqrt{\\sqr{\\frac{n:L:s}{\\sin\\alpha}} - 1}}',
+    '2d &= \\frac{2{h:L:s}}{\\sqrt{\\sqr{\\frac{n:L:s}{\\sin\\alpha}} - 1}} \\approx {d2:V}',
+])
+class Vishnyakova_3_6_4(variant.VariantTask):
+    def GetUpdate(self, *, h=None, n=None, alpha=None):
+        sin = math.sin(float(alpha) / 180 * math.pi)
+        d_value = float(h.SI_Value) * 2 * ((float(n.SI_Value) / sin) ** 2 - 1) ** -0.5
+        return dict(
+            d2=f'2d = {d_value * 100:.1f} см',
+        )
+
+
+@variant.text('''
+    Луч света падает на {how} расположенную стеклянную пластинку толщиной {d:V:e}.
+    Пройдя через пластину, он выходит из неё в точке, смещённой по {how2} от точки падения на расстояние {h:V:e}.
+    Показатель преломления стекла {n:V:e}. Найти синус угла падения.
+''')
+@variant.solution_space(120)
+@variant.arg(how__how2=[('горизонтально', 'горизонтали'), ('вертикально', 'вертикали')])
+@variant.arg(d='d = 1.2/1.3/1.4/1.5/1.6 см')
+@variant.arg(h='h = 4/5/6 мм')
+@variant.arg(n='n = 1.4/1.5/1.6')
+@variant.answer_align([
+    '\\ctg \\beta &= \\frac{h:L:s}{d:L:s} \\implies',
+    '\\implies \\frac 1{\\sin^2 \\beta} &= \\ctg^2 \\beta + 1 = \\sqr{\\frac{h:L:s}{d:L:s}} + 1 \\implies',
+    '\\implies \\sin\\alpha &= n\\sin \\beta = n\\sqrt {\\frac 1{\\sqr{\\frac{h:L:s}{d:L:s}} + 1}} \\approx {sin:.2f}',
+])
+class Vishnyakova_3_6_5(variant.VariantTask):
+    def GetUpdate(self, *, how=None, how2=None, d=None, h=None, n=None):
+        ctg_b = float((d / h).SI_Value)
+        sin_b = 1 / (ctg_b ** 2 + 1) ** 0.5
+        sin_a = float(n.SI_Value) * sin_b
+        assert 0.1 <= sin_a <= 0.9, [sin_a, sin_b, h, d]
+        return dict(
+            sin=sin_a,
+        )
+
+
+@variant.text('''
     На плоскопараллельную стеклянную пластинку под углом ${angle}\\degrees$
     падают два параллельных луча света, расстояние между которыми {d:V:e}.
     Определите расстояние между точками, в которых эти лучи выходят из пластинки.
