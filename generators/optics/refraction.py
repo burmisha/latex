@@ -6,7 +6,7 @@ import math
 
 
 @variant.text('''
-    Луч падает из воздуха/вакуума на стекло с показателем преломления {n}.
+    Луч падает из {what} на стекло с показателем преломления {n}.
     Сделайте рисунок (без рисунка и отмеченных углов задача не проверяется) и определите:
     \\begin{itemize}
         \\item угол отражения,
@@ -19,6 +19,7 @@ import math
 ''')
 @variant.solution_space(100)
 @variant.arg(n='1.35/1.45/1.55/1.65')
+# @variant.arg(what='воздуха/вакуума')  # TODO: enable
 @variant.arg(which=['угол падения', 'между падающим лучом и границей раздела сред'])
 @variant.arg(alpha_base=[22, 28, 35, 40, 50, 55, 65])
 @variant.answer_align([
@@ -81,11 +82,11 @@ class Chernoutsan_13_12(variant.VariantTask):
 ''')
 class Chernoutsan_13_13(variant.VariantTask):
     def GetUpdate(self, *, sin=None, H=None, h=None, n=None):
-        s = float(sin)
-        c = (1 - s ** 2) ** 0.5
-        l1 = float(H.SI_Value - h.SI_Value) * c / s
+        sin_a = float(sin)
+        cos_a = (1 - sin_a ** 2) ** 0.5
+        l1 = float(H.SI_Value - h.SI_Value) * cos_a / sin_a
 
-        sin_b = c / float(n)
+        sin_b = cos_a / float(n)
         cos_b = (1 - sin_b ** 2) ** 0.5
         l2 = float(h.SI_Value) * sin_b / cos_b
 

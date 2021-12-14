@@ -70,13 +70,13 @@ class Vishnyakova_3_6_4(variant.VariantTask):
 
 @variant.text('''
     Луч света падает на {how} расположенную стеклянную пластинку толщиной {d:V:e}.
-    Пройдя через пластину, он выходит из неё в точке, смещённой по горизонтали от точки падения на расстояние {h:V:e}.
+    Пройдя через пластину, он выходит из неё в точке, смещённой по {how2} от точки падения на расстояние {h:V:e}.
     Показатель преломления стекла {n:V:e}. Найти синус угла падения.
 ''')
 @variant.solution_space(120)
-@variant.arg(how='горизонтально/вертикально')
-@variant.arg(d='d = 4/5/6 мм')
-@variant.arg(h='h = 1.2/1.3/1.4/1.5/1.6 см')
+@variant.arg(how__how2=[('горизонтально', 'горизонтали'), ('вертикально', 'вертикали')])
+@variant.arg(d='d = 1.2/1.3/1.4/1.5/1.6 см')
+@variant.arg(h='h = 4/5/6 мм')
 @variant.arg(n='n = 1.4/1.5/1.6')
 @variant.answer_align([
     '\\ctg \\beta &= \\frac{h:L:s}{d:L:s} \\implies',
@@ -84,11 +84,13 @@ class Vishnyakova_3_6_4(variant.VariantTask):
     '\\implies \\sin\\alpha &= n\\sin \\beta = n\\sqrt {\\frac 1{\\sqr{\\frac{h:L:s}{d:L:s}} + 1}} \\approx {sin:.2f}',
 ])
 class Vishnyakova_3_6_5(variant.VariantTask):
-    def GetUpdate(self, *, how=None, d=None, h=None, n=None):
-        sin = float(n.SI_Value) / (float((h / d).SI_Value ** 2) + 1) ** 0.5
-        assert 0.1 <= sin <= 0.9, [sin, h / d, (h / d).SI_Value]
+    def GetUpdate(self, *, how=None, how2=None, d=None, h=None, n=None):
+        ctg_b = float((d / h).SI_Value)
+        sin_b = 1 / (ctg_b ** 2 + 1) ** 0.5
+        sin_a = float(n.SI_Value) * sin_b
+        assert 0.1 <= sin_a <= 0.9, [sin_a, sin_b, h, d]
         return dict(
-            sin=sin,
+            sin=sin_a,
         )
 
 
