@@ -710,14 +710,18 @@ def get_all_variants(*, flt=None):
         ),
         Work(
             task_id='2021-12-15 11БА - ГО - 3',
-            classes={'optics.reflection': [
-                'Chernoutsan_13_5',
-                'Chernoutsan_13_6',
-                'Chernoutsan_13_7',
-                'Chernoutsan_13_8',
-                'Chernoutsan_13_9',
-                'Chernoutsan_13_10',
-                'Chernoutsan_13_11',
+            classes={'optics': [
+                'reflection.Chernoutsan_13_5',
+                'reflection.Chernoutsan_13_6',
+                'reflection.Chernoutsan_13_7',
+                'reflection.Chernoutsan_13_8',
+                'reflection.Chernoutsan_13_9',
+                'reflection.Chernoutsan_13_10',
+                'reflection.Chernoutsan_13_11',
+                'refraction.Refraction02',
+                'refraction.Vishnyakova_3_6_4',
+                'interference.Vishnyakova_example_11',
+                'shadow.Shadow02',
             ]},
         ),
         Work(
@@ -727,6 +731,7 @@ def get_all_variants(*, flt=None):
                 'Chernoutsan_13_13',
                 'Chernoutsan_13_14',
                 'Chernoutsan_13_15',
+                'Vishnyakova_3_6_5',
             ]},
         ),
     ]

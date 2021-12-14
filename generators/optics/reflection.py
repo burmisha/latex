@@ -29,9 +29,7 @@ class Reflection02(variant.VariantTask):
     pass
 
 
-@variant.text('''
-    Докажите, что {what}.
-''')
+@variant.text('Докажите, что {what}.')
 @variant.solution_space(120)
 @variant.arg(what=[
     '''изображение точечного источника света в плоском зеркале можно получить,
@@ -74,7 +72,7 @@ class ReflectionSize(variant.VariantTask):
 
 
 @variant.text('''
-    Предмет {what} со скоростью {v:V:e}. Определите скорость изображения.
+    Предмет {what} со скоростью {v:V:e}. Определите скорость изображения, приняв зеркало стационарным.
 ''')
 @variant.solution_space(80)
 @variant.arg(v='2/3/4 см/с')
@@ -87,6 +85,7 @@ class ReflectionSpeed(variant.VariantTask):
 @variant.text('''
     Запишите своё имя (не фамилию) печатными буквами
     и постройте их изображение в 2 зеркалах: вертикальном и горизонтальном.
+    Не забудьте отметить зеркала.
 ''')
 @variant.solution_space(120)
 @variant.no_args
@@ -155,9 +154,9 @@ class Chernoutsan_13_6(variant.VariantTask):
     ('Полина', 'могла', 'Полины'),
     ('Рипсиме', 'могла', 'Рипсиме'),
     ('Савелий', 'мог', 'Савелия'),
-    ('Тимур', 'мог', 'Тимур'),
+    ('Тимур', 'мог', 'Тимура'),
     ('Ульяна', 'могла', 'Ульяны'),
-    ('Феофан', 'мог', 'Феофан'),
+    ('Феофан', 'мог', 'Феофана'),
 ])
 @variant.answer_short('{l:V}, {H:V}')
 class Chernoutsan_13_7(variant.VariantTask):
