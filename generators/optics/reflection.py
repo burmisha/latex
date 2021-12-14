@@ -30,11 +30,15 @@ class Reflection02(variant.VariantTask):
 
 
 @variant.text('''
-    Докажите, что изображение точечного источника света в плоском зеркале можно получить,
-    «удвоив» (в векторном смысле) перпендикуляр, опущенный из источника на плоскость зеркала.
+    Докажите, что {what}.
 ''')
 @variant.solution_space(120)
-@variant.no_args
+@variant.arg(what=[
+    '''изображение точечного источника света в плоском зеркале можно получить,
+    «удвоив» (в векторном смысле) перпендикуляр, опущенный из источника на плоскость зеркала''',
+    '''при повороте плоского зеркала на угол $\\varphi$ вокруг оси, лежащей в плоскости зеркала
+    и перпендикулярной падающему лучу, этот луч повернётся на угол $2\\varphi$''',
+])
 class Reflection03(variant.VariantTask):
     pass
 
@@ -45,7 +49,7 @@ class Reflection03(variant.VariantTask):
     Определите угловую скорость вращения отражённого луча.
 ''')
 @variant.solution_space(80)
-@variant.arg(omega='0.1/0.2 рад/с')
+@variant.arg(omega='0.12/0.14/0.15/0.16/0.17/0.18/0.19/0.23/0.25/0.28 рад/с')
 @variant.answer_short('\\omega\' = 2 \\omega = {omega2:V}')
 class ReflectionRotate(variant.VariantTask):
     def GetUpdate(self, *, omega=None):

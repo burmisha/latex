@@ -1,10 +1,10 @@
 import generators.variant as variant
 
-from generators.helpers import letter_variants, Fraction, Consts
+from generators.helpers import letter_variants, Fraction, Consts, UnitValue
 
 import math
 
-
+# TODO: use h
 @variant.text('''
     Вертикально стоящий шест высотой 1,1 м, освещенный солнцем,
     отбрасывает на горизонтальную поверхность земли тень длиной {l:V:e}.
@@ -14,8 +14,13 @@ import math
 @variant.arg(h='h = 1.2/1.5/1.8 м')
 @variant.arg(l='\\ell = 1/2/3/4 м')
 @variant.arg(DL='\\Delta L = 5/6/7/8/9 м')
+@variant.answer_short('\\cfrac{ H }{ h } = \\cfrac{l + \\Delta l}{ l } \\implies H = h \\cbr{1 + \\cfrac{\\Delta l}{ l }} \\approx {H:V}')
 class Vishnyakova_3_6_1(variant.VariantTask):
-    pass
+    def GetUpdate(self, *, h=None, l=None, DL=None):
+        h = UnitValue('1.1 м')
+        return dict(
+            H=(h * ((DL / l).SI_Value + 1)).IncPrecision(1),
+        )
 
 
 @variant.text('''
@@ -28,7 +33,7 @@ class Vishnyakova_3_6_1(variant.VariantTask):
 @variant.arg(D='D = 2/2.5/3/3.5/4 см')
 @variant.arg(l='l = 12/15/18 см')
 @variant.arg(L='L = 10/20/30 см')
-@variant.answer_short('\\cfrac{\\frac d2 + \\frac D2}l = \\frac{\\frac d2 + r}{l + L} \\implies r = \\cfrac{Dl + dL + DL}{2l} = \\cfrac D2 + \\cfrac{ L }{ l } * \\cfrac{d+D}2 \\approx {r:V} \\implies 2r \\approx {r2:V}')
+@variant.answer_short('\\cfrac{\\frac d2 + \\frac D2}l = \\cfrac{\\frac d2 + r}{l + L} \\implies r = \\cfrac{Dl + dL + DL}{2l} = \\cfrac D2 + \\cfrac{ L }{ l } * \\cfrac{d+D}2 \\approx {r:V} \\implies 2r \\approx {r2:V}')
 class Shadow01(variant.VariantTask):
     def GetUpdate(self, *, d=None, D=None, l=None, L=None, what=None):
         r_value = ((D * l).SI_Value + (d * L).SI_Value + (D * L).SI_Value) / 2 / l.SI_Value
