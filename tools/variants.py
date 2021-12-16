@@ -725,13 +725,24 @@ def get_all_variants(*, flt=None):
             ]},
         ),
         Work(
+            task_id='2021-12-15 11Б - ВО - 2',
+            classes={'optics': [
+                'interference.Task01',
+                'difraction.Vishnyakova_3_6_15',
+                'difraction.Vishnyakova_3_6_16',
+                'difraction.Vishnyakova_3_6_17',
+                'difraction.Vishnyakova_3_6_18',
+            ]},
+        ),
+        Work(
             task_id='2021-12-16 11БА - ГО - 4',
-            classes={'optics.refraction': [
-                'Chernoutsan_13_12',
-                'Chernoutsan_13_13',
-                'Chernoutsan_13_14',
-                'Chernoutsan_13_15',
-                'Vishnyakova_3_6_5',
+            classes={'optics': [
+                'theory.Task05',
+                'refraction.Chernoutsan_13_12',
+                'refraction.Chernoutsan_13_13',
+                'refraction.Chernoutsan_13_14',
+                'refraction.Chernoutsan_13_15',
+                'refraction.Vishnyakova_3_6_5',
             ]},
         ),
     ]
