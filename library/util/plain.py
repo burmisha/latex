@@ -1,6 +1,5 @@
 
 def to_plain_list(config, prefix='', sep='.'):
-    print(config, prefix, sep)
     if isinstance(config, dict):
         new_prefix = f'{prefix}{sep}' if prefix else ''
         for key, value in config.items():
@@ -32,7 +31,7 @@ def test_to_plain_list():
     ]
     for config, result in data:
         res = list(to_plain_list(config))
-        assert res == result, f'{res} != {result}'
+        assert res == result, f'got {res} != expected {result}'
 
 
 test_to_plain_list()
