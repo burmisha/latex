@@ -16,11 +16,11 @@ def run(args):
         raise RuntimeError('Could not save all videos')
 
     for downloader in [
-        # library.download.MathusPhys(),
-        # library.download.ZnakKachestava(),
-        # library.download.PhysNsuRu(),
+        library.download.MathusPhys(library.location.udr('Материалы - mathus')),
+        library.download.ZnakKachestva(library.location.udr('Материалы - znakka4estva - 2')),
+        library.download.PhysNsuRu(library.location.udr('Материалы - phys.nsu.ru')),
     ]:
-        downloader.Download(library.location.udr(downloader.GetDirname()))
+        downloader.Download(force=False)
 
     all_videos = []
 
@@ -263,9 +263,6 @@ def run(args):
 
     topic_detector = library.topic.TopicDetector()
     topic_filter =  library.topic.TopicFilter(args.filter)
-
-    assert topic_detector.get_topic_index('Термодинамика - Внутренняя энергия идеального газа') is not None
-    assert topic_detector.get_topic_index('Термодинамика - Циклические процессы') is not None
 
     video_with_topics = []
     for video in all_videos:

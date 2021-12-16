@@ -33,6 +33,9 @@ class TopicDetector:
                             joined_title = ' '.join([subparts.get('name', ''), title]).strip()
                             self._matcher[joined_title].append(topic_index)
 
+        assert self.get_topic_index('Термодинамика - Внутренняя энергия идеального газа') is not None
+        assert self.get_topic_index('Термодинамика - Циклические процессы') is not None
+
     def get_topic_index(self, title, grade=None):
         assert grade in (7, 8, 9, 10, 11, None)
         search_key = title.replace('класс', '')

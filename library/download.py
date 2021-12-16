@@ -213,26 +213,51 @@ MATHUS_PHYS_CONFIG = [
 ]
 
 
-class MathusPhys:
-    def Download(self, path):
-        for partIndex, (partName, files) in enumerate(MATHUS_PHYS_CONFIG, 1):
-            partDir = os.path.join(path, f'{partIndex:02d}-{partName}')
-            if not os.path.isdir(partDir):
-                os.mkdir(partDir)
-            log.info(f'Chapter {partName} -> {partDir}')
-            for index, (location, name) in enumerate(files, 1):
-                assert location.endswith('.pdf')
-                url = 'http://mathus.ru' + location
-                filename = f'{index:02d}-{name}'.replace(' ', '-').replace('.', '') + '.pdf'
-                log.info('    Download {url} into {filename}')
-                assert '/' not in filename
-                dstFile = os.path.join(partDir, filename)
-                data = requests.get(url).content
-                with open(dstFile, 'wb') as f:
-                    f.write(data)
+class MultipleFilesDownloader:
+    def __init__(self, dirname):
+        self._dirname = dirname
 
-    def GetDirname(self):
-        return 'Материалы - mathus'
+    def _get_filename_and_urls(self):
+        raise NotImplementedError()
+
+    def _create_missing_local_dir(self, filename):
+        local_dirname = os.path.dirname(filename)
+        base_dir = os.path.join(self._dirname, local_dirname)
+        if not os.path.isdir(base_dir):
+            log.info(f'Create missing {base_dir}')
+            os.mkdir(base_dir)
+
+    def Download(self, force=False):
+        log.info(f'Download into {self._dirname}:')
+        for filename, url in self._get_filename_and_urls():
+            self._create_missing_local_dir(filename)
+
+            fullname = os.path.join(self._dirname, filename)
+            assert library.files.path_is_ok(fullname)
+            if not os.path.exists(fullname) or force:
+                log.info(f'    Download {url} into {filename} ...')
+                response = requests.get(url)
+                if response.ok and response.content:
+                    with open(fullname, 'wb') as f:
+                        f.write(response.content)
+                else:
+                    log.error(f'{cm("Could not download", color=color.Red)} {url}: {response}')
+                    # raise RuntimeError(f'Could not download')
+            else:
+                log.info(f'    Already exists: {filename} ...')
+
+
+class MathusPhys(MultipleFilesDownloader):
+    HOST = 'http://mathus.ru'
+
+    def _get_filename_and_urls(self):
+        for part_index, (part_name, files) in enumerate(MATHUS_PHYS_CONFIG, 1):
+            for index, (url_suffix, name) in enumerate(files, 1):
+                assert url_suffix.endswith('.pdf')
+                assert '/' not in name
+                filename = f'{index:02d}-{name}'.replace(' ', '-').replace('.', '') + '.pdf'
+                yield os.path.join(f'{part_index:02d}-{part_name}', filename), f'{self.HOST}{url_suffix}'
+
 
 PhysNsuRu_Config = [
     ('First%20Semester/Urok1.pdf', '1 - Урок 1 - Закон Кулона'),
@@ -288,55 +313,44 @@ PhysNsuRu_Config = [
 ]
 
 
-class PhysNsuRu:
-    def Download(self, path):
-        # url = 'http://phys.nsu.ru/cherk/Zadanie/zadaniya.htm'
-        prefix = 'http://phys.nsu.ru/cherk/Eldin/%s'
+class PhysNsuRu(MultipleFilesDownloader):
+    HOST = 'http://phys.nsu.ru'
+
+    def _get_filename_and_urls(self):
+        # see 'http://phys.nsu.ru/cherk/Zadanie/zadaniya.htm'
         for suffix, filename in PhysNsuRu_Config:
-            url = prefix % suffix
-            dstFile = os.path.join(path, filename + '.pdf')
-            data = requests.get(url).content
-            with open(dstFile, 'wb') as f:
-                f.write(data)
-
-    def GetDirname(self):
-        return 'Материалы - phys.nsu.ru'
+            yield f'{filename}.pdf', f'{self.HOST}/cherk/Eldin/{suffix}'
 
 
+class ZnakKachestva(MultipleFilesDownloader):
+    HOST = 'http://znakka4estva.ru'
 
-class ZnakKachestava:
-    def Download(self, path):
-        host = 'http://znakka4estva.ru'
-        urls = []
-        for i in range(1, 14):
-            url = f'{host}/prezentacii/fizika-i-energetika/'
-            d = requests.get(url, params={'page': i}).text
-            for line in d.split('\n'):
-                if 'blog-img-wrapper' in line and 'href="' + url in line:
+    def _get_presentation_urls(self):
+        for page_index in range(1, 14):
+            page_url = f'{self.HOST}/prezentacii/fizika-i-energetika/'
+            log.info(f'Processing page {page_index}: {page_url}')
+            response = requests.get(page_url, params={'page': page_index})
+            for line in response.text.split('\n'):
+                if 'blog-img-wrapper' in line and 'href="' + page_url in line:
                     l = re.sub(r'.*href="', '', line)
-                    ll = re.sub(r'" class=".*', '', l)
-                    urls.append(ll)
+                    presentation_url = re.sub(r'" class=".*', '', l)
+                    log.info(f'    New presentation: {presentation_url}')
+                    yield presentation_url
 
-        for url in urls:
-            lines = requests.get(url).text.split('\n')
-            for line in lines:
+    def _get_filename_and_urls(self):
+        for presentation_url in self._get_presentation_urls():
+            response = requests.get(presentation_url)
+            for line in response.text.split('\n'):
                 if '<h1 class="pull-sm-left">' in line:
                     l = re.sub(r'.*"pull-sm-left">', '', line)
                     ll = re.sub(r'<.*', '', l)
-                    klassStart = ll.find('. ')
-                    presName = ll[klassStart + 2:]
-                    link = f'{host}/uploads/category_items/{presName}.ppt'
+                    split_position = ll.find('. ')
+                    name = ll[split_position + 2:]
+                    grade = int(presentation_url.split('/')[-2].split('-')[0])
+                    assert 7 <= grade <= 11, f'Invalid grade: {grade}'
+                    link = f'{self.HOST}/uploads/category_items/{name}.ppt'
                     filename = re.sub(r'\. (\d)\. ', r'. 0\1. ', ll)
-                    filename = '{filename}.ppt'
-                    filename = os.path.join(path, filename)
-                    log.info(f'Saving {presName} to {filename}')
-                    response = requests.get(link)
-                    if response.ok and response.content:
-                        with open(filename, 'wb') as f:
-                            f.write(response.content)
-
-    def GetDirname(self):
-        return 'znakka4estva'
+                    yield os.path.join(f'{grade} класс', f'{filename}.ppt'), link
 
 
 class YoutubeVideo:
