@@ -62,7 +62,7 @@ class Refraction02(variant.VariantTask):
 
 
 @variant.text('''
-    На дне водоема глубиной {h:V:e} лежит зеркало.
+    На дне водоёма глубиной {h:V:e} лежит зеркало.
     Луч света, пройдя через воду, отражается от зеркала и выходит из воды.
     Найти расстояние между точкой входа луча в воду и точкой выхода луча из воды,
     если показатель преломления воды {n:V:e}, а угол падения луча ${alpha}\\degrees$.
@@ -133,8 +133,8 @@ class Chernoutsan_13_12(variant.VariantTask):
 
 @variant.text('''
     Солнце составляет с горизонтом угол, синус которого {sin}.
-    Шест высотой {H:V:e} вбит в дно водоема глубиной {h:V:e}.
-    Найдите длину тени от этого шеста на дне водоема, если показатель преломления воды {n}.
+    Шест высотой {H:V:e} вбит в дно водоёма глубиной {h:V:e}.
+    Найдите длину тени от этого шеста на дне водоёма, если показатель преломления воды {n}.
 ''')
 @variant.solution_space(80)
 @variant.arg(sin='0.5/0.6/0.7/0.8')
@@ -165,22 +165,23 @@ class Chernoutsan_13_13(variant.VariantTask):
 
 @variant.text('''
     Луч света падает на плоское зеркало под углом, синус которого {sin}.
-    На сколько миллиметров сместится отраженный луч,
+    На сколько миллиметров сместится отражённый луч,
     если на зеркало положить прозрачную пластину толщиной {d:V:e} с показателем преломления {n:V:e}?
 ''')
 @variant.solution_space(80)
 @variant.arg(sin='0.65/0.75/0.85')
 @variant.arg(d='d = 11/12/13/14/15/16/17/18/19 мм')
 @variant.arg(n='n = 1.3/1.35/1.4/1.45/1.5/1.55/1.6')
-@variant.answer_short('1 * \\sin \\alpha = n * \\sin \\beta \\implies \\beta \\approx {beta:.1f}, L = 2 d \\tg \\alpha - 2 d \\tg \\beta \\approx {L:V}')
+@variant.answer_short('1 * \\sin \\alpha = n * \\sin \\beta \\implies \\beta \\approx {beta:.1f}, L = \\cbr{2 d \\tg \\alpha - 2 d \\tg \\beta} * \\cos \\alpha \\approx {L:V}')
 class Chernoutsan_13_14(variant.VariantTask):
     def GetUpdate(self, *, sin=None, d=None, n=None):
-        cos = (1 - float(sin) ** 2) ** 0.5
-        sin_b = float(sin) / float(n.SI_Value)
+        sin_a = float(sin)
+        cos_a = (1 - sin_a ** 2) ** 0.5
+        sin_b = sin_a / float(n.SI_Value)
         cos_b = (1 - float(sin_b) ** 2) ** 0.5
         return dict(
             beta=math.asin(sin_b) / math.pi * 180,
-            L=(2 * d * (float(sin) / cos - sin_b / cos_b)).IncPrecision(1).As('мм'),
+            L=(2 * d * (sin_a / cos_a - sin_b / cos_b) * cos_a).IncPrecision(1).As('мм'),
         )
 
 

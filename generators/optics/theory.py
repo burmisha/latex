@@ -22,3 +22,17 @@ class Task03(variant.VariantTask):
 @variant.arg(q='преломления/отражения')
 class Task04(variant.VariantTask):
     pass
+
+
+@variant.text('''
+    Для закона {q}:
+    \\begin{itemize}
+        \\item сделайте рисунок,
+        \\item отметьте все необходимые углы и подпишите их названия,
+        \\item запишите этот закон формулой.
+    \\end{itemize}
+''')
+@variant.solution_space(80)
+@variant.arg(q='преломления/отражения')
+class Task05(variant.VariantTask):
+    pass

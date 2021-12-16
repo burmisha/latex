@@ -128,7 +128,7 @@ class Chernoutsan_13_6(variant.VariantTask):
 
 @variant.text('''
     {who} стоит перед плоским зеркалом, укрепленным на вертикальной стене.
-    Какова должна быть минимальная высота зеркала, чтобы {who} мог видеть себя в полный рост?
+    Какова должна быть минимальная высота зеркала, чтобы {who} {who2} видеть себя в полный рост?
     Рост {who3} {h:V:e}. Определите также расстояние от пола до нижнего края зеркала,
     приняв высоту головы равной {d:V:e}, и считая, что глаза находятся посередине (по высоте) головы.
 ''')
@@ -161,10 +161,10 @@ class Chernoutsan_13_6(variant.VariantTask):
 @variant.answer_short('{l:V}, {H:V}')
 class Chernoutsan_13_7(variant.VariantTask):
     def GetUpdate(self, *, h=None, d=None, who=None, who2=None, who3=None):
-        H = (h / 2).SI_Value - (d / 4).SI_Value
+        H = float((h / 2).SI_Value - (d / 4).SI_Value)
         return dict(
             l=(h / 2).IncPrecision(1).As('см'),
-            H=f'{H * 100} см',
+            H=f'{H * 100:.1f} см',
         )
 
 
