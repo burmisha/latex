@@ -2,6 +2,7 @@ import library.pupils
 import library.formatter
 import library.picker
 import library.check
+import library.util
 
 from library.gform.node import Choice, Text, TextTask, text_task, abv_choices
 from library.gform.generator import Generator
@@ -12,29 +13,6 @@ import logging
 log = logging.getLogger(__name__)
 
 ms2_re = r'( ?м/[cс]\^?2| м/\([cс]\^?2\))?'
-
-
-def follow_dots(key, base):
-    assert isinstance(key, str)
-    b = base
-    for part in key.split('.'):
-        b = getattr(b, part)
-    return b
-
-
-def pick_classes(base, config):
-    if isinstance(config, dict):
-        for key, value in config.items():
-            for c in pick_classes(follow_dots(key, base), value):
-                yield c
-    elif isinstance(config, list):
-        for cfg in config:
-            for c in pick_classes(base, cfg):
-                yield c
-    elif isinstance(config, str):
-        yield follow_dots(config, base)
-    else:
-        raise RuntimeError(f'Invalid config: {config}')
 
 
 class Work:
@@ -51,7 +29,10 @@ class Work:
         answers=None,
     ):
         self._task_id = task_id
-        self._tasks_classes = list(pick_classes(generators, classes)) if classes else None
+        self._tasks_classes = None
+        if classes:
+            classes_names = library.util.plain.to_plain_list(classes)
+            self._tasks_classes = [library.util.plain.follow_dots(generators, class_name) for class_name in classes_names]
         self._pupils = library.pupils.get_class_from_string(task_id)
         self._date = library.formatter.Date(task_id.split()[0])
 
