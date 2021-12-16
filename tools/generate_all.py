@@ -87,7 +87,12 @@ def run(args):
         log.warn('Skipping lists')
 
     if generateMultiple:
-        flt = lambda work: work._task_id >= '2021-12'
+        multiple_filter = args.multiple_filter
+        if multiple_filter:
+            flt = lambda work: work._task_id >= multiple_filter
+        else:
+            flt = None
+
         for work in tools.variants.get_all_variants(flt=flt):
             tasks = work.get_tasks()
             if not tasks:
@@ -120,4 +125,5 @@ def populate_parser(parser):
     parser.add_argument('-p', '--problems', help='Generate problems', action='store_true')
     parser.add_argument('-l', '--lists', help='Generate list', action='store_true')
     parser.add_argument('-m', '--multiple', help='Generate multiple', action='store_true')
+    parser.add_argument('-f', '--multiple-filter', help='multiple variants filter: only tasks greater than')
     parser.set_defaults(func=run)
