@@ -61,6 +61,18 @@ class Refraction02(variant.VariantTask):
     pass
 
 
+# @variant.text('''
+#     Ha рисунке показан ход луча света, проходящего из среды с показателем преломления п,
+#     через плоскопараллельную пластинку с показателем пре ломления п›
+#     в среду с показателем преломления п.
+#     Определить соотношения между показателями преломления сред, используя символы >, < или =.
+# ''')
+# @variant.solution_space(180)
+# @variant.arg(a='a = 1 м')
+# class Vishnyakova_3_6_3(variant.VariantTask):
+#     pass
+
+
 @variant.text('''
     На дне водоёма глубиной {h:V:e} лежит зеркало.
     Луч света, пройдя через воду, отражается от зеркала и выходит из воды.
@@ -143,7 +155,7 @@ class Chernoutsan_13_12(variant.VariantTask):
 @variant.arg(n=['1.33'])
 @variant.answer_short('''
     n \\sin \\beta = 1 * \\cos \\alpha \\implies \\beta \\approx {beta:.1f}\\degrees,
-    L = (H - h)\\ctg \\alpha + h \\tg \\beta \\approx {L:V}.
+    L = (H - h)\\ctg \\alpha + h \\tg \\beta \\approx {l1:V} + {l2:V} \\approx {L:V}.
 ''')
 class Chernoutsan_13_13(variant.VariantTask):
     def GetUpdate(self, *, sin=None, H=None, h=None, n=None):
@@ -159,6 +171,8 @@ class Chernoutsan_13_13(variant.VariantTask):
 
         return dict(
             beta=math.asin(sin_b) / math.pi * 180,
+            l1=f'{l1 * 100:.1f} см',
+            l2=f'{l2 * 100:.1f} см',
             L=f'{L * 100:.1f} см',
         )
 
@@ -172,7 +186,7 @@ class Chernoutsan_13_13(variant.VariantTask):
 @variant.arg(sin='0.65/0.75/0.85')
 @variant.arg(d='d = 11/12/13/14/15/16/17/18/19 мм')
 @variant.arg(n='n = 1.3/1.35/1.4/1.45/1.5/1.55/1.6')
-@variant.answer_short('1 * \\sin \\alpha = n * \\sin \\beta \\implies \\beta \\approx {beta:.1f}, L = \\cbr{2 d \\tg \\alpha - 2 d \\tg \\beta} * \\cos \\alpha \\approx {L:V}')
+@variant.answer_short('1 * \\sin \\alpha = n * \\sin \\beta \\implies \\beta \\approx {beta:.1f}\\degrees, L = \\cbr{2 d \\tg \\alpha - 2 d \\tg \\beta} * \\cos \\alpha \\approx {L:V}')
 class Chernoutsan_13_14(variant.VariantTask):
     def GetUpdate(self, *, sin=None, d=None, n=None):
         sin_a = float(sin)

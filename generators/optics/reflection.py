@@ -99,8 +99,8 @@ class ReflectionName(variant.VariantTask):
     чтобы отраженный пучок распространялся вертикально?
 ''')
 @variant.solution_space(80)
-@variant.arg(v='2/3/4 см/с')
-@variant.answer_short('{v:V}')
+@variant.no_args
+@variant.answer_short('45\\degrees')
 class Chernoutsan_13_5(variant.VariantTask):
     pass
 
