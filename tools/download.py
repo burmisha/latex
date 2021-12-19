@@ -17,7 +17,7 @@ def run(args):
 
     for downloader in [
         library.download.MathusPhys(library.location.udr('Материалы - mathus')),
-        library.download.ZnakKachestva(library.location.udr('Материалы - znakka4estva - 2')),
+        library.download.ZnakKachestva(library.location.udr('Материалы - znakka4estva')),
         library.download.PhysNsuRu(library.location.udr('Материалы - phys.nsu.ru')),
     ]:
         downloader.Download(force=False)
