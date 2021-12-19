@@ -40,6 +40,8 @@ $("a:contains('Пройти тестирование по этим задани�
 $("a:contains('Вернуться к каталогу заданий')").remove();
 $("a:contains('Версия для печати и копирования в MS Word')").remove();
 
+$('.Header').remove();
+$('.SubjectNav').remove();
 $('.left_column').remove();
 $('.new_header').remove();
 $('.new_topheader').remove();
@@ -169,7 +171,7 @@ class SdamGia(object):
                 problems_count += task_count
 
             result.append((part_name, parts))
-        assert len(result) == self._tasks_count
+        assert len(result) == self._tasks_count, f'Got {len(result)}, expected {self._tasks_count}'
         log.info(f'Found {self._tasks_count} tasks groups with total of {problems_count} problems')
         return result
 
@@ -221,7 +223,7 @@ class SdamGia(object):
 
 def run(args):
     config = [
-        ('Физика', 'https://phys-ege.sdamgia.ru', 32),
+        ('Физика', 'https://phys-ege.sdamgia.ru', 30),
         ('Физика-ОГЭ', 'https://phys-oge.sdamgia.ru', 25),
         ('География', 'https://geo-ege.sdamgia.ru', 34),
         ('Химия', 'https://chem-ege.sdamgia.ru', 35),
@@ -231,7 +233,7 @@ def run(args):
     ]
     with library.firefox.get_driver() as driver:
         for subject, link, count in config:
-            rootPath = library.files.UdrPath('Материалы - Решу ЕГЭ - %s' % subject)
+            rootPath = library.files.UdrPath(f'Материалы - Решу ЕГЭ - {subject}')
             rootPath(create_missing_dir=True)
             sdamGia = SdamGia(link, count=count, driver=driver)
             tasks = sdamGia.GetCatalog()
