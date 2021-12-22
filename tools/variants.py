@@ -726,6 +726,25 @@ def get_all_variants(*, flt=None):
                 'refraction.Vishnyakova_3_6_5',
             ]},
         ),
+        Work(
+            task_id='2021-12-23 11БА - ГО - 5',
+            classes={'optics.lens': [
+                'Theory01',
+                'Theory02',
+                'Theory03',
+                'Theory04',
+                'Theory05',
+                'Formula01',
+                'Formula02',
+                'Square',
+                # 'Vishnyakova_3_6_6',
+                # 'Vishnyakova_3_6_7',
+                # 'Vishnyakova_3_6_8',
+                # 'Vishnyakova_3_6_9',
+                # 'Vishnyakova_3_6_10',
+                # 'Vishnyakova_3_6_11',
+            ]},
+        ),
     ]
     if flt:
         works = [work for work in works if flt(work)]

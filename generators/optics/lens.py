@@ -4,6 +4,151 @@ import math
 
 
 @variant.text('''
+    Укажите, верны ли утверждения («да» или «нет» слева от каждого утверждения):
+    \\begin{itemize}
+        \\item  Изображение предмета в {q} линзе всегда {q1}.
+        \\item  Изображение предмета в {q} линзе всегда {q2}.
+        \\item  Изображение предмета в {q} линзе всегда {q3}.
+    \\end{itemize}
+''')
+@variant.arg(q='рассеивающей/собирающей')
+@variant.arg(q1='мнимое/действительное')
+@variant.arg(q2='прямое/перевёрнутое')
+@variant.arg(q3='увеличенное/уменьшенное')
+@variant.solution_space(0)
+@variant.answer_short('\\text{ {a1}, {a2}, {a3} }')
+class Theory01(variant.VariantTask):
+    def GetUpdate(self, *, q=None, q1=None, q2=None, q3=None, ):
+        a1 = {
+            'рассеивающей': {'мнимое': 'да', 'действительное': 'нет'},
+            'собирающей': {'мнимое': 'нет', 'действительное': 'нет'},
+        }[q][q1]
+
+        a2 = {
+            'рассеивающей': {'прямое': 'да', 'перевёрнутое': 'нет'},
+            'собирающей': {'прямое': 'нет', 'перевёрнутое': 'нет'},
+        }[q][q2]
+
+        a3 = {
+            'рассеивающей': {'увеличенное': 'нет', 'уменьшенное': 'да'},
+            'собирающей': {'увеличенное': 'нет', 'уменьшенное': 'нет'},
+        }[q][q3]
+
+        return dict(
+            a1=a1,
+            a2=a2,
+            a3=a3,
+        )
+
+
+@variant.text('{task}')
+@variant.arg(task=[
+    'Запишите формулу тонкой линзы и сделайте рисунок, указав на нём физические величины из этой формулы.',
+    'Запишите известные вам виды классификации изображений.',
+])
+@variant.solution_space(60)
+class Theory02(variant.VariantTask):
+    pass
+
+
+@variant.text('В каких линзах можно получить {which} изображение объекта?')
+@variant.arg(which='прямое/обратное/мнимое/действительное/уменьшенное/увеличенное')
+@variant.solution_space(40)
+class Theory03(variant.VariantTask):
+    pass
+
+
+@variant.text('Какое изображение называют {which}?')
+@variant.arg(which='мнимым/действительным')
+@variant.solution_space(40)
+class Theory04(variant.VariantTask):
+    pass
+
+
+@variant.text('''
+    Есть две линзы, обозначим их 1 и 2.
+    Известно что {what} линзы {A} {how}, чем у линзы {B}.
+    Какая линза сильнее преломляет лучи?
+''')
+@variant.arg(what=['фокусное расстояние', 'оптическая сила'])
+@variant.arg(how='больше/меньше')
+@variant.arg(A__B=[(1, 2), (2, 1)])
+@variant.solution_space(40)
+@variant.answer_short('{a}')
+class Theory05(variant.VariantTask):
+    def GetUpdate(self, *, what=None, how=None, A=None, B=None):
+        a = {
+            'фокусное расстояние': {'больше': B, 'меньше': A},
+            'оптическая сила': {'больше': A, 'меньше': B},
+        }[what][how]
+        return dict(
+            a=a,
+        )
+
+
+@variant.text('''
+    Предмет находится на расстоянии {a:V:e} от {which} линзы с фокусным расстоянием {F:V:e}.
+    Определите тип изображения, расстояние между предметом и его изображением, увеличение предмета. 
+    Сделайте схематичный рисунок (не обязательно в масштабе, но с сохранением свойств линзы и изображения).
+''')
+@variant.arg(a='10/20/30 см')
+@variant.arg(F='6/8/12/15/25/40/50 см')
+@variant.arg(which='собирающей/рассеивающей')
+@variant.solution_space(100)
+class Formula01(variant.VariantTask):
+    pass
+
+
+@variant.text('''
+    Объект находится на расстоянии {a:V:e} от линзы, а его {which} изображение — в {b:V:e} от неё. 
+    Определите увеличение предмета, фокусное расстояние линзы, оптическую силу линзы и её тип.
+''')
+@variant.arg(a='115/25/45 см')
+@variant.arg(b='10/20/30/40/50 см')
+@variant.arg(which='действительное/мнимое')
+@variant.solution_space(80)
+class Formula02(variant.VariantTask):
+    pass
+
+
+@variant.text('''
+    (Задача-«гроб»: решать на обратной стороне) Квадрат со стороной {d:Task:e} расположен так, что 2 его стороны параллельны главной оптической оси {which} линзы, 
+    его центр удален на {h:Task:e} от этой оси и на {a:Task:e} от плоскости линзы. 
+    Определите площадь изображения квадрата, если фокусное расстояние линзы составляет {F:Task:e}.
+    % (и сравните с площадью объекта, умноженной на квадрат увеличения центра квадрата).
+''')
+@variant.arg(d='d = 1/2/3 см')
+@variant.arg(h='h = 4/5/6 см')
+@variant.arg(a='a = 10/12/15 см')
+@variant.arg(F='F = 18/20/25 см')
+@variant.arg(which='собирающей/рассеивающей')
+@variant.solution_space(80)
+@variant.answer_align([
+    '\\frac 1 F &= \\frac 1{a + \\frac d2} + \\frac 1b \\implies b = \\frac 1{\\frac 1 F - \\frac 1{a + \\frac d2}} = \\frac{F(a + \\frac d2)}{a + \\frac d2 - F},',
+    '\\frac 1 F &= \\frac 1{a - \\frac d2} + \\frac 1c \\implies c = \\frac 1{\\frac 1 F - \\frac 1{a - \\frac d2}} = \\frac{F(a - \\frac d2)}{a - \\frac d2 - F},',
+
+    'c - b &= \\frac{F(a - \\frac d2)}{a - \\frac d2 - F} - \\frac{F(a + \\frac d2)}{a + \\frac d2 - F} = F\\cbr{ \\frac{a - \\frac d2}{a - \\frac d2 - F} - \\frac{a + \\frac d2}{a + \\frac d2 - F} } = ',
+        '&= F * \\frac{a^2 + \\frac {ad}2 - aF - \\frac{ad}2 - \\frac{d^2}4 + \\frac{dF}2 - a^2 + \\frac {ad}2 + aF - \\frac{ad}2 + \\frac{d^2}4 + \\frac{dF}2}{\\cbr{a + \\frac d2 - F}\\cbr{a - \\frac d2 - F}}'
+        '= F * \\frac {dF}{\\cbr{a + \\frac d2 - F}\\cbr{a - \\frac d2 - F}}.',
+
+    '\\Gamma_b &= \\frac b{a + \\frac d2} = \\frac{ F }{a + \\frac d2 - F},',
+    '\\Gamma_c &= \\frac c{a - \\frac d2} = \\frac{ F }{a - \\frac d2 - F},',
+
+    '&\\text{ тут интересно отметить, что } \\Gamma_x = \\frac{ c - b}{ d } = \\frac{ F^2 }{\\cbr{a + \\frac d2 - F}\\cbr{a - \\frac d2 - F}} \\ne \\Gamma_b \\text{ или } \\Gamma_c \\text{ даже при малых $d$}.',
+
+    'S\' '
+        '&= \\frac{d * \\Gamma_b + d * \\Gamma_c}2 * (c - b) '
+        '= \\frac d2 \\cbr{\\frac{ F }{a + \\frac d2 - F} + \\frac{ F }{a - \\frac d2 - F}} * \\cbr{c - b} = ',
+        '&=\\frac {dF}2 \\cbr{\\frac 1{a + \\frac d2 - F} + \\frac 1{a - \\frac d2 - F}} * \\frac {dF^2}{\\cbr{a + \\frac d2 - F}\\cbr{a - \\frac d2 - F}} = ',
+        '&=\\frac {dF}2 * \\frac{a - \\frac d2 - F + a + \\frac d2 - F}{\\cbr{a + \\frac d2 - F}\\cbr{a - \\frac d2 - F}} * \\frac {dF^2}{\\cbr{a + \\frac d2 - F}\\cbr{a - \\frac d2 - F}} = ',
+        '&= \\frac {d^2F^3}{2\\sqr{a + \\frac d2 - F}\\sqr{a - \\frac d2 - F}} * (2a - 2F) = \\frac {d^2F^3(a - F)}{ \\sqr{\\sqr{a - F} - \\frac{d^2}4} }.',
+    # 'S_0 = d^2 * \\Gamma_a^2 = d^2 \\sqr{\\frac{F a}{a - F} * \\frac 1a } = d^2 \\frac{F^2}{ \\sqr{a - F} }.'
+])
+class Square(variant.VariantTask):
+    pass
+
+
+@variant.text('''
     Найти оптическую силу собирающей линзы, если действительное изображение предмета,
     помещённого в {a:V:e} от линзы, получается на расстоянии {b:V:e} от неё.
 ''')
