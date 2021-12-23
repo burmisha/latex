@@ -50,64 +50,6 @@ class Fotons(variant.VariantTask):
 # Чем больше длина волны, тем ниже способность этой волны огибать препятствия.
 # Чем выше частота волны, тем больше информации в единицу времени она способна передать, что актуально для средств связи.
 
-@variant.solution_space(80)
-@variant.text('''
-    Определите название цвета по длине волны в вакууме
-    и частоту колебаний электромагнитного поля в ней:
-    \\begin{enumerate}
-        \\item {q1:V:e},
-        \\item {q2:V:e},
-        \\item {q3:V:e},
-        \\item {q4:V:e}.
-    \\end{enumerate}
-''')
-@variant.answer_tex('''
-    \\begin{enumerate}
-        \\item ${q1:V} \\to$ {a1}, $\\nu_1 = \\frac c{\\lambda_1} \\approx {nu1:V}$,
-        \\item ${q2:V} \\to$ {a2}, $\\nu_2 = \\frac c{\\lambda_2} \\approx {nu2:V}$,
-        \\item ${q3:V} \\to$ {a3}, $\\nu_3 = \\frac c{\\lambda_3} \\approx {nu3:V}$,
-        \\item ${q4:V} \\to$ {a4}, $\\nu_4 = \\frac c{\\lambda_4} \\approx {nu4:V}$.
-    \\end{enumerate}
-
-    $\\nu = \\frac 1 T = \\frac c{\\lambda} = \\frac {Consts.c_4:V:s}{l * {mkm:V}} \\approx \\frac{nu_0:V:s}l$,
-    где $l$~--- численное значение длины волны в мкм.
-''')
-@variant.arg(q1__a1=[('450 нм', 'синий'), ('580 нм', 'жёлтый '), ('660 нм', 'красный')])
-@variant.arg(q2__a2=[('470 нм', 'синий'), ('390 нм', 'фиолетовый'), ('595 нм', 'оранжевый')])
-@variant.arg(q3__a3=[('530 нм', 'зелёный'), ('720 нм', 'красный'), ('610 нм', 'оранжевый')])
-@variant.arg(q4__a4=[('580 нм', 'зелёный'), ('490 нм', 'голубой'), ('420 нм', 'фиолетовый')])
-class ColorNameFromLambda(variant.VariantTask):
-    def GetUpdate(self, q1=None, a1=None, q2=None, a2=None, q3=None, a3=None, q4=None, a4=None):
-        mkm = UnitValue('1.0000 мкм')
-        return dict(
-            mkm=mkm,
-            nu_0=Consts.c_4 / mkm,
-            nu1=Consts.c /q1,
-            nu2=Consts.c /q2,
-            nu3=Consts.c /q3,
-            nu4=Consts.c /q4,
-        )
-
-
-@variant.solution_space(80)
-@variant.text('''
-    Определите {what} колебаний вектора напряженности {of}
-    в электромагнитной волне в вакууме, длина который составляет {lmbd:V:e}.
-''')
-@variant.answer_align([
-    '\\lambda &= c T \\implies T = \\frac{\\lambda}c = \\frac{lmbd:V:s}{Consts.c:V:s} = {T:V},',
-    '\\lambda &= c T = c * \\frac 1\\nu \\implies \\nu = \\frac c{\\lambda} = \\frac{Consts.c:V:s}{lmbd:V:s} = {nu:V}.',
-])
-@variant.arg(what=['период', 'частоту'])
-@variant.arg(of=['электрического поля', 'индукции магнитного поля'])
-@variant.arg(lmbd=['%d %s' % (l, s) for l in [2, 3, 5] for s in ['м', 'см']])
-class T_Nu_from_lambda(variant.VariantTask):
-    def GetUpdate(self, what=None, of=None, lmbd=None):
-        return dict(
-            T=lmbd / Consts.c,
-            nu=Consts.c / lmbd,
-        )
-
 
 @variant.solution_space(80)
 @variant.text('''
@@ -131,9 +73,9 @@ class E_from_nu(variant.VariantTask):
     Способен ли человеческий глаз увидеть один такой квант? А импульс таких квантов?'
 ''')
 @variant.answer_short('E = h\\nu = \\frac{hc}{\\lambda} = \\frac{{Consts.h:V} * {Consts.c:V}}{lmbd:V:s} \\approx {E:V} \\approx {E_eV:V}')
-@variant.arg(lmbd=('{} нм', [150, 200, 400, 500, 600, 700, 850, 900]))
+@variant.arg(lmbd='150/200/400/500/600/700/850/900 нм')
 @variant.arg(of=['кванта света', 'фотона'])
-@variant.arg(in_what=['джоулях', 'электронвольтах'])
+@variant.arg(in_what='джоулях/электронвольтах')
 class E_from_lambda(variant.VariantTask):
     def GetUpdate(self, lmbd=None, of=None, in_what=None):
         E = Consts.h * Consts.c / lmbd
@@ -160,37 +102,6 @@ class Deduce01(variant.VariantTask):
 
 
 @variant.text('''
-    Какой период полураспада радиоактивного изотопа,
-    если за {time} ч в среднем распадается {delta} атомов из {total}?
-''')
-@variant.answer_short('''
-    N(t) = N_0 * 2^{-\\frac t{\\tau_{\\frac12}}}
-    \\implies \\log_2\\frac N{N_0} = - \\frac t{\\tau_\\frac 12}
-    \\implies \\tau_\\frac 12 = - \\frac t{\\log_2\\frac N{N_0}}
-                              =   \\frac t{\\log_2\\frac{N_0}N}
-    = \\frac{
-        {time} \\units{ч}
-    }
-    {
-        \\log_2\\frac{{total}}{{total} - {delta}}
-    }
-    \\approx {T:V}.
-''')
-@variant.arg(time__delta__total=[
-    (12, 7500, 8000),
-    (24, 75000, 80000),
-    (6, 3500, 4000),
-    (8, 37500, 40000),
-    (8, 300, 400),
-])
-class RadioFall2(variant.VariantTask):
-    def GetUpdate(self, time=None, total=None, delta=None):
-        return dict(
-            T='%.1f ч' % (time / math.log(total / (total - delta), 2)),
-        )
-
-
-@variant.text('''
     Определите длину волны лучей, фотоны которых имеют энергию
     равную кинетической энергии электрона, ускоренного напряжением {V:V|e}.
 ''')
@@ -198,16 +109,6 @@ class RadioFall2(variant.VariantTask):
 class Quantum1119(variant.VariantTask):  # 1119 Рымкевич
     pass
 
-
-@variant.text('''
-    Лучше всего нейтронное излучение ослабляет вода: в 4 раза лучше бетона и в 3 раза лучше свинца.
-    Толщина слоя половинного ослабления $\\gamma$-излучения для воды равна {d1:V|e}.
-    Во сколько раз ослабит нейтронное излучение слой воды толщиной {d:Task|e}?
-''')
-@variant.arg(d1=['3 см'])
-@variant.arg(d=['%s = %d см' % (l, v) for l, v in itertools.product(['l', 'h', 'd'], [15, 30, 60, 120])])
-class Quantum1120(variant.VariantTask):  # 1120 Рымкевич
-    pass
 
 
 # Кванты света (21-23)

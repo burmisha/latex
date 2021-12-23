@@ -1,5 +1,7 @@
 import generators.variant as variant
 from generators.helpers import Consts, letter_variants, Elements
+import itertools
+import math
 
 
 @variant.solution_space(40)
@@ -196,6 +198,47 @@ class BK_53_01(variant.VariantTask):  # Вишнякова - Базовый ку
             N_left_value=left,
             N_left_percent=left * 100,
         )
+
+
+@variant.text('''
+    Какой период полураспада радиоактивного изотопа,
+    если за {time} ч в среднем распадается {delta} атомов из {total}?
+''')
+@variant.answer_short('''
+    N(t) = N_0 * 2^{-\\frac t{\\tau_{\\frac12}}}
+    \\implies \\log_2\\frac N{N_0} = - \\frac t{\\tau_\\frac 12}
+    \\implies \\tau_\\frac 12 = - \\frac t{\\log_2\\frac N{N_0}}
+                              =   \\frac t{\\log_2\\frac{N_0}N}
+    = \\frac{
+        {time} \\units{ч}
+    }
+    {
+        \\log_2\\frac{{total}}{{total} - {delta}}
+    }
+    \\approx {T:V}.
+''')
+@variant.arg(time__delta__total=[
+    (12, 7500, 8000),
+    (24, 75000, 80000),
+    (6, 3500, 4000),
+    (8, 37500, 40000),
+    (8, 300, 400),
+])
+class RadioFall2(variant.VariantTask):
+    def GetUpdate(self, time=None, total=None, delta=None):
+        return dict(
+            T='%.1f ч' % (time / math.log(total / (total - delta), 2)),
+        )
+
+@variant.text('''
+    Лучше всего нейтронное излучение ослабляет вода: в 4 раза лучше бетона и в 3 раза лучше свинца.
+    Толщина слоя половинного ослабления $\\gamma$-излучения для воды равна {d1:V|e}.
+    Во сколько раз ослабит нейтронное излучение слой воды толщиной {d:Task|e}?
+''')
+@variant.arg(d1=['3 см'])
+@variant.arg(d=['%s = %d см' % (l, v) for l, v in itertools.product(['l', 'h', 'd'], [15, 30, 60, 120])])
+class Quantum1120(variant.VariantTask):  # 1120 Рымкевич
+    pass
 
 
 @variant.solution_space(150)

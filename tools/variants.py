@@ -120,7 +120,7 @@ def get_all_variants(*, flt=None):
         ),
         Work(
             task_id='2019-04-19 11',
-            classes={'atomic': ['quantum.Fotons', 'nuclear.KernelCount', 'nuclear.RadioFall', 'quantum.RadioFall2']},
+            classes={'atomic': ['quantum.Fotons', 'nuclear.KernelCount', 'nuclear.RadioFall', 'radioactive.RadioFall2']},
         ),
         Work(
             task_id='2019-04-30 10',
@@ -128,7 +128,10 @@ def get_all_variants(*, flt=None):
         ),
         Work(
             task_id='2019-04-30 11',
-            classes={'atomic.quantum': ['Quantum1119', 'Quantum1120']},
+            classes=[
+                'atomic.quantum.Quantum1119',
+                'atomic.radioactive.Quantum1120',
+            ],
         ),
         Work(
             task_id='2019-05-06 10',
@@ -414,7 +417,14 @@ def get_all_variants(*, flt=None):
         ),
         Work(
             task_id='2021-03-23 9',
-            classes={'atomic.quantum': ['Fotons', 'ColorNameFromLambda', 'E_from_nu',  'E_from_lambda', 'T_Nu_from_lambda', 'Deduce01']},
+            classes=[
+                'atomic.quantum.Fotons',
+                'oscillation.em_waves.ColorNameFromLambda',
+                'atomic.quantum.E_from_nu',
+                'atomic.quantum.E_from_lambda',
+                'oscillation.em_waves.T_Nu_from_lambda',
+                'atomic.quantum.Deduce01',
+            ],
         ),
         Work(
             task_id='2021-03-25 10',

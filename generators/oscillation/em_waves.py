@@ -205,3 +205,63 @@ class Chernoutsan_12_52(variant.VariantTask):
         return dict(
             d2=(d * (lmbd_1 / lmbd_2) * (lmbd_1 / lmbd_2)).IncPrecision(1).As('мм'),
         )
+
+
+
+@variant.solution_space(80)
+@variant.text('''
+    Определите название цвета по длине волны в вакууме
+    и частоту колебаний электромагнитного поля в ней:
+    \\begin{enumerate}
+        \\item {q1:V:e},
+        \\item {q2:V:e},
+        \\item {q3:V:e},
+        \\item {q4:V:e}.
+    \\end{enumerate}
+''')
+@variant.answer_tex('''
+    \\begin{enumerate}
+        \\item ${q1:V} \\to$ {a1}, $\\nu_1 = \\frac c{\\lambda_1} \\approx {nu1:V}$,
+        \\item ${q2:V} \\to$ {a2}, $\\nu_2 = \\frac c{\\lambda_2} \\approx {nu2:V}$,
+        \\item ${q3:V} \\to$ {a3}, $\\nu_3 = \\frac c{\\lambda_3} \\approx {nu3:V}$,
+        \\item ${q4:V} \\to$ {a4}, $\\nu_4 = \\frac c{\\lambda_4} \\approx {nu4:V}$.
+    \\end{enumerate}
+
+    $\\nu = \\frac 1 T = \\frac c{\\lambda} = \\frac {Consts.c_4:V:s}{l * {mkm:V}} \\approx \\frac{nu_0:V:s}l$,
+    где $l$~--- численное значение длины волны в мкм.
+''')
+@variant.arg(q1__a1=[('450 нм', 'синий'), ('580 нм', 'жёлтый '), ('660 нм', 'красный')])
+@variant.arg(q2__a2=[('470 нм', 'синий'), ('390 нм', 'фиолетовый'), ('595 нм', 'оранжевый')])
+@variant.arg(q3__a3=[('530 нм', 'зелёный'), ('720 нм', 'красный'), ('610 нм', 'оранжевый')])
+@variant.arg(q4__a4=[('580 нм', 'зелёный'), ('490 нм', 'голубой'), ('420 нм', 'фиолетовый')])
+class ColorNameFromLambda(variant.VariantTask):
+    def GetUpdate(self, q1=None, a1=None, q2=None, a2=None, q3=None, a3=None, q4=None, a4=None):
+        mkm = UnitValue('1.0000 мкм')
+        return dict(
+            mkm=mkm,
+            nu_0=Consts.c_4 / mkm,
+            nu1=Consts.c /q1,
+            nu2=Consts.c /q2,
+            nu3=Consts.c /q3,
+            nu4=Consts.c /q4,
+        )
+
+
+@variant.solution_space(80)
+@variant.text('''
+    Определите {what} колебаний вектора напряженности {of}
+    в электромагнитной волне в вакууме, длина который составляет {lmbd:V:e}.
+''')
+@variant.answer_align([
+    '\\lambda &= c T \\implies T = \\frac{\\lambda}c = \\frac{lmbd:V:s}{Consts.c:V:s} = {T:V},',
+    '\\lambda &= c T = c * \\frac 1\\nu \\implies \\nu = \\frac c{\\lambda} = \\frac{Consts.c:V:s}{lmbd:V:s} = {nu:V}.',
+])
+@variant.arg(what=['период', 'частоту'])
+@variant.arg(of=['электрического поля', 'индукции магнитного поля'])
+@variant.arg(lmbd=['%d %s' % (l, s) for l in [2, 3, 5] for s in ['м', 'см']])
+class T_Nu_from_lambda(variant.VariantTask):
+    def GetUpdate(self, what=None, of=None, lmbd=None):
+        return dict(
+            T=lmbd / Consts.c,
+            nu=Consts.c / lmbd,
+        )
