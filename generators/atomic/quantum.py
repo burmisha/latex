@@ -6,7 +6,7 @@ from generators.helpers import UnitValue, Consts
 
 
 @variant.text('''
-    Сколько фотонов испускает за {minutes} минут лазер,
+    Сколько фотонов испускает за {minutes:V:e} лазер,
     если мощность его излучения {power:V:e}?
     Длина волны излучения {length:V:e}. {h:Task:e}.
 ''')
@@ -15,22 +15,18 @@ from generators.helpers import UnitValue, Consts
         = \\frac{E_{\\text{общая}}}{E_{\\text{одного фотона}}}
         = \\frac{Pt}{h\\nu} = \\frac{Pt}{h \\frac c\\lambda}
         = \\frac{Pt\\lambda}{hc}
-        = \\frac{
-            {power:V} * {minutes} * 60 \\units{с} * {length:V}
-        }{
-            {h:V} * {c:V}
-        }
+        = \\frac{{power:V} * {minutes:V} * {length:V}}{{h:V} * {c:V}}
         \\approx {approx} * 10^{{answerPower}}\\units{фотонов}
 ''')
-@variant.arg(minutes=[5, 10, 20, 30, 40, 60, 120])
-@variant.arg(power=('P = {} мВт', [15, 40, 75, 200]))
-@variant.arg(length=('\\lambda = {} нм', [500, 600, 750]))
+@variant.arg(minutes='t = 5/10/20/30/40/60/120 мин')
+@variant.arg(power='P = 15/40/75/200 мВт')
+@variant.arg(length='\\lambda = 500/600/750 нм')
 class Fotons(variant.VariantTask):
     def GetUpdate(self, power=None, minutes=None, length=None):
         h = Consts.h
         c = Consts.c
         mul = 10 ** 20
-        answer = power * 60 * minutes * length / h / c / mul
+        answer = power * minutes * length / h / c / mul
         return dict(
             answerValue=answer,
             answerPower=20,
