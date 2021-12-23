@@ -9,16 +9,19 @@ import math
         \\item  Изображение предмета в {q} линзе всегда {q1}.
         \\item  Изображение предмета в {q} линзе всегда {q2}.
         \\item  Изображение предмета в {q} линзе всегда {q3}.
+        \\item  Оптическая сила {lens} линзы {sign}.
     \\end{itemize}
 ''')
 @variant.arg(q='рассеивающей/собирающей')
 @variant.arg(q1='мнимое/действительное')
 @variant.arg(q2='прямое/перевёрнутое')
 @variant.arg(q3='увеличенное/уменьшенное')
+@variant.arg(lens='рассеивающей/собирающей')
+@variant.arg(sign='положительна/отрицательна')
 @variant.solution_space(0)
-@variant.answer_short('\\text{ {a1}, {a2}, {a3} }')
+@variant.answer_short('\\text{ {a1}, {a2}, {a3}, {a4} }')
 class Theory01(variant.VariantTask):
-    def GetUpdate(self, *, q=None, q1=None, q2=None, q3=None, ):
+    def GetUpdate(self, *, q=None, q1=None, q2=None, q3=None, lens=None, sign=None):
         a1 = {
             'рассеивающей': {'мнимое': 'да', 'действительное': 'нет'},
             'собирающей': {'мнимое': 'нет', 'действительное': 'нет'},
@@ -34,10 +37,16 @@ class Theory01(variant.VariantTask):
             'собирающей': {'увеличенное': 'нет', 'уменьшенное': 'нет'},
         }[q][q3]
 
+        a4 = {
+            'рассеивающей': {'положительна': 'да', 'отрицательна': 'нет'},
+            'собирающей': {'положительна': 'нет', 'отрицательна': 'да'},
+        }[lens][sign]
+
         return dict(
             a1=a1,
             a2=a2,
             a3=a3,
+            a4=a4,
         )
 
 
@@ -54,8 +63,21 @@ class Theory02(variant.VariantTask):
 @variant.text('В каких линзах можно получить {which} изображение объекта?')
 @variant.arg(which='прямое/обратное/мнимое/действительное/уменьшенное/увеличенное')
 @variant.solution_space(40)
+@variant.answer_short('\\text{ {a} }')
 class Theory03(variant.VariantTask):
-    pass
+    def GetUpdate(self, *, which=None):
+        a = {
+            'прямое': 'собирающие и рассеивающие',
+            'обратное': 'собирающие',
+            'мнимое': 'собирающие и рассеивающие',
+            'действительное': 'собирающие',
+            'уменьшенное': 'собирающие и рассеивающие',
+            'увеличенное': 'рассеивающие',
+        }[which]
+
+        return dict(
+            a=a,
+        )
 
 
 @variant.text('Какое изображение называют {which}?')
@@ -112,6 +134,29 @@ class Formula02(variant.VariantTask):
 
 
 @variant.text('''
+    Известно, что из формулы тонкой линзы $\\cbr{\\frac 1F = \\frac 1a + \\frac 1b}$ 
+    и определения увеличения $\\cbr{\\Gamma_y = \\frac ba}$ можно получить выражение
+    для увеличения: $\\Gamma_y = \\frac {aF}{a - F} * \\frac 1a = \\frac {F}{a - F}.$
+    Назовём такое увеличение «поперечным»: поперёк главной оптической оси.
+    Получите формулу для «продольного» увеличения $\\Gamma_x$ небольшого предмета, находящегося на главной оптической оси.
+    Можно ли применить эту формулу для предмета, не лежащего на главной оптической оси, почему?
+''')
+@variant.no_args
+@variant.answer_align([
+    '\\frac 1F &= \\frac 1a + \\frac 1b \\implies b = \\frac {aF}{a - F}',
+    '\\frac 1F &= \\frac 1{a + x} + \\frac 1c \\implies c = \\frac {(a+x)F}{a + x - F}',
+    'x\' &= \\abs{b - c} = \\frac {aF}{a - F} - \\frac {(a+x)F}{a + x - F} = '
+    'F\\cbr{\\frac {a}{a - F} - \\frac {a+x}{a + x - F}} = ',
+    '&= F * \\frac {a^2 + ax - aF - a^2 - ax + aF + xF}{(a - F)(a + x - F)} = '
+    'F * \\frac {xF}{(a - F)(a + x - F)}',
+    '\\Gamma_x &= \\frac{x\'}x = \\frac{F^2}{(a - F)(a + x - F)} \\to \\frac{F^2}{\\sqr{a - F}}.',
+    '\\text{Нельзя: изображение по-разному растянет по осям $x$ и $y$ и понадобится теорема Пифагора}'
+])
+class Theory06(variant.VariantTask):
+    pass
+
+
+@variant.text('''
     (Задача-«гроб»: решать на обратной стороне) Квадрат со стороной {d:Task:e} расположен так, что 2 его стороны параллельны главной оптической оси {which} линзы, 
     его центр удален на {h:Task:e} от этой оси и на {a:Task:e} от плоскости линзы. 
     Определите площадь изображения квадрата, если фокусное расстояние линзы составляет {F:Task:e}.
@@ -155,8 +200,15 @@ class Square(variant.VariantTask):
 @variant.solution_space(180)
 @variant.arg(a='a = 15/35/35/55 см')
 @variant.arg(b='b = 20/30/40 см')
+@variant.answer_short(
+    'D = \\frac 1F = \\frac 1a + \\frac 1b = \\frac 1{a:V:s} + \\frac 1{b:V:s} \\approx {D:V}',
+)
 class Vishnyakova_3_6_6(variant.VariantTask):
-    pass
+    def GetUpdate(self, *, a=None, b=None):
+        D_value = 1 / float(a.SI_Value) +  1 / float(b.SI_Value)
+        return dict(
+            D=f'D = {D_value:.2f} дптр',
+        )
 
 
 @variant.text('''
@@ -166,8 +218,12 @@ class Vishnyakova_3_6_6(variant.VariantTask):
 @variant.solution_space(180)
 @variant.arg(a='a = 15/20/25 см')
 @variant.arg(b='b = 12/18/30 см')
+@variant.answer_short('{G:L} = \\frac ba = \\frac {b:V:s}{a:V:s} \\approx {G:V}')
 class Vishnyakova_3_6_7(variant.VariantTask):
-    pass
+    def GetUpdate(self, *, a=None, b=None):
+        return dict(
+            G=(b / a).SetLetter('\\Gamma')
+        )
 
 
 @variant.text('''
@@ -177,19 +233,39 @@ class Vishnyakova_3_6_7(variant.VariantTask):
 @variant.solution_space(180)
 @variant.arg(a='a = 8/10/12 см')
 @variant.arg(b='b = 20/25/30 см')
+@variant.answer_short('\\pm \\frac 1F = \\frac 1a - \\frac 1b \\implies {F:L} = \\frac{a b}{\\abs{b - a}} \\approx {F:V}')
 class Vishnyakova_3_6_8(variant.VariantTask):
-    pass
+    def GetUpdate(self, *, a=None, b=None):
+        a_v = float(a.SI_Value)
+        b_v = float(b.SI_Value)
+        F_value = abs(a_v * b_v / (b_v - a_v))
+        return dict(
+            F=f'F = {F_value * 100:.1f} см',
+        )
 
 
 @variant.text('''
-    Две тонкие линзы с фокусными расстояниями {f_1:V:e} и {f_2:V:e} сложены вместе.
+    Две тонкие собирающие линзы с фокусными расстояниями {f_1:V:e} и {f_2:V:e} сложены вместе.
     Чему равно фокусное расстояние такой оптической системы?
 ''')
 @variant.solution_space(180)
 @variant.arg(f_1='f_1 = 12/18/25 см')
 @variant.arg(f_2='f_2 = 20/30 см')
+@variant.answer_short(
+    '\\frac 1{f_1:L:s} = \\frac 1a + \\frac 1b; '
+    '\\frac 1{f_2:L:s} = - \\frac 1b + \\frac 1c \\implies '
+    '\\frac 1{f_1:L:s} + \\frac 1{f_2:L:s} = \\frac 1a + \\frac 1c \\implies '
+    '{f:L} = \\frac 1{\\frac 1{f_1:L:s} + \\frac 1{f_2:L:s}} = \\frac{{f_1:L} {f_2:L}}{{f_1:L} + {f_2:L}} '
+    '\\approx {f:V}'
+)
 class Vishnyakova_3_6_9(variant.VariantTask):
-    pass
+    def GetUpdate(self, *, f_1=None, f_2=None):
+        f1_v = float(f_1.SI_Value)
+        f2_v = float(f_2.SI_Value)
+        f_v = f1_v * f2_v / (f1_v + f2_v)
+        return dict(
+            f=f'f\' = {f_v * 100:.1f} см',
+        )
 
 
 @variant.text('''
@@ -199,10 +275,23 @@ class Vishnyakova_3_6_9(variant.VariantTask):
     чем его изображение, найти оптическую силу линзы.
 ''')
 @variant.solution_space(180)
-@variant.arg(l='l = 20/25/30/35/40 см')
+@variant.arg(l='\\ell = 20/25/30/35/40 см')
 @variant.arg(n__n_word=n_times(2, 3, 4))
+@variant.answer_align([
+    'D &= \\frac 1F = \\frac 1a + \\frac 1b, \\qquad \\Gamma = \\frac ba, \\qquad b - a = {l:L} \\implies '
+    'b = \\Gamma a \\implies {G:L} a - a = {l:L} \\implies ',
+    'a &= \\frac {l:L:s}{{G:L} - 1} \\implies '
+    'b = \\frac {{l:L:s} {G:L}}{{G:L} - 1} \\implies ',
+    'D &= \\frac {{G:L} - 1}{l:L} + \\frac {{G:L} - 1}{{l:L} {G:L}} = \\frac 1{l:L} * \\cbr{{G:L} - 1 + \\frac {{G:L} - 1}{{G:L}} } ='
+    '\\frac 1{l:L} * \\cbr{{G:L} - \\frac 1{G:L}} \\approx {D:V}.'
+])
 class Vishnyakova_3_6_10(variant.VariantTask):
-    pass
+    def GetUpdate(self, *, l=None, n=None, n_word=None):
+        D = 1 / float(l.SI_Value) * (n - 1 / n)
+        return dict(
+            D=f'D = {D:.1f} дптр',
+            G='\\Gamma = {n}',
+        )
 
 
 @variant.text('''
