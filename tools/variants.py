@@ -743,6 +743,7 @@ def get_all_variants(*, flt=None):
                 # 'Vishnyakova_3_6_9',
                 # 'Vishnyakova_3_6_10',
                 # 'Vishnyakova_3_6_11',
+                # 'Theory06',
             ]},
         ),
     ]
