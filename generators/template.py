@@ -12,4 +12,7 @@ import math
 @variant.answer_align([
 ])
 class Template(variant.VariantTask):
-    pass
+    def GetUpdate(self, *, A=None):
+        return dict(
+            B=1,
+        )
