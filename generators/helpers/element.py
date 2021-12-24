@@ -166,8 +166,6 @@ class Element:
     def beta(self):
         return self.beta_minus()
 
-
-
     def __format__(self, fmt):
         try:
             fmt_parts = fmt.replace(':', '|').split('|')

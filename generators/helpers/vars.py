@@ -11,36 +11,44 @@ class Vars:
         self._original_keys = []
         self._values = []
         self._fixed = False
+        self._used_keys = set()
 
     def _flatten(self):
         if self._fixed:
             return
 
         self._fixed = True
-        for index, (key, values) in enumerate(zip(self._keys, self._values)):
-            assert isinstance(key, str), f'key {key} is not str'
-            # TODO: lazy getter for large lists
-            self._values[index] = list(values)
+        for index in range(len(self._keys)):
+            # TODO: use lazy getter for large lists
+            self._values[index] = list(self._values[index])
             values = self._values[index]
-            if any(isinstance(v, tuple) for v in values):
-                assert all(isinstance(v, tuple) for v in values)
-                key = tuple(part.strip() for part in key.split('__'))
-                assert all(len(v) == len(key) for v in values)
+            key = self._keys[index]
+            if '__' in key:
+                key = tuple(key_part.strip() for key_part in key.split('__'))
+                for key_part in key:
+                    assert key_part not in self._used_keys, f'Already used key {key_part}'
+                    self._used_keys.add(key_part)
+                tuple_length = len(key)
+                for value in values:
+                    assert isinstance(value, tuple)
+                    assert len(value) == tuple_length, f'value: {value} has not length {tuple_length}'
                 self._keys[index] = key
-
-            assert isinstance(self._values[index], list)
-
-        # TODO: check all parts of key
-        # assert key not in self._keys, f'Already used key {key}: {self._keys}'
+            else:
+                assert key not in self._used_keys, f'Already used key {key}'
+                self._used_keys.add(key)
+                for value in values:
+                    assert not isinstance(value, tuple)
 
         self._denoms = [1 for v in self._values]
         for i in range(len(self._values) - 2, -1, -1):
             self._denoms[i] = self._denoms[i + 1] * len(self._values[i + 1])
 
-
     def add(self, key, values):
-        str_re = re.compile(r'^(-?\d+(\.\d+)?/)+-?\d+(\.\d+)?$')
+        assert not self._fixed
+        assert isinstance(key, str), f'key {key} is not str'
         assert values, f'No values for {key}'
+
+        str_re = re.compile(r'^(-?\d+(\.\d+)?/)+-?\d+(\.\d+)?$')
         if isinstance(values, tuple):
             assert len(values) == 2
             assert '{}' in values[0], f'No {{}} in {values}'
@@ -59,14 +67,13 @@ class Vars:
             else:
                 values = values.split('/')
 
-        try:
-            assert not self._fixed
-            self._original_keys.append(key)
-            self._keys.append(key)
-            self._values.append(values)
-        except:
-            log.error(f'Failed to add {key} and {vs}')
-            raise
+        self._original_keys.append(key)
+        self._keys.append(key)
+        self._values.append(values)
+
+    @property
+    def random_str(self):
+        return '__'.join(sorted(self._original_keys))
 
     def total_count(self):
         self._flatten()

@@ -309,10 +309,7 @@ class VariantTask:
         return result
 
     def GetRandomTask(self, pupil):
-        if self._vars is None:
-            args = ''
-        else:
-            args = '__'.join(sorted(self._vars._original_keys))
+        args = self._vars.random_str if self._vars else ''
         hash_md5 = hashlib.md5()
         hash_md5.update((self._get_random_str(pupil) + args).encode('utf-8'))
         randomHash = hash_md5.hexdigest()[8:16]  # use only part of hash
