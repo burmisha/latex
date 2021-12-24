@@ -207,7 +207,7 @@ class Definitions07(variant.VariantTask):
 class I_from_U_R(variant.VariantTask):
     def GetUpdate(self, R=None, U=None):
         return dict(
-            I='\\eli = %d А' % (U.Value / R.Value),
+            I=(U / R).SetLetter('\\eli'),
         )
 
 
@@ -218,17 +218,17 @@ class I_from_U_R(variant.VariantTask):
 ''')
 @variant.answer_test('{r.Value}')
 @variant.answer_short('{r:Task}')
-@variant.arg(R=('R = {} Ом', [160, 240, 320]))
-@variant.arg(N=('N = {}', [10, 20, 40]))
+@variant.arg(R='R = 160/240/320 Ом')
+@variant.arg(N='N = 10/20/40')
 @variant.arg(how=['параллельно', 'последовательно'])
 class r_from_R_N(variant.VariantTask):
     def GetUpdate(self, R=None, N=None, how=None):
-        answer = {
-            'параллельно': R.Value / N.Value,
-            'последовательно': R.Value * N.Value,
+        r = {
+            'параллельно': R / N,
+            'последовательно': R * N,
         }[how]
         return dict(
-            r='r = %d Ом' % answer,
+            r=r.SetLetter('r'),
         )
 
 @variant.solution_space(20)

@@ -97,7 +97,7 @@ class SimpleUnits:
     volt = SimpleUnit('вольт', 'В', 'V', {BaseUnits.kg: 1, BaseUnits.m: 2, BaseUnits.s: -3, BaseUnits.A: -1})
     ohm = SimpleUnit('ом', 'Ом', 'Ω', {BaseUnits.kg: 1, BaseUnits.m: 2, BaseUnits.s: -3, BaseUnits.A: -2})
     farad = SimpleUnit('фарад', 'Ф', 'F', {BaseUnits.s: 4, BaseUnits.A: 2, BaseUnits.kg: -1, BaseUnits.m: -2})
-    weber = SimpleUnit('вебер', 'Вб', 'Wb', {BaseUnits.kg: 1, BaseUnits.m: 2, BaseUnits.s: -2, BaseUnits.A: -2})
+    weber = SimpleUnit('вебер', 'Вб', 'Wb', {BaseUnits.kg: 1, BaseUnits.m: 2, BaseUnits.s: -2, BaseUnits.A: -1})
     tesla = SimpleUnit('тесла', 'Тл', 'T', {BaseUnits.kg: 1, BaseUnits.s: -2, BaseUnits.A: -1})
     henry = SimpleUnit('генри', 'Гн', 'H', {BaseUnits.kg: 1, BaseUnits.m: 2, BaseUnits.s: -2, BaseUnits.A: -2})
     siemens = SimpleUnit('сименс', 'См', 'S', {BaseUnits.kg: -1, BaseUnits.m: -2, BaseUnits.s: 3, BaseUnits.A: 2})
@@ -126,6 +126,7 @@ def get_known_units():
         ('минут', 60, SimpleUnits.s),
         ('мин', 60, SimpleUnits.s),
 
+        ('ч', 3600, SimpleUnits.s),
         ('час', 3600, SimpleUnits.s),
         ('часов', 3600, SimpleUnits.s),
         ('часа', 3600, SimpleUnits.s),
@@ -153,7 +154,6 @@ def get_known_units():
             unit, multiplier, simple_unit = row._short_name, 1, row
         else:
             unit, multiplier, simple_unit = row[0], row[1], row[2]
-
 
         prefixes = [('', 0)]
         if unit == 'эВ':
@@ -259,6 +259,9 @@ def test_one_unit():
         ('ц^2', 0, 'ц', 2, SimpleUnits.kg),
         ('Гр', 0, 'Гр', 1, SimpleUnits.gray),
         ('дптр', 0, 'дптр', 1, SimpleUnits.dioptre),
+        ('мВб', -3, 'мВб', 1, SimpleUnits.weber),
+        ('мГн', -3, 'мГн', 1, SimpleUnits.henry),
+        ('А', 0, 'А', 1, SimpleUnits.A),
     ]
     for unit_text, si_power, human_unit, human_power, simple_unit in data:
         unit = OneUnit(unit_text, True)

@@ -149,21 +149,24 @@ class E_P_from_v_ratio(variant.VariantTask):  # Вишнякова - Базов�
     ''',
     '''
     \\implies v &= c\\sqrt{1 - \\sqr{\\frac l{l_0}}}
-    = {Consts.c:Value} * \\sqrt{1 - \\sqr{\\frac {l_0 - 0.{percent}l_0}{l_0}}}
-    = {Consts.c:Value} * \\sqrt{1 - \\sqr{1 - 0.{percent}}} \\approx ''',
+    = {c:V} * \\sqrt{1 - \\sqr{\\frac {l_0 - 0.{percent}l_0}{l_0}}}
+    = {c:V} * \\sqrt{1 - \\sqr{1 - 0.{percent}}} \\approx ''',
     '''
     &\\approx {answerShare:.3f}c
-    \\approx {speed:Value}
-    \\approx {kmch:Value}.''',
+    \\approx {speed:V}
+    \\approx {kmch:V}.''',
 ])
 @variant.arg(what=['км/ч', 'м/с', 'долях скорости света'])
 @variant.arg(percent=['50', '30', '10'])
 class beta_from_l_reduction(variant.VariantTask):  # Вишнякова - Базовый курс 4._ - задача 6
     def GetUpdate(self, what=None, percent=None):
+        c = Consts.c
         share = float('0.' + percent)
         answerShare = Decimal((1. - (1. - share) ** 2) ** 0.5)
+        speed = c * answerShare
         return dict(
             answerShare=answerShare,
-            speed='%.3f 10^8 м / с' % (answerShare * Consts.c.Value),
-            kmch='%.3f 10^8 км / ч' % (Decimal('3.6') * answerShare * Consts.c.Value),
+            c=c,
+            speed=speed,
+            kmch=speed.As('км / ч'),
         )

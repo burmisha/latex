@@ -116,8 +116,8 @@ class Find_E_easy(variant.VariantTask):
     Число витков в катушке: {n}. Определите магнитный поток, пронизывающий 1 виток катушки.
     Ответ выразите в милливеберах и округлите до целых.
 ''')
-@variant.arg(I=('\\eli = {} А', [5, 6, 7]))
-@variant.arg(L=('L = {} мГн', [50, 60, 70, 80, 90]))
+@variant.arg(I='\\eli = 5/6/7 А')
+@variant.arg(L='L = 50/60/70/80/90 мГн')
 @variant.arg(n=[20, 30, 40])
 @variant.answer_test('{Phi1_answer}')
 @variant.answer_short('''
@@ -131,19 +131,19 @@ class Find_E_easy(variant.VariantTask):
 @variant.solution_space(60)
 class Find_Phi_1(variant.VariantTask):
     def GetUpdate(self, I=None, L=None, n=None):
-        Phi1 = L.Value * I.Value / n
-        Phi1_answer = int(Phi1 + Decimal(0.5))
+        Phi1 = (L * I / n).IncPrecision(1).As('мВб').SetLetter('\\Phi_\\text{1 виток}')
+        Phi1_answer = int(Phi1.SI_Value * 1000 + Decimal(0.5))
 
         assert Phi1_answer >= 5, [Phi1, Phi1_answer]
         return dict(
-            Phi1=f'\\Phi_\\text{{1 виток}} = {Phi1:.3f} мВб',
+            Phi1=Phi1,
             Phi1_answer=Phi1_answer,
         )
 
 
 @variant.text('Определите энергию магнитного поля в катушке индуктивностью {L:V:e}, если {what} равен {value:V:e}.')
 @variant.solution_space(60)
-@variant.arg(L=('L = {} мГн', [200, 300, 400, 600]))
+@variant.arg(L='L = 200/300/400/600 мГн')
 @variant.arg(what__value=[
         ('её собственный магнитный поток', v) for v in ['3 Вб', '4 Вб', '5 Вб', '6 Вб', '7 Вб', '8 Вб']
     ]+ [

@@ -444,6 +444,9 @@ class UnitValue:
         other_units = other_uv.get_base_units()
         assert this_units == other_units, f'Got {this_units} and {other_units} for {self!s} and {other!s}'
         result = self._calculate(other_uv, action='div', units=other)
+        # preserve letter if exists
+        if self._letter:
+            result.SetLetter(self._letter)
         return result
 
 
@@ -485,6 +488,7 @@ def test_unit_value():
         ),
         ('{:V}', (UV('0.94') * UV('859 мА') * UV('200 В') / UV('4.3 А')).As('В'), '38\\,\\text{В}'),
         ('{:V}', UV('38 В') * UV('4.3 А') / (UV('859 мА') * UV('200 В')), '0{,}95'),
+        ('{:V}', (UV('70 мГн') * UV('6 А')).As('мВб'), '420\\,\\text{мВб}'),
         # ('{:V}', UnitValue('600000000000000000 Гц', precision=3), '6 \\cdot 10^{14}\\,\\text{Гц}'),  # TODO
     ]
     for fmt, unit_value, canonic in data:

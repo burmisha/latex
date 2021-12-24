@@ -95,18 +95,13 @@ class Definitions04(variant.VariantTask):
     {C:L} = \\frac{Q:L:s}{U:L:s} = \\frac{Q:Value:s}{U:Value:s} = {C:Value}.
     \\text{ Заряды обкладок: ${Q:L}$ и $-{Q:L}$}
 ''')
-@variant.answer_test('{C_test}')
-# @variant.arg(U=['%s = %d кВ' % (Ul, Uv) for Ul in ['U', 'V'] for Uv in [2, 3, 5, 6, 12, 15, 20]])
-# @variant.arg(Q=['%s = %d нКл' % (ql, qv) for ql in ['Q', 'q'] for qv in [4, 6, 15, 18, 24, 25]])
+@variant.answer_test('{С:TestAnswer}')
 @variant.arg(U=['%s = %d кВ' % (Ul, Uv) for Ul in ['U', 'V'] for Uv in [2, 4, 20, 40, 50]])
 @variant.arg(Q=['%s = %d мКл' % (ql, qv) for ql in ['Q', 'q'] for qv in [4, 6, 15, 18, 24, 25]])
 class C_from_U_Q(variant.VariantTask):  # Rymkevich748
     def GetUpdate(self, U=None, Q=None):
-        C = 1000 * Q.Value / U.Value
         return dict(
-            # C='C = %.2f пФ' % (1. * Q.Value / U.Value)
-            C='C = %d нФ' % C,
-            C_test = int(C),
+            C=(Q / U).As('нФ').SetLetter('C'),
         )
 
 
@@ -126,8 +121,9 @@ class C_from_U_Q(variant.VariantTask):  # Rymkevich748
 @variant.arg(C=['C = %d пФ' % Cv for Cv in [50, 80, 100, 120, 150]])
 class Q_is_possible(variant.VariantTask):  # Rymkevich750
     def GetUpdate(self, U=None, Q=None, C=None):
-        Q_max = C.Value * U.Value / 1000
-        if Q_max >= Q.Value:
+        Q_max = C * U
+        Q_max.SetLetter(f'{Q:L}_{{\\text{{max}}}}')
+        if Q_max.SI_Value >= Q.SI_Value:
             sign = '\\ge'
             result = 'удастся'
             short = '[Дд][Аа]'
@@ -136,7 +132,7 @@ class Q_is_possible(variant.VariantTask):  # Rymkevich750
             result = 'не удастся'
             short = '[Нн][Ее][Тт]'
         return dict(
-            Q_max=f'{Q:L}_{{\\text{{max}}}} = {Q_max} нКл',
+            Q_max=Q_max.As('нКл'),
             sign=sign,
             result=result,
             short=short
@@ -214,21 +210,16 @@ class C_ratio(variant.VariantTask):  # Rymkevich751
     при этом ему сообщён заряд {Q:Task:e}. Какова энергия заряженного конденсатора?
     Ответ выразите в микроджоулях и округлите до целого.
 ''')
-@variant.answer_short('''
-    {W:L}
-    = \\frac{{Q:L}^2}{2{C:L}}
-    = \\frac{\\sqr{Q:Value:s}}{2 * {C:Value}}
-    = {W:Value}
-''')
+@variant.answer_short('{W:L} = \\frac{{Q:L}^2}{2{C:L}} = \\frac{Q:V|sqr|s}{2 * {C:V}} = {W:V}')
 @variant.answer_test('{W_test}')
 @variant.arg(Q=['%s = %s нКл' % (Ql, Qv) for Ql in ['Q', 'q'] for Qv in [300, 500, 800, 900]])
 @variant.arg(C=['C = %s пФ' % Cv for Cv in [200, 400, 600, 750]])
 class W_from_Q_C(variant.VariantTask):  # Rymkevich762
     def GetUpdate(self, C=None, Q=None):
-        W = Q.Value ** 2 / 2 / C.Value
+        W = Q * Q / 2 / C
         return dict(
-            W='W = %.2f мкДж' % W,
-            W_test=int(W + Decimal(0.5)),
+            W=W.SetLetter('W').As('мкДж'),
+            W_test=int(W.SI_Value * 10 ** 6 + Decimal(0.5)),
         )
 
 

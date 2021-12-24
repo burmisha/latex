@@ -314,8 +314,8 @@ class A_from_DeltaT(variant.VariantTask):
 class Q_from_DeltaU(variant.VariantTask):
     def GetUpdate(self, ratio=None, N=None, dU=None, what=None):
         return dict(
-            Q='%d Дж' % (dU.Value * N / (N - 1)),
-            A='%d Дж' % (dU.Value / (N - 1)),
+            Q=dU * N / (N - 1),
+            A=dU / (N - 1),
         )
 
 

@@ -209,7 +209,7 @@ class Om_eta_full(variant.VariantTask):
 ]])
 class r_eta_from_Rs(variant.VariantTask):
     def GetUpdate(self, R1=None, R2=None):
-        r = UnitValue('r = %.1f Ом' % (float(R1.Value * R2.Value) ** 0.5))
+        r = UnitValue('r = %.1f Ом' % (float((R1 * R2).SI_Value) ** 0.5))
         return dict(
             R1=R1,
             R2=R2,
