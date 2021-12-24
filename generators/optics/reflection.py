@@ -13,10 +13,9 @@ import math
 @variant.arg(X='A/B/C')
 @variant.arg(Y='D/E/F')
 @variant.arg(U='K/L/M')
-@variant.arg(U='P/R/S')
+@variant.arg(V='P/R/S')
 class Reflection01(variant.VariantTask):
     pass
-
 
 
 @variant.text('''
