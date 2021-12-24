@@ -5,8 +5,19 @@ from library.logging import colorize_json, cm, color
 
 import logging
 log = logging.getLogger(__name__)
+
 from decimal import Decimal
+
 import math
+
+
+def assert_equals(name, expected, actual):
+    if actual != expected:
+        log.error(f'''Assertion error for {cm(name, color=color.Cyan)}:
+\texpected:\t{cm(repr(expected), color=color.Red)}
+\tactual:\t\t{cm(repr(actual), color=color.Green)}
+''')
+        raise AssertionError(f'{actual} != {expected}')
 
 
 def precisionFmt2(value, precision):
@@ -117,7 +128,7 @@ def test_precisionFmt2():
         (3 * 10 ** 7, 2, '30000000'),
     ]:
         res = precisionFmt2(value, precision)
-        assert res == result, f'Expected {value}, {precision} -> {result}, got {res!r}'
+        assert_equals(f'value {value}, precision {precision}', result, res)
 
 
 test_precisionFmt2()
@@ -226,21 +237,18 @@ class UnitValue:
         assert line.count('/') <= 1
         assert line.count('=') <= 1
 
-        line = line.strip()
-
         if '=' in line:
             letter_line, line = line.split('=', 1)
-            line = line.strip()
             self.SetLetter(letter_line)
 
+        line = line.strip()
         line = self._substitute_calc(line)
 
         self.ValuePower = 0
         self.Value = None
-        self.Precision = 1  # TODO
         self._units = []
 
-        isNumerator = True
+        is_numerator = True
         for part in line.split():
             try:
                 float(part)
@@ -248,18 +256,18 @@ class UnitValue:
                 if part.startswith('10^'):
                     self.ValuePower = int(part[3:].strip('{').strip('}'))
                 elif part == '/':
-                    isNumerator = False
+                    is_numerator = False
                 else:
-                    self._units.append(OneUnit(part, isNumerator))
+                    self._units.append(OneUnit(part, is_numerator))
             else:
                 assert self.Value is None
                 self.Value = Decimal(part)
-                self._ValueWasSet = True
                 self.Precision = get_precision(part) if precision is None else precision
 
         if self.Value is None:
+            assert self._units, f'No units for {line!r}'
             self.Value = Decimal(1)
-            self._ValueWasSet = False
+            self.Precision = None
 
     def __str__(self):
         return f'UVS {self.__raw_line!r}'
@@ -283,7 +291,7 @@ class UnitValue:
             if self.Value.is_zero():
                 valueStr = '0'
             else:
-                valueStr = precisionFmt2(self.Value, self.ViewPrecision or self.Precision)
+                valueStr = precisionFmt2(self.Value, self.ViewPrecision or self.Precision or 1)
             self._precisionFmt2 = str(valueStr)
             valueStr = valueStr.replace('.', '{,}')
             if self.ValuePower:
@@ -356,30 +364,42 @@ class UnitValue:
     def _calculate(self, other, action=None, units=None):
         MAX_PRECISION = 7
 
-        if isinstance(other, (int, float, Decimal)):
-            other = UnitValue(str(other))
-
-        assert isinstance(other, UnitValue)
-
         this_units = self.get_base_units()
-        other_units = other.get_base_units()
-        used_units = set(this_units) | set(other_units)
 
+        if isinstance(other, UnitValue):
+            other_units = other.get_base_units()
+            other_precision = other.Precision
+            other_value = other.SI_Value
+        elif isinstance(other, (int, float, Decimal)):
+            other_units = {}
+            other_precision = None
+            other_value = Decimal(str(other))
+        else:
+            raise RuntimeError('other {!r} is not supported')
+
+        if self.Precision is not None and other_precision is not None:
+            precision = min(self.Precision, other_precision)
+        elif self.Precision is None and other_precision is not None:
+            precision = other_precision
+        elif self.Precision is not None and other_precision is None:
+            precision = self.Precision
+        else:
+            precision = None
+        if precision is None:
+            precision = MAX_PRECISION
+        else:
+            precision = min(precision, MAX_PRECISION)
+
+        used_units = set(this_units) | set(other_units)
         calced_units = {}
 
-        if other._ValueWasSet:
-            precision = min(self.Precision, other.Precision)
-        else:
-            precision = self.Precision
-        precision = min(precision, MAX_PRECISION)
-
         if action == 'mult':
-            value = self.SI_Value * other.SI_Value
+            value = self.SI_Value * other_value
             for key in used_units:
                 calced_units[key] = this_units.get(key, 0) + other_units.get(key, 0)
 
         elif action == 'div':
-            value = self.SI_Value / other.SI_Value
+            value = self.SI_Value / other_value
             for key in used_units:
                 calced_units[key] = this_units.get(key, 0) - other_units.get(key, 0)
 
@@ -413,6 +433,7 @@ class UnitValue:
         if units:
             line += f' {units}'
 
+        # print(self, other, action, line, precision)
         r = UnitValue(line, precision=precision)
         return r
 
@@ -441,7 +462,6 @@ def test_unit_value():
         ('{:Value}', UnitValue('2 а.е.м.'), '2\\,\\text{а.е.м.}'),
         ('{:Task}', UnitValue('A = 200 Дж'), 'A = 200\\,\\text{Дж}'),
         ('{:TestAnswer}', UnitValue('2.5 м'), r'2.5'),
-        ('{:V}', UnitValue(''), '1'),
         ('{:V}', UnitValue('0'), '0'),
         ('{:V}', UnitValue('1'), '1'),
         ('{:V}', UnitValue('1230 10^2'), '1230 \\cdot 10^{2}'),
@@ -457,19 +477,19 @@ def test_unit_value():
         ('{:V}', UnitValue('10 мин') * UnitValue('5 Гц'), '3000'),
         ('{:Task}', (UnitValue('10 мин') * UnitValue('5 Гц')).SetLetter('l'), 'l = 3000'),
         ('{:Value}', UnitValue('2 10^4 км/c'), '2 \\cdot 10^{4}\\,\\frac{\\text{км}}{\\text{c}}'),
-        ('{:Value}', (UV('0.0288 А') / UV('6.18 с') * 3 * math.pi**2).IncPrecision(1), '0{,}138\\,\\frac{\\text{А}}{\\text{с}}'),
+        ('{:Value}', (UV('0.0288 А') / UV('6.18 с') * 3 * math.pi**2), '0{,}1380\\,\\frac{\\text{А}}{\\text{с}}'),
         (
             '{:V}',
             UnitValue('h = 6.626 10^{-34} Дж с') * UnitValue('c = 3 10^{8} м / с', precision=3) / UnitValue('200 нм'),
             r'0{,}994 \cdot 10^{-18}\,\text{Дж}',
         ),
-        # ('{:Value}', UV('0.94') * UV('859 мА') * UV('200 В') / UV('4.3 А'), '0{,}95'),
-        # ('{:Value}', UV('38 В') * UV('4.3 А') / (UV('859 мА') * UV('200 В')), '0{,}95'),
-        # ('{:V}'.format(UnitValue('600000000000000000 Гц', precision=3)), '6 \\cdot 10^{14}\\,\\text{Гц}'),  # TODO
+        ('{:V}', (UV('0.94') * UV('859 мА') * UV('200 В') / UV('4.3 А')).As('В'), '38\\,\\text{В}'),
+        ('{:V}', UV('38 В') * UV('4.3 А') / (UV('859 мА') * UV('200 В')), '0{,}95'),
+        # ('{:V}', UnitValue('600000000000000000 Гц', precision=3), '6 \\cdot 10^{14}\\,\\text{Гц}'),  # TODO
     ]
     for fmt, unit_value, canonic in data:
         result = fmt.format(unit_value)
-        assert result == canonic, f'unit_value {unit_value!r},\n\texpected:\t{canonic!r}\n\tactual:\t\t{result!r}'
+        assert_equals(f'unit_value {unit_value!r}', canonic, result)
 
     assert UnitValue('1230 * 10^2').SI_Value == 123000
 
@@ -479,7 +499,6 @@ test_unit_value()
 
 def test_get_base_units():
     data = [
-        ('', {}),
         ('1', {}),
         ('Гц', {BaseUnits.s: -1}),
         ('м^3 кг^1 / с^2', {BaseUnits.m: 3, BaseUnits.s: -2, BaseUnits.kg: 1}),
@@ -494,7 +513,7 @@ def test_get_base_units():
     for line, base_units in data:
         unit_value = UnitValue(line)
         result = unit_value.get_base_units()
-        assert result == base_units, f'Expected {base_units}, got {result} for {unit_value!r}'
+        assert_equals(f'unit_value {unit_value!r}', base_units, result)
 
     unit_value = UnitValue('50 мВт мс')
     result = get_simple_unit(unit_value.get_base_units())
@@ -507,18 +526,17 @@ test_get_base_units()
 
 def test_as_conversion():
     data = [
-        ('10^-17 Дж', 'эВ', '60\\,\\text{эВ}'),
-        ('10^-12 Дж', 'МэВ', '6\\,\\text{МэВ}'),
+        ('1 10^-17 Дж', 'эВ', '60\\,\\text{эВ}'),
         ('100 10^-12 Дж', 'МэВ', '625\\,\\text{МэВ}'),
         ('100 кэВ', 'Дж', '16 \\cdot 10^{-15}\\,\\text{Дж}'),
-        ('10^-24 кг', 'а.е.м.', '600\\,\\text{а.е.м.}'),
+        ('10^-24 кг', 'а.е.м.', '602{,}2137\\,\\text{а.е.м.}'),
         ('1000 10^-27 кг', 'а.е.м.', '602\\,\\text{а.е.м.}'),
-        ('10^-24 г', 'а.е.м.', '0{,}6\\,\\text{а.е.м.}'),
+        ('10^-24 г', 'а.е.м.', '0{,}6022137\\,\\text{а.е.м.}'),
     ]
     for line, as_to, canonic in data:
         unit_value = UnitValue(line)
         result = '{:V}'.format(unit_value.As(as_to))
-        assert result == canonic, f'Expected {canonic}, got {result} for {line!r} to {as_to}'
+        assert_equals(f'{line!r} to {as_to!r}', canonic, result)
 
 
 test_as_conversion()
