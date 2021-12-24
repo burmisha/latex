@@ -194,9 +194,9 @@ class UnitValue:
         self._value_str = None
 
     def SetLetter(self, letter):
+        assert isinstance(letter, str)
         if self._letter:
             raise RuntimeError(f'Could not overwrite letter for {self} to {letter}')
-        assert isinstance(letter, str)
         self._letter = letter.strip()
         return self
 
@@ -209,6 +209,18 @@ class UnitValue:
 
         return self
 
+    def _substitute_calc(self, line):
+        for key, value in [
+            ('/', ' / '),
+            ('**', '^'),
+            (' ^', '^'),
+            ('^ ', '^'),
+            (' * ', ' '),
+            ('  ', ' '),
+        ]:
+            line = line.replace(key, value)
+        return line
+
     def _load(self, line, precision=None):
         assert isinstance(line, str)
         assert line.count('/') <= 1
@@ -217,54 +229,37 @@ class UnitValue:
         line = line.strip()
 
         if '=' in line:
-            letter_line, value_line = line.split('=', 1)
-            value_line = value_line.strip()
+            letter_line, line = line.split('=', 1)
+            line = line.strip()
             self.SetLetter(letter_line)
-        else:
-            value_line = line
 
-        for key, value in {
-            '/': ' / ',
-            '**': '^',
-            ' ^': '^',
-            '^ ': '^',
-        }.items():
-            value_line = value_line.replace(key, value)
+        line = self._substitute_calc(line)
 
         self.ValuePower = 0
-        self.Value = Decimal(1)
+        self.Value = None
         self.Precision = 1  # TODO
-        self._ValueWasSet = False
         self._units = []
 
         isNumerator = True
-        for part in value_line.split():
+        for part in line.split():
             try:
                 float(part)
             except ValueError:
-                is_value = False
+                if part.startswith('10^'):
+                    self.ValuePower = int(part[3:].strip('{').strip('}'))
+                elif part == '/':
+                    isNumerator = False
+                else:
+                    self._units.append(OneUnit(part, isNumerator))
             else:
-                is_value = True
-
-            if is_value:
-                if self._ValueWasSet:
-                    raise RuntimeError('Multiple values')
+                assert self.Value is None
                 self.Value = Decimal(part)
-                self.Precision = get_precision(part) if precision is None else precision
                 self._ValueWasSet = True
+                self.Precision = get_precision(part) if precision is None else precision
 
-
-            elif part.startswith('10^'):
-                self.ValuePower = int(part[3:].strip('{').strip('}'))
-
-            elif part == '/':
-                isNumerator = False
-
-            elif part == '*':
-                continue
-
-            else:
-                self._units.append(OneUnit(part, isNumerator))
+        if self.Value is None:
+            self.Value = Decimal(1)
+            self._ValueWasSet = False
 
     def __str__(self):
         return f'UVS {self.__raw_line!r}'
@@ -387,6 +382,7 @@ class UnitValue:
             value = self.SI_Value / other.SI_Value
             for key in used_units:
                 calced_units[key] = this_units.get(key, 0) - other_units.get(key, 0)
+
         else:
             raise NotImplementedError(f'Could not apply unknown action {action!r}')
 
@@ -462,13 +458,18 @@ def test_unit_value():
         ('{:Task}', (UnitValue('10 мин') * UnitValue('5 Гц')).SetLetter('l'), 'l = 3000'),
         ('{:Value}', UnitValue('2 10^4 км/c'), '2 \\cdot 10^{4}\\,\\frac{\\text{км}}{\\text{c}}'),
         ('{:Value}', (UV('0.0288 А') / UV('6.18 с') * 3 * math.pi**2).IncPrecision(1), '0{,}138\\,\\frac{\\text{А}}{\\text{с}}'),
+        (
+            '{:V}',
+            UnitValue('h = 6.626 10^{-34} Дж с') * UnitValue('c = 3 10^{8} м / с', precision=3) / UnitValue('200 нм'),
+            r'0{,}994 \cdot 10^{-18}\,\text{Дж}',
+        ),
         # ('{:Value}', UV('0.94') * UV('859 мА') * UV('200 В') / UV('4.3 А'), '0{,}95'),
         # ('{:Value}', UV('38 В') * UV('4.3 А') / (UV('859 мА') * UV('200 В')), '0{,}95'),
         # ('{:V}'.format(UnitValue('600000000000000000 Гц', precision=3)), '6 \\cdot 10^{14}\\,\\text{Гц}'),  # TODO
     ]
     for fmt, unit_value, canonic in data:
         result = fmt.format(unit_value)
-        assert result == canonic, f'Expected {canonic!r} for {unit_value!r}, got {result!r}'
+        assert result == canonic, f'unit_value {unit_value!r},\n\texpected:\t{canonic!r}\n\tactual:\t\t{result!r}'
 
     assert UnitValue('1230 * 10^2').SI_Value == 123000
 
