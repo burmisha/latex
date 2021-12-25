@@ -30,8 +30,6 @@ class GetPhi(variant.VariantTask):
         rho = (rho_np_1 * phi_1).SetLetter('\\rho_\\text{пара}')
         t = '%.1f' % Consts.vapor.get_t_by_rho(rho)
         phi_2 = rho_np_1 / rho_np_2 * phi_1
-        # print([rho_np_1 / rho_np_2 * phi1])
-        # raise
         return dict(
             rho_np_1=rho_np_1,
             rho_np_2=rho_np_2,
@@ -135,18 +133,21 @@ class GetNFromPhi(variant.VariantTask):
     Парциальное давление насыщенного водяного пара при ${t2}\\celsius$ ищем по таблице: {P_np_2:Task:e}.
     Теперь определяем влажность:
     $$
-        \\varphi_2 = \\frac{P2:L:s}{P_np_2:L:s} = \\frac{P2:V:s}{P_np_2:V:s} \\approx {phi2} = {phi2_percent}\%.
+        \\varphi_2 = \\frac{P2:L:s}{P_np_2:L:s} = \\frac{P2:V:s}{P_np_2:V:s} \\approx {phi2} = {phi2_percent:V}\%.
     $$
 
     Или же выражаем то же самое через плотности (плотность не изменяется при изохорном нагревании $\\rho_1 =\\rho_2 = \\rho$, в отличие от давления):
     $$
         \\varphi_2 = \\frac{\\rho}{rho_np_2:L:s} = \\frac{\\varphi_1{rho_np_1:L}}{rho_np_2:L:s}
-        = \\frac{{phi_1} * {rho_np_1:V}}{rho_np_2:V:s} \\approx {phi_2_rho} = {phi2_percent_rho}\%.
+        = \\frac{{phi_1} * {rho_np_1:V}}{rho_np_2:V:s} \\approx {phi_2_rho:V} = {phi2_percent_rho:V}\%.
     $$
     Сравните 2 последних результата.
 ''')
 class GetPFromPhi(variant.VariantTask):
     def GetUpdate(self, phi1=None, V=None, t1=None, t2=None):
+        T1 = t1 + 273
+        T2 = t2 + 273
+
         P_np_1 = Consts.vapor.get_p_by_t(t1).SetLetter(f'P_{{\\text{{нас. пара {t1}}} \\celsius}}')
         P_np_2 = Consts.vapor.get_p_by_t(t2).SetLetter(f'P_{{\\text{{нас. пара {t2}}} \\celsius}}')
 
@@ -155,8 +156,6 @@ class GetPFromPhi(variant.VariantTask):
 
         phi_1 = phi1 / 100
         P1 = (P_np_1 * phi_1).SetLetter('P_\\text{пара 1}').As('кПа')
-        T1 = t1 + 273
-        T2 = t2 + 273
         P2 = (P1 * T2 / T1).SetLetter('P_\\text{пара 2}').As('кПа')
         phi2 = P2 / P_np_2
         phi_2_rho = phi_1 * Consts.vapor.get_rho_by_t(t1) / Consts.vapor.get_rho_by_t(t2)
@@ -170,9 +169,9 @@ class GetPFromPhi(variant.VariantTask):
             T1='T_1 = %d К' % T1,
             T2='T_2 = %d К' % T2,
             phi2='%.3f' % phi2.SI_Value,
-            phi2_percent='%.1f' % (phi2.SI_Value * 100),
-            phi_2_rho='%.3f' % phi_2_rho.SI_Value,
-            phi2_percent_rho='%.1f' % (phi_2_rho.SI_Value * 100),
+            phi2_percent=phi2 * 100,
+            phi_2_rho=phi_2_rho,
+            phi2_percent_rho=phi_2_rho * 100,
             rho_np_1=rho_np_1,
             rho_np_2=rho_np_2,
         )

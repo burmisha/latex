@@ -368,7 +368,7 @@ class UnitValue:
 
     @property
     def frac_value(self):
-        return decimal_to_fraction(self.Value)
+        return decimal_to_fraction(self.SI_Value)
 
     def As(self, other):
         assert isinstance(other, str)

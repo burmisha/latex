@@ -137,7 +137,7 @@ class Formula02(variant.VariantTask):
     Известно, что из формулы тонкой линзы $\\cbr{\\frac 1F = \\frac 1a + \\frac 1b}$
     и определения увеличения $\\cbr{\\Gamma_y = \\frac ba}$ можно получить выражение
     для увеличения: $\\Gamma_y = \\frac {aF}{a - F} * \\frac 1a = \\frac {F}{a - F}.$
-    Назовём такое увеличение «поперечным»: поперёк главной оптической оси.
+    Назовём такое увеличение «поперечным»: поперёк главной оптической оси (поэтому и ${}_y$).
     Получите формулу для «продольного» увеличения $\\Gamma_x$ небольшого предмета, находящегося на главной оптической оси.
     Можно ли применить эту формулу для предмета, не лежащего на главной оптической оси, почему?
 ''')
@@ -169,15 +169,16 @@ class Theory06(variant.VariantTask):
 @variant.arg(which='собирающей/рассеивающей')
 @variant.solution_space(80)
 @variant.answer_align([
-    '\\frac 1 F &= \\frac 1{a + \\frac d2} + \\frac 1b \\implies b = \\frac 1{\\frac 1 F - \\frac 1{a + \\frac d2}} = \\frac{F(a + \\frac d2)}{a + \\frac d2 - F},',
-    '\\frac 1 F &= \\frac 1{a - \\frac d2} + \\frac 1c \\implies c = \\frac 1{\\frac 1 F - \\frac 1{a - \\frac d2}} = \\frac{F(a - \\frac d2)}{a - \\frac d2 - F},',
+    '&\\text{Все явные вычисления — в см и $\\text{см}^2$,}',
+    '\\frac 1 F &= \\frac 1{a + \\frac d2} + \\frac 1b \\implies b = \\frac 1{\\frac 1 F - \\frac 1{a + \\frac d2}} = \\frac{F(a + \\frac d2)}{a + \\frac d2 - F} = {b:LaTeX},',
+    '\\frac 1 F &= \\frac 1{a - \\frac d2} + \\frac 1c \\implies c = \\frac 1{\\frac 1 F - \\frac 1{a - \\frac d2}} = \\frac{F(a - \\frac d2)}{a - \\frac d2 - F} = {c:LaTeX},',
 
     'c - b &= \\frac{F(a - \\frac d2)}{a - \\frac d2 - F} - \\frac{F(a + \\frac d2)}{a + \\frac d2 - F} = F\\cbr{ \\frac{a - \\frac d2}{a - \\frac d2 - F} - \\frac{a + \\frac d2}{a + \\frac d2 - F} } = ',
         '&= F * \\frac{a^2 + \\frac {ad}2 - aF - \\frac{ad}2 - \\frac{d^2}4 + \\frac{dF}2 - a^2 + \\frac {ad}2 + aF - \\frac{ad}2 + \\frac{d^2}4 + \\frac{dF}2}{\\cbr{a + \\frac d2 - F}\\cbr{a - \\frac d2 - F}}'
-        '= F * \\frac {dF}{\\cbr{a + \\frac d2 - F}\\cbr{a - \\frac d2 - F}}.',
+        '= F * \\frac {dF}{\\cbr{a + \\frac d2 - F}\\cbr{a - \\frac d2 - F}} = {c_m_b:LaTeX}.',
 
-    '\\Gamma_b &= \\frac b{a + \\frac d2} = \\frac{ F }{a + \\frac d2 - F},',
-    '\\Gamma_c &= \\frac c{a - \\frac d2} = \\frac{ F }{a - \\frac d2 - F},',
+    '\\Gamma_b &= \\frac b{a + \\frac d2} = \\frac{ F }{a + \\frac d2 - F} = {Gb:LaTeX},',
+    '\\Gamma_c &= \\frac c{a - \\frac d2} = \\frac{ F }{a - \\frac d2 - F} = {Gc:LaTeX},',
 
     '&\\text{ тут интересно отметить, что } \\Gamma_x = \\frac{ c - b}{ d } = \\frac{ F^2 }{\\cbr{a + \\frac d2 - F}\\cbr{a - \\frac d2 - F}} \\ne \\Gamma_b \\text{ или } \\Gamma_c \\text{ даже при малых $d$}.',
 
@@ -186,11 +187,34 @@ class Theory06(variant.VariantTask):
         '= \\frac d2 \\cbr{\\frac{ F }{a + \\frac d2 - F} + \\frac{ F }{a - \\frac d2 - F}} * \\cbr{c - b} = ',
         '&=\\frac {dF}2 \\cbr{\\frac 1{a + \\frac d2 - F} + \\frac 1{a - \\frac d2 - F}} * \\frac {dF^2}{\\cbr{a + \\frac d2 - F}\\cbr{a - \\frac d2 - F}} = ',
         '&=\\frac {dF}2 * \\frac{a - \\frac d2 - F + a + \\frac d2 - F}{\\cbr{a + \\frac d2 - F}\\cbr{a - \\frac d2 - F}} * \\frac {dF^2}{\\cbr{a + \\frac d2 - F}\\cbr{a - \\frac d2 - F}} = ',
-        '&= \\frac {d^2F^3}{2\\sqr{a + \\frac d2 - F}\\sqr{a - \\frac d2 - F}} * (2a - 2F) = \\frac {d^2F^3(a - F)}{ \\sqr{\\sqr{a - F} - \\frac{d^2}4} }.',
+        '&= \\frac {d^2F^3}{2\\sqr{a + \\frac d2 - F}\\sqr{a - \\frac d2 - F}} * (2a - 2F) = \\frac {d^2F^3(a - F)}{ \\sqr{\\sqr{a - F} - \\frac{d^2}4} } = {S:LaTeX}.',
     # 'S_0 = d^2 * \\Gamma_a^2 = d^2 \\sqr{\\frac{F a}{a - F} * \\frac 1a } = d^2 \\frac{F^2}{ \\sqr{a - F} }.'
 ])
 class Square(variant.VariantTask):
-    pass
+    def GetUpdate(self, *, d=None, h=None, a=None, F=None, which=None):
+        df = d.frac_value * 100
+        hf = h.frac_value * 100
+        af = a.frac_value * 100
+        Ff = F.frac_value * 100
+        if which == 'рассеивающей':
+            Ff = -Ff
+
+        b = Ff * (af + df / 2)/ (af + df / 2 - Ff)
+        c = Ff * (af - df / 2)/ (af - df / 2 - Ff)
+        Gb = Ff / (af + df / 2 - Ff)
+        Gc = Ff / (af - df / 2 - Ff)
+        c_m_b = c - b
+
+        S = df**2 * Ff**3 * (af - Ff) / (((af - Ff)**2 - df**2/4) ** 2)
+
+        return dict(
+            b=b,
+            c=c,
+            Gb=Gb,
+            Gc=Gc,
+            c_m_b=c_m_b,
+            S=S,
+        )
 
 
 @variant.text('''
