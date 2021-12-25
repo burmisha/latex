@@ -137,6 +137,7 @@ def get_known_units():
         ('дней', 86400, SimpleUnits.s),
         ('день', 86400, SimpleUnits.s),
 
+        ('л', Decimal('0.001'), {BaseUnits.m: 3}),
         ('атм', 100000, SimpleUnits.pascal),
         ('эВ', Decimal('1.60e-19'), SimpleUnits.joule),  # электронвольт
         ('С', 1, SimpleUnits.degree_celsius),   # цельсий
@@ -152,13 +153,18 @@ def get_known_units():
     for row in units:
         if isinstance(row, SimpleUnit):
             unit, multiplier, simple_unit = row._short_name, 1, row
+            base_units = simple_unit._base_units
         else:
             unit, multiplier, simple_unit = row[0], row[1], row[2]
+            if isinstance(simple_unit, dict):
+                base_units = simple_unit
+            else:
+                base_units = simple_unit._base_units
 
         prefixes = [('', 0)]
         if unit == 'эВ':
             prefixes.extend(SI_PREFIXES)
-        elif unit == 'г':
+        elif unit in ['г', 'л']:
             prefixes.extend([p for p in SI_PREFIXES if p[1] <= -3])
         elif isinstance(row, SimpleUnit) and unit not in ['кг', 'дптр']:
             prefixes.extend(SI_PREFIXES)
@@ -172,7 +178,7 @@ def get_known_units():
                 else:
                     if (si_prefix + unit) in known_units:
                         raise RuntimeError(f'Already found {si_prefix} {unit}: {known_units[si_prefix + unit]}')
-                    known_units[si_prefix + unit] = (multiplier, simple_unit, si_prefix, si_power)
+                    known_units[si_prefix + unit] = (multiplier, base_units, si_prefix, si_power)
 
     return known_units
 
@@ -186,7 +192,7 @@ class OneUnit:
         self.IsNumerator = is_numenator
 
         self._exponent = 0
-        self.simple_unit = SimpleUnits.no_units
+        self._base_units = {}
         self._Multiplier = 1
 
         try:
@@ -198,7 +204,7 @@ class OneUnit:
         assert isinstance(self.HumanUnit, str)
         assert isinstance(self.HumanPower, int)
         assert isinstance(self.IsNumerator, bool)
-        assert isinstance(self.simple_unit, SimpleUnit)
+        assert isinstance(self._base_units, dict)
 
     def __str__(self):
         return f'unit: {self._line} is_num: {self.IsNumerator}'
@@ -226,6 +232,10 @@ class OneUnit:
     def Multiplier(self):
         return Decimal(self._Multiplier) ** self.HumanPower
 
+    @property
+    def base_units(self):
+        return self._base_units
+
     def _load_from_str(self, line):
         if '^' in line:
             line, power = line.split('^')
@@ -236,9 +246,9 @@ class OneUnit:
         self.HumanUnit = line
 
         if line in KNOWN_UNITS:
-            multiplier, simple_unit, si_prefix, si_power = KNOWN_UNITS[line]
+            multiplier, base_units, si_prefix, si_power = KNOWN_UNITS[line]
             self._exponent = si_power
-            self.simple_unit = simple_unit
+            self._base_units = base_units
             self._Multiplier = multiplier
 
 
@@ -268,7 +278,7 @@ def test_one_unit():
         assert unit.SiPower == si_power, f'Expected SiPower {si_power}, got {unit.SiPower} for {unit!s}'
         assert unit.HumanUnit == human_unit, f'Expected HumanUnit {human_unit}, got {unit.HumanUnit} for {unit!s}'
         assert unit.HumanPower == human_power, f'Expected HumanPower {human_power}, got {unit.HumanPower} for {unit!s}'
-        assert unit.simple_unit == simple_unit, f'Expected simple_unit {simple_unit}, got {unit.simple_unit} for {unit!s}'
+        assert unit.base_units == simple_unit._base_units, f'Expected simple_unit {simple_unit}, got {unit.simple_unit} for {unit!s}'
 
     unit = OneUnit('мин^2', True)
     assert unit.Multiplier == 3600, f'Expected {3600}, got {unit.Multiplier}'

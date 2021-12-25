@@ -1,5 +1,5 @@
 import generators.variant as variant
-from generators.helpers import Consts, Decimal
+from generators.helpers import Consts, Decimal, UnitValue
 
 
 @variant.solution_space(40)
@@ -12,12 +12,8 @@ from generators.helpers import Consts, Decimal
 @variant.arg(t=['%d час' % v for v in [2, 3, 4, 5]] + ['%d сут' % v for v in [2, 3, 4, 5]])
 class Basic01(variant.VariantTask):
     def GetUpdate(self, v=None, t=None):
-        if 'час' in f'{t:Value}':
-            mult = 3600
-        elif 'сут' in f'{t:Value}':
-            mult = 3600 * 24
         return dict(
-            s='{} м'.format(v.Value * t.Value * mult),
+            s=(v * t).IncPrecision(2),
         )
 
 @variant.solution_space(0)
@@ -297,8 +293,8 @@ class Basic09(variant.VariantTask):
     'кельвин',
     'градус Цельсия',
 ])
-@variant.arg(fv_2=['мПа', 'МПа'])
-@variant.arg(fv_3=['эВ', 'мкДж', 'мДж'])
+@variant.arg(fv_2='мПа/МПа')
+@variant.arg(fv_3='эВ/мкДж/мДж')
 @variant.arg(fv_4=[
     '$\\frac{\\text{кг}}{\\text{м}^3}$',
     '$\\frac{\\text{г}}{\\text{л}}$',
@@ -439,17 +435,23 @@ class GraphPV_2(variant.VariantTask):
 @variant.answer_align([
     'T\\text{— const} &\\implies P_1V_1 = \\nu RT = P_2V_2.',
     'V_2 = \\frac 1{n} V_1 &\\implies P_1V_1 = P_2 * \\frac 1{n}V_1 \\implies P_2 = {n}P_1 = {n}{Consts.p_atm:L}.',
-    'P_2 = {Consts.p_atm:L} + {Consts.water.rho:L} {Consts.g_ten:L} h \\implies '
-    'h = \\frac{P_2 - {Consts.p_atm:L}}{{Consts.water.rho:L} {Consts.g_ten:L}}'
-    ' &= \\frac{{n}{Consts.p_atm:L} - {Consts.p_atm:L}}{{Consts.water.rho:L} {Consts.g_ten:L}}'
-    ' = \\frac{{n_1} * {Consts.p_atm:L}}{{Consts.water.rho:L} {Consts.g_ten:L}} = ',
-    ' &= \\frac{{n_1} * {Consts.p_atm:V}}{{Consts.water.rho:V} *  {Consts.g_ten:V}} \\approx {h:V}.'
+    'P_2 = {p_atm:L} + {rho_water:L} {g:L} h \\implies '
+    'h = \\frac{P_2 - {p_atm:L}}{{rho_water:L} {g:L}}'
+    ' &= \\frac{{n}{p_atm:L} - {p_atm:L}}{{rho_water:L} {g:L}}'
+    ' = \\frac{{n_1} * {p_atm:L}}{{rho_water:L} {g:L}} = ',
+    ' &= \\frac{{n_1} * {p_atm:V}}{{rho_water:V} *  {g:V}} \\approx {h:V}.'
 ])
 class ZFTSH_10_2_9_kv(variant.VariantTask):
     def GetUpdate(self, ratio=None, n=None, T=None):
+        rho_water = Consts.water.rho_name
+        p_atm = Consts.p_atm
+        g = Consts.g_ten
         return dict(
             n_1=n - 1,
-            h='%d м' % ((n - 1) * Consts.p_atm.Value * 1000 / Consts.water.rho.Value / Consts.g_ten.Value),
+            h=p_atm / rho_water / Consts.g_ten * (n - 1),
+            rho_water=rho_water,
+            p_atm=p_atm,
+            g=g,
         )
 
 
@@ -466,7 +468,7 @@ class ZFTSH_10_2_9_kv(variant.VariantTask):
     Consts.gas_ne,
     Consts.gas_ar,
 ])
-@variant.arg(V=[f'{V} л' for V in [2, 3, 4, 5]])
+@variant.arg(V='V = 2/3/4/5 л')
 @variant.arg(p=[2.5, 3, 3.5, 4, 4.5, 5])
 @variant.arg(t=[7, 17, 27, 37, 47])
 @variant.answer_short('''
@@ -477,9 +479,10 @@ class ZFTSH_10_2_9_kv(variant.VariantTask):
 
 class ZFTSH_10_2_2_kv(variant.VariantTask):
     def GetUpdate(self, gas=None, V=None, p=None, t=None):
+        T = UnitValue(f'{t + 273} К')
         return dict(
-            P='%.1f атм' % p,
-            m='%.2f г' % (Decimal(p) * Consts.p_atm.Value * 1000 * V.Value * gas.mu.Value / 1000 / Consts.R.Value / (t + 273)),
+            P=f'{p:.1f} атм',
+            m=(Consts.p_atm * p * V * gas.mu / Consts.R / T).IncPrecision(3).As('г'),
         )
 
 
@@ -504,7 +507,7 @@ class Polytrope(variant.VariantTask):
         if what == 'увеличился':
             ans = 1 / ans
         return dict(
-            ans='%.3f' % ans,
+            ans=f'{ans:.3f}',
         )
 
 
@@ -515,19 +518,18 @@ class Polytrope(variant.VariantTask):
 ''')
 @variant.arg(rho=['1.3 кг / м^3'])
 @variant.arg(t=[50, 100, 150, 200])
-@variant.arg(p=('p = {} кПа', [50, 80, 120, 150]))
+@variant.arg(p='p = 50/80/120/150 кПа')
 @variant.answer_align([
     '\\text{В общем случае:} PV = \\frac m{\\mu} RT \\implies \\rho = \\frac mV = \\frac m{\\frac{\\frac m{\\mu} RT}P} = \\frac{P\\mu}{RT},',
     '\\text{У нас 2 состояния:} \\rho_1 = \\frac{P_1\\mu}{RT_1}, \\rho_2 = \\frac{P_2\\mu}{RT_2} \\implies \\frac{\\rho_2}{\\rho_1} = \\frac{\\frac{P_2\\mu}{RT_2}}{\\frac{P_1\\mu}{RT_1}} = \\frac{P_2T_1}{P_1T_2} \\implies',
-    '\\implies \\rho_2 = \\rho_1 *  \\frac{P_2T_1}{P_1T_2} = {rho:V} * \\frac{{p:V} * {T1}\\units{К}}{{Consts.p_atm:V} * {T2}\\units{К}} \\approx {rho2:V}.'
+    '\\implies \\rho_2 = \\rho_1 * \\frac{P_2T_1}{P_1T_2} = {rho:V} * \\frac{{p:V} * {T1}\\units{К}}{{Consts.p_atm:V} * {T2}\\units{К}} \\approx {rho2:V}.'
 ])
 class Air_rho(variant.VariantTask):
     def GetUpdate(self, rho=None, p=None, t=None):
         T1 = 273
         T2 = t + 273
-        rho2 = rho * p / Consts.p_atm * T1 / T2
         return dict(
-            rho2=f'\\rho_2 = {rho2.SI_Value:.2f} кг / м^3',
+            rho2=(rho * p / Consts.p_atm * T1 / T2).IncPrecision(1).SetLetter('\\rho_2'),
             T1=T1,
             T2=T2,
         )

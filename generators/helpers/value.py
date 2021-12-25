@@ -20,6 +20,14 @@ def assert_equals(name, expected, actual):
         raise AssertionError(f'{actual} != {expected}')
 
 
+class Calculation:
+    PLUS = 'plus'
+    MINUS = 'minus'
+    DIV = 'div'
+    MULT = 'mult'
+
+
+
 def precisionFmt2(value, precision):
     assert isinstance(value, (int, float, Decimal)), f'Value {value} has type {type(value)}'
     assert isinstance(precision, int), f'Got precision {precision} for {value}'
@@ -177,7 +185,8 @@ class Pipes:
         'e': '${}$',
         'sqr': '\\sqr{{{}}}',
         'sqrt': '\\sqrt{{{}}}',
-        'cdot': '{} \\cdot'
+        'cdot': '{} \\cdot',
+        'inv': '\\frac 1{{{}}}',
     }
 
     def apply(self, line, pipes):
@@ -189,10 +198,10 @@ class Pipes:
         return line
 
 
+PIPES = Pipes()
+
 
 class UnitValue:
-    PIPES = Pipes()
-
     def __init__(self, line, precision=None, viewPrecision=None):
         self.__raw_line = line
         self._letter = None
@@ -304,7 +313,7 @@ class UnitValue:
         total_units = {}
         for unit in self._units:
             mult = 1 if unit.IsNumerator else -1
-            base_units = unit.simple_unit._base_units
+            base_units = unit.base_units
             for base_unit, degree in base_units.items():
                 if base_unit not in total_units:
                     total_units[base_unit] = 0
@@ -332,20 +341,20 @@ class UnitValue:
             else:
                 raise RuntimeError(f'Unknown main format: {main_format!r} from {fmt!r} for {self.__raw_line!r}')
 
-            result = self.PIPES.apply(result, pipes)
+            result = PIPES.apply(result, pipes)
             return result
         except Exception:
             log.error(f'Error in __format__ for format {fmt!r} and raw line {self.__raw_line!r}')
             raise
 
     def __mul__(self, other):
-        return self._calculate(other, action='mult')
+        return calculate(self, other, action=Calculation.MULT)
 
     def __truediv__(self, other):
-        return self._calculate(other, action='div')
+        return calculate(self, other, action=Calculation.DIV)
 
     def __rmul__(self, other):
-        return self._calculate(other, action='mult')
+        return calculate(self, other, action=Calculation.MULT)
 
     @property
     def SI_Value(self):
@@ -361,93 +370,96 @@ class UnitValue:
     def frac_value(self):
         return decimal_to_fraction(self.Value)
 
-    def _calculate(self, other, action=None, units=None):
-        MAX_PRECISION = 7
-
-        this_units = self.get_base_units()
-
-        if isinstance(other, UnitValue):
-            other_units = other.get_base_units()
-            other_precision = other.Precision
-            other_value = other.SI_Value
-        elif isinstance(other, (int, float, Decimal)):
-            other_units = {}
-            other_precision = None
-            other_value = Decimal(str(other))
-        else:
-            raise RuntimeError('other {!r} is not supported')
-
-        if self.Precision is not None and other_precision is not None:
-            precision = min(self.Precision, other_precision)
-        elif self.Precision is None and other_precision is not None:
-            precision = other_precision
-        elif self.Precision is not None and other_precision is None:
-            precision = self.Precision
-        else:
-            precision = None
-        if precision is None:
-            precision = MAX_PRECISION
-        else:
-            precision = min(precision, MAX_PRECISION)
-
-        used_units = set(this_units) | set(other_units)
-        calced_units = {}
-
-        if action == 'mult':
-            value = self.SI_Value * other_value
-            for key in used_units:
-                calced_units[key] = this_units.get(key, 0) + other_units.get(key, 0)
-
-        elif action == 'div':
-            value = self.SI_Value / other_value
-            for key in used_units:
-                calced_units[key] = this_units.get(key, 0) - other_units.get(key, 0)
-
-        else:
-            raise NotImplementedError(f'Could not apply unknown action {action!r}')
-
-        t = value
-        if value > 10 ** 5 or value < 10 ** -4:
-            power = int(abs(value).log10()) // 3 * 3
-            value *= Decimal(10) ** -power
-        else:
-            power = 0
-
-        if not units:
-            simple_unit = get_simple_unit(calced_units)
-            if simple_unit:
-                units = simple_unit._short_name
-
-            else:
-                sorted_units = sorted(calced_units.items())
-                nom_units = [(key, value) for key, value in sorted_units if value > 0]
-                denom_units = [(key, abs(value)) for key, value in sorted_units if value < 0]
-                units = ' '.join([f'{key._name}^{value}' for key, value in nom_units])
-                if denom_units:
-                    units += ' / '
-                    units += ' '.join([f'{key._name}^{value}' for key, value in denom_units])
-
-        line = f'{value}'
-        if power:
-            line += f' 10^{{{power}}}'
-        if units:
-            line += f' {units}'
-
-        # print(self, other, action, line, precision)
-        r = UnitValue(line, precision=precision)
-        return r
-
     def As(self, other):
         assert isinstance(other, str)
         other_uv = UnitValue(other)
         this_units = self.get_base_units()
         other_units = other_uv.get_base_units()
         assert this_units == other_units, f'Got {this_units} and {other_units} for {self!s} and {other!s}'
-        result = self._calculate(other_uv, action='div', units=other)
+        result = calculate(self, other_uv, action=Calculation.DIV, units=other)
+
         # preserve letter if exists
         if self._letter:
             result.SetLetter(self._letter)
+
         return result
+
+
+def calculate(left, right, action=None, units=None):
+    MAX_PRECISION = 7
+
+    this_units = left.get_base_units()
+
+    if isinstance(right, UnitValue):
+        other_units = right.get_base_units()
+        other_precision = right.Precision
+        other_value = right.SI_Value
+    elif isinstance(right, (int, float, Decimal)):
+        other_units = {}
+        other_precision = None
+        other_value = Decimal(str(right))
+    else:
+        raise RuntimeError('right {!r} is not supported')
+
+    if left.Precision is not None and other_precision is not None:
+        precision = min(left.Precision, other_precision)
+    elif left.Precision is None and other_precision is not None:
+        precision = other_precision
+    elif left.Precision is not None and other_precision is None:
+        precision = left.Precision
+    else:
+        precision = None
+    if precision is None:
+        precision = MAX_PRECISION
+    else:
+        precision = min(precision, MAX_PRECISION)
+
+    used_units = set(this_units) | set(other_units)
+    calced_units = {}
+
+    if action == Calculation.MULT:
+        value = left.SI_Value * other_value
+        for key in used_units:
+            calced_units[key] = this_units.get(key, 0) + other_units.get(key, 0)
+
+    elif action == Calculation.DIV:
+        value = left.SI_Value / other_value
+        for key in used_units:
+            calced_units[key] = this_units.get(key, 0) - other_units.get(key, 0)
+
+    else:
+        raise NotImplementedError(f'Could not apply unknown action {action!r}')
+
+    t = value
+    if value > 10 ** 5 or value < 10 ** -4:
+        power = int(abs(value).log10()) // 3 * 3
+        value *= Decimal(10) ** -power
+    else:
+        power = 0
+
+    if not units:
+        simple_unit = get_simple_unit(calced_units)
+        if simple_unit:
+            units = simple_unit._short_name
+
+        else:
+            sorted_units = sorted(calced_units.items())
+            nom_units = [(key, value) for key, value in sorted_units if value > 0]
+            denom_units = [(key, abs(value)) for key, value in sorted_units if value < 0]
+            units = ' '.join([f'{key._name}^{value}' for key, value in nom_units])
+            if denom_units:
+                units += ' / '
+                units += ' '.join([f'{key._name}^{value}' for key, value in denom_units])
+
+    line = f'{value}'
+    if power:
+        line += f' 10^{{{power}}}'
+    if units:
+        line += f' {units}'
+
+    # print(self, other, action, line, precision)
+    r = UnitValue(line, precision=precision)
+    return r
 
 
 def test_unit_value():

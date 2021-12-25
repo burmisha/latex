@@ -10,37 +10,36 @@ from generators.helpers import UnitValue, Consts, Decimal
         \\item Какой станет относительная влажность этого воздуха, если нагреть его до ${t2}\\celsius$?
     \\end{itemize}
 ''')
-@variant.arg(t1=('{}', [15, 20, 25, 30]))
-@variant.arg(t2=('{}', [40, 50, 60, 70, 80]))
-@variant.arg(phi1=('{}', [40, 45, 50, 55, 60, 65, 70, 75]))
+@variant.arg(t1=[15, 20, 25, 30])
+@variant.arg(t2=[40, 50, 60, 70, 80])
+@variant.arg(phi1=[40, 45, 50, 55, 60, 65, 70, 75])
 @variant.answer_align([
     '&\\text{Значения плотности насыщенного водяного пара определяем по таблице:}',
     '&{rho_np_1:Task}, {rho_np_2:Task}.',
-    '\\varphi_1 &= \\frac{rho:L:s}{rho_np_1:L:s} \\implies {rho:L:s} = {rho_np_1:L} * \\varphi_1 = {rho_np_1:V} * {phi1_ratio} = {rho:V}.',
+    '\\varphi_1 &= \\frac{rho:L:s}{rho_np_1:L:s} \\implies {rho:L:s} = {rho_np_1:L} * \\varphi_1 = {rho_np_1:V} * {phi_1} = {rho:V}.',
     '&\\text{По таблице определяем, при какой температуре пар с такой плотностью станет насыщенным:} ',
     't_\\text{росы} &= {t}\\celsius,',
     '\\varphi_2 &= \\frac{rho:L:s}{rho_np_2:L:s} = \\frac{{rho_np_1:L} * \\varphi_1}{rho_np_2:L:s}'
-    '= \\varphi_1 * \\frac{rho_np_1:L:s}{rho_np_2:L:s} = {phi1_ratio} * \\frac{rho_np_1:V:s}{rho_np_2:V:s} = {phi2} \\approx {phi2_ratio}\\%.'
+    '= \\varphi_1 * \\frac{rho_np_1:L:s}{rho_np_2:L:s} = {phi_1} * \\frac{rho_np_1:V:s}{rho_np_2:V:s} = {phi_2:V} \\approx {phi2_percent:V}\\%.'
 ])
 class GetPhi(variant.VariantTask):
     def GetUpdate(self, t1=None, t2=None, phi1=None):
-        np_1 = Consts.vapor.get_rho_by_t(int(t1))
-        np_2 = Consts.vapor.get_rho_by_t(int(t2))
-        rho_np_1 = f'\\rho_{{\\text{{нас. пара {t1}}} \\celsius}}= {np_1:.3f} г / м^3'
-        rho_np_2 = f'\\rho_{{\\text{{нас. пара {t2}}} \\celsius}} = {np_2:.3f} г / м^3'
-        rho = '\\rho_\\text{пара} = %.3f г / м^3' % (np_1 * int(phi1) / 100)
-        t = '%.1f' % Consts.vapor.get_t_by_rho(np_1 * int(phi1) / 100)
-        phi_2 = '%.3f' % (int(phi1) * np_1 / np_2 / 100)
-        phi1_ratio = '%.2f' % (int(phi1) / 100)
-        phi2_ratio = '%.1f' % (int(phi1) * np_1 / np_2)
+        phi_1 = phi1 / 100
+        rho_np_1 = Consts.vapor.get_rho_by_t(t1).SetLetter(f'\\rho_{{\\text{{нас. пара {t1}}} \\celsius}}')
+        rho_np_2 = Consts.vapor.get_rho_by_t(t2).SetLetter(f'\\rho_{{\\text{{нас. пара {t2}}} \\celsius}}')
+        rho = (rho_np_1 * phi_1).SetLetter('\\rho_\\text{пара}')
+        t = '%.1f' % Consts.vapor.get_t_by_rho(rho)
+        phi_2 = rho_np_1 / rho_np_2 * phi_1
+        # print([rho_np_1 / rho_np_2 * phi1])
+        # raise
         return dict(
             rho_np_1=rho_np_1,
             rho_np_2=rho_np_2,
-            rho=rho,
+            rho=rho.As('г / м^3'),
             t=t,
-            phi2=phi_2,
-            phi1_ratio=phi1_ratio,
-            phi2_ratio=phi2_ratio,
+            phi_2=phi_2,
+            phi_1=phi_1,
+            phi2_percent=phi_2 * 100,
         )
 
 
@@ -49,9 +48,9 @@ class GetPhi(variant.VariantTask):
     Сколько молекул водяного пара содержится в сосуде объёмом {V:V:e} при температуре ${t}\\celsius$,
     и влажности воздуха ${phi}\%$?
 ''')
-@variant.arg(V=('{} л', [3, 6, 9, 12, 15]))
-@variant.arg(t=('{}', [15, 20, 25, 30, 40, 50, 60, 70, 80, 90, 100]))
-@variant.arg(phi=('{}', [20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80]))
+@variant.arg(V='3/6/7/12/15 л')
+@variant.arg(t=[15, 20, 25, 30, 40, 50, 60, 70, 80, 90, 100])
+@variant.arg(phi=[20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80])
 @variant.answer_tex('''
     Уравнение состояния идеального газа (и учтём, что $R = {Consts.N_A:L} * {Consts.k_boltzmann:L}$,
     это чуть упростит выячичления, но вовсе не обязательно это делать):
@@ -66,7 +65,7 @@ class GetPhi(variant.VariantTask):
     $$
         N = \\frac{\\varphi * {P_np:L} * V}{{Consts.k_boltzmann:L}T}
          = \\frac{{phi_share} * {P_np:V} * {V:V}}{{Consts.k_boltzmann:V} * {T:V}}
-         \\approx {N:V}.
+         \\approx {N:V} * 10^{{power}}.
     $$
 
     Другой вариант решения (через плотности) приводит в результату:
@@ -75,29 +74,31 @@ class GetPhi(variant.VariantTask):
           = {Consts.N_A:L} \\frac{\\rho V}{mu:L:s}
           = {Consts.N_A:L} \\frac{\\varphi * {rho_np:L} * V}{mu:L:s}
           = {Consts.N_A:V} * \\frac{{phi_share} * {rho_np:V} * {V:V}}{mu:V:s}
-          \\approx {N2:V}.
+          \\approx {N2:V} * 10^{{power}}.
     $$
 ''')
 class GetNFromPhi(variant.VariantTask):
     def GetUpdate(self, phi=None, V=None, t=None):
-        mu_value = 18
+        mu = Consts.water.mu
+        T = UnitValue(f'{t + 273} К')
 
-        t_int = int(t)
-        T = t_int + 273
+        P_np = Consts.vapor.get_p_by_t(t).SetLetter(f'P_{{\\text{{нас. пара {t}}} \\celsius}}')
+        rho_np = Consts.vapor.get_rho_by_t(t).SetLetter(f'\\rho_{{\\text{{нас. пара {t}}} \\celsius}}')
 
-        P_np_value = Decimal(Consts.vapor.get_p_by_t(t_int))
-        rho_np_value = Decimal(Consts.vapor.get_rho_by_t(t_int))
+        power = 20
 
-        N = Decimal(int(phi)) / 100 * P_np_value * V.Value / Consts.k_boltzmann.Value / T * 1000
-        N2 = Decimal(int(phi)) / 100 * rho_np_value * V.Value / mu_value * Consts.N_A.Value
+        N = phi / 100 * P_np * V / Consts.k_boltzmann / T / 10 ** power
+        N2 = phi / 100 * rho_np * V / mu * Consts.N_A / 10 ** power
+
         return dict(
-            P_np=f'P_{{\\text{{нас. пара {t}}} \\celsius}} = %.3f кПа' % P_np_value,
-            rho_np=f'\\rho_{{\\text{{нас. пара {t}}} \\celsius}} = %.3f г/м^3' % rho_np_value,
-            T='T = %d К' % T,
-            phi_share='%.2f' % (int(phi) / 100),
-            N='N = %.1f 10^20' % N,
-            N2='N = %.1f 10^20' % N2,
-            mu=f'\\mu = {mu_value} г / моль',
+            P_np=P_np,
+            rho_np=rho_np,
+            T=T,
+            phi_share=f'{phi / 100:.2f}',
+            N=N.SetLetter('N').IncPrecision(3),
+            N2=N2.SetLetter('N').IncPrecision(3),
+            mu=mu,
+            power=power,
         )
 
 
@@ -113,10 +114,10 @@ class GetNFromPhi(variant.VariantTask):
         \\item Получите ответ на предыдущий вопрос, используя плотности, а не давления.
     \\end{enumerate}
 ''')
-@variant.arg(V=('{} л', [3, 6, 9, 12, 15]))
-@variant.arg(t1=('{}', [15, 20, 25, 30, 40]))
-@variant.arg(t2=('{}', [70, 80, 90]))
-@variant.arg(phi1=('{}', [20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80]))
+@variant.arg(V='3/6/9/12/15 л')
+@variant.arg(t1=[15, 20, 25, 30, 40])
+@variant.arg(t2=[70, 80, 90])
+@variant.arg(phi1=[20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80])
 @variant.answer_tex('''
     Парциальное давление насыщенного водяного пара при ${t1}\\celsius$ ищем по таблице: $${P_np_1:Task}.$$
 
@@ -146,30 +147,34 @@ class GetNFromPhi(variant.VariantTask):
 ''')
 class GetPFromPhi(variant.VariantTask):
     def GetUpdate(self, phi1=None, V=None, t1=None, t2=None):
-        P_np_1_value = Consts.vapor.get_p_by_t(int(t1))
-        P_np_2_value = Consts.vapor.get_p_by_t(int(t2))
-        phi_1 = 1. * int(phi1) / 100
-        P1_value = P_np_1_value * phi_1
-        T1 = int(t1) + 273
-        T2 = int(t2) + 273
-        P2_value = P1_value * T2 / T1
-        phi2 = P2_value / P_np_2_value
-        phi_2_rho = phi_1 * Consts.vapor.get_rho_by_t(int(t1)) / Consts.vapor.get_rho_by_t(int(t2))
+        P_np_1 = Consts.vapor.get_p_by_t(t1).SetLetter(f'P_{{\\text{{нас. пара {t1}}} \\celsius}}')
+        P_np_2 = Consts.vapor.get_p_by_t(t2).SetLetter(f'P_{{\\text{{нас. пара {t2}}} \\celsius}}')
+
+        rho_np_1 = Consts.vapor.get_rho_by_t(t1).SetLetter(f'\\rho_{{\\text{{нас. пара {t1}}} \\celsius}}')
+        rho_np_2 = Consts.vapor.get_rho_by_t(t2).SetLetter(f'\\rho_{{\\text{{нас. пара {t2}}} \\celsius}}')
+
+        phi_1 = phi1 / 100
+        P1 = (P_np_1 * phi_1).SetLetter('P_\\text{пара 1}').As('кПа')
+        T1 = t1 + 273
+        T2 = t2 + 273
+        P2 = (P1 * T2 / T1).SetLetter('P_\\text{пара 2}').As('кПа')
+        phi2 = P2 / P_np_2
+        phi_2_rho = phi_1 * Consts.vapor.get_rho_by_t(t1) / Consts.vapor.get_rho_by_t(t2)
         return dict(
-            P_np_1=f'P_{{\\text{{нас. пара {t1}}} \\celsius}} = %.3f кПа' % P_np_1_value,
-            P_np_2=f'P_{{\\text{{нас. пара {t2}}} \\celsius}} = %.3f кПа' % P_np_2_value,
-            t='%.1f' % Consts.vapor.get_t_by_p(P1_value),
+            P_np_1=P_np_1,
+            P_np_2=P_np_2,
+            t='%.1f' % Consts.vapor.get_t_by_p(P1),
             phi_1='%.2f' % phi_1,
-            P1='P_\\text{пара 1} = %.3f кПа' % P1_value,
-            P2='P_\\text{пара 2} = %.3f кПа' % P2_value,
+            P1=P1,
+            P2=P2,
             T1='T_1 = %d К' % T1,
             T2='T_2 = %d К' % T2,
-            phi2='%.3f' % phi2,
-            phi2_percent='%.1f' % (phi2 * 100),
-            phi_2_rho='%.3f' % phi_2_rho,
-            phi2_percent_rho='%.1f' % (phi_2_rho * 100),
-            rho_np_1=f'\\rho_{{\\text{{нас. пара {t1}}} \\celsius}} = %.3f г/м^3' % Consts.vapor.get_rho_by_t(int(t1)),
-            rho_np_2=f'\\rho_{{\\text{{нас. пара {t2}}} \\celsius}} = %.3f г/м^3' % Consts.vapor.get_rho_by_t(int(t2)),
+            phi2='%.3f' % phi2.SI_Value,
+            phi2_percent='%.1f' % (phi2.SI_Value * 100),
+            phi_2_rho='%.3f' % phi_2_rho.SI_Value,
+            phi2_percent_rho='%.1f' % (phi_2_rho.SI_Value * 100),
+            rho_np_1=rho_np_1,
+            rho_np_2=rho_np_2,
         )
 
 
@@ -178,11 +183,11 @@ class GetPFromPhi(variant.VariantTask):
     Закрытый сосуд объёмом {V:V:e} заполнен сухим воздухом при давлении {P_air_old:V:e} и температуре ${t1}\\celsius$.
     Каким станет давление в сосуде, если в него налить {m:V:e} воды и нагреть содержимое сосуда до ${t2}\\celsius$?
 ''')
-@variant.arg(P_air_old=('P = {} кПа', [100]))
-@variant.arg(V=('{} л', [10, 15, 20]))
-@variant.arg(t1=('{}', [10, 20, 30]))
-@variant.arg(t2=('{}', [100, 90, 80]))
-@variant.arg(m=('{} г', [5, 10, 20, 30]))
+@variant.arg(P_air_old=['P = 100 кПа'])
+@variant.arg(V='10/15/20 л')
+@variant.arg(t1=[10, 20, 30])
+@variant.arg(t2=[100, 90, 80])
+@variant.arg(m='5/10/20/30 г')
 @variant.answer_tex('''
     Конечное давление газа в сосуде складывается по закону Дальтона из давления нагретого сухого воздуха {P_air_new:L:e} и
     давления насыщенного пара {P_vapor_1:L:e}:
@@ -216,33 +221,26 @@ class GetPFromPhi(variant.VariantTask):
     Тут получаем ответ: {P_2:Task:e}.
 ''')
 class GetPFromM(variant.VariantTask):
-    def GetUpdate(self, P_air_old=None, V=None, t1=None, t2=None, m=None):
-        mu_value = 18
-        mu = f'\\mu = {mu_value} г / моль'
+    def GetUpdate(self, *, P_air_old=None, V=None, t1=None, t2=None, m=None):
+        mu = Consts.water.mu
 
-        T1 = f'T = {int(t1) + 273} К'
-        T2 = f'T\' = {int(t2) + 273} К'
+        T1 = UnitValue(f'T = {t1 + 273} К')
+        T2 = UnitValue(f'T\' = {t2 + 273} К')
 
-        P_air_new_value = P_air_old.Value * (int(t2) + 273) / (int(t1) + 273)
-        P_air_new = 'P\'_\\text{воздуха} = %.1f кПа' % P_air_new_value
+        P_air_new = (P_air_old * T2 / T1).SetLetter('P\'_\\text{воздуха}').As('кПа')
 
-        rho_value = Decimal(Consts.vapor.get_rho_by_t(int(t2)))
-        rho = '\\rho_\\text{н. п. %d $\\celsius$} = %.2f г / м^3' % (int(t2), rho_value)
+        rho = Consts.vapor.get_rho_by_t(t2).SetLetter(f'\\rho_\\text{{н. п. {t2} $\\celsius$}}')
 
-        m_np_value = rho_value * V.Value / 1000
-        m_np = 'm_\\text{н. п.} = %.1f г' % m_np_value
-        m_vapor = 'm_\\text{пара} = %.1f г' % min(m_np_value, m.Value)
-        P_vapor_1_value = min(m_np_value, m.Value) * Consts.R.Value * (int(t2) + 273) / mu_value / V.Value
-        P_vapor_1 = 'P_\\text{пара} = %.1f кПа' % P_vapor_1_value
+        m_np = (rho * V).SetLetter('m_\\text{н. п.}').As('г').IncPrecision(1)
+        m_vapor = UnitValue('%.1f г' % (min(m_np.SI_Value, m.SI_Value) * 1000)).SetLetter('m_\\text{пара}')
+        P_vapor_1 = (m_vapor * Consts.R * T2 / mu / V).SetLetter('P_\\text{пара}').IncPrecision(2).As('кПа')
 
-        P_np_value = Decimal(Consts.vapor.get_p_by_t(int(t2)))
-        P_np = 'P_\\text{н. п. %d $\\celsius$} = %.1f кПа' % (int(t2), P_np_value)
-        P_max_value = m.Value * Consts.R.Value * (int(t2) + 273) / mu_value / V.Value
-        P_max = 'P_\\text{max} = %.1f кПа' % P_max_value
-        P_vapor_2 = 'P\'_\\text{пара} = %.1f кПа' % min(P_max_value, P_np_value)
+        P_np = Consts.vapor.get_p_by_t(t2).SetLetter(f'P_\\text{{н. п. {t2} $\\celsius$}}')
+        P_max = (m * Consts.R * T2 / mu / V).SetLetter('P_\\text{max}').IncPrecision(2).As('кПа')
+        P_vapor_2 = 'P\'_\\text{пара} = %.1f кПа' % (min(P_max.SI_Value, P_np.SI_Value) / 1000)
 
-        P_1 = 'P\'_\\text{пара} = %.1f кПа' % (P_air_new_value + P_vapor_1_value)
-        P_2 = 'P\'_\\text{пара} = %.1f кПа' % (P_air_new_value + min(P_max_value, P_np_value))
+        P_1 = 'P\'_\\text{пара} = %.1f кПа' % ((P_air_new.SI_Value + P_vapor_1.SI_Value) / 1000)
+        P_2 = 'P\'_\\text{пара} = %.1f кПа' % ((P_air_new.SI_Value + min(P_max.SI_Value, P_np.SI_Value)) / 1000)
         return dict(
             T1=T1,
             T2=T2,

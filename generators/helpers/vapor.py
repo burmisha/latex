@@ -1,3 +1,5 @@
+from generators.helpers.value import UnitValue
+
 import logging
 log = logging.getLogger(__name__)
 
@@ -189,16 +191,42 @@ class Vapor:
         raise RuntimeError()
 
     def get_rho_by_t(self, t):
-        return self._get_index_by_index(value=t, search_index=0, result_index=3)
+        if isinstance(t, UnitValue):
+            s = float((t / UnitValue('С')).SI_Value)
+        else:
+            assert isinstance(t, (int, float))
+            s = t
+        value = self._get_index_by_index(value=s, search_index=0, result_index=3)
+        return UnitValue(f'{value:.2f} г / м^3')
+
 
     def get_p_by_t(self, t):
-        return self._get_index_by_index(value=t, search_index=0, result_index=1)
+        if isinstance(t, UnitValue):
+            s = float((t / UnitValue('С')).SI_Value)
+        else:
+            assert isinstance(t, (int, float))
+            s = t
+        value = self._get_index_by_index(value=s, search_index=0, result_index=1)
+        return UnitValue(f'{value:.3f} кПа')
 
     def get_t_by_rho(self, rho):
-        return self._get_index_by_index(value=rho, search_index=3, result_index=0)
+        if isinstance(rho, UnitValue):
+            s = float((rho / UnitValue('г / м^3')).SI_Value)
+        else:
+            assert isinstance(rho, (int, float))
+            s = t
+        value = self._get_index_by_index(value=s, search_index=3, result_index=0)
+        return value
 
     def get_t_by_p(self, p):
-        return self._get_index_by_index(value=p, search_index=1, result_index=0)
+        if isinstance(p, UnitValue):
+            s = float((p / UnitValue('кПа')).SI_Value)
+        else:
+            assert isinstance(p, (int, float))
+            s = p
+        value = self._get_index_by_index(value=s, search_index=1, result_index=0)
+        return value
+
 
 
 def test_vapor():
@@ -214,5 +242,5 @@ def test_vapor():
     assert vapor_2.get_rho_by_t(100) == 588.5
     assert vapor_2.get_t_by_rho(293) == 80.29729729729729
 
-
-test_vapor()
+# TODO: enable
+# test_vapor()

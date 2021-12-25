@@ -42,19 +42,21 @@ class Ch_6_3(variant.VariantTask):
 
 @variant.text('''
     На какой глубине полное давление пресной воды превышает атмосферное в {N} раз?
-    Принять {Consts.p_atm:Task|e}, {Consts.g_ten:Task|e}, {Consts.water.rho:Task|e}.
+    Принять {Consts.p_atm:Task|e}, {Consts.g_ten:Task|e}, {rho_water:Task|e}.
 ''')
 @variant.answer_short(
-    'p = {Consts.water.rho:L} {Consts.g_ten:L} {h:L} + {Consts.p_atm:L} = {N} {Consts.p_atm:L} \\implies '
-    '{h:L} = \\frac{({N}-1) {Consts.p_atm:L}}{{Consts.g_ten:L} {Consts.water.rho:L}} '
-    '= \\frac{({N}-1) * {Consts.p_atm:Value}}{{Consts.g_ten:Value} * {Consts.water.rho:Value}} = {h:Value}.'
+    'p = {rho_water:L} {Consts.g_ten:L} {h:L} + {Consts.p_atm:L} = {N} {Consts.p_atm:L} \\implies '
+    '{h:L} = \\frac{({N}-1) {Consts.p_atm:L}}{{Consts.g_ten:L} {rho_water:L}} '
+    '= \\frac{({N}-1) * {Consts.p_atm:Value}}{{Consts.g_ten:Value} * {rho_water:Value}} = {h:Value}.'
 )
 @variant.answer_test('{h:TestAnswer}')
 @variant.arg(N=[2, 3, 4, 5, 6, 7, 8, 9, 10])
 class Ch_6_8(variant.VariantTask):
     def GetUpdate(self, N=None, p=None):
+        rho_water = Consts.water.rho_name
         return dict(
-            h='h = %d м' % (1000 * Consts.p_atm.Value * (N-1) / Consts.g_ten.Value / Consts.water.rho.Value),
+            rho_water=rho_water,
+            h='h = %d м' % (1000 * Consts.p_atm.Value * (N-1) / Consts.g_ten.Value / rho_water.Value),
         )
 
 
@@ -92,12 +94,12 @@ class Ch_6_10(variant.VariantTask):
     В два сообщающихся сосуда налита вода. В один из соcудов наливают {matter} так,
     что столб этой жидкости имеет высоту {h1:Value:e}.
     На сколько теперь уровень воды в этом сосуде ниже, чем в другом?
-    Ответ выразите в сантиметрах. {Consts.water.rho:Task|e}, {rho:Task:e}.
+    Ответ выразите в сантиметрах. {rho_water:Task|e}, {rho:Task:e}.
 ''')
 @variant.answer_short(
-    '{rho:L}{Consts.g_ten:L}{h1:L} = {Consts.water.rho:L}{Consts.g_ten:L}{h2:L} \\implies '
-    '{h2:L} = {h1:L} \\frac{rho:L:s}{Consts.water.rho:L:s} '
-    '= {h1:Value} * \\frac{rho:Value:s}{Consts.water.rho:Value:s} '
+    '{rho:L}{Consts.g_ten:L}{h1:L} = {rho_water:L}{Consts.g_ten:L}{h2:L} \\implies '
+    '{h2:L} = {h1:L} \\frac{rho:L:s}{rho_water:L:s} '
+    '= {h1:Value} * \\frac{rho:Value:s}{rho_water:Value:s} '
     '= {h2:Value}'
 )
 @variant.answer_test({'{h2:TestAnswer}': 1, '{h2_m:TestAnswer}': 0.7})
@@ -122,9 +124,12 @@ class Ch_6_10(variant.VariantTask):
 ])
 class Ch_6_16(variant.VariantTask):
     def GetUpdate(self, matter=None, h1=None, rho=None):
+        rho_water = Consts.water.rho_name
+        h2 = (h1 * rho / rho_water).SetLetter('h_2')
         return dict(
-            h2='h_2 = %d см' % (h1.Value * rho.Value / Consts.water.rho.Value),
-            h2_m = 'h_2 = %.2f м' % (h1.Value * rho.Value / Consts.water.rho.Value / 100),
+            rho_water=rho_water,
+            h2=h2.As('см'),
+            h2_m=h2,
         )
 
 
@@ -133,14 +138,14 @@ class Ch_6_16(variant.VariantTask):
     Оба сосуда закрыты лёгкими поршнями и находятся в равновесии.
     На больший из поршней кладут груз массой {m:Value:e}.
     Определите, на сколько поднимется меньший поршень.
-    Ответ выразите в сантиметрах. {Consts.water.rho:Task|e}.
+    Ответ выразите в сантиметрах. {rho_water:Task|e}.
 ''')
 @variant.answer_align([
     '{S1:L}h_1 &= {S2:L}h_2 \\implies h_1 = h_2 \\frac{S2:L:s}{S1:L:s} ',
-    '\\frac{{m:L}{Consts.g_ten:L}}{S1:L:s} &= {Consts.water.rho:L}{Consts.g_ten:L}(h_1 + h_2) '
-    '= {Consts.water.rho:L}{Consts.g_ten:L} * h_2 \\cbr{1 + \\frac{S2:L:s}{S1:L:s}}',
-    'h_2 &= \\frac{{m:L}{Consts.g_ten:L}}{{S1:L}{Consts.water.rho:L}{Consts.g_ten:L}} * '
-    '\\frac{S1:L:s}{{S1:L} + {S2:L}} = \\frac{m:L:s}{{Consts.water.rho:L}({S1:L} + {S2:L})}'
+    '\\frac{{m:L}{Consts.g_ten:L}}{S1:L:s} &= {rho_water:L}{Consts.g_ten:L}(h_1 + h_2) '
+    '= {rho_water:L}{Consts.g_ten:L} * h_2 \\cbr{1 + \\frac{S2:L:s}{S1:L:s}}',
+    'h_2 &= \\frac{{m:L}{Consts.g_ten:L}}{{S1:L}{rho_water:L}{Consts.g_ten:L}} * '
+    '\\frac{S1:L:s}{{S1:L} + {S2:L}} = \\frac{m:L:s}{{rho_water:L}({S1:L} + {S2:L})}'
     ' = {h2:Value}',
 ])
 @variant.answer_test('{h2:TestAnswer}')
@@ -159,8 +164,10 @@ class Ch_6_16(variant.VariantTask):
 ])
 class Ch_6_20(variant.VariantTask):
     def GetUpdate(self, S1=None, S2=None, m=None):
+        rho_water = Consts.water.rho_name
         return dict(
-            h2='h_2 = %d см' % (100 * 10 * m.Value / Consts.water.rho.Value / (S1.Value + S2.Value)),
+            rho_water=rho_water,
+            h2='h_2 = %d см' % (100 * 10 * m.Value / rho_water.Value / (S1.Value + S2.Value)),
         )
 
 
