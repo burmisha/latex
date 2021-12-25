@@ -77,19 +77,20 @@
 }
 \answer{%
     \begin{align*}
-    \frac 1 F &= \frac 1{a + \frac d2} + \frac 1b \implies b = \frac 1{\frac 1 F - \frac 1{a + \frac d2}} = \frac{F(a + \frac d2)}{a + \frac d2 - F}, \\
-    \frac 1 F &= \frac 1{a - \frac d2} + \frac 1c \implies c = \frac 1{\frac 1 F - \frac 1{a - \frac d2}} = \frac{F(a - \frac d2)}{a - \frac d2 - F}, \\
+    &\text{Все явные вычисления — в см и $\text{см}^2$,} \\
+    \frac 1 F &= \frac 1{a + \frac d2} + \frac 1b \implies b = \frac 1{\frac 1 F - \frac 1{a + \frac d2}} = \frac{F(a + \frac d2)}{a + \frac d2 - F} = -144, \\
+    \frac 1 F &= \frac 1{a - \frac d2} + \frac 1c \implies c = \frac 1{\frac 1 F - \frac 1{a - \frac d2}} = \frac{F(a - \frac d2)}{a - \frac d2 - F} = -63, \\
     c - b &= \frac{F(a - \frac d2)}{a - \frac d2 - F} - \frac{F(a + \frac d2)}{a + \frac d2 - F} = F\cbr{ \frac{a - \frac d2}{a - \frac d2 - F} - \frac{a + \frac d2}{a + \frac d2 - F} } =  \\
-    &= F \cdot \frac{a^2 + \frac {ad}2 - aF - \frac{ad}2 - \frac{d^2}4 + \frac{dF}2 - a^2 + \frac {ad}2 + aF - \frac{ad}2 + \frac{d^2}4 + \frac{dF}2}{\cbr{a + \frac d2 - F}\cbr{a - \frac d2 - F}}= F \cdot \frac {dF}{\cbr{a + \frac d2 - F}\cbr{a - \frac d2 - F}}.
+    &= F \cdot \frac{a^2 + \frac {ad}2 - aF - \frac{ad}2 - \frac{d^2}4 + \frac{dF}2 - a^2 + \frac {ad}2 + aF - \frac{ad}2 + \frac{d^2}4 + \frac{dF}2}{\cbr{a + \frac d2 - F}\cbr{a - \frac d2 - F}}= F \cdot \frac {dF}{\cbr{a + \frac d2 - F}\cbr{a - \frac d2 - F}} = 81.
     \\
-    \Gamma_b &= \frac b{a + \frac d2} = \frac{ F }{a + \frac d2 - F}, \\
-    \Gamma_c &= \frac c{a - \frac d2} = \frac{ F }{a - \frac d2 - F}, \\
+    \Gamma_b &= \frac b{a + \frac d2} = \frac{ F }{a + \frac d2 - F} = -9, \\
+    \Gamma_c &= \frac c{a - \frac d2} = \frac{ F }{a - \frac d2 - F} = -\frac92, \\
     &\text{ тут интересно отметить, что } \Gamma_x = \frac{ c - b}{ d } = \frac{ F^2 }{\cbr{a + \frac d2 - F}\cbr{a - \frac d2 - F}} \ne \Gamma_b \text{ или } \Gamma_c \text{ даже при малых $d$}.
     \\
     S' &= \frac{d \cdot \Gamma_b + d \cdot \Gamma_c}2 \cdot (c - b) = \frac d2 \cbr{\frac{ F }{a + \frac d2 - F} + \frac{ F }{a - \frac d2 - F}} \cdot \cbr{c - b} =  \\
     &=\frac {dF}2 \cbr{\frac 1{a + \frac d2 - F} + \frac 1{a - \frac d2 - F}} \cdot \frac {dF^2}{\cbr{a + \frac d2 - F}\cbr{a - \frac d2 - F}} =  \\
     &=\frac {dF}2 \cdot \frac{a - \frac d2 - F + a + \frac d2 - F}{\cbr{a + \frac d2 - F}\cbr{a - \frac d2 - F}} \cdot \frac {dF^2}{\cbr{a + \frac d2 - F}\cbr{a - \frac d2 - F}} =  \\
-    &= \frac {d^2F^3}{2\sqr{a + \frac d2 - F}\sqr{a - \frac d2 - F}} \cdot (2a - 2F) = \frac {d^2F^3(a - F)}{ \sqr{\sqr{a - F} - \frac{d^2}4} }.
+    &= \frac {d^2F^3}{2\sqr{a + \frac d2 - F}\sqr{a - \frac d2 - F}} \cdot (2a - 2F) = \frac {d^2F^3(a - F)}{ \sqr{\sqr{a - F} - \frac{d^2}4} } = -\frac{2187}2.
     \end{align*}
 }
 
