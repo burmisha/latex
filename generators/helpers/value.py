@@ -1,6 +1,6 @@
 from generators.helpers.unit import OneUnit, BaseUnits, SimpleUnits, get_simple_unit
 from generators.helpers.fraction import decimal_to_fraction
-from generators.helpers.precision import precisionFmt2, get_precision
+from generators.helpers.precision import format_with_precision, get_precision
 from library.util.asserts import assert_equals
 
 from library.logging import colorize_json, cm, color
@@ -141,8 +141,8 @@ class UnitValue:
             if self.Value.is_zero():
                 valueStr = '0'
             else:
-                valueStr = precisionFmt2(self.Value, self.ViewPrecision or self.Precision or 1)
-            self._precisionFmt2 = str(valueStr)
+                valueStr = format_with_precision(self.Value, self.ViewPrecision or self.Precision or 1)
+            self._format_with_precision = str(valueStr)
             valueStr = valueStr.replace('.', '{,}')
             if self.ValuePower:
                 valueStr += f' \\cdot 10^{{{self.ValuePower}}}'
@@ -168,8 +168,8 @@ class UnitValue:
 
             value_str = self.get_value_str()
             if main_format == 'TestAnswer':
-                # assert str(int(self._precisionFmt2)) == self._precisionFmt2
-                return self._precisionFmt2
+                # assert str(int(self._format_with_precision)) == self._format_with_precision
+                return self._format_with_precision
             elif main_format == 'Task':
                 assert self._letter and value_str
                 result = f'{self._letter} = {value_str}'

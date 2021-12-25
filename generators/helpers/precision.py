@@ -1,63 +1,42 @@
 from library.util.asserts import assert_equals
 
-import logging
-log = logging.getLogger(__name__)
-
-from decimal import Decimal
+from decimal import Decimal, ROUND_DOWN
+import math
 
 
-def precisionFmt2(value, precision):
-    assert isinstance(value, (int, float, Decimal)), f'Value {value} has type {type(value)}'
-    assert isinstance(precision, int), f'Got precision {precision} for {value}'
-    assert 1 <= precision <= 10, f'Got precision {precision} for {value}'
+def _strip_prefix(line):
+    return line.replace('-', '').replace('.', '').lstrip('0')
+
+
+def format_with_precision(value, precision):
+    assert isinstance(value, (int, float, Decimal)), f'Value {value} has unsupported type {type(value)}'
+    assert isinstance(precision, int), f'Precision must be int, got {precision!r}'
+    assert 1 <= precision <= 10, f'Invalid precision {precision} for {value}'
 
     if int(value) == value:
         return str(int(value))
 
-    abs_value = float(abs(value))
+    str_value = str(abs(value))
+    abs_decimal = Decimal(str_value)
+    strip_prefix = _strip_prefix(str_value)
 
-    shift = 0
-    lower = 10 ** (precision - 1)
-    upper = 10 ** precision
-    while not (lower <= abs_value < upper):
-        if abs_value < lower:
-            abs_value *= 10
-            shift += 1
-        else:
-            abs_value /= 10
-            shift -= 1
+    log10 = math.floor(abs_decimal.log10()) - precision + 1
+    if strip_prefix and strip_prefix[0] == '1':
+        log10 -= 1
+    mult = Decimal(10) ** log10
+    new_value = Decimal(int(abs_decimal / mult + Decimal('0.5'))) * mult
 
-    leading_one = False
-    if str(abs_value).startswith('1'):
-        precision += 1
-        abs_value *= 10
-        shift += 1
-        leading_one = True
-
-    int_value = int(abs_value + 0.5)
-    result = str(int_value)
-
-    more_zeros = 0
-    if len(result) < precision:
-        more_zeros = precision - len(result)
-        if more_zeros and leading_one:
-            more_zeros -= 1
-    result += '0' * more_zeros
-
-    if shift < 0:
-        result += '0' * (-shift)
-    elif shift > 0:
-        if len(result) >= shift + 1:
-            result = result[:-shift] + '.' + result[-shift:]
-        else:
-            result = '0.' + '0' * (shift - len(result)) + result
+    result = str(new_value)
+    if 'E-' in result:
+        line, exp = result.split('E-')
+        result = '0.' + '0' * (int(exp) - 1) + line.replace('.', '')
 
     if value < 0:
         result = '-' + result
     return result
 
 
-def test_precisionFmt2():
+def test_format_with_precision():
     for value, precision, result in [
         (1, 1, '1'),
         (1.0, 1, '1'),
@@ -113,15 +92,15 @@ def test_precisionFmt2():
         (3 * 10 ** 7, 1, '30000000'),
         (3 * 10 ** 7, 2, '30000000'),
     ]:
-        res = precisionFmt2(value, precision)
+        res = format_with_precision(value, precision)
         assert_equals(f'value {value}, precision {precision}', result, res)
 
 
-test_precisionFmt2()
+test_format_with_precision()
 
 
 def get_precision(line):
-    precisionStr = line.replace('-', '').replace('.', '').lstrip('0')
+    precisionStr = _strip_prefix(line)
     if not precisionStr:
         assert line in ['0', '0.0', '0.00'], f'Could not get precision from {line!r}'
         precisionStr = '0'
@@ -142,9 +121,11 @@ def test_get_precision():
         ('2.00', 3),
         ('0.0020', 2),
         ('0.00200', 3),
+        ('0.00020', 2),
         ('20', 2),
         ('200', 3),
         ('192', 2),
+        ('1', 1),
         ('0', 1),
         ('0.0', 1),
         ('0.00', 1),
@@ -155,4 +136,3 @@ def test_get_precision():
 
 
 test_get_precision()
-
