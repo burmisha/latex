@@ -1,4 +1,5 @@
 from generators.helpers.value import UnitValue
+from decimal import Decimal
 
 import logging
 log = logging.getLogger(__name__)
@@ -199,7 +200,6 @@ class Vapor:
         value = self._get_index_by_index(value=s, search_index=0, result_index=3)
         return UnitValue(f'{value:.2f} г / м^3')
 
-
     def get_p_by_t(self, t):
         if isinstance(t, UnitValue):
             s = float((t / UnitValue('С')).SI_Value)
@@ -214,7 +214,7 @@ class Vapor:
             s = float((rho / UnitValue('г / м^3')).SI_Value)
         else:
             assert isinstance(rho, (int, float))
-            s = t
+            s = rho
         value = self._get_index_by_index(value=s, search_index=3, result_index=0)
         return value
 
@@ -231,16 +231,15 @@ class Vapor:
 
 def test_vapor():
     vapor = Vapor(T_P_Pmm_rho)
-    assert vapor.get_rho_by_t(80) == 293
-    assert vapor.get_rho_by_t(65) == 164
-    assert vapor.get_rho_by_t(100) == 598
+    assert vapor.get_rho_by_t(80).SI_Value == Decimal('0.29300')
+    assert vapor.get_rho_by_t(65).SI_Value == Decimal('0.16400')
+    assert vapor.get_rho_by_t(100).SI_Value == Decimal('0.598')
     assert vapor.get_t_by_rho(293) == 80
 
     vapor_2 = Vapor(T_P_Pmm_rho_2)
-    assert vapor_2.get_rho_by_t(80) == 289.7
-    assert vapor_2.get_rho_by_t(65) == 160.1
-    assert vapor_2.get_rho_by_t(100) == 588.5
+    assert vapor_2.get_rho_by_t(80).SI_Value == Decimal('0.28970')
+    assert vapor_2.get_rho_by_t(65).SI_Value == Decimal('0.16010')
+    assert vapor_2.get_rho_by_t(100).SI_Value == Decimal('0.58850')
     assert vapor_2.get_t_by_rho(293) == 80.29729729729729
 
-# TODO: enable
-# test_vapor()
+test_vapor()

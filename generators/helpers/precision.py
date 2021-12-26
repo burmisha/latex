@@ -103,7 +103,7 @@ def get_precision(line):
     precisionStr = _strip_prefix(line)
     if not precisionStr:
         assert line in ['0', '0.0', '0.00'], f'Could not get precision from {line!r}'
-        precisionStr = '0'
+        return 1
 
     precision = len(precisionStr)
     if precisionStr[0] == '1' and precision >= 2:

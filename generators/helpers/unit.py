@@ -292,6 +292,9 @@ def test_one_unit():
         ('кц', False),
         ('дптр', True),
         ('кдптр', False),
+        ('кл', False),
+        ('л', True),
+        ('мл', True),
     ]
     for name, canonic in data:
         assert (name in KNOWN_UNITS) == canonic
