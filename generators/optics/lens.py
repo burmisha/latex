@@ -575,8 +575,9 @@ class Baumanski_15_44(variant.VariantTask):
 @variant.arg(F2='0.09 м')
 @variant.answer_short('')
 class Chernoutsan_13_24(variant.VariantTask):
-    def GetUpdate(self, *, F=None):
-        pass
+    def GetUpdate(self, *, F1=None, F2=None):
+        return dict(
+        )
 
 
 @variant.text('''
@@ -591,8 +592,9 @@ class Chernoutsan_13_24(variant.VariantTask):
 @variant.arg(D='15 см')
 @variant.answer_short('')
 class Chernoutsan_13_25(variant.VariantTask):
-    def GetUpdate(self, *, F=None):
-        pass
+    def GetUpdate(self, *, F=None, l=None, D=None):
+        return dict(
+        )
 
 
 @variant.text('''
@@ -608,8 +610,9 @@ class Chernoutsan_13_25(variant.VariantTask):
 @variant.arg(f='12 см')
 @variant.answer_short('')
 class Chernoutsan_13_26(variant.VariantTask):
-    def GetUpdate(self, *, F=None):
-        pass
+    def GetUpdate(self, *, D=None, d=None, f=None):
+        return dict(
+        )
 
 
 @variant.text('''
@@ -617,14 +620,16 @@ class Chernoutsan_13_26(variant.VariantTask):
     с фокусным расстоянием {F:V:e}. За линзой на расстоянии {f:V:e}
     от неё расположен плоский экран, на котором видно круглое светлое пятно.
     На какое расстояние от фокуса линзы надо переместить вдоль оптической оси
-    источник света, чтобы радиус светлого пятна на экране увеличился в 2 раза?
+    источник света, чтобы радиус светлого пятна на экране увеличился в {n_word}?
 ''')
 @variant.arg(F='6 см')
 @variant.arg(f='12 см')
+@variant.arg(n__n_word=n_times(2, 3, 4))
 @variant.answer_short('')
 class Chernoutsan_13_27(variant.VariantTask):
-    def GetUpdate(self, *, F=None):
-        pass
+    def GetUpdate(self, *, F=None, f=None, n=None, n_word=None):
+        return dict(
+        )
 
 
 # формула линзы
@@ -636,8 +641,9 @@ class Chernoutsan_13_27(variant.VariantTask):
 @variant.arg(F='15 мм')
 @variant.answer_short('')
 class Chernoutsan_13_28(variant.VariantTask):
-    def GetUpdate(self, *, F=None):
-        pass
+    def GetUpdate(self, *, a=None, F=None):
+        return dict(
+        )
 
 
 @variant.text('''
@@ -649,19 +655,21 @@ class Chernoutsan_13_28(variant.VariantTask):
 @variant.arg(c='40 см')
 @variant.answer_short('')
 class Chernoutsan_13_29(variant.VariantTask):
-    def GetUpdate(self, *, F=None):
-        pass
+    def GetUpdate(self, *, F=None, c=None):
+        return dict(
+        )
 
 
 @variant.text('''
-    Расстояние от предмета до собирающей линзы в 1,5 раза больше фокусного.
+    Расстояние от предмета до собирающей линзы в {n_word} больше фокусного.
     Во сколько раз больше фокусного расстояние от изображения до линзы?
 ''')
-@variant.arg(D='15 мм')
+@variant.arg(n__n_word=n_times(2, 3, 4))
 @variant.answer_short('')
 class Chernoutsan_13_30(variant.VariantTask):
-    def GetUpdate(self, *, F=None):
-        pass
+    def GetUpdate(self, *, n=None, n_word=None):
+        return dict(
+        )
 
 
 @variant.text('''
@@ -672,8 +680,9 @@ class Chernoutsan_13_30(variant.VariantTask):
 @variant.arg(D='10 дптр')
 @variant.answer_short('')
 class Chernoutsan_13_31(variant.VariantTask):
-    def GetUpdate(self, *, F=None):
-        pass
+    def GetUpdate(self, *, a=None, D=None):
+        return dict(
+        )
 
 
 @variant.text('''
@@ -685,8 +694,9 @@ class Chernoutsan_13_31(variant.VariantTask):
 @variant.arg(b='15 см')
 @variant.answer_short('')
 class Chernoutsan_13_32(variant.VariantTask):
-    def GetUpdate(self, *, F=None):
-        pass
+    def GetUpdate(self, *, F=None, b=None):
+        return dict(
+        )
 
 
 @variant.text('''
@@ -697,20 +707,23 @@ class Chernoutsan_13_32(variant.VariantTask):
 @variant.arg(a='12 см')
 @variant.answer_short('')
 class Chernoutsan_13_33(variant.VariantTask):
-    def GetUpdate(self, *, F=None):
-        pass
+    def GetUpdate(self, *, F=None, a=None):
+        return dict(
+        )
 
 
 @variant.text('''
     Мнимое изображение предмета в рассеивающей линзе находится от неё
-    на расстоянии в 2 раза меньшем, чем расстояние от линзы до предмета.
+    на расстоянии в {n_word} меньшем, чем расстояние от линзы до предмета.
     Найдите расстояние от линзы до изображения, если фокусное расстояние линзы {F:V:e}.
 ''')
-@variant.arg(F='50 см')
+@variant.arg(F='40/50/60 см')
+@variant.arg(n__n_word=n_times(2, 3, 4))
 @variant.answer_short('')
 class Chernoutsan_13_34(variant.VariantTask):
-    def GetUpdate(self, *, F=None):
-        pass
+    def GetUpdate(self, *, F=None, n=None, n_word=None):
+        return dict(
+        )
 
 
 @variant.text('''
@@ -723,8 +736,9 @@ class Chernoutsan_13_34(variant.VariantTask):
 @variant.arg(b='2 см')
 @variant.answer_short('')
 class Chernoutsan_13_35(variant.VariantTask):
-    def GetUpdate(self, *, F=None):
-        pass
+    def GetUpdate(self, *, l=None, b=None):
+        return dict(
+        )
 
 
 @variant.text('''
@@ -739,8 +753,9 @@ class Chernoutsan_13_35(variant.VariantTask):
 @variant.arg(l='10 см')
 @variant.answer_short('')
 class Chernoutsan_13_36(variant.VariantTask):
-    def GetUpdate(self, *, F=None):
-        pass
+    def GetUpdate(self, *, a=None, f=None, l=None):
+        return dict(
+        )
 
 
 @variant.text('''
@@ -756,8 +771,9 @@ class Chernoutsan_13_36(variant.VariantTask):
 @variant.arg(F2='12 cм')
 @variant.answer_short('')
 class Chernoutsan_13_37(variant.VariantTask):
-    def GetUpdate(self, *, F=None):
-        pass
+    def GetUpdate(self, *, a=None, F1=None, l=None, F2=None):
+        return dict(
+        )
 
 
 @variant.text('''
@@ -774,8 +790,9 @@ class Chernoutsan_13_37(variant.VariantTask):
 @variant.arg(n='1.4/1.5/1.6')
 @variant.answer_short('')
 class Chernoutsan_13_38(variant.VariantTask):
-    def GetUpdate(self, *, F=None):
-        pass
+    def GetUpdate(self, *, a=None, F=None, h=None, n=None):
+        return dict(
+        )
 
 
 # увеличение линзы
@@ -789,8 +806,9 @@ class Chernoutsan_13_38(variant.VariantTask):
 @variant.arg(l='200 см')
 @variant.answer_short('')
 class Chernoutsan_13_39(variant.VariantTask):
-    def GetUpdate(self, *, F=None):
-        pass
+    def GetUpdate(self, *, F=None, l=None):
+        return dict(
+        )
 
 
 @variant.text('''
@@ -803,30 +821,34 @@ class Chernoutsan_13_39(variant.VariantTask):
 @variant.arg(l='9 м')
 @variant.answer_short('')
 class Chernoutsan_13_40(variant.VariantTask):
-    def GetUpdate(self, *, F=None):
-        pass
+    def GetUpdate(self, *, h=None, d=None, l=None):
+        return dict(
+        )
 
 
 @variant.text('''
     На каком расстоянии от собирающей линзы с фокусным расстоянием {F:V:e}
-    следует поместить предмет, чтобы получить действительное изображение, увеличенное в 3 раза?
+    следует поместить предмет, чтобы получить действительное изображение, увеличенное в {n_word}?
 ''')
 @variant.arg(F='30 см')
+@variant.arg(n__n_word=n_times(2, 3, 4))
 @variant.answer_short('')
 class Chernoutsan_13_41(variant.VariantTask):
-    def GetUpdate(self, *, F=None):
-        pass
+    def GetUpdate(self, *, F=None, n=None, n_word=None):
+        return dict(
+        )
 
 
 @variant.text('''
-    Расстояние от предмета до собирающей линзы составляет 1,25
+    Расстояние от предмета до собирающей линзы составляет {n:.2f}
     от фокусного расстояния. Найдите увеличение линзы.
 ''')
-@variant.arg(D='15 мм')
+@variant.arg(n=[1.25, 1.35, 1.45, 1.55, 1.65, 1.75])
 @variant.answer_short('')
 class Chernoutsan_13_42(variant.VariantTask):
-    def GetUpdate(self, *, F=None):
-        pass
+    def GetUpdate(self, *, n=None):
+        return dict(
+        )
 
 
 @variant.text('''
@@ -834,94 +856,108 @@ class Chernoutsan_13_42(variant.VariantTask):
     получено по другую сторону линзы в натуральную величину.
     Во сколько раз увеличится размер изображения, если предмет передвинуть в сторону линзы на {x:V:e}?
 ''')
-@variant.arg(D='60 см')
+@variant.arg(a='60 см')
 @variant.arg(x='20 см')
 @variant.answer_short('')
 class Chernoutsan_13_43(variant.VariantTask):
-    def GetUpdate(self, *, F=None):
-        pass
+    def GetUpdate(self, *, a=None, x=None):
+        return dict(
+        )
 
 
 @variant.text('''
     Предмет расположен на расстоянии {a:V:e} перед собирающей линзой,
-    с помощью которой получено увеличенное в 5 раз мнимое изображение предмета.
+    с помощью которой получено увеличенное в {n_word} мнимое изображение предмета.
     Определите оптическую силу линзы в диоптриях.
 ''')
-@variant.arg(a='0,2 м')
+@variant.arg(a='0.2 м')
+@variant.arg(n__n_word=n_times(3, 4, 5, 6))
 @variant.answer_short('')
 class Chernoutsan_13_44(variant.VariantTask):
-    def GetUpdate(self, *, F=None):
-        pass
+    def GetUpdate(self, *, a=None, n=None, n_word=None):
+        return dict(
+        )
 
 
 @variant.text('''
     Мнимое изображение предмета, полученное собирающей линзой,
-    в 4 раза дальше от линзы, чем её фокус. Определите увеличение линзы.
+    в {n_word} дальше от линзы, чем её фокус. Определите увеличение линзы.
 ''')
-@variant.arg(D='15 мм')
+@variant.arg(n__n_word=n_times(3, 4, 5, 6))
 @variant.answer_short('')
 class Chernoutsan_13_45(variant.VariantTask):
-    def GetUpdate(self, *, F=None):
-        pass
+    def GetUpdate(self, *, n=None, n_word=None):
+        return dict(
+        )
 
 
 @variant.text('''
-    Расстояние между предметом и его увеличенным в 3 раза действительным изображением {l:V:e}.
+    Расстояние между предметом и его увеличенным в {n_word} действительным изображением {l:V:e}.
     Найдите фокусное расстояние линзы.
 ''')
 @variant.arg(l='80 см')
+@variant.arg(n__n_word=n_times(3, 4, 5, 6))
 @variant.answer_short('')
 class Chernoutsan_13_46(variant.VariantTask):
-    def GetUpdate(self, *, F=None):
-        pass
+    def GetUpdate(self, *, l=None, n=None, n_word=None):
+        return dict(
+        )
 
 
 @variant.text('''
-    Расстояние между предметом и его увеличенным в 5 раз мнимым изображением {l:V:e}.
+    Расстояние между предметом и его увеличенным в {n_word} мнимым изображением {l:V:e}.
     Найдите расстояние от предмета до линзы.
 ''')
 @variant.arg(l='80 см')
+@variant.arg(n__n_word=n_times(3, 4, 5, 6))
 @variant.answer_short('')
 class Chernoutsan_13_47(variant.VariantTask):
-    def GetUpdate(self, *, F=None):
-        pass
+    def GetUpdate(self, *, l=None, n=None, n_word=None):
+        return dict(
+        )
 
 
 @variant.text('''
-    Рассеивающая линза с фокусным расстоянием {F:V:e} уменьшает предмет в два раза.
+    Рассеивающая линза с фокусным расстоянием {F:V:e} уменьшает предмет в {n_word}.
     Найдите расстояние от предмета до линзы.
 ''')
 @variant.arg(F='8 см')
+@variant.arg(n__n_word=n_times(2, 3, 4, 5))
 @variant.answer_short('')
 class Chernoutsan_13_48(variant.VariantTask):
-    def GetUpdate(self, *, F=None):
-        pass
+    def GetUpdate(self, *, F=None, n=None, n_word=None):
+        return dict(
+        )
 
 
 @variant.text('''
-    Линза с фокусным расстоянием {F:V:e} формирует уменьшенное в 3 раза
+    Линза с фокусным расстоянием {F:V:e} формирует уменьшенное в {n_word}
     действительное изображение предмета. Другая линза, помещенная на место первой,
     формирует его увеличенное в 3 раза действительное изображение.
     Найдите фокусное расстояние второй линзы.
 ''')
 @variant.arg(F='12 см')
+@variant.arg(n__n_word=n_times(2, 3, 4, 5))
 @variant.answer_short('')
 class Chernoutsan_13_49(variant.VariantTask):
-    def GetUpdate(self, *, F=None):
-        pass
+    def GetUpdate(self, *, F=None, n=None, n_word=None):
+        return dict(
+        )
 
 
 @variant.text('''
-    Линза с фокусным расстоянием {F:V:e} формирует увеличенное в 5 раз
+    Линза с фокусным расстоянием {F:V:e} формирует увеличенное в {n_word}
     действительное изображение предмета. Каким должно быть фокусное расстояние (в см)
     другой линзы, чтобы, поместив её на место первой, мы получили увеличенное в 5 раз
     мнимое изображение?
 ''')
 @variant.arg(F='8 см')
+@variant.arg(n__n_word=n_times(3, 4, 5, 6))
 @variant.answer_short('')
 class Chernoutsan_13_50(variant.VariantTask):
-    def GetUpdate(self, *, F=None):
-        pass
+    def GetUpdate(self, *, F=None, n=None, n_word=None):
+        return dict(
+        )
 
 
 @variant.text('''
@@ -934,35 +970,39 @@ class Chernoutsan_13_50(variant.VariantTask):
 @variant.arg(h2='4 см')
 @variant.answer_short('')
 class Chernoutsan_13_51(variant.VariantTask):
-    def GetUpdate(self, *, F=None):
-        pass
+    def GetUpdate(self, *, h1=None, h2=None):
+        return dict(
+        )
 
 
 @variant.text('''
     Тонкий стержень расположен вдоль главной оптической оси собирающей линзы.
     Каково продольное увеличение стержня, если объект, расположенный у одного конца стержня,
-    изображается с увеличением 4, а у другого конца — с увеличением 2,75?
+    изображается с увеличением {G1}, а у другого конца — с увеличением {G2:.1f}?
     Оба конца стержня располагаются от линзы на расстоянии больше фокусного.
 ''')
-@variant.arg(D='15 мм')
+@variant.arg(G1=[4, 5, 6])
+@variant.arg(G2=[2.5, 3.0, 3.5])
 @variant.answer_short('')
 class Chernoutsan_13_52(variant.VariantTask):
-    def GetUpdate(self, *, F=None):
-        pass
+    def GetUpdate(self, *, G1=None, G2=None):
+        return dict(
+        )
 
 
 @variant.text('''
     Точечный источник, находящийся на главной оптической оси собирающей линзы
-    на расстоянии от неё, в полтора раза большем фокусного, начинает смещаться
+    на расстоянии от неё, в {n_word} большем фокусного, начинает смещаться
     со скоростью {v:V:e} перпендикулярно оси. С какой скоростью
     движется изображение источника?
-    Ответ выразите в мм/c.
 ''')
 @variant.arg(v='4 мм/с')
+@variant.arg(n__n_word=n_times(2, 3))
 @variant.answer_short('')
 class Chernoutsan_13_53(variant.VariantTask):
-    def GetUpdate(self, *, F=None):
-        pass
+    def GetUpdate(self, *, v=None, n=None, n_word=None):
+        return dict(
+        )
 
 
 @variant.text('''
@@ -970,15 +1010,15 @@ class Chernoutsan_13_53(variant.VariantTask):
     с фокусным расстоянием {F:V:e} на расстоянии {a:V:e} от линзы.
     Линзу начинают смещать со скоростью {v:V:e} в направлении,
     перпендикулярном оптической оси. С какой скоростью движется изображение источника?
-    Ответ выразите в мм/c.
 ''')
 @variant.arg(F='6 см')
 @variant.arg(a='8 см')
 @variant.arg(v='3 мм/с')
 @variant.answer_short('')
 class Chernoutsan_13_54(variant.VariantTask):
-    def GetUpdate(self, *, F=None):
-        pass
+    def GetUpdate(self, *, F=None, a=None, v=None):
+        return dict(
+        )
 
 
 @variant.text('''
@@ -986,12 +1026,12 @@ class Chernoutsan_13_54(variant.VariantTask):
     главной оптической оси собирающей линзы с фокусным расстоянием {F:V:e}.
     С какой скоростью движется изображение источника в тот момент,
     когда источник находится от линзы на расстоянии {a:V:e}?
-    Ответ выразите в мм/c.
 ''')
 @variant.arg(v='2 мм/с')
 @variant.arg(F='8 см')
 @variant.arg(a='10 см')
 @variant.answer_short('')
 class Chernoutsan_13_55(variant.VariantTask):
-    def GetUpdate(self, *, F=None):
-        pass
+    def GetUpdate(self, *, v=None, F=None, a=None):
+        return dict(
+        )
