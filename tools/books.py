@@ -1,7 +1,7 @@
 import library.location
 import library.process
 
-from library.convert import (
+from library.convert.pdf_to_jpeg import (
     PdfBook,
     disable_trim,
     page_shift,
@@ -9,8 +9,9 @@ from library.convert import (
     source_link,
     structure,
     ppi,
-    Structure,
 )
+
+from library.structure.structure import Structure
 
 import logging
 log = logging.getLogger(__name__)

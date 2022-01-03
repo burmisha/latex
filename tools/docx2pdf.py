@@ -1,4 +1,5 @@
-import library.convert
+from library.convert.pdf_to_pdf import PdfToPdf
+from library.convert.docx_to_pdf import DocxToPdf
 import library.files
 import library.location
 import library.pupils
@@ -20,7 +21,7 @@ class PdfExtractor:
         assert library.files.is_file(self._source_file)
         assert library.files.is_dir(self._destination_directory)
 
-        self._pdf2pdf = library.convert.PdfToPdf(self._source_file)
+        self._pdf2pdf = PdfToPdf(self._source_file)
 
     def Extract(self, pages, destination_filename):
         dst_file = os.path.join(self._destination_directory, destination_filename)
@@ -135,7 +136,7 @@ def get_extract_config():
 
 
 def run(args):
-    docxToPdf = library.convert.DocxToPdf()
+    docxToPdf = DocxToPdf()
     for src_dir, dst_dir, recursive, regexp in get_convert_config():
         docxToPdf.ConvertDir(
             src_dir,

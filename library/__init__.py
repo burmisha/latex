@@ -14,6 +14,7 @@ import library.normalize
 import library.process
 import library.pupils
 import library.secrets
+import library.structure
 import library.template
 import library.topic
 import library.tripod

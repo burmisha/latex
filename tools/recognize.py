@@ -1,5 +1,5 @@
 from tools.books import get_all_books
-from library.convert import PagesRange
+from library.structure.page import PagesRange
 from library.normalize import format_plain_text
 
 import library.process
