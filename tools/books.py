@@ -1651,7 +1651,11 @@ class KodificatorCards(PdfBook):
     pass
 
 
-def get_all_books():
+def get_dst_path(*pdf_path):
+    return library.location.no_sync('Книги - физика - картинки', *pdf_path)
+
+
+def get_basic_books():
     books_config = [
         (ComicsBook, ['Физика в комиксах.pdf']),
         (ChernoutsanBook, ['Сборники', 'Сборник - Черноуцан - 2011.pdf']),
@@ -1679,9 +1683,11 @@ def get_all_books():
     for book_class, pdfPath in books_config:
         yield book_class(
             pdfPath=library.location.udr('Книги - физика', *pdfPath),
-            dstPath=library.location.no_sync('Книги - физика - картинки', pdfPath[-1].replace('.pdf', '')),
+            dstPath=get_dst_path(pdfPath[-1].replace('.pdf', '')),
         )
 
+
+def get_zftsh_books():
     zftsh_config = [
         ([(1, 2), (3, 14), (14, 16)], 'Физика 8 - 1 - Гидростатика и аэростатика.pdf'),
         ([(1, 2), (3, 19), (19, 20)], 'Физика 8 - 2 - Тепловые явления.pdf'),
@@ -1710,7 +1716,7 @@ def get_all_books():
     for parts, file_name in zftsh_config:
         book_class = ZFTSH(
             pdfPath=library.location.udr('Материалы - ЗФТШ', 'ЗФТШ-2013', file_name),
-            dstPath=library.location.no_sync('Книги - физика - картинки', 'ЗФТШ', file_name.replace('.pdf', '')),
+            dstPath=get_dst_path('ЗФТШ', file_name.replace('.pdf', '')),
         )
         structure = Structure(
             [
@@ -1723,6 +1729,8 @@ def get_all_books():
         book_class.set_structure(structure)
         yield book_class
 
+
+def get_mathus_books():
     mathus_config = [
         (Mathus_mechanics, '9 - Механика - пособие.pdf'),
         (Mathus_termodynamics, '10 - Термодинамика - пособие.pdf'),
@@ -1735,32 +1743,45 @@ def get_all_books():
     for book_class, file_name in mathus_config:
         yield book_class(
             pdfPath=library.location.udr('Материалы - mathus', file_name),
-            dstPath=library.location.no_sync('Книги - физика - картинки', 'Mathus - ' + file_name.replace('.pdf', '')),
+            dstPath=get_dst_path('Mathus - ' + file_name.replace('.pdf', '')),
         )
 
+
+def get_ege_books():
     yield FIPI_kodificator(
         pdfPath=library.location.udr('11 ЕГЭ', '2019-ФИПИ', 'ФИ_КОДИФ 2019.pdf'),
-        dstPath=library.location.no_sync('Книги - физика - картинки', '11 - ЕГЭ', 'Кодификатор ФИПИ 2019'),
+        dstPath=get_dst_path('11 - ЕГЭ', 'Кодификатор ФИПИ 2019'),
     )
     yield FIPI_kodificator(
         pdfPath=library.location.udr('11 ЕГЭ', 'fi-ege-2021', 'ФИ-11 ЕГЭ 2021 КОДИФ.pdf'),
-        dstPath=library.location.no_sync('Книги - физика - картинки', '11 - ЕГЭ', 'Кодификатор ФИПИ 2021'),
+        dstPath=get_dst_path('11 - ЕГЭ', 'Кодификатор ФИПИ 2021'),
     )
     yield FIPI_demo(
         pdfPath=library.location.udr('11 ЕГЭ', 'fi-ege-2021', 'ФИ-11 ЕГЭ 2021 ДЕМО.pdf'),
-        dstPath=library.location.no_sync('Книги - физика - картинки', '11 - ЕГЭ', 'Демовариант 2021'),
+        dstPath=get_dst_path('11 - ЕГЭ', 'Демовариант 2021'),
     )
     yield Statgrad39(
         pdfPath=library.location.udr('11 ЕГЭ', 'Статград', '2021 Статград ЕГЭ-5', 'Zadanie_FI11_17052021.pdf'),
-        dstPath=library.location.no_sync('Книги - физика - картинки', '11 - ЕГЭ', 'Статград 2021-05-17'),
+        dstPath=get_dst_path('11 - ЕГЭ', 'Статград 2021-05-17'),
     )
-
     yield BlankiEge(
         pdfPath=library.location.udr('11 ЕГЭ', 'blanki-ege-2020-all.pdf'),
-        dstPath=library.location.no_sync('Книги - физика - картинки', '11 - ЕГЭ', 'Бланки'),
+        dstPath=get_dst_path('11 - ЕГЭ', 'Бланки'),
     )
-
     yield KodificatorCards(
         pdfPath=library.location.udr('11 ЕГЭ', '11 Кодификатор.pdf'),
-        dstPath=library.location.no_sync('Книги - физика - картинки', '11 - ЕГЭ', 'Кодификатор - карточки'),
+        dstPath=get_dst_path('11 - ЕГЭ', 'Кодификатор - карточки'),
     )
+
+
+def get_all_books():
+    books_funcs = [
+        get_basic_books,
+        get_zftsh_books,
+        get_mathus_books,
+        get_ege_books,
+    ]
+
+    for books_func in books_funcs:
+        for book in books_func():
+            yield book
