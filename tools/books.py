@@ -7,11 +7,9 @@ from library.convert import (
     page_shift,
     params,
     source_link,
-    zero_d_structure,
-    one_d_structure,
-    two_d_structure,
+    structure,
     ppi,
-    ZeroDStructure,
+    Structure,
 )
 
 import logging
@@ -19,7 +17,7 @@ log = logging.getLogger(__name__)
 
 
 @page_shift(lambda self, pageNumber: -2 if pageNumber < 110 else -3)
-@one_d_structure([
+@structure([
     ('Движение', 9, 23),
     ('Яблоко и Луна', 24, 38),
     ('Пуля и параболическое движение', 39, 42),
@@ -50,7 +48,7 @@ class ComicsBook(PdfBook):
 
 
 @params(['-level', '50%,90%,1.5'])
-@two_d_structure(
+@structure(
     [
         ('Кинематика', [
             ('Примеры решения', 6, 25),
@@ -183,7 +181,7 @@ class ComicsBook(PdfBook):
         ]),
         ('Ответы', [('Ответы', 320, 323)]),
     ],
-    secondLevelStartIndex=0,
+    indices=[None, 0],
 )
 class ChernoutsanBook(PdfBook):
     pass
@@ -191,7 +189,7 @@ class ChernoutsanBook(PdfBook):
 
 @page_shift(1)
 @params(['-level', '50%,90%,1.5'])
-@one_d_structure([
+@structure([
     ('Механика', 5, 78),
     ('Колебания', 78, 87),
     ('Волны', 87, 92),
@@ -204,7 +202,7 @@ class Maron_9_Sbornik(PdfBook):
 
 @page_shift(1)
 @params(['-level', '50%,90%,1.5'])
-@one_d_structure([
+@structure([
     ('Тепловые явления', 5, 51),
     ('Электрические явления', 52, 117),
     ('Электромагнитные явления', 118, 129),
@@ -216,7 +214,7 @@ class Maron_8_Sbornik(PdfBook):
 
 @page_shift(1)
 @params(['-level', '10%,90%,0.7'])
-@two_d_structure([
+@structure([
     ('Тепловые явления', [
         ('Тепловое движение Температура', 4, 4),
         ('Внутренняя энергия', 5, 5),
@@ -309,7 +307,7 @@ class Maron_8_SR_KR(PdfBook):
 
 @page_shift(1)
 @params(['-level', '10%,90%,0.7'])
-@two_d_structure([
+@structure([
     ('Механика', [
         ('Материальная точка и СО', 5, 5),
         ('Перемещение', 6, 6),
@@ -408,7 +406,7 @@ class Maron_9_SR_KR(PdfBook):
 
 @page_shift(1)
 @params(['-level', '10%,90%,0.7'])
-@two_d_structure([
+@structure([
     ('Тренировочные задания', [
         ('Путь и перемещение', 5, 6),
         ('Прямолинейное равномерное движение', 6, 8),
@@ -466,7 +464,7 @@ class Maron_9_Didaktika(PdfBook):
 
 @page_shift(1)
 @params(['-level', '10%,90%,0.7'])
-@two_d_structure([
+@structure([
     ('Тренировочные задания', [
         ('Внутренняя энергия', 5, 6),
         ('Виды теплопередачи', 6, 9),
@@ -523,7 +521,7 @@ class Maron_8_Didaktika(PdfBook):
 @page_shift(1)
 @params(['-level', '10%,90%,0.7'])
 @source_link('http://alleng.net/d/phys/phys462.htm')
-@two_d_structure([
+@structure([
     ('Тепловые явления', [
         ('Внутренняя энергия - Виды теплопередачи', 6, 10),
         ('Количество теплоты - Удельная теплоемкость', 11, 16),
@@ -576,7 +574,7 @@ class Kirik_8(PdfBook):
 @page_shift(1)
 @params(['-level', '10%,90%,0.7'])
 @source_link('https://uchebnik.alleng.me/d/phys/phys552.htm')
-@two_d_structure([
+@structure([
     ('Кинематика', [
         ('Механическое движение и система отсчета - траектория-путь-перемещение', 6, 12),
         ('Прямолинейное равномерное движение', 13, 17),
@@ -617,7 +615,7 @@ class Kirik_9(PdfBook):
 @page_shift(1)
 @params(['-level', '10%,90%,0.7'])
 @source_link('http://alleng.net/d/phys/phys433.htm')
-@two_d_structure([
+@structure([
     ('Тепловые явления', [
         ('Внутренняя энергия', 4, 7),
         ('Виды теплопередачи', 7, 15),
@@ -663,7 +661,7 @@ class Gendenshteyn_8(PdfBook):
 @page_shift(1)
 @params(['-level', '20%,90%,0.6'])
 @source_link('https://may.alleng.org/d/phys/phys375.htm')
-@two_d_structure([
+@structure([
     ('Кинематика', [
         ('Система отсчёта, траектория, путь и перемещение', 4, 6),
         ('Прямолинейное равномерное движение', 6, 8),
@@ -749,7 +747,7 @@ class Gendenshteyn_10(PdfBook):
 @page_shift(1)
 @params(['-level', '20%,90%,0.6'])
 @source_link('https://may.alleng.org/d/phys/phys399.htm')
-@two_d_structure([
+@structure([
     ('Магнитное поле', [  # 1-4
         ('Магнитные взаимодействия. Магнитное поле', 4, 6),
         ('Закон Ампера', 6, 11),
@@ -834,7 +832,7 @@ class Gendenshteyn_11(PdfBook):
 @page_shift(1)
 @params(['-level', '10%,90%,0.7'])
 @source_link('https://uchebnik.alleng.me/d/phys/phys435.htm')
-@two_d_structure([
+@structure([
     ('Механика', [
         ('Механическое движение и система отсчёта', 4, 13),
         ('Прямолинейное равномерное движение', 13, 20),
@@ -871,7 +869,7 @@ class Gendenshteyn_9(PdfBook):
 
 
 @params(['-level', '10%,90%,0.7'])
-@one_d_structure([
+@structure([
     ('Кинематика-1', 10, 13),
     ('Кинематика-2', 14, 18),
     ('Динамика-1', 25, 28),
@@ -906,7 +904,7 @@ class Gorbushin(PdfBook):
 
 
 @page_shift(1)
-@two_d_structure([
+@structure([
     ('Механика', [
         ('1.1 - Кинематика', 7, 18),
         ('1.1 - Кинематика - ответы', 304, 305),
@@ -973,7 +971,7 @@ class Vishnyakova(PdfBook):
     pass
 
 
-@one_d_structure([
+@structure([
     ('Кинематика', 6, 21),
     ('Динамика', 21, 36),
     ('Импульс', 36, 42),
@@ -999,7 +997,7 @@ class Baumansky2000(PdfBook):
 
 
 @page_shift(1)
-@two_d_structure([
+@structure([
     ('Механика', [
         ('01-1 - Кинематика', 3, 14),
         ('01-2 - Кинематика - решения', 164, 181),
@@ -1072,7 +1070,7 @@ class Goldfarb(PdfBook):
 
 
 @page_shift(-1)
-@two_d_structure([
+@structure([
     ('Механика', [
         ('Векторы и скаляры', 9, 11),
         ('Кинематика равномерного движения', 11, 13),
@@ -1168,7 +1166,7 @@ class Belolipetsky(PdfBook):
 
 
 @page_shift(-1)
-@two_d_structure([
+@structure([
     ('Механика - Кинематика', [
         ('Поступательное движение, материальная точка, система отсчёта, путь и перемещение', 5, 8),
         ('Прямолинейное равномерное движение', 8, 10),
@@ -1184,7 +1182,7 @@ class Rymkevich(PdfBook):
 
 @page_shift(-2)
 @ppi(300)
-@two_d_structure([
+@structure([
     ('Механика', [
         ('01 - Прямолинейное равномерное и равнопеременное движение', 7, 13),
         ('01 - Прямолинейное равномерное и равнопеременное движение - решения', 171, 180),
@@ -1266,7 +1264,7 @@ class Bendrikov(PdfBook):
 
 @params(['-level', '10%,90%,0.7'])
 @source_link('https://uchebnik.alleng.me/d/phys/phys435.htm')
-@two_d_structure([
+@structure([
     ('Механика - Кинематика', [
         ('Длина - время - скорость', 4, 7),
         ('Материальная точка. Система отсчета. Путь. Перемещение', 7, 8),
@@ -1484,7 +1482,7 @@ class ZFTSH(PdfBook):
 
 
 @ppi(250)
-@one_d_structure([
+@structure([
     ('Производная', 5, 17),
     ('Механическое движение', 18, 25),
     ('Равномерное прямолинейное движение', 26, 27),
@@ -1510,7 +1508,7 @@ class Mathus_mechanics(PdfBook):
 
 
 @ppi(250)
-@one_d_structure([
+@structure([
     ('Основные положения молекулярно-кинетической теории', 4, 7),
     ('Газы, жидкости и твёрдые тела', 8, 10),
     ('Основные формулы молекулярной физики', 11, 12),
@@ -1530,7 +1528,7 @@ class Mathus_termodynamics(PdfBook):
 
 
 @ppi(250)
-@one_d_structure([
+@structure([
     ('Фотоэффект', 3, 9),
     ('Фотоны', 10, 13),
     ('Корпускулярно-волновой дуализм', 14, 16),
@@ -1548,7 +1546,7 @@ class Mathus_quantum(PdfBook):
 
 
 @ppi(250)
-@one_d_structure([
+@structure([
     ('Электрический заряд', 6, 9),
     ('Закон Кулона', 10, 12),
     ('Напряжённость электрического поля', 13, 18),
@@ -1582,7 +1580,7 @@ class Mathus_electricity(PdfBook):
 
 
 @ppi(250)
-@one_d_structure([
+@structure([
     ('Введение', 2, 2),
     ('Принцип Гюйгенса', 3, 9),
     ('Интерференция волн', 10, 16),
@@ -1595,7 +1593,7 @@ class Mathus_wave_optics(PdfBook):
 
 
 @ppi(250)
-@one_d_structure([
+@structure([
     ('Световые лучи', 3, 5),
     ('Отражение света', 6, 9),
     ('Преломление света', 10, 14),
@@ -1610,7 +1608,7 @@ class Mathus_geom_optics(PdfBook):
 
 
 @ppi(250)
-@one_d_structure([
+@structure([
     ('Описание движения в механике', 2, 4),
     ('Принцип относительности Галилея', 5, 7),
     ('Принципы СТО', 8, 12),
@@ -1622,31 +1620,31 @@ class Mathus_relativity(PdfBook):
 
 
 @ppi(250)
-@zero_d_structure([('Кодификатор', 1, 8)])
+@structure([('Кодификатор', 1, 8)])
 class FIPI_kodificator(PdfBook):
     pass
 
 
 @ppi(250)
-@zero_d_structure([('Справочные материалы', 2, 3)])
+@structure([('Справочные материалы', 2, 3)])
 class FIPI_demo(PdfBook):
     pass
 
 
 @ppi(200)
-@zero_d_structure([('Статград - ЕГЭ', 1, 39)])
+@structure([('Статград - ЕГЭ', 1, 39)])
 class Statgrad39(PdfBook):
     pass
 
 
 @ppi(300)
-@zero_d_structure([('Бланки - ЕГЭ', 1, 9)])
+@structure([('Бланки - ЕГЭ', 1, 9)])
 class BlankiEge(PdfBook):
     pass
 
 
 @ppi(300)
-@zero_d_structure([('Кодификатор - карточки', 1, 35)])
+@structure([('Кодификатор - карточки', 1, 35)])
 @disable_trim()
 class KodificatorCards(PdfBook):
     pass
@@ -1669,11 +1667,11 @@ def get_all_books():
         (Gendenshteyn_10, ['10 класс', '10 - Генденштейн - Задачник - 2014.pdf']),
         (Gendenshteyn_11, ['11 класс', '11 - Генденштейн - Задачник - 2014.pdf']),
         (Gorbushin, ['Методика', 'Горбушин - Как можно учить физике.pdf']),
-        (Goldfarb, ['Сборники', 'Сборник - Гольдфарб - 10-11.pdf']),
+        (Goldfarb, ['Сборники', '10-11 - Гольдфарб - Сборник.pdf']),
         (Vishnyakova, ['МГУ', 'Вишнякова - Физика - сборник задач к ЕГЭ - 2015.pdf']),
         (Baumansky2000, ['Сборники', 'Бауманский - 2000 - Васюков - Сборник для поступающих.pdf']),
         (Belolipetsky, ['Сборники', 'Сборник - Белолипецкий - Задачник с лягушками.pdf']),
-        (Rymkevich, ['Сборники', '9-11 - Рымкевич.pdf']),
+        (Rymkevich, ['Сборники', '9-11 - Рымкевич - Сборник.pdf']),
         (Problems_3800, ['Сборники', '3800 задач по физике.pdf']),
         (Bendrikov, ['Сборники', 'Бендриков - Лебедь рак и щука - 2010.pdf']),
     ]
@@ -1713,11 +1711,14 @@ def get_all_books():
             pdfPath=library.location.udr('Материалы - ЗФТШ', 'ЗФТШ-2013', file_name),
             dstPath=library.location.no_sync('Книги - физика - картинки', 'ЗФТШ', file_name.replace('.pdf', '')),
         )
-        structure = ZeroDStructure([
-            ('Вступление', parts[0][0], parts[0][1]),
-            ('Теория', parts[1][0], parts[1][1]),
-            ('Задачи', parts[2][0], parts[2][1]),
-        ])
+        structure = Structure(
+            [
+                ('Вступление', parts[0][0], parts[0][1]),
+                ('Теория', parts[1][0], parts[1][1]),
+                ('Задачи', parts[2][0], parts[2][1]),
+            ],
+            plain=True,
+        )
         book_class.set_structure(structure)
         yield book_class
 

@@ -2,6 +2,7 @@ import library.files
 import library.location
 import library.process
 
+from library.util.asserts import assert_equals
 from library.logging import cm, color
 
 import os
@@ -64,86 +65,121 @@ def test_pages_range():
 test_pages_range()
 
 
+def _get_indices(indices):
+    if indices is None:
+        first_level_index = 1
+        second_level_index = 1
+    else:
+        first_level_index, second_level_index = indices
+
+    if first_level_index is None:
+        first_level_index = 1
+    if second_level_index is None:
+        second_level_index = 1
+
+    return first_level_index, second_level_index
+
+
+def was_indexed(items):
+    return all(item[0][0].isdigit() for item in items)
+
+
+def _get_pages(first_page, last_page, dst_dir, name_template):
+    for page_index in range(first_page, last_page + 1):
+        yield DestinationPage(
+            index=page_index,
+            dst_dir=dst_dir,
+            name_template=name_template,
+        )
+
+
+def parse_simple_structure(data, *, indices=None, plain=None):
+    assert isinstance(data, list)
+    first_level_start_index, second_level_start_index = _get_indices(indices)
+
+    already_has_first_index = was_indexed(data)
+    if len(data) == 1:
+        plain = True
+
+    for first_level_index, first_level_item in enumerate(data, first_level_start_index):
+        assert isinstance(first_level_item, tuple)
+
+        if already_has_first_index: 
+            name_template = f'{first_level_item[0]}'
+        else:
+            name_template = f'{first_level_index:02} {first_level_item[0]}'
+
+        if plain:
+            dst_dir = None
+        else:
+            dst_dir = name_template
+
+        if len(first_level_item) == 3:
+            _, first_page, last_page = first_level_item  
+            for page in _get_pages(first_page, last_page, dst_dir, name_template):
+                yield page
+
+        elif len(first_level_item) == 2:
+            second_level_items = first_level_item[1]
+            already_has_second_index = was_indexed(second_level_items)
+
+            for second_level_index, second_level_item in enumerate(first_level_item[1], second_level_start_index):
+                assert isinstance(second_level_item, tuple)
+                assert len(second_level_item) == 3
+                second_level_name, first_page, last_page = second_level_item
+
+                if already_has_second_index:
+                    second_level_template = second_level_name
+                else:
+                    second_level_template = f'{second_level_index:02} {second_level_name}'
+
+                for page in _get_pages(first_page, last_page, name_template, second_level_template):
+                    yield page
+
+        else:
+            raise RuntimeError(f'Structure is not supported: {first_level_item}')
+
+
 class Structure:
-    def get_pages(self):
-        raise NotImplementedError('Could not get structure')
-
-    def _get_plain_pages(self, sub_dir=None, start_index=None, parts=None):
-        has_digit = all(part[0].isdigit() for part, _, _ in parts)  # all subfiles start with digit
-        for index, (part_name, first, last) in enumerate(parts, start_index):
-            if first > last:
-                log.error(f'Invalid pages range in book structure for {part_name!r}: [{first}, {last}]. End must be greater or equal')
-                raise RuntimeError('Broken pages range in structure')
-
-            if has_digit:
-                name = f'{part_name}'
-            else:
-                name = f'{index:02d} {part_name}'
-
-            for page_index in range(first, last + 1):
-                yield DestinationPage(
-                    index=page_index,
-                    dst_dir=sub_dir(page_index, name),
-                    name_template=name,
-                )
-
-
-class ZeroDStructure(Structure):
-    def __init__(self, data, startIndex=1):
-        self.Data = data
-        self.StartIndex = startIndex
+    def __init__(self, data, indices=None, plain=None):
+        self._data = data
+        self._indices = indices
+        self._plain = plain
 
     def get_pages(self):
-        for result in self._get_plain_pages(
-            sub_dir=lambda index, name: None,
-            start_index=self.StartIndex,
-            parts=self.Data,
-        ):
-            yield result
+        for page in parse_simple_structure(self._data, indices=self._indices, plain=self._plain):
+            yield page
 
 
-class OneDStructure(Structure):
-    def __init__(self, data, startIndex=1):
-        self.Data = data
-        self.StartIndex = startIndex
-
-    def get_pages(self):
-        for result in self._get_plain_pages(
-            sub_dir=lambda index, name: f'{name}',
-            start_index=self.StartIndex,
-            parts=self.Data,
-        ):
-            yield result
-
-
-class TwoDStructure(Structure):
-    def __init__(self, data, firstLevelStartIndex=1, secondLevelStartIndex=1):
-        self.Data = data
-        self.FirstLevelStartIndex = firstLevelStartIndex
-        self.SecondLevelStartIndex = secondLevelStartIndex
-
-    def get_pages(self):
-        for chapterIndex, (chapterName, parts) in enumerate(self.Data, self.FirstLevelStartIndex):
-            for result in self._get_plain_pages(
-                sub_dir=lambda index, name: f'{chapterIndex:02d} {chapterName}',
-                start_index=self.SecondLevelStartIndex,
-                parts=parts,
-            ):
-                yield result
-
-
-def test_structures():
+def test_parse_simple_structure():
     data = [
         (
-            ZeroDStructure([('Раздел', 1, 3)]),
-            [DestinationPage(1, None, '01 Раздел'), DestinationPage(2, None, '01 Раздел'), DestinationPage(3, None, '01 Раздел')],
+            Structure([('Раздел', 1, 1)]),
+            [DestinationPage(1, None, '01 Раздел')],
         ),
         (
-            OneDStructure([('Кинематика', 2, 3), ('Динамика', 3, 3)]),
+            Structure([('Раздел', 1, 3)]),
+            [
+                DestinationPage(1, None, '01 Раздел'), 
+                DestinationPage(2, None, '01 Раздел'), 
+                DestinationPage(3, None, '01 Раздел'),
+            ],
+        ),
+        (
+            Structure([('Кинематика', 2, 3), ('Динамика', 3, 3)]),
             [DestinationPage(2, '01 Кинематика', '01 Кинематика'), DestinationPage(3, '01 Кинематика', '01 Кинематика'), DestinationPage(3, '02 Динамика', '02 Динамика')],
         ),
         (
-            TwoDStructure([
+            Structure([
+                ('А', [('Б', 1, 2)]),
+            ]),
+            [
+                DestinationPage(1, '01 А', '01 Б'),
+                DestinationPage(2, '01 А', '01 Б'),
+            ],
+        ),
+        (
+            Structure([
                 ('А', [('Б', 1, 2), ('В', 2, 2)]),
                 ('Ф', [('Д', 3, 3), ('Г', 4, 4)]),
             ]),
@@ -156,7 +192,52 @@ def test_structures():
             ],
         ),
         (
-            TwoDStructure([
+            Structure([
+                ('А', [('3 Б', 1, 2), ('4 В', 2, 2)]),
+                ('Ф', [('Д', 3, 3), ('Г', 4, 4)]),
+            ]),
+            [
+                DestinationPage(1, '01 А', '3 Б'),
+                DestinationPage(2, '01 А', '3 Б'),
+                DestinationPage(2, '01 А', '4 В'),
+                DestinationPage(3, '02 Ф', '01 Д'),
+                DestinationPage(4, '02 Ф', '02 Г'),
+            ],
+        ),
+    ]
+    for structure, canonic in data:
+        result = list(structure.get_pages())
+        assert_equals('Broken structure', canonic, result)
+
+
+test_parse_simple_structure()
+
+
+def test_structures():
+    data = [
+        (
+            Structure([('Раздел', 1, 3)]),
+            [DestinationPage(1, None, '01 Раздел'), DestinationPage(2, None, '01 Раздел'), DestinationPage(3, None, '01 Раздел')],
+        ),
+        (
+            Structure([('Кинематика', 2, 3), ('Динамика', 3, 3)]),
+            [DestinationPage(2, '01 Кинематика', '01 Кинематика'), DestinationPage(3, '01 Кинематика', '01 Кинематика'), DestinationPage(3, '02 Динамика', '02 Динамика')],
+        ),
+        (
+            Structure([
+                ('А', [('Б', 1, 2), ('В', 2, 2)]),
+                ('Ф', [('Д', 3, 3), ('Г', 4, 4)]),
+            ]),
+            [
+                DestinationPage(1, '01 А', '01 Б'),
+                DestinationPage(2, '01 А', '01 Б'),
+                DestinationPage(2, '01 А', '02 В'),
+                DestinationPage(3, '02 Ф', '01 Д'),
+                DestinationPage(4, '02 Ф', '02 Г'),
+            ],
+        ),
+        (
+            Structure([
                 ('А', [('3 Б', 1, 2), ('4 В', 2, 2)]),
                 ('Ф', [('Д', 3, 3), ('Г', 4, 4)]),
             ]),
@@ -349,23 +430,9 @@ def params(params_list):
     return decorator
 
 
-def zero_d_structure(data, **kws):
+def structure(data, **kws):
     def decorator(cls):
-        cls._structure = ZeroDStructure(data, **kws)
-        return cls
-    return decorator
-
-
-def one_d_structure(data, **kws):
-    def decorator(cls):
-        cls._structure = OneDStructure(data, **kws)
-        return cls
-    return decorator
-
-
-def two_d_structure(data, **kws):
-    def decorator(cls):
-        cls._structure = TwoDStructure(data, **kws)
+        cls._structure = Structure(data, **kws)
         return cls
     return decorator
 
