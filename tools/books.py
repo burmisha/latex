@@ -1477,6 +1477,15 @@ class Problems_3800(PdfBook):
     pass
 
 
+
+@page_shift(1)
+@structure([
+    ('Содержание', 77, 78),
+])
+class Maron_11_Conspects(PdfBook):
+    pass
+
+
 @ppi(250)
 class ZFTSH(PdfBook):
     pass
@@ -1679,6 +1688,7 @@ def get_basic_books():
         (Rymkevich, ['Сборники', '9-11 - Рымкевич - Сборник.pdf']),
         (Problems_3800, ['Сборники', '3800 задач по физике.pdf']),
         (Bendrikov, ['Сборники', 'Бендриков - Лебедь рак и щука - 2010.pdf']),
+        (Maron_11_Conspects, ['11 класс', '11 - Марон - ОпКонспект - 2013.pdf']),
     ]
     for book_class, pdfPath in books_config:
         yield book_class(
