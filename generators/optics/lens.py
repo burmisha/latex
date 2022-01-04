@@ -405,7 +405,7 @@ class Baumanski_15_31(variant.VariantTask):
 ])
 @variant.answer_align([
     '\\frac 1F = \\frac 1a + \\frac 1b \\implies a = \\frac{bF}{b-F} \\implies \\Gamma = \\frac ba = \\frac{b-F}F',
-    'y = x * \\Gamma = x * \\frac{b-F}F \\implies d = {what} = {d:V:e}.',
+    'y = x * \\Gamma = x * \\frac{b-F}F \\implies d = {what} = {d:V}.',
 ])
 class Baumanski_15_34(variant.VariantTask):
     def GetUpdate(self, *, b=None, x=None, F=None, how=None):
@@ -420,7 +420,7 @@ class Baumanski_15_34(variant.VariantTask):
             raise RuntimeError(f'Invalid how: {how}')
 
         return dict(
-            d=d,
+            d=d.As('см').IncPrecision(1),
             what=what,
         )
 
@@ -431,27 +431,43 @@ class Baumanski_15_34(variant.VariantTask):
 ''')
 @variant.arg(D1='4.5/5/5.5 дптр')
 @variant.arg(D2='1.4/1.5/1.6 дптр')
-@variant.answer_short([
+@variant.answer_align([
     'D_1 &=\\cbr{\\frac n{n_1} - 1}\\cbr{\\frac 1{R_1} + \\frac 1{R_2}},',
     'D_2 &=\\cbr{\\frac n{n_2} - 1}\\cbr{\\frac 1{R_1} + \\frac 1{R_2}},',
-    '\\frac {D_2}{D_1} &=\\frac{\\frac n{n_2} - 1}{\\frac n{n_1} - 1}',
+    '\\frac {D_2}{D_1} &=\\frac{\\frac n{n_2} - 1}{\\frac n{n_1} - 1}'
+    ' \\implies {D_2}\\cbr{\\frac n{n_1} - 1} = {D_1}\\cbr{\\frac n{n_2} - 1} '
+    ' \\implies n\\cbr{\\frac{D_2}{n_1} - \\frac{D_1}{n_2}} = D_2 - D_1,',
+    'n &= \\frac{D_2 - D_1}{\\frac{D_2}{n_1} - \\frac{D_1}{n_2}} = \\frac{n_1 n_2 (D_2 - D_1)}{D_2n_2 - D_1n_1} \\approx {n:.3f}.',
 ])
 class Baumanski_15_35(variant.VariantTask):
     def GetUpdate(self, *, D1=None, D2=None):
+        n1 = 1
+        n2 = 1.33
+        d1 = float(D1.SI_Value)
+        d2 = float(D2.SI_Value)
         return dict(
+            n = n1 * n2 * (d2 - d1) / (d2 * n2 - d1 * n1),
         )
 
 
 @variant.text('''
-    На каком расстоянии надо поместить предмет
-    от собирающей линзы с фокусным расстоянием {F:V:e}, чтобы расстояние
+    На каком расстоянии от собирающей линзы с фокусным расстоянием {F:V:e}
+    следует надо поместить предмет, чтобы расстояние
     от предмета до его действительного изображения было наименьшим?
 ''')
 @variant.arg(F='30/40/50 дптр')
-@variant.answer_short('')
+@variant.answer_align([
+    '\\frac 1a &+ \\frac 1b = D \\implies b = \\frac 1{D - \\frac 1a} '
+    '\\implies \\ell = a + b = a + \\frac a{Da - 1} = \\frac{ Da^2 }{Da - 1} \\implies',
+    '\\implies \\ell\'_a &= \\frac{ 2Da * (Da - 1) - Da^2 * D }{\\sqr{Da - 1}}'
+    '= \\frac{ D^2a^2 - 2Da}{\\sqr{Da - 1}} = \\frac{ Da(Da - 2)}{\\sqr{Da - 1}}'
+    '\\implies a_{\\min} = \\frac 2D \\approx {a:V}.'
+])
 class Baumanski_15_36(variant.VariantTask):
     def GetUpdate(self, *, F=None):
+        a = 2 / F.SI_Value
         return dict(
+            a=f'{a * 1000:.1f} мм',
         )
 
 
@@ -461,7 +477,22 @@ class Baumanski_15_36(variant.VariantTask):
     иа расстоянии $a$ от линзы, которая даёт действительное изображение
     всех точек предмета. Определить продольное увеличение предмета.
 ''')
-@variant.answer_short('')
+@variant.no_args
+@variant.answer_align([
+    '\\frac 1{a + \\frac \\ell 2} &+ \\frac 1b = \\frac 1F \\implies b = \\frac{F\\cbr{a + \\frac \\ell 2}}{a + \\frac \\ell 2 - F}',
+    '\\frac 1{a - \\frac \\ell 2} &+ \\frac 1c = \\frac 1F \\implies c = \\frac{F\\cbr{a - \\frac \\ell 2}}{a - \\frac \\ell 2 - F}',
+    '\\abs{b - c} &'
+        '= \\abs{\\frac{F\\cbr{a + \\frac \\ell 2}}{a + \\frac \\ell 2 - F} - \\frac{F\\cbr{a - \\frac \\ell 2}}{a - \\frac \\ell 2 - F}}'
+        '= F\\abs{\\frac{\\cbr{a + \\frac \\ell 2}\\cbr{a - \\frac \\ell 2 - F} - \\cbr{a - \\frac \\ell 2}\\cbr{a + \\frac \\ell 2 - F}}{ \\cbr{a + \\frac \\ell 2 - F} \\cbr{a - \\frac \\ell 2 - F} }} = ',
+    '&= F\\abs{\\frac{'
+            'a^2 - \\frac {a\\ell} 2 - Fa + \\frac {a\\ell} 2 - \\frac {\\ell^2} 4 - \\frac {F\\ell}2'
+            ' - a^2 - \\frac {a\\ell}2 + aF + \\frac {a\\ell}2 + \\frac {\\ell^2} 4 - \\frac {F\\ell} 2'
+        '}{'
+            '\\cbr{a + \\frac \\ell 2 - F} \\cbr{a - \\frac \\ell 2 - F} '
+        '}} =',
+    '&= F\\frac{F\\ell}{\\sqr{a-F} - \\frac {\\ell^2}4} = \\frac{F^2\\ell}{\\sqr{a-F} - \\frac {\\ell^2}4}'
+    '\\implies \\Gamma = \\frac{\\abs{b - c}}\\ell = \\frac{F^2}{\\sqr{a-F} - \\frac {\\ell^2}4}.',
+])
 class Baumanski_15_37(variant.VariantTask):
     def GetUpdate(self, *, F=None):
         return dict(
@@ -469,11 +500,20 @@ class Baumanski_15_37(variant.VariantTask):
 
 
 @variant.text('''
-    Даны точечный источник света 5, его изображение 5}, полученное с помошью собирающей 5 Е ∎ ∣
-    линзы, и ближайший к источнику фокус линзы Е. Расстояния 5Е = [ и 551= Ё..
+    Даны точечный источник света $S$, его изображение $S_1$, полученное с помошью собирающей линзы,
+    и ближайший к источнику фокус линзы $F$ (см. рис. на доске). Расстояния $SF = \\ell$ и $SS_1 = L$.
     Определить положение линзы и её фокусное расстояние.
 ''')
-@variant.answer_short('')
+@variant.no_args
+@variant.answer_align([
+    '\\frac 1a + \\frac 1b &= \\frac 1F, \\ell = a - F, L = a + b \\implies a = \\ell + F, b = L - a = L - \\ell - F',
+    '\\frac 1{\\ell + F} + \\frac 1{L - \\ell - F} &= \\frac 1F',
+    'F\\ell + F^2 + LF - F\\ell - F^2 &= L\\ell - \\ell^2 - F\\ell + LF - F\\ell - F^2',
+    '0 &= L\\ell - \\ell^2 - 2F\\ell - F^2',
+    '0 &=  F^2 + 2F\\ell - L\\ell + \\ell^2',
+    'F &= -\\ell \\pm \\sqrt{\\ell^2 +  L\\ell - \\ell^2} = -\\ell \\pm \\sqrt{L\\ell} \\implies F = \\sqrt{L\\ell} - \\ell',
+    'a &= \\ell + F = \\ell + \\sqrt{L\\ell} - \\ell = \\sqrt{L\\ell}.',
+])
 class Baumanski_15_38(variant.VariantTask):
     def GetUpdate(self, *, F=None):
         return dict(
@@ -481,29 +521,54 @@ class Baumanski_15_38(variant.VariantTask):
 
 
 @variant.text('''
-    Расстояние от освещённого предмета до экрана [=100 см.
+    Расстояние от освещённого предмета до экрана {L:V:e}.
     Линза, помещенная между ними, даёт чёткое изображение предмета на
-    экране при двух положениях, расстояние между которыми /=20 см. 2_ 12
-    Найти фокусное расстояние линзы. |[ т ; Е=24 см ]
+    экране при двух положениях, расстояние между которыми {l:V:e}.
+    Найти фокусное расстояние линзы. 
 ''')
-@variant.answer_short('')
+@variant.arg(L='L = 80/100 см')
+@variant.arg(l='\\ell = 20/30/40 см')
+@variant.answer_align([
+    '\\frac 1a + \\frac 1b &= \\frac 1F, \\frac 1{a-{l:L}} + \\frac 1{b+{l:L}} = \\frac 1F, a + b = L',
+    '\\frac 1a + \\frac 1b &= \\frac 1{a-{l:L}} + \\frac 1{b+{l:L}}'
+    '\\implies \\frac{a + b}{ab} = \\frac{(a-{l:L}) + (b+{l:L})}{(a-{l:L})(b+{l:L})}',
+    'ab  &= (a - {l:L})(b+{l:L}) \\implies 0  = -b{l:L} + a{l:L} - {l:L}^2 \\implies 0 = -b + a - {l:L} \\implies b = a - {l:L}',
+    'a + (a - {l:L}) &= L \\implies a = \\frac{L + {l:L}}2 \\implies b = \\frac{L - {l:L}}2',
+    'F &= \\frac{ab}{a + b} = \\frac{L^2 -{l:L}^2}{4L} \\approx {F:V}.',
+])
 class Baumanski_15_39(variant.VariantTask):
-    def GetUpdate(self, *, F=None):
+    def GetUpdate(self, *, L=None, l=None):
+        F = (L.SI_Value ** 2 - l.SI_Value ** 2) / 4 / L.SI_Value
         return dict(
+            F=f'F = {F * 100:.1f} см',
         )
 
 
 @variant.text('''
-    Предмет находится на расстоянии Г, = 90 см от экрана.
+    Предмет находится на расстоянии {L:V:e} от экрана.
     Между предметом и экраном помещают линзу, причём при одном
     положении линзы на экране получается увеличенное изображение предмета,
     а при другом — уменьшенное. Каково фокусное расстояние линзы, если
-    линейные размеры первого изображения в 4 раза больше второго?  [ F=2L=20 cm }
+    линейные размеры первого изображения в {n_word} больше второго?
 ''')
-@variant.answer_short('')
+@variant.arg(L='L = 60/70/80/90 см')
+@variant.arg(n__n_word=n_times(2, 3, 5))
+@variant.answer_align([
+    '\\frac 1a + \\frac 1{L-a} &= \\frac 1F, h_1 = h * \\frac{L-a}a,',
+    '\\frac 1b + \\frac 1{L-b} &= \\frac 1F, h_2 = h * \\frac{L-b}b,',
+    '\\frac{h_1}{h_2} &= {n} \\implies \\frac{(L-a)b}{(L-b)a} = {n},',
+    '\\frac 1F &= \\frac{ L }{a(L-a)} = \\frac{ L }{b(L-b)} \\implies \\frac{L-a}{L-b} = \\frac b a \\implies \\frac {b^2}{a^2} = {n}.',
+    '\\frac 1a + \\frac 1{L-a} &= \\frac 1b + \\frac 1{L-b} \\implies \\frac L{a(L-a)} = \\frac L{b(L-b)} \\implies',
+    '\\implies aL - a^2 &= bL - b^2 \\implies (a-b)L = (a-b)(a+b) \\implies b = L - a,',
+    '\\frac{\\sqr{L-a}}{a^2} &= {n} \\implies \\frac La - 1 = \\sqrt{{n}} \\implies a = \\frac{ L }{\\sqrt{{n}} + 1}',
+    'F &= \\frac{a(L-a)}L = \\frac 1L * \\frac L{\\sqrt{{n}} + 1} * \\frac {L\\sqrt{{n}}}{\\sqrt{{n}} + 1}'
+    '= \\frac { L\\sqrt{{n}} }{ \\sqr{\\sqrt{{n}} + 1} } \\approx {F:V}.',
+])
 class Baumanski_15_40(variant.VariantTask):
-    def GetUpdate(self, *, F=None):
+    def GetUpdate(self, *, L=None, n=None, n_word=None):
+        s = n ** 0.5
         return dict(
+            F=(L * s / ((s + 1) ** 2)).As('см'),
         )
 
 
