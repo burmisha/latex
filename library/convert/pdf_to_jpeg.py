@@ -91,20 +91,28 @@ class PdfBook:
         return fileName
 
     def get_magick_params(self) -> List[str]:
-        return [
+        params = [
             'magick',
             'convert',
             '-log', '%t %e',
             '-density', str(self._ppi * 3),
             '-resample', str(self._ppi),
-        ] + (['-trim'] if self.should_trim else []) + [
+        ]
+
+        if self.should_trim:
+            params.append('-trim')
+            # params += ['-fuzz', '5%']
+
+        params += [
             '+repage',
             # '-transparent', '"#ffffff"',
             '-type', 'Grayscale',
             '-background', 'white',
             # '-define', 'png:compression-level=9',
             '-flatten',
-        ] + self._magick_params
+        ]
+
+        return params + self._magick_params
 
     def _extract_page(self, *, page=None, overwrite=False, dry_run=False):
         pdf_index = self.get_pdf_index(page.index)
