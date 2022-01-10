@@ -6,6 +6,7 @@ import library.pupils
 
 import os
 import yaml
+import re
 
 import logging
 log = logging.getLogger(__name__)
@@ -81,6 +82,17 @@ def get_convert_config():
     ]
 
 
+PRIVATE_SUBSRINGS = [
+    'Самостоятельная работа',
+    'Проверочная работа',
+    'Контрольная работа',
+]
+
+
+def is_private_lesson(lesson_name: str) -> bool:
+    return any(s in lesson_name for s in PRIVATE_SUBSRINGS)
+
+
 def get_extract_config():
     extract_config = [
         (
@@ -113,24 +125,34 @@ def get_extract_config():
     for class_name, class_config in class_config_2.items():
         pupils = library.pupils.get_class_from_string(class_name)
         grade = pupils.Grade
-        dst_dir = pupils.get_path(archive=False)
 
         for part, part_config in class_config.items():
             part_index, part_name = part.split(' ', 1)
             prefix = f'{grade}-{part_index} - {part_name}'
 
-            pages_map = {}
+            public_pages_map = {}
+            private_pages_map = {}
             for pages, lesson_name in part_config.items():
                 lesson_index, lesson_name = lesson_name.split(' ', 1)
-                filename = f'{grade}-{part_index}-{lesson_index} - {part_name} - {lesson_name}.pdf'
-                pages_map[pages] = filename
 
-            extract_config.append((
-                library.location.udr(f'{grade} класс', f'{prefix} - Рабочая тетрадь.pdf'),
-                os.path.join(dst_dir, prefix),
-                pages_map,
-            ))
+                filename = [f'{grade}-{part_index}-{lesson_index}']
+                if re.match(r'^\d{4}[\.-]\d{2}[\.-]\d{2}', lesson_name):
+                    date = lesson_name[:10].replace('-', '.')
+                    lesson_name = lesson_name[10:].strip()
+                    filename.append(date)
+                filename += [part_name, lesson_name]
+                filename = ' - '.join(filename) + '.pdf'
 
+                if is_private_lesson(lesson_name):
+                    private_pages_map[pages] = filename
+                else:
+                    public_pages_map[pages] = filename
+
+            pdf_name = library.location.udr(f'{grade} класс', f'{prefix} - Рабочая тетрадь.pdf')
+            if public_pages_map:
+                extract_config.append((pdf_name, pupils.get_path(prefix, archive=False), public_pages_map))
+            if private_pages_map:
+                extract_config.append((pdf_name, pupils.get_path(prefix, archive=True), private_pages_map))
 
     return extract_config
 
