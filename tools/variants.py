@@ -756,6 +756,25 @@ def get_all_variants(*, flt=None):
                 # 'Theory06',
             ]},
         ),
+        Work(
+            task_id='2022-01-10 11БА - ГО - 6',
+            classes={'optics.lens': [
+                'Baumanski_15_31',
+                # 'Baumanski_15_32',
+                # 'Baumanski_15_33',
+                'Baumanski_15_34',
+                'Baumanski_15_35',
+                'Baumanski_15_36',
+                'Baumanski_15_37',
+                'Baumanski_15_38',
+                'Baumanski_15_39',
+                'Baumanski_15_40',
+                # 'Baumanski_15_41',
+                # 'Baumanski_15_42',
+                # 'Baumanski_15_43',
+                # 'Baumanski_15_44',
+            ]},
+        ),
     ]
     if flt:
         works = [work for work in works if flt(work)]
