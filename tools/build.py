@@ -61,6 +61,7 @@ def run(args):
                     '.log',
                     '.out',
                     '.synctex(busy)',
+                    '.synctex.gz',
                 ],
                 regexp=filenames_regex,
             )
