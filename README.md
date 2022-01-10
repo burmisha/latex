@@ -25,4 +25,4 @@ $ . venv/bin/activate
 $ ./run.py --help
 ```
 
-2012–2021 burmisha
+2012–2022 burmisha
