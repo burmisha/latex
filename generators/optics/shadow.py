@@ -4,9 +4,8 @@ from generators.helpers import letter_variants, Fraction, Consts, UnitValue
 
 import math
 
-# TODO: use h
 @variant.text('''
-    Вертикально стоящий шест высотой 1,1 м, освещенный солнцем,
+    Вертикально стоящий шест высотой {h:V:e}, освещенный солнцем,
     отбрасывает на горизонтальную поверхность земли тень длиной {l:V:e}.
     Известно, что длина тени от телеграфного столба на {DL:V:e} больше. Определить высоту столба.
 ''')
@@ -42,7 +41,6 @@ class Shadow01(variant.VariantTask):
             r=r,
             r2=f'{r_value * 100 * 2:.1f} см',
         )
-
 
 
 @variant.text('''

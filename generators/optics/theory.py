@@ -10,7 +10,7 @@ import generators.variant as variant
 ''')
 @variant.solution_space(60)
 @variant.arg(q2='преломления/отражения')
-class Task03(variant.VariantTask):
+class HuygensFresnel_NoProof(variant.VariantTask):
     pass
 
 
@@ -20,7 +20,7 @@ class Task03(variant.VariantTask):
 ''')
 @variant.solution_space(80)
 @variant.arg(q='преломления/отражения')
-class Task04(variant.VariantTask):
+class HuygensFresnel_WithProof(variant.VariantTask):
     pass
 
 
@@ -34,5 +34,5 @@ class Task04(variant.VariantTask):
 ''')
 @variant.solution_space(80)
 @variant.arg(q='преломления/отражения')
-class Task05(variant.VariantTask):
+class RefrReflLaws(variant.VariantTask):
     pass

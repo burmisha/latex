@@ -677,17 +677,19 @@ def get_all_variants(*, flt=None):
         ),
         Work(
             task_id='2021-12-09 11БА - ГО - 1',
-            classes=[
-                {'optics.theory': ['Task03']},
-                {'optics.refraction': ['Vishnyakova_3_6_4', 'Vishnyakova_3_6_5']},
-                # {'optics.reflection': ['Reflection01']},
-                {'optics.shadow': ['Shadow01', 'Shadow02']},
-            ],
+            classes={'optics': [
+                'theory.HuygensFresnel_NoProof',
+                'refraction.Vishnyakova_3_6_4',
+                'refraction.Vishnyakova_3_6_5',
+                # 'reflection.Reflection01',
+                'shadow.Shadow01',
+                'shadow.Shadow02',
+            ]},
         ),
         Work(
             task_id='2021-12-14 11БА - ГО - 2',
             classes={'optics': [
-                'theory.Task04',
+                'theory.HuygensFresnel_WithProof',
                 'reflection.Reflection01',
                 'reflection.Reflection02',
                 'reflection.Reflection03',
@@ -728,7 +730,7 @@ def get_all_variants(*, flt=None):
         Work(
             task_id='2021-12-16 11БА - ГО - 4',
             classes={'optics': [
-                'theory.Task05',
+                'theory.RefrReflLaws',
                 'refraction.Chernoutsan_13_12',
                 'refraction.Chernoutsan_13_13',
                 'refraction.Chernoutsan_13_14',
@@ -757,24 +759,34 @@ def get_all_variants(*, flt=None):
             ]},
         ),
         Work(
-            task_id='2022-01-10 11БА - ГО - 6',
-            classes={'optics.lens': [
-                'Baumanski_15_31',
-                # 'Baumanski_15_32',
-                # 'Baumanski_15_33',
-                'Baumanski_15_34',
-                'Baumanski_15_35',
-                'Baumanski_15_36',
-                'Baumanski_15_37',
-                'Baumanski_15_38',
-                'Baumanski_15_39',
-                'Baumanski_15_40',
-                # 'Baumanski_15_41',
-                # 'Baumanski_15_42',
-                # 'Baumanski_15_43',
-                # 'Baumanski_15_44',
+            task_id='2022-01-12 11БА - ГО - 6',
+            classes={'optics': [
+                'theory.RefrReflLaws',
+                'reflection.Chernoutsan_13_6',
+                'reflection.Chernoutsan_13_11',
+                'refraction.Refraction02',
+                'refraction.Chernoutsan_13_13',
             ]},
         ),
+        # Work(
+        #     task_id='2022-01-10 11БА - ГО - 6',
+        #     classes={'optics.lens': [
+        #         'Baumanski_15_31',
+        #         # 'Baumanski_15_32',
+        #         # 'Baumanski_15_33',
+        #         'Baumanski_15_34',
+        #         'Baumanski_15_35',
+        #         'Baumanski_15_36',
+        #         'Baumanski_15_37',
+        #         'Baumanski_15_38',
+        #         'Baumanski_15_39',
+        #         'Baumanski_15_40',
+        #         # 'Baumanski_15_41',
+        #         # 'Baumanski_15_42',
+        #         # 'Baumanski_15_43',
+        #         # 'Baumanski_15_44',
+        #     ]},
+        # ),
     ]
     if flt:
         works = [work for work in works if flt(work)]
