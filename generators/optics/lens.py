@@ -2,6 +2,9 @@ import generators.variant as variant
 from generators.helpers import Consts, n_times
 import math
 
+import logging
+log = logging.getLogger(__name__)
+
 
 @variant.text('''
     Укажите, верны ли утверждения («да» или «нет» слева от каждого утверждения):
@@ -117,8 +120,46 @@ class Theory05(variant.VariantTask):
 @variant.arg(F='6/8/12/15/25/40/50 см')
 @variant.arg(which='собирающей/рассеивающей')
 @variant.solution_space(100)
+@variant.answer_short('b = \\frac{aF}{a - F} \\approx {b:V}, l = \\abs{a + b} = {l:V}, \\Gamma = {G:.2f}, \\text{{t}}')
 class Formula01(variant.VariantTask):
-    pass
+    def GetUpdate(self, *, a=None, F=None, which=None):
+        if which == 'собирающей':
+            f = F
+            if 2 * F.SI_Value < a.SI_Value:
+                t = 'действительное, прямое, уменьшенное'
+            elif a.SI_Value == 2 * F.SI_Value:
+                t = 'действительное, прямое, равное'
+            elif F.SI_Value < a.SI_Value < 2 * F.SI_Value:
+                t = 'действительное, прямое, увеличенное'
+            elif a.SI_Value < F.SI_Value:
+                t = 'мнимое, прямое, увеличенное'
+            else:
+                log.error([
+                    a.SI_Value,
+                    F.SI_Value,
+                    a.SI_Value < F.SI_Value,
+                    2 * F.SI_Value < a.SI_Value,
+                    F.SI_Value < a.SI_Value < 2 * F.SI_Value,
+                    a.SI_Value < F.SI_Value,
+                    type(a.SI_Value),
+                    type(F.SI_Value)
+                ])
+                raise RuntimeError(f'Invalid a and F')
+        elif which == 'рассеивающей':
+            f = F * (-1)
+            t = 'мнимое, прямое, уменьшенное'
+        else:
+            raise RuntimeError(f'Invalid which: {which}')
+        b = f.SI_Value * a.SI_Value / (a.SI_Value - f.SI_Value)
+        l = abs(a.SI_Value + b)
+        return dict(
+            b=f'{b * 100:.1f} см',
+            l=f'{l * 100:.1f} см',
+            D=f'{1 / f.SI_Value:.1f} дптр',
+            G=abs(b / a.SI_Value),
+            t=t,
+        )
+
 
 
 @variant.text('''
@@ -128,9 +169,32 @@ class Formula01(variant.VariantTask):
 @variant.arg(a='115/25/45 см')
 @variant.arg(b='10/20/30/40/50 см')
 @variant.arg(which='действительное/мнимое')
+@variant.answer_short('\\frac 1F = D = \\frac 1a + \\frac 1b, D \\approx{D:V}, F\\approx{F:V}, \\Gamma\\approx{G:.2f},\\text{{t}}')
+
 @variant.solution_space(80)
 class Formula02(variant.VariantTask):
-    pass
+    def GetUpdate(self, *, a=None, b=None, which=None):
+        aa = a.SI_Value
+        if which == 'действительное':
+            bb = b.SI_Value
+        elif which == 'мнимое':
+            bb = -b.SI_Value
+        else:
+            raise RuntimeError(f'Invalid which: {which}')
+        F = aa * bb / (aa + bb)
+        if F > 0:
+            t = 'собирающая'
+        elif F < 0:
+            t = 'рассеивающая'
+        else:
+            raise RuntimeError()
+
+        return dict(
+            F=f'{F * 100:.1f} см',
+            D=f'{1 / F:.1f} дптр',
+            t=t,
+            G=abs(bb / aa),
+        )
 
 
 @variant.text('''
