@@ -352,27 +352,50 @@ class VariantTask:
         ])
 
 
+VARIANT_SPLITTER = '\n\n\\variantsplitter\n\n'
+
 class MultiplePaper:
     def __init__(self, date=None, pupils=None):
         self.Date = date  # only for date in header and filename
         self.Pupils = pupils
 
-    def GetTex(self, variant_tasks=None, withAnswers=False, only_me=False):
+    def GetTex(self, variant_tasks=None, withAnswers=False, only_me=False, page_splits=None):
         paper_tex = []
         for pupil in self.Pupils.Iterate(only_me=only_me):
+            personal_variant = f'\\addpersonalvariant{{{pupil.name} {pupil.surname}}}'
+            pupil_page_splits = list(page_splits) if page_splits else []
             pupil_tex = [
-                f'\\addpersonalvariant{{{pupil.name} {pupil.surname}}}'
+                personal_variant,
             ]
             for index, variant_task in enumerate(variant_tasks, 1):
                 task = variant_task.GetRandomTask(pupil, self.Date)
-                task_tex = task.GetTex(index=index, add_solution_space=index != len(variant_tasks))
+
+                repeat_name = False
+                add_solution_space = True
+                if index == len(variant_tasks):
+                    add_solution_space = False
+
+                if pupil_page_splits and index == pupil_page_splits[0]:
+                    pupil_page_splits = pupil_page_splits[1:]
+                    add_solution_space = False
+                    repeat_name = True
+
+                task_tex = task.GetTex(index=index, add_solution_space=add_solution_space)
+
                 pupil_tex += ['', task_tex]
+
+                if repeat_name and index != len(variant_tasks):
+                    pupil_tex += [
+                        VARIANT_SPLITTER,
+                        personal_variant,
+                    ]
+
             paper_tex.append('\n'.join(pupil_tex))
 
         for variant_task in variant_tasks:
             variant_task.CheckStats()
 
-        paper_tex = '\n\n\\variantsplitter\n\n'.join(paper_tex)
+        paper_tex = VARIANT_SPLITTER.join(paper_tex)
 
         result = PAPER_TEMPLATE.format(
             date=self.Date.GetHumanText(),

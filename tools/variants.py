@@ -20,6 +20,7 @@ class Work:
 
     def __init__(
         self,
+        *,
         task_id=None,
         classes=None,
         thresholds=None,
@@ -27,6 +28,7 @@ class Work:
         image=None,
         questions=None,
         answers=None,
+        page_splits=None,
     ):
         self._task_id = task_id
         self._tasks_classes = None
@@ -42,6 +44,7 @@ class Work:
         self._image = image
         self._questions = questions
         self._answers = answers
+        self._page_splits = page_splits
 
         if self.has_gform:
             assert self.get_human_name(), f'No human_name for task {self._task_id}'
@@ -781,6 +784,7 @@ def get_all_variants(*, flt=None):
                 'Baumanski_15_40',
                 'Square',
             ]},
+            page_splits=[7, 12],
         ),
         Work(
             task_id='2022-01-20 11Б - ГО - 1',

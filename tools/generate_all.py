@@ -103,10 +103,12 @@ def run(args):
             dirname = get_dir_from_date(date, create_missing=True)
             filename = os.path.join(dirname, multiplePaper.GetFilename())
 
-            text = multiplePaper.GetTex(variant_tasks=tasks, only_me=False)
+            page_splits = work._page_splits
+            text = multiplePaper.GetTex(variant_tasks=tasks, only_me=False, page_splits=page_splits)
             task = PAPER_TEMPLATE.format(noanswers='\n\\noanswers\n', filename=filename)
             answer = PAPER_TEMPLATE.format(noanswers='', filename=filename)
-            debug_tex = DEBUG_TEMPLATE.format(debug_tex=multiplePaper.GetTex(variant_tasks=tasks, only_me=True))
+            debug_text = multiplePaper.GetTex(variant_tasks=tasks, only_me=True, page_splits=page_splits)
+            debug_tex = DEBUG_TEMPLATE.format(debug_tex=debug_text)
 
             fileWriter.Write(f'{filename}.tex', text=text)
             fileWriter.Write(f'{filename}-task.tex', text=task)
