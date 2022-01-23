@@ -32,6 +32,7 @@ class Checker:
 
     def _get_proper_answer_list(self, answer, pupil):
         if isinstance(answer, generators.variant.VariantTask):
+            # TODO: date is lost
             answer = answer.GetRandomTask(pupil).GetTestAnswer()
 
         if isinstance(answer, (str, int)):

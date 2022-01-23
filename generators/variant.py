@@ -240,10 +240,10 @@ test_check_unit_value()
 
 
 class VariantTask:
-    def __init__(self, pupils, date):
-        self.__Stats = collections.defaultdict(int)
+    def __init__(self, *, pupils=None):
         self._pupils = pupils
-        self._date = date
+
+        self.__Stats = collections.defaultdict(int)
         self._expanded_args_list = None
         self._variants_count = None
         self._prefer_test_version = False
@@ -308,10 +308,10 @@ class VariantTask:
         assert result, f'No tasks for {self}'
         return result
 
-    def GetRandomTask(self, pupil):
+    def GetRandomTask(self, pupil, date):
         args = self._vars.random_str if self._vars else ''
         hash_md5 = hashlib.md5()
-        hash_md5.update((self._get_random_str(pupil) + args).encode('utf-8'))
+        hash_md5.update((self._get_random_str(pupil, date) + args).encode('utf-8'))
         randomHash = hash_md5.hexdigest()[8:16]  # use only part of hash
         randomIndex = int(randomHash, 16) % self.GetTasksCount()
         self.__Stats[randomIndex] += 1
@@ -344,10 +344,10 @@ class VariantTask:
             stats,
         )
 
-    def _get_random_str(self, pupil):
+    def _get_random_str(self, pupil, date):
         return '_'.join([
             pupil.GetRandomSeedPart(),
-            self._date.GetFilenameText(),
+            date.GetFilenameText(),
             self._pupils.GetRandomSeedPart()
         ])
 
@@ -364,7 +364,7 @@ class MultiplePaper:
                 f'\\addpersonalvariant{{{pupil.name} {pupil.surname}}}'
             ]
             for index, variant_task in enumerate(variant_tasks, 1):
-                task = variant_task.GetRandomTask(pupil)
+                task = variant_task.GetRandomTask(pupil, self.Date)
                 task_tex = task.GetTex(index=index, add_solution_space=index != len(variant_tasks))
                 pupil_tex += ['', task_tex]
             paper_tex.append('\n'.join(pupil_tex))

@@ -63,7 +63,7 @@ class Work:
         if not self._tasks_classes:
             return None
 
-        tasks = [task(pupils=self._pupils, date=self._date) for task in self._tasks_classes]
+        tasks = [task(pupils=self._pupils) for task in self._tasks_classes]
         if self._is_distant_task():  # use test version on distant
             for task in tasks:
                 task.PreferTestVersion()
