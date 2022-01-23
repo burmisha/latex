@@ -1,5 +1,5 @@
 import generators.variant as variant
-from generators.helpers import Consts, n_times
+from generators.helpers import Consts, n_times, UnitValue
 import math
 
 import logging
@@ -319,7 +319,7 @@ class Square(variant.VariantTask):
     Найти оптическую силу собирающей линзы, если действительное изображение предмета,
     помещённого в {a:V:e} от линзы, получается на расстоянии {b:V:e} от неё.
 ''')
-@variant.solution_space(180)
+@variant.solution_space(80)
 @variant.arg(a='a = 15/35/35/55 см')
 @variant.arg(b='b = 20/30/40 см')
 @variant.answer_short(
@@ -337,7 +337,7 @@ class Vishnyakova_3_6_6(variant.VariantTask):
     Найти увеличение изображения, если изображение предмета, находящегося
     на расстоянии {a:V:e} от линзы, получается на расстоянии {b:V:e} от неё.
 ''')
-@variant.solution_space(180)
+@variant.solution_space(80)
 @variant.arg(a='a = 15/20/25 см')
 @variant.arg(b='b = 12/18/30 см')
 @variant.answer_short('{G:L} = \\frac ba = \\frac {b:V:s}{a:V:s} \\approx {G:V}')
@@ -352,7 +352,7 @@ class Vishnyakova_3_6_7(variant.VariantTask):
     Расстояние от предмета до линзы {a:V:e}, а от линзы до мнимого изображения {b:V:e}.
     Чему равно фокусное расстояние линзы?
 ''')
-@variant.solution_space(180)
+@variant.solution_space(80)
 @variant.arg(a='a = 8/10/12 см')
 @variant.arg(b='b = 20/25/30 см')
 @variant.answer_short('\\pm \\frac 1F = \\frac 1a - \\frac 1b \\implies {F:L} = \\frac{a b}{\\abs{b - a}} \\approx {F:V}')
@@ -370,7 +370,7 @@ class Vishnyakova_3_6_8(variant.VariantTask):
     Две тонкие собирающие линзы с фокусными расстояниями {f_1:V:e} и {f_2:V:e} сложены вместе.
     Чему равно фокусное расстояние такой оптической системы?
 ''')
-@variant.solution_space(180)
+@variant.solution_space(80)
 @variant.arg(f_1='f_1 = 12/18/25 см')
 @variant.arg(f_2='f_2 = 20/30 см')
 @variant.answer_short(
@@ -396,22 +396,34 @@ class Vishnyakova_3_6_9(variant.VariantTask):
     Зная, что предмет находится на {l:V:e} ближе к линзе,
     чем его изображение, найти оптическую силу линзы.
 ''')
-@variant.solution_space(180)
+@variant.solution_space(120)
 @variant.arg(l='\\ell = 20/25/30/35/40 см')
 @variant.arg(n__n_word=n_times(2, 3, 4))
 @variant.answer_align([
+    '\\text{Если изображение действительное:}',
     'D &= \\frac 1F = \\frac 1a + \\frac 1b, \\qquad \\Gamma = \\frac ba, \\qquad b - a = {l:L} \\implies '
     'b = \\Gamma a \\implies {G:L} a - a = {l:L} \\implies ',
     'a &= \\frac {l:L:s}{{G:L} - 1} \\implies '
     'b = \\frac {{l:L:s} {G:L}}{{G:L} - 1} \\implies ',
     'D &= \\frac {{G:L} - 1}{l:L} + \\frac {{G:L} - 1}{{l:L} {G:L}} = \\frac 1{l:L} * \\cbr{{G:L} - 1 + \\frac {{G:L} - 1}{{G:L}} } ='
-    '\\frac 1{l:L} * \\cbr{{G:L} - \\frac 1{G:L}} \\approx {D:V}.'
+    '\\frac 1{l:L} * \\cbr{{G:L} - \\frac 1{G:L}} \\approx {D1:V}.',
+
+    '\\text{Если изображение мнимое:}',
+    'D &= \\frac 1F = \\frac 1a - \\frac 1b, \\qquad \\Gamma = \\frac ba, \\qquad b - a = {l:L} \\implies '
+    'b = \\Gamma a \\implies {G:L} a - a = {l:L} \\implies ',
+    'a &= \\frac {l:L:s}{{G:L} - 1} \\implies '
+    'b = \\frac {{l:L:s} {G:L}}{{G:L} - 1} \\implies ',
+    'D &= \\frac {{G:L} - 1}{l:L} - \\frac {{G:L} - 1}{{l:L} {G:L}} = \\frac 1{l:L} * \\cbr{{G:L} - 1 - \\frac {{G:L} - 1}{{G:L}} } ='
+    '\\frac 1{l:L} * \\cbr{{G:L} + \\frac 1{G:L} - 2} \\approx {D2:V}.',
+    '\\text{В ответе надо указать оба значения.}',
 ])
 class Vishnyakova_3_6_10(variant.VariantTask):
     def GetUpdate(self, *, l=None, n=None, n_word=None):
-        D = 1 / float(l.SI_Value) * (n - 1 / n)
+        D1 = 1 / float(l.SI_Value) * (n - 1 / n)
+        D2 = 1 / float(l.SI_Value) * (n + 1 / n - 2)
         return dict(
-            D=f'D = {D:.1f} дптр',
+            D1=f'D = {D1:.1f} дптр',
+            D2=f'D = {D2:.1f} дптр',
             G='\\Gamma = {n}',
         )
 
@@ -419,15 +431,23 @@ class Vishnyakova_3_6_10(variant.VariantTask):
 @variant.text('''
     Оптическая сила объектива фотоаппарата равна {D:V:e}.
     При фотографировании чертежа с расстояния {a:V:e} площадь изображения
-    чертежа на фотопластинке оказалась равной {S:V:e}.
+    чертежа на фотопластинке оказалась равной {S2:V:e}.
     Какова площадь самого чертежа? Ответ выразите в квадратных сантиметрах.
 ''')
-@variant.solution_space(180)
+@variant.solution_space(120)
 @variant.arg(D='D = 3/4/5/6 дптр')
 @variant.arg(a='a = 0.8/0.9/1.1/1.2 м')
-@variant.arg(S='S = 4/9/16 см^2')
+@variant.arg(S2='S\' = 4/9/16 см^2')
+@variant.answer_align([
+    '\\frac 1a + \\frac 1b = \\frac 1F = D \\implies b = \\frac{aF}{a - F}',
+    '\\frac {S\'}S = \\Gamma^2 = \\sqr{\\frac ba} = \\sqr{\\frac F{a - F}} \\implies',
+    '\\implies S = S\' * \\sqr{\\frac{a - F}F} = S\' * \\sqr{\\frac aF - 1} = S\' * \\sqr{aD - 1} \\approx {S1:V}.',
+])
 class Vishnyakova_3_6_11(variant.VariantTask):
-    pass
+    def GetUpdate(self, *, D=None, a=None, S2=None):
+        return dict(
+            S1 = (S2 * (1 - float((a * D).SI_Value)) ** 2).As('см^2'),
+        )
 
 
 @variant.text('''
@@ -456,7 +476,6 @@ class Baumanski_15_31(variant.VariantTask):
 @variant.arg(h='h = 30/40/50 см')
 @variant.arg(d='d = 0.8/1.0/1.2 м')
 @variant.arg(F='F = -15/20/25 см')
-# @variant.answer_short('')
 class Baumanski_15_32(variant.VariantTask):
     def GetUpdate(self, *, h=None, d=None, F=None):
         return dict(
@@ -469,7 +488,6 @@ class Baumanski_15_32(variant.VariantTask):
 ''')
 @variant.arg(D='D = 1.5/2/2.5 дптр')
 @variant.arg(f='f = 1.5/2/2.5 м')
-# @variant.answer_short('')
 class Baumanski_15_33(variant.VariantTask):
     def GetUpdate(self, *, D=None, f=None):
         return dict(
@@ -663,65 +681,103 @@ class Baumanski_15_40(variant.VariantTask):
 
 @variant.text('''
     На экране с помощью тонкой линзы получено изображение предмета
-    с увеличением {G1:V:e}. Предмет передвинули на {d:V:e}.
+    с увеличением {G1:V:e}. Предмет передвинули на {x:V:e}.
     Для того, чтобы получить резкое изображение, пришлось передвинуть экран.
     При этом увеличение оказалось равным {G2:V:e}. На какое расстояние
     пришлось передвинуть экран?
 ''')
-@variant.arg(d='d = 2/4/6/8/10 см')
+@variant.arg(x='x = 2/4/6/8/10 см')
 @variant.arg(G1='\\Gamma_1 = 2/4')
 @variant.arg(G2='\\Gamma_2 = 6/8')
-# @variant.answer_short('')
+@variant.answer_align([
+    '\\frac 1a + \\frac 1b = \\frac 1F, {G1:L} = \\frac ba = \\frac{F}{a-F} \\implies {G1:L}(a-F) = F \\implies a = F * \\frac{1 + {G1:L}}{G1:L:s}',
+    '\\frac 1{a + x} + \\frac 1{b + y} = \\frac 1F, {G2:L} = \\frac {b+y}{a+x} = \\frac{F}{a+x-F} \\implies a + x = F * \\frac{1 + {G2:L}}{G2:L:s}',
+    # 'x = F\\cbr{ \\frac{1 + {G2:L}}{G2:L:s} - \\frac{1 + {G1:L}}{G1:L:s}}'
+    '1 + \\frac xa = \\frac{ \\frac{1 + {G2:L}}{G2:L:s} }{ \\frac{1 + {G1:L}}{G1:L:s} } = \\frac{{G1:L}(1 + {G2:L})}{{G2:L}(1 + {G1:L})}',
+    'a = \\frac x{ \\frac{{G1:L}(1 + {G2:L})}{{G2:L}(1 + {G1:L})} - 1} = x * \\frac{{G2:L}(1 + {G1:L})}{{G1:L} - {G2:L}}',
+    'y = (a + x){G2:L} - b = (a + x){G2:L} - a{G1:L} = a({G2:L} - {G1:L}) + x{G2:L} = -x{G2:L}(1 + {G1:L}) + x{G2:L} = -x{G2:L}{G1:L} = {y:V},',
+    '\\text{знаки разные, т.е. экран надо было подвинуть в другую сторону чем предмет: $x < 0, y > 0$.}',
+])
 class Baumanski_15_41(variant.VariantTask):
-    def GetUpdate(self, *, d=None, G1=None, G2=None):
+    def GetUpdate(self, *, x=None, G1=None, G2=None):
         return dict(
+            y=(x * G1 * G2).As('см')
         )
 
 
 @variant.text('''
-    Тонкая собирающая линза дает изображение предмета на экране высотой $H_1$,
-    и $H_2$, при двух положениях линзы между предметом и экраном.
-    Расстояние между ними неизменно. Чему равна высота предмета $h$?
+    Тонкая собирающая линза дает изображение предмета на экране при двух положениях линзы между предметом и экраном.
+    Высота изображения при первом положении {H1:V:e}, во втором — {H2:V:e}.
+    Расстояние между предметом и экранов постоянно. Чему равна высота предмета?
 ''')
-@variant.no_args
-@variant.answer_short('h = \\sqrt{H_1 H_2}')
+@variant.arg(H1='H_1 = 15/20/25/30 см')
+@variant.arg(H2='H_2 = 5/7/9 см')
+@variant.answer_align([
+    '\\frac 1a + \\frac 1b = \\frac 1F, \\frac 1c + \\frac 1d = \\frac 1F, a + b = c + d \\implies \\frac{a + b}{ab} = \\frac 1F = \\frac{c+d}{cd} \\implies ab = cd,',
+    '\\implies ab = c(a + b - c) \\implies c^2 - ac - bc + ab = 0 \\implies c = a \\text{ или } c = b \\implies c = b \\implies d = a.',
+    '\\Gamma_1 = \\frac {H_1}H = \\frac ba, \\Gamma_2 = \\frac {H_2}H = \\frac dc = \\frac ab \\implies \\frac {H_1}H * \\frac {H_2}H = \\frac ba * \\frac ab = 1,',
+    'H = \\sqrt{H_1 H_2} \\approx {H:V}.',
+])
 class Baumanski_15_42(variant.VariantTask):
-    pass
+    def GetUpdate(self, *, H1=None, H2=None):
+        H = float(H1.SI_Value * H2.SI_Value) ** 0.5
+        return dict(
+            H=f'H = {H * 100:.1f} см',
+        )
 
 
 @variant.text('''
     Какие предметы можно рассмотреть на фотографии, сделанной со спутника,
-    если разрешающая способность пленки {d:V:e}? Каким должно быть
-    время экспозиции $\\tau$ чтобы полностью использовать возможности пленки?
+    если разрешающая способность плёнки {d:V:e}? Каким должно быть
+    время экспозиции $\\tau$ чтобы полностью использовать возможности плёнки?
     Фокусное расстояние объектива используемого фотоаппарата {F:V:e},
     высота орбиты спутника {H:V:e}.
 ''')
-@variant.arg(F='F = 10/15/20 cм')
+@variant.arg(F='F = 10/15/20 см')
 @variant.arg(d='\\delta = 0.01/0.02 мм')
 @variant.arg(H='H = 80/100/120/150 км')
-# @variant.answer_short('')
+@variant.answer_align([
+    'H \\ll R \\implies v = v_{\\text{I}} = \\sqrt{G R} \\approx {v:V}.',
+    'F \\ll H \\implies b = F, a = H,',
+    '\\Gamma = \\frac \\delta\\ell = \\frac ba \\implies '
+    '\\ell = \\frac{\\delta a}b = \\frac{\\delta H}F \\approx \\frac{{d:V} * {H:V}}{F:V:s} \\approx {l:V},',
+    '\\implies \\tau = \\frac \\ell v = \\frac{\\delta H}{F v} = \\frac{{d:V} * {H:V}}{{F:V} * {v:V}} \\approx {t:V}.'
+])
 class Baumanski_15_43(variant.VariantTask):
     def GetUpdate(self, *, F=None, d=None, H=None):
+        v = UnitValue('7.9 км / с')
+        l = d * H / F
+        t = (d * H / F / v).As('мс')
         return dict(
+            v=v,
+            t=t,
+            l=l,
         )
 
 
 @variant.text('''
     При аэрофотосъемках используется фотоаппарат, объектив которого
-    имеет фокусиое расстояние {F:V:e}. Разрешающая способность пленки {d:V:e}.
+    имеет фокусиое расстояние {F:V:e}. Разрешающая способность плёнки {d:V:e}.
     На какой высоте должен лететь самолет, чтобы на фотографии можно
-    было различить листья деревьев размером {l:V:e}?
+    было различить следы размером {l:V:e}?
     При какой скорости самолета изображение не будет размытым,
-    если время зкспозиции {t:V:e}?
+    если время экспозиции {t:V:e}?
 ''')
-@variant.arg(F='F = 8/10/12 cм')
-@variant.arg(l='\\ell = 4/5/6 cм')
+@variant.arg(F='F = 10/15/20 см')
+@variant.arg(l='\\ell = 15/20/25/30 см')
 @variant.arg(t='\\tau = 1/2 мс')
 @variant.arg(d='\\delta = 0.01/0.015/0.02 мм')
-# @variant.answer_short('')
+@variant.answer_align([
+    'F \\ll H \\implies b = F, a = H,',
+    '\\Gamma = \\frac \\delta\\ell = \\frac ba = \\frac FH \\implies '
+    'H = \\frac{\\ell F}\\delta = \\frac{{l:V} * {F:V}}{d:V:s} \\approx {H:V},',
+    '\\implies v = \\frac l\\tau = \\frac{l:V:s}{t:V:s} \\approx {v:V}.'
+])
 class Baumanski_15_44(variant.VariantTask):
     def GetUpdate(self, *, F=None, l=None, t=None, d=None):
         return dict(
+            H = (l * F / d).As('км'),
+            v = (l / t).As('км / ч'),
         )
 
 
@@ -1198,3 +1254,73 @@ class Chernoutsan_13_55(variant.VariantTask):
     def GetUpdate(self, *, v=None, F=None, a=None):
         return dict(
         )
+
+
+@variant.text('''
+    Две одинаковые собиращие линзы установлены так, что их главные оптические оси совпадают, 
+    а главный фокус первой находится там же, где главный фокус второй. 
+    Расстояние от первой линзы до предмета равно {a:V:e}.
+    Чему равно расстояние от изображения объекта во второй линзе до {what}? 
+    Определите также увеличение. Фокусное расстояние каждой линзы {F:V:e}.
+''')
+@variant.arg(F='F = 20/25/30/35/40 см')
+@variant.arg(a=('a = {} см', list(range(5, 35))))
+@variant.arg(what=['самого объекта', 'второй линзы'])
+@variant.answer_align([
+    '\\frac 1a + \\frac 1b &= \\frac 1F \\implies b = \\frac{aF}{a - F} \\implies 2F - b = \\frac{2aF - 2F^2 - aF}{a - F} = \\frac{F(a - 2F)}{a - F}.',
+    '\\frac 1{2F - b} + \\frac 1c &= \\frac 1F \\implies '
+    'c = \\frac{F(2F-b)}{(2F - b) - F} = \\frac{F * \\frac{F(a - 2F)}{a - F}}{\\frac{F(a - 2F)}{a - F} - F}'
+    '  = F * \\frac{ \\frac{F(a - 2F)}{a - F} }{ \\frac{F(a - 2F)}{a - F} - 1} =',
+    ' &= F * \\frac{a - 2F}{a - 2F - a + F} = 2F - a = {c:V}.',
+    '\\ell &= a + 2F + c = 4F = {l:V}.',
+    '\\Gamma = \\Gamma_1 * \\Gamma_2 = \\frac ba * \\frac c{2F-b} = \\frac F{a - F} * \\frac{2F - a}{\\frac{F(a - 2F)}{a - F}} = -1.',
+])
+class Gorbushin_22_15(variant.VariantTask):
+    def GetUpdate(self, *, F=None, a=None, what=None):
+        c = F.SI_Value * 2 - a.SI_Value
+        return dict(
+            c=f'{c*100} см',
+            l=(4 * F).As('см'),
+        )
+
+
+@variant.text('''
+    Собирающая линза с фокусным расстоянием $F_1 > 0$ и рассеивающая линза с фокусным расстоянием $F_2 < 0$
+    установлены коаксиально на расстоянии $\\ell$. Пучок параллельных лучей падает на {which} линзу.
+    Сделайте схематичное построение и определите, в какой точке система из этих линз соберёт пучок.
+''')
+@variant.arg(which='собирающую/рассеивающую')
+@variant.answer_align([
+    '\\text{Если пучок падает на собирающую линзу:}',
+    '\\frac 1{\\infty} + \\frac 1b &= \\frac 1{F_1} \\implies b = F_1 \\implies \\ell - b = \\ell - F_1', 
+    '\\frac 1{\\ell - b} + \\frac 1c &= \\frac 1{F_2} \\implies c = \\frac{F_2(\\ell - b)}{\\ell - b - F_2} = '
+    '\\frac{F_2(\\ell - F_1)}{\\ell - F_1 - F_2}.',
+
+    '\\text{Если же пучок падает на рассеивающую линзу:}',
+    '\\frac 1{\\infty} + \\frac 1b &= \\frac 1{F_2} \\implies b = F_2 \\implies \\ell - b = \\ell - F_2', 
+    '\\frac 1{\\ell - b} + \\frac 1c &= \\frac 1{F_1} \\implies c = \\frac{F_1(\\ell - b)}{\\ell - b - F_1} = '
+    '\\frac{F_1(\\ell - F_2)}{\\ell - F_2 - F_1}.',
+])
+class Gorbushin_22_17(variant.VariantTask):
+    pass
+
+
+@variant.text('''
+    Две собирающих линзы с фокусными расстояниями {F1:V:e} и {F2:V:e} расположены так,
+    что их оптические оси совмещены. На первую линзу падает пучок параллельных лучей. 
+    Пройдя через вторую линзу, он остался параллельным.
+    Найдите расстояние между линзами и сделайте рисунок.
+''')
+@variant.arg(F1='F_1 = 20/30/40/50 см')
+@variant.arg(F2='F_2 = 25/35/45 см')
+@variant.answer_align([
+    '\\frac 1\\infty + \\frac 1b &= \\frac 1{F_1} \\implies b = F_1,',
+    '\\frac 1{\\ell - b} + \\frac 1{\\infty} &= \\frac 1{F_2} \\implies \\ell - b = F_2 \\implies \\ell = b + F_2 = F_1 + F_2 = {l:V}.',
+])
+class Gorbushin_22_18(variant.VariantTask):
+    def GetUpdate(self, *, F1=None, F2=None):
+        l = F1.SI_Value + F2.SI_Value
+        return dict(
+            l=f'\\ell = {l*100} см',
+        )
+
