@@ -354,6 +354,7 @@ class VariantTask:
 
 VARIANT_SPLITTER = '\n\n\\variantsplitter\n\n'
 
+
 class MultiplePaper:
     def __init__(self, date=None, pupils=None):
         self.Date = date  # only for date in header and filename

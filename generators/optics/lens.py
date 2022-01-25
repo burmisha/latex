@@ -222,7 +222,7 @@ class Theory06(variant.VariantTask):
 
 
 @variant.text('''
-    Доказать формулу тонкой линзы для {which} линзы.
+    Докажите формулу тонкой линзы для {which} линзы.
 ''')
 @variant.arg(which='рассеивающей/собирающей')
 class Theory07(variant.VariantTask):
