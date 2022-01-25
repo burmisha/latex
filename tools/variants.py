@@ -821,6 +821,17 @@ def get_all_variants(*, flt=None):
             ]},
             page_splits=[6, 11],
         ),
+        Work(
+            task_id='2022-01-26 11Б - ГО - 2',
+            classes={'optics.lens': [
+                'Theory01',
+                'Theory07',
+                'Vishnyakova_3_6_6',
+                'Vishnyakova_3_6_7',
+                'Vishnyakova_3_6_8',
+                'Gorbushin_22_15',
+            ]},
+        ),
     ]
     if flt:
         works = [work for work in works if flt(work)]
