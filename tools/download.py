@@ -16,21 +16,21 @@ def run(args):
         raise RuntimeError('Could not save all videos')
 
     for downloader in [
-        library.download.MathusPhys(library.location.udr('Материалы - mathus')),
-        library.download.ZnakKachestva(library.location.udr('Материалы - znakka4estva')),
-        library.download.PhysNsuRu(library.location.udr('Материалы - phys.nsu.ru')),
+        # library.download.MathusPhys(library.location.udr('Материалы - mathus')),
+        # library.download.ZnakKachestva(library.location.udr('Материалы - znakka4estva')),
+        # library.download.PhysNsuRu(library.location.udr('Материалы - phys.nsu.ru')),
     ]:
         downloader.Download(force=False)
 
     all_videos = []
 
     download_playlists_cfg = {
-        'Foxford': 'https://www.youtube.com/playlist?list=PL66kIi3dt8A6Hd7soGMFXe6E5366Y66So',
-        'OnliSkill - 7 класс': 'https://www.youtube.com/playlist?list=PLRqVDT_WVZRkqpQBB1rIGzVKCaPf5qtYi',
-        'OnliSkill - 8 класс': 'https://www.youtube.com/playlist?list=PLRqVDT_WVZRmWRPyyVVOTe0Jc46eVxqEz',
-        'OnliSkill - 9 класс': 'https://www.youtube.com/playlist?list=PLRqVDT_WVZRlWUbTOSqswejgrO1RvQQs1',
-        'OnliSkill - 10 класс': 'https://www.youtube.com/playlist?list=PLRqVDT_WVZRkKOQFruLNC1v74_jTp6LzW',
-        'OnliSkill - 11 класс': 'https://www.youtube.com/playlist?list=PLRqVDT_WVZRkCHtZmveDa9z3G1IiPpisi',
+        # 'Foxford': 'https://www.youtube.com/playlist?list=PL66kIi3dt8A6Hd7soGMFXe6E5366Y66So',
+        # 'OnliSkill - 7 класс': 'https://www.youtube.com/playlist?list=PLRqVDT_WVZRkqpQBB1rIGzVKCaPf5qtYi',
+        # 'OnliSkill - 8 класс': 'https://www.youtube.com/playlist?list=PLRqVDT_WVZRmWRPyyVVOTe0Jc46eVxqEz',
+        # 'OnliSkill - 9 класс': 'https://www.youtube.com/playlist?list=PLRqVDT_WVZRlWUbTOSqswejgrO1RvQQs1',
+        # 'OnliSkill - 10 класс': 'https://www.youtube.com/playlist?list=PLRqVDT_WVZRkKOQFruLNC1v74_jTp6LzW',
+        # 'OnliSkill - 11 класс': 'https://www.youtube.com/playlist?list=PLRqVDT_WVZRkCHtZmveDa9z3G1IiPpisi',
     }
     for dirname, playlist_url in download_playlists_cfg.items():
         playlist = library.download.YoutubePlaylist(playlist_url)
@@ -158,6 +158,7 @@ def run(args):
             'https://www.youtube.com/watch?v=dOR41kRQ2tg': '2017 - American Anarchist - Американский анархист',
             'https://www.youtube.com/watch?v=i8fD_jG_TM8': 'FREE BEATS',
             'https://www.youtube.com/watch?v=LXpfBwApM3E': '2021 - 554 - 1 класс',
+            'https://www.youtube.com/watch?v=pySJ3cNrZKA': '2022 - Вынос ели',
         },
         'Veritasium': {
             'https://www.youtube.com/watch?v=AaZ_RSt0KP8': '2021.08.31 - The Universe is Hostile to Computers',
