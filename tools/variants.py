@@ -832,6 +832,17 @@ def get_all_variants(*, flt=None):
                 'Gorbushin_22_15',
             ]},
         ),
+        Work(
+            task_id='2022-01-27 11Б - ГО - 3',
+            classes={'optics': [
+                'reflection.Chernoutsan_13_6',
+                'reflection.Chernoutsan_13_8',
+                'reflection.Chernoutsan_13_9',
+                'refraction.Refraction01',
+                'refraction.Vishnyakova_3_6_4',
+            ]},
+        ),
+
     ]
     if flt:
         works = [work for work in works if flt(work)]
