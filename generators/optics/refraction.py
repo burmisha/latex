@@ -19,7 +19,7 @@ import math
 ''')
 @variant.solution_space(100)
 @variant.arg(n='1.35/1.45/1.55/1.65')
-# @variant.arg(what='воздуха/вакуума')  # TODO: enable
+@variant.arg(what='воздуха/вакуума')
 @variant.arg(which=['угол падения', 'между падающим лучом и границей раздела сред'])
 @variant.arg(alpha_base=[22, 28, 35, 40, 50, 55, 65])
 @variant.answer_align([
@@ -32,7 +32,7 @@ import math
     '\\varphi_5 &= \\alpha - \\beta \\approx {phi5:.2f}\\degrees.',
 ])
 class Refraction01(variant.VariantTask):
-    def GetUpdate(self, *, n=None, which=None, alpha_base=None):
+    def GetUpdate(self, *, n=None, which=None, alpha_base=None, what=None):
         alpha = {
             'угол падения': alpha_base,
             'между падающим лучом и границей раздела сред': 90 - alpha_base,
