@@ -455,13 +455,13 @@ class Vishnyakova_3_6_11(variant.VariantTask):
     нужно поместить точечный источник света,
     чтобы его изображение оказалось в главном фокусе линзы?
 ''')
-@variant.arg(which='двояковыпуклой/двояковыгнутой')
+@variant.arg(which='двояковыпуклой/двояковогнутой')
 @variant.answer_short('\\text{{answer}}')
 class Baumanski_15_31(variant.VariantTask):
     def GetUpdate(self, *, which=None):
         answer = {
             'двояковыпуклой': 'для мнимого - на половине фокусного, для действительного - на бесконечности',
-            'двояковыгнутой': 'на половине фокусного расстояния',
+            'двояковогнутой': 'на половине фокусного расстояния',
         }[which]
         return dict(
             answer=answer,
