@@ -10,6 +10,7 @@ import json
 import os
 import re
 import time
+import shutil
 
 import requests
 
@@ -63,16 +64,25 @@ class Description:
 
 
 class AnswersJoiner:
-    def __init__(self):
+    def __init__(self, form_id: str):
+        self._form_id = form_id
         self._task_map = collections.defaultdict(lambda: collections.defaultdict(lambda: collections.defaultdict(list)))
         ya_cookie = library.secrets.token.get('ru.yandex.cookie')
         self._headers = {
-            'Cookie': ya_cookie,
+            # 'Cookie': ya_cookie,
         }
         self._csrf_headers = {
-            'Cookie': ya_cookie,
-            'csrf-token': library.secrets.token.get('ru.yandex.token.csrf'),
+            # 'Cookie': ya_cookie,
+            # 'csrf-token': library.secrets.token.get('ru.yandex.token.csrf'),
         }
+        self._known_files = self._get_known_files()
+
+    def _get_known_files(self):
+        files = {}
+        files_dir = library.location.ya_disk('Yandex.Forms', self._form_id, 'Files')
+        for file in library.files.walkFiles(files_dir):
+            files[os.path.basename(file)] = os.path.join(files_dir, file)
+        return files
 
     def add_answer(self, yf_answer):
         pupils = library.pupils.get_class_from_string(yf_answer.get_pupils_id())
@@ -92,13 +102,20 @@ class AnswersJoiner:
             self._task_map[pupils_dir][work_id][pupil_name] += yf_answer.get_photos()
 
     def _download_to_file(self, link, filename):
+        basename = link.split('/')[-1]
+        if basename in self._known_files:
+            ready_file = self._known_files[basename]
+            shutil.copy(ready_file, filename)
+            log.info(f'Copied into {ready_file} to {filename}')
+            return
+
         log.info(f'Downloading {link} into {filename}')
         response = requests.get(link, headers=self._headers)
         if response.ok:
             with open(filename, 'wb') as f:
                 f.write(response.content)
         else:
-            log.warn(f'Failed to download {link}')
+            log.warn(f'Failed to download {link}: {response.status_code}')
             raise RuntimeError('Failed to download file from Yandex')
 
     def _get_download_cfg(self):
@@ -225,12 +242,12 @@ class YFAnswer:
         return photos
 
     def __str__(self):
-        return (
-            f'answer {cm(self._create_time, color=color.Yellow)}'
-            f' - {cm(self._work_name, color=color.Cyan)}'
-            f' - {cm(len(self.get_photos()), color=color.Magenta)} files'
-            f' - {cm(self._original_name, color=color.Green)}'
-        )
+        return ' - '.join([
+            f'answer {cm(self._create_time, color=color.Yellow)}',
+            f'{cm(self._work_name, color=color.Cyan)}',
+            f'{cm(len(self.get_photos()), color=color.Magenta)} files',
+            f'{cm(self._original_name, color=color.Green)}',
+        ])
 
 
 def get_latest_file(dir_name, regexp):
@@ -246,16 +263,21 @@ def get_latest_file(dir_name, regexp):
 
 def run(args):
     sleep_time = args.sleep
-    form_id = '5fd491a3dfc5aebea76233ef'
-    log.info(f'Forse JSON update at https://forms.yandex.ru/admin/{form_id}/answers')
-    log.info('Delete old versions at https://disk.yandex.ru/client/disk/Yandex.Forms')
 
-    answer_location = library.location.ya_disk('Yandex.Forms')
-    regexp = r'.*202021 Физика 554.*\.json'
+    # old_form_id = '5fd491a3dfc5aebea76233ef'
+    form_id = '61f81cd1e03b86bced1d0ebd'
+    answers_page = f'https://forms.yandex.ru/admin/{form_id}/answers'
+    ya_disk_page = f'https://disk.yandex.ru/client/disk/Yandex.Forms/{form_id}'
+
+    log.info(f'Click «Save to Yandex.Disk» with images in JSON at {cm(answers_page, color=color.Green)}')
+    log.info(f'Delete old versions at {cm(ya_disk_page, color=color.Green)}')
+
+    answer_location = library.location.ya_disk('Yandex.Forms', form_id)
+    regexp = r'.*202122 Физика 554.*\.json'
     old_latest_file = get_latest_file(answer_location, regexp)
     new_latest_file = None
 
-    answers_joiner = AnswersJoiner()
+    answers_joiner = AnswersJoiner(form_id)
     if args.sync:
         log.info(f'Syncing answers to dir {cm(answer_location, color=color.Green)}')
         answers_joiner.sync_with_yadisk(form_id)
