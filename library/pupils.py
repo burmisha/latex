@@ -210,7 +210,11 @@ def get_class_from_string(value, addMyself=False, onlyMe=False):
     else:
         raise RuntimeError(f'Could not guess class from {value}: {date_part} {class_part} {year}')
 
-    key = f'{year} {class_part}'
+    if (len(parts)) >= 3 and (len(parts[2]) <= 2):
+        key = f'{year} {class_part} {parts[2]}'
+    else:
+        key = f'{year} {class_part}'
+
     pupils = names_picker.get(key)
     assert pupils, f'Could not find pupils by key {value!r}: got key {key!r}'
 
@@ -219,3 +223,8 @@ def get_class_from_string(value, addMyself=False, onlyMe=False):
 
 
 assert get_class_from_string('2019 11Т')
+assert get_class_from_string('2020 9М Физика')
+assert get_class_from_string('2022-01-31 11 БА')
+assert get_class_from_string('2022-01-31 11БА')
+assert get_class_from_string('2022-01-31 11 Б')
+assert get_class_from_string('2022-01-31 11Б')
