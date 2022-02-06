@@ -159,6 +159,7 @@ def run(args):
             'https://www.youtube.com/watch?v=i8fD_jG_TM8': 'FREE BEATS',
             'https://www.youtube.com/watch?v=LXpfBwApM3E': '2021 - 554 - 1 класс',
             'https://www.youtube.com/watch?v=pySJ3cNrZKA': '2022 - Вынос ели',
+            'https://www.youtube.com/watch?v=rckEw0z7aK4': '1964 - Что такое теория относительности'
         },
         'Veritasium': {
             'https://www.youtube.com/watch?v=AaZ_RSt0KP8': '2021.08.31 - The Universe is Hostile to Computers',
