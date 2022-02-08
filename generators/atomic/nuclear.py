@@ -1,5 +1,6 @@
 import generators.variant as variant
 from generators.helpers import UnitValue, Consts, Elements, ElementsList
+from library.util.asserts import assert_equals
 
 
 def get_element_answer(what, element):
@@ -14,12 +15,32 @@ def get_element_answer(what, element):
 all_particles = ['протонов', 'нейтронов', 'электронов', 'нуклонов']
 
 
+def get_first_index(index):
+    return index * (index + 1) // 2 + 2 * index
+
+
+def test_get_first_index():
+    assert_equals('Broken index', 0, get_first_index(0))
+    assert_equals('Broken index', 3, get_first_index(1))
+    assert_equals('Broken index', 7, get_first_index(2))
+    assert_equals('Broken index', 12, get_first_index(3))
+
+
+test_get_first_index()
+
+
+def get_elements_sublist(index, shift=0):
+    first = get_first_index(index) + shift
+    last = get_first_index(index + 1) + shift
+    return ElementsList[first:last]
+
+
 @variant.solution_space(0)
 @variant.text('Определите число {what01} в атоме ${element:LaTeX}$.')
 @variant.answer('$Z = {element:protons}$ протонов и столько же электронов $A = {element:nuclons}$ нуклонов, $A - Z = {element:neutrons}$ нейтронов. Ответ: {answer}')
 @variant.answer_test('{answer}')
 @variant.arg(what01=all_particles)
-@variant.arg(element=ElementsList[0:3])
+@variant.arg(element=get_elements_sublist(0))
 class AtomCount01(variant.VariantTask):
     def GetUpdate(self, element=None, what01=None):
         return dict(answer=get_element_answer(what01, element))
@@ -30,7 +51,7 @@ class AtomCount01(variant.VariantTask):
 @variant.answer('$Z = {element:protons}$ протонов и столько же электронов $A = {element:nuclons}$ нуклонов, $A - Z = {element:neutrons}$ нейтронов. Ответ: {answer}')
 @variant.answer_test('{answer}')
 @variant.arg(what02=all_particles)
-@variant.arg(element=ElementsList[3:7])
+@variant.arg(element=get_elements_sublist(1))
 class AtomCount02(variant.VariantTask):
     def GetUpdate(self, element=None, what02=None):
         return dict(answer=get_element_answer(what02, element))
@@ -41,7 +62,7 @@ class AtomCount02(variant.VariantTask):
 @variant.answer('$Z = {element:protons}$ протонов и столько же электронов $A = {element:nuclons}$ нуклонов, $A - Z = {element:neutrons}$ нейтронов. Ответ: {answer}')
 @variant.answer_test('{answer}')
 @variant.arg(what03=all_particles)
-@variant.arg(element=ElementsList[7:12])
+@variant.arg(element=get_elements_sublist(2))
 class AtomCount03(variant.VariantTask):
     def GetUpdate(self, element=None, what03=None):
         return dict(answer=get_element_answer(what03, element))
@@ -52,7 +73,7 @@ class AtomCount03(variant.VariantTask):
 @variant.answer('$Z = {element:protons}$ протонов и столько же электронов $A = {element:nuclons}$ нуклонов, $A - Z = {element:neutrons}$ нейтронов. Ответ: {answer}')
 @variant.answer_test('{answer}')
 @variant.arg(what04=all_particles)
-@variant.arg(element=ElementsList[12:18])
+@variant.arg(element=get_elements_sublist(3))
 class AtomCount04(variant.VariantTask):
     def GetUpdate(self, element=None, what04=None):
         return dict(answer=get_element_answer(what04, element))
@@ -63,7 +84,7 @@ class AtomCount04(variant.VariantTask):
 @variant.answer('$Z = {element:protons}$ протонов и столько же электронов $A = {element:nuclons}$ нуклонов, $A - Z = {element:neutrons}$ нейтронов. Ответ: {answer}')
 @variant.answer_test('{answer}')
 @variant.arg(what05=all_particles)
-@variant.arg(element=ElementsList[18:25])
+@variant.arg(element=get_elements_sublist(4))
 class AtomCount05(variant.VariantTask):
     def GetUpdate(self, element=None, what05=None):
         return dict(answer=get_element_answer(what05, element))
@@ -74,7 +95,7 @@ class AtomCount05(variant.VariantTask):
 @variant.answer('$Z = {element:protons}$ протонов и столько же электронов $A = {element:nuclons}$ нуклонов, $A - Z = {element:neutrons}$ нейтронов. Ответ: {answer}')
 @variant.answer_test('{answer}')
 @variant.arg(what06=all_particles)
-@variant.arg(element=ElementsList[25:33])
+@variant.arg(element=get_elements_sublist(5))
 class AtomCount06(variant.VariantTask):
     def GetUpdate(self, element=None, what06=None):
         return dict(answer=get_element_answer(what06, element))
@@ -85,7 +106,7 @@ class AtomCount06(variant.VariantTask):
 @variant.answer('$Z = {element:protons}$ протонов и столько же электронов $A = {element:nuclons}$ нуклонов, $A - Z = {element:neutrons}$ нейтронов. Ответ: {answer}')
 @variant.answer_test('{answer}')
 @variant.arg(what07=all_particles)
-@variant.arg(element=ElementsList[33:42])
+@variant.arg(element=get_elements_sublist(6))
 class AtomCount07(variant.VariantTask):
     def GetUpdate(self, element=None, what07=None):
         return dict(answer=get_element_answer(what07, element))
@@ -96,7 +117,7 @@ class AtomCount07(variant.VariantTask):
 @variant.answer('$Z = {element:protons}$ протонов и столько же электронов $A = {element:nuclons}$ нуклонов, $A - Z = {element:neutrons}$ нейтронов. Ответ: {answer}')
 @variant.answer_test('{answer}')
 @variant.arg(what08=all_particles)
-@variant.arg(element=ElementsList[42:52])
+@variant.arg(element=get_elements_sublist(7))
 class AtomCount08(variant.VariantTask):
     def GetUpdate(self, element=None, what08=None):
         return dict(answer=get_element_answer(what08, element))
@@ -107,7 +128,7 @@ class AtomCount08(variant.VariantTask):
 @variant.answer('$Z = {element:protons}$ протонов и столько же электронов $A = {element:nuclons}$ нуклонов, $A - Z = {element:neutrons}$ нейтронов. Ответ: {answer}')
 @variant.answer_test('{answer}')
 @variant.arg(what09=all_particles)
-@variant.arg(element=ElementsList[52:63])
+@variant.arg(element=get_elements_sublist(8))
 class AtomCount09(variant.VariantTask):
     def GetUpdate(self, element=None, what09=None):
         return dict(answer=get_element_answer(what09, element))
@@ -118,7 +139,7 @@ class AtomCount09(variant.VariantTask):
 @variant.answer('$Z = {element:protons}$ протонов и столько же электронов $A = {element:nuclons}$ нуклонов, $A - Z = {element:neutrons}$ нейтронов. Ответ: {answer}')
 @variant.answer_test('{answer}')
 @variant.arg(what10=all_particles)
-@variant.arg(element=ElementsList[63:75])
+@variant.arg(element=get_elements_sublist(9))
 class AtomCount10(variant.VariantTask):
     def GetUpdate(self, element=None, what10=None):
         return dict(answer=get_element_answer(what10, element))
@@ -129,7 +150,7 @@ class AtomCount10(variant.VariantTask):
 @variant.answer('$Z = {element:protons}$ протонов и столько же электронов $A = {element:nuclons}$ нуклонов, $A - Z = {element:neutrons}$ нейтронов. Ответ: {answer}')
 @variant.answer_test('{answer}')
 @variant.arg(what11=all_particles)
-@variant.arg(element=ElementsList[75:88])
+@variant.arg(element=get_elements_sublist(10))
 class AtomCount11(variant.VariantTask):
     def GetUpdate(self, element=None, what11=None):
         return dict(answer=get_element_answer(what11, element))
@@ -140,7 +161,7 @@ class AtomCount11(variant.VariantTask):
 @variant.answer('$Z = {element:protons}$ протонов и столько же электронов $A = {element:nuclons}$ нуклонов, $A - Z = {element:neutrons}$ нейтронов. Ответ: {answer}')
 @variant.answer_test('{answer}')
 @variant.arg(what12=all_particles)
-@variant.arg(element=ElementsList[88:102])
+@variant.arg(element=get_elements_sublist(11))
 class AtomCount12(variant.VariantTask):
     def GetUpdate(self, element=None, what12=None):
         return dict(answer=get_element_answer(what12, element))
@@ -152,7 +173,7 @@ class AtomCount12(variant.VariantTask):
 @variant.answer('$Z = {element01:protons}$ протонов и столько же электронов, $A = {element01:nuclons}$ нуклонов, $A - Z = {element01:neutrons}$ нейтронов. Ответ: {answer}')
 @variant.answer_test('{answer}')
 @variant.arg(what01=all_particles)
-@variant.arg(element01=ElementsList[1:4])
+@variant.arg(element01=get_elements_sublist(0, shift=1))
 class AtomCount01_Text(variant.VariantTask):
     def GetUpdate(self, element01=None, what01=None):
         return dict(answer=get_element_answer(what01, element01))
@@ -163,7 +184,7 @@ class AtomCount01_Text(variant.VariantTask):
 @variant.answer('$Z = {element02:protons}$ протонов и столько же электронов, $A = {element02:nuclons}$ нуклонов, $A - Z = {element02:neutrons}$ нейтронов. Ответ: {answer}')
 @variant.answer_test('{answer}')
 @variant.arg(what02=all_particles)
-@variant.arg(element02=ElementsList[4:8])
+@variant.arg(element02=get_elements_sublist(1, shift=1))
 class AtomCount02_Text(variant.VariantTask):
     def GetUpdate(self, element02=None, what02=None):
         return dict(answer=get_element_answer(what02, element02))
@@ -174,7 +195,7 @@ class AtomCount02_Text(variant.VariantTask):
 @variant.answer('$Z = {element03:protons}$ протонов и столько же электронов, $A = {element03:nuclons}$ нуклонов, $A - Z = {element03:neutrons}$ нейтронов. Ответ: {answer}')
 @variant.answer_test('{answer}')
 @variant.arg(what03=all_particles)
-@variant.arg(element03=ElementsList[8:13])
+@variant.arg(element03=get_elements_sublist(2, shift=1))
 class AtomCount03_Text(variant.VariantTask):
     def GetUpdate(self, element03=None, what03=None):
         return dict(answer=get_element_answer(what03, element03))
@@ -185,7 +206,7 @@ class AtomCount03_Text(variant.VariantTask):
 @variant.answer('$Z = {element04:protons}$ протонов и столько же электронов, $A = {element04:nuclons}$ нуклонов, $A - Z = {element04:neutrons}$ нейтронов. Ответ: {answer}')
 @variant.answer_test('{answer}')
 @variant.arg(what04=all_particles)
-@variant.arg(element04=ElementsList[13:19])
+@variant.arg(element04=get_elements_sublist(3, shift=1))
 class AtomCount04_Text(variant.VariantTask):
     def GetUpdate(self, element04=None, what04=None):
         return dict(answer=get_element_answer(what04, element04))
@@ -196,7 +217,7 @@ class AtomCount04_Text(variant.VariantTask):
 @variant.answer('$Z = {element05:protons}$ протонов и столько же электронов, $A = {element05:nuclons}$ нуклонов, $A - Z = {element05:neutrons}$ нейтронов. Ответ: {answer}')
 @variant.answer_test('{answer}')
 @variant.arg(what05=all_particles)
-@variant.arg(element05=ElementsList[19:26])
+@variant.arg(element05=get_elements_sublist(4, shift=1))
 class AtomCount05_Text(variant.VariantTask):
     def GetUpdate(self, element05=None, what05=None):
         return dict(answer=get_element_answer(what05, element05))
@@ -207,7 +228,7 @@ class AtomCount05_Text(variant.VariantTask):
 @variant.answer('$Z = {element06:protons}$ протонов и столько же электронов, $A = {element06:nuclons}$ нуклонов, $A - Z = {element06:neutrons}$ нейтронов. Ответ: {answer}')
 @variant.answer_test('{answer}')
 @variant.arg(what06=all_particles)
-@variant.arg(element06=ElementsList[26:34])
+@variant.arg(element06=get_elements_sublist(5, shift=1))
 class AtomCount06_Text(variant.VariantTask):
     def GetUpdate(self, element06=None, what06=None):
         return dict(answer=get_element_answer(what06, element06))
@@ -218,7 +239,7 @@ class AtomCount06_Text(variant.VariantTask):
 @variant.answer('$Z = {element07:protons}$ протонов и столько же электронов, $A = {element07:nuclons}$ нуклонов, $A - Z = {element07:neutrons}$ нейтронов. Ответ: {answer}')
 @variant.answer_test('{answer}')
 @variant.arg(what07=all_particles)
-@variant.arg(element07=ElementsList[34:43])
+@variant.arg(element07=get_elements_sublist(6, shift=1))
 class AtomCount07_Text(variant.VariantTask):
     def GetUpdate(self, element07=None, what07=None):
         return dict(answer=get_element_answer(what07, element07))
@@ -229,7 +250,7 @@ class AtomCount07_Text(variant.VariantTask):
 @variant.answer('$Z = {element08:protons}$ протонов и столько же электронов, $A = {element08:nuclons}$ нуклонов, $A - Z = {element08:neutrons}$ нейтронов. Ответ: {answer}')
 @variant.answer_test('{answer}')
 @variant.arg(what08=all_particles)
-@variant.arg(element08=ElementsList[43:53])
+@variant.arg(element08=get_elements_sublist(7, shift=1))
 class AtomCount08_Text(variant.VariantTask):
     def GetUpdate(self, element08=None, what08=None):
         return dict(answer=get_element_answer(what08, element08))
@@ -240,7 +261,7 @@ class AtomCount08_Text(variant.VariantTask):
 @variant.answer('$Z = {element09:protons}$ протонов и столько же электронов, $A = {element09:nuclons}$ нуклонов, $A - Z = {element09:neutrons}$ нейтронов. Ответ: {answer}')
 @variant.answer_test('{answer}')
 @variant.arg(what09=all_particles)
-@variant.arg(element09=ElementsList[53:64])
+@variant.arg(element09=get_elements_sublist(8, shift=1))
 class AtomCount09_Text(variant.VariantTask):
     def GetUpdate(self, element09=None, what09=None):
         return dict(answer=get_element_answer(what09, element09))
@@ -251,7 +272,7 @@ class AtomCount09_Text(variant.VariantTask):
 @variant.answer('$Z = {element10:protons}$ протонов и столько же электронов, $A = {element10:nuclons}$ нуклонов, $A - Z = {element10:neutrons}$ нейтронов. Ответ: {answer}')
 @variant.answer_test('{answer}')
 @variant.arg(what10=all_particles)
-@variant.arg(element10=ElementsList[64:76])
+@variant.arg(element10=get_elements_sublist(9, shift=1))
 class AtomCount10_Text(variant.VariantTask):
     def GetUpdate(self, element10=None, what10=None):
         return dict(answer=get_element_answer(what10, element10))
@@ -262,7 +283,7 @@ class AtomCount10_Text(variant.VariantTask):
 @variant.answer('$Z = {element11:protons}$ протонов и столько же электронов, $A = {element11:nuclons}$ нуклонов, $A - Z = {element11:neutrons}$ нейтронов. Ответ: {answer}')
 @variant.answer_test('{answer}')
 @variant.arg(what11=all_particles)
-@variant.arg(element11=ElementsList[76:89])
+@variant.arg(element11=get_elements_sublist(10, shift=1))
 class AtomCount11_Text(variant.VariantTask):
     def GetUpdate(self, element11=None, what11=None):
         return dict(answer=get_element_answer(what11, element11))
@@ -273,7 +294,7 @@ class AtomCount11_Text(variant.VariantTask):
 @variant.answer('$Z = {element12:protons}$ протонов и столько же электронов, $A = {element12:nuclons}$ нуклонов, $A - Z = {element12:neutrons}$ нейтронов. Ответ: {answer}')
 @variant.answer_test('{answer}')
 @variant.arg(what12=all_particles)
-@variant.arg(element12=ElementsList[89:103])
+@variant.arg(element12=get_elements_sublist(11, shift=1))
 class AtomCount12_Text(variant.VariantTask):
     def GetUpdate(self, element12=None, what12=None):
         return dict(answer=get_element_answer(what12, element12))
