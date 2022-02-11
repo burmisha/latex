@@ -64,9 +64,9 @@ class UnitValue:
     def IncPrecision(self, incPrecision=1):
         assert isinstance(incPrecision, int)
         assert incPrecision >= 1, incPrecision
-        self.Precision += 1
+        self.Precision += incPrecision
         if self.ViewPrecision:
-            self.ViewPrecision += 1
+            self.ViewPrecision += incPrecision
 
         return self
 
@@ -123,7 +123,7 @@ class UnitValue:
         return f'UVS {self.__raw_line!r}'
 
     def __repr__(self):
-        return f'UVR {self.__raw_line!r}@{self.ViewPrecision or self.Precision}'
+        return f'UVR {self.__raw_line!r}@{self.Precision}'
 
     def _get_units_tex(self):
         humanNom = '\\cdot'.join(unit.get_tex() for unit in self._units if unit.IsNumerator)
@@ -326,6 +326,10 @@ def calculate(left, right, action=None, units=None):
 
 def test_unit_value():
     UV = UnitValue
+
+    assert UV('2').Precision == 1
+    assert UV('2').IncPrecision(2).Precision == 3
+
     data = [
         ('{:Task}', UnitValue('c = 3 10^{8} м / с'), 'c = 3 \\cdot 10^{8}\\,\\frac{\\text{м}}{\\text{с}}'),
         ('{:Task}', UnitValue('t = 8 суток'), 't = 8\\,\\text{суток}'),
@@ -364,6 +368,8 @@ def test_unit_value():
         ('{:V}', UV('38 В') * UV('4.3 А') / (UV('859 мА') * UV('200 В')), '0{,}95'),
         ('{:V}', (UV('70 мГн') * UV('6 А')).As('мВб'), '420\\,\\text{мВб}'),
         # ('{:V}', UnitValue('600000000000000000 Гц', precision=3), '6 \\cdot 10^{14}\\,\\text{Гц}'),  # TODO
+        ('{:V}', UV('2').IncPrecision(2), '2'),
+        ('{:V}', UV('2.').IncPrecision(2), '2'),
     ]
     for fmt, unit_value, canonic in data:
         result = fmt.format(unit_value)

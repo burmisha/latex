@@ -13,7 +13,7 @@ def format_with_precision(value, precision):
     assert isinstance(precision, int), f'Precision must be int, got {precision!r}'
     assert 1 <= precision <= 10, f'Invalid precision {precision} for {value}'
 
-    if int(value) == value:
+    if not isinstance(value, float) and (int(value) == value):
         return str(int(value))
 
     str_value = str(abs(value))
@@ -39,7 +39,7 @@ def format_with_precision(value, precision):
 def test_format_with_precision():
     for value, precision, result in [
         (1, 1, '1'),
-        (1.0, 1, '1'),
+        (1.0, 1, '1.0'),
         (Decimal(1), 1, '1'),
         (1.7, 1, '1.7'),
         (0.091, 2, '0.091'),
@@ -52,13 +52,14 @@ def test_format_with_precision():
         (1.99, 3, '1.990'),
         (19.9, 2, '19.9'),
         (19.9, 1, '20'),
+        (2.00, 3, '2.00'),
         (12, 1, '12'),
         (12, 2, '12'),
         (20, 2, '20'),
         (20, 1, '20'),
         (2.99, 2, '3.0'),
         (29.9, 2, '30'),
-        (299., 2, '299'),
+        (299., 2, '300'),
         (299, 2, '299'),
         (1 + 1. / 30, 2, '1.03'),
         (1 + 1. / 300, 2, '1.00'),
@@ -126,13 +127,14 @@ def test_get_precision():
         ('200', 3),
         ('192', 2),
         ('1', 1),
+        ('2', 1),
         ('0', 1),
         ('0.0', 1),
         ('0.00', 1),
     ]
     for line, precision in data:
         result = get_precision(line)
-        assert result == precision, f'Expected {precision},  got {result} for {line}'
+        assert_equals(f'line {line!r}', precision, result)
 
 
 test_get_precision()
