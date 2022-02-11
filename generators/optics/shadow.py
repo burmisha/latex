@@ -33,9 +33,10 @@ class Vishnyakova_3_6_1(variant.VariantTask):
 @variant.arg(l='l = 12/15/18 см')
 @variant.arg(L='L = 10/20/30 см')
 @variant.answer_short('\\cfrac{\\frac d2 + \\frac D2}l = \\cfrac{\\frac d2 + r}{l + L} \\implies r = \\cfrac{Dl + dL + DL}{2l} = \\cfrac D2 + \\cfrac{ L }{ l } * \\cfrac{d+D}2 \\approx {r:V} \\implies 2r \\approx {r2:V}')
+@variant.is_one_arg
 class Shadow01(variant.VariantTask):
-    def GetUpdate(self, *, d=None, D=None, l=None, L=None, what=None):
-        r_value = ((D * l).SI_Value + (d * L).SI_Value + (D * L).SI_Value) / 2 / l.SI_Value
+    def GetUpdateOneArg(self, a):
+        r_value = ((a.D * a.l).SI_Value + (a.d * a.L).SI_Value + (a.D * a.L).SI_Value) / 2 / a.l.SI_Value
         r = f'{r_value * 100:.1f} см'
         return dict(
             r=r,
