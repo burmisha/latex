@@ -47,7 +47,7 @@ class Task02(variant.VariantTask):
             answer1=a1 * b1,
             answer2=a2 / b2,
             answer3=a3 * b3,
-            answer4=(a3 / b3 * (float(math.pi) ** 2) * 3).IncPrecision(2),
+            answer4=(a3 / b3 * (float(math.pi) ** 2) * 3).IncPrecision(1),
         )
 
 
@@ -85,7 +85,7 @@ class Vishnyakova_example_11(variant.VariantTask):
             raise RuntimeError()
 
         return dict(
-            x=(lmbd * L / l * float(ratio)).IncPrecision(2).As('мм'),
+            x=(lmbd * L / l * float(ratio)).IncPrecision(1).As('мм'),
             ratio=ratio,
         )
 

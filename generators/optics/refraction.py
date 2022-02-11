@@ -139,7 +139,7 @@ class Chernoutsan_13_12(variant.VariantTask):
     def GetUpdate(self, *, angle=None, d=None):
         cos = math.cos(angle / 180 * math.pi)
         return dict(
-            l=(d / cos).IncPrecision(2).As('мм'),
+            l=(d / cos).IncPrecision(1).As('мм'),
         )
 
 

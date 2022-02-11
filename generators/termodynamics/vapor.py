@@ -93,8 +93,8 @@ class GetNFromPhi(variant.VariantTask):
             rho_np=rho_np,
             T=T,
             phi_share=f'{phi / 100:.2f}',
-            N=N.SetLetter('N').IncPrecision(3),
-            N2=N2.SetLetter('N').IncPrecision(3),
+            N=N.SetLetter('N').IncPrecision(1),
+            N2=N2.SetLetter('N').IncPrecision(1),
             mu=mu,
             power=power,
         )

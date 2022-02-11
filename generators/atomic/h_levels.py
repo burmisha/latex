@@ -10,15 +10,15 @@ from generators.helpers import UnitValue, Consts, Fraction
     Постоянная Планка {Consts.h:Task:e}, скорость света {Consts.c:Task:e}.
 ''')
 @variant.answer_short('''
-    E = h\\nu = h \\frac c {lmbd:L}
+    E = h\\nu = h \\frac c{lmbd:L}
     \\implies {lmbd:L} = \\frac{hc}E
         = \\frac{{Consts.h:Value} * {Consts.c:Value|s}}{E:Value|s}
         = {lmbd:Value}.
 ''')
 @variant.arg(E=('E = {} 10^{{-19}} Дж', ['4.04', '5.05', '2.02', '7.07', '1.01', '0.55']))
-class Lambda_from_E(variant.VariantTask):  # Вишнякова - Базовый курс 5.2 - задача 01
+class Lambda_from_E(variant.VariantTask):  # Вишнякова - Базовый курс 5.2
     def GetUpdate(self, E=None):
-        lmbd = (Consts.h * Consts.c / E).SetLetter('\\lambda').As('нм')
+        lmbd = (Consts.h * Consts.c / E).IncPrecision(2).SetLetter('\\lambda').As('нм')
         return dict(lmbd=lmbd)
 
 
@@ -28,15 +28,15 @@ class Lambda_from_E(variant.VariantTask):  # Вишнякова - Базовый
     Постоянная Планка {Consts.h:Task:e}, скорость света {Consts.c:Task:e}.
 ''')
 @variant.answer_short('''
-    E = h\\nu = h \\frac c {lmbd:L}
+    E = h\\nu = h \\frac c{lmbd:L}
     \\implies {lmbd:L} = \\frac{hc}E
         = \\frac{{Consts.h:Value} * {Consts.c:Value|s}}{E:Value|s}
         = {lmbd:Value}.
 ''')
 @variant.arg(E=['E = %d 10^{-19} Дж' % E for E in [2, 3, 4, 6]])
-class Lambda_from_E_2(variant.VariantTask):  # Вишнякова - Базовый курс 5.2 - задача 02
+class Lambda_from_E_2(variant.VariantTask):  # Вишнякова - Базовый курс 5.2
     def GetUpdate(self, E=None):
-        lmbd = (Consts.h * Consts.c / E).SetLetter('\\lambda').As('нм')
+        lmbd = (Consts.h * Consts.c / E).IncPrecision(2).SetLetter('\\lambda').As('нм')
         return dict(lmbd=lmbd)
 
 

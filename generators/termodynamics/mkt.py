@@ -13,7 +13,7 @@ from generators.helpers import Consts, Decimal, UnitValue
 class Basic01(variant.VariantTask):
     def GetUpdate(self, v=None, t=None):
         return dict(
-            s=(v * t).IncPrecision(2),
+            s=(v * t).IncPrecision(1),
         )
 
 @variant.solution_space(0)
@@ -482,7 +482,7 @@ class ZFTSH_10_2_2_kv(variant.VariantTask):
         T = UnitValue(f'{t + 273} К')
         return dict(
             P=f'{p:.1f} атм',
-            m=(Consts.p_atm * p * V * gas.mu / Consts.R / T).IncPrecision(3).As('г'),
+            m=(Consts.p_atm * p * V * gas.mu / Consts.R / T).IncPrecision(1).As('г'),
         )
 
 

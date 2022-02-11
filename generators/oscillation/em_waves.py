@@ -26,7 +26,7 @@ class Gendenshteyn_11_11_18(variant.VariantTask):
             see = 'не увидит'
         return dict(
             nu=Consts.c / lmbd,
-            lmbd_1=lmbd_1.IncPrecision(3).As('нм'),
+            lmbd_1=lmbd_1.IncPrecision(1).As('нм'),
             see=see,
         )
 
@@ -178,7 +178,7 @@ class Chernoutsan_12_50(variant.VariantTask):
 class Chernoutsan_12_51(variant.VariantTask):
     def GetUpdate(self, *, what=None, nu_1=None, lmbd_2=None):
         return dict(
-            ratio=((nu_1 / Consts.c * lmbd_2) * (nu_1 / Consts.c * lmbd_2)).IncPrecision(2),
+            ratio=((nu_1 / Consts.c * lmbd_2) * (nu_1 / Consts.c * lmbd_2)).IncPrecision(1),
         )
 
 

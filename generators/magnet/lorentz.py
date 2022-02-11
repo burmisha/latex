@@ -50,7 +50,7 @@ class Force13(variant.VariantTask):
 class Force14(variant.VariantTask):
     def GetUpdate(self, what=None, m=None, v=None, B=None):
         return dict(
-            R=(m * v / Consts.e / B).IncPrecision(2)
+            R=(m * v / Consts.e / B).IncPrecision(1)
         )
 
 
