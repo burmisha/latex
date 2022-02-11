@@ -115,7 +115,9 @@ def test_replace_comma():
     assert LaTeXFormatter().format('0.2', replace_comma=True) == r'0{,}2'
     assert LaTeXFormatter().format('node 0.2', replace_comma=True) == r'node 0.2'
 
+
 test_replace_comma()
+
 
 lv = list(letter_variants(
     {'дважды два': 'четыре', 'трижды три': 'девять'},
@@ -202,6 +204,13 @@ def test_fraction():
 test_fraction()
 
 
+# https://stackoverflow.com/questions/4984647/accessing-dict-keys-like-an-attribute
+class AttrDict(dict):
+    def __init__(self, *args, **kwargs):
+        super(AttrDict, self).__init__(*args, **kwargs)
+        self.__dict__ = self
+
+
 def check_unit_value(value):
     try:
         if isinstance(value, UnitValue):
@@ -239,6 +248,7 @@ def test_check_unit_value():
 test_check_unit_value()
 
 
+
 class VariantTask:
     def __init__(self, *, pupils=None):
         self._pupils = pupils
@@ -248,13 +258,16 @@ class VariantTask:
         self._variants_count = None
         self._prefer_test_version = False
 
-    def validate(self):
-        pass
+    def validate(self) -> bool:
+        return True
 
-    def PreferTestVersion(self):
+    def PreferTestVersion(self) -> bool:
         self._prefer_test_version = True
 
-    def GetUpdate(self, **kws):
+    def GetUpdate(self, **kws) -> dict:
+        return {}
+
+    def GetUpdateOneArg(self, s) -> dict:
         return {}
 
     def GetSolutionSpace(self):
@@ -286,13 +299,20 @@ class VariantTask:
         else:
             return None
 
-    def _get_args_from_index(self, index):
+    def _get_args_from_index(self, index: int) -> dict:
         res = self._vars.form_one(index)
 
         try:
             for k, v in res.items():
                 res[k] = check_unit_value(v)
-            for k, v in self.GetUpdate(**res).items():
+
+            if hasattr(self, 'is_one_arg'):
+                args = AttrDict(res)
+                update = self.GetUpdateOneArg(args)
+            else:
+                update = self.GetUpdate(**res)
+
+            for k, v in update.items():
                 res[k] = check_unit_value(v)
         except:
             log.error(f'Cannot enrich {cm(type(self), color=color.Green)} with args')
@@ -303,7 +323,7 @@ class VariantTask:
 
         return res
 
-    def GetTasksCount(self):
+    def GetTasksCount(self) -> int:
         result = self._vars.total_count()
         assert result, f'No tasks for {self}'
         return result
@@ -406,7 +426,7 @@ class MultiplePaper:
         )
         return result
 
-    def GetFilename(self):
+    def GetFilename(self) -> str:
         filename = f'{self.Date.GetFilenameText()}-{self.Pupils.Grade}'
         if self.Pupils.LatinLetter:
             filename += self.Pupils.LatinLetter
@@ -488,6 +508,12 @@ def answer_tex(text):
         cls.AnswerTex = text
         return cls
     return decorator
+
+
+def is_one_arg(cls):
+    assert not hasattr(cls, 'is_one_arg')
+    cls.is_one_arg = True
+    return cls
 
 
 def no_args(cls):
