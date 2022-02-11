@@ -1,45 +1,43 @@
 import generators.variant as variant
-from generators.helpers import UnitValue, Consts
+from generators.helpers import UnitValue, Consts, Fraction
 
 
 @variant.solution_space(150)
 @variant.text('''
     При переходе электрона в атоме с одной стационарной орбиты на другую
-    излучается фотон с энергией ${E:Value}$.
+    излучается фотон с энергией {E:V:e}.
     Какова длина волны этой линии спектра?
-    Постоянная Планка ${Consts.h:Task}$, скорость света ${Consts.c:Task}$.
+    Постоянная Планка {Consts.h:Task:e}, скорость света {Consts.c:Task:e}.
 ''')
 @variant.answer_short('''
-    E = h\\nu = h \\frac c\\lambda
-    \\implies \\lambda = \\frac{hc}E
+    E = h\\nu = h \\frac c {lmbd:L}
+    \\implies {lmbd:L} = \\frac{hc}E
         = \\frac{{Consts.h:Value} * {Consts.c:Value|s}}{E:Value|s}
         = {lmbd:Value}.
 ''')
 @variant.arg(E=('E = {} 10^{{-19}} Дж', ['4.04', '5.05', '2.02', '7.07', '1.01', '0.55']))
 class Lambda_from_E(variant.VariantTask):  # Вишнякова - Базовый курс 5.2 - задача 01
     def GetUpdate(self, E=None):
-        lmbd = Consts.c * Consts.h / E
-        mul = 10 ** 9
-        return dict(lmbd=f'\\lambda = {lmbd.SI_Value * mul:.2f} нм')
+        lmbd = (Consts.h * Consts.c / E).SetLetter('\\lambda').As('нм')
+        return dict(lmbd=lmbd)
 
 
 @variant.solution_space(150)
 @variant.text('''
-    Излучение какой длины волны поглотил атом водорода, если полная энергия в атоме увеличилась на ${E:Value}$?
-    Постоянная Планка ${Consts.h:Task}$, скорость света ${Consts.c:Task}$.
+    Излучение какой длины волны поглотил атом водорода, если полная энергия в атоме увеличилась на {E:V:e}?
+    Постоянная Планка {Consts.h:Task:e}, скорость света {Consts.c:Task:e}.
 ''')
 @variant.answer_short('''
-    E = h\\nu = h \\frac c\\lambda
-    \\implies \\lambda = \\frac{hc}E
+    E = h\\nu = h \\frac c {lmbd:L}
+    \\implies {lmbd:L} = \\frac{hc}E
         = \\frac{{Consts.h:Value} * {Consts.c:Value|s}}{E:Value|s}
         = {lmbd:Value}.
 ''')
 @variant.arg(E=['E = %d 10^{-19} Дж' % E for E in [2, 3, 4, 6]])
 class Lambda_from_E_2(variant.VariantTask):  # Вишнякова - Базовый курс 5.2 - задача 02
     def GetUpdate(self, E=None):
-        lmbd = Consts.h * Consts.c / E
-        mul = 10 ** 9
-        return dict(lmbd=f'\\lambda = {lmbd.SI_Value * mul:.2f} нм')
+        lmbd = (Consts.h * Consts.c / E).SetLetter('\\lambda').As('нм')
+        return dict(lmbd=lmbd)
 
 
 @variant.solution_space(150)
@@ -77,46 +75,49 @@ class H_levels(variant.VariantTask):  # Вишнякова - Базовый ку
 @variant.text('''
     Во сколько раз уменьшается радиус орбиты электрона в атоме водорода,
     если при переходе атома из одного стационарного состояния в другое
-    кинетическая энергия электрона увеличивается в 16 раз?
+    кинетическая энергия электрона увеличивается в {n} раз?
 ''')
 @variant.solution_space(80)
-@variant.arg(A=('A = {} a', [1]))
+@variant.arg(n=[16])
 @variant.answer_align([
+    # 'E_{\\text{кин.}} &= \\frac{mv^2} \\implies v = \\sqrt{\\frac {2E_{\\text{кин.} k}} m} \\implies mv = \\sqrt{2 m E_{\\text{кин.}}},',
+    'm_e v r &= n h \\implies v = \\frac{n h}{m_e r}'
+    'm_e \\frac{v^2}r &= k\\frac{e^2}{r^2} \\implies m_e \\frac{n^2 h^2}{m_e^2 r^3} = k\\frac{e^2}{r^2} \\implies r = \\frac{m_e n^2 h^2}{m_e^2 k e^2}',
+    'v &= \\frac{k e^2}{n h} \\implies \\sqrt{ \\frac{2E_k}{m_e} } = \\frac{k e^2}{n h} \\implies \\frac{2E_k}{m_e} = \\frac{k^2 e^4}{n^2 h^2}',
+    'r &= \\frac{m_e n^2 h^2}{m_e^2 k e^2} \\implies \\frac{2E_k}{m_e} * r = \\frac{k^2 e^4}{n^2 h^2} * \\frac{m_e n^2 h^2}{m_e^2 k e^2} = k e^2 m_e'
+
 ])
 class Chernoutsan_13_73(variant.VariantTask):
-    def GetUpdate(self, *, A=None):
+    def GetUpdate(self, *, n=None):
         return dict(
-            B=1,
         )
 
 
 @variant.text('''
     Во сколько раз увеличилась кинетическая энергия электрона в атоме водорода при переходе
-    из одного стационарного состояния в другое, если угловая скорость вращения по орбите увеличилась в 8 раз?
+    из одного стационарного состояния в другое, если угловая скорость вращения по орбите увеличилась в {n} раз?
 ''')
 @variant.solution_space(80)
-@variant.arg(A=('A = {} a', [1]))
+@variant.arg(n=[8])
 @variant.answer_align([
 ])
 class Chernoutsan_13_74(variant.VariantTask):
-    def GetUpdate(self, *, A=None):
+    def GetUpdate(self, *, n=None):
         return dict(
-            B=1,
         )
 
 
 @variant.text('''
     Во сколько раз увеличивается угловая скорость вращения электрона в атоме водорода,
-    если при переходе атома из одного стационарного состояния в другое радиус орбиты электрона уменьшается в 4 раза?
+    если при переходе атома из одного стационарного состояния в другое радиус орбиты электрона уменьшается в {n} раза?
 ''')
 @variant.solution_space(80)
-@variant.arg(A=('A = {} a', [1]))
+@variant.arg(n=[4])
 @variant.answer_align([
 ])
 class Chernoutsan_13_75(variant.VariantTask):
     def GetUpdate(self, *, A=None):
         return dict(
-            B=1,
         )
 
 
@@ -132,20 +133,18 @@ class Chernoutsan_13_75(variant.VariantTask):
 class Chernoutsan_13_76(variant.VariantTask):
     def GetUpdate(self, *, A=None):
         return dict(
-            B=1,
         )
 
 
 @variant.text('''
     Каков номер возбужденного состояния, в которое переходит атом водорода из нормального состояния
-    при поглощении фотона, энергия которого составляет 8/9 энергии ионизации атома водорода?
+    при поглощении фотона, энергия которого составляет {share:LaTeX} энергии ионизации атома водорода?
 ''')
 @variant.solution_space(80)
-@variant.arg(A=('A = {} a', [1]))
+@variant.arg(share=[Fraction(8) / 9])
 @variant.answer_align([
 ])
 class Chernoutsan_13_77(variant.VariantTask):
     def GetUpdate(self, *, A=None):
         return dict(
-            B=1,
         )
