@@ -8,7 +8,7 @@ import math
 @variant.text('''
 ''')
 @variant.solution_space(80)
-@variant.arg(A=('A = {} a', [1]))
+@variant.arg(A='A = 1/2/3 a')
 @variant.answer_align([
 ])
 class Template(variant.VariantTask):
