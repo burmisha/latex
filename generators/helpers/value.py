@@ -1,6 +1,6 @@
 from generators.helpers.unit import OneUnit, BaseUnits, SimpleUnits, get_simple_unit
 from generators.helpers.fraction import decimal_to_fraction
-from generators.helpers.precision import format_with_precision, get_precision
+from generators.helpers.precision import format_with_precision, get_precision, get_delta
 from library.util.asserts import assert_equals
 
 from library.logging import colorize_json, cm, color
@@ -197,6 +197,12 @@ class UnitValue:
     def __rmul__(self, other):
         return calculate(self, other, action=Calculation.MULT)
 
+    def __add__(self, other):
+        return calculate(self, other, action=Calculation.PLUS)
+
+    def __sub__(self, other):
+        return calculate(self, other, action=Calculation.MINUS)
+
     @property
     def SI_Value(self):
         result = self.Value * Decimal(10) ** self.ValuePower
@@ -225,7 +231,6 @@ class UnitValue:
 
         return result
 
-
 def get_calc_precision(left, other_value, left_precision, right_precision, action):
     MAX_PRECISION = 7
 
@@ -244,10 +249,26 @@ def get_calc_precision(left, other_value, left_precision, right_precision, actio
         else:
             precision = min(precision, MAX_PRECISION)
 
-    elif action in [Calculation.PLUS]:
-        value = left.SI_Value + other_value
-        assert this_units == other_units
-        calced_units = this_units
+    elif action in [Calculation.PLUS, Calculation.MINUS]:
+        if action == Calculation.PLUS:
+            value = left.SI_Value + other_value
+        else:
+            value = left.SI_Value - other_value
+        left_delta = get_delta(left.SI_Value, left_precision) if left_precision else None
+        right_delta = get_delta(other_value, right_precision) if right_precision else None
+
+        if right_delta is not None and left_delta is not None:
+            delta = max(left_delta, right_delta)
+        elif right_delta is None and left_delta is not None:
+            delta = left_delta
+        elif right_delta is not None and left_delta is None:
+            delta = right_delta
+        else:
+            raise NotImplementedError('wut: get_calc_precision')
+            # delta = None
+
+        precision = math.floor((abs(value) / delta).log10()) + 1
+        assert precision >= 1
 
     else:
         raise NotImplementedError(f'Could not apply unknown action {action!r}')
@@ -286,6 +307,11 @@ def calculate(left, right, action=None, units=None):
 
     elif action in [Calculation.PLUS]:
         value = left.SI_Value + other_value
+        assert this_units == other_units
+        calced_units = this_units
+
+    elif action in [Calculation.MINUS]:
+        value = left.SI_Value - other_value
         assert this_units == other_units
         calced_units = this_units
 
@@ -370,6 +396,11 @@ def test_unit_value():
         # ('{:V}', UnitValue('600000000000000000 Гц', precision=3), '6 \\cdot 10^{14}\\,\\text{Гц}'),  # TODO
         ('{:V}', UV('2').IncPrecision(2), '2'),
         ('{:V}', UV('2.').IncPrecision(2), '2'),
+
+        ('{:V}', UV('2 м') + UV('7 м'), '9\\,\\text{м}'),
+        ('{:V}', UV('7 м') - UV('2 м'), '5\\,\\text{м}'),
+        ('{:V}', UV('70 см') - UV('20 см'), '0{,}50\\,\\text{м}'),
+        ('{:V}', UV('7.0 м') - UV('20 см'), '6{,}8\\,\\text{м}'),
     ]
     for fmt, unit_value, canonic in data:
         result = fmt.format(unit_value)

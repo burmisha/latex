@@ -8,6 +8,11 @@ def _strip_prefix(line):
     return line.replace('-', '').replace('.', '').lstrip('0')
 
 
+def _leading_one(line: str) -> bool:
+    stripped = _strip_prefix(line)
+    return bool(stripped and stripped[0] == '1')
+
+
 def format_with_precision(value, precision):
     assert isinstance(value, (int, float, Decimal)), f'Value {value} has unsupported type {type(value)}'
     assert isinstance(precision, int), f'Precision must be int, got {precision!r}'
@@ -18,10 +23,9 @@ def format_with_precision(value, precision):
 
     str_value = str(abs(value))
     abs_decimal = Decimal(str_value)
-    strip_prefix = _strip_prefix(str_value)
 
     log10 = math.floor(abs_decimal.log10()) - precision + 1
-    if strip_prefix and strip_prefix[0] == '1':
+    if _leading_one(str_value):
         log10 -= 1
     mult = Decimal(10) ** log10
     new_value = Decimal(int(abs_decimal / mult + Decimal('0.5'))) * mult
@@ -107,7 +111,7 @@ def get_precision(line):
         return 1
 
     precision = len(precisionStr)
-    if precisionStr[0] == '1' and precision >= 2:
+    if _leading_one(precisionStr) and precision >= 2:
         precision -= 1
 
     assert precision >= 1, f'Got invalid precision {precision} from {line!r}'
@@ -138,3 +142,35 @@ def test_get_precision():
 
 
 test_get_precision()
+
+
+def get_delta(decimal_value: Decimal, precision: int):
+    abs_decimal = abs(decimal_value)
+    str_value = str(abs_decimal)
+
+    log10 = math.floor(abs_decimal.log10()) - precision + 1
+    if _leading_one(str_value):
+        log10 -= 1
+    return Decimal(10) ** log10
+
+
+def test_get_delta():
+    data = [
+        (Decimal('2.2'), 3, Decimal('0.01')),
+        (Decimal('2.2'), 2, Decimal('0.1')),
+        (Decimal('2.2'), 1, Decimal('1')),
+        (Decimal('0.002'), 3, Decimal('0.00001')),
+        (Decimal('0.002'), 2, Decimal('0.0001')),
+        (Decimal('0.002'), 1, Decimal('0.001')),
+        (Decimal('2000'), 3, Decimal('10')),
+        (Decimal('2000'), 2, Decimal('100')),
+        (Decimal('2000'), 1, Decimal('1000')),
+    ]
+    for decimal_value, precision, delta in data:
+        result = get_delta(decimal_value, precision)
+        assert_equals(f'line {decimal_value!r}, precision: {precision}', delta, result)
+
+    assert math.floor(- (Decimal(1) / Decimal(67)).log10() + 1) == 2, - (Decimal(1) / Decimal(67)).log10() + 1
+
+
+test_get_delta()
