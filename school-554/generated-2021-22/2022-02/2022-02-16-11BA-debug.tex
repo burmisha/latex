@@ -1,0 +1,194 @@
+\newcommand\rootpath{../../..}
+\input{\rootpath/school-554/main}
+\begin{document}
+
+\setdate{16~февраля~2022}
+\setclass{11«БА»}
+
+\addpersonalvariant{Михаил Бурмистров}
+
+\tasknumber{1}%
+\task{%
+    Протон движется со скоростью $0{,}7\,c$, где $c$~--- скорость света в вакууме.
+    Каково при этом отношение кинетической энергии частицы $E_\text{кин.}$ к его энергии покоя $E_0$?
+}
+\answer{%
+    \begin{align*}
+    E &= \frac{E_0}{\sqrt{1 - \frac{v^2}{c^2}}}
+            \implies \frac E{E_0}
+                = \frac 1{\sqrt{1 - \frac{v^2}{c^2}}}
+                = \frac 1{\sqrt{1 - \sqr{0{,}7}}}
+                \approx 1{,}400,
+         \\
+        {E_{\text{кин}}} &= E - E_0
+            \implies \frac{E_{\text{кин}}}{E_0}
+                = \frac E{E_0} - 1
+                = \frac 1{\sqrt{1 - \frac{v^2}{c^2}}} - 1
+                = \frac 1{\sqrt{1 - \sqr{0{,}7}}} - 1
+                \approx 0{,}400.
+    \end{align*}
+}
+\solutionspace{150pt}
+
+\tasknumber{2}%
+\task{%
+    Полная энергия релятивистской частицы в шесть раз больше её энергии покоя.
+    Найти скорость этой частицы: в долях $c$ и численное значение.
+    Скорость света в вакууме $c = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}$.
+}
+\answer{%
+    \begin{align*}
+    E &= \frac{E_0}{\sqrt{1 - \frac{v^2}{c^2}}}\implies \sqrt{1 - \frac{v^2}{c^2}} = \frac{E_0}{E}\implies \frac{v^2}{c^2} = 1 - \sqr{\frac{E_0}{E}}\implies v = c \sqrt{1 - \sqr{\frac{E_0}{E}}} \approx 0{,}986c \approx 296 \cdot 10^{6}\,\frac{\text{м}}{\text{с}}.
+    \end{align*}
+}
+\solutionspace{80pt}
+
+\tasknumber{3}%
+\task{%
+    Кинетическая энергия релятивистской частицы в шесть раз больше её энергии покоя.
+    Найти скорость этой частицы.
+    Скорость света в вакууме $c = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}$.
+}
+\answer{%
+    \begin{align*}
+    E &= E_0 + E_{\text{кин}} \\
+    E &= \frac{E_0}{\sqrt{1 - \frac{v^2}{c^2}}}\implies \sqrt{1 - \frac{v^2}{c^2}} = \frac{E_0}{E}\implies \frac{v^2}{c^2} = 1 - \sqr{\frac{E_0}{E}} \implies \\
+    \implies &v = c \sqrt{1 - \sqr{\frac{E_0}{E}}} = c \sqrt{1 - \sqr{\frac{E_0}{E_0 + E_{\text{кин}} }}} = c \sqrt{1 - \frac 1 {\sqr{ 1 + \frac{E_{\text{кин}}}{E_0} }} }\approx 0{,}990c \approx 297 \cdot 10^{6}\,\frac{\text{м}}{\text{с}}.
+    \end{align*}
+}
+\solutionspace{80pt}
+
+\tasknumber{4}%
+\task{%
+    Электрон движется со скоростью $0{,}65\,c$, где $c$~--- скорость света в вакууме.
+    Определите его кинетическую энергию (в ответе приведите формулу и укажите численное значение).
+}
+\answer{%
+    \begin{align*}
+    E &= \frac{mc^2}{\sqrt{1 - \frac{v^2}{c^2}}}
+            \approx \frac{9{,}1 \cdot 10^{-31}\,\text{кг} \cdot \sqr{3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}}}{\sqrt{1 - 0{,}65^2}}
+            \approx 0{,}1078 \cdot 10^{-12}\,\text{Дж},
+         \\
+        E_{\text{кин}} &= \frac{mc^2}{\sqrt{1 - \frac{v^2}{c^2}}} - mc^2
+            = mc^2 \cbr{\frac 1{\sqrt{1 - \frac{v^2}{c^2}}} - 1} \approx \\
+            &\approx \cbr{9{,}1 \cdot 10^{-31}\,\text{кг} \cdot \sqr{3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}}}
+            \cdot \cbr{\frac 1{\sqrt{1 - 0{,}65^2}} - 1}
+            \approx 25{,}9 \cdot 10^{-15}\,\text{Дж},
+         \\
+        p &= \frac{mv}{\sqrt{1 - \frac{v^2}{c^2}}}
+            \approx \frac{9{,}1 \cdot 10^{-31}\,\text{кг} \cdot 0{,}65 \cdot 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}}{\sqrt{1 - 0{,}65^2}}
+            \approx 0{,}234 \cdot 10^{-21}\,\frac{\text{кг}\cdot\text{м}}{\text{с}}.
+    \end{align*}
+}
+\solutionspace{150pt}
+
+\tasknumber{5}%
+\task{%
+    Кинетическая энергия частицы космических лучей в шесть раз превышает её энергию покоя.
+    Определить отношение скорости частицы к скорости света.
+}
+\answer{%
+    \begin{align*}
+    E &= E_0 + E_{\text{кин}} \\
+    E &= \frac{E_0}{\sqrt{1 - \frac{v^2}{c^2}}}\implies \sqrt{1 - \frac{v^2}{c^2}} = \frac{E_0}{E}\implies \frac{v^2}{c^2} = 1 - \sqr{\frac{E_0}{E}} \implies \\
+    \implies \frac vc &= \sqrt{1 - \sqr{\frac{E_0}{E}}} = \sqrt{1 - \sqr{\frac{E_0}{E_0 + E_{\text{кин}} }}} \approx 0{,}990.
+    \end{align*}
+}
+\solutionspace{80pt}
+
+\tasknumber{6}%
+\task{%
+    Некоторая частица, пройдя ускоряющую разность потенциалов, приобрела импульс $3 \cdot 10^{-19}\,\frac{\text{кг}\cdot\text{м}}{\text{с}}$.
+    Скорость частицы стала равной $2{,}4 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}$.
+    Найти массу частицы.
+}
+\answer{%
+    $p = \frac{ mv }{\sqrt{1 - \frac{v^2}{c^2} }}\implies m = \frac pv \sqrt{1 - \frac{v^2}{c^2}}= \frac {3 \cdot 10^{-19}\,\frac{\text{кг}\cdot\text{м}}{\text{с}}}{2{,}4 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}} \sqrt{1 - \sqr{\frac{2{,}4 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}}{3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}}} } \approx 0{,}75 \cdot 10^{-27}\,\text{кг}.$
+}
+
+
+\variantsplitter
+
+
+\addpersonalvariant{Михаил Бурмистров}
+
+\tasknumber{7}%
+\task{%
+    При какой скорости движения (в км/ч) релятивистское сокращение длины движущегося тела
+    составит 50\%?
+}
+\answer{%
+    \begin{align*}
+    l_0 &= \frac l{\sqrt{1 - \frac{v^2}{c^2}}}
+        \implies 1 - \frac{v^2}{c^2} = \sqr{\frac l{l_0}}
+        \implies \frac v c = \sqrt{1 - \sqr{\frac l{l_0}}} \implies
+         \\
+        \implies v &= c\sqrt{1 - \sqr{\frac l{l_0}}}
+        = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} \cdot \sqrt{1 - \sqr{\frac {l_0 - 0{,}50l_0}{l_0}}}
+        = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}} \cdot \sqrt{1 - \sqr{1 - 0{,}50}} \approx  \\
+        &\approx 0{,}866c
+        \approx 260 \cdot 10^{6}\,\frac{\text{м}}{\text{с}}
+        \approx 935 \cdot 10^{6}\,\frac{\text{км}}{\text{ч}}.
+    \end{align*}
+}
+\solutionspace{150pt}
+
+\tasknumber{8}%
+\task{%
+    Стержень движется в продольном направлении с постоянной скоростью относительно инерциальной системы отсчёта.
+    При каком значении скорости (в долях скорости света) длина стержня в этой системе отсчёта
+    будет в  3  раза меньше его собственной длины?
+}
+\answer{%
+    $l_0 = \frac l{\sqrt{1 - \frac{v^2}{c^2}}}\implies \sqrt{1 - \frac{v^2}{c^2}} = \frac{ l }{ l_0 }\implies \frac v c = \sqrt{1 - \sqr{\frac{ l }{ l_0 }}} \approx 0{,}943.$
+}
+\solutionspace{80pt}
+
+\tasknumber{9}%
+\task{%
+    Какую скорость должно иметь движущееся тело, чтобы его продольные размеры уменьшились в шесть раз?
+    Скорость света $c = 3 \cdot 10^{8}\,\frac{\text{м}}{\text{с}}$.
+}
+\answer{%
+    $l_0 = \frac l{\sqrt{1 - \frac{v^2}{c^2}}}\implies \sqrt{1 - \frac{v^2}{c^2}} = \frac{ l }{ l_0 }\implies v = c\sqrt{1 - \sqr{\frac{ l }{ l_0 }}} \approx 296 \cdot 10^{6}\,\frac{\text{м}}{\text{с}}.$
+}
+\solutionspace{80pt}
+
+\tasknumber{10}%
+\task{%
+    Время жизни мюона, измеренное наблюдателем, относительно которого мюон покоился, равно $\tau_0$
+    Какое расстояние пролетит мюон в системе отсчёта, относительно которой он движется со скоростью $v$,
+    сравнимой со скоростью света в вакууме $c$?
+}
+\answer{%
+    $\ell = v\tau = v \frac{\tau_0}{\sqrt{1 - \frac{v^2}{c^2}}}$
+}
+\solutionspace{80pt}
+
+\tasknumber{11}%
+\task{%
+    Если $c$ — скорость света в вакууме, то с какой скоростью должна двигаться нестабильная частица относительно наблюдателя,
+    чтобы её время жизни было в шесть раз больше, чем у такой же, но покоящейся относительно наблюдателя частицы?
+}
+\answer{%
+    $\tau = \frac{\tau_0}{\sqrt{1 - \frac{v^2}{c^2}}}\implies \sqrt{1 - \frac{v^2}{c^2}} = \frac{\tau_0}{\tau}\implies v = c\sqrt{1 - \sqr{\frac{\tau_0}{\tau}} } \approx 296 \cdot 10^{6}\,\frac{\text{м}}{\text{с}}.$
+}
+
+
+\variantsplitter
+
+
+\addpersonalvariant{Михаил Бурмистров}
+
+\tasknumber{12}%
+\task{%
+    Время жизни нестабильной частицы, входящего в состав космических лучей, измеренное земным наблюдателем,
+    относительно которого частица двигалась со скоростью, составляющей 75\% скорости света в вакууме, оказалось равным $4{,}8\,\text{мкс}$.
+    Каково время жизни частицы, покоящейся относительно наблюдателя?
+}
+\answer{%
+    $t = \frac{t_0}{\sqrt{1 - \frac{v^2}{c^2}}}\implies t_0 = t\sqrt{1 - \frac{v^2}{c^2}} \approx 3{,}2 \cdot 10^{-6}\,\text{с}.$
+}
+
+\end{document}
+% autogenerated
