@@ -1,7 +1,7 @@
 import itertools
 
 import generators.variant as variant
-from generators.helpers import Consts, Decimal
+from generators.helpers import Consts, Decimal, n_times
 
 @variant.text('''
     Для частицы, движущейся с релятивистской скоростью,
@@ -53,7 +53,7 @@ class Equations(variant.VariantTask):
 
 @variant.solution_space(150)
 @variant.text('''
-    {what} движется со скоростью $0.{percent}\,c$, где $c$~--- скорость света в вакууме.
+    {what} движется со скоростью $0{,}{percent}\,c$, где $c$~--- скорость света в вакууме.
     Каково при этом отношение {energy} к его энергии покоя $E_0$?
 ''')
 @variant.answer_align([
@@ -64,28 +64,81 @@ class Equations(variant.VariantTask):
             \\approx {E:.3f},
     ''',
     '''
-    E_{\\text{кин}} &= E - E_0
-        \\implies \\frac{E_{\\text{кин}}}{E_0}
+    {E_kin_L:L:s} &= E - E_0
+        \\implies \\frac{E_kin_L:L:s}{E_0}
             = \\frac E{E_0} - 1
             = \\frac 1{\\sqrt{1 - \\frac{v^2}{c^2}}} - 1
             = \\frac 1{\\sqrt{1 - \\sqr{0.{percent}}}} - 1
             \\approx {E_kin:.3f}.''',
 ])
-@variant.arg(what='Протон/Позитрон')
+@variant.arg(what='Протон/Позитрон/Электрон')
 @variant.arg(energy='полной энергии частицы $E$/кинетической энергии частицы $E_\\text{кин.}$')
 @variant.arg(percent=['9', '8', '7', '6'])
 class E_ratio_from_v_ratio(variant.VariantTask):  # Вишнякова - Базовый курс 4 - задача 1, Vishnyakova_4_1
     def GetUpdate(self, what=None, energy=None, percent=None):
         share = float('0.' + percent)
+        E_share = 1. / ((1. - share ** 2) ** 0.5)
         return dict(
-            E=1. / ((1. - share ** 2) ** 0.5),
-            E_kin=1. / ((1. - share ** 2) ** 0.5) - 1,
+            E=E_share,
+            E_kin=E_share - 1,
+            E_kin_L='E_{\\text{кин}} = 1',
         )
+
+
+@variant.text('''
+    Полная энергия релятивистской частицы в {n_word} больше её энергии покоя.
+    Найти скорость этой частицы: в долях $c$ и численное значение. Скорость света в вакууме {Consts.c:Task:e}.
+''')
+@variant.solution_space(80)
+@variant.arg(n__n_word=n_times(3, 4, 5, 6))
+@variant.answer_align([
+    'E &= \\frac{E_0}{\\sqrt{1 - \\frac{v^2}{c^2}}}'
+    '\\implies \\sqrt{1 - \\frac{v^2}{c^2}} = \\frac{E_0}{E}'
+    '\\implies \\frac{v^2}{c^2} = 1 - \\sqr{\\frac{E_0}{E}}'
+    '\\implies v = c \\sqrt{1 - \\sqr{\\frac{E_0}{E}}} \\approx {share:.3f}c \\approx {v:V}.',
+])
+@variant.is_one_arg
+class Vishnyakova_4_2(variant.VariantTask):
+    def GetUpdateOneArg(self, a):
+        share = (1 - (1 / a.n) ** 2) ** 0.5
+        v = Consts.c * share
+        return dict(
+            share=share,
+            v=v,
+        )
+
+
+@variant.text('''
+    Кинетическая энергия релятивистской частицы в {n_word} больше её энергии покоя.
+    Найти скорость этой частицы. Скорость света в вакууме {Consts.c:Task:e}.
+''')
+@variant.solution_space(80)
+@variant.arg(n__n_word=n_times(3, 4, 5, 6))
+@variant.answer_align([
+    'E &= E_0 + {E_kin:L}',
+    'E &= \\frac{E_0}{\\sqrt{1 - \\frac{v^2}{c^2}}}'
+    '\\implies \\sqrt{1 - \\frac{v^2}{c^2}} = \\frac{E_0}{E}'
+    '\\implies \\frac{v^2}{c^2} = 1 - \\sqr{\\frac{E_0}{E}} \\implies',
+    '\\implies &v = c \\sqrt{1 - \\sqr{\\frac{E_0}{E}}} = c \\sqrt{1 - \\sqr{\\frac{E_0}{E_0 + {E_kin:L} }}} '
+    '= c \\sqrt{1 - \\frac 1 {\\sqr{ 1 + \\frac{E_kin:L:s}{E_0} }} }'
+    '\\approx {share:.3f}c \\approx {v:V}.',
+])
+@variant.is_one_arg
+class Vishnyakova_4_2_kin(variant.VariantTask):
+    def GetUpdateOneArg(self, a):
+        share = (1 - 1 / (1 + a.n) ** 2) ** 0.5
+        v = Consts.c * share
+        return dict(
+            share=share,
+            v=v,
+            E_kin='E_{\\text{кин}} = 1',
+        )
+
 
 
 @variant.solution_space(150)
 @variant.text('''
-    {what} движется со скоростью $0.{percent}\,c$, где $c$~--- скорость света в вакууме.
+    {what} движется со скоростью $0{,}{percent}\,c$, где $c$~--- скорость света в вакууме.
     Определите его {x} (в ответе приведите формулу и укажите численное значение).
 ''')
 @variant.answer_align([
@@ -122,19 +175,61 @@ class E_P_from_v_ratio(variant.VariantTask):  # Вишнякова - Базов�
 
         E = m * c * c * gamma
         E_kin = m * c * c * (gamma - 1)
-        p = m * c * Decimal(share) * gamma
-
-        power = -12
-        power_p = -21
-        mul = 10 ** (-power)
-        mul_p = 10 ** (-power_p)
+        p = m * c * share * gamma
 
         return dict(
-            E=f'E = {E.SI_Value * mul:.3f} 10^{power} Дж',
-            E_kin=f'E_{{\\text{{кин}}}} = {E_kin.SI_Value * mul:.3f} 10^{power} Дж',
-            p=f'p = {p.SI_Value * mul_p:.3f} 10^{power_p} кг м / с',
+            E=E.SetLetter('E').IncPrecision(1),
+            E_kin=E_kin.SetLetter('E_{\\text{кин}}').IncPrecision(1),
+            p=p.SetLetter('p').IncPrecision(1),
             m=m,
         )
+
+
+@variant.text('''
+    Кинетическая энергия частицы космических лучей в {n_word} превышает её энергию покоя.
+    Определить отношение скорости частицы к скорости света.
+''')
+@variant.solution_space(80)
+@variant.arg(n__n_word=n_times(3, 4, 5, 6))
+@variant.answer_align([
+    'E &= E_0 + {E_kin:L}',
+    'E &= \\frac{E_0}{\\sqrt{1 - \\frac{v^2}{c^2}}}'
+    '\\implies \\sqrt{1 - \\frac{v^2}{c^2}} = \\frac{E_0}{E}'
+    '\\implies \\frac{v^2}{c^2} = 1 - \\sqr{\\frac{E_0}{E}} \\implies',
+    '\\implies \\frac vc &= \\sqrt{1 - \\sqr{\\frac{E_0}{E}}} = \\sqrt{1 - \\sqr{\\frac{E_0}{E_0 + {E_kin:L} }}} '
+    '\\approx {share:.3f}.',
+])
+@variant.is_one_arg
+class Vishnyakova_4_4(variant.VariantTask):  # see Vishnyakova_4_2_kin
+   def GetUpdateOneArg(self, a):
+        share = (1 - 1 / (1 + a.n) ** 2) ** 0.5
+        return dict(
+            share=share,
+            E_kin='E_{\\text{кин}} = 1',
+        )
+
+
+@variant.text('''
+    Некоторая частица, пройдя ускоряющую разность потенциалов, приобрела импульс {p:V:e}.
+    Скорость частицы стала равной {v:V:e}. Найти массу частицы.
+''')
+@variant.solution_space(80)
+@variant.arg(p='3/3.5/3.8/4.2 10**{-19} кг м /с')
+@variant.arg(v='1.5/1.8/2.0/2.4 10**8 м/с')
+@variant.answer_short(
+    'p = \\frac{ mv }{\\sqrt{1 - \\frac{v^2}{c^2} }}'
+    '\\implies m = \\frac pv \\sqrt{1 - \\frac{v^2}{c^2}}'
+    '= \\frac {p:V:s}{v:V:s} \\sqrt{1 - \\sqr{\\frac{v:V:s}{Consts.c:V:s}} } \\approx {m:V}.'
+)
+@variant.is_one_arg
+class Vishnyakova_4_5(variant.VariantTask):
+    def GetUpdateOneArg(self, a):
+        r = (a.v / Consts.c).SI_Value
+        m = a.p / a.v * float(1 - r ** 2) ** 0.5
+        return dict(
+            m=m.IncPrecision(1),
+        )
+
 
 
 @variant.solution_space(150)
@@ -172,79 +267,43 @@ class beta_from_l_reduction(variant.VariantTask):  # Вишнякова - Баз
         )
 
 
-# @variant.text('''
-#     Полная энергия релятивистской частицы в 5 раз больше её энергии покоя.
-#     Найти скорость этой частицы. Скорость света в вакууме с=3: 10% м/с.
-# ''')
-# @variant.solution_space(80)
-# @variant.arg(A=('A = {} a', [1]))
-# @variant.answer_align([
-# ])
-# class Vishnyakova_4_2(variant.VariantTask):
-#     def GetUpdate(self, *, A=None):
-#         return dict(
-#             B=1,
-#         )
-
-
-# @variant.text('''
-#     Кинетическая энергия частицы космических лучей B3 раза превышает её энергию покоя.
-#     Определить отношение скорости частицы к скорости света.
-# ''')
-# @variant.solution_space(80)
-# @variant.arg(A=('A = {} a', [1]))
-# @variant.answer_align([
-# ])
-# class Vishnyakova_4_4(variant.VariantTask):
-#     def GetUpdate(self, *, A=None):
-#         return dict(
-#             B=1,
-#         )
-
-
-# @variant.text('''
-#     Некоторая частица, пройдя ускоряющую разность потенциалов, приобрела импульс 3,8.107? кгм/с.
-#     Скорость частицы стала равной 1,8-10* м/с. Найти массу частицы.
-# ''')
-# @variant.solution_space(80)
-# @variant.arg(A=('A = {} a', [1]))
-# @variant.answer_align([
-# ])
-# class Vishnyakova_4_5(variant.VariantTask):
-#     def GetUpdate(self, *, A=None):
-#         return dict(
-#             B=1,
-#         )
-
-
 @variant.text('''
     Стержень движется в продольном направлении с постоянной скоростью относительно инерциальной системы отсчёта.
     При каком значении скорости (в долях скорости света) длина стержня в этой системе отсчёта
-    будет в 1,66 раза меньше его собственной длины?
+    будет в {n} раза меньше его собственной длины?
 ''')
 @variant.solution_space(80)
-@variant.arg(A=('A = {} a', [1]))
-@variant.answer_align([
-])
+@variant.arg(n='1.25/1.5/1.67/2.5/3/4')
+@variant.answer_short(
+    'l_0 = \\frac l{\\sqrt{1 - \\frac{v^2}{c^2}}}'
+    '\\implies \\sqrt{1 - \\frac{v^2}{c^2}} = \\frac{ l }{ l_0 }'
+    '\\implies \\frac v c = \\sqrt{1 - \\sqr{\\frac{ l }{ l_0 }}} \\approx {r:.3f}.'
+)
+@variant.is_one_arg
 class Vishnyakova_4_7(variant.VariantTask):
-    def GetUpdate(self, *, A=None):
+    def GetUpdateOneArg(self, a):
         return dict(
-            B=1,
+            r = (1 - (1 / float(a.n)) ** 2) ** 0.5,
         )
 
 
 @variant.text('''
-    Какую скорость должно иметь движущееся тело, чтобы его продольные размеры уменьшились в два раза?
+    Какую скорость должно иметь движущееся тело, чтобы его продольные размеры уменьшились в {n_word}?
     Скорость света {Consts.c:Task:e}.
 ''')
 @variant.solution_space(80)
-@variant.arg(A=('A = {} a', [1]))
-@variant.answer_align([
-])
+@variant.arg(n__n_word=n_times(2, 3, 4, 5, 6))
+@variant.answer_short(
+    'l_0 = \\frac l{\\sqrt{1 - \\frac{v^2}{c^2}}}'
+    '\\implies \\sqrt{1 - \\frac{v^2}{c^2}} = \\frac{ l }{ l_0 }'
+    '\\implies v = c\\sqrt{1 - \\sqr{\\frac{ l }{ l_0 }}} \\approx {v:V}.'
+)
+@variant.is_one_arg
 class Vishnyakova_4_8(variant.VariantTask):
-    def GetUpdate(self, *, A=None):
+    def GetUpdateOneArg(self, a):
+        r = (1 - (1 / float(a.n)) ** 2) ** 0.5
         return dict(
-            B=1,
+            v=Consts.c * r,
         )
 
 
@@ -254,42 +313,48 @@ class Vishnyakova_4_8(variant.VariantTask):
     сравнимой со скоростью света в вакууме $c$?
 ''')
 @variant.solution_space(80)
-@variant.arg(A=('A = {} a', [1]))
-@variant.answer_align([
-])
+@variant.no_args
+@variant.answer_short('\\ell = v\\tau = v \\frac{\\tau_0}{\\sqrt{1 - \\frac{v^2}{c^2}}}')
 class Vishnyakova_4_9(variant.VariantTask):
-    def GetUpdate(self, *, A=None):
-        return dict(
-            B=1,
-        )
+    pass
 
 
 @variant.text('''
     Если $c$ — скорость света в вакууме, то с какой скоростью должна двигаться нестабильная частица относительно наблюдателя,
-    чтобы её время жизни было в 10 раз больше, чем у такой же, но покоящейся относительно наблюдателя частицы?
+    чтобы её время жизни было в {n_word} больше, чем у такой же, но покоящейся относительно наблюдателя частицы?
 ''')
 @variant.solution_space(80)
-@variant.arg(A=('A = {} a', [1]))
-@variant.answer_align([
-])
+@variant.arg(n__n_word=n_times(3, 4, 5, 6, 7, 8, 9, 10))
+@variant.answer_short(
+    '\\tau = \\frac{\\tau_0}{\\sqrt{1 - \\frac{v^2}{c^2}}}'
+    '\\implies \\sqrt{1 - \\frac{v^2}{c^2}} = \\frac{\\tau_0}{\\tau}'
+    '\\implies v = c\\sqrt{1 - \\sqr{\\frac{\\tau_0}{\\tau}} } \\approx {v:V}.'
+)
+@variant.is_one_arg
 class Vishnyakova_4_10(variant.VariantTask):
-    def GetUpdate(self, *, A=None):
+    def GetUpdateOneArg(self, a):
+        r = (1 - (1 / float(a.n)) ** 2) ** 0.5
         return dict(
-            B=1,
+            v=Consts.c * r,
         )
 
 
 @variant.text('''
-    Время жизни нестабильного мюона, входящего в состав космических лучей, измеренное земным наблюдателем,
-    относительно которого мюон двигался со скоростью, составляющей 95% скорости света в вакууме, оказалось равным 6,4 мкс.
-    Каково время жизни мюона, покоящегося относительно наблюдателя? Ответ привести в микросекундах.
+    Время жизни нестабильной частицы, входящего в состав космических лучей, измеренное земным наблюдателем,
+    относительно которого частица двигалась со скоростью, составляющей {percent}\\% скорости света в вакууме, оказалось равным {t:V:e}.
+    Каково время жизни частицы, покоящейся относительно наблюдателя?
 ''')
 @variant.solution_space(80)
-@variant.arg(A=('A = {} a', [1]))
-@variant.answer_align([
-])
+@variant.arg(percent=['85', '75', '65'])
+@variant.arg(t='3.7/4.8/5.3/6.4/7.1 мкс')
+@variant.answer_short(
+    't = \\frac{t_0}{\\sqrt{1 - \\frac{v^2}{c^2}}}'
+    '\\implies t_0 = t\\sqrt{1 - \\frac{v^2}{c^2}} \\approx {t0:V}.'
+)
+@variant.is_one_arg
 class Vishnyakova_4_11(variant.VariantTask):
-    def GetUpdate(self, *, A=None):
+    def GetUpdateOneArg(self, a):
+        r = float(a.percent) / 100
         return dict(
-            B=1,
+            t0=a.t * (1 - r ** 2) ** 0.5,
         )

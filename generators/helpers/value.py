@@ -288,7 +288,7 @@ def calculate(left, right, action=None, units=None):
         other_precision = None
         other_value = Decimal(str(right))
     else:
-        raise RuntimeError('right {!r} is not supported')
+        raise RuntimeError(f'right {right!r} is not supported')
 
     precision = get_calc_precision(left, other_value, left.Precision, other_precision, action)
 
