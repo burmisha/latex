@@ -842,6 +842,24 @@ def get_all_variants(*, flt=None):
                 'refraction.Vishnyakova_3_6_4',
             ]},
         ),
+        Work(
+            task_id='2022-02-16 11БА - СТО - 1',
+            classes={'atomic.sto': [
+                'E_ratio_from_v_ratio',
+                'Vishnyakova_4_2',
+                'Vishnyakova_4_2_kin',
+                'E_P_from_v_ratio',
+                'Vishnyakova_4_4',
+                'Vishnyakova_4_5',
+                'beta_from_l_reduction',
+                'Vishnyakova_4_7',
+                'Vishnyakova_4_8',
+                'Vishnyakova_4_9',
+                'Vishnyakova_4_10',
+                'Vishnyakova_4_11',
+            ]},
+            page_splits=[6, 11],
+        ),
 
     ]
     if flt:
