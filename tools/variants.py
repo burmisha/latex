@@ -845,6 +845,8 @@ def get_all_variants(*, flt=None):
         Work(
             task_id='2022-02-16 11БА - СТО - 1',
             classes={'atomic.sto': [
+                'Theory01',
+                'Theory02',
                 'E_ratio_from_v_ratio',
                 'Vishnyakova_4_2',
                 'Vishnyakova_4_2_kin',
@@ -857,8 +859,10 @@ def get_all_variants(*, flt=None):
                 'Vishnyakova_4_9',
                 'Vishnyakova_4_10',
                 'Vishnyakova_4_11',
+                'Gelfgat_9_18',
+                'Equations',
             ]},
-            page_splits=[6, 11],
+            page_splits=[5, 11],
         ),
 
     ]
