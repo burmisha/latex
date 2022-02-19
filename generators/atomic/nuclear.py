@@ -315,18 +315,19 @@ class AtomCount12_Text(variant.VariantTask):
     (123, 51),  # Cu
     (190, 78),  # Pt
 ])
+@variant.is_one_arg
 class KernelCount(variant.VariantTask):
-    def GetUpdate(self, nuclons=None, electrons=None):
+    def GetUpdateOneArg(self, a):
         return dict(
-            neutrons=nuclons - electrons,
-            protons=electrons,
-            element=Elements.get_by_z_a(z=electrons, a=nuclons)
+            neutrons=a.nuclons - a.electrons,
+            protons=a.electrons,
+            element=Elements.get_by_z_a(z=a.electrons, a=a.nuclons)
         )
 
 
 @variant.solution_space(80)
 @variant.text('Запишите реакцию ${fallType}$-распада ${element:LaTeX}$.')
-@variant.answer('${element:LaTeX} \\to {res:LaTeX} + {add}$')
+@variant.answer_short('{reaction}')
 @variant.arg(fallType__element=[
     ('\\alpha', Elements.get_by_z_a(92, 238)),
     ('\\alpha', Elements.get_by_z_a(60, 144)),
@@ -337,19 +338,11 @@ class KernelCount(variant.VariantTask):
     ('\\beta', Elements.get_by_z_a(55, 137)),
     ('\\beta', Elements.get_by_z_a(11, 22)),
 ])
+@variant.is_one_arg
 class RadioFall(variant.VariantTask):
-    def GetUpdate(self, fallType, element):
-        if 'alpha' in fallType:
-            res = element.alpha()
-            add = '\\ce{^4_2 He}'
-        elif 'beta' in fallType:
-            res = element.beta()
-            add = 'e^- + \\tilde\\nu_e'
-        else:
-            raise RuntimeError(f'Unknown fallType: {fallType}')
+    def GetUpdateOneArg(self, a):
         return dict(
-            res=res,
-            add=add,
+            reaction=a.element.get_reaction(a.fallType),
         )
 
 # Ядерные реакции (27-30)

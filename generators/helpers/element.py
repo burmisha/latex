@@ -181,13 +181,15 @@ class Element:
             raise RuntimeError(f'Invalid fall: {fall}')
 
     def get_reaction(self, fall):
-        result = self.fall(fall)
         if fall == '\\beta^-' or fall == '\\beta':
             addenda = 'e^- + \\tilde\\nu_e'
         elif fall == '\\beta^+':
             addenda = 'e^+ + \\nu_e'
         elif fall == '\\alpha':
             addenda = '\\ce{^4_2{He}}'
+        else:
+            raise RuntimeError(f'Invalid fall: {fall}')
+
         return f'{self.get_ce()} \\to {self.fall(fall).get_ce()} + {addenda}'
 
     def __format__(self, fmt):
