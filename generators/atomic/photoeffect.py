@@ -115,3 +115,145 @@ class Chernoutsan_13_72(variant.VariantTask):
         return dict(
             B=1,
         )
+
+
+@variant.text('''
+    Электрон вылетает из металлической пластинки с кинетической энергией 1,8 эВ.
+    Какова длина волны света, вызывающего фотоэффект, если работа выхода электрона
+    из металла равна 1,3 эВ? 1эВ = 1,6:10°° Дж, постоянная Планка {Const.h:Task:e},
+    модуль заряда электрона {Const.e:Task:e}, скорость света {Const.c:Task:e}.
+''')
+@variant.solution_space(80)
+@variant.arg(A='A = 1/2/3 a')
+@variant.answer_align([
+])
+@variant.is_one_arg
+class Vishnyakova_5_1_1(variant.VariantTask):
+    def GetUpdateOneArg(self, a):
+        return dict(
+            B=a.A,
+        )
+
+
+@variant.text('''
+    Кинетическая энергия фотоэлектрона составляет 25% от работы выхода.
+    Во сколько раз энергия фотона, вырвавшего электрон, больше работы выхода?
+''')
+@variant.solution_space(80)
+@variant.arg(A='A = 1/2/3 a')
+@variant.answer_align([
+])
+@variant.is_one_arg
+class Vishnyakova_5_1_2(variant.VariantTask):
+    def GetUpdateOneArg(self, a):
+        return dict(
+            B=a.A,
+        )
+
+
+@variant.text('''
+    Найти потенциал, до которого может зарядиться металлическая пластина,
+    работа выхода электронов из которой 1,6 эВ, при длительном освещении
+    потоком фотонов с энергией 4 эВ. 1эВ = 1.6.1079 Дж, модуль заряда электрона {Const.e:Task:e}.
+''')
+@variant.solution_space(80)
+@variant.arg(A='A = 1/2/3 a')
+@variant.answer_align([
+])
+@variant.is_one_arg
+class Vishnyakova_5_1_3(variant.VariantTask):
+    def GetUpdateOneArg(self, a):
+        return dict(
+            B=a.A,
+        )
+
+
+@variant.text('''
+    Наибольшая длина волны излучения, способного вызвать фотоэффект у платины,
+    равна 0,234 мкм. Какова наибольшая кинетическая энергия вырываемых электронов
+    при облучении платины излучением с частотой 1,5`10'° Гц?
+    Постоянная Планка {Const.h:Task:e}. Скорость света {Const.c:Task:e}.
+''')
+@variant.solution_space(80)
+@variant.arg(A='A = 1/2/3 a')
+@variant.answer_align([
+])
+@variant.is_one_arg
+class Vishnyakova_5_1_4(variant.VariantTask):
+    def GetUpdateOneArg(self, a):
+        return dict(
+            B=a.A,
+        )
+
+
+@variant.text('''
+    При облучении некоторого металла светом частотой 2,2-10'° Гц
+    фототок прекращается при задерживающей разности потенциалов 6,6 В.
+    Определить красную границу фотоэффекта для этого металла.
+    Постоянная Планка {Const.h:Task:e}, модуль заряда электрона {Const.e:Task:e},
+    скорость света {Const.с:Task:e}.
+''')
+@variant.solution_space(80)
+@variant.arg(A='A = 1/2/3 a')
+@variant.answer_align([
+])
+@variant.is_one_arg
+class Vishnyakova_5_1_5(variant.VariantTask):
+    def GetUpdateOneArg(self, a):
+        return dict(
+            B=a.A,
+        )
+
+
+@variant.text('''
+    Красная граница фотоэффекта для некоторого металла соответствует длине волны 275 нм.
+    Определите задерживающую разность потенциалов для фотоэлектронов,
+    вырываемых с поверхности этого металла при освещении его светом с частотой 4,6-10'° Гц.
+    Постоянная Планка {Const.h:Task:e}, модуль заряда электрона {Const.e:Task:e}, скорость света {Const.c:Task:e}.
+''')
+@variant.solution_space(80)
+@variant.arg(A='A = 1/2/3 a')
+@variant.answer_align([
+])
+@variant.is_one_arg
+class Vishnyakova_5_1_6(variant.VariantTask):
+    def GetUpdateOneArg(self, a):
+        return dict(
+            B=a.A,
+        )
+
+
+@variant.text('''
+    На фотокатод, для которого красная граница фотоэффекта равна 240 нм,
+    приложено запирающее напряжение 1 В, при котором фототок прекратился.
+    Какова частота падающего на фотокатод света? Постоянная Планка {Const.h:Task:e},
+    модуль заряда электрона {Const.e:Task:e}, скорость света {Const.c:Task:e}.
+''')
+@variant.solution_space(80)
+@variant.arg(A='A = 1/2/3 a')
+@variant.answer_align([
+])
+@variant.is_one_arg
+class Vishnyakova_5_1_7(variant.VariantTask):
+    def GetUpdateOneArg(self, a):
+        return dict(
+            B=a.A,
+        )
+
+
+@variant.text('''
+    При облучении некоторого металла светом с частотой 9.10“ Гц
+    фототок прекращается при задерживающей разности потенциалов 1,8 В.
+    Найти задерживающую разность потенциалов для излучения с частотой Ш: 105 Гц.
+    Постоянная Планка {Const.h:Task:e}, модуль заряда электрона {Const.e:Task:e}.
+''')
+@variant.solution_space(80)
+@variant.arg(A='A = 1/2/3 a')
+@variant.answer_align([
+])
+@variant.is_one_arg
+class Vishnyakova_5_1_8(variant.VariantTask):
+    def GetUpdateOneArg(self, a):
+        return dict(
+            B=a.A,
+        )

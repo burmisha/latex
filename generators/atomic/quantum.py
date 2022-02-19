@@ -41,7 +41,6 @@ class Fotons(variant.VariantTask):
 # Сигнал радиолокатора отразился от самолёта и вернулся обратно через {}. Чему равно расстояние от локатора для самолёта?
 
 
-
 # Длина волны рентгеновского излучения больше длины волны видимого излучения.
 # Частота волны инфракрасного излучения больше частоты волны гамма-излучения.
 # Скорость распространения инфракрасного излучения составляет 200000 км/с
@@ -109,6 +108,74 @@ class Deduce01(variant.VariantTask):
 class Quantum1119(variant.VariantTask):  # 1119 Рымкевич
     pass
 
+
+@variant.text('''
+    Лазер мощностью М испускает и фотонов за 1 секунду.
+    Определить длину волны излучения лазера. Скорость света $с$, постоянная Планка $h$.
+''')
+@variant.solution_space(80)
+@variant.arg(A='A = 1/2/3 a')
+@variant.answer_align([
+])
+@variant.is_one_arg
+class Vishnyakova_5_1_9(variant.VariantTask):
+    def GetUpdateOneArg(self, a):
+        return dict(
+            B=a.A,
+        )
+
+
+@variant.text('''
+    Адаптированный к темноте глаз воспринимает свет с длиной волны 590 нм
+    при мощности падающего на зрачок глаза светового потока 3,7108 Вт.
+    Найти число фотонов, ежесекундно попадающих при этом на сетчатку глаза.
+    Постоянная Планка {Const.h:Task:e}, скорость света {Const.c:Task:e}.
+''')
+@variant.solution_space(80)
+@variant.arg(A='A = 1/2/3 a')
+@variant.answer_align([
+])
+@variant.is_one_arg
+class Vishnyakova_5_1_10(variant.VariantTask):
+    def GetUpdateOneArg(self, a):
+        return dict(
+            B=a.A,
+        )
+
+
+@variant.text('''
+    Монохроматический пучок света с длиной волны . падает нормально
+    на зеркальную поверхность и полностью отражается от нее.
+    Определить давление света на эту поверхность, если ежесекундно
+    на единицу площади падает п фотонов. Постоянная Планка $h$.
+''')
+@variant.solution_space(80)
+@variant.arg(A='A = 1/2/3 a')
+@variant.answer_align([
+])
+@variant.is_one_arg
+class Vishnyakova_5_1_11(variant.VariantTask):
+    def GetUpdateOneArg(self, a):
+        return dict(
+            B=a.A,
+        )
+
+
+@variant.text('''
+    Лазерный луч, падая нормально на зеркало, полностью от него отражается.
+    Определить импульс, получаемый зеркалом в 1 секунду, если за время {
+    лазер излучает энергию 2. Скорость света $c$.
+''')
+@variant.solution_space(80)
+@variant.arg(A='A = 1/2/3 a')
+@variant.answer_align([
+])
+@variant.is_one_arg
+class Vishnyakova_5_1_12(variant.VariantTask):
+    def GetUpdateOneArg(self, a):
+        return dict(
+            B=a.A,
+        )
 
 
 # Кванты света (21-23)
