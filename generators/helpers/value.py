@@ -307,12 +307,12 @@ def calculate(left, right, action=None, units=None):
 
     elif action in [Calculation.PLUS]:
         value = left.SI_Value + other_value
-        assert this_units == other_units
+        assert this_units == other_units, f'Invalid units: {this_units} vs {other_units}'
         calced_units = this_units
 
     elif action in [Calculation.MINUS]:
         value = left.SI_Value - other_value
-        assert this_units == other_units
+        assert this_units == other_units, f'Invalid units: {this_units} vs {other_units}'
         calced_units = this_units
 
     else:

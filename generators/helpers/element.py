@@ -136,9 +136,11 @@ class Element:
 
         if Z == 1 and A == 2:
             self._ru = 'дейтерий'
+            self._ru_roditel = 'дейтерия'
             self._X = 'D'
         elif Z == 1 and A == 3:
             self._ru = 'тритий'
+            self._ru_roditel = 'трития'
             self._X = 'T'
         else:
             self._ru = isotopes_cfg[Z][1]

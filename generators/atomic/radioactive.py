@@ -356,7 +356,7 @@ class Vishnyakova_5_3_12(variant.VariantTask):
 
 @variant.solution_space(150)
 @variant.text('''
-    Определите деффект массы (в а.е.м.) и энергию связи (в МэВ) ядра атома {element:LaTeX},
+    Определите дефект массы (в а.е.м.) и энергию связи (в МэВ) ядра атома {element:LaTeX},
     если его масса составляет {m_aem:Value|e}.
     Считать {Consts.m_p_aem:Task|e}, {Consts.m_n_aem:Task|e}.
 ''')
