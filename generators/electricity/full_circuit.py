@@ -1,5 +1,5 @@
 import generators.variant as variant
-from generators.helpers import UnitValue, letter_variants, n_times
+from generators.helpers import UnitValue, n_times
 
 
 @variant.text('''

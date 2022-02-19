@@ -1,5 +1,5 @@
 import generators.variant as variant
-from generators.helpers import letter_variants, Fraction, Consts, Decimal
+from generators.helpers import Fraction, Consts, Decimal
 import math
 
 

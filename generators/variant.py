@@ -4,7 +4,8 @@ import collections
 import hashlib
 import re
 
-from generators.helpers import UnitValue, Consts, letter_variants
+from generators.helpers import UnitValue, Consts
+from generators.helpers.args import letter_variants, LV_TEXT, LV_SOLUTION_SPACE
 from generators.helpers.vars import Vars
 from generators.helpers.fraction import Fraction, FractionFormatter
 
@@ -534,6 +535,30 @@ def arg(**kws):
 
         for key, value in kws.items():
             cls._vars.add(key, value)
+
+        return cls
+
+    return decorator
+
+
+def lv_variant_task(*args, **kwargs):
+    lv = letter_variants(*args, **kwargs)
+    def decorator(cls):
+        assert not hasattr(cls, 'SolutionSpace')
+        cls.SolutionSpace = LV_SOLUTION_SPACE
+
+        assert not hasattr(cls, 'TextTemplate')
+        cls.TextTemplate = LV_TEXT
+
+        assert not hasattr(cls, 'AnswerTestTemplate')
+        cls.AnswerTestTemplate = '{lv.Answer}'
+
+        assert not hasattr(cls, 'AnswerTemplate')
+        cls.AnswerTemplate = '${lv.Answer}$'
+
+        assert not hasattr(cls, '_vars')
+        cls._vars = Vars()
+        cls._vars.add('lv', lv)
 
         return cls
 

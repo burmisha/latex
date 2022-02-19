@@ -1,13 +1,10 @@
 import generators.variant as variant
-from generators.helpers import Consts, letter_variants, Elements, LV_TEXT
+from generators.helpers import Consts, Elements
 import itertools
 import math
 
 
-@variant.solution_space(40)
-@variant.text(LV_TEXT)
-@variant.answer_test('{lv.Answer}')
-@variant.arg(lv=letter_variants(
+@variant.lv_variant_task(
     {
         '$\\alpha$-излучение': 'обладает положительным зарядом',
         '$\\beta$-излучение': 'обладает отрицательным электрическим зарядом',
@@ -16,16 +13,12 @@ import math
     [],
     answers_count=3,
     mocks_count=0,
-))
-@variant.answer_short('{lv.Answer}')
+)
 class Definitions01(variant.VariantTask):
     pass
 
 
-@variant.solution_space(40)
-@variant.text(LV_TEXT)
-@variant.answer_test('{lv.Answer}')
-@variant.arg(lv=letter_variants(
+@variant.lv_variant_task(
     {
         '$\\alpha$-излучение': 'ядра атомов гелия',
         '$\\beta$-излучение': 'электроны',
@@ -34,16 +27,12 @@ class Definitions01(variant.VariantTask):
     [],
     answers_count=3,
     mocks_count=0,
-))
-@variant.answer_short('{lv.Answer}')
+)
 class Definitions02(variant.VariantTask):
     pass
 
 
-@variant.solution_space(40)
-@variant.text(LV_TEXT)
-@variant.answer_test('{lv.Answer}')
-@variant.arg(lv=letter_variants(
+@variant.lv_variant_task(
     {
         'атом Резерфорда': 'планетарная модель атома',
         'атом Томсона': '«пудинг с изюмом»',
@@ -51,16 +40,12 @@ class Definitions02(variant.VariantTask):
     [],
     answers_count=2,
     mocks_count=0,
-))
-@variant.answer_short('{lv.Answer}')
+)
 class Definitions03(variant.VariantTask):
     pass
 
 
-@variant.solution_space(40)
-@variant.text(LV_TEXT)
-@variant.answer_test('{lv.Answer}')
-@variant.arg(lv=letter_variants(
+@variant.lv_variant_task(
     {
         'размер атома': '$10^{-8}\\units{см}$',
         'размер ядра атома': '$10^{-13}\\units{см}$',
@@ -68,16 +53,12 @@ class Definitions03(variant.VariantTask):
     ['$10^{-15}\\units{см}$', '$10^{-10}\\units{см }$'],
     answers_count=2,
     mocks_count=1,
-))
-@variant.answer_short('{lv.Answer}')
+)
 class Definitions04(variant.VariantTask):
     pass
 
 
-@variant.solution_space(40)
-@variant.text(LV_TEXT)
-@variant.answer_test('{lv.Answer}')
-@variant.arg(lv=letter_variants(
+@variant.lv_variant_task(
     {
         'массовое число водорода \\ce{^{1}_{1}H}': 1,
         'массовое число углерода \\ce{^{12}_{6}C}': 12,
@@ -91,16 +72,12 @@ class Definitions04(variant.VariantTask):
     [4, 10, 11, 9, 5],
     answers_count=2,
     mocks_count=2,
-))
-@variant.answer_short('{lv.Answer}')
+)
 class Definitions05(variant.VariantTask):
     pass
 
 
-@variant.solution_space(40)
-@variant.text(LV_TEXT)
-@variant.answer_test('{lv.Answer}')
-@variant.arg(lv=letter_variants(
+@variant.lv_variant_task(
     {
         'массовое число $\\alpha$-частицы': 4,
         'массовое число $\\beta$-частицы': 0,
@@ -112,8 +89,7 @@ class Definitions05(variant.VariantTask):
     [1, -2],
     answers_count=3,
     mocks_count=2,
-))
-@variant.answer_short('{lv.Answer}')
+)
 class Definitions06(variant.VariantTask):
     pass
 

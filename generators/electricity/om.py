@@ -1,19 +1,10 @@
 import itertools
 
 import generators.variant as variant
-from generators.helpers import UnitValue, letter_variants, Fraction, n_times
+from generators.helpers import UnitValue, Fraction, n_times
 from decimal import Decimal
 
-@variant.solution_space(20)
-@variant.text('''
-    Установите каждой букве в соответствие ровно одну цифру и запишите ответ (только цифры, без других символов).
-
-    {lv.Questions}.
-
-    {lv.Options}.
-''')
-@variant.answer_test('{lv.Answer}')
-@variant.arg(lv=letter_variants(
+@variant.lv_variant_task(
     {
         'разность потенциалов': '$U$',
         'электрическое сопротивление резистора': '$R$',
@@ -25,22 +16,12 @@ from decimal import Decimal
     ['$D$', '$k$', '$\\lambda$'],
     answers_count=3,
     mocks_count=2,
-))
-@variant.answer_short('{lv.Answer}')
+)
 class Definitions01(variant.VariantTask):
     pass
 
 
-@variant.solution_space(20)
-@variant.text('''
-    Установите каждой букве в соответствие ровно одну цифру и запишите ответ (только цифры, без других символов).
-
-    {lv.Questions}.
-
-    {lv.Options}.
-''')
-@variant.answer_test('{lv.Answer}')
-@variant.arg(lv=letter_variants(
+@variant.lv_variant_task(
     {
 
         'разность потенциалов': 'вольт',
@@ -52,22 +33,12 @@ class Definitions01(variant.VariantTask):
     ['генри', 'ватт', 'сименс'],
     answers_count=3,
     mocks_count=2,
-))
-@variant.answer_short('{lv.Answer}')
+)
 class Definitions02(variant.VariantTask):
     pass
 
 
-@variant.solution_space(20)
-@variant.text('''
-    Установите каждой букве в соответствие ровно одну цифру и запишите ответ (только цифры, без других символов).
-
-    {lv.Questions}.
-
-    {lv.Options}.
-''')
-@variant.answer_test('{lv.Answer}')
-@variant.arg(lv=letter_variants(
+@variant.lv_variant_task(
     {
 
         'закон Ома': '$\\eli R = U$',
@@ -78,22 +49,12 @@ class Definitions02(variant.VariantTask):
     ['$\\frac{2R_1R_2}{R_1 + R_2}$', '$\\frac{R_1 + R_2} 2$', '$\\sqrt{R_1R_2}$', '$\\rho = R l S$', '$R = \\rho \\frac Sl$', '$\\frac{\\eli} R = U$' ],
     answers_count=2,
     mocks_count=3,
-))
-@variant.answer_short('{lv.Answer}')
+)
 class Definitions03(variant.VariantTask):
     pass
 
 
-@variant.solution_space(20)
-@variant.text('''
-    Установите каждой букве в соответствие ровно одну цифру и запишите ответ (только цифры, без других символов).
-
-    {lv.Questions}.
-
-    {lv.Options}.
-''')
-@variant.answer_test('{lv.Answer}')
-@variant.arg(lv=letter_variants(
+@variant.lv_variant_task(
     {
 
         'эквивалентное сопротивление 3 резисторов (параллельно)': '$\\frac{R_1R_2R_3}{R_1R_2 + R_2R_3 + R_3R_1}$',
@@ -102,8 +63,7 @@ class Definitions03(variant.VariantTask):
     ['$\\frac{R_1R_2R_3}{R_1 + R_2 + R_3}$', '$\\frac{R_1 + R_2 + R_3}3$', '$\\frac 3{\\frac 1{R_1} + \\frac 1{R_2} + \\frac 1{R_3}}$', '$\\sqrt{\\frac{R_1^2 + R_2^2 + R_3^2}3}$',],
     answers_count=2,
     mocks_count=3,
-))
-@variant.answer_short('{lv.Answer}')
+)
 class Definitions04(variant.VariantTask):
     pass
 

@@ -1,6 +1,6 @@
 import generators.variant as variant
 
-from generators.helpers import letter_variants, Fraction, Consts, n_times
+from generators.helpers import Fraction, Consts, n_times
 
 import math
 

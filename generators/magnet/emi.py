@@ -1,21 +1,12 @@
 import itertools
 
 import generators.variant as variant
-from generators.helpers import Consts, letter_variants
+from generators.helpers import Consts
 
 import math
 
 
-@variant.solution_space(20)
-@variant.text('''
-    Установите каждой букве в соответствие ровно одну цифру и запишите ответ (только цифры, без других символов).
-
-    {lv.Questions}.
-
-    {lv.Options}.
-''')
-@variant.answer_test('{lv.Answer}')
-@variant.arg(lv=letter_variants(
+@variant.lv_variant_task(
     {
         'индукция магнитного поля': '$B$',
         'магнитный поток': '$\\Phi$',
@@ -28,22 +19,12 @@ import math
     ['$D$', '$v$', '$U$', '$l$'],
     answers_count=2,
     mocks_count=2,
-))
-@variant.answer_short('{lv.Answer}')
+)
 class Definitions01(variant.VariantTask):
     pass
 
 
-@variant.solution_space(20)
-@variant.text('''
-    Установите каждой букве в соответствие ровно одну цифру и запишите ответ (только цифры, без других символов).
-
-    {lv.Questions}.
-
-    {lv.Options}.
-''')
-@variant.answer_test('{lv.Answer}')
-@variant.arg(lv=letter_variants(
+@variant.lv_variant_task(
     {
         'индукция магнитного поля': 'Тл',
         'магнитный поток': 'Вб',
@@ -54,22 +35,12 @@ class Definitions01(variant.VariantTask):
     ['Кл', 'Ом', 'Гц', 'Гн'],
     answers_count=3,
     mocks_count=2,
-))
-@variant.answer_short('{lv.Answer}')
+)
 class Definitions02(variant.VariantTask):
     pass
 
 
-@variant.solution_space(20)
-@variant.text('''
-    Установите каждой букве в соответствие ровно одну цифру и запишите в ответ только цифры (без других символов).
-
-    {lv.Questions}.
-
-    {lv.Options}.
-''')
-@variant.answer_test('{lv.Answer}')
-@variant.arg(lv=letter_variants(
+@variant.lv_variant_task(
     {
         '$\\ele$': '$-\\frac{\\Delta \\Phi}{\\Delta t}$',
         '$\\Delta t$': '$t_2 - t_1$',
@@ -78,8 +49,7 @@ class Definitions02(variant.VariantTask):
     ['$t_1 - t_2$', '$\\Phi_1 - \\Phi_2$'],
     answers_count=3,
     mocks_count=2,
-))
-@variant.answer_short('{lv.Answer}')
+)
 class Definitions03(variant.VariantTask):
     pass
 

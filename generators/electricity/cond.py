@@ -1,5 +1,5 @@
 import generators.variant as variant
-from generators.helpers import Fraction, n_times, letter_variants, Decimal, LV_TEXT
+from generators.helpers import Fraction, n_times, Decimal, LV_TEXT
 
 
 @variant.solution_space(40)
@@ -31,10 +31,7 @@ class Definitions02(variant.VariantTask):
 
 
 
-@variant.solution_space(40)
-@variant.text(LV_TEXT)
-@variant.answer_test('{lv.Answer}')
-@variant.arg(lv=letter_variants(
+@variant.lv_variant_task(
     {
         'электроёмкость': 'фарад',
         'напряжённость электрического поля': 'Н / Кл',
@@ -45,17 +42,12 @@ class Definitions02(variant.VariantTask):
     ['генри', 'ватт', 'ампер'],
     answers_count=3,
     mocks_count=2,
-))
-@variant.answer_short('{lv.Answer}')
+)
 class Definitions03(variant.VariantTask):
     pass
 
 
-@variant.solution_space(40)
-@variant.text(LV_TEXT)
-@variant.answer_test('{lv.Answer}')
-@variant.answer_short('{lv.Answer}')
-@variant.arg(lv=letter_variants(
+@variant.lv_variant_task(
     {
         'электроёмкость': '$C$',
         'напряжённость электрического поля': '$E$',
@@ -67,7 +59,7 @@ class Definitions03(variant.VariantTask):
     ['$r$', '$\\eps$'],
     answers_count=3,
     mocks_count=2,
-))
+)
 class Definitions04(variant.VariantTask):
     pass
 

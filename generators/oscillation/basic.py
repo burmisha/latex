@@ -1,17 +1,8 @@
 import generators.variant as variant
-from generators.helpers import letter_variants, Decimal
+from generators.helpers import Decimal
 
 
-@variant.solution_space(0)
-@variant.text('''
-    Установите каждой букве в соответствие ровно одну цифру и запишите ответ (только цифры, без других символов).
-
-    {lv.Questions}.
-
-    {lv.Options}.
-''')
-@variant.answer_test('{lv.Answer}')
-@variant.arg(lv=letter_variants(
+@variant.lv_variant_task(
     {
         'период колебаний': '$T$',
         'частота колебаний': '$\\nu$',
@@ -22,22 +13,12 @@ from generators.helpers import letter_variants, Decimal
     ['$\\frac{2\\pi}{\\nu}$', '$\\frac{\\nu}{2\\pi}$', '$tN$'],
     answers_count=3,
     mocks_count=2,
-))
-@variant.answer_short('{lv.Answer}')
+)
 class Definitions01(variant.VariantTask):
     pass
 
 
-@variant.solution_space(0)
-@variant.text('''
-    Установите каждой букве в соответствие ровно одну цифру и запишите ответ (только цифры, без других символов).
-
-    {lv.Questions}.
-
-    {lv.Options}.
-''')
-@variant.answer_test('{lv.Answer}')
-@variant.arg(lv=letter_variants(
+@variant.lv_variant_task(
     {
         'период колебаний': 'c',
         'частота колебаний': 'Гц',
@@ -46,8 +27,7 @@ class Definitions01(variant.VariantTask):
     ['м / с', 'Гн'],
     answers_count=2,
     mocks_count=2,
-))
-@variant.answer_short('{lv.Answer}')
+)
 class Definitions02(variant.VariantTask):
     pass
 
