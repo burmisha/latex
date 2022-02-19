@@ -12,6 +12,14 @@ TOTAL_TIMES = {
     10: ('десять', 'раз'),
 }
 
+LV_TEXT = '''
+    Установите соответствие буквам и запишите в ответ набор цифр (без других символов).
+
+    {lv.Questions}.
+
+    {lv.Options}.
+'''
+
 
 def permute(*options):
     return list(itertools.permutations(options))

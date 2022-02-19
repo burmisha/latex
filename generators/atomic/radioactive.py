@@ -1,17 +1,11 @@
 import generators.variant as variant
-from generators.helpers import Consts, letter_variants, Elements
+from generators.helpers import Consts, letter_variants, Elements, LV_TEXT
 import itertools
 import math
 
 
 @variant.solution_space(40)
-@variant.text('''
-    Установите соответствие буквам и запишите в ответ набор цифр (без других символов).
-
-    {lv.Questions}.
-
-    {lv.Options}.
-''')
+@variant.text(LV_TEXT)
 @variant.answer_test('{lv.Answer}')
 @variant.arg(lv=letter_variants(
     {
@@ -29,13 +23,7 @@ class Definitions01(variant.VariantTask):
 
 
 @variant.solution_space(40)
-@variant.text('''
-    Установите соответствие буквам и запишите в ответ набор цифр (без других символов).
-
-    {lv.Questions}.
-
-    {lv.Options}.
-''')
+@variant.text(LV_TEXT)
 @variant.answer_test('{lv.Answer}')
 @variant.arg(lv=letter_variants(
     {
@@ -53,13 +41,7 @@ class Definitions02(variant.VariantTask):
 
 
 @variant.solution_space(40)
-@variant.text('''
-    Установите соответствие буквам и запишите в ответ набор цифр (без других символов).
-
-    {lv.Questions}.
-
-    {lv.Options}.
-''')
+@variant.text(LV_TEXT)
 @variant.answer_test('{lv.Answer}')
 @variant.arg(lv=letter_variants(
     {
@@ -76,13 +58,7 @@ class Definitions03(variant.VariantTask):
 
 
 @variant.solution_space(40)
-@variant.text('''
-    Установите соответствие буквам и запишите в ответ набор цифр (без других символов).
-
-    {lv.Questions}.
-
-    {lv.Options}.
-''')
+@variant.text(LV_TEXT)
 @variant.answer_test('{lv.Answer}')
 @variant.arg(lv=letter_variants(
     {
@@ -99,13 +75,7 @@ class Definitions04(variant.VariantTask):
 
 
 @variant.solution_space(40)
-@variant.text('''
-    Установите соответствие буквам и запишите в ответ набор цифр (без других символов).
-
-    {lv.Questions}.
-
-    {lv.Options}.
-''')
+@variant.text(LV_TEXT)
 @variant.answer_test('{lv.Answer}')
 @variant.arg(lv=letter_variants(
     {
@@ -128,13 +98,7 @@ class Definitions05(variant.VariantTask):
 
 
 @variant.solution_space(40)
-@variant.text('''
-    Установите соответствие буквам и запишите в ответ набор цифр (без других символов).
-
-    {lv.Questions}.
-
-    {lv.Options}.
-''')
+@variant.text(LV_TEXT)
 @variant.answer_test('{lv.Answer}')
 @variant.arg(lv=letter_variants(
     {

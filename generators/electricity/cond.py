@@ -1,5 +1,5 @@
 import generators.variant as variant
-from generators.helpers import Fraction, n_times, letter_variants, Decimal
+from generators.helpers import Fraction, n_times, letter_variants, Decimal, LV_TEXT
 
 
 @variant.solution_space(40)
@@ -32,13 +32,7 @@ class Definitions02(variant.VariantTask):
 
 
 @variant.solution_space(40)
-@variant.text('''
-    Установите соответствие и запишите в ответ набор цифр (без других символов).
-
-    {lv.Questions}.
-
-    {lv.Options}.
-''')
+@variant.text(LV_TEXT)
 @variant.answer_test('{lv.Answer}')
 @variant.arg(lv=letter_variants(
     {
@@ -58,13 +52,7 @@ class Definitions03(variant.VariantTask):
 
 
 @variant.solution_space(40)
-@variant.text('''
-    Установите соответствие и запишите в ответ набор цифр (без других символов).
-
-    {lv.Questions}.
-
-    {lv.Options}.
-''')
+@variant.text(LV_TEXT)
 @variant.answer_test('{lv.Answer}')
 @variant.answer_short('{lv.Answer}')
 @variant.arg(lv=letter_variants(
