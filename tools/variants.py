@@ -864,6 +864,20 @@ def get_all_variants(*, flt=None):
             ]},
             page_splits=[5, 11],
         ),
+        Work(
+            task_id='2022-02-17 11Б - СТО - 1',
+            classes={'atomic.sto': [
+                # 'Theory01',
+                'Theory02',
+                'E_ratio_from_v_ratio',
+                'Vishnyakova_4_2',
+                'Vishnyakova_4_2_kin',
+                # 'E_P_from_v_ratio',
+                'Vishnyakova_4_4',
+                # 'Vishnyakova_4_5',
+                'Gelfgat_9_9',
+            ]},
+        ),
 
     ]
     if flt:
