@@ -2,6 +2,7 @@ import datetime
 import time
 
 FULL_DATE_FORMAT = '%Y-%m-%d %H:%M:%S'
+DAY_DATE_FORMAT = '%Y-%m-%d'
 
 
 def formatTimestamp(timestamp, fmt=None):
@@ -25,7 +26,7 @@ class NowDelta:
             elif isinstance(dt, datetime.datetime):
                 self._now = dt
             else:
-                raise RuntimeException(f'Unknown datetime {dt}')
+                raise RuntimeException(f'Unknown datetime to parse: {dt}')
         self._default_fmt = default_fmt
 
     def _Format(self, dt, fmt=None):
