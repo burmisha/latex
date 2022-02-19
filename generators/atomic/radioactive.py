@@ -169,6 +169,80 @@ class Definitions07(variant.VariantTask):
 
 @variant.solution_space(150)
 @variant.text('''
+    Определите неизвестный продукт X ядерной реакции ${reaction}$.
+''')
+@variant.answer_short('{X}')
+@variant.arg(reaction__X=[
+    ('\\ce{^{10}_{5}B} + \\alpha \\to \\ce{^{14}_{7}N} + X', ''),
+])
+class Vishnyakova_5_3_6(variant.VariantTask):
+    pass
+
+
+@variant.solution_space(80)
+@variant.text('''
+    В какое ядро превращается в результате ядерного распада?
+    Запишите уравнение реакции и явно укажите число протонов и нейтронов в получившемся ядре.
+    \\begin{itemize}
+        \\item {element1:RuName}, ${fall1}$-распад,
+        \\item {element2:RuName}, ${fall2}$-распад,
+        \\item {element3:RuName}, ${fall3}$-распад,
+        \\item {element4:RuName}, ${fall4}$-распад.
+    \\end{itemize}
+''')
+@variant.answer_align([
+    '{reaction1}: \\qquad \\text{{r1:RuName}}: {r1:protons}\,p^+, {r1:neutrons}\,n^0,',
+    '{reaction2}: \\qquad \\text{{r2:RuName}}: {r2:protons}\,p^+, {r2:neutrons}\,n^0,',
+    '{reaction3}: \\qquad \\text{{r3:RuName}}: {r3:protons}\,p^+, {r3:neutrons}\,n^0,',
+    '{reaction4}: \\qquad \\text{{r4:RuName}}: {r4:protons}\,p^+, {r4:neutrons}\,n^0.',
+])
+@variant.arg(element1__fall1=[
+    (Elements.get_by_z_a(90, 234), '\\beta^-'),            # Белолипецкий 6.86
+    (Elements.get_by_ru_a('торий', 234), '\\beta'),        # Марон 9 840
+    (Elements.get_by_ru_a('протактиний', 234), '\\beta'),  # Марон 9 840
+    (Elements.get_by_z_a(15, 30), '\\beta^+'),             # Белолипецкий 6.89
+    (Elements.get_by_z_a(6, 14), '\\beta^-'),              # Марон 9 832
+])
+@variant.arg(element2__fall2=[
+    (Elements.get_by_z_a(88, 226), '\\alpha'),             # Белолипецкий 6.87
+    (Elements.get_by_z_a(84, 210), '\\alpha'),             # Белолипецкий 6.88
+    (Elements.get_by_ru_a('уран', 238), '\\alpha'),        # Марон 9 840
+    (Elements.get_by_ru_a('уран', 234), '\\alpha'),        # Марон 9 840
+    (Elements.get_by_ru_a('торий', 230), '\\alpha'),       # Марон 9 840
+    (Elements.get_by_ru_a('радий', 226), '\\alpha'),       # Марон 9 840
+    (Elements.get_by_ru_a('радон', 222), '\\alpha'),       # Марон 9 840
+])
+@variant.arg(element3__fall3=[
+    (Elements.get_by_ru_a('полоний', 218), '\\alpha'),     # Марон 9 840
+    (Elements.get_by_ru_a('свинец', 214), '\\alpha'),      # Марон 9 840
+    (Elements.get_by_ru_a('висмут', 214), '\\beta'),       # Марон 9 840
+    (Elements.get_by_ru_a('полоний', 214), '\\alpha'),     # Марон 9 840
+    (Elements.get_by_ru_a('свинец', 210), '\\beta'),       # Марон 9 840
+    (Elements.get_by_ru_a('висмут', 210), '\\beta'),       # Марон 9 840
+    (Elements.get_by_ru_a('полоний', 210), '\\beta'),      # Марон 9 840
+    (Elements.get_by_ru_a('свинец', 206), '\\alpha'),      # Марон 9 840
+])
+@variant.arg(element4__fall4=[
+    (Elements.get_by_ru_a('плутоний', 239), '\\alpha'),    # Марон 9 ДМ СР 2-2
+    (Elements.get_by_ru_a('свинец', 209), '\\beta'),       # Марон 9 ДМ СР 10-2
+])
+@variant.is_one_arg
+class WriteRadioFall(variant.VariantTask):  
+    def GetUpdateOneArg(self, a):
+        return dict(
+            r1=a.element1.fall(a.fall1),
+            reaction1=a.element1.get_reaction(a.fall1),
+            r2=a.element2.fall(a.fall2),
+            reaction2=a.element2.get_reaction(a.fall2),
+            r3=a.element3.fall(a.fall3),
+            reaction3=a.element3.get_reaction(a.fall3),
+            r4=a.element4.fall(a.fall4),
+            reaction4=a.element4.get_reaction(a.fall4),
+        )
+
+
+@variant.solution_space(150)
+@variant.text('''
     Какая доля (от начального количества) радиоактивных ядер {what} через время,
     равное {when} периодам полураспада? Ответ выразить в процентах.
 ''')
@@ -187,7 +261,7 @@ class Definitions07(variant.VariantTask):
     ('трём', 3),
     ('четырём', 4),
 ])
-class BK_53_01(variant.VariantTask):  # Вишнякова - Базовый курс 5.3 - задача 01
+class Vishnyakova_5_3_1(variant.VariantTask):
     def GetUpdate(self, what=None, when=None, t=None):
         share = 2. ** (-t)
         left = 1. - share
@@ -201,7 +275,7 @@ class BK_53_01(variant.VariantTask):  # Вишнякова - Базовый ку
 
 
 @variant.text('''
-    Какой период полураспада радиоактивного изотопа,
+    Каков период полураспада радиоактивного изотопа,
     если за {time} ч в среднем распадается {delta} атомов из {total}?
 ''')
 @variant.answer_short('''
@@ -253,7 +327,7 @@ class Quantum1120(variant.VariantTask):  # 1120 Рымкевич
 ])
 @variant.arg(t=['t = %s суток' % t for t in ['91.2', '136.8', '182.4']])
 @variant.arg(T=['T = 45.6 суток'])
-class BK_53_02(variant.VariantTask):  # Вишнякова - Базовый курс 5.3 - задача 02
+class Vishnyakova_5_3_2(variant.VariantTask):  # Вишнякова - Базовый курс 5.3 - задача 02
     def GetUpdate(self, t=None, T=None):
         share = 2 ** float(- (t / T).SI_Value)
         return dict(
@@ -289,7 +363,7 @@ class BK_53_02(variant.VariantTask):  # Вишнякова - Базовый ку
     ('одна шестнадцатая', 16, 4),
 ])
 @variant.arg(t=['%d суток' % t for t in [2, 3, 4, 5]])
-class BK_53_03(variant.VariantTask):  # Вишнякова - Базовый курс 5.3 - задача 03
+class Vishnyakova_5_3_3(variant.VariantTask):
     def GetUpdate(self, how=None, t=None, num=None, log_num=None):
         return dict(
             T=(t / log_num).IncPrecision(1).As('суток'),
@@ -328,7 +402,7 @@ class BK_53_03(variant.VariantTask):  # Вишнякова - Базовый ку
     ('кислорода \\ce{^{17}_{8}O}', 'E = 131.8 МэВ'),
     ('кислорода \\ce{^{18}_{8}O}', 'E = 139.8 МэВ'),
 ])
-class BK_53_12(variant.VariantTask):  # Вишнякова - Базовый курс 5.3 - задача 12
+class Vishnyakova_5_3_12(variant.VariantTask):
     def GetUpdate(self, element=None, E=None):
         c = Consts.c_4
         dm = E / c / c

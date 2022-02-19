@@ -188,7 +188,7 @@ def get_all_variants(*, flt=None):
         ),
         Work(
             task_id='2020-04-22 9А',
-            classes={'atomic.radioactive': ['BK_53_01', 'BK_53_02', 'BK_53_03', 'BK_53_12']},
+            classes={'atomic.radioactive': ['Vishnyakova_5_3_1', 'Vishnyakova_5_3_2', 'Vishnyakova_5_3_3', 'Vishnyakova_5_3_12']},
         ),
         Work(
             task_id='2020-04-28 9Л',
@@ -199,7 +199,7 @@ def get_all_variants(*, flt=None):
             classes={'atomic': [
                 {'sto': ['Equations', 'E_ratio_from_v_ratio', 'E_P_from_v_ratio', 'beta_from_l_reduction']},
                 {'h_levels': ['Lambda_from_E', 'Lambda_from_E_2', 'H_levels']}, 'quantum.Fotons',
-                {'radioactive': ['BK_53_01', 'BK_53_02', 'BK_53_03', 'BK_53_12']}
+                {'radioactive': ['Vishnyakova_5_3_1', 'Vishnyakova_5_3_2', 'Vishnyakova_5_3_3', 'Vishnyakova_5_3_12']}
             ]},
         ),
         Work(
@@ -494,7 +494,7 @@ def get_all_variants(*, flt=None):
         ),
         Work(
             task_id='2021-04-30 9',
-            classes={'atomic': ['nuclear.KernelCount', 'nuclear.RadioFall', 'radioactive.BK_53_12', 'radioactive.Delta_m_from_m', 'h_levels.H_levels']},
+            classes={'atomic': ['nuclear.KernelCount', 'nuclear.RadioFall', 'radioactive.Vishnyakova_5_3_12', 'radioactive.Delta_m_from_m', 'h_levels.H_levels']},
         ),
         Work(
             task_id='2021-04-31 10',
@@ -514,7 +514,7 @@ def get_all_variants(*, flt=None):
         ),
         Work(
             task_id='2021-05-13 9',
-            classes={'atomic.radioactive': ['BK_53_01', 'BK_53_02', 'BK_53_03', 'BK_53_12']},
+            classes={'atomic.radioactive': ['Vishnyakova_5_3_1', 'Vishnyakova_5_3_2', 'Vishnyakova_5_3_3', 'Vishnyakova_5_3_12']},
         ),
         Work(
             task_id='2021-05-18 10',
@@ -875,6 +875,12 @@ def get_all_variants(*, flt=None):
                 'Gelfgat_9_9',
             ]},
         ),
+        # Work(
+        #     task_id='2022-02-18 11Б - СТО - 1',
+        #     classes={'atomic.radioactive': [
+        #         'WriteRadioFall',
+        #     ]},
+        # ),
 
     ]
     if flt:
