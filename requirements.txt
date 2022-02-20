@@ -12,4 +12,9 @@ pytesseract==0.3.8
 python-Levenshtein
 pyyaml
 retry
-pystyle==0.6
+# pystyle==0.6
+
+# dev
+# black==22.1.0
+# yapf==0.32.0
+# toml==0.10.2
