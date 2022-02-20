@@ -14,32 +14,20 @@ class Isotope:
     ru: str = attr.ib()
     ru_roditelny: str = attr.ib()
     stable_a: List[int] = attr.ib()
-    lower_a: Optional[int] = attr.ib(default=0)
-    upper_a: Optional[int] = attr.ib(default=0)
+    lower_a: int = attr.ib()
+    upper_a: int = attr.ib()
 
     def GetOne(self, a: int):
         return Element(Z=self.Z, A=a, X=self.X, ru=self.ru, ru_roditelny=self.ru_roditelny)
 
     def GetAll(self):
-        lower_bound = self.lower_a or (min(self.stable_a) if self.stable_a else None)
-        upper_bound = self.upper_a or (max(self.stable_a) if self.stable_a else None)
-        if lower_bound and upper_bound:
-            a_values = range(lower_bound, upper_bound + 1)
-        else:
-            a_values = []
-
-        for a in a_values:
+        for a in range(self.lower_a, self.upper_a + 1):
             yield Element(Z=self.Z, A=a, X=self.X, ru=self.ru, ru_roditelny=self.ru_roditelny)
 
     def GetStable(self):
         for a in sorted(self.stable_a):
             yield Element(Z=self.Z, A=a, X=self.X, ru=self.ru, ru_roditelny=self.ru_roditelny)
 
-
-# see https://ru.wikipedia.org/wiki/%D0%A2%D0%B0%D0%B1%D0%BB%D0%B8%D1%86%D0%B0_%D0%B8%D0%B7%D0%BE%D1%82%D0%BE%D0%BF%D0%BE%D0%B2
-# https://ru.wikipedia.org/wiki/%D0%A1%D0%BF%D0%B8%D1%81%D0%BE%D0%BA_%D1%85%D0%B8%D0%BC%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D1%85_%D1%8D%D0%BB%D0%B5%D0%BC%D0%B5%D0%BD%D1%82%D0%BE%D0%B2
-Isotopes = [Isotope(**kws) for kws in library.files.load_yaml_data('isotopes.yaml')]
-IsotopeByZ = {isotope.Z: isotope for isotope in Isotopes}
 
 
 class FallType:
@@ -61,18 +49,9 @@ class Element:
         self._A = A
         self._Z = Z
 
-        if Z == 1 and A == 2:
-            self._ru = 'дейтерий'
-            self._ru_roditel = 'дейтерия'
-            self._X = 'D'
-        elif Z == 1 and A == 3:
-            self._ru = 'тритий'
-            self._ru_roditel = 'трития'
-            self._X = 'T'
-        else:
-            self._ru = ru
-            self._ru_roditel = ru_roditelny
-            self._X = X
+        self._ru = ru
+        self._ru_roditel = ru_roditelny
+        self._X = X
 
         self.e = int(self._Z)
         self.p = int(self._Z)
@@ -88,13 +67,13 @@ class Element:
         return f'ядро {self._ru_roditel} ${self.get_ce()}$'
 
     def alpha(self):
-        return IsotopeByZ[self._Z - 2].GetOne(self._A - 4)
+        return ElementsByZA[(self._Z - 2, self._A - 4)]
 
     def beta_minus(self):
-        return IsotopeByZ[self._Z + 1].GetOne(self._A)
+        return ElementsByZA[(self._Z + 1, self._A)]
 
     def beta_plus(self):
-        return IsotopeByZ[self._Z - 1].GetOne(self._A)
+        return ElementsByZA[(self._Z - 1, self._A)]
 
     def beta(self):
         return self.beta_minus()
@@ -147,6 +126,18 @@ class Element:
         except Exception:
             log.error(f'Error in __format__ for {fmt}')
             raise
+
+# see urls and file to parse it
+# https://ru.wikipedia.org/wiki/%D0%A2%D0%B0%D0%B1%D0%BB%D0%B8%D1%86%D0%B0_%D0%B8%D0%B7%D0%BE%D1%82%D0%BE%D0%BF%D0%BE%D0%B2
+# https://ru.wikipedia.org/wiki/%D0%A1%D0%BF%D0%B8%D1%81%D0%BE%D0%BA_%D1%85%D0%B8%D0%BC%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D1%85_%D1%8D%D0%BB%D0%B5%D0%BC%D0%B5%D0%BD%D1%82%D0%BE%D0%B2
+Isotopes = [Isotope(**kws) for kws in library.files.load_yaml_data('isotopes.yaml')]
+ElementsByZA = {
+    (element._Z, element._A): element
+    for isotope in Isotopes
+    for element in isotope.GetAll()
+}
+
+assert len(ElementsByZA) == 3338
 
 
 class LoadedElements:

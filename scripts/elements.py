@@ -6,7 +6,6 @@ URL = 'https://ru.wikipedia.org/wiki/%D0%A2%D0%B0%D0%B1%D0%BB%D0%B8%D1%86%D0%B0_
 
 from collections import defaultdict
 
-TMP_FILE = os.path.join(os.getenv('HOME'), 'tmp', 'elements.html')
 
 def download_file(url, file):
     r = requests.get(url)
@@ -15,36 +14,45 @@ def download_file(url, file):
         f.write(r.content)
 
 
-download_file(URL, TMP_FILE)
+class FallTime:
+    Stable = 'stable'
+    Instable = 'instable'
+    Instable = 'instable'
+    Upto10d = 'upto10d'
+    Upto100d = 'upto100d'
+    Upto10y = 'upto10y'
+    Upto10ky = 'upto10ky'
+    Upto700my = 'upto700my'
+    Morethan700my = 'morethan700my'
 
 
 def get_fall_time(line):
     if 'Период полураспада: Стабильный' in line:
-        return 'stable'
-    if 'Период полураспада: Нестабильный' in line:
-        return 'instable'
-    if 'Период полураспада – Изотоп: Нестабильный' in line:
-        return 'instable'
+        return FallTime.Stable
+    elif 'Период полураспада: Нестабильный' in line:
+        return FallTime.Instable
     elif 'Период полураспада: 1 — 10 дней' in line:
-        return 'upto10d'
+        return FallTime.Upto10d
     elif 'Период полураспада: 10 — 100 дней' in line:
-        return 'upto100d'
+        return FallTime.Upto100d
     elif 'Период полураспада: 100 дней — 10 лет' in line:
-        return 'upto10y'
+        return FallTime.Upto10y
     elif 'Период полураспада: 10 — 10 000 лет' in line:
-        return 'upto10ky'
+        return FallTime.Upto10ky
     elif 'Период полураспада: 10 тыс. — 700 млн лет' in line:
-        return 'upto700my'
+        return FallTime.Upto700my
     elif 'Период полураспада: &gt;700 млн лет' in line:
-        return 'morethan700my'
+        return FallTime.Morethan700my
     else:
         raise RuntimeError(f'Unknown line: {line}')
+
 
 def get_element(line):
     r = line.split('>')[-1].split()
     assert len(r) == 2
     int(r[0])
     return r
+
 
 def parse_file(file):
     elements = defaultdict(list)
@@ -89,10 +97,13 @@ def parse_file(file):
                 lower_a = a
             if not upper_a or upper_a < a:
                 upper_a = a
-            if fall_time != 'instable':
+            if fall_time != FallTime.Instable:
                 stable_a.append(a)
 
         print(f'{element:3s} {lower_a}...{upper_a}, {stable_a}')
 
 
-parse_file(TMP_FILE)
+if __name__ == '__main__':
+    tmp_file = os.path.join(os.getenv('HOME'), 'tmp', 'elements.html')
+    download_file(URL, tmp_file)
+    parse_file(tmp_file)
