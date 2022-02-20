@@ -18,16 +18,15 @@ class Isotope:
     upper_a: int = attr.ib()
 
     def GetOne(self, a: int):
-        return Element(Z=self.Z, A=a, X=self.X, ru=self.ru, ru_roditelny=self.ru_roditelny)
+        return Element(Z=self.Z, A=a, X=self.X, ru=self.ru, ru_roditelny=self.ru_roditelny, is_stable=a in self.stable_a)
 
     def GetAll(self):
         for a in range(self.lower_a, self.upper_a + 1):
-            yield Element(Z=self.Z, A=a, X=self.X, ru=self.ru, ru_roditelny=self.ru_roditelny)
+            yield Element(Z=self.Z, A=a, X=self.X, ru=self.ru, ru_roditelny=self.ru_roditelny, is_stable=a in self.stable_a)
 
     def GetStable(self):
         for a in sorted(self.stable_a):
-            yield Element(Z=self.Z, A=a, X=self.X, ru=self.ru, ru_roditelny=self.ru_roditelny)
-
+            yield Element(Z=self.Z, A=a, X=self.X, ru=self.ru, ru_roditelny=self.ru_roditelny, is_stable=True)
 
 
 class FallType:
@@ -37,43 +36,45 @@ class FallType:
     BetaPlus = '\\beta^+'
 
 
+@attr.s
 class Element:
-    def __init__(self, Z=None, A=None, X=None, ru=None, ru_roditelny=None):
-        assert isinstance(A, int)
-        assert isinstance(Z, int)
-        assert isinstance(X, str)
-        assert isinstance(ru, str)
-        assert isinstance(ru_roditelny, str)
+    # TODO: add validators
+    Z: int = attr.ib()
+    A: int = attr.ib()
+    X: str = attr.ib()
+    ru: str = attr.ib()
+    ru_roditelny: str = attr.ib()
+    is_stable: bool = attr.ib()
 
-        assert 1 <= Z <= A
-        self._A = A
-        self._Z = Z
+    @property
+    def e(self):
+        return self.Z
 
-        self._ru = ru
-        self._ru_roditel = ru_roditelny
-        self._X = X
+    @property
+    def p(self):
+        return self.Z
 
-        self.e = int(self._Z)
-        self.p = int(self._Z)
-        self.n = self._A - self._Z
+    @property
+    def n(self):
+        return self.A - self.Z
 
     def get_ce(self):
-        return f'\\ce{{^{{{self._A}}}_{{{self._Z}}}{{{self._X}}}}}'
+        return f'\\ce{{^{{{self.A}}}_{{{self.Z}}}{{{self.X}}}}}'
 
     def get_ru(self):
-        return f'\\text{{{self._ru}-{self._A}}}'
+        return f'\\text{{{self.ru}-{self.A}}}'
 
     def get_ru_name(self):
-        return f'ядро {self._ru_roditel} ${self.get_ce()}$'
+        return f'ядро {self.ru_roditel} ${self.get_ce()}$'
 
     def alpha(self):
-        return ElementsByZA[(self._Z - 2, self._A - 4)]
+        return ElementsByZA[(self.Z - 2, self.A - 4)]
 
     def beta_minus(self):
-        return ElementsByZA[(self._Z + 1, self._A)]
+        return ElementsByZA[(self.Z + 1, self.A)]
 
     def beta_plus(self):
-        return ElementsByZA[(self._Z - 1, self._A)]
+        return ElementsByZA[(self.Z - 1, self.A)]
 
     def beta(self):
         return self.beta_minus()
@@ -130,42 +131,42 @@ class Element:
 # see urls and file to parse it
 # https://ru.wikipedia.org/wiki/%D0%A2%D0%B0%D0%B1%D0%BB%D0%B8%D1%86%D0%B0_%D0%B8%D0%B7%D0%BE%D1%82%D0%BE%D0%BF%D0%BE%D0%B2
 # https://ru.wikipedia.org/wiki/%D0%A1%D0%BF%D0%B8%D1%81%D0%BE%D0%BA_%D1%85%D0%B8%D0%BC%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D1%85_%D1%8D%D0%BB%D0%B5%D0%BC%D0%B5%D0%BD%D1%82%D0%BE%D0%B2
-Isotopes = [Isotope(**kws) for kws in library.files.load_yaml_data('isotopes.yaml')]
+AllIsotopes = [Isotope(**kws) for kws in library.files.load_yaml_data('isotopes.yaml')]
 ElementsByZA = {
-    (element._Z, element._A): element
-    for isotope in Isotopes
+    (element.Z, element.A): element
+    for isotope in AllIsotopes
     for element in isotope.GetAll()
 }
 
 assert len(ElementsByZA) == 3338
 
 
-class LoadedElements:
-    def __init__(self, isotopes: List[Isotope], only_stable: bool):
-        self._za_map = {}
+class AllElementsClass:
+    def __init__(self):
         self._rua_map = {}
-        self._list = []
+        self._elements = []
+        self._stable_elements = []
 
-        for isotope in isotopes:
-            if only_stable:
-                elements = isotope.GetStable()
-            else:
-                elements = isotope.GetAll()
-
-            for element in elements:
-                self._za_map[(element._Z, element._A)] = element
-                self._rua_map[(element._ru, element._A)] = element
-                self._list.append(element)
+        for isotope in AllIsotopes:
+            for element in isotope.GetAll():
+                self._rua_map[(element.ru, element.A)] = element
+                self._elements.append(element)
+                if element.is_stable:
+                    self._stable_elements.append(element)
 
     def get_by_z_a(self, z=None, a=None):
-        return self._za_map[(z, a)]
+        return ElementsByZA[(z, a)]
 
     def get_by_ru_a(self, ru=None, a=None):
         return self._rua_map[(ru, a)]
 
+    @property
+    def all_elements(self):
+        return self._elements
 
-AllElements = LoadedElements(isotopes=Isotopes, only_stable=False)
-AllElementsList = list(AllElements._list)
+    @property
+    def stable_elements(self):
+        return self._stable_elements
 
-StableElements = LoadedElements(isotopes=Isotopes, only_stable=True)
-StableElementsList = list(StableElements._list)
+
+AllElements = AllElementsClass()

@@ -1,5 +1,5 @@
 import generators.variant as variant
-from generators.helpers import UnitValue, Consts, AllElements, StableElementsList
+from generators.helpers import UnitValue, Consts, AllElements
 from library.util.asserts import assert_equals
 
 
@@ -32,7 +32,7 @@ test_get_first_index()
 def get_elements_sublist(index, shift=0):
     first = get_first_index(index) + shift
     last = get_first_index(index + 1) + shift
-    return StableElementsList[first:last]
+    return AllElements.stable_elements[first:last]
 
 
 @variant.solution_space(0)
