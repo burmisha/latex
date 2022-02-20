@@ -58,7 +58,6 @@ class Short_i(variant.VariantTask):  # Вишнякова - 7
     pass
 
 
-
 @variant.solution_space(180)
 @variant.text('''
     При подключении к источнику тока с ЭДС равным {E:Value:e}
@@ -109,7 +108,6 @@ class Update_external_R(variant.VariantTask):
             P2_ratio=P2_ratio,
             P2='P\'_2 = %.1f Вт' % float(P2_ratio),
         )
-
 
 
 @variant.solution_space(180)

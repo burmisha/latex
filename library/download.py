@@ -404,7 +404,6 @@ class YoutubeVideo:
                 best_stream.download(filepath=filename)
 
 
-
 class YoutubePlaylist:
     def __init__(self, url):
         assert url.startswith('https://www.youtube.com/playlist?list=PL')

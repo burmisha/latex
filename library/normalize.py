@@ -87,7 +87,6 @@ def format_plain_text(text: str, fill=False) -> str:
         return r
 
 
-
 def test_format_plain_text():
     data = [
         ('a-\nb', 'ab'),

@@ -15,7 +15,7 @@ from generators.helpers import UnitValue, Consts, Fraction
         = \\frac{{Consts.h:Value} * {Consts.c:Value|s}}{E:Value|s}
         = {lmbd:Value}.
 ''')
-@variant.arg(E=('E = {} 10^{{-19}} Дж', ['4.04', '5.05', '2.02', '7.07', '1.01', '0.55']))
+@variant.arg(E='E = 4.04/5.05/2.02/7.07/1.01/0.55 10^{-19} Дж')
 class Lambda_from_E(variant.VariantTask):  # Вишнякова - Базовый курс 5.2
     def GetUpdate(self, E=None):
         lmbd = (Consts.h * Consts.c / E).IncPrecision(2).SetLetter('\\lambda').As('нм')
@@ -33,7 +33,7 @@ class Lambda_from_E(variant.VariantTask):  # Вишнякова - Базовый
         = \\frac{{Consts.h:Value} * {Consts.c:Value|s}}{E:Value|s}
         = {lmbd:Value}.
 ''')
-@variant.arg(E=['E = %d 10^{-19} Дж' % E for E in [2, 3, 4, 6]])
+@variant.arg(E='E = 2/3/4/6 10^{-19} Дж')
 class Lambda_from_E_2(variant.VariantTask):  # Вишнякова - Базовый курс 5.2
     def GetUpdate(self, E=None):
         lmbd = (Consts.h * Consts.c / E).IncPrecision(2).SetLetter('\\lambda').As('нм')
@@ -49,7 +49,7 @@ class Lambda_from_E_2(variant.VariantTask):  # Вишнякова - Базовы
     Отметьте все соответствующие переходы на рисунке и укажите,
     при каком переходе (среди отмеченных) {what} излучённого фотона {minmax}.
 ''')
-@variant.answer_short('N = {N}, \\text{{answer}}')
+@variant.answer_short('N = {N}, \\text{ {answer} }')
 @variant.arg(n=[3, 4, 5])
 @variant.arg(what__what_sign=[
     ('энергия', 1),

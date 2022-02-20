@@ -30,7 +30,6 @@ class Definitions02(variant.VariantTask):
     pass
 
 
-
 @variant.lv_variant_task(
     {
         'электроёмкость': 'фарад',
@@ -117,7 +116,6 @@ class Q_is_possible(variant.VariantTask):  # Rymkevich750
             result=result,
             short=short
         )
-
 
 
 @variant.solution_space(80)

@@ -45,7 +45,6 @@ def get_dir_from_date(date, create_missing=False):
     return dirname
 
 
-
 def run(args):
     fileWriter = library.files.FileWriter(args.filter)
 

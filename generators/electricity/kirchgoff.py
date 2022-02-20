@@ -142,7 +142,6 @@ class Kirchgof_plain(variant.VariantTask):
         )
 
 
-
 @variant.text('''
     Определите ток, протекающий через резистор {R:Task:e} и разность потенциалов на нём (см. рис.),
     если {E1:Task:e}, {E2:Task:e}, {r1:Task:e}, {r2:Task:e}.

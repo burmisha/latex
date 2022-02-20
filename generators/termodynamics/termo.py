@@ -201,7 +201,6 @@ class V_from_P_and_U(variant.VariantTask):
         )
 
 
-
 @variant.solution_space(40)
 @variant.text('''
     Газ расширился от {V1:Value:e} до {V2:Value:e}.

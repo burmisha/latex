@@ -15,7 +15,6 @@ import logging
 log = logging.getLogger(__name__)
 
 
-
 class PdfBook:
     def __init__(
         self,
@@ -216,7 +215,6 @@ def disable_trim():
         cls.enable_trim = False
         return cls
     return decorator
-
 
 
 def ppi(value):

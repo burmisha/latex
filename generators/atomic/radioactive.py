@@ -107,7 +107,6 @@ class Definitions07(variant.VariantTask):
     pass
 
 
-
 @variant.solution_space(150)
 @variant.text('''
     Определите неизвестный продукт X ядерной реакции ${reaction}$.
@@ -168,7 +167,7 @@ class Vishnyakova_5_3_6(variant.VariantTask):
     (AllElements.get_by_ru_a('свинец', 209), FallType.Beta),       # Марон 9 ДМ СР 10-2
 ])
 @variant.is_one_arg
-class WriteRadioFall(variant.VariantTask):  
+class WriteRadioFall(variant.VariantTask):
     def GetUpdateOneArg(self, a):
         return dict(
             r1=FallType.fall(a.element1, a.fall1),
@@ -196,7 +195,7 @@ class WriteRadioFall(variant.VariantTask):
     \\frac{N_\\text{расп.}}{N_0} = 1 - 2^{-\\frac t{T_{1/2}}}
     = 1 - 2^{-{t}} \\approx {N_left_value:.2f} \\approx {N_left_percent:.0f}\\%''',
 ])
-@variant.arg(what=['распадётся', 'останется'])
+@variant.arg(what='распадётся/останется')
 @variant.arg(when__t=[
     ('двум', 2),
     ('трём', 3),
@@ -266,7 +265,7 @@ class Quantum1120(variant.VariantTask):  # 1120 Рымкевич
     = 2^{-\\frac{t:Value|s}{T:Value|s}}
     \\approx {share:.4f} = {percent:.2f}\\%''',
 ])
-@variant.arg(t=['t = %s суток' % t for t in ['91.2', '136.8', '182.4']])
+@variant.arg(t='t = 91.2/136.8/182.4 суток')
 @variant.arg(T=['T = 45.6 суток'])
 class Vishnyakova_5_3_2(variant.VariantTask):  # Вишнякова - Базовый курс 5.3 - задача 02
     def GetUpdate(self, t=None, T=None):

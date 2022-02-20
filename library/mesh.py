@@ -112,7 +112,6 @@ class ControlForm:
         return f'  Active control form [{self._raw_data["weight"]}] {cm(self._raw_data["name"], color=color.Yellow)}'
 
 
-
 class Client:
     def __init__(self, username=None, password=None):
         self._base_url = BASE_URL

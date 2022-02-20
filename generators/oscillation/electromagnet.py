@@ -337,7 +337,6 @@ class Task08(variant.VariantTask):
         )
 
 
-
 @variant.text('''
     В схеме (см. рис. на доске) при разомкнутом ключе $K$ конденсатор ёмкостью {C:Task:e} заряжен до напряжения {U0:Task:e}.
     ЭДС батареи {E:Task:e}, индуктивность катушки {L:Task:e}. Определите
@@ -373,7 +372,6 @@ class Chernoutsan_12_43(variant.VariantTask):
 @variant.solution_space(100)
 class Chernoutsan_12_44(variant.VariantTask):
     pass
-
 
 
 @variant.text('''

@@ -207,7 +207,6 @@ class Chernoutsan_12_52(variant.VariantTask):
         )
 
 
-
 @variant.solution_space(80)
 @variant.text('''
     Определите название цвета по длине волны в вакууме

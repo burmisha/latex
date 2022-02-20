@@ -27,6 +27,3 @@ print(get_two_max([1, 2]))
 print(get_two_max([2, 1]))
 print(get_two_max(numbers))
 print(get_two_max(range(100000000)))  # works with generators
-
-
-

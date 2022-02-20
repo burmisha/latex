@@ -1503,7 +1503,6 @@ class Problems_3800(PdfBook):
     pass
 
 
-
 @page_shift(1)
 @structure([
     ('Опорные конспекты', [

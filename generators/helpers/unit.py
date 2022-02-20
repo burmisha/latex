@@ -36,7 +36,6 @@ class BaseUnit:
         return self._order < other._order
 
 
-
 class BaseUnits:
     kg = BaseUnit('кг', 'килограмм', 1)
     s = BaseUnit('с', 'секунда', 2)

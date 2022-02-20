@@ -84,7 +84,6 @@ class Theory02(variant.VariantTask):
     pass
 
 
-
 @variant.solution_space(80)
 @variant.text('''
     {what} движется со скоростью $0{,}{percent}\,c$, где $c$~--- скорость света в вакууме.
@@ -167,7 +166,6 @@ class Vishnyakova_4_2_kin(variant.VariantTask):
             v=v,
             E_kin='E_{\\text{кин}} = 1',
         )
-
 
 
 @variant.solution_space(100)
@@ -263,7 +261,6 @@ class Vishnyakova_4_5(variant.VariantTask):
         return dict(
             m=m.IncPrecision(1),
         )
-
 
 
 @variant.solution_space(80)
@@ -392,7 +389,6 @@ class Vishnyakova_4_11(variant.VariantTask):
         return dict(
             t0=a.t * (1 - r ** 2) ** 0.5,
         )
-
 
 
 @variant.text('''

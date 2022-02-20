@@ -228,7 +228,6 @@ class Vapor:
         return value
 
 
-
 def test_vapor():
     vapor = Vapor(T_P_Pmm_rho)
     assert vapor.get_rho_by_t(80).SI_Value == Decimal('0.29300')

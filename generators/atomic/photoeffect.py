@@ -3,7 +3,6 @@ import generators.variant as variant
 from generators.helpers import Fraction, Consts
 
 
-
 @variant.text('''
     Свет с энергией кванта {E:V:e} вырывает из металлической пластинки электроны,
     имеющие максимальную кинетическую энергию {K:V:e}.

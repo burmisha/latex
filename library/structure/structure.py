@@ -41,7 +41,7 @@ def parse_simple_structure(data, *, indices=None, plain=None):
     for first_level_index, first_level_item in enumerate(data, first_level_start_index):
         assert isinstance(first_level_item, tuple)
 
-        if already_has_first_index: 
+        if already_has_first_index:
             name_template = f'{first_level_item[0]}'
         else:
             name_template = f'{first_level_index:02} {first_level_item[0]}'
@@ -52,7 +52,7 @@ def parse_simple_structure(data, *, indices=None, plain=None):
             dst_dir = name_template
 
         if len(first_level_item) == 3:
-            _, first_page, last_page = first_level_item  
+            _, first_page, last_page = first_level_item
             for page in _get_pages(first_page, last_page, dst_dir, name_template):
                 yield page
 
@@ -97,8 +97,8 @@ def test_parse_simple_structure():
         (
             Structure([('Раздел', 1, 3)]),
             [
-                DestinationPage(1, None, '01 Раздел'), 
-                DestinationPage(2, None, '01 Раздел'), 
+                DestinationPage(1, None, '01 Раздел'),
+                DestinationPage(2, None, '01 Раздел'),
                 DestinationPage(3, None, '01 Раздел'),
             ],
         ),

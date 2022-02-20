@@ -39,7 +39,6 @@ abv_choices = Choice('АБВ')
 text_task = TextTask()
 
 
-
 assert len(Text('QWE') * 7) == 7
 assert len(Text('12') + Text('123')) == 2
 assert len(Text('12') * 2 + Text('123') * 3) == 5

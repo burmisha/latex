@@ -249,7 +249,6 @@ def test_check_unit_value():
 test_check_unit_value()
 
 
-
 class VariantTask:
     def __init__(self, *, pupils=None):
         self._pupils = pupils
