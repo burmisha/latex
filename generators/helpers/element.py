@@ -29,11 +29,39 @@ class Isotope:
             yield Element(Z=self.Z, A=a, X=self.X, ru=self.ru, ru_roditelny=self.ru_roditelny, is_stable=True)
 
 
-class FallType:
+class FallHandler:
     Alpha = '\\alpha'
     Beta = '\\beta'
     BetaMinus = '\\beta^-'
     BetaPlus = '\\beta^+'
+
+    def fall(self, element, fall):
+        if fall == self.BetaMinus or fall == self.Beta:
+            dZ, dA = 1, 0
+        elif fall == self.BetaPlus:
+            dZ, dA = -1, 0
+        elif fall == self.Alpha:
+            dZ, dA = -2, -4
+        else:
+            raise RuntimeError(f'Invalid fall: {fall}')
+
+        return ElementsByZA[(element.Z + dZ, element.A + dA)]
+
+    def get_reaction(self, element, fall):
+        if fall == self.BetaMinus or fall == self.Beta:
+            addenda = 'e^- + \\tilde\\nu_e'
+        elif fall == self.BetaPlus:
+            addenda = 'e^+ + \\nu_e'
+        elif fall == self.Alpha:
+            addenda = '\\ce{^4_2{He}}'
+        else:
+            raise RuntimeError(f'Invalid fall: {fall}')
+
+        result = self.fall(element, fall)
+        return f'{element:LaTeX} \\to {result:LaTeX} + {addenda}'
+
+
+FallType = FallHandler()
 
 
 @attr.s
@@ -66,40 +94,6 @@ class Element:
 
     def get_ru_name(self):
         return f'ядро {self.ru_roditel} ${self.get_ce()}$'
-
-    def alpha(self):
-        return ElementsByZA[(self.Z - 2, self.A - 4)]
-
-    def beta_minus(self):
-        return ElementsByZA[(self.Z + 1, self.A)]
-
-    def beta_plus(self):
-        return ElementsByZA[(self.Z - 1, self.A)]
-
-    def beta(self):
-        return self.beta_minus()
-
-    def fall(self, fall):
-        if fall == FallType.BetaMinus or fall == FallType.Beta:
-            return self.beta_minus()
-        elif fall == FallType.BetaPlus:
-            return self.beta_plus()
-        elif fall == FallType.Alpha:
-            return self.alpha()
-        else:
-            raise RuntimeError(f'Invalid fall: {fall}')
-
-    def get_reaction(self, fall):
-        if fall == FallType.BetaMinus or fall == FallType.Beta:
-            addenda = 'e^- + \\tilde\\nu_e'
-        elif fall == FallType.BetaPlus:
-            addenda = 'e^+ + \\nu_e'
-        elif fall == FallType.Alpha:
-            addenda = '\\ce{^4_2{He}}'
-        else:
-            raise RuntimeError(f'Invalid fall: {fall}')
-
-        return f'{self.get_ce()} \\to {self.fall(fall).get_ce()} + {addenda}'
 
     def __format__(self, fmt):
         try:

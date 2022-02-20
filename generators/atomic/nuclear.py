@@ -1,7 +1,7 @@
 import generators.variant as variant
 from generators.helpers import UnitValue, Consts, AllElements
+from generators.helpers.element import FallType
 from library.util.asserts import assert_equals
-
 
 def get_element_answer(what, element):
     return {
@@ -342,7 +342,7 @@ class KernelCount(variant.VariantTask):
 class RadioFall(variant.VariantTask):
     def GetUpdateOneArg(self, a):
         return dict(
-            reaction=a.element.get_reaction(a.fallType),
+            reaction=FallType.get_reaction(a.element, a.fallType),
         )
 
 # Ядерные реакции (27-30)

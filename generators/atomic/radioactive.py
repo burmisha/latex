@@ -171,14 +171,14 @@ class Vishnyakova_5_3_6(variant.VariantTask):
 class WriteRadioFall(variant.VariantTask):  
     def GetUpdateOneArg(self, a):
         return dict(
-            r1=a.element1.fall(a.fall1),
-            reaction1=a.element1.get_reaction(a.fall1),
-            r2=a.element2.fall(a.fall2),
-            reaction2=a.element2.get_reaction(a.fall2),
-            r3=a.element3.fall(a.fall3),
-            reaction3=a.element3.get_reaction(a.fall3),
-            r4=a.element4.fall(a.fall4),
-            reaction4=a.element4.get_reaction(a.fall4),
+            r1=FallType.fall(a.element1, a.fall1),
+            reaction1=FallType.get_reaction(a.element1, a.fall1),
+            r2=FallType.fall(a.element2, a.fall2),
+            reaction2=FallType.get_reaction(a.element2, a.fall2),
+            r3=FallType.fall(a.element3, a.fall3),
+            reaction3=FallType.get_reaction(a.element3, a.fall3),
+            r4=FallType.fall(a.element4, a.fall4),
+            reaction4=FallType.get_reaction(a.element4, a.fall4),
         )
 
 
