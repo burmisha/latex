@@ -316,7 +316,7 @@ class Vishnyakova_5_3_3(variant.VariantTask):
 @variant.text('''
     Энергия связи ядра {element} равна ${E:Value}$.
     Найти дефект массы этого ядра. Ответ выразите в а.е.м. и кг.
-    Скорость света {Consts.c_4:Task|e}, элементарный заряд {Consts.e:Task|e}.
+    Скорость света {c:Task|e}, элементарный заряд {Consts.e:Task|e}.
 ''')
 @variant.answer_align([
     'E_\\text{св.} &= \\Delta m c^2 \\implies',
@@ -376,9 +376,9 @@ class Vishnyakova_5_3_12(variant.VariantTask):
 ])
 class Delta_m_from_m(variant.VariantTask):
     def GetUpdate(self, element, m_aem):
-        dm = element.n * Consts.m_n_aem.Value + element.p * Consts.m_p_aem.Value - m_aem.Value
-        dE = dm * Consts.one_aem_eV.Value
+        dm = Consts.m_n_aem * element.n + Consts.m_p_aem * element.p - m_aem
+        dE = dm * Consts.c * Consts.c
         return dict(
-            dm='\\Delta m = %.5f а.е.м.' % dm,
-            dE='E_\\text{св.} = %.2f МэВ' % dE,
+            dm=dm.SetLetter('\\Delta m').As('а.е.м.'),
+            dE=dE.SetLetter('E_\\text{св.}').As('МэВ'),
         )

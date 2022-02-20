@@ -16,23 +16,18 @@ from generators.helpers import UnitValue, Consts
         = \\frac{Pt}{h\\nu} = \\frac{Pt}{h \\frac c\\lambda}
         = \\frac{Pt\\lambda}{hc}
         = \\frac{{power:V} * {minutes:V} * {length:V}}{{h:V} * {c:V}}
-        \\approx {approx} * 10^{{answerPower}}\\units{фотонов}
+        \\approx {N:V}\\units{фотонов}
 ''')
 @variant.arg(minutes='t = 5/10/20/30/40/60/120 мин')
 @variant.arg(power='P = 15/40/75/200 мВт')
 @variant.arg(length='\\lambda = 500/600/750 нм')
+@variant.is_one_arg
 class Fotons(variant.VariantTask):
-    def GetUpdate(self, power=None, minutes=None, length=None):
-        h = Consts.h
-        c = Consts.c
-        mul = 10 ** 20
-        answer = power * minutes * length / h / c / mul
+    def GetUpdateOneArg(self, a):
         return dict(
-            answerValue=answer,
-            answerPower=20,
-            approx=f'{answer.SI_Value:.2f}',
-            h=h,
-            c=c,
+            N=(a.power * a.minutes * a.length / Consts.h / Consts.c).IncPrecision(2),
+            h=Consts.h,
+            c=Consts.c,
         )
 
 
