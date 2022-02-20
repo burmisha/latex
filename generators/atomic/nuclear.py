@@ -1,5 +1,5 @@
 import generators.variant as variant
-from generators.helpers import UnitValue, Consts, Elements, ElementsList
+from generators.helpers import UnitValue, Consts, AllElements, StableElementsList
 from library.util.asserts import assert_equals
 
 
@@ -32,7 +32,7 @@ test_get_first_index()
 def get_elements_sublist(index, shift=0):
     first = get_first_index(index) + shift
     last = get_first_index(index + 1) + shift
-    return ElementsList[first:last]
+    return StableElementsList[first:last]
 
 
 @variant.solution_space(0)
@@ -321,7 +321,7 @@ class KernelCount(variant.VariantTask):
         return dict(
             neutrons=a.nuclons - a.electrons,
             protons=a.electrons,
-            element=Elements.get_by_z_a(z=a.electrons, a=a.nuclons)
+            element=AllElements.get_by_z_a(z=a.electrons, a=a.nuclons)
         )
 
 
@@ -329,14 +329,14 @@ class KernelCount(variant.VariantTask):
 @variant.text('Запишите реакцию ${fallType}$-распада ${element:LaTeX}$.')
 @variant.answer_short('{reaction}')
 @variant.arg(fallType__element=[
-    ('\\alpha', Elements.get_by_z_a(92, 238)),
-    ('\\alpha', Elements.get_by_z_a(60, 144)),
-    ('\\alpha', Elements.get_by_z_a(62, 147)),
-    ('\\alpha', Elements.get_by_z_a(62, 148)),
-    ('\\alpha', Elements.get_by_z_a(74, 180)),
-    ('\\alpha', Elements.get_by_z_a(63, 153)),
-    ('\\beta', Elements.get_by_z_a(55, 137)),
-    ('\\beta', Elements.get_by_z_a(11, 22)),
+    ('\\alpha', AllElements.get_by_z_a(92, 238)),
+    ('\\alpha', AllElements.get_by_z_a(60, 144)),
+    ('\\alpha', AllElements.get_by_z_a(62, 147)),
+    ('\\alpha', AllElements.get_by_z_a(62, 148)),
+    ('\\alpha', AllElements.get_by_z_a(74, 180)),
+    ('\\alpha', AllElements.get_by_z_a(63, 153)),
+    ('\\beta', AllElements.get_by_z_a(55, 137)),
+    ('\\beta', AllElements.get_by_z_a(11, 22)),
 ])
 @variant.is_one_arg
 class RadioFall(variant.VariantTask):

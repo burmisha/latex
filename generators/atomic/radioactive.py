@@ -1,5 +1,6 @@
 import generators.variant as variant
-from generators.helpers import Consts, Elements
+from generators.helpers import Consts, AllElements
+from generators.helpers.element import FallType
 import itertools
 import math
 
@@ -137,34 +138,34 @@ class Vishnyakova_5_3_6(variant.VariantTask):
     '{reaction4}: \\qquad \\text{{r4:RuName}}: {r4:protons}\,p^+, {r4:neutrons}\,n^0.',
 ])
 @variant.arg(element1__fall1=[
-    (Elements.get_by_z_a(90, 234), '\\beta^-'),            # Белолипецкий 6.86
-    (Elements.get_by_ru_a('торий', 234), '\\beta'),        # Марон 9 840
-    (Elements.get_by_ru_a('протактиний', 234), '\\beta'),  # Марон 9 840
-    (Elements.get_by_z_a(15, 30), '\\beta^+'),             # Белолипецкий 6.89
-    (Elements.get_by_z_a(6, 14), '\\beta^-'),              # Марон 9 832
+    (AllElements.get_by_z_a(90, 234), FallType.BetaMinus),         # Белолипецкий 6.86
+    (AllElements.get_by_ru_a('торий', 234), FallType.Beta),        # Марон 9 840
+    (AllElements.get_by_ru_a('протактиний', 234), FallType.Beta),  # Марон 9 840
+    (AllElements.get_by_z_a(15, 30), FallType.BetaPlus),           # Белолипецкий 6.89
+    (AllElements.get_by_z_a(6, 14), FallType.BetaMinus),           # Марон 9 832
 ])
 @variant.arg(element2__fall2=[
-    (Elements.get_by_z_a(88, 226), '\\alpha'),             # Белолипецкий 6.87
-    (Elements.get_by_z_a(84, 210), '\\alpha'),             # Белолипецкий 6.88
-    (Elements.get_by_ru_a('уран', 238), '\\alpha'),        # Марон 9 840
-    (Elements.get_by_ru_a('уран', 234), '\\alpha'),        # Марон 9 840
-    (Elements.get_by_ru_a('торий', 230), '\\alpha'),       # Марон 9 840
-    (Elements.get_by_ru_a('радий', 226), '\\alpha'),       # Марон 9 840
-    (Elements.get_by_ru_a('радон', 222), '\\alpha'),       # Марон 9 840
+    (AllElements.get_by_z_a(88, 226), FallType.Alpha),             # Белолипецкий 6.87
+    (AllElements.get_by_z_a(84, 210), FallType.Alpha),             # Белолипецкий 6.88
+    (AllElements.get_by_ru_a('уран', 238), FallType.Alpha),        # Марон 9 840
+    (AllElements.get_by_ru_a('уран', 234), FallType.Alpha),        # Марон 9 840
+    (AllElements.get_by_ru_a('торий', 230), FallType.Alpha),       # Марон 9 840
+    (AllElements.get_by_ru_a('радий', 226), FallType.Alpha),       # Марон 9 840
+    (AllElements.get_by_ru_a('радон', 222), FallType.Alpha),       # Марон 9 840
 ])
 @variant.arg(element3__fall3=[
-    (Elements.get_by_ru_a('полоний', 218), '\\alpha'),     # Марон 9 840
-    (Elements.get_by_ru_a('свинец', 214), '\\alpha'),      # Марон 9 840
-    (Elements.get_by_ru_a('висмут', 214), '\\beta'),       # Марон 9 840
-    (Elements.get_by_ru_a('полоний', 214), '\\alpha'),     # Марон 9 840
-    (Elements.get_by_ru_a('свинец', 210), '\\beta'),       # Марон 9 840
-    (Elements.get_by_ru_a('висмут', 210), '\\beta'),       # Марон 9 840
-    (Elements.get_by_ru_a('полоний', 210), '\\beta'),      # Марон 9 840
-    (Elements.get_by_ru_a('свинец', 206), '\\alpha'),      # Марон 9 840
+    (AllElements.get_by_ru_a('полоний', 218), FallType.Alpha),     # Марон 9 840
+    (AllElements.get_by_ru_a('свинец', 214), FallType.Alpha),      # Марон 9 840
+    (AllElements.get_by_ru_a('висмут', 214), FallType.Beta),       # Марон 9 840
+    (AllElements.get_by_ru_a('полоний', 214), FallType.Alpha),     # Марон 9 840
+    (AllElements.get_by_ru_a('свинец', 210), FallType.Beta),       # Марон 9 840
+    (AllElements.get_by_ru_a('висмут', 210), FallType.Beta),       # Марон 9 840
+    (AllElements.get_by_ru_a('полоний', 210), FallType.Beta),      # Марон 9 840
+    (AllElements.get_by_ru_a('свинец', 206), FallType.Alpha),      # Марон 9 840
 ])
 @variant.arg(element4__fall4=[
-    (Elements.get_by_ru_a('плутоний', 239), '\\alpha'),    # Марон 9 ДМ СР 2-2
-    (Elements.get_by_ru_a('свинец', 209), '\\beta'),       # Марон 9 ДМ СР 10-2
+    (AllElements.get_by_ru_a('плутоний', 239), FallType.Alpha),    # Марон 9 ДМ СР 2-2
+    (AllElements.get_by_ru_a('свинец', 209), FallType.Beta),       # Марон 9 ДМ СР 10-2
 ])
 @variant.is_one_arg
 class WriteRadioFall(variant.VariantTask):  
@@ -366,12 +367,12 @@ class Vishnyakova_5_3_12(variant.VariantTask):
 ])
 @variant.arg(element__m_aem=[
     # https://ru.wikipedia.org/wiki/%D0%A1%D0%B2%D0%BE%D0%B4%D0%BD%D0%B0%D1%8F_%D1%82%D0%B0%D0%B1%D0%BB%D0%B8%D1%86%D0%B0_%D0%B8%D0%B7%D0%BE%D1%82%D0%BE%D0%BF%D0%BE%D0%B2
-    (Elements.get_by_z_a(1, 2), 'm = 2.0141 а.е.м.'),
-    (Elements.get_by_z_a(1, 3), 'm = 3.01605 а.е.м.'),
-    (Elements.get_by_z_a(2, 3), 'm = 3.01603 а.е.м.'),
-    (Elements.get_by_z_a(2, 4), 'm = 4.0026 а.е.м.'),
-    (Elements.get_by_z_a(2, 6), 'm = 6.0189 а.е.м.'),
-    (Elements.get_by_z_a(2, 8), 'm = 8.0225 а.е.м.'),
+    (AllElements.get_by_z_a(1, 2), 'm = 2.0141 а.е.м.'),
+    (AllElements.get_by_z_a(1, 3), 'm = 3.01605 а.е.м.'),
+    (AllElements.get_by_z_a(2, 3), 'm = 3.01603 а.е.м.'),
+    (AllElements.get_by_z_a(2, 4), 'm = 4.0026 а.е.м.'),
+    (AllElements.get_by_z_a(2, 6), 'm = 6.0189 а.е.м.'),
+    (AllElements.get_by_z_a(2, 8), 'm = 8.0225 а.е.м.'),
 ])
 class Delta_m_from_m(variant.VariantTask):
     def GetUpdate(self, element, m_aem):
