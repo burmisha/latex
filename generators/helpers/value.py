@@ -455,3 +455,13 @@ def test_as_conversion():
 
 
 test_as_conversion()
+
+
+def test_value():
+    res = (UnitValue('10 г') + UnitValue('5 см^3') * UnitValue('2000 кг / м^3')).As('г')
+    assert_equals('', '20\\,\\text{г}', f'{res:Value}')
+    # TODO: desirable
+    # res == UnitValue('20 г')
+
+
+test_value()

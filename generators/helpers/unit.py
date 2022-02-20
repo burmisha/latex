@@ -116,11 +116,6 @@ def get_simple_unit(base_units):
     return None
 
 
-# TODO: desirable
-def test_value():
-    Value('10 г') + Value('5 см^3') * Value('2000 кг / м^3') == Value('20 г')
-
-
 def get_known_units():
     units = ALL_SIMPLE_UNITS + [
         ('минут', 60, SimpleUnits.s),

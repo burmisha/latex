@@ -3,6 +3,7 @@ from generators.helpers.unit import BaseUnits
 from generators.helpers.matter import Matter
 from generators.helpers.vapor import Vapor, T_P_Pmm_rho
 from generators.helpers.fraction import Decimal
+from library.util.asserts import assert_equals
 
 
 class Consts:
@@ -110,8 +111,7 @@ def test_calculation():
         ((Consts.c / UnitValue('0.500 мкм')).As('ТГц'), r'600\,\text{ТГц}'),
     ]
     for unit_value, answer in data:
-        result = '{:V}'.format(unit_value)
-        assert result == answer, f'Expected |{answer}|, got |{result}|'
+        assert_equals('Checking calculation', answer, f'{unit_value:V}')
 
     assert UnitValue('2 10^4 км/c').Value * Consts.m_p.Value / Consts.e.Value / UnitValue('200 мТл').Value * 10 ** 2 == Decimal('1.0453875')
 
@@ -127,7 +127,7 @@ def test_get_base_units():
     ]
     for unit_value, base_units in data:
         result = unit_value.get_base_units()
-        assert result == base_units, f'Expected {base_units}, got {result} for {unit_value!r}'
+        assert_equals(f'Base units for {unit_value!r}', base_units, result)
 
 
 test_get_base_units()
