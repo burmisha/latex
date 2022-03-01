@@ -27,9 +27,11 @@ class StudentsGroup:
 
         best_name = data['class_unit_name']
         if best_name is None:
-            assert self._name == 'МЕТ.Физика Бурмистров 5ч. Тех'
-            best_name = '10'
-        self._best_name = best_name + " " + self._subject_name
+            best_name = {
+                # 'МЕТ.Физика Бурмистров 5ч. Тех': '10',
+                'МЕТ. Физика 11АБ Техн': '11БА',
+            }[self._name]
+        self._best_name = f'{best_name} {self._subject_name}'
 
         self._raw_data = data
 
@@ -42,7 +44,7 @@ class StudentsGroup:
         return ' '.join([
             f'group {cm(self._best_name, color=color.Green)}',
             f'({self._id}, {len(self._student_ids)} students),',
-            cm(f'https://dnevnik.mos.ru/manage/journal?group_id={self._id}&class_unit_id={class_unit_id_str}', color=color.Cyan),
+            cm(f'{BASE_URL}/manage/journal?group_id={self._id}&class_unit_id={class_unit_id_str}', color=color.Cyan),
         ])
 
 
@@ -126,6 +128,7 @@ class Client:
         self._control_forms = {}
 
     def _login(self, username, password):
+        log.info('Trying to log in...')
         response = requests.post(
             f'{self._base_url}/lms/api/sessions',
             headers=self._get_headers(add_personal=False),
@@ -155,8 +158,8 @@ class Client:
             'Accept-Language': 'ru-RU,ru;q=0.8,en-US;q=0.5,en;q=0.3',
             'Connection': 'keep-alive',
             'Content-Type': 'application/json;charset=utf-8',
-            'Origin': 'https://dnevnik.mos.ru',
-            'Referer': 'https://dnevnik.mos.ru/',
+            'Origin': BASE_URL,
+            'Referer': f'{BASE_URL}/',
             'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:83.0) Gecko/20100101 Firefox/83.0',
         }
         if add_personal:
@@ -279,7 +282,6 @@ class Client:
                     # 'with_parents': True,
                 })
                 log.info(f'Loaded {len(student_profiles_data)} students for {group!r}')
-                assert len(student_profiles_data) == len(group._student_ids)
                 for item in student_profiles_data:
                     student_profile = StudentProfile(item)
                     self._all_student_profiles[student_profile._id] = student_profile
