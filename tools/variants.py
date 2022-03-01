@@ -875,6 +875,17 @@ def get_all_variants(*, flt=None):
                 'Gelfgat_9_9',
             ]},
         ),
+        Work(
+            task_id='2022-03-01 11БА - КФ - 1',
+            classes={'atomic.photoeffect': [
+                'Energy_from_eV',
+                'Energy_to_eV',
+                'Chernoutsan_13_66',
+                'Chernoutsan_13_67',
+                'Chernoutsan_13_68',
+                'Chernoutsan_13_69',
+            ]},
+        ),
         # Work(
         #     task_id='2022-02-18 11Б - СТО - 1',
         #     classes={'atomic.radioactive': [
