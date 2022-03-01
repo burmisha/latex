@@ -1,4 +1,4 @@
-import library.mesh
+import library.dnevnik.mesh
 import library.datetools
 import library.logging
 
@@ -63,7 +63,7 @@ def run(args):
     #     log.info(f'Got\n{library.logging.colorize_json(json.loads(data))}')
     # return
 
-    client = library.mesh.Client(
+    client = library.dnevnik.mesh.Client(
         username=args.username,
         password=library.secrets.token.get('dnevnik.mos.ru.password'),
     )
