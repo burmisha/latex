@@ -71,8 +71,8 @@ def run(args):
     schedule_items = client.get_schedule_items(from_date=from_date, to_date=to_date)
 
     for lesson in schedule_items:
-        for grade in [9, 10]:
-            client.get_control_forms(lesson._subject_id, grade)
+        for grade in [9, 10, 11]:
+            client.get_control_forms(lesson._subject_id, grade, log_forms=True)
 
 
     for schedule_item in sorted(schedule_items):

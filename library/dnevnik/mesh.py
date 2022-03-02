@@ -111,7 +111,7 @@ class ControlForm:
         return self._raw_data['name']
 
     def __str__(self):
-        return f'  Active control form [{self._raw_data["weight"]}] {cm(self._raw_data["name"], color=color.Yellow)}'
+        return f'  active control form [{self._raw_data["weight"]}] {cm(self._raw_data["name"], color=color.Yellow)}'
 
 
 class Client:
@@ -590,12 +590,13 @@ class Client:
         # curl 'https://dnevnik.mos.ru/core/api/marks/1188480155?pid=15033420' -X DELETE
         pass
 
-    def get_control_forms(self, subject_id, grade):
+    def get_control_forms(self, subject_id, grade, log_forms: bool):
         education_level_id = {
+            11: 3,
             10: 3,
             9: 2,
         }[grade]
-        key = (education_level_id, subject_id)
+        key = (grade, subject_id)
         if self._control_forms.get(key) is None:
             log.debug(f'Loading available control forms for grade {grade} subject {subject_id}')
             data = self.get(f'/core/api/control_forms', {
@@ -613,7 +614,8 @@ class Client:
             self._control_forms[key] = {}
             for control_form in control_forms:
                 self._control_forms[key][control_form.get_name()] = control_form
-                log.info(control_form)
+                if log_forms:
+                    log.info(control_form)
             log.info(f'Loaded {len(self._control_forms[key])} active control forms for grade {grade} subject {subject_id}')
         return self._control_forms[key]
 
