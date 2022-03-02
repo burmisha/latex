@@ -92,7 +92,7 @@ class Energy_to_eV(variant.VariantTask):
 class Chernoutsan_13_66(variant.VariantTask):
     def GetUpdateOneArg(self, a):
         return dict(
-            A=(a.E - a.K).As('эВ'),
+            A=(a.E - a.K).IncPrecision(1).As('эВ'),
         )
 
 
@@ -111,7 +111,7 @@ class Chernoutsan_13_67(variant.VariantTask):
         K = Consts.c * Consts.h / a.lmbd - a.A
         assert K.SI_Value > 0
         return dict(
-            K=K.As('эВ'),
+            K=K.IncPrecision(1).As('эВ'),
         )
 
 
