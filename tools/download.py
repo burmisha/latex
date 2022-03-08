@@ -161,6 +161,10 @@ def run(args):
             'https://www.youtube.com/watch?v=pySJ3cNrZKA': '2022 - Вынос ели',
             'https://www.youtube.com/watch?v=rckEw0z7aK4': '1964 - Что такое теория относительности',
             'https://www.youtube.com/watch?v=N9eW-QRiamA': '2022 - 2022-03-01 Статус',
+            'https://www.youtube.com/watch?v=9QV2q8JLVY8': '2022 - 2022-03-03 Гозман',
+            'https://www.youtube.com/watch?v=70RmF0rPj9o': '2022 - 2022-03-04 Дудь-Акунин',
+            'https://www.youtube.com/watch?v=KDQ-WaKHJnY': '2022 - 2022-03-03 Fack This Job',
+            'https://www.youtube.com/watch?v=3-S29KGlQro': '2022 - 2022-03-01 Редакция - Спецреп',
         },
         'Veritasium': {
             'https://www.youtube.com/watch?v=AaZ_RSt0KP8': '2021.08.31 - The Universe is Hostile to Computers',
