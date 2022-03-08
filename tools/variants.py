@@ -895,6 +895,9 @@ def get_all_variants(*, flt=None):
                 'Chernoutsan_13_67',
                 'Chernoutsan_13_68',
                 'Chernoutsan_13_69',
+                # 'Chernoutsan_13_70',
+                # 'Chernoutsan_13_71',
+                # 'Chernoutsan_13_72',
             ]},
         ),
         # Work(
