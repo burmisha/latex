@@ -44,7 +44,8 @@ class StudentsGroup:
         return ' '.join([
             f'group {cm(self._best_name, color=color.Green)}',
             f'({self._id}, {len(self._student_ids)} students),',
-            cm(f'{BASE_URL}/manage/journal?group_id={self._id}&class_unit_id={class_unit_id_str}', color=color.Cyan),
+            cm(f'{BASE_URL}/webteacher/study-process/grade-journals/{self._id}', color=color.Cyan),
+            # cm(f'{BASE_URL}/manage/journal?group_id={self._id}&class_unit_id={class_unit_id_str}', color=color.Cyan),
         ])
 
 
@@ -59,6 +60,9 @@ class StudentProfile:
 
     def __repr__(self):
         return f'student {self._short_name} ({self._id})'
+
+    def matches(self, name: str) -> bool:
+        return sorted(self._short_name.lower().split()) == sorted(name.lower().split())
 
 
 class ScheduleItem:
@@ -295,7 +299,7 @@ class Client:
         return student_profile
 
     def get_student_by_name(self, student_name):
-        matched = [student_profile for student_profile in self.get_student_profiles().values() if student_profile._short_name == student_name]
+        matched = [student_profile for student_profile in self.get_student_profiles().values() if student_profile.matches(student_name)]
         if len(matched) == 1:
             return matched[0]
         else:

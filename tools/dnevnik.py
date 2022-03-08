@@ -1,6 +1,7 @@
 import library.dnevnik.mesh
 import library.datetools
 import library.logging
+import library.files
 
 import locale
 
@@ -33,6 +34,50 @@ class MarkSetter:
             point_date=point_date,
             control_form=self._control_form,
         )
+
+
+class MarksUpdater:
+    def __init__(self, client=None):
+        self._client = client
+        self._marks_data = library.files.load_yaml_data('marks.yaml')
+
+    def UpdateAll(self):
+        # TODO: update grade
+        grade = 11
+        for group_id, class_data in self._marks_data.items():
+            lesson_form = []
+            for lesson_str in class_data['lessons']:
+                lesson_id, control_form_name = lesson_str.split(' - ')
+                lesson = self._client.get_schedule_item_by_id(int(lesson_id))
+                control_form = self._client.get_control_forms(lesson._subject_id, grade, log_forms=False)[control_form_name]
+                lesson_form.append((lesson, control_form))
+
+            for student_name, marks_str in class_data['marks'].items():
+                student = self._client.get_student_by_name(student_name)
+                marks = marks_str.strip(',').split(',')
+                assert len(marks) == len(lesson_form)
+                for mark_str, (lesson, control_form) in zip(marks, lesson_form):
+                    if mark_str == '-':
+                        self._client.set_absent(
+                            student_id=student._id,
+                            lesson_id=lesson._id,
+                        )
+                    else:
+                        mark = int(mark_str)
+                        if mark == 1:
+                            pass
+                        elif mark in [2, 3, 4, 5]:
+                            raise RuntimeError('TODO: Check if no mark was set')
+                            self._client.set_mark(
+                                schedule_lesson_id=lesson._id,
+                                student_id=student._id,
+                                value=mark,
+                                comment=None,
+                                point_date=None,
+                                control_form=control_form,
+                            )
+                        else:
+                            raise RuntimeError(f'Invalid mark {mark} for {student} at {lesson}')
 
 
 def run(args):
@@ -74,6 +119,10 @@ def run(args):
         for grade in [9, 10, 11]:
             client.get_control_forms(lesson._subject_id, grade, log_forms=True)
 
+    marks_updater = MarksUpdater(client)
+    marks_updater.UpdateAll()
+
+    return
 
     for schedule_item in sorted(schedule_items):
         if class_filter and class_filter not in schedule_item._group._best_name:
