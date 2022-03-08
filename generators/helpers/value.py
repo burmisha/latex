@@ -268,7 +268,7 @@ def get_calc_precision(left, other_value, left_precision, right_precision, actio
             # delta = None
 
         precision = math.floor((abs(value) / delta).log10()) + 1
-        assert precision >= 1
+        assert precision >= 1, [action, left, other_value]
 
     else:
         raise NotImplementedError(f'Could not apply unknown action {action!r}')

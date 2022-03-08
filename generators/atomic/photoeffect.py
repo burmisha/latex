@@ -1,6 +1,6 @@
 import generators.variant as variant
 
-from generators.helpers import Fraction, Consts
+from generators.helpers import Fraction, Consts, UnitValue
 
 
 @variant.text('''
@@ -22,6 +22,7 @@ from generators.helpers import Fraction, Consts
 @variant.arg(E4='1.6/7.2/8.3/9.4 10^{-3} эВ')
 @variant.arg(E5='1.7/3.3/5.4 10^7 эВ')
 @variant.answer_align([
+    '{E0:V} &\\approx {E0_eV:V}',
     '{E1:V} &\\approx {E1_eV:V}',
     '{E2:V} &\\approx {E2_eV:V}',
     '{E3:V} &\\approx {E3_eV:V}',
@@ -60,6 +61,7 @@ class Energy_from_eV(variant.VariantTask):
 @variant.arg(E4='1.6/7.2/8.3/9.4 10^{-17} Дж')
 @variant.arg(E5='1.7/3.3/5.4 10^{-21} Дж')
 @variant.answer_align([
+    '{E0:V} &\\approx {E0_eV:V}',
     '{E1:V} &\\approx {E1_eV:V}',
     '{E2:V} &\\approx {E2_eV:V}',
     '{E3:V} &\\approx {E3_eV:V}',
@@ -111,7 +113,7 @@ class Chernoutsan_13_67(variant.VariantTask):
         K = Consts.c * Consts.h / a.lmbd - a.A
         assert K.SI_Value > 0
         return dict(
-            K=K.IncPrecision(1).As('эВ'),
+            K=K.As('эВ'),
         )
 
 
@@ -129,7 +131,7 @@ class Chernoutsan_13_68(variant.VariantTask):
         U = (a.E - a.A) / Consts.e
         assert U.SI_Value > 0
         return dict(
-            U=U,
+            U=U.IncPrecision(1),
         )
 
 
@@ -156,50 +158,71 @@ class Chernoutsan_13_69(variant.VariantTask):
 
 @variant.text('''
     Определите длину волны (в нм) света, которым освещается поверхность металла,
-    если фотоэлектроны имеют максимальную кинетическую энергию 6-10-20 Дж,
-    а работа выхода электронов из этого металла 6-107! Дж. Постоянная Планка {Consts.h:Task:e}.
+    если фотоэлектроны имеют максимальную кинетическую энергию {K:V:e},
+    а работа выхода электронов из этого металла {A:V:e}. Постоянная Планка {Consts.h:Task:e}.
 ''')
 @variant.solution_space(80)
-@variant.arg(A='A = 1/2 a')
-@variant.answer_short('K = \\frac{hc}{lmbd:L:s} - A \\approx {K:V}')
+@variant.arg(K='E_{\\text{кин.}} = 3/4/5/9 10^{-20} Дж')
+@variant.arg(A='A_{\\text{вых.}} = 7/9/11/13 10^{-19} Дж')
+@variant.answer_short(
+    'h \\frac c\\lambda = {A:L} + {K:L} '
+    '\\implies \\lambda = \\frac{h c}{{A:L} + {K:L}} = \\frac{ {Consts.h:V} * {Const.c:V} }{{A:V} + {K:V}} '
+    '\\approx {lmbd:V}.'
+)
 @variant.is_one_arg
 class Chernoutsan_13_70(variant.VariantTask):
     def GetUpdateOneArg(self, a):
+        lmbd = Consts.h * Consts.c / (a.A + a.K)
         return dict(
-            B=1,
+            lmbd=lmbd.IncPrecision(1),
         )
 
 
 @variant.text('''
-    Работа выхода электронов из некоторого металла 3,375 эВ. Найдите скорость электронов (в км/с),
-    вылетающих с поверхности металла при освещении его светом с длиной волны 2-10`7 м.
-    Масса электрона 9-10 кг. Постоянная Планка {Consts.h:Task:e}, заряд электрона {Consts.e:Task:e}.
+    Работа выхода электронов из некоторого металла {A:V:e}. Найдите скорость электронов (в км/с),
+    вылетающих с поверхности металла при освещении его светом с длиной волны {lmbd:V:e}.
+    Масса электрона {Consts.m_e:Task:e}. Постоянная Планка {Consts.h:Task:e}, заряд электрона {Consts.e:Task:e}.
 ''')
 @variant.solution_space(80)
-@variant.arg(A='A = 1/2 a')
-@variant.answer_short('K = \\frac{hc}{lmbd:L:s} - A \\approx {K:V}')
+@variant.arg(A='A_{\\text{вых.}} = 2.1/3.4/4.3 эВ')
+@variant.arg(lmbd='\\lambda = 1.7/2.2/2.7 10^{-5} см')
+@variant.answer_short(
+    'h \\frac c\\lambda = {A:L} + \\frac{ {Consts.m_e:L}v^2 }2 '
+    '\\implies v = \\sqrt{ \\frac 2{Consts.m_e:L:s}\\cbr{ h \\frac c\\lambda - {A:L} } } \\approx {v:V}.'
+)
 @variant.is_one_arg
 class Chernoutsan_13_71(variant.VariantTask):
     def GetUpdateOneArg(self, a):
+        vv = (Consts.h * Consts.c / a.lmbd - a.A) * 2 / Consts.m_e
+        assert vv.SI_Value > 0, [a.lmbd, a.A]
+        v_value = float(vv.SI_Value) ** 0.5
+        v = UnitValue(f'v = {v_value / 1000:.1f} км / c')
         return dict(
-            B=1,
+            v=v,
         )
 
 
 @variant.text('''
-    Работа выхода электронов из некоторого металла 5,2-1 07° Дж.
-    На металл падают фотоны с импульсом .
+    Работа выхода электронов из некоторого металла {A:V:e}.
+    На металл падают фотоны с импульсом {p:V:e}.
     Во сколько раз максимальный импульс электронов, вылетающих с поверхности металла при фотоэффекте,
-    больше импульса падающих фотонов? Масса электрона {Consts.m_e:Task}.
+    больше импульса падающих фотонов? Масса электрона {Consts.m_e:Task:e}.
 ''')
 @variant.solution_space(80)
+@variant.arg(A='A_{\\text{вых.}} = 3.4/4.3 эВ')
 @variant.arg(p='p = 2.4/2.7/3.0 10**-27 кг м / с')
-@variant.answer_short('K = \\frac{hc}{lmbd:L:s} - A \\approx {K:V}')
+@variant.answer_short(
+        'h \\frac c\\lambda = {A:L} + \\frac{p_e^2}{2m}, p=\\frac h\\lambda'
+        '\\implies p_e = \\sqrt{2m\\cbr{pc - {A:L}}} '
+        '\\implies \\frac{p_e}p = \\sqrt{\\frac{2m}p \\cbr{c - \\frac{A:L:s}p } } \\approx {r:.2f}'
+)
 @variant.is_one_arg
 class Chernoutsan_13_72(variant.VariantTask):
     def GetUpdateOneArg(self, a):
+        rr = Consts.m_e * 2 / a.p * (Consts.c - a.A.IncPrecision(1) / a.p.IncPrecision(1))
+        assert rr.SI_Value > 0
         return dict(
-            B=1,
+            r=float(rr.SI_Value) ** 0.5,
         )
 
 
