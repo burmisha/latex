@@ -17,6 +17,7 @@
 }
 \answer{%
     \begin{align*}
+    1\,\text{эВ} &\approx 0{,}160 \cdot 10^{-18}\,\text{Дж} \\
     3{,}2\,\text{эВ} &\approx 0{,}512 \cdot 10^{-18}\,\text{Дж} \\
     13{,}5\,\text{МэВ} &\approx 2{,}16 \cdot 10^{-12}\,\text{Дж} \\
     7{,}3\,\text{кэВ} &\approx 1{,}168 \cdot 10^{-15}\,\text{Дж} \\
@@ -40,6 +41,7 @@
 }
 \answer{%
     \begin{align*}
+    1\,\text{Дж} &\approx 6{,}3 \cdot 10^{18}\,\text{эВ} \\
     3{,}2\,\text{Дж} &\approx 20 \cdot 10^{18}\,\text{эВ} \\
     13{,}5\,\text{мкДж} &\approx 84{,}4 \cdot 10^{12}\,\text{эВ} \\
     7{,}3\,\text{кДж} &\approx 45{,}6 \cdot 10^{21}\,\text{эВ} \\
@@ -67,7 +69,7 @@
     если работа выхода электрона $3{,}4 \cdot 10^{-19}\,\text{Дж}$? Постоянная Планка $h = 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с}$, заряд электрона $e = 1{,}6 \cdot 10^{-19}\,\text{Кл}$.
 }
 \answer{%
-    $K = \frac{hc}{\lambda} - A \approx 0{,}981\,\text{эВ}$
+    $K = \frac{hc}{\lambda} - A \approx 0{,}98\,\text{эВ}$
 }
 \solutionspace{80pt}
 
@@ -77,7 +79,7 @@
     с энергией фотонов $6{,}3 \cdot 10^{-19}\,\text{Дж}$, если работа выхода из этого металла $5 \cdot 10^{-19}\,\text{Дж}$? Заряд электрона $e = 1{,}6 \cdot 10^{-19}\,\text{Кл}$.
 }
 \answer{%
-    $eU = K = E - A \implies U = \frac{E - A}{ e } \approx 0{,}8\,\text{В}$
+    $eU = K = E - A \implies U = \frac{E - A}{ e } \approx 0{,}81\,\text{В}$
 }
 \solutionspace{80pt}
 
@@ -89,6 +91,43 @@
 }
 \answer{%
     $eU = K = E - A = \frac{hc}{\lambda} - A, \qquad 0 = \frac{hc}{\lambda_0} - A \implies U = \frac{ \frac{hc}{\lambda} - \frac{hc}{\lambda_0} }{ e } = \frac{hc}{ e }\cbr{ \frac 1{\lambda} - \frac 1{\lambda_0}}  \approx 3{,}5\,\text{В}$
+}
+\solutionspace{80pt}
+
+\tasknumber{7}%
+\task{%
+    Определите длину волны (в нм) света, которым освещается поверхность металла,
+    если фотоэлектроны имеют максимальную кинетическую энергию $4 \cdot 10^{-20}\,\text{Дж}$,
+    а работа выхода электронов из этого металла $7 \cdot 10^{-19}\,\text{Дж}$.
+    Постоянная Планка $h = 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с}$.
+}
+\answer{%
+    $h \frac c\lambda = A_{\text{вых.}} + E_{\text{кин.}} \implies \lambda = \frac{h c}{A_{\text{вых.}} + E_{\text{кин.}}} = \frac{ 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с} \cdot {Const.c:V} }{7 \cdot 10^{-19}\,\text{Дж} + 4 \cdot 10^{-20}\,\text{Дж}} \approx 0{,}27 \cdot 10^{-6}\,\text{м}.$
+}
+\solutionspace{80pt}
+
+\tasknumber{8}%
+\task{%
+    Работа выхода электронов из некоторого металла $4{,}3\,\text{эВ}$.
+    Найдите скорость электронов (в км/с),
+    вылетающих с поверхности металла при освещении его светом с длиной волны $2{,}7 \cdot 10^{-5}\,\text{см}$.
+    Масса электрона $m_{e} = 9{,}1 \cdot 10^{-31}\,\text{кг}$.
+    Постоянная Планка $h = 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с}$, заряд электрона $e = 1{,}6 \cdot 10^{-19}\,\text{Кл}$.
+}
+\answer{%
+    $h \frac c\lambda = A_{\text{вых.}} + \frac{ m_{e}v^2 }2 \implies v = \sqrt{ \frac 2{m_{e}}\cbr{ h \frac c\lambda - A_{\text{вых.}} } } \approx 325{,}6\,\frac{\text{км}}{\text{c}}.$
+}
+\solutionspace{80pt}
+
+\tasknumber{9}%
+\task{%
+    Работа выхода электронов из некоторого металла $4{,}30\,\text{эВ}$.
+    На металл падают фотоны с импульсом $3 \cdot 10^{-27}\,\frac{\text{кг}\cdot\text{м}}{\text{с}}$.
+    Во сколько раз максимальный импульс электронов, вылетающих с поверхности металла при фотоэффекте,
+    больше импульса падающих фотонов? Масса электрона $m_{e} = 9{,}1 \cdot 10^{-31}\,\text{кг}$.
+}
+\answer{%
+    $h \frac c\lambda = A_{\text{вых.}} + \frac{p_e^2}{2m}, p=\frac h\lambda\implies p_e = \sqrt{2m\cbr{pc - A_{\text{вых.}}}} \implies \frac{p_e}p = \sqrt{\frac{2m}p \cbr{c - \frac{A_{\text{вых.}}}p } } \approx 207{,}05$
 }
 
 \variantsplitter
@@ -109,6 +148,7 @@
 }
 \answer{%
     \begin{align*}
+    1\,\text{эВ} &\approx 0{,}160 \cdot 10^{-18}\,\text{Дж} \\
     4{,}3\,\text{эВ} &\approx 0{,}688 \cdot 10^{-18}\,\text{Дж} \\
     1{,}4\,\text{МэВ} &\approx 0{,}22 \cdot 10^{-12}\,\text{Дж} \\
     6{,}2\,\text{кэВ} &\approx 0{,}992 \cdot 10^{-15}\,\text{Дж} \\
@@ -132,6 +172,7 @@
 }
 \answer{%
     \begin{align*}
+    1\,\text{Дж} &\approx 6{,}3 \cdot 10^{18}\,\text{эВ} \\
     4{,}3\,\text{Дж} &\approx 26{,}9 \cdot 10^{18}\,\text{эВ} \\
     1{,}4\,\text{мкДж} &\approx 8{,}8 \cdot 10^{12}\,\text{эВ} \\
     6{,}2\,\text{кДж} &\approx 38{,}8 \cdot 10^{21}\,\text{эВ} \\
@@ -159,7 +200,7 @@
     если работа выхода электрона $3{,}2 \cdot 10^{-19}\,\text{Дж}$? Постоянная Планка $h = 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с}$, заряд электрона $e = 1{,}6 \cdot 10^{-19}\,\text{Кл}$.
 }
 \answer{%
-    $K = \frac{hc}{\lambda} - A \approx 1{,}765\,\text{эВ}$
+    $K = \frac{hc}{\lambda} - A \approx 1{,}76\,\text{эВ}$
 }
 \solutionspace{80pt}
 
@@ -169,7 +210,7 @@
     с энергией фотонов $8{,}5 \cdot 10^{-19}\,\text{Дж}$, если работа выхода из этого металла $3 \cdot 10^{-19}\,\text{Дж}$? Заряд электрона $e = 1{,}6 \cdot 10^{-19}\,\text{Кл}$.
 }
 \answer{%
-    $eU = K = E - A \implies U = \frac{E - A}{ e } \approx 3\,\text{В}$
+    $eU = K = E - A \implies U = \frac{E - A}{ e } \approx 3{,}4\,\text{В}$
 }
 \solutionspace{80pt}
 
@@ -181,6 +222,43 @@
 }
 \answer{%
     $eU = K = E - A = \frac{hc}{\lambda} - A, \qquad 0 = \frac{hc}{\lambda_0} - A \implies U = \frac{ \frac{hc}{\lambda} - \frac{hc}{\lambda_0} }{ e } = \frac{hc}{ e }\cbr{ \frac 1{\lambda} - \frac 1{\lambda_0}}  \approx 2{,}4\,\text{В}$
+}
+\solutionspace{80pt}
+
+\tasknumber{7}%
+\task{%
+    Определите длину волны (в нм) света, которым освещается поверхность металла,
+    если фотоэлектроны имеют максимальную кинетическую энергию $4 \cdot 10^{-20}\,\text{Дж}$,
+    а работа выхода электронов из этого металла $13 \cdot 10^{-19}\,\text{Дж}$.
+    Постоянная Планка $h = 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с}$.
+}
+\answer{%
+    $h \frac c\lambda = A_{\text{вых.}} + E_{\text{кин.}} \implies \lambda = \frac{h c}{A_{\text{вых.}} + E_{\text{кин.}}} = \frac{ 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с} \cdot {Const.c:V} }{13 \cdot 10^{-19}\,\text{Дж} + 4 \cdot 10^{-20}\,\text{Дж}} \approx 0{,}1483 \cdot 10^{-6}\,\text{м}.$
+}
+\solutionspace{80pt}
+
+\tasknumber{8}%
+\task{%
+    Работа выхода электронов из некоторого металла $3{,}4\,\text{эВ}$.
+    Найдите скорость электронов (в км/с),
+    вылетающих с поверхности металла при освещении его светом с длиной волны $2{,}2 \cdot 10^{-5}\,\text{см}$.
+    Масса электрона $m_{e} = 9{,}1 \cdot 10^{-31}\,\text{кг}$.
+    Постоянная Планка $h = 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с}$, заряд электрона $e = 1{,}6 \cdot 10^{-19}\,\text{Кл}$.
+}
+\answer{%
+    $h \frac c\lambda = A_{\text{вых.}} + \frac{ m_{e}v^2 }2 \implies v = \sqrt{ \frac 2{m_{e}}\cbr{ h \frac c\lambda - A_{\text{вых.}} } } \approx 888{,}9\,\frac{\text{км}}{\text{c}}.$
+}
+\solutionspace{80pt}
+
+\tasknumber{9}%
+\task{%
+    Работа выхода электронов из некоторого металла $4{,}30\,\text{эВ}$.
+    На металл падают фотоны с импульсом $3 \cdot 10^{-27}\,\frac{\text{кг}\cdot\text{м}}{\text{с}}$.
+    Во сколько раз максимальный импульс электронов, вылетающих с поверхности металла при фотоэффекте,
+    больше импульса падающих фотонов? Масса электрона $m_{e} = 9{,}1 \cdot 10^{-31}\,\text{кг}$.
+}
+\answer{%
+    $h \frac c\lambda = A_{\text{вых.}} + \frac{p_e^2}{2m}, p=\frac h\lambda\implies p_e = \sqrt{2m\cbr{pc - A_{\text{вых.}}}} \implies \frac{p_e}p = \sqrt{\frac{2m}p \cbr{c - \frac{A_{\text{вых.}}}p } } \approx 207{,}05$
 }
 
 \variantsplitter
@@ -201,6 +279,7 @@
 }
 \answer{%
     \begin{align*}
+    1\,\text{эВ} &\approx 0{,}160 \cdot 10^{-18}\,\text{Дж} \\
     3{,}2\,\text{эВ} &\approx 0{,}512 \cdot 10^{-18}\,\text{Дж} \\
     13{,}5\,\text{МэВ} &\approx 2{,}16 \cdot 10^{-12}\,\text{Дж} \\
     7{,}3\,\text{кэВ} &\approx 1{,}168 \cdot 10^{-15}\,\text{Дж} \\
@@ -224,6 +303,7 @@
 }
 \answer{%
     \begin{align*}
+    1\,\text{Дж} &\approx 6{,}3 \cdot 10^{18}\,\text{эВ} \\
     3{,}2\,\text{Дж} &\approx 20 \cdot 10^{18}\,\text{эВ} \\
     13{,}5\,\text{мкДж} &\approx 84{,}4 \cdot 10^{12}\,\text{эВ} \\
     7{,}3\,\text{кДж} &\approx 45{,}6 \cdot 10^{21}\,\text{эВ} \\
@@ -251,7 +331,7 @@
     если работа выхода электрона $2{,}8 \cdot 10^{-19}\,\text{Дж}$? Постоянная Планка $h = 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с}$, заряд электрона $e = 1{,}6 \cdot 10^{-19}\,\text{Кл}$.
 }
 \answer{%
-    $K = \frac{hc}{\lambda} - A \approx 2{,}01\,\text{эВ}$
+    $K = \frac{hc}{\lambda} - A \approx 2{,}0\,\text{эВ}$
 }
 \solutionspace{80pt}
 
@@ -261,7 +341,7 @@
     с энергией фотонов $8{,}5 \cdot 10^{-19}\,\text{Дж}$, если работа выхода из этого металла $3 \cdot 10^{-19}\,\text{Дж}$? Заряд электрона $e = 1{,}6 \cdot 10^{-19}\,\text{Кл}$.
 }
 \answer{%
-    $eU = K = E - A \implies U = \frac{E - A}{ e } \approx 3\,\text{В}$
+    $eU = K = E - A \implies U = \frac{E - A}{ e } \approx 3{,}4\,\text{В}$
 }
 \solutionspace{80pt}
 
@@ -273,6 +353,43 @@
 }
 \answer{%
     $eU = K = E - A = \frac{hc}{\lambda} - A, \qquad 0 = \frac{hc}{\lambda_0} - A \implies U = \frac{ \frac{hc}{\lambda} - \frac{hc}{\lambda_0} }{ e } = \frac{hc}{ e }\cbr{ \frac 1{\lambda} - \frac 1{\lambda_0}}  \approx 2{,}0\,\text{В}$
+}
+\solutionspace{80pt}
+
+\tasknumber{7}%
+\task{%
+    Определите длину волны (в нм) света, которым освещается поверхность металла,
+    если фотоэлектроны имеют максимальную кинетическую энергию $3 \cdot 10^{-20}\,\text{Дж}$,
+    а работа выхода электронов из этого металла $11 \cdot 10^{-19}\,\text{Дж}$.
+    Постоянная Планка $h = 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с}$.
+}
+\answer{%
+    $h \frac c\lambda = A_{\text{вых.}} + E_{\text{кин.}} \implies \lambda = \frac{h c}{A_{\text{вых.}} + E_{\text{кин.}}} = \frac{ 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с} \cdot {Const.c:V} }{11 \cdot 10^{-19}\,\text{Дж} + 3 \cdot 10^{-20}\,\text{Дж}} \approx 0{,}1759 \cdot 10^{-6}\,\text{м}.$
+}
+\solutionspace{80pt}
+
+\tasknumber{8}%
+\task{%
+    Работа выхода электронов из некоторого металла $2{,}1\,\text{эВ}$.
+    Найдите скорость электронов (в км/с),
+    вылетающих с поверхности металла при освещении его светом с длиной волны $2{,}2 \cdot 10^{-5}\,\text{см}$.
+    Масса электрона $m_{e} = 9{,}1 \cdot 10^{-31}\,\text{кг}$.
+    Постоянная Планка $h = 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с}$, заряд электрона $e = 1{,}6 \cdot 10^{-19}\,\text{Кл}$.
+}
+\answer{%
+    $h \frac c\lambda = A_{\text{вых.}} + \frac{ m_{e}v^2 }2 \implies v = \sqrt{ \frac 2{m_{e}}\cbr{ h \frac c\lambda - A_{\text{вых.}} } } \approx 1116{,}8\,\frac{\text{км}}{\text{c}}.$
+}
+\solutionspace{80pt}
+
+\tasknumber{9}%
+\task{%
+    Работа выхода электронов из некоторого металла $3{,}40\,\text{эВ}$.
+    На металл падают фотоны с импульсом $2{,}40 \cdot 10^{-27}\,\frac{\text{кг}\cdot\text{м}}{\text{с}}$.
+    Во сколько раз максимальный импульс электронов, вылетающих с поверхности металла при фотоэффекте,
+    больше импульса падающих фотонов? Масса электрона $m_{e} = 9{,}1 \cdot 10^{-31}\,\text{кг}$.
+}
+\answer{%
+    $h \frac c\lambda = A_{\text{вых.}} + \frac{p_e^2}{2m}, p=\frac h\lambda\implies p_e = \sqrt{2m\cbr{pc - A_{\text{вых.}}}} \implies \frac{p_e}p = \sqrt{\frac{2m}p \cbr{c - \frac{A_{\text{вых.}}}p } } \approx 235{,}82$
 }
 
 \variantsplitter
@@ -293,6 +410,7 @@
 }
 \answer{%
     \begin{align*}
+    1\,\text{эВ} &\approx 0{,}160 \cdot 10^{-18}\,\text{Дж} \\
     4{,}3\,\text{эВ} &\approx 0{,}688 \cdot 10^{-18}\,\text{Дж} \\
     1{,}4\,\text{МэВ} &\approx 0{,}22 \cdot 10^{-12}\,\text{Дж} \\
     7{,}3\,\text{кэВ} &\approx 1{,}168 \cdot 10^{-15}\,\text{Дж} \\
@@ -316,6 +434,7 @@
 }
 \answer{%
     \begin{align*}
+    1\,\text{Дж} &\approx 6{,}3 \cdot 10^{18}\,\text{эВ} \\
     4{,}3\,\text{Дж} &\approx 26{,}9 \cdot 10^{18}\,\text{эВ} \\
     1{,}4\,\text{мкДж} &\approx 8{,}8 \cdot 10^{12}\,\text{эВ} \\
     7{,}3\,\text{кДж} &\approx 45{,}6 \cdot 10^{21}\,\text{эВ} \\
@@ -343,7 +462,7 @@
     если работа выхода электрона $2{,}8 \cdot 10^{-19}\,\text{Дж}$? Постоянная Планка $h = 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с}$, заряд электрона $e = 1{,}6 \cdot 10^{-19}\,\text{Кл}$.
 }
 \answer{%
-    $K = \frac{hc}{\lambda} - A \approx 1{,}356\,\text{эВ}$
+    $K = \frac{hc}{\lambda} - A \approx 1{,}36\,\text{эВ}$
 }
 \solutionspace{80pt}
 
@@ -353,7 +472,7 @@
     с энергией фотонов $6{,}3 \cdot 10^{-19}\,\text{Дж}$, если работа выхода из этого металла $4 \cdot 10^{-19}\,\text{Дж}$? Заряд электрона $e = 1{,}6 \cdot 10^{-19}\,\text{Кл}$.
 }
 \answer{%
-    $eU = K = E - A \implies U = \frac{E - A}{ e } \approx 1{,}4\,\text{В}$
+    $eU = K = E - A \implies U = \frac{E - A}{ e } \approx 1{,}44\,\text{В}$
 }
 \solutionspace{80pt}
 
@@ -365,6 +484,43 @@
 }
 \answer{%
     $eU = K = E - A = \frac{hc}{\lambda} - A, \qquad 0 = \frac{hc}{\lambda_0} - A \implies U = \frac{ \frac{hc}{\lambda} - \frac{hc}{\lambda_0} }{ e } = \frac{hc}{ e }\cbr{ \frac 1{\lambda} - \frac 1{\lambda_0}}  \approx 3{,}6\,\text{В}$
+}
+\solutionspace{80pt}
+
+\tasknumber{7}%
+\task{%
+    Определите длину волны (в нм) света, которым освещается поверхность металла,
+    если фотоэлектроны имеют максимальную кинетическую энергию $4 \cdot 10^{-20}\,\text{Дж}$,
+    а работа выхода электронов из этого металла $13 \cdot 10^{-19}\,\text{Дж}$.
+    Постоянная Планка $h = 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с}$.
+}
+\answer{%
+    $h \frac c\lambda = A_{\text{вых.}} + E_{\text{кин.}} \implies \lambda = \frac{h c}{A_{\text{вых.}} + E_{\text{кин.}}} = \frac{ 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с} \cdot {Const.c:V} }{13 \cdot 10^{-19}\,\text{Дж} + 4 \cdot 10^{-20}\,\text{Дж}} \approx 0{,}1483 \cdot 10^{-6}\,\text{м}.$
+}
+\solutionspace{80pt}
+
+\tasknumber{8}%
+\task{%
+    Работа выхода электронов из некоторого металла $2{,}1\,\text{эВ}$.
+    Найдите скорость электронов (в км/с),
+    вылетающих с поверхности металла при освещении его светом с длиной волны $2{,}7 \cdot 10^{-5}\,\text{см}$.
+    Масса электрона $m_{e} = 9{,}1 \cdot 10^{-31}\,\text{кг}$.
+    Постоянная Планка $h = 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с}$, заряд электрона $e = 1{,}6 \cdot 10^{-19}\,\text{Кл}$.
+}
+\answer{%
+    $h \frac c\lambda = A_{\text{вых.}} + \frac{ m_{e}v^2 }2 \implies v = \sqrt{ \frac 2{m_{e}}\cbr{ h \frac c\lambda - A_{\text{вых.}} } } \approx 937{,}9\,\frac{\text{км}}{\text{c}}.$
+}
+\solutionspace{80pt}
+
+\tasknumber{9}%
+\task{%
+    Работа выхода электронов из некоторого металла $3{,}40\,\text{эВ}$.
+    На металл падают фотоны с импульсом $2{,}40 \cdot 10^{-27}\,\frac{\text{кг}\cdot\text{м}}{\text{с}}$.
+    Во сколько раз максимальный импульс электронов, вылетающих с поверхности металла при фотоэффекте,
+    больше импульса падающих фотонов? Масса электрона $m_{e} = 9{,}1 \cdot 10^{-31}\,\text{кг}$.
+}
+\answer{%
+    $h \frac c\lambda = A_{\text{вых.}} + \frac{p_e^2}{2m}, p=\frac h\lambda\implies p_e = \sqrt{2m\cbr{pc - A_{\text{вых.}}}} \implies \frac{p_e}p = \sqrt{\frac{2m}p \cbr{c - \frac{A_{\text{вых.}}}p } } \approx 235{,}82$
 }
 
 \variantsplitter
@@ -385,6 +541,7 @@
 }
 \answer{%
     \begin{align*}
+    1\,\text{эВ} &\approx 0{,}160 \cdot 10^{-18}\,\text{Дж} \\
     2{,}1\,\text{эВ} &\approx 0{,}336 \cdot 10^{-18}\,\text{Дж} \\
     4{,}6\,\text{МэВ} &\approx 0{,}736 \cdot 10^{-12}\,\text{Дж} \\
     1{,}5\,\text{кэВ} &\approx 0{,}24 \cdot 10^{-15}\,\text{Дж} \\
@@ -408,6 +565,7 @@
 }
 \answer{%
     \begin{align*}
+    1\,\text{Дж} &\approx 6{,}3 \cdot 10^{18}\,\text{эВ} \\
     2{,}1\,\text{Дж} &\approx 13{,}13 \cdot 10^{18}\,\text{эВ} \\
     4{,}6\,\text{мкДж} &\approx 28{,}8 \cdot 10^{12}\,\text{эВ} \\
     1{,}5\,\text{кДж} &\approx 9{,}4 \cdot 10^{21}\,\text{эВ} \\
@@ -435,7 +593,7 @@
     если работа выхода электрона $2{,}8 \cdot 10^{-19}\,\text{Дж}$? Постоянная Планка $h = 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с}$, заряд электрона $e = 1{,}6 \cdot 10^{-19}\,\text{Кл}$.
 }
 \answer{%
-    $K = \frac{hc}{\lambda} - A \approx 2{,}01\,\text{эВ}$
+    $K = \frac{hc}{\lambda} - A \approx 2{,}0\,\text{эВ}$
 }
 \solutionspace{80pt}
 
@@ -445,7 +603,7 @@
     с энергией фотонов $7{,}8 \cdot 10^{-19}\,\text{Дж}$, если работа выхода из этого металла $5 \cdot 10^{-19}\,\text{Дж}$? Заряд электрона $e = 1{,}6 \cdot 10^{-19}\,\text{Кл}$.
 }
 \answer{%
-    $eU = K = E - A \implies U = \frac{E - A}{ e } \approx 1{,}8\,\text{В}$
+    $eU = K = E - A \implies U = \frac{E - A}{ e } \approx 1{,}75\,\text{В}$
 }
 \solutionspace{80pt}
 
@@ -457,6 +615,43 @@
 }
 \answer{%
     $eU = K = E - A = \frac{hc}{\lambda} - A, \qquad 0 = \frac{hc}{\lambda_0} - A \implies U = \frac{ \frac{hc}{\lambda} - \frac{hc}{\lambda_0} }{ e } = \frac{hc}{ e }\cbr{ \frac 1{\lambda} - \frac 1{\lambda_0}}  \approx 2{,}6\,\text{В}$
+}
+\solutionspace{80pt}
+
+\tasknumber{7}%
+\task{%
+    Определите длину волны (в нм) света, которым освещается поверхность металла,
+    если фотоэлектроны имеют максимальную кинетическую энергию $4 \cdot 10^{-20}\,\text{Дж}$,
+    а работа выхода электронов из этого металла $11 \cdot 10^{-19}\,\text{Дж}$.
+    Постоянная Планка $h = 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с}$.
+}
+\answer{%
+    $h \frac c\lambda = A_{\text{вых.}} + E_{\text{кин.}} \implies \lambda = \frac{h c}{A_{\text{вых.}} + E_{\text{кин.}}} = \frac{ 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с} \cdot {Const.c:V} }{11 \cdot 10^{-19}\,\text{Дж} + 4 \cdot 10^{-20}\,\text{Дж}} \approx 0{,}1744 \cdot 10^{-6}\,\text{м}.$
+}
+\solutionspace{80pt}
+
+\tasknumber{8}%
+\task{%
+    Работа выхода электронов из некоторого металла $2{,}1\,\text{эВ}$.
+    Найдите скорость электронов (в км/с),
+    вылетающих с поверхности металла при освещении его светом с длиной волны $2{,}2 \cdot 10^{-5}\,\text{см}$.
+    Масса электрона $m_{e} = 9{,}1 \cdot 10^{-31}\,\text{кг}$.
+    Постоянная Планка $h = 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с}$, заряд электрона $e = 1{,}6 \cdot 10^{-19}\,\text{Кл}$.
+}
+\answer{%
+    $h \frac c\lambda = A_{\text{вых.}} + \frac{ m_{e}v^2 }2 \implies v = \sqrt{ \frac 2{m_{e}}\cbr{ h \frac c\lambda - A_{\text{вых.}} } } \approx 1116{,}8\,\frac{\text{км}}{\text{c}}.$
+}
+\solutionspace{80pt}
+
+\tasknumber{9}%
+\task{%
+    Работа выхода электронов из некоторого металла $3{,}40\,\text{эВ}$.
+    На металл падают фотоны с импульсом $2{,}40 \cdot 10^{-27}\,\frac{\text{кг}\cdot\text{м}}{\text{с}}$.
+    Во сколько раз максимальный импульс электронов, вылетающих с поверхности металла при фотоэффекте,
+    больше импульса падающих фотонов? Масса электрона $m_{e} = 9{,}1 \cdot 10^{-31}\,\text{кг}$.
+}
+\answer{%
+    $h \frac c\lambda = A_{\text{вых.}} + \frac{p_e^2}{2m}, p=\frac h\lambda\implies p_e = \sqrt{2m\cbr{pc - A_{\text{вых.}}}} \implies \frac{p_e}p = \sqrt{\frac{2m}p \cbr{c - \frac{A_{\text{вых.}}}p } } \approx 235{,}82$
 }
 
 \variantsplitter
@@ -477,6 +672,7 @@
 }
 \answer{%
     \begin{align*}
+    1\,\text{эВ} &\approx 0{,}160 \cdot 10^{-18}\,\text{Дж} \\
     1{,}3\,\text{эВ} &\approx 0{,}21 \cdot 10^{-18}\,\text{Дж} \\
     4{,}6\,\text{МэВ} &\approx 0{,}736 \cdot 10^{-12}\,\text{Дж} \\
     7{,}3\,\text{кэВ} &\approx 1{,}168 \cdot 10^{-15}\,\text{Дж} \\
@@ -500,6 +696,7 @@
 }
 \answer{%
     \begin{align*}
+    1\,\text{Дж} &\approx 6{,}3 \cdot 10^{18}\,\text{эВ} \\
     1{,}3\,\text{Дж} &\approx 8{,}1 \cdot 10^{18}\,\text{эВ} \\
     4{,}6\,\text{мкДж} &\approx 28{,}8 \cdot 10^{12}\,\text{эВ} \\
     7{,}3\,\text{кДж} &\approx 45{,}6 \cdot 10^{21}\,\text{эВ} \\
@@ -527,7 +724,7 @@
     если работа выхода электрона $2{,}8 \cdot 10^{-19}\,\text{Дж}$? Постоянная Планка $h = 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с}$, заряд электрона $e = 1{,}6 \cdot 10^{-19}\,\text{Кл}$.
 }
 \answer{%
-    $K = \frac{hc}{\lambda} - A \approx 2{,}01\,\text{эВ}$
+    $K = \frac{hc}{\lambda} - A \approx 2{,}0\,\text{эВ}$
 }
 \solutionspace{80pt}
 
@@ -537,7 +734,7 @@
     с энергией фотонов $8{,}5 \cdot 10^{-19}\,\text{Дж}$, если работа выхода из этого металла $5 \cdot 10^{-19}\,\text{Дж}$? Заряд электрона $e = 1{,}6 \cdot 10^{-19}\,\text{Кл}$.
 }
 \answer{%
-    $eU = K = E - A \implies U = \frac{E - A}{ e } \approx 2\,\text{В}$
+    $eU = K = E - A \implies U = \frac{E - A}{ e } \approx 2{,}2\,\text{В}$
 }
 \solutionspace{80pt}
 
@@ -549,6 +746,43 @@
 }
 \answer{%
     $eU = K = E - A = \frac{hc}{\lambda} - A, \qquad 0 = \frac{hc}{\lambda_0} - A \implies U = \frac{ \frac{hc}{\lambda} - \frac{hc}{\lambda_0} }{ e } = \frac{hc}{ e }\cbr{ \frac 1{\lambda} - \frac 1{\lambda_0}}  \approx 5\,\text{В}$
+}
+\solutionspace{80pt}
+
+\tasknumber{7}%
+\task{%
+    Определите длину волны (в нм) света, которым освещается поверхность металла,
+    если фотоэлектроны имеют максимальную кинетическую энергию $5 \cdot 10^{-20}\,\text{Дж}$,
+    а работа выхода электронов из этого металла $7 \cdot 10^{-19}\,\text{Дж}$.
+    Постоянная Планка $h = 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с}$.
+}
+\answer{%
+    $h \frac c\lambda = A_{\text{вых.}} + E_{\text{кин.}} \implies \lambda = \frac{h c}{A_{\text{вых.}} + E_{\text{кин.}}} = \frac{ 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с} \cdot {Const.c:V} }{7 \cdot 10^{-19}\,\text{Дж} + 5 \cdot 10^{-20}\,\text{Дж}} \approx 0{,}27 \cdot 10^{-6}\,\text{м}.$
+}
+\solutionspace{80pt}
+
+\tasknumber{8}%
+\task{%
+    Работа выхода электронов из некоторого металла $2{,}1\,\text{эВ}$.
+    Найдите скорость электронов (в км/с),
+    вылетающих с поверхности металла при освещении его светом с длиной волны $2{,}2 \cdot 10^{-5}\,\text{см}$.
+    Масса электрона $m_{e} = 9{,}1 \cdot 10^{-31}\,\text{кг}$.
+    Постоянная Планка $h = 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с}$, заряд электрона $e = 1{,}6 \cdot 10^{-19}\,\text{Кл}$.
+}
+\answer{%
+    $h \frac c\lambda = A_{\text{вых.}} + \frac{ m_{e}v^2 }2 \implies v = \sqrt{ \frac 2{m_{e}}\cbr{ h \frac c\lambda - A_{\text{вых.}} } } \approx 1116{,}8\,\frac{\text{км}}{\text{c}}.$
+}
+\solutionspace{80pt}
+
+\tasknumber{9}%
+\task{%
+    Работа выхода электронов из некоторого металла $4{,}30\,\text{эВ}$.
+    На металл падают фотоны с импульсом $2{,}40 \cdot 10^{-27}\,\frac{\text{кг}\cdot\text{м}}{\text{с}}$.
+    Во сколько раз максимальный импульс электронов, вылетающих с поверхности металла при фотоэффекте,
+    больше импульса падающих фотонов? Масса электрона $m_{e} = 9{,}1 \cdot 10^{-31}\,\text{кг}$.
+}
+\answer{%
+    $h \frac c\lambda = A_{\text{вых.}} + \frac{p_e^2}{2m}, p=\frac h\lambda\implies p_e = \sqrt{2m\cbr{pc - A_{\text{вых.}}}} \implies \frac{p_e}p = \sqrt{\frac{2m}p \cbr{c - \frac{A_{\text{вых.}}}p } } \approx 100{,}55$
 }
 
 \variantsplitter
@@ -569,6 +803,7 @@
 }
 \answer{%
     \begin{align*}
+    1\,\text{эВ} &\approx 0{,}160 \cdot 10^{-18}\,\text{Дж} \\
     4{,}3\,\text{эВ} &\approx 0{,}688 \cdot 10^{-18}\,\text{Дж} \\
     1{,}4\,\text{МэВ} &\approx 0{,}22 \cdot 10^{-12}\,\text{Дж} \\
     7{,}3\,\text{кэВ} &\approx 1{,}168 \cdot 10^{-15}\,\text{Дж} \\
@@ -592,6 +827,7 @@
 }
 \answer{%
     \begin{align*}
+    1\,\text{Дж} &\approx 6{,}3 \cdot 10^{18}\,\text{эВ} \\
     4{,}3\,\text{Дж} &\approx 26{,}9 \cdot 10^{18}\,\text{эВ} \\
     1{,}4\,\text{мкДж} &\approx 8{,}8 \cdot 10^{12}\,\text{эВ} \\
     7{,}3\,\text{кДж} &\approx 45{,}6 \cdot 10^{21}\,\text{эВ} \\
@@ -619,7 +855,7 @@
     если работа выхода электрона $3{,}4 \cdot 10^{-19}\,\text{Дж}$? Постоянная Планка $h = 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с}$, заряд электрона $e = 1{,}6 \cdot 10^{-19}\,\text{Кл}$.
 }
 \answer{%
-    $K = \frac{hc}{\lambda} - A \approx 2{,}84\,\text{эВ}$
+    $K = \frac{hc}{\lambda} - A \approx 2{,}8\,\text{эВ}$
 }
 \solutionspace{80pt}
 
@@ -629,7 +865,7 @@
     с энергией фотонов $8{,}5 \cdot 10^{-19}\,\text{Дж}$, если работа выхода из этого металла $3 \cdot 10^{-19}\,\text{Дж}$? Заряд электрона $e = 1{,}6 \cdot 10^{-19}\,\text{Кл}$.
 }
 \answer{%
-    $eU = K = E - A \implies U = \frac{E - A}{ e } \approx 3\,\text{В}$
+    $eU = K = E - A \implies U = \frac{E - A}{ e } \approx 3{,}4\,\text{В}$
 }
 \solutionspace{80pt}
 
@@ -641,6 +877,43 @@
 }
 \answer{%
     $eU = K = E - A = \frac{hc}{\lambda} - A, \qquad 0 = \frac{hc}{\lambda_0} - A \implies U = \frac{ \frac{hc}{\lambda} - \frac{hc}{\lambda_0} }{ e } = \frac{hc}{ e }\cbr{ \frac 1{\lambda} - \frac 1{\lambda_0}}  \approx 3{,}6\,\text{В}$
+}
+\solutionspace{80pt}
+
+\tasknumber{7}%
+\task{%
+    Определите длину волны (в нм) света, которым освещается поверхность металла,
+    если фотоэлектроны имеют максимальную кинетическую энергию $3 \cdot 10^{-20}\,\text{Дж}$,
+    а работа выхода электронов из этого металла $13 \cdot 10^{-19}\,\text{Дж}$.
+    Постоянная Планка $h = 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с}$.
+}
+\answer{%
+    $h \frac c\lambda = A_{\text{вых.}} + E_{\text{кин.}} \implies \lambda = \frac{h c}{A_{\text{вых.}} + E_{\text{кин.}}} = \frac{ 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с} \cdot {Const.c:V} }{13 \cdot 10^{-19}\,\text{Дж} + 3 \cdot 10^{-20}\,\text{Дж}} \approx 0{,}1495 \cdot 10^{-6}\,\text{м}.$
+}
+\solutionspace{80pt}
+
+\tasknumber{8}%
+\task{%
+    Работа выхода электронов из некоторого металла $4{,}3\,\text{эВ}$.
+    Найдите скорость электронов (в км/с),
+    вылетающих с поверхности металла при освещении его светом с длиной волны $1{,}7 \cdot 10^{-5}\,\text{см}$.
+    Масса электрона $m_{e} = 9{,}1 \cdot 10^{-31}\,\text{кг}$.
+    Постоянная Планка $h = 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с}$, заряд электрона $e = 1{,}6 \cdot 10^{-19}\,\text{Кл}$.
+}
+\answer{%
+    $h \frac c\lambda = A_{\text{вых.}} + \frac{ m_{e}v^2 }2 \implies v = \sqrt{ \frac 2{m_{e}}\cbr{ h \frac c\lambda - A_{\text{вых.}} } } \approx 1028{,}5\,\frac{\text{км}}{\text{c}}.$
+}
+\solutionspace{80pt}
+
+\tasknumber{9}%
+\task{%
+    Работа выхода электронов из некоторого металла $3{,}40\,\text{эВ}$.
+    На металл падают фотоны с импульсом $3 \cdot 10^{-27}\,\frac{\text{кг}\cdot\text{м}}{\text{с}}$.
+    Во сколько раз максимальный импульс электронов, вылетающих с поверхности металла при фотоэффекте,
+    больше импульса падающих фотонов? Масса электрона $m_{e} = 9{,}1 \cdot 10^{-31}\,\text{кг}$.
+}
+\answer{%
+    $h \frac c\lambda = A_{\text{вых.}} + \frac{p_e^2}{2m}, p=\frac h\lambda\implies p_e = \sqrt{2m\cbr{pc - A_{\text{вых.}}}} \implies \frac{p_e}p = \sqrt{\frac{2m}p \cbr{c - \frac{A_{\text{вых.}}}p } } \approx 268{,}31$
 }
 
 \variantsplitter
@@ -661,6 +934,7 @@
 }
 \answer{%
     \begin{align*}
+    1\,\text{эВ} &\approx 0{,}160 \cdot 10^{-18}\,\text{Дж} \\
     3{,}2\,\text{эВ} &\approx 0{,}512 \cdot 10^{-18}\,\text{Дж} \\
     13{,}5\,\text{МэВ} &\approx 2{,}16 \cdot 10^{-12}\,\text{Дж} \\
     6{,}2\,\text{кэВ} &\approx 0{,}992 \cdot 10^{-15}\,\text{Дж} \\
@@ -684,6 +958,7 @@
 }
 \answer{%
     \begin{align*}
+    1\,\text{Дж} &\approx 6{,}3 \cdot 10^{18}\,\text{эВ} \\
     3{,}2\,\text{Дж} &\approx 20 \cdot 10^{18}\,\text{эВ} \\
     13{,}5\,\text{мкДж} &\approx 84{,}4 \cdot 10^{12}\,\text{эВ} \\
     6{,}2\,\text{кДж} &\approx 38{,}8 \cdot 10^{21}\,\text{эВ} \\
@@ -711,7 +986,7 @@
     если работа выхода электрона $3{,}2 \cdot 10^{-19}\,\text{Дж}$? Постоянная Планка $h = 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с}$, заряд электрона $e = 1{,}6 \cdot 10^{-19}\,\text{Кл}$.
 }
 \answer{%
-    $K = \frac{hc}{\lambda} - A \approx 2{,}97\,\text{эВ}$
+    $K = \frac{hc}{\lambda} - A \approx 3{,}0\,\text{эВ}$
 }
 \solutionspace{80pt}
 
@@ -721,7 +996,7 @@
     с энергией фотонов $6{,}3 \cdot 10^{-19}\,\text{Дж}$, если работа выхода из этого металла $5 \cdot 10^{-19}\,\text{Дж}$? Заряд электрона $e = 1{,}6 \cdot 10^{-19}\,\text{Кл}$.
 }
 \answer{%
-    $eU = K = E - A \implies U = \frac{E - A}{ e } \approx 0{,}8\,\text{В}$
+    $eU = K = E - A \implies U = \frac{E - A}{ e } \approx 0{,}81\,\text{В}$
 }
 \solutionspace{80pt}
 
@@ -733,6 +1008,43 @@
 }
 \answer{%
     $eU = K = E - A = \frac{hc}{\lambda} - A, \qquad 0 = \frac{hc}{\lambda_0} - A \implies U = \frac{ \frac{hc}{\lambda} - \frac{hc}{\lambda_0} }{ e } = \frac{hc}{ e }\cbr{ \frac 1{\lambda} - \frac 1{\lambda_0}}  \approx 5\,\text{В}$
+}
+\solutionspace{80pt}
+
+\tasknumber{7}%
+\task{%
+    Определите длину волны (в нм) света, которым освещается поверхность металла,
+    если фотоэлектроны имеют максимальную кинетическую энергию $9 \cdot 10^{-20}\,\text{Дж}$,
+    а работа выхода электронов из этого металла $13 \cdot 10^{-19}\,\text{Дж}$.
+    Постоянная Планка $h = 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с}$.
+}
+\answer{%
+    $h \frac c\lambda = A_{\text{вых.}} + E_{\text{кин.}} \implies \lambda = \frac{h c}{A_{\text{вых.}} + E_{\text{кин.}}} = \frac{ 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с} \cdot {Const.c:V} }{13 \cdot 10^{-19}\,\text{Дж} + 9 \cdot 10^{-20}\,\text{Дж}} \approx 0{,}1430 \cdot 10^{-6}\,\text{м}.$
+}
+\solutionspace{80pt}
+
+\tasknumber{8}%
+\task{%
+    Работа выхода электронов из некоторого металла $3{,}4\,\text{эВ}$.
+    Найдите скорость электронов (в км/с),
+    вылетающих с поверхности металла при освещении его светом с длиной волны $1{,}7 \cdot 10^{-5}\,\text{см}$.
+    Масса электрона $m_{e} = 9{,}1 \cdot 10^{-31}\,\text{кг}$.
+    Постоянная Планка $h = 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с}$, заряд электрона $e = 1{,}6 \cdot 10^{-19}\,\text{Кл}$.
+}
+\answer{%
+    $h \frac c\lambda = A_{\text{вых.}} + \frac{ m_{e}v^2 }2 \implies v = \sqrt{ \frac 2{m_{e}}\cbr{ h \frac c\lambda - A_{\text{вых.}} } } \approx 1172{,}3\,\frac{\text{км}}{\text{c}}.$
+}
+\solutionspace{80pt}
+
+\tasknumber{9}%
+\task{%
+    Работа выхода электронов из некоторого металла $4{,}30\,\text{эВ}$.
+    На металл падают фотоны с импульсом $2{,}40 \cdot 10^{-27}\,\frac{\text{кг}\cdot\text{м}}{\text{с}}$.
+    Во сколько раз максимальный импульс электронов, вылетающих с поверхности металла при фотоэффекте,
+    больше импульса падающих фотонов? Масса электрона $m_{e} = 9{,}1 \cdot 10^{-31}\,\text{кг}$.
+}
+\answer{%
+    $h \frac c\lambda = A_{\text{вых.}} + \frac{p_e^2}{2m}, p=\frac h\lambda\implies p_e = \sqrt{2m\cbr{pc - A_{\text{вых.}}}} \implies \frac{p_e}p = \sqrt{\frac{2m}p \cbr{c - \frac{A_{\text{вых.}}}p } } \approx 100{,}55$
 }
 
 \variantsplitter
@@ -753,6 +1065,7 @@
 }
 \answer{%
     \begin{align*}
+    1\,\text{эВ} &\approx 0{,}160 \cdot 10^{-18}\,\text{Дж} \\
     1{,}3\,\text{эВ} &\approx 0{,}21 \cdot 10^{-18}\,\text{Дж} \\
     5{,}7\,\text{МэВ} &\approx 0{,}912 \cdot 10^{-12}\,\text{Дж} \\
     7{,}3\,\text{кэВ} &\approx 1{,}168 \cdot 10^{-15}\,\text{Дж} \\
@@ -776,6 +1089,7 @@
 }
 \answer{%
     \begin{align*}
+    1\,\text{Дж} &\approx 6{,}3 \cdot 10^{18}\,\text{эВ} \\
     1{,}3\,\text{Дж} &\approx 8{,}1 \cdot 10^{18}\,\text{эВ} \\
     5{,}7\,\text{мкДж} &\approx 35{,}6 \cdot 10^{12}\,\text{эВ} \\
     7{,}3\,\text{кДж} &\approx 45{,}6 \cdot 10^{21}\,\text{эВ} \\
@@ -803,7 +1117,7 @@
     если работа выхода электрона $3{,}2 \cdot 10^{-19}\,\text{Дж}$? Постоянная Планка $h = 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с}$, заряд электрона $e = 1{,}6 \cdot 10^{-19}\,\text{Кл}$.
 }
 \answer{%
-    $K = \frac{hc}{\lambda} - A \approx 1{,}106\,\text{эВ}$
+    $K = \frac{hc}{\lambda} - A \approx 1{,}11\,\text{эВ}$
 }
 \solutionspace{80pt}
 
@@ -813,7 +1127,7 @@
     с энергией фотонов $6{,}3 \cdot 10^{-19}\,\text{Дж}$, если работа выхода из этого металла $3 \cdot 10^{-19}\,\text{Дж}$? Заряд электрона $e = 1{,}6 \cdot 10^{-19}\,\text{Кл}$.
 }
 \answer{%
-    $eU = K = E - A \implies U = \frac{E - A}{ e } \approx 2\,\text{В}$
+    $eU = K = E - A \implies U = \frac{E - A}{ e } \approx 2{,}1\,\text{В}$
 }
 \solutionspace{80pt}
 
@@ -825,6 +1139,43 @@
 }
 \answer{%
     $eU = K = E - A = \frac{hc}{\lambda} - A, \qquad 0 = \frac{hc}{\lambda_0} - A \implies U = \frac{ \frac{hc}{\lambda} - \frac{hc}{\lambda_0} }{ e } = \frac{hc}{ e }\cbr{ \frac 1{\lambda} - \frac 1{\lambda_0}}  \approx 5\,\text{В}$
+}
+\solutionspace{80pt}
+
+\tasknumber{7}%
+\task{%
+    Определите длину волны (в нм) света, которым освещается поверхность металла,
+    если фотоэлектроны имеют максимальную кинетическую энергию $3 \cdot 10^{-20}\,\text{Дж}$,
+    а работа выхода электронов из этого металла $7 \cdot 10^{-19}\,\text{Дж}$.
+    Постоянная Планка $h = 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с}$.
+}
+\answer{%
+    $h \frac c\lambda = A_{\text{вых.}} + E_{\text{кин.}} \implies \lambda = \frac{h c}{A_{\text{вых.}} + E_{\text{кин.}}} = \frac{ 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с} \cdot {Const.c:V} }{7 \cdot 10^{-19}\,\text{Дж} + 3 \cdot 10^{-20}\,\text{Дж}} \approx 0{,}27 \cdot 10^{-6}\,\text{м}.$
+}
+\solutionspace{80pt}
+
+\tasknumber{8}%
+\task{%
+    Работа выхода электронов из некоторого металла $3{,}4\,\text{эВ}$.
+    Найдите скорость электронов (в км/с),
+    вылетающих с поверхности металла при освещении его светом с длиной волны $2{,}7 \cdot 10^{-5}\,\text{см}$.
+    Масса электрона $m_{e} = 9{,}1 \cdot 10^{-31}\,\text{кг}$.
+    Постоянная Планка $h = 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с}$, заряд электрона $e = 1{,}6 \cdot 10^{-19}\,\text{Кл}$.
+}
+\answer{%
+    $h \frac c\lambda = A_{\text{вых.}} + \frac{ m_{e}v^2 }2 \implies v = \sqrt{ \frac 2{m_{e}}\cbr{ h \frac c\lambda - A_{\text{вых.}} } } \approx 650\,\frac{\text{км}}{\text{c}}.$
+}
+\solutionspace{80pt}
+
+\tasknumber{9}%
+\task{%
+    Работа выхода электронов из некоторого металла $3{,}40\,\text{эВ}$.
+    На металл падают фотоны с импульсом $2{,}70 \cdot 10^{-27}\,\frac{\text{кг}\cdot\text{м}}{\text{с}}$.
+    Во сколько раз максимальный импульс электронов, вылетающих с поверхности металла при фотоэффекте,
+    больше импульса падающих фотонов? Масса электрона $m_{e} = 9{,}1 \cdot 10^{-31}\,\text{кг}$.
+}
+\answer{%
+    $h \frac c\lambda = A_{\text{вых.}} + \frac{p_e^2}{2m}, p=\frac h\lambda\implies p_e = \sqrt{2m\cbr{pc - A_{\text{вых.}}}} \implies \frac{p_e}p = \sqrt{\frac{2m}p \cbr{c - \frac{A_{\text{вых.}}}p } } \approx 257{,}70$
 }
 
 \variantsplitter
@@ -845,6 +1196,7 @@
 }
 \answer{%
     \begin{align*}
+    1\,\text{эВ} &\approx 0{,}160 \cdot 10^{-18}\,\text{Дж} \\
     1{,}3\,\text{эВ} &\approx 0{,}21 \cdot 10^{-18}\,\text{Дж} \\
     1{,}4\,\text{МэВ} &\approx 0{,}22 \cdot 10^{-12}\,\text{Дж} \\
     6{,}2\,\text{кэВ} &\approx 0{,}992 \cdot 10^{-15}\,\text{Дж} \\
@@ -868,6 +1220,7 @@
 }
 \answer{%
     \begin{align*}
+    1\,\text{Дж} &\approx 6{,}3 \cdot 10^{18}\,\text{эВ} \\
     1{,}3\,\text{Дж} &\approx 8{,}1 \cdot 10^{18}\,\text{эВ} \\
     1{,}4\,\text{мкДж} &\approx 8{,}8 \cdot 10^{12}\,\text{эВ} \\
     6{,}2\,\text{кДж} &\approx 38{,}8 \cdot 10^{21}\,\text{эВ} \\
@@ -895,7 +1248,7 @@
     если работа выхода электрона $3{,}4 \cdot 10^{-19}\,\text{Дж}$? Постоянная Планка $h = 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с}$, заряд электрона $e = 1{,}6 \cdot 10^{-19}\,\text{Кл}$.
 }
 \answer{%
-    $K = \frac{hc}{\lambda} - A \approx 1{,}640\,\text{эВ}$
+    $K = \frac{hc}{\lambda} - A \approx 1{,}64\,\text{эВ}$
 }
 \solutionspace{80pt}
 
@@ -905,7 +1258,7 @@
     с энергией фотонов $8{,}5 \cdot 10^{-19}\,\text{Дж}$, если работа выхода из этого металла $4 \cdot 10^{-19}\,\text{Дж}$? Заряд электрона $e = 1{,}6 \cdot 10^{-19}\,\text{Кл}$.
 }
 \answer{%
-    $eU = K = E - A \implies U = \frac{E - A}{ e } \approx 3\,\text{В}$
+    $eU = K = E - A \implies U = \frac{E - A}{ e } \approx 2{,}8\,\text{В}$
 }
 \solutionspace{80pt}
 
@@ -917,6 +1270,43 @@
 }
 \answer{%
     $eU = K = E - A = \frac{hc}{\lambda} - A, \qquad 0 = \frac{hc}{\lambda_0} - A \implies U = \frac{ \frac{hc}{\lambda} - \frac{hc}{\lambda_0} }{ e } = \frac{hc}{ e }\cbr{ \frac 1{\lambda} - \frac 1{\lambda_0}}  \approx 5\,\text{В}$
+}
+\solutionspace{80pt}
+
+\tasknumber{7}%
+\task{%
+    Определите длину волны (в нм) света, которым освещается поверхность металла,
+    если фотоэлектроны имеют максимальную кинетическую энергию $4 \cdot 10^{-20}\,\text{Дж}$,
+    а работа выхода электронов из этого металла $9 \cdot 10^{-19}\,\text{Дж}$.
+    Постоянная Планка $h = 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с}$.
+}
+\answer{%
+    $h \frac c\lambda = A_{\text{вых.}} + E_{\text{кин.}} \implies \lambda = \frac{h c}{A_{\text{вых.}} + E_{\text{кин.}}} = \frac{ 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с} \cdot {Const.c:V} }{9 \cdot 10^{-19}\,\text{Дж} + 4 \cdot 10^{-20}\,\text{Дж}} \approx 0{,}21 \cdot 10^{-6}\,\text{м}.$
+}
+\solutionspace{80pt}
+
+\tasknumber{8}%
+\task{%
+    Работа выхода электронов из некоторого металла $4{,}3\,\text{эВ}$.
+    Найдите скорость электронов (в км/с),
+    вылетающих с поверхности металла при освещении его светом с длиной волны $2{,}2 \cdot 10^{-5}\,\text{см}$.
+    Масса электрона $m_{e} = 9{,}1 \cdot 10^{-31}\,\text{кг}$.
+    Постоянная Планка $h = 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с}$, заряд электрона $e = 1{,}6 \cdot 10^{-19}\,\text{Кл}$.
+}
+\answer{%
+    $h \frac c\lambda = A_{\text{вых.}} + \frac{ m_{e}v^2 }2 \implies v = \sqrt{ \frac 2{m_{e}}\cbr{ h \frac c\lambda - A_{\text{вых.}} } } \approx 688{,}3\,\frac{\text{км}}{\text{c}}.$
+}
+\solutionspace{80pt}
+
+\tasknumber{9}%
+\task{%
+    Работа выхода электронов из некоторого металла $4{,}30\,\text{эВ}$.
+    На металл падают фотоны с импульсом $3 \cdot 10^{-27}\,\frac{\text{кг}\cdot\text{м}}{\text{с}}$.
+    Во сколько раз максимальный импульс электронов, вылетающих с поверхности металла при фотоэффекте,
+    больше импульса падающих фотонов? Масса электрона $m_{e} = 9{,}1 \cdot 10^{-31}\,\text{кг}$.
+}
+\answer{%
+    $h \frac c\lambda = A_{\text{вых.}} + \frac{p_e^2}{2m}, p=\frac h\lambda\implies p_e = \sqrt{2m\cbr{pc - A_{\text{вых.}}}} \implies \frac{p_e}p = \sqrt{\frac{2m}p \cbr{c - \frac{A_{\text{вых.}}}p } } \approx 207{,}05$
 }
 
 \variantsplitter
@@ -937,6 +1327,7 @@
 }
 \answer{%
     \begin{align*}
+    1\,\text{эВ} &\approx 0{,}160 \cdot 10^{-18}\,\text{Дж} \\
     3{,}2\,\text{эВ} &\approx 0{,}512 \cdot 10^{-18}\,\text{Дж} \\
     4{,}6\,\text{МэВ} &\approx 0{,}736 \cdot 10^{-12}\,\text{Дж} \\
     5{,}1\,\text{кэВ} &\approx 0{,}816 \cdot 10^{-15}\,\text{Дж} \\
@@ -960,6 +1351,7 @@
 }
 \answer{%
     \begin{align*}
+    1\,\text{Дж} &\approx 6{,}3 \cdot 10^{18}\,\text{эВ} \\
     3{,}2\,\text{Дж} &\approx 20 \cdot 10^{18}\,\text{эВ} \\
     4{,}6\,\text{мкДж} &\approx 28{,}8 \cdot 10^{12}\,\text{эВ} \\
     5{,}1\,\text{кДж} &\approx 31{,}9 \cdot 10^{21}\,\text{эВ} \\
@@ -987,7 +1379,7 @@
     если работа выхода электрона $2{,}8 \cdot 10^{-19}\,\text{Дж}$? Постоянная Планка $h = 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с}$, заряд электрона $e = 1{,}6 \cdot 10^{-19}\,\text{Кл}$.
 }
 \answer{%
-    $K = \frac{hc}{\lambda} - A \approx 1{,}356\,\text{эВ}$
+    $K = \frac{hc}{\lambda} - A \approx 1{,}36\,\text{эВ}$
 }
 \solutionspace{80pt}
 
@@ -997,7 +1389,7 @@
     с энергией фотонов $7{,}8 \cdot 10^{-19}\,\text{Дж}$, если работа выхода из этого металла $4 \cdot 10^{-19}\,\text{Дж}$? Заряд электрона $e = 1{,}6 \cdot 10^{-19}\,\text{Кл}$.
 }
 \answer{%
-    $eU = K = E - A \implies U = \frac{E - A}{ e } \approx 2\,\text{В}$
+    $eU = K = E - A \implies U = \frac{E - A}{ e } \approx 2{,}4\,\text{В}$
 }
 \solutionspace{80pt}
 
@@ -1009,6 +1401,43 @@
 }
 \answer{%
     $eU = K = E - A = \frac{hc}{\lambda} - A, \qquad 0 = \frac{hc}{\lambda_0} - A \implies U = \frac{ \frac{hc}{\lambda} - \frac{hc}{\lambda_0} }{ e } = \frac{hc}{ e }\cbr{ \frac 1{\lambda} - \frac 1{\lambda_0}}  \approx 2{,}6\,\text{В}$
+}
+\solutionspace{80pt}
+
+\tasknumber{7}%
+\task{%
+    Определите длину волны (в нм) света, которым освещается поверхность металла,
+    если фотоэлектроны имеют максимальную кинетическую энергию $4 \cdot 10^{-20}\,\text{Дж}$,
+    а работа выхода электронов из этого металла $11 \cdot 10^{-19}\,\text{Дж}$.
+    Постоянная Планка $h = 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с}$.
+}
+\answer{%
+    $h \frac c\lambda = A_{\text{вых.}} + E_{\text{кин.}} \implies \lambda = \frac{h c}{A_{\text{вых.}} + E_{\text{кин.}}} = \frac{ 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с} \cdot {Const.c:V} }{11 \cdot 10^{-19}\,\text{Дж} + 4 \cdot 10^{-20}\,\text{Дж}} \approx 0{,}1744 \cdot 10^{-6}\,\text{м}.$
+}
+\solutionspace{80pt}
+
+\tasknumber{8}%
+\task{%
+    Работа выхода электронов из некоторого металла $2{,}1\,\text{эВ}$.
+    Найдите скорость электронов (в км/с),
+    вылетающих с поверхности металла при освещении его светом с длиной волны $2{,}7 \cdot 10^{-5}\,\text{см}$.
+    Масса электрона $m_{e} = 9{,}1 \cdot 10^{-31}\,\text{кг}$.
+    Постоянная Планка $h = 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с}$, заряд электрона $e = 1{,}6 \cdot 10^{-19}\,\text{Кл}$.
+}
+\answer{%
+    $h \frac c\lambda = A_{\text{вых.}} + \frac{ m_{e}v^2 }2 \implies v = \sqrt{ \frac 2{m_{e}}\cbr{ h \frac c\lambda - A_{\text{вых.}} } } \approx 937{,}9\,\frac{\text{км}}{\text{c}}.$
+}
+\solutionspace{80pt}
+
+\tasknumber{9}%
+\task{%
+    Работа выхода электронов из некоторого металла $4{,}30\,\text{эВ}$.
+    На металл падают фотоны с импульсом $3 \cdot 10^{-27}\,\frac{\text{кг}\cdot\text{м}}{\text{с}}$.
+    Во сколько раз максимальный импульс электронов, вылетающих с поверхности металла при фотоэффекте,
+    больше импульса падающих фотонов? Масса электрона $m_{e} = 9{,}1 \cdot 10^{-31}\,\text{кг}$.
+}
+\answer{%
+    $h \frac c\lambda = A_{\text{вых.}} + \frac{p_e^2}{2m}, p=\frac h\lambda\implies p_e = \sqrt{2m\cbr{pc - A_{\text{вых.}}}} \implies \frac{p_e}p = \sqrt{\frac{2m}p \cbr{c - \frac{A_{\text{вых.}}}p } } \approx 207{,}05$
 }
 
 \variantsplitter
@@ -1029,6 +1458,7 @@
 }
 \answer{%
     \begin{align*}
+    1\,\text{эВ} &\approx 0{,}160 \cdot 10^{-18}\,\text{Дж} \\
     4{,}3\,\text{эВ} &\approx 0{,}688 \cdot 10^{-18}\,\text{Дж} \\
     5{,}7\,\text{МэВ} &\approx 0{,}912 \cdot 10^{-12}\,\text{Дж} \\
     7{,}3\,\text{кэВ} &\approx 1{,}168 \cdot 10^{-15}\,\text{Дж} \\
@@ -1052,6 +1482,7 @@
 }
 \answer{%
     \begin{align*}
+    1\,\text{Дж} &\approx 6{,}3 \cdot 10^{18}\,\text{эВ} \\
     4{,}3\,\text{Дж} &\approx 26{,}9 \cdot 10^{18}\,\text{эВ} \\
     5{,}7\,\text{мкДж} &\approx 35{,}6 \cdot 10^{12}\,\text{эВ} \\
     7{,}3\,\text{кДж} &\approx 45{,}6 \cdot 10^{21}\,\text{эВ} \\
@@ -1079,7 +1510,7 @@
     если работа выхода электрона $2{,}8 \cdot 10^{-19}\,\text{Дж}$? Постоянная Планка $h = 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с}$, заряд электрона $e = 1{,}6 \cdot 10^{-19}\,\text{Кл}$.
 }
 \answer{%
-    $K = \frac{hc}{\lambda} - A \approx 1{,}356\,\text{эВ}$
+    $K = \frac{hc}{\lambda} - A \approx 1{,}36\,\text{эВ}$
 }
 \solutionspace{80pt}
 
@@ -1089,7 +1520,7 @@
     с энергией фотонов $9{,}2 \cdot 10^{-19}\,\text{Дж}$, если работа выхода из этого металла $3 \cdot 10^{-19}\,\text{Дж}$? Заряд электрона $e = 1{,}6 \cdot 10^{-19}\,\text{Кл}$.
 }
 \answer{%
-    $eU = K = E - A \implies U = \frac{E - A}{ e } \approx 4\,\text{В}$
+    $eU = K = E - A \implies U = \frac{E - A}{ e } \approx 3{,}9\,\text{В}$
 }
 \solutionspace{80pt}
 
@@ -1101,6 +1532,43 @@
 }
 \answer{%
     $eU = K = E - A = \frac{hc}{\lambda} - A, \qquad 0 = \frac{hc}{\lambda_0} - A \implies U = \frac{ \frac{hc}{\lambda} - \frac{hc}{\lambda_0} }{ e } = \frac{hc}{ e }\cbr{ \frac 1{\lambda} - \frac 1{\lambda_0}}  \approx 2{,}8\,\text{В}$
+}
+\solutionspace{80pt}
+
+\tasknumber{7}%
+\task{%
+    Определите длину волны (в нм) света, которым освещается поверхность металла,
+    если фотоэлектроны имеют максимальную кинетическую энергию $3 \cdot 10^{-20}\,\text{Дж}$,
+    а работа выхода электронов из этого металла $13 \cdot 10^{-19}\,\text{Дж}$.
+    Постоянная Планка $h = 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с}$.
+}
+\answer{%
+    $h \frac c\lambda = A_{\text{вых.}} + E_{\text{кин.}} \implies \lambda = \frac{h c}{A_{\text{вых.}} + E_{\text{кин.}}} = \frac{ 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с} \cdot {Const.c:V} }{13 \cdot 10^{-19}\,\text{Дж} + 3 \cdot 10^{-20}\,\text{Дж}} \approx 0{,}1495 \cdot 10^{-6}\,\text{м}.$
+}
+\solutionspace{80pt}
+
+\tasknumber{8}%
+\task{%
+    Работа выхода электронов из некоторого металла $2{,}1\,\text{эВ}$.
+    Найдите скорость электронов (в км/с),
+    вылетающих с поверхности металла при освещении его светом с длиной волны $2{,}7 \cdot 10^{-5}\,\text{см}$.
+    Масса электрона $m_{e} = 9{,}1 \cdot 10^{-31}\,\text{кг}$.
+    Постоянная Планка $h = 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с}$, заряд электрона $e = 1{,}6 \cdot 10^{-19}\,\text{Кл}$.
+}
+\answer{%
+    $h \frac c\lambda = A_{\text{вых.}} + \frac{ m_{e}v^2 }2 \implies v = \sqrt{ \frac 2{m_{e}}\cbr{ h \frac c\lambda - A_{\text{вых.}} } } \approx 937{,}9\,\frac{\text{км}}{\text{c}}.$
+}
+\solutionspace{80pt}
+
+\tasknumber{9}%
+\task{%
+    Работа выхода электронов из некоторого металла $4{,}30\,\text{эВ}$.
+    На металл падают фотоны с импульсом $2{,}40 \cdot 10^{-27}\,\frac{\text{кг}\cdot\text{м}}{\text{с}}$.
+    Во сколько раз максимальный импульс электронов, вылетающих с поверхности металла при фотоэффекте,
+    больше импульса падающих фотонов? Масса электрона $m_{e} = 9{,}1 \cdot 10^{-31}\,\text{кг}$.
+}
+\answer{%
+    $h \frac c\lambda = A_{\text{вых.}} + \frac{p_e^2}{2m}, p=\frac h\lambda\implies p_e = \sqrt{2m\cbr{pc - A_{\text{вых.}}}} \implies \frac{p_e}p = \sqrt{\frac{2m}p \cbr{c - \frac{A_{\text{вых.}}}p } } \approx 100{,}55$
 }
 
 \variantsplitter
@@ -1121,6 +1589,7 @@
 }
 \answer{%
     \begin{align*}
+    1\,\text{эВ} &\approx 0{,}160 \cdot 10^{-18}\,\text{Дж} \\
     1{,}3\,\text{эВ} &\approx 0{,}21 \cdot 10^{-18}\,\text{Дж} \\
     1{,}4\,\text{МэВ} &\approx 0{,}22 \cdot 10^{-12}\,\text{Дж} \\
     6{,}2\,\text{кэВ} &\approx 0{,}992 \cdot 10^{-15}\,\text{Дж} \\
@@ -1144,6 +1613,7 @@
 }
 \answer{%
     \begin{align*}
+    1\,\text{Дж} &\approx 6{,}3 \cdot 10^{18}\,\text{эВ} \\
     1{,}3\,\text{Дж} &\approx 8{,}1 \cdot 10^{18}\,\text{эВ} \\
     1{,}4\,\text{мкДж} &\approx 8{,}8 \cdot 10^{12}\,\text{эВ} \\
     6{,}2\,\text{кДж} &\approx 38{,}8 \cdot 10^{21}\,\text{эВ} \\
@@ -1171,7 +1641,7 @@
     если работа выхода электрона $3{,}2 \cdot 10^{-19}\,\text{Дж}$? Постоянная Планка $h = 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с}$, заряд электрона $e = 1{,}6 \cdot 10^{-19}\,\text{Кл}$.
 }
 \answer{%
-    $K = \frac{hc}{\lambda} - A \approx 1{,}106\,\text{эВ}$
+    $K = \frac{hc}{\lambda} - A \approx 1{,}11\,\text{эВ}$
 }
 \solutionspace{80pt}
 
@@ -1181,7 +1651,7 @@
     с энергией фотонов $8{,}5 \cdot 10^{-19}\,\text{Дж}$, если работа выхода из этого металла $5 \cdot 10^{-19}\,\text{Дж}$? Заряд электрона $e = 1{,}6 \cdot 10^{-19}\,\text{Кл}$.
 }
 \answer{%
-    $eU = K = E - A \implies U = \frac{E - A}{ e } \approx 2\,\text{В}$
+    $eU = K = E - A \implies U = \frac{E - A}{ e } \approx 2{,}2\,\text{В}$
 }
 \solutionspace{80pt}
 
@@ -1193,5 +1663,42 @@
 }
 \answer{%
     $eU = K = E - A = \frac{hc}{\lambda} - A, \qquad 0 = \frac{hc}{\lambda_0} - A \implies U = \frac{ \frac{hc}{\lambda} - \frac{hc}{\lambda_0} }{ e } = \frac{hc}{ e }\cbr{ \frac 1{\lambda} - \frac 1{\lambda_0}}  \approx 3{,}5\,\text{В}$
+}
+\solutionspace{80pt}
+
+\tasknumber{7}%
+\task{%
+    Определите длину волны (в нм) света, которым освещается поверхность металла,
+    если фотоэлектроны имеют максимальную кинетическую энергию $3 \cdot 10^{-20}\,\text{Дж}$,
+    а работа выхода электронов из этого металла $11 \cdot 10^{-19}\,\text{Дж}$.
+    Постоянная Планка $h = 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с}$.
+}
+\answer{%
+    $h \frac c\lambda = A_{\text{вых.}} + E_{\text{кин.}} \implies \lambda = \frac{h c}{A_{\text{вых.}} + E_{\text{кин.}}} = \frac{ 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с} \cdot {Const.c:V} }{11 \cdot 10^{-19}\,\text{Дж} + 3 \cdot 10^{-20}\,\text{Дж}} \approx 0{,}1759 \cdot 10^{-6}\,\text{м}.$
+}
+\solutionspace{80pt}
+
+\tasknumber{8}%
+\task{%
+    Работа выхода электронов из некоторого металла $3{,}4\,\text{эВ}$.
+    Найдите скорость электронов (в км/с),
+    вылетающих с поверхности металла при освещении его светом с длиной волны $2{,}7 \cdot 10^{-5}\,\text{см}$.
+    Масса электрона $m_{e} = 9{,}1 \cdot 10^{-31}\,\text{кг}$.
+    Постоянная Планка $h = 6{,}626 \cdot 10^{-34}\,\text{Дж}\cdot\text{с}$, заряд электрона $e = 1{,}6 \cdot 10^{-19}\,\text{Кл}$.
+}
+\answer{%
+    $h \frac c\lambda = A_{\text{вых.}} + \frac{ m_{e}v^2 }2 \implies v = \sqrt{ \frac 2{m_{e}}\cbr{ h \frac c\lambda - A_{\text{вых.}} } } \approx 650\,\frac{\text{км}}{\text{c}}.$
+}
+\solutionspace{80pt}
+
+\tasknumber{9}%
+\task{%
+    Работа выхода электронов из некоторого металла $4{,}30\,\text{эВ}$.
+    На металл падают фотоны с импульсом $2{,}40 \cdot 10^{-27}\,\frac{\text{кг}\cdot\text{м}}{\text{с}}$.
+    Во сколько раз максимальный импульс электронов, вылетающих с поверхности металла при фотоэффекте,
+    больше импульса падающих фотонов? Масса электрона $m_{e} = 9{,}1 \cdot 10^{-31}\,\text{кг}$.
+}
+\answer{%
+    $h \frac c\lambda = A_{\text{вых.}} + \frac{p_e^2}{2m}, p=\frac h\lambda\implies p_e = \sqrt{2m\cbr{pc - A_{\text{вых.}}}} \implies \frac{p_e}p = \sqrt{\frac{2m}p \cbr{c - \frac{A_{\text{вых.}}}p } } \approx 100{,}55$
 }
 % autogenerated
