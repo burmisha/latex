@@ -64,7 +64,7 @@ class E_from_nu(variant.VariantTask):
 @variant.solution_space(80)
 @variant.text('''
     Определите энергию {of} с длиной волны {lmbd:V:e}. Ответ выразите в {in_what}.
-    Способен ли человеческий глаз увидеть один такой квант? А импульс таких квантов?'
+    Способен ли человеческий глаз увидеть один такой квант, а импульс таких квантов?'
 ''')
 @variant.answer_short('E = h\\nu = \\frac{hc}{\\lambda} = \\frac{{Consts.h:V} * {Consts.c:V}}{lmbd:V:s} \\approx {E:V} \\approx {E_eV:V}')
 @variant.arg(lmbd='150/200/400/500/600/700/850/900 нм')
