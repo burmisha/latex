@@ -895,9 +895,19 @@ def get_all_variants(*, flt=None):
                 'Chernoutsan_13_67',
                 'Chernoutsan_13_68',
                 'Chernoutsan_13_69',
-                # 'Chernoutsan_13_70',
-                # 'Chernoutsan_13_71',
-                # 'Chernoutsan_13_72',
+            ]},
+        ),
+        Work(
+            task_id='2022-03-10 11БА - КФ - 2',
+            classes={'atomic': [
+                'photoeffect.Chernoutsan_13_70',
+                'photoeffect.Chernoutsan_13_71',
+                'quantum.Fotons',
+                'quantum.E_from_nu',
+                'quantum.E_from_lambda',
+                # 'quantum.Deduce01',
+                'quantum.Quantum1119',
+                # 'photoeffect.Chernoutsan_13_72',
             ]},
         ),
         # Work(
