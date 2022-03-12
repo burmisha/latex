@@ -101,8 +101,8 @@ class Mark:
     def __init__(self, data):
         self._id = data['id']
         self._name = data['name']
-        self._student_profile_id = data['student_profile_id']
-        self._schedule_lesson_id = data['schedule_lesson_id']
+        self._student_id = data['student_profile_id']
+        self._lesson_id = data['schedule_lesson_id']
         assert self._name in ['2', '3', '4', '5']
         self._raw_data = data
 
@@ -386,10 +386,10 @@ class Client:
         })
         assert len(marks_items) < limit, f'Too many marks: reduce dates or increase limit: {limit}'
         marks = [Mark(item) for item in marks_items]
-        marks.sort(key=lambda x: (x._schedule_lesson_id, x._student_profile_id))
+        marks.sort(key=lambda mark: (mark._lesson_id, mark._student_id))
 
         for mark in marks:
-            self._marks_cache[(mark._schedule_lesson_id, mark._student_profile_id)] = mark
+            self._marks_cache[(mark._lesson_id, mark._student_id)] = mark
 
         log.info(f'Got marks [{from_date}, {to_date}] for {group}')
         return marks
@@ -613,7 +613,7 @@ class Client:
         key = (grade, subject_id)
         if self._control_forms.get(key) is None:
             log.debug(f'Loading available control forms for grade {grade} subject {subject_id}')
-            data = self.get(f'/core/api/control_forms', {
+            data = self.get('/core/api/control_forms', {
                 'academic_year_id': self.get_current_year().id,
                 'education_level_id': education_level_id,
                 'page': 1,
