@@ -100,8 +100,13 @@ class Deduce01(variant.VariantTask):
     равную кинетической энергии электрона, ускоренного напряжением {V:V|e}.
 ''')
 @variant.arg(V=['%d В' % v for v in [1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610]])
+@variant.answer_short('E = h\\frac c\\lambda = e U \\implies \\lambda = \\frac{hc}{eU} = \\frac{{Consts.h:V} * {Consts.c:V}}{{Consts.e:V} * {V:V}} \\approx {lmbd:V}.')
+@variant.is_one_arg
 class Quantum1119(variant.VariantTask):  # 1119 Рымкевич
-    pass
+    def GetUpdateOneArg(self, a):
+        return dict(
+            lmbd=(Consts.h * Consts.c / Consts.e / a.V).IncPrecision(1).As('нм'),
+        )
 
 
 @variant.text('''
