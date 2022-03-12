@@ -83,14 +83,18 @@ class ScheduleItem:
     def get_link(self):
         return f'{BASE_URL}/conference/?scheduled_lesson_id={self._id}'
 
+    @property
+    def str_time(self):
+        return self._timestamp.strftime('%d %B %Y, %A, %H:%M')
+
     def __lt__(self, other):
         return self._iso_date_time < other._iso_date_time
 
     def __str__(self):
-        return f'lesson {cm(self._timestamp.strftime("%d %B %Y, %A, %H:%M"), color=color.Yellow)} ({self._id}, {self._group})'
+        return f'lesson {cm(self.str_time, color=color.Yellow)} ({self._id}, {self._group})'
 
     def __repr__(self):
-        return f'Schedule item {cm(self._timestamp.strftime("%d %B %Y, %A, %H:%M"), color=color.Yellow)} ({self._id}) for {self._group!r}'
+        return f'Schedule item {cm(self.str_time, color=color.Yellow)} ({self._id}) for {self._group!r}'
 
 
 class Mark:
@@ -103,7 +107,7 @@ class Mark:
         self._raw_data = data
 
     def __str__(self):
-        return f'{cm(self._name, color=color.Red)}'
+        return f'mark {cm(self._name, color=color.Red)}'
 
 
 class ControlForm:
@@ -115,7 +119,9 @@ class ControlForm:
         return self._raw_data['name']
 
     def __str__(self):
-        return f'  active control form [{self._raw_data["weight"]}] {cm(self._raw_data["name"], color=color.Yellow)}'
+        weight = self._raw_data['weight']
+        name = self._raw_data['name']
+        return f'  active control form [{weight}] {cm(name, color=color.Yellow)}'
 
 
 class Client:
@@ -153,7 +159,8 @@ class Client:
             log.error(f'Got during log out: {response}')
             raise RuntimeError('Could not logout')
 
-    def get_teacher_id(self):
+    @property
+    def teacher_id(self):
         return self._profile_id
 
     def _get_headers(self, add_personal=True):
@@ -229,7 +236,7 @@ class Client:
 
     def get_current_year(self):
         if self._current_year is None:
-            academic_years = self.get('/core/api/academic_years', {'pid': self.get_teacher_id()})
+            academic_years = self.get('/core/api/academic_years', {'pid': self.teacher_id})
             academic_years = [Year(**item) for item in academic_years]
             current_years = [year for year in academic_years if year.current_year]
             assert len(current_years) == 1
@@ -240,9 +247,9 @@ class Client:
 
     def get_teacher_profile(self):
         if self._teacher_profile is None:
-            self._teacher_profile = self.get(f'/core/api/teacher_profiles/{self.get_teacher_id()}', {
+            self._teacher_profile = self.get(f'/core/api/teacher_profiles/{self.teacher_id}', {
                 'academic_year_id': self.get_current_year().id,
-                'pid': self.get_teacher_id(),
+                'pid': self.teacher_id,
                 'with_assigned_groups': True
             })
 
@@ -254,7 +261,7 @@ class Client:
             groups = self.get('/jersey/api/groups', {
                 'academic_year_id': self.get_current_year().id,
                 'group_ids': assigned_group_ids,
-                'pid': self.get_teacher_id(),
+                'pid': self.teacher_id,
             })
             self._groups = [StudentsGroup(item) for item in groups]
         return self._groups
@@ -276,7 +283,7 @@ class Client:
                     'class_unit_ids': ','.join(str(i) for i in group._class_unit_ids),
                     'group_ids': ','.join(str(i) for i in [group._id] + group._subgroup_ids),
                     'per_page': 1000,
-                    'pid': self.get_teacher_id(),
+                    'pid': self.teacher_id,
                     'with_archived_groups': True,
                     'with_deleted': True,
                     'with_final_marks': True,
@@ -318,7 +325,7 @@ class Client:
         schedule_lesson = self.get_schedule_item_by_id(lesson_id)
         assert schedule_lesson is not None
 
-        result = self.post(f'/core/api/attendances?pid={self.get_teacher_id()}', {
+        result = self.post(f'/core/api/attendances?pid={self.teacher_id}', {
             'absence_reason': None,
             'absence_reason_id': 2,
             'schedule_lesson_id': lesson_id,
@@ -343,8 +350,8 @@ class Client:
             'original': True,
             'page': 1,
             'per_page': 100,
-            'pid': self.get_teacher_id(),
-            'teacher_id': self.get_teacher_id(),
+            'pid': self.teacher_id,
+            'teacher_id': self.teacher_id,
             'with_group_class_subject_info': True,
             # 'with_lesson_info': True,  # no need
             # 'with_rooms_info': True,  # no need
@@ -359,22 +366,25 @@ class Client:
                 schedule_items.append(schedule_item)
                 self._available_lessons_dict[schedule_item._id] = schedule_item
             else:
-                log.warn(f'Skipping schedule item for {cm(schedule_item._raw_data["group_name"], color=color.Red)} as no group found')
+                group_name = schedule_item._raw_data['group_name']
+                log.warn(f'Skipping schedule item for {cm(group_name, color=color.Red)} as no group found')
         return schedule_items
 
-    def get_marks(self, from_date=None, to_date=None, group=None):
+    def get_marks(self, from_date=None, to_date=None, group=None, limit=1000):
         log.info(f'Getting marks [{from_date}, {to_date}] for {group}')
+
         assert re.match(r'\d{2}.\d{2}.20\d{2}', from_date), f'Invalid from_date format: {from_date}'
         assert re.match(r'\d{2}.\d{2}.20\d{2}', to_date), f'Invalid to_date format: {to_date}'
+
         marks_items = self.get('/core/api/marks', params={
             'created_at_from': from_date,
             'created_at_to': to_date,
             'group_ids': ','.join(str(i) for i in [group._id] + group._subgroup_ids),
             'page': 1,
-            'per_page': 1000,
-            'pid': self.get_teacher_id(),
+            'per_page': limit,
+            'pid': self.teacher_id,
         })
-        assert len(marks_items) < 1000, 'Too many marks: reduce dates or increase limit'
+        assert len(marks_items) < limit, f'Too many marks: reduce dates or increase limit: {limit}'
         marks = [Mark(item) for item in marks_items]
         marks.sort(key=lambda x: (x._schedule_lesson_id, x._student_profile_id))
 
@@ -487,7 +497,7 @@ class Client:
           'valuesByIds': {str(grade_system_id): value},
           'weight': weight,
         }
-        response = self.post(f'/core/api/marks?pid={self.get_teacher_id()}', json_data=data)
+        response = self.post(f'/core/api/marks?pid={self.teacher_id}', json_data=data)
         mark_id = response['id']
         if isinstance(mark_id, int) and mark_id > 0:
             log.info(f'Set mark id {mark_id} was ok')
@@ -585,7 +595,7 @@ class Client:
           'name': str(value),
         }
 
-        response = self.put(f'/core/api/marks/{mark_id}?pid={self.get_teacher_id()}', json_data=data)
+        response = self.put(f'/core/api/marks/{mark_id}?pid={self.teacher_id}', json_data=data)
         assert response['id'] == mark_id
         assert int(response['name']) == value
         return
@@ -608,7 +618,7 @@ class Client:
                 'education_level_id': education_level_id,
                 'page': 1,
                 'per_page': 100,
-                'pid': self.get_teacher_id(),
+                'pid': self.teacher_id,
                 'subject_id': subject_id,
                 'with_grade_system': True,
             })

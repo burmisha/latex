@@ -9,33 +9,6 @@ import logging
 log = logging.getLogger(__name__)
 
 
-class MarkSetter:
-    def __init__(self, client=None, lesson_id=None, point_date=None, control_form_name=None, comment=None, grade=None):
-        self._client = client
-        self._point_date = point_date
-        self._lesson = self._client.get_schedule_item_by_id(lesson_id)
-        assert self._lesson, f'No lesson found by id {lesson_id}'
-        self._control_form = self._client.get_control_forms(self._lesson._subject_id, grade)[control_form_name]
-        self._comment = comment
-
-    def Set(self, student_name=None, value=None):
-        assert value in [2, 3, 4, 5]
-
-        if value == 5:
-            point_date = None
-        else:
-            point_date = self._point_date
-
-        self._client.set_mark(
-            schedule_lesson_id=self._lesson._id,
-            student_id=self._client.get_student_by_name(student_name)._id,
-            value=value,
-            comment=self._comment,
-            point_date=point_date,
-            control_form=self._control_form,
-        )
-
-
 class MarksUpdater:
     def __init__(self, client=None):
         self._client = client
@@ -119,11 +92,6 @@ def run(args):
         for grade in [9, 10, 11]:
             client.get_control_forms(lesson._subject_id, grade, log_forms=True)
 
-    marks_updater = MarksUpdater(client)
-    marks_updater.UpdateAll()
-
-    return
-
     for schedule_item in sorted(schedule_items):
         if class_filter and class_filter not in schedule_item._group._best_name:
             continue
@@ -134,12 +102,14 @@ def run(args):
         if args.log_links:
             log.info(f'  Link: {schedule_item.get_link()}')
 
-        if schedule_item._id in args.set_all_absent:
-            for student_id in schedule_item._group._student_ids:
-                client.set_absent(student_id=student_id, lesson_id=schedule_item._id)
+        # if schedule_item._id in args.set_all_absent:
+        #     for student_id in schedule_item._group._student_ids:
+        #         client.set_absent(student_id=student_id, lesson_id=schedule_item._id)
 
     for _, student in client.get_student_profiles().items():
         log.debug(student)
+
+
 
     marks_now_date = library.datetools.NowDelta(default_fmt='%d.%m.%Y')
     marks_from_date = marks_now_date.Before(days=from_date_days)
@@ -150,86 +120,10 @@ def run(args):
             lesson = client.get_schedule_item_by_id(mark._schedule_lesson_id)
             log.info(f'  {student} got {mark} at {lesson}')
 
-    marks_cfg = [
-        # (10, 220536675, '2020-12-29', 'Домашняя работа', 'Динамика - Задачи наизусть', [
-        #     ('Ан Ирина', 2),
-        #     ('Андрианова Софья', 4),  # 4 / 6
-        #     ('Артемчук Владимир', 4),  # 3 / 6
-        #     ('Белянкина Софья', 2),
-        #     ('Егиазарян Варвара', 3),  # 2 / 6
-        #     ('Емелин Владислав', 2),
-        #     ('Жичин Артём', 2),
-        #     ('Кошман Дарья', 5),
-        #     ('Кузьмичёва Анна', 2),
-        #     ('Куприянова Алёна', 2),
-        #     ('Ламанова Анастасия', 2),
-        #     ('Легонькова Виктория', 3),  # 2 / 6
-        #     ('Мартынов Семён', 2),
-        #     ('Минаева Варвара', 5),  # 5 / 6
-        #     ('Никитин Леонид', 5),  # 6 / 6
-        #     ('Полетаев Тимофей', 3),  # 2 / 6
-        #     ('Рожков Андрей', 5),  # 5 / 6
-        #     ('Таржиманова Рената', 5),  # 6 / 6
-        #     ('Трофимов Арсений', 2),
-        #     ('Щербаков Андрей', 4),  # 4 / 6
-        #     ('Ярошевский Михаил', 2),
-        # ]),
-        (10, 220536894, None, 'Проверочная работа', 'Гидростатика по индивидуальным вариантам', [
-            ('Андрианова Софья', 4),
-            ('Артемчук Владимир', 3),
-            ('Белянкина Софья', 4),
-            ('Егиазарян Варвара', 3),
-            ('Жичин Артём', 3),
-            ('Козлов Константин', 2),
-            ('Кошман Дарья', 3),
-            ('Куприянова Алёна', 4),
-            ('Легонькова Виктория', 3),
-            ('Минаева Варвара', 3),
-            ('Никитин Леонид', 4),
-            ('Полетаев Тимофей', 3),
-            ('Полканова Алина', 2),
-            ('Пономарев Сергей', 3),
-            ('Рожков Андрей', 4),
-            ('Соколов Дмитрий', 4),
-            ('Таржиманова Рената', 3),
-            ('Трофимов Арсений', 2),
-            ('Щербаков Андрей', 5),
-        ]),
-        # (10, 220536671, '2020-12-29', 'Цифровое домашнее задание', 'Динамика - Задачи наизусть', [
-        #     ('Алимпиев Алексей', 2),  # 0 / 6
-        #     ('Васин Евгений', 2),  # 0 / 6
-        #     ('Говоров Герман', 2),  # 0 / 6
-        #     ('Журавлёва София', 2),  # 0 / 6
-        #     ('Козлов Константин', 2),  # 0 / 6
-        #     ('Кравченко Наталья', 2),  # 0 / 6
-        #     ('Малышев Сергей', 2),  # 0 / 6
-        #     ('Полканова Алина', 2),  # 0 / 6
-        #     ('Пономарев Сергей', 3),  # 1 / 6
-        #     ('Свистушкин Егор', 2),  # 0 / 6
-        #     ('Соколов Дмитрий', 2),  # 0 / 6
-        # ]),
-        # (9, 220571202, None, 'Решение задач', 'Колебания и волны - тест 3', [
-        #     ('Гончарова Наталья', 5),
-        #     ('Касымов Файёзбек', 5),
-        #     ('Козинец Александр', 5),
-        #     ('Лоткова ПОЛИНА', 5),
-        #     ('Медведева Екатерина', 5),
-        #     ('Мельник Константин', 5),
-        #     ('Небоваренков Степан', 5),
-        #     ('Неретин Матвей', 5),
-        #     ('Никонова Мария', 5),
-        #     ('Палаткин Даниил', 5),
-        #     ('Пикун Станислав', 5),
-        #     ('Севрюгин Кирилл', 5),
-        #     ('Стратонников Илья', 5),
-        #     ('Шустов Иван', 5),
-        # ]),
-    ]
-    if args.set_marks:
-        for grade, lesson_id, point_date, control_form_name, comment, marks in marks_cfg:
-            mark_setter = MarkSetter(client=client, lesson_id=lesson_id, point_date=point_date, control_form_name=control_form_name, comment=comment, grade=grade)
-            for student_name, value in marks:
-                mark_setter.Set(student_name=student_name, value=value)
+    marks_updater = MarksUpdater(client)
+    # marks_updater.UpdateAll()
+
+    return
 
     for res in [
         # client.get('/acl/api/users', {
