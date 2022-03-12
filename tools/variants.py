@@ -910,6 +910,17 @@ def get_all_variants(*, flt=None):
                 # 'photoeffect.Chernoutsan_13_72',
             ]},
         ),
+        Work(
+            task_id='2022-03-10 11Б - КФ - 2',
+            classes={'atomic': [
+                'photoeffect.Chernoutsan_13_69',
+                'quantum.Fotons',
+                'quantum.E_from_nu',
+                'quantum.E_from_lambda',
+                'quantum.Deduce01',
+                'quantum.Quantum1119',
+            ]},
+        ),
         # Work(
         #     task_id='2022-02-18 11Б - СТО - 1',
         #     classes={'atomic.radioactive': [
