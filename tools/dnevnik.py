@@ -1,24 +1,24 @@
 import library.dnevnik.mesh
-import library.datetools
 import library.logging
 import library.files
 
 import locale
+import datetime
 
 import logging
 log = logging.getLogger(__name__)
 
 
 class MarksUpdater:
-    def __init__(self, client=None):
+    def __init__(self, *, client=None, marks_cache=None):
         self._client = client
+        self._marks_cache = marks_cache
         self._marks_data = library.files.load_yaml_data('marks.yaml')
 
     def UpdateAll(self):
-        # TODO: update grade
-        grade = 11
         for group_id, class_data in self._marks_data.items():
             lesson_form = []
+            grade = class_data['grade']
             for lesson_str in class_data['lessons']:
                 lesson_id, control_form_name = lesson_str.split(' - ')
                 lesson = self._client.get_schedule_item_by_id(int(lesson_id))
@@ -40,15 +40,18 @@ class MarksUpdater:
                         if mark == 1:
                             pass
                         elif mark in [2, 3, 4, 5]:
-                            raise RuntimeError('TODO: Check if no mark was set')
-                            self._client.set_mark(
-                                schedule_lesson_id=lesson._id,
-                                student_id=student._id,
-                                value=mark,
-                                comment=None,
-                                point_date=None,
-                                control_form=control_form,
-                            )
+                            cached_mark = self._marks_cache.get(lesson_id=lesson._id, student_id=student._id)
+                            if cached_mark is None:
+                                self._client.set_mark(
+                                    schedule_lesson_id=lesson._id,
+                                    student_id=student._id,
+                                    value=mark,
+                                    comment=None,
+                                    point_date=None,
+                                    control_form=control_form,
+                                )
+                            else:
+                                log.info(f'{cached_mark} for {student} at {lesson} already set')
                         else:
                             raise RuntimeError(f'Invalid mark {mark} for {student} at {lesson}')
 
@@ -64,19 +67,20 @@ def run(args):
     assert -15 <= from_date_days <= 15
     assert -15 <= to_date_days <= 15
 
-    schedule_now = library.datetools.NowDelta(default_fmt='%Y-%m-%d')
-    schedule_from = schedule_now.Before(days=from_date_days)
-    schedule_to = schedule_now.After(days=to_date_days)
+    now = datetime.datetime.now()
+    from_dt = now - datetime.timedelta(days=from_date_days)
+    to_dt = now + datetime.timedelta(days=to_date_days)
 
     client = library.dnevnik.mesh.Client(
         username=args.username,
         password=library.secrets.token.get('dnevnik.mos.ru.password'),
     )
 
-    schedule_items = client.get_schedule_items(from_date=schedule_from, to_date=schedule_to)
+    schedule_items = client.get_schedule_items(from_dt=from_dt, to_dt=to_dt)
 
+    grades = sorted(library.dnevnik.mesh.EDUCATION_LEVELS.keys())
     for lesson in schedule_items:
-        for grade in [9, 10, 11]:
+        for grade in grades:
             client.get_control_forms(lesson._subject_id, grade, log_forms=True)
 
     for schedule_item in sorted(schedule_items):
@@ -89,24 +93,23 @@ def run(args):
         if args.log_links:
             log.info(f'  Link: {schedule_item.get_link()}')
 
-        # if schedule_item._id in args.set_all_absent:
-        #     for student_id in schedule_item._group._student_ids:
-        #         client.set_absent(student_id=student_id, lesson_id=schedule_item._id)
-
     for _, student in client.get_student_profiles().items():
         log.debug(student)
 
-    marks_now = library.datetools.NowDelta(default_fmt='%d.%m.%Y')
-    marks_from = marks_now.Before(days=from_date_days)
-    marks_to = marks_now.After(days=to_date_days)
+    marks_cache = library.dnevnik.mesh.MarksCache(from_dt=from_dt, to_dt=to_dt)
     for group in client.get_groups():
-        for mark in client.get_marks(from_date=marks_from, to_date=marks_to, group=client.get_group_by_id(group._id)):
+        for mark in client.get_marks(from_date=from_dt, to_date=to_dt, group=group):
+            marks_cache.add(mark)
             student = client.get_student_by_id(mark._student_id)
             lesson = client.get_schedule_item_by_id(mark._lesson_id)
             log.info(f'  {student} got {mark} at {lesson}')
+    marks_cache.freeze()
 
-    marks_updater = MarksUpdater(client)
-    # marks_updater.UpdateAll()
+    if args.set_marks:
+        marks_updater = MarksUpdater(client=client, marks_cache=marks_cache)
+        marks_updater.UpdateAll()
+    else:
+        log.info('Skip setting marks')
 
     return
 
@@ -139,13 +142,12 @@ def run(args):
 
 
 def populate_parser(parser):
-    parser.add_argument('-a', '--set-all-absent', help='Set all absent for schedult item', type=int, action='append', default=[])
-    parser.add_argument('-f', '--from-date', help='Search lessons from date (in days)', type=int, default=5)
+    parser.add_argument('-f', '--from-date', help='Search lessons from date (in days)', type=int, default=12)
     parser.add_argument('-t', '--to-date', help='Search lessons to date (in days)', type=int, default=2)
     parser.add_argument('-c', '--class-filter', help='Class filter')
     parser.add_argument('-g', '--group-filter', help='Group filter (by id)', type=int)
     parser.add_argument('--username', help='Username to login', default='burmistrovmo')
     parser.add_argument('-l', '--log-links', help='Log distant links', action='store_true')
     parser.add_argument('-m', '--set-marks', help='Set marks', action='store_true')
-    parser.add_argument('--logout', help='Logout an all devices', action='store_true')
+    parser.add_argument('--logout', help='Logout on all devices', action='store_true')
     parser.set_defaults(func=run)

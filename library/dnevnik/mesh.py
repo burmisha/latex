@@ -4,6 +4,7 @@ import datetime
 import re
 import requests
 import json
+import datetime
 
 import logging
 log = logging.getLogger(__name__)
@@ -14,7 +15,13 @@ import library.secrets
 Year = collections.namedtuple('Year', ['id', 'name', 'begin_date', 'end_date', 'calendar_id', 'current_year'])
 
 BASE_URL = 'https://dnevnik.mos.ru'
-
+MARKS_DATE_FMT = '%d.%m.%Y'
+SCHEDULE_DATE_FMT = '%Y-%m-%d'
+EDUCATION_LEVELS = {
+    11: 3,
+    10: 3,
+    9: 2,
+}
 
 class StudentsGroup:
     def __init__(self, data):
@@ -100,14 +107,49 @@ class ScheduleItem:
 class Mark:
     def __init__(self, data):
         self._id = data['id']
-        self._name = data['name']
+        self._value = int(data['name'])
         self._student_id = data['student_profile_id']
         self._lesson_id = data['schedule_lesson_id']
-        assert self._name in ['2', '3', '4', '5']
         self._raw_data = data
+        assert self._value in [2, 3, 4, 5]
 
     def __str__(self):
-        return f'mark {cm(self._name, color=color.Red)}'
+        return f'mark {cm(str(self._value), color=color.Red)}'
+
+    def __repr__(self):
+        return f'mark {cm(str(self._value), color=color.Red)} for {self._student_id} at {self._lesson_id}'
+
+
+class MarksCache:
+    def __init__(self, *, from_dt: datetime.datetime, to_dt: datetime.datetime):
+        self._marks = dict()
+        self._from_dt = from_dt
+        self._to_dt = to_dt
+        self._frozen = False
+
+    def add(self, mark: Mark):
+        assert not self._frozen
+        assert isinstance(mark._lesson_id, int)
+        assert isinstance(mark._student_id, int)
+        key = (mark._lesson_id, mark._student_id)
+        assert key not in self._marks
+        self._marks[key] = mark
+
+    def freeze(self):
+        self._frozen = True
+
+    def get(self, *, lesson_id: int=None, student_id: int=None):
+        assert isinstance(lesson_id, int)
+        assert isinstance(student_id, int)
+        key = (lesson_id, student_id)
+        mark = self._marks.get(key)
+        return mark
+
+    def lesson_is_cached(self, lesson: ScheduleItem):
+        assert self._frozen
+        is_cached = (self._from_dt <= lesson._timestamp <= self._to_dt)
+        log.info(f'cached {lesson}: {is_cached}')
+        return is_cached
 
 
 class ControlForm:
@@ -134,7 +176,6 @@ class Client:
         self._groups = None
         self._all_student_profiles = None
         self._available_lessons_dict = {}
-        self._marks_cache = {}  # very silly, looses data
         self._control_forms = {}
 
     def _login(self, username, password):
@@ -339,10 +380,11 @@ class Client:
             log.error(f'Unknown response: {colorize_json(result)}')
             raise RuntimeError('Unknown response')
 
-    def get_schedule_items(self, from_date=None, to_date=None):
+    def get_schedule_items(self, *, from_dt: datetime.datetime=None, to_dt: datetime.datetime=None):
+        from_date = library.datetools.formatTimestamp(from_dt, fmt=SCHEDULE_DATE_FMT)
+        to_date = library.datetools.formatTimestamp(to_dt, fmt=SCHEDULE_DATE_FMT)
         log.info(f'get_schedule_items from {from_date} to {to_date}')
-        assert re.match(r'20\d\d-\d{2}-\d{2}', from_date), f'Invalid from_date format: {from_date}'
-        assert re.match(r'20\d\d-\d{2}-\d{2}', to_date), f'Invalid to_date format: {to_date}'
+
         schedule_items_raw = self.get('/jersey/api/schedule_items', {
             'academic_year_id': self.get_current_year().id,
             'from': from_date,
@@ -370,29 +412,38 @@ class Client:
                 log.warn(f'Skipping schedule item for {cm(group_name, color=color.Red)} as no group found')
         return schedule_items
 
-    def get_marks(self, from_date=None, to_date=None, group=None, limit=1000):
-        log.info(f'Getting marks [{from_date}, {to_date}] for {group}')
+    def get_marks(
+        self,
+        *,
+        from_date: datetime.datetime=None,
+        to_date: datetime.datetime=None,
+        group: StudentsGroup=None,
+        limit: int=1000,
+    ):
+        if not hasattr(self, '_marks_cache'):
+            self._marks_cache = MarksCache(from_dt=from_date, to_dt=to_date)
+        else:
+            assert self._marks_cache._from_dt == from_date
+            assert self._marks_cache._to_dt == to_date
 
-        assert re.match(r'\d{2}.\d{2}.20\d{2}', from_date), f'Invalid from_date format: {from_date}'
-        assert re.match(r'\d{2}.\d{2}.20\d{2}', to_date), f'Invalid to_date format: {to_date}'
+        from_date_str = library.datetools.formatTimestamp(from_date, fmt=MARKS_DATE_FMT)
+        to_date_str = library.datetools.formatTimestamp(to_date, fmt=MARKS_DATE_FMT)
+        log.info(f'Getting marks [{from_date_str}, {to_date_str}] for {group}')
 
         marks_items = self.get('/core/api/marks', params={
-            'created_at_from': from_date,
-            'created_at_to': to_date,
+            'created_at_from': from_date_str,
+            'created_at_to': to_date_str,
             'group_ids': ','.join(str(i) for i in [group._id] + group._subgroup_ids),
             'page': 1,
             'per_page': limit,
             'pid': self.teacher_id,
         })
         assert len(marks_items) < limit, f'Too many marks: reduce dates or increase limit: {limit}'
-        marks = [Mark(item) for item in marks_items]
-        marks.sort(key=lambda mark: (mark._lesson_id, mark._student_id))
 
-        for mark in marks:
-            self._marks_cache[(mark._lesson_id, mark._student_id)] = mark
-
-        log.info(f'Got marks [{from_date}, {to_date}] for {group}')
-        return marks
+        for mark_item in marks_items:
+            mark = Mark(mark_item)
+            self._marks_cache.add(mark)
+            yield mark
 
     def set_mark(self, schedule_lesson_id=None, student_id=None, value=None, comment=None, point_date=None, control_form=None):
         assert isinstance(control_form, ControlForm)
@@ -414,14 +465,14 @@ class Client:
 
         log_message = f'Setting mark {cm(value, color=color.Red)} for {student} at {lesson}'
 
-        known_mark = self._marks_cache.get((schedule_lesson_id, student_id))
-        if known_mark:
-            if int(known_mark._name) == value:
+        cached_mark = self._marks_cache.get(lesson_id=schedule_lesson_id, student_id=student_id)
+        if cached_mark:
+            if cached_mark._value == value:
                 log.info(f'{log_message}: already set')
                 return
-            if int(known_mark._name) < value:
+            if cached_mark._value < value:
                 self._update_mark(
-                    mark_id=known_mark._id,
+                    mark_id=cached_mark._id,
                     schedule_lesson_id=schedule_lesson_id,
                     student_id=student_id,
                     value=value,
@@ -605,11 +656,7 @@ class Client:
         pass
 
     def get_control_forms(self, subject_id, grade, log_forms: bool):
-        education_level_id = {
-            11: 3,
-            10: 3,
-            9: 2,
-        }[grade]
+        education_level_id = EDUCATION_LEVELS[grade]
         key = (grade, subject_id)
         if self._control_forms.get(key) is None:
             log.debug(f'Loading available control forms for grade {grade} subject {subject_id}')
