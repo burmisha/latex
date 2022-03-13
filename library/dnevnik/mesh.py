@@ -167,9 +167,19 @@ class ControlForm:
 
 
 class Client:
-    def __init__(self, username=None, password=None):
+    def __init__(
+        self,
+        *,
+        username=None,
+        password=None,
+        from_dt: datetime.datetime=None,
+        to_dt: datetime.datetime=None,
+    ):
         self._base_url = BASE_URL
         self._login(username=username, password=password)
+
+        self.from_dt = from_dt
+        self.to_dt = to_dt
 
         self._current_year = None
         self._teacher_profile = None
@@ -380,9 +390,9 @@ class Client:
             log.error(f'Unknown response: {colorize_json(result)}')
             raise RuntimeError('Unknown response')
 
-    def get_schedule_items(self, *, from_dt: datetime.datetime=None, to_dt: datetime.datetime=None):
-        from_date = library.datetools.formatTimestamp(from_dt, fmt=SCHEDULE_DATE_FMT)
-        to_date = library.datetools.formatTimestamp(to_dt, fmt=SCHEDULE_DATE_FMT)
+    def get_schedule_items(self):
+        from_date = library.datetools.formatTimestamp(self.from_dt, fmt=SCHEDULE_DATE_FMT)
+        to_date = library.datetools.formatTimestamp(self.to_dt, fmt=SCHEDULE_DATE_FMT)
         log.info(f'get_schedule_items from {from_date} to {to_date}')
 
         schedule_items_raw = self.get('/jersey/api/schedule_items', {
@@ -415,24 +425,22 @@ class Client:
     def get_marks(
         self,
         *,
-        from_date: datetime.datetime=None,
-        to_date: datetime.datetime=None,
         group: StudentsGroup=None,
         limit: int=1000,
     ):
         if not hasattr(self, '_marks_cache'):
-            self._marks_cache = MarksCache(from_dt=from_date, to_dt=to_date)
+            self._marks_cache = MarksCache(from_dt=self.from_dt, to_dt=self.to_dt)
         else:
-            assert self._marks_cache._from_dt == from_date
-            assert self._marks_cache._to_dt == to_date
+            assert self._marks_cache._from_dt == self.from_dt
+            assert self._marks_cache._to_dt == self.to_dt
 
-        from_date_str = library.datetools.formatTimestamp(from_date, fmt=MARKS_DATE_FMT)
-        to_date_str = library.datetools.formatTimestamp(to_date, fmt=MARKS_DATE_FMT)
-        log.info(f'Getting marks [{from_date_str}, {to_date_str}] for {group}')
+        from_date = library.datetools.formatTimestamp(self.from_dt, fmt=MARKS_DATE_FMT)
+        to_date = library.datetools.formatTimestamp(self.to_dt, fmt=MARKS_DATE_FMT)
+        log.info(f'Getting marks [{from_date}, {to_date}] for {group}')
 
         marks_items = self.get('/core/api/marks', params={
-            'created_at_from': from_date_str,
-            'created_at_to': to_date_str,
+            'created_at_from': from_date,
+            'created_at_to': to_date,
             'group_ids': ','.join(str(i) for i in [group._id] + group._subgroup_ids),
             'page': 1,
             'per_page': limit,

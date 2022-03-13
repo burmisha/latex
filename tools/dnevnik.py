@@ -56,27 +56,32 @@ class MarksUpdater:
                             raise RuntimeError(f'Invalid mark {mark} for {student} at {lesson}')
 
 
-def run(args):
-    locale.setlocale(locale.LC_ALL, ('RU', 'UTF8'))
-
-    class_filter = args.class_filter
-    group_filter = args.group_filter
-
-    from_date_days = args.from_date
-    to_date_days = args.to_date
+def get_dt(from_date_days, to_date_days):
     assert -15 <= from_date_days <= 15
     assert -15 <= to_date_days <= 15
 
     now = datetime.datetime.now()
     from_dt = now - datetime.timedelta(days=from_date_days)
     to_dt = now + datetime.timedelta(days=to_date_days)
+    return from_dt, to_dt
+
+
+def run(args):
+    locale.setlocale(locale.LC_ALL, ('RU', 'UTF8'))
+
+    class_filter = args.class_filter
+    group_filter = args.group_filter
+
+    from_dt, to_dt = get_dt(args.from_date, args.to_date)
 
     client = library.dnevnik.mesh.Client(
         username=args.username,
         password=library.secrets.token.get('dnevnik.mos.ru.password'),
+        from_dt=from_dt,
+        to_dt=to_dt,
     )
 
-    schedule_items = client.get_schedule_items(from_dt=from_dt, to_dt=to_dt)
+    schedule_items = client.get_schedule_items()
 
     grades = sorted(library.dnevnik.mesh.EDUCATION_LEVELS.keys())
     for lesson in schedule_items:
@@ -98,7 +103,7 @@ def run(args):
 
     marks_cache = library.dnevnik.mesh.MarksCache(from_dt=from_dt, to_dt=to_dt)
     for group in client.get_groups():
-        for mark in client.get_marks(from_date=from_dt, to_date=to_dt, group=group):
+        for mark in client.get_marks(group=group):
             marks_cache.add(mark)
             student = client.get_student_by_id(mark._student_id)
             lesson = client.get_schedule_item_by_id(mark._lesson_id)
