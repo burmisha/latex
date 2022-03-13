@@ -46,3 +46,5 @@ venv
 
 *secret*.json
 *.json
+data/marks.yaml
+data/marks.yaml.1*

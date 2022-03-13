@@ -1,4 +1,5 @@
 import tools.absent
+import tools.archive
 import tools.books
 import tools.build
 import tools.checker
