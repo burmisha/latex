@@ -921,6 +921,27 @@ def get_all_variants(*, flt=None):
                 'quantum.Quantum1119',
             ]},
         ),
+        Work(
+            task_id='2022-03-16 11БА - КФ - 3',
+            classes={'atomic.h_levels': [
+                'Lambda_from_E',
+                'Lambda_from_E_2',
+                'H_levels',
+                'Chernoutsan_13_73',
+                'Chernoutsan_13_74',
+                'Chernoutsan_13_75',
+            ]},
+        ),
+        Work(
+            task_id='2022-03-17 11Б - КФ - 3',
+            classes={'atomic.h_levels': [
+                'Theory01',
+                'Lambda_from_E',
+                'TwoLevels',
+                'MedianLevels',
+                'H_levels',
+            ]},
+        ),
         # Work(
         #     task_id='2022-02-18 11Б - СТО - 1',
         #     classes={'atomic.radioactive': [
