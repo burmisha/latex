@@ -1,10 +1,12 @@
 # see https://github.com/search?q=dnevnik.mos.ru&type=repositories
+import attr
 import collections
 import datetime
 import re
 import requests
 import json
 import datetime
+from typing import Optional
 
 import logging
 log = logging.getLogger(__name__)
@@ -22,6 +24,9 @@ EDUCATION_LEVELS = {
     10: 3,
     9: 2,
 }
+MARKS_LIMIT = 1000
+VALID_MARKS = [2, 3, 4, 5]
+
 
 class StudentsGroup:
     def __init__(self, data):
@@ -66,7 +71,7 @@ class StudentProfile:
         return f'{cm(self._short_name, color=color.Cyan)}'
 
     def __repr__(self):
-        return f'student {self._short_name} ({self._id})'
+        return f'student {cm(self._short_name, color=color.Cyan)} ({self._id})'
 
     def matches(self, name: str) -> bool:
         return sorted(self._short_name.lower().split()) == sorted(name.lower().split())
@@ -108,10 +113,16 @@ class Mark:
     def __init__(self, data):
         self._id = data['id']
         self._value = int(data['name'])
+        assert self._value in VALID_MARKS
+
         self._student_id = data['student_profile_id']
+        assert isinstance(self._student_id, int)
+
         self._lesson_id = data['schedule_lesson_id']
+        assert isinstance(self._lesson_id, int)
+
         self._raw_data = data
-        assert self._value in [2, 3, 4, 5]
+
 
     def __str__(self):
         return f'mark {cm(str(self._value), color=color.Red)}'
@@ -121,22 +132,15 @@ class Mark:
 
 
 class MarksCache:
-    def __init__(self, *, from_dt: datetime.datetime, to_dt: datetime.datetime):
+    def __init__(self):
         self._marks = dict()
-        self._from_dt = from_dt
-        self._to_dt = to_dt
-        self._frozen = False
 
     def add(self, mark: Mark):
-        assert not self._frozen
         assert isinstance(mark._lesson_id, int)
         assert isinstance(mark._student_id, int)
         key = (mark._lesson_id, mark._student_id)
         assert key not in self._marks
         self._marks[key] = mark
-
-    def freeze(self):
-        self._frozen = True
 
     def get(self, *, lesson_id: int=None, student_id: int=None):
         assert isinstance(lesson_id, int)
@@ -144,12 +148,6 @@ class MarksCache:
         key = (lesson_id, student_id)
         mark = self._marks.get(key)
         return mark
-
-    def lesson_is_cached(self, lesson: ScheduleItem):
-        assert self._frozen
-        is_cached = (self._from_dt <= lesson._timestamp <= self._to_dt)
-        log.info(f'cached {lesson}: {is_cached}')
-        return is_cached
 
 
 class ControlForm:
@@ -163,7 +161,23 @@ class ControlForm:
     def __str__(self):
         weight = self._raw_data['weight']
         name = self._raw_data['name']
-        return f'  active control form [{weight}] {cm(name, color=color.Yellow)}'
+        return f'active control form [{weight}] {cm(name, color=color.Yellow)}'
+
+
+@attr.s
+class Absence:
+    student_id: int = attr.ib()
+    lesson_id: int = attr.ib()
+
+
+@attr.s
+class NewMark:
+    lesson_id: int = attr.ib()
+    student_id: int = attr.ib()
+    value: int = attr.ib()
+    comment: Optional[str] = attr.ib()
+    point_date: Optional[str] = attr.ib()
+    control_form: ControlForm = attr.ib()
 
 
 class Client:
@@ -187,6 +201,9 @@ class Client:
         self._all_student_profiles = None
         self._available_lessons_dict = {}
         self._control_forms = {}
+
+        self._marks_cache = MarksCache()
+        self._loaded_marks = False
 
     def _login(self, username, password):
         log.info('Trying to log in...')
@@ -349,12 +366,9 @@ class Client:
                     self._all_student_profiles[student_profile._id] = student_profile
         return self._all_student_profiles
 
-    def get_student_by_id(self, student_id):
+    def get_student_by_id(self, student_id: int) -> StudentProfile:
         assert isinstance(student_id, int)
-        student_profile = self.get_student_profiles().get(student_id)
-        if not student_profile:
-            log.warn(f'No student item with id {student_id}')
-        return student_profile
+        return self.get_student_profiles()[student_id]
 
     def get_student_by_name(self, student_name):
         matched = [student_profile for student_profile in self.get_student_profiles().values() if student_profile.matches(student_name)]
@@ -363,25 +377,21 @@ class Client:
         else:
             raise RuntimeError(f'Not found students by name {student_name}: got {matched}')
 
-    def get_schedule_item_by_id(self, schedule_item_id):
+    def get_schedule_item_by_id(self, schedule_item_id: int) -> ScheduleItem:
         assert isinstance(schedule_item_id, int)
-        schedule_item = self._available_lessons_dict.get(schedule_item_id)
-        if not schedule_item:
-            log.warn(f'No schedule item with id {schedule_item_id}')
-        return schedule_item
+        return self._available_lessons_dict[schedule_item_id]
 
-    def set_absent(self, student_id=None, lesson_id=None):
-        student = self.get_student_by_id(student_id)
-        assert student is not None
-        schedule_lesson = self.get_schedule_item_by_id(lesson_id)
-        assert schedule_lesson is not None
+    def set_absent(self, absence: Absence=None):
+        student = self.get_student_by_id(absence.student_id)
+        schedule_lesson = self.get_schedule_item_by_id(absence.lesson_id)
 
         result = self.post(f'/core/api/attendances?pid={self.teacher_id}', {
             'absence_reason': None,
             'absence_reason_id': 2,
-            'schedule_lesson_id': lesson_id,
-            'student_profile_id': student_id,
+            'schedule_lesson_id': absence.lesson_id,
+            'student_profile_id': absence.student_id,
         })
+
         if result.get('created_at'):
             log.info(f'Absense was set for {student} for {schedule_lesson}')
         elif result.get('code') == 403 and result.get('message') == 'Пропуск для выбранного ученика и урока уже существует':
@@ -408,32 +418,23 @@ class Client:
             # 'with_lesson_info': True,  # no need
             # 'with_rooms_info': True,  # no need
         })
-        schedule_items = []
-
         for item in schedule_items_raw:
             schedule_item = ScheduleItem(item)
             group = self.get_group_by_id(schedule_item._group_id)
-            if group is not None:
+            if group:
                 schedule_item.set_group(group)
-                schedule_items.append(schedule_item)
                 self._available_lessons_dict[schedule_item._id] = schedule_item
+                yield schedule_item
             else:
                 group_name = schedule_item._raw_data['group_name']
                 log.warn(f'Skipping schedule item for {cm(group_name, color=color.Red)} as no group found')
-        return schedule_items
 
-    def get_marks(
+    def _get_marks_for_group(
         self,
         *,
         group: StudentsGroup=None,
-        limit: int=1000,
+        limit: int=MARKS_LIMIT,
     ):
-        if not hasattr(self, '_marks_cache'):
-            self._marks_cache = MarksCache(from_dt=self.from_dt, to_dt=self.to_dt)
-        else:
-            assert self._marks_cache._from_dt == self.from_dt
-            assert self._marks_cache._to_dt == self.to_dt
-
         from_date = library.datetools.formatTimestamp(self.from_dt, fmt=MARKS_DATE_FMT)
         to_date = library.datetools.formatTimestamp(self.to_dt, fmt=MARKS_DATE_FMT)
         log.info(f'Getting marks [{from_date}, {to_date}] for {group}')
@@ -449,18 +450,23 @@ class Client:
         assert len(marks_items) < limit, f'Too many marks: reduce dates or increase limit: {limit}'
 
         for mark_item in marks_items:
-            mark = Mark(mark_item)
-            self._marks_cache.add(mark)
-            yield mark
+            yield Mark(mark_item)
 
-    def set_mark(self, schedule_lesson_id=None, student_id=None, value=None, comment=None, point_date=None, control_form=None):
-        assert isinstance(control_form, ControlForm)
+    def get_all_marks(self):
+        marks = []
+        for group in self.get_groups():
+            for mark in self._get_marks_for_group(group=group):
+                self._marks_cache.add(mark)
+                marks.append(mark)
 
-        lesson = self.get_schedule_item_by_id(schedule_lesson_id)
-        assert lesson
+        self._loaded_marks = True
+        return marks
 
-        student = self.get_student_by_id(student_id)
-        assert student
+    def set_mark(self, new_mark: NewMark):
+        assert self._loaded_marks, 'Marks were not loaded, setting new ones will cause duplicates'
+
+        lesson = self.get_schedule_item_by_id(new_mark.lesson_id)
+        student = self.get_student_by_id(new_mark.student_id)
 
         try:
             student_group_ids = [group['id'] for group in student._raw_data['groups']]
@@ -471,51 +477,40 @@ class Client:
             log.error(f'Failed on {student} at {lesson}')
             raise RuntimeError(f'Failed at student check')
 
-        log_message = f'Setting mark {cm(value, color=color.Red)} for {student} at {lesson}'
+        log_message = f'Setting mark {cm(new_mark.value, color=color.Red)} for {student} at {lesson}'
 
-        cached_mark = self._marks_cache.get(lesson_id=schedule_lesson_id, student_id=student_id)
+        cached_mark = self._marks_cache.get(lesson_id=new_mark.lesson_id, student_id=new_mark.student_id)
+
         if cached_mark:
-            if cached_mark._value == value:
+            if cached_mark._value == new_mark.value:
                 log.info(f'{log_message}: already set')
                 return
-            if cached_mark._value < value:
-                self._update_mark(
-                    mark_id=cached_mark._id,
-                    schedule_lesson_id=schedule_lesson_id,
-                    student_id=student_id,
-                    value=value,
-                    comment=comment,
-                    point_date=point_date,
-                    control_form=control_form,
-                )
+            if cached_mark._value < new_mark.value:
+                self._update_mark(new_mark)
             else:
-                log.error(f'{log_message}: changged mark, already have {value}')
+                log.error(f'{log_message}: changed mark, already have {new_mark.value}')
                 raise RuntimeError('Seems to have broken mark')
         else:
             log.info(log_message)
 
-        if comment is None:
-            show_comment = False
-        else:
-            assert isinstance(comment, str)
-            show_comment = True
+        show_comment = (new_mark.comment is not None)
 
-        if point_date is None:
+        if new_mark.point_date is None:
             is_point = False
             point_date_patched = None
             point_date_strange = library.datetools.NowDelta().After(fmt='%FT%T.000Z', hours=20)
         else:
-            assert isinstance(point_date, str)
+            assert isinstance(new_mark.point_date, str)
             assert re.match(r'202\d\-\d\d-\d\d', point_date)
             is_point = True
-            point_date_patched = '.'.join([point_date[8:], point_date[5:7], point_date[:4], ])
-            point_date_strange = f'{point_date}T04:12:35.678Z'
+            point_date_patched = '.'.join([new_mark.point_date[8:], new_mark.point_date[5:7], new_mark.point_date[:4], ])
+            point_date_strange = f'{new_mark.point_date}T04:12:35.678Z'
             assert re.match(r'\d\d\.\d\d.202\d', point_date_patched)
 
-        assert value in [2, 3, 4, 5]
+        assert new_mark.value in VALID_MARKS, f'{value!r} is not valid mark'
 
         # TODO: round all floats better
-        control_form_str = json.dumps(control_form._raw_data)
+        control_form_str = json.dumps(new_mark.control_form._raw_data)
         control_form_str = control_form_str.replace('.0', '')
         control_form_data = json.loads(control_form_str)
 
@@ -537,10 +532,10 @@ class Client:
         })
 
         data = {
-          'comment': comment,
+          'comment': new_mark.comment,
           'controlForm': control_form_data,
           'control_form_id': control_form_id,
-          'grade_origins': [{ 'grade_origin': value, 'grade_system_id': grade_system_id}],
+          'grade_origins': [{ 'grade_origin': new_mark.value, 'grade_system_id': grade_system_id}],
           'grade_system_id': grade_system_id,
           'grade_system_name': grade_system_name,
           'grade_system_type': grade_system_type,
@@ -550,22 +545,21 @@ class Client:
           'is_point': is_point,
           'pointDate': point_date_strange,
           'point_date': point_date_patched,
-          'schedule_lesson_id': schedule_lesson_id,
+          'schedule_lesson_id': new_mark.lesson_id,
           'showComment': show_comment,
-          'student_profile_id': student_id,
-          'valuesByIds': {str(grade_system_id): value},
+          'student_profile_id': new_mark.student_id,
+          'valuesByIds': {str(grade_system_id): new_mark.value},
           'weight': weight,
         }
         response = self.post(f'/core/api/marks?pid={self.teacher_id}', json_data=data)
         mark_id = response['id']
         if isinstance(mark_id, int) and mark_id > 0:
-            log.info(f'Set mark id {mark_id} was ok')
+            log.info(f'Set mark ok: {mark_id}')
         else:
             raise RuntimeError('Could not set mark')
-        return
 
-    def _update_mark(self, mark_id=None, schedule_lesson_id=None, student_id=None, value=None, comment=None, point_date=None, control_form=None):
-        raise RuntimeError('Will set same mark')
+    def _update_mark(self, new_mark: NewMark):
+        raise NotImplementedError(f'Could not update mark to {new_mark}')
         # https://dnevnik.mos.ru/core/api/marks/1188507628?pid=15033420
         assert isinstance(control_form, ControlForm)
 
@@ -657,7 +651,6 @@ class Client:
         response = self.put(f'/core/api/marks/{mark_id}?pid={self.teacher_id}', json_data=data)
         assert response['id'] == mark_id
         assert int(response['name']) == value
-        return
 
     def delete_mark(self):
         # curl 'https://dnevnik.mos.ru/core/api/marks/1188480155?pid=15033420' -X DELETE
@@ -667,7 +660,7 @@ class Client:
         education_level_id = EDUCATION_LEVELS[grade]
         key = (grade, subject_id)
         if self._control_forms.get(key) is None:
-            log.debug(f'Loading available control forms for grade {grade} subject {subject_id}')
+            log.info(f'Loading available control forms for grade {grade} subject {subject_id}')
             data = self.get('/core/api/control_forms', {
                 'academic_year_id': self.get_current_year().id,
                 'education_level_id': education_level_id,
@@ -684,7 +677,7 @@ class Client:
             for control_form in control_forms:
                 self._control_forms[key][control_form.get_name()] = control_form
                 if log_forms:
-                    log.info(control_form)
+                    log.info(f'  {control_form}')
             log.info(f'Loaded {len(self._control_forms[key])} active control forms for grade {grade} subject {subject_id}')
         return self._control_forms[key]
 

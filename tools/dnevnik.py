@@ -9,20 +9,32 @@ import logging
 log = logging.getLogger(__name__)
 
 
+ABSENT_MARK = '-'
+SKIP_MARKS = [0, 1]
+
+
 class MarksUpdater:
-    def __init__(self, *, client=None, marks_cache=None):
+    def __init__(self, *, client=None, marks_data=None):
         self._client = client
-        self._marks_cache = marks_cache
-        self._marks_data = library.files.load_yaml_data('marks.yaml')
+        self._marks_data = marks_data
 
     def UpdateAll(self):
+        absences = []
+        new_marks = []
         for group_id, class_data in self._marks_data.items():
             lesson_form = []
             grade = class_data['grade']
             for lesson_str in class_data['lessons']:
                 lesson_id, control_form_name = lesson_str.split(' - ')
-                lesson = self._client.get_schedule_item_by_id(int(lesson_id))
-                control_form = self._client.get_control_forms(lesson._subject_id, grade, log_forms=False)[control_form_name]
+                lesson_id = int(lesson_id)
+
+                if lesson_id in self._client._available_lessons_dict:
+                    lesson = self._client.get_schedule_item_by_id(int(lesson_id))
+                    control_form = self._client.get_control_forms(lesson._subject_id, grade, log_forms=False)[control_form_name]
+                else:
+                    lesson = None
+                    control_form = None
+
                 lesson_form.append((lesson, control_form))
 
             for student_name, marks_str in class_data['marks'].items():
@@ -30,33 +42,41 @@ class MarksUpdater:
                 marks = marks_str.strip(',').split(',')
                 assert len(marks) == len(lesson_form)
                 for mark_str, (lesson, control_form) in zip(marks, lesson_form):
-                    if mark_str == '-':
-                        self._client.set_absent(
-                            student_id=student._id,
-                            lesson_id=lesson._id,
-                        )
+                    mark_str = mark_str.strip()
+                    if not lesson:
+                        continue
+
+                    if mark_str == ABSENT_MARK:
+                        absence = library.dnevnik.mesh.Absence(student_id=student._id, lesson_id=lesson._id)
+                        absences.append(absence)
                     else:
                         mark = int(mark_str)
-                        if mark == 1:
+                        if mark in library.dnevnik.mesh.VALID_MARKS:
+                            new_mark = library.dnevnik.mesh.NewMark(
+                                lesson_id=lesson._id,
+                                student_id=student._id,
+                                value=mark,
+                                comment=None,
+                                point_date=None,
+                                control_form=control_form,
+                            )
+                            new_marks.append(new_mark)
+                        elif mark in SKIP_MARKS:
                             pass
-                        elif mark in [2, 3, 4, 5]:
-                            cached_mark = self._marks_cache.get(lesson_id=lesson._id, student_id=student._id)
-                            if cached_mark is None:
-                                self._client.set_mark(
-                                    schedule_lesson_id=lesson._id,
-                                    student_id=student._id,
-                                    value=mark,
-                                    comment=None,
-                                    point_date=None,
-                                    control_form=control_form,
-                                )
-                            else:
-                                log.info(f'{cached_mark} for {student} at {lesson} already set')
                         else:
                             raise RuntimeError(f'Invalid mark {mark} for {student} at {lesson}')
 
+        log.info(f'Got total of {len(absences)} absences')
+        log.info(f'Got total of {len(new_marks)} new marks')
 
-def get_dt(from_date_days, to_date_days):
+        for absence in absences:
+            self._client.set_absent(absence)
+
+        for new_mark in new_marks:
+            self._client.set_mark(new_mark)
+
+
+def get_dt(from_date_days: int, to_date_days: int):
     assert -15 <= from_date_days <= 15
     assert -15 <= to_date_days <= 15
 
@@ -69,19 +89,16 @@ def get_dt(from_date_days, to_date_days):
 def run(args):
     locale.setlocale(locale.LC_ALL, ('RU', 'UTF8'))
 
-    class_filter = args.class_filter
-    group_filter = args.group_filter
-
     from_dt, to_dt = get_dt(args.from_date, args.to_date)
 
     client = library.dnevnik.mesh.Client(
-        username=args.username,
+        username=library.secrets.token.get('dnevnik.mos.ru.username'),
         password=library.secrets.token.get('dnevnik.mos.ru.password'),
         from_dt=from_dt,
         to_dt=to_dt,
     )
 
-    schedule_items = client.get_schedule_items()
+    schedule_items = list(client.get_schedule_items())
 
     grades = sorted(library.dnevnik.mesh.EDUCATION_LEVELS.keys())
     for lesson in schedule_items:
@@ -89,29 +106,20 @@ def run(args):
             client.get_control_forms(lesson._subject_id, grade, log_forms=True)
 
     for schedule_item in sorted(schedule_items):
-        if class_filter and class_filter not in schedule_item._group._best_name:
-            continue
-        if group_filter and schedule_item._group._id != group_filter:
-            continue
-
         log.info(schedule_item)
         if args.log_links:
             log.info(f'  Link: {schedule_item.get_link()}')
 
-    for _, student in client.get_student_profiles().items():
-        log.debug(student)
-
-    marks_cache = library.dnevnik.mesh.MarksCache(from_dt=from_dt, to_dt=to_dt)
-    for group in client.get_groups():
-        for mark in client.get_marks(group=group):
-            marks_cache.add(mark)
+    if args.set_marks:
+        for mark in client.get_all_marks():
             student = client.get_student_by_id(mark._student_id)
             lesson = client.get_schedule_item_by_id(mark._lesson_id)
             log.info(f'  {student} got {mark} at {lesson}')
-    marks_cache.freeze()
 
-    if args.set_marks:
-        marks_updater = MarksUpdater(client=client, marks_cache=marks_cache)
+        marks_updater = MarksUpdater(
+            client=client,
+            marks_data=library.files.load_yaml_data('marks.yaml'),
+        )
         marks_updater.UpdateAll()
     else:
         log.info('Skip setting marks')
@@ -149,9 +157,6 @@ def run(args):
 def populate_parser(parser):
     parser.add_argument('-f', '--from-date', help='Search lessons from date (in days)', type=int, default=12)
     parser.add_argument('-t', '--to-date', help='Search lessons to date (in days)', type=int, default=2)
-    parser.add_argument('-c', '--class-filter', help='Class filter')
-    parser.add_argument('-g', '--group-filter', help='Group filter (by id)', type=int)
-    parser.add_argument('--username', help='Username to login', default='burmistrovmo')
     parser.add_argument('-l', '--log-links', help='Log distant links', action='store_true')
     parser.add_argument('-m', '--set-marks', help='Set marks', action='store_true')
     parser.add_argument('--logout', help='Logout on all devices', action='store_true')
