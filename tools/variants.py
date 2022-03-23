@@ -942,13 +942,27 @@ def get_all_variants(*, flt=None):
                 'H_levels',
             ]},
         ),
-        # Work(
-        #     task_id='2022-02-18 11Б - СТО - 1',
-        #     classes={'atomic.radioactive': [
-        #         'WriteRadioFall',
-        #     ]},
-        # ),
-
+        Work(
+            task_id='2022-03-22 11БА - КФ - 3',
+            classes={'atomic': [
+                'nuclear.AtomCount01',
+                'nuclear.AtomCount02',
+                'nuclear.AtomCount03',
+                'nuclear.AtomCount04',
+                'nuclear.AtomCount05',
+                'nuclear.AtomCount06',
+                'nuclear.AtomCount07_Text',
+                'nuclear.AtomCount08_Text',
+                'nuclear.AtomCount09_Text',
+                'nuclear.AtomCount10_Text',
+                'nuclear.AtomCount11_Text',
+                'nuclear.AtomCount12_Text',
+                'radioactive.WriteRadioFall',
+                'radioactive.Vishnyakova_5_3_1',
+                'radioactive.Vishnyakova_5_3_2',
+                'radioactive.Vishnyakova_5_3_3',
+            ]},
+        ),
     ]
     if flt:
         works = [work for work in works if flt(work)]
