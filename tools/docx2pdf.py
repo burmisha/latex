@@ -86,11 +86,12 @@ PRIVATE_SUBSRINGS = [
     'Самостоятельная работа',
     'Проверочная работа',
     'Контрольная работа',
+    'ЕГЭ - задание',
 ]
 
 
 def is_private_lesson(lesson_name: str) -> bool:
-    return any(s in lesson_name for s in PRIVATE_SUBSRINGS)
+    return any(s.lower() in lesson_name.lower() for s in PRIVATE_SUBSRINGS)
 
 
 def get_extract_config():
