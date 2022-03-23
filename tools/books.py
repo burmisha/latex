@@ -1014,8 +1014,8 @@ class Vishnyakova(PdfBook):
     ('Колебания', 123, 132),
     ('Геометрическая оптика', 132, 142),
     ('Волны и волновая оптика', 142, 148),
-    ('Квантовая оптика', 148, 151),
-    ('Физика атома и атомного ядра', 151, 155),
+    ('Квантовая оптика', 148, 150),
+    ('Физика атома и атомного ядра', 151, 154),
     ('СТО', 155, 157),
 ])
 class Baumansky2000(PdfBook):
@@ -1544,7 +1544,7 @@ class Problems_3800(PdfBook):
         ('Световые волны - отражение и преломление света', 53, 57),
         ('Световые волны - линзы', 57, 60),
         ('Световые волны - интерференция и дифракция', 60, 64),
-        ('Световые кванты', 64, 68),
+        ('Световые кванты', 64, 67),
         ('Физика атомного ядра', 68, 70),
     ]),
     ('Ответы', 71, 74),
@@ -1716,6 +1716,12 @@ class Statgrad39(PdfBook):
     pass
 
 
+@ppi(200)
+@structure([('Статград - ЕГЭ', 1, 34)])
+class Statgrad34(PdfBook):
+    pass
+
+
 @ppi(300)
 @structure([('Бланки - ЕГЭ', 1, 9)])
 class BlankiEge(PdfBook):
@@ -1829,20 +1835,24 @@ def get_mathus_books():
 
 def get_ege_books():
     yield FIPI_kodificator(
-        pdfPath=library.location.udr('11 ЕГЭ', '2019-ФИПИ', 'ФИ_КОДИФ 2019.pdf'),
+        pdfPath=library.location.udr('11 ЕГЭ', 'ФИПИ 2019', 'ФИ_КОДИФ 2019.pdf'),
         dstPath=get_dst_path('11 - ЕГЭ', 'Кодификатор ФИПИ 2019'),
     )
     yield FIPI_kodificator(
-        pdfPath=library.location.udr('11 ЕГЭ', 'fi-ege-2021', 'ФИ-11 ЕГЭ 2021 КОДИФ.pdf'),
+        pdfPath=library.location.udr('11 ЕГЭ', 'ФИПИ 2021', 'ФИ-11 ЕГЭ 2021 КОДИФ.pdf'),
         dstPath=get_dst_path('11 - ЕГЭ', 'Кодификатор ФИПИ 2021'),
     )
     yield FIPI_demo(
-        pdfPath=library.location.udr('11 ЕГЭ', 'fi-ege-2021', 'ФИ-11 ЕГЭ 2021 ДЕМО.pdf'),
+        pdfPath=library.location.udr('11 ЕГЭ', 'ФИПИ 2021', 'ФИ-11 ЕГЭ 2021 ДЕМО.pdf'),
         dstPath=get_dst_path('11 - ЕГЭ', 'Демовариант 2021'),
     )
     yield Statgrad39(
         pdfPath=library.location.udr('11 ЕГЭ', 'Статград', '2021 Статград ЕГЭ-5', 'Zadanie_FI11_17052021.pdf'),
         dstPath=get_dst_path('11 - ЕГЭ', 'Статград 2021-05-17'),
+    )
+    yield Statgrad34(
+        pdfPath=library.location.udr('11 ЕГЭ', 'Статград', '2022 Статград ЕГЭ-2', 'Zadanie_FI11_20122021.pdf'),
+        dstPath=get_dst_path('11 - ЕГЭ', 'Статград 2021-12-20'),
     )
     yield BlankiEge(
         pdfPath=library.location.udr('11 ЕГЭ', 'blanki-ege-2020-all.pdf'),
