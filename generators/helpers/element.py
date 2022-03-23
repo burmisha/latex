@@ -46,7 +46,7 @@ class Element:
         return f'\\text{{{self.ru}-{self.A}}}'
 
     def _get_ru_name(self) -> str:
-        return f'ядро {self.ru_roditel} ${self._get_ce()}$'
+        return f'ядро {self.ru_roditelny} ${self._get_ce()}$'
 
     def __format__(self, fmt: str):
         try:

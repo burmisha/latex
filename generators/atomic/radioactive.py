@@ -181,7 +181,7 @@ class WriteRadioFall(variant.VariantTask):
         )
 
 
-@variant.solution_space(150)
+@variant.solution_space(90)
 @variant.text('''
     Какая доля (от начального количества) радиоактивных ядер {what} через время,
     равное {when} периодам полураспада? Ответ выразить в процентах.
@@ -255,7 +255,7 @@ class Quantum1120(variant.VariantTask):  # 1120 Рымкевич
     pass
 
 
-@variant.solution_space(150)
+@variant.solution_space(90)
 @variant.text('''
     Сколько процентов ядер радиоактивного железа $\\ce{^{59}Fe}$
     останется через ${t:Value}$, если период его полураспада составляет ${T:Value}$?
@@ -276,7 +276,7 @@ class Vishnyakova_5_3_2(variant.VariantTask):  # Вишнякова - Базов
         )
 
 
-@variant.solution_space(150)
+@variant.solution_space(90)
 @variant.text('''
     За ${t:Value}$ от начального количества ядер радиоизотопа осталась {how}.
     Каков период полураспада этого изотопа (ответ приведите в сутках)?
