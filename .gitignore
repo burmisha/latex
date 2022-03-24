@@ -48,3 +48,5 @@ venv
 *.json
 data/marks.yaml
 data/marks.yaml.1*
+data/pupils.yaml
+data/pupils.yaml.1*
