@@ -984,6 +984,22 @@ def get_all_variants(*, flt=None):
                 'radioactive.Vishnyakova_5_3_3',
             ]},
         ),
+        Work(
+            task_id='2022-03-29 11БА - КФ - 4',
+            classes={'atomic': [
+                'nuclear.KernelCount',
+                'radioactive.Vishnyakova_5_3_12',
+                'radioactive.Delta_m_from_m',
+                'radioactive.Definitions01',
+                'radioactive.Definitions02',
+                'radioactive.Definitions03',
+                'radioactive.Definitions04',
+                'radioactive.Definitions05',
+                'radioactive.Definitions06',
+                'radioactive.Definitions07',
+            ]},
+        ),
+
     ]
     if flt:
         works = [work for work in works if flt(work)]
