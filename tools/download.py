@@ -1,6 +1,8 @@
 import library.download
 from library.logging import cm, color
 
+import pytube
+
 import os
 
 import logging
@@ -14,6 +16,50 @@ def run(args):
     if save_files and add_pavel_victor:
         log.error('Could not download Павел Виктор videos from save as there too many large videos')
         raise RuntimeError('Could not save all videos')
+
+    channels = [
+        # (
+        #     'https://www.youtube.com/c/%D0%9F%D1%80%D0%BE%D0%B4%D0%BE%D0%BB%D0%B6%D0%B5%D0%BD%D0%B8%D0%B5%D1%81%D0%BB%D0%B5%D0%B4%D1%83%D0%B5%D1%82',
+        #     library.location.udr('Видео', 'Продолжение следует'),
+        # ),
+        # (
+        #     'https://www.youtube.com/c/NovayagazetaRu',
+        #     library.location.udr('Видео', 'Новая газета'),
+        # ),
+    ]
+    for url, path in channels:
+        channel = pytube.Channel(url)
+        for video in channel.videos:
+            title = video.title.strip()
+            extension = 'mp4'
+            for src, dst in [
+                (' @Продолжение следует', ''),
+                ('?', '.'),
+                ('@', ''),
+                ('*', ''),
+                ('№', ''),
+                ('«', ''),
+                ('»', ''),
+                (' 18+', ''),
+                ('18+', ''),
+                (': ', ' - '),
+                ('–', '-'),
+                ('—', '-'),
+                ('/', ' ',),
+                (' .', '.'),
+                ('..', ' '),
+                ('  ', ' '),
+                ('  ', ' '),
+                ('  ', ' '),
+            ]:
+                title = title.replace(src, dst)
+
+            filename = f'{video.publish_date.strftime("%F")} - {title}.{extension}'
+            if save_files:
+                streams = video.streams.filter(progressive=True, file_extension=extension)
+                best_stream = streams.order_by('resolution').desc().first()
+                log.info(f'Downloading {cm(filename, color=color.Green)}')
+                best_stream.download(output_path=path, filename=filename, skip_existing=True)
 
     for downloader in [
         # library.download.MathusPhys(library.location.udr('Материалы - mathus')),
@@ -172,6 +218,209 @@ def run(args):
             'https://www.youtube.com/watch?v=wFiRz0f9LdE': '2022 - 2022-03-17 НГ - Стрим с Кириллом Мартыновым',
             'https://www.youtube.com/watch?v=XlKFjEblvTc': '2012 - Бремзен Андрей - Как торговать человеческими почками',
             'https://www.youtube.com/watch?v=Zd2n8stiPj4': '2016 - Слишком свободный человек',
+            'https://www.youtube.com/watch?v=mQRTKvoLAEM': '2022 - 2022-03-27 Интервью Зеленского',
+        },
+        'Масяня': {
+            'https://www.youtube.com/watch?v=kzx_N8AJiKw':  'Масяня. Эпизод 160. Вакидзаси',
+            'https://www.youtube.com/watch?v=HNBvY6J9Pqs':  'Масяня. Эпизод 159. Лафбокс',
+            'https://www.youtube.com/watch?v=U9Pwn6F9rgo':  'Не мульт. Просто поздравление с новым годом!',
+            'https://www.youtube.com/watch?v=vDoD1rMmfGc':  'Масяня. Эпизод 158. Аешаллензолбрухштелленвеурзахер',
+            'https://www.youtube.com/watch?v=QLpQSc54GPw':  'Масяня. Эпизод 157. Только Две Сцены',
+            'https://www.youtube.com/watch?v=Kvqz5T_PlTc':  'Масяня. Эпизод 156. Вечный бан',
+            'https://www.youtube.com/watch?v=z-KyTHhWeJc':  'Масяня. Эпизод 155. Катапульта',
+            'https://www.youtube.com/watch?v=tBUFz_clVOU':  'Масяня. Эпизод 154. Щещя',
+            'https://www.youtube.com/watch?v=5Hp0l0AAxtU':  'Масяня. Эпизод 153. Обормотень',
+            'https://www.youtube.com/watch?v=qVkQif8opaA':  'Масяня. Эпизод 152. Доппельгангер',
+            'https://www.youtube.com/watch?v=1qOXkslawuo':  'Масяня. Эпизод 151. Неудобняк',
+            'https://www.youtube.com/watch?v=ANKJM-99G1k':  'Масяня. Эпизод 150. Мазурик',
+            'https://www.youtube.com/watch?v=lBeMDqcWTG8':  'Масяня. Эпизод 149. Ёршик',
+            'https://www.youtube.com/watch?v=fzETanMXFJA':  'Масяня. Эпизод 148. Листья Ясеня',
+            'https://www.youtube.com/watch?v=F4HvmHdtpiw':  'Масяня. Эпизод 147. Тесла с Маском',
+            'https://www.youtube.com/watch?v=9I4gu3weD48':  'Масяня. Эпизод 146. Джентельмены предпочитают ботинок',
+            'https://www.youtube.com/watch?v=1TCeJhVXXx0':  'Масяня. Эпизод 145. Шницель',
+            'https://www.youtube.com/watch?v=NMwd4SRzP0c':  'Масяня. Эпизод 144. Гуляш',
+            'https://www.youtube.com/watch?v=2wcEoKJCuhY':  'Масяня. Эпизод 143. Билефельд',
+            'https://www.youtube.com/watch?v=ZWzVBUlCxow':  'Масяня. Эпизод 142. Изоляция.',
+            'https://www.youtube.com/watch?v=IOhISmvAXv8':  'Бонус нарезка. Инстаграмасяня',
+            'https://www.youtube.com/watch?v=Y4lOd3L-Uks':  'Это не пипец',
+            'https://www.youtube.com/watch?v=MMi5Fu56OAI':  'Масяня. Эпизод 141. Блоб',
+            'https://www.youtube.com/watch?v=8mC4f3LYDGM':  'Масяня. Эпизод 140. The Weird Face',
+            'https://www.youtube.com/watch?v=Ihb85teP0XA':  'Масяня. Эпизод 139. Дед Сабзиро',
+            'https://www.youtube.com/watch?v=M01LeCQM-j4':  'Масяня. Эпизод 138. Проделки Эйнштейна',
+            'https://www.youtube.com/watch?v=mzNrTkK8VNA':  'Масяня. Эпизод 137. Шухер',
+            'https://www.youtube.com/watch?v=_jNw1CZlfxQ':  'Масяня. Эпизод 136. Легалайз',
+            'https://www.youtube.com/watch?v=pkV4ae6lTCM':  'Масяня. Эпизод 135. Высокие отношения',
+            'https://www.youtube.com/watch?v=iMSn4db-cCE':  'Масяня. Эпизод 134. Хухры-Мухры',
+            'https://www.youtube.com/watch?v=XEM7oThdLyM':  'Масяня. Эпизод 133. Снусы и Манюшки',
+            'https://www.youtube.com/watch?v=C4vZkb_juyQ':  'Масяня. Эпизод 132. Шайсе',
+            'https://www.youtube.com/watch?v=Rl2xw-LxU-w':  'Масяня. Эпизод 131. Бегулеле',
+            'https://www.youtube.com/watch?v=r9loc1UQ9ZI':  'Масяня. Эпизод 130. Зерцало',
+            'https://www.youtube.com/watch?v=XuO9NIQVXDE':  'Масяня. Эпизод 129. Агрегат',
+            'https://www.youtube.com/watch?v=Ggv6o7ptvdg':  'Масяня в Швеции. Мини-сериал. Эпизод 5',
+            'https://www.youtube.com/watch?v=Ez3AgHySXL8':  'Масяня в Швеции. Мини-сериал. Эпизод 4',
+            'https://www.youtube.com/watch?v=20PXoz8l6mc':  'Масяня в Швеции. Мини-сериал. Эпизод 3',
+            'https://www.youtube.com/watch?v=C_a0DWzXwtc':  'Масяня в Швеции. Мини-сериал. Эпизод 2',
+            'https://www.youtube.com/watch?v=mEELfbDUgvE':  'Масяня в Швеции. Мини-сериал. Эпизод 1',
+            'https://www.youtube.com/watch?v=G-Uz4PmBiDE':  'Масяня. Эпизод 128. Факультет',
+            'https://www.youtube.com/watch?v=uNHw0SxBK3g':  'Олег Куваев. Чисто Питерские Заморочки',
+            'https://www.youtube.com/watch?v=jvqBRQYisxA':  'Слендермэн Масяня-стайл',
+            'https://www.youtube.com/watch?v=8a8R9oRjGrU':  'Масянерон vs Кувайный',
+            'https://www.youtube.com/watch?v=tXiwpFVMEXs':  'Масяня. Эпизод 127. Традесканция',
+            'https://www.youtube.com/watch?v=I5HEy2IDx2A':  'Масяня. Эпизод 126. Кейзи Джонс',
+            'https://www.youtube.com/watch?v=Nru8dbN9_SQ':  'Масяня. Эпизод 125. Baghdad banana',
+            'https://www.youtube.com/watch?v=ClZg5g0ekk8':  'Масяня. Эпизод 124. Срытая угроза',
+            'https://www.youtube.com/watch?v=Rtxu2kGajOQ':  'Масяня. Эпизод 123. Ватрушка',
+            'https://www.youtube.com/watch?v=bI7DTKWvAl4':  'Масяня. Водяное Ведро',
+            'https://www.youtube.com/watch?v=mvS6dh0AC5A':  'Масяня. Эпизод 122. Сублимация',
+            'https://www.youtube.com/watch?v=_dydTviK8gY':  'Масяня. Эпизод 121. Будапешт',
+            'https://www.youtube.com/watch?v=W12J6FuzIww':  'Масяня. Эпизод 120. Nice and sweet cartoon with not really clear message',
+            'https://www.youtube.com/watch?v=a5W3vKwL6_Y':  'Масяня. Эпизод 53. День сурком',
+            'https://www.youtube.com/watch?v=L6elgC3fZDU':  'Масяня. Эпизод 119. Пескун в непонятках',
+            'https://www.youtube.com/watch?v=mSM-x5g2IVE':  'Масяня. Эпизод 118. Кури, дедушка, нарзан!',
+            'https://www.youtube.com/watch?v=GFgjLQX9rps':  'Масяня. Эпизод 117. Абстиненция',
+            'https://www.youtube.com/watch?v=11Vyj7LGi3U':  'Масяня. Эпизод 116. Питерское лето',
+            'https://www.youtube.com/watch?v=38mxlvmXKzA':  'Масяня. Эпизод 115. Царь-ру',
+            'https://www.youtube.com/watch?v=TnUZtvHKBiE':  'Самый первый мульт про Масяню',
+            'https://www.youtube.com/watch?v=KxRmUm4OTzI':  'Кайф по выходным',
+            'https://www.youtube.com/watch?v=6PzliGsq9nw':  'Масяня. Эпизод 114. Зеленая кикимора',
+            'https://www.youtube.com/watch?v=rHgTSVyTWWw':  'Масяня. Трейлер.',
+            'https://www.youtube.com/watch?v=yhvFdE7AQtM':  'Масяня. Эпизод 113. Человечики',
+            'https://www.youtube.com/watch?v=C773PuOs9Q0':  'Масяня. Эпизод 112. Ктулху и пингвин с пропеллером',
+            'https://www.youtube.com/watch?v=3jbLMFSwrm0':  'Магазинчик БО. Эпизод 2. Набережная',
+            'https://www.youtube.com/watch?v=WU88HVn-XGc':  'Магазинчик БО. Эпизод 9. Зоосад',
+            'https://www.youtube.com/watch?v=1FUMlvZLoWs':  'Магазинчик БО. Эпизод 8. НеЩАС',
+            'https://www.youtube.com/watch?v=HFyiZpI-ToQ':  'Магазинчик БО. Эпизод 1. Интро плюс фонарь',
+            'https://www.youtube.com/watch?v=dMs9W0fe4hs':  'Магазинчик Бо. Эпизод 14. Люляки БО',
+            'https://www.youtube.com/watch?v=hMD1nD5RLLI':  'Магазинчик Бо. Эпизод 12. Ты знаешь где меня найти',
+            'https://www.youtube.com/watch?v=_WJrukzMKsw':  'Магазинчик Бо. Эпизод 10. Раб Дафны',
+            'https://www.youtube.com/watch?v=ZWpnHZuNQlw':  'Магазинчик БО. Эпизод 5. Дубликатор и фотоген',
+            'https://www.youtube.com/watch?v=sha97rJQ3aA':  'Магазинчик БО. Эпизод 6. Зайберпанк',
+            'https://www.youtube.com/watch?v=VDpIuQZPVz0':  'Магазинчик Бо. Эпизод 13. Бо-гемия',
+            'https://www.youtube.com/watch?v=0BfDquOqazE':  'Магазинчик Бо. Эпизод 11. Иммерз',
+            'https://www.youtube.com/watch?v=6Sda0W6A7as':  'Магазинчик БО. Эпизод 4. Свобоdа слова',
+            'https://www.youtube.com/watch?v=C6Esw36YuBo':  'Магазинчик БО. Эпизод 3. Sупердраг',
+            'https://www.youtube.com/watch?v=2GXEdkwp3AA':  'Магазинчик Бо. Эпизод 24. Крем материализации',
+            'https://www.youtube.com/watch?v=otj2T_-RUrw':  'Магазинчик Бо. Эпизод 19. Жыл',
+            'https://www.youtube.com/watch?v=8ShX7y-rgWc':  'Магазинчик Бо. Эпизод 21. Грузилово',
+            'https://www.youtube.com/watch?v=qkIQl-3H0Kg':  'Магазинчик Бо. Эпизод 17. БО-жья воля',
+            'https://www.youtube.com/watch?v=xGcskAWJqYY':  'Магазинчик Бо. Эпизод 20. Пропасть',
+            'https://www.youtube.com/watch?v=NqOAAqZ1SPY':  'Магазинчик Бо. Эпизод 22. Психологическое топливо',
+            'https://www.youtube.com/watch?v=WKjYRP25ncc':  'Магазинчик Бо. Эпизод 26. Армия медведей',
+            'https://www.youtube.com/watch?v=jwYDk5Unm40':  'Магазинчик Бо. Эпизод 15. Кечак',
+            'https://www.youtube.com/watch?v=xMs-IxeIfxM':  'Магазинчик БО. Эпизод 16. Мятый элемент',
+            'https://www.youtube.com/watch?v=OCndqQqHlQo':  'Магазинчик Бо. Эпизод 23. Сень Бо-Гэ',
+            'https://www.youtube.com/watch?v=pj3yMKYD45Y':  'Магазинчик Бо. Эпизод 25. Деление на всех',
+            'https://www.youtube.com/watch?v=O0ni7xLdUXY':  'Магазинчик Бо. Эпизод 18. Мартын',
+            'https://www.youtube.com/watch?v=1LuyZ7ZdOow':  'Масяня. Эпизод 111. Троллейбус',
+            'https://www.youtube.com/watch?v=--JYQvbzw00':  'Масяня. Эпизод 110. Шевелёнка',
+            'https://www.youtube.com/watch?v=QbbeieVjT0E':  'Масяня. Эпизод 109. Нехилый супец',
+            'https://www.youtube.com/watch?v=GBo7kKcg3bU':  'Масяня. Эпизод 108. Ядрёный взрыв',
+            'https://www.youtube.com/watch?v=phuNrhPFSjM':  'Масяня. Эпизод 107. Свой Чужой',
+            'https://www.youtube.com/watch?v=z_Tswjx7Lpk':  'Масяня. Эпизод 106. Как сделать мульт',
+            'https://www.youtube.com/watch?v=YOkvT_z3CmU':  'Масяня. Эпизод 105. Будтенате',
+            'https://www.youtube.com/watch?v=Bl1ptKWH5Mc':  'Масяня. Эпизод 104. Опаньки',
+            'https://www.youtube.com/watch?v=KUGXSD0YObI':  'Масяня. Эпизод 103. Жаба',
+            'https://www.youtube.com/watch?v=f_YftiwXeKo':  'Масяня. Эпизод 102. Пицца-Пицца',
+            'https://www.youtube.com/watch?v=9FzmEV6SDvI':  'Масяня. Эпизод 101. Трудный способ бросить курить',
+            'https://www.youtube.com/watch?v=zy4NJWoUabw':  'Масяня. Эпизод 100. Сюрпризец',
+            'https://www.youtube.com/watch?v=cVvhYpEucIc':  'Масяня. Эпизод 99. Аэро треугольники',
+            'https://www.youtube.com/watch?v=c39yE_lv8T8':  'Масяня. Эпизод 98. Женские треугольники',
+            'https://www.youtube.com/watch?v=Clq3n4ufdRw':  'Масяня. Эпизод 97. Отдача',
+            'https://www.youtube.com/watch?v=at8UEb6BKHE':  'Масяня. Эпизод 96. Угадай всё',
+            'https://www.youtube.com/watch?v=w4ksppoBDjw':  'Масяня. Эпизод 95. Груша и Кондрашка',
+            'https://www.youtube.com/watch?v=fo3Hr1TRfg8':  'Масяня. Эпизод 94. Морква',
+            'https://www.youtube.com/watch?v=Lw4WFBzT1Kc':  'Масяня. Эпизод 93. Курыцца',
+            'https://www.youtube.com/watch?v=cgJ6q9pg4gg':  'Масяня. Эпизод 92. Мотыль.',
+            'https://www.youtube.com/watch?v=vzMm_pwFlJg':  'Масяня. Эпизод 91. Серенгетти',
+            'https://www.youtube.com/watch?v=kljmbJIVjPQ':  'Масяня. Эпизод 90. Бурасяно',
+            'https://www.youtube.com/watch?v=RUr3E3Yq91k':  'Масяня. Эпизод 89. Джонатан Хрюндельсон',
+            'https://www.youtube.com/watch?v=-O0g7WL2WEA':  'Масяня. Эпизод 88. Муравьиная оратория',
+            'https://www.youtube.com/watch?v=8ni7jyGKITA':  'Масяня. Эпизод 87. О без яна',
+            'https://www.youtube.com/watch?v=daP4ocakdiw':  'Масяня. Эпизод 86. Чернооухий попугай',
+            'https://www.youtube.com/watch?v=0Rua4sZBGHk':  'Масяня. Эпизод 85. Масяптиц и Хрюндептицепап',
+            'https://www.youtube.com/watch?v=_cfv0LoQhsg':  'Масяня. Эпизод 84. Жизнь с котом',
+            'https://www.youtube.com/watch?v=HDpLv2-o0rE':  'Масяня. Эпизод 83. Нерпа',
+            'https://www.youtube.com/watch?v=Up9tWPii4No':  'Масяня. Эпизод 82. Пингвин',
+            'https://www.youtube.com/watch?v=5wOkOjHs97o':  'Масяня. Эпизод 81. Зеркало',
+            'https://www.youtube.com/watch?v=GwQA0_wHigs':  'Масяня. Эпизод 80. Дерево друидов',
+            'https://www.youtube.com/watch?v=lJqHDl6c6q4':  'Масяня. Эпизод 79. Лузер',
+            'https://www.youtube.com/watch?v=DJrc6dAo40U':  'Масяня. Эпизод 78. Рашн трафико',
+            'https://www.youtube.com/watch?v=EGo2K9v17_Q':  'Масяня. Эпизод 77. Кофе по-масяньски',
+            'https://www.youtube.com/watch?v=BN6dE-bKJv4':  'Масяня. Эпизод 76. Всем лицам',
+            'https://www.youtube.com/watch?v=FwEeOLgShgA':  'Масяня. Эпизод 75. Новогодний обход',
+            'https://www.youtube.com/watch?v=wOSJJjyz_mw':  'Масяня. Эпизод 74. Кузина',
+            'https://www.youtube.com/watch?v=GWpF9LIhXhk':  'Масяня. Эпизод 73. Десять дохлых енотов',
+            'https://www.youtube.com/watch?v=FgCLoF8AM8o':  'Масяня. Эпизод 72. Ночной эльф',
+            'https://www.youtube.com/watch?v=JeOci7mQGz4':  'Масяня. Эпизод 71. Боян',
+            'https://www.youtube.com/watch?v=daHn0laSgkw':  'Масяня. Эпизод 70. Обескураж',
+            'https://www.youtube.com/watch?v=PcLOTb8SrTg':  'Масяня. Эпизод 69. В раю денег не берут',
+            'https://www.youtube.com/watch?v=THCUGiQ93P4':  'Масяня. Эпизод 68. Мораторий - Диета',
+            'https://www.youtube.com/watch?v=LcgIw_OLguU':  'Масяня. Эпизод 67. Судьба Нигилиста или Че',
+            'https://www.youtube.com/watch?v=0KC6c4acrZg':  'Масяня. Эпизод 66. Воробей',
+            'https://www.youtube.com/watch?v=yoTJSmKZ0DA':  'Масяня. Эпизод 65. Мануке - полиция Рунета',
+            'https://www.youtube.com/watch?v=TVpWYbvMLAY':  'Масяня. Эпизод 64. Ганди или Ищи Дурака',
+            'https://www.youtube.com/watch?v=YsUHmexMWQU':  'Масяня. Эпизод 63. Анатомический театр',
+            'https://www.youtube.com/watch?v=wjubRM-2ljw':  'Масяня. Эпизод 62. Искушение Лохматого',
+            'https://www.youtube.com/watch?v=3GULUaILnQg':  'Масяня. Эпизод 61. Мани-мани',
+            'https://www.youtube.com/watch?v=4Jix85fykBw':  'Масяня. Эпизод 60. Гавеный день или Масяня в тумане',
+            'https://www.youtube.com/watch?v=FHb4w76VhEw':  'Масяня. Эпизод 59. Ляпы на сьемках',
+            'https://www.youtube.com/watch?v=cgKXnoGerug':  'Масяня. Эпизод 58. Флудеры',
+            'https://www.youtube.com/watch?v=k8LVUJx5nlI':  'Масяня. Эпизод 57. Треугольники',
+            'https://www.youtube.com/watch?v=CxyeWAOesYw':  'Масяня. Эпизод 56. Околобаха',
+            'https://www.youtube.com/watch?v=GDL8cIuXIQA':  'Масяня. Эпизод 55. Такой секс',
+            'https://www.youtube.com/watch?v=l33x3td5gfg':  'Масяня. Эпизод 54. Общество борьбы с козлами',
+            'https://www.youtube.com/watch?v=ghLDvqXLl1M':  'Масяня. Эпизод 52. Карусель',
+            'https://www.youtube.com/watch?v=N_oR3sAkCwI':  'Масяня. Эпизод 51. Хабиби',
+            'https://www.youtube.com/watch?v=pixiF83bEcg':  'Масяня. Эпизод 50. Посленовогодний бред',
+            'https://www.youtube.com/watch?v=YQT-jJGpf8c':  'Масяня. Эпизод 49. Сказка 2003',
+            'https://www.youtube.com/watch?v=rfzTgB1JSPE':  'Масяня. Эпизод 48. Здоровье',
+            'https://www.youtube.com/watch?v=NfakZ426zYE':  'Масяня. Эпизод 47. Эффект Дятла',
+            'https://www.youtube.com/watch?v=atAp8l9uVNM':  'Масяня. Эпизод 46. Попсня',
+            'https://www.youtube.com/watch?v=A1m0gXPuqnI':  'Масяня. Эпизод 45. Принц Альберт',
+            'https://www.youtube.com/watch?v=LrYsGgV0S0I':  'Масяня. Эпизод 44. Киноавангард',
+            'https://www.youtube.com/watch?v=TQeoN01n2JQ':  'Масяня. Эпизод 43. Хомяк',
+            'https://www.youtube.com/watch?v=rUT3boOZUJc':  'Масяня. Эпизод 42. Пого',
+            'https://www.youtube.com/watch?v=a3ogrOqtErM':  'Масяня. Эпизод 41. Во вне',
+            'https://www.youtube.com/watch?v=7Ov6y3hgRD8':  'Масяня. Эпизод 40. Таблетки на Блюхера',
+            'https://www.youtube.com/watch?v=gojj9N2ZtXo':  'Масяня. Эпизод 39. Катаклизм',
+            'https://www.youtube.com/watch?v=VxkuTiXF1C4':  'Масяня. Эпизод 38. Крыса',
+            'https://www.youtube.com/watch?v=0CYR-IY_jDQ':  'Масяня. Эпизод 37. Два моста',
+            'https://www.youtube.com/watch?v=Ct8qDUDsMy8':  'Масяня. Эпизод 36. Пуговица Пушкина',
+            'https://www.youtube.com/watch?v=MCpBMpdOukE':  'Масяня. Эпизод 35. Розовая кофточка',
+            'https://www.youtube.com/watch?v=ivfF5B3IsSU':  'Масяня. Эпизод 34. Языковой барьер',
+            'https://www.youtube.com/watch?v=ufRJzhBtGSI':  'Масяня. Эпизод 33. ТВ-Интро',
+            'https://www.youtube.com/watch?v=tJofh3icVi8':  'Масяня. Эпизод 30. Русский панкрок',
+            'https://www.youtube.com/watch?v=NmUn-QX3bS0':  'Масяня. Эпизод 29. На измене',
+            'https://www.youtube.com/watch?v=cmPpG1Nb-ss':  'Масяня. Эпизод 26. Колёса',
+            'https://www.youtube.com/watch?v=nZeBWUPaEaU':  'Масяня. Эпизод 32. Деньги, Небо и Машины',
+            'https://www.youtube.com/watch?v=LhCKRIZl9X4':  'Масяня. Эпизод 31. Кукла',
+            'https://www.youtube.com/watch?v=VYgTvWPft04':  'Масяня. Эпизод 28. Депресняк',
+            'https://www.youtube.com/watch?v=aGxQ71et5Eo':  'Масяня. Эпизод 27. Поттер',
+            'https://www.youtube.com/watch?v=k9uO9zZsQmc':  'Масяня. Эпизод 25. Взаимопонимание полов',
+            'https://www.youtube.com/watch?v=OvZqKc-36kw':  'Масяня. Эпизод 24. Городские ужасы',
+            'https://www.youtube.com/watch?v=ISZsQiSpzy8':  'Масяня. Эпизод 23. 8 марта',
+            'https://www.youtube.com/watch?v=wsLXO-Nmn-U':  'Масяня. Эпизод 22. Экскурсия по Санкт-Петербургу',
+            'https://www.youtube.com/watch?v=mXdJ8OT-4UI':  'Масяня. Эпизод 21. Валентинки',
+            'https://www.youtube.com/watch?v=m05xKxkIGU4':  'Масяня. Эпизод 20. Даунлоад',
+            'https://www.youtube.com/watch?v=7_wYv6Y21rg':  'Масяня. Эпизод 19. Шоу-бизнес',
+            'https://www.youtube.com/watch?v=k2oCEOxeEnk':  'Масяня. Эпизод 18. Подарочки',
+            'https://www.youtube.com/watch?v=hLCwl0asqSI':  'Масяня. Эпизод 17. Новогодняя сказочка',
+            'https://www.youtube.com/watch?v=KPrqEN27Ohg':  'Масяня. Эпизод 16. Сладкие грёзы',
+            'https://www.youtube.com/watch?v=g9gKkej9gGg':  'Масяня. Эпизод 15. Москва',
+            'https://www.youtube.com/watch?v=ElUhVkyxZi4':  'Масяня. Эпизод 14. Как-нибудь',
+            'https://www.youtube.com/watch?v=Klxm8y3WLHE':  'Масяня. Эпизод 13. День радио',
+            'https://www.youtube.com/watch?v=YboUUyuEgIM':  'Масяня. Эпизод 12. В отрыв',
+            'https://www.youtube.com/watch?v=PjBSoBhZWu0':  'Масяня. Эпизод 11. Мороженое',
+            'https://www.youtube.com/watch?v=n5Ly_V7aZ8s':  'Масяня. Эпизод 10. Пятница',
+            'https://www.youtube.com/watch?v=yb0hEebmZeA':  'Масяня. Эпизод 9. Обломчики',
+            'https://www.youtube.com/watch?v=NLuof0H9u6M':  'Масяня. Эпизод 8. Масяня и Сплин',
+            'https://www.youtube.com/watch?v=KvPHuukuj3U':  'Масяня. Эпизод 7. День Рождения',
+            'https://www.youtube.com/watch?v=S7xNSEtIGQQ':  'Масяня. Эпизод 6. Амстердам',
+            'https://www.youtube.com/watch?v=EnpunGElAk8':  'Масяня. Эпизод 5. Анекдот',
+            'https://www.youtube.com/watch?v=FiQymYIhTW8':  'Масяня. Эпизод 4. Телевизор',
+            'https://www.youtube.com/watch?v=ER1g5D2Thnc':  'Масяня. Эпизод 3. Электричка',
+            'https://www.youtube.com/watch?v=AjXdcEiEEeY':  'Масяня. Эпизод 2. Модем',
+            'https://www.youtube.com/watch?v=_Ynb7PSfK4w':  'Масяня. Эпизод 1. Автолюбитель',
         },
         'Veritasium': {
             'https://www.youtube.com/watch?v=AaZ_RSt0KP8': '2021.08.31 - The Universe is Hostile to Computers',
@@ -287,15 +536,29 @@ def run(args):
         video_with_topics = [(v, t) for v, t in video_with_topics if t]
         video_with_topics.sort(key=lambda t: t[1])
 
+    failed_videos = []
     for video, topic_index in video_with_topics:
         if save_files:
-            video.download()
+            try:
+                video.download()
+            except KeyboardInterrupt:
+                log.error(f'Download cancelled: {video}')
+                raise
+            except:
+                log.error(f'Failed to download {video}')
+                failed_videos.append(video)
         else:
             if topic_filter.matches(topic_index):
                 if not topic_index:
                     log.info(video)
                 else:
                     log.info(f'{video}, {topic_index}')
+
+    if failed_videos:
+        for video in failed_videos:
+            log.info(f'Failed to download {video}')
+        raise RuntimeError(f'Got {len(failed_videos)} failed videos:')
+
 
 
 def populate_parser(parser):
