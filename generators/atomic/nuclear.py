@@ -314,6 +314,7 @@ class AtomCount12_Text(variant.VariantTask):
     (123, 51),  # Cu
     (190, 78),  # Pt
 ])
+@variant.solution_space(40)
 @variant.is_one_arg
 class KernelCount(variant.VariantTask):
     def GetUpdateOneArg(self, a):

@@ -96,12 +96,11 @@ class Definitions06(variant.VariantTask):
 
 
 @variant.text('''
-    На какой {which} угол (в градусах) отконялись $\\alpha$-частицы
+    На какой {which} угол (в градусах) отклонялись $\\alpha$-частицы
     в опытах Резерфорда по их рассеянию на тонкой золотой фольге?
 ''')
 @variant.arg(which__a=[('минимальный', 0), ('максимальный', 180)])
 @variant.answer_test('{a}')
-@variant.solution_space(40)
 @variant.answer_short('{a}\\degrees')
 class Definitions07(variant.VariantTask):
     pass
@@ -354,7 +353,7 @@ class Vishnyakova_5_3_12(variant.VariantTask):
         )
 
 
-@variant.solution_space(150)
+@variant.solution_space(90)
 @variant.text('''
     Определите дефект массы (в а.е.м.) и энергию связи (в МэВ) ядра атома {element:LaTeX},
     если его масса составляет {m_aem:Value|e}.
