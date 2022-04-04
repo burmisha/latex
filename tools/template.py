@@ -48,11 +48,12 @@ def runTemplate(args):
     futureFmt = nowDelta.After(days=12, fmt='%F')
 
     for date in [
-        '2020-10-17',
-        '2020-12-05',
-        '2020-12-12',
-        '2021-10-26',
-        '2021-10-28',
+        # '2020-10-17',
+        # '2020-12-05',
+        # '2020-12-12',
+        # '2021-10-26',
+        # '2021-10-28',
+        '2022-03-24',
     ]:
         if nowFmt <= date <= futureFmt:
             ipadCopier.CreateFile(library.location.ipad('2021-22 Кружок', f'{date} Кружок.docx'))
