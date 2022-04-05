@@ -56,6 +56,12 @@ def get_convert_config():
             r'.*\b[Кк]ружок.*\.docx$',
         ),
         (
+            library.location.udr('12 - кружок - 9-10-11', '2021-22 Кружок и допы'),
+            library.location.udr('12 - кружок - 9-10-11', '2021-22 Кружок и допы'),
+            False,
+            r'.*\b[Кк]ружок.*\.docx$',
+        ),
+        (
             pupils_10ab.get_path(archive=True),
             pupils_10ab.get_path(archive=False),
             False,
