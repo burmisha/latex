@@ -26,6 +26,10 @@ def run(args):
         #     'https://www.youtube.com/c/NovayagazetaRu',
         #     library.location.udr('Видео', 'Новая газета'),
         # ),
+        (
+            'https://www.youtube.com/channel/UCO1lJlI3gjuOMrKppvPlDww',
+            library.location.udr('Видео', 'Новая газета - Европа'),
+        ),
     ]
     for url, path in channels:
         channel = pytube.Channel(url)
@@ -51,6 +55,7 @@ def run(args):
                 ('  ', ' '),
                 ('  ', ' '),
                 ('  ', ' '),
+                ('..', ''),
             ]:
                 title = title.replace(src, dst)
 
