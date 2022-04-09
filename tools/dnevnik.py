@@ -124,34 +124,8 @@ def run(args):
     else:
         log.info('Skip setting marks')
 
-    return
-
-    for res in [
-        # client.get('/acl/api/users', {
-        #     'ids': 14650300
-        # }),
-        # client.get('/jersey/api/lesson_replacements', {
-        #     'academic_year_id': current_year.id,
-        #     'begin_date': '2020/11/30',
-        #     'end_date': '2020/12/06',
-        #     'pid': client.get_teacher_id(),
-        #     'teacher_id': client.get_teacher_id()
-        # }),
-        # client.get('/core/api/homeworks', {
-        #     'academic_year_id': current_year.id,
-        #     'begin_date': '30.11.2020',
-        #     'end_date': '06.12.2020',
-        #     'group_ids': '5404115,5472791,5396206,5351031,5351036',
-        #     'pid': client.get_teacher_id(),
-        #     'with_entries': True
-        # }),
-    ]:
-        log.info(f'Got\n{library.logging.colorize_json(res)}')
-
     if args.logout:
         client._logout()
-    else:
-        log.info('Skipping logout as it will require login on all devices')
 
 
 def populate_parser(parser):

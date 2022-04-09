@@ -1,12 +1,11 @@
 # see https://github.com/search?q=dnevnik.mos.ru&type=repositories
 import attr
-import collections
 import datetime
 import re
 import requests
 import json
 import datetime
-from typing import Optional
+from typing import Optional, List
 
 import logging
 log = logging.getLogger(__name__)
@@ -14,7 +13,16 @@ log = logging.getLogger(__name__)
 from library.logging import colorize_json, cm, color
 import library.secrets
 
-Year = collections.namedtuple('Year', ['id', 'name', 'begin_date', 'end_date', 'calendar_id', 'current_year'])
+
+@attr.s
+class Year:
+    id: int = attr.ib()
+    name: str = attr.ib()
+    begin_date: str = attr.ib()
+    end_date: str = attr.ib()
+    calendar_id: int = attr.ib()
+    current_year: bool = attr.ib()
+
 
 BASE_URL = 'https://dnevnik.mos.ru'
 MARKS_DATE_FMT = '%d.%m.%Y'
@@ -25,7 +33,24 @@ EDUCATION_LEVELS = {
     9: 2,
 }
 MARKS_LIMIT = 1000
+CONTROL_FORMS_LIMIT = 100
 VALID_MARKS = [2, 3, 4, 5]
+
+
+class ApiUrl:
+    GROUPS = '/jersey/api/groups'
+    SCHEDULE_ITEMS = '/jersey/api/schedule_items'
+    ACADEMIC_YEARS = '/core/api/academic_years'
+    TEACHER_PROFILES = '/core/api/teacher_profiles/{teacher_id}'
+    STUDENT_PROFILES = '/core/api/student_profiles'
+    ATTENDANCES = '/core/api/attendances?pid={teacher_id}'
+    MARKS_GET = '/core/api/marks'
+    MARKS_POST = '/core/api/marks?pid={teacher_id}'
+    MARKS_PUT = '/core/api/marks/{mark_id}?pid={teacher_id}'
+    CONTROL_FORMS = '/core/api/control_forms'
+
+    LMS_LOGIN = '/lms/api/sessions'
+    LMS_LOGOUT = '/lms/api/sessions?authentication_token={auth_token}'
 
 
 class StudentsGroup:
@@ -66,6 +91,8 @@ class StudentProfile:
         self._id = data['id']
         self._short_name = data['short_name']
         self._raw_data = data
+        self.group_ids = [group['id'] for group in data['groups']]
+        self.class_unit_id = data['class_unit']['id']
 
     def __str__(self):
         return f'{cm(self._short_name, color=color.Cyan)}'
@@ -83,10 +110,12 @@ class ScheduleItem:
         self._date = data['date']
         self._iso_date_time = data['iso_date_time']
         self._schedule_id = data['schedule_id']
-        self._group_id = data['group_id']
+        self.group_id = data['group_id']
         self._subject_id = data['subject_id']
         self._timestamp = datetime.datetime.strptime(self._iso_date_time, '%Y-%m-%dT%H:%M:00.000')
 
+        self.class_unit_id = data['class_unit_id']
+        self.group_name = data['group_name']
         self._raw_data = data
 
     def set_group(self, group):
@@ -123,7 +152,6 @@ class Mark:
 
         self._raw_data = data
 
-
     def __str__(self):
         return f'mark {cm(str(self._value), color=color.Red)}'
 
@@ -153,15 +181,17 @@ class MarksCache:
 class ControlForm:
     def __init__(self, data):
         assert not data['deleted_at']
+        self.name = data['name']
+        self.weight = data['weight']
+
         self._raw_data = data
 
-    def get_name(self):
-        return self._raw_data['name']
+        control_form_str = json.dumps(data)
+        control_form_str = control_form_str.replace('.0', '')
+        self.rounded_raw_data = json.loads(control_form_str)
 
     def __str__(self):
-        weight = self._raw_data['weight']
-        name = self._raw_data['name']
-        return f'active control form [{weight}] {cm(name, color=color.Yellow)}'
+        return f'active control form [{cm(self.weight, color=color.Green)}] {cm(self.name, color=color.Yellow)}'
 
 
 @attr.s
@@ -179,66 +209,73 @@ class NewMark:
     point_date: Optional[str] = attr.ib()
     control_form: ControlForm = attr.ib()
 
+    @value.validator
+    def is_valid(self, attribute, mark_value):
+        if mark_value not in VALID_MARKS:
+            raise ValueError(f'Mark value {mark_value} is invalid')
 
-class Client:
-    def __init__(
-        self,
-        *,
-        username=None,
-        password=None,
-        from_dt: datetime.datetime=None,
-        to_dt: datetime.datetime=None,
-    ):
+    @property
+    def is_point(self):
+        return self.point_date is not None
+
+    @property
+    def point_date_patched(self) -> Optional[str]:
+        if self.point_date is None:
+            return None
+
+        assert re.match(r'202\d\-\d\d-\d\d', self.point_date)
+        return '.'.join([self.point_date[8:], self.point_date[5:7], self.point_date[:4]])
+
+    @property
+    def point_date_strange(self) -> Optional[str]:
+        if self.point_date is None:
+            return library.datetools.NowDelta().After(fmt='%FT%T.000Z', hours=20)
+
+        assert re.match(r'202\d\-\d\d\-\d\d', point_date)
+        return f'{new_mark.point_date}T04:12:35.678Z'
+
+    @property
+    def show_comment(self) -> bool:
+        return self.comment is not None
+
+
+class AuthorizedClient:
+    def __init__(self, *, username: str=None, password: str=None):    
         self._base_url = BASE_URL
         self._login(username=username, password=password)
-
-        self.from_dt = from_dt
-        self.to_dt = to_dt
-
-        self._current_year = None
-        self._teacher_profile = None
-        self._groups = None
-        self._all_student_profiles = None
-        self._available_lessons_dict = {}
-        self._control_forms = {}
-
-        self._marks_cache = MarksCache()
-        self._loaded_marks = False
 
     def _login(self, username, password):
         log.info('Trying to log in...')
         response = requests.post(
-            f'{self._base_url}/lms/api/sessions',
+            self.get_full_url(ApiUrl.LMS_LOGIN),
             headers=self._get_headers(add_personal=False),
-            json={'login': username, 'password_plain': password,
-        }).json()
+            json={'login': username, 'password_plain': password}
+        ).json()
         self._profile_id = response['profiles'][0]['id']
         self._auth_token = response['authentication_token']
-        log.info(f'Got profile_id {self._profile_id} and auth_token {self._auth_token} for {username} at login')
+        log.info(f'Got profile_id {self._profile_id} and auth_token of len {len(self._auth_token)} for {username} at login')
 
     def _logout(self):
+        raise RuntimeError('Logout is disabled as it will require login on all devices')
+
         response = requests.delete(
-            f'{self._base_url}/lms/api/sessions?authentication_token={self._auth_token}',
+            self.get_full_url(ApiUrl.LMS_LOGOUT.format(authentication_token=self._auth_token)),
             headers=self._get_headers(add_personal=False)
         ).json()
         if response == {'status': 'ok', 'http_status_code': 200}:
-            log.debug(f'Logged out')
+            log.info(f'Logged out')
         else:
             log.error(f'Got during log out: {response}')
             raise RuntimeError('Could not logout')
 
-    @property
-    def teacher_id(self):
-        return self._profile_id
-
-    def _get_headers(self, add_personal=True):
+    def headers(self, add_personal=True):
         headers = {
             'Accept': 'application/json, text/plain, */*',
             'Accept-Language': 'ru-RU,ru;q=0.8,en-US;q=0.5,en;q=0.3',
             'Connection': 'keep-alive',
             'Content-Type': 'application/json;charset=utf-8',
-            'Origin': BASE_URL,
-            'Referer': f'{BASE_URL}/',
+            'Origin': self._base_url,
+            'Referer': f'{self._base_url}/',
             'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:83.0) Gecko/20100101 Firefox/83.0',
         }
         if add_personal:
@@ -255,82 +292,118 @@ class Client:
             log.error(f'Could not load json from {response.text}')
             raise
 
-        if isinstance(data, dict) and data.get('code') == 400:
-            raise RuntimeError(f'Got {colorize_json(data)}')
-        if isinstance(data, dict) and data.get('message') == 'Предыдущая сессия работы в ЭЖД завершена. Войдите в ЭЖД заново':
-            raise RuntimeError(f'Token is invalid')
+        if isinstance(data, dict):
+            if data.get('code') == 400:
+                raise RuntimeError(f'Got 400: {colorize_json(data)}')
+            if data.get('message') == 'Предыдущая сессия работы в ЭЖД завершена. Войдите в ЭЖД заново':
+                raise RuntimeError(f'Token is invalid')
 
         return data
 
-    def post(self, url, json_data):
-        assert url.startswith('/'), f'url doesn\'t start with /: {url}'
-        full_url = f'{self._base_url}{url}'
+    def get_full_url(self, path):
+        assert path.startswith('/'), f'path must start with /, got: {path!r}'
+        return f'{self._base_url}{path}'
+
+    def post(self, url: str, json_data: dict):
+        full_url = self.get_full_url(url)
         try:
-            response = requests.post(full_url, json=json_data, headers=self._get_headers())
-            response = self._check_response(response)
-            log.debug(f'Response from {url}: {response}')
-            return response
+            response = requests.post(full_url, json=json_data, headers=self.headers())
+            return self._check_response(response)
         except:
             log.error(f'Error on POST to {full_url} with {colorize_json(json_data)}')
             raise
 
-    def put(self, url, json_data):
-        assert url.startswith('/'), f'url doesn\'t start with /: {url}'
-        full_url = f'{self._base_url}{url}'
+    def put(self, url: str, json_data: dict):
+        full_url = self.get_full_url(url)
         try:
-            response = requests.put(full_url, json=json_data, headers=self._get_headers())
-            response = self._check_response(response)
-            log.debug(f'Response from {url}: {response}')
-            return response
+            response = requests.put(full_url, json=json_data, headers=self.headers())
+            return self._check_response(response)
         except:
             log.error(f'Error on PUT to {full_url} with {colorize_json(json_data)}')
             raise
 
-    def get(self, url, params):
-        assert url.startswith('/'), f'url doesn\'t start with /: {url}'
+    def get(self, url: str, params: dict):
+        full_url = self.get_full_url(url)
+
         str_params = {}
         for key, value in params.items():
             str_params[key] = str(value)
 
-        full_url = f'{self._base_url}{url}'
         try:
-            response = requests.get(full_url, params=str_params, headers=self._get_headers())
-            response = self._check_response(response)
-            log.debug(f'Response from {url}: {response}')
-            return response
+            response = requests.get(full_url, params=str_params, headers=self.headers())
+            return self._check_response(response)
         except:
-            log.error(f'Error on GET to {full_url} with {params}')
+            log.error(f'Error on GET to {full_url} with str params {colorize_json(str_params)}')
             raise
+
+
+class Client:
+    def __init__(
+        self,
+        *,
+        username=None,
+        password=None,
+        from_dt: datetime.datetime=None,
+        to_dt: datetime.datetime=None,
+    ):
+        self.authorized_client = AuthorizedClient(username=username, password=password)
+        self.teacher_id = self.authorized_client._profile_id
+
+        self.from_dt = from_dt
+        self.to_dt = to_dt
+
+        self._current_year = None
+        self._teacher_profile = None
+        self._groups = None
+        self._all_student_profiles = None
+        self._available_lessons_dict = {}
+        self._control_forms = {}
+
+        self._marks_cache = MarksCache()
+        self._loaded_marks = False
+
+        from_date_str = library.datetools.formatTimestamp(self.from_dt, fmt='%F')
+        to_date_str = library.datetools.formatTimestamp(self.to_dt, fmt='%F')
+
+        log.info(f'Using dates {cm(from_date_str, color.Green)} ... {cm(to_date_str, color.Green)}')
 
     def get_current_year(self):
         if self._current_year is None:
-            academic_years = self.get('/core/api/academic_years', {'pid': self.teacher_id})
-            academic_years = [Year(**item) for item in academic_years]
-            current_years = [year for year in academic_years if year.current_year]
-            assert len(current_years) == 1
-            log.info(f'Current year: {current_years[0]}')
-            self._current_year = current_years[0]
+            params = {'pid': self.teacher_id}
+            academic_years = self.authorized_client.get(ApiUrl.ACADEMIC_YEARS, params)
+            self._current_year = None
+            for item in academic_years:
+                year = Year(**item)
+                if year.current_year:
+                    assert not self._current_year
+                    self._current_year = year
+            assert self._current_year
+            log.info(f'Set current year: {self._current_year}')
 
         return self._current_year
 
     def get_teacher_profile(self):
         if self._teacher_profile is None:
-            self._teacher_profile = self.get(f'/core/api/teacher_profiles/{self.teacher_id}', {
+            params = {
                 'academic_year_id': self.get_current_year().id,
                 'pid': self.teacher_id,
                 'with_assigned_groups': True
-            })
+            }
+            self._teacher_profile = self.authorized_client.get(ApiUrl.TEACHER_PROFILES.format(teacher_id=self.teacher_id), params)
 
         return self._teacher_profile
 
+    def get_assigned_group_ids(self) -> List[int]:
+        return self.get_teacher_profile()['assigned_group_ids']
+
     def get_groups(self):
-        assigned_group_ids = ','.join(str(i) for i in sorted(self.get_teacher_profile()['assigned_group_ids']))
         if self._groups is None:
-            groups = self.get('/jersey/api/groups', {
+            params = {
                 'academic_year_id': self.get_current_year().id,
-                'group_ids': assigned_group_ids,
+                'group_ids': ','.join(str(i) for i in self.get_assigned_group_ids()),
                 'pid': self.teacher_id,
-            })
+            }
+            groups = self.authorized_client.get(ApiUrl.GROUPS, params)
             self._groups = [StudentsGroup(item) for item in groups]
         return self._groups
 
@@ -346,7 +419,7 @@ class Client:
         if self._all_student_profiles is None:
             self._all_student_profiles = {}
             for group in self.get_groups():
-                student_profiles_data = self.get('/core/api/student_profiles', params={
+                params = {
                     'academic_year_id': self.get_current_year().id,
                     'class_unit_ids': ','.join(str(i) for i in group._class_unit_ids),
                     'group_ids': ','.join(str(i) for i in [group._id] + group._subgroup_ids),
@@ -359,7 +432,8 @@ class Client:
                     'with_home_based': True,
                     'with_lesson_info': True,
                     # 'with_parents': True,
-                })
+                }
+                student_profiles_data = self.authorized_client.get(ApiUrl.STUDENT_PROFILES, params=params)
                 log.info(f'Loaded {len(student_profiles_data)} students for {group!r}')
                 for item in student_profiles_data:
                     student_profile = StudentProfile(item)
@@ -371,11 +445,13 @@ class Client:
         return self.get_student_profiles()[student_id]
 
     def get_student_by_name(self, student_name):
-        matched = [student_profile for student_profile in self.get_student_profiles().values() if student_profile.matches(student_name)]
-        if len(matched) == 1:
-            return matched[0]
-        else:
-            raise RuntimeError(f'Not found students by name {student_name}: got {matched}')
+        matched = [
+            student_profile for student_profile in self.get_student_profiles().values()
+            if student_profile.matches(student_name)
+        ]
+        if len(matched) != 1:
+            raise RuntimeError(f'Not found students by name {student_name}: got {matched} matched')
+        return matched[0]            
 
     def get_schedule_item_by_id(self, schedule_item_id: int) -> ScheduleItem:
         assert isinstance(schedule_item_id, int)
@@ -385,12 +461,13 @@ class Client:
         student = self.get_student_by_id(absence.student_id)
         schedule_lesson = self.get_schedule_item_by_id(absence.lesson_id)
 
-        result = self.post(f'/core/api/attendances?pid={self.teacher_id}', {
+        request = {
             'absence_reason': None,
             'absence_reason_id': 2,
             'schedule_lesson_id': absence.lesson_id,
             'student_profile_id': absence.student_id,
-        })
+        }
+        result = self.authorized_client.post(ApiUrl.ATTENDANCES.format(teacher_id=self.teacher_id), json_data=request)
 
         if result.get('created_at'):
             log.info(f'Absense was set for {student} for {schedule_lesson}')
@@ -401,52 +478,42 @@ class Client:
             raise RuntimeError('Unknown response')
 
     def get_schedule_items(self):
-        from_date = library.datetools.formatTimestamp(self.from_dt, fmt=SCHEDULE_DATE_FMT)
-        to_date = library.datetools.formatTimestamp(self.to_dt, fmt=SCHEDULE_DATE_FMT)
-        log.info(f'get_schedule_items from {from_date} to {to_date}')
-
-        schedule_items_raw = self.get('/jersey/api/schedule_items', {
+        request = {
             'academic_year_id': self.get_current_year().id,
-            'from': from_date,
-            'to': to_date,
+            'from': library.datetools.formatTimestamp(self.from_dt, fmt=SCHEDULE_DATE_FMT),
+            'to': library.datetools.formatTimestamp(self.to_dt, fmt=SCHEDULE_DATE_FMT),
             'original': True,
             'page': 1,
             'per_page': 100,
             'pid': self.teacher_id,
             'teacher_id': self.teacher_id,
             'with_group_class_subject_info': True,
-            # 'with_lesson_info': True,  # no need
-            # 'with_rooms_info': True,  # no need
-        })
+        }
+        schedule_items_raw = self.authorized_client.get(ApiUrl.SCHEDULE_ITEMS, request)
         for item in schedule_items_raw:
             schedule_item = ScheduleItem(item)
-            group = self.get_group_by_id(schedule_item._group_id)
+            group = self.get_group_by_id(schedule_item.group_id)
             if group:
                 schedule_item.set_group(group)
                 self._available_lessons_dict[schedule_item._id] = schedule_item
                 yield schedule_item
             else:
-                group_name = schedule_item._raw_data['group_name']
-                log.warn(f'Skipping schedule item for {cm(group_name, color=color.Red)} as no group found')
+                log.warn(f'Skipping schedule item for {cm(schedule_item.group_name, color=color.Red)} as no group found')
 
-    def _get_marks_for_group(
-        self,
-        *,
-        group: StudentsGroup=None,
-        limit: int=MARKS_LIMIT,
-    ):
+    def _get_marks_for_group(self, *, group: StudentsGroup=None, limit: int=MARKS_LIMIT):
         from_date = library.datetools.formatTimestamp(self.from_dt, fmt=MARKS_DATE_FMT)
         to_date = library.datetools.formatTimestamp(self.to_dt, fmt=MARKS_DATE_FMT)
         log.info(f'Getting marks [{from_date}, {to_date}] for {group}')
 
-        marks_items = self.get('/core/api/marks', params={
+        params = {
             'created_at_from': from_date,
             'created_at_to': to_date,
             'group_ids': ','.join(str(i) for i in [group._id] + group._subgroup_ids),
             'page': 1,
             'per_page': limit,
             'pid': self.teacher_id,
-        })
+        }
+        marks_items = self.authorized_client.get(ApiUrl.MARKS_GET, params=params)
         assert len(marks_items) < limit, f'Too many marks: reduce dates or increase limit: {limit}'
 
         for mark_item in marks_items:
@@ -462,25 +529,28 @@ class Client:
         self._loaded_marks = True
         return marks
 
-    def set_mark(self, new_mark: NewMark):
-        assert self._loaded_marks, 'Marks were not loaded, setting new ones will cause duplicates'
-
+    def validate_mark(self, new_mark: NewMark):
         lesson = self.get_schedule_item_by_id(new_mark.lesson_id)
         student = self.get_student_by_id(new_mark.student_id)
 
-        try:
-            student_group_ids = [group['id'] for group in student._raw_data['groups']]
-            assert (lesson._raw_data['group_id'] in student_group_ids) or (student._raw_data['class_unit']['id'] == lesson._raw_data['class_unit_id'])
-        except:
-            log.info(colorize_json(student._raw_data))
-            log.info(colorize_json(lesson._raw_data))
+        ok = (lesson.group_id in student.group_ids) or (lesson.class_unit_id == student.class_unit_id)  
+        if not ok:
+            log.info(f'student: {colorize_json(student._raw_data)}')
+            log.info(f'lesson: {colorize_json(lesson._raw_data)}')
             log.error(f'Failed on {student} at {lesson}')
             raise RuntimeError(f'Failed at student check')
+
+    def set_mark(self, new_mark: NewMark):
+        if not self._loaded_marks:
+            raise RuntimeError('Marks were not loaded, setting new ones will cause duplicates')
+
+        self.validate_mark(new_mark)
+        lesson = self.get_schedule_item_by_id(new_mark.lesson_id)
+        student = self.get_student_by_id(new_mark.student_id)
 
         log_message = f'Setting mark {cm(new_mark.value, color=color.Red)} for {student} at {lesson}'
 
         cached_mark = self._marks_cache.get(lesson_id=new_mark.lesson_id, student_id=new_mark.student_id)
-
         if cached_mark:
             if cached_mark._value == new_mark.value:
                 log.info(f'{log_message}: already set')
@@ -493,65 +563,40 @@ class Client:
         else:
             log.info(log_message)
 
-        show_comment = (new_mark.comment is not None)
+        rounded_raw_data = new_mark.control_form.rounded_raw_data
 
-        if new_mark.point_date is None:
-            is_point = False
-            point_date_patched = None
-            point_date_strange = library.datetools.NowDelta().After(fmt='%FT%T.000Z', hours=20)
-        else:
-            assert isinstance(new_mark.point_date, str)
-            assert re.match(r'202\d\-\d\d-\d\d', point_date)
-            is_point = True
-            point_date_patched = '.'.join([new_mark.point_date[8:], new_mark.point_date[5:7], new_mark.point_date[:4], ])
-            point_date_strange = f'{new_mark.point_date}T04:12:35.678Z'
-            assert re.match(r'\d\d\.\d\d.202\d', point_date_patched)
-
-        assert new_mark.value in VALID_MARKS, f'{value!r} is not valid mark'
-
-        # TODO: round all floats better
-        control_form_str = json.dumps(new_mark.control_form._raw_data)
-        control_form_str = control_form_str.replace('.0', '')
-        control_form_data = json.loads(control_form_str)
-
-        grade_system_id = int(control_form_data['grade_system_id'])
-        grade_system_name = control_form_data['grade_system']['name']
-        grade_system_type = control_form_data['grade_system']['type']
-        # subject_id = control_form_data['subject_id']  # unused
-        # school_id = control_form_data['school_id']  # unused
-        control_form_id = control_form_data['id']
-        weight = control_form_data['weight']
-        control_form_data.update({
+        grade_system_id = int(rounded_raw_data['grade_system_id'])
+        rounded_raw_data.update({
             'fromServer': False,
             'parentResource': None,
             'reqParams': None,
             'restangularCollection': False,
             'restangularized': True,
-            'route': '/core/api/control_forms',
+            'route': ApiUrl.CONTROL_FORMS,
             'selected': True,
         })
 
-        data = {
+        request = {
           'comment': new_mark.comment,
-          'controlForm': control_form_data,
-          'control_form_id': control_form_id,
-          'grade_origins': [{ 'grade_origin': new_mark.value, 'grade_system_id': grade_system_id}],
+          'controlForm': rounded_raw_data,
+          'control_form_id': rounded_raw_data['id'],
+          'grade_origins': [{'grade_origin': new_mark.value, 'grade_system_id': grade_system_id}],
           'grade_system_id': grade_system_id,
-          'grade_system_name': grade_system_name,
-          'grade_system_type': grade_system_type,
+          'grade_system_name': rounded_raw_data['grade_system']['name'],
+          'grade_system_type': rounded_raw_data['grade_system']['type'],
           'is_approve': False,
           'is_criterion': False,
           'is_exam': False,
-          'is_point': is_point,
-          'pointDate': point_date_strange,
-          'point_date': point_date_patched,
+          'is_point': new_mark.is_point,
+          'pointDate': new_mark.point_date_strange,
+          'point_date': new_mark.point_date_patched,
           'schedule_lesson_id': new_mark.lesson_id,
-          'showComment': show_comment,
+          'showComment': new_mark.show_comment,
           'student_profile_id': new_mark.student_id,
           'valuesByIds': {str(grade_system_id): new_mark.value},
-          'weight': weight,
+          'weight': new_mark.control_form.weight,
         }
-        response = self.post(f'/core/api/marks?pid={self.teacher_id}', json_data=data)
+        response = self.authorized_client.post(ApiUrl.MARKS_POST.format(teacher_id=self.teacher_id), json_data=request)
         mark_id = response['id']
         if isinstance(mark_id, int) and mark_id > 0:
             log.info(f'Set mark ok: {mark_id}')
@@ -561,94 +606,57 @@ class Client:
     def _update_mark(self, new_mark: NewMark):
         raise NotImplementedError(f'Could not update mark to {new_mark}')
         # https://dnevnik.mos.ru/core/api/marks/1188507628?pid=15033420
-        assert isinstance(control_form, ControlForm)
 
+        self.validate_mark(new_mark)
         lesson = self.get_schedule_item_by_id(schedule_lesson_id)
-        assert lesson
-
         student = self.get_student_by_id(student_id)
-        assert student
-
-        try:
-            student_group_ids = [group['id'] for group in student._raw_data['groups']]
-            assert (lesson._raw_data['group_id'] in student_group_ids) or (student._raw_data['class_unit']['id'] == lesson._raw_data['class_unit_id'])
-        except:
-            log.info(colorize_json(student._raw_data))
-            log.info(colorize_json(lesson._raw_data))
-            log.error(f'Failed on {student} at {lesson}')
-            raise RuntimeError(f'Failed at student check')
 
         log_message = f'Updating mark {cm(value, color=color.Red)} for {student} at {lesson}'
         log.info(log_message)
 
-        if comment is None:
-            show_comment = False
-        else:
-            assert isinstance(comment, str)
-            show_comment = True
+        rounded_raw_data = new_mark.control_form.rounded_raw_data
 
-        if point_date is None:
-            is_point = False
-            point_date_patched = None
-            point_date_strange = library.datetools.NowDelta().After(fmt='%FT%T.000Z', hours=20)
-        else:
-            assert isinstance(point_date, str)
-            assert re.match(r'202\d\-\d\d-\d\d', point_date)
-            is_point = True
-            point_date_patched = '.'.join([point_date[8:], point_date[5:7], point_date[:4], ])
-            point_date_strange = f'{point_date}T04:12:35.678Z'
-            assert re.match(r'\d\d\.\d\d.202\d', point_date_patched)
-
-        assert value in [2, 3, 4, 5]
-
-        # TODO: round all floats better
-        control_form_str = json.dumps(control_form._raw_data)
-        control_form_str = control_form_str.replace('.0', '')
-        control_form_data = json.loads(control_form_str)
-
-        grade_system_id = int(control_form_data['grade_system_id'])
-        grade_system_name = control_form_data['grade_system']['name']
-        grade_system_type = control_form_data['grade_system']['type']
-        # subject_id = control_form_data['subject_id']  # unused
-        # school_id = control_form_data['school_id']  # unused
-        control_form_id = control_form_data['id']
-        weight = control_form_data['weight']
-        control_form_data.update({
+        grade_system_id = int(rounded_raw_data['grade_system_id'])
+        control_form_id = rounded_raw_data['id']
+        rounded_raw_data.update({
             'fromServer': False,
             'parentResource': None,
             'reqParams': None,
             'restangularCollection': False,
             'restangularized': True,
-            'route': '/core/api/control_forms',
+            'route': ApiUrl.CONTROL_FORMS,
             'selected': True,
         })
 
-        data = {
+        request = {
           'comment': comment,
-          'controlForm': control_form_data,
+          'controlForm': rounded_raw_data,
           'control_form_id': control_form_id,
           'grade_origins': [{ 'grade_origin': value, 'grade_system_id': grade_system_id}],
           'grade_system_id': grade_system_id,
-          'grade_system_name': grade_system_name,
-          'grade_system_type': grade_system_type,
+          'grade_system_name': rounded_raw_data['grade_system']['name'],
+          'grade_system_type': rounded_raw_data['grade_system']['type'],
           'is_approve': False,
           'is_criterion': False,
           'is_exam': False,
-          'is_point': is_point,
-          'pointDate': point_date_strange,
-          'point_date': point_date_patched,
+          'is_point': new_mark.is_point,
+          'pointDate': new_mark.point_date_strange,
+          'point_date': new_mark.point_date_patched,
           'schedule_lesson_id': schedule_lesson_id,
-          'showComment': show_comment,
+          'showComment': new_mark.show_comment,
           'student_profile_id': student_id,
           'valuesByIds': {str(grade_system_id): value},
-          'weight': weight,
+          'weight': new_mark.control_form.weight,
 
           # some additional fields
           'id': mark_id,
           'name': str(value),
         }
 
-        response = self.put(f'/core/api/marks/{mark_id}?pid={self.teacher_id}', json_data=data)
+        response = self.authorized_client.put(
+            ApiUrl.MARKS_PUT.format(mark_id=mark_id, teacher_id=self.teacher_id),
+            json_data=request,
+        )
         assert response['id'] == mark_id
         assert int(response['name']) == value
 
@@ -656,29 +664,34 @@ class Client:
         # curl 'https://dnevnik.mos.ru/core/api/marks/1188480155?pid=15033420' -X DELETE
         pass
 
-    def get_control_forms(self, subject_id, grade, log_forms: bool):
+    def get_control_forms(self, subject_id, grade, log_forms: bool) -> dict:
         education_level_id = EDUCATION_LEVELS[grade]
         key = (grade, subject_id)
         if self._control_forms.get(key) is None:
             log.info(f'Loading available control forms for grade {grade} subject {subject_id}')
-            data = self.get('/core/api/control_forms', {
+            params = {
                 'academic_year_id': self.get_current_year().id,
                 'education_level_id': education_level_id,
                 'page': 1,
-                'per_page': 100,
+                'per_page': CONTROL_FORMS_LIMIT,
                 'pid': self.teacher_id,
                 'subject_id': subject_id,
                 'with_grade_system': True,
-            })
-            assert 1 <= len(data) < 100
-            control_forms = [ControlForm(item) for item in data if not item['deleted_at']]
-            assert control_forms
-            self._control_forms[key] = {}
-            for control_form in control_forms:
-                self._control_forms[key][control_form.get_name()] = control_form
+            }
+            data = self.authorized_client.get(ApiUrl.CONTROL_FORMS, params)
+
+            control_forms = {}
+            for item in data:
+                if item['deleted_at']:
+                    continue
+                control_form = ControlForm(item)
+                control_forms[control_form.name] = control_form
                 if log_forms:
                     log.info(f'  {control_form}')
-            log.info(f'Loaded {len(self._control_forms[key])} active control forms for grade {grade} subject {subject_id}')
+
+            assert 1 <= len(control_forms) < CONTROL_FORMS_LIMIT
+            self._control_forms[key] = control_forms
+            log.info(f'Loaded {len(control_forms)} active control forms for grade {grade} subject {subject_id}')
         return self._control_forms[key]
 
 
