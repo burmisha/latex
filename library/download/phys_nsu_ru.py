@@ -1,4 +1,4 @@
-from library.download.multiple import MultipleFilesDownloader, DownloadItem
+from library.download.multiple import DownloadItem
 
 
 PhysNsuRu_Config = [
@@ -55,13 +55,12 @@ PhysNsuRu_Config = [
 ]
 
 
-class PhysNsuRu(MultipleFilesDownloader):
-    HOST = 'http://phys.nsu.ru'
+HOST = 'http://phys.nsu.ru'
 
-    def _get_filename_and_urls(self):
-        # see 'http://phys.nsu.ru/cherk/Zadanie/zadaniya.htm'
-        for suffix, filename in PhysNsuRu_Config:
-            yield DownloadItem(
-            	filename=f'{filename}.pdf',
-            	url=f'{self.HOST}/cherk/Eldin/{suffix}',
-            )
+def get_items():
+    # see 'http://phys.nsu.ru/cherk/Zadanie/zadaniya.htm'
+    for suffix, filename in PhysNsuRu_Config:
+        yield DownloadItem(
+            filename=f'{filename}.pdf',
+            url=f'{HOST}/cherk/Eldin/{suffix}',
+        )

@@ -17,7 +17,6 @@ except ImportError:
     log.error('Failed to load pafy')
 
 
-
 class YoutubeVideo:
     def __init__(self, url, title, dstdir=None, use_requests=False):
         assert url.startswith('https://www.youtube.com/watch?v=')

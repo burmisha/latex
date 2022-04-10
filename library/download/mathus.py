@@ -1,12 +1,6 @@
-from library.download.multiple import MultipleFilesDownloader, DownloadItem
+from library.download.multiple import DownloadItem
 
-import json
 import os
-
-from library.logging import cm, colorize_json, color
-import logging
-log = logging.getLogger(__name__)
-
 
 
 MATHUS_PHYS_CONFIG = [
@@ -203,17 +197,16 @@ MATHUS_PHYS_CONFIG = [
 ]
 
 
+HOST = 'http://mathus.ru'
 
-class MathusPhys(MultipleFilesDownloader):
-    HOST = 'http://mathus.ru'
 
-    def _get_filename_and_urls(self):
-        for part_index, (part_name, files) in enumerate(MATHUS_PHYS_CONFIG, 1):
-            for index, (url_suffix, name) in enumerate(files, 1):
-                assert url_suffix.endswith('.pdf')
-                assert '/' not in name
-                filename = f'{index:02d}-{name}'.replace(' ', '-').replace('.', '') + '.pdf'
-                yield DownloadItem(
-                	filename=os.path.join(f'{part_index:02d}-{part_name}', filename),
-                	url=f'{self.HOST}{url_suffix}',
-                )
+def get_items():
+    for part_index, (part_name, files) in enumerate(MATHUS_PHYS_CONFIG, 1):
+        for index, (url_suffix, name) in enumerate(files, 1):
+            assert url_suffix.endswith('.pdf')
+            assert '/' not in name
+            filename = f'{index:02d}-{name}'.replace(' ', '-').replace('.', '') + '.pdf'
+            yield DownloadItem(
+                filename=os.path.join(f'{part_index:02d}-{part_name}', filename),
+                url=f'{HOST}{url_suffix}',
+            )

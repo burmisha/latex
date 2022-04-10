@@ -2,14 +2,14 @@ import os
 import re
 import requests
 
-from library.download.multiple import MultipleFilesDownloader, DownloadItem
+from library.download.multiple import DownloadItem
 
 from library.logging import cm, colorize_json, color
 import logging
 log = logging.getLogger(__name__)
 
 
-class ZnakKachestva(MultipleFilesDownloader):
+class ZnakKachestva:
     HOST = 'http://znakka4estva.ru'
 
     def _get_presentation_urls(self):
@@ -24,7 +24,7 @@ class ZnakKachestva(MultipleFilesDownloader):
                     log.info(f'    New presentation: {presentation_url}')
                     yield presentation_url
 
-    def _get_filename_and_urls(self):
+    def get_items(self):
         for presentation_url in self._get_presentation_urls():
             response = requests.get(presentation_url)
             for line in response.text.split('\n'):
@@ -38,7 +38,10 @@ class ZnakKachestva(MultipleFilesDownloader):
                     link = f'{self.HOST}/uploads/category_items/{name}.ppt'
                     filename = re.sub(r'\. (\d)\. ', r'. 0\1. ', ll)
                     yield DownloadItem(
-                    	filename=os.path.join(f'{grade} класс', f'{filename}.ppt'),
-                    	url=link,
+                        filename=os.path.join(f'{grade} класс', f'{filename}.ppt'),
+                        url=link,
                     )
 
+def get_items():
+    znakKachestva = ZnakKachestva()
+    return znakKachestva.get_items()

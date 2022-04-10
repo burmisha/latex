@@ -66,12 +66,12 @@ def run(args):
                 log.info(f'Downloading {cm(filename, color=color.Green)}')
                 best_stream.download(output_path=path, filename=filename, skip_existing=True)
 
-    for downloader in [
-        library.download.mathus.MathusPhys(library.location.udr('Материалы - mathus')),
-        # library.download.znakka4estva.ZnakKachestva(library.location.udr('Материалы - znakka4estva')),
-        library.download.phys_nsu_ru.PhysNsuRu(library.location.udr('Материалы - phys.nsu.ru')),
+    for items, dirname in [
+        (library.download.mathus.get_items(), library.location.udr('Материалы - mathus')),
+        (library.download.znakka4estva.get_items(), library.location.udr('Материалы - znakka4estva')),
+        (library.download.phys_nsu_ru.get_items(), library.location.udr('Материалы - phys.nsu.ru')),
     ]:
-        downloader.Download(force=False)
+        library.download.multiple.download_items(items, dirname, force=False)
 
     all_videos = []
 
