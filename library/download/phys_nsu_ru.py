@@ -57,6 +57,7 @@ PhysNsuRu_Config = [
 
 HOST = 'http://phys.nsu.ru'
 
+
 def get_items():
     # see 'http://phys.nsu.ru/cherk/Zadanie/zadaniya.htm'
     for suffix, filename in PhysNsuRu_Config:

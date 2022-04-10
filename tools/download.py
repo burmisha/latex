@@ -49,19 +49,18 @@ def run(args):
         log.warning(cm('Listing channels is almost infinite', color=color.Red))
         for path_part, channel_url in download_cfg['Channels'].items():
             path = library.location.udr('Видео', path_part)
-            log.info(f'Downloading channel {cm(channel_url, color=color.Blue)} to {path}')
+            log.info(f'Got channel {cm(channel_url, color=color.Blue)}, path part: {path_part}')
             channel = pytube.Channel(channel_url)
             for video in channel.videos:
                 title = clean_title(video.title.strip())
                 extension = 'mp4'
                 filename = f'{video.publish_date.strftime("%F")} - {title}.{extension}'
+                log.info(f'got video {cm(filename, color=color.Green)}')
                 if save_files:
                     streams = video.streams.filter(progressive=True, file_extension=extension)
                     best_stream = streams.order_by('resolution').desc().first()
                     log.info(f'Downloading {cm(filename, color=color.Green)}')
                     best_stream.download(output_path=path, filename=filename, skip_existing=True)
-                else:
-                    log.info(f'got video {cm(filename, color=color.Green)}')
 
     for items, dirname in [
         # (library.download.mathus.get_items(), library.location.udr('Материалы - mathus')),

@@ -42,6 +42,7 @@ class ZnakKachestva:
                         url=link,
                     )
 
+
 def get_items():
     znakKachestva = ZnakKachestva()
     return znakKachestva.get_items()
