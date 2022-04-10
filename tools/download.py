@@ -67,9 +67,9 @@ def run(args):
                 best_stream.download(output_path=path, filename=filename, skip_existing=True)
 
     for downloader in [
-        # library.download.MathusPhys(library.location.udr('Материалы - mathus')),
-        # library.download.ZnakKachestva(library.location.udr('Материалы - znakka4estva')),
-        # library.download.PhysNsuRu(library.location.udr('Материалы - phys.nsu.ru')),
+        library.download.mathus.MathusPhys(library.location.udr('Материалы - mathus')),
+        # library.download.znakka4estva.ZnakKachestva(library.location.udr('Материалы - znakka4estva')),
+        library.download.phys_nsu_ru.PhysNsuRu(library.location.udr('Материалы - phys.nsu.ru')),
     ]:
         downloader.Download(force=False)
 
@@ -84,7 +84,7 @@ def run(args):
         # 'OnliSkill - 11 класс': 'https://www.youtube.com/playlist?list=PLRqVDT_WVZRkCHtZmveDa9z3G1IiPpisi',
     }
     for dirname, playlist_url in download_playlists_cfg.items():
-        playlist = library.download.YoutubePlaylist(playlist_url)
+        playlist = library.download.youtube.YoutubePlaylist(playlist_url)
         playlist_title, videos = playlist.ListVideos()
         dstdir = library.location.udr('Видео', dirname)
         if not os.path.exists(dstdir):
@@ -438,7 +438,7 @@ def run(args):
     for dirname, videos in videos_download_cfg.items():
         dirname = library.location.udr('Видео', dirname)
         for url, title in videos.items():
-            video = library.download.YoutubeVideo(url, title, dstdir=dirname, use_requests=True)
+            video = library.download.youtube.YoutubeVideo(url, title, dstdir=dirname, use_requests=True)
             all_videos.append(video)
 
     pavel_victor_config = [
@@ -520,7 +520,7 @@ def run(args):
 
     for prefix, large_topic, playlists in pavel_victor_config:
         for index, playlist_url in enumerate(playlists, 1):
-            youtube_playlist = library.download.YoutubePlaylist(playlist_url)
+            youtube_playlist = library.download.youtube.YoutubePlaylist(playlist_url)
             small_topic, videos = youtube_playlist.ListVideos()
             dirname = f'Павел Виктор - {prefix}-{index} - {large_topic} - {small_topic}'
             for video in videos:
