@@ -2,103 +2,98 @@ import library.files
 import library.process
 
 from library.structure.structure import Structure
+from library.structure.page import DestinationPage
 from library.logging import cm, color
 
 import os
 
 import pytesseract
 from PIL import Image
-
-from typing import List
+import attr
+from typing import List, Union, Callable, Optional
 
 import logging
 log = logging.getLogger(__name__)
 
 
-class PdfBook:
-    def __init__(
-        self,
-        pdfPath=None,
-        dstPath=None,
-        pageShift=None,
-    ):
-        assert pdfPath.endswith('.pdf'), f'Invalid pdf name: {pdfPath}'
-        assert library.files.path_is_ok(pdfPath)
-        assert library.files.path_is_ok(dstPath)
-        self.PdfPath = pdfPath
-        self.DstPath = dstPath
+@attr.s
+class BookConfig:
+    pdf_file: str = attr.ib()
+    dst_dir: str = attr.ib()
+    structure: Structure = attr.ib()
+    ppi: Optional[int] = attr.ib(default=200)
+    trim: Optional[bool] = attr.ib(default=True)
+    page_shift: Optional[Union[int, Callable]] = attr.ib(default=0)
+    magick_params: Optional[List[str]] = attr.ib(default=[])
+    source_link: Optional[str] = attr.ib(default=None)
 
-        if not hasattr(self, '_ppi'):
-            self._ppi = 200
-
-        if not hasattr(self, '_magick_params'):
-            self._magick_params = []
-
-    def set_structure(self, structure):
-        assert isinstance(structure, Structure)
-        self._structure = structure
-
-    @property
-    def should_trim(self) -> bool:
-        if hasattr(self, 'enable_trim'):
-            return self.enable_trim
-        return True
-
-    def Validate(self, create_missing=False):
-        assert library.files.is_file(self.PdfPath)
-        if create_missing:
-            if not os.path.isdir(self.DstPath):
-                log.info(f'Create missing {self.DstPath}')
-                os.mkdir(self.DstPath)
-
-        assert library.files.is_dir(self.DstPath)
-
-    def get_pdf_index(self, page_index: int):
+    def _get_pdf_index(self, page_index: int):
         assert 1 <= page_index < 1000, f'Invalid page index: {page_index}'
 
-        if hasattr(self, 'PageShift'):
-            if isinstance(self.PageShift, int):
-                page_shift = self.PageShift
-            else:
-                page_shift = self.PageShift(page_index)
+        if isinstance(self.page_shift, int):
+            shift = self.page_shift
         else:
-            page_shift = 0
+            shift = self.page_shift(page_index)
 
-        pdf_index = page_shift + page_index - 1
+        pdf_index = shift + page_index - 1
         assert 0 <= pdf_index < 1000, f'Invalid pdf index: {pdf_index}'
 
         return pdf_index
 
-    def EnsureDir(self, dirname):
+    def save_one_page(self, *, page: DestinationPage = None, force: bool = False, dry_run: bool = False):
+        pdf_index = self._get_pdf_index(page.index)
+
+        filename = self._get_filename(page)
+        if os.path.exists(filename) and not force:
+            log.debug(f'Already generated from {page.index}: {filename}')
+            return
+
+        log.info(f'  page {page.index} -> {os.path.basename(filename)!r}')
+        if dry_run:
+            return
+
+        command = self._get_magick_params() + [f'{self.pdf_file}[{pdf_index}]', filename]
+        library.process.run(command)
+
+    def Validate(self, create_missing=False):
+        assert library.files.is_file(self.pdf_file)
+        if create_missing:
+            if not os.path.isdir(self.dst_dir):
+                log.info(f'Create missing {self.dst_dir}')
+                os.mkdir(self.dst_dir)
+
+        assert library.files.is_dir(self.dst_dir)
+
+    def _ensure_dir(self, dirname):
         assert library.files.path_is_ok(dirname)
         if not os.path.isdir(dirname):
             log.info(f'Create missing {dirname}')
             os.mkdir(dirname)
 
-    def GetFilename(self, page):
-        self.EnsureDir(self.DstPath)
+    def _get_filename(self, page: DestinationPage) -> str:
+        self._ensure_dir(self.dst_dir)
 
         if page.dst_dir:
-            dir_name = os.path.join(self.DstPath, page.dst_dir)
-            self.EnsureDir(dir_name)
+            dir_name = os.path.join(self.dst_dir, page.dst_dir)
+            self._ensure_dir(dir_name)
         else:
-            dir_name = self.DstPath
+            dir_name = self.dst_dir
 
         fileName = os.path.join(dir_name, f'{page.name_template} - {page.index:03d}.png')
         assert library.files.path_is_ok(fileName)
 
         return fileName
 
-    def get_magick_params(self) -> List[str]:
+    def _get_magick_params(self) -> List[str]:
         params = [
             'magick',
             'convert',
             '-log', '%t %e',
-            '-density', str(self._ppi * 3),
-            '-resample', str(self._ppi),
+            '-density', str(self.ppi * 3),
+            '-resample', str(self.ppi),
         ]
 
-        if self.should_trim:
+        if self.trim:
             params.append('-trim')
             # params += ['-fuzz', '5%']
 
@@ -111,41 +106,26 @@ class PdfBook:
             '-flatten',
         ]
 
-        return params + self._magick_params
+        return params + self.magick_params
 
-    def _extract_page(self, *, page=None, overwrite=False, dry_run=False):
-        pdf_index = self.get_pdf_index(page.index)
-
-        filename = self.GetFilename(page)
-        if os.path.exists(filename) and not overwrite:
-            log.debug(f'Already generated from {page.index}: {filename}')
-            return
-
-        log.info(f'  page {page.index} -> {os.path.basename(filename)!r}')
-        if dry_run:
-            return
-
-        command = self.get_magick_params() + [f'{self.PdfPath}[{pdf_index}]', filename]
-        library.process.run(command)
-
-    def Save(self, *, overwrite=False, dry_run=False):
-        for page in self._structure.get_pages():
-            self._extract_page(
+    def save_all_pages(self, *, force: bool=False, dry_run: bool=False):
+        for page in self.structure.get_pages():
+            self.save_one_page(
                 page=page,
-                overwrite=overwrite,
+                force=force,
                 dry_run=dry_run,
             )
 
     def __str__(self):
-        basename = os.path.basename(self.PdfPath)
-        pages_count = len(list(self._structure.get_pages()))
-        return f'book {cm(basename, color=color.Green)} with {cm(pages_count, color=color.Green)} pages:\nSource file:\t\t{self.PdfPath}\nDestination dir:\t{self.DstPath}'
+        basename = os.path.basename(self.pdf_file)
+        pages_count = len(list(self.structure.get_pages()))
+        return f'book {cm(basename, color=color.Green)} with {cm(pages_count, color=color.Green)} pages:\nSource file:\t\t{self.pdf_file}\nDestination dir:\t{self.dst_dir}'
 
-    def GetStrangeFiles(self, remove=False):
-        found = set(library.files.walkFiles(self.DstPath, extensions=['.png']))
+    def get_strange_files(self, remove: bool=False):
+        found = set(library.files.walkFiles(self.dst_dir, extensions=['.png']))
         assert all(library.files.path_is_ok(file) for file in found)
 
-        known = set([self.GetFilename(page) for page in self._structure.get_pages()])
+        known = set([self._get_filename(page) for page in self.structure.get_pages()])
         strange = sorted(found - known)
         log.info(f'  expected {cm(len(known), color=color.Blue)} files, found {cm(len(found), color=color.Blue)} ones -> got {cm(len(strange), color=color.Blue)} strange files')
         for file in strange:
@@ -153,7 +133,7 @@ class PdfBook:
             if remove:
                 os.remove(file)
 
-    def decode_as_text(self, *, indices=None):
+    def decode_as_text(self, *, indices: List[int]=None) -> str:
         result = ''
         languages = [
             'rus',
@@ -162,10 +142,10 @@ class PdfBook:
         ]
         log.info(f'Reading pages {indices}')
         processed_indices = set()
-        for page in self._structure.get_pages():
+        for page in self.structure.get_pages():
             if page.index in processed_indices or (indices and page.index not in indices):
                 continue
-            filename = self.GetFilename(page)
+            filename = self._get_filename(page)
             log.info(f'Reading {page}')
             text = pytesseract.image_to_string(Image.open(filename), lang='+'.join(languages))
             text = text.strip()
@@ -178,51 +158,3 @@ class PdfBook:
             processed_indices.add(page.index)
 
         return result
-
-
-def page_shift(shift):
-    def decorator(cls):
-        cls.PageShift = shift
-        return cls
-    return decorator
-
-
-def params(params_list):
-    def decorator(cls):
-        assert isinstance(params_list, list)
-        cls._magick_params = params_list
-        return cls
-    return decorator
-
-
-def structure(data, **kws):
-    def decorator(cls):
-        cls._structure = Structure(data, **kws)
-        return cls
-    return decorator
-
-
-def source_link(link):
-    # now link is unused
-    def decorator(cls):
-        cls.SourceLink = link
-        return cls
-    return decorator
-
-
-def disable_trim():
-    def decorator(cls):
-        cls.enable_trim = False
-        return cls
-    return decorator
-
-
-def ppi(value):
-    def decorator(cls):
-        assert isinstance(value, int), f'Strange ppi: {value} is not int'
-        assert 120 <= value <= 300, f'Strange ppi: {value} is out of range'
-        cls._ppi = value
-        return cls
-    return decorator
-
-

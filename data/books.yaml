@@ -1,4 +1,5 @@
 ComicsBook:
+  pdf_file: 'Физика в комиксах'
   structure:
     - ['Движение', 9, 23]
     - ['Яблоко и Луна', 24, 38]
@@ -26,6 +27,7 @@ ComicsBook:
     - ['Квантовая электродинамика', 201, 214]
 
 ChernoutsanBook:
+  pdf_file: 'Сборник - Черноуцан - 2011'
   structure:
     - - 'Кинематика'
       - - ['Примеры решения', 6, 27]
@@ -145,13 +147,13 @@ ChernoutsanBook:
         - ['Ядерные реакции', 309, 310]
     - - 'Ответы'
       - - ['Ответы', 320, 323]
-
   indices: [null, 0]
-  params: ['-level', '50%,90%,1.5']
+  magick_params: ['-level', '50%,90%,1.5']
 
 Maron_9_Sbornik:
+  pdf_file: '9 - Марон - Сборник вопросов и задач - 2019'
   page_shift: 1
-  params: ['-level', '50%,90%,1.5']
+  magick_params: ['-level', '50%,90%,1.5']
   structure:
     - ['Механика', 5, 78]
     - ['Колебания', 78, 87]
@@ -160,8 +162,9 @@ Maron_9_Sbornik:
     - ['Строение атома', 119, 129]
 
 Maron_8_Sbornik:
+  pdf_file: '8 - Марон - Сборник вопросов и задач - 2019'
   page_shift: 1
-  params: ['-level', '50%,90%,1.5']
+  magick_params: ['-level', '50%,90%,1.5']
   structure:
     - ['Тепловые явления', 5, 51]
     - ['Электрические явления', 52, 117]
@@ -169,8 +172,9 @@ Maron_8_Sbornik:
     - ['Световые явления', 130, 143]
 
 Maron_8_SR_KR:
+  pdf_file: '8 - Марон - СР и КР - 2017'
   page_shift: 1
-  params: ['-level', '10%,90%,0.7']
+  magick_params: ['-level', '10%,90%,0.7']
   structure:
     - - 'Тепловые явления'
       - - ['Тепловое движение Температура', 4, 4]
@@ -254,8 +258,9 @@ Maron_8_SR_KR:
       - - ['Итоговые КР', 97, 102]
 
 Maron_9_SR_KR:
+  pdf_file: '9 - Марон - СР и КР - 2018'
   page_shift: 1
-  params: ['-level', '10%,90%,0.7']
+  magick_params: ['-level', '10%,90%,0.7']
   structure:
     - - Механика
       - - ['Материальная точка и СО', 5, 5]
@@ -344,8 +349,9 @@ Maron_9_SR_KR:
         - ['Экзамен', 103, 104]
 
 Maron_9_Didaktika:
+  pdf_file: '9 - Марон - Дидактические материалы - 2014'
   page_shift: 1
-  params: ['-level', '10%,90%,0.7']
+  magick_params: ['-level', '10%,90%,0.7']
   structure:
     - - Тренировочные задания
       - - ['Путь и перемещение', 5, 6]
@@ -395,8 +401,9 @@ Maron_9_Didaktika:
         - ['Электромагнитное поле', 109, 112]
 
 Maron_8_Didaktika:
+  pdf_file: '8 - Марон - Дидактические материалы - 2013'
   page_shift: 1
-  params: ['-level', '10%,90%,0.7']
+  magick_params: ['-level', '10%,90%,0.7']
   structure:
     - - Тренировочные задания
       - - ['Внутренняя энергия', 5, 6]
@@ -444,8 +451,9 @@ Maron_8_Didaktika:
         - ['Работа и мощность тока', 114, 115]
 
 Kirik_8:
+  pdf_file: '8 - Кирик - СР и КР - 2014'
   page_shift: 1
-  params: ['-level', '10%,90%,0.7']
+  magick_params: ['-level', '10%,90%,0.7']
   source_link: 'http://alleng.net/d/phys/phys462.htm'
   structure:
     - - 'Тепловые явления'
@@ -489,8 +497,9 @@ Kirik_8:
         - ['Световые явления', 188, 194]
 
 Kirik_9:
+  pdf_file: '9 - Кирик - СР и КР - 2016'
   page_shift: 1
-  params: ['-level', '10%,90%,0.7']
+  magick_params: ['-level', '10%,90%,0.7']
   source_link: 'https://uchebnik.alleng.me/d/phys/phys552.htm'
   structure:
     - - 'Кинематика'
@@ -521,8 +530,9 @@ Kirik_9:
         - ['Механические колебания и волны. Атом и атомное ядро', 140, 147]
 
 Gendenshteyn_8:
+  pdf_file: '8 - Генденштейн - 2012'
   page_shift: 1
-  params: ['-level', '10%,90%,0.7']
+  magick_params: ['-level', '10%,90%,0.7']
   source_link: 'http://alleng.net/d/phys/phys433.htm'
   structure:
     - - 'Тепловые явления'
@@ -561,8 +571,9 @@ Gendenshteyn_8:
         - ['Домашние экспериментальные задания', 156, 160]
 
 Gendenshteyn_10:
+  pdf_file: '10 - Генденштейн - Задачник - 2014'
   page_shift: 1
-  params: ['-level', '20%,90%,0.6']
+  magick_params: ['-level', '20%,90%,0.6']
   source_link: 'https://may.alleng.org/d/phys/phys375.htm'
   structure:
     - - 'Кинематика'
@@ -637,8 +648,9 @@ Gendenshteyn_10:
     # Ответы и указания 171
 
 Gendenshteyn_11:
+  pdf_file: '11 - Генденштейн - Задачник - 2014'
   page_shift: 1
-  params: ['-level', '20%,90%,0.6']
+  magick_params: ['-level', '20%,90%,0.6']
   source_link: 'https://may.alleng.org/d/phys/phys399.htm'
   structure:
     - - 'Магнитное поле'  # 1-4
@@ -708,8 +720,9 @@ Gendenshteyn_11:
         - ['Ответы', 109, 109]
 
 Gendenshteyn_9:
+  pdf_file: '9 - Генденштейн - 2012'
   page_shift: 1
-  params: ['-level', '10%,90%,0.7']
+  magick_params: ['-level', '10%,90%,0.7']
   source_link: 'https://uchebnik.alleng.me/d/phys/phys435.htm'
   structure:
     - - 'Механика'
@@ -741,7 +754,8 @@ Gendenshteyn_9:
         - ['Задания повышенной трудности', 151, 159]
 
 Gorbushin:
-  params: ['-level', '10%,90%,0.7']
+  pdf_file: 'Горбушин - Как можно учить физике'
+  magick_params: ['-level', '10%,90%,0.7']
   structure:
     - ['Кинематика-1', 10, 13]
     - ['Кинематика-2', 14, 18]
@@ -773,7 +787,8 @@ Gorbushin:
     - ['Строение ядра и больше', 240, 242]
 
 Gelfgat_11:
-  params: ['-level', '20%,80%,0.7']
+  pdf_file: '11 - Гельфгат - Задачник - 2004'
+  magick_params: ['-level', '20%,80%,0.7']
   structure:
     - ['Оглавление', 3, 3]
     - ['Механические колебания', 5, 9]
@@ -795,6 +810,7 @@ Gelfgat_11:
     - ['Приложение', 89, 95]
 
 Vishnyakova:
+  pdf_file: 'Вишнякова - Физика - сборник задач к ЕГЭ - 2015'
   page_shift: 1
   structure:
     - - 'Механика'
@@ -872,6 +888,7 @@ Vishnyakova:
         - ['5.3 - Физика атомного ядра - УК - ответы', 333, 333]
 
 Baumansky2000:
+  pdf_file: 'Бауманский - 2000 - Васюков - Сборник для поступающих'
   structure:
     - ['Кинематика', 6, 21]
     - ['Динамика', 21, 36]
@@ -894,6 +911,7 @@ Baumansky2000:
     - ['СТО', 155, 157]
 
 Goldfarb:
+  pdf_file: '10-11 - Гольдфарб - Сборник'
   page_shift: 1
   structure:
     - - 'Механика'
@@ -960,6 +978,7 @@ Goldfarb:
         - ['29-2 - Волны - кванты - энергия связи - решения', 394, 397]
 
 Belolipetsky:
+  pdf_file: Сборник - Белолипецкий - Задачник с лягушками
   page_shift: -1
   structure:
     - - 'Механика'
@@ -1046,6 +1065,7 @@ Belolipetsky:
         - ['Приложения', 359, 360]
 
 Rymkevich:
+  pdf_file: '9-11 - Рымкевич - Сборник'
   page_shift: -1
   structure:
     - - 'Механика - Кинематика'
@@ -1057,6 +1077,7 @@ Rymkevich:
         - ['Равномерное движение тела по окружности', 20, 22]
 
 Bendrikov:
+  pdf_file: 'Бендриков - Лебедь рак и щука - 2010'
   page_shift: -2
   ppi: 300
   structure:
@@ -1132,7 +1153,8 @@ Bendrikov:
     # III. Единицы и размерности физических величин в СИ 335
 
 Problems_3800:
-  params: ['-level', '10%,90%,0.7']
+  pdf_file: '3800 задач по физике'
+  magick_params: ['-level', '10%,90%,0.7']
   source_link: 'https://uchebnik.alleng.me/d/phys/phys435.htm'
   structure:
     - - 'Механика - Кинематика'
@@ -1323,6 +1345,7 @@ Problems_3800:
 # Приложение 659
 
 Maron_11_Conspects:
+  pdf_file: '11 - Марон - ОпКонспект - 2013'
   page_shift: 1
   structure:
     - - 'Опорные конспекты'
@@ -1369,11 +1392,8 @@ Maron_11_Conspects:
     - ['Таблицы физических величин', 75, 75]
     - ['Содержание', 77, 78]
 
-ZFTSH:
-  ppi: 250
-
 Mathus_mechanics:
-  ppi: 250
+  pdf_file: '9 - Механика - пособие'
   structure:
     - ['Производная', 5, 17]
     - ['Механическое движение', 18, 25]
@@ -1396,7 +1416,7 @@ Mathus_mechanics:
     - ['Механические волны', 89, 91]
 
 Mathus_termodynamics:
-  ppi: 250
+  pdf_file: '10 - Термодинамика - пособие'
   structure:
     - ['Основные положения молекулярно-кинетической теории', 4, 7]
     - ['Газы, жидкости и твёрдые тела', 8, 10]
@@ -1413,7 +1433,7 @@ Mathus_termodynamics:
     - ['Второй закон термодинамики', 54, 57]
 
 Mathus_quantum:
-  ppi: 250
+  pdf_file: '11 - Квантовая физика - пособие'
   structure:
     - ['Фотоэффект', 3, 9]
     - ['Фотоны', 10, 13]
@@ -1428,7 +1448,7 @@ Mathus_quantum:
     - ['Ядерные реакции', 45, 52]
 
 Mathus_electricity:
-  ppi: 250
+  pdf_file: '10 - Электродинамика - пособие'
   structure:
     - ['Электрический заряд', 6, 9]
     - ['Закон Кулона', 10, 12]
@@ -1459,7 +1479,7 @@ Mathus_electricity:
     - ['Электромагнитные волны', 149, 157]
 
 Mathus_wave_optics:
-  ppi: 250
+  pdf_file: '11 - Волновая оптика - пособие'
   structure:
     - ['Введение', 2, 2]
     - ['Принцип Гюйгенса', 3, 9]
@@ -1469,7 +1489,7 @@ Mathus_wave_optics:
     - ['Дисперсия света', 33, 34]
 
 Mathus_geom_optics:
-  ppi: 250
+  pdf_file: '11 - Геометрическая оптика - пособие'
   structure:
     - ['Световые лучи', 3, 5]
     - ['Отражение света', 6, 9]
@@ -1481,10 +1501,53 @@ Mathus_geom_optics:
     - ['Оптические приборы', 42, 47]
 
 Mathus_relativity:
-  ppi: 250
+  pdf_file: '11 - Теория относительности - пособие'
   structure:
     - ['Описание движения в механике', 2, 4]
     - ['Принцип относительности Галилея', 5, 7]
     - ['Принципы СТО', 8, 12]
     - ['Релятивистская кинематика', 13, 22]
     - ['Релятивистская динамика', 23, 29]
+
+EGE_FIPI_2019:
+  pdf_file: ['11 ЕГЭ', 'ФИПИ 2019', 'ФИ_КОДИФ 2019.pdf']
+  dst_dir: ['11 - ЕГЭ', 'Кодификатор ФИПИ 2019']
+  structure: [['Кодификатор', 1, 8]]
+  ppi: 250
+
+EGE_FIPI_2021_Kodif:
+  pdf_file: ['11 ЕГЭ', 'ФИПИ 2021', 'ФИ-11 ЕГЭ 2021 КОДИФ.pdf']
+  dst_dir: ['11 - ЕГЭ', 'Кодификатор ФИПИ 2021']
+  structure: [['Кодификатор', 1, 8]]
+  ppi: 250
+
+EGE_FIPI_2021_Demo:
+  pdf_file: ['11 ЕГЭ', 'ФИПИ 2021', 'ФИ-11 ЕГЭ 2021 ДЕМО.pdf']
+  dst_dir: ['11 - ЕГЭ', 'Демовариант 2021']
+  structure: [['Справочные материалы', 2, 3]]
+  ppi: 250
+
+EGE_Statgrad_2021_05:
+  pdf_file: ['11 ЕГЭ', 'Статград', '2021 Статград ЕГЭ-5', 'Zadanie_FI11_17052021.pdf']
+  dst_dir: ['11 - ЕГЭ', 'Статград 2021-05-17']
+  ppi: 200
+  structure: [['Статград - ЕГЭ', 1, 39]]
+
+EGE_Statgrad_2021_12:
+  pdf_file: ['11 ЕГЭ', 'Статград', '2022 Статград ЕГЭ-2', 'Zadanie_FI11_20122021.pdf']
+  dst_dir: ['11 - ЕГЭ', 'Статград 2021-12-20']
+  structure: [['Статград - ЕГЭ', 1, 34]]
+  ppi: 200
+
+EGE_Blanki:
+  pdf_file: ['11 ЕГЭ', 'blanki-ege-2020-all.pdf']
+  dst_dir: ['11 - ЕГЭ', 'Бланки']
+  structure: [['Бланки - ЕГЭ', 1, 9]]
+  ppi: 300
+
+EGE_Kodif_Cards:
+  pdf_file: ['11 ЕГЭ', '11 Кодификатор.pdf']
+  dst_dir: ['11 - ЕГЭ', 'Кодификатор - карточки']
+  structure: [['Кодификатор - карточки', 1, 35]]
+  ppi: 300
+  trim: False

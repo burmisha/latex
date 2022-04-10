@@ -8,8 +8,8 @@ def runConvert(args):
     for book in get_all_books():
         log.info(f'Processing {book}')
         book.Validate(create_missing=args.create_missing)
-        book.Save(overwrite=args.overwrite_existing, dry_run=args.dry_run)
-        book.GetStrangeFiles(remove=args.remove_strange_files)
+        book.save_all_pages(force=args.overwrite_existing, dry_run=args.dry_run)
+        book.get_strange_files(remove=args.remove_strange_files)
 
 
 def populate_parser(parser):

@@ -27,7 +27,7 @@ def runRecognize(args):
         indices += pages.pages_indicies
 
     for book in get_all_books():
-        if not args.filter.match(os.path.basename(book.PdfPath)):
+        if not args.filter.match(os.path.basename(book.pdf_file)):
             continue
         log.info(f'Processing {book}')
         text = book.decode_as_text(indices=indices)
