@@ -26,10 +26,10 @@ def run(args):
         #     'https://www.youtube.com/c/NovayagazetaRu',
         #     library.location.udr('Видео', 'Новая газета'),
         # ),
-        (
-            'https://www.youtube.com/channel/UCO1lJlI3gjuOMrKppvPlDww',
-            library.location.udr('Видео', 'Новая газета - Европа'),
-        ),
+        # (
+        #     'https://www.youtube.com/channel/UCO1lJlI3gjuOMrKppvPlDww',
+        #     library.location.udr('Видео', 'Новая газета - Европа'),
+        # ),
     ]
     for url, path in channels:
         channel = pytube.Channel(url)
@@ -487,7 +487,7 @@ def run(args):
             'https://www.youtube.com/playlist?list=PLYLAAGsAQhw98LcoigAEMKWmC0o0zilBO',  # Свойства жидкостей
             'https://www.youtube.com/playlist?list=PLYLAAGsAQhw8sdkmL_wvHS8zTr7BRY6py',  # Свойства твердых тел
         ]),
-        ('10-9', 'Основы электродинамики', [
+        ('10-8', 'Основы электродинамики', [
             'https://www.youtube.com/playlist?list=PLYLAAGsAQhw8Jtndre2W-4cZCnZTfuqc4',  # Электростатика
         ]),
         ('10-9', 'Основы электродинамики', [
