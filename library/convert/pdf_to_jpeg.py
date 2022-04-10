@@ -149,7 +149,7 @@ class PdfBook:
         strange = sorted(found - known)
         log.info(f'  expected {cm(len(known), color=color.Blue)} files, found {cm(len(found), color=color.Blue)} ones -> got {cm(len(strange), color=color.Blue)} strange files')
         for file in strange:
-            log.info(f'Unknown file {cm(file, color=color.Red)!r}')
+            log.info(f'Unknown file {cm(file, color=color.Red)}')
             if remove:
                 os.remove(file)
 

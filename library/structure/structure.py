@@ -39,7 +39,7 @@ def parse_simple_structure(data, *, indices=None, plain=None):
         plain = True
 
     for first_level_index, first_level_item in enumerate(data, first_level_start_index):
-        assert isinstance(first_level_item, tuple)
+        assert isinstance(first_level_item, (tuple, list)), f'{first_level_item!r} is not tuple'
 
         if already_has_first_index:
             name_template = f'{first_level_item[0]}'
@@ -61,7 +61,7 @@ def parse_simple_structure(data, *, indices=None, plain=None):
             already_has_second_index = was_indexed(second_level_items)
 
             for second_level_index, second_level_item in enumerate(first_level_item[1], second_level_start_index):
-                assert isinstance(second_level_item, tuple)
+                assert isinstance(second_level_item, (tuple, list)), f'{second_level_item!r} is not tuple'
                 assert len(second_level_item) == 3
                 second_level_name, first_page, last_page = second_level_item
 
