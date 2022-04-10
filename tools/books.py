@@ -9,6 +9,7 @@ BOOKS_CFG = library.files.load_yaml_data('books.yaml')
 
 MATHUS_PREFIX = 'Mathus'
 MATHUS_PPI = 250
+ZFTSH_PPI = 250
 
 def get_dst_path(*pdf_path):
     return library.location.no_sync('Книги - физика - картинки', *pdf_path)
@@ -45,7 +46,7 @@ def get_basic_books():
                 params['pdf_file'] = library.location.udr(*pdf_file)
                 params['dst_dir'] = get_dst_path(*params['dst_dir'])
             else:
-                assert isinstance(pdf_file, str):
+                assert isinstance(pdf_file, str)
                 params['pdf_file'] = locate_file(library.location.udr('Книги - физика'), pdf_file)
                 params['dst_dir'] = get_dst_path(pdf_file)
 
@@ -87,13 +88,12 @@ def get_zftsh_books():
             ],
             plain=True,
         )
-        zftsh_book = BookConfig(
+        yield BookConfig(
             pdf_file=locate_file(library.location.udr('Материалы - ЗФТШ', 'ЗФТШ-2013'), file_name),
             dst_dir=get_dst_path('ЗФТШ', file_name),
             structure=structure,
-            ppi=250,
+            ppi=ZFTSH_PPI,
         )
-        yield zftsh_book
 
 
 def get_all_books():
