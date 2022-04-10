@@ -1,7 +1,5 @@
 from library.util.asserts import assert_equals
-
 import attr
-
 
 from typing import List, Union
 
@@ -17,9 +15,6 @@ class DestinationPage:
 
 
 class PagesRange:
-    first_index: int = attr.ib()  # including
-    last_index: int = attr.ib()  # including
-
     def __init__(self, str_range: Union[int, str]):
         pages_range = str(str_range).strip()
         if '-' in pages_range:
@@ -33,7 +28,8 @@ class PagesRange:
         self.last_index = int(last_page)
         assert self.first_index <= self.last_index
 
-    def get_pages_indicies(self):
+    @property
+    def pages_indicies(self) -> List[int]:
         return list(range(self.first_index, self.last_index + 1))
 
 
@@ -46,8 +42,7 @@ def test_pages_range():
     ]
     for pages_range_str, canonic in data:
         pages_range = PagesRange(pages_range_str)
-        result = pages_range.get_pages_indicies()
-        assert result == canonic, f'Broken get_pages_indicies:\nexpected:\t{canonic}\ngot:\t\t{result}'
+        assert_equals('pages_indicies', canonic, pages_range.pages_indicies)
 
 
 test_pages_range()
