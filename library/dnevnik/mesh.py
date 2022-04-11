@@ -1,4 +1,6 @@
 # see https://github.com/search?q=dnevnik.mos.ru&type=repositories
+# https://github.com/KonstantIMP/vega/blob/main/client/auth.py
+
 import datetime
 import datetime
 from typing import Optional, List
@@ -11,9 +13,9 @@ import library.secrets
 from library.dnevnik.client import AuthorizedClient, BASE_URL, ApiUrl
 from library.dnevnik.models import (
     Year,
-    StudentsGroup,
-    StudentProfile,
-    ScheduleItem,
+    Group,
+    Student,
+    Lesson,
     Mark,
     MarksCache,
     ControlForm,
@@ -101,25 +103,25 @@ class Client:
                 'pid': self.teacher_id,
             }
             groups = self.authorized_client.get(ApiUrl.GROUPS, params)
-            self._groups = [StudentsGroup(item) for item in groups]
+            self._groups = [Group(item) for item in groups]
         return self._groups
 
     def get_group_by_id(self, group_id):
         for group in self.get_groups():
-            if group._id == group_id:
+            if group.group_id == group_id:
                 return group
 
         log.warn(f'No group with id {group_id}')
         return None
 
-    def get_student_profiles(self):
+    def get_students(self):
         if self._all_student_profiles is None:
             self._all_student_profiles = {}
             for group in self.get_groups():
                 params = {
                     'academic_year_id': self.get_current_year().id,
                     'class_unit_ids': ','.join(str(i) for i in group._class_unit_ids),
-                    'group_ids': ','.join(str(i) for i in [group._id] + group._subgroup_ids),
+                    'group_ids': ','.join(str(i) for i in [group.group_id] + group._subgroup_ids),
                     'per_page': 1000,
                     'pid': self.teacher_id,
                     'with_archived_groups': True,
@@ -130,33 +132,39 @@ class Client:
                     'with_lesson_info': True,
                     # 'with_parents': True,
                 }
-                student_profiles_data = self.authorized_client.get(ApiUrl.STUDENT_PROFILES, params=params)
-                log.info(f'Loaded {len(student_profiles_data)} students for {group!r}')
-                for item in student_profiles_data:
-                    student_profile = StudentProfile(item)
-                    self._all_student_profiles[student_profile._id] = student_profile
+                rows = self.authorized_client.get(ApiUrl.STUDENT_PROFILES, params=params)
+                log.info(f'Loaded {len(rows)} students for {group!r}')
+                for row in rows:
+                    student = Student(
+                        student_id=int(row['id']),
+                        short_name=row['short_name'],
+                        group_ids=[int(group['id']) for group in row['groups']],
+                        class_unit_id=int(row['class_unit']['id']),
+                        raw_data=row,
+                    )
+                    self._all_student_profiles[student.student_id] = student
         return self._all_student_profiles
 
-    def get_student_by_id(self, student_id: int) -> StudentProfile:
+    def get_student_by_id(self, student_id: int) -> Student:
         assert isinstance(student_id, int)
-        return self.get_student_profiles()[student_id]
+        return self.get_students()[student_id]
 
     def get_student_by_name(self, student_name):
         matched = [
-            student_profile for student_profile in self.get_student_profiles().values()
-            if student_profile.matches(student_name)
+            student for student in self.get_students().values()
+            if student.matches(student_name)
         ]
         if len(matched) != 1:
             raise RuntimeError(f'Not found students by name {student_name}: got {matched} matched')
         return matched[0]            
 
-    def get_schedule_item_by_id(self, schedule_item_id: int) -> ScheduleItem:
-        assert isinstance(schedule_item_id, int)
-        return self._available_lessons_dict[schedule_item_id]
+    def get_lesson_by_id(self, lesson_id: int) -> Lesson:
+        assert isinstance(lesson_id, int)
+        return self._available_lessons_dict[lesson_id]
 
     def set_absent(self, absence: Absence=None):
         student = self.get_student_by_id(absence.student_id)
-        schedule_lesson = self.get_schedule_item_by_id(absence.lesson_id)
+        lesson = self.get_lesson_by_id(absence.lesson_id)
 
         request = {
             'absence_reason': None,
@@ -167,14 +175,14 @@ class Client:
         result = self.authorized_client.post(ApiUrl.ATTENDANCES.format(teacher_id=self.teacher_id), json_data=request)
 
         if result.get('created_at'):
-            log.info(f'Absense was set for {student} for {schedule_lesson}')
+            log.info(f'Absense was set for {student} for {lesson}')
         elif result.get('code') == 403 and result.get('message') == 'Пропуск для выбранного ученика и урока уже существует':
-            log.info(f'Absense has already been set for {student} for {schedule_lesson}')
+            log.info(f'Absense has already been set for {student} for {lesson}')
         else:
             log.error(f'Unknown response: {colorize_json(result)}')
             raise RuntimeError('Unknown response')
 
-    def get_schedule_items(self):
+    def get_lessons(self):
         request = {
             'academic_year_id': self.get_current_year().id,
             'from': library.datetools.formatTimestamp(self.from_dt, fmt=SCHEDULE_DATE_FMT),
@@ -186,18 +194,18 @@ class Client:
             'teacher_id': self.teacher_id,
             'with_group_class_subject_info': True,
         }
-        schedule_items_raw = self.authorized_client.get(ApiUrl.SCHEDULE_ITEMS, request)
-        for item in schedule_items_raw:
-            schedule_item = ScheduleItem(item)
-            group = self.get_group_by_id(schedule_item.group_id)
+        rows = self.authorized_client.get(ApiUrl.SCHEDULE_ITEMS, request)
+        for row in rows:
+            lesson = Lesson(row)
+            group = self.get_group_by_id(lesson.group_id)
             if group:
-                schedule_item.set_group(group)
-                self._available_lessons_dict[schedule_item._id] = schedule_item
-                yield schedule_item
+                lesson.set_group(group)
+                self._available_lessons_dict[lesson.lesson_id] = lesson
+                yield lesson
             else:
-                log.warn(f'Skipping schedule item for {cm(schedule_item.group_name, color=color.Red)} as no group found')
+                log.warn(f'Skipping lesson for {cm(lesson.group_name, color=color.Red)} as no group found')
 
-    def _get_marks_for_group(self, *, group: StudentsGroup=None, limit: int=MARKS_LIMIT):
+    def _get_marks_for_group(self, *, group: Group=None, limit: int=MARKS_LIMIT):
         from_date = library.datetools.formatTimestamp(self.from_dt, fmt=MARKS_DATE_FMT)
         to_date = library.datetools.formatTimestamp(self.to_dt, fmt=MARKS_DATE_FMT)
         log.info(f'Getting marks [{from_date}, {to_date}] for {group}')
@@ -205,7 +213,7 @@ class Client:
         params = {
             'created_at_from': from_date,
             'created_at_to': to_date,
-            'group_ids': ','.join(str(i) for i in [group._id] + group._subgroup_ids),
+            'group_ids': ','.join(str(i) for i in [group.group_id] + group._subgroup_ids),
             'page': 1,
             'per_page': limit,
             'pid': self.teacher_id,
@@ -214,7 +222,13 @@ class Client:
         assert len(marks_items) < limit, f'Too many marks: reduce dates or increase limit: {limit}'
 
         for mark_item in marks_items:
-            yield Mark(mark_item)
+            yield Mark(
+                mark_id=mark_item['id'],
+                value=int(mark_item['name']),
+                student_id=int(mark_item['student_profile_id']),
+                lesson_id=int(mark_item['schedule_lesson_id']),
+                raw_data=mark_item,
+            )
 
     def get_all_marks(self):
         marks = []
@@ -227,13 +241,13 @@ class Client:
         return marks
 
     def validate_mark(self, new_mark: NewMark):
-        lesson = self.get_schedule_item_by_id(new_mark.lesson_id)
+        lesson = self.get_lesson_by_id(new_mark.lesson_id)
         student = self.get_student_by_id(new_mark.student_id)
 
         ok = (lesson.group_id in student.group_ids) or (lesson.class_unit_id == student.class_unit_id)  
         if not ok:
-            log.info(f'student: {colorize_json(student._raw_data)}')
-            log.info(f'lesson: {colorize_json(lesson._raw_data)}')
+            log.info(f'student: {colorize_json(student.raw_data)}')
+            log.info(f'lesson: {colorize_json(lesson.raw_data)}')
             log.error(f'Failed on {student} at {lesson}')
             raise RuntimeError(f'Failed at student check')
 
@@ -242,17 +256,17 @@ class Client:
             raise RuntimeError('Marks were not loaded, setting new ones will cause duplicates')
 
         self.validate_mark(new_mark)
-        lesson = self.get_schedule_item_by_id(new_mark.lesson_id)
+        lesson = self.get_lesson_by_id(new_mark.lesson_id)
         student = self.get_student_by_id(new_mark.student_id)
 
         log_message = f'Setting mark {cm(new_mark.value, color=color.Red)} for {student} at {lesson}'
 
         cached_mark = self._marks_cache.get(lesson_id=new_mark.lesson_id, student_id=new_mark.student_id)
         if cached_mark:
-            if cached_mark._value == new_mark.value:
+            if cached_mark.value == new_mark.value:
                 log.info(f'{log_message}: already set')
                 return
-            if cached_mark._value < new_mark.value:
+            if cached_mark.value < new_mark.value:
                 self._update_mark(new_mark)
             else:
                 log.error(f'{log_message}: changed mark, already have {new_mark.value}')
@@ -305,7 +319,7 @@ class Client:
         # https://dnevnik.mos.ru/core/api/marks/1188507628?pid=15033420
 
         self.validate_mark(new_mark)
-        lesson = self.get_schedule_item_by_id(schedule_lesson_id)
+        lesson = self.get_lesson_by_id(lesson_id)
         student = self.get_student_by_id(student_id)
 
         log_message = f'Updating mark {cm(value, color=color.Red)} for {student} at {lesson}'
@@ -339,7 +353,7 @@ class Client:
           'is_point': new_mark.is_point,
           'pointDate': new_mark.point_date_strange,
           'point_date': new_mark.point_date_patched,
-          'schedule_lesson_id': schedule_lesson_id,
+          'schedule_lesson_id': new_mark.lesson_id,
           'showComment': new_mark.show_comment,
           'student_profile_id': student_id,
           'valuesByIds': {str(grade_system_id): value},

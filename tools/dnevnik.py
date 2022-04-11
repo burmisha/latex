@@ -29,7 +29,7 @@ class MarksUpdater:
                 lesson_id = int(lesson_id)
 
                 if lesson_id in self._client._available_lessons_dict:
-                    lesson = self._client.get_schedule_item_by_id(int(lesson_id))
+                    lesson = self._client.get_lesson_by_id(int(lesson_id))
                     control_form = self._client.get_control_forms(lesson._subject_id, grade, log_forms=False)[control_form_name]
                 else:
                     lesson = None
@@ -47,14 +47,14 @@ class MarksUpdater:
                         continue
 
                     if mark_str == ABSENT_MARK:
-                        absence = library.dnevnik.mesh.Absence(student_id=student._id, lesson_id=lesson._id)
+                        absence = library.dnevnik.mesh.Absence(student_id=student.student_id, lesson_id=lesson.lesson_id)
                         absences.append(absence)
                     else:
                         mark = int(mark_str)
                         if mark in library.dnevnik.mesh.VALID_MARKS:
                             new_mark = library.dnevnik.mesh.NewMark(
-                                lesson_id=lesson._id,
-                                student_id=student._id,
+                                lesson_id=lesson.lesson_id,
+                                student_id=student.student_id,
                                 value=mark,
                                 comment=None,
                                 point_date=None,
@@ -98,22 +98,22 @@ def run(args):
         to_dt=to_dt,
     )
 
-    schedule_items = list(client.get_schedule_items())
+    lessons = list(client.get_lessons())
 
     grades = sorted(library.dnevnik.mesh.EDUCATION_LEVELS.keys())
-    for lesson in schedule_items:
+    for lesson in lessons:
         for grade in grades:
             client.get_control_forms(lesson._subject_id, grade, log_forms=True)
 
-    for schedule_item in sorted(schedule_items):
-        log.info(schedule_item)
+    for lesson in sorted(lessons):
+        log.info(lesson)
         if args.log_links:
-            log.info(f'  Link: {schedule_item.get_link()}')
+            log.info(f'  Link: {lesson.get_link()}')
 
     if args.set_marks:
         for mark in client.get_all_marks():
-            student = client.get_student_by_id(mark._student_id)
-            lesson = client.get_schedule_item_by_id(mark._lesson_id)
+            student = client.get_student_by_id(mark.student_id)
+            lesson = client.get_lesson_by_id(mark.lesson_id)
             log.info(f'  {student} got {mark} at {lesson}')
 
         marks_updater = MarksUpdater(

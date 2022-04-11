@@ -1,7 +1,7 @@
 import datetime
 import re
 import attr
-from typing import Optional
+from typing import Optional, Any, List
 from library.dnevnik.client import BASE_URL
 from library.logging import cm, color
 import json
@@ -19,9 +19,9 @@ class Year:
     current_year: bool = attr.ib()
 
 
-class StudentsGroup:
+class Group:
     def __init__(self, data):
-        self._id = data['id']
+        self.group_id = data['id']
         self._name = data['name']
         self._student_ids = data['student_ids']
         self._subject_name = data['subject_name']
@@ -46,33 +46,33 @@ class StudentsGroup:
         class_unit_id_str = ','.join(str(i) for i in self._class_unit_ids)
         return ' '.join([
             f'group {cm(self._best_name, color=color.Green)}',
-            f'({self._id}, {len(self._student_ids)} students),',
-            cm(f'{BASE_URL}/webteacher/study-process/grade-journals/{self._id}', color=color.Cyan),
-            # cm(f'{BASE_URL}/manage/journal?group_id={self._id}&class_unit_id={class_unit_id_str}', color=color.Cyan),
+            f'({self.group_id}, {len(self._student_ids)} students),',
+            cm(f'{BASE_URL}/webteacher/study-process/grade-journals/{self.group_id}', color=color.Cyan),
+            # cm(f'{BASE_URL}/manage/journal?group_id={self.group_id}&class_unit_id={class_unit_id_str}', color=color.Cyan),
         ])
 
 
-class StudentProfile:
-    def __init__(self, data):
-        self._id = data['id']
-        self._short_name = data['short_name']
-        self._raw_data = data
-        self.group_ids = [group['id'] for group in data['groups']]
-        self.class_unit_id = data['class_unit']['id']
+@attr.s
+class Student:
+    student_id: int = attr.ib()
+    short_name: int = attr.ib()
+    raw_data: Any = attr.ib()
+    group_ids: List[int] = attr.ib()
+    class_unit_id: int = attr.ib()
 
     def __str__(self):
-        return f'{cm(self._short_name, color=color.Cyan)}'
+        return f'{cm(self.short_name, color=color.Cyan)}'
 
     def __repr__(self):
-        return f'student {cm(self._short_name, color=color.Cyan)} ({self._id})'
+        return f'student {cm(self.short_name, color=color.Cyan)} ({self.student_id})'
 
     def matches(self, name: str) -> bool:
-        return sorted(self._short_name.lower().split()) == sorted(name.lower().split())
+        return sorted(self.short_name.lower().split()) == sorted(name.lower().split())
 
 
-class ScheduleItem:
+class Lesson:
     def __init__(self, data):
-        self._id = data['id']
+        self.lesson_id = data['id']
         self._date = data['date']
         self._iso_date_time = data['iso_date_time']
         self._schedule_id = data['schedule_id']
@@ -82,13 +82,13 @@ class ScheduleItem:
 
         self.class_unit_id = data['class_unit_id']
         self.group_name = data['group_name']
-        self._raw_data = data
+        self.raw_data = data
 
     def set_group(self, group):
         self._group = group
 
     def get_link(self):
-        return f'{BASE_URL}/conference/?scheduled_lesson_id={self._id}'
+        return f'{BASE_URL}/conference/?scheduled_lesson_id={self.lesson_id}'
 
     @property
     def str_time(self):
@@ -98,31 +98,30 @@ class ScheduleItem:
         return self._iso_date_time < other._iso_date_time
 
     def __str__(self):
-        return f'lesson {cm(self.str_time, color=color.Yellow)} ({self._id}, {self._group})'
+        return f'lesson {cm(self.str_time, color=color.Yellow)} ({self.lesson_id}, {self._group})'
 
     def __repr__(self):
-        return f'Schedule item {cm(self.str_time, color=color.Yellow)} ({self._id}) for {self._group!r}'
+        return f'Schedule item {cm(self.str_time, color=color.Yellow)} ({self.lesson_id}) for {self._group!r}'
 
 
+@attr.s
 class Mark:
-    def __init__(self, data):
-        self._id = data['id']
-        self._value = int(data['name'])
-        assert self._value in VALID_MARKS
+    mark_id: int = attr.ib()
+    value: str = attr.ib()
+    student_id: int = attr.ib()
+    lesson_id: int = attr.ib()
+    raw_data: Any = attr.ib()
 
-        self._student_id = data['student_profile_id']
-        assert isinstance(self._student_id, int)
-
-        self._lesson_id = data['schedule_lesson_id']
-        assert isinstance(self._lesson_id, int)
-
-        self._raw_data = data
+    @value.validator
+    def is_valid(self, attribute, mark_value):
+        if mark_value not in VALID_MARKS:
+            raise ValueError(f'Mark value {mark_value} is invalid')
 
     def __str__(self):
-        return f'mark {cm(str(self._value), color=color.Red)}'
+        return f'mark {cm(str(self.value), color=color.Red)}'
 
     def __repr__(self):
-        return f'mark {cm(str(self._value), color=color.Red)} for {self._student_id} at {self._lesson_id}'
+        return f'mark {cm(str(self.value), color=color.Red)} for {self.student_id} at {self.lesson_id}'
 
 
 class MarksCache:
@@ -130,9 +129,9 @@ class MarksCache:
         self._marks = dict()
 
     def add(self, mark: Mark):
-        assert isinstance(mark._lesson_id, int)
-        assert isinstance(mark._student_id, int)
-        key = (mark._lesson_id, mark._student_id)
+        assert isinstance(mark.lesson_id, int)
+        assert isinstance(mark.student_id, int)
+        key = (mark.lesson_id, mark.student_id)
         assert key not in self._marks
         self._marks[key] = mark
 
