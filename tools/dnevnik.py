@@ -108,7 +108,7 @@ def run(args):
     for lesson in sorted(lessons):
         log.info(lesson)
         if args.log_links:
-            log.info(f'  Link: {lesson.get_link()}')
+            log.info(f'  Link: {lesson.link}')
 
     if args.set_marks:
         for mark in client.get_all_marks():

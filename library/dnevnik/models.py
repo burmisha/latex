@@ -11,7 +11,7 @@ VALID_MARKS = [2, 3, 4, 5]
 
 @attr.s
 class Year:
-    id: int = attr.ib()
+    year_id: int = attr.ib()
     name: str = attr.ib()
     begin_date: str = attr.ib()
     end_date: str = attr.ib()
@@ -78,7 +78,6 @@ class Lesson:
         self._schedule_id = data['schedule_id']
         self.group_id = data['group_id']
         self._subject_id = data['subject_id']
-        self._timestamp = datetime.datetime.strptime(self._iso_date_time, '%Y-%m-%dT%H:%M:00.000')
 
         self.class_unit_id = data['class_unit_id']
         self.group_name = data['group_name']
@@ -87,12 +86,14 @@ class Lesson:
     def set_group(self, group):
         self._group = group
 
-    def get_link(self):
+    @property
+    def link(self):
         return f'{BASE_URL}/conference/?scheduled_lesson_id={self.lesson_id}'
 
     @property
     def str_time(self):
-        return self._timestamp.strftime('%d %B %Y, %A, %H:%M')
+        timestamp = datetime.datetime.strptime(self._iso_date_time, '%Y-%m-%dT%H:%M:00.000')
+        return timestamp.strftime('%d %B %Y, %A, %H:%M')
 
     def __lt__(self, other):
         return self._iso_date_time < other._iso_date_time

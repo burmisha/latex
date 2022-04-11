@@ -69,10 +69,17 @@ class Client:
     def get_current_year(self):
         if self._current_year is None:
             params = {'pid': self.teacher_id}
-            academic_years = self.authorized_client.get(ApiUrl.ACADEMIC_YEARS, params)
+            rows = self.authorized_client.get(ApiUrl.ACADEMIC_YEARS, params)
             self._current_year = None
-            for item in academic_years:
-                year = Year(**item)
+            for row in rows:
+                year = Year(
+                    year_id=row['id'],
+                    name=row['name'],
+                    begin_date=row['begin_date'],
+                    end_date=row['end_date'],
+                    calendar_id=row['calendar_id'],
+                    current_year=row['current_year'],
+                )
                 if year.current_year:
                     assert not self._current_year
                     self._current_year = year
@@ -84,7 +91,7 @@ class Client:
     def get_teacher_profile(self):
         if self._teacher_profile is None:
             params = {
-                'academic_year_id': self.get_current_year().id,
+                'academic_year_id': self.get_current_year().year_id,
                 'pid': self.teacher_id,
                 'with_assigned_groups': True
             }
@@ -98,7 +105,7 @@ class Client:
     def get_groups(self):
         if self._groups is None:
             params = {
-                'academic_year_id': self.get_current_year().id,
+                'academic_year_id': self.get_current_year().year_id,
                 'group_ids': ','.join(str(i) for i in self.get_assigned_group_ids()),
                 'pid': self.teacher_id,
             }
@@ -119,7 +126,7 @@ class Client:
             self._all_student_profiles = {}
             for group in self.get_groups():
                 params = {
-                    'academic_year_id': self.get_current_year().id,
+                    'academic_year_id': self.get_current_year().year_id,
                     'class_unit_ids': ','.join(str(i) for i in group._class_unit_ids),
                     'group_ids': ','.join(str(i) for i in [group.group_id] + group._subgroup_ids),
                     'per_page': 1000,
@@ -184,7 +191,7 @@ class Client:
 
     def get_lessons(self):
         request = {
-            'academic_year_id': self.get_current_year().id,
+            'academic_year_id': self.get_current_year().year_id,
             'from': library.datetools.formatTimestamp(self.from_dt, fmt=SCHEDULE_DATE_FMT),
             'to': library.datetools.formatTimestamp(self.to_dt, fmt=SCHEDULE_DATE_FMT),
             'original': True,
@@ -381,7 +388,7 @@ class Client:
         if self._control_forms.get(key) is None:
             log.info(f'Loading available control forms for grade {grade} subject {subject_id}')
             params = {
-                'academic_year_id': self.get_current_year().id,
+                'academic_year_id': self.get_current_year().year_id,
                 'education_level_id': education_level_id,
                 'page': 1,
                 'per_page': CONTROL_FORMS_LIMIT,
