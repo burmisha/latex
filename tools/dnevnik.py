@@ -30,7 +30,7 @@ class MarksUpdater:
 
                 if lesson_id in self._client._available_lessons_dict:
                     lesson = self._client.get_lesson_by_id(int(lesson_id))
-                    control_form = self._client.get_control_forms(lesson._subject_id, grade, log_forms=False)[control_form_name]
+                    control_form = self._client.get_control_forms(lesson.subject_id, grade, log_forms=False)[control_form_name]
                 else:
                     lesson = None
                     control_form = None
@@ -103,10 +103,10 @@ def run(args):
     grades = sorted(library.dnevnik.mesh.EDUCATION_LEVELS.keys())
     for lesson in lessons:
         for grade in grades:
-            client.get_control_forms(lesson._subject_id, grade, log_forms=True)
+            client.get_control_forms(lesson.subject_id, grade, log_forms=True)
 
     for lesson in sorted(lessons):
-        log.info(lesson)
+        log.info(f'{lesson} {client.get_group_by_id(lesson.group_id)}')
         if args.log_links:
             log.info(f'  Link: {lesson.link}')
 

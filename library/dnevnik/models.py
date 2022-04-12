@@ -1,7 +1,7 @@
 import datetime
 import re
 import attr
-from typing import Optional, Any, List
+from typing import Optional, List
 from library.dnevnik.client import BASE_URL
 from library.logging import cm, color
 import json
@@ -19,36 +19,43 @@ class Year:
     current_year: bool = attr.ib()
 
 
+@attr.s
 class Group:
-    def __init__(self, data):
-        self.group_id = data['id']
-        self._name = data['name']
-        self._student_ids = data['student_ids']
-        self._subject_name = data['subject_name']
-        self._class_unit_ids = data['class_unit_ids']
-        self._subgroup_ids = data['subgroup_ids'] or []
+    group_id: int = attr.ib()
+    name: str = attr.ib()
+    student_ids: List[int] = attr.ib()
+    subject_name: str = attr.ib()
+    class_unit_ids: List[int] = attr.ib()
+    subgroup_ids: List[int] = attr.ib()
+    raw_data: dict = attr.ib()
 
-        best_name = data['class_unit_name']
-        if best_name is None:
-            best_name = {
+    @property
+    def best_name(self) -> str:
+        name = self.raw_data['class_unit_name']
+        if name is None:
+            name = {
                 # 'МЕТ.Физика Бурмистров 5ч. Тех': '10',
                 'МЕТ. Физика 11АБ Техн': '11БА',
-            }[self._name]
-        self._best_name = f'{best_name} {self._subject_name}'
+            }[self.name]
+        return f'{name} {self.subject_name}'
 
-        self._raw_data = data
+    @property
+    def class_unit_id_str(self):
+        return ','.join(str(i) for i in self.class_unit_ids)
+
+    @property
+    def all_groups_ids(self) -> str:
+        return ','.join(str(i) for i in [self.group_id] + self.subgroup_ids)
 
     def __str__(self):
-        class_unit_id_str = ','.join(str(i) for i in self._class_unit_ids)
-        return f'group {cm(self._best_name, color=color.Green)}'
+        return f'group {cm(self.best_name, color=color.Green)}'
 
     def __repr__(self):
-        class_unit_id_str = ','.join(str(i) for i in self._class_unit_ids)
         return ' '.join([
-            f'group {cm(self._best_name, color=color.Green)}',
-            f'({self.group_id}, {len(self._student_ids)} students),',
+            f'group {cm(self.best_name, color=color.Green)}',
+            f'({self.group_id}, {len(self.student_ids)} students),',
             cm(f'{BASE_URL}/webteacher/study-process/grade-journals/{self.group_id}', color=color.Cyan),
-            # cm(f'{BASE_URL}/manage/journal?group_id={self.group_id}&class_unit_id={class_unit_id_str}', color=color.Cyan),
+            # cm(f'{BASE_URL}/manage/journal?group_id={self.group_id}&class_unit_id={self.class_unit_id_str}', color=color.Cyan),
         ])
 
 
@@ -56,7 +63,7 @@ class Group:
 class Student:
     student_id: int = attr.ib()
     short_name: int = attr.ib()
-    raw_data: Any = attr.ib()
+    raw_data: dict = attr.ib()
     group_ids: List[int] = attr.ib()
     class_unit_id: int = attr.ib()
 
@@ -70,39 +77,29 @@ class Student:
         return sorted(self.short_name.lower().split()) == sorted(name.lower().split())
 
 
+@attr.s
 class Lesson:
-    def __init__(self, data):
-        self.lesson_id = data['id']
-        self._date = data['date']
-        self._iso_date_time = data['iso_date_time']
-        self._schedule_id = data['schedule_id']
-        self.group_id = data['group_id']
-        self._subject_id = data['subject_id']
-
-        self.class_unit_id = data['class_unit_id']
-        self.group_name = data['group_name']
-        self.raw_data = data
-
-    def set_group(self, group):
-        self._group = group
+    lesson_id: int = attr.ib()
+    group_id: int = attr.ib()
+    subject_id: int = attr.ib()
+    class_unit_id: Optional[int] = attr.ib()
+    iso_date_time: str = attr.ib()
+    raw_data: dict = attr.ib()
 
     @property
     def link(self):
         return f'{BASE_URL}/conference/?scheduled_lesson_id={self.lesson_id}'
 
     @property
-    def str_time(self):
-        timestamp = datetime.datetime.strptime(self._iso_date_time, '%Y-%m-%dT%H:%M:00.000')
+    def human_time(self):
+        timestamp = datetime.datetime.strptime(self.iso_date_time, '%Y-%m-%dT%H:%M:00.000')
         return timestamp.strftime('%d %B %Y, %A, %H:%M')
 
     def __lt__(self, other):
-        return self._iso_date_time < other._iso_date_time
+        return self.iso_date_time < other.iso_date_time
 
     def __str__(self):
-        return f'lesson {cm(self.str_time, color=color.Yellow)} ({self.lesson_id}, {self._group})'
-
-    def __repr__(self):
-        return f'Schedule item {cm(self.str_time, color=color.Yellow)} ({self.lesson_id}) for {self._group!r}'
+        return f'lesson {cm(self.human_time, color=color.Yellow)} ({self.lesson_id})'
 
 
 @attr.s
@@ -111,7 +108,7 @@ class Mark:
     value: str = attr.ib()
     student_id: int = attr.ib()
     lesson_id: int = attr.ib()
-    raw_data: Any = attr.ib()
+    raw_data: dict = attr.ib()
 
     @value.validator
     def is_valid(self, attribute, mark_value):
@@ -144,17 +141,22 @@ class MarksCache:
         return mark
 
 
+@attr.s
 class ControlForm:
-    def __init__(self, data):
-        assert not data['deleted_at']
-        self.name = data['name']
-        self.weight = data['weight']
+    name: str = attr.ib()
+    weight: int = attr.ib()
+    raw_data: dict = attr.ib()
 
-        self._raw_data = data
+    @raw_data.validator
+    def is_valid(self, attribute, value):
+        if value['deleted_at']:
+            raise ValueError(f'ControlForm is deleted')
 
-        control_form_str = json.dumps(data)
+    @property
+    def rounded_raw_data(self):
+        control_form_str = json.dumps(self.data)
         control_form_str = control_form_str.replace('.0', '')
-        self.rounded_raw_data = json.loads(control_form_str)
+        return json.loads(control_form_str)
 
     def __str__(self):
         return f'active control form [{cm(self.weight, color=color.Green)}] {cm(self.name, color=color.Yellow)}'

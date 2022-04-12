@@ -34,6 +34,8 @@ EDUCATION_LEVELS = {
 }
 MARKS_LIMIT = 1000
 CONTROL_FORMS_LIMIT = 100
+LESSONS_LIMIT = 100
+STUDENTS_LIMIT = 1000
 
 
 class Client:
@@ -109,8 +111,18 @@ class Client:
                 'group_ids': ','.join(str(i) for i in self.get_assigned_group_ids()),
                 'pid': self.teacher_id,
             }
-            groups = self.authorized_client.get(ApiUrl.GROUPS, params)
-            self._groups = [Group(item) for item in groups]
+            rows = self.authorized_client.get(ApiUrl.GROUPS, params)
+            self._groups = [
+                Group(
+                    group_id=int(row['id']),
+                    name=row['name'],
+                    student_ids=[int(i) for i in row['student_ids']],
+                    subject_name=row['subject_name'],
+                    class_unit_ids=[int(i) for i in row['class_unit_ids']],
+                    subgroup_ids=row['subgroup_ids'] or [],
+                    raw_data=row,
+                ) for row in rows
+            ]
         return self._groups
 
     def get_group_by_id(self, group_id):
@@ -127,9 +139,9 @@ class Client:
             for group in self.get_groups():
                 params = {
                     'academic_year_id': self.get_current_year().year_id,
-                    'class_unit_ids': ','.join(str(i) for i in group._class_unit_ids),
-                    'group_ids': ','.join(str(i) for i in [group.group_id] + group._subgroup_ids),
-                    'per_page': 1000,
+                    'class_unit_ids': class_unit_id_str,
+                    'group_ids': group.all_groups_ids,
+                    'per_page': STUDENTS_LIMIT,
                     'pid': self.teacher_id,
                     'with_archived_groups': True,
                     'with_deleted': True,
@@ -140,6 +152,7 @@ class Client:
                     # 'with_parents': True,
                 }
                 rows = self.authorized_client.get(ApiUrl.STUDENT_PROFILES, params=params)
+                assert len(rows) < STUDENTS_LIMIT
                 log.info(f'Loaded {len(rows)} students for {group!r}')
                 for row in rows:
                     student = Student(
@@ -196,21 +209,29 @@ class Client:
             'to': library.datetools.formatTimestamp(self.to_dt, fmt=SCHEDULE_DATE_FMT),
             'original': True,
             'page': 1,
-            'per_page': 100,
+            'per_page': LESSONS_LIMIT,
             'pid': self.teacher_id,
             'teacher_id': self.teacher_id,
             'with_group_class_subject_info': True,
         }
         rows = self.authorized_client.get(ApiUrl.SCHEDULE_ITEMS, request)
+        assert len(rows) < LESSONS_LIMIT
         for row in rows:
-            lesson = Lesson(row)
+            lesson = Lesson(
+                lesson_id=int(row['id']),
+                group_id=int(row['group_id']),
+                subject_id=int(row['subject_id']),
+                class_unit_id=row['class_unit_id'],  # can be None
+                iso_date_time=row['iso_date_time'],
+                raw_data=row,
+            )
             group = self.get_group_by_id(lesson.group_id)
             if group:
-                lesson.set_group(group)
                 self._available_lessons_dict[lesson.lesson_id] = lesson
                 yield lesson
             else:
-                log.warn(f'Skipping lesson for {cm(lesson.group_name, color=color.Red)} as no group found')
+                group_name = row['group_name']
+                log.warn(f'Skipping lesson for {cm(group_name, color=color.Red)} as no group found')
 
     def _get_marks_for_group(self, *, group: Group=None, limit: int=MARKS_LIMIT):
         from_date = library.datetools.formatTimestamp(self.from_dt, fmt=MARKS_DATE_FMT)
@@ -220,7 +241,7 @@ class Client:
         params = {
             'created_at_from': from_date,
             'created_at_to': to_date,
-            'group_ids': ','.join(str(i) for i in [group.group_id] + group._subgroup_ids),
+            'group_ids': group.all_groups_ids,
             'page': 1,
             'per_page': limit,
             'pid': self.teacher_id,
@@ -396,18 +417,23 @@ class Client:
                 'subject_id': subject_id,
                 'with_grade_system': True,
             }
-            data = self.authorized_client.get(ApiUrl.CONTROL_FORMS, params)
+            rows = self.authorized_client.get(ApiUrl.CONTROL_FORMS, params)
+            assert len(rows) < CONTROL_FORMS_LIMIT
 
             control_forms = {}
-            for item in data:
-                if item['deleted_at']:
+            for row in rows:
+                if row['deleted_at']:
                     continue
-                control_form = ControlForm(item)
+                control_form = ControlForm(
+                    name=row['name'],
+                    weight=int(row['weight']),
+                    raw_data=row,
+                )
                 control_forms[control_form.name] = control_form
                 if log_forms:
                     log.info(f'  {control_form}')
 
-            assert 1 <= len(control_forms) < CONTROL_FORMS_LIMIT
+            assert 1 <= len(control_forms)
             self._control_forms[key] = control_forms
             log.info(f'Loaded {len(control_forms)} active control forms for grade {grade} subject {subject_id}')
         return self._control_forms[key]
