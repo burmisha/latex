@@ -7,9 +7,13 @@ import logging
 import os
 import requests
 import time
+import attr
+
+from typing import Optional
 
 log = logging.getLogger(__name__)
 
+import pytube
 
 try:
     import pafy  # http://np1.github.io/pafy/
@@ -17,33 +21,40 @@ except ImportError:
     log.error('Failed to load pafy')
 
 
+class Mode:
+    # local pytube was fixed, see: https://github.com/pytube/pytube/issues/1281
+    PYTYBE = 'pytube'
+    PAFY = 'pafy'
+    REQUESTS = 'requests'
+
+
+@attr.s
 class YoutubeVideo:
-    def __init__(self, url, title, dstdir=None, use_requests=False):
-        assert url.startswith('https://www.youtube.com/watch?v=')
-        self._url = url
-        self._title = title
-        self._dstdir = dstdir
-        self._use_requests = use_requests
+    url: str = attr.ib()
+    title: str = attr.ib()
+    mode: str = attr.ib()
+    dstdir: Optional[str] = attr.ib(default=None)
+    extension: str = attr.ib(default='mp4')
+
+    @url.validator
+    def is_valid(self, attribute, value):
+        if not value.startswith('https://www.youtube.com/watch?v='):
+            raise ValueError(f'Got url {value}')
+
+    @dstdir.validator
+    def is_valid(self, attribute, value):
+        if value and not library.files.is_dir(value):
+            raise ValueError(f'Not dir: {value}')
 
     def __str__(self):
-        return f'{cm(self._title, color=color.Yellow)} ({self._url}) from {os.path.basename(self._dstdir)}'
-
-    def set_dstdir(self, dstdir):
-        self._dstdir = dstdir
-
-    def get_filename(self):
-        assert library.files.is_dir(self._dstdir)
-        return os.path.join(self._dstdir, f'{self._title}.mp4')
-
-    def set_use_requests(self, use_requests):
-        self._use_requests = use_requests
+        return f'{cm(self.title, color=color.Yellow)} ({self.url}) from {os.path.basename(self.dstdir)}'
 
     def get_best_stream(self, preftype=None, sleepTime=1200):
         log.debug(f'Searching best stream for {self}')
         ok = False
         while not ok:
             try:
-                video = pafy.new(self._url)
+                video = pafy.new(self.url)
                 ok = True
             except IndexError:
                 log.exception('Failed to get best stream')
@@ -53,29 +64,55 @@ class YoutubeVideo:
         log.info(f'Streams: {video.streams}, best stream: {best_stream}')
         return best_stream
 
-    def download(self):
-        filename = self.get_filename()
-        if os.path.exists(filename):
-            log.info(f'Skipping {self} as \'{filename}\' exists')
+    @property
+    def basename(self):
+        return f'{self.title}.{self.extension}'
+
+    @property
+    def filename(self):
+        return os.path.join(self.dstdir, self.basename)
+
+
+def download_video(video: YoutubeVideo) -> Optional[Exception]:
+    try:
+        log.info(f'Downloading {video}...')
+        if video.mode == Mode.REQUESTS:
+            best_stream = video.get_best_stream(preftype=video.extension)
+            data = requests.get(best_stream.url).content
+            with open(video.filename, 'wb') as f:
+                f.write(data)
+        elif video.mode == Mode.PAFY:
+            best_stream = video.get_best_stream(preftype=video.extension)
+            best_stream.download(filepath=video.filename)
+        elif video.mode == Mode.PYTYBE:
+            streams = pytube.YouTube(video.url).streams
+            streams = streams.filter(progressive=True, file_extension=video.extension)
+            # streams = streams.get_highest_resolution()
+            best_stream = streams.order_by('resolution').desc().first()
+            best_stream.download(output_path=video.dstdir, filename=video.basename)
         else:
-            log.info(f'Downloading {self} to \'{filename}\'')
-            best_stream = self.get_best_stream(preftype='mp4')
-            if self._use_requests:
-                data = requests.get(best_stream.url).content
-                with open(filename, 'wb') as f:
-                    f.write(data)
-            else:
-                best_stream.download(filepath=filename)
+            raise RuntimeError(f'Invalid mode: {video.mode}')
+        log.info(f'Downloaded {video}')
+    except KeyboardInterrupt:
+        log.error(f'Download cancelled: {video}')
+    except Exception as e:
+        log.exception(f'Failed to download {video}')
+        return e
+    return None
 
 
+@attr.s
 class YoutubePlaylist:
-    def __init__(self, url):
-        assert url.startswith('https://www.youtube.com/playlist?list=PL')
-        self._Url = url
-        self._TitleCanonizer = TitleCanonizer()
+    url: str = attr.ib()
+    title_canonizer: Optional[TitleCanonizer] = attr.ib(default=TitleCanonizer())
+
+    @url.validator
+    def is_valid(self, attribute, value):
+        if not value.startswith('https://www.youtube.com/playlist?list=PL'):
+            raise ValueError(f'Got url {value}')
 
     def __str__(self):
-        return f'{cm(self._Url, color=color.Cyan)}'
+        return f'{cm(self.url, color=color.Cyan)}'
 
     def get_unique_suffix(self, videos, title, url):
         suffixes = [''] + [f' - {i}' for i in range(2, 4)]
@@ -83,15 +120,15 @@ class YoutubePlaylist:
             new_title = title + suffix
             has_duplicate = False
             for video in videos:
-                if video._title == new_title:
+                if video.title == new_title:
                     has_duplicate = True
-                    if video._url == url:
+                    if video.url == url:
                         log.info(f'Found full duplicate for {title!r}, skipping')
                         return False, None
                     else:
                         log.warn((
                             f'Found duplicate for {title!r} with another url: '
-                            f'check {video._url} and {url}'
+                            f'check {video.url} and {url}'
                         ))
             if not has_duplicate:
                 if suffix:
@@ -100,9 +137,9 @@ class YoutubePlaylist:
 
         raise RuntimeError(f'Could not resolve duplicate {title!r}, check {url}')
 
-    def ListVideos(self):
-        log.debug(f'Looking for videos in {cm(self._Url, color=color.Cyan)}')
-        text = requests.get(self._Url).text
+    def ListVideos(self, dstdir):
+        log.debug(f'Looking for videos in {self}')
+        text = requests.get(self.url).text
 
         start_expression = 'var ytInitialData ='
         end_expression = '</script>'
@@ -121,12 +158,18 @@ class YoutubePlaylist:
                 assert index_text == index, f'Got index {index_text} instead of {index}'
                 video_id = contentItem['playlistVideoRenderer']['videoId']
                 title_text = contentItem['playlistVideoRenderer']['title']['runs'][0]['text']
-                title_text = self._TitleCanonizer.Canonize(title_text)
+                title_text = self.title_canonizer.Canonize(title_text)
                 url = f'https://www.youtube.com/watch?v={video_id}'
 
                 is_unique, suffix = self.get_unique_suffix(videos, title_text, url)
                 if is_unique:
-                    videos.append(YoutubeVideo(url, title_text + suffix))
+                    video = YoutubeVideo(
+                        url,
+                        title_text + suffix,
+                        dstdir=dstdir,
+                        mode=Mode.PAFY,
+                    )
+                    videos.append(video)
             except:
                 log.error(f'Error on {colorize_json(contentItem)} in {self}')
                 raise

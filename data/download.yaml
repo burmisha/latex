@@ -341,9 +341,24 @@ Explicit:
 
 
 Channels:
-    'Продолжение следует': 'https://www.youtube.com/c/%D0%9F%D1%80%D0%BE%D0%B4%D0%BE%D0%BB%D0%B6%D0%B5%D0%BD%D0%B8%D0%B5%D1%81%D0%BB%D0%B5%D0%B4%D1%83%D0%B5%D1%82'
-    # 'Новая газета': 'https://www.youtube.com/c/NovayagazetaRu'
-    'Новая газета - Европа': 'https://www.youtube.com/channel/UCO1lJlI3gjuOMrKppvPlDww'
+    - dirname: 'Продолжение следует'
+      url: 'https://www.youtube.com/c/%D0%9F%D1%80%D0%BE%D0%B4%D0%BE%D0%BB%D0%B6%D0%B5%D0%BD%D0%B8%D0%B5%D1%81%D0%BB%D0%B5%D0%B4%D1%83%D0%B5%D1%82'
+    # - dirname: 'Новая газета'
+    #   url: 'https://www.youtube.com/c/NovayagazetaRu'
+    - dirname: 'Новая газета - Европа'
+      url: 'https://www.youtube.com/channel/UCO1lJlI3gjuOMrKppvPlDww'
+    - dirname: 'Живой Гвоздь'
+      url: https://www.youtube.com/channel/UCWAIvx2yYLK_xTYD4F2mUNw
+      filters:
+        - Явлинский
+    - dirname: ещенепознер 
+      url: https://www.youtube.com/channel/UCNRYbltJXhf6DepS26-uSbQ
+      filters:
+        - Явлинский
+    - dirname: Фишман 
+      url: https://www.youtube.com/channel/UCieHwWZXwzIwWEjGtmQ2y6A
+      filters:
+        - Итоги недели
 
 
 Playlists:
