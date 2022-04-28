@@ -54,6 +54,7 @@ def runTemplate(args):
         # '2021-10-26',
         # '2021-10-28',
         # '2022-03-24',
+        '2022-04-25',
     ]:
         if nowFmt <= date <= futureFmt:
             ipadCopier.CreateFile(library.location.ipad('2021-22 Кружок', f'{date} Кружок.docx'))
