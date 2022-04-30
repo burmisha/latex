@@ -1,23 +1,15 @@
 from tools.books import get_all_books
+
 from library.structure.page import PagesRange
 from library.normalize import format_plain_text
+from library.util import fn_filter
 
 import library.process
 
-import fnmatch
 import os
 
 import logging
 log = logging.getLogger(__name__)
-
-
-class FnFilter:
-    def __init__(self, fn_filter: str):
-        assert fn_filter, f'No filter provided: {fn_filter}'
-        self.fn_filter = fn_filter
-
-    def match(self, value):
-        return fnmatch.fnmatch(value, self.fn_filter)
 
 
 def runRecognize(args):
@@ -36,6 +28,6 @@ def runRecognize(args):
 
 
 def populate_parser(parser):
-    parser.add_argument('-f', '--filter', help='fnmatch expresiion for book basename', required=True, type=FnFilter)
+    parser.add_argument('-f', '--filter', help='fnmatch expression for book basename', required=True, type=fn_filter.FnFilter)
     parser.add_argument('-p', '--pages', help='Pages indices', required=True)
     parser.set_defaults(func=runRecognize)

@@ -94,5 +94,3 @@ class DocxToPdf:
             else:
                 already_converted_count += 1
         log.info(f'Converted {new_converted:2d} files and found {already_converted_count:2d} existing in \'{source_directory}\'')
-
-
