@@ -1014,6 +1014,32 @@ def get_all_variants(*, flt=None):
                 'radioactive.Definitions07',
             ]},
         ),
+        Work(
+            task_id='2022-04-20 11Б - КФ - 6',
+            classes={'atomic': [
+                'nuclear.AtomCount09',
+                'nuclear.AtomCount08_Text',
+                'radioactive.Vishnyakova_5_3_12',
+                'radioactive.Delta_m_from_m',
+                'radioactive.WriteRadioFall',
+                'radioactive.Vishnyakova_5_3_1',
+                'radioactive.Vishnyakova_5_3_2',
+                'radioactive.Vishnyakova_5_3_3',
+            ]},
+        ),
+        Work(
+            task_id='2022-04-27 11БА - КФ - 5',
+            classes={
+                'magnet': [
+                    'lorentz.Force13',
+                    'ampere.Chernoutsan11_02',
+                    'lorentz.Force18',
+                    'induction.F_speed',
+                    'induction.L_from_b',
+                    'induction.W_kirchgof',
+                ],
+            },
+        ),
 
     ]
     if flt:
