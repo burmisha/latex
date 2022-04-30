@@ -21,6 +21,12 @@ class Year:
 
 @attr.s
 class Group:
+    """
+        Группа — это учебная группа в духе «10 класс — Алгебра».
+        Класс — это класс в духе «10А класс».
+        Таким образом, одному классу соответствует много групп (по всем предметам).
+        Но и в одной группе могут оказаться ученики разных классов (мета-группы).
+    """
     group_id: int = attr.ib()
     name: str = attr.ib()
     student_ids: List[int] = attr.ib()
@@ -91,12 +97,12 @@ class Lesson:
         return f'{BASE_URL}/conference/?scheduled_lesson_id={self.lesson_id}'
 
     @property
-    def human_time(self):
-        timestamp = datetime.datetime.strptime(self.iso_date_time, '%Y-%m-%dT%H:%M:00.000')
-        return timestamp.strftime('%d %B %Y, %A, %H:%M')
+    def dt(self):
+        return datetime.datetime.strptime(self.iso_date_time, '%Y-%m-%dT%H:%M:00.000')
 
-    def __lt__(self, other):
-        return self.iso_date_time < other.iso_date_time
+    @property
+    def human_time(self):
+        return self.dt.strftime('%d %B %Y, %A, %H:%M')
 
     def __str__(self):
         return f'lesson {cm(self.human_time, color=color.Yellow)} ({self.lesson_id})'

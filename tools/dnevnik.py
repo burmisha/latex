@@ -77,8 +77,8 @@ class MarksUpdater:
 
 
 def get_dt(from_date_days: int, to_date_days: int):
-    assert -15 <= from_date_days <= 15
-    assert -15 <= to_date_days <= 15
+    assert 0 <= from_date_days <= 50
+    assert 0 <= to_date_days <= 50
 
     now = datetime.datetime.now()
     from_dt = now - datetime.timedelta(days=from_date_days)
@@ -98,6 +98,10 @@ def run(args):
         to_dt=to_dt,
     )
 
+    # client.teacher_profiles
+    # client.lesson_replacements
+    # return
+
     lessons = list(client.get_lessons())
 
     grades = sorted(library.dnevnik.mesh.EDUCATION_LEVELS.keys())
@@ -105,7 +109,7 @@ def run(args):
         for grade in grades:
             client.get_control_forms(lesson.subject_id, grade, log_forms=True)
 
-    for lesson in sorted(lessons):
+    for lesson in sorted(lessons, key=lambda l: l.dt):
         log.info(f'{lesson} {client.get_group_by_id(lesson.group_id)}')
         if args.log_links:
             log.info(f'  Link: {lesson.link}')

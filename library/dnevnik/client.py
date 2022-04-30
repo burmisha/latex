@@ -10,13 +10,15 @@ class ApiUrl:
     GROUPS = '/jersey/api/groups'
     SCHEDULE_ITEMS = '/jersey/api/schedule_items'
     ACADEMIC_YEARS = '/core/api/academic_years'
-    TEACHER_PROFILES = '/core/api/teacher_profiles/{teacher_id}'
+    TEACHER_PROFILE = '/core/api/teacher_profiles/{teacher_id}'
     STUDENT_PROFILES = '/core/api/student_profiles'
     ATTENDANCES = '/core/api/attendances?pid={teacher_id}'
     MARKS_GET = '/core/api/marks'
     MARKS_POST = '/core/api/marks?pid={teacher_id}'
     MARKS_PUT = '/core/api/marks/{mark_id}?pid={teacher_id}'
     CONTROL_FORMS = '/core/api/control_forms'
+    LESSON_REPLACEMENTS = '/jersey/api/lesson_replacements'
+    TEACHER_PROFILES = '/core/api/teacher_profiles'
 
     LMS_LOGIN = '/lms/api/sessions'
     LMS_LOGOUT = '/lms/api/sessions?authentication_token={auth_token}'
@@ -34,9 +36,10 @@ class AuthorizedClient:
             headers=self.headers(add_personal=False),
             json={'login': username, 'password_plain': password}
         ).json()
-        self._profile_id = response['profiles'][0]['id']
+        self.profile_id = response['profiles'][0]['id']
+        self.school_id = response['profiles'][0]['school_id']
         self._auth_token = response['authentication_token']
-        log.info(f'Got profile_id {self._profile_id} and auth_token of len {len(self._auth_token)} for {username} at login')
+        log.info(f'Got profile_id {self.profile_id} and auth_token of len {len(self._auth_token)} for {username} at login')
 
     def _logout(self):
         raise RuntimeError('Logout is disabled as it will require login on all devices')
@@ -64,7 +67,7 @@ class AuthorizedClient:
         if add_personal:
             headers.update({
                 'Auth-Token': self._auth_token,
-                'Profile-Id': str(self._profile_id),
+                'Profile-Id': str(self.profile_id),
             })
         return headers
 

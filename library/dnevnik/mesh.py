@@ -2,7 +2,7 @@
 # https://github.com/KonstantIMP/vega/blob/main/client/auth.py
 
 import datetime
-import datetime
+import functools
 from typing import Optional, List
 
 import logging
@@ -36,6 +36,9 @@ MARKS_LIMIT = 1000
 CONTROL_FORMS_LIMIT = 100
 LESSONS_LIMIT = 100
 STUDENTS_LIMIT = 1000
+TEACHERS_LIMIT = 500
+
+FIRST_PAGE = 1
 
 
 class Client:
@@ -48,7 +51,8 @@ class Client:
         to_dt: datetime.datetime=None,
     ):
         self.authorized_client = AuthorizedClient(username=username, password=password)
-        self.teacher_id = self.authorized_client._profile_id
+        self.teacher_id = self.authorized_client.profile_id
+        self.school_id = self.authorized_client.school_id
 
         self.from_dt = from_dt
         self.to_dt = to_dt
@@ -97,7 +101,9 @@ class Client:
                 'pid': self.teacher_id,
                 'with_assigned_groups': True
             }
-            self._teacher_profile = self.authorized_client.get(ApiUrl.TEACHER_PROFILES.format(teacher_id=self.teacher_id), params)
+            rows = self.authorized_client.get(ApiUrl.TEACHER_PROFILE.format(teacher_id=self.teacher_id), params)
+            assert isinstance(rows, dict)
+            self._teacher_profile = rows
 
         return self._teacher_profile
 
@@ -139,7 +145,7 @@ class Client:
             for group in self.get_groups():
                 params = {
                     'academic_year_id': self.get_current_year().year_id,
-                    'class_unit_ids': class_unit_id_str,
+                    'class_unit_ids': group.class_unit_id_str,
                     'group_ids': group.all_groups_ids,
                     'per_page': STUDENTS_LIMIT,
                     'pid': self.teacher_id,
@@ -153,7 +159,7 @@ class Client:
                 }
                 rows = self.authorized_client.get(ApiUrl.STUDENT_PROFILES, params=params)
                 assert len(rows) < STUDENTS_LIMIT
-                log.info(f'Loaded {len(rows)} students for {group!r}')
+                log.info(f'Loaded {len(rows)} students for {group}')
                 for row in rows:
                     student = Student(
                         student_id=int(row['id']),
@@ -208,7 +214,7 @@ class Client:
             'from': library.datetools.formatTimestamp(self.from_dt, fmt=SCHEDULE_DATE_FMT),
             'to': library.datetools.formatTimestamp(self.to_dt, fmt=SCHEDULE_DATE_FMT),
             'original': True,
-            'page': 1,
+            'page': FIRST_PAGE,
             'per_page': LESSONS_LIMIT,
             'pid': self.teacher_id,
             'teacher_id': self.teacher_id,
@@ -242,7 +248,7 @@ class Client:
             'created_at_from': from_date,
             'created_at_to': to_date,
             'group_ids': group.all_groups_ids,
-            'page': 1,
+            'page': FIRST_PAGE,
             'per_page': limit,
             'pid': self.teacher_id,
         }
@@ -411,7 +417,7 @@ class Client:
             params = {
                 'academic_year_id': self.get_current_year().year_id,
                 'education_level_id': education_level_id,
-                'page': 1,
+                'page': FIRST_PAGE,
                 'per_page': CONTROL_FORMS_LIMIT,
                 'pid': self.teacher_id,
                 'subject_id': subject_id,
@@ -437,6 +443,35 @@ class Client:
             self._control_forms[key] = control_forms
             log.info(f'Loaded {len(control_forms)} active control forms for grade {grade} subject {subject_id}')
         return self._control_forms[key]
+
+    @functools.cached_property
+    def teacher_profiles(self):
+        params = {
+            'profile_id': self.teacher_id,
+            'school_id': self.school_id,
+            'per_page': TEACHERS_LIMIT,
+            'page': FIRST_PAGE,
+        }
+        rows = self.authorized_client.get(ApiUrl.TEACHER_PROFILES, params=params)
+        for row in rows:
+            row_str = [row['name'], row['deleted'], row['class_unit_ids'], row['group_ids'], row['comment'], row['managed_class_unit_ids']]
+            if any(i in row['name'] for i in ['Бурмистров']):
+                log.error(colorize_json(row))
+            log.info(' '.join(str(i) for i in row_str))
+
+        return rows
+
+    @functools.cached_property
+    def lesson_replacements(self):
+        params = {
+            'teacher_id': self.teacher_id,
+            'begin_date': '2020/01/01',
+            'end_date': '2023/12/31',
+        }
+        rows = self.authorized_client.get(ApiUrl.LESSON_REPLACEMENTS, params=params)
+        for row in rows:
+            log.info([row['date'], row['class_unit_name'], row['from']['group_name']])
+        return rows
 
 
 # curl 'https://dnevnik.mos.ru/core/api/lesson_comments?pid=15033420'  --data-raw $'{"schedule_lesson_id":221224612,"student_id":2890790,"comment":"\u041e","teacher_id":15033420,"subject_id":56}'
