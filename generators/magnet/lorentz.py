@@ -24,7 +24,7 @@ class BaseR(variant.VariantTask):
     Индукция магнитного поля равна $B$, масса частицы $m$, её заряд — $q$.
     Выведите из базовых физических законов формулы для радиуса траектории частицы и её {what}.
 ''')
-@variant.solution_space(120)
+@variant.solution_space(80)
 @variant.arg(what=['периода обращения', 'угловой скорости', 'частоты обращения'])
 @variant.answer_short('''
     F = ma, F = qvB, a = v^2 / R \\implies R = \\frac{mv}{qB}.
@@ -110,7 +110,7 @@ class Force17(variant.VariantTask):
     и движется по окружности диаметром {d:V:e}. Сделайте рисунок, определите значение разности потенциалов
     и укажите, в какой области потенциал больше, а где меньше.
 ''')
-@variant.solution_space(100)
+@variant.solution_space(80)
 @variant.arg(particle=['Электрон', 'Позитрон', 'Протон'])
 @variant.arg(B=('B = {} мТл', [20, 40, 50]))
 @variant.arg(d=('d = {} мм', [4, 6, 8]))

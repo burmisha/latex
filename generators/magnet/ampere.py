@@ -71,6 +71,7 @@ class Chernoutsan11_01(variant.VariantTask):
         )
 
 
+@variant.solution_space(80)
 @variant.text('''
     В однородном горизонтальном магнитном поле с индукцией {B:Task|e} находится проводник,
     расположенный также горизонтально и перпендикулярно полю.
