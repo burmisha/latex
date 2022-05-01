@@ -42,7 +42,6 @@ def unarchive(src_file):
         f.write(encoded)
 
 
-
 def run(args):
     files = [
         library.location.root('data', 'marks.yaml'),
@@ -53,7 +52,6 @@ def run(args):
             archive(file)
         else:
             unarchive(file)
-
 
 
 def populate_parser(parser):
