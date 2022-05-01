@@ -3,6 +3,7 @@ import re
 import attr
 from typing import Optional, List
 from library.dnevnik.client import BASE_URL
+from library.datetools import NowDelta
 from library.logging import cm, color
 import json
 
@@ -160,7 +161,7 @@ class ControlForm:
 
     @property
     def rounded_raw_data(self):
-        control_form_str = json.dumps(self.data)
+        control_form_str = json.dumps(self.raw_data)
         control_form_str = control_form_str.replace('.0', '')
         return json.loads(control_form_str)
 
@@ -203,7 +204,7 @@ class NewMark:
     @property
     def point_date_strange(self) -> Optional[str]:
         if self.point_date is None:
-            return library.datetools.NowDelta().After(fmt='%FT%T.000Z', hours=20)
+            return NowDelta().After(fmt='%FT%T.000Z', hours=20)
 
         assert re.match(r'202\d\-\d\d\-\d\d', point_date)
         return f'{new_mark.point_date}T04:12:35.678Z'
