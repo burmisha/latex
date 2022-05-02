@@ -72,6 +72,7 @@ def CreateArgumentsParser():
         ('dnevnik', 'Run mesh tools', tools.dnevnik),
         ('docx2pdf', 'Convert docx files to pdf ones', tools.docx2pdf),
         ('download', 'Download extra files', tools.download),
+        ('ege', 'Check EGE', tools.ege),
         ('generate', 'Generate all LaTeX-files and papers', tools.generate_all),
         ('gforms', 'Create JS scripts for Google Forms', tools.google_forms),
         ('lucky', 'Find lucky pupils', tools.lucky),

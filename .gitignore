@@ -46,6 +46,8 @@ venv
 
 *secret*.json
 *.json
+data/ege.yaml
+data/ege.yaml.1*
 data/marks.yaml
 data/marks.yaml.1*
 data/pupils.yaml

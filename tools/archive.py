@@ -44,6 +44,7 @@ def unarchive(src_file):
 
 def run(args):
     files = [
+        library.location.root('data', 'ege.yaml'),
         library.location.root('data', 'marks.yaml'),
         library.location.root('data', 'pupils.yaml'),
     ]
