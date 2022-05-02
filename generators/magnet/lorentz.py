@@ -114,5 +114,22 @@ class Force17(variant.VariantTask):
 @variant.arg(particle=['Электрон', 'Позитрон', 'Протон'])
 @variant.arg(B=('B = {} мТл', [20, 40, 50]))
 @variant.arg(d=('d = {} мм', [4, 6, 8]))
+@variant.answer_short('''
+    \\frac{mv^2}2 = eU, \\frac{mv^2}R = evB \\implies U = \\frac{mv^2}{2e}
+    = \\frac{m \\sqr{\\frac{eBR}m} }{2e} = \\frac{e B^2 R^2}{2m}
+    = \\frac{ {Consts.e:V} * {B:V|sqr} * {d:V|sqr} }{ 8 {m:V} }
+    \\approx {U:V}.
+''')
+@variant.is_one_arg
 class Force18(variant.VariantTask):
-    pass
+    def GetUpdateOneArg(self, a=None):
+        m = {
+            'Электрон': Consts.m_e,
+            'Позитрон': Consts.m_e,
+            'Протон': Consts.m_p,
+        }[a.particle]
+        U = Consts.e * a.B * a.B * a.d * a.d / 8 / m
+        return dict(
+            U=U,
+            m=m,
+        )
