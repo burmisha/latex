@@ -6,11 +6,15 @@ from library.logging import cm, color
 import logging
 log = logging.getLogger(__name__)
 
-SPLITTER = '|'
+
+EMPTY_ANSWER = '-'
 
 
 def load_n_split(line: str) -> List[str]:
-    return [item.strip() for item in line.split(SPLITTER)]
+    return [
+        item.strip() if item != EMPTY_ANSWER else ''
+        for item in line.split()
+    ]
 
 
 def format_answers(name: str, results: List[library.check.ege.Result], sizes: dict):
@@ -41,9 +45,8 @@ def run(args):
             ('%30s' % 'Номера', numbers_header),
             ('%30s' % 'Ответы', correct_results),
         ]
-        for line_index, answer_line in enumerate(data['answers'], 1):
-            splitted = load_n_split(answer_line)
-            pupil_name, pupil_answers = splitted[0], splitted[1:]
+        for line_index, (pupil_name, answer_line) in enumerate(data['answers'].items(), 1):
+            pupil_answers = load_n_split(answer_line)
             assert len(pupil_answers) == len(correct_answers), f'Invalid answers len for {pupil_name}: {len(pupil_answers)} expecting {len(correct_answers)}: '
             results = []
             for number, (correct, answer) in enumerate(zip(correct_answers, pupil_answers), 1):
