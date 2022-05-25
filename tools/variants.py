@@ -1040,6 +1040,28 @@ def get_all_variants(*, flt=None):
                 ],
             },
         ),
+        Work(
+            task_id='2022-05-24 11БА',
+            classes={
+                'personal.personal': [
+                    'Joke',
+                    'BeforeExam',
+                    'Bucha',
+                    'ExtraExam',
+                    'Formula',
+                    'Advances',
+                    'Who',
+                    'Why',
+                    'JobPresent',
+                    'JobFuture',
+                    'Where',
+                    'Uni',
+                    'Contact',
+                ],
+            },
+            page_splits=[6],
+        ),
+
 
     ]
     if flt:
