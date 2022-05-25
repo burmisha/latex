@@ -4,5 +4,6 @@ import generators.magnet
 import generators.mechanics
 import generators.optics
 import generators.oscillation
+import generators.personal
 import generators.termodynamics
 import generators.variant
