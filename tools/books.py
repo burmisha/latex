@@ -78,6 +78,7 @@ def get_zftsh_books():
         ([(1, 2), (3, 29), (29, 32)], 'Физика 11 - 4 - Электромагнитная индукция и колебания'),
         ([(1, 2), (3, 27), (27, 30)], 'Физика 11 - 5 - Геометрическая оптика'),
         ([(1, 2), (3, 30), (30, 32)], 'Физика 11 - 6 - Физическая оптика и квантовая физика'),
+        ([(1, 2), (3, 29), (30, 31)], '2018 - Математика - 11-4 Показательные и логарифимические'),
     ]
     for parts, file_name in zftsh_config:
         structure = Structure(
@@ -89,7 +90,7 @@ def get_zftsh_books():
             plain=True,
         )
         yield BookConfig(
-            pdf_file=locate_file(library.location.udr('Материалы - ЗФТШ', 'ЗФТШ-2013'), file_name),
+            pdf_file=locate_file(library.location.udr('Материалы - ЗФТШ'), file_name),
             dst_dir=get_dst_path('ЗФТШ', file_name),
             structure=structure,
             ppi=ZFTSH_PPI,
