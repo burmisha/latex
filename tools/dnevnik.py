@@ -4,6 +4,7 @@ import library.files
 
 import locale
 import datetime
+from collections import defaultdict
 
 import logging
 log = logging.getLogger(__name__)
@@ -77,8 +78,8 @@ class MarksUpdater:
 
 
 def get_dt(from_date_days: int, to_date_days: int):
-    assert 0 <= from_date_days <= 50
-    assert 0 <= to_date_days <= 50
+    assert 0 <= from_date_days <= 200
+    assert 0 <= to_date_days <= 200
 
     now = datetime.datetime.now()
     from_dt = now - datetime.timedelta(days=from_date_days)
@@ -114,6 +115,17 @@ def run(args):
         if args.log_links:
             log.info(f'  Link: {lesson.link}')
 
+    if args.show_marks:
+        marks_count = defaultdict(int)
+        for mark in client.get_all_marks():
+            student = client.get_student_by_id(mark.student_id)
+            lesson = client.get_lesson_by_id(mark.lesson_id)
+            marks_count[student.short_name] += 1
+
+        log.info(library.logging.colorize_json(dict(marks_count)))
+        return
+
+
     if args.set_marks:
         for mark in client.get_all_marks():
             student = client.get_student_by_id(mark.student_id)
@@ -137,5 +149,6 @@ def populate_parser(parser):
     parser.add_argument('-t', '--to-date', help='Search lessons to date (in days)', type=int, default=2)
     parser.add_argument('-l', '--log-links', help='Log distant links', action='store_true')
     parser.add_argument('-m', '--set-marks', help='Set marks', action='store_true')
+    parser.add_argument('--show-marks', help='Show marks', action='store_true')
     parser.add_argument('--logout', help='Logout on all devices', action='store_true')
     parser.set_defaults(func=run)
