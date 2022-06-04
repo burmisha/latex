@@ -98,7 +98,7 @@ class Who(variant.VariantTask):
 
 
 @variant.text('''
-    Назовите 3 причины для вас лично вернуться в школу
+    Назовите 3 возможные причины для вас лично вернуться в школу.
 ''')
 @variant.solution_space(60)
 @variant.no_args
