@@ -39,7 +39,7 @@ def run(args):
             correct_result = library.check.ege.check_answer(number, correct, correct)
             correct_results.append(correct_result)
             max_sizes[number] = len(correct_result.correct)
-            numbers_header.append(library.check.ege.Result(1, 1, str(number), str(number)))
+            numbers_header.append(library.check.ege.Result(1, 1, str(number), str(number), colors_by_char=[color.Green] * len(str(number))))
 
         pupil_results = [
             ('%30s' % 'Номера', numbers_header),
