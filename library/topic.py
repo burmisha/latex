@@ -1,5 +1,6 @@
 from fuzzywuzzy import process, fuzz
 import yaml
+import attr
 
 from library.logging import cm, color, one_line_pairs
 import library.location
@@ -12,29 +13,52 @@ import logging
 log = logging.getLogger(__name__)
 
 
-TopicIndex = collections.namedtuple('TopicIndex', ['Grade', 'Part', 'Subpart', 'Index'])
+@attr.s
+class TopicIndex:
+    Grade: int = attr.ib()
+    ChapterIndex: int = attr.ib()
+    PartIndex: int = attr.ib()
+    Index: int = attr.ib()
+    ChapterTitle: str = attr.ib()
+    PartTitle: str = attr.ib()
+    Title: str = attr.ib()
+
+    def __str__(self):
+        index = f'{self.Grade}-{self.ChapterIndex}-{self.PartIndex}-{self.Index}'
+        return f'topic {cm(index, color=color.Cyan)} {cm(self.Title, color=color.Green)}'
 
 
 class TopicDetector:
-    SEARCH_MIN_THRESHOLD = 80
+    SEARCH_MIN_THRESHOLD = 50
     SEARCH_DELTA_MULTIPLIER = 0.95
 
     def __init__(self):
         config = library.files.load_yaml_data('topics.yaml')
 
         self._matcher = collections.defaultdict(list)
-        for grade, parts in config.items():
-            for part_index, subparts in parts.items():
-                for subpart_index, titles in subparts.items():
-                    if isinstance(subpart_index, int):
-                        for index, title in enumerate(titles, 1):
-                            topic_index = TopicIndex(grade, part_index, subpart_index, index)
-                            assert topic_index not in self._matcher[title]
-                            joined_title = ' '.join([subparts.get('name', ''), title]).strip()
-                            self._matcher[joined_title].append(topic_index)
+        for grade, chapters in config.items():
+            for chapter_index, chapter in enumerate(chapters, 1):
+                chapter_name = chapter['name']
+                for part_index, part in enumerate(chapter['parts'], 1):
+                    part_name = part['name']
+                    for index, title in enumerate(part['titles'], 1):
+                        topic_index = TopicIndex(
+                            grade,
+                            chapter_index,
+                            part_index,
+                            index,
+                            chapter_name,
+                            part_name,
+                            title,
+                        )
+                        joined_title = f'{chapter_name} {part_name} {title}'
+                        self._matcher[joined_title].append(topic_index)
 
-        assert self.get_topic_index('Термодинамика - Внутренняя энергия идеального газа') is not None
-        assert self.get_topic_index('Термодинамика - Циклические процессы') is not None
+        assert self.get_topic_index('МКТ и термодинамика Термодинамика Внутренняя энергия идеального газа') is not None
+        assert self.get_topic_index('МКТ и термодинамика Термодинамика Циклические процессы') is not None
+        assert self.get_topic_index('Урок 343 - Затухающие колебания - 1') is not None
+        # assert self.get_topic_index('Задачи на фотоэффект') is not None
+
 
     def get_topic_index(self, title, grade=None):
         assert grade in (7, 8, 9, 10, 11, None)
@@ -92,3 +116,6 @@ class TopicFilter:
             )
 
         return False
+
+
+# TopicDetector()

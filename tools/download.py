@@ -90,10 +90,10 @@ def get_pavel_victor_videos(pavel_victor_config: dict):
         prefix, large_topic = key.split(' ', 1)
         for index, playlist_url in enumerate(playlists, 1):
             youtube_playlist = library.download.youtube.YoutubePlaylist(playlist_url)
+            small_topic, videos = youtube_playlist.ListVideos()
             dirname = f'Павел Виктор - {prefix}-{index} - {large_topic} - {small_topic}'
-            dstdir = library.location.udr('Видео', dirname)
-            small_topic, videos = youtube_playlist.ListVideos(dstdir)
             for video in videos:
+                video.dstdir = library.location.udr('Видео', dirname)
                 yield video
 
 
@@ -127,8 +127,9 @@ def run(args):
         dstdir = library.location.udr('Видео', dirname)
         if not os.path.exists(dstdir):
             os.mkdir(dstdir)
-        _, videos = playlist.ListVideos(dstdir)
+        _, videos = playlist.ListVideos()
         for video in videos:
+            video.dstdir = dstdir
             all_videos.append(video)
 
     for dirname, videos in download_cfg['Explicit'].items():
@@ -158,7 +159,7 @@ def run(args):
 
     if args.sort:
         video_with_topics = [(v, t) for v, t in video_with_topics if t]
-        video_with_topics.sort(key=lambda t: t[1])
+        video_with_topics.sort(key=lambda video_with_topic: video_with_topic[1])
 
     if save_files:
         missing_videos = [video for video in all_videos if not os.path.exists(video.filename)]

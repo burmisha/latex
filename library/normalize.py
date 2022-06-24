@@ -1,4 +1,6 @@
 import library.location
+from library.util.asserts import assert_equals
+
 
 import re
 import textwrap
@@ -15,6 +17,7 @@ class TitleCanonizer:
                 (r'^Физика[\.:] ', ''),
                 (r' Центр онлайн-обучения «Фоксфорд»$', ''),
                 (r'\.$', ''),
+                (r' -$', ''),
                 (r' \(осн\)\.?', '.'),
                 (r'^8 кл - ([0-9]{3})', r'Урок \1'),
                 (r' \(осн, запись 2014 года\)\.', r'.'),
@@ -24,6 +27,7 @@ class TitleCanonizer:
                 (r'[\(\)"\?]', r''),
                 (r'(\. )?[Чч](асть|\.)? *(\d)', r' - \3'),
                 (r'Подготоcка к ЕГЭ по физике. Занятие', r' - '),
+                (r'Подготовка к ЕГЭ по физике. Занятие', r' - '),
                 (r'ВарІант', r'Вариант'),
                 (r'Урок (\d+)\.', r'Урок \1 -'),
                 (r'(\w) [Рр]ешение задач', r'\1 - решение задач'),
@@ -45,8 +49,7 @@ class TitleCanonizer:
 
 
 def test_title_canonizer():
-    title_canonizer = TitleCanonizer()
-    for src, canonic_dst in [
+    data = [
         ('Физика 10 класс  : Второй', '10 класс - Второй'),
         ('Физика 10 класс - Прямолинейное', '10 класс - Прямолинейное'),
         ('Физика 10 класс - Прямолинейное равноускоренное движение', '10 класс - Прямолинейное равноускоренное движение'),
@@ -56,9 +59,11 @@ def test_title_canonizer():
         ('импульса ч.2', 'импульса - 2'),
         ('Закон. Решение задач', 'Закон - решение задач'),
         ('распад Решение задач', 'распад - решение задач'),
-    ]:
-        dst = title_canonizer.Canonize(src)
-        assert dst == canonic_dst, f'Expected {canonic_dst!r}, got {dst!r} from {src!r}'
+        ('ФИЗИКА 10 класс: Бросок под углом горизонта | Видеоурок', '10 класс - Бросок под углом горизонта'),
+    ]
+    title_canonizer = TitleCanonizer()
+    for src, canonic_dst in data:
+        assert_equals('Broken canonizer', canonic_dst, title_canonizer.Canonize(src))
 
 
 test_title_canonizer()

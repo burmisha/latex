@@ -41,11 +41,6 @@ class YoutubeVideo:
         if not value.startswith('https://www.youtube.com/watch?v='):
             raise ValueError(f'Got url {value}')
 
-    @dstdir.validator
-    def is_valid(self, attribute, value):
-        if value and not library.files.is_dir(value):
-            raise ValueError(f'Not dir: {value}')
-
     def __str__(self):
         return f'{cm(self.title, color=color.Yellow)} ({self.url}) from {os.path.basename(self.dstdir)}'
 
@@ -70,6 +65,9 @@ class YoutubeVideo:
 
     @property
     def filename(self):
+        if not library.files.is_dir(self.dstdir):
+            raise ValueError(f'Not dir: {value}')
+
         return os.path.join(self.dstdir, self.basename)
 
 
@@ -137,7 +135,7 @@ class YoutubePlaylist:
 
         raise RuntimeError(f'Could not resolve duplicate {title!r}, check {url}')
 
-    def ListVideos(self, dstdir):
+    def ListVideos(self):
         log.debug(f'Looking for videos in {self}')
         text = requests.get(self.url).text
 
@@ -166,7 +164,6 @@ class YoutubePlaylist:
                     video = YoutubeVideo(
                         url,
                         title_text + suffix,
-                        dstdir=dstdir,
                         mode=Mode.PAFY,
                     )
                     videos.append(video)
