@@ -1,5 +1,4 @@
 import library.files
-from library.normalize import TitleCanonizer
 from library.logging import cm, colorize_json, color
 
 import json
@@ -9,7 +8,7 @@ import requests
 import time
 import attr
 
-from typing import Optional
+from typing import Optional, List, Tuple
 
 log = logging.getLogger(__name__)
 
@@ -44,21 +43,6 @@ class YoutubeVideo:
     def __str__(self):
         return f'{cm(self.title, color=color.Yellow)} ({self.url}) from {os.path.basename(self.dstdir)}'
 
-    def get_best_stream(self, preftype=None, sleepTime=1200):
-        log.debug(f'Searching best stream for {self}')
-        ok = False
-        while not ok:
-            try:
-                video = pafy.new(self.url)
-                ok = True
-            except IndexError:
-                log.exception('Failed to get best stream')
-                log.info(f'Sleeping for {sleepTime} seconds')
-                time.sleep(sleepTime)
-        best_stream = video.getbest(preftype=preftype)
-        log.info(f'Streams: {video.streams}, best stream: {best_stream}')
-        return best_stream
-
     @property
     def basename(self):
         return f'{self.title}.{self.extension}'
@@ -71,7 +55,23 @@ class YoutubeVideo:
         return os.path.join(self.dstdir, self.basename)
 
 
-def download_video(video: YoutubeVideo) -> Optional[Exception]:
+def get_best_stream(video: YoutubeVideo, sleepTime=1200):
+    log.debug(f'Searching best stream for {video}')
+    ok = False
+    while not ok:
+        try:
+            pafy_video = pafy.new(video.url)
+            ok = True
+        except IndexError:
+            log.exception('Failed to create pafy video')
+            log.info(f'Sleeping for {sleepTime} seconds')
+            time.sleep(sleepTime)
+    best_stream = pafy_video.getbest(preftype=video.preftype)
+    log.info(f'Streams: {pafy_video.streams}, best stream: {best_stream}')
+    return best_stream
+
+
+def download_video() -> Optional[Exception]:
     try:
         log.info(f'Downloading {video}...')
         if video.mode == Mode.REQUESTS:
@@ -102,7 +102,6 @@ def download_video(video: YoutubeVideo) -> Optional[Exception]:
 @attr.s
 class YoutubePlaylist:
     url: str = attr.ib()
-    title_canonizer: Optional[TitleCanonizer] = attr.ib(default=TitleCanonizer())
 
     @url.validator
     def is_valid(self, attribute, value):
@@ -135,8 +134,7 @@ class YoutubePlaylist:
 
         raise RuntimeError(f'Could not resolve duplicate {title!r}, check {url}')
 
-    def ListVideos(self):
-        log.debug(f'Looking for videos in {self}')
+    def _fast_url_title(self):
         text = requests.get(self.url).text
 
         start_expression = 'var ytInitialData ='
@@ -145,31 +143,37 @@ class YoutubePlaylist:
         end_pos = text.find(end_expression, start_pos)
         js_data = text[start_pos:end_pos].strip().strip(';')
         loaded = json.loads(js_data)
-        playlistTitle = loaded['metadata']['playlistMetadataRenderer']['title']
+        self.playlistTitle = loaded['metadata']['playlistMetadataRenderer']['title']
         contentItems = loaded['contents']['twoColumnBrowseResultsRenderer']['tabs'][0]['tabRenderer']['content']['sectionListRenderer']['contents'][0]['itemSectionRenderer']['contents'][0]['playlistVideoListRenderer']['contents']
 
         content_items = [item for item in contentItems if 'playlistVideoRenderer' in item]
-        videos = []
         for index, contentItem in enumerate(content_items, 1):
             try:
                 index_text = int(contentItem['playlistVideoRenderer']['index']['simpleText'])
                 assert index_text == index, f'Got index {index_text} instead of {index}'
                 video_id = contentItem['playlistVideoRenderer']['videoId']
                 title_text = contentItem['playlistVideoRenderer']['title']['runs'][0]['text']
-                title_text = self.title_canonizer.Canonize(title_text)
                 url = f'https://www.youtube.com/watch?v={video_id}'
-
-                is_unique, suffix = self.get_unique_suffix(videos, title_text, url)
-                if is_unique:
-                    video = YoutubeVideo(
-                        url,
-                        title_text + suffix,
-                        mode=Mode.PAFY,
-                    )
-                    videos.append(video)
+                yield url, title_text
             except:
                 log.error(f'Error on {colorize_json(contentItem)} in {self}')
                 raise
 
-        log.info(f'Found {len(videos)} unique videos for \'{playlistTitle}\' in {self}')
-        return playlistTitle, videos
+    def _slow_url_title(self):
+        pl = pytube.Playlist(self.url)
+        self.playlistTitle = pl.title
+        for pl_video in pl.videos:
+            url = pl_video.watch_url.replace('https://youtube.com', 'https://www.youtube.com')
+            yield url, pl_video.title
+
+    def ListVideos(self) -> Tuple[str, List[YoutubeVideo]]:
+        log.info(f'Looking for videos in {self}')
+        videos = []
+        for url, title in self._fast_url_title():
+            is_unique, suffix = self.get_unique_suffix(videos, title, url)
+            if is_unique:
+                video = YoutubeVideo(url, title + suffix, mode=Mode.PAFY)
+                videos.append(video)
+
+        log.info(f'Found {len(videos)} unique videos for {self.playlistTitle!r} in {self}')
+        return self.playlistTitle, videos

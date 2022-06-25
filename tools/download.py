@@ -1,4 +1,5 @@
 import library.download
+import library.normalize
 from library.logging import cm, color
 from typing import List, Optional
 import multiprocessing
@@ -9,42 +10,6 @@ import os
 
 import logging
 log = logging.getLogger(__name__)
-
-
-def clean_title(title: str) -> str:
-    for src, dst in [
-        (' @Продолжение следует', ''),
-        ('?', '.'),
-        ('@', ''),
-        ('*', ''),
-        ('№', ''),
-        ('«', ''),
-        ('»', ''),
-        (' 18+', ''),
-        ('18+', ''),
-        (': ', ' - '),
-        ('–', '-'),
-        ('—', '-'),
-        ('/', ' ',),
-        ('(', '',),
-        (')', '',),
-        ('#', '',),
-        ('$', '',),
-        ('%', '',),
-        ('^', '',),
-        ('&', '',),
-        (' .', '.'),
-        ('..', ' '),
-        ('  ', ' '),
-        ('  ', ' '),
-        ('  ', ' '),
-        ('..', ''),
-        ('"', ''),
-        ('…', ''),
-    ]:
-        title = title.replace(src, dst)
-
-    return title
 
 
 @attr.s
@@ -68,7 +33,7 @@ def get_videos_from_channel(channel_config: ChannelConfig):
     channel = pytube.Channel(channel_config.url)
     index = 0
     for index, video in enumerate(channel.videos, 1):
-        title = clean_title(video.title.strip())
+        title = canonizer.Canonize(video.title.strip())
         filename = f'{video.publish_date.strftime("%F")} - {title}'
         if not channel_config.matches(title):
             log.info(f'  skip {cm(filename, color=color.Green)}')
@@ -103,8 +68,8 @@ def run(args):
     download_cfg = library.files.load_yaml_data('download.yaml')
 
     if save_files and add_pavel_victor:
-        log.error('Could not download Павел Виктор videos from save as there\'re too many large videos')
-        raise RuntimeError('Could not save all videos')
+        log.error('Could not save Павел Виктор videos as there\'re too many large videos')
+        raise ValueError('Could not save all videos')
 
     all_videos = []
 
@@ -149,6 +114,11 @@ def run(args):
 
     log.info(f'Got total of {len(all_videos)} videos')
 
+
+    canonizer = library.normalize.TitleCanonizer()
+    for video in all_videos:
+        video.title = canonizer.Canonize(video.title)
+
     topic_detector = library.topic.TopicDetector()
     topic_filter =  library.topic.TopicFilter(args.filter)
 
@@ -163,9 +133,9 @@ def run(args):
 
     if save_files:
         missing_videos = [video for video in all_videos if not os.path.exists(video.filename)]
+        threads_count = args.threads
+        log.info(f'Downloading {len(missing_videos)} videos in {threads_count} threads:')
         if missing_videos:
-            threads_count = args.threads
-            log.info(f'Downloading {len(missing_videos)} videos in {threads_count} threads:')
             for video in missing_videos:
                 log.info(f'  {video}')
             pool = multiprocessing.Pool(processes=threads_count)
@@ -173,7 +143,7 @@ def run(args):
 
             failed_videos_count = sum(1 for r in results if r)
             if failed_videos_count:
-                raise RuntimeError(f'Got {failed_videos_count} failed videos:')
+                raise RuntimeError(f'Got {failed_videos_count} failed videos')
     else:
         for video, topic_index in video_with_topics:
             if topic_filter.matches(topic_index):

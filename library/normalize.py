@@ -11,41 +11,57 @@ log = logging.getLogger(__name__)
 
 class TitleCanonizer:
     def __init__(self, replacements=None):
-        if replacements is None:
-            log.debug('Using default replacements')
-            replacements = [
-                (r'^Физика[\.:] ', ''),
-                (r' Центр онлайн-обучения «Фоксфорд»$', ''),
-                (r'\.$', ''),
-                (r' -$', ''),
-                (r' \(осн\)\.?', '.'),
-                (r'^8 кл - ([0-9]{3})', r'Урок \1'),
-                (r' \(осн, запись 2014 года\)\.', r'.'),
-                (r' \| Видеоурок', r''),
-                (r' \| ', r' и '),
-                (r'\((\w+)\)', r'- \1 -'),
-                (r'[\(\)"\?]', r''),
-                (r'(\. )?[Чч](асть|\.)? *(\d)', r' - \3'),
-                (r'Подготоcка к ЕГЭ по физике. Занятие', r' - '),
-                (r'Подготовка к ЕГЭ по физике. Занятие', r' - '),
-                (r'ВарІант', r'Вариант'),
-                (r'Урок (\d+)\.', r'Урок \1 -'),
-                (r'(\w) [Рр]ешение задач', r'\1 - решение задач'),
-                (r'\. [Рр]ешение задач', r' - решение задач'),
-                (r'[Фф]..... +(\d\d?) +класс *([:.-] *)?(\w)', r'\1 класс - \3'),
-                (r':', r' - '),
-                (r'  +', ' '),
-                (r'ур-ни', r'уравнени'),
-            ]
+        self._regex_replacements = [
+            (r'^Физика[\.:] +', ''),
+            (r' Центр онлайн-обучения «Фоксфорд»$', ''),
+            (r'\.$', ''),
+            (r' -$', ''),
+            (r' \(осн\)\.?', '.'),
+            (r'^8 кл - ([0-9]{3})', r'Урок \1'),
+            (r' \(осн, запись 2014 года\)\.', r'.'),
+            (r' \| Видеоурок', r''),
+            (r' \| ', r' и '),
+            (r'\((\w+)\)', r'- \1 -'),
+            (r'[\(\)"\?]', r''),
+            (r'(\. )?[Чч](асть|\.)? *(\d)', r' - \3'),
+            (r'Подгото.ка к ЕГЭ по физике. Занятие', r' - '),
+            (r'ВарІант', r'Вариант'),
+            (r'Урок (\d+)\.', r'Урок \1 -'),
+            (r'(\w) [Рр]ешение задач', r'\1 - решение задач'),
+            (r'\. [Рр]ешение задач', r' - решение задач'),
+            (r'[Фф]..... +(\d\d?) +класс *([:.-] *)?(\w)', r'\1 класс - \3'),
+            (r':', r' - '),
+            (r'  +', ' '),
+            (r'ур-ни', r'уравнени'),
+            (r'Центр онлайн-обучения «Фоксфорд»', ''),
+            (r'[\?@\*№«»\\\[\]\(\)#\$%\^&"…!]', ''),
+            (r'[–—]', '-'),
+            (r' +', ' '),
+            (r'\.+', '.'),
+        ]
 
-        self._Replacements = replacements
+        self._replacements = [
+            ('@Продолжение следует', ''),
+            ('18+', ''),
+            (': ', ' - '),
+            ('/', ' ',),
+            (' .', '.'),
+            ('- -', '-'),
+        ]
+
 
     def Canonize(self, title):
-        canonized = str(title)
-        for pattern, replacement in self._Replacements:
+        canonized = str(title).strip()
+
+        for pattern, replacement in self._replacements:
+            canonized = canonized.replace(pattern, replacement)
+            canonized = canonized.strip()
+
+        for pattern, replacement in self._regex_replacements:
             canonized = re.sub(pattern, replacement, canonized)
-        canonized = canonized.strip()
-        return canonized
+            canonized = canonized.strip()
+
+        return canonized.strip('.').strip()
 
 
 def test_title_canonizer():
@@ -60,6 +76,8 @@ def test_title_canonizer():
         ('Закон. Решение задач', 'Закон - решение задач'),
         ('распад Решение задач', 'распад - решение задач'),
         ('ФИЗИКА 10 класс: Бросок под углом горизонта | Видеоурок', '10 класс - Бросок под углом горизонта'),
+        ('123][/")(\\', '123'),
+        ('1?@*№«»\\[]()#$%^&', '1'),
     ]
     title_canonizer = TitleCanonizer()
     for src, canonic_dst in data:
@@ -124,8 +142,3 @@ def test_format_plain_text():
 
 
 test_format_plain_text()
-
-
-# with open(library.location.root('data', '1.txt')) as f:
-#     s = f.read()
-#     print(format_plain_text(s))
