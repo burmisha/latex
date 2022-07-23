@@ -14,7 +14,6 @@ def runTemplate(args):
     ipadTemplate = library.location.udr('Шаблоны', 'template-2-columns.docx')
     one_column_template = library.location.udr('Шаблоны', 'template-1-column.docx')
 
-    fileCopier = library.files.FileCopier(ipadTemplate, destination_dir=library.location.udr('11 класс', 'Вишнякова'))
     one_column = library.files.FileCopier(one_column_template, destination_dir=library.location.udr('11 класс', 'Вишнякова'))
     chapters = [
         # '1.1 - Кинематика',
@@ -54,7 +53,12 @@ def runTemplate(args):
         # '2021-10-26',
         # '2021-10-28',
         # '2022-03-24',
-        '2022-04-25',
+        # '2022-04-25',
+        # '2022-07-11',
+        # '2022-07-13',
+        # '2022-07-15',
+        # '2022-07-18',
+        # '2022-07-20',
     ]:
         if nowFmt <= date <= futureFmt:
             ipadCopier.CreateFile(library.location.ipad('2021-22 Кружок', f'{date} Кружок.docx'))
@@ -62,36 +66,30 @@ def runTemplate(args):
             log.info(f'Skipping {date}')
 
     textbookTemplate = library.location.udr('Шаблоны', 'Рабочая тетрадь - Шаблон.docx')
-    for class_dir, filenames in {
-        '9 класс': [
-        ],
-        '10 класс': [
-            '10-1 - Кинематика',
-            '10-2 - Динамика',
-            '10-3 - Законы сохранения',
-            '10-4 - Статика и гидростатика',
-            '10-5 - Повторение механики',
-            '10-6 - МКТ',
-            '10-7 - Термодинамика',
-            '10-8 - Электростатика',
-            '10-9 - Постоянный ток',
-        ],
-        '11 класс': [
-            '11-1 - Магнитное поле',
-            '11-2 - Электромагнитная индукция',
-            '11-3 - Механические колебания',
-            '11-4 - Электромагнитные колебания',
-            '11-5 - Механические и ЭМ волны',
-            '11-6 - Световые волны - Геометрическая оптика',
-            '11-6 - Световые волны - Волновая оптика',
-            '11-7 - Элементы теории относительности',
-            '11-8 - Квантовая физика',
-            '11-9 - Астрономия',
-        ],
-    }.items():
+    for filename in [
+        '10-1 - Кинематика',
+        '10-2 - Динамика',
+        '10-3 - Законы сохранения',
+        '10-4 - Статика и гидростатика',
+        '10-5 - Повторение механики',
+        '10-6 - МКТ',
+        '10-7 - Термодинамика',
+        '10-8 - Электростатика',
+        '10-9 - Постоянный ток',
+        '11-1 - Магнитное поле',
+        '11-2 - Электромагнитная индукция',
+        '11-3 - Механические колебания',
+        '11-4 - Электромагнитные колебания',
+        '11-5 - Механические и ЭМ волны',
+        '11-6 - Световые волны - Волновая оптика',
+        '11-6 - Световые волны - Геометрическая оптика',
+        '11-7 - Элементы теории относительности',
+        '11-8 - Квантовая физика',
+        '11-9 - Астрономия',
+    ]:
+        class_dir = filename.split('-', 1)[0] + ' класс'
         copier = library.files.FileCopier(textbookTemplate, destination_dir=library.location.udr(class_dir))
-        for filename in filenames:
-            copier.CreateFile(f'{filename} - Рабочая тетрадь.docx')
+        copier.CreateFile(f'{filename} - Рабочая тетрадь.docx')
 
 
     ipad_distant = library.location.ipad('2021 дистант')
@@ -151,5 +149,5 @@ def runTemplate(args):
 
 
 def populate_parser(parser):
-    parser.add_argument('-t', '--today', help='Today appers are ready, move them too', action='store_true')
+    parser.add_argument('-t', '--today', help='Today papers are ready, move them too', action='store_true')
     parser.set_defaults(func=runTemplate)
