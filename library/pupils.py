@@ -154,10 +154,10 @@ class NamesPicker:
     def __init__(self, pupils_file):
         config = library.files.load_yaml_data(pupils_file)
         cfg = collections.defaultdict(list)
-        for name, classes_names in config.items():
-            if name.endswith(' - 2') or name.endswith(' - 3'):
-                name = name[:-4]
-            for class_name in classes_names:
+        for row in config:
+            parts = [part.strip() for part in row.split(',')]
+            name = parts[0]
+            for class_name in parts[1:]:
                 assert name not in cfg[class_name]
                 cfg[class_name].append(name)
 
