@@ -1,19 +1,80 @@
 import library.datetools
 import library.files
+from library.pupils import get_study_year
 
+from typing import Iterable
 import itertools
+import datetime
 
 import logging
 log = logging.getLogger(__name__)
 
 import os
+import shutil
+
+AFTER_DAYS = 12
+
+
+class LessonPaper:
+    def __init__(self, name: str):
+        if ('/' in name) or (name.count('.') > 1) or (not library.files.path_is_ok(name)):
+            raise RuntimeError(f'Invalid lesson paper: {name}')
+        self._name = name.split('.', 1)[0]
+        self.dt = datetime.datetime.strptime(name[:10], '%Y-%m-%d')
+
+    @property
+    def year_plus_one(self):
+        study_year = get_study_year(self._name)
+        return f'{study_year}-' + f'{study_year+1}'[2:]
+
+    @property
+    def ipad_dirname(self) -> str:
+        return f'{self.year_plus_one} Дистант'
+
+    @property
+    def basename(self) -> str:
+        return f'{self._name}.docx'
+
+    @property
+    def ipad_location(self) -> str:
+        return os.path.join(self.ipad_dirname, self.basename)
+
+    @property
+    def ready_location(self) -> str:
+        pupils = library.pupils.get_class_from_string(self._name)
+        if pupils is None:
+            if ('ужок' not in self.basename) and ('амена' not in self.basename):
+                raise RuntimeError(f'Invalid {self._name}')
+            dst_dir = os.path.join('12 - кружок - 9-10-11', f'{self.year_plus_one} Кружок и допы')
+        else:
+            dst_dir = pupils.get_path(archive=True)
+        return os.path.join(dst_dir, self.basename)
+
+
+class TemplateConfig:
+    def __init__(self, data: dict):
+        self._data = data
+
+    @property
+    def lesson_papers(self) -> Iterable[LessonPaper]:
+        for row in self._data['ipad']:
+            yield LessonPaper(row)
 
 
 def runTemplate(args):
     nowDelta = library.datetools.NowDelta()
-    ipadTemplate = library.location.udr('Шаблоны', 'template-2-columns.docx')
-    one_column_template = library.location.udr('Шаблоны', 'template-1-column.docx')
+    template_config = TemplateConfig(library.files.load_yaml_data('template.yaml'))
 
+    now = datetime.datetime.now()
+    future = now + datetime.timedelta(days=AFTER_DAYS)
+
+    ipadTemplate = library.location.udr('Шаблоны', 'template-2-columns.docx')
+    ipadCopier = library.files.FileCopier(ipadTemplate)
+    for lesson_paper in template_config.lesson_papers:
+        if now <= lesson_paper.dt <= future:
+            ipadCopier.CreateFile(library.location.ipad(lesson_paper.ipad_location))
+
+    one_column_template = library.location.udr('Шаблоны', 'template-1-column.docx')
     one_column = library.files.FileCopier(one_column_template, destination_dir=library.location.udr('11 класс', 'Вишнякова'))
     chapters = [
         # '1.1 - Кинематика',
@@ -41,29 +102,6 @@ def runTemplate(args):
     for chapter, course in itertools.product(chapters, courses):
         one_column.CreateFile(f'Вишнякова - {chapter} - {course} - решения.docx')
 
-    ipadCopier = library.files.FileCopier(ipadTemplate)
-
-    nowFmt = nowDelta.Now(fmt='%F')
-    futureFmt = nowDelta.After(days=12, fmt='%F')
-
-    for date in [
-        # '2020-10-17',
-        # '2020-12-05',
-        # '2020-12-12',
-        # '2021-10-26',
-        # '2021-10-28',
-        # '2022-03-24',
-        # '2022-04-25',
-        # '2022-07-11',
-        # '2022-07-13',
-        # '2022-07-15',
-        # '2022-07-18',
-        # '2022-07-20',
-    ]:
-        if nowFmt <= date <= futureFmt:
-            ipadCopier.CreateFile(library.location.ipad('2021-22 Кружок', f'{date} Кружок.docx'))
-        else:
-            log.info(f'Skipping {date}')
 
     textbookTemplate = library.location.udr('Шаблоны', 'Рабочая тетрадь - Шаблон.docx')
     for filename in [
@@ -91,61 +129,34 @@ def runTemplate(args):
         copier = library.files.FileCopier(textbookTemplate, destination_dir=library.location.udr(class_dir))
         copier.CreateFile(f'{filename} - Рабочая тетрадь.docx')
 
-
-    ipad_distant = library.location.ipad('2021 дистант')
-    distantCopier = library.files.FileCopier(
-        ipadTemplate,
-        destination_dir=ipad_distant
-    )
-    for dateClass in [
-        # '2020-10-20-10', '2020-10-20-9', '2020-10-22-9', '2020-10-22-10', '2020-10-23-10',  # week 2-1
-        # '2020-10-27-10', '2020-10-27-9', '2020-10-29-9', '2020-10-29-10', '2020-10-30-10', '2020-10-30-8', # week 2-2
-        # '2020-11-03-10', '2020-11-03-9', '2020-11-05-9', '2020-11-05-10', '2020-11-06-10',  # week 2-4
-        #                                  '2020-11-12-9', '2020-11-12-10', '2020-11-13-10',  # week 2-3 is missing some lessons
-        # '2020-11-17-10', '2020-11-17-9', '2020-11-19-9', '2020-11-19-8',                    # week 2-5
-        # '2020-11-24-10', '2020-11-24-9', '2020-11-26-9', '2020-11-26-10', '2020-11-27-10'  # week 3-1
-        # '2020-12-01-10', '2020-12-01-9', '2020-12-03-9', '2020-12-03-10', '2020-12-04-10'  # week 3-2
-        # '2020-12-08-10', '2020-12-08-9', '2020-12-10-9', '2020-12-10-10', '2020-12-11-10'  # week 3-3
-        # '2020-12-15-10', '2020-12-15-9', '2020-12-17-9', '2020-12-17-10', '2020-12-18-10'  # week 3-4
-        # '2020-12-22-10', '2020-12-22-9', '2020-12-24-9', '2020-12-24-10', '2020-12-25-10'  # week 3-5
-        # '2021-06-09-10', '2021-06-16-10', '2021-06-23-10', '2021-06-30-10',
-    ]:
-        if nowFmt <= dateClass <= futureFmt:
-            distantCopier.CreateFile(f'{dateClass} - занятие.docx')
-        else:
-            log.info(f'Skipping {dateClass}: {nowFmt}, {futureFmt}')
-
     zoomRenamer = library.files.ZoomRenamer(library.files.Location.Zoom)
     for dir_name in library.files.walkFiles(library.files.Location.Zoom, dirsOnly=True, regexp='.*2198986972$'):
         zoomRenamer.RenameOne(dir_name)
 
-    last_date = nowDelta.Before(days=0 if args.today else 1, fmt='%F')
-    first_date = nowDelta.Before(days=32, fmt='%F')
-    fileMover = library.files.FileMover()
-    fileMover.Move(
-        source=library.location.ipad('2020-21 Кружок'),
-        destination=library.location.udr('12 - кружок - 9-10-11'),
-        re='.*[Кк]ружок( по математике)?.docx$',
-        matching=lambda b: first_date <= b[:10] <= last_date,
-    )
-    fileMover.Move(
-        source=ipad_distant,
-        destination=library.location.udr('10 класс', '2020-21 10АБ Физика'),
-        re='^....-..-..-10 .* с урока.*\.docx$',
-        matching=lambda b: first_date <= b[:10] <= last_date,
-    )
-    fileMover.Move(
-        source=ipad_distant,
-        destination=library.location.udr('9 класс', '2020-21 9М Физика'),
-        re='^....-..-..-9 .* с урока.*\.docx$',
-        matching=lambda b: first_date <= b[:10] <= last_date,
-    )
-    fileMover.Move(
-        source=ipad_distant,
-        destination=library.location.udr('8 класс', '2020-21 Архив'),
-        re='^....-..-..-8 .* с урока.*\.docx$',
-        matching=lambda b: first_date <= b[:10] <= last_date,
-    )
+    last_date = now - datetime.timedelta(days=0 if args.today else 1)
+
+    ipad_dirnames = {
+        lesson_paper.ipad_dirname
+        for lesson_paper in template_config.lesson_papers
+    }
+    ipad_files = [
+        filename
+        for ipad_dirname in ipad_dirnames
+        for filename in library.files.walkFiles(
+            library.location.ipad(ipad_dirname),
+            extensions=['.docx']
+        )
+    ]
+    for src_file in ipad_files:
+        lesson_paper = LessonPaper(os.path.basename(src_file))
+        if lesson_paper.dt <= last_date:
+            dst_file = library.location.udr(lesson_paper.ready_location)
+            if os.path.exists(dst_file):
+                raise RuntimeError(f'Exists {dst_file}')
+            log.info(f'Moving file {src_file!r} to {dst_file!r}')
+            shutil.move(src_file, dst_file)
+        else:
+            log.info(f'Skipping ipad file: {src_file}')
 
 
 def populate_parser(parser):

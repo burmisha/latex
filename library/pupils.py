@@ -7,6 +7,8 @@ import library.files
 import library.location
 import library.picker
 
+from typing import Optional
+
 import logging
 log = logging.getLogger(__name__)
 
@@ -187,17 +189,7 @@ class NamesPicker:
 names_picker = NamesPicker('pupils.yaml')
 
 
-def get_class_from_string(value, addMyself=False, onlyMe=False):
-    search_by_id = names_picker.get(value)
-    if search_by_id:
-        return search_by_id
-
-    assert isinstance(value, str), f'Trying to search not by str: {value!r}'
-    assert ' ' in value, f'No space in class name: {value!r}'
-
-    parts = value.split()
-    date_part, class_part = parts[0], parts[1]
-
+def get_study_year(date_part: str) -> int:
     year = int(date_part[:4])
     if re.match(r'20\d\d[\.-]\d{2}[\.-]\d{2}', date_part):
         if int(date_part[5:7]) <= 8:  # Aug
@@ -210,14 +202,39 @@ def get_class_from_string(value, addMyself=False, onlyMe=False):
         pass
     else:
         raise RuntimeError(f'Could not guess class from {value}: {date_part} {class_part} {year}')
+    return year
+
+
+assert get_study_year('2020-09-01') == 2020
+assert get_study_year('2021-09-01') == 2021
+assert get_study_year('2021-08-31') == 2020
+assert get_study_year('2021') == 2021
+assert get_study_year('2021-22') == 2021
+assert get_study_year('2021-2022') == 2021
+
+
+def get_class_from_string(value, addMyself=False, onlyMe=False) -> Optional[Pupils]:
+    search_by_id = names_picker.get(value)
+    if search_by_id:
+        return search_by_id
+
+    assert isinstance(value, str), f'Trying to search not by str: {value!r}'
+    assert ' ' in value, f'No space in class name: {value!r}'
+
+    value = value.split('.', 1)[0]
+    parts = value.split()
+    date_part, class_part = parts[0], parts[1]
+    study_year = get_study_year(date_part)
 
     if (len(parts)) >= 3 and (len(parts[2]) <= 2):
-        key = f'{year} {class_part} {parts[2]}'
+        key = f'{study_year} {class_part} {parts[2]}'
     else:
-        key = f'{year} {class_part}'
+        key = f'{study_year} {class_part}'
 
     pupils = names_picker.get(key)
-    assert pupils, f'Could not find pupils by key {value!r}: got key {key!r}'
+    if not pupils:
+        log.info(f'Could not find pupils by key {value!r}: got key {key!r}')
+        return None
 
     log.debug(f'Got {pupils} (search by: {key!r})')
     return pupils
@@ -229,3 +246,7 @@ assert get_class_from_string('2022-01-31 11 БА')
 assert get_class_from_string('2022-01-31 11БА')
 assert get_class_from_string('2022-01-31 11 Б')
 assert get_class_from_string('2022-01-31 11Б')
+assert get_class_from_string('2021-04-30 10')._id == '2020-10-АБ'
+assert get_class_from_string('2021-04-30 10.docx')._id == '2020-10-АБ'
+assert get_class_from_string('2021-04-30 10 класс.docx')._id == '2020-10-АБ'
+assert get_class_from_string('2021-06-30 10 - занятие.docx')._id == '2020-10-АБ'

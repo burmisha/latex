@@ -241,30 +241,6 @@ class ZoomRenamer:
         shutil.move(dir_name, dst_dir)
 
 
-class FileMover:
-    def __init__(self, prefix=None):
-        self._prefix = prefix
-
-    def Move(self, re=None, source=None, destination=None, matching=None):
-        src_list = [i for i in [self._prefix, source] if i]
-        dst_list = [i for i in [self._prefix, source, destination] if i]
-        src_dir = os.path.join(*src_list).replace(BROKEN_Y, PROPER_Y)
-        dst_dir = os.path.join(*dst_list).replace(BROKEN_Y, PROPER_Y)
-        log.info(f'Moving files from {src_dir} (recursive) to {dst_dir} (flat) by re {re}')
-        assert is_dir(src_dir)
-        assert is_dir(dst_dir)
-        for src_file in walkFiles(source, regexp=re):
-            assert is_file(src_file)
-            basename = os.path.basename(src_file)
-            if matching is None or matching(basename):
-                dst_file = os.path.join(dst_dir, basename)
-                assert not os.path.exists(dst_file), f'Exists {dst_file}'
-                log.info(f'Moving file {basename!r} to {dst_file}')
-                shutil.move(src_file, dst_file)
-            else:
-                log.debug(f'File {basename!r} does not match')
-
-
 class ZippedCsv:
     def __init__(self, filename):
         assert filename.endswith('.csv.zip')
