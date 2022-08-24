@@ -370,6 +370,7 @@ Playlists:
     'OnliSkill - 10 класс': 'https://www.youtube.com/playlist?list=PLRqVDT_WVZRkKOQFruLNC1v74_jTp6LzW'
     'OnliSkill - 11 класс': 'https://www.youtube.com/playlist?list=PLRqVDT_WVZRkCHtZmveDa9z3G1IiPpisi'
 
+
 PavelVictor:
     '07 7 класс':
         - https://www.youtube.com/playlist?list=PLYLAAGsAQhw9TcTQiq-EZeVuVPc6P8PSX
@@ -426,3 +427,12 @@ PavelVictor:
         - https://www.youtube.com/playlist?list=PLYLAAGsAQhw9nEvX4BxcRMTRffGvIzMis  # Физическая оптика
         - https://www.youtube.com/playlist?list=PLYLAAGsAQhw-1grjrzQxwUBhI7Qy-zS0D  # Атомная физика
         - https://www.youtube.com/playlist?list=PLYLAAGsAQhw_sm3UrSTHX4EPZZJjBsoTs  # Физика ядра
+    '12 Готовимся к олимпиадам':
+        # https://www.youtube.com/c/pvictor54/playlists?view=50&sort=dd&shelf_id=6
+        - https://www.youtube.com/playlist?list=PL1Us50cZo25mT6jEWT_9AOJYbhZwBcVYL
+        - https://www.youtube.com/playlist?list=PL1Us50cZo25k57MiCXlO7UnU565hj5qO5
+        - https://www.youtube.com/playlist?list=PL1Us50cZo25lGR4vCVsobxf59SEpyDKyA
+        - https://www.youtube.com/playlist?list=PL1Us50cZo25nW7sPBEMl4OoCJLLAYpfkJ
+        - https://www.youtube.com/playlist?list=PL1Us50cZo25lFAQNLYsDGQWzSVSDMZjqC
+    '12 Solving problems - basic level':
+        - https://www.youtube.com/playlist?list=PL1Us50cZo25kR4P9lmmm03iciiUrrkoGe

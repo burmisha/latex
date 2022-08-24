@@ -41,7 +41,7 @@ class YoutubeVideo:
             raise ValueError(f'Got url {value}')
 
     def __str__(self):
-        return f'{cm(self.title, color=color.Yellow)} ({self.url}) from {os.path.basename(self.dstdir)}'
+        return f'{cm(self.title, color=color.Yellow)} ({self.url}) from {cm(os.path.basename(self.dstdir), color=color.Yellow)}'
 
     @property
     def basename(self):
@@ -66,21 +66,21 @@ def get_best_stream(video: YoutubeVideo, sleepTime=1200):
             log.exception('Failed to create pafy video')
             log.info(f'Sleeping for {sleepTime} seconds')
             time.sleep(sleepTime)
-    best_stream = pafy_video.getbest(preftype=video.preftype)
+    best_stream = pafy_video.getbest(preftype=video.extension)
     log.info(f'Streams: {pafy_video.streams}, best stream: {best_stream}')
     return best_stream
 
 
-def download_video() -> Optional[Exception]:
+def download_video(video) -> Optional[Exception]:
+    log.info(f'Downloading {video}...')
     try:
-        log.info(f'Downloading {video}...')
         if video.mode == Mode.REQUESTS:
-            best_stream = video.get_best_stream(preftype=video.extension)
+            best_stream = get_best_stream(video=video)
             data = requests.get(best_stream.url).content
             with open(video.filename, 'wb') as f:
                 f.write(data)
         elif video.mode == Mode.PAFY:
-            best_stream = video.get_best_stream(preftype=video.extension)
+            best_stream = get_best_stream(video=video)
             best_stream.download(filepath=video.filename)
         elif video.mode == Mode.PYTYBE:
             streams = pytube.YouTube(video.url).streams
@@ -93,8 +93,16 @@ def download_video() -> Optional[Exception]:
         log.info(f'Downloaded {video}')
     except KeyboardInterrupt:
         log.error(f'Download cancelled: {video}')
+        if os.path.exists(video.filename):
+            os.remove(video.filename)
     except Exception as e:
-        log.exception(f'Failed to download {video}')
+        if 'This video may be inappropriate for some users.' in str(e):
+            log.warn(f'Video is not inappropriate {video}')
+            return None
+
+        log.warn(f'Failed to download {video}: {e}, {type(e)}')
+        if os.path.exists(video.filename):
+            os.remove(video.filename)
         return e
     return None
 
@@ -172,7 +180,7 @@ class YoutubePlaylist:
         for url, title in self._fast_url_title():
             is_unique, suffix = self.get_unique_suffix(videos, title, url)
             if is_unique:
-                video = YoutubeVideo(url, title + suffix, mode=Mode.PAFY)
+                video = YoutubeVideo(url, title + suffix, mode=Mode.PYTYBE)
                 videos.append(video)
 
         log.info(f'Found {len(videos)} unique videos for {self.playlistTitle!r} in {self}')

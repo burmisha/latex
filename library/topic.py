@@ -4,7 +4,7 @@ import attr
 
 from library.logging import cm, color, one_line_pairs
 import library.location
-
+from typing import List
 import collections
 import re
 
@@ -33,10 +33,10 @@ class TopicDetector:
     SEARCH_DELTA_MULTIPLIER = 0.95
 
     def __init__(self):
-        config = library.files.load_yaml_data('topics.yaml')
+        self.config = library.files.load_yaml_data('topics.yaml')
 
         self._matcher = collections.defaultdict(list)
-        for grade, chapters in config.items():
+        for grade, chapters in self.config.items():
             for chapter_index, chapter in enumerate(chapters, 1):
                 chapter_name = chapter['name']
                 for part_index, part in enumerate(chapter['parts'], 1):
@@ -59,6 +59,22 @@ class TopicDetector:
         assert self.get_topic_index('Урок 343 - Затухающие колебания - 1') is not None
         # assert self.get_topic_index('Задачи на фотоэффект') is not None
 
+    @property
+    def get_grades(self) -> List[int]:
+        grades = list(self.config.keys())
+        grades.sort()
+        return grades
+
+    def get_parts(self, grades: List[int]):
+        for grade in grades:
+            for chapter in self.config[grade]:
+                chapter_name = chapter['name']
+                for part in chapter['parts']:
+                    part_name = part['name']
+                    if chapter_name == part_name:
+                        yield f'{grade} - {chapter_name}'
+                    else:
+                        yield f'{grade} - {chapter_name} - {part_name}'
 
     def get_topic_index(self, title, grade=None):
         assert grade in (7, 8, 9, 10, 11, None)
