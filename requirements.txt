@@ -14,7 +14,7 @@ pyyaml
 retry
 pytube==12.0.0
 # yt-dlp==2022.4.8
-streamlit==1.10.0
+streamlit==1.11.1
 watchdog==2.1.8  # speed up streamlit
 
 # pystyle==0.6
