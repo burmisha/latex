@@ -149,14 +149,14 @@ def run(args):
     topic_detector = library.topic.TopicDetector()
     topic_filter =  library.topic.TopicFilter(args.filter)
 
-    # video_with_topics = []
-    # for video in videos:
-    #     topic_index = topic_detector.get_topic_index(video.title)
-    #     video_with_topics.append((video, topic_index))
+    video_with_topics = []
+    for video in videos:
+        topic_index = topic_detector.get_topic_index(video.title)
+        video_with_topics.append((video, topic_index))
 
-    # if args.sort:
-    #     video_with_topics = [(v, t) for v, t in video_with_topics if t]
-    #     video_with_topics.sort(key=lambda video_with_topic: video_with_topic[1])
+    if args.sort:
+        video_with_topics = [(v, t) for v, t in video_with_topics if t]
+        video_with_topics.sort(key=lambda video_with_topic: video_with_topic[1])
 
     if save_files:
         download_videos(
