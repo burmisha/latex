@@ -1,0 +1,9 @@
+\begin{tikzpicture}[domain=0:35, xscale=0.12, yscale=0.3]
+\draw[thin,color=gray,densely dashed,xstep=5,ystep=2] (0,-7) grid (32,7);
+\draw[-{Latex},semithick] (0,0) -- (35,0) node[below] {$t, \text{c}$};
+\draw[-{Latex},semithick] (0,-8) -- (0,8) node[left] {$x, \text{м}$};
+\draw[very thick] (0,2) -- (5,4) -- (10,-6)  -- (15,-4) -- (20,6) -- (25,0) -- (30,-2);
+
+\foreach \x in {10,20,30} \draw (\x,0) node[below] {$\x$};
+\foreach \y in {-6,-4,-2,0,2,4,6} \draw (0,\y) node[left] {$\y$};
+\end{tikzpicture}
