@@ -62,33 +62,46 @@ class Pupil(object):
         else:
             return False
 
+class IndexType:
+    ALPHA = 'alpha'
+    DIGIT = 'digit'
+
 
 class Pupils(object):
     SEARCH_MIN_THRESHOLD = 54
     SEARCH_DELTA_MULTIPLIER = 0.85
 
     def __init__(self, pupils_id=None, pupils=[], letter=None, grade=None, year=None):
+        assert isinstance(grade, int)
+        assert 6 <= grade <= 11
+        assert 2010 <= year < 2099
+
         self._id = pupils_id
         self._pupils_list = pupils
         self._me = Pupil(name='Михаил', surname='Бурмистров')
         self.Letter = letter
         self.Grade = grade
-        assert 2010 <= year < 2099
         self.Year = f'{year}-{year-2000+1}'
-        assert isinstance(self.Grade, int)
-        assert 6 <= self.Grade <= 11
-        self.LatinLetter = {
-            'А1': 'A1',
-            'А': 'A',
-            'Б': 'B',
-            'В': 'V',
-            'Г': 'G',
-            'Т': 'T',
-            'Л': 'L',
-            'М': 'M',
-            'АБ': 'AB',
-            'БА': 'BA',
-        }[self.Letter]
+        try:
+            int(self.Letter)
+            self.LatinLetter = f'-{self.Letter}'
+            self._index_type = IndexType.DIGIT
+        except ValueError:
+            self.LatinLetter = {
+                'А1': 'A1',
+                'А': 'A',
+                'Б': 'B',
+                'В': 'V',
+                'Г': 'G',
+                'Т': 'T',
+                'Л': 'L',
+                'М': 'M',
+                'АБ': 'AB',
+                'БА': 'BA',
+            }[self.Letter]
+            self._index_type = IndexType.ALPHA
+        except Exception:
+            raise
         self._name_lookup = dict([
             (f'{pupil.name} {pupil.surname}', pupil)
             for pupil in self.Iterate()
@@ -100,9 +113,13 @@ class Pupils(object):
         else:
             suffix = ''
 
+        grade_suffix = {
+            IndexType.DIGIT: f'-{self.Letter}',
+            IndexType.ALPHA: self.Letter,
+        }[self._index_type]
         return library.location.udr(
             f'{self.Grade} класс',
-            f'{self.Year} {self.Grade}{self.Letter} Физика{suffix}',
+            f'{self.Year} {self.Grade}{grade_suffix} Физика{suffix}',
             *args,
         )
 
@@ -250,3 +267,5 @@ assert get_class_from_string('2021-04-30 10')._id == '2020-10-АБ'
 assert get_class_from_string('2021-04-30 10.docx')._id == '2020-10-АБ'
 assert get_class_from_string('2021-04-30 10 класс.docx')._id == '2020-10-АБ'
 assert get_class_from_string('2021-06-30 10 - занятие.docx')._id == '2020-10-АБ'
+assert get_class_from_string('2022-09-01 10-0')._id == '2022-10-0'
+assert get_class_from_string('2022-09-01 10-0').get_path().endswith('/10 класс/2022-23 10-0 Физика - private')
