@@ -71,6 +71,7 @@ class DocxToPdf:
         return True
 
     def ConvertDir(self, source_directory, destination_directory=None, recursive=True, regexp=None):
+        log.info(f'Converting files in {source_directory}')
         assert library.files.is_dir(source_directory)
         if destination_directory:
             dst_path = os.path.join(source_directory, destination_directory)
