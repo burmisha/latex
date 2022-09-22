@@ -13,7 +13,7 @@ log = logging.getLogger(__name__)
 
 
 class PdfExtractor:
-    def __init__(self, source_file=None, destination_directory=None):
+    def __init__(self, *, source_file=None, destination_directory=None):
         self._source_file = source_file
         if destination_directory:
             self._destination_directory = os.path.join(os.path.dirname(self._source_file), destination_directory)
@@ -27,7 +27,7 @@ class PdfExtractor:
     def Extract(self, pages, destination_filename):
         dst_file = os.path.join(self._destination_directory, destination_filename)
         if library.files.is_older(self._source_file, dst_file):
-            log.debug(f'Skipping updated file \'{destination_filename}\' (no pages check: {pages})')
+            log.debug(f'Skipping updated file {destination_filename!r} (no pages check: {pages})')
         else:
             self._pdf2pdf.Extract(pages, dst_file)
 
@@ -44,7 +44,7 @@ def get_convert_config():
         (library.location.udr('10 класс'), None, False, '.*Рабочая тетрадь.*'),
         (library.location.udr('9 класс'), None, False, '.*Рабочая тетрадь.*'),
         (
-            library.location.ipad('2020-21 Кружок'),
+            library.location.ipad('2020-21 Дистант'),
             library.location.udr('12 - кружок - 9-10-11', '2020-21 Кружок и допы - Видео и материалы'),
             True,
             r'.*\b[Кк]ружок.*\.docx$',
