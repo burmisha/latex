@@ -7,6 +7,9 @@ import library.pupils
 import os
 import yaml
 import re
+import attr
+
+from typing import List
 
 import logging
 log = logging.getLogger(__name__)
@@ -32,58 +35,100 @@ class PdfExtractor:
             self._pdf2pdf.Extract(pages, dst_file)
 
 
-def get_convert_config():
+@attr.s
+class ConvertConfig:
+    src_dir: str = attr.ib()
+    dst_dir: str = attr.ib()
+    recursive: bool = attr.ib()
+    regexp: str = attr.ib()
+
+
+@attr.s
+class ExtractConfig:
+    source_file: str = attr.ib()
+    destination_directory: str = attr.ib()
+    pages_map: dict = attr.ib()
+
+
+
+def get_convert_configs() -> List[ConvertConfig]:
     pupils_9m = library.pupils.get_class_from_string('2020 9М')
     pupils_10ab = library.pupils.get_class_from_string('2020 10АБ')
     pupils_11ba = library.pupils.get_class_from_string('2021 11БА')
 
     return [
-        (library.location.udr('11 класс', 'Вишнякова'), 'generated', False, '.*Вишнякова - [0-9].*'),
-        (library.location.udr('11 класс', 'Вишнякова'), 'generated', False, '.*Вишнякова - .* - Все условия.*'),
-        (library.location.udr('11 класс'), None, False, '.*Рабочая тетрадь.*'),
-        (library.location.udr('10 класс'), None, False, '.*Рабочая тетрадь.*'),
-        (library.location.udr('9 класс'), None, False, '.*Рабочая тетрадь.*'),
-        (
-            library.location.ipad('2020-21 Дистант'),
-            library.location.udr('12 - кружок - 9-10-11', '2020-21 Кружок и допы - Видео и материалы'),
-            True,
-            r'.*\b[Кк]ружок.*\.docx$',
+        ConvertConfig(
+            src_dir=library.location.udr('11 класс', 'Вишнякова'),
+            dst_dir='generated',
+            recursive=False,
+            regexp='.*Вишнякова - [0-9].*',
         ),
-        (
-            library.location.udr('12 - кружок - 9-10-11'),
-            '2020-21 Кружок и допы - Видео и материалы',
-            False,
-            r'.*\b[Кк]ружок.*\.docx$',
+        ConvertConfig(
+            src_dir=library.location.udr('11 класс', 'Вишнякова'),
+            dst_dir='generated',
+            recursive=False,
+            regexp='.*Вишнякова - .* - Все условия.*',
         ),
-        (
-            library.location.udr('12 - кружок - 9-10-11', '2021-22 Кружок и допы'),
-            library.location.udr('12 - кружок - 9-10-11', '2021-22 Кружок и допы'),
-            False,
-            r'.*\b[Кк]ружок.*\.docx$',
+        ConvertConfig(
+            src_dir=library.location.udr('11 класс'),
+            dst_dir=None,
+            recursive=True,
+            regexp='.*Рабочая тетрадь.*',
         ),
-        (
-            pupils_10ab.get_path(archive=True),
-            pupils_10ab.get_path(archive=False),
-            False,
-            r'.*с урока.*\.docx$',
+        ConvertConfig(
+            src_dir=library.location.udr('10 класс'),
+            dst_dir=None,
+            recursive=True,
+            regexp='.*Рабочая тетрадь.*',
         ),
-        (
-            pupils_9m.get_path(archive=True),
-            pupils_9m.get_path(archive=False),
-            False,
-            r'.*с урока.*\.docx$',
+        ConvertConfig(
+            src_dir=library.location.udr('9 класс'),
+            dst_dir=None,
+            recursive=True,
+            regexp='.*Рабочая тетрадь.*',
         ),
-        (
-            pupils_11ba.get_path('11-1 - Магнитное поле', archive=True),
-            pupils_11ba.get_path('11-1 - Магнитное поле', archive=False),
-            False,
-            r'.* - решения\.docx$',
+        # TODO: move and convert
+        # ConvertConfig(
+        #     src_dir=library.location.ipad('2020-21 Дистант'),
+        #     dst_dir=library.location.udr('12 - кружок - 9-10-11', '2020-21 Кружок и допы - Видео и материалы'),
+        #     recursive=True,
+        #     regexp=r'.*\b[Кк]ружок.*\.docx$',
+        # ),
+        ConvertConfig(
+            src_dir=library.location.udr('12 - кружок - 9-10-11'),
+            dst_dir='2020-21 Кружок и допы - Видео и материалы',
+            recursive=False,
+            regexp=r'.*\b[Кк]ружок.*\.docx$',
         ),
-        (
-            library.location.udr('8 класс', '2020-21 Архив'),
-            None,
-            False,
-            r'.*с урока\.docx$',
+        ConvertConfig(
+            src_dir=library.location.udr('12 - кружок - 9-10-11', '2021-22 Кружок и допы'),
+            dst_dir=library.location.udr('12 - кружок - 9-10-11', '2021-22 Кружок и допы'),
+            recursive=False,
+            regexp=r'.*\b[Кк]ружок.*\.docx$',
+        ),
+        ConvertConfig(
+            src_dir=pupils_10ab.get_path(archive=True),
+            dst_dir=pupils_10ab.get_path(archive=False),
+            recursive=False,
+            regexp=r'.*с урока.*\.docx$',
+        ),
+        ConvertConfig(
+            src_dir=pupils_9m.get_path(archive=True),
+            dst_dir=pupils_9m.get_path(archive=False),
+            recursive=False,
+            regexp=r'.*с урока.*\.docx$',
+        ),
+        ConvertConfig(
+            src_dir=pupils_11ba.get_path('11-1 - Магнитное поле', archive=True),
+            dst_dir=pupils_11ba.get_path('11-1 - Магнитное поле', archive=False),
+            recursive=False,
+            regexp=r'.* - решения\.docx$',
+        ),
+        ConvertConfig(
+            src_dir=library.location.udr('8 класс', '2020-21 Архив'),
+            dst_dir=None,
+            recursive=False,
+            regexp=r'.*с урока\.docx$',
         ),
     ]
 
@@ -100,12 +145,12 @@ def is_private_lesson(lesson_name: str) -> bool:
     return any(s.lower() in lesson_name.lower() for s in PRIVATE_SUBSRINGS)
 
 
-def get_extract_config():
-    extract_config = [
-        (
-            library.location.udr('11 класс', 'Вишнякова', 'Вишнякова - Базовый курс - Все условия.pdf'),
-            library.location.udr('11 класс', 'Вишнякова', 'generated'),
-            {
+def get_extract_configs() -> List[ExtractConfig]:
+    extract_configs = [
+        ExtractConfig(
+            source_file=library.location.udr('11 класс', 'Вишнякова', 'Вишнякова - Базовый курс - Все условия.pdf'),
+            destination_directory=library.location.udr('11 класс', 'Вишнякова', 'generated'),
+            pages_map={
                 '1': 'Вишнякова - 1.1 - Кинематика - БК - условия.pdf',
                 '2': 'Вишнякова - 1.2 - Динамика - БК - условия.pdf',
                 '3': 'Вишнякова - 1.3 - Статика - БК - условия.pdf',
@@ -127,9 +172,9 @@ def get_extract_config():
         ),
     ]
 
-    class_config_2 = library.files.load_yaml_data('docx_2_pdf.yaml')
+    yaml_config = library.files.load_yaml_data('docx_2_pdf.yaml')
 
-    for class_name, class_config in class_config_2.items():
+    for class_name, class_config in yaml_config.items():
         pupils = library.pupils.get_class_from_string(class_name)
         grade = pupils.Grade
 
@@ -155,31 +200,54 @@ def get_extract_config():
                 else:
                     public_pages_map[pages] = filename
 
-            pdf_name = library.location.udr(f'{grade} класс', f'{prefix} - Рабочая тетрадь.pdf')
-            if public_pages_map:
-                extract_config.append((pdf_name, pupils.get_path(prefix, archive=False), public_pages_map))
-            if private_pages_map:
-                extract_config.append((pdf_name, pupils.get_path(prefix, archive=True), private_pages_map))
+            if pupils.is_active:
+                pdf_name = library.location.udr(
+                    f'{grade} класс',
+                    f'{prefix} - Рабочая тетрадь.pdf',
+                )
+            else:
+                pdf_name = library.location.udr(
+                    f'{grade} класс',
+                    f'{pupils.Year} {pupils.Grade} Архив',
+                    f'{prefix} - Рабочая тетрадь.pdf',
+                )
 
-    return extract_config
+            if public_pages_map:
+                extract_configs.append(
+                    ExtractConfig(
+                        source_file=pdf_name,
+                        destination_directory=pupils.get_path(prefix, archive=False),
+                        pages_map=public_pages_map,
+                    )
+                )
+            if private_pages_map:
+                extract_configs.append(
+                    ExtractConfig(
+                        source_file=pdf_name,
+                        destination_directory=pupils.get_path(prefix, archive=True),
+                        pages_map=private_pages_map,
+                    )
+                )
+
+    return extract_configs
 
 
 def run(args):
     docxToPdf = DocxToPdf()
-    for src_dir, dst_dir, recursive, regexp in get_convert_config():
+    for convert_config in get_convert_configs():
         docxToPdf.ConvertDir(
-            src_dir,
-            destination_directory=dst_dir,
-            recursive=recursive,
-            regexp=regexp,
+            convert_config.src_dir,
+            destination_directory=convert_config.dst_dir,
+            recursive=convert_config.recursive,
+            regexp=convert_config.regexp,
         )
 
-    for source_file, destination_directory, config in get_extract_config():
+    for extract_config in get_extract_configs():
         pdfExtractor = PdfExtractor(
-            source_file=source_file,
-            destination_directory=destination_directory,
+            source_file=extract_config.source_file,
+            destination_directory=extract_config.destination_directory,
         )
-        for pages, filename in config.items():
+        for pages, filename in extract_config.pages_map.items():
             pdfExtractor.Extract(pages, filename)
 
 

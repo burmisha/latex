@@ -1,6 +1,7 @@
 import library.files
 import library.location
 import library.process
+from library.logging import cm, color
 
 import os
 import platform
@@ -44,6 +45,11 @@ class DocxToPdf:
         assert source_file.endswith('.docx')
         assert destination_file.endswith('.pdf')
 
+        log.debug(
+            f'Converting file:\n'
+            f'src: {cm(source_file, color=color.Yellow)}\n'
+            f'dst: {cm(destination_file, color=color.Yellow)}\n'
+        )
         if library.files.is_older(source_file, destination_file):
             log.debug(f'Skipping ready file {destination_file!r}')
             return False
@@ -71,14 +77,16 @@ class DocxToPdf:
         return True
 
     def ConvertDir(self, source_directory, destination_directory=None, recursive=True, regexp=None):
-        log.info(f'Converting files in {source_directory}')
+        log.info(
+            f'Converting files:\n'
+            f'\tsrc: {cm(source_directory, color=color.Green)}\n'
+            f'\tdst: {cm(destination_directory, color=color.Green)}\n'
+            f'\trecursive: {cm(recursive, color=color.Cyan)}\n'
+            f'\tregexp: {cm(regexp, color=color.Cyan)}'
+        )
         assert library.files.is_dir(source_directory)
         if destination_directory:
-            dst_path = os.path.join(source_directory, destination_directory)
-        else:
-            dst_path = source_directory
-        assert library.files.is_dir(dst_path)
-
+            assert not recursive
         docx_suffix = '.docx'
         new_converted = 0
         already_converted_count = 0
@@ -88,8 +96,16 @@ class DocxToPdf:
             recursive=recursive,
             regexp=regexp,
         )):
+            log.debug(f'\tDocx: {cm(docx_file, color=color.Green)}')
+
+            if destination_directory:
+                dst_dir = os.path.join(source_directory, destination_directory)
+            else:
+                dst_dir = os.path.dirname(docx_file)
+            assert library.files.is_dir(dst_dir)
+
             basename = os.path.basename(docx_file)[:-len(docx_suffix)] + '.pdf'
-            pdf_file = os.path.join(dst_path, basename)
+            pdf_file = os.path.join(dst_dir, basename)
             if self.ConvertFile(docx_file, pdf_file):
                 new_converted += 1
             else:
