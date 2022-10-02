@@ -1,6 +1,7 @@
 from fuzzywuzzy import process, fuzz
 
 import collections
+import datetime
 import re
 
 import library.files
@@ -82,6 +83,7 @@ class Pupils(object):
         self.Letter = letter
         self.Grade = grade
         self.Year = f'{year}-{year-2000+1}'
+        self.start_year = year
         try:
             int(self.Letter)
             self.LatinLetter = f'-{self.Letter}'
@@ -167,6 +169,11 @@ class Pupils(object):
             return '{}«{}»'.format(self.Grade, self.Letter)
         else:
             return self.Grade
+
+    @property
+    def is_active(self) -> bool:
+        today = datetime.datetime.now().strftime('%F')
+        return get_study_year(today) == self.start_year
 
 
 class NamesPicker:
@@ -268,4 +275,10 @@ assert get_class_from_string('2021-04-30 10.docx')._id == '2020-10-АБ'
 assert get_class_from_string('2021-04-30 10 класс.docx')._id == '2020-10-АБ'
 assert get_class_from_string('2021-06-30 10 - занятие.docx')._id == '2020-10-АБ'
 assert get_class_from_string('2022-09-01 10-0')._id == '2022-10-0'
+assert get_class_from_string('2022-23 10-0')._id == '2022-10-0'
 assert get_class_from_string('2022-09-01 10-0').get_path().endswith('/10 класс/2022-23 10-0 Физика - private')
+assert get_class_from_string('2022-01-31 11Б').Year == '2021-22'
+assert get_class_from_string('2022-09-01 10-0').Year == '2022-23'
+assert get_class_from_string('2022-01-31 11Б').is_active is False
+assert get_class_from_string('2022-09-01 10-0').is_active is True
+assert get_class_from_string('2020-9-М').is_active is False
