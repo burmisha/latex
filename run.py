@@ -84,6 +84,7 @@ def CreateArgumentsParser():
         ('tripod', 'Generate tripod results', tools.tripod),
         ('yaform', 'Download yandex form results', tools.yaform),
         ('znanium', 'Znanium', tools.znanium),
+        ('material', 'Material', tools.material),
     ]:
         subparser = subparsers.add_parser(
             mode_name,

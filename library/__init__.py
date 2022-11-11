@@ -10,6 +10,7 @@ import library.formatter
 import library.gform
 import library.location
 import library.logging
+import library.material
 import library.normalize
 import library.process
 import library.pupils
