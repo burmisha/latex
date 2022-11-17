@@ -32,6 +32,7 @@ class YoutubeVideo:
     url: str = attr.ib()
     title: str = attr.ib()
     mode: str = attr.ib()
+    extra_title: Optional[str] = attr.ib(default=None)
     dstdir: Optional[str] = attr.ib(default=None)
     extension: str = attr.ib(default='mp4')
 
@@ -180,7 +181,12 @@ class YoutubePlaylist:
         for url, title in self._fast_url_title():
             is_unique, suffix = self.get_unique_suffix(videos, title, url)
             if is_unique:
-                video = YoutubeVideo(url, title + suffix, mode=Mode.PYTYBE)
+                video = YoutubeVideo(
+                    url,
+                    title + suffix,
+                    mode=Mode.PYTYBE,
+                    extra_title=self.playlistTitle,
+                )
                 videos.append(video)
 
         log.info(f'Found {len(videos)} unique videos for {self.playlistTitle!r} in {self}')

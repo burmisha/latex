@@ -3,9 +3,31 @@ import library
 import tools.download
 import attr
 import yaml
+import collections
+from typing import List
 
 import logging
 log = logging.getLogger(__name__)
+
+def serialize_list_of_dicts(items: List[dict]) -> str:
+    serialized = yaml.dump(
+        items,
+        encoding='utf-8',
+        allow_unicode=True,
+        width=1000,
+        sort_keys=False,
+    ).decode()
+
+    replacements = [('\n- ', '\n\n- ')]
+    keys = set(key for item in items for key in item.keys())
+    max_len = max(len(key) for key in keys)
+    for key in keys:
+        replacements.append((f' {key}: ', f' {key}:  ' + ' ' * (max_len - len(key))))
+
+    for replace_what, replace_with in replacements:
+        serialized = serialized.replace(replace_what, replace_with)
+
+    return serialized
 
 
 def run(args):
@@ -14,18 +36,19 @@ def run(args):
 
     materials = [
         library.material.material.Material(
-            source_format=library.material.material.SourceFormat.Video._value,
-            raw_title=video.title,
+            title=video.title,
             url=video.url,
+            source_format=library.material.material.SourceFormat.Video.value,
+            extra_title=video.extra_title,
         )
         for video in videos
     ]
 
     if args.save:
+        data = [attr.asdict(material) for material in materials]
+        serialized = serialize_list_of_dicts(data)
         with open(library.location.root('data', 'materials_raw.yaml'), 'w') as f:
-            data = [attr.asdict(material) for material in materials]
-            print([data[0], type(data[0])])
-            yaml.safe_dump(data, f, encoding='utf-8', allow_unicode=True)
+            f.write(serialized)
 
     # topic_detector = library.topic.TopicDetector()
     # topic_filter =  library.topic.TopicFilter(args.filter)

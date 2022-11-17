@@ -1,6 +1,6 @@
 import attr
 from enum import Enum
-from typing import List
+from typing import List, Optional
 
 
 class SourceFormat(str, Enum):
@@ -8,12 +8,12 @@ class SourceFormat(str, Enum):
     Text = 'text'
 
 
-
 @attr.s
 class Material:
-    source_format: str = attr.ib()
-    raw_title: str = attr.ib()
+    title: str = attr.ib()
     url: str = attr.ib()
+    source_format: str = attr.ib()
+    extra_title: Optional[str] = attr.ib(default=None)
 
 
 def get_videos() -> List[Material]:
