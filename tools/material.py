@@ -31,49 +31,47 @@ def serialize_list_of_dicts(items: List[dict]) -> str:
 
 
 def run(args):
-    download_cfg = library.files.load_yaml_data('download.yaml')
-    videos = tools.download.get_pavel_viktor_videos(download_cfg['PavelVictor'])
-
-    materials = [
-        library.material.material.Material(
-            title=video.title,
-            url=video.url,
-            source_format=library.material.material.SourceFormat.Video.value,
-            extra_title=video.extra_title,
-        )
-        for video in videos
-    ]
+    raw_file = library.location.root('data', 'materials_raw.yaml')
+    ready_file = library.location.root('data', 'materials_ready.yaml')
 
     if args.save:
-        data = [attr.asdict(material) for material in materials]
+        download_cfg = library.files.load_yaml_data('download.yaml')
+        videos = tools.download.get_pavel_viktor_videos(download_cfg['PavelVictor'])
+
+        materials = [
+            library.material.material.Material(
+                title=video.title,
+                url=video.url,
+                source_format=library.material.material.SourceFormat.Video.value,
+                extra_title=video.extra_title,
+            )
+            for video in videos
+        ]
+        data = [{k: v for k, v in attr.asdict(material).items() if v} for material in materials]
         serialized = serialize_list_of_dicts(data)
-        with open(library.location.root('data', 'materials_raw.yaml'), 'w') as f:
+        with open(raw_file, 'w') as f:
             f.write(serialized)
 
-    # topic_detector = library.topic.TopicDetector()
-    # topic_filter =  library.topic.TopicFilter(args.filter)
+    if args.prepare:
+        canonizer = library.normalize.TitleCanonizer()
+        topic_detector = library.topic.TopicDetector()
 
-    # video_with_topics = []
-    # for video in videos:
-    #     topic_index = topic_detector.get_topic_index(video.title)
-    #     video_with_topics.append((video, topic_index))
+        rows = library.files.load_yaml_data('materials_raw.yaml')
+        materials = [library.material.material.Material(**row) for row in rows]
 
-    # if args.sort:
-    #     video_with_topics = [(v, t) for v, t in video_with_topics if t]
-    #     video_with_topics.sort(key=lambda video_with_topic: video_with_topic[1])
+        for material in materials:
+            material.canonized_title = canonizer.Canonize(material.title)
+            topic_index = topic_detector.get_topic_index(material.title)
+            if topic_index:
+                material.topic = f'{topic_index.full_index} - {topic_index.Title}'
 
-    # if save_files:
-    #     download_videos(
-    #         videos=videos,
-    #         threads=args.threads,
-    #         retries=args.retries,
-    #     )
-    # else:
-    #     for video, topic_index in video_with_topics:
-    #         if topic_filter.matches(topic_index):
-    #             log.info(f'{video}, {topic_index}')
-
+        data = [{k: v for k, v in attr.asdict(material).items() if v} for material in materials]
+        serialized = serialize_list_of_dicts(data)
+        with open(ready_file, 'w') as f:
+            f.write(serialized)
+        
 
 def populate_parser(parser):
     parser.add_argument('-s', '--save', help='Save yaml', action='store_true')
+    parser.add_argument('-p', '--prepare', help='Prepare material', action='store_true')
     parser.set_defaults(func=run)

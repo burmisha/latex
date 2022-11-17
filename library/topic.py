@@ -23,9 +23,12 @@ class TopicIndex:
     PartTitle: str = attr.ib()
     Title: str = attr.ib()
 
+    @property
+    def full_index(self):
+        return f'{self.Grade}-{self.ChapterIndex}-{self.PartIndex}-{self.Index}'
+
     def __str__(self):
-        index = f'{self.Grade}-{self.ChapterIndex}-{self.PartIndex}-{self.Index}'
-        return f'topic {cm(index, color=color.Cyan)} {cm(self.Title, color=color.Green)}'
+        return f'topic {cm(self.full_index, color=color.Cyan)} {cm(self.Title, color=color.Green)}'
 
 
 class TopicDetector:
