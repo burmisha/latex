@@ -22,7 +22,6 @@ with st.sidebar:
          [],
     )
 
-
     material_types = st.multiselect(
          'Тип материала',
          ['Youtube', 'Статьи', 'Задачи', 'Конспекты'],
