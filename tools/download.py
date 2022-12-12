@@ -15,6 +15,7 @@ log = logging.getLogger(__name__)
 THREADS_COUNT = 4
 RETRIES_COUNT = 3
 
+VIDEO_DIR = 'Видео'
 
 @attr.s
 class ChannelConfig:
@@ -33,7 +34,7 @@ class ChannelConfig:
 
 def get_videos_from_channel(channel_config: ChannelConfig):
     log.info(f'Getting videos from {channel_config}')
-    path = library.location.udr('Видео', channel_config.dirname)
+    path = library.location.udr(VIDEO_DIR, channel_config.dirname)
     channel = pytube.Channel(channel_config.url)
     for video in channel.videos:
         title = canonizer.Canonize(video.title.strip())
@@ -54,12 +55,14 @@ def get_videos_from_channel(channel_config: ChannelConfig):
 def get_explicit_videos(explicit_config: dict):
     log.info('Getting explicit videos')
     for dirname, videos in explicit_config.items():
-        dirname = library.location.udr('Видео', dirname)
+        dirname = library.location.udr(VIDEO_DIR, dirname)
         for url, title in videos.items():
             yield library.download.youtube.YoutubeVideo(
                 url,
                 title,
                 dstdir=dirname,
+                # mode=library.download.youtube.Mode.PYTYBE,
+                # mode=library.download.youtube.Mode.PAFY,
                 mode=library.download.youtube.Mode.REQUESTS,
             )
 
@@ -94,7 +97,7 @@ def download_videos(*, videos: List[library.download.youtube.YoutubeVideo], thre
         raise RuntimeError(f'После {retries} попыток не скачано {len(videos)} видео')
 
 
-def get_all_videos(*, add_channels: bool, add_pavel_viktor: bool):
+def get_all_videos(*, add_channels: bool=False, add_playlists: bool=False, add_pavel_viktor: bool=False):
     download_cfg = library.files.load_yaml_data('download.yaml')
 
     if add_channels:
@@ -104,18 +107,20 @@ def get_all_videos(*, add_channels: bool, add_pavel_viktor: bool):
             for video in get_videos_from_channel(channel_config):
                 yield video
 
-    log.info('Listing playlists')
-    for dirname, playlist_url in download_cfg['Playlists'].items():
-        playlist = library.download.youtube.YoutubePlaylist(playlist_url)
-        _, videos = playlist.ListVideos()
-        for video in videos:
-            video.dstdir = library.location.udr('Видео', dirname)
-            yield video
+    if add_playlists:
+        log.info('Listing playlists')
+        for dirname, playlist_url in download_cfg['Playlists'].items():
+            playlist = library.download.youtube.YoutubePlaylist(playlist_url)
+            _, videos = playlist.ListVideos()
+            for video in videos:
+                video.dstdir = library.location.udr(VIDEO_DIR, dirname)
+                yield video
 
     for video in get_explicit_videos(download_cfg['Explicit']):
         yield video
 
     if add_pavel_viktor:
+        log.info('Listing Pavel Viktor')
         for video in get_pavel_viktor_videos(download_cfg['PavelVictor']):
             yield video
 
@@ -133,7 +138,14 @@ def run(args):
     ]:
         library.download.multiple.download_items(items, dirname, force=False)
 
-    videos = list(get_all_videos(add_channels=args.channels, add_pavel_viktor=args.pavel_viktor))
+    videos = [
+        video
+        for video in get_all_videos(
+            add_channels=args.channels,
+            add_playlists=args.add_playlists,
+            add_pavel_viktor=args.pavel_viktor
+        )
+    ]
 
     missing_dirs = set(video.dstdir for video in videos if not os.path.exists(video.dstdir))
     for missing_dir in sorted(missing_dirs):
@@ -176,6 +188,7 @@ def populate_parser(parser):
     parser.add_argument('-f', '--filter', help='Choose only videos matching filters')
     parser.add_argument('--sort', help='Sort by topic', action='store_true')
     parser.add_argument('--channels', help='Add channels (infinite)', action='store_true')
+    parser.add_argument('--playlists', help='Add playlists (finite)', action='store_true')
     parser.add_argument('--threads', help='Threads count to download', type=int, default=THREADS_COUNT)
     parser.add_argument('--retries', help='Retries count', type=int, default=RETRIES_COUNT)
     parser.set_defaults(func=run)
