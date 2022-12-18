@@ -4,7 +4,7 @@ import attr
 
 from library.logging import cm, color, one_line_pairs
 import library.location
-from typing import List
+from typing import List, Optional
 import collections
 import re
 
@@ -14,21 +14,35 @@ log = logging.getLogger(__name__)
 
 
 @attr.s
-class TopicIndex:
+class Topic:
     Grade: int = attr.ib()
     ChapterIndex: int = attr.ib()
     PartIndex: int = attr.ib()
-    Index: int = attr.ib()
     ChapterTitle: str = attr.ib()
     PartTitle: str = attr.ib()
-    Title: str = attr.ib()
+    Terms: List[str] = attr.ib()
 
     @property
-    def full_index(self):
-        return f'{self.Grade}-{self.ChapterIndex}-{self.PartIndex}-{self.Index}'
+    def index(self):
+        return f'{self.Grade}-{self.ChapterIndex}-{self.PartIndex}'
+
+    @property
+    def title(self):
+        return f'{self.ChapterTitle} {self.PartTitle}'
 
     def __str__(self):
-        return f'topic {cm(self.full_index, color=color.Cyan)} {cm(self.Title, color=color.Green)}'
+        return (
+            f'topic {cm(self.index, color=color.Cyan)} '
+            f'{cm(self.title, color=color.Green)} '
+            f'with {len(self.Terms)} terms'
+        )
+
+    @property
+    def extended_terms(self) -> List[str]:
+        return [
+            f'{self.ChapterTitle} {self.PartTitle} {term}'
+            for term in self.Terms
+        ]
 
 
 class TopicDetector:
@@ -38,28 +52,28 @@ class TopicDetector:
     def __init__(self):
         self.config = library.files.load_yaml_data('topics.yaml')
 
-        self._matcher = collections.defaultdict(list)
+        self._topic_by_extended_term = collections.defaultdict(list)
         for grade, chapters in self.config.items():
             for chapter_index, chapter in enumerate(chapters, 1):
                 chapter_name = chapter['name']
                 for part_index, part in enumerate(chapter['parts'], 1):
-                    part_name = part['name']
-                    for index, title in enumerate(part['titles'], 1):
-                        topic_index = TopicIndex(
-                            grade,
-                            chapter_index,
-                            part_index,
-                            index,
-                            chapter_name,
-                            part_name,
-                            title,
-                        )
-                        joined_title = f'{chapter_name} {part_name} {title}'
-                        self._matcher[joined_title].append(topic_index)
+                    topic = Topic(
+                        Grade=grade,
+                        ChapterIndex=chapter_index,
+                        PartIndex=part_index,
+                        ChapterTitle=chapter_name,
+                        PartTitle=part['name'],
+                        Terms=part['terms'],
+                    )
+                    log.info(topic)
+                    for extended_term in topic.extended_terms:
+                        self._topic_by_extended_term[extended_term].append(topic)
 
         assert self.get_topic_index('МКТ и термодинамика Термодинамика Внутренняя энергия идеального газа') is not None
         assert self.get_topic_index('МКТ и термодинамика Термодинамика Циклические процессы') is not None
         assert self.get_topic_index('Урок 343 - Затухающие колебания - 1') is not None
+        assert self.get_topic_index('электрический потенциал') is not None
+        # assert self.get_topic_index('Урок 229. Работа электрического поля. Потенциал. Электрическое напряжение') is not None
         # assert self.get_topic_index('Задачи на фотоэффект') is not None
 
     @property
@@ -79,36 +93,40 @@ class TopicDetector:
                     else:
                         yield f'{grade} - {chapter_name} - {part_name}'
 
-    def get_topic_index(self, title, grade=None):
-        assert grade in (7, 8, 9, 10, 11, None)
-        search_key = title.replace('класс', '')
+    def get_topic_index(self, title, grade: Optional[int]=None):
         if grade:
-            search_key = search_key.replace(str(grade), '')
-        best_keys = process.extract(search_key, self._matcher.keys(), limit=2, scorer=fuzz.token_sort_ratio)
-
-        best_key = None
-        if best_keys[0][1] >= self.SEARCH_MIN_THRESHOLD:
-            if len(best_keys) == 1:
-                best_key = best_keys[0][0]
-            elif best_keys[1][1] < self.SEARCH_DELTA_MULTIPLIER * best_keys[0][1]:
-                best_key = best_keys[0][0]
-
-        topic_indices = []
-        if best_key:
-            topic_indices = self._matcher[best_key]
-            if grade:
-                topic_indices = [topic_index for topic_index in topic_indices if topic_index.Grade == grade]
-        if len(topic_indices) == 1:
-            topic_index = topic_indices[0]
+            candidates = {
+                extended_term: [topic for topic in topics if topic.Grade == grade]
+                for extended_term, topics in self._topic_by_extended_term.items()
+            }
         else:
-            topic_index = None
+            candidates = list(self._topic_by_extended_term.keys())
 
-        log.debug((
-            f'Search topic index by title {cm(title, color=color.Cyan)} in grade {grade}: {cm(topic_index, color=color.Cyan)}\n'
-            f'  Best keys are: {one_line_pairs(sorted([(v, k) for k, v in best_keys], reverse=True))}\n'
-            f'  Topic indices {topic_indices}'
-        ))
-        return topic_index
+        best_extended_terms = process.extract(
+            title,
+            candidates,
+            limit=2,
+            scorer=fuzz.token_sort_ratio,
+        )
+
+        best_extended_term = None
+        if best_extended_terms[0][1] >= self.SEARCH_MIN_THRESHOLD:
+            if len(best_extended_terms) == 1:
+                best_extended_term = best_extended_terms[0][0]
+            elif best_extended_terms[1][1] < self.SEARCH_DELTA_MULTIPLIER * best_extended_terms[0][1]:
+                best_extended_term = best_extended_terms[0][0]
+
+        topics = self._topic_by_extended_term[best_extended_term] if best_extended_term else []
+        topic = topics[0] if len(topics) == 1 else None
+
+        # log.info(best_extended_terms)
+        # log.info(
+        #     f'Search topic index by title {cm(title, color=color.Cyan)}: {cm(topic, color=color.Cyan)}\n'
+        #     f'  Best keys are: {one_line_pairs(sorted([(v, k) for k, v in best_extended_terms], reverse=True))}\n'
+        #     # f'  Best keys are: {best_extended_terms}\n'
+        #     # f'  Topic indices {topics}'
+        # )
+        return topic
 
 
 class TopicFilter:

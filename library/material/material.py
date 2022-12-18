@@ -17,6 +17,13 @@ class Material:
     extra_title: Optional[str] = attr.ib(default=None)
     topic: Optional[str] = attr.ib(default=None)
 
+    @property
+    def grade(self) -> Optional[int]:
+        if 'класс' in self.extra_title:
+            return int(self.extra_title.split(' ', 2)[0].strip())
+
+        return None
+
 
 def get_videos() -> List[Material]:
     return []

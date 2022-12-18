@@ -63,9 +63,14 @@ def run(args):
 
         for material in tqdm(materials):
             material.canonized_title = canonizer.Canonize(material.title)
-            topic_index = topic_detector.get_topic_index(material.title)
-            if topic_index:
-                material.topic = f'{topic_index.full_index} - {topic_index.Title}'
+            for search_key in [
+                f'{material.canonized_title}',
+                f'{material.canonized_title} {material.extra_title}',
+            ]:
+                topic = topic_detector.get_topic_index(search_key, grade=material.grade)
+                if topic:
+                    material.topic = f'{topic.index} - {topic.ChapterTitle} - {topic.PartTitle}'
+                    break
 
         data = [{k: v for k, v in attr.asdict(material).items() if v} for material in materials]
         serialized = serialize_list_of_dicts(data)
