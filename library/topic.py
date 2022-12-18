@@ -28,7 +28,7 @@ class Topic:
 
     @property
     def title(self):
-        return f'{self.ChapterTitle} {self.PartTitle}'
+        return f'{self.ChapterTitle} - {self.PartTitle}'
 
     def __str__(self):
         return (
