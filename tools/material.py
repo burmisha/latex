@@ -5,9 +5,11 @@ import attr
 import yaml
 import collections
 from typing import List
+from tqdm import tqdm
 
 import logging
 log = logging.getLogger(__name__)
+
 
 def serialize_list_of_dicts(items: List[dict]) -> str:
     serialized = yaml.dump(
@@ -59,7 +61,7 @@ def run(args):
         rows = library.files.load_yaml_data('materials_raw.yaml')
         materials = [library.material.material.Material(**row) for row in rows]
 
-        for material in materials:
+        for material in tqdm(materials):
             material.canonized_title = canonizer.Canonize(material.title)
             topic_index = topic_detector.get_topic_index(material.title)
             if topic_index:
