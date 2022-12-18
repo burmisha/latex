@@ -44,10 +44,19 @@ class Topic:
             for term in self.Terms
         ]
 
+
+TAGS_SPLITTER = ','
+DESCRIPTION_SPLITTER = '|'
+
+
 @attr.s
 class Tag:
     name: str = attr.ib()
     description: str = attr.ib()
+
+    @property
+    def grade(self) -> int:
+        return int(self.name.split('_')[0])
 
 
 @attr.s
@@ -60,58 +69,55 @@ class TopicDetector:
     SEARCH_MIN_THRESHOLD = 50
     SEARCH_DELTA_MULTIPLIER = 0.95
 
+    def tags_by_raw(self, raw_tags: str) -> List[Tag]:
+        tags = [self.tag_by_name[tag.strip()] for tag in raw_tags.split(TAGS_SPLITTER)]
+        return tags
+
     def __init__(self):
         config = library.files.load_yaml_data('topics.yaml')
 
-        self.tags = {}
-        tag_by_desc = {}
+        self.tag_by_name = {}
         for key, value in config['tags'].items():
-            tag = Tag(name=key, description=value)
-            self.tags[tag.name] = tag
-            tag_by_desc[tag.description] = tag
-            log.info(tag)
+            tag = Tag(
+                name=key,
+                description=value,
+            )
+            self.tag_by_name[tag.name] = tag
         del config['tags']
 
         self.tagged_topics = []
         for row in config['tagged_topics']:
-            description, raw_tags = row.split('|')
-            description = description.strip()
+            description, raw_tags = row.split(DESCRIPTION_SPLITTER)
             tagged_topic = TaggedTopic(
-                description=description,
-                tags=[self.tags[tag.strip()] for tag in raw_tags.split(',')]
+                description=description.strip(),
+                tags=self.tags_by_raw(raw_tags),
             )
             self.tagged_topics.append(tagged_topic)
-            log.info(tagged_topic)
         del config['tagged_topics']
 
-
-        self.config = {key: value for key, value in config.items()}
-
-        
-
         self._topic_by_extended_term = collections.defaultdict(list)
-        for grade, chapters in self.config.items():
-            for chapter_index, chapter in enumerate(chapters, 1):
-                chapter_name = chapter['name']
-                for part_index, part in enumerate(chapter['parts'], 1):
-                    topic = Topic(
-                        Grade=grade,
-                        ChapterIndex=chapter_index,
-                        PartIndex=part_index,
-                        ChapterTitle=chapter_name,
-                        PartTitle=part['name'],
-                        Terms=part['terms'],
-                    )
-                    # log.info(topic)
-                    for extended_term in topic.extended_terms:
-                        self._topic_by_extended_term[extended_term].append(topic)
-                    for term in topic.Terms:
-                        tags = [
-                            f'{topic.Grade}_grade',
-                            tag_by_desc[topic.ChapterTitle].name,
-                            tag_by_desc[topic.PartTitle].name,
-                        ]
-                        log.info(f'{term}: {tags}')
+        chapter_values = collections.defaultdict(int)
+        part_values = collections.defaultdict(int)
+        for row in config['program']:
+            tags = self.tags_by_raw(row)
+
+            grade = tags[0].grade
+            part_index = f'{grade} {tags[1].name}'
+            if part_index not in part_values:
+                chapter_values[grade] += 1
+            part_values[part_index] += 1
+
+            topic = Topic(
+                Grade=grade,
+                ChapterIndex=chapter_values[grade],
+                PartIndex=part_values[part_index],
+                ChapterTitle=tags[1].description,
+                PartTitle=tags[2].description,
+                Terms=[tt.description for tt in self.tagged_topics if tt.tags == tags],
+            )
+
+            for extended_term in topic.extended_terms:
+                self._topic_by_extended_term[extended_term].append(topic)
 
         assert self.get_topic_index('МКТ и термодинамика Термодинамика Внутренняя энергия идеального газа') is not None
         assert self.get_topic_index('МКТ и термодинамика Термодинамика Циклические процессы') is not None
