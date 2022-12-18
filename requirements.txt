@@ -1,11 +1,11 @@
 attrs==22.1.0
-fuzzywuzzy==0.18.0
+thefuzz==0.19.0
 pafy==0.5.5
 Pillow==9.3.0
 pygments==2.13.0
 pymaging
 pytesseract==0.3.10
-python-Levenshtein==0.20.8
+python-Levenshtein==0.12.2
 pytube==12.1.0
 pyyaml==6.0
 qrcode==7.3.1
@@ -15,6 +15,7 @@ selenium==4.7.2
 streamlit==1.15.2
 watchdog==2.2.0  # speed up streamlit
 youtube-dl==2021.12.17
+tqdm==4.64.1
 # yt-dlp==2022.11.11
 
 # pystyle==0.6

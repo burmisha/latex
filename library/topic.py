@@ -1,4 +1,4 @@
-from fuzzywuzzy import process, fuzz
+from thefuzz import process, fuzz
 import yaml
 import attr
 
