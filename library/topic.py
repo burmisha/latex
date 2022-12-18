@@ -73,32 +73,32 @@ class TopicDetector:
         tags = [self.tag_by_name[tag.strip()] for tag in raw_tags.split(TAGS_SPLITTER)]
         return tags
 
-    def __init__(self):
-        config = library.files.load_yaml_data('topics.yaml')
-
-        self.tag_by_name = {}
-        for key, value in config['tags'].items():
+    def create_tags(self, config) -> List[Tag]:
+        tags = []
+        for key, value in config.items():
             tag = Tag(
                 name=key,
                 description=value,
             )
-            self.tag_by_name[tag.name] = tag
-        del config['tags']
+            tags.append(tag)
+        return tags
 
-        self.tagged_topics = []
-        for row in config['tagged_topics']:
+    def create_tagged_topics(self, config) -> List[TaggedTopic]:
+        tagged_topics = []
+        for row in config:
             description, raw_tags = row.split(DESCRIPTION_SPLITTER)
             tagged_topic = TaggedTopic(
                 description=description.strip(),
                 tags=self.tags_by_raw(raw_tags),
             )
-            self.tagged_topics.append(tagged_topic)
-        del config['tagged_topics']
+            tagged_topics.append(tagged_topic)
+        return tagged_topics
 
-        self._topic_by_extended_term = collections.defaultdict(list)
+    def create_topics(self, config) -> List[Topic]:
+        topics = []
         chapter_values = collections.defaultdict(int)
         part_values = collections.defaultdict(int)
-        for row in config['program']:
+        for row in config:
             tags = self.tags_by_raw(row)
 
             grade = tags[0].grade
@@ -116,9 +116,24 @@ class TopicDetector:
                 Terms=[tt.description for tt in self.tagged_topics if tt.tags == tags],
             )
 
+            topics.append(topic)
+
+        return topics
+
+    def __init__(self):
+        config = library.files.load_yaml_data('topics.yaml')
+
+        self.tag_by_name = {tag.name: tag for tag in self.create_tags(config['tags'])}
+        self.tagged_topics = self.create_tagged_topics(config['tagged_topics'])
+
+        self._topic_by_extended_term = collections.defaultdict(list)
+        for topic in self.create_topics(config['program']):
             for extended_term in topic.extended_terms:
                 self._topic_by_extended_term[extended_term].append(topic)
 
+        self._validate()
+
+    def _validate(self):
         assert self.get_topic_index('МКТ и термодинамика Термодинамика Внутренняя энергия идеального газа') is not None
         assert self.get_topic_index('МКТ и термодинамика Термодинамика Циклические процессы') is not None
         assert self.get_topic_index('Урок 343 - Затухающие колебания - 1') is not None
