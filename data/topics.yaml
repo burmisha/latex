@@ -1,69 +1,527 @@
-# tags:
-#   7_grade:                 7 класс
-#   8_grade:                 8 класс
-#   9_grade:                 9 класс
-#   10_grade:                10 класс
-#   11_grade:                11 класс
-#   into:                    Введение
-#   science:                 Физика как наука
-#   quantity:                Физические величины и единицы их измерения
-#   matter:                  Состояние вещества
-#   base_speed:              Скорость
-#   base_mass:               Масса
-#   base_force:              Сила
-#   base_pressure:           Давление
-#   base_work:               Работа и мощность
-#   base_energy:             Простые механизмы и энергия
-#   termo:                   Тепловые явления
-#   electro:                 Электрические явления
-#   optics:                  Световые явления
-#   nuclear:                 Строение атома и ядра
-#   kinematics_base:         Основные понятия кинематики
-#   kinematics_speed:        Скорости и равномерное прямолинейное движение
-#   kinematics_acceleration: Равноускоренное движение
-#   kinematics_rotary:       Криволинейное и вращательное движение
-#   momentum:                Импульс и момент импульса
-#   energy:                  Работа и энергия
-#   hydro:                   Гидростатика
-#   statics:                 Статика
-#   mkt:                     Основы молекулярно-кинетической теории
-#   ideal_gas:               Уравнение состояния идеального газа
-#   termodynamics:           Термодинамика
-#   vapor:                   Свойства паров, жидкостей и твердых тел
-#   electrostatics:          Электростатика
-#   om:                      Законы постоянного тока
-#   magnet:                  Магнитное поле
-#   induction:               Электромагнитная индукция
-#   meduim_current:          Электрический ток в различных средах
-#   base_waves:              Повторение механики
-#   differential:            Элементы дифференциального исчисления
-#   oscillation:             Механические колебания
-#   em_oscillation:          Электромагнитные колебания
-#   waves:                   Механические волны
-#   em_waves:                Электромагнитные волны
-#   optics_geom:             Геометрическая оптика
-#   photometry:              Фотометрия
-#   optics_phys:             Физическая оптика
-#   relativity:              Специальная теория относительности
-#   atom:                    Атомная физика
-#   nuclear:                 Физика ядра
+tags:
+  7_grade:                 7 класс
+  8_grade:                 8 класс
+  9_grade:                 9 класс
+  10_grade:                10 класс
+  11_grade:                11 класс
+  into:                    Введение
+  science:                 Физика как наука
+  quantity:                Физические величины и единицы их измерения
+  matter:                  Состояние вещества
+  base:                    Основные физические величины
+  base_speed:              Скорость
+  base_mass:               Масса
+  base_force:              Сила
+  base_pressure:           Давление
+  base_work:               Работа и мощность
+  base_energy:             Простые механизмы и энергия
+  termo:                   Тепловые явления
+  electro:                 Электрические явления
+  optics:                  Световые явления
+  nuclear:                 Строение атома и ядра
+  kinematics_base:         Основные понятия кинематики
+  kinematics_speed:        Скорости и равномерное прямолинейное движение
+  kinematics_acceleration: Равноускоренное движение
+  kinematics_rotary:       Криволинейное и вращательное движение
+  conservation:            Законы сохранения
+  momentum:                Импульс и момент импульса
+  energy:                  Работа и энергия
+  hydro:                   Гидростатика
+  statics:                 Статика
+  mkt:                     Основы молекулярно-кинетической теории
+  ideal_gas:               Уравнение состояния идеального газа
+  mkt_n_termodynamics:     МКТ и термодинамика
+  termodynamics:           Термодинамика
+  vapor:                   Свойства паров, жидкостей и твердых тел
+  electrostatics:          Электростатика
+  om:                      Законы постоянного тока
+  magnet:                  Магнитное поле
+  induction:               Электромагнитная индукция
+  meduim_current:          Электрический ток в различных средах
+  base_waves:              Повторение механики
+  differential:            Элементы дифференциального исчисления
+  oscillation:             Механические колебания
+  em_oscillation:          Электромагнитные колебания
+  waves:                   Механические волны
+  em_waves:                Электромагнитные волны
+  optics:                  Оптика
+  light:                   Световые явления
+  optics_geom:             Геометрическая оптика
+  photometry:              Фотометрия
+  optics_phys:             Физическая оптика
+  relativity:              Специальная теория относительности
+  nuclear_atom:            Строение атома и ядра
+  kinematics:              Кинематика
+  atom:                    Атомная физика
+  nuclear:                 Физика ядра
+  electodynamics:          Основы электродинамики
+  waves_n_oscillation:     Колебания и волны
 
-# tagged_topics:
-#   - {"Физика - наука о природе": [7_grade, intro, science]}
-#   - {"Научные методы изучения природы": [7_grade, intro, science]}
-#   - {"Физические величины и единицы их измерения": [7_grade, intro, quantity]}
-#   - {"Измерение физических величин. Цена деления шкалы измерительного прибора": [7_grade, intro, quantity]}
-#   - {"Вычисление и измерение площади фигур": [7_grade, intro, quantity]}
-#   - {"Вычисление и измерение объема": [7_grade, intro, quantity]}
-#   - {"Точность измерений": [7_grade, intro, quantity]}
-#   - {"Преобразование единиц измерения физических величин": [7_grade, intro, quantity]}
-#   - {"Мега-, макро- и микромир": [7_grade, intro, matter]}
-#   - {"Практическая работа Изготовление мензурки": [7_grade, intro, matter]}
-#   - {"Атомы и молекулы": [7_grade, intro, matter]}
-#   - {"Диффузия. Броуновское движение": [7_grade, intro, matter]}
-#   - {"Взаимодействие молекул. Смачивание и несмачивание": [7_grade, intro, matter]}
-#   - {"Три состояния вещества": [7_grade, intro, matter]}
-
+tagged_topics:
+ - Физика - наука о природе | 7_grade, into, science
+ - Научные методы изучения природы | 7_grade, into, science
+ - Физические величины и единицы их измерения | 7_grade, into, quantity
+ - Измерение физических величин. Цена деления шкалы измерительного прибора | 7_grade, into, quantity
+ - Вычисление и измерение площади фигур | 7_grade, into, quantity
+ - Вычисление и измерение объема | 7_grade, into, quantity
+ - Точность измерений | 7_grade, into, quantity
+ - Преобразование единиц измерения физических величин | 7_grade, into, quantity
+ - Мега-, макро- и микромир | 7_grade, into, matter
+ - Практическая работа Изготовление мензурки | 7_grade, into, matter
+ - Атомы и молекулы | 7_grade, into, matter
+ - Диффузия. Броуновское движение | 7_grade, into, matter
+ - Взаимодействие молекул. Смачивание и несмачивание | 7_grade, into, matter
+ - Три состояния вещества | 7_grade, into, matter
+ - Механическое движение. Скорость | 7_grade, base, base_speed
+ - Средняя скорость. Вычисление пути и времени движения | 7_grade, base, base_speed
+ - Координаты тела | 7_grade, base, base_speed
+ - График движения | 7_grade, base, base_speed
+ - График скорости | 7_grade, base, base_speed
+ - Одновременное движение тел | 7_grade, base, base_speed
+ - Инерция. Взаимодействие тел. Инертность | 7_grade, base, base_mass
+ - Масса - мера инертности тела | 7_grade, base, base_mass
+ - Измерение массы тела на весах | 7_grade, base, base_mass
+ - Плотность. Единицы плотности | 7_grade, base, base_mass
+ - Вычисление массы и объема тела по плотности | 7_grade, base, base_mass
+ - Сила. Единицы силы. Изображение сил | 7_grade, base, base_force
+ - Сила тяжести | 7_grade, base, base_force
+ - Сила упругости. Закон Гука | 7_grade, base, base_force
+ - Измерение сил. Динамометр | 7_grade, base, base_force
+ - Вес тела | 7_grade, base, base_force
+ - Сложение сил, направленных по одной прямой. Равнодействующая | 7_grade, base, base_force
+ - Сила трения. Коэффициент трения | 7_grade, base, base_force
+ - Трение качения. Трение в жидкостях и газах | 7_grade, base, base_force
+ - Давление. Единицы давления | 7_grade, base, base_pressure
+ - Методы увеличения и уменьшения давления | 7_grade, base, base_pressure
+ - Давление газа | 7_grade, base, base_pressure
+ - Передача давления жидкостями и газами. Закон Паскаля | 7_grade, base, base_pressure
+ - Расчет давления жидкости на дно и стенки сосуда | 7_grade, base, base_pressure
+ - Гидростатическое давление | 7_grade, base, base_pressure
+ - Сообщающиеся сосуды | 7_grade, base, base_pressure
+ - Атмосферное давление | 7_grade, base, base_pressure
+ - Экспериментальное определение плотности раствора соли | 7_grade, base, base_pressure
+ - Барометр анероид. Атмосферное давление на разных высотах | 7_grade, base, base_pressure
+ - Проявления атмосферного давления | 7_grade, base, base_pressure
+ - Манометры | 7_grade, base, base_pressure
+ - Жидкостный поршневой насос | 7_grade, base, base_pressure
+ - Гидравлический пресс | 7_grade, base, base_pressure
+ - Закон Архимеда | 7_grade, base, base_pressure
+ - Плавание тел | 7_grade, base, base_pressure
+ - Плавание судов | 7_grade, base, base_pressure
+ - Воздухоплавание | 7_grade, base, base_pressure
+ - Механическая работа. Единицы работы | 7_grade, base, base_work
+ - Мощность. Единицы мощности | 7_grade, base, base_work
+ - Простые механизмы. Рычаг. Условие равновесия рычага | 7_grade, base, base_energy
+ - Момент силы. Правило моментов | 7_grade, base, base_energy
+ - Блоки | 7_grade, base, base_energy
+ - Золотое правило механики | 7_grade, base, base_energy
+ - Коэффициент полезного действия механизма | 7_grade, base, base_energy
+ - Энергия. Превращения энергии | 7_grade, base, base_energy
+ - Вращательное движение. Период и частота вращения | 7_grade, base, base_energy
+ - Линейная скорость точки на вращающемся теле | 7_grade, base, base_energy
+ - Колебательное движение. Маятники | 7_grade, base, base_energy
+ - Исследование пружинного маятника | 7_grade, base, base_energy
+ - Механические волны. Звук | 7_grade, base, base_energy
+ - Характеристики звука - высота, громкость, тембр | 7_grade, base, base_energy
+ - Волновое движение | 7_grade, base, base_energy
+ - Тепловые явления | 8_grade, termo, termo
+ - Тепловое равновесие. Температура | 8_grade, termo, termo
+ - Тепловое расширение твердых тел, жидкостей и газов | 8_grade, termo, termo
+ - Коэффициенты линейного и объемного расширения тел | 8_grade, termo, termo
+ - Связь коэффициентов линейного и объемного расширения | 8_grade, termo, termo
+ - Экспериментальное определение коэффициента объемного расширения жидкости | 8_grade, termo, termo
+ - Внутренняя энергия тела и способы ее изменения. Количество теплоты | 8_grade, termo, termo
+ - Виды теплопередачи | 8_grade, termo, termo
+ - Теплоемкость тела. Удельная теплоемкость вещества | 8_grade, termo, termo
+ - График нагревания | 8_grade, termo, termo
+ - Уравнение теплового баланса | 8_grade, termo, termo
+ - Удельная теплота сгорания топлива. КПД нагревателя | 8_grade, termo, termo
+ - Экспериментальное определение КПД нагревателя | 8_grade, termo, termo
+ - Плавление и кристаллизация. Удельная теплота плавления | 8_grade, termo, termo
+ - Испарение и конденсация | 8_grade, termo, termo
+ - Сколько молекул воды ежесекундно испаряется с 1 кв.см ее поверхности | 8_grade, termo, termo
+ - Кипение. Удельная теплота парообразования и конденсации | 8_grade, termo, termo
+ - Зависимость температуры кипения жидкости от давления | 8_grade, termo, termo
+ - Тепловые двигатели, КПД теплового двигателя | 8_grade, termo, termo
+ - Паровая машина. Паровая турбина | 8_grade, termo, termo
+ - Двигатель внутреннего сгорания | 8_grade, termo, termo
+ - Электризация тел. Два рода электрических зарядов. Проводники и диэлектрики | 8_grade, electro, electro
+ - Электроскоп. Электрометр | 8_grade, electro, electro
+ - Электрическое поле. Делимость электрического заряда. Опыт Милликена-Иоффе | 8_grade, electro, electro
+ - Строение атома | 8_grade, electro, electro
+ - Объяснение электрических явлений | 8_grade, electro, electro
+ - Закон Кулона | 8_grade, electro, electro
+ - Закон сохранения заряда | 8_grade, electro, electro
+ - Электрический ток. Источники тока | 8_grade, electro, electro
+ - Электрическая цепь и ее составные части | 8_grade, electro, electro
+ - Действия электрического тока | 8_grade, electro, electro
+ - Изображение схем электрических цепей | 8_grade, electro, electro
+ - Сила тока. Единицы силы тока. Амперметры | 8_grade, electro, electro
+ - Электрическое напряжение | 8_grade, electro, electro
+ - Вольтметры | 8_grade, electro, electro
+ - Зависимость силы тока от напряжения. Закон Ома | 8_grade, electro, electro
+ - Вычисление сопротивления проводника. Удельное сопротивление | 8_grade, electro, electro
+ - Реостаты | 8_grade, electro, electro
+ - Последовательное и параллельное соединение проводников | 8_grade, electro, electro
+ - Работа и мощность электрического тока | 8_grade, electro, electro
+ - Закон Джоуля-Ленца | 8_grade, electro, electro
+ - Лампа накаливания. Электронагревательные приборы. Короткое замыкание. Плавкие предохранители | 8_grade, electro, electro
+ - Магнитное поле. Линии магнитного поля | 8_grade, electro, electro
+ - Магнитное поле витка и катушки с током | 8_grade, electro, electro
+ - Постоянные магниты. Гипотеза Ампера | 8_grade, electro, electro
+ - Электромагниты | 8_grade, electro, electro
+ - Применение электромагнитов | 8_grade, electro, electro
+ - Магнитное поле Земли | 8_grade, electro, electro
+ - Телеграфный аппарат | 8_grade, electro, electro
+ - Действие магнитного поля на проводник с током | 8_grade, electro, electro
+ - Рамка с током в магнитном поле. Электродвигатель | 8_grade, electro, electro
+ - Электроизмерительные приборы | 8_grade, electro, electro
+ - Магнитные явления | 8_grade, electro, electro
+ - Электромагнитная индукция | 8_grade, electro, electro
+ - Вихревые токи. Правило Ленца | 8_grade, electro, electro
+ - Электрический ток в металлах | 8_grade, electro, electro
+ - Зависимость сопротивления металлов от температуры | 8_grade, electro, electro
+ - Электрический ток в жидкостях. Закон Фарадея для электролиза | 8_grade, electro, electro
+ - Свет. Источники света. Распространение света | 8_grade, light, light
+ - Следствия из закона прямолинейного распространения света | 8_grade, light, light
+ - Отражение света. Законы отражения | 8_grade, light, light
+ - Построение изображения в плоском зеркале | 8_grade, light, light
+ - Преломление света. Законы преломления | 8_grade, light, light
+ - Прохождение света через плоскопараллельную пластинку и призму | 8_grade, light, light
+ - Полное отражение. Предельный угол полного отражения | 8_grade, light, light
+ - Определение показателя преломления материала плоскопараллельной пластинки | 8_grade, light, light
+ - Сферические линзы. Основные определения | 8_grade, light, light
+ - Построение изображений с помощью линз | 8_grade, light, light
+ - Формула тонкой линзы | 8_grade, light, light
+ - Линейное увеличение линзы | 8_grade, light, light
+ - Глаз. Зрение. Восприятие цветов | 8_grade, light, light
+ - Экспериментальное определение фокусного расстояния собирающей линзы | 8_grade, light, light
+ - Дисперсия света | 8_grade, light, light
+ - Строение ядра. Ядерная энергия. Физика ядра. | 8_grade, nuclear_atom, nuclear_atom
+ - Открытие радиоактивности. Радиоактивное излучение и его свойства | 8_grade, nuclear_atom, nuclear_atom
+ - Альфа- и бета-распад. Правила Содди | 8_grade, nuclear_atom, nuclear_atom
+ - Период полураспада. Активность радионуклидов | 8_grade, nuclear_atom, nuclear_atom
+ - Поглощенная и эквивалентная доза излучения. Счетчик Гейгера | 8_grade, nuclear_atom, nuclear_atom
+ - Реакция деления ядер. Термоядерная реакция | 8_grade, nuclear_atom, nuclear_atom
+ - ЛР Определение коэффициента ослабления гамма-излучения различными материалами | 8_grade, nuclear_atom, nuclear_atom
+ - ЛР по теме Определение коэффициента ослабления гамма-лучей | 8_grade, nuclear_atom, nuclear_atom
+ - Механическое движение и его виды. Материальная точка, траектория, перемещение | 10_grade, kinematics, kinematics_base
+ - Проекции вектора на оси координат | 10_grade, kinematics, kinematics_base
+ - Механическое движение. Основные определения кинематики | 10_grade, kinematics, kinematics_base
+ - Векторные величины. Действия над векторами | 10_grade, kinematics, kinematics_base
+ - Проекции вектора на координатные оси | 10_grade, kinematics, kinematics_base
+ - Действия над проекциями вектора | 10_grade, kinematics, kinematics_base
+ - Средняя скорость | 10_grade, kinematics, kinematics_speed
+ - Правило сложения скоростей и относительная скорость | 10_grade, kinematics, kinematics_speed
+ - Движение связанных тел | 10_grade, kinematics, kinematics_speed
+ - Равномерное прямолинейное движение | 10_grade, kinematics, kinematics_speed
+ - Графическое описание РПД | 10_grade, kinematics, kinematics_speed
+ - Графики движения | 10_grade, kinematics, kinematics_speed
+ - Средняя скорость. Средняя путевая скорость | 10_grade, kinematics, kinematics_speed
+ - Относительность движения и формула сложения скоростей | 10_grade, kinematics, kinematics_speed
+ - Прямолинейное равноускоренное движение | 10_grade, kinematics, kinematics_acceleration
+ - Графики кинематических величин | 10_grade, kinematics, kinematics_acceleration
+ - Движение по вертикали | 10_grade, kinematics, kinematics_acceleration
+ - Свободное падение | 10_grade, kinematics, kinematics_acceleration
+ - Путь в n-ю секунду | 10_grade, kinematics, kinematics_acceleration
+ - Мгновенная скорость. Равноускоренное движение. Ускорение | 10_grade, kinematics, kinematics_acceleration
+ - График скорости РУД. Перемещение при РУД | 10_grade, kinematics, kinematics_acceleration
+ - Средняя скорость при РУД | 10_grade, kinematics, kinematics_acceleration
+ - Связь перемещения при РУД с начальной и конечной скоростью | 10_grade, kinematics, kinematics_acceleration
+ - Графическое представление РУД | 10_grade, kinematics, kinematics_acceleration
+ - Свободное падение. Ускорение свободного падения | 10_grade, kinematics, kinematics_acceleration
+ - Измерение ускорения стробоскопическим методом | 10_grade, kinematics, kinematics_acceleration
+ - Движение тела, брошенного под углом к горизонту | 10_grade, kinematics, kinematics_acceleration
+ - Горизонтальный бросок | 10_grade, kinematics, kinematics_acceleration
+ - Бросок под углом к горизонту | 10_grade, kinematics, kinematics_acceleration
+ - Движение по окружности с постоянной скоростью | 10_grade, kinematics, kinematics_acceleration
+ - Криволинейное движение. Равномерное движение по окружности. Центростремительное ускорение | 10_grade, kinematics, kinematics_rotary
+ - Вращательное движение. Вращение твердого тела. Линейная и угловая скорость. Период и частота вращения | 10_grade, kinematics, kinematics_rotary
+ - Неравномерное движение по окружности. Тангенциальное ускорение | 10_grade, kinematics, kinematics_rotary
+ - Вращение с постоянным угловым ускорением | 10_grade, kinematics, kinematics_rotary
+ - Импульс тела. Относительный импульс. Изменение импульса | 10_grade, conservation, momentum
+ - Закон сохранения импульса тел | 10_grade, conservation, momentum
+ - Второй закон Ньютона в импульсном виде. Реактивная сила | 10_grade, conservation, momentum
+ - Закон сохранения импульса в проекциях на оси координат | 10_grade, conservation, momentum
+ - Импульс. Закон сохранения импульса | 10_grade, conservation, momentum
+ - Границы применимости ЗСИ | 10_grade, conservation, momentum
+ - Реактивное движение | 10_grade, conservation, momentum
+ - Момент импульса. Закон сохранения момента импульса | 10_grade, conservation, momentum
+ - Следствия из закона сохранения момента импульса | 10_grade, conservation, momentum
+ - Векторное описание вращательного движения. Гироскопический эффект | 10_grade, conservation, momentum
+ - Работа силы | 10_grade, conservation, energy
+ - Мощность | 10_grade, conservation, energy
+ - Кинетическая энергия и Теорема о кинетической энергии | 10_grade, conservation, energy
+ - Потенциальная энергия тела | 10_grade, conservation, energy
+ - Закон сохранения энергии | 10_grade, conservation, energy
+ - Превращение механической энергии в тепловую | 10_grade, conservation, energy
+ - Работа. Теорема о кинетической энергии | 10_grade, conservation, energy
+ - Работа переменной силы | 10_grade, conservation, energy
+ - Работа силы тяжести. Потенциальная энергия тела, поднятого над Землей | 10_grade, conservation, energy
+ - Потенциальная энергия гравитационного взаимодействия. Вторая космическая скорость | 10_grade, conservation, energy
+ - Работа силы упругости | 10_grade, conservation, energy
+ - Закон сохранения полной механической энергии | 10_grade, conservation, energy
+ - Закон сохранения и превращения энергии. КПД. Мощность | 10_grade, conservation, energy
+ - Связь мощности, силы и скорости | 10_grade, conservation, energy
+ - Работа, мощность и кинетическая энергия при вращательном движении | 10_grade, conservation, energy
+ - Закон сохранения энергии | 10_grade, conservation, energy
+ - Соударения тел | 10_grade, conservation, energy
+ - Частные случаи абсолютно упругого центрального соударения | 10_grade, conservation, energy
+ - Сила Архимеда | 10_grade, statics, hydro
+ - Гидравлический пресс | 10_grade, statics, hydro
+ - Сообщающиеся сосуды | 10_grade, statics, hydro
+ - Основные понятия гидродинамики. Уравнение непрерывности | 10_grade, statics, hydro
+ - Закон Бернулли. Уравнение Бернулли | 10_grade, statics, hydro
+ - Применения уравнения Бернулли | 10_grade, statics, hydro
+ - Подъемная сила крыла самолета | 10_grade, statics, hydro
+ - Движение тела в жидкости и газе | 10_grade, statics, hydro
+ - Число Рейнольдса. Критерий Рейнольдса | 10_grade, statics, hydro
+ - Виды равновесия. Условие равновесия тела при отсутствии вращения | 10_grade, statics, statics
+ - Правило сил | 10_grade, statics, statics
+ - Равновесие тела с закрепленной осью вращения | 10_grade, statics, statics
+ - Следствия из условий равновесия тела | 10_grade, statics, statics
+ - Правило моментов | 10_grade, statics, statics
+ - Центр масс тела и методы определения его положения | 10_grade, statics, statics
+ - Определение положения центра масс тела | 10_grade, statics, statics
+ - Устойчивость тел в присутствии силы тяжести | 10_grade, statics, statics
+ - Равнодействующая параллельных сил. Пара сил | 10_grade, statics, statics
+ - Теорема о движении центра масс | 10_grade, statics, statics
+ - Температура | 10_grade, mkt_n_termodynamics, mkt
+ - Основное уравнение молекулярно-кинетической теории идеального газа | 10_grade, mkt_n_termodynamics, mkt
+ - Объединенный газовый закон | 10_grade, mkt_n_termodynamics, mkt
+ - Закон Дальтона | 10_grade, mkt_n_termodynamics, mkt
+ - Уравнение Клапейрона-Менделеева | 10_grade, mkt_n_termodynamics, mkt
+ - Изопроцессы | 10_grade, mkt_n_termodynamics, mkt
+ - Графики изопроцессов | 10_grade, mkt_n_termodynamics, mkt
+ - Влажность воздуха | 10_grade, mkt_n_termodynamics, mkt
+ - Основные положения МКТ | 10_grade, mkt_n_termodynamics, mkt
+ - Опыт Перрена. Масса молекул. Взаимодействие молекул | 10_grade, mkt_n_termodynamics, mkt
+ - Количество вещества. Молярная масса. Оценка размеров молекул. Число молекул | 10_grade, mkt_n_termodynamics, mkt
+ - Идеальный газ | 10_grade, mkt_n_termodynamics, mkt
+ - Основное уравнение МКТ идеального газа | 10_grade, mkt_n_termodynamics, mkt
+ - Тепловое равновесие. Температура | 10_grade, mkt_n_termodynamics, mkt
+ - Абсолютная температурная шкала | 10_grade, mkt_n_termodynamics, mkt
+ - Средняя кинетическая энергия молекул многоатомного газа | 10_grade, mkt_n_termodynamics, mkt
+ - Среднеквадратичная скорость молекул. Опыт Штерна | 10_grade, mkt_n_termodynamics, mkt
+ - Распределение молекул по скоростям | 10_grade, mkt_n_termodynamics, mkt
+ - Изучение распределения Максвелла | 10_grade, mkt_n_termodynamics, mkt
+ - Уравнение состояния идеального газа. Квазистатические процессы | 10_grade, mkt_n_termodynamics, ideal_gas
+ - Изопроцессы и их графики. Частные газовые законы | 10_grade, mkt_n_termodynamics, ideal_gas
+ - Построение графиков изопроцессов в различных координатах | 10_grade, mkt_n_termodynamics, ideal_gas
+ - Работа в термодинамике | 10_grade, mkt_n_termodynamics, termodynamics
+ - Работа газа | 10_grade, mkt_n_termodynamics, termodynamics
+ - Внутренняя энергия и способы её изменения | 10_grade, mkt_n_termodynamics, termodynamics
+ - Внутренняя энергия идеального газа | 10_grade, mkt_n_termodynamics, termodynamics
+ - Количество теплоты | 10_grade, mkt_n_termodynamics, termodynamics
+ - Первое начало термодинамики | 10_grade, mkt_n_termodynamics, termodynamics
+ - Адиабатный процесс | 10_grade, mkt_n_termodynamics, termodynamics
+ - Теплоёмкость | 10_grade, mkt_n_termodynamics, termodynamics
+ - Молярная теплоёмкость | 10_grade, mkt_n_termodynamics, termodynamics
+ - Удельная теплоёмкость | 10_grade, mkt_n_termodynamics, termodynamics
+ - Циклические процессы | 10_grade, mkt_n_termodynamics, termodynamics
+ - Тепловые машины | 10_grade, mkt_n_termodynamics, termodynamics
+ - Агрегатные (фазовые) переходы | 10_grade, mkt_n_termodynamics, termodynamics
+ - Предмет термодинамики. Внутренняя энергия тела | 10_grade, mkt_n_termodynamics, termodynamics
+ - Вычисление работы в термодинамике | 10_grade, mkt_n_termodynamics, termodynamics
+ - Количество теплоты. Первый закон термодинамики | 10_grade, mkt_n_termodynamics, termodynamics
+ - Применение 1 закона термодинамики для различных процессов | 10_grade, mkt_n_termodynamics, termodynamics
+ - Уравнение теплового баланса | 10_grade, mkt_n_termodynamics, termodynamics
+ - Теплопередача | 10_grade, mkt_n_termodynamics, termodynamics
+ - Тепловые двигатели и их КПД. Цикл Карно | 10_grade, mkt_n_termodynamics, termodynamics
+ - Двигатель внутреннего сгорания | 10_grade, mkt_n_termodynamics, termodynamics
+ - Холодильные машины и тепловые насосы | 10_grade, mkt_n_termodynamics, termodynamics
+ - Устройство компрессионного холодильника | 10_grade, mkt_n_termodynamics, termodynamics
+ - Свойства паров - Испарение и конденсация. Насыщенный пар и его свойства | 10_grade, mkt_n_termodynamics, vapor
+ - Свойства паров - Температурная зависимость давления пара. Точка росы | 10_grade, mkt_n_termodynamics, vapor
+ - Свойства паров - Влажность воздуха. Абсолютная и относительная влажность | 10_grade, mkt_n_termodynamics, vapor
+ - Свойства паров - Приборы для измерения влажности | 10_grade, mkt_n_termodynamics, vapor
+ - Свойства паров - Кипение жидкости | 10_grade, mkt_n_termodynamics, vapor
+ - Свойства паров - Критическая температура | 10_grade, mkt_n_termodynamics, vapor
+ - Свойства паров - Уравнение Ван-дер-Ваальса | 10_grade, mkt_n_termodynamics, vapor
+ - Свойства паров - Изотермы реального газа | 10_grade, mkt_n_termodynamics, vapor
+ - Свойства жидкостей - Поверхностная энергия. Коэффициент поверхностного натяжения | 10_grade, mkt_n_termodynamics, vapor
+ - Свойства жидкостей - Смачивание. Капиллярные явления | 10_grade, mkt_n_termodynamics, vapor
+ - Свойства жидкостей - Давление под искривленной поверхностью жидкости. Формула Лапласа | 10_grade, mkt_n_termodynamics, vapor
+ - Свойства жидкостей - Поверхностные явления в природе, технике и в быту | 10_grade, mkt_n_termodynamics, vapor
+ - Свойства твердых тел - Кристаллические и аморфные тела | 10_grade, mkt_n_termodynamics, vapor
+ - Свойства твердых тел - Деформация твердых тел. Классификация видов деформации | 10_grade, mkt_n_termodynamics, vapor
+ - Свойства твердых тел - Закон Гука. Модуль Юнга | 10_grade, mkt_n_termodynamics, vapor
+ - Свойства твердых тел - Диаграмма растяжения. Запас прочности | 10_grade, mkt_n_termodynamics, vapor
+ - Свойства твердых тел - Дефекты в кристаллах. Управление механическими свойствами материалов | 10_grade, mkt_n_termodynamics, vapor
+ - Свойства твердых тел - Жидкие кристаллы | 10_grade, mkt_n_termodynamics, vapor
+ - Электрические заряды и их взаимодействие. Закон Кулона | 10_grade, electodynamics, electrostatics
+ - Закон Кулона | 10_grade, electodynamics, electrostatics
+ - Напряженность электрического поля | 10_grade, electodynamics, electrostatics
+ - Поток вектора напряженности электрического поля | 10_grade, electodynamics, electrostatics
+ - Теорема Гаусса | 10_grade, electodynamics, electrostatics
+ - Напряженность поля неточечных зарядов | 10_grade, electodynamics, electrostatics
+ - Поток вектора напряженности электрического поля | 10_grade, electodynamics, electrostatics
+ - Плоский конденсатор | 10_grade, electodynamics, electrostatics
+ - Проводники в электрическом поле | 10_grade, electodynamics, electrostatics
+ - Диэлектрики в электрическом поле. Диэлектрическая проницаемость | 10_grade, electodynamics, electrostatics
+ - Работа электрического поля | 10_grade, electodynamics, electrostatics
+ - Электрический потенциал | 10_grade, electodynamics, electrostatics
+ - Электрическое напряжение | 10_grade, electodynamics, electrostatics
+ - Электрон-вольт. Потенциал поля точечного заряда | 10_grade, electodynamics, electrostatics
+ - Метод электростатических изображений | 10_grade, electodynamics, electrostatics
+ - Электрическая емкость (электроемкость). Конденсаторы | 10_grade, electodynamics, electrostatics
+ - Емкость плоского конденсатора. Классификация конденсаторов | 10_grade, electodynamics, electrostatics
+ - Соединение конденсаторов в батареи | 10_grade, electodynamics, electrostatics
+ - Энергия электрического поля | 10_grade, electodynamics, electrostatics
+ - Условия существования постоянного тока. Электродвижущая сила | 10_grade, electodynamics, om
+ - Закон Ома. Вычисление сопротивления проводника | 10_grade, electodynamics, om
+ - Последовательное и параллельное соединение проводников | 10_grade, electodynamics, om
+ - Расчет электрических цепей | 10_grade, electodynamics, om
+ - Измерение напряжения и силы тока | 10_grade, electodynamics, om
+ - Тепловое действие тока. Закон Джоуля-Ленца. Работа и мощность электрического тока | 10_grade, electodynamics, om
+ - Закон Ома для полной - замкнутой - цепи | 10_grade, electodynamics, om
+ - Потери энергии в ЛЭП. Условие согласования источника тока с нагрузкой | 10_grade, electodynamics, om
+ - Правила Кирхгофа | 10_grade, electodynamics, om
+ - Соединение источников тока в батареи | 10_grade, electodynamics, om
+ - Компенсационные методы измерения ЭДС и сопротивления | 10_grade, electodynamics, om
+ - КПД электрического тока | 10_grade, electodynamics, om
+ - Магнитное поле и его характеристики | 11_grade, electodynamics, magnet
+ - Модуль вектора магнитной индукции. Закон Ампера | 11_grade, electodynamics, magnet
+ - Рамка с током в магнитном поле | 11_grade, electodynamics, magnet
+ - Электроизмерительные приборы. Громкоговорители | 11_grade, electodynamics, magnet
+ - Сила Лоренца. Движение заряженных частиц в магнитном поле | 11_grade, electodynamics, magnet
+ - Масс-спектрограф. Циклотрон. Магнитный щит Земли | 11_grade, electodynamics, magnet
+ - Электромагнитная индукция. Магнитный поток. Правило Ленца | 11_grade, electodynamics, induction
+ - Закон Фарадея для электромагнитной индукции | 11_grade, electodynamics, induction
+ - Вихревое электрическое поле | 11_grade, electodynamics, induction
+ - Индуктивность контура - катушки - явление самоиндукции | 11_grade, electodynamics, induction
+ - Явление самоиндукции | 11_grade, electodynamics, induction
+ - Магнитное поле в веществе. Магнитная проницаемость. Диа-, пара- и ферромагнетики | 11_grade, electodynamics, induction
+ - Объяснение свойств ферромагнетиков | 11_grade, electodynamics, induction
+ - Энергия магнитного поля | 11_grade, electodynamics, induction
+ - Основы электронной теории электропроводности металлов | 11_grade, electodynamics, meduim_current
+ - Вывод закона Ома из электронной теории | 11_grade, electodynamics, meduim_current
+ - Температурная зависимость сопротивления металлов. Сверхпроводимость | 11_grade, electodynamics, meduim_current
+ - Электрический ток в жидкостях. Закон Фарадея для электролиза | 11_grade, electodynamics, meduim_current
+ - Применение электролиза | 11_grade, electodynamics, meduim_current
+ - Об измерении элементарного заряда | 11_grade, electodynamics, meduim_current
+ - Электрической ток в вакууме. Вакуумный диод | 11_grade, electodynamics, meduim_current
+ - Вакуумный триод. Усилитель на вакуумном триоде | 11_grade, electodynamics, meduim_current
+ - Электронные пучки. Электронно-лучевая трубка. Осциллограф | 11_grade, electodynamics, meduim_current
+ - Электрический ток в полупроводниках. Собственная и примесная проводимость | 11_grade, electodynamics, meduim_current
+ - Электронно-дырочный переход. Полупроводниковый диод | 11_grade, electodynamics, meduim_current
+ - Ток в вакууме и полупроводники | 11_grade, electodynamics, meduim_current
+ - Транзистор. Усилитель на транзисторе | 11_grade, electodynamics, meduim_current
+ - Электрический ток в газах. Плазма | 11_grade, electodynamics, meduim_current
+ - Виды газового разряда | 11_grade, electodynamics, meduim_current
+ - Основные понятия и соотношения кинематики | 11_grade, waves_n_oscillation, base_waves
+ - Основные законы и соотношения динамики | 11_grade, waves_n_oscillation, base_waves
+ - Законы сохранения. Импульс. Работа. Энергия | 11_grade, waves_n_oscillation, base_waves
+ - Производная функции и ее геометрический смысл | 11_grade, waves_n_oscillation, differential
+ - Правила вычисления производной | 11_grade, waves_n_oscillation, differential
+ - Производная сложной функции. Производная тригонометрических функций | 11_grade, waves_n_oscillation, differential
+ - Применение производной в задачах физики | 11_grade, waves_n_oscillation, differential
+ - Гармонические колебания | 11_grade, waves_n_oscillation, differential
+ - Колебательное движение и его характеристики | 11_grade, waves_n_oscillation, oscillation
+ - Динамика колебательного движения | 11_grade, waves_n_oscillation, oscillation
+ - Гармонические колебания | 11_grade, waves_n_oscillation, oscillation
+ - Зависимость периода свободных колебаний от параметров колебательной системы | 11_grade, waves_n_oscillation, oscillation
+ - Скорость и ускорение при гармонических колебаниях | 11_grade, waves_n_oscillation, oscillation
+ - Силовой метод расчета частоты свободных колебаний | 11_grade, waves_n_oscillation, oscillation
+ - Энергетический метод расчета частоты свободных колебаний | 11_grade, waves_n_oscillation, oscillation
+ - Анализ графика гармонических колебаний | 11_grade, waves_n_oscillation, oscillation
+ - Векторное представление колебаний | 11_grade, waves_n_oscillation, oscillation
+ - Сложение колебаний одной частоты. Метод векторных диаграмм | 11_grade, waves_n_oscillation, oscillation
+ - Сложение колебаний близких частот. Биения | 11_grade, waves_n_oscillation, oscillation
+ - Сложение колебаний кратных частот. Гармонический анализ и синтез | 11_grade, waves_n_oscillation, oscillation
+ - Сложение взаимно перпендикулярных колебаний. Фигуры Лиссажу | 11_grade, waves_n_oscillation, oscillation
+ - Затухающие колебания | 11_grade, waves_n_oscillation, oscillation
+ - Добротность колебательной системы | 11_grade, waves_n_oscillation, oscillation
+ - Определение добротности по графику затухающих колебаний | 11_grade, waves_n_oscillation, oscillation
+ - Вынужденные колебания | 11_grade, waves_n_oscillation, oscillation
+ - Резонанс | 11_grade, waves_n_oscillation, oscillation
+ - Электромагнитная индукция | 11_grade, waves_n_oscillation, em_oscillation
+ - Колебательный контур | 11_grade, waves_n_oscillation, em_oscillation
+ - Математическое описание процессов в колебательном контуре | 11_grade, waves_n_oscillation, em_oscillation
+ - Затухающие электромагнитные колебания | 11_grade, waves_n_oscillation, em_oscillation
+ - Переменный ток | 11_grade, waves_n_oscillation, em_oscillation
+ - Генератор переменного электрического тока | 11_grade, waves_n_oscillation, em_oscillation
+ - Активное сопротивление в цепи переменного тока. Действующее значение тока и напряжения | 11_grade, waves_n_oscillation, em_oscillation
+ - Конденсатор и катушка индуктивности в цепи переменного тока | 11_grade, waves_n_oscillation, em_oscillation
+ - Вынужденные колебания в последовательном колебательном контуре | 11_grade, waves_n_oscillation, em_oscillation
+ - Анализ вынужденных электромагнитных колебаний методом векторных диаграмм | 11_grade, waves_n_oscillation, em_oscillation
+ - Мощность в цепи переменного тока | 11_grade, waves_n_oscillation, em_oscillation
+ - Автоколебания. Транзисторный генератор незатухающих колебаний | 11_grade, waves_n_oscillation, em_oscillation
+ - Трансформатор | 11_grade, waves_n_oscillation, em_oscillation
+ - Передача электроэнергии на расстояние | 11_grade, waves_n_oscillation, em_oscillation
+ - Механические волны. Математическое описание бегущей волны | 11_grade, waves_n_oscillation, waves
+ - Фазовая скорость волны. Скорость поперечной волны в струне | 11_grade, waves_n_oscillation, waves
+ - Скорость продольной волны в стержне. Скорость звука в жидкостях и газах | 11_grade, waves_n_oscillation, waves
+ - Волновое движение | 11_grade, waves_n_oscillation, waves
+ - Энергия, переносимая волной. Интенсивность сферической волны | 11_grade, waves_n_oscillation, waves
+ - Стоячие волны | 11_grade, waves_n_oscillation, waves
+ - Колебания струн, стержней и воздушных столбов | 11_grade, waves_n_oscillation, waves
+ - Звук и его характеристики | 11_grade, waves_n_oscillation, waves
+ - Методы определения скорости звука в воздухе | 11_grade, waves_n_oscillation, waves
+ - Эффект Доплера в акустике | 11_grade, waves_n_oscillation, waves
+ - Интерференция волн | 11_grade, waves_n_oscillation, waves
+ - Принцип Гюйгенса. Вывод законов отражения и преломления волн | 11_grade, waves_n_oscillation, waves
+ - Распространение волн в неоднородных средах. Рефракция. Дифракция | 11_grade, waves_n_oscillation, waves
+ - Вихревое электрическое поле. Ток смещения | 11_grade, waves_n_oscillation, em_waves
+ - Электромагнитные волны | 11_grade, waves_n_oscillation, em_waves
+ - Излучение электромагнитных волн | 11_grade, waves_n_oscillation, em_waves
+ - Опыты Герца. Свойства электромагнитных волн | 11_grade, waves_n_oscillation, em_waves
+ - Изобретение радио. Принципы радиосвязи | 11_grade, waves_n_oscillation, em_waves
+ - Принципы радиосвязи. Распространение волн различных диапазонов | 11_grade, waves_n_oscillation, em_waves
+ - Радиолокация. Физические основы телевидения | 11_grade, waves_n_oscillation, em_waves
+ - Законы геометрической оптики | 11_grade, optics, optics_geom
+ - Сферические линзы. Основные определения | 11_grade, optics, optics_geom
+ - Построение изображений с помощью линз | 11_grade, optics, optics_geom
+ - Формула тонкой линзы. Линейное увеличение линзы | 11_grade, optics, optics_geom
+ - Недостатки линз | 11_grade, optics, optics_geom
+ - Преломление света сферической поверхностью | 11_grade, optics, optics_geom
+ - Формула шлифовщика линз | 11_grade, optics, optics_geom
+ - Оптика сферических зеркал | 11_grade, optics, optics_geom
+ - Оптические приборы | 11_grade, optics, optics_geom
+ - Основные понятия фотометрии | 11_grade, optics, photometry
+ - Скорость света и ее измерение | 11_grade, optics, optics_phys
+ - Интерференция света | 11_grade, optics, optics_phys
+ - Интерференционные схемы | 11_grade, optics, optics_phys
+ - Интерференция в тонких пленках | 11_grade, optics, optics_phys
+ - Кольца Ньютона | 11_grade, optics, optics_phys
+ - Дифракция света | 11_grade, optics, optics_phys
+ - Дифракционная решетка | 11_grade, optics, optics_phys
+ - Поляризация света. Закон Малюса | 11_grade, optics, optics_phys
+ - Угол Брюстера. Интерференция поляризованных лучей | 11_grade, optics, optics_phys
+ - Спектральные приборы. Виды спектров | 11_grade, optics, optics_phys
+ - Шкала электромагнитных излучений | 11_grade, optics, optics_phys
+ - Постулаты СТО | 11_grade, optics, relativity
+ - Следствия из постулатов СТО | 11_grade, optics, relativity
+ - Элементы релятивистской динамики | 11_grade, optics, relativity
+ - Фотоэффект. Законы фотоэффекта | 11_grade, optics, relativity
+ - Теория фотоэффекта. Фотоэлементы | 11_grade, optics, relativity
+ - Давление света. Масса и импульс фотона | 11_grade, optics, relativity
+ - Квантовая оптика | 11_grade, optics, relativity
+ - Понятие о планетарной модели | 11_grade, nuclear_atom, atom
+ - Постулаты Бора. Опыты Франка и Герца | 11_grade, nuclear_atom, atom
+ - Особенности спектра атома водорода. Диаграмма Гротриана | 11_grade, nuclear_atom, atom
+ - Атомная физика | 11_grade, nuclear_atom, atom
+ - Модель атома водорода по Бору | 11_grade, nuclear_atom, atom
+ - Вывод формулы Ридберга по Бору | 11_grade, nuclear_atom, atom
+ - Корпускулярно-волновой дуализм. Гипотеза де Бройля | 11_grade, nuclear_atom, atom
+ - Экспериментальное подтверждение справедливости гипотезы де Бройля | 11_grade, nuclear_atom, atom
+ - Понятие о волновой функции | 11_grade, nuclear_atom, atom
+ - Уравнение Шрёдингера | 11_grade, nuclear_atom, atom
+ - Движение микрообъекта в одномерной бесконечно глубокой потенциальной яме | 11_grade, nuclear_atom, atom
+ - Соотношение неопределенностей | 11_grade, nuclear_atom, atom
+ - Обзор квантовой теории атома водорода | 11_grade, nuclear_atom, atom
+ - Портрет атома водорода. Многоэлектронные атомы | 11_grade, nuclear_atom, atom
+ - Периодическая система элементов | 11_grade, nuclear_atom, atom
+ - Вынужденное излучение. Лазеры | 11_grade, nuclear_atom, atom
+ - Открытие естественной радиоактивности. Альфа-, бета- и гамма-излучение | 11_grade, nuclear_atom, nuclear
+ - Методы регистрации элементарных частиц | 11_grade, nuclear_atom, nuclear
+ - Радиоактивные превращения. Правила смещения Содди | 11_grade, nuclear_atom, nuclear
+ - Закон радиоактивного распада | 11_grade, nuclear_atom, nuclear
+ - Открытие нейтрона. Протонно-нейтронная модель ядра | 11_grade, nuclear_atom, nuclear
+ - Ядерные реакции. Энергетический выход ядерной реакции | 11_grade, nuclear_atom, nuclear
+ - Реакция деления ядер урана. Ядерная энергетика | 11_grade, nuclear_atom, nuclear
+ - Термоядерная реакция | 11_grade, nuclear_atom, nuclear
+ - Элементарные частицы. Позитрон. Нейтрино | 11_grade, nuclear_atom, nuclear
 
 7:
     - name: Введение
@@ -683,7 +1141,7 @@
             - Давление света. Масса и импульс фотона
             - Квантовая оптика
 
-    - name: Физика атома и ядра
+    - name: Строение атома и ядра
       parts:
         - name: Атомная физика
           terms:
