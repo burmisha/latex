@@ -4,7 +4,7 @@ tags:
   9_grade:                 9 класс
   10_grade:                10 класс
   11_grade:                11 класс
-  into:                    Введение
+  introduction:            Введение
   science:                 Физика как наука
   quantity:                Физические величины и единицы их измерения
   matter:                  Состояние вещества
@@ -58,20 +58,20 @@ tags:
   waves_n_oscillation:     Колебания и волны
 
 tagged_topics:
- - Физика - наука о природе | 7_grade, into, science
- - Научные методы изучения природы | 7_grade, into, science
- - Физические величины и единицы их измерения | 7_grade, into, quantity
- - Измерение физических величин. Цена деления шкалы измерительного прибора | 7_grade, into, quantity
- - Вычисление и измерение площади фигур | 7_grade, into, quantity
- - Вычисление и измерение объема | 7_grade, into, quantity
- - Точность измерений | 7_grade, into, quantity
- - Преобразование единиц измерения физических величин | 7_grade, into, quantity
- - Мега-, макро- и микромир | 7_grade, into, matter
- - Практическая работа Изготовление мензурки | 7_grade, into, matter
- - Атомы и молекулы | 7_grade, into, matter
- - Диффузия. Броуновское движение | 7_grade, into, matter
- - Взаимодействие молекул. Смачивание и несмачивание | 7_grade, into, matter
- - Три состояния вещества | 7_grade, into, matter
+ - Физика - наука о природе | 7_grade, introduction, science
+ - Научные методы изучения природы | 7_grade, introduction, science
+ - Физические величины и единицы их измерения | 7_grade, introduction, quantity
+ - Измерение физических величин. Цена деления шкалы измерительного прибора | 7_grade, introduction, quantity
+ - Вычисление и измерение площади фигур | 7_grade, introduction, quantity
+ - Вычисление и измерение объема | 7_grade, introduction, quantity
+ - Точность измерений | 7_grade, introduction, quantity
+ - Преобразование единиц измерения физических величин | 7_grade, introduction, quantity
+ - Мега-, макро- и микромир | 7_grade, introduction, matter
+ - Практическая работа Изготовление мензурки | 7_grade, introduction, matter
+ - Атомы и молекулы | 7_grade, introduction, matter
+ - Диффузия. Броуновское движение | 7_grade, introduction, matter
+ - Взаимодействие молекул. Смачивание и несмачивание | 7_grade, introduction, matter
+ - Три состояния вещества | 7_grade, introduction, matter
  - Механическое движение. Скорость | 7_grade, base, base_speed
  - Средняя скорость. Вычисление пути и времени движения | 7_grade, base, base_speed
  - Координаты тела | 7_grade, base, base_speed
@@ -524,9 +524,9 @@ tagged_topics:
  - Элементарные частицы. Позитрон. Нейтрино | 11_grade, nuclear_atom, nuclear
 
 program:
-  - 7_grade, into, science
-  - 7_grade, into, quantity
-  - 7_grade, into, matter
+  - 7_grade, introduction, science
+  - 7_grade, introduction, quantity
+  - 7_grade, introduction, matter
   - 7_grade, base, base_speed
   - 7_grade, base, base_mass
   - 7_grade, base, base_force
