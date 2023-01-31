@@ -142,7 +142,7 @@ def run(args):
         video
         for video in get_all_videos(
             add_channels=args.channels,
-            add_playlists=args.add_playlists,
+            add_playlists=args.playlists,
             add_pavel_viktor=args.pavel_viktor
         )
     ]
@@ -159,7 +159,7 @@ def run(args):
         video.title = canonizer.Canonize(video.title)
 
     topic_detector = library.topic.TopicDetector()
-    topic_filter =  library.topic.TopicFilter(args.filter)
+    topic_filter = library.topic.TopicFilter(args.filter)
 
     video_with_topics = []
     for video in videos:
