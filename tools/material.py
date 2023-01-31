@@ -32,11 +32,12 @@ def serialize_list_of_dicts(items: List[dict]) -> str:
     return serialized
 
 
-def run(args):
-    raw_file = library.location.root('data', 'materials_raw.yaml')
-    ready_file = library.location.root('data', 'materials_ready.yaml')
+class MaterialHandler:
+    def __init__(self):
+        self.raw_file = library.location.root('data', 'materials_raw.yaml')
+        self.ready_file = library.location.root('data', 'materials_ready.yaml')
 
-    if args.save:
+    def save(self):
         download_cfg = library.files.load_yaml_data('download.yaml')
         videos = tools.download.get_pavel_viktor_videos(download_cfg['PavelVictor'])
 
@@ -51,10 +52,10 @@ def run(args):
         ]
         data = [{k: v for k, v in attr.asdict(material).items() if v} for material in materials]
         serialized = serialize_list_of_dicts(data)
-        with open(raw_file, 'w') as f:
+        with open(self.raw_file, 'w') as f:
             f.write(serialized)
 
-    if args.prepare:
+    def prepare(self):
         canonizer = library.normalize.TitleCanonizer()
         topic_detector = library.topic.TopicDetector()
 
@@ -74,9 +75,17 @@ def run(args):
 
         data = [{k: v for k, v in attr.asdict(material).items() if v} for material in materials]
         serialized = serialize_list_of_dicts(data)
-        with open(ready_file, 'w') as f:
+        with open(self.ready_file, 'w') as f:
             f.write(serialized)
-        
+
+
+def run(args):
+    material_handler = MaterialHandler()
+    if args.save:
+        material_handler.save()
+    if args.prepare:
+        material_handler.prepare()
+
 
 def populate_parser(parser):
     parser.add_argument('-s', '--save', help='Save yaml', action='store_true')
