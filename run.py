@@ -47,9 +47,10 @@ def get_log_level(args):
 
 
 def CreateArgumentsParser():
+    formatter = argparse.ArgumentDefaultsHelpFormatter
     parser = argparse.ArgumentParser(
         description='One script to run all tools',
-        formatter_class=argparse.ArgumentDefaultsHelpFormatter,
+        formatter_class=formatter,
     )
 
     log_format_group = parser.add_argument_group('Logging arguments')
@@ -89,7 +90,7 @@ def CreateArgumentsParser():
         subparser = subparsers.add_parser(
             mode_name,
             help=help_message,
-            formatter_class=argparse.ArgumentDefaultsHelpFormatter,
+            formatter_class=formatter,
         )
         populate_module.populate_parser(subparser)
 
