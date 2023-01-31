@@ -185,7 +185,7 @@ class FileCopier(object):
             log.info(f'Creating {destination_path} from template')
             shutil.copy(self._source_file, destination_path)
         else:
-            log.info('File %s already exists', destination_path)
+            log.info(f'File {destination_path} already exists')
 
 
 def is_older(first_file, second_file):

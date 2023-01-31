@@ -238,22 +238,29 @@ assert get_study_year('2021-2022') == 2021
 
 
 def get_class_from_string(value, addMyself=False, onlyMe=False) -> Optional[Pupils]:
+    assert isinstance(value, str), f'Trying to search not by str: {value!r}'
+
     search_by_id = names_picker.get(value)
     if search_by_id:
         return search_by_id
 
-    assert isinstance(value, str), f'Trying to search not by str: {value!r}'
-    assert ' ' in value, f'No space in class name: {value!r}'
-
     value = value.split('.', 1)[0]
-    parts = value.split()
-    date_part, class_part = parts[0], parts[1]
-    study_year = get_study_year(date_part)
-
-    if (len(parts)) >= 3 and (len(parts[2]) <= 2):
-        key = f'{study_year} {class_part} {parts[2]}'
-    else:
+    matches = re.match(r'^(20\d{2}-\d{2}-\d{2})-(\d+)\b', value)
+    if matches:
+        study_year = get_study_year(matches.group(1))
+        class_part = matches.group(2)
         key = f'{study_year} {class_part}'
+    elif ' ' in value:
+        parts = value.split()
+        date_part, class_part = parts[0], parts[1]
+        study_year = get_study_year(date_part)
+
+        if (len(parts)) >= 3 and (len(parts[2]) <= 2):
+            key = f'{study_year} {class_part} {parts[2]}'
+        else:
+            key = f'{study_year} {class_part}'
+    else:
+        raise ValueError(f'Invalid value to search class: {value!r}')
 
     pupils = names_picker.get(key)
     if not pupils:
@@ -274,6 +281,8 @@ assert get_class_from_string('2021-04-30 10')._id == '2020-10-АБ'
 assert get_class_from_string('2021-04-30 10.docx')._id == '2020-10-АБ'
 assert get_class_from_string('2021-04-30 10 класс.docx')._id == '2020-10-АБ'
 assert get_class_from_string('2021-06-30 10 - занятие.docx')._id == '2020-10-АБ'
+assert get_class_from_string('2021-06-30-10')._id == '2020-10-АБ'
+assert get_class_from_string('2021-06-30-10 - занятие')._id == '2020-10-АБ'
 assert get_class_from_string('2022-09-01 10-0')._id == '2022-10-0'
 assert get_class_from_string('2022-23 10-0')._id == '2022-10-0'
 assert get_class_from_string('2022-09-01 10-0').get_path().endswith('/10 класс/2022-23 10-0 Физика - private')

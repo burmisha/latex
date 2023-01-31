@@ -1,8 +1,7 @@
-import library.datetools
 import library.files
 from library.pupils import get_study_year
 
-from typing import Iterable
+from typing import List
 import itertools
 import datetime
 
@@ -12,7 +11,10 @@ log = logging.getLogger(__name__)
 import os
 import shutil
 
-AFTER_DAYS = 12
+
+def today():
+    now = datetime.datetime.now()
+    return now.replace(hour=0, minute=0, second=0, microsecond=0)
 
 
 class LessonPaper:
@@ -20,35 +22,31 @@ class LessonPaper:
         if ('/' in name) or (name.count('.') > 1) or (not library.files.path_is_ok(name)):
             raise RuntimeError(f'Invalid lesson paper: {name}')
         self._name = name.split('.', 1)[0]
-        self.dt = datetime.datetime.strptime(name[:10], '%Y-%m-%d')
-
-    @property
-    def year_plus_one(self):
+        self.dt = datetime.datetime.strptime(self._name[:10], '%Y-%m-%d')
+        self._basename = f'{self._name}.docx'
         study_year = get_study_year(self._name)
-        return f'{study_year}-' + f'{study_year+1}'[2:]
-
-    @property
-    def ipad_dirname(self) -> str:
-        return f'{self.year_plus_one} Дистант'
-
-    @property
-    def basename(self) -> str:
-        return f'{self._name}.docx'
+        self._year_plus_one = f'{study_year}-' + f'{study_year+1}'[2:]
 
     @property
     def ipad_location(self) -> str:
-        return os.path.join(self.ipad_dirname, self.basename)
+        return library.location.ipad(f'{self._year_plus_one} Дистант', self._basename)
 
     @property
     def ready_location(self) -> str:
         pupils = library.pupils.get_class_from_string(self._name)
         if pupils is None:
-            if ('ужок' not in self.basename) and ('амена' not in self.basename):
+            if ('ужок' not in self._name) and ('амена' not in self._name):
                 raise RuntimeError(f'Invalid {self._name}')
-            dst_dir = os.path.join('12 - кружок - 9-10-11', f'{self.year_plus_one} Кружок и допы')
+            dst_dir = os.path.join('12 - кружок - 9-10-11', f'{self._year_plus_one} Кружок и допы')
         else:
             dst_dir = pupils.get_path(archive=True)
-        return os.path.join(dst_dir, self.basename)
+        return library.location.udr(dst_dir, self._basename)
+
+
+assert LessonPaper('2023-01-29 Кружок').ipad_location.endswith('2022-23 Дистант/2023-01-29 Кружок.docx')
+assert LessonPaper('2023-01-29 Кружок').ready_location.endswith('12 - кружок - 9-10-11/2022-23 Кружок и допы/2023-01-29 Кружок.docx')
+assert LessonPaper('2021-06-30-10 - занятие').ipad_location.endswith('2020-21 Дистант/2021-06-30-10 - занятие.docx')
+assert LessonPaper('2021-06-30-10 - занятие').ready_location.endswith('10 класс/2020-21 10АБ Физика - private/2021-06-30-10 - занятие.docx')
 
 
 class TemplateConfig:
@@ -56,26 +54,28 @@ class TemplateConfig:
         self._data = data
 
     @property
-    def lesson_papers(self) -> Iterable[LessonPaper]:
-        for row in self._data['ipad']:
-            yield LessonPaper(row)
+    def lesson_papers(self) -> List[LessonPaper]:
+        return [LessonPaper(row) for row in self._data['ipad']]
 
 
-def runTemplate(args):
-    nowDelta = library.datetools.NowDelta()
-    template_config = TemplateConfig(library.files.load_yaml_data('template.yaml'))
-
-    now = datetime.datetime.now()
-    future = now + datetime.timedelta(days=AFTER_DAYS)
+def create_lesson_papers(lesson_papers: List[LessonPaper], after_days: int):
+    from_dt = today()
+    to_dt = from_dt + datetime.timedelta(days=after_days)
+    log.info(f'Creating files: from {from_dt:%Y-%m-%d} to {to_dt:%Y-%m-%d} (including)')
 
     ipadTemplate = library.location.udr('Шаблоны', 'template-2-columns.docx')
     ipadCopier = library.files.FileCopier(ipadTemplate)
-    for lesson_paper in template_config.lesson_papers:
-        if now <= lesson_paper.dt <= future:
-            ipadCopier.CreateFile(library.location.ipad(lesson_paper.ipad_location))
 
-    one_column_template = library.location.udr('Шаблоны', 'template-1-column.docx')
-    one_column = library.files.FileCopier(one_column_template, destination_dir=library.location.udr('11 класс', 'Вишнякова'))
+    for lesson_paper in lesson_papers:
+        if from_dt <= lesson_paper.dt <= to_dt:
+            ipadCopier.CreateFile(lesson_paper.ipad_location)
+
+
+def create_vishnyakova():
+    one_column = library.files.FileCopier(
+        library.location.udr('Шаблоны', 'template-1-column.docx'),
+        destination_dir=library.location.udr('11 класс', 'Вишнякова'),
+    )
     chapters = [
         # '1.1 - Кинематика',
         # '1.2 - Динамика',
@@ -103,7 +103,9 @@ def runTemplate(args):
         one_column.CreateFile(f'Вишнякова - {chapter} - {course} - решения.docx')
 
 
+def create_text_books():
     textbookTemplate = library.location.udr('Шаблоны', 'Рабочая тетрадь - Шаблон.docx')
+    copier = library.files.FileCopier(textbookTemplate)
     for filename in [
         '10-1 - Кинематика',
         '10-2 - Динамика',
@@ -126,39 +128,54 @@ def runTemplate(args):
         '11-9 - Астрономия',
     ]:
         class_dir = filename.split('-', 1)[0] + ' класс'
-        copier = library.files.FileCopier(textbookTemplate, destination_dir=library.location.udr(class_dir))
-        copier.CreateFile(f'{filename} - Рабочая тетрадь.docx')
+        textbook_file = library.location.udr(class_dir, f'{filename} - Рабочая тетрадь.docx')
+        copier.CreateFile(textbook_file)
 
+
+def rename_zoom():
     zoomRenamer = library.files.ZoomRenamer(library.files.Location.Zoom)
     for dir_name in library.files.walkFiles(library.files.Location.Zoom, dirsOnly=True, regexp='.*2198986972$'):
         zoomRenamer.RenameOne(dir_name)
 
-    last_date = now - datetime.timedelta(days=0 if args.today else 1)
 
-    ipad_dirnames = {
-        lesson_paper.ipad_dirname
-        for lesson_paper in template_config.lesson_papers
-    }
-    ipad_files = [
+def move_from_ipad(lesson_papers, use_today: bool):
+    to_date = today()
+    if use_today:
+        to_date += datetime.timedelta(days=1)
+
+    log.info(f'Move files from iPad up to: {to_date}')
+
+    available_ipad_dirs = set(
+        os.path.dirname(lesson_paper.ipad_location)
+        for lesson_paper in lesson_papers
+    )
+    all_ipad_files = [
         filename
-        for ipad_dirname in ipad_dirnames
-        for filename in library.files.walkFiles(
-            library.location.ipad(ipad_dirname),
-            extensions=['.docx']
-        )
+        for ipad_dir in available_ipad_dirs
+        for filename in library.files.walkFiles(ipad_dir, extensions=['.docx'])
     ]
-    for src_file in ipad_files:
-        lesson_paper = LessonPaper(os.path.basename(src_file))
-        if lesson_paper.dt <= last_date:
-            dst_file = library.location.udr(lesson_paper.ready_location)
-            if os.path.exists(dst_file):
+
+    for ipad_file in all_ipad_files:
+        lesson_paper = LessonPaper(os.path.basename(ipad_file))
+        if lesson_paper.dt < to_date:
+            if os.path.exists(lesson_paper.ready_location):
                 raise RuntimeError(f'Exists {dst_file}')
-            log.info(f'Moving file {src_file!r} to {dst_file!r}')
-            shutil.move(src_file, dst_file)
+            log.info(f'Moving {ipad_file!r} from iPad to {lesson_paper.ready_location!r}')
+            shutil.move(ipad_file, lesson_paper.ready_location)
         else:
-            log.info(f'Skipping ipad file: {src_file}')
+            log.info(f'Skipping iPad file: {src_file}')
+
+
+def runTemplate(args):
+    template_config = TemplateConfig(library.files.load_yaml_data('template.yaml'))
+    create_lesson_papers(template_config.lesson_papers, args.after)
+    create_vishnyakova()
+    create_text_books()
+    rename_zoom()
+    move_from_ipad(template_config.lesson_papers, use_today=args.today)
 
 
 def populate_parser(parser):
     parser.add_argument('-t', '--today', help='Today papers are ready, move them too', action='store_true')
+    parser.add_argument('-a', '--after', help='After days', type=int, default=12)
     parser.set_defaults(func=runTemplate)
