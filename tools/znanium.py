@@ -1,4 +1,5 @@
-import library
+import library.files
+import library.firefox
 
 import os
 import time

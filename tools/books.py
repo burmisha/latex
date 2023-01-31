@@ -5,11 +5,10 @@ from library.convert.pdf_to_jpeg import BookConfig
 from library.structure.structure import Structure
 
 
-BOOKS_CFG = library.files.load_yaml_data('books.yaml')
+class PPI:
+    MATHUS = 250
+    ZFTSH = 250
 
-MATHUS_PREFIX = 'Mathus'
-MATHUS_PPI = 250
-ZFTSH_PPI = 250
 
 def get_dst_path(*pdf_path):
     return library.location.no_sync('Книги - физика - картинки', *pdf_path)
@@ -25,13 +24,14 @@ def locate_file(location, filename):
 
 
 def get_basic_books():
-    for key, params in BOOKS_CFG.items():
-        if key.startswith(MATHUS_PREFIX):
+    books_cfg = library.files.load_yaml_data('books.yaml')
+    for key, params in books_cfg.items():
+        if key.startswith('Mathus'):
             yield BookConfig(
                 pdf_file=locate_file(library.location.udr('Материалы - mathus'), params['pdf_file']),
                 dst_dir=get_dst_path(f'Mathus - {params["pdf_file"]}'),
                 structure=Structure(params['structure']),
-                ppi=MATHUS_PPI,
+                ppi=PPI.MATHUS,
             )
         else:
             if key == 'ComicsBook':
@@ -93,7 +93,7 @@ def get_zftsh_books():
             pdf_file=locate_file(library.location.udr('Материалы - ЗФТШ'), file_name),
             dst_dir=get_dst_path('ЗФТШ', file_name),
             structure=structure,
-            ppi=ZFTSH_PPI,
+            ppi=PPI.ZFTSH,
         )
 
 

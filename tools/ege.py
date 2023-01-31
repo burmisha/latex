@@ -1,6 +1,7 @@
 from typing import List
 
-import library
+import library.check.ege
+import library.files
 from library.logging import cm, color
 
 import logging
@@ -47,7 +48,9 @@ def run(args):
         ]
         for line_index, (pupil_name, answer_line) in enumerate(data['answers'].items(), 1):
             pupil_answers = load_n_split(answer_line)
-            assert len(pupil_answers) == len(correct_answers), f'Invalid answers len for {pupil_name}: {len(pupil_answers)} expecting {len(correct_answers)}: '
+            if len(pupil_answers) != len(correct_answers):
+                raise ValueError(f'Invalid answers len for {pupil_name}: got {len(pupil_answers)}, expecting {len(correct_answers)}')
+
             results = []
             for number, (correct, answer) in enumerate(zip(correct_answers, pupil_answers), 1):
                 result = library.check.ege.check_answer(number, correct, answer)

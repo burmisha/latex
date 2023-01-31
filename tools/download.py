@@ -17,6 +17,7 @@ RETRIES_COUNT = 3
 
 VIDEO_DIR = 'Видео'
 
+
 @attr.s
 class ChannelConfig:
     dirname: str = attr.ib()
