@@ -86,7 +86,7 @@ class TopicDetector:
     def create_tagged_topics(self, config) -> List[TaggedTopic]:
         tagged_topics = []
         for row in config:
-            description, raw_tags = row.split(DESCRIPTION_SPLITTER)
+            raw_tags, description = row.split(DESCRIPTION_SPLITTER)
             tagged_topic = TaggedTopic(
                 description=description.strip(),
                 tags=self.tags_by_raw(raw_tags),
@@ -94,8 +94,7 @@ class TopicDetector:
             tagged_topics.append(tagged_topic)
         return tagged_topics
 
-    def create_topics(self, config) -> List[Topic]:
-        topics = []
+    def create_topics(self, config):
         chapter_values = collections.defaultdict(int)
         part_values = collections.defaultdict(int)
         for row in config:
@@ -107,7 +106,7 @@ class TopicDetector:
                 chapter_values[grade] += 1
             part_values[part_index] += 1
 
-            topic = Topic(
+            yield Topic(
                 Grade=grade,
                 ChapterIndex=chapter_values[grade],
                 PartIndex=part_values[part_index],
@@ -115,10 +114,6 @@ class TopicDetector:
                 PartTitle=tags[2].description,
                 Terms=[tt.description for tt in self.tagged_topics if tt.tags == tags],
             )
-
-            topics.append(topic)
-
-        return topics
 
     def __init__(self):
         config = library.files.load_yaml_data('topics.yaml')
@@ -165,11 +160,11 @@ class TopicDetector:
                 for extended_term, topics in self._topic_by_extended_term.items()
             }
         else:
-            candidates = list(self._topic_by_extended_term.keys())
+            candidates = dict(self._topic_by_extended_term)
 
         best_extended_terms = process.extract(
             title,
-            candidates,
+            candidates.keys(),
             limit=2,
             scorer=fuzz.token_sort_ratio,
         )
@@ -184,13 +179,11 @@ class TopicDetector:
         topics = self._topic_by_extended_term[best_extended_term] if best_extended_term else []
         topic = topics[0] if len(topics) == 1 else None
 
-        # log.info(best_extended_terms)
-        # log.info(
-        #     f'Search topic index by title {cm(title, color=color.Cyan)}: {cm(topic, color=color.Cyan)}\n'
-        #     f'  Best keys are: {one_line_pairs(sorted([(v, k) for k, v in best_extended_terms], reverse=True))}\n'
-        #     # f'  Best keys are: {best_extended_terms}\n'
-        #     # f'  Topic indices {topics}'
-        # )
+        log.debug(
+            f'Search topic index by title {cm(title, color=color.Cyan)}: {cm(topic, color=color.Cyan)}\n'
+            f'  Best keys are: {one_line_pairs(sorted([(v, k) for k, v in best_extended_terms], reverse=True))}\n'
+            f'  Topic indices {topics}'
+        )
         return topic
 
 
