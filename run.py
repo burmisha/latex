@@ -1,12 +1,14 @@
 #!/usr/bin/env python3
 
+import argparse
+import sys
+import time
+start_time = time.time()
+
 import tools
 from library.logging import cm, color
 from library.process import say
 
-import argparse
-import sys
-import time
 
 import logging
 log = logging.getLogger('main')
@@ -107,13 +109,12 @@ def main():
         datefmt=args.log_datefmt,
     )
 
-    log.info(cm(f'Start', color=color.Green))
-    start_time = time.time()
+    log.info(cm('Start', color=color.Green))
     try:
         args.func(args)
         finish_time = time.time()
         delta = finish_time - start_time
-        log.info(cm('Finished in %.2f seconds', color=color.Green), delta)
+        log.info(cm(f'Finished in {delta:.2f} seconds', color=color.Green))
         if delta >= 300:
             say('Готово', rate=250)
     except Exception as e:
@@ -122,7 +123,7 @@ def main():
         delta = finish_time - start_time
         log.exception(cm(f'Failed in {delta:.2f} seconds', color=color.Red))
         if delta >= 30:
-            msg = str(e)[:30]
+            msg = ' '.join(str(e).split()[:10])
             say(f'Ошибка: {msg}', rate=250)
         sys.exit(1)
 
