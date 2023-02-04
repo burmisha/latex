@@ -36,16 +36,16 @@
 
 - абсолютная:
     
-    $$
-    \Delta(ab) = (a\pm\Delta a)(b\pm \Delta b) - ab = \Delta a \cdot b + a \cdot \Delta b + Δa \cdot Δb,
-    $$
+$$
+\Delta(ab) = (a\pm\Delta a)(b\pm \Delta b) - ab = \Delta a \cdot b + a \cdot \Delta b + Δa \cdot Δb,
+$$
     
 - относительная:
     
-    $$
-    \delta(ab) = (\Delta a \cdot b + a \cdot \Delta b + \Delta a \cdot \Delta b) / ab
-    = \Delta a/a + \Delta b/b + \Delta a/a \cdot \Delta b/b = \delta a + \delta b + \delta a \cdot \delta b
-    $$
+$$
+\delta(ab) = (\Delta a \cdot b + a \cdot \Delta b + \Delta a \cdot \Delta b) / ab
+= \Delta a/a + \Delta b/b + \Delta a/a \cdot \Delta b/b = \delta a + \delta b + \delta a \cdot \delta b
+$$
     
 
 В типичной ситуации $\delta x$ — заметно меньше 1, поэтому последнее (из трёх) слагаемое — сильно меньше каждого из первых двух и им можно пренебречь. 
