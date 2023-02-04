@@ -65,6 +65,14 @@ def is_file(file_name):
     return True
 
 
+def ensure_dir(dir_name):
+    assert library.files.path_is_ok(dir_name)
+    if not os.path.isdir(dir_name):
+        log.info(f'Create missing {dir_name}')
+        os.mkdir(dir_name)
+    assert is_dir(dir_name)
+
+
 def walkFiles(
     dirName,
     extensions=[],
@@ -247,8 +255,7 @@ class ZippedCsv:
         self._filename = filename
 
     def ReadDicts(self):
-        assert os.path.exists(self._filename), f'No file {self._filename}'
-        assert os.path.isfile(self._filename), f'Is not file {self._filename}'
+        assert is_file(self._filename)
         with zipfile.ZipFile(self._filename, 'r') as zfile:
             assert len(zfile.namelist()) == 1, f'Found too many files in {filename}: {zfile.namelist()}'
             for file in zfile.namelist():

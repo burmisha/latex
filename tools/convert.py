@@ -10,7 +10,7 @@ def runConvert(args):
         if args.filter and not args.filter.match(book.pdf_file):
             continue
         log.info(f'Processing {book}')
-        book.Validate(create_missing=args.create_missing)
+        book.validate(create_missing=args.create_missing)
         book.save_all_pages(force=args.overwrite_existing, dry_run=args.dry_run)
         book.get_strange_files(remove=args.remove_strange_files)
 

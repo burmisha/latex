@@ -24,7 +24,6 @@ def run(args):
         date_from = datetools.NowDelta().Before(weeks=WEEKS_TO_PROCESS, fmt=datetools.DAY_DATE_FORMAT)
     log.info(f'Processing LaTeX files since {cm(date_from, color=color.Cyan)}')
 
-
     generared_paths = [
         library.location.root('school-554', f'generated-{year}-{year-2000+1}')
         for year in ACTIVE_YEARS
