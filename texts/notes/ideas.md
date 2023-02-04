@@ -99,3 +99,13 @@ PPI и разрешение экранов
 ## 11 класс
 
 Однажды знаменитый физик Роберт Вуд, управляя автомашиной, по рассеянности не заметил красного сигнала светофора. Пытаясь оправдаться перед полицейским, он объяснил, что при движении к светофору, благодаря эффекту Доплера, красный свет показался ему зеленым. Но и полицейский проявил смекалку. Он подсчитал, что для того, чтобы красный свет показался зеленым, машина должна приближаться к светофору со скоростью около 50 000 м/сек, и оштрафовал физика за превышение дозволенной скорости.
+
+
+# Греческие буквы
+* https://www.physicsforums.com/threads/who-here-writes-the-prettiest-greek-letters.744953/
+* https://www.foundalis.com/lan/hw/grkhandw.htm
+* http://www.johnkerl.org/doc/ortho/ortho.html
+* https://www.pinterest.ru/pin/317926054915261205/?autologin=true
+* https://www.pinterest.ru/pin/8162843048881550/?autologin=true
+* http://rin.io/the-handwritten-greek-alphabet-a-quick-guide/
+* https://www.web2pdf.net/data/modern-greek-alphabet-pdf
