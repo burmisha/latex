@@ -8,33 +8,33 @@ NASA Goddard [https://www.youtube.com/watch?v=aMTwtb3TVIk](https://www.youtube.c
 
 # Книги
 
-[http://kvant.mccme.ru/pdf/1997/06/16.pdf](http://kvant.mccme.ru/pdf/1997/06/16.pdf) Ф1608 — Квант
+http://kvant.mccme.ru/pdf/1997/06/16.pdf Ф1608 — Квант
 
-[https://vk.com/topic-87661351_33346275](https://vk.com/topic-87661351_33346275)
+https://vk.com/topic-87661351_33346275
 
-[https://phys.msu.ru/rus/entrants/publications/](https://phys.msu.ru/rus/entrants/publications/)
+https://phys.msu.ru/rus/entrants/publications/
 
-[https://sites.google.com/site/physics239/biblioteka](https://sites.google.com/site/physics239/biblioteka)
+https://sites.google.com/site/physics239/biblioteka
 
-[http://www.239.ru/physcenter/Kniga](http://www.239.ru/physcenter/Kniga)_
+http://www.239.ru/physcenter/Kniga_
 
-[http://rlphys2022.blogspot.com/p/blog-page_58.html](http://rlphys2022.blogspot.com/p/blog-page_58.html)
+http://rlphys2022.blogspot.com/p/blog-page_58.html
 
-[http://www.physics.uni-altai.ru/journals/physics/](http://www.physics.uni-altai.ru/journals/physics/)
+http://www.physics.uni-altai.ru/journals/physics/
 
-[https://waldorf-irkutsk.ru/valdorfskaya-pedagogika/elektronnaya-biblioteka](https://waldorf-irkutsk.ru/valdorfskaya-pedagogika/elektronnaya-biblioteka)
+https://waldorf-irkutsk.ru/valdorfskaya-pedagogika/elektronnaya-biblioteka
 
-[https://yandex.ru/search/?text=https%3A%2F%2Fprosv.ru%2F_data%2Fassistance%20site%3Ahttps%3A%2F%2Fprosv.ru&lr=213&clid=1955453&win=281](https://yandex.ru/search/?text=https%3A%2F%2Fprosv.ru%2F_data%2Fassistance%20site%3Ahttps%3A%2F%2Fprosv.ru&lr=213&clid=1955453&win=281)
+https://yandex.ru/search/?text=https%3A%2F%2Fprosv.ru%2F_https://yandex.ru/search/?text=https%3A%2F%2Fprosv.ru%2F_data%2Fassistance%20site%3Ahttps%3A%2F%2Fprosv.ru&lr=213&clid=1955453&win=281
 
-[https://github.com/tanookki/FizMatInf](https://github.com/tanookki/FizMatInf) — ссылка на метариалы и группы
+https://github.com/tanookki/FizMatInf — ссылка на метариалы и группы
 
-[http://www.ph4s.ru/book_ab_ph_teor.html](http://www.ph4s.ru/book_ab_ph_teor.html)
+http://www.ph4s.ru/book_ab_ph_teor.html
 
-[http://www.school.mipt.ru/Tasks.asp?p=P&c=8&r=36](http://www.school.mipt.ru/Tasks.asp?p=P&c=8&r=36)
+http://www.school.mipt.ru/Tasks.asp?p=P&c=8&r=36
 
 http://фимак.рф/index.php
 
-[http://school.mipt.ru/pubFileDown.asp?id=1086](http://school.mipt.ru/pubFileDown.asp?id=1083)
+http://school.mipt.ru/pubFileDown.asp?id=1083
 
 http://фимак.рф/index.php?i=8
 
