@@ -42,7 +42,7 @@ class BookConfig:
     structure: Structure = attr.ib()
     ppi: Optional[int] = attr.ib(default=200)
     trim: Optional[bool] = attr.ib(default=True)
-    page_indexer: Optional[PageIndexer] = attr.ib(default=PageIndexer())
+    page_shift: Optional[PageIndexer] = attr.ib(default=PageIndexer(), converter=lambda x: PageIndexer(x))
     magick_params: Optional[List[str]] = attr.ib(default=[])
     source_link: Optional[str] = attr.ib(default=None)
 
@@ -53,7 +53,7 @@ class BookConfig:
             return
 
         log.info(f'  page {page.index} -> {os.path.basename(filename)!r}')
-        pdf_index = self.page_indexer.get_index(page.index)
+        pdf_index = self.page_shift.get_index(page.index)
         command = self._get_magick_params() + [f'{self.pdf_file}[{pdf_index}]', filename]
         if not dry_run:
             library.process.run(command)
@@ -100,7 +100,13 @@ class BookConfig:
         return params + self.magick_params
 
     def save_all_pages(self, *, force: bool=False, dry_run: bool=False):
-        for page in self.structure.get_pages():
+        pages = list(self.structure.get_pages())
+        pages = [
+            page for page in pages
+            if not os.path.exists(self._get_filename(page)) or force
+        ]
+        log.info(f'Generating {len(pages)} missing pages ...')
+        for page in pages:
             self.save_one_page(
                 page=page,
                 force=force,
@@ -111,7 +117,7 @@ class BookConfig:
         basename = os.path.basename(self.pdf_file)
         pages_count = len(list(self.structure.get_pages()))
         return '\n'.join([
-            f'book {cm(basename, color=color.Green)} with {cm(pages_count, color=color.Green)} pages:'
+            f'book {cm(basename, color=color.Green)} with {cm(pages_count, color=color.Green)} pages:',
             f'\tSource file:\t\t{self.pdf_file}',
             f'\tDestination dir:\t{self.dst_dir}',
         ])

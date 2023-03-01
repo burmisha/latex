@@ -125,7 +125,6 @@ def run(args):
         log.info(library.logging.colorize_json(dict(marks_count)))
         return
 
-
     if args.set_marks:
         for mark in client.get_all_marks():
             student = client.get_student_by_id(mark.student_id)
