@@ -163,7 +163,7 @@ def move_from_ipad(lesson_papers, use_today: bool):
             log.info(f'Moving {ipad_file!r} from iPad to {lesson_paper.ready_location!r}')
             shutil.move(ipad_file, lesson_paper.ready_location)
         else:
-            log.info(f'Skipping iPad file: {src_file}')
+            log.info(f'Skipping iPad file: {ipad_file}')
 
 
 def runTemplate(args):
