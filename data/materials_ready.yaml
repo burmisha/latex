@@ -45,7 +45,6 @@
   canonized_title:  Урок 7 - Точность измерений
   url:              https://www.youtube.com/watch?v=VlYZS-kQrqA
   extra_title:      7 класс
-  topic:            11-3-3 - Оптика - Физическая оптика
 
 - source_format:    video
   title:            Урок 8 (осн). Преобразование единиц измерения физических величин
@@ -1242,28 +1241,28 @@
   canonized_title:  Урок 195 - Свет. Источники света. Распространение света
   url:              https://www.youtube.com/watch?v=RyC8QIs-o_0
   extra_title:      9 класс
-  topic:            8-3-1 - Световые явления - Световые явления
+  topic:            8-3-1 - Геометрическая оптика - Световые явления
 
 - source_format:    video
   title:            Урок 196 (осн). Следствия из закона прямолинейного распространения света
   canonized_title:  Урок 196 - Следствия из закона прямолинейного распространения света
   url:              https://www.youtube.com/watch?v=BC5jwVIWr_4
   extra_title:      9 класс
-  topic:            8-3-1 - Световые явления - Световые явления
+  topic:            8-3-1 - Геометрическая оптика - Световые явления
 
 - source_format:    video
   title:            Урок 197 (осн). Задачи на закон прямолинейного распространения света
   canonized_title:  Урок 197 - Задачи на закон прямолинейного распространения света
   url:              https://www.youtube.com/watch?v=AR9A5n7MJu4
   extra_title:      9 класс
-  topic:            8-3-1 - Световые явления - Световые явления
+  topic:            8-3-1 - Геометрическая оптика - Световые явления
 
 - source_format:    video
   title:            Урок 198 (осн). Отражение света. Законы отражения
   canonized_title:  Урок 198 - Отражение света. Законы отражения
   url:              https://www.youtube.com/watch?v=U0NyW2j2XaQ
   extra_title:      9 класс
-  topic:            8-3-1 - Световые явления - Световые явления
+  topic:            8-3-1 - Геометрическая оптика - Световые явления
 
 - source_format:    video
   title:            Урок 199 (осн). Задачи на законы отражения
@@ -1276,21 +1275,21 @@
   canonized_title:  Урок 200 - Построение изображения в плоском зеркале
   url:              https://www.youtube.com/watch?v=Y7vov6OYhLA
   extra_title:      9 класс
-  topic:            8-3-1 - Световые явления - Световые явления
+  topic:            8-3-1 - Геометрическая оптика - Световые явления
 
 - source_format:    video
   title:            Урок 201 (осн). Задачи на построение изображения в плоском зеркале
   canonized_title:  Урок 201 - Задачи на построение изображения в плоском зеркале
   url:              https://www.youtube.com/watch?v=kubIFiaRjPs
   extra_title:      9 класс
-  topic:            8-3-1 - Световые явления - Световые явления
+  topic:            8-3-1 - Геометрическая оптика - Световые явления
 
 - source_format:    video
   title:            Урок 202 (осн). Преломление света. Законы преломления
   canonized_title:  Урок 202 - Преломление света. Законы преломления
   url:              https://www.youtube.com/watch?v=T0VI4wzqyJY
   extra_title:      9 класс
-  topic:            8-3-1 - Световые явления - Световые явления
+  topic:            8-3-1 - Геометрическая оптика - Световые явления
 
 - source_format:    video
   title:            Урок 203 (осн). Задачи на законы преломления - 1
@@ -1309,21 +1308,21 @@
   canonized_title:  Урок 205 - Прохождение света через плоскопараллельную пластинку и призму
   url:              https://www.youtube.com/watch?v=zQIJhzrtD5Y
   extra_title:      9 класс
-  topic:            8-3-1 - Световые явления - Световые явления
+  topic:            8-3-1 - Геометрическая оптика - Световые явления
 
 - source_format:    video
   title:            Урок 206 (осн). Полное отражение. Предельный угол полного отражения
   canonized_title:  Урок 206 - Полное отражение. Предельный угол полного отражения
   url:              https://www.youtube.com/watch?v=4AhDXZ4P2Jo
   extra_title:      9 класс
-  topic:            8-3-1 - Световые явления - Световые явления
+  topic:            8-3-1 - Геометрическая оптика - Световые явления
 
 - source_format:    video
   title:            Урок 207 (осн). Определение показателя преломления материала плоскопараллельной пластинки
   canonized_title:  Урок 207 - Определение показателя преломления материала плоскопараллельной пластинки
   url:              https://www.youtube.com/watch?v=CWvflfmWS7s
   extra_title:      9 класс
-  topic:            8-3-1 - Световые явления - Световые явления
+  topic:            8-3-1 - Геометрическая оптика - Световые явления
 
 - source_format:    video
   title:            Урок 208 (осн). Подготовка к КР по распространению, отражению и преломлению света
@@ -1336,7 +1335,6 @@
   canonized_title:  Урок 209 - Сферические линзы. Основные определения
   url:              https://www.youtube.com/watch?v=TjyhVS1Bdis
   extra_title:      9 класс
-  topic:            11-3-1 - Оптика - Геометрическая оптика
 
 - source_format:    video
   title:            Урок 210 (осн). Построение изображений с помощью линз
@@ -1349,53 +1347,55 @@
   canonized_title:  Урок 211 - Задачи на построение изображений с помощью линз
   url:              https://www.youtube.com/watch?v=DGyVH_EImOY
   extra_title:      9 класс
-  topic:            11-3-1 - Оптика - Геометрическая оптика
 
 - source_format:    video
   title:            Урок 212 (осн). Формула тонкой линзы
   canonized_title:  Урок 212 - Формула тонкой линзы
   url:              https://www.youtube.com/watch?v=Je-52fmXV44
   extra_title:      9 класс
+  topic:            8-3-2 - Геометрическая оптика - Линзы
 
 - source_format:    video
   title:            Урок 213 (осн). Линейное увеличение линзы
   canonized_title:  Урок 213 - Линейное увеличение линзы
   url:              https://www.youtube.com/watch?v=KpWOHNUHsQM
   extra_title:      9 класс
-  topic:            8-3-1 - Световые явления - Световые явления
+  topic:            8-3-2 - Геометрическая оптика - Линзы
 
 - source_format:    video
   title:            Урок 214 (осн). Задачи на формулу тонкой линзы - 1
   canonized_title:  Урок 214 - Задачи на формулу тонкой линзы - 1
   url:              https://www.youtube.com/watch?v=n0ZH94OoVtQ
   extra_title:      9 класс
+  topic:            8-3-2 - Геометрическая оптика - Линзы
 
 - source_format:    video
   title:            Урок 215 (осн). Глаз. Зрение. Восприятие цветов
   canonized_title:  Урок 215 - Глаз. Зрение. Восприятие цветов
   url:              https://www.youtube.com/watch?v=DHdd35zoRt0
   extra_title:      9 класс
-  topic:            8-3-1 - Световые явления - Световые явления
+  topic:            8-3-2 - Геометрическая оптика - Линзы
 
 - source_format:    video
   title:            Урок 216 (осн). Восприятие цветов (продолжение)
   canonized_title:  Урок 216 - Восприятие цветов - продолжение
   url:              https://www.youtube.com/watch?v=zdnssZfK_kg
   extra_title:      9 класс
-  topic:            8-3-1 - Световые явления - Световые явления
+  topic:            8-3-2 - Геометрическая оптика - Линзы
 
 - source_format:    video
   title:            Урок 217 (осн). Задачи на формулу тонкой линзы - 2
   canonized_title:  Урок 217 - Задачи на формулу тонкой линзы - 2
   url:              https://www.youtube.com/watch?v=VPXJDFuFmfM
   extra_title:      9 класс
+  topic:            8-3-2 - Геометрическая оптика - Линзы
 
 - source_format:    video
   title:            Урок 218 (осн). Экспериментальное определение фокусного расстояния собирающей линзы
   canonized_title:  Урок 218 - Экспериментальное определение фокусного расстояния собирающей линзы
   url:              https://www.youtube.com/watch?v=aLphF5KK9A8
   extra_title:      9 класс
-  topic:            8-3-1 - Световые явления - Световые явления
+  topic:            8-3-2 - Геометрическая оптика - Линзы
 
 - source_format:    video
   title:            Урок 219 (осн). Дисперсия света
@@ -1543,7 +1543,6 @@
   canonized_title:  Урок 4 - Погрешность косвенных измерений
   url:              https://www.youtube.com/watch?v=n8IgntrRc2s
   extra_title:      Измерения. Теория погрешностей.
-  topic:            11-3-3 - Оптика - Физическая оптика
 
 - source_format:    video
   title:            Урок 5. Вычисление случайной погрешности
@@ -1575,7 +1574,7 @@
   canonized_title:  ЛР-10-2-02 Проверка закона Гей-Люссака
   url:              https://www.youtube.com/watch?v=FG1VK_cSBSs
   extra_title:      Физический практикум
-  topic:            11-3-3 - Оптика - Физическая оптика
+  topic:            11-3-3 - Геометрическая оптика - Физическая оптика
 
 - source_format:    video
   title:            ЛР-10-2-03 Определение коэффициента поверхностного натяжения методом отрыва капель
@@ -1601,7 +1600,7 @@
   canonized_title:  ЛР-11-2-01 Определение фокусного расстояния рассеивающей линзы
   url:              https://www.youtube.com/watch?v=9S3U6GzjolM
   extra_title:      Физический практикум
-  topic:            7-2-4 - Основные физические величины - Давление
+  topic:            8-3-2 - Геометрическая оптика - Линзы
 
 - source_format:    video
   title:            ЛР-11-2-02 Определение температуры нити лампы накаливания
@@ -1614,6 +1613,7 @@
   canonized_title:  ЛР-11-2-03 Измерение сопротивления проводника мостовым методом
   url:              https://www.youtube.com/watch?v=bWEdM5Z3erk
   extra_title:      Физический практикум
+  topic:            10-5-2 - Основы электродинамики - Законы постоянного тока
 
 - source_format:    video
   title:            Урок 7. Механическое движение. Основные определения кинематики.
@@ -1709,6 +1709,7 @@
   canonized_title:  Урок 20 - Простейшие задачи на относительность движения
   url:              https://www.youtube.com/watch?v=0uA9wPaCNeU
   extra_title:      Равномерное прямолинейное движение
+  topic:            10-1-2 - Кинематика - Скорости и равномерное прямолинейное движение
 
 - source_format:    video
   title:            Урок 21. Решение задач на относительность движения (одномерный случай)
@@ -1937,6 +1938,7 @@
   canonized_title:  Урок 54 - Третий закон Ньютона. Принцип относительности Галилея
   url:              https://www.youtube.com/watch?v=OijNRhnYokY
   extra_title:      Законы Ньютона
+  topic:            11-3-4 - Геометрическая оптика - Специальная теория относительности
 
 - source_format:    video
   title:            Урок 55. Задачи на законы Ньютона
@@ -4217,251 +4219,250 @@
   canonized_title:  Урок 391 - Законы геометрической оптики - 1
   url:              https://www.youtube.com/watch?v=LVziS9Fkrb4
   extra_title:      Геометрическая оптика
-  topic:            11-3-1 - Оптика - Геометрическая оптика
+  topic:            11-3-1 - Геометрическая оптика - Линзы
 
 - source_format:    video
   title:            Урок 392. Законы геометрической оптики - 2
   canonized_title:  Урок 392 - Законы геометрической оптики - 2
   url:              https://www.youtube.com/watch?v=df1npELwAiU
   extra_title:      Геометрическая оптика
-  topic:            11-3-1 - Оптика - Геометрическая оптика
+  topic:            11-3-1 - Геометрическая оптика - Линзы
 
 - source_format:    video
   title:            Урок 393. Законы геометрической оптики - 3
   canonized_title:  Урок 393 - Законы геометрической оптики - 3
   url:              https://www.youtube.com/watch?v=Tq8X0nu2RqM
   extra_title:      Геометрическая оптика
-  topic:            11-3-1 - Оптика - Геометрическая оптика
+  topic:            11-3-1 - Геометрическая оптика - Линзы
 
 - source_format:    video
   title:            Урок 394. Задачи на законы геометрической оптики
   canonized_title:  Урок 394 - Задачи на законы геометрической оптики
   url:              https://www.youtube.com/watch?v=OoR42yq4Lx4
   extra_title:      Геометрическая оптика
-  topic:            11-3-1 - Оптика - Геометрическая оптика
+  topic:            11-3-1 - Геометрическая оптика - Линзы
 
 - source_format:    video
   title:            Урок 395. Сферические линзы. Основные определения
   canonized_title:  Урок 395 - Сферические линзы. Основные определения
   url:              https://www.youtube.com/watch?v=DXp-mmvGWJs
   extra_title:      Геометрическая оптика
-  topic:            11-3-1 - Оптика - Геометрическая оптика
 
 - source_format:    video
   title:            Урок 396. Построение изображений с помощью линз
   canonized_title:  Урок 396 - Построение изображений с помощью линз
   url:              https://www.youtube.com/watch?v=3kBXw_w1lSg
   extra_title:      Геометрическая оптика
-  topic:            11-3-1 - Оптика - Геометрическая оптика
 
 - source_format:    video
   title:            Урок 397. Формула тонкой линзы. Линейное увеличение линзы
   canonized_title:  Урок 397 - Формула тонкой линзы. Линейное увеличение линзы
   url:              https://www.youtube.com/watch?v=_sLuh03AdW0
   extra_title:      Геометрическая оптика
-  topic:            11-3-1 - Оптика - Геометрическая оптика
+  topic:            11-3-1 - Геометрическая оптика - Линзы
 
 - source_format:    video
   title:            Урок 398. Задачи на формулу тонкой линзы - 1
   canonized_title:  Урок 398 - Задачи на формулу тонкой линзы - 1
   url:              https://www.youtube.com/watch?v=O4h_wTbmfjA
   extra_title:      Геометрическая оптика
-  topic:            11-3-1 - Оптика - Геометрическая оптика
+  topic:            8-3-2 - Геометрическая оптика - Линзы
 
 - source_format:    video
   title:            Урок 399. Задачи на формулу тонкой линзы - 2
   canonized_title:  Урок 399 - Задачи на формулу тонкой линзы - 2
   url:              https://www.youtube.com/watch?v=KFm5g4j6UmA
   extra_title:      Геометрическая оптика
-  topic:            11-3-1 - Оптика - Геометрическая оптика
+  topic:            8-3-2 - Геометрическая оптика - Линзы
 
 - source_format:    video
   title:            Урок 400. Недостатки линз
   canonized_title:  Урок 400 - Недостатки линз
   url:              https://www.youtube.com/watch?v=vwvDH9K5xkg
   extra_title:      Геометрическая оптика
-  topic:            11-3-1 - Оптика - Геометрическая оптика
+  topic:            11-3-1 - Геометрическая оптика - Линзы
 
 - source_format:    video
   title:            Урок 401. Преломление света сферической поверхностью
   canonized_title:  Урок 401 - Преломление света сферической поверхностью
   url:              https://www.youtube.com/watch?v=v7z-GZxtp4s
   extra_title:      Геометрическая оптика
-  topic:            11-3-1 - Оптика - Геометрическая оптика
+  topic:            11-3-1 - Геометрическая оптика - Линзы
 
 - source_format:    video
   title:            Урок 402. Формула шлифовщика линз
   canonized_title:  Урок 402 - Формула шлифовщика линз
   url:              https://www.youtube.com/watch?v=UuvWgJJKABg
   extra_title:      Геометрическая оптика
-  topic:            11-3-1 - Оптика - Геометрическая оптика
+  topic:            11-3-1 - Геометрическая оптика - Линзы
 
 - source_format:    video
   title:            Урок 403. Оптика сферических зеркал
   canonized_title:  Урок 403 - Оптика сферических зеркал
   url:              https://www.youtube.com/watch?v=lTRMfup4ULE
   extra_title:      Геометрическая оптика
-  topic:            11-3-1 - Оптика - Геометрическая оптика
+  topic:            11-3-1 - Геометрическая оптика - Линзы
 
 - source_format:    video
   title:            Урок 404. Задачи на формулу линзы - 3
   canonized_title:  Урок 404 - Задачи на формулу линзы - 3
   url:              https://www.youtube.com/watch?v=MymjdP5AA5U
   extra_title:      Геометрическая оптика
+  topic:            8-3-2 - Геометрическая оптика - Линзы
 
 - source_format:    video
   title:            Урок 405. Оптические приборы - 1
   canonized_title:  Урок 405 - Оптические приборы - 1
   url:              https://www.youtube.com/watch?v=4WLKAGXQgtI
   extra_title:      Геометрическая оптика
-  topic:            11-3-1 - Оптика - Геометрическая оптика
+  topic:            11-3-1 - Геометрическая оптика - Линзы
 
 - source_format:    video
   title:            Урок 406. Оптические приборы - 2
   canonized_title:  Урок 406 - Оптические приборы - 2
   url:              https://www.youtube.com/watch?v=G3nueSOCN18
   extra_title:      Геометрическая оптика
-  topic:            11-3-1 - Оптика - Геометрическая оптика
+  topic:            11-3-1 - Геометрическая оптика - Линзы
 
 - source_format:    video
   title:            Урок 407. Оптические приборы - 3
   canonized_title:  Урок 407 - Оптические приборы - 3
   url:              https://www.youtube.com/watch?v=lV4fFElb7_I
   extra_title:      Геометрическая оптика
-  topic:            11-3-1 - Оптика - Геометрическая оптика
+  topic:            11-3-1 - Геометрическая оптика - Линзы
 
 - source_format:    video
   title:            Урок 408. Основные понятия фотометрии - 1
   canonized_title:  Урок 408 - Основные понятия фотометрии - 1
   url:              https://www.youtube.com/watch?v=eA3RuDDSpN8
   extra_title:      Фотометрия
-  topic:            11-3-2 - Оптика - Фотометрия
+  topic:            11-3-2 - Геометрическая оптика - Фотометрия
 
 - source_format:    video
   title:            Урок 409. Основные понятия фотометрии - 2
   canonized_title:  Урок 409 - Основные понятия фотометрии - 2
   url:              https://www.youtube.com/watch?v=rqKGIjkBp2c
   extra_title:      Фотометрия
-  topic:            11-3-2 - Оптика - Фотометрия
+  topic:            11-3-2 - Геометрическая оптика - Фотометрия
 
 - source_format:    video
   title:            Урок 410. Решение задач по фотометрии - 1
   canonized_title:  Урок 410 - Решение задач по фотометрии - 1
   url:              https://www.youtube.com/watch?v=Iddik8WFeWo
   extra_title:      Фотометрия
-  topic:            11-3-2 - Оптика - Фотометрия
+  topic:            11-3-2 - Геометрическая оптика - Фотометрия
 
 - source_format:    video
   title:            Урок 411. Решение задач по фотометрии - 2
   canonized_title:  Урок 411 - Решение задач по фотометрии - 2
   url:              https://www.youtube.com/watch?v=aiCCTHqnVT8
   extra_title:      Фотометрия
-  topic:            11-3-2 - Оптика - Фотометрия
+  topic:            11-3-2 - Геометрическая оптика - Фотометрия
 
 - source_format:    video
   title:            Урок 412. Решение задач по фотометрии - 3
   canonized_title:  Урок 412 - Решение задач по фотометрии - 3
   url:              https://www.youtube.com/watch?v=ADfPLcyH27A
   extra_title:      Фотометрия
-  topic:            11-3-2 - Оптика - Фотометрия
+  topic:            11-3-2 - Геометрическая оптика - Фотометрия
 
 - source_format:    video
   title:            Урок 413. Скорость света и ее измерение
   canonized_title:  Урок 413 - Скорость света и ее измерение
   url:              https://www.youtube.com/watch?v=6LSiaeIC6m4
   extra_title:      Физическая оптика
-  topic:            11-3-3 - Оптика - Физическая оптика
+  topic:            11-3-3 - Геометрическая оптика - Физическая оптика
 
 - source_format:    video
   title:            Урок 414. Интерференция света
   canonized_title:  Урок 414 - Интерференция света
   url:              https://www.youtube.com/watch?v=0MuRk7X-vIM
   extra_title:      Физическая оптика
-  topic:            11-3-3 - Оптика - Физическая оптика
+  topic:            11-3-3 - Геометрическая оптика - Физическая оптика
 
 - source_format:    video
   title:            Урок 415. Интерференционные схемы
   canonized_title:  Урок 415 - Интерференционные схемы
   url:              https://www.youtube.com/watch?v=h_pAhgiCIvg
   extra_title:      Физическая оптика
-  topic:            11-3-3 - Оптика - Физическая оптика
+  topic:            11-3-3 - Геометрическая оптика - Физическая оптика
 
 - source_format:    video
   title:            Урок 416. Интерференция в тонких пленках
   canonized_title:  Урок 416 - Интерференция в тонких пленках
   url:              https://www.youtube.com/watch?v=fgaAPStffJ0
   extra_title:      Физическая оптика
-  topic:            11-3-3 - Оптика - Физическая оптика
+  topic:            11-3-3 - Геометрическая оптика - Физическая оптика
 
 - source_format:    video
   title:            Урок 417. Кольца Ньютона
   canonized_title:  Урок 417 - Кольца Ньютона
   url:              https://www.youtube.com/watch?v=gd9wQhAV0P4
   extra_title:      Физическая оптика
-  topic:            11-3-3 - Оптика - Физическая оптика
+  topic:            11-3-3 - Геометрическая оптика - Физическая оптика
 
 - source_format:    video
   title:            Урок 418. Задачи на интерференцию света - 1
   canonized_title:  Урок 418 - Задачи на интерференцию света - 1
   url:              https://www.youtube.com/watch?v=ZCvgDuAOMiY
   extra_title:      Физическая оптика
-  topic:            11-3-3 - Оптика - Физическая оптика
+  topic:            11-3-3 - Геометрическая оптика - Физическая оптика
 
 - source_format:    video
   title:            Урок 419. Задачи на интерференцию света - 2
   canonized_title:  Урок 419 - Задачи на интерференцию света - 2
   url:              https://www.youtube.com/watch?v=3aaVPXKi3Y4
   extra_title:      Физическая оптика
-  topic:            11-3-3 - Оптика - Физическая оптика
+  topic:            11-3-3 - Геометрическая оптика - Физическая оптика
 
 - source_format:    video
   title:            Урок 420. Дифракция света. Дифракционная решетка
   canonized_title:  Урок 420 - Дифракция света. Дифракционная решетка
   url:              https://www.youtube.com/watch?v=gE3zO9FSDm0
   extra_title:      Физическая оптика
-  topic:            11-3-3 - Оптика - Физическая оптика
+  topic:            11-3-3 - Геометрическая оптика - Физическая оптика
 
 - source_format:    video
   title:            Урок 421. Задачи на дифракцию света - 1
   canonized_title:  Урок 421 - Задачи на дифракцию света - 1
   url:              https://www.youtube.com/watch?v=-XcY7LSV6fw
   extra_title:      Физическая оптика
-  topic:            11-3-3 - Оптика - Физическая оптика
+  topic:            11-3-3 - Геометрическая оптика - Физическая оптика
 
 - source_format:    video
   title:            Урок 422. Задачи на дифракцию света - 2
   canonized_title:  Урок 422 - Задачи на дифракцию света - 2
   url:              https://www.youtube.com/watch?v=fbaz6D6HcqU
   extra_title:      Физическая оптика
-  topic:            11-3-3 - Оптика - Физическая оптика
+  topic:            11-3-3 - Геометрическая оптика - Физическая оптика
 
 - source_format:    video
   title:            Урок 423. Поляризация света. Закон Малюса
   canonized_title:  Урок 423 - Поляризация света. Закон Малюса
   url:              https://www.youtube.com/watch?v=1PK__XxPmmE
   extra_title:      Физическая оптика
-  topic:            11-3-3 - Оптика - Физическая оптика
+  topic:            11-3-3 - Геометрическая оптика - Физическая оптика
 
 - source_format:    video
   title:            Урок 424. Угол Брюстера. Интерференция поляризованных лучей
   canonized_title:  Урок 424 - Угол Брюстера. Интерференция поляризованных лучей
   url:              https://www.youtube.com/watch?v=kUSrwDQqW7M
   extra_title:      Физическая оптика
-  topic:            11-3-3 - Оптика - Физическая оптика
+  topic:            11-3-3 - Геометрическая оптика - Физическая оптика
 
 - source_format:    video
   title:            Урок 425. Спектральные приборы. Виды спектров
   canonized_title:  Урок 425 - Спектральные приборы. Виды спектров
   url:              https://www.youtube.com/watch?v=XroCN_XKWMc
   extra_title:      Физическая оптика
-  topic:            11-3-3 - Оптика - Физическая оптика
+  topic:            11-3-3 - Геометрическая оптика - Физическая оптика
 
 - source_format:    video
   title:            Урок 426. Шкала электромагнитных излучений
   canonized_title:  Урок 426 - Шкала электромагнитных излучений
   url:              https://www.youtube.com/watch?v=jQeu7WV2jjU
   extra_title:      Физическая оптика
-  topic:            11-3-3 - Оптика - Физическая оптика
+  topic:            11-3-3 - Геометрическая оптика - Физическая оптика
 
 - source_format:    video
   title:            Урок 427. Подготовка к КР Волновая оптика
@@ -4480,21 +4481,19 @@
   canonized_title:  Урок 429 - Следствия из постулатов СТО - 1
   url:              https://www.youtube.com/watch?v=mFr6vrkkbWk
   extra_title:      Физическая оптика
-  topic:            11-3-4 - Оптика - Специальная теория относительности
 
 - source_format:    video
   title:            Урок 430. Следствия из постулатов СТО - 2
   canonized_title:  Урок 430 - Следствия из постулатов СТО - 2
   url:              https://www.youtube.com/watch?v=4nj4jo3RqVE
   extra_title:      Физическая оптика
-  topic:            11-3-4 - Оптика - Специальная теория относительности
 
 - source_format:    video
   title:            Урок 431. Элементы релятивистской динамики
   canonized_title:  Урок 431 - Элементы релятивистской динамики
   url:              https://www.youtube.com/watch?v=USP_7rqjs9s
   extra_title:      Физическая оптика
-  topic:            11-3-4 - Оптика - Специальная теория относительности
+  topic:            11-3-4 - Геометрическая оптика - Специальная теория относительности
 
 - source_format:    video
   title:            Урок 432. Задачи по СТО - 1
@@ -4513,14 +4512,14 @@
   canonized_title:  Урок 434 - Фотоэффект. Законы фотоэффекта
   url:              https://www.youtube.com/watch?v=zOM4h_Dt9_s
   extra_title:      Физическая оптика
-  topic:            11-3-4 - Оптика - Специальная теория относительности
+  topic:            11-3-4 - Геометрическая оптика - Специальная теория относительности
 
 - source_format:    video
   title:            Урок 435. Теория фотоэффекта. Фотоэлементы
   canonized_title:  Урок 435 - Теория фотоэффекта. Фотоэлементы
   url:              https://www.youtube.com/watch?v=Qr4Yti-6G-8
   extra_title:      Физическая оптика
-  topic:            11-3-4 - Оптика - Специальная теория относительности
+  topic:            11-3-4 - Геометрическая оптика - Специальная теория относительности
 
 - source_format:    video
   title:            Урок 436. Задачи на фотоэффект - 1
@@ -4545,7 +4544,7 @@
   canonized_title:  Урок 439 - Давление света. Масса и импульс фотона
   url:              https://www.youtube.com/watch?v=8qVLMHW5cbY
   extra_title:      Физическая оптика
-  topic:            11-3-4 - Оптика - Специальная теория относительности
+  topic:            11-3-4 - Геометрическая оптика - Специальная теория относительности
 
 - source_format:    video
   title:            Урок 440. Задачи по квантовой оптике - 1
@@ -4854,7 +4853,6 @@
   canonized_title:  Как это снимали
   url:              https://www.youtube.com/watch?v=vt2XMOe1eKo
   extra_title:      Демонстрационная олимпиада
-  topic:            11-3-3 - Оптика - Физическая оптика
 
 - source_format:    video
   title:            01 Механика (9-10 кл)
@@ -5257,121 +5255,139 @@
   canonized_title:  01 Оптика 8-11 кл
   url:              https://www.youtube.com/watch?v=IOYCB2WT5FU
   extra_title:      Задачи по оптике
+  topic:            11-3-1 - Геометрическая оптика - Линзы
 
 - source_format:    video
   title:            02 Оптика (11 кл)
   canonized_title:  02 Оптика 11 кл
   url:              https://www.youtube.com/watch?v=IPw4W-7OTM8
   extra_title:      Задачи по оптике
+  topic:            11-3-1 - Геометрическая оптика - Линзы
 
 - source_format:    video
   title:            03 Оптика (8-11 кл)
   canonized_title:  03 Оптика 8-11 кл
   url:              https://www.youtube.com/watch?v=PXt4jkY7f0k
   extra_title:      Задачи по оптике
+  topic:            11-3-1 - Геометрическая оптика - Линзы
 
 - source_format:    video
   title:            04 Оптика (8-11 кл)
   canonized_title:  04 Оптика 8-11 кл
   url:              https://www.youtube.com/watch?v=eBAdKrhfcjY
   extra_title:      Задачи по оптике
+  topic:            11-3-1 - Геометрическая оптика - Линзы
 
 - source_format:    video
   title:            05 Оптика (8-11 кл)
   canonized_title:  05 Оптика 8-11 кл
   url:              https://www.youtube.com/watch?v=tXXkEsFSbro
   extra_title:      Задачи по оптике
+  topic:            11-3-1 - Геометрическая оптика - Линзы
 
 - source_format:    video
   title:            06 Оптика (8-11 кл)
   canonized_title:  06 Оптика 8-11 кл
   url:              https://www.youtube.com/watch?v=RIsxr2z4-e0
   extra_title:      Задачи по оптике
+  topic:            11-3-1 - Геометрическая оптика - Линзы
 
 - source_format:    video
   title:            07 Оптика (8-9 кл)
   canonized_title:  07 Оптика 8-9 кл
   url:              https://www.youtube.com/watch?v=hsDvMWqChL4
   extra_title:      Задачи по оптике
+  topic:            11-3-1 - Геометрическая оптика - Линзы
 
 - source_format:    video
   title:            08 Оптика (8-9 кл)
   canonized_title:  08 Оптика 8-9 кл
   url:              https://www.youtube.com/watch?v=swfSPEqCA_M
   extra_title:      Задачи по оптике
+  topic:            11-3-1 - Геометрическая оптика - Линзы
 
 - source_format:    video
   title:            09 Оптика (8-9 кл)
   canonized_title:  09 Оптика 8-9 кл
   url:              https://www.youtube.com/watch?v=szZAiygYPjk
   extra_title:      Задачи по оптике
+  topic:            11-3-1 - Геометрическая оптика - Линзы
 
 - source_format:    video
   title:            10 Оптика (8-9 кл)
   canonized_title:  10 Оптика 8-9 кл
   url:              https://www.youtube.com/watch?v=BILK4nJf080
   extra_title:      Задачи по оптике
+  topic:            11-3-1 - Геометрическая оптика - Линзы
 
 - source_format:    video
   title:            11 Оптика (8-11 кл)
   canonized_title:  11 Оптика 8-11 кл
   url:              https://www.youtube.com/watch?v=jVl2bV2VqKU
   extra_title:      Задачи по оптике
+  topic:            11-3-1 - Геометрическая оптика - Линзы
 
 - source_format:    video
   title:            12 Оптика (8-9 кл)
   canonized_title:  12 Оптика 8-9 кл
   url:              https://www.youtube.com/watch?v=QuKV1Dz6djU
   extra_title:      Задачи по оптике
+  topic:            11-3-1 - Геометрическая оптика - Линзы
 
 - source_format:    video
   title:            13 Оптика (8-9 класс)
   canonized_title:  13 Оптика 8-9 класс
   url:              https://www.youtube.com/watch?v=LlCMmFnji94
   extra_title:      Задачи по оптике
-  topic:            11-3-1 - Оптика - Геометрическая оптика
 
 - source_format:    video
   title:            14 Оптика (8-9 кл)
   canonized_title:  14 Оптика 8-9 кл
   url:              https://www.youtube.com/watch?v=tzCt3eg0aBo
   extra_title:      Задачи по оптике
+  topic:            11-3-1 - Геометрическая оптика - Линзы
 
 - source_format:    video
   title:            15 Оптика (8-9 кл)
   canonized_title:  15 Оптика 8-9 кл
   url:              https://www.youtube.com/watch?v=1AGE0EZX5Ig
   extra_title:      Задачи по оптике
+  topic:            11-3-1 - Геометрическая оптика - Линзы
 
 - source_format:    video
   title:            16 Оптика (8-9 кл)
   canonized_title:  16 Оптика 8-9 кл
   url:              https://www.youtube.com/watch?v=TYS6f7p4_8M
   extra_title:      Задачи по оптике
+  topic:            11-3-1 - Геометрическая оптика - Линзы
 
 - source_format:    video
   title:            17 Оптика (8-9 кл)
   canonized_title:  17 Оптика 8-9 кл
   url:              https://www.youtube.com/watch?v=Ap_RqO_v5hs
   extra_title:      Задачи по оптике
+  topic:            11-3-1 - Геометрическая оптика - Линзы
 
 - source_format:    video
   title:            18 Оптика (8-9 кл)
   canonized_title:  18 Оптика 8-9 кл
   url:              https://www.youtube.com/watch?v=PWypZ1Ajf_A
   extra_title:      Задачи по оптике
+  topic:            11-3-1 - Геометрическая оптика - Линзы
 
 - source_format:    video
   title:            19 Оптика (8-9 кл)
   canonized_title:  19 Оптика 8-9 кл
   url:              https://www.youtube.com/watch?v=8CCm-Y4d-X0
   extra_title:      Задачи по оптике
+  topic:            11-3-1 - Геометрическая оптика - Линзы
 
 - source_format:    video
   title:            20 Оптика (8-9 кл)
   canonized_title:  20 Оптика 8-9 кл
   url:              https://www.youtube.com/watch?v=EBvvrOFparQ
   extra_title:      Задачи по оптике
+  topic:            11-3-1 - Геометрическая оптика - Линзы
 
 - source_format:    video
   title:            Physics. Problem solving. 01_01

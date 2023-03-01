@@ -44,10 +44,10 @@ tags:
   em_oscillation:          Электромагнитные колебания
   waves:                   Механические волны
   em_waves:                Электромагнитные волны
-  optics:                  Оптика
-  light:                   Световые явления
-  optics_geom:             Геометрическая оптика
-  photometry:              Фотометрия
+  optics:                  Геометрическая оптика
+  optics_base:             Световые явления
+  optics_lens:             Линзы
+  optics_photometry:       Фотометрия
   optics_phys:             Физическая оптика
   relativity:              Специальная теория относительности
   nuclear_atom:            Строение атома и ядра
@@ -182,21 +182,21 @@ tagged_topics:
  - 8_grade, electro, electro | Электрический ток в металлах
  - 8_grade, electro, electro | Зависимость сопротивления металлов от температуры
  - 8_grade, electro, electro | Электрический ток в жидкостях. Закон Фарадея для электролиза
- - 8_grade, light, light | Свет. Источники света. Распространение света
- - 8_grade, light, light | Следствия из закона прямолинейного распространения света
- - 8_grade, light, light | Отражение света. Законы отражения
- - 8_grade, light, light | Построение изображения в плоском зеркале
- - 8_grade, light, light | Преломление света. Законы преломления
- - 8_grade, light, light | Прохождение света через плоскопараллельную пластинку и призму
- - 8_grade, light, light | Полное отражение. Предельный угол полного отражения
- - 8_grade, light, light | Определение показателя преломления материала плоскопараллельной пластинки
- - 8_grade, light, light | Сферические линзы. Основные определения
- - 8_grade, light, light | Построение изображений с помощью линз
- - 8_grade, light, light | Формула тонкой линзы
- - 8_grade, light, light | Линейное увеличение линзы
- - 8_grade, light, light | Глаз. Зрение. Восприятие цветов
- - 8_grade, light, light | Экспериментальное определение фокусного расстояния собирающей линзы
- - 8_grade, light, light | Дисперсия света
+ - 8_grade, optics, optics_base | Свет. Источники света. Распространение света
+ - 8_grade, optics, optics_base | Следствия из закона прямолинейного распространения света
+ - 8_grade, optics, optics_base | Отражение света. Законы отражения
+ - 8_grade, optics, optics_base | Построение изображения в плоском зеркале
+ - 8_grade, optics, optics_base | Преломление света. Законы преломления
+ - 8_grade, optics, optics_base | Прохождение света через плоскопараллельную пластинку и призму
+ - 8_grade, optics, optics_base | Полное отражение. Предельный угол полного отражения
+ - 8_grade, optics, optics_base | Определение показателя преломления материала плоскопараллельной пластинки
+ - 8_grade, optics, optics_lens | Сферические линзы. Основные определения
+ - 8_grade, optics, optics_lens | Построение изображений с помощью линз
+ - 8_grade, optics, optics_lens | Формула тонкой линзы
+ - 8_grade, optics, optics_lens | Линейное увеличение линзы
+ - 8_grade, optics, optics_lens | Глаз. Зрение. Восприятие цветов
+ - 8_grade, optics, optics_lens | Экспериментальное определение фокусного расстояния собирающей линзы
+ - 8_grade, optics, optics_phys | Дисперсия света
  - 8_grade, nuclear_atom, nuclear_atom | Строение ядра. Ядерная энергия. Физика ядра.
  - 8_grade, nuclear_atom, nuclear_atom | Открытие радиоактивности. Радиоактивное излучение и его свойства
  - 8_grade, nuclear_atom, nuclear_atom | Альфа- и бета-распад. Правила Содди
@@ -469,16 +469,16 @@ tagged_topics:
  - 11_grade, waves_n_oscillation, em_waves | Изобретение радио. Принципы радиосвязи
  - 11_grade, waves_n_oscillation, em_waves | Принципы радиосвязи. Распространение волн различных диапазонов
  - 11_grade, waves_n_oscillation, em_waves | Радиолокация. Физические основы телевидения
- - 11_grade, optics, optics_geom | Законы геометрической оптики
- - 11_grade, optics, optics_geom | Сферические линзы. Основные определения
- - 11_grade, optics, optics_geom | Построение изображений с помощью линз
- - 11_grade, optics, optics_geom | Формула тонкой линзы. Линейное увеличение линзы
- - 11_grade, optics, optics_geom | Недостатки линз
- - 11_grade, optics, optics_geom | Преломление света сферической поверхностью
- - 11_grade, optics, optics_geom | Формула шлифовщика линз
- - 11_grade, optics, optics_geom | Оптика сферических зеркал
- - 11_grade, optics, optics_geom | Оптические приборы
- - 11_grade, optics, photometry | Основные понятия фотометрии
+ - 11_grade, optics, optics_lens | Законы геометрической оптики
+ - 11_grade, optics, optics_lens | Сферические линзы. Основные определения
+ - 11_grade, optics, optics_lens | Построение изображений с помощью линз
+ - 11_grade, optics, optics_lens | Формула тонкой линзы. Линейное увеличение линзы
+ - 11_grade, optics, optics_lens | Недостатки линз
+ - 11_grade, optics, optics_lens | Преломление света сферической поверхностью
+ - 11_grade, optics, optics_lens | Формула шлифовщика линз
+ - 11_grade, optics, optics_lens | Оптика сферических зеркал
+ - 11_grade, optics, optics_lens | Оптические приборы
+ - 11_grade, optics, optics_photometry | Основные понятия фотометрии
  - 11_grade, optics, optics_phys | Скорость света и ее измерение
  - 11_grade, optics, optics_phys | Интерференция света
  - 11_grade, optics, optics_phys | Интерференционные схемы
@@ -535,7 +535,9 @@ program:
   - 7_grade, base, base_energy
   - 8_grade, termo, termo
   - 8_grade, electro, electro
-  - 8_grade, light, light
+  - 8_grade, optics, optics_base
+  - 8_grade, optics, optics_lens
+  - 8_grade, optics, optics_phys
   - 8_grade, nuclear_atom, nuclear_atom
   - 10_grade, kinematics, kinematics_base
   - 10_grade, kinematics, kinematics_speed
@@ -560,8 +562,8 @@ program:
   - 11_grade, waves_n_oscillation, em_oscillation
   - 11_grade, waves_n_oscillation, waves
   - 11_grade, waves_n_oscillation, em_waves
-  - 11_grade, optics, optics_geom
-  - 11_grade, optics, photometry
+  - 11_grade, optics, optics_lens
+  - 11_grade, optics, optics_photometry
   - 11_grade, optics, optics_phys
   - 11_grade, optics, relativity
   - 11_grade, nuclear_atom, atom
