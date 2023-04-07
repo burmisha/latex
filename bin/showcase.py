@@ -5,22 +5,40 @@ from library.topic import TopicDetector
 
 topic_detector = TopicDetector()
 
-available_grades = [f'{grade} класс' for grade in topic_detector.get_grades]
 
 with st.sidebar:
-    grades_str = st.multiselect(
-         'Класс',
-         available_grades,
-         available_grades[len(available_grades) // 2:],
+    grade_tag_by_desc = {tag.description: tag for tag in topic_detector.grade_tags}
+    grade_tag_descs = list(grade_tag_by_desc.keys())
+    grade_descs = st.multiselect(
+        'Класс',
+        grade_tag_descs,
+        grade_tag_descs[len(grade_tag_descs) // 2:],
     )
-    grades_int = [int(grade.split(' ', 1)[0]) for grade in grades_str]
+    grade_tags = [grade_tag_by_desc[grade_desc] for grade_desc in grade_descs]
 
-    available_parts = list(topic_detector.get_parts(grades_int))
-    parts = st.multiselect(
-         'Темы',
-         available_parts,
-         [],
+    second_tags_by_desc = {tag.description: tag for tag in topic_detector.get_second_tags(grade_tags)}
+    second_tags_descs = list(second_tags_by_desc.keys())
+    second_descs = st.multiselect(
+         'Разделы',
+         second_tags_descs,
+         second_tags_descs,
     )
+    second_tags = [second_tags_by_desc[second_desc] for second_desc in second_descs]
+
+    third_tags_by_desc = {tag.description: tag for tag in topic_detector.get_third_tags(grade_tags, second_tags)}
+    third_tags_descs = list(third_tags_by_desc.keys())
+    third_descs = st.multiselect(
+         'Темы',
+         third_tags_descs,
+         third_tags_descs[:10],
+    )
+    third_tags = [third_tags_by_desc[third_desc] for third_desc in third_descs]
+
+    # parts = st.multiselect(
+    #      'Темы',
+    #      [tt.description for tt in tagged_topics],
+    #      [],
+    # )
 
     material_types = st.multiselect(
          'Тип материала',
@@ -28,9 +46,7 @@ with st.sidebar:
          ['Youtube', 'Статьи', 'Задачи', 'Конспекты'],
     )
 
-st.write('You selected:', grades_int)
-st.write('You selected:', parts)
-st.write('You selected:', material_types)
+# st.write('You selected:', material_types)
 
 
 x = st.slider('Select a value')

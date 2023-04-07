@@ -524,47 +524,51 @@ tagged_topics:
  - 11_grade, nuclear_atom, nuclear | Элементарные частицы. Позитрон. Нейтрино
 
 program:
-  - 7_grade, introduction, science
-  - 7_grade, introduction, quantity
-  - 7_grade, introduction, matter
-  - 7_grade, base, base_speed
-  - 7_grade, base, base_mass
-  - 7_grade, base, base_force
-  - 7_grade, base, base_pressure
-  - 7_grade, base, base_work
-  - 7_grade, base, base_energy
-  - 8_grade, termo, termo
-  - 8_grade, electro, electro
-  - 8_grade, optics, optics_base
-  - 8_grade, optics, optics_lens
-  - 8_grade, optics, optics_phys
-  - 8_grade, nuclear_atom, nuclear_atom
-  - 10_grade, kinematics, kinematics_base
-  - 10_grade, kinematics, kinematics_speed
-  - 10_grade, kinematics, kinematics_acceleration
-  - 10_grade, kinematics, kinematics_rotary
-  - 10_grade, conservation, momentum
-  - 10_grade, conservation, energy
-  - 10_grade, statics, hydro
-  - 10_grade, statics, statics
-  - 10_grade, mkt_n_termodynamics, mkt
-  - 10_grade, mkt_n_termodynamics, ideal_gas
-  - 10_grade, mkt_n_termodynamics, termodynamics
-  - 10_grade, mkt_n_termodynamics, vapor
-  - 10_grade, electodynamics, electrostatics
-  - 10_grade, electodynamics, om
-  - 11_grade, electodynamics, magnet
-  - 11_grade, electodynamics, induction
-  - 11_grade, electodynamics, meduim_current
-  - 11_grade, waves_n_oscillation, base_waves
-  - 11_grade, waves_n_oscillation, differential
-  - 11_grade, waves_n_oscillation, oscillation
-  - 11_grade, waves_n_oscillation, em_oscillation
-  - 11_grade, waves_n_oscillation, waves
-  - 11_grade, waves_n_oscillation, em_waves
-  - 11_grade, optics, optics_lens
-  - 11_grade, optics, optics_photometry
-  - 11_grade, optics, optics_phys
-  - 11_grade, optics, relativity
-  - 11_grade, nuclear_atom, atom
-  - 11_grade, nuclear_atom, nuclear
+  7_grade:
+    - introduction, science
+    - introduction, quantity
+    - introduction, matter
+    - base, base_speed
+    - base, base_mass
+    - base, base_force
+    - base, base_pressure
+    - base, base_work
+    - base, base_energy
+  8_grade:
+    - termo, termo
+    - electro, electro
+    - optics, optics_base
+    - optics, optics_lens
+    - optics, optics_phys
+    - nuclear_atom, nuclear_atom
+  10_grade:
+    - kinematics, kinematics_base
+    - kinematics, kinematics_speed
+    - kinematics, kinematics_acceleration
+    - kinematics, kinematics_rotary
+    - conservation, momentum
+    - conservation, energy
+    - statics, hydro
+    - statics, statics
+    - mkt_n_termodynamics, mkt
+    - mkt_n_termodynamics, ideal_gas
+    - mkt_n_termodynamics, termodynamics
+    - mkt_n_termodynamics, vapor
+    - electodynamics, electrostatics
+    - electodynamics, om
+  11_grade:
+    - electodynamics, magnet
+    - electodynamics, induction
+    - electodynamics, meduim_current
+    - waves_n_oscillation, base_waves
+    - waves_n_oscillation, differential
+    - waves_n_oscillation, oscillation
+    - waves_n_oscillation, em_oscillation
+    - waves_n_oscillation, waves
+    - waves_n_oscillation, em_waves
+    - optics, optics_lens
+    - optics, optics_photometry
+    - optics, optics_phys
+    - optics, relativity
+    - nuclear_atom, atom
+    - nuclear_atom, nuclear
