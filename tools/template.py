@@ -159,7 +159,7 @@ def move_from_ipad(lesson_papers, use_today: bool):
         lesson_paper = LessonPaper(os.path.basename(ipad_file))
         if lesson_paper.dt < to_date:
             if os.path.exists(lesson_paper.ready_location):
-                raise RuntimeError(f'Exists {dst_file}')
+                raise RuntimeError(f'Exists {lesson_paper.ready_location!r}')
             log.info(f'Moving {ipad_file!r} from iPad to {lesson_paper.ready_location!r}')
             shutil.move(ipad_file, lesson_paper.ready_location)
         else:

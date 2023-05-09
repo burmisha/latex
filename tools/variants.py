@@ -1061,8 +1061,6 @@ def get_all_variants(*, flt=None):
             },
             page_splits=[6],
         ),
-
-
     ]
     if flt:
         works = [work for work in works if flt(work)]
