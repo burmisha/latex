@@ -2,7 +2,7 @@ attrs==22.2.0
 thefuzz==0.19.0
 pafy==0.5.5
 Pillow==9.4.0
-pygments==2.13.0
+pygments==2.15.0
 pymaging
 pytesseract==0.3.10
 python-Levenshtein==0.20.9
