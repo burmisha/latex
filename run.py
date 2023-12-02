@@ -88,6 +88,7 @@ def CreateArgumentsParser():
         ('yaform', 'Download yandex form results', tools.yaform),
         ('znanium', 'Znanium', tools.znanium),
         ('material', 'Material', tools.material),
+        ('udr-members', 'Material', tools.udr_members),
     ]:
         subparser = subparsers.add_parser(
             mode_name,
