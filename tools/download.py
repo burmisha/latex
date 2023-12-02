@@ -15,8 +15,6 @@ log = logging.getLogger(__name__)
 THREADS_COUNT = 4
 RETRIES_COUNT = 3
 
-VIDEO_DIR = 'Видео'
-
 
 @attr.s
 class ChannelConfig:
@@ -35,7 +33,6 @@ class ChannelConfig:
 
 def get_videos_from_channel(channel_config: ChannelConfig):
     log.info(f'Getting videos from {channel_config}')
-    path = library.location.udr(VIDEO_DIR, channel_config.dirname)
     channel = pytube.Channel(channel_config.url)
     for video in channel.videos:
         title = canonizer.Canonize(video.title.strip())
@@ -48,7 +45,7 @@ def get_videos_from_channel(channel_config: ChannelConfig):
         yield library.download.youtube.YoutubeVideo(
             f'https://www.youtube.com/watch?v={video.video_id}',
             filename,
-            dstdir=path,
+            dstdir=channel_config.dirname,
             mode=library.download.youtube.Mode.PYTYBE,
         )
 
@@ -56,12 +53,11 @@ def get_videos_from_channel(channel_config: ChannelConfig):
 def get_explicit_videos(explicit_config: dict):
     log.info('Getting explicit videos')
     for dirname, videos in explicit_config.items():
-        dirname = library.location.udr(VIDEO_DIR, dirname)
         for url, title in videos.items():
             yield library.download.youtube.YoutubeVideo(
                 url,
                 title,
-                dstdir=dirname,
+                dst_dir=dirname,
                 # mode=library.download.youtube.Mode.PYTYBE,
                 # mode=library.download.youtube.Mode.PAFY,
                 mode=library.download.youtube.Mode.REQUESTS,
@@ -81,7 +77,13 @@ def get_pavel_viktor_videos(pavel_victor_config: dict):
                 yield video
 
 
-def download_videos(*, videos: List[library.download.youtube.YoutubeVideo], threads: int, retries: int):
+def download_videos(
+    *,
+    videos: List[library.download.youtube.YoutubeVideo],
+    base_dir: str,
+    threads: int,
+    retries: int,
+):
     for try_index in range(retries):
         videos = [video for video in videos if not os.path.exists(video.filename)]
         if videos:
@@ -114,7 +116,7 @@ def get_all_videos(*, add_channels: bool=False, add_playlists: bool=False, add_p
             playlist = library.download.youtube.YoutubePlaylist(playlist_url)
             _, videos = playlist.ListVideos()
             for video in videos:
-                video.dstdir = library.location.udr(VIDEO_DIR, dirname)
+                video.dstdir = dirname
                 yield video
 
     for video in get_explicit_videos(download_cfg['Explicit']):
@@ -148,7 +150,13 @@ def run(args):
         )
     ]
 
-    missing_dirs = set(video.dstdir for video in videos if not os.path.exists(video.dstdir))
+    for video in videos:
+        video.base_dir = args.base_dir
+
+    if args.title_filter:
+        videos = [video for video in videos if args.title_filter in video.title]
+
+    missing_dirs = set(video.dir_name for video in videos if not os.path.exists(video.dir_name))
     for missing_dir in sorted(missing_dirs):
         log.info(f'Create missing dir: {missing_dir}')
         os.mkdir(missing_dir)
@@ -174,22 +182,25 @@ def run(args):
     if save_files:
         download_videos(
             videos=videos,
+            base_dir=args.base_dir,
             threads=args.threads,
             retries=args.retries,
         )
     else:
         for video, topic_index in video_with_topics:
             if topic_filter.matches(topic_index):
-                log.info(f'{video}, {topic_index}')
+                log.info(f'{video}, topic index: {topic_index}')
 
 
 def populate_parser(parser):
     parser.add_argument('-s', '--save', help='Save videos to hard drive', action='store_true')
     parser.add_argument('-p', '--pavel-viktor', help='Add Pavel Viktor', action='store_true')
     parser.add_argument('-f', '--filter', help='Choose only videos matching filters')
+    parser.add_argument('--title-filter', help='Choose video by title')
     parser.add_argument('--sort', help='Sort by topic', action='store_true')
     parser.add_argument('--channels', help='Add channels (infinite)', action='store_true')
     parser.add_argument('--playlists', help='Add playlists (finite)', action='store_true')
     parser.add_argument('--threads', help='Threads count to download', type=int, default=THREADS_COUNT)
     parser.add_argument('--retries', help='Retries count', type=int, default=RETRIES_COUNT)
+    parser.add_argument('--base-dir', help='Base dir', default=library.location.udr('Видео'))
     parser.set_defaults(func=run)

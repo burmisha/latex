@@ -33,7 +33,8 @@ class YoutubeVideo:
     title: str = attr.ib()
     mode: str = attr.ib()
     extra_title: Optional[str] = attr.ib(default=None)
-    dstdir: Optional[str] = attr.ib(default=None)
+    dst_dir: Optional[str] = attr.ib(default=None)
+    base_dir: Optional[str] = attr.ib(default=None)
     extension: str = attr.ib(default='mp4')
 
     @url.validator
@@ -42,18 +43,22 @@ class YoutubeVideo:
             raise ValueError(f'Got url {value}')
 
     def __str__(self):
-        return f'{cm(self.title, color=color.Yellow)} ({self.url}) from {cm(os.path.basename(self.dstdir), color=color.Yellow)}'
+        return f'{cm(self.title, color=color.Yellow)} ({self.url}) from {cm(os.path.basename(self.dst_dir), color=color.Yellow)}'
 
     @property
     def basename(self):
         return f'{self.title}.{self.extension}'
 
     @property
+    def dir_name(self):
+        return os.path.join(self.base_dir, self.dst_dir)
+
+    @property
     def filename(self):
-        if not library.files.is_dir(self.dstdir):
+        if not library.files.is_dir(self.dir_name):
             raise ValueError(f'Not dir: {value}')
 
-        return os.path.join(self.dstdir, self.basename)
+        return os.path.join(self.dir_name, self.basename)
 
 
 def get_best_stream(video: YoutubeVideo, sleepTime=1200):
@@ -72,7 +77,7 @@ def get_best_stream(video: YoutubeVideo, sleepTime=1200):
     return best_stream
 
 
-def download_video(video) -> Optional[Exception]:
+def download_video(video: YoutubeVideo) -> Optional[Exception]:
     log.info(f'Downloading {video}...')
     try:
         if video.mode == Mode.REQUESTS:
@@ -88,7 +93,7 @@ def download_video(video) -> Optional[Exception]:
             streams = streams.filter(progressive=True, file_extension=video.extension)
             # streams = streams.get_highest_resolution()
             best_stream = streams.order_by('resolution').desc().first()
-            best_stream.download(output_path=video.dstdir, filename=video.basename)
+            best_stream.download(output_path=video.dir_name, filename=video.basename)
         else:
             raise RuntimeError(f'Invalid mode: {video.mode}')
         log.info(f'Downloaded {video}')
