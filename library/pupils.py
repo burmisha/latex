@@ -289,5 +289,5 @@ assert get_class_from_string('2022-09-01 10-0').get_path().endswith('/10 кла�
 assert get_class_from_string('2022-01-31 11Б').Year == '2021-22'
 assert get_class_from_string('2022-09-01 10-0').Year == '2022-23'
 assert get_class_from_string('2022-01-31 11Б').is_active is False
-assert get_class_from_string('2022-09-01 10-0').is_active is True
+assert get_class_from_string('2022-09-01 10-0').is_active is False
 assert get_class_from_string('2020-9-М').is_active is False
