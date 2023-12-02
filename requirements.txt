@@ -11,7 +11,7 @@ pyyaml==6.0
 qrcode==7.3.1
 requests==2.28.2
 retry==0.9.2
-selenium==4.8.0
+selenium==4.10.0
 streamlit==1.17.0
 watchdog==2.2.1  # speed up streamlit
 youtube-dl==2021.12.17
